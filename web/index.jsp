@@ -45,7 +45,7 @@
 
 
                     var params = "username=" + username + "&password=" + password + "&opc=ingresar";
-                    var url = "Control/Operaciones.php";
+                    var url = "src/ControlUsuario";
                     $.ajax({
                         type: 'POST',
                         url: url,
