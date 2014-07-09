@@ -18,10 +18,10 @@ public class Conexion {
 
     public static Connection getConex() throws Exception {
         String usuario = "sys_dgp";
-        String password = "jair";
+        String password = "alex";
         String host = "localhost";
         String puerto = "1521";
-        String sid = "xe";
+        String sid = "orcl";
         String driver = "oracle.jdbc.driver.OracleDriver";
         String url = "jdbc:oracle:thin:" + usuario + "/" + password + "@" + host + ":" + puerto + ":" + sid;
 

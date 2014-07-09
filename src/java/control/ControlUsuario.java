@@ -27,7 +27,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "ControlUsuario", urlPatterns = {"/ControlUsuario"})
 public class ControlUsuario extends HttpServlet {
-    ResultSet rs=null;
+    
     Connection cx=null;
     ModeloUsuario mu= new ModeloUsuario();
 
@@ -45,31 +45,34 @@ public class ControlUsuario extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String opc= request.getParameter("opc");
-             out.println("1");
+             
+       // out.println("1");
+        
         if (opc.equals("ingresar")) {
             String Usuario = request.getParameter("username");
-            String Clave = request.getParameter("password");
-            rs = mu.ValidarUsuario(Usuario, Clave);
-           
-            if (rs.next()) {
-                if (rs.getRow()==1) {
-                    HttpSession sesion =  request.getSession(true);
+            String Clave = request.getParameter("clave");
+       
+            
+        ResultSet rs = mu.ValidarUsuario(Usuario, Clave);
+      
+          
+                if (rs.next()) {
+                   HttpSession sesion =  request.getSession(true);
                     sesion.setAttribute("IDUSER", rs.getString("IDUSUARIO"));
                     sesion.setAttribute("IDPER", rs.getString("IDEMPLEADO"));
                     sesion.setAttribute("IDROL", rs.getString("IDROLES"));
                     sesion.setAttribute("CL", rs.getString("CLAVE"));
-                    sesion.setAttribute("PUESTO_ID", rs.getString("PUES"));
+                    sesion.setAttribute("PUESTO_ID", rs.getString("PUESTO_ID"));
                     sesion.setAttribute("AREA_ID", rs.getString("AREA_ID"));
                     sesion.setAttribute("AREA", rs.getString("AREA"));
                     sesion.setAttribute("DEPARTAMENTO", rs.getString("DEPARTAMENTO"));
                     sesion.setAttribute("DEPARTAMENTO_ID", rs.getString("DEPARTAMENTO_ID"));
                     sesion.setAttribute("PUESTO", rs.getString("PUESTO"));
-                    
-                    out.println(rs.getRow());
-                }else if (rs.getRow()==0) {
-                    
+                    response.sendRedirect("Vista/Principal.jsp");
+                }else  {
+                    response.sendRedirect("index.jsp");
                 }
-            }
+            
             
             
         
