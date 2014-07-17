@@ -17,8 +17,8 @@ import java.sql.SQLException;
 public class Conexion {
 
     public static Connection getConex() throws Exception {
-        String usuario = "sys_dgp";
-        String password = "alex";
+        String usuario = "RH_UPEU";
+        String password = "alfa";
         String host = "localhost";
         String puerto = "1521";
         String sid = "orcl";
