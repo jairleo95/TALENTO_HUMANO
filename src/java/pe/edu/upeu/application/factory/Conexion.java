@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lib;
+package pe.edu.upeu.application.factory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
