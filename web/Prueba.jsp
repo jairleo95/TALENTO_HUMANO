@@ -76,7 +76,10 @@
 
         <%    for (int f = 0; f < List1.length; f++) {
                 out.print("<br>");
-                      out.print("//TABLA : "+List1[f][0]);
+                      out.print("CREATE OR REPLACE PROCEDURE SP_INSERT_"+List1[f][0]);
+                      out.print("CREATE OR REPLACE PROCEDURE SP_INSERT_"+List1[f][0]);
+                      out.print("CREATE OR REPLACE PROCEDURE SP_INSERT_"+List1[f][0]);
+                      out.print("CREATE OR REPLACE PROCEDURE SP_INSERT_"+List1[f][0]);
                    
                     for (int s = 0; s < List2.length; s++) {
                        
