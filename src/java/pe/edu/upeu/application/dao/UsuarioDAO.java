@@ -8,6 +8,7 @@ package pe.edu.upeu.application.dao;
 
 
 
+import pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;

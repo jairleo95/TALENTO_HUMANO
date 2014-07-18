@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package pe.edu.upeu.application.dao;
+package pe.edu.upeu.application.dao_imp;
 
 import pe.edu.upeu.application.model.Usuario;
 import java.util.List;
