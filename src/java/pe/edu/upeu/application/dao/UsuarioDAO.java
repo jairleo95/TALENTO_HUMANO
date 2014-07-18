@@ -6,11 +6,15 @@
 
 package pe.edu.upeu.application.dao;
 
-import Modelo.Usuario;
+
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import pe.edu.upeu.application.model.Usuario;
+
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
 

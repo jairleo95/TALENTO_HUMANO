@@ -6,7 +6,7 @@
 
 package pe.upeu.application.web.controller;
 
-import Modelo.ModeloUsuario;
+import pe.edu.upeu.application.model.ModeloUsuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;

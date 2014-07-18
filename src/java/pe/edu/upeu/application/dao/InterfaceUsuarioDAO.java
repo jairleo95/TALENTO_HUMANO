@@ -6,7 +6,7 @@
 
 package pe.edu.upeu.application.dao;
 
-import Modelo.Usuario;
+import pe.edu.upeu.application.model.Usuario;
 import java.util.List;
 
 /**
