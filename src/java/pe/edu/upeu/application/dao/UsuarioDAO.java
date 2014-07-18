@@ -7,7 +7,12 @@
 package pe.edu.upeu.application.dao;
 
 import Modelo.Usuario;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import pe.edu.upeu.application.factory.ConexionBD;
+import pe.edu.upeu.application.factory.FactoryConnectionDB;
 
 
 /**
@@ -19,7 +24,29 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
     ConexionBD conn;
     @Override
     public java.util.List<Usuario> List() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    this.conn= FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+    StringBuilder sql= new StringBuilder();
+    sql.append("select * from "); 
+    List<Usuario> list= new ArrayList<Usuario>();
+        try {
+            ResultSet rs = this.conn.query(sql.toString());
+            while(rs.next()){
+            Usuario us= new Usuario();
+            us.setId_rol(rs.getString("id_rol"));
+            us.setId_empleado(rs.getString("id_empleado"));
+            us.setNo_usuario(rs.getString("no_usuario"));
+            us.setPw_usuario(rs.getString("pw_usuario"));
+            list.add(us);
+            }
+        
+            
+        } catch (SQLException e) {
+        }finally{
+        this.conn.close();
+        }
+    
+    return list;
+    
     }
 
     @Override

@@ -23,12 +23,19 @@ public final class ORACLEConnectionDB extends ConexionBD{
     
     @Override
     Connection open() {
+     
+        String host = "localhost";
+        String puerto = "1521";
+   
+        String driver = "oracle.jdbc.driver.OracleDriver";
+        String url = "jdbc:oracle:thin:" + this.parametro[0] + "/" + this.parametro[1] + "@" + host + ":" + puerto + ":" + this.parametro[2];
         try {
-            Class.forName("oracle.jdbc.driver.OracleDriver").newInstance();
-            this.conex = DriverManager.getConnection("jdbc:oracle:oci:@ORACLEBD"+this.parametro[0],this.parametro[1],this.parametro[2]);
+            Class.forName(driver).newInstance();
+            this.conex = DriverManager.getConnection(url);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
         return this.conex;
     }
     
