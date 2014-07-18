@@ -24,18 +24,21 @@ public final class ORACLEConnectionDB extends ConexionBD{
     @Override
     Connection open() {
      
+       String usuario = "RH_UPEU";
+        String password = "alfa";
         String host = "localhost";
         String puerto = "1521";
-   
+        String sid = "orcl";
         String driver = "oracle.jdbc.driver.OracleDriver";
-        String url = "jdbc:oracle:thin:" + this.parametro[0] + "/" + this.parametro[1] + "@" + host + ":" + puerto + ":" + this.parametro[2];
+        //String url = "jdbc:oracle:thin:" + this.parametro[0] + "/" + this.parametro[1] + "@" + host + ":" + puerto + ":" + this.parametro[2];
+        String url = "jdbc:oracle:thin:" + usuario + "/" + password + "@" + host + ":" + puerto + ":" + sid;
         try {
             Class.forName(driver).newInstance();
             this.conex = DriverManager.getConnection(url);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+       
         return this.conex;
     }
     

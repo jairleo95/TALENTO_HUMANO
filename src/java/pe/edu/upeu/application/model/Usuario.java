@@ -14,7 +14,7 @@ public class Usuario {
     private String id_usuario;
     private String no_usuario;
     private String pw_usuario;
-        private String id_empleado;
+    private String id_empleado;
     private String id_rol;
 
     public Usuario(String id_usuario, String no_usuario, String pw_usuario, String id_empleado, String id_rol) {

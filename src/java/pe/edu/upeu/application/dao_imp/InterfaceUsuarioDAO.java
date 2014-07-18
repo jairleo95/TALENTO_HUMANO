@@ -14,9 +14,9 @@ import java.util.List;
  * @author Alfa.sistemas
  */
 public interface InterfaceUsuarioDAO {
-    public List<Usuario> List();
-    public Usuario Edit( int ID);
-    public boolean Edit(Usuario usuario);
-    public boolean Save(Usuario usuario);
-    public boolean Delete(int ID);
+    public List<Usuario> List_Usuario();
+    public Usuario Edit_Usuario( String ID);
+    public boolean Edit_Usuario(Usuario usuario);
+    public boolean Save_Usuario(Usuario usuario);
+    public boolean Delete_Usuario(String ID);
 }
