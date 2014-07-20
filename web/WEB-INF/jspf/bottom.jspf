@@ -1,0 +1,7 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+    </div>
+    <div class="bottom">
+        &COPY; 2014 - GESTIÓN DEL TALENTO HUMANO
+    </div>
+</div>

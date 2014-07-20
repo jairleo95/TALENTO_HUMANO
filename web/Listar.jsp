@@ -4,12 +4,10 @@
     Author     : Alfa.sistemas
 --%>
 
-<%@page import="pe.edu.upeu.application.dao.UsuarioDAO"%>
-<%@page import="pe.edu.upeu.application.factory.ConexionBD"%>
+
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
-<%@page import="jdk.nashorn.internal.runtime.ListAdapter"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:useBean id="General" scope="page" class="Usuario">
+<jsp:useBean id="List_Usuario" scope="session" class="java.util.ArrayList" />
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,6 +15,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+         <a href="<%= request.getContextPath()%>/proveedor?op=create" class="btn btn-mini btn-primary" role="button">Nuevo</a>
        <%
            //UsuarioDAO usdao =  new UsuarioDAO();
            

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package pe.upeu.application.web.controller;
+package pe.edu.upeu.application.web.controller;
 
 import pe.edu.upeu.application.model.ModeloUsuario;
 import java.io.IOException;

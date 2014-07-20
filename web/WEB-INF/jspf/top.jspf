@@ -1,0 +1,17 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<div>
+    <div class="header">
+        Sistema de Recursos Humanos
+        <div class="menu">
+            <a href="index" class="btn btn-mini btn-primary" role="button">Inicio</a>
+            <a href="usuario" class="btn btn-mini btn-primary" role="button">Proveedor</a>
+            <a href="index" class="btn btn-mini btn-primary" role="button">Inicio</a>
+            <a href="index" class="btn btn-mini btn-primary" role="button">Inicio</a>
+            <a href="index" class="btn btn-mini btn-primary" role="button">Inicio</a>
+            <a href="index" class="btn btn-mini btn-primary" role="button">Inicio</a>
+        </div>
+    </div>
+    <div class="content">
+        
+    
