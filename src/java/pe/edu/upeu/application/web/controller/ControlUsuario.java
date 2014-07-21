@@ -58,17 +58,18 @@ public class ControlUsuario extends HttpServlet {
           
                 if (rs.next()) {
                    HttpSession sesion =  request.getSession(true);
-                    sesion.setAttribute("IDUSER", rs.getString("IDUSUARIO"));
-                    sesion.setAttribute("IDPER", rs.getString("IDEMPLEADO"));
-                    sesion.setAttribute("IDROL", rs.getString("IDROLES"));
-                    sesion.setAttribute("CL", rs.getString("CLAVE"));
-                    sesion.setAttribute("PUESTO_ID", rs.getString("PUESTO_ID"));
-                    sesion.setAttribute("AREA_ID", rs.getString("AREA_ID"));
-                    sesion.setAttribute("AREA", rs.getString("AREA"));
-                    sesion.setAttribute("DEPARTAMENTO", rs.getString("DEPARTAMENTO"));
-                    sesion.setAttribute("DEPARTAMENTO_ID", rs.getString("DEPARTAMENTO_ID"));
-                    sesion.setAttribute("PUESTO", rs.getString("PUESTO"));
-                    response.sendRedirect("Vista/Principal.jsp");
+                    sesion.setAttribute("IDUSER", rs.getString("ID_USUARIO"));
+                    sesion.setAttribute("USER", rs.getString("NO_USUARIO"));
+                    sesion.setAttribute("IDPER", rs.getString("ID_EMPLEADO"));
+                    sesion.setAttribute("IDROL", rs.getString("ID_ROL"));
+                    sesion.setAttribute("CL", rs.getString("PW_USUARIO"));
+                    sesion.setAttribute("PUESTO_ID", rs.getString("ID_PUESTO"));
+                    sesion.setAttribute("AREA_ID", rs.getString("ID_AREA"));
+                    sesion.setAttribute("AREA", rs.getString("NO_AREA"));
+                    sesion.setAttribute("DEPARTAMENTO", rs.getString("NO_DEP"));
+                    sesion.setAttribute("DEPARTAMENTO_ID", rs.getString("ID_DEPARTAMENTO"));
+                    sesion.setAttribute("PUESTO", rs.getString("NO_PUESTO"));
+                    response.sendRedirect("Principal.jsp");
                 }else  {
                     response.sendRedirect("index.jsp");
                 }

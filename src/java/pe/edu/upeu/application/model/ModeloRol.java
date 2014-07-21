@@ -22,7 +22,7 @@ public class ModeloRol {
      Connection cx = null;
     
     public ResultSet ListarURL(String idrol) throws Exception{
-    String sql= "select * from det_privilegio where idroles = '"+idrol+"' order by nro_orden";
+    String sql= "select * from rhvd_privilegio where id_rol = '"+idrol+"' order by nu_orden";
     cx= Conexion.getConex();
     stmt=cx.createStatement();
     rs= stmt.executeQuery(sql);

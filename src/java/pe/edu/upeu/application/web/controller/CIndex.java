@@ -76,7 +76,7 @@ public class CIndex extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
       
-         String pagina = "/principal.jsp";
+         String pagina = "/principal_2.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
         dispatcher.forward(request, response);
         processRequest(request, response);

@@ -24,7 +24,7 @@ public class ModeloUsuario {
         
         cx=Conexion.getConex();
         stmt = cx.createStatement();
-        rs = stmt.executeQuery("select * from det_usuario where usuario='" + User + "' and clave='" + pwd + "'");
+        rs = stmt.executeQuery("select * from rhvd_usuario where no_usuario='" + User + "' and pw_usuario='" + pwd + "'");
         return this.rs;
     }
 }

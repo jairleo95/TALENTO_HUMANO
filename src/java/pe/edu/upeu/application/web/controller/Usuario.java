@@ -67,8 +67,10 @@ public class Usuario extends HttpServlet {
             throws ServletException, IOException {
             String pagina = "/PruebaWeb/list.jsp";
             InterfaceUsuarioDAO aO = new UsuarioDAO();
+            
             HttpSession session = request.getSession(true);
             session.setAttribute("List_Usuario", aO.List_Usuario());
+            
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
             dispatcher.forward(request, response);
     }
@@ -91,6 +93,7 @@ public class Usuario extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
     }
 
     /**

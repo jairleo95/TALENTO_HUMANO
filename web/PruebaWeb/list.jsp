@@ -25,7 +25,10 @@
                     <th>Estado</th>
                     <th></th>
                 </tr>
-                <% for(int i=0; i<List_Usuario.size();i++){
+                <%
+                
+                
+                for(int i=0; i<List_Usuario.size();i++){
                     Usuario us = new Usuario();
                     us = (Usuario)List_Usuario.get(i);
                     %>
