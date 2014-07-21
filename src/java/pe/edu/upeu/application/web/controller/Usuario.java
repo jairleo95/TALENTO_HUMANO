@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +21,6 @@ import pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO;
  *
  * @author Alfa.sistemas
  */
-@WebServlet(name = "Usuario", urlPatterns = {"/Usuario"})
 public class Usuario extends HttpServlet {
 
     /**
@@ -54,20 +52,31 @@ public class Usuario extends HttpServlet {
         }
     }
 
- 
-    protected void List_Usuario(HttpServletRequest request,HttpServletResponse response )throws ServletException, IOException{
-    String pagina = "Listar.jsp";
-        InterfaceUsuarioDAO Iud= new UsuarioDAO();
-        HttpSession session = request.getSession(true);
-        session.setAttribute("List_Usuario", Iud.List_Usuario());
-        RequestDispatcher dispacher  = getServletContext().getRequestDispatcher(pagina);
-        dispacher.forward(request, response);
-    }
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     
+    
+        protected void List_Usuario(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+            String pagina = "/PruebaWeb/list.jsp";
+            InterfaceUsuarioDAO aO = new UsuarioDAO();
+            HttpSession session = request.getSession(true);
+            session.setAttribute("List_Usuario", aO.List_Usuario());
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
+            dispatcher.forward(request, response);
+    }
+        
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+            throws ServletException, IOException { 
+        this.List_Usuario(request, response);
     }
 
     /**

@@ -5,7 +5,7 @@
         Sistema de Recursos Humanos
         <div class="menu">
             <a href="index" class="btn btn-mini btn-primary" role="button">Inicio</a>
-            <a href="usuario" class="btn btn-mini btn-primary" role="button">Proveedor</a>
+            <a href="user" class="btn btn-mini btn-primary" role="button">Listar Usuario</a>
             <a href="index" class="btn btn-mini btn-primary" role="button">Inicio</a>
             <a href="index" class="btn btn-mini btn-primary" role="button">Inicio</a>
             <a href="index" class="btn btn-mini btn-primary" role="button">Inicio</a>

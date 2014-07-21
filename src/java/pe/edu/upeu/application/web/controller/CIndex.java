@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Docente
+ * @author Alfa.sistemas
  */
 public class CIndex extends HttpServlet {
 
@@ -75,7 +75,8 @@ public class CIndex extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String pagina = "/principal.jsp";
+      
+         String pagina = "/principal.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
         dispatcher.forward(request, response);
         processRequest(request, response);

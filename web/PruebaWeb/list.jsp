@@ -30,7 +30,7 @@
                     us = (Usuario)List_Usuario.get(i);
                     %>
                 <tr>
-                    <td><% %></td>
+                    <td><%=us.getNo_usuario() %></td>
                    
                     <td>
                         <a href="index" class="btn btn-mini btn-primary" role="button">Editar</a>

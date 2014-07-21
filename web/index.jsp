@@ -17,7 +17,7 @@
         <div>
         <div id="logueo"></div>
         <div id="caja_logueo">
-            <form class="form-signin" method="post" action="CIndex">
+            <form class="form-signin" method="post" action="prueba">
                 <!--<div style="font-size: 24px; text-align: center;" >RRHH</div>-->
                 <div><input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usuario" autocomplete="off" autofocus ></div>
                 <div><input type="password" class="form-control" placeholder="Clave" name="clave" id="clave"></div>

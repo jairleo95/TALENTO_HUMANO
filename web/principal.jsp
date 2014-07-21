@@ -15,7 +15,7 @@
     <body>
         <%@include file="WEB-INF/jspf/top.jspf" %>
         <div>
-            Bienvenido.......
+            Bienvenido....asas...
         </div>
         <%@include file="WEB-INF/jspf/bottom.jspf" %>
     </body>
