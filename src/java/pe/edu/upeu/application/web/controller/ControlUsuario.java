@@ -73,17 +73,8 @@ public class ControlUsuario extends HttpServlet {
                 }else  {
                     response.sendRedirect("index.jsp");
                 }
-            
-            
-            
+        }
         
-        try {
-         
-            
-        } finally {
-            out.close();
-        }
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
