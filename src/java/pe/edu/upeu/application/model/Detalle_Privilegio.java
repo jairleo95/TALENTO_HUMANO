@@ -11,67 +11,65 @@ package pe.edu.upeu.application.model;
  */
 public class Detalle_Privilegio {
 
-    private String id_detalle_pasos;
-    private String id_pasos;
-    private String id_puesto;
-    private String es_detalle_pasos;
-    private String co_puesto;
+    private String id_detalle_privilegio;
+    private String id_rol;
+    private int nu_orden;
+    private String id_privilegio;
+    private String es_detalle_privilegio;
 
-    public Detalle_Privilegio(String id_detalle_pasos, String id_pasos, String id_puesto, String es_detalle_pasos, String co_puesto) {
-        this.id_detalle_pasos = id_detalle_pasos;
-        this.id_pasos = id_pasos;
-        this.id_puesto = id_puesto;
-        this.es_detalle_pasos = es_detalle_pasos;
-        this.co_puesto = co_puesto;
+    public Detalle_Privilegio(String id_detalle_privilegio, String id_rol, int nu_orden, String id_privilegio, String es_detalle_privilegio) {
+        this.id_detalle_privilegio = id_detalle_privilegio;
+        this.id_rol = id_rol;
+        this.nu_orden = nu_orden;
+        this.id_privilegio = id_privilegio;
+        this.es_detalle_privilegio = es_detalle_privilegio;
     }
-
     public Detalle_Privilegio() {
-        this.id_detalle_pasos = "";
-        this.id_pasos = "";
-        this.id_puesto = "";
-        this.es_detalle_pasos = "";
-        this.co_puesto = "";
+        this.id_detalle_privilegio = id_detalle_privilegio;
+        this.id_rol = id_rol;
+        this.nu_orden = nu_orden;
+        this.id_privilegio = id_privilegio;
+        this.es_detalle_privilegio = es_detalle_privilegio;
     }
 
-    public String getId_detalle_pasos() {
-        return id_detalle_pasos;
+    public String getId_detalle_privilegio() {
+        return id_detalle_privilegio;
     }
 
-    public void setId_detalle_pasos(String id_detalle_pasos) {
-        this.id_detalle_pasos = id_detalle_pasos;
+    public void setId_detalle_privilegio(String id_detalle_privilegio) {
+        this.id_detalle_privilegio = id_detalle_privilegio;
     }
 
-    public String getId_pasos() {
-        return id_pasos;
+    public String getId_rol() {
+        return id_rol;
     }
 
-    public void setId_pasos(String id_pasos) {
-        this.id_pasos = id_pasos;
+    public void setId_rol(String id_rol) {
+        this.id_rol = id_rol;
     }
 
-    public String getId_puesto() {
-        return id_puesto;
+    public int getNu_orden() {
+        return nu_orden;
     }
 
-    public void setId_puesto(String id_puesto) {
-        this.id_puesto = id_puesto;
+    public void setNu_orden(int nu_orden) {
+        this.nu_orden = nu_orden;
     }
 
-    public String getEs_detalle_pasos() {
-        return es_detalle_pasos;
+    public String getId_privilegio() {
+        return id_privilegio;
     }
 
-    public void setEs_detalle_pasos(String es_detalle_pasos) {
-        this.es_detalle_pasos = es_detalle_pasos;
+    public void setId_privilegio(String id_privilegio) {
+        this.id_privilegio = id_privilegio;
     }
 
-    public String getCo_puesto() {
-        return co_puesto;
+    public String getEs_detalle_privilegio() {
+        return es_detalle_privilegio;
     }
 
-    public void setCo_puesto(String co_puesto) {
-        this.co_puesto = co_puesto;
+    public void setEs_detalle_privilegio(String es_detalle_privilegio) {
+        this.es_detalle_privilegio = es_detalle_privilegio;
     }
-    
     
 }

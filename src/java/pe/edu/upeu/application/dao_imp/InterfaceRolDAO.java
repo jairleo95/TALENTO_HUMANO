@@ -7,6 +7,7 @@
 package pe.edu.upeu.application.dao_imp;
 
 import java.util.List;
+import pe.edu.upeu.application.model.Detalle_Privilegio;
 import pe.edu.upeu.application.model.Rol;
 
 
@@ -17,4 +18,6 @@ import pe.edu.upeu.application.model.Rol;
 public interface InterfaceRolDAO  {
    
      public List<Rol> List_Rol();
+     public List<Detalle_Privilegio> listarURL( String idrol);
+     public boolean INSERT_ROLES( String idrol);
 }
