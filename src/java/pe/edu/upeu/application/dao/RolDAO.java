@@ -31,8 +31,8 @@ ConexionBD conn;
              ResultSet rs = this.conn.query(sql);
              Rol r =  new Rol();
              while (rs.next()) {
-                 r.setId_rol(rs.getString(1));
-                 r.setNo_rol(rs.getString(2));
+                 r.setId_rol(rs.getString("id_rol"));
+                 r.setNo_rol(rs.getString("no_rol"));
             list.add(r);
              }
              
