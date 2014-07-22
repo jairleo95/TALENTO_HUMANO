@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>.:RRHH:.</title>
+        <title>.: RRHH :.</title>
 
 
         <link rel="stylesheet" href="css/styleN.css" type="text/css" />
@@ -90,7 +90,7 @@
                 <div class="password-text">Clave:</div>
 
                 <div class="username-field item">
-                    <input type="text" name="username"   id="username" autofocus="" required="" autocomplete="off"    />
+                    <input type="text" name="username"   id="username"  autocomplete="off"    />
                     <div class='tooltip help'>
                         <span>?</span>
                         <div class='content'>
