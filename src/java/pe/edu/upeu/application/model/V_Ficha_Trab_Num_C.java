@@ -70,12 +70,21 @@ public class V_Ficha_Trab_Num_C {
     private String us_creacion;
     private String fe_creacion;
     private String us_modif;
+
+    public String getId_departamento2() {
+        return id_departamento2;
+    }
+
+    public void setId_departamento2(String id_departamento2) {
+        this.id_departamento2 = id_departamento2;
+    }
     private String fe_modif;
     private String ip_usuario;
     private String idtr;
     private String nu_contrato;
+    private String id_departamento2;
 
-    public V_Ficha_Trab_Num_C(String id_trabajador, String ap_paterno, String ap_materno, String no_trabajador, String ti_doc, String nu_doc, String es_civil, String fe_nac, String id_nacionalidad, String id_departamento, String id_provincia, String id_distrito, String te_trabajador, String cl_tra, String di_correo_personal, String di_correo_inst, String co_sistema_pensionario, String li_nivel_educativo, String li_grado_academico, String li_titulo_profesional, String id_carrera, String id_universidad, String cm_otros_estudios, String es_sexo, String li_grupo_sanguineo, String de_referencia, String li_religion, String no_iglesia, String de_cargo, String li_autoridad, String no_ap_autoridad, String cl_autoridad, String id_no_afp, String es_afiliado_essalud, String li_tipo_trabajador, String ca_tipo_hora_pago_refeerencial, String es_factor_rh, String li_di_dom_a_d1, String di_dom_a_d2, String li_di_dom_a_d3, String di_dom_a_d4, String li_di_dom_a_d5, String di_dom_a_d6, String di_dom_a_ref, String id_di_dom_a_distrito, String li_di_dom_leg_d1, String di_dom_leg_d2, String li_di_dom_leg_d3_id, String di_dom_leg_d4, String li_di_dom_leg_d5_id, String di_dom_leg_d6, String id_di_dom_leg_distrito, String ca_ing_qta_cat_empresa, String ca_ing_qta_cat_ruc, String ca_ing_qta_cat_otras_empresas, String cm_observaciones, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String ip_usuario, String idtr, String nu_contrato) {
+    public V_Ficha_Trab_Num_C(String id_trabajador, String ap_paterno, String ap_materno, String no_trabajador, String ti_doc, String nu_doc, String es_civil, String fe_nac, String id_nacionalidad, String id_departamento, String id_provincia, String id_distrito, String te_trabajador, String cl_tra, String di_correo_personal, String di_correo_inst, String co_sistema_pensionario, String li_nivel_educativo, String li_grado_academico, String li_titulo_profesional, String id_carrera, String id_universidad, String cm_otros_estudios, String es_sexo, String li_grupo_sanguineo, String de_referencia, String li_religion, String no_iglesia, String de_cargo, String li_autoridad, String no_ap_autoridad, String cl_autoridad, String id_no_afp, String es_afiliado_essalud, String li_tipo_trabajador, String ca_tipo_hora_pago_refeerencial, String es_factor_rh, String li_di_dom_a_d1, String di_dom_a_d2, String li_di_dom_a_d3, String di_dom_a_d4, String li_di_dom_a_d5, String di_dom_a_d6, String di_dom_a_ref, String id_di_dom_a_distrito, String li_di_dom_leg_d1, String di_dom_leg_d2, String li_di_dom_leg_d3_id, String di_dom_leg_d4, String li_di_dom_leg_d5_id, String di_dom_leg_d6, String id_di_dom_leg_distrito, String ca_ing_qta_cat_empresa, String ca_ing_qta_cat_ruc, String ca_ing_qta_cat_otras_empresas, String cm_observaciones, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String ip_usuario, String idtr, String nu_contrato, String id_departamento2) {
         this.id_trabajador = id_trabajador;
         this.ap_paterno = ap_paterno;
         this.ap_materno = ap_materno;
@@ -139,73 +148,75 @@ public class V_Ficha_Trab_Num_C {
         this.ip_usuario = ip_usuario;
         this.idtr = idtr;
         this.nu_contrato = nu_contrato;
+        this.id_departamento2 = id_departamento2;
+    }
+    public V_Ficha_Trab_Num_C() {
+        this.id_trabajador = id_trabajador;
+        this.ap_paterno = ap_paterno;
+        this.ap_materno = ap_materno;
+        this.no_trabajador = no_trabajador;
+        this.ti_doc = ti_doc;
+        this.nu_doc = nu_doc;
+        this.es_civil = es_civil;
+        this.fe_nac = fe_nac;
+        this.id_nacionalidad = id_nacionalidad;
+        this.id_departamento = id_departamento;
+        this.id_provincia = id_provincia;
+        this.id_distrito = id_distrito;
+        this.te_trabajador = te_trabajador;
+        this.cl_tra = cl_tra;
+        this.di_correo_personal = di_correo_personal;
+        this.di_correo_inst = di_correo_inst;
+        this.co_sistema_pensionario = co_sistema_pensionario;
+        this.li_nivel_educativo = li_nivel_educativo;
+        this.li_grado_academico = li_grado_academico;
+        this.li_titulo_profesional = li_titulo_profesional;
+        this.id_carrera = id_carrera;
+        this.id_universidad = id_universidad;
+        this.cm_otros_estudios = cm_otros_estudios;
+        this.es_sexo = es_sexo;
+        this.li_grupo_sanguineo = li_grupo_sanguineo;
+        this.de_referencia = de_referencia;
+        this.li_religion = li_religion;
+        this.no_iglesia = no_iglesia;
+        this.de_cargo = de_cargo;
+        this.li_autoridad = li_autoridad;
+        this.no_ap_autoridad = no_ap_autoridad;
+        this.cl_autoridad = cl_autoridad;
+        this.id_no_afp = id_no_afp;
+        this.es_afiliado_essalud = es_afiliado_essalud;
+        this.li_tipo_trabajador = li_tipo_trabajador;
+        this.ca_tipo_hora_pago_refeerencial = ca_tipo_hora_pago_refeerencial;
+        this.es_factor_rh = es_factor_rh;
+        this.li_di_dom_a_d1 = li_di_dom_a_d1;
+        this.di_dom_a_d2 = di_dom_a_d2;
+        this.li_di_dom_a_d3 = li_di_dom_a_d3;
+        this.di_dom_a_d4 = di_dom_a_d4;
+        this.li_di_dom_a_d5 = li_di_dom_a_d5;
+        this.di_dom_a_d6 = di_dom_a_d6;
+        this.di_dom_a_ref = di_dom_a_ref;
+        this.id_di_dom_a_distrito = id_di_dom_a_distrito;
+        this.li_di_dom_leg_d1 = li_di_dom_leg_d1;
+        this.di_dom_leg_d2 = di_dom_leg_d2;
+        this.li_di_dom_leg_d3_id = li_di_dom_leg_d3_id;
+        this.di_dom_leg_d4 = di_dom_leg_d4;
+        this.li_di_dom_leg_d5_id = li_di_dom_leg_d5_id;
+        this.di_dom_leg_d6 = di_dom_leg_d6;
+        this.id_di_dom_leg_distrito = id_di_dom_leg_distrito;
+        this.ca_ing_qta_cat_empresa = ca_ing_qta_cat_empresa;
+        this.ca_ing_qta_cat_ruc = ca_ing_qta_cat_ruc;
+        this.ca_ing_qta_cat_otras_empresas = ca_ing_qta_cat_otras_empresas;
+        this.cm_observaciones = cm_observaciones;
+        this.us_creacion = us_creacion;
+        this.fe_creacion = fe_creacion;
+        this.us_modif = us_modif;
+        this.fe_modif = fe_modif;
+        this.ip_usuario = ip_usuario;
+        this.idtr = idtr;
+        this.nu_contrato = nu_contrato;
+        this.id_departamento2 = id_departamento2;
     }
     
-     public V_Ficha_Trab_Num_C() {
-        this.id_trabajador = "";
-        this.ap_paterno = "";
-        this.ap_materno = "";
-        this.no_trabajador = "";
-        this.ti_doc = "";
-        this.nu_doc = "";
-        this.es_civil = "";
-        this.fe_nac = "";
-        this.id_nacionalidad = "";
-        this.id_departamento = "";
-        this.id_provincia = "";
-        this.id_distrito = "";
-        this.te_trabajador = "";
-        this.cl_tra = "";
-        this.di_correo_personal = "";
-        this.di_correo_inst = "";
-        this.co_sistema_pensionario = "";
-        this.li_nivel_educativo = "";
-        this.li_grado_academico = "";
-        this.li_titulo_profesional = "";
-        this.id_carrera = "";
-        this.id_universidad ="";
-        this.cm_otros_estudios = "";
-        this.es_sexo = "";
-        this.li_grupo_sanguineo = "";
-        this.de_referencia = "";
-        this.li_religion = "";
-        this.no_iglesia = "";
-        this.de_cargo = "";
-        this.li_autoridad = "";
-        this.no_ap_autoridad = "";
-        this.cl_autoridad = "";
-        this.id_no_afp = "";
-        this.es_afiliado_essalud = "";
-        this.li_tipo_trabajador = "";
-        this.ca_tipo_hora_pago_refeerencial = "";
-        this.es_factor_rh = "";
-        this.li_di_dom_a_d1 = "";
-        this.di_dom_a_d2 = "";
-        this.li_di_dom_a_d3 = "";
-        this.di_dom_a_d4 = "";
-        this.li_di_dom_a_d5 = "";
-        this.di_dom_a_d6 = "";
-        this.di_dom_a_ref = "";
-        this.id_di_dom_a_distrito = "";
-        this.li_di_dom_leg_d1 = "";
-        this.di_dom_leg_d2 = "";
-        this.li_di_dom_leg_d3_id = "";
-        this.di_dom_leg_d4 = "";
-        this.li_di_dom_leg_d5_id = "";
-        this.di_dom_leg_d6 = "";
-        this.id_di_dom_leg_distrito = "";
-        this.ca_ing_qta_cat_empresa = "";
-        this.ca_ing_qta_cat_ruc = "";
-        this.ca_ing_qta_cat_otras_empresas = "";
-        this.cm_observaciones = "";
-        this.us_creacion = "";
-        this.fe_creacion = "";
-        this.us_modif = "";
-        this.fe_modif = "";
-        this.ip_usuario = "";
-        this.idtr = "";
-        this.nu_contrato = "";
-    }
 
     public String getId_trabajador() {
         return id_trabajador;
