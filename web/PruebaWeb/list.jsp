@@ -4,6 +4,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <jsp:useBean id="List_Usuario" scope="session" class="java.util.ArrayList"/>
+<%@page import="pe.edu.upeu.application.model.Usuario" %>
 <!DOCTYPE html>
 <html>
     <head>

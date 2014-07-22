@@ -1,0 +1,53 @@
+.header{
+    background-color: #269abc;
+    color: #ffffff;
+    font-size: 150%;
+    height: auto;
+    padding: 20px;
+    text-align: center;
+    font-family: serif;
+}
+.bottom{
+    background-color: #269abc;
+    height: 50px;
+    padding: 10px;
+    text-align: center;
+    color: #abe5f8
+}
+.content{
+   padding: 20px; 
+}
+.menu{
+    margin-top: 10px;    
+}
+#logueo{
+    position: absolute;
+    width: 224px;
+    height: 224px;
+    left: 50%;
+    margin-left: -112px;
+    border: 1px solid #cccccc;
+    border-radius: 50%;
+    background-image: url('/rrhh/imagenes/Checkmark.jpg');
+    background-repeat: no-repeat;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+   -webkit-transition:500ms;
+   margin-top: 20px;   
+}
+#caja_logueo{
+    width: 350px;
+    height: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 250px;
+    margin-top: 50px;
+    box-shadow:1px 1px 5px #e5e7e7;   
+    -webkit-transition:500ms;
+}
+#mensaje{
+    width: 300px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}

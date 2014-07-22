@@ -1,0 +1,20 @@
+.header{
+    background-color: #000;
+    color: #000;
+    font-size: 150%;
+    height: auto;
+    padding: 20px;
+}
+.bottom{
+    background-color: #269abc;
+    height: 50px;
+    padding: 10px;
+    text-align: center;
+    color: #abe5f8
+}
+.content{
+   padding: 20px; 
+}
+.menu{
+    margin-top: 10px;    
+}
