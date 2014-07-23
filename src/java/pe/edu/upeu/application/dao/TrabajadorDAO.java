@@ -46,16 +46,15 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO{
             
         }
          this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-         String sql="select d.* , u.departametno_id from ficha_trab_num_c ) d, det_usuario u where \n" +
-"u.idusuario= d.user_creacion ";
+         String sql="select d.* , u.id_departamento from (select * from RHVD_FICHA_TRAB_NUM_C) d, RHVD_USUARIO u where u.id_usuario= d.us_creacion";
          nom=nom.toUpperCase();
          ape_p=ape_p.toUpperCase();
          ape_m=ape_m.toUpperCase();
          sql+=(Integer.parseInt(dni)<=0)?"and d.NRO_DOC='"+dni+"'":"";
-         sql+=(nom!="")?"and upper(d.nombres)like '%"+nom+"%'":"";
-         sql+=(ape_p!="")?"and upper(d.apellido_p)like '%"+ape_p+"%'":"";
-         sql+=(ape_m!="")?"and upper(d.apellido_m)like '%"+ape_m+"%'":"";
-         sql+="order by d.iddatos_trabajador desc";
+         sql+=(nom!="")?"and upper(d.NO_TRABAJADOR)like '%"+nom+"%'":"";
+         sql+=(ape_p!="")?"and upper(d.AP_PATERNO)like '%"+ape_p+"%'":"";
+         sql+=(ape_m!="")?"and upper(d.AP_MATERNO)like '%"+ape_m+"%'":"";
+         sql+="order by d.ID_TRABAJADOR desc";
          
          List<V_Ficha_Trab_Num_C> list = new ArrayList<V_Ficha_Trab_Num_C>();
           try {
@@ -138,7 +137,9 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO{
 
     @Override
     public List<Trabajador> ListaridTrabajador(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+       String sql="select * from datos_trabajador where iddatos_trabajador='"+id+"'";
+       return  null;
     }
 
     @Override
