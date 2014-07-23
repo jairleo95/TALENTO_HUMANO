@@ -20,10 +20,10 @@ $idf=$mod_f->LIST_FOTO_TRABAJADOR($listra[$index][1]);
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Empleados</title>
     
-	<script src="../Vistas/sort/modernizr.custom.63321.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="../Vistas/sort/style.css" />
-    <!--Css pannel contact-->
-    <link href="../Vistas/sort/stylesContact.css" rel="stylesheet" type="text/css" />
+	<script src="../../js/Js_Sort/modernizr.custom.63321.js" type="text/javascript"></script>
+            <link rel="stylesheet" href="../../css/Css_Sort/style.css" />
+            <link href="../../css/Css_Sort/stylesContact.css" rel="stylesheet" type="text/css" />
+    
     <!--End Css pannel contact-->
     <script type="text/javascript">
         function changeCSS(cssFile, cssLinkIndex) {
@@ -91,7 +91,7 @@ $idf=$mod_f->LIST_FOTO_TRABAJADOR($listra[$index][1]);
                 <? for ($index = 0; $index < count($listra); $index++) { ?>
                 <tr>
                     <td><?echo  $index+1;?></td>
-                    <td class="name"><a href="DetalleTrabajador.php?idtr=<? echo $listra[$index][1]; ?>"><?echo strtoupper( $listra[$index][2].' '.$listra[$index][3].' '.$listra[$index][4]);?></a></td>
+                    <td class="name"><a href="../Trabajador/Detalle_Trabajador.jsp?idtr=<? echo $listra[$index][1]; ?>"><?echo strtoupper( $listra[$index][2].' '.$listra[$index][3].' '.$listra[$index][4]);?></a></td>
                     <td><?echo  $listra[$index][7];?></td>
                     <td><?echo  $listra[$index][6];?></td>
                     <td><?echo  $listra[$index][5];?></td>
@@ -104,12 +104,12 @@ $idf=$mod_f->LIST_FOTO_TRABAJADOR($listra[$index][1]);
         </table>
         <div id="tablefooter">
           <div id="tablenav">
-            	<div>
-                    <img src="../Vistas/sort/imagenes/first.png" width="16" height="16" alt="First Page" onclick="sorter.move(-1,true)" />
-                    <img src="../Vistas/sort/imagenes/previous.png" width="16" height="16" alt="First Page" onclick="sorter.move(-1)" />
-                    <img src="../Vistas/sort/imagenes/next.png" width="16" height="16" alt="First Page" onclick="sorter.move(1)" />
-                    <img src="../Vistas/sort/imagenes/last.png" width="16" height="16" alt="Last Page" onclick="sorter.move(1,true)" />
-                </div>
+               <div>
+                                    <img src="../../imagenes/Img_Sort/first.png" width="16" height="16" alt="First Page" onclick="sorter.move(-1, true)" />
+                                    <img src="../../imagenes/Img_Sort/previous.png" width="16" height="16" alt="First Page" onclick="sorter.move(-1)" />
+                                    <img src="../../imagenes/Img_Sort/next.png" width="16" height="16" alt="First Page" onclick="sorter.move(1)" />
+                                    <img src="../../imagenes/Img_Sort/last.png" width="16" height="16" alt="Last Page" onclick="sorter.move(1, true)" />
+                                </div>
                 <div>
                 	<select  id="pagedropdown"></select>
                 </div>
@@ -135,7 +135,7 @@ $idf=$mod_f->LIST_FOTO_TRABAJADOR($listra[$index][1]);
 </div>
 
 
-	<script type="text/javascript" src="../Vistas/sort/script.js"></script>
+	  <script type="text/javascript" src="../../js/Js_Sort/script.js"></script>
 	<script type="text/javascript">
 	var sorter = new TINY.table.sorter('sorter','table',{
 	    headclass: 'head', // Header Class //
@@ -166,10 +166,10 @@ $idf=$mod_f->LIST_FOTO_TRABAJADOR($listra[$index][1]);
 	});
   </script>
   
-  <!--Script Open Pannel--->
-  <script src="../Vistas/sort/jquery.min.js"></script>
-    <script src="../Vistas/sort/jquery.reveal.js" type="text/javascript"></script>
-   
+
+       <script src="../../js/JQuery/jQuery.js"></script>
+                <script src="../../js/Js_Sort/jquery.reveal.js" type="text/javascript"></script>
+
   <script type="text/javascript">
       $(document).ready(function () {
           $('.button-email').click(function (e) { // Button which will activate our modal

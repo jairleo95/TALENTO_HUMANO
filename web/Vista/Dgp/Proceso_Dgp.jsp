@@ -14,7 +14,7 @@ if (isset($_SESSION['IDUSER'])) {
             <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
             <title>Requeriemiento en Proceso</title>
             <!--<link type="text/css" rel="stylesheet" href="../CSS/form.css">-->
-            <link type="text/css" rel="stylesheet" href="../CSS/Reportes.css">
+            <link type="text/css" rel="stylesheet" href="../../css/Css_Reporte/Reportes.css">
             <!-- <link type="text/css" rel="stylesheet" href="../CSS/desplegable.css">
             --><style>
 
@@ -132,26 +132,26 @@ if (isset($_SESSION['IDUSER'])) {
                             ?>
 
                             <? if ($idf == null) { ?>
-                                <td><img src="../Imagenes/avatar_default.jpg"  width="60"  height="60">
+                            <td><img src="../../imagenes/avatar_default.jpg"  width="60"  height="60">
                                 </td>
                             <? } else { ?>
                                 <td><img src="Foto.php?idf=<? echo $idf; ?>"  width="60"  height="60"></td>
                             <? } ?>
                             <td>   
-                                <div><a href="DetalleTrabajador.php?idtr=<? echo $list_dgp[$index][0]; ?>"> <strong><? echo strtoupper($list_dgp[$index][1] . ' ' . $list_dgp[$index][2] . ' ' . $list_dgp[$index][3]); ?></strong></a></div>
+                                <div><a href="../Trabajador/Detalle_Trabajador.jsp?idtr=<? echo $list_dgp[$index][0]; ?>"> <strong><? echo strtoupper($list_dgp[$index][1] . ' ' . $list_dgp[$index][2] . ' ' . $list_dgp[$index][3]); ?></strong></a></div>
                             </td>
                             <td>
                                 <ul class="nav">
                                     <li>
                                         <div class="opc">
-                                            <img src="../images/engranaje-hi.png" width="40" height="40">
+                                            <img src="../../imagenes/engranaje-hi.png" width="40" height="40">
                                         </div>   
                                         <ul>
-                                            <li><a href="User_DGP.php?iddgp=<? echo $list_dgp[$index][4]; ?>">Usuarios - Prox. Autorizacion</a></li>
+                                            <li><a href="User_Dgp.jsp?iddgp=<? echo $list_dgp[$index][4]; ?>">Usuarios - Prox. Autorizacion</a></li>
 
-                                            <li><a href="SeguimientoDGP.php?iddgp=<? echo $list_dgp[$index][4]; ?>">Ver Seguimiento</a> </li>
-                                            <li><a href="RegistrarDocumento.php?iddgp=<? echo $list_dgp[$index][4]; ?>&idtr=<? echo $list_dgp[$index][0]; ?>">Ver Documentos</a></li>
-                                            <li><a href="Reg_Comentario_dgp.php?iddgp=<? echo$list_dgp[$index][4]; ?>&idp=<? ?>">Comentarios</a></li>    
+                                            <li><a href="Detalle_Seguimiento_Dgp.jsp?iddgp=<? echo $list_dgp[$index][4]; ?>">Ver Seguimiento</a> </li>
+                                            <li><a href="Documento/Reg_Documento.jsp?iddgp=<? echo $list_dgp[$index][4]; ?>&idtr=<? echo $list_dgp[$index][0]; ?>">Ver Documentos</a></li>
+                                            <li><a href="Comentario/Reg_Comentario.jsp?iddgp=<? echo$list_dgp[$index][4]; ?>&idp=<? ?>">Comentarios</a></li>    
                                         </ul>
                                     </li>
                                 </ul>

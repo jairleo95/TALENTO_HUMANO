@@ -6,25 +6,25 @@ session_start();
     <head>
         <meta charset="windows-1252">
         <title>Registrar Trabajador</title>
-        <link rel="stylesheet" type="text/css"  href="../CSS/form.css">
+        <link rel="stylesheet" type="text/css"  href="../../css/Css_Formulario/form.css">
 
-            <link rel="stylesheet" href="../CSS/chosen.css">
-            <script src="../js3/abc.js"></script>
-            <script src="../js3/organictabs.jquery.js"></script>
-            
-            
-                  <script type="text/javascript" src="../CSS/Mensajes/Alertas/alertify.js"></script>
-        <link rel="stylesheet" href="../CSS/Mensajes/Alertas/alertify.core.css" />
-        <link rel="stylesheet" href="../CSS/Mensajes/Alertas/alertify.default.css" />
-        <script type="text/javascript"  src="../CSS/Mensajes/Alertas/Alertas.js"></script>
-         
-            
-            <link rel="stylesheet" href="../validator-master/fv.css" type="text/css" />
-            
-            
-            
-            <script type="text/javascript" src="../JS/jquery-1.10.2.min.js" ></script>
-        <script type="text/javascript" src="../JS/jquery.numeric.js"></script>
+        <link rel="stylesheet" href="../../css/Css_Formulario/chosen.css">
+        <script src="../../js/Js_Formulario/abc.js"></script>
+        <script src="../../js/Js_Formulario/organictabs.jquery.js"></script>
+
+
+        <script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
+        <link rel="stylesheet" href="../../css/Alertas/alertify.core.css" />
+        <link rel="stylesheet" href="../../css/Alertas/alertify.default.css" />
+        <script type="text/javascript"  src="../../js/Js_Alerta/Alertas.js"></script>
+
+
+        <link rel="stylesheet" href="../../css/Css_Validar/fv.css" type="text/css" />
+
+
+
+        <script type="text/javascript" src="../../js/JQuery/jQuery.js" ></script>
+        <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
 
         <script type="text/javascript">
             $(document).ready(
@@ -35,7 +35,8 @@ session_start();
                                 function() {
                                     $(".doc").val("");
                                     if ($(".select-doc").val() == 1) {
-                                        $("#doc").numeric(false, function() {});
+                                        $("#doc").numeric(false, function() {
+                                        });
                                         $(".doc").attr("maxlength", "8");
                                         // $(".doc").val("");
 
@@ -44,17 +45,18 @@ session_start();
                                         $(".doc").removeAttr("maxlength");
                                         $("#doc").removeNumeric();
                                         //    $(".doc").val("");
-                                    }  if ($(".select-doc").val() == 3){
-                                          $("#doc").removeNumeric();
-                                          $(".doc").removeAttr("maxlength");
+                                    }
+                                    if ($(".select-doc").val() == 3) {
+                                        $("#doc").removeNumeric();
+                                        $(".doc").removeAttr("maxlength");
                                     }
                                 }
                         );
-                    }  
+                    }
             );
         </script>
-  
-            <script type="text/javascript">
+
+        <script type="text/javascript">
             $(document).ready(
                     function() {
                         $(".alerta-req").hide();
@@ -70,7 +72,7 @@ session_start();
                                     var diaCumple = FechaNac[2];
                                     var mmCumple = FechaNac[1];
                                     var yyyyCumple = FechaNac[0];
-                                //retiramos el primer cero de la izquierda
+                                    //retiramos el primer cero de la izquierda
                                     if (mmCumple.substr(0, 1) == 0) {
                                         mmCumple = mmCumple.substring(1, 2);
                                     }
@@ -98,56 +100,56 @@ session_start();
 
         </script>
         <style>
-            
+
             .btn-duplicar{
-               margin-left: 30%;
-                
+                margin-left: 30%;
+
             }
         </style>
-            
+
     </head>
     <body>
-        
+
         <?
         require_once '../Modelo/ModeloUbigeo.php';
         require_once '../Modelo/ModeloLista.php';
         $md=new ModeloUbigeo();
         $mdl=new ModeloLista();
-        
+
         $list_dis=$md->ListarDistrito();
         $list_d=$md->ListarDistrito();
         $list_distrito=$md->ListarDistrito();
-        
+
         $lis_nacionalidad=$mdl->LISTA_NACIONALIDAD();
         $lis_carrera=$mdl->LISTA_CARRERA();
         $lis_universidad=$mdl->LISTA_UNIVERSIDAD();
         ?>
-      <br>
-      <center>
-             <?
-         
-             if (true){ ?>
-        <script type="text/javascript">
-                  Esperar();
-             </script>
-        <?}?>
-          <label class="title">FICHA DE DATOS DEL TRABAJADOR</label>
-         
-          
-        <button onclick="alerta_dt_ingresados();">Hola</button>
-       
-   
         <br>
-          <br>
-          <form class="form" action="../Control/ControlTrabajador.php" method="post" novalidate="" > 
-              
-              <table class="table" >      
-                  
-                  
-                  <tr><td colspan="4"><div class="sub_title"><label class="label">Datos Personales</label></div></td></tr>
-                  <tr ><td>Apellido Paterno:</td><td>
-                         <div class="item">
-                                <input type="text" name="APELLIDO_P"  required=""  class="text-box"  >
+    <center>
+        <?
+
+        if (true){ ?>
+        <script type="text/javascript">
+            Esperar();
+        </script>
+        <?}?>
+        <label class="title">FICHA DE DATOS DEL TRABAJADOR</label>
+
+
+        <button onclick="alerta_dt_ingresados();">Hola</button>
+
+
+        <br>
+        <br>
+        <form class="form" action="../Control/ControlTrabajador.php" method="post" novalidate="" > 
+
+            <table class="table" >      
+
+
+                <tr><td colspan="4"><div class="sub_title"><label class="label">Datos Personales</label></div></td></tr>
+                <tr ><td>Apellido Paterno:</td><td>
+                        <div class="item">
+                            <input type="text" name="APELLIDO_P"  required=""  class="text-box"  >
                             <div class='tooltip help'>
                                 <span>?</span>
                                 <div class='content'>
@@ -156,11 +158,11 @@ session_start();
                                 </div>
                             </div>
                         </div>
-                      </td></tr>                 
-                  <tr><td>Apellido Materno:</td><td>
-                          
-                            <div class="item">
-                               <input type="text" name="APELLIDO_M" required="" class="text-box" >
+                    </td></tr>                 
+                <tr><td>Apellido Materno:</td><td>
+
+                        <div class="item">
+                            <input type="text" name="APELLIDO_M" required="" class="text-box" >
                             <div class='tooltip help'>
                                 <span>?</span>
                                 <div class='content'>
@@ -169,11 +171,11 @@ session_start();
                                 </div>
                             </div>
                         </div>
-                      </td></tr>              
-                  <tr><td>Nombres:</td><td>
- 
-                       <div class="item">
-                             <input type="text" name="NOMBRES" class="text-box" required="" >
+                    </td></tr>              
+                <tr><td>Nombres:</td><td>
+
+                        <div class="item">
+                            <input type="text" name="NOMBRES" class="text-box" required="" >
                             <div class='tooltip help'>
                                 <span>?</span>
                                 <div class='content'>
@@ -182,118 +184,118 @@ session_start();
                                 </div>
                             </div>
                         </div>
-                      </td></tr>     
-                  <tr><td>Sexo:</td><td>
-                          <div class="item">
-                          <select name="SEXO" required="" class="text-box">
-                          <option value=""  >----------</option>
-                          <option value="M">Masculino</option>
-                          <option value="F">Femenino</option>
-                      </select></div>
-                     </td></tr>   
-                  <tr><td>Fecha Nacimiento:</td><td>
-                          <div class="item">
-                          <input type="date" name="FECHA_NAC" required=""id="edad"  class="text-box" onchange="" >    <div class='tooltip help'>
+                    </td></tr>     
+                <tr><td>Sexo:</td><td>
+                        <div class="item">
+                            <select name="SEXO" required="" class="text-box">
+                                <option value=""  >----------</option>
+                                <option value="M">Masculino</option>
+                                <option value="F">Femenino</option>
+                            </select></div>
+                    </td></tr>   
+                <tr><td>Fecha Nacimiento:</td><td>
+                        <div class="item">
+                            <input type="date" name="FECHA_NAC" required=""id="edad"  class="text-box" onchange="" >    <div class='tooltip help'>
                                 <span>?</span>
                                 <div class='content'>
                                     <b></b>
                                     <p>El Trabajador debe ser mayor de edad</p>
                                 </div>
                             </div>
-                          <br>
-                          <p class="edad"><div class="alerta-req" style="display: none;">Es un menor de edad</div></p>
-                         </div>
-                          
-                          </td>
-                          
-                          </tr>   
-                      <tr><td>Nacionalidad:</td><td>
-                              <select name="NACIONALIDAD" class="text-box chosen-select"   required="">
-                              <option value="" > </option>
-                              <?  for ($s = 0; $s < count($lis_nacionalidad); $s++) {?>
-                             <?  if ($lis_nacionalidad[$s][0]==44) {?>
-                              <option value="<? echo $lis_nacionalidad[$s][0];?>" selected="selected" ><? echo $lis_nacionalidad[$s][1];?> </option>
-                              <?}else{?>
-                              <option value="<? echo $lis_nacionalidad[$s][0];?>" ><? echo $lis_nacionalidad[$s][1];?> </option>
-                              <?}}?>
-                          </select></td></tr>  
-                        <tr><td>Distrito:</td><td>
-                                <select name="DISTRITO" class="text-box chosen-select"  required="">
-                                    <option value="" >-----</option>
-                                <?  for ($index = 0; $index < count($list_dis); $index++) {?>
-                                <option value="<? echo $list_dis[$index][0];?>"><?  echo $list_dis[$index][1];?></option>
-                                <?}?>
-                            </select>
-                         
-                        </td></tr> 
-                     <tr><td> Documento:</td><td>
-                             <div class="item">
-                        <select name="TIPO_DOC" class="required text-box select-doc "  required="">
-                            <option value="">------</option>
-                            <option value="1" selected="selected" >DNI</option>
-                            <option value="2">Carné de Extranjeria</option>
-                            <option value="3">Pasaporte</option>
+                            <br>
+                            <p class="edad"><div class="alerta-req" style="display: none;">Es un menor de edad</div></p>
+                        </div>
+
+                    </td>
+
+                </tr>   
+                <tr><td>Nacionalidad:</td><td>
+                        <select name="NACIONALIDAD" class="text-box chosen-select"   required="">
+                            <option value="" > </option>
+                            <?  for ($s = 0; $s < count($lis_nacionalidad); $s++) {?>
+                            <?  if ($lis_nacionalidad[$s][0]==44) {?>
+                            <option value="<? echo $lis_nacionalidad[$s][0];?>" selected="selected" ><? echo $lis_nacionalidad[$s][1];?> </option>
+                            <?}else{?>
+                            <option value="<? echo $lis_nacionalidad[$s][0];?>" ><? echo $lis_nacionalidad[$s][1];?> </option>
+                            <?}}?>
+                        </select></td></tr>  
+                <tr><td>Distrito:</td><td>
+                        <select name="DISTRITO" class="text-box chosen-select"  required="">
+                            <option value="" >-----</option>
+                            <?  for ($index = 0; $index < count($list_dis); $index++) {?>
+                            <option value="<? echo $list_dis[$index][0];?>"><?  echo $list_dis[$index][1];?></option>
+                            <?}?>
                         </select>
-                                 </div> <div class="item">
-                      <input type="text" name="NRO_DOC" class="text-box doc" id="doc" required=""></div></td></tr> 
-               
-                  
-                   <tr><td>Estado Civil:</td><td>
-                           <div class="item">
-                           <select name="ESTADO_CIVIL"  class="text-box required" required="">
-                           <option value="">-------------</option>
-                           <option value="1">Soltero(a)</option>
-                           <option value="2">Casado(a)</option>
-                           <option value="3">Divorciado(a)</option>
-                           <option value="4">Viudo(a)</option>
-                           <option value="5">Separado(a)</option>
-                           <option value="6">Conviviente(a)</option>
-                       </select></div>
-             </td></tr>   
-                   <tr><td>Grupo Sanguineo:</td><td>
-                       <select name="GRUPO_SANGUINEO" class="text-box">
-                           <option value="">---</option>
-                           <option value="1">A</option>
-                           <option value="2">B</option>
-                           <option value="3">AB</option>
-                           <option value="4">0</option>
-                       </select>Factor RH:
-                           <select name="FACTOR_RH_ID" class="text-box">
-                               <option value="">--------</option>
-                               <option value="1">Positivo</option>
-                               <option value="2">Negativo</option>
-                           </select>
-                       </td></tr>   
-                  <tr><td>Teléfono:</td><td><input type="text" name="TELEFONO" class="text-box" >Celular:<input type="text" name="CELULAR" class="text-box" ></td></tr>      
-                  <tr><td>Correo Personal:</td><td>
-                       <div class="item">
-                           <input type="email" name="CORREO_PERSONAL"  required="" class="text-box email"  >
+
+                    </td></tr> 
+                <tr><td> Documento:</td><td>
+                        <div class="item">
+                            <select name="TIPO_DOC" class="required text-box select-doc "  required="">
+                                <option value="">------</option>
+                                <option value="1" selected="selected" >DNI</option>
+                                <option value="2">Carné de Extranjeria</option>
+                                <option value="3">Pasaporte</option>
+                            </select>
+                        </div> <div class="item">
+                            <input type="text" name="NRO_DOC" class="text-box doc" id="doc" required=""></div></td></tr> 
+
+
+                <tr><td>Estado Civil:</td><td>
+                        <div class="item">
+                            <select name="ESTADO_CIVIL"  class="text-box required" required="">
+                                <option value="">-------------</option>
+                                <option value="1">Soltero(a)</option>
+                                <option value="2">Casado(a)</option>
+                                <option value="3">Divorciado(a)</option>
+                                <option value="4">Viudo(a)</option>
+                                <option value="5">Separado(a)</option>
+                                <option value="6">Conviviente(a)</option>
+                            </select></div>
+                    </td></tr>   
+                <tr><td>Grupo Sanguineo:</td><td>
+                        <select name="GRUPO_SANGUINEO" class="text-box">
+                            <option value="">---</option>
+                            <option value="1">A</option>
+                            <option value="2">B</option>
+                            <option value="3">AB</option>
+                            <option value="4">0</option>
+                        </select>Factor RH:
+                        <select name="FACTOR_RH_ID" class="text-box">
+                            <option value="">--------</option>
+                            <option value="1">Positivo</option>
+                            <option value="2">Negativo</option>
+                        </select>
+                    </td></tr>   
+                <tr><td>Teléfono:</td><td><input type="text" name="TELEFONO" class="text-box" >Celular:<input type="text" name="CELULAR" class="text-box" ></td></tr>      
+                <tr><td>Correo Personal:</td><td>
+                        <div class="item">
+                            <input type="email" name="CORREO_PERSONAL"  required="" class="text-box email"  >
                         </div>
-                      
-                      </td></tr>  
-                  <tr><td>Correo Institucional:</td><td>
-                      
-                           <div class="item">
-                         
-                           <input type="email" name="CORREO_INST"  class="text-box email" >
+
+                    </td></tr>  
+                <tr><td>Correo Institucional:</td><td>
+
+                        <div class="item">
+
+                            <input type="email" name="CORREO_INST"  class="text-box email" >
                         </div>
-                   
-                          
-                          
-                      </td></tr>    
-                  <tr><td>Sistema Pensionario:</td><td>
-                             <div class="item">
-                          <select name="SISTEMA_PENSIONARIO" class="text-box required"  required="">
-                          <option value="">-----------</option>
-                          <option value="1">AFP</option>
-                          <option value="2">ONP</option>
-                          <option value="3">Ninguno</option>
-                          <option value="4">Sin Régimen Provisional(jubilado, cesante).</option>
-                      </select></div>
-       
-                  </td></tr> 
-                  
-                    <tr><td>Nombre AFP :</td><td>
+
+
+
+                    </td></tr>    
+                <tr><td>Sistema Pensionario:</td><td>
+                        <div class="item">
+                            <select name="SISTEMA_PENSIONARIO" class="text-box required"  required="">
+                                <option value="">-----------</option>
+                                <option value="1">AFP</option>
+                                <option value="2">ONP</option>
+                                <option value="3">Ninguno</option>
+                                <option value="4">Sin Régimen Provisional(jubilado, cesante).</option>
+                            </select></div>
+
+                    </td></tr> 
+
+                <tr><td>Nombre AFP :</td><td>
                         <select name="NOMBRE_AFP_ID" class="text-box">
                             <option value="">--------</option>
                             <option value="1">Integra</option>
@@ -301,299 +303,298 @@ session_start();
                             <option value="3">Profuturo</option>
                             <option value="4">Horizonte</option>
                             <option value="4">Habitat</option>
-               
+
                         </select></td></tr> 
-                  <tr><td>Afiliado ESSALUD-VIDA:</td><td>
-                      <select name="AFILIADO_ESSALUD_ID" class="text-box">
-                          <option value="">----</option>
-                          <option value="1">Si</option>
-                          <option value="2">No</option>
-                      </select></td></tr> 
-                      <tr><td>Tipo Trabajador:</td><td>
-                          <select  name="TIPO_TRABAJADOR_ID" class="text-box" >
-                              <option value="">----</option>
-                              <option value="T" selected >Trabajador</option>
-                              <option value="A">Alumno</option>
-                          </select>
-                      </td></tr>  
-                      <tr><td colspan="4"><div class="sub_title"><label class="label">Datos Academicos</label></div></td></tr>
-                  
-                  <tr><td>Nivel Educativo:</td><td>
-                          <div class="item">
-                          <select name="NIVEL_EDUCATIVO" class="text-box required" required="">
-                          <option value="">------</option>
-                          <option value="1">Ninguno</option>
-                          <option value="2">Primaria Incompleta</option>
-                          <option value="3">Primaria Completa</option>
-                          <option value="4">Superior No Universitario Incompleta</option>
-                          <option value="5">Superior No Universitario Completa</option>
-                          <option value="6">Superior Universitario Incompleta</option>
-                          <option value="7">Superior Universitario Completa</option>
-                          <option value="8">Superior Post Grado incompleta</option>
-                          <option value="9">Superior Post Grado Completa</option>
-                      </select></div>
-                  </td></tr>   
-                  <tr><td>Grado Academico:</td><td>
-                             <div class="item">
-                          <select name="GRADO_ACADEMICO" class="text-box required" required="">
-                          <option value="">--------</option>
-                          <option value="1">Ninguno</option>
-                          <option value="2">Bachiller</option>
-                          <option value="3">Magister</option>
-                          <option value="4">Doctor</option>
-                      </select></div>
-                      
-                  </td></tr>   
-                  <tr><td>Titulo Profesional:</td><td>
-                             <div class="item">
-                          <select name="TITULO_PROFESIONA" class="text-box"  required="">
-                          <option value="">---------</option>
-                          <option value="1">Ninguno</option>
-                          <option value="2">Titulo Profesional</option>
-                          <option value="3">Titulo Tecnico</option>
-                      </select></div>
-                  </td></tr>  
+                <tr><td>Afiliado ESSALUD-VIDA:</td><td>
+                        <select name="AFILIADO_ESSALUD_ID" class="text-box">
+                            <option value="">----</option>
+                            <option value="1">Si</option>
+                            <option value="2">No</option>
+                        </select></td></tr> 
+                <tr><td>Tipo Trabajador:</td><td>
+                        <select  name="TIPO_TRABAJADOR_ID" class="text-box" >
+                            <option value="">----</option>
+                            <option value="T" selected >Trabajador</option>
+                            <option value="A">Alumno</option>
+                        </select>
+                    </td></tr>  
+                <tr><td colspan="4"><div class="sub_title"><label class="label">Datos Academicos</label></div></td></tr>
 
-                  <tr><td>Carrera:</td><td>
-                             <div class="item0">
-                          <select name="CARRERA" class="text-box chosen-select required" required="">
-                          <option value=""></option>
-                          <?  for ($r = 0; $r < count($lis_carrera); $r++) {?>
-                          <option value="<? echo $lis_carrera[$r][0];?>"><?echo $lis_carrera[$r][1];?></option>
-                          <?}?>
-                      </select>
-                             </div>
-                             </td></tr>
-                      
-                      <tr><td>Centro de Estudio Superior:</td><td>
-                               <div class="item0">
-                              <select name="CENTRO_DE_ESTUDIO" class="text-box chosen-select required"  required=""> 
-                              <option value=""></option>
-                              <?  for ($h = 0; $h < count($lis_universidad); $h++) {?>
-                              <option value="<? echo $lis_universidad[$h][0];?>"><?echo $lis_universidad[$h][1];?></option>
-                              <?}?>
-                          </select>
-                               </div>
-                               </td></tr>
-                  <tr><td>Tipo Hora Pago Referencial:</td><td><input type="text" name="TIPO_HORA_PAGO_REFEERENCIAL"  value="0" class="text-box" ></td></tr> 
-                  <tr><td>Otros Estudios:</td><td colspan="3"><textarea name="OTROS_ESTUDIOS" class="text-box" cols="60" rows="6"></textarea></td></tr> 
-          
-                  
-                  <tr><td colspan="4"><div class="sub_title"><label class="label">Domicilio Actual del Trabajador</label></div></td></tr>
-                   
-                     <tr><td>Dirección:</td><td> 
-                              <div class="item">
-                             <select name="DIR_DOM_A_D1_ID" class="text-box required" id="DOM_A_D1" required="">
-                             <option value="">------</option>
-                             <option value="1">Avenida</option>
-                             <option value="2">Jiron</option>
-                             <option value="3">Manzana</option>
-                             <option value="4">Calle</option>
-                             <option value="5">Pasaje</option>
-                             <option value="6">Alameda</option>
-                             <option value="7">Malecón</option>
-                             <option value="8">Ovalo</option>
-                             <option value="9">Plaza</option>
-                             <option value="10">Carretera</option>
-                             <option value="11">Block</option>
-                         </select>
-                                  </div>
-                             <div class="item"><input type="text" name="DIR_DOM_A_D2" id="DOM_A_D2" class="text-box" required=""></div>
-                             <div class="item"><select name="DIR_DOM_A_D3_ID" class="text-box required" id="DOM_A_D3" required="">
-                             <option value="">------</option>
-                             <option value="1">Número</option>
-                             <option value="2">Lote</option>
-                             <option value="3">S/N</option>
-                                 </select></div><div class="item"><input type="text" name="DIR_DOM_A_D4" id="DOM_A_D4" class="text-box" required="" ></div></td></tr>  
+                <tr><td>Nivel Educativo:</td><td>
+                        <div class="item">
+                            <select name="NIVEL_EDUCATIVO" class="text-box required" required="">
+                                <option value="">------</option>
+                                <option value="1">Ninguno</option>
+                                <option value="2">Primaria Incompleta</option>
+                                <option value="3">Primaria Completa</option>
+                                <option value="4">Superior No Universitario Incompleta</option>
+                                <option value="5">Superior No Universitario Completa</option>
+                                <option value="6">Superior Universitario Incompleta</option>
+                                <option value="7">Superior Universitario Completa</option>
+                                <option value="8">Superior Post Grado incompleta</option>
+                                <option value="9">Superior Post Grado Completa</option>
+                            </select></div>
+                    </td></tr>   
+                <tr><td>Grado Academico:</td><td>
+                        <div class="item">
+                            <select name="GRADO_ACADEMICO" class="text-box required" required="">
+                                <option value="">--------</option>
+                                <option value="1">Ninguno</option>
+                                <option value="2">Bachiller</option>
+                                <option value="3">Magister</option>
+                                <option value="4">Doctor</option>
+                            </select></div>
 
-                     <tr><td> </td><td>
-                                <div class="item">
-                             <select  class="text-box required"  name="DIR_DOM_A_D5_ID" id="DOM_A_D5" required="">
-                             <option value="">-----</option>
-                             <option value="1">Urbanizacion</option>
-                             <option value="2">Pueblo Joven</option>
-                             <option value="3">Unidad Vecinal</option>
-                             <option value="4">Conjuto Habitacional</option>
-                             <option value="5">Asentamiento Humano</option>
-                             <option value="6">Cooperativa</option>
-                             <option value="7">Residencial</option>
-                             <option value="8">Zona Industrial</option>
-                             <option value="9">Grupo</option>
-                             <option value="10">Caserío</option>
-                             <option value="11">Fundo</option>
-                             <option value="12">Ninguno</option>
-                             </select></div>
-                            <div class="item"><input type="text" name="DIR_DOM_A_D6" id="DOM_A_D6" class="text-box" required="" ></div></tr> 
-                     <tr><td>Referencia:</td><td>   <div class="item"><input type="text" name="DIR_DOM_A_REF" id="DOM_A_REF" class="text-box" required=""></div></td></tr> 
-                  <tr><td>Distrito:</td><td>
-                             <div class="item0">
-                          <select name="DIR_DOM_A_DISTRITO_ID" id="DOM_A_DISTRITO" class="chosen-select required" required="">
-                          <option value="">----------</option>
-                      <? for ($ff = 0; $ff < count($list_distrito); $ff++) {?>
-                          <option value="<? echo $list_distrito[$ff][0];?>"><? echo $list_distrito[$ff][1]." / ".$list_distrito[$ff][2]." / ".$list_distrito[$ff][0];?></option>
-                          <?}?></select></div><button onclick="duplicar();return false;" class="btn-duplicar" >duplicar</button></td></tr>
-                  
-                  
-                 
-                  <tr><td colspan="4"><div class="sub_title"><label class="label">Domicilio Legal (segun DNI)</label></div></td></tr>
-                  
-                  <tr><td>Dirección:</td><td>
-                             <div class="item">
-                          <select name="DIR_DOM_LEG_D1_ID" class="text-box required"  id="DOM_LEG_D1" required="">
-                          
-                            <option value=""></option>
-                             <option value="1">Avenida</option>
-                             <option value="2">Jiron</option>
-                             <option value="3">Manzana</option>
-                             <option value="4">Calle</option>
-                             <option value="5">Pasaje</option>
-                             <option value="6">Alameda</option>
-                             <option value="7">Malecón</option>
-                             <option value="8">Ovalo</option>
-                             <option value="9">Plaza</option>
-                             <option value="10">Carretera</option>
-                             <option value="11">Block</option>
-                      
-                          </select>
-                                 </div>
-                                    <div class="item"><input type="text" name="DIR_DOM_LEG_D2" id="DOM_LEG_D2" class="text-box"  required=""></div>
-                           <div class="item">
-                                    <select name="DIR_DOM_LEG_D3_ID"  id="DOM_LEG_D3" class="text-box required"  required="">
-                          <option value="">----------</option>
-                           <option value="1">Número</option>
-                             <option value="2">Lote</option>
-                             <option value="3">S/N</option>
-                          </select>
-                               </div>
-                                <div class="item">
-                                    <input type="text" name="DIR_DOM_LEG_D4" id="DOM_LEG_D4" class="text-box"  required=""></div></td></tr> 
-                  <tr><td> </td><td>
-                           <div class="item">
-                          <select name="DIR_DOM_LEG_D5_ID" id="DOM_LEG_D5" class="text-box required" required="">
-                          <option value="">-----------</option>
-                               <option value="1">Urbanizacion</option>
-                             <option value="2">Pueblo Joven</option>
-                             <option value="3">Unidad Vecinal</option>
-                             <option value="4">Conjuto Habitacional</option>
-                             <option value="5">Asentamiento Humano</option>
-                             <option value="6">Cooperativa</option>
-                             <option value="7">Residencial</option>
-                             <option value="8">Zona Industrial</option>
-                             <option value="9">Grupo</option>
-                             <option value="10">Caserío</option>
-                             <option value="11">Fundo</option>
-                             <option value="12">Ninguno</option>  
-                          </select>
-                               </div>
-                                 <div class="item"> <input type="text" name="DIR_DOM_LEG_D6" id="DOM_LEG_D6" class="text-box"  required=""></div></td></tr> 
-                 
-                  <tr><td>Distrito:</td><td>
-                             <div class="item">
-                          <select name="DIR_DOM_LEG_DISTRITO_ID"   id="DOM_LEG_DISTRITO" class="text-box required" required="">
-                              <option value="">----------</option>
-                          <?  for ($i = 0; $i < count($list_d); $i++) {?>
-                          <option value="<? echo $list_d[$i][0];?>"><? echo $list_d[$i][1]." / ".$list_d[$i][2]." / ".$list_d[$i][3];?></option>
-                          <?}?>
-                      </select></div>
-                  </td></tr>
-                   <tr><td colspan="4"><div class="sub_title"><label class="label">Ingresos de Quinta Categoria</label></div></td></tr>
-                    <input type="hidden" name="REFERENCIA" class="text-box"  > 
-                   <tr><td>Empresa:</td><td><input type="text" name="ING_QTA_CAT_EMPRESA" class="text-box" ></td></tr> 
-                  <tr><td>RUC:</td><td><input type="text" name="ING_QTA_CAT_RUC" class="text-box" ></td></tr> 
-                  <tr><td>Otras Empresas:</td><td><textarea name="ING_QTA_CAT_OTRAS_EMPRESAS" class="text-box" cols="60" rows="6"></textarea></td></tr> 
-                 <tr><td colspan="4"><div class="sub_title"><label class="label">Informacion Religiosa</label></div></td></tr>
-                  <tr><td>Religión:</td><td>
-                          <div class="item">
-                      <select  name="RELIGION" required class="text-box required">
-                          <option value="">-----</option>
-                          <option value="1">Adventista</option>
-                          <option value="2">Catolico</option>
-                          <option value="3">Otros</option>
-                      </select>
-                          </div>
-                          </td></tr>  
-                  <tr><td>Iglesia:</td><td><div class="item"><input type="text" name="IGLESIA" class="text-box"  required></div></td></tr>  
-                  <tr><td>Cargo en la Iglesia:</td><td><input type="text" name="CARGO" class="text-box" ></td></tr>  
-                  <tr><td>Autoridad:</td><td>
-                      <select name="AUTORIDAD" class="text-box">
-                          <option value="">-----</option>
-                          <option value="1">Pastor</option>
-                          <option value="2">Primer Anciano</option>
-                          <option value="3">Sacerdote</option>
-                      </select></td></tr>  
-                  <tr><td>Nombres y Apellidos:</td><td><input type="text" name="AUT_APELLIDOSNOMBRES" class="text-box" ></td></tr> 
-                  <tr><td>Telefono/Celular:</td><td><input type="text" name="AUT_CELULAR" class="text-box" ></td></tr>   
-                   <tr><td>Observaciones:</td><td> <textarea  name="OBSERVACIONES" class="text-box" cols="60" rows="6"></textarea></td></tr> 
-                   <input type="hidden" value="<? echo $_SESSION["IDUSUARIO"];?>" name="USER_CREACION" class="text-box" >
-                   <input type="hidden" value="" name="FECHA_CREACION" class="text-box" >
-                   <input type="hidden" value="" name="USUARIO_IP" class="text-box" >
-                   <tr><td colspan="2"><input type="submit" name="opc"  class="submit" value="Registrar"></td></tr> 
-              </table></form></center><br><br>
-    </body>
-    
-       <script src="../js2/prism.jss" type="text/javascript" charset="utf-8"></script>
-        <script src="../js2/chosen.jquery.js" type="text/javascript"></script>
-        <script src="../JS/prism.js" type="text/javascript" charset="utf-8"></script>
-        <script type="text/javascript">
-                            var config = {
-                                '.chosen-select': {},
-                                '.chosen-select-deselect': {allow_single_deselect: true},
-                                '.chosen-select-no-single': {disable_search_threshold: 10},
-                                '.chosen-select-no-results': {no_results_text: 'Oops, nothing found!'},
-                                '.chosen-select-width': {width: "95%"}
-                            }
-                            for (var selector in config) {
-                                $(selector).chosen(config[selector]);
-                            }
+                    </td></tr>   
+                <tr><td>Titulo Profesional:</td><td>
+                        <div class="item">
+                            <select name="TITULO_PROFESIONA" class="text-box"  required="">
+                                <option value="">---------</option>
+                                <option value="1">Ninguno</option>
+                                <option value="2">Titulo Profesional</option>
+                                <option value="3">Titulo Tecnico</option>
+                            </select></div>
+                    </td></tr>  
+
+                <tr><td>Carrera:</td><td>
+                        <div class="item0">
+                            <select name="CARRERA" class="text-box chosen-select required" required="">
+                                <option value=""></option>
+                                <?  for ($r = 0; $r < count($lis_carrera); $r++) {?>
+                                <option value="<? echo $lis_carrera[$r][0];?>"><?echo $lis_carrera[$r][1];?></option>
+                                <?}?>
+                            </select>
+                        </div>
+                    </td></tr>
+
+                <tr><td>Centro de Estudio Superior:</td><td>
+                        <div class="item0">
+                            <select name="CENTRO_DE_ESTUDIO" class="text-box chosen-select required"  required=""> 
+                                <option value=""></option>
+                                <?  for ($h = 0; $h < count($lis_universidad); $h++) {?>
+                                <option value="<? echo $lis_universidad[$h][0];?>"><?echo $lis_universidad[$h][1];?></option>
+                                <?}?>
+                            </select>
+                        </div>
+                    </td></tr>
+                <tr><td>Tipo Hora Pago Referencial:</td><td><input type="text" name="TIPO_HORA_PAGO_REFEERENCIAL"  value="0" class="text-box" ></td></tr> 
+                <tr><td>Otros Estudios:</td><td colspan="3"><textarea name="OTROS_ESTUDIOS" class="text-box" cols="60" rows="6"></textarea></td></tr> 
+
+
+                <tr><td colspan="4"><div class="sub_title"><label class="label">Domicilio Actual del Trabajador</label></div></td></tr>
+
+                <tr><td>Dirección:</td><td> 
+                        <div class="item">
+                            <select name="DIR_DOM_A_D1_ID" class="text-box required" id="DOM_A_D1" required="">
+                                <option value="">------</option>
+                                <option value="1">Avenida</option>
+                                <option value="2">Jiron</option>
+                                <option value="3">Manzana</option>
+                                <option value="4">Calle</option>
+                                <option value="5">Pasaje</option>
+                                <option value="6">Alameda</option>
+                                <option value="7">Malecón</option>
+                                <option value="8">Ovalo</option>
+                                <option value="9">Plaza</option>
+                                <option value="10">Carretera</option>
+                                <option value="11">Block</option>
+                            </select>
+                        </div>
+                        <div class="item"><input type="text" name="DIR_DOM_A_D2" id="DOM_A_D2" class="text-box" required=""></div>
+                        <div class="item"><select name="DIR_DOM_A_D3_ID" class="text-box required" id="DOM_A_D3" required="">
+                                <option value="">------</option>
+                                <option value="1">Número</option>
+                                <option value="2">Lote</option>
+                                <option value="3">S/N</option>
+                            </select></div><div class="item"><input type="text" name="DIR_DOM_A_D4" id="DOM_A_D4" class="text-box" required="" ></div></td></tr>  
+
+                <tr><td> </td><td>
+                        <div class="item">
+                            <select  class="text-box required"  name="DIR_DOM_A_D5_ID" id="DOM_A_D5" required="">
+                                <option value="">-----</option>
+                                <option value="1">Urbanizacion</option>
+                                <option value="2">Pueblo Joven</option>
+                                <option value="3">Unidad Vecinal</option>
+                                <option value="4">Conjuto Habitacional</option>
+                                <option value="5">Asentamiento Humano</option>
+                                <option value="6">Cooperativa</option>
+                                <option value="7">Residencial</option>
+                                <option value="8">Zona Industrial</option>
+                                <option value="9">Grupo</option>
+                                <option value="10">Caserío</option>
+                                <option value="11">Fundo</option>
+                                <option value="12">Ninguno</option>
+                            </select></div>
+                        <div class="item"><input type="text" name="DIR_DOM_A_D6" id="DOM_A_D6" class="text-box" required="" ></div></tr> 
+                <tr><td>Referencia:</td><td>   <div class="item"><input type="text" name="DIR_DOM_A_REF" id="DOM_A_REF" class="text-box" required=""></div></td></tr> 
+                <tr><td>Distrito:</td><td>
+                        <div class="item0">
+                            <select name="DIR_DOM_A_DISTRITO_ID" id="DOM_A_DISTRITO" class="chosen-select required" required="">
+                                <option value="">----------</option>
+                                <? for ($ff = 0; $ff < count($list_distrito); $ff++) {?>
+                                <option value="<? echo $list_distrito[$ff][0];?>"><? echo $list_distrito[$ff][1]." / ".$list_distrito[$ff][2]." / ".$list_distrito[$ff][0];?></option>
+                                <?}?></select></div><button onclick="duplicar();
+                                  return false;" class="btn-duplicar" >duplicar</button></td></tr>
+
+
+
+                <tr><td colspan="4"><div class="sub_title"><label class="label">Domicilio Legal (segun DNI)</label></div></td></tr>
+
+                <tr><td>Dirección:</td><td>
+                        <div class="item">
+                            <select name="DIR_DOM_LEG_D1_ID" class="text-box required"  id="DOM_LEG_D1" required="">
+
+                                <option value=""></option>
+                                <option value="1">Avenida</option>
+                                <option value="2">Jiron</option>
+                                <option value="3">Manzana</option>
+                                <option value="4">Calle</option>
+                                <option value="5">Pasaje</option>
+                                <option value="6">Alameda</option>
+                                <option value="7">Malecón</option>
+                                <option value="8">Ovalo</option>
+                                <option value="9">Plaza</option>
+                                <option value="10">Carretera</option>
+                                <option value="11">Block</option>
+
+                            </select>
+                        </div>
+                        <div class="item"><input type="text" name="DIR_DOM_LEG_D2" id="DOM_LEG_D2" class="text-box"  required=""></div>
+                        <div class="item">
+                            <select name="DIR_DOM_LEG_D3_ID"  id="DOM_LEG_D3" class="text-box required"  required="">
+                                <option value="">----------</option>
+                                <option value="1">Número</option>
+                                <option value="2">Lote</option>
+                                <option value="3">S/N</option>
+                            </select>
+                        </div>
+                        <div class="item">
+                            <input type="text" name="DIR_DOM_LEG_D4" id="DOM_LEG_D4" class="text-box"  required=""></div></td></tr> 
+                <tr><td> </td><td>
+                        <div class="item">
+                            <select name="DIR_DOM_LEG_D5_ID" id="DOM_LEG_D5" class="text-box required" required="">
+                                <option value="">-----------</option>
+                                <option value="1">Urbanizacion</option>
+                                <option value="2">Pueblo Joven</option>
+                                <option value="3">Unidad Vecinal</option>
+                                <option value="4">Conjuto Habitacional</option>
+                                <option value="5">Asentamiento Humano</option>
+                                <option value="6">Cooperativa</option>
+                                <option value="7">Residencial</option>
+                                <option value="8">Zona Industrial</option>
+                                <option value="9">Grupo</option>
+                                <option value="10">Caserío</option>
+                                <option value="11">Fundo</option>
+                                <option value="12">Ninguno</option>  
+                            </select>
+                        </div>
+                        <div class="item"> <input type="text" name="DIR_DOM_LEG_D6" id="DOM_LEG_D6" class="text-box"  required=""></div></td></tr> 
+
+                <tr><td>Distrito:</td><td>
+                        <div class="item">
+                            <select name="DIR_DOM_LEG_DISTRITO_ID"   id="DOM_LEG_DISTRITO" class="text-box required" required="">
+                                <option value="">----------</option>
+                                <?  for ($i = 0; $i < count($list_d); $i++) {?>
+                                <option value="<? echo $list_d[$i][0];?>"><? echo $list_d[$i][1]." / ".$list_d[$i][2]." / ".$list_d[$i][3];?></option>
+                                <?}?>
+                            </select></div>
+                    </td></tr>
+                <tr><td colspan="4"><div class="sub_title"><label class="label">Ingresos de Quinta Categoria</label></div></td></tr>
+                <input type="hidden" name="REFERENCIA" class="text-box"  > 
+                <tr><td>Empresa:</td><td><input type="text" name="ING_QTA_CAT_EMPRESA" class="text-box" ></td></tr> 
+                <tr><td>RUC:</td><td><input type="text" name="ING_QTA_CAT_RUC" class="text-box" ></td></tr> 
+                <tr><td>Otras Empresas:</td><td><textarea name="ING_QTA_CAT_OTRAS_EMPRESAS" class="text-box" cols="60" rows="6"></textarea></td></tr> 
+                <tr><td colspan="4"><div class="sub_title"><label class="label">Informacion Religiosa</label></div></td></tr>
+                <tr><td>Religión:</td><td>
+                        <div class="item">
+                            <select  name="RELIGION" required class="text-box required">
+                                <option value="">-----</option>
+                                <option value="1">Adventista</option>
+                                <option value="2">Catolico</option>
+                                <option value="3">Otros</option>
+                            </select>
+                        </div>
+                    </td></tr>  
+                <tr><td>Iglesia:</td><td><div class="item"><input type="text" name="IGLESIA" class="text-box"  required></div></td></tr>  
+                <tr><td>Cargo en la Iglesia:</td><td><input type="text" name="CARGO" class="text-box" ></td></tr>  
+                <tr><td>Autoridad:</td><td>
+                        <select name="AUTORIDAD" class="text-box">
+                            <option value="">-----</option>
+                            <option value="1">Pastor</option>
+                            <option value="2">Primer Anciano</option>
+                            <option value="3">Sacerdote</option>
+                        </select></td></tr>  
+                <tr><td>Nombres y Apellidos:</td><td><input type="text" name="AUT_APELLIDOSNOMBRES" class="text-box" ></td></tr> 
+                <tr><td>Telefono/Celular:</td><td><input type="text" name="AUT_CELULAR" class="text-box" ></td></tr>   
+                <tr><td>Observaciones:</td><td> <textarea  name="OBSERVACIONES" class="text-box" cols="60" rows="6"></textarea></td></tr> 
+                <input type="hidden" value="<? echo $_SESSION["IDUSUARIO"];?>" name="USER_CREACION" class="text-box" >
+                       <input type="hidden" value="" name="FECHA_CREACION" class="text-box" >
+                <input type="hidden" value="" name="USUARIO_IP" class="text-box" >
+                <tr><td colspan="2"><input type="submit" name="opc"  class="submit" value="Registrar"></td></tr> 
+            </table></form></center><br><br>
+</body>
+
+<script src="../js2/prism.jss" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/chosen.jquery.js" type="text/javascript"></script>
+<script src="../../js/prism.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+                      var config = {
+                          '.chosen-select': {},
+                          '.chosen-select-deselect': {allow_single_deselect: true},
+                          '.chosen-select-no-single': {disable_search_threshold: 10},
+                          '.chosen-select-no-results': {no_results_text: 'Oops, nothing found!'},
+                          '.chosen-select-width': {width: "95%"}
+                      }
+                      for (var selector in config) {
+                          $(selector).chosen(config[selector]);
+                      }
+</script>
+<script src="../../js/Js_Validar/multifield.js"></script>
+<script src="../../js/Js_Validar/validator.js"></script>
+<script>
+                          // initialize the validator function
+                          validator.message['date'] = 'not a real date';
+
+                          // validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
+                          $('form')
+                                  .on('blur', 'input[required], input.optional, select.required', validator.checkField)
+                                  .on('change', 'select.required', validator.checkField)
+                                  .on('keypress', 'input[required][pattern]', validator.keypress);
+
+                          $('.multi.required')
+                                  .on('keyup blur', 'input', function() {
+                                      validator.checkField.apply($(this).siblings().last()[0]);
+                                  });
+
+                          // bind the validation to the form submit event
+                          //$('#send').click('submit');//.prop('disabled', true);
+
+                          $('form').submit(function(e) {
+                              e.preventDefault();
+                              var submit = true;
+                              // evaluate the form using generic validaing
+                              if (!validator.checkAll($(this))) {
+                                  submit = false;
+                              }
+
+                              if (submit)
+                                  this.submit();
+                              return false;
+                          });
+
+                          /* FOR DEMO ONLY */
+                          $('#vfields').change(function() {
+                              $('form').toggleClass('mode2');
+                          }).prop('checked', false);
+
+                          $('#alerts').change(function() {
+                              validator.defaults.alerts = (this.checked) ? false : true;
+                              if (this.checked)
+                                  $('form .alert').remove();
+                          }).prop('checked', false);
 </script>
 
-<script src="../validator-master/multifield.js"></script>
-<script src="../validator-master/validator.js"></script>
-
-    <script>
-                // initialize the validator function
-                validator.message['date'] = 'not a real date';
-
-                // validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
-                $('form')
-                        .on('blur', 'input[required], input.optional, select.required', validator.checkField)
-                        .on('change', 'select.required', validator.checkField)
-                        .on('keypress', 'input[required][pattern]', validator.keypress);
-
-                $('.multi.required')
-                        .on('keyup blur', 'input', function() {
-                            validator.checkField.apply($(this).siblings().last()[0]);
-                        });
-
-                // bind the validation to the form submit event
-                //$('#send').click('submit');//.prop('disabled', true);
-
-                $('form').submit(function(e) {
-                    e.preventDefault();
-                    var submit = true;
-                    // evaluate the form using generic validaing
-                    if (!validator.checkAll($(this))) {
-                        submit = false;
-                    }
-
-                    if (submit)
-                        this.submit();
-                    return false;
-                });
-
-                /* FOR DEMO ONLY */
-                $('#vfields').change(function() {
-                    $('form').toggleClass('mode2');
-                }).prop('checked', false);
-
-                $('#alerts').change(function() {
-                    validator.defaults.alerts = (this.checked) ? false : true;
-                    if (this.checked)
-                        $('form .alert').remove();
-                }).prop('checked', false);
-    </script>
-    
-    <script type="text/javascript">
+<script type="text/javascript">
     $("#docs").numeric();
     $("#doc").numeric(false, function() {
         alert("Solo Numeros Enteros");
@@ -621,30 +622,28 @@ session_start();
 </script>
 
 <script>
-                     function  duplicar(){
-                    
-                    var DAD1=$("#DOM_A_D1").val();
-                    var DAD2=$("#DOM_A_D2").val();
-                    var DAD3=$("#DOM_A_D3").val();
-                    var DAD4=$("#DOM_A_D4").val();
-                    var DAD5=$("#DOM_A_D5").val();
-                    var DAD6=$("#DOM_A_D6").val();
-                    
-                    
-                    var DADIS=$("#DOM_A_DISTRITO").val();
-                    
-                    $("#DOM_LEG_D1").val(DAD1);
-                    $("#DOM_LEG_D2").val(DAD2);
-                    $("#DOM_LEG_D3").val(DAD3);
-                    $("#DOM_LEG_D4").val(DAD4);
-                    $("#DOM_LEG_D5").val(DAD5);
-                    $("#DOM_LEG_D6").val(DAD6);
-                    $("#DOM_LEG_DISTRITO").val(DADIS);
-                
-    }
-                
-         
-        </script>
+    function  duplicar() {
 
-    
+        var DAD1 = $("#DOM_A_D1").val();
+        var DAD2 = $("#DOM_A_D2").val();
+        var DAD3 = $("#DOM_A_D3").val();
+        var DAD4 = $("#DOM_A_D4").val();
+        var DAD5 = $("#DOM_A_D5").val();
+        var DAD6 = $("#DOM_A_D6").val();
+
+
+        var DADIS = $("#DOM_A_DISTRITO").val();
+
+        $("#DOM_LEG_D1").val(DAD1);
+        $("#DOM_LEG_D2").val(DAD2);
+        $("#DOM_LEG_D3").val(DAD3);
+        $("#DOM_LEG_D4").val(DAD4);
+        $("#DOM_LEG_D5").val(DAD5);
+        $("#DOM_LEG_D6").val(DAD6);
+        $("#DOM_LEG_DISTRITO").val(DADIS);
+
+    }
+
+
+</script>
 </html>

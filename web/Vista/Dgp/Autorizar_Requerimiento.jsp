@@ -18,10 +18,9 @@ $s = count($listra);
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <title>Autorizacion</title>
 
-       <link type="text/css" rel="stylesheet" href="../CSS/Reportes.css">
+        <link type="text/css" rel="stylesheet" href="../../css/Css_Reporte/Reportes.css">
      <!--  <link type="text/css" rel="stylesheet" href="../CSS/form.css">
 -->
-
     </head>
   
 
@@ -70,7 +69,7 @@ $s = count($listra);
                 ?>
               
               <? if ($idf==null) {?>
-              <td><img src="../Imagenes/avatar_default.jpg"  width="80"  height="80"></td>
+              <td><img src="../../imagenes/avatar_default.jpg"  width="80"  height="80"></td>
               
               <?}else{?>
               <<td><img src="Foto.php?idf=<?echo $idf;?>"  width="80"  height="80"></td>
@@ -86,16 +85,16 @@ $s = count($listra);
                                 <td style="width: 300px;"><? echo $listra[$index][15]; ?></td>      
                          <!--     <td><? //echo $listra[$index][5]; ?></td>  -->     
                         <td style="width: 300px;"><? echo $listra[$index][10]; ?></td>
-                           <td><a href="SeguimientoDGP.php?iddgp=<? echo $listra[$index][7];?>">Ver Proceso</a></td>
-                           <td><a href="Reg_Comentario_dgp.php?iddgp=<? echo$listra[$index][7]; ?>&idp=<?echo  $listra[$index][16];?>">Comentar dgp</a></td> 
-                            <td class="caji" ><a href="RegistrarDocumento.php?iddgp=<? echo $listra[$index][7];?>&idtr=<?echo $listra[$index][0];?>">Ver Documentos</a></td> 
+                        <td><a href="Detalle_Seguimiento_Dgp.jsp?iddgp=<? echo $listra[$index][7];?>">Ver Proceso</a></td>
+                        <td><a href="Comentario/Reg_Comentario.jsp?iddgp=<? echo$listra[$index][7]; ?>&idp=<?echo  $listra[$index][16];?>">Comentar dgp</a></td> 
+                        <td class="caji" ><a href="Documento/Reg_Documento.jsp?iddgp=<? echo $listra[$index][7];?>&idtr=<?echo $listra[$index][0];?>">Ver Documentos</a></td> 
                <? 
                 require_once '../Modelo/ModeloDGP.php';
                              $mddgp=new ModeloDGP();
                              $num=$mddgp->VALIDAR_DGP_CONTR($iddgp, $idtr);
                     ?>
                           
-                            <td><a href="DetalleTrabajador.php?idtr=<? echo $listra[$index][0];
+                    <td><a href="../Trabajador/Detalle_Trabajador.jsp?idtr=<? echo $listra[$index][0];
                             ?>&IDDETALLE_REQ_PROCESO=<? echo $listra[$index][9]; 
                             ?>&iddetalle_dgp=<? echo $listra[$index][7]; 
                             ?>&puesto_id=<? echo $idpu; ?>&cod=<? echo $listra[$index][8]; 
