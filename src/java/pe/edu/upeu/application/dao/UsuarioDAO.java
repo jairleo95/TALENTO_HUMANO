@@ -117,27 +117,27 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         boolean save = false;
         /*try {
-            StringBuilder sql = new StringBuilder();
-            sql.append("UPDATE rhtc_usuario set no_usuario)VALUES(").append(proveedor.getId());
-            sql.append(", '").append(proveedor.getProv());
-            sql.append("', '").append(proveedor.getRuc());
-            sql.append("', '").append(proveedor.getDir());
-            sql.append("', '").append(proveedor.getTel());
-            sql.append("', '").append(proveedor.getEst()).append("')");
-        } catch (SQLException e) {
-        } finally {
-            this.conn.close();
-        }*/
+         StringBuilder sql = new StringBuilder();
+         sql.append("UPDATE rhtc_usuario set no_usuario)VALUES(").append(proveedor.getId());
+         sql.append(", '").append(proveedor.getProv());
+         sql.append("', '").append(proveedor.getRuc());
+         sql.append("', '").append(proveedor.getDir());
+         sql.append("', '").append(proveedor.getTel());
+         sql.append("', '").append(proveedor.getEst()).append("')");
+         } catch (SQLException e) {
+         } finally {
+         this.conn.close();
+         }*/
 
         return save;
 
     }
-    
-    @Override
-    public List<V_Usuario> Val_Usuario(String id_usuario){
-    this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
 
-        String sql = "select * from rhvd_usuario where id_usuario='"+ id_usuario +"'";
+    @Override
+    public List<V_Usuario> Val_Usuario(String id_usuario) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+
+        String sql = "select * from rhvd_usuario where id_usuario='" + id_usuario + "'";
         List<V_Usuario> list = new ArrayList<V_Usuario>();
         try {
             ResultSet rs = this.conn.query(sql.toString());
@@ -163,30 +163,33 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
 
         return list;
     }
-    @Override
-     public boolean Mod_Pw(String nombre ,String usuario, String clave){
-          this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-          String sql = "select count(*) from rhtc_usuario where no_usuario='"+ nombre +"' and id_usuario='"+ usuario +"' and pw_usuario='"+ clave + "'";
-     /*$sql = "select count(*) from usuario where usuario='$user' and idusuario=$iduser and clave='$clave'";
-        //echo $sql;
 
-        $exe = oci_parse(Conexion::conex(), $sql);
-        oci_execute($exe);
-        $row = oci_fetch_array($exe);
-        $id = $row[0];
-        if ($id == 1) {
-            $sql_u = "update usuario set clave='$clave_nueva' where idusuario=$iduser";
-            $exe_u = oci_parse(Conexion::conex(), $sql_u);
-            oci_execute($exe_u);
-        }
-        if ($id == 0) {
-            echo '<script language="JavaScript" type="text/javascript">
-alert("Las Claves son Incorrectas");
-window.history.back();
-</script> ';
-        }*/
+    @Override
+    public boolean Mod_Pw(String nombre, String usuario, String clave) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select count(*) from rhtc_usuario where no_usuario='" + nombre + "' and id_usuario='" + usuario + "' and pw_usuario='" + clave + "'";
+        /*$sql = "select count(*) from usuario where usuario='$user' and idusuario=$iduser and clave='$clave'";
+         //echo $sql;
+
+         $exe = oci_parse(Conexion::conex(), $sql);
+         oci_execute($exe);
+         $row = oci_fetch_array($exe);
+         $id = $row[0];
+         if ($id == 1) {
+         $sql_u = "update usuario set clave='$clave_nueva' where idusuario=$iduser";
+         $exe_u = oci_parse(Conexion::conex(), $sql_u);
+         oci_execute($exe_u);
+         }
+         if ($id == 0) {
+         echo '<script language="JavaScript" type="text/javascript">
+         alert("Las Claves son Incorrectas");
+         window.history.back();
+         </script> ';
+         }*/
         return false;
-     }
+    }
+
+    
 
     @Override
     public Usuario Edit_Usuario(String ID) {
