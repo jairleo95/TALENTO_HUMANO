@@ -6,17 +6,12 @@ session_start();
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <title>Fichas de Trabajador</title>
-        
-          <link rel="stylesheet" href="../Vistas/sort/style.css" />
-            
-        
-        <link type="text/css" rel="stylesheet" href="../CSS/Reportes.css">
-   
-        <script type="text/javascript" src="../CSS/Mensajes/Alertas/alertify.js"></script>
-        <link rel="stylesheet" href="../CSS/Mensajes/Alertas/alertify.core.css" />
-        <link rel="stylesheet" href="../CSS/Mensajes/Alertas/alertify.default.css" />
-        <script type="text/javascript"  src="../CSS/Mensajes/Alertas/Alertas.js"></script>
-    
+        <link rel="stylesheet" href="../../css/Css_Trabajador/style.css" />
+        <link type="text/css" rel="stylesheet" href="../../css/Css_Reporte/Reportes.css">
+        <script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
+        <link rel="stylesheet" href="../../css/Css_Alertas/alertify.core.css" />
+        <link rel="stylesheet" href="../../css/Css_Alertas/alertify.default.css" />
+        <script type="text/javascript"  src="../../js/Js_Alerta/Alertas.js"></script>
     </head>
     <SCRIPT LANGUAGE="JavaScript">
 function checkIt(evt) {
@@ -35,13 +30,15 @@ function checkIt(evt) {
    
         <div class="spacing">
             <center><h1 class="spacing">Fichas de Trabajador</h1></center>
+
+
         </div>
     <center>
         <div class="container theme-showcase">
             <table  style="width: 80%;" >
                 <tr>
                     <!--<td style="width: 800px;  " colspan="2"> Lista de Fichas (<? //echo $s; ?>)</td>-->
-                    <td>Elaborar Ficha:</td><td><a href="Reg_Trabajador.php"    class="button blue" >Agregar Nueva Ficha</a></td>    
+                    <td>Elaborar Ficha:</td><td><a href="Reg_Trabajador.jsp"    class="button blue" >Agregar Nueva Ficha</a></td>    
                 <!--<button onclick="Hola();">Hola</button>
                 -->
                 </tr>
@@ -97,12 +94,12 @@ $s = count($listra);
                           ?>
               
               <? if ($idf==null) {?>
-            <td><img src="../Imagenes/avatar_default.jpg"  width="80"  height="80"></td>
+              <td><img src="../../imagenes/avatar_default.jpg"  width="80"  height="80"></td>
               <?}else{?>
               <td><img src="Foto.php?idf=<?echo $idf;?>"  width="80"  height="80"></td>
               <?}?>
                         
-                        <td><div ><a href="DetalleTrabajador.php?idtr=<? echo $listra[$index][0]; ?>"><? echo strtoupper($listra[$index]["1"] . ' ' . $listra[$index]["2"]. ' ' . $listra[$index]["3"]); ?></a></div></td>
+                        <td><div ><a href="Detalle_Trabajador.jsp?idtr=<? echo $listra[$index][0]; ?>"><? echo strtoupper($listra[$index]["1"] . ' ' . $listra[$index]["2"]. ' ' . $listra[$index]["3"]); ?></a></div></td>
                         <td> <? 
                           require_once '../Modelo/ModeloLista.php';
                           $md_l=new ModeloLista();
@@ -122,17 +119,17 @@ $s = count($listra);
                      $n_v=$mddgp->VAL_OPC_DGP($listra[$index][0]);
                   //  echo $n_v;
                     if ($n_v>0) {?>
-                       <a href="List_dgp_trabajador.php?idtr=<? echo $listra[$index][0];?>">Ver DGP's</a>
+                       <a href="List_Dgp_Trabajador.jsp?idtr=<? echo $listra[$index][0];?>">Ver DGP's</a>
                     <?}else{?> 
                         <?if ($listra[$index][62]>0) {?>
                         <? if ($num[0][0]!=0) {?>
-                         <a href="List_dgp_trabajador.php?idtr=<? echo $listra[$index][0];?>">Ver DGP's</a>
+                         <a href="List_Dgp_trabajador.jsp?idtr=<? echo $listra[$index][0];?>">Ver DGP's</a>
                             <?}?>
-                        <a href="Info_Contractual.php?idtr=<? echo $listra[$index][0];?>">Ver Contratos</a>
+                            <a href="../Contrato/Detalle_Info_Contractual.jsp?idtr=<? echo $listra[$index][0];?>">Ver Contratos</a>
                      <?}else{?>
-                     <a href="Reg_dgp.php?idtr=<?echo $listra[$index][0];?>">Solicitar Contratación</a>        
+                     <a href="../Dgp/Reg_Dgp.jsp?idtr=<?echo $listra[$index][0];?>">Solicitar Contratación</a>        
                      <?  if ($_SESSION["IDROL"]==6) {?>
-                     <a href="Reg_Contrato.php?idtr=<?echo $listra[$index][0];?>">ELaborar Contrato</a>                       
+                     <a href="../Contrato/Reg_Contrato.jsp?idtr=<?echo $listra[$index][0];?>">ELaborar Contrato</a>                       
                      <?}?>
                          <?}}?>
                         </td>

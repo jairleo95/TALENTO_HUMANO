@@ -14,7 +14,6 @@
 
         <link rel="stylesheet" href="css/styleN.css" type="text/css" />
         <link rel="stylesheet" href="css/Mensajes/Mensaje.css" type="text/css" />
-
         <script language="JavaScript" type="text/javascript">
             javascript:window.history.forward(1); //Esto es para cuando le pulse al botón de Atrás
             javascript:window.history.back(1); //Esto para cuando le pulse al botón de Adelante
