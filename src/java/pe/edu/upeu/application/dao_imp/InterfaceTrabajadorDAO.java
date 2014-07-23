@@ -9,6 +9,7 @@ import java.util.List;
 import pe.edu.upeu.application.model.Contrato;
 import pe.edu.upeu.application.model.Trabajador;
 import pe.edu.upeu.application.model.V_Ficha_Trab_Num_C;
+import pe.edu.upeu.application.model.X_List_dat_tr_plantilla;
 
 /**
  *
@@ -49,7 +50,7 @@ public interface InterfaceTrabajadorDAO {
             String CARGO,
             String AUTORIDAD,
             String AUT_APELLIDOSNOMBRES,
-            int AUT_CELULAR,
+            String AUT_CELULAR,
             String NOMBRE_AFP_ID,
             String AFILIADO_ESSALUD_ID,
             String TIPO_TRABAJADOR_ID,
@@ -87,7 +88,7 @@ public interface InterfaceTrabajadorDAO {
 
     public List<Trabajador> ListaridTrabajador(String id);
 
-    public List<Contrato> LIST_DAT_TR_PLANTILLA(String id);
+    public List<X_List_dat_tr_plantilla> LIST_DAT_TR_PLANTILLA(String id);
 
     public String MAX_ID_DATOS_TRABAJADOR();
 }

@@ -252,11 +252,18 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO{
 
     @Override
     public String MAX_ID_DATOS_TRABAJADOR() {
-        
-        
-        return null;
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql="SELECT 'TRB-' ||MAX (SUBSTR(ID_TRABAJADOR,5,8)) FROM RHTM_TRABAJADOR";
+        String Max = null ;
+        try {
+             ResultSet rs = this.conn.query(sql);
+             while (rs.next()) {
+                Max=rs.getString(1);
+             }
+        } catch (SQLException e) {
+        }finally{
+         this.conn.close();
+         }
+        return Max;
     }
-
-   
-
 }
