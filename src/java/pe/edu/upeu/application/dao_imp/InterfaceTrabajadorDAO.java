@@ -3,23 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pe.edu.upeu.application.dao_imp;
 
 import java.util.List;
 import pe.edu.upeu.application.model.Contrato;
 import pe.edu.upeu.application.model.Trabajador;
 import pe.edu.upeu.application.model.V_Ficha_Trab_Num_C;
+
 /**
  *
  * @author Jose
  */
 public interface InterfaceTrabajadorDAO {
+
     public String Calculaedad(String fecha_nac);
-    public boolean INSERT_DATOS_TRABAJADOR(  String IDDATOS_TRABAJADOR,
+
+    public boolean INSERT_DATOS_TRABAJADOR(String IDDATOS_TRABAJADOR,
             String APELLIDO_P,
             String APELLIDO_M,
-            String NOMBRES, 
+            String NOMBRES,
             String TIPO_DOC,
             String NU_DOC,
             String ESTADO_CIVIL,
@@ -45,7 +47,7 @@ public interface InterfaceTrabajadorDAO {
             String RELIGION,
             String IGLESIA,
             String CARGO,
-            String  AUTORIDAD,
+            String AUTORIDAD,
             String AUT_APELLIDOSNOMBRES,
             int AUT_CELULAR,
             String NOMBRE_AFP_ID,
@@ -78,9 +80,14 @@ public interface InterfaceTrabajadorDAO {
             String FECHA_MODIF,
             String USUARIO_IP
     );
+
     public boolean EliminarTrabajador(String id, String idc);
-    public List<V_Ficha_Trab_Num_C> ListarTrabajador(String iddep,String dni,String nom,String ape_p,String ape_m);
+
+    public List<V_Ficha_Trab_Num_C> ListarTrabajador(String iddep, String dni, String nom, String ape_p, String ape_m);
+
     public List<Trabajador> ListaridTrabajador(String id);
-    public List<Contrato>LIST_DAT_TR_PLANTILLA(String id);
+
+    public List<Contrato> LIST_DAT_TR_PLANTILLA(String id);
+
     public String MAX_ID_DATOS_TRABAJADOR();
 }

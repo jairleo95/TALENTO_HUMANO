@@ -84,7 +84,7 @@
     </head>
     <body>
         <div id="container">
-            <form  action="user" method="POST">
+            <form  action="menu" method="POST">
                 <div class="login ">Login</div>
                 <div class="username-text">Usuario:</div>
                 <div class="password-text">Clave:</div>

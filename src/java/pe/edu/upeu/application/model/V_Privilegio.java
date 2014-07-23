@@ -16,9 +16,9 @@ public class V_Privilegio {
     private String id_rol;
     private String no_link;
     private String di_url;
-    private Double nu_orden;
+    private int nu_orden;
 
-    public V_Privilegio(String id_privilegio, String id_detalle_privilegio, String id_rol, String no_link, String di_url, Double nu_orden) {
+    public V_Privilegio(String id_privilegio, String id_detalle_privilegio, String id_rol, String no_link, String di_url, int nu_orden) {
         this.id_privilegio = id_privilegio;
         this.id_detalle_privilegio = id_detalle_privilegio;
         this.id_rol = id_rol;
@@ -33,7 +33,7 @@ public class V_Privilegio {
         this.id_rol = "";
         this.no_link = "";
         this.di_url = "";
-        this.nu_orden = 0.0;
+        this.nu_orden = 0;
     } 
      
     public String getId_privilegio() {
@@ -76,11 +76,11 @@ public class V_Privilegio {
         this.di_url = di_url;
     }
 
-    public Double getNu_orden() {
+    public int getNu_orden() {
         return nu_orden;
     }
 
-    public void setNu_orden(Double nu_orden) {
+    public void setNu_orden(int nu_orden) {
         this.nu_orden = nu_orden;
     }
 

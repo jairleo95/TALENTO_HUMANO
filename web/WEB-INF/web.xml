@@ -5,16 +5,16 @@
         <servlet-class>pe.edu.upeu.application.web.controller.CIndex</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Usuario</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.Usuario</servlet-class>
+        <servlet-name>CPrincipal</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CPrincipal</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CIndex</servlet-name>
         <url-pattern>/prueba</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Usuario</servlet-name>
-        <url-pattern>/user</url-pattern>
+        <servlet-name>CPrincipal</servlet-name>
+        <url-pattern>/menu</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
