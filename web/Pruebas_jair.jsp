@@ -5,6 +5,10 @@
 --%>
 
 
+<%@page import="pe.edu.upeu.application.factory.Conexion"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="pe.edu.upeu.application.factory.ConexionBD"%>
+<%@page import="java.sql.CallableStatement"%>
 <%@page import="pe.edu.upeu.application.model.V_Privilegio"%>
 <%@page import="pe.edu.upeu.application.dao.RolDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceRolDAO"%>
@@ -17,15 +21,8 @@
     </head>
     <body>
         <%
-      InterfaceRolDAO r =  new RolDAO();
-      
-      for(int i = 0; i <r.listarURL("ROL-0002").size();i++){
-      V_Privilegio  p =  new V_Privilegio();
-      p =  (V_Privilegio)r.listarURL("ROL-0002").get(i);
-          out.println(p.getNo_link());
-      }
-      
-      
+            Connection cnn= Conexion.getConex();
+     CallableStatement cst= cnn.prepareCall("{CALL SP_ANNO (?,?,?,?,?)}");
         %>
     </body>
 </html>

@@ -6,6 +6,7 @@
 
 package pe.edu.upeu.application.factory;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,7 +18,7 @@ import java.sql.Statement;
  */
 public abstract class ConexionBD {
     protected String[] parametro;
-    protected Connection conex;
+    public Connection conex;
     abstract Connection open();
     
     public ResultSet query(String sql){
@@ -44,6 +45,7 @@ public abstract class ConexionBD {
     
     return op;
     }
+  
     public boolean close(){
     boolean ok = true;
         try {
