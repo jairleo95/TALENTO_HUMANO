@@ -33,7 +33,50 @@ public class DgpDAO implements InterfaceDgpDAO {
 
     @Override
     public List<X_User_dgp> USER_DGP(String id_dgp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.conn=FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql=" select u.*,du.NO_TRABAJADOR ,du.AP_PATERNO,du.AP_MATERNO, p.DE_PASOS as  paso from RHVD_USER_AUT u  ,RHTC_PASOS p ,RHVD_USUARIO du  where u.ID_EMPLEADO=du.ID_EMPLEADO and u.ID_PASOS= p.ID_PASOS  and u.ID_DGP='"+id_dgp+"'  and u.ID_PUESTO <>0";
+        List<X_User_dgp> Lista=new ArrayList<X_User_dgp>();
+        try {
+            ResultSet rs=this.conn.query(sql);
+            X_User_dgp x= new X_User_dgp();
+            while(rs.next())
+            {
+                x.setId_trabajador(rs.getString("id_trabajador"));
+                x.setId_usuario(rs.getString("id_usuario"));
+                x.setId_rol(rs.getString("id_rol"));
+                x.setId_empleado(rs.getString("id_empleado"));
+                x.setNo_usuario(rs.getString("no_usuario"));
+                x.setPw_usuario(rs.getString("pw_usuario"));
+                x.setNo_puesto(rs.getString("no_puesto"));
+                x.setId_puesto(rs.getString("id_puesto"));
+                x.setNo_area(rs.getString("no_area"));
+                x.setId_area(rs.getString("id_area"));
+                x.setNo_dep(rs.getString("no_dep"));
+                x.setId_departamento(rs.getString("id_departamento"));
+                x.setId_direccion(rs.getString("id_direccion"));
+                x.setId_seccion(rs.getString("id_seccion"));
+                x.setNo_seccion(rs.getString("No_seccion"));
+                x.setNu_pasos(rs.getString("nu_pasos"));
+                x.setCo_pasos(rs.getString("co_pasos"));
+                x.setDe_pasos(rs.getString("de_pasos"));
+                x.setId_dgp(rs.getString("id_dgp"));
+                x.setId_detalle_pasos(rs.getString("id_detalle_pasos"));
+                x.setId_detalle_req_proceso(rs.getString("id_detalle_req_proceso"));
+                x.setId_pasos(rs.getString("id_pasos"));
+                x.setId_proceso(rs.getString("id_proceso"));
+                x.setId_requerimiento(rs.getString("id_requerimiento"));
+                x.setNo_proceso(rs.getString("no_proceso"));
+                x.setNo_trabajador(rs.getString("no_trabajador"));
+                x.setAp_paterno(rs.getString("ap_paterno"));
+                x.setAp_materno(rs.getString("ap_materno"));
+                x.setPaso(rs.getString("paso"));
+                Lista.add(x);
+            }
+        } catch (SQLException e) {
+        }finally{
+                this.conn.close();
+        }
+        return Lista;
     }
 
     @Override
@@ -379,7 +422,4 @@ public class DgpDAO implements InterfaceDgpDAO {
         String sql="UPDATE RHTM_DGP SET ES_DGP='0' WHERE ID_DGP='"+IDDGP+ "'";
         this.conn.ejecutar(sql);
     }
-    
-    
-
 }
