@@ -39,37 +39,61 @@ public class ContratoDAO implements InterfaceContratoDAO {
         try {
             ResultSet rs = this.conn.query(sql);
             X_List_Id_Contrato_DGP icd = new X_List_Id_Contrato_DGP();
-            while (rs.next()) {                
-                icd.setCa_asig_familiar(rs.getDouble("ca_asig_familiar"));
-                icd.setCa_bono_alimento(rs.getDouble("ca_bono_alimento"));
-                icd.setCa_reintegro(rs.getDouble("ca_reintegro"));
-                icd.setCa_sueldo(rs.getDouble("ca_sueldo"));
-                icd.setDe_observacion(rs.getString("de_observacion"));
-                icd.setDe_registro_sistem_remu(rs.getString("de_registro_sistem_remu"));
-                icd.setDia_contrato(rs.getDouble("dia_contrato"));
-                icd.setEs_apoyo(rs.getString("es_apoyo"));
-                icd.setEs_contrato(rs.getString("es_contrato"));
-                icd.setEs_contrato_trabajador(rs.getString("es_contrato_trabajador"));
-                icd.setEs_discapacidad(rs.getString("es_discapacidad"));
-                icd.setEs_entregar_doc_reglamentos(rs.getString("es_entregar_doc_reglamentos"));
-                icd.setEs_firmo_contrato(rs.getString("es_firmo_contrato"));
-                icd.setEs_jefe(rs.getString("es_jefe"));
-                icd.setEs_registro_huella(rs.getString("es_registro_huella"));
-                icd.setFe_cese(rs.getString("fe_cese"));
-                icd.setFe_creacion(rs.getString("fe_creacion"));
+            while (rs.next()) {
+
+                icd.setId_contrato(rs.getString("id_contrato"));
+                icd.setId_dgp(rs.getString("id_dgp"));
                 icd.setFe_desde(rs.getString("fe_desde"));
                 icd.setFe_hasta(rs.getString("fe_hasta"));
-                icd.setFe_modif(rs.getString("fe_modif"));
-                icd.setFe_vacacio_fin(rs.getString("fe_vacacio_fin"));
-                icd.setFe_vacacio_ini(rs.getString("Fe_vacacio_ini"));
+                icd.setFe_cese(rs.getString("fe_cese"));
+                icd.setId_func(rs.getString("id_func"));
+                icd.setLi_condicion(rs.getString("li_condicion"));
+                icd.setCa_sueldo(rs.getDouble("ca_sueldo"));
+                icd.setCa_reintegro(rs.getDouble("ca_reintegro"));
+                icd.setCa_asig_familiar(rs.getDouble("ca_asig_familiar"));
                 icd.setHo_semana(rs.getDouble("ho_semana"));
-                icd.setId_anno(rs.getString("id_anno"));
+                icd.setNu_horas_lab(rs.getDouble("nu_horas_lab"));
+                icd.setDia_contrato(rs.getDouble("dia_contrato"));
+                icd.setTi_trabajador(rs.getString("ti_trabajador"));
+                icd.setLi_regimen_laboral(rs.getString("li_regimen_laboral"));
+                icd.setEs_discapacidad(rs.getString("es_discapacidad"));
+                icd.setTi_contrato(rs.getString("ti_contrato"));
+                icd.setLi_regimen_pensionario(rs.getString("li_regimen_pensionario"));
+                icd.setEs_contrato_trabajador(rs.getString("es_contrato_trabajador"));
+                icd.setUs_creacion(rs.getString("us_creacion"));
+                icd.setFe_creacion(rs.getString("fe_creacion"));
+                icd.setUs_modif(rs.getString("us_modif"));
+                icd.setFe_modif(rs.getString("fe_modif"));
+                icd.setUs_ip(rs.getString("us_ip"));
+                icd.setFe_vacacio_ini(rs.getString("fe_vacacio_ini"));
+                icd.setFe_vacacio_fin(rs.getString("fe_vacacio_fin"));
+                icd.setEs_contrato(rs.getString("es_contrato"));
+                icd.setId_filial(rs.getString("id_filial"));
+                icd.setId_direccion(rs.getString("id_direccion"));
+                icd.setId_departamento(rs.getString("id_departamento"));
                 icd.setId_area(rs.getString("id_area"));
+                icd.setId_seccion(rs.getString("id_seccion"));
+                icd.setId_puesto(rs.getString("id_puesto"));
+                icd.setCa_bono_alimento(rs.getDouble("ca_bono_alimento"));
+                icd.setEs_jefe(rs.getString("es_jefe"));
+                icd.setLi_tipo_convenio(rs.getString("li_tipo_convenio"));
+                icd.setEs_firmo_contrato(rs.getString("es_firmo_contrato"));
+                icd.setNu_contrato(rs.getDouble("nu_contrato"));
+                icd.setDe_observacion(rs.getString("de_observacion"));
+                icd.setEs_apoyo(rs.getString("es_apoyo"));
+                icd.setTi_hora_pago(rs.getString("ti_hora_pago"));
+                icd.setNu_documento(rs.getString("nu_documento"));
+                icd.setId_anno(rs.getString("id_anno"));
+                icd.setEs_entregar_doc_reglamentos(rs.getString("es_entregar_doc_reglamentos"));
+                icd.setEs_registro_huella(rs.getString("es_registro_huella"));
+                icd.setDe_registro_sistem_remu(rs.getString("de_registro_sistem_remu"));
+                icd.setId_trabajador(rs.getString("id_trabajador"));
+
                 list.add(icd);
             }
         } catch (SQLException e) {
-        }finally{
-        this.conn.close();
+        } finally {
+            this.conn.close();
         }
         return list;
     }
