@@ -6,7 +6,11 @@
 
 package pe.edu.upeu.application.dao;
 
+import java.sql.CallableStatement;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -26,11 +30,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public boolean Insert_Autorizacion(String id_autorizacion, String id_dgp, String estado, String nu_pasos, String ip_usuario, String user_creacion, String FECHA_CREACION, String USER_MODIF, String FECHA_MODIF, String COD, String id_puesto, String ID_DETALLE_REQ_PROCESO, String IDPASOS) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+  
     @Override
     public List<Autorizacion> Det_Autorizacion() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -71,6 +71,11 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
 
     @Override
     public int Val_Aut_DGP_M(String id_dgp) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean Insert_Autorizacion() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

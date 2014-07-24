@@ -76,22 +76,26 @@
 
 
         <%   
-            int af =0;
             for (int f = 0; f < List1.length; f++) {
                 out.print("<br>");
-                out.print("CREATE OR REPLACE PROCEDURE SP_INSERT_" + List1[f][0] + " (");
+                out.print("@Override");
+                out.print("<br>");
+                out.print(" public void INSERT_" + List1[f][0].substring(4).toUpperCase()  + " (");
 
                 for (int s = 0; s < List2.length; s++) {
                        
                     if (List1[f][0].equals(List2[s][0])) {
+                  if (List2[s][2].equals("NUMBER")) {
+                             out.print( " Double "+List2[s][1]);
+                      }else{
+                        out.print(" String "+ List2[s][1] );}
                   
-                        out.print( List2[s][1] + "_SP " + List2[s][2]);
                         if (List2[s][4].equals(List1[f][1])==false) {
                             out.println(",");
                           
                         } else {
                            
-                            out.println(")");
+                            out.println("){ ");
                             out.println("<br>");    
                         }
                   
@@ -101,44 +105,36 @@
                 }
                 
                 
-                out.println("IS BEGIN");
-                out.println("<BR>");
-                out.println("INSERT INTO "+List1[f][0]+" (");
+                out.println("CallableStatement cst; try {  cst = conn.conex.prepareCall(\"{CALL SP_INSERT_"+List1[f][0]+"(");
+   
                 
                  for (int v = 1; v < List2.length; v++) {
 
                     if (List1[f][0].equals(List2[v][0])) {
-                        out.print( List2[v][1]);
+                        out.print( "?");
                         if (List2[v][4].equals(List1[f][1])==false) {
                             out.println(",");
                         } else {
                        
-                            out.println(") VALUES (");
+                            out.println("\");");
                           
                         }
 
                     }
                 }
-                 
+                 int l=0;
                    for (int h = 1; h < List2.length; h++) {
-
+                       
                     if (List1[f][0].equals(List2[h][0])) {
-                        
-                        out.print( List2[h][1] + "_SP " );
+                         l++;
+                        out.print( "cst.setString("+l+","+List2[h][1] + "); " );
                         if (List2[h][4].equals(List1[f][1])==false) {
-                            out.println(",");
-                           
                         } else {
-                         
-                            out.println(");");
-                            out.println("<br>");
-                            out.println("END ;");
+                            out.println(" cst.execute();} catch (SQLException ex) {}}");
                         }
-
                     }
                 }
-                   out.println("<br>");
-                   out.println("/");
+                   
                    out.println("<br>");
                 
                 

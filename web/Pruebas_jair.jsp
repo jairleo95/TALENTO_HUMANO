@@ -21,8 +21,16 @@
     </head>
     <body>
         <%
-            Connection cnn= Conexion.getConex();
-     CallableStatement cst= cnn.prepareCall("{CALL SP_ANNO (?,?,?,?,?)}");
+            Connection cnn = Conexion.getConex();
+            CallableStatement cst = cnn.prepareCall("{CALL SP_INSERT_RHTR_ANNO (?,?,?,?,?,?)}");
+            cst.setString(1, null);
+            cst.setString(2, null);
+            cst.setString(3, null);
+            cst.setString(4, null);
+            cst.setString(5, null);
+            cst.setString(6, null);
+            cst.setString(6, null);
+            cst.execute();
         %>
     </body>
 </html>
