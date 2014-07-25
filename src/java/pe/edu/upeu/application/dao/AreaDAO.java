@@ -34,11 +34,11 @@ public class AreaDAO implements InterfaceAreaDAO{
             ResultSet rs = this.conn.query(sql);
             Area a = new Area();
             while (rs.next()) {                
-                a.setId_area(rs.getString(1));
-                a.setEs_area(rs.getString(2));
-                a.setId_departamento(rs.getString(3));
-                a.setNo_area(rs.getString(4));
-                a.setNo_corto_area(rs.getString(5));
+                a.setId_area(rs.getString("id_area"));
+                a.setEs_area(rs.getString("es_area"));
+                a.setId_departamento(rs.getString("id_departamento"));
+                a.setNo_area(rs.getString("no_area"));
+                a.setNo_corto_area(rs.getString("no_corto_area"));
                 list.add(a);
             }
         } catch (SQLException e) {
