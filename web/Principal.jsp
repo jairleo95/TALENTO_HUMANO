@@ -10,7 +10,7 @@
 
         Usuario us = new Usuario();
 
-    //include './SYS_SEG_URL/CLEAN_URL.php';
+        //include './SYS_SEG_URL/CLEAN_URL.php';
         /*require_once '../Modelo/modelorol.php';
          $idrol = $_SESSION["IDROL"];
          $w1 = new modelorol();
@@ -162,7 +162,7 @@
                                     <li class="li-pla" ><a>Otros</a></li>
                                 </ul>
                                 <%}
-                        }%>
+                                    }%>
                             </li>
 
 

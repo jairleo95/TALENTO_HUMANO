@@ -43,7 +43,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO{
 
     @Override
     public List<V_Ficha_Trab_Num_C> ListarTrabajador(String iddep, String dni, String nom, String ape_p, String ape_m) {
-         if (dni != null || nom != "") {
+         if (dni != null || !"".equals(nom)) {
             
         }
          this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -52,9 +52,9 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO{
          ape_p=ape_p.toUpperCase();
          ape_m=ape_m.toUpperCase();
          sql+=(Integer.parseInt(dni)<=0)?"and d.NRO_DOC='"+dni+"'":"";
-         sql+=(nom!="")?"and upper(d.NO_TRABAJADOR)like '%"+nom+"%'":"";
-         sql+=(ape_p!="")?"and upper(d.AP_PATERNO)like '%"+ape_p+"%'":"";
-         sql+=(ape_m!="")?"and upper(d.AP_MATERNO)like '%"+ape_m+"%'":"";
+         sql+=(!"".equals(nom))?"and upper(d.NO_TRABAJADOR)like '%"+nom+"%'":"";
+         sql+=(!"".equals(ape_p))?"and upper(d.AP_PATERNO)like '%"+ape_p+"%'":"";
+         sql+=(!"".equals(ape_m))?"and upper(d.AP_MATERNO)like '%"+ape_m+"%'":"";
          sql+="order by d.ID_TRABAJADOR desc";
          
          List<V_Ficha_Trab_Num_C> list = new ArrayList<V_Ficha_Trab_Num_C>();

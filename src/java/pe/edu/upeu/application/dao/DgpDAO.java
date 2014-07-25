@@ -5,7 +5,7 @@
  */
 package pe.edu.upeu.application.dao;
 
-import static java.nio.file.Files.size;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import pe.edu.upeu.application.model.X_List_id_dgp;
 import pe.edu.upeu.application.model.X_User_dgp;
 import pe.edu.upeu.application.model.X_val_tra_dgp;
 import pe.edu.upeu.application.model.x_List_Id_Trab_Dgp;
-import sun.security.rsa.RSACore;
+
 
 /**
  *

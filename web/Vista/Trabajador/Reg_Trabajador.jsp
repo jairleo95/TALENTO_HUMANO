@@ -1,6 +1,8 @@
-<?php
-session_start();
-?>
+<%
+    HttpSession sesion = request.getSession(true);
+    String iddep = (String) request.getAttribute("DEPARTAMENTO_ID");
+
+%>
 <!DOCTYPE html >
 <html>
     <head>
@@ -126,13 +128,9 @@ session_start();
         ?>
         <br>
     <center>
-        <?
-
-        if (true){ ?>
         <script type="text/javascript">
             Esperar();
         </script>
-        <?}?>
         <label class="title">FICHA DE DATOS DEL TRABAJADOR</label>
 
 
