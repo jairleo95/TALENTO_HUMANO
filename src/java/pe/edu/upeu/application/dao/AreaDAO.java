@@ -7,6 +7,7 @@
 package pe.edu.upeu.application.dao;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class AreaDAO implements InterfaceAreaDAO{
                 a.setNo_corto_area(rs.getString(5));
                 list.add(a);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }finally{
         this.conn.close();
         }        
@@ -65,7 +66,7 @@ public class AreaDAO implements InterfaceAreaDAO{
                 list.add(a);
              }
             
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }finally {
          this.conn.close();
          }
