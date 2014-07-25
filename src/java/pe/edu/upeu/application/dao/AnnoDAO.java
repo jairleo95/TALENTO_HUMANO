@@ -7,6 +7,7 @@
 package pe.edu.upeu.application.dao;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import pe.edu.upeu.application.dao_imp.InterfaceAnnoDAO;
@@ -34,15 +35,15 @@ public class AnnoDAO implements InterfaceAnnoDAO{
             ResultSet rs = this.conn.query(sql);
             Anno a = new Anno();
             while (rs.next()){
-                a.setId_anno(rs.getString(1));
-                a.setNo_anno(rs.getString(2));
-                a.setDe_anno(rs.getString(3));
-                a.setFe_desde(rs.getString(4));
-                a.setFe_hasta(rs.getString(5));
-                a.setDe_observacion(rs.getString(6));
+                a.setId_anno(rs.getString("id_anno"));
+                a.setNo_anno(rs.getString("no_anno"));
+                a.setDe_anno(rs.getString("de_anno"));
+                a.setFe_desde(rs.getString("fe_desde"));
+                a.setFe_hasta(rs.getString("fe_hasta"));
+                a.setDe_observacion(rs.getString("de_observacion"));
                list.add(a);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }finally{
         this.conn.close();
         }

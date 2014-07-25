@@ -17,8 +17,17 @@
     Statement stmt=  null;
 
 stmt= cx.createStatement();
-//rs=stmt.executeQuery("select table_name, SUBSTR(column_name,1,1)||SUBSTR(lower(column_name),2,length(column_name)), data_type from user_tab_columns where table_name = 'RHTM_CONTRATO' order by table_name,column_id");
-rs=stmt.executeQuery(" select * from List_Dao");
+//sentencia para generar correctamente los set y get en los list DAO
+/*select table_name, column_name,data_type,data_length,column_id from user_tab_columns order by table_name,column_id;
+
+select * from user_tab_columns;
+
+create view List_Dao1 as
+select table_name, SUBSTR(column_name,1,1)||SUBSTR(lower(column_name),2,length(column_name)) as columna , '"'||COLUMN_NAME||'"' as columna1, data_type 
+from user_tab_columns 
+where table_name = 'RHTD_PADRE_MADRE_CONYUGUE' order by table_name,column_id;
+*/
+rs=stmt.executeQuery(" select * from List_Dao3");
 %>
 <html>
     <head>
@@ -29,7 +38,7 @@ rs=stmt.executeQuery(" select * from List_Dao");
         <%System.out.println("1");%>
             <table >
 
-           <% String objeto = "icd"; 
+           <% String objeto = "lp"; 
 
             while(rs.next()){
              
