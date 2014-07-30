@@ -121,7 +121,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
 
          }*/
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select d.* , u.id_departamento  as ID_DEPARTAMENTO2 from (select * from RHVD_FICHA_TRAB_NUM_C) d, RHVD_USUARIO u where u.id_usuario= d.us_creacion";
+        String sql = "select d.*  from (select * from RHVD_FICHA_TRAB_NUM_C) d, RHVD_USUARIO u where u.id_usuario= d.id_usuario_creacion";
         nom = nom.toUpperCase();
         ape_p = ape_p.toUpperCase();
         ape_m = ape_m.toUpperCase();
@@ -146,10 +146,10 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 v.setNu_doc(rs.getString("NU_DOC"));
                 v.setEs_civil(rs.getString("ES_CIVIL"));
                 v.setFe_nac(rs.getString("FE_NAC"));
-                v.setId_nacionalidad(rs.getString("ID_NACIONALIDAD"));
-                v.setId_departamento(rs.getString("ID_DEPARTAMENTO"));
-                v.setId_provincia(rs.getString("ID_PROVINCIA"));
-                v.setId_distrito(rs.getString("ID_DISTRITO"));
+                v.setNo_universidad(rs.getString("NO_UNIVERSIDAD"));
+                v.setNo_departamento(rs.getString("NO_DEPARTAMENTO"));
+                v.setNo_provincia(rs.getString("NO_PROVINCIA"));
+                v.setNo_distrito(rs.getString("NO_DISTRITO"));
                 v.setTe_trabajador(rs.getString("TE_TRABAJADOR"));
                 v.setCl_tra(rs.getString("CL_TRA"));
                 v.setDi_correo_personal(rs.getString("DI_CORREO_PERSONAL"));
@@ -158,8 +158,8 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 v.setLi_nivel_educativo(rs.getString("LI_NIVEL_EDUCATIVO"));
                 v.setLi_grado_academico(rs.getString("LI_GRADO_ACADEMICO"));
                 v.setLi_titulo_profesional(rs.getString("LI_TITULO_PROFESIONAL"));
-                v.setId_carrera(rs.getString("ID_CARRERA"));
-                v.setId_universidad(rs.getString("ID_UNIVERSIDAD"));
+                v.setNo_carrera(rs.getString("NO_CARRERA"));
+                v.setNo_universidad(rs.getString("NO_UNIVERSIDAD"));
                 v.setCm_otros_estudios(rs.getString("CM_OTROS_ESTUDIOS"));
                 v.setEs_sexo(rs.getString("ES_SEXO"));
                 v.setLi_grupo_sanguineo(rs.getString("LI_GRUPO_SANGUINEO"));
@@ -182,14 +182,14 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 v.setLi_di_dom_a_d5(rs.getString("LI_DI_DOM_A_D5"));
                 v.setDi_dom_a_d6(rs.getString("DI_DOM_A_D6"));
                 v.setDi_dom_a_ref(rs.getString("DI_DOM_A_REF"));
-                v.setId_di_dom_a_distrito(rs.getString("ID_DI_DOM_A_DISTRITO"));
+                v.setDi_dom_a_distrito(rs.getString("DI_DOM_A_DISTRITO"));
                 v.setLi_di_dom_leg_d1(rs.getString("LI_DI_DOM_LEG_D1"));
                 v.setDi_dom_leg_d2(rs.getString("DI_DOM_LEG_D2"));
-                v.setLi_di_dom_leg_d3_id(rs.getString("LI_DI_DOM_LEG_D3_ID"));
+                v.setLi_di_dom_leg_d3(rs.getString("LI_DI_DOM_LEG_D3"));
                 v.setDi_dom_leg_d4(rs.getString("DI_DOM_LEG_D4"));
-                v.setLi_di_dom_leg_d5_id(rs.getString("LI_DI_DOM_LEG_D5_ID"));
+                v.setLi_di_dom_leg_d5(rs.getString("LI_DI_DOM_LEG_D5"));
                 v.setDi_dom_leg_d6(rs.getString("DI_DOM_LEG_D6"));
-                v.setId_di_dom_leg_distrito(rs.getString("ID_DI_DOM_LEG_DISTRITO"));
+                v.setDi_dom_leg_distrito(rs.getString("DI_DOM_LEG_DISTRITO"));
                 v.setCa_ing_qta_cat_empresa(rs.getString("CA_ING_QTA_CAT_EMPRESA"));
                 v.setCa_ing_qta_cat_ruc(rs.getString("CA_ING_QTA_CAT_RUC"));
                 v.setCa_ing_qta_cat_otras_empresas(rs.getString("CA_ING_QTA_CAT_OTRAS_EMPRESAS"));
@@ -200,8 +200,6 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 v.setFe_modif(rs.getString("FE_MODIF"));
                 v.setIp_usuario(rs.getString("IP_USUARIO"));
                 v.setIdtr(rs.getString("IDTR"));
-                v.setNu_contrato(rs.getString("NU_CONTRATO"));
-                v.setId_departamento2(rs.getString("ID_DEPARTAMENTO2"));
                 list.add(v);
             }
 

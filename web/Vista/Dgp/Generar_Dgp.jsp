@@ -100,7 +100,7 @@
                     <% //}%>
 
                     <td><div ><a href="Detalle_Trabajador.jsp?idtr=<? echo $listra[$index][0]; ?>"><%=tr.getAp_paterno() + " " + tr.getAp_materno() + " " + tr.getNo_trabajador()%></a></div></td>
-                    <td>Carrera</td>
+                    <td><%=tr.getNo_carrera()%></td>
                     <td><a href="../../dgp?idtr=<%=tr.getId_trabajador()%>&idreq=<%=idreq%>&iddep=<%=iddep%>&opc=Reg_form">Elaborar Requerimiento</a></td>
 
                 </tr>

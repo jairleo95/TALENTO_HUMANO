@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.model.Trabajador"%>
 <jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
@@ -9,19 +10,14 @@
     </head>
     
     <body>
-    
-        <?
-        
-        require_once '../Modelo/modelotrabajador.php';
-        $mtr=new modelotrabajador();
-        $id=$_REQUEST["idtr"];
-        $list=$mtr->ListaridTrabajador($id);
-        
-        ?>
         <form method="post" action="">
         <table class="tables">
             
-            <%for(int index = 0;index<ListaridTrabajador.size();index++){%>           
+            <%for(int index = 0;index<ListaridTrabajador.size();index++){
+             Trabajador trb=new Trabajador();
+                                        trb=(Trabajador)ListaridTrabajador.get(index);
+            
+            %>           
             <tr><td class="text-info">Nacionalidad:</td><td></td></tr>
       
                <tr><td  class="text-info">Distrito:</td><td></td></tr>
@@ -34,7 +30,7 @@
                  }
                  ?>
                      </td></tr>
-                <tr><td  class="text-info">Numero Documento:</td><td><? echo $list[$index][5]?></td></tr>
+                <tr><td  class="text-info">Numero Documento:</td><td><%=trb.getNu_doc()%></td></tr>
                  <tr><td  class="text-info">Estado Civil:</td><td><? 
                  $list_e_c =$mod_list->LISTA_ESTADO_CIVIL();
      
@@ -62,9 +58,10 @@
                  }
                  ?></td></tr>
                  
-                <tr><td  class="text-info">Telefono:</td><td><? echo $list[$index][12]?></td></tr>
-                <tr><td  class="text-info">Celular:</td><td><? echo $list[$index][13]?></td></tr>
-                <tr><td  class="text-info">Correo:</td><td><? echo $list[$index][14]?></td></tr>
+                <tr><td  class="text-info">Telefono:</td><td><%=trb.getTe_trabajador()%></td></tr>
+                <tr><td  class="text-info">Celular:</td><td><%=trb.getCl_tra()%></td></tr>
+                <tr><td  class="text-info">Correo:</td><td><%=trb.getDi_correo_personal()%></td></tr>
+                
                
                 
                 <tr><td   class="text-info">Sistema Pensionario:</td><td><?

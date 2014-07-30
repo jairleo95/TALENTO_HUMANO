@@ -12,79 +12,19 @@ package pe.edu.upeu.application.model;
 public class V_Ficha_Trab_Num_C {
 
     private String id_trabajador;
-    private String ap_paterno;
-    private String ap_materno;
-    private String no_trabajador;
-    private String ti_doc;
-    private String nu_doc;
-    private String es_civil;
-    private String fe_nac;
-    private String id_nacionalidad;
-    private String id_departamento;
-    private String id_provincia;
-    private String id_distrito;
-    private String te_trabajador;
-    private String cl_tra;
-    private String di_correo_personal;
-    private String di_correo_inst;
-    private String co_sistema_pensionario;
-    private String li_nivel_educativo;
-    private String li_grado_academico;
-    private String li_titulo_profesional;
-    private String id_carrera;
-    private String id_universidad;
-    private String cm_otros_estudios;
-    private String es_sexo;
-    private String li_grupo_sanguineo;
-    private String de_referencia;
-    private String li_religion;
-    private String no_iglesia;
-    private String de_cargo;
-    private String li_autoridad;
-    private String no_ap_autoridad;
-    private String cl_autoridad;
-    private String id_no_afp;
-    private String es_afiliado_essalud;
-    private String li_tipo_trabajador;
-    private String ca_tipo_hora_pago_refeerencial;
-    private String es_factor_rh;
-    private String li_di_dom_a_d1;
-    private String di_dom_a_d2;
-    private String li_di_dom_a_d3;
-    private String di_dom_a_d4;
-    private String li_di_dom_a_d5;
-    private String di_dom_a_d6;
-    private String di_dom_a_ref;
-    private String id_di_dom_a_distrito;
-    private String li_di_dom_leg_d1;
-    private String di_dom_leg_d2;
-    private String li_di_dom_leg_d3_id;
-    private String di_dom_leg_d4;
-    private String li_di_dom_leg_d5_id;
-    private String di_dom_leg_d6;
-    private String id_di_dom_leg_distrito;
-    private String ca_ing_qta_cat_empresa;
-    private String ca_ing_qta_cat_ruc;
-    private String ca_ing_qta_cat_otras_empresas;
-    private String cm_observaciones;
-    private String us_creacion;
-    private String fe_creacion;
-    private String us_modif;
+private String ap_paterno;
+private String ap_materno;
+private String no_trabajador;
+private String ti_doc;
+private String nu_doc;
+private String es_civil;
+private String fe_nac;
+private String no_nacionalidad;
+private String no_departamento;
+private String no_provincia;
+private String no_distrito;
 
-    public String getId_departamento2() {
-        return id_departamento2;
-    }
-
-    public void setId_departamento2(String id_departamento2) {
-        this.id_departamento2 = id_departamento2;
-    }
-    private String fe_modif;
-    private String ip_usuario;
-    private String idtr;
-    private String nu_contrato;
-    private String id_departamento2;
-
-    public V_Ficha_Trab_Num_C(String id_trabajador, String ap_paterno, String ap_materno, String no_trabajador, String ti_doc, String nu_doc, String es_civil, String fe_nac, String id_nacionalidad, String id_departamento, String id_provincia, String id_distrito, String te_trabajador, String cl_tra, String di_correo_personal, String di_correo_inst, String co_sistema_pensionario, String li_nivel_educativo, String li_grado_academico, String li_titulo_profesional, String id_carrera, String id_universidad, String cm_otros_estudios, String es_sexo, String li_grupo_sanguineo, String de_referencia, String li_religion, String no_iglesia, String de_cargo, String li_autoridad, String no_ap_autoridad, String cl_autoridad, String id_no_afp, String es_afiliado_essalud, String li_tipo_trabajador, String ca_tipo_hora_pago_refeerencial, String es_factor_rh, String li_di_dom_a_d1, String di_dom_a_d2, String li_di_dom_a_d3, String di_dom_a_d4, String li_di_dom_a_d5, String di_dom_a_d6, String di_dom_a_ref, String id_di_dom_a_distrito, String li_di_dom_leg_d1, String di_dom_leg_d2, String li_di_dom_leg_d3_id, String di_dom_leg_d4, String li_di_dom_leg_d5_id, String di_dom_leg_d6, String id_di_dom_leg_distrito, String ca_ing_qta_cat_empresa, String ca_ing_qta_cat_ruc, String ca_ing_qta_cat_otras_empresas, String cm_observaciones, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String ip_usuario, String idtr, String nu_contrato, String id_departamento2) {
+    public V_Ficha_Trab_Num_C(String id_trabajador, String ap_paterno, String ap_materno, String no_trabajador, String ti_doc, String nu_doc, String es_civil, String fe_nac, String no_nacionalidad, String no_departamento, String no_provincia, String no_distrito, String te_trabajador, String cl_tra, String di_correo_personal, String di_correo_inst, String co_sistema_pensionario, String li_nivel_educativo, String li_grado_academico, String li_titulo_profesional, String no_carrera, String no_universidad, String cm_otros_estudios, String es_sexo, String li_grupo_sanguineo, String de_referencia, String li_religion, String no_iglesia, String de_cargo, String li_autoridad, String no_ap_autoridad, String cl_autoridad, String id_no_afp, String es_afiliado_essalud, String li_tipo_trabajador, String ca_tipo_hora_pago_refeerencial, String es_factor_rh, String li_di_dom_a_d1, String di_dom_a_d2, String li_di_dom_a_d3, String di_dom_a_d4, String li_di_dom_a_d5, String di_dom_a_d6, String di_dom_a_ref, String di_dom_a_distrito, String li_di_dom_leg_d1, String di_dom_leg_d2, String li_di_dom_leg_d3, String di_dom_leg_d4, String li_di_dom_leg_d5, String di_dom_leg_d6, String di_dom_leg_distrito, String ca_ing_qta_cat_empresa, String ca_ing_qta_cat_ruc, String ca_ing_qta_cat_otras_empresas, String cm_observaciones, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String ip_usuario, String idtr, int nu_contrato) {
         this.id_trabajador = id_trabajador;
         this.ap_paterno = ap_paterno;
         this.ap_materno = ap_materno;
@@ -93,10 +33,10 @@ public class V_Ficha_Trab_Num_C {
         this.nu_doc = nu_doc;
         this.es_civil = es_civil;
         this.fe_nac = fe_nac;
-        this.id_nacionalidad = id_nacionalidad;
-        this.id_departamento = id_departamento;
-        this.id_provincia = id_provincia;
-        this.id_distrito = id_distrito;
+        this.no_nacionalidad = no_nacionalidad;
+        this.no_departamento = no_departamento;
+        this.no_provincia = no_provincia;
+        this.no_distrito = no_distrito;
         this.te_trabajador = te_trabajador;
         this.cl_tra = cl_tra;
         this.di_correo_personal = di_correo_personal;
@@ -105,8 +45,8 @@ public class V_Ficha_Trab_Num_C {
         this.li_nivel_educativo = li_nivel_educativo;
         this.li_grado_academico = li_grado_academico;
         this.li_titulo_profesional = li_titulo_profesional;
-        this.id_carrera = id_carrera;
-        this.id_universidad = id_universidad;
+        this.no_carrera = no_carrera;
+        this.no_universidad = no_universidad;
         this.cm_otros_estudios = cm_otros_estudios;
         this.es_sexo = es_sexo;
         this.li_grupo_sanguineo = li_grupo_sanguineo;
@@ -129,14 +69,14 @@ public class V_Ficha_Trab_Num_C {
         this.li_di_dom_a_d5 = li_di_dom_a_d5;
         this.di_dom_a_d6 = di_dom_a_d6;
         this.di_dom_a_ref = di_dom_a_ref;
-        this.id_di_dom_a_distrito = id_di_dom_a_distrito;
+        this.di_dom_a_distrito = di_dom_a_distrito;
         this.li_di_dom_leg_d1 = li_di_dom_leg_d1;
         this.di_dom_leg_d2 = di_dom_leg_d2;
-        this.li_di_dom_leg_d3_id = li_di_dom_leg_d3_id;
+        this.li_di_dom_leg_d3 = li_di_dom_leg_d3;
         this.di_dom_leg_d4 = di_dom_leg_d4;
-        this.li_di_dom_leg_d5_id = li_di_dom_leg_d5_id;
+        this.li_di_dom_leg_d5 = li_di_dom_leg_d5;
         this.di_dom_leg_d6 = di_dom_leg_d6;
-        this.id_di_dom_leg_distrito = id_di_dom_leg_distrito;
+        this.di_dom_leg_distrito = di_dom_leg_distrito;
         this.ca_ing_qta_cat_empresa = ca_ing_qta_cat_empresa;
         this.ca_ing_qta_cat_ruc = ca_ing_qta_cat_ruc;
         this.ca_ing_qta_cat_otras_empresas = ca_ing_qta_cat_otras_empresas;
@@ -148,9 +88,8 @@ public class V_Ficha_Trab_Num_C {
         this.ip_usuario = ip_usuario;
         this.idtr = idtr;
         this.nu_contrato = nu_contrato;
-        this.id_departamento2 = id_departamento2;
     }
-    public V_Ficha_Trab_Num_C() {
+    public V_Ficha_Trab_Num_C(){
         this.id_trabajador = "";
         this.ap_paterno = "";
         this.ap_materno = "";
@@ -159,10 +98,10 @@ public class V_Ficha_Trab_Num_C {
         this.nu_doc = "";
         this.es_civil = "";
         this.fe_nac = "";
-        this.id_nacionalidad = "";
-        this.id_departamento = "";
-        this.id_provincia = "";
-        this.id_distrito = "";
+        this.no_nacionalidad ="";
+        this.no_departamento = "";
+        this.no_provincia = "";
+        this.no_distrito = "";
         this.te_trabajador = "";
         this.cl_tra = "";
         this.di_correo_personal = "";
@@ -171,8 +110,8 @@ public class V_Ficha_Trab_Num_C {
         this.li_nivel_educativo = "";
         this.li_grado_academico = "";
         this.li_titulo_profesional = "";
-        this.id_carrera = "";
-        this.id_universidad = "";
+        this.no_carrera = "";
+        this.no_universidad = "";
         this.cm_otros_estudios = "";
         this.es_sexo = "";
         this.li_grupo_sanguineo = "";
@@ -195,14 +134,14 @@ public class V_Ficha_Trab_Num_C {
         this.li_di_dom_a_d5 = "";
         this.di_dom_a_d6 = "";
         this.di_dom_a_ref = "";
-        this.id_di_dom_a_distrito = "";
+        this.di_dom_a_distrito = "";
         this.li_di_dom_leg_d1 = "";
         this.di_dom_leg_d2 = "";
-        this.li_di_dom_leg_d3_id = "";
+        this.li_di_dom_leg_d3 = "";
         this.di_dom_leg_d4 = "";
-        this.li_di_dom_leg_d5_id = "";
+        this.li_di_dom_leg_d5 = "";
         this.di_dom_leg_d6 = "";
-        this.id_di_dom_leg_distrito = "";
+        this.di_dom_leg_distrito = "";
         this.ca_ing_qta_cat_empresa = "";
         this.ca_ing_qta_cat_ruc = "";
         this.ca_ing_qta_cat_otras_empresas = "";
@@ -213,10 +152,59 @@ public class V_Ficha_Trab_Num_C {
         this.fe_modif = "";
         this.ip_usuario = "";
         this.idtr = "";
-        this.nu_contrato = "";
-        this.id_departamento2 = "";
+        this.nu_contrato = 0;
     }
-    
+private String te_trabajador;
+private String cl_tra;
+private String di_correo_personal;
+private String di_correo_inst;
+private String co_sistema_pensionario;
+private String li_nivel_educativo;
+private String li_grado_academico;
+private String li_titulo_profesional;
+private String no_carrera;
+private String no_universidad;
+private String cm_otros_estudios;
+private String es_sexo;
+private String li_grupo_sanguineo;
+private String de_referencia;
+private String li_religion;
+private String no_iglesia;
+private String de_cargo;
+private String li_autoridad;
+private String no_ap_autoridad;
+private String cl_autoridad;
+private String id_no_afp;
+private String es_afiliado_essalud;
+private String li_tipo_trabajador;
+private String ca_tipo_hora_pago_refeerencial;
+private String es_factor_rh;
+private String li_di_dom_a_d1;
+private String di_dom_a_d2;
+private String li_di_dom_a_d3;
+private String di_dom_a_d4;
+private String li_di_dom_a_d5;
+private String di_dom_a_d6;
+private String di_dom_a_ref;
+private String di_dom_a_distrito;
+private String li_di_dom_leg_d1;
+private String di_dom_leg_d2;
+private String li_di_dom_leg_d3;
+private String di_dom_leg_d4;
+private String li_di_dom_leg_d5;
+private String di_dom_leg_d6;
+private String di_dom_leg_distrito;
+private String ca_ing_qta_cat_empresa;
+private String ca_ing_qta_cat_ruc;
+private String ca_ing_qta_cat_otras_empresas;
+private String cm_observaciones;
+private String us_creacion;
+private String fe_creacion;
+private String us_modif;
+private String fe_modif;
+private String ip_usuario;
+private String idtr;
+private int nu_contrato;
 
     public String getId_trabajador() {
         return id_trabajador;
@@ -282,36 +270,36 @@ public class V_Ficha_Trab_Num_C {
         this.fe_nac = fe_nac;
     }
 
-    public String getId_nacionalidad() {
-        return id_nacionalidad;
+    public String getNo_nacionalidad() {
+        return no_nacionalidad;
     }
 
-    public void setId_nacionalidad(String id_nacionalidad) {
-        this.id_nacionalidad = id_nacionalidad;
+    public void setNo_nacionalidad(String no_nacionalidad) {
+        this.no_nacionalidad = no_nacionalidad;
     }
 
-    public String getId_departamento() {
-        return id_departamento;
+    public String getNo_departamento() {
+        return no_departamento;
     }
 
-    public void setId_departamento(String id_departamento) {
-        this.id_departamento = id_departamento;
+    public void setNo_departamento(String no_departamento) {
+        this.no_departamento = no_departamento;
     }
 
-    public String getId_provincia() {
-        return id_provincia;
+    public String getNo_provincia() {
+        return no_provincia;
     }
 
-    public void setId_provincia(String id_provincia) {
-        this.id_provincia = id_provincia;
+    public void setNo_provincia(String no_provincia) {
+        this.no_provincia = no_provincia;
     }
 
-    public String getId_distrito() {
-        return id_distrito;
+    public String getNo_distrito() {
+        return no_distrito;
     }
 
-    public void setId_distrito(String id_distrito) {
-        this.id_distrito = id_distrito;
+    public void setNo_distrito(String no_distrito) {
+        this.no_distrito = no_distrito;
     }
 
     public String getTe_trabajador() {
@@ -378,20 +366,20 @@ public class V_Ficha_Trab_Num_C {
         this.li_titulo_profesional = li_titulo_profesional;
     }
 
-    public String getId_carrera() {
-        return id_carrera;
+    public String getNo_carrera() {
+        return no_carrera;
     }
 
-    public void setId_carrera(String id_carrera) {
-        this.id_carrera = id_carrera;
+    public void setNo_carrera(String no_carrera) {
+        this.no_carrera = no_carrera;
     }
 
-    public String getId_universidad() {
-        return id_universidad;
+    public String getNo_universidad() {
+        return no_universidad;
     }
 
-    public void setId_universidad(String id_universidad) {
-        this.id_universidad = id_universidad;
+    public void setNo_universidad(String no_universidad) {
+        this.no_universidad = no_universidad;
     }
 
     public String getCm_otros_estudios() {
@@ -570,12 +558,12 @@ public class V_Ficha_Trab_Num_C {
         this.di_dom_a_ref = di_dom_a_ref;
     }
 
-    public String getId_di_dom_a_distrito() {
-        return id_di_dom_a_distrito;
+    public String getDi_dom_a_distrito() {
+        return di_dom_a_distrito;
     }
 
-    public void setId_di_dom_a_distrito(String id_di_dom_a_distrito) {
-        this.id_di_dom_a_distrito = id_di_dom_a_distrito;
+    public void setDi_dom_a_distrito(String di_dom_a_distrito) {
+        this.di_dom_a_distrito = di_dom_a_distrito;
     }
 
     public String getLi_di_dom_leg_d1() {
@@ -594,12 +582,12 @@ public class V_Ficha_Trab_Num_C {
         this.di_dom_leg_d2 = di_dom_leg_d2;
     }
 
-    public String getLi_di_dom_leg_d3_id() {
-        return li_di_dom_leg_d3_id;
+    public String getLi_di_dom_leg_d3() {
+        return li_di_dom_leg_d3;
     }
 
-    public void setLi_di_dom_leg_d3_id(String li_di_dom_leg_d3_id) {
-        this.li_di_dom_leg_d3_id = li_di_dom_leg_d3_id;
+    public void setLi_di_dom_leg_d3(String li_di_dom_leg_d3) {
+        this.li_di_dom_leg_d3 = li_di_dom_leg_d3;
     }
 
     public String getDi_dom_leg_d4() {
@@ -610,12 +598,12 @@ public class V_Ficha_Trab_Num_C {
         this.di_dom_leg_d4 = di_dom_leg_d4;
     }
 
-    public String getLi_di_dom_leg_d5_id() {
-        return li_di_dom_leg_d5_id;
+    public String getLi_di_dom_leg_d5() {
+        return li_di_dom_leg_d5;
     }
 
-    public void setLi_di_dom_leg_d5_id(String li_di_dom_leg_d5_id) {
-        this.li_di_dom_leg_d5_id = li_di_dom_leg_d5_id;
+    public void setLi_di_dom_leg_d5(String li_di_dom_leg_d5) {
+        this.li_di_dom_leg_d5 = li_di_dom_leg_d5;
     }
 
     public String getDi_dom_leg_d6() {
@@ -626,12 +614,12 @@ public class V_Ficha_Trab_Num_C {
         this.di_dom_leg_d6 = di_dom_leg_d6;
     }
 
-    public String getId_di_dom_leg_distrito() {
-        return id_di_dom_leg_distrito;
+    public String getDi_dom_leg_distrito() {
+        return di_dom_leg_distrito;
     }
 
-    public void setId_di_dom_leg_distrito(String id_di_dom_leg_distrito) {
-        this.id_di_dom_leg_distrito = id_di_dom_leg_distrito;
+    public void setDi_dom_leg_distrito(String di_dom_leg_distrito) {
+        this.di_dom_leg_distrito = di_dom_leg_distrito;
     }
 
     public String getCa_ing_qta_cat_empresa() {
@@ -714,14 +702,12 @@ public class V_Ficha_Trab_Num_C {
         this.idtr = idtr;
     }
 
-    public String getNu_contrato() {
+    public int getNu_contrato() {
         return nu_contrato;
     }
 
-    public void setNu_contrato(String nu_contrato) {
+    public void setNu_contrato(int nu_contrato) {
         this.nu_contrato = nu_contrato;
     }
-     
-    
     
 }

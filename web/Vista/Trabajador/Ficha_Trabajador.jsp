@@ -104,8 +104,8 @@
                     <!--<td><img src="Foto.php?idf=<?echo $idf;?>"  width="80"  height="80"></td>-->
                     <% //}%>
 
-                    <td><div ><a href="Detalle_Trabajador.jsp?idtr=<? echo $listra[$index][0]; ?>"><%=tr.getAp_paterno() + " " + tr.getAp_materno() + " " + tr.getNo_trabajador()%></a></div></td>
-                    <td>Carrera</td>
+                    <td><div ><a href="../../trabajador?idtr=<%=tr.getId_trabajador()%>&opc=list"><%=tr.getAp_paterno() + " " + tr.getAp_materno() + " " + tr.getNo_trabajador()%></a></div></td>
+                    <td><%=tr.getNo_carrera()%></td>
                     <td>
                         <%
                             /*require_once '../Modelo/ModeloDGP.php';

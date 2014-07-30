@@ -1,4 +1,6 @@
-
+<%@page import="pe.edu.upeu.application.model.Trabajador"%>
+<%@page import="pe.edu.upeu.application.model.Trabajador"%>
+<jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,17 +11,13 @@
     </head>
     <body>
   
-           <?
-        require_once '../Modelo/modelotrabajador.php';
-        $mtr=new modelotrabajador();
-        $id=$_REQUEST["idtr"];
-        $list=$mtr->ListaridTrabajador($id);
-        
-        ?>
         <form>
         <table class="tables">
-             <? for ($index = 0; $index < count($list); $index++) {?>
-            
+             <%for (int index = 0; index < ListaridTrabajador.size(); index++) {
+                        Trabajador trb = new Trabajador();
+                        trb = (Trabajador) ListaridTrabajador.get(index);
+
+                %>   
             
             <tr><td colspan="2"><div class="title">Direccion</div></td></tr> 
             <tr><td class="text-info">Dirección :</td><td><?
@@ -54,7 +52,7 @@
                     
                     ?></td></tr>
             
-             <tr><td class="text-info">Referencia:</td><td><? echo $list[$index][43]?></td></tr>
+             <tr><td class="text-info">Referencia:</td><td><%=trb.getDe_referencia()%></td></tr>
              <tr><td class="text-info">Distrito:</td><td><? 
         require_once '../Modelo/ModeloUbigeo.php';
         $mod_u=new ModeloUbigeo();
@@ -113,9 +111,9 @@
              ?></td></tr>
               
              <tr><td colspan="2"><div class="title">Ingresos de Quinta Categoria</div></td></tr> 
-             <tr><td class="text-info">Empresa:</td><td><? echo $list[$index][52]?></td></tr>
-             <tr><td class="text-info">RUC:</td><td><? echo $list[$index][53]?></td></tr>
-             <tr><td class="text-info">Otras Empresas:</td><td><? echo $list[$index][54]?></td></tr>
+             <tr><td class="text-info">Empresa:</td><td><%=trb.getCa_ing_qta_cat_empresa()%></td></tr>
+             <tr><td class="text-info">RUC:</td><td><%=trb.getCa_ing_qta_cat_ruc()%></td></tr>
+             <tr><td class="text-info">Otras Empresas:</td><td><%=trb.getCa_ing_qta_cat_otras_empresas()%></td></tr>
              
              <tr><td colspan="2"><div class="title">Información Religiosa</div></td></tr>
              <tr><td class="text-info">Religión:</td><td><? 
@@ -128,8 +126,8 @@
                  if ($list[$index][26]==3) {
                      echo'Otros';
                  }?></td></tr>
-             <tr><td class="text-info">Iglesia:</td><td><? echo $list[$index][27]?></td></tr>
-             <tr><td class="text-info">Cargo en la Iglesia:</td><td><? echo $list[$index][28]?></td></tr>
+             <tr><td class="text-info">Iglesia:</td><td><%=trb.getNo_iglesia()%></td></tr>
+             <tr><td class="text-info">Cargo en la Iglesia:</td><td><%=trb.getDe_cargo()%></td></tr>
              <tr><td class="text-info">Autoridad:</td><td><? 
     if ($list[$index][29]==1) {
         echo 'Pastor';     
@@ -141,11 +139,11 @@
         echo 'Sacerdote';
     }
     ?></td></tr>
-             <tr><td class="text-info">Nombres y Apellidos:</td><td><? echo $list[$index][30]?></td></tr>
-             <tr><td class="text-info">Telefono/Celular:</td><td><? echo $list[$index][31]?></td></tr>
+             <tr><td class="text-info">Nombres y Apellidos:</td><td><%=trb.getNo_ap_autoridad()%></td></tr>
+             <tr><td class="text-info">Telefono/Celular:</td><td><%=trb.getCl_autoridad()%></td></tr>
              
               
-             <?}?>
+             <%}%>
         <tr><td colspan="2"></td><td><input class="btn btn-success"  type="submit" value="Editar"></td></tr>
        </table>
             </form>

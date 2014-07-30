@@ -2,6 +2,7 @@
 
 <%@page import="pe.edu.upeu.application.model.Trabajador"%>
 <jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -16,11 +17,7 @@
 
 
         <title>Detalle de Trabajador</title>
-        <%
-            
-            String idtr =  request.getParameter("idtr");
-            
-        %>  
+      
 
         <script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
         <link rel="stylesheet" href="../../css/Css_Alerta/alertify.core.css" />
@@ -169,7 +166,7 @@
                  $list_aut_m=$mdl->LISTA_AUTO_MOSTRAR($_SESSION["IDROL"]);*/
             %>
             <%  //for ($h = 0; $h < count($list_aut_m); $h++) {%>
-            <iframe name="contenido" id="contenido"  class="autoHeight" src="" width="100%" height="100%" ></iframe>
+            <iframe name="contenido" id="contenido"  class="autoHeight" src="Datos_Generales.jsp" width="100%" height="100%" ></iframe>
             <%//}%>
 
         </div> 
