@@ -16,6 +16,10 @@
         <servlet-name>CDgp</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CDgp</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CContrato</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CContrato</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CIndex</servlet-name>
         <url-pattern>/prueba</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>CDgp</servlet-name>
         <url-pattern>/dgp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CContrato</servlet-name>
+        <url-pattern>/contrato</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

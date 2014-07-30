@@ -1,71 +1,36 @@
-
-<?
-session_start();
-?>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<%@page import="pe.edu.upeu.application.model.Anno"%>
+<jsp:useBean id="List_Anno" scope="application" class="java.util.ArrayList"/>
+<!DOCTYPE html >
 
 <html>
     <head>
         <meta charset="windows-1252">
         <title>Registrar Contrato</title>
         
-        <link rel="stylesheet" type="text/css"  href="../CSS/form.css">
+        <link rel="stylesheet" type="text/css"  href="../../css/Css_Formulario/form.css">
     </head>
     <body>
-<?
-
-error_reporting(E_ALL ^ E_STRICT);
-error_reporting(0); 
-
-require_once '../Modelo/ModeloAño.php';
-$md_a=new ModeloAño();
-$list_año=$md_a->LISTA_AÑO();
-require_once '../Modelo/ModeloRH_Area.php';
-$mdarea=new ModelorRH_Area();
-$lis_area=$mdarea->LISTA_RH_N_AREA();
-require_once '../Modelo/ModeloRH_Departamento.php';
-$mod_dep=new ModelorRH_Departamento();
-$list_rh_dep=$mod_dep->LISTA_RH_DEPARTAMENTO();
-require_once '../Modelo/ModeloRH_Direccion.php';
-$mdrh_dir=new ModelorRH_Direccion();
-$list_rh_dir= $mdrh_dir->LISTA_RH_DIRECCION();
-
-require_once '../Modelo/ModeloRH_Seccion.php';
-$md_rh_sec=new ModelorRH_Seccion();
-$list_rh_sec=$md_rh_sec->LISTA_RH_SECCION();
-require_once '../Modelo/ModeloRH_Puesto.php';
-$md_rh_pu=new ModelorRH_Puesto();
-$list_rh_pu= $md_rh_pu->LISTA_RH_PUESTO();
-
-$iddgp=$_REQUEST["iddgp"];
-$idtr=$_REQUEST["idtr"];
-
-require_once '../Modelo/ModeloDGP.php';
-
-$mddgp=new ModeloDGP();
-$list_dgp= $mddgp->LIST_ID_DGP($iddgp);
-
-$hac_cont=$_REQUEST["hac_cont"];
-
-?>
 <center> 
     <label class="title">Información Contractual</label>
             <br>
             <br>
-           <?  if ($hac_cont==null&&$iddgp==null) {?>
+           <%  /*if ($hac_cont==null&&$iddgp==null) { */%>
+          
             <label>Todavia no se ha almacenado El DGP,¿desea contratar sin  antes elaborar un DGP?</label>  
            <br>
            <a href="Reg_Contrato.php?hac_cont=1&idtr=<? echo $idtr;?>">Hacer Contrato de Todas Maneras</a>
          
            <?}else{?>
-            <form class="form" action="../Control/ControlContrato.php"> 
+            <form class="form" action="../contrato"> 
                 <table class="table">      
                 <tr><td>Año :</td><td>
                         <select name="AÑO_ID" class="text-box" required="" >
-                        <?  for ($i = 0; $i < count($list_año); $i++) {?>
-                            <option value="<?echo $list_año[$i][0];?>"><? echo $list_año[$i][1]?></option>
-                        <?}?>
+                        <%  for (int i = 0;i<List_Anno.size();i++){ 
+                            Anno a =  new  Anno();
+                            a= (Anno)List_Anno.get(i);
+                        %>
+                        <option value="<%=a.getId_anno()%>"><%=a.getNo_anno()%></option>
+                        <%}%>
                  </select></td></tr>
                  
                  <input type="hidden" name="IDDETALLE_DGP" value="<?echo $iddgp;?>" class="text-box"  >
