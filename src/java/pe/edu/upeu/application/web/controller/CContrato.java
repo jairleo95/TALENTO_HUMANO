@@ -14,8 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import pe.edu.upeu.application.dao.AnnoDAO;
 import pe.edu.upeu.application.dao.DgpDAO;
+import pe.edu.upeu.application.dao.PuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAnnoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
+import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 
 /**
  *
@@ -38,12 +40,13 @@ public class CContrato extends HttpServlet {
         PrintWriter out = response.getWriter();
         InterfaceAnnoDAO a=new AnnoDAO();
         InterfaceDgpDAO dgp= new DgpDAO();
-        
+        InterfacePuestoDAO puesto=new PuestoDAO();
         try {
             
             String iddgp=request.getParameter("iddgp");
             getServletContext().setAttribute("List_Anno", a.List_Anno());
             getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(iddgp));
+            getServletContext().setAttribute("List_Puesto", puesto.List_Puesto());
             
             response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp");
             

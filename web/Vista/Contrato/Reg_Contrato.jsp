@@ -1,5 +1,9 @@
+<%@page import="pe.edu.upeu.application.model.Puesto"%>
+<%@page import="pe.edu.upeu.application.model.DGP"%>
 <%@page import="pe.edu.upeu.application.model.Anno"%>
 <jsp:useBean id="List_Anno" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Puesto" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="LIST_ID_DGP" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html >
 
 <html>
@@ -14,6 +18,8 @@
     <label class="title">Información Contractual</label>
             <br>
             <br>
+            <%DGP d =new DGP();%>
+
            <%  /*if ($hac_cont==null&&$iddgp==null) { */%>
           
             <label>Todavia no se ha almacenado El DGP,¿desea contratar sin  antes elaborar un DGP?</label>  
@@ -27,8 +33,7 @@
                         <select name="AÑO_ID" class="text-box" required="" >
                         <%  for (int i = 0;i<List_Anno.size();i++){ 
                             Anno a =  new  Anno();
-                            a= (Anno)List_Anno.get(i);
-                        %>
+                            a= (Anno)List_Anno.get(i);%>
                         <option value="<%=a.getId_anno()%>"><%=a.getNo_anno()%></option>
                         <%}%>
                  </select></td></tr>
@@ -68,13 +73,15 @@
                         -->
                     <tr><td>Puesto:</td><td>
                         <select name="PUESTO_ID" class="text-box"  required="" >
-                            <?  for ($j = 0; $j < count($list_rh_pu); $j++) {?>
-                            <?  if ($list_dgp[0][6]==$list_rh_pu[$j][0]) {?>
+                            <%  for (int j = 0; j < List_Puesto.size(); j++) {%>
+                            <%Puesto p=new Puesto();
+                            p=(Puesto)List_Puesto.get(j);
+                             if (d.getId_puesto()==p.getId_puesto()){%>
                             
-                            <option value="<?echo $list_rh_pu[$j][0];?>" selected="selected"><?echo $list_rh_pu[$j][1];?></option>
-                            <?}else{?>
-                            <option value="<?echo $list_rh_pu[$j][0];?>"><?echo $list_rh_pu[$j][1];?></option>
-                            <?}}?>
+                            <option value="<%=p.getId_puesto()%>" selected="selected"><%=p.getNo_puesto()%></option>
+                            <%}else{%>
+                            <option value="<%=p.getId_puesto()%>"><%=p.getNo_puesto()%></option>
+                            <%}}%>
                         </select>
                     <tr><td>¿Es Jefe?:</td><td>
                         <select name="JEFE" class="text-box" required="" >
