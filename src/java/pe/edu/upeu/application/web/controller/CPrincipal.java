@@ -20,6 +20,7 @@ import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.ListaDAO;
 
 import pe.edu.upeu.application.dao.PuestoDAO;
+import pe.edu.upeu.application.dao.RequerimientoDAO;
 import pe.edu.upeu.application.dao.RolDAO;
 import pe.edu.upeu.application.dao.TrabajadorDAO;
 import pe.edu.upeu.application.dao.UbigeoDAO;
@@ -29,6 +30,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
 
 
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRolDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUbigeoDAO;
@@ -62,6 +64,7 @@ public class CPrincipal extends HttpServlet {
             InterfaceDgpDAO dgp = new DgpDAO();
             InterfaceUbigeoDAO ub = new UbigeoDAO();
             InterfaceTrabajadorDAO tr = new TrabajadorDAO();
+            InterfaceRequerimientoDAO IReq = new RequerimientoDAO();
 
              InterfaceRolDAO Irol = new RolDAO();
                  InterfacePuestoDAO pu = new PuestoDAO();
@@ -94,6 +97,7 @@ public class CPrincipal extends HttpServlet {
                     getServletContext().setAttribute("listarURL", Irol.listarURL(user.getId_rol()));  
                     
                     /*LISTAS*/
+                getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
                 getServletContext().setAttribute("List_Carrera", li.List_Carrera());
                 getServletContext().setAttribute("List_Nacionalidad", li.List_Nacionalidad());
                 getServletContext().setAttribute("List_Universidad", li.List_Universidad());

@@ -95,7 +95,7 @@ public class CDgp extends HttpServlet {
 
         } if(opc.equals("Reg_form")) {
 
-            getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
+            
             /* TEMPORAL*/
             if (idreq.equals("1")) {
                 idreq = "REQ-0001";
