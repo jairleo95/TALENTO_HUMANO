@@ -123,6 +123,7 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             getServletContext().setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Vista/Trabajador/Detalle_Trabajador.jsp?idtr='" + idtr + "'");
+
             dispatcher.forward(request, response);
         }
         /* if (true) {
@@ -130,6 +131,7 @@ public class CTrabajador extends HttpServlet {
          dispatcher.forward(request, response);  
          }*/
         if (opc.equals("Buscar")) {
+
 
             String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
 

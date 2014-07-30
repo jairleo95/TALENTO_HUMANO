@@ -1,4 +1,5 @@
 
+
 <%@page import="pe.edu.upeu.application.model.Trabajador"%>
 <jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>

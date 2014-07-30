@@ -81,6 +81,7 @@
                 out.print("<br>");
                 out.print("CREATE OR REPLACE PROCEDURE RHSP_INSERT" + List1[f][0].substring(4).toUpperCase() + " (");
 
+
                 for (int s = 0; s < List2.length; s++) {
                        
                     if (List1[f][0].equals(List2[s][0])) {

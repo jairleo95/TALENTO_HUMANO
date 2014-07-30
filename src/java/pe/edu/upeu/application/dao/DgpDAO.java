@@ -348,9 +348,9 @@ public class DgpDAO implements InterfaceDgpDAO {
         } catch (SQLException e) {
         } finally {
             this.conn.close();
-          
-        }
-          return Lista;
+
+        return Lista;}
+
     }
 
     @Override

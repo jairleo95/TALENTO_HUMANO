@@ -114,7 +114,7 @@ public class CDgp extends HttpServlet {
             getServletContext().setAttribute("List_Puesto", pu.List_Puesto_Dep(iddepa));
             //}
             getServletContext().setAttribute("Listar_Trabajador_id", tr.ListaridTrabajador(idtr));
-           
+
             response.sendRedirect("Vista/Dgp/Reg_Dgp.jsp?idreq=" + idreq);
         }
 

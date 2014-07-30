@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.ListaDAO;
+
 import pe.edu.upeu.application.dao.PuestoDAO;
 import pe.edu.upeu.application.dao.RolDAO;
 import pe.edu.upeu.application.dao.TrabajadorDAO;
@@ -25,6 +26,8 @@ import pe.edu.upeu.application.dao.UbigeoDAO;
 import pe.edu.upeu.application.dao.UsuarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
+
+
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRolDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
@@ -59,8 +62,10 @@ public class CPrincipal extends HttpServlet {
             InterfaceDgpDAO dgp = new DgpDAO();
             InterfaceUbigeoDAO ub = new UbigeoDAO();
             InterfaceTrabajadorDAO tr = new TrabajadorDAO();
+
              InterfaceRolDAO Irol = new RolDAO();
                  InterfacePuestoDAO pu = new PuestoDAO();
+
         
         try {
 
@@ -85,6 +90,7 @@ public class CPrincipal extends HttpServlet {
                     sesion.setAttribute("DEPARTAMENTO_ID", user.getId_departamento());
                     sesion.setAttribute("PUESTO", user.getNo_puesto());
                     
+
                     getServletContext().setAttribute("listarURL", Irol.listarURL(user.getId_rol()));  
                     
                     /*LISTAS*/
@@ -94,7 +100,7 @@ public class CPrincipal extends HttpServlet {
                 getServletContext().setAttribute("List_Distrito", ub.List_Distrito());
                 getServletContext().setAttribute("List_Det_Puesto", pu.List_Det_Puesto());    
                 
-                
+
                     
                     RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Principal.jsp");
                     dispatcher.forward(request, response);

@@ -39,6 +39,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         CallableStatement cst;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+
             cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_TRABAJADOR( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
             cst.setString(1, null);
             cst.setString(2, AP_PATERNO);
@@ -103,10 +104,8 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(61, IP_USUARIO);
             cst.execute();
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        } catch (Exception ex) {
-          //  Logger.getLogger(TrabajadorDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
+            System.out.println(ex.getMessage());}
+       finally {
             this.conn.close();
         }
     }
