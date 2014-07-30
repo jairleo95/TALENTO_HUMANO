@@ -4,7 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <title>Lista Hijos</title>
-        <link rel="stylesheet" href="../CSS/listas.css" />
+        <link rel="stylesheet" href="../../../css/Css_Lista/listas.css" />
     </head>
     <body>
     <center>

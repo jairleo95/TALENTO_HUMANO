@@ -13,6 +13,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import pe.edu.upeu.application.dao.UsuarioDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO;
 
 /**
  *
@@ -75,8 +77,10 @@ public class CIndex extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      
-         String pagina = "/principal_2.jsp";
+        
+        InterfaceUsuarioDAO us=  new UsuarioDAO();
+      getServletContext().setAttribute("List_Usuario", us.List_Usuario());
+         String pagina = "/PruebaWeb/list.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
         dispatcher.forward(request, response);
         processRequest(request, response);

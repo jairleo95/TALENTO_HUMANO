@@ -5,7 +5,7 @@
         <meta charset="windows-1252">
         <title>Autorizaciones DGP</title>
         
-        <link href="../CSS/listas.css" rel="stylesheet">    
+        <link href="../../css/Css_Lista/listas.css" rel="stylesheet">    
         <style type="text/css">
             
             
@@ -106,16 +106,16 @@
                 <td class="caji">
                    <?
         if ($list[$i][18]==0 | $list[$i][18]==null) {?>
-            <a href="SeguimientoDGP.php?iddgp=<? echo $list[$i][0]; ?>">En Proceso</a>
+        <a href="../Dgp/Detalle_Seguimiento_Dgp.jsp?iddgp=<? echo $list[$i][0]; ?>">En Proceso</a>
        <? }?>
         <?if ($list[$i][18]==1) {?>
-            <a href="SeguimientoDGP.php?iddgp=<? echo $list[$i][0]; ?>">Ver Proceso Terminado</a>
+            <a href="../Dgp/Detalle_Seguimiento_Dgp.jsp?iddgp=<? echo $list[$i][0]; ?>">Ver Proceso Terminado</a>
        <? }?>
          </td> 
-                <td class="caji" ><a href="RegistrarDocumento.php?iddgp=<? echo $list[$i][0];?>&idtr=<?echo $idtr;?>">Ver Documentos</a></td> 
+         <td class="caji" ><a href="../Dgp/Documento/Reg_Documento.jsp?iddgp=<? echo $list[$i][0];?>&idtr=<?echo $idtr;?>">Ver Documentos</a></td> 
                
          
-             <td class="caji" ><a href="DetalleDGP.php?iddgp=<?echo $list[$i][0];?>&idtr=<?echo $idtr;?>">Ver Detalle</a></td>
+         <td class="caji" ><a href="../Dgp/Detalle_Dgp.jsp?iddgp=<?echo $list[$i][0];?>&idtr=<?echo $idtr;?>">Ver Detalle</a></td>
     <?}?>
              </tr> 
                </tbody>

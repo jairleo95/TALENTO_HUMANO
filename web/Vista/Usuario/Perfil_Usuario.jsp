@@ -19,7 +19,7 @@ if (id_user!="") {
     <head>
         <meta charset="windows-1252">
         <title>Perfil de Usuario</title>
-        <link rel="stylesheet" type="text/css" href="../CSS/STYLE_USER_PROFILE.css">
+        <link rel="stylesheet" type="text/css" href="../../css/Css_Perfil_Usuario/STYLE_USER_PROFILE.css">
         <style type="text/css">
             body{
                 font-size: 14px;
@@ -120,7 +120,7 @@ if (id_user!="") {
                 <div id="caja1">
                     <div id="imagen">
                          <? if ($idf==null) {?>
-                        <img src="../Imagenes/avatar_default.jpg"  width="120"  height="140" style="padding: 20px 14px 0px 14px;">              
+                         <img src="../../imagenes/avatar_default.jpg"  width="120"  height="140" style="padding: 20px 14px 0px 14px;">              
                       <?}else{?>
                       <img src="Foto.php?idf=<? echo $idf;?>"  width="120" style="padding: 20px 14px 0px 14px;"  height="140" >
                       <?}?>
@@ -167,7 +167,7 @@ if (id_user!="") {
                   <div class="cajita">
                     <div class="cajita2"></div><div class="cajita3">
                        
-                        <a href="change_pass.php?idu=<? echo $_SESSION["IDUSER"]?>&us=<? echo $list_u[$j][4];?>"  id="boton1">Cambiar Contraseña</a>
+                        <a href="Cambiar_Clave.jsp?idu=<? echo $_SESSION["IDUSER"]?>&us=<? echo $list_u[$j][4];?>"  id="boton1">Cambiar Contraseña</a>
                     </div>
                 </div>
              

@@ -1,0 +1,150 @@
+      
+       
+@font-face {
+    font-family: "OswaldLight";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../font/Oswald-Light-webfont.eot?#iefix") format("embedded-opentype"), url("../font/Oswald-Light-webfont.woff") format("woff"), url("../font/Oswald-Light-webfont.ttf") format("truetype");
+}
+@font-face {
+    font-family: "OswaldBook";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../font/Oswald-Regular-webfont.eot?#iefix") format("embedded-opentype"), url("../font/Oswald-Regular-webfont.woff") format("woff"), url("../font/Oswald-Regular-webfont.ttf") format("truetype");
+}
+@font-face {
+    font-family: "OswaldBold";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../font/Oswald-Bold-webfont.eot?#iefix") format("embedded-opentype"), url("../font/Oswald-Bold-webfont.woff") format("woff"), url("../font/Oswald-Bold-webfont.ttf") format("truetype");
+}
+@font-face {
+    font-family: "OswaldStencilRegular";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../font/Oswald-Stencil-webfont.eot?#iefix") format("embedded-opentype"), url("../font/Oswald-Stencil-webfont.woff") format("woff"), url("../font/Oswald-Stencil-webfont.ttf") format("truetype");
+}
+
+* {margin:0; padding:0; outline:0}
+body { margin:2%; background-color:#e6edf2; }
+#tablewrapper {width:67.8%; margin:0 auto}
+#tableheader {height:55px;max-width:1000px; min-width:880px; }
+#tableheader option{padding-left:4px;font-size:13px; background-color:#ecf2f6;}
+.search {float:left; padding:6px; border:1px solid #c6d5e1; background:#fff}
+#tableheader select {float:left; font-size:13px; width:125px; padding:2px 4px 4px; background-color:#f7fbfe;}
+#tableheader input {float:left; font-size:13px; width:225px; padding:2px 4px 4px; margin-left:4px; background-color:#f7fbfe;}
+.details {float:right; padding-top:12px}
+.details div{float:left; font-family:OswaldLight, sans-serif; margin-left:15px; font-size:17px}
+
+.tinytable {width:100%; border-left:1px solid #c6d5e1; border-top:1px solid #c6d5e1; border-bottom:none; }
+.tinytable th {background-color:#019dd8;font-family:OswaldLight, sans-serif; text-align:left; color:#fff; border:1px solid #fff; border-right:none}
+.tinytable th h3 {font-size:15px;text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5); padding:8px 8px 8px}
+.tinytable td {padding:4px 6px 6px; border-bottom:1px solid #c6d5e1; border-right:1px solid #c6d5e1}
+.tinytable .head h3 {background:url(../images/sort.png) 7px center no-repeat; cursor:pointer; padding-left:18px}
+.tinytable .desc, .sortable .asc {background-color:#0284b5;}
+.tinytable .desc h3 {background:url(../images/desc.png) 7px center no-repeat; cursor:pointer; padding-left:18px}
+.tinytable .asc h3 {background:url(../images/asc.png) 7px  center no-repeat; cursor:pointer; padding-left:18px}
+.tinytable .head:hover, .tinytable .desc:hover, .tinytable .asc:hover {color:#fff}
+.tinytable .evenrow td {background:#fff}
+.tinytable .oddrow td {background:#ecf2f6}
+.tinytable td.evenselected {background:#ecf2f6}
+.tinytable td.oddselected {background:#dce6ee}
+.tinytable tfoot {background:#fff; font-weight:bold}
+.tinytable tfoot td {padding:6px 8px 8px}
+.tinytable td a{color:#0194cb;}
+
+#tablefooter {height:15px;max-width:1000px;min-width:880px; margin-top:20px}
+#tablenav {float:left}
+#tablenav img {cursor:pointer}
+#tablenav div {float:left; margin-right:15px}
+#tablelocation {float:right;font-family:OswaldLight, sans-serif; font-size:18px;background: none repeat scroll 0 0 #FFFFFF;border: 1px solid #C6D5E1;padding: 6px;}
+#tablelocation select {margin-right:3px;width:70px; background-color:#f7fbfe;}
+#tablelocation option{background-color:#ecf2f6;}
+#pagedropdown{width:70px; height:24px;background-color:#f7fbfe;}
+
+#pagedropdown option{background-color:#ecf2f6;}
+#tablelocation div {float:left; margin-left:15px}
+.page {margin-top:2px; font-style:normal;}
+#selectedrow td {background:#c6d5e1}
+.txt-page{font-family:OswaldLight, sans-serif; font-size:17px;}
+
+/***Heading pannel contact***/
+.heading-color{	background:#019dd8;border-bottom:1px solid #54c9f5;}
+
+
+/*****************Button Style******************/
+
+.btn-reset {}
+.txt-txt{font-family:OswaldLight, sans-serif; font-size:17px;}
+
+.button {
+	display: inline-block;
+	zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
+	*display: inline;
+	vertical-align: baseline;
+	margin: 0 2px;
+	outline: none;
+	cursor: pointer;
+	//text-align: center;
+	text-decoration: none;
+	font: 14px/100% Arial, Helvetica, sans-serif;
+	padding: .2em 1em .35em;
+	text-shadow: 0px 1px 3px rgba(150, 150, 150, 1);
+	-webkit-border-radius: .1em; 
+	-moz-border-radius: .1em;
+	border-radius: .1em;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+}
+.button:hover {
+	text-decoration: none;
+}
+.button:active {
+	position: relative;
+	top: 1px;
+}
+
+/* blue */
+.blue {
+	color: #fff;
+	border: solid 1px #0076a3;
+	background-color: #0095cd;
+	
+}
+.blue:hover {
+	background: #007ead;
+
+}
+.blue:active {
+	color: #80bed6;
+	background: #00adee;
+
+}
+
+/*Preview*/
+.preview-top{width:100%; height:30px;}
+.sub-preview{width:900px;height:30px;margin:0 auto;}
+.button-top{float:left; margin:0 auto;}
+
+.red {
+	
+	background: #e1071c;
+	width:20px; height:16px;
+}
+.green {
+	
+	background: #19d905;
+	width:20px; height:16px;
+}
+.blueTop {
+	
+	background: #0095cd;
+	width:20px; height:16px;
+}
+
+
+  td  {
+            //text-align:center; 
+        }
+

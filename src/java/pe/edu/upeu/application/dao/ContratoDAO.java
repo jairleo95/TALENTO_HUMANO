@@ -41,9 +41,9 @@ public class ContratoDAO implements InterfaceContratoDAO {
         List<X_List_Id_Contrato_DGP> list = new ArrayList<X_List_Id_Contrato_DGP>();
         try {
             ResultSet rs = this.conn.query(sql);
-            X_List_Id_Contrato_DGP icd = new X_List_Id_Contrato_DGP();
-            while (rs.next()) {
 
+            while (rs.next()) {
+                X_List_Id_Contrato_DGP icd = new X_List_Id_Contrato_DGP();
                 icd.setId_contrato(rs.getString("id_contrato"));
                 icd.setId_dgp(rs.getString("id_dgp"));
                 icd.setFe_desde(rs.getString("fe_desde"));
@@ -103,30 +103,30 @@ public class ContratoDAO implements InterfaceContratoDAO {
 
     @Override
     public List<Contrato> List_Rh_Contrato_Idtr() {
-      this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql ="select id_trabajador  from rhtm_contrato where id_trabajador not in (\n" +
-        "select id_trabajador from rhtd_empleado where es_empleado = 1 and id_trabajador is not null) and es_contrato=1";
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select id_trabajador  from rhtm_contrato where id_trabajador not in (\n"
+                + "select id_trabajador from rhtd_empleado where es_empleado = 1 and id_trabajador is not null) and es_contrato=1";
         List<Contrato> list = new ArrayList<Contrato>();
         try {
             ResultSet rs = this.conn.query(sql);
             Contrato c = new Contrato();
             while (rs.next()) {
                 c.setId_trabajador(rs.getString("id_trabajador"));
-            list.add(c);
+                list.add(c);
             }
         } catch (SQLException e) {
         } finally {
             this.conn.close();
         }
-        return list;  
+        return list;
     }
 
     @Override
     public List<List_Rh_Contrato_Fec> List_Rh_Contrato_Fec(String id_departamento, String fecha_creacion) {
-       this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql ="select c.id_contrato , c.id_trabajador,dt.ap_paterno,dt.ap_materno,dt.no_trabajador , c.fe_desde,c.fe_hasta,c.ca_sueldo ,dp.no_area,dp.no_seccion,dp.no_puesto, to_char(c.fe_creacion,'dd/mm/yy')\n" +
-"from RHTM_CONTRATO c, RHTM_TRABAJADOR dt , RHVD_PUESTO_DIRECCION dp  where dt.id_trabajador = c.id_trabajador  and dp.id_puesto = c.id_puesto \n" +
-"AND TO_CHAR(c.fe_creacion,'dd/mm/yy') = TO_CHAR(to_date("+fecha_creacion+"),'dd/mm/yy') and dp.id_departamento='"+id_departamento+"'";
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select c.id_contrato , c.id_trabajador,dt.ap_paterno,dt.ap_materno,dt.no_trabajador , c.fe_desde,c.fe_hasta,c.ca_sueldo ,dp.no_area,dp.no_seccion,dp.no_puesto, to_char(c.fe_creacion,'dd/mm/yy')\n"
+                + "from RHTM_CONTRATO c, RHTM_TRABAJADOR dt , RHVD_PUESTO_DIRECCION dp  where dt.id_trabajador = c.id_trabajador  and dp.id_puesto = c.id_puesto \n"
+                + "AND TO_CHAR(c.fe_creacion,'dd/mm/yy') = TO_CHAR(to_date(" + fecha_creacion + "),'dd/mm/yy') and dp.id_departamento='" + id_departamento + "'";
         List<List_Rh_Contrato_Fec> list = new ArrayList<List_Rh_Contrato_Fec>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -144,21 +144,21 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 rhf.setNo_puesto(rs.getString("no_puesto"));
                 rhf.setNo_seccion(rs.getString("no_seccion"));
                 rhf.setNo_trabajador(rs.getString("no_trabajador"));
-            list.add(rhf);
+                list.add(rhf);
             }
         } catch (SQLException e) {
         } finally {
             this.conn.close();
         }
-        return list;  
+        return list;
     }
 
     @Override
     public List<X_List_Anno_Id_Tr_DGP> List_Anno_Id_Tr_DGP(String id_trabajador) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql ="select * from (\n" +
-"select a.id_anno,a.no_anno ,rh.id_dgp ,rh.id_trabajador from RHTR_ANNO a , RHTM_CONTRATO rh  where   a.id_anno=rh.id_anno and rh.es_contrato=1)f \n" +
-"left outer join RHTM_DGP dgp on (f.id_dgp =dgp.id_dgp) where f.id_trabajador=$idtr order by f.no_anno desc";
+        String sql = "select * from (\n"
+                + "select a.id_anno,a.no_anno ,rh.id_dgp ,rh.id_trabajador from RHTR_ANNO a , RHTM_CONTRATO rh  where   a.id_anno=rh.id_anno and rh.es_contrato=1)f \n"
+                + "left outer join RHTM_DGP dgp on (f.id_dgp =dgp.id_dgp) where f.id_trabajador=$idtr order by f.no_anno desc";
         List<X_List_Anno_Id_Tr_DGP> list = new ArrayList<X_List_Anno_Id_Tr_DGP>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -168,30 +168,30 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 aitd.setId_dgp(rs.getString("id_dgp"));
                 aitd.setId_trabajador(rs.getString("id_trabajador"));
                 aitd.setNo_anno(rs.getString("no_anno"));
-            list.add(aitd);
+                list.add(aitd);
             }
         } catch (SQLException e) {
         } finally {
             this.conn.close();
         }
-        return list; 
+        return list;
     }
 
     @Override
     public int Validar_Anno(String id_trabajador, String id_anno) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select count(*) from rhtm_contrato  where  id_anno_id='"+id_anno+"' and id_trabajador='"+id_trabajador+"'";
+        String sql = "select count(*) from rhtm_contrato  where  id_anno_id='" + id_anno + "' and id_trabajador='" + id_trabajador + "'";
         int validar = 0;
         try {
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
-            validar = rs.getInt("1");
+                validar = rs.getInt("1");
             }
         } catch (SQLException e) {
         } finally {
             this.conn.close();
         }
-        return validar; 
+        return validar;
     }
 
     @Override
@@ -199,5 +199,5 @@ public class ContratoDAO implements InterfaceContratoDAO {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         this.conn.ejecutar(" begin venc_contrato; end;");
     }
-    
+
 }

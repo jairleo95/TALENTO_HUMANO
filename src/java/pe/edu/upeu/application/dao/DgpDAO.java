@@ -5,7 +5,7 @@
  */
 package pe.edu.upeu.application.dao;
 
-
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,7 +22,6 @@ import pe.edu.upeu.application.model.X_User_dgp;
 import pe.edu.upeu.application.model.X_val_tra_dgp;
 import pe.edu.upeu.application.model.x_List_Id_Trab_Dgp;
 
-
 /**
  *
  * @author Jose
@@ -32,15 +31,55 @@ public class DgpDAO implements InterfaceDgpDAO {
     ConexionBD conn;
 
     @Override
-    public List<X_User_dgp> USER_DGP(String id_dgp) {
-        this.conn=FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql=" select u.*,du.NO_TRABAJADOR ,du.AP_PATERNO,du.AP_MATERNO, p.DE_PASOS as  paso from RHVD_USER_AUT u  ,RHTC_PASOS p ,RHVD_USUARIO du  where u.ID_EMPLEADO=du.ID_EMPLEADO and u.ID_PASOS= p.ID_PASOS  and u.ID_DGP='"+id_dgp+"'  and u.ID_PUESTO <>0";
-        List<X_User_dgp> Lista=new ArrayList<X_User_dgp>();
+    public void INSERT_DGP(String ID_DGP, String FE_DESDE, String FE_HASTA, String CA_SUELDO, String DE_DIAS_TRABAJO, String ID_PUESTO, String ID_REQUERIMIENTO, String ID_TRABAJADOR, String CO_RUC, String DE_LUGAR_SERVICIO, String DE_SERVICIO, String DE_PERIODO_PAGO, String DE_DOMICILIO_FISCAL, String DE_SUBVENCION, String DE_HORARIO_CAPACITACION, String DE_HORARIO_REFRIGERIO, String DE_DIAS_CAPACITACION, String ES_DGP, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String CA_BONO_ALIMENTARIO, String DE_BEV, String CA_CENTRO_COSTOS, String DE_ANTECEDENTES_POLICIALES, String DE_CERTIFICADO_SALUD, String DE_MONTO_HONORARIO) {
+        CallableStatement cst;
         try {
-            ResultSet rs=this.conn.query(sql);
-            X_User_dgp x= new X_User_dgp();
-            while(rs.next())
-            {
+            cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DGP( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+            cst.setString(1, null);
+            cst.setString(2, FE_DESDE);
+            cst.setString(3, FE_HASTA);
+            cst.setString(4, CA_SUELDO);
+            cst.setString(5, DE_DIAS_TRABAJO);
+            cst.setString(6, ID_PUESTO);
+            cst.setString(7, ID_REQUERIMIENTO);
+            cst.setString(8, ID_TRABAJADOR);
+            cst.setString(9, CO_RUC);
+            cst.setString(10, DE_LUGAR_SERVICIO);
+            cst.setString(11, DE_SERVICIO);
+            cst.setString(12, DE_PERIODO_PAGO);
+            cst.setString(13, DE_DOMICILIO_FISCAL);
+            cst.setString(14, DE_SUBVENCION);
+            cst.setString(15, DE_HORARIO_CAPACITACION);
+            cst.setString(16, DE_HORARIO_REFRIGERIO);
+            cst.setString(17, DE_DIAS_CAPACITACION);
+            cst.setString(18, ES_DGP);
+            cst.setString(19, US_CREACION);
+            cst.setString(20, FE_CREACION);
+            cst.setString(21, US_MODIF);
+            cst.setString(22, FE_MODIF);
+            cst.setString(23, IP_USUARIO);
+            cst.setString(24, CA_BONO_ALIMENTARIO);
+            cst.setString(25, DE_BEV);
+            cst.setString(26, CA_CENTRO_COSTOS);
+            cst.setString(27, DE_ANTECEDENTES_POLICIALES);
+            cst.setString(28, DE_CERTIFICADO_SALUD);
+            cst.setString(29, DE_MONTO_HONORARIO);
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        }
+    }
+
+    @Override
+    public List<X_User_dgp> USER_DGP(String id_dgp) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = " select u.*,du.NO_TRABAJADOR ,du.AP_PATERNO,du.AP_MATERNO, p.DE_PASOS as  paso from RHVD_USER_AUT u  ,RHTC_PASOS p ,RHVD_USUARIO du  where u.ID_EMPLEADO=du.ID_EMPLEADO and u.ID_PASOS= p.ID_PASOS  and u.ID_DGP='" + id_dgp + "'  and u.ID_PUESTO <>0";
+        List<X_User_dgp> Lista = new ArrayList<X_User_dgp>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            X_User_dgp x = new X_User_dgp();
+            while (rs.next()) {
                 x.setId_trabajador(rs.getString("id_trabajador"));
                 x.setId_usuario(rs.getString("id_usuario"));
                 x.setId_rol(rs.getString("id_rol"));
@@ -73,15 +112,10 @@ public class DgpDAO implements InterfaceDgpDAO {
                 Lista.add(x);
             }
         } catch (SQLException e) {
-        }finally{
-                this.conn.close();
+        } finally {
+            this.conn.close();
         }
         return Lista;
-    }
-
-    @Override
-    public boolean INSERT_DETALLE_DGP(String IDDETALLE_DGP, String FEC_DESDE, String FEC_HASTA, String SUELDO, String DIAS_TRABAJO, String HORARIO, String IDPUESTO, String IDREQUERIMIENTO, String IDDATOS_TRABAJADOR, String RUC, String LUGAR_SERVICIO, String DESCRIPCION_SERVICIO, String PERIODO_PAGO, String DOMICILIO_FISCAL, String SUBVENCION, String HORARIO_CAPACITACION, String HORARIO_REFRIGERIO, String DIAS_CAPACITACION, String ESTADO, String USER_CREACION, String FECHA_CREACION, String USER_MODIF, String FECHA_MODIF, String USUARIO_IP, String BONO_ALIMENTARIO, String BEV, String CENTRO_COSTOS, String ANTECEDENTES_POLICIALES, String CERTIFICADO_SALUD, String MONTO_HONORARIO) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -226,8 +260,9 @@ public class DgpDAO implements InterfaceDgpDAO {
         try {
             ResultSet rs = this.conn.query(sql);
             List<DGP> Lista = new ArrayList<DGP>();
-            DGP x = new DGP();
+
             while (rs.next()) {
+                DGP x = new DGP();
                 x.setId_dgp(rs.getString("id_dgp"));
                 x.setFe_desde(rs.getString("fe_desde"));
                 x.setFe_hasta(rs.getString("fe_hasta"));
@@ -304,27 +339,29 @@ public class DgpDAO implements InterfaceDgpDAO {
         List<X_val_tra_dgp> Lista = new ArrayList<X_val_tra_dgp>();
         try {
             ResultSet rs = this.conn.query(sql);
-            X_val_tra_dgp X = new X_val_tra_dgp();
+
             while (rs.next()) {
+                X_val_tra_dgp X = new X_val_tra_dgp();
                 X.setTotal(rs.getString("total"));
                 X.setId_dgp(rs.getString("id_dgp"));
             }
         } catch (SQLException e) {
         } finally {
             this.conn.close();
-            return Lista;
+
         }
+        return Lista;
     }
 
     @Override
     public int VAL_OPC_DGP(String idtr) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "select count(ID_DGP) from RHTM_DGP   where ES_DGP='0' and ID_TRABAJADOR='" + idtr + "';";
-        int TOTAL=0 ;
+        int TOTAL = 0;
         try {
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
-                TOTAL =Integer.parseInt(rs.getString(1));
+                TOTAL = Integer.parseInt(rs.getString(1));
             }
         } catch (SQLException e) {
         } finally {
@@ -339,12 +376,12 @@ public class DgpDAO implements InterfaceDgpDAO {
         String sql = "select  d.ID_DGP,to_char(d.fe_desde,'yyyy-mm-dd') as fe_desde,to_char(d.fe_hasta,'yyyy-mm-dd') as fe_hasta ,d.CA_sueldo, d.DE_DIAS_TRABAJO,null, d.ID_PUESTO, d.ID_REQUERIMIENTO, d.ID_TRABAJADOR, d.CO_RUC, d.DE_LUGAR_SERVICIO,\n"
                 + "d.DE_SERVICIO, d.DE_PERIODO_PAGO, d.DE_DOMICILIO_FISCAL, d.DE_SUBVENCION,d.DE_HORARIO_CAPACITACION,d.DE_HORARIO_REFRIGERIO,\n"
                 + "d.DE_DIAS_CAPACITACION,d.ES_DGP,d.US_CREACION,d.FE_CREACION,d.US_MODIF,d.FE_MODIF,d.IP_USUARIO,r.NO_REQ,d.CA_BONO_ALIMENTARIO,d.DE_BEV,d.CA_CENTRO_COSTOS,d.DE_ANTECEDENTES_POLICIALES,d.DE_CERTIFICADO_SALUD\n"
-                + "from RHTM_DGP  d , RHTR_REQUERIMIENTO r  where r.ID_REQUERIMIENTO = d.ID_REQUERIMIENTO and d.ID_DGP='"+id+"'";
-        List<X_List_id_dgp> Lista=new ArrayList<X_List_id_dgp>();
+                + "from RHTM_DGP  d , RHTR_REQUERIMIENTO r  where r.ID_REQUERIMIENTO = d.ID_REQUERIMIENTO and d.ID_DGP='" + id + "'";
+        List<X_List_id_dgp> Lista = new ArrayList<X_List_id_dgp>();
         try {
-            ResultSet rs=this.conn.query(sql);
-            X_List_id_dgp x=new X_List_id_dgp();
-            while(rs.next()){
+            ResultSet rs = this.conn.query(sql);
+            X_List_id_dgp x = new X_List_id_dgp();
+            while (rs.next()) {
                 x.setId_dgp(rs.getString("id_dgp"));
                 x.setFe_desde(rs.getString("fe_desde"));
                 x.setFe_hasta(rs.getString("fe_hasta"));
@@ -377,38 +414,38 @@ public class DgpDAO implements InterfaceDgpDAO {
                 Lista.add(x);
             }
         } catch (SQLException e) {
-        }finally{
-                this.conn.close();
+        } finally {
+            this.conn.close();
         }
         return Lista;
     }
 
     @Override
     public String MAX_ID_DETALLE_DGP() {
-        this.conn=FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql="SELECT 'DGP-' ||MAX (SUBSTR(ID_DGP,5,8)) FROM RHTM_DGP";
-        String Maxdgp=null;
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT 'DGP-' ||MAX (SUBSTR(ID_DGP,5,8)) FROM RHTM_DGP";
+        String Maxdgp = null;
         try {
-             ResultSet rs = this.conn.query(sql);
-             while (rs.next()) {
-                Maxdgp=rs.getString(1);
-             }
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Maxdgp = rs.getString(1);
+            }
         } catch (SQLException e) {
-        }finally{
-         this.conn.close();
-         }
+        } finally {
+            this.conn.close();
+        }
         return Maxdgp;
     }
 
     @Override
     public int VALIDAR_DGP_CONTR(String id_dgp, String id_tr) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select count(*) from rh_contrato  where iddetalle_dgp ='"+id_dgp+"' and  firmo_contrato is null and iddatos_trabajador='"+id_tr+"'";
-        int val=0 ;
+        String sql = "select count(*) from rh_contrato  where iddetalle_dgp ='" + id_dgp + "' and  firmo_contrato is null and iddatos_trabajador='" + id_tr + "'";
+        int val = 0;
         try {
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
-                val =Integer.parseInt(rs.getString(1));
+                val = Integer.parseInt(rs.getString(1));
             }
         } catch (SQLException e) {
         } finally {
@@ -419,7 +456,7 @@ public class DgpDAO implements InterfaceDgpDAO {
 
     @Override
     public void REG_DGP_FINAL(String IDDGP) {
-        String sql="UPDATE RHTM_DGP SET ES_DGP='0' WHERE ID_DGP='"+IDDGP+ "'";
+        String sql = "UPDATE RHTM_DGP SET ES_DGP='0' WHERE ID_DGP='" + IDDGP + "'";
         this.conn.ejecutar(sql);
     }
 }

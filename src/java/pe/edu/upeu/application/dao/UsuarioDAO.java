@@ -5,7 +5,6 @@
  */
 package pe.edu.upeu.application.dao;
 
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,11 +29,10 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
     @Override
     public List<Usuario> List_Usuario() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        StringBuilder sql = new StringBuilder();
-        sql.append("SELECT * FROM RHTC_USUARIO");
+        String sql="SELECT * FROM RHTC_USUARIO";
         List<Usuario> list = new ArrayList<Usuario>();
         try {
-            ResultSet rs = this.conn.query(sql.toString());
+            ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Usuario us = new Usuario();
                 us.setId_usuario(rs.getString("id_usuario"));

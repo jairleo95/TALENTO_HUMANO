@@ -1,0 +1,15 @@
+     .tables{
+             margin: 2%;
+             margin-bottom: 0;
+            }
+            .text-info{
+                font-weight: bold;
+                text-align: right;
+            }
+            
+            .title{
+                background-color: #0c9ba0 ;
+                color: white;
+                padding:1%;
+                text-align:center;
+            }
