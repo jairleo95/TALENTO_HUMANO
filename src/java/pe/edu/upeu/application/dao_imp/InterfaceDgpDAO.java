@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pe.edu.upeu.application.dao_imp;
 
 import java.util.List;
@@ -21,46 +20,30 @@ import pe.edu.upeu.application.model.x_List_Id_Trab_Dgp;
  * @author Jose
  */
 public interface InterfaceDgpDAO {
+
     public List<X_User_dgp> USER_DGP(String id_dgp);
-    public boolean INSERT_DETALLE_DGP(String IDDETALLE_DGP , 
-        String FEC_DESDE , 
-        String FEC_HASTA , 
-        String SUELDO , 
-        String DIAS_TRABAJO , 
-        String HORARIO , 
-        String IDPUESTO ,   
-        String IDREQUERIMIENTO , 
-        String IDDATOS_TRABAJADOR , 
-        String RUC , 
-        String LUGAR_SERVICIO , 
-        String DESCRIPCION_SERVICIO , 
-        String PERIODO_PAGO , 
-        String DOMICILIO_FISCAL , 
-        String SUBVENCION , 
-        String HORARIO_CAPACITACION , 
-        String HORARIO_REFRIGERIO , 
-        String DIAS_CAPACITACION , 
-        String ESTADO , 
-        String USER_CREACION , 
-        String FECHA_CREACION , 
-        String USER_MODIF , 
-        String FECHA_MODIF , 
-        String USUARIO_IP , 
-        String BONO_ALIMENTARIO , 
-        String BEV , 
-        String CENTRO_COSTOS , 
-        String ANTECEDENTES_POLICIALES , 
-        String CERTIFICADO_SALUD , 
-        String MONTO_HONORARIO );
-  public List<x_List_Id_Trab_Dgp> LIST_ID_TRAB_DGP(String id);
-  public List<X_List_det_dgp>LIST_DET_DGP(String id_dep);
-  public List<X_List_dgp_by>LIST_DGP_BY(String id_user);
-  public void VAL_DGP_PASOS();
-  public List<V_Es_Requerimiento>LIST_DGP(String id_dep);
-  public List<X_val_tra_dgp>VAL_TRA_DGP(String id_tr);
-  public int VAL_OPC_DGP(String idtr);
-  public List<X_List_id_dgp> LIST_ID_DGP(String id);
-  public String MAX_ID_DETALLE_DGP();
-  public int VALIDAR_DGP_CONTR(String id_dgp, String id_tr);
-  public void REG_DGP_FINAL (String IDDGP);
+
+    public void INSERT_DGP(String ID_DGP, String FE_DESDE, String FE_HASTA, String CA_SUELDO, String DE_DIAS_TRABAJO, String ID_PUESTO, String ID_REQUERIMIENTO, String ID_TRABAJADOR, String CO_RUC, String DE_LUGAR_SERVICIO, String DE_SERVICIO, String DE_PERIODO_PAGO, String DE_DOMICILIO_FISCAL, String DE_SUBVENCION, String DE_HORARIO_CAPACITACION, String DE_HORARIO_REFRIGERIO, String DE_DIAS_CAPACITACION, String ES_DGP, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String CA_BONO_ALIMENTARIO, String DE_BEV, String CA_CENTRO_COSTOS, String DE_ANTECEDENTES_POLICIALES, String DE_CERTIFICADO_SALUD, String DE_MONTO_HONORARIO);
+
+    public List<x_List_Id_Trab_Dgp> LIST_ID_TRAB_DGP(String id);
+
+    public List<X_List_det_dgp> LIST_DET_DGP(String id_dep);
+
+    public List<X_List_dgp_by> LIST_DGP_BY(String id_user);
+
+    public void VAL_DGP_PASOS();
+
+    public List<V_Es_Requerimiento> LIST_DGP(String id_dep);
+
+    public List<X_val_tra_dgp> VAL_TRA_DGP(String id_tr);
+
+    public int VAL_OPC_DGP(String idtr);
+
+    public List<X_List_id_dgp> LIST_ID_DGP(String id);
+
+    public String MAX_ID_DETALLE_DGP();
+
+    public int VALIDAR_DGP_CONTR(String id_dgp, String id_tr);
+
+    public void REG_DGP_FINAL(String IDDGP);
 }

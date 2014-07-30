@@ -25,12 +25,12 @@ public class RequerimientoDAO implements InterfaceRequerimientoDAO {
     @Override
     public List<Requerimiento> Listar_Requerimiento() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "Select * from rhtd_area ";
+        String sql = "select * from rhtr_requerimiento ";
         List<Requerimiento> list = new ArrayList<Requerimiento>();
         try {
             ResultSet rs = this.conn.query(sql);
-            Requerimiento r = new Requerimiento();
             while (rs.next()) {
+                   Requerimiento r = new Requerimiento();
                 r.setId_requerimiento(rs.getString("id_requerimiento"));
                 r.setNo_req(rs.getString("no_req"));
                 r.setId_tipo_planilla(rs.getString("id_tipo_planilla"));

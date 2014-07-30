@@ -8,6 +8,7 @@ package pe.edu.upeu.application.dao_imp;
 
 import java.util.List;
 import pe.edu.upeu.application.model.Puesto;
+import pe.edu.upeu.application.model.V_Puesto_Direccion;
 
 /**
  *
@@ -17,6 +18,8 @@ public interface  InterfacePuestoDAO {
     public boolean Guardar_Puesto();
     public boolean Eliminar_Puesto();
     public List<Puesto> List_Puesto();
+     public List<V_Puesto_Direccion> List_Puesto_Dep(String id_departamento);
+       public List<V_Puesto_Direccion> List_Det_Puesto() ;
     public List<Puesto> List_Id_Puesto( String id_puesto);
     public boolean Modif_Puesto(String id_puesto,String no_puesto, String no_corto_pu,String es_puesto,String id_seccion,String co_grupo);
     

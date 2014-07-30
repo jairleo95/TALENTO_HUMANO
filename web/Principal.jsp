@@ -146,9 +146,9 @@
                                 <ul>
                                     <li class="li-pla" ><a> (Planilla) Contrato</a>
                                         <ul class="ul-pla1" style="display: none">
-                                            <li ><a href="../Vistas/pruebaassss.php?text=1" target="contenido1">Tiempo Completo</a></li>
-                                            <li><a href="../Vistas/pruebaassss.php?text=2" target="contenido1">Tiempo Parcial</a></li>
-                                            <li><a href="../Vistas/pruebaassss.php?text=3" target="contenido1">Medio Tiempo</a></li>
+                                     <li ><a href="Vista/Dgp/Generar_Dgp.jsp?text=1" target="contenido1">Tiempo Completo</a></li>
+                                            <li><a href="Vista/Dgp/Generar_Dgp.jsp?text=2" target="contenido1">Tiempo Parcial</a></li>
+                                            <li><a href="Vista/Dgp/Generar_Dgp.jsp?text=3" target="contenido1">Medio Tiempo</a></li>
                                             <!--  <li><a href="../Vistas/Reg_dgp.php">Renovación de Contrato</a></li>
                                               <li><a href="../Vistas/Reg_dgp.php">Extranjero</a></li>
                                             -->

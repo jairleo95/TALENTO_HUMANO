@@ -41,24 +41,19 @@ public class CTrabajador extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-
-        HttpSession sesion = request.getSession(true);
-        String idrol = (String) request.getAttribute("IDROL");
-
         //try {
+
+        HttpSession sesion= request.getSession(true);
+        String idrol=(String)sesion.getAttribute("IDROL");
+        
         InterfaceListaDAO li = new ListaDAO();
         InterfaceDgpDAO dgp = new DgpDAO();
         InterfaceUbigeoDAO ub = new UbigeoDAO();
         InterfaceTrabajadorDAO tr = new TrabajadorDAO();
 
         String opc = (String) request.getParameter("opc");
+        String Text =(String) request.getParameter("text");
 
-        if (opc.equals("Detalle")) {
-            String idtr = (String) request.getParameter("idtr");
-            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-            getServletContext().setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));
-            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp");
-        }
         if (opc.equals("Registrar")) {
             String ID_TRABAJADOR = request.getParameter("ID_TRABAJADOR");
             String AP_PATERNO = request.getParameter("APELLIDO_P");
@@ -123,6 +118,7 @@ public class CTrabajador extends HttpServlet {
             String IP_USUARIO = request.getParameter("USUARIO_IP");
 
             tr.INSERT_TRABAJADOR(ID_TRABAJADOR, AP_PATERNO, AP_MATERNO, NO_TRABAJADOR, TI_DOC, NU_DOC, ES_CIVIL, FE_NAC, ID_NACIONALIDAD, ID_DEPARTAMENTO, ID_PROVINCIA, ID_DISTRITO, TE_TRABAJADOR, CL_TRA, DI_CORREO_PERSONAL, DI_CORREO_INST, CO_SISTEMA_PENSIONARIO, LI_NIVEL_EDUCATIVO, LI_GRADO_ACADEMICO, LI_TITULO_PROFESIONAL, ID_CARRERA, ID_UNIVERSIDAD, CM_OTROS_ESTUDIOS, ES_SEXO, LI_GRUPO_SANGUINEO, DE_REFERENCIA, LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, ID_NO_AFP, ES_AFILIADO_ESSALUD, LI_TIPO_TRABAJADOR, CA_TIPO_HORA_PAGO_REFEERENCIAL, ES_FACTOR_RH, LI_DI_DOM_A_D1, DI_DOM_A_D2, LI_DI_DOM_A_D3, DI_DOM_A_D4, LI_DI_DOM_A_D5, DI_DOM_A_D6, DI_DOM_A_REF, ID_DI_DOM_A_DISTRITO, LI_DI_DOM_LEG_D1, DI_DOM_LEG_D2, LI_DI_DOM_LEG_D3, DI_DOM_LEG_D4, LI_DI_DOM_LEG_D5, DI_DOM_LEG_D6, ID_DI_DOM_LEG_DISTRITO, CA_ING_QTA_CAT_EMPRESA, CA_ING_QTA_CAT_RUC, CA_ING_QTA_CAT_OTRAS_EMPRESAS, CM_OBSERVACIONES, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO);
+           out.println("sdfgiojdgkjdhgkjhdfg");
             String idtr = tr.MAX_ID_DATOS_TRABAJADOR();
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             getServletContext().setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));

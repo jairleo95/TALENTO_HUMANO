@@ -39,7 +39,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         CallableStatement cst;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            cst = this.conn.conex.prepareCall("{CALL SP_INSERT_RHTM_TRABAJADOR( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+            cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_TRABAJADOR( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
             cst.setString(1, null);
             cst.setString(2, AP_PATERNO);
             cst.setString(3, AP_MATERNO);
@@ -105,7 +105,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         } catch (Exception ex) {
-            Logger.getLogger(TrabajadorDAO.class.getName()).log(Level.SEVERE, null, ex);
+          //  Logger.getLogger(TrabajadorDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             this.conn.close();
         }

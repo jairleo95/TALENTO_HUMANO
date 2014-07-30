@@ -34,8 +34,16 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="../../menu">
+        <form action="../../dgp">
             <input type="date" id="date" name="date">
+            
+            <input type="hidden"  name="idtr" value="TRB-000175">
+            <input type="hidden"  name="idreq" value="REQ-0001">
+            <input type="hidden"  name="iddep" value="DPT-0019">
+            
+            <input type="hidden"  name="opc" value="Reg_form">
+            
+            
             <input type="submit" value="Enviar"  name="Enviar">
             <%
                 String d=  "2014-07-28";

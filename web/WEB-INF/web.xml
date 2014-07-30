@@ -12,6 +12,10 @@
         <servlet-name>CTrabajador</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CTrabajador</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CDgp</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CDgp</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CIndex</servlet-name>
         <url-pattern>/prueba</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
         <url-pattern>/trabajador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CDgp</servlet-name>
+        <url-pattern>/dgp</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

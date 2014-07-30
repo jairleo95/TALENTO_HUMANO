@@ -1,8 +1,6 @@
 
-<%@page import="pe.edu.upeu.application.model.Auto_Mostrar"%>
 <%@page import="pe.edu.upeu.application.model.Trabajador"%>
 <jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Auto_mostrar" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -13,23 +11,14 @@
         <meta name="author" content="">
         <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.autoheight.js"></script>
-
+        
 
 
         <title>Detalle de Trabajador</title>
         <%
-            HttpSession sesion = request.getSession(true);
             
-            String idtr = request.getParameter("idtr");
-            String nropaso = request.getParameter("nropaso");
-            String cod = request.getParameter("cod");
-            String idpasos = request.getParameter("idpasos");
-            String IDDETALLE_REQ_PROCESO = request.getParameter("IDDETALLE_REQ_PROCESO");
-            String iddgp = request.getParameter("iddgp");
-            String autorizar = request.getParameter("autorizacion");
-
-            String idpuesto = (String) request.getAttribute("PUESTO_ID");
-
+            String idtr =  request.getParameter("idtr");
+            
         %>  
 
         <script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
@@ -142,27 +131,28 @@
                      */
                 %>
 
-                <%                    if (false) {
+                <%
+                    if (false) {
                         //if ($idf==null){%>
                 <tr><td><img src="../../imagenes/avatar_default.jpg"  width="100"  height="100"></td>
                 <a href="Sub_fotos.php?idtr=<? echo $idtr ;?>">Subir imagen</a>
                 <%
                     }
-                    else{%>
+                    //}else{%>
                 <tr><td><img src="Foto.php?idf=<?echo $idf;?>"  width="100"  height="100"></td>
-                        <%}%>
+                        <%//}%>
                     <td>
                         <div >
                             <table class="info-det">
                                 <%
-                                    for (int index = 0; index < ListaridTrabajador.size(); index++) {
-                                        Trabajador trb = new Trabajador();
-                                        trb = (Trabajador) ListaridTrabajador.get(index);
-                                %>
+                                    for(int index =0; index<ListaridTrabajador.size();index++){
+                                        Trabajador trb=new Trabajador();
+                                        trb=(Trabajador)ListaridTrabajador.get(index);
+                                        %>
                                 <tr><td class="td">Nombre :</td><td><%=trb.getNo_trabajador()%></td></tr>
                                 <tr><td class="td">Apellido Paterno :</td><td><%=trb.getAp_paterno()%></td></tr>
-                                <tr><td class="td">Apellido Materno :</td><td><%=trb.getAp_materno()%></td></tr>
-                                <tr><td class="td">Fecha de Nacimiento :</td><td><%=trb.getFe_nac()%></td></tr>
+                                <tr><td class="td">Apellido Materno :</td><td><%=trb.getAp_paterno()%></td></tr>
+                                <tr><td class="td">Fecha de Nacimiento :</td><td><%=trb.getFe_nac() %></td></tr>
                                 <%}%>
                             </table>
                         </div>
@@ -171,48 +161,60 @@
             </table>
 
             <div  class="titulo" id="titulo-c">Informacion Personal</div> 
-            <% for (int h = 0; h < List_Auto_mostrar.size(); h++) {
-                    Auto_Mostrar aut = new Auto_Mostrar();
-                    aut = (Auto_Mostrar) List_Auto_mostrar.get(h);
+
+            <%
+            /*require_once '../Modelo/ModeloLista.php';
+                 $mdl= new ModeloLista();
+                 $list_aut_m=$mdl->LISTA_AUTO_MOSTRAR($_SESSION["IDROL"]);*/
             %>
-            <iframe name="contenido" id="contenido"  class="autoHeight" src="<%=aut.getDi_url()%>?idtr=<%=idtr%><%if (autorizar=="1") {
-                    out.println("&iddgp=" + request.getParameter("iddetalle_dgp"));}%>" width="100%" height="100%" ></iframe>
-            <%}%>
+            <%  //for ($h = 0; $h < count($list_aut_m); $h++) {%>
+            <iframe name="contenido" id="contenido"  class="autoHeight" src="" width="100%" height="100%" ></iframe>
+            <%//}%>
 
         </div> 
         <div>
             <%
-                if (autorizar=="1") {
+                if (false) {
+                    /* if ($_REQUEST["autorizacion"]==1) {
+                     $puesto_id= $_SESSION["PUESTO_ID"];
+                     $iddetalle_dgp= $_REQUEST["iddetalle_dgp"];
+                     $IDDETALLE_REQ_PROCESO= $_REQUEST["IDDETALLE_REQ_PROCESO"];
+                     $cod= $_REQUEST["cod"];
+                     $idpasos= $_REQUEST["idpasos"];
+                     $nropaso= $_REQUEST["nropaso"];
+                     //echo $idempleado;
+                   
+                     */
             %>
             <center>
                 <form class="form" action="../Control/ControlAutorizacion.php" method="post" > 
                     <table > 
-                        <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>" class="text-box" >           
+                        <input type="hidden" name="IDDETALLE_DGP"  value="<? echo $iddetalle_dgp;?>" class="text-box" >           
                         <input type="hidden" name="ESTADO" value="1" >                     
-                        <input type="hidden" name="NROPASO" value="<%=nropaso%>"  class="text-box" >                
+                        <input type="hidden" name="NROPASO" value="<? echo $nropaso;?>"  class="text-box" >                
                         <input type="hidden" name="USUARIO_IP" class="text-box" >  
                         <input type="hidden" name="USER_CREACION" value="" class="text-box" > 
 
-                        <input type="hidden" name="COD" value="<%=cod%>"  class="text-box" >               
-                        <input type="hidden" name="PUESTO_ID" value="<%=idpuesto%>" class="text-box" >  
-                        <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=IDDETALLE_REQ_PROCESO%>" class="text-box" >  
-                        <input type="hidden" name="IDPASOS" value="<%=idpasos%>"  class="text-box" >
+                        <input type="hidden" name="COD" value="<? echo $cod;?>"  class="text-box" >               
+                        <input type="hidden" name="PUESTO_ID" value="<? echo $puesto_id;?>" class="text-box" >  
+                        <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<? echo $IDDETALLE_REQ_PROCESO;?>" class="text-box" >  
+                        <input type="hidden" name="IDPASOS" value="<? echo $idpasos;?>"  class="text-box" >
                         <tr><td><input type="submit" name="opc"  class="submit" value="Aceptar"/></td></tr>
                     </table>
                 </form>
                 <form action="../Control/ControlAutorizacion.php" method="post">
                     <table>
-                        <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>" class="text-box" >           
+                        <input type="hidden" name="IDDETALLE_DGP"  value="<? echo $iddetalle_dgp;?>" class="text-box" >           
                         <input type="hidden" name="ESTADO" value="2" >                     
-                        <input type="hidden" name="NROPASO" value="<%=nropaso%>"  class="text-box" >                
+                        <input type="hidden" name="NROPASO" value="<? echo $nropaso;?>"  class="text-box" >                
                         <input type="hidden" name="USUARIO_IP" class="text-box" >  
                         <input type="hidden" name="USER_CREACION" value="" class="text-box" > 
 
 
-                        <input type="hidden" name="COD" value="<%=cod%>"  class="text-box" >               
-                        <input type="hidden" name="PUESTO_ID" value="<%=idpuesto%>" class="text-box" >  
-                        <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=IDDETALLE_REQ_PROCESO%>" class="text-box" >  
-                        <input type="hidden" name="IDPASOS" value="<%=idpasos%>"  class="text-box" >
+                        <input type="hidden" name="COD" value="<? echo $cod;?>"  class="text-box" >               
+                        <input type="hidden" name="PUESTO_ID" value="<? echo $puesto_id;?>" class="text-box" >  
+                        <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<? echo $IDDETALLE_REQ_PROCESO;?>" class="text-box" >  
+                        <input type="hidden" name="IDPASOS" value="<? echo $idpasos;?>"  class="text-box" >
                         <tr><td><input type="submit" name="opc"  class="submit" value="Rechazar"/></td></tr>
                     </table>
                 </form>   

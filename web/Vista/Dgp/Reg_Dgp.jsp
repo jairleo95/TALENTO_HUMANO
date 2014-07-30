@@ -1,424 +1,218 @@
 
-<!DOCTYPE html>
-<?
-//require '../Modelo/ModeloAño.php';
-/*
- $listaU = new ModeloUbigeo();
-  $distrito = $listaU->ListarDistrito();
-  $provincia = $listaU->ListarProvincia();
-  $departamento = $listaU->ListarDepartamento();
-  $pais = $listaU->ListarPais(); */
+<%@page import="com.sun.org.apache.regexp.internal.recompile"%>
+<%@page import="pe.edu.upeu.application.model.Requerimiento"%>
+<%@page import="pe.edu.upeu.application.model.V_Puesto_Direccion"%>
+<%@page import="pe.edu.upeu.application.model.Puesto"%>
+<%@page import="pe.edu.upeu.application.model.Trabajador"%>
+<jsp:useBean id="Listar_Trabajador_id" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Puesto" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Det_Puesto" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_Requerimiento" scope="application" class="java.util.ArrayList"/>
 
-/* require '../Modelo/modelotrabajador.php';
-               
-               $mtr=new modelotrabajador();
-               $listra=$mtr->ListarTrabajador();
-               $s=count($listra);*/
-?>
+<!DOCTYPE html >
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+        <meta charset="windows-1252">
         <title></title>
-        
-        <link rel="shortcut icon" href="../bootstrap-3.0.0/assets/ico/favicon.png">
-        <link href="../bootstrap-3.0.0/dist/css/bootstrap-theme.min.css" rel="stylesheet">
-        <link href="../bootstrap-3.0.0/examples/theme/theme.css" rel="stylesheet">
-         
-            <!-- 
-            <link href="../bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet">
-            -->
-            <link rel="stylesheet" href="../CSS/style2.css"> 
-            <link rel="stylesheet" href="../css/prism.css">    
-            <link rel="stylesheet" href="../CSS/chosen.css">
-            <script src="../js3/abc.js"></script>
-            <script src="../js3/organictabs.jquery.js"></script>
-            
-
-            <script type="text/javascript">
-                 $(function() {
-
-                     $("#example-one").organicTabs();
-
-                     $("#example-two").organicTabs({
-                         "speed": 200
-                     });
-
-                 });
-            </script>
+        <link rel="stylesheet" href="../CSS/form.css"  type="text/css" > 
+        <script language="javascript" type="text/javascript" src="jquery-1.3.2.min.js"></script>
 
 
+        <link rel="stylesheet" href="../../css/Css_DGP/chosen.css">
+        <script src="../../js/Js_DGP/abc.js"></script>
+        <script src="../../js/Js_DGP/organictabs.jquery.js"></script>
 
-            <link rel="stylesheet" href="../CSS/estilos.css">
-            <link rel="stylesheet" href="../CSS/chosen.css">
-            <link rel="stylesheet" href="../CSS/prism.css">
+        <SCRIPT LANGUAGE="JavaScript">
+            function checkIt(evt) {
+                evt = (evt) ? evt : window.event
+                var charCode = (evt.which) ? evt.which : evt.keyCode
+                if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                    status = "This field accepts numbers only."
+                    return false
+                }
+                status = ""
+                return true
+            }
+        </SCRIPT>
 
-            <link href="../CSS/layout.css" rel="stylesheet" type="text/css" />
-            <link href="../CSS/modal.css" rel="stylesheet" type="text/css" />
 
-        
-        <style type="text/css" media="all">
-            /* fix rtl for demo */
-            .chosen-rtl .chosen-drop { left: -9000px; }
+        <script language="javascript" type="text/javascript">
+            $(document).ready(function() {
+                $(".contenido").hide();
+          
+          /*TEMPORAL*/
+                 //Planilla
+                //if ($("#combito").val()=="REQ-0001" | $("#combito").val() == "REQ-0002" | $("#combito").val() == "REQ-0003" | $(this).val() == "REQ-0004" | $(this).val() == "REQ-0005" | $(this).val() == "REQ-0006") {
+                if (true) {
+                    $(".contenido").hide();
+                    $("#div_1").show();
+                }
+                //Fuera PLanilla
+                if ($("#combito").val() == 7 | $(this).val() == 8 | $(this).val() == 9) {
+                    $(".contenido").hide();
+                    $("#div_2").show();
+                }
+                //Otros
+                if ($("#combito").val() == 10 | $(this).val() == 11 | $(this).val() == 12) {
+                    $(".contenido").hide();
+                    $("#div_3").show();
+                }
+
+            });
+
+
+        </script>
+
+
+        <style>
+
+            .td{
+                font-weight: bold;
+            }
         </style>
-   
-      
+
+
+
+
+
     </head>
-    <style type="text/css">
-
-      
-         .table{
-             margin-top: 40px;
-             border-color: #000000; 
-             background: #dce1fd;
-             border-radius: 20px;
-             margin:20px;
-             border-color: blue;
-         }
-         .tables{
-             margin-top: 40px;
-             border-color: #000000; 
-             background: #98b4fd;
-             border-radius: 20px;
-             margin:20px;
-         }
-          .body {
-        
-          background-color: #EEE;
-        }
-        
-        
-th {
-  text-align: left;
-}
-
-.table {
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-.table thead > tr > th,
-.table tbody > tr > th,
-.table tfoot > tr > th,
-.table thead > tr > td,
-.table tbody > tr > td,
-.table tfoot > tr > td {
-  padding: 2px;
-  line-height: 1.428571429;
-  vertical-align: top;
-  border-top: 1px solid #dddddd;
-}
-
-.table thead > tr > th {
-  vertical-align: bottom;
-  border-bottom: 2px solid #dddddd;
-}
-
-.table caption + thead tr:first-child th,
-.table colgroup + thead tr:first-child th,
-.table thead:first-child tr:first-child th,
-.table caption + thead tr:first-child td,
-.table colgroup + thead tr:first-child td,
-.table thead:first-child tr:first-child td {
-  border-top: 0;
-}
-
-.table tbody + tbody {
-  border-top: 2px solid #dddddd;
-}
-
-.table .table {
-  background-color: #ffffff;
-}
-.btn {
-  display: inline-block;
-  padding: 6px 12px;
-  margin-bottom: 0;
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 1.428571429;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  cursor: pointer;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-       -o-user-select: none;
-          user-select: none;
-          color: white;
-          margin-top:17px;
-}
-
-.btn:focus {
-  outline: thin dotted #333;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px;
-}
-
-.btn:hover,
-.btn:focus {
-  color: #333333;
-  text-decoration: none;
-}
-
-.btn:active,
-.btn.active {
-  background-image: none;
-  outline: 0;
-  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-}
-
-
-.form-control:-moz-placeholder {
-  color: #999999;
-}
-
-.form-control::-moz-placeholder {
-  color: #999999;
-}
-
-.form-control:-ms-input-placeholder {
-  color: #999999;
-}
-
-.form-control::-webkit-input-placeholder {
-  color: #999999;
-}
-
-.form-control {
-  display: block;
-  width: 100%;
-  height: 25px;
-  padding: 6px 12px;
-  font-size: 14px;
-  line-height: 1.428571429;
-  color: #555555;
-  vertical-align: middle;
-  background-color: #ffffff;
-  border: 1px solid #cccccc;
-  border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-          transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-}
-
-.form-control:focus {
-  border-color: #66afe9;
-  outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
-}
-
-.tab td{margin:10px;padding: 10px;}
-.tab-a td{margin:4px;padding: 4px;}
-.tab-b td{margin:4px;padding: 4px;}
-.tab-c td{margin:2px;padding: 2px;}
-
-
-    </style>
-
-    <body>  
-         <div class="page-header">
-       <center><h1>DGP LABORAL</h1></center>
-        </div>
-    <center>
-         
-              <table  style="width: 1050px; "  class="table"  >
-             
-                  <?
-                  require_once '../Modelo/modelotrabajador.php';
-                  $mdtr=new modelotrabajador();
-                  $list_tr=$mdtr->ListarTrabajador();
-                  ?>
-                  <tr><td>Buscar Trabajador:</td><td>
-                          <select name="idtr"  >
-                           <option value=""></option>
-                           <?  for ($h = 0; $h < count($list_tr); $h++) {?>
-                           <option value="<?echo $list_tr[$h][0];?>"><?echo $list_tr[$h][1].' '.$list_tr[$h][2].' '.$list_tr[$h][3];?></option>
-                           <?}?>
-                       </select>
-                   </td>
-                   <td><td><div >
-            <div class="main" >
-            <div class="panel" >
-             
-            <p><a href="#login_form"  class="btn btn-sm btn-primary" >Ficha del trabajador</a></p> 
-     
-           <!-- <a href="#join_form" id="join_pop">Sign Up</a>  -->        
-            </div> 
-            </div>
-            
-            <a href="#x" class="overlay" id="login_form"></a>
-            <div class="popup">
-                <form action="../Control/ControlTrabajador.php" method="post">
-            <div id="page-wrap">
-        <div id="example-two">
-                <ul class="nav">
-                        <li class="nav-one"><a href="#featured2" class="current"> Datos Personales</a></li>
-                        <li class="nav-two"><a href="#core2">Familiares/Dependientes</a></li>
-                        <li class="nav-three"><a href="#jquerytuts2">Aspecto Academico</a></li>
-                        <li class="nav-four last"><a href="#classics2">Aspecto Social</a></li>
-                    </ul> 
-            <div class="list-wrap">
-                <div id="featured2">
-                    <div style="height: 350px;">
-                        <table class="tab">
-                       <!-- datos Generales -->
-                        </table>
-     
-                        </div>
-                    </div>
-                <div id="core2" class="hide">
-                    <div style="height: 350px;">
-                        <table class="tab-a">
-                       <!--datos personales -->
-                    </table>
-               
-                        </div>
-                    </div>
-                <div id="jquerytuts2" class="hide">
-                       <div style="height: 350px;">
-
-                    <table class="tab-b">
-                        <!-- datos academicos -->
-                    </table>
-                </fieldset>
-                    </div>
-                    </div>
-                <div id="classics2" class="hide">
-                   <div style="height: 350px;">
-
-                    <table class="tab-c">
-             <!--  datos adiciona>D-->
-                                
-                    </table>
-            
-                </div>
-                </div>
-              
-            </div>
-</div>            
-</div>            
-
-                <input type="hidden" name="idcontrato" value="1"  />            
-                <input type="hidden" name="idpuesto" value="1"  />            
-                
-            </form>
-                
-                     <a class="close" href="#close"></a>
-            </div>
-            </table>
-                
-                
-        </center>
-    
-  
- <? 
-                             require_once '../Modelo/ModeloRequerimiento.php';
-                             $mr= new ModeloRequerimiento();
-                             $lisre= $mr->ListarRequerimiento();
-                             $idd_t=$_REQUEST["idtr"];
-                           // echo $idd_t;
-                             
-                             require_once '../Modelo/ModeloRH_Puesto.php';
-                             $mod_pu=new ModelorRH_Puesto();
-                             $list_pu=$mod_pu->LISTA_RH_PUESTO();
-                             require_once '../Modelo/modelotrabajador.php';
-                             $mod_tr=new modelotrabajador();
-                             $lis_tr=$mod_tr->ListaridTrabajador($idd_t);
-                             
-                             ?>
+    <body>    
 
     <center>
-            <form class="form" action="../Control/ControlDGP.php"> 
-                
-                <table class="table" style="width:1050px; ">       
-                    <input type="hidden" name="IDDETALLE_DGP" class="text-box" >
-                    <tr><td>Fecha Desde:</td><td><input type="date" name="FEC_DESDE" class="text-box" ></td></tr>     
-                    <tr><td>Fecha Hasta:</td><td><input type="date" name="FEC_HASTA" class="text-box" ></td></tr>   
-                    <tr><td>Sueldo:</td><td><input type="text" name="SUELDO" class="text-box" ></td></tr>       
-                    <tr><td>Dias de Trabajo:</td><td><input type="text" name="DIAS_TRABAJO" class="text-box" ></td></tr>    
-                    <tr><td>Horario:</td><td><input type="text" name="HORARIO" class="text-box" ></td></tr>    
-                    <tr><td>Puesto:</td><td>
-                        <select name="IDPUESTO"  ata-placeholder="Elija un Pais..." class="chosen-select">
-                            <option value=""></option>
-                            <?  for ($k = 0; $k < count($list_pu); $k++) {?>
-                            <option value="<?echo $list_pu[$k][0];?>"><?echo $list_pu[$k][1];?></option>
-                            <?}?>
-                        </select></td></tr>   
-                    <tr><td>Requermiento:</td><td>
-                        <select name="IDREQUERIMIENTO" class="text-box" > 
-                            <option value=""></option>
-                                   <? for ($index = 0; $index < count($lisre); $index++) { ?>
-                               <option value="<? echo $lisre[$index][0];?>"><? echo $lisre[$index][1];?></option>
-                           <?}?>
-                        </select> 
-                    </td></tr>   
-                <? for ($j = 0; $j < count($lis_tr); $j++) {?>
-                <tr><td>Trabajador:</td><td><?echo $lis_tr[$j][1].' '.$lis_tr[$j][2].' '.$lis_tr[$j][3]; ?><input type="hidden" value="<? echo $idd_t;?>" name="IDDATOS_TRABAJADOR" class="text-box" ></td></tr>   
-                <?}?>    
-                <tr><td>Ruc:</td><td><input type="text" name="RUC" class="text-box" ></td></tr>    
-                    <tr><td>Lugar de Servicio:</td><td><input type="text" name="LUGAR_SERVICIO" class="text-box" ></td></tr>   
-                    <tr><td>Descripcion de Servicio:</td><td><input type="text" name="DESCRIPCION_SERVICIO" class="text-box" ></td></tr> 
-                    <tr><td>Periodo Pago:</td><td><input type="text" name="PERIODO_PAGO" class="text-box" ></td></tr>    
-                    <tr><td>Domicilio Fiscal:</td><td><input type="text" name="DOMICILIO_FISCAL" class="text-box" ></td></tr>    
-                    <tr><td>Subvencion:</td><td><input type="text" name="SUBVENCION" class="text-box" ></td></tr>   
-                    <tr><td>Horario de Capacitacion:</td><td><input type="text" name="HORARIO_CAPACITACION" class="text-box" ></td></tr>   
-                    <tr><td>Horario de Refrigerio:</td><td><input type="text" name="HORARIO_REFRIGERIO" class="text-box" ></td></tr>  
-                    <tr><td>Dias de Capacitacion:</td><td><input type="text" name="DIAS_CAPACITACION" class="text-box" ></td></tr>  
-               
-                    <input type="hidden" name="ESTADO" class="text-box" >
-                    <input type="hidden" name="USER_CREACION" class="text-box" >
-                    <input type="hidden" name="FECHA_CREACION" class="text-box" >
-                    <input type="hidden" name="USER_MODIF" class="text-box" > 
-                    <input type="hidden" name="FECHA_MODIF" class="text-box" >
-                    <input type="hidden" name="USUARIO_IP" class="text-box" >   
-                    <tr><td><input type="submit" name="opc"  class="submit" value="REGISTRAR DETALLE_DGP"></td></tr>
+        <label class="title"><%%></label>
+
+
+        <form class="form" action="../../dgp" method="post" > 
+            <div>
+                <table class="table"  >       
+
+
+                    <%
+                        /*Temporal*/
+                        String idreq=  request.getParameter("idreq");
+                        
+                        for (int i = 0; i < Listar_Trabajador_id.size(); i++) {
+                            Trabajador tr = new Trabajador();
+                            tr = (Trabajador) Listar_Trabajador_id.get(i);
+                    %>
+                    <tr><td>Trabajador:</td><td><%=tr.getAp_paterno() + " " + tr.getAp_materno() + " " + tr.getNo_trabajador()%><input type="hidden" value="<? echo $idd_t; ?>" name="IDDATOS_TRABAJADOR" class="text-box" ></td></tr>   
+                            <% }
+                        if (Listar_Trabajador_id.size() == 0) { %>   
+
+                    <%}%>
+
+                    <tr><td class="td">Puesto / Seccion / Area:</td><td>
+                            <select name="IDPUESTO"  required="" class="chosen-select">
+                                <option value=""></option>
+                               
+                                <%
+                                    for (int j = 0; j < List_Puesto.size(); j++) {
+                                        V_Puesto_Direccion p = new V_Puesto_Direccion();
+                                        p = (V_Puesto_Direccion) List_Puesto.get(j);
+                                        %>
+
+                                        <option value="<%=p.getId_puesto()%>"><% out.println(p.getNo_puesto() + " / " + p.getNo_seccion() + " / " + p.getNo_area());%></option> <%} %>
+
+                            </select></td></tr>   
+                    <tr style="display: "><td class="td">Requermiento:</td><td>
+                            <select name="IDREQUERIMIENTO"   onchange="mostrar()" class="chosen-select"  > 
+                                <option value=""></option>
+
+                                <% 
+                                        for(int index=0;index<Listar_Requerimiento.size();index++){
+                                        Requerimiento r=  new Requerimiento();
+                                        r=  (Requerimiento)Listar_Requerimiento.get(index);
+                                        if(idreq.equals(r.getId_requerimiento())){
+                                %>
+                                <option value="<%=r.getId_requerimiento()%>" selected="" ><%=r.getNo_req() %></option>
+
+                                <%}
+        else{%>
+                   <option value="<%=r.getId_requerimiento()%>"><%=r.getNo_req() %></option>                      
+        <%                          }                                
+        } %>
+                            </select> 
+                        </td></tr>   
+                    <input type="hidden" name="IDREQUERIMIENTO"  id="combito"  value="<% %>" >
+
+
+                    <tr><td class="td">Fecha Desde:</td><td><input type="date" name="FEC_DESDE" min="<%%>" required="" id="datepicker" class="text-box" ></td></tr>     
+
+                    <tr><td class="td">Fecha Hasta:</td><td><input type="date" required="" min="<%%>" name="FEC_HASTA" class="text-box" ></td></tr>   
+                    <tr><td class="td">Sueldo:</td><td><input type="text"  name="SUELDO" required="" class="text-box" ></td></tr>       
+                    <tr><td class="td">Bono Alimentario:</td><td><input  type="text"  required="" name="BONO_ALIMENTARIO" class="text-box" ></td></tr>       
+
                 </table>
-            </form>
+            </div>
+            <div id="div_1" class="contenido" style="display:none ">
+                <table class="table">
+                    <tr><td class="td">BEV:</td><td><input type="text" name="BEV" class="text-box" ></td></tr>    
+                    <tr><td class="td">Centro de Costos:</td><td>
+                            <select name="CENTRO_COSTOS">
+                                <option value="0">----</option>
+                            </select>
+                        </td></tr>    
+                    <tr><td class="td">Antecedentes Policiales:</td><td><input type="text" name="ANTECEDENTES_POLICIALES" class="text-box" ></td></tr>     
+                    <tr><td class="td">Certificado de Salud:</td><td><input type="text" name="CERTIFICADO_SALUD" class="text-box" ></td></tr>   
 
-       
-   
-        </center>
-      
-        
-       
+                </table>
+            </div>   
+
+            <div id="div_2" class="contenido" style="display: none">
+                <table  class="table">
+                    <tr><td class="td">Subvencion:</td><td><input type="text" name="SUBVENCION" class="text-box" ></td></tr>   
+                    <tr><td class="td">Horario de Capacitacion:</td><td><input type="text" name="HORARIO_CAPACITACION" class="text-box" ></td></tr>   
+                    <tr><td class="td">Horario de Refrigerio:</td><td><input type="text" name="HORARIO_REFRIGERIO" class="text-box" ></td></tr>  
+                    <tr><td class="td">Dias de Capacitacion:</td><td><input type="text" name="DIAS_CAPACITACION
+                                                                            " class="text-box" ></td></tr>  
+
+
+                </table>
+            </div  >
+
+            <div id="div_3" class="contenido" style="display:none ">
+                <table class="table">
+                    <tr><td class="td">Ruc:</td><td><input type="text" name="RUC" class="text-box" ></td></tr>    
+                    <tr><td class="td">Lugar de Servicio:</td><td><input type="text" name="LUGAR_SERVICIO" class="text-box" ></td></tr>   
+                    <tr><td class="td">Descripcion de Servicio:</td><td><input type="text" name="DESCRIPCION_SERVICIO" class="text-box" ></td></tr> 
+                    <tr><td class="td">Monto del Honorario:</td><td><input type="text" name="MONTO_HONORARIO" class="text-box" ></td></tr>   
+                    <tr><td class="td">Periodo Pago:</td><td><input type="text" name="PERIODO_PAGO" class="text-box" ></td></tr>    
+                    <tr><td class="td">Domicilio Fiscal:</td><td><input type="text" name="DOMICILIO_FISCAL" class="text-box" ></td></tr>    
+                </table>
+            </div>
+  
+            <input type="hidden" value="<%%>" name="USER_CREACION" class="text-box" >
+
+                   <input type="hidden" name="USER_MODIF" class="text-box" > 
+            <input type="hidden" name="FECHA_MODIF" class="text-box" >
+            <input type="hidden" name="USUARIO_IP" class="text-box" >   
+            <table><tr><td><input type="submit" name="opc"  class="submit" value="Registrar"></td></tr>
+            </table>
+        </form>
+    </center>
+    <br><br>
+
+
+
 </body>
- 
-    
-    
-         <script src="../js2/prism.jss" type="text/javascript" charset="utf-8"></script>
-        <script src="../js2/chosen.jquery.js" type="text/javascript"></script>
-        <script src="../JS/prism.js" type="text/javascript" charset="utf-8"></script>
-        <script type="text/javascript">
-                            var config = {
-                                '.chosen-select': {},
-                                '.chosen-select-deselect': {allow_single_deselect: true},
-                                '.chosen-select-no-single': {disable_search_threshold: 10},
-                                '.chosen-select-no-results': {no_results_text: 'Oops, nothing found!'},
-                                '.chosen-select-width': {width: "95%"}
-                            }
-                            for (var selector in config) {
-                                $(selector).chosen(config[selector]);
-                            }
+
+<script src="../../js/Js_DGP/prism.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/Js_DGP/chosen.jquery.js" type="text/javascript"></script>
+<script src="../JS/prism.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+                                var config = {
+                                    '.chosen-select': {},
+                                    '.chosen-select-deselect': {allow_single_deselect: true},
+                                    '.chosen-select-no-single': {disable_search_threshold: 10},
+                                    '.chosen-select-no-results': {no_results_text: 'Oops, nothing found!'},
+                                    '.chosen-select-width': {width: "95%"}
+                                }
+                                for (var selector in config) {
+                                    $(selector).chosen(config[selector]);
+                                }
 </script>
 
- <!--   <script src="../bootstrap-3.0.0/assets/js/jquery.js"></script>
-   
-  
- -->
- 
-  <script src="../bootstrap-3.0.0/dist/js/bootstrap.min.js"></script>
-   <script src="../bootstrap-3.0.0/assets/js/holder.js"></script>
-<!--
-<script src="../JS/jquery.min.js" type="text/javascript"></script>
-<script src="../JS/chosen.jquery.js" type="text/javascript"></script>
 
 
 
--->
 </html>

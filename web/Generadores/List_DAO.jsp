@@ -27,7 +27,7 @@ select table_name, SUBSTR(column_name,1,1)||SUBSTR(lower(column_name),2,length(c
 from user_tab_columns 
 where table_name = 'RHTD_PADRE_MADRE_CONYUGUE' order by table_name,column_id;
 */
-rs=stmt.executeQuery(" select * from List_Dao5");
+//rs=stmt.executeQuery(" select * from List_Dao5");
 %>
 <html>
     <head>
