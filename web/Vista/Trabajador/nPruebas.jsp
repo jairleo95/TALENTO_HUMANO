@@ -17,28 +17,21 @@
                     function() {
                         $("#date").change(
                                 function() {
-
-
                                     $("#s").text($("#date").val());
-
-
-
                                 }
-
                         );
                     }
-
-
             );
         </script>
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="../../dgp">
+        <form action="../../dgp" method="GET">
             <input type="date" id="date" name="date">
             
             <input type="hidden"  name="idtr" value="TRB-000175">
             <input type="hidden"  name="idreq" value="REQ-0001">
+            
             <input type="hidden"  name="iddep" value="DPT-0019">
             
             <input type="hidden"  name="opc" value="Reg_form">

@@ -10,8 +10,10 @@
     <center>
         <div class="spacing">
             <center><h1 class="spacing"><%
+                HttpSession sesion= request.getSession(true);
                 String idreq = "";
                 String text = request.getParameter("text");
+                String iddep=(String)sesion.getAttribute("DEPARTAMENTO_ID");
 
                 if (text.equals("1")) {
                     out.println("Requerimiento: Tiempo Completo");
@@ -46,6 +48,7 @@
                         <td>Apellido Paterno: <input type="text"  class="text-box"  name="ape_pat"></td>
                         <td>Apellidos Materno: <input type="text"  class="text-box"  name="ape_mat"></td>
                         <td>DNI : <input type="text" class="text-box" onKeyPress="return checkIt(event)" name="dni"></td>
+                        
                         <input type="hidden" name="opc" value="Buscar">
                         <input type="hidden" name="busc" value="Busc">
                         <input type="hidden" name="text" value="<%=text%>">
@@ -98,7 +101,7 @@
 
                     <td><div ><a href="Detalle_Trabajador.jsp?idtr=<? echo $listra[$index][0]; ?>"><%=tr.getAp_paterno() + " " + tr.getAp_materno() + " " + tr.getNo_trabajador()%></a></div></td>
                     <td>Carrera</td>
-                    <td><a href="../../dgp?idtr=<%=tr.getId_trabajador()%>&idreq=<%=idreq%>">Elaborar Requerimiento</a></td>
+                    <td><a href="../../dgp?idtr=<%=tr.getId_trabajador()%>&idreq=<%=idreq%>&iddep=<%=iddep%>&opc=Reg_form">Elaborar Requerimiento</a></td>
 
                 </tr>
                 <% //} %>

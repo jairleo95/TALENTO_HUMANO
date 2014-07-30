@@ -93,7 +93,8 @@ public class CDgp extends HttpServlet {
             dgp.INSERT_DGP(ID_DGP, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO, DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION, ES_DGP, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, CA_CENTRO_COSTOS, DE_ANTECEDENTES_POLICIALES, DE_CERTIFICADO_SALUD, DE_MONTO_HONORARIO);
         out.println("asdasdfasdfsdf");
 
-        } if(opc.equals("Reg_form")) {
+        }
+        if(opc.equals("Reg_form")) {
 
             
             /* TEMPORAL*/
@@ -107,14 +108,9 @@ public class CDgp extends HttpServlet {
                 idreq = "REQ-0003";
             }
 
-            /*  if (iddepa == null) {
-             getServletContext().setAttribute("List_Puesto", pu.List_Puesto());
-             } else*/
-            //if{
-            getServletContext().setAttribute("List_Puesto", pu.List_Puesto_Dep(iddepa));
-            //}
+          getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
+            getServletContext().setAttribute("List_Puesto", pu.List_Puesto_Dep(iddep));
             getServletContext().setAttribute("Listar_Trabajador_id", tr.ListaridTrabajador(idtr));
-
             response.sendRedirect("Vista/Dgp/Reg_Dgp.jsp?idreq=" + idreq);
         }
 
