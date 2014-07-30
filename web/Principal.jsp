@@ -6,15 +6,11 @@
 <%
     HttpSession sesion = request.getSession(true);
     String id_user = (String) sesion.getAttribute("IDUSER");
-    if (id_user != "") {
+    if (id_user !=null) {
 
         Usuario us = new Usuario();
 
-        //include './SYS_SEG_URL/CLEAN_URL.php';
-        /*require_once '../Modelo/modelorol.php';
-         $idrol = $_SESSION["IDROL"];
-         $w1 = new modelorol();
-         $lista3 = $w1->listarURL($idrol);
+        /* FALTA ESTA PARTE
          require_once '../Modelo/ModeloContrato.php';
          $modc=  new ModeloContrato();
          $modc->VENC_CONT();*/
@@ -28,13 +24,13 @@
         <meta http-equiv="Expires" content="0" />
         <meta http-equiv="Pragma" content="no-cache" />
         <title>Principal</title>
-        <link rel="stylesheet" href="css/styles.css" />
-        <link rel="stylesheet" href="css/font-awesome.css" />
+        <link rel="stylesheet" href="css/Css_Principal/styles.css" />
+        <link rel="stylesheet" href="css/Css_Principal/font-awesome.css" />
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700,300italic" />
-        <link rel="stylesheet" href="css/principal.css" />
+        <link rel="stylesheet" href="css/Css_Principal/principal.css" />
 
-        <script type="text/javascript" src="js/jquery.autoheight.js"></script>
-        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/JQuery/jquery.autoheight.js"></script>
+        <script type="text/javascript" src="js/JQuery/jQuery.js"></script>
 
         <link href="imagenes/guia.gif" rel="shortcut icon"/>
 
@@ -182,7 +178,7 @@
         </nav>
         <hr style="border: 1px solid #d0d2d3; height: 2px; background-color: #EEEEEE; margin-top: 10px;">
             <iframe name="contenido1" id="contenido1"  class="autoHeight" src="Vista/inicio.jsp" width="100%"   height="100%" frameborder="0" align="center" transparency="transparency"></iframe>
-            <script src="js/jquery-1.10.2.min.js"></script> 
+            <script src="js/JQuery/jQuery.js"></script> 
 
 
     </body>

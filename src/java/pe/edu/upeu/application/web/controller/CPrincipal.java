@@ -16,9 +16,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import pe.edu.upeu.application.dao.DgpDAO;
+import pe.edu.upeu.application.dao.ListaDAO;
 import pe.edu.upeu.application.dao.RolDAO;
+import pe.edu.upeu.application.dao.TrabajadorDAO;
+import pe.edu.upeu.application.dao.UbigeoDAO;
 import pe.edu.upeu.application.dao.UsuarioDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRolDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceUbigeoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO;
 import pe.edu.upeu.application.model.V_Usuario;
 
@@ -44,6 +52,12 @@ public class CPrincipal extends HttpServlet {
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        
+         InterfaceListaDAO li = new ListaDAO();
+            InterfaceDgpDAO dgp = new DgpDAO();
+            InterfaceUbigeoDAO ub = new UbigeoDAO();
+            InterfaceTrabajadorDAO tr = new TrabajadorDAO();
+        
         try {
 
             String opc = request.getParameter("opc");
@@ -69,7 +83,14 @@ public class CPrincipal extends HttpServlet {
                     
                     InterfaceRolDAO Irol = new RolDAO();
                     getServletContext().setAttribute("listarURL", Irol.listarURL(user.getId_rol()));
+                    
+                getServletContext().setAttribute("List_Carrera", li.List_Carrera());
 
+                getServletContext().setAttribute("List_Nacionalidad", li.List_Nacionalidad());
+                getServletContext().setAttribute("List_Universidad", li.List_Universidad());
+                getServletContext().setAttribute("List_Distrito", ub.List_Distrito());
+                    
+                    
                     RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Principal.jsp");
                     dispatcher.forward(request, response);
                     //response.sendRedirect("Principal.jsp");

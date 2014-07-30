@@ -226,8 +226,9 @@ public class DgpDAO implements InterfaceDgpDAO {
         try {
             ResultSet rs = this.conn.query(sql);
             List<DGP> Lista = new ArrayList<DGP>();
-            DGP x = new DGP();
+            
             while (rs.next()) {
+                DGP x = new DGP();
                 x.setId_dgp(rs.getString("id_dgp"));
                 x.setFe_desde(rs.getString("fe_desde"));
                 x.setFe_hasta(rs.getString("fe_hasta"));
@@ -304,16 +305,18 @@ public class DgpDAO implements InterfaceDgpDAO {
         List<X_val_tra_dgp> Lista = new ArrayList<X_val_tra_dgp>();
         try {
             ResultSet rs = this.conn.query(sql);
-            X_val_tra_dgp X = new X_val_tra_dgp();
+           
             while (rs.next()) {
+                 X_val_tra_dgp X = new X_val_tra_dgp();
                 X.setTotal(rs.getString("total"));
                 X.setId_dgp(rs.getString("id_dgp"));
             }
         } catch (SQLException e) {
         } finally {
             this.conn.close();
-            return Lista;
+          
         }
+          return Lista;
     }
 
     @Override

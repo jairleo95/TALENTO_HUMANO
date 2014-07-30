@@ -3,8 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-            <link type="text/css" rel="stylesheet" href="../CSS/CSS_DETALLE.css">
-        
+<link type="text/css" rel="stylesheet" href="../../css/Css_Detalle/CSS_DETALLE.css">        
         <title>Aspecto Social</title>
    
     </head>

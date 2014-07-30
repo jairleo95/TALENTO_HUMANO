@@ -33,8 +33,9 @@ public class ListaDAO implements InterfaceListaDAO {
         List<Nacionalidad> list = new ArrayList<Nacionalidad>();
         try {
             ResultSet rs = this.conn.query(sql);
-            Nacionalidad n = new Nacionalidad();
+          
             while (rs.next()) {
+                  Nacionalidad n = new Nacionalidad();
                 n.setId_nacionalidad(rs.getString("id_nacionalidad"));
                 n.setNo_nacionalidad(rs.getString("no_nacionalidad"));
                 list.add(n);
@@ -53,8 +54,9 @@ public class ListaDAO implements InterfaceListaDAO {
         List<Proceso> list = new ArrayList<Proceso>();
         try {
             ResultSet rs = this.conn.query(sql);
-            Proceso p = new Proceso();
+          
             while (rs.next()) {
+                  Proceso p = new Proceso();
                 p.setDe_proceso(rs.getString("de_proceso"));
                 p.setId_proceso(rs.getString("id_proceso"));
                 p.setNo_proceso(rs.getString("no_proceso"));
@@ -74,8 +76,9 @@ public class ListaDAO implements InterfaceListaDAO {
         List<Carrera> list = new ArrayList<Carrera>();
         try {
             ResultSet rs = this.conn.query(sql);
-            Carrera c = new Carrera();
+           
             while (rs.next()) {
+                 Carrera c = new Carrera();
                c.setId_carrera(rs.getString("id_carrera"));
                c.setNo_carrera(rs.getString("no_carrera"));               
                 list.add(c);
@@ -94,8 +97,9 @@ public class ListaDAO implements InterfaceListaDAO {
         List<Universidad> list = new ArrayList<Universidad>();
         try {
             ResultSet rs = this.conn.query(sql);
-            Universidad u = new Universidad();
+            
             while (rs.next()) {
+                Universidad u = new Universidad();
                 u.setId_universidad(rs.getString("id_universidad"));
                 u.setNo_universidad(rs.getString("no_universidad"));
                 list.add(u);
@@ -114,8 +118,9 @@ public class ListaDAO implements InterfaceListaDAO {
         List<Auto_Mostrar> list = new ArrayList<Auto_Mostrar>();
         try {
             ResultSet rs = this.conn.query(sql);
-            Auto_Mostrar am = new Auto_Mostrar();
+           
             while (rs.next()) {
+                 Auto_Mostrar am = new Auto_Mostrar();
                 am.setDi_url(rs.getString("di_url"));
                 am.setId_auto_mostrar(rs.getString("id_auto_mostrar"));
                 am.setId_rol(rs.getString("id_rol"));

@@ -80,7 +80,7 @@
                 out.print("<br>");
                 out.print("@Override");
                 out.print("<br>");
-                out.print(" public void INSERT_" + List1[f][0].substring(4).toUpperCase()  + " (");
+                out.print(" public void INSERT" + List1[f][0].substring(4).toUpperCase()  + " (");
 
                 for (int s = 0; s < List2.length; s++) {
                        
@@ -130,7 +130,7 @@
                         out.print( "cst.setString("+l+","+List2[h][1] + "); " );
                         if (List2[h][4].equals(List1[f][1])==false) {
                         } else {
-                            out.println(" cst.execute();} catch (SQLException ex) {}}");
+                            out.println(" cst.execute();} catch (SQLException ex) {}finally {this.conn.close();}}");
                         }
                     }
                 }

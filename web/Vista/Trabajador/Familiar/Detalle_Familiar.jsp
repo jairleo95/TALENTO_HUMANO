@@ -3,8 +3,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <link type="text/css" rel="stylesheet" href="../CSS/CSS_DETALLE.css">
-        <link type="text/css" rel="stylesheet" href="../CSS/style.css"> 
+<link type="text/css" rel="stylesheet" href="../../../css/Css_Detalle/CSS_DETALLE.css">
+<link type="text/css" rel="stylesheet" href="../../../css/Css_Detalle/style.css"> 
         <title>Familiares</title>
   
     </head>
@@ -77,7 +77,7 @@
         <center>
             <label>Aun no se ha registrado los datos del familiar</label>
             <?  if ($_SESSION["IDROL"]==2) {?>
-            <a href="Reg_Padre_Madre_Conyugue.php?idtr=<?echo $id?>">Registrar</a>
+            <a href="Reg_Padre_Madre_Conyugue.jsp?idtr=<?echo $id?>">Registrar</a>
             <?}?>
         </center>
         <? } ?>
@@ -96,14 +96,14 @@
 ?>
             <?  include './List_datos_hijos_trabajador.php';?>
                 <? if ($_SESSION["IDROL"]==2) {?>
-<a href="Reg_datos_hijos.php?idtr=<?echo $id;?>" class="button blue">Agregar un hijo</a>
+                <a href="Reg_Datos_Hijo.jsp?idtr=<?echo $id;?>" class="button blue">Agregar un hijo</a>
                     <?}?>
             <?}else{?>
 
 <label>No se ha registrado ningun Hijo(a)</label><br>
 
 <?  if ($_SESSION["IDROL"]==2) {?>
-<a href="Reg_datos_hijos.php?idtr=<?echo $id;?>" class="">Registrar</a>
+<a href="Reg_Datos_Hijo.jsp?idtr=<?echo $id;?>" class="">Registrar</a>
 <?}?>
 </center>
                 <?}?>

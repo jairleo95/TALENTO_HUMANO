@@ -60,7 +60,7 @@ and open the template in the editor.
             <?}?>
        
         <?  if ($_REQUEST["P2"]==true) {?>
-        <a href="DetalleDGP.php?iddgp=<?echo $_REQUEST["iddgp"]; ?>&idtr=<?echo $_REQUEST["idtr"];?>&opc=rd">Continuar</a>
+        <a href="../Detalle_Dgp.jsp?iddgp=<?echo $_REQUEST["iddgp"]; ?>&idtr=<?echo $_REQUEST["idtr"];?>&opc=rd">Continuar</a>
         <?}?>
  
 

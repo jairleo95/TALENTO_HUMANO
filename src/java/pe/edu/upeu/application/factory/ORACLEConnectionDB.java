@@ -28,7 +28,7 @@ public final class ORACLEConnectionDB extends ConexionBD{
         String password = "alfa";
         String host = "localhost";
         String puerto = "1521";
-        String sid = "orcl";
+        String sid = "ORCL";
         String driver = "oracle.jdbc.driver.OracleDriver";
         //String url = "jdbc:oracle:thin:" + this.parametro[0] + "/" + this.parametro[1] + "@" + host + ":" + puerto + ":" + this.parametro[2];
         String url = "jdbc:oracle:thin:" + usuario + "/" + password + "@" + host + ":" + puerto + ":" + sid;

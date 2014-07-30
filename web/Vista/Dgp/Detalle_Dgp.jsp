@@ -5,9 +5,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <link href="bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet">
-        <link href="bootstrap-3.0.0/dist/css/bootstrap-theme.min.css" rel="stylesheet">
-        <link href="bootstrap-3.0.0/examples/theme/theme.css" rel="stylesheet">
+        <link href="../../css/Css_Bootstrap/bootstrap.css" rel="stylesheet">
+        <link href="../../css/Css_Bootstrap/bootstrap-theme.min.css" rel="stylesheet">
         <title>Detalle DGP</title>
         
         <style type="text/css">
@@ -66,7 +65,7 @@
                 }
             }
             ?></td></tr>
-             <tr><td class="td-det">Horario:</td><td><a href="Detalle_Horario.php?iddgp=<?echo $iddgp; ?>">Ver Horario</a></td></tr>
+             <tr><td class="td-det">Horario:</td><td><a href="Horario/Detalle_Horario.jsp?iddgp=<?echo $iddgp; ?>">Ver Horario</a></td></tr>
              
              </tr>
              <tr><td class="td-det">BEV: </td><td><?echo $list[$index][26];?></td></tr>
@@ -120,7 +119,7 @@
              
             <?  if ($_REQUEST["opc"]=="rd") {?>
              <tr><td><h3>Registrar documentos</h3>
-                     <a href="RegistrarDocumento.php?iddgp=<?echo $iddgp; ?>&idtr=<?echo $idtr;?>">Siguiente</a></td></tr>
+                     <a href="Documento/Reg_Documento.jsp?iddgp=<?echo $iddgp; ?>&idtr=<?echo $idtr;?>">Siguiente</a></td></tr>
                 <?}?>
         </table>
             </form>

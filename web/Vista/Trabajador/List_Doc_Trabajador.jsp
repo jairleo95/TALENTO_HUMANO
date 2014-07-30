@@ -7,7 +7,7 @@ error_reporting(0);
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <title>Documentos</title>
-        <link rel="stylesheet" href="../CSS/listas.css" />
+        <link rel="stylesheet" href="../../css/Css_Lista/listas.css" />
           <style type="text/css">
             
             

@@ -1,16 +1,17 @@
-
+<jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 
         <title>Datos generales</title>
-        <link type="text/css" rel="stylesheet" href="../CSS/CSS_DETALLE.css">
+        <link type="text/css" rel="stylesheet" href="../../css/Css_Detalle/CSS_DETALLE.css">
     </head>
     
     <body>
     
         <?
+        
         require_once '../Modelo/modelotrabajador.php';
         $mtr=new modelotrabajador();
         $id=$_REQUEST["idtr"];
@@ -19,31 +20,11 @@
         ?>
         <form method="post" action="">
         <table class="tables">
-            <? for ($index = 0; $index < count($list); $index++) {?>
             
-            <tr><td class="text-info">Nacionalidad:</td><td> 
-                        <?
-                                    require_once '../Modelo/ModeloLista.php';
-                                    $mod_list= new ModeloLista();
-                                    $l_nac=$mod_list->LISTA_NACIONALIDAD();
-                        for ($h = 0; $h < count($l_nac); $h++) {
-                            if ($list[$index][8]==$l_nac[$h][0]) {
-                            echo $l_nac[$h][1];
-                            }
-                        } ?>
-                    </td></tr>
-              <!--   <tr><td>Departamento:</td><td><? echo $list[$index][9]?></td></tr>
-                <tr><td>Provincia:</td><td><? echo $list[$index][10]?></td></tr>-->
-               <tr><td  class="text-info">Distrito:</td><td><? 
-   require_once '../Modelo/ModeloUbigeo.php';
-        $md=new ModeloUbigeo();               
-        $l_dis=$md->ListarDistrito();
-        for ($u = 0; $u < count($l_dis); $u++) {
-            if ($list[$index][11]==$l_dis[$u][0]) {
-                echo $l_dis[$u][1];
-            }
-        }      ?>
-                   </td></tr>
+            <%for(int index = 0;index<ListaridTrabajador.size();index++){%>           
+            <tr><td class="text-info">Nacionalidad:</td><td></td></tr>
+      
+               <tr><td  class="text-info">Distrito:</td><td></td></tr>
                  <tr><td  class="text-info">Tipo Documento:</td><td><?
                  $doc=$mod_list->LISTA_DOC();
                  for ($t = 0; $t < count($doc); $t++) {
@@ -119,7 +100,7 @@
                 ?></td></tr>
               
                 <tr><td colspan="2"></td><td><input class="btn btn-success"  type="submit" value="Editar"></td></tr>
-            <?}?>
+          <%}%>
         </table>
         </form>
     

@@ -8,15 +8,14 @@ session_start();
         <meta charset="windows-1252">
         <title></title>
         
-        <link rel="stylesheet" href="../CSS/form.css"  type="text/css" > 
-         <script language="javascript" type="text/javascript" src="../JS/jquery-1.10.2.min.js"></script>
+        <link rel="stylesheet" href="../../../css/Css_Formulario/form.css"  type="text/css" > 
+        <script language="javascript" type="text/javascript" src="../../../js/JQuery/jQuery.js"></script>
         
         <script type="text/javascript">
         $(document).ready(
                 
             function (){
                 $("#as").focus();
-                
             }    
             );
         </script>

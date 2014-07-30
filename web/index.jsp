@@ -12,14 +12,14 @@
         <title>.: RRHH :.</title>
 
 
-        <link rel="stylesheet" href="css/styleN.css" type="text/css" />
-        <link rel="stylesheet" href="css/Mensajes/Mensaje.css" type="text/css" />
+        <link rel="stylesheet" href="css/Css_Logueo/styleN.css" type="text/css" />
+        <link rel="stylesheet" href="css/Css_Alerta/Mensaje.css" type="text/css" />
         <script language="JavaScript" type="text/javascript">
             javascript:window.history.forward(1); //Esto es para cuando le pulse al botón de Atrás
             javascript:window.history.back(1); //Esto para cuando le pulse al botón de Adelante
 
         </script>
-        <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="js/JQuery/jQuery.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {
                 setTimeout(function() {
@@ -27,9 +27,9 @@
                 }, 3000);
             });
         </script>
-        <script type="text/javascript" src="css/Mensajes/Alertas/alertify.js"></script>
-        <link rel="stylesheet" href="css/Mensajes/Alertas/alertify.core.css" />
-        <link rel="stylesheet" href="css/Mensajes/Alertas/alertify.default.css" />
+        <script type="text/javascript" src="js/Js_Alerta/alertify.js"></script>
+        <link rel="stylesheet" href="css/Css_Alerta/alertify.core.css" />
+        <link rel="stylesheet" href="css/Css_Alerta/alertify.default.css" />
 
 
 
@@ -75,7 +75,7 @@
             }
         </script>
 
-        <script type="text/javascript"  src="css/Mensajes/Alertas/Alertas.js"></script>
+        <script type="text/javascript"  src="js/Js_Alerta/Alertas.js"></script>
 
 
 
@@ -113,8 +113,9 @@
             Universidad Peruana Unión - Recursos Humanos © 2014 
         </div>
     </body>
-    <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="validator-master/multifield.js">< /script   >
-                    < script src = "validator-master/validator.js" ></script>
+    <script src="js/JQuery/jQuery.js"></script>
+    <script src="js/Js_Validar/multifield.js"></script>
+
+    <script src = "js/Js_Validar/validator.js" ></script>
 
 </html>

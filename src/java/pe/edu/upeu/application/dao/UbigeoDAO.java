@@ -31,8 +31,9 @@ public class UbigeoDAO implements InterfaceUbigeoDAO {
         List<V_Ubigeo> list = new ArrayList<V_Ubigeo>();
         try {
             ResultSet rs = this.conn.query(sql);
-            V_Ubigeo vp = new V_Ubigeo();
+
             while (rs.next()) {
+                V_Ubigeo vp = new V_Ubigeo();
                 vp.setId_distrito(rs.getString("id_distrito"));
                 vp.setNo_departamento(rs.getString("no_departamento"));
                 vp.setNo_distrito(rs.getString("no_distrito"));
@@ -76,8 +77,8 @@ public class UbigeoDAO implements InterfaceUbigeoDAO {
             ResultSet rs = this.conn.query(sql);
             Ub_Departamento d = new Ub_Departamento();
             while (rs.next()) {
-               d.setId_departamento(rs.getString("id_departamento"));
-               d.setNo_departamento(rs.getString("no_departamento"));
+                d.setId_departamento(rs.getString("id_departamento"));
+                d.setNo_departamento(rs.getString("no_departamento"));
                 list.add(d);
             }
         } catch (SQLException e) {

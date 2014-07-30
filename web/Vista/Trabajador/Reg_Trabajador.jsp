@@ -1,8 +1,17 @@
+<%@page import="pe.edu.upeu.application.model.Universidad"%>
+<%@page import="pe.edu.upeu.application.model.Carrera"%>
+<%@page import="pe.edu.upeu.application.model.V_Ubigeo"%>
+<%@page import="pe.edu.upeu.application.model.Nacionalidad"%>
 <%
     HttpSession sesion = request.getSession(true);
     String iddep = (String) request.getAttribute("DEPARTAMENTO_ID");
+    String iduser = (String) request.getAttribute("IDUSER");
 
 %>
+<jsp:useBean id="List_Nacionalidad" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Distrito" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Carrera" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Universidad" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html >
 <html>
     <head>
@@ -16,8 +25,8 @@
 
 
         <script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
-        <link rel="stylesheet" href="../../css/Alertas/alertify.core.css" />
-        <link rel="stylesheet" href="../../css/Alertas/alertify.default.css" />
+        <link rel="stylesheet" href="../../css/Css_Alerta/alertify.core.css" />
+        <link rel="stylesheet" href="../../css/Css_Alerta/alertify.default.css" />
         <script type="text/javascript"  src="../../js/Js_Alerta/Alertas.js"></script>
 
 
@@ -111,21 +120,6 @@
 
     </head>
     <body>
-
-        <?
-        require_once '../Modelo/ModeloUbigeo.php';
-        require_once '../Modelo/ModeloLista.php';
-        $md=new ModeloUbigeo();
-        $mdl=new ModeloLista();
-
-        $list_dis=$md->ListarDistrito();
-        $list_d=$md->ListarDistrito();
-        $list_distrito=$md->ListarDistrito();
-
-        $lis_nacionalidad=$mdl->LISTA_NACIONALIDAD();
-        $lis_carrera=$mdl->LISTA_CARRERA();
-        $lis_universidad=$mdl->LISTA_UNIVERSIDAD();
-        ?>
         <br>
     <center>
         <script type="text/javascript">
@@ -139,7 +133,7 @@
 
         <br>
         <br>
-        <form class="form" action="../Control/ControlTrabajador.php" method="post" novalidate="" > 
+        <form class="form" action="../../trabajador" method="post" novalidate="" > 
 
             <table class="table" >      
 
@@ -210,19 +204,26 @@
                 <tr><td>Nacionalidad:</td><td>
                         <select name="NACIONALIDAD" class="text-box chosen-select"   required="">
                             <option value="" > </option>
-                            <?  for ($s = 0; $s < count($lis_nacionalidad); $s++) {?>
-                            <?  if ($lis_nacionalidad[$s][0]==44) {?>
-                            <option value="<? echo $lis_nacionalidad[$s][0];?>" selected="selected" ><? echo $lis_nacionalidad[$s][1];?> </option>
-                            <?}else{?>
-                            <option value="<? echo $lis_nacionalidad[$s][0];?>" ><? echo $lis_nacionalidad[$s][1];?> </option>
-                            <?}}?>
+                            <%for (int s = 0; s < List_Nacionalidad.size(); s++) {
+                                    Nacionalidad nac = new Nacionalidad();
+                                    nac = (Nacionalidad) List_Nacionalidad.get(s);
+                                    if (nac.getId_nacionalidad().equals("NAC-0044")) {
+                            %>
+                            <option value="<%=nac.getId_nacionalidad()%>" selected="selected" ><%=nac.getNo_nacionalidad()%></option>
+                            <%} else {%>
+                            <option value="<%=nac.getId_nacionalidad()%>" ><%=nac.getNo_nacionalidad()%></option>
+                            <%}
+                                }%>
                         </select></td></tr>  
                 <tr><td>Distrito:</td><td>
                         <select name="DISTRITO" class="text-box chosen-select"  required="">
                             <option value="" >-----</option>
-                            <?  for ($index = 0; $index < count($list_dis); $index++) {?>
-                            <option value="<? echo $list_dis[$index][0];?>"><?  echo $list_dis[$index][1];?></option>
-                            <?}?>
+                            <%for (int index = 0; index < List_Distrito.size(); index++) {
+                                    V_Ubigeo ub_dist = new V_Ubigeo();
+                                    ub_dist = (V_Ubigeo) List_Distrito.get(index);
+                            %>
+                            <option value="<%=ub_dist.getId_distrito()%>"><%=ub_dist.getNo_distrito()%></option>
+                            <%}%>
                         </select>
 
                     </td></tr> 
@@ -346,7 +347,7 @@
                     </td></tr>   
                 <tr><td>Titulo Profesional:</td><td>
                         <div class="item">
-                            <select name="TITULO_PROFESIONA" class="text-box"  required="">
+                            <select name="TITULO_PROFESIONAL" class="text-box"  required="">
                                 <option value="">---------</option>
                                 <option value="1">Ninguno</option>
                                 <option value="2">Titulo Profesional</option>
@@ -358,9 +359,12 @@
                         <div class="item0">
                             <select name="CARRERA" class="text-box chosen-select required" required="">
                                 <option value=""></option>
-                                <?  for ($r = 0; $r < count($lis_carrera); $r++) {?>
-                                <option value="<? echo $lis_carrera[$r][0];?>"><?echo $lis_carrera[$r][1];?></option>
-                                <?}?>
+                                <%for (int r = 0; r < List_Carrera.size(); r++) {
+                                        Carrera c = new Carrera();
+                                        c = (Carrera) List_Carrera.get(r);
+                                %>
+                                <option value="<%=c.getId_carrera()%>"><%=c.getNo_carrera()%></option>
+                                <%}%>
                             </select>
                         </div>
                     </td></tr>
@@ -369,9 +373,13 @@
                         <div class="item0">
                             <select name="CENTRO_DE_ESTUDIO" class="text-box chosen-select required"  required=""> 
                                 <option value=""></option>
-                                <?  for ($h = 0; $h < count($lis_universidad); $h++) {?>
-                                <option value="<? echo $lis_universidad[$h][0];?>"><?echo $lis_universidad[$h][1];?></option>
-                                <?}?>
+
+                                <%for (int h = 0; h < List_Universidad.size(); h++) {
+                                        Universidad u = new Universidad();
+                                        u = (Universidad) List_Universidad.get(h);
+                                %>
+                                <option value="<%=u.getId_universidad()%>"><%=u.getNo_universidad()%></option>
+                                <%}%>
                             </select>
                         </div>
                     </td></tr>
@@ -429,10 +437,15 @@
                         <div class="item0">
                             <select name="DIR_DOM_A_DISTRITO_ID" id="DOM_A_DISTRITO" class="chosen-select required" required="">
                                 <option value="">----------</option>
-                                <? for ($ff = 0; $ff < count($list_distrito); $ff++) {?>
-                                <option value="<? echo $list_distrito[$ff][0];?>"><? echo $list_distrito[$ff][1]." / ".$list_distrito[$ff][2]." / ".$list_distrito[$ff][0];?></option>
-                                <?}?></select></div><button onclick="duplicar();
-                                  return false;" class="btn-duplicar" >duplicar</button></td></tr>
+                                <%for (int ff = 0; ff < List_Distrito.size(); ff++) {
+                                        V_Ubigeo ub = new V_Ubigeo();
+                                        ub = (V_Ubigeo) List_Distrito.get(ff);
+                                %>
+                                <option value="<%=ub.getId_distrito()%>"><%=ub.getNo_distrito()%></option>
+                                <%}%></select>
+                        </div>
+                        <button onclick="duplicar();
+                                        return false;" class="btn-duplicar" >duplicar</button></td></tr>
 
 
 
@@ -492,9 +505,12 @@
                         <div class="item">
                             <select name="DIR_DOM_LEG_DISTRITO_ID"   id="DOM_LEG_DISTRITO" class="text-box required" required="">
                                 <option value="">----------</option>
-                                <?  for ($i = 0; $i < count($list_d); $i++) {?>
-                                <option value="<? echo $list_d[$i][0];?>"><? echo $list_d[$i][1]." / ".$list_d[$i][2]." / ".$list_d[$i][3];?></option>
-                                <?}?>
+                                <%for (int i = 0; i < List_Distrito.size(); i++) {
+                                        V_Ubigeo ub = new V_Ubigeo();
+                                        ub = (V_Ubigeo) List_Distrito.get(i);
+                                %>
+                                <option value="<%=ub.getId_distrito()%>"><%=ub.getNo_distrito()%></option>
+                                <%}%> 
                             </select></div>
                     </td></tr>
                 <tr><td colspan="4"><div class="sub_title"><label class="label">Ingresos de Quinta Categoria</label></div></td></tr>
@@ -525,8 +541,8 @@
                 <tr><td>Nombres y Apellidos:</td><td><input type="text" name="AUT_APELLIDOSNOMBRES" class="text-box" ></td></tr> 
                 <tr><td>Telefono/Celular:</td><td><input type="text" name="AUT_CELULAR" class="text-box" ></td></tr>   
                 <tr><td>Observaciones:</td><td> <textarea  name="OBSERVACIONES" class="text-box" cols="60" rows="6"></textarea></td></tr> 
-                <input type="hidden" value="<? echo $_SESSION["IDUSUARIO"];?>" name="USER_CREACION" class="text-box" >
-                       <input type="hidden" value="" name="FECHA_CREACION" class="text-box" >
+                <input type="hidden" value="<%=iduser%>" name="USER_CREACION" class="text-box" >
+                <input type="hidden" value="" name="FECHA_CREACION" class="text-box" >
                 <input type="hidden" value="" name="USUARIO_IP" class="text-box" >
                 <tr><td colspan="2"><input type="submit" name="opc"  class="submit" value="Registrar"></td></tr> 
             </table></form></center><br><br>
@@ -536,60 +552,60 @@
 <script src="../../js/chosen.jquery.js" type="text/javascript"></script>
 <script src="../../js/prism.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
-                      var config = {
-                          '.chosen-select': {},
-                          '.chosen-select-deselect': {allow_single_deselect: true},
-                          '.chosen-select-no-single': {disable_search_threshold: 10},
-                          '.chosen-select-no-results': {no_results_text: 'Oops, nothing found!'},
-                          '.chosen-select-width': {width: "95%"}
-                      }
-                      for (var selector in config) {
-                          $(selector).chosen(config[selector]);
-                      }
+                                    var config = {
+                                        '.chosen-select': {},
+                                        '.chosen-select-deselect': {allow_single_deselect: true},
+                                        '.chosen-select-no-single': {disable_search_threshold: 10},
+                                        '.chosen-select-no-results': {no_results_text: 'Oops, nothing found!'},
+                                        '.chosen-select-width': {width: "95%"}
+                                    }
+                                    for (var selector in config) {
+                                        $(selector).chosen(config[selector]);
+                                    }
 </script>
 <script src="../../js/Js_Validar/multifield.js"></script>
 <script src="../../js/Js_Validar/validator.js"></script>
 <script>
-                          // initialize the validator function
-                          validator.message['date'] = 'not a real date';
+                                    // initialize the validator function
+                                    validator.message['date'] = 'not a real date';
 
-                          // validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
-                          $('form')
-                                  .on('blur', 'input[required], input.optional, select.required', validator.checkField)
-                                  .on('change', 'select.required', validator.checkField)
-                                  .on('keypress', 'input[required][pattern]', validator.keypress);
+                                    // validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
+                                    $('form')
+                                            .on('blur', 'input[required], input.optional, select.required', validator.checkField)
+                                            .on('change', 'select.required', validator.checkField)
+                                            .on('keypress', 'input[required][pattern]', validator.keypress);
 
-                          $('.multi.required')
-                                  .on('keyup blur', 'input', function() {
-                                      validator.checkField.apply($(this).siblings().last()[0]);
-                                  });
+                                    $('.multi.required')
+                                            .on('keyup blur', 'input', function() {
+                                                validator.checkField.apply($(this).siblings().last()[0]);
+                                            });
 
-                          // bind the validation to the form submit event
-                          //$('#send').click('submit');//.prop('disabled', true);
+                                    // bind the validation to the form submit event
+                                    //$('#send').click('submit');//.prop('disabled', true);
 
-                          $('form').submit(function(e) {
-                              e.preventDefault();
-                              var submit = true;
-                              // evaluate the form using generic validaing
-                              if (!validator.checkAll($(this))) {
-                                  submit = false;
-                              }
+                                    $('form').submit(function(e) {
+                                        e.preventDefault();
+                                        var submit = true;
+                                        // evaluate the form using generic validaing
+                                        if (!validator.checkAll($(this))) {
+                                            submit = false;
+                                        }
 
-                              if (submit)
-                                  this.submit();
-                              return false;
-                          });
+                                        if (submit)
+                                            this.submit();
+                                        return false;
+                                    });
 
-                          /* FOR DEMO ONLY */
-                          $('#vfields').change(function() {
-                              $('form').toggleClass('mode2');
-                          }).prop('checked', false);
+                                    /* FOR DEMO ONLY */
+                                    $('#vfields').change(function() {
+                                        $('form').toggleClass('mode2');
+                                    }).prop('checked', false);
 
-                          $('#alerts').change(function() {
-                              validator.defaults.alerts = (this.checked) ? false : true;
-                              if (this.checked)
-                                  $('form .alert').remove();
-                          }).prop('checked', false);
+                                    $('#alerts').change(function() {
+                                        validator.defaults.alerts = (this.checked) ? false : true;
+                                        if (this.checked)
+                                            $('form .alert').remove();
+                                    }).prop('checked', false);
 </script>
 
 <script type="text/javascript">

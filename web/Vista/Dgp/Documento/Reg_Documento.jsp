@@ -1,9 +1,6 @@
 <?php
 @session_start();
 
-
-error_reporting(E_ALL ^ E_STRICT);
-error_reporting(0);
 ?>
 <!DOCTYPE html >
 
@@ -11,7 +8,7 @@ error_reporting(0);
     <head>
         <meta charset="windows-1252">
         <title>Archivos por adjuntar</title>
-        <link href="../CSS/listas.css"  rel="stylesheet" >
+        <link href="../../../css/Css_Lista/listas.css"  rel="stylesheet" >
       <!--  <style>
           
                @media 
