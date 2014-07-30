@@ -1,5 +1,4 @@
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
-<%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
 <jsp:useBean id="ListarTrabajador2" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
@@ -52,7 +51,7 @@
                         <input type="hidden" name="text" value="<%=text%>">
                         <td><input class="button blue"  type="submit" name="busqueda"  value="Buscar"></td>
                         <!--<td><input class="button blue"  type="submit" name="all"  value="Todos"></td>
-                        --><td><a class="button blue"href="?cancel=true"  >Cancelar</a></td>
+                        --><td><a class="button blue"href="?cancel=true&text=<%=text%>"  >Cancelar</a></td>
                         </tr>
                     </table>
                 </form>

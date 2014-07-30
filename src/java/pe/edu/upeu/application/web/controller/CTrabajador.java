@@ -43,16 +43,16 @@ public class CTrabajador extends HttpServlet {
         PrintWriter out = response.getWriter();
         //try {
 
-        HttpSession sesion= request.getSession(true);
-        String idrol=(String)sesion.getAttribute("IDROL");
-        
+        HttpSession sesion = request.getSession(true);
+        String idrol = (String) sesion.getAttribute("IDROL");
+
         InterfaceListaDAO li = new ListaDAO();
         InterfaceDgpDAO dgp = new DgpDAO();
         InterfaceUbigeoDAO ub = new UbigeoDAO();
         InterfaceTrabajadorDAO tr = new TrabajadorDAO();
 
         String opc = (String) request.getParameter("opc");
-        String Text =(String) request.getParameter("text");
+        String Text = (String) request.getParameter("text");
 
         if (opc.equals("Registrar")) {
             String ID_TRABAJADOR = request.getParameter("ID_TRABAJADOR");
@@ -118,7 +118,7 @@ public class CTrabajador extends HttpServlet {
             String IP_USUARIO = request.getParameter("USUARIO_IP");
 
             tr.INSERT_TRABAJADOR(ID_TRABAJADOR, AP_PATERNO, AP_MATERNO, NO_TRABAJADOR, TI_DOC, NU_DOC, ES_CIVIL, FE_NAC, ID_NACIONALIDAD, ID_DEPARTAMENTO, ID_PROVINCIA, ID_DISTRITO, TE_TRABAJADOR, CL_TRA, DI_CORREO_PERSONAL, DI_CORREO_INST, CO_SISTEMA_PENSIONARIO, LI_NIVEL_EDUCATIVO, LI_GRADO_ACADEMICO, LI_TITULO_PROFESIONAL, ID_CARRERA, ID_UNIVERSIDAD, CM_OTROS_ESTUDIOS, ES_SEXO, LI_GRUPO_SANGUINEO, DE_REFERENCIA, LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, ID_NO_AFP, ES_AFILIADO_ESSALUD, LI_TIPO_TRABAJADOR, CA_TIPO_HORA_PAGO_REFEERENCIAL, ES_FACTOR_RH, LI_DI_DOM_A_D1, DI_DOM_A_D2, LI_DI_DOM_A_D3, DI_DOM_A_D4, LI_DI_DOM_A_D5, DI_DOM_A_D6, DI_DOM_A_REF, ID_DI_DOM_A_DISTRITO, LI_DI_DOM_LEG_D1, DI_DOM_LEG_D2, LI_DI_DOM_LEG_D3, DI_DOM_LEG_D4, LI_DI_DOM_LEG_D5, DI_DOM_LEG_D6, ID_DI_DOM_LEG_DISTRITO, CA_ING_QTA_CAT_EMPRESA, CA_ING_QTA_CAT_RUC, CA_ING_QTA_CAT_OTRAS_EMPRESAS, CM_OBSERVACIONES, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO);
-           out.println("sdfgiojdgkjdhgkjhdfg");
+            out.println("sdfgiojdgkjdhgkjhdfg");
             String idtr = tr.MAX_ID_DATOS_TRABAJADOR();
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             getServletContext().setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));
@@ -132,7 +132,6 @@ public class CTrabajador extends HttpServlet {
          }*/
         if (opc.equals("Buscar")) {
 
-
             String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
 
             String Buscar = request.getParameter("busqueda");
@@ -143,18 +142,22 @@ public class CTrabajador extends HttpServlet {
             String all = request.getParameter("all");
 
             if (("Buscar".equals(Buscar) & (!"".equals(dni) | !"".equals(nom) | !"".equals(ape_mat) | !"".equals(ape_pat))) | "Todos".equals(all)) {
-                getServletContext().setAttribute("ListarTrabajador", tr.ListarTrabajador(iddep, dni, nom, ape_pat, ape_mat));
-            }
-
-            // out.println(tr.ListarTrabajador(iddep, dni, nom, ape_pat, ape_mat).size());
-               /* getServletContext().setAttribute("List_Carrera", li.List_Carrera());
-             getServletContext().setAttribute("List_Nacionalidad", li.List_Nacionalidad());
-             getServletContext().setAttribute("List_Universidad", li.List_Universidad());
-             getServletContext().setAttribute("List_Distrito", ub.List_Distrito());
-             */
-            // RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Vista/Trabajador/Ficha_Trabajador.jsp");
+                
+                
+                String busc= (String)request.getParameter("busc");
+            
+           if (busc!=null) {
+             getServletContext().setAttribute("ListarTrabajador2", tr.ListarTrabajador(iddep, dni, nom, ape_pat, ape_mat));
+                 response.sendRedirect("Vista/Dgp/Generar_Dgp.jsp?text="+Text);
+            }else{
             response.sendRedirect("Vista/Trabajador/Ficha_Trabajador.jsp");
-            // dispatcher.forward(request, response);
+            getServletContext().setAttribute("ListarTrabajador", tr.ListarTrabajador(iddep, dni, nom, ape_pat, ape_mat));
+            }
+            }
+            
+            
+           
+            
         }
 
         /* } catch(IOException e){

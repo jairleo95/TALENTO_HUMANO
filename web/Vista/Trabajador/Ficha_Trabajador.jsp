@@ -70,9 +70,9 @@
                     if (cancel.equals("true")) {
                         ListarTrabajador.clear();
                     }
-                }else{
+                } else {
 
-                if (count == 0) {
+                    if (count == 0) {
             %>
             <h1>No se encontraron registros...</h1>
             <%}
@@ -138,8 +138,8 @@
 
 
                 <%
+                            }
                         }
-                }
 
                     }%> 
             </table>

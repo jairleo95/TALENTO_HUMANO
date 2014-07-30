@@ -104,8 +104,8 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(61, IP_USUARIO);
             cst.execute();
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());}
-       finally {
+            System.out.println(ex.getMessage());
+        } finally {
             this.conn.close();
         }
     }
@@ -125,11 +125,11 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         nom = nom.toUpperCase();
         ape_p = ape_p.toUpperCase();
         ape_m = ape_m.toUpperCase();
-         sql += (!"".equals(dni)) ? " and d.NU_DOC='" + dni + "'" : "";
-         sql += (!"".equals(nom)) ? " and upper(d.NO_TRABAJADOR)like '%" + nom + "%'" : "";
-         sql += (!"".equals(ape_p)) ? " and upper(d.AP_PATERNO)like '%" + ape_p + "%'" : "";
-         sql += (!"".equals(ape_m)) ? " and upper(d.AP_MATERNO)like '%" + ape_m + "%'" : "";
-         sql += " order by d.ID_TRABAJADOR desc";
+        sql += (!"".equals(dni)) ? " and d.NU_DOC='" + dni + "'" : "";
+        sql += (!"".equals(nom)) ? " and upper(d.NO_TRABAJADOR)like '%" + nom + "%'" : "";
+        sql += (!"".equals(ape_p)) ? " and upper(d.AP_PATERNO)like '%" + ape_p + "%'" : "";
+        sql += (!"".equals(ape_m)) ? " and upper(d.AP_MATERNO)like '%" + ape_m + "%'" : "";
+        sql += " order by d.ID_TRABAJADOR desc";
 
         List<V_Ficha_Trab_Num_C> list = new ArrayList<V_Ficha_Trab_Num_C>();
         try {

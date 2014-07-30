@@ -28,7 +28,6 @@ import pe.edu.upeu.application.dao.UsuarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
 
-
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRolDAO;
@@ -59,17 +58,16 @@ public class CPrincipal extends HttpServlet {
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        
-         InterfaceListaDAO li = new ListaDAO();
-            InterfaceDgpDAO dgp = new DgpDAO();
-            InterfaceUbigeoDAO ub = new UbigeoDAO();
-            InterfaceTrabajadorDAO tr = new TrabajadorDAO();
-            InterfaceRequerimientoDAO IReq = new RequerimientoDAO();
 
-             InterfaceRolDAO Irol = new RolDAO();
-                 InterfacePuestoDAO pu = new PuestoDAO();
+        InterfaceListaDAO li = new ListaDAO();
+        InterfaceDgpDAO dgp = new DgpDAO();
+        InterfaceUbigeoDAO ub = new UbigeoDAO();
+        InterfaceTrabajadorDAO tr = new TrabajadorDAO();
+        InterfaceRequerimientoDAO IReq = new RequerimientoDAO();
 
-        
+        InterfaceRolDAO Irol = new RolDAO();
+        InterfacePuestoDAO pu = new PuestoDAO();
+
         try {
 
             String opc = request.getParameter("opc");
@@ -92,20 +90,17 @@ public class CPrincipal extends HttpServlet {
                     sesion.setAttribute("DEPARTAMENTO", user.getNo_dep());
                     sesion.setAttribute("DEPARTAMENTO_ID", user.getId_departamento());
                     sesion.setAttribute("PUESTO", user.getNo_puesto());
-                    
 
-                    getServletContext().setAttribute("listarURL", Irol.listarURL(user.getId_rol()));  
-                    
+                    getServletContext().setAttribute("listarURL", Irol.listarURL(user.getId_rol()));
+
                     /*LISTAS*/
-                getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
-                getServletContext().setAttribute("List_Carrera", li.List_Carrera());
-                getServletContext().setAttribute("List_Nacionalidad", li.List_Nacionalidad());
-                getServletContext().setAttribute("List_Universidad", li.List_Universidad());
-                getServletContext().setAttribute("List_Distrito", ub.List_Distrito());
-                getServletContext().setAttribute("List_Det_Puesto", pu.List_Det_Puesto());    
-                
+                    getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
+                    getServletContext().setAttribute("List_Carrera", li.List_Carrera());
+                    getServletContext().setAttribute("List_Nacionalidad", li.List_Nacionalidad());
+                    getServletContext().setAttribute("List_Universidad", li.List_Universidad());
+                    getServletContext().setAttribute("List_Distrito", ub.List_Distrito());
+                    getServletContext().setAttribute("List_Det_Puesto", pu.List_Det_Puesto());
 
-                    
                     RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Principal.jsp");
                     dispatcher.forward(request, response);
                     //response.sendRedirect("Principal.jsp");
@@ -114,9 +109,6 @@ public class CPrincipal extends HttpServlet {
                     dispatcher.forward(request, response);
                 }
             }
-            
-            
-            
 
         } finally {
             out.close();
