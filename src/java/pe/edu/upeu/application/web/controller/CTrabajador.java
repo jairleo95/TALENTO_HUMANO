@@ -63,7 +63,7 @@ public class CTrabajador extends HttpServlet {
             String TI_DOC = request.getParameter("TIPO_DOC");
             String NU_DOC = request.getParameter("NRO_DOC");
             String ES_CIVIL = request.getParameter("ESTADO_CIVIL");
-            String FE_NAC = "12/10/95";
+            String FE_NAC = request.getParameter("FECHA_NAC");
             String ID_NACIONALIDAD = request.getParameter("NACIONALIDAD");
             String ID_DEPARTAMENTO = request.getParameter("ID_DEPARTAMENTO");
             String ID_PROVINCIA = request.getParameter("ID_PROVINCIA");

@@ -25,6 +25,7 @@ import pe.edu.upeu.application.model.X_List_id_dgp;
 import pe.edu.upeu.application.model.X_User_dgp;
 import pe.edu.upeu.application.model.X_val_tra_dgp;
 import pe.edu.upeu.application.model.x_List_Id_Trab_Dgp;
+import pe.edu.upeu.application.web.controller.CConversion;
 
 /**
  *
@@ -33,49 +34,21 @@ import pe.edu.upeu.application.model.x_List_Id_Trab_Dgp;
 public class DgpDAO implements InterfaceDgpDAO {
 
     ConexionBD conn;
-    
+    CConversion c = new CConversion();
 
     @Override
-    public void INSERT_DGP(String ID_DGP, String FE_DESDE, String FE_HASTA, double CA_SUELDO, String DE_DIAS_TRABAJO, String ID_PUESTO, String ID_REQUERIMIENTO, String ID_TRABAJADOR, String CO_RUC, String DE_LUGAR_SERVICIO, String DE_SERVICIO, String DE_PERIODO_PAGO, String DE_DOMICILIO_FISCAL, String DE_SUBVENCION, String DE_HORARIO_CAPACITACION, String DE_HORARIO_REFRIGERIO, String DE_DIAS_CAPACITACION, String ES_DGP, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String CA_BONO_ALIMENTARIO, String DE_BEV, String CA_CENTRO_COSTOS, String DE_ANTECEDENTES_POLICIALES, String DE_CERTIFICADO_SALUD, String DE_MONTO_HONORARIO) {
-     //   CallableStatement cst;
+    public void INSERT_DGP(String ID_DGP, String FE_DESDE, String FE_HASTA, double CA_SUELDO, String DE_DIAS_TRABAJO, String ID_PUESTO, String ID_REQUERIMIENTO, String ID_TRABAJADOR, String CO_RUC, String DE_LUGAR_SERVICIO, String DE_SERVICIO, String DE_PERIODO_PAGO, String DE_DOMICILIO_FISCAL, String DE_SUBVENCION, String DE_HORARIO_CAPACITACION, String DE_HORARIO_REFRIGERIO, String DE_DIAS_CAPACITACION, String ES_DGP, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, double CA_BONO_ALIMENTARIO, double DE_BEV, double CA_CENTRO_COSTOS, String DE_ANTECEDENTES_POLICIALES, String DE_CERTIFICADO_SALUD, String DE_MONTO_HONORARIO) {
         try {
-            Connection cx = Conexion.getConex();
-            CallableStatement cst = cx.prepareCall("{CALL RHSP_INSERT_DGP( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
-           double d= 100;
+
+            
+
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DGP( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+
             cst.setString(1, null);
-           cst.setString(2, "30/06/14");
-            cst.setString(3, "31/08/14");
-            cst.setDouble(4, d);
-            cst.setString(5, DE_DIAS_TRABAJO);
-            cst.setString(6, "PUT-000185");
-            cst.setString(7, "REQ-0001");
-            cst.setString(8, "TRB-000543");
-            cst.setString(9, "1");
-            cst.setString(10, "1");
-            cst.setString(11, "1");
-            cst.setString(12, "1");
-            cst.setString(13, "1");
-            cst.setString(14, "1");
-            cst.setString(15, "1");
-            cst.setString(16, "1");
-            cst.setString(17, "1");
-            cst.setString(18, "1");
-            cst.setString(19, "USR-000057");
-            cst.setString(20, "18/06/14");
-            cst.setString(21, "1");
-            cst.setString(22, "30/06/14");
-            cst.setString(23, "1");
-            cst.setDouble(24, 11);
-            cst.setDouble(25, 1);
-            cst.setDouble(26, 0);
-            cst.setString(27, "21");
-            cst.setString(28, "22");
-            cst.setString(29, "0");
-            cst.execute();
-            /* cst.setString(1, null);
-            cst.setString(2, FE_DESDE);
-            cst.setString(3, FE_HASTA);
-            cst.setString(4, CA_SUELDO);
+            cst.setString(2, c.convertFecha(FE_DESDE));
+            cst.setString(3, c.convertFecha(FE_HASTA));
+            cst.setDouble(4, CA_SUELDO);
             cst.setString(5, DE_DIAS_TRABAJO);
             cst.setString(6, ID_PUESTO);
             cst.setString(7, ID_REQUERIMIENTO);
@@ -91,21 +64,22 @@ public class DgpDAO implements InterfaceDgpDAO {
             cst.setString(17, DE_DIAS_CAPACITACION);
             cst.setString(18, ES_DGP);
             cst.setString(19, US_CREACION);
-            cst.setString(20, FE_CREACION);
+            cst.setString(20, null);
             cst.setString(21, US_MODIF);
-            cst.setString(22, FE_MODIF);
+            cst.setString(22, null);
             cst.setString(23, IP_USUARIO);
-            cst.setString(24, CA_BONO_ALIMENTARIO);
-            cst.setString(25, DE_BEV);
-            cst.setString(26, CA_CENTRO_COSTOS);
+            cst.setDouble(24, CA_BONO_ALIMENTARIO);
+            cst.setDouble(25, DE_BEV);
+            cst.setDouble(26, CA_CENTRO_COSTOS);
             cst.setString(27, DE_ANTECEDENTES_POLICIALES);
             cst.setString(28, DE_CERTIFICADO_SALUD);
             cst.setString(29, DE_MONTO_HONORARIO);
-            cst.execute();*/
+            cst.execute();
+
         } catch (Exception ex) {
-          //  Logger.getLogger(DgpDAO.class.getName()).log(Level.SEVERE, null, ex);
+            //  Logger.getLogger(DgpDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-           // this.conn.close();
+            // this.conn.close();
         }
     }
 
@@ -387,7 +361,8 @@ public class DgpDAO implements InterfaceDgpDAO {
         } finally {
             this.conn.close();
 
-        return Lista;}
+            return Lista;
+        }
 
     }
 

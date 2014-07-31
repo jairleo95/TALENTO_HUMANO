@@ -20,13 +20,14 @@ import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Trabajador;
 import pe.edu.upeu.application.model.V_Ficha_Trab_Num_C;
 import pe.edu.upeu.application.model.X_List_dat_tr_plantilla;
+import pe.edu.upeu.application.web.controller.CConversion;
 
 /**
  *
  * @author Jose
  */
 public class TrabajadorDAO implements InterfaceTrabajadorDAO {
-
+        CConversion c = new CConversion();
     ConexionBD conn;
 
     @Override
@@ -48,7 +49,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(5, TI_DOC);
             cst.setString(6, NU_DOC);
             cst.setString(7, ES_CIVIL);
-            cst.setString(8, FE_NAC);
+            cst.setString(8, c.convertFecha(FE_NAC));
             cst.setString(9, ID_NACIONALIDAD);
             cst.setString(10, ID_DEPARTAMENTO);
             cst.setString(11, ID_PROVINCIA);

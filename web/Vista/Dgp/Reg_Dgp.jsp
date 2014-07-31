@@ -95,7 +95,7 @@
                             Trabajador tr = new Trabajador();
                             tr = (Trabajador) Listar_Trabajador_id.get(i);
                     %>
-                    <tr><td>Trabajador:</td><td><%=tr.getAp_paterno() + " " + tr.getAp_materno() + " " + tr.getNo_trabajador()%><input type="hidden" value="<? echo $idd_t; ?>" name="IDDATOS_TRABAJADOR" class="text-box" ></td></tr>   
+                    <tr><td>Trabajador:</td><td><%=tr.getAp_paterno() + " " + tr.getAp_materno() + " " + tr.getNo_trabajador()%><input type="hidden" value="<%=tr.getId_trabajador()%>" name="IDDATOS_TRABAJADOR" class="text-box" ></td></tr>   
                             <% }
                         if (Listar_Trabajador_id.size() == 0) { %>   
 
