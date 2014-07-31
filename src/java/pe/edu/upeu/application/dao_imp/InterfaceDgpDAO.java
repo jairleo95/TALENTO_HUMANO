@@ -41,7 +41,7 @@ public interface InterfaceDgpDAO {
 
     public List<X_List_id_dgp> LIST_ID_DGP(String id);
 
-    public String MAX_ID_DETALLE_DGP();
+    public String MAX_ID_DGP();
 
     public int VALIDAR_DGP_CONTR(String id_dgp, String id_tr);
 

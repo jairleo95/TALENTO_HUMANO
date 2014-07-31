@@ -148,6 +148,7 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
        response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr='" + idtr + "'");
         }
+        
 
         /*  } catch (IOException e) {
          System.out.println(e.getMessage());

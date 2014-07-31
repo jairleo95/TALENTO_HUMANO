@@ -11,23 +11,18 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-    ResultSet rs= null;
+
+            ResultSet rs = null;
+            Statement stmt2 = null;
+            
+            Connection cx = Conexion.getConex();
+
+            stmt2 = cx.createStatement();
+            rs = stmt2.executeQuery("select table_name, initcap(SUBSTR(COLUMN_NAME,1,2))||lower(SUBSTR(COLUMN_NAME,3,LENGTH(COLUMN_NAME))),column_name,data_type from user_tab_columns  where table_name='RHVD_REQ_PASO_PU'");
+
+   
     
-    Connection cx=  Conexion.getConex();
-    Statement stmt=  null;
-
-stmt= cx.createStatement();
-//sentencia para generar correctamente los set y get en los list DAO
-/*select table_name, column_name,data_type,data_length,column_id from user_tab_columns order by table_name,column_id;
-
-select * from user_tab_columns;
-
-create view List_Dao1 as
-select table_name, SUBSTR(column_name,1,1)||SUBSTR(lower(column_name),2,length(column_name)) as columna , '"'||COLUMN_NAME||'"' as columna1, data_type 
-from user_tab_columns 
-where table_name = 'RHTD_PADRE_MADRE_CONYUGUE' order by table_name,column_id;
-*/
-//rs=stmt.executeQuery(" select * from List_Dao5");
+    
 %>
 <html>
     <head>
@@ -35,10 +30,9 @@ where table_name = 'RHTD_PADRE_MADRE_CONYUGUE' order by table_name,column_id;
         <title>JSP Page</title>
     </head>
     <body>
-        <%System.out.println("1");%>
             <table >
 
-           <% String objeto = "ft"; 
+           <% String objeto = "rpp"; 
 
             while(rs.next()){
              
@@ -46,10 +40,11 @@ where table_name = 'RHTD_PADRE_MADRE_CONYUGUE' order by table_name,column_id;
            <tr>
                
                <td><%
+                
                 if(rs.getString(4).equals("NUMBER") ){
-                out.print( objeto+".set"+rs.getString(2)+"(rs.getDouble("+rs.getString(3).toLowerCase()+"));");    
+                out.print( objeto+".set"+rs.getString(2)+"(rs.getDouble(\""+rs.getString(3).toLowerCase()+"\"));");    
                 }else{
-                out.print( objeto+".set"+rs.getString(2)+"(rs.getString("+rs.getString(3).toLowerCase()+"));");
+                out.print( objeto+".set"+rs.getString(2)+"(rs.getString(\""+rs.getString(3).toLowerCase()+"\"));");
                
                 }
                
