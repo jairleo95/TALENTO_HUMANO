@@ -15,6 +15,5 @@ import pe.edu.upeu.application.model.Requerimiento;
  */
 public interface InterfaceRequerimientoDAO {
     public List<Requerimiento> Listar_Requerimiento();
-    public List<Requerimiento> id_det_proc();
-    public List<Requerimiento> Validar_Req_DGP();
+    public String id_det_req_proc(String iddgp);
 }

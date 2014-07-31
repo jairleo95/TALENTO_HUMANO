@@ -5,8 +5,10 @@
  */
 package pe.edu.upeu.application.dao;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
@@ -30,7 +32,7 @@ public class RequerimientoDAO implements InterfaceRequerimientoDAO {
         try {
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
-                   Requerimiento r = new Requerimiento();
+                Requerimiento r = new Requerimiento();
                 r.setId_requerimiento(rs.getString("id_requerimiento"));
                 r.setNo_req(rs.getString("no_req"));
                 r.setId_tipo_planilla(rs.getString("id_tipo_planilla"));
@@ -44,12 +46,22 @@ public class RequerimientoDAO implements InterfaceRequerimientoDAO {
     }
 
     @Override
-    public List<Requerimiento> id_det_proc() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String id_det_req_proc(String iddgp) {
+        String Id = "";
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        try {
+            CallableStatement sentencia = this.conn.conex.prepareCall("{?=call RHFU_REQ_PRO_ID_DGP(?)}");
+            sentencia.registerOutParameter(1, Types.VARCHAR);
+            sentencia.setString(2, iddgp);
+            sentencia.executeQuery();
+            Id = sentencia.getString(1);
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return Id;
     }
 
-    @Override
-    public List<Requerimiento> Validar_Req_DGP() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
+
 }
