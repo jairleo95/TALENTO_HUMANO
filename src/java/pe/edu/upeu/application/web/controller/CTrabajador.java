@@ -146,7 +146,8 @@ public class CTrabajador extends HttpServlet {
         if ("list".equals(opc)) {
             String idtr = request.getParameter("idtr");
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-       response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr='" + idtr + "'");
+
+ response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr='" + idtr.trim() + "'");
         }
         
 

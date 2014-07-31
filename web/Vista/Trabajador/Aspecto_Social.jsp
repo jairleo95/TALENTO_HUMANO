@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
 <%@page import="pe.edu.upeu.application.model.Trabajador"%>
 <%@page import="pe.edu.upeu.application.model.Trabajador"%>
 <jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
@@ -14,8 +15,8 @@
         <form>
         <table class="tables">
              <%for (int index = 0; index < ListaridTrabajador.size(); index++) {
-                        Trabajador trb = new Trabajador();
-                        trb = (Trabajador) ListaridTrabajador.get(index);
+                        V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
+                        trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
 
                 %>   
             

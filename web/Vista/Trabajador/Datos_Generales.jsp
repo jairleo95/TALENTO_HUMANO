@@ -1,6 +1,6 @@
+<%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
 <%@page import="pe.edu.upeu.application.dao.ListaDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceListaDAO"%>
-<%@page import="pe.edu.upeu.application.model.Trabajador"%>
 <jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
@@ -16,13 +16,13 @@
             <table class="tables">
 
                 <%for (int index = 0; index < ListaridTrabajador.size(); index++) {
-                        Trabajador trb = new Trabajador();
-                        trb = (Trabajador) ListaridTrabajador.get(index);
+                        V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
+                        trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
 
                 %>           
-                <tr><td class="text-info">Nacionalidad:</td><td><%=trb.getNo_nacionalidad()%></td></tr>
+                <tr><td class="text-info">Nacionalidad:</td><td><%=trb.getNo_nacionalidad().trim()%></td></tr>
 
-                <tr><td  class="text-info">Distrito:</td><td></td></tr>
+                <tr><td  class="text-info">Distrito:</td><td><%=trb.getNo_distrito()%></td></tr>
                 <tr><td  class="text-info">Tipo Documento:</td><td>
                         <%                             
                         InterfaceListaDAO list = new ListaDAO();

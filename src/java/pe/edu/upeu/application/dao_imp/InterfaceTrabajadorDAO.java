@@ -24,7 +24,7 @@ public interface InterfaceTrabajadorDAO {
 
     public List<V_Ficha_Trab_Num_C> ListarTrabajador(String iddep, String dni, String nom, String ape_p, String ape_m);
 
-    public List<Trabajador> ListaridTrabajador(String id);
+    public List<V_Ficha_Trab_Num_C> ListaridTrabajador(String id);
 
     public List<X_List_dat_tr_plantilla> LIST_DAT_TR_PLANTILLA(String id);
 
