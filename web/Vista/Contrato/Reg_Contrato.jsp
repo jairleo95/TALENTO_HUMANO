@@ -4,6 +4,7 @@
 <jsp:useBean id="List_Anno" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Puesto" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="LIST_ID_DGP" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="iddgp" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html >
 
 <html>
@@ -18,8 +19,11 @@
     <label class="title">Información Contractual</label>
             <br>
             <br>
-            <%DGP d =new DGP();%>
-
+            <%%>
+            <%  for (int j = 0; j < LIST_ID_DGP.size(); j++) {
+                DGP d =new DGP();     
+                d=(DGP)LIST_ID_DGP.get(j);%>
+                    
            <%  /*if ($hac_cont==null&&$iddgp==null) { */%>
           
             <label>Todavia no se ha almacenado El DGP,¿desea contratar sin  antes elaborar un DGP?</label>  
@@ -37,9 +41,8 @@
                         <option value="<%=a.getId_anno()%>"><%=a.getNo_anno()%></option>
                         <%}%>
                  </select></td></tr>
-                 
-                 <input type="hidden" name="IDDETALLE_DGP" value="<?echo $iddgp;?>" class="text-box"  >
-                 <tr><td>Desde:</td><td><input type="date" value="<? echo $list_dgp[0][1];?>" name="FEC_DESDE" class="text-box"  required="" >Hasta:<input type="date" name="FEC_HASTA"  value="<? echo $list_dgp[0][2];?>" class="text-box" required=""  ></td></tr> 
+                <input type="hidden" name="IDDETALLE_DGP" value="<%=iddgp%>" class="text-box"  >
+                 <tr><td>Desde:</td><td><input type="date" value="<%=d.getFe_desde()%>" name="FEC_DESDE" class="text-box"  required="" >Hasta:<input type="date" name="FEC_HASTA"  value="<%=d.getFe_hasta()%>" class="text-box" required=""  ></td></tr> 
                  <!--   
                 <tr><td>Dirección:</td><td>
                         <select name="DIRECCION_ID" class="text-box">
@@ -107,9 +110,8 @@
                             <option value="9">MFL-Contrato</option>
                         </select>
                                               
-                   
-                        
-                    <tr><td>Sueldo:</td><td><input type="text" name="SUELDO" value="<? echo $list_dgp[0][3];?>" class="text-box"  required=""  >Reintegro:<input type="text" name="REINTEGRO"  value="0" class="text-box" ></td></tr>    
+                  
+                    <tr><td>Sueldo:</td><td><input type="text" name="SUELDO" value="<%=d.getCa_sueldo()%>" class="text-box"  required=""  >Reintegro:<input type="text" name="REINTEGRO"  value="0" class="text-box" ></td></tr>   
                     <tr><td>Tipo Horas Pago:</td><td><input type="text" value="0" name="TIPO_HORA_PAGO" class="text-box" ></td></tr>
                     <tr><td>Bono Alimentario:</td><td><input type="text"  value="<? echo $list_dgp[0][25];?>" name="BONO_ALIMENTO" class="text-box" ></td></tr>
                    <? require_once '../Modelo/ModeloDatos_hijos_trabajador.php';
@@ -224,6 +226,7 @@
                     <input type="hidden" value="<?echo $idtr;?>" name="IDDATOS_TRABAJADOR" class="text-box" >
                     <input type="hidden" name="AREA_ID" class="text-box" >
                     <tr><td colspan="2"><input type="submit" name="opc"  class="submit" value="REGISTRAR CONTRATO"></td></tr>
+                    <%}%>
                 </table></form></center><br><br>
            <?}?>
     </body>
