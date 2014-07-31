@@ -6,11 +6,15 @@
 package pe.edu.upeu.application.dao;
 
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
+import pe.edu.upeu.application.factory.Conexion;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.DGP;
@@ -29,13 +33,46 @@ import pe.edu.upeu.application.model.x_List_Id_Trab_Dgp;
 public class DgpDAO implements InterfaceDgpDAO {
 
     ConexionBD conn;
+    
 
     @Override
-    public void INSERT_DGP(String ID_DGP, String FE_DESDE, String FE_HASTA, String CA_SUELDO, String DE_DIAS_TRABAJO, String ID_PUESTO, String ID_REQUERIMIENTO, String ID_TRABAJADOR, String CO_RUC, String DE_LUGAR_SERVICIO, String DE_SERVICIO, String DE_PERIODO_PAGO, String DE_DOMICILIO_FISCAL, String DE_SUBVENCION, String DE_HORARIO_CAPACITACION, String DE_HORARIO_REFRIGERIO, String DE_DIAS_CAPACITACION, String ES_DGP, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String CA_BONO_ALIMENTARIO, String DE_BEV, String CA_CENTRO_COSTOS, String DE_ANTECEDENTES_POLICIALES, String DE_CERTIFICADO_SALUD, String DE_MONTO_HONORARIO) {
-        CallableStatement cst;
+    public void INSERT_DGP(String ID_DGP, String FE_DESDE, String FE_HASTA, double CA_SUELDO, String DE_DIAS_TRABAJO, String ID_PUESTO, String ID_REQUERIMIENTO, String ID_TRABAJADOR, String CO_RUC, String DE_LUGAR_SERVICIO, String DE_SERVICIO, String DE_PERIODO_PAGO, String DE_DOMICILIO_FISCAL, String DE_SUBVENCION, String DE_HORARIO_CAPACITACION, String DE_HORARIO_REFRIGERIO, String DE_DIAS_CAPACITACION, String ES_DGP, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String CA_BONO_ALIMENTARIO, String DE_BEV, String CA_CENTRO_COSTOS, String DE_ANTECEDENTES_POLICIALES, String DE_CERTIFICADO_SALUD, String DE_MONTO_HONORARIO) {
+     //   CallableStatement cst;
         try {
-            cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DGP( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+            Connection cx = Conexion.getConex();
+            CallableStatement cst = cx.prepareCall("{CALL RHSP_INSERT_DGP( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+           double d= 100;
             cst.setString(1, null);
+           cst.setString(2, "30/06/14");
+            cst.setString(3, "31/08/14");
+            cst.setDouble(4, d);
+            cst.setString(5, DE_DIAS_TRABAJO);
+            cst.setString(6, "PUT-000185");
+            cst.setString(7, "REQ-0001");
+            cst.setString(8, "TRB-000543");
+            cst.setString(9, "1");
+            cst.setString(10, "1");
+            cst.setString(11, "1");
+            cst.setString(12, "1");
+            cst.setString(13, "1");
+            cst.setString(14, "1");
+            cst.setString(15, "1");
+            cst.setString(16, "1");
+            cst.setString(17, "1");
+            cst.setString(18, "1");
+            cst.setString(19, "USR-000057");
+            cst.setString(20, "18/06/14");
+            cst.setString(21, "1");
+            cst.setString(22, "30/06/14");
+            cst.setString(23, "1");
+            cst.setDouble(24, 11);
+            cst.setDouble(25, 1);
+            cst.setDouble(26, 0);
+            cst.setString(27, "21");
+            cst.setString(28, "22");
+            cst.setString(29, "0");
+            cst.execute();
+            /* cst.setString(1, null);
             cst.setString(2, FE_DESDE);
             cst.setString(3, FE_HASTA);
             cst.setString(4, CA_SUELDO);
@@ -64,10 +101,11 @@ public class DgpDAO implements InterfaceDgpDAO {
             cst.setString(27, DE_ANTECEDENTES_POLICIALES);
             cst.setString(28, DE_CERTIFICADO_SALUD);
             cst.setString(29, DE_MONTO_HONORARIO);
-            cst.execute();
-        } catch (SQLException ex) {
+            cst.execute();*/
+        } catch (Exception ex) {
+          //  Logger.getLogger(DgpDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            this.conn.close();
+           // this.conn.close();
         }
     }
 
