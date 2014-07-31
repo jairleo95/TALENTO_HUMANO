@@ -16,7 +16,7 @@ Connection cx=  Conexion.getConex();
 Statement stmt=  null;
 
 stmt= cx.createStatement();
-rs=stmt.executeQuery("select  'PAS-' ||lpad(trim(ID_PASOS),6,'0'),trim(ID_PASOS),ID_PASOS  from RHTC_PASOS");
+rs=stmt.executeQuery("select  'PCO-' ||lpad(trim(ID_PROCESO),6,'0'),trim(ID_PROCESO),ID_PROCESO  from RHTC_PASOS");
 
 %>
 <html>
@@ -31,7 +31,7 @@ rs=stmt.executeQuery("select  'PAS-' ||lpad(trim(ID_PASOS),6,'0'),trim(ID_PASOS)
            <tr>
                <% //stmt.executeQuery("update RHTC_HORARIO set ID_HORARIO='"+rs.getString(1)+"' where trim(ID_HORARIO) ='"+rs.getString(2)+"'");%>
                <td><%//=rs.getString(1)
-               out.print("update RHTC_PASOS set ID_PASOS='"+rs.getString(1)+"' where trim(ID_PASOS) ='"+rs.getString(2)+"';");
+               out.print("update RHTC_PASOS set ID_PROCESO='"+rs.getString(1)+"' where trim(ID_PROCESO) ='"+rs.getString(2)+"';");
                %></td>
                
            </tr>
@@ -40,3 +40,5 @@ rs=stmt.executeQuery("select  'PAS-' ||lpad(trim(ID_PASOS),6,'0'),trim(ID_PASOS)
    
     </body>
 </html>
+
+

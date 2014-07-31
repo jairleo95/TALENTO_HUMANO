@@ -5,6 +5,7 @@
  */
 package pe.edu.upeu.application.dao;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -26,8 +27,61 @@ public class ContratoDAO implements InterfaceContratoDAO {
     ConexionBD conn;
 
     @Override
-    public boolean Insert_Contrato() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void INSERT_CONTRATO(String ID_CONTRATO, String ID_DGP, String FE_DESDE, String FE_HASTA, String FE_CESE, String ID_FUNC, String LI_CONDICION, Double CA_SUELDO, Double CA_REINTEGRO, Double CA_ASIG_FAMILIAR, Double HO_SEMANA, Double NU_HORAS_LAB, Double DIA_CONTRATO, String TI_TRABAJADOR, String LI_REGIMEN_LABORAL, String ES_DISCAPACIDAD, String TI_CONTRATO, String LI_REGIMEN_PENSIONARIO, String ES_CONTRATO_TRABAJADOR, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String US_IP, String FE_VACACIO_INI, String FE_VACACIO_FIN, String ES_CONTRATO, String ID_FILIAL, String ID_DIRECCION, String ID_DEPARTAMENTO, String ID_AREA, String ID_SECCION, String ID_PUESTO, Double CA_BONO_ALIMENTO, String ES_JEFE, String LI_TIPO_CONVENIO, String ES_FIRMO_CONTRATO, Double NU_CONTRATO, String DE_OBSERVACION, String ES_APOYO, String TI_HORA_PAGO, String NU_DOCUMENTO, String ID_ANNO, String ES_ENTREGAR_DOC_REGLAMENTOS, String ES_REGISTRO_HUELLA, String DE_REGISTRO_SISTEM_REMU, String ID_TRABAJADOR) {
+        CallableStatement cst;
+        try {
+            cst = conn.conex.prepareCall("{CALL RHSP_INSERT_CONTRATO( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?");
+            cst.setString(1,null);
+            cst.setString(2, ID_DGP);
+            cst.setString(3, FE_DESDE);
+            cst.setString(4, FE_HASTA);
+            cst.setString(5, FE_CESE);
+            cst.setString(6, ID_FUNC);
+            cst.setString(7, LI_CONDICION);
+            cst.setDouble(8, CA_SUELDO);
+            cst.setDouble(9, CA_REINTEGRO);
+            cst.setDouble(10, CA_ASIG_FAMILIAR);
+            cst.setDouble(11, HO_SEMANA);
+            cst.setDouble(12, NU_HORAS_LAB);
+            cst.setDouble(13, DIA_CONTRATO);
+            cst.setString(14, TI_TRABAJADOR);
+            cst.setString(15, LI_REGIMEN_LABORAL);
+            cst.setString(16, ES_DISCAPACIDAD);
+            cst.setString(17, TI_CONTRATO);
+            cst.setString(18, LI_REGIMEN_PENSIONARIO);
+            cst.setString(19, ES_CONTRATO_TRABAJADOR);
+            cst.setString(20, US_CREACION);
+            cst.setString(21, US_MODIF);
+            cst.setString(22, FE_MODIF);
+            cst.setString(23, US_IP);
+            cst.setString(24, FE_VACACIO_INI);
+            cst.setString(25, FE_VACACIO_FIN);
+            cst.setString(26, ES_CONTRATO);
+            cst.setString(27, ID_FILIAL);
+            cst.setString(28, ID_DIRECCION);
+            cst.setString(29, ID_DEPARTAMENTO);
+            cst.setString(30, ID_AREA);
+            cst.setString(31, ID_SECCION);
+            cst.setString(32, ID_PUESTO);
+            cst.setDouble(33, CA_BONO_ALIMENTO);
+            cst.setString(34, ES_JEFE);
+            cst.setString(35, LI_TIPO_CONVENIO);
+            cst.setString(36, ES_FIRMO_CONTRATO);
+            cst.setDouble(37, NU_CONTRATO);
+            cst.setString(38, DE_OBSERVACION);
+            cst.setString(39, ES_APOYO);
+            cst.setString(40, TI_HORA_PAGO);
+            cst.setString(41, NU_DOCUMENTO);
+            cst.setString(42, ID_ANNO);
+            cst.setString(43, ES_ENTREGAR_DOC_REGLAMENTOS);
+            cst.setString(44, ES_REGISTRO_HUELLA);
+            cst.setString(45, DE_REGISTRO_SISTEM_REMU);
+            cst.setString(46, ID_TRABAJADOR);
+            cst.executeQuery();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        }
     }
 
     @Override

@@ -1,17 +1,18 @@
+<%@page import="pe.edu.upeu.application.model.X_List_id_dgp"%>
 <%@page import="pe.edu.upeu.application.model.Puesto"%>
 <%@page import="pe.edu.upeu.application.model.DGP"%>
 <%@page import="pe.edu.upeu.application.model.Anno"%>
 <jsp:useBean id="List_Anno" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Puesto" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="LIST_ID_DGP" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="iddgp" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="ASIGNACION_F" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html >
 
 <html>
     <head>
         <meta charset="windows-1252">
         <title>Registrar Contrato</title>
-        
+         
         <link rel="stylesheet" type="text/css"  href="../../css/Css_Formulario/form.css">
     </head>
     <body>
@@ -20,18 +21,24 @@
             <br>
             <br>
             <%%>
-            <%  for (int j = 0; j < LIST_ID_DGP.size(); j++) {
-                DGP d =new DGP();     
-                d=(DGP)LIST_ID_DGP.get(j);%>
+            <%  
+                
+     
+            for(int u=0;u<LIST_ID_DGP.size();u++){
+                X_List_id_dgp  d =new X_List_id_dgp ();
+                d=(X_List_id_dgp )LIST_ID_DGP.get(u);
+            %>
+                %>
+                
                     
-           <%  /*if ($hac_cont==null&&$iddgp==null) { */%>
+          <%  /* if ($hac_cont==null&&$iddgp==null) { */   %>
           
             <label>Todavia no se ha almacenado El DGP,¿desea contratar sin  antes elaborar un DGP?</label>  
            <br>
            <a href="Reg_Contrato.php?hac_cont=1&idtr=<? echo $idtr;?>">Hacer Contrato de Todas Maneras</a>
          
            <?}else{?>
-            <form class="form" action="../contrato"> 
+            <form class="form" action="../../contrato"> 
                 <table class="table">      
                 <tr><td>Año :</td><td>
                         <select name="AÑO_ID" class="text-box" required="" >
@@ -41,7 +48,7 @@
                         <option value="<%=a.getId_anno()%>"><%=a.getNo_anno()%></option>
                         <%}%>
                  </select></td></tr>
-                <input type="hidden" name="IDDETALLE_DGP" value="<%=iddgp%>" class="text-box"  >
+                <input type="hidden" name="IDDETALLE_DGP" value="<%=d.getId_dgp()%>" class="text-box"  >
                  <tr><td>Desde:</td><td><input type="date" value="<%=d.getFe_desde()%>" name="FEC_DESDE" class="text-box"  required="" >Hasta:<input type="date" name="FEC_HASTA"  value="<%=d.getFe_hasta()%>" class="text-box" required=""  ></td></tr> 
                  <!--   
                 <tr><td>Dirección:</td><td>
@@ -79,7 +86,7 @@
                             <%  for (int j = 0; j < List_Puesto.size(); j++) {%>
                             <%Puesto p=new Puesto();
                             p=(Puesto)List_Puesto.get(j);
-                             if (d.getId_puesto()==p.getId_puesto()){%>
+                            if (d.getId_puesto().equals(p.getId_puesto())){%>
                             
                             <option value="<%=p.getId_puesto()%>" selected="selected"><%=p.getNo_puesto()%></option>
                             <%}else{%>
@@ -89,7 +96,7 @@
                     <tr><td>¿Es Jefe?:</td><td>
                         <select name="JEFE" class="text-box" required="" >
                             <option value=""></option>
-                            <option value="1">No es Jefe</option>
+                            <option value="No es Jefe">No es Jefe</option>
                             <option value="2">Jefe de Sección</option>
                             <option value="3">Jefe de Area</option>
                             <option value="4">Jefe de Departamento</option>
@@ -113,12 +120,17 @@
                   
                     <tr><td>Sueldo:</td><td><input type="text" name="SUELDO" value="<%=d.getCa_sueldo()%>" class="text-box"  required=""  >Reintegro:<input type="text" name="REINTEGRO"  value="0" class="text-box" ></td></tr>   
                     <tr><td>Tipo Horas Pago:</td><td><input type="text" value="0" name="TIPO_HORA_PAGO" class="text-box" ></td></tr>
-                    <tr><td>Bono Alimentario:</td><td><input type="text"  value="<? echo $list_dgp[0][25];?>" name="BONO_ALIMENTO" class="text-box" ></td></tr>
+                    <tr><td>Bono Alimentario:</td><td><input type="text"  value="<%=d.getCa_bono_alimentario()%>" name="BONO_ALIMENTO" class="text-box" ></td></tr>
                    <? require_once '../Modelo/ModeloDatos_hijos_trabajador.php';
                    $mdh= new ModeloDatos_hijos_trabajador();
                    $n=$mdh->ASIGNACION_F($idtr);
                    ?>
-                <tr><td>Asignación Familiar:</td><td><input type="text" name="ASIG_FAMILIAR"  <?  if ($n==0) {?> value="0" <?}else{?>value="75" <?}?> class="text-box" ></td></tr>  
+                   <%
+                   int total=Integer.parseInt(request.getParameter("num"));
+                   
+                   %>
+                   
+                <tr><td>Asignación Familiar:</td><td><input type="text" name="ASIG_FAMILIAR"  <% if (total==0) {%> value="0" <%}else{%>value="75" <%}%> class="text-box" ></td></tr>  
 
                     <tr><td>Horas:</td><td>Semanal:<input type="text" name="HORAS_SEMANA" value="48" class="text-box"  required="" >Mensual:<input type="text" name="NRO_HORAS_LAB" value="192" class="text-box"  required="" >Dias:<input type="text" name="DIAS" value="30" class="text-box" required=""  ></td></tr>      
 
@@ -214,20 +226,17 @@
                     <input type="hidden" name="ENTREGAR_DOC_REGLAMENTOS"  value="0" class="text-box" >
                     <input type="hidden" name="REGISTRO_HUELLA"  value="0" class="text-box" > 
                     <input type="hidden" name="REGISTRO_SISTEM_REMU" value="0" class="text-box" >
-
                     <input type="hidden" name="ESTADO" value="1" class="text-box" > 
-
-                    <input type="hidden" value="<? echo $_SESSION["IDUSER"];?>" name="USER_CREACION" class="text-box" >
                     <input type="hidden" value="" name="FECHA_CREACION" class="text-box" >
                     <input type="hidden" value="" name="USER_MODIF" class="text-box" >
                     <input type="hidden" value="" name="FECHA_MODIF" class="text-box" >
                     <input type="hidden" value="" name="USUARIO_IP" class="text-box" >
                            
-                    <input type="hidden" value="<?echo $idtr;?>" name="IDDATOS_TRABAJADOR" class="text-box" >
+                    <input type="hidden" value="<%=d.getId_trabajador()%>" name="IDDATOS_TRABAJADOR" class="text-box" >
                     <input type="hidden" name="AREA_ID" class="text-box" >
                     <tr><td colspan="2"><input type="submit" name="opc"  class="submit" value="REGISTRAR CONTRATO"></td></tr>
-                    <%}%>
+                    
                 </table></form></center><br><br>
-           <?}?>
+           <%}%>
     </body>
 </html>

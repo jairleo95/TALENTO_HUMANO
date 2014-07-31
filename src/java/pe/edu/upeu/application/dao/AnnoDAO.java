@@ -33,8 +33,9 @@ public class AnnoDAO implements InterfaceAnnoDAO{
         List<Anno> list = new ArrayList<Anno>();
         try {
             ResultSet rs = this.conn.query(sql);
-            Anno a = new Anno();
+            
             while (rs.next()){
+                Anno a = new Anno();
                 a.setId_anno(rs.getString("id_anno"));
                 a.setNo_anno(rs.getString("no_anno"));
                 a.setDe_anno(rs.getString("de_anno"));
@@ -72,6 +73,8 @@ public class AnnoDAO implements InterfaceAnnoDAO{
     public List<Contrato> List_A_Cont(String id_dgp) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
 
 
     
