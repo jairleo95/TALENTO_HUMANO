@@ -1,5 +1,5 @@
 
-<%@page import="com.sun.org.apache.regexp.internal.recompile"%>
+<%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
 <%@page import="pe.edu.upeu.application.model.Requerimiento"%>
 <%@page import="pe.edu.upeu.application.model.V_Puesto_Direccion"%>
 <%@page import="pe.edu.upeu.application.model.Puesto"%>
@@ -92,8 +92,8 @@
                         String idreq=  request.getParameter("idreq");
                         
                         for (int i = 0; i < Listar_Trabajador_id.size(); i++) {
-                            Trabajador tr = new Trabajador();
-                            tr = (Trabajador) Listar_Trabajador_id.get(i);
+                            V_Ficha_Trab_Num_C tr = new V_Ficha_Trab_Num_C();
+                            tr = (V_Ficha_Trab_Num_C) Listar_Trabajador_id.get(i);
                     %>
                     <tr><td>Trabajador:</td><td><%=tr.getAp_paterno() + " " + tr.getAp_materno() + " " + tr.getNo_trabajador()%><input type="hidden" value="<%=tr.getId_trabajador()%>" name="IDDATOS_TRABAJADOR" class="text-box" ></td></tr>   
                             <% }
