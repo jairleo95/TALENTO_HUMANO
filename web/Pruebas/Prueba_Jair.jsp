@@ -4,10 +4,9 @@
     Author     : Alfa.sistemas
 --%>
 
-<%@page import="pe.edu.upeu.application.factory.Conexion"%>
-<%@page import="java.sql.Types"%>
-<%@page import="java.sql.Connection"%>
 <%@page import="java.sql.CallableStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="pe.edu.upeu.application.factory.Conexion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,18 +16,22 @@
     </head>
     <body>
         <%
-
-            String ID = "";
             Connection cx = Conexion.getConex();
-            CallableStatement sentencia = cx.prepareCall("{?=call RHFU_REQ_PRO_ID_DGP(?)}");
-            sentencia.registerOutParameter(1, Types.VARCHAR);
-            sentencia.setString(2, "DGP-000821");
-
-            sentencia.executeQuery();
-
-            ID = sentencia.getString(1);
-
-            out.println(ID);
+     CallableStatement cst = cx.prepareCall("{CALL RHSP_INSERT_AUTORIZACION( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+            cst.setString(1, null);
+            cst.setString(2, "DGP-000823");
+            cst.setString(3, "1");
+            cst.setString(4, "PU1");
+            cst.setString(5, "123412312");
+            cst.setString(6, "qwerrtrewq");
+       
+            cst.setString(7, "qweqweqwee");
+            cst.setString(8, "31/07/14");
+            cst.setString(9, "3213");
+            cst.setString(10, "PUT-000136");
+            cst.setString(11, "DRP-000001");
+            cst.setString(12, "PAS-000001");
+           cst.execute();
 
         %>
     </body>

@@ -6,6 +6,7 @@
 package pe.edu.upeu.application.dao;
 
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -13,19 +14,21 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO;
+import pe.edu.upeu.application.factory.Conexion;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Autorizacion;
-import pe.edu.upeu.application.model.V_Req_Paso_Pu;
 import pe.edu.upeu.application.model.X_List_De_Autorizacion;
+import pe.edu.upeu.application.web.controller.CConversion;
 
 /**
  *
  * @author Admin
  */
 public class AutorizacionDAO implements InterfaceAutorizacionDAO {
-
+     CConversion c = new CConversion();
     ConexionBD conn;
+   
 
     @Override
     public boolean Guardar_Autorizacion(String id_autorizacion, String id_dgp, String id_proceso, String estado, String detalle, String nu_pasos) {
@@ -71,40 +74,78 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
     }
 
     @Override
-    public boolean Insert_Autorizacion() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<String> Det_Autorizacion(String id_rpp) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select * from rhvd_req_paso_pu where id_detalle_req_proceso ='" + id_rpp + "' and trim(nu_pasos)='P1'";
+        List<String> list = new ArrayList<String>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            rs.next() ;
+                list.add(rs.getString("id_pasos"));
+                list.add(rs.getString("id_proceso"));
+                list.add(rs.getString("id_detalle_req_proceso"));
+                list.add(rs.getString("id_detalle_pasos"));
+                list.add(rs.getString("de_pasos"));
+                list.add(rs.getString("nu_pasos"));
+                list.add(rs.getString("co_pasos"));
+                list.add(rs.getString("no_proceso"));
+                list.add(rs.getString("id_puesto"));
+                list.add(rs.getString("id_direccion"));
+                list.add(rs.getString("id_departamento"));
+                list.add(rs.getString("id_requerimiento"));
+            
+
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return list;
     }
 
     @Override
-    public List<V_Req_Paso_Pu> Det_Autorizacion(String id_rpp, String nu_pasos) {
-        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from rhvd_req_paso_pu where id_detalle_req_proceso ='" + id_rpp + "' and trim(nu_pasos)='" + nu_pasos + "'";
-        List<V_Req_Paso_Pu> list = new ArrayList<V_Req_Paso_Pu>();
+    public void Insert_Autorizacion(String ID_AUTORIZACION, String ID_DGP, String ES_AUTORIZACION, String NU_PASOS, String IP_USUARIO, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String CO_PUESTO, String ID_PUESTO, String ID_DETALLE_REQ_PROCESO, String ID_PASOS) {
+        CallableStatement cst;
+        
         try {
-            ResultSet rs = this.conn.query(sql);
-            V_Req_Paso_Pu rpp = new V_Req_Paso_Pu();
-
-            while (rs.next()) {
-                rpp.setId_pasos(rs.getString("id_pasos"));
-                rpp.setId_proceso(rs.getString("id_proceso"));
-                rpp.setId_detalle_req_proceso(rs.getString("id_detalle_req_proceso"));
-                rpp.setId_detalle_pasos(rs.getString("id_detalle_pasos"));
-                rpp.setDe_pasos(rs.getString("de_pasos"));
-                rpp.setNu_pasos(rs.getString("nu_pasos"));
-                rpp.setCo_pasos(rs.getString("co_pasos"));
-                rpp.setNo_proceso(rs.getString("no_proceso"));
-                rpp.setId_puesto(rs.getString("id_puesto"));
-                rpp.setId_direccion(rs.getString("id_direccion"));
-                rpp.setId_departamento(rs.getString("id_departamento"));
-                rpp.setId_requerimiento(rs.getString("id_requerimiento"));
-                list.add(rpp);
-            }
-
+            
+            Connection cx = Conexion.getConex();
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = cx.prepareCall("{CALL RHSP_INSERT_AUTORIZACION( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+            cst.setString(1, null);
+            cst.setString(2, "DGP-000823");
+            cst.setString(3, "1");
+            cst.setString(4, "P1");
+            cst.setString(5, "");
+            cst.setString(6, "USR-000057");
+            cst.setString(7, "08/08/14");
+            cst.setString(8, "");
+            cst.setString(9, "");
+            cst.setString(10, "SECR");
+            cst.setString(11, "PUT-000136");
+            cst.setString(12, "DRP-000001");
+            cst.setString(13, "PAS-000001");
+           cst.execute();
+            /*
+                cst.setString(1, null);
+            cst.setString(2, ID_DGP);
+            cst.setString(3, ES_AUTORIZACION);
+            cst.setString(4, NU_PASOS);
+            cst.setString(5, IP_USUARIO);
+            cst.setString(6, US_CREACION);
+            cst.setString(7, FE_CREACION);
+            cst.setString(8, US_MODIF);
+            cst.setString(9, FE_MODIF);
+            cst.setString(10, CO_PUESTO);
+            cst.setString(11, ID_PUESTO);
+            cst.setString(12, ID_DETALLE_REQ_PROCESO);
+            cst.setString(13, ID_PASOS);*/
         } catch (SQLException e) {
-        }finally{
-        this.conn.close();
+           // System.out.println(e.getMessage());
+        } catch (Exception ex) {
+            // Logger.getLogger(AutorizacionDAO.class.getName()).log(Level.SEVERE, null, ex);
+         }finally{
+            this.conn.close();
         }
-        return list;
     }
 
 }

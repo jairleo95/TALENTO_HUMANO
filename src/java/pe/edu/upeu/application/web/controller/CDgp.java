@@ -7,22 +7,23 @@ package pe.edu.upeu.application.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import static oracle.security.o3logon.b.a;
-import oracle.sql.ConverterArchive;
+import pe.edu.upeu.application.dao.AutorizacionDAO;
 import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.PuestoDAO;
 import pe.edu.upeu.application.dao.RequerimientoDAO;
 import pe.edu.upeu.application.dao.TrabajadorDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
+import pe.edu.upeu.application.model.V_Req_Paso_Pu;
 
 /**
  *
@@ -47,6 +48,8 @@ public class CDgp extends HttpServlet {
         /*Declaramos*/
         HttpSession sesion = request.getSession(true);
         String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
+        String idpuesto = (String) sesion.getAttribute("PUESTO_ID");
+        String iduser = (String) sesion.getAttribute("IDUSER");
         String idtr = request.getParameter("idtr");
         String iddepa = request.getParameter("iddep");
         String idreq = request.getParameter("idreq");
@@ -54,6 +57,7 @@ public class CDgp extends HttpServlet {
         InterfaceRequerimientoDAO IReq = new RequerimientoDAO();
         InterfaceTrabajadorDAO tr = new TrabajadorDAO();
         InterfaceDgpDAO dgp = new DgpDAO();
+        InterfaceAutorizacionDAO a = new AutorizacionDAO();
 
         String opc = request.getParameter("opc");
 
@@ -88,20 +92,23 @@ public class CDgp extends HttpServlet {
             String DE_ANTECEDENTES_POLICIALES = request.getParameter("ANTECEDENTES_POLICIALES");
             String DE_CERTIFICADO_SALUD = request.getParameter("CERTIFICADO_SALUD");
             String DE_MONTO_HONORARIO = request.getParameter("MONTO_HONORARIO");
-            
+
             dgp.INSERT_DGP(ID_DGP, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO, DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION, ES_DGP, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, CA_CENTRO_COSTOS, DE_ANTECEDENTES_POLICIALES, DE_CERTIFICADO_SALUD, DE_MONTO_HONORARIO);
-       
-       //  r.
+
+            //  r.
             String iddgp = dgp.MAX_ID_DGP();
-            String idrp =  IReq.id_det_req_proc(iddgp);
-            
-            
-                out.println("lalalala");
+            String idrp = IReq.id_det_req_proc(iddgp);
 
+            List<String> list = a.Det_Autorizacion(idrp);
+         
+            a.Insert_Autorizacion("", iddgp , "1", "P1", "", iduser, "", "", "", "SECR", idpuesto , idrp, "PAS-000001");
+            out.print(idrp);
+            
+
+            //out.println("lalalala");
         }
-        if(opc.equals("Reg_form")) {
+        if (opc.equals("Reg_form")) {
 
-            
             /* TEMPORAL*/
             if (idreq.equals("1")) {
                 idreq = "REQ-0001";
@@ -113,7 +120,7 @@ public class CDgp extends HttpServlet {
                 idreq = "REQ-0003";
             }
 
-          getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
+            getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
             getServletContext().setAttribute("List_Puesto", pu.List_Puesto_Dep(iddep));
             getServletContext().setAttribute("Listar_Trabajador_id", tr.ListaridTrabajador(idtr));
             response.sendRedirect("Vista/Dgp/Reg_Dgp.jsp?idreq=" + idreq);

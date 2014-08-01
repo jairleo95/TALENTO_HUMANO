@@ -74,7 +74,7 @@
 
         %>
 
-
+        <table>
         <%   
             for (int f = 0; f < List1.length; f++) {
                 out.print("<br>");
