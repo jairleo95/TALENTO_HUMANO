@@ -55,7 +55,7 @@ public class CContrato extends HttpServlet {
         String opc = request.getParameter("opc");
         HttpSession sesion= request.getSession(true);
         String iduser=(String)sesion.getAttribute("IDUSER");
-        try {
+        //try {
 
             if (opc.equals("enviar")) {
                 String iddgp = request.getParameter("iddgp");
@@ -120,12 +120,12 @@ public class CContrato extends HttpServlet {
                 String DE_REGISTRO_SISTEM_REMU = request.getParameter("REGISTRO_SISTEM_REMU");
                 String ID_TRABAJADOR = request.getParameter("IDDATOS_TRABAJADOR");
                 con.INSERT_CONTRATO(ID_CONTRATO, ID_DGP, FE_DESDE, FE_HASTA, FE_CESE, ID_FUNC, LI_CONDICION, CA_SUELDO, CA_REINTEGRO, CA_ASIG_FAMILIAR, HO_SEMANA, NU_HORAS_LAB, DIA_CONTRATO, TI_TRABAJADOR, LI_REGIMEN_LABORAL, ES_DISCAPACIDAD, TI_CONTRATO, LI_REGIMEN_PENSIONARIO, ES_CONTRATO_TRABAJADOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, US_IP, FE_VACACIO_INI, FE_VACACIO_FIN, ES_CONTRATO, ID_FILIAL, ID_DIRECCION, ID_DEPARTAMENTO, ID_AREA, ID_SEC, ID_PUESTO, CA_BONO_ALIMENTO, ES_JEFE, LI_TIPO_CONVENIO, ES_FIRMO_CONTRATO, NU_CONTRATO, DE_OBSERVACION, ES_APOYO, TI_HORA_PAGO, NU_DOCUMENTO, ID_ANNO, ES_ENTREGAR_DOC_REGLAMENTOS, ES_REGISTRO_HUELLA, DE_REGISTRO_SISTEM_REMU, ID_TRABAJADOR);
+                out.println("entro");
                 
-                response.sendRedirect("Pruebas/PruebaSuca.jsp");
             }
-        } finally {
+       /* } finally {
             out.close();
-        }
+        }*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

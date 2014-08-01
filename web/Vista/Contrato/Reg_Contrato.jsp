@@ -12,7 +12,8 @@
     <head>
         <meta charset="windows-1252">
         <title>Registrar Contrato</title>
-         
+        <% HttpSession sesion= request.getSession(true);
+        String iduser=(String)sesion.getAttribute("IDUSER");%>
         <link rel="stylesheet" type="text/css"  href="../../css/Css_Formulario/form.css">
     </head>
     <body>
@@ -20,15 +21,12 @@
     <label class="title">Información Contractual</label>
             <br>
             <br>
-            <%%>
+            <p><%=iduser%></p>
             <%  
-                
-     
             for(int u=0;u<LIST_ID_DGP.size();u++){
                 X_List_id_dgp  d =new X_List_id_dgp ();
                 d=(X_List_id_dgp )LIST_ID_DGP.get(u);
             %>
-                %>
                 
                     
           <%  /* if ($hac_cont==null&&$iddgp==null) { */   %>
