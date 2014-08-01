@@ -77,6 +77,7 @@ public class CPrincipal extends HttpServlet {
                 List<V_Usuario> u = us.Val_Usuario(Usuario, Clave);
                 V_Usuario user = new V_Usuario();
                 user = (V_Usuario) u.get(0);
+                
                 if (us.Val_Usuario(Usuario, Clave).size() == 1) {
                     HttpSession sesion = request.getSession(true);
                     sesion.setAttribute("IDUSER", user.getId_usuario());

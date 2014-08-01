@@ -101,11 +101,11 @@ public class CDgp extends HttpServlet {
 
             List<String> list = a.Det_Autorizacion(idrp);
          
-            a.Insert_Autorizacion("", iddgp , "1", "P1", "", iduser, "", "", "", "SECR", idpuesto , idrp, "PAS-000001");
-            out.print(idrp);
+            a.Insert_Autorizacion("", iddgp , "1", "PU1", "123412312",iduser, "", "31/07/14", "3213", idpuesto , idrp, "PAS-000001");
+
             
 
-            //out.println("lalalala");
+            //out.println("lalalala"); 
         }
         if (opc.equals("Reg_form")) {
 

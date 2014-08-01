@@ -24,7 +24,6 @@
             cst.setString(4, "PU1");
             cst.setString(5, "123412312");
             cst.setString(6, "qwerrtrewq");
-       
             cst.setString(7, "qweqweqwee");
             cst.setString(8, "31/07/14");
             cst.setString(9, "3213");

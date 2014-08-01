@@ -103,42 +103,28 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
     }
 
     @Override
-    public void Insert_Autorizacion(String ID_AUTORIZACION, String ID_DGP, String ES_AUTORIZACION, String NU_PASOS, String IP_USUARIO, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String CO_PUESTO, String ID_PUESTO, String ID_DETALLE_REQ_PROCESO, String ID_PASOS) {
+    public void Insert_Autorizacion(String ID_AUTORIZACION, String ID_DGP, String ES_AUTORIZACION, String NU_PASOS, String IP_USUARIO, String US_CREACION, String US_MODIF,String FE_MODIF, String CO_PUESTO, String ID_PUESTO, String ID_DETALLE_REQ_PROCESO, String ID_PASOS) {
         CallableStatement cst;
         
         try {
             
             Connection cx = Conexion.getConex();
-            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            cst = cx.prepareCall("{CALL RHSP_INSERT_AUTORIZACION( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);  
+            cst = cx.prepareCall("{CALL RHSP_INSERT_AUTORIZACION( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
             cst.setString(1, null);
-            cst.setString(2, "DGP-000823");
-            cst.setString(3, "1");
-            cst.setString(4, "P1");
-            cst.setString(5, "");
-            cst.setString(6, "USR-000057");
-            cst.setString(7, "08/08/14");
-            cst.setString(8, "");
-            cst.setString(9, "");
-            cst.setString(10, "SECR");
-            cst.setString(11, "PUT-000136");
-            cst.setString(12, "DRP-000001");
-            cst.setString(13, "PAS-000001");
-           cst.execute();
-            /*
-                cst.setString(1, null);
             cst.setString(2, ID_DGP);
             cst.setString(3, ES_AUTORIZACION);
             cst.setString(4, NU_PASOS);
             cst.setString(5, IP_USUARIO);
             cst.setString(6, US_CREACION);
-            cst.setString(7, FE_CREACION);
-            cst.setString(8, US_MODIF);
-            cst.setString(9, FE_MODIF);
-            cst.setString(10, CO_PUESTO);
-            cst.setString(11, ID_PUESTO);
-            cst.setString(12, ID_DETALLE_REQ_PROCESO);
-            cst.setString(13, ID_PASOS);*/
+            cst.setString(7, US_MODIF);
+            cst.setString(8, FE_MODIF);
+            cst.setString(9, CO_PUESTO);
+            cst.setString(10, ID_PUESTO);
+            cst.setString(11, ID_DETALLE_REQ_PROCESO);
+            cst.setString(12, ID_PASOS);
+           cst.execute();
+
         } catch (SQLException e) {
            // System.out.println(e.getMessage());
         } catch (Exception ex) {
