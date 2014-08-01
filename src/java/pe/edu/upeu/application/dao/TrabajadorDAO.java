@@ -6,18 +6,13 @@
 package pe.edu.upeu.application.dao;
 
 import java.sql.CallableStatement;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
-import pe.edu.upeu.application.factory.Conexion;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
-import pe.edu.upeu.application.model.Trabajador;
 import pe.edu.upeu.application.model.V_Ficha_Trab_Num_C;
 import pe.edu.upeu.application.model.X_List_dat_tr_plantilla;
 import pe.edu.upeu.application.web.controller.CConversion;

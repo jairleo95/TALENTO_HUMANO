@@ -23,7 +23,6 @@ import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
-import pe.edu.upeu.application.model.V_Req_Paso_Pu;
 
 /**
  *
@@ -53,6 +52,7 @@ public class CDgp extends HttpServlet {
         String idtr = request.getParameter("idtr");
         String iddepa = request.getParameter("iddep");
         String idreq = request.getParameter("idreq");
+        
         InterfacePuestoDAO pu = new PuestoDAO();
         InterfaceRequerimientoDAO IReq = new RequerimientoDAO();
         InterfaceTrabajadorDAO tr = new TrabajadorDAO();
@@ -95,17 +95,18 @@ public class CDgp extends HttpServlet {
 
             dgp.INSERT_DGP(ID_DGP, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO, DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION, ES_DGP, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, CA_CENTRO_COSTOS, DE_ANTECEDENTES_POLICIALES, DE_CERTIFICADO_SALUD, DE_MONTO_HONORARIO);
 
-            //  r.
             String iddgp = dgp.MAX_ID_DGP();
             String idrp = IReq.id_det_req_proc(iddgp);
 
             List<String> list = a.Det_Autorizacion(idrp);
          
             a.Insert_Autorizacion("", iddgp , "1", "PU1", "123412312",iduser, "", "31/07/14", "3213", idpuesto , idrp, "PAS-000001");
+            
+           response.sendRedirect("Vista/Dgp/Horario/Reg_Horario.jsp?iddgp="+iddgp +"&idtr="+idtr+"&opc=rd");
 
             
 
-            //out.println("lalalala"); 
+           
         }
         if (opc.equals("Reg_form")) {
 
