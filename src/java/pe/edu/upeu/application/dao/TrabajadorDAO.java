@@ -99,8 +99,8 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(60, FE_MODIF);
             cst.setString(61, IP_USUARIO);
             cst.execute();
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+        } catch (SQLException e) {
+
         } finally {
             this.conn.close();
         }
@@ -199,8 +199,14 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 list.add(v);
             }
 
-        } catch (SQLException e) {
-        } finally {
+         } catch (SQLException e){
+       
+     System.err.println("Error :"+e.getMessage());
+             
+     } 
+        
+        
+        finally {
             this.conn.close();
         }
         return list;
@@ -342,4 +348,6 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         }
         return Max;
     }
+
+   
 }
