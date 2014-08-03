@@ -52,11 +52,6 @@
                 <tr><td class="text-info">Tipo de Hora Referencial:</td><td><%=trb.getCa_tipo_hora_pago_refeerencial()%></td></tr>
                 <tr><td class="text-info">Otros Estudios:</td><td><%=trb.getCm_otros_estudios()%></td></tr>
                 <tr><td  class="text-info">Correo Institucional:</td><td><%=trb.getDi_correo_inst()%></td></tr>
-
-
-
-
-
                 <%}%>
                 <tr><td colspan="2"></td><td><input class=""  type="submit" value="Editar"></td></tr>
             </table>
