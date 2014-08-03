@@ -14,8 +14,8 @@ import pe.edu.upeu.application.model.Horario;
  * @author Admin
  */
 public interface InterfaceHorarioDAO {
-    public boolean Insert_Horario();
-    public boolean Insert_Detalle_Horatio();
-    public String Max_id_Horatio ();
+    public void Insert_Horario(String ID_HOR, String HO_DESDE,String HO_HASTA,String DIA_HOR,String ES_HOR,String ID_DET_HOR);
+    public void Insert_Detalle_Horario(String ID_DET_HOR,String ID_DGP,String ES_DE_HOR,String US_CRE,String FE_CRE,String US_MODIF,String FE_MODIF);
+    public String Max_id_Detalle_Horario ();
     public List<Horario> List_Horario ();
 }

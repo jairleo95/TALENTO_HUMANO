@@ -7,7 +7,7 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="windows-1252">
-        <title>Horario</title>
+        <title>Detalle Horiario</title>
         <style>
               table{
                 // display:block;
@@ -27,6 +27,7 @@ and open the template in the editor.
     
     
     <body>
+        <h2>Horario</h2>
         <? 
         require_once '../Modelo/ModeloHorario.php';
         require_once '../Modelo/ModeloLista.php';
@@ -60,7 +61,7 @@ and open the template in the editor.
             <?}?>
        
         <?  if ($_REQUEST["P2"]==true) {?>
-        <a href="../Detalle_Dgp.jsp?iddgp=<?echo $_REQUEST["iddgp"]; ?>&idtr=<?echo $_REQUEST["idtr"];?>&opc=rd">Continuar</a>
+        <a href="../Detalle_Dgp.jsp?iddgp">Continuar</a>
         <?}?>
  
 

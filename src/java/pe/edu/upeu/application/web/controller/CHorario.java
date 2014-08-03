@@ -8,11 +8,15 @@ package pe.edu.upeu.application.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import pe.edu.upeu.application.dao.HorarioDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceHorarioDAO;
 
 /**
  *
@@ -36,31 +40,71 @@ public class CHorario extends HttpServlet {
         
         HttpSession sesion = request.getSession();
         
-        String [][] dia;
-        dia = new String[0][];
-        dia = new String[1][];
-        dia = new String[2][];
-        dia = new String[3][];
-        dia = new String[5][];
+      String iduser=(String)  sesion.getAttribute("IDUSER");
+        
+        InterfaceHorarioDAO IHor = new HorarioDAO();
+        
+       List<String> dia = new ArrayList<String>();
+       dia.add("lun");
+       dia.add("mar");
+       dia.add("mie");
+       dia.add("jue");
+       dia.add("vie");
+       dia.add("dom");
+   
         
         String opc = request.getParameter("opc");
         
-        if (opc.equals("Registrar")) {
-            String ID_DETALLE_HORARIO = request.getParameter("");
-            String ID_DGP = request.getParameter("");
-            String ES_DGP="1";
-            String US_CREACION  = request.getParameter("");
-            String FE_CREACION = request.getParameter("");
-            String US_MODIFICACION = request.getParameter("");
-            String FE_MODIFICACION = request.getParameter("");
-            String ID_HORARIO = request.getParameter("");
-            String HO_DESDE = request.getParameter("");
-            String HO_HASTA = request.getParameter("");
-            String DIA_HORARIO = request.getParameter("");
-            String IDDETALLE_HORARIO = request.getParameter("");
+        if (opc.equals("REGISTRAR HORARIO")) {
             
+            String ID_DETALLE_HORARIO = request.getParameter("ID_DETALLE_HORARIO");
+            String ID_DGP = request.getParameter("IDDETALLE_DGP");
+            String ES_DETALLE_HORARIO="1";
+          //  String US_MODIFICACION = request.getParameter("USER_MODIFICACION");
+           // String FE_MODIFICACION = request.getParameter("FECHA_MODIFICACION");
+            String ES_HORARIO = "1";
+            String ID_TRABAJJADOR = request.getParameter("IDDATOS_TRABAJADOR");
             
+           IHor.Insert_Detalle_Horario(ID_DETALLE_HORARIO, ID_DGP, ES_DETALLE_HORARIO, iduser, null, null,null);
             
+           ID_DETALLE_HORARIO =  IHor.Max_id_Detalle_Horario();
+            
+            out.print(ID_DETALLE_HORARIO);
+            out.print(ID_DGP);
+            out.print(iduser);
+            
+            for (int i = 0; i < dia.size(); i++) {
+                for (int j = 0; j < 10; j++) {
+                    if(request.getParameter("HORA_DESDE_"+ dia.get(i)+ j)!= null){
+                        IHor.Insert_Horario(null, 
+                                request.getParameter("HORA_DESDE_"+dia.get(i)+j), 
+                                request.getParameter("HORA_HASTA_"+dia.get(i)+j), 
+                                request.getParameter("DIA_"+dia.get(i)+j),
+                                ES_HORARIO,
+                                 ID_DETALLE_HORARIO );
+                    }
+        
+                }
+                
+            }
+           /* for (int i = 0; i < dia.size(); i++) {
+                for (int j = 0; j < 10; j++) {
+                    if(request.getParameter("HORA_DESDE_"+ dia.get(i)+ j)!= null){
+                 out.println(request.getParameter("HORA_DESDE_"+dia.get(i)+j));
+                 out.println("<br>");
+                 out.println("<br>");
+                 out.println(request.getParameter("HORA_HASTA_"+dia.get(i)+j));
+                                  out.println("<br>");
+                                  out.println("<br>");
+                 out.println(request.getParameter("DIA_"+dia.get(i)+j));
+                                 out.println("<br>");
+                                 out.println("<br>");
+                }
+                }
+               
+            }*/
+          
+            response.sendRedirect("Vista/Dgp/Horario/Detalle_Horario.jsp?iddgp="+ID_DGP+"&idtr="+ID_TRABAJJADOR+"&P2=true");
         }
         
     }

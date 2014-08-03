@@ -1,12 +1,5 @@
 
-<%@page import="pe.edu.upeu.application.factory.fecha"%>
-<%@page import="java.text.DateFormat"%>
-<%@page import="java.text.ParseException"%>
-<%@page import="java.util.Formatter"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%>
-<%@page import="java.util.GregorianCalendar"%>
-<%@page import="java.util.Calendar"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,17 +7,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
         <script type="text/javascript" src="../js/JQuery/jQuery.js"></script>
-        <script>
-            $(document).ready(
-                    function() {
-                        $("#date").change(
-                                function() {
-                                    $("#s").text($("#date").val());
-                                }
-                        );
-                    }
-            );
-        </script>
         <title>JSP Page</title>
     </head>
     <body>
@@ -34,15 +16,25 @@
 
 
             <input type="submit" value="Enviar"  name="Enviar">
-            <%
-              
-                
-                
-                String fec = "2014-07-28";
-                fecha f =  new fecha();
-                out.println(f.convertFecha(fec));
 
-            %>
+            <%
+            Connection cx = Conexion.getConex();
+     CallableStatement cst = cx.prepareCall("{CALL RHSP_INSERT_AUTORIZACION( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+            cst.setString(1, null);
+            cst.setString(2, "DGP-000823");
+            cst.setString(3, "1");
+            cst.setString(4, "PU1");
+            cst.setString(5, "123412312");
+            cst.setString(6, "qwerrtrewq");
+            cst.setString(7, "qweqweqwee");
+            cst.setString(8, "31/07/14");
+            cst.setString(9, "3213");
+            cst.setString(10, "PUT-000136");
+            cst.setString(11, "DRP-000001");
+            cst.setString(12, "PAS-000001");
+           cst.execute();
+
+        %>
             <p id="s"></p>
         </form>
     </body>
