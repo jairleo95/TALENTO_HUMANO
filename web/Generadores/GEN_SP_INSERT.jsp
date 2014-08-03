@@ -20,7 +20,7 @@
     </head>
     <body>
         <%
-            ResultSet rs2 = null;
+             ResultSet rs2 = null;
             ResultSet cnt2 = null;
             ResultSet cnt1 = null;
             ResultSet rs = null;
