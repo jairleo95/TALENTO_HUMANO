@@ -46,6 +46,7 @@ public class CDgp extends HttpServlet {
 
         /*Declaramos*/
         HttpSession sesion = request.getSession(true);
+        
         String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
         String idpuesto = (String) sesion.getAttribute("PUESTO_ID");
         String iduser = (String) sesion.getAttribute("IDUSER");

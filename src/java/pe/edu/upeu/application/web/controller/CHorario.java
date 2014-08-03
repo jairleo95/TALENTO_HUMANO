@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -33,13 +34,32 @@ public class CHorario extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
+        HttpSession sesion = request.getSession();
+        
+        String [][] dia;
+        dia = new String[0][];
+        dia = new String[1][];
+        dia = new String[2][];
+        dia = new String[3][];
+        dia = new String[5][];
+        
         String opc = request.getParameter("opc");
         
         if (opc.equals("Registrar")) {
-            String ID_HORARIO = request.getParameter("");
+            String ID_DETALLE_HORARIO = request.getParameter("");
             String ID_DGP = request.getParameter("");
             String ES_DGP="1";
             String US_CREACION  = request.getParameter("");
+            String FE_CREACION = request.getParameter("");
+            String US_MODIFICACION = request.getParameter("");
+            String FE_MODIFICACION = request.getParameter("");
+            String ID_HORARIO = request.getParameter("");
+            String HO_DESDE = request.getParameter("");
+            String HO_HASTA = request.getParameter("");
+            String DIA_HORARIO = request.getParameter("");
+            String IDDETALLE_HORARIO = request.getParameter("");
+            
+            
             
         }
         

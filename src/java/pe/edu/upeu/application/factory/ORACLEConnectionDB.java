@@ -24,11 +24,11 @@ public final class ORACLEConnectionDB extends ConexionBD{
     @Override
     Connection open() {
      
-     String usuario = "procesosrh";
-        String password = "gestionrrhh";
-        String host = "procesrh-db.upeu";
+     String usuario = "RH_UPEU";
+        String password = "alfa";
+        String host = "localhost";
         String puerto = "1521";
-        String sid = "UPEU";
+        String sid = "ORCL";
         String driver = "oracle.jdbc.driver.OracleDriver";
         //String url = "jdbc:oracle:thin:" + this.parametro[0] + "/" + this.parametro[1] + "@" + host + ":" + puerto + ":" + this.parametro[2];
         String url = "jdbc:oracle:thin:" + usuario + "/" + password + "@" + host + ":" + puerto + ":" + sid;
