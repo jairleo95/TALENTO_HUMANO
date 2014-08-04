@@ -22,12 +22,12 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
     @Override
     public String Id_Puesto_Personal(String ide) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT 'DGP-' ||MAX (SUBSTR(ID_DGP,5,8)) FROM RHTM_DGP";
+        String sql = "select id_puesto from RHVD_EMP_PU_DIR_DEP WHERE ID_EMPLEADO='"+ide+"'";
         String id = null;
         try {
             ResultSet rs = this.conn.query(sql);
             rs.next();
-            id = rs.getString(1);
+            id = rs.getString("id_puesto");
         } catch (SQLException e) {
         } finally {
             this.conn.close();
