@@ -68,9 +68,5 @@
             cst.setString(47, null);
             cst.execute();
         %>
-        
-        <form action="../autorizacion">
-            <input type="submit" >
-        </form>
     </body>
 </html>
