@@ -17,11 +17,11 @@ import java.sql.SQLException;
 public class Conexion {
 
     public static Connection getConex() throws Exception {
-        String usuario = "procesosrh";
-        String password = "gestionrrhh";
-        String host = "procesrh-db.upeu";
+        String usuario = "RH_UPEU";
+        String password = "alfa";
+        String host = "localhost";
         String puerto = "1521";
-        String sid = "UPEU";
+        String sid = "ORCL";
         String driver = "oracle.jdbc.driver.OracleDriver";
         String url = "jdbc:oracle:thin:" + usuario + "/" + password + "@" + host + ":" + puerto + ":" + sid;
 

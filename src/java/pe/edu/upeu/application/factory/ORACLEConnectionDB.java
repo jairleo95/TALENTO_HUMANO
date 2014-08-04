@@ -8,6 +8,7 @@ package pe.edu.upeu.application.factory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
  *
@@ -15,7 +16,7 @@ import java.sql.DriverManager;
  */
 public final class ORACLEConnectionDB extends ConexionBD{
 
-     public ORACLEConnectionDB(String[] parametro) {
+   ORACLEConnectionDB(String[] parametro) {
         this.parametro = parametro;
         this.open();
     }
@@ -23,21 +24,20 @@ public final class ORACLEConnectionDB extends ConexionBD{
     
     @Override
     Connection open() {
-     
-     String usuario = "RH_UPEU";
-        String password = "alfa";
-        String host = "localhost";
-        String puerto = "1521";
-        String sid = "ORCL";
         String driver = "oracle.jdbc.driver.OracleDriver";
-        //String url = "jdbc:oracle:thin:" + this.parametro[0] + "/" + this.parametro[1] + "@" + host + ":" + puerto + ":" + this.parametro[2];
-        String url = "jdbc:oracle:thin:" + usuario + "/" + password + "@" + host + ":" + puerto + ":" + sid;
+        String url = "jdbc:oracle:thin:" + this.parametro[0] + "/" + this.parametro[1] + "@" + this.parametro[2] + ":" + this.parametro[3] + ":" + this.parametro[4];
         try {
             Class.forName(driver).newInstance();
             this.conex = DriverManager.getConnection(url);
-        } catch (Exception e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+       } catch (InstantiationException e) {
+           e.printStackTrace();
+       } catch (SQLException e) {
+           e.printStackTrace();
+       }
        
         return this.conex;
     }
