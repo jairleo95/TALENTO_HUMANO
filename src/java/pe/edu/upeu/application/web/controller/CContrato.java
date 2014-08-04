@@ -121,8 +121,8 @@ public class CContrato extends HttpServlet {
             String FE_VACACIO_FIN = "";
             String ES_CONTRATO = request.getParameter("ESTADO_CONTRATO");
             String ID_FILIAL = request.getParameter("FILIAL");
-            String ID_DIRECCION = "";
-            String ID_DEPARTAMENTO = "";
+            String ID_DIRECCION = "DIR-0002";
+            String ID_DEPARTAMENTO = "DPT-0092";
             String ID_AREA = request.getParameter("AREA_ID");
             String ID_PUESTO = request.getParameter("PUESTO_ID");
             String ID_SEC = sec.ID_SECCION(ID_PUESTO);

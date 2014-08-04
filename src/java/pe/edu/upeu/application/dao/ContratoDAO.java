@@ -206,7 +206,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
     @Override
     public List<X_List_Anno_Id_Tr_DGP> List_Anno_Id_Tr_DGP(String id_trabajador) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from (select a.id_anno,a.no_anno ,rh.id_dgp ,rh.id_trabajador from RHTR_ANNO a , RHTM_CONTRATO rh  where   a.id_anno=rh.id_anno and rh.es_contrato=1)f left outer join RHTM_DGP dgp on (f.id_dgp =dgp.id_dgp) where f.id_trabajador=$idtr order by f.no_anno desc";
+        String sql = "select * from (select a.id_anno,a.no_anno ,rh.id_dgp ,rh.id_trabajador from RHTR_ANNO a , RHTM_CONTRATO rh  where   a.id_anno=rh.id_anno and rh.es_contrato=1)f left outer join RHTM_DGP dgp on (f.id_dgp =dgp.id_dgp) where f.id_trabajador='"+id_trabajador+"' order by f.no_anno desc";
         List<X_List_Anno_Id_Tr_DGP> list = new ArrayList<X_List_Anno_Id_Tr_DGP>();
         try {
             ResultSet rs = this.conn.query(sql);
