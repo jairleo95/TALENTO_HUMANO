@@ -100,8 +100,8 @@ public class CDgp extends HttpServlet {
             String idrp = IReq.id_det_req_proc(iddgp);
 
             List<String> list = a.Det_Autorizacion(idrp);
-         
-            a.Insert_Autorizacion("", iddgp , "1", "PU1", "123412312",iduser, "", "31/07/14", "3213", idpuesto , idrp, "PAS-000001");
+
+            a.Insert_Autorizacion("", iddgp , "1", "P1", "12312",iduser, "", "31/07/14", "3213", idpuesto , idrp, "PAS-000001");
             
            response.sendRedirect("Vista/Dgp/Horario/Reg_Horario.jsp?iddgp="+iddgp +"&idtr="+idtr+"&opc=rd");
 

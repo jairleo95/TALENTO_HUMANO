@@ -11,13 +11,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO;
 import pe.edu.upeu.application.factory.Conexion;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Autorizacion;
+import pe.edu.upeu.application.model.V_Autorizar_Dgp;
 import pe.edu.upeu.application.model.X_List_De_Autorizacion;
 import pe.edu.upeu.application.web.controller.CConversion;
 
@@ -26,9 +25,9 @@ import pe.edu.upeu.application.web.controller.CConversion;
  * @author Admin
  */
 public class AutorizacionDAO implements InterfaceAutorizacionDAO {
-     CConversion c = new CConversion();
+
+    CConversion c = new CConversion();
     ConexionBD conn;
-   
 
     @Override
     public boolean Guardar_Autorizacion(String id_autorizacion, String id_dgp, String id_proceso, String estado, String detalle, String nu_pasos) {
@@ -54,8 +53,43 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
     }
 
     @Override
-    public List<Autorizacion> List_id_Autorizacion(String id_aurotizacion, String id_user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<V_Autorizar_Dgp> List_id_Autorizacion(String id, String id_user) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select *  from rhvd_autorizar_dgp";
+        //sql += (!"".equals(id_user)) ? " and id_usuario='" + id_user + "'" : "";
+
+        List<V_Autorizar_Dgp> list = new ArrayList<V_Autorizar_Dgp>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                V_Autorizar_Dgp x = new V_Autorizar_Dgp();
+                x.setId_trabajador(rs.getString("id_trabajador"));
+                x.setNo_trabajador(rs.getString("no_trabajador"));
+                x.setAp_paterno(rs.getString("ap_paterno"));
+                x.setAp_materno(rs.getString("ap_materno"));
+                x.setNo_puesto(rs.getString("no_puesto"));
+                x.setNu_pasos(rs.getString("nu_pasos"));
+                x.setId_dgp(rs.getString("id_dgp"));
+                x.setCo_pasos(rs.getString("co_pasos"));
+                x.setId_detalle_req_proceso(rs.getString("id_detalle_req_proceso"));
+                x.setDe_pasos(rs.getString("de_pasos"));
+                x.setId_departamento(rs.getString("id_departamento"));
+                x.setId_puesto(rs.getString("id_puesto"));
+                x.setId_requerimiento(rs.getString("id_requerimiento"));
+                x.setId_tipo_planilla(rs.getString("id_tipo_planilla"));
+                x.setNo_req(rs.getString("no_req"));
+                x.setId_pasos(rs.getString("id_pasos"));
+                x.setNo_usuario(rs.getString("no_usuario"));
+                x.setNo_seccion(rs.getString("no_seccion"));
+                x.setNo_area(rs.getString("no_area"));
+                list.add(x);
+            }
+
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return list;
     }
 
     @Override
@@ -80,20 +114,19 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
         List<String> list = new ArrayList<String>();
         try {
             ResultSet rs = this.conn.query(sql);
-            rs.next() ;
-                list.add(rs.getString("id_pasos"));
-                list.add(rs.getString("id_proceso"));
-                list.add(rs.getString("id_detalle_req_proceso"));
-                list.add(rs.getString("id_detalle_pasos"));
-                list.add(rs.getString("de_pasos"));
-                list.add(rs.getString("nu_pasos"));
-                list.add(rs.getString("co_pasos"));
-                list.add(rs.getString("no_proceso"));
-                list.add(rs.getString("id_puesto"));
-                list.add(rs.getString("id_direccion"));
-                list.add(rs.getString("id_departamento"));
-                list.add(rs.getString("id_requerimiento"));
-            
+            rs.next();
+            list.add(rs.getString("id_pasos"));
+            list.add(rs.getString("id_proceso"));
+            list.add(rs.getString("id_detalle_req_proceso"));
+            list.add(rs.getString("id_detalle_pasos"));
+            list.add(rs.getString("de_pasos"));
+            list.add(rs.getString("nu_pasos"));
+            list.add(rs.getString("co_pasos"));
+            list.add(rs.getString("no_proceso"));
+            list.add(rs.getString("id_puesto"));
+            list.add(rs.getString("id_direccion"));
+            list.add(rs.getString("id_departamento"));
+            list.add(rs.getString("id_requerimiento"));
 
         } catch (SQLException e) {
         } finally {
@@ -103,13 +136,13 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
     }
 
     @Override
-    public void Insert_Autorizacion(String ID_AUTORIZACION, String ID_DGP, String ES_AUTORIZACION, String NU_PASOS, String IP_USUARIO, String US_CREACION, String US_MODIF,String FE_MODIF, String CO_PUESTO, String ID_PUESTO, String ID_DETALLE_REQ_PROCESO, String ID_PASOS) {
+    public void Insert_Autorizacion(String ID_AUTORIZACION, String ID_DGP, String ES_AUTORIZACION, String NU_PASOS, String IP_USUARIO, String US_CREACION, String US_MODIF, String FE_MODIF, String CO_PUESTO, String ID_PUESTO, String ID_DETALLE_REQ_PROCESO, String ID_PASOS) {
         CallableStatement cst;
-        
+
         try {
-            
+
             Connection cx = Conexion.getConex();
-            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);  
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             cst = cx.prepareCall("{CALL RHSP_INSERT_AUTORIZACION( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
             cst.setString(1, null);
             cst.setString(2, ID_DGP);
@@ -123,13 +156,13 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
             cst.setString(10, ID_PUESTO);
             cst.setString(11, ID_DETALLE_REQ_PROCESO);
             cst.setString(12, ID_PASOS);
-           cst.execute();
+            cst.execute();
 
         } catch (SQLException e) {
-           // System.out.println(e.getMessage());
+            // System.out.println(e.getMessage());
         } catch (Exception ex) {
             // Logger.getLogger(AutorizacionDAO.class.getName()).log(Level.SEVERE, null, ex);
-         }finally{
+        } finally {
             this.conn.close();
         }
     }

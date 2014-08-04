@@ -8,6 +8,7 @@ package pe.edu.upeu.application.dao_imp;
 
 import java.util.List;
 import pe.edu.upeu.application.model.Autorizacion;
+import pe.edu.upeu.application.model.V_Autorizar_Dgp;
 import pe.edu.upeu.application.model.X_List_De_Autorizacion;
 
 
@@ -22,7 +23,7 @@ public interface InterfaceAutorizacionDAO {
     public List<String> Det_Autorizacion(String id_rpp);
     public String Max_Id_Autorizacion();
     public List<X_List_De_Autorizacion>  List_Detalle_Autorizacion();
-    public List<Autorizacion> List_id_Autorizacion(String id_aurotizacion , String id_user);
+    public List<V_Autorizar_Dgp> List_id_Autorizacion(String id_aurotizacion , String id_user);
     public List<Autorizacion> NO_List_DGP();
     public boolean Elim_Aut(String id_Autorizacion);
     public int Val_Aut_DGP_M(String id_dgp);

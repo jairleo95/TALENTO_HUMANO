@@ -94,7 +94,7 @@
                     <tr><td>¿Es Jefe?:</td><td>
                         <select name="JEFE" class="text-box" required="" >
                             <option value=""></option>
-                            <option value="No es Jefe">No es Jefe</option>
+                            <option value="1">No es Jefe</option>
                             <option value="2">Jefe de Sección</option>
                             <option value="3">Jefe de Area</option>
                             <option value="4">Jefe de Departamento</option>

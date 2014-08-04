@@ -5,6 +5,7 @@
  */
 package pe.edu.upeu.application.dao;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import pe.edu.upeu.application.dao_imp.InterfaceEmpleadoDAO;
@@ -33,6 +34,22 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
             this.conn.close();
         }
         return id;
+    }
+
+    @Override
+    public void VALIDAR_EMPLEADO(String id_tra) {
+       
+        CallableStatement cst;
+        try {
+             this.conn=FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst=conn.conex.prepareCall("{CALL RHSP_VAL_EMP ( ? )}");
+            cst.setString(1,id_tra);
+            cst.execute();
+        } catch (SQLException e) {
+        }finally{
+            this.conn.close();
+        }
+
     }
 
 }

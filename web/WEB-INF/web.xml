@@ -24,6 +24,10 @@
         <servlet-name>CHorario</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CHorario</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CAutorizacion</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CAutorizacion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CIndex</servlet-name>
         <url-pattern>/prueba</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>CHorario</servlet-name>
         <url-pattern>/horario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CAutorizacion</servlet-name>
+        <url-pattern>/autorizacion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
