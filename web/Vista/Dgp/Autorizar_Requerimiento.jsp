@@ -89,9 +89,9 @@
                         int num = dgp.VALIDAR_DGP_CONTR(iddgp, idtr);
                     %>
 
-                    <td><a href="../../trabajador?idtr=<%=a.getId_trabajador()%>&IDDETALLE_REQ_PROCESO=<%=a.getId_requerimiento()%>&iddetalle_dgp=<%=a.getId_requerimiento()%>&puesto_id=<%=a.getId_puesto()%>&cod=<%=a.getCo_pasos()%>&idpasos=<%=a.getId_pasos()%>&autorizacion=1&opc=list">
+                    <td><a href="../../trabajador?idtr=<%=a.getId_trabajador()%>&IDDETALLE_REQ_PROCESO=<%=a.getId_requerimiento()%>&iddetalle_dgp=<%=a.getId_requerimiento()%>&puesto_id=<%=a.getId_puesto()%>&cod=<%=a.getCo_pasos()%>&idpasos=<%=a.getId_pasos()%>&autorizacion=1&opc=aut">
                             <%
-                          if(idrol!=null){
+                                if (idrol != null) {
                                     if (idrol.equals("ROL-0006")) {
                                         if (num != 0) {
                                             out.println("Registrar Firma");
@@ -104,7 +104,7 @@
                                         out.println("Autorizar");
                                     }
 
-                          }
+                                }
 
                             %> </a></td>    
 

@@ -42,18 +42,34 @@ public class CAutorizacion extends HttpServlet {
         String iduser = (String) sesion.getAttribute("IDUSER");
         String ide = (String) sesion.getAttribute("IDPER");
 
-      
-        //try {
-            
-              String idpu = e.Id_Puesto_Personal(ide);
-               out.println(ide);
-       getServletContext().setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
-       //
-       response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp");
+        String opc = request.getParameter("opc");
 
-       /* } finally {
-            out.close();
-        }*/
+        if (opc != null) {
+            if (opc.equals("Aceptar")) {
+                String iddgp = request.getParameter("IDDETALLE_DGP");
+                String estado = "1";
+                String nropaso = request.getParameter("NROPASO");
+                String usuario_ip = request.getParameter("USUARIO_IP");
+                String us_creacion = iduser;
+                String cod = request.getParameter("COD");
+                String id_puesto = request.getParameter("PUESTO_ID");
+                String iddrp = request.getParameter("IDDETALLE_REQ_PROCESO");
+                String idpasos = request.getParameter("IDPASOS");
+                a.Insert_Autorizacion(null, iddgp, estado, nropaso, usuario_ip, us_creacion, null, null, cod, id_puesto, iddrp, idpasos);
+
+            }
+            //try {
+        } else {
+
+            String idpu = e.Id_Puesto_Personal(ide);
+            getServletContext().setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
+
+            //
+            response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp");
+        }
+        /* } finally {
+         out.close();
+         }*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

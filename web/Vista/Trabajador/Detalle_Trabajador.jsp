@@ -14,11 +14,11 @@
         <meta name="author" content="">
         <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.autoheight.js"></script>
-        
+
 
 
         <title>Detalle de Trabajador</title>
-      
+
 
         <script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
         <link rel="stylesheet" href="../../css/Css_Alerta/alertify.core.css" />
@@ -144,14 +144,14 @@
                         <div >
                             <table class="info-det">
                                 <%
-                                    for(int index =0; index<ListaridTrabajador.size();index++){
-                                        V_Ficha_Trab_Num_C trb=new V_Ficha_Trab_Num_C();
-                                        trb=(V_Ficha_Trab_Num_C)ListaridTrabajador.get(index);
-                                        %>
+                                    for (int index = 0; index < ListaridTrabajador.size(); index++) {
+                                        V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
+                                        trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
+                                %>
                                 <tr><td class="td">Nombre :</td><td><%=trb.getNo_trabajador()%></td></tr>
                                 <tr><td class="td">Apellido Paterno :</td><td><%=trb.getAp_paterno()%></td></tr>
                                 <tr><td class="td">Apellido Materno :</td><td><%=trb.getAp_paterno()%></td></tr>
-                                <tr><td class="td">Fecha de Nacimiento :</td><td><%=trb.getFe_nac() %></td></tr>
+                                <tr><td class="td">Fecha de Nacimiento :</td><td><%=trb.getFe_nac()%></td></tr>
                                 <%}%>
                             </table>
                         </div>
@@ -162,7 +162,7 @@
             <div  class="titulo" id="titulo-c">Informacion Personal</div> 
 
             <%
-            /*require_once '../Modelo/ModeloLista.php';
+                /*require_once '../Modelo/ModeloLista.php';
                  $mdl= new ModeloLista();
                  $list_aut_m=$mdl->LISTA_AUTO_MOSTRAR($_SESSION["IDROL"]);*/
             %>
@@ -173,52 +173,55 @@
         </div> 
         <div>
             <%
-                if (false) {
-                    /* if ($_REQUEST["autorizacion"]==1) {
-                     $puesto_id= $_SESSION["PUESTO_ID"];
-                     $iddetalle_dgp= $_REQUEST["iddetalle_dgp"];
-                     $IDDETALLE_REQ_PROCESO= $_REQUEST["IDDETALLE_REQ_PROCESO"];
-                     $cod= $_REQUEST["cod"];
-                     $idpasos= $_REQUEST["idpasos"];
-                     $nropaso= $_REQUEST["nropaso"];
-                     //echo $idempleado;
-                   
-                     */
+                String aut = request.getParameter("aut");
+                HttpSession sesion = request.getSession(true);
+
+                if(aut!=null){
+                if (aut.equals("1")) {
+
+                    String idp = (String) sesion.getAttribute("PUESTO_ID");
+                    String iddgp = request.getParameter("iddgp");
+                    String cod = request.getParameter("cod");
+                    String iddrp = request.getParameter("IDDETALLE_REQ_PROCESO");
+                    String id_pasos = request.getParameter("idpasos");
+                    String nropaso = request.getParameter("nropaso");
+
             %>
             <center>
                 <form class="form" action="../Control/ControlAutorizacion.php" method="post" > 
                     <table > 
-                        <input type="hidden" name="IDDETALLE_DGP"  value="<? echo $iddetalle_dgp;?>" class="text-box" >           
+                        <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
                         <input type="hidden" name="ESTADO" value="1" >                     
-                        <input type="hidden" name="NROPASO" value="<? echo $nropaso;?>"  class="text-box" >                
-                        <input type="hidden" name="USUARIO_IP" class="text-box" >  
-                        <input type="hidden" name="USER_CREACION" value="" class="text-box" > 
-
-                        <input type="hidden" name="COD" value="<? echo $cod;?>"  class="text-box" >               
-                        <input type="hidden" name="PUESTO_ID" value="<? echo $puesto_id;?>" class="text-box" >  
-                        <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<? echo $IDDETALLE_REQ_PROCESO;?>" class="text-box" >  
-                        <input type="hidden" name="IDPASOS" value="<? echo $idpasos;?>"  class="text-box" >
+                        <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
+                        <input type="hidden" name="USUARIO_IP" >  
+                        <input type="hidden" name="USER_CREACION" value=""  > 
+                        <input type="hidden" name="COD" value="<%=cod%>"  >               
+                        <input type="hidden" name="PUESTO_ID" value="<%=idp%>" >  
+                        <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
+                        <input type="hidden" name="IDPASOS" value="<%=id_pasos%>"   >
                         <tr><td><input type="submit" name="opc"  class="submit" value="Aceptar"/></td></tr>
                     </table>
                 </form>
                 <form action="../Control/ControlAutorizacion.php" method="post">
                     <table>
-                        <input type="hidden" name="IDDETALLE_DGP"  value="<? echo $iddetalle_dgp;?>" class="text-box" >           
+                        
+                        
+                        
+                            <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
                         <input type="hidden" name="ESTADO" value="2" >                     
-                        <input type="hidden" name="NROPASO" value="<? echo $nropaso;?>"  class="text-box" >                
-                        <input type="hidden" name="USUARIO_IP" class="text-box" >  
-                        <input type="hidden" name="USER_CREACION" value="" class="text-box" > 
+                        <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
+                        <input type="hidden" name="USUARIO_IP" >  
+                        <input type="hidden" name="USER_CREACION" value=""  > 
 
-
-                        <input type="hidden" name="COD" value="<? echo $cod;?>"  class="text-box" >               
-                        <input type="hidden" name="PUESTO_ID" value="<? echo $puesto_id;?>" class="text-box" >  
-                        <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<? echo $IDDETALLE_REQ_PROCESO;?>" class="text-box" >  
-                        <input type="hidden" name="IDPASOS" value="<? echo $idpasos;?>"  class="text-box" >
+                        <input type="hidden" name="COD" value="<%=cod%>"  >               
+                        <input type="hidden" name="PUESTO_ID" value="<%=idp%>" >  
+                        <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
+                        <input type="hidden" name="IDPASOS" value="<%=id_pasos%>" 
                         <tr><td><input type="submit" name="opc"  class="submit" value="Rechazar"/></td></tr>
                     </table>
                 </form>   
             </center>
-            <%}%>
+            <%}}%>
         </div>
         <script src="../../js/JQuery/jQuery.js"></script>
         <script src="../../js/Js_dlmenu/jquery.dlmenu.js"></script>
