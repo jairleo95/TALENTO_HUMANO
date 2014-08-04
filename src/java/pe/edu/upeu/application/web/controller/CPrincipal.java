@@ -41,8 +41,10 @@ public class CPrincipal extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        out.print("ERROR");
+         
         InterfaceListaDAO li = new ListaDAO();
         InterfaceDgpDAO dgp = new DgpDAO();
         InterfaceUbigeoDAO ub = new UbigeoDAO();
@@ -53,15 +55,14 @@ public class CPrincipal extends HttpServlet {
 
         try {
 
-            String opc = request.getParameter("opc");
-            //out.println(opc);/*
-            if (opc.equals("ingresar")) {
                 String Usuario = request.getParameter("username");
                 String Clave = request.getParameter("clave");
+                if(Usuario.equals("") && Clave.equals("")){
+                    out.print("ERROR");
+                }else{
                 List<V_Usuario> u = us.Val_Usuario(Usuario, Clave);
                 V_Usuario user = new V_Usuario();
-                user = (V_Usuario) u.get(0);
-                
+                user = (V_Usuario) u.get(0);                
                 if (us.Val_Usuario(Usuario, Clave).size() == 1) {
                     HttpSession sesion = request.getSession(true);
                     sesion.setAttribute("IDUSER", user.getId_usuario());
@@ -82,16 +83,17 @@ public class CPrincipal extends HttpServlet {
                     getServletContext().setAttribute("List_Universidad", li.List_Universidad());
                     getServletContext().setAttribute("List_Distrito", ub.List_Distrito());
                     getServletContext().setAttribute("List_Det_Puesto", pu.List_Det_Puesto());
-
+                    out.print("EXITO!");
+                    /*
                     RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Principal.jsp");
                     dispatcher.forward(request, response);
-                    //response.sendRedirect("Principal.jsp");
+                    //response.sendRedirect("Principal.jsp");*/
                 } else {
                     RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
                     dispatcher.forward(request, response);
                 }
-            }
-
+            
+                }
         } finally {
             out.close();
         }

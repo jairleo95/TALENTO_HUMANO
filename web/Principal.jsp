@@ -182,5 +182,5 @@
     </body>
 </html>
 <%}else{
-    
+  response.sendRedirect("/index.jsp");  
 }%>

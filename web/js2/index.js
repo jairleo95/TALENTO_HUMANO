@@ -1,18 +1,32 @@
-$(document).on("ready",function(){
-    $("#enviar").click(function(){
-	 var url = "jonas"; // El script a dónde se realizará la petición.
-	    $.ajax({
-	           type: "POST",
-	           url: url,
-	           data: $("#formulario").serialize(), // Adjuntar los campos del formulario enviado.
-                   cache: false,
-	           success: function(data)
-	           {
-	               $("#mensaje").html(data); // Mostrar la respuestas del script PHP.
-                       $("#mensaje").addClass("test");
-	           }
-	         });
-	 
-	    return false; // Evitar ejecutar el submit del formulario.
-	 });
+$(document).ready(function(){
+    $("#formulario").submit(function(){
+    $("#mensaje").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);
+    this.timer = setTimeout(function () {
+    $.ajax({
+            type: 'POST',
+            url: 'valida',
+            data: $("#formulario").serialize(),
+    success: function(msg){
+    if(msg != 'ERROR') // Message Sent, check and redirect
+    {                // and direct to the success page
+        $("#mensaje").html('Login Verified, Logging in.....').addClass('myinfo').fadeTo(900,1,
+            function()
+            {
+            //redirect to secure page
+            document.location='menu';
+            });
+    }else{
+        $("#mensaje").fadeTo(200,0.1,function() //start fading the messagebox
+        {//add message and change the class of the box and start fading
+        $(this).html('Disculpe. USUARIO Y CLAVE INCORRECTO').removeClass().addClass('myerror').fadeTo(900,1);
+    });
+ 
+    }
+    }
+ 
+    });
+    }, 200);
+    return false;
+    }); 
 });
+ 

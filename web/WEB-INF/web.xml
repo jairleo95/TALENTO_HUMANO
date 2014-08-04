@@ -5,10 +5,6 @@
         <servlet-class>pe.edu.upeu.application.web.controller.CIndex</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CPrincipal</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CPrincipal</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>CTrabajador</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CTrabajador</servlet-class>
     </servlet>
@@ -29,20 +25,12 @@
         <servlet-class>pe.edu.upeu.application.web.controller.CAutorizacion</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Prueba</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.Prueba</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Prueba2</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.Prueba2</servlet-class>
+        <servlet-name>CMenu</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CMenu</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CIndex</servlet-name>
-        <url-pattern>/prueba</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CPrincipal</servlet-name>
-        <url-pattern>/menu</url-pattern>
+        <url-pattern>/valida</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
@@ -65,12 +53,8 @@
         <url-pattern>/autorizacion</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Prueba</servlet-name>
-        <url-pattern>/jonas</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Prueba2</servlet-name>
-        <url-pattern>/error</url-pattern>
+        <servlet-name>CMenu</servlet-name>
+        <url-pattern>/menu</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
