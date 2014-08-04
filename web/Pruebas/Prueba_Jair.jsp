@@ -16,7 +16,7 @@
     </head>
     <body>
         <%
-            Connection cx = Conexion.getConex();
+           /* Connection cx = Conexion.getConex();
      CallableStatement cst = cx.prepareCall("{CALL RHSP_INSERT_AUTORIZACION( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
             cst.setString(1, null);
             cst.setString(2, "DGP-000823");
@@ -30,8 +30,12 @@
             cst.setString(10, "PUT-000136");
             cst.setString(11, "DRP-000001");
             cst.setString(12, "PAS-000001");
-           cst.execute();
+           cst.execute();*/
 
         %>
+        
+        <form action="../autorizacion">
+            <input type="submit" >
+        </form>
     </body>
 </html>
