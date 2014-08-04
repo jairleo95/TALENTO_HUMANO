@@ -9,113 +9,38 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>.: RRHH :.</title>
-
-
-        <link rel="stylesheet" href="css/Css_Logueo/styleN.css" type="text/css" />
-        <link rel="stylesheet" href="css/Css_Alerta/Mensaje.css" type="text/css" />
-        <script language="JavaScript" type="text/javascript">
-            javascript:window.history.forward(1); //Esto es para cuando le pulse al botón de Atrás
-            javascript:window.history.back(1); //Esto para cuando le pulse al botón de Adelante
-
-        </script>
-        <script type="text/javascript" src="js/JQuery/jQuery.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                setTimeout(function() {
-                    $(".mensajes").fadeOut(800).fadeIn(800).fadeOut(500).fadeIn(500).fadeOut(300);
-                }, 3000);
-            });
-        </script>
-        <script type="text/javascript" src="js/Js_Alerta/alertify.js"></script>
-        <link rel="stylesheet" href="css/Css_Alerta/alertify.core.css" />
-        <link rel="stylesheet" href="css/Css_Alerta/alertify.default.css" />
-
-
-
-
-        <script>
-            function chk_ajax_login_with_php() {
-
-                var username = document.getElementById("username").value;
-                var password = document.getElementById("password").value;
-                if (username != "" & password != "") {
-
-
-
-                    var params = "username=" + username + "&password=" + password + "&opc=ingresar";
-                    var url = "src/ControlUsuario";
-                    $.ajax({
-                        type: 'POST',
-                        url: url,
-                        dataType: 'html',
-                        data: params,
-                        beforeSend: function() {
-                            //  document.getElementById("status").innerHTML = 'esperando...';
-                        },
-                        complete: function() {
-
-                        },
-                        success: function(html) {
-                            //document.getElementById("status").innerHTML= html;
-                            //  window.location = "vistas/Principal.php"
-                            if (html == 1) {
-                                error();
-                                //window.location = "vistas/Principal.php"
-
-                            }
-                            else {
-                                error();
-                            }
-
-                        }
-                    });
-
-                }
-            }
-        </script>
-
-        <script type="text/javascript"  src="js/Js_Alerta/Alertas.js"></script>
-
-
-
-        <link rel="stylesheet" href="validator-master/fv.css" type="text/css" />
-    </head>
-    <body>
-        <div id="container">
-            <form  action="menu" method="POST">
-                <div class="login ">Login</div>
-                <div class="username-text">Usuario:</div>
-                <div class="password-text">Clave:</div>
-
-                <div class="username-field item">
-                    <input type="text" name="username"   id="username"  autocomplete="off"    />
-                    <div class='tooltip help'>
-                        <span>?</span>
-                        <div class='content'>
-                            <b></b>
-                            <p>Digite su usuario</p>
-                        </div>
-                    </div>
-                </div>
-
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css1/bootstrap.css" rel="stylesheet" >
+        <link href="css1/signin.css" rel="stylesheet">
+        <link href='http://fonts.googleapis.com/css?family=Skranji' rel='stylesheet' type='text/css'>
+        <link href="css1/cssindex.css" rel="stylesheet">
+        <script src="js1/jquery-1.11.1.min.js" type="text/javascript"></script>
+        <script src="js1/bootstrap.min.js" type="text/javascript"></script>
+        <title>.: RRHH :.</title> 
+<script language="Javascript" type="text/javascript">
+           document.oncontextmenu = function(){return false;}
+</script>
+</head>
+<body>
+       <div id="logueo"></div>
+       <div id="caja_logueo">
+       <div>
+           <form class="form-signin" method="POST" id="formulario" action="menu">
+                <h2 class="form-signin-heading">RRHH</h2>
+                <input class="form-control" type="text"  id="usuario" name="username" placeholder="Usuario" autocomplete="off" autofocus >
+                <input class="form-control" type="password"  placeholder="Clave" name="clave" id="clave">
                 <input type="hidden" value="ingresar" name="opc" />
-                <div class="password-field item">
-                    <input type="password"  id="password" required="" name="clave" />
-                </div>
-
-
-                <div style="padding-left: 420px;"><input type="submit" name="submit" class="submit" value="IR"  onclick='chk_ajax_login_with_php();'/></div>
-                <div id='status'></div>
+                <input type="submit" id="enviar" class="btn btn-lg btn-primary btn-block" value="Iniciar Sesión" name="submit">
             </form>
-        </div>            
-        <div id="footer">
-            Universidad Peruana Unión - Recursos Humanos © 2014 
         </div>
-    </body>
-    <script src="js/JQuery/jQuery.js"></script>
-    <script src="js/Js_Validar/multifield.js"></script>
-
-    <script src = "js/Js_Validar/validator.js" ></script>
-
+        </div>
+      <div id="mensaje"></div>
+       
+       <!--<span></span>-->
+       <footer>            
+            © Copyright 2014 - UPeU - Cardumen            
+        </footer>
+        <hr style="border: 1px solid #999999; margin-top: 5px;">
+       
+</body>
 </html>

@@ -8,8 +8,6 @@ package pe.edu.upeu.application.web.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -36,41 +34,27 @@ import pe.edu.upeu.application.dao_imp.InterfaceUbigeoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO;
 import pe.edu.upeu.application.model.V_Usuario;
 
-/**
- *
- * @author Alfa.sistemas
- */
 public class CPrincipal extends HttpServlet {
 
     InterfaceUsuarioDAO us = new UsuarioDAO();
     V_Usuario user = new V_Usuario();
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, Exception {
-        response.setContentType("text/html;charset=UTF-8");
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-
         InterfaceListaDAO li = new ListaDAO();
         InterfaceDgpDAO dgp = new DgpDAO();
         InterfaceUbigeoDAO ub = new UbigeoDAO();
         InterfaceTrabajadorDAO tr = new TrabajadorDAO();
         InterfaceRequerimientoDAO IReq = new RequerimientoDAO();
-
         InterfaceRolDAO Irol = new RolDAO();
         InterfacePuestoDAO pu = new PuestoDAO();
 
         try {
 
             String opc = request.getParameter("opc");
+            //out.println(opc);/*
             if (opc.equals("ingresar")) {
                 String Usuario = request.getParameter("username");
                 String Clave = request.getParameter("clave");
@@ -91,10 +75,7 @@ public class CPrincipal extends HttpServlet {
                     sesion.setAttribute("DEPARTAMENTO", user.getNo_dep());
                     sesion.setAttribute("DEPARTAMENTO_ID", user.getId_departamento());
                     sesion.setAttribute("PUESTO", user.getNo_puesto());
-
-                    getServletContext().setAttribute("listarURL", Irol.listarURL(user.getId_rol()));
-
-                    /*LISTAS*/
+                    getServletContext().setAttribute("listarURL", Irol.listarURL(user.getId_rol()));        
                     getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
                     getServletContext().setAttribute("List_Carrera", li.List_Carrera());
                     getServletContext().setAttribute("List_Nacionalidad", li.List_Nacionalidad());
@@ -114,53 +95,7 @@ public class CPrincipal extends HttpServlet {
         } finally {
             out.close();
         }
-
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
-            this.processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(CPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
-            this.processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(CPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";

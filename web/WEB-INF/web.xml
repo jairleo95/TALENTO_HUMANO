@@ -28,6 +28,14 @@
         <servlet-name>CAutorizacion</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CAutorizacion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Prueba</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.Prueba</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Prueba2</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.Prueba2</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CIndex</servlet-name>
         <url-pattern>/prueba</url-pattern>
@@ -55,6 +63,14 @@
     <servlet-mapping>
         <servlet-name>CAutorizacion</servlet-name>
         <url-pattern>/autorizacion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Prueba</servlet-name>
+        <url-pattern>/jonas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Prueba2</servlet-name>
+        <url-pattern>/error</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
