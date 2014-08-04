@@ -26,4 +26,5 @@ public interface InterfaceUsuarioDAO {
     public boolean Edit_Usuario(Usuario usuario);
     public boolean Save_Usuario(Usuario usuario);
     public boolean Delete_Usuario(String ID);
+    public List<Usuario> List_ID_User(String id_user);
 }

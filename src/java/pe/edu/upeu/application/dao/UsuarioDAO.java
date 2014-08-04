@@ -208,5 +208,26 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
     public boolean Delete_Usuario(String ID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    @Override
+    public List<Usuario> List_ID_User(String id_user) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql="select * from RHTC_USUARIO where ID_USUARIO ='"+id_user+"'";
+        List<Usuario> list = new ArrayList<Usuario>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Usuario us = new Usuario();
+                us.setId_usuario(rs.getString("id_usuario"));
+                us.setId_rol(rs.getString("id_rol"));
+                us.setId_empleado(rs.getString("id_empleado"));
+                us.setNo_usuario(rs.getString("no_usuario"));
+                us.setPw_usuario(rs.getString("pw_usuario"));
+                list.add(us);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return list;
+    }
 }

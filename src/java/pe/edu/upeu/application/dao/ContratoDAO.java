@@ -92,11 +92,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
     @Override
     public List<X_List_Id_Contrato_DGP> List_id_Contrato_DGP(String id_trabajador, String id_anno) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select c.idcontrato, c.iddetalle_dgp,c.fec_desde, c.fec_hasta, c.fe_cese, c.id_func,pd.no_area,c.li_condicion , c.ca_sueldo,c.ca_reintegro,c.ca_asig_familiar\n"
-                + ", c.ho_semana,c.nu_horas_lab,c.dia_contrato,c.ti_trabajador,c.li_regimen_laboral,c.es_discapacidad,c.ti_contrato,c.li_regimen_pensionario, c.es_contrato_trabajador,c.us_creacion,c.fe_creacion,c.us_modif,c.fe_modif,c.us_ip,c.fe_vacacio_ini,c.fe_vacacio_fin,\n"
-                + "c.es_contrato,c.id_filial,pd.id_direccion,pd.id_departamento,pd.id_area,pd.id_seccion,pd.id_puesto,c.ca_bono_alimento,c.es_jefe,c.pares,c.li_tipo_convenio,c.es_firmo_contrato,c.nu_contrato,c.de_observacion,c.es_apoyo,c.ti_hora_pago\n"
-                + ",c.nu_documento,c.id_anno,c.es_entregar_doc_reglamentos,c.es_registro_huella,c.de_registro_sistem_remu,c.id_trabajador, pd.id_puesto,pd.id_seccion,pd.id_area, pd.id_departamento,pd.id_direccion\n"
-                + "from rhtm_contrato c, thvd_puesto_direccion pd   where c.id_puesto = pd.id_puesto and c.es_contrato='1' and c.id_trabajador='" + id_trabajador + "' and c.AÑO_ID='" + id_anno + "'";
+        String sql = "select c.id_contrato, c.id_dgp, c.fe_desde, c.fe_hasta, c.fe_cese, c.id_func,pd.no_area,c.li_condicion , c.ca_sueldo,c.ca_reintegro,c.ca_asig_familiar, c.ho_semana,c.nu_horas_lab,c.dia_contrato,c.ti_trabajador,c.li_regimen_laboral,c.es_discapacidad,c.ti_contrato,c.li_regimen_pensionario, c.es_contrato_trabajador,c.us_creacion,c.fe_creacion,c.us_modif,c.fe_modif,c.us_ip,c.fe_vacacio_ini,c.fe_vacacio_fin,c.es_contrato,c.id_filial,pd.id_direccion,pd.id_departamento,pd.id_area,pd.id_seccion,pd.id_puesto,c.ca_bono_alimento,c.es_jefe,c.li_tipo_convenio,c.es_firmo_contrato,c.nu_contrato,c.de_observacion,c.es_apoyo,c.ti_hora_pago,c.nu_documento,c.id_anno,c.es_entregar_doc_reglamentos,c.es_registro_huella,c.de_registro_sistem_remu,c.id_trabajador, pd.id_puesto,pd.id_seccion,pd.id_area, pd.id_departamento,pd.id_direccion from rhtm_contrato c, RHVD_puesto_direccion pd   where c.id_puesto = pd.id_puesto and c.es_contrato='1' and c.id_trabajador='"+id_trabajador+"' and c.ID_ANNO='"+id_anno+"'";
         List<X_List_Id_Contrato_DGP> list = new ArrayList<X_List_Id_Contrato_DGP>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -109,6 +105,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 icd.setFe_hasta(rs.getString("fe_hasta"));
                 icd.setFe_cese(rs.getString("fe_cese"));
                 icd.setId_func(rs.getString("id_func"));
+                icd.setNo_area(rs.getString("no_area"));
                 icd.setLi_condicion(rs.getString("li_condicion"));
                 icd.setCa_sueldo(rs.getDouble("ca_sueldo"));
                 icd.setCa_reintegro(rs.getDouble("ca_reintegro"));
@@ -150,7 +147,6 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 icd.setEs_registro_huella(rs.getString("es_registro_huella"));
                 icd.setDe_registro_sistem_remu(rs.getString("de_registro_sistem_remu"));
                 icd.setId_trabajador(rs.getString("id_trabajador"));
-
                 list.add(icd);
             }
         } catch (SQLException e) {
@@ -180,9 +176,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
     @Override
     public List<List_Rh_Contrato_Fec> List_Rh_Contrato_Fec(String id_departamento, String fecha_creacion) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select c.id_contrato , c.id_trabajador,dt.ap_paterno,dt.ap_materno,dt.no_trabajador , c.fe_desde,c.fe_hasta,c.ca_sueldo ,dp.no_area,dp.no_seccion,dp.no_puesto, to_char(c.fe_creacion,'dd/mm/yy')\n"
-                + "from RHTM_CONTRATO c, RHTM_TRABAJADOR dt , RHVD_PUESTO_DIRECCION dp  where dt.id_trabajador = c.id_trabajador  and dp.id_puesto = c.id_puesto \n"
-                + "AND TO_CHAR(c.fe_creacion,'dd/mm/yy') = TO_CHAR(to_date(" + fecha_creacion + "),'dd/mm/yy') and dp.id_departamento='" + id_departamento + "'";
+        String sql = "select c.id_contrato , c.id_trabajador,dt.ap_paterno,dt.ap_materno,dt.no_trabajador , c.fe_desde,c.fe_hasta,c.ca_sueldo ,dp.no_area,dp.no_seccion,dp.no_puesto, to_char(c.fe_creacion,'dd/mm/yy') from RHTM_CONTRATO c, RHTM_TRABAJADOR dt , RHVD_PUESTO_DIRECCION dp  where dt.id_trabajador = c.id_trabajador  and dp.id_puesto = c.id_puesto AND TO_CHAR(c.fe_creacion,'dd/mm/yy') = TO_CHAR(to_date(" + fecha_creacion + "),'dd/mm/yy') and dp.id_departamento='" + id_departamento + "'";
         List<List_Rh_Contrato_Fec> list = new ArrayList<List_Rh_Contrato_Fec>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -212,9 +206,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
     @Override
     public List<X_List_Anno_Id_Tr_DGP> List_Anno_Id_Tr_DGP(String id_trabajador) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from (\n"
-                + "select a.id_anno,a.no_anno ,rh.id_dgp ,rh.id_trabajador from RHTR_ANNO a , RHTM_CONTRATO rh  where   a.id_anno=rh.id_anno and rh.es_contrato=1)f \n"
-                + "left outer join RHTM_DGP dgp on (f.id_dgp =dgp.id_dgp) where f.id_trabajador=$idtr order by f.no_anno desc";
+        String sql = "select * from (select a.id_anno,a.no_anno ,rh.id_dgp ,rh.id_trabajador from RHTR_ANNO a , RHTM_CONTRATO rh  where   a.id_anno=rh.id_anno and rh.es_contrato=1)f left outer join RHTM_DGP dgp on (f.id_dgp =dgp.id_dgp) where f.id_trabajador='"+id_trabajador+"' order by f.no_anno desc";
         List<X_List_Anno_Id_Tr_DGP> list = new ArrayList<X_List_Anno_Id_Tr_DGP>();
         try {
             ResultSet rs = this.conn.query(sql);

@@ -1,3 +1,4 @@
+<%@page import="oracle.net.aso.p"%>
 <%@page import="pe.edu.upeu.application.model.X_List_id_dgp"%>
 <%@page import="pe.edu.upeu.application.model.Puesto"%>
 <%@page import="pe.edu.upeu.application.model.DGP"%>
@@ -43,7 +44,7 @@
                         <%  for (int i = 0;i<List_Anno.size();i++){ 
                             Anno a =  new  Anno();
                             a= (Anno)List_Anno.get(i);%>
-                        <option value="<%=a.getId_anno()%>"><%=a.getNo_anno()%></option>
+                            <option value="<%=a.getId_anno()%>" selected="selected"><%=a.getNo_anno()%></option>
                         <%}%>
                  </select></td></tr>
                 <input type="hidden" name="IDDETALLE_DGP" value="<%=d.getId_dgp()%>" class="text-box"  >
@@ -86,14 +87,15 @@
                             p=(Puesto)List_Puesto.get(j);
                             if (d.getId_puesto().equals(p.getId_puesto())){%>
                             
-                            <option value="<%=p.getId_puesto()%>" selected="selected"><%=p.getNo_puesto()%></option>
+                            <option value="<%=p.getId_puesto()%>" selected="selected"><%=p.getNo_puesto()%></option><td><%=p.getId_puesto()%></td>
                             <%}else{%>
                             <option value="<%=p.getId_puesto()%>"><%=p.getNo_puesto()%></option>
+                            
                             <%}}%>
                         </select>
                     <tr><td>¿Es Jefe?:</td><td>
                         <select name="JEFE" class="text-box" required="" >
-                            <option value=""></option>
+                            <option value="">---elegir---</option>
                             <option value="1">No es Jefe</option>
                             <option value="2">Jefe de Sección</option>
                             <option value="3">Jefe de Area</option>
@@ -104,7 +106,7 @@
                  <!--   <tr><td>Funcion:</td><td><input type="text" name="FUNC_ID" class="text-box" ></td></tr>      -->
                     <tr><td>Condición:</td><td>
                         <select  name="CONDICION" class="text-box" required="" >
-                            <option value="1"></option>
+                            <option value="1">---elegir---</option>
                             <option value="2">Contratado</option>
                             <option value="3">Contratado Independiente</option>
                             <option value="4">Enpleado</option>
@@ -154,7 +156,7 @@
                         </select>
                     <tr><td>Tipo Contrato:</td><td>
                         <select name="TIPO_CONTRATO" class="text-box" required="" >
-                            <option value=""></option>
+                            <option value="">---elegir---</option>
                             <option value="1">Necesidad de Mercado</option>
                             <option value="2">Incremento de Actividad</option>
                             <option value="3">Servicio Especifico</option>
@@ -172,7 +174,7 @@
                                 
                     <tr><td>Tipo Convenio:</td><td>
                         <select name="TIPO_CONVENIO" class="text-box">
-                            <option value=""></option>
+                            <option value="">---elegir---</option>
                             <option value="1">CLJ</option>
                             <option value="2">PPP</option>
                             <option value="3">PP</option>
@@ -195,7 +197,7 @@
                         </select></td></tr>
                     <tr><td>Situacion Actual:</td><td>
                         <select  name="ESTADO_CONTRATO" class="text-box">
-                            <option value=""></option>
+                            <option value="">---elegir---</option>
                             <option value="1" selected>Activo</option>
                             <option value="2">Término de Contrato</option>
                             <option value="3">Renuncia Voluntaria</option>
@@ -209,7 +211,7 @@
                     </td></tr> 
                     <tr><td>Filial donde Trabaja:</td><td>
                         <select name="FILIAL" class="text-box"  > 
-                            <option value=""></option>
+                            <option value="">---elegir---</option>
                             <option value="1" selected >Lima</option>
                             <option value="2">Juliaca</option>
                             <option value="3">Tarapoto</option>
@@ -229,6 +231,7 @@
                     <input type="hidden" value="" name="USER_MODIF" class="text-box" >
                     <input type="hidden" value="" name="FECHA_MODIF" class="text-box" >
                     <input type="hidden" value="" name="USUARIO_IP" class="text-box" >
+                    <input type="hidden" value="info" name="opc1" class="text-box" >
                            
                     <input type="hidden" value="<%=d.getId_trabajador()%>" name="IDDATOS_TRABAJADOR" class="text-box" >
                     <input type="hidden" name="AREA_ID" class="text-box" >
