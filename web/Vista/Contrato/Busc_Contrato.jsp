@@ -1,8 +1,10 @@
+<%@page import="pe.edu.upeu.application.model.Area"%>
 <?
 session_start();
 if (isset($_SESSION['IDUSER'])) {
     $iddep = $_SESSION["IDDEPARTAMENTO"];
     ?>
+    <jsp:useBean id="List_Area" scope="application" class="java.util.ArrayList"/>
     <!DOCTYPE html>
     <html>
         <head>
@@ -38,14 +40,12 @@ if (isset($_SESSION['IDUSER'])) {
                             <tr>
                                 <td class="td-form">Area:</td><td><select name="area" class="text-box">
                                         <option value="0"></option>
-                                        <?
-                                        require '../Modelo/ModeloRH_Area.php';
-                                        $md_a = new ModelorRH_Area();
-                                        $list_a = $md_a->LISTA_RH_AREA_ID($_SESSION["DEPARTAMENTO_ID"]);
-                                        for ($u = 0; $u < count($list_a); $u++) {
-                                            ?>
-                                            <option value="<? echo $list_a[$u][0]; ?>"><? echo $list_a[$u][1]; ?></option>
-                                        <? } ?>
+                                        <%for (int u = 0; u < List_Area.size(); u++) {
+                                            Area a=new Area();
+                                            a=(Area)List_Area.get(u);
+                                            %>
+                                            <option value="<%=a.getId_area()%>"><%=a.getNo_area()%></option>
+                                        <%}%>
                                     </select></td>    
                                 <td class="td-form">Puesto:</td><td><input type="text" name="puesto" size="25"  class="text-box" /></td>
                             </tr>

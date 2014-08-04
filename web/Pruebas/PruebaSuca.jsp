@@ -21,6 +21,8 @@
         <input type="hidden" name="opc" value="enviar">
         <input type="submit" >
     </form>
-    
+        <form action="../contrato" method="GET">
+            <input type="hidden" name="iddgp" value="DGP-000821">
+        </form>
     </body>
 </html>

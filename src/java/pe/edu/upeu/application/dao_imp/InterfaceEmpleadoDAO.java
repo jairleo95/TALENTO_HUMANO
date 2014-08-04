@@ -12,4 +12,5 @@ package pe.edu.upeu.application.dao_imp;
  */
 public interface InterfaceEmpleadoDAO {
     public String Id_Puesto_Personal(String ide);
+    public void VALIDAR_EMPLEADO(String id_tra);
 }

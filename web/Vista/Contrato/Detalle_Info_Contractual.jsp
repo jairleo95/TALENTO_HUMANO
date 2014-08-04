@@ -1,6 +1,10 @@
+<%@page import="pe.edu.upeu.application.model.X_List_Anno_Id_Tr_DGP"%>
 <? session_start();
 if (isset($_SESSION['IDUSER'])) {
 ?>
+<jsp:useBean id="List_id_Contrato_DGP" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Anno_Id_Tr_DGP" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Jefe" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -57,24 +61,26 @@ if (isset($_SESSION['IDUSER'])) {
           $mod_list= new ModeloLista();
     
           ?>
-        <?  if (count($list_rhc)==0) {?>
+        <%  if (List_id_Contrato_DGP.size()==0) {%>
         <h3>Aun no se ha hecho Contrato.</h3>
-            <?}else{?>
+            <%}else{%>
         <form action="Info_Contractual.php" method="post">
         <table>
                <tr><td><select name="ida">
-                <?  for ($o = 0; $o < count($list_combo_a); $o++) {?>
-                           <?  if ($ida==$list_combo_a[$o][0]) {?>
-                            <option value="<? echo $list_combo_a[$o][0];?>" selected="selected"><? echo $list_combo_a[$o][1];?></option>
-                              <?}else{?>
-                             <option value="<? echo $list_combo_a[$o][0];?>"><? echo $list_combo_a[$o][1];?></option>
-                <?}}?>
-                       </select> </td><td><input type="hidden" name="idtr" value="<?echo $idtr;?>"></td><td><input name="opc" value="Actualizar" type="submit"></td></tr>
+                <%  for (int o = 0; o < List_Anno_Id_Tr_DGP.size(); o++) {%>
+                <%X_List_Anno_Id_Tr_DGP x=new X_List_Anno_Id_Tr_DGP();
+                x=(X_List_Anno_Id_Tr_DGP )List_Anno_Id_Tr_DGP.get(o);%>
+                <%  if (request.getParameter("ida")==List_id_Contrato_DGP.get(o)) {%>
+                            <option value="<%=x.getId_anno()%>" selected="selected"><%=x.getNo_anno()%></option>
+                              <%}else{%>
+                             <option value="<%=x.getId_anno()%>"><%=x.getNo_anno()%></option>
+                <%}}%>
+                       </select> </td><td><input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>"></td><td><input name="opc" value="Actualizar" type="submit"></td></tr>
         </table>
               </form>
         <form>
         <table class="tables">
-           <? for ($index = 0; $index < count($list_rhc); $index++) {?>
+           <% for (int p = 0; p < List_id_Contrato_DGP.size(); p++) {%>
             <tr><td><strong>Desde:</strong></td><td><? echo $list_rhc[$index][2];?></td><td><strong>Hasta:</strong></td><td><? echo $list_rhc[$index][3];?></td></tr>
             <tr><td><strong>Dirección:</strong></td><td><? echo $list_rhc[$index][29];?> </td></tr>
             <tr><td><strong>Departamento:</strong></td><td><? echo $list_rhc[$index][30];?> </td></tr>
@@ -84,11 +90,11 @@ if (isset($_SESSION['IDUSER'])) {
             <tr><td><strong>¿Es Jefe?:</strong></td><td><? 
             
             $list_j=$mod_list->LISTA_JEFE();
-            for ($e = 0; $e < count($list_j); $e++) {
-                if ($list_rhc[$index][35]==($e+1)) {
+            <%for (int e = 0; e < List_Jefe.size();e++) {%>
+                <%if ($list_rhc[$index][35]==($e+1)) {
                  echo $list_j[$e][0];   
                 }
-            }
+            }%>
             ?></td> </tr>
             <tr><td><strong>Condición:</strong></td><td><?
             $list_c=$mod_list->LISTA_CONDICION_CONTRATO();

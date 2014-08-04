@@ -17,6 +17,7 @@ import pe.edu.upeu.application.model.Contrato;
 import pe.edu.upeu.application.model.List_Rh_Contrato_Fec;
 import pe.edu.upeu.application.model.X_List_Anno_Id_Tr_DGP;
 import pe.edu.upeu.application.model.X_List_Id_Contrato_DGP;
+import pe.edu.upeu.application.web.controller.CConversion;
 
 /**
  *
@@ -25,18 +26,19 @@ import pe.edu.upeu.application.model.X_List_Id_Contrato_DGP;
 public class ContratoDAO implements InterfaceContratoDAO {
 
     ConexionBD conn;
+    CConversion c = new CConversion();
 
     @Override
     public void INSERT_CONTRATO(String ID_CONTRATO, String ID_DGP, String FE_DESDE, String FE_HASTA, String FE_CESE, String ID_FUNC, String LI_CONDICION, Double CA_SUELDO, Double CA_REINTEGRO, Double CA_ASIG_FAMILIAR, Double HO_SEMANA, Double NU_HORAS_LAB, Double DIA_CONTRATO, String TI_TRABAJADOR, String LI_REGIMEN_LABORAL, String ES_DISCAPACIDAD, String TI_CONTRATO, String LI_REGIMEN_PENSIONARIO, String ES_CONTRATO_TRABAJADOR, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String US_IP, String FE_VACACIO_INI, String FE_VACACIO_FIN, String ES_CONTRATO, String ID_FILIAL, String ID_DIRECCION, String ID_DEPARTAMENTO, String ID_AREA, String ID_SECCION, String ID_PUESTO, Double CA_BONO_ALIMENTO, String ES_JEFE, String LI_TIPO_CONVENIO, String ES_FIRMO_CONTRATO, Double NU_CONTRATO, String DE_OBSERVACION, String ES_APOYO, String TI_HORA_PAGO, String NU_DOCUMENTO, String ID_ANNO, String ES_ENTREGAR_DOC_REGLAMENTOS, String ES_REGISTRO_HUELLA, String DE_REGISTRO_SISTEM_REMU, String ID_TRABAJADOR) {
         CallableStatement cst;
         try {
              this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            cst = conn.conex.prepareCall("{CALL RHSP_INSERT_CONTRATO( ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+            cst = conn.conex.prepareCall("{CALL RHSP_INSERT_CONTRATO( ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
             cst.setString(1,"");
             cst.setString(2, ID_DGP);
-            cst.setString(3, FE_DESDE);
-            cst.setString(4, FE_HASTA);
-            cst.setString(5, FE_CESE);
+            cst.setString(3, c.convertFecha(FE_DESDE));
+            cst.setString(4, c.convertFecha(FE_HASTA));
+            cst.setString(5, c.convertFecha(FE_CESE));
             cst.setString(6, ID_FUNC);
             cst.setString(7, LI_CONDICION);
             cst.setDouble(8, CA_SUELDO);
@@ -79,7 +81,8 @@ public class ContratoDAO implements InterfaceContratoDAO {
             cst.setString(45, ES_REGISTRO_HUELLA);
             cst.setString(46, DE_REGISTRO_SISTEM_REMU);
             cst.setString(47, ID_TRABAJADOR);
-            cst.executeQuery();
+            cst.execute();
+            
         } catch (SQLException ex) {
         } finally {
             this.conn.close();
@@ -158,17 +161,14 @@ public class ContratoDAO implements InterfaceContratoDAO {
     }
 
     @Override
-    public List<Contrato> List_Rh_Contrato_Idtr() {
+    public List<String> List_Rh_Contrato_Idtr() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select id_trabajador  from rhtm_contrato where id_trabajador not in (\n"
-                + "select id_trabajador from rhtd_empleado where es_empleado = 1 and id_trabajador is not null) and es_contrato=1";
-        List<Contrato> list = new ArrayList<Contrato>();
+        String sql = "select id_trabajador  from rhtm_contrato where id_trabajador not in (select id_trabajador from rhtd_empleado where es_empleado = 1 and id_trabajador is not null) and es_contrato=1";
+        List<String> list = new ArrayList<String>();
         try {
             ResultSet rs = this.conn.query(sql);
-            Contrato c = new Contrato();
             while (rs.next()) {
-                c.setId_trabajador(rs.getString("id_trabajador"));
-                list.add(c);
+                list.add(rs.getString("id_trabajador"));
             }
         } catch (SQLException e) {
         } finally {
