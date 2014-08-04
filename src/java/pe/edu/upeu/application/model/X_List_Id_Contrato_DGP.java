@@ -17,6 +17,7 @@ public class X_List_Id_Contrato_DGP {
     private String fe_hasta;
     private String fe_cese;
     private String id_func;
+    private String no_area;
     private String li_condicion;
     private Double ca_sueldo;
     private Double ca_reintegro;
@@ -58,13 +59,8 @@ public class X_List_Id_Contrato_DGP {
     private String es_registro_huella;
     private String de_registro_sistem_remu;
     private String id_trabajador;
-    private String no_direccion;
-    private String no_dep;
-    private String no_area;
-    private String no_seccion;
-    private String no_puesto;
 
-    public X_List_Id_Contrato_DGP(String id_contrato, String id_dgp, String fe_desde, String fe_hasta, String fe_cese, String id_func, String li_condicion, Double ca_sueldo, Double ca_reintegro, Double ca_asig_familiar, Double ho_semana, Double nu_horas_lab, Double dia_contrato, String ti_trabajador, String li_regimen_laboral, String es_discapacidad, String ti_contrato, String li_regimen_pensionario, String es_contrato_trabajador, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String us_ip, String fe_vacacio_ini, String fe_vacacio_fin, String es_contrato, String id_filial, String id_direccion, String id_departamento, String id_area, String id_seccion, String id_puesto, Double ca_bono_alimento, String es_jefe, String li_tipo_convenio, String es_firmo_contrato, Double nu_contrato, String de_observacion, String es_apoyo, String ti_hora_pago, String nu_documento, String id_anno, String es_entregar_doc_reglamentos, String es_registro_huella, String de_registro_sistem_remu, String id_trabajador, String no_direccion, String no_dep, String no_area, String no_seccion, String no_puesto) {
+    public X_List_Id_Contrato_DGP(String id_contrato, String id_dgp, String fe_desde, String fe_hasta, String fe_cese, String id_func, String li_condicion, Double ca_sueldo, Double ca_reintegro, Double ca_asig_familiar, Double ho_semana, Double nu_horas_lab, Double dia_contrato, String ti_trabajador, String li_regimen_laboral, String es_discapacidad, String ti_contrato, String li_regimen_pensionario, String es_contrato_trabajador, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String us_ip, String fe_vacacio_ini, String fe_vacacio_fin, String es_contrato, String id_filial, String id_direccion, String id_departamento, String id_area, String id_seccion, String id_puesto, Double ca_bono_alimento, String es_jefe, String li_tipo_convenio, String es_firmo_contrato, Double nu_contrato, String de_observacion, String es_apoyo, String ti_hora_pago, String nu_documento, String id_anno, String es_entregar_doc_reglamentos, String es_registro_huella, String de_registro_sistem_remu, String id_trabajador ) {
         this.id_contrato = id_contrato;
         this.id_dgp = id_dgp;
         this.fe_desde = fe_desde;
@@ -112,11 +108,7 @@ public class X_List_Id_Contrato_DGP {
         this.es_registro_huella = es_registro_huella;
         this.de_registro_sistem_remu = de_registro_sistem_remu;
         this.id_trabajador = id_trabajador;
-        this.no_direccion = no_direccion;
-        this.no_dep = no_dep;
         this.no_area = no_area;
-        this.no_seccion = no_seccion;
-        this.no_puesto = no_puesto;
     }
     
     public X_List_Id_Contrato_DGP() {
@@ -167,11 +159,7 @@ public class X_List_Id_Contrato_DGP {
         this.es_registro_huella = "";
         this.de_registro_sistem_remu = "";
         this.id_trabajador = "";
-        this.no_direccion = "";
-        this.no_dep = "";
         this.no_area = "";
-        this.no_seccion = "";
-        this.no_puesto = "";
     }
 
     public String getId_contrato() {
@@ -549,23 +537,6 @@ public class X_List_Id_Contrato_DGP {
     public void setId_trabajador(String id_trabajador) {
         this.id_trabajador = id_trabajador;
     }
-
-    public String getNo_direccion() {
-        return no_direccion;
-    }
-
-    public void setNo_direccion(String no_direccion) {
-        this.no_direccion = no_direccion;
-    }
-
-    public String getNo_dep() {
-        return no_dep;
-    }
-
-    public void setNo_dep(String no_dep) {
-        this.no_dep = no_dep;
-    }
-
     public String getNo_area() {
         return no_area;
     }
@@ -573,23 +544,4 @@ public class X_List_Id_Contrato_DGP {
     public void setNo_area(String no_area) {
         this.no_area = no_area;
     }
-
-    public String getNo_seccion() {
-        return no_seccion;
-    }
-
-    public void setNo_seccion(String no_seccion) {
-        this.no_seccion = no_seccion;
-    }
-
-    public String getNo_puesto() {
-        return no_puesto;
-    }
-
-    public void setNo_puesto(String no_puesto) {
-        this.no_puesto = no_puesto;
-    }
-    
-    
-    
 }

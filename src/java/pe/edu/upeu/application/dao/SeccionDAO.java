@@ -48,12 +48,12 @@ public class SeccionDAO implements InterfaceSeccionDAO{
     @Override
     public String ID_SECCION(String id_puesto) {
         this.conn=FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql="select id_seccion from   RHTR_PUESTO  where ID_PUESTO='"+id_puesto+"'";
+        String sql="select ID_SECCION from   RHTR_PUESTO  where ID_PUESTO='"+id_puesto+"'";
         String id_sec = null;
         try {
             ResultSet rs=this.conn.query(sql);
             while(rs.next()){
-                id_sec=rs.getString(1);
+                id_sec=rs.getString("ID_SECCION");
             }
         } catch (SQLException e) {
         }finally{
