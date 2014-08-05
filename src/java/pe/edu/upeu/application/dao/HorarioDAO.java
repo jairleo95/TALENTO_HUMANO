@@ -18,7 +18,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceHorarioDAO;
 import pe.edu.upeu.application.factory.Conexion;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
-import pe.edu.upeu.application.model.Horario;
+import pe.edu.upeu.application.model.V_Horario;
 
 /**
  *
@@ -48,20 +48,22 @@ public class HorarioDAO implements InterfaceHorarioDAO{
     }
 
     @Override
-    public List<Horario> List_Horario() {
+    public List<V_Horario> List_V_Horario(String iddgp) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql="select max(id_detalle_horario) from rhtd_detalle_horario";
-        List<Horario> list= new ArrayList<Horario>();
+        String sql="select * from rhvd_horario where id_dgp='"+iddgp+"' order by id_horario asc";
+        List<V_Horario> list= new ArrayList<V_Horario>();
         try {
              ResultSet rs = this.conn.query(sql);
-             Horario h = new Horario();
+             
              while (rs.next()) {
-                h.setDia_horario(rs.getString("dia_horario"));
-                h.setEs_horario(rs.getString("es_horario"));
-                h.setHo_desde(rs.getString("ho_desde"));
-                h.setHo_hasta(rs.getString("ho_hasta"));
-                h.setId_detalle_horario(rs.getString("id_detalle_horario"));
-                h.setId_horario(rs.getString("id_horario"));
+                 V_Horario Vh = new V_Horario();
+                Vh.setDia_horario(rs.getString("dia_horario"));
+                Vh.setHo_desde(rs.getString("ho_desde"));
+                Vh.setHo_hasta(rs.getString("ho_hasta"));
+                Vh.setId_detalle_horario(rs.getString("id_detalle_horario"));
+                Vh.setId_dgp(rs.getString("id_dgp"));
+                Vh.setId_horario(rs.getString("id_horario"));
+                list.add(Vh);
              }
         } catch (SQLException e) {
         }finally{

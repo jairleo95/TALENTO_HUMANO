@@ -1,3 +1,12 @@
+<%@page import="pe.edu.upeu.application.model.V_Horario"%>
+<%@page import="pe.edu.upeu.application.model.Detalle_Horario"%>
+<%@page import="java.util.List"%>
+<%@page import="pe.edu.upeu.application.dao.HorarioDAO"%>
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceHorarioDAO"%>
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceListaDAO"%>
+<%@page import="pe.edu.upeu.application.dao.ListaDAO"%>
+<%@page import="pe.edu.upeu.application.web.controller.CHorario"%>
+<jsp:useBean id="List_V_Horario" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -9,7 +18,7 @@ and open the template in the editor.
         <meta charset="windows-1252">
         <title>Detalle Horiario</title>
         <style>
-              table{
+            table{
                 // display:block;
                 position: static;
                 float: left;
@@ -21,49 +30,47 @@ and open the template in the editor.
             body{
                 height: 300px;
             }
-            
+
         </style>
     </head>
-    
-    
+
+
     <body>
         <h2>Horario</h2>
-        <? 
-        require_once '../Modelo/ModeloHorario.php';
-        require_once '../Modelo/ModeloLista.php';
-        $mod_l=new ModeloLista();
-        $mod= new ModeloHorario();
-        
-        $list_h=$mod->LIST_HORARIO($_REQUEST["iddgp"]);
-        $list_l=$mod_l->LIST_H();
-        ?>
-        
-        
-     
-        <?  for ($i = 0; $i < count($list_l); $i++) {?>
-          <? $g=0;?>
-            <? for ($s = 0; $s < count($list_h); $s++) {?>
-                 
-            <?  if ($list_h[$s][2]==$list_l[$i][0]) {?>
 
-            <?if ($g==0) {?>
-               <table border="1">
-                   <tr><td colspan="2"><? echo $list_l[$i][1];?></td></tr>   
-        
-                <?}?>
-               
-            <tr><td><? echo $list_h[$s][3];?> </td><td><? echo $list_h[$s][4];?></td></tr>
-         <? $g=$g+1;?>      
-        <?}?>
-     
-            <?} ?>  
-           </table>
-            <?}?>
+        <%
+            InterfaceListaDAO l = new ListaDAO();
+            
+            for (int i = 0; i < l.List_H().length; i++) {
+                int g=0;
+                for(int s = 0;s<List_V_Horario.size();s++){
+                V_Horario h= new V_Horario();
+                h=(V_Horario)List_V_Horario.get(s);
+                if(h.getDia_horario().trim().equals(l.List_H()[i][0])){
+                    if(g==0){%>
+                    <table border="1">
+                   <tr><td colspan="2"><% out.println(l.List_H()[i][1]);%></td></tr>   
+                                                
+                    <%}%>
+                    
+                    <tr><td><%out.println(h.getHo_hasta()); %> </td><td><%out.println(h.getDia_horario());%></td></tr>
+                    <% g++; %>
+            
+               <%}%>
+                
+                
+                <%}%>
+                
+            </table>
+                
+            <%}%>
+
+
        
-        <?  if ($_REQUEST["P2"]==true) {?>
-        <a href="../Detalle_Dgp.jsp?iddgp">Continuar</a>
-        <?}?>
+            <%  if (request.getParameter("P2").equals("1")) { %>
+             <a href="Vista/Dgp/Detalle_Dgp.jsp?iddgp">Continuar</a>
+             <%}%>
  
-
+             
     </body>
 </html>

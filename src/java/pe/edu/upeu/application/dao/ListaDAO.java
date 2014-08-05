@@ -299,5 +299,31 @@ public class ListaDAO implements InterfaceListaDAO {
         list.add("Abandono de Trabajo");
         return list;
     }
+    
+    public  String [][]List_H  (){
+        String [][] l= new String[7][2];
+        l[0][0]="lun";
+        l[0][1]="Lunes";
+        
+        l[1][0]="mar";
+        l[1][1]="Martes";
+        
+        l[2][0]="mie";
+        l[2][1]="Miercoles";
+        
+        l[3][0]="jue";
+        l[3][1]="Jueves";
+        
+        l[4][0]="vie";
+        l[4][1]="Viernes";
+        
+        l[5][0]="sab";
+        l[5][1]="Sabado";
+        
+        l[6][0]="dom";
+        l[6][1]="Domingo";
+        
+    return l;
+    }
 
 }
