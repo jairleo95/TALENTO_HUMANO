@@ -129,7 +129,8 @@
                         <a href="#" class="icon-cog" title="Contratación de Personal" ></a>
                         <ul>
 
-                            <% for (int i = 0; i < listarURL.size(); i++) {
+                            <% 
+                                for (int i = 0; i < listarURL.size(); i++) {
                                     V_Privilegio dp = new V_Privilegio();
                                     dp = (V_Privilegio) listarURL.get(i);
                             %>
@@ -139,7 +140,7 @@
                                 <ul>
                                     <li class="li-pla" ><a> (Planilla) Contrato</a>
                                         <ul class="ul-pla1" style="display: none">
-                                     <li ><a href="Vista/Dgp/Generar_Dgp.jsp?text=1" target="contenido1">Tiempo Completo</a></li>
+                                            <li ><a href="Vista/Dgp/Generar_Dgp.jsp?text=1" target="contenido1">Tiempo Completo</a></li>
                                             <li><a href="Vista/Dgp/Generar_Dgp.jsp?text=2" target="contenido1">Tiempo Parcial</a></li>
                                             <li><a href="Vista/Dgp/Generar_Dgp.jsp?text=3" target="contenido1">Medio Tiempo</a></li>
                                             <!--  <li><a href="../Vistas/Reg_dgp.php">Renovación de Contrato</a></li>

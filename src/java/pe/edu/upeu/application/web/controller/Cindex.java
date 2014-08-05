@@ -46,7 +46,9 @@ public class Cindex extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-         
+        String Usuario = request.getParameter("username");
+        String Clave = request.getParameter("clave");
+        
         InterfaceListaDAO li = new ListaDAO();
         InterfaceDgpDAO dgp = new DgpDAO();
         InterfaceUbigeoDAO ub = new UbigeoDAO();
@@ -55,49 +57,35 @@ public class Cindex extends HttpServlet {
         InterfaceRolDAO Irol = new RolDAO();
         InterfacePuestoDAO pu = new PuestoDAO();
 
-        try {
-
-                String Usuario = request.getParameter("username");
-                String Clave = request.getParameter("clave");
-            if(Usuario.equals("") && Clave.equals("")){
+        if(Usuario.equals("") && Clave.equals("")){
                 out.print("ERROR");
-            }else{
-                List<V_Usuario> u = us.Val_Usuario(Usuario, Clave);
-                V_Usuario user = new V_Usuario();
-                user = (V_Usuario) u.get(0);                
-                if (us.Val_Usuario(Usuario, Clave).size() == 1) {
-                    HttpSession sesion = request.getSession(true);
-                    sesion.setAttribute("IDUSER", user.getId_usuario());
-                    sesion.setAttribute("USER", user.getNo_usuario());
-                    sesion.setAttribute("IDPER", user.getId_empleado());
-                    sesion.setAttribute("IDROL", user.getId_rol());
-                    sesion.setAttribute("CL", user.getPw_usuario());
-                    sesion.setAttribute("PUESTO_ID", user.getId_puesto());
-                    sesion.setAttribute("AREA_ID", user.getId_area());
-                    sesion.setAttribute("AREA", user.getNo_area());
-                    sesion.setAttribute("DEPARTAMENTO", user.getNo_dep());
-                    sesion.setAttribute("DEPARTAMENTO_ID", user.getId_departamento());
-                    sesion.setAttribute("PUESTO", user.getNo_puesto());
-                    getServletContext().setAttribute("listarURL", Irol.listarURL(user.getId_rol()));        
-                    getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
-                    getServletContext().setAttribute("List_Carrera", li.List_Carrera());
-                    getServletContext().setAttribute("List_Nacionalidad", li.List_Nacionalidad());
-                    getServletContext().setAttribute("List_Universidad", li.List_Universidad());
-                    getServletContext().setAttribute("List_Distrito", ub.List_Distrito());
-                    getServletContext().setAttribute("List_Det_Puesto", pu.List_Det_Puesto());
-                    out.print("EXITO!");                    
-                    /*
-                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Principal.jsp");
-                    dispatcher.forward(request, response);
-                    response.sendRedirect("Principal2.jsp");*/
-                } else {
-                    out.print("ERROR");
-                }
-            }
-                
-        } finally {
-            out.close();
-        }
+         }else if(us.Val_Usuario(Usuario, Clave).size() == 1){
+                    List<V_Usuario> u = us.Val_Usuario(Usuario, Clave);
+                    V_Usuario user = new V_Usuario();
+                    user = (V_Usuario) u.get(0); 
+                        HttpSession sesion = request.getSession(true);
+                        sesion.setAttribute("IDUSER", user.getId_usuario());
+                        sesion.setAttribute("USER", user.getNo_usuario());
+                        sesion.setAttribute("IDPER", user.getId_empleado());
+                        sesion.setAttribute("IDROL", user.getId_rol());
+                        sesion.setAttribute("CL", user.getPw_usuario());
+                        sesion.setAttribute("PUESTO_ID", user.getId_puesto());
+                        sesion.setAttribute("AREA_ID", user.getId_area());
+                        sesion.setAttribute("AREA", user.getNo_area());
+                        sesion.setAttribute("DEPARTAMENTO", user.getNo_dep());
+                        sesion.setAttribute("DEPARTAMENTO_ID", user.getId_departamento());
+                        sesion.setAttribute("PUESTO", user.getNo_puesto());
+                        getServletContext().setAttribute("listarURL", Irol.listarURL(user.getId_rol()));        
+                        getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
+                        getServletContext().setAttribute("List_Carrera", li.List_Carrera());
+                        getServletContext().setAttribute("List_Nacionalidad", li.List_Nacionalidad());
+                        getServletContext().setAttribute("List_Universidad", li.List_Universidad());
+                        getServletContext().setAttribute("List_Distrito", ub.List_Distrito());
+                        getServletContext().setAttribute("List_Det_Puesto", pu.List_Det_Puesto());
+                        out.print("EXITO!");
+         }else{
+         out.print("ERROR");
+         }
     }
     @Override
     public String getServletInfo() {
