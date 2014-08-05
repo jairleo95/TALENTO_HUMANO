@@ -17,6 +17,6 @@ import pe.edu.upeu.application.model.Contrato;
  */
 public interface InterfaceAnnoDAO {
     public List<Anno> List_Anno();
-    public List<Contrato> List_Anno_Max_Cont(String id_Trabajador); 
+    public String List_Anno_Max_Cont(String id_Trabajador); 
     public List<Contrato> List_A_Cont (String id_dgp);
 }

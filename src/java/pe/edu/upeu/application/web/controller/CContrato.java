@@ -7,8 +7,6 @@ package pe.edu.upeu.application.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +22,6 @@ import pe.edu.upeu.application.dao.ListaDAO;
 import pe.edu.upeu.application.dao.PlantillaDAO;
 import pe.edu.upeu.application.dao.PuestoDAO;
 import pe.edu.upeu.application.dao.SeccionDAO;
-import pe.edu.upeu.application.dao.TrabajadorDAO;
 import pe.edu.upeu.application.dao.UsuarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAnnoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAreaDAO;
@@ -36,9 +33,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePlantillaDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceSeccionDAO;
-import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO;
-import pe.edu.upeu.application.model.Contrato;
 
 /**
  *
@@ -131,10 +126,13 @@ public class CContrato extends HttpServlet {
             String LI_TIPO_CONVENIO = request.getParameter("TIPO_CONVENIO");
             String ES_FIRMO_CONTRATO = "";
             Double NU_CONTRATO = 0.0;/*Double.parseDouble(request.getParameter("NU_CONTRATO"));*/
+
             String DE_OBSERVACION = request.getParameter("OBSERVACION");
             String ES_APOYO = "";/*request.getParameter("ES_APOYO");*/
+
             String TI_HORA_PAGO = request.getParameter("TIPO_HORA_PAGO");
             String NU_DOCUMENTO = ""; /*request.getParameter("NU_DOCUMENTO");*/
+
             String ID_ANNO = request.getParameter("AÑO_ID");
             String ES_ENTREGAR_DOC_REGLAMENTOS = request.getParameter("ENTREGAR_DOC_REGLAMENTOS");
             String ES_REGISTRO_HUELLA = request.getParameter("REGISTRO_HUELLA");
@@ -146,33 +144,41 @@ public class CContrato extends HttpServlet {
             out.println(ID_ANNO);
             //out.println(ID_PUESTO);
             for (int i = 0; i < con.List_Rh_Contrato_Idtr().size(); i++) {
-             emp.VALIDAR_EMPLEADO(con.List_Rh_Contrato_Idtr().get(i));
-             }
+                emp.VALIDAR_EMPLEADO(con.List_Rh_Contrato_Idtr().get(i));
+            }
             /*if (request.getParameter("opc").equals("actualizar")) {
+                
              String ida = request.getParameter("ida");
              String idtr = request.getParameter("idtr");
+             
              getServletContext().setAttribute("List_id_Contrato_DGP", con.List_id_Contrato_DGP(idtr, ida));
              getServletContext().setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr));
-             getServletContext().setAttribute("List_Jefe",l.List_Jefe());
-             getServletContext().setAttribute("list_Condicion_contrato",l.list_Condicion_contrato());
-             response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp?=ida"+ida+"?=idtr"+idtr);
+             
+             // getServletContext().setAttribute("List_Jefe",l.List_Jefe());
+             // getServletContext().setAttribute("list_Condicion_contrato",l.list_Condicion_contrato());
+             //  response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp?=ida"+ida+"?=idtr"+idtr);
                     
              } else {*/
-            if(request.getParameter("opc1").equals("info")){
-            String idtr = request.getParameter("IDDATOS_TRABAJADOR");
-            String ida = request.getParameter("ID_ANNO");
-            getServletContext().setAttribute("List_Anno_Max_Cont", a.List_Anno_Max_Cont(idtr));
-            getServletContext().setAttribute("List_id_Contrato_DGP", con.List_id_Contrato_DGP(idtr, ida));
-            getServletContext().setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr));
-            getServletContext().setAttribute("List_Jefe", l.List_Jefe());
-            getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
-            getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
-            getServletContext().setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
-            getServletContext().setAttribute("List_ID_User",usu.List_ID_User(US_CREACION));
-            response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp");
-            }
-            /*  }*/
+
+            //if (request.getParameter("opc1").equals("info")) {
+                String idtr = request.getParameter("IDDATOS_TRABAJADOR");
+               // String ida = a.List_Anno_Max_Cont(idtr);
+                String ida = "ANN-000001";
+
+                getServletContext().setAttribute("List_id_Contrato_DGP", con.List_id_Contrato_DGP(idtr, ida));
+                 getServletContext().setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr));
+                 getServletContext().setAttribute("List_Jefe", l.List_Jefe());
+                 getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
+                 getServletContext().setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
+                 getServletContext().setAttribute("List_ID_User",usu.List_ID_User(US_CREACION));
+                 
+
+                out.println(idtr);
+                out.println(ida);
+                response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp");
+           // }
         }
+        //  }
         if (opc.equals("Buscar")) {
             getServletContext().setAttribute("List_Area", area.List_Area());
         }
