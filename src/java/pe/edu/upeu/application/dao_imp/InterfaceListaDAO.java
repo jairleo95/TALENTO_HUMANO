@@ -36,5 +36,6 @@ public interface InterfaceListaDAO {
     public List<String> list_Condicion_contrato();
     public List<String> List_tipo_contrato();
     public List<String> List_Situacion_Actual();
+    public  String [][]List_H  ();
     
  }
