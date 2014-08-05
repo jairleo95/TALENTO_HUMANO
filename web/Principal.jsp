@@ -43,6 +43,14 @@
     <script language="Javascript" type="text/javascript">
            document.oncontextmenu = function(){return false;}
     </script>
+    <style type="text/css">
+        #contenido{
+            border: 1px solid #cccccc; 
+            width: 100%; 
+            height: 750px; 
+            padding-left: 20px;
+        }
+    </style>
     </head>
     <body class="skin-blue">
         <!-- header logo: style can be found in header.less -->
@@ -369,10 +377,28 @@
 
             <!-- Right side column. Contains the navbar and content of the page -->
             <!--emiliano jnasrerttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt-->
-           
+            <aside class="right-side">
+                <section class="content-header">
+                    <h1>
+                        Widgets
+                        <small>Preview page</small>
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li class="active">Widgets</li>
+                    </ol>
+                </section>
+                <section class="content">
+                    <div id="contenido">
+                        
+                    </div>
+                </section>
+            </aside>
             
-            <script src="js/JQuery/jQuery.js"></script> 
-        </div><!-- ./wrapper -->
+            </div>
+            
+            <script src="plantilla/js/JQuery/jQuery.js"></script> 
+        <!-- ./wrapper -->
 
         <!-- add new calendar event modal -->
         <!-- jQuery 2.0.2 -->
@@ -408,6 +434,7 @@
 
         <!-- AdminLTE for demo purposes -->
         <script src="plantilla/js/AdminLTE/demo.js" type="text/javascript"></script>
+        
     </body>
 </html>
 <%}%>
