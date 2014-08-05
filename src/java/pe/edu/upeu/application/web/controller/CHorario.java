@@ -43,23 +43,6 @@ public class CHorario extends HttpServlet {
         getServletContext().setAttribute("List_V_Horario", IHor.List_V_Horario(iddgp));
         getServletContext().setAttribute("List_V_Horario", Ilis.List_H());
 
-    //List<V_Horario> List_V_H = IHor.List_V_Horario(iddgp);
-        //String [][]List_H =Ilis.List_H();
-        /*for (int i = 0; i < List_H.length; i++) {
-         int g = 0;
-         for (int j = 0; j < List_V_H.size() ; j++) {
-         V_Horario h =  new V_Horario();
-                
-         if (List_H[i][0].equals(h.getDia_horario())) {
-         if (g==0) {
-         out.println(List_H[i][1]);
-         }
-                   
-         g++;
-         }
-         out.println(h.getHo_desde());
-         }
-         }*/
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -99,7 +82,7 @@ public class CHorario extends HttpServlet {
             out.print(ID_DGP);
             out.print(iduser);
 
-            for (int i = 0; i < dia.size(); i++) {
+          /*  for (int i = 0; i < dia.size(); i++) {
                 for (int j = 0; j < 10; j++) {
                     if (request.getParameter("HORA_DESDE_" + dia.get(i) + j) != null) {
                         IHor.Insert_Horario(null,
@@ -116,7 +99,7 @@ public class CHorario extends HttpServlet {
            
             getServletContext().setAttribute("List_V_Horario", IHor.List_V_Horario(ID_DGP));
             getServletContext().setAttribute("List_H", Ilis.List_H());
-            
+            */
             response.sendRedirect("Vista/Dgp/Horario/Detalle_Horario.jsp?iddgp=" + ID_DGP + "&idtr=" + ID_TRABAJJADOR + "&P2=1");
         }
 

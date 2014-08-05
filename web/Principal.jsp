@@ -4,7 +4,7 @@
 <%
     HttpSession sesion = request.getSession(true);
     String id_user = (String) sesion.getAttribute("IDUSER");
-    if (id_user !=null) {
+    if (id_user != null) {
 
         Usuario us = new Usuario();
 %>
@@ -49,7 +49,7 @@
         <header class="header">
             <a href="index.html" class="logo">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
-                SysRRHH
+                Talento Humano
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
@@ -60,6 +60,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
+                <!-- Barra de Usuario -->
                 <div class="navbar-right">
                     <ul class="nav navbar-nav">
                         <!-- Messages: style can be found in dropdown.less-->
@@ -269,7 +270,7 @@
                                                 var meses = new Array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
                                                 var diasSemana = new Array("Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado");
                                                 var f = new Date();
-                                                 document.write(diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear());
+                                                document.write(diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear());
                                             </script>
                                         </small>
                                     </p>
@@ -303,7 +304,7 @@
                 </div>
             </nav>
         </header>
-   <!--jonas-->
+        <!--jonas-->
         <div class="wrapper row-offcanvas row-offcanvas-left">
             <!-- Left side column. contains the logo and sidebar -->
             <aside class="left-side sidebar-offcanvas">
@@ -315,7 +316,7 @@
                             <img src="img/avatar3.png" class="img-circle" alt="User Image" />
                         </div>
                         <div class="pull-left info">
-                            <p>Hello, <%out.println((String) sesion.getAttribute("USER")); %></p>
+                            <p>Hola, <%out.println((String) sesion.getAttribute("USER")); %></p>
                             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                         </div>
                     </div>
@@ -329,6 +330,9 @@
                         </div>
                     </form>
                     <!-- /.search form -->
+
+                    <!-- Desplegables  -->
+
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
                         <% 
@@ -360,11 +364,14 @@
                     </ul>
                 </section>
                 <!-- /.sidebar -->
+                
             </aside>
 
             <!-- Right side column. Contains the navbar and content of the page -->
             <!--emiliano jnasrerttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt-->
+           
             
+            <script src="js/JQuery/jQuery.js"></script> 
         </div><!-- ./wrapper -->
 
         <!-- add new calendar event modal -->
