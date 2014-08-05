@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pe.edu.upeu.application.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -41,12 +39,13 @@ public class Cindex extends HttpServlet {
 
     InterfaceUsuarioDAO us = new UsuarioDAO();
     V_Usuario user = new V_Usuario();
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-         
+
         InterfaceListaDAO li = new ListaDAO();
         InterfaceDgpDAO dgp = new DgpDAO();
         InterfaceUbigeoDAO ub = new UbigeoDAO();
@@ -57,15 +56,17 @@ public class Cindex extends HttpServlet {
 
         try {
 
-                String Usuario = request.getParameter("username");
-                String Clave = request.getParameter("clave");
-            if(Usuario.equals("") && Clave.equals("")){
+            String Usuario = request.getParameter("username").trim();
+            String Clave = request.getParameter("clave").trim();
+
+            if (Usuario.equals("") & Clave.equals("")) {
                 out.print("ERROR");
-            }else{
+            } else if (Usuario != null & Clave != null) {
                 List<V_Usuario> u = us.Val_Usuario(Usuario, Clave);
                 V_Usuario user = new V_Usuario();
-                user = (V_Usuario) u.get(0);                
-                if (us.Val_Usuario(Usuario, Clave).size() == 1) {
+                user = (V_Usuario) u.get(0);
+                int val_num = us.Val_Usuario(Usuario, Clave).size();
+                if (val_num == 1) {
                     HttpSession sesion = request.getSession(true);
                     sesion.setAttribute("IDUSER", user.getId_usuario());
                     sesion.setAttribute("USER", user.getNo_usuario());
@@ -78,28 +79,29 @@ public class Cindex extends HttpServlet {
                     sesion.setAttribute("DEPARTAMENTO", user.getNo_dep());
                     sesion.setAttribute("DEPARTAMENTO_ID", user.getId_departamento());
                     sesion.setAttribute("PUESTO", user.getNo_puesto());
-                    getServletContext().setAttribute("listarURL", Irol.listarURL(user.getId_rol()));        
+                    getServletContext().setAttribute("listarURL", Irol.listarURL(user.getId_rol()));
                     getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
                     getServletContext().setAttribute("List_Carrera", li.List_Carrera());
                     getServletContext().setAttribute("List_Nacionalidad", li.List_Nacionalidad());
                     getServletContext().setAttribute("List_Universidad", li.List_Universidad());
                     getServletContext().setAttribute("List_Distrito", ub.List_Distrito());
                     getServletContext().setAttribute("List_Det_Puesto", pu.List_Det_Puesto());
-                    out.print("EXITO!");                    
+                    out.print("EXITO!");
+
                     /*
-                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Principal.jsp");
-                    dispatcher.forward(request, response);
-                    response.sendRedirect("Principal2.jsp");*/
-                } else {
-                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index2.jsp");
-                    dispatcher.forward(request, response);
+                     RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Principal.jsp");
+                     dispatcher.forward(request, response);
+                     response.sendRedirect("Principal2.jsp");*/
+                } else if (val_num == 0) {
+                    out.print("ERROR");
                 }
             }
-                
+
         } finally {
             out.close();
         }
     }
+
     @Override
     public String getServletInfo() {
         return "Short description";
