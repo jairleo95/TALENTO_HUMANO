@@ -57,9 +57,7 @@ public class CPrincipal extends HttpServlet {
 
                 String Usuario = request.getParameter("username");
                 String Clave = request.getParameter("clave");
-                if(Usuario.equals("") && Clave.equals("")){
-                    out.print("ERROR");
-                }else{
+            
                 List<V_Usuario> u = us.Val_Usuario(Usuario, Clave);
                 V_Usuario user = new V_Usuario();
                 user = (V_Usuario) u.get(0);                
@@ -83,17 +81,16 @@ public class CPrincipal extends HttpServlet {
                     getServletContext().setAttribute("List_Universidad", li.List_Universidad());
                     getServletContext().setAttribute("List_Distrito", ub.List_Distrito());
                     getServletContext().setAttribute("List_Det_Puesto", pu.List_Det_Puesto());
-                    out.print("EXITO!");
                     /*
                     RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Principal.jsp");
-                    dispatcher.forward(request, response);
-                    //response.sendRedirect("Principal.jsp");*/
+                    dispatcher.forward(request, response);*/
+                    response.sendRedirect("Principal2.jsp");
                 } else {
-                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index2.jsp");
                     dispatcher.forward(request, response);
                 }
             
-                }
+                
         } finally {
             out.close();
         }

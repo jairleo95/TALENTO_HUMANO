@@ -26,7 +26,7 @@
     </servlet>
     <servlet>
         <servlet-name>CMenu</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CMenu</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.CPrincipal</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CIndex</servlet-name>
