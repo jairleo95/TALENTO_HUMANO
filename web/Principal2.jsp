@@ -29,7 +29,7 @@
 
         <style type="text/css">
 
-            .autoHeight{
+            .aautoHeight{
                 border-style: none;
 
             }

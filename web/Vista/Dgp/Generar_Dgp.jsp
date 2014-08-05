@@ -7,9 +7,10 @@
         <title></title>
     </head>
     <body>
-    <center>
-        <div class="spacing">
-            <center><h1 class="spacing"><%
+ 
+                <center>
+                <div class="spacing">
+                <center><h1 class="spacing"><%
                 HttpSession sesion= request.getSession(true);
                 String idreq = "";
                 String text = request.getParameter("text");
@@ -31,17 +32,9 @@
                 }
                     %>
                 </h1></center>
-        </div>
-
-
-        <div class="container theme-showcase">
-            <table  style="width: 80%;" >
-                <tr>
-
-                </tr>
-                <tr>
-            </table>  
-            <div>
+                </div>
+                <div >
+            
                 <form method="post" action="../../trabajador">
                     <table style="width: 80%; " >
                         <td>Nombres: <input type="text"  class="text-box"  name="nom"></td>
@@ -117,7 +110,8 @@
             </table>
 
             <?}}?>
-        </div>
+   
     </center>
+
 </body>
 </html>

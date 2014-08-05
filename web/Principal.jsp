@@ -40,7 +40,7 @@
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
         <script type="text/javascript" src="js2/jquery.js"></script>
-        <script type="text/javascript" src="js2/iframe.js"></script>
+        <script type="text/javascript" src="js2/jquery.autoheight.js"></script>
         <link href="imagenes/guia.gif" rel="shortcut icon"/>
     <script language="Javascript" type="text/javascript">
            document.oncontextmenu = function(){return false;}
@@ -49,7 +49,7 @@
         #deposito{
             border: 1px solid #cccccc; 
             width: 100%; 
-            height: 750px; 
+            height: auto; 
             padding-left: 20px;
         }
     </style>
@@ -365,9 +365,9 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>                         
                             <ul class="treeview-menu">
-                                <li ><a href="Vista/Dgp/Generar_Dgp.jsp?text=1" target="contenido"><i class="fa fa-angle-double-right"></i> Tiempo Completo</a></li>
-                                <li><a href="Vista/Dgp/Generar_Dgp.jsp?text=2" target="contenido"><i class="fa fa-angle-double-right"></i> Tiempo Parcial</a></li>
-                                <li><a href="prueba2.jsp" target="contenido"><i class="fa fa-angle-double-right"></i> Medio Tiempo</a></li>
+                                <li ><a href="Vista/Dgp/Generar_Dgp.jsp?text=1" target="myframe"><i class="fa fa-angle-double-right"></i> Tiempo Completo</a></li>
+                                <li><a href="Vista/Dgp/Generar_Dgp.jsp?text=2" target="myframe"><i class="fa fa-angle-double-right"></i> Tiempo Parcial</a></li>
+                                <li><a href="prueba2.jsp" target="myframe"><i class="fa fa-angle-double-right"></i> Medio Tiempo</a></li>
                             </ul>
                         </li>                                
                         <%}}%>
@@ -392,7 +392,7 @@
                 </section>
                 <section class="content">
                     <div id="deposito">
-                        <iframe class="autoHeight" id="myframe" name="myframe" src="prueba.jsp" scrolling="no" frameborder="0"></iframe>
+                        <iframe id="myframe" name="myframe" width="100%" class="autoHeight" scrolling="no" frameborder="0" src="prueba.jsp"></iframe>
                     </div>
                 </section>
             </aside>
@@ -436,7 +436,9 @@
 
         <!-- AdminLTE for demo purposes -->
         <script src="plantilla/js/AdminLTE/demo.js" type="text/javascript"></script>
-        
+        <script type="text/javascript">
+            jQuery('iframe').iframeAutoHeight({debug: true, diagnostics: false});      
+        </script>
     </body>
 </html>
 <%}%>
