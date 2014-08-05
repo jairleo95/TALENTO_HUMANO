@@ -33,7 +33,7 @@ public class HorarioDAO implements InterfaceHorarioDAO{
     @Override
     public String Max_id_Detalle_Horario() {
          this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql="SELECT 'DHO-' ||MAX (SUBSTR(ID_DETALLE_HORARIO,5,10)) FROM RHTD_DETALLE_HORARIO";
+        String sql="SELECT 'DHO-'||MAX (SUBSTR(ID_DETALLE_HORARIO,5,10)) FROM RHTD_DETALLE_HORARIO";
         String Max = "" ;
         try {
              ResultSet rs = this.conn.query(sql);
