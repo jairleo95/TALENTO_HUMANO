@@ -13,7 +13,7 @@ public class FactoryConnectionDB {
     public static final int MYSQL = 1;
     public static final int ORACLE = 2;
     public static String[] configMYSQL ={"bd_almacen","root","root"};
-    public static String[] configORACLE ={"procesosrh","gestinrrhh","procesrh-db.upeu","1521", "UPEU"};
+    public static String[] configORACLE ={"procesosrh","gestionrrhh","procesrh-db.upeu","1521", "UPEU"};
     public static ConexionBD open(int typeDB){
         switch(typeDB){
             case FactoryConnectionDB.MYSQL:
