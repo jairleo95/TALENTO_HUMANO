@@ -7,7 +7,6 @@
 package pe.edu.upeu.application.web.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +21,8 @@ public class CMenu extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Principal.jsp");
+            dispatcher.forward(request, response);
     }
 
     @Override
