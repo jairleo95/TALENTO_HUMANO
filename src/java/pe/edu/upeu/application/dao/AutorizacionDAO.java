@@ -156,7 +156,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
             cst.setString(10, ID_PUESTO);
             cst.setString(11, ID_DETALLE_REQ_PROCESO);
             cst.setString(12, ID_PASOS);
-            cst.execute();
+           cst.execute();
 
         } catch (SQLException e) {
             // System.out.println(e.getMessage());

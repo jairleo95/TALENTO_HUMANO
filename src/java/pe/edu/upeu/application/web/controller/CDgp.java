@@ -46,14 +46,14 @@ public class CDgp extends HttpServlet {
 
         /*Declaramos*/
         HttpSession sesion = request.getSession(true);
-        
+
         String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
         String idpuesto = (String) sesion.getAttribute("PUESTO_ID");
         String iduser = (String) sesion.getAttribute("IDUSER");
         String idtr = request.getParameter("idtr");
         String iddepa = request.getParameter("iddep");
         String idreq = request.getParameter("idreq");
-        
+
         InterfacePuestoDAO pu = new PuestoDAO();
         InterfaceRequerimientoDAO IReq = new RequerimientoDAO();
         InterfaceTrabajadorDAO tr = new TrabajadorDAO();
@@ -99,15 +99,14 @@ public class CDgp extends HttpServlet {
             String iddgp = dgp.MAX_ID_DGP();
             String idrp = IReq.id_det_req_proc(iddgp);
 
-            List<String> list = a.Det_Autorizacion(idrp);
-
-            a.Insert_Autorizacion("", iddgp , "1", "P1", "12312",iduser, "", "31/07/14", "3213", idpuesto , idrp, "PAS-000001");
-            
+          //  List<String> list = a.Det_Autorizacion(idrp);
+            a.Insert_Autorizacion("", iddgp, "1", "P1", "12312", iduser, "", "31/07/14", "3213", idpuesto, idrp, "PAS-000001");
+            out.println(iddgp);
+            out.println(iduser);
+            out.println(idpuesto);
+            out.println(idrp);
            response.sendRedirect("Vista/Dgp/Horario/Reg_Horario.jsp?iddgp="+iddgp +"&idtr="+idtr+"&opc=rd");
 
-            
-
-           
         }
         if (opc.equals("Reg_form")) {
 
