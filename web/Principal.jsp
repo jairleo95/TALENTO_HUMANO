@@ -4,7 +4,7 @@
 <%
     HttpSession sesion = request.getSession(true);
     String id_user = (String) sesion.getAttribute("IDUSER");
-    if (id_user !=null) {
+    if (id_user != null) {
 
         Usuario us = new Usuario();
 %>
@@ -46,7 +46,7 @@
         <header class="header">
             <a href="index.html" class="logo">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
-                SysRRHH
+                Talento Humano
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
@@ -57,6 +57,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
+                <!-- Barra de Usuario -->
                 <div class="navbar-right">
                     <ul class="nav navbar-nav">
                         <!-- Messages: style can be found in dropdown.less-->
@@ -264,7 +265,7 @@
                                                 var meses = new Array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
                                                 var diasSemana = new Array("Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado");
                                                 var f = new Date();
-                                                 document.write(diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear());
+                                                document.write(diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear());
                                             </script>
                                         </small>
                                     </p>
@@ -296,7 +297,7 @@
                 </div>
             </nav>
         </header>
-   <!--jonas-->
+        <!--jonas-->
         <div class="wrapper row-offcanvas row-offcanvas-left">
             <!-- Left side column. contains the logo and sidebar -->
             <aside class="left-side sidebar-offcanvas">
@@ -308,7 +309,7 @@
                             <img src="img/avatar3.png" class="img-circle" alt="User Image" />
                         </div>
                         <div class="pull-left info">
-                            <p>Hello, <%out.println((String) sesion.getAttribute("USER")); %></p>
+                            <p>Hola, <%out.println((String) sesion.getAttribute("USER")); %></p>
                             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                         </div>
                     </div>
@@ -322,100 +323,136 @@
                         </div>
                     </form>
                     <!-- /.search form -->
+
+                    <!-- Desplegables  -->
+
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
+
+
+
+                        <% for (int i = 0; i < listarURL.size(); i++) {
+                                V_Privilegio dp = new V_Privilegio();
+                                dp = (V_Privilegio) listarURL.get(i);
+                        %>
                         <li class="active">
-                            <a href="index.html">
-                                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                            <a href="<%=dp.getDi_url()%>" target="contenido1">
+                                <i class="fa fa-dashboard"></i> <span><%=dp.getNo_link()%></span>
+
                             </a>
-                        </li>
-                        <li>
-                            <a href="pages/widgets.html">
-                                <i class="fa fa-th"></i> <span>Widgets</span> <small class="badge pull-right bg-green">new</small>
-                            </a>
-                        </li>
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-bar-chart-o"></i>
-                                <span>Charts</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
+                            <%  if (dp.getId_privilegio().equals("PRV-000012")) {%>
                             <ul class="treeview-menu">
-                                <li><a href="pages/charts/morris.html"><i class="fa fa-angle-double-right"></i> Morris</a></li>
-                                <li><a href="pages/charts/flot.html"><i class="fa fa-angle-double-right"></i> Flot</a></li>
-                                <li><a href="pages/charts/inline.html"><i class="fa fa-angle-double-right"></i> Inline charts</a></li>
-                            </ul>
+                                <li><a  href="Vista/Dgp/Generar_Dgp.jsp?text=1" target="contenido1"><i class="fa fa-angle-double-right"></i> Tiempo Completo</a></li>
+                                <li><a href="Vista/Dgp/Generar_Dgp.jsp?text=2" target="contenido1"><i class="fa fa-angle-double-right"></i> Tiempo Parcial</a></li>
+                                <li><a href="Vista/Dgp/Generar_Dgp.jsp?text=3" target="contenido1"><i class="fa fa-angle-double-right"></i> Medio Tiempo</a></li>
+                            </ul> <%}%>
                         </li>
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-laptop"></i>
-                                <span>UI Elements</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> General</a></li>
-                                <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Icons</a></li>
-                                <li><a href="pages/UI/buttons.html"><i class="fa fa-angle-double-right"></i> Buttons</a></li>
-                                <li><a href="pages/UI/sliders.html"><i class="fa fa-angle-double-right"></i> Sliders</a></li>
-                                <li><a href="pages/UI/timeline.html"><i class="fa fa-angle-double-right"></i> Timeline</a></li>
-                            </ul>
-                        </li>
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-edit"></i> <span>Forms</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="pages/forms/general.html"><i class="fa fa-angle-double-right"></i> General Elements</a></li>
-                                <li><a href="pages/forms/advanced.html"><i class="fa fa-angle-double-right"></i> Advanced Elements</a></li>
-                                <li><a href="pages/forms/editors.html"><i class="fa fa-angle-double-right"></i> Editors</a></li>
-                            </ul>
-                        </li>
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-table"></i> <span>Tables</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="pages/tables/simple.html"><i class="fa fa-angle-double-right"></i> Simple tables</a></li>
-                                <li><a href="pages/tables/data.html"><i class="fa fa-angle-double-right"></i> Data tables</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="pages/calendar.html">
-                                <i class="fa fa-calendar"></i> <span>Calendar</span>
-                                <small class="badge pull-right bg-red">3</small>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="pages/mailbox.html">
-                                <i class="fa fa-envelope"></i> <span>Mailbox</span>
-                                <small class="badge pull-right bg-yellow">12</small>
-                            </a>
-                        </li>
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-folder"></i> <span>Examples</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="pages/examples/invoice.html"><i class="fa fa-angle-double-right"></i> Invoice</a></li>
-                                <li><a href="pages/examples/login.html"><i class="fa fa-angle-double-right"></i> Login</a></li>
-                                <li><a href="pages/examples/register.html"><i class="fa fa-angle-double-right"></i> Register</a></li>
-                                <li><a href="pages/examples/lockscreen.html"><i class="fa fa-angle-double-right"></i> Lockscreen</a></li>
-                                <li><a href="pages/examples/404.html"><i class="fa fa-angle-double-right"></i> 404 Error</a></li>
-                                <li><a href="pages/examples/500.html"><i class="fa fa-angle-double-right"></i> 500 Error</a></li>
-                                <li><a href="pages/examples/blank.html"><i class="fa fa-angle-double-right"></i> Blank Page</a></li>
-                            </ul>
-                        </li>
+                        <%
+                            }%>
+
+                           <li class="active">
+                   <a href="index.html">
+                       <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                   </a>
+               </li>
+               <li>
+                   <a href="pages/widgets.html">
+                       <i class="fa fa-th"></i> <span>Widgets</span> <small class="badge pull-right bg-green">new</small>
+                   </a>
+               </li>
+               
+               <li class="treeview">
+                   <a href="#">
+                       <i class="fa fa-bar-chart-o"></i>
+                       <span>Charts</span>
+                       <i class="fa fa-angle-left pull-right"></i>
+                   </a>
+                   <ul class="treeview-menu">
+                       <li><a href="pages/charts/morris.html"><i class="fa fa-angle-double-right"></i> Morris</a></li>
+                       <li><a href="pages/charts/flot.html"><i class="fa fa-angle-double-right"></i> Flot</a></li>
+                       <li><a href="pages/charts/inline.html"><i class="fa fa-angle-double-right"></i> Inline charts</a></li>
+                   </ul>
+               </li>
+               
+               <li class="treeview">
+                   <a href="#">
+                       <i class="fa fa-laptop"></i>
+                       <span>UI Elements</span>
+                       <i class="fa fa-angle-left pull-right"></i>
+                   </a>
+                   <ul class="treeview-menu">
+                       <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> General</a></li>
+                       <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Icons</a></li>
+                       <li><a href="pages/UI/buttons.html"><i class="fa fa-angle-double-right"></i> Buttons</a></li>
+                       <li><a href="pages/UI/sliders.html"><i class="fa fa-angle-double-right"></i> Sliders</a></li>
+                       <li><a href="pages/UI/timeline.html"><i class="fa fa-angle-double-right"></i> Timeline</a></li>
+                   </ul>
+               </li>
+               
+               <li class="treeview">
+                   <a href="#">
+                       <i class="fa fa-edit"></i> <span>Forms</span>
+                       <i class="fa fa-angle-left pull-right"></i>
+                   </a>
+                   <ul class="treeview-menu">
+                       <li><a href="pages/forms/general.html"><i class="fa fa-angle-double-right"></i> General Elements</a></li>
+                       <li><a href="pages/forms/advanced.html"><i class="fa fa-angle-double-right"></i> Advanced Elements</a></li>
+                       <li><a href="pages/forms/editors.html"><i class="fa fa-angle-double-right"></i> Editors</a></li>
+                   </ul>
+               </li>
+               
+               <li class="treeview">
+                   <a href="#">
+                       <i class="fa fa-table"></i> <span>Tables</span>
+                       <i class="fa fa-angle-left pull-right"></i>
+                   </a>
+                   <ul class="treeview-menu">
+                       <li><a href="pages/tables/simple.html"><i class="fa fa-angle-double-right"></i> Simple tables</a></li>
+                       <li><a href="pages/tables/data.html"><i class="fa fa-angle-double-right"></i> Data tables</a></li>
+                   </ul>
+               </li>
+               
+               <li>
+                   <a href="pages/calendar.html">
+                       <i class="fa fa-calendar"></i> <span>Calendar</span>
+                       <small class="badge pull-right bg-red">3</small>
+                   </a>
+               </li>
+               <li>
+                   <a href="pages/mailbox.html">
+                       <i class="fa fa-envelope"></i> <span>Mailbox</span>
+                       <small class="badge pull-right bg-yellow">12</small>
+                   </a>
+               </li>
+               <li class="treeview">
+                   <a href="#">
+                       <i class="fa fa-folder"></i> <span>Examples</span>
+                       <i class="fa fa-angle-left pull-right"></i>
+                   </a>
+                   <ul class="treeview-menu">
+                       <li><a href="pages/examples/invoice.html"><i class="fa fa-angle-double-right"></i> Invoice</a></li>
+                       <li><a href="pages/examples/login.html"><i class="fa fa-angle-double-right"></i> Login</a></li>
+                       <li><a href="pages/examples/register.html"><i class="fa fa-angle-double-right"></i> Register</a></li>
+                       <li><a href="pages/examples/lockscreen.html"><i class="fa fa-angle-double-right"></i> Lockscreen</a></li>
+                       <li><a href="pages/examples/404.html"><i class="fa fa-angle-double-right"></i> 404 Error</a></li>
+                       <li><a href="pages/examples/500.html"><i class="fa fa-angle-double-right"></i> 500 Error</a></li>
+                       <li><a href="pages/examples/blank.html"><i class="fa fa-angle-double-right"></i> Blank Page</a></li>
+                   </ul>
+                        
+                      
+               </li>  -
+
                     </ul>
                 </section>
                 <!-- /.sidebar -->
+                
             </aside>
 
             <!-- Right side column. Contains the navbar and content of the page -->
             <!--emiliano jnasrerttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt-->
-            
+           
+             <iframe name="contenido1" id="contenido1"  class="autoHeight" src="Vista/inicio.jsp" width="100%"   height="100%" frameborder="0" align="center" transparency="transparency"></iframe>
+            <script src="js/JQuery/jQuery.js"></script> 
         </div><!-- ./wrapper -->
 
         <!-- add new calendar event modal -->
@@ -454,6 +491,6 @@
         <script src="plantilla/js/AdminLTE/demo.js" type="text/javascript"></script>
     </body>
 </html>
-<%}else{
-  response.sendRedirect("/index.jsp");  
-}%>
+<%} else {
+        response.sendRedirect("/index.jsp");
+    }%>
