@@ -18,7 +18,7 @@
         <script src="js1/jquery-1.11.1.min.js" type="text/javascript"></script>
         <script src="js1/bootstrap.min.js" type="text/javascript"></script>
         <script src="js2/index.js" type="text/javascript"></script>
-        
+        <link href="imagenes/guia.gif" rel="shortcut icon"/>
         <title>.: RRHH :.</title> 
 <script language="Javascript" type="text/javascript">
            document.oncontextmenu = function(){return false;}

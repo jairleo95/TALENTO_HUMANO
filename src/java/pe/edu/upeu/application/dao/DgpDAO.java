@@ -377,10 +377,7 @@ public class DgpDAO implements InterfaceDgpDAO {
     @Override
     public List<X_List_id_dgp> LIST_ID_DGP(String id) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select  d.ID_DGP,to_char(d.fe_desde,'yyyy-mm-dd') as fe_desde,to_char(d.fe_hasta,'yyyy-mm-dd') as fe_hasta ,d.CA_sueldo, d.DE_DIAS_TRABAJO,null, d.ID_PUESTO, d.ID_REQUERIMIENTO, d.ID_TRABAJADOR, d.CO_RUC, d.DE_LUGAR_SERVICIO,\n"
-                + "d.DE_SERVICIO, d.DE_PERIODO_PAGO, d.DE_DOMICILIO_FISCAL, d.DE_SUBVENCION,d.DE_HORARIO_CAPACITACION,d.DE_HORARIO_REFRIGERIO,\n"
-                + "d.DE_DIAS_CAPACITACION,d.ES_DGP,d.US_CREACION,d.FE_CREACION,d.US_MODIF,d.FE_MODIF,d.IP_USUARIO,r.NO_REQ,d.CA_BONO_ALIMENTARIO,d.DE_BEV,d.CA_CENTRO_COSTOS,d.DE_ANTECEDENTES_POLICIALES,d.DE_CERTIFICADO_SALUD\n"
-                + "from RHTM_DGP  d , RHTR_REQUERIMIENTO r  where r.ID_REQUERIMIENTO = d.ID_REQUERIMIENTO and d.ID_DGP='" + id + "'";
+        String sql = "select  d.ID_DGP,to_char(d.fe_desde,'yyyy-mm-dd') as fe_desde,to_char(d.fe_hasta,'yyyy-mm-dd') as fe_hasta ,d.CA_sueldo, d.DE_DIAS_TRABAJO,null, d.ID_PUESTO, d.ID_REQUERIMIENTO, d.ID_TRABAJADOR, d.CO_RUC, d.DE_LUGAR_SERVICIO, d.DE_SERVICIO, d.DE_PERIODO_PAGO, d.DE_DOMICILIO_FISCAL, d.DE_SUBVENCION,d.DE_HORARIO_CAPACITACION,d.DE_HORARIO_REFRIGERIO, d.DE_DIAS_CAPACITACION,d.ES_DGP,d.US_CREACION,d.FE_CREACION,d.US_MODIF,d.FE_MODIF,d.IP_USUARIO,r.NO_REQ,d.CA_BONO_ALIMENTARIO,d.DE_BEV,d.CA_CENTRO_COSTOS,d.DE_ANTECEDENTES_POLICIALES,d.DE_CERTIFICADO_SALUD from RHTM_DGP  d , RHTR_REQUERIMIENTO r  where r.ID_REQUERIMIENTO = d.ID_REQUERIMIENTO and d.ID_DGP='" + id + "'";
         List<X_List_id_dgp> Lista = new ArrayList<X_List_id_dgp>();
         try {
             ResultSet rs = this.conn.query(sql);

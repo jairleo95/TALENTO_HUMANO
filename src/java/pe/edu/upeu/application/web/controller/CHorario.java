@@ -7,7 +7,6 @@ package pe.edu.upeu.application.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -19,7 +18,6 @@ import pe.edu.upeu.application.dao.HorarioDAO;
 import pe.edu.upeu.application.dao.ListaDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceHorarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
-import pe.edu.upeu.application.model.V_Horario;
 
 /**
  *
@@ -94,10 +92,6 @@ public class CHorario extends HttpServlet {
             IHor.Insert_Detalle_Horario(ID_DETALLE_HORARIO, ID_DGP, ES_DETALLE_HORARIO, iduser, null, null, null);
 
             ID_DETALLE_HORARIO = IHor.Max_id_Detalle_Horario();
-
-            out.print(ID_DETALLE_HORARIO);
-            out.print(ID_DGP);
-            out.print(iduser);
 
             for (int i = 0; i < dia.size(); i++) {
                 for (int j = 0; j < 10; j++) {

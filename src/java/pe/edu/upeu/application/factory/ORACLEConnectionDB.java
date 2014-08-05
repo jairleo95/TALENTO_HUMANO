@@ -17,14 +17,12 @@ public final class ORACLEConnectionDB extends ConexionBD{
     Connection open() {
         String driver = "oracle.jdbc.driver.OracleDriver";
         String url = "jdbc:oracle:thin:" + this.parametro[0] + "/" + this.parametro[1] + "@" + this.parametro[2] + ":" + this.parametro[3] + ":" + this.parametro[4];
-        try {
+       try {
             Class.forName(driver).newInstance();
             this.conex = DriverManager.getConnection(url);
-            } catch (ClassNotFoundException e) {
-            } catch (IllegalAccessException e) {
-            } catch (InstantiationException e) {
-            } catch (SQLException e) {
-            }       
+        } catch (Exception e) {
+            e.printStackTrace();
+        }       
         return this.conex;
     }    
 }

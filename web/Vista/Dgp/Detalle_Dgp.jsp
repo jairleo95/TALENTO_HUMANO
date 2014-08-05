@@ -1,3 +1,9 @@
+
+<%@page import="pe.edu.upeu.application.model.X_List_id_dgp"%>
+<%@page import="java.util.List"%>
+<%@page import="pe.edu.upeu.application.dao.DgpDAO"%>
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceDgpDAO"%>
+<jsp:useBean id="LIST_ID_DGP" scope="application" class="java.util.ArrayList"/>
 <?    session_start();
 
 ?>
@@ -28,14 +34,25 @@
         </style>
     </head>
     <body><center>
-          <?
-        require_once '../Modelo/ModeloDGP.php';
+        
+       <%         
+        /*require_once '../Modelo/ModeloDGP.php';
         $mtr=new ModeloDGP();
         $iddgp=$_REQUEST["iddgp"];
         $idtr=$_REQUEST["idtr"];
         $list=$mtr->LIST_ID_DGP($iddgp);
+           
+           
+            V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
+                                        trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);*/
         
-        ?>
+        InterfaceDgpDAO Idgp = new DgpDAO();
+        String iddgp = request.getParameter("ID_DGP");
+        String idtr = request.getParameter("ID_TRABAJADOR");
+        X_List_id_dgp dgp = new X_List_id_dgp();
+        dgp = (X_List_id_dgp) LIST_ID_DGP.get(iddgp);
+        
+                %>
        
         <form>
         <table class="tab_det">
