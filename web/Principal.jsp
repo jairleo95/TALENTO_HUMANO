@@ -392,7 +392,7 @@
                 </section>
                 <section class="content">
                     <div id="deposito">
-                        <iframe class="autoHeight" id="contenido" name="contenido" src="prueba.jsp" width="100" height="500" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+                        <iframe class="autoHeight" id="myframe" name="myframe" src="prueba.jsp" scrolling="no" frameborder="0"></iframe>
                     </div>
                 </section>
             </aside>
