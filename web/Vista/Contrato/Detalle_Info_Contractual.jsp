@@ -48,30 +48,7 @@ if (isset($_SESSION['IDUSER'])) {
     </head>
     <body>
     <center>
-        <?
-        require_once '../Modelo/ModeloContrato.php';
-        require_once '../Modelo/ModeloAño.php';
-        $idtr=$_REQUEST["idtr"];
-        $mda=new ModeloAño();
-        $m_rhc=new ModeloContrato();
-
-        if($_REQUEST["opc"]=="Actualizar"){
-        $idtr=$_REQUEST["idtr"]; 
-        $ida=$_REQUEST["ida"]; 
-        $list_rhc=$m_rhc->LISTA_ID_CONTRATO_DGP($idtr, $ida);
-        $list_combo_a=$m_rhc->LISTA_AÑO_ID_TR_DGP($idtr);
-
-        }else{
-        $ida=$mda->LISTA_AÑO_MAX_CONT($idtr);
-
-        $list_rhc=$m_rhc->LISTA_ID_CONTRATO_DGP($idtr, $ida);
-        $list_combo_a=$m_rhc->LISTA_AÑO_ID_TR_DGP($idtr);
-        }
-
-        require_once '../Modelo/ModeloLista.php';
-        $mod_list= new ModeloLista();
-
-        ?>
+   
         <%CConversion c = new CConversion();%>
         <%for (int b = 0; b < List_id_Contrato_DGP.size(); b++) {
                 X_List_Id_Contrato_DGP n = new X_List_Id_Contrato_DGP();
@@ -209,12 +186,6 @@ if (isset($_SESSION['IDUSER'])) {
                 <!--   <tr><td>Nro. Documento:</td><td><? /*echo $list_rhc[$index][43];?> </td></tr>   
                <tr><td>Pares:</td><td><? echo $list_rhc[$index][36];?> </td></tr>   
                  <tr><td>Apoyo:</td><td><? echo $list_rhc[$index][41];*/?> </td></tr>   -->
-                <?  // echo $list_rhc[$index][49];
-                require_once '../Modelo/ModeloPlantilla.php';
-                $mdpl= new ModeloPlantilla();
-                $l_pl= $mdpl->LIST_PLANTILLA($list_rhc[$index][53], $list_rhc[$index][52], $list_rhc[$index][51], $list_rhc[$index][50], $list_rhc[$index][49]);
-                if (count($l_pl!=0)) {
-                for ($a = 0; $a < count($l_pl); $a++) {?>
                 <%
                 if(List_Planilla.size()==0){
                     for(int a=0;a<List_Planilla.size();a++ ){
@@ -228,16 +199,13 @@ if (isset($_SESSION['IDUSER'])) {
                     <td><a  class="button blue" href="../Plantillas/Direccion_general_sistemas.php?idc=<? echo $list_rhc[$index][0];?>">Ver Plantilla</a></td></tr>
                 <%}%>
 
-                <? require_once '../Modelo/modelousuario.php';
-                $mdu= new modelousuario();
-                ?>
-                <tr style="color: red;"> <%if (c.convertFecha2(n.getFe_creacion())==null && c.convertFecha2(n.getFe_modif())!=null){%>
+                <tr style="color: red;"> <%if (n.getUs_creacion()==null && n.getUs_creacion()!=null){%>
                     <td><strong>Modificado por:</strong></td>
                     <td><% 
                         for (int f = 0; f <List_ID_User.size(); f++) {
                             Usuario u= new Usuario();
                             u=(Usuario)List_ID_User.get(f);%>
-                        <%=u.getId_empleado()%>
+                        <%=u.getNo_usuario()%>
                         <%}%>
                     </td>
                     <%}%>
@@ -246,9 +214,8 @@ if (isset($_SESSION['IDUSER'])) {
                         $list_us=$mdu->LIST_ID_USER($list_rhc[$index][20]);
                         for ($k = 0; $k < count($list_us); $k++) {
                         echo $list_us[$k][4];
-                        }
-                        ?></td>
-                    <?}?>
+                        }?></td>
+                    <%}%>
                 </tr>
 
                 <%}%>

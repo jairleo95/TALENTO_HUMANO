@@ -26,20 +26,16 @@ public class PlantillaDAO implements InterfacePlantillaDAO {
     @Override
     public List<X_List_Plantilla> List_Planilla(String id_direc, String id_depart, String id_seccion, String id_puesto, String id_area) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select RHFU_BUSCAR_PLANTILLA(" + id_puesto + " ,," + id_seccion + " ," + id_area + " , ," + id_depart + ",," + id_direc + ") from dual";
-        String id = "";
+        String sql = "select RHFU_BUSCAR_PLANTILLA('" + id_puesto + "' ,'" + id_seccion + "' ,'" + id_area + "' ,'" + id_depart + "','" + id_direc + "') from dual";
+        String id = null;
         List<X_List_Plantilla> list = new ArrayList<X_List_Plantilla>();
         try {
             ResultSet rs = this.conn.query(sql);
             rs.next();
             id = rs.getString("1");
-
-            String sql1 = "select * from RHTC_PLANTILLA_PUESTO pp , RHTC_PLANTILLA_CONTRACTUAL pc \n"
-                    + "where pp.ID_PLANTILLA_CONTRACTUAL = pc.ID_PLANTILLA_CONTRACTUAL and pp.es_plantilla_puesto = 1 and pc.ID_PLANTILLA_CONTRACTUAL='" + id + "'";
-
+            String sql1 = "select * from RHTC_PLANTILLA_PUESTO pp , RHTC_PLANTILLA_CONTRACTUAL pc where pp.ID_PLANTILLA_CONTRACTUAL = pc.ID_PLANTILLA_CONTRACTUAL and pp.es_plantilla_puesto = 1 and pc.ID_PLANTILLA_CONTRACTUAL='" + id + "'";
             ResultSet rs1 = this.conn.query(sql1);
             X_List_Plantilla lp = new X_List_Plantilla();
-
             while (rs1.next()) {
                 lp.setId_plantilla_puesto(rs.getString("id_plantilla_puesto"));
                 lp.setId_direccion(rs.getString("id_direccion"));

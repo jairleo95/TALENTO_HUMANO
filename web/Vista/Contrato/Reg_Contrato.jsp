@@ -234,7 +234,7 @@
                     <input type="hidden" value="info" name="opc1" class="text-box" >
                            
                     <input type="hidden" value="<%=d.getId_trabajador()%>" name="IDDATOS_TRABAJADOR" class="text-box" >
-                    <input type="hidden" name="AREA_ID" class="text-box" >
+                    <input type="hidden" value="ARE-0089" name="AREA_ID" class="text-box" >
                     <tr><td colspan="2"><input type="submit" name="opc"  class="submit" value="REGISTRAR CONTRATO"></td></tr>
                     
                 </table></form></center><br><br>
