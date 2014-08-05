@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <servlet>
-        <servlet-name>CIndex</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CIndex</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>CTrabajador</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CTrabajador</servlet-class>
     </servlet>
@@ -25,13 +21,13 @@
         <servlet-class>pe.edu.upeu.application.web.controller.CAutorizacion</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CMenu</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CPrincipal</servlet-class>
+        <servlet-name>Cindex</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.Cindex</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>CIndex</servlet-name>
-        <url-pattern>/valida</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>CMenu</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CMenu</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
         <url-pattern>/trabajador</url-pattern>
@@ -51,6 +47,10 @@
     <servlet-mapping>
         <servlet-name>CAutorizacion</servlet-name>
         <url-pattern>/autorizacion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Cindex</servlet-name>
+        <url-pattern>/valida</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CMenu</servlet-name>

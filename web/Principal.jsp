@@ -419,8 +419,6 @@
         </div><!-- ./wrapper -->
 
         <!-- add new calendar event modal -->
-
-
         <!-- jQuery 2.0.2 -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <!-- jQuery UI 1.10.3 -->
