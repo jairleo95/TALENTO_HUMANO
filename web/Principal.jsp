@@ -39,7 +39,8 @@
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
-        <script src="js2/iframe.js" type="text/javascript"></script>
+        <script type="text/javascript" src="js2/jquery.js"></script>
+        <script type="text/javascript" src="js2/iframe.js"></script>
         <link href="imagenes/guia.gif" rel="shortcut icon"/>
     <script language="Javascript" type="text/javascript">
            document.oncontextmenu = function(){return false;}
@@ -364,8 +365,8 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>                         
                             <ul class="treeview-menu">
-                                <li ><a href="Vista/Dgp/Generar_Dgp.jsp?text=1" target="contenido1"><i class="fa fa-angle-double-right"></i> Tiempo Completo</a></li>
-                                <li><a href="Vista/Dgp/Generar_Dgp.jsp?text=2" target="contenido1"><i class="fa fa-angle-double-right"></i> Tiempo Parcial</a></li>
+                                <li ><a href="Vista/Dgp/Generar_Dgp.jsp?text=1" target="contenido"><i class="fa fa-angle-double-right"></i> Tiempo Completo</a></li>
+                                <li><a href="Vista/Dgp/Generar_Dgp.jsp?text=2" target="contenido"><i class="fa fa-angle-double-right"></i> Tiempo Parcial</a></li>
                                 <li><a href="prueba2.jsp" target="contenido"><i class="fa fa-angle-double-right"></i> Medio Tiempo</a></li>
                             </ul>
                         </li>                                
@@ -391,7 +392,7 @@
                 </section>
                 <section class="content">
                     <div id="deposito">
-                        <iframe id="contenido" name="contenido" src="prueba.jsp" width="500" height="500" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+                        <iframe class="autoHeight" id="contenido" name="contenido" src="prueba.jsp" width="100" height="500" frameborder="0" marginheight="0" marginwidth="0"></iframe>
                     </div>
                 </section>
             </aside>
