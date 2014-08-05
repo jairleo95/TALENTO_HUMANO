@@ -91,8 +91,7 @@ public class Cindex extends HttpServlet {
                     dispatcher.forward(request, response);
                     response.sendRedirect("Principal2.jsp");*/
                 } else {
-                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index2.jsp");
-                    dispatcher.forward(request, response);
+                    out.print("ERROR");
                 }
             }
                 

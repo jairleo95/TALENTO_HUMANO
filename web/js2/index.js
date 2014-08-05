@@ -14,11 +14,10 @@ $(document).ready(function(){
         }else{
             $("#mensaje").fadeTo(200,0.1,function()
             {$(this).html('Disculpe. USUARIO Y CLAVE INCORRECTO').removeClass().addClass('myerror').fadeTo(300,1);});
-        }
-    } 
+            }
+        } 
     });
     }, 200);
     return false;
     }); 
-});
- 
+}); 
