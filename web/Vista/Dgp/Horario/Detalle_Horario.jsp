@@ -68,7 +68,7 @@ and open the template in the editor.
 
        
             <%  if (request.getParameter("P2").equals("1")) { %>
-             <a href="Vista/Dgp/Detalle_Dgp.jsp?iddgp">Continuar</a>
+            <a href="../Detalle_Dgp.jsp?iddgp">Continuar</a>
              <%}%>
  
              
