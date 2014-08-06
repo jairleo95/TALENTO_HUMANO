@@ -53,7 +53,7 @@ public class AnnoDAO implements InterfaceAnnoDAO {
     @Override
     public String List_Anno_Max_Cont(String id_Trabajador) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select d.id_anno from (select a.id_anno,rhc.id_contrato,rhc.id_dgp ,rhc.id_trabajador from rhtm_contrato rhc ,  rhtr_año a where  rhc.id_anno=a.id_anno and a.no_anno =( select max(no_anno) from año)) d left outer join detalle_dgp dgp on (d.id_dgp = dgp.id_dgp) where d.i_trabajador='" + id_Trabajador + "'";
+        String sql = "select d.id_anno from (select a.id_anno,rhc.id_contrato,rhc.id_dgp ,rhc.id_trabajador from RHTM_CONTRATO rhc ,  RHTR_ANNO a where  rhc.id_anno=a.id_anno and a.id_anno =( select 'ANN-'||lpad(to_char(MAX(TO_NUMBER(SUBSTR(ID_ANNO,5,8)))),6,'0') from RHTR_ANNO)) d left outer join RHTM_DGP dgp on (d.id_dgp = dgp.id_dgp) where d.id_trabajador='"+id_Trabajador+"'";
         ResultSet rs = this.conn.query(sql);
         String id = "";
 
@@ -75,4 +75,29 @@ public class AnnoDAO implements InterfaceAnnoDAO {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public List<Anno> List_anno_max() {
+        this.conn=FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql="Select * from RHTR_ANNO WHERE ID_ANNO=(SELECT 'ANN-'||lpad(to_char(MAX(TO_NUMBER(SUBSTR(ID_ANNO,5,8)))),6,'0') FROM RHTR_ANNO)";
+        List<Anno> a= new ArrayList<Anno>();
+        try {
+            ResultSet rs=this.conn.query(sql);
+            while(rs.next()){
+                Anno b=new Anno();
+                b.setId_anno(rs.getString("id_anno"));
+                b.setNo_anno(rs.getString("no_anno"));
+                b.setDe_anno(rs.getString("de_anno"));
+                b.setFe_desde(rs.getString("fe_desde"));
+                b.setFe_hasta(rs.getString("fe_hasta"));
+                b.setDe_observacion(rs.getString("de_observacion"));
+                a.add(b);
+            }
+        } catch (SQLException e) {
+        }finally{
+            this.conn.close();
+        }
+        return a;
+        
+    }
+    
 }

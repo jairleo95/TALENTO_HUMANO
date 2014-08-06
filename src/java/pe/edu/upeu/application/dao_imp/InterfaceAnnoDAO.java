@@ -19,4 +19,6 @@ public interface InterfaceAnnoDAO {
     public List<Anno> List_Anno();
     public String List_Anno_Max_Cont(String id_Trabajador); 
     public List<Contrato> List_A_Cont (String id_dgp);
+    public List<Anno>List_anno_max();
+    
 }

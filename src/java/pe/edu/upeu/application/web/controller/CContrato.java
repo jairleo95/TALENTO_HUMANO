@@ -71,7 +71,7 @@ public class CContrato extends HttpServlet {
         String opc = request.getParameter("opc");
         HttpSession sesion = request.getSession(true);
         String iduser = (String) sesion.getAttribute("IDUSER");
-        /*try {*/
+        try {
 
         if (opc.equals("enviar")) {
             String iddgp = request.getParameter("iddgp");
@@ -83,7 +83,7 @@ public class CContrato extends HttpServlet {
             getServletContext().setAttribute("LISTA_RH_SECCION", seccion.LISTA_RH_SECCION());
 
             int num = dht.ASIGNACION_F(idtr);
-
+            out.println(num);
             response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp?num=" + num);
         }
         if (opc.equals("REGISTRAR CONTRATO")) {
@@ -162,8 +162,8 @@ public class CContrato extends HttpServlet {
 
             //if (request.getParameter("opc1").equals("info")) {
                 String idtr = request.getParameter("IDDATOS_TRABAJADOR");
-               // String ida = a.List_Anno_Max_Cont(idtr);
-                String ida = "ANN-000001";
+                String ida = a.List_Anno_Max_Cont(idtr);
+                //String ida = "ANN-000001";
 
                 getServletContext().setAttribute("List_id_Contrato_DGP", con.List_id_Contrato_DGP(idtr, ida));
                  getServletContext().setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr));
@@ -171,21 +171,25 @@ public class CContrato extends HttpServlet {
                  getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
                  getServletContext().setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
                  getServletContext().setAttribute("List_ID_User",usu.List_ID_User(US_CREACION));
-                 
-
-                out.println(idtr);
-                out.println(ida);
                 response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp");
            // }
         }
-        //  }
+        if (opc.equals("actualizar")) {
+                
+             String ida = request.getParameter("ida");
+             String idtr = request.getParameter("idtr");
+             
+             getServletContext().setAttribute("List_id_Contrato_DGP", con.List_id_Contrato_DGP(idtr, ida));
+             getServletContext().setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr));
+             response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp");
+        }
+          
         if (opc.equals("Buscar")) {
             getServletContext().setAttribute("List_Area", area.List_Area());
         }
-
-        /* } finally {
+        }finally {
          out.close();
-         }*/
+         }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -63,7 +63,7 @@
         <%  if (List_id_Contrato_DGP.size() == 0) {%>
         <h3>Aun no se ha hecho Contrato.</h3>
         <%} else {%>
-        <form action="Detalle_Info_Contractual.jsp" method="post">
+        <form class="form"action="../../contrato" method="post">
             <table>
                 <tr><td><select name="ida">
                             <%  for (int o = 0; o < List_Anno_Id_Tr_DGP.size(); o++) {%>
@@ -76,7 +76,8 @@
                             <option value="<%=x.getId_anno()%>"><%=x.getNo_anno()%></option>
                             <%}
                                 }%>
-                        </select> </td><td><input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>"></td><td><input name="opc" value="Actualizar" type="submit"></td></tr>
+                        </select> </td><td><input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>"></td>
+                        <td><input name="opc" value="actualizar" type="submit"></td></tr>
             </table>
         </form>
         <form>
@@ -90,7 +91,7 @@
                 <tr><td><strong>Puesto:</strong></td><td><%=n.getNo_puesto()%></td> </tr>
                 <tr><td><strong>¿Es Jefe?:</strong></td><%for (int e = 0; e < List_Jefe.size(); e++) {
                         if (n.getEs_jefe().equals(e + 1 + "")) {%>
-                    <td><%=n.getId_contrato()%>
+                    <td><%=List_Jefe.get(0+e)%>
                         <%}
                             }%></td> </tr>
                 <tr><td><strong>Condición:</strong></td> <td><%
@@ -212,7 +213,7 @@
                         }
                         if (List_Planilla.size() == 0) {%>
                 <tr><td colspan="2"></td><td><input class="button blue"  type="submit" value="Editar"></td>
-                    <td><a  class="button blue" href="../Plantillas/Direccion_general_sistemas.php?idc=<? echo $list_rhc[$index][0];?>">Ver Plantilla</a></td></tr>
+                    <td><a  class="button blue" href="../Contrato/Plantilla/Direccion_general_Sistemas.jsp?idc=<? echo $list_rhc[$index][0];?>">Ver Plantilla</a></td></tr>
                     <%}%>
 
                 <tr style="color: red;"> <%if (n.getUs_creacion() == null && n.getUs_creacion() != null) {%>

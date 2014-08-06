@@ -24,4 +24,5 @@ public interface InterfaceDocumentoDAO {
     public List<Padre_Madre_Conyugue> List_Conyugue(String id_Trabajador);
     public String List_Adventista (String id_trabajador);
     public String List_Req_nacionalidad(String id_trabajador);
+    
 }

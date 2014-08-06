@@ -32,6 +32,10 @@
         <servlet-name>CError</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CError</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CDocumento</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CDocumento</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
         <url-pattern>/trabajador</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>CError</servlet-name>
         <url-pattern>/error</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CDocumento</servlet-name>
+        <url-pattern>/documento</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
