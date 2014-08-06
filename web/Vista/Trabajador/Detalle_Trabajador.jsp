@@ -1,8 +1,10 @@
 
 
+<%@page import="pe.edu.upeu.application.model.Auto_Mostrar"%>
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
 <%@page import="pe.edu.upeu.application.model.Trabajador"%>
 <jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Auto_mostrar" scope="application" class="java.util.ArrayList"/>
 
 <!DOCTYPE html>
 
@@ -159,17 +161,21 @@
                 </tr>
             </table>
 
-            <div  class="titulo" id="titulo-c">Informacion Personal</div> 
+            <div  class="titulo" id="titulo-c">Informacion Personal<%=List_Auto_mostrar.size()%></div> 
 
-            <%
-                /*require_once '../Modelo/ModeloLista.php';
-                 $mdl= new ModeloLista();
-                 $list_aut_m=$mdl->LISTA_AUTO_MOSTRAR($_SESSION["IDROL"]);*/
+            <%     
+              if  (List_Auto_mostrar.size()==1){  
+                      for(int r=0;r<List_Auto_mostrar.size();r++){              
+                          Auto_Mostrar a = new Auto_Mostrar();
+                          a=(Auto_Mostrar)List_Auto_mostrar.get(r);
             %>
-            <%  //for ($h = 0; $h < count($list_aut_m); $h++) {%>
-            <iframe name="contenido" id="contenido"  class="autoHeight" src="Datos_Generales.jsp" width="100%" height="100%" ></iframe>
-            <%//}%>
-
+    
+            <iframe name="contenido" id="contenido"  class="autoHeight" src="<%
+            out.println(a.getDi_url());
+            %>" width="100%" height="100%" ></iframe>
+            <% }}else{ %>
+             <iframe name="contenido" id="contenido"  class="autoHeight" src="Datos_Generales.jsp" width="100%" height="100%" ></iframe>
+            <%}%>
         </div> 
         <div>
             <%

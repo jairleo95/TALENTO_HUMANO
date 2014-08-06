@@ -22,12 +22,8 @@
         </div>
     <center>
         <div class="container theme-showcase">
-
-
-            <table >
-
+            <table >  
                 <tr><td   colspan="4"> Requerimientos (<%=t%>)</td>
-
             </table>       
             <table class="tinytable" >
 
@@ -111,7 +107,6 @@
                                 }
 
                             %> </a></td>    
-
                 </tr>
                 <% }%>
             </table>

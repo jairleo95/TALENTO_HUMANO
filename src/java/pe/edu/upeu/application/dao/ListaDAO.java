@@ -114,7 +114,7 @@ public class ListaDAO implements InterfaceListaDAO {
     @Override
     public List<Auto_Mostrar> List_Auto_mostrar(String id_rol) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select di_url from rhtx_AUTO_MOSTRAR where ID_ROL='"+id_rol+"'";
+        String sql = "select di_url from RHTX_AUTO_MOSTRAR where ID_ROL='"+id_rol+"'";
         List<Auto_Mostrar> list = new ArrayList<Auto_Mostrar>();
         try {
             ResultSet rs = this.conn.query(sql);
