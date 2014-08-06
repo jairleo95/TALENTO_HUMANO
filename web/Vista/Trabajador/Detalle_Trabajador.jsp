@@ -176,15 +176,15 @@
                 String aut = request.getParameter("aut");
                 HttpSession sesion = request.getSession(true);
 
-                if(aut!=null){
-                if (aut.equals("1")) {
+                if (aut != null) {
+                    if (aut.equals("1")) {
 
-                    String idp = (String) sesion.getAttribute("p");
-                    String iddgp = request.getParameter("dgp");
-                    String cod = request.getParameter("c");
-                    String iddrp = request.getParameter("drp");
-                    String id_pasos = request.getParameter("pas");
-                    String nropaso = request.getParameter("np");
+                        String idp = (String) sesion.getAttribute("p");
+                        String iddgp = request.getParameter("dgp");
+                        String cod = request.getParameter("c");
+                        String iddrp = request.getParameter("drp");
+                        String id_pasos = request.getParameter("pas");
+                        String nropaso = request.getParameter("np");
 
             %>
             <center>
@@ -195,7 +195,7 @@
                         <input type="hidden" name="USUARIO_IP" >  
                         <input type="hidden" name="USER_CREACION" value=""  > 
                         <input type="hidden" name="COD" value="<%=cod%>"  >               
-                        <input type="text" name="PUESTO_ID" value="<%=idp%>" >  
+                        <input type="hidden" name="PUESTO_ID" value="<%=idp%>" >  
                         <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
                         <input type="hidden" name="IDPASOS" value="<%=id_pasos%>"   >
                         <tr><td><input type="submit" name="opc"  class="submit" value="Aceptar"/></td></tr>
@@ -203,10 +203,10 @@
                 </form>
                 <form action="../../autorizacion" method="post">
                     <table>
-                        
-                        
-                        
-                            <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
+
+
+
+                        <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
                         <input type="hidden" name="ESTADO" value="2" >                     
                         <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
                         <input type="hidden" name="USUARIO_IP" >  
@@ -216,11 +216,12 @@
                         <input type="hidden" name="PUESTO_ID" value="<%=idp%>" >  
                         <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
                         <input type="hidden" name="IDPASOS" value="<%=id_pasos%>" 
-                        <tr><td><input type="submit" name="opc"  class="submit" value="Rechazar"/></td></tr>
+                               <tr><td><input type="submit" name="opc"  class="submit" value="Rechazar"/></td></tr>
                     </table>
                 </form>   
             </center>
-            <%}}%>
+            <%}
+                }%>
         </div>
         <script src="../../js/JQuery/jQuery.js"></script>
         <script src="../../js/Js_dlmenu/jquery.dlmenu.js"></script>

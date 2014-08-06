@@ -96,11 +96,4 @@ if (isset($_SESSION['IDUSER'])) {
 
 
     </html>
-    <?php
-} else {
-    echo"
-		<script type='text/javascript'>
-		window.location= 'http://localhost/SysDGP/';
-		</script >
-	";
-}
+ 

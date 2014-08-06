@@ -1,4 +1,4 @@
-<?php
+<%/*
 ini_set('default_charset', 'utf8');
 ?>
 <?php header('Content-type: text/html; charset=iso-8859-1'); ?>
@@ -12,8 +12,8 @@ require_once '../Modelo/Modelo_Imagen.php';
 $modelo= new modelopersonal();
 $listra=$modelo->LIST_EMPLEADO($_SESSION["DEPARTAMENTO_ID"]);    
 $mod_f= new Modelo_Imagen();
-$idf=$mod_f->LIST_FOTO_TRABAJADOR($listra[$index][1]);
-?>
+$idf=$mod_f->LIST_FOTO_TRABAJADOR($listra[$index][1]);*/
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -53,7 +53,6 @@ $idf=$mod_f->LIST_FOTO_TRABAJADOR($listra[$index][1]);
             text-decoration: none;
         }
         
-      
     </style>
 </head>
 <body>
@@ -190,11 +189,3 @@ $idf=$mod_f->LIST_FOTO_TRABAJADOR($listra[$index][1]);
 </body>
 </html>
 
-<?php
-} else {
-    echo"
-		<script type='text/javascript'>
-		window.location= 'http://localhost/SysDGP/';
-		</script >
-	";
-}
