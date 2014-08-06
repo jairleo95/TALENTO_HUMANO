@@ -151,10 +151,17 @@ public class CTrabajador extends HttpServlet {
         }
         if ("aut".equals(opc)) {
             String idtr = request.getParameter("idtr");
+            String iddgp = request.getParameter("iddetalle_dgp");
+            String puesto_id = request.getParameter("puesto_id");
+            String cod = request.getParameter("cod");
+            String idpasos = request.getParameter("idpasos");
+            String drp = request.getParameter("IDDETALLE_REQ_PROCESO");
+            String np = request.getParameter("nup");
+
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr='" + idtr.trim() + "'&aut=1");
+            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr='" + idtr.trim() + "'&aut=1&dgp=" + iddgp + "&p=" + puesto_id + "&c=" + cod + "&pas=" + idpasos + "&drp=" + drp + "&np=" + np);
         }
-        
+
         /*  } catch (IOException e) {
          System.out.println(e.getMessage());
          } finally {

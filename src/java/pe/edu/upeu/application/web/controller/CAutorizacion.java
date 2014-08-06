@@ -41,6 +41,7 @@ public class CAutorizacion extends HttpServlet {
         HttpSession sesion = request.getSession(true);
         String iduser = (String) sesion.getAttribute("IDUSER");
         String ide = (String) sesion.getAttribute("IDPER");
+        String idp = (String) sesion.getAttribute("PUESTO_ID");
 
         String opc = request.getParameter("opc");
 
@@ -52,11 +53,10 @@ public class CAutorizacion extends HttpServlet {
                 String usuario_ip = request.getParameter("USUARIO_IP");
                 String us_creacion = iduser;
                 String cod = request.getParameter("COD");
-                String id_puesto = request.getParameter("PUESTO_ID");
                 String iddrp = request.getParameter("IDDETALLE_REQ_PROCESO");
                 String idpasos = request.getParameter("IDPASOS");
-                a.Insert_Autorizacion(null, iddgp, estado, nropaso, usuario_ip, us_creacion, null, null, cod, id_puesto, iddrp, idpasos);
-
+              
+            a.Insert_Autorizacion("", iddgp, "1", nropaso, "", us_creacion, "", "", cod.trim(), idp,iddrp,idpasos);        
             }
             //try {
         } else {

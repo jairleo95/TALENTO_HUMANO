@@ -179,30 +179,29 @@
                 if(aut!=null){
                 if (aut.equals("1")) {
 
-                    String idp = (String) sesion.getAttribute("PUESTO_ID");
-                    String iddgp = request.getParameter("iddgp");
-                    String cod = request.getParameter("cod");
-                    String iddrp = request.getParameter("IDDETALLE_REQ_PROCESO");
-                    String id_pasos = request.getParameter("idpasos");
-                    String nropaso = request.getParameter("nropaso");
+                    String idp = (String) sesion.getAttribute("p");
+                    String iddgp = request.getParameter("dgp");
+                    String cod = request.getParameter("c");
+                    String iddrp = request.getParameter("drp");
+                    String id_pasos = request.getParameter("pas");
+                    String nropaso = request.getParameter("np");
 
             %>
             <center>
-                <form class="form" action="../Control/ControlAutorizacion.php" method="post" > 
+                <form class="form" action="../../autorizacion" method="post" > 
                     <table > 
                         <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
-                        <input type="hidden" name="ESTADO" value="1" >                     
                         <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
                         <input type="hidden" name="USUARIO_IP" >  
                         <input type="hidden" name="USER_CREACION" value=""  > 
                         <input type="hidden" name="COD" value="<%=cod%>"  >               
-                        <input type="hidden" name="PUESTO_ID" value="<%=idp%>" >  
+                        <input type="text" name="PUESTO_ID" value="<%=idp%>" >  
                         <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
                         <input type="hidden" name="IDPASOS" value="<%=id_pasos%>"   >
                         <tr><td><input type="submit" name="opc"  class="submit" value="Aceptar"/></td></tr>
                     </table>
                 </form>
-                <form action="../Control/ControlAutorizacion.php" method="post">
+                <form action="../../autorizacion" method="post">
                     <table>
                         
                         
