@@ -1,4 +1,5 @@
 
+<%@page import="pe.edu.upeu.application.model.V_Det_DGP"%>
 <%@page import="pe.edu.upeu.application.model.X_List_id_dgp"%>
 <%@page import="java.util.List"%>
 <%@page import="pe.edu.upeu.application.dao.DgpDAO"%>
@@ -36,33 +37,23 @@
     <body><center>
         
        <%         
-        /*require_once '../Modelo/ModeloDGP.php';
-        $mtr=new ModeloDGP();
-        $iddgp=$_REQUEST["iddgp"];
-        $idtr=$_REQUEST["idtr"];
-        $list=$mtr->LIST_ID_DGP($iddgp);
+
            
-           
-            V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
-                                        trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);*/
-        
-        InterfaceDgpDAO Idgp = new DgpDAO();
-        String iddgp = request.getParameter("ID_DGP");
-        String idtr = request.getParameter("ID_TRABAJADOR");
-        X_List_id_dgp dgp = new X_List_id_dgp();
-        dgp = (X_List_id_dgp) LIST_ID_DGP.get(iddgp);
         
                 %>
        
         <form>
         <table class="tab_det">
             
-             <? for ($index = 0; $index < count($list); $index++) {?>
+             <% for (int i = 0; i < LIST_ID_DGP.size(); i++) {
+             V_Det_DGP d = new V_Det_DGP();
+             d=(V_Det_DGP)LIST_ID_DGP.get(i);
+             %>
             
-            <label style="color: red; //font-family: cursive;"><h2><?  echo $list[$index][24];?></h2></label>
+            <label style="color: red; //font-family: cursive;"><h2><%=d.getNo_req()%></h2></label>
          
             
-            <tr><td class="td-det">Fecha Desde:</td><td><?  echo $list[$index][1];?></td></tr>
+            <tr><td class="td-det">Fecha Desde:</td><td><%=d.getFe_desde()%></td></tr>
              <tr ><td class="td-det">Fecha Hasta:</td><td><?  echo $list[$index][2];?></td></tr>
             
              <tr><td class="td-det">Sueldo : S/.</td><td><?echo $list[$index][3];?></td></tr>
@@ -72,16 +63,7 @@
             <!-- <tr><td class="td-det">Dias de Trabajo:</td><td><?//echo $list[$index][4];?></td></tr>
              <tr><td class="td-det">Horario:</td><td><?//echo $list[$index][5];?></td></tr>
             -->
-             <tr><td class="td-det">Puesto:</td><td><?
-            require_once '../Modelo/ModeloRH_Puesto.php';
-            $md=new ModelorRH_Puesto();
-            $list_pu=$md->LISTA_RH_PUESTO();
-            for ($f = 0; $f < count($list_pu); $f++) {
-                if ($list[$index][6]==$list_pu[$f][0]) {
-                    echo $list_pu[$f][1];
-                }
-            }
-            ?></td></tr>
+             <tr><td class="td-det">Puesto:</td><td><%=d.getNo_puesto()%></td></tr>
              <tr><td class="td-det">Horario:</td><td><a href="Horario/Detalle_Horario.jsp?iddgp=<?echo $iddgp; ?>">Ver Horario</a></td></tr>
              
              </tr>
@@ -132,7 +114,7 @@
              ?></td>
                  <?}?>
              </tr>
-              <? }?>
+              <%}%>
              
             <?  if ($_REQUEST["opc"]=="rd") {?>
              <tr><td><h3>Registrar documentos</h3>

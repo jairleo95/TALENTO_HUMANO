@@ -7,6 +7,7 @@ package pe.edu.upeu.application.dao_imp;
 
 import java.util.List;
 import pe.edu.upeu.application.model.DGP;
+import pe.edu.upeu.application.model.V_Det_DGP;
 import pe.edu.upeu.application.model.V_Es_Requerimiento;
 import pe.edu.upeu.application.model.X_List_det_dgp;
 import pe.edu.upeu.application.model.X_List_dgp_by;
@@ -39,7 +40,7 @@ public interface InterfaceDgpDAO {
 
     public int VAL_OPC_DGP(String idtr);
 
-    public List<X_List_id_dgp> LIST_ID_DGP(String id);
+    public List<V_Det_DGP> LIST_ID_DGP(String id);
 
     public String MAX_ID_DGP();
 

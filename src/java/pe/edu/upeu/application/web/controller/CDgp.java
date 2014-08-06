@@ -23,6 +23,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
+import pe.edu.upeu.application.model.X_List_det_dgp;
 
 /**
  *
@@ -127,10 +128,18 @@ public class CDgp extends HttpServlet {
             response.sendRedirect("Vista/Dgp/Reg_Dgp.jsp?idreq=" + idreq);
         }
 
-
+          if (opc.equals("rd")) {
+              
+              String ID_DGP = request.getParameter("iddgp");
+              String ID_TRABAJADOR = request.getParameter("idtr");
+              getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(ID_DGP));
+              out.println(ID_DGP);
+            response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr="+ID_TRABAJADOR);
+        }
         /* } finally {
          out.close();
          }*/
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

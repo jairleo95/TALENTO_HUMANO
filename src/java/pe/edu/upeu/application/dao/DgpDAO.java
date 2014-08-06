@@ -14,6 +14,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.DGP;
+import pe.edu.upeu.application.model.V_Det_DGP;
 import pe.edu.upeu.application.model.V_Es_Requerimiento;
 import pe.edu.upeu.application.model.X_List_det_dgp;
 import pe.edu.upeu.application.model.X_List_dgp_by;
@@ -74,6 +75,7 @@ public class DgpDAO implements InterfaceDgpDAO {
             // this.conn.close();
         }
     }
+
     @Override
     public List<X_User_dgp> USER_DGP(String id_dgp) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -375,33 +377,35 @@ public class DgpDAO implements InterfaceDgpDAO {
     }
 
     @Override
-    public List<X_List_id_dgp> LIST_ID_DGP(String id) {
+    public List<V_Det_DGP> LIST_ID_DGP(String id) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select  d.ID_DGP,to_char(d.fe_desde,'yyyy-mm-dd') as fe_desde,to_char(d.fe_hasta,'yyyy-mm-dd') as fe_hasta ,d.CA_sueldo, d.DE_DIAS_TRABAJO,null, d.ID_PUESTO, d.ID_REQUERIMIENTO, d.ID_TRABAJADOR, d.CO_RUC, d.DE_LUGAR_SERVICIO, d.DE_SERVICIO, d.DE_PERIODO_PAGO, d.DE_DOMICILIO_FISCAL, d.DE_SUBVENCION,d.DE_HORARIO_CAPACITACION,d.DE_HORARIO_REFRIGERIO, d.DE_DIAS_CAPACITACION,d.ES_DGP,d.US_CREACION,d.FE_CREACION,d.US_MODIF,d.FE_MODIF,d.IP_USUARIO,r.NO_REQ,d.CA_BONO_ALIMENTARIO,d.DE_BEV,d.CA_CENTRO_COSTOS,d.DE_ANTECEDENTES_POLICIALES,d.DE_CERTIFICADO_SALUD from RHTM_DGP  d , RHTR_REQUERIMIENTO r  where r.ID_REQUERIMIENTO = d.ID_REQUERIMIENTO and d.ID_DGP='" + id + "'";
-        List<X_List_id_dgp> Lista = new ArrayList<X_List_id_dgp>();
+        String sql = "SELECT * FROM RHVD_DET_DGP WHERE ID_DGP='" + id + "'";
+        List<V_Det_DGP> Lista = new ArrayList<V_Det_DGP>();
         try {
             ResultSet rs = this.conn.query(sql);
-            X_List_id_dgp x = new X_List_id_dgp();
+
             while (rs.next()) {
+                V_Det_DGP x = new V_Det_DGP();
                 x.setId_dgp(rs.getString("id_dgp"));
                 x.setFe_desde(rs.getString("fe_desde"));
                 x.setFe_hasta(rs.getString("fe_hasta"));
                 x.setCa_sueldo(rs.getDouble("ca_sueldo"));
                 x.setDe_dias_trabajo(rs.getString("de_dias_trabajo"));
+                x.setNo_puesto(rs.getString("no_puesto"));
                 x.setId_puesto(rs.getString("id_puesto"));
                 x.setId_requerimiento(rs.getString("id_requerimiento"));
                 x.setId_trabajador(rs.getString("id_trabajador"));
                 x.setCo_ruc(rs.getString("co_ruc"));
-                x.setDe_lugar_servicio(rs.getString("De_lugar_servicio"));
-                x.setDe_servicio(rs.getString("De_servicio"));
-                x.setDe_periodo_pago(rs.getString("De_periodo_pago"));
-                x.setDe_domicilio_fiscal(rs.getString("De_domicilio_fiscal"));
-                x.setDe_subvencion(rs.getString("De_subvencion"));
+                x.setDe_lugar_servicio(rs.getString("de_lugar_servicio"));
+                x.setDe_servicio(rs.getString("de_servicio"));
+                x.setDe_periodo_pago(rs.getString("de_periodo_pago"));
+                x.setDe_domicilio_fiscal(rs.getString("de_domicilio_fiscal"));
+                x.setDe_subvencion(rs.getString("de_subvencion"));
                 x.setDe_horario_capacitacion(rs.getString("de_horario_capacitacion"));
                 x.setDe_horario_refrigerio(rs.getString("de_horario_refrigerio"));
                 x.setDe_dias_capacitacion(rs.getString("de_dias_capacitacion"));
                 x.setEs_dgp(rs.getString("es_dgp"));
-                x.setUs_creacion(rs.getString("Us_creacion"));
+                x.setUs_creacion(rs.getString("us_creacion"));
                 x.setFe_creacion(rs.getString("fe_creacion"));
                 x.setUs_modif(rs.getString("us_modif"));
                 x.setFe_modif(rs.getString("fe_modif"));
