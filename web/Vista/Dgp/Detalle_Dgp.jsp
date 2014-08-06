@@ -54,23 +54,23 @@
          
             
             <tr><td class="td-det">Fecha Desde:</td><td><%=d.getFe_desde()%></td></tr>
-             <tr ><td class="td-det">Fecha Hasta:</td><td><?  echo $list[$index][2];?></td></tr>
+             <tr ><td class="td-det">Fecha Hasta:</td><td><%=d.getFe_hasta()%></td></tr>
             
-             <tr><td class="td-det">Sueldo : S/.</td><td><?echo $list[$index][3];?></td></tr>
-             <tr><td class="td-det">Bono Alimentario : S/.</td><td><?echo $list[$index][25];?></td></tr>
-             <tr style="color: red;"><td class="td-det" >Sueldo Total : S/.</td><td><?echo $list[$index][25]+$list[$index][3];?></td></tr>
+             <tr><td class="td-det">Sueldo : S/.</td><td><%=d.getCa_sueldo()%></td></tr>
+             <tr><td class="td-det">Bono Alimentario : S/.</td><td><%=d.getCa_bono_alimentario()%></td></tr>
+             <tr style="color: red;"><td class="td-det" >Sueldo Total : S/.</td><td><%=(d.getCa_sueldo()+d.getCa_bono_alimentario())%></td></tr>
            
             <!-- <tr><td class="td-det">Dias de Trabajo:</td><td><?//echo $list[$index][4];?></td></tr>
              <tr><td class="td-det">Horario:</td><td><?//echo $list[$index][5];?></td></tr>
             -->
              <tr><td class="td-det">Puesto:</td><td><%=d.getNo_puesto()%></td></tr>
-             <tr><td class="td-det">Horario:</td><td><a href="Horario/Detalle_Horario.jsp?iddgp=<?echo $iddgp; ?>">Ver Horario</a></td></tr>
+             <tr><td class="td-det">Horario:</td><td><a href="../../horario?iddgp=<%=d.getId_dgp()%>&opc=Listar ">Ver Horario</a></td></tr>
              
              </tr>
-             <tr><td class="td-det">BEV: </td><td><?echo $list[$index][26];?></td></tr>
-             <tr><td class="td-det">Centro de Costos: </td><td><?echo $list[$index][27];?></td></tr>
-             <tr><td class="td-det">Antecedentes Policiales: </td><td><?echo $list[$index][28];?></td></tr>
-             <tr><td class="td-det">Certificado de Salud: </td><td><?echo $list[$index][29];?></td></tr>
+             <tr><td class="td-det">BEV: </td><td><%=d.getDe_bev()%></td></tr>
+             <tr><td class="td-det">Centro de Costos: </td><td><%=d.getCa_centro_costos()%></td></tr>
+             <tr><td class="td-det">Antecedentes Policiales: </td><td><%=d.getDe_antecedentes_policiales()%></td></tr>
+             <tr><td class="td-det">Certificado de Salud: </td><td><%=d.getDe_certificado_salud()%></td></tr>
              
              <!--<tr><td class="td-det">Ruc:</td><td><?echo $list[$index][9];?></td></tr>
              <tr><td class="td-det">Lugar de Servicio:</td><td><?echo $list[$index][10];?></td></tr>

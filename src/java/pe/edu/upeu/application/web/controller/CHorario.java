@@ -41,7 +41,7 @@ public class CHorario extends HttpServlet {
         getServletContext().setAttribute("List_V_Horario", IHor.List_V_Horario(iddgp));
         getServletContext().setAttribute("List_V_Horario", Ilis.List_H());
 
-    //List<V_Horario> List_V_H = IHor.List_V_Horario(iddgp);
+        //List<V_Horario> List_V_H = IHor.List_V_Horario(iddgp);
         //String [][]List_H =Ilis.List_H();
         /*for (int i = 0; i < List_H.length; i++) {
          int g = 0;
@@ -107,11 +107,20 @@ public class CHorario extends HttpServlet {
                 }
 
             }
-           
+
             getServletContext().setAttribute("List_V_Horario", IHor.List_V_Horario(ID_DGP));
             getServletContext().setAttribute("List_H", Ilis.List_H());
-            
+
             response.sendRedirect("Vista/Dgp/Horario/Detalle_Horario.jsp?iddgp=" + ID_DGP + "&idtr=" + ID_TRABAJJADOR + "&P2=1");
+        }
+
+        if (opc.equals("Listar")) {
+            String ID_DGP = request.getParameter("iddgp");
+            getServletContext().setAttribute("List_V_Horario", IHor.List_V_Horario(ID_DGP));
+            getServletContext().setAttribute("List_H", Ilis.List_H());
+
+            response.sendRedirect("Vista/Dgp/Horario/Detalle_Horario.jsp" );
+
         }
 
     }
