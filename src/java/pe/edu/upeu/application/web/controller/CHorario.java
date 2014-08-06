@@ -93,10 +93,6 @@ public class CHorario extends HttpServlet {
 
             ID_DETALLE_HORARIO = IHor.Max_id_Detalle_Horario();
 
-            out.print(ID_DETALLE_HORARIO);
-            out.print(ID_DGP);
-            out.print(iduser);
-
             for (int i = 0; i < dia.size(); i++) {
                 for (int j = 0; j < 10; j++) {
                     if (request.getParameter("HORA_DESDE_" + dia.get(i) + j) != null) {
