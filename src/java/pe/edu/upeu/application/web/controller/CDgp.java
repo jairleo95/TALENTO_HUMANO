@@ -18,11 +18,13 @@ import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.PuestoDAO;
 import pe.edu.upeu.application.dao.RequerimientoDAO;
 import pe.edu.upeu.application.dao.TrabajadorDAO;
+import pe.edu.upeu.application.dao.UsuarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO;
 import pe.edu.upeu.application.model.X_List_det_dgp;
 
 /**
@@ -60,6 +62,7 @@ public class CDgp extends HttpServlet {
         InterfaceTrabajadorDAO tr = new TrabajadorDAO();
         InterfaceDgpDAO dgp = new DgpDAO();
         InterfaceAutorizacionDAO a = new AutorizacionDAO();
+        InterfaceUsuarioDAO us = new UsuarioDAO();
 
         String opc = request.getParameter("opc");
 
@@ -101,11 +104,7 @@ public class CDgp extends HttpServlet {
             String idrp = IReq.id_det_req_proc(iddgp);
 
           //  List<String> list = a.Det_Autorizacion(idrp);
-            a.Insert_Autorizacion("", iddgp, "1", "P1", "12312", iduser, "", "31/07/14", "3213", idpuesto, idrp, "PAS-000001");
-            out.println(iddgp);
-            out.println(iduser);
-            out.println(idpuesto);
-            out.println(idrp);
+           a.Insert_Autorizacion("", iddgp, "1", "P1", "12312", iduser, "", "31/07/14", "3213", idpuesto, idrp, "PAS-000001");
            response.sendRedirect("Vista/Dgp/Horario/Reg_Horario.jsp?iddgp="+iddgp +"&idtr="+idtr+"&opc=rd");
 
         }
@@ -133,8 +132,11 @@ public class CDgp extends HttpServlet {
               String ID_DGP = request.getParameter("iddgp");
               String ID_TRABAJADOR = request.getParameter("idtr");
               getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(ID_DGP));
-              out.println(ID_DGP);
-            response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr="+ID_TRABAJADOR);
+              int num=dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
+              getServletContext().setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
+    
+              
+            response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr="+ID_TRABAJADOR+"&num="+num+"&idgp="+ID_DGP+"&opc=reg_doc");
         }
         /* } finally {
          out.close();
