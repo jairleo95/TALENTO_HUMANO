@@ -16,13 +16,8 @@
         <meta name="author" content="">
         <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.autoheight.js"></script>
-
-
-
         <title>Detalle de Trabajador</title>
-
-
-        <script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
+         <script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
         <link rel="stylesheet" href="../../css/Css_Alerta/alertify.core.css" />
         <link rel="stylesheet" href="../../css/Css_Alerta/alertify.default.css" />
         <script type="text/javascript"  src="../../js/Js_Alerta/Alertas.js"></script>
