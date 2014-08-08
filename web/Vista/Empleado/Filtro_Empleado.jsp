@@ -1,11 +1,11 @@
 <%/*
-ini_set('default_charset', 'utf8');
+ini_set('default_charset', 'utf8'); 
 ?>
 <?php header('Content-type: text/html; charset=iso-8859-1'); ?>
 <? 
 session_start();
 if (isset($_SESSION['IDUSER'])) {
-$iddep=$_SESSION["IDDEPARTAMENTO"];
+$iddep=$_SESSION["IDDEPARTAMENTO"];                 
 
 require_once '../Modelo/modelopersonal.php';
 require_once '../Modelo/Modelo_Imagen.php';
