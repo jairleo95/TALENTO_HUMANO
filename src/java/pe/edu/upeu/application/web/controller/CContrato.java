@@ -142,28 +142,12 @@ public class CContrato extends HttpServlet {
             out.println(ID_SEC);
             out.println(ID_TRABAJADOR);
             out.println(ID_ANNO);
-            //out.println(ID_PUESTO);
             for (int i = 0; i < con.List_Rh_Contrato_Idtr().size(); i++) {
                 emp.VALIDAR_EMPLEADO(con.List_Rh_Contrato_Idtr().get(i));
             }
-            /*if (request.getParameter("opc").equals("actualizar")) {
-                
-             String ida = request.getParameter("ida");
-             String idtr = request.getParameter("idtr");
-             
-             getServletContext().setAttribute("List_id_Contrato_DGP", con.List_id_Contrato_DGP(idtr, ida));
-             getServletContext().setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr));
-             
-             // getServletContext().setAttribute("List_Jefe",l.List_Jefe());
-             // getServletContext().setAttribute("list_Condicion_contrato",l.list_Condicion_contrato());
-             //  response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp?=ida"+ida+"?=idtr"+idtr);
-                    
-             } else {*/
-
-            //if (request.getParameter("opc1").equals("info")) {
+           
                 String idtr = request.getParameter("IDDATOS_TRABAJADOR");
                 String ida = a.List_Anno_Max_Cont(idtr);
-                //String ida = "ANN-000001";
 
                 getServletContext().setAttribute("List_id_Contrato_DGP", con.List_id_Contrato_DGP(idtr, ida));
                  getServletContext().setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr));
@@ -172,7 +156,7 @@ public class CContrato extends HttpServlet {
                  getServletContext().setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
                  getServletContext().setAttribute("List_ID_User",usu.List_ID_User(US_CREACION));
                 response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp");
-           // }
+
         }
         if (opc.equals("actualizar")) {
                 
