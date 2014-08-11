@@ -6,6 +6,9 @@
 
 package pe.edu.upeu.application.dao_imp;
 
+import java.util.List;
+import pe.edu.upeu.application.model.V_List_Empleado;
+
 /**
  *
  * @author Alfa.sistemas
@@ -13,4 +16,5 @@ package pe.edu.upeu.application.dao_imp;
 public interface InterfaceEmpleadoDAO {
     public String Id_Puesto_Personal(String ide);
     public void VALIDAR_EMPLEADO(String id_tra);
+    public List<V_List_Empleado> Listar_Empleado(String Departamento);
 }

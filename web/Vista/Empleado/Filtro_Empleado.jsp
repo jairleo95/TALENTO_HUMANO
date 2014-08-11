@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.model.V_List_Empleado"%>
 <%/*
 ini_set('default_charset', 'utf8'); 
 ?>
@@ -14,6 +15,7 @@ $listra=$modelo->LIST_EMPLEADO($_SESSION["DEPARTAMENTO_ID"]);
 $mod_f= new Modelo_Imagen();
 $idf=$mod_f->LIST_FOTO_TRABAJADOR($listra[$index][1]);*/
 %>
+<jsp:useBean id="List_Empleado" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -87,18 +89,22 @@ $idf=$mod_f->LIST_FOTO_TRABAJADOR($listra[$index][1]);*/
                 </tr>
             </thead>
             <tbody>
-                <? for ($index = 0; $index < count($listra); $index++) { ?>
+                <% for (int i = 0; i < List_Empleado.size(); i++) {
+             V_List_Empleado e = new V_List_Empleado();
+             e =(V_List_Empleado)List_Empleado.get(i);
+             %>
                 <tr>
-                    <td><?echo  $index+1;?></td>
-                    <td class="name"><a href="../Trabajador/Detalle_Trabajador.jsp?idtr=<? echo $listra[$index][1]; ?>"><?echo strtoupper( $listra[$index][2].' '.$listra[$index][3].' '.$listra[$index][4]);?></a></td>
-                    <td><?echo  $listra[$index][7];?></td>
-                    <td><?echo  $listra[$index][6];?></td>
-                    <td><?echo  $listra[$index][5];?></td>
-                    <td><?echo  $listra[$index][18];?></td>
-                    <td><?echo  $listra[$index][19];?></td>
-                    <td><?echo  $listra[$index][17];?></td>
+                    <td><%out.print(i+1);%></td>
+                    <td class="name"><a href="../Trabajador/Detalle_Trabajador.jsp"><%=e.getNo_trabajador()+" "+e.getAp_paterno()+" "+e.getAp_materno()%></a></td>
+                    <td><%=e.getNo_area() %></td>
+                    <td><%=e.getNo_seccion()%></td>
+                    <td><%=e.getNo_puesto()%></td>
+                    <td><%=e.getFe_desde()%></td>
+                    <td><%=e.getFe_hasta()%></td>
+                    <td><%=e.getCa_sueldo()%></td>
+                   
                 </tr>
-                <?}?>        
+                <%}%>        
             </tbody>
         </table>
         <div id="tablefooter">
