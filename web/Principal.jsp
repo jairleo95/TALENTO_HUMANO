@@ -47,7 +47,6 @@
     </script>
     <style type="text/css">
         #deposito{
-            border: 1px solid #cccccc; 
             width: 100%; 
             height: auto; 
             padding-left: 20px;
@@ -344,14 +343,14 @@
                     <!-- Desplegables  -->
 
                     <!-- sidebar menu: : style can be found in sidebar.less -->
-                    <ul class="sidebar-menu">
+                    <ul class="sidebar-menu" id="jonas">
                         <% 
                             for (int i = 0; i < listarURL.size(); i++)
                             { V_Privilegio dp = new V_Privilegio();
                               dp = (V_Privilegio) listarURL.get(i);
                         %>
-                        <li class="treeview">
-                            <a href="<%=dp.getDi_url()%>">
+                        <li>
+                            <a href="<%=dp.getDi_url()%>" target="myframe">
                                 <i class="fa fa-laptop"></i>
                                 <span><%=dp.getNo_link()%></span>
                                 
@@ -359,7 +358,7 @@
                         </li>
                         <%  if (dp.getId_privilegio().equals("PRV-000012")) {%>
                         <li class="treeview">
-                            <a href="">
+                            <a href="" >
                                 <i class="fa fa-table"></i>
                                 <span><%=dp.getNo_link()%></span>
                                 <i class="fa fa-angle-left pull-right"></i>
@@ -367,7 +366,7 @@
                             <ul class="treeview-menu">
                                 <li ><a href="Vista/Dgp/Generar_Dgp.jsp?text=1" target="myframe"><i class="fa fa-angle-double-right"></i> Tiempo Completo</a></li>
                                 <li><a href="Vista/Dgp/Generar_Dgp.jsp?text=2" target="myframe"><i class="fa fa-angle-double-right"></i> Tiempo Parcial</a></li>
-                                <li><a href="prueba2.jsp" target="myframe"><i class="fa fa-angle-double-right"></i> Medio Tiempo</a></li>
+                                <li><a href="Vista/Dgp/Generar_Dgp.jsp?text=3" target="myframe"><i class="fa fa-angle-double-right"></i> Medio Tiempo</a></li>
                             </ul>
                         </li>                                
                         <%}}%>
@@ -440,5 +439,6 @@
             jQuery('iframe').iframeAutoHeight({debug: true, diagnostics: false});      
         </script>
     </body>
+   
 </html>
 <%}%>

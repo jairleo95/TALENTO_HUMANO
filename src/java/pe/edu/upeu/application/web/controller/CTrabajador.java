@@ -45,7 +45,7 @@ public class CTrabajador extends HttpServlet {
         HttpSession sesion = request.getSession(true);
         String idrol = (String) sesion.getAttribute("IDROL");
 
-        InterfaceListaDAO li = new ListaDAO();
+       InterfaceListaDAO li = new ListaDAO();
         InterfaceDgpDAO dgp = new DgpDAO();
         InterfaceUbigeoDAO ub = new UbigeoDAO();
         InterfaceTrabajadorDAO tr = new TrabajadorDAO();
@@ -151,10 +151,19 @@ public class CTrabajador extends HttpServlet {
         }
         if ("aut".equals(opc)) {
             String idtr = request.getParameter("idtr");
+            String iddgp = request.getParameter("iddetalle_dgp");
+            String puesto_id = request.getParameter("puesto_id");
+            String cod = request.getParameter("cod");
+            String idpasos = request.getParameter("idpasos");
+            String drp = request.getParameter("IDDETALLE_REQ_PROCESO");
+            String np = request.getParameter("nup");
+
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr='" + idtr.trim() + "'&aut=1");
+            getServletContext().setAttribute("List_Auto_mostrar",li.List_Auto_mostrar(idrol));
+            out.println(li.List_Auto_mostrar(idrol).size());
+          //  response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr='" + idtr.trim() + "'&aut=1&dgp=" + iddgp + "&p=" + puesto_id + "&c=" + cod + "&pas=" + idpasos + "&drp=" + drp + "&np=" + np);
         }
-        
+
         /*  } catch (IOException e) {
          System.out.println(e.getMessage());
          } finally {

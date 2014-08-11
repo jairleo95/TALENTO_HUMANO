@@ -15,13 +15,12 @@ HttpSession sesion =  request.getSession(true);
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
             <title>Requerimientos Autorizados</title>
-            <link rel="stylesheet" href="../Vistas/sort/style.css" />
-            <script type="text/javascript" src="../JS/jquery-1.7.2.min.js"></script>
-            <script type="text/javascript" src="../JS/jquery-ui-1.8.16.custom.min.js"></script>
-            <script type="text/javascript" src="../JS/js_dgp_aut.js"></script>
-            
-            <link type="text/css" rel="stylesheet" href="../CSS/Reportes.css">
-            <link type="text/css" rel="stylesheet" href="../CSS/form.css">
+            <link rel="stylesheet" href="../../css/Css_Sort/style.css" />
+            <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
+            <script type="text/javascript" src="../../js/JQuery/jquery-ui-1.8.16.custom.min.js"></script>
+            <script type="text/javascript" src="../../js/Js_DGP/js_dgp_aut.js"></script>
+            <link type="text/css" rel="stylesheet" href="../../css/Css_Reporte/Reportes.css">
+            <link type="text/css" rel="stylesheet" href="../../css/Css_Formulario/form.css">
         </head>
         <body class="body" style="height: 1024px;" >  
 

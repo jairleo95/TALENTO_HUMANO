@@ -1,4 +1,4 @@
-<?php
+<%/*
 ini_set('default_charset', 'utf8');
 ?>
 <?php header('Content-type: text/html; charset=iso-8859-1'); ?>
@@ -14,8 +14,9 @@ if (isset($_SESSION['IDUSER'])) {
     
     require_once '../Modelo/ModeloDGP.php';
     $modelo = new ModeloDGP();
-    $listra = $modelo->LIST_DET_DGP( $iddep);
-    ?>
+    $listra = $modelo->LIST_DET_DGP( $iddep);*/
+    
+%>
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml">
         <head>
@@ -197,11 +198,3 @@ if (isset($_SESSION['IDUSER'])) {
         </body>
     </html>
 
-    <?php
-} else {
-    echo"
-		<script type='text/javascript'>
-		window.location= 'http://localhost/SysDGP/';
-		</script >
-	";
-}

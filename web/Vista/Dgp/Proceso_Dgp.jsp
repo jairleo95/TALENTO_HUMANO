@@ -1,12 +1,12 @@
-<?
-session_start();
+<%
+/*session_start();
 if (isset($_SESSION['IDUSER'])) {
     require '../Modelo/ModeloDGP.php';
     $iddep = $_SESSION["DEPARTAMENTO_ID"];
     $mddgp = new ModeloDGP();
     $list_dgp = $mddgp->LIST_DGP($iddep);
-    $s = count($list_dgp);
-    ?>
+    $s = count($list_dgp);*/
+    %>
 
     <!DOCTYPE html>
     <html>
@@ -125,11 +125,12 @@ if (isset($_SESSION['IDUSER'])) {
                                   <label for="roundedOne"></label>
                               </div></td>-->
 
-                            <?
-                            require_once '../Modelo/Modelo_Imagen.php';
+                            <%
+                            /*require_once '../Modelo/Modelo_Imagen.php';
                             $mod_f = new Modelo_Imagen();
                             $idf = $mod_f->LIST_FOTO_TRABAJADOR($list_dgp[$index][0]);
-                            ?>
+                            */
+                            %>
 
                             <? if ($idf == null) { ?>
                             <td><img src="../../imagenes/avatar_default.jpg"  width="60"  height="60">
@@ -176,11 +177,3 @@ if (isset($_SESSION['IDUSER'])) {
     </body>
 
     </html>
-    <?php
-} else {
-    echo"
-		<script type='text/javascript'>
-		window.location= 'http://localhost/SysDGP/';
-		</script >
-	";
-}

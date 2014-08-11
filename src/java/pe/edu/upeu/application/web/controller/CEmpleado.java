@@ -3,25 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package pe.edu.upeu.application.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import pe.edu.upeu.application.dao.AutorizacionDAO;
 import pe.edu.upeu.application.dao.EmpleadoDAO;
-import pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO;
+import pe.edu.upeu.application.dao.Fotos_TrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceEmpleadoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceFotos_TrabajadorDAO;
 
 /**
  *
- * @author Alfa.sistemas
+ * @author Admin
  */
-public class CAutorizacion extends HttpServlet {
+@WebServlet(name = "CEmpleado", urlPatterns = {"/CEmpleado"})
+public class CEmpleado extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,47 +35,23 @@ public class CAutorizacion extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    InterfaceEmpleadoDAO Iemp = new EmpleadoDAO();
+    InterfaceFotos_TrabajadorDAO Iftr = new Fotos_TrabajadorDAO();
+    
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        InterfaceEmpleadoDAO e = new EmpleadoDAO();
-        InterfaceAutorizacionDAO a = new AutorizacionDAO();
-        
         HttpSession sesion = request.getSession(true);
         
-        String iduser = (String) sesion.getAttribute("IDUSER");
-        String ide = (String) sesion.getAttribute("IDPER");
-        String idp = (String) sesion.getAttribute("PUESTO_ID");
-
-        String opc = request.getParameter("opc");
-
-        if (opc != null) {
-            if (opc.equals("Aceptar")) {
-                String iddgp = request.getParameter("IDDETALLE_DGP");
-                String estado = "1";
-                String nropaso = request.getParameter("NROPASO");
-                String usuario_ip = request.getParameter("USUARIO_IP");
-                String us_creacion = iduser;
-                String cod = request.getParameter("COD");
-                String iddrp = request.getParameter("IDDETALLE_REQ_PROCESO");
-                String idpasos = request.getParameter("IDPASOS");
-              
-            a.Insert_Autorizacion("", iddgp, "1", nropaso, "", us_creacion, "", "", cod.trim(), idp,iddrp,idpasos);        
-            }
-            //try {
-        } else {
-
-            String idpu = e.Id_Puesto_Personal(ide);
-            getServletContext().setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
-
-            //
-            response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp");
-        }
-        /* } finally {
-         out.close();
-         }*/
+       /* try {
+            
+        } finally {
+            out.close();
+        }*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

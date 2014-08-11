@@ -1,8 +1,10 @@
 
 
+<%@page import="pe.edu.upeu.application.model.Auto_Mostrar"%>
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
 <%@page import="pe.edu.upeu.application.model.Trabajador"%>
 <jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Auto_mostrar" scope="application" class="java.util.ArrayList"/>
 
 <!DOCTYPE html>
 
@@ -14,13 +16,8 @@
         <meta name="author" content="">
         <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.autoheight.js"></script>
-
-
-
         <title>Detalle de Trabajador</title>
-
-
-        <script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
+         <script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
         <link rel="stylesheet" href="../../css/Css_Alerta/alertify.core.css" />
         <link rel="stylesheet" href="../../css/Css_Alerta/alertify.default.css" />
         <script type="text/javascript"  src="../../js/Js_Alerta/Alertas.js"></script>
@@ -159,39 +156,42 @@
                 </tr>
             </table>
 
-            <div  class="titulo" id="titulo-c">Informacion Personal</div> 
+            <div  class="titulo" id="titulo-c">Informacion Personal<%=List_Auto_mostrar.size()%></div> 
 
-            <%
-                /*require_once '../Modelo/ModeloLista.php';
-                 $mdl= new ModeloLista();
-                 $list_aut_m=$mdl->LISTA_AUTO_MOSTRAR($_SESSION["IDROL"]);*/
+            <%     
+              if  (List_Auto_mostrar.size()==1){  
+                      for(int r=0;r<List_Auto_mostrar.size();r++){              
+                          Auto_Mostrar a = new Auto_Mostrar();
+                          a=(Auto_Mostrar)List_Auto_mostrar.get(r);
             %>
-            <%  //for ($h = 0; $h < count($list_aut_m); $h++) {%>
-            <iframe name="contenido" id="contenido"  class="autoHeight" src="Datos_Generales.jsp" width="100%" height="100%" ></iframe>
-            <%//}%>
-
+    
+            <iframe name="contenido" id="contenido"  class="autoHeight" src="<%
+            out.println(a.getDi_url());
+            %>" width="100%" height="100%" ></iframe>
+            <% }}else{ %>
+             <iframe name="contenido" id="contenido"  class="autoHeight" src="Datos_Generales.jsp" width="100%" height="100%" ></iframe>
+            <%}%>
         </div> 
         <div>
             <%
                 String aut = request.getParameter("aut");
                 HttpSession sesion = request.getSession(true);
 
-                if(aut!=null){
-                if (aut.equals("1")) {
+                if (aut != null) {
+                    if (aut.equals("1")) {
 
-                    String idp = (String) sesion.getAttribute("PUESTO_ID");
-                    String iddgp = request.getParameter("iddgp");
-                    String cod = request.getParameter("cod");
-                    String iddrp = request.getParameter("IDDETALLE_REQ_PROCESO");
-                    String id_pasos = request.getParameter("idpasos");
-                    String nropaso = request.getParameter("nropaso");
+                        String idp = (String) sesion.getAttribute("p");
+                        String iddgp = request.getParameter("dgp");
+                        String cod = request.getParameter("c");
+                        String iddrp = request.getParameter("drp");
+                        String id_pasos = request.getParameter("pas");
+                        String nropaso = request.getParameter("np");
 
             %>
             <center>
-                <form class="form" action="../Control/ControlAutorizacion.php" method="post" > 
+                <form class="form" action="../../autorizacion" method="post" > 
                     <table > 
                         <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
-                        <input type="hidden" name="ESTADO" value="1" >                     
                         <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
                         <input type="hidden" name="USUARIO_IP" >  
                         <input type="hidden" name="USER_CREACION" value=""  > 
@@ -202,12 +202,12 @@
                         <tr><td><input type="submit" name="opc"  class="submit" value="Aceptar"/></td></tr>
                     </table>
                 </form>
-                <form action="../Control/ControlAutorizacion.php" method="post">
+                <form action="../../autorizacion" method="post">
                     <table>
-                        
-                        
-                        
-                            <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
+
+
+
+                        <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
                         <input type="hidden" name="ESTADO" value="2" >                     
                         <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
                         <input type="hidden" name="USUARIO_IP" >  
@@ -217,11 +217,12 @@
                         <input type="hidden" name="PUESTO_ID" value="<%=idp%>" >  
                         <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
                         <input type="hidden" name="IDPASOS" value="<%=id_pasos%>" 
-                        <tr><td><input type="submit" name="opc"  class="submit" value="Rechazar"/></td></tr>
+                               <tr><td><input type="submit" name="opc"  class="submit" value="Rechazar"/></td></tr>
                     </table>
                 </form>   
             </center>
-            <%}}%>
+            <%}
+                }%>
         </div>
         <script src="../../js/JQuery/jQuery.js"></script>
         <script src="../../js/Js_dlmenu/jquery.dlmenu.js"></script>

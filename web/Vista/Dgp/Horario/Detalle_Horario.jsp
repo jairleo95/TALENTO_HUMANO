@@ -57,8 +57,6 @@ and open the template in the editor.
                     <% g++; %>
             
                <%}%>
-                
-                
                 <%}%>
                 
             </table>
@@ -67,9 +65,10 @@ and open the template in the editor.
 
 
        
-            <%  if (request.getParameter("P2").equals("1")) { %>
-            <a href="../Detalle_Dgp.jsp?iddgp">Continuar</a>
-             <%}%>
+            <%  if(request.getParameter("P2")!= null){
+                if (request.getParameter("P2").equals("1")) { %>
+            <a href="../../../dgp?iddgp=<%=request.getParameter("iddgp")%>&idtr=<%=request.getParameter("idtr")%>&opc=rd">Continuar</a>
+             <%}}%>
  
              
     </body>
