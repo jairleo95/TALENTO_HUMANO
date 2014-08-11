@@ -96,7 +96,7 @@ for (int z = 0; z < List_doc_req_pla.size(); z++) {
                             <td class="caji"><strong><%=v.getDocumento()%></strong></td>
 
                             <td class="caji">
-                                <% //if (v.get == null & $_SESSION["IDROL"] == 2) { %>
+                                <%if (v.getDe_documento_adjunto()== null & $_SESSION["IDROL"] == 2) { %>
                                     <input type="file" name="lob_upload<? echo $i + 1; ?>">
                                 <%} else { %>
                                     <% if ($list_d[$z][25] == null) { %>
