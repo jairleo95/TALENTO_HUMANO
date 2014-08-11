@@ -42,10 +42,11 @@ public class CDocumento extends HttpServlet {
         try {
             
             if(opc.equals("enviar")){
-                getServletContext().setAttribute("",d.List_Hijos(idtr));
-                getServletContext().setAttribute("",d.List_Conyugue(idtr));
-                getServletContext().setAttribute("",d.List_Adventista(idtr));
-                getServletContext().setAttribute("",d.List_Req_nacionalidad(idtr));
+                getServletContext().setAttribute("List_Hijos",d.List_Hijos(idtr));
+                getServletContext().setAttribute("List_Conyugue",d.List_Conyugue(idtr));
+                getServletContext().setAttribute("List_Adventista",d.List_Adventista(idtr));
+                getServletContext().setAttribute("List_Req_nacionalidad",d.List_Req_nacionalidad(idtr));
+                getServletContext().setAttribute("List_Req_nacionalidad",d.List_doc_req_pla(dgp,idtr));
             }
         } finally {
             out.close();

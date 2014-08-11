@@ -1,5 +1,10 @@
-
-
+<%@page import="pe.edu.upeu.application.model.V_Reg_Dgp_Tra"%>
+<jsp:useBean id="List_Hijos" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Conyugue" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Adventista" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Req_nacionalidad" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_doc_req_pla" scope="application" class="java.util.ArrayList"/>
+<!DOCTYPE html >
 <html>
     <head>
         <meta charset="windows-1252">
@@ -79,27 +84,28 @@
                     </tr>
                 </thead>
                 <tbody>
-<? 
-$i=0;
-for ($z = 0; $z < count($list_d); $z++) { ?>
-                    
-                     <?  if ($list_d[$z][39] == "DOCA") {?>
-                    <?  if (count($list_ext)!=0) {?>
+<% int i=0;
+for (int z = 0; z < List_doc_req_pla.size(); z++) {
+    V_Reg_Dgp_Tra v=new V_Reg_Dgp_Tra();
+    v=(V_Reg_Dgp_Tra)List_doc_req_pla.get(i);
+%>
+<%  if (v.getTi_documento()== "DOCA") {%>
+                    <%  if (List_Req_nacionalidad.size()!=0) {%>
                         <tr>
-                            <? echo count($list_ext)    ?>
-                            <td class="caji"><strong><? echo $list_d[$z][3]; ?></strong></td>
+                            <%  out.println(List_Req_nacionalidad.size());%>
+                            <td class="caji"><strong><%=v.getDocumento()%></strong></td>
 
                             <td class="caji">
-                                <? if ($list_d[$z][25] == null & $_SESSION["IDROL"] == 2) { ?>
+                                <% //if (v.get == null & $_SESSION["IDROL"] == 2) { %>
                                     <input type="file" name="lob_upload<? echo $i + 1; ?>">
-                                <? } else { ?>
-                                    <? if ($list_d[$z][25] == null) { ?>
+                                <%} else { %>
+                                    <% if ($list_d[$z][25] == null) { %>
                                         <label class="null">No Registrado</label>
-        <? } else { ?>
+        <% } else { %>
                                         <a href="Ver_Doc.php?iddoc=<? echo $list_d[$z][25]; ?>"><? echo $list_d[$z][36]; ?></a>
 
-        <? }
-    } ?>
+        <%}
+    }%>
                             </td>
 
                             <td class="caji">
@@ -386,7 +392,7 @@ for ($z = 0; $z < count($list_d); $z++) { ?>
 
                     <!--primer for-->
 
-                    <? }$i++; } ?>
+                    <% /* }$i++;*/ } %>
                     
                 <input type="hidden" name="iddgp" value="<? echo $iddgp; ?>">
                 <input type="hidden" name="idtr" value="<? echo $idtra; ?>">
