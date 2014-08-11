@@ -22,7 +22,7 @@ public interface InterfaceAutorizacionDAO {
     public void Insert_Autorizacion(String ID_AUTORIZACION,String ID_DGP,String ES_AUTORIZACION,String NU_PASOS ,String IP_USUARIO,String US_CREACION,String US_MODIF ,String FE_MODIF ,String CO_PUESTO,String ID_PUESTO, String ID_DETALLE_REQ_PROCESO,String ID_PASOS);
     public List<String> Det_Autorizacion(String id_rpp);
     public String Max_Id_Autorizacion();
-    public List<X_List_De_Autorizacion>  List_Detalle_Autorizacion();
+    public List<X_List_De_Autorizacion>  List_Detalle_Autorizacion(String iddgp, String idrp);
     public List<V_Autorizar_Dgp> List_id_Autorizacion(String id_aurotizacion , String id_user);
     public List<Autorizacion> NO_List_DGP();
     public boolean Elim_Aut(String id_Autorizacion);

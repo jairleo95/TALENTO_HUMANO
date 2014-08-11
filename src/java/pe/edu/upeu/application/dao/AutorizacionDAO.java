@@ -40,9 +40,9 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
     }
 
     @Override
-    public List<X_List_De_Autorizacion> List_Detalle_Autorizacion() {
+    public List<X_List_De_Autorizacion> List_Detalle_Autorizacion(String iddgp,String idrp) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "";
+        String sql = "select  *  from ( select a.id_detalle_req_proceso,a.id_dgp, a.id_pasos,d.id_proceso,d.id_detalle_pasos , d.DE_PASOS,d.NU_PASOS,d.CO_PASOS , d.no_proceso ,d.id_puesto,d.id_direccion,d.id_departamento , d.id_requerimiento ,a.id_autorizacion,a.fe_creacion,a.es_autorizacion,a.us_creacion from ( select * from rhvd_req_paso_pu where id_detalle_req_proceso='"+idrp+"') d left outer join rhtv_autorizacion a on ( a.id_pasos=d.id_pasos and a.id_dgp='"+iddgp+"' and d.id_pasos=a.id_pasos and d.id_puesto=a.id_puesto) ) a ,rhtm_dgp dgp , rhtm_trabajador dt , rhvd_usuario du ,rhvd_puesto_direccion pu where dgp.id_dgp=a.id_dgp and dt.id_trabajador = dgp.id_trabajador and du.id_usuario=a.us_creacion  and dgp.id_puesto=pu.id_puesto order by a.id_pasos asc";
 
         return null;
     }
