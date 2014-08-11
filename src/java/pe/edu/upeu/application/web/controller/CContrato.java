@@ -126,13 +126,10 @@ public class CContrato extends HttpServlet {
             String LI_TIPO_CONVENIO = request.getParameter("TIPO_CONVENIO");
             String ES_FIRMO_CONTRATO = "";
             Double NU_CONTRATO = 0.0;/*Double.parseDouble(request.getParameter("NU_CONTRATO"));*/
-
             String DE_OBSERVACION = request.getParameter("OBSERVACION");
             String ES_APOYO = "";/*request.getParameter("ES_APOYO");*/
-
             String TI_HORA_PAGO = request.getParameter("TIPO_HORA_PAGO");
             String NU_DOCUMENTO = ""; /*request.getParameter("NU_DOCUMENTO");*/
-
             String ID_ANNO = request.getParameter("AÑO_ID");
             String ES_ENTREGAR_DOC_REGLAMENTOS = request.getParameter("ENTREGAR_DOC_REGLAMENTOS");
             String ES_REGISTRO_HUELLA = request.getParameter("REGISTRO_HUELLA");
@@ -144,8 +141,7 @@ public class CContrato extends HttpServlet {
             out.println(ID_ANNO);
             for (int i = 0; i < con.List_Rh_Contrato_Idtr().size(); i++) {
                 emp.VALIDAR_EMPLEADO(con.List_Rh_Contrato_Idtr().get(i));
-            }
-           
+            }          
                 String idtr = request.getParameter("IDDATOS_TRABAJADOR");
                 String ida = a.List_Anno_Max_Cont(idtr);
 
@@ -155,10 +151,8 @@ public class CContrato extends HttpServlet {
                  getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
                  getServletContext().setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
                  getServletContext().setAttribute("List_ID_User",usu.List_ID_User(US_CREACION));
-                response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp");
-
+                response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp");               
         }
-        
         if (opc.equals("actualizar")) {
                 
              String ida = request.getParameter("ida");
@@ -176,7 +170,6 @@ public class CContrato extends HttpServlet {
          out.close();
          }
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
