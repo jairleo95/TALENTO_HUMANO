@@ -39,9 +39,9 @@
         <script language="javascript" type="text/javascript">
             $(document).ready(function() {
                 $(".contenido").hide();
-          
-          /*TEMPORAL*/
-                 //Planilla
+
+                /*TEMPORAL*/
+                //Planilla
                 //if ($("#combito").val()=="REQ-0001" | $("#combito").val() == "REQ-0002" | $("#combito").val() == "REQ-0003" | $(this).val() == "REQ-0004" | $(this).val() == "REQ-0005" | $(this).val() == "REQ-0006") {
                 if (true) {
                     $(".contenido").hide();
@@ -89,51 +89,50 @@
 
                     <%
                         /*Temporal*/
-                        String idreq=  request.getParameter("idreq");
-                        
+                        String idreq = request.getParameter("idreq");
+
                         for (int i = 0; i < Listar_Trabajador_id.size(); i++) {
                             V_Ficha_Trab_Num_C tr = new V_Ficha_Trab_Num_C();
                             tr = (V_Ficha_Trab_Num_C) Listar_Trabajador_id.get(i);
                     %>
                     <tr><td>Trabajador:</td><td><%=tr.getAp_paterno() + " " + tr.getAp_materno() + " " + tr.getNo_trabajador()%><input type="hidden" value="<%=tr.getId_trabajador()%>" name="IDDATOS_TRABAJADOR" class="text-box" ></td></tr>   
                             <% }
-                        if (Listar_Trabajador_id.size() == 0) { %>   
+                                if (Listar_Trabajador_id.size() == 0) { %>   
 
                     <%}%>
 
                     <tr><td class="td">Puesto / Seccion / Area:</td><td>
                             <select name="IDPUESTO"  required="" class="chosen-select">
                                 <option value=""></option>
-                               
+
                                 <%
                                     for (int j = 0; j < List_Puesto.size(); j++) {
                                         V_Puesto_Direccion p = new V_Puesto_Direccion();
                                         p = (V_Puesto_Direccion) List_Puesto.get(j);
-                                        %>
+                                %>
 
-                                        <option value="<%=p.getId_puesto()%>"><% out.println(p.getNo_puesto() + " / " + p.getNo_seccion() + " / " + p.getNo_area());%></option> <%} %>
+                                <option value="<%=p.getId_puesto()%>"><% out.println(p.getNo_puesto() + " / " + p.getNo_seccion() + " / " + p.getNo_area());%></option> <%} %>
 
                             </select></td></tr>   
                     <tr style="display: "><td class="td">Requermiento:</td><td>
                             <select name="IDREQUERIMIENTO"   onchange="mostrar()" class="chosen-select"  > 
                                 <option value=""></option>
 
-                                <% 
-                                        for(int index=0;index<Listar_Requerimiento.size();index++){
-                                        Requerimiento r=  new Requerimiento();
-                                        r=  (Requerimiento)Listar_Requerimiento.get(index);
-                                        if(idreq.equals(r.getId_requerimiento())){
+                                <%
+                                    for (int index = 0; index < Listar_Requerimiento.size(); index++) {
+                                        Requerimiento r = new Requerimiento();
+                                        r = (Requerimiento) Listar_Requerimiento.get(index);
+                                        if (idreq.equals(r.getId_requerimiento())) {
                                 %>
-                                <option value="<%=r.getId_requerimiento()%>" selected="" ><%=r.getNo_req() %></option>
+                                <option value="<%=r.getId_requerimiento()%>" selected="" ><%=r.getNo_req()%></option>
 
-                                <%}
-        else{%>
-                   <option value="<%=r.getId_requerimiento()%>"><%=r.getNo_req() %></option>                      
-        <%                          }                                
-        } %>
+                                <%} else {%>
+                                <option value="<%=r.getId_requerimiento()%>"><%=r.getNo_req()%></option>                      
+                                <%                          }
+            } %>
                             </select> 
                         </td></tr>   
-                    <input type="hidden" name="IDREQUERIMIENTO"  id="combito"  value="<% %>" >
+                    <input type="hidden" name="IDREQUERIMIENTO"  id="combito"  value="<%%>" >
 
 
                     <tr><td class="td">Fecha Desde:</td><td><input type="date" name="FEC_DESDE" min="<%%>" required="" id="datepicker" class="text-box" ></td></tr>     
@@ -180,10 +179,10 @@
                     <tr><td class="td">Domicilio Fiscal:</td><td><input type="text" name="DOMICILIO_FISCAL" class="text-box" ></td></tr>    
                 </table>
             </div>
-  
+
             <input type="hidden" value="<%%>" name="USER_CREACION" class="text-box" >
 
-                   <input type="hidden" name="USER_MODIF" class="text-box" > 
+            <input type="hidden" name="USER_MODIF" class="text-box" > 
             <input type="hidden" name="FECHA_MODIF" class="text-box" >
             <input type="hidden" name="USUARIO_IP" class="text-box" >   
             <table><tr><td><input type="submit" name="opc"  class="submit" value="Registrar"></td></tr>

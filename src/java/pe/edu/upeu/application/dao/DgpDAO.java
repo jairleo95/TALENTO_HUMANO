@@ -72,7 +72,7 @@ public class DgpDAO implements InterfaceDgpDAO {
         } catch (Exception ex) {
             //  Logger.getLogger(DgpDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            // this.conn.close();
+             this.conn.close();
         }
     }
 

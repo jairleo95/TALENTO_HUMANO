@@ -92,11 +92,11 @@
                 HttpSession sesion = request.getSession(true);
                 String idrol=(String)sesion.getAttribute("IDROL");
                 String num=request.getParameter("num");
-                if(num.equals("0") && d.getEs_dgp().equals("0") && idrol.equals("ROL-0006")){ 
+                if(num.equals("0") & d.getEs_dgp().equals("0") & idrol.trim().equals("ROL-0006")){ 
                 %>
                 
-                <td><a href="Reg_Dgp.jsp?iddgp=<%=d.getId_dgp()%>&idtr=<%=d.getId_requerimiento()%>">Hacer Contrato</a></td></tr>
-           <%}if(d.getEs_dgp().equals("1") && num.equals("0") && idrol!="6"){%>
+                <td><a href="../../contrato?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=enviar">Hacer Contrato</a></td></tr>
+        <%}if(d.getEs_dgp().equals("1") && num.equals("0") & !"ROL-0006".equals(idrol.trim())){%>
                  <td><a href="">Ver Contrato</a></td></tr>
            <%}%>
    

@@ -17,7 +17,7 @@
         <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.autoheight.js"></script>
         <title>Detalle de Trabajador</title>
-         <script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
+        <script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
         <link rel="stylesheet" href="../../css/Css_Alerta/alertify.core.css" />
         <link rel="stylesheet" href="../../css/Css_Alerta/alertify.default.css" />
         <script type="text/javascript"  src="../../js/Js_Alerta/Alertas.js"></script>
@@ -89,7 +89,16 @@
         </script>
     </head>
     <body >
-        <%//if ($_REQUEST["CR"]=1){ %>
+        <%
+            String aut = request.getParameter("aut");
+            HttpSession sesion = request.getSession(true);
+            String idp = (String) sesion.getAttribute("p");
+            String iddgp = request.getParameter("dgp");
+            String cod = request.getParameter("c");
+            String iddrp = request.getParameter("drp");
+            String id_pasos = request.getParameter("pas");
+            String nropaso = request.getParameter("np");
+//if ($_REQUEST["CR"]=1){ %>
         <script type="text/javascript">
             // alerta_dt_ingresados();
         </script>
@@ -147,9 +156,9 @@
                                 %>
                                 <tr><td class="td">Nombre :</td><td><%=trb.getNo_trabajador()%></td></tr>
                                 <tr><td class="td">Apellido Paterno :</td><td><%=trb.getAp_paterno()%></td></tr>
-                                <tr><td class="td">Apellido Materno :</td><td><%=trb.getAp_paterno()%></td></tr>
+                                <tr><td class="td">Apellido Materno :</td><td><%=trb.getAp_materno()%></td></tr>
                                 <tr><td class="td">Fecha de Nacimiento :</td><td><%=trb.getFe_nac()%></td></tr>
-                                <%}%>
+                              
                             </table>
                         </div>
                     </td>
@@ -158,34 +167,27 @@
 
             <div  class="titulo" id="titulo-c">Informacion Personal<%=List_Auto_mostrar.size()%></div> 
 
-            <%     
-              if  (List_Auto_mostrar.size()==1){  
-                      for(int r=0;r<List_Auto_mostrar.size();r++){              
-                          Auto_Mostrar a = new Auto_Mostrar();
-                          a=(Auto_Mostrar)List_Auto_mostrar.get(r);
+            <%
+                if (List_Auto_mostrar.size() == 1) {
+                    for (int r = 0; r < List_Auto_mostrar.size(); r++) {
+                        Auto_Mostrar a = new Auto_Mostrar();
+                        a = (Auto_Mostrar) List_Auto_mostrar.get(r);
             %>
-    
+
             <iframe name="contenido" id="contenido"  class="autoHeight" src="<%
-            out.println(a.getDi_url());
-            %>" width="100%" height="100%" ></iframe>
-            <% }}else{ %>
-             <iframe name="contenido" id="contenido"  class="autoHeight" src="Datos_Generales.jsp" width="100%" height="100%" ></iframe>
+                out.println(a.getDi_url() + "&iddgp=" +iddgp+"&idtr="+trb.getIdtr());
+                    %>" width="100%" height="100%" ></iframe>
+            <% }
+            } else { %>
+            <iframe name="contenido" id="contenido"  class="autoHeight" src="Datos_Generales.jsp" width="100%" height="100%" ></iframe>
             <%}%>
         </div> 
         <div>
             <%
-                String aut = request.getParameter("aut");
-                HttpSession sesion = request.getSession(true);
 
                 if (aut != null) {
                     if (aut.equals("1")) {
 
-                        String idp = (String) sesion.getAttribute("p");
-                        String iddgp = request.getParameter("dgp");
-                        String cod = request.getParameter("c");
-                        String iddrp = request.getParameter("drp");
-                        String id_pasos = request.getParameter("pas");
-                        String nropaso = request.getParameter("np");
 
             %>
             <center>
@@ -233,6 +235,6 @@
                 });
             });
         </script>
-
+  <%}%>
     </body>
 </html>

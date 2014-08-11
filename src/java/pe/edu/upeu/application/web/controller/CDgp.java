@@ -138,6 +138,13 @@ public class CDgp extends HttpServlet {
               
             response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr="+ID_TRABAJADOR+"&num="+num+"&idgp="+ID_DGP+"&opc=reg_doc");
         }
+          if (opc.equals("Seguimiento")) {
+              String iddgp = request.getParameter("iddgp");
+                String idrp = IReq.id_det_req_proc(iddgp);
+              
+              
+            
+        }
         /* } finally {
          out.close();
          }*/

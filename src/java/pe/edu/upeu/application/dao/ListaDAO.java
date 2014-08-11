@@ -122,8 +122,8 @@ public class ListaDAO implements InterfaceListaDAO {
             while (rs.next()) {
                  Auto_Mostrar am = new Auto_Mostrar();
                 am.setDi_url(rs.getString("di_url"));
-                am.setId_auto_mostrar(rs.getString("id_auto_mostrar"));
-                am.setId_rol(rs.getString("id_rol"));
+               // am.setId_auto_mostrar(rs.getString("id_auto_mostrar"));
+            //    am.setId_rol(rs.getString("id_rol"));
                 list.add(am);
             }
         } catch (SQLException e) {

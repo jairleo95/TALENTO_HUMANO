@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.model.V_Det_DGP"%>
 <%@page import="oracle.net.aso.p"%>
 <%@page import="pe.edu.upeu.application.model.X_List_id_dgp"%>
 <%@page import="pe.edu.upeu.application.model.Puesto"%>
@@ -25,8 +26,8 @@
             <p><%=iduser%></p>
             <%  
             for(int u=0;u<LIST_ID_DGP.size();u++){
-                X_List_id_dgp  d =new X_List_id_dgp ();
-                d=(X_List_id_dgp )LIST_ID_DGP.get(u);
+                V_Det_DGP  d =new V_Det_DGP ();
+                d=(V_Det_DGP )LIST_ID_DGP.get(u);
             %>
                 
                     
