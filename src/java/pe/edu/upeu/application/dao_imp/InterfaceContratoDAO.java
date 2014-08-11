@@ -21,6 +21,7 @@ public interface InterfaceContratoDAO {
     public List <String> List_Rh_Contrato_Idtr ();
     public List<List_Rh_Contrato_Fec> List_Rh_Contrato_Fec(String id_departamento, String fecha_creacion);
     public List<X_List_Anno_Id_Tr_DGP> List_Anno_Id_Tr_DGP (String id_trabajador);
+    
     public int Validar_Anno (String id_trabajador, String id_anno);
     public void Venc_Cont();
 }
