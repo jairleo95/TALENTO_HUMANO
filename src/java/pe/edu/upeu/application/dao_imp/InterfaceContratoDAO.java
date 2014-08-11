@@ -7,7 +7,6 @@
 package pe.edu.upeu.application.dao_imp;
 
 import java.util.List;
-import pe.edu.upeu.application.model.Contrato;
 import pe.edu.upeu.application.model.List_Rh_Contrato_Fec;
 import pe.edu.upeu.application.model.X_List_Anno_Id_Tr_DGP;
 import pe.edu.upeu.application.model.X_List_Id_Contrato_DGP;
