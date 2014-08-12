@@ -13,14 +13,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import pe.edu.upeu.application.dao.EmpleadoDAO;
-import pe.edu.upeu.application.dao_imp.InterfaceEmpleadoDAO;
+import pe.edu.upeu.application.dao.DgpDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 
 /**
  *
  * @author Admin
  */
-public class CEmpleado extends HttpServlet {
+public class CRequerimiento extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,24 +36,22 @@ public class CEmpleado extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        InterfaceEmpleadoDAO Iem = new EmpleadoDAO();
-        
+        InterfaceDgpDAO Idgp = new DgpDAO();
         
         HttpSession sesion = request.getSession(true);
         String opc = request.getParameter("opc");
-
-        if(opc.equals("Reporte")){
-            
-        String iddepa = (String)sesion.getAttribute("DEPARTAMENTO_ID");
-        getServletContext().setAttribute("List_Empleado", Iem.Listar_Empleado(iddepa));
         
-        out.print(Iem.Listar_Empleado(iddepa).size());
+        if(opc.equals("Listar")){
+        String iddep =(String)sesion.getAttribute("IDDEPARTAMENTO");
+        getServletContext().setAttribute("List_Det_Dgp", Idgp.LIST_DET_DGP(iddep));
         
-        response.sendRedirect("Vista/Empleado/Filtro_Empleado.jsp?iddepa");
+         out.print(Idgp.LIST_DET_DGP(iddep).size());
+         response.sendRedirect("Vista/Dgp/List_Dgp.jsp?iddep");
+        
         }
         
         try {
-     
+            
         } finally {
             out.close();
         }

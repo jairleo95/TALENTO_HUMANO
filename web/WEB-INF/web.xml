@@ -36,6 +36,14 @@
         <servlet-name>CDocumento</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CDocumento</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CRequerimiento</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CRequerimiento</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CEmpleado</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CEmpleado</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
         <url-pattern>/trabajador</url-pattern>
@@ -71,6 +79,14 @@
     <servlet-mapping>
         <servlet-name>CDocumento</servlet-name>
         <url-pattern>/documento</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CRequerimiento</servlet-name>
+        <url-pattern>/requerimiento</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CEmpleado</servlet-name>
+        <url-pattern>/empleado</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
