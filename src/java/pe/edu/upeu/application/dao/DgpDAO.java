@@ -13,12 +13,10 @@ import java.util.List;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
-import pe.edu.upeu.application.model.DGP;
 import pe.edu.upeu.application.model.V_Det_DGP;
 import pe.edu.upeu.application.model.V_Es_Requerimiento;
 import pe.edu.upeu.application.model.X_List_det_dgp;
 import pe.edu.upeu.application.model.X_List_dgp_by;
-import pe.edu.upeu.application.model.X_List_id_dgp;
 import pe.edu.upeu.application.model.X_User_dgp;
 import pe.edu.upeu.application.model.X_val_tra_dgp;
 import pe.edu.upeu.application.model.x_List_Id_Trab_Dgp;
@@ -72,7 +70,7 @@ public class DgpDAO implements InterfaceDgpDAO {
         } catch (Exception ex) {
             //  Logger.getLogger(DgpDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-             this.conn.close();
+            this.conn.close();
         }
     }
 
@@ -258,48 +256,13 @@ public class DgpDAO implements InterfaceDgpDAO {
     @Override
     public void VAL_DGP_PASOS() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from RHTM_DGP";
+        String sql = "select id_dgp from RHTM_DGP where es_dgp='0'";
         try {
             ResultSet rs = this.conn.query(sql);
-            List<DGP> Lista = new ArrayList<DGP>();
-
             while (rs.next()) {
-                DGP x = new DGP();
-                x.setId_dgp(rs.getString("id_dgp"));
-                x.setFe_desde(rs.getString("fe_desde"));
-                x.setFe_hasta(rs.getString("fe_hasta"));
-                x.setCa_sueldo(rs.getDouble("ca_sueldo"));
-                x.setDe_dias_trabajo(rs.getString("de_dias_trabajo"));
-                x.setId_puesto(rs.getString("id_puesto"));
-                x.setId_requerimiento(rs.getString("id_requerimiento"));
-                x.setId_trabajador(rs.getString("id_trabajador"));
-                x.setCo_ruc(rs.getString("co_ruc"));
-                x.setDe_lugar_servicio(rs.getString("de_lugar_servicio"));
-                x.setDe_servicio(rs.getString("de_servicio"));
-                x.setDe_periodo_pago(rs.getString("de_periodo_pago"));
-                x.setDe_domicilio_fiscal(rs.getString("de_domicilio_fiscal"));
-                x.setDe_subvencion(rs.getString("de_subvencion"));
-                x.setDe_horario_capacitacion(rs.getString("de_horario_capacitacion"));
-                x.setDe_horario_refrigerio(rs.getString("de_horario_refrigerio"));
-                x.setDe_dias_capacitacion(rs.getString("de_dias_capacitacion"));
-                x.setEs_dgp(rs.getString("es_dgp"));
-                x.setUs_creacion(rs.getString("us_creacion"));
-                x.setFe_creacion(rs.getString("fe_creacion"));
-                x.setUs_modif(rs.getString("us_modif"));
-                x.setFe_modif(rs.getString("fe_modif"));
-                x.setIp_usuario(rs.getString("ip_usuario"));
-                x.setCa_bono_alimentario(rs.getDouble("ca_bono_alimentario"));
-                x.setDe_bev(rs.getDouble("de_bev"));
-                x.setCa_centro_costos(rs.getDouble("ca_centro_costos"));
-                x.setDe_antecedentes_policiales(rs.getString("de_antecedentes_policiales"));
-                x.setDe_certificado_salud(rs.getString("de_certificado_salud"));
-                x.setDe_monto_honorario(rs.getString("de_monto_honorario"));
-                Lista.add(x);
-            }
-            for (int i = 0; i < Lista.size(); i++) {
-                String sql2 = "BEGIN SP_VAL_DGP(:id_dgp ); END;";
-                this.conn.ejecutar(sql2);
-
+                CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_VAL_DGP(?)}");
+                cst.setString(1, rs.getString("id_dgp"));
+                cst.execute();
             }
         } catch (SQLException e) {
         } finally {

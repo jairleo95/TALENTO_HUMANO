@@ -138,6 +138,17 @@ public class CDgp extends HttpServlet {
               
             response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr="+ID_TRABAJADOR+"&num="+num+"&idgp="+ID_DGP+"&opc=reg_doc");
         }
+          if (opc.equals("Detalle")) {
+              
+              String ID_DGP = request.getParameter("iddgp");
+              String ID_TRABAJADOR = request.getParameter("idtr");
+              getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(ID_DGP));
+              int num=dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
+              getServletContext().setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
+    
+              
+            response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr="+ID_TRABAJADOR+"&num="+num+"&idgp="+ID_DGP+"&opc=reg_doc");
+        }
           if (opc.equals("Seguimiento")) {
               String iddgp = request.getParameter("iddgp");
                 String idrp = IReq.id_det_req_proc(iddgp);

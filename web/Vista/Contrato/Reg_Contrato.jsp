@@ -32,13 +32,15 @@
             %>
                 
                     
-          <%  /* if ($hac_cont==null&&$iddgp==null) { */   %>
+            <%if (d.getId_dgp()==null) {
+                  
+  /*if ($hac_cont==null&&$iddgp==null) { */   %>
           
             <label>Todavia no se ha almacenado El DGP,¿desea contratar sin  antes elaborar un DGP?</label>  
            <br>
            <a href="Reg_Contrato.php?hac_cont=1&idtr=<? echo $idtr;?>">Hacer Contrato de Todas Maneras</a>
          
-           <?}else{?>
+           <%} else{%>
             <form class="form" action="../../contrato"> 
                 <table class="table">      
                 <tr><td>Año :</td><td>
@@ -130,10 +132,7 @@
                     <tr><td>Sueldo:</td><td><input type="text" name="SUELDO" value="<%=d.getCa_sueldo()%>" class="text-box"  required=""  >Reintegro:<input type="text" name="REINTEGRO"  value="0" class="text-box" ></td></tr>   
                     <tr><td>Tipo Horas Pago:</td><td><input type="text" value="0" name="TIPO_HORA_PAGO" class="text-box" ></td></tr>
                     <tr><td>Bono Alimentario:</td><td><input type="text"  value="<%=d.getCa_bono_alimentario()%>" name="BONO_ALIMENTO" class="text-box" ></td></tr>
-                   <? require_once '../Modelo/ModeloDatos_hijos_trabajador.php';
-                   $mdh= new ModeloDatos_hijos_trabajador();
-                   $n=$mdh->ASIGNACION_F($idtr);
-                   ?>
+               
                    <%
                    int total=Integer.parseInt(request.getParameter("num"));
                    
@@ -246,6 +245,6 @@
                     <tr><td colspan="2"><input type="submit" name="opc"  class="submit" value="REGISTRAR CONTRATO"></td></tr>
                     
                 </table></form></center><br><br>
-           <%}%>
+           <%}}%>
     </body>
 </html>

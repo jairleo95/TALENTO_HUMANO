@@ -13,7 +13,6 @@ import java.util.List;
 import pe.edu.upeu.application.dao_imp.InterfaceContratoDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
-import pe.edu.upeu.application.model.Contrato;
 import pe.edu.upeu.application.model.List_Rh_Contrato_Fec;
 import pe.edu.upeu.application.model.X_List_Anno_Id_Tr_DGP;
 import pe.edu.upeu.application.model.X_List_Id_Contrato_DGP;
@@ -38,7 +37,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
             cst.setString(2, ID_DGP);
             cst.setString(3, c.convertFecha(FE_DESDE));
             cst.setString(4, c.convertFecha(FE_HASTA));
-            cst.setString(5, c.convertFecha(FE_CESE));
+            cst.setString(5, null);
             cst.setString(6, ID_FUNC);
             cst.setString(7, LI_CONDICION);
             cst.setDouble(8, CA_SUELDO);

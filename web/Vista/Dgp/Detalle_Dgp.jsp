@@ -96,7 +96,9 @@
                 %>
                 
                 <td><a href="../../contrato?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=enviar">Hacer Contrato</a></td></tr>
-        <%}if(d.getEs_dgp().equals("1") && num.equals("0") & !"ROL-0006".equals(idrol.trim())){%>
+        <%}
+                
+        if(d.getEs_dgp().equals("1") & num.equals("0") & !"ROL-0006".equals(idrol.trim())){%>
                  <td><a href="">Ver Contrato</a></td></tr>
            <%}%>
    

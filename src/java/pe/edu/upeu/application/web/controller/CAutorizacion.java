@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import pe.edu.upeu.application.dao.AutorizacionDAO;
+import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.EmpleadoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceEmpleadoDAO;
 
 /**
@@ -36,12 +38,12 @@ public class CAutorizacion extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        
+
         InterfaceEmpleadoDAO e = new EmpleadoDAO();
         InterfaceAutorizacionDAO a = new AutorizacionDAO();
-        
+        InterfaceDgpDAO dgp = new DgpDAO();
         HttpSession sesion = request.getSession(true);
-        
+
         String iduser = (String) sesion.getAttribute("IDUSER");
         String ide = (String) sesion.getAttribute("IDPER");
         String idp = (String) sesion.getAttribute("PUESTO_ID");
@@ -58,17 +60,21 @@ public class CAutorizacion extends HttpServlet {
                 String cod = request.getParameter("COD");
                 String iddrp = request.getParameter("IDDETALLE_REQ_PROCESO");
                 String idpasos = request.getParameter("IDPASOS");
-              
-            a.Insert_Autorizacion("", iddgp, "1", nropaso, "", us_creacion, "", "", cod.trim(), idp,iddrp,idpasos);        
+                /*Cambiar con un trigger al momento de insertar*/
+                dgp.VAL_DGP_PASOS();
+
+                a.Insert_Autorizacion("", iddgp, estado, nropaso, "", us_creacion, "", "", cod.trim(), idp, iddrp, idpasos);
+                String idpu = e.Id_Puesto_Personal(ide);
+                getServletContext().setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
+                response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp");
             }
             //try {
         } else {
 
             String idpu = e.Id_Puesto_Personal(ide);
             getServletContext().setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
-
-            //
             response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp");
+
         }
         /* } finally {
          out.close();
