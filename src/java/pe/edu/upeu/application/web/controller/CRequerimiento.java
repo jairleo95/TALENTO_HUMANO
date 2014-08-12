@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import pe.edu.upeu.application.dao.DgpDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 
 /**
  *
@@ -34,10 +36,17 @@ public class CRequerimiento extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
+        InterfaceDgpDAO Idgp = new DgpDAO();
+        
         HttpSession sesion = request.getSession(true);
         String opc = request.getParameter("opc");
         
         if(opc.equals("Listar")){
+        String iddep =(String)sesion.getAttribute("IDDEPARTAMENTO");
+        getServletContext().setAttribute("List_Det_Dgp", Idgp.LIST_DET_DGP(iddep));
+        
+         out.print(Idgp.LIST_DET_DGP(iddep).size());
+         response.sendRedirect("Vista/Dgp/List_Dgp.jsp?iddep");
         
         }
         

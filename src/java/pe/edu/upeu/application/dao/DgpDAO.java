@@ -184,12 +184,8 @@ public class DgpDAO implements InterfaceDgpDAO {
     @Override
     public List<X_List_det_dgp> LIST_DET_DGP(String id_dep) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select dgp.ID_DGP , dgp.ID_TRABAJADOR,tr.NO_TRABAJADOR,tr.AP_PATERNO,tr.AP_MATERNO, dgp.ID_PUESTO,dgp.FE_DESDE,dgp.FE_HASTA,dgp.CA_SUELDO , pd.NO_PUESTO, pd.NO_AREA, r.NO_REQ ,dgp.ES_DGP\n"
-                + "from RHTR_REQUERIMIENTO r,RHTM_DGP dgp , \n"
-                + "RHTM_TRABAJADOR tr,RHVD_PUESTO_DIRECCION  pd \n"
-                + "where r.ID_REQUERIMIENTO = dgp.ID_REQUERIMIENTO and dgp.ES_DGP is not null and\n"
-                + "dgp.ID_PUESTO=pd.ID_PUESTO and tr.ID_TRABAJADOR = dgp.ID_TRABAJADOR";
-        sql += (id_dep != "") ? " and pd.ID_DEPARTAMENTO='" + id_dep + "'" : "";
+        String sql = "select dgp.id_dgp , dgp.id_trabajador,tr.no_trabajador,tr.ap_paterno,tr.ap_materno, dgp.id_puesto,dgp.fe_desde,dgp.fe_hasta,dgp.ca_sueldo, pd.no_puesto, pd.no_area, r.no_req,dgp.ES_DGP from RHTR_REQUERIMIENTO r,RHTM_DGP dgp , RHTM_TRABAJADOR tr,RHVD_PUESTO_DIRECCION  pd where r.ID_REQUERIMIENTO = dgp.ID_REQUERIMIENTO and dgp.ES_DGP is not null and dgp.ID_PUESTO=pd.ID_PUESTO and tr.ID_TRABAJADOR = dgp.ID_TRABAJADOR";
+        //sql += (id_dep != "") ? " and pd.ID_DEPARTAMENTO='" + id_dep + "'" : "";
         List<X_List_det_dgp> Lista = new ArrayList<X_List_det_dgp>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -205,7 +201,8 @@ public class DgpDAO implements InterfaceDgpDAO {
                 x.setFe_hasta(rs.getString("fe_hasta"));
                 x.setCa_sueldo(rs.getDouble("ca_sueldo"));
                 x.setNo_puesto(rs.getString("no_puesto"));
-                x.setNo_reg(rs.getString("no_reg"));
+                x.setNo_area(rs.getString("no_area"));
+                x.setNo_req(rs.getString("no_req"));
                 x.setEs_dgp(rs.getString("es_dgp"));
                 Lista.add(x);
             }

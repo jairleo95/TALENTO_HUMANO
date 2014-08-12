@@ -49,7 +49,7 @@ public class CEmpleado extends HttpServlet {
         
         out.print(Iem.Listar_Empleado(iddepa).size());
         
-        response.sendRedirect("Vista/Empleado/Filtro_Empleado.jsp?iddep");
+        response.sendRedirect("Vista/Empleado/Filtro_Empleado.jsp?iddepa");
         }
         
         try {

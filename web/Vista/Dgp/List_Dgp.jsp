@@ -1,23 +1,7 @@
-<%/*
-ini_set('default_charset', 'utf8');
-?>
-<?php header('Content-type: text/html; charset=iso-8859-1'); ?>
-<?
-session_start();
-if (isset($_SESSION['IDUSER'])) {
-    if ($_SESSION["IDROL"]==5) {
-        $iddep = 0; 
-    }else{
-         $iddep = $_SESSION["IDDEPARTAMENTO"];
-    }
-   
-    
-    require_once '../Modelo/ModeloDGP.php';
-    $modelo = new ModeloDGP();
-    $listra = $modelo->LIST_DET_DGP( $iddep);*/
-    
-%>
-    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<%@page import="pe.edu.upeu.application.model.X_List_det_dgp"%>
+<jsp:useBean id="List_Det_Dgp" scope="application" class="java.util.ArrayList"/>  
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml">
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -91,26 +75,30 @@ if (isset($_SESSION['IDUSER'])) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <? for ($index = 0; $index < count($listra); $index++) { ?>
+                                <% HttpSession sesion = request.getSession(true);
+                                    out.print((String)sesion.getAttribute("IDDEPARTAMENTO"));
+                                    for (int i= 0; i < List_Det_Dgp.size(); i++) { 
+                                    X_List_det_dgp x = new X_List_det_dgp();
+                                    x =(X_List_det_dgp)List_Det_Dgp.get(i); %>
                                     <tr>
-                                        <td><? echo $index + 1; ?></td>
-                                        <td class="name"><a href="../Trabajador/Detalle_Trabajador.jsp?idtr=<? echo $listra[$index][1]; ?>"><? echo strtoupper($listra[$index][4] . ' ' . $listra[$index][3] . ' ' . $listra[$index][2]); ?></a></td>
-                                        <td><? echo $listra[$index][6]; ?></td>
-                                        <td><? echo $listra[$index][7]; ?></td>
-                                        <td><? echo $listra[$index][8]; ?></td>
-                                        <td><? echo $listra[$index][9]; ?></td>
-                                        <td><? echo $listra[$index][10]; ?></td>
-                                        <td><a href="Detalle_Dgp.jsp?iddgp=<? echo $listra[$index][0]; ?>"><? echo $listra[$index][11]; ?></a></td>
-                                        <td><?
-                                            if ($listra[$index][12] == 1) {
-                                                echo 'Terminado';
+                                        <td><%out.print(i+1);%></td>
+                                        <td class="name"><a href="../Trabajador/Detalle_Trabajador.jsp"><%=x.getNo_trabajador()+" "+x.getAp_paterno()+" "+x.getAp_materno()%></a></td>
+                                        <td><%=x.getFe_desde()%></td>
+                                        <td><%=x.getFe_hasta()%></td>
+                                        <td><%=x.getCa_sueldo()%></td>
+                                        <td><%=x.getNo_puesto()%></td>
+                                        <td><%=x.getNo_area()%></td>
+                                        <td><a href="Detalle_Dgp.jsp?iddgp=<%=x.getId_dgp()%>"><%x.getEs_dgp();%></a></td>
+                                        <td><%
+                                            if (x.getEs_dgp().equals("1") ) {
+                                               out.print("Terminado");
                                             }
-                                            if ($listra[$index][12] == 0) {
-                                                echo 'En proceso';
+                                            if (x.getEs_dgp().equals("0") ) {
+                                                out.print("En Proceso");
                                             }
-                                            ?></td>
+                                            %></td>
                                     </tr>
-    <? } ?>        
+      <%}%>
                             </tbody>
                         </table>
                         <div id="tablefooter">
