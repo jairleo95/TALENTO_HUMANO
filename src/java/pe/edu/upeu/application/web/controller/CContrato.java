@@ -62,7 +62,6 @@ public class CContrato extends HttpServlet {
     InterfaceEmpleadoDAO emp = new EmpleadoDAO();
     InterfacePlantillaDAO pl = new PlantillaDAO();
     InterfaceUsuarioDAO usu = new UsuarioDAO();
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -81,6 +80,7 @@ public class CContrato extends HttpServlet {
             getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(iddgp));
             getServletContext().setAttribute("List_Puesto", puesto.List_Puesto());
             getServletContext().setAttribute("LISTA_RH_SECCION", seccion.LISTA_RH_SECCION());
+            getServletContext().setAttribute("List_anno_max", a.List_anno_max());
 
             int num = dht.ASIGNACION_F(idtr);
             out.println(num);
@@ -139,19 +139,23 @@ public class CContrato extends HttpServlet {
             out.println(ID_SEC);
             out.println(ID_TRABAJADOR);
             out.println(ID_ANNO);
-            for (int i = 0; i < con.List_Rh_Contrato_Idtr().size(); i++) {
+            out.println(ES_JEFE);
+            
+           /* for (int i = 0; i < con.List_Rh_Contrato_Idtr().size(); i++) {
                 emp.VALIDAR_EMPLEADO(con.List_Rh_Contrato_Idtr().get(i));
-            }          
-                String idtr = request.getParameter("IDDATOS_TRABAJADOR");
-                String ida = a.List_Anno_Max_Cont(idtr);
+            }          */
+                String idtr1 =ID_TRABAJADOR;
+                String ida1 = a.List_Anno_Max_Cont(idtr1);
 
-                getServletContext().setAttribute("List_id_Contrato_DGP", con.List_id_Contrato_DGP(idtr, ida));
-                 getServletContext().setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr));
+                getServletContext().setAttribute("List_id_Contrato_DGP", con.List_id_Contrato_DGP(idtr1, ida1));
+                 getServletContext().setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr1));
                  getServletContext().setAttribute("List_Jefe", l.List_Jefe());
                  getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
                  getServletContext().setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
                  getServletContext().setAttribute("List_ID_User",usu.List_ID_User(US_CREACION));
-                response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp");               
+                 getServletContext().setAttribute("list_Condicion_contrato",l.list_Condicion_contrato());
+                 getServletContext().setAttribute("List_tipo_contrato",l.List_tipo_contrato());
+                response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp?ida1="+ida1);               
         }
         if (opc.equals("actualizar")) {
                 

@@ -32,9 +32,9 @@ public class ContratoDAO implements InterfaceContratoDAO {
     public void INSERT_CONTRATO(String ID_CONTRATO, String ID_DGP, String FE_DESDE, String FE_HASTA, String FE_CESE, String ID_FUNC, String LI_CONDICION, Double CA_SUELDO, Double CA_REINTEGRO, Double CA_ASIG_FAMILIAR, Double HO_SEMANA, Double NU_HORAS_LAB, Double DIA_CONTRATO, String TI_TRABAJADOR, String LI_REGIMEN_LABORAL, String ES_DISCAPACIDAD, String TI_CONTRATO, String LI_REGIMEN_PENSIONARIO, String ES_CONTRATO_TRABAJADOR, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String US_IP, String FE_VACACIO_INI, String FE_VACACIO_FIN, String ES_CONTRATO, String ID_FILIAL, String ID_DIRECCION, String ID_DEPARTAMENTO, String ID_AREA, String ID_SECCION, String ID_PUESTO, Double CA_BONO_ALIMENTO, String ES_JEFE, String LI_TIPO_CONVENIO, String ES_FIRMO_CONTRATO, Double NU_CONTRATO, String DE_OBSERVACION, String ES_APOYO, String TI_HORA_PAGO, String NU_DOCUMENTO, String ID_ANNO, String ES_ENTREGAR_DOC_REGLAMENTOS, String ES_REGISTRO_HUELLA, String DE_REGISTRO_SISTEM_REMU, String ID_TRABAJADOR) {
         CallableStatement cst;
         try {
-             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             cst = conn.conex.prepareCall("{CALL RHSP_INSERT_CONTRATO( ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
-            cst.setString(1,"");
+            cst.setString(1, "");
             cst.setString(2, ID_DGP);
             cst.setString(3, c.convertFecha(FE_DESDE));
             cst.setString(4, c.convertFecha(FE_HASTA));
@@ -82,7 +82,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
             cst.setString(46, DE_REGISTRO_SISTEM_REMU);
             cst.setString(47, ID_TRABAJADOR);
             cst.execute();
-            
+
         } catch (SQLException ex) {
         } finally {
             this.conn.close();
@@ -92,7 +92,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
     @Override
     public List<X_List_Id_Contrato_DGP> List_id_Contrato_DGP(String id_trabajador, String id_anno) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select c.id_contrato, c.id_dgp, c.fe_desde, c.fe_hasta, c.fe_cese, c.id_func, pd.no_area,c.li_condicion , c.ca_sueldo,c.ca_reintegro,c.ca_asig_familiar, c.ho_semana,c.nu_horas_lab,c.dia_contrato,c.ti_trabajador,c.li_regimen_laboral,c.es_discapacidad,c.ti_contrato,c.li_regimen_pensionario, c.es_contrato_trabajador,c.us_creacion,c.fe_creacion,c.us_modif,c.fe_modif,c.us_ip,c.fe_vacacio_ini,c.fe_vacacio_fin,c.es_contrato,c.id_filial,pd.id_direccion,pd.id_departamento,pd.id_area,pd.id_seccion,pd.id_puesto,c.ca_bono_alimento,c.es_jefe,c.li_tipo_convenio,c.es_firmo_contrato,c.nu_contrato,c.de_observacion,c.es_apoyo,c.ti_hora_pago,c.nu_documento,c.id_anno,c.es_entregar_doc_reglamentos,c.es_registro_huella,c.de_registro_sistem_remu,c.id_trabajador, pd.no_puesto,pd.no_seccion, pd.no_dep,pd.no_direccion from rhtm_contrato c, RHVD_puesto_direccion pd   where c.id_puesto = pd.id_puesto and c.es_contrato='1' and c.id_trabajador='"+id_trabajador+"' and c.ID_ANNO='"+id_anno+"'";
+        String sql = "select c.id_contrato, c.id_dgp, c.fe_desde, c.fe_hasta, c.fe_cese, c.id_func, pd.no_area,c.li_condicion , c.ca_sueldo,c.ca_reintegro,c.ca_asig_familiar, c.ho_semana,c.nu_horas_lab,c.dia_contrato,c.ti_trabajador,c.li_regimen_laboral,c.es_discapacidad,c.ti_contrato,c.li_regimen_pensionario, c.es_contrato_trabajador,c.us_creacion,c.fe_creacion,c.us_modif,c.fe_modif,c.us_ip,c.fe_vacacio_ini,c.fe_vacacio_fin,c.es_contrato,c.id_filial,pd.id_direccion,pd.id_departamento,pd.id_area,pd.id_seccion,pd.id_puesto,c.ca_bono_alimento,c.es_jefe,c.li_tipo_convenio,c.es_firmo_contrato,c.nu_contrato,c.de_observacion,c.es_apoyo,c.ti_hora_pago,c.nu_documento,c.id_anno,c.es_entregar_doc_reglamentos,c.es_registro_huella,c.de_registro_sistem_remu,c.id_trabajador, pd.no_puesto,pd.no_seccion, pd.no_dep,pd.no_direccion from rhtm_contrato c, RHVD_puesto_direccion pd   where c.id_puesto = pd.id_puesto and c.es_contrato='1' and c.id_trabajador='" + id_trabajador + "' and c.ID_ANNO='" + id_anno + "'";
         List<X_List_Id_Contrato_DGP> list = new ArrayList<X_List_Id_Contrato_DGP>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -210,16 +210,42 @@ public class ContratoDAO implements InterfaceContratoDAO {
     @Override
     public List<X_List_Anno_Id_Tr_DGP> List_Anno_Id_Tr_DGP(String id_trabajador) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from (select a.id_anno,a.no_anno ,rh.id_dgp ,rh.id_trabajador from RHTR_ANNO a , RHTM_CONTRATO rh  where   a.id_anno=rh.id_anno and rh.es_contrato=1)f left outer join RHTM_DGP dgp on (f.id_dgp =dgp.id_dgp) where f.id_trabajador='"+id_trabajador+"' order by f.no_anno desc";
+        String sql = "select f.id_anno,f.no_anno, dgp.* from (select a.id_anno,a.no_anno ,r.id_dgp ,r.id_trabajador from RHTR_ANNO a , RHTM_CONTRATO r  where   a.id_anno=r.id_anno and r.es_contrato=1)f left outer join RHTM_DGP dgp on (f.id_dgp =dgp.id_dgp) where f.id_trabajador='"+id_trabajador+"' order by f.no_anno desc";
         List<X_List_Anno_Id_Tr_DGP> list = new ArrayList<X_List_Anno_Id_Tr_DGP>();
         try {
             ResultSet rs = this.conn.query(sql);
             X_List_Anno_Id_Tr_DGP aitd = new X_List_Anno_Id_Tr_DGP();
             while (rs.next()) {
                 aitd.setId_anno(rs.getString("id_anno"));
-                aitd.setId_dgp(rs.getString("id_dgp"));
-                aitd.setId_trabajador(rs.getString("id_trabajador"));
                 aitd.setNo_anno(rs.getString("no_anno"));
+                aitd.setId_dgp(rs.getString("id_dgp"));
+                aitd.setFe_desde(rs.getString("fe_desde"));
+                aitd.setFe_hasta(rs.getString("fe_hasta"));
+                aitd.setCa_sueldo(rs.getDouble("ca_sueldo"));
+                aitd.setId_puesto(rs.getString("id_puesto"));
+                aitd.setId_requerimiento(rs.getString("id_requerimiento"));
+                aitd.setId_trabajador(rs.getString("id_trabajador"));
+                aitd.setCo_ruc(rs.getString("co_ruc"));
+                aitd.setDe_lugar_servicio(rs.getString("de_lugar_servicio"));
+                aitd.setDe_servicio(rs.getString("de_servicio"));
+                aitd.setDe_periodo_pago(rs.getString("de_periodo_pago"));
+                aitd.setDe_domicilio_fiscal(rs.getString("de_domicilio_fiscal"));
+                aitd.setDe_subvencion(rs.getString("de_subvencion"));
+                aitd.setDe_horario_capacitacion(rs.getString("de_horario_capacitacion"));
+                aitd.setDe_horario_refrigerio(rs.getString("de_horario_refrigerio"));
+                aitd.setDe_dias_capacitacion(rs.getString("de_dias_capacitacion"));
+                aitd.setEs_dgp(rs.getString("es_dgp"));
+                aitd.setUs_creacion(rs.getString("us_creacion"));
+                aitd.setFe_creacion(rs.getString("fe_creacion"));
+                aitd.setUs_modif(rs.getString("us_modif"));
+                aitd.setFe_modif(rs.getString("fe_modif"));
+                aitd.setIp_usuario(rs.getString("ip_usuario"));
+                aitd.setCa_bono_alimentario(rs.getDouble("ca_bono_alimentario"));
+                aitd.setDe_bev(rs.getDouble("de_bev"));
+                aitd.setCa_centro_costos(rs.getDouble("ca_centro_costos"));
+                aitd.setDe_antecedentes_policiales(rs.getString("de_antecedentes_policiales"));
+                aitd.setDe_certificado_salud(rs.getString("de_certificado_salud"));
+                aitd.setDe_monto_honorario(rs.getString("de_monto_honorario"));
                 list.add(aitd);
             }
         } catch (SQLException e) {

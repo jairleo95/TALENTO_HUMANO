@@ -8,6 +8,7 @@
 <jsp:useBean id="List_Puesto" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="LIST_ID_DGP" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="ASIGNACION_F" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_anno_max" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html >
 
 <html>
@@ -44,9 +45,16 @@
                         <select name="AÑO_ID" class="text-box" required="" >
                         <%  for (int i = 0;i<List_Anno.size();i++){ 
                             Anno a =  new  Anno();
+                            for(int e=0;e<List_anno_max.size();e++){
+                            Anno w= new Anno();
+                            w=(Anno)List_anno_max.get(e);
                             a= (Anno)List_Anno.get(i);%>
+                            <%if(a.getId_anno().trim()!=w.getId_anno().trim()&& a.getId_anno().equals("")){%>
                             <option value="<%=a.getId_anno()%>" selected="selected"><%=a.getNo_anno()%></option>
-                        <%}%>
+                            <%}else{%>
+                            <option value="<%=w.getId_anno()%>"><%=w.getNo_anno()%></option>
+                        <%}
+                            }}%>
                  </select></td></tr>
                 <input type="hidden" name="IDDETALLE_DGP" value="<%=d.getId_dgp()%>" class="text-box"  >
                  <tr><td>Desde:</td><td><input type="date" value="<%=d.getFe_desde()%>" name="FEC_DESDE" class="text-box"  required="" >Hasta:<input type="date" name="FEC_HASTA"  value="<%=d.getFe_hasta()%>" class="text-box" required=""  ></td></tr> 
@@ -107,15 +115,15 @@
                  <!--   <tr><td>Funcion:</td><td><input type="text" name="FUNC_ID" class="text-box" ></td></tr>      -->
                     <tr><td>Condición:</td><td>
                         <select  name="CONDICION" class="text-box" required="" >
-                            <option value="1">---elegir---</option>
-                            <option value="2">Contratado</option>
-                            <option value="3">Contratado Independiente</option>
-                            <option value="4">Enpleado</option>
-                            <option value="5">Misionero</option>
-                            <option value="6">MFL-Práctica Pre-Profesional</option>
-                            <option value="7">MFL-Práctica Profesionales</option>
-                            <option value="8">MFL-CLJ</option>
-                            <option value="9">MFL-Contrato</option>
+                            <option value="">---elegir---</option>
+                            <option value="1">Contratado</option>
+                            <option value="2">Contratado Independiente</option>
+                            <option value="3">Enpleado</option>
+                            <option value="4">Misionero</option>
+                            <option value="5">MFL-Práctica Pre-Profesional</option>
+                            <option value="6">MFL-Práctica Profesionales</option>
+                            <option value="7">MFL-CLJ</option>
+                            <option value="8">MFL-Contrato</option>
                         </select>
                                               
                   

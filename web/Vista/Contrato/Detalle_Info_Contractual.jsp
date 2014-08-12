@@ -16,6 +16,8 @@
 <jsp:useBean id="List_Situacion_Actual" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Planilla" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_ID_User" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="list_Condicion_contrato" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_tipo_contrato" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -51,7 +53,7 @@
 
         <%
             CConversion c = new CConversion();
-            InterfaceListaDAO l = new ListaDAO();
+            
             HttpSession Sesion = request.getSession(true);
             String idrol = (String) Sesion.getAttribute("IDROL");
 
@@ -69,14 +71,13 @@
                             <%  for (int o = 0; o < List_Anno_Id_Tr_DGP.size(); o++) {%>
                             <%X_List_Anno_Id_Tr_DGP x = new X_List_Anno_Id_Tr_DGP();
                                 x = (X_List_Anno_Id_Tr_DGP) List_Anno_Id_Tr_DGP.get(o);%>
-
-                            <%  if (request.getParameter("ida") == List_id_Contrato_DGP.get(o)) {%>
+                                <%  if (request.getParameter("ida1").trim()==x.getId_anno().trim()) {%>
                             <option value="<%=x.getId_anno()%>" selected="selected"><%=x.getNo_anno()%></option>
                             <%} else {%>
                             <option value="<%=x.getId_anno()%>"><%=x.getNo_anno()%></option>
                             <%}
-                                }%>
-                        </select> </td><td><input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>"></td>
+                               } %>
+                        </select> </td><td><input type="hidden" name="idtr" value="<%=n.getId_trabajador()%>"></td>
                         <td><input name="opc" value="actualizar" type="submit"></td></tr>
             </table>
         </form>
@@ -90,15 +91,15 @@
                 <tr><td><strong>Sección:</strong></td><td><%=n.getNo_seccion()%> </td></tr>
                 <tr><td><strong>Puesto:</strong></td><td><%=n.getNo_puesto()%></td> </tr>
                 <tr><td><strong>¿Es Jefe?:</strong></td><%for (int e = 0; e < List_Jefe.size(); e++) {
-                        if (n.getEs_jefe().equals(e + 1 + "")) {%>
-                    <td><%=List_Jefe.get(0+e)%>
+                        if (n.getEs_jefe().equals(e+1+ "")) {%>
+                    <td><%=List_Jefe.get(e)%>
                         <%}
                             }%></td> </tr>
                 <tr><td><strong>Condición:</strong></td> <td><%
 
-                    for (int h = 0; h < l.list_Condicion_contrato().size(); h++) {
-                        if ((n.getLi_condicion().trim().equals(h + 1 + ""))) {
-                            out.println(l.list_Condicion_contrato().get(h));
+                    for (int h = 0; h < list_Condicion_contrato.size(); h++) {
+                        if (n.getLi_condicion().trim().equals(h+1+"")) {
+                            out.println(list_Condicion_contrato.get(h));
                         }
                     }
                         %> </td></tr>
@@ -134,9 +135,9 @@
 
                         %> 
                     </td></tr>   
-                <tr><td><strong>Tipo de Contrato:</strong></td><td><%                    for (int k = 0; k < l.List_tipo_contrato().size(); k++) {
+                <tr><td><strong>Tipo de Contrato:</strong></td><td><%                    for (int k = 0; k < List_tipo_contrato.size(); k++) {
                         if (n.getTi_contrato().trim().equals(k + 1 + "")) {
-                            out.println(l.List_tipo_contrato().get(k));
+                            out.println(List_tipo_contrato.get(k));
                         }
                     }%> 
                     </td></tr>   
