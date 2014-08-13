@@ -1,12 +1,12 @@
-<? session_start();
-?>
+<%@page import="pe.edu.upeu.application.model.X_List_De_Autorizacion"%>
+<jsp:useBean class="java.util.ArrayList" id="Det_Autorizacion" scope="application" />
 <!DOCTYPE html >
 <html>
     <head>
         <meta charset="windows-1252">
         <title>Autorizaciones DGP</title>
-        <link href="../CSS/listas.css" rel="stylesheet"> 
-        <link type="text/css" rel="stylesheet" href="../CSS/Reportes.css">
+        <link href="../../css/Css_Lista/listas.css" rel="stylesheet"> 
+        <link type="text/css" rel="stylesheet" href="../../css/Css_Reporte/Reportes.css">
         <style type="text/css">
           @media 
 	only screen and (max-width: 760px),
@@ -70,24 +70,18 @@
             <center><h1 class="spacing">HISTORIAL DE AUTORIZACIONES POR  TRABAJADOR</h1></center>
         </div>
 
-        <?
-        require_once '../Modelo/ModeloAutorizacion.php';
-        require_once '../Modelo/ModeloRequerimiento.php';
-        $mr = new ModeloRequerimiento();
-        $ma = new ModeloAutorizacion();
-
-        $iddgp = $_REQUEST["iddgp"];
-        $iddreq = $mr->VALIDAR_REQ_DGP($iddgp);
-
-        $list = $ma->ListarDetalleAutorizacion($iddgp, $iddreq);
-        ?>
+        <%
+    X_List_De_Autorizacion s= new X_List_De_Autorizacion();
+                    s=(X_List_De_Autorizacion)Det_Autorizacion.get(0);
+            
+        %>
 
 
         <table class="table">
-            <tr><td ><strong>Nombre:</strong></td><td><label><? echo $list[0][43] . ' ' . $list[0][44] . ' ' . $list[0][45]; ?> </label></td></tr>
-            <tr><td ><strong>Sueldo:</strong></td><td><label><? echo $list[0][20]; ?> </label></td></tr>
-            <tr><td ><strong>Puesto:</strong></td><td><label><? echo $list[0][131]; ?> </label></td></tr>
-            <tr><td ><strong>Tipo Proceso:</strong></td><td><label><? echo $list[0][8]; ?> </label></td></tr>
+            <tr><td ><strong>Nombre:</strong></td><td><label><%=s.getAP_PATERNO()+" "+s.getAP_MATERNO()+" "+s.getNO_TRABAJADOR()%></label></td></tr>
+            <tr><td ><strong>Sueldo:</strong></td><td><label><%=s.getCA_SUELDO()%> </label></td></tr>
+            <tr><td ><strong>Puesto:</strong></td><td><label><%%></label></td></tr>
+            <tr><td ><strong>Tipo Proceso:</strong></td><td><label><%=s.getNo_proceso()%> </label></td></tr>
         </table>
         
       
@@ -105,29 +99,34 @@
             </tr>
             </thead>
             <tbody>
-            <? for ($i = 0; $i < count($list); $i++) { ?>
+                <%for (int i = 0;i<Det_Autorizacion.size();i++){
+                    X_List_De_Autorizacion a= new X_List_De_Autorizacion();
+                    a=(X_List_De_Autorizacion)Det_Autorizacion.get(i);
+                %>
                 <tr >
-                    <td class="caji"><? echo $list[$i][6]; ?></td>
-                    <td class="caji" ><? if ($list[$i][15] == 1) { ?>
-                            <img src="../Imagenes/Aprobado.png" width="40" height="40">
-                        <? }
-                        if ($list[$i][15] == 2) {
-                            ?>
-                            <img src="../Imagenes/Fire-Toy-icon-link.png" width="40" height="40">
-                        <? } ?></td>
-                    <td class="caji" style="width:300px;"><? echo $list[$i][120] . ' ' . $list[$i][121] . ' ' . $list[$i][119]; ?></td> 
-                    <td class="caji" style="width: 200px;"><? echo $list[$i][109]; ?></td> 
-                    <td class="caji"><? echo $list[$i][111]; ?></td> 
-                    <td class="caji" style="width: 200px;"><? echo $list[$i][113]; ?></td> 
-                    <td class="caji" style="width: 300px;"><? echo $list[$i][5]; ?></td> 
+                    <td class="caji"><%=a.getNu_pasos()%></td>
+                    <td class="caji" ><% if (a.getEs_autorizacion().equals("1") ) { %>
+                        <img src="../../imagenes/Aprobado.png" width="40" height="40">
+                        <% }
+                        if (a.getEs_autorizacion().equals("2")) {
+                            %>
+                            <img src="../../imagenes/Desaprobado.png" width="40" height="40">
+                        <% } %></td>
+                    <td class="caji" style="width:300px;"><%=a.getUs_ap_p()+" "+a.getUs_ap_mat()+" "+a.getUs_no_tr()%></td> 
+                    <td class="caji" style="width: 200px;"><%=a.getUs_no_puesto()%></td> 
+                    <td class="caji"><%=a.getUs_no_area()%></td> 
+                    <td class="caji" style="width: 200px;"><%=a.getUs_no_dep()%></td> 
+                    <td class="caji" style="width: 300px;"><%%></td> 
                   
                 </tr> 
-                  <?  if ($list[$i][15]==2 & $_SESSION["IDROL"]==2) { ?>
+                  <%  
+if(false){  
+//if ($list[$i][15]==2 & $_SESSION["IDROL"]==2) { %>
         <div class="alerta">
             <h1>Alerta! debe Corregir el Dgp... se ha Rechazado el Dgp</h1>
             <a href="../Control/ControlAutorizacion.php?opc=HDGP&ida=<? echo $list[$i][13]; ?>">Habilitar DGP</a></div>
-        <?}?>
-            <? } ?>
+        <%}%>
+            <% } %>
             </tbody>
         </table>
     </center>

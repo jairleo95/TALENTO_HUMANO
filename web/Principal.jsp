@@ -2,7 +2,7 @@
 <%@page import="pe.edu.upeu.application.model.V_Usuario"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
-    HttpSession sesion = request.getSession(true);
+    HttpSession sesion = request.getSession();
     String id_user = (String) sesion.getAttribute("IDUSER");
     if (id_user != null) {
 
@@ -304,7 +304,7 @@
                                         <a href="#" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                        <a href="menu?opc=logout" class="btn btn-default btn-flat">Sign out</a>
                                     </div>
                                 </li>
                             </ul>
@@ -441,4 +441,9 @@
     </body>
    
 </html>
-<%}%>
+<%}else{
+    response.sendRedirect("/TALENTO_HUMANO/");
+    }
+
+
+%>

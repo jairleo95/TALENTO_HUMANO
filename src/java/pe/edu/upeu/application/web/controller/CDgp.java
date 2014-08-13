@@ -25,7 +25,6 @@ import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO;
-import pe.edu.upeu.application.model.X_List_det_dgp;
 
 /**
  *
@@ -54,7 +53,7 @@ public class CDgp extends HttpServlet {
         String idpuesto = (String) sesion.getAttribute("PUESTO_ID");
         String iduser = (String) sesion.getAttribute("IDUSER");
         String idtr = request.getParameter("idtr");
-        String iddepa = request.getParameter("iddep");
+       // String iddepa = request.getParameter("iddep");
         String idreq = request.getParameter("idreq");
 
         InterfacePuestoDAO pu = new PuestoDAO();
@@ -152,10 +151,17 @@ public class CDgp extends HttpServlet {
           if (opc.equals("Seguimiento")) {
               String iddgp = request.getParameter("iddgp");
                 String idrp = IReq.id_det_req_proc(iddgp);
-              
-              
+                
+              getServletContext().setAttribute("Det_Autorizacion", a.List_Detalle_Autorizacion(iddgp, idrp));
+                
+            response.sendRedirect("Vista/Dgp/Detalle_Seguimiento_Dgp.jsp");
             
         }
+          if (opc.equals("Proceso")) {
+          getServletContext().setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep));
+           response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp");
+        }
+          
         /* } finally {
          out.close();
          }*/

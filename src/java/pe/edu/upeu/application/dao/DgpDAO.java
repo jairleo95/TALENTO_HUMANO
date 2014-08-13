@@ -271,17 +271,18 @@ public class DgpDAO implements InterfaceDgpDAO {
     }
 
     @Override
-    public List<V_Es_Requerimiento> LIST_DGP(String id_dep) {
+    public List<V_Es_Requerimiento> LIST_DGP_PROCESO(String id_dep) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
 
-        String sql = "select * from RHVD_ES_REQUERIMIENTO";
-        sql += (id_dep != "") ? "where departamento_id='" + id_dep + "'" : "";
-        sql += "order by ID_DGP";
+        String sql = "select * from RHVD_ES_REQUERIMIENTO where ID_DEPARTAMENTO='"+id_dep+"'";
+        //sql += (!"".equals(id_dep)) ? "where ID_DEPARTAMENTO='" + id_dep + "'" : "";
+        //sql += "order by ID_DGP";
         List<V_Es_Requerimiento> Lista = new ArrayList<V_Es_Requerimiento>();
         try {
             ResultSet rs = this.conn.query(sql);
-            V_Es_Requerimiento v = new V_Es_Requerimiento();
+          
             while (rs.next()) {
+                  V_Es_Requerimiento v = new V_Es_Requerimiento();
                 v.setId_trabajador(rs.getString("id_trabajador"));
                 v.setAp_paterno(rs.getString("ap_paterno"));
                 v.setAp_materno(rs.getString("ap_materno"));
