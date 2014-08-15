@@ -53,7 +53,7 @@ public class CDgp extends HttpServlet {
         String idpuesto = (String) sesion.getAttribute("PUESTO_ID");
         String iduser = (String) sesion.getAttribute("IDUSER");
         String idtr = request.getParameter("idtr");
-       // String iddepa = request.getParameter("iddep");
+        // String iddepa = request.getParameter("iddep");
         String idreq = request.getParameter("idreq");
 
         InterfacePuestoDAO pu = new PuestoDAO();
@@ -102,9 +102,9 @@ public class CDgp extends HttpServlet {
             String iddgp = dgp.MAX_ID_DGP();
             String idrp = IReq.id_det_req_proc(iddgp);
 
-          //  List<String> list = a.Det_Autorizacion(idrp);
-           a.Insert_Autorizacion("", iddgp, "1", "P1", "12312", iduser, "", "31/07/14", "3213", idpuesto, idrp, "PAS-000001");
-           response.sendRedirect("Vista/Dgp/Horario/Reg_Horario.jsp?iddgp="+iddgp +"&idtr="+idtr+"&opc=rd");
+            //  List<String> list = a.Det_Autorizacion(idrp);
+            a.Insert_Autorizacion("", iddgp, "1", "P1", "12312", iduser, "", "31/07/14", "3213", idpuesto, idrp, "PAS-000001");
+            response.sendRedirect("Vista/Dgp/Horario/Reg_Horario.jsp?iddgp=" + iddgp + "&idtr=" + idtr + "&opc=rd");
 
         }
         if (opc.equals("Reg_form")) {
@@ -126,46 +126,47 @@ public class CDgp extends HttpServlet {
             response.sendRedirect("Vista/Dgp/Reg_Dgp.jsp?idreq=" + idreq);
         }
 
-          if (opc.equals("rd")) {
-              
-              String ID_DGP = request.getParameter("iddgp");
-              String ID_TRABAJADOR = request.getParameter("idtr");
-              getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(ID_DGP));
-              int num=dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
-              getServletContext().setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
-    
-              
-            response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr="+ID_TRABAJADOR+"&num="+num+"&idgp="+ID_DGP+"&opc=reg_doc");
+        if (opc.equals("rd")) {
+
+            String ID_DGP = request.getParameter("iddgp");
+            String ID_TRABAJADOR = request.getParameter("idtr");
+            getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(ID_DGP));
+            int num = dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
+            getServletContext().setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
+
+            response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&idgp=" + ID_DGP + "&opc=reg_doc");
         }
-          if (opc.equals("Detalle")) {
-              
-              String ID_DGP = request.getParameter("iddgp");
-              String ID_TRABAJADOR = request.getParameter("idtr");
-              getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(ID_DGP));
-              int num=dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
-              getServletContext().setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
-    
-              
-            response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr="+ID_TRABAJADOR+"&num="+num+"&idgp="+ID_DGP+"&opc=reg_doc");
+        if (opc.equals("Detalle")) {
+
+            String ID_DGP = request.getParameter("iddgp");
+            String ID_TRABAJADOR = request.getParameter("idtr");
+            getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(ID_DGP));
+            int num = dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
+            getServletContext().setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
+
+            response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&idgp=" + ID_DGP + "&opc=reg_doc");
         }
-          if (opc.equals("Seguimiento")) {
-              String iddgp = request.getParameter("iddgp");
-                String idrp = IReq.id_det_req_proc(iddgp);
-                
-              getServletContext().setAttribute("Det_Autorizacion", a.List_Detalle_Autorizacion(iddgp, idrp));
-                
+        if (opc.equals("Seguimiento")) {
+            String iddgp = request.getParameter("iddgp");
+            String idrp = IReq.id_det_req_proc(iddgp);
+
+            getServletContext().setAttribute("Det_Autorizacion", a.List_Detalle_Autorizacion(iddgp, idrp));
+
             response.sendRedirect("Vista/Dgp/Detalle_Seguimiento_Dgp.jsp");
-            
         }
-          if (opc.equals("Proceso")) {
-          getServletContext().setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep));
-           response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp");
+        if (opc.equals("Proceso")) {
+            getServletContext().setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep));
+            response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp");
         }
-          
+        if (opc.equals("User_Aut")) {
+            String iddgp = request.getParameter("iddgp");
+            getServletContext().setAttribute("USER_DGP", dgp.USER_DGP(iddgp));
+            response.sendRedirect("Vista/Dgp/User_Dgp.jsp");
+        }
+
         /* } finally {
          out.close();
          }*/
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -317,9 +317,9 @@
                             <option value="A">Alumno</option>
                         </select>
                     </td></tr>  
-                <tr><td colspan="4"><div class="sub_title"><label class="label">Datos Academicos</label></div></td></tr>
+                <tr><td colspan="4"><div class="sub_title"><label class="label">Datos de la Situación Educativa</label></div></td></tr>
 
-                <tr><td>Nivel Educativo:</td><td>
+                <tr><td>Situación Educativa</td><td>
                         <div class="item">
                             <select name="NIVEL_EDUCATIVO" class="text-box required" required="">
                                 <option value="">------</option>
@@ -334,42 +334,51 @@
                                 <option value="9">Superior Post Grado Completa</option>
                             </select></div>
                     </td></tr>   
-                <tr><td>Grado Academico:</td><td>
+                <tr><td>xxGrado Academico:xx(Eliminar)</td><td>
                         <div class="item">
                             <select name="GRADO_ACADEMICO" class="text-box required" required="">
                                 <option value="">--------</option>
-                                <option value="1">Ninguno</option>
-                                <option value="2">Bachiller</option>
-                                <option value="3">Magister</option>
-                                <option value="4">Doctor</option>
+                                <!-- <option value="1">Ninguno</option>
+                                 <option value="2">Bachiller</option>
+                                 <option value="3">Magister</option>
+                                 <option value="4">Doctor</option>-->
                             </select></div>
 
                     </td></tr>   
-                <tr><td>Titulo Profesional:</td><td>
+                <tr><td>¿Estudio en una institucion educativa del Perú?</td><td>
+                        <div class="item">
+                            <select name="" class="text-box required" required="">
+                                <option value="">--------</option>
+                                <option value="1">Si</option>
+                                <option value="2">No</option>
+
+                            </select></div>
+                    </td></tr>  
+                <tr><td>Regimen de la Institución Educativa</td><td>
+                        <div class="item">
+                            <select name="" class="text-box required" required="">
+                                <option value="">--------</option>
+                                <option value="1">Publica</option>
+                                <option value="2">Privada</option>
+
+                            </select></div>
+                    </td></tr>  
+                <tr><td>Tipo de Institución</td><td>
+                        <div class="item">
+                            <select name="" class="text-box required" required="">
+                                <option value="">--------</option>
+                            </select></div>
+                    </td></tr>  
+                <tr><td>xxTitulo Profesional:xx(Eliminar)</td><td>
                         <div class="item">
                             <select name="TITULO_PROFESIONAL" class="text-box"  required="">
                                 <option value="">---------</option>
-                                <option value="1">Ninguno</option>
-                                <option value="2">Titulo Profesional</option>
-                                <option value="3">Titulo Tecnico</option>
+                                <!---   <option value="1">Ninguno</option>
+                                   <option value="2">Titulo Profesional</option>
+                                   <option value="3">Titulo Tecnico</option>-->
                             </select></div>
                     </td></tr>  
-
-                <tr><td>Carrera:</td><td>
-                        <div class="item0">
-                            <select name="CARRERA" class="text-box chosen-select required" required="">
-                                <option value=""></option>
-                                <%for (int r = 0; r < List_Carrera.size(); r++) {
-                                        Carrera c = new Carrera();
-                                        c = (Carrera) List_Carrera.get(r);
-                                %>
-                                <option value="<%=c.getId_carrera()%>"><%=c.getNo_carrera()%></option>
-                                <%}%>
-                            </select>
-                        </div>
-                    </td></tr>
-
-                <tr><td>Centro de Estudio Superior:</td><td>
+                <tr><td>Institución:</td><td>
                         <div class="item0">
                             <select name="CENTRO_DE_ESTUDIO" class="text-box chosen-select required"  required=""> 
                                 <option value=""></option>
@@ -383,6 +392,21 @@
                             </select>
                         </div>
                     </td></tr>
+                <tr><td>Carrera:(Modificar)</td><td>
+                        <div class="item0">
+                            <select name="CARRERA" class="text-box chosen-select required" required="">
+                                <option value=""></option>
+                                <%for (int r = 0; r < List_Carrera.size(); r++) {
+                                        Carrera c = new Carrera();
+                                        c = (Carrera) List_Carrera.get(r);
+                                %>
+                                <option value="<%=c.getId_carrera()%>"><%=c.getNo_carrera()%></option>
+                                <%}%>
+                            </select>
+                        </div>
+                    </td></tr>
+                <tr><td>Año Egreso(Nuevo)</td><td>   <div class="item"><input type="text" name="" id="" class="text-box" required=""></div></td></tr> 
+
                 <tr><td>Tipo Hora Pago Referencial:</td><td><input type="text" name="TIPO_HORA_PAGO_REFEERENCIAL"  value="0" class="text-box" ></td></tr> 
                 <tr><td>Otros Estudios:</td><td colspan="3"><textarea name="OTROS_ESTUDIOS" class="text-box" cols="60" rows="6"></textarea></td></tr> 
 

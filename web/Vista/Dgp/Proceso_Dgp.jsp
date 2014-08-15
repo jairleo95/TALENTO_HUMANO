@@ -145,7 +145,7 @@
                     <td><img src="Foto.php?idf=<? echo $idf; ?>"  width="60"  height="60"></td>
                         <% } %>
                     <td>   
-                        <div><a href="../Trabajador/Detalle_Trabajador.jsp?idtr=<? echo $list_dgp[$index][0]; ?>"> <strong><%=r.getAp_paterno()+" "+r.getAp_materno()+" "+r.getNo_trabajador()%></strong></a></div>
+                        <div><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno()+" "+r.getAp_materno()+" "+r.getNo_trabajador()%></strong></a></div>
                     </td>
                     <td>
                         <ul class="nav">
@@ -154,7 +154,7 @@
                                     <img src="../../imagenes/engranaje-hi.png" width="40" height="40">
                                 </div>   
                                 <ul>
-                                    <li><a href="User_Dgp.jsp?iddgp=<? echo $list_dgp[$index][4]; ?>">Usuarios - Prox. Autorizacion</a></li>
+                                    <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=User_Aut">Usuarios - Prox. Autorizacion</a></li>
 
                                     <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=Seguimiento">Ver Seguimiento</a> </li>
                                     <li><a href="Documento/Reg_Documento.jsp?iddgp=<? echo $list_dgp[$index][4]; ?>&idtr=<? echo $list_dgp[$index][0]; ?>">Ver Documentos</a></li>

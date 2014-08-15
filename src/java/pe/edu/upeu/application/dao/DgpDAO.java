@@ -77,12 +77,13 @@ public class DgpDAO implements InterfaceDgpDAO {
     @Override
     public List<X_User_dgp> USER_DGP(String id_dgp) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = " select u.*,du.NO_TRABAJADOR ,du.AP_PATERNO,du.AP_MATERNO, p.DE_PASOS as  paso from RHVD_USER_AUT u  ,RHTC_PASOS p ,RHVD_USUARIO du  where u.ID_EMPLEADO=du.ID_EMPLEADO and u.ID_PASOS= p.ID_PASOS  and u.ID_DGP='" + id_dgp + "'  and u.ID_PUESTO <>0";
+        String sql = " select u.*,du.NO_TRABAJADOR ,du.AP_PATERNO,du.AP_MATERNO, p.DE_PASOS as  paso from RHVD_USER_AUT u  ,RHTC_PASOS p ,RHVD_USUARIO du  where u.ID_EMPLEADO=du.ID_EMPLEADO and u.ID_PASOS= p.ID_PASOS  and u.ID_DGP='" + id_dgp + "'  and u.ID_PUESTO IS NOT NULL";
         List<X_User_dgp> Lista = new ArrayList<X_User_dgp>();
         try {
             ResultSet rs = this.conn.query(sql);
-            X_User_dgp x = new X_User_dgp();
+            
             while (rs.next()) {
+                X_User_dgp x = new X_User_dgp();
                 x.setId_trabajador(rs.getString("id_trabajador"));
                 x.setId_usuario(rs.getString("id_usuario"));
                 x.setId_rol(rs.getString("id_rol"));

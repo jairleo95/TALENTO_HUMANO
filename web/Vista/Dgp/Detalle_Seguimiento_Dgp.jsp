@@ -1,7 +1,9 @@
 <%@page import="pe.edu.upeu.application.model.X_List_De_Autorizacion"%>
 <jsp:useBean class="java.util.ArrayList" id="Det_Autorizacion" scope="application" />
 <!DOCTYPE html >
+
 <html>
+    
     <head>
         <meta charset="windows-1252">
         <title>Autorizaciones DGP</title>
@@ -58,6 +60,10 @@
 
 	}   
         </style>
+        <% 
+HttpSession sesion =request.getSession();
+String rol=(String)sesion.getAttribute("IDROL");
+%>
 
     </head>
     <body>
@@ -80,7 +86,7 @@
         <table class="table">
             <tr><td ><strong>Nombre:</strong></td><td><label><%=s.getAP_PATERNO()+" "+s.getAP_MATERNO()+" "+s.getNO_TRABAJADOR()%></label></td></tr>
             <tr><td ><strong>Sueldo:</strong></td><td><label><%=s.getCA_SUELDO()%> </label></td></tr>
-            <tr><td ><strong>Puesto:</strong></td><td><label><%%></label></td></tr>
+            <tr><td ><strong>Puesto:</strong></td><td><label><%=s.getNo_puesto()%></label></td></tr>
             <tr><td ><strong>Tipo Proceso:</strong></td><td><label><%=s.getNo_proceso()%> </label></td></tr>
         </table>
         
@@ -116,12 +122,13 @@
                     <td class="caji" style="width: 200px;"><%=a.getUs_no_puesto()%></td> 
                     <td class="caji"><%=a.getUs_no_area()%></td> 
                     <td class="caji" style="width: 200px;"><%=a.getUs_no_dep()%></td> 
-                    <td class="caji" style="width: 300px;"><%%></td> 
+                    <td class="caji" style="width: 300px;"><%=a.getDe_pasos()%></td> 
                   
                 </tr> 
                   <%  
-if(false){  
-//if ($list[$i][15]==2 & $_SESSION["IDROL"]==2) { %>
+if(a.getEs_autorizacion().equals("2")&rol.trim().equals("ROL-0002") ){  
+
+%>
         <div class="alerta">
             <h1>Alerta! debe Corregir el Dgp... se ha Rechazado el Dgp</h1>
             <a href="../Control/ControlAutorizacion.php?opc=HDGP&ida=<? echo $list[$i][13]; ?>">Habilitar DGP</a></div>

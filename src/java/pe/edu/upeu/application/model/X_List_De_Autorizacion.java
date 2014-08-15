@@ -38,8 +38,9 @@ public class X_List_De_Autorizacion {
     private String us_no_puesto;
     private String us_no_area;
     private String us_no_dep;
+    private String no_puesto;
 
-    public X_List_De_Autorizacion(String co_pasos, String de_pasos, String es_autorizacion, String fe_creacion, String id_autorizacion, String id_departamento, String id_detalle_pasos, String id_detalle_req_proceso, String id_dgp, String id_direccion, String id_pasos, String id_proceso, String id_puesto, String id_requerimiento, String no_proceso, String nu_pasos, String us_creacion, String AP_PATERNO, String AP_MATERNO, String NO_TRABAJADOR, String CA_SUELDO, String us_ap_p, String us_ap_mat, String us_no_tr, String us_no_puesto, String us_no_area, String us_no_dep) {
+    public X_List_De_Autorizacion(String co_pasos, String de_pasos, String es_autorizacion, String fe_creacion, String id_autorizacion, String id_departamento, String id_detalle_pasos, String id_detalle_req_proceso, String id_dgp, String id_direccion, String id_pasos, String id_proceso, String id_puesto, String id_requerimiento, String no_proceso, String nu_pasos, String us_creacion, String AP_PATERNO, String AP_MATERNO, String NO_TRABAJADOR, String CA_SUELDO, String us_ap_p, String us_ap_mat, String us_no_tr, String us_no_puesto, String us_no_area, String us_no_dep, String no_puesto) {
         this.co_pasos = co_pasos;
         this.de_pasos = de_pasos;
         this.es_autorizacion = es_autorizacion;
@@ -67,6 +68,7 @@ public class X_List_De_Autorizacion {
         this.us_no_puesto = us_no_puesto;
         this.us_no_area = us_no_area;
         this.us_no_dep = us_no_dep;
+        this.no_puesto = no_puesto;
     }
     public X_List_De_Autorizacion() {
         this.co_pasos = "";
@@ -96,6 +98,7 @@ public class X_List_De_Autorizacion {
         this.us_no_puesto = "";
         this.us_no_area = "";
         this.us_no_dep = "";
+        this.no_puesto = "";
     }
 
     public String getCo_pasos() {
@@ -312,6 +315,14 @@ public class X_List_De_Autorizacion {
 
     public void setUs_no_dep(String us_no_dep) {
         this.us_no_dep = us_no_dep;
+    }
+
+    public String getNo_puesto() {
+        return no_puesto;
+    }
+
+    public void setNo_puesto(String no_puesto) {
+        this.no_puesto = no_puesto;
     }
   
 
