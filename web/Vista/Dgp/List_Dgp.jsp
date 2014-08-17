@@ -88,7 +88,7 @@
                                         <td><%=x.getCa_sueldo()%></td>
                                         <td><%=x.getNo_puesto()%></td>
                                         <td><%=x.getNo_area()%></td>
-                                        <td><a href="Detalle_Dgp.jsp?iddgp=<%=x.getId_dgp()%>"><%x.getEs_dgp();%></a></td>
+                                        <td><%=x.getNo_req()%></td>
                                         <td><%
                                             if (x.getEs_dgp().equals("1") ) {
                                                out.print("Terminado");
