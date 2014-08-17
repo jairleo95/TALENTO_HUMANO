@@ -76,7 +76,7 @@
                             </thead>
                             <tbody>
                                 <% HttpSession sesion = request.getSession(true);
-                                    out.print((String)sesion.getAttribute("IDDEPARTAMENTO"));
+                                    
                                     for (int i= 0; i < List_Det_Dgp.size(); i++) { 
                                     X_List_det_dgp x = new X_List_det_dgp();
                                     x =(X_List_det_dgp)List_Det_Dgp.get(i); %>
@@ -88,7 +88,7 @@
                                         <td><%=x.getCa_sueldo()%></td>
                                         <td><%=x.getNo_puesto()%></td>
                                         <td><%=x.getNo_area()%></td>
-                                        <td><%=x.getNo_req()%></td>
+                                        <td><a href="../../dgp?iddgp=<%=x.getId_dgp()%>&opc=Detalle "><%=x.getNo_req()%></a></td>
                                         <td><%
                                             if (x.getEs_dgp().equals("1") ) {
                                                out.print("Terminado");
