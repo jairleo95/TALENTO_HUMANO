@@ -1,6 +1,6 @@
 $(document).ready(function(){
     $("#formulario").submit(function(){
-    $("#mensaje").removeClass().addClass('myinfo').text('Validando Datos!! ').fadeIn(1000);
+    $("#mensaje").removeClass().addClass('myinfo').text('Validando Datos!! ').fadeIn(50);
     this.timer = setTimeout(function() {
     $.ajax({
             type: 'POST',
@@ -8,12 +8,12 @@ $(document).ready(function(){
             data: $("#formulario").serialize(),
     success: function(msg){
         if(msg != 'ERROR') 
-        {   $("#mensaje").html('Usuario Verificando...!').addClass('myinfo').fadeTo(500,1,
+        {   $("#mensaje").html('Usuario Verificando...!').addClass('myinfo').fadeTo(50,1,
                 function()
                 {      document.location='menu';});
         }else{
-            $("#mensaje").fadeTo(200,0.1,function()
-            {$(this).html('Disculpe. USUARIO Y CLAVE INCORRECTO').removeClass().addClass('myerror').fadeTo(300,1);});
+            $("#mensaje").fadeTo(20,0.1,function()
+            {$(this).html('Disculpe. USUARIO Y CLAVE INCORRECTO').removeClass().addClass('myerror').fadeTo(50,1);});
             }
         } 
     });
