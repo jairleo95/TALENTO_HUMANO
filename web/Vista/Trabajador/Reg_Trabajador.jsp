@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.model.Situacion_Educativa"%>
 <%@page import="pe.edu.upeu.application.model.Universidad"%>
 <%@page import="pe.edu.upeu.application.model.Carrera"%>
 <%@page import="pe.edu.upeu.application.model.V_Ubigeo"%>
@@ -12,6 +13,7 @@
 <jsp:useBean id="List_Distrito" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Carrera" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Universidad" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Situacion_Educativa" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html >
 <html>
     <head>
@@ -323,28 +325,16 @@
                         <div class="item">
                             <select name="NIVEL_EDUCATIVO" class="text-box required" required="">
                                 <option value="">------</option>
-                                <option value="1">Ninguno</option>
-                                <option value="2">Primaria Incompleta</option>
-                                <option value="3">Primaria Completa</option>
-                                <option value="4">Superior No Universitario Incompleta</option>
-                                <option value="5">Superior No Universitario Completa</option>
-                                <option value="6">Superior Universitario Incompleta</option>
-                                <option value="7">Superior Universitario Completa</option>
-                                <option value="8">Superior Post Grado incompleta</option>
-                                <option value="9">Superior Post Grado Completa</option>
+                                <%for(int s=0;s<List_Situacion_Educativa.size();s++){
+                                Situacion_Educativa e= new Situacion_Educativa();
+                                e=(Situacion_Educativa)List_Situacion_Educativa.get(s);
+                                %>
+                                <option value="<%=e.getId_situacion_educativa()%>"><%=e.getNo_s_educativa()%></option>
+                                <%}%>
+                          
                             </select></div>
                     </td></tr>   
-                <tr><td>xxGrado Academico:xx(Eliminar)</td><td>
-                        <div class="item">
-                            <select name="GRADO_ACADEMICO" class="text-box required" required="">
-                                <option value="">--------</option>
-                                <!-- <option value="1">Ninguno</option>
-                                 <option value="2">Bachiller</option>
-                                 <option value="3">Magister</option>
-                                 <option value="4">Doctor</option>-->
-                            </select></div>
-
-                    </td></tr>   
+            
                 <tr><td>¿Estudio en una institucion educativa del Perú?</td><td>
                         <div class="item">
                             <select name="" class="text-box required" required="">
@@ -369,15 +359,7 @@
                                 <option value="">--------</option>
                             </select></div>
                     </td></tr>  
-                <tr><td>xxTitulo Profesional:xx(Eliminar)</td><td>
-                        <div class="item">
-                            <select name="TITULO_PROFESIONAL" class="text-box"  required="">
-                                <option value="">---------</option>
-                                <!---   <option value="1">Ninguno</option>
-                                   <option value="2">Titulo Profesional</option>
-                                   <option value="3">Titulo Tecnico</option>-->
-                            </select></div>
-                    </td></tr>  
+    
                 <tr><td>Institución:</td><td>
                         <div class="item0">
                             <select name="CENTRO_DE_ESTUDIO" class="text-box chosen-select required"  required=""> 

@@ -45,8 +45,8 @@ public class CTrabajador extends HttpServlet {
         HttpSession sesion = request.getSession(true);
         String idrol = (String) sesion.getAttribute("IDROL");
 
-       InterfaceListaDAO li = new ListaDAO();
-        InterfaceDgpDAO dgp = new DgpDAO();
+        InterfaceListaDAO li = new ListaDAO();
+        // InterfaceDgpDAO dgp = new DgpDAO();
         InterfaceUbigeoDAO ub = new UbigeoDAO();
         InterfaceTrabajadorDAO tr = new TrabajadorDAO();
 
@@ -55,6 +55,17 @@ public class CTrabajador extends HttpServlet {
         opc = (String) request.getParameter("opc");
         Text = (String) request.getParameter("text");
 
+      
+if(opc.equals("Form_Reg")){
+      getServletContext().setAttribute("List_Carrera", li.List_Carrera());
+        getServletContext().setAttribute("List_Nacionalidad", li.List_Nacionalidad());
+        getServletContext().setAttribute("List_Universidad", li.List_Universidad());
+        getServletContext().setAttribute("List_Distrito", ub.List_Distrito());
+        getServletContext().setAttribute("List_Situacion_Educativa", li.List_Situacion_Educativa());
+        response.sendRedirect("Vista/Trabajador/Reg_Trabajador.jsp");
+        
+
+}
         if (opc.equals("Registrar")) {
             String ID_TRABAJADOR = request.getParameter("ID_TRABAJADOR");
             String AP_PATERNO = request.getParameter("APELLIDO_P");
@@ -76,8 +87,10 @@ public class CTrabajador extends HttpServlet {
             String LI_NIVEL_EDUCATIVO = request.getParameter("NIVEL_EDUCATIVO");
             String LI_GRADO_ACADEMICO = request.getParameter("GRADO_ACADEMICO");
             String LI_TITULO_PROFESIONAL = request.getParameter("TITULO_PROFESIONAL");
-            String ID_CARRERA = request.getParameter("CARRERA");
-            String ID_UNIVERSIDAD = request.getParameter("CENTRO_DE_ESTUDIO");
+            //String ID_CARRERA = request.getParameter("CARRERA");
+            String ID_CARRERA = "";
+            //String ID_UNIVERSIDAD = request.getParameter("CENTRO_DE_ESTUDIO");
+            String ID_UNIVERSIDAD = "";
             String CM_OTROS_ESTUDIOS = request.getParameter("OTROS_ESTUDIOS");
             String ES_SEXO = request.getParameter("SEXO");
             String LI_GRUPO_SANGUINEO = request.getParameter("GRUPO_SANGUINEO");
@@ -158,10 +171,8 @@ public class CTrabajador extends HttpServlet {
             String drp = request.getParameter("IDDETALLE_REQ_PROCESO");
             String np = request.getParameter("nup");
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-            getServletContext().setAttribute("List_Auto_mostrar",li.List_Auto_mostrar(idrol));
-            out.println(li.List_Auto_mostrar(idrol).size());
-            
-            
+            getServletContext().setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));
+//            out.println(li.List_Auto_mostrar(idrol).size());
             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr='" + idtr.trim() + "'&aut=1&dgp=" + iddgp + "&p=" + puesto_id + "&c=" + cod + "&pas=" + idpasos + "&drp=" + drp + "&np=" + np);
         }
 

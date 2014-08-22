@@ -70,6 +70,7 @@ public class Cindex extends HttpServlet {
             sesion.setAttribute("DEPARTAMENTO", user.getNo_dep());
             sesion.setAttribute("DEPARTAMENTO_ID", user.getId_departamento());
             sesion.setAttribute("PUESTO", user.getNo_puesto());
+            
             getServletContext().setAttribute("listarURL", Irol.listarURL(user.getId_rol()));
             getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
             getServletContext().setAttribute("List_Carrera", li.List_Carrera());
@@ -77,6 +78,9 @@ public class Cindex extends HttpServlet {
             getServletContext().setAttribute("List_Universidad", li.List_Universidad());
             getServletContext().setAttribute("List_Distrito", ub.List_Distrito());
             getServletContext().setAttribute("List_Det_Puesto", pu.List_Det_Puesto());
+            getServletContext().setAttribute("List_Situacion_Educativa", li.List_Situacion_Educativa());
+            
+            
             out.print("EXITO!");
         } else {
             out.print("ERROR");

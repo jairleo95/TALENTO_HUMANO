@@ -16,6 +16,7 @@ import pe.edu.upeu.application.model.Auto_Mostrar;
 import pe.edu.upeu.application.model.Carrera;
 import pe.edu.upeu.application.model.Nacionalidad;
 import pe.edu.upeu.application.model.Proceso;
+import pe.edu.upeu.application.model.Situacion_Educativa;
 import pe.edu.upeu.application.model.Universidad;
 
 /**
@@ -33,9 +34,9 @@ public class ListaDAO implements InterfaceListaDAO {
         List<Nacionalidad> list = new ArrayList<Nacionalidad>();
         try {
             ResultSet rs = this.conn.query(sql);
-          
+
             while (rs.next()) {
-                  Nacionalidad n = new Nacionalidad();
+                Nacionalidad n = new Nacionalidad();
                 n.setId_nacionalidad(rs.getString("id_nacionalidad"));
                 n.setNo_nacionalidad(rs.getString("no_nacionalidad"));
                 list.add(n);
@@ -54,9 +55,9 @@ public class ListaDAO implements InterfaceListaDAO {
         List<Proceso> list = new ArrayList<Proceso>();
         try {
             ResultSet rs = this.conn.query(sql);
-          
+
             while (rs.next()) {
-                  Proceso p = new Proceso();
+                Proceso p = new Proceso();
                 p.setDe_proceso(rs.getString("de_proceso"));
                 p.setId_proceso(rs.getString("id_proceso"));
                 p.setNo_proceso(rs.getString("no_proceso"));
@@ -76,11 +77,11 @@ public class ListaDAO implements InterfaceListaDAO {
         List<Carrera> list = new ArrayList<Carrera>();
         try {
             ResultSet rs = this.conn.query(sql);
-           
+
             while (rs.next()) {
-                 Carrera c = new Carrera();
-               c.setId_carrera(rs.getString("id_carrera"));
-               c.setNo_carrera(rs.getString("no_carrera"));               
+                Carrera c = new Carrera();
+                c.setId_carrera(rs.getString("id_carrera"));
+                c.setNo_carrera(rs.getString("no_carrera"));
                 list.add(c);
             }
         } catch (SQLException e) {
@@ -97,7 +98,7 @@ public class ListaDAO implements InterfaceListaDAO {
         List<Universidad> list = new ArrayList<Universidad>();
         try {
             ResultSet rs = this.conn.query(sql);
-            
+
             while (rs.next()) {
                 Universidad u = new Universidad();
                 u.setId_universidad(rs.getString("id_universidad"));
@@ -114,16 +115,16 @@ public class ListaDAO implements InterfaceListaDAO {
     @Override
     public List<Auto_Mostrar> List_Auto_mostrar(String id_rol) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select di_url from RHTX_AUTO_MOSTRAR where ID_ROL='"+id_rol+"'";
+        String sql = "select di_url from RHTX_AUTO_MOSTRAR where ID_ROL='" + id_rol + "'";
         List<Auto_Mostrar> list = new ArrayList<Auto_Mostrar>();
         try {
             ResultSet rs = this.conn.query(sql);
-           
+
             while (rs.next()) {
-                 Auto_Mostrar am = new Auto_Mostrar();
+                Auto_Mostrar am = new Auto_Mostrar();
                 am.setDi_url(rs.getString("di_url"));
                // am.setId_auto_mostrar(rs.getString("id_auto_mostrar"));
-            //    am.setId_rol(rs.getString("id_rol"));
+                //    am.setId_rol(rs.getString("id_rol"));
                 list.add(am);
             }
         } catch (SQLException e) {
@@ -141,7 +142,7 @@ public class ListaDAO implements InterfaceListaDAO {
         list.add("Divorcio(a)");
         list.add("Viudo(a)");
         list.add("Separado(a)");
-        list.add("Conviviente(a)");  
+        list.add("Conviviente(a)");
         return list;
     }
 
@@ -156,7 +157,7 @@ public class ListaDAO implements InterfaceListaDAO {
 
     @Override
     public List<String> List_Gs() {
- List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<String>();
         list.add("A");
         list.add("B");
         list.add("AB");
@@ -166,7 +167,7 @@ public class ListaDAO implements InterfaceListaDAO {
 
     @Override
     public List<String> List_Sp() {
-         List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<String>();
         list.add("AFP");
         list.add("ONP");
         list.add("Ninguno");
@@ -176,7 +177,7 @@ public class ListaDAO implements InterfaceListaDAO {
 
     @Override
     public List<String> List_Nom_AFP() {
-         List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<String>();
         list.add("Integra");
         list.add("Prima");
         list.add("Profuturo");
@@ -186,7 +187,7 @@ public class ListaDAO implements InterfaceListaDAO {
 
     @Override
     public List<String> List_Nivel_Educativo() {
-         List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<String>();
         list.add("Ninguno");
         list.add("Primaria Incompleta");
         list.add("Primaria Completa");
@@ -201,7 +202,7 @@ public class ListaDAO implements InterfaceListaDAO {
 
     @Override
     public List<String> List_Grado_Academico() {
-         List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<String>();
         list.add("Ninguno");
         list.add("Bachiller");
         list.add("Magister");
@@ -211,7 +212,7 @@ public class ListaDAO implements InterfaceListaDAO {
 
     @Override
     public List<String> List_Dom_D1_Id() {
-         List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<String>();
         list.add("Avenida");
         list.add("Jiron");
         list.add("Manzana");
@@ -228,7 +229,7 @@ public class ListaDAO implements InterfaceListaDAO {
 
     @Override
     public List<String> List_Dom_D5_Id() {
-         List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<String>();
         list.add("Urbanizacion");
         list.add("Pueblo Joven");
         list.add("Unidad Vecinal");
@@ -246,7 +247,7 @@ public class ListaDAO implements InterfaceListaDAO {
 
     @Override
     public List<String> List_Jefe() {
-         List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<String>();
         list.add("No es Jefe");
         list.add("Jefe de Sección");
         list.add("Jefe de Area");
@@ -257,7 +258,7 @@ public class ListaDAO implements InterfaceListaDAO {
 
     @Override
     public List<String> list_Condicion_contrato() {
-         List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<String>();
         list.add("Contrato");
         list.add("Contrato Independiente");
         list.add("Empleado");
@@ -271,7 +272,7 @@ public class ListaDAO implements InterfaceListaDAO {
 
     @Override
     public List<String> List_tipo_contrato() {
-         List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<String>();
         list.add("Necesidad de Mercado");
         list.add("Incremento de Actividad");
         list.add("Servicio Específico");
@@ -289,7 +290,7 @@ public class ListaDAO implements InterfaceListaDAO {
 
     @Override
     public List<String> List_Situacion_Actual() {
-         List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<String>();
         list.add("Activo");
         list.add("Término de Contrato");
         list.add("Renuncia Voluntaria");
@@ -299,31 +300,55 @@ public class ListaDAO implements InterfaceListaDAO {
         list.add("Abandono de Trabajo");
         return list;
     }
-    
-    public  String [][]List_H  (){
-        String [][] l= new String[7][2];
-        l[0][0]="lun";
-        l[0][1]="Lunes";
-        
-        l[1][0]="mar";
-        l[1][1]="Martes";
-        
-        l[2][0]="mie";
-        l[2][1]="Miercoles";
-        
-        l[3][0]="jue";
-        l[3][1]="Jueves";
-        
-        l[4][0]="vie";
-        l[4][1]="Viernes";
-        
-        l[5][0]="sab";
-        l[5][1]="Sabado";
-        
-        l[6][0]="dom";
-        l[6][1]="Domingo";
-        
-    return l;
+
+    public String[][] List_H() {
+        String[][] l = new String[7][2];
+        l[0][0] = "lun";
+        l[0][1] = "Lunes";
+
+        l[1][0] = "mar";
+        l[1][1] = "Martes";
+
+        l[2][0] = "mie";
+        l[2][1] = "Miercoles";
+
+        l[3][0] = "jue";
+        l[3][1] = "Jueves";
+
+        l[4][0] = "vie";
+        l[4][1] = "Viernes";
+
+        l[5][0] = "sab";
+        l[5][1] = "Sabado";
+
+        l[6][0] = "dom";
+        l[6][1] = "Domingo";
+
+        return l;
+    }
+
+    @Override
+    public List<Situacion_Educativa> List_Situacion_Educativa() {
+
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select * from rhtx_situacion_educativa ";
+        List<Situacion_Educativa> list = new ArrayList<Situacion_Educativa>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+
+            while (rs.next()) {
+                Situacion_Educativa n = new Situacion_Educativa();
+                n.setId_situacion_educativa(rs.getString("id_situacion_educativa"));
+                n.setNo_s_educativa(rs.getString("no_s_educativa"));
+                n.setEs_s_educativa(rs.getString("es_s_educativa"));
+                list.add(n);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return list;
+
     }
 
 }

@@ -43,7 +43,7 @@
             <table  style="width: 80%;" >
                 <tr>
                     <!--<td style="width: 800px;  " colspan="2"> Lista de Fichas (<? //echo $s; ?>)</td>-->
-                    <td>Elaborar Ficha:</td><td><a href="Reg_Trabajador.jsp"    class="button blue" >Agregar Nueva Ficha</a></td>    
+                    <td>Elaborar Ficha:</td><td><a href="../../trabajador?opc=Form_Reg"    class="button blue" >Agregar Nueva Ficha</a></td>    
                     <!--<button onclick="Hola();">Hola</button>
                     -->
                 </tr>
