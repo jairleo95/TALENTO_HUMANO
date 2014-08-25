@@ -44,6 +44,14 @@
         <servlet-name>CEmpleado</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CEmpleado</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CComentario</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CComentario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CFamiliar</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CFamiliar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
         <url-pattern>/trabajador</url-pattern>
@@ -87,6 +95,14 @@
     <servlet-mapping>
         <servlet-name>CEmpleado</servlet-name>
         <url-pattern>/empleado</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CComentario</servlet-name>
+        <url-pattern>/comentario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CFamiliar</servlet-name>
+        <url-pattern>/familiar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

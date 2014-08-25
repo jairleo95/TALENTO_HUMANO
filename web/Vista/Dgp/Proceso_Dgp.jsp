@@ -157,8 +157,8 @@
                                     <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=User_Aut">Usuarios - Prox. Autorizacion</a></li>
 
                                     <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=Seguimiento">Ver Seguimiento</a> </li>
-                                    <li><a href="Documento/Reg_Documento.jsp?iddgp=<? echo $list_dgp[$index][4]; ?>&idtr=<? echo $list_dgp[$index][0]; ?>">Ver Documentos</a></li>
-                                    <li><a href="Comentario/Reg_Comentario.jsp?iddgp=<? echo$list_dgp[$index][4]; ?>&idp=<? ?>">Comentarios</a></li>    
+                                    <li><a href="../../documento?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a></li>
+                                    <li><a href="../../comentario?iddgp=<%=r.getId_dgp().trim()%>&opc=Comentar_Dgp">Comentarios</a></li>    
                                 </ul>
                             </li>
                         </ul>

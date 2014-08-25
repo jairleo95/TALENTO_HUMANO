@@ -113,7 +113,7 @@
                             <li class="active"><a  class="item-m" href="Datos_Generales.jsp?idtr=<?echo $idtr;?>" target="contenido">Datos Personales  </a></li>
                             <li><a class="item-m" href="Aspecto_Academico.jsp?idtr=<?echo $idtr;?>" target="contenido">Aspecto Academico</a></li>
                             <li><a class="item-m" href="Aspecto_Social.jsp?idtr=<?echo $idtr;?>" target="contenido" >Aspecto Social</a></li>
-                            <li><a class="item-m" href="Familiar/Detalle_Familiar.jsp?idtr=<?echo $idtr;?>" target="contenido" >Familiares</a></li>
+                            <li><a class="item-m" href="../../familiar?idtr=<%%>&opc=Detalle_Familiar" target="contenido" >Familiares</a></li>
                             <li><a class="item-m" href="List_Dgp_Trabajador.jsp?idtr=<?echo $idtr;?>&iddgp=<? echo $iddetalle_dgp;?>" target="contenido">Requerimientos</a></li>
                             <li><a class="item-m" href="List_Doc_Trabajador.jsp?idtr=<?echo $idtr;?>" target="contenido">Documentos</a></li>
                             <li><a class="item-m" href="../Contrato/Detalle_Info_Contractual.jsp?idtr=<?echo $idtr;?>" target="contenido">Informacion Contractual</a></li>
@@ -158,7 +158,7 @@
                                 <tr><td class="td">Apellido Paterno :</td><td><%=trb.getAp_paterno()%></td></tr>
                                 <tr><td class="td">Apellido Materno :</td><td><%=trb.getAp_materno()%></td></tr>
                                 <tr><td class="td">Fecha de Nacimiento :</td><td><%=trb.getFe_nac()%></td></tr>
-                              
+
                             </table>
                         </div>
                     </td>
@@ -175,7 +175,7 @@
             %>
 
             <iframe name="contenido" id="contenido"  class="autoHeight" src="<%
-                out.println(a.getDi_url() + "&iddgp=" +iddgp+"&idtr="+trb.getIdtr());
+                out.println(a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getIdtr());
                     %>" width="100%" height="100%" ></iframe>
             <% }
             } else { %>
@@ -195,8 +195,6 @@
                     <table > 
                         <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
                         <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
-                        <input type="hidden" name="USUARIO_IP" >  
-                        <input type="hidden" name="USER_CREACION" value=""  > 
                         <input type="hidden" name="COD" value="<%=cod%>"  >               
                         <input type="hidden" name="PUESTO_ID" value="<%=idp%>" >  
                         <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
@@ -210,16 +208,12 @@
 
 
                         <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
-                        <input type="hidden" name="ESTADO" value="2" >                     
                         <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
-                        <input type="hidden" name="USUARIO_IP" >  
-                        <input type="hidden" name="USER_CREACION" value=""  > 
-
                         <input type="hidden" name="COD" value="<%=cod%>"  >               
                         <input type="hidden" name="PUESTO_ID" value="<%=idp%>" >  
                         <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
                         <input type="hidden" name="IDPASOS" value="<%=id_pasos%>" 
-                               <tr><td><input type="submit" name="opc"  class="submit" value="Rechazar"/></td></tr>
+                        <tr><td><input type="submit" name="opc"  class="submit" value="Rechazar"/></td></tr>
                     </table>
                 </form>   
             </center>
@@ -235,6 +229,6 @@
                 });
             });
         </script>
-  <%}%>
+        <%}%>
     </body>
 </html>

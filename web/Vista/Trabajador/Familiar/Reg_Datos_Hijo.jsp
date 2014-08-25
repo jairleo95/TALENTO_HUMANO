@@ -68,4 +68,4 @@
                  
     </body>
 </html>
-<? include './List_datos_hijos_trabajador.php';?>
+<%@include  file="List_Hijo.jsp"%>
