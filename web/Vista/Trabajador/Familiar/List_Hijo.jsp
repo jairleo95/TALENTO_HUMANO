@@ -1,4 +1,5 @@
-
+<%@page import="pe.edu.upeu.application.model.Datos_Hijo_Trabajador"%>
+<jsp:useBean id="LISTA_HIJO" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,80 +9,83 @@
     </head>
     <body>
     <center>
-        <? require_once '../Modelo/ModeloDatos_hijos_trabajador.php'; ?>
+
         <table>
             <thead>
-            <tr>
-                <th class="cajita">Nro</th>
-                <th class="cajita">Apellidos y Nombres</th>
-                <th class="cajita">Fecha de Nacimiento</th>              
-                <th class="cajita">Sexo</th>              
-                <th class="cajita">Tipo Documento</th>
-                <th class="cajita">Nro Documento</th>
-                <th class="cajita">Presentó</th>
-                <th class="cajita">Essalud</th>
-                <th class="cajita">Usuario Registro</th>
-                <th colspan="2" class="cajita">Opciones</th>
-            </tr>  
+                <tr>
+                    <th class="cajita">Nro</th>
+                    <th class="cajita">Apellidos y Nombres</th>
+                    <th class="cajita">Fecha de Nacimiento</th>              
+                    <th class="cajita">Sexo</th>              
+                    <th class="cajita">Tipo Documento</th>
+                    <th class="cajita">Nro Documento</th>
+                    <!--<th class="cajita">Presentó</th>-->
+                    <th class="cajita">Essalud</th>
+                    <th class="cajita">Est. Nivel Superior</th>
+                   <!--  <th class="cajita">Usuario Registro</th>-->
+                   <th colspan="2" class="cajita">Opciones</th>
+                </tr>  
             </thead>
             <tbody>
-                <?
-            $idtr=$_REQUEST["idtr"];
-            $modelo = new ModeloDatos_hijos_trabajador();
-            $listar = $modelo->LISTA_HIJOS($idtr);
-            ?>
 
-            <? for ($i = 0; $i < count($listar); $i++) { ?>
-                
-            <tr>
-                    <td class="caji"><? echo $i+1; ?></td>
-                    <td class="caji"><? echo $listar[$i]["2"].' '.$listar[$i]["3"].' '.$listar[$i]["4"]; ?></td>
-                    
-                    <td class="caji"><? echo $listar[$i]["5"]; ?></td>
-                    <td class="caji"><? echo $listar[$i]["6"]; ?></td>
-                    <td class="caji"><? 
-            
-                    if ($listar[$i]["7"]==1) {
-                echo 'Dni';
-            }
-                    if ($listar[$i]["7"]==2) {
-                echo 'Partida';
-            }
-            ?></td>
-                    <td class="caji"><? echo $listar[$i]["8"]; ?></td>
-                    <td class="caji"><?
-            if ($listar[$i]["9"]==1) {
-                echo 'Si';
-            } 
-            if ($listar[$i]["9"]==2) {
-                echo 'No';
-            } 
-            ?></td>
-                    
-                    <td class="caji"><? 
-            if ($listar[$i]["10"]==1) {
-                echo 'Si';
-            }
-            
-            if ($listar[$i]["10"]==0) {
-                echo 'No';
-            }
-       
-            
-                    ?></td>
-                    <td class="caji"><? 
-                    if ($listar[$i]["11"]==1) {
-                        echo 'Si';
-                    }
-                    if ($listar[$i]["11"]==0) {
-                        echo 'No';
-                    }
-                     ?></td>
-                    <td class="caji"><a href=""><img src="../Imagenes/lapiz.png" alt="" width="25px" height="25px"/></a></td>
-                    <td class="caji"><a href=""><img src="../Imagenes/eliminar.png" alt=""   width="25px" height="25px"/></a></td>                    
+                <%for (int i = 0; i < LISTA_HIJO.size(); i++) {
+                        Datos_Hijo_Trabajador h = new Datos_Hijo_Trabajador();
+                        h = (Datos_Hijo_Trabajador) LISTA_HIJO.get(i);
+                %>
+
+                <tr>
+                    <td class="caji"><%=i + 1%></td>
+                    <td class="caji"><%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></td>
+
+                    <td class="caji"><%=h.getFe_nacimiento()%></td>
+                    <td class="caji">
+                        <%
+                            if (h.getEs_sexo().trim().equals("M")) {
+                                out.println("Masculino");
+                            }
+                            if (h.getEs_sexo().trim().equals("F")) {
+                                out.println("Femenino");
+                            }
+                        %>
+                    </td>
+                    <td class="caji">
+                        <%
+                            if (h.getEs_tipo_doc().trim().equals("1")) {
+                                out.println("Dni");
+                            }
+                            if (h.getEs_tipo_doc().trim().equals("2")) {
+                                out.println("Partida");
+                            }
+                        %>
+                    </td>
+                    <td class="caji"><%=h.getNu_doc()%></td>
+
+
+                    <td class="caji">
+                        <%
+                            if (h.getEs_inscripcion_vig_essalud().trim().equals("1")) {
+                                out.println("Si");
+                            }
+                            if (h.getEs_inscripcion_vig_essalud().trim().equals("0")) {
+                                out.println("No");
+                            }
+                        %>
+                    </td>
+                    <td class="caji">
+                        <%
+                            if (h.getEs_estudio_niv_superior().trim().equals("1")) {
+                                out.println("Si");
+                            }
+                            if (h.getEs_estudio_niv_superior().trim().equals("0")) {
+                                out.println("No");
+                            }
+                        %>
+                    </td>
+                    <td class="caji"><a href=""><img src="../../../imagenes/lapiz.png" alt="" width="25px" height="25px"/></a></td>
+                    <td class="caji"><a href=""><img src="../../../imagenes/eliminar.png" alt=""   width="25px" height="25px"/></a></td>                    
                 </tr>
-            <? } ?>
-        </tbody>
+                <% }%>
+            </tbody>
         </table>
     </center>
 </body>

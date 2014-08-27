@@ -1,8 +1,4 @@
-<?
-session_start();
-?>
 <!DOCTYPE html >
-
 <html>
     <head>
         <meta charset="windows-1252">
@@ -21,13 +17,10 @@ session_start();
         </script>
     </head>
     <body>
-            <?
-            $idtr=$_REQUEST["idtr"];
-            ?>        
                  <center>
                      <label class="title">DATOS DEL PADRE, MADRE Y CONYUGUE</label>
                      
-                     <form class="form" action="../Control/ControlPadre_Madre_Conyugue.php"> 
+                     <form class="form" action="../../../familiar"> 
                          <div >
                          <table class="table" >  
                                <tr><td colspan="4"><div class="sub_title"><label class="label">Datos del Padre y Madre</label></div></td></tr>
@@ -67,13 +60,9 @@ session_start();
                                  </div>
                                  <div>
                                      <table class="table">
-                                         <input type="hidden" name="USER_CREACION" value="<?echo $_SESSION["IDUSUARIO"];?>" class="text-box" >
-                         <input type="hidden" name="FECHA_CREACION" value="" class="text-box" >
-                         <input type="hidden" name="USER_MODIF" value="" class="text-box" >
-                         <input type="hidden" name="FECHA_MODIF" value="" class="text-box" >
-                         <input type="hidden" name="USUARIO_IP" value="" class="text-box" >     
-                         <input type="hidden" name="IDDATOS_TRABAJADOR"  value="<?echo $idtr;?>" class="text-box" >  
-                             <tr><td><input type="submit" name="opc"  class="submit" value="REGISTRAR"></td></tr>
+                                      <input type="hidden" name="IDDATOS_TRABAJADOR"  value="<%=request.getParameter("idtr")%>" class="text-box" >  
+                                         
+                                <tr><td><input type="submit" name="opc"  class="submit" value="REGISTRAR"></td></tr>
                  
                          </table>
                  </div>

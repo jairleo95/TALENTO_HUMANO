@@ -177,9 +177,8 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
 
         try {
 
-            Connection cx = Conexion.getConex();
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            cst = cx.prepareCall("{CALL RHSP_INSERT_AUTORIZACION( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+           cst = conn.conex.prepareCall("{CALL RHSP_INSERT_AUTORIZACION( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
             cst.setString(1, null);
             cst.setString(2, ID_DGP);
             cst.setString(3, ES_AUTORIZACION);

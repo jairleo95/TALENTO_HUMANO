@@ -53,7 +53,7 @@
 
         <%
             CConversion c = new CConversion();
-            
+
             HttpSession Sesion = request.getSession(true);
             String idrol = (String) Sesion.getAttribute("IDROL");
 
@@ -71,14 +71,14 @@
                             <%  for (int o = 0; o < List_Anno_Id_Tr_DGP.size(); o++) {%>
                             <%X_List_Anno_Id_Tr_DGP x = new X_List_Anno_Id_Tr_DGP();
                                 x = (X_List_Anno_Id_Tr_DGP) List_Anno_Id_Tr_DGP.get(o);%>
-                                <%  if (request.getParameter("ida1").trim()==x.getId_anno().trim()) {%>
+                            <%  if (request.getParameter("ida1").trim().equals(x.getId_anno().trim())) {%>
                             <option value="<%=x.getId_anno()%>" selected="selected"><%=x.getNo_anno()%></option>
                             <%} else {%>
                             <option value="<%=x.getId_anno()%>"><%=x.getNo_anno()%></option>
                             <%}
-                               } %>
+                                }%>
                         </select> </td><td><input type="hidden" name="idtr" value="<%=n.getId_trabajador()%>"></td>
-                        <td><input name="opc" value="actualizar" type="submit"></td></tr>
+                    <td><input name="opc" value="actualizar" type="submit"></td></tr>
             </table>
         </form>
         <form>
@@ -91,14 +91,14 @@
                 <tr><td><strong>Sección:</strong></td><td><%=n.getNo_seccion()%> </td></tr>
                 <tr><td><strong>Puesto:</strong></td><td><%=n.getNo_puesto()%></td> </tr>
                 <tr><td><strong>¿Es Jefe?:</strong></td><%for (int e = 0; e < List_Jefe.size(); e++) {
-                        if (n.getEs_jefe().equals(e+1+ "")) {%>
+                        if (n.getEs_jefe().equals(e + 1 + "")) {%>
                     <td><%=List_Jefe.get(e)%>
                         <%}
                             }%></td> </tr>
                 <tr><td><strong>Condición:</strong></td> <td><%
 
                     for (int h = 0; h < list_Condicion_contrato.size(); h++) {
-                        if (n.getLi_condicion().trim().equals(h+1+"")) {
+                        if (n.getLi_condicion().trim().equals(h + 1 + "")) {
                             out.println(list_Condicion_contrato.get(h));
                         }
                     }
@@ -156,19 +156,19 @@
                     if (idrol.trim().equals("ROL-0006") && n.getEs_firmo_contrato() == null) {%>
                         <a href="../../contrato?fc=s&idc=<%=n.getId_trabajador()%>"  class="boton">SI</a>o<a href="../Control/ControlContrato.php?fc=n&idc=<?echo $list_rhc[$index][0];?>" class="boton">NO</a>
                         <%} else {
-                               
-                        if(n.getEs_firmo_contrato() != null){
-                                if (n.getEs_firmo_contrato().equals("1")) {
-                                    out.println("Si");
-                                }
-                                if (n.getEs_firmo_contrato().equals("2")) {
-                                    out.println("No");
-                                }
-                        }else{
-                            out.println("aun no se firma");
-                        }
 
-                       }%></td></tr>
+                                if (n.getEs_firmo_contrato() != null) {
+                                    if (n.getEs_firmo_contrato().equals("1")) {
+                                        out.println("Si");
+                                    }
+                                    if (n.getEs_firmo_contrato().equals("2")) {
+                                        out.println("No");
+                                    }
+                                } else {
+                                    out.println("aun no se firma");
+                                }
+
+                            }%></td></tr>
 
                 <!--  <tr><td>Nro. de Contrato:</td><td><?/* echo $list_rhc[$index][39];*/?> </td></tr>   -->
                 <tr><td><strong>Observaciones:</strong></td><td><%=n.getDe_observacion()%> </td></tr>   
@@ -203,7 +203,7 @@
                <tr><td>Pares:</td><td><? echo $list_rhc[$index][36];?> </td></tr>   
                  <tr><td>Apoyo:</td><td><? echo $list_rhc[$index][41];*/?> </td></tr>   -->
                 <%
-                    if (List_Planilla.size() == 0) {
+                    if (List_Planilla.size() != 0) {
                         for (int a = 0; a < List_Planilla.size(); a++) {
                             X_List_Plantilla f = new X_List_Plantilla();
                             f = (X_List_Plantilla) List_Planilla.get(a);

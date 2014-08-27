@@ -81,7 +81,7 @@ public class DgpDAO implements InterfaceDgpDAO {
         List<X_User_dgp> Lista = new ArrayList<X_User_dgp>();
         try {
             ResultSet rs = this.conn.query(sql);
-            
+
             while (rs.next()) {
                 X_User_dgp x = new X_User_dgp();
                 x.setId_trabajador(rs.getString("id_trabajador"));
@@ -129,8 +129,9 @@ public class DgpDAO implements InterfaceDgpDAO {
         List<x_List_Id_Trab_Dgp> Lista = new ArrayList<x_List_Id_Trab_Dgp>();
         try {
             ResultSet rs = this.conn.query(sql);
-            x_List_Id_Trab_Dgp x = new x_List_Id_Trab_Dgp();
+
             while (rs.next()) {
+                x_List_Id_Trab_Dgp x = new x_List_Id_Trab_Dgp();
                 x.setId_dgp(rs.getString("id_dgp"));
                 x.setFe_desde(rs.getString("fe_desde"));
                 x.setFe_hasta(rs.getString("fe_hasta"));
@@ -275,15 +276,15 @@ public class DgpDAO implements InterfaceDgpDAO {
     public List<V_Es_Requerimiento> LIST_DGP_PROCESO(String id_dep) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
 
-        String sql = "select * from RHVD_ES_REQUERIMIENTO where ID_DEPARTAMENTO='"+id_dep+"'";
+        String sql = "select * from RHVD_ES_REQUERIMIENTO where ID_DEPARTAMENTO='" + id_dep + "'";
         //sql += (!"".equals(id_dep)) ? "where ID_DEPARTAMENTO='" + id_dep + "'" : "";
         //sql += "order by ID_DGP";
         List<V_Es_Requerimiento> Lista = new ArrayList<V_Es_Requerimiento>();
         try {
             ResultSet rs = this.conn.query(sql);
-          
+
             while (rs.next()) {
-                  V_Es_Requerimiento v = new V_Es_Requerimiento();
+                V_Es_Requerimiento v = new V_Es_Requerimiento();
                 v.setId_trabajador(rs.getString("id_trabajador"));
                 v.setAp_paterno(rs.getString("ap_paterno"));
                 v.setAp_materno(rs.getString("ap_materno"));

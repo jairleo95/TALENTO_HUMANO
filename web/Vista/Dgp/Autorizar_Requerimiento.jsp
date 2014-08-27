@@ -87,21 +87,21 @@
 
                     <td><a href="../../trabajador?idtr=<%=a.getId_trabajador()%>&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&iddetalle_dgp=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&cod=<%=a.getCo_pasos()%>&idpasos=<%=a.getId_pasos()%>&autorizacion=1&opc=aut&nup=<%=a.getNu_pasos()%>">
                             <%
-                            
+
                                 if (idrol != null) {
                                     if (idrol.trim().equals("ROL-0006")) {
-                                        if (num ==1) {
+                                        if (num == 1) {
                                             out.println("Registrar Firma");
                                         }
                                         if (num == 0) {
                                             out.print("Hacer Contrato");
-                                        }else{
+                                        } else {
                                             out.print("Autorizar");
                                         }
                                     } else {
 
                                         out.println("Autorizar");
-                                        
+
                                     }
 
                                 }
