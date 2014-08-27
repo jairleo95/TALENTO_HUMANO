@@ -7,8 +7,6 @@ package pe.edu.upeu.application.factory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  *
@@ -21,7 +19,7 @@ public class Conexion {
         String password = "gestionrrhh";
         String host = "localhost";
         String puerto = "1521";
-        String sid = "xe";
+        String sid = "upeu";
         String driver = "oracle.jdbc.driver.OracleDriver";
         String url = "jdbc:oracle:thin:" + usuario + "/" + password + "@" + host + ":" + puerto + ":" + sid;
 
