@@ -163,6 +163,11 @@ public class CDgp extends HttpServlet {
             getServletContext().setAttribute("USER_DGP", dgp.USER_DGP(iddgp));
             response.sendRedirect("Vista/Dgp/User_Dgp.jsp");
         }
+        if (opc.equals("List_Dgp_Tr")) {
+          
+            getServletContext().setAttribute("LIST_ID_TRAB_DGP", dgp.LIST_ID_TRAB_DGP(idtr));
+            response.sendRedirect("Vista/Trabajador/List_Dgp_Trabajador.jsp");
+        }
 
         /* } finally {
          out.close();

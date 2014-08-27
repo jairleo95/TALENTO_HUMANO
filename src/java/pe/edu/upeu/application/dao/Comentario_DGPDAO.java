@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pe.edu.upeu.application.dao;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,25 +19,43 @@ import pe.edu.upeu.application.model.X_List_Comen_DGP;
  *
  * @author Admin
  */
-public class Comentario_DGPDAO implements InterfaceComentario_DGPDAO{
+public class Comentario_DGPDAO implements InterfaceComentario_DGPDAO {
+
     ConexionBD conn;
 
     @Override
-    public boolean Insert_Comentario_DGP() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void INSERT_COMENTARIO_DGP(String ID_COMENTARIO_DGP, String ID_DGP, String ID_AUTORIZACION, String CM_COMENTARIO, String US_CREACION, String FE_CREACION, String US_MODIFICACION, String FE_MODIFICACION, String ES_COMENTARIO_DGP) {
+
+        CallableStatement cst;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = conn.conex.prepareCall("{CALL RHSP_INSERT_COMENTARIO_DGP( ?, ?, ?, ?, ?, ?, ?, ?)}");
+            cst.setString(1, ID_COMENTARIO_DGP);
+            cst.setString(2, ID_DGP);
+            cst.setString(3, ID_AUTORIZACION);
+            cst.setString(4, CM_COMENTARIO);
+            cst.setString(5, US_CREACION);
+            cst.setString(6, US_MODIFICACION);
+            cst.setString(7, FE_MODIFICACION);
+            cst.setString(8, ES_COMENTARIO_DGP);
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        }
     }
 
     @Override
     public List<X_List_Comen_DGP> List_Comentario_DGP(String id_dgp) {
-       this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-       String sql= "select * from rhtr_comentario_dgp cm, rhvd_usuario u where cm.id_usuario=u.id_usuario and cm.id_dgp='"+id_dgp+"' order by cm.id_comentario_dgp desc;";
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select * from rhtr_comentario_dgp cm, rhvd_usuario u where cm.us_creacion=u.id_usuario and cm.id_dgp='" + id_dgp + "' order by cm.id_comentario_dgp desc";
         List<X_List_Comen_DGP> list = new ArrayList<X_List_Comen_DGP>();
         try {
             ResultSet rs = this.conn.query(sql);
-            X_List_Comen_DGP cd = new X_List_Comen_DGP();
-            while (rs.next()) {                
+            
+            while (rs.next()) {
+                X_List_Comen_DGP cd = new X_List_Comen_DGP();
                 cd.setId_comentario_dgp(rs.getString("id_comentario_dgp"));
-                cd.setId_usuario(rs.getString("id_usuario"));
                 cd.setId_dgp(rs.getString("id_dgp"));
                 cd.setId_autorizacion(rs.getString("id_autorizacion"));
                 cd.setCm_comentario(rs.getString("cm_comentario"));
@@ -46,7 +64,6 @@ public class Comentario_DGPDAO implements InterfaceComentario_DGPDAO{
                 cd.setUs_modificacion(rs.getString("us_modificacion"));
                 cd.setFe_modificacion(rs.getString("fe_modificacion"));
                 cd.setEs_comentario_dgp(rs.getString("es_comentario_dgp"));
-                cd.setId_pasos(rs.getString("id_pasos"));
                 cd.setId_trabajador(rs.getString("id_trabajador"));
                 cd.setId_rol(rs.getString("id_rol"));
                 cd.setId_empleado(rs.getString("id_empleado"));
@@ -69,10 +86,10 @@ public class Comentario_DGPDAO implements InterfaceComentario_DGPDAO{
                 list.add(cd);
             }
         } catch (SQLException e) {
-        }finally{
+        } finally {
             this.conn.close();
+        }
+        return list;
     }
-       return list;
-    }
-    
+
 }

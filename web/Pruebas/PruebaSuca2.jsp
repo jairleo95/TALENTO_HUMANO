@@ -13,7 +13,7 @@
         
     </head>
     <body>
-        <form>
+        <form action="">
             <input type="hidden" name="opc" value="enviar">
             <input type="hidden" name="idtra" value="DGP-000821">
             <input type="hidden" name="iddgp" value="TRB-000543">

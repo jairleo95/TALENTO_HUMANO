@@ -55,18 +55,34 @@ public class CAutorizacion extends HttpServlet {
                 String iddgp = request.getParameter("IDDETALLE_DGP");
                 String estado = "1";
                 String nropaso = request.getParameter("NROPASO");
-                String usuario_ip = request.getParameter("USUARIO_IP");
-                String us_creacion = iduser;
+                String usuario_ip = "";
                 String cod = request.getParameter("COD");
                 String iddrp = request.getParameter("IDDETALLE_REQ_PROCESO");
                 String idpasos = request.getParameter("IDPASOS");
                 /*Cambiar con un trigger al momento de insertar*/
                 dgp.VAL_DGP_PASOS();
 
-                a.Insert_Autorizacion("", iddgp, estado, nropaso, "", us_creacion, "", "", cod.trim(), idp, iddrp, idpasos);
+                a.Insert_Autorizacion("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
                 String idpu = e.Id_Puesto_Personal(ide);
                 getServletContext().setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
                 response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp");
+            }
+            if (opc.equals("Rechazar")) {
+                String iddgp = request.getParameter("IDDETALLE_DGP");
+                String estado = "2";
+                String nropaso = request.getParameter("NROPASO");
+                String usuario_ip = "";
+                String cod = request.getParameter("COD");
+                String iddrp = request.getParameter("IDDETALLE_REQ_PROCESO");
+                String idpasos = request.getParameter("IDPASOS");
+                /*Cambiar con un trigger al momento de insertar*/
+                dgp.VAL_DGP_PASOS();
+
+                a.Insert_Autorizacion("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
+                String idpu = e.Id_Puesto_Personal(ide);
+                
+               /* getServletContext().setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
+                response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp");*/
             }
             //try {
         } else {

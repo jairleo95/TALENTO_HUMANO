@@ -5,7 +5,9 @@
  */
 package pe.edu.upeu.application.dao;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import static oracle.security.o3logon.b.a;
@@ -23,19 +25,43 @@ public class Padre_Madre_ConyugueDAO implements InterfacePadre_Madre_ConyugueDAO
     ConexionBD conn;
 
     @Override
-    public boolean Insert_PMC() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void INSERT_PADRE_MADRE_CONYUGUE(String ID_PADRE_MADRE_CONYUGUE, String AP_NOMBRES_PADRE, String AP_NOMBRES_MADRE, String ES_TRABAJA_UPEU_CONYUGUE, String AP_NOMBRES_CONYUGUE, String FE_NAC_CONYUGUE, String TI_DOC_ID, String NU_DOC, String LI_INSCRIPCION_VIG_ESSALUD, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String ID_TRABAJADOR) {
+        CallableStatement cst;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = conn.conex.prepareCall("{CALL RHSP_INSERT_PMC( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+            cst.setString(1, ID_PADRE_MADRE_CONYUGUE);
+            cst.setString(2, AP_NOMBRES_PADRE);
+            cst.setString(3, AP_NOMBRES_MADRE);
+            cst.setString(4, ES_TRABAJA_UPEU_CONYUGUE);
+            cst.setString(5, AP_NOMBRES_CONYUGUE);
+            cst.setString(6, FE_NAC_CONYUGUE);
+            cst.setString(7, TI_DOC_ID);
+            cst.setString(8, NU_DOC);
+            cst.setString(9, LI_INSCRIPCION_VIG_ESSALUD);
+            cst.setString(10, US_CREACION);
+            cst.setString(11, FE_CREACION);
+            cst.setString(12, US_MODIF);
+            cst.setString(13, FE_MODIF);
+            cst.setString(14, IP_USUARIO);
+            cst.setString(15, ID_TRABAJADOR);
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        }
     }
 
     @Override
-    public List<Padre_Madre_Conyugue> List_PMC(String id_pmc) {
+    public List<Padre_Madre_Conyugue> List_PMC(String idtr) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "Select * from rhtd_area ";
+        String sql = "Select * from rhtd_padre_madre_conyugue where id_trabajador='" + idtr.trim() + "'";
         List<Padre_Madre_Conyugue> list = new ArrayList<Padre_Madre_Conyugue>();
         try {
             ResultSet rs = this.conn.query(sql);
-            Padre_Madre_Conyugue pmc = new Padre_Madre_Conyugue();
+
             while (rs.next()) {
+                Padre_Madre_Conyugue pmc = new Padre_Madre_Conyugue();
                 pmc.setId_padre_madre_conyugue(rs.getString("id_padre_madre_conyugue"));
                 pmc.setAp_nombres_padre(rs.getString("ap_nombres_padre"));
                 pmc.setAp_nombres_madre(rs.getString("ap_nombres_madre"));

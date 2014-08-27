@@ -15,7 +15,6 @@ import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Datos_Hijo_Trabajador;
 import pe.edu.upeu.application.model.Documentos;
 import pe.edu.upeu.application.model.Padre_Madre_Conyugue;
-import pe.edu.upeu.application.model.Trabajador;
 import pe.edu.upeu.application.model.V_Reg_Dgp_Tra;
 
 /**
@@ -72,12 +71,13 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     @Override
     public List<Datos_Hijo_Trabajador> List_Hijos(String id_trabajador) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from RHTD_DATOS_HIJO_TRABAJADOR where id_trabajador='" + id_trabajador + "' and (sysdate-fe_nacimiento)/360<18";
+        String sql = "select * from RHTD_DATOS_HIJO_TRABAJADOR where id_trabajador='" + id_trabajador.trim() + "' and (sysdate-fe_nacimiento)/360>18";
         List<Datos_Hijo_Trabajador> list = new ArrayList<Datos_Hijo_Trabajador>();
         try {
             ResultSet rs = this.conn.query(sql);
-            Datos_Hijo_Trabajador dht = new Datos_Hijo_Trabajador();
+            
             while (rs.next()) {
+                Datos_Hijo_Trabajador dht = new Datos_Hijo_Trabajador();
                 dht.setAp_materno(rs.getString("ap_materno"));
                 dht.setAp_paterno(rs.getString("ap_paterno"));
                 dht.setEs_datos_hijo_trabajador(rs.getString("es_datos_hijo_trabajador"));
@@ -110,12 +110,13 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     @Override
     public List<Padre_Madre_Conyugue> List_Conyugue(String id_trabajador) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT * FROM rhtd_padre_madre_conyugue where ap_nombres_conyugue is not null and id_trabajador='" + id_trabajador + "'";
+        String sql = "SELECT * FROM rhtd_padre_madre_conyugue where ap_nombres_conyugue is not null and id_trabajador='" + id_trabajador.trim() + "'";
         List<Padre_Madre_Conyugue> list = new ArrayList<Padre_Madre_Conyugue>();
         try {
             ResultSet rs = this.conn.query(sql);
-            Padre_Madre_Conyugue pmc = new Padre_Madre_Conyugue();
+           
             while (rs.next()) {
+                 Padre_Madre_Conyugue pmc = new Padre_Madre_Conyugue();
                 pmc.setAp_nombres_conyugue(rs.getString("Ap_nombres_conyugue"));
                 pmc.setAp_nombres_madre(rs.getString("ap_nombres_madre"));
                 pmc.setAp_nombres_padre(rs.getString("ap_nombres_padre"));
@@ -142,14 +143,14 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     }
 
     @Override
-    public String List_Adventista(String id_trabajador) {
+    public int List_Adventista(String id_trabajador) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select li_religion from RHTM_TRABAJADOR where li_religion = 1 and id_trabajador='" + id_trabajador + "'";
-        String religion = "";
+        String sql = "select count(li_religion) as  num from RHTM_TRABAJADOR where li_religion = 1 and id_trabajador='" + id_trabajador + "'";
+        int religion = 0;
         try {
             ResultSet rs = this.conn.query(sql);
             rs.next();
-            religion = rs.getString("li_religion");
+            religion = rs.getInt("num");
         } catch (SQLException e) {
         } finally {
             this.conn.close();
@@ -159,14 +160,14 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     }
 
     @Override
-    public String List_Req_nacionalidad(String id_trabajador) {
+    public int List_Req_nacionalidad(String id_trabajador) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select id_nacionalidad from rhtm_trabajador where id_trabajador not in ( select id_trabajador from rhtm_trabajador where id_nacionalidad != 'NAC-0044') and id_trabajador='" + id_trabajador + "'";
-        String nacionalidad = "";
+        String sql = "select count(id_nacionalidad) as num from rhtm_trabajador where id_trabajador not in ( select id_trabajador from rhtm_trabajador where id_nacionalidad != 'NAC-0044') and id_trabajador='" + id_trabajador.trim() + "'";
+        int nacionalidad = 0;
         try {
             ResultSet rs = this.conn.query(sql);
             rs.next();
-            nacionalidad = rs.getString("id_nacionalidad");
+            nacionalidad = rs.getInt("num");
         } catch (SQLException e) {
         } finally {
             this.conn.close();
@@ -182,8 +183,9 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
         List<V_Reg_Dgp_Tra> x= new ArrayList<V_Reg_Dgp_Tra>();
         try {
             ResultSet rs=this.conn.query(sql);
-            V_Reg_Dgp_Tra v=new V_Reg_Dgp_Tra();
+           
             while(rs.next()){
+                 V_Reg_Dgp_Tra v=new V_Reg_Dgp_Tra();
                 v.setId_document(rs.getString("id_document"));
                 v.setId_tipo_plani(rs.getString("id_tipo_plani"));
                 v.setId_requerimient(rs.getString("id_requerimient"));
@@ -211,7 +213,6 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
                 v.setEs_dgp(rs.getString("es_dgp"));
                 v.setTi_documento(rs.getString("ti_documento"));
                 v.setId_documento_adjunto(rs.getString("id_documento_adjunto"));
-                v.setId_dgp(rs.getString("id_dgp"));
                 v.setId_documentos(rs.getString("id_documentos"));
                 v.setEs_documento_adjunto(rs.getString("es_documento_adjunto"));
                 v.setUs_creacion(rs.getString("us_creacion"));

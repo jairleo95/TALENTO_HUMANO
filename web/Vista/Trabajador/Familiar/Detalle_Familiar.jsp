@@ -1,109 +1,110 @@
-<? session_start();?>
+<%@page import="pe.edu.upeu.application.model.Padre_Madre_Conyugue"%>
+<jsp:useBean id="List_PMC" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="LISTA_HIJOS" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-<link type="text/css" rel="stylesheet" href="../../../css/Css_Detalle/CSS_DETALLE.css">
-<link type="text/css" rel="stylesheet" href="../../../css/Css_Detalle/style.css"> 
+        <link type="text/css" rel="stylesheet" href="../../../css/Css_Detalle/CSS_DETALLE.css">
+        <link type="text/css" rel="stylesheet" href="../../../css/Css_Detalle/style.css"> 
         <title>Familiares</title>
-  
+
     </head>
     <body>
     <center>
-          <?
-        require_once '../Modelo/ModeloPadre_Madre_Conyugue.php';
-        $m_pmc=new ModeloPadre_Madre_Conyugue();
-        $id=$_REQUEST["idtr"];
-        $list=$m_pmc->LISTA_PMC_TR($id);
-        
-        require_once '../Modelo/ModeloDatos_hijos_trabajador.php';
-        $mdh=new ModeloDatos_hijos_trabajador();
-        $list_h=$mdh->LISTA_HIJOS($id);
-        
-        
-        ?>
-        <? if (count($list)!=0) {?>
+        <%
+
+            HttpSession sesion = request.getSession(true);
+            String rol = (String) sesion.getAttribute("IDROL");
+        %>
+
+        <%if (List_PMC.size() != 0) {%>
         <form >
             <div>
                 <table class="table_info" >
-                     <tr><td colspan="2"><div class="title">Datos de Padre y Madre</div></td></tr>
-           <? for ($index = 0; $index < count($list); $index++) {?>
-             
-            <tr><td class="text-info">Nombres y Apellidos del padre:</td><td class="text-info-left"><? echo $list[$index][1]?></td></tr>
-            <tr><td class="text-info">Nombres y Apellidos de la Madre :</td><td class="text-info-left"><? echo $list[$index][2]?></td></tr>
-           </table>
+                    <tr><td colspan="2"><div class="title">Datos de Padre y Madre</div></td></tr>
+                    <%for (int i = 0; i < List_PMC.size(); i++) {
+                            Padre_Madre_Conyugue pmc = new Padre_Madre_Conyugue();
+                            pmc = (Padre_Madre_Conyugue) List_PMC.get(i);
+                    %>
+                    <tr><td class="text-info">Nombres y Apellidos del padre:</td><td class="text-info-left"><%=pmc.getAp_nombres_madre()%></td></tr>
+                    <tr><td class="text-info">Nombres y Apellidos de la Madre :</td><td class="text-info-left"><%=pmc.getAp_nombres_padre()%></td></tr>
+                </table>
             </div>
-            
+
             <div style="display:/*none*/" >
                 <table  class="table_info"  >
-                     <tr><td colspan="2"><div class="title">Conyugue</div></td></tr>
-            <tr><td class="text-info">Trabaja en UPeU:</td><td class="text-info-left"><?
-                if ($list[$index][3]==1) {
-                 echo 'Si';    
-                }
-                if ($list[$index][3]==0) {
-                 echo 'No';    
-                }
-                ?></td></tr>
-            <tr><td class="text-info">Apellidos y Nombres:</td><td class="text-info-left"><? echo $list[$index][4]?></td></tr>
-            <tr><td class="text-info">Fecha de Nacimiento:</td><td class="text-info-left"><? echo $list[$index][5]?></td></tr>
-            <tr ><td class="text-info">Documento</td><td class="text-info-left"><? 
-                    if ($list[$index][6]==1) {
-            echo 'DNI';            
-                    }
-                    if ($list[$index][6]==2) {
-            echo 'Pasaporte';            
-                    }
-            ?></td></tr>
-             <tr><td class="text-info">Numero Documento:</td><td class="text-info-left"><? echo $list[$index][7]?></td></tr>
-            <tr><td class="text-info">Inscripcion Vigente en EsSalud:</td><td class="text-info-left"><?
-                if ( $list[$index][8]==1) {
-                    echo 'Si'; 
-                }
-                if ( $list[$index][8]==0) {
-                    echo 'No'; 
-                }
-           ?></td></tr>
-            </table>
+                    <tr><td colspan="2"><div class="title">Conyugue</div></td></tr>
+                    <tr><td class="text-info">Trabaja en UPeU:</td><td class="text-info-left">
+                            <%
+                                if (pmc.getEs_trabaja_upeu_conyugue().trim().equals("1")) {
+                                    out.println("Si");
+                                }
+                                if (pmc.getEs_trabaja_upeu_conyugue().trim().equals("2")) {
+                                    out.println("No");
+                                }
+                            %>
+                        </td></tr>
+                    <tr><td class="text-info">Apellidos y Nombres:</td><td class="text-info-left"><%=pmc.getAp_nombres_conyugue()%></td></tr>
+                    <tr><td class="text-info">Fecha de Nacimiento:</td><td class="text-info-left"><%=pmc.getFe_nac_conyugue()%></td></tr>
+                    <tr ><td class="text-info">Documento</td><td class="text-info-left">
+                            <%
+                                if (pmc.getTi_doc_id().trim().equals("1")) {
+                                    out.println("DNI");
+                                }
+                                if (pmc.getTi_doc_id().trim().equals("2")) {
+                                    out.println("Pasaporte");
+                                }
+                            %>
+                        </td></tr>
+                    <tr><td class="text-info">Numero Documento:</td><td class="text-info-left"><%=pmc.getNu_doc()%></td></tr>
+                    <tr><td class="text-info">Inscripcion Vigente en EsSalud:</td><td class="text-info-left">
+                            <%
+                                if (pmc.getLi_inscripcion_vig_essalud().trim().equals("1")) {
+
+                                    out.println("Si");
+                                }
+                                if (pmc.getLi_inscripcion_vig_essalud().trim().equals("2")) {
+
+                                    out.println("No");
+                                }
+                            %>
+                        </td></tr>
+                </table>
             </div>
             <table>
-          
-            
-           <?}?>
-        <tr><td colspan="2"></td><td><input class="btn btn-success" type="submit" value="Editar"></td></tr>
-        </table>
+
+
+                <%}%>
+                <tr><td colspan="2"></td><td><input class="btn btn-success" type="submit" value="Editar"></td></tr>
+            </table>
         </form>
-        <?}else{?>
+        <%} else {%>
         <center>
             <label>Aun no se ha registrado los datos del familiar</label>
-            <?  if ($_SESSION["IDROL"]==2) {?>
+            <%  if (rol.trim().equals("ROL-0002")) {%>
             <a href="Reg_Padre_Madre_Conyugue.jsp?idtr=<?echo $id?>">Registrar</a>
-            <?}?>
+            <%}%>
         </center>
-        <? } ?>
-</center>
-    </body>
+        <% } %>
+    </center>
+</body>
 </html>
 <center>
-<?
- $id=$_REQUEST["idtr"];
- 
-            $mod_dht = new ModeloDatos_hijos_trabajador();
-            $list_dht = $mod_dht->LISTA_HIJOS($id);
-            $r=count($list_dht);
-           
-            if ($r!=0) {
-?>
-            <?  include './List_datos_hijos_trabajador.php';?>
-                <? if ($_SESSION["IDROL"]==2) {?>
-                <a href="Reg_Datos_Hijo.jsp?idtr=<?echo $id;?>" class="button blue">Agregar un hijo</a>
-                    <?}?>
-            <?}else{?>
+    <%
+  
+        if (LISTA_HIJOS.size()!=0) {
+    %>
+    <%@include file="List_Hijo.jsp" %>
+    <%  if (rol.trim().equals("ROL-0002")) {%>
+    <a href="Reg_Datos_Hijo.jsp?idtr=<?echo $id;?>" class="button blue">Agregar un hijo</a>
+    <%}%>
+    <%} else {%>
 
-<label>No se ha registrado ningun Hijo(a)</label><br>
+    <label>No se ha registrado ningun Hijo(a)</label><br>
 
-<?  if ($_SESSION["IDROL"]==2) {?>
-<a href="Reg_Datos_Hijo.jsp?idtr=<?echo $id;?>" class="">Registrar</a>
-<?}?>
+    <%  if (rol.trim().equals("ROL-0002")) {%>
+    <a href="Reg_Datos_Hijo.jsp?idtr=<?echo $id;?>" class="">Registrar</a>
+    <%}%>
 </center>
-                <?}?>
+<%}%>

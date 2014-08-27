@@ -209,12 +209,13 @@ public class ContratoDAO implements InterfaceContratoDAO {
     @Override
     public List<X_List_Anno_Id_Tr_DGP> List_Anno_Id_Tr_DGP(String id_trabajador) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select f.id_anno,f.no_anno, dgp.* from (select a.id_anno,a.no_anno ,r.id_dgp ,r.id_trabajador from RHTR_ANNO a , RHTM_CONTRATO r  where   a.id_anno=r.id_anno and r.es_contrato=1)f left outer join RHTM_DGP dgp on (f.id_dgp =dgp.id_dgp) where f.id_trabajador='"+id_trabajador+"' order by f.no_anno desc";
+        String sql = "select f.id_anno,f.no_anno, dgp.* from (select a.id_anno,a.no_anno ,r.id_dgp ,r.id_trabajador from RHTR_ANNO a , RHTM_CONTRATO r  where   a.id_anno=r.id_anno and r.es_contrato=1)f left outer join RHTM_DGP dgp on (f.id_dgp =dgp.id_dgp) where f.id_trabajador='" + id_trabajador.trim() + "' order by f.no_anno desc";
         List<X_List_Anno_Id_Tr_DGP> list = new ArrayList<X_List_Anno_Id_Tr_DGP>();
         try {
             ResultSet rs = this.conn.query(sql);
-            X_List_Anno_Id_Tr_DGP aitd = new X_List_Anno_Id_Tr_DGP();
+
             while (rs.next()) {
+                X_List_Anno_Id_Tr_DGP aitd = new X_List_Anno_Id_Tr_DGP();
                 aitd.setId_anno(rs.getString("id_anno"));
                 aitd.setNo_anno(rs.getString("no_anno"));
                 aitd.setId_dgp(rs.getString("id_dgp"));
