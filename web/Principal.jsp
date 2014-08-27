@@ -42,16 +42,18 @@
         <script type="text/javascript" src="js2/jquery.js"></script>
         <script type="text/javascript" src="js2/jquery.autoheight.js"></script>
         <link href="imagenes/guia.gif" rel="shortcut icon"/>
-    <script language="Javascript" type="text/javascript">
-           document.oncontextmenu = function(){return false;}
-    </script>
-    <style type="text/css">
-        #deposito{
-            width: 100%; 
-            height: auto; 
-            padding-left: 20px;
-        }
-    </style>
+        <script language="Javascript" type="text/javascript">
+            document.oncontextmenu = function() {
+                return false;
+            }
+        </script>
+        <style type="text/css">
+            #deposito{
+                width: 100%; 
+                height: auto; 
+                padding-left: 20px;
+            }
+        </style>
     </head>
     <body class="skin-blue">
         <!-- header logo: style can be found in header.less -->
@@ -290,14 +292,14 @@
                                     <div class="col-xs-4 text-center">
                                         <a href="#"></a>
                                     </div>
-                                    <!--
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Sales</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Friends</a>
-                                    </div>
-                                </li>-->
+                                <!--
+                                <div class="col-xs-4 text-center">
+                                    <a href="#">Sales</a>
+                                </div>
+                                <div class="col-xs-4 text-center">
+                                    <a href="#">Friends</a>
+                                </div>
+                            </li>-->
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
@@ -344,16 +346,16 @@
 
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu" id="jonas">
-                        <% 
-                            for (int i = 0; i < listarURL.size(); i++)
-                            { V_Privilegio dp = new V_Privilegio();
-                              dp = (V_Privilegio) listarURL.get(i);
+                        <%
+                            for (int i = 0; i < listarURL.size(); i++) {
+                                V_Privilegio dp = new V_Privilegio();
+                                dp = (V_Privilegio) listarURL.get(i);
                         %>
                         <li>
                             <a href="<%=dp.getDi_url()%>" target="myframe">
                                 <i class="fa fa-laptop"></i>
                                 <span><%=dp.getNo_link()%></span>
-                                
+
                             </a>
                         </li>
                         <%  if (dp.getId_privilegio().equals("PRV-000012")) {%>
@@ -369,11 +371,12 @@
                                 <li><a href="Vista/Dgp/Generar_Dgp.jsp?text=3" target="myframe"><i class="fa fa-angle-double-right"></i> Medio Tiempo</a></li>
                             </ul>
                         </li>                                
-                        <%}}%>
+                        <%}
+                            }%>
                     </ul>
                 </section>
                 <!-- /.sidebar -->
-                
+
             </aside>
 
             <!-- Right side column. Contains the navbar and content of the page -->
@@ -391,14 +394,14 @@
                 </section>
                 <section class="content">
                     <div id="deposito">
-                        <iframe id="myframe" name="myframe" width="100%" class="autoHeight" scrolling="no" frameborder="0" src="prueba.jsp"></iframe>
+                        <iframe id="myframe" name="myframe" width="100%" class="autoHeight" scrolling="no" frameborder="0" src="Vista/inicio.jsp"></iframe>
                     </div>
                 </section>
             </aside>
-            
-            </div>
-            
-            <script src="plantilla/js/JQuery/jQuery.js"></script> 
+
+        </div>
+
+        <script src="plantilla/js/JQuery/jQuery.js"></script> 
         <!-- ./wrapper -->
 
         <!-- add new calendar event modal -->
@@ -436,13 +439,13 @@
         <!-- AdminLTE for demo purposes -->
         <script src="plantilla/js/AdminLTE/demo.js" type="text/javascript"></script>
         <script type="text/javascript">
-            jQuery('iframe').iframeAutoHeight({debug: true, diagnostics: false});      
+                                                jQuery('iframe').iframeAutoHeight({debug: true, diagnostics: false});
         </script>
     </body>
-   
+
 </html>
-<%}else{
-    response.sendRedirect("/TALENTO_HUMANO/");
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
     }
 
 
