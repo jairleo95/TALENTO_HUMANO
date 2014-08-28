@@ -15,6 +15,7 @@ import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Datos_Hijo_Trabajador;
 import pe.edu.upeu.application.model.Documentos;
 import pe.edu.upeu.application.model.Padre_Madre_Conyugue;
+import pe.edu.upeu.application.model.V_Documento_Trabajador;
 import pe.edu.upeu.application.model.V_Reg_Dgp_Tra;
 
 /**
@@ -26,15 +27,23 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     ConexionBD conn;
 
     @Override
-    public List<Documentos> List_Id_Doc_Trab(String id_trabajador) {
+    public List<V_Documento_Trabajador> List_Id_Doc_Trab(String id_trabajador) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from RHTV_DOCUMENTO_ADJUNTO da, RHTR_DOCUMENTOS d ,RHTM_DGP dgp, RHTR_REQUERIMIENTO r  where da.id_documentos = d.id_documentos  and r.id_requerimiento = dgp.id_requerimiento  and dgp.id_dgp = da.id_dgp and dgp.id_trabajador='" + id_trabajador + "' and da.ES_DOCUMENTO_ADJUNTO=1";
-        List<Documentos> list = new ArrayList<Documentos>();
+        String sql = "select * from RHVD_DOCUMENTO_TRABAJADOR WHERE id_trabajador='" + id_trabajador.trim() + "'";
+        List<V_Documento_Trabajador> list = new ArrayList<V_Documento_Trabajador>();
         try {
             ResultSet rs = this.conn.query(sql);
-            Documentos d = new Documentos();
+
             while (rs.next()) {
-                //falta agregar setter y getter
+                V_Documento_Trabajador d = new V_Documento_Trabajador();
+
+                d.setId_documento_adjunto(rs.getString("id_documento_adjunto"));
+                d.setId_dgp(rs.getString("id_dgp"));
+                d.setId_trabajador(rs.getString("id_trabajador"));
+                d.setNo_documento(rs.getString("no_documento"));
+                d.setNo_req(rs.getString("no_req"));
+                d.setDe_documento_adjunto(rs.getString("de_documento_adjunto"));
+
                 list.add(d);
             }
         } catch (SQLException e) {
@@ -75,7 +84,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
         List<Datos_Hijo_Trabajador> list = new ArrayList<Datos_Hijo_Trabajador>();
         try {
             ResultSet rs = this.conn.query(sql);
-            
+
             while (rs.next()) {
                 Datos_Hijo_Trabajador dht = new Datos_Hijo_Trabajador();
                 dht.setAp_materno(rs.getString("ap_materno"));
@@ -114,9 +123,9 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
         List<Padre_Madre_Conyugue> list = new ArrayList<Padre_Madre_Conyugue>();
         try {
             ResultSet rs = this.conn.query(sql);
-           
+
             while (rs.next()) {
-                 Padre_Madre_Conyugue pmc = new Padre_Madre_Conyugue();
+                Padre_Madre_Conyugue pmc = new Padre_Madre_Conyugue();
                 pmc.setAp_nombres_conyugue(rs.getString("Ap_nombres_conyugue"));
                 pmc.setAp_nombres_madre(rs.getString("ap_nombres_madre"));
                 pmc.setAp_nombres_padre(rs.getString("ap_nombres_padre"));
@@ -180,12 +189,12 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     public List<V_Reg_Dgp_Tra> List_doc_req_pla(String iddgp, String idtra) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "SELECT * FROM RHVD_REQ_DGP_TRA  where IDDGP='" + iddgp + "' AND ID_TRABAJADOR='" + idtra + "'";
-        List<V_Reg_Dgp_Tra> x= new ArrayList<V_Reg_Dgp_Tra>();
+        List<V_Reg_Dgp_Tra> x = new ArrayList<V_Reg_Dgp_Tra>();
         try {
-            ResultSet rs=this.conn.query(sql);
-           
-            while(rs.next()){
-                 V_Reg_Dgp_Tra v=new V_Reg_Dgp_Tra();
+            ResultSet rs = this.conn.query(sql);
+
+            while (rs.next()) {
+                V_Reg_Dgp_Tra v = new V_Reg_Dgp_Tra();
                 v.setId_document(rs.getString("id_document"));
                 v.setId_tipo_plani(rs.getString("id_tipo_plani"));
                 v.setId_requerimient(rs.getString("id_requerimient"));
@@ -228,7 +237,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
                 x.add(v);
             }
         } catch (SQLException e) {
-        }finally{
+        } finally {
             this.conn.close();
         }
         return x;

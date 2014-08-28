@@ -116,7 +116,7 @@
                             <li><a class="item-m" href="Aspecto_Social.jsp?idtr=<?echo $idtr;?>" target="contenido" >Aspecto Social</a></li>
                             <li><a class="item-m" href="../../familiar?idtr=<%=idtr%>&opc=Detalle_Familiar" target="contenido" >Familiares</a></li>
                             <li><a class="item-m" href="../../dgp?idtr=<%=idtr%>&opc=List_Dgp_Tr" target="contenido">Requerimientos</a></li>
-                            <li><a class="item-m" href="List_Doc_Trabajador.jsp?idtr=<?echo $idtr;?>" target="contenido">Documentos</a></li>
+                            <li><a class="item-m" href="../../trabajador?idtr=<%=idtr%>&opc=Documento_Trabajador" target="contenido">Documentos</a></li>
                             <li><a class="item-m" href="../../contrato?idtr=<%=idtr%>&opc=Detalle_Contractual" target="contenido">Informacion Contractual</a></li>
                         </ul>
                     </div><!-- /dl-menuwrapper -->

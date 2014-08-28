@@ -12,11 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import pe.edu.upeu.application.dao.DgpDAO;
+import pe.edu.upeu.application.dao.DocumentoDAO;
 import pe.edu.upeu.application.dao.ListaDAO;
 import pe.edu.upeu.application.dao.TrabajadorDAO;
 import pe.edu.upeu.application.dao.UbigeoDAO;
-import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUbigeoDAO;
@@ -49,6 +49,7 @@ public class CTrabajador extends HttpServlet {
         // InterfaceDgpDAO dgp = new DgpDAO();
         InterfaceUbigeoDAO ub = new UbigeoDAO();
         InterfaceTrabajadorDAO tr = new TrabajadorDAO();
+        InterfaceDocumentoDAO d = new DocumentoDAO();
 
         String opc = "";
         String Text = "";
@@ -162,6 +163,11 @@ public class CTrabajador extends HttpServlet {
             String idtr = request.getParameter("idtr");
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim());
+        }
+        if ("Documento_Trabajador".equals(opc)) {
+            String idtr = request.getParameter("idtr");
+            getServletContext().setAttribute("List_Id_Doc_Trab", d.List_Id_Doc_Trab(idtr));
+            response.sendRedirect("Vista/Trabajador/List_Doc_Trabajador.jsp");
         }
         if ("aut".equals(opc)) {
             String idtr = request.getParameter("idtr");

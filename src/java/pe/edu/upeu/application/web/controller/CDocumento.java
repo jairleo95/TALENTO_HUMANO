@@ -48,9 +48,18 @@ public class CDocumento extends HttpServlet {
                 int num_ad = d.List_Adventista(idtr);
                 getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
                 getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
-
-                //out.println(idtr);
                 response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad);
+            }
+            if (opc.equals("Registrar")) {
+                
+                String iddgp=request.getParameter("iddgp");
+                int i=Integer.parseInt(request.getParameter("num"));
+                for (int j =1; j < i; j++) {
+                    String name=request.getParameter("lob_upload"+i);
+                    
+                    
+                    
+                }
             }
         } finally {
             out.close();
