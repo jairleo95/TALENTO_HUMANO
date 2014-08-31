@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.model.Ub_Departamento"%>
 <%@page import="pe.edu.upeu.application.model.Situacion_Educativa"%>
 <%@page import="pe.edu.upeu.application.model.Universidad"%>
 <%@page import="pe.edu.upeu.application.model.Carrera"%>
@@ -10,7 +11,7 @@
 
 %>
 <jsp:useBean id="List_Nacionalidad" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Distrito" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Departamento" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Carrera" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Universidad" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Situacion_Educativa" scope="application" class="java.util.ArrayList"/>
@@ -69,11 +70,11 @@
                             }
                             else {
                                 $("#es_inst_p").hide();
-                                 $("#regimen").hide();
-                                 $("#egreso").hide();
-                                 $("#ti").hide();
-                                 $("#institucion").hide();
-                                 $("#carr").hide();
+                                $("#regimen").hide();
+                                $("#egreso").hide();
+                                $("#ti").hide();
+                                $("#institucion").hide();
+                                $("#carr").hide();
 
                             }
 
@@ -81,18 +82,18 @@
 
                         $("#es_inst_p").change(function() {
                             if ($("#inst_peru").val() == "1") {
-                                 $("#regimen").show();
-                                 $("#egreso").show();
-                                 $("#ti").show();
-                                 $("#institucion").show();
-                                 $("#carr").show();
-                            }else{
-                                  $("#regimen").hide();
-                                 $("#egreso").hide();
-                                 $("#ti").hide();
-                                 $("#institucion").hide();
-                                 $("#carr").hide();
-                                
+                                $("#regimen").show();
+                                $("#egreso").show();
+                                $("#ti").show();
+                                $("#institucion").show();
+                                $("#carr").show();
+                            } else {
+                                $("#regimen").hide();
+                                $("#egreso").hide();
+                                $("#ti").hide();
+                                $("#institucion").hide();
+                                $("#carr").hide();
+
                             }
 
                         });
@@ -266,15 +267,29 @@
                             <%}
                                 }%>
                         </select></td></tr>  
-                <tr id="dist"><td>Distrito:</td><td>
-                        <select name="DISTRITO" class="text-box chosen-select"  required="">
+                <tr id="dist"><td>Lugar de Nacimiento: </td>
+
+                    <td>
+                        Departamento:
+                        <select  id="dep_nac" class="text-box chosen-select"  required="">
                             <option value="" >-----</option>
-                            <%for (int index = 0; index < List_Distrito.size(); index++) {
-                                    V_Ubigeo ub_dist = new V_Ubigeo();
-                                    ub_dist = (V_Ubigeo) List_Distrito.get(index);
+                            <%for (int d = 0; d < List_Departamento.size(); d++) {
+                                    Ub_Departamento dep = new Ub_Departamento();
+                                    dep = (Ub_Departamento) List_Departamento.get(d);
+
                             %>
-                            <option value="<%=ub_dist.getId_distrito()%>"><%=ub_dist.getNo_distrito()%></option>
+                            <option value="<%=dep.getId_departamento()%>" ><%=dep.getNo_departamento()%></option>
                             <%}%>
+                        </select>
+                        Provincia:
+                        <select  id="pro_nac" class="text-box"  required="">
+                            <option value="" >-----</option>
+
+                        </select>
+                        Distrito:
+                        <select name="DISTRITO" id="dist_nac" class="text-box"  required="">
+                            <option value="" >-----</option>
+
                         </select>
                     </td></tr> 
                 <tr><td> Documento:</td><td>
@@ -473,12 +488,15 @@
                         <div class="item0">
                             <select name="DIR_DOM_A_DISTRITO_ID" id="DOM_A_DISTRITO" class="chosen-select required" required="">
                                 <option value="">----------</option>
-                                <%for (int ff = 0; ff < List_Distrito.size(); ff++) {
-                                        V_Ubigeo ub = new V_Ubigeo();
-                                        ub = (V_Ubigeo) List_Distrito.get(ff);
+                                <%for (int d = 0; d < List_Departamento.size(); d++) {
+                                        Ub_Departamento dep = new Ub_Departamento();
+                                        dep = (Ub_Departamento) List_Departamento.get(d);
+
                                 %>
-                                <option value="<%=ub.getId_distrito()%>"><%=ub.getNo_distrito()%></option>
-                                <%}%></select>
+                                <option value="<%=dep.getId_departamento()%>" ><%=dep.getNo_departamento()%></option>
+                                <%}%>
+
+                            </select>
                         </div>
                         <button onclick="duplicar();
                                 return false;" class="btn-duplicar" >duplicar</button></td></tr>
@@ -541,12 +559,13 @@
                         <div class="item">
                             <select name="DIR_DOM_LEG_DISTRITO_ID"   id="DOM_LEG_DISTRITO" class="text-box required" required="">
                                 <option value="">----------</option>
-                                <%for (int i = 0; i < List_Distrito.size(); i++) {
-                                        V_Ubigeo ub = new V_Ubigeo();
-                                        ub = (V_Ubigeo) List_Distrito.get(i);
+                                <%for (int d = 0; d < List_Departamento.size(); d++) {
+                                        Ub_Departamento dep = new Ub_Departamento();
+                                        dep = (Ub_Departamento) List_Departamento.get(d);
+
                                 %>
-                                <option value="<%=ub.getId_distrito()%>"><%=ub.getNo_distrito()%></option>
-                                <%}%> 
+                                <option value="<%=dep.getId_departamento()%>" ><%=dep.getNo_departamento()%></option>
+                                <%}%>
                             </select></div>
                     </td></tr>
                 <tr><td colspan="4"><div class="sub_title"><label class="label">Ingresos de Quinta Categoria</label></div></td></tr>
@@ -695,6 +714,60 @@
 
 </script>
 <script type="text/javascript">
+    /*Ubigeo*/
+    $("#dep_nac").change(function() {
+        var ti = $("#pro_nac");
+        ti.empty();
+        var rg = $("#dep_nac").val();
+        var data = "id_dep=" + rg + "&opc=dep_nac";
+        ti.append('<option value="">Cargando...</option>').val('');
+        $.post("../../ubigeo", data, function(objJson) {
+            ti.empty();
+            if (objJson.rpta == -1) {
+                alert(objJson.mensaje);
+                return;
+            }
+            var lista = objJson.lista;
+            if (lista.length > 0) {
+                ti.append("<option value='0'>[Seleccione]</option>");
+            } else {
+                ti.append("<option value='0'>[]</option>");
+            }
+            for (var i = 0; i < lista.length; i++) {
+                var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                ti.append(item);
+            }
+        });
+    });
+    $("#pro_nac").change(function() {
+        var ti = $("#dist_nac");
+        ti.empty();
+        var rg = $("#pro_nac").val();
+        var data = "id_dist=" + rg + "&opc=pro_nac";
+        ti.append('<option value="">Cargando...</option>').val('');
+        $.post("../../ubigeo", data, function(objJson) {
+            ti.empty();
+            if (objJson.rpta == -1) {
+                alert(objJson.mensaje);
+                return;
+            }
+            var lista = objJson.lista;
+            if (lista.length > 0) {
+                ti.append("<option value='0'>[Seleccione]</option>");
+            } else {
+                ti.append("<option value='0'>[]</option>");
+            }
+            for (var i = 0; i < lista.length; i++) {
+                var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                ti.append(item);
+            }
+        });
+    });
+
+
+
+
+    /*Datos Academicos*/
     $("#rg").change(function() {
         var ti = $("#ti_inst");
         ti.empty();

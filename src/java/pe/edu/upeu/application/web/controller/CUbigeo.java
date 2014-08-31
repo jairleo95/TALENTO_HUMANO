@@ -17,14 +17,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import pe.edu.upeu.application.dao.Carrera_UniversidadDAO;
+import pe.edu.upeu.application.dao.UbigeoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceCarrera_UniversidadDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceUbigeoDAO;
 
 /**
  *
  * @author Alfa.sistemas
  */
-@WebServlet(name = "CCarrera_Institucion", urlPatterns = {"/detalle_carrera"})
-public class CCarrera_Institucion extends HttpServlet {
+@WebServlet(name = "CUbigeo", urlPatterns = {"/ubigeo"})
+public class CUbigeo extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,34 +42,28 @@ public class CCarrera_Institucion extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        
-        
+
         Map<String, Object> rpta = new HashMap<String, Object>();
-        InterfaceCarrera_UniversidadDAO model = new Carrera_UniversidadDAO();
+
+        InterfaceUbigeoDAO ub = new UbigeoDAO();
+        InterfaceCarrera_UniversidadDAO c = new Carrera_UniversidadDAO();
         String opc = request.getParameter("opc");
+
         try {
-
-            if (opc.equals("institucion")) {
-                String id = request.getParameter("ti");
-                List<Map<String, ?>> lista = model.Istitucion(id);
+            if (opc.equals("dep_nac")) {
+                String id_dep = request.getParameter("id_dep");
+                List<Map<String, ?>> lista = ub.Provincia(id_dep);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
-            }
-            if (opc.equals("ti_inst")) {
-                String reg = request.getParameter("regimen");
 
-                List<Map<String, ?>> lista = model.Tipo_Institucion(reg);
+            }
+            if (opc.equals("pro_nac")) {
+                String id = request.getParameter("id_dist");
+                List<Map<String, ?>> lista = ub.Distrito(id);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
-            }
-            if (opc.equals("carrera")) {
-                String reg = request.getParameter("inst");
 
-                List<Map<String, ?>> lista = model.Carrera(reg);
-                rpta.put("rpta", "1");
-                rpta.put("lista", lista);
             }
-
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());

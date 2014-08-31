@@ -34,7 +34,6 @@
             Statement stmt3 = null;
             Statement stmt4 = null;
             Statement stmt = null;
-
             stmt2 = cx.createStatement();
             rs2 = stmt2.executeQuery("select table_name, column_name,data_type,data_length,column_id from user_tab_columns order by table_name,column_id");
 

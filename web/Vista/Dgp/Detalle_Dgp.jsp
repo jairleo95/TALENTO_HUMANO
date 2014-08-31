@@ -23,7 +23,7 @@
         <title>Detalle DGP</title>
         
         <style type="text/css">
-            body{
+          /*  body{
                 background-color: #D2E0E6;
             }
             
@@ -36,7 +36,7 @@
             .td-det{ 
             font-weight:bold ;
             text-align: right;
-            }
+            }*/
             
         </style>
     </head>
@@ -44,7 +44,7 @@
         
        
         <form>
-        <table class="tab_det">
+        <table class="table">
             
              <% for (int i = 0; i < LIST_ID_DGP.size(); i++) {
              V_Det_DGP d = new V_Det_DGP();

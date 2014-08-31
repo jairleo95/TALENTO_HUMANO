@@ -60,7 +60,7 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("List_Carrera", li.List_Carrera());
             getServletContext().setAttribute("List_Nacionalidad", li.List_Nacionalidad());
             getServletContext().setAttribute("List_Universidad", li.List_Universidad());
-            getServletContext().setAttribute("List_Distrito", ub.List_Distrito());
+            getServletContext().setAttribute("List_Departamento", ub.List_Departamento());
             getServletContext().setAttribute("List_Situacion_Educativa", li.List_Situacion_Educativa());
             response.sendRedirect("Vista/Trabajador/Reg_Trabajador.jsp");
 

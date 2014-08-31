@@ -26,5 +26,5 @@ public interface InterfaceDocumentoDAO {
     public int List_Adventista (String id_trabajador);
     public int List_Req_nacionalidad(String id_trabajador);
     public List<V_Reg_Dgp_Tra> List_doc_req_pla(String iddg,String idtra);
-    
+     public void INSERT_DOCUMENTO_ADJUNTO(String ID_DOCUMENTO_ADJUNTO, String ID_DGP, String ID_DOCUMENTOS, String ES_DOCUMENTO_ADJUNTO, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String DE_DOCUMENTO_ADJUNTO, String AR_DATO_ARCHIVO, String NO_ARCHIVO, String TA_ARCHIVO, String AR_FILE_TYPE);
 }

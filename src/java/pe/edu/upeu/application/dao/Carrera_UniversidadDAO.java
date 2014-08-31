@@ -25,7 +25,6 @@ public class Carrera_UniversidadDAO implements InterfaceCarrera_UniversidadDAO {
     @Override
     public List<Map<String, ?>> Tipo_Institucion(String id_reg) {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
-
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "select id_tipo_institucion,no_tipo_institucion,co_regimen  from rhtr_tipo_institucion where trim(co_regimen)='" + id_reg.trim() + "'";
@@ -41,7 +40,7 @@ public class Carrera_UniversidadDAO implements InterfaceCarrera_UniversidadDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR: ...");
+            throw new RuntimeException("ERROR");
         } finally {
             try {
                 this.conn.close();

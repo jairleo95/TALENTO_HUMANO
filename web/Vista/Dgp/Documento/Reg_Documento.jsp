@@ -85,8 +85,6 @@
                         for (int z = 0; z < List_doc_req_pla.size(); z++) {
                             V_Reg_Dgp_Tra d = new V_Reg_Dgp_Tra();
                             d = (V_Reg_Dgp_Tra) List_doc_req_pla.get(z);
-                            
-                           out.println(d.getIddgp());
                     %>
 
                     <%  if (d.getTi_documento().trim().equals("DOCA")) {%>
@@ -130,7 +128,7 @@
                             <% } else { %>
                             <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
 
-                                <img src="../Imagenes/Aprobado.png" width="20" height="20">
+                                <img src="../../../Imagenes/Aprobado.png" width="20" height="20">
                                 <%
                                 } else {
                                     out.println(d.getEs_documento_adjunto().trim());
@@ -185,9 +183,10 @@
 
                         <label class="null">No Registrado</label>
                         <% } else { %>
-                        <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
+                        <label><% if (d.getEs_documento_adjunto().trim().equals("1")) {
+                            %>
 
-                            <img src="../Imagenes/Aprobado.png" width="20" height="20">
+                            <img src="../../../Imagenes/Checkmark.jpg" width="20" height="20">
                             <%
                             } else {
                                 out.println(d.getEs_documento_adjunto().trim());
@@ -198,7 +197,6 @@
                     </td>
                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
                 </tr>  
-
 
 
                 <%}
@@ -256,7 +254,7 @@
                         <% } else { %>
                         <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
 
-                            <img src="../Imagenes/Aprobado.png" width="20" height="20">
+                            <img src="../../../Imagenes/Aprobado.png" width="20" height="20">
                             <%
                             } else {
                                 out.println(d.getEs_documento_adjunto().trim());
@@ -319,7 +317,7 @@
                         <% } else { %>
                         <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
 
-                            <img src="../Imagenes/Aprobado.png" width="20" height="20">
+                            <img src="../../../Imagenes/Aprobado.png" width="20" height="20">
                             <%
                             } else {
                                 out.println(d.getEs_documento_adjunto().trim());
@@ -328,7 +326,7 @@
                                     }
                                 }%>
                     </td>
-                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
+                <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
                 </tr>  
 
                 <%
@@ -340,10 +338,7 @@
 
                 <%} else if (!d.getTi_documento().trim().equals("DNIH") & !d.getTi_documento().trim().equals("DNIC") & !d.getTi_documento().trim().equals("ACMA") & !d.getTi_documento().trim().equals("COFE") & !d.getTi_documento().trim().equals("DOCA")) {
                 %>
-
-
                 <tr>
-
                     <td class="caji"><strong><%=d.getDocumento()%></strong></td>
 
                     <td class="caji">
@@ -354,11 +349,9 @@
                         <label class="null">No Registrado</label>
                         <% } else {%>
                         <a href="Ver_Doc.php?iddoc=<? echo $list_d[$z][25]; ?>"><%=d.getNo_archivo()%></a>
-
                         <% }
                             } %>
                     </td>
-
                     <td class="caji">
                         <% if (d.getDe_documento_adjunto() == null & rol.trim().equals("ROL-0002")) {%>
                         <input type="text" name="lob_description<%=i + 1%>">
@@ -380,8 +373,7 @@
                         <label class="null">No Registrado</label>
                         <% } else { %>
                         <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
-
-                            <img src="../Imagenes/Aprobado.png" width="20" height="20">
+                            <img src="../../../Imagenes/Aprobado.png" width="20" height="20">
                             <%
                             } else {
                                 out.println(d.getEs_documento_adjunto().trim());
@@ -390,18 +382,18 @@
                                     }
                                 }%>
                     </td>
-
-                  <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
+                <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
                 </tr>  
-
+                <input type="hidden" name="iddgp" value="<%=d.getIddgp()%>">
+                <input type="hidden" name="idtr" value="<%=d.getId_trabajador().trim()%>">
                 <% }
 
                         i++;
                     }%>
 
-                <input type="hidden" name="iddgp" value="<%%>">
-                <input type="hidden" name="idtr" value="<? echo $idtra; ?>">
-                
+
+
+
                 <input type="hidden" name="num" value="<%=i + 1%>">
                 <% if (rol.trim().equals("ROL-0002")) { %>
                 <tr><td><input type="submit" value="Registrar" name="opc"></td></tr>

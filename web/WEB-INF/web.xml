@@ -56,6 +56,7 @@
         <servlet-name>CCarrera_Universidad</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CCarrera_Universidad</servlet-class>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
         <url-pattern>/trabajador</url-pattern>
@@ -112,6 +113,7 @@
         <servlet-name>CCarrera_Universidad</servlet-name>
         <url-pattern>/carrera_universidad</url-pattern>
     </servlet-mapping>
+   
     <session-config>
         <session-timeout>
             30

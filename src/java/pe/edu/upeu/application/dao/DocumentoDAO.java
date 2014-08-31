@@ -5,6 +5,7 @@
  */
 package pe.edu.upeu.application.dao;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -241,6 +242,33 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
             this.conn.close();
         }
         return x;
+    }
+
+    @Override
+    public void INSERT_DOCUMENTO_ADJUNTO(String ID_DOCUMENTO_ADJUNTO, String ID_DGP, String ID_DOCUMENTOS, String ES_DOCUMENTO_ADJUNTO, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String DE_DOCUMENTO_ADJUNTO, String AR_DATO_ARCHIVO, String NO_ARCHIVO, String TA_ARCHIVO, String AR_FILE_TYPE) {
+        ConexionBD conn;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DOCUMENTO_ADJUNTO( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+            cst.setString(1, null);
+            cst.setString(2, ID_DGP);
+            cst.setString(3, ID_DOCUMENTOS);
+            cst.setString(4, ES_DOCUMENTO_ADJUNTO);
+            cst.setString(5, US_CREACION);
+            cst.setString(6, FE_CREACION);
+            cst.setString(7, US_MODIF);
+            cst.setString(8, FE_MODIF);
+            cst.setString(9, IP_USUARIO);
+            cst.setString(10, DE_DOCUMENTO_ADJUNTO);
+            cst.setString(11, AR_DATO_ARCHIVO);
+            cst.setString(12, NO_ARCHIVO);
+            cst.setString(13, TA_ARCHIVO);
+            cst.setString(14, AR_FILE_TYPE);
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        }
     }
 
 }

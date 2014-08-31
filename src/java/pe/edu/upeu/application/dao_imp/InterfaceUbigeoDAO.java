@@ -7,6 +7,7 @@
 package pe.edu.upeu.application.dao_imp;
 
 import java.util.List;
+import java.util.Map;
 import pe.edu.upeu.application.model.Ub_Departamento;
 import pe.edu.upeu.application.model.Ub_Provincia;
 import pe.edu.upeu.application.model.V_Ubigeo;
@@ -19,4 +20,8 @@ public interface InterfaceUbigeoDAO {
     public List<V_Ubigeo> List_Distrito();
     public List<Ub_Provincia> List_Provincia();
     public List<Ub_Departamento> List_Departamento();
+   
+    public List<Map<String,?>> Provincia(String id);
+    public List<Map<String,?>> Distrito(String id);
+    
 }
