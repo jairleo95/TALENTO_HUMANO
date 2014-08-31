@@ -355,21 +355,21 @@
                     </td></tr>  
                 <tr><td>Tipo de Institución</td><td>
                         <div class="item">
-                            <select name="" id="ti_inst" class="text-box required" required="">
+                            <select name="" id="ti_inst" required="">
                                 <option value="">--------</option>
                             </select></div>
                     </td></tr>  
 
                 <tr><td>Institución:</td><td>
                         <div class="item0">
-                            <select name="CENTRO_DE_ESTUDIO" id="inst" class="text-box chosen-select required"  required=""> 
+                            <select name="CENTRO_DE_ESTUDIO" id="inst"  required=""> 
                                 <option value="">----</option>
                             </select>
                         </div>
                     </td></tr>
                 <tr><td>Carrera:(Modificar)</td><td>
                         <div class="item0">
-                            <select name="CARRERA"  id="carrera" class="text-box chosen-select required" required="">
+                            <select name="CARRERA"  id="carrera"  required="">
                                 <option value=""></option>
                             </select>
                         </div>
@@ -661,7 +661,7 @@
         var data = "regimen=" + rg + "&opc=ti_inst";
 
         ti.append('<option value="">Cargando...</option>').val('');
-        $.post("../../carrera_universidad", data, function(objJson) {
+        $.post("../../detalle_carrera", data, function(objJson) {
             ti.empty();
             if (objJson.rpta == -1) {
                 alert(objJson.mensaje);
@@ -690,7 +690,7 @@
          }*/
         var data = "sucursal=" + sucursal + "&opc=institucion";
         cboCuenta.append('<option value="">Cargando...</option>').val('');
-        $.post("../../carrera_universidad", data, function(objJson) {
+        $.post("../../detalle_carrera", data, function(objJson) {
             cboCuenta.empty();
             if (objJson.rpta == -1) {
                 alert(objJson.mensaje);
@@ -717,7 +717,7 @@
          }*/
         var data = "inst=" + sucursal + "&opc=carrera";
         cboCuenta.append('<option value="">Cargando...</option>').val('');
-        $.post("../../carrera_universidad", data, function(objJson) {
+        $.post("../../detalle_carrera", data, function(objJson) {
             cboCuenta.empty();
             if (objJson.rpta == -1) {
                 alert(objJson.mensaje);

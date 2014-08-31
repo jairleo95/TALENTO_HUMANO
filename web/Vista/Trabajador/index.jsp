@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>COMBOS ANIDADOS</h1>
-        <form id="form">
+        <form id="form" >
 
             <label>Regimen</label><br/>
             <select id="rg">
@@ -41,7 +41,7 @@
             var data = "regimen=" + rg+"&opc=ti_inst";
 
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../carrera_universidad", data, function(objJson) {
+            $.post("../../detalle_carrera", data, function(objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -51,7 +51,7 @@
                 if (lista.length > 0) {
                     ti.append("<option value='0'>[Seleccione]</option>");
                 } else {
-                    ti.append("<option value='0'>[No hay cuentas]</option>");
+                    ti.append("<option value='0'>[]</option>");
                 }
                 for (var i = 0; i < lista.length; i++) {
                     var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
@@ -70,7 +70,7 @@
              }*/
             var data = "sucursal=" + sucursal+"&opc=institucion";
             cboCuenta.append('<option value="">Cargando...</option>').val('');
-            $.post("../../carrera_universidad", data, function(objJson) {
+            $.post("../../detalle_carrera", data, function(objJson) {
                 cboCuenta.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -97,7 +97,7 @@
              }*/
             var data = "inst=" + sucursal+"&opc=carrera";
             cboCuenta.append('<option value="">Cargando...</option>').val('');
-            $.post("../../carrera_universidad", data, function(objJson) {
+            $.post("../../detalle_carrera", data, function(objJson) {
                 cboCuenta.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -107,7 +107,7 @@
                 if (lista.length > 0) {
                     cboCuenta.append("<option value='0'>[Seleccione]</option>");
                 } else {
-                    cboCuenta.append("<option value='0'>[No hay cuentas]</option>");
+                    cboCuenta.append("<option value='0'>[]</option>");
                 }
                 for (var i = 0; i < lista.length; i++) {
                     var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
