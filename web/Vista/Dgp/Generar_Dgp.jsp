@@ -4,13 +4,15 @@
 <html>
     <head>
         <meta charset="windows-1252">
+        
+        <link rel="stylesheet" href="../../css1/bootstrap.min.css">
         <title></title>
     </head>
     <body>
  
                 <center>
                 <div class="spacing">
-                <center><h1 class="spacing"><%
+                <center><h3><%
                 HttpSession sesion= request.getSession(true);
                 String idreq = "";
                 String text = request.getParameter("text");
@@ -31,25 +33,38 @@
                     idreq = "REQ-0003";
                 }
                     %>
-                </h1></center>
+                </h3></center>
                 </div>
                 <div >
             
-                <form method="post" action="../../trabajador">
-                    <table style="width: 80%; " >
-                        <td>Nombres: <input type="text"  class="text-box"  name="nom"></td>
-                        <td>Apellido Paterno: <input type="text"  class="text-box"  name="ape_pat"></td>
-                        <td>Apellidos Materno: <input type="text"  class="text-box"  name="ape_mat"></td>
-                        <td>DNI : <input type="text" class="text-box" onKeyPress="return checkIt(event)" name="dni"></td>
-                        
+                <form method="post" action="../../trabajador" class="form-inline">                    
+                    
+                        <div class="form-group">
+                            <label class="control-label">Nombres:</label><br>
+                            <input type="text"  class="form-control"  name="nom">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" >Apellido Paterno:</label><br>
+                            <input type="text"  class="form-control"  name="ape_pat">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" >Apellido Materno:</label><br>
+                            <input type="text"  class="form-control"  name="ape_mat">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" >DNI:</label><br>
+                            <input type="text"  class="form-control"  onKeyPress="return checkIt(event)" name="dni">
+                        </div>
                         <input type="hidden" name="opc" value="Buscar">
                         <input type="hidden" name="busc" value="Busc">
                         <input type="hidden" name="text" value="<%=text%>">
-                        <td><input class="button blue"  type="submit" name="busqueda"  value="Buscar"></td>
-                        <!--<td><input class="button blue"  type="submit" name="all"  value="Todos"></td>
-                        --><td><a class="button blue"href="?cancel=true&text=<%=text%>"  >Cancelar</a></td>
-                        </tr>
-                    </table>
+                        <div class="form-group">
+                            <br>
+                         <input class="btn btn-primary"  type="submit" name="busqueda"  value="Buscar">
+                     
+                         <a href="?cancel=true&text=<%=text%>" class="btn btn-default" role="button">Cancelar</a>
+                        </div>
+                   
                 </form>
             </div>
             <%                int count = ListarTrabajador2.size();
