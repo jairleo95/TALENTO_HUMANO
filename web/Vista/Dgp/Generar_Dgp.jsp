@@ -34,7 +34,9 @@
                 }
                     %>
                 </h3></center>
+                
                 </div>
+                <hr/>
                 <div >
             
                 <form method="post" action="../../trabajador" class="form-inline">                    
@@ -67,6 +69,7 @@
                    
                 </form>
             </div>
+            <hr/>
             <%                int count = ListarTrabajador2.size();
                 String cancel = request.getParameter("cancel");
                 if (cancel != null) {
@@ -77,11 +80,11 @@
 
                     if (count == 0) {
             %>
-            <h1>No se encontraron registros...</h1>
+            <strong>No se encontraron registros...</strong>
             <%}
                 if (count > 0) {%>
-            <table class="tinytable"   >
-                <tr class="tab_cabe">
+            <table class="table-responsive"   >
+                <tr>
                     <td>Nro</td>
                     <td>Foto</td>
                     <td>Nombre</td>
