@@ -44,6 +44,59 @@
                     function() {
                         $(".doc").attr("maxlength", "8");
                         $(".doc").val("");
+                        $("#nac").change(
+                                function() {
+                                    if ($("#nac").val() != "NAC-0044") {
+                                        $("#dist").hide();
+                                    }
+                                    if ($("#nac").val() == "NAC-0044") {
+
+                                        $("#dist").show();
+                                    }
+                                }
+                        );
+
+                        $("#sit_edu").change(function() {
+                            if ($("#sit_edu").val() == 'SED-0011' | $("#sit_edu").val() == 'SED-0013' | $("#sit_edu").val() == 'SED-0014'
+                                    | $("#sit_edu").val() == 'SED-0015'
+                                    | $("#sit_edu").val() == 'SED-0016' | $("#sit_edu").val() == 'SED-0017'
+                                    | $("#sit_edu").val() == 'SED-0017' | $("#sit_edu").val() == 'SED-0018'
+                                    | $("#sit_edu").val() == 'SED-0019' | $("#sit_edu").val() == 'SED-0020'
+                                    | $("#sit_edu").val() == 'SED-0021') {
+
+                                $("#es_inst_p").show();
+
+                            }
+                            else {
+                                $("#es_inst_p").hide();
+                                 $("#regimen").hide();
+                                 $("#egreso").hide();
+                                 $("#ti").hide();
+                                 $("#institucion").hide();
+                                 $("#carr").hide();
+
+                            }
+
+                        });
+
+                        $("#es_inst_p").change(function() {
+                            if ($("#inst_peru").val() == "1") {
+                                 $("#regimen").show();
+                                 $("#egreso").show();
+                                 $("#ti").show();
+                                 $("#institucion").show();
+                                 $("#carr").show();
+                            }else{
+                                  $("#regimen").hide();
+                                 $("#egreso").hide();
+                                 $("#ti").hide();
+                                 $("#institucion").hide();
+                                 $("#carr").hide();
+                                
+                            }
+
+                        });
+
                         $(".select-doc").change(
                                 function() {
                                     $(".doc").val("");
@@ -141,9 +194,9 @@
 
 
                 <tr><td colspan="4"><div class="sub_title"><label class="label">Datos Personales</label></div></td></tr>
-                <tr ><td>Apellido Paterno:</td><td>
+                <tr ><td >Apellido Paterno:</td><td>
                         <div class="item">
-                            <input type="text" name="APELLIDO_P"  required=""  class="text-box"  >
+                            <input type="text" name="APELLIDO_P"  required=""  class="text-box"  onkeyup="this.value = this.value.toUpperCase()" >
                             <div class='tooltip help'>
                                 <span>?</span>
                                 <div class='content'>
@@ -156,7 +209,7 @@
                 <tr><td>Apellido Materno:</td><td>
 
                         <div class="item">
-                            <input type="text" name="APELLIDO_M" required="" class="text-box" >
+                            <input type="text" name="APELLIDO_M" required=""  class="text-box" onkeyup="this.value = this.value.toUpperCase()">
                             <div class='tooltip help'>
                                 <span>?</span>
                                 <div class='content'>
@@ -169,7 +222,7 @@
                 <tr><td>Nombres:</td><td>
 
                         <div class="item">
-                            <input type="text" name="NOMBRES" class="text-box" required="" >
+                            <input type="text" name="NOMBRES" class="text-box" required="" onkeyup="this.value = this.value.toUpperCase()">
                             <div class='tooltip help'>
                                 <span>?</span>
                                 <div class='content'>
@@ -204,7 +257,7 @@
 
                 </tr>   
                 <tr><td>Nacionalidad:</td><td>
-                        <select name="NACIONALIDAD" class="text-box chosen-select"   required="">
+                        <select name="NACIONALIDAD" class="text-box chosen-select" id="nac"  required="">
                             <option value="" > </option>
                             <%for (int s = 0; s < List_Nacionalidad.size(); s++) {
                                     Nacionalidad nac = new Nacionalidad();
@@ -217,7 +270,7 @@
                             <%}
                                 }%>
                         </select></td></tr>  
-                <tr><td>Distrito:</td><td>
+                <tr id="dist"><td>Distrito:</td><td>
                         <select name="DISTRITO" class="text-box chosen-select"  required="">
                             <option value="" >-----</option>
                             <%for (int index = 0; index < List_Distrito.size(); index++) {
@@ -278,7 +331,7 @@
 
                         <div class="item">
 
-                            <input type="email" name="CORREO_INST"  class="text-box email" >
+                            <input type="email" name="CORREO_INST" required="" class="text-box email" >
                         </div>
 
 
@@ -323,7 +376,7 @@
 
                 <tr><td>Situación Educativa</td><td>
                         <div class="item">
-                            <select name="NIVEL_EDUCATIVO" class="text-box required" required="">
+                            <select name="NIVEL_EDUCATIVO"  id="sit_edu" class="text-box required" required="">
                                 <option value="">------</option>
                                 <%for (int s = 0; s < List_Situacion_Educativa.size(); s++) {
                                         Situacion_Educativa e = new Situacion_Educativa();
@@ -335,46 +388,46 @@
                             </select></div>
                     </td></tr>   
 
-                <tr><td>¿Estudio en una institucion educativa del Perú?</td><td>
+                <tr id="es_inst_p"style="display: none"><td>¿Estudio en una institucion educativa del Perú?</td><td>
                         <div class="item">
-                            <select name="" class="text-box required" required="">
+                            <select name="" id="inst_peru" class="text-box required" required="">
                                 <option value="">--------</option>
                                 <option value="1">Si</option>
                                 <option value="2">No</option>
 
                             </select></div>
                     </td></tr>  
-                <tr><td>Regimen de la Institución Educativa</td><td>
+                <tr id="regimen" style="display: none"><td>Regimen de la Institución Educativa</td><td>
                         <div class="item">
-                            <select name="" id="rg" class="text-box required" required="">
+                            <select name="" id="rg" class="text-box required" required="" >
                                 <option value="">--------</option>
                                 <option value="1">Publica</option>
                                 <option value="2">Privada</option>
 
                             </select></div>
                     </td></tr>  
-                <tr><td>Tipo de Institución</td><td>
+                <tr id="ti"style="display: none" ><td>Tipo de Institución</td><td>
                         <div class="item">
-                            <select name="" id="ti_inst" required="">
+                            <select name="" id="ti_inst" class="text-box" >
                                 <option value="">--------</option>
                             </select></div>
                     </td></tr>  
 
-                <tr><td>Institución:</td><td>
-                        <div class="item0">
-                            <select name="CENTRO_DE_ESTUDIO" id="inst"  required=""> 
+                <tr id="institucion"style="display: none"><td>Institución:</td><td>
+                        <div class="item">
+                            <select name="CENTRO_DE_ESTUDIO" id="inst"  class="text-box"> 
                                 <option value="">----</option>
                             </select>
                         </div>
                     </td></tr>
-                <tr><td>Carrera:(Modificar)</td><td>
-                        <div class="item0">
-                            <select name="CARRERA"  id="carrera"  required="">
-                                <option value=""></option>
+                <tr id="carr"style="display: none"><td>Carrera:</td><td>
+                        <div class="item">
+                            <select name="CARRERA"  id="carrera"  class="text-box">
+                                <option value="">-----</option>
                             </select>
                         </div>
                     </td></tr>
-                <tr><td>Año Egreso(Nuevo)</td><td>   <div class="item"><input type="text" name="" id="" class="text-box" required=""></div></td></tr> 
+                <tr id="egreso" style="display: none"><td>Año Egreso(Nuevo)</td><td>   <div class="item"><input type="text" name="" id="" class="text-box"></div></td></tr> 
 
                 <tr><td>Tipo Hora Pago Referencial:</td><td><input type="text" name="TIPO_HORA_PAGO_REFEERENCIAL"  value="0" class="text-box" ></td></tr> 
                 <tr><td>Otros Estudios:</td><td colspan="3"><textarea name="OTROS_ESTUDIOS" class="text-box" cols="60" rows="6"></textarea></td></tr> 
@@ -438,7 +491,7 @@
                                 <%}%></select>
                         </div>
                         <button onclick="duplicar();
-                return false;" class="btn-duplicar" >duplicar</button></td></tr>
+                                return false;" class="btn-duplicar" >duplicar</button></td></tr>
 
 
 
@@ -535,8 +588,6 @@
                 <tr><td>Telefono/Celular:</td><td><input type="text" name="AUT_CELULAR" class="text-box" ></td></tr>   
                 <tr><td>Observaciones:</td><td> <textarea  name="OBSERVACIONES" class="text-box" cols="60" rows="6"></textarea></td></tr> 
                 <input type="hidden" value="<%=iduser%>" name="USER_CREACION" class="text-box" >
-                <input type="hidden" value="" name="FECHA_CREACION" class="text-box" >
-                <input type="hidden" value="" name="USUARIO_IP" class="text-box" >
                 <tr><td colspan="2"><input type="submit" name="opc"  class="submit" value="Registrar"></td></tr> 
             </table></form></center><br><br>
 </body>
@@ -545,60 +596,60 @@
 <script src="../../js/chosen.jquery.js" type="text/javascript"></script>
 <script src="../../js/prism.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
-            var config = {
-                '.chosen-select': {},
-                '.chosen-select-deselect': {allow_single_deselect: true},
-                '.chosen-select-no-single': {disable_search_threshold: 10},
-                '.chosen-select-no-results': {no_results_text: 'Oops, nothing found!'},
-                '.chosen-select-width': {width: "95%"}
-            }
-            for (var selector in config) {
-                $(selector).chosen(config[selector]);
-            }
+                            var config = {
+                                '.chosen-select': {},
+                                '.chosen-select-deselect': {allow_single_deselect: true},
+                                '.chosen-select-no-single': {disable_search_threshold: 10},
+                                '.chosen-select-no-results': {no_results_text: 'Oops, nothing found!'},
+                                '.chosen-select-width': {width: "95%"}
+                            }
+                            for (var selector in config) {
+                                $(selector).chosen(config[selector]);
+                            }
 </script>
 <script src="../../js/Js_Validar/multifield.js"></script>
 <script src="../../js/Js_Validar/validator.js"></script>
 <script>
-            // initialize the validator function
-            validator.message['date'] = 'not a real date';
+                            // initialize the validator function
+                            validator.message['date'] = 'not a real date';
 
-            // validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
-            $('form')
-                    .on('blur', 'input[required], input.optional, select.required', validator.checkField)
-                    .on('change', 'select.required', validator.checkField)
-                    .on('keypress', 'input[required][pattern]', validator.keypress);
+                            // validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
+                            $('form')
+                                    .on('blur', 'input[required], input.optional, select.required', validator.checkField)
+                                    .on('change', 'select.required', validator.checkField)
+                                    .on('keypress', 'input[required][pattern]', validator.keypress);
 
-            $('.multi.required')
-                    .on('keyup blur', 'input', function() {
-                validator.checkField.apply($(this).siblings().last()[0]);
-            });
+                            $('.multi.required')
+                                    .on('keyup blur', 'input', function() {
+                                        validator.checkField.apply($(this).siblings().last()[0]);
+                                    });
 
-            // bind the validation to the form submit event
-            //$('#send').click('submit');//.prop('disabled', true);
+                            // bind the validation to the form submit event
+                            //$('#send').click('submit');//.prop('disabled', true);
 
-            $('form').submit(function(e) {
-                e.preventDefault();
-                var submit = true;
-                // evaluate the form using generic validaing
-                if (!validator.checkAll($(this))) {
-                    submit = false;
-                }
+                            $('form').submit(function(e) {
+                                e.preventDefault();
+                                var submit = true;
+                                // evaluate the form using generic validaing
+                                if (!validator.checkAll($(this))) {
+                                    submit = false;
+                                }
 
-                if (submit)
-                    this.submit();
-                return false;
-            });
+                                if (submit)
+                                    this.submit();
+                                return false;
+                            });
 
-            /* FOR DEMO ONLY */
-            $('#vfields').change(function() {
-                $('form').toggleClass('mode2');
-            }).prop('checked', false);
+                            /* FOR DEMO ONLY */
+                            $('#vfields').change(function() {
+                                $('form').toggleClass('mode2');
+                            }).prop('checked', false);
 
-            $('#alerts').change(function() {
-                validator.defaults.alerts = (this.checked) ? false : true;
-                if (this.checked)
-                    $('form .alert').remove();
-            }).prop('checked', false);
+                            $('#alerts').change(function() {
+                                validator.defaults.alerts = (this.checked) ? false : true;
+                                if (this.checked)
+                                    $('form .alert').remove();
+                            }).prop('checked', false);
 </script>
 
 <script type="text/javascript">
@@ -671,7 +722,7 @@
             if (lista.length > 0) {
                 ti.append("<option value='0'>[Seleccione]</option>");
             } else {
-                ti.append("<option value='0'>[No hay cuentas]</option>");
+                ti.append("<option value='0'>[]</option>");
             }
             for (var i = 0; i < lista.length; i++) {
                 var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
@@ -682,56 +733,56 @@
 
 
     $("#ti_inst").change(function() {
-        var cboCuenta = $("#inst");
-        cboCuenta.empty();
-        var sucursal = $("#ti_inst").val();
+        var inst = $("#inst");
+        inst.empty();
+        var ti = $("#ti_inst").val();
         /* if (sucursal == '000') {
          return;
          }*/
-        var data = "sucursal=" + sucursal + "&opc=institucion";
-        cboCuenta.append('<option value="">Cargando...</option>').val('');
+        var data = "ti=" + ti + "&opc=institucion";
+        inst.append('<option value="">Cargando...</option>').val('');
         $.post("../../detalle_carrera", data, function(objJson) {
-            cboCuenta.empty();
+            inst.empty();
             if (objJson.rpta == -1) {
                 alert(objJson.mensaje);
                 return;
             }
             var lista = objJson.lista;
             if (lista.length > 0) {
-                cboCuenta.append("<option value='0'>[Seleccione]</option>");
+                inst.append("<option value='0'>[Seleccione]</option>");
             } else {
-                cboCuenta.append("<option value='0'>[No hay cuentas]</option>");
+                inst.append("<option value='0'>[]</option>");
             }
             for (var i = 0; i < lista.length; i++) {
                 var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                cboCuenta.append(item);
+                inst.append(item);
             }
         });
     });
     $("#inst").change(function() {
-        var cboCuenta = $("#carrera");
-        cboCuenta.empty();
-        var sucursal = $("#inst").val();
+        var carr = $("#carrera");
+        carr.empty();
+        var insti = $("#inst").val();
         /* if (sucursal == '000') {
          return;
          }*/
-        var data = "inst=" + sucursal + "&opc=carrera";
-        cboCuenta.append('<option value="">Cargando...</option>').val('');
+        var data = "inst=" + insti + "&opc=carrera";
+        carr.append('<option value="">Cargando...</option>').val('');
         $.post("../../detalle_carrera", data, function(objJson) {
-            cboCuenta.empty();
+            carr.empty();
             if (objJson.rpta == -1) {
                 alert(objJson.mensaje);
                 return;
             }
             var lista = objJson.lista;
             if (lista.length > 0) {
-                cboCuenta.append("<option value='0'>[Seleccione]</option>");
+                carr.append("<option value='0'>[Seleccione]</option>");
             } else {
-                cboCuenta.append("<option value='0'>[No hay cuentas]</option>");
+                carr.append("<option value='0'>[]</option>");
             }
             for (var i = 0; i < lista.length; i++) {
                 var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                cboCuenta.append(item);
+                carr.append(item);
             }
         });
     });

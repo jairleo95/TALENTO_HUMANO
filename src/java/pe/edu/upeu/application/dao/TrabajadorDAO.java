@@ -38,9 +38,9 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
 
             cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_TRABAJADOR( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
             cst.setString(1, null);
-            cst.setString(2, AP_PATERNO);
-            cst.setString(3, AP_MATERNO);
-            cst.setString(4, NO_TRABAJADOR);
+            cst.setString(2, AP_PATERNO.toUpperCase());
+            cst.setString(3, AP_MATERNO.toUpperCase());
+            cst.setString(4, NO_TRABAJADOR.toUpperCase());
             cst.setString(5, TI_DOC);
             cst.setString(6, NU_DOC);
             cst.setString(7, ES_CIVIL);

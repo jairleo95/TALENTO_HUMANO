@@ -46,7 +46,7 @@ public class CCarrera_Institucion extends HttpServlet {
         try {
 
             if (opc.equals("institucion")) {
-                String id = request.getParameter("sucursal");
+                String id = request.getParameter("ti");
                 List<Map<String, ?>> lista = model.Istitucion(id);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
