@@ -52,6 +52,10 @@
         <servlet-name>CFamiliar</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CFamiliar</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CCarrera_Universidad</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CCarrera_Universidad</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
         <url-pattern>/trabajador</url-pattern>
@@ -103,6 +107,10 @@
     <servlet-mapping>
         <servlet-name>CFamiliar</servlet-name>
         <url-pattern>/familiar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CCarrera_Universidad</servlet-name>
+        <url-pattern>/carrera_universidad</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
