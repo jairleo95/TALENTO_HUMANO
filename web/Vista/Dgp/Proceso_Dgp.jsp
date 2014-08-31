@@ -145,7 +145,7 @@
                     <td><img src="Foto.php?idf=<? echo $idf; ?>"  width="60"  height="60"></td>
                         <% } %>
                     <td>   
-                        <div><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno()+" "+r.getAp_materno()+" "+r.getNo_trabajador()%></strong></a></div>
+                        <div><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase()+" "+r.getAp_materno().toUpperCase()+" "+r.getNo_trabajador().toUpperCase()%></strong></a></div>
                     </td>
                     <td>
                         <ul class="nav">
@@ -162,16 +162,7 @@
                                 </ul>
                             </li>
                         </ul>
-
-
-
                     </td> 
-
-
-
-
-
-
                     <!-- <td><a href="List_Coment.php?iddgp=<? //echo $list_dgp[$index][4];   ?>">Ver Comentarios</a></td>
                     -->
                 </tr>

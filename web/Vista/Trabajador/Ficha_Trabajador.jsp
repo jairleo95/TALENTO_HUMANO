@@ -104,7 +104,7 @@
                     <!--<td><img src="Foto.php?idf=<?echo $idf;?>"  width="80"  height="80"></td>-->
                     <% //}%>
 
-                    <td><div ><a href="../../trabajador?idtr=<%=tr.getId_trabajador()%>&opc=list"><%=tr.getAp_paterno() + " " + tr.getAp_materno() + " " + tr.getNo_trabajador()%></a></div></td>
+                    <td><div ><a href="../../trabajador?idtr=<%=tr.getId_trabajador()%>&opc=list"><%=tr.getAp_paterno().toUpperCase() + " " + tr.getAp_materno().toUpperCase() + " " + tr.getNo_trabajador().toUpperCase()%></a></div></td>
                     <td><%=tr.getNo_carrera()%></td>
                     <td>
                         <%

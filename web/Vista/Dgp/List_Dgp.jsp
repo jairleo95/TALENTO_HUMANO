@@ -82,7 +82,7 @@
                                     x =(X_List_det_dgp)List_Det_Dgp.get(i); %>
                                     <tr>
                                         <td><%out.print(i+1);%></td>
-                                        <td class="name"><a href="../Trabajador/Detalle_Trabajador.jsp"><%=x.getNo_trabajador()+" "+x.getAp_paterno()+" "+x.getAp_materno()%></a></td>
+                                        <td class="name"><a href="../../trabajador?idtr=<%=x.getId_trabajador()%>&opc=list"><%=x.getNo_trabajador().toUpperCase()+" "+x.getAp_paterno().toUpperCase()+" "+x.getAp_materno().toUpperCase()%></a></td>
                                         <td><%=x.getFe_desde()%></td>
                                         <td><%=x.getFe_hasta()%></td>
                                         <td><%=x.getCa_sueldo()%></td>

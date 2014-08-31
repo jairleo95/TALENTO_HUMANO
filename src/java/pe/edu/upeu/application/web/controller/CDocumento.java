@@ -39,8 +39,9 @@ public class CDocumento extends HttpServlet {
         String dgp = request.getParameter("iddgp");
         String idtr = request.getParameter("idtr");
         String opc = request.getParameter("opc");
+        
 
-        try {
+        /*try {*/
 
             if (opc.equals("Ver_Documento")) {
                 getServletContext().setAttribute("List_doc_req_pla", d.List_doc_req_pla(dgp, idtr));
@@ -51,19 +52,20 @@ public class CDocumento extends HttpServlet {
                 response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad);
             }
             if (opc.equals("Registrar")) {
-                
                 String iddgp=request.getParameter("iddgp");
                 int i=Integer.parseInt(request.getParameter("num"));
                 for (int j =1; j < i; j++) {
-                    String name=request.getParameter("lob_upload"+i);
-                    
+                    String name=request.getParameter("lob_upload"+j);
+                    String desc=request.getParameter("lob_description"+j);
+                    String iddoc=request.getParameter("iddoc"+j);
+                    out.println(iddoc);
                     
                     
                 }
             }
-        } finally {
+        /*} finally {
             out.close();
-        }
+        }*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

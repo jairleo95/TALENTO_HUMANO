@@ -70,7 +70,7 @@
         %>
     <center>
 
-        <form action="../Control/ControlDoc_Archivo.php" method="post" enctype="multipart/form-data">
+        <form action="../../../documento" method="post" >
             <table>
                 <thead>
                     <tr>
@@ -85,6 +85,8 @@
                         for (int z = 0; z < List_doc_req_pla.size(); z++) {
                             V_Reg_Dgp_Tra d = new V_Reg_Dgp_Tra();
                             d = (V_Reg_Dgp_Tra) List_doc_req_pla.get(z);
+                            
+                           out.println(d.getIddgp());
                     %>
 
                     <%  if (d.getTi_documento().trim().equals("DOCA")) {%>
@@ -137,7 +139,7 @@
                                         }
                                     }%>
                         </td>
-                <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getIddgp()%>">
+                <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
                 </tr>  
 
 
@@ -194,7 +196,7 @@
                                     }
                                 }%>
                     </td>
-                <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getIddgp()%>">
+                <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
                 </tr>  
 
 
@@ -263,7 +265,7 @@
                                     }
                                 }%>
                     </td>
-                <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getIddgp()%>">
+                <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
                 </tr>  
 
 
@@ -326,7 +328,7 @@
                                     }
                                 }%>
                     </td>
-                <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getIddgp()%>">
+                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
                 </tr>  
 
                 <%
@@ -389,7 +391,7 @@
                                 }%>
                     </td>
 
-                <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getIddgp()%>">
+                  <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
                 </tr>  
 
                 <% }
@@ -399,6 +401,7 @@
 
                 <input type="hidden" name="iddgp" value="<%%>">
                 <input type="hidden" name="idtr" value="<? echo $idtra; ?>">
+                
                 <input type="hidden" name="num" value="<%=i + 1%>">
                 <% if (rol.trim().equals("ROL-0002")) { %>
                 <tr><td><input type="submit" value="Registrar" name="opc"></td></tr>

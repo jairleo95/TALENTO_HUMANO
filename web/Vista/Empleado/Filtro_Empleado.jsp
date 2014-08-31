@@ -95,7 +95,7 @@ $idf=$mod_f->LIST_FOTO_TRABAJADOR($listra[$index][1]);*/
              %>
                 <tr>
                     <td><%out.print(i+1);%></td>
-                    <td class="name"><a href="../Trabajador/Detalle_Trabajador.jsp"><%=e.getNo_trabajador()+" "+e.getAp_paterno()+" "+e.getAp_materno()%></a></td>
+                    <td class="name"><a href="../../trabajador?idtr=<%=e.getId_trabajador()%>&opc=list"><%=e.getNo_trabajador().toUpperCase()+" "+e.getAp_paterno().toUpperCase()+" "+e.getAp_materno().toUpperCase()%></a></td>
                     <td><%=e.getNo_area() %></td>
                     <td><%=e.getNo_seccion()%></td>
                     <td><%=e.getNo_puesto()%></td>

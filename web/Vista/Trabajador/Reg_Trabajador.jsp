@@ -180,12 +180,10 @@
         <script type="text/javascript">
             Esperar();
         </script>
-        <label class="title">FICHA DE DATOS DEL TRABAJADOR <%=iduser%></label>
+        <label class="title">FICHA DE DATOS DEL TRABAJADOR </label>
 
 
-        <button onclick="alerta_dt_ingresados();">Hola</button>
-
-
+        <button onclick="alerta_dt_ingresados();">Mensaje</button>
         <br>
         <br>
         <form class="form" action="../../trabajador" method="post" novalidate="" > 
@@ -252,9 +250,7 @@
                             <br>
                             <p class="edad"><div class="alerta-req" style="display: none;">Es un menor de edad</div></p>
                         </div>
-
                     </td>
-
                 </tr>   
                 <tr><td>Nacionalidad:</td><td>
                         <select name="NACIONALIDAD" class="text-box chosen-select" id="nac"  required="">
@@ -280,7 +276,6 @@
                             <option value="<%=ub_dist.getId_distrito()%>"><%=ub_dist.getNo_distrito()%></option>
                             <%}%>
                         </select>
-
                     </td></tr> 
                 <tr><td> Documento:</td><td>
                         <div class="item">
@@ -292,8 +287,6 @@
                             </select>
                         </div> <div class="item">
                             <input type="text" name="NRO_DOC" class="text-box doc" id="doc" required=""></div></td></tr> 
-
-
                 <tr><td>Estado Civil:</td><td>
                         <div class="item">
                             <select name="ESTADO_CIVIL"  class="text-box required" required="">
@@ -333,9 +326,6 @@
 
                             <input type="email" name="CORREO_INST" required="" class="text-box email" >
                         </div>
-
-
-
                     </td></tr>    
                 <tr><td>Sistema Pensionario:</td><td>
                         <div class="item">
