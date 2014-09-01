@@ -23,35 +23,37 @@
         <title>Detalle DGP</title>
         
         <style type="text/css">
-            body{
-                background-color: #D2E0E6;
+
+            
+            table{
+            //font-weight:bold ;
+            width: 50px;
             }
             
-            .tab_det{
-                margin-top: 0px;
-               // margin-left: 5%;
-               // font-family: cursive;
-               //font-size:18px;
-            }
-            .td-det{ 
-            font-weight:bold ;
-            text-align: right;
+            div{
+            font-family:verdana;
+            margin: 35px;
+            margin-left: 450px;
+            margin-right: 450px;
+            padding:10px;
+            border-radius:10px;
+            border:10px solid #BDCACF;    
             }
             
         </style>
     </head>
     <body><center>
-        
+         <div >
        
         <form>
-        <table class="tab_det">
-            
+           
+            <table class="table table-hover">
              <% for (int i = 0; i < LIST_ID_DGP.size(); i++) {
              V_Det_DGP d = new V_Det_DGP();
              d=(V_Det_DGP)LIST_ID_DGP.get(i);
              %>
             
-            <label style="color: red; //font-family: cursive;"><h2><%=d.getNo_req()%></h2></label>
+            <label style="color: black; //font-family: cursive;"><h2><%=d.getNo_req()%></h2></label>
          
             
             <tr><td class="td-det">Fecha Desde:</td><td><%=d.getFe_desde()%></td></tr>
@@ -134,6 +136,7 @@
                 <%}}%>
         </table>
             </form>
+         </div>
         </center>
     </body>
 </html>
