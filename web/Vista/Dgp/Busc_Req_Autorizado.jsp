@@ -15,35 +15,45 @@ HttpSession sesion =  request.getSession(true);
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
             <title>Requerimientos Autorizados</title>
+            <!--
             <link rel="stylesheet" href="../../css/Css_Sort/style.css" />
             <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
             <script type="text/javascript" src="../../js/JQuery/jquery-ui-1.8.16.custom.min.js"></script>
             <script type="text/javascript" src="../../js/Js_DGP/js_dgp_aut.js"></script>
             <link type="text/css" rel="stylesheet" href="../../css/Css_Reporte/Reportes.css">
             <link type="text/css" rel="stylesheet" href="../../css/Css_Formulario/form.css">
+            -->
+            <link rel="stylesheet" href="../../css1/bootstrap.min.css">
         </head>
-        <body class="body" style="height: 1024px;" >  
+        <body>  
 
             <div class="spacing">
-                <center><h1 class="spacing">REQUERIMIENTOS AUTORIZADOS</h1></center>
+                <center><h3 class="spacing">REQUERIMIENTOS AUTORIZADOS</h3></center>
             </div>
         <center>
-            <div id="content">
-                <div class="filtro">
+            <div style="width: 600px;">
+                
                     <form id="frm_filtro" method="post" action="">
-                        <table id="tab" >
-                            <tr>
-                                <td class="td-form"><strong>Fecha de Creación  del : </strong> </td>
-                                <td><input type="date"  class="text-box" name="del"  size="15" class="" /></td>
-                                <td class="td-form"><strong>al :</strong></td> 
-                                <td><input type="date" name="al" size="15" class="text-box" /></td>
-                            <input type="hidden" name="iddep" value="<? echo $_SESSION["DEPARTAMENTO_ID"]; ?>">
-                            </tr>
-                            <tr>
-                                <td class="td-form"><strong>Nombres y Apellidos :</strong></td><td><input type="text" class="text-box" name="nom_ape"   size="25" /></td>
-
-                                <td class="td-form"><strong>Area :</strong></td><td><select name="area" class="text-box">
-                                        <option value="0"></option>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label>Fecha inicio:</label><br>
+                                 <input type="date"  class="form-control" name="del"  />
+                            </div>
+                            <div class="col-xs-6">
+                                <label>Fecha fin:</label>
+                                <input type="date" name="al" class="form-control" />
+                                <input type="hidden" name="iddep" value="<? echo $_SESSION['DEPARTAMENTO_ID']; ?>">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">  
+                                <label>Nombres y Apellidos :</label>
+                                <input type="text" class="form-control" name="nom_ape"   size="25"/>
+                            </div>
+                            <div class="col-xs-6">  
+                                <label>Area :</label><br>
+                                <select name="area" class="form-control">
+                                     <option value="0"></option>
                                         <?
                                         require '../Modelo/ModeloRH_Area.php';
                                         $md_a = new ModelorRH_Area();
@@ -57,17 +67,27 @@ HttpSession sesion =  request.getSession(true);
                                             ?>
                                             <option value="<? echo $list_a[$u][0]; ?>"><? echo $list_a[$u][1]; ?></option>
                                         <? } ?>
-                                    </select></td>    
-                            </tr>
-                            <tr >
-                                <td class="td-form"><strong>Puesto :</strong></td><td><input type="text" name="puesto" class="text-box" size="25" /></td>
-                                <td class="td-form"><strong>Sueldo :</strong></td><td><input type="text" name="sueldo" class="text-box" size="25" /></td>
-                            </tr>
-                            <tr>
-                                <td class="td-form"><strong>Sección :</strong></td><td><input type="text" name="seccion" class="text-box"></td>
-                                <td class="td-form"><strong>Requerimiento :</strong></td>
-                                <td>
-                                    <select name="motivo" class="text-box" > 
+                                    </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-xs-6">
+                                <label>Puesto :</label>
+                                <input type="text" name="puesto" class="form-control" size="25" />
+                            </div>
+                            <div class="col-xs-6">
+                                 <label>Sueldo :</label>
+                                <input type="text" name="sueldo" class="form-control" size="25" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label>Sección :</label>
+                                <input type="text" name="seccion" class="form-control">
+                            </div>
+                            <div class="col-xs-6">
+                            <label>Requerimiento :</label>
+                            <select name="motivo" class="form-control" > 
                                         <option value="0"></option>
                                         <?
                                         require_once '../Modelo/ModeloRequerimiento.php';
@@ -78,12 +98,14 @@ HttpSession sesion =  request.getSession(true);
                                             ?>
                                             <option value="<? echo $list_r[$g][0]; ?>"><? echo $list_r[$g][1]; ?></option>
                                         <? } ?>
-                                    </select></td>
-                            </tr>
-                            <tr>
-                            <input type="hidden" name="iduser" value="<? echo $iduser; ?>">
-                            <td class="td-form"><strong>Proceso :</strong></td>
-                            <td><select name="proceso" class="text-box">
+                             </select>
+                             <input type="hidden" name="iduser" value="<? echo $iduser; ?>">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                            <label>Proceso :</label>
+                            <select name="proceso" class="form-control">
                                     <option value="0"></option>
                                     <?
                                     require_once '../Modelo/ModeloLista.php';
@@ -93,22 +115,34 @@ HttpSession sesion =  request.getSession(true);
                                         ?>
                                         <option value="<? echo $list_pro[$f][0]; ?>"><? echo $list_pro[$f][1]; ?></option>
                                     <? } ?>
-                                </select></td>
+                                </select>
+                            </div>
                             <? //if ($_SESSION["IDROL"] == 1) { ?>
-                                <td class="td-form">Departamento :</td>
-                                <td><select name="dep" class="text-box">
-                                        <option value="0"></option>
+                            <div class="col-xs-6">
+                            <label>Departamento :</label>
+                             <select name="dep" class="form-control">
+                                        <option value="0" ></option>
                                         <?  for ($kk = 0; $kk < count($list_d); $kk++) {?>
                                         <option value="<?echo $list_d[$kk][0]?>"><?echo $list_d[$kk][1];?></option>
                                             <?}?>
-                                    </select></td>
+                             </select>
+                            </div>
+                        </div>
                             <? //} ?>
-                            <td><button type="button" class="button blue" id="btnfiltrar">Buscar</button></td>
-                            <td><a href="javascript:;"  id="btncancel" class="button blue">Cancelar</a></td>
-                            </tr>
-                        </table>
+                         
+                                <hr/>
+             
+                         <div class="row">
+                            <div class="col-xs-6">                            
+                            <button type="button" class="btn btn-primary" id="btnfiltrar">Buscar</button>
+                            </div>
+                            <div class="col-xs-6">  
+                            <a href="javascript:;"  id="btncancel" class="btn btn-default">Cancelar</a>
+                            </div>
+                         </div>
+
                     </form>
-                </div>
+                
                 <br>
                 <br>
                 <div class="container">
