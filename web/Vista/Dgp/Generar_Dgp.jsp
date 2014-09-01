@@ -64,7 +64,7 @@
                     <br>
                     <input class="btn btn-primary"  type="submit" name="busqueda"  value="Buscar">
 
-                    <a href="?cancel=true&text=<%=text%>" class="btn btn-default" role="button">Cancelar</a>
+                    <a href="?cancel=true&text=<%=text%>" class="btn btn-primary" role="button">Cancelar</a>
                 </div>
 
             </form>
@@ -83,7 +83,7 @@
         <strong>No se encontraron registros...</strong>
         <%}
                 if (count > 0) {%>
-        <table class="table-responsive"   >
+        <table class="table table-hover"  >
             <tr>
                 <td>Nro</td>
                 <td>Foto</td>

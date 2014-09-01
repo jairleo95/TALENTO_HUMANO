@@ -10,6 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+        <link rel="stylesheet" href="../../css1/bootstrap.min.css">
         <title>Fichas de Trabajador</title>
         <link rel="stylesheet" href="../../css/Css_Trabajador/style.css" />
         <link type="text/css" rel="stylesheet" href="../../css/Css_Reporte/Reportes.css">
@@ -40,29 +41,40 @@
         </div>
     <center>
         <div class="container theme-showcase">
-            <table  style="width: 80%;" >
-                <tr>
-                    <!--<td style="width: 800px;  " colspan="2"> Lista de Fichas (<? //echo $s; ?>)</td>-->
-                    <td>Elaborar Ficha:</td><td><a href="../../trabajador?opc=Form_Reg"    class="button blue" >Agregar Nueva Ficha</a></td>    
-                    <!--<button onclick="Hola();">Hola</button>
-                    -->
-                </tr>
-                <tr>
-            </table>  
+           
+            <div class="form-group">
+                <label class="control-label">Elaborar Ficha</label>
+                <a href="../../trabajador?opc=Form_Reg"    class="btn btn-primary" role="button" >Agregar Nueva Ficha</a>   
+            </div>
             <div>
-                <form method="post" action="../../trabajador">
-                    <table style="width: 80%; " >
-                        <td>Nombres: <input type="text"  class="text-box"  name="nom"></td>
-                        <td>Apellido Paterno: <input type="text"  class="text-box"  name="ape_pat"></td>
-                        <td>Apellidos Materno: <input type="text"  class="text-box"  name="ape_mat"></td>
-                        <td>DNI : <input type="text" class="text-box" onKeyPress="return checkIt(event)" name="dni"></td>
-                        <input type="hidden" name="opc" value="Buscar">
-                        <td><input class="button blue"  type="submit" name="busqueda"  value="Buscar"></td>
-                        <!--<td><input class="button blue"  type="submit" name="all"  value="Todos"></td>
-                        --><td><a class="button blue"href="?cancel=true"  >Cancelar</a></td>
-                        </tr>
-                    </table>
-                </form>
+     
+                <form method="post" action="../../trabajador" class="form-inline">                    
+
+                <div class="form-group">
+                    <label class="control-label">Nombres:</label><br>
+                    <input type="text"  class="form-control"  name="nom">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" >Apellido Paterno:</label><br>
+                    <input type="text"  class="form-control"  name="ape_pat">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" >Apellido Materno:</label><br>
+                    <input type="text"  class="form-control"  name="ape_mat">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" >DNI:</label><br>
+                    <input type="text"  class="form-control"  onKeyPress="return checkIt(event)" name="dni">
+                </div>
+                    <input type="hidden" name="opc" value="Buscar">
+                <div class="form-group">
+                    <br>
+                    <input class="btn btn-primary"  type="submit" name="busqueda"  value="Buscar">
+
+                    <a href="?cancel=true"  class="btn btn-primary" role="button">Cancelar</a>
+                </div>
+
+            </form>
             </div>
             <%                int count = ListarTrabajador.size();
                 String cancel = request.getParameter("cancel");
@@ -77,7 +89,8 @@
             <h1>No se encontraron registros...</h1>
             <%}
                 if (count > 0) {%>
-            <table class="tinytable"   >
+                <br>
+            <table class="table table-hover">
                 <tr class="tab_cabe">
                     <td>Nro</td>
                     <td>Foto</td>
