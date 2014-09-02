@@ -44,7 +44,7 @@ public class CDocumento extends HttpServlet {
         String user = (String) sesion.getAttribute("IDUSER");
 
 
-        /*try {*/
+        try {
         if (opc.equals("Ver_Documento")) {
             getServletContext().setAttribute("List_doc_req_pla", d.List_doc_req_pla(dgp, idtr));
             int i = d.List_Req_nacionalidad(idtr);
@@ -60,8 +60,7 @@ public class CDocumento extends HttpServlet {
             int num_ad = d.List_Adventista(idtr);
             getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
             getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
-
-            response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad);
+            response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad+"&pro=pr_dgp");
         }
         if (opc.equals("Registrar")) {
             String iddgp = request.getParameter("iddgp");
@@ -72,7 +71,7 @@ public class CDocumento extends HttpServlet {
                 String desc = request.getParameter("lob_description" + j);
                 String iddoc = request.getParameter("iddoc" + j);
                 String estado = request.getParameter("estado" + j);
-                out.println(iddgp);
+                //out.println(iddgp);
 
                 String AR_DATO_ARCHIVO = request.getParameter("AR_DATO_ARCHIVO");
                 String NO_ARCHIVO = request.getParameter("NO_ARCHIVO");
@@ -82,17 +81,28 @@ public class CDocumento extends HttpServlet {
                     d.INSERT_DOCUMENTO_ADJUNTO(null, iddgp, iddoc, estado, user, null, null, null, null, desc, AR_DATO_ARCHIVO, NO_ARCHIVO, TA_ARCHIVO, AR_FILE_TYPE);
                 }
             }
+
             getServletContext().setAttribute("List_doc_req_pla", d.List_doc_req_pla(iddgp, idtr));
             int s = d.List_Req_nacionalidad(idtr);
             int num_ad = d.List_Adventista(idtr);
             getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
             getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
-            response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad);
+
+            String pr = request.getParameter("P2");
+            if (pr != null) {
+                if (pr.equals("enter")) {
+
+                    response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE");
+
+                }
+            } else {
+                response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad);
+            }
 
         }
-        /*} finally {
+        } finally {
          out.close();
-         }*/
+         }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
