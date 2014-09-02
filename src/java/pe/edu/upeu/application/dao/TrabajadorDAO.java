@@ -22,7 +22,8 @@ import pe.edu.upeu.application.web.controller.CConversion;
  * @author Jose
  */
 public class TrabajadorDAO implements InterfaceTrabajadorDAO {
-        CConversion c = new CConversion();
+
+    CConversion c = new CConversion();
     ConexionBD conn;
 
     @Override
@@ -31,16 +32,16 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
     }
 
     @Override
-    public void INSERT_TRABAJADOR(String ID_TRABAJADOR, String AP_PATERNO, String AP_MATERNO, String NO_TRABAJADOR, String TI_DOC, String NU_DOC, String ES_CIVIL, String FE_NAC, String ID_NACIONALIDAD, String ID_DEPARTAMENTO, String ID_PROVINCIA, String ID_DISTRITO, String TE_TRABAJADOR, String CL_TRA, String DI_CORREO_PERSONAL, String DI_CORREO_INST, String CO_SISTEMA_PENSIONARIO, String LI_NIVEL_EDUCATIVO, String LI_GRADO_ACADEMICO, String LI_TITULO_PROFESIONAL, String ID_CARRERA, String ID_UNIVERSIDAD, String CM_OTROS_ESTUDIOS, String ES_SEXO, String LI_GRUPO_SANGUINEO, String DE_REFERENCIA, String LI_RELIGION, String NO_IGLESIA, String DE_CARGO, String LI_AUTORIDAD, String NO_AP_AUTORIDAD, String CL_AUTORIDAD, String ID_NO_AFP, String ES_AFILIADO_ESSALUD, String LI_TIPO_TRABAJADOR, String CA_TIPO_HORA_PAGO_REFEERENCIAL, String ES_FACTOR_RH, String LI_DI_DOM_A_D1, String DI_DOM_A_D2, String LI_DI_DOM_A_D3, String DI_DOM_A_D4, String LI_DI_DOM_A_D5, String DI_DOM_A_D6, String DI_DOM_A_REF, String ID_DI_DOM_A_DISTRITO, String LI_DI_DOM_LEG_D1, String DI_DOM_LEG_D2, String LI_DI_DOM_LEG_D3, String DI_DOM_LEG_D4, String LI_DI_DOM_LEG_D5, String DI_DOM_LEG_D6, String ID_DI_DOM_LEG_DISTRITO, String CA_ING_QTA_CAT_EMPRESA, String CA_ING_QTA_CAT_RUC, String CA_ING_QTA_CAT_OTRAS_EMPRESAS, String CM_OBSERVACIONES, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO) {
+    public void INSERT_TRABAJADOR(String ID_TRABAJADOR, String AP_PATERNO, String AP_MATERNO, String NO_TRABAJADOR, String TI_DOC, String NU_DOC, String ES_CIVIL, String FE_NAC, String ID_NACIONALIDAD, String ID_DEPARTAMENTO, String ID_PROVINCIA, String ID_DISTRITO, String TE_TRABAJADOR, String CL_TRA, String DI_CORREO_PERSONAL, String DI_CORREO_INST, String CO_SISTEMA_PENSIONARIO, String ID_SITUACION_EDUCATIVA, String LI_REG_INST_EDUCATIVA, String ES_INST_EDUC_PERU, String ID_UNIVERSIDAD_CARRERA, String DE_ANNO_EGRESO, String CM_OTROS_ESTUDIOS, String ES_SEXO, String LI_GRUPO_SANGUINEO, String DE_REFERENCIA, String LI_RELIGION, String NO_IGLESIA, String DE_CARGO, String LI_AUTORIDAD, String NO_AP_AUTORIDAD, String CL_AUTORIDAD, String ID_NO_AFP, String ES_AFILIADO_ESSALUD, String LI_TIPO_TRABAJADOR, String CA_TIPO_HORA_PAGO_REFEERENCIAL, String ES_FACTOR_RH, String LI_DI_DOM_A_D1, String DI_DOM_A_D2, String LI_DI_DOM_A_D3, String DI_DOM_A_D4, String LI_DI_DOM_A_D5, String DI_DOM_A_D6, String DI_DOM_A_REF, String ID_DI_DOM_A_DISTRITO, String LI_DI_DOM_LEG_D1, String DI_DOM_LEG_D2, String LI_DI_DOM_LEG_D3, String DI_DOM_LEG_D4, String LI_DI_DOM_LEG_D5, String DI_DOM_LEG_D6, String ID_DI_DOM_LEG_DISTRITO, String CA_ING_QTA_CAT_EMPRESA, String CA_ING_QTA_CAT_RUC, String CA_ING_QTA_CAT_OTRAS_EMPRESAS, String CM_OBSERVACIONES, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO) {
         CallableStatement cst;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
 
             cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_TRABAJADOR( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
             cst.setString(1, null);
-            cst.setString(2, AP_PATERNO.toUpperCase());
-            cst.setString(3, AP_MATERNO.toUpperCase());
-            cst.setString(4, NO_TRABAJADOR.toUpperCase());
+            cst.setString(2, AP_PATERNO);
+            cst.setString(3, AP_MATERNO);
+            cst.setString(4, NO_TRABAJADOR);
             cst.setString(5, TI_DOC);
             cst.setString(6, NU_DOC);
             cst.setString(7, ES_CIVIL);
@@ -54,11 +55,11 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(15, DI_CORREO_PERSONAL);
             cst.setString(16, DI_CORREO_INST);
             cst.setString(17, CO_SISTEMA_PENSIONARIO);
-            cst.setString(18, LI_NIVEL_EDUCATIVO);
-            cst.setString(19, LI_GRADO_ACADEMICO);
-            cst.setString(20, LI_TITULO_PROFESIONAL);
-            cst.setString(21, ID_CARRERA);
-            cst.setString(22, ID_UNIVERSIDAD);
+            cst.setString(18, ID_SITUACION_EDUCATIVA);
+            cst.setString(19, LI_REG_INST_EDUCATIVA);
+            cst.setString(20, ES_INST_EDUC_PERU);
+            cst.setString(21, ID_UNIVERSIDAD_CARRERA);
+            cst.setString(22, DE_ANNO_EGRESO);
             cst.setString(23, CM_OTROS_ESTUDIOS);
             cst.setString(24, ES_SEXO);
             cst.setString(25, LI_GRUPO_SANGUINEO);
@@ -100,8 +101,9 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(61, IP_USUARIO);
             cst.execute();
         } catch (SQLException e) {
-
-        } finally {
+            throw new RuntimeException(e.getMessage());
+        }
+        finally {
             this.conn.close();
         }
     }
@@ -142,7 +144,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 v.setNu_doc(rs.getString("NU_DOC"));
                 v.setEs_civil(rs.getString("ES_CIVIL"));
                 v.setFe_nac(rs.getString("FE_NAC"));
-             //   v.setNo_universidad(rs.getString("NO_UNIVERSIDAD"));
+                //   v.setNo_universidad(rs.getString("NO_UNIVERSIDAD"));
                 v.setNo_departamento(rs.getString("NO_DEPARTAMENTO"));
                 v.setNo_provincia(rs.getString("NO_PROVINCIA"));
                 v.setNo_distrito(rs.getString("NO_DISTRITO"));
@@ -151,11 +153,11 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 v.setDi_correo_personal(rs.getString("DI_CORREO_PERSONAL"));
                 v.setDi_correo_inst(rs.getString("DI_CORREO_INST"));
                 v.setCo_sistema_pensionario(rs.getString("CO_SISTEMA_PENSIONARIO"));
-              //  v.setLi_nivel_educativo(rs.getString("LI_NIVEL_EDUCATIVO"));
-              //  v.setLi_grado_academico(rs.getString("LI_GRADO_ACADEMICO"));
-             //   v.setLi_titulo_profesional(rs.getString("LI_TITULO_PROFESIONAL"));
-               // v.setNo_carrera(rs.getString("NO_CARRERA"));
-               // v.setNo_universidad(rs.getString("NO_UNIVERSIDAD"));
+                //  v.setLi_nivel_educativo(rs.getString("LI_NIVEL_EDUCATIVO"));
+                //  v.setLi_grado_academico(rs.getString("LI_GRADO_ACADEMICO"));
+                //   v.setLi_titulo_profesional(rs.getString("LI_TITULO_PROFESIONAL"));
+                // v.setNo_carrera(rs.getString("NO_CARRERA"));
+                // v.setNo_universidad(rs.getString("NO_UNIVERSIDAD"));
                 v.setCm_otros_estudios(rs.getString("CM_OTROS_ESTUDIOS"));
                 v.setEs_sexo(rs.getString("ES_SEXO"));
                 v.setLi_grupo_sanguineo(rs.getString("LI_GRUPO_SANGUINEO"));
@@ -199,14 +201,11 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 list.add(v);
             }
 
-         } catch (SQLException e){
-       
-     System.err.println("Error :"+e.getMessage());
-             
-     } 
-        
-        
-        finally {
+        } catch (SQLException e) {
+
+            System.err.println("Error :" + e.getMessage());
+
+        } finally {
             this.conn.close();
         }
         return list;
@@ -219,10 +218,10 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         List<V_Ficha_Trab_Num_C> list = new ArrayList<V_Ficha_Trab_Num_C>();
         try {
             ResultSet rs = this.conn.query(sql);
-          
+
             while (rs.next()) {
-                   V_Ficha_Trab_Num_C v = new V_Ficha_Trab_Num_C();
-               v.setId_trabajador(rs.getString("ID_TRABAJADOR"));
+                V_Ficha_Trab_Num_C v = new V_Ficha_Trab_Num_C();
+                v.setId_trabajador(rs.getString("ID_TRABAJADOR"));
                 v.setAp_paterno(rs.getString("AP_PATERNO"));
                 v.setAp_materno(rs.getString("AP_MATERNO"));
                 v.setNo_trabajador(rs.getString("NO_TRABAJADOR"));
@@ -230,7 +229,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 v.setNu_doc(rs.getString("NU_DOC"));
                 v.setEs_civil(rs.getString("ES_CIVIL"));
                 v.setFe_nac(rs.getString("FE_NAC"));
-               // v.setNo_universidad(rs.getString("NO_UNIVERSIDAD"));
+                // v.setNo_universidad(rs.getString("NO_UNIVERSIDAD"));
                 v.setNo_departamento(rs.getString("NO_DEPARTAMENTO"));
                 v.setNo_provincia(rs.getString("NO_PROVINCIA"));
                 v.setNo_distrito(rs.getString("NO_DISTRITO"));
@@ -242,8 +241,8 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 //v.setLi_nivel_educativo(rs.getString("LI_NIVEL_EDUCATIVO"));
                 //v.setLi_grado_academico(rs.getString("LI_GRADO_ACADEMICO"));
                 //v.setLi_titulo_profesional(rs.getString("LI_TITULO_PROFESIONAL"));
-             //  v.setNo_carrera(rs.getString("NO_CARRERA"));
-             //   v.setNo_universidad(rs.getString("NO_UNIVERSIDAD"));
+                //  v.setNo_carrera(rs.getString("NO_CARRERA"));
+                //   v.setNo_universidad(rs.getString("NO_UNIVERSIDAD"));
                 v.setCm_otros_estudios(rs.getString("CM_OTROS_ESTUDIOS"));
                 v.setEs_sexo(rs.getString("ES_SEXO"));
                 v.setLi_grupo_sanguineo(rs.getString("LI_GRUPO_SANGUINEO"));
@@ -349,5 +348,4 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         return Max;
     }
 
-   
 }

@@ -250,7 +250,7 @@
                             </div>
                             <br>
                             <p class="edad">
-                                <div class="alerta-req" style="display: none;">Es un menor de edad</div>
+                            <div class="alerta-req" style="display: none;">Es un menor de edad</div>
                             </p>
                         </div>
                     </td>
@@ -397,7 +397,7 @@
 
                 <tr id="es_inst_p"style="display: none"><td>¿Estudio en una institucion educativa del Perú?</td><td>
                         <div class="item">
-                            <select name="" id="inst_peru" class="text-box required" required="">
+                            <select name="ES_INST_PERU" id="inst_peru" class="text-box required" required="">
                                 <option value="">--------</option>
                                 <option value="1">Si</option>
                                 <option value="2">No</option>
@@ -406,7 +406,7 @@
                     </td></tr>  
                 <tr id="regimen" style="display: none"><td>Regimen de la Institución Educativa</td><td>
                         <div class="item">
-                            <select name="" id="rg" class="text-box required" required="" >
+                            <select name="REGIMEN" id="rg" class="text-box required" required="" >
                                 <option value="">--------</option>
                                 <option value="1">Publica</option>
                                 <option value="2">Privada</option>
@@ -422,7 +422,7 @@
 
                 <tr id="institucion"style="display: none"><td>Institución:</td><td>
                         <div class="item">
-                            <select name="CENTRO_DE_ESTUDIO" id="inst"  class="text-box"> 
+                            <select name="" id="inst"  class="text-box"> 
                                 <option value="">----</option>
                             </select>
                         </div>
@@ -434,7 +434,7 @@
                             </select>
                         </div>
                     </td></tr>
-                <tr id="egreso" style="display: none"><td>Año Egreso(Nuevo)</td><td>   <div class="item"><input type="text" name="" id="" class="text-box"></div></td></tr> 
+                <tr id="egreso" style="display: none"><td>Año Egreso(Nuevo)</td><td>   <div class="item"><input type="text" name="A_EGRESO" id="" class="text-box"></div></td></tr> 
 
                 <tr><td>Tipo Hora Pago Referencial:</td><td><input type="text" name="TIPO_HORA_PAGO_REFEERENCIAL"  value="0" class="text-box" ></td></tr> 
                 <tr><td>Otros Estudios:</td><td colspan="3"><textarea name="OTROS_ESTUDIOS" class="text-box" cols="60" rows="6"></textarea></td></tr> 
@@ -486,18 +486,28 @@
                             </select></div>
                         <div class="item"><input type="text" name="DIR_DOM_A_D6" id="DOM_A_D6" class="text-box" required="" ></div></tr> 
                 <tr><td>Referencia:</td><td>   <div class="item"><input type="text" name="DIR_DOM_A_REF" id="DOM_A_REF" class="text-box" required=""></div></td></tr> 
-                <tr><td>Distrito:</td><td>
+
+
+
+                <tr><td></td><td> Departamento:
+                        <select  id="dep_dir_a" class="text-box chosen-select"  required="">
+                            <option value="" >-----</option>
+                            <%for (int d = 0; d < List_Departamento.size(); d++) {
+                                    Ub_Departamento dep = new Ub_Departamento();
+                                    dep = (Ub_Departamento) List_Departamento.get(d);
+
+                            %>
+                            <option value="<%=dep.getId_departamento()%>" ><%=dep.getNo_departamento()%></option>
+                            <%}%>
+                        </select>
+                        Provincia:
+                        <select  id="pro_dir_a" class="text-box"  required="">
+                            <option value="" >-----</option>
+
+                        </select>Distrito:
                         <div class="item0">
-                            <select name="DIR_DOM_A_DISTRITO_ID" id="DOM_A_DISTRITO" class="chosen-select required" required="">
+                            <select name="DIR_DOM_A_DISTRITO_ID" id="DOM_A_DISTRITO" class="text-box required" required="">
                                 <option value="">----------</option>
-                                <%for (int d = 0; d < List_Departamento.size(); d++) {
-                                        Ub_Departamento dep = new Ub_Departamento();
-                                        dep = (Ub_Departamento) List_Departamento.get(d);
-
-                                %>
-                                <option value="<%=dep.getId_departamento()%>" ><%=dep.getNo_departamento()%></option>
-                                <%}%>
-
                             </select>
                         </div>
                         <button onclick="duplicar();
@@ -557,21 +567,30 @@
                         </div>
                         <div class="item"> <input type="text" name="DIR_DOM_LEG_D6" id="DOM_LEG_D6" class="text-box"  required=""></div></td></tr> 
 
-                <tr><td>Distrito:</td><td>
+                <tr><td></td><td> Departamento:
+                        <select  id="dep_dir_l" class="text-box"  required="">
+                            <option value="" >-----</option>
+                            <%for (int d = 0; d < List_Departamento.size(); d++) {
+                                    Ub_Departamento dep = new Ub_Departamento();
+                                    dep = (Ub_Departamento) List_Departamento.get(d);
+
+                            %>
+                            <option value="<%=dep.getId_departamento()%>" ><%=dep.getNo_departamento()%></option>
+                            <%}%>
+                        </select>
+                        Provincia:
+                        <select  id="pro_dir_l" class="text-box"  required="">
+                            <option value="" >-----</option>
+
+                        </select>Distrito:
                         <div class="item">
                             <select name="DIR_DOM_LEG_DISTRITO_ID"   id="DOM_LEG_DISTRITO" class="text-box required" required="">
                                 <option value="">----------</option>
-                                <%for (int d = 0; d < List_Departamento.size(); d++) {
-                                        Ub_Departamento dep = new Ub_Departamento();
-                                        dep = (Ub_Departamento) List_Departamento.get(d);
 
-                                %>
-                                <option value="<%=dep.getId_departamento()%>" ><%=dep.getNo_departamento()%></option>
-                                <%}%>
                             </select></div>
                     </td></tr>
                 <tr><td colspan="4"><div class="sub_title"><label class="label">Ingresos de Quinta Categoria</label></div>
-                <input type="hidden" name="REFERENCIA" class="text-box"  > </td></tr>
+                        <input type="hidden" name="REFERENCIA" class="text-box"  > </td></tr>
                 <tr><td>Empresa:</td><td><input type="text" name="ING_QTA_CAT_EMPRESA" class="text-box" ></td></tr> 
                 <tr><td>RUC:</td><td><input type="text" name="ING_QTA_CAT_RUC" class="text-box" ></td></tr> 
                 <tr><td>Otras Empresas:</td><td><textarea name="ING_QTA_CAT_OTRAS_EMPRESAS" class="text-box" cols="60" rows="6"></textarea></td></tr> 
@@ -598,7 +617,7 @@
                 <tr><td>Nombres y Apellidos:</td><td><input type="text" name="AUT_APELLIDOSNOMBRES" class="text-box" ></td></tr> 
                 <tr><td>Telefono/Celular:</td><td><input type="text" name="AUT_CELULAR" class="text-box" ></td></tr>   
                 <tr><td>Observaciones:</td><td> <textarea  name="OBSERVACIONES" class="text-box" cols="60" rows="6"></textarea>
-                <input type="hidden" value="<%=iduser%>" name="USER_CREACION" class="text-box" ></td></tr> 
+                        <input type="hidden" value="<%=iduser%>" name="USER_CREACION" class="text-box" ></td></tr> 
                 <tr><td colspan="2"><input type="submit" name="opc"  class="submit" value="Registrar"></td></tr> 
             </table></form></center><br><br>
 </body>
@@ -700,6 +719,8 @@
         var DAD5 = $("#DOM_A_D5").val();
         var DAD6 = $("#DOM_A_D6").val();
 
+        var DEP_A = $("#dep_dir_a").val();
+
 
         var DADIS = $("#DOM_A_DISTRITO").val();
 
@@ -710,6 +731,7 @@
         $("#DOM_LEG_D5").val(DAD5);
         $("#DOM_LEG_D6").val(DAD6);
         $("#DOM_LEG_DISTRITO").val(DADIS);
+        $("#dep_dir_l").val(DEP_A);
 
     }
 
@@ -745,6 +767,102 @@
         var ti = $("#dist_nac");
         ti.empty();
         var rg = $("#pro_nac").val();
+        var data = "id_dist=" + rg + "&opc=pro_nac";
+        ti.append('<option value="">Cargando...</option>').val('');
+        $.post("../../ubigeo", data, function(objJson) {
+            ti.empty();
+            if (objJson.rpta == -1) {
+                alert(objJson.mensaje);
+                return;
+            }
+            var lista = objJson.lista;
+            if (lista.length > 0) {
+                ti.append("<option value='0'>[Seleccione]</option>");
+            } else {
+                ti.append("<option value='0'>[]</option>");
+            }
+            for (var i = 0; i < lista.length; i++) {
+                var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                ti.append(item);
+            }
+        });
+    });
+    $("#dep_dir_a").change(function() {
+        var ti = $("#pro_dir_a");
+        ti.empty();
+        var rg = $("#dep_dir_a").val();
+        var data = "id_dep=" + rg + "&opc=dep_nac";
+        ti.append('<option value="">Cargando...</option>').val('');
+        $.post("../../ubigeo", data, function(objJson) {
+            ti.empty();
+            if (objJson.rpta == -1) {
+                alert(objJson.mensaje);
+                return;
+            }
+            var lista = objJson.lista;
+            if (lista.length > 0) {
+                ti.append("<option value='0'>[Seleccione]</option>");
+            } else {
+                ti.append("<option value='0'>[]</option>");
+            }
+            for (var i = 0; i < lista.length; i++) {
+                var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                ti.append(item);
+            }
+        });
+    });
+    $("#pro_dir_a").change(function() {
+        var ti = $("#DOM_A_DISTRITO");
+        ti.empty();
+        var rg = $("#pro_dir_a").val();
+        var data = "id_dist=" + rg + "&opc=pro_nac";
+        ti.append('<option value="">Cargando...</option>').val('');
+        $.post("../../ubigeo", data, function(objJson) {
+            ti.empty();
+            if (objJson.rpta == -1) {
+                alert(objJson.mensaje);
+                return;
+            }
+            var lista = objJson.lista;
+            if (lista.length > 0) {
+                ti.append("<option value='0'>[Seleccione]</option>");
+            } else {
+                ti.append("<option value='0'>[]</option>");
+            }
+            for (var i = 0; i < lista.length; i++) {
+                var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                ti.append(item);
+            }
+        });
+    });
+    $("#dep_dir_l").change(function() {
+        var ti = $("#pro_dir_l");
+        ti.empty();
+        var rg = $("#dep_dir_l").val();
+        var data = "id_dep=" + rg + "&opc=dep_nac";
+        ti.append('<option value="">Cargando...</option>').val('');
+        $.post("../../ubigeo", data, function(objJson) {
+            ti.empty();
+            if (objJson.rpta == -1) {
+                alert(objJson.mensaje);
+                return;
+            }
+            var lista = objJson.lista;
+            if (lista.length > 0) {
+                ti.append("<option value='0'>[Seleccione]</option>");
+            } else {
+                ti.append("<option value='0'>[]</option>");
+            }
+            for (var i = 0; i < lista.length; i++) {
+                var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                ti.append(item);
+            }
+        });
+    });
+    $("#pro_dir_l").change(function() {
+        var ti = $("#DOM_LEG_DISTRITO");
+        ti.empty();
+        var rg = $("#pro_dir_l").val();
         var data = "id_dist=" + rg + "&opc=pro_nac";
         ti.append('<option value="">Cargando...</option>').val('');
         $.post("../../ubigeo", data, function(objJson) {
