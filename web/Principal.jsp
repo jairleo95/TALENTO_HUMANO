@@ -364,11 +364,12 @@
                                 <i class="fa fa-table"></i>
                                 <span><%=dp.getNo_link()%></span>
                                 <i class="fa fa-angle-left pull-right"></i>
-                            </a>                         
+                            </a> 
+                            
                             <ul class="treeview-menu">
                                 <li ><a href="Vista/Dgp/Generar_Dgp.jsp?text=1" target="myframe"><i class="fa fa-angle-double-right"></i> Tiempo Completo</a></li>
                                 <li><a href="Vista/Dgp/Generar_Dgp.jsp?text=2" target="myframe"><i class="fa fa-angle-double-right"></i> Tiempo Parcial</a></li>
-                                <li><a href="Vista/Dgp/Generar_Dgp.jsp?text=3" target="myframe"><i class="fa fa-angle-double-right"></i> Medio Tiempo</a></li>
+                                <li><a href="steps.html" target="myframe"><i class="fa fa-angle-double-right"></i> Medio Tiempo</a></li>
                             </ul>
                         </li>                                
                         <%}
@@ -394,7 +395,7 @@
                 </section>
                 <section class="content">
                     <div id="deposito">
-                        <iframe id="myframe" name="myframe" width="100%" class="autoHeight" scrolling="no" frameborder="0" src="Vista/inicio.jsp"></iframe>
+                        <iframe id="myframe" name="myframe" width="100%" height="800" scrolling="si" frameborder="0" src="Vista/inicio.jsp"></iframe>
                     </div>
                 </section>
             </aside>

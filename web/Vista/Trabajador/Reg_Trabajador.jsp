@@ -176,7 +176,7 @@
 
     </head>
     <body>
-        <br>
+
     <center>
         <script type="text/javascript">
             Esperar();
@@ -249,7 +249,9 @@
                                 </div>
                             </div>
                             <br>
-                            <p class="edad"><div class="alerta-req" style="display: none;">Es un menor de edad</div></p>
+                            <p class="edad">
+                                <div class="alerta-req" style="display: none;">Es un menor de edad</div>
+                            </p>
                         </div>
                     </td>
                 </tr>   
@@ -568,8 +570,8 @@
                                 <%}%>
                             </select></div>
                     </td></tr>
-                <tr><td colspan="4"><div class="sub_title"><label class="label">Ingresos de Quinta Categoria</label></div></td></tr>
-                <input type="hidden" name="REFERENCIA" class="text-box"  > 
+                <tr><td colspan="4"><div class="sub_title"><label class="label">Ingresos de Quinta Categoria</label></div>
+                <input type="hidden" name="REFERENCIA" class="text-box"  > </td></tr>
                 <tr><td>Empresa:</td><td><input type="text" name="ING_QTA_CAT_EMPRESA" class="text-box" ></td></tr> 
                 <tr><td>RUC:</td><td><input type="text" name="ING_QTA_CAT_RUC" class="text-box" ></td></tr> 
                 <tr><td>Otras Empresas:</td><td><textarea name="ING_QTA_CAT_OTRAS_EMPRESAS" class="text-box" cols="60" rows="6"></textarea></td></tr> 
@@ -595,8 +597,8 @@
                         </select></td></tr>  
                 <tr><td>Nombres y Apellidos:</td><td><input type="text" name="AUT_APELLIDOSNOMBRES" class="text-box" ></td></tr> 
                 <tr><td>Telefono/Celular:</td><td><input type="text" name="AUT_CELULAR" class="text-box" ></td></tr>   
-                <tr><td>Observaciones:</td><td> <textarea  name="OBSERVACIONES" class="text-box" cols="60" rows="6"></textarea></td></tr> 
-                <input type="hidden" value="<%=iduser%>" name="USER_CREACION" class="text-box" >
+                <tr><td>Observaciones:</td><td> <textarea  name="OBSERVACIONES" class="text-box" cols="60" rows="6"></textarea>
+                <input type="hidden" value="<%=iduser%>" name="USER_CREACION" class="text-box" ></td></tr> 
                 <tr><td colspan="2"><input type="submit" name="opc"  class="submit" value="Registrar"></td></tr> 
             </table></form></center><br><br>
 </body>

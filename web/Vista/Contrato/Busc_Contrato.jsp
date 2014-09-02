@@ -22,7 +22,7 @@ if (isset($_SESSION['IDUSER'])) {
                 <center><h1 class="spacing">Contratos</h1></center>
             </div> 
         <center>
-            <div id="content">
+            <div id="contenido">
                 <div class="filtro">
                     <form id="frm_filtro" method="post" action="">
                         <table id="tab"   >
