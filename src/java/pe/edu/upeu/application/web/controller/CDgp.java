@@ -104,7 +104,7 @@ public class CDgp extends HttpServlet {
 
             //  List<String> list = a.Det_Autorizacion(idrp);
             a.Insert_Autorizacion("", iddgp, "1", "P1", "12312", iduser, "", "31/07/14", "3213", idpuesto, idrp, "PAS-000001");
-            response.sendRedirect("Vista/Dgp/Horario/Reg_Horario.jsp?iddgp=" + iddgp + "&idtr=" + idtr + "&opc=rd");
+            response.sendRedirect("Vista/Dgp/Horario/Reg_Horario.jsp?iddgp=" + iddgp + "&idtr=" + ID_TRABAJADOR + "&opc=rd");
 
         }
         if (opc.equals("Reg_form")) {
@@ -134,7 +134,7 @@ public class CDgp extends HttpServlet {
             int num = dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
             getServletContext().setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
 
-            response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&idgp=" + ID_DGP + "&opc=reg_doc");
+            response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&iddgp=" + ID_DGP + "&opc=reg_doc");
         }
         if (opc.equals("Detalle")) {
 

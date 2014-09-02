@@ -127,12 +127,15 @@
              %></td>
                  <%}%>
              </tr>
-              <%}%>
+              <%}%> 
              
               <% if(request.getParameter("opc")!=null){ 
-             if (request.getParameter("opc").equals("reg_doc")) {%>
+             if (request.getParameter("opc").equals("reg_doc")) {
+              
+              %>
+         
              <tr><td><h3>Registrar documentos</h3>
-                     <a href="Documento/Reg_Documento.jsp?iddgp=<%=request.getParameter("ID_DGP")%>&idtr=<%=request.getParameter("ID_TRABAJADOR")%>"class="btn btn-default" role="button">Siguiente</a></td></tr>
+                     <a href="../../documento?iddgp=<%=request.getParameter("iddgp")%>&idtr=<%=request.getParameter("idtr")%>&opc=Reg_Pro_Dgp"class="btn btn-default" role="button">Siguiente</a></td></tr>
                 <%}}%>
         </table>
             </form>

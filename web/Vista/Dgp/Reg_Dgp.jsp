@@ -95,7 +95,8 @@
                             V_Ficha_Trab_Num_C tr = new V_Ficha_Trab_Num_C();
                             tr = (V_Ficha_Trab_Num_C) Listar_Trabajador_id.get(i);
                     %>
-                    <tr><td>Trabajador:</td><td><%=tr.getAp_paterno() + " " + tr.getAp_materno() + " " + tr.getNo_trabajador()%><input type="hidden" value="<%=tr.getId_trabajador()%>" name="IDDATOS_TRABAJADOR" class="text-box" ></td></tr>   
+                    <tr><td>Trabajador:</td><td><%=tr.getAp_paterno() + " " + tr.getAp_materno() + " " + tr.getNo_trabajador()%>
+                            <input type="hidden" value="<%=tr.getId_trabajador()%>" name="IDDATOS_TRABAJADOR" class="text-box" ></td></tr>   
                             <% }
                                 if (Listar_Trabajador_id.size() == 0) { %>   
 
@@ -180,11 +181,7 @@
                 </table>
             </div>
 
-            <input type="hidden" value="<%%>" name="USER_CREACION" class="text-box" >
 
-            <input type="hidden" name="USER_MODIF" class="text-box" > 
-            <input type="hidden" name="FECHA_MODIF" class="text-box" >
-            <input type="hidden" name="USUARIO_IP" class="text-box" >   
             <table><tr><td><input type="submit" name="opc"  class="submit" value="Registrar"></td></tr>
             </table>
         </form>

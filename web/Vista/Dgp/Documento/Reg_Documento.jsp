@@ -404,7 +404,11 @@
             </table>
 
         </form>
-        <%
+        <%   if (request.getParameter("P2") != null) {
+                if (request.getParameter("P2").equals("TRUE")) {
+                    
+                }}
+                
             if (request.getParameter("P2") != null) {
                 if (request.getParameter("P2").equals("TRUE")) { %>
 

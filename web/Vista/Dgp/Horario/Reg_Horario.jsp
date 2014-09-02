@@ -274,7 +274,7 @@
             <br>
             <br>
             <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >
-            <input type="hidden" name="IDDATOS_TRABAJADOR"  value="<%=idtr%>"  >
+            <input type="hidden" name="idtr"  value="<%=idtr%>"  >
 
             <div class="input-desp">
                 <table style="" id="show_1" class="cont_lunes"> 
