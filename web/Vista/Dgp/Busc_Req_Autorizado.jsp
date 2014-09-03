@@ -15,23 +15,40 @@ HttpSession sesion =  request.getSession(true);
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
             <title>Requerimientos Autorizados</title>
-            <!--
             <link rel="stylesheet" href="../../css/Css_Sort/style.css" />
             <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
             <script type="text/javascript" src="../../js/JQuery/jquery-ui-1.8.16.custom.min.js"></script>
-            <script type="text/javascript" src="../../js/Js_DGP/js_dgp_aut.js"></script>
+            <script type="text/javascript" src="../../js/Js_Busc_Contrato/js_contratacion.js"></script>
             <link type="text/css" rel="stylesheet" href="../../css/Css_Reporte/Reportes.css">
             <link type="text/css" rel="stylesheet" href="../../css/Css_Formulario/form.css">
-            -->
             <link rel="stylesheet" href="../../css1/bootstrap.min.css">
+            
+            <style>
+                #contenido{
+                    margin: auto;
+                    
+                }
+                #form{
+                    width: 40%;
+                     margin: auto;
+                     
+                }
+                #table{
+                    width: 70%;
+                     margin: auto;
+                     
+                }
+                
+            </style>
         </head>
         <body>  
-
             <div class="spacing">
-                <center><h3 class="spacing">REQUERIMIENTOS AUTORIZADOS</h3></center>
+                <center><h1 class="spacing" style="font-weight: bold;">Requeriemientos Autorizados</h1></center> 
             </div>
         <center>
-            <div style="width: 600px;">
+            <br>
+            <div id="contenido">
+                <div id="form">
                 
                     <form id="frm_filtro" method="post" action="">
                         <div class="row">
@@ -137,7 +154,7 @@ HttpSession sesion =  request.getSession(true);
                             <button type="button" class="btn btn-primary" id="btnfiltrar">Buscar</button>
                             </div>
                             <div class="col-xs-6">  
-                            <a href="javascript:;"  id="btncancel" class="btn btn-default">Cancelar</a>
+                            <a href="javascript:;"  id="btncancel" class="btn btn-primary">Cancelar</a>
                             </div>
                          </div>
 
@@ -145,13 +162,13 @@ HttpSession sesion =  request.getSession(true);
                 
                 <br>
                 <br>
-                <div class="container">
-                    <table     id="data" class="tinytable" style="width: 1050px;">
-                        <thead class="tab_cabe">
-                            <tr class="tr">
-                                <td style="width: 230px;" ><span title="NOMBRE_P">Nombres y Apellidos</span></td>
-                                <td  ><span title="DEPARTAMENTO" >Departamento</span></td>
-                                <td  ><span title="AREA" >Area</span></td>
+                </div>
+                <div id="table">
+                    <table   class="table table-hover" >
+                            <tr>
+                                <td><span title="NOMBRE_P">Nombres y Apellidos</span></td>
+                                <td><span title="DEPARTAMENTO" >Departamento</span></td>
+                                <td><span title="AREA" >Area</span></td>
                                 <td><span title="SECCION">Sección</span></td>
                                 <td><span title="PUESTO">Puesto</span></td>
                                 <td><span title="SUELDO">Sueldo</span></td>
@@ -159,19 +176,13 @@ HttpSession sesion =  request.getSession(true);
                                 <td><span title="MOTIVO">Requerimiento</span></td>
                                 <td><span title="FECHA_CREACION">Fecha de Contratación</span></td>
                             </tr>
-                        </thead>
-
-                        <tbody>
-
-
-                        </tbody>
                     </table>
 
                 </div>
 
-            </div>
+            
 
-
+                </div>
         </center>
 
     </body>

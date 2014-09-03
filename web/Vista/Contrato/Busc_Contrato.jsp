@@ -16,63 +16,109 @@ if (isset($_SESSION['IDUSER'])) {
             <script type="text/javascript" src="../../js/Js_Busc_Contrato/js_contratacion.js"></script>
             <link type="text/css" rel="stylesheet" href="../../css/Css_Reporte/Reportes.css">
             <link type="text/css" rel="stylesheet" href="../../css/Css_Formulario/form.css">
+            <link rel="stylesheet" href="../../css1/bootstrap.min.css" >
+            
+             <style>
+                #contenido{
+                    margin: auto;
+                    
+                }
+                #form{
+                    width: 40%;
+                     margin: auto;
+                     
+                }
+                #table{
+                    width: 70%;
+                     margin: auto;
+                     
+                }
+                
+            </style>
         </head>
+        
         <body class="body" style="height: 1024px;">  
             <div class="spacing">
-                <center><h1 class="spacing">Contratos</h1></center>
+                <center><h1 class="spacing" style="font-weight: bold;">Contratos</h1></center>
             </div> 
+            <br>
         <center>
             <div id="contenido">
-                <div class="filtro">
-                    <form id="frm_filtro" method="post" action="">
-                        <table id="tab"   >
-                            <tr>
-                                <td class="td-form">Fecha de Contratación  del: </td>
-                                <td><input type="date" name="del"  size="15" class="text-box" /></td>
-                                <td class="td-form">al</td> 
-                                <td><input type="date" name="al" size="15" class="text-box" /></td>
-                                <!--<input type="hidden" name="iddep" value="<? //echo $_SESSION["DEPARTAMENTO_ID"];  ?>">
-                                -->
-                            </tr>
-                            <tr>
-                                <td class="td-form">Nombres y Apellidos:</td><td><input type="text" name="nom_ape"  class="text-box"  size="25" /></td>
-                            </tr>
-                            <tr>
-                                <td class="td-form">Area:</td><td><select name="area" class="text-box">
-                                        <option value="0"></option>
-                                        <%for (int u = 0; u < List_Area.size(); u++) {
+                <div id="form">   
+                 <form id="frm_filtro" method="post" action="">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label>Fecha de Contratación:</label><br>
+                                 <input type="date" name="del"  size="15" class="form-control"  />
+                            </div>
+                            <div class="col-xs-6">
+                                <label>Al</label>
+                                <input type="date" name="al" size="15" class="form-control" />
+                               <!-- <input type="hidden" name="iddep" value="<? echo $_SESSION['DEPARTAMENTO_ID']; ?>">-->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">  
+                                <label>Nombres y Apellidos :</label>
+                                <input type="text" class="form-control" name="nom_ape"   size="25"/>
+                            </div>
+                            <div class="col-xs-6">  
+                                <label>Área :</label><br>
+                                <select name="area" class="form-control">
+                                     <option value="0"></option> 
+                                     <%for (int u = 0; u < List_Area.size(); u++) {
                                             Area a=new Area();
                                             a=(Area)List_Area.get(u);
                                             %>
                                             <option value="<%=a.getId_area()%>"><%=a.getNo_area()%></option>
-                                        <%}%>
-                                    </select></td>    
-                                <td class="td-form">Puesto:</td><td><input type="text" name="puesto" size="25"  class="text-box" /></td>
-                            </tr>
-                            <tr>
-                                <td class="td-form">Sueldo:</td><td><input type="text" name="sueldo" size="25"  class="text-box" /></td>
-                                <td class="td-form">Fecha Inicio:</td><td><input type="date" name="fec_i" size="25" class="text-box" /></td>
-                            </tr>
-                            <tr>
-                                <td class="td-form">Fecha Fin:</td><td><input type="date" name="fec_f" size="25"  class="text-box"/></td>
+                                            <%}%>
+                                    </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-xs-6">
+                                <label>Puesto :</label>
+                                <input type="text" name="puesto" class="form-control" size="25" />
+                            </div>
+                            <div class="col-xs-6">
+                                 <label>Sueldo :</label>
+                                <input type="text" name="sueldo" class="form-control" size="25" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label>Fecha Inicio:</label>
+                                <input type="date" name="fec_i" class="form-control">
+                            </div>
+                            <div class="col-xs-6">
+                                <label>Fecha Fin :</label>
+                                 <input type="date" name="fec_f" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                            <label>Sección:</label>
+                           <input type="text" name="seccion" class="form-control">
+                            </div>
+             
+                        </div>
+                         <hr>
+                         <div class="row">
+                            <div class="col-xs-6">                            
+                            <button type="button" class="btn btn-primary" id="btnfiltrar">Buscar</button>
+                            </div>
+                            <div class="col-xs-6">  
+                            <a href="javascript:;"  id="btncancel" class="btn btn-primary">Cancelar</a>
+                            </div>
+                         </div>
 
-                                <td class="td-form">Sección:</td>
-                                <td><input type="text" name="seccion" class="text-box"></td>
-
-                                <td><button type="button" id="btnfiltrar" class="button blue">Buscar</button></td>
-                                <td><a href="javascript:;" id="btncancel"  class="button blue">Cancelar</a></td>
-                            </tr>
-                        </table>
-                    </form>
+                </form>
                 </div>
                 <br>
-                <br>
-                <div class="container">
-                    <table   id="data" class="tinytable" >
-
-                        <thead class="tab_cabe">
-                            <tr class="tr">
-                                <td style="width: 100%;" ><span title="NOMBRE_P">Nombres y Apellidos</span></td>
+                <div id="table">
+                    <table    class="table table-hover" >
+                            <tr>
+                                <td><span title="NOMBRE_P">Nombres y Apellidos</span></td>
                                 <td><span title="FEC_DESDE">Fecha Desde</span></td>
                                 <td><span title="FEC_HASTA">Fecha Hasta</span></td>
                                 <td><span title="AREA">Area</span></td>
@@ -82,7 +128,7 @@ if (isset($_SESSION['IDUSER'])) {
                                 <td><span title="FECHA_CREACION">Fecha de Contratación</span></td>
                                 <td><span title="">Contrato</span></td>
                             </tr>
-                        </thead>
+
 
                         <tbody>
 
