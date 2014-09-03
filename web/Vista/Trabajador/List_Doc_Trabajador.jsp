@@ -7,6 +7,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <title>Documentos</title>
         <link rel="stylesheet" href="../../css/Css_Lista/listas.css" />
+        <link rel="stylesheet" href="../../css1/bootstrap.min.css" />
         <style type="text/css">
 
 
@@ -61,7 +62,7 @@
     </head>
     <body>
     <center>
-        <table>
+        <table class=" table table-hover alert-link  btn-default">
             <thead>
                 <tr>
                     <th class="cajita">Nro</th>

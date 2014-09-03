@@ -82,7 +82,7 @@ if (isset($_SESSION['IDUSER'])) {
                             </div>
                             <div class="col-xs-6">
                                  <label>Sueldo :</label>
-                                <input type="text" name="sueldo" class="form-control" size="25" />
+                                 <input type="text" name="sueldo" class="form-control" size="25" maxlength="10"/>
                             </div>
                         </div>
                         <div class="row">

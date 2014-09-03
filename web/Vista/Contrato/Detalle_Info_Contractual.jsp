@@ -125,6 +125,11 @@
                     }%> </td></tr>   
                 <tr><td><strong>Vacaciones:</strong></td><td><strong>Desde:</strong> <%=n.getFe_vacacio_ini()%> </td><td><strong>Hasta:</strong> <%=n.getFe_vacacio_fin()%> </td></tr>   
 
+                
+                
+                
+                
+                
                 <tr><td><strong>Discapacidad:</strong></td><td><%
 
                     if (n.getEs_discapacidad().equals("1")) {

@@ -55,7 +55,7 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label" >DNI:</label><br>
-                    <input type="text"  class="form-control"  onKeyPress="return checkIt(event)" name="dni">
+                    <input type="text"  class="form-control"  onKeyPress="return checkIt(event)" name="dni" maxlength="8">
                 </div>
                 <input type="hidden" name="opc" value="Buscar">
                 <input type="hidden" name="busc" value="Busc">

@@ -39,6 +39,7 @@ HttpSession sesion =  request.getSession(true);
                      
                 }
                 
+                
             </style>
         </head>
         <body>  
@@ -94,7 +95,7 @@ HttpSession sesion =  request.getSession(true);
                             </div>
                             <div class="col-xs-6">
                                  <label>Sueldo :</label>
-                                <input type="text" name="sueldo" class="form-control" size="25" />
+                                 <input type="text" name="sueldo" class="form-control" size="25" maxlength="10"/>
                             </div>
                         </div>
                         <div class="row">
@@ -171,7 +172,7 @@ HttpSession sesion =  request.getSession(true);
                                 <td><span title="AREA" >Area</span></td>
                                 <td><span title="SECCION">Sección</span></td>
                                 <td><span title="PUESTO">Puesto</span></td>
-                                <td><span title="SUELDO">Sueldo</span></td>
+                                <td><span title="SUELDO" >Sueldo</span></td>
                                <!-- <th><span title="PROCESO">Proceso</span></th>-->
                                 <td><span title="MOTIVO">Requerimiento</span></td>
                                 <td><span title="FECHA_CREACION">Fecha de Contratación</span></td>

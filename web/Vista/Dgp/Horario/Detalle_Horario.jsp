@@ -15,19 +15,16 @@
 
         <meta charset="windows-1252">
         <title>Detalle Horiario</title>
-    <link rel="stylesheet" href="../../css1/bootstrap.min.css" >
+        <link rel="stylesheet" href="../../../css1/bootstrap.min.css" >
+        <script type="text/javascript" src="../../../js1/bootstrap.js" ></script>
+        <script type="text/javascript" src=""></script>
+            
+            
        <style>
-            table{
-                // display:block;
-                position: static;
-                float: left;
-                border-style: solid;
-                border-width: 5px;
-                margin: 2%;
-
-            }
+            
             body{
                 height: 300px;
+                position: relative;
             }
 
         </style>
@@ -35,9 +32,11 @@
 
 
     <body>
+        <div class="container">
         <center>
         <h2>Horario</h2>
         </center>
+    
     
         <%
             InterfaceListaDAO l = new ListaDAO();
@@ -50,9 +49,9 @@
                     if (h.getDia_horario().trim().equals(l.List_H()[i][0])) {
                         if (g == 0) {%>
                         
-            <table class="table table-hover">
+                        <table class="col-xs-1 table-hover bg-info">
                 
-            <tr><td><% out.println(l.List_H()[i][1]);%></td></tr>   
+                                <tr><td><% out.println(l.List_H()[i][1]);%></td></tr>   
 
             <%}%>
 
@@ -65,7 +64,8 @@
             <%}%>
             <%}%>
 
-        </table>
+             </table>
+    
 
         <%}%>
 
@@ -78,6 +78,6 @@
         <%}
                  }%>
 
-
+</div>
     </body>
 </html>
