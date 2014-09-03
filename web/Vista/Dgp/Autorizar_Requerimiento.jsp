@@ -18,16 +18,18 @@
 
     <body class="body">  
         <div class="spacing">
-            <center><h1 class="spacing">Requerimientos por Autorizar</h1></center>
+            <center><h1 class="spacing" style="font-weight: bold;">Requerimientos por Autorizar</h1></center>
         </div>
     <center>
         <div class="container theme-showcase">
-            <h3>  
+            <strong>
+            <h2>  
                 Requerimientos (<%=t%>)
-            </h3>       
-            <table class="tinytable" >
+            </h2>       
+            </strong>
+            <table class="table table-hover" >
 
-                <tr class="tab_cabe">
+                <tr >
                     <td><strong>Nro</strong></td>
                     <td><strong>Foto</strong> </td>
                     <td><strong>Nombres y Apellidos</strong></td>

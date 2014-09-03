@@ -11,9 +11,12 @@
 
 <html>
     <head>
+      
+
         <meta charset="windows-1252">
         <title>Detalle Horiario</title>
-        <style>
+    <link rel="stylesheet" href="../../css1/bootstrap.min.css" >
+       <style>
             table{
                 // display:block;
                 position: static;
@@ -32,8 +35,10 @@
 
 
     <body>
+        <center>
         <h2>Horario</h2>
-
+        </center>
+    
         <%
             InterfaceListaDAO l = new ListaDAO();
 
@@ -44,12 +49,17 @@
                     h = (V_Horario) List_V_Horario.get(s);
                     if (h.getDia_horario().trim().equals(l.List_H()[i][0])) {
                         if (g == 0) {%>
-        <table border="1">
-            <tr><td colspan="2"><% out.println(l.List_H()[i][1]);%></td></tr>   
+                        
+            <table class="table table-hover">
+                
+            <tr><td><% out.println(l.List_H()[i][1]);%></td></tr>   
 
             <%}%>
 
-            <tr><td><%out.println(h.getHo_hasta()); %> </td><td><%out.println(h.getDia_horario());%></td></tr>
+            <tr>
+             <td><%out.println(h.getHo_hasta()); %> </td>
+             <td><%out.println(h.getDia_horario());%></td>
+            </tr>
             <% g++; %>
 
             <%}%>
