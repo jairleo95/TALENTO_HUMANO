@@ -33,12 +33,8 @@
         <link href="plantilla/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
         <!-- Theme style -->
         <link href="plantilla/css/AdminLTE.css" rel="stylesheet" type="text/css" />
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-          <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
+      
+        
         <script type="text/javascript" src="js2/jquery.js"></script>
         <script type="text/javascript" src="js2/jquery.autoheight.js"></script>
         <link href="imagenes/guia.gif" rel="shortcut icon"/>
@@ -55,6 +51,10 @@
             }
         </style>
     </head>
+    
+    
+    
+    
     <body class="skin-blue">
         <!-- header logo: style can be found in header.less -->
         <header class="header">
@@ -321,6 +321,8 @@
             <aside class="left-side sidebar-offcanvas">
                 <!-- sidebar: style can be found in sidebar.less -->
                 <section class="sidebar">
+                    
+                    
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
                         <div class="pull-left image">
@@ -331,6 +333,7 @@
                             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                         </div>
                     </div>
+                            
                     <!-- search form -->
                     <form action="#" method="get" class="sidebar-form">
                         <div class="input-group">
@@ -345,15 +348,22 @@
                     <!-- Desplegables  -->
 
                     <!-- sidebar menu: : style can be found in sidebar.less -->
-                    <ul class="sidebar-menu" id="jonas">
+                    <ul class="sidebar-menu" id="">
+                        
+                        
+                        
                         <%
                             for (int i = 0; i < listarURL.size(); i++) {
                                 V_Privilegio dp = new V_Privilegio();
                                 dp = (V_Privilegio) listarURL.get(i);
+                              
                         %>
                         <li>
                             <a href="<%=dp.getDi_url()%>" target="myframe">
-                                <i class="fa fa-laptop"></i>
+                               
+                                <i class="<%=dp.getIc_link().trim()%>"></i>
+                                
+                               
                                 <span><%=dp.getNo_link()%></span>
 
                             </a>
@@ -374,11 +384,15 @@
                         </li>                                
                         <%}
                             }%>
+                    
+                            
+                            
                     </ul>
                 </section>
                 <!-- /.sidebar -->
 
             </aside>
+                            
 
             <!-- Right side column. Contains the navbar and content of the page -->
             <!--emiliano jnasrerttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt-->

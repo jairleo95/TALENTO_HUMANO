@@ -13,7 +13,6 @@
     <body>
     <center>
         <%
-
             HttpSession sesion = request.getSession(true);
             String rol = (String) sesion.getAttribute("IDROL");
         %>
@@ -83,7 +82,7 @@
         <center>
             <label>Aun no se ha registrado los datos del familiar</label>
             <%  if (rol.trim().equals("ROL-0002")) {%>
-            <a href="Reg_Padre_Madre_Conyugue.jsp?idtr=<?echo $id?>">Registrar</a>
+            <a href="Reg_Padre_Madre_Conyugue.jsp?idtr=<%=request.getParameter("idtr")%>">Registrar</a>
             <%}%>
         </center>
         <% } %>
@@ -92,19 +91,19 @@
 </html>
 <center>
     <%
-  
-        if (LISTA_HIJOS.size()!=0) {
+
+        if (LISTA_HIJOS.size() != 0) {
     %>
     <%@include file="List_Hijo.jsp" %>
     <%  if (rol.trim().equals("ROL-0002")) {%>
-    <a href="Reg_Datos_Hijo.jsp?idtr=<?echo $id;?>" class="button blue">Agregar un hijo</a>
+    <a href="Reg_Datos_Hijo.jsp?idtr=<%=request.getParameter("idtr")%>" class="button blue">Agregar un hijo</a>
     <%}%>
     <%} else {%>
 
     <label>No se ha registrado ningun Hijo(a)</label><br>
 
     <%  if (rol.trim().equals("ROL-0002")) {%>
-    <a href="Reg_Datos_Hijo.jsp?idtr=<?echo $id;?>" class="">Registrar</a>
+    <a href="Reg_Datos_Hijo.jsp?idtr=<%=request.getParameter("idtr")%>" class="">Registrar</a>
     <%}%>
 </center>
 <%}%>

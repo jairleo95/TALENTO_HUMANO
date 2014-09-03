@@ -14,8 +14,8 @@
     <head>
         <meta charset="windows-1252">
         <title></title>
-        <link rel="stylesheet" href="../CSS/form.css"  type="text/css" > 
-        <script language="javascript" type="text/javascript" src="jquery-1.3.2.min.js"></script>
+        <link rel="stylesheet" href="../../css/Css_Formulario/form.css"  type="text/css" > 
+        <script language="javascript" type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
 
 
         <link rel="stylesheet" href="../../css/Css_DGP/chosen.css">
@@ -116,7 +116,7 @@
 
                             </select></td></tr>   
                     <tr style="display: "><td class="td">Requermiento:</td><td>
-                            <select name="IDREQUERIMIENTO"   onchange="mostrar()" class="chosen-select"  > 
+                            <select name="IDREQUERIMIENTO"    disabled="" onchange="mostrar()" class="text-box"   > 
                                 <option value=""></option>
 
                                 <%

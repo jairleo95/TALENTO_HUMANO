@@ -12,7 +12,7 @@
                 <form class="form" action="../../../familiar"> 
                          <table class="table" >  
                            
-                             <input type="hidden" name="TRABAJADOR" value="TRB-000704" class="text-box" >      
+                             <input type="hidden" name="TRABAJADOR" value="<%=request.getParameter("idtr")%>" class="text-box" >      
                              
                              <tr><td>Apellido Paterno:</td><td><input type="text" name="APELLIDO_P" class="text-box" required=""></td></tr>      
                              <tr><td>Apellido Materno:</td><td><input type="text" name="APELLIDO_M" class="text-box"  required=""></td></tr>    

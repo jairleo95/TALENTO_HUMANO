@@ -51,6 +51,10 @@
     <body>
     <center>
 
+        <%  if (List_id_Contrato_DGP.size() == 0) {%>
+        <h3>Aun no se ha hecho Contrato.</h3>
+        <%} else {%>
+        
         <%
             CConversion c = new CConversion();
 
@@ -62,9 +66,6 @@
                 X_List_Id_Contrato_DGP n = new X_List_Id_Contrato_DGP();
                 n = (X_List_Id_Contrato_DGP) List_id_Contrato_DGP.get(b);
         %>
-        <%  if (List_id_Contrato_DGP.size() == 0) {%>
-        <h3>Aun no se ha hecho Contrato.</h3>
-        <%} else {%>
         <form class="form"action="../../contrato" method="post">
             <table>
                 <tr><td><select name="ida">

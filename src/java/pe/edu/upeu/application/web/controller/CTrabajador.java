@@ -135,10 +135,10 @@ public class CTrabajador extends HttpServlet {
                  String idtr = tr.MAX_ID_DATOS_TRABAJADOR();
                  getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
                  getServletContext().setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));
-                 if (!ES_CIVIL.equals("1")) {
-                 response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr='" + idtr + "'");
+                 if (ES_CIVIL.equals("1")) {
+                 response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr + "");
                  } else {
-                 response.sendRedirect("Vista/Trabajador/Familiar/Reg_Padre_Madre_Conyugue.jsp?idtr='" + idtr + "'");
+                 response.sendRedirect("Vista/Trabajador/Familiar/Reg_Padre_Madre_Conyugue.jsp?idtr=" + idtr + "");
                  }
             }
             if (opc.equals("Buscar")) {

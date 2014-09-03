@@ -424,7 +424,8 @@ public class DgpDAO implements InterfaceDgpDAO {
 
     @Override
     public void REG_DGP_FINAL(String IDDGP) {
-        String sql = "UPDATE RHTM_DGP SET ES_DGP='0' WHERE ID_DGP='" + IDDGP + "'";
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "UPDATE RHTM_DGP SET ES_DGP='0' WHERE ID_DGP='" + IDDGP.trim() + "'";
         this.conn.ejecutar(sql);
     }
 }

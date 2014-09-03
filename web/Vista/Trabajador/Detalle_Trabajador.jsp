@@ -90,7 +90,11 @@
     </head>
     <body >
         <%
-            String idtr = request.getParameter("idtr");
+
+            V_Ficha_Trab_Num_C t = new V_Ficha_Trab_Num_C();
+            t = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(0);
+
+            String idtr = t.getId_trabajador().trim();
             String aut = request.getParameter("aut");
             HttpSession sesion = request.getSession(true);
             String idp = (String) sesion.getAttribute("p");

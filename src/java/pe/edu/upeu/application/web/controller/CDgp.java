@@ -149,10 +149,10 @@ public class CDgp extends HttpServlet {
         if (opc.equals("Seguimiento")) {
             String iddgp = request.getParameter("iddgp");
             String idrp = IReq.id_det_req_proc(iddgp);
-
             getServletContext().setAttribute("Det_Autorizacion", a.List_Detalle_Autorizacion(iddgp, idrp));
+          
 
-            response.sendRedirect("Vista/Dgp/Detalle_Seguimiento_Dgp.jsp");
+  response.sendRedirect("Vista/Dgp/Detalle_Seguimiento_Dgp.jsp");
         }
         if (opc.equals("Proceso")) {
             getServletContext().setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep));
@@ -161,7 +161,9 @@ public class CDgp extends HttpServlet {
         if (opc.equals("User_Aut")) {
             String iddgp = request.getParameter("iddgp");
             getServletContext().setAttribute("USER_DGP", dgp.USER_DGP(iddgp));
-            response.sendRedirect("Vista/Dgp/User_Dgp.jsp");
+            
+out.println(iddgp);
+//response.sendRedirect("Vista/Dgp/User_Dgp.jsp");
         }
         if (opc.equals("List_Dgp_Tr")) {
           

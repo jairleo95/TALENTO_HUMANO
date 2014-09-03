@@ -59,7 +59,7 @@ public class CFamiliar extends HttpServlet {
             String US_MODIF = null;
             String FE_MODIF = null;
             String IP_USUARIO = null;
-            String ID_TRABAJADOR = request.getParameter("ID_TRABAJADOR");
+            String ID_TRABAJADOR = request.getParameter("IDDATOS_TRABAJADOR");
             pmc.INSERT_PADRE_MADRE_CONYUGUE(ID_PADRE_MADRE_CONYUGUE, AP_NOMBRES_PADRE, AP_NOMBRES_MADRE, ES_TRABAJA_UPEU_CONYUGUE, AP_NOMBRES_CONYUGUE, FE_NAC_CONYUGUE, TI_DOC_ID, NU_DOC, LI_INSCRIPCION_VIG_ESSALUD, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, ID_TRABAJADOR);
             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + ID_TRABAJADOR);
         }
@@ -68,7 +68,8 @@ public class CFamiliar extends HttpServlet {
             getServletContext().setAttribute("List_PMC", pmc.List_PMC(idtr));
             getServletContext().setAttribute("LISTA_HIJOS", h.LISTA_HIJOS(idtr));
              getServletContext().setAttribute("LISTA_HIJO", h.LISTA_HIJOS(idtr));
-            response.sendRedirect("Vista/Trabajador/Familiar/Detalle_Familiar.jsp");
+            // out.println(idtr);
+            response.sendRedirect("Vista/Trabajador/Familiar/Detalle_Familiar.jsp?idtr="+idtr);
         }
         if (opc.equals("REGISTRAR HIJO")) {
             String ID_DATOS_HIJOS_TRABAJADOR = null;
