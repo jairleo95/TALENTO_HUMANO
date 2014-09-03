@@ -1,0 +1,511 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>jQeury.steps Demos</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width">
+<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="css1/bootstrap.min.css" />
+<style>
+/*custom font*/
+
+@import url(http://fonts.googleapis.com/css?family=Montserrat);
+/*basic reset*/
+* {
+margin: 0;
+padding: 0;
+}
+html {
+height: 100%;
+}
+body {
+font-family: montserrat, arial, verdana;
+}
+/*form styles*/
+#msform {
+width: 58%;
+margin: 20px auto;
+text-align: center;
+position: relative;
+/*border: 1px solid #27AE60;*/
+}
+#msform fieldset {
+background: white;
+border: 0 none;
+border-radius: 3px;
+box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+padding: 20px 10px;
+box-sizing: border-box;
+width: 35%;
+margin: 0 27%;
+/*stacking fieldsets above each other*/
+position: absolute;
+}
+/*Hide all except first fieldset*/
+#msform fieldset:not(:first-of-type) {
+display: none;
+}
+/*inputs*/
+#msform input, #msform textarea, #msform select {
+padding: 5px;
+border: 1px solid #ccc;
+border-radius: 3px;
+margin-bottom: 10px;
+width: 100%;
+box-sizing: border-box;
+font-family: montserrat;
+color: #2C3E50;
+font-size: 11px;
+}
+/*buttons*/
+#msform .action-button {
+width: 100%;
+background: #006699;
+font-weight: bold;
+color: white;
+border: 0 none;
+border-radius: 1px;
+cursor: pointer;
+padding: 10px 5px;
+margin: 10px 5px;
+}
+#msform .action-button:hover, #msform .action-button:focus {
+box-shadow: 0 0 0 2px white, 0 0 0 3px #red;
+}
+/*headings*/
+.fs-title {
+font-size: 16px;
+text-transform: uppercase;
+color: #2C3E50;
+margin-bottom: 10px;
+}
+.fs-subtitle {
+font-weight: normal;
+font-size: 13px;
+color: #666;
+margin-bottom: 20px;
+}
+/*progressbar*/
+#progressbar {
+margin-bottom: 30px;
+overflow: hidden;
+/*CSS counters to number the steps*/
+counter-reset: step;
+}
+#progressbar li {
+list-style-type: none;
+color: #006699;
+text-transform: uppercase;
+font-size: 10px;
+width: 14%;
+float: left;
+position: relative;
+/*border: 1px solid #27AE60;*/
+}
+#progressbar li:before {
+content: counter(step);
+counter-increment: step;
+width: 30px;
+line-height: 20px;
+display: block;
+font-size: 14px;
+color: #333;
+background: white;
+border-radius: 3px;
+margin: 0 auto 5px auto;
+}
+/*progressbar connectors*/
+#progressbar li:after {
+content: '';
+width: 100%;
+height: 2px;
+background: white;
+position: absolute;
+left: -50%;
+top: 9px;
+z-index: -1; /*put it behind the numbers*/
+}
+#progressbar li:first-child:after {
+/*connector not needed before the first step*/
+content: none;
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before, #progressbar li.active:after {
+    background: #0383c3;
+color: white;
+}
+input[type=date]::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    display: none;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    width: 100%;
+    color: #2C3E50;
+    font-size: 10px;
+}
+</style>
+
+</head>
+<body>
+
+<!-- multistep form -->
+<form id="msform">
+<!-- progressbar -->
+<ul id="progressbar">
+<li class="active">Datos Personales 1</li>
+<li>Datos Personales 2</li>
+<li>Situación Educativa</li>
+<li>Domicilio Actual</li>
+<li>Domicilio Legal</li>
+<li>Ingresos Quinta Categoría</li>
+<li>Información Religiosa</li>
+</ul>
+<!-- fieldsets -->
+<fieldset>
+<h3 class="fs-title">DATOS PERSONALES</h3>
+<h4 class="fs-subtitle">Paso 1</h4>
+<input type="text" name="email" placeholder="Apellido Paterno..." autofocus="" class="" />
+<input type="text" name="pass" placeholder="Apellido Materno..." />
+<input type="text" name="cpass" placeholder="Nombres..." />
+<select name="SEXO" required="">
+    <option value="">Seleccionar Sexo</option>
+    <option value="M">Masculino</option>
+    <option value="F">Femenino</option>
+</select>
+<input type="date" name="FECHA_NAC" required="" id="edad"  min="1944-01-01" max="1995-12-31">
+<select name="NACIONALIDAD" id="nac"  required="">
+    <option value="" > </option>
+    <option value="NAC-0067" > Albanesa                                                                                                                                                                                                                                                                                                   </option>
+    <option value="NAC-0068" > Alemana                                                                                                                                                                                                                                                                                                    </option>
+    <option value="NAC-0002" > Argelina                                                                                                                                                                                                                                                                                                   </option>
+    <option value="NAC-0036" > Argentina                                                                                                                                                                                                                                                                                                  </option>
+    <option value="NAC-0069" > Armenia                                                                                                                                                                                                                                                                                                    </option>
+    <option value="NAC-0050" > Azerbaiyana                                                                                                                                                                                                                                                                                                </option>
+    <option value="NAC-0071" > Belga                                                                                                                                                                                                                                                                                                      </option>
+    <option value="NAC-0072" > Bielorrusa                                                                                                                                                                                                                                                                                                 </option>
+    <option value="NAC-0037" > Boliviana                                                                                                                                                                                                                                                                                                  </option>
+    <option value="NAC-0073" > Bosnia                                                                                                                                                                                                                                                                                                     </option>
+    <option value="NAC-0003" > Camerunesa                                                                                                                                                                                                                                                                                                 </option>
+    <option value="NAC-0018" > Canadiense                                                                                                                                                                                                                                                                                                 </option>
+    <option value="NAC-0075" > Checa                                                                                                                                                                                                                                                                                                      </option>
+    <option value="NAC-0039" > Chilena                                                                                                                                                                                                                                                                                                    </option>
+    <option value="NAC-0051" > China                                                                                                                                                                                                                                                                                                      </option>
+    <option value="NAC-0076" > Chipriota                                                                                                                                                                                                                                                                                                  </option>
+    <option value="NAC-0040" > Colombiana                                                                                                                                                                                                                                                                                                 </option>
+    <option value="NAC-0022" > Costarricense                                                                                                                                                                                                                                                                                              </option>
+    <option value="NAC-0077" > Danesa                                                                                                                                                                                                                                                                                                     </option>
+    <option value="NAC-0030" > Dominicana                                                                                                                                                                                                                                                                                                 </option>
+    <option value="NAC-0005" > Ecuatoguineana                                                                                                                                                                                                                                                                                             </option>
+    <option value="NAC-0041" > Ecuatoriana                                                                                                                                                                                                                                               </option>
+    <option value="NAC-0006" > Egipcia                                                                                                                                                                                                                                                                                                    </option>
+    <option value="NAC-0078" > Escocesa                                                                                                                                                                                                                                                                                                   </option>
+    <option value="NAC-0079" > Eslovaca                                                                                                                                                                                                                                                                                                   </option>
+    <option value="NAC-0080" > Eslovena                                                                                                                                                                                                                                                                                                   </option>
+    <option value="NAC-0019" > Estadounidense                                                                                                                                                                                                                                                                                             </option>
+    <option value="NAC-0082" > Estonia                                                                                                                                                                                                                                                                                                    </option>
+    <option value="NAC-0052" > Filipina                                                                                                                                                                                                                                                                                                   </option>
+    <option value="NAC-0083" > Finlandesa                                                                                                                                                                                                                                                                                                 </option>
+    <option value="NAC-0084" > Francesa                                                                                                                                                                                                                                                                                                   </option>
+    <option value="NAC-0053" > Georgiana                                                                                                                                                                                                                                                                                                  </option>
+    <option value="NAC-0085" > Griega                                                                                                                                                                                                                                                                                                     </option>
+    <option value="NAC-0023" > Guatemalteca                                                                                                                                                                                                                                                                                               </option>
+    <option value="NAC-0031" > Haitiana                                                                                                                                                                                                                                                                                                   </option>
+    <option value="NAC-0086" > Holandesa                                                                                                                                                                                                                                                                                                  </option>
+    <option value="NAC-0055" > Indonesia                                                                                                                                                                                                                                                                                                  </option>
+    <option value="NAC-0088" > Inglesa                                                                                                                                                                                                                                                                                                    </option>
+    <option value="NAC-0089" > Irlandesa                                                                                                                                                                                                                                                                                                  </option>
+    <option value="NAC-0090" > Italiana                                                                                                                                                                                                                                                                                                   </option>
+    <option value="NAC-0032" > Jamaiquina                                                                                                                                                                                                                                                                                                 </option>
+    <option value="NAC-0057" > Japonesa                                                                                                                                                                                                                                                                                                   </option>
+    <option value="NAC-0091" > Letona                                                                                                                                                                                                                                                                                                     </option>
+    <option value="NAC-0058" > Libanesa                                                                                                                                                                                                                                                                                                   </option>
+    <option value="NAC-0007" > Libia                                                                                                                                                                                                                                                                                                      </option>
+    <option value="NAC-0092" > Lituana                                                                                                                                                                                                                                                                                                    </option>
+    <option value="NAC-0093" > Luxemburguesa                                                                                                                                                                                                                                                                                              </option>
+    <option value="NAC-0094" > Maltesa                                                                                                                                                                                                                                                                                                    </option>
+    <option value="NAC-0020" > Mexicana                                                                                                                                                                                                                                                                                                   </option>
+    <option value="NAC-0095" > Moldava                                                                                                                                                                                                                                                                                                    </option>
+    <option value="NAC-0096" > Monegasca                                                                                                                                                                                                                                                                                                  </option>
+    <option value="NAC-0097" > Montenegrina                                                                                                                                                                                                                                                                                               </option>
+    <option value="NAC-0009" > Namibia                                                                                                                                                                                                                                                                                                    </option>
+    <option value="NAC-0010" > Nigeriana                                                                                                                                                                                                                                                                                                  </option>
+    <option value="NAC-0059" > Norcoreana                                                                                                                                                                                                                                                                                                 </option>
+    <option value="NAC-0098" > Noruega                                                                                                                                                                                                                                                                                                    </option>
+    <option value="NAC-0043" > Paraguaya                                                                                                                                                                                                                                                                                                  </option>
+    <option value="NAC-0044" selected="selected" > Peruana                                                                                                                                                                                                                                                                                                    </option>
+    <option value="NAC-0099" > Polaca                                                                                                                                                                                                                                                                                                     </option>
+    <option value="NAC-0100" > Portuguesa                                                                                                                                                                                                                                                                                                 </option>
+    <option value="NAC-0101" > Rumana                                                                                                                                                                                                                                                                                                     </option>
+    <option value="NAC-0102" > Rusa                                                                                                                                                                                                                                                                                                       </option>
+    <option value="NAC-0011" > Saharaui                                                                                                                                                                                                                                                                                                   </option>
+    <option value="NAC-0012" > Senegalesa                                                                                                                                                                                                                                                                                                 </option>
+    <option value="NAC-0103" > Serbia                                                                                                                                                                                                                                                                                                     </option>
+    <option value="NAC-0060" > Siria                                                                                                                                                                                                                                                                                                      </option>
+    <option value="NAC-0013" > Sudafricana                                                                                                                                                                                                                                                                                                </option>
+    <option value="NAC-0104" > Sueca                                                                                                                                                                                                                                                                                                      </option>
+    <option value="NAC-0105" > Suiza                                                                                                                                                                                                                                                                                                      </option>
+    <option value="NAC-0061" > Surcoreana                                                                                                                                                                                                                                                                                                 </option>
+    <option value="NAC-0014" > Togolesa                                                                                                                                                                                                                                                                                                   </option>
+    <option value="NAC-0106" > Turca                                                                                                                                                                                                                                                                                                      </option>
+    <option value="NAC-0107" > Ucraniana                                                                                                                                                                                                                                                                                                  </option>
+    <option value="NAC-0046" > Uruguaya                                                                                                                                                                                                                                                                                                   </option>
+    <option value="NAC-0047" > Venezolana                                                                                                                                                                                                                                                                                                 </option>
+    <option value="NAC-0062" > Vietnamita                                                                                                                                                                                                                                                                                                 </option>
+</select>
+<select  id="dep_nac" class="text-box chosen-select"  required="">
+    <option value="" >Seleccionar Departamento</option>
+    <option value="DEP-0001" >AMAZONAS                                                                                                                                                                                             </option>
+    <option value="DEP-0002" >ANCASH                                                                                                                                                                                                  </option>
+    <option value="DEP-0003" >APURIMAC                                                                                                                                                                                                </option>
+    <option value="DEP-0004" >AREQUIPA                                                                                                                                                                                                </option>
+    <option value="DEP-0005" >AYACUCHO                                                                                                                                                                                                </option>
+    <option value="DEP-0006" >CAJAMARCA                                                                                                                                                                                               </option>
+    <option value="DEP-0007" >CALLAO                                                                                                                                                                                                  </option>
+    <option value="DEP-0008" >CUSCO                                                                                                                                                                                                   </option>
+    <option value="DEP-0009" >HUANCAVELICA                                                                                                                                                                                            </option>
+    <option value="DEP-0010" >HUANUCO                                                                                                                                                                                                 </option>
+    <option value="DEP-0011" >ICA                                                                                                                                                                                                     </option>
+    <option value="DEP-0012" >JUNIN                                                                                                                                                                                                   </option>
+    <option value="DEP-0013" >LA LIBERTAD                                                                                                                                                                                             </option>
+    <option value="DEP-0014" >LAMBAYEQUE                                                                                                                                                                                              </option>
+    <option value="DEP-0015" >LIMA                                                                                                                                                                                                    </option>
+    <option value="DEP-0016" >LORETO                                                                                                                                                                                                  </option>
+    <option value="DEP-0017" >MADRE DE DIOS                                                                                                                                                                                           </option>
+    <option value="DEP-0018" >MOQUEGUA                                                                                                                                                                                                </option>
+    <option value="DEP-0019" >PASCO                                                                                                                                                                                                   </option>
+    <option value="DEP-0020" >PIURA                                                                                                                                                                                                   </option>
+    <option value="DEP-0021" >PUNO                                                                                                                                                                                                    </option>
+    <option value="DEP-0022" >SAN MARTIN                                                                                                                                                                                              </option>
+    <option value="DEP-0023" >TACNA                                                                                                                                                                                                   </option>
+    <option value="DEP-0024" >TUMBES                                                                                                                                                                                                  </option>
+    <option value="DEP-0025" >UCAYALI                                                                                                                                                                                                 </option>
+</select>
+<select  id="pro_nac" required="">
+    <option value="" >Seleccionar Provincia</option>
+</select>
+<select name="DISTRITO" id="dist_nac" required="">
+    <option value="" >Seleccionar Distrito</option>
+</select>
+<select name="TIPO_DOC" required="">
+    <option value="">------</option>
+    <option value="1" selected="selected" >DNI</option>
+    <option value="2">Carné de Extranjeria</option>
+    <option value="3">Pasaporte</option>
+</select>
+<input type="text" name="NRO_DOC" class="text-box doc" id="doc" required="" placeholder="Ingresar Nº de Doc...">
+<select name="ESTADO_CIVIL"  required="">
+    <option value="">Seleccionar Estado Civil...</option>
+    <option value="1">Soltero(a)</option>
+    <option value="2">Casado(a)</option>
+    <option value="3">Divorciado(a)</option>
+    <option value="4">Viudo(a)</option>
+    <option value="5">Separado(a)</option>
+    <option value="6">Conviviente(a)</option>
+</select>
+<input type="button" name="next" class="next action-button" value="Next" />
+</fieldset>
+<fieldset>
+<h2 class="fs-title">DATOS PERSONALES</h2>
+<h3 class="fs-subtitle">Paso 2</h3>
+
+<select name="GRUPO_SANGUINEO" class="text-box">
+    <option value="">Seleccionar Grupo Sanguineo</option>
+    <option value="1">A</option>
+    <option value="2">B</option>
+    <option value="3">AB</option>
+    <option value="4">0</option>
+</select>
+<select name="FACTOR_RH_ID" class="text-box">
+    <option value="">Seleccionar Factor RH</option>
+    <option value="1">Positivo</option>
+    <option value="2">Negativo</option>
+</select>
+<input type="text" name="TELEFONO" class="text-box" placeholder="Nº de Teléfono">
+<input type="text" name="CELULAR" class="text-box" placeholder="Nº de Celular">
+<input type="email" name="CORREO_PERSONAL"  required="" class="text-box email"  placeholder="Correo Electrónico">
+<input type="email" name="CORREO_INST" required="" class="text-box email" placeholder="Correo Institucional">
+<select name="SISTEMA_PENSIONARIO" class="text-box required"  required="">
+    <option value="">Seleccionar Sistema Pensionario</option>
+    <option value="1">AFP</option>
+    <option value="2">ONP</option>
+    <option value="3">Ninguno</option>
+    <option value="4">Sin Régimen Provisional(jubilado, cesante).</option>
+</select>
+<select name="NOMBRE_AFP_ID" class="text-box">
+    <option value="">Seleccionar AFP</option>
+    <option value="1">Integra</option>
+    <option value="2">Prima</option>
+    <option value="3">Profuturo</option>
+    <option value="4">Horizonte</option>
+    <option value="4">Habitat</option>
+</select>
+<select name="AFILIADO_ESSALUD_ID" class="text-box">
+    <option value="">Seleccionar Afiliación</option>
+    <option value="1">Si</option>
+    <option value="2">No</option>
+</select>
+<select  name="TIPO_TRABAJADOR_ID" class="text-box" >
+    <option value="">Seleccionar Tipo Trabajador</option>
+    <option value="T" selected >Trabajador</option>
+    <option value="A">Alumno</option>
+</select>
+
+<input type="button" name="previous" class="previous action-button" value="Previous" />
+<input type="button" name="next" class="next action-button" value="Next" />
+</fieldset>
+<fieldset>
+<h2 class="fs-title">SITUACIÓN EDUCATIVA</h2>
+<h3 class="fs-subtitle">Paso 3</h3>
+<input type="text" name="twitter" placeholder="Twitter" />
+<input type="text" name="facebook" placeholder="Facebook" />
+<input type="text" name="gplus" placeholder="Google Plus" />
+<input type="button" name="previous" class="previous action-button" value="Previous" />
+<input type="button" name="next" class="next action-button" value="Next" />
+</fieldset>
+<fieldset>
+<h2 class="fs-title">DOMICILIO ACTUAL</h2>
+<h3 class="fs-subtitle">Paso 4</h3>
+<input type="text" name="twitter" placeholder="Twitter" />
+<input type="text" name="facebook" placeholder="Facebook" />
+<input type="text" name="gplus" placeholder="Google Plus" />
+<input type="button" name="previous" class="previous action-button" value="Previous" />
+<input type="button" name="next" class="next action-button" value="Next" />
+</fieldset>
+<fieldset>
+<h2 class="fs-title">DOMICILIO LEGAL</h2>
+<h3 class="fs-subtitle">Paso 5</h3>
+<input type="text" name="twitter" placeholder="Twitter" />
+<input type="text" name="facebook" placeholder="Facebook" />
+<input type="text" name="gplus" placeholder="Google Plus" />
+<input type="button" name="previous" class="previous action-button" value="Previous" />
+<input type="button" name="next" class="next action-button" value="Next" />
+</fieldset>
+<fieldset>
+<h2 class="fs-title">INGRESOS QUINTA CATEGORÍA</h2>
+<h3 class="fs-subtitle">Paso 6</h3>
+<input type="text" name="fname" placeholder="First Name" />
+<input type="text" name="lname" placeholder="Last Name" />
+<input type="text" name="phone" placeholder="Phone" />
+<textarea name="address" placeholder="Address"></textarea>
+<input type="button" name="previous" class="previous action-button" value="Previous" />
+<input type="button" name="next" class="next action-button" value="Next" />
+</fieldset>
+<fieldset>
+<h2 class="fs-title">INFORMACIÓN RELIGIOSA</h2>
+<h3 class="fs-subtitle">Paso 7</h3>
+<input type="text" name="fname" placeholder="First Name" />
+<input type="text" name="lname" placeholder="Last Name" />
+<input type="text" name="phone" placeholder="Phone" />
+<textarea name="address" placeholder="Address"></textarea>
+<input type="button" name="previous" class="previous action-button" value="Previous" />
+<input type="submit" name="submit" class="submit action-button" value="Submit" />
+</fieldset>
+</form>
+
+<!-- jQuery --> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<!-- jQuery easing plugin --> 
+<script src="js-steps/jquery.easing.min.js" type="text/javascript"></script> 
+<script>
+$(function() {
+
+//jQuery time
+var current_fs, next_fs, previous_fs; //fieldsets
+var left, opacity, scale; //fieldset properties which we will animate
+var animating; //flag to prevent quick multi-click glitches
+
+$(".next").click(function(){
+	if(animating) return false;
+	animating = true;
+	
+	current_fs = $(this).parent();
+	next_fs = $(this).parent().next();
+	
+	//activate next step on progressbar using the index of next_fs
+	$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+	
+	//show the next fieldset
+	next_fs.show(); 
+	//hide the current fieldset with style
+	current_fs.animate({opacity: 0}, {
+		step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale current_fs down to 80%
+			scale = 1 - (1 - now) * 0.2;
+			//2. bring next_fs from the right(50%)
+			left = (now * 50)+"%";
+			//3. increase opacity of next_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'transform': 'scale('+scale+')'});
+			next_fs.css({'left': left, 'opacity': opacity});
+		}, 
+		duration: 800, 
+		complete: function(){
+			current_fs.hide();
+			animating = false;
+		}, 
+		//this comes from the custom easing plugin
+		easing: 'easeInOutBack'
+	});
+});
+
+$(".previous").click(function(){
+	if(animating) return false;
+	animating = true;
+	
+	current_fs = $(this).parent();
+	previous_fs = $(this).parent().prev();
+	
+	//de-activate current step on progressbar
+	$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+	
+	//show the previous fieldset
+	previous_fs.show(); 
+	//hide the current fieldset with style
+	current_fs.animate({opacity: 0}, {
+		step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+		}, 
+		duration: 800, 
+		complete: function(){
+			current_fs.hide();
+			animating = false;
+		}, 
+		//this comes from the custom easing plugin
+		easing: 'easeInOutBack'
+	});
+});
+
+$(".submit").click(function(){
+	return false;
+})
+
+});
+</script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>
