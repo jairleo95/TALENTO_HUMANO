@@ -7,6 +7,7 @@ package pe.edu.upeu.application.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -118,7 +119,7 @@ public class CTrabajador extends HttpServlet {
                 String DI_DOM_LEG_D4 = request.getParameter("DIR_DOM_LEG_D4");
                 String LI_DI_DOM_LEG_D5 = request.getParameter("DIR_DOM_LEG_D5_ID");
                 String DI_DOM_LEG_D6 = request.getParameter("DIR_DOM_LEG_D6");
-              //  String ID_DI_DOM_LEG_DISTRITO = request.getParameter("DIR_DOM_LEG_DISTRITO_ID");
+                //  String ID_DI_DOM_LEG_DISTRITO = request.getParameter("DIR_DOM_LEG_DISTRITO_ID");
                 String ID_DI_DOM_LEG_DISTRITO = "DST-001343";;
                 String CA_ING_QTA_CAT_EMPRESA = request.getParameter("ING_QTA_CAT_EMPRESA");
                 String CA_ING_QTA_CAT_RUC = request.getParameter("ING_QTA_CAT_RUC");
@@ -131,15 +132,16 @@ public class CTrabajador extends HttpServlet {
                 String IP_USUARIO = request.getParameter("USUARIO_IP");
 
                 tr.INSERT_TRABAJADOR(ID_TRABAJADOR, AP_PATERNO, AP_MATERNO, NO_TRABAJADOR, TI_DOC, NU_DOC, ES_CIVIL, FE_NAC, ID_NACIONALIDAD, ID_DEPARTAMENTO, ID_PROVINCIA, ID_DISTRITO, TE_TRABAJADOR, CL_TRA, DI_CORREO_PERSONAL, DI_CORREO_INST, CO_SISTEMA_PENSIONARIO, LI_NIVEL_EDUCATIVO, REGIMEN, ES_INST_PERU, CARRERA, DE_ANNO_EGRESO, CM_OTROS_ESTUDIOS, ES_SEXO, LI_GRUPO_SANGUINEO, DE_REFERENCIA, LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, ID_NO_AFP, ES_AFILIADO_ESSALUD, LI_TIPO_TRABAJADOR, CA_TIPO_HORA_PAGO_REFEERENCIAL, ES_FACTOR_RH, LI_DI_DOM_A_D1, DI_DOM_A_D2, LI_DI_DOM_A_D3, DI_DOM_A_D4, LI_DI_DOM_A_D5, DI_DOM_A_D6, DI_DOM_A_REF, ID_DI_DOM_A_DISTRITO, LI_DI_DOM_LEG_D1, DI_DOM_LEG_D2, LI_DI_DOM_LEG_D3, DI_DOM_LEG_D4, LI_DI_DOM_LEG_D5, DI_DOM_LEG_D6, ID_DI_DOM_LEG_DISTRITO, CA_ING_QTA_CAT_EMPRESA, CA_ING_QTA_CAT_RUC, CA_ING_QTA_CAT_OTRAS_EMPRESAS, CM_OBSERVACIONES, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO);
-               // out.println("sdfsdsdf");
-                 String idtr = tr.MAX_ID_DATOS_TRABAJADOR();
-                 getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-                 getServletContext().setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));
-                 if (ES_CIVIL.equals("1")) {
-                 response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr + "");
-                 } else {
-                 response.sendRedirect("Vista/Trabajador/Familiar/Reg_Padre_Madre_Conyugue.jsp?idtr=" + idtr + "");
-                 }
+                // out.println("sdfsdsdf");
+                String idtr = tr.MAX_ID_DATOS_TRABAJADOR();
+                getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+                getServletContext().setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));
+                if (ES_CIVIL.equals("1")) {
+                    response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr + "&a=t");
+
+                } else {
+                    response.sendRedirect("Vista/Trabajador/Familiar/Reg_Padre_Madre_Conyugue.jsp?idtr=" + idtr + "");
+                }
             }
             if (opc.equals("Buscar")) {
                 String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");

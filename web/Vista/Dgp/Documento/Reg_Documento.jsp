@@ -66,7 +66,7 @@
             String rol = (String) sesion.getAttribute("IDROL");
             int n_nac = Integer.parseInt(request.getParameter("n_nac"));
             int num_ad = Integer.parseInt(request.getParameter("num_ad"));
-
+            String id_dgp = "";
         %>
     <center>
 
@@ -387,8 +387,8 @@
                 <input type="hidden" name="iddgp" value="<%=d.getIddgp()%>">
                 <input type="hidden" name="idtr" value="<%=d.getId_trabajador().trim()%>">
                 <% }
-
                         i++;
+                        id_dgp = d.getIddgp();
                     }%>
 
 
@@ -403,17 +403,18 @@
 
             </table>
 
-  
-        <%   if (request.getParameter("pro") != null) {
-                if (request.getParameter("pro").equals("pr_dgp")) {
-                    out.println("<input  type='hidden' value='enter' name='P2'/>");
-                }}
-                
-            if (request.getParameter("P2") != null) {
-                if (request.getParameter("P2").equals("TRUE")) { %>
-      </form>
-        <form action="../Control/ControlDGP.php" method="post">
-            <input  type="hidden" value="<? echo $iddgp; ?>" name="iddgp">
+
+            <%   if (request.getParameter("pro") != null) {
+                    if (request.getParameter("pro").equals("pr_dgp")) {
+                        out.println("<input  type='hidden' value='enter' name='P2'/>");
+                    }
+                }
+
+                if (request.getParameter("P2") != null) {
+                    if (request.getParameter("P2").equals("TRUE")) { %>
+        </form>
+        <form action="../../../dgp" method="post">
+            <input  type="hidden" value="<%=id_dgp%>" name="iddgp">
             <input type="submit" value="Terminar" name="opc">
 
         </form>

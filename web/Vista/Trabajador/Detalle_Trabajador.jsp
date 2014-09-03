@@ -88,7 +88,19 @@
 
         </script>
     </head>
+
+    <%if (request.getParameter("a") != null) {
+            if (request.getParameter("a").equals("t")) {
+    %>
+
+    <body onload="alerta_dt_ingresados()">
+
+        <%
+            }
+        } else {
+        %>
     <body >
+        <%}%>
         <%
 
             V_Ficha_Trab_Num_C t = new V_Ficha_Trab_Num_C();
@@ -170,7 +182,7 @@
                 </tr>
             </table>
 
-            <div  class="titulo" id="titulo-c">Informacion Personal<%=List_Auto_mostrar.size()%></div> 
+            <div  class="titulo" id="titulo-c">Informacion Personal</div> 
 
             <%
                 if (List_Auto_mostrar.size() == 1) {
@@ -179,9 +191,7 @@
                         a = (Auto_Mostrar) List_Auto_mostrar.get(r);
             %>
 
-            <iframe name="contenido" id="contenido"  class="autoHeight" src="<%
-                out.println(a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getIdtr());
-                    %>" width="100%" height="100%" ></iframe>
+            <iframe name="contenido" id="contenido"  class="autoHeight" src="<%=a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getIdtr()%>" width="100%" height="100%" ></iframe>
             <% }
             } else { %>
             <iframe name="contenido" id="contenido"  class="autoHeight" src="Datos_Generales.jsp" width="100%" height="100%" ></iframe>

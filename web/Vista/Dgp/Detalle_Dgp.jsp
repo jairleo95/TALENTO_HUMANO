@@ -11,9 +11,7 @@
 <jsp:useBean id="LIST_ID_DGP" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="VALIDAR_DGP_CONTR" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="LIST_ID_USER" scope="application" class="java.util.ArrayList"/>
-<?    session_start();
 
-?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -94,7 +92,9 @@
                 HttpSession sesion = request.getSession(true);
                 String idrol=(String)sesion.getAttribute("IDROL");
                 String num=request.getParameter("num");
+                if( d.getEs_dgp()!=null){ 
                 if(num.equals("0") & d.getEs_dgp().equals("0") & idrol.trim().equals("ROL-0006")){ 
+               
                 %>
                 
                 <td><a href="../../contrato?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=enviar">Hacer Contrato</a></td></tr>
@@ -102,7 +102,7 @@
                 
         if(d.getEs_dgp().equals("1") & num.equals("0") & !"ROL-0006".equals(idrol.trim())){%>
                  <td><a href="">Ver Contrato</a></td></tr>
-           <%}%>
+           <%}}%>
    
              <tr style="color: red;">
                  <% InterfaceUsuarioDAO us = new UsuarioDAO();

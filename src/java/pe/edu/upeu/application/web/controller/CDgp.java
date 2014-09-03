@@ -7,7 +7,6 @@ package pe.edu.upeu.application.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -84,7 +83,7 @@ public class CDgp extends HttpServlet {
             String DE_HORARIO_CAPACITACION = request.getParameter("HORARIO_CAPACITACION");
             String DE_HORARIO_REFRIGERIO = request.getParameter("HORARIO_REFRIGERIO");
             String DE_DIAS_CAPACITACION = request.getParameter("DIAS_CAPACITACION");
-            String ES_DGP = "0";
+            String ES_DGP = "";
             String US_CREACION = request.getParameter("USER_CREACION");
             String FE_CREACION = request.getParameter("FECHA_CREACION");
             String US_MODIF = request.getParameter("USER_MODIF");
@@ -150,9 +149,8 @@ public class CDgp extends HttpServlet {
             String iddgp = request.getParameter("iddgp");
             String idrp = IReq.id_det_req_proc(iddgp);
             getServletContext().setAttribute("Det_Autorizacion", a.List_Detalle_Autorizacion(iddgp, idrp));
-          
 
-  response.sendRedirect("Vista/Dgp/Detalle_Seguimiento_Dgp.jsp");
+            response.sendRedirect("Vista/Dgp/Detalle_Seguimiento_Dgp.jsp");
         }
         if (opc.equals("Proceso")) {
             getServletContext().setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep));
@@ -161,14 +159,19 @@ public class CDgp extends HttpServlet {
         if (opc.equals("User_Aut")) {
             String iddgp = request.getParameter("iddgp");
             getServletContext().setAttribute("USER_DGP", dgp.USER_DGP(iddgp));
-            
-out.println(iddgp);
-//response.sendRedirect("Vista/Dgp/User_Dgp.jsp");
+
+            response.sendRedirect("Vista/Dgp/User_Dgp.jsp");
         }
         if (opc.equals("List_Dgp_Tr")) {
-          
+
             getServletContext().setAttribute("LIST_ID_TRAB_DGP", dgp.LIST_ID_TRAB_DGP(idtr));
             response.sendRedirect("Vista/Trabajador/List_Dgp_Trabajador.jsp");
+        }
+        if (opc.equals("Terminar")) {
+            String iddgp = request.getParameter("iddgp");
+            dgp.REG_DGP_FINAL(iddgp);
+            getServletContext().setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep));
+            response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp");
         }
 
         /* } finally {

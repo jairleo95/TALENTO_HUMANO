@@ -133,7 +133,7 @@
             } %>
                             </select> 
                         </td></tr>   
-                    <input type="hidden" name="IDREQUERIMIENTO"  id="combito"  value="<%%>" >
+                    <input type="hidden" name="IDREQUERIMIENTO"  id="combito"  value="<%=idreq%>" >
 
 
                     <tr><td class="td">Fecha Desde:</td><td><input type="date" name="FEC_DESDE" min="<%%>" required="" id="datepicker" class="text-box" ></td></tr>     
