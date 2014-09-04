@@ -308,7 +308,7 @@
                                             <a href="Vista/Dgp/Generar_Dgp.jsp?text=2" target="myframe">Tiempo Parcial</a>
                                         </li>
                                         <li>
-                                            <a href="steps.html" target="myframe">Medio Tiempo</a>
+                                         <a href="Vista/Dgp/Generar_Dgp.jsp?text=3" target="myframe">Medio Tiempo</a>
                                         </li>
                                         <li>
                                             <a href="otro.html" target="myframe">Extranjero</a>
