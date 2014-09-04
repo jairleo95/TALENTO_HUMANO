@@ -20,6 +20,7 @@
                         V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
                         trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
 
+                        
                 %>   
 
                 <tr><td colspan="2"><div class="title">Direccion Domicilio Actual</div></td></tr> 
