@@ -35,17 +35,18 @@
     <body style="height: 1024px;">  
 
         <div class="spacing">
-            <center><h1 class="spacing">Fichas de Trabajador</h1></center>
-
+            <center><h1 class="spacing" style="font-weight: bold;">Fichas de Trabajador</h1></center>
+            <br>
 
         </div>
     <center>
         <div class="container theme-showcase">
            
             <div class="form-group">
-                <label class="control-label">Elaborar Ficha</label>
+                <label class="control-label">Elaborar Ficha</label><br>
                 <a href="../../trabajador?opc=Form_Reg"    class="btn btn-primary" role="button" >Agregar Nueva Ficha</a>   
             </div>
+            <br>
             <div>
      
                 <form method="post" action="../../trabajador" class="form-inline">                    

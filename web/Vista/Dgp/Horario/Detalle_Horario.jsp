@@ -21,10 +21,23 @@
             
             
        <style>
+            #tab{
+            font-family:verdana;
+            margin: 35px;
+            margin-left: 450px;
+            margin-right: 450px;
+            padding:10px;
+            border-radius:10px;
+            border:10px solid #BDCACF;    
             
-            body{
-                height: 300px;
+            }
+            
+            .table{
+                border: 3px solid black;
+                width: 13%;
                 position: relative;
+                float: left;
+                margin: 5px;
             }
 
         </style>
@@ -32,12 +45,12 @@
 
 
     <body>
-        <div class="container">
+<div class="container">
         <center>
         <h2>Horario</h2>
         </center>
-    
-    
+    <hr>
+    <div >
         <%
             InterfaceListaDAO l = new ListaDAO();
 
@@ -49,9 +62,10 @@
                     if (h.getDia_horario().trim().equals(l.List_H()[i][0])) {
                         if (g == 0) {%>
                         
-                        <table class="col-xs-1 table-hover bg-info">
+                        
+                        <table class="table table-hover">
                 
-                                <tr><td><% out.println(l.List_H()[i][1]);%></td></tr>   
+                            <tr><td colspan="2"  style="text-align: center;"><strong><% out.println(l.List_H()[i][1]);%></strong></td></tr>   
 
             <%}%>
 
@@ -65,10 +79,10 @@
             <%}%>
 
              </table>
-    
+
 
         <%}%>
-
+</div>
 
 
         <%  if (request.getParameter("P2") != null) {
