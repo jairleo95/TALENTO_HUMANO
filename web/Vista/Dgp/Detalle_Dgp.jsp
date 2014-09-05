@@ -30,12 +30,16 @@
             
             div{
             font-family:verdana;
-            margin: 35px;
-            margin-left: 450px;
-            margin-right: 450px;
-            padding:10px;
+            padding:2%;
             border-radius:10px;
-            border:10px solid #BDCACF;    
+            border:10px solid #BDCACF;  
+            width: 50%;
+            margin-left: 2%;
+            margin-right: 2%;
+            margin-top: 2%;
+            }
+            body{
+                //border: 1px solid black;
             }
             
         </style>
@@ -134,8 +138,8 @@
               
               %>
          
-             <tr><td><h3>Registrar documentos</h3>
-                     <a href="../../documento?iddgp=<%=request.getParameter("iddgp")%>&idtr=<%=request.getParameter("idtr")%>&opc=Reg_Pro_Dgp"class="btn btn-default" role="button">Siguiente</a></td></tr>
+              <tr><td colspan="2"><h3 style="text-align: center;">Registrar documentos</h3>
+                      <a href="../../documento?iddgp=<%=request.getParameter("iddgp")%>&idtr=<%=request.getParameter("idtr")%>&opc=Reg_Pro_Dgp"class="btn btn-default" role="button">Siguiente</a></td></tr>
                 <%}}%>
         </table>
             </form>
