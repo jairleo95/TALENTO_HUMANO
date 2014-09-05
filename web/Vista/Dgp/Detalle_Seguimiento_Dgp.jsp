@@ -1,5 +1,6 @@
-<%@page import="pe.edu.upeu.application.model.X_List_De_Autorizacion"%>
+
 <jsp:useBean class="java.util.ArrayList" id="Det_Autorizacion" scope="application" />
+<%@page import="pe.edu.upeu.application.model.X_List_De_Autorizacion"%>
 <!DOCTYPE html >
 
 <html>
