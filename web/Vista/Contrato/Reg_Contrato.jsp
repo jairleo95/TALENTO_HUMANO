@@ -24,7 +24,7 @@
     <label class="title">Información Contractual</label>
             <br>
             <br>
-            <p><%=iduser%></p>
+        
             <%  
             for(int u=0;u<LIST_ID_DGP.size();u++){
                 V_Det_DGP  d =new V_Det_DGP ();
@@ -98,7 +98,7 @@
                             p=(Puesto)List_Puesto.get(j);
                             if (d.getId_puesto().equals(p.getId_puesto())){%>
                             
-                            <option value="<%=p.getId_puesto()%>" selected="selected"><%=p.getNo_puesto()%></option><td><%=p.getId_puesto()%></td>
+                            <option value="<%=p.getId_puesto()%>" selected="selected"><%=p.getNo_puesto()%></option>
                             <%}else{%>
                             <option value="<%=p.getId_puesto()%>"><%=p.getNo_puesto()%></option>
                             

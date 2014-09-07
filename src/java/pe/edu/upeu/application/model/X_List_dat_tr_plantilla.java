@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pe.edu.upeu.application.model;
 
 /**
@@ -11,7 +10,7 @@ package pe.edu.upeu.application.model;
  * @author Jose
  */
 public class X_List_dat_tr_plantilla {
-    
+
     private String ap_paterno;
     private String ap_materno;
     private String no_trabajador;
@@ -30,8 +29,11 @@ public class X_List_dat_tr_plantilla {
     private String ca_bono_alimento;
     private String fecha_actual;
     private String id_di_dom_a_distrito;
+    private String no_ub_departamento;
+    private String no_ub_distrito;
+    private String no_ub_provincia;
 
-    public X_List_dat_tr_plantilla(String ap_paterno, String ap_materno, String no_trabajador, String nu_doc, String li_di_dom_a_d1, String di_dom_a_d2, String li_di_dom_a_d3, String di_dom_a_d4, String li_di_dom_a_d5, String di_dom_a_d6, String no_dep, String no_puesto, String fe_desde, String fe_hasta, String ca_sueldo, String ca_bono_alimento, String fecha_actual, String id_di_dom_a_distrito) {
+    public X_List_dat_tr_plantilla(String ap_paterno, String ap_materno, String no_trabajador, String nu_doc, String li_di_dom_a_d1, String di_dom_a_d2, String li_di_dom_a_d3, String di_dom_a_d4, String li_di_dom_a_d5, String di_dom_a_d6, String no_dep, String no_puesto, String fe_desde, String fe_hasta, String ca_sueldo, String ca_bono_alimento, String fecha_actual, String id_di_dom_a_distrito, String no_ub_departamento, String no_ub_distrito, String no_ub_provincia) {
         this.ap_paterno = ap_paterno;
         this.ap_materno = ap_materno;
         this.no_trabajador = no_trabajador;
@@ -50,7 +52,11 @@ public class X_List_dat_tr_plantilla {
         this.ca_bono_alimento = ca_bono_alimento;
         this.fecha_actual = fecha_actual;
         this.id_di_dom_a_distrito = id_di_dom_a_distrito;
+        this.no_ub_departamento = no_ub_departamento;
+        this.no_ub_distrito = no_ub_distrito;
+        this.no_ub_provincia = no_ub_provincia;
     }
+
     public X_List_dat_tr_plantilla() {
         this.ap_paterno = "";
         this.ap_materno = "";
@@ -70,6 +76,9 @@ public class X_List_dat_tr_plantilla {
         this.ca_bono_alimento = "";
         this.fecha_actual = "";
         this.id_di_dom_a_distrito = "";
+        this.no_ub_departamento = "";
+        this.no_ub_distrito = "";
+        this.no_ub_provincia = "";
     }
 
     public String getAp_paterno() {
@@ -216,5 +225,28 @@ public class X_List_dat_tr_plantilla {
         this.id_di_dom_a_distrito = id_di_dom_a_distrito;
     }
 
-    
+    public String getNo_ub_departamento() {
+        return no_ub_departamento;
+    }
+
+    public void setNo_ub_departamento(String no_ub_departamento) {
+        this.no_ub_departamento = no_ub_departamento;
+    }
+
+    public String getNo_ub_distrito() {
+        return no_ub_distrito;
+    }
+
+    public void setNo_ub_distrito(String no_ub_distrito) {
+        this.no_ub_distrito = no_ub_distrito;
+    }
+
+    public String getNo_ub_provincia() {
+        return no_ub_provincia;
+    }
+
+    public void setNo_ub_provincia(String no_ub_provincia) {
+        this.no_ub_provincia = no_ub_provincia;
+    }
+
 }

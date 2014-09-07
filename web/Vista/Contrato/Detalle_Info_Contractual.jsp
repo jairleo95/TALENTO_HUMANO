@@ -220,7 +220,7 @@
                         }
                         if (List_Planilla.size() == 0) {%>
                 <tr><td colspan="2"></td><td><input class="button blue"  type="submit" value="Editar"></td>
-                    <td><a  class="button blue" href="../Contrato/Plantilla/Direccion_general_Sistemas.jsp?idc=<? echo $list_rhc[$index][0];?>">Ver Plantilla</a></td></tr>
+                    <td><a  class="button blue" href="../../contrato?opc=Ver_Plantilla&idc=<%=n.getId_contrato().trim()%>">Ver Plantilla</a></td></tr>
                     <%}%>
 
                 <tr style="color: red;"> <%if (n.getUs_creacion() == null && n.getUs_creacion() != null) {%>
@@ -228,7 +228,7 @@
                     <td><%for (int f = 0; f < List_ID_User.size(); f++) {
                             Usuario u = new Usuario();
                             u = (Usuario) List_ID_User.get(f);
-                            out.println(u.getNo_usuario());%>
+                         /*   out.println(u.getNo_usuario());*/%>
                         <%}%>
                     </td>
                     <%}%>
@@ -238,7 +238,7 @@
                             for (int f = 0; f < List_ID_User.size(); f++) {
                                 Usuario u = new Usuario();
                                 u = (Usuario) List_ID_User.get(f);%>
-                        <%=u.getNo_usuario()%>
+                        <%/*=u.getNo_usuario()*/%>
                         <%}%></td>
                         <%}%>
                 </tr>

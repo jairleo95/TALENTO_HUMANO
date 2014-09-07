@@ -22,6 +22,7 @@ import pe.edu.upeu.application.dao.ListaDAO;
 import pe.edu.upeu.application.dao.PlantillaDAO;
 import pe.edu.upeu.application.dao.PuestoDAO;
 import pe.edu.upeu.application.dao.SeccionDAO;
+import pe.edu.upeu.application.dao.TrabajadorDAO;
 import pe.edu.upeu.application.dao.UsuarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAnnoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAreaDAO;
@@ -33,6 +34,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePlantillaDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceSeccionDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO;
 
 /**
@@ -62,6 +64,7 @@ public class CContrato extends HttpServlet {
     InterfaceEmpleadoDAO emp = new EmpleadoDAO();
     InterfacePlantillaDAO pl = new PlantillaDAO();
     InterfaceUsuarioDAO usu = new UsuarioDAO();
+    InterfaceTrabajadorDAO tr = new TrabajadorDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -82,7 +85,7 @@ public class CContrato extends HttpServlet {
                 getServletContext().setAttribute("List_anno_max", a.List_anno_max());
 
                 int num = dht.ASIGNACION_F(idtr);
-                out.println(num);
+                // out.println(num);
                 response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp?num=" + num);
             }
             if (opc.equals("Detalle_Contractual")) {
@@ -139,7 +142,7 @@ public class CContrato extends HttpServlet {
                 Double CA_BONO_ALIMENTO = Double.parseDouble(request.getParameter("BONO_ALIMENTO"));
                 String ES_JEFE = request.getParameter("JEFE");
                 String LI_TIPO_CONVENIO = request.getParameter("TIPO_CONVENIO");
-                String ES_FIRMO_CONTRATO = "";
+                String ES_FIRMO_CONTRATO = "1";
                 Double NU_CONTRATO = 0.0;/*Double.parseDouble(request.getParameter("NU_CONTRATO"));*/
 
                 String DE_OBSERVACION = request.getParameter("OBSERVACION");
@@ -181,7 +184,7 @@ public class CContrato extends HttpServlet {
 
                 String idtr = request.getParameter("idtr");
                 String ida1 = request.getParameter("ida");
-              
+
                 getServletContext().setAttribute("List_id_Contrato_DGP", con.List_id_Contrato_DGP(idtr, ida1));
                 getServletContext().setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr));
                 getServletContext().setAttribute("List_Jefe", l.List_Jefe());
@@ -196,6 +199,11 @@ public class CContrato extends HttpServlet {
 
             if (opc.equals("Buscar")) {
                 getServletContext().setAttribute("List_Area", area.List_Area());
+            }
+            if (opc.equals("Ver_Plantilla")) {
+                String idc = request.getParameter("idc");
+                getServletContext().setAttribute("LIST_DAT_TR_PLANTILLA", tr.LIST_DAT_TR_PLANTILLA(idc));
+                response.sendRedirect("Vista/Contrato/Plantilla/Direccion_general_Sistemas.jsp");
             }
         } finally {
             out.close();

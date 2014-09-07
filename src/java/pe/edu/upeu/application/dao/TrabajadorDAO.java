@@ -102,8 +102,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
-        }
-        finally {
+        } finally {
             this.conn.close();
         }
     }
@@ -296,12 +295,13 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
     @Override
     public List<X_List_dat_tr_plantilla> LIST_DAT_TR_PLANTILLA(String id) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select dt.ap_paterno,dt.ap_materno,dt.no_trabajador,dt.nu_doc,dt.li_di_dom_a_d1,dt.di_dom_a_d2,dt.li_di_dom_a_d3,dt.di_dom_a_d4,dt.li_di_dom_a_d5,dt.di_dom_a_d6,p.no_dep,p.no_puesto,c.fe_desde,c.fe_hasta,c.ca_sueldo,c.ca_bono_alimento,to_char(sysdate,'dd')||' de '||to_char(sysdate,'Month')||' del '||to_char(sysdate,'YYYY') AS fecha_actual,dt.id_di_dom_a_distrito from RHTM_TRABAJADOR dt,RHTM_CONTRATO c,RHVD_PUESTO_DIRECCION p where  dt.id_trabajador=c.id_trabajador and c.id_puesto=p.id_puesto  and c.id_contrato='" + id + "'";
+        String sql = "select dt.ap_paterno,dt.ap_materno,dt.no_trabajador,dt.nu_doc,dt.li_di_dom_a_d1,dt.di_dom_a_d2,dt.li_di_dom_a_d3,dt.di_dom_a_d4,dt.li_di_dom_a_d5,dt.di_dom_a_d6,p.no_dep,p.no_puesto,c.fe_desde,c.fe_hasta,c.ca_sueldo,c.ca_bono_alimento,to_char(sysdate,'dd')||' de '||to_char(sysdate,'Month')||' del '||to_char(sysdate,'YYYY') AS fecha_actual,dt.id_di_dom_a_distrito,u.NO_DISTRITO,u.NO_PROVINCIA,u.NO_DEPARTAMENTO from RHTM_TRABAJADOR dt,RHTM_CONTRATO c,RHVD_PUESTO_DIRECCION p,RHVD_UBIGEO u where  dt.id_trabajador=c.id_trabajador and c.id_puesto=p.id_puesto  and dt.ID_DI_DOM_A_DISTRITO=u.ID_DISTRITO and c.id_contrato='" + id + "'";
         List<X_List_dat_tr_plantilla> list = new ArrayList<X_List_dat_tr_plantilla>();
         try {
             ResultSet rs = this.conn.query(sql);
-            X_List_dat_tr_plantilla t = new X_List_dat_tr_plantilla();
+
             while (rs.next()) {
+                X_List_dat_tr_plantilla t = new X_List_dat_tr_plantilla();
                 t.setAp_paterno(rs.getString("ap_paterno"));
                 t.setAp_materno(rs.getString("ap_materno"));
                 t.setNo_trabajador(rs.getString("no_trabajador"));
@@ -320,6 +320,9 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 t.setCa_bono_alimento(rs.getString("ca_bono_alimento"));
                 t.setFecha_actual(rs.getString("fecha_actual"));
                 t.setId_di_dom_a_distrito(rs.getString("id_di_dom_a_distrito"));
+                t.setNo_ub_departamento(rs.getString("no_departamento"));
+                t.setNo_ub_provincia(rs.getString("no_provincia"));
+                t.setNo_ub_distrito(rs.getString("no_distrito"));
                 list.add(t);
             }
 

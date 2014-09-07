@@ -154,8 +154,8 @@
                                     <img src="../../imagenes/engranaje-hi.png" width="40" height="40">
                                 </div>   
                                 <ul>
+                                   <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=Detalle">Ver Requerimiento</a> </li>
                                     <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=User_Aut">Usuarios - Prox. Autorizacion</a></li>
-
                                     <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=Seguimiento">Ver Seguimiento</a> </li>
                                     <li><a href="../../documento?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a></li>
                                     <li><a href="../../comentario?iddgp=<%=r.getId_dgp().trim()%>&opc=Comentar_Dgp">Comentarios</a></li>    

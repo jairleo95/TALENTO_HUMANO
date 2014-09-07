@@ -289,9 +289,10 @@
 
                         </select>
                         Distrito:
-                        <select name="DISTRITO" id="dist_nac" class="text-box"  required="">
-                            <option value="" >-----</option>
-
+                        <div class="item">
+                            <select name="DISTRITO" id="dist_nac" class="text-box"  required="">
+                                <option value="" >-----</option>
+                        </div>
                         </select>
                     </td></tr> 
                 <tr><td> Documento:</td><td>
@@ -505,7 +506,7 @@
                             <option value="" >-----</option>
 
                         </select>Distrito:
-                        <div class="item0">
+                        <div class="item">
                             <select name="DIR_DOM_A_DISTRITO_ID" id="DOM_A_DISTRITO" class="text-box required" required="">
                                 <option value="">----------</option>
                             </select>
@@ -753,9 +754,9 @@
             }
             var lista = objJson.lista;
             if (lista.length > 0) {
-                ti.append("<option value='0'>[Seleccione]</option>");
+                ti.append("<option value=''>[Seleccione]</option>");
             } else {
-                ti.append("<option value='0'>[]</option>");
+                ti.append("<option value=''>[]</option>");
             }
             for (var i = 0; i < lista.length; i++) {
                 var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
@@ -777,9 +778,9 @@
             }
             var lista = objJson.lista;
             if (lista.length > 0) {
-                ti.append("<option value='0'>[Seleccione]</option>");
+                ti.append("<option value=''>[Seleccione]</option>");
             } else {
-                ti.append("<option value='0'>[]</option>");
+                ti.append("<option value=''>[]</option>");
             }
             for (var i = 0; i < lista.length; i++) {
                 var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
@@ -801,9 +802,9 @@
             }
             var lista = objJson.lista;
             if (lista.length > 0) {
-                ti.append("<option value='0'>[Seleccione]</option>");
+                ti.append("<option value=''>[Seleccione]</option>");
             } else {
-                ti.append("<option value='0'>[]</option>");
+                ti.append("<option value=''>[]</option>");
             }
             for (var i = 0; i < lista.length; i++) {
                 var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
@@ -825,9 +826,9 @@
             }
             var lista = objJson.lista;
             if (lista.length > 0) {
-                ti.append("<option value='0'>[Seleccione]</option>");
+                ti.append("<option value=''>[Seleccione]</option>");
             } else {
-                ti.append("<option value='0'>[]</option>");
+                ti.append("<option value=''>[]</option>");
             }
             for (var i = 0; i < lista.length; i++) {
                 var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
@@ -849,9 +850,9 @@
             }
             var lista = objJson.lista;
             if (lista.length > 0) {
-                ti.append("<option value='0'>[Seleccione]</option>");
+                ti.append("<option value=''>[Seleccione]</option>");
             } else {
-                ti.append("<option value='0'>[]</option>");
+                ti.append("<option value=''>[]</option>");
             }
             for (var i = 0; i < lista.length; i++) {
                 var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
@@ -873,9 +874,9 @@
             }
             var lista = objJson.lista;
             if (lista.length > 0) {
-                ti.append("<option value='0'>[Seleccione]</option>");
+                ti.append("<option value=''>[Seleccione]</option>");
             } else {
-                ti.append("<option value='0'>[]</option>");
+                ti.append("<option value=''>[]</option>");
             }
             for (var i = 0; i < lista.length; i++) {
                 var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
@@ -903,9 +904,9 @@
             }
             var lista = objJson.lista;
             if (lista.length > 0) {
-                ti.append("<option value='0'>[Seleccione]</option>");
+                ti.append("<option value=''>[Seleccione]</option>");
             } else {
-                ti.append("<option value='0'>[]</option>");
+                ti.append("<option value=''>[]</option>");
             }
             for (var i = 0; i < lista.length; i++) {
                 var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
