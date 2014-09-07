@@ -185,12 +185,13 @@ public class DgpDAO implements InterfaceDgpDAO {
     public List<X_List_det_dgp> LIST_DET_DGP(String id_dep) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "select dgp.id_dgp , dgp.id_trabajador,tr.no_trabajador,tr.ap_paterno,tr.ap_materno, dgp.id_puesto,dgp.fe_desde,dgp.fe_hasta,dgp.ca_sueldo, pd.no_puesto, pd.no_area, r.no_req,dgp.ES_DGP from RHTR_REQUERIMIENTO r,RHTM_DGP dgp , RHTM_TRABAJADOR tr,RHVD_PUESTO_DIRECCION  pd where r.ID_REQUERIMIENTO = dgp.ID_REQUERIMIENTO and dgp.ES_DGP is not null and dgp.ID_PUESTO=pd.ID_PUESTO and tr.ID_TRABAJADOR = dgp.ID_TRABAJADOR";
-        //sql += (id_dep != "") ? " and pd.ID_DEPARTAMENTO='" + id_dep + "'" : "";
+        sql += (!id_dep.equals("")) ? " and pd.ID_DEPARTAMENTO='" + id_dep.trim() + "'" : "";
+        sql += " ORDER BY TO_NUMBER(SUBSTR(dgp.ID_DGP,5,LENGTH(dgp.ID_DGP))) DESC";
         List<X_List_det_dgp> Lista = new ArrayList<X_List_det_dgp>();
         try {
             ResultSet rs = this.conn.query(sql);
-            X_List_det_dgp x = new X_List_det_dgp();
             while (rs.next()) {
+                X_List_det_dgp x = new X_List_det_dgp();
                 x.setId_dgp(rs.getString("id_dgp"));
                 x.setId_trabajador(rs.getString("id_trabajador"));
                 x.setNo_trabajador(rs.getString("no_trabajador"));

@@ -143,7 +143,7 @@ public class CDgp extends HttpServlet {
             int num = dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
             getServletContext().setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
 
-            response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&idgp=" + ID_DGP );
+            response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&idgp=" + ID_DGP);
         }
         if (opc.equals("Seguimiento")) {
             String iddgp = request.getParameter("iddgp");
@@ -172,6 +172,14 @@ public class CDgp extends HttpServlet {
             dgp.REG_DGP_FINAL(iddgp);
             getServletContext().setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep));
             response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp");
+        }
+
+        if (opc.equals("Listar")) {
+
+            getServletContext().setAttribute("List_Det_Dgp", dgp.LIST_DET_DGP(iddep));
+            // out.print(Idgp.LIST_DET_DGP(iddep).size());
+            response.sendRedirect("Vista/Dgp/List_Dgp.jsp?iddep");
+
         }
 
         /* } finally {

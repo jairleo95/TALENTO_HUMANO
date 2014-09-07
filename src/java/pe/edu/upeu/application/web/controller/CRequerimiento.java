@@ -43,9 +43,10 @@ public class CRequerimiento extends HttpServlet {
         
         if(opc.equals("Listar")){
         String iddep =(String)sesion.getAttribute("IDDEPARTAMENTO");
+        
         getServletContext().setAttribute("List_Det_Dgp", Idgp.LIST_DET_DGP(iddep));
         
-         out.print(Idgp.LIST_DET_DGP(iddep).size());
+        // out.print(Idgp.LIST_DET_DGP(iddep).size());
          response.sendRedirect("Vista/Dgp/List_Dgp.jsp?iddep");
         
         }

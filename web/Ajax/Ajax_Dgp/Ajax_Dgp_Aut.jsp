@@ -1,3 +1,6 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="com.google.gson.Gson"%>
 <%@page import="org.json.simple.JSONArray"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -8,13 +11,16 @@
 <%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 
 <%
+    response.setContentType("application/json");
+    response.setCharacterEncoding("UTF-8");
 
     HttpSession sesion = request.getSession(true);
     CConversion c = new CConversion();
     ConexionBD cnn;
     String Accion = request.getParameter("action");
 
-    if (Accion.equals("listar")) {
+    // if (Accion.equals("listar")) {
+    if (true) {
 
         String iddep = request.getParameter("dep");
         String nom_ape = request.getParameter("nom_ape");
@@ -30,15 +36,15 @@
         String order = request.getParameter("orderby");
         if (true) {
 
-            String sql = "select  *  from RHVD_FILTRO_DGP_AUTORIZADO";
+            String sql = "select  *  from RHVD_FILTRO_DGP_AUTORIZADO WHERE FECHA_CREACION IS NOT NULL  ";
 
-            /*  nom_ape=nom_ape.toUpperCase();
-             sueldo=sueldo.toUpperCase();
+            nom_ape = nom_ape.toUpperCase();
+            /* sueldo=sueldo.toUpperCase();
              seccion=seccion.toUpperCase();
              puesto = puesto.toUpperCase();
              */
-            /* sql +=(!"".equals(nom_ape))?" and upper(tr.no_trabajador ||' '||tr.ap_paterno ||' '||tr.ap_materno)  like '%"+nom_ape+"%'":"";
-             sql +=(!"".equals(sueldo))?"  and upper(dgp.ca_sueldo) like '"+sueldo+"'":"";
+            sql += (!"".equals(nom_ape)) ? " AND  upper(NOMBRE_P)  like '%" + nom_ape + "%'" : "";
+            /* sql +=(!"".equals(sueldo))?"  and upper(dgp.ca_sueldo) like '"+sueldo+"'":"";
              sql +=(!"".equals(puesto))?"  and upper(id.no_puesto) like '%"+sueldo+"%'":"";
              sql +=(!"".equals(area))?"  and dd.id_area='"+sueldo+"'":"";
              sql +=(!"".equals(seccion))?"  and upper(dd.seccion) like'"+seccion+"'":"";
@@ -54,29 +60,32 @@
             cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
 
             ResultSet rs = cnn.query(sql);
-            JSONArray list = new JSONArray();
+
+            Map<String, Object> rpta = new HashMap<String, Object>();
+
+            List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
 
             List<V_Filtro_Dgp_Aut> a = new ArrayList<V_Filtro_Dgp_Aut>();
             while (rs.next()) {
-                V_Filtro_Dgp_Aut f = new V_Filtro_Dgp_Aut();
-                f.setId_dgp(rs.getString("id_dgp"));
-                f.setNombre_p(rs.getString("nombre_p"));
-                f.setId_trabajador(rs.getString("id_trabajador"));
-                f.setNo_seccion(rs.getString("no_seccion"));
-                f.setNo_puesto(rs.getString("no_puesto"));
-                f.setDep(rs.getString("dep"));
-                f.setRequerimiento(rs.getString("requerimiento"));
-                f.setFecha_creacion(rs.getString("fecha_creacion"));
-                f.setNo_area(rs.getString("no_area"));
-                f.setCa_sueldo(rs.getString("ca_sueldo"));
-                list.add(f);
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id_dgp", rs.getString("id_dgp"));
+                rec.put("nombre_p", rs.getString("nombre_p"));
+                rec.put("id_trabajador", rs.getString("id_trabajador"));
+                rec.put("no_seccion", rs.getString("no_seccion"));
+                rec.put("no_puesto", rs.getString("no_puesto"));
+                rec.put("dep", rs.getString("no_dep"));
+                rec.put("req", rs.getString("requerimiento"));
+                rec.put("fecha_contratacion", rs.getString("fecha_creacion"));
+                rec.put("no_area", rs.getString("no_area"));
+                rec.put("ca_sueldo", rs.getString("ca_sueldo"));
+                lista.add(rec);
+
             }
-
-            String jsonText = null;
-
-            jsonText = list.toString();
-
-            out.print(jsonText);
+            rpta.put("lista", lista);
+            Gson gson = new Gson();
+            out.print(gson.toJson(rpta));
+            out.flush();
+            out.close();
 
         }
 

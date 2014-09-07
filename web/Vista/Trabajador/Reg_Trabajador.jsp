@@ -183,8 +183,6 @@
         </script>
         <label class="title">FICHA DE DATOS DEL TRABAJADOR </label>
 
-
-        <button onclick="alerta_dt_ingresados();">Mensaje</button>
         <br>
         <br>
         <form class="form" action="../../trabajador" method="post" novalidate="" > 
