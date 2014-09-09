@@ -40,14 +40,14 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
     }
 
     @Override
-    public List<X_List_De_Autorizacion> List_Detalle_Autorizacion(String iddgp,String idrp) {
+    public List<X_List_De_Autorizacion> List_Detalle_Autorizacion(String iddgp, String idrp) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select  pu.NO_PUESTO,a.co_pasos,a.DE_PASOS,a.es_autorizacion,a.fe_creacion,a.id_autorizacion,a.id_departamento,a.id_detalle_pasos,a.id_detalle_req_proceso,a.id_dgp,a.id_direccion,a.id_pasos,a.id_proceso,a.id_puesto,a.id_requerimiento,a.no_proceso,a.nu_pasos,a.us_creacion ,  dt.AP_PATERNO,dt.AP_MATERNO,dt.NO_TRABAJADOR,dgp.CA_SUELDO, du.AP_PATERNO as us_ap_p,du.AP_MATERNO as us_ap_mat ,du.NO_TRABAJADOR as  us_no_tr,du.NO_PUESTO as us_no_puesto,du.NO_AREA as us_no_area,du.NO_DEP as us_no_dep   from ( select a.id_detalle_req_proceso,a.id_dgp, a.id_pasos,d.id_proceso,d.id_detalle_pasos , d.DE_PASOS,d.NU_PASOS,d.CO_PASOS , d.no_proceso ,d.id_puesto,d.id_direccion,d.id_departamento , d.id_requerimiento ,a.id_autorizacion,a.fe_creacion,a.es_autorizacion,a.us_creacion from ( select * from rhvd_req_paso_pu where id_detalle_req_proceso='"+idrp.trim()+"') d left outer join rhtv_autorizacion a on ( a.id_pasos=d.id_pasos and a.id_dgp='"+iddgp.trim()+"' and d.id_pasos=a.id_pasos and d.id_puesto=a.id_puesto) ) a ,rhtm_dgp dgp , rhtm_trabajador dt , rhvd_usuario du ,rhvd_puesto_direccion pu where dgp.id_dgp=a.id_dgp and dt.id_trabajador = dgp.id_trabajador and du.id_usuario=a.us_creacion  and dgp.id_puesto=pu.id_puesto order by a.id_pasos asc";
-        List<X_List_De_Autorizacion> list=new ArrayList<X_List_De_Autorizacion>();
+        String sql = "select  pu.NO_PUESTO,a.co_pasos,a.DE_PASOS,a.es_autorizacion,a.fe_creacion,a.id_autorizacion,a.id_departamento,a.id_detalle_pasos,a.id_detalle_req_proceso,a.id_dgp,a.id_direccion,a.id_pasos,a.id_proceso,a.id_puesto,a.id_requerimiento,a.no_proceso,a.nu_pasos,a.us_creacion ,  dt.AP_PATERNO,dt.AP_MATERNO,dt.NO_TRABAJADOR,dgp.CA_SUELDO, du.AP_PATERNO as us_ap_p,du.AP_MATERNO as us_ap_mat ,du.NO_TRABAJADOR as  us_no_tr,du.NO_PUESTO as us_no_puesto,du.NO_AREA as us_no_area,du.NO_DEP as us_no_dep   from ( select a.id_detalle_req_proceso,a.id_dgp, a.id_pasos,d.id_proceso,d.id_detalle_pasos , d.DE_PASOS,d.NU_PASOS,d.CO_PASOS , d.no_proceso ,d.id_puesto,d.id_direccion,d.id_departamento , d.id_requerimiento ,a.id_autorizacion,a.fe_creacion,a.es_autorizacion,a.us_creacion from ( select * from rhvd_req_paso_pu where id_detalle_req_proceso='" + idrp.trim() + "') d left outer join rhtv_autorizacion a on ( a.id_pasos=d.id_pasos and a.id_dgp='" + iddgp.trim() + "' and d.id_pasos=a.id_pasos and d.id_puesto=a.id_puesto) ) a ,rhtm_dgp dgp , rhtm_trabajador dt , rhvd_usuario du ,rhvd_puesto_direccion pu where dgp.id_dgp=a.id_dgp and dt.id_trabajador = dgp.id_trabajador and du.id_usuario=a.us_creacion  and dgp.id_puesto=pu.id_puesto order by a.id_pasos asc";
+        List<X_List_De_Autorizacion> list = new ArrayList<X_List_De_Autorizacion>();
         try {
-        ResultSet rs=this.conn.query(sql);
-            while (rs.next()) {  
-                X_List_De_Autorizacion x=new X_List_De_Autorizacion();
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                X_List_De_Autorizacion x = new X_List_De_Autorizacion();
                 x.setCo_pasos(rs.getString("co_pasos"));
                 x.setDe_pasos(rs.getString("de_pasos"));
                 x.setEs_autorizacion(rs.getString("es_autorizacion"));
@@ -76,22 +76,22 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 x.setUs_no_area(rs.getString("us_no_area"));
                 x.setUs_no_dep(rs.getString("us_no_dep"));
                 x.setNo_puesto(rs.getString("no_puesto"));
-       
+
                 list.add(x);
             }
-        
+
         } catch (SQLException e) {
-        }finally{
-    this.conn.close();
+        } finally {
+            this.conn.close();
         }
-        
+
         return list;
     }
 
     @Override
     public List<V_Autorizar_Dgp> List_id_Autorizacion(String id, String id_user) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select *  from rhvd_autorizar_dgp where id_puesto='"+id+"'";
+        String sql = "select *  from rhvd_autorizar_dgp where id_puesto='" + id + "'";
         sql += (!"".equals(id_user)) ? " and id_usuario='" + id_user + "'" : "";
 
         List<V_Autorizar_Dgp> list = new ArrayList<V_Autorizar_Dgp>();
@@ -178,7 +178,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
         try {
 
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-           cst = conn.conex.prepareCall("{CALL RHSP_INSERT_AUTORIZACION( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+            cst = conn.conex.prepareCall("{CALL RHSP_INSERT_AUTORIZACION( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
             cst.setString(1, null);
             cst.setString(2, ID_DGP);
             cst.setString(3, ES_AUTORIZACION);
@@ -191,7 +191,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
             cst.setString(10, ID_PUESTO);
             cst.setString(11, ID_DETALLE_REQ_PROCESO);
             cst.setString(12, ID_PASOS);
-           cst.execute();
+            cst.execute();
 
         } catch (SQLException e) {
             // System.out.println(e.getMessage());
