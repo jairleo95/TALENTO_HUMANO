@@ -77,7 +77,7 @@
                     <td style="width: 300px;"><%=a.getDe_pasos()%></td>
                     <td><a href="../../dgp?iddgp=<%=a.getId_dgp().trim()%>&opc=Seguimiento">Ver Proceso</a></td>
                     <td><a href="../../comentario?iddgp=<%=a.getId_dgp().trim()%>&idp=<%=a.getId_puesto()%>&opc=Comentar_Dgp">Comentar dgp</a></td> 
-                    <td class="caji" ><a href="Documento/Reg_Documento.jsp?iddgp=<%=a.getId_dgp().trim()%>&idtr=<%=a.getId_trabajador().trim()%>">Ver Documentos</a></td> 
+                    <td class="caji" ><a href="../../documento?iddgp=<%=a.getId_dgp().trim()%>&idtr=<%=a.getId_trabajador().trim()%>&opc=Reg_Pro_Dgp">Ver Documentos</a></td> 
                     <%
                         HttpSession sesion = request.getSession(true);
                         String idrol = (String) sesion.getAttribute("IDROL");
