@@ -56,7 +56,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="">Talento Humano</a>
+                <a class="navbar-brand" href=""><%out.println((String) sesion.getAttribute("USER")); %> - <%out.println((String) sesion.getAttribute("PUESTO")); %> - <%out.println((String) sesion.getAttribute("DEPARTAMENTO"));%></a>
+                
             </div>
             <!-- /.navbar-header -->
 
@@ -117,6 +118,7 @@
                         <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-tasks">
+                        
                         <li>
                             <a href="#">
                                 <div>
@@ -132,6 +134,7 @@
                                 </div>
                             </a>
                         </li>
+                        
                         <li class="divider"></li>
                         <li>
                             <a href="#">
@@ -148,6 +151,7 @@
                                 </div>
                             </a>
                         </li>
+                        <li class="divider"></li>
                         <li class="divider"></li>
                         <li>
                             <a href="#">

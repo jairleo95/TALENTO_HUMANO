@@ -146,23 +146,24 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
     @Override
     public List<String> Det_Autorizacion(String id_rpp) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from rhvd_req_paso_pu where id_detalle_req_proceso ='" + id_rpp + "' and trim(nu_pasos)='P1'";
+        String sql = "select * from rhvd_req_paso_pu where id_detalle_req_proceso ='" + id_rpp.trim() + "' and trim(nu_pasos)='P1'";
         List<String> list = new ArrayList<String>();
         try {
             ResultSet rs = this.conn.query(sql);
             rs.next();
             list.add(rs.getString("id_pasos"));
-            list.add(rs.getString("id_proceso"));
+             list.add(rs.getString("id_puesto"));
+           /* list.add(rs.getString("id_proceso"));
             list.add(rs.getString("id_detalle_req_proceso"));
             list.add(rs.getString("id_detalle_pasos"));
             list.add(rs.getString("de_pasos"));
             list.add(rs.getString("nu_pasos"));
             list.add(rs.getString("co_pasos"));
             list.add(rs.getString("no_proceso"));
-            list.add(rs.getString("id_puesto"));
+           
             list.add(rs.getString("id_direccion"));
             list.add(rs.getString("id_departamento"));
-            list.add(rs.getString("id_requerimiento"));
+            list.add(rs.getString("id_requerimiento"));*/
 
         } catch (SQLException e) {
         } finally {
