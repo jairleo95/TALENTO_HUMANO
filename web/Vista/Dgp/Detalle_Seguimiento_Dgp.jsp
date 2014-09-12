@@ -127,7 +127,7 @@
 
                 </tr> 
                 <%
-                    if (a.getEs_autorizacion().equals("2") & rol.trim().equals("ROL-0002")) {
+                    if (a.getEs_autorizacion().equals("2") & (rol.trim().equals("ROL-0002")|rol.trim().equals("ROL-0005"))) {
 
                 %>
             <div class="alerta">

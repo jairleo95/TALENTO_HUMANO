@@ -57,7 +57,7 @@ function Autorizado() {
 
 
 function ok() {
-    alertify.success("El Requerimiento ha sido procesado con exito...!!!");
+    alertify.success("El Requerimiento ha sido procesado con exito...!!! ");
     return false;
 }
 

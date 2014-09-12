@@ -82,7 +82,7 @@
         %>
         <strong>No se encontraron registros...</strong>
         <%}
-                if (count > 0) {%>
+            if (count > 0) {%>
         <table class="table table-hover"  >
             <tr>
                 <td>Nro</td>
@@ -120,6 +120,8 @@
 
             <%
                         }
+
+                        ListarTrabajador2.clear();
                     }
 
                 }%> 
