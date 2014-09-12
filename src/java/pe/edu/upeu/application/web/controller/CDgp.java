@@ -13,12 +13,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import pe.edu.upeu.application.dao.AreaDAO;
 import pe.edu.upeu.application.dao.AutorizacionDAO;
 import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.PuestoDAO;
 import pe.edu.upeu.application.dao.RequerimientoDAO;
 import pe.edu.upeu.application.dao.TrabajadorDAO;
 import pe.edu.upeu.application.dao.UsuarioDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceAreaDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
@@ -62,7 +64,7 @@ public class CDgp extends HttpServlet {
         InterfaceDgpDAO dgp = new DgpDAO();
         InterfaceAutorizacionDAO a = new AutorizacionDAO();
         InterfaceUsuarioDAO us = new UsuarioDAO();
-
+        InterfaceAreaDAO area= new AreaDAO();
         String opc = request.getParameter("opc");
 
         //try {
@@ -133,6 +135,14 @@ public class CDgp extends HttpServlet {
             getServletContext().setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
 
             response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&iddgp=" + ID_DGP + "&opc=reg_doc");
+        }
+        if (opc.equals("filtrar")) {
+
+            getServletContext().setAttribute("List_Area", area.List_Area_ID(iddep));
+        //    int num = dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
+            getServletContext().setAttribute("Listar_Requerimiento",IReq.Listar_Requerimiento() );
+
+            response.sendRedirect("Vista/Dgp/Busc_Req_Autorizado.jsp");
         }
         if (opc.equals("Detalle")) {
 

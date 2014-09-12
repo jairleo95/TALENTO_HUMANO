@@ -1,3 +1,7 @@
+<%@page import="pe.edu.upeu.application.model.Requerimiento"%>
+<%@page import="pe.edu.upeu.application.model.Area"%>
+<jsp:useBean class="java.util.ArrayList" scope="application"  id="List_Area"/>
+<jsp:useBean class="java.util.ArrayList" scope="application"  id="Listar_Requerimiento"/>
 <%
     HttpSession sesion = request.getSession(true);
     String id_user = (String) sesion.getAttribute("IDUSER");
@@ -68,19 +72,12 @@
                             <label>Area :</label><br>
                             <select name="area" class="form-control">
                                 <option value="0"></option>
-                                <?
-                                require '../Modelo/ModeloRH_Area.php';
-                                $md_a = new ModelorRH_Area();
-                                $iddgp=$_SESSION["DEPARTAMENTO_ID"];
-                                if ( $_SESSION["IDROL"]==5) {
-                                $iddgp=0;
-                                }
-
-                                $list_a = $md_a->LISTA_RH_AREA_ID($iddgp);
-                                for ($u = 0; $u < count($list_a); $u++) {
-                                ?>
-                                <option value="<? echo $list_a[$u][0]; ?>"><? echo $list_a[$u][1]; ?></option>
-                                <? } ?>
+                                <%                                    for (int i = 0; i < List_Area.size(); i++) {
+                                        Area a = new Area();
+                                        a = (Area) List_Area.get(i);
+                                %>
+                                <option value="<%=a.getId_area()%>"><%=a.getNo_area()%></option>
+                                <% } %>
                             </select>
                         </div>
                     </div>
@@ -103,15 +100,14 @@
                             <label>Requerimiento :</label>
                             <select name="motivo" class="form-control" > 
                                 <option value="0"></option>
-                                <?
-                                require_once '../Modelo/ModeloRequerimiento.php';
-                                $mreq = new ModeloRequerimiento();
-                                $list_r = $mreq->ListarRequerimiento();
-
-                                for ($g = 0; $g < count($list_r); $g++) {
-                                ?>
-                                <option value="<? echo $list_r[$g][0]; ?>"><? echo $list_r[$g][1]; ?></option>
-                                <? } ?>
+                                <%
+                                        for (int s = 0; s < Listar_Requerimiento.size(); s++) {
+                                        Requerimiento r= new Requerimiento();
+                                        r=(Requerimiento)Listar_Requerimiento.get(s);
+                                %>
+                                <option value="<%=r.getId_requerimiento()%>"><%=r.getNo_req()%></option>
+                                <% } %>
+                             
                             </select>
                             <input type="hidden" name="iduser" value="<? echo $iduser; ?>">
                         </div>
@@ -121,14 +117,13 @@
                             <label>Proceso :</label>
                             <select name="proceso" class="form-control">
                                 <option value="0"></option>
-                                <?
-                                require_once '../Modelo/ModeloLista.php';
-                                $mpro = new ModeloLista();
-                                $list_pro = $mpro->LISTA_PROCESO();
-                                for ($f = 0; $f < count($list_pro); $f++) {
-                                ?>
-                                <option value="<? echo $list_pro[$f][0]; ?>"><? echo $list_pro[$f][1]; ?></option>
-                                <? } ?>
+                                <%
+                                        for (int s = 0; s < Listar_Requerimiento.size(); s++) {
+                                        Requerimiento r= new Requerimiento();
+                                        r=(Requerimiento)Listar_Requerimiento.get(s);
+                                %>
+                                <option value="<%=r.getId_requerimiento()%>"><%=r.getNo_req()%></option>
+                                <% } %>
                             </select>
                         </div>
                         <? //if ($_SESSION["IDROL"] == 1) { ?>
