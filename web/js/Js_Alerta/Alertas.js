@@ -57,7 +57,7 @@ function Autorizado() {
 
 
 function ok() {
-    alertify.success("Visita nuestro <a href=\"http://blog.reaccionestudio.com/\" style=\"color:white;\" target=\"_blank\"><b>BLOG.</b></a>");
+    alertify.success("El Requerimiento ha sido procesado con exito...!!!");
     return false;
 }
 

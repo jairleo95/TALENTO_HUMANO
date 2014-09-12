@@ -65,7 +65,7 @@ public class CAutorizacion extends HttpServlet {
                 a.Insert_Autorizacion("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
                 String idpu = e.Id_Puesto_Personal(ide);
                 getServletContext().setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
-                response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp");
+                response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?r=ok");
             }
             if (opc.equals("Rechazar")) {
                 String iddgp = request.getParameter("IDDETALLE_DGP");

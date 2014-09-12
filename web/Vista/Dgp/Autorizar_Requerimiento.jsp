@@ -25,17 +25,17 @@
     %>
 
 
-    <%if (request.getParameter("a") != null) {
-            if (request.getParameter("a").equals("t")) {
+    <%if (request.getParameter("r") != null) {
+            if (request.getParameter("r").equals("ok")) {
     %>
 
-    <body onload=" Autorizado()" class="body">
+    <body onload="ok()" class="body">
 
         <%
             }
         } else {
         %>
-    <body class="body"  onload="Autorizado()">
+    <body class="body"  >
         <%}%> 
         <div class="spacing">
             <center><h1 class="spacing" style="font-weight: bold;">Requerimientos por Autorizar</h1></center>
