@@ -56,7 +56,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href=""><%out.println((String) sesion.getAttribute("USER")); %> - <%out.println((String) sesion.getAttribute("PUESTO")); %> - <%out.println((String) sesion.getAttribute("DEPARTAMENTO"));%></a>
+                    <a class="navbar-brand" href=""><%out.println((String) sesion.getAttribute("USER")); %> - <%out.println((String) sesion.getAttribute("PUESTO")+" - "+(String) sesion.getAttribute("AREA")); %> - <%out.println((String) sesion.getAttribute("DEPARTAMENTO"));%></a>
 
                 </div>
                 <!-- /.navbar-header -->

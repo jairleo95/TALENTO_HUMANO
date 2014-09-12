@@ -8,7 +8,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <title>Autorizacion</title>
         <link rel="stylesheet" href="../../css1/bootstrap.min.css">
+
         <link type="text/css" rel="stylesheet" href="../../css/Css_Reporte/Reportes.css">
+        <script type="text/javascript" src="../../js/JQuery/jQuery.js" ></script>
+
+        <script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
+        <link rel="stylesheet" href="../../css/Css_Alerta/alertify.core.css" />
+        <link rel="stylesheet" href="../../css/Css_Alerta/alertify.default.css" />
+        <script type="text/javascript"  src="../../js/Js_Alerta/Alertas.js"></script>
+
+
 
     </head>
     <%
@@ -16,16 +25,27 @@
     %>
 
 
-    <body class="body">  
+    <%if (request.getParameter("a") != null) {
+            if (request.getParameter("a").equals("t")) {
+    %>
+
+    <body onload=" Autorizado()" class="body">
+
+        <%
+            }
+        } else {
+        %>
+    <body class="body"  onload="Autorizado()">
+        <%}%> 
         <div class="spacing">
             <center><h1 class="spacing" style="font-weight: bold;">Requerimientos por Autorizar</h1></center>
         </div>
     <center>
         <div class="container theme-showcase">
             <strong>
-            <h2>  
-                Requerimientos (<%=t%>)
-            </h2>       
+                <h2>  
+                    Requerimientos (<%=t%>)
+                </h2>       
             </strong>
             <table class="table table-hover" >
 
@@ -84,7 +104,7 @@
                         String iddgp = request.getParameter("iddgp");
                         String idtr = request.getParameter("idtr");
                         InterfaceDgpDAO dgp = new DgpDAO();
-                        int num = dgp.VALIDAR_DGP_CONTR(iddgp, idtr);
+                        int num = dgp.VALIDAR_DGP_CONTR(a.getId_dgp(), a.getId_trabajador());
                     %>
 
                     <td><a href="../../trabajador?idtr=<%=a.getId_trabajador()%>&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&iddetalle_dgp=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&cod=<%=a.getCo_pasos()%>&idpasos=<%=a.getId_pasos()%>&autorizacion=1&opc=aut&nup=<%=a.getNu_pasos()%>">
@@ -92,7 +112,7 @@
 
                                 if (idrol != null) {
                                     if (idrol.trim().equals("ROL-0006")) {
-                                        if (num == 1) {
+                                        if (num >= 1) {
                                             out.println("Registrar Firma");
                                         }
                                         if (num == 0) {
