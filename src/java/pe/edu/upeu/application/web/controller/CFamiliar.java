@@ -94,6 +94,12 @@ public class CFamiliar extends HttpServlet {
             getServletContext().setAttribute("LISTA_HIJO", h.LISTA_HIJOS(ID_TRABAJADOR));
             response.sendRedirect("Vista/Trabajador/Familiar/Reg_Datos_Hijo.jsp");
         }
+        if(opc.equals("ELIMINAR HIJO")){
+            
+            
+        }
+        if(opc.equals("MODIFICAR HIJO")){
+        }
 
         /* } finally {
          out.close();
