@@ -82,7 +82,9 @@
                             }
                         %>
                     </td>
-                    <td class="caji"><a href=""><img src="../../../imagenes/lapiz.png" alt="" width="25px" height="25px"/></a></td>
+                    <input type="hidden" name="opc" value="<%=h.getId_datos_hijos_trabajador()%>">
+                    <input type="hidden" name="opc" value="<%=h.getId_trabajador()%>">
+                    <td class="caji"> <a href="Mod_Datos_Hijos.jsp" ><img src="../../../imagenes/lapiz.png" alt="" width="25px" height="25px"/></a></td>
                     <td class="caji"><a href=""><img src="../../../imagenes/eliminar.png" alt=""   width="25px" height="25px"/></a></td>                    
                 </tr>
                 <% }}%>
