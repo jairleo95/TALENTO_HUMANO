@@ -110,4 +110,35 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
         return TOTAL;
     }
 
+    @Override
+    public void MOD_HIJOS_TRAB(String ID_DATOS_HIJOS_TRABAJADOR, String ID_TRABAJADOR, String AP_PATERNO, String AP_MATERNO, String NO_HIJO_TRABAJADOR, String FE_NACIMIENTO, String ES_SEXO, String ES_TIPO_DOC, String NU_DOC, String ES_PRESENTA_DOCUMENTO, String ES_INSCRIPCION_VIG_ESSALUD, String ES_ESTUDIO_NIV_SUPERIOR, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String ES_DATOS_HIJO_TRABAJADOR) {
+        CallableStatement cst;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = conn.conex.prepareCall("update ");
+            cst.setString(1, null);
+            cst.setString(2, ID_TRABAJADOR);
+            cst.setString(3, AP_PATERNO);
+            cst.setString(4, AP_MATERNO);
+            cst.setString(5, NO_HIJO_TRABAJADOR);
+            cst.setString(6, c.convertFecha(FE_NACIMIENTO));
+            cst.setString(7, ES_SEXO);
+            cst.setString(8, ES_TIPO_DOC);
+            cst.setString(9, NU_DOC);
+            cst.setString(10, ES_PRESENTA_DOCUMENTO);
+            cst.setString(11, ES_INSCRIPCION_VIG_ESSALUD);
+            cst.setString(12, ES_ESTUDIO_NIV_SUPERIOR);
+            cst.setString(13, US_CREACION);
+            cst.setString(14, null);
+            cst.setString(15, null);
+            cst.setString(16, null);
+            cst.setString(17, IP_USUARIO);
+            cst.setString(18, "1");
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        }
+    }
+
 }
