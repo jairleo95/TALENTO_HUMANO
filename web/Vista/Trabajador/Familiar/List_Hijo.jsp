@@ -31,7 +31,7 @@
                 <%for (int i = 0; i < LISTA_HIJO.size(); i++) {
                         Datos_Hijo_Trabajador h = new Datos_Hijo_Trabajador();
                         h = (Datos_Hijo_Trabajador) LISTA_HIJO.get(i);
-                        if(h.getEs_datos_hijo_trabajador().trim().equals("0")){
+                        if(h.getEs_datos_hijo_trabajador().trim().equals("1")){
                 %>
 
                 <tr>
