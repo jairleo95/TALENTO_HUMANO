@@ -409,7 +409,7 @@ public class DgpDAO implements InterfaceDgpDAO {
     @Override
     public int VALIDAR_DGP_CONTR(String id_dgp, String id_tr) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select count(*) from rhtm_contrato  where id_dgp ='" + id_dgp + "' and  ES_FIRMO_CONTRATO is null and id_trabajador='" + id_tr + "'";
+        String sql = "select count(*) from rhtm_contrato  where id_dgp ='" + id_dgp.trim() + "' and  ES_FIRMO_CONTRATO is not null and id_trabajador='" + id_tr.trim() + "'";
         int val = 0;
         try {
             ResultSet rs = this.conn.query(sql);

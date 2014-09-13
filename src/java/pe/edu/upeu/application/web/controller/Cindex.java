@@ -13,12 +13,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.ListaDAO;
 import pe.edu.upeu.application.dao.PuestoDAO;
 import pe.edu.upeu.application.dao.RequerimientoDAO;
 import pe.edu.upeu.application.dao.RolDAO;
 import pe.edu.upeu.application.dao.UbigeoDAO;
 import pe.edu.upeu.application.dao.UsuarioDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
@@ -51,6 +53,7 @@ public class Cindex extends HttpServlet {
         InterfaceRequerimientoDAO IReq = new RequerimientoDAO();
         InterfaceRolDAO Irol = new RolDAO();
         InterfacePuestoDAO pu = new PuestoDAO();
+        InterfaceDgpDAO dgp = new DgpDAO();
 
         if (Usuario.equals("") && Clave.equals("")) {
             out.print("ERROR");
@@ -70,7 +73,7 @@ public class Cindex extends HttpServlet {
             sesion.setAttribute("DEPARTAMENTO", user.getNo_dep());
             sesion.setAttribute("DEPARTAMENTO_ID", user.getId_departamento());
             sesion.setAttribute("PUESTO", user.getNo_puesto());
-            
+
             getServletContext().setAttribute("listarURL", Irol.listarURL(user.getId_rol()));
             getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
             getServletContext().setAttribute("List_Carrera", li.List_Carrera());
@@ -79,8 +82,8 @@ public class Cindex extends HttpServlet {
             getServletContext().setAttribute("List_Distrito", ub.List_Distrito());
             getServletContext().setAttribute("List_Det_Puesto", pu.List_Det_Puesto());
             getServletContext().setAttribute("List_Situacion_Educativa", li.List_Situacion_Educativa());
-            
-            
+            dgp.VAL_DGP_PASOS();
+
             out.print("EXITO!");
         } else {
             out.print("ERROR");

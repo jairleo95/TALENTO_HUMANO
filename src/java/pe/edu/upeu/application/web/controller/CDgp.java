@@ -13,12 +13,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import pe.edu.upeu.application.dao.AreaDAO;
 import pe.edu.upeu.application.dao.AutorizacionDAO;
 import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.PuestoDAO;
 import pe.edu.upeu.application.dao.RequerimientoDAO;
 import pe.edu.upeu.application.dao.TrabajadorDAO;
 import pe.edu.upeu.application.dao.UsuarioDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceAreaDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
@@ -62,7 +64,7 @@ public class CDgp extends HttpServlet {
         InterfaceDgpDAO dgp = new DgpDAO();
         InterfaceAutorizacionDAO a = new AutorizacionDAO();
         InterfaceUsuarioDAO us = new UsuarioDAO();
-
+        InterfaceAreaDAO area= new AreaDAO();
         String opc = request.getParameter("opc");
 
         //try {
@@ -85,7 +87,6 @@ public class CDgp extends HttpServlet {
             String DE_HORARIO_REFRIGERIO = request.getParameter("HORARIO_REFRIGERIO");
             String DE_DIAS_CAPACITACION = request.getParameter("DIAS_CAPACITACION");
             String ES_DGP = "";
-            String US_CREACION = request.getParameter("USER_CREACION");
             String FE_CREACION = request.getParameter("FECHA_CREACION");
             String US_MODIF = request.getParameter("USER_MODIF");
             String FE_MODIF = request.getParameter("FECHA_MODIF");
@@ -97,12 +98,11 @@ public class CDgp extends HttpServlet {
             String DE_CERTIFICADO_SALUD = request.getParameter("CERTIFICADO_SALUD");
             String DE_MONTO_HONORARIO = request.getParameter("MONTO_HONORARIO");
 
-            dgp.INSERT_DGP(ID_DGP, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO, DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION, ES_DGP, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, CA_CENTRO_COSTOS, DE_ANTECEDENTES_POLICIALES, DE_CERTIFICADO_SALUD, DE_MONTO_HONORARIO);
+            dgp.INSERT_DGP(ID_DGP, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO, DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION, ES_DGP, iduser, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, CA_CENTRO_COSTOS, DE_ANTECEDENTES_POLICIALES, DE_CERTIFICADO_SALUD, DE_MONTO_HONORARIO);
 
             String iddgp = dgp.MAX_ID_DGP();
             String idrp = IReq.id_det_req_proc(iddgp);
-
-              List<String> list = a.Det_Autorizacion(idrp);
+            List<String> list = a.Det_Autorizacion(idrp);
             a.Insert_Autorizacion("", iddgp, "1", "P1", "12312", iduser, "", "31/07/14", "3213", list.get(1), idrp, list.get(0));
             response.sendRedirect("Vista/Dgp/Horario/Reg_Horario.jsp?iddgp=" + iddgp + "&idtr=" + ID_TRABAJADOR + "&opc=rd");
 
@@ -135,6 +135,14 @@ public class CDgp extends HttpServlet {
             getServletContext().setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
 
             response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&iddgp=" + ID_DGP + "&opc=reg_doc");
+        }
+        if (opc.equals("filtrar")) {
+
+            getServletContext().setAttribute("List_Area", area.List_Area_ID(iddep));
+        //    int num = dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
+            getServletContext().setAttribute("Listar_Requerimiento",IReq.Listar_Requerimiento() );
+
+            response.sendRedirect("Vista/Dgp/Busc_Req_Autorizado.jsp");
         }
         if (opc.equals("Detalle")) {
 
