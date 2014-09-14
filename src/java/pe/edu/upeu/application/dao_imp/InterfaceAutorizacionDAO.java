@@ -25,6 +25,6 @@ public interface InterfaceAutorizacionDAO {
     public List<X_List_De_Autorizacion>  List_Detalle_Autorizacion(String iddgp, String idrp);
     public List<V_Autorizar_Dgp> List_id_Autorizacion(String id_aurotizacion , String id_user);
     public List<Autorizacion> NO_List_DGP();
-    public boolean Elim_Aut(String id_Autorizacion);
+    public void Elim_Aut(String id_Autorizacion);
     public int Val_Aut_DGP_M(String id_dgp);
 }

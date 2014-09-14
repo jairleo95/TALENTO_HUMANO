@@ -134,8 +134,12 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
     }
 
     @Override
-    public boolean Elim_Aut(String id_Autorizacion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void Elim_Aut(String id_Autorizacion) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "DELETE FROM RHTV_AUTORIZACION WHERE ID_AUTORIZACION='" + id_Autorizacion.trim() + "'";
+        this.conn.ejecutar(sql);
+        this.conn.close();
+
     }
 
     @Override
@@ -152,18 +156,18 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
             ResultSet rs = this.conn.query(sql);
             rs.next();
             list.add(rs.getString("id_pasos"));
-             list.add(rs.getString("id_puesto"));
-           /* list.add(rs.getString("id_proceso"));
-            list.add(rs.getString("id_detalle_req_proceso"));
-            list.add(rs.getString("id_detalle_pasos"));
-            list.add(rs.getString("de_pasos"));
-            list.add(rs.getString("nu_pasos"));
-            list.add(rs.getString("co_pasos"));
-            list.add(rs.getString("no_proceso"));
+            list.add(rs.getString("id_puesto"));
+            /* list.add(rs.getString("id_proceso"));
+             list.add(rs.getString("id_detalle_req_proceso"));
+             list.add(rs.getString("id_detalle_pasos"));
+             list.add(rs.getString("de_pasos"));
+             list.add(rs.getString("nu_pasos"));
+             list.add(rs.getString("co_pasos"));
+             list.add(rs.getString("no_proceso"));
            
-            list.add(rs.getString("id_direccion"));
-            list.add(rs.getString("id_departamento"));
-            list.add(rs.getString("id_requerimiento"));*/
+             list.add(rs.getString("id_direccion"));
+             list.add(rs.getString("id_departamento"));
+             list.add(rs.getString("id_requerimiento"));*/
 
         } catch (SQLException e) {
         } finally {

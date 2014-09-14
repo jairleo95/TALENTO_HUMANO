@@ -55,7 +55,7 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
     public List<V_Usuario> Val_Usuario(String Usuario, String PWD) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         //StringBuilder sql = new StringBuilder();
-        String sql = "select * from rhvd_usuario where no_usuario='" + Usuario + "' and pw_usuario='" + PWD + "'";
+        String sql = "select * from rhvd_usuario where no_usuario='" + Usuario.trim() + "' and pw_usuario='" + PWD + "'";
         List<V_Usuario> list = new ArrayList<V_Usuario>();
         try {
             ResultSet rs = this.conn.query(sql.toString());

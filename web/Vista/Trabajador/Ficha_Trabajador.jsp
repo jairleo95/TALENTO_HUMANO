@@ -41,41 +41,41 @@
         </div>
     <center>
         <div class="container theme-showcase">
-           
+
             <div class="form-group">
                 <label class="control-label">Elaborar Ficha</label><br>
                 <a href="../../trabajador?opc=Form_Reg"    class="btn btn-primary" role="button" >Agregar Nueva Ficha</a>   
             </div>
             <br>
             <div>
-     
+
                 <form method="post" action="../../trabajador" class="form-inline">                    
 
-                <div class="form-group">
-                    <label class="control-label">Nombres:</label><br>
-                    <input type="text"  class="form-control"  name="nom">
-                </div>
-                <div class="form-group">
-                    <label class="control-label" >Apellido Paterno:</label><br>
-                    <input type="text"  class="form-control"  name="ape_pat">
-                </div>
-                <div class="form-group">
-                    <label class="control-label" >Apellido Materno:</label><br>
-                    <input type="text"  class="form-control"  name="ape_mat">
-                </div>
-                <div class="form-group">
-                    <label class="control-label" >DNI:</label><br>
-                    <input type="text"  class="form-control"  onKeyPress="return checkIt(event)" name="dni">
-                </div>
+                    <div class="form-group">
+                        <label class="control-label">Nombres:</label><br>
+                        <input type="text"  class="form-control"  name="nom">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" >Apellido Paterno:</label><br>
+                        <input type="text"  class="form-control"  name="ape_pat">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" >Apellido Materno:</label><br>
+                        <input type="text"  class="form-control"  name="ape_mat">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" >DNI:</label><br>
+                        <input type="text"  class="form-control"  onKeyPress="return checkIt(event)" name="dni">
+                    </div>
                     <input type="hidden" name="opc" value="Buscar">
-                <div class="form-group">
-                    <br>
-                    <input class="btn btn-primary"  type="submit" name="busqueda"  value="Buscar">
+                    <div class="form-group">
+                        <br>
+                        <input class="btn btn-primary"  type="submit" name="busqueda"  value="Buscar">
 
-                    <a href="?cancel=true"  class="btn btn-primary" role="button">Cancelar</a>
-                </div>
+                        <a href="?cancel=true"  class="btn btn-primary" role="button">Cancelar</a>
+                    </div>
 
-            </form>
+                </form>
             </div>
             <%                int count = ListarTrabajador.size();
                 String cancel = request.getParameter("cancel");
@@ -90,7 +90,7 @@
             <h1>No se encontraron registros...</h1>
             <%}
                 if (count > 0) {%>
-                <br>
+            <br>
             <table class="table table-hover">
                 <tr class="tab_cabe">
                     <td>Nro</td>
@@ -153,6 +153,8 @@
 
                 <%
                             }
+                            ListarTrabajador.clear();
+
                         }
 
                     }%> 
