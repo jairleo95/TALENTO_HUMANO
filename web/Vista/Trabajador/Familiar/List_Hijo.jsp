@@ -82,13 +82,15 @@
                             }
                         %>
                     </td>
-                    <input type="hidden" name="opc" value="<%=h.getId_datos_hijos_trabajador()%>">
-                    <input type="hidden" name="idtr" value="<%=h.getId_trabajador()%>">
-                    <td class="caji"> <a href="Mod_Datos_Hijos.jsp" ><img src="../../../imagenes/lapiz.png" alt="" width="25px" height="25px"/></a></td>
-                    <td class="caji"><a href=""><img src="../../../imagenes/eliminar.png" alt=""   width="25px" height="25px"/></a></td>                    
+                  
+                    <td class="c
+                        aji"> <a href="Mod_Datos_Hijos.jsp" ><img src="../../../imagenes/lapiz.png" alt="" width="25px" height="25px"/></a></td>
+                    <td class="caji"><a href="../../../familiar?idhijo=<%=h.getId_datos_hijos_trabajador()%>&idtr=<%=h.getId_trabajador()%>&opc=eliminar" >
+                            <img src="../../../imagenes/eliminar.png" alt=""   width="25px" height="25px"/></a></td> 
+                            
                 </tr>
                 <% }}%>
-            </tbody>
+            </tbody
         </table>
     </center>
 </body>

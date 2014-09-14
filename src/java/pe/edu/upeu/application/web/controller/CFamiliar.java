@@ -37,9 +37,11 @@ public class CFamiliar extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         HttpSession sesion = request.getSession(true);
+        
         String user = (String) sesion.getAttribute("IDUSER");
         String opc = request.getParameter("opc");
         CConversion c = new CConversion();
+        
         InterfaceDatos_Hijo_Trabajador h = new Datos_Hijo_TrabajadorDAO();
         InterfacePadre_Madre_ConyugueDAO pmc = new Padre_Madre_ConyugueDAO();
 
@@ -94,9 +96,12 @@ public class CFamiliar extends HttpServlet {
             getServletContext().setAttribute("LISTA_HIJO", h.LISTA_HIJOS(ID_TRABAJADOR));
             response.sendRedirect("Vista/Trabajador/Familiar/Reg_Datos_Hijo.jsp");
         }
-        if(opc.equals("ELIMINAR HIJO")){
-            
-            
+        if(opc.equals("eliminar")){
+           String id_hijo = request.getParameter("idhijo");
+           String id_tr = request.getParameter("idtr");
+            out.print(id_hijo+"   "+id_tr+"");
+            h.ELIMINAR_HIJO(id_hijo, id_tr);
+           response.sendRedirect("Vista/Trabajador/Familiar/Detalle_Familiar.jsp?idtr=" + id_tr);
         }
         if(opc.equals("MODIFICAR HIJO")){
         }

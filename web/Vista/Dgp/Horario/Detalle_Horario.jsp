@@ -89,8 +89,7 @@
                     if (request.getParameter("P2").equals("1")) {%>
 
         <a href="../../../dgp?iddgp=<%=request.getParameter("iddgp")%>&idtr=<%=request.getParameter("idtr")%>&opc=rd">Continuar</a>
-        <%}
-                 }%>
+
 
 </div>
     </body>

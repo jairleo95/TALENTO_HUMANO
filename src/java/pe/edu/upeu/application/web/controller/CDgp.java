@@ -133,8 +133,8 @@ public class CDgp extends HttpServlet {
             getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(ID_DGP));
             int num = dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
             getServletContext().setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
-
-            response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&iddgp=" + ID_DGP + "&opc=reg_doc");
+            out.print(ID_DGP);
+           response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&iddgp=" + ID_DGP + "&opc=reg_doc");
         }
         if (opc.equals("filtrar")) {
 

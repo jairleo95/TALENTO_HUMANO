@@ -141,4 +141,11 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
         }
     }
 
+    @Override
+    public void ELIMINAR_HIJO(String id_hijo, String id_id_trabajador) {
+         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+         String sql = "UPDATE RHTD_DATOS_HIJO_TRABAJADOR SET ES_DATOS_HIJO_TRABAJADOR = '0' WHERE ID_TRABAJADOR = '"+id_id_trabajador+"' and ID_DATOS_HIJOS_TRABAJADOR = '"+id_hijo+"'";
+         ResultSet rs = this.conn.query(sql);
+    }
+
 }
