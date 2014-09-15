@@ -1,4 +1,6 @@
+<%@page importp="e.edu.upeu.application.model.Datos_Hijo_Trabajador"%>
 
+<jsp:useBean id="Lista_hijo_individual" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,29 +12,31 @@
         <center>
                 <label class="title">HIJOS</label>
                 <form class="form" action="../../../familiar"> 
-                         <table class="table" >  
-                           
-                             <input type="hidden" name="TRABAJADOR" value="<%=request.getParameter("idtr")%>" class="text-box" >      
-                             
-                             <tr><td>Apellido Paterno:</td><td><input type="text" name="APELLIDO_P" class="text-box" required=""></td></tr>      
-                             <tr><td>Apellido Materno:</td><td><input type="text" name="APELLIDO_M" class="text-box"  required=""></td></tr>    
-                             <tr><td>Nombres:</td><td><input type="text" name="NOMBRE" class="text-box"  required=""></td></tr>           
-                             <tr><td>Fecha de Nacimiento:</td><td><input type="date" name="FECHA_NAC" class="text-box" required=""></td></tr>   
+                         <table class="table" >        
+                             <% for( int i=0 ; i<= Lista_hijo_individual.size();i++){ %>
+                             <% Datos_Hijo_Trabajador d = new Datos_Hijo_Trabajador();%>
+                             <% d = (Datos_Hijo_Trabajador)Lista_hijo_individual.get(i);%>
+                             <input type="hidden" id="idhijo" value="<%= d.getId_datos_hijos_trabajador() %>">
+                             <input type="hidden" id="idtr" value="<%= d.getId_trabajador()%>">
+                             <tr><td>Apellido Paterno:</td><td><input type="text" name="APELLIDO_P" class="text-box" value="<%= d.getAp_paterno()%>" required=""></td></tr>      
+                             <tr><td>Apellido Materno:</td><td><input type="text" name="APELLIDO_M" class="text-box"  required="<%= d.getAp_materno()%>"></td></tr>    
+                             <tr><td>Nombres:</td><td><input type="text" name="NOMBRE" class="text-box" value="<%= d.getNo_hijo_trabajador()%>" required=""></td></tr>   
+                             <tr><td>Fecha de Nacimiento:</td><td><input type="date" name="FECHA_NAC" class="text-box" value="<%= d.getFe_nacimiento()%>" required=""></td></tr>   
                              <tr><td>Sexo:</td><td>
-                                     <select name="SEXO" class="text-box" required="">
+                                     <select name="SEXO" class="text-box" value="<%= d.getEs_sexo()%>" required="">
                                      <option value=""></option>
                                      <option value="M">Masculino</option>
                                      <option value="F">Femenino</option>
                                  </select> </td> </tr>    
                              <tr><td>Tipo de Documento</td><td>
-                                     <select name="TIPO_DOC_ID" class="text-box" required="">
+                                     <select name="TIPO_DOC_ID" class="text-box" value="<%= d.getEs_tipo_doc()%>" required="">
                                      <option value=""></option>
                                      <option value="1">DNI</option>
                                      <option value="2">Partida</option>
                                  </select>
                              </td></tr>     
                              
-                         <tr><td>Numero de Documento:</td><td><input type="text" name="NRO_DOC" class="text-box" ></td></tr>      
+                         <tr><td>Numero de Documento:</td><td><input type="text" name="NRO_DOC" value="<%= d.getNu_doc()%>" class="text-box" ></td></tr>      
                              <!--<tr><td>Presenta documento:</td><td>
                                  <select name="PRESENTA_DOCUMENTO" class="text-box">
                                      <option value=""></option>
@@ -41,7 +45,7 @@
                                  </select>
                              </td></tr>  -->
                              <tr><td>Inscripción Vigente en Essalud:</td><td>
-                                 <select  name="INSCRIPCION_VIG_ESSALUD" class="text-box" >
+                                 <select  name="INSCRIPCION_VIG_ESSALUD" value="<%= d.getEs_inscripcion_vig_essalud()%>" class="text-box" >
                                      <option value=""></option>
                                      <option value="1">Si</option>
                                      <option value="0">No</option>
@@ -54,8 +58,9 @@
                                      <option  value="0">No</option>
                                  </select>
                                 </td></tr>  
-                         <tr><td colspan="2"><input type="submit" name="opc"  class="submit" value="REGISTRAR HIJO"></td></tr>
-                         </table></form></center><br><br>
+                         <tr><td colspan="2"><input type="submit" name="opc"  class="submit" value="MODIFICAR HIJO">
+                                 <input type="submit" name="usrmodi" value="" class="submit"></td></tr>
+                         <%}%></table></form></center><br><br>
                  
     </body>
 </html>

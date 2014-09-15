@@ -103,14 +103,29 @@ public class CFamiliar extends HttpServlet {
             h.ELIMINAR_HIJO(id_hijo, id_tr);
            response.sendRedirect("Vista/Trabajador/Familiar/Detalle_Familiar.jsp?idtr=" + id_tr);
         }
-        if(opc.equals("MODIFICAR HIJO")){
+        if(opc.equals("modificar")){String idhijo=request.getParameter("idhijo");
+            String idtr=request.getParameter("idtr");
+            getServletContext().setAttribute("Lista_hijo_individual", h.LISTA_HIJO(idhijo,idtr));
+            response.sendRedirect("Vista/Trabajador/Familiar/Mod_Datos_Hijos.jsp?idhijo="+ idhijo);
         }
-
-        /* } finally {
-         out.close();
-         }*/
-    }
-
+        if(opc.equals("MODIFICAR HIJO")){
+            String idtr=request.getParameter("idtr");
+            String ID_DATOS_HIJOS_TRABAJADOR = request.getParameter("idhijo");
+            String AP_PATERNO = request.getParameter("APELLIDO_P");
+            String AP_MATERNO = request.getParameter("APELLIDO_M");
+            String NO_HIJO_TRABAJADOR = request.getParameter("NOMBRE");
+            String FE_NACIMIENTO = request.getParameter("FECHA_NAC");
+            String ES_SEXO = request.getParameter("SEXO");
+            String ES_TIPO_DOC = request.getParameter("TIPO_DOC_ID");
+            String NU_DOC = request.getParameter("NRO_DOC");
+            String ES_INSCRIPCION_VIG_ESSALUD = request.getParameter("INSCRIPCION_VIG_ESSALUD");
+            String ES_ESTUDIO_NIV_SUPERIOR = request.getParameter("ESTUD_NIV_SUPERIOR");
+            h.MOD_HIJOS_TRAB(ID_DATOS_HIJOS_TRABAJADOR, AP_PATERNO, AP_MATERNO, NO_HIJO_TRABAJADOR, FE_NACIMIENTO, ES_SEXO, ES_TIPO_DOC, NU_DOC, ES_INSCRIPCION_VIG_ESSALUD, ES_ESTUDIO_NIV_SUPERIOR);
+            response.sendRedirect("Vista/Trabajador/Familiar/Detalle_Familiar.jsp?idtr=" + idtr);
+        }
+       }
+            
+        
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
