@@ -19,7 +19,7 @@
                              <input type="hidden" id="idhijo" value="<%= d.getId_datos_hijos_trabajador() %>">
                              <input type="hidden" id="idtr" value="<%= d.getId_trabajador()%>">
                              <tr><td>Apellido Paterno:</td><td><input type="text" name="APELLIDO_P" class="text-box" value="<%= d.getAp_paterno()%>" required=""></td></tr>      
-                             <tr><td>Apellido Materno:</td><td><input type="text" name="APELLIDO_M" class="text-box"  required="<%= d.getAp_materno()%>"></td></tr>    
+                             <tr><td>Apellido Materno:</td><td><input type="text" name="APELLIDO_M" class="text-box"  value="<%= d.getAp_materno()%>"></td></tr>    
                              <tr><td>Nombres:</td><td><input type="text" name="NOMBRE" class="text-box" value="<%= d.getNo_hijo_trabajador()%>" required=""></td></tr>   
                              <tr><td>Fecha de Nacimiento:</td><td><input type="date" name="FECHA_NAC" class="text-box" value="<%= d.getFe_nacimiento()%>" required=""></td></tr>   
                              <tr><td>Sexo:</td><td>

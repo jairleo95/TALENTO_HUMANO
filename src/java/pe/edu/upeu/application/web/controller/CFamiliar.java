@@ -101,6 +101,7 @@ public class CFamiliar extends HttpServlet {
            String id_tr = request.getParameter("idtr");
             out.print(id_hijo+"   "+id_tr+"");
             h.ELIMINAR_HIJO(id_hijo, id_tr);
+            getServletContext().setAttribute("LISTA_HIJO", h.LISTA_HIJOS(id_tr));
            response.sendRedirect("Vista/Trabajador/Familiar/Detalle_Familiar.jsp?idtr=" + id_tr);
         }
         if(opc.equals("modificar")){String idhijo=request.getParameter("idhijo");

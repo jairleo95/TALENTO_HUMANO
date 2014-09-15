@@ -89,7 +89,8 @@
                             <img src="../../../imagenes/eliminar.png" alt=""   width="25px" height="25px"/></a></td> 
                             
                 </tr>
-                <% }}%>
+                <% }}
+                LISTA_HIJO.clear();%>
             </tbody
         </table>
     </center>
