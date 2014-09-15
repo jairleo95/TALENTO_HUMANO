@@ -1,6 +1,7 @@
 <%@page import="pe.edu.upeu.application.model.Datos_Hijo_Trabajador"%>
 
 <jsp:useBean id="Lista_hijo_individual" scope="application" class="java.util.ArrayList"/>
+
 <!DOCTYPE html>
 <html>
     <head>
