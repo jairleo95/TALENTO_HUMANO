@@ -47,10 +47,22 @@
 
                         </select> </td> </tr>    
                 <tr><td>Tipo de Documento</td><td>
-                        <select name="TIPO_DOC_ID" class="text-box" value="<%= d.getEs_tipo_doc()%>" required="">
+                        <select name="TIPO_DOC_ID" class="text-box" required="">
                             <option value=""></option>
-                            <option value="1">DNI</option>
+                            <%
+                                if (d.getEs_tipo_doc().equals("1")) {
+                            %>
+                            <option value="1" selected="">DNI</option>
                             <option value="2">Partida</option>
+                             <%}
+                            %>
+                             <%
+                                if (d.getEs_tipo_doc().equals("2")) {
+                            %>
+                             <option value="1">DNI</option>
+                             <option value="2" selected="">Partida</option>
+                             <%}
+                            %>
                         </select>
                     </td></tr>     
 
@@ -63,17 +75,41 @@
                     </select>
                 </td></tr>  -->
                 <tr><td>Inscripción Vigente en Essalud:</td><td>
-                        <select  name="INSCRIPCION_VIG_ESSALUD" value="<%= d.getEs_inscripcion_vig_essalud()%>" class="text-box" >
+                        <select  name="INSCRIPCION_VIG_ESSALUD" required="" class="text-box" >
                             <option value=""></option>
-                            <option value="1">Si</option>
+                             <%
+                                if (d.getEs_inscripcion_vig_essalud().equals("1")) {
+                            %>
+                            <option value="1" selected="">Si</option>
                             <option value="0">No</option>
+                             <%}
+                            %>
+                             <%
+                                if (d.getEs_inscripcion_vig_essalud().equals("0")) {
+                            %>
+                             <option value="1">Si</option>
+                             <option value="0" selected="">No</option>
+                             <%}
+                            %>
                         </select></td></tr> 
 
                 <tr><td>Estudiante de Nivel Superior:</td><td>
                         <select name="ESTUD_NIV_SUPERIOR" class="text-box">
                             <option  value=""></option>
-                            <option  value="1">Si</option>
+                             <%
+                                if (d.getEs_estudio_niv_superior().equals("1")) {
+                            %>
+                            <option  value="1" selected="">Si</option>
                             <option  value="0">No</option>
+                             <%}
+                            %>
+                             <%
+                                if (d.getEs_estudio_niv_superior.equals("0")) {
+                            %>
+                            <option  value="1" selected="">Si</option>
+                            <option  value="0">No</option>
+                             <%}
+                            %>
                         </select>
                     </td></tr>  
                 <tr><td colspan="2"><input type="submit" name="opc"  class="submit" value="MODIFICAR HIJO">
