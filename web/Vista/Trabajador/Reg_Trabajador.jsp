@@ -193,7 +193,7 @@
                 <tr><td colspan="4"><div class="sub_title"><label class="label">Datos Personales</label></div></td></tr>
                 <tr ><td >Apellido Paterno:</td><td>
                         <div class="item">
-                            <input type="text" name="APELLIDO_P"  required=""  class="text-box"  onkeyup="this.value = this.value.toUpperCase()" >
+                            <input type="text" name="APELLIDO_P"  required=""  class="text-box"  onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
                             <div class='tooltip help'>
                                 <span>?</span>
                                 <div class='content'>
@@ -206,7 +206,7 @@
                 <tr><td>Apellido Materno:</td><td>
 
                         <div class="item">
-                            <input type="text" name="APELLIDO_M" required=""  class="text-box" onkeyup="this.value = this.value.toUpperCase()">
+                            <input type="text" name="APELLIDO_M" required=""  class="text-box" onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
                             <div class='tooltip help'>
                                 <span>?</span>
                                 <div class='content'>
@@ -219,7 +219,7 @@
                 <tr><td>Nombres:</td><td>
 
                         <div class="item">
-                            <input type="text" name="NOMBRES" class="text-box" required="" onkeyup="this.value = this.value.toUpperCase()">
+                            <input type="text" name="NOMBRES" class="text-box" required="" onkeyup="this.value = this.value.toUpperCase()" maxlength="50">
                             <div class='tooltip help'>
                                 <span>?</span>
                                 <div class='content'>
@@ -302,7 +302,7 @@
                                 <option value="3">Pasaporte</option>
                             </select>
                         </div> <div class="item">
-                            <input type="text" name="NRO_DOC" class="text-box doc" id="doc" required=""></div></td></tr> 
+                            <input type="text" name="NRO_DOC" class="text-box doc" id="doc" required="" maxlength="10"></div></td></tr> 
                 <tr><td>Estado Civil:</td><td>
                         <div class="item">
                             <select name="ESTADO_CIVIL"  class="text-box required" required="">
@@ -329,10 +329,10 @@
                             <option value="2">Negativo</option>
                         </select>
                     </td></tr>   
-                <tr><td>Teléfono:</td><td><input type="text" name="TELEFONO" class="text-box" >Celular:<input type="text" name="CELULAR" class="text-box" ></td></tr>      
+                <tr><td>Teléfono:</td><td><input type="text" name="TELEFONO" class="text-box" maxlength="50">Celular:<input type="text" name="CELULAR" class="text-box" maxlength="38"></td></tr>      
                 <tr><td>Correo Personal:</td><td>
                         <div class="item">
-                            <input type="email" name="CORREO_PERSONAL"  required="" class="text-box email"  >
+                            <input type="email" name="CORREO_PERSONAL"  required="" class="text-box email" maxlength="100" >
                         </div>
 
                     </td></tr>  
@@ -340,7 +340,7 @@
 
                         <div class="item">
 
-                            <input type="email" name="CORREO_INST" required="" class="text-box email" >
+                            <input type="email" name="CORREO_INST" required="" class="text-box email" maxlength="100" >
                         </div>
                     </td></tr>    
                 <tr><td>Sistema Pensionario:</td><td>
@@ -435,8 +435,8 @@
                     </td></tr>
                 <tr id="egreso" style="display: none"><td>Año Egreso(Nuevo)</td><td>   <div class="item"><input type="text" name="A_EGRESO" id="" class="text-box"></div></td></tr> 
 
-                <tr><td>Tipo Hora Pago Referencial:</td><td><input type="text" name="TIPO_HORA_PAGO_REFEERENCIAL"  value="0" class="text-box" ></td></tr> 
-                <tr><td>Otros Estudios:</td><td colspan="3"><textarea name="OTROS_ESTUDIOS" class="text-box" cols="60" rows="6"></textarea></td></tr> 
+                <tr><td>Tipo Hora Pago Referencial:</td><td><input type="text" name="TIPO_HORA_PAGO_REFEERENCIAL"  value="0" class="text-box" maxlength="6"></td></tr> 
+                <tr><td>Otros Estudios:</td><td colspan="3"><textarea name="OTROS_ESTUDIOS" class="text-box" cols="60" rows="6" maxlength="500"></textarea></td></tr> 
 
 
                 <tr><td colspan="4"><div class="sub_title"><label class="label">Domicilio Actual del Trabajador</label></div></td></tr>
@@ -458,13 +458,13 @@
                                 <option value="11">Block</option>
                             </select>
                         </div>
-                        <div class="item"><input type="text" name="DIR_DOM_A_D2" id="DOM_A_D2" class="text-box" required=""></div>
+                        <div class="item"><input type="text" name="DIR_DOM_A_D2" id="DOM_A_D2" class="text-box" required="" maxlength="100"></div>
                         <div class="item"><select name="DIR_DOM_A_D3_ID" class="text-box required" id="DOM_A_D3" required="">
                                 <option value="">------</option>
                                 <option value="1">Número</option>
                                 <option value="2">Lote</option>
                                 <option value="3">S/N</option>
-                            </select></div><div class="item"><input type="text" name="DIR_DOM_A_D4" id="DOM_A_D4" class="text-box" required="" ></div></td></tr>  
+                            </select></div><div class="item"><input type="text" name="DIR_DOM_A_D4" id="DOM_A_D4" class="text-box" required="" maxlength="100"></div></td></tr>  
 
                 <tr><td> </td><td>
                         <div class="item">
@@ -483,8 +483,8 @@
                                 <option value="11">Fundo</option>
                                 <option value="12">Ninguno</option>
                             </select></div>
-                        <div class="item"><input type="text" name="DIR_DOM_A_D6" id="DOM_A_D6" class="text-box" required="" ></div></tr> 
-                <tr><td>Referencia:</td><td>   <div class="item"><input type="text" name="DIR_DOM_A_REF" id="DOM_A_REF" class="text-box" required=""></div></td></tr> 
+                        <div class="item"><input type="text" name="DIR_DOM_A_D6" id="DOM_A_D6" class="text-box" required="" maxlength="100"></div></tr> 
+                <tr><td>Referencia:</td><td>   <div class="item"><input type="text" name="DIR_DOM_A_REF" id="DOM_A_REF" class="text-box" required="" maxlength="200"></div></td></tr> 
 
 
 
@@ -535,7 +535,7 @@
 
                             </select>
                         </div>
-                        <div class="item"><input type="text" name="DIR_DOM_LEG_D2" id="DOM_LEG_D2" class="text-box"  required=""></div>
+                        <div class="item"><input type="text" name="DIR_DOM_LEG_D2" id="DOM_LEG_D2" class="text-box"  required="" maxlength="100"></div>
                         <div class="item">
                             <select name="DIR_DOM_LEG_D3_ID"  id="DOM_LEG_D3" class="text-box required"  required="">
                                 <option value="">----------</option>
@@ -545,7 +545,7 @@
                             </select>
                         </div>
                         <div class="item">
-                            <input type="text" name="DIR_DOM_LEG_D4" id="DOM_LEG_D4" class="text-box"  required=""></div></td></tr> 
+                            <input type="text" name="DIR_DOM_LEG_D4" id="DOM_LEG_D4" class="text-box"  required="" maxlength="100"></div></td></tr> 
                 <tr><td> </td><td>
                         <div class="item">
                             <select name="DIR_DOM_LEG_D5_ID" id="DOM_LEG_D5" class="text-box required" required="">
@@ -564,7 +564,7 @@
                                 <option value="12">Ninguno</option>  
                             </select>
                         </div>
-                        <div class="item"> <input type="text" name="DIR_DOM_LEG_D6" id="DOM_LEG_D6" class="text-box"  required=""></div></td></tr> 
+                        <div class="item"> <input type="text" name="DIR_DOM_LEG_D6" id="DOM_LEG_D6" class="text-box"  required="" maxlength="100"></div></td></tr> 
 
                 <tr><td></td><td> Departamento:
                         <select  id="dep_dir_l" class="text-box"  required="">
@@ -590,9 +590,9 @@
                     </td></tr>
                 <tr><td colspan="4"><div class="sub_title"><label class="label">Ingresos de Quinta Categoria</label></div>
                         <input type="hidden" name="REFERENCIA" class="text-box"  > </td></tr>
-                <tr><td>Empresa:</td><td><input type="text" name="ING_QTA_CAT_EMPRESA" class="text-box" ></td></tr> 
-                <tr><td>RUC:</td><td><input type="text" name="ING_QTA_CAT_RUC" class="text-box" ></td></tr> 
-                <tr><td>Otras Empresas:</td><td><textarea name="ING_QTA_CAT_OTRAS_EMPRESAS" class="text-box" cols="60" rows="6"></textarea></td></tr> 
+                <tr><td>Empresa:</td><td><input type="text" name="ING_QTA_CAT_EMPRESA" class="text-box" maxlength="100"></td></tr> 
+                <tr><td>RUC:</td><td><input type="text" name="ING_QTA_CAT_RUC" class="text-box" maxlength="20"></td></tr> 
+                <tr><td>Otras Empresas:</td><td><textarea name="ING_QTA_CAT_OTRAS_EMPRESAS" class="text-box" cols="60" rows="6" maxlength="500"></textarea></td></tr> 
                 <tr><td colspan="4"><div class="sub_title"><label class="label">Informacion Religiosa</label></div></td></tr>
                 <tr><td>Religión:</td><td>
                         <div class="item">
@@ -604,8 +604,8 @@
                             </select>
                         </div>
                     </td></tr>  
-                <tr><td>Iglesia:</td><td><div class="item"><input type="text" name="IGLESIA" class="text-box"  required></div></td></tr>  
-                <tr><td>Cargo en la Iglesia:</td><td><input type="text" name="CARGO" class="text-box" ></td></tr>  
+                <tr><td>Iglesia:</td><td><div class="item"><input type="text" name="IGLESIA" class="text-box"  required="" maxlength="30"></div></td></tr>  
+                <tr><td>Cargo en la Iglesia:</td><td><input type="text" name="CARGO" class="text-box" maxlength="30"></td></tr>  
                 <tr><td>Autoridad:</td><td>
                         <select name="AUTORIDAD" class="text-box">
                             <option value="">-----</option>
@@ -613,9 +613,9 @@
                             <option value="2">Primer Anciano</option>
                             <option value="3">Sacerdote</option>
                         </select></td></tr>  
-                <tr><td>Nombres y Apellidos:</td><td><input type="text" name="AUT_APELLIDOSNOMBRES" class="text-box" ></td></tr> 
-                <tr><td>Telefono/Celular:</td><td><input type="text" name="AUT_CELULAR" class="text-box" ></td></tr>   
-                <tr><td>Observaciones:</td><td> <textarea  name="OBSERVACIONES" class="text-box" cols="60" rows="6"></textarea>
+                <tr><td>Nombres y Apellidos:</td><td><input type="text" name="AUT_APELLIDOSNOMBRES" class="text-box" maxlength="90"></td></tr> 
+                <tr><td>Telefono/Celular:</td><td><input type="text" name="AUT_CELULAR" class="text-box" maxlength="20"></td></tr>   
+                <tr><td>Observaciones:</td><td> <textarea  name="OBSERVACIONES" class="text-box" cols="60" rows="6" maxlength="500"></textarea>
                         <input type="hidden" value="<%=iduser%>" name="USER_CREACION" class="text-box" ></td></tr> 
                 <tr><td colspan="2"><input type="submit" name="opc"  class="submit" value="Registrar"></td></tr> 
             </table></form></center><br><br>
