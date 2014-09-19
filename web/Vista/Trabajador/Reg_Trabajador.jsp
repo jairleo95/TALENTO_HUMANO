@@ -109,13 +109,14 @@
 
                                     }
                                     if ($(".select-doc").val() == 2) {
-                                        $(".doc").removeAttr("maxlength");
+                                        
                                         $("#doc").removeNumeric();
+                                        $(".doc").attr("maxlength","10");
                                         //    $(".doc").val("");
                                     }
                                     if ($(".select-doc").val() == 3) {
                                         $("#doc").removeNumeric();
-                                        $(".doc").removeAttr("maxlength");
+                                        $(".doc").attr("maxlength","10");
                                     }
                                 }
                         );
