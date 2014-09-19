@@ -52,20 +52,20 @@
                 <form method="post" action="../../trabajador" class="form-inline">                    
 
                     <div class="form-group">
-                        <label class="control-label">Nombres:</label><br>
-                        <input type="text"  class="form-control"  name="nom">
+                        <label class="control-label" >Nombres:</label><br>
+                        <input type="text"  class="form-control"  name="nom" maxlength="50">
                     </div>
                     <div class="form-group">
                         <label class="control-label" >Apellido Paterno:</label><br>
-                        <input type="text"  class="form-control"  name="ape_pat">
+                        <input type="text"  class="form-control"  name="ape_pat" maxlength="50">
                     </div>
                     <div class="form-group">
                         <label class="control-label" >Apellido Materno:</label><br>
-                        <input type="text"  class="form-control"  name="ape_mat">
+                        <input type="text"  class="form-control"  name="ape_mat" maxlength="50">
                     </div>
                     <div class="form-group">
                         <label class="control-label" >DNI:</label><br>
-                        <input type="text"  class="form-control"  onKeyPress="return checkIt(event)" name="dni">
+                        <input type="text"  class="form-control"  onKeyPress="return checkIt(event)" name="dni" maxlength="8">
                     </div>
                     <input type="hidden" name="opc" value="Buscar">
                     <div class="form-group">
