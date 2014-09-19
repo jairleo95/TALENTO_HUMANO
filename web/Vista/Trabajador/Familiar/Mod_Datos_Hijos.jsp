@@ -21,7 +21,7 @@
                 <input type="hidden" id="idhijo" value="<%= d.getId_datos_hijos_trabajador()%>">
                 <input type="hidden" id="idtr" value="<%= d.getId_trabajador()%>">
                 <tr><td>Apellido Paterno:</td><td><input type="text" name="APELLIDO_P" class="text-box" value="<%= d.getAp_paterno()%>" required="" maxlength="30"></td></tr>      
-                <tr><td>Apellido Materno:</td><td><input type="text" name="APELLIDO_M" class="text-box"  value="<%= d.getAp_materno()%>" maxlength="30"></td></tr>    
+                <tr><td>Apellido Materno:</td><td><input type="text" name="NOMBRE" class="text-box"  value="<%= d.getAp_materno()%>" maxlength="30"></td></tr>    
                 <tr><td>Nombres:</td><td><input type="text" name="NOMBRE" class="text-box" value="<%= d.getNo_hijo_trabajador()%>" required="" maxlength="30"></td></tr>   
                 <tr><td>Fecha de Nacimiento:</td><td><input type="date" name="FECHA_NAC" class="text-box" value="<%= d.getFe_nacimiento()%>" required=""></td></tr>   
                 <tr><td>Sexo:</td><td>
@@ -104,7 +104,7 @@
                              <%}
                             %>
                              <%
-                                if (d.getEs_estudio_niv_superior.equals("0")) {
+                                if (d.getEs_estudio_niv_superior().equals("0")) {
                             %>
                             <option  value="1" selected="">Si</option>
                             <option  value="0">No</option>
@@ -112,8 +112,9 @@
                             %>
                         </select>
                     </td></tr>  
-                <tr><td colspan="2"><input type="submit" name="opc"  class="submit" value="MODIFICAR HIJO">
-                        <input type="submit" name="usrmodi" value="" class="submit"></td></tr>
+                    <input type="hidden" name="usrmodi" value="" class="submit">
+                <tr><td colspan="2"><input type="submit" name="opc"  class="submit" value="MODIFICAR HIJO"></td></tr>
+
                 <%}%></table></form></center><br><br>
 
 </body>

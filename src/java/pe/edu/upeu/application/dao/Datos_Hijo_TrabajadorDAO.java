@@ -115,7 +115,7 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
         CallableStatement cst;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            cst = conn.conex.prepareCall("UPDATE RHTD_DATOS_HIJO_TRABAJADOR SET ap_paterno=?, Ap_materno =? , no_hijo_trabajador =? , fe_nacimiento=? , es_sexo=? , es_tipo_doc=? , nu_doc=?, es_inscripcion_vig_essalud=? , es_estudio_niv_superior=? , WHERE ID_DATOS_HIJOS_TRABAJADOR = '"+ID_DATOS_HIJOS_TRABAJADOR.trim()+"'");
+            cst = conn.conex.prepareCall("UPDATE RHTD_DATOS_HIJO_TRABAJADOR SET ap_paterno=?, Ap_materno =? , no_hijo_trabajador =? , fe_nacimiento=? , es_sexo=? , es_tipo_doc=? , nu_doc=?, es_inscripcion_vig_essalud=? , es_estudio_niv_superior=? WHERE ID_DATOS_HIJOS_TRABAJADOR = '"+ID_DATOS_HIJOS_TRABAJADOR.trim()+"'");
             cst.setString(1, AP_PATERNO);
             cst.setString(2, AP_MATERNO);
             cst.setString(3, NO_HIJO_TRABAJADOR);
