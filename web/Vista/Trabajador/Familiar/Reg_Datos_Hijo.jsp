@@ -14,9 +14,9 @@
                            
                              <input type="hidden" name="TRABAJADOR" value="<%=request.getParameter("idtr")%>" class="text-box" >      
                              
-                             <tr><td>Apellido Paterno:</td><td><input type="text" name="APELLIDO_P" class="text-box" required=""></td></tr>      
-                             <tr><td>Apellido Materno:</td><td><input type="text" name="APELLIDO_M" class="text-box"  required=""></td></tr>    
-                             <tr><td>Nombres:</td><td><input type="text" name="NOMBRE" class="text-box"  required=""></td></tr>           
+                             <tr><td>Apellido Paterno:</td><td><input type="text" name="APELLIDO_P" class="text-box" required="" maxlength="30"></td></tr>      
+                             <tr><td>Apellido Materno:</td><td><input type="text" name="APELLIDO_M" class="text-box"  required="" maxlength="30"></td></tr>    
+                             <tr><td>Nombres:</td><td><input type="text" name="NOMBRE" class="text-box"  required="" maxlength="30"></td></tr>           
                              <tr><td>Fecha de Nacimiento:</td><td><input type="date" name="FECHA_NAC" class="text-box" required=""></td></tr>   
                              <tr><td>Sexo:</td><td>
                                      <select name="SEXO" class="text-box" required="">
@@ -32,7 +32,7 @@
                                  </select>
                              </td></tr>     
                              
-                         <tr><td>Numero de Documento:</td><td><input type="text" name="NRO_DOC" class="text-box" ></td></tr>      
+                             <tr><td>Numero de Documento:</td><td><input type="text" name="NRO_DOC" class="text-box" maxlength="20"></td></tr>      
                              <!--<tr><td>Presenta documento:</td><td>
                                  <select name="PRESENTA_DOCUMENTO" class="text-box">
                                      <option value=""></option>

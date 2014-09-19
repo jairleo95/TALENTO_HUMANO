@@ -20,9 +20,9 @@
                 %>
                 <input type="hidden" id="idhijo" value="<%= d.getId_datos_hijos_trabajador()%>">
                 <input type="hidden" id="idtr" value="<%= d.getId_trabajador()%>">
-                <tr><td>Apellido Paterno:</td><td><input type="text" name="APELLIDO_P" class="text-box" value="<%= d.getAp_paterno()%>" required=""></td></tr>      
-                <tr><td>Apellido Materno:</td><td><input type="text" name="APELLIDO_M" class="text-box"  value="<%= d.getAp_materno()%>"></td></tr>    
-                <tr><td>Nombres:</td><td><input type="text" name="NOMBRE" class="text-box" value="<%= d.getNo_hijo_trabajador()%>" required=""></td></tr>   
+                <tr><td>Apellido Paterno:</td><td><input type="text" name="APELLIDO_P" class="text-box" value="<%= d.getAp_paterno()%>" required="" maxlength="30"></td></tr>      
+                <tr><td>Apellido Materno:</td><td><input type="text" name="APELLIDO_M" class="text-box"  value="<%= d.getAp_materno()%>" maxlength="30"></td></tr>    
+                <tr><td>Nombres:</td><td><input type="text" name="NOMBRE" class="text-box" value="<%= d.getNo_hijo_trabajador()%>" required="" maxlength="30"></td></tr>   
                 <tr><td>Fecha de Nacimiento:</td><td><input type="date" name="FECHA_NAC" class="text-box" value="<%= d.getFe_nacimiento()%>" required=""></td></tr>   
                 <tr><td>Sexo:</td><td>
                         <select name="SEXO" class="text-box" required="">
@@ -66,7 +66,7 @@
                         </select>
                     </td></tr>     
 
-                <tr><td>Numero de Documento:</td><td><input type="text" name="NRO_DOC" value="<%= d.getNu_doc()%>" class="text-box" ></td></tr>      
+                <tr><td>Numero de Documento:</td><td><input type="text" name="NRO_DOC" value="<%= d.getNu_doc()%>" class="text-box" maxlength="20"></td></tr>      
                 <!--<tr><td>Presenta documento:</td><td>
                     <select name="PRESENTA_DOCUMENTO" class="text-box">
                         <option value=""></option>
