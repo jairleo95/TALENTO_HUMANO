@@ -296,7 +296,7 @@
                     </td>
 
                     <td class="caji">
-                        <% if (d.getDe_documento_adjunto() == null & ((rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005"))) {%>
+                        <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005"))) {%>
                         <input type="text" name="lob_description<%=i + 1%>">
                         <% } else { %>
                         <% if (d.getDe_documento_adjunto() == null) { %>
