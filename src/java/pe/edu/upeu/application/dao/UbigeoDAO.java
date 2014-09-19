@@ -96,7 +96,8 @@ public class UbigeoDAO implements InterfaceUbigeoDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select id_provincia,no_provincia from rhtx_ub_provincia where id_departamento='" + id.trim() + "'";
+            String sql = "select id_provincia,no_provincia from rhtx_ub_provincia";
+            sql += (!id.equals("")) ? " where id_departamento='" + id.trim() + "'" : "";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> l = new HashMap<String, Object>();
@@ -125,7 +126,9 @@ public class UbigeoDAO implements InterfaceUbigeoDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select id_distrito,no_distrito from rhtx_ub_distrito where id_provincia='" + id.trim() + "'";
+            String sql = "select id_distrito,no_distrito from rhtx_ub_distrito ";
+            
+               sql += (!id.equals("")) ? " where id_provincia='" + id.trim() + "'" : "";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> l = new HashMap<String, Object>();
