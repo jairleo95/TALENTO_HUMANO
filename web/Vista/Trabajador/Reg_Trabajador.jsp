@@ -51,9 +51,6 @@
                                         $("#dist").hide();
                                         $("#dist_nac").val("DST-001832");
 
-                                        document.getElementById("dist_nac").value = "DST-001832";
-
-                                        alert($("#dist_nac").val());
 
                                     }
                                     if ($("#nac").val() == "NAC-0044") {

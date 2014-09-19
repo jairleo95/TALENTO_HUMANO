@@ -128,7 +128,7 @@
                             <% } else { %>
                             <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
 
-                                <img src="../../../Imagenes/Aprobado.png" width="20" height="20">
+                                <img src="Aprobado.png" width="20" height="20">
                                 <%
                                 } else {
                                     out.println(d.getEs_documento_adjunto().trim());
@@ -186,7 +186,7 @@
                         <label><% if (d.getEs_documento_adjunto().trim().equals("1")) {
                             %>
 
-                            <img src="../../../Imagenes/Checkmark.jpg" width="20" height="20">
+                            <img src="Aprobado.png" width="20" height="20">
                             <%
                             } else {
                                 out.println(d.getEs_documento_adjunto().trim());
@@ -211,11 +211,11 @@
 
 
                 <tr>
-                    <td class="caji"><strong><%  if (d.getTi_documento().trim().equals("ACMA")) {
-                            out.println("ACTA DE MATRIMONIO CON:" + co.getAp_nombres_conyugue());
+                    <td class="caji"  ><strong><%  if (d.getTi_documento().trim().equals("ACMA")) {
+                            out.println("ACTA DE MATRIMONIO CON: <p style='color:red;' >" + co.getAp_nombres_conyugue()+"</p>");
                         }
                         if (d.getTi_documento().trim().equals("DNIC")) {
-                            out.println("COPIA DNI CONYUGUE : " + co.getAp_nombres_conyugue());
+                            out.println("COPIA DNI CONYUGUE : <p style='color:red;' >" + co.getAp_nombres_conyugue()+"</p>");
                         }%>
                         </strong></td>
 
@@ -254,7 +254,7 @@
                         <% } else { %>
                         <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
 
-                            <img src="../../../Imagenes/Aprobado.png" width="20" height="20">
+                            <img src="Aprobado.png" width="20" height="20">
                             <%
                             } else {
                                 out.println(d.getEs_documento_adjunto().trim());
@@ -317,7 +317,7 @@
                         <% } else { %>
                         <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
 
-                            <img src="../../../Imagenes/Aprobado.png" width="20" height="20">
+                            <img src="Aprobado.png" width="20" height="20">
                             <%
                             } else {
                                 out.println(d.getEs_documento_adjunto().trim());
@@ -373,7 +373,7 @@
                         <label class="null">No Registrado</label>
                         <% } else { %>
                         <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
-                            <img src="../../../Imagenes/Aprobado.png" width="20" height="20">
+                            <img src="Aprobado.png" width="20" height="20">
                             <%
                             } else {
                                 out.println(d.getEs_documento_adjunto().trim());

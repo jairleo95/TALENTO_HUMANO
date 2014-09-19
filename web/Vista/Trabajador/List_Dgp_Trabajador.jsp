@@ -80,7 +80,7 @@
                     </tr>
                 </thead>
                 <%  if (LIST_ID_TRAB_DGP.size() == 0) {%>
-                <td colspan="9" style="text-align: center"><h2>El Trabajador  no Tiene ningun DGP elaborado...</h2></td>
+                <td colspan="10" style="text-align: center"><h2>El Trabajador  no Tiene ningun DGP elaborado...</h2></td>
                 <%}%>
 
                 <tbody> 
