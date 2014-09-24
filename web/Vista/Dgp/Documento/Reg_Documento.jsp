@@ -70,7 +70,7 @@
         %>
     <center>
 
-        <form action="../../../documento" method="post" >
+        <form action="../../../documento" method="post" enctype="multipart/form-data">
             <table>
                 <thead>
                     <tr>
