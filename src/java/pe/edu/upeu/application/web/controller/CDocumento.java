@@ -130,73 +130,92 @@ public class CDocumento extends HttpServlet {
             f.setRepository(new File(ubicacion));
             ServletFileUpload upload = new ServletFileUpload(f);
 
-            try {
-                List<FileItem> p = upload.parseRequest(request);
-                Iterator it = p.iterator();
-                List<FileItem> n_f = upload.parseRequest(request);
-                Iterator itera = n_f.iterator();
+            //try {
+            List<FileItem> p = upload.parseRequest(request);
+
+            int num_filas = 0;
+
+            Iterator itera = p.iterator();
+
+            while (itera.hasNext()) {
                 FileItem i_n_f = (FileItem) itera.next();
-                int num_filas = Integer.parseInt(i_n_f.getString());
-                out.println(num_filas);
 
-                String iddoc = null;
-                String nombre_archivo = null;
-                String desc = null;
-                String estado = null;
-                String iddgp = null;
-                String no_original = null;
-                for (int i = 0; i < num_filas; i++) {
-                    while (it.hasNext()) {
-                        FileItem item = (FileItem) it.next();
-                        if (item.isFormField()) {
-                            //Plain request parameters will come here.
-                            String nombre = item.getFieldName();
-                            String valor = item.getString();
+                if (i_n_f.isFormField()) {
 
-                            iddoc = (nombre.equals("iddoc" + i)) ? valor : iddoc;
-                            desc = (nombre.equals("lob_description" + i)) ? valor : desc;
-                            estado = (nombre.equals("estado" + i)) ? valor : estado;
-                            iddgp = (nombre.equals("iddgp")) ? valor : iddgp;
-                            out.println(iddoc);
-                        } else {
-                            //uploaded files will come here.  
-                            // FileItem file = item;
-                            //String fieldName = item.getFieldName();
-                            //String fileName = item.getName();
-                            //String contentType = item.getContentType();
-                            //boolean isInMemory = item.isInMemory();
-                            //long sizeInBytes = item.getSize();
-                            nombre_archivo = iddgp.trim() + item.getName().trim();
-                            File files = new File(ubicacion, nombre_archivo);
-                            no_original = item.getName().trim();
-                            item.write(files);
-                            out.println(nombre_archivo);
-                        }
-                    }
+                    String nombre = i_n_f.getFieldName();
+                    String valor = i_n_f.getString();
 
-                    if (nombre_archivo != null & (desc != null | estado != null)) {
-                        d.INSERT_DOCUMENTO_ADJUNTO(null, iddgp, iddoc, estado, user, null, null, null, null, desc, nombre_archivo, no_original, null, null);
-                    }
+                    num_filas = (nombre.equals("num")) ? Integer.parseInt(valor) : num_filas;
 
                 }
-                getServletContext().setAttribute("List_doc_req_pla", d.List_doc_req_pla(iddgp, idtr));
-                int s = d.List_Req_nacionalidad(idtr);
-                int num_ad = d.List_Adventista(idtr);
-                getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
-                getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
 
-                String pr = request.getParameter("P2");
-                if (pr != null) {
-                    if (pr.equals("enter")) {
-                        response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE");
-                    }
-                } else {
-                    response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad);
-                }
-
-            } catch (FileUploadException e) {
-                out.println("Error : " + e.getMessage());
             }
+
+            String iddoc = null;
+            String nombre_archivo = null;
+            String desc = null;
+            String estado = null;
+            String iddgp = null;
+            String no_original = null;
+            for (int i = 0; i < num_filas; i++) {
+                Iterator it = p.iterator();
+                while (it.hasNext()) {
+
+                    FileItem item = (FileItem) it.next();
+
+                    if (item.isFormField()) {
+                        String nombre = item.getFieldName();
+                        String valor = item.getString();
+                        iddoc = (nombre.equals("iddoc" + i)) ? valor : iddoc;
+                        desc = (nombre.equals("lob_description" + i)) ? valor : desc;
+                        estado = (nombre.equals("estado" + i)) ? valor : estado;
+                        iddgp = (nombre.equals("iddgp")) ? valor : iddgp;
+
+                    } else {
+                        //uploaded files will come here.  
+                        // FileItem file = item;
+                        //String fieldName = item.getFieldName();
+                        //String fileName = item.getName();
+                        //String contentType = item.getContentType();
+                        //boolean isInMemory = item.isInMemory();
+                        //long sizeInBytes = item.getSize();
+
+                        nombre_archivo = item.getName().toUpperCase();
+                        File files = new File(ubicacion, nombre_archivo);
+                        no_original = item.getName();
+                       // item.write(files);
+                        //Thread.sleep (1000);
+
+                    }
+
+                }
+
+                if (desc != null & estado != null & nombre_archivo != null) {
+
+                    //d.INSERT_DOCUMENTO_ADJUNTO(null, iddgp, iddoc, estado, user, null, null, null, null, desc, nombre_archivo, no_original, null, null);
+                    out.println(nombre_archivo);
+
+                }
+
+            }
+            /* getServletContext().setAttribute("List_doc_req_pla", d.List_doc_req_pla(iddgp, idtr));
+             int s = d.List_Req_nacionalidad(idtr);
+             int num_ad = d.List_Adventista(idtr);
+             getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
+             getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
+
+             String pr = request.getParameter("P2");
+             if (pr != null) {
+             if (pr.equals("enter")) {
+             response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE");
+             }
+             } else {
+             response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad);
+             }*/
+
+            /*  } catch (FileUploadException e) {
+             out.println("Error : " + e.getMessage());
+             }*/
         }
         /* } 
          catch(Exception e){
