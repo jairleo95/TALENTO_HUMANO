@@ -100,7 +100,7 @@
                             <% if (d.getAr_dato_archivo() == null) { %>
                             <label class="null">No Registrado</label>
                             <% } else {%>
-                            <a href="Ver_Doc.php?iddoc=<? echo $list_d[$z][25]; ?>"><%=d.getNo_archivo()%></a>
+                            <a href=""><%=d.getNo_archivo()%></a>
 
                             <% }
                                 } %>
