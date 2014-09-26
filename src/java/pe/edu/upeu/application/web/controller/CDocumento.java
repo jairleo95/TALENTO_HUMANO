@@ -8,6 +8,8 @@ package pe.edu.upeu.application.web.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
@@ -23,6 +25,7 @@ import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import pe.edu.upeu.application.dao.DocumentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO;
+import pe.edu.upeu.application.model.Renombrar;
 
 /**
  *
@@ -134,7 +137,7 @@ public class CDocumento extends HttpServlet {
             List<FileItem> p = upload.parseRequest(request);
 
             int num_filas = 0;
-
+            String iddgp = null;
             Iterator itera = p.iterator();
 
             while (itera.hasNext()) {
@@ -146,7 +149,12 @@ public class CDocumento extends HttpServlet {
                     String valor = i_n_f.getString();
 
                     num_filas = (nombre.equals("num")) ? Integer.parseInt(valor) : num_filas;
-
+                    if (nombre.equals("iddgp") & iddgp == null) {
+                        iddgp = valor;
+                    }
+                    if (nombre.equals("idtr") & idtr == null) {
+                        idtr = valor;
+                    }
                 }
 
             }
@@ -155,7 +163,7 @@ public class CDocumento extends HttpServlet {
             String nombre_archivo = null;
             String desc = null;
             String estado = null;
-            String iddgp = null;
+            int num = 0;
             String no_original = null;
             for (int i = 0; i < num_filas; i++) {
                 Iterator it = p.iterator();
@@ -169,41 +177,60 @@ public class CDocumento extends HttpServlet {
                         iddoc = (nombre.equals("iddoc" + i)) ? valor : iddoc;
                         desc = (nombre.equals("lob_description" + i)) ? valor : desc;
                         estado = (nombre.equals("estado" + i)) ? valor : estado;
-                        iddgp = (nombre.equals("iddgp")) ? valor : iddgp;
 
                     } else {
                         //uploaded files will come here.  
                         // FileItem file = item;
-                        //String fieldName = item.getFieldName();
+                        String fieldName = item.getFieldName();
                         //String fileName = item.getName();
                         //String contentType = item.getContentType();
                         //boolean isInMemory = item.isInMemory();
                         //long sizeInBytes = item.getSize();
+                        num++;
+                        Calendar fecha = new GregorianCalendar();
 
-                        nombre_archivo = item.getName().toUpperCase();
-                        File files = new File(ubicacion, nombre_archivo);
-                        no_original = item.getName();
-                       // item.write(files);
-                        //Thread.sleep (1000);
+                        int hora = fecha.get(Calendar.HOUR_OF_DAY);
+                        int min = fecha.get(Calendar.MINUTE);
+                        int sec = fecha.get(Calendar.SECOND);
 
+                        nombre_archivo = String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + num + iddgp + "_" + item.getName().toUpperCase();
+                        // File files = new File(ubicacion, nombre_archivo);
+                        no_original = (fieldName.equals("lob_upload" + i)) ? item.getName() : no_original;
+                        // nombre_archivo = (fieldName.equals("lob_upload" + i)) ? String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + num + iddgp + "_" + item.getName().toUpperCase() : nombre_archivo;
+                        Thread thread = new Thread(new Renombrar(item, ubicacion, nombre_archivo));
+                        thread.start();
+//nombre_archivo = (fieldName.equals("lob_upload" + i)) ?String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + num + iddgp + "_" + item.getName().toUpperCase() : nombre_archivo;
+                        // out.println(no_original);
+                        //no_original = item.getName();
+
+                        //item.write(files);
                     }
 
                 }
+                //Thread.sleep(1000);
+                if ((desc != null & estado != null) | no_original != null) {
 
-                if (desc != null & estado != null & nombre_archivo != null) {
-
-                    //d.INSERT_DOCUMENTO_ADJUNTO(null, iddgp, iddoc, estado, user, null, null, null, null, desc, nombre_archivo, no_original, null, null);
+                    // d.INSERT_DOCUMENTO_ADJUNTO(null, iddgp, iddoc, estado, user, null, null, null, null, desc, nombre_archivo, no_original, null, null);
                     out.println(nombre_archivo);
 
                 }
+                no_original = null;
+                iddoc = null;
+                nombre_archivo = null;
+                desc = null;
+                estado = null;
+
+                no_original = null;
 
             }
-            /* getServletContext().setAttribute("List_doc_req_pla", d.List_doc_req_pla(iddgp, idtr));
+
+            /*getServletContext().setAttribute("List_doc_req_pla", d.List_doc_req_pla(iddgp, idtr));
+             
              int s = d.List_Req_nacionalidad(idtr);
              int num_ad = d.List_Adventista(idtr);
              getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
              getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
-
+          
              String pr = request.getParameter("P2");
              if (pr != null) {
              if (pr.equals("enter")) {
@@ -211,8 +238,8 @@ public class CDocumento extends HttpServlet {
              }
              } else {
              response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad);
-             }*/
-
+             }
+             */
             /*  } catch (FileUploadException e) {
              out.println("Error : " + e.getMessage());
              }*/
