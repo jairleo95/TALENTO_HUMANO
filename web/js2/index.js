@@ -1,14 +1,14 @@
 $(document).ready(function(){
-    $("#formulario").submit(function(){
-    $("#mensaje").removeClass().addClass('myinfo').text('Validando Datos!! ').fadeIn(50);
+    $("#login-form").submit(function(){
+    $("#mensaje").removeClass().addClass('myinfo').text('Validando Datos... ').fadeIn(50);
     this.timer = setTimeout(function() {
     $.ajax({
             type: 'POST',
             url: 'valida',
-            data: $("#formulario").serialize(),
+            data: $("#login-form").serialize(),
     success: function(msg){
         if(msg != 'ERROR') 
-        {   $("#mensaje").html('Usuario Verificando...!').addClass('myinfo').fadeTo(50,1,
+        {   $("#mensaje").html('Usuario Verificado!').addClass('myinfo').fadeTo(50,1,
                 function()
                 {      document.location='menu';});
         }else{

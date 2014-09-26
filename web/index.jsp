@@ -1,4 +1,4 @@
-<%-- 
+1<%-- 
     Document   : index
     Created on : 07-jul-2014, 10:52:37
     Author     : Alfa.sistemas
@@ -32,7 +32,7 @@
                 <h2 class="form-signin-heading">RRHH</h2>
                 <input class="form-control" type="text"  id="usuario" name="username" placeholder="Usuario" autocomplete="off" autofocus >
                 <input class="form-control" type="password"  placeholder="Clave" name="clave" id="clave">
-                <input type="submit" id="enviar" class="btn btn-lg btn-primary btn-block" value="Iniciar Sesión" name="submit">
+                <input type="submit" id="enviar" class="btn btn-lg btn-primary btn-block" value="Iniciar SesiÃ³n" name="submit">
             </form>
         </div>
         </div>
@@ -40,7 +40,7 @@
        
        <!--<span></span>-->
        <footer>            
-            © Copyright 2014 - UPeU - Cardumen            
+            Â© Copyright 2014 - UPeU - Cardumen            
         </footer>
         <hr style="border: 1px solid #999999; margin-top: 5px;">
        
