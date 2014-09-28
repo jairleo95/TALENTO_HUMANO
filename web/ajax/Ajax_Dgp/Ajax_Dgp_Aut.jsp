@@ -31,28 +31,28 @@
         String proceso = request.getParameter("`proceso");
         String req = request.getParameter("motivo");
         String iduser = (String) sesion.getAttribute("IDUSUARIO");
-        /*  String del = (!"".equals(request.getParameter("del"))) ? c.convertFecha(request.getParameter("del")) : "";
-         String al = (!"".equals(request.getParameter("al"))) ? c.convertFecha(request.getParameter("al")) : "";*/
+       String del = c.convertFecha(request.getParameter("del").trim());
+        String al =  c.convertFecha(request.getParameter("al").trim());
         String order = request.getParameter("orderby");
         if (true) {
 
             String sql = "select  *  from RHVD_FILTRO_DGP_AUTORIZADO WHERE FECHA_CREACION IS NOT NULL  ";
 
             nom_ape = nom_ape.toUpperCase();
-            /* sueldo=sueldo.toUpperCase();
-             seccion=seccion.toUpperCase();
-             puesto = puesto.toUpperCase();
-             */
+            sueldo = sueldo.toUpperCase();
+            seccion = seccion.toUpperCase();
+            puesto = puesto.toUpperCase();
+
             sql += (!"".equals(nom_ape)) ? " AND  upper(NOMBRE_P)  like '%" + nom_ape + "%'" : "";
-            /* sql +=(!"".equals(sueldo))?"  and upper(dgp.ca_sueldo) like '"+sueldo+"'":"";
-             sql +=(!"".equals(puesto))?"  and upper(id.no_puesto) like '%"+sueldo+"%'":"";
-             sql +=(!"".equals(area))?"  and dd.id_area='"+sueldo+"'":"";
-             sql +=(!"".equals(seccion))?"  and upper(dd.seccion) like'"+seccion+"'":"";
-             sql +=(!"".equals(iduser))?"  and a.us_creacion='"+seccion+"'":"";
-             sql +=(!"".equals(req))?"  and dgp.id_requerimiento='"+req+"'":"";
-             sql +=(!"".equals(proceso))?"  and dp.id_proceso='"+proceso+"'":"";
-             sql +=(!"".equals(del) && !"".equals(al))?" AND dgp.fe_creacion BETWEEN '"+del+"' and '"+al+"'":"";
-             sql +=(!"".equals(iddep))?"  and du.id_departamento='"+iddep+"'":"";
+            sql += (!"".equals(sueldo)) ? "  and upper(ca_sueldo) like '%" + sueldo + "%'" : "";
+            sql += (!"".equals(puesto)) ? "  and upper(no_puesto) like '%" + puesto + "%'" : "";
+//             sql +=(!"".equals(area))?"  and id_area='"+area.trim()+"'":"";
+            sql += (!"".equals(seccion)) ? "  and upper(no_seccion) like'%" + seccion + "%'" : "";
+            //sql += (!"".equals(iduser)) ? "  and us_creacion='" + iduser.trim() + "'" : "";
+            sql += (!"0".equals(req)) ? "  and id_requerimiento='" + req.trim() + "'" : "";
+            // sql +=(!"".equals(proceso))?"  and dp.id_proceso='"+proceso+"'":"";
+            sql +=(!"".equals(del) && !"".equals(al))?" AND FE_CREACION BETWEEN '"+del+"' and '"+al+"'":"";
+             /* sql +=(!"".equals(iddep))?"  and du.id_departamento='"+iddep+"'":"";
             
              if(!"".equals(order)){
              sql +="ORDER BY A.ID_AUTORIZACION ,"+order;
@@ -69,7 +69,7 @@
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
                 rec.put("id_dgp", rs.getString("id_dgp"));
-                rec.put("nombre_p", rs.getString("nombre_p"));
+                rec.put("nombre_p", rs.getString("nombre_p")+del );
                 rec.put("id_trabajador", rs.getString("id_trabajador"));
                 rec.put("no_seccion", rs.getString("no_seccion"));
                 rec.put("no_puesto", rs.getString("no_puesto"));
