@@ -10,10 +10,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <link rel="stylesheet" href="../../css1/bootstrap.min.css">
+        <link rel="stylesheet" href="../../css/bootstrap.min.css">
         <title>Fichas de Trabajador</title>
-        <link rel="stylesheet" href="../../css/Css_Trabajador/style.css" />
+    
         <link type="text/css" rel="stylesheet" href="../../css/Css_Reporte/Reportes.css">
+        
         <script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
         <link rel="stylesheet" href="../../css/Css_Alerta/alertify.core.css" />
         <link rel="stylesheet" href="../../css/Css_Alerta/alertify.default.css" />
@@ -32,7 +33,7 @@
         }
     </SCRIPT>
 
-    <body style="height: 1024px;">  
+    <body >  
 
         <div class="spacing">
             <center><h1 class="spacing" style="font-weight: bold;">Fichas de Trabajador</h1></center>
@@ -87,7 +88,7 @@
 
                     if (count == 0) {
             %>
-            <h1>No se encontraron registros...</h1>
+            <h1></h1>
             <%}
                 if (count > 0) {%>
             <br>

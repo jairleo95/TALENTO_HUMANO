@@ -681,7 +681,6 @@
             </table></form></center><br><br>
 </body>
 
-<script src="../js2/prism.jss" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/chosen.jquery.js" type="text/javascript"></script>
 <script src="../../js/prism.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
