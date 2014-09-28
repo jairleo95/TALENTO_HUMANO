@@ -2,7 +2,7 @@
 <html lang="en-us" id="extr-page">
     <head>
         <meta charset="utf-8">
-        <title> SmartAdmin</title>
+        <title> .:RRHH:.</title>
         <meta name="description" content="">
         <meta name="author" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -63,7 +63,7 @@
         <style>
 
             div{
-                border: 1px solid black;
+               
             }
 
             div.about{
@@ -98,7 +98,7 @@
                           <div class="hero">
 
                             <div class="pull-left login-desc-box-l">
-                                <h4 class="paragraph-header">La calidad depende de ti!</h4>
+                                <h4 class="paragraph-header">Exitoso es aquel que puede establecer una base firme con los ladrillos que los demás le tiraron!</h4>
                                 <div class="login-app-icons">
                                     <a href="http://recursoshumanos.upeu.edu.pe/" class="btn btn-danger btn-sm">Pagina Oficial</a>
                                 </div>
@@ -124,7 +124,7 @@
                         <div class="well no-padding" style="padding-top: 50px;">
                             <form id="login-form" class="smart-form client-form">
                                 <header>
-                                    Iniciar Sesion 
+                                    Iniciar Sesión 
                                 </header>
 
                                 <fieldset>
@@ -142,7 +142,7 @@
                                             <input type="password" name="clave">
                                             <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Ingrese la contraseña</b> </label>
                                         <div class="note">
-                                            <a href="forgotpassword.html">Olvido su contraseña?</a>
+                                            <a href="forgotpassword.html">Olvidó su contraseña?</a>
                                         </div>
                                     </section>
 
@@ -160,17 +160,19 @@
 
                             </form>
                         </div>
-
+                        <div id="mensaje"  class="tooltip-arrow"></div>
+                        
                     </div>
                 </div>
             </div>
 
         </div>
-        <div id="mensaje"></div>
+        
         <!--================================================== -->	
 
         <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
         <script src="js/plugin/pace/pace.min.js"></script>
+        
 
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
