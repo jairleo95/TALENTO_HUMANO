@@ -7,10 +7,6 @@
     String id_user = (String) sesion.getAttribute("IDUSER");
     String id_dep = (String) sesion.getAttribute("ID_DEPARTAMENTO");
     if (id_user != "") {
-
-        /*require_once '../Modelo/ModeloRH_Departamento.php';
-         $md=new ModelorRH_Departamento();
-         $list_d=$md->LISTA_RH_DEPARTAMENTO();*/
 %>
 <!DOCTYPE html>
 <html>
@@ -21,7 +17,7 @@
         <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
         <link type="text/css" rel="stylesheet" href="../../css/Css_Reporte/Reportes.css">
         <link type="text/css" rel="stylesheet" href="../../css/Css_Formulario/form.css">
-        <link rel="stylesheet" href="../../css1/bootstrap.min.css">
+        <link rel="stylesheet" href="../../css/bootstrap.min.css">
 
         <style>
             #contenido{
@@ -51,7 +47,7 @@
         <div id="contenido">
             <div id="form">
 
-                <form id="frm_filtro" method="post" action="">
+                <form id="frm_filtro" method="post" action="" name="formulario">
                     <div class="row">
                         <div class="col-xs-6">
                             <label>Fecha inicio:</label><br>
@@ -71,7 +67,7 @@
                         <div class="col-xs-6">  
                             <label>Area :</label><br>
                             <select name="area" class="form-control">
-                                <option value="0"></option>
+                                <option value="0">[Seleccione]</option>
                                 <%                                    for (int i = 0; i < List_Area.size(); i++) {
                                         Area a = new Area();
                                         a = (Area) List_Area.get(i);
@@ -99,15 +95,15 @@
                         <div class="col-xs-6">
                             <label>Requerimiento :</label>
                             <select name="motivo" class="form-control" > 
-                                <option value="0"></option>
+                                <option value="0">[Seleccione]</option>
                                 <%
-                                        for (int s = 0; s < Listar_Requerimiento.size(); s++) {
-                                        Requerimiento r= new Requerimiento();
-                                        r=(Requerimiento)Listar_Requerimiento.get(s);
+                                    for (int s = 0; s < Listar_Requerimiento.size(); s++) {
+                                        Requerimiento r = new Requerimiento();
+                                        r = (Requerimiento) Listar_Requerimiento.get(s);
                                 %>
                                 <option value="<%=r.getId_requerimiento()%>"><%=r.getNo_req()%></option>
                                 <% } %>
-                             
+
                             </select>
                             <input type="hidden" name="iduser" value="<? echo $iduser; ?>">
                         </div>
@@ -116,11 +112,11 @@
                         <div class="col-xs-6">
                             <label>Proceso :</label>
                             <select name="proceso" class="form-control">
-                                <option value="0"></option>
+                                <option value="0">[Seleccione]</option>
                                 <%
-                                        for (int s = 0; s < Listar_Requerimiento.size(); s++) {
-                                        Requerimiento r= new Requerimiento();
-                                        r=(Requerimiento)Listar_Requerimiento.get(s);
+                                    for (int s = 0; s < Listar_Requerimiento.size(); s++) {
+                                        Requerimiento r = new Requerimiento();
+                                        r = (Requerimiento) Listar_Requerimiento.get(s);
                                 %>
                                 <option value="<%=r.getId_requerimiento()%>"><%=r.getNo_req()%></option>
                                 <% } %>
@@ -203,7 +199,9 @@
         $("#btnfiltrar").click(
                 function() {
 
-                    $.post("../../Ajax/Ajax_Dgp/Ajax_Dgp_Aut.jsp", $("#frm_filtro").serialize(), function(objJson) {
+
+                    $.post("../../ajax/Ajax_Dgp/Ajax_Dgp_Aut.jsp", $("#frm_filtro").serialize(), function(objJson) {
+                        b.empty();
                         var list = objJson.lista;
                         for (var i = 0; i < list.length; i++) {
                             b.append("<tr>");
@@ -225,7 +223,8 @@
         );
         $("#btncancel").click(
                 function() {
-
+                    document.formulario.reset();
+                    b.empty();
                     html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'
                     $(".tbodys").html(html);
                 }
