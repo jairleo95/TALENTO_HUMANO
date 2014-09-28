@@ -138,6 +138,7 @@ public class CDocumento extends HttpServlet {
 
             int num_filas = 0;
             String iddgp = null;
+            String pr = null;
             Iterator itera = p.iterator();
 
             while (itera.hasNext()) {
@@ -154,6 +155,9 @@ public class CDocumento extends HttpServlet {
                     }
                     if (nombre.equals("idtr") & idtr == null) {
                         idtr = valor;
+                    }
+                    if (nombre.equals("P2") & pr == null) {
+                        pr = valor;
                     }
                 }
 
@@ -193,16 +197,22 @@ public class CDocumento extends HttpServlet {
                         int min = fecha.get(Calendar.MINUTE);
                         int sec = fecha.get(Calendar.SECOND);
 
-                        nombre_archivo = String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + num + iddgp + "_" + item.getName().toUpperCase();
                         // File files = new File(ubicacion, nombre_archivo);
-                        no_original = (fieldName.equals("lob_upload" + i)) ? item.getName() : no_original;
+                        //  no_original = (fieldName.equals("lob_upload" + i)) ? item.getName() : no_original;
+                        if (fieldName.equals("lob_upload" + i)) {
+                            nombre_archivo = String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + num + iddgp + "_" + item.getName().toUpperCase();
+                            no_original = item.getName();
+                            Thread thread = new Thread(new Renombrar(item, ubicacion, nombre_archivo));
+                            thread.start();
+                        } else {
+                            no_original = no_original;
+                            nombre_archivo = nombre_archivo;
+                        }
                         // nombre_archivo = (fieldName.equals("lob_upload" + i)) ? String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + num + iddgp + "_" + item.getName().toUpperCase() : nombre_archivo;
-                        Thread thread = new Thread(new Renombrar(item, ubicacion, nombre_archivo));
-                        thread.start();
-//nombre_archivo = (fieldName.equals("lob_upload" + i)) ?String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + num + iddgp + "_" + item.getName().toUpperCase() : nombre_archivo;
+
+                        //nombre_archivo = (fieldName.equals("lob_upload" + i)) ?String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + num + iddgp + "_" + item.getName().toUpperCase() : nombre_archivo;
                         // out.println(no_original);
                         //no_original = item.getName();
-
                         //item.write(files);
                     }
 
@@ -210,7 +220,7 @@ public class CDocumento extends HttpServlet {
                 //Thread.sleep(1000);
                 if ((desc != null & estado != null) | no_original != null) {
 
-                    // d.INSERT_DOCUMENTO_ADJUNTO(null, iddgp, iddoc, estado, user, null, null, null, null, desc, nombre_archivo, no_original, null, null);
+                    d.INSERT_DOCUMENTO_ADJUNTO(null, iddgp, iddoc, estado, user, null, null, null, null, desc, nombre_archivo, no_original, null, null);
                     out.println(nombre_archivo);
 
                 }
@@ -224,22 +234,22 @@ public class CDocumento extends HttpServlet {
 
             }
 
-            /*getServletContext().setAttribute("List_doc_req_pla", d.List_doc_req_pla(iddgp, idtr));
-             
-             int s = d.List_Req_nacionalidad(idtr);
-             int num_ad = d.List_Adventista(idtr);
-             getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
-             getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
-          
-             String pr = request.getParameter("P2");
-             if (pr != null) {
-             if (pr.equals("enter")) {
-             response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE");
-             }
-             } else {
-             response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad);
-             }
-             */
+            getServletContext().setAttribute("List_doc_req_pla", d.List_doc_req_pla(iddgp, idtr));
+
+            int s = d.List_Req_nacionalidad(idtr);
+            int num_ad = d.List_Adventista(idtr);
+            getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
+            getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
+
+            
+            if (pr != null) {
+                if (pr.equals("enter")) {
+                    response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE");
+                }
+            } else {
+                response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad);
+            }
+
             /*  } catch (FileUploadException e) {
              out.println("Error : " + e.getMessage());
              }*/
