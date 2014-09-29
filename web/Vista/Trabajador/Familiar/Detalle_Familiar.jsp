@@ -21,7 +21,7 @@
         %>
 
         <%if (List_PMC.size() != 0) {%>
-        <form >
+        <form align="center">
             <div>
                 <table class="table table-striped table-bordered table-hover" >
                     <tr><td colspan="2"><div class="title">Datos de Padre y Madre</div></td></tr>

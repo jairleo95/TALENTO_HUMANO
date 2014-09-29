@@ -6,16 +6,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-
-        <title>Datos generales</title>
-        <link type="text/css" rel="stylesheet" href="../../css/Css_Detalle/CSS_DETALLE.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/font-awesome.min.css">
         <script src=" ../../../../js1/jquery-1.11.1.min.js" type="text/javascript"></script>
+        <title>Datos generales</title>
     </head>
 
     <body>
-        <form method="post" action="" >
+        <form  align="center" ethod="post" action="" >
             <table class="table table-striped table-hover table-responsive  ">
 
                 <%for (int index = 0; index < ListaridTrabajador.size(); index++) {
@@ -99,7 +97,7 @@
                     }
                         %></td></tr>
 
-                <tr><td colspan="2"><input class="btn btn-success"  style="position: relative; top:95%; left: 50%" type="submit" value="Editar"></td></tr>
+                <tr><td colspan="2"><input class="btn btn-success"   type="submit" value="Editar"></td></tr>
                         <%}%>
             </table>
         </form>
