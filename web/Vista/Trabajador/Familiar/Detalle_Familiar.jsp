@@ -7,6 +7,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <link type="text/css" rel="stylesheet" href="../../../css/Css_Detalle/CSS_DETALLE.css">
         <link type="text/css" rel="stylesheet" href="../../../css/Css_Detalle/style.css"> 
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../HTML_version/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../HTML_version/css/font-awesome.min.css">
+        <script src=" ../../../../../js1/jquery-1.11.1.min.js" type="text/javascript"></script>
         <title>Familiares</title>
 
     </head>
@@ -20,7 +23,7 @@
         <%if (List_PMC.size() != 0) {%>
         <form >
             <div>
-                <table class="table_info" >
+                <table class="table table-striped table-bordered table-hover" >
                     <tr><td colspan="2"><div class="title">Datos de Padre y Madre</div></td></tr>
                     <%for (int i = 0; i < List_PMC.size(); i++) {
                             Padre_Madre_Conyugue pmc = new Padre_Madre_Conyugue();
@@ -32,7 +35,7 @@
             </div>
 
             <div style="display:/*none*/" >
-                <table  class="table_info"  >
+                <table  class="table table-striped table-bordered table-hover"  >
                     <tr><td colspan="2"><div class="title">Conyugue</div></td></tr>
                     <tr><td class="text-info">Trabaja en UPeU:</td><td class="text-info-left">
                             <%
@@ -71,7 +74,7 @@
                         </td></tr>
                 </table>
             </div>
-            <table>
+                        <table class="table table-striped table-bordered table-hover">
 
 
                 <%}%>

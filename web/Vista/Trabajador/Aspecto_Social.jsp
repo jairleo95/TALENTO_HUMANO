@@ -8,14 +8,18 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <link type="text/css" rel="stylesheet" href="../../css/Css_Detalle/CSS_DETALLE.css">        
+        <link type="text/css" rel="stylesheet" href="../../css/Css_Detalle/CSS_DETALLE.css">  
+        <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/font-awesome.min.css">
+        <script src=" ../../../../js1/jquery-1.11.1.min.js" type="text/javascript"></script>
+        
         <title>Aspecto Social</title>
 
     </head>
     <body>
 
-        <form>
-            <table class="tables">
+        <form align="center">
+            <table class="table table-hover table-striped table-bordered table-responsive" style="border-radius: 30px ">
                 <%for (int index = 0; index < ListaridTrabajador.size(); index++) {
                         V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
                         trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
@@ -121,8 +125,9 @@
                 %></td></tr>
                 <tr><td class="text-info">Nombres y Apellidos:</td><td><%=trb.getNo_ap_autoridad()%></td></tr>
                 <tr><td class="text-info">Telefono/Celular:</td><td><%=trb.getCl_autoridad()%></td></tr>
+                <td colspan="2"><input class="btn btn-success"  type="submit" value="Editar"></td>
                 <%}%>
-                <tr><td colspan="2"></td><td><input class="btn btn-success"  type="submit" value="Editar"></td></tr>
+                <tr></tr>
             </table>
         </form>
 
