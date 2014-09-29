@@ -9,11 +9,14 @@
 
         <title>Datos generales</title>
         <link type="text/css" rel="stylesheet" href="../../css/Css_Detalle/CSS_DETALLE.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/font-awesome.min.css">
+        <script src=" ../../../../js1/jquery-1.11.1.min.js" type="text/javascript"></script>
     </head>
 
     <body>
-        <form method="post" action="">
-            <table class="tables">
+        <form method="post" action="" >
+            <table class="table table-striped table-hover table-responsive  ">
 
                 <%for (int index = 0; index < ListaridTrabajador.size(); index++) {
                         V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
@@ -96,7 +99,7 @@
                     }
                         %></td></tr>
 
-                <tr><td colspan="2"></td><td><input class="btn btn-success"  type="submit" value="Editar"></td></tr>
+                <tr><td colspan="2"><input class="btn btn-success"  style="position: relative; top:95%; left: 50%" type="submit" value="Editar"></td></tr>
                         <%}%>
             </table>
         </form>
