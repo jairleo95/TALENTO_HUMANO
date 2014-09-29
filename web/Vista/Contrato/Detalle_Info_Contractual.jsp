@@ -22,8 +22,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <link rel="stylesheet" href="../Vistas/sort/style.css" />
-
+        <link rel="stylesheet" href="../../css/Css_Sort/style.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/font-awesome.min.css">
+        <script src=" ../../../../js1/jquery-1.11.1.min.js" type="text/javascript"></script>
         <title>Información Contractual</title>
         <style type="text/css">
             .tables{
@@ -67,7 +69,7 @@
                 n = (X_List_Id_Contrato_DGP) List_id_Contrato_DGP.get(b);
         %>
         <form class="form"action="../../contrato" method="post">
-            <table>
+            <table class="table table-striped table-bordered table-responsive">
                 <tr><td><select name="ida">
                             <%  for (int o = 0; o < List_Anno_Id_Tr_DGP.size(); o++) {%>
                             <%X_List_Anno_Id_Tr_DGP x = new X_List_Anno_Id_Tr_DGP();
@@ -219,7 +221,7 @@
                     <%}
                         }
                         if (List_Planilla.size() == 0) {%>
-                <tr><td colspan="2"></td><td><input class="button blue"  type="submit" value="Editar"></td>
+                <tr><td colspan="2"></td><td><input class="button blue"  type="hidden" value="Editar"></td>
                     <td><a  class="button blue" href="../../contrato?opc=Ver_Plantilla&idc=<%=n.getId_contrato().trim()%>">Ver Plantilla</a></td></tr>
                     <%}%>
 

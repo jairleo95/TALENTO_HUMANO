@@ -18,7 +18,7 @@
 
 
         <form align="center">
-            <table class="table table-striped table-hover table-responsive">
+        <table class="table table-striped table-hover table-responsive">
                 <%for (int index = 0; index < ListaridTrabajador.size(); index++) {
                         V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
                         trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);

@@ -97,7 +97,7 @@
                     }
                         %></td></tr>
 
-                <tr><td colspan="2"><input class="btn btn-success"   type="submit" value="Editar"></td></tr>
+                <tr><td colspan="2"><input class="btn btn-success" style="height: 140%; width: 30%;"  type="submit" value="Editar"></td></tr>
                         <%}%>
             </table>
         </form>
