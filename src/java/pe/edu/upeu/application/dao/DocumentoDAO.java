@@ -34,16 +34,15 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
         List<V_Documento_Trabajador> list = new ArrayList<V_Documento_Trabajador>();
         try {
             ResultSet rs = this.conn.query(sql);
-
             while (rs.next()) {
                 V_Documento_Trabajador d = new V_Documento_Trabajador();
-
                 d.setId_documento_adjunto(rs.getString("id_documento_adjunto"));
                 d.setId_dgp(rs.getString("id_dgp"));
                 d.setId_trabajador(rs.getString("id_trabajador"));
                 d.setNo_documento(rs.getString("no_documento"));
                 d.setNo_req(rs.getString("no_req"));
                 d.setDe_documento_adjunto(rs.getString("de_documento_adjunto"));
+                d.setAr_dato_archivo(rs.getString("ar_dato_archivo"));
 
                 list.add(d);
             }

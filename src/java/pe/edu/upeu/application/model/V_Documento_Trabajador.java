@@ -17,16 +17,17 @@ public class V_Documento_Trabajador {
     private String no_documento;
     private String no_req;
     private String de_documento_adjunto;
+        private String ar_dato_archivo;
 
-    public V_Documento_Trabajador(String id_documento_adjunto, String id_dgp, String id_trabajador, String no_documento, String no_req, String de_documento_adjunto) {
+    public V_Documento_Trabajador(String id_documento_adjunto, String id_dgp, String id_trabajador, String no_documento, String no_req, String de_documento_adjunto, String ar_dato_archivo) {
         this.id_documento_adjunto = id_documento_adjunto;
         this.id_dgp = id_dgp;
         this.id_trabajador = id_trabajador;
         this.no_documento = no_documento;
         this.no_req = no_req;
         this.de_documento_adjunto = de_documento_adjunto;
+        this.ar_dato_archivo = ar_dato_archivo;
     }
-
     public V_Documento_Trabajador() {
         this.id_documento_adjunto = "";
         this.id_dgp = "";
@@ -34,6 +35,7 @@ public class V_Documento_Trabajador {
         this.no_documento = "";
         this.no_req = "";
         this.de_documento_adjunto = "";
+        this.ar_dato_archivo = "";
     }
 
     public String getId_documento_adjunto() {
@@ -83,5 +85,15 @@ public class V_Documento_Trabajador {
     public void setDe_documento_adjunto(String de_documento_adjunto) {
         this.de_documento_adjunto = de_documento_adjunto;
     }
+
+    public String getAr_dato_archivo() {
+        return ar_dato_archivo;
+    }
+
+    public void setAr_dato_archivo(String ar_dato_archivo) {
+        this.ar_dato_archivo = ar_dato_archivo;
+    }
+
+
 
 }

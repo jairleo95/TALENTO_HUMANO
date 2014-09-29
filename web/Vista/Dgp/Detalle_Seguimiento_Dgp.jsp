@@ -78,8 +78,9 @@
         </div>
 
         <%
-            X_List_De_Autorizacion s = new X_List_De_Autorizacion();
-            s = (X_List_De_Autorizacion) Det_Autorizacion.get(0);
+            if (Det_Autorizacion.size() != 0) {
+                X_List_De_Autorizacion s = new X_List_De_Autorizacion();
+                s = (X_List_De_Autorizacion) Det_Autorizacion.get(0);
 
         %>
 
@@ -90,7 +91,7 @@
             <tr><td ><strong>Puesto:</strong></td><td><label><%=s.getNo_puesto()%></label></td></tr>
             <tr><td ><strong>Tipo Proceso:</strong></td><td><label><%=s.getNo_proceso()%> </label></td></tr>
         </table>
-
+        <%}%>
 
         <table >
 
@@ -127,7 +128,7 @@
 
                 </tr> 
                 <%
-                    if (a.getEs_autorizacion().equals("2") & (rol.trim().equals("ROL-0002")|rol.trim().equals("ROL-0005"))) {
+                    if (a.getEs_autorizacion().equals("2") & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005"))) {
 
                 %>
             <div class="alerta">

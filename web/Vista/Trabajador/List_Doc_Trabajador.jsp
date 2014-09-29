@@ -84,12 +84,13 @@
             <tr>
                 <td class="caji"><%=i + 1%></td>
                 <td class="caji" ><%=d.getNo_documento()%></td>
-                <td class="caji" ><a href="Ver_Doc.php?iddoc=<?echo $listar[$i][0];?>"><%=d.getNo_documento()%></a></td>
+                <td class="caji" ><a href="../Dgp/Documento/Ver_Doc.jsp?nom_doc=<%=d.getAr_dato_archivo()%>"><%=d.getNo_documento()%></a></td>
+
                 <td class="caji"><%=d.getDe_documento_adjunto()%></td>
                 <td class="caji" ><%=d.getNo_req()%></td>
 
             </tr>
-            <% } %>
+            <% }%>
             </tbody>
         </table>
     </center>
