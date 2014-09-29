@@ -102,8 +102,8 @@
 
                     <%}%>
 
-                    <tr><td class="td">Puesto / Seccion / Area:</td><td>
-                            <select name="IDPUESTO"  required="" class="chosen-select">
+                    <tr><td class="td">Puesto | Seccion | Area:</td><td>
+                            <select name="IDPUESTO"  required="" >
                                 <option value=""></option>
 
                                 <%
@@ -112,7 +112,7 @@
                                         p = (V_Puesto_Direccion) List_Puesto.get(j);
                                 %>
 
-                                <option value="<%=p.getId_puesto()%>"><% out.println(p.getNo_puesto() + " / " + p.getNo_seccion() + " / " + p.getNo_area());%></option> <%} %>
+                                <option value="<%=p.getId_puesto()%>"><% out.println(p.getNo_puesto() + " | " + p.getNo_seccion() + " | " + p.getNo_area());%></option> <%} %>
 
                             </select></td></tr>   
                     <tr style="display: "><td class="td">Requermiento:</td><td>
@@ -139,7 +139,7 @@
                     <tr><td class="td">Fecha Desde:</td><td><input type="date" name="FEC_DESDE" min="<%%>" required="" id="datepicker" class="text-box" ></td></tr>     
 
                     <tr><td class="td">Fecha Hasta:</td><td><input type="date" required="" min="<%%>" name="FEC_HASTA" class="text-box" ></td></tr>   
-                    <tr><td class="td">Sueldo:</td><td><input type="text"  name="SUELDO" required="" class="text-box" ></td></tr>       
+                    <tr><td class="td">Sueldo:</td><td><input type="number"  name="SUELDO" required="" class="text-box" ></td></tr>       
                     <tr><td class="td">Bono Alimentario:</td><td><input  type="text"  required="" name="BONO_ALIMENTARIO" class="text-box" ></td></tr>       
 
                 </table>

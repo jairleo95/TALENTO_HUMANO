@@ -357,10 +357,10 @@
                                         <a href="Vista/Dgp/Generar_Dgp.jsp?text=1" target="myframe">Tiempo Conpleto</a>
                                     </li>
                                     <li>
-                                        <a href="Vista/Dgp/Generar_Dgp.jsp?text=2" target="myframe">Tiempo Parcial</a>
+                                        <a href="Vista/Dgp/Generar_Dgp.jsp?text=2" target="myframe">Medio Tiempo</a>
                                     </li>
                                     <li>
-                                        <a href="Vista/Dgp/Generar_Dgp.jsp?text=3" target="myframe">Medio Tiempo</a>
+                                        <a href="Vista/Dgp/Generar_Dgp.jsp?text=3" target="myframe">Tiempo Parcial</a>
                                     </li>
                                     <li>
                                         <a href="otro.html" target="myframe">Extranjero</a>

@@ -122,6 +122,7 @@
                                 <% } %>
                             </select>
                         </div>
+                            
                         <? //if ($_SESSION["IDROL"] == 1) { ?>
                         <div class="col-xs-6">
                             <label>Departamento :</label>
