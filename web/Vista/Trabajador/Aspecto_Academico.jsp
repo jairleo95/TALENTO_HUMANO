@@ -24,7 +24,7 @@
                         trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
 
                 %>   
-                <tr><td class="text-info">Nivel Educativo:</td><td><%                    out.println(trb.getLi_nivel_educativo());
+                <tr><td class="text-info">Situacion Educativa:</td><td><%                    out.println(trb.getLi_nivel_educativo());
                         %></td></tr>
                 <tr><td class="text-info">Grado Academico:</td><td><%
                     for (int x = 0; x < l.List_Grado_Academico().size(); x++) {

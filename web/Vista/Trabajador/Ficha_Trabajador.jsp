@@ -98,7 +98,7 @@
                     <td>Foto</td>
                     <td>Nombres Y Apellidos</td>
                     <td>DNI</td>
-                    <td>Acciones</td>
+                    <td>Carrera</td>
                 </tr>
                 <% for (int i = 0; i < ListarTrabajador.size(); i++) {
                         V_Ficha_Trab_Num_C tr = new V_Ficha_Trab_Num_C();
@@ -109,42 +109,20 @@
 
 
                     <% if (true) {%>
-                    <td><img src="../../imagenes/avatar_default.jpg"  width="40"  height="40"></td>
+                    <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30"></td>
                         <%} else {%>
                     <td><img src="Foto.php?idf=<?echo $idf;?>"  width="80"  height="80"></td>
                         <% }%>
 
                     <td><div ><a href="../../trabajador?idtr=<%=tr.getId_trabajador()%>&opc=list"><%=tr.getAp_paterno().toUpperCase() + " " + tr.getAp_materno().toUpperCase() + " " + tr.getNo_trabajador().toUpperCase()%></a></div></td>
                     <td><%=tr.getNu_doc()%></td>
-                    <td>
-                        <%
-                            /*require_once '../Modelo/ModeloDGP.php';
-                             $mddgp= new ModeloDGP();
-                             $num=$mddgp->VAL_TRA_DGP($listra[$index][0]);
-
-                             $n_v=$mddgp->VAL_OPC_DGP($listra[$index][0]);
-                             if ($n_v>0) {
-                             */
-                        %>
-                        <!--<a href="List_Dgp_Trabajador.jsp?idtr=<? echo $listra[$index][0];?>">Ver DGP's</a>
-                        <%//}else{%> 
-                        <% //if ($listra[$index][62]>0) {%>
-                        <% //if ($num[0][0]!=0) {%>
-                        <a href="List_Dgp_trabajador.jsp?idtr=<? echo $listra[$index][0];?>">Ver DGP's</a>
-                        <%//}%>
-                        <a href="../Contrato/Detalle_Info_Contractual.jsp?idtr=<? echo $listra[$index][0];?>">Ver Contratos</a>
-                        <%//}else{%>
-                        <a href="../Dgp/Reg_Dgp.jsp?idtr=<?echo $listra[$index][0];?>">Solicitar Contratación</a>        
-                        <%  //if ($_SESSION["IDROL"]==6) {%>
-                        <a href="../Contrato/Reg_Contrato.jsp?idtr=<?echo $listra[$index][0];?>">ELaborar Contrato</a>                       
-                        <%//}%>
-                        <%//}}%>-->
-                    </td>
-
+                    <td><%if (tr.getNo_carrera() != null) {
+                            out.println(tr.getNo_carrera());
+                        } else {
+                            out.println("Ninguna");
+                        }
+                        %></td>
                 </tr>
-                <% //} %>
-
-                <%//}}%>
 
 
                 <%
