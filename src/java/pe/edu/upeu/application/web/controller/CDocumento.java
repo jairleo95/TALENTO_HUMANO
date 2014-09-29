@@ -127,7 +127,7 @@ public class CDocumento extends HttpServlet {
              d.INSERT_DOCUMENTO_ADJUNTO(null, iddgp, iddoc, estado, user, null, null, null, null, desc, AR_DATO_ARCHIVO, NO_ARCHIVO, TA_ARCHIVO, AR_FILE_TYPE);
              }
              }*/
-            String ubicacion = "C:\\Users\\Alex\\Documents\\NetBeansProjects\\TALENTO_HUMANO\\web\\Vista\\Dgp\\Documento\\Archivo";
+            String ubicacion = "C:\\Users\\ALFA 3\\Documents\\NetBeansProjects\\TALENTO_HUMANO\\web\\Vista\\Dgp\\Documento\\Archivo";
             DiskFileItemFactory f = new DiskFileItemFactory();
             f.setSizeThreshold(1024);
             f.setRepository(new File(ubicacion));

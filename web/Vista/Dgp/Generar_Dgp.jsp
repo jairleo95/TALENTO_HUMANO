@@ -24,12 +24,12 @@
                 }
 
                 if (text.equals("2")) {
-                    out.println("Requerimiento: Tiempo Parcial");
+                    out.println("Requerimiento: Medio Tiempo");
                     idreq = "REQ-0002";
                 }
 
                 if (text.equals("3")) {
-                    out.println("Requerimiento: Medio Tiempo");
+                    out.println("Requerimiento: Tiempo Parcial");
                     idreq = "REQ-0003";
                 }
                     %>
@@ -38,9 +38,7 @@
         </div>
         <hr/>
         <div >
-
             <form method="post" action="../../trabajador" class="form-inline">                    
-
                 <div class="form-group">
                     <label class="control-label">Nombres:</label><br>
                     <input type="text"  class="form-control"  name="nom">
@@ -70,7 +68,8 @@
             </form>
         </div>
         <hr/>
-        <%                int count = ListarTrabajador2.size();
+        <%
+        int count = ListarTrabajador2.size();
             String cancel = request.getParameter("cancel");
             if (cancel != null) {
                 if (cancel.equals("true")) {
@@ -101,9 +100,7 @@
                     /*require_once '../Modelo/Modelo_Imagen.php';
                      $mod_f= new Modelo_Imagen();
                      $idf=$mod_f->LIST_FOTO_TRABAJADOR($listra[$index][0]);*/
-
                 %>
-
                 <% //if ($idf==null) {%>
                 <td><img src="../../imagenes/avatar_default.jpg"  width="80"  height="80"></td>
                     <%//}else{%>
@@ -114,16 +111,11 @@
                 <td><a href="../../dgp?idtr=<%=tr.getId_trabajador()%>&idreq=<%=idreq%>&iddep=<%=iddep%>&opc=Reg_form">Elaborar Requerimiento</a></td>
             </tr>
             <% //} %>
-
             <%//}}%>
-
-
             <%
                         }
-
                         ListarTrabajador2.clear();
                     }
-
                 }%> 
         </table>
 

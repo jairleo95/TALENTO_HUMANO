@@ -304,7 +304,7 @@ public class DgpDAO implements InterfaceDgpDAO {
     @Override
     public List<X_val_tra_dgp> VAL_TRA_DGP(String id_tr) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select count(*) as TOTAL,ID_DGP from RHTM_DGP where ID_TRABAJADOR='" + id_tr + "' and ES_DGP=0 group by ID_DGP";
+        String sql = "select count(*) as TOTAL,ID_DGP from RHTM_DGP where ID_TRABAJADOR='" + id_tr.trim() + "' and ES_DGP='0' group by ID_DGP";
         List<X_val_tra_dgp> Lista = new ArrayList<X_val_tra_dgp>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -326,7 +326,7 @@ public class DgpDAO implements InterfaceDgpDAO {
     @Override
     public int VAL_OPC_DGP(String idtr) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select count(ID_DGP) from RHTM_DGP   where ES_DGP='0' and ID_TRABAJADOR='" + idtr + "';";
+        String sql = "select count(ID_DGP) from RHTM_DGP   where ES_DGP='0' and ID_TRABAJADOR='" + idtr.trim() + "'";
         int TOTAL = 0;
         try {
             ResultSet rs = this.conn.query(sql);

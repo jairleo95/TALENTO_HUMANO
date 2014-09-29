@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
     <head>
         <meta charset="windows-1252">
@@ -12,28 +11,32 @@
                 border-style: solid;
                 border-width: 5px;
                 margin: 2%;
-
             }
             .input-desp{ 
                 margin-top: 5%;
                 width:90%;
                 //height: 200px;
-                position: absolute;
+                position: static;
+                float: left;
                 border-color: #000;
                 border-style: solid;
                 border-width: 5px;
             }
-
             .tab-horario{
                 margin: 0;
+                 position: static;
+                float: left;
                 //  float: start;
             }
             input{
+                position: static;
+                float: left;
                 width: 40px;
             }
             .submit{
-                position: absolute;
-                margin-top: 20%;
+                position: static;
+                float: left;
+                margin-top: 5%;
                 width:200px; 
 
             }
@@ -45,15 +48,13 @@
             a { color:#999; text-decoration: none; }
             a:hover { color:#802727; }
             p { padding:0 0 5px 0; }
-
             input { padding:5px; border:1px solid #999; border-radius:4px; -moz-border-radius:4px; -web-kit-border-radius:4px; -khtml-border-radius:4px; }
-
             body{
-                height: 500px;
+                //  height: 500px;
             }
 
         </style>
-        <script language="javascript" type="text/javascript" src="../../../js/JQuery/jQuery.js"></script>
+        <script language="javascript" type="text/javascript" src="../../../js/jquery-1.3.2.min.js"></script>
         <script language="javascript" type="text/javascript">
             $(document).ready(
                     function mostrar() {
@@ -364,15 +365,9 @@
                     <tr class="tr-count_5"><td>T1 :</td><td><input type="text" name="HORA_DESDE_vie1"  id="HORA_DESDE_vie1" class="text-box" ></td>
                         <td><input type="text" name="HORA_HASTA_vie1" id="HORA_HASTA_vie1" class="text-box" ></td></tr>         
                     <input type="hidden" name="DIA_vie1" value="vie" class="text-box" >                    
-
-
                     <input type="hidden" name="USER_CREACION_vie1" class="text-box" >   
                     <tr><td colspan="2"><a href="#" id="add_5">+</a></td></tr>
-
-
                 </table>
-
-
                 <table id="show_6" class="cont_domingo" >
                     <tr><td align="center" colspan="2">Domingo</td></tr>
                     <tr class="tr-count_6"><td>T1 :</td><td><input type="text" name="HORA_DESDE_dom1"  id="HORA_DESDE_dom1" class="text-box" ></td>
@@ -388,20 +383,11 @@
 
                     <tr><td colspan="2"><a href="#" id="add_6">+</a></td></tr>
                     <input type="hidden" name="USER_CREACION_dom2" class="text-box" >   
-
-
-
                 </table>
-
             </div>
             <br>
             <input type="submit" name="opc" onclick="enviar()"   class="submit" value="REGISTRAR HORARIO">
-
         </form>
-
-
-
-
     </center>
     <br><br>
 

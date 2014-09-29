@@ -12,9 +12,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <link rel="stylesheet" href="../../css/bootstrap.min.css">
         <title>Fichas de Trabajador</title>
-    
+
         <link type="text/css" rel="stylesheet" href="../../css/Css_Reporte/Reportes.css">
-        
+
         <script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
         <link rel="stylesheet" href="../../css/Css_Alerta/alertify.core.css" />
         <link rel="stylesheet" href="../../css/Css_Alerta/alertify.default.css" />
@@ -113,11 +113,11 @@
 
                     %>
 
-                    <% //if ($idf==null) {%>
-                    <td><img src="../../imagenes/avatar_default.jpg"  width="80"  height="80"></td>
-                        <%//}else{%>
-                    <!--<td><img src="Foto.php?idf=<?echo $idf;?>"  width="80"  height="80"></td>-->
-                    <% //}%>
+                    <% if (true) {%>
+                    <td><img src="../../imagenes/avatar_default.jpg"  width="40"  height="40"></td>
+                        <%} else {%>
+                    <td><img src="Foto.php?idf=<?echo $idf;?>"  width="80"  height="80"></td>
+                        <% }%>
 
                     <td><div ><a href="../../trabajador?idtr=<%=tr.getId_trabajador()%>&opc=list"><%=tr.getAp_paterno().toUpperCase() + " " + tr.getAp_materno().toUpperCase() + " " + tr.getNo_trabajador().toUpperCase()%></a></div></td>
                     <td><%=tr.getNo_carrera()%></td>

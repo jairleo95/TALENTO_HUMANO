@@ -13,10 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.DocumentoDAO;
 import pe.edu.upeu.application.dao.ListaDAO;
 import pe.edu.upeu.application.dao.TrabajadorDAO;
 import pe.edu.upeu.application.dao.UbigeoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
@@ -51,6 +53,7 @@ public class CTrabajador extends HttpServlet {
             InterfaceUbigeoDAO ub = new UbigeoDAO();
             InterfaceTrabajadorDAO tr = new TrabajadorDAO();
             InterfaceDocumentoDAO d = new DocumentoDAO();
+            InterfaceDgpDAO dgp =  new DgpDAO();
 
             String opc = "";
             String Text = "";
@@ -151,14 +154,17 @@ public class CTrabajador extends HttpServlet {
                 String ape_mat = request.getParameter("ape_mat");
                 String ape_pat = request.getParameter("ape_pat");
                 String all = request.getParameter("all");
+             
+                
                 if (("Buscar".equals(Buscar) & (!"".equals(dni) | !"".equals(nom) | !"".equals(ape_mat) | !"".equals(ape_pat))) | "Todos".equals(all)) {
                     String busc = (String) request.getParameter("busc");
                     if (busc != null) {
                         getServletContext().setAttribute("ListarTrabajador2", tr.ListarTrabajador(iddep, dni, nom, ape_pat, ape_mat));
+                        getServletContext().setAttribute(nom, dgp.VAL_OPC_DGP(dni));
                         response.sendRedirect("Vista/Dgp/Generar_Dgp.jsp?text=" + Text);
                     } else {
-                        getServletContext().setAttribute("ListarTrabajador", tr.ListarTrabajador(iddep, dni, nom, ape_pat, ape_mat));
-                        response.sendRedirect("Vista/Trabajador/Ficha_Trabajador.jsp");
+                       // getServletContext().setAttribute("ListarTrabajador2", tr.ListarTrabajador(iddep, dni, nom, ape_pat, ape_mat));
+                        //response.sendRedirect("Vista/Trabajador/Ficha_Trabajador.jsp");
 
                     }
                 }
