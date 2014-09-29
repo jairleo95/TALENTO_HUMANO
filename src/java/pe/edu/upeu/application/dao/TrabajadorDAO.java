@@ -123,9 +123,9 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         ape_p = ape_p.toUpperCase();
         ape_m = ape_m.toUpperCase();
         sql += (!"".equals(dni)) ? " and d.NU_DOC='" + dni + "'" : "";
-        sql += (!"".equals(nom)) ? " and upper(d.NO_TRABAJADOR)like '%" + nom + "%'" : "";
-        sql += (!"".equals(ape_p)) ? " and upper(d.AP_PATERNO)like '%" + ape_p + "%'" : "";
-        sql += (!"".equals(ape_m)) ? " and upper(d.AP_MATERNO)like '%" + ape_m + "%'" : "";
+        sql += (!"".equals(nom)) ? " and upper(d.NO_TRABAJADOR)like '%" + nom.trim() + "%'" : "";
+        sql += (!"".equals(ape_p)) ? " and upper(d.AP_PATERNO)like '%" + ape_p.trim() + "%'" : "";
+        sql += (!"".equals(ape_m)) ? " and upper(d.AP_MATERNO)like '%" + ape_m.trim()  + "%'" : "";
         sql += " order by d.ID_TRABAJADOR desc";
 
         List<V_Ficha_Trab_Num_C> list = new ArrayList<V_Ficha_Trab_Num_C>();

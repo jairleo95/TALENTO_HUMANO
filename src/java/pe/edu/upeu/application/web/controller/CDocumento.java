@@ -76,7 +76,7 @@ public class CDocumento extends HttpServlet {
                 response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&pro=pr_dgp");
             }
 
-            if (opc.equals("Registrars")) {
+           /* if (opc.equals("Registrars")) {
                 String iddgp = request.getParameter("iddgp");
                 int i = Integer.parseInt(request.getParameter("num"));
                 for (int j = 1; j < i; j++) {
@@ -107,26 +107,8 @@ public class CDocumento extends HttpServlet {
                 } else {
                     response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad);
                 }
-            }
+            }*/
         } else {
-            /* String iddgp = request.getParameter("iddgp");
-             int i = Integer.parseInt(request.getParameter("num"));
-             for (int j = 1; j < i; j++) {
-
-             String name = request.getParameter("lob_upload" + j);
-             String desc = request.getParameter("lob_description" + j);
-             String iddoc = request.getParameter("iddoc" + j);
-             String estado = request.getParameter("estado" + j);
-             //out.println(iddgp);
-
-             String AR_DATO_ARCHIVO = request.getParameter("AR_DATO_ARCHIVO");
-             String NO_ARCHIVO = request.getParameter("NO_ARCHIVO");
-             String TA_ARCHIVO = request.getParameter("TA_ARCHIVO");
-             String AR_FILE_TYPE = request.getParameter("AR_FILE_TYPE");
-             if (AR_DATO_ARCHIVO == null & (desc != null | estado != null)) {
-             d.INSERT_DOCUMENTO_ADJUNTO(null, iddgp, iddoc, estado, user, null, null, null, null, desc, AR_DATO_ARCHIVO, NO_ARCHIVO, TA_ARCHIVO, AR_FILE_TYPE);
-             }
-             }*/
             String ubicacion = "C:\\Users\\ALFA 3\\Documents\\NetBeansProjects\\TALENTO_HUMANO\\web\\Vista\\Dgp\\Documento\\Archivo";
             DiskFileItemFactory f = new DiskFileItemFactory();
             f.setSizeThreshold(1024);

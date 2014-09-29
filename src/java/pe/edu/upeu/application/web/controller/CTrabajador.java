@@ -163,8 +163,9 @@ public class CTrabajador extends HttpServlet {
                         getServletContext().setAttribute(nom, dgp.VAL_OPC_DGP(dni));
                         response.sendRedirect("Vista/Dgp/Generar_Dgp.jsp?text=" + Text);
                     } else {
-                       // getServletContext().setAttribute("ListarTrabajador2", tr.ListarTrabajador(iddep, dni, nom, ape_pat, ape_mat));
-                        //response.sendRedirect("Vista/Trabajador/Ficha_Trabajador.jsp");
+                        getServletContext().setAttribute("ListarTrabajador", tr.ListarTrabajador(iddep, dni, nom, ape_pat, ape_mat));
+                        response.sendRedirect("Vista/Trabajador/Ficha_Trabajador.jsp");
+                        out.println("putazo");
 
                     }
                 }

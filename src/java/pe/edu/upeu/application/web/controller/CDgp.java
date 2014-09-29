@@ -186,6 +186,7 @@ public class CDgp extends HttpServlet {
         if (opc.equals("Listar")) {
 
             getServletContext().setAttribute("List_Det_Dgp", dgp.LIST_DET_DGP(iddep));
+            
             // out.print(Idgp.LIST_DET_DGP(iddep).size());
             response.sendRedirect("Vista/Dgp/List_Dgp.jsp?iddep");
 
