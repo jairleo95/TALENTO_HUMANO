@@ -95,7 +95,8 @@
                              <%}
                             %>
                         </select></td></tr> 
-
+ 
+                
                 <tr><td>Estudiante de Nivel Superior:</td><td>
                         <select name="ESTUD_NIV_SUPERIOR" class="text-box">
                             <option  value=""></option>

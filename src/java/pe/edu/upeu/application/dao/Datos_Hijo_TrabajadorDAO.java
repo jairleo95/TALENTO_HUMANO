@@ -147,7 +147,6 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
         List<Datos_Hijo_Trabajador> Lista = new ArrayList<Datos_Hijo_Trabajador>();
         try {
             ResultSet rs = this.conn.query(sql);
-
             while (rs.next()) {
                 Datos_Hijo_Trabajador t = new Datos_Hijo_Trabajador();
                 t.setId_datos_hijos_trabajador(rs.getString("id_datos_hijos_trabajador"));
@@ -175,6 +174,7 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
             this.conn.close();
         }
         return Lista;
+        
     }
 
 }
