@@ -125,7 +125,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         sql += (!"".equals(dni)) ? " and d.NU_DOC='" + dni + "'" : "";
         sql += (!"".equals(nom)) ? " and upper(d.NO_TRABAJADOR)like '%" + nom.trim() + "%'" : "";
         sql += (!"".equals(ape_p)) ? " and upper(d.AP_PATERNO)like '%" + ape_p.trim() + "%'" : "";
-        sql += (!"".equals(ape_m)) ? " and upper(d.AP_MATERNO)like '%" + ape_m.trim()  + "%'" : "";
+        sql += (!"".equals(ape_m)) ? " and upper(d.AP_MATERNO)like '%" + ape_m.trim() + "%'" : "";
         sql += " order by d.ID_TRABAJADOR desc";
 
         List<V_Ficha_Trab_Num_C> list = new ArrayList<V_Ficha_Trab_Num_C>();
@@ -143,7 +143,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 v.setNu_doc(rs.getString("NU_DOC"));
                 v.setEs_civil(rs.getString("ES_CIVIL"));
                 v.setFe_nac(rs.getString("FE_NAC"));
-                //   v.setNo_universidad(rs.getString("NO_UNIVERSIDAD"));
+                v.setNo_universidad(rs.getString("NO_UNIVERSIDAD"));
                 v.setNo_departamento(rs.getString("NO_DEPARTAMENTO"));
                 v.setNo_provincia(rs.getString("NO_PROVINCIA"));
                 v.setNo_distrito(rs.getString("NO_DISTRITO"));
@@ -152,11 +152,11 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 v.setDi_correo_personal(rs.getString("DI_CORREO_PERSONAL"));
                 v.setDi_correo_inst(rs.getString("DI_CORREO_INST"));
                 v.setCo_sistema_pensionario(rs.getString("CO_SISTEMA_PENSIONARIO"));
-                //  v.setLi_nivel_educativo(rs.getString("LI_NIVEL_EDUCATIVO"));
+                  v.setLi_nivel_educativo(rs.getString("NO_S_EDUCATIVA"));
                 //  v.setLi_grado_academico(rs.getString("LI_GRADO_ACADEMICO"));
                 //   v.setLi_titulo_profesional(rs.getString("LI_TITULO_PROFESIONAL"));
-                // v.setNo_carrera(rs.getString("NO_CARRERA"));
-                // v.setNo_universidad(rs.getString("NO_UNIVERSIDAD"));
+                v.setNo_carrera(rs.getString("NO_CARRERA"));
+
                 v.setCm_otros_estudios(rs.getString("CM_OTROS_ESTUDIOS"));
                 v.setEs_sexo(rs.getString("ES_SEXO"));
                 v.setLi_grupo_sanguineo(rs.getString("LI_GRUPO_SANGUINEO"));

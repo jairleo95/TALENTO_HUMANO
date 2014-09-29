@@ -17,17 +17,14 @@
 
         <form>
             <table class="tables">
-                <%for (int index = 0; index < ListaridTrabajador.size(); index++) {
+                <%
+                    InterfaceListaDAO l = new ListaDAO();
+                    for (int index = 0; index < ListaridTrabajador.size(); index++) {
                         V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
                         trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
 
                 %>   
-                <tr><td class="text-info">Nivel Educativo:</td><td><%                    InterfaceListaDAO l = new ListaDAO();
-                    for (int h = 0; h < l.List_Nivel_Educativo().size(); h++) {
-                        if (trb.getLi_nivel_educativo().trim().equals(h + 1 + "")) {
-                            out.println(l.List_Nivel_Educativo().get(h));
-                        }
-                    }
+                <tr><td class="text-info">Nivel Educativo:</td><td><%                    out.println(trb.getLi_nivel_educativo());
                         %></td></tr>
                 <tr><td class="text-info">Grado Academico:</td><td><%
                     for (int x = 0; x < l.List_Grado_Academico().size(); x++) {
@@ -35,6 +32,7 @@
                             out.println(l.List_Grado_Academico().get(x));
                         }
                     }
+
                         %></td></tr>
                 <tr><td class="text-info">Carrera:</td><td><%=trb.getNo_carrera()%></td></tr>
                 <tr><td class="text-info">Titulo Profesional:</td><td><%

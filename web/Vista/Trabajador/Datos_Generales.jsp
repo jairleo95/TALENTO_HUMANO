@@ -20,7 +20,7 @@
                         trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
 
                 %>           
-                <tr><td class="text-info">Nacionalidad:</td><td><%=trb.getNo_nacionalidad().trim()%></td></tr>
+                <tr><td class="text-info">Nacionalidad:</td><td><%=trb.getNo_nacionalidad()%></td></tr>
 
                 <tr><td  class="text-info">Distrito:</td><td><%=trb.getNo_distrito()%></td></tr>
                 <tr><td  class="text-info">Tipo Documento:</td><td>

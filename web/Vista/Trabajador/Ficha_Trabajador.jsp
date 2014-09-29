@@ -96,8 +96,8 @@
                 <tr class="tab_cabe">
                     <td>Nro</td>
                     <td>Foto</td>
-                    <td>Nombre</td>
-                    <td>Carrera</td>
+                    <td>Nombres Y Apellidos</td>
+                    <td>DNI</td>
                     <td>Acciones</td>
                 </tr>
                 <% for (int i = 0; i < ListarTrabajador.size(); i++) {
@@ -106,12 +106,7 @@
                 %>
                 <tr>
                     <td><%out.println(i + 1);%></td>         
-                    <%
-                        /*require_once '../Modelo/Modelo_Imagen.php';
-                         $mod_f= new Modelo_Imagen();
-                         $idf=$mod_f->LIST_FOTO_TRABAJADOR($listra[$index][0]);*/
 
-                    %>
 
                     <% if (true) {%>
                     <td><img src="../../imagenes/avatar_default.jpg"  width="40"  height="40"></td>
@@ -120,7 +115,7 @@
                         <% }%>
 
                     <td><div ><a href="../../trabajador?idtr=<%=tr.getId_trabajador()%>&opc=list"><%=tr.getAp_paterno().toUpperCase() + " " + tr.getAp_materno().toUpperCase() + " " + tr.getNo_trabajador().toUpperCase()%></a></div></td>
-                    <td><%=tr.getNo_carrera()%></td>
+                    <td><%=tr.getNu_doc()%></td>
                     <td>
                         <%
                             /*require_once '../Modelo/ModeloDGP.php';
@@ -131,7 +126,7 @@
                              if ($n_v>0) {
                              */
                         %>
-                        <a href="List_Dgp_Trabajador.jsp?idtr=<? echo $listra[$index][0];?>">Ver DGP's</a>
+                        <!--<a href="List_Dgp_Trabajador.jsp?idtr=<? echo $listra[$index][0];?>">Ver DGP's</a>
                         <%//}else{%> 
                         <% //if ($listra[$index][62]>0) {%>
                         <% //if ($num[0][0]!=0) {%>
@@ -143,7 +138,7 @@
                         <%  //if ($_SESSION["IDROL"]==6) {%>
                         <a href="../Contrato/Reg_Contrato.jsp?idtr=<?echo $listra[$index][0];?>">ELaborar Contrato</a>                       
                         <%//}%>
-                        <%//}}%>
+                        <%//}}%>-->
                     </td>
 
                 </tr>
