@@ -10,9 +10,18 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <style>
+            .archivo{
+                max-width:500px;
+                min-height:50px; 
+                
+            }
+            
+        </style>
     </head>
     <body>
-        <img src="Archivo/<%=request.getParameter("nom_doc")%>">
-        <%=request.getParameter("nom_doc")%>
+        <center>
+            <img src="Archivo/<%=request.getParameter("nom_doc")%>" class="archivo" >
+        </center>
     </body>
 </html>

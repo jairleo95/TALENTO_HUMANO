@@ -99,19 +99,24 @@
                         <td class="caji" ><%=d.getNo_area()%></td> 
 
                         <td class="caji">
-                            <%if (d.getEs_dgp().trim().equals("0") | d.getEs_dgp() == null) {
+                            <%
+                                if (d.getEs_dgp() != null) {
+                                    if (d.getEs_dgp().trim().equals("0")) {
                             %>
-                            <a href="../Dgp/Detalle_Seguimiento_Dgp.jsp?iddgp=<? echo $list[$i][0]; ?>">En Proceso</a>
+                            <a href="../../dgp?iddgp=<%=d.getId_dgp().trim()%>&opc=Seguimiento">En Proceso</a>
                             <% }%>
                             <%if (d.getEs_dgp().trim().equals("1")) {
                             %>
-                            <a href="../Dgp/Detalle_Seguimiento_Dgp.jsp?iddgp=<? echo $list[$i][0]; ?>">Ver Proceso Terminado</a>
-                            <% }%>
+                            <a href="../../dgp?iddgp=<%=d.getId_dgp().trim()%>&opc=Seguimiento">Ver Proceso Terminado</a>
+                            <% }
+                            } else {%>
+                            <a href="../../dgp?iddgp=<%=d.getId_dgp().trim()%>&opc=Seguimiento">Incompleto - Interrumpido</a>
+                            <%}%>
                         </td> 
-                        <td class="caji" ><a href="../Dgp/Documento/Reg_Documento.jsp?iddgp=<? echo $list[$i][0];?>&idtr=<?echo $idtr;?>">Ver Documentos</a></td> 
+                        <td class="caji" ><a href="../../documento?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a></td> 
 
 
-                        <td class="caji" ><a href="../Dgp/Detalle_Dgp.jsp?iddgp=<?echo $list[$i][0];?>&idtr=<?echo $idtr;?>">Ver Detalle</a></td>
+                        <td class="caji" ><a href="../../dgp?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=Detalle">Ver Detalle</a></td>
                         <%}%>
                     </tr> 
                 </tbody>
