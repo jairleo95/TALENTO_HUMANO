@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="pe.edu.upeu.application.model.Datos_Hijo_Trabajador"%>
 
 <jsp:useBean id="Lista_hijo_individual" scope="application" class="java.util.ArrayList"/>
@@ -14,14 +15,16 @@
         <label class="title">HIJOS</label>
         <form class="form" action="../../../familiar"> 
             <table class="table" >        
-                <% for (int i = 0; i < Lista_hijo_individual.size(); i++) {
+                <% 
+                CConversion c =  new  CConversion();
+                for (int i = 0; i < Lista_hijo_individual.size(); i++) {
                         Datos_Hijo_Trabajador d = new Datos_Hijo_Trabajador();
                         d = (Datos_Hijo_Trabajador) Lista_hijo_individual.get(i);
                 %>
-                <input type="hidden" id="idhijo" value="<%= d.getId_datos_hijos_trabajador()%>">
-                <input type="hidden" id="idtr" value="<%= d.getId_trabajador()%>">
+                <input type="hidden" name="idhijo" value="<%= d.getId_datos_hijos_trabajador()%>">
+                <input type="hidden" name="idtr" value="<%= d.getId_trabajador()%>">
                 <tr><td>Apellido Paterno:</td><td><input type="text" name="APELLIDO_P" class="text-box" value="<%= d.getAp_paterno()%>" required="" maxlength="30"></td></tr>      
-                <tr><td>Apellido Materno:</td><td><input type="text" name="NOMBRE" class="text-box"  value="<%= d.getAp_materno()%>" maxlength="30"></td></tr>    
+                <tr><td>Apellido Materno:</td><td><input type="text" name="APELLIDO_M" class="text-box"  value="<%= d.getAp_materno()%>" maxlength="30"></td></tr>    
                 <tr><td>Nombres:</td><td><input type="text" name="NOMBRE" class="text-box" value="<%= d.getNo_hijo_trabajador()%>" required="" maxlength="30"></td></tr>   
                 <tr><td>Fecha de Nacimiento:</td><td><input type="date" name="FECHA_NAC" class="text-box" value="<%= d.getFe_nacimiento()%>" required=""></td></tr>   
                 <tr><td>Sexo:</td><td>

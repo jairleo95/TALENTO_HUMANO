@@ -115,16 +115,17 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
         CallableStatement cst;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            cst = conn.conex.prepareCall("UPDATE RHTD_DATOS_HIJO_TRABAJADOR SET ap_paterno=?, Ap_materno =? , no_hijo_trabajador =? , fe_nacimiento=? , es_sexo=? , es_tipo_doc=? , nu_doc=?, es_inscripcion_vig_essalud=? , es_estudio_niv_superior=? WHERE ID_DATOS_HIJOS_TRABAJADOR = '"+ID_DATOS_HIJOS_TRABAJADOR.trim()+"'");
-            cst.setString(1, AP_PATERNO);
-            cst.setString(2, AP_MATERNO);
-            cst.setString(3, NO_HIJO_TRABAJADOR);
-            cst.setString(4, c.convertFecha(FE_NACIMIENTO));
-            cst.setString(5, ES_SEXO);
-            cst.setString(6, ES_TIPO_DOC);
-            cst.setString(7, NU_DOC);
-            cst.setString(8, ES_INSCRIPCION_VIG_ESSALUD);
-            cst.setString(9, ES_ESTUDIO_NIV_SUPERIOR);
+            cst = conn.conex.prepareCall("{CALL RHSP_MOD_HIJOS( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )}");
+            cst.setString(1, ID_DATOS_HIJOS_TRABAJADOR );
+            cst.setString(2, AP_PATERNO);
+            cst.setString(3, AP_MATERNO);
+            cst.setString(4, NO_HIJO_TRABAJADOR);
+            cst.setString(5, c.convertFecha(FE_NACIMIENTO));
+            cst.setString(6, ES_SEXO);
+            cst.setString(7, ES_TIPO_DOC);
+            cst.setString(8, NU_DOC);
+            cst.setString(9, ES_INSCRIPCION_VIG_ESSALUD);
+            cst.setString(10, ES_ESTUDIO_NIV_SUPERIOR);
             cst.execute();
         } catch (SQLException ex) {
         } finally {
@@ -142,7 +143,7 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
     @Override
     public List<Datos_Hijo_Trabajador> LISTA_HIJO(String idHijo, String idtr) {
          this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from RHTD_DATOS_HIJO_TRABAJADOR where ID_TRABAJADOR='" +idtr.trim()+ "' and ID_DATOS_HIJOS_TRABAJADOR ='"+idHijo.trim()+"'";
+        String sql = "SELECT ID_DATOS_HIJOS_TRABAJADOR,ID_TRABAJADOR,AP_PATERNO,AP_MATERNO,NO_HIJO_TRABAJADOR,to_char(FE_NACIMIENTO,'yyyy-mm-dd')fe_nacimiento , ES_SEXO,ES_TIPO_DOC,NU_DOC, ES_PRESENTA_DOCUMENTO, ES_INSCRIPCION_VIG_ESSALUD, ES_ESTUDIO_NIV_SUPERIOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, ES_DATOS_HIJO_TRABAJADOR from RHTD_DATOS_HIJO_TRABAJADOR where ID_TRABAJADOR='" +idtr.trim()+ "' and ID_DATOS_HIJOS_TRABAJADOR ='"+idHijo.trim()+"'";
         List<Datos_Hijo_Trabajador> Lista = new ArrayList<Datos_Hijo_Trabajador>();
         try {
             ResultSet rs = this.conn.query(sql);

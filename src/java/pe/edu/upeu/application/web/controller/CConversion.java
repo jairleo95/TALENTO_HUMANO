@@ -19,5 +19,9 @@ public class CConversion {
          String f[]=fecha.split("/");
          return f[0]+"-"+f[1]+"-"+f[2];
      }
+     public String convertFecha3(String fecha){
+         String f[]=fecha.split("/");
+         return f[2]+"-"+f[1]+"-"+f[0];
+     }
 
 }
