@@ -45,7 +45,6 @@ if (id_user!="") {
             .cajita{
                 width: 100%;
                 height: 30px;
-            }
             .cajita2{
                 float: left;
                 width: 150px;
