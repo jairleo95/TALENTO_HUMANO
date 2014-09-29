@@ -70,10 +70,18 @@
 
         <!-- HEADER -->
         <header id="header">
-            <div id="logo-group">
+            <div id="logo-group" >
 
                 <!-- PLACE YOUR LOGO HERE -->
-                <span id="logo"> <img src="HTML_version/img/logo.png" alt="SmartAdmin"> </span>
+                <style>
+                    img{
+                      
+                        
+                    }
+                </style>
+                    
+                    
+                <span id="logo"> <img src="imagenes/logo rrhh.jpg" style=" position: absolute;top: 6px; width:130px; height:36px " alt="Talento Humano"> </span>
                 <!-- END LOGO PLACEHOLDER -->
 
                 <!-- Note: The activity badge color changes when clicked and resets the number to 0
@@ -87,21 +95,21 @@
                     <div class="btn-group btn-group-justified" data-toggle="buttons">
                         <label class="btn btn-default">
                             <input type="radio" name="activity" id="ajax/notify/mail.html">
-                            Msgs (14) </label>
+                            SMS (14) </label>
                         <label class="btn btn-default">
                             <input type="radio" name="activity" id="ajax/notify/notifications.html">
-                            notify (3) </label>
+                            Eventos (3) </label>
                         <label class="btn btn-default">
                             <input type="radio" name="activity" id="ajax/notify/tasks.html">
-                            Tasks (4) </label>
+                            Tareas (4) </label>
                     </div>
 
                     <!-- notification content -->
                     <div class="ajax-notifications custom-scroll">
 
                         <div class="alert alert-transparent">
-                            <h4>Click a button to show messages here</h4>
-                            This blank page message helps protect your privacy, or you can show the first message here automatically.
+                            <h4>Click en el boton para mostrar el mensaje</h4>
+                            
                         </div>
 
                         <i class="fa fa-lock fa-4x fa-border"></i>
@@ -110,7 +118,7 @@
                     <!-- end notification content -->
 
                     <!-- footer: refresh area -->
-                    <span> Last updated on: 12/12/2013 9:43AM
+                    <span> ultima actualización: 29/09/2014 
                         <button type="button" data-loading-text="<i class='fa fa-refresh fa-spin'></i> Loading..." class="btn btn-xs btn-default pull-right">
                             <i class="fa fa-refresh"></i>
                         </button> 
@@ -124,23 +132,23 @@
             <!-- projects dropdown -->
             <div class="project-context hidden-xs">
 
-                <span class="label">Projects:</span>
-                <span class="project-selector dropdown-toggle" data-toggle="dropdown">Recent projects <i class="fa fa-angle-down"></i></span>
+                <span class="label">Proyectos:</span>
+                <span class="project-selector dropdown-toggle" data-toggle="dropdown">Proyectos Recientes <i class="fa fa-angle-down"></i></span>
 
                 <!-- Suggestion: populate this list with fetch and push technique -->
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="javascript:void(0);">Online e-merchant management system - attaching integration with the iOS</a>
+                        <a href="javascript:void(0);">Contratación de Personal</a>
                     </li>
                     <li>
-                        <a href="javascript:void(0);">Notes on pipeline upgradee</a>
+                        <a href="javascript:void(0);">Gestión de Renuncias</a>
                     </li>
                     <li>
-                        <a href="javascript:void(0);">Assesment Report for merchant account</a>
+                        <a href="javascript:void(0);">Gestión de Licencias</a>
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="javascript:void(0);"><i class="fa fa-power-off"></i> Clear</a>
+                        <a href="javascript:void(0);"><i class="fa fa-power-off"></i> Borrar</a>
                     </li>
                 </ul>
                 <!-- end dropdown-menu-->
@@ -201,8 +209,8 @@
                 <!-- end search mobile button -->
 
                 <!-- input: search field -->
-                <form action="search.html" class="header-search pull-right">
-                    <input id="search-fld"  type="text" name="param" placeholder="Find reports and more" data-autocomplete='[
+                <form action="" class="header-search pull-right">
+                    <input id="search-fld"  type="text" name="param" placeholder="Buscar reportes y más" data-autocomplete='[
                            "ActionScript",
                            "AppleScript",
                            "Asp",
@@ -239,7 +247,7 @@
                 <!-- end fullscreen button -->
 
                 <!-- #Voice Command: Start Speech -->
-                <div id="speech-btn" class="btn-header transparent pull-right hidden-sm hidden-xs">
+               <!-- <div id="speech-btn" class="btn-header transparent pull-right hidden-sm hidden-xs">
                     <div> 
                         <a href="javascript:void(0)" title="Voice Command" data-action="voiceCommand"><i class="fa fa-microphone"></i></a> 
                         <div class="popover bottom"><div class="arrow"></div>
@@ -255,11 +263,12 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- end voice command -->
 
                 <!-- multiple lang dropdown : find all flags in the flags page -->
-                <ul class="header-dropdown-list hidden-xs">
+                <!-- Lenguaje -->
+                <!--<ul class="header-dropdown-list hidden-xs">
                     <li>
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="HTML_version/img/blank.gif" class="flag flag-us" alt="United States"> <span> English (US) </span> <i class="fa fa-angle-down"></i> </a>
                         <ul class="dropdown-menu pull-right">
@@ -296,7 +305,7 @@
 
                         </ul>
                     </li>
-                </ul>
+                </ul>-->
                 <!-- end multiple lang -->
 
             </div>
@@ -463,9 +472,9 @@
 
                 <div class="row">
                     <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
-                        <h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-home"></i> Dashboard <span>> My Dashboard</span></h1>
+                        <h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-home"></i> Menu <span>> My Dashboard</span></h1>
                     </div>
-                    <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+                   <!-- <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
                         <ul id="sparks" class="">
                             <li class="sparks-info">
                                 <h5> My Income <span class="txt-color-blue">$47,171</span></h5>
@@ -486,7 +495,7 @@
                                 </div>
                             </li>
                         </ul>
-                    </div>
+                    </div>-->
                 </div>
                 <!-- widget grid -->
                 <section id="widget-grid" class="">

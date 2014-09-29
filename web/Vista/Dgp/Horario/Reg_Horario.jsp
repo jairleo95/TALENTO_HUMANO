@@ -10,15 +10,15 @@
                 float: left;
                 border-style: solid;
                 border-width: 5px;
-                margin: 2%;
+                margin: 2px;
             }
             .input-desp{ 
                 margin-top: 5%;
-                width:90%;
+                width:100%;
                 //height: 200px;
                 position: static;
                 float: left;
-                border-color: #000;
+                border-color: #F2F2F2;
                 border-style: solid;
                 border-width: 5px;
             }
