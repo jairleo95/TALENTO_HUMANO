@@ -152,7 +152,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 v.setDi_correo_personal(rs.getString("DI_CORREO_PERSONAL"));
                 v.setDi_correo_inst(rs.getString("DI_CORREO_INST"));
                 v.setCo_sistema_pensionario(rs.getString("CO_SISTEMA_PENSIONARIO"));
-                  v.setLi_nivel_educativo(rs.getString("NO_S_EDUCATIVA"));
+                v.setLi_nivel_educativo(rs.getString("NO_S_EDUCATIVA"));
                 //  v.setLi_grado_academico(rs.getString("LI_GRADO_ACADEMICO"));
                 //   v.setLi_titulo_profesional(rs.getString("LI_TITULO_PROFESIONAL"));
                 v.setNo_carrera(rs.getString("NO_CARRERA"));
@@ -219,7 +219,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
 
             while (rs.next()) {
                 V_Ficha_Trab_Num_C v = new V_Ficha_Trab_Num_C();
-                  v.setId_trabajador(rs.getString("ID_TRABAJADOR"));
+                v.setId_trabajador(rs.getString("ID_TRABAJADOR"));
                 v.setAp_paterno(rs.getString("AP_PATERNO"));
                 v.setAp_materno(rs.getString("AP_MATERNO"));
                 v.setNo_trabajador(rs.getString("NO_TRABAJADOR"));
@@ -236,7 +236,9 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 v.setDi_correo_personal(rs.getString("DI_CORREO_PERSONAL"));
                 v.setDi_correo_inst(rs.getString("DI_CORREO_INST"));
                 v.setCo_sistema_pensionario(rs.getString("CO_SISTEMA_PENSIONARIO"));
-                  v.setLi_nivel_educativo(rs.getString("NO_S_EDUCATIVA"));
+                v.setLi_nivel_educativo(rs.getString("NO_S_EDUCATIVA"));
+                v.setNo_nacionalidad(rs.getString("NO_NACIONALIDAD"));
+
                 //  v.setLi_grado_academico(rs.getString("LI_GRADO_ACADEMICO"));
                 //   v.setLi_titulo_profesional(rs.getString("LI_TITULO_PROFESIONAL"));
                 v.setNo_carrera(rs.getString("NO_CARRERA"));

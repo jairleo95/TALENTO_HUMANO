@@ -185,7 +185,7 @@
             <div  class="titulo" id="titulo-c">Informacion Personal</div> 
 
             <%
-                if (List_Auto_mostrar.size() == 1) {
+                if (List_Auto_mostrar.size() == 1 & iddgp!=null) {
                     for (int r = 0; r < List_Auto_mostrar.size(); r++) {
                         Auto_Mostrar a = new Auto_Mostrar();
                         a = (Auto_Mostrar) List_Auto_mostrar.get(r);
