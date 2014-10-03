@@ -15,25 +15,28 @@
 <jsp:useBean id="List_Carrera" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Universidad" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Situacion_Educativa" scope="application" class="java.util.ArrayList"/>
-<!DOCTYPE html >
-<html>
+<!DOCTYPE html>
+<html lang="en-us">
     <head>
-        <meta charset="windows-1252">
-        <title>Registrar Trabajador</title>
+        <meta charset="utf-8">
+        <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
+
+        <title> Registrar Trabajador </title>
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+
+
         <link rel="stylesheet" type="text/css"  href="../../css/Css_Formulario/form.css">
 
+        <!-- buscador en select-->
         <link rel="stylesheet" href="../../css/Css_Formulario/chosen.css">
         <script src="../../js/Js_Formulario/abc.js"></script>
         <script src="../../js/Js_Formulario/organictabs.jquery.js"></script>
 
-
-        <script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
-        <link rel="stylesheet" href="../../css/Css_Alerta/alertify.core.css" />
-        <link rel="stylesheet" href="../../css/Css_Alerta/alertify.default.css" />
-        <script type="text/javascript"  src="../../js/Js_Alerta/Alertas.js"></script>
-
-
-        <link rel="stylesheet" href="../../css/Css_Validar/fv.css" type="text/css" />
+        <!--validador de inputs-->
+        <link rel="stylesheet" href="   ../../css/Css_Validar/fv.css" type="text/css" />
 
 
 
@@ -67,36 +70,36 @@
                                 tip.append(item);
                             }
                         });
-                        
-                        
-                        
-                        
-        var ti = $("#DOM_LEG_DISTRITO");
-        ti.empty();
-        var rg = $("#pro_dir_l").val();
-        var data = "id_dist=" + rg + "&opc=pro_nac";
-        ti.append('<option value="">Cargando...</option>').val('');
-        $.post("../../ubigeo", data, function(objJson) {
-            ti.empty();
-            if (objJson.rpta == -1) {
-                alert(objJson.mensaje);
-                return;
-            }
-            var lista = objJson.lista;
-            if (lista.length > 0) {
-                ti.append("<option value=''>[Seleccione]</option>");
-            } else {
-                ti.append("<option value=''>[]</option>");
-            }
-            for (var i = 0; i < lista.length; i++) {
-                var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                ti.append(item);
-            }
-        });
-                        
-                        
-                        
-                        
+
+
+
+
+                        var ti = $("#DOM_LEG_DISTRITO");
+                        ti.empty();
+                        var rg = $("#pro_dir_l").val();
+                        var data = "id_dist=" + rg + "&opc=pro_nac";
+                        ti.append('<option value="">Cargando...</option>').val('');
+                        $.post("../../ubigeo", data, function(objJson) {
+                            ti.empty();
+                            if (objJson.rpta == -1) {
+                                alert(objJson.mensaje);
+                                return;
+                            }
+                            var lista = objJson.lista;
+                            if (lista.length > 0) {
+                                ti.append("<option value=''>[Seleccione]</option>");
+                            } else {
+                                ti.append("<option value=''>[]</option>");
+                            }
+                            for (var i = 0; i < lista.length; i++) {
+                                var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                                ti.append(item);
+                            }
+                        });
+
+
+
+
                         $(".doc").attr("maxlength", "8");
                         $(".doc").val("");
                         $("#nac").change(
@@ -180,7 +183,7 @@
                     }
             );
         </script>
-
+        <!--Alerta para la edad -->
         <script type="text/javascript">
             $(document).ready(
                     function() {
@@ -234,9 +237,7 @@
     <body>
 
     <center>
-        <script type="text/javascript">
-            Esperar();
-        </script>
+
         <label class="title">FICHA DE DATOS DEL TRABAJADOR </label>
 
         <br>
@@ -678,7 +679,7 @@
                 <tr><td colspan="2"><input type="submit" name="opc"  class="submit" value="Registrar"></td></tr> 
             </table></form></center><br><br>
 </body>
-
+<!-- buscador de select-->
 <script src="../../js/chosen.jquery.js" type="text/javascript"></script>
 <script src="../../js/prism.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
@@ -693,6 +694,8 @@
                                 $(selector).chosen(config[selector]);
                             }
 </script>
+
+<!--validadores-->
 <script src="../../js/Js_Validar/multifield.js"></script>
 <script src="../../js/Js_Validar/validator.js"></script>
 <script>
@@ -726,7 +729,7 @@
                                 return false;
                             });
 
-                            /* FOR DEMO ONLY */
+
                             $('#vfields').change(function() {
                                 $('form').toggleClass('mode2');
                             }).prop('checked', false);
@@ -738,6 +741,7 @@
                             }).prop('checked', false);
 </script>
 
+<!--Solo numeros -->
 <script type="text/javascript">
     $("#docs").numeric();
     $("#doc").numeric(false, function() {
@@ -765,6 +769,7 @@
     );
 </script>
 
+<!--boton duplicar-->
 <script>
     function  duplicar() {
 
@@ -795,6 +800,7 @@
 
 
 </script>
+<!--Select dinamicos-->
 <script type="text/javascript">
     /*Ubigeo*/
     $("#dep_nac").change(function() {
