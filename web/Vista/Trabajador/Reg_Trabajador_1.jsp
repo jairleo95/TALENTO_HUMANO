@@ -517,7 +517,7 @@
                                 <option value="11">Block</option>
                             </select>
                         </div>
-                        <div class="item"><input type="text" name="DIR_DOM_A_D2" id="DOM_A_D2" class="text-box" required="" maxlength="100"></div>
+                            <div class="item"><input type="text" name="DIR_DOM_A_D2" id="DOM_A_D2" class="text-box" required="" maxlength="100"></div>
                         <div class="item"><select name="DIR_DOM_A_D3_ID" class="text-box required" id="DOM_A_D3" required="">
                                 <option value="">------</option>
                                 <option value="1">Número</option>
@@ -800,7 +800,7 @@
 
 
 </script>
-<!--Select dinamicos-->
+<!--->
 <script type="text/javascript">
     /*Ubigeo*/
     $("#dep_nac").change(function() {
