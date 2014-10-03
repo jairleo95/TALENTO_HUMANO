@@ -15,6 +15,7 @@ import pe.edu.upeu.application.dao_imp.InterfacePadre_Madre_ConyugueDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Padre_Madre_Conyugue;
+import pe.edu.upeu.application.web.controller.CConversion;
 
 /**
  *
@@ -23,7 +24,7 @@ import pe.edu.upeu.application.model.Padre_Madre_Conyugue;
 public class Padre_Madre_ConyugueDAO implements InterfacePadre_Madre_ConyugueDAO {
 
     ConexionBD conn;
-
+    CConversion c=new CConversion();
     @Override
     public void INSERT_PADRE_MADRE_CONYUGUE(String ID_PADRE_MADRE_CONYUGUE, String AP_NOMBRES_PADRE, String AP_NOMBRES_MADRE, String ES_TRABAJA_UPEU_CONYUGUE, String AP_NOMBRES_CONYUGUE, String FE_NAC_CONYUGUE, String TI_DOC_ID, String NU_DOC, String LI_INSCRIPCION_VIG_ESSALUD, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String ID_TRABAJADOR) {
         CallableStatement cst;
@@ -35,7 +36,7 @@ public class Padre_Madre_ConyugueDAO implements InterfacePadre_Madre_ConyugueDAO
             cst.setString(3, AP_NOMBRES_MADRE);
             cst.setString(4, ES_TRABAJA_UPEU_CONYUGUE);
             cst.setString(5, AP_NOMBRES_CONYUGUE);
-            cst.setString(6, FE_NAC_CONYUGUE);
+            cst.setString(6, c.convertFecha(FE_NAC_CONYUGUE));
             cst.setString(7, TI_DOC_ID);
             cst.setString(8, NU_DOC);
             cst.setString(9, LI_INSCRIPCION_VIG_ESSALUD);
@@ -55,7 +56,7 @@ public class Padre_Madre_ConyugueDAO implements InterfacePadre_Madre_ConyugueDAO
     @Override
     public List<Padre_Madre_Conyugue> List_PMC(String idtr) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "Select * from rhtd_padre_madre_conyugue where id_trabajador='" + idtr.trim() + "'";
+        String sql = "SELECT ID_PADRE_MADRE_CONYUGUE, AP_NOMBRES_PADRE,AP_NOMBRES_MADRE, ES_TRABAJA_UPEU_CONYUGUE ,AP_NOMBRES_CONYUGUE, to_char(FE_NAC_CONYUGUE,'yyyy-mm-dd')fe_nac_conyugue, TI_DOC_ID,NU_DOC, LI_INSCRIPCION_VIG_ESSALUD, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO,ID_TRABAJADOR FROM RHTD_PADRE_MADRE_CONYUGUE where id_trabajador='" + idtr.trim() + "'";
         List<Padre_Madre_Conyugue> list = new ArrayList<Padre_Madre_Conyugue>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -84,6 +85,28 @@ public class Padre_Madre_ConyugueDAO implements InterfacePadre_Madre_ConyugueDAO
             this.conn.close();
         }
         return list;
+    }
+
+    @Override
+    public void MOD_PADRE_MADRE_CONYUGUE(String AP_NOMBRES_PADRE, String AP_NOMBRES_MADRE, String ES_TRABAJA_UPEU_CONYUGUE, String AP_NOMBRES_CONYUGUE, String FE_NAC_CONYUGUE, String TI_DOC_ID, String NU_DOC, String LI_INSCRIPCION_VIG_ESSALUD, String US_MODIF, String FE_MODIF, String ID_TRABAJADOR) {
+    CallableStatement cst;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = conn.conex.prepareCall("{CALL RHSP_MOD_PADRE_MAD_CON( ?, ?, ?, ?, ?, ?, ?, ?, ? )}");
+            cst.setString(1, AP_NOMBRES_PADRE);
+            cst.setString(2, AP_NOMBRES_MADRE);
+            cst.setString(3, ES_TRABAJA_UPEU_CONYUGUE);
+            cst.setString(4, AP_NOMBRES_CONYUGUE);
+            cst.setString(5, FE_NAC_CONYUGUE);
+            cst.setString(6, TI_DOC_ID);
+            cst.setString(7, NU_DOC);
+            cst.setString(8, LI_INSCRIPCION_VIG_ESSALUD);
+            cst.setString(9, ID_TRABAJADOR);
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        }
     }
 
 }

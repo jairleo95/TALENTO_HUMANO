@@ -21,7 +21,7 @@
         %>
 
         <%if (List_PMC.size() != 0) {%>
-        <form align="center">
+        <form align="center" action="../../../familiar">
             <div>
                 <table class="table table-striped table-bordered table-hover" >
                     <tr><td colspan="2"><div class="title">Datos de Padre y Madre</div></td></tr>
@@ -29,8 +29,8 @@
                             Padre_Madre_Conyugue pmc = new Padre_Madre_Conyugue();
                             pmc = (Padre_Madre_Conyugue) List_PMC.get(i);
                     %>
-                    <tr><td class="text-info">Nombres y Apellidos del padre:</td><td class="text-info-left"><%=pmc.getAp_nombres_madre()%></td></tr>
-                    <tr><td class="text-info">Nombres y Apellidos de la Madre :</td><td class="text-info-left"><%=pmc.getAp_nombres_padre()%></td></tr>
+                    <tr><td class="text-info">Nombres y Apellidos del padre:</td><td class="text-info-left"><%=pmc.getAp_nombres_padre()%></td></tr>
+                    <tr><td class="text-info">Nombres y Apellidos de la Madre :</td><td class="text-info-left"><%=pmc.getAp_nombres_madre()%></td></tr>
                 </table>
             </div>
 
@@ -74,11 +74,11 @@
                         </td></tr>
                 </table>
             </div>
-                        <table class="table table-striped table-bordered table-hover">
-
-
+            <table class="table table-striped table-bordered table-hover">
+                <input type="hidden" name="idtra" value="<%=pmc.getId_trabajador().trim()%>">
                 <%}%>
-                <tr><td colspan="2"></td><td><input class="btn btn-success" type="submit" value="Editar"></td></tr>
+                
+                <tr><td colspan="2"></td><td><input class="btn btn-success" type="submit" name="opc" value="Editar"></td></tr>
             </table>
         </form>
         <%} else {%>

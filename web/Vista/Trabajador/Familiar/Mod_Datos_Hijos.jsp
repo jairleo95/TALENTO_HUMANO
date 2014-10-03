@@ -16,7 +16,6 @@
         <form class="form" action="../../../familiar"> 
             <table class="table" >        
                 <% 
-                CConversion c =  new  CConversion();
                 for (int i = 0; i < Lista_hijo_individual.size(); i++) {
                         Datos_Hijo_Trabajador d = new Datos_Hijo_Trabajador();
                         d = (Datos_Hijo_Trabajador) Lista_hijo_individual.get(i);
@@ -29,8 +28,6 @@
                 <tr><td>Fecha de Nacimiento:</td><td><input type="date" name="FECHA_NAC" class="text-box" value="<%= d.getFe_nacimiento()%>" required=""></td></tr>   
                 <tr><td>Sexo:</td><td>
                         <select name="SEXO" class="text-box" required="">
-                            <option value=""></option>
-
                             <%
                                 if (d.getEs_sexo().equals("M")) {
                             %>
@@ -38,7 +35,6 @@
                             <option value="F" >Femennino</option>
                             <%}
                             %>
-
                             <%
                                 if (d.getEs_sexo().equals("F")) {
                             %>
