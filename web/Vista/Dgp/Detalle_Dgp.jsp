@@ -47,7 +47,7 @@
     <body><center>
         <div >
 
-            <form>
+            <form action="../../dgp">
 
                 <table class="table table-hover">
                     <% for (int i = 0; i < LIST_ID_DGP.size(); i++) {
@@ -65,6 +65,8 @@
                     -->
                     <tr><td class="td-det">Puesto:</td><td><%=d.getNo_puesto()%></td></tr>
                     <tr><td class="td-det">Horario:</td><td><a href="../../horario?iddgp=<%=d.getId_dgp()%>&opc=Listar ">Ver Horario</a></td></tr>
+                    <input type="hidden" name="iddgp" value="<%=d.getId_dgp().trim()%>">
+                    <input type="hidden" name="idreq" value="<%=d.getId_requerimiento().trim()%>">
                     </tr>
                     <tr><td class="td-det">BEV: </td><td><%=d.getDe_bev()%></td></tr>
                     <tr><td class="td-det">Centro de Costos: </td><td><%=d.getCa_centro_costos()%></td></tr>
@@ -98,7 +100,6 @@
 
                     <td><a href="../../contrato?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=enviar">Hacer Contrato</a></td></tr>
                     <%}
-
                         if (d.getEs_dgp().equals("1") & num.equals("0") & !"ROL-0006".equals(idrol.trim())) {%>
                     <td><a href="">Ver Contrato</a></td></tr>
                     <%}
@@ -136,9 +137,12 @@
 
                     <tr><td colspan="2"><h3 style="text-align: center;">Registrar documentos</h3>
                             <a href="../../documento?iddgp=<%=request.getParameter("iddgp")%>&idtr=<%=request.getParameter("idtr")%>&opc=Reg_Pro_Dgp"class="btn btn-default" role="button">Siguiente</a></td></tr>
-                            <%}
+                    
+                    <%}
                                 }%>
-                </table>
+                    <input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>">
+                    <input type="hidden" name="opc" value="MODIFICAR REQUERIMIENTO">    
+                    <tr><td><input type="submit"  value="Modificar"></td><td></td></tr>
             </form>
         </div>
     </center>

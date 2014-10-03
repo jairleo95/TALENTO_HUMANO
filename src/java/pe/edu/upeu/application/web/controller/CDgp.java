@@ -191,6 +191,13 @@ public class CDgp extends HttpServlet {
             response.sendRedirect("Vista/Dgp/List_Dgp.jsp?iddep");
 
         }
+        if(opc.equals("MODIFICAR REQUERIMIENTO")){
+            String iddgp=request.getParameter("iddgp");
+            out.println(idtr+" "+iddgp+""+idreq);
+            getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(iddgp));
+          /*  response.sendRedirect("Vista/Dgp/Mod_DGP.jsp?idreq="+idreq);*/
+            
+        }
 
         /* } finally {
          out.close();
