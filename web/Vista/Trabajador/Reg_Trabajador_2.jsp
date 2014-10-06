@@ -21,7 +21,7 @@
         <meta charset="utf-8">
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
-        <title> SmartAdmin </title>
+        <title>Registrar Trabajador</title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -346,6 +346,14 @@
 
 
                                                         </ul>
+                                                        <div class="actions">
+                                                            <button type="button" class="btn btn-sm btn-primary btn-prev">
+                                                                <i class="fa fa-arrow-left"></i>Prev
+                                                            </button>
+                                                            <button type="button" class="btn btn-sm btn-success btn-next" data-last="Finish">
+                                                                Next<i class="fa fa-arrow-right"></i>
+                                                            </button>
+                                                        </div>
                                                         <div class="clearfix"></div>
                                                     </div>
                                                     <div class="tab-content">
@@ -831,7 +839,7 @@
 
                                                             </div>
                                                             <div class="row">
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-4">
 
                                                                     <div class="form-group">
 
@@ -855,7 +863,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-4">
                                                                     <div class="form-group">
 
                                                                         <div class="input-group">
@@ -866,7 +874,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-4">
                                                                     <div class="form-group">
 
                                                                         <div class="input-group">
@@ -878,8 +886,199 @@
                                                                 </div>
 
                                                             </div>
+
                                                             <div class="row">
-                                                                
+                                                                <div class="col-sm-4">
+
+                                                                    <div class="form-group">
+
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <select  id="dep_dir_a" class="form-control input-lg"  required="">
+                                                                                <option value="">[Departamento]</option>
+                                                                                <%for (int d = 0; d < List_Departamento.size(); d++) {
+                                                                                        Ub_Departamento dep = new Ub_Departamento();
+                                                                                        dep = (Ub_Departamento) List_Departamento.get(d);
+
+                                                                                %>
+                                                                                <option value="<%=dep.getId_departamento()%>" ><%=dep.getNo_departamento()%></option>
+                                                                                <%}%>
+
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-4">
+
+                                                                    <div class="form-group">
+
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <select  id="pro_dir_a" class="form-control input-lg"  required="">
+                                                                                <option value="">[Provincia]</option>
+
+
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-4">
+
+                                                                    <div class="form-group">
+
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <select name="DIR_DOM_A_DISTRITO_ID"  id="DOM_A_DISTRITO" class="form-control input-lg"  required="">
+                                                                                <option value="">[Distrito]</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <button onclick="duplicar();
+                                                                        return false;" >duplicar</button>
+                                                            </div>
+                                                            <br>
+                                                            <h3><strong>Step 3</strong> - Domicilio Legal (segun DNI)</h3>
+                                                            <label>Direccion :</label>
+                                                            <div class="row">
+                                                                <div class="col-sm-3">
+
+                                                                    <div class="form-group">
+
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <select name="DIR_DOM_LEG_D1_ID"  id="DOM_LEG_D1" class="form-control input-lg"  required="">
+                                                                                <option value="">[Seleccione]</option>
+                                                                                <option value="1">Avenida</option>
+                                                                                <option value="2">Jiron</option>
+                                                                                <option value="3">Manzana</option>
+                                                                                <option value="4">Calle</option>
+                                                                                <option value="5">Pasaje</option>
+                                                                                <option value="6">Alameda</option>
+                                                                                <option value="7">Malecón</option>
+                                                                                <option value="8">Ovalo</option>
+                                                                                <option value="9">Plaza</option>
+                                                                                <option value="10">Carretera</option>
+                                                                                <option value="11">Block</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3">
+
+                                                                    <div class="form-group">
+
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <input class="form-control input-lg"    placeholder="" type="text" name="DIR_DOM_LEG_D2" id="DOM_LEG_D2" maxlength="100">
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3">
+
+                                                                    <div class="form-group">
+
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <select name="DIR_DOM_LEG_D3_ID"  id="DOM_LEG_D3" class="form-control input-lg"  required="">
+                                                                                <option value="">[Seleccione]</option>
+                                                                                <option value="1">Número</option>
+                                                                                <option value="2">Lote</option>
+                                                                                <option value="3">S/N</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3">
+
+                                                                    <div class="form-group">
+
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <input class="form-control input-lg"    placeholder="" type="text" name="DIR_DOM_LEG_D4" id="DOM_LEG_D4" maxlength="100">
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-3">
+
+                                                                    <div class="form-group">
+
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <select name="DIR_DOM_LEG_D5_ID"  id="DOM_LEG_D5" class="form-control input-lg"  required="">
+                                                                                <option value="">[Seleccione]</option>
+                                                                                <option value="1">Urbanizacion</option>
+                                                                                <option value="2">Pueblo Joven</option>
+                                                                                <option value="3">Unidad Vecinal</option>
+                                                                                <option value="4">Conjuto Habitacional</option>
+                                                                                <option value="5">Asentamiento Humano</option>
+                                                                                <option value="6">Cooperativa</option>
+                                                                                <option value="7">Residencial</option>
+                                                                                <option value="8">Zona Industrial</option>
+                                                                                <option value="9">Grupo</option>
+                                                                                <option value="10">Caserío</option>
+                                                                                <option value="11">Fundo</option>
+                                                                                <option value="12">Ninguno</option> 
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3">
+
+                                                                    <div class="form-group">
+
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <input class="form-control input-lg"    placeholder="" type="text" name="DIR_DOM_LEG_D6" id="DOM_LEG_D6" maxlength="100">
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <div class="form-group">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <select   id="dep_dir_l" class="form-control input-lg"  required="">
+                                                                                <option value="">[Departamento]</option>
+                                                                                <%for (int d = 0; d < List_Departamento.size(); d++) {
+                                                                                        Ub_Departamento dep = new Ub_Departamento();
+                                                                                        dep = (Ub_Departamento) List_Departamento.get(d);
+
+                                                                                %>
+                                                                                <option value="<%=dep.getId_departamento()%>" ><%=dep.getNo_departamento()%></option>
+                                                                                <%}%>
+
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <div class="form-group">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <select   id="pro_dir_l" class="form-control input-lg"  required="">
+                                                                                <option value="">[Provincia]</option>
+
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <div class="form-group">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <select   name="DIR_DOM_LEG_DISTRITO_ID"   id="DOM_LEG_DISTRITO" class="form-control input-lg"  required="">
+                                                                                <option value="">[Distrito]</option>
+
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
 
@@ -890,6 +1089,7 @@
                                                             <br>
                                                             <h1 class="text-center text-success"><strong><i class="fa fa-check fa-lg"></i> Complete</strong></h1>
                                                             <h4 class="text-center">Click next to finish</h4>
+                                                            <input type="submit" value="Enviar" name="Registrar">
                                                             <br>
                                                             <br>
                                                         </div>
@@ -997,7 +1197,7 @@
                                             </div>
                                         </div>
                                         <div class="step-content">
-                                            <form class="form-horizontal" id="fuelux-wizard" method="post">
+                                            <form class="form-horizontal" id="fuelux-wizard" method="post" >
 
                                                 <div class="step-pane active" id="step1">
                                                     <h3><strong>Step 1 </strong> - Validation states</h3>
@@ -1167,16 +1367,16 @@
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
-                                                                                if (!window.jQuery) {
-                                                                                    document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
-                                                                                }
+                                                                    if (!window.jQuery) {
+                                                                        document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                                                                    }
         </script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script>
-                                                                                if (!window.jQuery.ui) {
-                                                                                    document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                                                                                }
+                                                                    if (!window.jQuery.ui) {
+                                                                        document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                                                                    }
         </script>
 
         <!-- IMPORTANT: APP CONFIG -->
@@ -1241,107 +1441,107 @@
 
         <script type="text/javascript">
 
-                                                                                // DO NOT REMOVE : GLOBAL FUNCTIONS!
+                                                                    // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-                                                                                $(document).ready(function() {
+                                                                    $(document).ready(function() {
 
-                                                                                    pageSetUp();
-
-
-
-                                                                                    //Bootstrap Wizard Validations
-
-                                                                                    var $validator = $("#wizard-1").validate({
-                                                                                        rules: {
-                                                                                            email: {
-                                                                                                required: true,
-                                                                                                email: "Your email address must be in the format of name@domain.com"
-                                                                                            },
-                                                                                            fname: {
-                                                                                                required: true
-                                                                                            },
-                                                                                            lname: {
-                                                                                                required: true
-                                                                                            },
-                                                                                            country: {
-                                                                                                required: true
-                                                                                            },
-                                                                                            city: {
-                                                                                                required: true
-                                                                                            },
-                                                                                            postal: {
-                                                                                                required: true,
-                                                                                                minlength: 4
-                                                                                            },
-                                                                                            wphone: {
-                                                                                                required: true,
-                                                                                                minlength: 10
-                                                                                            },
-                                                                                            hphone: {
-                                                                                                required: true,
-                                                                                                minlength: 10
-                                                                                            }
-                                                                                        },
-                                                                                        messages: {
-                                                                                            fname: "Please specify your First name",
-                                                                                            lname: "Please specify your Last name",
-                                                                                            email: {
-                                                                                                required: "We need your email address to contact you",
-                                                                                                email: "Your email address must be in the format of name@domain.com"
-                                                                                            }
-                                                                                        },
-                                                                                        highlight: function(element) {
-                                                                                            $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-                                                                                        },
-                                                                                        unhighlight: function(element) {
-                                                                                            $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
-                                                                                        },
-                                                                                        errorElement: 'span',
-                                                                                        errorClass: 'help-block',
-                                                                                        errorPlacement: function(error, element) {
-                                                                                            if (element.parent('.input-group').length) {
-                                                                                                error.insertAfter(element.parent());
-                                                                                            } else {
-                                                                                                error.insertAfter(element);
-                                                                                            }
-                                                                                        }
-                                                                                    });
-
-                                                                                    $('#bootstrap-wizard-1').bootstrapWizard({
-                                                                                        'tabClass': 'form-wizard',
-                                                                                        'onNext': function(tab, navigation, index) {
-                                                                                            var $valid = $("#wizard-1").valid();
-                                                                                            if (!$valid) {
-                                                                                                $validator.focusInvalid();
-                                                                                                return false;
-                                                                                            } else {
-                                                                                                $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass(
-                                                                                                        'complete');
-                                                                                                $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).find('.step')
-                                                                                                        .html('<i class="fa fa-check"></i>');
-                                                                                            }
-                                                                                        }
-                                                                                    });
+                                                                        pageSetUp();
 
 
-                                                                                    // fuelux wizard
-                                                                                    var wizard = $('.wizard').wizard();
 
-                                                                                    wizard.on('finished', function(e, data) {
-                                                                                        //$("#fuelux-wizard").submit();
-                                                                                        //console.log("submitted!");
-                                                                                        $.smallBox({
-                                                                                            title: "Congratulations! Your form was submitted",
-                                                                                            content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
-                                                                                            color: "#5F895F",
-                                                                                            iconSmall: "fa fa-check bounce animated",
-                                                                                            timeout: 4000
-                                                                                        });
+                                                                        //Bootstrap Wizard Validations
 
-                                                                                    });
+                                                                        var $validator = $("#wizard-1").validate({
+                                                                            rules: {
+                                                                                email: {
+                                                                                    required: true,
+                                                                                    email: "Your email address must be in the format of name@domain.com"
+                                                                                },
+                                                                                fname: {
+                                                                                    required: true
+                                                                                },
+                                                                                lname: {
+                                                                                    required: true
+                                                                                },
+                                                                                country: {
+                                                                                    required: true
+                                                                                },
+                                                                                city: {
+                                                                                    required: true
+                                                                                },
+                                                                                postal: {
+                                                                                    required: true,
+                                                                                    minlength: 4
+                                                                                },
+                                                                                wphone: {
+                                                                                    required: true,
+                                                                                    minlength: 10
+                                                                                },
+                                                                                hphone: {
+                                                                                    required: true,
+                                                                                    minlength: 10
+                                                                                }
+                                                                            },
+                                                                            messages: {
+                                                                                fname: "Please specify your First name",
+                                                                                lname: "Please specify your Last name",
+                                                                                email: {
+                                                                                    required: "We need your email address to contact you",
+                                                                                    email: "Your email address must be in the format of name@domain.com"
+                                                                                }
+                                                                            },
+                                                                            highlight: function(element) {
+                                                                                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                                                                            },
+                                                                            unhighlight: function(element) {
+                                                                                $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+                                                                            },
+                                                                            errorElement: 'span',
+                                                                            errorClass: 'help-block',
+                                                                            errorPlacement: function(error, element) {
+                                                                                if (element.parent('.input-group').length) {
+                                                                                    error.insertAfter(element.parent());
+                                                                                } else {
+                                                                                    error.insertAfter(element);
+                                                                                }
+                                                                            }
+                                                                        });
+
+                                                                        $('#bootstrap-wizard-1').bootstrapWizard({
+                                                                            'tabClass': 'form-wizard',
+                                                                            'onNext': function(tab, navigation, index) {
+                                                                                var $valid = $("#wizard-1").valid();
+                                                                                if (!$valid) {
+                                                                                    $validator.focusInvalid();
+                                                                                    return false;
+                                                                                } else {
+                                                                                    $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass(
+                                                                                            'complete');
+                                                                                    $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).find('.step')
+                                                                                            .html('<i class="fa fa-check"></i>');
+                                                                                }
+                                                                            }
+                                                                        });
 
 
-                                                                                })
+                                                                        // fuelux wizard
+                                                                        var wizard = $('.wizard').wizard();
+
+                                                                        wizard.on('finished', function(e, data) {
+                                                                            //$("#fuelux-wizard").submit();
+                                                                            //console.log("submitted!");
+                                                                            $.smallBox({
+                                                                                title: "Congratulations! Your form was submitted",
+                                                                                content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
+                                                                                color: "#5F895F",
+                                                                                iconSmall: "fa fa-check bounce animated",
+                                                                                timeout: 4000
+                                                                            });
+
+                                                                        });
+
+
+                                                                    })
 
         </script>
 

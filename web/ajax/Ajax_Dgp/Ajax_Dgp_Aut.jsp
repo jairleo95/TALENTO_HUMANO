@@ -69,7 +69,7 @@
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
                 rec.put("id_dgp", rs.getString("id_dgp"));
-                rec.put("nombre_p", rs.getString("nombre_p")+del );
+                rec.put("nombre_p", rs.getString("nombre_p"));
                 rec.put("id_trabajador", rs.getString("id_trabajador"));
                 rec.put("no_seccion", rs.getString("no_seccion"));
                 rec.put("no_puesto", rs.getString("no_puesto"));
