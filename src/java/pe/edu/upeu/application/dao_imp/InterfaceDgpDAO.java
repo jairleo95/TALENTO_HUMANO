@@ -46,5 +46,7 @@ public interface InterfaceDgpDAO {
     public int VALIDAR_DGP_CONTR(String id_dgp, String id_tr);
 
     public void REG_DGP_FINAL(String IDDGP);
+    
+    public void MOD_REQUE(String ID_DGP, String FE_DESDE, String FE_HASTA, double CA_SUELDO, String ID_PUESTO, String ID_REQUERIMIENTO,  double CA_BONO_ALIMENTARIO, double DE_BEV, double CA_CENTRO_COSTOS, String DE_ANTECEDENTES_POLICIALES, String DE_CERTIFICADO_SALUD);
 
 }

@@ -430,4 +430,29 @@ public class DgpDAO implements InterfaceDgpDAO {
         String sql = "UPDATE RHTM_DGP SET ES_DGP='0' WHERE ID_DGP='" + IDDGP.trim() + "'";
         this.conn.ejecutar(sql);
     }
+
+    @Override
+    public void MOD_REQUE(String ID_DGP, String FE_DESDE, String FE_HASTA, double CA_SUELDO, String ID_PUESTO, String ID_REQUERIMIENTO,  double CA_BONO_ALIMENTARIO, double DE_BEV, double CA_CENTRO_COSTOS, String DE_ANTECEDENTES_POLICIALES, String DE_CERTIFICADO_SALUD) {
+         try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_REQUERIMIENTO(  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+            cst.setString(1, c.convertFecha(FE_DESDE));
+            cst.setString(2, c.convertFecha(FE_HASTA));
+            cst.setDouble(3, CA_SUELDO);
+            cst.setString(4, ID_PUESTO);
+            cst.setString(5, ID_REQUERIMIENTO);
+            cst.setDouble(6, CA_BONO_ALIMENTARIO);
+            cst.setDouble(7, DE_BEV);
+            cst.setDouble(8, CA_CENTRO_COSTOS);
+            cst.setString(9, DE_ANTECEDENTES_POLICIALES);
+            cst.setString(10, DE_CERTIFICADO_SALUD);
+            cst.setString(11, ID_DGP);
+            cst.execute();
+
+        } catch (Exception ex) {
+            //  Logger.getLogger(DgpDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.conn.close();
+        }
+    }
 }

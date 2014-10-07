@@ -107,34 +107,34 @@
 
                     <tr><td class="td">Puesto | Seccion | Area:</td><td>
                             <select name="IDPUESTO"  required="" >
-                                <%
-                                    for (int j = 0; j < List_Puesto.size(); j++) {
-                                        V_Puesto_Direccion p = new V_Puesto_Direccion();
-                                        p = (V_Puesto_Direccion) List_Puesto.get(j);
-                                        for (int u = 0; u < LIST_ID_DGP.size(); u++) {
-                                             V_Det_DGP d = new V_Det_DGP();
-                                             d = (V_Det_DGP) LIST_ID_DGP.get(u);
-                                        if(p.getId_puesto().equals(d.getId_puesto())){        
-                                %>
-                                <option value="<%=p.getId_puesto()%>"><% out.println(p.getNo_puesto() + " | " + p.getNo_seccion() + " | " + p.getNo_area());%></option> 
-                                <%}%>
-                                <option value="<%=p.getId_puesto()%>"><% out.println(p.getNo_puesto() + " | " + p.getNo_seccion() + " | " + p.getNo_area());%></option> <%}} %>
-
-                            </select></td></tr>   
+                         <%
+                           for(int r=0;r<LIST_ID_DGP.size();r++){
+                           V_Det_DGP w= new V_Det_DGP();
+                           w=(V_Det_DGP)LIST_ID_DGP.get(r);
+                            for(int f=0;f< List_Puesto.size();f++){
+                            V_Puesto_Direccion p= new V_Puesto_Direccion();
+                            p= (V_Puesto_Direccion)List_Puesto.get(f);
+                            
+                                if( p.getId_puesto().equals(w.getId_puesto())){
+                         %>
+                         <option value="<%=p.getId_puesto()%>" selected=""><% out.println(p.getNo_puesto() + " | " + p.getNo_seccion() + " | " + p.getNo_area());%></option> 
+                           <%}%>
+                    <option value="<%=p.getId_puesto()%>"><% out.println(p.getNo_puesto() + " | " + p.getNo_seccion() + " | " + p.getNo_area());%></option> 
+                    <%}%>
+                    </select></td></tr>
+                    
                     <tr style="display: "><td class="td">Requermiento:</td><td>
-                            <select name="IDREQUERIMIENTO"    disabled="" onchange="mostrar()" class="text-box"   > 
+                            <select name="IDREQUERIMIENTO"  class="text-box"   > 
                                 <option value=""></option>
 
-                                <%
-                                    for (int index = 0; index < Listar_Requerimiento.size(); index++) {
-                                        Requerimiento r = new Requerimiento();
-                                        r = (Requerimiento) Listar_Requerimiento.get(index);
-                                        if (idreq.equals(r.getId_requerimiento())) {
+                                <% for(int index = 0; index < Listar_Requerimiento.size(); index++) {
+                                        Requerimiento t = new Requerimiento();
+                                        t = (Requerimiento) Listar_Requerimiento.get(index);
+                                        if (idreq.equals(t.getId_requerimiento())) {
                                 %>
-                                <option value="<%=r.getId_requerimiento()%>" selected="" ><%=r.getNo_req()%></option>
-
+                                <option value="<%=t.getId_requerimiento()%>" selected="" ><%=t.getNo_req()%></option>
                                 <%} else {%>
-                                <option value="<%=r.getId_requerimiento()%>"><%=r.getNo_req()%></option>                      
+                                <option value="<%=t.getId_requerimiento()%>"><%=t.getNo_req()%></option>                      
                                 <%                          }
             } %>
                             </select> 
@@ -142,24 +142,23 @@
                     <input type="hidden" name="IDREQUERIMIENTO"  id="combito"  value="<%=idreq%>" >
 
 
-                    <tr><td class="td">Fecha Desde:</td><td><input type="date" name="FEC_DESDE" min="<%%>" required="" id="datepicker" class="text-box" ></td></tr>     
-
-                    <tr><td class="td">Fecha Hasta:</td><td><input type="date" required="" min="<%%>" name="FEC_HASTA" class="text-box" ></td></tr>   
-                    <tr><td class="td">Sueldo:</td><td><input type="number"  name="SUELDO" required="" class="text-box" ></td></tr>       
-                    <tr><td class="td">Bono Alimentario:</td><td><input  type="text"  required="" name="BONO_ALIMENTARIO" class="text-box" ></td></tr>       
+                    <tr><td class="td">Fecha Desde:</td><td><input type="date" name="FEC_DESDE" min="<%%>" required="" id="datepicker" class="text-box" value="<%=w.getFe_desde()%>"></td></tr>     
+                    <tr><td class="td">Fecha Hasta:</td><td><input type="date" required="" min="<%%>" name="FEC_HASTA" class="text-box" value="<%=w.getFe_hasta()%>"></td></tr>   
+                    <tr><td class="td">Sueldo:</td><td><input type="number"  name="SUELDO" required="" class="text-box" value="<%=w.getCa_sueldo()%>"></td></tr>       
+                    <tr><td class="td">Bono Alimentario:</td><td><input  type="text"  required="" name="BONO_ALIMENTARIO" class="text-box" value="<%=w.getCa_bono_alimentario()%>" ></td></tr>       
 
                 </table>
             </div>
             <div id="div_1" class="contenido" style="display:none ">
                 <table class="table">
-                    <tr><td class="td">BEV:</td><td><input type="text" name="BEV" class="text-box" ></td></tr>    
+                    <tr><td class="td">BEV:</td><td><input type="text" name="BEV" class="text-box" value="<%=w.getDe_bev()%>"></td></tr>    
                     <tr><td class="td">Centro de Costos:</td><td>
                             <select name="CENTRO_COSTOS">
                                 <option value="0">----</option>
                             </select>
                         </td></tr>    
-                    <tr><td class="td">Antecedentes Policiales:</td><td><input type="text" name="ANTECEDENTES_POLICIALES" class="text-box" ></td></tr>     
-                    <tr><td class="td">Certificado de Salud:</td><td><input type="text" name="CERTIFICADO_SALUD" class="text-box" ></td></tr>   
+                    <tr><td class="td">Antecedentes Policiales:</td><td><input type="text" name="ANTECEDENTES_POLICIALES" class="text-box" value="<%=w.getDe_antecedentes_policiales()%>"></td></tr>     
+                    <tr><td class="td">Certificado de Salud:</td><td><input type="text" name="CERTIFICADO_SALUD" class="text-box" value="<%=w.getDe_certificado_salud()%>"></td></tr>   
 
                 </table>
             </div>   
@@ -184,11 +183,12 @@
                     <tr><td class="td">Monto del Honorario:</td><td><input type="text" name="MONTO_HONORARIO" class="text-box" ></td></tr>   
                     <tr><td class="td">Periodo Pago:</td><td><input type="text" name="PERIODO_PAGO" class="text-box" ></td></tr>    
                     <tr><td class="td">Domicilio Fiscal:</td><td><input type="text" name="DOMICILIO_FISCAL" class="text-box" ></td></tr>    
+                    <input type="hidden"  name="ID_DGP" value="<%=w.getId_dgp()%>">
                 </table>
             </div>
+            <%}%>
 
-
-            <table><tr><td><input type="submit" name="opc"  class="submit" value="Registrar"></td></tr>
+            <table><tr><td><input type="submit" name="opc"  class="submit" value="MODIFICAR"></td></tr>
             </table>
         </form>
     </center>

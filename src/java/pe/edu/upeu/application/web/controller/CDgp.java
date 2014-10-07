@@ -193,10 +193,31 @@ public class CDgp extends HttpServlet {
         }
         if(opc.equals("MODIFICAR REQUERIMIENTO")){
             String iddgp=request.getParameter("iddgp");
-            out.println(idtr+" "+iddgp+""+idreq);
+            out.println(idtr+" "+iddgp+""+idreq+""+iddep+""+idpuesto);
             getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(iddgp));
-          /*  response.sendRedirect("Vista/Dgp/Mod_DGP.jsp?idreq="+idreq);*/
-            
+            getServletContext().setAttribute("Listar_Trabajador_id",tr.ListaridTrabajador(idtr));
+            getServletContext().setAttribute("List_Puesto",pu.List_Puesto_Dep(iddep));
+            getServletContext().setAttribute("Listar_Requerimiento",IReq.Listar_Requerimiento());
+            response.sendRedirect("Vista/Dgp/Mod_DGP.jsp?idreq="+idreq);
+        }
+        if(opc.equals("MODIFICAR")){
+            String ID_DGP = request.getParameter("ID_DGP");
+            String FE_DESDE = request.getParameter("FEC_DESDE");
+            String FE_HASTA = request.getParameter("FEC_HASTA");
+            double CA_SUELDO = Double.parseDouble(request.getParameter("SUELDO"));
+            String ID_PUESTO = request.getParameter("IDPUESTO");
+            String ID_REQUERIMIENTO = request.getParameter("IDREQUERIMIENTO");
+            double CA_BONO_ALIMENTARIO = Double.parseDouble(request.getParameter("BONO_ALIMENTARIO"));
+            double DE_BEV = Double.parseDouble(request.getParameter("BEV"));
+            double CA_CENTRO_COSTOS = Double.parseDouble(request.getParameter("CENTRO_COSTOS"));
+            String DE_ANTECEDENTES_POLICIALES = request.getParameter("ANTECEDENTES_POLICIALES");
+            String DE_CERTIFICADO_SALUD = request.getParameter("CERTIFICADO_SALUD");
+            dgp.MOD_REQUE(ID_DGP, FE_DESDE, FE_HASTA, CA_SUELDO, ID_PUESTO, ID_REQUERIMIENTO, CA_BONO_ALIMENTARIO, DE_BEV, CA_CENTRO_COSTOS, DE_ANTECEDENTES_POLICIALES, DE_CERTIFICADO_SALUD);
+            String ID_TRABAJADOR=request.getParameter("IDDATOS_TRABAJADOR");
+            getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(ID_DGP));
+            int num = dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
+            getServletContext().setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
+            response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&iddgp=" + ID_DGP );
         }
 
         /* } finally {

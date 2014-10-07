@@ -59,24 +59,23 @@ public class PuestoDAO implements InterfacePuestoDAO {
  @Override
     public List<V_Puesto_Direccion> List_Puesto_Dep(String id_departamento) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select  * from RHVD_PUESTO_DIRECCION where id_departamento='"+id_departamento+"' ORDER BY ID_PUESTO ASC";
+        String sql = "select  * from RHVD_PUESTO_DIRECCION where id_departamento='"+id_departamento.trim()+"' ORDER BY ID_PUESTO ASC";
         List<V_Puesto_Direccion> list = new ArrayList<V_Puesto_Direccion>();
         try {
             ResultSet rs = this.conn.query(sql);
 
             while (rs.next()) {
                 V_Puesto_Direccion  p = new V_Puesto_Direccion();
-                p.setId_area(rs.getString("id_area"));
-                p.setId_departamento(rs.getString("id_departamento"));
-                p.setId_direccion(rs.getString("id_direccion"));
-                p.setId_puesto(rs.getString("id_puesto"));
-                p.setId_seccion(rs.getString("id_seccion"));
-                p.setNo_area(rs.getString("no_area"));
-                p.setNo_dep(rs.getString("no_dep"));
                 p.setNo_direccion(rs.getString("no_direccion"));
-                p.setNo_puesto(rs.getString("no_puesto"));
+                p.setId_direccion(rs.getString("id_direccion"));
+                p.setNo_dep(rs.getString("no_dep"));
+                p.setId_departamento(rs.getString("id_departamento"));
+                p.setNo_area(rs.getString("no_area"));
+                p.setId_area(rs.getString("id_area"));
                 p.setNo_seccion(rs.getString("no_seccion"));
-                
+                p.setId_seccion(rs.getString("id_seccion"));
+                p.setNo_puesto(rs.getString("no_puesto"));
+                p.setId_puesto(rs.getString("id_puesto"));
                 list.add(p);
             }
         } catch (SQLException e) {
