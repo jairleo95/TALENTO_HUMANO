@@ -346,14 +346,7 @@
 
 
                                                         </ul>
-                                                        <div class="actions">
-                                                            <button type="button" class="btn btn-sm btn-primary btn-prev">
-                                                                <i class="fa fa-arrow-left"></i>Prev
-                                                            </button>
-                                                            <button type="button" class="btn btn-sm btn-success btn-next" data-last="Finish">
-                                                                Next<i class="fa fa-arrow-right"></i>
-                                                            </button>
-                                                        </div>
+                                                        
                                                         <div class="clearfix"></div>
                                                     </div>
                                                     <div class="tab-content">
