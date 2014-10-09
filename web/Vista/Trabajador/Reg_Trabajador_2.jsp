@@ -75,7 +75,7 @@
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <script type="text/javascript">
             $(document).ready(
-                    function() {
+                    function () {
 
 
                         var tip = $("#pro_dir_l");
@@ -83,7 +83,7 @@
                         var rg = $("#dep_dir_l").val();
                         var data = "id_dep=" + rg + "&opc=dep_nac";
                         tip.append('<option value="">Cargando...</option>').val('');
-                        $.post("../../ubigeo", data, function(objJson) {
+                        $.post("../../ubigeo", data, function (objJson) {
                             tip.empty();
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
@@ -109,7 +109,7 @@
                         var rg = $("#pro_dir_l").val();
                         var data = "id_dist=" + rg + "&opc=pro_nac";
                         ti.append('<option value="">Cargando...</option>').val('');
-                        $.post("../../ubigeo", data, function(objJson) {
+                        $.post("../../ubigeo", data, function (objJson) {
                             ti.empty();
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
@@ -131,9 +131,10 @@
 
 
                         $(".doc").attr("maxlength", "8");
+                          $(".doc").attr("minlength", "8");
                         $(".doc").val("");
                         $("#nac").change(
-                                function() {
+                                function () {
                                     if ($("#nac").val() != "NAC-0044") {
                                         $("#dist").hide();
                                         $("#dist_nac").val("DST-001832");
@@ -147,7 +148,7 @@
                                 }
                         );
 
-                        $("#sit_edu").change(function() {
+                        $("#sit_edu").change(function () {
                             if ($("#sit_edu").val() == 'SED-0011' | $("#sit_edu").val() == 'SED-0013' | $("#sit_edu").val() == 'SED-0014'
                                     | $("#sit_edu").val() == 'SED-0015'
                                     | $("#sit_edu").val() == 'SED-0016' | $("#sit_edu").val() == 'SED-0017'
@@ -170,7 +171,7 @@
 
                         });
 
-                        $("#es_inst_p").change(function() {
+                        $("#es_inst_p").change(function () {
                             if ($("#inst_peru").val() == "1") {
                                 $("#regimen").show();
                                 $("#egreso").show();
@@ -189,12 +190,13 @@
                         });
 
                         $(".select-doc").change(
-                                function() {
+                                function () {
                                     $(".doc").val("");
                                     if ($(".select-doc").val() == 1) {
-                                        $("#doc").numeric(false, function() {
+                                        $("#doc").numeric(false, function () {
                                         });
                                         $(".doc").attr("maxlength", "8");
+                                        $(".doc").attr("minlength", "8");
                                         // $(".doc").val("");
 
                                     }
@@ -202,11 +204,13 @@
 
                                         $("#doc").removeNumeric();
                                         $(".doc").attr("maxlength", "10");
+                                         $(".doc").removeAttr("minlength");
                                         //    $(".doc").val("");
                                     }
                                     if ($(".select-doc").val() == 3) {
                                         $("#doc").removeNumeric();
                                         $(".doc").attr("maxlength", "10");
+                                        $(".doc").removeAttr("minlength");
                                     }
                                 }
                         );
@@ -216,10 +220,10 @@
         <!--Alerta para la edad -->
         <script type="text/javascript">
             $(document).ready(
-                    function() {
+                    function () {
                         $(".alerta-req").hide();
                         $("#edad").change(
-                                function() {
+                                function () {
                                     $(".alerta-req").hide();
                                     var fecha = $("#edad").val();
                                     var fechaActual = new Date();
@@ -258,8 +262,9 @@
 
         </script>
         <style>
-            .btn-duplicar{
-                margin-left: 30%;
+            #btn-duplicar{
+                margin: 1%;
+                margin-left:  6%;
             }
         </style>
 
@@ -327,7 +332,7 @@
                                     <div class="widget-body">
 
                                         <div class="row">
-                                            <form id="wizard-1" novalidate="novalidate">
+                                            <form id="wizard-1" novalidate="novalidate" action="../../trabajador">
                                                 <div id="bootstrap-wizard-1" class="col-sm-12">
                                                     <div class="form-bootstrapWizard">
                                                         <ul class="bootstrapWizard form-wizard">
@@ -341,21 +346,18 @@
                                                                 <a href="#tab3" data-toggle="tab"> <span class="step">3</span> <span class="title">Aspecto Social</span> </a>
                                                             </li>
                                                             <li data-target="#step4">
-                                                                <a href="#tab4" data-toggle="tab"> <span class="step">4</span> <span class="title">Save Form</span> </a>
+                                                                <a href="#tab4" data-toggle="tab"> <span class="step">4</span> <span class="title">Datos Adicionales</span> </a>
                                                             </li>
 
 
                                                         </ul>
-                                                        
+
                                                         <div class="clearfix"></div>
                                                     </div>
                                                     <div class="tab-content">
                                                         <div class="tab-pane active" id="tab1">
                                                             <br>
                                                             <h3><strong>Step 1 </strong> - Basic Information</h3>
-
-
-
                                                             <div class="row">
                                                                 <div class="col-sm-4">
 
@@ -510,7 +512,7 @@
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <select name="ESTADO_CIVIL" class="form-control input-lg select-doc"  required="">
+                                                                            <select name="ESTADO_CIVIL" class="form-control input-lg"  required="">
                                                                                 <option value="">[Estado Civil]</option>
                                                                                 <option value="1">Soltero(a)</option>
                                                                                 <option value="2">Casado(a)</option>
@@ -556,7 +558,7 @@
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="TELEFONO" id="doc" placeholder="Teléfono"  formnovalidate maxlength="50" class="form-control input-lg" >
+                                                                            <input type="text" name="TELEFONO" id="doc" placeholder="Teléfono"  data-mask="+99 (999) 999-9999" data-mask-placeholder= "X"   formnovalidate maxlength="50" class="form-control input-lg" >
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -564,7 +566,7 @@
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="CELULAR" id="doc" placeholder="Celular"  formnovalidate maxlength="38" class="form-control input-lg" >
+                                                                            <input type="text" name="CELULAR" id="doc" placeholder="Celular"  data-mask="999-999-999" data-mask-placeholder= "X" formnovalidate maxlength="38" class="form-control input-lg" >
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -587,7 +589,24 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <script>
+                                                                $(document).ready(
+                                                                        function () {
+                                                                            $("#sis_pens").change(
+                                                                                    function () {
+                                                                                        if ($("#sis_pens").val() != "1") {
+                                                                                            $("#nom_afp").val("6");
+                                                                                        }
+                                                                                        if ($("#sis_pens").val() == "1") {
 
+                                                                                            $("#nom_afp").val("");
+                                                                                        }
+                                                                                    }
+                                                                            );
+
+                                                                        });
+
+                                                            </script>
 
                                                             <div class="row">
 
@@ -595,7 +614,7 @@
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <select name="SISTEMA_PENSIONARIO" class="form-control input-lg"  required="">
+                                                                            <select name="SISTEMA_PENSIONARIO" class="form-control input-lg"  id="sis_pens" required="">
                                                                                 <option value="">[Sistema Pensionario]</option>
                                                                                 <option value="1">AFP</option>
                                                                                 <option value="2">ONP</option>
@@ -610,13 +629,14 @@
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <select name="NOMBRE_AFP_ID" class="form-control input-lg"  required="">
+                                                                            <select name="NOMBRE_AFP_ID" class="form-control input-lg" id="nom_afp" required="">
                                                                                 <option value="">[Nombre AFP]</option>
                                                                                 <option value="1">Integra</option>
                                                                                 <option value="2">Prima</option>
                                                                                 <option value="3">Profuturo</option>
                                                                                 <option value="4">Horizonte</option>
-                                                                                <option value="4">Habitat</option>
+                                                                                <option value="5">Habitat</option>
+                                                                                <option value="6">Ninguno</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -735,7 +755,7 @@
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-lg"  placeholder="Año Egreso" type="text" name="A_EGRESO" >
+                                                                            <input class="form-control input-lg"  placeholder="Año Egreso" type="text"   maxlength="4" minlength="4"   name="A_EGRESO" >
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -748,6 +768,8 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                                            <!--  <input pattern=".{3,}" required title="3 characters minimum">
+                                                                            <input pattern=".{5,10}" required title="5 to 10 characters">-->
                                                             <div class="row">
 
                                                                 <div class="col-sm-10">
@@ -881,7 +903,7 @@
                                                             </div>
 
                                                             <div class="row">
-                                                                <div class="col-sm-4">
+                                                                <div class="col-sm-3">
 
                                                                     <div class="form-group">
 
@@ -901,7 +923,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-4">
+                                                                <div class="col-sm-3">
 
                                                                     <div class="form-group">
 
@@ -915,7 +937,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-4">
+                                                                <div class="col-sm-3">
 
                                                                     <div class="form-group">
 
@@ -928,7 +950,10 @@
                                                                     </div>
                                                                 </div>
                                                                 <button onclick="duplicar();
-                                                                        return false;" >duplicar</button>
+                                                                        return false;"  class="btn btn-primary" id="btn-duplicar">Duplicar</button>
+
+
+
                                                             </div>
                                                             <br>
                                                             <h3><strong>Step 3</strong> - Domicilio Legal (segun DNI)</h3>
@@ -997,10 +1022,8 @@
 
                                                             </div>
                                                             <div class="row">
-                                                                <div class="col-sm-3">
-
+                                                                <div class="col-sm-6">
                                                                     <div class="form-group">
-
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select name="DIR_DOM_LEG_D5_ID"  id="DOM_LEG_D5" class="form-control input-lg"  required="">
@@ -1021,7 +1044,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-6">
 
                                                                     <div class="form-group">
 
@@ -1032,7 +1055,12 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3">
+
+
+
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
@@ -1050,7 +1078,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
@@ -1061,7 +1089,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
@@ -1072,19 +1100,151 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
+
                                                             </div>
                                                         </div>
 
 
                                                         <div class="tab-pane" id="tab4">
-                                                            <br>
-                                                            <h3><strong>Step 4</strong> - Save Form</h3>
-                                                            <br>
-                                                            <h1 class="text-center text-success"><strong><i class="fa fa-check fa-lg"></i> Complete</strong></h1>
-                                                            <h4 class="text-center">Click next to finish</h4>
-                                                            <input type="submit" value="Enviar" name="Registrar">
-                                                            <br>
-                                                            <br>
+                                                            <h3><strong>Step 4</strong> - Ingresos de Quinta Categoria</h3>
+
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+
+                                                                    <div class="form-group">
+
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <input class="form-control input-lg"    placeholder="Empresa" type="text" name="ING_QTA_CAT_EMPRESA"  maxlength="100">
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+
+                                                                    <div class="form-group">
+
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <input class="form-control input-lg"    placeholder="RUC" type="text" name="ING_QTA_CAT_RUC"  maxlength="20">
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
+                                                            <div class="row">
+
+                                                                <div class="col-sm-12">
+
+                                                                    <div class="form-group">
+
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <textarea name="ING_QTA_CAT_OTRAS_EMPRESAS"  placeholder="Otras Empresas"  class="form-control input-lg"  cols="60" rows="6" maxlength="500" ></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <h3><strong>Step 4</strong> - Informacion Religiosa</h3>
+
+                                                            <div class="row">
+                                                                <div class="col-sm-4">
+
+                                                                    <div class="form-group">
+
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <select  class="form-control input-lg"  required="" >
+                                                                                <option value="">[Religión]</option>
+                                                                                <option value="1">Adventista</option>
+                                                                                <option value="2">Catolico</option>
+                                                                                <option value="3">Otros</option>
+                                                                            </select>   
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-4">
+
+                                                                    <div class="form-group">
+
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <input class="form-control input-lg"    placeholder="Iglesia" type="text" name="IGLESIA"   maxlength="30" required="">
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-4">
+
+                                                                    <div class="form-group">
+
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <input class="form-control input-lg"    placeholder="Cargo en la Iglesia" type="text" name="CARGO"  maxlength="30">
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="row"> 
+                                                                <div class="col-sm-3">
+
+                                                                    <div class="form-group">
+
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <select  name="AUTORIDAD" class="form-control input-lg"   >
+                                                                                <option value="">[Autoridad]</option>
+                                                                                <option value="1">Pastor</option>
+                                                                                <option value="2">Primer Anciano</option>
+                                                                                <option value="3">Sacerdote</option>
+                                                                            </select>   
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3">
+
+                                                                    <div class="form-group">
+
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <input class="form-control input-lg"    placeholder="Nombres y Apellidos" type="text" name="AUT_APELLIDOSNOMBRES"  maxlength="90">
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3">
+
+                                                                    <div class="form-group">
+
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <input class="form-control input-lg"    placeholder="Telefono/Celular" type="text" name="AUT_CELULAR"  maxlength="20">
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+
+                                                                <div class="col-sm-12">
+
+                                                                    <div class="form-group">
+
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <textarea name="ING_QTA_CAT_OTRAS_EMPRESAS"  placeholder="Otras Empresas"  class="form-control input-lg"  cols="60" rows="6" maxlength="500" ></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <input type="submit" name="opc"  class="submit" value="Registrar">
+
                                                         </div>
 
 
@@ -1436,7 +1596,7 @@
 
                                                                     // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-                                                                    $(document).ready(function() {
+                                                                    $(document).ready(function () {
 
                                                                         pageSetUp();
 
@@ -1483,15 +1643,15 @@
                                                                                     email: "Your email address must be in the format of name@domain.com"
                                                                                 }
                                                                             },
-                                                                            highlight: function(element) {
+                                                                            highlight: function (element) {
                                                                                 $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
                                                                             },
-                                                                            unhighlight: function(element) {
+                                                                            unhighlight: function (element) {
                                                                                 $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
                                                                             },
                                                                             errorElement: 'span',
                                                                             errorClass: 'help-block',
-                                                                            errorPlacement: function(error, element) {
+                                                                            errorPlacement: function (error, element) {
                                                                                 if (element.parent('.input-group').length) {
                                                                                     error.insertAfter(element.parent());
                                                                                 } else {
@@ -1502,7 +1662,7 @@
 
                                                                         $('#bootstrap-wizard-1').bootstrapWizard({
                                                                             'tabClass': 'form-wizard',
-                                                                            'onNext': function(tab, navigation, index) {
+                                                                            'onNext': function (tab, navigation, index) {
                                                                                 var $valid = $("#wizard-1").valid();
                                                                                 if (!$valid) {
                                                                                     $validator.focusInvalid();
@@ -1520,7 +1680,7 @@
                                                                         // fuelux wizard
                                                                         var wizard = $('.wizard').wizard();
 
-                                                                        wizard.on('finished', function(e, data) {
+                                                                        wizard.on('finished', function (e, data) {
                                                                             //$("#fuelux-wizard").submit();
                                                                             //console.log("submitted!");
                                                                             $.smallBox({
@@ -1544,7 +1704,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function() {
+            (function () {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
@@ -1558,24 +1718,24 @@
         <!--Solo numeros -->
         <script type="text/javascript">
             $("#docs").numeric();
-            $("#doc").numeric(false, function() {
+            $("#doc").numeric(false, function () {
                 alert("Solo Numeros Enteros");
                 this.value = "";
                 this.focus();
             });
-            $(".positive").numeric({negative: false}, function() {
+            $(".positive").numeric({negative: false}, function () {
                 alert("No negative values");
                 this.value = "";
                 this.focus();
             });
-            $(".positive-integer").numeric({decimal: false, negative: false}, function() {
+            $(".positive-integer").numeric({decimal: false, negative: false}, function () {
                 alert("Positive integers only");
                 this.value = "";
                 this.focus();
             });
 
             $("#remove").click(
-                    function(e)
+                    function (e)
                     {
                         e.preventDefault();
                         $(".numeric,.integer,.positive").removeNumeric();
@@ -1617,13 +1777,13 @@
         <!--Select dinamicos-->
         <script type="text/javascript">
             /*Ubigeo*/
-            $("#dep_nac").change(function() {
+            $("#dep_nac").change(function () {
                 var ti = $("#pro_nac");
                 ti.empty();
                 var rg = $("#dep_nac").val();
                 var data = "id_dep=" + rg + "&opc=dep_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
+                $.post("../../ubigeo", data, function (objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -1641,13 +1801,13 @@
                     }
                 });
             });
-            $("#pro_nac").change(function() {
+            $("#pro_nac").change(function () {
                 var ti = $("#dist_nac");
                 ti.empty();
                 var rg = $("#pro_nac").val();
                 var data = "id_dist=" + rg + "&opc=pro_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
+                $.post("../../ubigeo", data, function (objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -1665,13 +1825,13 @@
                     }
                 });
             });
-            $("#dep_dir_a").change(function() {
+            $("#dep_dir_a").change(function () {
                 var ti = $("#pro_dir_a");
                 ti.empty();
                 var rg = $("#dep_dir_a").val();
                 var data = "id_dep=" + rg + "&opc=dep_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
+                $.post("../../ubigeo", data, function (objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -1689,13 +1849,13 @@
                     }
                 });
             });
-            $("#pro_dir_a").change(function() {
+            $("#pro_dir_a").change(function () {
                 var ti = $("#DOM_A_DISTRITO");
                 ti.empty();
                 var rg = $("#pro_dir_a").val();
                 var data = "id_dist=" + rg + "&opc=pro_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
+                $.post("../../ubigeo", data, function (objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -1713,13 +1873,13 @@
                     }
                 });
             });
-            $("#dep_dir_l").change(function() {
+            $("#dep_dir_l").change(function () {
                 var ti = $("#pro_dir_l");
                 ti.empty();
                 var rg = $("#dep_dir_l").val();
                 var data = "id_dep=" + rg + "&opc=dep_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
+                $.post("../../ubigeo", data, function (objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -1737,13 +1897,13 @@
                     }
                 });
             });
-            $("#pro_dir_l").change(function() {
+            $("#pro_dir_l").change(function () {
                 var ti = $("#DOM_LEG_DISTRITO");
                 ti.empty();
                 var rg = $("#pro_dir_l").val();
                 var data = "id_dist=" + rg + "&opc=pro_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
+                $.post("../../ubigeo", data, function (objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -1766,14 +1926,14 @@
 
 
             /*Datos Academicos*/
-            $("#rg").change(function() {
+            $("#rg").change(function () {
                 var ti = $("#ti_inst");
                 ti.empty();
                 var rg = $("#rg").val();
                 var data = "regimen=" + rg + "&opc=ti_inst";
 
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../detalle_carrera", data, function(objJson) {
+                $.post("../../detalle_carrera", data, function (objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -1793,7 +1953,7 @@
             });
 
 
-            $("#ti_inst").change(function() {
+            $("#ti_inst").change(function () {
                 var inst = $("#inst");
                 inst.empty();
                 var ti = $("#ti_inst").val();
@@ -1802,7 +1962,7 @@
                  }*/
                 var data = "ti=" + ti + "&opc=institucion";
                 inst.append('<option value="">Cargando...</option>').val('');
-                $.post("../../detalle_carrera", data, function(objJson) {
+                $.post("../../detalle_carrera", data, function (objJson) {
                     inst.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -1820,7 +1980,7 @@
                     }
                 });
             });
-            $("#inst").change(function() {
+            $("#inst").change(function () {
                 var carr = $("#carrera");
                 carr.empty();
                 var insti = $("#inst").val();
@@ -1829,7 +1989,7 @@
                  }*/
                 var data = "inst=" + insti + "&opc=carrera";
                 carr.append('<option value="">Cargando...</option>').val('');
-                $.post("../../detalle_carrera", data, function(objJson) {
+                $.post("../../detalle_carrera", data, function (objJson) {
                     carr.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
