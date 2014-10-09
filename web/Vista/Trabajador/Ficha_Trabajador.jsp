@@ -89,8 +89,8 @@
             <%}
                 if (count > 0) {%>
             <br>
-            <table class="table table-hover">
-                <tr class="tab_cabe">
+            <table class="table table-hover" >
+                <tr class="tab_cabe" >
                     <td>Nro</td>
                     <td>Foto</td>
                     <td>Nombres Y Apellidos</td>

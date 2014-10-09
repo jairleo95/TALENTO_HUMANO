@@ -6,6 +6,8 @@
         <meta charset="windows-1252">
         <link type="text/css" rel="stylesheet" href="../../css/Css_Reporte/Reportes.css">
         <link rel="stylesheet" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
 
         <title></title>
     </head>
@@ -85,7 +87,7 @@
         <strong>No se encontraron registros...</strong>
         <%}
             if (count > 0) {%>
-        <table class="table table-hover"  >
+        <table class="table table-hover" style="width: 50%" >
             <tr class="tab_cabe">
                 <td>Nro</td>
                 <td>Foto</td>
@@ -100,10 +102,11 @@
             <tr>
                 <td><%out.println(i + 1);%></td>         
 
-                <td><img src="../../imagenes/avatar_default.jpg"  width="80"  height="80"></td>
+                <td><img src="../../imagenes/avatar_default.jpg"  width="50"  height="50"></td>
                 <td><div ><a href="../../trabajador?idtr=<%=tr.getId_trabajador()%>&opc=list"><%=tr.getAp_paterno().toUpperCase() + " " + tr.getAp_materno().toUpperCase() + " " + tr.getNo_trabajador().toUpperCase()%></a></div></td>
                 <td><%=tr.getNo_carrera()%></td>
-                <td><a href="../../dgp?idtr=<%=tr.getId_trabajador()%>&idreq=<%=idreq%>&iddep=<%=iddep%>&opc=Reg_form">Elaborar Requerimiento</a></td>
+                <td><a href="../../dgp?idtr=<%=tr.getId_trabajador()%>&idreq=<%=idreq%>&iddep=<%=iddep%>&opc=Reg_form" class="btn bg-color-teal txt-color-white">Elaborar Requerimiento</a></td>
+
             </tr>
             <%
                         }
