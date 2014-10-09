@@ -850,6 +850,17 @@
                                                                                        
                                                                                     }
                                                                             );
+                                                                            $("#reli").change(
+                                                                                    function () {
+                                                                                        if ($("#reli").val() == "1") {
+                                                                                            $("#igle").attr("required","required")
+                                                                                        }else{
+                                                                                            
+                                                                                             $("#igle").removeAttr("required");
+                                                                                        }
+                                                                                       
+                                                                                    }
+                                                                            );
 
                                                                         });
 
@@ -1185,7 +1196,7 @@
 
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
-                                                                            <select  class="form-control input-lg"  required="" >
+                                                                            <select  class="form-control input-lg"  id="reli" required="" >
                                                                                 <option value="">[Religión]</option>
                                                                                 <option value="1">Adventista</option>
                                                                                 <option value="2">Catolico</option>
@@ -1201,7 +1212,7 @@
 
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-lg"    placeholder="Iglesia" type="text" name="IGLESIA"   maxlength="30" required="">
+                                                                            <input class="form-control input-lg"    placeholder="Iglesia" type="text" name="IGLESIA"   maxlength="30" id="igle">
 
                                                                         </div>
                                                                     </div>

@@ -37,7 +37,7 @@
 
 
         <script language="javascript" type="text/javascript">
-            $(document).ready(function() {
+            $(document).ready(function () {
                 $(".contenido").hide();
 
                 /*TEMPORAL*/
@@ -130,30 +130,66 @@
                                 <%} else {%>
                                 <option value="<%=r.getId_requerimiento()%>"><%=r.getNo_req()%></option>                      
                                 <%                          }
-            } %>
+                                    }%>
                             </select> 
                         </td></tr>   
+                    <script>
+                        $(document).ready(
+                                function () {
+                                    $("#sueldo").keyup(
+                                            function () {
+                                              var   x = parseFloat($("#sueldo").val());
+                                               var  y =parseFloat($("#bono_al").val());
+                                                var z =parseFloat($("#bev").val());
+                                                var v=x+y+z;
+                                                $("#suel_total").text(v);
+                                            }
+                                    );
+                                    $("#bono_al").keyup(
+                                            function () {
+                                           var   x = parseFloat($("#sueldo").val());
+                                               var  y =parseFloat($("#bono_al").val());
+                                                var z =parseFloat($("#bev").val());
+                                                var v=x+y+z;
+                                                $("#suel_total").text(v);
+                                            }
+                                    );
+                                    $("#bev").keyup(
+                                            function () {
+                                           var   x = parseFloat($("#sueldo").val());
+                                               var  y =parseFloat($("#bono_al").val());
+                                                var z =parseFloat($("#bev").val());
+                                                var v=x+y+z;
+                                                $("#suel_total").text(v);
+                                            }
+                                    );
+
+                                }
+                        );
+                    </script>
                     <input type="hidden" name="IDREQUERIMIENTO"  id="combito"  value="<%=idreq%>" >
+                    <tr><td class="td">Fecha de Inicio:</td><td><input type="date" name="FEC_DESDE" min="<%%>" required="" id="datepicker" class="text-box" ></td></tr>     
 
-
-                    <tr><td class="td">Fecha Desde:</td><td><input type="date" name="FEC_DESDE" min="<%%>" required="" id="datepicker" class="text-box" ></td></tr>     
-
-                    <tr><td class="td">Fecha Hasta:</td><td><input type="date" required="" min="<%%>" name="FEC_HASTA" class="text-box" ></td></tr>   
-                    <tr><td class="td">Sueldo:</td><td><input type="number"  name="SUELDO" required="" class="text-box" ></td></tr>       
-                    <tr><td class="td">Bono Alimentario:</td><td><input  type="text"  required="" name="BONO_ALIMENTARIO" class="text-box" ></td></tr>       
+                    <tr><td class="td">Fecha de Cese:</td><td><input type="date" required="" min="<%%>" name="FEC_HASTA" class="text-box" ></td></tr>   
+                    <tr><td class="td">Sueldo:</td><td><input type="text"  name="SUELDO" required="" value="0.0"  id="sueldo" class="text-box" ></td></tr>       
+                    <tr><td class="td">Bono de Alimentos :</td><td><input  type="text"  required="" value="0.0" name="BONO_ALIMENTARIO"  id="bono_al"class="text-box" ></td></tr>       
 
                 </table>
             </div>
             <div id="div_1" class="contenido" style="display:none ">
                 <table class="table">
-                    <tr><td class="td">BEV:</td><td><input type="text" name="BEV" class="text-box" ></td></tr>    
+                    <tr><td class="td">BEV:</td><td><input type="text" name="BEV" class="text-box" value="0.0" id="bev" ></td></tr>    
+                    <tr><td class="td">Sueldo Total:</td><td><div id="suel_total">0.0</div></td></tr>    
                     <tr><td class="td">Centro de Costos:</td><td>
                             <select name="CENTRO_COSTOS">
                                 <option value="0">----</option>
                             </select>
                         </td></tr>    
-                    <tr><td class="td">Antecedentes Policiales:</td><td><input type="text" name="ANTECEDENTES_POLICIALES" class="text-box" ></td></tr>     
-                    <tr><td class="td">Certificado de Salud:</td><td><input type="text" name="CERTIFICADO_SALUD" class="text-box" ></td></tr>   
+                    <tr><td class="td">Antecedentes Policiales:</td><td><select name="ANTECEDENTES_POLICIALES" >
+                                            <option value="1" selected="">No</option>
+                                            <option value="2">Si</option>
+                            </select></td></tr>     
+                    <tr><td class="td">Certificado de Salud:</td><td><input type="text" name="CERTIFICADO_SALUD" class="text-box"  ></td></tr>   
 
                 </table>
             </div>   
@@ -163,8 +199,7 @@
                     <tr><td class="td">Subvencion:</td><td><input type="text" name="SUBVENCION" class="text-box" ></td></tr>   
                     <tr><td class="td">Horario de Capacitacion:</td><td><input type="text" name="HORARIO_CAPACITACION" class="text-box" ></td></tr>   
                     <tr><td class="td">Horario de Refrigerio:</td><td><input type="text" name="HORARIO_REFRIGERIO" class="text-box" ></td></tr>  
-                    <tr><td class="td">Dias de Capacitacion:</td><td><input type="text" name="DIAS_CAPACITACION
-                                                                            " class="text-box" ></td></tr>  
+                    <tr><td class="td">Dias de Capacitacion:</td><td><input type="text" name="DIAS_CAPACITACION" class="text-box" ></td></tr>  
 
 
                 </table>
@@ -196,16 +231,16 @@
 <script src="../../js/Js_DGP/chosen.jquery.js" type="text/javascript"></script>
 <script src="../JS/prism.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
-                                var config = {
-                                    '.chosen-select': {},
-                                    '.chosen-select-deselect': {allow_single_deselect: true},
-                                    '.chosen-select-no-single': {disable_search_threshold: 10},
-                                    '.chosen-select-no-results': {no_results_text: 'Oops, nothing found!'},
-                                    '.chosen-select-width': {width: "95%"}
-                                }
-                                for (var selector in config) {
-                                    $(selector).chosen(config[selector]);
-                                }
+                        var config = {
+                            '.chosen-select': {},
+                            '.chosen-select-deselect': {allow_single_deselect: true},
+                            '.chosen-select-no-single': {disable_search_threshold: 10},
+                            '.chosen-select-no-results': {no_results_text: 'Oops, nothing found!'},
+                            '.chosen-select-width': {width: "95%"}
+                        }
+                        for (var selector in config) {
+                            $(selector).chosen(config[selector]);
+                        }
 </script>
 
 

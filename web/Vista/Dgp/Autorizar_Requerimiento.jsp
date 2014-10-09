@@ -7,7 +7,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <title>Autorizacion</title>
-        <link rel="stylesheet" href="../../css1/bootstrap.min.css">
+        <link rel="stylesheet" href="../../css/bootstrap.min.css">
 
         <link type="text/css" rel="stylesheet" href="../../css/Css_Reporte/Reportes.css">
         <script type="text/javascript" src="../../js/JQuery/jQuery.js" ></script>

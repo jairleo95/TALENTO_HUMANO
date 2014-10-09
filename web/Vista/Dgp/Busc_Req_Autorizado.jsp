@@ -13,7 +13,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <title>Requerimientos Autorizados</title>
-        <link rel="stylesheet" href="../../css/Css_Sort/style.css" />
         <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
         <link type="text/css" rel="stylesheet" href="../../css/Css_Reporte/Reportes.css">
         <link type="text/css" rel="stylesheet" href="../../css/Css_Formulario/form.css">
@@ -29,11 +28,7 @@
                 margin: auto;
 
             }
-            #table{
-                width: 70%;
-                margin: auto;
-
-            }
+         
 
 
         </style>
@@ -153,7 +148,7 @@
             <br>
             <br>
             <div class="container">
-                <table     id="data" class="tinytable" style="width: 1050px;">
+                <table     id="data" class="table">
                     <thead class="tab_cabe">
                         <tr class="tr">
                             <td style="width: 230px;" ><span title="NOMBRE_P">Nombres y Apellidos</span></td>

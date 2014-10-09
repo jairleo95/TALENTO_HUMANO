@@ -10,15 +10,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <link rel="stylesheet" href="../../css/bootstrap.min.css">
+       
         <title>Fichas de Trabajador</title>
 
         <link type="text/css" rel="stylesheet" href="../../css/Css_Reporte/Reportes.css">
-
-        <script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
-        <link rel="stylesheet" href="../../css/Css_Alerta/alertify.core.css" />
-        <link rel="stylesheet" href="../../css/Css_Alerta/alertify.default.css" />
-        <script type="text/javascript"  src="../../js/Js_Alerta/Alertas.js"></script>
+ <link rel="stylesheet" href="../../css/bootstrap.min.css">
+      
     </head>
     <SCRIPT LANGUAGE="JavaScript">
         function checkIt(evt) {

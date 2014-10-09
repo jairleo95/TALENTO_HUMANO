@@ -449,7 +449,7 @@
 
                 <!-- breadcrumb -->
                 <ol class="breadcrumb">
-                    <li>Home</li><li>Dashboard</li>
+                    <li><%out.println("DEPARTAMENTO DE  "+((String) sesion.getAttribute("DEPARTAMENTO")).toUpperCase()); %></li>
                 </ol>
                 <!-- end breadcrumb -->
 
