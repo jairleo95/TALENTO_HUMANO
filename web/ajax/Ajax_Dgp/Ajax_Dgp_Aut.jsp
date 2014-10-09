@@ -39,6 +39,7 @@
             String sql = "select  *  from RHVD_FILTRO_DGP_AUTORIZADO WHERE FECHA_CREACION IS NOT NULL  ";
 
             nom_ape = nom_ape.toUpperCase();
+            
             sueldo = sueldo.toUpperCase();
             seccion = seccion.toUpperCase();
             puesto = puesto.toUpperCase();
@@ -65,7 +66,6 @@
 
             List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
 
-            List<V_Filtro_Dgp_Aut> a = new ArrayList<V_Filtro_Dgp_Aut>();
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
                 rec.put("id_dgp", rs.getString("id_dgp"));
