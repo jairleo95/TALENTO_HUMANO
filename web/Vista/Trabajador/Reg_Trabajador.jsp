@@ -289,16 +289,16 @@
 
 
                 <!-- widget grid -->
-                <section id="widget-grid" class="">
+                <section id="widget-grid" class="" >
 
                     <!-- row -->
                     <div class="row">
 
                         <!-- NEW WIDGET START -->
-                        <article class="col-sm-12 col-md-12 col-lg-6">
+                        <article class="col-sm-12 col-md-12 col-lg-6" style="width: 95%">
 
                             <!-- Widget ID (each widget will need unique ID)-->
-                            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false" data-widget-deletebutton="false">
+                            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false" data-widget-deletebutton="false"  >
                                 <!-- widget options:
                                 usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
@@ -407,7 +407,7 @@
                                                                 <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-flag fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-child fa-lg fa-fw"></i></span>
                                                                             <input type="date" name="FECHA_NAC" required=""  id="edad" placeholder="Fecha de Nacimiento" class="form-control input-lg" >
                                                                             <p class="edad">
                                                                             <div class="alerta-req" style="display: none;">Es un menor de edad</div>
@@ -502,7 +502,7 @@
                                                                 <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-list-alt fa-lg fa-fw"></i></span>
                                                                             <input type="text" name="NRO_DOC" id="doc" placeholder="Numero Documento" required="" maxlength="10" class="form-control input-lg doc" >
 
                                                                         </div>
@@ -557,7 +557,7 @@
                                                                 <div class="col-sm-3">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-phone fa-lg fa-fw"></i></span>
                                                                             <input type="text" name="TELEFONO" id="doc" placeholder="Teléfono"  data-mask="+99 (999) 999-9999" data-mask-placeholder= "X"   formnovalidate maxlength="50" class="form-control input-lg" >
                                                                         </div>
                                                                     </div>
@@ -565,7 +565,7 @@
                                                                 <div class="col-sm-3">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-mobile fa-lg fa-fw"></i></span>
                                                                             <input type="text" name="CELULAR" id="doc" placeholder="Celular"  data-mask="999-999-999" data-mask-placeholder= "X" formnovalidate maxlength="38" class="form-control input-lg" >
                                                                         </div>
                                                                     </div>
@@ -575,7 +575,7 @@
                                                                 <div class="col-sm-6">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-envelope fa-lg fa-fw"></i></span>
                                                                             <input type="email" name="CORREO_PERSONAL" id="doc" placeholder="Correo Personal"  required=""  maxlength="100" class="form-control input-lg" >
                                                                         </div>
                                                                     </div>
@@ -583,7 +583,7 @@
                                                                 <div class="col-sm-6">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-envelope fa-lg fa-fw"></i></span>
                                                                             <input type="email" name="CORREO_INST" id="doc" placeholder="Correo Institucional"  required=""  maxlength="100" class="form-control input-lg" >
                                                                         </div>
                                                                     </div>
@@ -825,6 +825,35 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                                <script>
+                                                                $(document).ready(
+                                                                        function () {
+                                                                            $("#DOM_A_D3").change(
+                                                                                    function () {
+                                                                                        if ($("#DOM_A_D3").val() == "3") {
+                                                                                            $("#DOM_A_D4").val("Sin Numero");
+                                                                                        }else{
+                                                                                            
+                                                                                            $("#DOM_A_D4").val("");
+                                                                                        }
+                                                                                       
+                                                                                    }
+                                                                            );
+                                                                            $("#DOM_LEG_D3").change(
+                                                                                    function () {
+                                                                                        if ($("#DOM_LEG_D3").val() == "3") {
+                                                                                            $("#DOM_LEG_D4").val("Sin Numero");
+                                                                                        }else{
+                                                                                            
+                                                                                            $("#DOM_LEG_D4").val("");
+                                                                                        }
+                                                                                       
+                                                                                    }
+                                                                            );
+
+                                                                        });
+
+                                                            </script>
                                                                 <div class="col-sm-3">
 
                                                                     <div class="form-group">
@@ -1155,7 +1184,7 @@
                                                                     <div class="form-group">
 
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
                                                                             <select  class="form-control input-lg"  required="" >
                                                                                 <option value="">[Religión]</option>
                                                                                 <option value="1">Adventista</option>
@@ -1223,7 +1252,7 @@
                                                                     <div class="form-group">
 
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-mobile-phone fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-lg"    placeholder="Telefono/Celular" type="text" name="AUT_CELULAR"  maxlength="20">
 
                                                                         </div>
@@ -1290,7 +1319,7 @@
                         <article class="col-sm-12 col-md-12 col-lg-6">
 
                             <!-- Widget ID (each widget will need unique ID)-->
-                            <div class="jarviswidget" id="wid-id-2" data-widget-editbutton="false" data-widget-deletebutton="false">
+                            <div class="jarviswidget" id="wid-id-2" data-widget-editbutton="false" data-widget-deletebutton="false" >
                                 <!-- widget options:
                                 usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
                 

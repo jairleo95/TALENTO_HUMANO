@@ -99,6 +99,7 @@
                     <td>Nombres Y Apellidos</td>
                     <td>DNI</td>
                     <td>Carrera</td>
+                    <td>Detalle</td>
                 </tr>
                 <% for (int i = 0; i < ListarTrabajador.size(); i++) {
                         V_Ficha_Trab_Num_C tr = new V_Ficha_Trab_Num_C();
@@ -122,6 +123,8 @@
                             out.println("Ninguna");
                         }
                         %></td>
+                     <td><a href="../../trabajador?idtr=<%=tr.getId_trabajador()%>&opc=list">Ver Detalle</a></td>
+
                 </tr>
 
 
