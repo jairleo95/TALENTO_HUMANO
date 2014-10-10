@@ -140,7 +140,15 @@
                     }
             );
         </script>
+        <style type="text/css">
 
+            #titu{
+
+                font-weight: bold;
+                 color: #005cac;
+                // color: blue;
+            }
+        </style>
 
     </head>
     <body>    
@@ -170,7 +178,7 @@
                                 -->
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                    <h2>Form Grid </h2>
+                                    <h2>Registrar Requerimiento</h2>
 
                                 </header>
 
@@ -188,8 +196,13 @@
                                     <div class="widget-body no-padding">
 
                                         <form class="smart-form" action="../../dgp">
-                                            <header>
-                                                Responsive grid system
+                                            <header class="titulo_req">
+
+                                                <div class="spacing">
+                                                    <center><h1 class="spacing" style="font-weight: bold; margin: 0px;  color: #005cac;"> Documento de Gestión de Personal</h1></center>
+                                                    <br>
+
+                                                </div>
                                             </header>
 
                                             <fieldset>
@@ -203,10 +216,10 @@
                                                 %>
 
                                                 <section>
-                                                    <label class="label">Trabajador :</label>
+                                                    <label class="label" id="titu">Trabajador :</label>
                                                     <label class="input">
                                                         <%=tr.getAp_paterno() + " " + tr.getAp_materno() + " " + tr.getNo_trabajador()%>
-                                                        <input type="hidden" value="<%=tr.getId_trabajador()%>" name="IDDATOS_TRABAJADOR" class="input-xs" >
+                                                        <input type="hidden" value="<%=tr.getId_trabajador()%>" name="IDDATOS_TRABAJADOR" class="input-xs">
                                                         <% }
                                                             if (Listar_Trabajador_id.size() == 0) { %>   
 
@@ -214,8 +227,8 @@
                                                     </label>
                                                 </section>
                                                 <section>
-                                                    <label class="label">Puesto | Seccion | Area:</label>
-                                                    <label class="input">
+                                                    <label class="label" id="titu">Puesto | Seccion | Area:</label>
+                                                    <label class="select">
                                                         <select name="IDPUESTO"  required="" >
                                                             <option value="">[Seleccionar]</option>
 
@@ -231,9 +244,9 @@
                                                     </label>
                                                 </section>
                                                 <section>
-                                                    <label class="label">Requerimiento :</label>
+                                                    <label class="label" id="titu">Requerimiento :</label>
                                                     <label class="input">
-                                                        <select name="IDREQUERIMIENTO"    disabled="" onchange="mostrar()" class="text-box"   > 
+                                                        <select name="IDREQUERIMIENTO"    disabled="" onchange="mostrar()" class="text-box"  id="nom_req"  > 
                                                             <option value=""></option>
 
                                                             <%
@@ -242,65 +255,76 @@
                                                                     r = (Requerimiento) Listar_Requerimiento.get(index);
                                                                     if (idreq.equals(r.getId_requerimiento())) {
                                                             %>
-                                                            <option value="<%=r.getId_requerimiento()%>" selected="" ><%=r.getNo_req()%></option>
+                                                            <option value="<%=r.getId_requerimiento()%>" selected=""  ><%=r.getNo_req()%></option>
 
                                                             <%} else {%>
                                                             <option value="<%=r.getId_requerimiento()%>"><%=r.getNo_req()%></option>                      
                                                             <%                          }
-                                                                    }%>
+                                                                }%>
                                                         </select> 
                                                     </label>
                                                 </section>
                                                 <section>
-                                                    <label class="label">Fecha de Inicio :</label>
+                                                    <label class="label" id="titu">Fecha de Inicio :</label>
                                                     <label class="input">
-                                                        <input type="date" name="FEC_DESDE" min="<%%>" required="" id="datepicker" class="input-xs" >
+                                                        <input type="date" name="FEC_DESDE"  required="" id="datepicker" class="input-xs" >
                                                     </label>
                                                 </section>
                                                 <section>
-                                                    <label class="label">Fecha de Cese :</label>
+                                                    <label class="label" id="titu">Fecha de Cese :</label>
                                                     <label class="input">
-                                                        <input type="date" required="" min="<%%>" name="FEC_HASTA" class="input-xs" >
+                                                        <input type="date" required="" required="" name="FEC_HASTA" class="input-xs" >
                                                     </label>
                                                 </section>
                                                 <section>
-                                                    <label class="label">Sueldo :</label>
+                                                    <label class="label" id="titu">Sueldo :</label>
                                                     <label class="input">
                                                         <input type="text"  name="SUELDO" required="" value="0.0"  id="sueldo" class="input-xs" >
                                                     </label>
                                                 </section>
                                                 <section>
-                                                    <label class="label">Bono de Alimentos :</label>
+                                                    <label class="label" id="titu">Bono de Alimentos :</label>
                                                     <label class="input">
                                                         <input  type="text"  required="" value="0.0" name="BONO_ALIMENTARIO"  id="bono_al" class="input-xs" >
 
                                                     </label>
                                                 </section>
                                                 <section>
-                                                    <label class="label">Extra Small text input</label>
+                                                    <label class="label" id="titu">BEV :</label>
                                                     <label class="input">
-                                                        <input type="text" class="input-xs">
+                                                        <input type="text" name="BEV" class="input-xs" value="0.0" id="bev" >
                                                     </label>
                                                 </section>
-                                                <input type="hidden" name="IDREQUERIMIENTO"  id="combito"  value="<%=idreq%>" >
-                                                <div id="div_1" class="contenido" style="display:none ">
-                                                    <table class="table">
-                                                        <tr><td class="td">BEV:</td><td><input type="text" name="BEV" class="text-box" value="0.0" id="bev" ></td></tr>    
-                                                        <tr><td class="td">Sueldo Total:</td><td><div id="suel_total">0.0</div></td></tr>    
-                                                        <tr><td class="td">Centro de Costos:</td><td>
-                                                                <select name="CENTRO_COSTOS">
-                                                                    <option value="0">----</option>
-                                                                </select>
-                                                            </td></tr>    
-                                                        <tr><td class="td">Antecedentes Policiales:</td><td><select name="ANTECEDENTES_POLICIALES" >
-                                                                    <option value="1" selected="">No</option>
-                                                                    <option value="2">Si</option>
-                                                                </select></td></tr>     
-                                                        <tr><td class="td">Certificado de Salud:</td><td><input type="text" name="CERTIFICADO_SALUD" class="text-box"  ></td></tr>   
-
-                                                    </table>
-                                                </div>   
-
+                                                <section>
+                                                    <label class="label" id="titu">Sueldo Total :</label>
+                                                    <label class="input">
+                                                        <div id="suel_total" style="color: red;">0.0</div>
+                                                    </label>
+                                                </section>
+                                                <section>
+                                                    <label class="label" id="titu">Centro de Costos :</label>
+                                                    <label class="input">
+                                                        <select name="CENTRO_COSTOS">
+                                                            <option value="0">----</option>
+                                                        </select>
+                                                    </label>
+                                                </section>
+                                                <section>
+                                                    <label class="label" id="titu">Antecedentes Policiales :</label>
+                                                    <label class="input">
+                                                        <select name="ANTECEDENTES_POLICIALES" >
+                                                            <option value="1" selected="">No</option>
+                                                            <option value="2">Si</option>
+                                                        </select>
+                                                    </label>
+                                                </section>
+                                                <section>
+                                                    <label class="label" id="titu">Certificado de Salud :</label>
+                                                    <label class="input">
+                                                        <input type="text" name="CERTIFICADO_SALUD" class="input-xs"  required=""e>
+                                                    </label>
+                                                </section>
+                                                <input type="hidden" name="IDREQUERIMIENTO"  id="combito"  value="<%=idreq%>">
                                                 <div id="div_2" class="contenido" style="display: none">
                                                     <table  class="table">
                                                         <tr><td class="td">Subvencion:</td><td><input type="text" name="SUBVENCION" class="text-box" ></td></tr>   
