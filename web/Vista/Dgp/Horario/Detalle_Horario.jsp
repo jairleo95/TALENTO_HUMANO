@@ -70,8 +70,8 @@
             <%}%>
 
             <tr>
-             <td><%out.println(h.getHo_hasta()); %> </td>
-             <td><%out.println(h.getDia_horario());%></td>
+             <td><%out.println(h.getHo_desde()); %> </td>
+             <td><%out.println(h.getHo_hasta());%></td>
             </tr>
             <% g++; %>
 
