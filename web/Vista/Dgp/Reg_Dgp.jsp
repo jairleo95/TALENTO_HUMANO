@@ -583,14 +583,7 @@
                                                             <input type="hidden" name="USER_CREACION_dom2" class="texto-h" >   
                                                         </table>
                                                     </div>
-                                                    <section>
-                                                        <label class="label" id="titu">Trabajador :</label>
-                                                        <label class="select">
 
-                                                            <input type="text" value="" name="IDDATOS_TRABAJADOR" required="" class="input-xs">
-
-                                                        </label>
-                                                    </section>
                                                 </fieldset>
                                                 <footer>
                                                     <button type="submit" class="btn btn-primary">

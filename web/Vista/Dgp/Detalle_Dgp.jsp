@@ -50,12 +50,15 @@
             <form action="../../dgp">
 
                 <table class="table table-hover">
-                    <% HttpSession sesion = request.getSession(true);
+                    <%
+                        String iddgp = "";
+                        HttpSession sesion = request.getSession(true);
                         String idrol = (String) sesion.getAttribute("IDROL");%>
-                    
+
                     <% for (int i = 0; i < LIST_ID_DGP.size(); i++) {
                             V_Det_DGP d = new V_Det_DGP();
                             d = (V_Det_DGP) LIST_ID_DGP.get(i);
+                            iddgp = d.getId_dgp();
                     %>
 
                     <label style="color: black; //font-family: cursive;"><h2><%=d.getNo_req()%></h2></label>
@@ -136,10 +139,14 @@
 
                     %>
 
-                    <tr><td colspan="2"><h3 style="text-align: center;">Registrar documentos</h3>
-                            <a href="../../documento?iddgp=<%=request.getParameter("iddgp")%>&idtr=<%=request.getParameter("idtr")%>&opc=Reg_Pro_Dgp"class="btn btn-default" role="button">Siguiente</a></td></tr>
-                    
-                    <%}}%>
+                    <tr><td colspan="2"><h3 style="text-align: center;">Enviar Requerimiento</h3>  <form action="../../../dgp" method="post">
+                                <input  type="hidden" value="<%=iddgp%>" name="iddgp">
+                                <input type="submit" value="Terminar" name="opc">
+
+                            </form></td></tr>
+
+                    <%}
+                        }%>
                     <input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>">
                     <input type="hidden" name="opc" value="MODIFICAR REQUERIMIENTO">   
                     <% if (idrol.trim().equals("ROL-0002") | idrol.trim().equals("ROL-0005") | idrol.trim().equals("ROL-0003")) { %>

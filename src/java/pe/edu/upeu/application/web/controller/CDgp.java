@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import pe.edu.upeu.application.dao.AreaDAO;
 import pe.edu.upeu.application.dao.AutorizacionDAO;
 import pe.edu.upeu.application.dao.DgpDAO;
+import pe.edu.upeu.application.dao.DocumentoDAO;
 import pe.edu.upeu.application.dao.HorarioDAO;
 import pe.edu.upeu.application.dao.ListaDAO;
 import pe.edu.upeu.application.dao.PuestoDAO;
@@ -26,6 +27,7 @@ import pe.edu.upeu.application.dao.UsuarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAreaDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceHorarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
@@ -72,7 +74,8 @@ public class CDgp extends HttpServlet {
         InterfaceAreaDAO area = new AreaDAO();
         String opc = request.getParameter("opc");
         InterfaceHorarioDAO IHor = new HorarioDAO();
-          InterfaceListaDAO Ilis = new ListaDAO();
+        InterfaceListaDAO Ilis = new ListaDAO();
+         InterfaceDocumentoDAO doc = new DocumentoDAO();
 
         //try {
         if (opc.equals("Registrar")) {
@@ -148,12 +151,14 @@ public class CDgp extends HttpServlet {
 
             }
 
-            getServletContext().setAttribute("List_V_Horario", IHor.List_V_Horario(iddgp));
-            getServletContext().setAttribute("List_H", Ilis.List_H());
-            out.print(iddgp);
-            response.sendRedirect("Vista/Dgp/Horario/Detalle_Horario.jsp?iddgp=" + iddgp + "&idtr=" + ID_TRABAJADOR + "&P2=1");
+            getServletContext().setAttribute("List_doc_req_pla", doc.List_doc_req_pla(iddgp, ID_TRABAJADOR));
+            int i = doc.List_Req_nacionalidad(ID_TRABAJADOR);
+            int num_ad = doc.List_Adventista(ID_TRABAJADOR);
+            getServletContext().setAttribute("List_Hijos", doc.List_Hijos(ID_TRABAJADOR));
+            getServletContext().setAttribute("List_Conyugue", doc.List_Conyugue(ID_TRABAJADOR));
 
-           // response.sendRedirect("Vista/Dgp/Horario/Reg_Horario.jsp?iddgp=" + iddgp + "&idtr=" + ID_TRABAJADOR + "&opc=rd");
+            response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&pro=pr_dgp");
+            // response.sendRedirect("Vista/Dgp/Horario/Reg_Horario.jsp?iddgp=" + iddgp + "&idtr=" + ID_TRABAJADOR + "&opc=rd");
 
         }
         if (opc.equals("Reg_form")) {

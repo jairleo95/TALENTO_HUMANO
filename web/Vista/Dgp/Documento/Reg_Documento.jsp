@@ -119,7 +119,7 @@
                             <% } %>    
                         </td>
                         <td class="caji">
-                            <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002")  | rol.trim().equals("ROL-0003")| rol.trim().equals("ROL-0005"))) {%>
+                            <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005"))) {%>
                             <input type="checkbox"  value="1"  name="estado<%=i + 1%>">
                             <% } else { %>
                             <% if (d.getEs_documento_adjunto() == null) { %>
@@ -157,7 +157,7 @@
                         <% if (d.getAr_dato_archivo() == null) { %>
                         <label class="null">No Registrado</label>
                         <% } else {%>
-                <a href="Ver_Doc.jsp?nom_doc=<%=d.getAr_dato_archivo()%>"><%=d.getNo_archivo()%></a>
+                        <a href="Ver_Doc.jsp?nom_doc=<%=d.getAr_dato_archivo()%>"><%=d.getNo_archivo()%></a>
 
                         <% }
                             } %>
@@ -212,10 +212,10 @@
 
                 <tr>
                     <td class="caji"  ><strong><%  if (d.getTi_documento().trim().equals("ACMA")) {
-                            out.println("ACTA DE MATRIMONIO CON: <p style='color:red;' >" + co.getAp_nombres_conyugue()+"</p>");
+                            out.println("ACTA DE MATRIMONIO CON: <p style='color:red;' >" + co.getAp_nombres_conyugue() + "</p>");
                         }
                         if (d.getTi_documento().trim().equals("DNIC")) {
-                            out.println("COPIA DNI CONYUGUE : <p style='color:red;' >" + co.getAp_nombres_conyugue()+"</p>");
+                            out.println("COPIA DNI CONYUGUE : <p style='color:red;' >" + co.getAp_nombres_conyugue() + "</p>");
                         }%>
                         </strong></td>
 
@@ -289,7 +289,7 @@
                         <% if (d.getAr_dato_archivo() == null) { %>
                         <label class="null">No Registrado</label>
                         <% } else {%>
-                       <a href="Ver_Doc.jsp?nom_doc=<%=d.getAr_dato_archivo()%>"><%=d.getNo_archivo()%></a>
+                        <a href="Ver_Doc.jsp?nom_doc=<%=d.getAr_dato_archivo()%>"><%=d.getNo_archivo()%></a>
 
                         <% }
                             } %>
@@ -413,11 +413,8 @@
                 if (request.getParameter("P2") != null) {
                     if (request.getParameter("P2").equals("TRUE")) {%>
         </form>
-        <form action="../../../dgp" method="post">
-            <input  type="hidden" value="<%=id_dgp%>" name="iddgp">
-            <input type="submit" value="Terminar" name="opc">
+        <a href="../../../dgp?iddgp=<%=request.getParameter("iddgp")%>&idtr=<%=request.getParameter("idtr")%>&opc=rd">Continuar</a>
 
-        </form>
         <% }
             }%> 
 
