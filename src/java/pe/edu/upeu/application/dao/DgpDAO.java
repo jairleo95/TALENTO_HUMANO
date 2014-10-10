@@ -16,6 +16,7 @@ import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.DGP;
 import pe.edu.upeu.application.model.V_Det_DGP;
 import pe.edu.upeu.application.model.V_Es_Requerimiento;
+import pe.edu.upeu.application.model.V_Estado_req;
 import pe.edu.upeu.application.model.X_List_det_dgp;
 import pe.edu.upeu.application.model.X_List_dgp_by;
 import pe.edu.upeu.application.model.X_User_dgp;
@@ -455,4 +456,35 @@ public class DgpDAO implements InterfaceDgpDAO {
             this.conn.close();
         }
     }
+
+
+    @Override
+    public List<V_Es_Requerimiento> List_Incomplet(String iddep) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+
+        String sql = "select * from RHVD_ESTADO_REQ where ID_DEPARTAMENTO='" + iddep + "' ORDER BY TO_NUMBER(SUBSTR(ID_DGP,5,LENGTH(ID_DGP))) DESC";
+        //sql += (!"".equals(id_dep)) ? "where ID_DEPARTAMENTO='" + id_dep + "'" : "";
+        //sql += "order by ID_DGP";
+        List<V_Es_Requerimiento> Lista = new ArrayList<V_Es_Requerimiento>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+
+            while (rs.next()) {
+                V_Es_Requerimiento v = new V_Es_Requerimiento();
+                v.setId_trabajador(rs.getString("id_trabajador"));
+                v.setAp_paterno(rs.getString("ap_paterno"));
+                v.setAp_materno(rs.getString("ap_materno"));
+                v.setNo_trabajador(rs.getString("no_trabajador"));
+                v.setId_dgp(rs.getString("id_dgp"));
+                v.setId_departamento(rs.getString("id_departamento"));
+                Lista.add(v);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return Lista;
+    }
+
+    
 }

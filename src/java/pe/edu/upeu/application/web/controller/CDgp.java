@@ -269,6 +269,10 @@ public class CDgp extends HttpServlet {
             getServletContext().setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
             response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&iddgp=" + ID_DGP);
         }
+        if (opc.equals("Incompleto")) {
+            getServletContext().setAttribute("List_Incomplet", dgp.List_Incomplet(iddep));
+            response.sendRedirect("Vista/Dgp/List_req_incompl.jsp");
+        }
 
         /* } finally {
          out.close();

@@ -9,6 +9,7 @@ import java.util.List;
 import pe.edu.upeu.application.model.DGP;
 import pe.edu.upeu.application.model.V_Det_DGP;
 import pe.edu.upeu.application.model.V_Es_Requerimiento;
+import pe.edu.upeu.application.model.V_Estado_req;
 import pe.edu.upeu.application.model.X_List_det_dgp;
 import pe.edu.upeu.application.model.X_List_dgp_by;
 import pe.edu.upeu.application.model.X_User_dgp;
@@ -49,4 +50,5 @@ public interface InterfaceDgpDAO {
     
     public void MOD_REQUE(String ID_DGP, String FE_DESDE, String FE_HASTA, double CA_SUELDO, String ID_PUESTO, String ID_REQUERIMIENTO,  double CA_BONO_ALIMENTARIO, double DE_BEV, double CA_CENTRO_COSTOS, String DE_ANTECEDENTES_POLICIALES, String DE_CERTIFICADO_SALUD);
 
+    public List<V_Es_Requerimiento> List_Incomplet(String iddep);
 }
