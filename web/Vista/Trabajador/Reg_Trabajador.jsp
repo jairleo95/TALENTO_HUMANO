@@ -357,7 +357,7 @@
                                                     <div class="tab-content">
                                                         <div class="tab-pane active" id="tab1">
                                                             <br>
-                                                            <h3><strong>Step 1 </strong> - Basic Information</h3>
+                                                            <h3><strong>Paso 1 </strong> - Datos del Trabajador</h3>
                                                             <div class="row">
                                                                 <div class="col-sm-4">
 
@@ -531,7 +531,7 @@
                                                                 <div class="col-sm-3">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-group fa-lg fa-fw"></i></span>
                                                                             <select name="GRUPO_SANGUINEO" class="form-control input-lg"  required="">
                                                                                 <option value="">[Grupo Sanguineo]</option>
                                                                                 <option value="1">A</option>
@@ -672,13 +672,13 @@
 
                                                         <div class="tab-pane" id="tab2">
                                                             <br>
-                                                            <h3><strong>Step 2</strong> - Billing Information</h3>
+                                                            <h3><strong>Paso 2</strong> - Aspecto Académico</h3>
 
                                                             <div class="row">
                                                                 <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-flag fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
                                                                             <select name="NIVEL_EDUCATIVO" class="form-control input-lg" id="sit_edu" required>
                                                                                 <option value="" selected="selected" >[Situación Educativa]</option>
                                                                                 <%for (int s = 0; s < List_Situacion_Educativa.size(); s++) {
@@ -694,9 +694,9 @@
                                                                 <div class="col-sm-4" id="es_inst_p"style="display: none">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
                                                                             <select class="form-control input-lg" id="inst_peru" name="ES_INST_PERU" required>
-                                                                                <option value="" selected="selected">[¿Estudio en una institucion educativa del Perú?]</option>
+                                                                                <option value="" selected="selected" >[¿Estudio en una institucion educativa del Perú?]</option>
                                                                                 <option value="1">Si</option>
                                                                                 <option value="2">No</option>
 
@@ -707,7 +707,7 @@
                                                                 <div class="col-sm-4" id="regimen" style="display: none">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
                                                                             <select class="form-control input-lg" id="rg" name="REGIMEN" required>
                                                                                 <option value="" selected="selected">[Regimen de la Institución Educativa]</option>
                                                                                 <option value="1">Publica</option>
@@ -724,7 +724,7 @@
                                                                 <div class="col-sm-4" id="ti" style="display: none">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
                                                                             <select class="form-control input-lg" id="ti_inst"  required>
                                                                                 <option value="" selected="selected">[Tipo de Institución]</option>
                                                                             </select>
@@ -734,7 +734,7 @@
                                                                 <div class="col-sm-4" id="institucion" style="display: none">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
                                                                             <select class="form-control input-lg" id="inst"  required>
                                                                                 <option value="" selected="selected">[Institución]</option>
                                                                             </select>
@@ -744,7 +744,7 @@
                                                                 <div class="col-sm-4" id="carr" style="display: none">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
                                                                             <select class="form-control input-lg" id="carrera" name="CARRERA" required>
                                                                                 <option value="" selected="selected">[Carrera]</option>
                                                                             </select>
@@ -754,7 +754,7 @@
                                                                 <div class="col-sm-4" id="egreso" style="display: none">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-lg"  placeholder="Año Egreso" type="text"   maxlength="4" minlength="4"   name="A_EGRESO" >
                                                                         </div>
                                                                     </div>
@@ -762,7 +762,7 @@
                                                                 <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-money fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-lg" value="0"  placeholder="Tipo Hora Pago Referencial" type="text" name="TIPO_HORA_PAGO_REFEERENCIAL" maxlength="6">
                                                                         </div>
                                                                     </div>
@@ -775,7 +775,7 @@
                                                                 <div class="col-sm-10">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-align-justify fa-lg fa-fw"></i></span>
                                                                             <textarea name="OTROS_ESTUDIOS"  placeholder="Otros Estudios"  class="form-control input-lg" class="text-box" cols="60" rows="6" maxlength="500"></textarea>
                                                                         </div>
                                                                     </div>
@@ -785,7 +785,8 @@
                                                         </div>
                                                         <div class="tab-pane" id="tab3">
                                                             <br>
-                                                            <h3><strong>Step 3</strong> - Domicilio Actual del Trabajador</h3>
+                                                            <strong>Paso 3</strong><br>
+                                                            <h3>-Domicilio Actual del Trabajador</h3>
                                                             <label>Direccion :</label>
                                                             <div class="row">
 
@@ -996,7 +997,7 @@
 
                                                             </div>
                                                             <br>
-                                                            <h3><strong>Step 3</strong> - Domicilio Legal (segun DNI)</h3>
+                                                            <h3>- Domicilio Legal (segun DNI)</h3>
                                                             <label>Direccion :</label>
                                                             <div class="row">
                                                                 <div class="col-sm-3">
@@ -1146,7 +1147,8 @@
 
 
                                                         <div class="tab-pane" id="tab4">
-                                                            <h3><strong>Step 4</strong> - Ingresos de Quinta Categoria</h3>
+                                                            <strong>Paso 4</strong><br> 
+                                                            <h3>- Ingresos de Quinta Categoria</h3>
 
                                                             <div class="row">
                                                                 <div class="col-sm-6">
@@ -1154,7 +1156,7 @@
                                                                     <div class="form-group">
 
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-suitcase fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-lg"    placeholder="Empresa" type="text" name="ING_QTA_CAT_EMPRESA"  maxlength="100">
 
                                                                         </div>
@@ -1165,7 +1167,7 @@
                                                                     <div class="form-group">
 
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-file-o fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-lg"    placeholder="RUC" type="text" name="ING_QTA_CAT_RUC"  maxlength="20">
 
                                                                         </div>
@@ -1181,13 +1183,13 @@
                                                                     <div class="form-group">
 
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-suitcase fa-lg fa-fw"></i></span>
                                                                             <textarea name="ING_QTA_CAT_OTRAS_EMPRESAS"  placeholder="Otras Empresas"  class="form-control input-lg"  cols="60" rows="6" maxlength="500" ></textarea>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <h3><strong>Step 4</strong> - Informacion Religiosa</h3>
+                                                            <h3>- Informacion Religiosa</h3>
 
                                                             <div class="row">
                                                                 <div class="col-sm-4">
@@ -1211,7 +1213,7 @@
                                                                     <div class="form-group">
 
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-lg"    placeholder="Iglesia" type="text" name="IGLESIA"   maxlength="30" id="igle">
 
                                                                         </div>
@@ -1222,7 +1224,7 @@
                                                                     <div class="form-group">
 
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-male fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-lg"    placeholder="Cargo en la Iglesia" type="text" name="CARGO"  maxlength="30">
 
                                                                         </div>
@@ -1236,7 +1238,7 @@
                                                                     <div class="form-group">
 
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-male fa-lg fa-fw"></i></span>
                                                                             <select  name="AUTORIDAD" class="form-control input-lg"   >
                                                                                 <option value="">[Autoridad]</option>
                                                                                 <option value="1">Pastor</option>
@@ -1252,7 +1254,7 @@
                                                                     <div class="form-group">
 
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-lg"    placeholder="Nombres y Apellidos" type="text" name="AUT_APELLIDOSNOMBRES"  maxlength="90">
 
                                                                         </div>
@@ -1277,7 +1279,7 @@
                                                                     <div class="form-group">
 
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-suitcase fa-lg fa-fw"></i></span>
                                                                             <textarea name="ING_QTA_CAT_OTRAS_EMPRESAS"  placeholder="Otras Empresas"  class="form-control input-lg"  cols="60" rows="6" maxlength="500" ></textarea>
                                                                         </div>
                                                                     </div>
@@ -1296,13 +1298,13 @@
                                                                         <a href="javascript:void(0);" class="btn btn-lg btn-default"> First </a>
                                                                         </li>-->
                                                                         <li class="previous disabled">
-                                                                            <a href="javascript:void(0);" class="btn btn-lg btn-default"> Previous </a>
+                                                                            <a href="javascript:void(0);" class="btn btn-lg btn-default"> Atras </a>
                                                                         </li>
                                                                         <!--<li class="next last">
                                                                         <a href="javascript:void(0);" class="btn btn-lg btn-primary"> Last </a>
                                                                         </li>-->
                                                                         <li class="next">
-                                                                            <a href="javascript:void(0);" class="btn btn-lg txt-color-darken"> Next </a>
+                                                                            <a href="javascript:void(0);" class="btn btn-lg txt-color-darken"> Siguiente </a>
                                                                         </li>
                                                                     </ul>
                                                                 </div>

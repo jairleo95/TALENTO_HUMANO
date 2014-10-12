@@ -30,7 +30,7 @@
         <br>
         <div id="contenido">
            
-            <div  style=" border:1px solid red">
+            <div   >
                 <!--style="padding-left: 30px"-->
                 <form class="form-inline" method="post" action="" name="formulario">
                     <div class="row">
