@@ -32,7 +32,7 @@
            
             <div   >
                 <!--style="padding-left: 30px"-->
-                <form class="form-inline" method="post" action="" name="formulario">
+                <form class="form-inline" id="frm_filtro" method="post" action="" name="formulario">
                     <div class="row">
                         <div class="form-group" >
                             <label>Fecha inicio:</label><br>

@@ -18,18 +18,9 @@
         <link rel="stylesheet" href="../../../css/bootstrap.min.css">
 
         <style>
-            #contenido{
-                margin: auto;
+            div{
+                border: 1px solid blue;
             }
-            #form{
-                width: 40%;
-                margin: auto;
-            }
-            #table{
-                width: 70%;
-                margin: auto;
-            }
-
         </style>
     </head>
     <body>
@@ -38,49 +29,54 @@
         </div>
     <center>
         <br>
-        <div id="container theme-showcase">
-            <div id="form">
+        <div id="contenido">
+            <div >
 
-                <form id="frm_filtro" method="post" name="formulario"  >
+                <form class="form-inline" id="frm_filtro" method="post" name="formulario"  >
 
-                    <div class="col-xs-6">
-                        <label class="control-label" >Nombres</label><br>
-                        <input type="text"  class="form-control"  name="nom" maxlength="50">
-                    </div>
-                    <div class="col-xs-6">
-                        <label class="control-label" >Apellido Paterno</label><br>
-                        <input type="text"  class="form-control"  name="ap_pa" maxlength="50">
-                    </div>
-                    <div class="col-xs-6">
-                        <label class="control-label" >Apellido Materno</label><br>
-                        <input type="text"  class="form-control"  name="ap_ma" maxlength="50">
-                    </div>
-
-                    <div class="col-xs-6">
-                        <label class="control-label" >DNI:</label><br>
-                        <input type="text"  class="form-control"  onKeyPress="return checkIt(event)" name="dni" maxlength="8">
-                    </div>
-
-
-                    <div class="buttons">
-                        <div class="col-xs-6">                            
-                            <button type="button" class="btn btn-primary" id="btnfiltrar" style="margin:10px;">Buscar</button>
+                    <div class="row">
+                        <div class="form-group" >
+                            <label class="control-label" >Nombres</label><br>
+                            <input type="text"  class="form-control"  name="nom" maxlength="80" style="width: 250px">
                         </div>
-                        <div class="col-xs-6">  
-                            <a href="javascript:;"  id="btncancel" class="btn btn-primary" style="margin:10px;">Cancelar</a>
+                        <div class="form-group" >
+                            <label class="control-label" >Apellido Paterno</label><br>
+                            <input type="text"  class="form-control"  name="ap_pa" maxlength="80" style="width: 250px">
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="control-label" >Apellido Materno</label><br>
+                            <input type="text"  class="form-control"  name="ap_ma" maxlength="80" style="width: 250px">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" >DNI:</label><br>
+                            <input type="text"  class="form-control"  onKeyPress="return checkIt(event)"  style="width: 250px" name="dni" maxlength="8">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                    
+                            <div class="form-group">                            
+                                <button type="button" class="btn btn-primary" id="btnfiltrar" style="margin:10px;">Buscar</button>
+                            </div>
+                            <div class="form-group">  
+                                <a href="javascript:;"  id="btncancel" class="btn btn-primary" style="margin:10px;">Cancelar</a>
+                            </div>
+         
                     </div>
 
                 </form>
 
             </div> 
-            
+
             <hr/>
             <div class="container">
-                <table     id="data" class="tinytable" style="width: 660px;">
+                <table     id="data" class="tinytable" style="width: 75%">
                     <thead class="tab_cabe">
                         <tr class="tr">
-                            <td style="width: 445px" ><span title="NOMBRE_AP">Nombres y Apellidos</span></td>
+                            <td style="" ><span title="NOMBRE_AP">Nombres y Apellidos</span></td>
                             <td  ><span  >DNI</span></td>
 
                         </tr>
@@ -101,7 +97,7 @@
 <script>
     $(document).ready(function() {
         var b = $(".tbodys");
-     
+
         $("#btnfiltrar").click(
                 function() {
 
@@ -111,11 +107,11 @@
                         var list = objJson.lista;
                         for (var i = 0; i < list.length; i++) {
                             b.append("<tr>");
-                            b.append("<td>" + list[i].NOM +"asd"+ list[i].AP_PA + list[i].AP_MA + "</td>");
+                            b.append("<td>" + list[i].NOM + "asd" + list[i].AP_PA + list[i].AP_MA + "</td>");
                             b.append("<td>" + list[i].NU_DOC + "</td>");
 
                             b.append("</tr>");
-                            
+
                         }
                     }
                     );
