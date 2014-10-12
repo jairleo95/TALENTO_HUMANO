@@ -294,6 +294,11 @@ public class DgpDAO implements InterfaceDgpDAO {
                 v.setNo_trabajador(rs.getString("no_trabajador"));
                 v.setId_dgp(rs.getString("id_dgp"));
                 v.setId_departamento(rs.getString("id_departamento"));
+                v.setAr_foto(rs.getString("ar_foto"));
+                v.setDe_foto(rs.getString("de_foto"));
+                v.setId_foto(rs.getString("id_foto"));
+                v.setNo_ar_foto(rs.getString("no_ar_foto"));
+                v.setTa_ar_foto(rs.getString("ta_ar_foto"));
                 Lista.add(v);
             }
         } catch (SQLException e) {
@@ -433,8 +438,8 @@ public class DgpDAO implements InterfaceDgpDAO {
     }
 
     @Override
-    public void MOD_REQUE(String ID_DGP, String FE_DESDE, String FE_HASTA, double CA_SUELDO, String ID_PUESTO, String ID_REQUERIMIENTO,  double CA_BONO_ALIMENTARIO, double DE_BEV, double CA_CENTRO_COSTOS, String DE_ANTECEDENTES_POLICIALES, String DE_CERTIFICADO_SALUD) {
-         try {
+    public void MOD_REQUE(String ID_DGP, String FE_DESDE, String FE_HASTA, double CA_SUELDO, String ID_PUESTO, String ID_REQUERIMIENTO, double CA_BONO_ALIMENTARIO, double DE_BEV, double CA_CENTRO_COSTOS, String DE_ANTECEDENTES_POLICIALES, String DE_CERTIFICADO_SALUD) {
+        try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_REQUERIMIENTO(  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
             cst.setString(1, c.convertFecha(FE_DESDE));
@@ -456,7 +461,6 @@ public class DgpDAO implements InterfaceDgpDAO {
             this.conn.close();
         }
     }
-
 
     @Override
     public List<V_Es_Requerimiento> List_Incomplet(String iddep) {
@@ -486,5 +490,4 @@ public class DgpDAO implements InterfaceDgpDAO {
         return Lista;
     }
 
-    
 }

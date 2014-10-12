@@ -42,10 +42,9 @@ public class Renombrar implements Runnable {
     public void run() {
 
         try {
-            Thread.sleep(1000);
+            
             File files = new File(getUbicacion(), getNombre());
             getItem().write(files);
-
         } catch (Exception ex) {
             Logger.getLogger(Renombrar.class.getName()).log(Level.SEVERE, null, ex);
         }

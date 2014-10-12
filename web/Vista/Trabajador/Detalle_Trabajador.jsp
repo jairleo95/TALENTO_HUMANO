@@ -77,9 +77,9 @@
         </style>
         <script type="text/javascript">
             $(document).ready(
-                    function() {
+                    function () {
                         $(".item-m").click(
-                                function() {
+                                function () {
                                     $("#titulo-c").text($(this).text());
                                 }
                         );
@@ -147,20 +147,14 @@
 
 
                 <%
-                    /*require_once '../Modelo/Modelo_Imagen.php';
-                     $mod_f= new Modelo_Imagen();
-                     $idf=$mod_f->LIST_FOTO_TRABAJADOR($idtr);
-                     */
-                %>
 
-                <%
-                    if (true) {
+                    if (t.getNo_ar_foto() == null) {
                 %>
                 <tr><td><img src="../../imagenes/avatar_default.jpg"  width="100"  height="100"></td>
-                <a href="Sub_fotos.php?idtr=<? echo $idtr ;?>">Subir imagen</a>
+                <a href="../Usuario/Subir_Foto.jsp?idtr=<%=idtr%>">Subir imagen</a>
                 <%
                 } else {%>
-                <tr><td><img src="Foto.php?idf=<?echo $idf;?>"  width="100"  height="100"></td>
+                <tr><td><img src="../Usuario/Fotos/<%=t.getAr_foto()%>"  width="100"  height="100"></td>
                         <%}%>
                     <td>
                         <div >
@@ -171,6 +165,7 @@
                                         trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
 
                                 %>
+                                
                                 <tr><td class="td">Nombre :</td><td><%=trb.getNo_trabajador().toUpperCase()%></td></tr>
                                 <tr><td class="td">Apellido Paterno :</td><td><%=trb.getAp_paterno().toUpperCase()%></td></tr>
                                 <tr><td class="td">Apellido Materno :</td><td><%=trb.getAp_materno().toUpperCase()%></td></tr>
@@ -185,7 +180,7 @@
             <div  class="titulo" id="titulo-c">Informacion Personal</div> 
 
             <%
-                if (List_Auto_mostrar.size() == 1 & iddgp!=null) {
+                if (List_Auto_mostrar.size() == 1 & iddgp != null) {
                     for (int r = 0; r < List_Auto_mostrar.size(); r++) {
                         Auto_Mostrar a = new Auto_Mostrar();
                         a = (Auto_Mostrar) List_Auto_mostrar.get(r);
@@ -238,7 +233,7 @@
         <script src="../../js/JQuery/jQuery.js"></script>
         <script src="../../js/Js_dlmenu/jquery.dlmenu.js"></script>
         <script>
-            $(function() {
+            $(function () {
                 $('#dl-menu').dlmenu({
                     animationClasses: {classin: 'dl-animate-in-2', classout: 'dl-animate-out-2'}
                 });

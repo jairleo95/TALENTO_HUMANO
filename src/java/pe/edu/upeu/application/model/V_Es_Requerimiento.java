@@ -17,16 +17,26 @@ public class V_Es_Requerimiento {
     private String no_trabajador;
     private String id_dgp;
     private String id_departamento;
+    private String ar_foto;
+    private String de_foto;
+    private String id_foto;
+    private String no_ar_foto;
+    private String ta_ar_foto;
 
-    public V_Es_Requerimiento(String id_trabajador, String ap_paterno, String ap_materno, String no_trabajador, String id_dgp, String id_departamento) {
+    public V_Es_Requerimiento(String id_trabajador, String ap_paterno, String ap_materno, String no_trabajador, String id_dgp, String id_departamento, String ar_foto, String de_foto, String id_foto, String no_ar_foto, String ta_ar_foto) {
         this.id_trabajador = id_trabajador;
         this.ap_paterno = ap_paterno;
         this.ap_materno = ap_materno;
         this.no_trabajador = no_trabajador;
         this.id_dgp = id_dgp;
         this.id_departamento = id_departamento;
+        this.ar_foto = ar_foto;
+        this.de_foto = de_foto;
+        this.id_foto = id_foto;
+        this.no_ar_foto = no_ar_foto;
+        this.ta_ar_foto = ta_ar_foto;
     }
-    
+
     public V_Es_Requerimiento() {
         this.id_trabajador = "";
         this.ap_paterno = "";
@@ -34,6 +44,11 @@ public class V_Es_Requerimiento {
         this.no_trabajador = "";
         this.id_dgp = "";
         this.id_departamento = "";
+        this.ar_foto = "";
+        this.de_foto = "";
+        this.id_foto = "";
+        this.no_ar_foto = "";
+        this.ta_ar_foto = "";
     }
 
     public String getId_trabajador() {
@@ -83,6 +98,45 @@ public class V_Es_Requerimiento {
     public void setId_departamento(String id_departamento) {
         this.id_departamento = id_departamento;
     }
-    
-    
+
+    public String getAr_foto() {
+        return ar_foto;
+    }
+
+    public void setAr_foto(String ar_foto) {
+        this.ar_foto = ar_foto;
+    }
+
+    public String getDe_foto() {
+        return de_foto;
+    }
+
+    public void setDe_foto(String de_foto) {
+        this.de_foto = de_foto;
+    }
+
+    public String getId_foto() {
+        return id_foto;
+    }
+
+    public void setId_foto(String id_foto) {
+        this.id_foto = id_foto;
+    }
+
+    public String getNo_ar_foto() {
+        return no_ar_foto;
+    }
+
+    public void setNo_ar_foto(String no_ar_foto) {
+        this.no_ar_foto = no_ar_foto;
+    }
+
+    public String getTa_ar_foto() {
+        return ta_ar_foto;
+    }
+
+    public void setTa_ar_foto(String ta_ar_foto) {
+        this.ta_ar_foto = ta_ar_foto;
+    }
+
 }

@@ -11,4 +11,6 @@ package pe.edu.upeu.application.dao_imp;
  */
 public interface InterfaceFotos_TrabajadorDAO {
     public String List_id_Fotos_Trabajador(String idtr);
+    public void INSERT_FOTOS_TRABAJADOR(String ID_FOTO, String DE_FOTO, String AR_FOTO, String NO_AR_FOTO, String TA_AR_FOTO, String TI_AR_FOTO, String ID_TRABAJADOR); 
+      
     }

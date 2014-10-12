@@ -106,10 +106,12 @@
                     <td><%out.println(i + 1);%></td>         
 
 
-                    <% if (true) {%>
+                    <% 
+                    
+if (tr.getAr_foto()==null) {%>
                     <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30"></td>
                         <%} else {%>
-                    <td><img src="Foto.php?idf=<?echo $idf;?>"  width="80"  height="80"></td>
+                    <td><img src="../Usuario/Fotos/<%=tr.getAr_foto()%>"  width="30"  height="30"></td>
                         <% }%>
 
                     <td><div ><a href="../../trabajador?idtr=<%=tr.getId_trabajador()%>&opc=list"><%=tr.getAp_paterno().toUpperCase() + " " + tr.getAp_materno().toUpperCase() + " " + tr.getNo_trabajador().toUpperCase()%></a></div></td>

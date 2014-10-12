@@ -153,17 +153,14 @@
                                                         </div>
                                                     </td> 
                                                     <%
-                                                        /*require_once '../Modelo/Modelo_Imagen.php';
-                                                         $mod_f = new Modelo_Imagen();
-                                                         $idf = $mod_f->LIST_FOTO_TRABAJADOR($list_dgp[$index][0]);
-                                                         */
+
                                                     %>
 
-                                                    <% if (true) {%>
+                                                    <% if (r.getAr_foto() == null) {%>
                                                     <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30">
                                                         <a style="margin-left: 3%;" href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a></td>
                                                         <% } else {%>
-                                                    <td><img src="Foto.php?idf=<? echo $idf; ?>"  width="60"  height="60"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a></td>
+                                                    <td><img src="../Usuario/Fotos/<%=r.getAr_foto()%>"  width="30"  height="30"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a></td>
                                                         <% }%>
 
 
@@ -846,7 +843,7 @@
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-            $(document).ready(function() {
+            $(document).ready(function () {
 
                 pageSetUp();
 
@@ -882,16 +879,16 @@
                             "t" +
                             "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
                     "autoWidth": true,
-                    "preDrawCallback": function() {
+                    "preDrawCallback": function () {
                         // Initialize the responsive datatables helper once.
                         if (!responsiveHelper_dt_basic) {
                             responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
                         }
                     },
-                    "rowCallback": function(nRow) {
+                    "rowCallback": function (nRow) {
                         responsiveHelper_dt_basic.createExpandIcon(nRow);
                     },
-                    "drawCallback": function(oSettings) {
+                    "drawCallback": function (oSettings) {
                         responsiveHelper_dt_basic.respond();
                     }
                 });
@@ -910,16 +907,16 @@
                             "t" +
                             "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
                     "autoWidth": true,
-                    "preDrawCallback": function() {
+                    "preDrawCallback": function () {
                         // Initialize the responsive datatables helper once.
                         if (!responsiveHelper_datatable_fixed_column) {
                             responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
                         }
                     },
-                    "rowCallback": function(nRow) {
+                    "rowCallback": function (nRow) {
                         responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
                     },
-                    "drawCallback": function(oSettings) {
+                    "drawCallback": function (oSettings) {
                         responsiveHelper_datatable_fixed_column.respond();
                     }
 
@@ -929,7 +926,7 @@
                 $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
 
                 // Apply the filter
-                $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function() {
+                $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
 
                     otable
                             .column($(this).parent().index() + ':visible')
@@ -945,16 +942,16 @@
                             "t" +
                             "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
                     "autoWidth": true,
-                    "preDrawCallback": function() {
+                    "preDrawCallback": function () {
                         // Initialize the responsive datatables helper once.
                         if (!responsiveHelper_datatable_col_reorder) {
                             responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
                         }
                     },
-                    "rowCallback": function(nRow) {
+                    "rowCallback": function (nRow) {
                         responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
                     },
-                    "drawCallback": function(oSettings) {
+                    "drawCallback": function (oSettings) {
                         responsiveHelper_datatable_col_reorder.respond();
                     }
                 });
@@ -987,16 +984,16 @@
                         "sSwfPath": "js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
                     },
                     "autoWidth": true,
-                    "preDrawCallback": function() {
+                    "preDrawCallback": function () {
                         // Initialize the responsive datatables helper once.
                         if (!responsiveHelper_datatable_tabletools) {
                             responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
                         }
                     },
-                    "rowCallback": function(nRow) {
+                    "rowCallback": function (nRow) {
                         responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
                     },
-                    "drawCallback": function(oSettings) {
+                    "drawCallback": function (oSettings) {
                         responsiveHelper_datatable_tabletools.respond();
                     }
                 });
@@ -1013,7 +1010,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function() {
+            (function () {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
