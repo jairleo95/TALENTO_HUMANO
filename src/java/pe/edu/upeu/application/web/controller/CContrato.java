@@ -203,7 +203,7 @@ public class CContrato extends HttpServlet {
             if (opc.equals("Ver_Plantilla")) {
                 String idc = request.getParameter("idc");
                 getServletContext().setAttribute("LIST_DAT_TR_PLANTILLA", tr.LIST_DAT_TR_PLANTILLA(idc));
-                response.sendRedirect("Vista/Contrato/Plantilla/Direccion_general_Sistemas.jsp");
+                response.sendRedirect("Vista/Contrato/Plantilla/Editor_Plantilla.jsp");
             }
         } finally {
             out.close();

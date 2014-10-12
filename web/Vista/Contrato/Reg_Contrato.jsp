@@ -181,7 +181,7 @@
                         
                                 
                     <tr><td>Tipo Convenio:</td><td>
-                        <select name="TIPO_CONVENIO" class="text-box">
+                            <select name="TIPO_CONVENIO" class="text-box" required="">
                             <option value="">---elegir---</option>
                             <option value="1">CLJ</option>
                             <option value="2">PPP</option>
