@@ -423,7 +423,7 @@
 
                                                         </label>
                                                     </section>
-                                                    <table class="tab-horario">
+                                                    <table class="tab-horario table table-striped table-bordered table-hover">
                                                         <tr>
                                                             <td> <label class="title">LUNES</label>
                                                                 <select id="lunes" >
@@ -448,7 +448,10 @@
                                                                 </select>
                                                             </td>
 
-                                                            <td>
+                                                         
+                                                        </tr>
+                                                        <tr>
+                                                               <td>
                                                                 <label class="title">JUEVES</label>
                                                                 <select id="jueves" >
 
@@ -473,6 +476,7 @@
                                                                     <option value="2" selected="">Deshabilitado</option>
                                                                 </select>
                                                             </td>
+                                                            
                                                         </tr>
                                                     </table>
                                                     <div class="input-desp">
