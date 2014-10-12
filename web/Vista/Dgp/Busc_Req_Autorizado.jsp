@@ -19,17 +19,6 @@
         <link rel="stylesheet" href="../../css/bootstrap.min.css">
 
         <style>
-            #contenido{
-                margin: auto;
-
-            }
-            #form{
-                width: 40%;
-                margin: auto;
-
-            }
-         
-
 
         </style>
     </head>
@@ -40,28 +29,30 @@
     <center>
         <br>
         <div id="contenido">
-            <div id="form">
-
-                <form id="frm_filtro" method="post" action="" name="formulario">
+           
+            <div  style=" border:1px solid red">
+                <!--style="padding-left: 30px"-->
+                <form class="form-inline" method="post" action="" name="formulario">
                     <div class="row">
-                        <div class="col-xs-6">
+                        <div class="form-group" >
                             <label>Fecha inicio:</label><br>
-                            <input type="date"  class="form-control" name="del"  />
+                            <input type="date"  class="form-control" name="del"  length="45" style="width: 250px" />
                         </div>
-                        <div class="col-xs-6">
-                            <label>Fecha fin:</label>
-                            <input type="date" name="al" class="form-control" />
+                        <div class="form-group" >
+                            <label>Fecha fin:</label><br>
+                            <input type="date"  class="form-control" name="al" size="45" maxlength="100" style="width: 250px" />
                             <input type="hidden" name="iddep" value="<? echo $_SESSION['DEPARTAMENTO_ID']; ?>">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-6">  
-                            <label>Nombres y Apellidos :</label>
-                            <input type="text" class="form-control" name="nom_ape"   size="25"/>
+
+                        <div class="form-group">
+                            <label>Nombres y Apellidos :</label><br>
+                            <input type="text"  class="form-control" name="nom_ape"  style="width: 250px"   />
                         </div>
-                        <div class="col-xs-6">  
+                        <div class="form-group">  
                             <label>Area :</label><br>
-                            <select name="area" class="form-control">
+                            <select name="area" class="form-control" style="width: 250px" >
                                 <option value="0">[Seleccione]</option>
                                 <%                                    for (int i = 0; i < List_Area.size(); i++) {
                                         Area a = new Area();
@@ -73,23 +64,24 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-6">
-                            <label>Puesto :</label>
-                            <input type="text" name="puesto" class="form-control" size="25" />
+                        <div class="form-group" >
+                            <label>Puesto :</label><br>
+                            <input type="text" name="puesto" class="form-control" style="width: 250px" />
                         </div>
-                        <div class="col-xs-6">
-                            <label>Sueldo :</label>
-                            <input type="text" name="sueldo" class="form-control" size="25" maxlength="10"/>
+                        
+                        <div class="form-group">
+                            <label>Sueldo :</label><br>
+                            <input type="text" name="sueldo" class="form-control" style="width: 250px" maxlength="10"/>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-6">
-                            <label>Sección :</label>
-                            <input type="text" name="seccion" class="form-control">
+                        <div class="form-group">
+                            <label>Sección :</label><br>
+                            <input type="text" name="seccion" class="form-control" style="width: 250px">
                         </div>
-                        <div class="col-xs-6">
-                            <label>Requerimiento :</label>
-                            <select name="motivo" class="form-control" > 
+                        <div class="form-group">
+                            <label>Requerimiento :</label><br>
+                            <select name="motivo" class="form-control" style="width: 250px" > 
                                 <option value="0">[Seleccione]</option>
                                 <%
                                     for (int s = 0; s < Listar_Requerimiento.size(); s++) {
@@ -104,9 +96,9 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-6">
-                            <label>Proceso :</label>
-                            <select name="proceso" class="form-control">
+                        <div class="form-group">
+                            <label>Proceso :</label><br>
+                            <select name="proceso" class="form-control" style="width: 250px">
                                 <option value="0">[Seleccione]</option>
                                 <%
                                     for (int s = 0; s < Listar_Requerimiento.size(); s++) {
@@ -117,11 +109,11 @@
                                 <% } %>
                             </select>
                         </div>
-                            
+
                         <? //if ($_SESSION["IDROL"] == 1) { ?>
-                        <div class="col-xs-6">
-                            <label>Departamento :</label>
-                            <select name="dep" class="form-control">
+                        <div class="form-group">
+                            <label>Departamento :</label><br>
+                            <select name="dep" class="form-control" style="width: 250px">
                                 <option value="0" ></option>
                                 <?  for ($kk = 0; $kk < count($list_d); $kk++) {?>
                                 <option value="<?echo $list_d[$kk][0]?>"><?echo $list_d[$kk][1];?></option>
@@ -134,17 +126,22 @@
                     <hr/>
 
                     <div class="row">
-                        <div class="col-xs-6">                            
+                        <div class="form-group">                            
                             <button type="button" class="btn btn-primary" id="btnfiltrar">Buscar</button>
                         </div>
-                        <div class="col-xs-6">  
-                            <a href="javascript:;"  id="btncancel" class="btn btn-primary">Cancelar</a>
+                        <div class="form-group">  
+                            <a href="javascript:;"  id="btncancel" class="btn btn-primary" >Cancelar</a>
                         </div>
-                    </div>
+                    </div>       
+
+
+
+
 
                 </form>
 
             </div> 
+            
             <br>
             <br>
             <div class="container">

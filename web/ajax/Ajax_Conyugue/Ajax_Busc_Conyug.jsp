@@ -37,6 +37,8 @@
             
             nom = nom.toUpperCase();
             dni = dni.toUpperCase();
+            dni = ape_pa.toUpperCase();
+            dni = ape_ma.toUpperCase();
 
             sql += (!"".equals(nom)) ? " AND upper(NO_TRABAJADOR) like '%" +nom.trim()+ "%'" : "";
             sql += (!"".equals(ape_ma)) ? " AND upper(AP_MATERNO) like '%" +ape_ma.trim()+ "%'" : "";

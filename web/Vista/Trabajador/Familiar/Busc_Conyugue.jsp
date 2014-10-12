@@ -38,7 +38,7 @@
         </div>
     <center>
         <br>
-        <div id="contenido">
+        <div id="container theme-showcase">
             <div id="form">
 
                 <form id="frm_filtro" method="post" name="formulario"  >
@@ -80,7 +80,7 @@
                 <table     id="data" class="tinytable" style="width: 660px;">
                     <thead class="tab_cabe">
                         <tr class="tr">
-                            <td style="width: 445px" ><span title="NOMBRE_P">Nombres y Apellidos</span></td>
+                            <td style="width: 445px" ><span title="NOMBRE_AP">Nombres y Apellidos</span></td>
                             <td  ><span  >DNI</span></td>
 
                         </tr>
@@ -111,7 +111,7 @@
                         var list = objJson.lista;
                         for (var i = 0; i < list.length; i++) {
                             b.append("<tr>");
-                            b.append("<td>" + list[i].NOM + list[i].AP_PA + list[i].AP_MA + "</td>");
+                            b.append("<td>" + list[i].NOM +"asd"+ list[i].AP_PA + list[i].AP_MA + "</td>");
                             b.append("<td>" + list[i].NU_DOC + "</td>");
 
                             b.append("</tr>");
