@@ -54,7 +54,7 @@
             }
 
         </style>
-        <script language="javascript" type="text/javascript" src="../../../js/jquery-1.3.2.min.js"></script>
+        <script language="javascript" type="text/javascript" src="../../js/jquery-1.3.2.min.js"></script>
        
         <%
             String idtr = request.getParameter("idtr");

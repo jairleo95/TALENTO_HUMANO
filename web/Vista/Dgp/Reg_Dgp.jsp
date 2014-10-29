@@ -170,8 +170,11 @@
         </style>
 
     </head>
-    <body>    
+    <body>   
+
+
         <div id="main" role="main" style="margin: 0px;">
+
 
             <div id="content">
                 <section id="widget-grid" class="">
@@ -507,8 +510,8 @@
                                                             <input type="hidden" name="USER_CREACION_lun1"  >   
 
                                                             <tr class="tr-count"><td>T2 :</td><td><input type="text" name="HORA_DESDE_lun2" id="HORA_DESDE_lun2" class="texto-h" ></td>           
-                                                                <td ><input type="text" name="HORA_HASTA_lun2" id="HORA_HASTA_lun2" class="texto-h" ><a href="#" id="remScnt">-</a></td></tr>      
-                                                            <input type="hidden" name="DIA_lun2" value="lun" >                    
+                                                                <td ><input type="text" name="HORA_HASTA_lun2" id="HORA_HASTA_lun2" class="texto-h" ><div style="background-color: black;width:100px;" id="remScnt" >lskdrhdfhdfhdgndskgdjkg</div></td></tr>      
+                                                            <input type="hidden" name="DIA_lun2" value="lun">                    
 
                                                             <input type="hidden" name="USER_CREACION_lun2"  >   
 
@@ -605,7 +608,7 @@
                                                             <tr><td colspan="2"><a href="#" id="add_6">+</a></td></tr>
                                                             <input type="hidden" name="USER_CREACION_dom2" class="texto-h" >   
                                                         </table>
-                                                        <div class="h_total">Horas Totales : 24 horas</div>
+                                                        <div class="h_total">Horas Totales : 00:00 horas</div>
                                                     </div>
 
                                                 </fieldset>
@@ -751,7 +754,7 @@
             var min = ((acum - parseInt(acum)) * 60);
             min = parseInt(min.toPrecision(2));
             acum = parseInt(acum);
-            $(".h_total").text("Hora Semanal Total :" + acum + ":" + min);
+            $(".h_total").text("Hora Semanal Total :" + acum + ":" + min + " Horas.");
         }
         $(document).ready(function () {
 
@@ -830,20 +833,18 @@
 
     </script>
     <script type="text/javascript">
-        $(function () {
+        $(document).ready(function () {
             var scntDiv = $('#show_1');
             var i = $('#show_1 .texto-h').size() + 1;
             var s = $('#show_1 .tr-count').size() + 1;
 
-            $('#addScnt').live('click', function () {
-
+            $('#addScnt').click(function () {
                 $('<tr><td>T' + s + ' :</td><td><input type="text"   name="HORA_DESDE_lun' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_lun' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_lun' + i + '" value="lun" ><input type="hidden" name="USER_CREACION_lun' + i + '"> <a href="#" id="remScnt">-</a></td></tr>').appendTo(scntDiv);
-
                 i++;
                 s++;
                 return false;
             });
-            $('#remScnt').live('click', function () {
+            $('#remScnt').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -852,7 +853,11 @@
                 }
                 return false;
             });
+
+
         });
+
+
 
         //MARTES
         $(function () {
@@ -860,7 +865,7 @@
             var i = $('#show_2 .texto-h').size() + 1;
             var s = $('#show_2 .tr-count_2').size() + 1;
 
-            $('#add_2').live('click', function () {
+            $('#add_2').click(function () {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_mar' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_mar' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_mar' + i + '" value="mar" ><input type="hidden" name="USER_CREACION_mar' + i + '"> <a href="#" id="remove_2">-</a></td></tr>').appendTo(scntDiv);
 
@@ -868,7 +873,7 @@
                 s++;
                 return false;
             });
-            $('#remove_2').live('click', function () {
+            $('#remove_2').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -884,7 +889,7 @@
             var i = $('#show_3 .texto-h').size() + 1;
             var s = $('#show_3 .tr-count_3').size() + 1;
 
-            $('#add_3').live('click', function () {
+            $('#add_3').click(function () {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_mie' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_mie' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_mie' + i + '" value="mie" ><input type="hidden" name="USER_CREACION_mie' + i + '"> <a href="#" id="remove_3">-</a></td></tr>').appendTo(scntDiv);
 
@@ -892,7 +897,7 @@
                 s++;
                 return false;
             });
-            $('#remove_3').live('click', function () {
+            $('#remove_3').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -908,7 +913,7 @@
             var i = $('#show_4 .texto-h').size() + 1;
             var s = $('#show_4 .tr-count_4').size() + 1;
 
-            $('#add_4').live('click', function () {
+            $('#add_4').click(function () {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_jue' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_jue' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_jue' + i + '" value="jue" ><input type="hidden" name="USER_CREACION_jue' + i + '"> <a href="#" id="remove_4">-</a></td></tr>').appendTo(scntDiv);
 
@@ -916,7 +921,7 @@
                 s++;
                 return false;
             });
-            $('#remove_4').live('click', function () {
+            $('#remove_4').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -932,7 +937,7 @@
             var i = $('#show_5 .texto-h').size() + 1;
             var s = $('#show_5 .tr-count_5').size() + 1;
 
-            $('#add_5').live('click', function () {
+            $('#add_5').click(function () {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_vie' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_vie' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_vie' + i + '" value="vie" ><input type="hidden" name="USER_CREACION_vie' + i + '"> <a href="#" id="remove_5">-</a></td></tr>').appendTo(scntDiv);
 
@@ -940,7 +945,7 @@
                 s++;
                 return false;
             });
-            $('#remove_5').live('click', function () {
+            $('#remove_5').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -956,7 +961,7 @@
             var i = $('#show_6 .texto-h').size() + 1;
             var s = $('#show_6 .tr-count_6').size() + 1;
 
-            $('#add_6').live('click', function () {
+            $('#add_6').click(function () {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_dom' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_dom' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_dom' + i + '" value="dom" ><input type="hidden" name="USER_CREACION_dom' + i + '"> <a href="#" id="remove_6">-</a></td></tr>').appendTo(scntDiv);
 
@@ -964,7 +969,7 @@
                 s++;
                 return false;
             });
-            $('#remove_6').live('click', function () {
+            $('#remove_6').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
