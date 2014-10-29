@@ -137,8 +137,27 @@
                                 }
                         );
 
+
+
+
+
                     }
+
+
+
             );
+        </script>
+        <script>
+            $(".texto-h").setMask("29:59").keypress(
+                    function () {
+                        var currentMask = $(this).data('mask').mask;
+                        var newMask = $(this).val().match(/^2.*/) ? "23:59" : "29:59";
+                        if (newMask != currentMask) {
+                            $(this).setMask(newMask);
+                        }
+                    });
+            $(".texto-h").attr("data-mask", "29:59");
+
         </script>
         <style type="text/css">
 
@@ -413,7 +432,7 @@
 
 
                                                     <section>
-                                                        <label class="label" id="titu">Trabajador :</label>
+                                                        <label class="label" id="titu">Opcion :</label>
                                                         <label class="select">
 
                                                             <select id="horario" >
@@ -448,10 +467,10 @@
                                                                 </select>
                                                             </td>
 
-                                                         
+
                                                         </tr>
                                                         <tr>
-                                                               <td>
+                                                            <td>
                                                                 <label class="title">JUEVES</label>
                                                                 <select id="jueves" >
 
@@ -476,7 +495,7 @@
                                                                     <option value="2" selected="">Deshabilitado</option>
                                                                 </select>
                                                             </td>
-                                                            
+
                                                         </tr>
                                                     </table>
                                                     <div class="input-desp">
@@ -586,6 +605,7 @@
                                                             <tr><td colspan="2"><a href="#" id="add_6">+</a></td></tr>
                                                             <input type="hidden" name="USER_CREACION_dom2" class="texto-h" >   
                                                         </table>
+                                                        <div class="h_total">Horas Totales : 24 horas</div>
                                                     </div>
 
                                                 </fieldset>
@@ -706,7 +726,43 @@
 
     </script>
     <script  language="javascript" type="text/javascript">
+
+        function calcularHoras() {
+            var dias_semana = new Array("lun", "mar", "mier", "jue", "vie", "dom");
+            var acum = 0;
+            for (var i = 0; i < dias_semana.length; i++) {
+
+                for (var j = 0, max = 5; j < max; j++) {
+                    //var str = $("#HORA_DESDE_" + dias_semana[i] + j).val();
+
+                    var Desde = $("#HORA_DESDE_" + dias_semana[i] + j).val();
+                    var Hasta = $("#HORA_HASTA_" + dias_semana[i] + j).val();
+                    //  var arrDesde = $(str).val().split(":");
+                    if (typeof Desde !== 'undefined' && typeof Hasta !== 'undefined') {
+                        var arrDesde = Desde.split(":");
+                        var arrHasta = Hasta.split(":");
+                        var horaTurno = (((parseInt(arrHasta[0]) * 60) + (parseInt(arrHasta[1]))) - ((parseInt(arrDesde[0]) * 60) + (parseInt(arrDesde[1]))));
+
+                        acum = acum + horaTurno;
+                    }
+                }
+            }
+            acum = acum / 60;
+            var min = ((acum - parseInt(acum)) * 60);
+            min = parseInt(min.toPrecision(2));
+            acum = parseInt(acum);
+            $(".h_total").text("Hora Semanal Total :" + acum + ":" + min);
+        }
         $(document).ready(function () {
+
+
+            $(".texto-h").keyup(
+                    function () {
+                        calcularHoras();
+                    }
+
+            );
+
             $("#horario").change(
                     function () {
                         if ($(this).val() == 0) {
@@ -726,7 +782,6 @@
                             $("#show_5").show();
                             $("#show_6").show();
 
-
                             $("#lunes").val(1);
                             $("#martes").val(1);
                             $("#miercoles").val(1);
@@ -734,6 +789,7 @@
                             $("#viernes").val(1);
                             $("#sabado").val(1);
                             $("#domingo").val(1);
+
 
                             document.getElementById("HORA_DESDE_lun1").value = "7:50";
                             document.getElementById("HORA_HASTA_lun1").value = "12:30";
@@ -765,6 +821,7 @@
 
 
                         }
+                        calcularHoras();
 
                     }
             );
