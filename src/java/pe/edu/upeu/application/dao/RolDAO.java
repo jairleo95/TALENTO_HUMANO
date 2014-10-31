@@ -5,6 +5,7 @@
  */
 package pe.edu.upeu.application.dao;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -76,8 +77,19 @@ public class RolDAO implements InterfaceRolDAO {
     }
 
     @Override
-    public boolean INSERT_ROLES(String idrol) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void INSERT_ROLES(String no_rol) {
+        CallableStatement cst;
+        try {
+            String id_rol="";
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = conn.conex.prepareCall("{CALL RHSP_INSERT_ROL( ?,?)}");
+            cst.setString(1, id_rol);
+            cst.setString(2, no_rol);
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        }
     }
 
 }

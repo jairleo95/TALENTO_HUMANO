@@ -11,7 +11,7 @@ and open the template in the editor.
     </head>
     <body>
 
-    <center><label class="title">Rol</label><form class="form" action="../Control/ControlRoles.php" method="post"> <table class="table">              
+    <center><label class="title">ROLES</label><form class="form" action="../Control/ControlRoles.php" method="post"> <table class="table">              
                 <tr><td>Nombre:</td><td><input type="text" name="NOMBRE" class="text-box" ></td></tr>                    
                 <tr><td><input type="submit" name="opc"  class="submit" value="REGISTRAR"></td></tr>
             </table>
@@ -20,3 +20,4 @@ and open the template in the editor.
     <br><br>
 </body>
 </html>
+<%@include  file="List_Roles.jsp"%>

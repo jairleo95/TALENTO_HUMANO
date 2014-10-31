@@ -20,5 +20,5 @@ public interface InterfaceRolDAO {
 
     public List<V_Privilegio> listarURL(String idrol);
 
-    public boolean INSERT_ROLES(String idrol);
+    public void INSERT_ROLES(String no_rol);
 }

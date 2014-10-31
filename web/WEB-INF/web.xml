@@ -60,6 +60,10 @@
         <servlet-name>CFoto</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CFoto</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Roles</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CRoles</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
         <url-pattern>/trabajador</url-pattern>
@@ -119,6 +123,10 @@
     <servlet-mapping>
         <servlet-name>CFoto</servlet-name>
         <url-pattern>/foto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Roles</servlet-name>
+        <url-pattern>/CRoles</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

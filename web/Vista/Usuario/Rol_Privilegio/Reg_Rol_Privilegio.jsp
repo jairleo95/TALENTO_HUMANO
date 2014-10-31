@@ -12,9 +12,9 @@ and open the template in the editor.
     </head>
     <body>
         <ul>
-            <li><a href="Reg_Roles.php" target="Source">Roles</a></li>
-            <li><a href="Reg_Privilegio.php" target="Source">Privilegios</a></li>
-            <li><a href="Otorgar_Privilegio.php" target="Source">Otorgar Privilegios</a></li>
+            <li><a href="Reg_Roles.jsp" target="Source">Roles</a></li>
+            <li><a href="Reg_Privilegio.jsp" target="Source">Privilegios</a></li>
+            <li><a href="Otorgar_Privilegio.jsp" target="Source">Otorgar Privilegios</a></li>
         </ul>
         <iframe name="Source" class="autoHeight" width="100%"   height="100%" frameborder="0" align="center" transparency="transparency" ></iframe>
     </body>
