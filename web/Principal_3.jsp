@@ -360,8 +360,8 @@
                         <a href="#"><i class="fa fa-lg fa-fw fa-windows"></i> <span class="menu-item-parent">Generar Requerimiento</span></a>
                         <ul>
                             <li>
-                                <a href="#"><i class="fa fa-lg fa-fw fa-file"></i> En Planilla</a>
-                                <ul>
+                                <a href="Vista/Dgp/Requerimiento.jsp" target="myframe"><i class="fa fa-lg fa-fw fa-file"></i> En Planilla</a>
+                              <!--  <ul>
                                     <li>
                                         <a href="Vista/Dgp/Generar_Dgp.jsp?text=1" target="myframe">Tiempo Conpleto</a>
                                     </li>
@@ -377,7 +377,7 @@
                                     <li>
                                         <a href="#" target="myframe">Tiempo Parcial - Trabajador Docente</a>
                                     </li>
-                                </ul>
+                                </ul>-->
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-lg fa-fw fa-file"></i> Fuera de Planilla</a>
