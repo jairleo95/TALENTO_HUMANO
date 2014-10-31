@@ -129,6 +129,7 @@
                                                 p = (X_List_dat_tr_plantilla) LIST_DAT_TR_PLANTILLA.get(i);
                                         %>
                                         <textarea name="ckeditor">
+
  <h2 style="text-align:center"><strong>CONTRATO DE TRABAJO A PLAZO FIJO Y BAJO MODALIDAD</strong></h2>
                 <p>Conste por el presente documento el contrato de trabajo a plazo fijo y sujeto a modalidad por 
 
@@ -242,9 +243,10 @@
                     Ñaña, Chosica, Lima, al <strong><%=p.getFecha_actual()%></strong>.
 
                 </p>
-                <br>				                		
-
- <div  ><table  style="width: 100%;  height: 50px; text-align:center; "><tr><td align="center">______________________________<br><br>EMPLEADOR</td>
+                <br>	
+    </script>
+<table id="letra" style="margin: 0;"><tr><td>asdasdasd</td></tr></table>
+ <div  ><table  style="width: 100%;  height: 50px; text-align:center; "id="asdglñhsdkgohk" ><tr><td align="center">______________________________<br><br>EMPLEADOR</td>
                         <td align="center">_______________________________<br><br>TRABAJADOR(A)</td></tr></table></div>
 
 	
@@ -275,7 +277,14 @@
             <!-- END MAIN CONTENT -->
 
         </div>
-
+                                    <script>
+                                        $(document).ready(function(){
+                                            $("#letra").click(function(){alert("alknaklsdn");});
+                                            
+                                        });
+                                        
+                                    </script>
+                                    <table id="letra" style="margin: 0;"><tr><td>asdasdasd</td></tr></table>
         <!--================================================== -->
 
         <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->

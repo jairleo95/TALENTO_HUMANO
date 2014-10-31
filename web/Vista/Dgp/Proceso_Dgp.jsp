@@ -54,6 +54,83 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
 
+        <style>
+            /* Service Box
+================================================== */
+
+            #service{
+                position: relative;
+              //  padding: 0 0 40px;
+            }
+            .service-content{
+                text-align: center;
+                position: relative;
+            //    padding: 0 10px;
+            }
+            .service-content .service-icon{
+                position: relative;
+            }
+            .service-content:after{
+                content: "";
+                background: #1881F2;
+                width: 3%;
+                height: 4%;
+                position: absolute;
+                top: 40%;
+               // margin-top: -58px;
+                left: 105%;
+                -webkit-border-radius: 100%;
+                -moz-border-radius: 100%;
+                border-radius: 100%;
+                -webkit-box-shadow: 0 0 0 3px rgba(0, 0, 0, .09);
+                -moz-box-shadow: 0 0 0 3px rgba(0, 0, 0, .09);
+                box-shadow: 0 0 0 3px rgba(0, 0, 0, .09);
+                z-index: 3;
+            }
+
+            .service-content:before{
+                content: '';
+                background: #ccc;
+                position: absolute;
+                top: 40%;
+                margin-top: 1%;
+                width: 100%;
+                //left: 74px;
+                height: 1px;
+                z-index: 0;
+
+            }
+
+            .service-content.last:after, 
+            .service-content.last:before{
+                content: '';
+                position: relative;
+                box-shadow: none;
+                border: 0;
+            }
+            .service-content i{
+                display: inline-block;
+                overflow: hidden;
+                color: #fff;
+                font-size: 350%;
+                background: #1881F2;
+                width:150px; 
+                height:150px;
+                line-height: 150px;
+               // margin:10px 0 0;
+                -webkit-box-shadow: 0 0 0 12px #f0f0f0;
+                -moz-box-shadow: 0 0 0 12px #f0f0f0;
+                box-shadow: 0 0 0 12px #f0f0f0;
+            }
+
+            .service-content h3{
+                font-size: 15px;
+
+            }
+
+
+        </style>
+
     </head>
     <body class="">
 
@@ -68,7 +145,57 @@
             <!-- MAIN CONTENT -->
             <div id="content">
 
-
+                <section id="service" class="wow fadeInUp">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-3">
+                                <div class="service-content">
+                                    <a href="#."><span class="service-icon"><i class="fa fa-briefcase img-circle wow flipInX"></i></span></a>
+                                    <h3>Tiempo Completo</h3>
+                                    <p>
+                                   
+                                    </p>
+                                </div>
+                            </div><!--/ End first service -->
+                            <div class="col-md-3 col-sm-3">
+                                <div class="service-content">
+                                    <a href="#."><span class="service-icon"><i class="fa fa-cogs img-circle wow flipInX"></i></span></a>
+                                    <h3>Medio Tiempo</h3>
+                                    <p>
+                                    
+                                    </p>
+                                </div>
+                            </div><!--/ End 2nd service -->
+                            <div class="col-md-3 col-sm-3">
+                                <div class="service-content">
+                                    <a href="#."><span class="service-icon"><i class="fa fa-comments-o img-circle wow flipInX"></i></span></a>
+                                    <h3>Tiempo Parcial</h3>
+                                    <p>
+                                       
+                                    </p>
+                                </div>
+                            </div><!--/ End 3rd service -->
+                            <div class="col-md-3 col-sm-3">
+                                <div class="service-content">
+                                    <a href="#."><span class="service-icon"><i class="fa fa-flask img-circle wow flipInX"></i></span></a>
+                                    <h3>Extranjero</h3>
+                                    <p>
+                                      
+                                    </p>
+                                </div>
+                            </div><!--/ End 4th service -->
+                            <div class="col-md-3 col-sm-3">
+                                <div class="service-content last">
+                                    <a href="#."><span class="service-icon"><i class="fa fa-flask img-circle wow flipInX"></i></span></a>
+                                    <h3>Tiempo Parcial (Trabajador Docente)</h3>
+                                    <p>
+                                      
+                                    </p>
+                                </div>
+                            </div><!--/ End 4th service -->
+                        </div>
+                    </div>
+                </section><!-- Service box end -->
 
                 <!-- widget grid -->
                 <section id="widget-grid" class="">
