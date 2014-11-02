@@ -26,6 +26,36 @@
         <link rel="stylesheet" type="text/css" href="../../css/Css_Menu_Desplegable/component.css" />
         <script src="../../js/modernizr.custom.js"></script>
 
+        <!-- Estilos plantilla-->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/font-awesome.min.css">
+
+        <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/smartadmin-production.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/smartadmin-skins.min.css">
+
+        <!-- SmartAdmin RTL Support is under construction
+                 This RTL CSS will be released in version 1.5
+        <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css"> -->
+
+        <!-- We recommend you use "your_style.css" to override SmartAdmin
+             specific styles this will also ensure you retrain your customization with each SmartAdmin update.
+        <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
+
+        <!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/demo.min.css">
+
+        <!-- FAVICONS -->
+        <link rel="shortcut icon" href="../../HTML_version/img/favicon/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="../../HTML_version/img/favicon/favicon.ico" type="image/x-icon">
+
+        <!-- GOOGLE FONT -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+
+        <!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
         <style type="text/css">
             body{
 
@@ -77,9 +107,9 @@
         </style>
         <script type="text/javascript">
             $(document).ready(
-                    function () {
+                    function() {
                         $(".item-m").click(
-                                function () {
+                                function() {
                                     $("#titulo-c").text($(this).text());
                                 }
                         );
@@ -139,7 +169,103 @@
                 </div>
             </div>
         </div>
+
+        <!-- Begin TABS-->
+        <div  style="border:3px solid red;" class="jarviswidget well" id="wid-id-3" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
+            <!-- widget options:
+            usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+            data-widget-colorbutton="false"
+            data-widget-editbutton="false"
+            data-widget-togglebutton="false"
+            data-widget-deletebutton="false"
+            data-widget-fullscreenbutton="false"
+            data-widget-custombutton="false"
+            data-widget-collapsed="true"
+            data-widget-sortable="false"
+
+            -->
+            <header>
+                <span class="widget-icon"> <i class="fa fa-comments"></i> </span>
+                <h2>Default Tabs with border </h2>
+
+            </header>
+
+            <!-- widget div-->
+            <div>
+
+                <!-- widget edit box -->
+                <div class="jarviswidget-editbox">
+                    <!-- This area used as dropdown edit box -->
+
+                </div>
+                <!-- end widget edit box -->
+
+                <!-- widget content -->
+                <div class="widget-body">
+
+
+                    <hr class="simple">
+                    <ul id="myTab1" class="nav nav-tabs bordered">
+                        <li class="active">
+                            <a href="#s1" data-toggle="tab">Informacion  <span class="badge bg-color-blue txt-color-white"></span></a>
+                        </li>
+                        <li>
+                            <a href="#s2" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i> Tab Item 2</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#s3" data-toggle="tab">@fat</a>
+                                </li>
+                                <li>
+                                    <a href="#s4" data-toggle="tab">@mdo</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="pull-right">
+                            <a href="javascript:void(0);">
+                                <div class="sparkline txt-color-pinkDark text-align-right" data-sparkline-height="18px" data-sparkline-width="90px" data-sparkline-barwidth="7">
+                                    5,10,6,7,4,3
+                                </div> </a>
+                        </li>
+                    </ul>
+
+                    <div id="myTabContent1" class="tab-content padding-10">
+                        <div class="tab-pane fade in active" id="s1">
+                            <p>
+                                I have six locks on my door all in a row. When I go out, I lock every other one. I figure no matter how long somebody stands there picking the locks, they are always locking three.
+                            </p>
+                        </div>
+                        <div class="tab-pane fade" id="s2">
+                            <p>
+                                Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee.
+                            </p>
+                        </div>
+                        <div class="tab-pane fade" id="s3">
+                            <p>
+                                Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony.
+                            </p>
+                        </div>
+                        <div class="tab-pane fade" id="s4">
+                            <p>
+                                Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- end widget content -->
+
+            </div>
+            <!-- end widget div -->
+
+        </div>        
+        <!-- end TABS-->
+        
         <div class="container theme-showcase" >
+
 
 
             <div  class="titulo">Detalle del Trabajador</div> 
@@ -165,7 +291,7 @@
                                         trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
 
                                 %>
-                                
+
                                 <tr><td class="td">Nombre :</td><td><%=trb.getNo_trabajador().toUpperCase()%></td></tr>
                                 <tr><td class="td">Apellido Paterno :</td><td><%=trb.getAp_paterno().toUpperCase()%></td></tr>
                                 <tr><td class="td">Apellido Materno :</td><td><%=trb.getAp_materno().toUpperCase()%></td></tr>
@@ -233,11 +359,338 @@
         <script src="../../js/JQuery/jQuery.js"></script>
         <script src="../../js/Js_dlmenu/jquery.dlmenu.js"></script>
         <script>
-            $(function () {
+            $(function() {
                 $('#dl-menu').dlmenu({
                     animationClasses: {classin: 'dl-animate-in-2', classout: 'dl-animate-out-2'}
                 });
             });
+        </script>
+
+        <!-- IMPORTANT: APP CONFIG -->
+        <script src="../../HTML_version/js/app.config.js"></script>
+
+        <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
+        <script src="../../HTML_version/js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
+
+        <!-- BOOTSTRAP JS -->
+        <script src="../../HTML_version/js/bootstrap/bootstrap.min.js"></script>
+
+        <!-- CUSTOM NOTIFICATION -->
+        <script src="../../HTML_version/js/notification/SmartNotification.min.js"></script>
+
+        <!-- JARVIS WIDGETS -->
+        <script src="../../HTML_version/js/smartwidgets/jarvis.widget.min.js"></script>
+
+        <!-- EASY PIE CHARTS -->
+        <script src="../../HTML_version/js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+
+        <!-- SPARKLINES -->
+        <script src="../../HTML_version/js/plugin/sparkline/jquery.sparkline.min.js"></script>
+
+        <!-- JQUERY VALIDATE -->
+        <script src="../../HTML_version/js/plugin/jquery-validate/jquery.validate.min.js"></script>
+
+        <!-- JQUERY MASKED INPUT -->
+        <script src="../../HTML_version/js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+
+        <!-- JQUERY SELECT2 INPUT -->
+        <script src="../../HTML_version/js/plugin/select2/select2.min.js"></script>
+
+        <!-- JQUERY UI + Bootstrap Slider -->
+        <script src="../../HTML_version/js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+
+        <!-- browser msie issue fix -->
+        <script src="../../HTML_version/js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+
+        <!-- FastClick: For mobile devices -->
+        <script src="../../HTML_version/js/plugin/fastclick/fastclick.min.js"></script>
+
+        <!--[if IE 8]>
+
+        <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+
+        <![endif]-->
+
+        <!-- Demo purpose only -->
+        <script src="../../HTML_version/js/demo.min.js"></script>
+
+        <!-- MAIN APP JS FILE -->
+        <script src="../../HTML_version/js/app.min.js"></script>
+
+        <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
+        <!-- Voice command : plugin -->
+        <script src="../../HTML_version/js/speech/voicecommand.min.js"></script>
+
+        <!-- PAGE RELATED PLUGIN(S) -->
+        <script src="../../HTML_version/js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+        <script type="text/javascript">
+
+            // DO NOT REMOVE : GLOBAL FUNCTIONS!
+
+            $(document).ready(function() {
+
+                pageSetUp();
+
+                /*
+                 * Autostart Carousel
+                 */
+                $('.carousel.slide').carousel({
+                    interval: 3000,
+                    cycle: true
+                });
+                $('.carousel.fade').carousel({
+                    interval: 3000,
+                    cycle: true
+                });
+
+                // Fill all progress bars with animation
+
+                $('.progress-bar').progressbar({
+                    display_text: 'fill'
+                });
+
+
+                /*
+                 * Smart Notifications
+                 */
+                $('#eg1').click(function(e) {
+
+                    $.bigBox({
+                        title: "Big Information box",
+                        content: "This message will dissapear in 6 seconds!",
+                        color: "#C46A69",
+                        //timeout: 6000,
+                        icon: "fa fa-warning shake animated",
+                        number: "1",
+                        timeout: 6000
+                    });
+
+                    e.preventDefault();
+
+                })
+
+                $('#eg2').click(function(e) {
+
+                    $.bigBox({
+                        title: "Big Information box",
+                        content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                        color: "#3276B1",
+                        //timeout: 8000,
+                        icon: "fa fa-bell swing animated",
+                        number: "2"
+                    });
+
+                    e.preventDefault();
+                })
+
+                $('#eg3').click(function(e) {
+
+                    $.bigBox({
+                        title: "Shield is up and running!",
+                        content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                        color: "#C79121",
+                        //timeout: 8000,
+                        icon: "fa fa-shield fadeInLeft animated",
+                        number: "3"
+                    });
+
+                    e.preventDefault();
+
+                })
+
+                $('#eg4').click(function(e) {
+
+                    $.bigBox({
+                        title: "Success Message Example",
+                        content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                        color: "#739E73",
+                        //timeout: 8000,
+                        icon: "fa fa-check",
+                        number: "4"
+                    }, function() {
+                        closedthis();
+                    });
+
+                    e.preventDefault();
+
+                })
+
+
+
+                $('#eg5').click(function() {
+
+                    $.smallBox({
+                        title: "Ding Dong!",
+                        content: "Someone's at the door...shall one get it sir? <p class='text-align-right'><a href='javascript:void(0);' class='btn btn-primary btn-sm'>Yes</a> <a href='javascript:void(0);' class='btn btn-danger btn-sm'>No</a></p>",
+                        color: "#296191",
+                        //timeout: 8000,
+                        icon: "fa fa-bell swing animated"
+                    });
+
+                });
+
+
+
+                $('#eg6').click(function() {
+
+                    $.smallBox({
+                        title: "Big Information box",
+                        content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                        color: "#5384AF",
+                        //timeout: 8000,
+                        icon: "fa fa-bell"
+                    });
+
+                })
+
+                $('#eg7').click(function() {
+
+                    $.smallBox({
+                        title: "James Simmons liked your comment",
+                        content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
+                        color: "#296191",
+                        iconSmall: "fa fa-thumbs-up bounce animated",
+                        timeout: 4000
+                    });
+
+                })
+
+                function closedthis() {
+                    $.smallBox({
+                        title: "Great! You just closed that last alert!",
+                        content: "This message will be gone in 5 seconds!",
+                        color: "#739E73",
+                        iconSmall: "fa fa-cloud",
+                        timeout: 5000
+                    });
+                }
+
+                /*
+                 * SmartAlerts
+                 */
+                // With Callback
+                $("#smart-mod-eg1").click(function(e) {
+                    $.SmartMessageBox({
+                        title: "Smart Alert!",
+                        content: "This is a confirmation box. Can be programmed for button callback",
+                        buttons: '[No][Yes]'
+                    }, function(ButtonPressed) {
+                        if (ButtonPressed === "Yes") {
+
+                            $.smallBox({
+                                title: "Callback function",
+                                content: "<i class='fa fa-clock-o'></i> <i>You pressed Yes...</i>",
+                                color: "#659265",
+                                iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                timeout: 4000
+                            });
+                        }
+                        if (ButtonPressed === "No") {
+                            $.smallBox({
+                                title: "Callback function",
+                                content: "<i class='fa fa-clock-o'></i> <i>You pressed No...</i>",
+                                color: "#C46A69",
+                                iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                timeout: 4000
+                            });
+                        }
+
+                    });
+                    e.preventDefault();
+                })
+                // With Input
+                $("#smart-mod-eg2").click(function(e) {
+
+                    $.SmartMessageBox({
+                        title: "Smart Alert: Input",
+                        content: "Please enter your user name",
+                        buttons: "[Accept]",
+                        input: "text",
+                        placeholder: "Enter your user name"
+                    }, function(ButtonPress, Value) {
+                        alert(ButtonPress + " " + Value);
+                    });
+
+                    e.preventDefault();
+                })
+                // With Buttons
+                $("#smart-mod-eg3").click(function(e) {
+
+                    $.SmartMessageBox({
+                        title: "Smart Notification: Buttons",
+                        content: "Lots of buttons to go...",
+                        buttons: '[Need?][You][Do][Buttons][Many][How]'
+                    });
+
+                    e.preventDefault();
+                })
+                // With Select
+                $("#smart-mod-eg4").click(function(e) {
+
+                    $.SmartMessageBox({
+                        title: "Smart Alert: Select",
+                        content: "You can even create a group of options.",
+                        buttons: "[Done]",
+                        input: "select",
+                        options: "[Costa Rica][United States][Autralia][Spain]"
+                    }, function(ButtonPress, Value) {
+                        alert(ButtonPress + " " + Value);
+                    });
+
+                    e.preventDefault();
+                });
+
+                // With Login
+                $("#smart-mod-eg5").click(function(e) {
+
+                    $.SmartMessageBox({
+                        title: "Login form",
+                        content: "Please enter your user name",
+                        buttons: "[Cancel][Accept]",
+                        input: "text",
+                        placeholder: "Enter your user name"
+                    }, function(ButtonPress, Value) {
+                        if (ButtonPress == "Cancel") {
+                            alert("Why did you cancel that? :(");
+                            return 0;
+                        }
+
+                        Value1 = Value.toUpperCase();
+                        ValueOriginal = Value;
+                        $.SmartMessageBox({
+                            title: "Hey! <strong>" + Value1 + ",</strong>",
+                            content: "And now please provide your password:",
+                            buttons: "[Login]",
+                            input: "password",
+                            placeholder: "Password"
+                        }, function(ButtonPress, Value) {
+                            alert("Username: " + ValueOriginal + " and your password is: " + Value);
+                        });
+                    });
+
+                    e.preventDefault();
+                });
+
+
+            })
+
+        </script>
+
+        <!-- Your GOOGLE ANALYTICS CODE Below -->
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+                var ga = document.createElement('script');
+                ga.type = 'text/javascript';
+                ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(ga, s);
+            })();
+
         </script>
         <%}%>
     </body>
