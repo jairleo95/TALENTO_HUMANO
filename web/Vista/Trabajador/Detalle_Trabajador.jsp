@@ -157,7 +157,7 @@
                     <div id="dl-menu" class="dl-menuwrapper">
                         <button class="dl-trigger">Open Menu</button>
                         <ul class="dl-menu">
-                            <li class="active"><a  class="item-m" href="Datos_Generales.jsp?idtr=<?echo $idtr;?>" target="contenido">Datos Personales  </a></li>
+                            <li class="active"><a  class="item-m" href="Datos_Generales.jsp?idtr=<?echo $idtr;?>" target="contenido">Información General  </a></li>
                             <li><a class="item-m" href="Aspecto_Academico.jsp?idtr=<?echo $idtr;?>" target="contenido">Aspecto Academico</a></li>
                             <li><a class="item-m" href="Aspecto_Social.jsp?idtr=<?echo $idtr;?>" target="contenido" >Aspecto Social</a></li>
                             <li><a class="item-m" href="../../familiar?idtr=<%=idtr%>&opc=Detalle_Familiar" target="contenido" >Familiares</a></li>
@@ -169,6 +169,43 @@
                 </div>
             </div>
         </div>
+
+        <!--Begin Detalle Trabajador-->
+        <div   class="titulo">Detalle del Trabajador</div> 
+        <table  style="background-color: white" class="table-det">
+
+
+            <%
+
+                if (t.getNo_ar_foto() == null) {
+            %>
+            <tr><td><img src="../../imagenes/avatar_default.jpg"  width="100"  height="100"></td>
+            <a href="../Usuario/Subir_Foto.jsp?idtr=<%=idtr%>">Subir imagen</a>
+            <%
+            } else {%>
+            <tr><td><img src="../Usuario/Fotos/<%=t.getAr_foto()%>"  width="100"  height="100"></td>
+                    <%}%>
+                <td>
+                    <div >
+                        <table class="info-det">
+                            <%
+                                for (int index = 0; index < ListaridTrabajador.size(); index++) {
+                                    V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
+                                    trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
+
+                            %>
+
+                            <tr><td class="td">Nombre :</td><td><%=trb.getNo_trabajador().toUpperCase()%></td></tr>
+                            <tr><td class="td">Apellido Paterno :</td><td><%=trb.getAp_paterno().toUpperCase()%></td></tr>
+                            <tr><td class="td">Apellido Materno :</td><td><%=trb.getAp_materno().toUpperCase()%></td></tr>
+                            <tr><td class="td">Fecha de Nacimiento :</td><td><%=trb.getFe_nac()%></td></tr>
+
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <!--End Detalle Trabajador-->
 
         <!-- Begin TABS-->
         <div  style="border:3px solid red;" class="jarviswidget well" id="wid-id-3" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
@@ -207,51 +244,50 @@
 
                     <hr class="simple">
                     <ul id="myTab1" class="nav nav-tabs bordered">
-                        <li class="active">
-                            <a href="#s1" data-toggle="tab">Informacion  <span class="badge bg-color-blue txt-color-white"></span></a>
+                        <li >
+                            <a href="#s1" data-toggle="tab">Información General <span class="badge bg-color-blue txt-color-white">Alex</span></a>
                         </li>
                         <li>
-                            <a href="#s2" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i> Tab Item 2</a>
+                            <a href="#s2" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i> Aspecto Académico</a>
                         </li>
-                        <li class="dropdown">
-                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="#s3" data-toggle="tab">@fat</a>
-                                </li>
-                                <li>
-                                    <a href="#s4" data-toggle="tab">@mdo</a>
-                                </li>
-                            </ul>
+                        <li >
+                            <a href="#s3" data-toggle="tab">Aspecto Social <span class="badge bg-color-blue txt-color-white">Alex</span></a>
                         </li>
-                        <li class="pull-right">
-                            <a href="javascript:void(0);">
-                                <div class="sparkline txt-color-pinkDark text-align-right" data-sparkline-height="18px" data-sparkline-width="90px" data-sparkline-barwidth="7">
-                                    5,10,6,7,4,3
-                                </div> </a>
+                        <li >
+                            <a href="#s4" data-toggle="tab">Familiares </a>
+                        </li>
+                        <li >
+                            <a href="#s5" data-toggle="tab">Requerimientos </a>
+                        </li>
+                        <li >
+                            <a href="#s6" data-toggle="tab">Documentación </a>
+                        </li>
+                        <li >
+                            <a href="#s7" data-toggle="tab">Información Contractual </a>
                         </li>
                     </ul>
 
                     <div id="myTabContent1" class="tab-content padding-10">
                         <div class="tab-pane fade in active" id="s1">
-                            <p>
-                                I have six locks on my door all in a row. When I go out, I lock every other one. I figure no matter how long somebody stands there picking the locks, they are always locking three.
-                            </p>
+                            <iframe name="contenido" id="contenido"  class="autoHeight" src="Datos_Generales.jsp" width="100%" height="100%" ></iframe>
                         </div>
-                        <div class="tab-pane fade" id="s2">
-                            <p>
-                                Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee.
-                            </p>
+                        <div class="tab-pane fade" id="s2">                           
+                            <iframe name="contenido" id="contenido"  class="autoHeight" src="Aspecto_Academico.jsp" width="100%" height="100%" ></iframe>                           
                         </div>
-                        <div class="tab-pane fade" id="s3">
-                            <p>
-                                Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony.
-                            </p>
+                        <div class="tab-pane fade" id="s3">                            
+                            <iframe name="contenido" id="contenido"  class="autoHeight" src="Aspecto_Social.jsp" width="100%" height="100%" ></iframe>                           
                         </div>
-                        <div class="tab-pane fade" id="s4">
-                            <p>
-                                Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table.
-                            </p>
+                        <div class="tab-pane fade" id="s4">                            
+                            <iframe name="contenido" id="contenido"  class="autoHeight" src="Familiar/Detalle_Familiar.jsp" width="100%" height="100%" ></iframe>
+                        </div>
+                        <div class="tab-pane fade" id="s5">                            
+                            <iframe name="contenido" id="contenido"  class="autoHeight" src="../Trabajador/List_Dgp_Trabajador.jsp" width="100%" height="100%" ></iframe>
+                        </div>
+                        <div class="tab-pane fade" id="s6">                            
+                            <iframe name="contenido" id="contenido"  class="autoHeight" src="../Trabajador/List_Doc_Trabajador.jsp" width="100%" height="100%" ></iframe>
+                        </div>
+                        <div class="tab-pane fade" id="s7">                            
+                            <iframe name="contenido" id="contenido"  class="autoHeight" src="../Contrato/Detalle_Info_Contractual.jsp" width="100%" height="100%" ></iframe>
                         </div>
                     </div>
 
@@ -263,47 +299,16 @@
 
         </div>        
         <!-- end TABS-->
-        
-        <div class="container theme-showcase" >
 
 
-
-            <div  class="titulo">Detalle del Trabajador</div> 
-            <table style="background-color: white" class="table-det">
+        <div class="container theme-showcase" style="border: 3px solid red">
 
 
-                <%
+            <!-- begin detalle trajador-->
+           
+            <!-- end detalle trajador-->
 
-                    if (t.getNo_ar_foto() == null) {
-                %>
-                <tr><td><img src="../../imagenes/avatar_default.jpg"  width="100"  height="100"></td>
-                <a href="../Usuario/Subir_Foto.jsp?idtr=<%=idtr%>">Subir imagen</a>
-                <%
-                } else {%>
-                <tr><td><img src="../Usuario/Fotos/<%=t.getAr_foto()%>"  width="100"  height="100"></td>
-                        <%}%>
-                    <td>
-                        <div >
-                            <table class="info-det">
-                                <%
-                                    for (int index = 0; index < ListaridTrabajador.size(); index++) {
-                                        V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
-                                        trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
-
-                                %>
-
-                                <tr><td class="td">Nombre :</td><td><%=trb.getNo_trabajador().toUpperCase()%></td></tr>
-                                <tr><td class="td">Apellido Paterno :</td><td><%=trb.getAp_paterno().toUpperCase()%></td></tr>
-                                <tr><td class="td">Apellido Materno :</td><td><%=trb.getAp_materno().toUpperCase()%></td></tr>
-                                <tr><td class="td">Fecha de Nacimiento :</td><td><%=trb.getFe_nac()%></td></tr>
-
-                            </table>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-
-            <div  class="titulo" id="titulo-c">Informacion Personal</div> 
+            <div  class="titulo" id="titulo-c">Información General</div> 
 
             <%
                 if (List_Auto_mostrar.size() == 1 & iddgp != null) {
@@ -318,7 +323,7 @@
             <iframe name="contenido" id="contenido"  class="autoHeight" src="Datos_Generales.jsp" width="100%" height="100%" ></iframe>
             <%}%>
         </div> 
-        <div>
+        <div style="border: 3px solid red">
             <%
 
                 if (aut != null) {
@@ -329,6 +334,7 @@
             <center>
                 <form class="form" action="../../autorizacion" method="post" > 
                     <table > 
+
                         <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
                         <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
                         <input type="hidden" name="COD" value="<%=cod%>"  >               
