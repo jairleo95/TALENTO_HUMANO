@@ -51,8 +51,8 @@
         <link rel="apple-touch-startup-image" href="img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="img/splash/iphone.png" media="screen and (max-device-width: 320px)">
 
-        <script src="js1/jquery-1.11.1.min.js" type="text/javascript"></script>
-        <script src="js2/index.js" type="text/javascript"></script>
+        <script src="js/JQuery/jQuery.js" type="text/javascript"></script>
+        <script src="js/Js_Index/index.js" type="text/javascript"></script>
 
         <script language="Javascript" type="text/javascript">
             document.oncontextmenu = function() {

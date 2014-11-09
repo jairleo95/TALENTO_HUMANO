@@ -171,7 +171,30 @@
 
     </head>
     <body>   
+        <script>
+            $(document).ready(function () {
+                var b = $("#alerta_dgp");
+               // $("#alerta_dgp").hide();
+                function listar() {
+                    $.post("../../plazo_dgp", "opc=Listar", function (objJson) {
+                        b.empty();
+                        var lista = objJson.lista;
+                        if (objJson.rpta == -1) {
+                            alert(objJson.mensaje);
+                            return;
+                        }
+                        for (var i = 0; i < lista.length; i++) {
+                            
+                            
+                            b.append("<div class='alert alert-danger alert-block' ><a class='close' data-dismiss='alert' href='#'>×</a><h4 class='alert-heading'>"+ lista[i].nom +"</h4>"+ lista[i].det + " , Fecha Plazo "+ lista[i].desde + " al "+ lista[i].hasta + "</div>");
+                        }
+                    });
+                }
+                listar();
 
+            });
+
+        </script>
 
         <div id="main" role="main" style="margin: 0px;">
 
@@ -182,6 +205,10 @@
                         <form action="../../dgp">
                             <!-- NEW COL START -->
                             <article class="col-sm-12 col-md-12 col-lg-6">
+
+                                <div id="alerta_dgp">
+                                   
+                                </div>
 
                                 <!-- Widget ID (each widget will need unique ID)-->
                                 <div class="jarviswidget" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-custombutton="false">
@@ -510,7 +537,7 @@
                                                             <input type="hidden" name="USER_CREACION_lun1"  >   
 
                                                             <tr class="tr-count"><td>T2 :</td><td><input type="text" name="HORA_DESDE_lun2" id="HORA_DESDE_lun2" class="texto-h" ></td>           
-                                                                <td ><input type="text" name="HORA_HASTA_lun2" id="HORA_HASTA_lun2" class="texto-h" ><div style="background-color: black;width:100px;" id="remScnt" >lskdrhdfhdfhdgndskgdjkg</div></td></tr>      
+                                                                <td ><input type="text" name="HORA_HASTA_lun2" id="HORA_HASTA_lun2" class="texto-h" ><a  id="remScnt" >-</a></td></tr>      
                                                             <input type="hidden" name="DIA_lun2" value="lun">                    
 
                                                             <input type="hidden" name="USER_CREACION_lun2"  >   

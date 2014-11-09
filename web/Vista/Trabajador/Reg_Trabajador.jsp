@@ -135,13 +135,13 @@
                         $(".doc").val("");
                         $("#nac").change(
                                 function () {
-                                    if ($("#nac").val() != "NAC-0044") {
+                                    if ($("#nac").val() != "NAC-0193") {
                                         $("#dist").hide();
                                         $("#dist_nac").val("DST-001832");
 
 
                                     }
-                                    if ($("#nac").val() == "NAC-0044") {
+                                    if ($("#nac").val() == "NAC-0193") {
 
                                         $("#dist").show();
                                     }
@@ -424,7 +424,7 @@
                                                                                 <%for (int s = 0; s < List_Nacionalidad.size(); s++) {
                                                                                         Nacionalidad nac = new Nacionalidad();
                                                                                         nac = (Nacionalidad) List_Nacionalidad.get(s);
-                                                                                        if (nac.getId_nacionalidad().equals("NAC-0044")) {
+                                                                                        if (nac.getId_nacionalidad().equals("NAC-0193")) {
                                                                                 %>
                                                                                 <option value="<%=nac.getId_nacionalidad()%>" selected="selected" ><%=nac.getNo_nacionalidad()%></option>
                                                                                 <%} else {%>
