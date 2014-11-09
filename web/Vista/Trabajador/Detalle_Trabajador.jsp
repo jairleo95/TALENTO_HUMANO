@@ -149,26 +149,8 @@
         <script type="text/javascript">
             // alerta_dt_ingresados();
         </script>
-        <%//}%>
-        <div class="container demo-2">	
-            <!--<div class="main clearfix">-->
-            <div class="main ">
-                <div class="column ">
-                    <div id="dl-menu" class="dl-menuwrapper">
-                        <button class="dl-trigger">Open Menu</button>
-                        <ul class="dl-menu">
-                            <li class="active"><a  class="item-m" href="Datos_Generales.jsp?idtr=<?echo $idtr;?>" target="contenido">Información General  </a></li>
-                            <li><a class="item-m" href="Aspecto_Academico.jsp?idtr=<?echo $idtr;?>" target="contenido">Aspecto Academico</a></li>
-                            <li><a class="item-m" href="Aspecto_Social.jsp?idtr=<?echo $idtr;?>" target="contenido" >Aspecto Social</a></li>
-                            <li><a class="item-m" href="../../familiar?idtr=<%=idtr%>&opc=Detalle_Familiar" target="contenido" >Familiares</a></li>
-                            <li><a class="item-m" href="../../dgp?idtr=<%=idtr%>&opc=List_Dgp_Tr" target="contenido">Requerimientos</a></li>
-                            <li><a class="item-m" href="../../trabajador?idtr=<%=idtr%>&opc=Documento_Trabajador" target="contenido">Documentos</a></li>
-                            <li><a class="item-m" href="../../contrato?idtr=<%=idtr%>&opc=Detalle_Contractual" target="contenido">Informacion Contractual</a></li>
-                        </ul>
-                    </div><!-- /dl-menuwrapper -->
-                </div>
-            </div>
-        </div>
+       
+        
 
         <!--Begin Detalle Trabajador-->
         <div   class="titulo">Detalle del Trabajador</div> 
@@ -245,7 +227,7 @@
                     <hr class="simple">
                     <ul id="myTab1" class="nav nav-tabs bordered">
                         <li >
-                            <a href="#s1" data-toggle="tab">Información General <span class="badge bg-color-blue txt-color-white">Alex</span></a>
+                            <a href="#s1" data-toggle="tab">Información General </a>
                         </li>
                         <li>
                             <a href="#s2" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i> Aspecto Académico</a>
@@ -269,25 +251,25 @@
 
                     <div id="myTabContent1" class="tab-content padding-10">
                         <div class="tab-pane fade in active" id="s1">
-                            <iframe name="contenido" id="contenido"  class="autoHeight" src="Datos_Generales.jsp" width="100%" height="100%" ></iframe>
+                            <iframe name="contenido" id="contenido"  class="autoHeight" src="Datos_Generales.jsp?idtr=<?echo $idtr;?>" width="100%" height="100%" ></iframe>
                         </div>
                         <div class="tab-pane fade" id="s2">                           
-                            <iframe name="contenido" id="contenido"  class="autoHeight" src="Aspecto_Academico.jsp" width="100%" height="100%" ></iframe>                           
+                            <iframe name="contenido" id="contenido"  class="autoHeight" src="Aspecto_Academico.jsp?idtr=<?echo $idtr;?>" width="100%" height="100%" ></iframe>                           
                         </div>
                         <div class="tab-pane fade" id="s3">                            
-                            <iframe name="contenido" id="contenido"  class="autoHeight" src="Aspecto_Social.jsp" width="100%" height="100%" ></iframe>                           
+                            <iframe name="contenido" id="contenido"  class="autoHeight" src="Aspecto_Social.jsp?idtr=<?echo $idtr;?>" width="100%" height="100%" ></iframe>                           
                         </div>
                         <div class="tab-pane fade" id="s4">                            
-                            <iframe name="contenido" id="contenido"  class="autoHeight" src="Familiar/Detalle_Familiar.jsp" width="100%" height="100%" ></iframe>
+                            <iframe name="contenido" id="contenido"  class="autoHeight" src="../../familiar?idtr=<%=idtr%>&opc=Detalle_Familiar" width="100%" height="100%" ></iframe>
                         </div>
                         <div class="tab-pane fade" id="s5">                            
-                            <iframe name="contenido" id="contenido"  class="autoHeight" src="../Trabajador/List_Dgp_Trabajador.jsp" width="100%" height="100%" ></iframe>
+                            <iframe name="contenido" id="contenido"  class="autoHeight" src="../../dgp?idtr=<%=idtr%>&opc=List_Dgp_Tr" width="100%" height="100%" ></iframe>
                         </div>
                         <div class="tab-pane fade" id="s6">                            
-                            <iframe name="contenido" id="contenido"  class="autoHeight" src="../Trabajador/List_Doc_Trabajador.jsp" width="100%" height="100%" ></iframe>
+                            <iframe name="contenido" id="contenido"  class="autoHeight" src="../../trabajador?idtr=<%=idtr%>&opc=Documento_Trabajador" width="100%" height="100%" ></iframe>
                         </div>
                         <div class="tab-pane fade" id="s7">                            
-                            <iframe name="contenido" id="contenido"  class="autoHeight" src="../Contrato/Detalle_Info_Contractual.jsp" width="100%" height="100%" ></iframe>
+                            <iframe name="contenido" id="contenido"  class="autoHeight" src="../../contrato?idtr=<%=idtr%>&opc=Detalle_Contractual" width="100%" height="100%" ></iframe>
                         </div>
                     </div>
 
@@ -301,28 +283,7 @@
         <!-- end TABS-->
 
 
-        <div class="container theme-showcase" style="border: 3px solid red">
-
-
-            <!-- begin detalle trajador-->
-           
-            <!-- end detalle trajador-->
-
-            <div  class="titulo" id="titulo-c">Información General</div> 
-
-            <%
-                if (List_Auto_mostrar.size() == 1 & iddgp != null) {
-                    for (int r = 0; r < List_Auto_mostrar.size(); r++) {
-                        Auto_Mostrar a = new Auto_Mostrar();
-                        a = (Auto_Mostrar) List_Auto_mostrar.get(r);
-            %>
-
-            <iframe name="contenido" id="contenido"  class="autoHeight" src="<%=a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getIdtr()%>" width="100%" height="100%" ></iframe>
-            <% }
-            } else { %>
-            <iframe name="contenido" id="contenido"  class="autoHeight" src="Datos_Generales.jsp" width="100%" height="100%" ></iframe>
-            <%}%>
-        </div> 
+        
         <div style="border: 3px solid red">
             <%
 
