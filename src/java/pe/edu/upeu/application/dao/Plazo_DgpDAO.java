@@ -32,7 +32,7 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select *  from rhtr_plazo where es_plazo ='1'";
+            String sql = "select *  from rhtr_plazo where es_plazo ='1' and SYSDATE BETWEEN FE_DESDE AND FE_HASTA";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
 

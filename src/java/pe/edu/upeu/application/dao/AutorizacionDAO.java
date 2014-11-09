@@ -98,27 +98,35 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
         try {
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
-                V_Autorizar_Dgp x = new V_Autorizar_Dgp();
-                x.setId_trabajador(rs.getString("id_trabajador"));
-                x.setNo_trabajador(rs.getString("no_trabajador"));
-                x.setAp_paterno(rs.getString("ap_paterno"));
-                x.setAp_materno(rs.getString("ap_materno"));
-                x.setNo_puesto(rs.getString("no_puesto"));
-                x.setNu_pasos(rs.getString("nu_pasos"));
-                x.setId_dgp(rs.getString("id_dgp"));
-                x.setCo_pasos(rs.getString("co_pasos"));
-                x.setId_detalle_req_proceso(rs.getString("id_detalle_req_proceso"));
-                x.setDe_pasos(rs.getString("de_pasos"));
-                x.setId_departamento(rs.getString("id_departamento"));
-                x.setId_puesto(rs.getString("id_puesto"));
-                x.setId_requerimiento(rs.getString("id_requerimiento"));
-                x.setId_tipo_planilla(rs.getString("id_tipo_planilla"));
-                x.setNo_req(rs.getString("no_req"));
-                x.setId_pasos(rs.getString("id_pasos"));
-                x.setNo_usuario(rs.getString("no_usuario"));
-                x.setNo_seccion(rs.getString("no_seccion"));
-                x.setNo_area(rs.getString("no_area"));
-                list.add(x);
+                V_Autorizar_Dgp v = new V_Autorizar_Dgp();
+
+                v.setId_trabajador(rs.getString("id_trabajador"));
+                v.setNo_trabajador(rs.getString("no_trabajador"));
+                v.setAp_paterno(rs.getString("ap_paterno"));
+                v.setAp_materno(rs.getString("ap_materno"));
+                v.setNo_puesto(rs.getString("no_puesto"));
+                v.setNu_pasos(rs.getString("nu_pasos"));
+                v.setId_dgp(rs.getString("id_dgp"));
+                v.setCo_pasos(rs.getString("co_pasos"));
+                v.setId_detalle_req_proceso(rs.getString("id_detalle_req_proceso"));
+                v.setDe_pasos(rs.getString("de_pasos"));
+                v.setId_departamento(rs.getString("id_departamento"));
+                v.setId_puesto(rs.getString("id_puesto"));
+                v.setId_requerimiento(rs.getString("id_requerimiento"));
+                v.setId_tipo_planilla(rs.getString("id_tipo_planilla"));
+                v.setNo_req(rs.getString("no_req"));
+                v.setId_pasos(rs.getString("id_pasos"));
+                v.setNo_usuario(rs.getString("no_usuario"));
+                v.setId_usuario(rs.getString("id_usuario"));
+                v.setNo_seccion(rs.getString("no_seccion"));
+                v.setNo_area(rs.getString("no_area"));
+                v.setAr_foto(rs.getString("ar_foto"));
+                v.setDe_foto(rs.getString("de_foto"));
+                v.setId_foto(rs.getString("id_foto"));
+                v.setNo_ar_foto(rs.getString("no_ar_foto"));
+                v.setTa_ar_foto(rs.getString("ta_ar_foto"));
+                v.setTi_ar_foto(rs.getString("ti_ar_foto"));
+                list.add(v);
             }
 
         } catch (SQLException e) {

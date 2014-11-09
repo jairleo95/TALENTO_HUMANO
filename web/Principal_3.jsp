@@ -475,7 +475,7 @@
 
                 <div class="row">
                     <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
-                        <h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-home"></i><label class="titulo_menu">Inicio</label><span> </span></h1>
+                        <h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-home"></i><label class="titulo_menu" style="color: #1881F2; font-weight: bold;">Inicio</label><span> </span></h1>
                     </div>
                     <!-- <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
                          <ul id="sparks" class="">

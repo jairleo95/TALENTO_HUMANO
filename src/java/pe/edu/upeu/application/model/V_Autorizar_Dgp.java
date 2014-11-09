@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pe.edu.upeu.application.model;
 
 /**
@@ -11,28 +10,35 @@ package pe.edu.upeu.application.model;
  * @author Alfa.sistemas
  */
 public class V_Autorizar_Dgp {
-    
-    private String id_trabajador;
-private String no_trabajador;
-private String ap_paterno;
-private String ap_materno;
-private String no_puesto;
-private String nu_pasos;
-private String id_dgp;
-private String co_pasos;
-private String id_detalle_req_proceso;
-private String de_pasos;
-private String id_departamento;
-private String id_puesto;
-private String id_requerimiento;
-private String id_tipo_planilla;
-private String no_req;
-private String id_pasos;
-private String no_usuario;
-private String no_seccion;
-private String no_area;
 
-    public V_Autorizar_Dgp(String id_trabajador, String no_trabajador, String ap_paterno, String ap_materno, String no_puesto, String nu_pasos, String id_dgp, String co_pasos, String id_detalle_req_proceso, String de_pasos, String id_departamento, String id_puesto, String id_requerimiento, String id_tipo_planilla, String no_req, String id_pasos, String no_usuario, String no_seccion, String no_area) {
+    private String id_trabajador;
+    private String no_trabajador;
+    private String ap_paterno;
+    private String ap_materno;
+    private String no_puesto;
+    private String nu_pasos;
+    private String id_dgp;
+    private String co_pasos;
+    private String id_detalle_req_proceso;
+    private String de_pasos;
+    private String id_departamento;
+    private String id_puesto;
+    private String id_requerimiento;
+    private String id_tipo_planilla;
+    private String no_req;
+    private String id_pasos;
+    private String no_usuario;
+    private String id_usuario;
+    private String no_seccion;
+    private String no_area;
+    private String ar_foto;
+    private String de_foto;
+    private String id_foto;
+    private String no_ar_foto;
+    private String ta_ar_foto;
+    private String ti_ar_foto;
+
+    public V_Autorizar_Dgp(String id_trabajador, String no_trabajador, String ap_paterno, String ap_materno, String no_puesto, String nu_pasos, String id_dgp, String co_pasos, String id_detalle_req_proceso, String de_pasos, String id_departamento, String id_puesto, String id_requerimiento, String id_tipo_planilla, String no_req, String id_pasos, String no_usuario, String id_usuario, String no_seccion, String no_area, String ar_foto, String de_foto, String id_foto, String no_ar_foto, String ta_ar_foto, String ti_ar_foto) {
         this.id_trabajador = id_trabajador;
         this.no_trabajador = no_trabajador;
         this.ap_paterno = ap_paterno;
@@ -50,10 +56,17 @@ private String no_area;
         this.no_req = no_req;
         this.id_pasos = id_pasos;
         this.no_usuario = no_usuario;
+        this.id_usuario = id_usuario;
         this.no_seccion = no_seccion;
         this.no_area = no_area;
+        this.ar_foto = ar_foto;
+        this.de_foto = de_foto;
+        this.id_foto = id_foto;
+        this.no_ar_foto = no_ar_foto;
+        this.ta_ar_foto = ta_ar_foto;
+        this.ti_ar_foto = ti_ar_foto;
     }
-    public V_Autorizar_Dgp(){
+    public V_Autorizar_Dgp() {
         this.id_trabajador = "";
         this.no_trabajador = "";
         this.ap_paterno = "";
@@ -71,8 +84,15 @@ private String no_area;
         this.no_req = "";
         this.id_pasos = "";
         this.no_usuario = "";
+        this.id_usuario = "";
         this.no_seccion = "";
         this.no_area = "";
+        this.ar_foto = "";
+        this.de_foto = "";
+        this.id_foto = "";
+        this.no_ar_foto = "";
+        this.ta_ar_foto = "";
+        this.ti_ar_foto = "";
     }
 
     public String getId_trabajador() {
@@ -211,6 +231,14 @@ private String no_area;
         this.no_usuario = no_usuario;
     }
 
+    public String getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(String id_usuario) {
+        this.id_usuario = id_usuario;
+    }
+
     public String getNo_seccion() {
         return no_seccion;
     }
@@ -226,5 +254,55 @@ private String no_area;
     public void setNo_area(String no_area) {
         this.no_area = no_area;
     }
+
+    public String getAr_foto() {
+        return ar_foto;
+    }
+
+    public void setAr_foto(String ar_foto) {
+        this.ar_foto = ar_foto;
+    }
+
+    public String getDe_foto() {
+        return de_foto;
+    }
+
+    public void setDe_foto(String de_foto) {
+        this.de_foto = de_foto;
+    }
+
+    public String getId_foto() {
+        return id_foto;
+    }
+
+    public void setId_foto(String id_foto) {
+        this.id_foto = id_foto;
+    }
+
+    public String getNo_ar_foto() {
+        return no_ar_foto;
+    }
+
+    public void setNo_ar_foto(String no_ar_foto) {
+        this.no_ar_foto = no_ar_foto;
+    }
+
+    public String getTa_ar_foto() {
+        return ta_ar_foto;
+    }
+
+    public void setTa_ar_foto(String ta_ar_foto) {
+        this.ta_ar_foto = ta_ar_foto;
+    }
+
+    public String getTi_ar_foto() {
+        return ti_ar_foto;
+    }
+
+    public void setTi_ar_foto(String ti_ar_foto) {
+        this.ti_ar_foto = ti_ar_foto;
+    }
     
+    
+
 }
