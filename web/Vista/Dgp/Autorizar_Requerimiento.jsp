@@ -164,7 +164,7 @@
                                                     InterfaceDgpDAO dgp = new DgpDAO();
                                                     if (t == 0) {
                                                 %>
-                                                <tr><td colspan="12" align="center"><h3>No hay ningún DGP por autorizar...</h3></td></tr>
+                                               <!-- <tr><td colspan="9" align="center"><h3>No hay ningún DGP por autorizar...</h3></td></tr>-->
                                                 <%}%>
                                                 <%for (int f = 0; f < List_id_Autorizacion.size(); f++) {
 

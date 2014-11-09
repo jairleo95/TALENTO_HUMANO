@@ -24,7 +24,7 @@
     </head>
     <body>  
         <div class="spacing">
-            <center><h1 class="spacing" style="font-weight: bold;">Requeriemientos Autorizados</h1></center> 
+            <center><h1 class="spacing" style="font-weight: bold;">Requerimientos Autorizados</h1></center> 
         </div>
     <center>
         <br>
@@ -41,7 +41,7 @@
                         <div class="form-group" >
                             <label>Fecha fin:</label><br>
                             <input type="date"  class="form-control" name="al" size="45" maxlength="100" style="width: 250px" />
-                            <input type="hidden" name="iddep" value="<? echo $_SESSION['DEPARTAMENTO_ID']; ?>">
+                            <input type="hidden" name="iddep" value="<%%>">
                         </div>
                     </div>
                     <div class="row">

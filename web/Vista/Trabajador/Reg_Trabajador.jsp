@@ -596,10 +596,12 @@
                                                                                     function () {
                                                                                         if ($("#sis_pens").val() != "1") {
                                                                                             $("#nom_afp").val("6");
+                                                                                            $("#nom_afp").attr("disabled",true);
                                                                                         }
                                                                                         if ($("#sis_pens").val() == "1") {
 
                                                                                             $("#nom_afp").val("");
+                                                                                             $("#nom_afp").removeAttr("disabled");
                                                                                         }
                                                                                     }
                                                                             );
@@ -629,7 +631,7 @@
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <select name="NOMBRE_AFP_ID" class="form-control input-lg" id="nom_afp" required="">
+                                                                            <select name="NOMBRE_AFP_ID" class="form-control input-lg" id="nom_afp" required=""  >
                                                                                 <option value="">[Nombre AFP]</option>
                                                                                 <option value="1">Integra</option>
                                                                                 <option value="2">Prima</option>
@@ -1198,7 +1200,7 @@
 
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
-                                                                            <select  class="form-control input-lg"  id="reli" required="" >
+                                                                            <select  class="form-control input-lg"  id="reli" required="" name="RELIGION">
                                                                                 <option value="">[Religión]</option>
                                                                                 <option value="1">Adventista</option>
                                                                                 <option value="2">Catolico</option>

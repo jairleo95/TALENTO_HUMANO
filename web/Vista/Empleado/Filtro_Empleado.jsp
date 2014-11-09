@@ -141,7 +141,7 @@
                                                                                                                                                 <td><%=e.getNo_puesto()%></td>
                                                                                                                                                 <td><%=e.getFe_desde()%></td>
                                                                                                                                                 <td><%=e.getFe_hasta()%></td>
-                                                                                                                                                <td><%=e.getCa_sueldo()%></td>
+                                                                                                                                                <td><%="S/. "+e.getCa_sueldo()%></td>
 
                                                                                                                                             </tr>
                                                                                                                                      

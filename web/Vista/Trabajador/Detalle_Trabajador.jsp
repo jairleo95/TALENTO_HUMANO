@@ -192,8 +192,8 @@
 
                     if (t.getNo_ar_foto() == null) {
                 %>
-                <tr><td ><img style="border: 3px solid green" src="../../imagenes/avatar_default.jpg"  width="100%"  height="100%"></td>
-                <a href="../Usuario/Subir_Foto.jsp?idtr=<%=idtr%>">Subir imagen</a>
+                <tr><td class="td2" ><img style="border: 3px solid grey ; position:absolute; left:0.5%; top: 6% " src="../../imagenes/avatar_default.jpg"  width="100"  height="100"></td>
+                    <td><a href="../Usuario/Subir_Foto.jsp?idtr=<%=idtr%>">Subir imagen</a></td>
                 <%
             } else {%>
             <tr><td class="td2"><img style="border: 3px solid grey ; position:absolute; left:0.5%; top: 6% " src="../Usuario/Fotos/<%=t.getAr_foto()%>"  width="100"  height="100"></td>
@@ -284,13 +284,13 @@
 
                     <div id="myTabContent1" class="tab-content padding-10">
                         <div class="tab-pane fade in active" id="s1">
-                            <iframe name="contenido" id="contenido"  class="autoHeight" src="Datos_Generales.jsp?idtr=<?echo $idtr;?>" width="100%" height="100%" ></iframe>
+                            <iframe name="contenido" id="contenido"  class="autoHeight" src="Datos_Generales.jsp" width="100%" height="100%" ></iframe>
                         </div>
                         <div class="tab-pane fade" id="s2">                           
-                            <iframe name="contenido" id="contenido"  class="autoHeight" src="Aspecto_Academico.jsp?idtr=<?echo $idtr;?>" width="100%" height="100%" ></iframe>                           
+                            <iframe name="contenido" id="contenido"  class="autoHeight" src="Aspecto_Academico.jsp" width="100%" height="100%" ></iframe>                           
                         </div>
                         <div class="tab-pane fade" id="s3">                            
-                            <iframe name="contenido" id="contenido"  class="autoHeight" src="Aspecto_Social.jsp?idtr=<?echo $idtr;?>" width="100%" height="100%" ></iframe>                           
+                            <iframe name="contenido" id="contenido"  class="autoHeight" src="Aspecto_Social.jsp" width="100%" height="100%" ></iframe>                           
                         </div>
                         <div class="tab-pane fade" id="s4">                            
                             <iframe name="contenido" id="contenido"  class="autoHeight" src="../../familiar?idtr=<%=idtr%>&opc=Detalle_Familiar" width="100%" height="100%" ></iframe>

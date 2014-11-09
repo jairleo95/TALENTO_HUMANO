@@ -52,7 +52,7 @@ public class CFamiliar extends HttpServlet {
             String AP_NOMBRES_MADRE = request.getParameter("APELLIDOS_NOMBRES_MADRE");
             String ES_TRABAJA_UPEU_CONYUGUE = request.getParameter("TRABAJA_UPEU_CONYUGUE");
             String AP_NOMBRES_CONYUGUE = request.getParameter("APELLIDO_NOMBRES_CONYUGUE");
-            String FE_NAC_CONYUGUE = c.convertFecha(request.getParameter("FECHA_NAC_CONYUGUE"));
+            String FE_NAC_CONYUGUE = request.getParameter("FECHA_NAC_CONYUGUE");
             String TI_DOC_ID = request.getParameter("TIPO_DOC_ID");
             String NU_DOC = request.getParameter("NRO_DOC");
             String LI_INSCRIPCION_VIG_ESSALUD = request.getParameter("INSCRIPCION_VIG_ESSALUD");
