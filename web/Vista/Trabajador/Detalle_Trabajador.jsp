@@ -30,6 +30,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/font-awesome.min.css">
 
+
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
         <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/smartadmin-skins.min.css">
@@ -52,25 +53,39 @@
         <!-- GOOGLE FONT -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
 
+        <!-- Specifying a Webpage Icon for Web Clip 
+                 Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
+        <link rel="apple-touch-icon" href="../../HTML_version/img/splash/sptouch-icon-iphone.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../HTML_version/img/splash/touch-icon-ipad.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../HTML_version/img/splash/touch-icon-iphone-retina.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../HTML_version/img/splash/touch-icon-ipad-retina.png">
+
         <!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+        <!-- Startup image for web apps -->
+        <link rel="apple-touch-startup-image" href="../../HTML_version/img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+        <link rel="apple-touch-startup-image" href="../../HTML_version/img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+        <link rel="apple-touch-startup-image" href="../../HTML_version/img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+
+
+
 
         <style type="text/css">
             body{
 
                 margin-left: auto;
                 margin-right: auto  ;
-                width: 70%;
+                width: 95%;
                 // margin: 0;
             }
             .titulo{
 
-                border-radius: 10px;
-                background-color:#0c9ba0 ;
-                width: 100%;
+
+                background-color: #474747;
                 padding: 0.5%;
-                margin-top: 0.5%;
+
                 font-family: arial;
                 font-size: 130%;
                 text-align: center;
@@ -83,14 +98,21 @@
 
             .td{
                 font-weight: bold;
-                text-align: right;
+                text-align: center;
+            }
+            .td1{
+                text-align: center;
+            }
+            .td2{
+                width: 8%;
             }
             .info-det{
-                margin: 5%;
+                 
+                width: 25%;
             }
 
             .table-det{
-                position: static;
+                width: 100%;
             }
             .submit{
                 //position: relative;
@@ -103,6 +125,16 @@
             .submit:hover{
                 background-color: #643771;
             }
+
+            table, th, td {
+                
+                padding: 4px;
+            }
+            img{
+               position: absolute;
+                
+            }
+
 
         </style>
         <script type="text/javascript">
@@ -149,48 +181,49 @@
         <script type="text/javascript">
             // alerta_dt_ingresados();
         </script>
-       
-        
 
         <!--Begin Detalle Trabajador-->
-        <div   class="titulo">Detalle del Trabajador</div> 
-        <table  style="background-color: white" class="table-det">
+        <div   class="titulo" style=" width:100%;">Detalle del Trabajador</div> 
+        <div  class="jarviswidget well" id="wid-id-3" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
+            <table  style="background-color: white " class="table-det" cellpadding="0">
 
 
-            <%
+                <%
 
-                if (t.getNo_ar_foto() == null) {
-            %>
-            <tr><td><img src="../../imagenes/avatar_default.jpg"  width="100"  height="100"></td>
-            <a href="../Usuario/Subir_Foto.jsp?idtr=<%=idtr%>">Subir imagen</a>
-            <%
+                    if (t.getNo_ar_foto() == null) {
+                %>
+                <tr><td ><img style="border: 3px solid green" src="../../imagenes/avatar_default.jpg"  width="100%"  height="100%"></td>
+                <a href="../Usuario/Subir_Foto.jsp?idtr=<%=idtr%>">Subir imagen</a>
+                <%
             } else {%>
-            <tr><td><img src="../Usuario/Fotos/<%=t.getAr_foto()%>"  width="100"  height="100"></td>
-                    <%}%>
-                <td>
-                    <div >
-                        <table class="info-det">
-                            <%
-                                for (int index = 0; index < ListaridTrabajador.size(); index++) {
-                                    V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
-                                    trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
+            <tr><td class="td2"><img style="border: 3px solid grey ; position:absolute; left:0.5%; top: 6% " src="../Usuario/Fotos/<%=t.getAr_foto()%>"  width="100"  height="100"></td>
+                        <%}%>
+                    <td>
+                        <div >
+                            <table   class="info-det" >
+                                <%
+                                    for (int index = 0; index < ListaridTrabajador.size(); index++) {
+                                        V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
+                                        trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
 
-                            %>
+                                %>
 
-                            <tr><td class="td">Nombre :</td><td><%=trb.getNo_trabajador().toUpperCase()%></td></tr>
-                            <tr><td class="td">Apellido Paterno :</td><td><%=trb.getAp_paterno().toUpperCase()%></td></tr>
-                            <tr><td class="td">Apellido Materno :</td><td><%=trb.getAp_materno().toUpperCase()%></td></tr>
-                            <tr><td class="td">Fecha de Nacimiento :</td><td><%=trb.getFe_nac()%></td></tr>
+                                <tr><td class="td">Nombre :</td><td class="td1"><%=trb.getNo_trabajador().toUpperCase()%></td></tr>
+                                <tr><td class="td">Apellido Paterno :</td><td class="td1"><%=trb.getAp_paterno().toUpperCase()%></td></tr>
+                                <tr><td class="td">Apellido Materno :</td><td class="td1"><%=trb.getAp_materno().toUpperCase()%></td></tr>
+                                <tr><td class="td">Fecha de Nacimiento :</td><td class="td1"><%=trb.getFe_nac()%></td></tr>
 
-                        </table>
-                    </div>
-                </td>
-            </tr>
-        </table>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
         <!--End Detalle Trabajador-->
 
         <!-- Begin TABS-->
-        <div  style="border:3px solid red;" class="jarviswidget well" id="wid-id-3" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
+        <div class="jarviswidget well" id="wid-id-3" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
             <!-- widget options:
             usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
@@ -227,25 +260,25 @@
                     <hr class="simple">
                     <ul id="myTab1" class="nav nav-tabs bordered">
                         <li >
-                            <a href="#s1" data-toggle="tab">Información General </a>
+                            <a href="#s1" data-toggle="tab"><i class="fa fa-male fa-gear"></i> Información General </a>
                         </li>
                         <li>
-                            <a href="#s2" data-toggle="tab"><i class="fa fa-fw fa-lg fa-gear"></i> Aspecto Académico</a>
+                            <a href="#s2" data-toggle="tab"><i class="fa fa-graduation-cap fa-gear"></i> Aspecto Académico</a>
                         </li>
                         <li >
-                            <a href="#s3" data-toggle="tab">Aspecto Social <span class="badge bg-color-blue txt-color-white">Alex</span></a>
+                            <a href="#s3" data-toggle="tab"><i class="fa fa-home fa-gear"></i> Aspecto Social </a>
                         </li>
                         <li >
-                            <a href="#s4" data-toggle="tab">Familiares </a>
+                            <a href="#s4" data-toggle="tab"><i class="fa fa-group fa-gear"></i> Familiares </a>
                         </li>
                         <li >
-                            <a href="#s5" data-toggle="tab">Requerimientos </a>
+                            <a href="#s5" data-toggle="tab"><i class="fa fa-file-o fa-gear"></i> Requerimientos </a>
                         </li>
                         <li >
-                            <a href="#s6" data-toggle="tab">Documentación </a>
+                            <a href="#s6" data-toggle="tab"><i class="fa fa-file fa-gear"></i> Documentación </a>
                         </li>
                         <li >
-                            <a href="#s7" data-toggle="tab">Información Contractual </a>
+                            <a href="#s7" data-toggle="tab"><i class="fa fa-file-text fa-gear"></i> Información Contractual </a>
                         </li>
                     </ul>
 
@@ -283,8 +316,8 @@
         <!-- end TABS-->
 
 
-        
-        <div style="border: 3px solid red">
+
+        <div >
             <%
 
                 if (aut != null) {
