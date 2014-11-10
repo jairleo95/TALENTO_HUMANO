@@ -13,9 +13,10 @@
         <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
         <script>
             $(document).ready(function () {
+                listar();
                 var b = $(".tbodys");
                 function listar() {
-                    $.post("../../../plazo_dgp", "opc=Listar", function (objJson) {
+                    $.post("../../../plazo_dgp", "opc=Listar&t_List=admin", function (objJson) {
                         b.empty();
                         var lista = objJson.lista;
                         if (objJson.rpta == -1) {
@@ -24,48 +25,83 @@
                         }
                         for (var i = 0; i < lista.length; i++) {
                             b.append("<tr>");
-                            b.append("<td>" + lista[i].nom + "</td>");
-                            b.append("<td>" + lista[i].det + "</td>");
-                            b.append("<td>" + lista[i].desde + "</td>");
-                            b.append("<td>" + lista[i].hasta + "</td>");
+                            b.append("<td class='id" + i + "'>" + lista[i].id + "</td>");
+                            b.append("<td class='nombre" + i + "'>" + lista[i].nom + "</td>");
+                            b.append("<td class='det" + i + "'>" + lista[i].det + "</td>");
+                            b.append("<td class='desde" + i + "'>" + lista[i].desde + "</td>");
+                            b.append("<td class='hasta" + i + "'>" + lista[i].hasta + "</td>");
+                            b.append("<td><button value='" + i + "' class='Editar-Plazo'>Modificar</button><button value='" + i + "' class='Eliminar-Plazo'>Eliminar</button></td>");
                             b.append("</tr>");
                         }
+
+                        $(".Editar-Plazo").click(
+                                function () {
+                                    $(".nombre_plazo").val($(".nombre" + $(this).val()).text());
+                                    $(".descripcion").val($(".det" + $(this).val()).text());
+                                    $(".desde").val($(".desde" + $(this).val()).text());
+                                    $(".hasta").val($(".hasta" + $(this).val()).text());
+                                    $("#form-plazo").append("<input type='hidden' name='ID' value='" + $(".id" + $(this).val()).text() + "'  />");
+                                    $("#btn-registrar").val("Modificar");
+                                    $(".opc").val("Modificar");
+
+                                }
+                        );
+                        $(".Eliminar-Plazo").click(
+                                function () {
+                                 alert("Esta seguro de Eliminar?");
+
+                                }
+                        );
+
                     });
                 }
-                listar();
+
 
                 $("#btn-registrar").click(
                         function () {
-                            $.post("../../../plazo_dgp", $("#form-plazo").serialize() + "&opc=Registrar");
+                            $.post("../../../plazo_dgp", $("#form-plazo").serialize(), function () {
+                                listar();
+
+                            });
+                            $("#btn-registrar").val("Registrar Plazo");
+                            $(".opc").val("Registrar");
                             $("#form-plazo")[0].reset();
-                            listar();
+
                             return false;
+
                         }
                 );
+
+
             });
 
         </script>
-    </head>
-    <body> 
+    </head >
+
+
+    <body > 
     <center>
         <h1>Registrar Plazo para Requerimientos</h1>
 
         <form  method="post" id="form-plazo" >
             <table>
-                <tr><td>Nombre Plazo :<td><input type="text" name="nombre_plazo" required="" /></td></tr>
-                <tr><td>Descripción :<td><textarea name="descripcion" required=""></textarea></td></tr>
-                <tr><td>Desde :<td><input type="date" name="desde" required=""/></td></tr>
-                <tr><td>Hasta :<td><input type="date" name="hasta" required="" /></td></tr>
-                <tr><td><input type="submit" id="btn-registrar" name="opc" value="Establecer Plazo" /></td></tr>
+                <tr><td>Nombre Plazo :<td><input type="text" name="nombre_plazo" required="" class="nombre_plazo" /></td></tr>
+                <tr><td>Descripción :<td><textarea name="descripcion" required="" class="descripcion"></textarea></td></tr>
+                <tr><td>Desde :<td><input type="date" name="desde" required="" class="desde"/></td></tr>
+                <tr><td>Hasta :<td><input type="date" name="hasta" required="" class="hasta"/></td></tr>
+                <input type="hidden" name="opc" value="Registrar"  class="opc"/>
+                <tr><td><input type="submit" id="btn-registrar" name="Enviar" value="Registrar Plazo" /></td></tr>
             </table>
         </form>
         <table border='1'>
             <thead>
                 <tr>
+                    <td>ID</td>
                     <td>Nombre Plazo</td>
                     <td>Descripción</td>
                     <td>Desde</td>
                     <td>Hasta</td>
+                    <td>Editar</td>
 
                 </tr>
             </thead>

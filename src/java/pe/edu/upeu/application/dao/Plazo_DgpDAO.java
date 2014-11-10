@@ -27,12 +27,13 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
     CConversion c = new CConversion();
 
     @Override
-    public List<Map<String, ?>> List_Plazo() {
+    public List<Map<String, ?>> List_Plazo(String t_List) {
 
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select *  from rhtr_plazo where es_plazo ='1' and SYSDATE BETWEEN FE_DESDE AND FE_HASTA";
+            String sql = "select id_plazo,no_plazo,det_alerta ,to_char(fe_desde,'yyyy-mm-dd')  as fe_desde ,to_char(fe_hasta,'yyyy-mm-dd')  as fe_hasta  from rhtr_plazo where es_plazo ='1'";
+            sql += (t_List != null) ? "" : " and SYSDATE BETWEEN FE_DESDE AND FE_HASTA";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
 
@@ -42,7 +43,6 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
                 rec.put("det", rs.getString("DET_ALERTA"));
                 rec.put("desde", rs.getString("FE_DESDE"));
                 rec.put("hasta", rs.getString("FE_HASTA"));
-            
                 lista.add(rec);
             }
             rs.close();
@@ -67,6 +67,25 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_PLAZO( ?, ?, ?, ?, ?, ?)}");
             cst.setString(1, null);
+            cst.setString(2, NO_PLAZO);
+            cst.setString(3, DET_ALERTA);
+            cst.setString(4, c.convertFecha(FE_DESDE));
+            cst.setString(5, c.convertFecha(FE_HASTA));
+            cst.setString(6, "1");
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        }
+    }
+
+    @Override
+    public void UPDATE_PLAZO(String ID_PLAZO, String NO_PLAZO, String DET_ALERTA, String FE_DESDE, String FE_HASTA, String ES_PLAZO) {
+        try {
+
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_UPDATE_PLAZO( ?, ?, ?, ?, ?, ?)}");
+            cst.setString(1, ID_PLAZO);
             cst.setString(2, NO_PLAZO);
             cst.setString(3, DET_ALERTA);
             cst.setString(4, c.convertFecha(FE_DESDE));

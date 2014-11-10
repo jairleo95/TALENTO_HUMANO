@@ -45,21 +45,29 @@ public class CPlazo extends HttpServlet {
         try {
             String opc = request.getParameter("opc");
             if (opc.equals("Mantenimiento")) {
-                 response.sendRedirect("Vista/Dgp/Plazo/Reg_Plazo_Dgp.jsp");
-                
+                response.sendRedirect("Vista/Dgp/Plazo/Reg_Plazo_Dgp.jsp");
+
             }
-  
             if (opc.equals("Registrar")) {
 
                 String NO_PLAZO = request.getParameter("nombre_plazo");
                 String DET_ALERTA = request.getParameter("descripcion");
                 String FE_DESDE = request.getParameter("desde");
                 String FE_HASTA = request.getParameter("hasta");
-
                 pl.INSERT_PLAZO(null, NO_PLAZO, DET_ALERTA, FE_DESDE, FE_HASTA, null);
             }
+            if (opc.equals("Modificar")) {
+
+                String ID_PLAZO= request.getParameter("ID");
+                String NO_PLAZO = request.getParameter("nombre_plazo");
+                String DET_ALERTA = request.getParameter("descripcion");
+                String FE_DESDE = request.getParameter("desde");
+                String FE_HASTA = request.getParameter("hasta");
+                pl.UPDATE_PLAZO(ID_PLAZO, NO_PLAZO, DET_ALERTA, FE_DESDE, FE_HASTA, null);
+            }
             if (opc.equals("Listar")) {
-                List<Map<String, ?>> lista = pl.List_Plazo();
+                String t_List = request.getParameter("t_List");
+                List<Map<String, ?>> lista = pl.List_Plazo(t_List);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
