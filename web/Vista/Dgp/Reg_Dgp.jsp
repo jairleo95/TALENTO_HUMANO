@@ -174,7 +174,7 @@
         <script>
             $(document).ready(function () {
                 var b = $("#alerta_dgp");
-               // $("#alerta_dgp").hide();
+                // $("#alerta_dgp").hide();
                 function listar() {
                     $.post("../../plazo_dgp", "opc=Listar", function (objJson) {
                         b.empty();
@@ -184,9 +184,9 @@
                             return;
                         }
                         for (var i = 0; i < lista.length; i++) {
-                            
-                            
-                            b.append("<div class='alert alert-danger alert-block' ><a class='close' data-dismiss='alert' href='#'>×</a><h4 class='alert-heading'>"+ lista[i].nom +"</h4>"+ lista[i].det + " , Fecha Plazo "+ lista[i].desde + " al "+ lista[i].hasta + "</div>");
+
+
+                            b.append("<div class='alert alert-danger alert-block' ><a class='close' data-dismiss='alert' href='#'>×</a><h4 class='alert-heading'>" + lista[i].nom + "</h4>" + lista[i].det + " , Fecha Plazo " + lista[i].desde + " al " + lista[i].hasta + "</div>");
                         }
                     });
                 }
@@ -207,7 +207,7 @@
                             <article class="col-sm-12 col-md-12 col-lg-6">
 
                                 <div id="alerta_dgp">
-                                   
+
                                 </div>
 
                                 <!-- Widget ID (each widget will need unique ID)-->
@@ -255,6 +255,7 @@
                                                 </header>
 
                                                 <fieldset>
+
                                                     <%
                                                         /*Temporal*/
                                                         String idreq = request.getParameter("idreq");
@@ -313,66 +314,66 @@
                                                             </select> 
                                                         </label>
                                                     </section>
-                                                    <section>
-                                                        <label class="label" id="titu">Fecha de Inicio :</label>
-                                                        <label class="input">
-                                                            <input type="date" name="FEC_DESDE"  required="" id="datepicker" class="input-xs" >
-                                                        </label>
-                                                    </section>
-                                                    <section>
-                                                        <label class="label" id="titu">Fecha de Cese :</label>
-                                                        <label class="input">
-                                                            <input type="date" required="" required="" name="FEC_HASTA" class="input-xs" >
-                                                        </label>
-                                                    </section>
-                                                    <section>
-                                                        <label class="label" id="titu">Sueldo :</label>
-                                                        <label class="input">
-                                                            <input type="text"  name="SUELDO" required="" value="0.0"  id="sueldo" class="input-xs" >
-                                                        </label>
-                                                    </section>
-                                                    <section>
-                                                        <label class="label" id="titu">Bono de Alimentos :</label>
-                                                        <label class="input">
-                                                            <input  type="text"  required="" value="0.0" name="BONO_ALIMENTARIO"  id="bono_al" class="input-xs" >
-
-                                                        </label>
-                                                    </section>
-                                                    <section>
-                                                        <label class="label" id="titu">BEV :</label>
-                                                        <label class="input">
-                                                            <input type="text" name="BEV" class="input-xs" value="0.0" id="bev" >
-                                                        </label>
-                                                    </section>
-                                                    <section>
-                                                        <label class="label" id="titu">Sueldo Total :</label>
-                                                        <label class="input">
-                                                            <div id="suel_total" style="color: red;">0.0</div>
-                                                        </label>
-                                                    </section>
-                                                    <section>
-                                                        <label class="label" id="titu">Centro de Costos :</label>
-                                                        <label class="input">
-                                                            <select name="CENTRO_COSTOS">
-                                                                <option value="0">----</option>
-                                                            </select>
-                                                        </label>
-                                                    </section>
-                                                    <section>
-                                                        <label class="label" id="titu">Antecedentes Policiales :</label>
-                                                        <label class="input">
-                                                            <select name="ANTECEDENTES_POLICIALES" >
+                                                    <div class="row">
+                                                        <section class="col col-6" >
+                                                            <label class="input" id="titu">Fecha de Inicio :
+                                                                <input type="date" name="FEC_DESDE" id="datepicker" required="" >
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-6">
+                                                            <label class="input"  id="titu"> 
+                                                                Fecha de Cese :<input type="date" name="FEC_DESDE"  required="" id="datepicker">
+                                                            </label>
+                                                        </section>
+                                                    </div>
+                                                    <div class="row">
+                                                        <section class="col col-3" >
+                                                            <label class="input" id="titu">Sueldo :
+                                                                <input type="text" name="SUELDO" required="" value="0.0"  id="sueldo" >
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-3">
+                                                            <label class="input"  id="titu"> 
+                                                                Bono de Alimentos :<input type="text" required="" value="0.0" name="BONO_ALIMENTARIO"  id="bono_al">
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-3">
+                                                            <label class="input"  id="titu"> 
+                                                                BEV :<input type="text" name="BEV"  value="0.0" id="bev">
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-3">
+                                                            <label class="input"  id="titu"> 
+                                                                Sueldo Total :<div id="suel_total" style="color: red;">0.0</div>
+                                                            </label>
+                                                        </section>
+                                                    </div>
+                                                    <div  class="row">
+                                                        <section class="col col-4">
+                                                            
+                                                                <label class="select" id="titu">
+                                                                Centro de Costos :<select name="CENTRO_COSTOS" >
+                                                                    <option value="0">----</option>
+                                                                </select>
+                                                       
+                                                        </section>
+                                                        <section class="col col-4">
+                                                            
+                                                                <label class="select" id="titu">
+                                                               Antecedentes Policiales :<select name="ANTECEDENTES_POLICIALES" >
                                                                 <option value="1" selected="">No</option>
                                                                 <option value="2">Si</option>
                                                             </select>
-                                                        </label>
-                                                    </section>
-                                                    <section>
-                                                        <label class="label" id="titu">Certificado de Salud :</label>
-                                                        <label class="input">
-                                                            <input type="text" name="CERTIFICADO_SALUD" class="input-xs"  required=""e>
-                                                        </label>
-                                                    </section>
+                                                       
+                                                        </section>
+                                                        <section class="col col-4">
+                                                            
+                                                                <label class="input" id="titu">
+                                                               Certificado de Salud : <input type="text" name="CERTIFICADO_SALUD" required="">
+                                                       
+                                                        </section>
+                                                    </div>
+
                                                     <input type="hidden" name="IDREQUERIMIENTO"  id="combito"  value="<%=idreq%>">
                                                     <div id="div_2" class="contenido" style="display: none">
                                                         <table  class="table">

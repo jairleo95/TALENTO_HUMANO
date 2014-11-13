@@ -98,7 +98,6 @@
                         }
                         for (var i = 0; i < lista.length; i++) {
 
-
                             b.append("<div class='alert alert-danger alert-block' ><a class='close' data-dismiss='alert' href='#'>×</a><h4 class='alert-heading'>" + lista[i].nom + "</h4>" + lista[i].det + " , Fecha Plazo " + lista[i].desde + " al " + lista[i].hasta + "</div>");
                         }
                     });
