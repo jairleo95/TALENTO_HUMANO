@@ -64,6 +64,10 @@
         <servlet-name>Roles</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CRoles</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CPaso</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CPaso</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
         <url-pattern>/trabajador</url-pattern>
@@ -127,6 +131,10 @@
     <servlet-mapping>
         <servlet-name>Roles</servlet-name>
         <url-pattern>/CRoles</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CPaso</servlet-name>
+        <url-pattern>/paso</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

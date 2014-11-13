@@ -83,7 +83,7 @@ public class Carrera_UniversidadDAO implements InterfaceCarrera_UniversidadDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select uc.id_universidad_carrera,trim(c.no_carrera) as no_carrera  from rhtx_carrera c , rhtx_universidad_carrera uc where trim(uc.id_carrera) = trim(c.id_carrera) and trim(uc.id_universidad)='" + id.trim() + "'";
+            String sql = "select uc.id_universidad_carrera,trim(c.no_carrera) as no_carrera  from rhtx_carrera c , rhtx_universidad_carrera uc where trim(uc.id_carrera) = trim(c.id_carrera) and trim(uc.id_universidad)='" + id.trim() + "' order by no_carrera asc";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 String cuenta = rs.getString("no_carrera");
