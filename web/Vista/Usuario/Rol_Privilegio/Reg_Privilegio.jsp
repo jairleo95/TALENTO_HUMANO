@@ -1,23 +1,48 @@
+<%-- 
+    Document   : List_Roles
+    Created on : 31-oct-2014, 12:36:30
+    Author     : joserodrigo
+--%>
+
+<%@page import="pe.edu.upeu.application.model.Privilegio"%>
+<%@page import="pe.edu.upeu.application.model.Rol"%>
+<jsp:useBean id="List_Privilegio" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
-        <meta charset="windows-1252">
-        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+        <title>Listar Privilegios</title>
+        <link rel="stylesheet" href="../../../css/Css_Lista/listas.css" />
+
     </head>
     <body>
-       
-    <center><label class="title">PRIVILEGIO</label><form class="form" action="../Control/ControlPrivilegio.php" method="post"> <table class="table">                
-                                     
-                             <tr><td>Link:</td><td><input type="text" name="LINK" class="text-box" ></td></tr>                   
-                             <tr><td>Url:</td><td><input type="text" name="URL" class="text-box" ></td></tr>                
-                             <tr><td>Estado:</td><td><input type="text" name="ESTADO" class="text-box" ></td></tr>        
-                             <tr><td><input type="submit" name="opc"  class="submit" value="REGISTRAR"></td></tr>
-                         </table>
-                     </form></center><br><br>
+        <form action="../../../Privilegio">
+        <center
+            <button name="opc" value="Registrar">Registrar Nuevo Privilegio</button>
+        <table>
+            <tr><td class="cajita">Nro</td>
+                <td class="cajita">Privilegio</td>
+                <td class="cajita">Estado</td>
+                <td class="cajita" colspan="3">Opcion</td>
+            <%for(int i=0;i<List_Privilegio.size();i++){
+              Privilegio r = new Privilegio();
+              r = (Privilegio) List_Privilegio.get(i);
+              
+            %>    
+            <tr><td class=""><%=i+1%></td>
+                <td class=""><%=r.getNo_link()%></td>
+               <% if(r.getEs_privilegio().trim().equals("0")){%>
+                <td class="caji"> Desactivado </td>
+                <%}else if(r.getEs_privilegio().trim().equals("1")){%>
+                    <td class="caji"> Activado </td> 
+                <%}%>
+                 <td class="caji"> <a href="../../../Privilegios?idrol=<%=r.getId_privilegio()%>&opc=modificar_Priv" ><img src="../../../imagenes/lapiz.png" alt="" width="25px" height="25px"/></a></td>
+                 <td class="caji"><a href="../../../Privilegios?idrol=<%=r.getId_privilegio()%>&opc=Desactivar_Priv" ><img src="../../../imagenes/eliminar.png" alt=""   width="25px" height="25px"/></a></td> 
+                 <td class="caji"><a href="../../../Privilegios?idrol=<%=r.getId_privilegio()%>&opc=Activar_Priv" ><img src="../../../imagenes/Aprobado.png" alt=""   width="25px" height="25px"/></a></td> 
+            <tr>
+            <%}%>
+        </table>
+        </center>
+        </form>
     </body>
 </html>

@@ -6,6 +6,7 @@
 
 package pe.edu.upeu.application.dao;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -44,8 +45,9 @@ public class PrivilegioDAO implements InterfacePrivilegioDAO{
         List<Privilegio> list= new ArrayList<Privilegio>();
         try {
             ResultSet rs = this.conn.query(sql);
-            Privilegio p = new Privilegio();
-            while (rs.next()) {     
+            
+            while (rs.next()) {   
+                Privilegio p = new Privilegio();
                 p.setDi_url(rs.getString("di_url"));
                 p.setEs_privilegio(rs.getString("es_privilegio"));
                 p.setId_privilegio(rs.getString("id_privilegio"));
@@ -57,6 +59,20 @@ public class PrivilegioDAO implements InterfacePrivilegioDAO{
         this.conn.close();
         }        
       return list;
+    }
+
+    @Override
+    public void Eliminar_Privilegio(String id_Priv) {
+        CallableStatement cst;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = conn.conex.prepareCall("{CALL RHSP_DELETE_ROL(?)}");
+            cst.setString(1, id_Priv);
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        }
     }
     
 }

@@ -94,11 +94,25 @@ public class RolDAO implements InterfaceRolDAO {
     }
 
     @Override
-    public void Eliminar_Roles(String id_rol) {
+    public void Desactivar_Roles(String id_rol) {
         CallableStatement cst;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            cst = conn.conex.prepareCall("{CALL RHSP_DELETE_ROL(?)}");
+            cst = conn.conex.prepareCall("{CALL RHSP_DESACTIVAR_ROL(?)}");
+            cst.setString(1, id_rol);
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        }
+    }
+
+    @Override
+    public void Activar_Roles(String id_rol) {
+        CallableStatement cst;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = conn.conex.prepareCall("{CALL RHSP_ACTIVAR_ROL(?)}");
             cst.setString(1, id_rol);
             cst.execute();
         } catch (SQLException ex) {

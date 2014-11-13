@@ -22,5 +22,8 @@ public interface InterfaceRolDAO {
 
     public void INSERT_ROLES(String no_rol);
     
-    public void Eliminar_Roles(String id_rol);
+    public void Desactivar_Roles(String id_rol);
+    
+    public void Activar_Roles(String id_rol);
+    
 }
