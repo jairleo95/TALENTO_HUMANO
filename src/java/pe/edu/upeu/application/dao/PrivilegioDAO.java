@@ -62,17 +62,32 @@ public class PrivilegioDAO implements InterfacePrivilegioDAO{
     }
 
     @Override
-    public void Eliminar_Privilegio(String id_Priv) {
+    public void Desactivar_Privilegio(String id_Priv) {
         CallableStatement cst;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            cst = conn.conex.prepareCall("{CALL RHSP_DELETE_ROL(?)}");
+            cst = conn.conex.prepareCall("{CALL RHSP_DESACTIVAR_PRIV(?)}");
             cst.setString(1, id_Priv);
             cst.execute();
         } catch (SQLException ex) {
         } finally {
             this.conn.close();
         }
+    }
+
+    @Override
+    public void Activar_Privilegio(String id_Priv) {
+        CallableStatement cst;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = conn.conex.prepareCall("{CALL RHSP_ACTIVAR_PRIV(?)}");
+            cst.setString(1, id_Priv);
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        }
+        
     }
     
 }

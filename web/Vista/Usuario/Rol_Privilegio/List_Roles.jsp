@@ -31,7 +31,7 @@
                 <%}else if(r.getEs_rol().trim().equals("0")){%>
                 <td class="cajita">Desactivado</td>
                 <%}%>
-                <td class="caji"> <a href="../../../Privilegios?idrol=<%=r.getId_rol()%>&opc=modificar_Rol" ><img src="../../../imagenes/lapiz.png" alt="" width="25px" height="25px"/></a></td>
+                <td class="caji"> <a href="../../../Privilegios?idrol=<%=r.getId_rol()%>&opc=Modificar_Rol" ><img src="../../../imagenes/lapiz.png" alt="" width="25px" height="25px"/></a></td>
                 <td class="caji"><a href="../../../Privilegios?idrol=<%=r.getId_rol()%>&opc=Desactivar_Rol" ><img src="../../../imagenes/eliminar.png" alt=""   width="25px" height="25px"/></a></td> 
                 <td class="caji"><a href="../../../Privilegios?idrol=<%=r.getId_rol()%>&opc=Activar_Rol" ><img src="../../../imagenes/Aprobado.png" alt=""   width="25px" height="25px"/></a></td> 
             <tr>

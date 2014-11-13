@@ -18,5 +18,6 @@ public interface InterfacePrivilegioDAO {
     public boolean Insert_Proceso();
     public boolean Insert_Detalle_Privilegio();
     public List<Privilegio> List_Privilegio();
-    public void Eliminar_Privilegio(String id_Priv);
+    public void Desactivar_Privilegio(String id_Priv);
+    public void Activar_Privilegio(String id_Priv);
 }
