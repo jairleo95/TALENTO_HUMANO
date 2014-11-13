@@ -1,3 +1,6 @@
+<%@page import="pe.edu.upeu.application.model.Rol"%>
+<jsp:useBean id="List_Privilegio" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Rol" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -21,16 +24,13 @@ $list_pri=$modp->LIST_PRIVILEGIO();
     <center>
         <label class="title">OTORGAR PRIVILEGIOS</label>
         <form class="form" action="../Control/ControlPrivilegio.php" method="post"> 
-            <table class="table" >               
-                <tr><td>Rol:</td><td>
-                        <select  name="IDROLES">
-                    <option>----</option>
-                        <?  for ($i = 0; $i < count($list_rol); $i++) {?>
-                    <option value="<? echo $list_rol[$i][0];?>"><?echo $list_rol[$i][1];?></option>
-                            <?}?>
-                        </select>
-                    </td></tr>
-               <tr><td>Nro_orden:</td><td><input type="text" name="NRO_ORDEN" class="text-box" ></td></tr>                                 
+            <table class="table" >    
+                <% for(int i=0;i<List_Rol.size();i++){
+                            Rol r = new Rol();
+                            r = (Rol) List_Rol.get(i);
+                        %>
+                <tr><td>Nombre Rol:</td><input type="text" name="Nombre_Rol" value="<%%>"></tr>
+                <tr><td>Nro_orden:</td><td><input type="text" name="NRO_ORDEN" class="text-box" value="<%%>"></td></tr>                                 
                <tr><td>Privilegio:</td><td>
                        <select name="IDPRIVILEGIO" >
                            <option>------</option>
@@ -51,3 +51,4 @@ $list_pri=$modp->LIST_PRIVILEGIO();
 
     </body>
 </html>
+<%@include file="" %>

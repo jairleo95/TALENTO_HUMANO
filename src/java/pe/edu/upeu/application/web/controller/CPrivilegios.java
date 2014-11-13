@@ -52,7 +52,8 @@ public class CPrivilegios extends HttpServlet {
             if(opc.equals("Modificar_Rol")){
                 String idrol=request.getParameter("idrol");
                 getServletContext().setAttribute("List_Rol", rol.List_Rol());
-                response.sendRedirect("Vista/Usuario/Rol_Privilegio/List_Roles.jsp");
+                getServletContext().setAttribute("List_Privilegio", priv.List_Privilegio());
+                response.sendRedirect("Vista/Usuario/Rol_Privilegio/Otorgar_Privilegio.jsp");
                 
             }
             if(opc.equals("Desactivar_Rol")){
