@@ -32,8 +32,8 @@ public class RolDAO implements InterfaceRolDAO {
         List<Rol> list = new ArrayList<Rol>();
         try {
             ResultSet rs = this.conn.query(sql);
-            Rol r = new Rol();
             while (rs.next()) {
+                Rol r = new Rol();
                 r.setId_rol(rs.getString("id_rol"));
                 r.setNo_rol(rs.getString("no_rol"));
                 list.add(r);

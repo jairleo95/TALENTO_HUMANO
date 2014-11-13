@@ -13,7 +13,7 @@
         <table>
             <thead>
                 <tr>
-                    <th class="cajita">Nro</th>
+                    <th class="cajita ">Nro</th>
                     <th class="cajita">Apellidos y Nombres</th>
                     <th class="cajita">Fecha de Nacimiento</th>              
                     <th class="cajita">Sexo</th>              

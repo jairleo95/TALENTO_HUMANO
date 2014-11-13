@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <title>Lista Hijos</title>
+        <title>Listar Roles</title>
         <link rel="stylesheet" href="../../../css/Css_Lista/listas.css" />
     </head>
     <body>
@@ -15,8 +15,7 @@
                 <tr>
                     <th class="cajita">Nro</th>
                     <th class="cajita">Rol</th>
-                    <th class="cajita">Privilegio</th>              
-                    <th class="cajita">Opcion</th>              
+                    <th class="cajita">Privilegio</th>                          
                    <th colspan="2" class="cajita">Opciones</th>
                 </tr>  
             </thead>
