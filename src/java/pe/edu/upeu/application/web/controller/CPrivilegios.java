@@ -46,6 +46,12 @@ public class CPrivilegios extends HttpServlet {
                 response.sendRedirect("Vista/Usuario/Rol_Privilegio/List_Roles.jsp");
                 
             }
+            if(opc.equals("Eliminar")){
+                String idrol=request.getParameter("idrol");
+                rol.Eliminar_Roles(idrol);
+                getServletContext().setAttribute("List_Rol", rol.List_Rol());
+                response.sendRedirect("Vista/Usuario/Rol_Privilegio/List_Roles.jsp");
+            }
         } catch (Exception e){
         }
     }

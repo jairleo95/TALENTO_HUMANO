@@ -36,6 +36,7 @@ public class RolDAO implements InterfaceRolDAO {
                 Rol r = new Rol();
                 r.setId_rol(rs.getString("id_rol"));
                 r.setNo_rol(rs.getString("no_rol"));
+                r.setEs_rol(rs.getString("es_rol"));
                 list.add(r);
             }
 
@@ -85,6 +86,20 @@ public class RolDAO implements InterfaceRolDAO {
             cst = conn.conex.prepareCall("{CALL RHSP_INSERT_ROL( ?,?)}");
             cst.setString(1, id_rol);
             cst.setString(2, no_rol);
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        }
+    }
+
+    @Override
+    public void Eliminar_Roles(String id_rol) {
+        CallableStatement cst;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = conn.conex.prepareCall("{CALL RHSP_DELETE_ROL(?)}");
+            cst.setString(1, id_rol);
             cst.execute();
         } catch (SQLException ex) {
         } finally {
