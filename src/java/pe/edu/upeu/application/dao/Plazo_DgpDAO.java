@@ -98,4 +98,17 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
         }
     }
 
+    @Override
+    public void REMOVE_PLAZO(String ID_PLAZO) {
+
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = " DELETE FROM RHTR_PLAZO WHERE ID_PLAZO='" + ID_PLAZO.trim() + "'";
+            this.conn.ejecutar(sql);
+        } catch (Exception e) {
+            this.conn.close();
+        }
+
+    }
+
 }

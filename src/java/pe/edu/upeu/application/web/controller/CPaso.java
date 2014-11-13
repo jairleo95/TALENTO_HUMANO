@@ -35,7 +35,7 @@ public class CPaso extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      response.setContentType("application/json");
+        response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
         InterfacePasoDAO p = new PasoDAO();
@@ -46,6 +46,10 @@ public class CPaso extends HttpServlet {
                 List<Map<String, ?>> lista = p.List_Paso();
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
+            }
+            if (opc.equals("Mantenimiento")) {
+                response.sendRedirect("Vista/Proceso/Edit_Paso.jsp");
+
             }
         } catch (Exception e) {
             rpta.put("rpta", "-1");

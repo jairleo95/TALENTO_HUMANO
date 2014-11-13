@@ -30,7 +30,7 @@
                             b.append("<td class='det" + i + "'>" + lista[i].det + "</td>");
                             b.append("<td class='desde" + i + "'>" + lista[i].desde + "</td>");
                             b.append("<td class='hasta" + i + "'>" + lista[i].hasta + "</td>");
-                            b.append("<td><button value='" + i + "' class='Editar-Plazo'>Modificar</button><button value='" + i + "' class='Eliminar-Plazo'>Eliminar</button></td>");
+                            b.append("<td><button value='" + i + "' class='Editar-Plazo'>Modificar</button><button value='" + i + "' class='Eliminar-Plazo' value='" + i + "'>Eliminar</button></td>");
                             b.append("</tr>");
                         }
 
@@ -48,7 +48,20 @@
                         );
                         $(".Eliminar-Plazo").click(
                                 function () {
-                                 alert("Esta seguro de Eliminar?");
+
+                                    if (confirm("Esta Seguro de Eliminar?")) {
+
+                                        $.post("../../../plazo_dgp", "opc=Eliminar&plz=" + $(".id" + $(this).val()).text(), function () {
+
+                                            listar();
+                                        });
+
+                                    } else {
+
+
+                                    }
+
+
 
                                 }
                         );
@@ -81,7 +94,7 @@
 
     <body > 
     <center>
-        <h1>Registrar Plazo para Requerimientos</h1>
+        <h1>Mantenimiento de Plazos de Requerimientos</h1>
 
         <form  method="post" id="form-plazo" >
             <table>

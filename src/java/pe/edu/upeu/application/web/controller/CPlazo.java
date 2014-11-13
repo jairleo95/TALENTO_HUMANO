@@ -58,7 +58,7 @@ public class CPlazo extends HttpServlet {
             }
             if (opc.equals("Modificar")) {
 
-                String ID_PLAZO= request.getParameter("ID");
+                String ID_PLAZO = request.getParameter("ID");
                 String NO_PLAZO = request.getParameter("nombre_plazo");
                 String DET_ALERTA = request.getParameter("descripcion");
                 String FE_DESDE = request.getParameter("desde");
@@ -70,6 +70,11 @@ public class CPlazo extends HttpServlet {
                 List<Map<String, ?>> lista = pl.List_Plazo(t_List);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
+            }
+            if (opc.equals("Eliminar")) {
+                String id = request.getParameter("plz");
+                pl.REMOVE_PLAZO(id);
+
             }
         } catch (Exception e) {
             rpta.put("rpta", "-1");
