@@ -22,14 +22,15 @@
             <%for(int i=0;i<List_Rol.size();i++){
               Rol r = new Rol();
               r = (Rol) List_Rol.get(i);
+              if(r.getEs_rol().trim().equals("1")){
             %>    
             <tr><td class=""><%=i%></td>
                 <td class=""><%=r.getNo_rol()%></td>
                 <td class="caji"> <a href="../../../Privilegios?idrol=<%=r.getId_rol()%>&opc=modificar" ><img src="../../../imagenes/lapiz.png" alt="" width="25px" height="25px"/></a></td>
-                    <td class="caji"><a href="../../../Privilegios?idrol=<%=r.getId_rol()%>&opc=eliminar" >
+                    <td class="caji"><a href="../../../Privilegios?idrol=<%=r.getId_rol()%>&opc=Eliminar" >
                             <img src="../../../imagenes/eliminar.png" alt=""   width="25px" height="25px"/></a></td> 
             <tr>
-            <%}%>
+            <%}}%>
         </table>
     </body>
 </html>
