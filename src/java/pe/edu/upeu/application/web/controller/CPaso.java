@@ -48,8 +48,19 @@ public class CPaso extends HttpServlet {
                 rpta.put("lista", lista);
             }
             if (opc.equals("Mantenimiento")) {
-                response.sendRedirect("Vista/Proceso/Edit_Paso.jsp");
+                response.sendRedirect("Vista/Proceso/Menu_Mantenimiento.jsp");
 
+            }
+            if (opc.equals("Eliminar")) {
+                String id = request.getParameter("paso");
+                p.DELETE_PASOS(id);
+            }
+            if (opc.equals("Registrar")) {
+                String ID_PROCESO = request.getParameter("proceso");
+                String DE_PASOS = request.getParameter("desc");
+                String NU_PASOS = request.getParameter("num");
+                String CO_PASOS = request.getParameter("cod");
+                p.INSERT_PASOS(null, ID_PROCESO, DE_PASOS, NU_PASOS, CO_PASOS);
             }
         } catch (Exception e) {
             rpta.put("rpta", "-1");

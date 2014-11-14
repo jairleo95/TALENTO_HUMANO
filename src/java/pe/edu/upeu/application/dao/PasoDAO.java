@@ -5,6 +5,7 @@
  */
 package pe.edu.upeu.application.dao;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -56,6 +57,35 @@ public class PasoDAO implements InterfacePasoDAO {
             }
         }
         return lista;
+
+    }
+
+    @Override
+    public void INSERT_PASOS(String ID_PASOS, String ID_PROCESO, String DE_PASOS, String NU_PASOS, String CO_PASOS) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_PASOS( ?, ?, ?, ?, ? )} ");
+            cst.setString(1, null);
+            cst.setString(2, ID_PROCESO);
+            cst.setString(3, DE_PASOS);
+            cst.setString(4, NU_PASOS);
+            cst.setString(5, CO_PASOS);
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        }
+    }
+
+    @Override
+    public void DELETE_PASOS(String ID_PASOS) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = " DELETE FROM RHTC_PASOS WHERE ID_PASOS='" + ID_PASOS.trim() + "'";
+            this.conn.ejecutar(sql);
+        } catch (Exception e) {
+            this.conn.close();
+        }
 
     }
 
