@@ -15,11 +15,11 @@
 
                         <!-- Basic Styles -->
                         <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
-                            <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
+                        <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
 
-                                <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
-                                <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
-                                    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
+                        <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+                        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
+                        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
 
                                         <!-- SmartAdmin RTL Support is under construction
                                                  This RTL CSS will be released in version 1.5
