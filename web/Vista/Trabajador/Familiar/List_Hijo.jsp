@@ -56,9 +56,9 @@
 
 
             <!-- widget content -->
-            <div class="widget-body no-padding" style="border: 3px solid green">
+            <div class="widget-body " >
 
-                <table id="datatable_tabletools" class="table table-striped table-bordered table-hover" width="100%" style="border: 3px solid red">
+                <table id="datatable_tabletools" class="table table-striped table-bordered table-hover" width="100%" >
                     <thead>
                         <tr>
                             <th data-hide="phone">Nro</th>
