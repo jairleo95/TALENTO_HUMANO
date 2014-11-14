@@ -88,11 +88,7 @@
                                 data-widget-sortable="false"
 
                                 -->
-                                <header>
-                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                    <h2>Información Contractual</h2>
-
-                                </header>
+                            
 
                                 <!-- widget div-->
                                 <div>
@@ -109,11 +105,11 @@
                                         <table id="datatable_tabletools" class="table table-striped table-bordered table-hover" width="100%">
                                             <thead>
                                                 <tr>
-                                                    <th data-hide="phone">Nro</th>
-                                                    <th data-class="expand">Nombres </th>
-                                                    <th data-hide="phone,tablet">Documento</th>
-                                                    <th data-hide="phone">Descrición</th>
-                                                    <th data-hide="phone,tablet">Requerimiento</th>
+                                                    <th data-hide="phone" style="color:black">Nro</th>
+                                                    <th data-class="expand" style="color:black">Nombres </th>
+                                                    <th data-hide="phone,tablet" style="color:black">Documento</th>
+                                                    <th data-hide="phone" style="color:black">Descrición</th>
+                                                    <th data-hide="phone,tablet" style="color:black">Requerimiento</th>
                                                 </tr>  
                                             <thead>
                                             <tbody>
