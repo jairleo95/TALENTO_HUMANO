@@ -86,6 +86,13 @@ InterfaceRolDAO rol=new RolDAO();
                 response.sendRedirect("Vista/Usuario/Rol_Privilegio/List_Privilegios.jsp");
                
             }
+            if(opc.equals("Eliminar_Priv")){
+                String idrol=request.getParameter("id_priv");
+                priv.Eliminar_Privilegio(idrol);
+                getServletContext().setAttribute("List_Privilegio",priv.List_Privilegio());
+                response.sendRedirect("Vista/Usuario/Rol_Privilegio/List_Privilegios.jsp");
+               
+            }
             if(opc.equals("Activar_Priv")){
                 String idrol=request.getParameter("id_priv");
                 priv.Activar_Privilegio(idrol);
@@ -111,7 +118,12 @@ InterfaceRolDAO rol=new RolDAO();
                 response.sendRedirect("Vista/Usuario/Rol_Privilegio/Reg_Privilegios.jsp");
             }
             if(opc.equals("REGISTRAR PRIVILEGIO")){
-                
+                String no_link=request.getParameter("No_Link");
+                String di_url=request.getParameter("Di_url");
+                String es_privilegio=request.getParameter("Es_privilegio");
+                String Ic_Link=request.getParameter("Ic_Link");
+                out.print(no_link+" "+di_url+" "+es_privilegio+" "+Ic_Link);
+                priv.Insert_Privilegio(no_link, di_url, es_privilegio, Ic_Link);
                 getServletContext().setAttribute("List_Privilegio",priv.List_Privilegio());
                 response.sendRedirect("Vista/Usuario/Rol_Privilegio/Reg_Privilegios.jsp");
             }

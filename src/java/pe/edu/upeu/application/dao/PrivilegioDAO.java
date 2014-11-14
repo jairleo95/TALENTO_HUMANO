@@ -34,8 +34,6 @@ public class PrivilegioDAO implements InterfacePrivilegioDAO{
             cst.setString(1, id_Priv);
             cst.setString(2, No_Link);
             cst.setString(3, Di_url);
-            
-            
             cst.setString(4, Es_privilegio);
             cst.setString(5, Ic_Link);
             cst.execute();
@@ -144,6 +142,20 @@ public class PrivilegioDAO implements InterfacePrivilegioDAO{
         this.conn.close();
         }        
       return list;
+    }
+
+    @Override
+    public void Eliminar_Privilegio(String id_Priv) {
+        CallableStatement cst;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = conn.conex.prepareCall("{CALL RHSP_ELIMINAR_PRIV(?)}");
+            cst.setString(1, id_Priv);
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        }
     }
     
 }

@@ -8,7 +8,7 @@
     <body>
         <center>
                 <label class="title">HIJOS</label>
-                <form class="form" action="../../../familiar"> 
+                <form class="form" action="../../../Privilegios"> 
                          <table class="table" >  
                              <tr><td>Nombre de Privilegio</td><td><input type="text" name="No_Link" class="text-box" required="" maxlength="30"></td></tr>      
                              <tr><td>Direccion url</td><td><input type="text" name="Di_url" class="text-box"  required="" maxlength="30"></td></tr>    

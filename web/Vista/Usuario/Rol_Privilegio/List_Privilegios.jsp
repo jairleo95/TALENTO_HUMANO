@@ -18,7 +18,7 @@
             <tr><td class="cajita">Nro</td>
                 <td class="cajita">Privilegio</td>
                 <td class="cajita">Estado</td>
-                <td class="cajita" colspan="3">Opcion</td>
+                <td class="cajita" colspan="4">Opcion</td>
             <%for(int i=0;i<List_Privilegio.size();i++){
               Privilegio r = new Privilegio();
               r = (Privilegio) List_Privilegio.get(i);
@@ -34,6 +34,7 @@
                  <td class="caji"> <a href="../../../Privilegios?id_priv=<%=r.getId_privilegio()%>&opc=modificar_Priv1" ><img src="../../../imagenes/lapiz.png" alt="" width="25px" height="25px"/></a></td>
                  <td class="caji"><a href="../../../Privilegios?id_priv=<%=r.getId_privilegio()%>&opc=Desactivar_Priv" ><img src="../../../imagenes/eliminar.png" alt=""   width="25px" height="25px"/></a></td> 
                  <td class="caji"><a href="../../../Privilegios?id_priv=<%=r.getId_privilegio()%>&opc=Activar_Priv" ><img src="../../../imagenes/Aprobado.png" alt=""   width="25px" height="25px"/></a></td> 
+                 <td class="caji"><a href="../../../Privilegios?id_priv=<%=r.getId_privilegio()%>&opc=Eliminar_Priv" ><img src="../../../imagenes/Desaprobado.png" alt=""   width="25px" height="25px"/></a></td> 
             <tr>
             <%}%>
         </table>
