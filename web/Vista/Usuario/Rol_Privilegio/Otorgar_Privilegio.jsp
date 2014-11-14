@@ -1,54 +1,50 @@
-<%@page import="pe.edu.upeu.application.model.Rol"%>
+<%@page import="pe.edu.upeu.application.model.Privilegio_Rol"%>
+<%@page import="pe.edu.upeu.application.model.V_Rol"%>
+<%@page import="pe.edu.upeu.application.model.Privilegio"%>
 <jsp:useBean id="List_Privilegio" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Rol" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_Car_Rol" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_Rol_Privilegio" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<?
-require_once '../Modelo/modelorol.php';
-require_once '../Modelo/ModeloPrivilegio.php';
-$modp=new ModeloPrivilegio();
-$modr=new modelorol();
-$list_rol=$modr->ListarRol();
-$list_pri=$modp->LIST_PRIVILEGIO();
-?>
 <html>
     <head>
-        <meta charset="windows-1252">
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <title></title>
+        
     </head>
     <body>
     <center>
         <label class="title">OTORGAR PRIVILEGIOS</label>
-        <form class="form" action="../Control/ControlPrivilegio.php" method="post"> 
-            <table class="table" >    
-                <% for(int i=0;i<List_Rol.size();i++){
-                            Rol r = new Rol();
-                            r = (Rol) List_Rol.get(i);
-                        %>
-                <tr><td>Nombre Rol:</td><input type="text" name="Nombre_Rol" value="<%%>"></tr>
-                <tr><td>Nro_orden:</td><td><input type="text" name="NRO_ORDEN" class="text-box" value="<%%>"></td></tr>                                 
+        <form class="form" action="../../../Privilegios" method="post"> 
+            <table class="table" >  
+                <%for(int u=0 ;u<Listar_Car_Rol.size();u++){
+                V_Rol r=new V_Rol();
+                r=(V_Rol)Listar_Car_Rol.get(u);
+                
+                %>
+                <tr><td>Nombre</td><td ><input type="text" name="Nombre_Rol" class="text-box" value="<%=r.getNo_Rol()%>" disabled="disabled"></td></tr>
+                <tr><td>Nro_orden:</td><td><input type="number" name="NRO_ORDEN" class="text-box"  ></td></tr>                                 
                <tr><td>Privilegio:</td><td>
                        <select name="IDPRIVILEGIO" >
                            <option>------</option>
-                           <?  for ($f = 0; $f < count($list_pri); $f++) {?>
-                           <option value="<?echo $list_pri[$f][0];?>"><?echo $list_pri[$f][1];?></option>
-                           <?}?>
+                       <% for(int i =0;i<List_Privilegio.size();i++){
+                           Privilegio p=new Privilegio();
+                           p =(Privilegio)List_Privilegio.get(i);
+                       %>
+                           <option value="<%=p.getId_privilegio()%>"><%=p.getNo_link()%></option>
+                         <%}%>
                        </select>
-                       
                      
                    </td></tr>                       
-               
-               <input type="hidden" name="ESTADO" value="1" class="text-box" >                           
-               <tr><td><input type="submit" name="opc"  class="submit" value="OTORGAR"></td></tr>
-           </table>
+               <input type="hidden" name="ESTADO" value="1" class="text-box">                           
+               <tr><td><input type="submit" name="opc"  class="submit" value="Otorgar"></td><td><input type="submit" name="opc"  class="submit" value="Terminar"></td></tr>
+            </table>
        </form>
    </center>
     <br><br>
-
     </body>
 </html>
-<%@include file="" %>
+<center></center>
+<%
+                }
+       
+%>

@@ -6,9 +6,11 @@
 package pe.edu.upeu.application.dao_imp;
 
 import java.util.List;
+import pe.edu.upeu.application.model.Privilegio_Rol;
 
 import pe.edu.upeu.application.model.Rol;
 import pe.edu.upeu.application.model.V_Privilegio;
+import pe.edu.upeu.application.model.V_Rol;
 
 /**
  *
@@ -22,8 +24,16 @@ public interface InterfaceRolDAO {
 
     public void INSERT_ROLES(String no_rol);
     
+    public void Mod_Rol(String Id_rol, String No_Rol, String Es_Rol);
+    
     public void Desactivar_Roles(String id_rol);
     
     public void Activar_Roles(String id_rol);
+    
+    public List<Privilegio_Rol>Listar_Rol_Privilegio(String id_rol);
+    
+    public List<Rol>Listar_Rol_id(String id_rol);
+    
+    
     
 }

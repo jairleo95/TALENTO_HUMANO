@@ -1,9 +1,3 @@
-<%-- 
-    Document   : List_Roles
-    Created on : 31-oct-2014, 12:36:30
-    Author     : joserodrigo
---%>
-
 <%@page import="pe.edu.upeu.application.model.Privilegio"%>
 <%@page import="pe.edu.upeu.application.model.Rol"%>
 <jsp:useBean id="List_Privilegio" scope="application" class="java.util.ArrayList"/>
@@ -16,10 +10,11 @@
 
     </head>
     <body>
-        <form action="../../../Privilegio" method="post">
-        <center
-            <button name="opc" value="Registrar">Registrar Nuevo Privilegio </button>
+        <form action="../../../Privilegios" method="post">
+            <center>
+            
         <table>
+            <tr><input type="submit" name="opc" value="Registrar"></tr>
             <tr><td class="cajita">Nro</td>
                 <td class="cajita">Privilegio</td>
                 <td class="cajita">Estado</td>
@@ -36,7 +31,7 @@
                 <%}else if(r.getEs_privilegio().trim().equals("1")){%>
                     <td class="caji"> Activado </td> 
                 <%}%>
-                 <td class="caji"> <a href="../../../Privilegios?id_priv=<%=r.getId_privilegio()%>&opc=modificar_Priv" ><img src="../../../imagenes/lapiz.png" alt="" width="25px" height="25px"/></a></td>
+                 <td class="caji"> <a href="../../../Privilegios?id_priv=<%=r.getId_privilegio()%>&opc=modificar_Priv1" ><img src="../../../imagenes/lapiz.png" alt="" width="25px" height="25px"/></a></td>
                  <td class="caji"><a href="../../../Privilegios?id_priv=<%=r.getId_privilegio()%>&opc=Desactivar_Priv" ><img src="../../../imagenes/eliminar.png" alt=""   width="25px" height="25px"/></a></td> 
                  <td class="caji"><a href="../../../Privilegios?id_priv=<%=r.getId_privilegio()%>&opc=Activar_Priv" ><img src="../../../imagenes/Aprobado.png" alt=""   width="25px" height="25px"/></a></td> 
             <tr>

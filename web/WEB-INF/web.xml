@@ -72,6 +72,10 @@
         <servlet-name>CProceso</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CProceso</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CPrivilegio</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CPrivilegio</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
         <url-pattern>/trabajador</url-pattern>
@@ -143,6 +147,10 @@
     <servlet-mapping>
         <servlet-name>CProceso</servlet-name>
         <url-pattern>/proceso</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CPrivilegio</servlet-name>
+        <url-pattern>/Privilegios</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

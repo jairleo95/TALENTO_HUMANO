@@ -16,6 +16,7 @@
     </head>
     <body>
         <table>
+            <tr><td><a href="../../../Privilegios?opc=Ingresar_Rol"></a></td></tr>
             <tr><td class="cajita">Nro</td>
                 <td class="cajita">Rol</td>
                 <td class="cajita">Estado</td>
