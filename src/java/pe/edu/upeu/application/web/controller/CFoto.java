@@ -51,7 +51,7 @@ public class CFoto extends HttpServlet {
         InterfaceTrabajadorDAO tr = new TrabajadorDAO();
 
         try {
-            String ubicacion = "C:\\Users\\ALFA 3\\Documents\\NetBeansProjects\\TALENTO_HUMANO\\web\\Vista\\Usuario\\Fotos";
+            String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "\\Vista\\Usuario\\Fotos";
             DiskFileItemFactory f = new DiskFileItemFactory();
             f.setSizeThreshold(1024);
             f.setRepository(new File(ubicacion));

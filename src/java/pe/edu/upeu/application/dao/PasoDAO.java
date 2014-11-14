@@ -27,12 +27,13 @@ public class PasoDAO implements InterfacePasoDAO {
     CConversion c = new CConversion();
 
     @Override
-    public List<Map<String, ?>> List_Paso() {
+    public List<Map<String, ?>> List_Paso(String Proceso) {
 
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select * from rhtc_pasos where   id_proceso='PCO-000001'";
+            String sql = "select * from rhtc_pasos ";
+            sql += (Proceso!=null)?" where   id_proceso='"+Proceso.trim() + "'":"";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
 

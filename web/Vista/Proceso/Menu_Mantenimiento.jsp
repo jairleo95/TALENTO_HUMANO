@@ -21,7 +21,7 @@
     <li><a href="Mant_Paso_Puesto.jsp"  target="myframe">Paso - Puesto</a></li>
     <li><a href="Mant_Req_Proceso.jsp"  target="myframe">Requerimiento - Proceso</a></li>
     </ul>
-    <iframe id="myframe" name="myframe" width="100%" height="800" scrolling="si" frameborder="0" src="Edit_Paso.jsp" />
+    <iframe id="myframe" name="myframe" width="100%" height="800" scrolling="si" frameborder="0" src="Mant_Paso.jsp" />
 
 </body>
 </html>

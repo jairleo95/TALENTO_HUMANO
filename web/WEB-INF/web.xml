@@ -68,6 +68,10 @@
         <servlet-name>CPaso</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CPaso</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CProceso</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CProceso</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
         <url-pattern>/trabajador</url-pattern>
@@ -135,6 +139,10 @@
     <servlet-mapping>
         <servlet-name>CPaso</servlet-name>
         <url-pattern>/paso</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CProceso</servlet-name>
+        <url-pattern>/proceso</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -5,24 +5,20 @@
  */
 package pe.edu.upeu.application.web.controller;
 
-import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import pe.edu.upeu.application.dao.PasoDAO;
-import pe.edu.upeu.application.dao_imp.InterfacePasoDAO;
 
 /**
  *
  * @author ALFA 3
  */
-public class CPaso extends HttpServlet {
+@WebServlet(name = "Pruebaas", urlPatterns = {"/Pruebaas"})
+public class Pruebaas extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,50 +31,22 @@ public class CPaso extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        InterfacePasoDAO p = new PasoDAO();
-        Map<String, Object> rpta = new HashMap<String, Object>();
         try {
-            String opc = request.getParameter("opc");
-            if (opc.equals("Listar")) {
-                 String id = request.getParameter("proceso");
-                List<Map<String, ?>> lista = p.List_Paso(id.trim());
-                rpta.put("rpta", "1");
-                rpta.put("lista", lista);
-            }
-            if (opc.equals("Mantenimiento")) {
-                response.sendRedirect("Vista/Proceso/Menu_Mantenimiento.jsp");
-
-            }
-            if (opc.equals("Eliminar")) {
-                String id = request.getParameter("paso");
-                p.DELETE_PASOS(id);
-            }
-            if (opc.equals("Registrar")) {
-                String ID_PROCESO = request.getParameter("proceso");
-                String DE_PASOS = request.getParameter("desc");
-                String NU_PASOS = request.getParameter("num");
-                String CO_PASOS = request.getParameter("cod");
-                p.INSERT_PASOS(null, ID_PROCESO, DE_PASOS, NU_PASOS, CO_PASOS);
-            }
-            if (opc.equals("Modificar")) {
-                String ID_PASO = request.getParameter("id");
-                String ID_PROCESO = request.getParameter("proceso");
-                String DE_PASOS = request.getParameter("desc");
-                String NU_PASOS = request.getParameter("num");
-                String CO_PASOS = request.getParameter("cod");
-                p.INSERT_PASOS(ID_PASO, ID_PROCESO, DE_PASOS, NU_PASOS, CO_PASOS);
-            }
-        } catch (Exception e) {
-            rpta.put("rpta", "-1");
-            rpta.put("mensaje", e.getMessage());
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Pruebaas</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet Pruebaas at " + getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        } finally {
+            out.close();
         }
-        Gson gson = new Gson();
-        out.print(gson.toJson(rpta));
-        out.flush();
-        out.close();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
