@@ -127,6 +127,17 @@ InterfaceRolDAO rol=new RolDAO();
                 getServletContext().setAttribute("List_Privilegio",priv.List_Privilegio());
                 response.sendRedirect("Vista/Usuario/Rol_Privilegio/Reg_Privilegios.jsp");
             }
+            if(opc.equals("Otorgar")){
+                getServletContext().setAttribute("List_Rol", rol.List_Rol());
+                getServletContext().setAttribute("List_Privilegio",priv.List_Privilegio());
+                getServletContext().setAttribute("List_Pr_Rol", priv.List_Pr_Rol());
+                response.sendRedirect("Vista/Usuario/Rol_Privilegio/Otorgar_Privilegio.jsp");
+            }
+            if(opc.equals("Listar_PR_ROL")){
+                getServletContext().setAttribute("List_Pr_Rol", priv.List_Pr_Rol());
+                response.sendRedirect("Vista/Usuario/Rol_Privilegio/List_Priv_Rol.jsp");
+            }
+            
         } finally {
             out.close();
         }

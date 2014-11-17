@@ -1,12 +1,17 @@
+<%-- 
+    Document   : List_Priv_Roles
+    Created on : 14-nov-2014, 13:25:53
+    Author     : joserodrigo
+--%>
+
 <%@page import="pe.edu.upeu.application.model.V_Privilegio_Rol"%>
-<%@page import="pe.edu.upeu.application.model.Privilegio_Rol"%>
 <jsp:useBean id="List_Pr_Rol" scope="application" class="java.util.ArrayList"/>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" href="../../../css/Css_Lista/listas.css" />
     </head>
     <body>
         <table>

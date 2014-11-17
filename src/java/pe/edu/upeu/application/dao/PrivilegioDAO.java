@@ -16,6 +16,7 @@ import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Privilegio;
 import pe.edu.upeu.application.model.Privilegio_Rol;
+import pe.edu.upeu.application.model.V_Privilegio_Rol;
 
 /**
  *
@@ -156,6 +157,29 @@ public class PrivilegioDAO implements InterfacePrivilegioDAO{
         } finally {
             this.conn.close();
         }
+    }
+
+    @Override
+    public List<V_Privilegio_Rol> List_Pr_Rol() {
+        this.conn=FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "Select * from RHVD_PRIVILEGIO_ROL";
+        List<V_Privilegio_Rol> list= new ArrayList<V_Privilegio_Rol>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            
+            while (rs.next()) {   
+                V_Privilegio_Rol p = new V_Privilegio_Rol();
+                p.setNo_rol(rs.getString("no_rol"));
+                p.setNo_link(rs.getString("no_link"));
+                p.setEs_detalle_privilegio(rs.getString("es_detalle_privilegio"));
+                p.setId_detalle_privilegio(rs.getString("id_detalle_privilegio"));
+                list.add(p);
+            }
+        } catch (SQLException e) {
+        }finally{
+        this.conn.close();
+        }        
+      return list;
     }
     
 }
