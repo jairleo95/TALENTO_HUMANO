@@ -1,0 +1,40 @@
+<%-- 
+    Document   : List_Pri_Roles
+    Created on : 17-nov-2014, 20:27:48
+    Author     : joserodrigo
+--%>
+<%@page import="pe.edu.upeu.application.model.V_Privilegio_Rol"%>
+<jsp:useBean id="List_Pr_Rol" scope="application" class="java.util.ArrayList"/>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+        <link rel="stylesheet" href="../../../css/Css_Lista/listas.css" />
+    </head>
+    <body>
+        <table>
+            <tr>
+                <td> Rol</td>
+                <td> Privilegio</td>
+                <td> Estado</td>
+                <td colspan="4"> Opciones</td>
+            </tr>
+            <%for(int i =0;i< List_Pr_Rol.size();i++){
+                    V_Privilegio_Rol v=new V_Privilegio_Rol();
+                    v=(V_Privilegio_Rol)List_Pr_Rol.get(i);
+                %>
+            <tr>
+                <td> <%= v.getNo_rol()%></td>
+                <td> <%= v.getNo_link()%></td>
+                <td> <%=v.getEs_detalle_privilegio()%></td>
+                <td class="caji"> <a href="../../../Privilegios?id_det_pr=<%=v.getId_detalle_privilegio()%>&opc=Mod_det_pr" ><img src="../../../imagenes/lapiz.png" alt="" width="25px" height="25px"/></a></td>
+                 <td class="caji"><a href="../../../Privilegios?id_det_pr=<%=v.getId_detalle_privilegio()%>%>&opc=Desap_det_pr" ><img src="../../../imagenes/eliminar.png" alt=""   width="25px" height="25px"/></a></td> 
+                 <td class="caji"><a href="../../../Privilegios?id_det_pr=<%=v.getId_detalle_privilegio()%>%>&opc=Activar_det_pr" ><img src="../../../imagenes/Aprobado.png" alt=""   width="25px" height="25px"/></a></td> 
+                 <td class="caji"><a href="../../../Privilegios?id_det_pr=<%=v.getId_detalle_privilegio()%>%>&opc=Desactivar_det_pr" ><img src="../../../imagenes/Desaprobado.png" alt=""   width="25px" height="25px"/></a></td> 
+                <%}%>
+            </tr>
+        </table>
+    </body>
+</html>

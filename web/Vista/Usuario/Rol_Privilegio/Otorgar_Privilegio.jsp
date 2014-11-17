@@ -26,7 +26,7 @@
                 </tr>
                 
                 <tr><td>Privilegio a Otorgar :</td>
-                    <td><select  name="Id_Rol" required="">
+                    <td><select  name="id_Priv" required="">
                 <%for(int a=0;a<List_Privilegio.size();a++){
                 Privilegio p=new Privilegio();
                 p=(Privilegio)List_Privilegio.get(a);
@@ -48,4 +48,4 @@
     <br><br>
     </body>
 </html>
-
+<%@include file="List_Pri_Roles.jsp" %>

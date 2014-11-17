@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import pe.edu.upeu.application.dao.Detalle_PrivilegioDAO;
 import pe.edu.upeu.application.dao.PrivilegioDAO;
 import pe.edu.upeu.application.dao.RolDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDetalle_PrivilegioDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePrivilegioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRolDAO;
 
@@ -23,8 +25,9 @@ import pe.edu.upeu.application.dao_imp.InterfaceRolDAO;
  * @author joserodrigo
  */
 public class CPrivilegio extends HttpServlet {
-InterfaceRolDAO rol=new RolDAO();
+    InterfaceRolDAO rol=new RolDAO();
     InterfacePrivilegioDAO priv=new PrivilegioDAO();
+    InterfaceDetalle_PrivilegioDAO detp=new Detalle_PrivilegioDAO();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -135,9 +138,17 @@ InterfaceRolDAO rol=new RolDAO();
             }
             if(opc.equals("Listar_PR_ROL")){
                 getServletContext().setAttribute("List_Pr_Rol", priv.List_Pr_Rol());
-                response.sendRedirect("Vista/Usuario/Rol_Privilegio/List_Priv_Rol.jsp");
+                response.sendRedirect("Vista/Usuario/Rol_Privilegio/List_Pri_Roles.jsp");
             }
-            
+            if(opc.equals("REGISTRAR PRIVILEGIO DADO")){
+                String Id_rol=request.getParameter("Id_Rol");
+                String id_Priv=request.getParameter("id_Priv");
+                String Nu_Orden=request.getParameter("Nu_Orden");
+                String Es_detalle_privilegio=request.getParameter("Es_detalle_privilegio");
+                out.print(Id_rol+" "+id_Priv+" "+Nu_Orden+""+Es_detalle_privilegio);
+                detp.Registrar_Detalle_Priv(Id_rol, Nu_Orden, id_Priv, Es_detalle_privilegio);
+                response.sendRedirect("Vista/Usuario/Rol_Privilegio/Otorgar_Privilegio.jsp");
+            }
         } finally {
             out.close();
         }

@@ -162,7 +162,7 @@ public class PrivilegioDAO implements InterfacePrivilegioDAO{
     @Override
     public List<V_Privilegio_Rol> List_Pr_Rol() {
         this.conn=FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "Select * from RHVD_PRIVILEGIO_ROL";
+        String sql = "Select * from RHVD_PRIVILEGIO_ROL order by no_rol";
         List<V_Privilegio_Rol> list= new ArrayList<V_Privilegio_Rol>();
         try {
             ResultSet rs = this.conn.query(sql);
