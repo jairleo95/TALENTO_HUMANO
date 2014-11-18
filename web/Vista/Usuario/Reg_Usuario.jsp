@@ -1,4 +1,6 @@
-<?
+<%@page import="pe.edu.upeu.application.model.Rol"%>
+<%@page import="pe.edu.upeu.application.model.V_List_Empleado"%>
+<%/*<?
 set_time_limit(60);
 // se sobrecarga la pagina y el appserv le da un tiempo limite de 30 seg aqui lo modifico a 60 seg
 // 
@@ -14,7 +16,10 @@ for ($r = 0; $r < count($list_tr_cont); $r++) {
     $mper->VALIDAR_EMPLEADO($list_tr_cont[$r][0]);
 }
 //fin de validacion
-?>
+?>*/%>
+<jsp:useBean id="List_Rol" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Usuario" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_Emp" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,11 +28,11 @@ for ($r = 0; $r < count($list_tr_cont); $r++) {
         </style>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <title>Mantenimiento de Usuarios</title>
-        <link rel="stylesheet" href="../CSS/estilos.css" />
+        <link rel="stylesheet" href="../../css/Css_DGP/estilos.css" />
 
-            <link rel="stylesheet" href="../CSS/chosen.css">
-            <script src="../js3/abc.js"></script>
-            <script src="../js3/organictabs.jquery.js"></script>
+        <link rel="stylesheet" href="../../css/Css_DGP//chosen.css">
+        <script src="../../js/Js_DGP/abc.js"></script>
+        <script src="../../js/Js_Formulario/organictabs.jquery.js"></script>
         <style type="text/css">
 
             .submit{
@@ -63,35 +68,28 @@ for ($r = 0; $r < count($list_tr_cont); $r++) {
         <label class="lab-mant"> <h1>Mantenimiento Usuarios de  Personal</h1></label>
 
         <center>
-            <form class="form" action="../Control/ControlPersonal.php"> 
+            <form class="form" action="../../Usuario"> 
                 <table class="table">      
                     <tr><td>Empleado:</td><td>
-                            <?
-                            require_once '../Modelo/modelopersonal.php';
-                            $mper = new modelopersonal();
-                            $list_per = $mper->LIST_PERS();
-                            ?>
-                            <select name="IDEMPLEADO" class="text-box chosen-select">
-                                <option value=""></option>
-                                <? for ($p = 0; $p < count($list_per); $p++) { ?>
-                                    <option value="<? echo $list_per[$p][0]; ?>"><? echo $list_per[$p][4] . ' ' . $list_per[$p][5] . ' ' . $list_per[$p][6]; ?></option>
-                                <? } ?>
+                            <select name="IDEMPLEADO" class="text-box chosen-select" required="">
+                                <% for (int i = 0; i < Listar_Emp.size(); i++) { 
+                                    V_List_Empleado v=new V_List_Empleado();
+                                    v=(V_List_Empleado)Listar_Emp.get(i);
+                                %>
+                                    <option value="<%=v.getId_empleado()%>"><%=v.getAp_paterno()+" "%><%=v.getAp_materno()+",   "%><%=v.getNo_trabajador()%></option>
+                                <%}%>
                             </select>
                         </td></tr>  
                     <tr><td>Rol:</td><td>
-                            <?
-                            require_once '../Modelo/modelorol.php';
-                            $mdrol = new modelorol();
-                            $list_rol = $mdrol->ListarRol();
-                            ?>
-                            <select name="IDROLES" class="text-box chosen-select">
-                                <option value=""></option>
-                                <? for ($t = 0; $t < count($list_rol); $t++) { ?>
-                                    <option value="<? echo$list_rol[$t][0]; ?>"><? echo $list_rol[$t][1]; ?></option>
-                                <? } ?>
+                            <select name="IDROLES" class="text-box chosen-select" required="">
+                                <% for (int t = 0; t < List_Rol.size();t++) { 
+                                    Rol r=new Rol();
+                                    r=(Rol)List_Rol.get(t);
+                                %>
+                                    <option value="<%=r.getId_rol()%>"><%=r.getNo_rol()%></option>
+                                <%}%>
                             </select>
                         </td></tr>  
-                    <input type="hidden" name="IDUSUARIO" class="text-box" >
                     <tr><td>Usuario:</td><td><input type="text" required="" name="USUARIO" class="text-box" ></td></tr> 
                     <tr><td>Clave:</td><td><input type="password"  required="" name="CLAVE" class="text-box" ></td></tr>   
                     <tr><td><input type="submit" name="opc"  class="submit" value="Registrar Usuario"></td></tr>
@@ -100,9 +98,9 @@ for ($r = 0; $r < count($list_tr_cont); $r++) {
         </center><br><br>
     </center>
 </body>
- <script src="../js2/prism.jss" type="text/javascript" charset="utf-8"></script>
-        <script src="../js2/chosen.jquery.js" type="text/javascript"></script>
-        <script src="../JS/prism.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/prism.js" type="text/javascript" charset="utf-8"></script>
+ <script src="../../js/chosen.jquery.js" type="text/javascript"></script>
+ <script src="../../js/prism.js" type="text/javascript" charset="utf-8"></script>
         <script type="text/javascript">
                             var config = {
                                 '.chosen-select': {},
@@ -119,4 +117,4 @@ for ($r = 0; $r < count($list_tr_cont); $r++) {
     
 
 </html>
-<? include '../Vistas/listarper.php'; ?>
+<%@include file="List_Usuario.jsp" %>

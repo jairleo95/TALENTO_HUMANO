@@ -1,12 +1,6 @@
 
-<?
-require_once '../Modelo/modelopersonal.php';
-require_once '../Modelo/Modelo_Imagen.php';
-$modelo= new modelopersonal();
-$listra=$modelo->ListarPersonal();    
-$mod_f= new Modelo_Imagen();
-$idf=$mod_f->LIST_FOTO_TRABAJADOR($listra[$index][1]);
-?>
+<%@page import="pe.edu.upeu.application.model.V_Var_Usuario"%>
+<jsp:useBean id="List_Usuario_var" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html">
 <html >
     <head>
@@ -15,6 +9,7 @@ $idf=$mod_f->LIST_FOTO_TRABAJADOR($listra[$index][1]);
 
         <script src="../../js/Js_Sort/modernizr.custom.63321.js" type="text/javascript"></script>
         <link rel="stylesheet" href="../../css/Css_Sort/style.css" />
+        
         <!--Css pannel contact-->
         <link href="../../css/Css_Sort/stylesContact.css" rel="stylesheet" type="text/css" />
         <!--End Css pannel contact-->
@@ -87,7 +82,7 @@ $idf=$mod_f->LIST_FOTO_TRABAJADOR($listra[$index][1]);
                     <thead>
                         <tr>
                             <th class="nosort"><h3>ID</h3></th>
-                    <th><h3>Nombres y Apellidos</h3></th>
+                    <th><h3>Apellidos y Nombres</h3></th>
                     <th><h3>Rol</h3></th>
                     <th><h3>Puesto</h3></th>
                     <th><h3>Sección</h3></th>
@@ -95,28 +90,31 @@ $idf=$mod_f->LIST_FOTO_TRABAJADOR($listra[$index][1]);
                     <th><h3>Departamento</h3></th>
                     <th><h3>Usuario</h3></th>
                     <th><h3>Clave</h3></th>
+                    <th colspan="3" ><h3>Opcion</h3></th>
+
 
                     </tr>
                     </thead>
                     <tbody>
-                        <? for ($index = 0; $index < count($listra); $index++) { ?>
+                        <% for (int w = 0; w <List_Usuario_var.size(); w++) {
+                            V_Var_Usuario u=new V_Var_Usuario();
+                            u=(V_Var_Usuario)List_Usuario_var.get(w);
+                        %>
                         <tr>
-                            <td><?echo  $index+1;?></td>
-                            <td class="name"><a href="../Trabajador/Detalle_Trabajador.jsp?idtr=<? echo $listra[$index][2]; ?>"><?echo  $listra[$index][11].' '.$listra[$index][12].' '.$listra[$index][13];?></a></td>
-                            <td><?echo  $listra[$index][9];?></td>
-                            <td><?echo  $listra[$index][128];?></td>
-                            <td><?echo  $listra[$index][126];?></td>
-                            <td><?echo  $listra[$index][124];?></td>
-                            <td><?echo  $listra[$index][122];?></td>
-                            <td><?echo  $listra[$index][4];?></td>
-                            <td><?echo  $listra[$index][5];?> <a href="modificarpersonal.php?id=<? echo $listar[$i]["0"]; ?>&idemp=<?echo $listar[$i]["3"];?>&idcargo=<? echo $listar[$i]["15"];?>"><img src="../Imagenes/lapiz.png" alt="" width="25px" height="25px"/></a>
-                                <a href="../Control/ControlPersonal.php?id=<? echo $listar[$i]["0"];?>&idemp=<? echo $listar[$i]["3"];?>&opc=eliminar" onclick=" checkAGE()"><img src="../Imagenes/eliminar.png" alt=""   width="25px" height="25px"/></a> </td>
-
-
-
-
+                            <td><%=w+1%></td>
+                            <td class="name"><a href="../Trabajador/Detalle_Trabajador.jsp?idtr=<%=u.getId_trabajador()%>"><%=u.getAp_paterno()+"  "%><%=u.getAp_materno()+",  "%><%=u.getNo_trabajador()%></a></td>
+                            <td><%=u.getNo_rol()%></td>
+                            <td><%=u.getNo_puesto()%></td>
+                            <td><%=u.getNo_seccion()%></td>
+                            <td><%=u.getNo_area()%></td>
+                            <td><%=u.getNo_dep()%></td>
+                            <td><%=u.getNo_usuario()%></td>
+                            <td><%=u.getPw_usuario()%></td>
+                            <td><a href="../../Usuario?id_usu=<%=u.getId_usuario()%>"><img src="../../imagenes/lapiz.png" alt="" width="25px" height="25px"/></a></td>
+                            <td><a href="../../Usuario?id_usu=<%=u.getId_usuario()%>"><img src="../../imagenes/eliminar.png" alt="" width="25px" height="25px"/></a></td>
+                            <td><a href="../../Usuario?id_usu=<%=u.getId_usuario()%>"><img src="../../imagenes/eliminar.png" alt="" width="25px" height="25px"/></a></td>
                         </tr>
-                        <?}?>        
+                        <%}%>        
                     </tbody>
 
 

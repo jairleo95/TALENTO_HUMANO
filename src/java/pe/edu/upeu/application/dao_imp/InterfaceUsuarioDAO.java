@@ -10,6 +10,7 @@ import pe.edu.upeu.application.model.Usuario;
 import java.util.List;
 import pe.edu.upeu.application.model.Trabajador;
 import pe.edu.upeu.application.model.V_Usuario;
+import pe.edu.upeu.application.model.V_Var_Usuario;
 
 /**
  *
@@ -27,4 +28,6 @@ public interface InterfaceUsuarioDAO {
     public boolean Save_Usuario(Usuario usuario);
     public boolean Delete_Usuario(String ID);
     public List<Usuario> List_ID_User(String id_user);
+    public void Insert_usuario(String No_usuario,String  pw_usuario , String id_emp, String id_rol, String es_usuario);
+    public List<V_Var_Usuario> List_Usuario_var();
 }

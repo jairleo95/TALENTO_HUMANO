@@ -16,5 +16,6 @@
     <li><a href="../../../Privilegios?opc=Listar_Privilegio">listar Privilegios</a> </li>
     <li><a href="../../../Privilegios?opc=Otorgar">Otorgar Privilegios a Roles</a> </li>
     <li><a href="../../../Privilegios?opc=Listar_PR_ROL">Listar Privilegios y sus roles</a> </li>
+    <li><a href="../../../Usuario?opc=list">Listar Privilegios y sus roles</a> </li>
     </body>
 </html>

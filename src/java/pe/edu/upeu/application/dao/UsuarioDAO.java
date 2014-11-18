@@ -5,6 +5,7 @@
  */
 package pe.edu.upeu.application.dao;
 
+import java.sql.CallableStatement;
 import pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,6 +18,7 @@ import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Trabajador;
 import pe.edu.upeu.application.model.V_Usuario;
+import pe.edu.upeu.application.model.V_Var_Usuario;
 
 /**
  *
@@ -228,6 +230,62 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
         } finally {
             this.conn.close();
         }
+        return list;
+    }
+
+    @Override
+    public void Insert_usuario(String No_usuario, String pw_usuario, String id_emp, String id_rol, String es_usuario) {
+       CallableStatement cst;
+        try {
+            String id_usuario="";
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = conn.conex.prepareCall("{CALL RHSP_INSERT_USUARIO( ?,?,?,?,?,?)}");
+            cst.setString(1, id_usuario);
+            cst.setString(2, No_usuario);
+            cst.setString(3, pw_usuario);
+            cst.setString(4, id_emp);
+            cst.setString(5, id_rol);
+            cst.setString(6, es_usuario);
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        }   
+    }
+
+    @Override
+    public List<V_Var_Usuario> List_Usuario_var() {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select * from RHVD_VAR_USUARIO order by ap_paterno";
+        List<V_Var_Usuario> list = new ArrayList<V_Var_Usuario>();
+        try {
+            ResultSet rs = this.conn.query(sql.toString());
+            while (rs.next()) {
+                V_Var_Usuario v = new V_Var_Usuario();
+                v.setId_usuario(rs.getString("id_usuario"));
+                v.setNo_usuario(rs.getString("no_usuario"));
+                v.setPw_usuario(rs.getString("pw_usuario"));
+                v.setId_trabajador(rs.getString("id_trabajador"));
+                v.setNo_trabajador(rs.getString("no_trabajador"));
+                v.setAp_paterno(rs.getString("ap_paterno"));
+                v.setAp_materno(rs.getString("ap_materno"));
+                v.setNo_rol(rs.getString("no_rol"));
+                v.setId_rol(rs.getString("id_rol"));
+                v.setNo_puesto(rs.getString("no_puesto"));
+                v.setId_puesto(rs.getString("id_puesto"));
+                v.setNo_seccion(rs.getString("no_seccion"));
+                v.setId_seccion(rs.getString("id_seccion"));
+                v.setNo_area(rs.getString("no_area"));
+                v.setId_area(rs.getString("id_area"));
+                v.setNo_dep(rs.getString("no_dep"));
+                v.setId_departamento(rs.getString("id_departamento"));
+                list.add(v);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+
         return list;
     }
 }
