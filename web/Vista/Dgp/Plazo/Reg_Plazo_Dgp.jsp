@@ -16,7 +16,7 @@
                 listar();
                 var b = $(".tbodys");
                 function listar() {
-                    $.post("../../../plazo_dgp", "opc=Listar&t_List=admin", function (objJson) {
+                    $.post("../../../plazo_dgp", "opc=Listar", function (objJson) {
                         b.empty();
                         var lista = objJson.lista;
                         if (objJson.rpta == -1) {

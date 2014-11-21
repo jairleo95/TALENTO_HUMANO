@@ -41,6 +41,7 @@ public class CPlazo extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
         InterfacePlazo_DgpDAO pl = new Plazo_DgpDAO();
+       
         Map<String, Object> rpta = new HashMap<String, Object>();
         try {
             String opc = request.getParameter("opc");
