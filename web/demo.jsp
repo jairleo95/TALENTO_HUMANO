@@ -13,46 +13,39 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <table width="100%" border="1" align="center">
-            <tr bgcolor="#949494">
-                <th>Header Name</th><th>Header Value(s)</th>
-            </tr>
-            <%
-                Enumeration headerNames = request.getHeaderNames();
-                while (headerNames.hasMoreElements()) {
-                    String paramName = (String) headerNames.nextElement();
-                    out.print("<tr><td>" + paramName + "</td>\n");
-                    String paramValue = request.getHeader(paramName);
-                    out.println("<td> " + paramValue + "</td></tr>\n");
-                }
-            %>
-        </table>
 
-
-        <%= getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1)%>
-        <h1>lista docentes</h1>
+        <h1>Lista docentes</h1>
+        <input  type="text" value="" id="sem"/>
+        <button class="listar">Buscar</button>
         <span id="cargador">Cargando...</span>
         <ul id="listaDoc" style="display:block;">
         </ul>
 
         <script type="text/javascript" src="js/JQuery/jQuery.js" ></script>
         <script>
-            /*
-             (function($){
-             $(document).ready(function(){
-             $('#cargador').show();
-             var url='http://localhost/demo/data.php';
-             
-             $.getJSON(url,function(data){
-             $('#cargador').hide();
-             $('#listaDoc').show();
-             $.each(data,function(i,campo){
-             $('#listaDoc').append('<li><strong>'+campo.dni+'</strong> - '+campo.nombre+'</li>');
-             });
-             });
-             });
-             })(jQuery);
-             */
+
+            (function ($) {
+                $(document).ready(function () {
+                    $('#cargador').show();
+
+                    var url = 'http://localhost/demo/data.php';
+
+                    $(".listar").click(function () {
+
+                        $.post(url, "semestre="+$("#sem").val(), function (data) {
+                            $('#cargador').hide();
+                            $('#listaDoc').show();
+                            $.each(data, function (i, campo) {
+                                $('#listaDoc').append('<li><strong>' + campo.dni + '</strong> - ' + campo.nombre + '</li>');
+                            });
+                        });
+                    });
+
+
+
+                });
+            })(jQuery);
+
         </script>
     </body>
 </html>

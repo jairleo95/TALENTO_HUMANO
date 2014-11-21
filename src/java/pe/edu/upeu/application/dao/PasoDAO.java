@@ -34,6 +34,7 @@ public class PasoDAO implements InterfacePasoDAO {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "select * from rhtc_pasos ";
             sql += (Proceso!=null)?" where   id_proceso='"+Proceso.trim() + "'":"";
+            sql +=" order by id_pasos";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
 
