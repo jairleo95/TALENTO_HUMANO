@@ -22,11 +22,8 @@ public interface InterfaceUsuarioDAO {
     public int  Val_Cuenta(int Usuario);
     public boolean Mod_perfil(Usuario proveedor,Trabajador trabajador);
     public List<V_Usuario> Val_Usuario(String id_usuario);
-    public boolean Mod_Pw(String nombre ,String usuario, String clave);
-    public Usuario Edit_Usuario( String ID);
-    public boolean Edit_Usuario(Usuario usuario);
-    public boolean Save_Usuario(Usuario usuario);
-    public boolean Delete_Usuario(String ID);
+    public void Mod_Pw(String id_usuario ,String usuario, String clave);
+    public void Delete_Usuario(String ID);
     public List<Usuario> List_ID_User(String id_user);
     public void Insert_usuario(String No_usuario,String  pw_usuario , String id_emp, String id_rol, String es_usuario);
     public List<V_Var_Usuario> List_Usuario_var();

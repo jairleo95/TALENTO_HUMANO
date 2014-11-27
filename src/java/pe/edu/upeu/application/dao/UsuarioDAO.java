@@ -165,50 +165,23 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
     }
 
     @Override
-    public boolean Mod_Pw(String nombre, String usuario, String clave) {
-        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select count(*) from rhtc_usuario where no_usuario='" + nombre + "' and id_usuario='" + usuario + "' and pw_usuario='" + clave + "'";
-        /*$sql = "select count(*) from usuario where usuario='$user' and idusuario=$iduser and clave='$clave'";
-         //echo $sql;
-
-         $exe = oci_parse(Conexion::conex(), $sql);
-         oci_execute($exe);
-         $row = oci_fetch_array($exe);
-         $id = $row[0];
-         if ($id == 1) {
-         $sql_u = "update usuario set clave='$clave_nueva' where idusuario=$iduser";
-         $exe_u = oci_parse(Conexion::conex(), $sql_u);
-         oci_execute($exe_u);
-         }
-         if ($id == 0) {
-         echo '<script language="JavaScript" type="text/javascript">
-         alert("Las Claves son Incorrectas");
-         window.history.back();
-         </script> ';
-         }*/
-        return false;
+    public void Mod_Pw(String id_usuario, String usuario, String clave) {
+       CallableStatement cst;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = conn.conex.prepareCall("{CALL RHSP_MOD_USUARIO_CL( ?,?,?)}");
+            cst.setString(1,id_usuario );
+            cst.setString(2, usuario );
+            cst.setString(3, clave);
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        }   
     }
-
-    
-
     @Override
-    public Usuario Edit_Usuario(String ID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean Edit_Usuario(Usuario usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean Save_Usuario(Usuario usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean Delete_Usuario(String ID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void Delete_Usuario(String ID) {
+        
     }
     @Override
     public List<Usuario> List_ID_User(String id_user) {
@@ -279,6 +252,7 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
                 v.setId_area(rs.getString("id_area"));
                 v.setNo_dep(rs.getString("no_dep"));
                 v.setId_departamento(rs.getString("id_departamento"));
+                v.setEs_usuario(rs.getString("es_usuario"));
                 list.add(v);
             }
         } catch (SQLException e) {

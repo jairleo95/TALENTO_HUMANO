@@ -41,11 +41,12 @@ public class CUsuario extends HttpServlet {
         String opc=request.getParameter("opc");
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        try {
+        
             if("Reg_Usuario".equals(opc)){
                 getServletContext().setAttribute("List_Usuario",usu.List_Usuario());
                 getServletContext().setAttribute("Listar_Emp",emp.Listar_Emp());
                 getServletContext().setAttribute("List_Rol",rol.List_Rol());
+                getServletContext().setAttribute("List_Usuario_var", usu.List_Usuario_var());
                 response.sendRedirect("Vista/Usuario/Reg_Usuario.jsp");
             }
             if("Registrar Usuario".equals(opc)){
@@ -62,10 +63,32 @@ public class CUsuario extends HttpServlet {
                 getServletContext().setAttribute("List_Usuario_var", usu.List_Usuario_var());
                 response.sendRedirect("Vista/Usuario/List_Usuario.jsp");
             }
+            if("Modificar_clave_1".equals(opc)){
+                String id_usuario=request.getParameter("id_usu");
+                getServletContext().setAttribute("List_ID_User",usu.List_ID_User(id_usuario));
+                response.sendRedirect("Vista/Usuario/Cambiar_Clave.jsp");
+            }
+            if("Modificar_clave_2".equals(opc)){
+                String id_usuario=request.getParameter("iduser");
+                String No_Usuario=request.getParameter("No_Usuario");
+                String pw_an=request.getParameter("pw_an");
+                usu.Mod_Pw(id_usuario, No_Usuario, pw_an);
+                getServletContext().setAttribute("List_Usuario_var", usu.List_Usuario_var());
+                response.sendRedirect("Vista/Usuario/Reg_Usuario.jsp");
+            }
+            if("Quitar_acceso".equals(opc)){
+                String id_usuario=request.getParameter("id_usu");
+                //getServletContext().setAttribute("List_ID_User",usu.List_ID_User(id_usuario));
+                out.print( id_usuario);
+                //getServletContext().setAttribute("List_Usuario_var", usu.List_Usuario_var());
+                //response.sendRedirect("Vista/Usuario/List_Usuario.jsp");
+            }
+            if("Eliminar_Usuario".equals(opc)){
+                //getServletContext().setAttribute("List_Usuario_var", usu.List_Usuario_var());
+                //response.sendRedirect("Vista/Usuario/List_Usuario.jsp");
+            }
             
-        } finally {
-            out.close();
-        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

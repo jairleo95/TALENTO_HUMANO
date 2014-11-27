@@ -27,7 +27,7 @@
 
 * {margin:0; padding:0; outline:0}
 body { margin:2%; background-color:#e6edf2; }
-#tablewrapper {width:67.8%; margin:0 auto}
+#tablewrapper {width:100%;max-width:100%; margin:0 auto}
 #tableheader {height:55px;max-width:1000px; min-width:880px; }
 #tableheader option{padding-left:4px;font-size:13px; background-color:#ecf2f6;}
 .search {float:left; padding:6px; border:1px solid #c6d5e1; background:#fff}

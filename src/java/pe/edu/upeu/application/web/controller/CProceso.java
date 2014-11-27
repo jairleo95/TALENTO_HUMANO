@@ -12,18 +12,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import pe.edu.upeu.application.dao.PasoDAO;
 import pe.edu.upeu.application.dao.ProcesoDAO;
-import pe.edu.upeu.application.dao_imp.InterfacePasoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceProcesoDAO;
 
 /**
  *
  * @author ALFA 3
  */
+
+@WebServlet(name = "CProceso", urlPatterns = {"/Proceso"})
 public class CProceso extends HttpServlet {
 
     /**
@@ -44,19 +45,26 @@ public class CProceso extends HttpServlet {
         Map<String, Object> rpta = new HashMap<String, Object>();
         try {
             String opc = request.getParameter("opc");
-            if (opc.equals("Listar")) {
-                List<Map<String, ?>> lista = p.List_Proceso();
-                rpta.put("rpta", "1");
-                rpta.put("lista", lista);
-            }
+            
             if (opc.equals("Mantenimiento")) {
+                response.sendRedirect("Vista/Dgp/Plazo/Reg_Plazo_Dgp.jsp");
 
             }
-            if (opc.equals("Eliminar")) {
-                String id = request.getParameter("paso");
-                //  p.DELETE_PASOS(id);
-            }
             if (opc.equals("Registrar")) {
+
+
+            }
+            if (opc.equals("Modificar")) {
+
+
+            }
+            if (opc.equals("Listar")) {
+                List<Map<String, ?>> lista=p.List_Proceso();
+                rpta.put("rpta","1");
+                rpta.put("lista",lista);
+            }
+            if (opc.equals("Eliminar")) {
+
 
             }
         } catch (Exception e) {

@@ -30,7 +30,7 @@ for ($r = 0; $r < count($list_tr_cont); $r++) {
         <title>Mantenimiento de Usuarios</title>
         <link rel="stylesheet" href="../../css/Css_DGP/estilos.css" />
 
-        <link rel="stylesheet" href="../../css/Css_DGP//chosen.css">
+        <link rel="stylesheet" href="../../css/Css_DGP/chosen.css">
         <script src="../../js/Js_DGP/abc.js"></script>
         <script src="../../js/Js_Formulario/organictabs.jquery.js"></script>
         <style type="text/css">
@@ -63,13 +63,13 @@ for ($r = 0; $r < count($list_tr_cont); $r++) {
         </style>
 
     </head>
-    <body class="body">
+    <body class="">
     <center>
         <label class="lab-mant"> <h1>Mantenimiento Usuarios de  Personal</h1></label>
 
         <center>
-            <form class="form" action="../../Usuario"> 
-                <table class="table">      
+            <form class="" action="../../Usuario"> 
+                <table>      
                     <tr><td>Empleado:</td><td>
                             <select name="IDEMPLEADO" class="text-box chosen-select" required="">
                                 <% for (int i = 0; i < Listar_Emp.size(); i++) { 
@@ -92,7 +92,7 @@ for ($r = 0; $r < count($list_tr_cont); $r++) {
                         </td></tr>  
                     <tr><td>Usuario:</td><td><input type="text" required="" name="USUARIO" class="text-box" ></td></tr> 
                     <tr><td>Clave:</td><td><input type="password"  required="" name="CLAVE" class="text-box" ></td></tr>   
-                    <tr><td><input type="submit" name="opc"  class="submit" value="Registrar Usuario"></td></tr>
+                    <tr><td colspan="2"><input type="submit" name="opc"  class="submit" value="Registrar Usuario"></td></tr>
                 </table>
             </form>
         </center><br><br>

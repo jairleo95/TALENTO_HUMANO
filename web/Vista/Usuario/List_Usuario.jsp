@@ -9,7 +9,7 @@
 
         <script src="../../js/Js_Sort/modernizr.custom.63321.js" type="text/javascript"></script>
         <link rel="stylesheet" href="../../css/Css_Sort/style.css" />
-        
+       <!-- <link rel="stylesheet" href="../../css/Css_Lista/listas.css" />
         <!--Css pannel contact-->
         <link href="../../css/Css_Sort/stylesContact.css" rel="stylesheet" type="text/css" />
         <!--End Css pannel contact-->
@@ -65,6 +65,7 @@
     </div>
         -->
         <hr>
+    <center>
         <div class="container">
 
             <div id="tablewrapper">
@@ -82,20 +83,21 @@
                     <thead>
                         <tr>
                             <th class="nosort"><h3>ID</h3></th>
-                    <th><h3>Apellidos y Nombres</h3></th>
-                    <th><h3>Rol</h3></th>
-                    <th><h3>Puesto</h3></th>
-                    <th><h3>Sección</h3></th>
-                    <th><h3>Area</h3></th>
-                    <th><h3>Departamento</h3></th>
-                    <th><h3>Usuario</h3></th>
-                    <th><h3>Clave</h3></th>
-                    <th colspan="3" ><h3>Opcion</h3></th>
+                <th class="cajita"><h3>Apellidos y Nombres</h3></th>
+<th class="cajita"><h3>Rol</h3></th>
+<th class="cajita"><h3>Puesto</h3></th>
+<th class="cajita"><h3>Sección</h3></th>
+<th class="cajita"><h3>Area</h3></th>
+<th class="cajita"><h3>Departamento</h3></th>
+<th class="cajita"><h3>Usuario</h3></th>
+<th class="cajita"><h3>Clave</h3></th>
+<th class="cajita"><h3>Estado</h3></th>
+<th class="cajita" colspan="3" ><h3>Opcion</h3></th>
 
 
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody> 
                         <% for (int w = 0; w <List_Usuario_var.size(); w++) {
                             V_Var_Usuario u=new V_Var_Usuario();
                             u=(V_Var_Usuario)List_Usuario_var.get(w);
@@ -110,9 +112,10 @@
                             <td><%=u.getNo_dep()%></td>
                             <td><%=u.getNo_usuario()%></td>
                             <td><%=u.getPw_usuario()%></td>
-                            <td><a href="../../Usuario?id_usu=<%=u.getId_usuario()%>"><img src="../../imagenes/lapiz.png" alt="" width="25px" height="25px"/></a></td>
-                            <td><a href="../../Usuario?id_usu=<%=u.getId_usuario()%>"><img src="../../imagenes/eliminar.png" alt="" width="25px" height="25px"/></a></td>
-                            <td><a href="../../Usuario?id_usu=<%=u.getId_usuario()%>"><img src="../../imagenes/eliminar.png" alt="" width="25px" height="25px"/></a></td>
+                            <td><%=u.getEs_usuario()%></td>
+                            <td><a href="../../Usuario?id_usu=<%=u.getId_usuario()%>&opc=Modificar_clave_1"><img src="../../imagenes/lapiz.png" alt="" width="25px" height="25px"/></a></td>
+                            <td><a href="../../Usuario?id_usu=<%=u.getId_usuario()%>&opc=Quitar_acceso"><img src="../../imagenes/eliminar.png" alt="" width="25px" height="25px"/></a></td>
+                            <td><a href="../../Usuario?id_usu=<%=u.getId_usuario()%>&opc=Eliminar_Usuario"><img src="../../imagenes/Desaprobado.png" alt="" width="25px" height="25px"/></a></td>
                         </tr>
                         <%}%>        
                     </tbody>
@@ -163,7 +166,7 @@
                 </div>
             </div>
         </div>
-
+        </center>
 
         <script type="text/javascript" src="../../js/Js_Sort/script.js"></script>
         <script type="text/javascript">

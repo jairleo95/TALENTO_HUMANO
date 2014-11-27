@@ -28,8 +28,9 @@ public class V_Var_Usuario {
     String id_area;
     String no_dep;
     String id_departamento;
+    String es_usuario;
 
-    public V_Var_Usuario(String id_usuario, String no_usuario, String pw_usuario, String id_trabajador, String no_trabajador, String ap_paterno, String ap_materno, String no_rol, String id_rol, String no_puesto, String id_puesto, String no_seccion, String id_seccion, String no_area, String id_area, String no_dep, String id_departamento) {
+    public V_Var_Usuario(String id_usuario, String no_usuario, String pw_usuario, String id_trabajador, String no_trabajador, String ap_paterno, String ap_materno, String no_rol, String id_rol, String no_puesto, String id_puesto, String no_seccion, String id_seccion, String no_area, String id_area, String no_dep, String id_departamento, String es_usuario) {
         this.id_usuario = id_usuario;
         this.no_usuario = no_usuario;
         this.pw_usuario = pw_usuario;
@@ -47,6 +48,7 @@ public class V_Var_Usuario {
         this.id_area = id_area;
         this.no_dep = no_dep;
         this.id_departamento = id_departamento;
+        this.es_usuario = es_usuario;
     }
     public V_Var_Usuario() {
         this.id_usuario = "";
@@ -66,6 +68,7 @@ public class V_Var_Usuario {
         this.id_area = "";
         this.no_dep = "";
         this.id_departamento = "";
+        this.es_usuario = "";
     }
 
     public String getId_usuario() {
@@ -204,4 +207,11 @@ public class V_Var_Usuario {
         this.id_departamento = id_departamento;
     }
     
+    public String getEs_usuario() {
+        return es_usuario;
+    }
+
+    public void setEs_usuario(String es_usuario) {
+        this.es_usuario = es_usuario;
+    }
 }

@@ -38,7 +38,6 @@ public class ProcesoDAO implements InterfaceProcesoDAO {
                 rec.put("id", rs.getString("id_proceso"));
                 rec.put("nom", rs.getString("no_proceso"));
                 rec.put("det", rs.getString("de_proceso"));
-
                 lista.add(rec);
             }
             rs.close();
