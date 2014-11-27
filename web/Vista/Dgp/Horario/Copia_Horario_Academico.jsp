@@ -84,7 +84,7 @@
                 $.post(url, "", function (data) {
 
                     $.each(data, function (f, campo) {
-                        if (campo.dni == '33261202') {
+                        if (campo.dni == '42001721') {
 
                             $('.tbody-cursos').append('<tr><td >' + (g + 1) + '.</td><td><b>' + campo.nombrecurso + '</b></td><td ><li> ' + campo.nombre + '</li><li>Ing.Sist. Ciclo:6</li></td></tr>');
 

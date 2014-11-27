@@ -69,8 +69,8 @@ public class DgpDAO implements InterfaceDgpDAO {
             cst.setString(29, DE_MONTO_HONORARIO);
             cst.execute();
 
-        } catch (Exception ex) {
-            //  Logger.getLogger(DgpDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
         } finally {
             this.conn.close();
         }
@@ -118,7 +118,8 @@ public class DgpDAO implements InterfaceDgpDAO {
                 Lista.add(x);
             }
         } catch (SQLException e) {
-        } finally {
+            throw new RuntimeException(e.getMessage());
+        }finally {
             this.conn.close();
         }
         return Lista;

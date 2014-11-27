@@ -322,7 +322,7 @@
                                                         </section>
                                                         <section class="col col-6">
                                                             <label class="input"  id="titu"> 
-                                                                Fecha de Cese :<input type="date" name="FEC_DESDE"  required="" id="datepicker">
+                                                                Fecha de Cese :<input type="date" name="FEC_HASTA"  required="" id="datepicker">
                                                             </label>
                                                         </section>
                                                     </div>
