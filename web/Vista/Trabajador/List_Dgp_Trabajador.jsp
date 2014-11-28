@@ -49,7 +49,7 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
 
     </head>
-    <body class="">
+    <body >
 
 
 
@@ -75,9 +75,9 @@
                             <thead> 
                                 <tr>
                                     <th data-hide="phone">Nro</th>
-                                    <th data-class="expand">Fecha Desde</th>
+                                    <th data-class="phone,tablet">Fecha Desde</th>
                                     <th data-hide="phone,tablet">Fecha Hasta</th>
-                                    <th data-hide="phone">Motivo</th>
+                                    <th data-hide="expand">Motivo</th>
                                     <th data-hide="phone,tablet">Puesto Trabajador</th>
                                     <th data-hide="phone,tablet">Sección</th>
                                     <th data-hide="phone,tablet">Area</th>

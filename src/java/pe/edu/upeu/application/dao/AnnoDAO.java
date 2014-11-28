@@ -97,9 +97,8 @@ public class AnnoDAO implements InterfaceAnnoDAO {
         return a;
         
     }
-
-    @Override
-    public List<Anno> List_anno_ma() {
+    
+        public List<Anno> List_anno_ma() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
