@@ -17,11 +17,6 @@
         <link type="text/css" rel="stylesheet" href="../../../css/Css_Formulario/form.css">
         <link rel="stylesheet" href="../../../css/bootstrap.min.css">
 
-        <style>
-            div{
-                border: 1px solid blue;
-            }
-        </style>
     </head>
     <body>
         <div class="spacing">
@@ -37,32 +32,32 @@
                     <div class="row">
                         <div class="form-group" >
                             <label class="control-label" >Nombres</label><br>
-                            <input type="text"  class="form-control"  name="nom" maxlength="80" style="width: 250px">
+                            <input type="text"  class="form-control"  name="nom" maxlength="80" >
                         </div>
                         <div class="form-group" >
                             <label class="control-label" >Apellido Paterno</label><br>
-                            <input type="text"  class="form-control"  name="ap_pa" maxlength="80" style="width: 250px">
+                            <input type="text"  class="form-control"  name="ap_pa" maxlength="80">
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group">
                             <label class="control-label" >Apellido Materno</label><br>
-                            <input type="text"  class="form-control"  name="ap_ma" maxlength="80" style="width: 250px">
+                            <input type="text"  class="form-control"  name="ap_ma" maxlength="80" >
                         </div>
 
                         <div class="form-group">
                             <label class="control-label" >DNI:</label><br>
-                            <input type="text"  class="form-control"  onKeyPress="return checkIt(event)"  style="width: 250px" name="dni" maxlength="8">
+                            <input type="text"  class="form-control"  onKeyPress="return checkIt(event)"   name="dni" maxlength="8">
                         </div>
                     </div>
 
                     <div class="row">
                     
                             <div class="form-group">                            
-                                <button type="button" class="btn btn-primary" id="btnfiltrar" style="margin:10px;">Buscar</button>
+                                <button type="button" class="btn btn-primary" id="btnfiltrar" >Buscar</button>
                             </div>
                             <div class="form-group">  
-                                <a href="javascript:;"  id="btncancel" class="btn btn-primary" style="margin:10px;">Cancelar</a>
+                                <a href="javascript:;"  id="btncancel" class="btn btn-primary" >Cancelar</a>
                             </div>
          
                     </div>

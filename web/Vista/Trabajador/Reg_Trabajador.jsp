@@ -760,8 +760,8 @@
                                                                             <input class="form-control input-lg"  placeholder="Año Egreso" type="text"   maxlength="4" minlength="4"   name="A_EGRESO" >
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-sm-4">
+                                                                </div>                        
+                                                                <div class="col-sm-4">   <label>Tipo Hora Pago Referencial:</label>
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-money fa-lg fa-fw"></i></span>
