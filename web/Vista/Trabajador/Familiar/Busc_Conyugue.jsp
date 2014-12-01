@@ -11,19 +11,23 @@
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <title>Conyugue</title>
 
-        <link rel="stylesheet" href="../../../css/Css_Sort/style.css" />
         <script type="text/javascript" src="../../../js/JQuery/jQuery.js"></script>
-        <link type="text/css" rel="stylesheet" href="../../../css/Css_Reporte/Reportes.css">
-        <link type="text/css" rel="stylesheet" href="../../../css/Css_Formulario/form.css">
         <link rel="stylesheet" href="../../../css/bootstrap.min.css">
 
     </head>
+    <style>
+        
+        *{
+            margin: 0px;
+            
+        }
+    </style>
     <body>
-        <div class="spacing">
-            <center><h1 class="spacing" style="font-weight: bold;">Conyugue</h1></center> 
-        </div>
+        
+           
+       
     <center>
-        <br>
+        <h1  style="font-weight: bold;">Conyugue</h1>
         <div id="contenido">
             <div >
 
