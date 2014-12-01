@@ -12,17 +12,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import pe.edu.upeu.application.dao.PasoDAO;
-import pe.edu.upeu.application.dao_imp.InterfacePasoDAO;
+import pe.edu.upeu.application.dao.ProcesoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceProcesoDAO;
 
 /**
  *
  * @author ALFA 3
  */
-public class CPaso extends HttpServlet {
+
+@WebServlet(name = "CProceso", urlPatterns = {"/Proceso"})
+public class CProceso extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,38 +41,31 @@ public class CPaso extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        InterfacePasoDAO p = new PasoDAO();
+        InterfaceProcesoDAO p = new ProcesoDAO();
         Map<String, Object> rpta = new HashMap<String, Object>();
         try {
             String opc = request.getParameter("opc");
-            if (opc.equals("Listar")) {
-                 String id = request.getParameter("proceso");
-                List<Map<String, ?>> lista = p.List_Paso(id.trim());
-                rpta.put("rpta", "1");
-                rpta.put("lista", lista);
-            }
+            
             if (opc.equals("Mantenimiento")) {
-                response.sendRedirect("Vista/Proceso/Menu_Mantenimiento.jsp");
+                response.sendRedirect("Vista/Dgp/Plazo/Reg_Plazo_Dgp.jsp");
 
             }
-            if (opc.equals("Eliminar")) {
-                String id = request.getParameter("paso");
-                p.DELETE_PASOS(id);
-            }
             if (opc.equals("Registrar")) {
-                String ID_PROCESO = request.getParameter("proceso");
-                String DE_PASOS = request.getParameter("desc");
-                String NU_PASOS = request.getParameter("num");
-                String CO_PASOS = request.getParameter("cod");
-                p.INSERT_PASOS(null, ID_PROCESO, DE_PASOS, NU_PASOS, CO_PASOS);
+
+
             }
             if (opc.equals("Modificar")) {
-                String ID_PASO = request.getParameter("id");
-                String ID_PROCESO = request.getParameter("proceso");
-                String DE_PASOS = request.getParameter("desc");
-                String NU_PASOS = request.getParameter("num");
-                String CO_PASOS = request.getParameter("cod");
-                p.INSERT_PASOS(ID_PASO, ID_PROCESO, DE_PASOS, NU_PASOS, CO_PASOS);
+
+
+            }
+            if (opc.equals("Listar2")) {
+                List<Map<String, ?>> lista=p.List_Proceso();
+                rpta.put("rpta","1");
+                rpta.put("lista",lista);
+            }
+            if (opc.equals("Eliminar")) {
+
+
             }
         } catch (Exception e) {
             rpta.put("rpta", "-1");

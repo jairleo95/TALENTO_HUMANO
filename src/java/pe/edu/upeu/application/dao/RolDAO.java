@@ -14,8 +14,10 @@ import pe.edu.upeu.application.dao_imp.InterfaceRolDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Detalle_Privilegio;
+import pe.edu.upeu.application.model.Privilegio_Rol;
 import pe.edu.upeu.application.model.Rol;
 import pe.edu.upeu.application.model.V_Privilegio;
+import pe.edu.upeu.application.model.V_Rol;
 
 /**
  *
@@ -114,6 +116,66 @@ public class RolDAO implements InterfaceRolDAO {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             cst = conn.conex.prepareCall("{CALL RHSP_ACTIVAR_ROL(?)}");
             cst.setString(1, id_rol);
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        }
+    }
+
+    @Override
+    public List<Privilegio_Rol> Listar_Rol_Privilegio(String id_rol) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT P.NO_LINK, e.ES_DETALLE_PRIVILEGIO,e.ID_DETALLE_PRIVILEGIO FROM RHTD_DETALLE_PRIVILEGIO e , RHTR_ROL r, RHTV_PRIVILEGIO WHERE e.ID_ROL = r.ID_ROL AND e.ID_PRIVILEGIO=P.ID_PRIVILEGIO AND e.ID_ROL ='"+id_rol+"'";
+        List<Privilegio_Rol> list = new ArrayList<Privilegio_Rol>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Privilegio_Rol d = new Privilegio_Rol();
+                d.setNo_link(rs.getString("No_link"));
+                d.setEs_detalle_privilegio(rs.getString("Es_detalle_privilegio"));
+                d.setId_detalle_privilegio(rs.getString("Id_detalle_privilegio"));
+                list.add(d);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return list;
+        
+    }
+
+    @Override
+    public List<Rol> Listar_Rol_id(String id_rol) {
+         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT NO_ROL, ID_ROL ,ES_ROL FROM RHTR_ROL WHERE ID_ROL='"+id_rol +"'";
+        List<Rol> list = new ArrayList<Rol>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Rol d = new Rol();
+                d.setNo_rol(rs.getString("no_Rol"));
+                d.setId_rol(rs.getString("id_rol"));
+                d.setEs_rol(rs.getString("es_rol"));
+                list.add(d);
+            }
+            
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return list;
+    }
+
+    @Override
+    public void Mod_Rol(String Id_rol, String No_Rol, String Es_Rol) {
+        CallableStatement cst;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = conn.conex.prepareCall("{CALL RHSP_MOD_ROL(?,?,?)}");
+            cst.setString(1, Id_rol);
+            cst.setString(2, No_Rol);
+            cst.setString(3, Es_Rol);
             cst.execute();
         } catch (SQLException ex) {
         } finally {

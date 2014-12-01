@@ -3,33 +3,36 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package pe.edu.upeu.application.model;
 
 /**
  *
- * @author Admin
+ * @author joserodrigo
  */
-public class Detalle_Privilegio {
-
+public class X_Detalle_Privilegio {
     private String id_detalle_privilegio;
     private String id_rol;
     private int nu_orden;
     private String id_privilegio;
-    private String es_detalle_privilegio;
+    private String es_datalle_privilegio;
+    private String no_rol;
 
-    public Detalle_Privilegio(String id_detalle_privilegio, String id_rol, int nu_orden, String id_privilegio, String es_detalle_privilegio) {
+    public X_Detalle_Privilegio(String id_detalle_privilegio, String id_rol, int nu_orden, String id_privilegio, String es_datalle_privilegio, String no_rol) {
         this.id_detalle_privilegio = id_detalle_privilegio;
         this.id_rol = id_rol;
         this.nu_orden = nu_orden;
         this.id_privilegio = id_privilegio;
-        this.es_detalle_privilegio = es_detalle_privilegio;
+        this.es_datalle_privilegio = es_datalle_privilegio;
+        this.no_rol = no_rol;
     }
-    public Detalle_Privilegio() {
+    public X_Detalle_Privilegio() {
         this.id_detalle_privilegio = "";
         this.id_rol = "";
         this.nu_orden = 0;
         this.id_privilegio = "";
-        this.es_detalle_privilegio = "";
+        this.es_datalle_privilegio = "";
+        this.no_rol = "";
     }
 
     public String getId_detalle_privilegio() {
@@ -64,13 +67,20 @@ public class Detalle_Privilegio {
         this.id_privilegio = id_privilegio;
     }
 
-    public String getEs_detalle_privilegio() {
-        return es_detalle_privilegio;
+    public String getEs_datalle_privilegio() {
+        return es_datalle_privilegio;
     }
 
-    public void setEs_detalle_privilegio(String es_detalle_privilegio) {
-        this.es_detalle_privilegio = es_detalle_privilegio;
+    public void setEs_datalle_privilegio(String es_datalle_privilegio) {
+        this.es_datalle_privilegio = es_datalle_privilegio;
     }
-    
+
+    public String getNo_rol() {
+        return no_rol;
+    }
+
+    public void setNo_rol(String no_rol) {
+        this.no_rol = no_rol;
+    }
     
 }

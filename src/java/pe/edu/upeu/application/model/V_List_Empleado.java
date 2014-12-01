@@ -30,8 +30,9 @@ public class V_List_Empleado {
     private Double ca_sueldo;
     private String fe_desde;
     private String fe_hasta;
+    private String nu_doc;
 
-    public V_List_Empleado(String id_contrato, String id_trabajador, String ap_paterno, String ap_materno, String no_trabajador, String no_puesto, String no_seccion, String no_area, String id_direccion, String no_dep, String id_departamento, String id_area, String id_seccion, String id_puesto, String id_empleado, String fe_creacion, Double ca_sueldo, String fe_desde, String fe_hasta) {
+    public V_List_Empleado(String id_contrato, String id_trabajador, String ap_paterno, String ap_materno, String no_trabajador, String no_puesto, String no_seccion, String no_area, String id_direccion, String no_dep, String id_departamento, String id_area, String id_seccion, String id_puesto, String id_empleado, String fe_creacion, Double ca_sueldo, String fe_desde, String fe_hasta, String nu_doc) {
         this.id_contrato = id_contrato;
         this.id_trabajador = id_trabajador;
         this.ap_paterno = ap_paterno;
@@ -51,8 +52,9 @@ public class V_List_Empleado {
         this.ca_sueldo = ca_sueldo;
         this.fe_desde = fe_desde;
         this.fe_hasta = fe_hasta;
+        this.nu_doc = nu_doc;
     }
-    
+
      public V_List_Empleado() {
         this.id_contrato = "";
         this.id_trabajador = "";
@@ -73,6 +75,7 @@ public class V_List_Empleado {
         this.ca_sueldo = 0.0;
         this.fe_desde = "";
         this.fe_hasta = "";
+        this.nu_doc = "";
     }
 
     public String getId_contrato() {
@@ -225,6 +228,14 @@ public class V_List_Empleado {
 
     public void setFe_hasta(String fe_hasta) {
         this.fe_hasta = fe_hasta;
+    }
+
+    public String getNu_doc() {
+        return nu_doc;
+    }
+
+    public void setNu_doc(String nu_doc) {
+        this.nu_doc = nu_doc;
     }
      
      

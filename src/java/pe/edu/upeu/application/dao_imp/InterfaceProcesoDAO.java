@@ -10,13 +10,9 @@ import java.util.Map;
 
 /**
  *
- * @author JAIR
+ * @author ALFA 3
  */
-public interface InterfacePasoDAO {
+public interface InterfaceProcesoDAO {
 
-    public List<Map<String, ?>> List_Paso(String proceso);
-
-    public void INSERT_PASOS(String ID_PASOS, String ID_PROCESO, String DE_PASOS, String NU_PASOS, String CO_PASOS);
-    public void DELETE_PASOS(String ID_PASOS);
-
+    public List<Map<String, ?>> List_Proceso();
 }
