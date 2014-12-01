@@ -110,7 +110,8 @@ public class CDocumento extends HttpServlet {
              }
              }*/
         } else {
-            String ubicacion = "C:\\Users\\ALFA 3\\Documents\\NetBeansProjects\\TALENTO_HUMANO\\web\\Vista\\Dgp\\Documento\\Archivo";
+            //------>   ./var/www/html/files/   (con: pwd)
+            String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "\\Vista\\Dgp\\Documento\\Archivo";
             DiskFileItemFactory f = new DiskFileItemFactory();
             f.setSizeThreshold(1024);
             f.setRepository(new File(ubicacion));
