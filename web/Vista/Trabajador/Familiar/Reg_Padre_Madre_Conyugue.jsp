@@ -52,7 +52,7 @@
 
         <script type="text/javascript">
             $(document).ready(
-                    function() {
+                    function () {
                         $("#as").focus();
                     }
             );
@@ -60,59 +60,6 @@
     </head>
     <body>
     <center>
-        <label class="title">DATOS DEL PADRE, MADRE Y CONYUGUE</label>
-
-        <form class="form" action="../../../familiar"> 
-            <div >
-                <table class="table" >  
-                    <tr><td colspan="4"><div class="sub_title"><label class="label">Datos del Padre y Madre</label></div></td></tr>
-
-                    <tr><td>Apellidos y Nombres del Padre:</td><td><input type="text" name="APELLIDOS_NOMBRES_PADRE"    class="text-box"  id="as" required="" maxlength="50"></td></tr>         
-                    <tr><td>Apellidos  y Nombres de la Madre:</td><td><input type="text" name="APELLIDOS_NOMBRES_MADRE"  class="text-box" required="" maxlength="50"></td></tr>        
-                </table>  
-            </div>
-            <div style="display: //none;" >
-                <table  class="table">
-                    <tr><td colspan="4"><div class="sub_title"><label class="label">Datos del Cónyugue</label></div></td></tr>
-                    <tr><td>¿Trabaja Upeu Conyugue?</td><td>
-                            <select name="TRABAJA_UPEU_CONYUGUE"  required=""  class="text-box">
-                                <option value="1">Si</option>
-                                <option value="0">No</option>
-                            </select>
-                        </td></tr>  
-
-                    <tr><td>Apellidos y Nombres :</td><td><input type="text" name="APELLIDO_NOMBRES_CONYUGUE" class="text-box" required="" maxlength="50"></td></tr>    
-                    <tr><td>Fecha de Nacimiento:</td><td><input type="date" name="FECHA_NAC_CONYUGUE"  class="text-box" required=""></td></tr>               
-
-                    <tr><td>Tipo Documento:</td><td>
-                            <select name="TIPO_DOC_ID"  class="text-box" required="">
-                                <option value=""></option>
-                                <option value="1">DNI</option>
-                                <option value="2">Pasaporte</option>
-                            </select>
-                            
-                    <tr><td>Nro de Documento:</td><td><input type="text" name="NRO_DOC" class="text-box" required="" maxlength="10"></td></tr>           
-                    <tr>
-                        <td>Inscripcion Vigente en Essalud:</td><td>
-                            <select name="INSCRIPCION_VIG_ESSALUD"   class="text-box" required="">
-                                <option value=""></option>
-                                <option value="1">Si</option>
-                                <option value="0">No</option>
-                            </select>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div>
-                <table class="table">
-                    <input type="hidden" name="IDDATOS_TRABAJADOR"  value="<%=request.getParameter("idtr")%>" class="text-box" >  
-
-                    <tr><td><input type="submit" name="opc"  class="submit" value="REGISTRAR"></td></tr>
-
-                </table>
-            </div>
-        </form>
-
         <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
 
             <header>
@@ -162,8 +109,8 @@
 
                                 <section class="col col-5">
                                     <label class="select">
-                                        <select name="TRABAJA_UPEU_CONYUGUE" required="">
-                                            <option value="" selected="" disabled="">¿Trabaja Upeu Conyugue?</option>
+                                        <select name="TRABAJA_UPEU_CONYUGUE" required="" class="select-conyugue">
+                                            <option value="" selected=""  disabled="">¿Trabaja Upeu Conyugue?</option>
                                             <option value="1">Si</option>
                                             <option value="0">No</option>
 
@@ -179,7 +126,7 @@
 
                                 <section class="col col-6">
                                     <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                                        <input type="text" name="FECHA_NAC_CONYUGUE" placeholder="Fecha de Nacimiento dd/mm/yy" class="datepicker"  data-dateformat='dd/mm/yy' required="">
+                                        <input type="date" name="FECHA_NAC_CONYUGUE" placeholder="Fecha de Nacimiento dd/mm/yy" class="date" required="">
                                     </label>
                                 </section>
 
@@ -198,7 +145,7 @@
                                         <input type="text" name="NRO_DOC" placeholder="Nro de Documento" maxlength="10" required="">
                                     </label>
                                 </section>
-             
+
 
                                 <section class="col col-5">
                                     <label class="select">
@@ -212,8 +159,9 @@
                                 </section>
                             </div>                        
                         </fieldset>
+                        <input type="hidden" name="opc"  class="submit" value="REGISTRAR">
                         <footer>
-                            <input type="" name="IDDATOS_TRABAJADOR"  value="<%=request.getParameter("idtr")%>" class="text-box" >  
+                            <input type="hidden" name="IDDATOS_TRABAJADOR"  value="<%=request.getParameter("idtr")%>" class="text-box" >  
                             <button type="submit" class="btn btn-primary" name="opc">
                                 Registrar
                             </button>
@@ -228,92 +176,199 @@
 
         </div>
         <!-- end widget -->
-    </form></center><br><br>
 
-<!--================================================== -->
 
-<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-<script data-pace-options='{ "restartOnRequestAfter": true }' src="../../../js/plugin/pace/pace.min.js"></script>
 
-<!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-<script>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Encontrar Conyugue</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div id="contenido">
+                                <div >
+
+                                    <form class="form-inline" id="frm_filtro" method="post" name="formulario"  >
+
+                                        <div class="row">
+                                            <div class="form-group" >
+                                                <label class="control-label" >Nombres</label><br>
+                                                <input type="text"  class="form-control"  name="nom" maxlength="80" >
+                                            </div>
+                                            <div class="form-group" >
+                                                <label class="control-label" >Apellido Paterno</label><br>
+                                                <input type="text"  class="form-control"  name="ap_pa" maxlength="80">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label" >Apellido Materno</label><br>
+                                                <input type="text"  class="form-control"  name="ap_ma" maxlength="80" >
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label" >DNI:</label><br>
+                                                <input type="text"  class="form-control"  onKeyPress="return checkIt(event)"   name="dni" maxlength="8">
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="form-group">                            
+                                                <button type="button" class="btn btn-primary" id="btnfiltrar" >Buscar</button>
+                                            </div>
+                                            <div class="form-group">  
+                                                <a href="javascript:;"  id="btncancel" class="btn btn-primary" >Cancelar</a>
+                                            </div>
+
+                                        </div>
+
+                                    </form>
+
+                                </div> 
+
+                                <hr/>
+                             
+                                    <table     id="data"  >
+                                        <thead class="tab_cabe">
+                                            <tr>
+                                                <td><span title="NOMBRE_AP">Nombres y Apellidos</span></td>
+                                                <td><span  >DNI</span></td>
+
+                                            </tr>
+                                        </thead>
+
+                                        <tbody class="tbodys">
+                                        </tbody>
+                                    </table>
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-salir-busc"  data-dismiss="modal">
+                            Salir
+                        </button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <button  data-toggle="modal" data-target="#myModal" id="btn-mostrar" hidden="">
+            Launch demo modal
+        </button>
+        <script>
+            $(document).ready(
+                    function () {
+                        $(".btn-salir-busc, .close").click(function () {
+
+                            $(".select-conyugue").val("0");
+                        });
+
+                        $(".select-conyugue").change(function () {
+                            if ($(this).val() == "1") {
+                                $("#btn-mostrar").click();
+                            }
+                        });
+                    }
+            );
+        </script>
+
+    </center><br><br>
+
+    <!--================================================== -->
+
+    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+    <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../../js/plugin/pace/pace.min.js"></script>
+
+    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script>
             if (!window.jQuery) {
                 document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
             }
-</script>
+    </script>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-<script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script>
             if (!window.jQuery.ui) {
                 document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
             }
-</script>
+    </script>
 
-<!-- IMPORTANT: APP CONFIG -->
-<script src="../../../js/app.config.js"></script>
+    <!-- IMPORTANT: APP CONFIG -->
+    <script src="../../../js/app.config.js"></script>
 
-<!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
-<script src="../../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
+    <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
+    <script src="../../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
 
-<!-- BOOTSTRAP JS -->
-<script src="../../../js/bootstrap/bootstrap.min.js"></script>
+    <!-- BOOTSTRAP JS -->
+    <script src="../../../js/bootstrap/bootstrap.min.js"></script>
 
-<!-- CUSTOM NOTIFICATION -->
-<script src="../../../js/notification/SmartNotification.min.js"></script>
+    <!-- CUSTOM NOTIFICATION -->
+    <script src="../../../js/notification/SmartNotification.min.js"></script>
 
-<!-- JARVIS WIDGETS -->
-<script src="../../../js/smartwidgets/jarvis.widget.min.js"></script>
+    <!-- JARVIS WIDGETS -->
+    <script src="../../../js/smartwidgets/jarvis.widget.min.js"></script>
 
-<!-- EASY PIE CHARTS -->
-<script src="../../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+    <!-- EASY PIE CHARTS -->
+    <script src="../../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
 
-<!-- SPARKLINES -->
-<script src="../../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
+    <!-- SPARKLINES -->
+    <script src="../../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
 
-<!-- JQUERY VALIDATE -->
-<script src="../../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
+    <!-- JQUERY VALIDATE -->
+    <script src="../../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
 
-<!-- JQUERY MASKED INPUT -->
-<script src="../../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+    <!-- JQUERY MASKED INPUT -->
+    <script src="../../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
 
-<!-- JQUERY SELECT2 INPUT -->
-<script src="../../../js/plugin/select2/select2.min.js"></script>
+    <!-- JQUERY SELECT2 INPUT -->
+    <script src="../../../js/plugin/select2/select2.min.js"></script>
 
-<!-- JQUERY UI + Bootstrap Slider -->
-<script src="../../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+    <!-- JQUERY UI + Bootstrap Slider -->
+    <script src="../../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
 
-<!-- browser msie issue fix -->
-<script src="../../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+    <!-- browser msie issue fix -->
+    <script src="../../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
 
-<!-- FastClick: For mobile devices -->
-<script src="../../../js/plugin/fastclick/fastclick.min.js"></script>
+    <!-- FastClick: For mobile devices -->
+    <script src="../../../js/plugin/fastclick/fastclick.min.js"></script>
 
-<!--[if IE 8]>
+    <!--[if IE 8]>
+    
+    <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+    
+    <![endif]-->
 
-<h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+    <!-- Demo purpose only -->
+    <script src="../../../js/demo.min.js"></script>
 
-<![endif]-->
+    <!-- MAIN APP JS FILE -->
+    <script src="../../../js/app.min.js"></script>
 
-<!-- Demo purpose only -->
-<script src="../../../js/demo.min.js"></script>
+    <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
+    <!-- Voice command : plugin -->
+    <script src="../../../js/speech/voicecommand.min.js"></script>
 
-<!-- MAIN APP JS FILE -->
-<script src="../../../js/app.min.js"></script>
-
-<!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
-<!-- Voice command : plugin -->
-<script src="../../../js/speech/voicecommand.min.js"></script>
-
-<!-- PAGE RELATED PLUGIN(S) -->
-<script src="../../../js/plugin/jquery-form/jquery-form.min.js"></script>
+    <!-- PAGE RELATED PLUGIN(S) -->
+    <script src="../../../js/plugin/jquery-form/jquery-form.min.js"></script>
 
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
-// DO NOT REMOVE : GLOBAL FUNCTIONS!
+            // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-            $(document).ready(function() {
+            $(document).ready(function () {
 
                 pageSetUp();
 
@@ -412,7 +467,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -481,7 +536,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -533,7 +588,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -572,15 +627,15 @@
                         }
                     },
                     // Ajax form submition
-                    submitHandler: function(form) {
+                    submitHandler: function (form) {
                         $(form).ajaxSubmit({
-                            success: function() {
+                            success: function () {
                                 $("#comment-form").addClass('submited');
                             }
                         });
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -614,15 +669,15 @@
                         }
                     },
                     // Ajax form submition
-                    submitHandler: function(form) {
+                    submitHandler: function (form) {
                         $(form).ajaxSubmit({
-                            success: function() {
+                            success: function () {
                                 $("#contact-form").addClass('submited');
                             }
                         });
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -651,7 +706,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -696,17 +751,17 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
 
-// START AND FINISH DATE
+                // START AND FINISH DATE
                 $('#startdate').datepicker({
                     dateFormat: 'dd.mm.yy',
                     prevText: '<i class="fa fa-chevron-left"></i>',
                     nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function(selectedDate) {
+                    onSelect: function (selectedDate) {
                         $('#finishdate').datepicker('option', 'minDate', selectedDate);
                     }
                 });
@@ -715,7 +770,7 @@
                     dateFormat: 'dd.mm.yy',
                     prevText: '<i class="fa fa-chevron-left"></i>',
                     nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function(selectedDate) {
+                    onSelect: function (selectedDate) {
                         $('#startdate').datepicker('option', 'maxDate', selectedDate);
                     }
                 });
@@ -724,24 +779,62 @@
 
             })
 
-</script>
+    </script>
 
-<!-- Your GOOGLE ANALYTICS CODE Below -->
-<script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-    _gaq.push(['_trackPageview']);
+    <!-- Your GOOGLE ANALYTICS CODE Below -->
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+        _gaq.push(['_trackPageview']);
 
-    (function() {
-        var ga = document.createElement('script');
-        ga.type = 'text/javascript';
-        ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(ga, s);
-    })();
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
 
-</script>
+    </script>
+    <script>
+        $(document).ready(function () {
+            var b = $(".tbodys");
+
+            $("#btnfiltrar").click(
+                    function () {
+
+
+                        $.post("../../../ajax/Ajax_Conyugue/Ajax_Busc_Conyug.jsp", $("#frm_filtro").serialize(), function (objJson) {
+                            b.empty();
+                            var list = objJson.lista;
+                            for (var i = 0; i < list.length; i++) {
+                                b.append("<tr>");
+                                b.append("<td>" + list[i].NOM + "asd" + list[i].AP_PA + list[i].AP_MA + "</td>");
+                                b.append("<td>" + list[i].NU_DOC + "</td>");
+
+                                b.append("</tr>");
+
+                            }
+                        }
+                        );
+
+                    }
+            );
+            $("#btncancel").click(
+                    function () {
+                        document.formulario.reset();
+                        b.empty();
+                        html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'
+                        $(".tbodys").html(html);
+                    }
+            );
+
+        }
+        );
+
+
+    </script>
 
 
 

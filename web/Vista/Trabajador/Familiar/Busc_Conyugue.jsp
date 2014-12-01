@@ -15,13 +15,7 @@
         <link rel="stylesheet" href="../../../css/bootstrap.min.css">
 
     </head>
-    <style>
-        
-        *{
-            margin: 0px;
-            
-        }
-    </style>
+
     <body>
         
            
@@ -131,5 +125,4 @@
 
 
 </script>
-
 </html>
