@@ -44,18 +44,6 @@ public class CPrivilegios extends HttpServlet {
         HttpSession sesion = request.getSession(true);
         String iduser = (String) sesion.getAttribute("IDUSER");
         try {
-            if(opc.equals("Listar_Rol")){
-                getServletContext().setAttribute("List_Rol", rol.List_Rol());
-                response.sendRedirect("Vista/Usuario/Rol_Privilegio/List_Roles.jsp");
-                
-            }
-            if(opc.equals("Modificar_Rol")){
-                String idrol=request.getParameter("idrol");
-                getServletContext().setAttribute("List_Rol", rol.List_Rol());
-                getServletContext().setAttribute("List_Privilegio", priv.List_Privilegio());
-                response.sendRedirect("Vista/Usuario/Rol_Privilegio/Otorgar_Privilegio.jsp");
-                
-            }
             if(opc.equals("Desactivar_Rol")){
                 String idrol=request.getParameter("idrol");
                 rol.Desactivar_Roles(idrol);

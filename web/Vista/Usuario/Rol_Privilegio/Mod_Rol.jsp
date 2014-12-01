@@ -1,4 +1,3 @@
-
 <%@page import="pe.edu.upeu.application.model.Rol"%>
 <jsp:useBean id="Listar_Rol_id" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
@@ -10,8 +9,8 @@
     </head>
     <body>
 
-        <title class="title">Modificar Rol</title>>
-        <form action="../../../Privilegios"> 
+        <title class="title">Modificar Rol</title>
+        <form action="../../../Roles"> 
             <center>
             <table class=""class="table" >  
                 <%for(int i=0 ;i<Listar_Rol_id.size();i++){
@@ -32,10 +31,11 @@
                     </td></tr>              
                <input type="hidden" name="" value="Modificar_rol2" class="text-box">                           
                <input type="hidden" name="id_rol" value="<%=r.getId_rol()%>" class="text-box">                           
-               <tr><td><input type="submit" name="opc"value="Modificar"></td></tr>
+               <tr><td colspan="2"><input type="submit" name="opc"value="Modificar"></td></tr>
             </table>
                         <%}%>
            </center>
         </form>
     </body>
 </html>
+<%@include file="List_Roles.jsp" %>
