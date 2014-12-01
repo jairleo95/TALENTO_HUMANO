@@ -92,13 +92,15 @@
                             </select>
                             
                     <tr><td>Nro de Documento:</td><td><input type="text" name="NRO_DOC" class="text-box" required="" maxlength="10"></td></tr>           
-                    <tr><td>Inscripcion Vigente en Essalud:</td><td>
+                    <tr>
+                        <td>Inscripcion Vigente en Essalud:</td><td>
                             <select name="INSCRIPCION_VIG_ESSALUD"   class="text-box" required="">
                                 <option value=""></option>
                                 <option value="1">Si</option>
                                 <option value="0">No</option>
                             </select>
-                        </td></tr>
+                        </td>
+                    </tr>
                 </table>
             </div>
             <div>
@@ -141,12 +143,12 @@
                             <div class="row">
                                 <section class="col col-6">
                                     <label class="input"> <i class="icon-prepend fa fa-user"></i>
-                                        <input type="text" name="APELLIDOS_NOMBRES_PADRE" placeholder="Apellidos y nombre del Padre">
+                                        <input type="text" name="APELLIDOS_NOMBRES_PADRE" placeholder="Apellidos y nombre del Padre" required="">
                                     </label>
                                 </section>
                                 <section class="col col-6">
                                     <label class="input"> <i class="icon-prepend fa fa-user"></i>
-                                        <input type="text" name="APELLIDOS_NOMBRES_MADRE" placeholder="Apellidos y nombre del Madre">
+                                        <input type="text" name="APELLIDOS_NOMBRES_MADRE" placeholder="Apellidos y nombre del Madre" required="">
                                     </label>
                                 </section>
                             </div>
@@ -160,7 +162,7 @@
 
                                 <section class="col col-5">
                                     <label class="select">
-                                        <select name="TRABAJA_UPEU_CONYUGUE">
+                                        <select name="TRABAJA_UPEU_CONYUGUE" required="">
                                             <option value="" selected="" disabled="">¿Trabaja Upeu Conyugue?</option>
                                             <option value="1">Si</option>
                                             <option value="0">No</option>
@@ -171,19 +173,19 @@
 
                                 <section class="col col-4">
                                     <label class="input">
-                                        <input type="text" name="APELLIDO_NOMBRES_CONYUGUE" placeholder="Apellidos y Nombres">
+                                        <input type="text" name="APELLIDO_NOMBRES_CONYUGUE" placeholder="Apellidos y Nombres" required="">
                                     </label>
                                 </section>
 
                                 <section class="col col-6">
                                     <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                                        <input type="text" name="FECHA_NAC_CONYUGUE" placeholder="Fecha de Nacimiento dd/mm/yy" class="datepicker"  data-dateformat='dd/mm/yy'>
+                                        <input type="text" name="FECHA_NAC_CONYUGUE" placeholder="Fecha de Nacimiento dd/mm/yy" class="datepicker"  data-dateformat='dd/mm/yy' required="">
                                     </label>
                                 </section>
 
                                 <section class="col col-5">
                                     <label class="select">
-                                        <select name="TIPO_DOC_ID">
+                                        <select name="TIPO_DOC_ID" required="">
                                             <option value="" selected="" disabled="">Tipo de Documento</option>
                                             <option value="1">DNI</option>
                                             <option value="0">Pasaporte</option>
@@ -193,14 +195,14 @@
                                 </section>
                                 <section class="col col-3">
                                     <label class="input">
-                                        <input type="text" name="NRO_DOC" placeholder="Nro de Documento" maxlength="10">
+                                        <input type="text" name="NRO_DOC" placeholder="Nro de Documento" maxlength="10" required="">
                                     </label>
                                 </section>
              
 
                                 <section class="col col-5">
                                     <label class="select">
-                                        <select name="INSCRIPCION_VIG_ESSALUD">
+                                        <select name="INSCRIPCION_VIG_ESSALUD" required="">
                                             <option value="" selected="" disabled="">Inscripción Vigente en Essalud</option>
                                             <option value="1">Si</option>
                                             <option value="0">No</option>
@@ -210,9 +212,9 @@
                                 </section>
                             </div>                        
                         </fieldset>
-
                         <footer>
-                            <button type="submit" class="btn btn-primary">
+                            <input type="" name="IDDATOS_TRABAJADOR"  value="<%=request.getParameter("idtr")%>" class="text-box" >  
+                            <button type="submit" class="btn btn-primary" name="opc">
                                 Registrar
                             </button>
                         </footer>
