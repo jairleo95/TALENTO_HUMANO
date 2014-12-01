@@ -18,12 +18,8 @@ public class V_Es_Requerimiento {
     private String id_dgp;
     private String id_departamento;
     private String ar_foto;
-    private String de_foto;
-    private String id_foto;
-    private String no_ar_foto;
-    private String ta_ar_foto;
 
-    public V_Es_Requerimiento(String id_trabajador, String ap_paterno, String ap_materno, String no_trabajador, String id_dgp, String id_departamento, String ar_foto, String de_foto, String id_foto, String no_ar_foto, String ta_ar_foto) {
+    public V_Es_Requerimiento(String id_trabajador, String ap_paterno, String ap_materno, String no_trabajador, String id_dgp, String id_departamento, String ar_foto, String de_foto, String id_foto, String no_ar_foto, String ta_ar_foto, String es_porcent) {
         this.id_trabajador = id_trabajador;
         this.ap_paterno = ap_paterno;
         this.ap_materno = ap_materno;
@@ -35,8 +31,8 @@ public class V_Es_Requerimiento {
         this.id_foto = id_foto;
         this.no_ar_foto = no_ar_foto;
         this.ta_ar_foto = ta_ar_foto;
+        this.es_porcent = es_porcent;
     }
-
     public V_Es_Requerimiento() {
         this.id_trabajador = "";
         this.ap_paterno = "";
@@ -49,7 +45,10 @@ public class V_Es_Requerimiento {
         this.id_foto = "";
         this.no_ar_foto = "";
         this.ta_ar_foto = "";
+        this.es_porcent = "";
     }
+    private String de_foto;
+    private String id_foto;
 
     public String getId_trabajador() {
         return id_trabajador;
@@ -139,4 +138,16 @@ public class V_Es_Requerimiento {
         this.ta_ar_foto = ta_ar_foto;
     }
 
+    public String getEs_porcent() {
+        return es_porcent;
+    }
+
+    public void setEs_porcent(String es_porcent) {
+        this.es_porcent = es_porcent;
+    }
+    private String no_ar_foto;
+    private String ta_ar_foto;
+    private String es_porcent;
+
+   
 }

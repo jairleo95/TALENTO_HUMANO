@@ -280,7 +280,7 @@ public class DgpDAO implements InterfaceDgpDAO {
     public List<V_Es_Requerimiento> LIST_DGP_PROCESO(String id_dep) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
 
-        String sql = "select * from RHVD_ES_REQUERIMIENTO where ID_DEPARTAMENTO='" + id_dep + "' ORDER BY TO_NUMBER(SUBSTR(ID_DGP,5,LENGTH(ID_DGP))) DESC";
+        String sql = "select * from RHVD_ES_REQUERIMIENTO where ID_DEPARTAMENTO='" + id_dep + "' AND ES_PORCENT IS NOT NULL  ORDER BY TO_NUMBER(SUBSTR(ID_DGP,5,LENGTH(ID_DGP))) DESC";
         //sql += (!"".equals(id_dep)) ? "where ID_DEPARTAMENTO='" + id_dep + "'" : "";
         //sql += "order by ID_DGP";
         List<V_Es_Requerimiento> Lista = new ArrayList<V_Es_Requerimiento>();
@@ -300,6 +300,7 @@ public class DgpDAO implements InterfaceDgpDAO {
                 v.setId_foto(rs.getString("id_foto"));
                 v.setNo_ar_foto(rs.getString("no_ar_foto"));
                 v.setTa_ar_foto(rs.getString("ta_ar_foto"));
+                v.setEs_porcent(rs.getString("ES_PORCENT"));
                 Lista.add(v);
             }
         } catch (SQLException e) {

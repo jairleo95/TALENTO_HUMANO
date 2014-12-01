@@ -33,7 +33,7 @@
         
         if (true) {
 
-            String sql = "select  NO_TRABAJADOR, AP_MATERNO,AP_PATERNO, NU_DOC,TI_DOC, FE_NAC, id_trabajador  from RHVD_LIST_EMPLEADO WHERE NO_TRABAJADOR IS NOT NULL  ";
+            String sql = "select  NO_TRABAJADOR, AP_MATERNO,AP_PATERNO, NU_DOC,TI_DOC, to_char(FE_NAC,'yyyy-mm-dd') as fe_nac, id_trabajador  from RHVD_LIST_EMPLEADO WHERE NO_TRABAJADOR IS NOT NULL  ";
             
             nom = nom.toUpperCase();
             dni = dni.toUpperCase();
@@ -61,6 +61,8 @@
                 rec.put("AP_PA", rs.getString("AP_PATERNO"));
                 rec.put("NU_DOC", rs.getString("NU_DOC"));
                 rec.put("ID_TRAB", rs.getString("id_trabajador"));
+                rec.put("TIPO", rs.getString("TI_DOC"));
+                rec.put("NAC", rs.getString("FE_NAC"));
                 
                 
                 //rec.put("id_dgp", rs.getString("id_dgp"));

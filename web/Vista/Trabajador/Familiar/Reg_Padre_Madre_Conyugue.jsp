@@ -120,32 +120,32 @@
 
                                 <section class="col col-4">
                                     <label class="input">
-                                        <input type="text" name="APELLIDO_NOMBRES_CONYUGUE" placeholder="Apellidos y Nombres" required="">
+                                        <input type="text" name="APELLIDO_NOMBRES_CONYUGUE" placeholder="Apellidos y Nombres" required="" class="nom_c" maxlength="110">
                                     </label>
                                 </section>
 
                                 <section class="col col-6">
                                     <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                                        <input type="date" name="FECHA_NAC_CONYUGUE" placeholder="Fecha de Nacimiento dd/mm/yy" class="date" required="">
+                                        <input type="date" name="FECHA_NAC_CONYUGUE" placeholder="Fecha de Nacimiento dd/mm/yy" class="date f_nac" required="">
                                     </label>
                                 </section>
 
                                 <section class="col col-5">
                                     <label class="select">
-                                        <select name="TIPO_DOC_ID" required="">
+                                        <select name="TIPO_DOC_ID" required="" class="ti_documento">
                                             <option value="" selected="" disabled="">Tipo de Documento</option>
-                                            <option value="1">DNI</option>
-                                            <option value="0">Pasaporte</option>
-
+                                            <option value="1" selected="selected" >DNI</option>
+                                            <option value="2">Carné de Extranjeria</option>
+                                            <option value="3">Pasaporte</option>
                                         </select> 
                                         <i></i> </label>
                                 </section>
                                 <section class="col col-3">
                                     <label class="input">
-                                        <input type="text" name="NRO_DOC" placeholder="Nro de Documento" maxlength="10" required="">
+                                        <input type="text" name="NRO_DOC" placeholder="Nro de Documento" maxlength="10" class="num_doc" required="">
                                     </label>
                                 </section>
-
+                                <input type="text" class="cony"  name="CONYUGUE"/>
 
                                 <section class="col col-5">
                                     <label class="select">
@@ -266,22 +266,7 @@
         <button  data-toggle="modal" data-target="#myModal" id="btn-mostrar" hidden="">
             Launch demo modal
         </button>
-        <script>
-            $(document).ready(
-                    function () {
-                        $(".btn-salir-busc, .close").click(function () {
 
-                            $(".select-conyugue").val("0");
-                        });
-
-                        $(".select-conyugue").change(function () {
-                            if ($(this).val() == "1") {
-                                $("#btn-mostrar").click();
-                            }
-                        });
-                    }
-            );
-        </script>
 
     </center><br><br>
 
@@ -293,16 +278,16 @@
     <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script>
-            if (!window.jQuery) {
-                document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
-            }
+                                                    if (!window.jQuery) {
+                                                        document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
+                                                    }
     </script>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script>
-            if (!window.jQuery.ui) {
-                document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-            }
+                                                    if (!window.jQuery.ui) {
+                                                        document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                                                    }
     </script>
 
     <!-- IMPORTANT: APP CONFIG -->
@@ -366,418 +351,418 @@
 
     <script type="text/javascript">
 
-            // DO NOT REMOVE : GLOBAL FUNCTIONS!
+                                                    // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-            $(document).ready(function () {
+                                                    $(document).ready(function () {
 
-                pageSetUp();
+                                                        pageSetUp();
 
-                var $checkoutForm = $('#checkout-form').validate({
-                    // Rules for form validation
-                    rules: {
-                        fname: {
-                            required: true
-                        },
-                        lname: {
-                            required: true
-                        },
-                        email: {
-                            required: true,
-                            email: true
-                        },
-                        phone: {
-                            required: true
-                        },
-                        country: {
-                            required: true
-                        },
-                        city: {
-                            required: true
-                        },
-                        code: {
-                            required: true,
-                            digits: true
-                        },
-                        address: {
-                            required: true
-                        },
-                        name: {
-                            required: true
-                        },
-                        card: {
-                            required: true,
-                            creditcard: true
-                        },
-                        cvv: {
-                            required: true,
-                            digits: true
-                        },
-                        month: {
-                            required: true
-                        },
-                        year: {
-                            required: true,
-                            digits: true
-                        }
-                    },
-                    // Messages for form validation
-                    messages: {
-                        fname: {
-                            required: 'Please enter your first name'
-                        },
-                        lname: {
-                            required: 'Please enter your last name'
-                        },
-                        email: {
-                            required: 'Please enter your email address',
-                            email: 'Please enter a VALID email address'
-                        },
-                        phone: {
-                            required: 'Please enter your phone number'
-                        },
-                        country: {
-                            required: 'Please select your country'
-                        },
-                        city: {
-                            required: 'Please enter your city'
-                        },
-                        code: {
-                            required: 'Please enter code',
-                            digits: 'Digits only please'
-                        },
-                        address: {
-                            required: 'Please enter your full address'
-                        },
-                        name: {
-                            required: 'Please enter name on your card'
-                        },
-                        card: {
-                            required: 'Please enter your card number'
-                        },
-                        cvv: {
-                            required: 'Enter CVV2',
-                            digits: 'Digits only'
-                        },
-                        month: {
-                            required: 'Select month'
-                        },
-                        year: {
-                            required: 'Enter year',
-                            digits: 'Digits only please'
-                        }
-                    },
-                    // Do not change code below
-                    errorPlacement: function (error, element) {
-                        error.insertAfter(element.parent());
-                    }
-                });
+                                                        var $checkoutForm = $('#checkout-form').validate({
+                                                            // Rules for form validation
+                                                            rules: {
+                                                                fname: {
+                                                                    required: true
+                                                                },
+                                                                lname: {
+                                                                    required: true
+                                                                },
+                                                                email: {
+                                                                    required: true,
+                                                                    email: true
+                                                                },
+                                                                phone: {
+                                                                    required: true
+                                                                },
+                                                                country: {
+                                                                    required: true
+                                                                },
+                                                                city: {
+                                                                    required: true
+                                                                },
+                                                                code: {
+                                                                    required: true,
+                                                                    digits: true
+                                                                },
+                                                                address: {
+                                                                    required: true
+                                                                },
+                                                                name: {
+                                                                    required: true
+                                                                },
+                                                                card: {
+                                                                    required: true,
+                                                                    creditcard: true
+                                                                },
+                                                                cvv: {
+                                                                    required: true,
+                                                                    digits: true
+                                                                },
+                                                                month: {
+                                                                    required: true
+                                                                },
+                                                                year: {
+                                                                    required: true,
+                                                                    digits: true
+                                                                }
+                                                            },
+                                                            // Messages for form validation
+                                                            messages: {
+                                                                fname: {
+                                                                    required: 'Please enter your first name'
+                                                                },
+                                                                lname: {
+                                                                    required: 'Please enter your last name'
+                                                                },
+                                                                email: {
+                                                                    required: 'Please enter your email address',
+                                                                    email: 'Please enter a VALID email address'
+                                                                },
+                                                                phone: {
+                                                                    required: 'Please enter your phone number'
+                                                                },
+                                                                country: {
+                                                                    required: 'Please select your country'
+                                                                },
+                                                                city: {
+                                                                    required: 'Please enter your city'
+                                                                },
+                                                                code: {
+                                                                    required: 'Please enter code',
+                                                                    digits: 'Digits only please'
+                                                                },
+                                                                address: {
+                                                                    required: 'Please enter your full address'
+                                                                },
+                                                                name: {
+                                                                    required: 'Please enter name on your card'
+                                                                },
+                                                                card: {
+                                                                    required: 'Please enter your card number'
+                                                                },
+                                                                cvv: {
+                                                                    required: 'Enter CVV2',
+                                                                    digits: 'Digits only'
+                                                                },
+                                                                month: {
+                                                                    required: 'Select month'
+                                                                },
+                                                                year: {
+                                                                    required: 'Enter year',
+                                                                    digits: 'Digits only please'
+                                                                }
+                                                            },
+                                                            // Do not change code below
+                                                            errorPlacement: function (error, element) {
+                                                                error.insertAfter(element.parent());
+                                                            }
+                                                        });
 
-                var $registerForm = $("#smart-form-register").validate({
-                    // Rules for form validation
-                    rules: {
-                        username: {
-                            required: true
-                        },
-                        email: {
-                            required: true,
-                            email: true
-                        },
-                        password: {
-                            required: true,
-                            minlength: 3,
-                            maxlength: 20
-                        },
-                        passwordConfirm: {
-                            required: true,
-                            minlength: 3,
-                            maxlength: 20,
-                            equalTo: '#password'
-                        },
-                        firstname: {
-                            required: true
-                        },
-                        lastname: {
-                            required: true
-                        },
-                        gender: {
-                            required: true
-                        },
-                        terms: {
-                            required: true
-                        }
-                    },
-                    // Messages for form validation
-                    messages: {
-                        login: {
-                            required: 'Please enter your login'
-                        },
-                        email: {
-                            required: 'Please enter your email address',
-                            email: 'Please enter a VALID email address'
-                        },
-                        password: {
-                            required: 'Please enter your password'
-                        },
-                        passwordConfirm: {
-                            required: 'Please enter your password one more time',
-                            equalTo: 'Please enter the same password as above'
-                        },
-                        firstname: {
-                            required: 'Please select your first name'
-                        },
-                        lastname: {
-                            required: 'Please select your last name'
-                        },
-                        gender: {
-                            required: 'Please select your gender'
-                        },
-                        terms: {
-                            required: 'You must agree with Terms and Conditions'
-                        }
-                    },
-                    // Do not change code below
-                    errorPlacement: function (error, element) {
-                        error.insertAfter(element.parent());
-                    }
-                });
+                                                        var $registerForm = $("#smart-form-register").validate({
+                                                            // Rules for form validation
+                                                            rules: {
+                                                                username: {
+                                                                    required: true
+                                                                },
+                                                                email: {
+                                                                    required: true,
+                                                                    email: true
+                                                                },
+                                                                password: {
+                                                                    required: true,
+                                                                    minlength: 3,
+                                                                    maxlength: 20
+                                                                },
+                                                                passwordConfirm: {
+                                                                    required: true,
+                                                                    minlength: 3,
+                                                                    maxlength: 20,
+                                                                    equalTo: '#password'
+                                                                },
+                                                                firstname: {
+                                                                    required: true
+                                                                },
+                                                                lastname: {
+                                                                    required: true
+                                                                },
+                                                                gender: {
+                                                                    required: true
+                                                                },
+                                                                terms: {
+                                                                    required: true
+                                                                }
+                                                            },
+                                                            // Messages for form validation
+                                                            messages: {
+                                                                login: {
+                                                                    required: 'Please enter your login'
+                                                                },
+                                                                email: {
+                                                                    required: 'Please enter your email address',
+                                                                    email: 'Please enter a VALID email address'
+                                                                },
+                                                                password: {
+                                                                    required: 'Please enter your password'
+                                                                },
+                                                                passwordConfirm: {
+                                                                    required: 'Please enter your password one more time',
+                                                                    equalTo: 'Please enter the same password as above'
+                                                                },
+                                                                firstname: {
+                                                                    required: 'Please select your first name'
+                                                                },
+                                                                lastname: {
+                                                                    required: 'Please select your last name'
+                                                                },
+                                                                gender: {
+                                                                    required: 'Please select your gender'
+                                                                },
+                                                                terms: {
+                                                                    required: 'You must agree with Terms and Conditions'
+                                                                }
+                                                            },
+                                                            // Do not change code below
+                                                            errorPlacement: function (error, element) {
+                                                                error.insertAfter(element.parent());
+                                                            }
+                                                        });
 
-                var $reviewForm = $("#review-form").validate({
-                    // Rules for form validation
-                    rules: {
-                        name: {
-                            required: true
-                        },
-                        email: {
-                            required: true,
-                            email: true
-                        },
-                        review: {
-                            required: true,
-                            minlength: 20
-                        },
-                        quality: {
-                            required: true
-                        },
-                        reliability: {
-                            required: true
-                        },
-                        overall: {
-                            required: true
-                        }
-                    },
-                    // Messages for form validation
-                    messages: {
-                        name: {
-                            required: 'Please enter your name'
-                        },
-                        email: {
-                            required: 'Please enter your email address',
-                            email: '<i class="fa fa-warning"></i><strong>Please enter a VALID email addres</strong>'
-                        },
-                        review: {
-                            required: 'Please enter your review'
-                        },
-                        quality: {
-                            required: 'Please rate quality of the product'
-                        },
-                        reliability: {
-                            required: 'Please rate reliability of the product'
-                        },
-                        overall: {
-                            required: 'Please rate the product'
-                        }
-                    },
-                    // Do not change code below
-                    errorPlacement: function (error, element) {
-                        error.insertAfter(element.parent());
-                    }
-                });
+                                                        var $reviewForm = $("#review-form").validate({
+                                                            // Rules for form validation
+                                                            rules: {
+                                                                name: {
+                                                                    required: true
+                                                                },
+                                                                email: {
+                                                                    required: true,
+                                                                    email: true
+                                                                },
+                                                                review: {
+                                                                    required: true,
+                                                                    minlength: 20
+                                                                },
+                                                                quality: {
+                                                                    required: true
+                                                                },
+                                                                reliability: {
+                                                                    required: true
+                                                                },
+                                                                overall: {
+                                                                    required: true
+                                                                }
+                                                            },
+                                                            // Messages for form validation
+                                                            messages: {
+                                                                name: {
+                                                                    required: 'Please enter your name'
+                                                                },
+                                                                email: {
+                                                                    required: 'Please enter your email address',
+                                                                    email: '<i class="fa fa-warning"></i><strong>Please enter a VALID email addres</strong>'
+                                                                },
+                                                                review: {
+                                                                    required: 'Please enter your review'
+                                                                },
+                                                                quality: {
+                                                                    required: 'Please rate quality of the product'
+                                                                },
+                                                                reliability: {
+                                                                    required: 'Please rate reliability of the product'
+                                                                },
+                                                                overall: {
+                                                                    required: 'Please rate the product'
+                                                                }
+                                                            },
+                                                            // Do not change code below
+                                                            errorPlacement: function (error, element) {
+                                                                error.insertAfter(element.parent());
+                                                            }
+                                                        });
 
-                var $commentForm = $("#comment-form").validate({
-                    // Rules for form validation
-                    rules: {
-                        name: {
-                            required: true
-                        },
-                        email: {
-                            required: true,
-                            email: true
-                        },
-                        url: {
-                            url: true
-                        },
-                        comment: {
-                            required: true
-                        }
-                    },
-                    // Messages for form validation
-                    messages: {
-                        name: {
-                            required: 'Enter your name',
-                        },
-                        email: {
-                            required: 'Enter your email address',
-                            email: 'Enter a VALID email'
-                        },
-                        url: {
-                            email: 'Enter a VALID url'
-                        },
-                        comment: {
-                            required: 'Please enter your comment'
-                        }
-                    },
-                    // Ajax form submition
-                    submitHandler: function (form) {
-                        $(form).ajaxSubmit({
-                            success: function () {
-                                $("#comment-form").addClass('submited');
-                            }
-                        });
-                    },
-                    // Do not change code below
-                    errorPlacement: function (error, element) {
-                        error.insertAfter(element.parent());
-                    }
-                });
+                                                        var $commentForm = $("#comment-form").validate({
+                                                            // Rules for form validation
+                                                            rules: {
+                                                                name: {
+                                                                    required: true
+                                                                },
+                                                                email: {
+                                                                    required: true,
+                                                                    email: true
+                                                                },
+                                                                url: {
+                                                                    url: true
+                                                                },
+                                                                comment: {
+                                                                    required: true
+                                                                }
+                                                            },
+                                                            // Messages for form validation
+                                                            messages: {
+                                                                name: {
+                                                                    required: 'Enter your name',
+                                                                },
+                                                                email: {
+                                                                    required: 'Enter your email address',
+                                                                    email: 'Enter a VALID email'
+                                                                },
+                                                                url: {
+                                                                    email: 'Enter a VALID url'
+                                                                },
+                                                                comment: {
+                                                                    required: 'Please enter your comment'
+                                                                }
+                                                            },
+                                                            // Ajax form submition
+                                                            submitHandler: function (form) {
+                                                                $(form).ajaxSubmit({
+                                                                    success: function () {
+                                                                        $("#comment-form").addClass('submited');
+                                                                    }
+                                                                });
+                                                            },
+                                                            // Do not change code below
+                                                            errorPlacement: function (error, element) {
+                                                                error.insertAfter(element.parent());
+                                                            }
+                                                        });
 
-                var $contactForm = $("#contact-form").validate({
-                    // Rules for form validation
-                    rules: {
-                        name: {
-                            required: true
-                        },
-                        email: {
-                            required: true,
-                            email: true
-                        },
-                        message: {
-                            required: true,
-                            minlength: 10
-                        }
-                    },
-                    // Messages for form validation
-                    messages: {
-                        name: {
-                            required: 'Please enter your name',
-                        },
-                        email: {
-                            required: 'Please enter your email address',
-                            email: 'Please enter a VALID email address'
-                        },
-                        message: {
-                            required: 'Please enter your message'
-                        }
-                    },
-                    // Ajax form submition
-                    submitHandler: function (form) {
-                        $(form).ajaxSubmit({
-                            success: function () {
-                                $("#contact-form").addClass('submited');
-                            }
-                        });
-                    },
-                    // Do not change code below
-                    errorPlacement: function (error, element) {
-                        error.insertAfter(element.parent());
-                    }
-                });
+                                                        var $contactForm = $("#contact-form").validate({
+                                                            // Rules for form validation
+                                                            rules: {
+                                                                name: {
+                                                                    required: true
+                                                                },
+                                                                email: {
+                                                                    required: true,
+                                                                    email: true
+                                                                },
+                                                                message: {
+                                                                    required: true,
+                                                                    minlength: 10
+                                                                }
+                                                            },
+                                                            // Messages for form validation
+                                                            messages: {
+                                                                name: {
+                                                                    required: 'Please enter your name',
+                                                                },
+                                                                email: {
+                                                                    required: 'Please enter your email address',
+                                                                    email: 'Please enter a VALID email address'
+                                                                },
+                                                                message: {
+                                                                    required: 'Please enter your message'
+                                                                }
+                                                            },
+                                                            // Ajax form submition
+                                                            submitHandler: function (form) {
+                                                                $(form).ajaxSubmit({
+                                                                    success: function () {
+                                                                        $("#contact-form").addClass('submited');
+                                                                    }
+                                                                });
+                                                            },
+                                                            // Do not change code below
+                                                            errorPlacement: function (error, element) {
+                                                                error.insertAfter(element.parent());
+                                                            }
+                                                        });
 
-                var $loginForm = $("#login-form").validate({
-                    // Rules for form validation
-                    rules: {
-                        email: {
-                            required: true,
-                            email: true
-                        },
-                        password: {
-                            required: true,
-                            minlength: 3,
-                            maxlength: 20
-                        }
-                    },
-                    // Messages for form validation
-                    messages: {
-                        email: {
-                            required: 'Please enter your email address',
-                            email: 'Please enter a VALID email address'
-                        },
-                        password: {
-                            required: 'Please enter your password'
-                        }
-                    },
-                    // Do not change code below
-                    errorPlacement: function (error, element) {
-                        error.insertAfter(element.parent());
-                    }
-                });
+                                                        var $loginForm = $("#login-form").validate({
+                                                            // Rules for form validation
+                                                            rules: {
+                                                                email: {
+                                                                    required: true,
+                                                                    email: true
+                                                                },
+                                                                password: {
+                                                                    required: true,
+                                                                    minlength: 3,
+                                                                    maxlength: 20
+                                                                }
+                                                            },
+                                                            // Messages for form validation
+                                                            messages: {
+                                                                email: {
+                                                                    required: 'Please enter your email address',
+                                                                    email: 'Please enter a VALID email address'
+                                                                },
+                                                                password: {
+                                                                    required: 'Please enter your password'
+                                                                }
+                                                            },
+                                                            // Do not change code below
+                                                            errorPlacement: function (error, element) {
+                                                                error.insertAfter(element.parent());
+                                                            }
+                                                        });
 
-                var $orderForm = $("#order-form").validate({
-                    // Rules for form validation
-                    rules: {
-                        name: {
-                            required: true
-                        },
-                        email: {
-                            required: true,
-                            email: true
-                        },
-                        phone: {
-                            required: true
-                        },
-                        interested: {
-                            required: true
-                        },
-                        budget: {
-                            required: true
-                        }
-                    },
-                    // Messages for form validation
-                    messages: {
-                        name: {
-                            required: 'Please enter your name'
-                        },
-                        email: {
-                            required: 'Please enter your email address',
-                            email: 'Please enter a VALID email address'
-                        },
-                        phone: {
-                            required: 'Please enter your phone number'
-                        },
-                        interested: {
-                            required: 'Please select interested service'
-                        },
-                        budget: {
-                            required: 'Please select your budget'
-                        }
-                    },
-                    // Do not change code below
-                    errorPlacement: function (error, element) {
-                        error.insertAfter(element.parent());
-                    }
-                });
+                                                        var $orderForm = $("#order-form").validate({
+                                                            // Rules for form validation
+                                                            rules: {
+                                                                name: {
+                                                                    required: true
+                                                                },
+                                                                email: {
+                                                                    required: true,
+                                                                    email: true
+                                                                },
+                                                                phone: {
+                                                                    required: true
+                                                                },
+                                                                interested: {
+                                                                    required: true
+                                                                },
+                                                                budget: {
+                                                                    required: true
+                                                                }
+                                                            },
+                                                            // Messages for form validation
+                                                            messages: {
+                                                                name: {
+                                                                    required: 'Please enter your name'
+                                                                },
+                                                                email: {
+                                                                    required: 'Please enter your email address',
+                                                                    email: 'Please enter a VALID email address'
+                                                                },
+                                                                phone: {
+                                                                    required: 'Please enter your phone number'
+                                                                },
+                                                                interested: {
+                                                                    required: 'Please select interested service'
+                                                                },
+                                                                budget: {
+                                                                    required: 'Please select your budget'
+                                                                }
+                                                            },
+                                                            // Do not change code below
+                                                            errorPlacement: function (error, element) {
+                                                                error.insertAfter(element.parent());
+                                                            }
+                                                        });
 
-                // START AND FINISH DATE
-                $('#startdate').datepicker({
-                    dateFormat: 'dd.mm.yy',
-                    prevText: '<i class="fa fa-chevron-left"></i>',
-                    nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function (selectedDate) {
-                        $('#finishdate').datepicker('option', 'minDate', selectedDate);
-                    }
-                });
+                                                        // START AND FINISH DATE
+                                                        $('#startdate').datepicker({
+                                                            dateFormat: 'dd.mm.yy',
+                                                            prevText: '<i class="fa fa-chevron-left"></i>',
+                                                            nextText: '<i class="fa fa-chevron-right"></i>',
+                                                            onSelect: function (selectedDate) {
+                                                                $('#finishdate').datepicker('option', 'minDate', selectedDate);
+                                                            }
+                                                        });
 
-                $('#finishdate').datepicker({
-                    dateFormat: 'dd.mm.yy',
-                    prevText: '<i class="fa fa-chevron-left"></i>',
-                    nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function (selectedDate) {
-                        $('#startdate').datepicker('option', 'maxDate', selectedDate);
-                    }
-                });
+                                                        $('#finishdate').datepicker({
+                                                            dateFormat: 'dd.mm.yy',
+                                                            prevText: '<i class="fa fa-chevron-left"></i>',
+                                                            nextText: '<i class="fa fa-chevron-right"></i>',
+                                                            onSelect: function (selectedDate) {
+                                                                $('#startdate').datepicker('option', 'maxDate', selectedDate);
+                                                            }
+                                                        });
 
 
 
-            })
+                                                    })
 
     </script>
 
@@ -812,16 +797,56 @@
                                 b.append("<tr>");
                                 b.append("<td>" + list[i].NOM + " " + list[i].AP_PA + " " + list[i].AP_MA + "</td>");
                                 b.append("<td>" + list[i].NU_DOC + "</td>");
-                                b.append("<input type ='text' value='" + list[i].ID_TRAB + "' />");
-                                b.append('<td><button type="button" class="btn btn-primary btn-add-conyugue"  data-dismiss="modal">Agregar</button></td>');
+                                b.append("<input type ='hidden' class='trab_" + i + "' value='" + list[i].ID_TRAB + "' />");
+                                b.append("<input type ='hidden' class='nac_" + i + "' value='" + list[i].NAC + "' />");
+                                b.append("<input type ='hidden' class='dni_" + i + "' value='" + list[i].NU_DOC + "' />");
+                                b.append("<input type ='hidden' class='tipo_" + i + "' value='" + list[i].TIPO + "' />");
+                                b.append("<input type ='hidden' class='nom_ape_" + i + "' value='" + list[i].NOM + " " + list[i].AP_PA + " " + list[i].AP_MA + "' />");
+                                b.append('<td><button type="button" class="btn btn-primary btn-add-conyugue" value="' + i + '" data-dismiss="modal">Agregar</button></td>');
 
                                 b.append("</tr>");
 
                             }
+
+                            $(".btn-add-conyugue").click(function () {
+                                var v = $(this).val();
+                                $(".nom_c").val($(".nom_ape_" + v).val());
+                                $(".f_nac").val($(".nac_" + v).val());
+                                $(".ti_documento").val($(".tipo_" + v).val());
+                                $(".num_doc").val($(".dni_" + v).val());
+                                $(".cony").val($(".trab_" + v).val());
+
+
+
+
+                                //$(".select-conyugue").val("1");
+                            });
                         }
                         );
 
-                    }
+
+
+                    });
+            $(".btn-salir-busc, .close").click(function () {
+
+                $(".select-conyugue").val("0");
+            });
+
+
+            $(".select-conyugue").change(function () {
+                if ($(this).val() == "1") {
+                    $("#btn-mostrar").click();
+                }
+                if ($(this).val() == "0") {
+                    $(".nom_c").val("");
+                    $(".f_nac").val("");
+                    $(".ti_documento").val("");
+                    $(".num_doc").val("");
+                    $(".cony").val("");
+
+                }
+
+            }
             );
             $("#btncancel").click(
                     function () {

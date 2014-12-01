@@ -60,12 +60,12 @@
 
             #service{
                 position: relative;
-              //  padding: 0 0 40px;
+                //  padding: 0 0 40px;
             }
             .service-content{
                 text-align: center;
                 position: relative;
-            //    padding: 0 10px;
+                //    padding: 0 10px;
             }
             .service-content .service-icon{
                 position: relative;
@@ -77,7 +77,7 @@
                 height: 4%;
                 position: absolute;
                 top: 40%;
-               // margin-top: -58px;
+                // margin-top: -58px;
                 left: 105%;
                 -webkit-border-radius: 100%;
                 -moz-border-radius: 100%;
@@ -117,7 +117,7 @@
                 width:150px; 
                 height:150px;
                 line-height: 150px;
-               // margin:10px 0 0;
+                // margin:10px 0 0;
                 -webkit-box-shadow: 0 0 0 12px #f0f0f0;
                 -moz-box-shadow: 0 0 0 12px #f0f0f0;
                 box-shadow: 0 0 0 12px #f0f0f0;
@@ -144,9 +144,9 @@
 
             <!-- MAIN CONTENT -->
             <div id="content">
-             
 
-            
+
+
 
                 <!-- widget grid -->
                 <section id="widget-grid" class="">
@@ -229,23 +229,29 @@
                                                                 </li>
                                                             </ul>
                                                         </div>
+                                                               
                                                     </td> 
-                                                    <%
-
-                                                    %>
-
                                                     <% if (r.getAr_foto() == null) {%>
                                                     <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30">
-                                                        <a style="margin-left: 3%;" href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a></td>
+                                                        <a style="margin-left: 3%;" href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a>
+                                                        
+                                                      
+                                                    
+                                                       
+                                                        <div class="progress" style="margin: 0px;"><div class="progress-bar bg-color-teal" aria-valuetransitiongoal="<%=r.getEs_porcent()%>"></div></div>
+														
+															
+				
+                                                    </td>
                                                         <% } else {%>
-                                                    <td><img src="../Usuario/Fotos/<%=r.getAr_foto()%>"  width="30"  height="30"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a></td>
+                                                    <td><img src="../Usuario/Fotos/<%=r.getAr_foto()%>"  width="30"  height="30"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a>
+                                                        <div class="progress" style="margin: 0px;"><div class="progress-bar bg-color-teal" aria-valuetransitiongoal="<%=r.getEs_porcent()%>"></div></div></td>
                                                         <% }%>
-
-
-
+                                        
                                                 </tr>
+
                                                 <% }
-                                                    LIST_DGP_PROCESO.clear();%>
+                                                LIST_DGP_PROCESO.clear();%>
 
 
                                             </tbody>
@@ -292,6 +298,7 @@
 
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        
         <script>
             if (!window.jQuery) {
                 document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
@@ -299,6 +306,8 @@
         </script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+         
+
         <script>
             if (!window.jQuery.ui) {
                 document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
@@ -337,6 +346,7 @@
 
         <!-- JQUERY UI + Bootstrap Slider -->
         <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+      
 
         <!-- browser msie issue fix -->
         <script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
@@ -355,17 +365,22 @@
 
         <!-- MAIN APP JS FILE -->
         <script src="../../js/app.min.js"></script>
+        
 
         <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
         <!-- Voice command : plugin -->
         <script src="../../js/speech/voicecommand.min.js"></script>
 
         <!-- PAGE RELATED PLUGIN(S) -->
+    
         <script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
         <script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>
         <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
         <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
+         <script src="../../js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+            
+
 
         <script type="text/javascript">
 
@@ -402,7 +417,7 @@
                     phone: 480
                 };
 
-                $('#dt_basic').dataTable({
+               /* $('#dt_basic').dataTable({
                     "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
                             "t" +
                             "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
@@ -419,7 +434,7 @@
                     "drawCallback": function (oSettings) {
                         responsiveHelper_dt_basic.respond();
                     }
-                });
+                });*/
 
                 /* END BASIC */
 
@@ -527,6 +542,258 @@
                 });
 
                 /* END TABLETOOLS */
+
+            })
+
+        </script>
+        <script type="text/javascript">
+
+            // DO NOT REMOVE : GLOBAL FUNCTIONS!
+
+            $(document).ready(function () {
+
+                pageSetUp();
+
+                /*
+                 * Autostart Carousel
+                 */
+                $('.carousel.slide').carousel({
+                    interval: 3000,
+                    cycle: true
+                });
+                $('.carousel.fade').carousel({
+                    interval: 3000,
+                    cycle: true
+                });
+
+                // Fill all progress bars with animation
+
+                $('.progress-bar').progressbar({
+                    display_text: 'fill'
+                });
+
+
+                /*
+                 * Smart Notifications
+                 */
+                $('#eg1').click(function (e) {
+
+                    $.bigBox({
+                        title: "Big Information box",
+                        content: "This message will dissapear in 6 seconds!",
+                        color: "#C46A69",
+                        //timeout: 6000,
+                        icon: "fa fa-warning shake animated",
+                        number: "1",
+                        timeout: 6000
+                    });
+
+                    e.preventDefault();
+
+                })
+
+                $('#eg2').click(function (e) {
+
+                    $.bigBox({
+                        title: "Big Information box",
+                        content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                        color: "#3276B1",
+                        //timeout: 8000,
+                        icon: "fa fa-bell swing animated",
+                        number: "2"
+                    });
+
+                    e.preventDefault();
+                })
+
+                $('#eg3').click(function (e) {
+
+                    $.bigBox({
+                        title: "Shield is up and running!",
+                        content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                        color: "#C79121",
+                        //timeout: 8000,
+                        icon: "fa fa-shield fadeInLeft animated",
+                        number: "3"
+                    });
+
+                    e.preventDefault();
+
+                })
+
+                $('#eg4').click(function (e) {
+
+                    $.bigBox({
+                        title: "Success Message Example",
+                        content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                        color: "#739E73",
+                        //timeout: 8000,
+                        icon: "fa fa-check",
+                        number: "4"
+                    }, function () {
+                        closedthis();
+                    });
+
+                    e.preventDefault();
+
+                })
+
+
+
+                $('#eg5').click(function () {
+
+                    $.smallBox({
+                        title: "Ding Dong!",
+                        content: "Someone's at the door...shall one get it sir? <p class='text-align-right'><a href='javascript:void(0);' class='btn btn-primary btn-sm'>Yes</a> <a href='javascript:void(0);' class='btn btn-danger btn-sm'>No</a></p>",
+                        color: "#296191",
+                        //timeout: 8000,
+                        icon: "fa fa-bell swing animated"
+                    });
+
+                });
+
+
+
+                $('#eg6').click(function () {
+
+                    $.smallBox({
+                        title: "Big Information box",
+                        content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                        color: "#5384AF",
+                        //timeout: 8000,
+                        icon: "fa fa-bell"
+                    });
+
+                })
+
+                $('#eg7').click(function () {
+
+                    $.smallBox({
+                        title: "James Simmons liked your comment",
+                        content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
+                        color: "#296191",
+                        iconSmall: "fa fa-thumbs-up bounce animated",
+                        timeout: 4000
+                    });
+
+                })
+
+                function closedthis() {
+                    $.smallBox({
+                        title: "Great! You just closed that last alert!",
+                        content: "This message will be gone in 5 seconds!",
+                        color: "#739E73",
+                        iconSmall: "fa fa-cloud",
+                        timeout: 5000
+                    });
+                }
+
+                /*
+                 * SmartAlerts
+                 */
+                // With Callback
+                $("#smart-mod-eg1").click(function (e) {
+                    $.SmartMessageBox({
+                        title: "Smart Alert!",
+                        content: "This is a confirmation box. Can be programmed for button callback",
+                        buttons: '[No][Yes]'
+                    }, function (ButtonPressed) {
+                        if (ButtonPressed === "Yes") {
+
+                            $.smallBox({
+                                title: "Callback function",
+                                content: "<i class='fa fa-clock-o'></i> <i>You pressed Yes...</i>",
+                                color: "#659265",
+                                iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                timeout: 4000
+                            });
+                        }
+                        if (ButtonPressed === "No") {
+                            $.smallBox({
+                                title: "Callback function",
+                                content: "<i class='fa fa-clock-o'></i> <i>You pressed No...</i>",
+                                color: "#C46A69",
+                                iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                timeout: 4000
+                            });
+                        }
+
+                    });
+                    e.preventDefault();
+                })
+                // With Input
+                $("#smart-mod-eg2").click(function (e) {
+
+                    $.SmartMessageBox({
+                        title: "Smart Alert: Input",
+                        content: "Please enter your user name",
+                        buttons: "[Accept]",
+                        input: "text",
+                        placeholder: "Enter your user name"
+                    }, function (ButtonPress, Value) {
+                        alert(ButtonPress + " " + Value);
+                    });
+
+                    e.preventDefault();
+                })
+                // With Buttons
+                $("#smart-mod-eg3").click(function (e) {
+
+                    $.SmartMessageBox({
+                        title: "Smart Notification: Buttons",
+                        content: "Lots of buttons to go...",
+                        buttons: '[Need?][You][Do][Buttons][Many][How]'
+                    });
+
+                    e.preventDefault();
+                })
+                // With Select
+                $("#smart-mod-eg4").click(function (e) {
+
+                    $.SmartMessageBox({
+                        title: "Smart Alert: Select",
+                        content: "You can even create a group of options.",
+                        buttons: "[Done]",
+                        input: "select",
+                        options: "[Costa Rica][United States][Autralia][Spain]"
+                    }, function (ButtonPress, Value) {
+                        alert(ButtonPress + " " + Value);
+                    });
+
+                    e.preventDefault();
+                });
+
+                // With Login
+                $("#smart-mod-eg5").click(function (e) {
+
+                    $.SmartMessageBox({
+                        title: "Login form",
+                        content: "Please enter your user name",
+                        buttons: "[Cancel][Accept]",
+                        input: "text",
+                        placeholder: "Enter your user name"
+                    }, function (ButtonPress, Value) {
+                        if (ButtonPress == "Cancel") {
+                            alert("Why did you cancel that? :(");
+                            return 0;
+                        }
+
+                        Value1 = Value.toUpperCase();
+                        ValueOriginal = Value;
+                        $.SmartMessageBox({
+                            title: "Hey! <strong>" + Value1 + ",</strong>",
+                            content: "And now please provide your password:",
+                            buttons: "[Login]",
+                            input: "password",
+                            placeholder: "Password"
+                        }, function (ButtonPress, Value) {
+                            alert("Username: " + ValueOriginal + " and your password is: " + Value);
+                        });
+                    });
+
+                    e.preventDefault();
+                });
+
 
             })
 
