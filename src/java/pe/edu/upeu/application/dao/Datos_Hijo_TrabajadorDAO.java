@@ -96,7 +96,7 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
     @Override
     public int ASIGNACION_F(String idtr) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select count(*) from RHTD_DATOS_HIJO_TRABAJADOR where to_number((sysdate - FE_NACIMIENTO)/365 ) >=18  and ID_TRABAJADOR='" + idtr + "'";
+        String sql = "select count(*) from RHTD_DATOS_HIJO_TRABAJADOR where to_number((sysdate - FE_NACIMIENTO)/365 ) <18  and ID_TRABAJADOR='" + idtr.trim() + "'";
         int TOTAL = 0;
         try {
             ResultSet rs = this.conn.query(sql);

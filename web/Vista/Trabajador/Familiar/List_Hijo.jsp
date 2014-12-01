@@ -49,6 +49,11 @@
 
     </head>
     <body>
+          <%
+           
+           /* HttpSession sesion = request.getSession(true);
+           String rol = (String) sesion.getAttribute("IDROL"); */
+        %>
 
 
 
@@ -137,9 +142,14 @@
                                                             }
                                                         %>
                                                     </td>
-                                                    <td> <a href="../../../familiar?idhijo=<%=h.getId_datos_hijos_trabajador()%>&idtr=<%=h.getId_trabajador()%>&opc=modificar" ><img src="../../../imagenes/lapiz.png" alt="" width="25px" height="25px"/></a></td>
+                                                    <td> 
+                                                        
+                                                        <% if (rol.trim().equals("ROL-0002")|rol.trim().equals("ROL-0005")) {%>
+                                                        
+                                                        <a href="../../../familiar?idhijo=<%=h.getId_datos_hijos_trabajador()%>&idtr=<%=h.getId_trabajador()%>&opc=modificar" ><img src="../../../imagenes/lapiz.png" alt="" width="25px" height="25px"/></a></td>
                                                     <td><a href="../../../familiar?idhijo=<%=h.getId_datos_hijos_trabajador()%>&idtr=<%=h.getId_trabajador()%>&opc=eliminar" >
                                                             <img src="../../../imagenes/eliminar.png" alt=""   width="25px" height="25px"/></a></td> 
+                                                            <%}%>
                                                 </tr>
                                                 <% }
                                                     }

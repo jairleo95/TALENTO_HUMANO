@@ -97,9 +97,9 @@
 
         if (LISTA_HIJOS.size() != 0) {
     %>
-   
+   <%@include file="List_Hijo.jsp" %>
     <%  if (rol.trim().equals("ROL-0002")|rol.trim().equals("ROL-0005")) {%>
-     <%@include file="List_Hijo.jsp" %>
+     
     <a href="Reg_Datos_Hijo.jsp?idtr=<%=request.getParameter("idtr")%>" class="button blue">Agregar un hijo</a>
     <%}%>
     <%} else {%>
