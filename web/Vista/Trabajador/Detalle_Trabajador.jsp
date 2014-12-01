@@ -107,7 +107,7 @@
                 width: 8%;
             }
             .info-det{
-                 
+
                 width: 25%;
             }
 
@@ -127,12 +127,12 @@
             }
 
             table, th, td {
-                
+
                 padding: 4px;
             }
             img{
-               position: absolute;
-                
+                position: absolute;
+
             }
 
 
@@ -194,13 +194,13 @@
                 %>
                 <tr><td class="td2" ><img style="border: 3px solid grey ; position:absolute; left:0.5%; top: 6% " src="../../imagenes/avatar_default.jpg"  width="100"  height="100"></td>
                     <td><a href="../Usuario/Subir_Foto.jsp?idtr=<%=idtr%>">Subir imagen</a></td>
-                <%
-            } else {%>
-            <tr><td class="td2"><img style="border: 3px solid grey ; position:absolute; left:0.5%; top: 6% " src="../Usuario/Fotos/<%=t.getAr_foto()%>"  width="100"  height="100"></td>
+                    <%
+                    } else {%>
+                <tr><td class="td2"><img style="border: 3px solid grey ; position:absolute; left:0.5%; top: 6% " src="../Usuario/Fotos/<%=t.getAr_foto()%>"  width="100"  height="100"></td>
                         <%}%>
                     <td>
-                        <div >
-                            <table   class="info-det" >
+                        <div>
+                            <table   class="info-det">
                                 <%
                                     for (int index = 0; index < ListaridTrabajador.size(); index++) {
                                         V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
@@ -284,7 +284,23 @@
 
                     <div id="myTabContent1" class="tab-content padding-10">
                         <div class="tab-pane fade in active" id="s1">
+
+                            <%
+                                if (List_Auto_mostrar.size() == 1) {
+                                    for (int r = 0; r < List_Auto_mostrar.size(); r++) {
+                                        Auto_Mostrar a = new Auto_Mostrar();
+                                        a = (Auto_Mostrar) List_Auto_mostrar.get(r);
+                            %>
+
+                            <iframe name="contenido" id="contenido"  class="autoHeight" src="<%=a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getIdtr()%>" width="100%" height="100%" ></iframe>
+                            <% 
+                                    List_Auto_mostrar.clear();
+                                    }
+                                    
+                            } else { %>
                             <iframe name="contenido" id="contenido"  class="autoHeight" src="Datos_Generales.jsp" width="100%" height="100%" ></iframe>
+                            <%}%>
+
                         </div>
                         <div class="tab-pane fade" id="s2">                           
                             <iframe name="contenido" id="contenido"  class="autoHeight" src="Aspecto_Academico.jsp" width="100%" height="100%" ></iframe>                           
