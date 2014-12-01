@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title></title>
         <link rel="stylesheet" href="../../../css/Css_Lista/listas.css" />
     </head>
     <body>
@@ -29,10 +29,10 @@
                 <td> <%= v.getNo_rol()%></td>
                 <td> <%= v.getNo_link()%></td>
                 <td> <%=v.getEs_detalle_privilegio()%></td>
-                <td class="caji"> <a href="../../../Privilegios?id_det_pr=<%=v.getId_detalle_privilegio()%>&opc=Mod_det_pr" ><img src="../../../imagenes/lapiz.png" alt="" width="25px" height="25px"/></a></td>
-                 <td class="caji"><a href="../../../Privilegios?id_det_pr=<%=v.getId_detalle_privilegio()%>%>&opc=Desactivar_det_pr" ><img src="../../../imagenes/eliminar.png" alt=""   width="25px" height="25px"/></a></td> 
-                 <td class="caji"><a href="../../../Privilegios?id_det_pr=<%=v.getId_detalle_privilegio()%>%>&opc=Activar_det_pr" ><img src="../../../imagenes/Aprobado.png" alt=""   width="25px" height="25px"/></a></td> 
-                 <td class="caji"><a href="../../../Privilegios?id_det_pr=<%=v.getId_detalle_privilegio()%>%>&opc=Elim_det_pr" ><img src="../../../imagenes/Desaprobado.png" alt=""   width="25px" height="25px"/></a></td> 
+                <td class="caji"> <a href="../../../Privilegio?id_det_pr=<%=v.getId_detalle_privilegio()%>&opc=Mod_det_pr" ><img src="../../../imagenes/lapiz.png" alt="" width="25px" height="25px"/></a></td>
+                 <td class="caji"><a href="../../../Privilegio?id_det_pr=<%=v.getId_detalle_privilegio()%>&opc=Desactivar_det_pr" ><img src="../../../imagenes/eliminar.png" alt=""   width="25px" height="25px"/></a></td> 
+                 <td class="caji"><a href="../../../Privilegio?id_det_pr=<%=v.getId_detalle_privilegio()%>&opc=Activar_det_pr" ><img src="../../../imagenes/Aprobado.png" alt=""   width="25px" height="25px"/></a></td> 
+                 <td class="caji"><a href="../../../Privilegio?id_det_pr=<%=v.getId_detalle_privilegio()%>&opc=Elim_det_pr" ><img src="../../../imagenes/Desaprobado.png" alt=""   width="25px" height="25px"/></a></td> 
                 <%}%>
             </tr>
         </table>

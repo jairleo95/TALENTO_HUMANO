@@ -9,6 +9,7 @@ package pe.edu.upeu.application.web.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +25,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceRolDAO;
  *
  * @author joserodrigo
  */
+@WebServlet(name = "CPrivilegio", urlPatterns = {"/Privilegio"})
 public class CPrivilegio extends HttpServlet {
     InterfaceRolDAO rol=new RolDAO();
     InterfacePrivilegioDAO priv=new PrivilegioDAO();
@@ -55,52 +57,35 @@ public class CPrivilegio extends HttpServlet {
                 String idrol=request.getParameter("idrol");
                 getServletContext().setAttribute("Listar_Rol_id", rol.Listar_Rol_id(idrol));
                 response.sendRedirect("Vista/Usuario/Rol_Privilegio/Mod_Rol.jsp");
-                
             }
-            if(opc.equals("Modificar")){
-                String idrol=request.getParameter("id_rol");
-                String no_rol=request.getParameter("Nombre_Rol");
-                String Es_rol=request.getParameter("Es_rol");
-                rol.Mod_Rol(idrol, no_rol, Es_rol);
-                getServletContext().setAttribute("List_Rol", rol.List_Rol());
-                response.sendRedirect("Vista/Usuario/Rol_Privilegio/List_Roles.jsp");
-                
-            }
-            if(opc.equals("Desactivar_Rol")){
-                String idrol=request.getParameter("idrol");
-                rol.Desactivar_Roles(idrol);
-                getServletContext().setAttribute("List_Rol", rol.List_Rol());
-                response.sendRedirect("Vista/Usuario/Rol_Privilegio/List_Roles.jsp");
-            }
-            if(opc.equals("Activar_Rol")){
-                String idrol=request.getParameter("idrol");
-                rol.Activar_Roles(idrol);
-                getServletContext().setAttribute("List_Rol", rol.List_Rol());
-                response.sendRedirect("Vista/Usuario/Rol_Privilegio/List_Roles.jsp");
-            }
-            if(opc.equals("Listar_Privilegio")){
+            
+            /*if(opc.equals("Listar_Privilegio")){
                 getServletContext().setAttribute("List_Privilegio",priv.List_Privilegio());
                 response.sendRedirect("Vista/Usuario/Rol_Privilegio/List_Privilegios.jsp");
+            }*/
+            if(opc.equals("Listar_Privilegio")){
+                getServletContext().setAttribute("List_Privilegio",priv.List_Privilegio());
+                response.sendRedirect("Vista/Usuario/Rol_Privilegio/Reg_Privilegio.jsp");
             }
             if(opc.equals("Desactivar_Priv")){
                 String idrol=request.getParameter("id_priv");
                 priv.Desactivar_Privilegio(idrol);
                 getServletContext().setAttribute("List_Privilegio",priv.List_Privilegio());
-                response.sendRedirect("Vista/Usuario/Rol_Privilegio/List_Privilegios.jsp");
+                response.sendRedirect("Vista/Usuario/Rol_Privilegio/Reg_Privilegio.jsp");
                
             }
             if(opc.equals("Eliminar_Priv")){
                 String idrol=request.getParameter("id_priv");
                 priv.Eliminar_Privilegio(idrol);
                 getServletContext().setAttribute("List_Privilegio",priv.List_Privilegio());
-                response.sendRedirect("Vista/Usuario/Rol_Privilegio/List_Privilegios.jsp");
+                response.sendRedirect("Vista/Usuario/Rol_Privilegio/Reg_Privilegio.jsp");
                
             }
             if(opc.equals("Activar_Priv")){
                 String idrol=request.getParameter("id_priv");
                 priv.Activar_Privilegio(idrol);
                 getServletContext().setAttribute("List_Privilegio",priv.List_Privilegio());
-                response.sendRedirect("Vista/Usuario/Rol_Privilegio/List_Privilegios.jsp");
+                response.sendRedirect("Vista/Usuario/Rol_Privilegio/Reg_Privilegio.jsp");
                
             }
             if(opc.equals("modificar_Priv1")){
@@ -112,9 +97,11 @@ public class CPrivilegio extends HttpServlet {
                 String id_priv=request.getParameter("Id_priv");
                 String No_Link=request.getParameter("No_Link");
                 String Es_priv=request.getParameter("Es_Privilegio");
-                priv.Mod_Priv(id_priv, No_Link, Es_priv);
+                String Di_url=request.getParameter("Di_url");
+                String Ic_link=request.getParameter("Ic_link");
+                priv.Mod_Priv(id_priv, No_Link, Es_priv,Di_url,Ic_link);
                 getServletContext().setAttribute("List_Privilegio",priv.List_Privilegio());
-                response.sendRedirect("Vista/Usuario/Rol_Privilegio/List_Privilegios.jsp");
+                response.sendRedirect("Vista/Usuario/Rol_Privilegio/Reg_Privilegio.jsp");
             }
             if(opc.equals("Registrar")){
                 getServletContext().setAttribute("List_Privilegio",priv.List_Privilegio());
@@ -141,10 +128,10 @@ public class CPrivilegio extends HttpServlet {
                 response.sendRedirect("Vista/Usuario/Rol_Privilegio/List_Pri_Roles.jsp");
             }
             if(opc.equals("REGISTRAR PRIVILEGIO DADO")){
-                String Id_rol=request.getParameter("Id_Rol");
-                String id_Priv=request.getParameter("id_Priv");
-                String Nu_Orden=request.getParameter("Nu_Orden");
-                String Es_detalle_privilegio=request.getParameter("Es_detalle_privilegio");
+                String Id_rol=request.getParameter("id_rol");
+                String id_Priv=request.getParameter("id_privilegio");
+                String Nu_Orden=request.getParameter("NRO_ORDEN");
+                String Es_detalle_privilegio=request.getParameter("ESTADO");
                 out.print(Id_rol+" "+id_Priv+" "+Nu_Orden+""+Es_detalle_privilegio);
                 detp.Registrar_Detalle_Priv(Id_rol, Nu_Orden, id_Priv, Es_detalle_privilegio);
                 getServletContext().setAttribute("List_Pr_Rol", priv.List_Pr_Rol());
@@ -171,7 +158,21 @@ public class CPrivilegio extends HttpServlet {
                 out.print(id_det_pr);
                 detp.Desc_r_pr(id_det_pr);
                 getServletContext().setAttribute("List_Pr_Rol", priv.List_Pr_Rol());
-               // response.sendRedirect("Vista/Usuario/Rol_Privilegio/Otorgar_Privilegio.jsp");   
+                response.sendRedirect("Vista/Usuario/Rol_Privilegio/Otorgar_Privilegio.jsp");   
+            }
+            if(opc.equals("Activar_det_pr")){
+                String id_det_pr=request.getParameter("id_det_pr");
+                out.print(id_det_pr);
+                detp.Act_r_pr(id_det_pr);
+                getServletContext().setAttribute("List_Pr_Rol", priv.List_Pr_Rol());
+                response.sendRedirect("Vista/Usuario/Rol_Privilegio/Otorgar_Privilegio.jsp");   
+            }
+            if(opc.equals("Elim_det_pr")){
+                String id_det_pr=request.getParameter("id_det_pr");
+                out.print(id_det_pr);
+                detp.Elim_Detalle_Priv(id_det_pr);
+                getServletContext().setAttribute("List_Pr_Rol", priv.List_Pr_Rol());
+                response.sendRedirect("Vista/Usuario/Rol_Privilegio/Otorgar_Privilegio.jsp");   
             }
         } finally {
             out.close();

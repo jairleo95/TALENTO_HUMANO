@@ -107,14 +107,16 @@ public class PrivilegioDAO implements InterfacePrivilegioDAO{
     }
 
     @Override
-    public void Mod_Priv(String id_Priv,String No_link,String Es_priv) {
+    public void Mod_Priv(String id_Priv,String No_link,String Es_priv,String Di_url,String ic_link) {
         CallableStatement cst;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            cst = conn.conex.prepareCall("{CALL RHSP_MOD_PRIV(?,?,?)}");
+            cst = conn.conex.prepareCall("{CALL RHSP_MOD_PRIV(?,?,?,?,?)}");
             cst.setString(1, id_Priv);
             cst.setString(2, No_link );
             cst.setString(3, Es_priv);
+            cst.setString(4, Di_url);
+            cst.setString(5, ic_link);
             cst.execute();
         } catch (SQLException ex) {
         } finally {
@@ -136,6 +138,7 @@ public class PrivilegioDAO implements InterfacePrivilegioDAO{
                 p.setEs_privilegio(rs.getString("es_privilegio"));
                 p.setId_privilegio(rs.getString("id_privilegio"));
                 p.setNo_link(rs.getString("no_link"));
+                p.setIc_link(rs.getString("ic_link"));
                 list.add(p);
             }
         } catch (SQLException e) {

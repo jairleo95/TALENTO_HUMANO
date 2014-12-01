@@ -183,4 +183,8 @@ public class RolDAO implements InterfaceRolDAO {
         }
     }
 
+    @Override
+    public void Eliminar_rol(String id_Rol) {
+    }
+
 }

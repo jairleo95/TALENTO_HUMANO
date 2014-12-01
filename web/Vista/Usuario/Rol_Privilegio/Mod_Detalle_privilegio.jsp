@@ -45,7 +45,7 @@
     <body>
     <center>
         <H1 class="title">MODIFICAR PRIVILEGIO</h1>
-        <form class="form" action="../../../Privilegios" method="post"> 
+        <form class="form" action="../../../Privilegio" method="post"> 
             <% for (int i=0; i< List_det_pri_id.size();i++ ){
                     X_Detalle_Privilegio d=new X_Detalle_Privilegio();
                     d=(X_Detalle_Privilegio)List_det_pri_id.get(i);

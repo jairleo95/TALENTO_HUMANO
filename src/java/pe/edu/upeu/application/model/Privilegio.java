@@ -15,19 +15,21 @@ public class Privilegio {
     private String no_link;
     private String di_url;
     private String es_privilegio;
+    private String ic_link;
 
-    public Privilegio(String id_privilegio, String no_link, String di_url, String es_privilegio) {
+    public Privilegio(String id_privilegio, String no_link, String di_url, String es_privilegio, String ic_link) {
         this.id_privilegio = id_privilegio;
         this.no_link = no_link;
         this.di_url = di_url;
         this.es_privilegio = es_privilegio;
+        this.ic_link = ic_link;
     }
-
     public Privilegio() {
         this.id_privilegio = "";
         this.no_link = "";
         this.di_url = "";
         this.es_privilegio = "";
+        this.ic_link = "";
     }
 
     public String getId_privilegio() {
@@ -62,5 +64,12 @@ public class Privilegio {
         this.es_privilegio = es_privilegio;
     }
 
+    public String getIc_link() {
+        return ic_link;
+    }
+
+    public void setIc_link(String ic_link) {
+        this.ic_link = ic_link;
+    }
     
 }

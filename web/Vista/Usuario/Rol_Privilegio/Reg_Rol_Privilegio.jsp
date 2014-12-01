@@ -20,13 +20,6 @@
                 </tr>  
             </thead>
             <tbody>
-
-                <%for (int i = 0; i < LISTA_HIJO.size(); i++) {
-                        Datos_Hijo_Trabajador h = new Datos_Hijo_Trabajador();
-                        h = (Datos_Hijo_Trabajador) LISTA_HIJO.get(i);
-                        if(h.getEs_datos_hijo_trabajador().trim().equals("1")){
-                %>
-
                 <tr>
                     <td class="caji"><%=i + 1%></td>
                     <td class="caji"><%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></td>

@@ -61,8 +61,17 @@ public class Detalle_PrivilegioDAO implements InterfaceDetalle_PrivilegioDAO{
     }
 
     @Override
-    public void Elim_Detalle_Priv(String id_rol, String nu_orden, String id_priv, String es_detalle_priv) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void Elim_Detalle_Priv(String ID_pri_rol) {
+        CallableStatement cst;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = conn.conex.prepareCall("{CALL RHSP_ELIMINAR_DET_PRI(?)}");
+            cst.setString(1, ID_pri_rol);
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        }
     }
 
     @Override
@@ -120,6 +129,20 @@ public class Detalle_PrivilegioDAO implements InterfaceDetalle_PrivilegioDAO{
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             cst = conn.conex.prepareCall("{CALL RHSP_DESACTIVAR_DET_PRI(?)}");
+            cst.setString(1, id_pr_r);
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        }
+    }
+
+    @Override
+    public void Act_r_pr(String id_pr_r) {
+        CallableStatement cst;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = conn.conex.prepareCall("{CALL RHSP_ACTIVAR_DET_PRI(?)}");
             cst.setString(1, id_pr_r);
             cst.execute();
         } catch (SQLException ex) {

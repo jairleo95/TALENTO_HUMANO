@@ -52,7 +52,32 @@ public class CRoles extends HttpServlet {
                 getServletContext().setAttribute("Listar_Rol_id", rol.Listar_Rol_id(idrol));
                 getServletContext().setAttribute("List_Rol", rol.List_Rol());
                 response.sendRedirect("Vista/Usuario/Rol_Privilegio/Mod_Rol.jsp");
-                
+            }
+            if(opc.equals("Modificar")){
+                String idrol=request.getParameter("id_rol");
+                String no_rol=request.getParameter("Nombre_Rol");
+                String Es_rol=request.getParameter("Es_rol");
+                rol.Mod_Rol(idrol, no_rol, Es_rol);
+                getServletContext().setAttribute("List_Rol", rol.List_Rol());
+                response.sendRedirect("Vista/Usuario/Rol_Privilegio/Reg_Roles.jsp");
+            }
+            if(opc.equals("Activar_Rol")){
+                String idrol=request.getParameter("idrol");
+                rol.Activar_Roles(idrol);
+                getServletContext().setAttribute("List_Rol", rol.List_Rol());
+                response.sendRedirect("Vista/Usuario/Rol_Privilegio/Reg_Roles.jsp");
+            }
+            if(opc.equals("Desactivar_Rol")){
+                String idrol=request.getParameter("idrol");
+                rol.Desactivar_Roles(idrol);
+                getServletContext().setAttribute("List_Rol", rol.List_Rol());
+                response.sendRedirect("Vista/Usuario/Rol_Privilegio/Reg_Roles.jsp");
+            }
+            if(opc.equals("Eliminar_Rol")){
+                String idrol=request.getParameter("idrol");
+                rol.Desactivar_Roles(idrol);
+                getServletContext().setAttribute("List_Rol", rol.List_Rol());
+                response.sendRedirect("Vista/Usuario/Rol_Privilegio/List_Roles.jsp");
             }
         } finally {
             out.close();

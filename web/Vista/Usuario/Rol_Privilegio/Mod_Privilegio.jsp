@@ -11,7 +11,7 @@
     <body>
 
         <title class="title">Modificar Rol</title>>
-        <form action="../../../Privilegios"> 
+        <form action="../../../Privilegio"> 
             <center>
             <table class=""class="table" >  
                 <%for(int i=0 ;i<List_Pri_Id.size();i++){
@@ -19,6 +19,8 @@
                 r=(Privilegio)List_Pri_Id.get(i);
                 %>
                 <tr><td>Nombre de Privilegio:</td><td ><input type="text" name="No_Link" class="" value="<%=r.getNo_link()%>"></td></tr>
+                <tr><td>Nombre de Privilegio:</td><td ><input type="text" name="Di_url" class="" value="<%=r.getDi_url()%>"></td></tr>
+                <tr><td>Nombre de Privilegio:</td><td ><input type="text" name="Ic_link" class="" value="<%=r.getIc_link()%>"></td></tr>
                 <tr><td>Estado Privilegio</td><td>
                         <select name="Es_Privilegio"  required="">
                             <%if(r.getEs_privilegio().equals("1")){%>
@@ -39,3 +41,4 @@
         </form>
     </body>
 </html>
+<%@include file="List_Privilegios.jsp" %>

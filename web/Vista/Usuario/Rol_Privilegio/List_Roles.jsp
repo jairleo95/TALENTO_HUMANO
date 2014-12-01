@@ -19,7 +19,7 @@
             <tr><td class="cajita">Nro</td>
                 <td class="cajita">Rol</td>
                 <td class="cajita">Estado</td>
-                <td class="cajita" colspan="3">opcion</td><tr>
+                <td class="cajita" colspan="4">opcion</td><tr>
             <%for(int i=0;i<List_Rol.size();i++){
               Rol r = new Rol();
               r = (Rol) List_Rol.get(i);
@@ -32,8 +32,9 @@
                 <td class="cajita">Desactivado</td>
                 <%}%>
                 <td class="caji"> <a href="../../../Roles?idrol=<%=r.getId_rol()%>&opc=Modificar_Rol" ><img src="../../../imagenes/lapiz.png" alt="" width="25px" height="25px"/></a></td>
-                <td class="caji"><a href="../../../Privilegios?idrol=<%=r.getId_rol()%>&opc=Desactivar_Rol" ><img src="../../../imagenes/eliminar.png" alt=""   width="25px" height="25px"/></a></td> 
-                <td class="caji"><a href="../../../Privilegios?idrol=<%=r.getId_rol()%>&opc=Activar_Rol" ><img src="../../../imagenes/Aprobado.png" alt=""   width="25px" height="25px"/></a></td> 
+                <td class="caji"><a href="../../../Roles?idrol=<%=r.getId_rol()%>&opc=Desactivar_Rol" ><img src="../../../imagenes/eliminar.png" alt=""   width="25px" height="25px"/></a></td> 
+                <td class="caji"><a href="../../../Roles?idrol=<%=r.getId_rol()%>&opc=Activar_Rol" ><img src="../../../imagenes/Aprobado.png" alt=""   width="25px" height="25px"/></a></td> 
+                <%//<td class="caji"><a href="../../../Roles?idrol=<%=r.getId_rol()%><%//&opc=Eliminar_Rol" ><img src="../../../imagenes/Desaprobado.png" alt=""   width="25px" height="25px"/></a>%></td> 
             <tr>
             <%}%>
         </table>

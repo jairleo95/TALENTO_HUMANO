@@ -34,6 +34,8 @@ public interface InterfaceRolDAO {
     
     public List<Rol>Listar_Rol_id(String id_rol);
     
+    public void Eliminar_rol(String id_Rol);
+    
     
     
 }
