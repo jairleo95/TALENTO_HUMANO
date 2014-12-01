@@ -33,7 +33,7 @@
         
         if (true) {
 
-            String sql = "select  *  from RHVD_LIST_EMPLEADO WHERE NO_TRABAJADOR IS NOT NULL  ";
+            String sql = "select  NO_TRABAJADOR, AP_MATERNO,AP_PATERNO, NU_DOC,TI_DOC, FE_NAC, id_trabajador  from RHVD_LIST_EMPLEADO WHERE NO_TRABAJADOR IS NOT NULL  ";
             
             nom = nom.toUpperCase();
             dni = dni.toUpperCase();

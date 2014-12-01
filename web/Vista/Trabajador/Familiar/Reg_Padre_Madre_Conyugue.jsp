@@ -235,19 +235,20 @@
                                 </div> 
 
                                 <hr/>
-                             
-                                    <table     id="data"  >
-                                        <thead class="tab_cabe">
-                                            <tr>
-                                                <td><span title="NOMBRE_AP">Nombres y Apellidos</span></td>
-                                                <td><span  >DNI</span></td>
 
-                                            </tr>
-                                        </thead>
+                                <table  id="data"  >
+                                    <thead class="tab_cabe">
+                                        <tr>
+                                            <td><span title="NOMBRE_AP">Nombres y Apellidos</span></td>
+                                            <td><span  >DNI</span></td>
+                                            <td></td>
 
-                                        <tbody class="tbodys">
-                                        </tbody>
-                                    </table>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody class="tbodys">
+                                    </tbody>
+                                </table>
 
                             </div>
                         </div>
@@ -256,9 +257,8 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default btn-salir-busc"  data-dismiss="modal">
-                            Salir
-                        </button>
+                        <button type="button" class="btn btn-default btn-salir-busc"  data-dismiss="modal">Salir</button>
+
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -810,8 +810,10 @@
                             var list = objJson.lista;
                             for (var i = 0; i < list.length; i++) {
                                 b.append("<tr>");
-                                b.append("<td>" + list[i].NOM + "asd" + list[i].AP_PA + list[i].AP_MA + "</td>");
+                                b.append("<td>" + list[i].NOM + " " + list[i].AP_PA + " " + list[i].AP_MA + "</td>");
                                 b.append("<td>" + list[i].NU_DOC + "</td>");
+                                b.append("<input type ='text' value='" + list[i].ID_TRAB + "' />");
+                                b.append('<td><button type="button" class="btn btn-primary btn-add-conyugue"  data-dismiss="modal">Agregar</button></td>');
 
                                 b.append("</tr>");
 

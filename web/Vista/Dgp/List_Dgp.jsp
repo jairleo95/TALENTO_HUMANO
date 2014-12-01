@@ -130,7 +130,7 @@
 
                                                                                                                                     </thead>
                                                                                                                                     <tbody>
-                                                                                                                                        <% HttpSession sesion = request.getSession(true);
+                                                                                                                                        <% 
 
                                                                                                                                             for (int i = 0; i < List_Det_Dgp.size(); i++) {
                                                                                                                                                 X_List_det_dgp x = new X_List_det_dgp();
@@ -153,7 +153,8 @@
                                                                                                                                                 }
                                                                                                                                                 %></td>
                                                                                                                                         </tr>
-                                                                                                                                        <%}%>
+                                                                                                                                        <%}List_Det_Dgp.clear();%>
+                                                                                                                                    
 
 
                                                                                                                                     </tbody>
