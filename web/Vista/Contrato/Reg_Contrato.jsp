@@ -76,12 +76,11 @@
                         </select>
                 <tr><td>Centro de Costo:</td><td>
                         <select name="CENTRO_COSTO" class="text-box"  >
-                            <option value="">---elegir---</option>
-
+                            <option value="">[SELECCIONE]</option>
                         </select>     
                 <tr><td>Condición:</td><td>
                         <select  name="CONDICION" class="text-box" required="" >
-                            <option value="">---elegir---</option>
+                            <option value="">[SELECCIONE]</option>
                             <option value="1">Contratado</option>
                             <option value="2">Contratado Independiente</option>
                             <option value="3">Enpleado</option>
@@ -107,11 +106,14 @@
 
                 <tr><td>Asignación Familiar:</td><td><input type="text" name="ASIG_FAMILIAR"  <% if (total == 0) {%> value="0" <%} else {%>value="75.0" <%}%> class="text-box" ></td></tr>  
 
-                <tr><td>Régimen Laboral:</td><td>
-                        <select name="REGIMEN_LABORAL" class="text-box">
+                <tr><td>Régimen Laboral Mintra :</td><td>
+                        <select name="REG_LAB_MINTRA" class="text-box">
                             <option value=""></option>
-                            <option value="1" selected>Privado</option>
-                        </select></td></tr>
+                           
+                        </select>
+                    
+                    
+                    </td></tr>
                 <tr><td>Modalidad:</td><td>
                         <select name="MODALIDAD" class="text-box">
                             <option value=""></option>
@@ -161,8 +163,18 @@
                             <option value=""></option>
                             <option value="1" selected>Empleado</option>
                             <option value="2">Obrero</option>
-                        </select>
+                        </select></td></tr>
 
+                <tr><td>Régimen Laboral </td><td>
+                        <select name="REGIMEN_LABORAL" class="text-box">
+                            <option value=""></option>
+                            <option value="1" selected>Privado</option>
+                            <option value="2" selected>Público</option>
+                        </select>
+                    
+                    
+                    </td></tr>
+                
                 <tr><td>Discapacidad:</td><td>
                         <select name="DISCAPACIDAD" class="text-box">
                             <option value=""></option>

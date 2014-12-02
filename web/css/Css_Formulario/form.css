@@ -3,7 +3,7 @@
 
     //height:30px;
     font-family: arial;
-    font-size: 18px;
+    font-size: 20px;
     color: #00329B;
     text-align: center;
     //padding-bottom: 10px; 
@@ -39,8 +39,8 @@
 }
 .text-box{
     padding:3px;
-    border:solid 1px #0099FF;
-    background-color: #fcfcfc;  
+    border:solid 1px 1F3135;
+   // background-color: #fcfcfc;  
     // margin-left: 5px;
     //width:500px;
 }
