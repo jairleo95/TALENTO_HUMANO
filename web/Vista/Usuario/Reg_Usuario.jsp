@@ -50,7 +50,7 @@
         <label class="lab-mant"> <h1>Mantenimiento Usuarios de  Personal</h1></label>
 
         <center>
-            <form class="form" action="../Control/ControlPersonal.php"> 
+            <form class="form" action="../../Usuario"> 
                 <table class="table">      
                     <tr><td>Empleado:</td><td>
                             <select name="IDEMPLEADO" class="text-box chosen-select">
@@ -77,7 +77,6 @@
                             </select>
                             
                         </td></tr>  
-                    <input type="hidden" name="IDUSUARIO" class="text-box" >
                     <tr><td>Usuario:</td><td><input type="text" required="" name="USUARIO" class="text-box" ></td></tr> 
                     <tr><td>Clave:</td><td><input type="password"  required="" name="CLAVE" class="text-box" ></td></tr>   
                     <tr><td><input type="submit" name="opc"  class="submit" value="Registrar Usuario"></td></tr>
