@@ -305,10 +305,38 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
         CallableStatement cst;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            cst = conn.conex.prepareCall("{CALL RHSP_INSERT_USUARIO( ?,?,?,?,?,?)}");
+            cst = conn.conex.prepareCall("{CALL RHSP_MOD_USUARIO_ROL( ?,?,?)}");
             cst.setString(1, id_usuario);
             cst.setString(2, IDROLES);
             cst.setString(3, no_user);
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        } 
+    }
+
+    @Override
+    public void Activar_usuario(String id_usuario) {
+        CallableStatement cst;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = conn.conex.prepareCall("{CALL RHSP_ACTIVAR_USUARIO( ?)}");
+            cst.setString(1, id_usuario);
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        } 
+    }
+
+    @Override
+    public void Desactivar_usuario(String id_usuario) {
+        CallableStatement cst;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = conn.conex.prepareCall("{CALL RHSP_DESACTIVAR_USUARIO( ?)}");
+            cst.setString(1, id_usuario);
             cst.execute();
         } catch (SQLException ex) {
         } finally {

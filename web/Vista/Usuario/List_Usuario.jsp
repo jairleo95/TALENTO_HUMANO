@@ -85,6 +85,7 @@
                     <th><h3>Departamento</h3></th>
                     <th><h3>Usuario</h3></th>
                     <th><h3>Clave</h3></th>
+                    <th><h3>Estado</h3></th>
                     <th colspan="4"><h3>Opcion</h3></th>
                     </tr>
                     </thead
@@ -103,9 +104,10 @@
                             <td><%=v.getNo_dep()%></td>
                             <td><%=v.getNo_usuario()%></td>
                             <td><a href="../../Usuario?id_Usuaio=<%=v.getId_usuario()%>&opc=Modificar_clave_1"><%=v.getPw_usuario()%> </a></td>
+                            <td><%=v.getEs_usuario()%></td>
                             <td><a href="../../Usuario?id_Usuaio=<%=v.getId_usuario()%>&opc=Mod_Usuario_con"><img src="../../imagenes/lapiz.png" alt=""   width="25px" height="25px"/></a> </td>
-                            <td><a href="../../Usuario?id_Usuaio=<%=v.getId_usuario()%>&opc=Activar_Usuario_con"><img src="../../imagenes/eliminar.png" alt=""   width="25px" height="25px"/></a> </td>
-                            <td><a href="../../Usuario?id_Usuaio=<%=v.getId_usuario()%>&opc=Desac_Usuario_con"><img src="../../imagenes/Aprobado.png" alt=""   width="25px" height="25px"/></a> </td>
+                            <td><a href="../../Usuario?id_Usuaio=<%=v.getId_usuario()%>&opc=Desac_Usuario_con"><img src="../../imagenes/eliminar.png" alt=""   width="25px" height="25px"/></a> </td>
+                            <td><a href="../../Usuario?id_Usuaio=<%=v.getId_usuario()%>&opc=Activar_Usuario_con"><img src="../../imagenes/Aprobado.png" alt=""   width="25px" height="25px"/></a> </td>
                             <td><a href="../../Usuario?id_Usuaio=<%=v.getId_usuario()%>&opc=Elim_Usuario_con"><img src="../../imagenes/Desaprobado.png" alt=""   width="25px" height="25px"/></a> </td>
 
                         </tr>

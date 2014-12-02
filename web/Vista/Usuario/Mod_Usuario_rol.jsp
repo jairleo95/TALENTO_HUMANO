@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.model.V_Var_Usuario"%>
 <%@page import="pe.edu.upeu.application.model.Rol"%>
 <jsp:useBean id="List_Usuario_var_id" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Rol" scope="application" class="java.util.ArrayList"/>
@@ -49,19 +50,19 @@
         <label class="lab-mant"> <h1>Mantenimiento Usuarios de  Personal</h1></label>
 
         <center>
-            <form class="form" action="../../Usuario"> 
-                <table class="table"> 
-                    <%for(int u =0;u<List_Usuario_var_id.size();u++){
+            <form class="form" action="../../Usuario" method="post"> 
+                <%for(int i =0;i<List_Usuario_var_id.size();i++){
                         V_Var_Usuario v=new V_Var_Usuario();
-                        v=(V_Var_Usuario)List_Usuario_var_id.get(u);
+                        v=(V_Var_Usuario)List_Usuario_var_id.get(i);
                     %>
+                <table class="table"> 
                     <tr><td>Empleado:</td><td><%=v.getNo_trabajador()+" "+v.getAp_paterno()+" "+v.getAp_materno()%></td></tr>  
                     <tr><td>Rol:</td><td>
                             <select name="IDROLES" class="text-box chosen-select">
                                 <option value=""></option>
-                                <%for (int i = 0; i < List_Rol.size(); i++) {
+                                <%for (int u = 0; u < List_Rol.size(); u++) {
                                         Rol r = new Rol();
-                                        r = (Rol) List_Rol.get(i);
+                                        r = (Rol) List_Rol.get(u);
                                         if(v.getId_rol().trim().equals(r.getId_rol())){
                                 %>
                                 <option value="<%=r.getId_rol()%>" selected=""><%=r.getNo_rol()%></option>
@@ -72,8 +73,8 @@
                             </select>
                             
                         </td></tr>  
-                    <tr><td>Usuario:</td><td><input type="text" required="" name="USUARIO" class="text-box" value="<%=v.getNo_usuario()%>"></td></tr>  
-                    <tr><td colspan="2"><input type="hidden" name="opc"  class="submit" value="Mod_Usuario_con_2 "><input type="hidden" name="ID_USUARIO"  class="submit" value="<%=v.getId_usuario()%> "><input type="submit" class="submit" value="MODIFICAR ROL USUARIO"></td></tr>
+                    <tr><td>Usuario:</td><td><input type="text" required="" name="USUARIO" class="text-box" value="<%=v.getNo_usuario().trim()%>"></td></tr>  
+                    <tr><td colspan="2"><input type="hidden" name="opc"  class="submit" value="Mod_Usuario_con_2"><input type="hidden" name="ID_USUARIO"  class="submit" value="<%=v.getId_usuario()%> "><input type="submit" class="submit" value="MODIFICAR ROL USUARIO"></td></tr>
                     <%}%>
                 </table>
             </form>
