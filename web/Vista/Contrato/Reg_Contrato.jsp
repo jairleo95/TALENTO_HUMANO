@@ -1,3 +1,5 @@
+<%@page import="pe.edu.upeu.application.model.Regimen_Laboral"%>
+<%@page import="pe.edu.upeu.application.model.Modalidad"%>
 <%@page import="pe.edu.upeu.application.model.V_Det_DGP"%>
 <%@page import="oracle.net.aso.p"%>
 <%@page import="pe.edu.upeu.application.model.X_List_id_dgp"%>
@@ -9,6 +11,8 @@
 <jsp:useBean id="LIST_ID_DGP" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="ASIGNACION_F" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_anno_max" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_modalidad" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="list_reg_labo" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html >
 
 <html>
@@ -108,15 +112,22 @@
 
                 <tr><td>Régimen Laboral Mintra :</td><td>
                         <select name="REG_LAB_MINTRA" class="text-box">
-                            <option value=""></option>
-                           
+                            <%for(int q =0;q<list_reg_labo.size();q++){
+                                Regimen_Laboral re=new Regimen_Laboral();
+                                re=(Regimen_Laboral)list_reg_labo.get(q);
+                            %>
+                            <option value="<%=re.getId_regimen_laboral()%>"><%=re.getDe_regimen_l()%></option>
+                           <%}%>
                         </select>
-                    
-                    
                     </td></tr>
                 <tr><td>Modalidad:</td><td>
                         <select name="MODALIDAD" class="text-box">
-                            <option value=""></option>
+                            <%for(int l =0;l<List_modalidad.size();l++){
+                                Modalidad mo=new Modalidad();
+                                mo=(Modalidad)List_modalidad.get(l);   
+                            %>
+                            <option value="<%=mo.getId_modalidad()%>"><%=mo.getDe_modalidad()%></option>
+                            <%}%>
                         </select></td></tr>
                 <tr><td>SUB-Modalidad:</td><td>
                         <select name="SUB_MODALIDAD" class="text-box">

@@ -12,8 +12,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-    <li><a href="../../../Roles?opc=Listar_Rol">Mantenimiento roles</a> </li>
-    <li><a href="../../../Privilegio?opc=Listar_Privilegio">Mantenimiento Privilegios</a> </li>
-    <li><a href="../../../Privilegio?opc=Otorgar">Otorgar Roles</a> </li>
+    <li ><a href="../../../Roles?opc=Listar_Rol" class="homeIcon">Mantenimiento roles</a> </li>
+    <li ><a href="../../../Privilegio?opc=Listar_Privilegio">Mantenimiento Privilegios</a> </li>
+    <li ><a href="../../../Privilegio?opc=Otorgar">Otorgar Roles</a> </li>
     </body>
 </html>

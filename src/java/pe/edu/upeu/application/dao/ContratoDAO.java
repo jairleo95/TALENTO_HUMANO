@@ -14,6 +14,8 @@ import pe.edu.upeu.application.dao_imp.InterfaceContratoDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.List_Rh_Contrato_Fec;
+import pe.edu.upeu.application.model.Modalidad;
+import pe.edu.upeu.application.model.Regimen_Laboral;
 import pe.edu.upeu.application.model.X_List_Anno_Id_Tr_DGP;
 import pe.edu.upeu.application.model.X_List_Id_Contrato_DGP;
 import pe.edu.upeu.application.web.controller.CConversion;
@@ -288,6 +290,50 @@ public class ContratoDAO implements InterfaceContratoDAO {
     public void Venc_Cont() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         this.conn.ejecutar(" begin venc_contrato; end;");
+    }
+
+    @Override
+    public List<Modalidad> List_modalidad() {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = " select * from  RHTX_MODALIDAD ";
+        List<Modalidad> list = new ArrayList<Modalidad>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+
+            while (rs.next()) {
+                Modalidad aitd = new Modalidad();
+                aitd.setId_modalidad(rs.getString("id_modalidad"));
+                aitd.setDe_modalidad(rs.getString("de_modalidad"));
+                aitd.setCo_modalidad(rs.getString("co_modalidad"));
+                list.add(aitd);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return list;
+    }
+
+    @Override
+    public List<Regimen_Laboral> list_reg_labo() {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = " select * from  RHTX_REGIMEN_LABORAL ";
+        List<Regimen_Laboral> list = new ArrayList<Regimen_Laboral>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+
+            while (rs.next()) {
+                Regimen_Laboral aitd = new Regimen_Laboral();
+                aitd.setId_regimen_laboral(rs.getString("id_regimen_laboral"));
+                aitd.setCo_regimen_l(rs.getString("co_regimen_l"));
+                aitd.setDe_regimen_l(rs.getString("de_regimen_l"));
+                list.add(aitd);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return list;
     }
 
 }

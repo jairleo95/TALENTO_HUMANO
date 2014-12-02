@@ -83,7 +83,8 @@ public class CContrato extends HttpServlet {
                 getServletContext().setAttribute("List_Puesto", puesto.List_Puesto());
                 getServletContext().setAttribute("LISTA_RH_SECCION", seccion.LISTA_RH_SECCION());
                 getServletContext().setAttribute("List_anno_max", a.List_anno_max());
-
+                getServletContext().setAttribute("List_modalidad", con.List_modalidad());    
+                getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());    
                 int num = dht.ASIGNACION_F(idtr);
                 // out.println(num);
                 response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp?num=" + num);
