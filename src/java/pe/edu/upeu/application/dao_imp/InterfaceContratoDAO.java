@@ -10,6 +10,7 @@ import java.util.List;
 import pe.edu.upeu.application.model.List_Rh_Contrato_Fec;
 import pe.edu.upeu.application.model.Modalidad;
 import pe.edu.upeu.application.model.Regimen_Laboral;
+import pe.edu.upeu.application.model.Sub_Modalidad;
 import pe.edu.upeu.application.model.X_List_Anno_Id_Tr_DGP;
 import pe.edu.upeu.application.model.X_List_Id_Contrato_DGP;
 
@@ -26,6 +27,7 @@ public void INSERT_CONTRATO(String ID_CONTRATO, String ID_DGP, String FE_DESDE, 
     public List<List_Rh_Contrato_Fec> List_Rh_Contrato_Fec(String id_departamento, String fecha_creacion);
     public List<X_List_Anno_Id_Tr_DGP> List_Anno_Id_Tr_DGP (String id_trabajador);
     public List<Modalidad> List_modalidad ();
+    public List<Sub_Modalidad> List_submodalidad ();
     public List<Regimen_Laboral> list_reg_labo ();
     public int Validar_Anno (String id_trabajador, String id_anno);
     public void Venc_Cont();

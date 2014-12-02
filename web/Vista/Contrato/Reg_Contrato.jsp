@@ -44,7 +44,7 @@
         <a href="Reg_Contrato.php?hac_cont=1&idtr=<? echo $idtr;?>">Hacer Contrato de Todas Maneras</a>
 
         <%} else {%>
-        <form class="form" action="../../contrato"> 
+        <form class="form" action="../../contrato" > 
             <table class="table">      
                 <tr><td>Año :</td><td>
                         <select name="AÑO_ID" class="text-box" required="" >
@@ -121,7 +121,7 @@
                         </select>
                     </td></tr>
                 <tr><td>Modalidad:</td><td>
-                        <select name="MODALIDAD" class="text-box">
+                        <select name="MODALIDAD" class="text-box" id="select_mod">
                             <%for(int l =0;l<List_modalidad.size();l++){
                                 Modalidad mo=new Modalidad();
                                 mo=(Modalidad)List_modalidad.get(l);   
@@ -130,8 +130,8 @@
                             <%}%>
                         </select></td></tr>
                 <tr><td>SUB-Modalidad:</td><td>
-                        <select name="SUB_MODALIDAD" class="text-box">
-                            <option value=""></option>
+                        <select name="SUB_MODALIDAD" class="text-box" id="select-sub-modalidad">
+                              <option value="">[SELECCIONE]</option>
                         </select></td></tr>
                 <tr><td>Tipo de Contratación:</td><td>
                         <select name="TI_CONTRATACION" class="text-box" required="">
@@ -268,4 +268,31 @@
             <%}
                 }%>
 </body>
+<script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var b = $("#select-sub-modalidad");
+                
+                $("#select_mod").change(
+                function() {
+                   // alert("?MODALIDAD="+$("#select_mod").val());
+                   
+                    $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp","MODALIDAD="+$("#select_mod").val(), function(objJson) {
+                        
+                        b.empty();
+                        var list = objJson.lista;
+                        for (var i = 0; i < list.length; i++) {
+                            b.append('<option value="'+list[i].id_sub_modalidad+'">'+list[i].de_sub_mod+'</option>');
+                            
+                        }
+                        });
+                   
+                   
+                    });
+                  
+
+                
+                
+            });
+        </script>
 </html>

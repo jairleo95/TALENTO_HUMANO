@@ -5,6 +5,7 @@
  */
 package pe.edu.upeu.application.dao;
 
+import com.sun.org.apache.bcel.internal.generic.RETURN;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,6 +17,7 @@ import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.List_Rh_Contrato_Fec;
 import pe.edu.upeu.application.model.Modalidad;
 import pe.edu.upeu.application.model.Regimen_Laboral;
+import pe.edu.upeu.application.model.Sub_Modalidad;
 import pe.edu.upeu.application.model.X_List_Anno_Id_Tr_DGP;
 import pe.edu.upeu.application.model.X_List_Id_Contrato_DGP;
 import pe.edu.upeu.application.web.controller.CConversion;
@@ -333,6 +335,12 @@ public class ContratoDAO implements InterfaceContratoDAO {
         } finally {
             this.conn.close();
         }
+        return list;
+    }
+
+    @Override
+    public List<Sub_Modalidad> List_submodalidad() {
+        List<Sub_Modalidad> list = new ArrayList<Sub_Modalidad>();
         return list;
     }
 
