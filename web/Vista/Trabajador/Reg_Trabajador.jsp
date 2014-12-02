@@ -1287,7 +1287,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <input type="submit" name="opc"  class="submit" value="Registrar">
+                                                            <input type="submit" name="opc"  class="submit btn btn-primary btn-lg" value="Registrar">
 
                                                         </div>
 
