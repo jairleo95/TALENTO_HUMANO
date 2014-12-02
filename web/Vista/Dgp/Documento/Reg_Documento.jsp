@@ -11,6 +11,10 @@
         <meta charset="windows-1252">
         <title>Archivos por adjuntar</title>
         <link href="../../../css/Css_Lista/listas.css"  rel="stylesheet" >
+
+        <!-- Basic Styles -->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/font-awesome.min.css">
         <!--  <style>
             
                  @media 
@@ -71,14 +75,16 @@
     <center>
 
         <form action="../../../documento" method="post" enctype="multipart/form-data">
-            <table>
+            <table id="datatable_tabletools" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>
+                <center>
                     <tr>
                         <th class="cajita">DOCUMENTO</th>   
                         <th class="cajita">ADJUNTAR</th>   
                         <th class="cajita">DESCRIPCION</th>   
                         <th class="cajita">RECIBIDO?</th>   
                     </tr>
+                </center>
                 </thead>
                 <tbody>
                     <%                        int i = 0;

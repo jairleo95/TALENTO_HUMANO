@@ -39,8 +39,9 @@ tr:hover {
     background-color:#d8dcf7;
 }
 th { 
-    background: #225BA5; 
-    color: white; 
+    text-align: center;
+    background: #C5C5C5; 
+    color: black; 
     font-weight: bold; 
 }
 td, th { 
