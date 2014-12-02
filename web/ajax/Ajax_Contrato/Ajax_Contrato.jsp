@@ -21,7 +21,6 @@
 
     // if (Accion.equals("listar")) {
     if (true) {
-
      String nom_ape = request.getParameter("nom_ape");
         String puesto = request.getParameter("puesto");
         String area = request.getParameter("area");
@@ -86,6 +85,4 @@
         }
 
     }
-
-
 %>
