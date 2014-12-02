@@ -51,8 +51,8 @@
     <body>
           <%
            
-           /* HttpSession sesion = request.getSession(true);
-           String rol = (String) sesion.getAttribute("IDROL"); */
+            HttpSession sesion = request.getSession(true);
+           String rol = (String) sesion.getAttribute("IDROL"); 
         %>
 
 

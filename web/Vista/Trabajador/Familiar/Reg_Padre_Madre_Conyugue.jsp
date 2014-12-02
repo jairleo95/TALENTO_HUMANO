@@ -124,7 +124,7 @@
                                     </label>
                                 </section>
 
-                                <section class="col col-6">
+                                <section class="col col-6"><labe>Fecha de Nacimiento</labe>
                                     <label class="input"> <i class="icon-append fa fa-calendar"></i>
                                         <input type="date" name="FECHA_NAC_CONYUGUE" placeholder="Fecha de Nacimiento dd/mm/yy" class="date f_nac" required="">
                                     </label>
@@ -145,7 +145,7 @@
                                         <input type="text" name="NRO_DOC" placeholder="Nro de Documento" maxlength="10" class="num_doc" required="">
                                     </label>
                                 </section>
-                                <input type="text" class="cony"  name="CONYUGUE"/>
+                                <input type="hidden" class="cony"  name="CONYUGUE"/>
 
                                 <section class="col col-5">
                                     <label class="select">
