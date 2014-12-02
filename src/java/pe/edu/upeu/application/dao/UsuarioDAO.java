@@ -262,4 +262,57 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
 
         return list;
     }
+
+    @Override
+    public List<V_Var_Usuario> List_Usuario_var_id(String id_usu) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select * from RHVD_VAR_USUARIO where id_usuario='"+id_usu+"'";
+        List<V_Var_Usuario> list = new ArrayList<V_Var_Usuario>();
+        try {
+            ResultSet rs = this.conn.query(sql.toString());
+            while (rs.next()) {
+                V_Var_Usuario v = new V_Var_Usuario();
+                v.setId_usuario(rs.getString("id_usuario"));
+                v.setNo_usuario(rs.getString("no_usuario"));
+                v.setPw_usuario(rs.getString("pw_usuario"));
+                v.setId_trabajador(rs.getString("id_trabajador"));
+                v.setNo_trabajador(rs.getString("no_trabajador"));
+                v.setAp_paterno(rs.getString("ap_paterno"));
+                v.setAp_materno(rs.getString("ap_materno"));
+                v.setNo_rol(rs.getString("no_rol"));
+                v.setId_rol(rs.getString("id_rol"));
+                v.setNo_puesto(rs.getString("no_puesto"));
+                v.setId_puesto(rs.getString("id_puesto"));
+                v.setNo_seccion(rs.getString("no_seccion"));
+                v.setId_seccion(rs.getString("id_seccion"));
+                v.setNo_area(rs.getString("no_area"));
+                v.setId_area(rs.getString("id_area"));
+                v.setNo_dep(rs.getString("no_dep"));
+                v.setId_departamento(rs.getString("id_departamento"));
+                v.setEs_usuario(rs.getString("es_usuario"));
+                list.add(v);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+
+        return list;
+    }
+
+    @Override
+    public void Mod_rol_usuario(String id_usuario, String IDROLES, String no_user) {
+        CallableStatement cst;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = conn.conex.prepareCall("{CALL RHSP_INSERT_USUARIO( ?,?,?,?,?,?)}");
+            cst.setString(1, id_usuario);
+            cst.setString(2, IDROLES);
+            cst.setString(3, no_user);
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        } 
+    }
 }

@@ -66,15 +66,31 @@ public class CUsuario extends HttpServlet {
                 response.sendRedirect("Vista/Usuario/List_Usuario.jsp");
             }
             if("Modificar_clave_1".equals(opc)){
-                String id_usuario=request.getParameter("id_usu");
+                String id_usuario=request.getParameter("id_Usuaio");
+                out.print(id_usuario);
                 getServletContext().setAttribute("List_ID_User",usu.List_ID_User(id_usuario));
                 response.sendRedirect("Vista/Usuario/Cambiar_Clave.jsp");
             }
             if("Modificar_clave_2".equals(opc)){
                 String id_usuario=request.getParameter("iduser");
                 String No_Usuario=request.getParameter("No_Usuario");
-                String pw_an=request.getParameter("pw_an");
+                String pw_an=request.getParameter("cl_nu_re");
                 usu.Mod_Pw(id_usuario, No_Usuario, pw_an);
+                getServletContext().setAttribute("List_Usuario_var", usu.List_Usuario_var());
+                response.sendRedirect("Vista/Usuario/Reg_Usuario.jsp");
+            }
+            if("Mod_Usuario_con".equals(opc)){
+                String id_usuario=request.getParameter("iduser");
+                getServletContext().setAttribute("List_Usuario_var_id", usu.List_Usuario_var_id(id_usuario));
+                getServletContext().setAttribute("List_Rol", rol.List_Rol());
+                getServletContext().setAttribute("List_Usuario_var", usu.List_Usuario_var());
+                response.sendRedirect("Vista/Usuario/.jsp");
+            }
+            if("Mod_Usuario_con_2".equals(opc)){
+                String id_usuario=request.getParameter("ID_USUARIO");
+                String IDROLES=request.getParameter("IDROLES");
+                String no_user=request.getParameter("USUARIO");
+                usu.Mod_rol_usuario(id_usuario, IDROLES, no_user);
                 getServletContext().setAttribute("List_Usuario_var", usu.List_Usuario_var());
                 response.sendRedirect("Vista/Usuario/Reg_Usuario.jsp");
             }

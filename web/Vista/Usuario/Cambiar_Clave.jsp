@@ -11,6 +11,34 @@ and open the template in the editor.
         <meta charset="windows-1252">
         <title></title>
         <script type="text/javascript" src="../../js/JQuery/jQuery.js" ></script>
+        <style type="text/css">
+
+            .submit{
+                margin:10px;
+                margin-left:0px;
+                width: 100%;
+                height:90%;
+                color:white;
+                background-color: #0575f4 ;
+
+            }
+            .tab-mant{
+                margin:10px;   
+            }   
+            .lab-mant{
+                color:#0575f4;  
+                //font-size:34px; 
+                // margin: 5px;
+            }
+            .body{
+                background-color: #EEE;
+
+            }
+
+            td{
+                text-align: left;
+            }
+        </style>
         <script>
 
 
@@ -45,7 +73,7 @@ and open the template in the editor.
         </script>
     </head>
     <body>
-    <center>
+    <center><label  class="lab-mant">Cambiar Clave</label>
         <form action="../../Usuario" method="post" onsubmit="return validar();">
             <table>
                 <%for (int i = 0; i < List_ID_User.size(); i++) {
@@ -58,10 +86,11 @@ and open the template in the editor.
                 <tr><td>Clave  Nueva:</td><td><input type="password" name="cl_nu" id="cl_nueva" required=""></td></tr>
                 <tr><td>Repita la Clave  Nueva:</td><td><input type="password" name="cl_nu_re" id="cl_repetido" required=""></td></tr>
                 <input type="hidden" name="opc" value="Modificar_clave_2">
-                <tr><td><input type="submit"  value="Cambiar Clave" ></td></tr>
+                <tr><td colspan="2"><input type="submit"  value="Cambiar Clave" ></td></tr>
             </table>
             <%}%>
         </form>
     </center>
 </body>
 </html>
+<%@include file="List_Usuario.jsp" %>

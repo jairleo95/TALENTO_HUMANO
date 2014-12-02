@@ -26,5 +26,7 @@ public interface InterfaceUsuarioDAO {
     public void Delete_Usuario(String ID);
     public List<Usuario> List_ID_User(String id_user);
     public void Insert_usuario(String No_usuario,String  pw_usuario , String id_emp, String id_rol, String es_usuario);
+    public void Mod_rol_usuario(String id_usuario,String  IDROLES , String no_user);
     public List<V_Var_Usuario> List_Usuario_var();
+    public List<V_Var_Usuario> List_Usuario_var_id(String id_usu);
 }
