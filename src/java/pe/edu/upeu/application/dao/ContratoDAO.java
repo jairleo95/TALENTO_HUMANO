@@ -28,12 +28,11 @@ public class ContratoDAO implements InterfaceContratoDAO {
     CConversion c = new CConversion();
 
     @Override
-    public void INSERT_CONTRATO(String ID_CONTRATO, String ID_DGP, String FE_DESDE, String FE_HASTA, String FE_CESE, String ID_FUNC, String LI_CONDICION, Double CA_SUELDO, Double CA_REINTEGRO, Double CA_ASIG_FAMILIAR, Double HO_SEMANA, Double NU_HORAS_LAB, Double DIA_CONTRATO, String TI_TRABAJADOR, String LI_REGIMEN_LABORAL, String ES_DISCAPACIDAD, String TI_CONTRATO, String LI_REGIMEN_PENSIONARIO, String ES_CONTRATO_TRABAJADOR, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String US_IP, String FE_VACACIO_INI, String FE_VACACIO_FIN, String ES_CONTRATO, String ID_FILIAL, String ID_DIRECCION, String ID_DEPARTAMENTO, String ID_AREA, String ID_SECCION, String ID_PUESTO, Double CA_BONO_ALIMENTO, String ES_JEFE, String LI_TIPO_CONVENIO, String ES_FIRMO_CONTRATO, Double NU_CONTRATO, String DE_OBSERVACION, String ES_APOYO, String TI_HORA_PAGO, String NU_DOCUMENTO, String ID_ANNO, String ES_ENTREGAR_DOC_REGLAMENTOS, String ES_REGISTRO_HUELLA, String DE_REGISTRO_SISTEM_REMU, String ID_TRABAJADOR) {
-        CallableStatement cst;
+    public void INSERT_CONTRATO(String ID_CONTRATO, String ID_DGP, String FE_DESDE, String FE_HASTA, String FE_CESE, String ID_FUNC, String LI_CONDICION, Double CA_SUELDO, Double CA_REINTEGRO, Double CA_ASIG_FAMILIAR, Double HO_SEMANA, Double NU_HORAS_LAB, Double DIA_CONTRATO, String TI_TRABAJADOR, String LI_REGIMEN_LABORAL, String ES_DISCAPACIDAD, String TI_CONTRATO, String LI_REGIMEN_PENSIONARIO, String ES_CONTRATO_TRABAJADOR, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String US_IP, String FE_VACACIO_INI, String FE_VACACIO_FIN, String ES_CONTRATO, String ID_FILIAL, String ID_DIRECCION, String ID_DEPARTAMENTO, String ID_AREA, String ID_SECCION, String ID_PUESTO, Double CA_BONO_ALIMENTO, String LI_TIPO_CONVENIO, String ES_FIRMO_CONTRATO, Double NU_CONTRATO, String DE_OBSERVACION, String ES_APOYO, String TI_HORA_PAGO, String NU_DOCUMENTO, String ID_ANNO, String ES_ENTREGAR_DOC_REGLAMENTOS, String ES_REGISTRO_HUELLA, String DE_REGISTRO_SISTEM_REMU, String ID_TRABAJADOR, String ID_CENTRO_COSTO, Double CA_SUELDO_TOTAL, String ID_REGIMEN_LABORAL, String ID_MODALIDAD, String ID_SUB_MODALIDAD, String CO_GR_OCUPACION, String FE_SUSCRIPCION, String CO_TI_MONEDA, String CO_TI_REM_VARIAB, String DE_REMU_ESPECIE, String DE_RUC_EMP_TRAB, String CO_SUCURSAL, String DE_MYPE, String ES_TI_CONTRATACION, Double CA_BEV) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            cst = conn.conex.prepareCall("{CALL RHSP_INSERT_CONTRATO( ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
-            cst.setString(1, "");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_CONTRATO( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )} ");
+            cst.setString(1, null);
             cst.setString(2, ID_DGP);
             cst.setString(3, c.convertFecha(FE_DESDE));
             cst.setString(4, c.convertFecha(FE_HASTA));
@@ -67,22 +66,36 @@ public class ContratoDAO implements InterfaceContratoDAO {
             cst.setString(32, ID_SECCION);
             cst.setString(33, ID_PUESTO);
             cst.setDouble(34, CA_BONO_ALIMENTO);
-            cst.setString(35, ES_JEFE);
-            cst.setString(36, LI_TIPO_CONVENIO);
-            cst.setString(37, ES_FIRMO_CONTRATO);
-            cst.setDouble(38, NU_CONTRATO);
-            cst.setString(39, DE_OBSERVACION);
-            cst.setString(40, ES_APOYO);
-            cst.setString(41, TI_HORA_PAGO);
-            cst.setString(42, NU_DOCUMENTO);
-            cst.setString(43, ID_ANNO);
-            cst.setString(44, ES_ENTREGAR_DOC_REGLAMENTOS);
-            cst.setString(45, ES_REGISTRO_HUELLA);
-            cst.setString(46, DE_REGISTRO_SISTEM_REMU);
-            cst.setString(47, ID_TRABAJADOR);
+            cst.setString(35, LI_TIPO_CONVENIO);
+            cst.setString(36, ES_FIRMO_CONTRATO);
+            cst.setDouble(37, NU_CONTRATO);
+            cst.setString(38, DE_OBSERVACION);
+            cst.setString(39, ES_APOYO);
+            cst.setString(40, TI_HORA_PAGO);
+            cst.setString(41, NU_DOCUMENTO);
+            cst.setString(42, ID_ANNO);
+            cst.setString(43, ES_ENTREGAR_DOC_REGLAMENTOS);
+            cst.setString(44, ES_REGISTRO_HUELLA);
+            cst.setString(45, DE_REGISTRO_SISTEM_REMU);
+            cst.setString(46, ID_TRABAJADOR);
+            cst.setString(47, ID_CENTRO_COSTO);
+            cst.setDouble(48, CA_SUELDO_TOTAL);
+            cst.setString(49, ID_REGIMEN_LABORAL);
+            cst.setString(50, ID_MODALIDAD);
+            cst.setString(51, ID_SUB_MODALIDAD);
+            cst.setString(52, CO_GR_OCUPACION);
+            cst.setString(53, c.convertFecha(FE_SUSCRIPCION));
+            cst.setString(54, CO_TI_MONEDA);
+            cst.setString(55, CO_TI_REM_VARIAB);
+            cst.setString(56, DE_REMU_ESPECIE);
+            cst.setString(57, DE_RUC_EMP_TRAB);
+            cst.setString(58, CO_SUCURSAL);
+            cst.setString(59, DE_MYPE);
+            cst.setString(60, ES_TI_CONTRATACION);
+            cst.setDouble(61, CA_BEV);
             cst.execute();
-
         } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
         } finally {
             this.conn.close();
         }
@@ -91,7 +104,8 @@ public class ContratoDAO implements InterfaceContratoDAO {
     @Override
     public List<X_List_Id_Contrato_DGP> List_id_Contrato_DGP(String id_trabajador, String id_anno) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select c.id_contrato, c.id_dgp, c.fe_desde, c.fe_hasta, c.fe_cese, c.id_func, pd.no_area,c.li_condicion , c.ca_sueldo,c.ca_reintegro,c.ca_asig_familiar, c.ho_semana,c.nu_horas_lab,c.dia_contrato,c.ti_trabajador,c.li_regimen_laboral,c.es_discapacidad,c.ti_contrato,c.li_regimen_pensionario, c.es_contrato_trabajador,c.us_creacion,c.fe_creacion,c.us_modif,c.fe_modif,c.us_ip,c.fe_vacacio_ini,c.fe_vacacio_fin,c.es_contrato,c.id_filial,pd.id_direccion,pd.id_departamento,pd.id_area,pd.id_seccion,pd.id_puesto,c.ca_bono_alimento,c.es_jefe,c.li_tipo_convenio,c.es_firmo_contrato,c.nu_contrato,c.de_observacion,c.es_apoyo,c.ti_hora_pago,c.nu_documento,c.id_anno,c.es_entregar_doc_reglamentos,c.es_registro_huella,c.de_registro_sistem_remu,c.id_trabajador, pd.no_puesto,pd.no_seccion, pd.no_dep,pd.no_direccion from rhtm_contrato c, RHVD_puesto_direccion pd   where c.id_puesto = pd.id_puesto and c.es_contrato='1' and c.id_trabajador='" + id_trabajador + "' and c.ID_ANNO='" + id_anno + "'";
+        //  String sql = "select c.id_contrato, c.id_dgp, c.fe_desde, c.fe_hasta, c.fe_cese, c.id_func, pd.no_area,c.li_condicion , c.ca_sueldo,c.ca_reintegro,c.ca_asig_familiar, c.ho_semana,c.nu_horas_lab,c.dia_contrato,c.ti_trabajador,c.li_regimen_laboral,c.es_discapacidad,c.ti_contrato,c.li_regimen_pensionario, c.es_contrato_trabajador,c.us_creacion,c.fe_creacion,c.us_modif,c.fe_modif,c.us_ip,c.fe_vacacio_ini,c.fe_vacacio_fin,c.es_contrato,c.id_filial,pd.id_direccion,pd.id_departamento,pd.id_area,pd.id_seccion,pd.id_puesto,c.ca_bono_alimento,c.es_jefe,c.li_tipo_convenio,c.es_firmo_contrato,c.nu_contrato,c.de_observacion,c.es_apoyo,c.ti_hora_pago,c.nu_documento,c.id_anno,c.es_entregar_doc_reglamentos,c.es_registro_huella,c.de_registro_sistem_remu,c.id_trabajador, pd.no_puesto,pd.no_seccion, pd.no_dep,pd.no_direccion from rhtm_contrato c, RHVD_puesto_direccion pd   where c.id_puesto = pd.id_puesto and c.es_contrato='1' and c.id_trabajador='" + id_trabajador + "' and c.ID_ANNO='" + id_anno + "'";
+        String sql = "select c.*, pd.no_puesto,pd.no_seccion,pd.no_area, pd.no_dep,pd.no_direccion from rhtm_contrato c, RHVD_puesto_direccion pd   where c.id_puesto = pd.id_puesto and c.es_contrato='1' and c.id_trabajador='" + id_trabajador + "' and c.ID_ANNO='" + id_anno + "'";
         List<X_List_Id_Contrato_DGP> list = new ArrayList<X_List_Id_Contrato_DGP>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -133,7 +147,6 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 icd.setId_seccion(rs.getString("id_seccion"));
                 icd.setId_puesto(rs.getString("id_puesto"));
                 icd.setCa_bono_alimento(rs.getDouble("ca_bono_alimento"));
-                icd.setEs_jefe(rs.getString("es_jefe"));
                 icd.setLi_tipo_convenio(rs.getString("li_tipo_convenio"));
                 icd.setEs_firmo_contrato(rs.getString("es_firmo_contrato"));
                 icd.setNu_contrato(rs.getDouble("nu_contrato"));
