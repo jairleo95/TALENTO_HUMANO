@@ -280,6 +280,9 @@
                         <li >
                             <a href="#s7" data-toggle="tab"><i class="fa fa-file-text fa-gear"></i> Información Contractual </a>
                         </li>
+                        <li >
+                            <a href="#s8" data-toggle="tab"><i class="fa fa-file-text fa-gear"></i> Evaluacion de Emleado</a>
+                        </li>
                     </ul>
 
                     <div id="myTabContent1" class="tab-content padding-10">
@@ -319,6 +322,9 @@
                         </div>
                         <div class="tab-pane fade" id="s7">                            
                             <iframe name="contenido" id="contenido"  class="autoHeight" src="../../contrato?idtr=<%=idtr%>&opc=Detalle_Contractual" width="100%" height="100%" ></iframe>
+                        </div>
+                        <div class="tab-pane fade" id="s8">                            
+                            <iframe name="contenido" id="contenido"  class="autoHeight" src="../../empleado?opc=Eva_Emp" width="100%" height="100%" ></iframe>
                         </div>
                     </div>
 

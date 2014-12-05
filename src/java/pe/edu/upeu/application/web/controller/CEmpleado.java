@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pe.edu.upeu.application.web.controller;
 
 import java.io.IOException;
@@ -35,25 +34,30 @@ public class CEmpleado extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        
+
         InterfaceEmpleadoDAO Iem = new EmpleadoDAO();
-        
-        
+
         HttpSession sesion = request.getSession(true);
         String opc = request.getParameter("opc");
 
-        if(opc.equals("Reporte")){
-            
-        String iddepa = (String)sesion.getAttribute("DEPARTAMENTO_ID");
-        getServletContext().setAttribute("List_Empleado", Iem.Listar_Empleado(iddepa));
-        
-        out.print(Iem.Listar_Empleado(iddepa).size());
-        
-        response.sendRedirect("Vista/Empleado/Filtro_Empleado.jsp?iddepa");
+        if (opc.equals("Eva_Emp")) {
+            response.sendRedirect("Vista/Empleado/Evaluacion_Empleado.jsp");
         }
-        
+        if (opc.equals("Reg_Evaluar_Emp")) {
+          
+        }
+        if (opc.equals("Reporte")) {
+
+            String iddepa = (String) sesion.getAttribute("DEPARTAMENTO_ID");
+            getServletContext().setAttribute("List_Empleado", Iem.Listar_Empleado(iddepa));
+
+            out.print(Iem.Listar_Empleado(iddepa).size());
+
+            response.sendRedirect("Vista/Empleado/Filtro_Empleado.jsp?iddepa");
+        }
+
         try {
-     
+
         } finally {
             out.close();
         }

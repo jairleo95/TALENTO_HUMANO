@@ -26,7 +26,6 @@
             ResultSet rs = null;
             Connection cx = Conexion.getConex();
             /*PreparedStatement ps = cx.prepareStatement("SELECT  * FROM USUARIO WHERE USUARIO=? AND CLAVE=?");
-    
              ps.setString(1, "SECRE135");
              ps.setString(2, "123");
              rs=ps.executeQuery();*/
@@ -47,7 +46,6 @@
             cnt2.next();
             stmt = cx.createStatement();
             rs = stmt.executeQuery("select table_name ,count(column_name)from user_tab_columns group by table_name order by table_name");
-
             String List1[][] = new String[cnt1.getInt(1)][2];
             String List2[][] = new String[cnt2.getInt(1)][5];
             int i = 0;
