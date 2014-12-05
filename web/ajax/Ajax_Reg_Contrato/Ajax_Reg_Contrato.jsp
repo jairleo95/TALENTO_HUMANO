@@ -13,22 +13,23 @@
 <%
     response.setContentType("application/json");
     response.setCharacterEncoding("UTF-8");
-
+    HttpSession sesion = request.getSession(true);
+    String Accion = request.getParameter("action");
     ConexionBD cnn;
 
     // if (Accion.equals("listar")) {
     if (true) {
 
         String id_Moda = request.getParameter("MODALIDAD");
+        String opc=request.getParameter("opc");
         if (true) {
-
-            String sql = "select  *  from RHTX_SUB_MODALIDAD  where  trim(id_modalidad)='"+id_Moda.trim()+"'";
-
+            if(opc.equals("submodalidad")){
+            String sql = "select  *  from RHTX_SUB_MODALIDAD ";
+            sql += (!"".equals(id_Moda)) ? " where  ID_MODALIDAD='"+id_Moda.toUpperCase()+"'" : "";
             //id_Moda = id_Moda.toUpperCase();
 
             //sql += (!"".equals(id_Moda)) ? " where  trim(id_modalidad)='"+id_Moda.trim()+"'":" ";
- 
-             /* sql +=(!"".equals(iddep))?"  and du.id_departamento='"+iddep+"'":"";
+            /* sql +=(!"".equals(iddep))?"  and du.id_departamento='"+iddep+"'":"";
             
              if(!"".equals(order)){
              sql +="ORDER BY A.ID_AUTORIZACION ,"+order;
@@ -39,19 +40,21 @@
 
             Map<String, Object> rpta = new HashMap<String, Object>();
 
-            List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+            List<Map<String, ?>> lista2 = new ArrayList<Map<String, ?>>();
 
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
-                rec.put("id_sub_modalidad", rs.getString("ID_SUB_MODALIDAD"));
-                rec.put("de_sub_mod", rs.getString("DE_SUB_MODALIDAD"));
+                rec.put("id_submodalidad", rs.getString("ID_SUB_MODALIDAD"));
                 rec.put("co_sub_mod", rs.getString("CO_SUB_MODALIDAD"));
+                rec.put("de_submod", rs.getString("DE_SUB_MODALIDAD"));
+                lista2.add(rec);
             }
-            rpta.put("lista", lista);
+            rpta.put("lista", lista2);
             Gson gson = new Gson();
             out.print(gson.toJson(rpta));
             out.flush();
             out.close();
+            }
 
         }
 

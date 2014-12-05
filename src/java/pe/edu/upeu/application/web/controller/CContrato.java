@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import pe.edu.upeu.application.dao.AnnoDAO;
 import pe.edu.upeu.application.dao.AreaDAO;
+import pe.edu.upeu.application.dao.Centro_CostosDAO;
 import pe.edu.upeu.application.dao.ContratoDAO;
 import pe.edu.upeu.application.dao.Datos_Hijo_TrabajadorDAO;
 import pe.edu.upeu.application.dao.DgpDAO;
@@ -26,6 +27,7 @@ import pe.edu.upeu.application.dao.TrabajadorDAO;
 import pe.edu.upeu.application.dao.UsuarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAnnoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAreaDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceCentro_CostosDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceContratoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDatos_Hijo_Trabajador;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
@@ -65,6 +67,7 @@ public class CContrato extends HttpServlet {
     InterfacePlantillaDAO pl = new PlantillaDAO();
     InterfaceUsuarioDAO usu = new UsuarioDAO();
     InterfaceTrabajadorDAO tr = new TrabajadorDAO();
+    InterfaceCentro_CostosDAO cc = new Centro_CostosDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -84,7 +87,8 @@ public class CContrato extends HttpServlet {
                 getServletContext().setAttribute("LISTA_RH_SECCION", seccion.LISTA_RH_SECCION());
                 getServletContext().setAttribute("List_anno_max", a.List_anno_max());
                 getServletContext().setAttribute("List_modalidad", con.List_modalidad());    
-                getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());    
+                getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
+                getServletContext().setAttribute("List_centro_costo", cc.List_centro_costo());
                 int num = dht.ASIGNACION_F(idtr);
                 // out.println(num);
                 response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp?num=" + num);

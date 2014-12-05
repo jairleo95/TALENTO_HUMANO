@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.model.Centro_Costos"%>
 <%@page import="pe.edu.upeu.application.model.Regimen_Laboral"%>
 <%@page import="pe.edu.upeu.application.model.Modalidad"%>
 <%@page import="pe.edu.upeu.application.model.V_Det_DGP"%>
@@ -13,6 +14,7 @@
 <jsp:useBean id="List_anno_max" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_modalidad" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="list_reg_labo" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_centro_costo" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html >
 
 <html>
@@ -80,7 +82,13 @@
                         </select>
                 <tr><td>Centro de Costo:</td><td>
                         <select name="CENTRO_COSTO" class="text-box"  >
-                            <option value="">[SELECCIONE]</option>
+                            <option value=""><%=List_centro_costo.size()%></option>
+                            <%for(int h=0; h<List_centro_costo.size();h++){
+                               Centro_Costos c=new Centro_Costos();
+                               c=(Centro_Costos)List_centro_costo.get(h);
+                           %>
+                           <option value="<%=c.getId_centro_costo()%>"><%=c.getDe_centro_costo()%></option>
+                            <%}%>
                         </select>     
                 <tr><td>Condición:</td><td>
                         <select  name="CONDICION" class="text-box" required="" >
@@ -112,26 +120,26 @@
 
                 <tr><td>Régimen Laboral Mintra :</td><td>
                         <select name="REG_LAB_MINTRA" class="text-box">
-                            <%for(int q =0;q<list_reg_labo.size();q++){
-                                Regimen_Laboral re=new Regimen_Laboral();
-                                re=(Regimen_Laboral)list_reg_labo.get(q);
+                            <%for (int q = 0; q < list_reg_labo.size(); q++) {
+                                    Regimen_Laboral re = new Regimen_Laboral();
+                                    re = (Regimen_Laboral) list_reg_labo.get(q);
                             %>
                             <option value="<%=re.getId_regimen_laboral()%>"><%=re.getDe_regimen_l()%></option>
-                           <%}%>
+                            <%}%>
                         </select>
                     </td></tr>
                 <tr><td>Modalidad:</td><td>
                         <select name="MODALIDAD" class="text-box" id="select_mod">
-                            <%for(int l =0;l<List_modalidad.size();l++){
-                                Modalidad mo=new Modalidad();
-                                mo=(Modalidad)List_modalidad.get(l);   
+                            <%for (int l = 0; l < List_modalidad.size(); l++) {
+                                    Modalidad mo = new Modalidad();
+                                    mo = (Modalidad) List_modalidad.get(l);
                             %>
                             <option value="<%=mo.getId_modalidad()%>"><%=mo.getDe_modalidad()%></option>
                             <%}%>
                         </select></td></tr>
                 <tr><td>SUB-Modalidad:</td><td>
-                        <select name="SUB_MODALIDAD" class="text-box" id="select-sub-modalidad">
-                              <option value="">[SELECCIONE]</option>
+                        <select name="SUB_MODALIDAD" class="text-box" id="select-sub-mod">
+                            <option >[SELECCIONES]</option>
                         </select></td></tr>
                 <tr><td>Tipo de Contratación:</td><td>
                         <select name="TI_CONTRATACION" class="text-box" required="">
@@ -182,17 +190,17 @@
                             <option value="1" selected>Privado</option>
                             <option value="2" selected>Público</option>
                         </select>
-                    
-                    
+
+
                     </td></tr>
-                
+
                 <tr><td>Discapacidad:</td><td>
                         <select name="DISCAPACIDAD" class="text-box">
                             <option value=""></option>
                             <option value="1" selected>No</option>
                             <option value="2">Si</option>
                         </select></td></tr>
-                         <tr><td>Régimen Pensionario:</td><td>
+                <tr><td>Régimen Pensionario:</td><td>
                         <select name="REGIMEN_PENSIONARIO" class="text-box">
                             <option value=""></option>
                             <option value="1" selected>Privado</option>
@@ -227,7 +235,7 @@
                 <tr><td>Observación:</td><td>
                         <textarea name="OBSERVACION" class="text-box" cols="50" rows="6"></textarea>
                     </td></tr> 
-               
+
                 <tr><td>Situacion Actual:</td><td>
                         <select  name="ESTADO_CONTRATO" class="text-box">
                             <option value="">---elegir---</option>
@@ -249,13 +257,13 @@
                             <option value="2">Juliaca</option>
                             <option value="3">Tarapoto</option>
                         </select>
-                      
-                <tr><td>Fecha de Cese:</td><td><input type="date" name="FEC_CESE" class="text-box" ></td></tr>   
-                  <tr><td>RUC UPEU:</td><td><input type="text"  value="20138122256" name="EMP_RUC" class="text-box" ></td></tr>
-                  <tr><td>CODIGO SUCURSAL:</td><td><input type="text"  value="-1" name="SUCURSAL" class="text-box" ></td></tr>
-                  <tr><td>MYPE:</td><td><input type="text"  value="N" name="MYPE" class="text-box" ></td></tr>
 
-               
+                <tr><td>Fecha de Cese:</td><td><input type="date" name="FEC_CESE" class="text-box" ></td></tr>   
+                <tr><td>RUC UPEU:</td><td><input type="text"  value="20138122256" name="EMP_RUC" class="text-box" ></td></tr>
+                <tr><td>CODIGO SUCURSAL:</td><td><input type="text"  value="-1" name="SUCURSAL" class="text-box" ></td></tr>
+                <tr><td>MYPE:</td><td><input type="text"  value="N" name="MYPE" class="text-box" ></td></tr>
+
+
 
                 <input type="hidden" name="ENTREGAR_DOC_REGLAMENTOS"  value="0" class="text-box" >
                 <input type="hidden" name="REGISTRO_HUELLA"  value="0" class="text-box" > 
@@ -269,30 +277,23 @@
                 }%>
 </body>
 <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                var b = $("#select-sub-modalidad");
-                
-                $("#select_mod").change(
+<script>
+    $(document).ready(function() {
+        var b = $("#select-sub-mod");
+        $("#select_mod").change(
                 function() {
-                   // alert("?MODALIDAD="+$("#select_mod").val());
-                   
-                    $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp","MODALIDAD="+$("#select_mod").val(), function(objJson) {
-                        
+                    // alert("?MODALIDAD="+$("#select_mod").val());
+
+                    $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function(objJson) {
+
                         b.empty();
                         var list = objJson.lista;
                         for (var i = 0; i < list.length; i++) {
-                            b.append('<option value="'+list[i].id_sub_modalidad+'">'+list[i].de_sub_mod+'</option>');
-                            
+                            b.append('<option value="' + list[i].id_submodalidad + '">' + list[i].de_submod + '</option>');
                         }
-                        });
-                   
-                   
                     });
-                  
+                });
 
-                
-                
-            });
-        </script>
+    });
+</script>
 </html>
