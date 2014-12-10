@@ -93,6 +93,7 @@
 </body>
 </html>
 <center>
+    <%@include file="List_Hijo.jsp" %>
     <%
 
         if (LISTA_HIJOS.size() != 0) {
@@ -103,7 +104,7 @@
     <%} else {%>
 
     <label>No se ha registrado ningun Hijo(a)</label><br>
-
+    
     <%  if (rol.trim().equals("ROL-0002")|rol.trim().equals("ROL-0005")) {%>
     <a href="Reg_Datos_Hijo.jsp?idtr=<%=request.getParameter("idtr")%>" class="">Registrar</a>
     <%}%>

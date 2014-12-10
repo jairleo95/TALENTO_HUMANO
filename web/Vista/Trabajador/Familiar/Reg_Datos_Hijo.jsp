@@ -698,3 +698,4 @@
 		</script>
     </body>
 </html>
+<%@include file="List_Hijo.jsp" %>

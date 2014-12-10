@@ -267,7 +267,7 @@
 
                                                     <section>
                                                         <label class="label" id="titu">Trabajador :</label>
-                                                        <label class="input">
+                                                        <label class="input" style="color: red; font-weight: bold;">
                                                             <%=tr.getAp_paterno() + " " + tr.getAp_materno() + " " + tr.getNo_trabajador()%>
                                                             <input type="hidden" value="<%=tr.getId_trabajador()%>" name="IDDATOS_TRABAJADOR" class="input-xs">
                                                             <% }
@@ -551,8 +551,6 @@
                                                                                     </header>
 
                                                                                     <fieldset>
-
-
                                                                                         <section>
                                                                                             <label class="label" id="titu">Opcion :</label>
                                                                                             <label class="select">
@@ -564,72 +562,70 @@
 
                                                                                             </label>
                                                                                         </section>
-                                                                                        <table class="tab-horario table table-striped table-bordered table-hover">
-                                                                                            <tr>
-                                                                                                <td> <label class="title">LUNES</label>
+                                                                                        <div class="row">
+                                                                                            <section class="col col-2">
+                                                                                                <label class="select" id="titu">LUNES
                                                                                                     <select id="lunes" >
-
-                                                                                                        <option value="1">Habilitado</option>
-                                                                                                        <option value="2" selected="">Deshabilitado</option>
-                                                                                                    </select></td>
-
-                                                                                                <td><label class="title">MARTES</label>
-                                                                                                    <select id="martes" >
-
-                                                                                                        <option value="1">Habilitado</option>
-                                                                                                        <option value="2" selected="">Deshabilitado</option>
-                                                                                                    </select></td>
-
-                                                                                                <td>
-                                                                                                    <label class="title">MIERCOLES</label>
-                                                                                                    <select id="miercoles"  >
-
                                                                                                         <option value="1">Habilitado</option>
                                                                                                         <option value="2" selected="">Deshabilitado</option>
                                                                                                     </select>
-                                                                                                </td>
-
-
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td>
-                                                                                                    <label class="title">JUEVES</label>
-                                                                                                    <select id="jueves" >
-
+                                                                                                </label>
+                                                                                            </section>
+                                                                                            <section class="col col-2">
+                                                                                                <label class="select" id="titu">MARTES
+                                                                                                   <select id="martes" >
+                                                                                                        <option value="1">Habilitado</option>
+                                                                                                        <option value="2" selected="">Deshabilitado</option>
+                                                                                                    </select>
+                                                                                                </label>
+                                                                                            </section>
+                                                                                            <section class="col col-2" >
+                                                                                                <label class="select" id="titu">MIERCOLES
+                                                                                                  <select id="miercoles"  >
+                                                                                                        <option value="1">Habilitado</option>
+                                                                                                        <option value="2" selected="">Deshabilitado</option>
+                                                                                                    </select>
+                                                                                                </label>
+                                                                                            </section>
+                                                                                            <section class="col col-2">
+                                                                                                <label class="select" id="titu">JUEVES
+                                                                                                  <select id="jueves"  >
                                                                                                         <option value="1">Habilitado</option>
                                                                                                         <option value="2" selected="">Deshabilitado</option>
                                                                                                     </select> 
-                                                                                                </td>
-
-                                                                                                <td>
-                                                                                                    <label class="title">VIERNES</label>
+                                                                                                </label>
+                                                                                            </section>
+                                                                                            <section class="col col-2">
+                                                                                                <label class="select" id="titu">VIERNES
                                                                                                     <select id="viernes"  >
+                                                                                                        <option value="1">Habilitado</option>
+                                                                                                        <option value="2" selected="">Deshabilitado</option>
+                                                                                                    </select>
+                                                                                                </label>
+                                                                                            </section>
+                                                                                            <section class="col col-2">
+                                                                                                <label class="select" id="titu">SABADO
+                                                                                                 <select id="sabado"  >
+                                                                                                        <option value="1">Habilitado</option>
+                                                                                                        <option value="2" selected="">Deshabilitado</option>
+                                                                                                    </select>
+                                                                                                </label>
+                                                                                            </section>
+
+                                                                                            <section class="col col-2">
+                                                                                                <label class="select" id="titu">DOMINGO
+                                                                                                 <select id="domingo" >
 
                                                                                                         <option value="1">Habilitado</option>
                                                                                                         <option value="2" selected="">Deshabilitado</option>
                                                                                                     </select>
+                                                                                                </label>
+                                                                                            </section>
+                                                                                        </div>
 
-                                                                                                </td>
 
-                                                                                                <td>
-                                                                                                    <label class="title">SABADO</label>
-                                                                                                    <select id="sabado"  >
 
-                                                                                                        <option value="1">Habilitado</option>
-                                                                                                        <option value="2" selected="">Deshabilitado</option>
-                                                                                                    </select>
-
-                                                                                                </td>
-                                                                                                <td><label class="title">DOMINGO</label>
-                                                                                                    <select id="domingo" >
-
-                                                                                                        <option value="1">Habilitado</option>
-                                                                                                        <option value="2" selected="">Deshabilitado</option>
-                                                                                                    </select>
-                                                                                                </td>
-
-                                                                                            </tr>
-                                                                                        </table>
+                                                                                    
                                                                                         <div class="input-desp">
                                                                                             <table style="" id="show_1" class="cont_lunes"> 
                                                                                                 <tr><td align="center" colspan="2">Lunes</td></tr>
@@ -686,8 +682,8 @@
                                                                                                 <tr class="tr-count_4"><td>T1 :</td><td><input type="text" name="HORA_DESDE_jue1" id="HORA_DESDE_jue1" class="texto-h" ></td>            
                                                                                                     <td><input type="text" name="HORA_HASTA_jue1" id="HORA_HASTA_jue1" class="texto-h" ></td></tr>         
                                                                                                 <input type="hidden" name="DIA_jue1" value="jue"  >           
-                                                                                                
-                                                                                                
+
+
                                                                                                 <tr class="tr-count_4"><td>T2 :</td><td><input type="text" name="HORA_DESDE_jue2" id="HORA_DESDE_jue2" class="texto-h" ></td>          
                                                                                                     <td><input type="text" name="HORA_HASTA_jue2" id="HORA_HASTA_jue2" class="texto-h" ><a href="#" id="remove_4">-</a></td></tr>         
                                                                                                 <input type="hidden" name="DIA_jue2" value="jue"  >                    
@@ -718,16 +714,15 @@
                                                                                                 <input type="hidden" name="DIA_dom2" value="dom"  >                    
                                                                                                 <tr><td colspan="2"><a href="#" id="add_7">+</a></td></tr>
                                                                                             </table>
-                                                                                            <div class="h_total">Horas Totales : 00:00 horas</div>
+                                                                                            <div class="h_total" style="color: red; font-weight: bold;">Horas Totales : 00:00 horas</div>
                                                                                         </div>
-
                                                                                     </fieldset>
                                                                                     <footer>
                                                                                         <button type="submit" class="btn btn-primary">
-                                                                                            Submit
+                                                                                            Siguiente
                                                                                         </button>
                                                                                         <button type="button" class="btn btn-default" onclick="window.history.back();">
-                                                                                            Back
+                                                                                            Regresar
                                                                                         </button>
                                                                                     </footer>
 
@@ -877,7 +872,7 @@
                                                                                 // }
                                                                             }
                                                                         }
-                                                                          var minutos_totales=acum;
+                                                                        var minutos_totales = acum;
                                                                         acum = acum / 60;
                                                                         var min = ((acum - parseInt(acum)) * 60);
                                                                         min = parseInt(min.toPrecision(2));
@@ -885,7 +880,7 @@
 
                                                                         $(".h_total").text("Hora Semanal Total : " + acum + ":" + min + " Horas.");
                                                                         if (minutos_totales > 2880) {
-                                                                        
+
                                                                         }
                                                                     }
                                                                     $(document).ready(function () {
@@ -894,7 +889,7 @@
                                                                         $(".texto-h").keyup(
                                                                                 function () {
                                                                                     calcularHoras();
-                                                                                  
+
                                                                                 }
                                                                         );
                                                                         $("#horario").change(

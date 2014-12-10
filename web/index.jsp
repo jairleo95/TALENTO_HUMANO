@@ -141,9 +141,7 @@
                                         <label class="input"> <i class="icon-append fa fa-lock"></i>
                                             <input type="password" name="clave">
                                             <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Ingrese la contraseña</b> </label>
-                                        <div class="note">
-                                            <a href="forgotpassword.html">Olvidó su contraseña?</a>
-                                        </div>
+                                        
                                     </section>
 
                                     <section>
