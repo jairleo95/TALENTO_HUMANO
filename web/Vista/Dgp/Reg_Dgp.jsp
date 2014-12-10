@@ -322,7 +322,7 @@
                                                         </section>
                                                         <section class="col col-6">
                                                             <label class="input"  id="titu"> 
-                                                                Fecha de Cese :<input type="date" name="FEC_DESDE"  required="" id="datepicker">
+                                                                Fecha de Cese :<input type="date" name="FEC_HASTA"  required="" id="datepicker">
                                                             </label>
                                                         </section>
                                                     </div>
@@ -378,7 +378,7 @@
                                                                     <section class="col col-4" name="">
 
                                                                         <label class="select" id="titu">Banco:
-                                                                            <select name="" id="banco" required="">
+                                                                            <select name="BANCO" id="banco" required="">
                                                                                 <option value="0" >Ninguno</option>
                                                                                 <option value="1" >BBVA</option>
                                                                                 <option value="2" >BCP</option>
@@ -389,21 +389,21 @@
                                                                     <section class="col col-3" id="no_cuen">
 
                                                                         <label class="input" id="titu">Nro Cuenta :
-                                                                            <input type="text" name="" required="" id="nu_cuen" maxlength="30"   />
+                                                                            <input type="text" name="CUENTA" required="" id="nu_cuen" maxlength="30"   />
                                                                         </label>
 
                                                                     </section>
                                                                     <section class="col col-3"  id="no_cuen_ban">
 
                                                                         <label class="input" id="titu">Nro Cuenta Bancaria:
-                                                                            <input type="text" name="" required="" id="nu_cuen_ban">
+                                                                            <input type="text" name="CUENTA_BANC" required="" id="nu_cuen_ban">
                                                                         </label>
 
                                                                     </section>
 
                                                                     <section class="col col-3" id="generar">
                                                                         <label class="checkbox" >
-                                                                            <input type="checkbox" name="subscription" id="subscription" required="" >
+                                                                            <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  >
                                                                             <i></i>Generar Nro de Cuenta Bancaria</label>
                                                                     </section>
 
@@ -425,9 +425,7 @@
                                                                                         $("#nu_cuen").val("");
                                                                                         $("#subscription").attr('checked', false);
                                                                                          $("#nu_cuen").attr("maxlength", "21");
-                                                                                        // $("#nu_cuen").attr("data-mask", "999-9999");
                                                                                          $("#nu_cuen").mask("0011-9999999999999999",{placeholder:"X"});
-                                                                                       //  data-mask="+99 (999) 999-9999" data-mask-placeholder= "X" 
                                                                                          
                                                                                     }
                                                                                     if ($("#banco").val() == '2') {
@@ -438,7 +436,7 @@
                                                                                         $("#nu_cuen").val("");
                                                                                         $("#subscription").attr('checked', false);
                                                                                            $("#nu_cuen").attr("maxlength", "14");
-                                                                                             $("#nu_cuen").mask("999",{placeholder:"X"});
+                                                                                      $("#nu_cuen").mask("99999999999999",{placeholder:"X"});
 
                                                                                     }
                                                                                     if ($("#banco").val() == '3') {

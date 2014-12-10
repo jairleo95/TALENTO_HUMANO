@@ -40,8 +40,12 @@ public class DGP {
     private String de_antecedentes_policiales;
     private String de_certificado_salud;
     private String de_monto_honorario;
+    private String no_banco;
+    private String nu_cuenta;
+    private String nu_cuenta_banc;
+    private String es_gen_nu_cuenta;
 
-    public DGP(String id_dgp, String fe_desde, String fe_hasta, Double ca_sueldo, String de_dias_trabajo, String id_puesto, String id_requerimiento, String id_trabajador, String co_ruc, String de_lugar_servicio, String de_servicio, String de_periodo_pago, String de_domicilio_fiscal, String de_subvencion, String de_horario_capacitacion, String de_horario_refrigerio, String de_dias_capacitacion, String es_dgp, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String ip_usuario, Double ca_bono_alimentario, Double de_bev, Double ca_centro_costos, String de_antecedentes_policiales, String de_certificado_salud, String de_monto_honorario) {
+    public DGP(String id_dgp, String fe_desde, String fe_hasta, Double ca_sueldo, String de_dias_trabajo, String id_puesto, String id_requerimiento, String id_trabajador, String co_ruc, String de_lugar_servicio, String de_servicio, String de_periodo_pago, String de_domicilio_fiscal, String de_subvencion, String de_horario_capacitacion, String de_horario_refrigerio, String de_dias_capacitacion, String es_dgp, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String ip_usuario, Double ca_bono_alimentario, Double de_bev, Double ca_centro_costos, String de_antecedentes_policiales, String de_certificado_salud, String de_monto_honorario, String no_banco, String nu_cuenta, String nu_cuenta_banc, String es_gen_nu_cuenta) {
         this.id_dgp = id_dgp;
         this.fe_desde = fe_desde;
         this.fe_hasta = fe_hasta;
@@ -71,10 +75,14 @@ public class DGP {
         this.de_antecedentes_policiales = de_antecedentes_policiales;
         this.de_certificado_salud = de_certificado_salud;
         this.de_monto_honorario = de_monto_honorario;
+        this.no_banco = no_banco;
+        this.nu_cuenta = nu_cuenta;
+        this.nu_cuenta_banc = nu_cuenta_banc;
+        this.es_gen_nu_cuenta = es_gen_nu_cuenta;
     }
-    
-    public DGP(){
-    this.id_dgp = id_dgp;
+
+    public DGP() {
+        this.id_dgp = id_dgp;
         this.fe_desde = "";
         this.fe_hasta = "";
         this.ca_sueldo = 0.0;
@@ -103,6 +111,10 @@ public class DGP {
         this.de_antecedentes_policiales = "";
         this.de_certificado_salud = "";
         this.de_monto_honorario = "";
+        this.no_banco = "";
+        this.nu_cuenta = "";
+        this.nu_cuenta_banc = "";
+        this.es_gen_nu_cuenta = "";
     }
 
     public String getId_dgp() {
@@ -337,5 +349,36 @@ public class DGP {
         this.de_monto_honorario = de_monto_honorario;
     }
 
-    
+    public String getNo_banco() {
+        return no_banco;
+    }
+
+    public void setNo_banco(String no_banco) {
+        this.no_banco = no_banco;
+    }
+
+    public String getNu_cuenta() {
+        return nu_cuenta;
+    }
+
+    public void setNu_cuenta(String nu_cuenta) {
+        this.nu_cuenta = nu_cuenta;
+    }
+
+    public String getNu_cuenta_banc() {
+        return nu_cuenta_banc;
+    }
+
+    public void setNu_cuenta_banc(String nu_cuenta_banc) {
+        this.nu_cuenta_banc = nu_cuenta_banc;
+    }
+
+    public String getEs_gen_nu_cuenta() {
+        return es_gen_nu_cuenta;
+    }
+
+    public void setEs_gen_nu_cuenta(String es_gen_nu_cuenta) {
+        this.es_gen_nu_cuenta = es_gen_nu_cuenta;
+    }
+
 }
