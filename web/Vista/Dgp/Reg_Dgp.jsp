@@ -71,7 +71,7 @@
 
 
         <script language="javascript" type="text/javascript">
-            $(document).ready(function() {
+            $(document).ready(function () {
                 $(".contenido").hide();
 
                 /*TEMPORAL*/
@@ -108,9 +108,9 @@
 
         <script>
             $(document).ready(
-                    function() {
+                    function () {
                         $("#sueldo").keyup(
-                                function() {
+                                function () {
                                     var x = parseFloat($("#sueldo").val());
                                     var y = parseFloat($("#bono_al").val());
                                     var z = parseFloat($("#bev").val());
@@ -119,7 +119,7 @@
                                 }
                         );
                         $("#bono_al").keyup(
-                                function() {
+                                function () {
                                     var x = parseFloat($("#sueldo").val());
                                     var y = parseFloat($("#bono_al").val());
                                     var z = parseFloat($("#bev").val());
@@ -128,7 +128,7 @@
                                 }
                         );
                         $("#bev").keyup(
-                                function() {
+                                function () {
                                     var x = parseFloat($("#sueldo").val());
                                     var y = parseFloat($("#bono_al").val());
                                     var z = parseFloat($("#bev").val());
@@ -149,7 +149,7 @@
         </script>
         <script>
             $(".texto-h").setMask("29:59").keypress(
-                    function() {
+                    function () {
                         var currentMask = $(this).data('mask').mask;
                         var newMask = $(this).val().match(/^2.*/) ? "23:59" : "29:59";
                         if (newMask != currentMask) {
@@ -172,11 +172,11 @@
     </head>
     <body>   
         <script>
-            $(document).ready(function() {
+            $(document).ready(function () {
                 var b = $("#alerta_dgp");
                 // $("#alerta_dgp").hide();
                 function listar() {
-                    $.post("../../plazo_dgp", "opc=Listar", function(objJson) {
+                    $.post("../../plazo_dgp", "opc=Listar", function (objJson) {
                         b.empty();
                         var lista = objJson.lista;
                         if (objJson.rpta == -1) {
@@ -211,7 +211,7 @@
                                 </div>
 
                                 <!-- Widget ID (each widget will need unique ID)-->
-                                <div class="jarviswidget" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-custombutton="false">
+                                <div class="jarviswidget" id="wid-id-2" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-custombutton="false">
                                     <!-- widget options:
                                     usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
     
@@ -410,13 +410,13 @@
                                                                 </div>
                                                                 <script type="text/javascript">
                                                                     $(document).ready(
-                                                                            function() {
+                                                                            function () {
                                                                                 $("#no_cuen").hide();
                                                                                 $("#no_cuen_ban").hide();
                                                                                 $("#generar").show();
 
 
-                                                                                $("#banco").change(function() {
+                                                                                $("#banco").change(function () {
                                                                                     if ($("#banco").val() == '1') {
                                                                                         $("#generar").hide();
                                                                                         $("#no_cuen").show();
@@ -424,9 +424,9 @@
                                                                                         $("#nu_cuen_ban").val("");
                                                                                         $("#nu_cuen").val("");
                                                                                         $("#subscription").attr('checked', false);
-                                                                                         $("#nu_cuen").attr("maxlength", "21");
-                                                                                         $("#nu_cuen").mask("0011-9999999999999999",{placeholder:"X"});
-                                                                                         
+                                                                                        $("#nu_cuen").attr("maxlength", "21");
+                                                                                        $("#nu_cuen").mask("0011-9999999999999999", {placeholder: "X"});
+
                                                                                     }
                                                                                     if ($("#banco").val() == '2') {
                                                                                         $("#generar").hide();
@@ -435,8 +435,8 @@
                                                                                         $("#nu_cuen_ban").val("");
                                                                                         $("#nu_cuen").val("");
                                                                                         $("#subscription").attr('checked', false);
-                                                                                           $("#nu_cuen").attr("maxlength", "14");
-                                                                                      $("#nu_cuen").mask("99999999999999",{placeholder:"X"});
+                                                                                        $("#nu_cuen").attr("maxlength", "14");
+                                                                                        $("#nu_cuen").mask("99999999999999", {placeholder: "X"});
 
                                                                                     }
                                                                                     if ($("#banco").val() == '3') {
@@ -504,11 +504,10 @@
                                                                 </article>
 
 
-
                                                                 <article class="col-sm-12 col-md-12 col-lg-6">
 
                                                                     <!-- Widget ID (each widget will need unique ID)-->
-                                                                    <div class="jarviswidget" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-deletebutton="false">
+                                                                    <div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-deletebutton="false">
                                                                         <!-- widget options:
                                                                         usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
                                         
@@ -611,6 +610,16 @@
                                                                                                     </select>
 
                                                                                                 </td>
+
+                                                                                                <td>
+                                                                                                    <label class="title">SABADO</label>
+                                                                                                    <select id="sabado"  >
+
+                                                                                                        <option value="1">Habilitado</option>
+                                                                                                        <option value="2" selected="">Deshabilitado</option>
+                                                                                                    </select>
+
+                                                                                                </td>
                                                                                                 <td><label class="title">DOMINGO</label>
                                                                                                     <select id="domingo" >
 
@@ -627,15 +636,10 @@
                                                                                                 <tr class="tr-count"><td>T1 :</td><td><input type="text" name="HORA_DESDE_lun1" id="HORA_DESDE_lun1" class="texto-h" ></td>      
                                                                                                     <td><input type="text" name="HORA_HASTA_lun1" id="HORA_HASTA_lun1" class="texto-h" ></td></tr>         
                                                                                                 <input type="hidden" name="DIA_lun1" value="lun" >                    
-                                                                                                <input type="hidden" name="USER_CREACION_lun1"  >   
 
                                                                                                 <tr class="tr-count"><td>T2 :</td><td><input type="text" name="HORA_DESDE_lun2" id="HORA_DESDE_lun2" class="texto-h" ></td>           
                                                                                                     <td ><input type="text" name="HORA_HASTA_lun2" id="HORA_HASTA_lun2" class="texto-h" ><a  id="remScnt" >-</a></td></tr>      
                                                                                                 <input type="hidden" name="DIA_lun2" value="lun">                    
-
-                                                                                                <input type="hidden" name="USER_CREACION_lun2"  >   
-
-
                                                                                                 <tr><td colspan="2"><a href="#" id="addScnt">+</a></td></tr>
 
                                                                                             </table>
@@ -644,18 +648,14 @@
                                                                                                 <tr><td align="center" colspan="2">Martes</td></tr>
                                                                                                 <tr class="tr-count_2"><td>T1 :</td><td><input type="text" name="HORA_DESDE_mar1" id="HORA_DESDE_mar1" class="texto-h" ></td>             
                                                                                                     <td><input type="text" name="HORA_HASTA_mar1" id="HORA_HASTA_mar1" class="texto-h" ></td></tr>         
-                                                                                                <input type="hidden" name="DIA_mar1" value="mar" class="texto-h" >                    
-
-
-                                                                                                <input type="hidden" name="USER_CREACION_mar1" class="texto-h" >   
+                                                                                                <input type="hidden" name="DIA_mar1" value="mar" >                    
 
                                                                                                 <tr class="tr-count_2"><td>T2 :</td><td><input type="text" name="HORA_DESDE_mar2" id="HORA_DESDE_mar2" class="texto-h" ></td>             
                                                                                                     <td><input type="text" name="HORA_HASTA_mar2"  id="HORA_HASTA_mar2" class="texto-h" ><a href="#" id="remove_2">-</a></td></tr>         
-                                                                                                <input type="hidden" name="DIA_mar2" value="mar" class="texto-h">    
+                                                                                                <input type="hidden" name="DIA_mar2" value="mar" >    
 
                                                                                                 <tr><td colspan="2"><a href="#" id="add_2">+</a></td></tr>
 
-                                                                                                <input type="hidden" name="USER_CREACION_mar2" class="texto-h" >   
 
 
 
@@ -668,18 +668,14 @@
                                                                                             <table id="show_3" class="cont_miercoles">     
                                                                                                 <tr ><td align="center" colspan="2">Miercoles</td></tr>
                                                                                                 <tr class="tr-count_3"><td>T1 :</td><td><input type="text" name="HORA_DESDE_mie1" id="HORA_DESDE_mier1" class="texto-h" ></td>           
-                                                                                                    <td><input type="text" name="HORA_HASTA_mie1" id="HORA_HASTA_mier1" class="texto-h" ></td></tr>         
-                                                                                                <input type="hidden" name="DIA_mie1" value="mie" class="texto-h" >                    
+                                                                                                    <td><input type="text" name="HORA_HASTA_mie1" id="HORA_HASTA_mier1" ></td></tr>         
+                                                                                                <input type="hidden" name="DIA_mie1" value="mie">                    
 
 
-                                                                                                <input type="hidden" name="USER_CREACION_mie1" class="texto-h" >   
 
                                                                                                 <tr class="tr-count_3"><td>T2 :</td><td><input type="text" name="HORA_DESDE_mie2" id="HORA_DESDE_mier2" class="texto-h" ></td>           
                                                                                                     <td><input type="text" name="HORA_HASTA_mie2" id="HORA_HASTA_mier2" class="texto-h" ><a href="#" id="remove_3">-</a></td></tr>         
-                                                                                                <input type="hidden" name="DIA_mie2" value="mie" class="texto-h" >                    
-
-
-                                                                                                <input type="hidden" name="USER_CREACION_mie2" class="texto-h" >   
+                                                                                                <input type="hidden" name="DIA_mie2" value="mie"  >                    
 
                                                                                                 <tr><td colspan="2"><a href="#" id="add_3">+</a></td></tr>
                                                                                             </table>
@@ -689,44 +685,38 @@
                                                                                                 <tr><td align="center" colspan="2">Jueves</td></tr>
                                                                                                 <tr class="tr-count_4"><td>T1 :</td><td><input type="text" name="HORA_DESDE_jue1" id="HORA_DESDE_jue1" class="texto-h" ></td>            
                                                                                                     <td><input type="text" name="HORA_HASTA_jue1" id="HORA_HASTA_jue1" class="texto-h" ></td></tr>         
-                                                                                                <input type="hidden" name="DIA_jue1" value="jue" class="texto-h" >                    
-
-
-                                                                                                <input type="hidden" name="USER_CREACION_jue1" class="texto-h" >   
-
+                                                                                                <input type="hidden" name="DIA_jue1" value="jue"  >           
+                                                                                                
+                                                                                                
                                                                                                 <tr class="tr-count_4"><td>T2 :</td><td><input type="text" name="HORA_DESDE_jue2" id="HORA_DESDE_jue2" class="texto-h" ></td>          
                                                                                                     <td><input type="text" name="HORA_HASTA_jue2" id="HORA_HASTA_jue2" class="texto-h" ><a href="#" id="remove_4">-</a></td></tr>         
-                                                                                                <input type="hidden" name="DIA_jue2" value="jue" class="texto-h" >                    
-
-
-                                                                                                <input type="hidden" name="USER_CREACION_jue2" class="texto-h" >   
+                                                                                                <input type="hidden" name="DIA_jue2" value="jue"  >                    
                                                                                                 <tr><td colspan="2"><a href="#" id="add_4">+</a></td></tr>
                                                                                             </table>
-
-
                                                                                             <table id="show_5" class="cont_viernes">     
                                                                                                 <tr><td align="center" colspan="2">Viernes</td></tr>
                                                                                                 <tr class="tr-count_5"><td>T1 :</td><td><input type="text" name="HORA_DESDE_vie1"  id="HORA_DESDE_vie1" class="texto-h" ></td>
                                                                                                     <td><input type="text" name="HORA_HASTA_vie1" id="HORA_HASTA_vie1" class="texto-h" ></td></tr>         
-                                                                                                <input type="hidden" name="DIA_vie1" value="vie" class="texto-h" >                    
-                                                                                                <input type="hidden" name="USER_CREACION_vie1" class="texto-h" >   
+                                                                                                <input type="hidden" name="DIA_vie1" value="vie"  >                    
                                                                                                 <tr><td colspan="2"><a href="#" id="add_5">+</a></td></tr>
                                                                                             </table>
-                                                                                            <table id="show_6" class="cont_domingo" >
-                                                                                                <tr><td align="center" colspan="2">Domingo</td></tr>
-                                                                                                <tr class="tr-count_6"><td>T1 :</td><td><input type="text" name="HORA_DESDE_dom1"  id="HORA_DESDE_dom1" class="texto-h" ></td>
-                                                                                                    <td><input type="text" name="HORA_HASTA_dom1"  id="HORA_HASTA_dom1" class="texto-h" ></td></tr>         
-                                                                                                <input type="hidden" name="DIA_dom1" value="dom" class="texto-h" >                    
-
-
-                                                                                                <input type="hidden" name="USER_CREACION_dom1" class="texto-h" >   
-
-                                                                                                <tr class="tr-count_6"><td>T2 :</td><td><input type="text" name="HORA_DESDE_dom2"  id="HORA_DESDE_dom2" class="texto-h" ></td>
-                                                                                                    <td><input type="text" name="HORA_HASTA_dom2"  id="HORA_HASTA_dom2" class="texto-h" ><a href="#" id="remove_6">-</a></td></tr>         
-                                                                                                <input type="hidden" name="DIA_dom2" value="dom" class="texto-h" >                    
-
+                                                                                            <table id="show_6" class="cont_sabado">     
+                                                                                                <tr><td align="center" colspan="2">Sábado</td></tr>
+                                                                                                <tr class="tr-count_6"><td>T1 :</td><td><input type="text" name="HORA_DESDE_sab1"  id="HORA_DESDE_sab1" class="texto-h" ></td>
+                                                                                                    <td><input type="text" name="HORA_HASTA_sab1" id="HORA_HASTA_sab1" class="texto-h" ></td></tr>         
+                                                                                                <input type="hidden" name="DIA_sab1" value="sab"  />                    
                                                                                                 <tr><td colspan="2"><a href="#" id="add_6">+</a></td></tr>
-                                                                                                <input type="hidden" name="USER_CREACION_dom2" class="texto-h" >   
+                                                                                            </table>
+                                                                                            <table id="show_7" class="cont_domingo" >
+                                                                                                <tr><td align="center" colspan="2">Domingo</td></tr>
+                                                                                                <tr class="tr-count_7"><td>T1 :</td><td><input type="text" name="HORA_DESDE_dom1"  id="HORA_DESDE_dom1" class="texto-h" ></td>
+                                                                                                    <td><input type="text" name="HORA_HASTA_dom1"  id="HORA_HASTA_dom1" class="texto-h" ></td></tr>         
+                                                                                                <input type="hidden" name="DIA_dom1" value="dom" >                    
+
+                                                                                                <tr class="tr-count_7"><td>T2 :</td><td><input type="text" name="HORA_DESDE_dom2"  id="HORA_DESDE_dom2" class="texto-h" ></td>
+                                                                                                    <td><input type="text" name="HORA_HASTA_dom2"  id="HORA_HASTA_dom2" class="texto-h" ><a href="#" id="remove_7">-</a></td></tr>         
+                                                                                                <input type="hidden" name="DIA_dom2" value="dom"  >                    
+                                                                                                <tr><td colspan="2"><a href="#" id="add_7">+</a></td></tr>
                                                                                             </table>
                                                                                             <div class="h_total">Horas Totales : 00:00 horas</div>
                                                                                         </div>
@@ -767,14 +757,16 @@
                                                                 <script language="javascript" type="text/javascript">
                                                                     $(document).ready(
                                                                             function mostrar() {
+                                                                                $(".texto-h").mask("99:99", {placeholder: "X"});
                                                                                 $(".cont_lunes").hide();
                                                                                 $(".cont_martes").hide();
                                                                                 $(".cont_miercoles").hide();
                                                                                 $(".cont_jueves").hide();
                                                                                 $(".cont_viernes").hide();
+                                                                                $(".cont_sabado").hide();
                                                                                 $(".cont_domingo").hide();
                                                                                 $("#lunes").change(
-                                                                                        function() {
+                                                                                        function () {
                                                                                             if ($(this).val() == 1) {
                                                                                                 $("#show_1").show();
                                                                                             }
@@ -785,7 +777,7 @@
                                                                                         }
                                                                                 );
                                                                                 $("#martes").change(
-                                                                                        function() {
+                                                                                        function () {
                                                                                             if ($(this).val() == 1) {
                                                                                                 $("#show_2").show();
                                                                                             }
@@ -796,46 +788,57 @@
                                                                                         }
                                                                                 );
                                                                                 $("#miercoles").change(
-                                                                                        function() {
+                                                                                        function () {
                                                                                             if ($(this).val() == 1) {
                                                                                                 $("#show_3").show();
                                                                                             }
                                                                                             if ($(this).val() == 2) {
                                                                                                 $(".cont_miercoles").hide();
-                                                                                                $("#show_1 input").val("");
+                                                                                                $("#show_3 input").val("00:00");
                                                                                             }
                                                                                         }
                                                                                 );
                                                                                 $("#jueves").change(
-                                                                                        function() {
+                                                                                        function () {
                                                                                             if ($(this).val() == 1) {
                                                                                                 $("#show_4").show();
                                                                                             }
                                                                                             if ($(this).val() == 2) {
                                                                                                 $(".cont_jueves").hide();
-                                                                                                $("#show_1 input").val("");
+                                                                                                $("#show_4 input").val("");
                                                                                             }
                                                                                         }
                                                                                 );
                                                                                 $("#viernes").change(
-                                                                                        function() {
+                                                                                        function () {
                                                                                             if ($(this).val() == 1) {
                                                                                                 $("#show_5").show();
                                                                                             }
                                                                                             if ($(this).val() == 2) {
                                                                                                 $(".cont_viernes").hide();
-                                                                                                $("#show_1 input").val("");
+                                                                                                $("#show_5 input").val("");
                                                                                             }
                                                                                         }
                                                                                 );
-                                                                                $("#domingo").change(
-                                                                                        function() {
+                                                                                $("#sabado").change(
+                                                                                        function () {
                                                                                             if ($(this).val() == 1) {
                                                                                                 $("#show_6").show();
                                                                                             }
                                                                                             if ($(this).val() == 2) {
+                                                                                                $(".cont_sabado").hide();
+                                                                                                $("#show_6 input").val("");
+                                                                                            }
+                                                                                        }
+                                                                                );
+                                                                                $("#domingo").change(
+                                                                                        function () {
+                                                                                            if ($(this).val() == 1) {
+                                                                                                $("#show_7").show();
+                                                                                            }
+                                                                                            if ($(this).val() == 2) {
                                                                                                 $(".cont_domingo").hide();
-                                                                                                $("#show_1 input").val("");
+                                                                                                $("#show_7 input").val("");
                                                                                             }
                                                                                         }
                                                                                 );
@@ -845,48 +848,73 @@
                                                                 <script  language="javascript" type="text/javascript">
 
                                                                     function calcularHoras() {
-                                                                        var dias_semana = new Array("lun", "mar", "mier", "jue", "vie", "dom");
+                                                                        var dias_semana = new Array("lun", "mar", "mier", "jue", "vie", "sab", "dom");
                                                                         var acum = 0;
                                                                         for (var i = 0; i < dias_semana.length; i++) {
 
                                                                             for (var j = 0, max = 5; j < max; j++) {
+                                                                                var horaTurno = 0;
                                                                                 //var str = $("#HORA_DESDE_" + dias_semana[i] + j).val();
 
                                                                                 var Desde = $("#HORA_DESDE_" + dias_semana[i] + j).val();
                                                                                 var Hasta = $("#HORA_HASTA_" + dias_semana[i] + j).val();
-                                                                                //  var arrDesde = $(str).val().split(":");
-                                                                                if (typeof Desde !== 'undefined' && typeof Hasta !== 'undefined') {
-                                                                                    var arrDesde = Desde.split(":");
-                                                                                    var arrHasta = Hasta.split(":");
-                                                                                    var horaTurno = (((parseInt(arrHasta[0]) * 60) + (parseInt(arrHasta[1]))) - ((parseInt(arrDesde[0]) * 60) + (parseInt(arrDesde[1]))));
-                                                                                    acum = acum + horaTurno;
+
+                                                                                if ($("#HORA_DESDE_" + dias_semana[i] + j).val() == null) {
+                                                                                    Desde = "00:00";
+                                                                                    Hasta = "00:00";
                                                                                 }
+                                                                                //  var arrDesde = $(str).val().split(":");
+                                                                                //if (typeof Desde !== 'undefined' && typeof Hasta !== 'undefined') {
+                                                                                var arrDesde = Desde.split(":");
+                                                                                var arrHasta = Hasta.split(":");
+                                                                                horaTurno = (((parseInt(arrHasta[0]) * 60) + (parseInt(arrHasta[1]))) - ((parseInt(arrDesde[0]) * 60) + (parseInt(arrDesde[1]))));
+
+
+
+                                                                                //alert(horaTurno);
+
+                                                                                acum = acum + horaTurno;
+                                                                                // }
                                                                             }
                                                                         }
+                                                                          var minutos_totales=acum;
                                                                         acum = acum / 60;
                                                                         var min = ((acum - parseInt(acum)) * 60);
                                                                         min = parseInt(min.toPrecision(2));
                                                                         acum = parseInt(acum);
-                                                                        $(".h_total").text("Hora Semanal Total :" + acum + ":" + min + " Horas.");
+
+                                                                        $(".h_total").text("Hora Semanal Total : " + acum + ":" + min + " Horas.");
+                                                                        if (minutos_totales > 2880) {
+                                                                        
+                                                                        }
                                                                     }
-                                                                    $(document).ready(function() {
+                                                                    $(document).ready(function () {
 
 
                                                                         $(".texto-h").keyup(
-                                                                                function() {
+                                                                                function () {
                                                                                     calcularHoras();
+                                                                                  
                                                                                 }
-
                                                                         );
                                                                         $("#horario").change(
-                                                                                function() {
+                                                                                function () {
                                                                                     if ($(this).val() == 0) {
                                                                                         $(".cont_lunes").hide();
                                                                                         $(".cont_martes").hide();
                                                                                         $(".cont_miercoles").hide();
                                                                                         $(".cont_jueves").hide();
                                                                                         $(".cont_viernes").hide();
+                                                                                        $(".cont_sabado").hide();
                                                                                         $(".cont_domingo").hide();
+
+                                                                                        $("#lunes").val(2);
+                                                                                        $("#martes").val(2);
+                                                                                        $("#miercoles").val(2);
+                                                                                        $("#jueves").val(2);
+                                                                                        $("#viernes").val(2);
+                                                                                        $("#sabado").val(2);
+                                                                                        $("#domingo").val(2);
                                                                                     }
                                                                                     if ($(this).val() == 1) {
                                                                                         $("#show_1").show();
@@ -894,13 +922,15 @@
                                                                                         $("#show_3").show();
                                                                                         $("#show_4").show();
                                                                                         $("#show_5").show();
-                                                                                        $("#show_6").show();
+                                                                                        //    $("#show_6").show();
+                                                                                        $("#show_7").show();
+
                                                                                         $("#lunes").val(1);
                                                                                         $("#martes").val(1);
                                                                                         $("#miercoles").val(1);
                                                                                         $("#jueves").val(1);
                                                                                         $("#viernes").val(1);
-                                                                                        $("#sabado").val(1);
+                                                                                        //$("#sabado").val(1);
                                                                                         $("#domingo").val(1);
                                                                                         document.getElementById("HORA_DESDE_lun1").value = "7:50";
                                                                                         document.getElementById("HORA_HASTA_lun1").value = "12:30";
@@ -920,6 +950,8 @@
                                                                                         document.getElementById("HORA_HASTA_jue2").value = "17:30";
                                                                                         document.getElementById("HORA_DESDE_vie1").value = "7:50";
                                                                                         document.getElementById("HORA_HASTA_vie1").value = "12:30";
+                                                                                        document.getElementById("HORA_DESDE_sab1").value = "00:00";
+                                                                                        document.getElementById("HORA_HASTA_sab1").value = "00:00";
                                                                                         document.getElementById("HORA_DESDE_dom1").value = "7:50";
                                                                                         document.getElementById("HORA_HASTA_dom1").value = "12:30";
                                                                                         document.getElementById("HORA_DESDE_dom2").value = "13:30";
@@ -930,17 +962,17 @@
                                                                         );
                                                                     });</script>
                                                                 <script type="text/javascript">
-                                                                    $(document).ready(function() {
+                                                                    $(document).ready(function () {
                                                                         var scntDiv = $('#show_1');
                                                                         var i = $('#show_1 .texto-h').size() + 1;
                                                                         var s = $('#show_1 .tr-count').size() + 1;
-                                                                        $('#addScnt').click(function() {
+                                                                        $('#addScnt').click(function () {
                                                                             $('<tr><td>T' + s + ' :</td><td><input type="text"   name="HORA_DESDE_lun' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_lun' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_lun' + i + '" value="lun" ><input type="hidden" name="USER_CREACION_lun' + i + '"> <a href="#" id="remScnt">-</a></td></tr>').appendTo(scntDiv);
                                                                             i++;
                                                                             s++;
                                                                             return false;
                                                                         });
-                                                                        $('#remScnt').click(function() {
+                                                                        $('#remScnt').click(function () {
                                                                             if (i > 2) {
                                                                                 $(this).parents('tr').remove();
                                                                                 //  $("#tr-d").remove();           
@@ -951,18 +983,18 @@
                                                                         });
                                                                     });
                                                                     //MARTES
-                                                                    $(function() {
+                                                                    $(function () {
                                                                         var scntDiv = $('#show_2');
                                                                         var i = $('#show_2 .texto-h').size() + 1;
                                                                         var s = $('#show_2 .tr-count_2').size() + 1;
-                                                                        $('#add_2').click(function() {
+                                                                        $('#add_2').click(function () {
 
                                                                             $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_mar' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_mar' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_mar' + i + '" value="mar" ><input type="hidden" name="USER_CREACION_mar' + i + '"> <a href="#" id="remove_2">-</a></td></tr>').appendTo(scntDiv);
                                                                             i++;
                                                                             s++;
                                                                             return false;
                                                                         });
-                                                                        $('#remove_2').click(function() {
+                                                                        $('#remove_2').click(function () {
                                                                             if (i > 2) {
                                                                                 $(this).parents('tr').remove();
                                                                                 //  $("#tr-d").remove();           
@@ -973,18 +1005,18 @@
                                                                         });
                                                                     });
                                                                     //MIERCOLES
-                                                                    $(function() {
+                                                                    $(function () {
                                                                         var scntDiv = $('#show_3');
                                                                         var i = $('#show_3 .texto-h').size() + 1;
                                                                         var s = $('#show_3 .tr-count_3').size() + 1;
-                                                                        $('#add_3').click(function() {
+                                                                        $('#add_3').click(function () {
 
                                                                             $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_mie' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_mie' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_mie' + i + '" value="mie" ><input type="hidden" name="USER_CREACION_mie' + i + '"> <a href="#" id="remove_3">-</a></td></tr>').appendTo(scntDiv);
                                                                             i++;
                                                                             s++;
                                                                             return false;
                                                                         });
-                                                                        $('#remove_3').click(function() {
+                                                                        $('#remove_3').click(function () {
                                                                             if (i > 2) {
                                                                                 $(this).parents('tr').remove();
                                                                                 //  $("#tr-d").remove();           
@@ -995,18 +1027,18 @@
                                                                         });
                                                                     });
                                                                     //JUEVES
-                                                                    $(function() {
+                                                                    $(function () {
                                                                         var scntDiv = $('#show_4');
                                                                         var i = $('#show_4 .texto-h').size() + 1;
                                                                         var s = $('#show_4 .tr-count_4').size() + 1;
-                                                                        $('#add_4').click(function() {
+                                                                        $('#add_4').click(function () {
 
                                                                             $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_jue' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_jue' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_jue' + i + '" value="jue" ><input type="hidden" name="USER_CREACION_jue' + i + '"> <a href="#" id="remove_4">-</a></td></tr>').appendTo(scntDiv);
                                                                             i++;
                                                                             s++;
                                                                             return false;
                                                                         });
-                                                                        $('#remove_4').click(function() {
+                                                                        $('#remove_4').click(function () {
                                                                             if (i > 2) {
                                                                                 $(this).parents('tr').remove();
                                                                                 //  $("#tr-d").remove();           
@@ -1017,18 +1049,18 @@
                                                                         });
                                                                     });
                                                                     //VIERNES
-                                                                    $(function() {
+                                                                    $(function () {
                                                                         var scntDiv = $('#show_5');
                                                                         var i = $('#show_5 .texto-h').size() + 1;
                                                                         var s = $('#show_5 .tr-count_5').size() + 1;
-                                                                        $('#add_5').click(function() {
+                                                                        $('#add_5').click(function () {
 
                                                                             $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_vie' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_vie' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_vie' + i + '" value="vie" ><input type="hidden" name="USER_CREACION_vie' + i + '"> <a href="#" id="remove_5">-</a></td></tr>').appendTo(scntDiv);
                                                                             i++;
                                                                             s++;
                                                                             return false;
                                                                         });
-                                                                        $('#remove_5').click(function() {
+                                                                        $('#remove_5').click(function () {
                                                                             if (i > 2) {
                                                                                 $(this).parents('tr').remove();
                                                                                 //  $("#tr-d").remove();           
@@ -1039,18 +1071,18 @@
                                                                         });
                                                                     });
                                                                     //DOMINGO
-                                                                    $(function() {
+                                                                    $(function () {
                                                                         var scntDiv = $('#show_6');
                                                                         var i = $('#show_6 .texto-h').size() + 1;
                                                                         var s = $('#show_6 .tr-count_6').size() + 1;
-                                                                        $('#add_6').click(function() {
+                                                                        $('#add_6').click(function () {
 
                                                                             $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_dom' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_dom' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_dom' + i + '" value="dom" ><input type="hidden" name="USER_CREACION_dom' + i + '"> <a href="#" id="remove_6">-</a></td></tr>').appendTo(scntDiv);
                                                                             i++;
                                                                             s++;
                                                                             return false;
                                                                         });
-                                                                        $('#remove_6').click(function() {
+                                                                        $('#remove_6').click(function () {
                                                                             if (i > 2) {
                                                                                 $(this).parents('tr').remove();
                                                                                 //  $("#tr-d").remove();           
@@ -1140,7 +1172,7 @@
 
                                                                     // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-                                                                    $(document).ready(function() {
+                                                                    $(document).ready(function () {
 
                                                                         pageSetUp();
                                                                     })
@@ -1152,7 +1184,7 @@
                                                                     var _gaq = _gaq || [];
                                                                     _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
                                                                     _gaq.push(['_trackPageview']);
-                                                                    (function() {
+                                                                    (function () {
                                                                         var ga = document.createElement('script');
                                                                         ga.type = 'text/javascript';
                                                                         ga.async = true;
