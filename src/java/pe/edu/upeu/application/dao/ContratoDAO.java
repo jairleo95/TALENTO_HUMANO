@@ -38,7 +38,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
             cst.setString(2, ID_DGP);
             cst.setString(3, c.convertFecha(FE_DESDE));
             cst.setString(4, c.convertFecha(FE_HASTA));
-            cst.setString(5, null);
+            cst.setString(5, c.convertFecha(FE_CESE));
             cst.setString(6, ID_FUNC);
             cst.setString(7, LI_CONDICION);
             cst.setDouble(8, CA_SUELDO);
@@ -160,6 +160,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 icd.setEs_registro_huella(rs.getString("es_registro_huella"));
                 icd.setDe_registro_sistem_remu(rs.getString("de_registro_sistem_remu"));
                 icd.setId_trabajador(rs.getString("id_trabajador"));
+                icd.setId_centro_costo(rs.getString("id_centro_costo"));
                 icd.setNo_puesto(rs.getString("no_puesto"));
                 icd.setNo_seccion(rs.getString("no_seccion"));
                 icd.setNo_dep(rs.getString("no_dep"));

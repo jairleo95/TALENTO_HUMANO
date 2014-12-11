@@ -88,7 +88,7 @@
                         </select></td></tr>
                 <tr><td>Centro de Costo:</td><td>
                         <select name="CENTRO_COSTO" class="text-box"  >
-                            <option value=""><%=List_centro_costo.size()%></option>
+                            <option value="">[SELECCIONE]</option>
                             <%for (int h = 0; h < List_centro_costo.size(); h++) {
                                     Centro_Costos c = new Centro_Costos();
                                     c = (Centro_Costos) List_centro_costo.get(h);

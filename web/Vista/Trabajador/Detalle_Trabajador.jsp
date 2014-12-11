@@ -161,7 +161,7 @@
             }
         } else {
         %>
-    <body >
+    <body>
         <%}%>
         <%
 
@@ -393,7 +393,7 @@
 
         <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
         <script src="../../HTML_version/js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
-
+        
         <!-- BOOTSTRAP JS -->
         <script src="../../HTML_version/js/bootstrap/bootstrap.min.js"></script>
 

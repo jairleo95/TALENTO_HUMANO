@@ -96,7 +96,7 @@ public class CContrato extends HttpServlet {
                 getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
                 getServletContext().setAttribute("List_centro_costo", cc.List_centro_costo());
                 getServletContext().setAttribute("Listar_Direccion", dir.Listar_Direccion());
-                getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
+                getServletContext().setAttribute("List_centro_costo", cc.List_centro_costo());
                 int num = dht.ASIGNACION_F(idtr);
                 // out.println(num);
                 response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp?num=" + num);
@@ -150,7 +150,7 @@ public class CContrato extends HttpServlet {
                 String ID_DEPARTAMENTO = "";
                 String ID_AREA = request.getParameter("AREA_ID");
                 String ID_PUESTO = request.getParameter("PUESTO_ID");
-                String ID_SEC = sec.ID_SECCION(ID_PUESTO);
+                String ID_SEC = sec.ID_SECCION(ID_PUESTO).trim();
                 Double CA_BONO_ALIMENTO = Double.parseDouble(request.getParameter("BONO_ALIMENTO"));
                 String LI_TIPO_CONVENIO = request.getParameter("TIPO_CONVENIO");
                 String ES_FIRMO_CONTRATO = "1";
@@ -171,9 +171,9 @@ public class CContrato extends HttpServlet {
                
                 String ID_CENTRO_COSTO = request.getParameter("CENTRO_COSTO");
                 Double CA_SUELDO_TOTAL = Double.parseDouble(request.getParameter("TOTAL_SUELDO"));
-                String ID_REGIMEN_LABORAL = request.getParameter("REGIMEN_LABORAL");
+                String ID_REGIMEN_LABORAL = request.getParameter("REG_LAB_MINTRA");
                 String ID_MODALIDAD = request.getParameter("MODALIDAD");
-                String ID_SUB_MODALIDAD = request.getParameter("SUB_MODALIDAD");
+                String ID_SUB_MODALIDAD = request.getParameter("SUB_MODALIDAD").trim();
                 String CO_GR_OCUPACION = request.getParameter("CO_GRUPO_OCU");
                 String FE_SUSCRIPCION = request.getParameter("FECHA_SUSCRIPCION");
                 String CO_TI_MONEDA = request.getParameter("TIPO_MONEDA");
@@ -188,7 +188,7 @@ public class CContrato extends HttpServlet {
                 
                 out.println("sdñogjlkgjlksdjlk");
                 
-                con.INSERT_CONTRATO(ID_CONTRATO, ID_DGP, FE_DESDE, FE_HASTA, FE_CESE, ID_FUNC, LI_CONDICION, CA_SUELDO, CA_REINTEGRO, CA_ASIG_FAMILIAR, HO_SEMANA, NU_HORAS_LAB, DIA_CONTRATO, TI_TRABAJADOR, LI_REGIMEN_LABORAL, ES_DISCAPACIDAD, TI_CONTRATO, LI_REGIMEN_PENSIONARIO, ES_CONTRATO_TRABAJADOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, US_IP, FE_VACACIO_INI, FE_VACACIO_FIN, ES_CONTRATO, ID_FILIAL, ID_DIRECCION, ID_DEPARTAMENTO, ID_AREA, null, ID_PUESTO, CA_BONO_ALIMENTO, LI_TIPO_CONVENIO, ES_FIRMO_CONTRATO, NU_CONTRATO, DE_OBSERVACION, ES_APOYO, TI_HORA_PAGO, NU_DOCUMENTO, ID_ANNO, ES_ENTREGAR_DOC_REGLAMENTOS, ES_REGISTRO_HUELLA, DE_REGISTRO_SISTEM_REMU, ID_TRABAJADOR, ID_CENTRO_COSTO, CA_SUELDO_TOTAL, ID_REGIMEN_LABORAL, ID_MODALIDAD, ID_SUB_MODALIDAD, CO_GR_OCUPACION, FE_SUSCRIPCION, CO_TI_MONEDA, CO_TI_REM_VARIAB, DE_REMU_ESPECIE, DE_RUC_EMP_TRAB, CO_SUCURSAL, DE_MYPE, ES_TI_CONTRATACION, CA_BEV);
+                con.INSERT_CONTRATO(ID_CONTRATO, ID_DGP, FE_DESDE, FE_HASTA, FE_CESE, ID_FUNC, LI_CONDICION, CA_SUELDO, CA_REINTEGRO, CA_ASIG_FAMILIAR, HO_SEMANA, NU_HORAS_LAB, DIA_CONTRATO, TI_TRABAJADOR, LI_REGIMEN_LABORAL, ES_DISCAPACIDAD, TI_CONTRATO, LI_REGIMEN_PENSIONARIO, ES_CONTRATO_TRABAJADOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, US_IP, FE_VACACIO_INI, FE_VACACIO_FIN, ES_CONTRATO, ID_FILIAL, ID_DIRECCION, ID_DEPARTAMENTO, ID_AREA, ID_SEC, ID_PUESTO, CA_BONO_ALIMENTO, LI_TIPO_CONVENIO, ES_FIRMO_CONTRATO, NU_CONTRATO, DE_OBSERVACION, ES_APOYO, TI_HORA_PAGO, NU_DOCUMENTO, ID_ANNO, ES_ENTREGAR_DOC_REGLAMENTOS, ES_REGISTRO_HUELLA, DE_REGISTRO_SISTEM_REMU, ID_TRABAJADOR, ID_CENTRO_COSTO, CA_SUELDO_TOTAL, ID_REGIMEN_LABORAL, ID_MODALIDAD, ID_SUB_MODALIDAD, CO_GR_OCUPACION, FE_SUSCRIPCION, CO_TI_MONEDA, CO_TI_REM_VARIAB, DE_REMU_ESPECIE, DE_RUC_EMP_TRAB, CO_SUCURSAL, DE_MYPE, ES_TI_CONTRATACION, CA_BEV);
 
                 /*Cambiar este for con un trigger al momento de insertar*/
                 for (int i = 0; i < con.List_Rh_Contrato_Idtr().size(); i++) {
@@ -206,6 +206,7 @@ public class CContrato extends HttpServlet {
                 getServletContext().setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
                 getServletContext().setAttribute("List_ID_User", usu.List_ID_User(US_CREACION));
                 getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
+                getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
                 getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
 
                 response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp?ida1=" + ida1);
