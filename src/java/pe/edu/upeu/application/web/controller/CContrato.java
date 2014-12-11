@@ -18,7 +18,9 @@ import pe.edu.upeu.application.dao.Centro_CostosDAO;
 import pe.edu.upeu.application.dao.ContratoDAO;
 import pe.edu.upeu.application.dao.Datos_Hijo_TrabajadorDAO;
 import pe.edu.upeu.application.dao.DgpDAO;
+import pe.edu.upeu.application.dao.DireccionDAO;
 import pe.edu.upeu.application.dao.EmpleadoDAO;
+import pe.edu.upeu.application.dao.GrupoOcupacionesDAO;
 import pe.edu.upeu.application.dao.ListaDAO;
 import pe.edu.upeu.application.dao.PlantillaDAO;
 import pe.edu.upeu.application.dao.PuestoDAO;
@@ -31,7 +33,9 @@ import pe.edu.upeu.application.dao_imp.InterfaceCentro_CostosDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceContratoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDatos_Hijo_Trabajador;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceEmpleadoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceGrupo_ocupacionesDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePlantillaDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
@@ -68,6 +72,8 @@ public class CContrato extends HttpServlet {
     InterfaceUsuarioDAO usu = new UsuarioDAO();
     InterfaceTrabajadorDAO tr = new TrabajadorDAO();
     InterfaceCentro_CostosDAO cc = new Centro_CostosDAO();
+    InterfaceDireccionDAO dir=new DireccionDAO();
+    InterfaceGrupo_ocupacionesDAO gr=new GrupoOcupacionesDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -89,6 +95,8 @@ public class CContrato extends HttpServlet {
                 getServletContext().setAttribute("List_modalidad", con.List_modalidad());    
                 getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
                 getServletContext().setAttribute("List_centro_costo", cc.List_centro_costo());
+                getServletContext().setAttribute("Listar_Direccion", dir.Listar_Direccion());
+                getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
                 int num = dht.ASIGNACION_F(idtr);
                 // out.println(num);
                 response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp?num=" + num);

@@ -25,7 +25,7 @@ public class Centro_CostosDAO implements InterfaceCentro_CostosDAO{
     @Override
     public List<Centro_Costos> List_centro_costo() {
          this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from RHTR_CENTRO_COSTO ";
+        String sql = "select * from RHTR_CENTRO_COSTO order by DE_CENTRO_COSTO";
         List<Centro_Costos> list = new ArrayList<Centro_Costos>();
         try {
             ResultSet rs = this.conn.query(sql);

@@ -1,3 +1,5 @@
+<%@page import="pe.edu.upeu.application.model.Grupo_Ocupaciones"%>
+<%@page import="pe.edu.upeu.application.model.Direccion"%>
 <%@page import="pe.edu.upeu.application.model.Centro_Costos"%>
 <%@page import="pe.edu.upeu.application.model.Regimen_Laboral"%>
 <%@page import="pe.edu.upeu.application.model.Modalidad"%>
@@ -15,6 +17,7 @@
 <jsp:useBean id="List_modalidad" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="list_reg_labo" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_centro_costo" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_grup_ocu" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html >
 
 <html>
@@ -27,7 +30,7 @@
     </head>
     <body>
     <center> 
-        <label class="title">Información Contractual</label>
+        <label class="title">Info Contrato</label>
         <br>
         <br>
 
@@ -46,7 +49,9 @@
         <a href="Reg_Contrato.php?hac_cont=1&idtr=<? echo $idtr;?>">Hacer Contrato de Todas Maneras</a>
 
         <%} else {%>
-        <form class="form" action="../../contrato" > 
+
+        <form class="form" action="../../contrato" id="Reg_con"> 
+
             <table class="table">      
                 <tr><td>Año :</td><td>
                         <select name="AÑO_ID" class="text-box" required="" >
@@ -67,10 +72,11 @@
                 <input type="hidden" name="IDDETALLE_DGP" value="<%=d.getId_dgp()%>" class="text-box"  >
                 <tr><td>Desde:</td><td><input type="date" value="<%=d.getFe_desde()%>" name="FEC_DESDE" class="text-box"  required="" >Hasta:<input type="date" name="FEC_HASTA"  value="<%=d.getFe_hasta()%>" class="text-box" required=""  ></td></tr> 
                 <tr><td>Puesto:</td><td>
-                        <select name="PUESTO_ID" class="text-box"  required="" >
+                        <select name="PUESTO_ID" class="text-box"  required=""    >
                             <%  for (int j = 0; j < List_Puesto.size(); j++) {%>
                             <%Puesto p = new Puesto();
                                 p = (Puesto) List_Puesto.get(j);
+
                                 if (d.getId_puesto().equals(p.getId_puesto())) {%>
 
                             <option value="<%=p.getId_puesto()%>" selected="selected"><%=p.getNo_puesto()%></option>
@@ -79,17 +85,17 @@
 
                             <%}
                                 }%>
-                        </select>
+                        </select></td></tr>
                 <tr><td>Centro de Costo:</td><td>
                         <select name="CENTRO_COSTO" class="text-box"  >
                             <option value=""><%=List_centro_costo.size()%></option>
-                            <%for(int h=0; h<List_centro_costo.size();h++){
-                               Centro_Costos c=new Centro_Costos();
-                               c=(Centro_Costos)List_centro_costo.get(h);
-                           %>
-                           <option value="<%=c.getId_centro_costo()%>"><%=c.getDe_centro_costo()%></option>
+                            <%for (int h = 0; h < List_centro_costo.size(); h++) {
+                                    Centro_Costos c = new Centro_Costos();
+                                    c = (Centro_Costos) List_centro_costo.get(h);
+                            %>
+                            <option value="<%=c.getId_centro_costo()%>"><%=c.getDe_centro_costo()%></option>
                             <%}%>
-                        </select>     
+                        </select></td></tr>     
                 <tr><td>Condición:</td><td>
                         <select  name="CONDICION" class="text-box" required="" >
                             <option value="">[SELECCIONE]</option>
@@ -101,7 +107,7 @@
                             <option value="6">MFL-Práctica Profesionales</option>
                             <option value="7">MFL-CLJ</option>
                             <option value="8">MFL-Contrato</option>
-                        </select>
+                        </select></td></tr>
 
 
                 <tr><td>Remuneración:</td><td><input type="text" name="SUELDO" value="<%=d.getCa_sueldo()%>" class="text-box"  required=""  >Reintegro:<input type="text" name="REINTEGRO"  value="0" class="text-box" ></td></tr>   
@@ -130,9 +136,11 @@
                     </td></tr>
                 <tr><td>Modalidad:</td><td>
                         <select name="MODALIDAD" class="text-box" id="select_mod">
+                            <option >[SELECCIONAR]</option>
                             <%for (int l = 0; l < List_modalidad.size(); l++) {
                                     Modalidad mo = new Modalidad();
                                     mo = (Modalidad) List_modalidad.get(l);
+
                             %>
                             <option value="<%=mo.getId_modalidad()%>"><%=mo.getDe_modalidad()%></option>
                             <%}%>
@@ -150,6 +158,12 @@
                 <tr><td>Codigo de Grupo de Ocupaciones:</td><td>
                         <select name="CO_GRUPO_OCU" class="text-box">
                             <option value="">[SELECCIONE]</option>
+                            <%for(int gr=0;gr<List_grup_ocu.size();gr++){
+                            Grupo_Ocupaciones g=new Grupo_Ocupaciones();
+                            g=(Grupo_Ocupaciones)List_grup_ocu.get(gr);
+                            %>
+                            <option value="<%=g.getCo_grupo_ocupacion()%>"><%=g.getDe_grupo_ocupacion()%></option>
+                            <%}%>
                         </select></td></tr>
 
 
@@ -272,28 +286,91 @@
                 <input type="hidden" value="<%=d.getId_trabajador()%>" name="IDDATOS_TRABAJADOR" class="text-box" >
                 <input type="hidden" value="ARE-0022" name="AREA_ID" class="text-box" >
                 <tr><td colspan="2"><input type="submit" name="opc"  class="submit" value="REGISTRAR CONTRATO"></td></tr>
-            </table></form></center><br><br>
+            </table></form><br><br>
             <%}
                 }%>
-</body>
-<script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
-<script>
-    $(document).ready(function() {
-        var b = $("#select-sub-mod");
-        $("#select_mod").change(
-                function() {
-                    // alert("?MODALIDAD="+$("#select_mod").val());
+        </body>
+        <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
+        <script>
+            $(document).ready(function() {
+                var a = $("#select-sub-mod");
+                var b = $("#selec_dep");
+                var c = $("#Selec_Area");
+                var d = $("#select_sec");
+                $("#select_mod").change(
+                        function() {
+                            // alert("?MODALIDAD="+$("#select_mod").val());
 
-                    $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function(objJson) {
+                            $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function(objJson) {
+                                a.empty();
+                                var list = objJson.lista;
+                                if (list.length !== 0) {
+                                    for (var i = 0; i < list.length; i++) {
+                                        a.append('<option value="' + list[i].id_submodalidad + '">' + list[i].de_submod + '</option>');
+                                    }
+                                } else {
+                                    document.getElementById('select-sub-mod').style.display = "none";
+                                }
+                            });
+                        });
+                $("#select_dir").change(
+                        function() {
+                            // alert("?MODALIDAD="+$("#select_mod").val());
 
-                        b.empty();
-                        var list = objJson.lista;
-                        for (var i = 0; i < list.length; i++) {
-                            b.append('<option value="' + list[i].id_submodalidad + '">' + list[i].de_submod + '</option>');
-                        }
-                    });
-                });
+                            $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=departamento&" + "DIRECCION=" + $("#select_dir").val(), function(objJson) {
+                                b.empty();
+                                var list = objJson.lista;
+                                if (list.length !== 0) {
+                                    document.getElementById('selec_dep').style.display = "block";
+                                    document.getElementById('Selec_Area').style.display = "block";
+                                    document.getElementById('select_sec').style.display = "block";
+                                    for (var i = 0; i < list.length; i++) {
+                                        b.append('<option value="' + list[i].id_dep + '">' + list[i].no_dep + '</option>');
+                                    }
+                                } else {
+                                    document.getElementById('selec_dep').style.display = "none";
+                                    document.getElementById('Selec_Area').style.display = "none";
+                                    document.getElementById('select_sec').style.display = "none";
+                                }
 
-    });
-</script>
+                            });
+                        });
+
+
+                $("#selec_dep").change(
+                        function() {
+                            // alert("?MODALIDAD="+$("#select_mod").val());
+
+                            $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=area&" + "DEPARTAMENTO=" + $("#selec_dep").val(), function(objJson) {
+                                c.empty();
+                                var list = objJson.lista;
+                                if (list.length !== 0) {
+                                    for (var i = 0; i < list.length; i++) {
+                                        c.append('<option value="' + list[i].id_area + '">' + list[i].no_area + '</option>');
+                                    }
+                                } else {
+                                    document.getElementById('Selec_Area').style.display = "none";
+                                    document.getElementById('select_sec').style.display = "none";
+                                }
+                            });
+                        });
+                $("#Selec_Area").change(
+                        function() {
+                            // alert("?MODALIDAD="+$("#select_mod").val());
+
+                            $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=seccion&" + "AREA=" + $("#Selec_Area").val(), function(objJson) {
+                                d.empty();
+                                var list = objJson.lista;
+                                if (list.length !== 0) {
+                                    for (var i = 0; i < list.length; i++) {
+                                        d.append('<option value="' + list[i].id_seccion + '">' + list[i].no_seccion + '</option>');
+                                    }
+                                } else {
+                                    document.getElementById('select_sec').style.display = "none";
+                                }
+                            });
+                        });
+
+            });
+        </script>
 </html>

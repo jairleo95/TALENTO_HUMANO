@@ -85,7 +85,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
             cst.setString(49, ID_REGIMEN_LABORAL);
             cst.setString(50, ID_MODALIDAD);
             cst.setString(51, ID_SUB_MODALIDAD);
-            cst.setString(52, CO_GR_OCUPACION);
+            cst.setString(52, CO_GR_OCUPACION.trim());
             cst.setString(53, c.convertFecha(FE_SUSCRIPCION));
             cst.setString(54, CO_TI_MONEDA);
             cst.setString(55, CO_TI_REM_VARIAB);
