@@ -393,6 +393,10 @@ public class DgpDAO implements InterfaceDgpDAO {
                 x.setCa_centro_costos(rs.getDouble("ca_centro_costos"));
                 x.setDe_antecedentes_policiales(rs.getString("de_antecedentes_policiales"));
                 x.setDe_certificado_salud(rs.getString("de_certificado_salud"));
+                x.setNo_banco(rs.getString("no_banco"));
+                x.setNu_cuenta(rs.getString("nu_cuenta"));
+                x.setNu_cuenta_banc(rs.getString("nu_cuenta_banc"));
+                x.setEs_gen_nu_cuenta(rs.getString("es_gen_nu_cuenta"));
                 Lista.add(x);
             }
         } catch (SQLException e) {

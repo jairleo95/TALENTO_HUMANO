@@ -94,7 +94,7 @@
                     <tr><td class="td-det">Banco: </td><td>Otros</td></tr>
                     <%}%>
                 
-                    <tr><td class="td-det">N° Cuenta: </td><td>aaaa<%=d.getNu_cuenta()%></td></tr>
+                    <tr><td class="td-det">N° Cuenta: </td><td><%=d.getNu_cuenta()%></td></tr>
 
                     <tr><td class="td-det">N° Cuenta Bancaria: </td><td><%=d.getNu_cuenta_banc()%></td></tr>
                     
