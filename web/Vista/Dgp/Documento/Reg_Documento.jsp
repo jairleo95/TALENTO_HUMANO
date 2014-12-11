@@ -302,7 +302,7 @@
                     <td class="caji"><strong><%=d.getDocumento()%></strong></td>
 
                     <td class="caji">
-                        <% if (d.getAr_dato_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005"))) {%>
+                        <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005"))) {%>
                         <input type="file" name="lob_upload<%=i + 1%>">
                         <% } else { %>
                         <% if (d.getAr_dato_archivo() == null) { %>
