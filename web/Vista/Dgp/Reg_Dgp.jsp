@@ -71,7 +71,7 @@
 
 
         <script language="javascript" type="text/javascript">
-            $(document).ready(function () {
+            $(document).ready(function() {
                 $(".contenido").hide();
 
                 /*TEMPORAL*/
@@ -108,9 +108,9 @@
 
         <script>
             $(document).ready(
-                    function () {
+                    function() {
                         $("#sueldo").keyup(
-                                function () {
+                                function() {
                                     var x = parseFloat($("#sueldo").val());
                                     var y = parseFloat($("#bono_al").val());
                                     var z = parseFloat($("#bev").val());
@@ -119,7 +119,7 @@
                                 }
                         );
                         $("#bono_al").keyup(
-                                function () {
+                                function() {
                                     var x = parseFloat($("#sueldo").val());
                                     var y = parseFloat($("#bono_al").val());
                                     var z = parseFloat($("#bev").val());
@@ -128,7 +128,7 @@
                                 }
                         );
                         $("#bev").keyup(
-                                function () {
+                                function() {
                                     var x = parseFloat($("#sueldo").val());
                                     var y = parseFloat($("#bono_al").val());
                                     var z = parseFloat($("#bev").val());
@@ -149,7 +149,7 @@
         </script>
         <script>
             $(".texto-h").setMask("29:59").keypress(
-                    function () {
+                    function() {
                         var currentMask = $(this).data('mask').mask;
                         var newMask = $(this).val().match(/^2.*/) ? "23:59" : "29:59";
                         if (newMask != currentMask) {
@@ -172,11 +172,11 @@
     </head>
     <body>   
         <script>
-            $(document).ready(function () {
+            $(document).ready(function() {
                 var b = $("#alerta_dgp");
                 // $("#alerta_dgp").hide();
                 function listar() {
-                    $.post("../../plazo_dgp", "opc=Listar", function (objJson) {
+                    $.post("../../plazo_dgp", "opc=Listar", function(objJson) {
                         b.empty();
                         var lista = objJson.lista;
                         if (objJson.rpta == -1) {
@@ -403,56 +403,58 @@
 
                                                                     <section class="col col-3" id="generar">
                                                                         <label class="checkbox" >
-                                                                            <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  >
+                                                                            <input type="checkbox" name="GEN_NU_CUEN" id="subscription" required="" value="1">
                                                                             <i></i>Generar Nro de Cuenta Bancaria</label>
                                                                     </section>
 
                                                                 </div>
                                                                 <script type="text/javascript">
                                                                     $(document).ready(
-                                                                            function () {
+                                                                            function() {
                                                                                 $("#no_cuen").hide();
                                                                                 $("#no_cuen_ban").hide();
                                                                                 $("#generar").show();
 
 
-                                                                                $("#banco").change(function () {
+                                                                                $("#banco").change(function() {
                                                                                     if ($("#banco").val() == '1') {
                                                                                         $("#generar").hide();
+                                                                                        $("#subscription").removeAttr('required');
                                                                                         $("#no_cuen").show();
                                                                                         $("#no_cuen_ban").hide();
+                                                                                        $("#nu_cuen_ban").removeAttr('required');
                                                                                         $("#nu_cuen_ban").val("");
                                                                                         $("#nu_cuen").val("");
                                                                                         $("#subscription").attr('checked', false);
                                                                                         $("#nu_cuen").attr("maxlength", "21");
                                                                                         $("#nu_cuen").mask("0011-9999999999999999", {placeholder: "X"});
-
                                                                                     }
                                                                                     if ($("#banco").val() == '2') {
                                                                                         $("#generar").hide();
-                                                                                        $("#no_cuen").show();
-                                                                                        $("#no_cuen_ban").hide();
-                                                                                        $("#nu_cuen_ban").val("");
-                                                                                        $("#nu_cuen").val("");
+                                                                                        $("#subscription").removeAttr('required');
                                                                                         $("#subscription").attr('checked', false);
+                                                                                        $("#no_cuen_ban").hide();
+                                                                                        $("#nu_cuen_ban").removeAttr('required');
+                                                                                        $("#nu_cuen_ban").val("");
+                                                                                        $("#no_cuen").show();
+                                                                                        $("#nu_cuen").val("");
                                                                                         $("#nu_cuen").attr("maxlength", "14");
                                                                                         $("#nu_cuen").mask("99999999999999", {placeholder: "X"});
-
                                                                                     }
                                                                                     if ($("#banco").val() == '3') {
                                                                                         $("#no_cuen").show();
                                                                                         $("#no_cuen_ban").show();
                                                                                         $("#generar").hide();
+                                                                                        $("#subscription").removeAttr('required');
                                                                                         $("#subscription").attr('checked', false);
-
                                                                                     }
                                                                                     if ($("#banco").val() == '0') {
                                                                                         $("#no_cuen").hide();
+                                                                                        $("#nu_cuen").removeAttr('required');
                                                                                         $("#nu_cuen").val("");
                                                                                         $("#no_cuen_ban").hide();
+                                                                                        $("#nu_cuen_ban").removeAttr('required');
                                                                                         $("#generar").show();
-
-
                                                                                     }
 
 
@@ -573,7 +575,7 @@
                                                                                             </section>
                                                                                             <section class="col col-2">
                                                                                                 <label class="select" id="titu">MARTES
-                                                                                                   <select id="martes" >
+                                                                                                    <select id="martes" >
                                                                                                         <option value="1">Habilitado</option>
                                                                                                         <option value="2" selected="">Deshabilitado</option>
                                                                                                     </select>
@@ -581,7 +583,7 @@
                                                                                             </section>
                                                                                             <section class="col col-2" >
                                                                                                 <label class="select" id="titu">MIERCOLES
-                                                                                                  <select id="miercoles"  >
+                                                                                                    <select id="miercoles"  >
                                                                                                         <option value="1">Habilitado</option>
                                                                                                         <option value="2" selected="">Deshabilitado</option>
                                                                                                     </select>
@@ -589,7 +591,7 @@
                                                                                             </section>
                                                                                             <section class="col col-2">
                                                                                                 <label class="select" id="titu">JUEVES
-                                                                                                  <select id="jueves"  >
+                                                                                                    <select id="jueves"  >
                                                                                                         <option value="1">Habilitado</option>
                                                                                                         <option value="2" selected="">Deshabilitado</option>
                                                                                                     </select> 
@@ -605,7 +607,7 @@
                                                                                             </section>
                                                                                             <section class="col col-2">
                                                                                                 <label class="select" id="titu">SABADO
-                                                                                                 <select id="sabado"  >
+                                                                                                    <select id="sabado"  >
                                                                                                         <option value="1">Habilitado</option>
                                                                                                         <option value="2" selected="">Deshabilitado</option>
                                                                                                     </select>
@@ -614,7 +616,7 @@
 
                                                                                             <section class="col col-2">
                                                                                                 <label class="select" id="titu">DOMINGO
-                                                                                                 <select id="domingo" >
+                                                                                                    <select id="domingo" >
 
                                                                                                         <option value="1">Habilitado</option>
                                                                                                         <option value="2" selected="">Deshabilitado</option>
@@ -625,7 +627,7 @@
 
 
 
-                                                                                    
+
                                                                                         <div class="input-desp">
                                                                                             <table style="" id="show_1" class="cont_lunes"> 
                                                                                                 <tr><td align="center" colspan="2">Lunes</td></tr>
@@ -761,7 +763,7 @@
                                                                                 $(".cont_sabado").hide();
                                                                                 $(".cont_domingo").hide();
                                                                                 $("#lunes").change(
-                                                                                        function () {
+                                                                                        function() {
                                                                                             if ($(this).val() == 1) {
                                                                                                 $("#show_1").show();
                                                                                             }
@@ -772,7 +774,7 @@
                                                                                         }
                                                                                 );
                                                                                 $("#martes").change(
-                                                                                        function () {
+                                                                                        function() {
                                                                                             if ($(this).val() == 1) {
                                                                                                 $("#show_2").show();
                                                                                             }
@@ -783,7 +785,7 @@
                                                                                         }
                                                                                 );
                                                                                 $("#miercoles").change(
-                                                                                        function () {
+                                                                                        function() {
                                                                                             if ($(this).val() == 1) {
                                                                                                 $("#show_3").show();
                                                                                             }
@@ -794,7 +796,7 @@
                                                                                         }
                                                                                 );
                                                                                 $("#jueves").change(
-                                                                                        function () {
+                                                                                        function() {
                                                                                             if ($(this).val() == 1) {
                                                                                                 $("#show_4").show();
                                                                                             }
@@ -805,7 +807,7 @@
                                                                                         }
                                                                                 );
                                                                                 $("#viernes").change(
-                                                                                        function () {
+                                                                                        function() {
                                                                                             if ($(this).val() == 1) {
                                                                                                 $("#show_5").show();
                                                                                             }
@@ -816,7 +818,7 @@
                                                                                         }
                                                                                 );
                                                                                 $("#sabado").change(
-                                                                                        function () {
+                                                                                        function() {
                                                                                             if ($(this).val() == 1) {
                                                                                                 $("#show_6").show();
                                                                                             }
@@ -827,7 +829,7 @@
                                                                                         }
                                                                                 );
                                                                                 $("#domingo").change(
-                                                                                        function () {
+                                                                                        function() {
                                                                                             if ($(this).val() == 1) {
                                                                                                 $("#show_7").show();
                                                                                             }
@@ -883,17 +885,17 @@
 
                                                                         }
                                                                     }
-                                                                    $(document).ready(function () {
+                                                                    $(document).ready(function() {
 
 
                                                                         $(".texto-h").keyup(
-                                                                                function () {
+                                                                                function() {
                                                                                     calcularHoras();
 
                                                                                 }
                                                                         );
                                                                         $("#horario").change(
-                                                                                function () {
+                                                                                function() {
                                                                                     if ($(this).val() == 0) {
                                                                                         $(".cont_lunes").hide();
                                                                                         $(".cont_martes").hide();
@@ -957,17 +959,17 @@
                                                                         );
                                                                     });</script>
                                                                 <script type="text/javascript">
-                                                                    $(document).ready(function () {
+                                                                    $(document).ready(function() {
                                                                         var scntDiv = $('#show_1');
                                                                         var i = $('#show_1 .texto-h').size() + 1;
                                                                         var s = $('#show_1 .tr-count').size() + 1;
-                                                                        $('#addScnt').click(function () {
+                                                                        $('#addScnt').click(function() {
                                                                             $('<tr><td>T' + s + ' :</td><td><input type="text"   name="HORA_DESDE_lun' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_lun' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_lun' + i + '" value="lun" ><input type="hidden" name="USER_CREACION_lun' + i + '"> <a href="#" id="remScnt">-</a></td></tr>').appendTo(scntDiv);
                                                                             i++;
                                                                             s++;
                                                                             return false;
                                                                         });
-                                                                        $('#remScnt').click(function () {
+                                                                        $('#remScnt').click(function() {
                                                                             if (i > 2) {
                                                                                 $(this).parents('tr').remove();
                                                                                 //  $("#tr-d").remove();           
@@ -978,18 +980,18 @@
                                                                         });
                                                                     });
                                                                     //MARTES
-                                                                    $(function () {
+                                                                    $(function() {
                                                                         var scntDiv = $('#show_2');
                                                                         var i = $('#show_2 .texto-h').size() + 1;
                                                                         var s = $('#show_2 .tr-count_2').size() + 1;
-                                                                        $('#add_2').click(function () {
+                                                                        $('#add_2').click(function() {
 
                                                                             $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_mar' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_mar' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_mar' + i + '" value="mar" ><input type="hidden" name="USER_CREACION_mar' + i + '"> <a href="#" id="remove_2">-</a></td></tr>').appendTo(scntDiv);
                                                                             i++;
                                                                             s++;
                                                                             return false;
                                                                         });
-                                                                        $('#remove_2').click(function () {
+                                                                        $('#remove_2').click(function() {
                                                                             if (i > 2) {
                                                                                 $(this).parents('tr').remove();
                                                                                 //  $("#tr-d").remove();           
@@ -1000,18 +1002,18 @@
                                                                         });
                                                                     });
                                                                     //MIERCOLES
-                                                                    $(function () {
+                                                                    $(function() {
                                                                         var scntDiv = $('#show_3');
                                                                         var i = $('#show_3 .texto-h').size() + 1;
                                                                         var s = $('#show_3 .tr-count_3').size() + 1;
-                                                                        $('#add_3').click(function () {
+                                                                        $('#add_3').click(function() {
 
                                                                             $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_mie' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_mie' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_mie' + i + '" value="mie" ><input type="hidden" name="USER_CREACION_mie' + i + '"> <a href="#" id="remove_3">-</a></td></tr>').appendTo(scntDiv);
                                                                             i++;
                                                                             s++;
                                                                             return false;
                                                                         });
-                                                                        $('#remove_3').click(function () {
+                                                                        $('#remove_3').click(function() {
                                                                             if (i > 2) {
                                                                                 $(this).parents('tr').remove();
                                                                                 //  $("#tr-d").remove();           
@@ -1022,18 +1024,18 @@
                                                                         });
                                                                     });
                                                                     //JUEVES
-                                                                    $(function () {
+                                                                    $(function() {
                                                                         var scntDiv = $('#show_4');
                                                                         var i = $('#show_4 .texto-h').size() + 1;
                                                                         var s = $('#show_4 .tr-count_4').size() + 1;
-                                                                        $('#add_4').click(function () {
+                                                                        $('#add_4').click(function() {
 
                                                                             $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_jue' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_jue' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_jue' + i + '" value="jue" ><input type="hidden" name="USER_CREACION_jue' + i + '"> <a href="#" id="remove_4">-</a></td></tr>').appendTo(scntDiv);
                                                                             i++;
                                                                             s++;
                                                                             return false;
                                                                         });
-                                                                        $('#remove_4').click(function () {
+                                                                        $('#remove_4').click(function() {
                                                                             if (i > 2) {
                                                                                 $(this).parents('tr').remove();
                                                                                 //  $("#tr-d").remove();           
@@ -1044,18 +1046,18 @@
                                                                         });
                                                                     });
                                                                     //VIERNES
-                                                                    $(function () {
+                                                                    $(function() {
                                                                         var scntDiv = $('#show_5');
                                                                         var i = $('#show_5 .texto-h').size() + 1;
                                                                         var s = $('#show_5 .tr-count_5').size() + 1;
-                                                                        $('#add_5').click(function () {
+                                                                        $('#add_5').click(function() {
 
                                                                             $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_vie' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_vie' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_vie' + i + '" value="vie" ><input type="hidden" name="USER_CREACION_vie' + i + '"> <a href="#" id="remove_5">-</a></td></tr>').appendTo(scntDiv);
                                                                             i++;
                                                                             s++;
                                                                             return false;
                                                                         });
-                                                                        $('#remove_5').click(function () {
+                                                                        $('#remove_5').click(function() {
                                                                             if (i > 2) {
                                                                                 $(this).parents('tr').remove();
                                                                                 //  $("#tr-d").remove();           
@@ -1066,18 +1068,18 @@
                                                                         });
                                                                     });
                                                                     //DOMINGO
-                                                                    $(function () {
+                                                                    $(function() {
                                                                         var scntDiv = $('#show_6');
                                                                         var i = $('#show_6 .texto-h').size() + 1;
                                                                         var s = $('#show_6 .tr-count_6').size() + 1;
-                                                                        $('#add_6').click(function () {
+                                                                        $('#add_6').click(function() {
 
                                                                             $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_dom' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_dom' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_dom' + i + '" value="dom" ><input type="hidden" name="USER_CREACION_dom' + i + '"> <a href="#" id="remove_6">-</a></td></tr>').appendTo(scntDiv);
                                                                             i++;
                                                                             s++;
                                                                             return false;
                                                                         });
-                                                                        $('#remove_6').click(function () {
+                                                                        $('#remove_6').click(function() {
                                                                             if (i > 2) {
                                                                                 $(this).parents('tr').remove();
                                                                                 //  $("#tr-d").remove();           
@@ -1167,7 +1169,7 @@
 
                                                                     // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-                                                                    $(document).ready(function () {
+                                                                    $(document).ready(function() {
 
                                                                         pageSetUp();
                                                                     })
@@ -1179,7 +1181,7 @@
                                                                     var _gaq = _gaq || [];
                                                                     _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
                                                                     _gaq.push(['_trackPageview']);
-                                                                    (function () {
+                                                                    (function() {
                                                                         var ga = document.createElement('script');
                                                                         ga.type = 'text/javascript';
                                                                         ga.async = true;

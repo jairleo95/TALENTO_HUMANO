@@ -80,6 +80,29 @@
                     <tr><td class="td-det">Certificado de Salud: </td><td><%=d.getDe_certificado_salud()%></td></tr>
                     <tr style="color: red;"><td class="td-det" >Sueldo Total : S/.</td><td><%=(d.getCa_sueldo() + d.getCa_bono_alimentario() + d.getDe_bev())%></td></tr>
                     <tr style="color: red;"><td class="td-det" >Documentos Adjuntos : </td><td><a href="../../documento?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a></td></tr>
+                    
+                    <%if (d.getNo_banco().equals("0")) {%>
+                    <tr><td class="td-det">Banco: </td><td>Ninguno</td></tr>
+                    <%}
+                        if (d.getNo_banco().equals("1")) {%>
+                    <tr><td class="td-det">Banco: </td><td>BBVA</td></tr>
+                    <%}
+                        if (d.getNo_banco().equals("2")) {%>
+                    <tr><td class="td-det">Banco: </td><td>BCP</td></tr>
+                    <%}
+                        if (d.getNo_banco().equals("3")) {%>
+                    <tr><td class="td-det">Banco: </td><td>Otros</td></tr>
+                    <%}%>
+                
+                    <tr><td class="td-det">N° Cuenta: </td><td>aaaa<%=d.getNu_cuenta()%></td></tr>
+
+                    <tr><td class="td-det">N° Cuenta Bancaria: </td><td><%=d.getNu_cuenta_banc()%></td></tr>
+                    
+                    <%if (d.getEs_gen_nu_cuenta().trim().equals("1")) {%>
+                    <tr><td class="td-det">N° Cuenta Generado por RRHH </td><td>Si</td></tr>
+                    <%} else {%>
+                    <tr><td class="td-det">N° Cuenta Generado por RRHH </td><td>No</td></tr>
+                    <%}%>
                     <!--<tr><td class="td-det">Ruc:</td><td><?echo $list[$index][9];?></td></tr>
                     <tr><td class="td-det">Lugar de Servicio:</td><td><?echo $list[$index][10];?></td></tr>
                     <tr><td class="td-det">Periodo de Pago:</td><td><?echo $list[$index][12];?></td></tr>
