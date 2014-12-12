@@ -106,7 +106,7 @@ public class CDgp extends HttpServlet {
             String DE_ANTECEDENTES_POLICIALES = request.getParameter("ANTECEDENTES_POLICIALES");
             String DE_CERTIFICADO_SALUD = request.getParameter("CERTIFICADO_SALUD");
             String DE_MONTO_HONORARIO = request.getParameter("MONTO_HONORARIO");
-            String NO_BANCO = request.getParameter("BANCO");
+            String NO_BANCO = (request.getParameter("BANCO") ==null)?"0":"1";
             String NU_CUENTA = request.getParameter("CUENTA");
             String NU_CUENTA_BANC = request.getParameter("CUENTA_BANC");
             

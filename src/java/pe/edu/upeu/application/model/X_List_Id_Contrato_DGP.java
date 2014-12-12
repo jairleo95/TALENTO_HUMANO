@@ -64,8 +64,17 @@ public class X_List_Id_Contrato_DGP {
     private String no_seccion;
     private String no_dep;
     private String no_direccion;
+    private String ca_bev;
+    private String ca_sueldo_total;
+    private String id_regimen_laboral;
+    private String id_modalidad;
+    private String id_sub_modalidad;
+    private String es_ti_contratacion;
+    private String co_gr_ocupacion;
+    private String fe_suscripcion;
+    private String co_ti_moneda;
 
-    public X_List_Id_Contrato_DGP(String id_contrato, String id_dgp, String fe_desde, String fe_hasta, String fe_cese, String id_func, String no_area, String li_condicion, Double ca_sueldo, Double ca_reintegro, Double ca_asig_familiar, Double ho_semana, Double nu_horas_lab, Double dia_contrato, String ti_trabajador, String li_regimen_laboral, String es_discapacidad, String ti_contrato, String li_regimen_pensionario, String es_contrato_trabajador, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String us_ip, String fe_vacacio_ini, String fe_vacacio_fin, String es_contrato, String id_filial, String id_direccion, String id_departamento, String id_area, String id_seccion, String id_puesto, Double ca_bono_alimento, String es_jefe, String li_tipo_convenio, String es_firmo_contrato, Double nu_contrato, String de_observacion, String es_apoyo, String ti_hora_pago, String nu_documento, String id_anno, String es_entregar_doc_reglamentos, String es_registro_huella, String de_registro_sistem_remu, String id_trabajador, String id_centro_costo, String no_puesto, String no_seccion, String no_dep, String no_direccion) {
+    public X_List_Id_Contrato_DGP(String id_contrato, String id_dgp, String fe_desde, String fe_hasta, String fe_cese, String id_func, String no_area, String li_condicion, Double ca_sueldo, Double ca_reintegro, Double ca_asig_familiar, Double ho_semana, Double nu_horas_lab, Double dia_contrato, String ti_trabajador, String li_regimen_laboral, String es_discapacidad, String ti_contrato, String li_regimen_pensionario, String es_contrato_trabajador, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String us_ip, String fe_vacacio_ini, String fe_vacacio_fin, String es_contrato, String id_filial, String id_direccion, String id_departamento, String id_area, String id_seccion, String id_puesto, Double ca_bono_alimento, String es_jefe, String li_tipo_convenio, String es_firmo_contrato, Double nu_contrato, String de_observacion, String es_apoyo, String ti_hora_pago, String nu_documento, String id_anno, String es_entregar_doc_reglamentos, String es_registro_huella, String de_registro_sistem_remu, String id_trabajador, String id_centro_costo, String no_puesto, String no_seccion, String no_dep, String no_direccion, String ca_bev,String ca_sueldo_total, String id_regimen_laboral, String id_modalidad, String id_sub_modalidad, String es_ti_contratacion, String co_gr_ocupacion , String fe_suscripcion, String co_ti_moneda) {
         this.id_contrato = id_contrato;
         this.id_dgp = id_dgp;
         this.fe_desde = fe_desde;
@@ -119,6 +128,15 @@ public class X_List_Id_Contrato_DGP {
         this.no_seccion = no_seccion;
         this.no_dep = no_dep;
         this.no_direccion = no_direccion;
+        this.ca_bev = ca_bev;
+        this.ca_sueldo_total = ca_sueldo_total;
+        this.id_regimen_laboral = id_regimen_laboral;
+        this.id_modalidad = id_modalidad;
+        this.id_sub_modalidad = id_sub_modalidad;
+        this.es_ti_contratacion = es_ti_contratacion;
+        this.co_gr_ocupacion = co_gr_ocupacion;
+        this.fe_suscripcion = fe_suscripcion;
+        this.co_ti_moneda = co_ti_moneda;
     }
 
     public X_List_Id_Contrato_DGP() {
@@ -175,6 +193,15 @@ public class X_List_Id_Contrato_DGP {
         this.no_seccion = "";
         this.no_dep = "";
         this.no_direccion = "";
+        this.ca_bev = "";
+        this.ca_sueldo_total = "";
+        this.id_regimen_laboral = "";
+        this.id_modalidad = "";
+        this.id_sub_modalidad = "";
+        this.es_ti_contratacion = "";
+        this.co_gr_ocupacion = "";
+        this.fe_suscripcion = "";
+        this.co_ti_moneda = "";
     }
 
     public String getNo_puesto() {
@@ -600,4 +627,77 @@ public class X_List_Id_Contrato_DGP {
     public void setNo_area(String no_area) {
         this.no_area = no_area;
     }
+
+    public String getCa_bev() {
+        return ca_bev;
+    }
+
+    public void setCa_bev(String ca_bev) {
+        this.ca_bev = ca_bev;
+    }
+
+    public String getCa_sueldo_total() {
+        return ca_sueldo_total;
+    }
+
+    public void setCa_sueldo_total(String ca_sueldo_total) {
+        this.ca_sueldo_total = ca_sueldo_total;
+    }
+
+    public String getId_regimen_laboral() {
+        return id_regimen_laboral;
+    }
+
+    public void setId_regimen_laboral(String id_regimen_laboral) {
+        this.id_regimen_laboral = id_regimen_laboral;
+    }
+
+    public String getId_modalidad() {
+        return id_modalidad;
+    }
+
+    public void setId_modalidad(String id_modalidad) {
+        this.id_modalidad = id_modalidad;
+    }
+
+    public String getId_sub_modalidad() {
+        return id_sub_modalidad;
+    }
+
+    public void setId_sub_modalidad(String id_sub_modalidad) {
+        this.id_sub_modalidad = id_sub_modalidad;
+    }
+
+    public String getEs_ti_contratacion() {
+        return es_ti_contratacion;
+    }
+
+    public void setEs_ti_contratacion(String es_ti_contratacion) {
+        this.es_ti_contratacion = es_ti_contratacion;
+    }
+
+    public String getCo_gr_ocupacion() {
+        return co_gr_ocupacion;
+    }
+
+    public void setCo_gr_ocupacion(String co_gr_ocupacion) {
+        this.co_gr_ocupacion = co_gr_ocupacion;
+    }
+
+    public String getFe_suscripcion() {
+        return fe_suscripcion;
+    }
+
+    public void setFe_suscripcion(String fe_suscripcion) {
+        this.fe_suscripcion = fe_suscripcion;
+    }
+
+    public String getCo_ti_moneda() {
+        return co_ti_moneda;
+    }
+
+    public void setCo_ti_moneda(String co_ti_moneda) {
+        this.co_ti_moneda = co_ti_moneda;
+    }
+    
 }

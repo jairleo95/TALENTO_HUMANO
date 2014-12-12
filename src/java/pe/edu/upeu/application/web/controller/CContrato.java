@@ -25,6 +25,7 @@ import pe.edu.upeu.application.dao.ListaDAO;
 import pe.edu.upeu.application.dao.PlantillaDAO;
 import pe.edu.upeu.application.dao.PuestoDAO;
 import pe.edu.upeu.application.dao.SeccionDAO;
+import pe.edu.upeu.application.dao.Sub_ModalidadDAO;
 import pe.edu.upeu.application.dao.TrabajadorDAO;
 import pe.edu.upeu.application.dao.UsuarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAnnoDAO;
@@ -40,6 +41,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePlantillaDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceSeccionDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceSub_ModalidadDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO;
 
@@ -72,8 +74,9 @@ public class CContrato extends HttpServlet {
     InterfaceUsuarioDAO usu = new UsuarioDAO();
     InterfaceTrabajadorDAO tr = new TrabajadorDAO();
     InterfaceCentro_CostosDAO cc = new Centro_CostosDAO();
-    InterfaceDireccionDAO dir=new DireccionDAO();
-    InterfaceGrupo_ocupacionesDAO gr=new GrupoOcupacionesDAO();
+    InterfaceDireccionDAO dir = new DireccionDAO();
+    InterfaceGrupo_ocupacionesDAO gr = new GrupoOcupacionesDAO();
+    InterfaceSub_ModalidadDAO sub = new Sub_ModalidadDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -92,11 +95,11 @@ public class CContrato extends HttpServlet {
                 getServletContext().setAttribute("List_Puesto", puesto.List_Puesto());
                 getServletContext().setAttribute("LISTA_RH_SECCION", seccion.LISTA_RH_SECCION());
                 getServletContext().setAttribute("List_anno_max", a.List_anno_max());
-                getServletContext().setAttribute("List_modalidad", con.List_modalidad());    
+                getServletContext().setAttribute("List_modalidad", con.List_modalidad());
                 getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
                 getServletContext().setAttribute("List_centro_costo", cc.List_centro_costo());
                 getServletContext().setAttribute("Listar_Direccion", dir.Listar_Direccion());
-                getServletContext().setAttribute("List_centro_costo", cc.List_centro_costo());
+                getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
                 int num = dht.ASIGNACION_F(idtr);
                 // out.println(num);
                 response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp?num=" + num);
@@ -105,7 +108,7 @@ public class CContrato extends HttpServlet {
 
                 String idtr = request.getParameter("idtr");
                 String ida1 = a.List_Anno_Max_Cont(idtr);
-                
+
                 getServletContext().setAttribute("List_id_Contrato_DGP", con.List_id_Contrato_DGP(idtr, ida1));
                 getServletContext().setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr));
                 getServletContext().setAttribute("List_Jefe", l.List_Jefe());
@@ -114,7 +117,11 @@ public class CContrato extends HttpServlet {
                 getServletContext().setAttribute("List_ID_User", usu.List_ID_User(iduser));
                 getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
                 getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
-
+                getServletContext().setAttribute("List_centro_costo", cc.List_centro_costo());
+                getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
+                getServletContext().setAttribute("List_modalidad", con.List_modalidad());
+                getServletContext().setAttribute("Listar_Sub_mo", sub.Listar_Sub_mo());
+                getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
                 response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp?ida1=" + ida1);
             }
             if (opc.equals("REGISTRAR CONTRATO")) {
@@ -168,7 +175,6 @@ public class CContrato extends HttpServlet {
                 String DE_REGISTRO_SISTEM_REMU = request.getParameter("REGISTRO_SISTEM_REMU");
                 String ID_TRABAJADOR = request.getParameter("IDDATOS_TRABAJADOR");
 
-               
                 String ID_CENTRO_COSTO = request.getParameter("CENTRO_COSTO");
                 Double CA_SUELDO_TOTAL = Double.parseDouble(request.getParameter("TOTAL_SUELDO"));
                 String ID_REGIMEN_LABORAL = request.getParameter("REG_LAB_MINTRA");
@@ -184,10 +190,9 @@ public class CContrato extends HttpServlet {
                 String DE_MYPE = request.getParameter("MYPE");
                 String ES_TI_CONTRATACION = request.getParameter("TI_CONTRATACION");
                 Double CA_BEV = Double.parseDouble(request.getParameter("BEV"));
-                
-                
+
                 out.println("sdñogjlkgjlksdjlk");
-                
+
                 con.INSERT_CONTRATO(ID_CONTRATO, ID_DGP, FE_DESDE, FE_HASTA, FE_CESE, ID_FUNC, LI_CONDICION, CA_SUELDO, CA_REINTEGRO, CA_ASIG_FAMILIAR, HO_SEMANA, NU_HORAS_LAB, DIA_CONTRATO, TI_TRABAJADOR, LI_REGIMEN_LABORAL, ES_DISCAPACIDAD, TI_CONTRATO, LI_REGIMEN_PENSIONARIO, ES_CONTRATO_TRABAJADOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, US_IP, FE_VACACIO_INI, FE_VACACIO_FIN, ES_CONTRATO, ID_FILIAL, ID_DIRECCION, ID_DEPARTAMENTO, ID_AREA, ID_SEC, ID_PUESTO, CA_BONO_ALIMENTO, LI_TIPO_CONVENIO, ES_FIRMO_CONTRATO, NU_CONTRATO, DE_OBSERVACION, ES_APOYO, TI_HORA_PAGO, NU_DOCUMENTO, ID_ANNO, ES_ENTREGAR_DOC_REGLAMENTOS, ES_REGISTRO_HUELLA, DE_REGISTRO_SISTEM_REMU, ID_TRABAJADOR, ID_CENTRO_COSTO, CA_SUELDO_TOTAL, ID_REGIMEN_LABORAL, ID_MODALIDAD, ID_SUB_MODALIDAD, CO_GR_OCUPACION, FE_SUSCRIPCION, CO_TI_MONEDA, CO_TI_REM_VARIAB, DE_REMU_ESPECIE, DE_RUC_EMP_TRAB, CO_SUCURSAL, DE_MYPE, ES_TI_CONTRATACION, CA_BEV);
 
                 /*Cambiar este for con un trigger al momento de insertar*/
@@ -237,20 +242,18 @@ public class CContrato extends HttpServlet {
                 response.sendRedirect("Vista/Contrato/Plantilla/Editor_Plantilla.jsp");
             }
             if (opc.equals("filtrar")) {
-                getServletContext().setAttribute("List_Area",area.List_Area());
+                getServletContext().setAttribute("List_Area", area.List_Area());
                 response.sendRedirect("Vista/Contrato/Busc_Contrato.jsp");
             }
-        }
-        catch(IOException e){
-        out.println( e.getMessage());
+        } catch (IOException e) {
+            out.println(e.getMessage());
         } catch (NumberFormatException e) {
-            out.println( e.getMessage());
+            out.println(e.getMessage());
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-
     /**
      * Handles the HTTP <code>GET</code> method.
      *

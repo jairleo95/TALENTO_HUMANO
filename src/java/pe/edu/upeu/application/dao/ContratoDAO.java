@@ -165,6 +165,15 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 icd.setNo_seccion(rs.getString("no_seccion"));
                 icd.setNo_dep(rs.getString("no_dep"));
                 icd.setNo_direccion(rs.getString("no_direccion"));
+                icd.setCa_bev(rs.getString("ca_bev"));
+                icd.setCa_sueldo_total(rs.getString("ca_sueldo_total"));
+                icd.setId_regimen_laboral(rs.getString("id_regimen_laboral"));
+                icd.setId_modalidad(rs.getString("id_modalidad"));
+                icd.setId_sub_modalidad(rs.getString("id_sub_modalidad"));
+                icd.setEs_ti_contratacion(rs.getString("es_ti_contratacion"));
+                icd.setCo_gr_ocupacion(rs.getString("co_gr_ocupacion"));
+                icd.setFe_suscripcion(rs.getString("fe_suscripcion"));
+                icd.setCo_ti_moneda(rs.getString("co_ti_moneda"));
                 list.add(icd);
             }
         } catch (SQLException e) {
