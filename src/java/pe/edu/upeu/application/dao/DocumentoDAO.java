@@ -253,7 +253,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
             cst.setString(1, null);
             cst.setString(2, ID_DGP);
             cst.setString(3, ID_DOCUMENTOS);
-            cst.setString(4, (ES_DOCUMENTO_ADJUNTO == null) ? "0" : ES_DOCUMENTO_ADJUNTO);
+            cst.setString(4, ES_DOCUMENTO_ADJUNTO);
             cst.setString(5, US_CREACION);
             cst.setString(6, FE_CREACION);
             cst.setString(7, US_MODIF);

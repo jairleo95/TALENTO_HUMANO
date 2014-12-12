@@ -202,12 +202,13 @@ public class CDocumento extends HttpServlet {
 
                 }
                 //Thread.sleep(1000);
-                if ((desc != null)) {
+                if (desc != null) {
 
-                  
+                    if (!desc.equals("")) {
+                        estado = ((estado == null) ? "0" : estado);
+                        d.INSERT_DOCUMENTO_ADJUNTO(null, iddgp, iddoc, estado, user, null, null, null, null, desc, nombre_archivo, no_original, null, null);
 
-                    d.INSERT_DOCUMENTO_ADJUNTO(null, iddgp, iddoc, estado, user, null, null, null, null, desc, nombre_archivo, no_original, null, null);
-                    out.println(nombre_archivo);
+                    }
 
                 }
                 no_original = null;
@@ -229,7 +230,7 @@ public class CDocumento extends HttpServlet {
 
             if (pr != null) {
                 if (pr.equals("enter")) {
-                    response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr + "&iddgp=" + iddgp);
+                     response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr + "&iddgp=" + iddgp);
                 }
             } else {
                 response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&iddgp=" + iddgp);
