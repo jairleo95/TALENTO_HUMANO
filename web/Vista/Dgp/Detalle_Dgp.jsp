@@ -80,7 +80,7 @@
                     <tr><td class="td-det">Certificado de Salud: </td><td><%=d.getDe_certificado_salud()%></td></tr>
                     <tr style="color: red;"><td class="td-det" >Sueldo Total : S/.</td><td><%=(d.getCa_sueldo() + d.getCa_bono_alimentario() + d.getDe_bev())%></td></tr>
                     <tr style="color: red;"><td class="td-det" >Documentos Adjuntos : </td><td><a href="../../documento?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a></td></tr>
-                    
+
                     <%if (d.getNo_banco().equals("0")) {%>
                     <tr><td class="td-det">Banco: </td><td>Ninguno</td></tr>
                     <%}
@@ -93,11 +93,11 @@
                         if (d.getNo_banco().equals("3")) {%>
                     <tr><td class="td-det">Banco: </td><td>Otros</td></tr>
                     <%}%>
-                
+
                     <tr><td class="td-det">N° Cuenta: </td><td><%=d.getNu_cuenta()%></td></tr>
 
                     <tr><td class="td-det">N° Cuenta Bancaria: </td><td><%=d.getNu_cuenta_banc()%></td></tr>
-                    
+
                     <%if (d.getEs_gen_nu_cuenta().trim().equals("1")) {%>
                     <tr><td class="td-det">N° Cuenta Generado por RRHH </td><td>Si</td></tr>
                     <%} else {%>
@@ -157,24 +157,35 @@
                     </tr>
                     <%}%> 
 
-                    <% if (request.getParameter("opc") != null) {
-                            if (request.getParameter("opc").equals("reg_doc")) {
 
-                    %>
 
-                    <tr><td colspan="2"><h3 style="text-align: center;">Enviar Requerimiento</h3>  <form action="../../../dgp" method="post">
-                                <input  type="hidden" value="<%=iddgp%>" name="iddgp">
-                                <input type="submit" value="Terminar" name="opc">
 
-                            </form></td></tr>
 
-                    <%}
-                        }%>
+
                     <input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>">
                     <input type="hidden" name="opc" value="MODIFICAR REQUERIMIENTO">   
                     <% if (idrol.trim().equals("ROL-0002") | idrol.trim().equals("ROL-0005") | idrol.trim().equals("ROL-0003")) { %>
                     <tr><td><input type="submit"  value="Modificar"></td><td></td></tr><%}%>
             </form>
+
+            <% if (request.getParameter("opc") != null) {
+                    if (request.getParameter("opc").equals("reg_doc")) {
+
+            %>
+
+            <tr><td colspan="2"><h3 style="text-align: center;">Enviar Requerimiento</h3> 
+                    <form action="../../../dgp" method="post">
+                        <input  type="hidden" value="<%=iddgp%>" name="iddgp">
+                        <input type="hidden" value="Terminar" name="opc">
+                        <footer>
+                            <button type="submit" class="btn btn-success">
+                                TERMINAR
+                            </button>
+                        </footer>
+                    </form></td></tr>
+
+            <%}
+                        }%>
         </div>
     </center>
 </body>
