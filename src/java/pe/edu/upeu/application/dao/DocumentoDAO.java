@@ -234,6 +234,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
                 v.setNo_archivo(rs.getString("no_archivo"));
                 v.setTa_archivo(rs.getString("ta_archivo"));
                 v.setAr_file_type(rs.getString("ar_file_type"));
+                v.setEs_obligatorio(rs.getString("es_obligatorio"));
                 x.add(v);
             }
         } catch (SQLException e) {
@@ -252,7 +253,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
             cst.setString(1, null);
             cst.setString(2, ID_DGP);
             cst.setString(3, ID_DOCUMENTOS);
-            cst.setString(4, ES_DOCUMENTO_ADJUNTO);
+            cst.setString(4, (ES_DOCUMENTO_ADJUNTO == null) ? "0" : ES_DOCUMENTO_ADJUNTO);
             cst.setString(5, US_CREACION);
             cst.setString(6, FE_CREACION);
             cst.setString(7, US_MODIF);

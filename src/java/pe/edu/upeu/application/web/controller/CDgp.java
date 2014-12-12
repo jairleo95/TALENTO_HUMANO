@@ -239,6 +239,7 @@ public class CDgp extends HttpServlet {
         }
         if (opc.equals("Terminar")) {
             String iddgp = request.getParameter("iddgp");
+            out.print(iddgp);
             dgp.REG_DGP_FINAL(iddgp);
             getServletContext().setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep));
             response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp");

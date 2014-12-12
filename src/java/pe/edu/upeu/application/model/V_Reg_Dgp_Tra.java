@@ -51,8 +51,9 @@ private String ar_dato_archivo;
 private String no_archivo;
 private String ta_archivo;
 private String ar_file_type;
+private String es_obligatorio;
 
-    public V_Reg_Dgp_Tra(String id_document, String id_tipo_plani, String id_requerimient, String documento, String ti_planilla, String planilla, String iddgp, String fe_desde, String fe_hasta, double ca_sueldo, String de_dias_trabajo, String horario, String id_puesto, String id_requerimiento, String id_trabajador, String co_ruc, String de_lugar_servicio, String de_servicio, String de_periodo_pago, String de_domicilio_fiscal, String de_subvencion, String de_horario_capacitacion, String de_horario_refrigerio, String de_dias_capacitacion, String es_dgp, String ti_documento, String id_documento_adjunto, String id_dgp, String id_documentos, String es_documento_adjunto, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String ip_usuario, String de_documento_adjunto, String ar_dato_archivo, String no_archivo, String ta_archivo, String ar_file_type) {
+    public V_Reg_Dgp_Tra(String id_document, String id_tipo_plani, String id_requerimient, String documento, String ti_planilla, String planilla, String iddgp, String fe_desde, String fe_hasta, double ca_sueldo, String de_dias_trabajo, String horario, String id_puesto, String id_requerimiento, String id_trabajador, String co_ruc, String de_lugar_servicio, String de_servicio, String de_periodo_pago, String de_domicilio_fiscal, String de_subvencion, String de_horario_capacitacion, String de_horario_refrigerio, String de_dias_capacitacion, String es_dgp, String ti_documento, String id_documento_adjunto, String id_dgp, String id_documentos, String es_documento_adjunto, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String ip_usuario, String de_documento_adjunto, String ar_dato_archivo, String no_archivo, String ta_archivo, String ar_file_type,String es_obligatorio) {
         this.id_document = id_document;
         this.id_tipo_plani = id_tipo_plani;
         this.id_requerimient = id_requerimient;
@@ -93,6 +94,7 @@ private String ar_file_type;
         this.no_archivo = no_archivo;
         this.ta_archivo = ta_archivo;
         this.ar_file_type = ar_file_type;
+        this.es_obligatorio = es_obligatorio;
     }
     public V_Reg_Dgp_Tra() {
         this.id_document = "";
@@ -135,6 +137,7 @@ private String ar_file_type;
         this.no_archivo = "";
         this.ta_archivo = "";
         this.ar_file_type = "";
+         this.es_obligatorio = "";
     }
 
     public String getId_document() {
@@ -455,6 +458,14 @@ private String ar_file_type;
 
     public void setAr_file_type(String ar_file_type) {
         this.ar_file_type = ar_file_type;
+    }
+
+    public String getEs_obligatorio() {
+        return es_obligatorio;
+    }
+
+    public void setEs_obligatorio(String es_obligatorio) {
+        this.es_obligatorio = es_obligatorio;
     }
     
 }

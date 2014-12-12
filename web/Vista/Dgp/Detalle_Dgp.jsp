@@ -174,7 +174,7 @@
             %>
 
             <tr><td colspan="2"><h3 style="text-align: center;">Enviar Requerimiento</h3> 
-                    <form action="../../../dgp" method="post">
+                    <form action="../../dgp" method="get">
                         <input  type="hidden" value="<%=iddgp%>" name="iddgp">
                         <input type="hidden" value="Terminar" name="opc">
                         <footer>

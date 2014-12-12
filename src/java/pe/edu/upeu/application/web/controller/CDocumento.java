@@ -202,7 +202,9 @@ public class CDocumento extends HttpServlet {
 
                 }
                 //Thread.sleep(1000);
-                if ((desc != null & estado != null) ) {
+                if ((desc != null)) {
+
+                  
 
                     d.INSERT_DOCUMENTO_ADJUNTO(null, iddgp, iddoc, estado, user, null, null, null, null, desc, nombre_archivo, no_original, null, null);
                     out.println(nombre_archivo);
