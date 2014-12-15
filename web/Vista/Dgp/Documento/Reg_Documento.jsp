@@ -174,8 +174,7 @@
                                                         </td>
                                                         <td class="caji">
                                                             <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005"))) {%>
-                                                            <span class="onoffswitch"><input type="checkbox" value="1"   name="estado<%=i + 1%>" class="onoffswitch-checkbox" id="st3"><label class="onoffswitch-label" for="st3"> 
-                                                                    <span class="onoffswitch-inner" data-swchon-text="YES" data-swchoff-text="NO"></span> <span class="onoffswitch-switch"></span> </label> </span>
+                                                           <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                                     <% } else { %>
                                                                     <% if (d.getEs_documento_adjunto() == null) { %>
 
@@ -232,8 +231,7 @@
                                                     </td>
                                                     <td class="caji">
                                                         <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005"))) {%>
-                                                        <span class="onoffswitch"><input type="checkbox" value="1"   name="estado<%=i + 1%>" class="onoffswitch-checkbox" id="st3"><label class="onoffswitch-label" for="st3"> 
-                                                                <span class="onoffswitch-inner" data-swchon-text="YES" data-swchoff-text="NO"></span> <span class="onoffswitch-switch"></span> </label> </span>
+                                                       <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                                 <% } else { %>
                                                                 <% if (d.getEs_documento_adjunto() == null) { %>
 
@@ -302,8 +300,7 @@
                                                     </td>
                                                     <td class="caji">
                                                         <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005"))) {%>
-                                                        <span class="onoffswitch"><input type="checkbox" value="1"   name="estado<%=i + 1%>" class="onoffswitch-checkbox" id="st3"><label class="onoffswitch-label" for="st3"> 
-                                                                <span class="onoffswitch-inner" data-swchon-text="YES" data-swchoff-text="NO"></span> <span class="onoffswitch-switch"></span> </label> </span>
+                                                      <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                                 <% } else { %>
                                                                 <% if (d.getEs_documento_adjunto() == null) { %>
 
@@ -365,8 +362,7 @@
                                                     </td>
                                                     <td class="caji">
                                                         <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005"))) {%>
-                                                        <span class="onoffswitch"><input type="checkbox" value="1"   name="estado<%=i + 1%>" class="onoffswitch-checkbox" id="st3"><label class="onoffswitch-label" for="st3"> 
-                                                                <span class="onoffswitch-inner" data-swchon-text="YES" data-swchoff-text="NO"></span> <span class="onoffswitch-switch"></span> </label> </span>
+                                                       <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                                 <% } else { %>
                                                                 <% if (d.getEs_documento_adjunto() == null) { %>
 
@@ -426,8 +422,7 @@
                                                     </td>
                                                     <td class="caji">
                                                         <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005"))) {%>
-                                                        <span class="onoffswitch"><input type="checkbox" value="1"   name="estado<%=i + 1%>" class="onoffswitch-checkbox" id="st3"><label class="onoffswitch-label" for="st3"> 
-                                                                <span class="onoffswitch-inner" data-swchon-text="YES" data-swchoff-text="NO"></span> <span class="onoffswitch-switch"></span> </label> </span>
+                                                                <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                                 <% } else { %>
                                                                 <% if (d.getEs_documento_adjunto() == null) { %>
 
