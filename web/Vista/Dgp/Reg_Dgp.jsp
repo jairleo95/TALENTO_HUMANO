@@ -66,11 +66,6 @@
 
         <link rel="stylesheet" href="../../css/Css_Formulario/form.css"  type="text/css" > 
         <script language="javascript" type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
-
-
-
-
-
         <script language="javascript" type="text/javascript">
             $(document).ready(function () {
                 $(".contenido").hide();
@@ -252,7 +247,6 @@
                                                             V_Ficha_Trab_Num_C tr = new V_Ficha_Trab_Num_C();
                                                             tr = (V_Ficha_Trab_Num_C) Listar_Trabajador_id.get(i);
                                                     %>
-
                                                     <section>
                                                         <label class="label" id="titu">Trabajador :</label>
                                                         <label class="input" style="color: red; font-weight: bold;">
@@ -260,7 +254,6 @@
                                                             <input type="hidden" value="<%=tr.getId_trabajador()%>" name="IDDATOS_TRABAJADOR" class="input-xs">
                                                             <% }
                                                                 if (Listar_Trabajador_id.size() == 0) { %>   
-
                                                             <%}%>
                                                         </label>
                                                     </section>
@@ -275,9 +268,7 @@
                                                                         V_Puesto_Direccion p = new V_Puesto_Direccion();
                                                                         p = (V_Puesto_Direccion) List_Puesto.get(j);
                                                                 %>
-
                                                                 <option value="<%=p.getId_puesto()%>"><% out.println(p.getNo_puesto() + " | " + p.getNo_seccion() + " | " + p.getNo_area());%></option> <%} %>
-
                                                             </select>
                                                         </label>
                                                     </section>
@@ -419,11 +410,11 @@
                                                                     $('#btn-agregar-cc').click(function () {
                                                                         texto += '<div  class="row" id="centro-costo_' + ag + '" >';
                                                                         texto += '<section class="col col-4"><label class="select" id="titu">Centro de Costo N' + ag + ':<select name="CENTRO_COSTOS_' + ag + '" ><option value="0">----</option></select></label></section>';
-                                                                        texto += '<section class="col col-4"><label class="input" id="titu">%<input name="por_cen_costo_1" type="text" value=""  id="porcentaje_cc"/></label></section>';
+                                                                        texto += '<section class="col col-4"><label class="input" id="titu">%<input name="por_cen_costo" type="text" value=""  id="porcentaje_cc"/></label></section>';
                                                                         texto += '<section class="col col-4"><label class="btn"><button type="button" class="btn btn-default"  onclick=" $(\'#centro-costo_' + ag + '\').remove()"  >Remover</button></label></section>';
                                                                         texto += '</div>';
                                                                         agregar.append(texto);
-
+                                                                          alert($("#por_cen_costo").val());
                                                                         // $(".ver").text(texto);
                                                                         texto = "";
                                                                         ag++;
@@ -540,7 +531,6 @@
                                     data-widget-custombutton="false"
                                     data-widget-collapsed="true"
                                     data-widget-sortable="false"
-    
                                     -->
                                     <header>
                                         <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
@@ -576,7 +566,8 @@
                                                         <label class="label" id="titu">Opcion :</label>
                                                         <label class="select">
 
-                                                            <select id="horario" >
+                                                            <select id="horario" required="" >
+                                                                <option value="">[SELECCIONE]</option>
                                                                 <option value="0">Editable</option>
                                                                 <option value="1">Horario Tiempo Completo</option>
                                                             </select>
@@ -732,6 +723,7 @@
                                                             <tr><td colspan="2"><a href="#" id="add_7">+</a></td></tr>
                                                         </table>
                                                         <div class="h_total" style="color: red; font-weight: bold;">Horas Totales : 00:00 horas</div>
+                                                        <input  readonly="" type="text" name="horas_totales" class="h_total" required="" max="48"/>
                                                     </div>
                                                 </fieldset>
                                                 <footer>
@@ -893,8 +885,8 @@
             acum = acum / 60;
             var min = ((acum - parseInt(acum)) * 60);
             min = parseInt(min.toPrecision(2));
-            acum = parseInt(acum);
-            $(".h_total").text("Hora Semanal Total : " + acum + ":" + min + " Horas.");
+            $(".h_total").text("Hora Semanal Total : " + parseInt(acum) + ":" + min + " Horas.");
+            $(".h_total").val(acum);
             if (minutos_totales > 2880) {
 
             }
@@ -1195,6 +1187,9 @@
                     fname: {
                         required: true
                     },
+                    horas_totales: {
+                        required: true
+                    },
                     lname: {
                         required: true
                     },
@@ -1241,6 +1236,9 @@
                 messages: {
                     fname: {
                         required: 'Please enter your first name'
+                    },
+                    horas_totales: {
+                        max: 'Porfavor digite un horario que se menor a 48 Horas de Trabajo'
                     },
                     lname: {
                         required: 'Please enter your last name'
