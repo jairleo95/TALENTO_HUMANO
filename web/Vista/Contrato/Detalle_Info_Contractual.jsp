@@ -28,6 +28,7 @@
 <jsp:useBean id="List_modalidad" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_Sub_mo" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_grup_ocu" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Usuario" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,7 +36,71 @@
         <link type="text/css" rel="stylesheet" href="../../css/Css_Detalle/CSS_DETALLE.css">  
         <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/font-awesome.min.css">
+        <style type="text/css">
+            body{
 
+                margin-left: auto;
+                margin-right: auto  ;
+                width: 95%;
+                // margin: 0;
+            }
+            .titulo{
+
+
+                background-color: #474747;
+                padding: 0.5%;
+
+                font-family: arial;
+                font-size: 130%;
+                text-align: center;
+                color: white;
+
+            }
+            .autoHeight{
+                border-style:none;            
+            }
+
+            .td{
+                font-weight: bold;
+                text-align: center;
+            }
+            .td1{
+                text-align: center;
+            }
+            .td2{
+                width: 8%;
+            }
+            .info-det{
+
+                width: 25%;
+            }
+
+            .table-det{
+                width: 100%;
+            }
+            .submit{
+                //position: relative;
+
+                background-color: #0575f4;
+                color: white;
+                width: 100%;
+
+            }
+            .submit:hover{
+                background-color: #643771;
+            }
+
+            table, th, td {
+
+                padding: 4px;
+            }
+            img{
+                position: absolute;
+
+            }
+
+
+        </style>
         <title>Información Contractual</title>
         <style type="text/css">
             .tables{
@@ -315,23 +380,27 @@
                 <tr><td class="text-info" colspan="8" style="text-align:center"><input class="button blue"  type="hidden" value="Editar"><a  class="button blue" href="../../contrato?opc=Ver_Plantilla&idc=<%=n.getId_contrato().trim()%>">Ver Plantilla</a></td></tr>
                             <%}%>
 
-                <tr style="color: red;"> <%if (n.getUs_creacion() == null && n.getUs_creacion() != null) {%>
+                <tr> <%if (n.getUs_modif()!= null && n.getFe_modif()!= null) {%>
                     <td class="text-info table-bordered"><strong>Modificado por:</strong></td>
-                    <td><%for (int f = 0; f < List_ID_User.size(); f++) {
+                    <td><%for (int f = 0; f < List_Usuario.size(); f++) {
                             Usuario u = new Usuario();
-                            u = (Usuario) List_ID_User.get(f);
-                            /*   out.println(u.getNo_usuario());*/%>
+                            u = (Usuario) List_Usuario.get(f);
+                            if(n.getUs_modif().equals(u.getId_usuario()))
+                               out.println(u.getNo_usuario());%>
                         <%}%>
                     </td>
                     <%}%>
                     <% if (n.getFe_modif() == null && n.getFe_creacion() != null) {%>
-                    <td><strong>Creado por:</strong></td><td>
-                        <%
-                            for (int f = 0; f < List_ID_User.size(); f++) {
+                    <td class="text-danger text-info text-center "><strong>Creado por:</strong></td>
+                         <%if (n.getUs_creacion() != null) {
+                            for (int f = 0; f < List_Usuario.size(); f++) {
                                 Usuario u = new Usuario();
-                                u = (Usuario) List_ID_User.get(f);%>
-                        <%/*=u.getNo_usuario()*/%>
-                        <%}%></td>
+                                u = (Usuario) List_Usuario.get(f);
+                                if (n.getUs_creacion().equals(u.getId_usuario())) {%>
+                                <td class="text-info text-center"><%=u.getNo_usuario()%></td>
+                    <%}}} else{%>
+                    <td>NO INGRESADO</td>
+                    <%}%>
                         <%}%>
                 </tr>
 
@@ -342,4 +411,3 @@
             }%>
     </center>
 </body>
-</html>

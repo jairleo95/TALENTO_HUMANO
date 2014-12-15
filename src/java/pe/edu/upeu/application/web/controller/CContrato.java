@@ -115,6 +115,7 @@ public class CContrato extends HttpServlet {
                 getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
                 //getServletContext().setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
                 getServletContext().setAttribute("List_ID_User", usu.List_ID_User(iduser));
+                getServletContext().setAttribute("List_Usuario", usu.List_Usuario());
                 getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
                 getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
                 getServletContext().setAttribute("List_centro_costo", cc.List_centro_costo());

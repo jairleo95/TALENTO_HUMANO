@@ -245,7 +245,7 @@
                 </p>
                 <br>	
     </script>
-<table id="letra" style="margin: 0;"><tr><td>asdasdasd</td></tr></table>
+<table id="letra" style="margin: 0;"><tr><td></td></tr></table>
  <div  ><table  style="width: 100%;  height: 50px; text-align:center; "id="asdglñhsdkgohk" ><tr><td align="center">______________________________<br><br>EMPLEADOR</td>
                         <td align="center">_______________________________<br><br>TRABAJADOR(A)</td></tr></table></div>
 
@@ -284,7 +284,7 @@
                                         });
                                         
                                     </script>
-                                    <table id="letra" style="margin: 0;"><tr><td>asdasdasd</td></tr></table>
+                                    <table id="letra" style="margin: 0;"><tr><td></td></tr></table>
         <!--================================================== -->
 
         <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
