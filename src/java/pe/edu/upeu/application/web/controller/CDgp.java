@@ -106,14 +106,9 @@ public class CDgp extends HttpServlet {
             String DE_ANTECEDENTES_POLICIALES = request.getParameter("ANTECEDENTES_POLICIALES");
             String DE_CERTIFICADO_SALUD = request.getParameter("CERTIFICADO_SALUD");
             String DE_MONTO_HONORARIO = request.getParameter("MONTO_HONORARIO");
-            String NO_BANCO = request.getParameter("BANCO");
-            //String NU_CUENTA = (request.getParameter("CUENTA")== null ) ? "0":"no tiene";
-            String NU_CUENTA = request.getParameter("CUENTA");
-            /*if(request.getParameter("CUENTA")== null ){
-             String NU_CUENTA = "no tiene";
-             }else{
-             String NU_CUENTA = request.getParameter("CUENTA");
-             }*/
+             String NO_BANCO = request.getParameter("BANCO");
+            String NU_CUENTA = (request.getParameter("CUENTA")== null ) ? "no tiene":request.getParameter("CUENTA");
+           // String NU_CUENTA = request.getParameter("CUENTA");
             //String NU_CUENTA_BANC = (request.getParameter("CUENTA_BANC") == null) ? "0" : "no tiene";
             String NU_CUENTA_BANC = request.getParameter("CUENTA_BANC");
             String ES_GEN_NU_CUENTA = (request.getParameter("GEN_NU_CUEN") == null) ? "0" : "1";

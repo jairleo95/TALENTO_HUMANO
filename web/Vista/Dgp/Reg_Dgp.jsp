@@ -458,7 +458,9 @@
                                                                                     }
                                                                                     if ($("#banco").val() == '3') {
                                                                                         $("#no_cuen").show();
+                                                                                        $("#nu_cuen").removeAttr('mask');
                                                                                         $("#no_cuen_ban").show();
+                                                                                        $("#nu_cuen_ban").removeAttr('mask');
                                                                                         $("#generar").hide();
                                                                                         $("#subscription").removeAttr('required');
                                                                                         $("#subscription").attr('checked', false);
