@@ -192,14 +192,14 @@
                 <tr><td>Horas:</td><td>Semanal:<input type="text" name="HORAS_SEMANA" value="48" class="text-box"  required="" >Mensual:<input type="text" name="NRO_HORAS_LAB" value="192" class="text-box"  required="" >Dias:<input type="text" name="DIAS" value="30" class="text-box" required=""  ></td></tr>      
 
                 <tr><td>Tipo Trabajador:</td><td>
-                        <select name="TIPO_TRABAJADOR" class="text-box" >
+                        <select name="TIPO_TRABAJADOR" class="text-box" required="" >
                             <option value=""></option>
                             <option value="1" selected>Empleado</option>
                             <option value="2">Obrero</option>
                         </select></td></tr>
 
                 <tr><td>Régimen Laboral </td><td>
-                        <select name="REGIMEN_LABORAL" class="text-box">
+                        <select name="REGIMEN_LABORAL" class="text-box" required="">
                             <option value=""></option>
                             <option value="1" selected>Privado</option>
                             <option value="2" selected>Público</option>
@@ -209,13 +209,13 @@
                     </td></tr>
 
                 <tr><td>Discapacidad:</td><td>
-                        <select name="DISCAPACIDAD" class="text-box">
+                        <select name="DISCAPACIDAD" class="text-box" >
                             <option value=""></option>
                             <option value="1" selected>No</option>
                             <option value="2">Si</option>
                         </select></td></tr>
                 <tr><td>Régimen Pensionario:</td><td>
-                        <select name="REGIMEN_PENSIONARIO" class="text-box">
+                        <select name="REGIMEN_PENSIONARIO" class="text-box" required="">
                             <option value=""></option>
                             <option value="1" selected>Privado</option>
                             <option value="2">SNP</option>
@@ -306,70 +306,14 @@
                                 var list = objJson.lista;
                                 if (list.length !== 0) {
                                     for (var i = 0; i < list.length; i++) {
-                                        a.append('<option value="' + list[i].id_submodalidad + '">' + list[i].de_submod + '</option>');
+                                        a.append('<option value="' + list[i].id_submodalidad + '" required="">' + list[i].de_submod + '</option>');
                                     }
                                 } else {
                                     document.getElementById('select-sub-mod').style.display = "none";
                                 }
                             });
                         });
-                $("#select_dir").change(
-                        function() {
-                            // alert("?MODALIDAD="+$("#select_mod").val());
-
-                            $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=departamento&" + "DIRECCION=" + $("#select_dir").val(), function(objJson) {
-                                b.empty();
-                                var list = objJson.lista;
-                                if (list.length !== 0) {
-                                    document.getElementById('selec_dep').style.display = "block";
-                                    document.getElementById('Selec_Area').style.display = "block";
-                                    document.getElementById('select_sec').style.display = "block";
-                                    for (var i = 0; i < list.length; i++) {
-                                        b.append('<option value="' + list[i].id_dep + '">' + list[i].no_dep + '</option>');
-                                    }
-                                } else {
-                                    document.getElementById('selec_dep').style.display = "none";
-                                    document.getElementById('Selec_Area').style.display = "none";
-                                    document.getElementById('select_sec').style.display = "none";
-                                }
-
-                            });
-                        });
-
-
-                $("#selec_dep").change(
-                        function() {
-                            // alert("?MODALIDAD="+$("#select_mod").val());
-
-                            $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=area&" + "DEPARTAMENTO=" + $("#selec_dep").val(), function(objJson) {
-                                c.empty();
-                                var list = objJson.lista;
-                                if (list.length !== 0) {
-                                    for (var i = 0; i < list.length; i++) {
-                                        c.append('<option value="' + list[i].id_area + '">' + list[i].no_area + '</option>');
-                                    }
-                                } else {
-                                    document.getElementById('Selec_Area').style.display = "none";
-                                    document.getElementById('select_sec').style.display = "none";
-                                }
-                            });
-                        });
-                $("#Selec_Area").change(
-                        function() {
-                            // alert("?MODALIDAD="+$("#select_mod").val());
-
-                            $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=seccion&" + "AREA=" + $("#Selec_Area").val(), function(objJson) {
-                                d.empty();
-                                var list = objJson.lista;
-                                if (list.length !== 0) {
-                                    for (var i = 0; i < list.length; i++) {
-                                        d.append('<option value="' + list[i].id_seccion + '">' + list[i].no_seccion + '</option>');
-                                    }
-                                } else {
-                                    document.getElementById('select_sec').style.display = "none";
-                                }
-                            });
-                        });
+                
 
             });
         </script>
