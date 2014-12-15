@@ -1,3 +1,5 @@
+
+
 <%@page import="pe.edu.upeu.application.dao.UsuarioDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
@@ -19,10 +21,13 @@
         <title>Detalle DGP</title>
 
         <style type="text/css">
+
+
             table{
                 font-weight:bold ;
                 width: 50px;
             }
+
             div{
                 font-family:verdana;
                 padding:2%;
@@ -36,6 +41,7 @@
             body{
                 //border: 1px solid black;
             }
+
         </style>
     </head>
     <body><center>
@@ -43,7 +49,7 @@
 
             <form action="../../dgp">
 
-                <table class="table table-hover" style="border">
+                <table class="table table-hover">
                     <%
                         String iddgp = "";
                         HttpSession sesion = request.getSession(true);
@@ -70,7 +76,11 @@
                     </tr>
                     <tr><td class="td-det">BEV: </td><td><%=d.getDe_bev()%></td></tr>
                     <tr><td class="td-det">Centro de Costos: </td><td><%=d.getCa_centro_costos()%></td></tr>
-                    <tr><td class="td-det">Antecedentes Policiales: </td><td><%=d.getDe_antecedentes_policiales()%></td></tr>
+                    <%if (d.getDe_antecedentes_policiales().equals("1")) {%>
+                    <tr><td class="td-det">Antecedentes Policiales: </td><td>No</td></tr>
+                    <%} else {%>
+                    <tr><td class="td-det">Antecedentes Policiales: </td><td>Si</td></tr>
+                    <%}%> 
                     <tr><td class="td-det">Certificado de Salud: </td><td><%=d.getDe_certificado_salud()%></td></tr>
                     <tr style="color: red;"><td class="td-det" >Sueldo Total : S/.</td><td><%=(d.getCa_sueldo() + d.getCa_bono_alimentario() + d.getDe_bev())%></td></tr>
                     <tr style="color: red;"><td class="td-det" >Documentos Adjuntos : </td><td><a href="../../documento?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a></td></tr>
@@ -87,13 +97,16 @@
                         if (d.getNo_banco().equals("3")) {%>
                     <tr><td class="td-det">Banco: </td><td>Otros</td></tr>
                     <%}%>
-                    
+
+                    <%if (d.getNo_banco_otros() != null) {%>
                     <tr><td class="td-det">Nombre Banco</td><td><%=d.getNo_banco_otros()%></td></tr>
-
+                    <%}%>
+                    <%if (d.getNu_cuenta() != null) {%>
                     <tr><td class="td-det">N° Cuenta: </td><td><%=d.getNu_cuenta()%></td></tr>
-
+                    <%}%>
+                    <%if (d.getNu_cuenta_banc() != null) {%>
                     <tr><td class="td-det">N° Cuenta Bancaria: </td><td><%=d.getNu_cuenta_banc()%></td></tr>
-
+                    <%}%>
                     <%if (d.getEs_gen_nu_cuenta().trim().equals("1")) {%>
                     <tr><td class="td-det">N° Cuenta Generado por RRHH </td><td>Si</td></tr>
                     <%} else {%>
@@ -118,6 +131,7 @@
                         String num = request.getParameter("num");
                         if (d.getEs_dgp() != null) {
                             if (num.equals("0") & d.getEs_dgp().equals("0") & idrol.trim().equals("ROL-0006")) {
+
                     %>
 
                     <td><a href="../../contrato?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=enviar">Hacer Contrato</a></td></tr>
@@ -134,6 +148,7 @@
                         <td class="td-det">Modificado por:</td>
                         <td><%
                             for (int j = 0; j < us.List_ID_User(d.getUs_modif()).size(); j++) {
+
                                 u = (Usuario) LIST_ID_USER.get(j);
                                 out.print(u.getId_rol());
                             }%>
@@ -155,6 +170,7 @@
 
 
 
+
                     <input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>">
                     <input type="hidden" name="opc" value="MODIFICAR REQUERIMIENTO">   
                     <% if (idrol.trim().equals("ROL-0002") | idrol.trim().equals("ROL-0005") | idrol.trim().equals("ROL-0003")) { %>
@@ -163,6 +179,7 @@
 
             <% if (request.getParameter("opc") != null) {
                     if (request.getParameter("opc").equals("reg_doc")) {
+
             %>
 
             <tr><td colspan="2"><h3 style="text-align: center;">Enviar Requerimiento</h3> 
@@ -177,7 +194,7 @@
                     </form></td></tr>
 
             <%}
-                        }%>
+                }%>
         </div>
     </center>
 </body>
