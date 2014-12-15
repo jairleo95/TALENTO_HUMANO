@@ -390,7 +390,7 @@
                                                                     <section class="col col-3" id="no_cuen_otros">
 
                                                                         <label class="input" id="titu">Nombre Banco :
-                                                                            <input type="text" name="" required="" id="nu_cuen_otros" maxlength="30"   />
+                                                                            <input type="text" name="BANCO_OTROS" required="" id="nu_cuen_otros" maxlength="30"   />
                                                                         </label>
 
                                                                     </section>
