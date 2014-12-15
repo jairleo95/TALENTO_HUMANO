@@ -398,6 +398,7 @@ public class DgpDAO implements InterfaceDgpDAO {
                 x.setNu_cuenta(rs.getString("nu_cuenta"));
                 x.setNu_cuenta_banc(rs.getString("nu_cuenta_banc"));
                 x.setEs_gen_nu_cuenta(rs.getString("es_gen_nu_cuenta"));
+                x.setNo_banco_otros(rs.getString("no_banco_otros"));
                 Lista.add(x);
             }
         } catch (SQLException e) {
