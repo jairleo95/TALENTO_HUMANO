@@ -126,6 +126,7 @@ public class CDgp extends HttpServlet {
             dia.add("mie");
             dia.add("jue");
             dia.add("vie");
+            dia.add("sab");
             dia.add("dom");
 
             String ID_DETALLE_HORARIO = request.getParameter("ID_DETALLE_HORARIO");
