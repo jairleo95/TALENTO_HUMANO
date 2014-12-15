@@ -379,11 +379,19 @@
 
                                                                         <label class="select" id="titu">Banco:
                                                                             <select name="BANCO" id="banco" required="">
+                                                                                <option value="4" selected="" disabled="">[Selecione]</option>
                                                                                 <option value="0" >Ninguno</option>
                                                                                 <option value="1" >BBVA</option>
                                                                                 <option value="2" >BCP</option>
                                                                                 <option value="3" >Otros</option>
                                                                             </select>
+
+                                                                    </section>
+                                                                    <section class="col col-3" id="no_cuen_otros">
+
+                                                                        <label class="input" id="titu">Nombre Banco :
+                                                                            <input type="text" name="" required="" id="nu_cuen_otros" maxlength="30"   />
+                                                                        </label>
 
                                                                     </section>
                                                                     <section class="col col-3" id="no_cuen">
@@ -413,7 +421,8 @@
                                                                             function() {
                                                                                 $("#no_cuen").hide();
                                                                                 $("#no_cuen_ban").hide();
-                                                                                $("#generar").show();
+                                                                                $("#generar").hide();
+                                                                                $("#no_cuen_otros").hide();
 
 
                                                                                 $("#banco").change(function() {
@@ -428,6 +437,9 @@
                                                                                         $("#subscription").attr('checked', false);
                                                                                         $("#nu_cuen").attr("maxlength", "21");
                                                                                         $("#nu_cuen").mask("0011-9999999999999999", {placeholder: "X"});
+                                                                                        $("#no_cuen_otros").hide();
+                                                                                        $("#nu_cuen_otros").removeAttr('required');
+                                                                                        $("#nu_cuen_otros").val("");
                                                                                     }
                                                                                     if ($("#banco").val() == '2') {
                                                                                         $("#generar").hide();
@@ -440,6 +452,9 @@
                                                                                         $("#nu_cuen").val("");
                                                                                         $("#nu_cuen").attr("maxlength", "14");
                                                                                         $("#nu_cuen").mask("99999999999999", {placeholder: "X"});
+                                                                                        $("#no_cuen_otros").hide();
+                                                                                        $("#nu_cuen_otros").removeAttr('required');
+                                                                                        $("#nu_cuen_otros").val("");
                                                                                     }
                                                                                     if ($("#banco").val() == '3') {
                                                                                         $("#no_cuen").show();
@@ -447,6 +462,8 @@
                                                                                         $("#generar").hide();
                                                                                         $("#subscription").removeAttr('required');
                                                                                         $("#subscription").attr('checked', false);
+                                                                                        $("#no_cuen_otros").show();
+                                                                                        $("#nu_cuen_otros").val("");
                                                                                     }
                                                                                     if ($("#banco").val() == '0') {
                                                                                         $("#no_cuen").hide();
@@ -959,14 +976,14 @@
                                                                         );
                                                                     });</script>
                                                                 <script type="text/javascript">
-                                                                    $(document).ready(function () {
-                                                                        
-                                                                          //$("#sueldo").numeric();
-                                                                          $("#sueldo").mask("99999.99", {placeholder: "0"});
-                                                                          $("#bono_al").mask("99999.99", {placeholder: "0"});
-                                                                          $("#bev").mask("99999.99", {placeholder: "0"});
-                                                                        
-                                                                        
+                                                                    $(document).ready(function() {
+
+                                                                        //$("#sueldo").numeric();
+                                                                        $("#sueldo").mask("99999.99", {placeholder: "0"});
+                                                                        $("#bono_al").mask("99999.99", {placeholder: "0"});
+                                                                        $("#bev").mask("99999.99", {placeholder: "0"});
+
+
                                                                         var scntDiv = $('#show_1');
                                                                         var i = $('#show_1 .texto-h').size() + 1;
                                                                         var s = $('#show_1 .tr-count').size() + 1;
@@ -1177,7 +1194,7 @@
 
                                                                     // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-                                                                    $(document).ready(function () {
+                                                                    $(document).ready(function() {
 
                                                                         pageSetUp();
 
@@ -1276,7 +1293,7 @@
                                                                                 }
                                                                             },
                                                                             // Do not change code below
-                                                                            errorPlacement: function (error, element) {
+                                                                            errorPlacement: function(error, element) {
                                                                                 error.insertAfter(element.parent());
                                                                             }
                                                                         });
@@ -1345,7 +1362,7 @@
                                                                                 }
                                                                             },
                                                                             // Do not change code below
-                                                                            errorPlacement: function (error, element) {
+                                                                            errorPlacement: function(error, element) {
                                                                                 error.insertAfter(element.parent());
                                                                             }
                                                                         });
@@ -1397,7 +1414,7 @@
                                                                                 }
                                                                             },
                                                                             // Do not change code below
-                                                                            errorPlacement: function (error, element) {
+                                                                            errorPlacement: function(error, element) {
                                                                                 error.insertAfter(element.parent());
                                                                             }
                                                                         });
@@ -1436,15 +1453,15 @@
                                                                                 }
                                                                             },
                                                                             // Ajax form submition
-                                                                            submitHandler: function (form) {
+                                                                            submitHandler: function(form) {
                                                                                 $(form).ajaxSubmit({
-                                                                                    success: function () {
+                                                                                    success: function() {
                                                                                         $("#comment-form").addClass('submited');
                                                                                     }
                                                                                 });
                                                                             },
                                                                             // Do not change code below
-                                                                            errorPlacement: function (error, element) {
+                                                                            errorPlacement: function(error, element) {
                                                                                 error.insertAfter(element.parent());
                                                                             }
                                                                         });
@@ -1478,15 +1495,15 @@
                                                                                 }
                                                                             },
                                                                             // Ajax form submition
-                                                                            submitHandler: function (form) {
+                                                                            submitHandler: function(form) {
                                                                                 $(form).ajaxSubmit({
-                                                                                    success: function () {
+                                                                                    success: function() {
                                                                                         $("#contact-form").addClass('submited');
                                                                                     }
                                                                                 });
                                                                             },
                                                                             // Do not change code below
-                                                                            errorPlacement: function (error, element) {
+                                                                            errorPlacement: function(error, element) {
                                                                                 error.insertAfter(element.parent());
                                                                             }
                                                                         });
@@ -1515,7 +1532,7 @@
                                                                                 }
                                                                             },
                                                                             // Do not change code below
-                                                                            errorPlacement: function (error, element) {
+                                                                            errorPlacement: function(error, element) {
                                                                                 error.insertAfter(element.parent());
                                                                             }
                                                                         });
@@ -1560,7 +1577,7 @@
                                                                                 }
                                                                             },
                                                                             // Do not change code below
-                                                                            errorPlacement: function (error, element) {
+                                                                            errorPlacement: function(error, element) {
                                                                                 error.insertAfter(element.parent());
                                                                             }
                                                                         });
@@ -1570,7 +1587,7 @@
                                                                             dateFormat: 'dd.mm.yy',
                                                                             prevText: '<i class="fa fa-chevron-left"></i>',
                                                                             nextText: '<i class="fa fa-chevron-right"></i>',
-                                                                            onSelect: function (selectedDate) {
+                                                                            onSelect: function(selectedDate) {
                                                                                 $('#finishdate').datepicker('option', 'minDate', selectedDate);
                                                                             }
                                                                         });
@@ -1579,7 +1596,7 @@
                                                                             dateFormat: 'dd.mm.yy',
                                                                             prevText: '<i class="fa fa-chevron-left"></i>',
                                                                             nextText: '<i class="fa fa-chevron-right"></i>',
-                                                                            onSelect: function (selectedDate) {
+                                                                            onSelect: function(selectedDate) {
                                                                                 $('#startdate').datepicker('option', 'maxDate', selectedDate);
                                                                             }
                                                                         });
