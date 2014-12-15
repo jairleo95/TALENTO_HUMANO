@@ -190,7 +190,7 @@
             <div id="content">
                 <section id="widget-grid" class="">
                     <div class="row">
-                        <form action="../../dgp"   >
+                        <form id="checkout-form" action="../../dgp"  novalidate="novalidate">
                             <!-- NEW COL START -->
                             <article class="col-sm-12 col-md-12 col-lg-6">
 
@@ -359,7 +359,7 @@
                                                         <section class="col col-3" name="">
                                                             <label class="select" id="titu">Banco:
                                                                 <select name="BANCO" id="banco" required="">
-                                                                    <option value="4" selected="" disabled="">[Selecione]</option>
+                                                                    <option value="" selected="" >[Selecione]</option>
                                                                     <option value="0" >Ninguno</option>
                                                                     <option value="1" >BBVA</option>
                                                                     <option value="2" >BCP</option>
@@ -370,37 +370,38 @@
                                                         <section class="col col-3" id="no_cuen_otros">
 
                                                             <label class="input" id="titu">Nombre Banco :
-                                                                <input type="text" name="BANCO_OTROS" required="" id="nu_cuen_otros" maxlength="30"   />
+                                                                <input type="text" name="BANCO_OTROS"  id="nu_cuen_otros" maxlength="30"   />
                                                             </label>
 
                                                         </section>
                                                         <section class="col col-3" id="no_cuen">
 
                                                             <label class="input" id="titu">Nro Cuenta :
-                                                                <input type="text" name="CUENTA" required="" id="nu_cuen" maxlength="30"   />
+                                                                <input type="text" name="CUENTA"  id="nu_cuen" maxlength="30"   />
                                                             </label>
 
                                                         </section>
                                                         <section class="col col-3"  id="no_cuen_ban">
 
                                                             <label class="input" id="titu">Nro Cuenta Bancaria:
-                                                                <input type="text" name="CUENTA_BANC" required="" id="nu_cuen_ban">
+                                                                <input type="text" name="CUENTA_BANC" id="nu_cuen_ban">
                                                             </label>
 
                                                         </section>
 
                                                         <section class="col col-3" id="generar">
                                                             <label class="checkbox" >
-                                                                <input type="checkbox" name="GEN_NU_CUEN" id="subscription" required="" value="1">
+                                                                <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="1">
                                                                 <i></i>Generar Nro de Cuenta Bancaria</label>
                                                         </section>
 
                                                     </div>
                                                     <div  class="row" id="centro-costo_1" >
                                                         <section class="col col-4"><label class="select" id="titu">Centro de Costo N1:<select name="CENTRO_COSTOS_1" ><option value="0">----</option></select></label></section>
-                                                        <section class="col col-4"><label class="input" id="titu">%<input name="por_cen_costo_1" type="text" value="100"  id="porcentaje_cc"/></label></section>
+                                                        <section class="col col-4"><label class="input" id="titu">%<input name="por_cen_costo_1" max="100" maxlength="3" type="text" value="100"  id="porcentaje_cc"/></label></section>
                                                         <section class="col col-4"><label class="btn"><button type="button" class="btn btn-default" id="btn-agregar-cc" >Agregar</button></label></section>
                                                     </div>
+                                                    <code class="ver"></code>
                                                     <script type="text/javascript">
                                                         $(document).ready(
                                                                 function () {
@@ -412,35 +413,21 @@
 
                                                                     var agregar = $('#fila-agregar');
                                                                     var ag = $('#fila-agregar #porcentaje_cc').size() + 1;
-                                                                    //var s = $('#fila-agregar #porcentaje_cc').size() + 1;
                                                                     var texto = "";
+                                                                    var r = "";
 
                                                                     $('#btn-agregar-cc').click(function () {
-                                                                        texto += '<div  class="row" id="centro-costo_'+ag+'" >';
+                                                                        texto += '<div  class="row" id="centro-costo_' + ag + '" >';
                                                                         texto += '<section class="col col-4"><label class="select" id="titu">Centro de Costo N' + ag + ':<select name="CENTRO_COSTOS_' + ag + '" ><option value="0">----</option></select></label></section>';
                                                                         texto += '<section class="col col-4"><label class="input" id="titu">%<input name="por_cen_costo_1" type="text" value=""  id="porcentaje_cc"/></label></section>';
-                                                                        texto += '<section class="col col-4"><label class="btn"><button type="button" class="btn btn-default" id="btn-remover-cc" >Remover</button></label></section>';
+                                                                        texto += '<section class="col col-4"><label class="btn"><button type="button" class="btn btn-default"  onclick=" $(\'#centro-costo_' + ag + '\').remove()"  >Remover</button></label></section>';
                                                                         texto += '</div>';
                                                                         agregar.append(texto);
 
-                                                                        $('#btn-remover-cc').click(function () {
-                                                                            if (ag > 1) {
-                                                                                $('#centro-costo_'+ag).remove();
-                                                                                alert('#centro-costo_'+ag);
-                                                                                ag--;
-                                                                              
-                                                                            }
-                                                                            return false;
-                                                                        });
+                                                                        // $(".ver").text(texto);
+                                                                        texto = "";
                                                                         ag++;
-                                                                        
-                                                                        return false;
                                                                     });
-
-
-
-
-
 
                                                                     $("#banco").change(function () {
                                                                         if ($("#banco").val() == '1') {

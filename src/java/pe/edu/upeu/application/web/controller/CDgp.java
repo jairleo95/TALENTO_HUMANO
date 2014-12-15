@@ -102,7 +102,7 @@ public class CDgp extends HttpServlet {
             String IP_USUARIO = request.getParameter("USUARIO_IP");
             double CA_BONO_ALIMENTARIO = Double.parseDouble(request.getParameter("BONO_ALIMENTARIO"));
             double DE_BEV = Double.parseDouble(request.getParameter("BEV"));
-            double CA_CENTRO_COSTOS = Double.parseDouble(request.getParameter("CENTRO_COSTOS"));
+            double CA_CENTRO_COSTOS = 0.0;
             String DE_ANTECEDENTES_POLICIALES = request.getParameter("ANTECEDENTES_POLICIALES");
             String DE_CERTIFICADO_SALUD = request.getParameter("CERTIFICADO_SALUD");
             String DE_MONTO_HONORARIO = request.getParameter("MONTO_HONORARIO");
