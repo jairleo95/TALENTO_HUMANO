@@ -118,6 +118,7 @@
                             <td ><span title="PUESTO">Puesto</span></td>
                             <td><span title="SUELDO">Sueldo</span></td>
                             <td><span title="FECHA_CREACION">Fecha de Contratación</span></td>
+                            <td><span >Opcion</span></td>
                         </tr>
                     </thead>
 
@@ -156,14 +157,19 @@
                         var list = objJson.lista;
                         for (var i = 0; i < list.length; i++) {
                             b.append("<tr>");
-                            b.append("<td>" + list[i].nom_ape + "</td>");
+                            b.append("<td><p>" + list[i].nom_ape + "</p></td>");
                             b.append("<td>" + list[i].fe_desde + "</td>");
                             b.append("<td>" + list[i].fe_hasta + "</td>");
-                            b.append("<td>" + list[i].no_area + "</td>");
-                            b.append("<td>" + list[i].no_seccion + "</td>");
-                            b.append("<td>" + list[i].no_puesto + "</td>");
-                            b.append("<td>" + list[i].ca_sueldo + "</td>");
+                            b.append("<td><p>" + list[i].no_area + "</p></td>");
+                            b.append("<td><p>" + list[i].no_seccion + "</p></td>");
+                            b.append("<td><p>" + list[i].no_puesto + "</p></td>");
+                            if (list[i].ca_sueldo === null) {
+                                b.append("<td>" + list[i].ca_sueldo + '</td>');
+                            } else {
+                                b.append("<td>" + "0" + '</td>');
+                            }
                             b.append("<td>" + list[i].fecha_contratacion + "</td>");
+                            b.append('<td><input type="submit" value="'+ +'"> </td>' );
                             b.append("</tr>");
                             ;
                         }
@@ -172,16 +178,16 @@
 
                 }
         );
-       /* $("#btnbuscar").click(
-                function() {
-
-                    $.post("../../ajax/Ajax_Contrato/Ajax_Contrato.jsp", $("#frm_filtro2").serialize(), function(objJson) {
-                       alert( );
-                    }
-                    );
-
-                }
-        );*/
+        /* $("#btnbuscar").click(
+         function() {
+         
+         $.post("../../ajax/Ajax_Contrato/Ajax_Contrato.jsp", $("#frm_filtro2").serialize(), function(objJson) {
+         alert( );
+         }
+         );
+         
+         }
+         );*/
         $("#btncancel").click(
                 function() {
                     document.formulario.reset();
