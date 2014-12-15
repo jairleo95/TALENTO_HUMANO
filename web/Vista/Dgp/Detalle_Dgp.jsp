@@ -93,6 +93,8 @@
                         if (d.getNo_banco().equals("3")) {%>
                     <tr><td class="td-det">Banco: </td><td>Otros</td></tr>
                     <%}%>
+                    
+                    <tr><td class="td-det">Nombre Banco</td><td><%=d.getNo_banco_otros()%></td></tr>
 
                     <tr><td class="td-det">N° Cuenta: </td><td><%=d.getNu_cuenta()%></td></tr>
 

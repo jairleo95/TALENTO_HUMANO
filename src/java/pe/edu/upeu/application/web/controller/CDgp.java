@@ -75,7 +75,7 @@ public class CDgp extends HttpServlet {
         String opc = request.getParameter("opc");
         InterfaceHorarioDAO IHor = new HorarioDAO();
         InterfaceListaDAO Ilis = new ListaDAO();
-         InterfaceDocumentoDAO doc = new DocumentoDAO();
+        InterfaceDocumentoDAO doc = new DocumentoDAO();
 
         //try {
         if (opc.equals("Registrar")) {
@@ -106,14 +106,20 @@ public class CDgp extends HttpServlet {
             String DE_ANTECEDENTES_POLICIALES = request.getParameter("ANTECEDENTES_POLICIALES");
             String DE_CERTIFICADO_SALUD = request.getParameter("CERTIFICADO_SALUD");
             String DE_MONTO_HONORARIO = request.getParameter("MONTO_HONORARIO");
-            String NO_BANCO = (request.getParameter("BANCO") ==null)?"0":"1";
+            String NO_BANCO = request.getParameter("BANCO");
+            //String NU_CUENTA = (request.getParameter("CUENTA")== null ) ? "0":"no tiene";
             String NU_CUENTA = request.getParameter("CUENTA");
+            /*if(request.getParameter("CUENTA")== null ){
+             String NU_CUENTA = "no tiene";
+             }else{
+             String NU_CUENTA = request.getParameter("CUENTA");
+             }*/
+            //String NU_CUENTA_BANC = (request.getParameter("CUENTA_BANC") == null) ? "0" : "no tiene";
             String NU_CUENTA_BANC = request.getParameter("CUENTA_BANC");
+            String ES_GEN_NU_CUENTA = (request.getParameter("GEN_NU_CUEN") == null) ? "0" : "1";
+            String NO_BANCO_OTROS = request.getParameter("BANCO_OTROS");
             
-            String ES_GEN_NU_CUENTA = (request.getParameter("GEN_NU_CUEN") ==null)?"0":"1";
-            
-
-            dgp.INSERT_DGP(null, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO, DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION, ES_DGP, iduser, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, CA_CENTRO_COSTOS, DE_ANTECEDENTES_POLICIALES, DE_CERTIFICADO_SALUD, DE_MONTO_HONORARIO, NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEN_NU_CUENTA);
+            dgp.INSERT_DGP(null, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO, DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION, ES_DGP, iduser, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, CA_CENTRO_COSTOS, DE_ANTECEDENTES_POLICIALES, DE_CERTIFICADO_SALUD, DE_MONTO_HONORARIO, NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEN_NU_CUENTA, NO_BANCO_OTROS);
 
             String iddgp = dgp.MAX_ID_DGP();
             String idrp = IReq.id_det_req_proc(iddgp);
