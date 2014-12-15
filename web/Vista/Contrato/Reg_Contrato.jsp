@@ -87,7 +87,7 @@
                                 }%>
                         </select></td></tr>
                 <tr><td>Centro de Costo:</td><td>
-                        <select name="CENTRO_COSTO" class="text-box"  >
+                        <select name="CENTRO_COSTO" class="text-box" required="" >
                             <option value="">[SELECCIONE]</option>
                             <%for (int h = 0; h < List_centro_costo.size(); h++) {
                                     Centro_Costos c = new Centro_Costos();
@@ -125,7 +125,8 @@
                 <tr><td>Asignación Familiar:</td><td><input type="text" name="ASIG_FAMILIAR"  <% if (total == 0) {%> value="0" <%} else {%>value="75.0" <%}%> class="text-box" ></td></tr>  
 
                 <tr><td>Régimen Laboral Mintra :</td><td>
-                        <select name="REG_LAB_MINTRA" class="text-box">
+                        <select name="REG_LAB_MINTRA" class="text-box" required="">
+                            <option value="">[SELECCIONE]</option>
                             <%for (int q = 0; q < list_reg_labo.size(); q++) {
                                     Regimen_Laboral re = new Regimen_Laboral();
                                     re = (Regimen_Laboral) list_reg_labo.get(q);
@@ -135,8 +136,8 @@
                         </select>
                     </td></tr>
                 <tr><td>Modalidad:</td><td>
-                        <select name="MODALIDAD" class="text-box" id="select_mod">
-                            <option >[SELECCIONAR]</option>
+                        <select name="MODALIDAD" class="text-box" id="select_mod" required="">
+                            <option value="">[SELECCIONE]</option>
                             <%for (int l = 0; l < List_modalidad.size(); l++) {
                                     Modalidad mo = new Modalidad();
                                     mo = (Modalidad) List_modalidad.get(l);
@@ -146,8 +147,8 @@
                             <%}%>
                         </select></td></tr>
                 <tr><td>SUB-Modalidad:</td><td>
-                        <select name="SUB_MODALIDAD" class="text-box" id="select-sub-mod">
-                            <option >[SELECCIONES]</option>
+                        <select name="SUB_MODALIDAD" class="text-box" id="select-sub-mod" required="">
+                            <option value="">[SELECCIONE]</option>
                         </select></td></tr>
                 <tr><td>Tipo de Contratación:</td><td>
                         <select name="TI_CONTRATACION" class="text-box" required="">
@@ -156,7 +157,7 @@
                             <option value="R">RENOVACION</option>
                         </select></td></tr>
                 <tr><td>Codigo de Grupo de Ocupaciones:</td><td>
-                        <select name="CO_GRUPO_OCU" class="text-box">
+                        <select name="CO_GRUPO_OCU" class="text-box" required="">
                             <option value="">[SELECCIONE]</option>
                             <%for(int gr=0;gr<List_grup_ocu.size();gr++){
                             Grupo_Ocupaciones g=new Grupo_Ocupaciones();
@@ -251,7 +252,7 @@
                     </td></tr> 
 
                 <tr><td>Situacion Actual:</td><td>
-                        <select  name="ESTADO_CONTRATO" class="text-box">
+                        <select  name="ESTADO_CONTRATO" class="text-box" required="">
                             <option value="">---elegir---</option>
                             <option value="1" selected>Activo</option>
                             <option value="2">Término de Contrato</option>
@@ -272,7 +273,7 @@
                             <option value="3">Tarapoto</option>
                         </select>
 
-                <tr><td>Fecha de Cese:</td><td><input type="date" name="FEC_CESE" class="text-box" ></td></tr>   
+                <tr><td>Fecha de Cese:</td><td><input type="date" name="FEC_CESE" class="text-box" required=""></td></tr>   
                 <tr><td>RUC UPEU:</td><td><input type="text"  value="20138122256" name="EMP_RUC" class="text-box" ></td></tr>
                 <tr><td>CODIGO SUCURSAL:</td><td><input type="text"  value="-1" name="SUCURSAL" class="text-box" ></td></tr>
                 <tr><td>MYPE:</td><td><input type="text"  value="N" name="MYPE" class="text-box" ></td></tr>
@@ -306,11 +307,9 @@
                                 var list = objJson.lista;
                                 if (list.length !== 0) {
                                     for (var i = 0; i < list.length; i++) {
-                                        a.append('<option value="' + list[i].id_submodalidad + '" required="">' + list[i].de_submod + '</option>');
+                                        a.append('<option value="' + list[i].id_submodalidad + '">' + list[i].de_submod + '</option>');
                                     }
-                                } else {
-                                    document.getElementById('select-sub-mod').style.display = "none";
-                                }
+                                } 
                             });
                         });
                 
