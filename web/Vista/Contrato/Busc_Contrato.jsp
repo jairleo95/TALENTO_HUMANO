@@ -18,9 +18,19 @@
         <link type="text/css" rel="stylesheet" href="../../css/Css_Formulario/form.css">
         <link rel="stylesheet" href="../../css/bootstrap.min.css">
         <title>Contratos</title>
-        <style>
-
-        </style>
+        <STYLE type=text/css>.enlaceboton {
+                PADDING-RIGHT: 4px; PADDING-LEFT: 4px; FONT-WEIGHT: bold; FONT-SIZE: 10pt; PADDING-BOTTOM: 4px; COLOR:#btnbuscar ; PADDING-TOP: 4px; FONT-FAMILY: verdana, arial, sans-serif; BACKGROUND-COLOR: #2D88D9; TEXT-DECORATION: none
+            }
+            .enlaceboton:link {
+                BORDER-RIGHT: #666666 2px solid; BORDER-TOP: #cccccc 1px solid; BORDER-LEFT: #cccccc 1px solid; BORDER-BOTTOM: #666666 2px solid; border-radius: 50px
+            }
+            .enlaceboton:visited {
+                BORDER-RIGHT: #666666 2px solid; BORDER-TOP: #cccccc 1px solid; BORDER-LEFT: #cccccc 1px solid; BORDER-BOTTOM: #666666 2px solid
+            }
+            .enlaceboton:hover {
+                BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #666666 2px solid; BORDER-LEFT: #666666 2px solid; BORDER-BOTTOM: #cccccc 1px solid
+            }
+        </STYLE>
     </head>
     <body>  
         <div class="spacing">
@@ -32,7 +42,7 @@
 
             <div   >
                 <!--style="padding-left: 30px"-->
-                <form class="form-inline" id="frm_filtro2" method="post" action="" name="formulario">
+                <form class="form-inline" id="frm_filtro2" method="post" action="../../contrato" name="formulario">
                     <div class="row">
                         <div class="form-group" >
                             <label>Fecha de Contratacion</label><br>
@@ -121,9 +131,8 @@
                             <td><span >Opcion</span></td>
                         </tr>
                     </thead>
-
+                    <a class="enlaceboton ">fg</a>
                     <tbody class="tbodys">
-
 
                     </tbody>
                 </table>
@@ -169,8 +178,8 @@
                                 b.append("<td>" + "0" + '</td>');
                             }
                             b.append("<td>" + list[i].fecha_contratacion + "</td>");
-                            b.append('<td><input type="submit" value="'+ +'"> </td>' );
-                            b.append("</tr>");
+                            b.append('<td><input type="hidden" name="idtr" value="'++'"><input type="submit" name="opc" value="Detalle_Contractual"> </td>');
+                                    b.append("</tr>");
                             ;
                         }
                     }

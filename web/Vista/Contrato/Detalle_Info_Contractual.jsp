@@ -94,7 +94,7 @@
                     <td><input name="opc" value="actualizar" type="submit"></td></tr>
             </table>
         </form>
-        <form >
+        <form>
             <table class="table table-hover table-striped  table-responsive">
                 <% for (int p = 0; p < List_id_Contrato_DGP.size(); p++) {%>
                 <tr><td class="text-info table-bordered"><strong>Desde: <%=n.getId_contrato()%></strong></td><td colspan="2"><%=n.getFe_desde()%></td><td class="text-info table-bordered" colspan="2"><strong>Hasta:</strong></td><td colspan="2"><%=n.getFe_hasta()%></td></tr>
@@ -312,8 +312,7 @@
                     <%}
                         }
                         if (List_Planilla.size() == 0) {%>
-                <center><table class=" table-hover table-striped  table-responsive"><tr><td class="text-info "><input class="button blue"  type="hidden" value="Editar"></td>
-                            <td colspan="6"><a  class="button blue" href="../../contrato?opc=Ver_Plantilla&idc=<%=n.getId_contrato().trim()%>">Ver Plantilla</a></td></tr></table></center>
+                <tr><td class="text-info" colspan="8" style="text-align:center"><input class="button blue"  type="hidden" value="Editar"><a  class="button blue" href="../../contrato?opc=Ver_Plantilla&idc=<%=n.getId_contrato().trim()%>">Ver Plantilla</a></td></tr>
                             <%}%>
 
                 <tr style="color: red;"> <%if (n.getUs_creacion() == null && n.getUs_creacion() != null) {%>
