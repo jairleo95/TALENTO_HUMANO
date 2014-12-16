@@ -420,53 +420,53 @@
                                                                         ag++;
                                                                     });
 
-                                                                    $("#banco").change(function () {
+                                                                   $("#banco").change(function() {
                                                                         if ($("#banco").val() == '1') {
                                                                             $("#generar").hide();
-                                                                            $("#subscription").removeAttr('required');
                                                                             $("#no_cuen").show();
-                                                                            $("#no_cuen_ban").hide();
-                                                                            $("#nu_cuen_ban").removeAttr('required');
-                                                                            $("#nu_cuen_ban").val("");
                                                                             $("#nu_cuen").val("");
+                                                                            $("#nu_cuen").attr("required", "required");
+                                                                            $("#no_cuen_ban").hide();
+                                                                            $("#nu_cuen_ban").val("");
                                                                             $("#subscription").attr('checked', false);
                                                                             $("#nu_cuen").attr("maxlength", "21");
                                                                             $("#nu_cuen").mask("0011-9999999999999999", {placeholder: "X"});
                                                                             $("#no_cuen_otros").hide();
-                                                                            $("#nu_cuen_otros").removeAttr('required');
                                                                             $("#nu_cuen_otros").val("");
                                                                         }
                                                                         if ($("#banco").val() == '2') {
                                                                             $("#generar").hide();
-                                                                            $("#subscription").removeAttr('required');
                                                                             $("#subscription").attr('checked', false);
                                                                             $("#no_cuen_ban").hide();
-                                                                            $("#nu_cuen_ban").removeAttr('required');
                                                                             $("#nu_cuen_ban").val("");
                                                                             $("#no_cuen").show();
                                                                             $("#nu_cuen").val("");
+                                                                            $("#nu_cuen").attr("required", "required");
                                                                             $("#nu_cuen").attr("maxlength", "14");
                                                                             $("#nu_cuen").mask("99999999999999", {placeholder: "X"});
                                                                             $("#no_cuen_otros").hide();
-                                                                            $("#nu_cuen_otros").removeAttr('required');
                                                                             $("#nu_cuen_otros").val("");
                                                                         }
                                                                         if ($("#banco").val() == '3') {
                                                                             $("#no_cuen").show();
+                                                                            $("#no_cuen").val("");
+                                                                            $("#no_cuen").attr("required","required");
                                                                             $("#no_cuen_ban").show();
-                                                                            $("#generar").hide();
-                                                                            $("#subscription").removeAttr('required');
-                                                                            $("#subscription").attr('checked', false);
+                                                                            $("#no_cuen_ban").val("");
+                                                                            $("#no_cuen_ban").attr("required","required");
                                                                             $("#no_cuen_otros").show();
                                                                             $("#nu_cuen_otros").val("");
+                                                                            $("#nu_cuen_otros").attr("required","required");
+                                                                            $("#generar").hide();
+                                                                            $("#subscription").attr('checked', false);
                                                                         }
                                                                         if ($("#banco").val() == '0') {
                                                                             $("#no_cuen").hide();
-                                                                            $("#nu_cuen").removeAttr('required');
                                                                             $("#nu_cuen").val("");
                                                                             $("#no_cuen_ban").hide();
-                                                                            $("#nu_cuen_ban").removeAttr('required');
+                                                                            $("#nu_cuen_ban").val("");
                                                                             $("#generar").show();
+                                                                            $("#subscription").attr("required", "required");
                                                                         }
 
 
