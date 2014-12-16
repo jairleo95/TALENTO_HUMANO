@@ -351,7 +351,7 @@
                                                         <section class="col col-3" name="">
                                                             <label class="select" id="titu">Banco:
                                                                 <select name="BANCO" id="banco" required="">
-                                                                    <option value="" selected="" >[Selecione]</option>
+                                                                    <option value="" selected="" disabled="" >[Selecione]</option>
                                                                     <option value="0" >Ninguno</option>
                                                                     <option value="1" >BBVA</option>
                                                                     <option value="2" >BCP</option>
@@ -451,10 +451,10 @@
                                                                         if ($("#banco").val() == '3') {
                                                                             $("#no_cuen").show();
                                                                             $("#no_cuen").val("");
-                                                                            $("#no_cuen").attr("required", "required");
+                                                                            $("#nu_cuen").attr("required","required");
                                                                             $("#no_cuen_ban").show();
                                                                             $("#no_cuen_ban").val("");
-                                                                            $("#no_cuen_ban").attr("required", "required");
+                                                                            $("#nu_cuen_ban").attr("required","required");
                                                                             $("#no_cuen_otros").show();
                                                                             $("#nu_cuen_otros").val("");
                                                                             $("#nu_cuen_otros").attr("required", "required");
