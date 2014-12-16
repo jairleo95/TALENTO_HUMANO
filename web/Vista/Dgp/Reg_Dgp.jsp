@@ -107,7 +107,8 @@
                                     var y = parseFloat($("#bono_al").val());
                                     var z = parseFloat($("#bev").val());
                                     var v = x + y + z;
-                                    $("#suel_total").text(v);
+                                    $("#suel_total").text(Math.round(v*100)/100);
+
                                 }
                         );
                         $("#bono_al").keyup(
@@ -116,7 +117,7 @@
                                     var y = parseFloat($("#bono_al").val());
                                     var z = parseFloat($("#bev").val());
                                     var v = x + y + z;
-                                    $("#suel_total").text(v);
+                                    $("#suel_total").text(Math.round(v*100)/100);
                                 }
                         );
                         $("#bev").keyup(
@@ -124,8 +125,8 @@
                                     var x = parseFloat($("#sueldo").val());
                                     var y = parseFloat($("#bono_al").val());
                                     var z = parseFloat($("#bev").val());
-                                    var v = x + y + z;
-                                    $("#suel_total").text(v);
+                                    var v =  x + y + z;
+                                    $("#suel_total").text(Math.round(v*100)/100);
                                 }
                         );
                     }
@@ -414,13 +415,13 @@
                                                                         texto += '<section class="col col-4"><label class="btn"><button type="button" class="btn btn-default"  onclick=" $(\'#centro-costo_' + ag + '\').remove()"  >Remover</button></label></section>';
                                                                         texto += '</div>';
                                                                         agregar.append(texto);
-                                                                          alert($("#por_cen_costo").val());
+                                                                        alert($("#por_cen_costo").val());
                                                                         // $(".ver").text(texto);
                                                                         texto = "";
                                                                         ag++;
                                                                     });
 
-                                                                   $("#banco").change(function() {
+                                                                    $("#banco").change(function () {
                                                                         if ($("#banco").val() == '1') {
                                                                             $("#generar").hide();
                                                                             $("#no_cuen").show();
@@ -450,13 +451,13 @@
                                                                         if ($("#banco").val() == '3') {
                                                                             $("#no_cuen").show();
                                                                             $("#no_cuen").val("");
-                                                                            $("#no_cuen").attr("required","required");
+                                                                            $("#no_cuen").attr("required", "required");
                                                                             $("#no_cuen_ban").show();
                                                                             $("#no_cuen_ban").val("");
-                                                                            $("#no_cuen_ban").attr("required","required");
+                                                                            $("#no_cuen_ban").attr("required", "required");
                                                                             $("#no_cuen_otros").show();
                                                                             $("#nu_cuen_otros").val("");
-                                                                            $("#nu_cuen_otros").attr("required","required");
+                                                                            $("#nu_cuen_otros").attr("required", "required");
                                                                             $("#generar").hide();
                                                                             $("#subscription").attr('checked', false);
                                                                         }
