@@ -1,13 +1,12 @@
-
-<jsp:useBean class="java.util.ArrayList" id="Det_Autorizacion" scope="application" />
-<%@page import="pe.edu.upeu.application.model.X_List_De_Autorizacion"%>
+<%@page import="pe.edu.upeu.application.model.X_User_dgp"%>
+<jsp:useBean class="java.util.ArrayList" id="USER_DGP" scope="application"/>
 <!DOCTYPE html >
 <html lang="">
     <head>
         <meta charset="utf-8">
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
-        <title> Autorizaciones DGP </title>
+        <title> Usuarios - DGP </title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -80,7 +79,7 @@
                         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
                             <!-- Widget ID (each widget will need unique ID)-->
-                         <div class="jarviswidget jarviswidget-color-yellow" id="wid-id-0" data-widget-editbutton="false">
+                            <div class="jarviswidget jarviswidget-color-teal" id="wid-id-0" data-widget-editbutton="false">
                                 <!-- widget options:
                                 usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
@@ -96,7 +95,7 @@
                                 -->
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                    <h2>Historial de Autorizaciones</h2>
+                                    <h2>Usuarios que intervienen en la autorizacion del  DGP</h2>
 
                                 </header>
 
@@ -111,46 +110,28 @@
                                         <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                                             <thead>
                                                 <tr>
-                                                    <th >Paso</th>
-                                                    <th data-class="expand"><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Estado</th>
-                                                    <th data-hide="phone"><i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i> Encargado</th>
-                                                    <th>Cargo Encargado</th>
-                                                    <th data-hide="phone,tablet"><i class="fa fa-fw fa-map-marker txt-color-blue hidden-md hidden-sm hidden-xs"></i> Area</th>
+
+                                                    <th data-class="expand"><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Nro. Paso</th>
+                                                    <th ><i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i> Usuarios</th>
+                                                    <th data-hide="phone">Nombres y Apellidos</th>
+                                                    <th data-hide="phone,tablet"><i class="fa fa-fw fa-map-marker txt-color-blue hidden-md hidden-sm hidden-xs"></i> Puesto</th>
                                                     <th data-hide="phone,tablet">Departamento</th>
-                                                    <th data-hide="phone,tablet"><i class="fa fa-fw fa-calendar txt-color-blue hidden-md hidden-sm hidden-xs"></i> Detalle</th>
+                                                    <th data-hide="phone,tablet"><i class="fa fa-fw fa-calendar txt-color-blue hidden-md hidden-sm hidden-xs"></i> Descripcion</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <%for (int i = 0; i < Det_Autorizacion.size(); i++) {
-                                                        X_List_De_Autorizacion a = new X_List_De_Autorizacion();
-                                                        a = (X_List_De_Autorizacion) Det_Autorizacion.get(i);
-                                                %>
-                                                <tr >
-                                                    <td class="caji"><%=a.getNu_pasos()%></td>
-                                                    <td class="caji" ><% if (a.getEs_autorizacion().equals("1")) { %>
-                                                        <img src="../../imagenes/Aprobado.png" width="20" height="20">
-                                                        <% }
-                                                            if (a.getEs_autorizacion().equals("2")) {
-                                                        %>
-                                                        <img src="../../imagenes/Desaprobado.png" width="20" height="20">
-                                                        <% }%></td>
-                                                    <td class="caji"><%=a.getUs_ap_p().toUpperCase() + " " + a.getUs_ap_mat().toUpperCase() + " " + a.getUs_no_tr().toUpperCase()%></td> 
-                                                    <td class="caji" ><%=a.getUs_no_puesto()%></td> 
-                                                    <td class="caji"><%=a.getUs_no_area()%></td> 
-                                                    <td class="caji"><%=a.getUs_no_dep()%></td> 
-                                                    <td class="caji" ><%=a.getDe_pasos()%></td> 
-
-                                                    <%
-                                                        if (a.getEs_autorizacion().equals("2") & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005"))) {
-
-                                                    %>
-                                            <div class="alerta">
-                                                <h1>Alerta! debe Corregir el Dgp... se ha Rechazado el Dgp</h1>
-                                                <a href="../Control/ControlAutorizacion.php?opc=HDGP&ida=<? echo $list[$i][13]; ?>">Habilitar DGP</a></div>
+                                                <%for (int i = 0; i < USER_DGP.size(); i++) {
+                                                        X_User_dgp u = new X_User_dgp();
+                                                        u = (X_User_dgp) USER_DGP.get(i);
+                                                %> <tr>
+                                                    <td class="caji"><%=u.getNu_pasos()%></td>
+                                                    <td class="caji"><%=u.getNo_usuario()%></td>
+                                                    <td class="caji"><%=u.getAp_paterno() + " " + u.getAp_materno() + " " + u.getNo_trabajador()%></td>
+                                                    <td class="caji"><%=u.getNo_puesto()%></td>
+                                                    <td class="caji"><%=u.getNo_dep()%></td>
+                                                    <td class="caji"><%=u.getDe_pasos()%></td>
+                                                </tr>
                                                 <%}%>
-                                                <% }%>
-
-                                            </tr> 
 
                                             </tbody>
                                         </table>
