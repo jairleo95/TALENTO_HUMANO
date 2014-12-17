@@ -118,7 +118,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
 
          }*/
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select d.*  from (select * from RHVD_FICHA_TRAB_NUM_C) d, RHVD_USUARIO u where u.id_usuario= d.id_usuario_creacion";
+        String sql = "select d.*, ES_PROCESO_TRABAJADOR(d.id_trabajador) as es_proceso from (select * from RHVD_FICHA_TRAB_NUM_C) d, RHVD_USUARIO u where u.id_usuario= d.id_usuario_creacion ";
         nom = nom.toUpperCase();
         ape_p = ape_p.toUpperCase();
         ape_m = ape_m.toUpperCase();
@@ -210,6 +210,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 v.setCm_otros_estudios(rs.getString("cm_otros_estudios"));
                 v.setEs_sexo(rs.getString("es_sexo"));
                 v.setLi_grupo_sanguineo(rs.getString("li_grupo_sanguineo"));
+                v.setEs_proceso(rs.getInt("es_proceso"));
                 list.add(v);
             }
 

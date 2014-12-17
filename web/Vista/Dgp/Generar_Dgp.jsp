@@ -66,7 +66,6 @@
                 <div class="form-group">
                     <br>
                     <input class="btn btn-primary"  type="submit" name="busqueda"  value="Buscar">
-
                     <a href="?cancel=true&text=<%=text%>" class="btn btn-primary" role="button">Cancelar</a>
                 </div>
 
@@ -102,11 +101,23 @@
             <tr>
                 <td><%out.println(i + 1);%></td>         
 
-                <td><img src="../../imagenes/avatar_default.jpg"  width="50"  height="50"></td>
+                <% if (tr.getAr_foto() == null) {%>
+                <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30"></td>
+                    <% } else {%>
+                <td><img src="../Usuario/Fotos/<%=tr.getAr_foto()%>"  width="30"  height="30"></td>
+                    <% }%>
+
                 <td><div ><a href="../../trabajador?idtr=<%=tr.getId_trabajador()%>&opc=list"><%=tr.getAp_paterno().toUpperCase() + " " + tr.getAp_materno().toUpperCase() + " " + tr.getNo_trabajador().toUpperCase()%></a></div></td>
                 <td><%=tr.getNo_carrera()%></td>
-                <td><a href="../../dgp?idtr=<%=tr.getId_trabajador()%>&idreq=<%=idreq%>&iddep=<%=iddep%>&opc=Reg_form" class="btn bg-color-teal txt-color-white">Elaborar Requerimiento</a></td>
+                <td>
+                    <%if (tr.getEs_proceso() > 0) {
+                            out.print("Tiene requerimiento en proceso");
+                        } else {
+                    %>
 
+                    <a href="../../dgp?idtr=<%=tr.getId_trabajador()%>&idreq=<%=idreq%>&iddep=<%=iddep%>&opc=Reg_form" class="btn bg-color-teal txt-color-white">Elaborar Requerimiento</a>
+                    <%}%>
+                </td>
             </tr>
             <%
                         }

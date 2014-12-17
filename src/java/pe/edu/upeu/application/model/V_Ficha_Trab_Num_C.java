@@ -86,8 +86,25 @@ public class V_Ficha_Trab_Num_C {
     private String ta_ar_foto;
     private String idtr;
     private Double nu_contrato;
+    private int es_proceso;
 
-    public V_Ficha_Trab_Num_C(String id_trabajador, String ap_paterno, String ap_materno, String no_trabajador, String ti_doc, String nu_doc, String es_civil, String fe_nac, String no_nacionalidad, String no_departamento, String no_provincia, String no_distrito, String te_trabajador, String cl_tra, String di_correo_personal, String di_correo_inst, String co_sistema_pensionario, String id_situacion_educativa, String li_reg_inst_educativa, String es_inst_educ_peru, String n, String nn, String cm_otros_estudios, String es_sexo, String li_grupo_sanguineo, String de_referencia, String li_religion, String no_iglesia, String de_cargo, String li_autoridad, String no_ap_autoridad, String cl_autoridad, String id_no_afp, String es_afiliado_essalud, String li_tipo_trabajador, String ca_tipo_hora_pago_refeerencial, String es_factor_rh, String li_di_dom_a_d1, String di_dom_a_d2, String li_di_dom_a_d3, String di_dom_a_d4, String li_di_dom_a_d5, String di_dom_a_d6, String di_dom_a_ref, String di_dom_a_distrito, String li_di_dom_leg_d1, String di_dom_leg_d2, String li_di_dom_leg_d3, String di_dom_leg_d4, String li_di_dom_leg_d5, String di_dom_leg_d6, String di_dom_leg_distrito, String ca_ing_qta_cat_empresa, String ca_ing_qta_cat_ruc, String ca_ing_qta_cat_otras_empresas, String cm_observaciones, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String ip_usuario, String id_usuario_creacion, String id_universidad_carrera, String id_nacionalidad, String distrito_nac, String no_s_educativa, String no_carrera, String no_universidad, String ar_foto, String de_foto, String id_foto, String no_ar_foto, String ta_ar_foto, String idtr, Double nu_contrato) {
+    public String getNo_s_educativa() {
+        return no_s_educativa;
+    }
+
+    public void setNo_s_educativa(String no_s_educativa) {
+        this.no_s_educativa = no_s_educativa;
+    }
+
+    public int getEs_proceso() {
+        return es_proceso;
+    }
+
+    public void setEs_proceso(int es_proceso) {
+        this.es_proceso = es_proceso;
+    }
+
+    public V_Ficha_Trab_Num_C(String id_trabajador, String ap_paterno, String ap_materno, String no_trabajador, String ti_doc, String nu_doc, String es_civil, String fe_nac, String no_nacionalidad, String no_departamento, String no_provincia, String no_distrito, String te_trabajador, String cl_tra, String di_correo_personal, String di_correo_inst, String co_sistema_pensionario, String id_situacion_educativa, String li_reg_inst_educativa, String es_inst_educ_peru, String n, String nn, String cm_otros_estudios, String es_sexo, String li_grupo_sanguineo, String de_referencia, String li_religion, String no_iglesia, String de_cargo, String li_autoridad, String no_ap_autoridad, String cl_autoridad, String id_no_afp, String es_afiliado_essalud, String li_tipo_trabajador, String ca_tipo_hora_pago_refeerencial, String es_factor_rh, String li_di_dom_a_d1, String di_dom_a_d2, String li_di_dom_a_d3, String di_dom_a_d4, String li_di_dom_a_d5, String di_dom_a_d6, String di_dom_a_ref, String di_dom_a_distrito, String li_di_dom_leg_d1, String di_dom_leg_d2, String li_di_dom_leg_d3, String di_dom_leg_d4, String li_di_dom_leg_d5, String di_dom_leg_d6, String di_dom_leg_distrito, String ca_ing_qta_cat_empresa, String ca_ing_qta_cat_ruc, String ca_ing_qta_cat_otras_empresas, String cm_observaciones, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String ip_usuario, String id_usuario_creacion, String id_universidad_carrera, String id_nacionalidad, String distrito_nac, String no_s_educativa, String no_carrera, String no_universidad, String ar_foto, String de_foto, String id_foto, String no_ar_foto, String ta_ar_foto, String idtr, Double nu_contrato,int es_proceso) {
         this.id_trabajador = id_trabajador;
         this.ap_paterno = ap_paterno;
         this.ap_materno = ap_materno;
@@ -163,6 +180,7 @@ public class V_Ficha_Trab_Num_C {
         this.ta_ar_foto = ta_ar_foto;
         this.idtr = idtr;
         this.nu_contrato = nu_contrato;
+        this.es_proceso = es_proceso;
     }
 
     public V_Ficha_Trab_Num_C() {
@@ -241,6 +259,7 @@ public class V_Ficha_Trab_Num_C {
         this.ta_ar_foto = "";
         this.idtr = "";
         this.nu_contrato = 0.0;
+        this.es_proceso = 0;
     }
 
     public String getId_trabajador() {
