@@ -15,9 +15,11 @@ import javax.servlet.http.HttpSession;
 import pe.edu.upeu.application.dao.AutorizacionDAO;
 import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.EmpleadoDAO;
+import pe.edu.upeu.application.dao.RequerimientoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceEmpleadoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
 
 /**
  *
@@ -43,10 +45,12 @@ public class CAutorizacion extends HttpServlet {
         InterfaceAutorizacionDAO a = new AutorizacionDAO();
         InterfaceDgpDAO dgp = new DgpDAO();
         HttpSession sesion = request.getSession(true);
+        InterfaceRequerimientoDAO IReq = new RequerimientoDAO();
 
         String iduser = (String) sesion.getAttribute("IDUSER");
         String ide = (String) sesion.getAttribute("IDPER");
         String idp = (String) sesion.getAttribute("PUESTO_ID");
+        String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
 
         String opc = request.getParameter("opc");
 
@@ -66,6 +70,14 @@ public class CAutorizacion extends HttpServlet {
                 String idpu = e.Id_Puesto_Personal(ide);
                 getServletContext().setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
                 response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?r=ok");
+            }
+            if (opc.equals("HDGP")) {
+                String iddgp = request.getParameter("iddgp");
+                out.print(iddgp);
+                dgp.HABILITAR_DGP(iddgp);
+                getServletContext().setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep));
+                response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp");
+
             }
             if (opc.equals("Rechazar")) {
                 String iddgp = request.getParameter("IDDETALLE_DGP");

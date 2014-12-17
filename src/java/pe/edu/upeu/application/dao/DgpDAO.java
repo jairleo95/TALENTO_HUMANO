@@ -124,7 +124,7 @@ public class DgpDAO implements InterfaceDgpDAO {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
-        }finally {
+        } finally {
             this.conn.close();
         }
         return Lista;
@@ -505,9 +505,24 @@ public class DgpDAO implements InterfaceDgpDAO {
 
     @Override
     public void RECHAZAR_DGP(String IDDGP) {
-      try {
+        try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_RECHAZAR_DGP(?)}");
+            cst.setString(1, IDDGP);
+            cst.execute();
+        } catch (Exception ex) {
+            //  Logger.getLogger(DgpDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.conn.close();
+        }
+    }
+
+    @Override
+    public void HABILITAR_DGP(String IDDGP) {
+
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_HABILITAR_DGP(?)}");
             cst.setString(1, IDDGP);
             cst.execute();
         } catch (Exception ex) {

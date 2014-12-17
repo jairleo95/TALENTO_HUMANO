@@ -83,7 +83,6 @@
                                 data-widget-custombutton="false"
                                 data-widget-collapsed="true"
                                 data-widget-sortable="false"
-
                                 -->
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
@@ -110,11 +109,9 @@
                                                     <th data-hide="phone">Nro</th>
                                                     <th><i class="fa fa-fw fa-building text-muted hidden-md hidden-sm hidden-xs"></i> Acciones</th>
                                                     <th>Nombre</th>
-
                                                 </tr>
                                             </thead>
                                             <tbody>
-
                                                 <%for (int i = 0; i < LIST_DGP_PROCESO.size(); i++) {
                                                         V_Es_Requerimiento r = new V_Es_Requerimiento();
                                                         r = (V_Es_Requerimiento) LIST_DGP_PROCESO.get(i);
@@ -122,7 +119,6 @@
                                                 <tr>
                                                     <td><strong><%=i + 1%></strong></td>
                                                     <td>
-
                                                         <div class="btn-group">
                                                             <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                                                 Accion <span class="caret"></span>
@@ -151,9 +147,7 @@
                                                         <div class="progress" style="margin: 0px;"><div  class="<%if (r.getEs_dgp().equals("2")) {out.print("progress-bar bg-color-red");}else{out.print("progress-bar bg-color-teal");}%>" aria-valuetransitiongoal="<%=r.getEs_porcent()%>"></div></div></td>
                                                             
                                                     <% }%>
-
                                                 </tr>
-
                                                 <% }
                                                     LIST_DGP_PROCESO.clear();%>
 

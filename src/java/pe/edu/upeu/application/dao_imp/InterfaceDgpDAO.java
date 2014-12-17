@@ -33,6 +33,7 @@ public interface InterfaceDgpDAO {
     public List<X_List_dgp_by> LIST_DGP_BY(String id_user);
 
     public void VAL_DGP_PASOS();
+    public void HABILITAR_DGP(String IDDGP);
 
     public List<V_Es_Requerimiento> LIST_DGP_PROCESO(String id_dep);
 
