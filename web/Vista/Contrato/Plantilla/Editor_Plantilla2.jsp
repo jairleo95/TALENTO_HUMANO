@@ -126,15 +126,15 @@
 
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">
-                                        <% String[] Imprimir=request.getParameterValues("Imprimir");
-                                        InterfaceTrabajadorDAO tr = new TrabajadorDAO();
-                                            for(int s=0;s<Imprimir.length;s++){
-                                            for (int i = 0; i < tr.LIST_DAT_TR_PLANTILLA(Imprimir[s]).size(); i++) {
-                                                X_List_dat_tr_plantilla p = new X_List_dat_tr_plantilla();
-                                                p=(X_List_dat_tr_plantilla)tr.LIST_DAT_TR_PLANTILLA(Imprimir[s]).get(i);
-                                        %>
                                         <textarea name="ckeditor">
-
+                                        <% String[] Imprimir = request.getParameterValues("Imprimir");
+                                            InterfaceTrabajadorDAO tr = new TrabajadorDAO();
+                                            for (int s = 0; s < Imprimir.length; s++) {
+                                                for (int i = 0; i < tr.LIST_DAT_TR_PLANTILLA(Imprimir[s]).size(); i++) {
+                                                    X_List_dat_tr_plantilla p = new X_List_dat_tr_plantilla();
+                                                    p = (X_List_dat_tr_plantilla) tr.LIST_DAT_TR_PLANTILLA(Imprimir[s]).get(i);
+                                        %>
+                                        
  <h2 style="text-align:center"><strong>CONTRATO DE TRABAJO A PLAZO FIJO Y BAJO MODALIDAD</strong></h2>
                 <p>Conste por el presente documento el contrato de trabajo a plazo fijo y sujeto a modalidad por 
 
@@ -249,15 +249,39 @@
 
                 </p>
                 <br>	
+                <br>	
+                <br>	
     </script>
-<table id="letra" style="margin: 0;"><tr><td></td></tr></table>
  <div  ><table  style="width: 100%;  height: 50px; text-align:center; "id="asdglñhsdkgohk" ><tr><td align="center">______________________________<br><br>EMPLEADOR</td>
                         <td align="center">_______________________________<br><br>TRABAJADOR(A)</td></tr></table></div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
-	
+                                            <%
+                                }
+                            }%>
                                         </textarea>						
-                                        <%
-                                            }}%>
+
                                     </div>
                                     <!-- end widget content -->
 
@@ -282,14 +306,16 @@
             <!-- END MAIN CONTENT -->
 
         </div>
-                                    <script>
-                                        $(document).ready(function(){
-                                            $("#letra").click(function(){alert("alknaklsdn");});
-                                            
-                                        });
-                                        
-                                    </script>
-                                    <table id="letra" style="margin: 0;"><tr><td></td></tr></table>
+        <script>
+            $(document).ready(function() {
+                $("#letra").click(function() {
+                   // alert("alknaklsdn");
+                });
+
+            });
+
+        </script>
+        <table id="letra" style="margin: 0;"><tr><td></td></tr></table>
         <!--================================================== -->
 
         <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
@@ -374,7 +400,7 @@
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-            $(document).ready(function () {
+            $(document).ready(function() {
 
                 CKEDITOR.replace('ckeditor', {height: '380px', startupFocus: true});
 
@@ -388,7 +414,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function () {
+            (function() {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
