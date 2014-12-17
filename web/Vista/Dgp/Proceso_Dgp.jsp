@@ -54,83 +54,6 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
 
-        <style>
-            /* Service Box
-================================================== */
-
-            #service{
-                position: relative;
-                //  padding: 0 0 40px;
-            }
-            .service-content{
-                text-align: center;
-                position: relative;
-                //    padding: 0 10px;
-            }
-            .service-content .service-icon{
-                position: relative;
-            }
-            .service-content:after{
-                content: "";
-                background: #1881F2;
-                width: 3%;
-                height: 4%;
-                position: absolute;
-                top: 40%;
-                // margin-top: -58px;
-                left: 105%;
-                -webkit-border-radius: 100%;
-                -moz-border-radius: 100%;
-                border-radius: 100%;
-                -webkit-box-shadow: 0 0 0 3px rgba(0, 0, 0, .09);
-                -moz-box-shadow: 0 0 0 3px rgba(0, 0, 0, .09);
-                box-shadow: 0 0 0 3px rgba(0, 0, 0, .09);
-                z-index: 3;
-            }
-
-            .service-content:before{
-                content: '';
-                background: #ccc;
-                position: absolute;
-                top: 40%;
-                margin-top: 1%;
-                width: 100%;
-                //left: 74px;
-                height: 1px;
-                z-index: 0;
-
-            }
-
-            .service-content.last:after, 
-            .service-content.last:before{
-                content: '';
-                position: relative;
-                box-shadow: none;
-                border: 0;
-            }
-            .service-content i{
-                display: inline-block;
-                overflow: hidden;
-                color: #fff;
-                font-size: 350%;
-                background: #1881F2;
-                width:150px; 
-                height:150px;
-                line-height: 150px;
-                // margin:10px 0 0;
-                -webkit-box-shadow: 0 0 0 12px #f0f0f0;
-                -moz-box-shadow: 0 0 0 12px #f0f0f0;
-                box-shadow: 0 0 0 12px #f0f0f0;
-            }
-
-            .service-content h3{
-                font-size: 15px;
-
-            }
-
-
-        </style>
-
     </head>
     <body class="">
 
@@ -144,9 +67,6 @@
 
             <!-- MAIN CONTENT -->
             <div id="content">
-
-
-
 
                 <!-- widget grid -->
                 <section id="widget-grid" class="">
@@ -202,9 +122,6 @@
                                             </thead>
                                             <tbody>
 
-
-
-
                                                 <%for (int i = 0; i < LIST_DGP_PROCESO.size(); i++) {
                                                         V_Es_Requerimiento r = new V_Es_Requerimiento();
                                                         r = (V_Es_Requerimiento) LIST_DGP_PROCESO.get(i);
@@ -220,7 +137,7 @@
                                                             <ul class="dropdown-menu">
 
                                                                 <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=User_Aut">Usuarios - Prox. Autorizacion</a></li>
-                                                                <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=Seguimiento">Ver Seguimiento</a> </li>
+                                                                <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=Seguimiento">Ver Historial</a> </li>
                                                                 <li><a href="../../documento?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a></li>
                                                                 <li><a href="../../comentario?iddgp=<%=r.getId_dgp().trim()%>&opc=Comentar_Dgp">Comentarios</a></li>    
                                                                 <li class="divider"></li>

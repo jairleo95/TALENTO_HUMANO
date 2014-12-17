@@ -74,15 +74,10 @@
             <div id="logo-group" >
 
                 <!-- PLACE YOUR LOGO HERE -->
-                <style>
-                    img{
 
 
-                    }
-                </style>
 
-
-                <span id="logo"> <img src="imagenes/logo rrhh.jpg" style=" position: absolute;top: 6px; width:130px; height:36px " alt="Talento Humano"> </span>
+                <span id="logo"> <img src="img/logo_rrhh.jpg" style=" position: absolute;top: 6px; width:130px; height:36px " alt="Talento Humano"> </span>
                 <!-- END LOGO PLACEHOLDER -->
 
                 <!-- Note: The activity badge color changes when clicked and resets the number to 0
@@ -199,7 +194,7 @@
 
                 <!-- logout button -->
                 <div id="logout" class="btn-header transparent pull-right">
-                    <span> <a href="index.jsp" title="Sign Out" data-action="userLogout" data-logout-msg="Esta complemetamente seguro de cerrar sesión?"><i class="fa fa-sign-out"></i></a> </span>
+                    <span> <a href="index.jsp" title="Sign Out" data-action="userLogout" data-logout-msg="¿Esta complemetamente seguro de cerrar sesión?"><i class="fa fa-sign-out"></i></a> </span>
                 </div>
                 <!-- end logout button -->
 
@@ -326,7 +321,7 @@
                     <a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
                         <img src="imagenes/avatar_default.jpg" alt="me" class="online" /> 
                         <span>
-                            <%out.println((String) sesion.getAttribute("USER")); %> - <%out.println((String) sesion.getAttribute("PUESTO")); %>
+                            <%out.println((String) sesion.getAttribute("USER")); %>  
                         </span>
                         <i class="fa fa-angle-down"></i>
                     </a> 
@@ -452,7 +447,7 @@
 
                 <!-- breadcrumb -->
                 <ol class="breadcrumb">
-                    <li><%out.println("DEPARTAMENTO DE  " + ((String) sesion.getAttribute("DEPARTAMENTO")).toUpperCase()); %></li>
+                    <li><%out.println("DEPARTAMENTO DE  " + ((String) sesion.getAttribute("DEPARTAMENTO")).toUpperCase()+ " - AREA DE "  +((String) sesion.getAttribute("PUESTO")).toUpperCase()); %></li>
                 </ol>
                 <!-- end breadcrumb -->
 
@@ -581,22 +576,22 @@
         <div id="shortcut">
             <ul>
                 <li>
-                    <a href="#inbox.html" class="jarvismetro-tile big-cubes bg-color-blue"> <span class="iconbox"> <i class="fa fa-envelope fa-4x"></i> <span>Mail <span class="label pull-right bg-color-darken">14</span></span> </span> </a>
+                    <a href="#inbox.html" class="jarvismetro-tile big-cubes bg-color-blue"> <span class="iconbox"> <i class="fa fa-envelope fa-4x"></i> <span>Correo<span class="label pull-right bg-color-darken">14</span></span> </span> </a>
                 </li>
                 <li>
-                    <a href="#calendar.html" class="jarvismetro-tile big-cubes bg-color-orangeDark"> <span class="iconbox"> <i class="fa fa-calendar fa-4x"></i> <span>Calendar</span> </span> </a>
+                    <a href="#calendar.html" class="jarvismetro-tile big-cubes bg-color-orangeDark"> <span class="iconbox"> <i class="fa fa-calendar fa-4x"></i> <span>Calendario</span> </span> </a>
                 </li>
                 <li>
-                    <a href="#gmap-xml.html" class="jarvismetro-tile big-cubes bg-color-purple"> <span class="iconbox"> <i class="fa fa-map-marker fa-4x"></i> <span>Maps</span> </span> </a>
+                    <a href="#gmap-xml.html" class="jarvismetro-tile big-cubes bg-color-purple"> <span class="iconbox"> <i class="fa fa-map-marker fa-4x"></i> <span>Mapas</span> </span> </a>
                 </li>
                 <li>
                     <a href="#invoice.html" class="jarvismetro-tile big-cubes bg-color-blueDark"> <span class="iconbox"> <i class="fa fa-book fa-4x"></i> <span>Invoice <span class="label pull-right bg-color-darken">99</span></span> </span> </a>
                 </li>
                 <li>
-                    <a href="#gallery.html" class="jarvismetro-tile big-cubes bg-color-greenLight"> <span class="iconbox"> <i class="fa fa-picture-o fa-4x"></i> <span>Gallery </span> </span> </a>
+                    <a href="#gallery.html" class="jarvismetro-tile big-cubes bg-color-greenLight"> <span class="iconbox"> <i class="fa fa-picture-o fa-4x"></i> <span>Galeria </span> </span> </a>
                 </li>
                 <li>
-                    <a href="javascript:void(0);" class="jarvismetro-tile big-cubes selected bg-color-pinkDark"> <span class="iconbox"> <i class="fa fa-user fa-4x"></i> <span>My Profile </span> </span> </a>
+                    <a href="javascript:void(0);" class="jarvismetro-tile big-cubes selected bg-color-pinkDark"> <span class="iconbox"> <i class="fa fa-user fa-4x"></i> <span>Mi Perfil </span> </span> </a>
                 </li>
             </ul>
         </div>
