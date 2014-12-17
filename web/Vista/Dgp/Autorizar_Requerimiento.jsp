@@ -110,9 +110,6 @@
 
         <!-- MAIN PANEL -->
         <div id="main" role="main" style="margin-left: 0px;">
-
-
-
             <!-- MAIN CONTENT -->
             <div id="content">
                 <!-- widget grid -->
@@ -175,12 +172,8 @@
                                                     <th data-hide="phone,tablet"><strong>Motivo</strong></th>
                                                     <!--  <td>Departamento</td>-->
                                                     <th data-hide="phone,tablet"><strong>Descripcion</strong></th>
-
                                                 </tr>
-
                                             </thead>
-
-
                                             <tbody>
                                                 <%
 
@@ -247,19 +240,11 @@
 
                                                     </td>
                                                     <td><%=f + 1%></td>
-
-
-
-
                                                     <% if (a.getAr_foto() == null) {%>
                                                     <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30"></td>
                                                         <% } else {%>
                                                     <td><img src="../Usuario/Fotos/<%=a.getAr_foto()%>"  width="30"  height="30"></td>
                                                         <% }%>
-
-
-
-
                                                     <td ><%=a.getAp_paterno() + " " + a.getAp_materno() + " " + a.getNo_trabajador()%></td>
                                                     <td ><%=a.getNo_puesto()%></td>   
                                                     <td ><%=a.getNo_seccion()%></td> 
@@ -267,16 +252,9 @@
                                                     <td style=""><%=a.getNo_req()%></td>      
 
                                                     <td style="color: red; font-weight: bold;"><%=a.getDe_pasos()%></td>
-
-
-
                                                 </tr>
                                                 <% }
                                                     List_id_Autorizacion.clear();%>
-
-
-
-
                                             </tbody>
                                         </table>
 

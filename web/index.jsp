@@ -81,7 +81,7 @@
         <header id="header">
 
             <div id="logo-group" >
-                <span id="logos"> <img src="imagenes/logo rrhh.jpg"  style="margin-top: 13px; width:130px; height:52px " alt="Talento Humano"> </span>
+                <span id="logos"> <img src="img/logo_rrhh.jpg"  style="margin-top: 13px; width:130px; height:52px " alt="Talento Humano"> </span>
             </div>
 
         </header>

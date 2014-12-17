@@ -306,6 +306,7 @@ public class DgpDAO implements InterfaceDgpDAO {
                 v.setNo_ar_foto(rs.getString("no_ar_foto"));
                 v.setTa_ar_foto(rs.getString("ta_ar_foto"));
                 v.setEs_porcent(rs.getString("ES_PORCENT"));
+                v.setEs_dgp(rs.getString("ES_DGP"));
                 Lista.add(v);
             }
         } catch (SQLException e) {

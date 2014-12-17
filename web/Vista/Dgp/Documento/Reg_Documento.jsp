@@ -182,11 +182,13 @@
                                                             <% } else { %>
                                                             <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
 
-                                                                <img src="Aprobado.png" width="20" height="20">
+                                                               
                                                                 <%
                                                                 } else {
-                                                                    out.println(d.getEs_documento_adjunto().trim());
-                                                                %></label>
+                                                                    
+                                                                %>
+                                                                <img src="Desaprobado.png" width="20" height="20">
+                                                            </label>
                                                                 <% }
                                                                         }
                                                                     }%>
@@ -243,8 +245,10 @@
                                                             <img src="Aprobado.png" width="20" height="20">
                                                             <%
                                                             } else {
-                                                                out.println(d.getEs_documento_adjunto().trim());
-                                                            %></label>
+                                                                
+                                                            %>
+                                                         <img src="Desaprobado.png" width="20" height="20">
+                                                        </label>
                                                             <% }
                                                                     }
                                                                 }%>
@@ -310,8 +314,10 @@
                                                             <img src="Aprobado.png" width="20" height="20">
                                                             <%
                                                             } else {
-                                                                out.println(d.getEs_documento_adjunto().trim());
-                                                            %></label>
+                                                               
+                                                            %>
+                                                         <img src="Desaprobado.png" width="20" height="20">
+                                                        </label>
                                                             <% }
                                                                     }
                                                                 }%>
@@ -373,8 +379,10 @@
                                                             <img src="Aprobado.png" width="20" height="20">
                                                             <%
                                                             } else {
-                                                                out.println(d.getEs_documento_adjunto().trim());
-                                                            %></label>
+                                                             
+                                                            %>
+                                                         <img src="Desaprobado.png" width="20" height="20">
+                                                        </label>
                                                             <% }
                                                                     }
                                                                 }%>
@@ -384,9 +392,7 @@
 
                                                 <%
                                                         i++;
-
                                                     }
-
                                                 %>
 
                                                 <%} else if (!d.getTi_documento().trim().equals("DNIH") & !d.getTi_documento().trim().equals("DNIC") & !d.getTi_documento().trim().equals("ACMA") & !d.getTi_documento().trim().equals("COFE") & !d.getTi_documento().trim().equals("DOCA")) {
@@ -432,8 +438,10 @@
                                                             <img src="Aprobado.png" width="20" height="20">
                                                             <%
                                                             } else {
-                                                                out.println(d.getEs_documento_adjunto().trim());
-                                                            %></label>
+                                                               
+                                                            %>
+                                                         <img src="Desaprobado.png" width="20" height="20">
+                                                        </label>
                                                             <% }
                                                                     }
                                                                 }%>

@@ -56,15 +56,8 @@
 
     </head>
     <body class="">
-
-
-
-
         <!-- MAIN PANEL -->
         <div id="main" role="main" style="margin-left: 0px;">
-
-
-
             <!-- MAIN CONTENT -->
             <div id="content">
 
@@ -146,29 +139,24 @@
                                                                 </li>
                                                             </ul>
                                                         </div>
-                                                               
+
                                                     </td> 
                                                     <% if (r.getAr_foto() == null) {%>
                                                     <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30">
-                                                        <a style="margin-left: 3%;" href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a>
-                                                        
-                                                      
-                                                    
-                                                       
-                                                        <div class="progress" style="margin: 0px;"><div class="progress-bar bg-color-teal" aria-valuetransitiongoal="<%=r.getEs_porcent()%>"></div></div>
-														
-															
-				
+                                                        <a style="margin-left: 3%;" href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a><%if (r.getEs_dgp().equals("2")) {out.print(" <span class='label label-danger'>Fuera de Proceso</span>");}else{out.print(" <span class='label label-primary'>En Proceso</span>");}%>
+
+                                                        <div class="progress" style="margin: 0px;"><div class="<%if (r.getEs_dgp().equals("2")) {out.print("progress-bar bg-color-red");}else{out.print("progress-bar bg-color-teal");}%>" aria-valuetransitiongoal="<%=r.getEs_porcent()%>"></div></div>
                                                     </td>
-                                                        <% } else {%>
-                                                    <td><img src="../Usuario/Fotos/<%=r.getAr_foto()%>"  width="30"  height="30"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a>
-                                                        <div class="progress" style="margin: 0px;"><div class="progress-bar bg-color-teal" aria-valuetransitiongoal="<%=r.getEs_porcent()%>"></div></div></td>
-                                                        <% }%>
-                                        
+                                                    <% } else {%>
+                                                    <td><img src="../Usuario/Fotos/<%=r.getAr_foto()%>"  width="30"  height="30"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a> <%if (r.getEs_dgp().equals("2")) {out.print(" <span class='label label-danger'>Fuera de Proceso</span>");}else{out.print(" <span class='label label-primary'>En Proceso</span>");}%>
+                                                        <div class="progress" style="margin: 0px;"><div  class="<%if (r.getEs_dgp().equals("2")) {out.print("progress-bar bg-color-red");}else{out.print("progress-bar bg-color-teal");}%>" aria-valuetransitiongoal="<%=r.getEs_porcent()%>"></div></div></td>
+                                                            
+                                                    <% }%>
+
                                                 </tr>
 
                                                 <% }
-                                                LIST_DGP_PROCESO.clear();%>
+                                                    LIST_DGP_PROCESO.clear();%>
 
 
                                             </tbody>
@@ -215,7 +203,7 @@
 
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-        
+
         <script>
             if (!window.jQuery) {
                 document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
@@ -223,7 +211,7 @@
         </script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-         
+
 
         <script>
             if (!window.jQuery.ui) {
@@ -263,7 +251,7 @@
 
         <!-- JQUERY UI + Bootstrap Slider -->
         <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
-      
+
 
         <!-- browser msie issue fix -->
         <script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
@@ -282,21 +270,21 @@
 
         <!-- MAIN APP JS FILE -->
         <script src="../../js/app.min.js"></script>
-        
+
 
         <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
         <!-- Voice command : plugin -->
         <script src="../../js/speech/voicecommand.min.js"></script>
 
         <!-- PAGE RELATED PLUGIN(S) -->
-    
+
         <script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
         <script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>
         <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
         <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
-         <script src="../../js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-            
+        <script src="../../js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+
 
 
         <script type="text/javascript">
@@ -334,24 +322,24 @@
                     phone: 480
                 };
 
-               /* $('#dt_basic').dataTable({
-                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
-                            "t" +
-                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                    "autoWidth": true,
-                    "preDrawCallback": function () {
-                        // Initialize the responsive datatables helper once.
-                        if (!responsiveHelper_dt_basic) {
-                            responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
-                        }
-                    },
-                    "rowCallback": function (nRow) {
-                        responsiveHelper_dt_basic.createExpandIcon(nRow);
-                    },
-                    "drawCallback": function (oSettings) {
-                        responsiveHelper_dt_basic.respond();
-                    }
-                });*/
+                /* $('#dt_basic').dataTable({
+                 "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
+                 "t" +
+                 "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                 "autoWidth": true,
+                 "preDrawCallback": function () {
+                 // Initialize the responsive datatables helper once.
+                 if (!responsiveHelper_dt_basic) {
+                 responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
+                 }
+                 },
+                 "rowCallback": function (nRow) {
+                 responsiveHelper_dt_basic.createExpandIcon(nRow);
+                 },
+                 "drawCallback": function (oSettings) {
+                 responsiveHelper_dt_basic.respond();
+                 }
+                 });*/
 
                 /* END BASIC */
 

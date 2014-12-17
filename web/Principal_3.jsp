@@ -72,11 +72,7 @@
         <!-- HEADER -->
         <header id="header">
             <div id="logo-group" >
-
                 <!-- PLACE YOUR LOGO HERE -->
-
-
-
                 <span id="logo"> <img src="img/logo_rrhh.jpg" style=" position: absolute;top: 6px; width:130px; height:36px " alt="Talento Humano"> </span>
                 <!-- END LOGO PLACEHOLDER -->
 
@@ -695,7 +691,7 @@
                 /*
                  * PAGE RELATED SCRIPTS
                  */
-                $(".menu-item-parent").click(function () {
+                $(".menu-item-parent").parent().click(function () {
                     $(".titulo_menu").text($(this).text());
                 });
                 $(".js-status-update a").click(function () {

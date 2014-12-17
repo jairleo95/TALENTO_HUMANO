@@ -79,8 +79,9 @@
                         <!-- NEW WIDGET START -->
                         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
+
                             <!-- Widget ID (each widget will need unique ID)-->
-                         <div class="jarviswidget jarviswidget-color-yellow" id="wid-id-0" data-widget-editbutton="false">
+                            <div class="jarviswidget jarviswidget-color-yellow" id="wid-id-0" data-widget-editbutton="false">
                                 <!-- widget options:
                                 usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
@@ -134,21 +135,29 @@
                                                         %>
                                                         <img src="../../imagenes/Desaprobado.png" width="20" height="20">
                                                         <% }%></td>
-                                                    <td class="caji"><%=a.getUs_ap_p().toUpperCase() + " " + a.getUs_ap_mat().toUpperCase() + " " + a.getUs_no_tr().toUpperCase()%></td> 
-                                                    <td class="caji" ><%=a.getUs_no_puesto()%></td> 
-                                                    <td class="caji"><%=a.getUs_no_area()%></td> 
-                                                    <td class="caji"><%=a.getUs_no_dep()%></td> 
-                                                    <td class="caji" ><%=a.getDe_pasos()%></td> 
+                                                    <td ><%=a.getUs_ap_p().toUpperCase() + " " + a.getUs_ap_mat().toUpperCase() + " " + a.getUs_no_tr().toUpperCase()%></td> 
+                                                    <td  ><%=a.getUs_no_puesto()%></td> 
+                                                    <td ><%=a.getUs_no_area()%></td> 
+                                                    <td ><%=a.getUs_no_dep()%></td> 
+                                                    <td ><%=a.getDe_pasos()%></td> 
 
                                                     <%
                                                         if (a.getEs_autorizacion().equals("2") & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005"))) {
 
                                                     %>
-                                            <div class="alerta">
-                                                <h1>Alerta! debe Corregir el Dgp... se ha Rechazado el Dgp</h1>
-                                                <a href="../Control/ControlAutorizacion.php?opc=HDGP&ida=<? echo $list[$i][13]; ?>">Habilitar DGP</a></div>
-                                                <%}%>
-                                                <% }%>
+
+                                            <a href="../Control/ControlAutorizacion.php?opc=HDGP&ida=<? echo $list[$i][13]; ?>">Habilitar DGP</a>
+                                            <div class="alert alert-danger alert-block">
+                                                <a class="close" data-dismiss="alert" href="#">×</a>
+                                                <h4 class="alert-heading">DGP fuera de Proceso!</h4>
+                                                <p>El DGP se ha rechazado por uno de los Usuarios...
+
+                                                    <a href="form-templates.html" class="btn btn-primary"><strong><i class="fa fa-arrow-circle-right"></i> Habilitar</strong></a>
+                                                </p>
+                                            </div>
+
+                                            <%}%>
+                                            <% }%>
 
                                             </tr> 
 
@@ -156,6 +165,7 @@
                                         </table>
 
                                     </div>
+
                                     <!-- end widget content -->
 
                                 </div>
