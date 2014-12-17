@@ -68,10 +68,6 @@
         <link rel="apple-touch-startup-image" href="../../HTML_version/img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../HTML_version/img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../HTML_version/img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-
-
-
-
         <style type="text/css">
             body{
 
@@ -235,7 +231,6 @@
             data-widget-custombutton="false"
             data-widget-collapsed="true"
             data-widget-sortable="false"
-
             -->
             <header>
                 <span class="widget-icon"> <i class="fa fa-comments"></i> </span>
@@ -284,7 +279,6 @@
                             <a href="#s8" data-toggle="tab"><i class="fa fa-file-text fa-gear"></i> Evaluacion de Emleado</a>
                         </li>
                     </ul>
-
                     <div id="myTabContent1" class="tab-content padding-10">
                         <div class="tab-pane fade in active" id="s1">
 
@@ -336,9 +330,6 @@
 
         </div>        
         <!-- end TABS-->
-
-
-
         <div >
             <%
 
@@ -350,7 +341,6 @@
             <center>
                 <form class="form" action="../../autorizacion" method="post" > 
                     <table > 
-
                         <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
                         <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
                         <input type="hidden" name="COD" value="<%=cod%>"  >               
