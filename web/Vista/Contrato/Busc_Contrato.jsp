@@ -20,7 +20,7 @@
         <title>Contratos</title>
     </head>
     <body>  
-        <form class="form-inline" id="frm_filtro2" method="post" action="../Contrato/Plantilla/Editor_Plantilla2.jsp" name="formulario">
+        <form class="form-inline" id="frm_filtro2" method="post" action="" name="formulario">
             <div class="spacing">
                 <center><h1 class="spacing" style="font-weight: bold;">CONTRATOS</h1></center> 
             </div>
@@ -105,23 +105,29 @@
 
                     <br>
                     <br>
+
+
+
                     <div class="container">
                         <table     id="data" class="table">
                             <thead class="tab_cabe">
-                                <tr class="tr">
+                                <tr class="tr" >
                                     <td style="width: 230px;"><span title="NOM_APE">Nombres y Apellidos</span></td>
-                                    <td><span title="FEC_DESDE">Fecha Desde</span></td>
-                                    <td><span title="FEC_HASTA">Fecha Hasta</span></td>
-                                    <td><span title="AREA">Area</span></td>
-                                    <td><span title="SECCION">Sección</span></td>
+                                    <td ><span title="FEC_DESDE">Fecha Desde</span></td>
+                                    <td ><span title="FEC_HASTA">Fecha Hasta</span></td>
+                                    <td ><span title="AREA">Area</span></td>
+                                    <td ><span title="SECCION">Sección</span></td>
                                     <td ><span title="PUESTO">Puesto</span></td>
-                                    <td><span title="SUELDO">Sueldo</span></td>
-                                    <td><span title="FECHA_CREACION">Fecha de Contratación</span></td>
-                                    <td><span >Opcion</span></td>
-                                    <td><span >Imprimir</span></td>
+                                    <td ><span title="SUELDO">Sueldo</span></td>
+                                    <td ><span title="FECHA_CREACION">Fecha de Contratación</span></td>
+                                    <td ><span >Opcion</span></td>
+                                    <td ><span >Imprimir</span></td>
+                                    <td><button type="button" class="btn btn-primary" id="btns"> Seleccionar todo</button><button type="button" class="btn btn-primary" id="btns2"> Seleccionar </button><input type="submit" class="btn btn-primary" id="asa" value="Imprimir"></td>
+
+
                                 </tr>
                             </thead>
-                            <tbody class="tbodys">
+                            <tbody class="tbodys" id="gg">
 
                             </tbody>
                         </table>
@@ -146,11 +152,10 @@
              
              });
              */
+            $("#asa").hide();
 
             $("#btnbuscar").click(
                     function() {
-
-
                         $.post("../../ajax/Ajax_Contrato/Ajax_Contrato.jsp", $("#frm_filtro2").serialize(), function(objJson) {
                             b.empty();
                             var list = objJson.lista;
@@ -162,21 +167,39 @@
                                 b.append("<td><p>" + list[i].no_area + "</p></td>");
                                 b.append("<td><p>" + list[i].no_seccion + "</p></td>");
                                 b.append("<td><p>" + list[i].no_puesto + "</p></td>");
-                                if (list[i].ca_sueldo === null) {
-                                    b.append("<td>" + list[i].ca_sueldo + '</td>');
-                                } else {
-                                    b.append("<td>" + "0" + '</td>');
-                                }
+                                b.append("<td>" + list[i].ca_sueldo + '</td>');
                                 b.append("<td>" + list[i].fecha_contratacion + "</td>");
                                 b.append('<td><a class="btn-warming" href="../../contrato?opc=Detalle_Contractual&idtr=' + list[i].id_trabajador + '">Ver detalle</a> </td>');
-                                b.append('<td><input type="checkbox" name="Imprimir" value="' + list[i].id_contrato + '"></td>');
+                                b.append('<td><input type="checkbox" id="imp" name="Imprimir" value="' + list[i].id_contrato + '"></td>');
                                 b.append("</tr>");
-                                ;
+
+
                             }
-                            b.append('<td><input type="submit" name="opc" ></td>');
+                            if (list.length !== 0) {
+                                $("#asa").show();
+                            }
+                            $("#btns").click(
+                                    function() {
+
+                                        $("#gg :checkbox").attr('checked', true);
+                                        $('#imp').is(':checked');
+                                        alerta(checkboxValues.push($("#imp").val()));
+                                    });
+                            $("#btns2").click(
+                                    function() {
+                                        var checkboxValues = new Array();
+//recorremos todos los checkbox seleccionados con .each
+                                        $('input[name="orderBox[]"]:checked').each(function() {
+                                            //$(this).val() es el valor del checkbox correspondiente
+                                             checkboxValues.push($(this).val());
+                                             alert(checkboxValues.push($(this).val()));
+                                        });
+                                     
+                                    });
+
+
                         }
                         );
-
                     }
             );
             /* $("#btnbuscar").click(

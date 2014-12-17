@@ -252,8 +252,9 @@
                 <br>	
                 <br>	
     </script>
- <div  ><table  style="width: 100%;  height: 50px; text-align:center; "id="asdglñhsdkgohk" ><tr><td align="center">______________________________<br><br>EMPLEADOR</td>
-                        <td align="center">_______________________________<br><br>TRABAJADOR(A)</td></tr></table></div>
+ <div><table  style="width: 100%;  height: 50px; text-align:center; "id="asdglñhsdkgohk" ><tr><td align="center">______________________________<br><br>EMPLEADOR</td>
+                        <td align="center">_______________________________<br><br>TRABAJADOR(A)</td></tr></div></table>
+<table>
 <br>
 <br>
 <br>
@@ -276,6 +277,21 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</table>
 
                                             <%
                                 }
