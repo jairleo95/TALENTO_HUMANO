@@ -14,11 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import pe.edu.upeu.application.dao.DgpDAO;
+import pe.edu.upeu.application.dao.DireccionDAO;
 import pe.edu.upeu.application.dao.DocumentoDAO;
 import pe.edu.upeu.application.dao.ListaDAO;
 import pe.edu.upeu.application.dao.TrabajadorDAO;
 import pe.edu.upeu.application.dao.UbigeoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
@@ -55,6 +57,7 @@ public class CTrabajador extends HttpServlet {
             InterfaceTrabajadorDAO tr = new TrabajadorDAO();
             InterfaceDocumentoDAO d = new DocumentoDAO();
             InterfaceDgpDAO dgp = new DgpDAO();
+            InterfaceDireccionDAO dir = new DireccionDAO();
 
             String opc = "";
             String Text = "";
@@ -67,6 +70,9 @@ public class CTrabajador extends HttpServlet {
                 getServletContext().setAttribute("List_Universidad", li.List_Universidad());
                 getServletContext().setAttribute("List_Departamento", ub.List_Departamento());
                 getServletContext().setAttribute("List_Situacion_Educativa", li.List_Situacion_Educativa());
+                getServletContext().setAttribute("Listar_via", dir.Listar_via());
+                getServletContext().setAttribute("Listar_zona", dir.Listar_zona());
+                
                 response.sendRedirect("Vista/Trabajador/Reg_Trabajador.jsp");
 
             }

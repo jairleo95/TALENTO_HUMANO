@@ -1,3 +1,5 @@
+<%@page import="pe.edu.upeu.application.model.Via"%>
+<%@page import="pe.edu.upeu.application.model.Zona"%>
 <%@page import="pe.edu.upeu.application.model.Ub_Departamento"%>
 <%@page import="pe.edu.upeu.application.model.Situacion_Educativa"%>
 <%@page import="pe.edu.upeu.application.model.Universidad"%>
@@ -15,6 +17,8 @@
 <jsp:useBean id="List_Carrera" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Universidad" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Situacion_Educativa" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_zona" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_via" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html lang="en-us">
     <head>
@@ -75,7 +79,7 @@
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <script type="text/javascript">
             $(document).ready(
-                    function () {
+                    function() {
 
 
                         var tip = $("#pro_dir_l");
@@ -83,7 +87,7 @@
                         var rg = $("#dep_dir_l").val();
                         var data = "id_dep=" + rg + "&opc=dep_nac";
                         tip.append('<option value="">Cargando...</option>').val('');
-                        $.post("../../ubigeo", data, function (objJson) {
+                        $.post("../../ubigeo", data, function(objJson) {
                             tip.empty();
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
@@ -109,7 +113,7 @@
                         var rg = $("#pro_dir_l").val();
                         var data = "id_dist=" + rg + "&opc=pro_nac";
                         ti.append('<option value="">Cargando...</option>').val('');
-                        $.post("../../ubigeo", data, function (objJson) {
+                        $.post("../../ubigeo", data, function(objJson) {
                             ti.empty();
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
@@ -131,10 +135,10 @@
 
 
                         $(".doc").attr("maxlength", "8");
-                          $(".doc").attr("minlength", "8");
+                        $(".doc").attr("minlength", "8");
                         $(".doc").val("");
                         $("#nac").change(
-                                function () {
+                                function() {
                                     if ($("#nac").val() != "NAC-0193") {
                                         $("#dist").hide();
                                         $("#dist_nac").val("DST-001832");
@@ -148,7 +152,7 @@
                                 }
                         );
 
-                        $("#sit_edu").change(function () {
+                        $("#sit_edu").change(function() {
                             if ($("#sit_edu").val() == 'SED-0011' | $("#sit_edu").val() == 'SED-0013' | $("#sit_edu").val() == 'SED-0014'
                                     | $("#sit_edu").val() == 'SED-0015'
                                     | $("#sit_edu").val() == 'SED-0016' | $("#sit_edu").val() == 'SED-0017'
@@ -171,7 +175,7 @@
 
                         });
 
-                        $("#es_inst_p").change(function () {
+                        $("#es_inst_p").change(function() {
                             if ($("#inst_peru").val() == "1") {
                                 $("#regimen").show();
                                 $("#egreso").show();
@@ -190,10 +194,10 @@
                         });
 
                         $(".select-doc").change(
-                                function () {
+                                function() {
                                     $(".doc").val("");
                                     if ($(".select-doc").val() == 1) {
-                                        $("#doc").numeric(false, function () {
+                                        $("#doc").numeric(false, function() {
                                         });
                                         $(".doc").attr("maxlength", "8");
                                         $(".doc").attr("minlength", "8");
@@ -204,7 +208,7 @@
 
                                         $("#doc").removeNumeric();
                                         $(".doc").attr("maxlength", "10");
-                                         $(".doc").removeAttr("minlength");
+                                        $(".doc").removeAttr("minlength");
                                         //    $(".doc").val("");
                                     }
                                     if ($(".select-doc").val() == 3) {
@@ -220,10 +224,10 @@
         <!--Alerta para la edad -->
         <script type="text/javascript">
             $(document).ready(
-                    function () {
+                    function() {
                         $(".alerta-req").hide();
                         $("#edad").change(
-                                function () {
+                                function() {
                                     $(".alerta-req").hide();
                                     var fecha = $("#edad").val();
                                     var fechaActual = new Date();
@@ -591,17 +595,17 @@
                                                             </div>
                                                             <script>
                                                                 $(document).ready(
-                                                                        function () {
+                                                                        function() {
                                                                             $("#sis_pens").change(
-                                                                                    function () {
+                                                                                    function() {
                                                                                         if ($("#sis_pens").val() != "1") {
                                                                                             $("#nom_afp").val("6");
-                                                                                            $("#nom_afp").attr("disabled",true);
+                                                                                            $("#nom_afp").attr("disabled", true);
                                                                                         }
                                                                                         if ($("#sis_pens").val() == "1") {
 
                                                                                             $("#nom_afp").val("");
-                                                                                             $("#nom_afp").removeAttr("disabled");
+                                                                                            $("#nom_afp").removeAttr("disabled");
                                                                                         }
                                                                                     }
                                                                             );
@@ -770,8 +774,8 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                                            <!--  <input pattern=".{3,}" required title="3 characters minimum">
-                                                                            <input pattern=".{5,10}" required title="5 to 10 characters">-->
+                                                            <!--  <input pattern=".{3,}" required title="3 characters minimum">
+                                                            <input pattern=".{5,10}" required title="5 to 10 characters">-->
                                                             <div class="row">
 
                                                                 <div class="col-sm-10">
@@ -799,18 +803,12 @@
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select name="DIR_DOM_A_D1_ID" id="DOM_A_D1" class="form-control input-lg"  required="">
-                                                                                <option value="">[Seleccione]</option>
-                                                                                <option value="1">Avenida</option>
-                                                                                <option value="2">Jiron</option>
-                                                                                <option value="3">Manzana</option>
-                                                                                <option value="4">Calle</option>
-                                                                                <option value="5">Pasaje</option>
-                                                                                <option value="6">Alameda</option>
-                                                                                <option value="7">Malecón</option>
-                                                                                <option value="8">Ovalo</option>
-                                                                                <option value="9">Plaza</option>
-                                                                                <option value="10">Carretera</option>
-                                                                                <option value="11">Block</option>
+                                                                                <option value="">[Seleccione Via]</option>
+                                                                                <%for(int i=0;i<Listar_via.size();i++){
+                                                                                Via zo=new Via();
+                                                                                zo=(Via)Listar_via.get(i);%>    
+                                                                                <option value="<%=zo.getId_via()%>"><%=zo.getDe_via()%></option>
+                                                                                <%}%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -829,45 +827,45 @@
                                                                     </div>
                                                                 </div>
                                                                 <script>
-                                                                $(document).ready(
-                                                                        function () {
-                                                                            $("#DOM_A_D3").change(
-                                                                                    function () {
-                                                                                        if ($("#DOM_A_D3").val() == "3") {
-                                                                                            $("#DOM_A_D4").val("Sin Numero");
-                                                                                        }else{
-                                                                                            
-                                                                                            $("#DOM_A_D4").val("");
-                                                                                        }
-                                                                                       
-                                                                                    }
-                                                                            );
-                                                                            $("#DOM_LEG_D3").change(
-                                                                                    function () {
-                                                                                        if ($("#DOM_LEG_D3").val() == "3") {
-                                                                                            $("#DOM_LEG_D4").val("Sin Numero");
-                                                                                        }else{
-                                                                                            
-                                                                                            $("#DOM_LEG_D4").val("");
-                                                                                        }
-                                                                                       
-                                                                                    }
-                                                                            );
-                                                                            $("#reli").change(
-                                                                                    function () {
-                                                                                        if ($("#reli").val() == "1") {
-                                                                                            $("#igle").attr("required","required")
-                                                                                        }else{
-                                                                                            
-                                                                                             $("#igle").removeAttr("required");
-                                                                                        }
-                                                                                       
-                                                                                    }
-                                                                            );
+                                                                    $(document).ready(
+                                                                            function() {
+                                                                                $("#DOM_A_D3").change(
+                                                                                        function() {
+                                                                                            if ($("#DOM_A_D3").val() == "3") {
+                                                                                                $("#DOM_A_D4").val("Sin Numero");
+                                                                                            } else {
 
-                                                                        });
+                                                                                                $("#DOM_A_D4").val("");
+                                                                                            }
 
-                                                            </script>
+                                                                                        }
+                                                                                );
+                                                                                $("#DOM_LEG_D3").change(
+                                                                                        function() {
+                                                                                            if ($("#DOM_LEG_D3").val() == "3") {
+                                                                                                $("#DOM_LEG_D4").val("Sin Numero");
+                                                                                            } else {
+
+                                                                                                $("#DOM_LEG_D4").val("");
+                                                                                            }
+
+                                                                                        }
+                                                                                );
+                                                                                $("#reli").change(
+                                                                                        function() {
+                                                                                            if ($("#reli").val() == "1") {
+                                                                                                $("#igle").attr("required", "required")
+                                                                                            } else {
+
+                                                                                                $("#igle").removeAttr("required");
+                                                                                            }
+
+                                                                                        }
+                                                                                );
+
+                                                                            });
+
+                                                                </script>
                                                                 <div class="col-sm-3">
 
                                                                     <div class="form-group">
@@ -879,6 +877,11 @@
                                                                                 <option value="1">Número</option>
                                                                                 <option value="2">Lote</option>
                                                                                 <option value="3">S/N</option>
+                                                                                <option value="4">Km</option>
+                                                                                <option value="5">Block</option>
+                                                                                <option value="6">Etapa</option>
+                                                                                <option value="7">Departamento</option>
+                                                                                <option value="8">Interior</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -890,7 +893,6 @@
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-lg"    placeholder="" type="text" name="DIR_DOM_A_D4" id="DOM_A_D4" maxlength="100">
 
-                                                                            </select>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -904,19 +906,13 @@
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select name="DIR_DOM_A_D5_ID" id="DOM_A_D5" class="form-control input-lg"  required="">
-                                                                                <option value="">[Seleccione]</option>
-                                                                                <option value="1">Urbanizacion</option>
-                                                                                <option value="2">Pueblo Joven</option>
-                                                                                <option value="3">Unidad Vecinal</option>
-                                                                                <option value="4">Conjuto Habitacional</option>
-                                                                                <option value="5">Asentamiento Humano</option>
-                                                                                <option value="6">Cooperativa</option>
-                                                                                <option value="7">Residencial</option>
-                                                                                <option value="8">Zona Industrial</option>
-                                                                                <option value="9">Grupo</option>
-                                                                                <option value="10">Caserío</option>
-                                                                                <option value="11">Fundo</option>
-                                                                                <option value="12">Ninguno</option>
+                                                                                
+                                                                                <option value="">[Seleccione Zona]</option>
+                                                                                <%for(int i=0;i<Listar_zona.size();i++){
+                                                                                Zona zo=new Zona();
+                                                                                zo=(Zona)Listar_zona.get(i);%>    
+                                                                                <option value="<%=zo.getId_zona()%>"><%=zo.getDe_zona()%></option>
+                                                                                <%}%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -928,7 +924,6 @@
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-lg"    placeholder="" type="text" name="DIR_DOM_A_D6" id="DOM_A_D6" maxlength="100">
 
-                                                                            </select>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -938,7 +933,6 @@
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-lg"    placeholder="Referencia" type="text" name="DIR_DOM_A_REF" id="DOM_A_REF" maxlength="200">
-                                                                            </select>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1009,18 +1003,12 @@
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select name="DIR_DOM_LEG_D1_ID"  id="DOM_LEG_D1" class="form-control input-lg"  required="">
-                                                                                <option value="">[Seleccione]</option>
-                                                                                <option value="1">Avenida</option>
-                                                                                <option value="2">Jiron</option>
-                                                                                <option value="3">Manzana</option>
-                                                                                <option value="4">Calle</option>
-                                                                                <option value="5">Pasaje</option>
-                                                                                <option value="6">Alameda</option>
-                                                                                <option value="7">Malecón</option>
-                                                                                <option value="8">Ovalo</option>
-                                                                                <option value="9">Plaza</option>
-                                                                                <option value="10">Carretera</option>
-                                                                                <option value="11">Block</option>
+                                                                                <option value="">[Seleccione Via]</option>
+                                                                               <%for(int i=0;i<Listar_via.size();i++){
+                                                                                Via zo=new Via();
+                                                                                zo=(Via)Listar_via.get(i);%>    
+                                                                                <option value="<%=zo.getId_via()%>"><%=zo.getDe_via()%></option>
+                                                                                <%}%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -1047,6 +1035,11 @@
                                                                                 <option value="1">Número</option>
                                                                                 <option value="2">Lote</option>
                                                                                 <option value="3">S/N</option>
+                                                                                <option value="4">Km</option>
+                                                                                <option value="5">Block</option>
+                                                                                <option value="6">Etapa</option>
+                                                                                <option value="7">Departamento</option>
+                                                                                <option value="8">Interior</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -1070,19 +1063,12 @@
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select name="DIR_DOM_LEG_D5_ID"  id="DOM_LEG_D5" class="form-control input-lg"  required="">
-                                                                                <option value="">[Seleccione]</option>
-                                                                                <option value="1">Urbanizacion</option>
-                                                                                <option value="2">Pueblo Joven</option>
-                                                                                <option value="3">Unidad Vecinal</option>
-                                                                                <option value="4">Conjuto Habitacional</option>
-                                                                                <option value="5">Asentamiento Humano</option>
-                                                                                <option value="6">Cooperativa</option>
-                                                                                <option value="7">Residencial</option>
-                                                                                <option value="8">Zona Industrial</option>
-                                                                                <option value="9">Grupo</option>
-                                                                                <option value="10">Caserío</option>
-                                                                                <option value="11">Fundo</option>
-                                                                                <option value="12">Ninguno</option> 
+                                                                                <option value="">[Seleccione Zona]</option>
+                                                                                <%for(int i=0;i<Listar_zona.size();i++){
+                                                                                Zona zo=new Zona();
+                                                                                zo=(Zona)Listar_zona.get(i);%>    
+                                                                                <option value="<%=zo.getId_zona()%>"><%=zo.getDe_zona()%></option>
+                                                                                <%}%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -1640,7 +1626,7 @@
 
                                                                     // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-                                                                    $(document).ready(function () {
+                                                                    $(document).ready(function() {
 
                                                                         pageSetUp();
 
@@ -1687,15 +1673,15 @@
                                                                                     email: "Your email address must be in the format of name@domain.com"
                                                                                 }
                                                                             },
-                                                                            highlight: function (element) {
+                                                                            highlight: function(element) {
                                                                                 $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
                                                                             },
-                                                                            unhighlight: function (element) {
+                                                                            unhighlight: function(element) {
                                                                                 $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
                                                                             },
                                                                             errorElement: 'span',
                                                                             errorClass: 'help-block',
-                                                                            errorPlacement: function (error, element) {
+                                                                            errorPlacement: function(error, element) {
                                                                                 if (element.parent('.input-group').length) {
                                                                                     error.insertAfter(element.parent());
                                                                                 } else {
@@ -1706,7 +1692,7 @@
 
                                                                         $('#bootstrap-wizard-1').bootstrapWizard({
                                                                             'tabClass': 'form-wizard',
-                                                                            'onNext': function (tab, navigation, index) {
+                                                                            'onNext': function(tab, navigation, index) {
                                                                                 var $valid = $("#wizard-1").valid();
                                                                                 if (!$valid) {
                                                                                     $validator.focusInvalid();
@@ -1724,7 +1710,7 @@
                                                                         // fuelux wizard
                                                                         var wizard = $('.wizard').wizard();
 
-                                                                        wizard.on('finished', function (e, data) {
+                                                                        wizard.on('finished', function(e, data) {
                                                                             //$("#fuelux-wizard").submit();
                                                                             //console.log("submitted!");
                                                                             $.smallBox({
@@ -1748,7 +1734,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function () {
+            (function() {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
@@ -1762,24 +1748,24 @@
         <!--Solo numeros -->
         <script type="text/javascript">
             $("#docs").numeric();
-            $("#doc").numeric(false, function () {
+            $("#doc").numeric(false, function() {
                 alert("Solo Numeros Enteros");
                 this.value = "";
                 this.focus();
             });
-            $(".positive").numeric({negative: false}, function () {
+            $(".positive").numeric({negative: false}, function() {
                 alert("No negative values");
                 this.value = "";
                 this.focus();
             });
-            $(".positive-integer").numeric({decimal: false, negative: false}, function () {
+            $(".positive-integer").numeric({decimal: false, negative: false}, function() {
                 alert("Positive integers only");
                 this.value = "";
                 this.focus();
             });
 
             $("#remove").click(
-                    function (e)
+                    function(e)
                     {
                         e.preventDefault();
                         $(".numeric,.integer,.positive").removeNumeric();
@@ -1821,13 +1807,13 @@
         <!--Select dinamicos-->
         <script type="text/javascript">
             /*Ubigeo*/
-            $("#dep_nac").change(function () {
+            $("#dep_nac").change(function() {
                 var ti = $("#pro_nac");
                 ti.empty();
                 var rg = $("#dep_nac").val();
                 var data = "id_dep=" + rg + "&opc=dep_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function (objJson) {
+                $.post("../../ubigeo", data, function(objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -1845,13 +1831,13 @@
                     }
                 });
             });
-            $("#pro_nac").change(function () {
+            $("#pro_nac").change(function() {
                 var ti = $("#dist_nac");
                 ti.empty();
                 var rg = $("#pro_nac").val();
                 var data = "id_dist=" + rg + "&opc=pro_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function (objJson) {
+                $.post("../../ubigeo", data, function(objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -1869,13 +1855,13 @@
                     }
                 });
             });
-            $("#dep_dir_a").change(function () {
+            $("#dep_dir_a").change(function() {
                 var ti = $("#pro_dir_a");
                 ti.empty();
                 var rg = $("#dep_dir_a").val();
                 var data = "id_dep=" + rg + "&opc=dep_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function (objJson) {
+                $.post("../../ubigeo", data, function(objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -1893,13 +1879,13 @@
                     }
                 });
             });
-            $("#pro_dir_a").change(function () {
+            $("#pro_dir_a").change(function() {
                 var ti = $("#DOM_A_DISTRITO");
                 ti.empty();
                 var rg = $("#pro_dir_a").val();
                 var data = "id_dist=" + rg + "&opc=pro_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function (objJson) {
+                $.post("../../ubigeo", data, function(objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -1917,13 +1903,13 @@
                     }
                 });
             });
-            $("#dep_dir_l").change(function () {
+            $("#dep_dir_l").change(function() {
                 var ti = $("#pro_dir_l");
                 ti.empty();
                 var rg = $("#dep_dir_l").val();
                 var data = "id_dep=" + rg + "&opc=dep_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function (objJson) {
+                $.post("../../ubigeo", data, function(objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -1941,13 +1927,13 @@
                     }
                 });
             });
-            $("#pro_dir_l").change(function () {
+            $("#pro_dir_l").change(function() {
                 var ti = $("#DOM_LEG_DISTRITO");
                 ti.empty();
                 var rg = $("#pro_dir_l").val();
                 var data = "id_dist=" + rg + "&opc=pro_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function (objJson) {
+                $.post("../../ubigeo", data, function(objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -1970,14 +1956,14 @@
 
 
             /*Datos Academicos*/
-            $("#rg").change(function () {
+            $("#rg").change(function() {
                 var ti = $("#ti_inst");
                 ti.empty();
                 var rg = $("#rg").val();
                 var data = "regimen=" + rg + "&opc=ti_inst";
 
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../detalle_carrera", data, function (objJson) {
+                $.post("../../detalle_carrera", data, function(objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -1997,7 +1983,7 @@
             });
 
 
-            $("#ti_inst").change(function () {
+            $("#ti_inst").change(function() {
                 var inst = $("#inst");
                 inst.empty();
                 var ti = $("#ti_inst").val();
@@ -2006,7 +1992,7 @@
                  }*/
                 var data = "ti=" + ti + "&opc=institucion";
                 inst.append('<option value="">Cargando...</option>').val('');
-                $.post("../../detalle_carrera", data, function (objJson) {
+                $.post("../../detalle_carrera", data, function(objJson) {
                     inst.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -2024,7 +2010,7 @@
                     }
                 });
             });
-            $("#inst").change(function () {
+            $("#inst").change(function() {
                 var carr = $("#carrera");
                 carr.empty();
                 var insti = $("#inst").val();
@@ -2033,7 +2019,7 @@
                  }*/
                 var data = "inst=" + insti + "&opc=carrera";
                 carr.append('<option value="">Cargando...</option>').val('');
-                $.post("../../detalle_carrera", data, function (objJson) {
+                $.post("../../detalle_carrera", data, function(objJson) {
                     carr.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);

@@ -242,6 +242,11 @@ public class CContrato extends HttpServlet {
                 getServletContext().setAttribute("LIST_DAT_TR_PLANTILLA", tr.LIST_DAT_TR_PLANTILLA(idc));
                 response.sendRedirect("Vista/Contrato/Plantilla/Editor_Plantilla.jsp");
             }
+            if (opc.equals("Ver Plantilla")) {
+                String idc = request.getParameter("idc");
+                getServletContext().setAttribute("LIST_DAT_TR_PLANTILLA", tr.LIST_DAT_TR_PLANTILLA(idc));
+                response.sendRedirect("Vista/Contrato/Plantilla/Editor_Plantilla.jsp");
+            }
             if (opc.equals("filtrar")) {
                 getServletContext().setAttribute("List_Area", area.List_Area());
                 response.sendRedirect("Vista/Contrato/Busc_Contrato.jsp");

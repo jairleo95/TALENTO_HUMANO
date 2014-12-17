@@ -506,15 +506,27 @@
                                 <option value="">------</option>
                                 <option value="1">Avenida</option>
                                 <option value="2">Jiron</option>
-                                <option value="3">Manzana</option>
-                                <option value="4">Calle</option>
-                                <option value="5">Pasaje</option>
-                                <option value="6">Alameda</option>
-                                <option value="7">Malecón</option>
-                                <option value="8">Ovalo</option>
+                                <option value="3">Calle</option>
+                                <option value="4">Pasaje</option>
+                                <option value="5">Alameda</option>
+                                <option value="6">Malecón</option>
+                                <option value="7">Ovalo</option>
+                                <option value="8">Parque</option>
                                 <option value="9">Plaza</option>
                                 <option value="10">Carretera</option>
-                                <option value="11">Block</option>
+                                <option value="11">Trocha</option>
+                                <option value="12">Camino Rural</option>
+                                <option value="13">Bajada</option>
+                                <option value="14">Galeria</option>
+                                <option value="15">Prolongación</option>
+                                <option value="16">Paseo</option>
+                                <option value="17">Plazuela</option>
+                                <option value="18">Portal</option>
+                                <option value="19">Camino Afirmado</option>
+                                <option value="20">Trocha Carrozable</option>                                
+                                <option value="21">Manzana</option>
+                                <option value="22">Block</option>
+                                <option value="23">Otros</option>
                             </select>
                         </div>
                             <div class="item"><input type="text" name="DIR_DOM_A_D2" id="DOM_A_D2" class="text-box" required="" maxlength="100"></div>

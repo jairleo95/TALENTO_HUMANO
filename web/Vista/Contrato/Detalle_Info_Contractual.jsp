@@ -192,8 +192,16 @@
                     }%> </p></td></tr>
                 <!--<tr><td>Funcion:</td><td><? /*echo $list_rhc[$index][5];*/?> </td></tr>-->
                 <tr><td class="text-info table-bordered"><strong>Sueldo:</strong></td><td><%=n.getCa_sueldo()%></td><td class="text-info table-bordered" colspan="1"><strong>Reintegro:</strong></td><td colspan="1"><%=n.getCa_reintegro()%></td><td class="text-info table-bordered" colspan="2"><strong>Bono Alimentario:</strong></td><td><%=n.getCa_bono_alimento()%> </td></tr>
-                <tr><td class="text-info table-bordered"><strong>Bev:</strong></td><td colspan="6"><%if(n.getCa_bev()!= null){ out.print(n.getCa_bev());}else{out.print("0");}%> </td></tr>
-                <tr><td class="text-info table-bordered"><strong>Sueldo Total:</strong></td><td colspan="6"><%if(n.getCa_sueldo_total()!= null){ out.print(n.getCa_sueldo_total());}else{out.print("0");}%> </td></tr>
+                <tr><td class="text-info table-bordered"><strong>Bev:</strong></td><td colspan="6"><%if (n.getCa_bev() != null) {
+                        out.print(n.getCa_bev());
+                    } else {
+                        out.print("0");
+                    }%> </td></tr>
+                <tr><td class="text-info table-bordered"><strong>Sueldo Total:</strong></td><td colspan="6"><%if (n.getCa_sueldo_total() != null) {
+                        out.print(n.getCa_sueldo_total());
+                    } else {
+                        out.print("0");
+                    }%> </td></tr>
                 <tr><td class="text-info table-bordered"><strong>Tipo Pago Horas:</strong></td><td colspan="6"><%=n.getTi_hora_pago()%> </td></tr>
                 <tr><td class="text-info table-bordered"><strong>Asignación Familiar:</strong></td><td colspan="6"><%= "S/." + n.getCa_asig_familiar()%> </td></tr>
                 <tr><td class="text-info table-bordered"><strong>Regimen Laboral Mintra:</strong></td>
@@ -257,7 +265,11 @@
                         }
                     } else {%><td colspan="6"> NO DEFINIDO</td><%}%>
                 </tr>
-                <tr><td class="text-info table-bordered"> Fecha de Suscripcion</td><td><%if(n.getFe_suscripcion()!=null){out.print(n.getFe_suscripcion());}else{out.print("NO DEFINIDO");}%> </td></tr>
+                <tr><td class="text-info table-bordered"> Fecha de Suscripcion</td><td><%if (n.getFe_suscripcion() != null) {
+                        out.print(n.getFe_suscripcion());
+                    } else {
+                        out.print("NO DEFINIDO");
+                    }%> </td></tr>
                 <tr><td class="text-info table-bordered"><strong>Tipo moneda de pago</strong></td><td colspan="6"><%
                     if (n.getCo_ti_moneda() != null) {
                         if (n.getCo_ti_moneda().trim().equals("01")) {
@@ -284,26 +296,34 @@
                     } else {
                         out.print("NO DEFINIDO");
                     }%> </td></tr>   
-                <tr><td class="text-info table-bordered"><strong>Régimen Laboral:</strong></td><td colspan="6"><%                    if (n.getLi_regimen_laboral().trim().equals("1")) {
-                        out.println("Privado");
-                    }%> </td></tr>   
+                <tr><td class="text-info table-bordered"><strong>Régimen Laboral:</strong></td><td colspan="6">
+                        <%if (n.getLi_regimen_laboral().trim().equals("1")) {
+                                out.println("Privado");
+                            } else if (n.getLi_regimen_laboral().trim().equals("1")) {
+                                out.println("Publico");
+                            } else if (n.getLi_regimen_laboral() == null) {
+                                out.println("NO DEFINIDO");
+                            }%> </td></tr>   
                 <!--<tr><td class="text-info table-bordered"><strong>Vacaciones:</strong></td><td class="text-info" colspan="2"><strong>Desde:</strong></td><td colspan="2"> <%=n.getFe_vacacio_ini()%> </td><td class="text-info" ><strong >Hasta:</strong></td><td colspan="2"> <%=n.getFe_vacacio_fin()%> </td></tr>   -->
                 <tr><td class="text-info table-bordered"><strong>Discapacidad:</strong></td><td colspan="6"><%
-
-                    if (n.getEs_discapacidad().equals("1")) {
-                        out.println("No");
-                    }
-                    if (n.getEs_discapacidad().equals("2")) {
-                        out.println("Si");
-                    }
-
-                        %> 
-                    </td></tr>   
-                <tr><td class="text-info table-bordered"><strong>Tipo de Contrato:</strong></td><td colspan="6"><%                    for (int k = 0; k < List_tipo_contrato.size(); k++) {
-                        if (n.getTi_contrato().trim().equals(k + 1 + "")) {
-                            out.println(List_tipo_contrato.get(k));
+                    if (n.getEs_discapacidad() != null) {
+                        if (n.getEs_discapacidad().equals("1")) {
+                            out.println("No");
                         }
+                        if (n.getEs_discapacidad().equals("2")) {
+                            out.println("Si");
+                        }
+                    } else {
+                        out.println("DATO NO INGRESADO ");
                     }%> 
+                    </td></tr>   
+                <tr><td class="text-info table-bordered"><strong>Tipo de Contrato:</strong></td><td colspan="6">
+                        <%for (int k = 0; k < List_tipo_contrato.size(); k++) {
+                            
+                                if (n.getTi_contrato().trim().equals(k + 1 + "")) {
+                                    out.println(List_tipo_contrato.get(k));
+                                }
+                            }%> 
                     </td></tr>   
                 <tr><td class="text-info table-bordered"><strong>Tipo de Convenio:</strong></td><td colspan="6"><%
                     if (n.getLi_tipo_convenio().trim().equals("1")) {
@@ -335,7 +355,11 @@
                             }%></td></tr>
 
                 <!--  <tr><td>Nro. de Contrato:</td><td><?/* echo $list_rhc[$index][39];*/?> </td></tr>   -->
-                <tr><td class="text-info table-bordered"><strong>Observaciones:</strong></td><td colspan="6"><%if(n.getDe_observacion()!=null){out.print(n.getDe_observacion());}else{out.print("SIN OBSERVACIONES");}%> </td></tr>   
+                <tr><td class="text-info table-bordered"><strong>Observaciones:</strong></td><td colspan="6"><%if (n.getDe_observacion() != null) {
+                        out.print(n.getDe_observacion());
+                    } else {
+                        out.print("SIN OBSERVACIONES");
+                    }%> </td></tr>   
                 <tr><td class="text-info table-bordered"><strong>Régimen Pensionario:</strong></td><td colspan="6"><%
                     if (n.getLi_regimen_pensionario().trim().equals("1")) {
                         out.println("Privado");
@@ -362,7 +386,11 @@
                                 out.println("Tarapoto");%>
                         <%}
                         %> </td></tr>   
-                <tr><td class="text-info table-bordered"><strong>Fecha de Cese:</strong></td><td class="table-bordered  " colspan="6"><% if(n.getFe_cese()!=null){ out.print(n.getFe_cese());}else{out.print("NO DEFINIDO");}%> </td></tr>   
+                <tr><td class="text-info table-bordered"><strong>Fecha de Cese:</strong></td><td class="table-bordered  " colspan="6"><% if (n.getFe_cese() != null) {
+                        out.print(n.getFe_cese());
+                    } else {
+                        out.print("NO DEFINIDO");
+                    }%> </td></tr>   
                 <!--   <tr><td>Nro. Documento:</td><td><? /*echo $list_rhc[$index][43];?> </td></tr>   
                <tr><td>Pares:</td><td><? echo $list_rhc[$index][36];?> </td></tr>   
                  <tr><td>Apoyo:</td><td><? echo $list_rhc[$index][41];*/?> </td></tr>   -->
@@ -378,36 +406,39 @@
                         }
                         if (List_Planilla.size() == 0) {%>
                 <tr><td class="text-info" colspan="8" style="text-align:center"><input class="button blue"  type="hidden" value="Editar"><a  class="button blue" href="../../contrato?opc=Ver_Plantilla&idc=<%=n.getId_contrato().trim()%>">Ver Plantilla</a></td></tr>
-                            <%}%>
+                        <%}%>
 
-                <tr> <%if (n.getUs_modif()!= null && n.getFe_modif()!= null) {%>
+                <tr> <%if (n.getUs_modif() != null && n.getFe_modif() != null) {%>
                     <td class="text-info table-bordered"><strong>Modificado por:</strong></td>
                     <td><%for (int f = 0; f < List_Usuario.size(); f++) {
                             Usuario u = new Usuario();
                             u = (Usuario) List_Usuario.get(f);
-                            if(n.getUs_modif().equals(u.getId_usuario()))
-                               out.println(u.getNo_usuario());%>
+                            if (n.getUs_modif().equals(u.getId_usuario())) {
+                                out.println(u.getNo_usuario());%>
                         <%}%>
                     </td>
                     <%}%>
                     <% if (n.getFe_modif() == null && n.getFe_creacion() != null) {%>
                     <td class="text-danger text-info text-center "><strong>Creado por:</strong></td>
-                         <%if (n.getUs_creacion() != null) {
+                    <%if (n.getUs_creacion() != null) {
                             for (int f = 0; f < List_Usuario.size(); f++) {
                                 Usuario u = new Usuario();
                                 u = (Usuario) List_Usuario.get(f);
                                 if (n.getUs_creacion().equals(u.getId_usuario())) {%>
-                                <td class="text-info text-center"><%=u.getNo_usuario()%></td>
-                    <%}}} else{%>
+                    <td class="text-info text-center"><%=u.getNo_usuario()%></td>
+                    <%}
+                        }
+                    } else {%>
                     <td>NO INGRESADO</td>
                     <%}%>
-                        <%}%>
+                    <%}%>
                 </tr>
 
                 <%}%>
             </table>
         </form>
         <%}
+                }
             }%>
     </center>
 </body>
