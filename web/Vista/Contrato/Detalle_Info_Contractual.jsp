@@ -160,8 +160,9 @@
             </table>
         </form>
         <form>
-            <table class="table table-hover table-striped  table-responsive">
+            
                 <% for (int p = 0; p < List_id_Contrato_DGP.size(); p++) {%>
+                <table class="table table-hover table-striped  table-responsive">
                 <tr><td class="text-info table-bordered"><strong>Desde: <%=n.getId_contrato()%></strong></td><td colspan="2"><%=n.getFe_desde()%></td><td class="text-info table-bordered" colspan="2"><strong>Hasta:</strong></td><td colspan="2"><%=n.getFe_hasta()%></td></tr>
                 <tr><td class="text-info table-bordered"><strong>Dirección:</strong></td><td colspan="6"><p><%=n.getNo_direccion()%> </p></td></tr>
                 <tr><td class="text-info table-bordered"><strong>Departamento:</strong></td><td colspan="6"><p><%=n.getNo_dep()%> </p></td></tr>

@@ -809,7 +809,7 @@
                                                                                 zo=(Via)Listar_via.get(i);%>    
                                                                                 <option value="<%=zo.getId_via()%>"><%=zo.getDe_via()%></option>
                                                                                 <%}%>
-                                                                            </select>
+                                                                            </select>   
                                                                         </div>
                                                                     </div>
                                                                 </div>
