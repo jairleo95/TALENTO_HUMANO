@@ -73,9 +73,28 @@
             #titulo{
 
                 font-weight: bold;
-                color: #005cac;
+                color: black;
                 // color: blue;
             }
+
+            .header{
+
+
+                background-color: #474747;
+                padding: 0%;
+
+                font-family: arial;
+                font-size: 130%;
+                text-align: center;
+                color: white;
+
+            }
+            #submit{
+                font-weight:bold;
+                padding-left: 4%;
+                padding-right: 4%;
+            }
+
         </style>
     </head>
 
@@ -97,9 +116,10 @@
                     
             -->
             <header>
-                <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                <h2>INFORMACIÓN CONTRACTUAL</h2>
-
+                <!--<div   class="header" style=" width:100%; border:2px solid red">Detalle del Trabajador</div> -->
+                <div class="header">
+                    <span class="widget-icon"> <i class="fa fa-edit"></i> Información Contractual</span>
+                </div>
             </header>
 
             <!-- widget div-->
@@ -152,17 +172,17 @@
                                 </section  >
                                 <input type="hidden" name="IDDETALLE_DGP" value="<%=d.getId_dgp()%>" class="text-box"  >
                                 <section class="col col-2">
-                                    <label class="input">Desde: 
+                                    <label class="input" id="titulo">Desde: 
                                         <input type="date" name="FEC_DESDE" value="<%=d.getFe_desde()%>" class="date input-lg" required="">
                                     </label>
                                 </section>
                                 <section class="col col-2">
-                                    <label class="input">Hasta: 
+                                    <label class="input" id="titulo">Hasta: 
                                         <input type="date" name="FEC_HASTA" value="<%=d.getFe_hasta()%>" class="input-lg" required="">
                                     </label>
                                 </section>
-                                <section class="col col-5">
-                                    <label class="select">Puesto:
+                                <section class="col col-5" id="titulo">
+                                    <label class="select" id="titulo">Puesto:
                                         <select name="PUESTO_ID" required="" class="input-lg">
                                             <%  for (int j = 0; j < List_Puesto.size(); j++) {%>
                                             <%Puesto p = new Puesto();
@@ -178,7 +198,7 @@
                                         </select>  </label>
                                 </section>
                                 <section class="col col-5">
-                                    <label class="select">Centro de Costo:
+                                    <label class="select" id="titulo">Centro de Costo:
                                         <select name="CENTRO_COSTO" required="" class="input-lg">
                                             <option value="">[SELECCIONE]</option>
                                             <%for (int h = 0; h < List_centro_costo.size(); h++) {
@@ -190,7 +210,7 @@
                                         </select>  </label>
                                 </section>
                                 <section class="col col-5">
-                                    <label class="select">Condición:
+                                    <label class="select" id="titulo">Condición:
                                         <select name="CONDICION" class="input-lg" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <option value="1">Contratado</option>
@@ -210,39 +230,39 @@
                             <div class="row">
 
                                 <section class="col col-2">
-                                    <label class="input">Remuneración:
+                                    <label class="input" id="titulo">Remuneración:
                                         <input type="text" name="SUELDO" value="<%=d.getCa_sueldo()%>" class="input-lg">
                                     </label>
                                 </section>
                                 <section class="col col-1">
-                                    <label class="input">Reintegro:
+                                    <label class="input" id="titulo">Reintegro:
                                         <input type="text" name="REINTEGRO" value="0" class="input-lg">
                                     </label>
                                 </section>
                                 <section class="col col-2">
-                                    <label class="input">Bono Alimentario:
+                                    <label class="input" id="titulo">Bono Alimentario:
                                         <input type="text" name="BONO_ALIMENTO" value="<%=d.getCa_bono_alimentario()%>" class="input-lg">
                                     </label>
                                 </section>
                                 <section class="col col-1">
-                                    <label class="input">BEV:
+                                    <label class="input" id="titulo">BEV:
                                         <input type="text" name="BEV" value="<%=d.getDe_bev()%>" class="input-lg">
                                     </label>
                                 </section>
 
                                 <section class="col col-2">
-                                    <label class="input">Sueldo Total:
+                                    <label class="input" id="titulo">Sueldo Total:
                                         <input type="text" name="TOTAL_SUELDO" value="<%=d.getCa_bono_alimentario() + d.getCa_sueldo() + d.getDe_bev()%>" class="input-lg">
                                     </label>
                                 </section>
                                 <section class="col col-2">
-                                    <label class="input">Tipo Horas Pago:
+                                    <label class="input" id="titulo">Tipo Horas Pago:
                                         <input type="text" name="TIPO_HORA_PAGO" value="0" class="input-lg">
                                     </label>
                                 </section>
                                 <%int total = Integer.parseInt(request.getParameter("num")); %>
-                                <section class="col col-2">
-                                    <label class="input">Asignanción Familiar:
+                                <section class="col col-2" >
+                                    <label class="input" id="titulo">Asignanción Familiar:
                                         <input type="text" name="ASIG_FAMILIAR" <%if (total == 0) {%>value="0" <%} else {%> value="75.0" <%}%> class="input-lg">
                                     </label>
                                 </section>
@@ -252,7 +272,7 @@
                         <fieldset>
                             <div class="row">
                                 <section class="col col-4">
-                                    <label class="select">Regimen Laboral Mintra:
+                                    <label class="select" id="titulo">Regimen Laboral Mintra:
                                         <select name="REG_LAB_MINTRA" class="input-lg" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <%for (int q = 0; q < list_reg_labo.size(); q++) {
@@ -265,7 +285,7 @@
                                     </label>
                                 </section>
                                 <section class="col col-4">
-                                    <label class="select">Modalidad:
+                                    <label class="select" id="titulo">Modalidad:
                                         <select name="MODALIDAD" class="input-lg" id="select_mod" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <%for (int l = 0; l < List_modalidad.size(); l++) {
@@ -279,14 +299,14 @@
                                     </label>
                                 </section>
                                 <section class="col col-4">
-                                    <label class="select">SUB-Modalidad:
+                                    <label class="select" id="titulo">SUB-Modalidad:
                                         <select name="SUB_MODALIDAD" class="input-lg" id="select-sub-mod" required="">
                                             <option value="">[SELECCIONE]</option>
                                         </select>
                                     </label>
                                 </section>
                                 <section class="col col-4">
-                                    <label class="select">Tipo Contratación:
+                                    <label class="select" id="titulo">Tipo Contratación:
                                         <select name="REG_LAB_MINTRA" class="input-lg" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <option value="I">INICIO</option>
@@ -295,7 +315,7 @@
                                     </label>
                                 </section>
                                 <section class="col col-4">
-                                    <label class="select">Codigo Grupo de Ocupaciones:
+                                    <label class="select" id="titulo">Codigo Grupo de Ocupaciones:
                                         <select name="CO_GRUPO_OCU" class="input-lg" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <%for (int gr = 0; gr < List_grup_ocu.size(); gr++) {
@@ -308,12 +328,12 @@
                                     </label>
                                 </section>
                                 <section class="col col-4">
-                                    <label class="input">Fecha de Suscripción: 
+                                    <label class="input" id="titulo">Fecha de Suscripción: 
                                         <input type="date" name="FECHA_SUSCRIPCION" placeholder="" class="input-lg" required="">
                                     </label>
                                 </section>
                                 <section class="col col-4">
-                                    <label class="select">Tipo de Modeda:
+                                    <label class="select" id="titulo">Tipo de Modeda:
                                         <select name="TIPO_MONEDA" class="input-lg" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <option value="01">SOLES</option>
@@ -323,7 +343,7 @@
                                     </label>
                                 </section>
                                 <section class="col col-4">
-                                    <label class="select">Tipo Remuneracion Variable:
+                                    <label class="select" id="titulo">Tipo Remuneracion Variable:
                                         <select name="REM_VARIABLE" class="input-lg" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <option value="1">DESTAJO</option>
@@ -333,7 +353,7 @@
                                     </label>
                                 </section>
                                 <section class="col col-4">
-                                    <label class="select">Remuneración en Especie:
+                                    <label class="select" id="titulo">Remuneración en Especie:
                                         <select name="REM_ESPECIE" class="input-lg" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <option value="1">SI</option>
@@ -346,24 +366,24 @@
                         </fieldset>
 
                         <fieldset>
-                            <h6><label>Horas:</label></h6>
+                            <h6><label id="titulo">Horas:</label></h6>
                             <div class="row" >
 
                                 </section>
                                 <section class="col col-2">
-                                    <label class="input">Semanal:
+                                    <label class="input" id="titulo">Semanal:
                                         <input type="text" name="HORAS_SEMANA" value="48" class="input-lg" required="">
                                     </label>
                                 </section>
                                 </section>
                                 <section class="col col-2">
-                                    <label class="input">Mensual:
+                                    <label class="input" id="titulo">Mensual:
                                         <input type="text" name="NRO_HORAS_LAB" value="192" class="input-lg" required="">
                                     </label>
                                 </section>
                                 </section>
                                 <section class="col col-2">
-                                    <label class="input">Dias:
+                                    <label class="input" id="titulo">Dias:
                                         <input type="text" name="DIAS" value="30" class="input-lg" required="">
                                     </label>
                                 </section>
@@ -373,7 +393,7 @@
                         <fieldset>
                             <div class="row">
                                 <section class="col col-4">
-                                    <label class="select">Tipo Trabajador.
+                                    <label class="select" id="titulo">Tipo Trabajador.
                                         <select name="TIPO_TRABAJADOR" class="input-lg" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <option value="1" selected>Empleado</option>
@@ -382,7 +402,7 @@
                                     </label>
                                 </section>
                                 <section class="col col-4">
-                                    <label class="select">Regimen Laboral: 
+                                    <label class="select" id="titulo">Regimen Laboral: 
                                         <select name="REGIMEN_LABORAL" class="input-lg" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <option value="1" selected>Privado</option>
@@ -391,7 +411,7 @@
                                     </label>
                                 </section>
                                 <section class="col col-4">
-                                    <label class="select">Discapacidad:
+                                    <label class="select" id="titulo"> Discapacidad:
                                         <select name="DISCAPACIDAD" class="input-lg" required="">
                                             <option value="">[SLECCIONE]</option>
                                             <option value="1" selected>No</option>
@@ -400,7 +420,7 @@
                                     </label>
                                 </section>
                                 <section class="col col-4">
-                                    <label class="select">Regimen Pensionario:
+                                    <label class="select" id="titulo">Regimen Pensionario:
                                         <select name="REGIMEN_PENSIONARIO" class="input-lg" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <option value="1" selected>Privado</option>
@@ -409,7 +429,7 @@
                                     </label>
                                 </section>
                                 <section class="col col-4">
-                                    <label class="select">Tipo Contrato::
+                                    <label class="select" id="titulo">Tipo Contrato::
                                         <select name="TIPO_CONTRATO" class="input-lg" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <option value="1">Necesidad de Mercado</option>
@@ -428,7 +448,7 @@
                                     </label>
                                 </section>
                                 <section class="col col-4">
-                                    <label class="select">Tipo Convenio:
+                                    <label class="select" id="titulo">Tipo Convenio:
                                         <select name="TIPO_CONVENIO" class="input-lg" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <option value="1">CLJ</option>
@@ -442,18 +462,26 @@
 
 
                         <fieldset>
-                            <div class="row">
-                                <section class="col col-2">
-                                    <label class="input">Observación:
-                                        <textarea  name="OBSERVACION"  class="input-lg" cols="130" rows="6"></textarea>
-                                    </label>
+                            <div class="">
+                                <section >
+                                    <label class="textarea" id="titulo">Observación:  </label>
+                                        <textarea  name="OBSERVACION"  class="input-lg" cols="35" rows="6"></textarea>
                                 </section>
+                          
                             </div>
+                            
+                            <!--<div>
+                              <section>
+                                <label class="textarea" id="titulo">Observación2:</label>										
+                                <textarea rows="5" rows="6" name="comment" placeholder=""></textarea> 
+                            </section>
+                            </div>-->
+                            
                         </fieldset>
                         <fieldset>
                             <div class="row">
-                                <section class="col col-3">
-                                    <label class="select">Situación Actual:
+                                <section class="col col-4">
+                                    <label class="select" id="titulo">Situación Actual:
                                         <select name="ESTADO_CONTRATO" class="input-lg" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <option value="1" selected>Activo</option>
@@ -466,8 +494,8 @@
                                         </select>
                                     </label>
                                 </section>
-                                <section class="col col-2">
-                                    <label class="select">Filial donde Trabaja:
+                                <section class="col col-4">
+                                    <label class="select" id="titulo">Filial donde Trabaja:
                                         <select name="FILIAL" class="input-lg" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <option value="1" selected >Lima</option>
@@ -476,23 +504,23 @@
                                         </select>
                                     </label>
                                 </section>
-                                <section class="col col-2">
-                                    <label class="input">Fecha Cese: 
+                                <section class="col col-4">
+                                    <label class="input" id="titulo">Fecha Cese: 
                                         <input type="date" name="FEC_CESE"  class="input-lg" required="">
                                     </label>
                                 </section>
-                                <section class="col col-2">
-                                    <label class="input">RUC UPEU:
+                                <section class="col col-4">
+                                    <label class="input" id="titulo">RUC UPEU:
                                         <input type="text" name="EMP_RUC" value="20138122256" maxlength="20" class="input-lg" required="">
                                     </label>
                                 </section>
-                                <section class="col col-1">
-                                    <label class="input">Cod. Sucursal:
+                                <section class="col col-4">
+                                    <label class="input" id="titulo">Cod. Sucursal:
                                         <input type="text" name="SUCURSAL" value="-1" maxlength="3" class="input-lg" required="">
                                     </label>
                                 </section>
-                                <section class="col col-1">
-                                    <label class="input">MYPE:
+                                <section class="col col-4">
+                                    <label class="input" id="titulo">MYPE:
                                         <input type="text" name="MYPE" value="N"  maxlength="2" class="input-lg" required="">
                                     </label>
                                 </section>
@@ -505,17 +533,18 @@
                             <input type="hidden" value="ARE-0022" name="AREA_ID" class="text-box" >
                         </fieldset>
 
-                       
-                        
-                           
-                            <footer>
-                                
-                                <button type="submit" name="opc"  class="btn btn-primary">
-                                    REGISTRAR CONTRATO
-                                </button>
-                            </footer>
-                           
-                        
+
+
+
+                        <footer>
+                            <input type="submit" name="opc"  class="submit" value="REGISTRAR CONTRATO">
+                            <!--<input type="hidden" name="opc"  class="text-box" >
+                            <button type="submit" id="submit" class="btn btn-primary">
+                                REGISTRAR CONTRATO
+                            </button>-->
+                        </footer>
+
+
                     </form>
                     <%}
                         }%>
@@ -610,7 +639,7 @@
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-            $(document).ready(function () {
+            $(document).ready(function() {
 
                 pageSetUp();
 
@@ -709,7 +738,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -778,7 +807,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -830,7 +859,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -869,15 +898,15 @@
                         }
                     },
                     // Ajax form submition
-                    submitHandler: function (form) {
+                    submitHandler: function(form) {
                         $(form).ajaxSubmit({
-                            success: function () {
+                            success: function() {
                                 $("#comment-form").addClass('submited');
                             }
                         });
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -911,15 +940,15 @@
                         }
                     },
                     // Ajax form submition
-                    submitHandler: function (form) {
+                    submitHandler: function(form) {
                         $(form).ajaxSubmit({
-                            success: function () {
+                            success: function() {
                                 $("#contact-form").addClass('submited');
                             }
                         });
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -948,7 +977,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -993,7 +1022,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1003,7 +1032,7 @@
                     dateFormat: 'dd.mm.yy',
                     prevText: '<i class="fa fa-chevron-left"></i>',
                     nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function (selectedDate) {
+                    onSelect: function(selectedDate) {
                         $('#finishdate').datepicker('option', 'minDate', selectedDate);
                     }
                 });
@@ -1012,7 +1041,7 @@
                     dateFormat: 'dd.mm.yy',
                     prevText: '<i class="fa fa-chevron-left"></i>',
                     nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function (selectedDate) {
+                    onSelect: function(selectedDate) {
                         $('#startdate').datepicker('option', 'maxDate', selectedDate);
                     }
                 });
@@ -1029,7 +1058,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function () {
+            (function() {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
@@ -1042,16 +1071,16 @@
     </body>
     <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
     <script>
-            $(document).ready(function () {
+            $(document).ready(function() {
                 var a = $("#select-sub-mod");
                 var b = $("#selec_dep");
                 var c = $("#Selec_Area");
                 var d = $("#select_sec");
                 $("#select_mod").change(
-                        function () {
+                        function() {
                             // alert("?MODALIDAD="+$("#select_mod").val());
 
-                            $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function (objJson) {
+                            $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function(objJson) {
                                 a.empty();
                                 var list = objJson.lista;
                                 if (list.length !== 0) {
