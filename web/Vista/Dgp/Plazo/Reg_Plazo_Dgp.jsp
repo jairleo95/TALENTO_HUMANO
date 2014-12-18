@@ -12,11 +12,11 @@
         <title>Registrar Plazo</title>
         <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
         <script>
-            $(document).ready(function () {
+            $(document).ready(function() {
                 listar();
                 var b = $(".tbodys");
                 function listar() {
-                    $.post("../../../plazo_dgp", "opc=Listar&t_List=admin", function (objJson) {
+                    $.post("../../../plazo_dgp", "opc=Listar", function(objJson) {
                         b.empty();
                         var lista = objJson.lista;
                         if (objJson.rpta == -1) {
@@ -35,7 +35,7 @@
                         }
 
                         $(".Editar-Plazo").click(
-                                function () {
+                                function() {
                                     $(".nombre_plazo").val($(".nombre" + $(this).val()).text());
                                     $(".descripcion").val($(".det" + $(this).val()).text());
                                     $(".desde").val($(".desde" + $(this).val()).text());
@@ -47,11 +47,11 @@
                                 }
                         );
                         $(".Eliminar-Plazo").click(
-                                function () {
+                                function() {
 
                                     if (confirm("Esta Seguro de Eliminar?")) {
 
-                                        $.post("../../../plazo_dgp", "opc=Eliminar&plz=" + $(".id" + $(this).val()).text(), function () {
+                                        $.post("../../../plazo_dgp", "opc=Eliminar&plz=" + $(".id" + $(this).val()).text(), function() {
 
                                             listar();
                                         });
@@ -71,8 +71,8 @@
 
 
                 $("#btn-registrar").click(
-                        function () {
-                            $.post("../../../plazo_dgp", $("#form-plazo").serialize(), function () {
+                        function() {
+                            $.post("../../../plazo_dgp", $("#form-plazo").serialize(), function() {
                                 listar();
 
                             });
