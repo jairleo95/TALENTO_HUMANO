@@ -9,6 +9,7 @@
 <%@page import="pe.edu.upeu.application.model.Puesto"%>
 <%@page import="pe.edu.upeu.application.model.DGP"%>
 <%@page import="pe.edu.upeu.application.model.Anno"%>
+
 <jsp:useBean id="List_Anno" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Puesto" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="LIST_ID_DGP" scope="application" class="java.util.ArrayList"/>
@@ -19,7 +20,6 @@
 <jsp:useBean id="List_centro_costo" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_grup_ocu" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html >
-
 <html>
     <head>
         <meta charset="windows-1252">
@@ -28,7 +28,6 @@
         <!-- Basic Styles -->
         <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/font-awesome.min.css">
-
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
         <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/smartadmin-skins.min.css">
@@ -168,7 +167,6 @@
                                             <%  for (int j = 0; j < List_Puesto.size(); j++) {%>
                                             <%Puesto p = new Puesto();
                                                 p = (Puesto) List_Puesto.get(j);
-
                                                 if (d.getId_puesto().equals(p.getId_puesto())) {%>
 
                                             <option value="<%=p.getId_puesto()%>" selected="selected"><%=p.getNo_puesto()%></option>

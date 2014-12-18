@@ -90,15 +90,17 @@ public class CContrato extends HttpServlet {
             if (opc.equals("enviar")) {
                 String iddgp = request.getParameter("iddgp");
                 String idtr = request.getParameter("idtr");
+
                 getServletContext().setAttribute("List_Anno", a.List_Anno());
                 getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(iddgp));
                 getServletContext().setAttribute("List_Puesto", puesto.List_Puesto());
-                getServletContext().setAttribute("LISTA_RH_SECCION", seccion.LISTA_RH_SECCION());
+
+                //getServletContext().setAttribute("LISTA_RH_SECCION", seccion.LISTA_RH_SECCION());
                 getServletContext().setAttribute("List_anno_max", a.List_anno_max());
                 getServletContext().setAttribute("List_modalidad", con.List_modalidad());
                 getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
                 getServletContext().setAttribute("List_centro_costo", cc.List_centro_costo());
-                getServletContext().setAttribute("Listar_Direccion", dir.Listar_Direccion());
+                //getServletContext().setAttribute("Listar_Direccion", dir.Listar_Direccion());
                 getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
                 int num = dht.ASIGNACION_F(idtr);
                 // out.println(num);
@@ -175,7 +177,6 @@ public class CContrato extends HttpServlet {
                 String ES_REGISTRO_HUELLA = request.getParameter("REGISTRO_HUELLA");
                 String DE_REGISTRO_SISTEM_REMU = request.getParameter("REGISTRO_SISTEM_REMU");
                 String ID_TRABAJADOR = request.getParameter("IDDATOS_TRABAJADOR");
-
                 String ID_CENTRO_COSTO = request.getParameter("CENTRO_COSTO");
                 Double CA_SUELDO_TOTAL = Double.parseDouble(request.getParameter("TOTAL_SUELDO"));
                 String ID_REGIMEN_LABORAL = request.getParameter("REG_LAB_MINTRA");
@@ -192,8 +193,7 @@ public class CContrato extends HttpServlet {
                 String ES_TI_CONTRATACION = request.getParameter("TI_CONTRATACION");
                 Double CA_BEV = Double.parseDouble(request.getParameter("BEV"));
 
-                out.println("sdñogjlkgjlksdjlk");
-
+               // out.println("sdñogjlkgjlksdjlk");
                 con.INSERT_CONTRATO(ID_CONTRATO, ID_DGP, FE_DESDE, FE_HASTA, FE_CESE, ID_FUNC, LI_CONDICION, CA_SUELDO, CA_REINTEGRO, CA_ASIG_FAMILIAR, HO_SEMANA, NU_HORAS_LAB, DIA_CONTRATO, TI_TRABAJADOR, LI_REGIMEN_LABORAL, ES_DISCAPACIDAD, TI_CONTRATO, LI_REGIMEN_PENSIONARIO, ES_CONTRATO_TRABAJADOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, US_IP, FE_VACACIO_INI, FE_VACACIO_FIN, ES_CONTRATO, ID_FILIAL, ID_DIRECCION, ID_DEPARTAMENTO, ID_AREA, ID_SEC, ID_PUESTO, CA_BONO_ALIMENTO, LI_TIPO_CONVENIO, ES_FIRMO_CONTRATO, NU_CONTRATO, DE_OBSERVACION, ES_APOYO, TI_HORA_PAGO, NU_DOCUMENTO, ID_ANNO, ES_ENTREGAR_DOC_REGLAMENTOS, ES_REGISTRO_HUELLA, DE_REGISTRO_SISTEM_REMU, ID_TRABAJADOR, ID_CENTRO_COSTO, CA_SUELDO_TOTAL, ID_REGIMEN_LABORAL, ID_MODALIDAD, ID_SUB_MODALIDAD, CO_GR_OCUPACION, FE_SUSCRIPCION, CO_TI_MONEDA, CO_TI_REM_VARIAB, DE_REMU_ESPECIE, DE_RUC_EMP_TRAB, CO_SUCURSAL, DE_MYPE, ES_TI_CONTRATACION, CA_BEV);
 
                 /*Cambiar este for con un trigger al momento de insertar*/
@@ -213,7 +213,7 @@ public class CContrato extends HttpServlet {
                 getServletContext().setAttribute("List_ID_User", usu.List_ID_User(US_CREACION));
                 getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
                 getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
-                getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
+                // getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
 
                 response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp?ida1=" + ida1);
             }
