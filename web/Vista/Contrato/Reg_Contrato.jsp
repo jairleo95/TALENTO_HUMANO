@@ -507,16 +507,17 @@
                             <input type="hidden" value="ARE-0022" name="AREA_ID" class="text-box" >
                         </fieldset>
 
-
-                        <footer>
-                            <center>
-
-                                <button type="submit" name="opc"  class="btn .bg-color-blueLight .txt-color-white btn-primary btn-lg">
+                       
+                        
+                           
+                            <footer>
+                                
+                                <button type="submit" name="opc"  class="btn btn-primary">
                                     REGISTRAR CONTRATO
                                 </button>
-
-                            </center>
-                        </footer>
+                            </footer>
+                           
+                        
                     </form>
                     <%}
                         }%>
