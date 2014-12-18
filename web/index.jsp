@@ -132,14 +132,14 @@
                                     <section>
                                         <label class="label">Usuario</label>
                                         <label class="input"> <i class="icon-append fa fa-user"></i>
-                                            <input type="text" name="username">
+                                            <input type="text" name="username" autocomplete="off" autofocus="" required=""  >
                                             <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Ingrese su usuario</b></label>
                                     </section>
 
                                     <section>
                                         <label class="label">Contraseña</label>
                                         <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                            <input type="password" name="clave">
+                                            <input type="password" name="clave" required="" >
                                             <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Ingrese la contraseña</b> </label>
                                         
                                     </section>

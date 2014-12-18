@@ -152,7 +152,11 @@
                                     <!-- widget edit box -->
                                     <div class="jarviswidget-editbox">
                                         <!-- This area used as dropdown edit box -->
+                                        <%
 
+                                            HttpSession sesion = request.getSession(true);
+                                            String idrol = (String) sesion.getAttribute("IDROL");
+                                            String dep = (String) sesion.getAttribute("DEPARTAMENTO_ID");%>
                                     </div>
                                     <!-- end widget edit box -->
 
@@ -172,18 +176,20 @@
                                                     <th data-hide="phone,tablet"><strong>Motivo</strong></th>
                                                     <!--  <td>Departamento</td>-->
                                                     <th data-hide="phone,tablet"><strong>Descripcion</strong></th>
+                                                        <% if (dep.equals("DPT-0019")) {%>
+                                                    <th  data-hide="phone,tablet">Fecha de Creación</th>
+                                                        <%}%>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody> 
                                                 <%
 
-                                                    HttpSession sesion = request.getSession(true);
-                                                    String idrol = (String) sesion.getAttribute("IDROL");
                                                     String iddgp = request.getParameter("iddgp");
                                                     String idtr = request.getParameter("idtr");
                                                     InterfaceDgpDAO dgp = new DgpDAO();
                                                     if (t == 0) {
                                                 %>
+
                                                 <!-- <tr><td colspan="9" align="center"><h3>No hay ningún DGP por autorizar...</h3></td></tr>-->
                                                 <%}%>
                                                 <%for (int f = 0; f < List_id_Autorizacion.size(); f++) {
@@ -249,9 +255,13 @@
                                                     <td ><%=a.getNo_puesto()%></td>   
                                                     <td ><%=a.getNo_seccion()%></td> 
                                                     <td ><%=a.getNo_area()%></td>      
-                                                    <td style=""><%=a.getNo_req()%></td>      
+                                                    <td ><%=a.getNo_req()%></td>      
 
                                                     <td style="color: red; font-weight: bold;"><%=a.getDe_pasos()%></td>
+
+                                                    <% if (dep.equals("DPT-0019")) {%>
+                                                    <td ><%=a.getFe_creacion()%></td>
+                                                    <%}%>
                                                 </tr>
                                                 <% }
                                                     List_id_Autorizacion.clear();%>

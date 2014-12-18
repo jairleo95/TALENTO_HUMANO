@@ -126,6 +126,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 v.setNo_ar_foto(rs.getString("no_ar_foto"));
                 v.setTa_ar_foto(rs.getString("ta_ar_foto"));
                 v.setTi_ar_foto(rs.getString("ti_ar_foto"));
+                v.setFe_creacion(rs.getString("fe_creacion"));
                 list.add(v);
             }
 
