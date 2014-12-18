@@ -443,7 +443,7 @@
 
                 <!-- breadcrumb -->
                 <ol class="breadcrumb">
-                    <li><%out.println("DEPARTAMENTO DE  " + ((String) sesion.getAttribute("DEPARTAMENTO")).toUpperCase()+ " - AREA DE "  +((String) sesion.getAttribute("PUESTO")).toUpperCase()); %></li>
+                    <li><%out.println("DEPARTAMENTO DE  " + ((String) sesion.getAttribute("DEPARTAMENTO")).toUpperCase()+ " - AREA DE "  +((String) sesion.getAttribute("AREA")).toUpperCase()); %></li>
                 </ol>
                 <!-- end breadcrumb -->
 

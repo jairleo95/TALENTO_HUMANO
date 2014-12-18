@@ -125,28 +125,32 @@
                                                                                                                                             <th data-hide="phone,tablet">Fecha Fin</th>
                                                                                                                                             <th data-hide="phone,tablet">Sueldo</th>
                                                                                                                                         </tr>
-
                                                                                                                                     </thead>
                                                                                                                                     <tbody>
                                                                                                                                         <% for (int i = 0; i < List_Empleado.size(); i++) {
                                                                                                                                                 V_List_Empleado e = new V_List_Empleado();
                                                                                                                                                 e = (V_List_Empleado) List_Empleado.get(i);
                                                                                                                                         %>
-                                                                                                                                      
-                                                                                                                                            <tr>
-                                                                                                                                                <td><%out.print(i + 1);%></td>
-                                                                                                                                                <td><a href="../../trabajador?idtr=<%=e.getId_trabajador()%>&opc=list"><%=e.getNo_trabajador().toUpperCase() + " " + e.getAp_paterno().toUpperCase() + " " + e.getAp_materno().toUpperCase()%></a></td>
-                                                                                                                                                <td><%=e.getNo_area()%></td>
-                                                                                                                                                <td><%=e.getNo_seccion()%></td>
-                                                                                                                                                <td><%=e.getNo_puesto()%></td>
-                                                                                                                                                <td><%=e.getFe_desde()%></td>
-                                                                                                                                                <td><%=e.getFe_hasta()%></td>
-                                                                                                                                                <td><%="S/. "+e.getCa_sueldo()%></td>
-
-                                                                                                                                            </tr>
-                                                                                                                                     
+                                                                                                                                        <tr>
+                                                                                                                                            <td><%out.print(i + 1);%></td>
+                                                                                                                                           
+                                                                                                                                            <td>
+                                                                                                                                                 <% if (e.getAr_foto() == null) {%>
+                                                                                                                                            <img src="../../imagenes/avatar_default.jpg"  width="30"  height="30">
+                                                                                                                                            <% } else {%>
+                                                                                                                                            <img src="../Usuario/Fotos/<%=e.getAr_foto()%>"  width="30"  height="30">
+                                                                                                                                            <% }%>
+                                                                                                                                                
+                                                                                                                                                <a href="../../trabajador?idtr=<%=e.getId_trabajador()%>&opc=list"><%=e.getNo_trabajador().toUpperCase() + " " + e.getAp_paterno().toUpperCase() + " " + e.getAp_materno().toUpperCase()%></a></td>
+                                                                                                                                            <td><%=e.getNo_area()%></td>
+                                                                                                                                            <td><%=e.getNo_seccion()%></td>
+                                                                                                                                            <td><%=e.getNo_puesto()%></td>
+                                                                                                                                            <td><%=e.getFe_desde()%></td>
+                                                                                                                                            <td><%=e.getFe_hasta()%></td>
+                                                                                                                                            <td><%="S/. " + e.getCa_sueldo()%></td>
+                                                                                                                                        </tr>
                                                                                                                                         <%}%> 
-                                                                                                                                     
+
 
                                                                                                                                     </tbody>
                                                                                                                                 </table>
@@ -268,7 +272,7 @@
 
                                                                                                     // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-                                                                                                    $(document).ready(function() {
+                                                                                                    $(document).ready(function () {
 
                                                                                                         pageSetUp();
 
@@ -304,16 +308,16 @@
                                                                                                                     "t" +
                                                                                                                     "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
                                                                                                             "autoWidth": true,
-                                                                                                            "preDrawCallback": function() {
+                                                                                                            "preDrawCallback": function () {
                                                                                                                 // Initialize the responsive datatables helper once.
                                                                                                                 if (!responsiveHelper_dt_basic) {
                                                                                                                     responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
                                                                                                                 }
                                                                                                             },
-                                                                                                            "rowCallback": function(nRow) {
+                                                                                                            "rowCallback": function (nRow) {
                                                                                                                 responsiveHelper_dt_basic.createExpandIcon(nRow);
                                                                                                             },
-                                                                                                            "drawCallback": function(oSettings) {
+                                                                                                            "drawCallback": function (oSettings) {
                                                                                                                 responsiveHelper_dt_basic.respond();
                                                                                                             }
                                                                                                         });
@@ -332,16 +336,16 @@
                                                                                                                     "t" +
                                                                                                                     "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
                                                                                                             "autoWidth": true,
-                                                                                                            "preDrawCallback": function() {
+                                                                                                            "preDrawCallback": function () {
                                                                                                                 // Initialize the responsive datatables helper once.
                                                                                                                 if (!responsiveHelper_datatable_fixed_column) {
                                                                                                                     responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
                                                                                                                 }
                                                                                                             },
-                                                                                                            "rowCallback": function(nRow) {
+                                                                                                            "rowCallback": function (nRow) {
                                                                                                                 responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
                                                                                                             },
-                                                                                                            "drawCallback": function(oSettings) {
+                                                                                                            "drawCallback": function (oSettings) {
                                                                                                                 responsiveHelper_datatable_fixed_column.respond();
                                                                                                             }
 
@@ -351,7 +355,7 @@
                                                                                                         $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
 
                                                                                                         // Apply the filter
-                                                                                                        $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function() {
+                                                                                                        $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
 
                                                                                                             otable
                                                                                                                     .column($(this).parent().index() + ':visible')
@@ -367,16 +371,16 @@
                                                                                                                     "t" +
                                                                                                                     "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
                                                                                                             "autoWidth": true,
-                                                                                                            "preDrawCallback": function() {
+                                                                                                            "preDrawCallback": function () {
                                                                                                                 // Initialize the responsive datatables helper once.
                                                                                                                 if (!responsiveHelper_datatable_col_reorder) {
                                                                                                                     responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
                                                                                                                 }
                                                                                                             },
-                                                                                                            "rowCallback": function(nRow) {
+                                                                                                            "rowCallback": function (nRow) {
                                                                                                                 responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
                                                                                                             },
-                                                                                                            "drawCallback": function(oSettings) {
+                                                                                                            "drawCallback": function (oSettings) {
                                                                                                                 responsiveHelper_datatable_col_reorder.respond();
                                                                                                             }
                                                                                                         });
@@ -409,16 +413,16 @@
                                                                                                                 "sSwfPath": "../../js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
                                                                                                             },
                                                                                                             "autoWidth": true,
-                                                                                                            "preDrawCallback": function() {
+                                                                                                            "preDrawCallback": function () {
                                                                                                                 // Initialize the responsive datatables helper once.
                                                                                                                 if (!responsiveHelper_datatable_tabletools) {
                                                                                                                     responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
                                                                                                                 }
                                                                                                             },
-                                                                                                            "rowCallback": function(nRow) {
+                                                                                                            "rowCallback": function (nRow) {
                                                                                                                 responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
                                                                                                             },
-                                                                                                            "drawCallback": function(oSettings) {
+                                                                                                            "drawCallback": function (oSettings) {
                                                                                                                 responsiveHelper_datatable_tabletools.respond();
                                                                                                             }
                                                                                                         });
@@ -435,7 +439,7 @@
                                                                                                     _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
                                                                                                     _gaq.push(['_trackPageview']);
 
-                                                                                                    (function() {
+                                                                                                    (function () {
                                                                                                         var ga = document.createElement('script');
                                                                                                         ga.type = 'text/javascript';
                                                                                                         ga.async = true;

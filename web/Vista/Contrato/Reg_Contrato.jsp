@@ -69,8 +69,18 @@
         <% HttpSession sesion = request.getSession(true);
             String iduser = (String) sesion.getAttribute("IDUSER");%>
         <link rel="stylesheet" type="text/css"  href="../../css/Css_Formulario/form.css">
+        <style type="text/css">
+
+            #titulo{
+
+                font-weight: bold;
+                color: #005cac;
+                // color: blue;
+            }
+        </style>
     </head>
-    <body>
+
+
     <body>
         <!-- Widget ID (each widget will need unique ID)-->
         <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
@@ -124,7 +134,7 @@
                         <fieldset>
                             <div class="row">
                                 <section class="col col-2">
-                                    <label class="select">Año:
+                                    <label class="select" id="titulo">Año:
                                         <select name="AÑO_ID" required="" class="input-lg">
                                             <%  for (int i = 0; i < List_Anno.size(); i++) {
                                                     Anno a = new Anno();
@@ -224,7 +234,7 @@
 
                                 <section class="col col-2">
                                     <label class="input">Sueldo Total:
-                                        <input type="text" name="TOTAL_SUELDO" value="<%=d.getCa_bono_alimentario() + d.getCa_sueldo()%>" class="input-lg">
+                                        <input type="text" name="TOTAL_SUELDO" value="<%=d.getCa_bono_alimentario() + d.getCa_sueldo() + d.getDe_bev()%>" class="input-lg">
                                     </label>
                                 </section>
                                 <section class="col col-2">
@@ -497,7 +507,7 @@
                             <input type="hidden" value="ARE-0022" name="AREA_ID" class="text-box" >
                         </fieldset>
 
-                       
+
                         <footer>
                             <center>
 
@@ -527,14 +537,14 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
             if (!window.jQuery) {
-                document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
+                document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
             }
         </script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script>
             if (!window.jQuery.ui) {
-                document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
             }
         </script>
 
@@ -601,7 +611,7 @@
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-            $(document).ready(function() {
+            $(document).ready(function () {
 
                 pageSetUp();
 
@@ -700,7 +710,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -769,7 +779,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -821,7 +831,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -860,15 +870,15 @@
                         }
                     },
                     // Ajax form submition
-                    submitHandler: function(form) {
+                    submitHandler: function (form) {
                         $(form).ajaxSubmit({
-                            success: function() {
+                            success: function () {
                                 $("#comment-form").addClass('submited');
                             }
                         });
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -902,15 +912,15 @@
                         }
                     },
                     // Ajax form submition
-                    submitHandler: function(form) {
+                    submitHandler: function (form) {
                         $(form).ajaxSubmit({
-                            success: function() {
+                            success: function () {
                                 $("#contact-form").addClass('submited');
                             }
                         });
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -939,7 +949,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -984,7 +994,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -994,7 +1004,7 @@
                     dateFormat: 'dd.mm.yy',
                     prevText: '<i class="fa fa-chevron-left"></i>',
                     nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function(selectedDate) {
+                    onSelect: function (selectedDate) {
                         $('#finishdate').datepicker('option', 'minDate', selectedDate);
                     }
                 });
@@ -1003,7 +1013,7 @@
                     dateFormat: 'dd.mm.yy',
                     prevText: '<i class="fa fa-chevron-left"></i>',
                     nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function(selectedDate) {
+                    onSelect: function (selectedDate) {
                         $('#startdate').datepicker('option', 'maxDate', selectedDate);
                     }
                 });
@@ -1020,7 +1030,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function() {
+            (function () {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
@@ -1033,16 +1043,16 @@
     </body>
     <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
     <script>
-            $(document).ready(function() {
+            $(document).ready(function () {
                 var a = $("#select-sub-mod");
                 var b = $("#selec_dep");
                 var c = $("#Selec_Area");
                 var d = $("#select_sec");
                 $("#select_mod").change(
-                        function() {
+                        function () {
                             // alert("?MODALIDAD="+$("#select_mod").val());
 
-                            $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function(objJson) {
+                            $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function (objJson) {
                                 a.empty();
                                 var list = objJson.lista;
                                 if (list.length !== 0) {

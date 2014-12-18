@@ -12,7 +12,6 @@
         <title></title>
     </head>
     <body>
-
     <center>
         <div class="spacing" >
             <center><h1 class="spacing" style="font-weight: bold;"><%
@@ -37,12 +36,9 @@
                 }
                     %>
                 </h1></center>
-
-
         </div>
-
         <hr/>
-        <div >
+        <div>
             <form method="post" action="../../trabajador" class="form-inline">                    
                 <div class="form-group">
                     <label class="control-label">Nombres:</label><br>
@@ -100,7 +96,6 @@
             %>
             <tr>
                 <td><%out.println(i + 1);%></td>         
-
                 <% if (tr.getAr_foto() == null) {%>
                 <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30"></td>
                     <% } else {%>
@@ -114,7 +109,6 @@
                             out.print("Tiene requerimiento en proceso");
                         } else {
                     %>
-
                     <a href="../../dgp?idtr=<%=tr.getId_trabajador()%>&idreq=<%=idreq%>&iddep=<%=iddep%>&opc=Reg_form" class="btn bg-color-teal txt-color-white">Elaborar Requerimiento</a>
                     <%}%>
                 </td>
