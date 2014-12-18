@@ -42,7 +42,6 @@
                         for (var i = 0; i < lista.length; i++) {
                             b.append("<tr class='editar-tr" + i + "' >");
                             b.append("<td >" + (i + 1) + "</td>");
-
                             b.append("<td class='td_det" + i + "'><label>" + lista[i].det + "</label></td>");
                             b.append("<td class='td_num" + i + "'><label>" + lista[i].num + "</label></td>");
                             b.append("<td  class='td_co" + i + "'><label>" + lista[i].co + "</label></td>");
@@ -98,7 +97,7 @@
                 <tr><td>Código:<td><input type="text" name="cod" required=""maxlength="6"  /></td></tr>
                 <tr><td>Proceso:<td>
                         <select name="proceso" required="" >
-                            <option value="PCO-000001">Preceso de Contratacion</option>
+                            <option value="PCO-000001">Proceso de Contratacion</option>
                         </select></td></tr>
                 <input type="hidden" name="opc" value="Registrar"  class="opc"/>
                 <tr><td><input type="submit" id="btn-registrar" name="Enviar" value="Registrar Paso" /></td></tr>
@@ -119,7 +118,6 @@
             </thead>
 
             <tbody  class="tbodys" >
-
 
             </tbody>
 

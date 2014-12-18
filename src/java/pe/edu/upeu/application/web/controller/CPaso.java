@@ -44,9 +44,10 @@ public class CPaso extends HttpServlet {
             String opc = request.getParameter("opc");
             if (opc.equals("Listar")) {
                  String id = request.getParameter("proceso");
-                List<Map<String, ?>> lista = p.List_Paso(id.trim());
+                List<Map<String, ?>> lista = p.List_Paso(id);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
+               
             }
             if (opc.equals("Mantenimiento")) {
                 response.sendRedirect("Vista/Proceso/Menu_Mantenimiento.jsp");
