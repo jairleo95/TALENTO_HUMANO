@@ -498,15 +498,16 @@
                         </fieldset>
 
                        
-                        <footer>
-                            <center>
-
-                                <button type="submit" name="opc"  class="btn .bg-color-blueLight .txt-color-white btn-primary btn-lg">
+                        
+                           
+                            <footer>
+                                
+                                <button type="submit" name="opc"  class="btn btn-primary">
                                     REGISTRAR CONTRATO
                                 </button>
-
-                            </center>
-                        </footer>
+                            </footer>
+                           
+                        
                     </form>
                     <%}
                         }%>
