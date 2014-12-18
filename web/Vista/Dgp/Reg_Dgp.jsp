@@ -107,7 +107,7 @@
                                     var y = parseFloat($("#bono_al").val());
                                     var z = parseFloat($("#bev").val());
                                     var v = x + y + z;
-                                    $("#suel_total").text(Math.round(v*100)/100);
+                                    $("#suel_total").text(Math.round(v * 100) / 100);
 
                                 }
                         );
@@ -117,7 +117,7 @@
                                     var y = parseFloat($("#bono_al").val());
                                     var z = parseFloat($("#bev").val());
                                     var v = x + y + z;
-                                    $("#suel_total").text(Math.round(v*100)/100);
+                                    $("#suel_total").text(Math.round(v * 100) / 100);
                                 }
                         );
                         $("#bev").keyup(
@@ -125,8 +125,8 @@
                                     var x = parseFloat($("#sueldo").val());
                                     var y = parseFloat($("#bono_al").val());
                                     var z = parseFloat($("#bev").val());
-                                    var v =  x + y + z;
-                                    $("#suel_total").text(Math.round(v*100)/100);
+                                    var v = x + y + z;
+                                    $("#suel_total").text(Math.round(v * 100) / 100);
                                 }
                         );
                     }
@@ -451,10 +451,10 @@
                                                                         if ($("#banco").val() == '3') {
                                                                             $("#no_cuen").show();
                                                                             $("#no_cuen").val("");
-                                                                            $("#nu_cuen").attr("required","required");
+                                                                            $("#nu_cuen").attr("required", "required");
                                                                             $("#no_cuen_ban").show();
                                                                             $("#no_cuen_ban").val("");
-                                                                            $("#nu_cuen_ban").attr("required","required");
+                                                                            $("#nu_cuen_ban").attr("required", "required");
                                                                             $("#no_cuen_otros").show();
                                                                             $("#nu_cuen_otros").val("");
                                                                             $("#nu_cuen_otros").attr("required", "required");
@@ -571,6 +571,7 @@
                                                                 <option value="">[SELECCIONE]</option>
                                                                 <option value="0">Editable</option>
                                                                 <option value="1">Horario Tiempo Completo</option>
+                                                                <option value="2">Horario de Oficina</option>
                                                             </select>
 
                                                         </label>
@@ -957,6 +958,47 @@
                             document.getElementById("HORA_HASTA_dom1").value = "12:30";
                             document.getElementById("HORA_DESDE_dom2").value = "13:30";
                             document.getElementById("HORA_HASTA_dom2").value = "17:30";
+                        }
+                        if ($(this).val() == 2) {
+                            $("#show_1").show();
+                            $("#show_2").show();
+                            $("#show_3").show();
+                            $("#show_4").show();
+                            $("#show_5").show();
+                            //    $("#show_6").show();
+                            $("#show_7").hide();
+
+                            $("#lunes").val(1);
+                            $("#martes").val(1);
+                            $("#miercoles").val(1);
+                            $("#jueves").val(1);
+                            $("#viernes").val(1);
+                            //$("#sabado").val(1);
+                            $("#domingo").val(2);
+                            document.getElementById("HORA_DESDE_lun1").value = "7:30";
+                            document.getElementById("HORA_HASTA_lun1").value = "12:30";
+                            document.getElementById("HORA_DESDE_lun2").value = "13:30";
+                            document.getElementById("HORA_HASTA_lun2").value = "17:30";
+                            document.getElementById("HORA_DESDE_mar1").value = "7:30";
+                            document.getElementById("HORA_HASTA_mar1").value = "12:30";
+                            document.getElementById("HORA_DESDE_mar2").value = "13:30";
+                            document.getElementById("HORA_HASTA_mar2").value = "17:30";
+                            document.getElementById("HORA_DESDE_mier1").value = "7:30";
+                            document.getElementById("HORA_HASTA_mier1").value = "12:30";
+                            document.getElementById("HORA_DESDE_mier2").value = "13:30";
+                            document.getElementById("HORA_HASTA_mier2").value = "17:30";
+                            document.getElementById("HORA_DESDE_jue1").value = "7:30";
+                            document.getElementById("HORA_HASTA_jue1").value = "12:30";
+                            document.getElementById("HORA_DESDE_jue2").value = "13:30";
+                            document.getElementById("HORA_HASTA_jue2").value = "17:30";
+                            document.getElementById("HORA_DESDE_vie1").value = "7:30";
+                            document.getElementById("HORA_HASTA_vie1").value = "13:00";
+                            document.getElementById("HORA_DESDE_sab1").value = "00:00";
+                            document.getElementById("HORA_HASTA_sab1").value = "00:00";
+                              document.getElementById("HORA_DESDE_dom1").value = "00:00";
+                             document.getElementById("HORA_HASTA_dom1").value = "00:00";
+                             document.getElementById("HORA_DESDE_dom2").value = "00:00";
+                             document.getElementById("HORA_HASTA_dom2").value = "00:00";
                         }
                         calcularHoras();
                     }
