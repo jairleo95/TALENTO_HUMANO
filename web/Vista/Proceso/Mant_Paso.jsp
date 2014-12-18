@@ -32,7 +32,7 @@
                 );
                 function listar_Proceso() {
                     var s = $("#select-proceso");
-                    $.post("../../proceso", "opc=Listar", function (objJson) {
+                    $.post("../../Proceso", "opc=Listar", function (objJson) {
                         s.empty();
                         var lista = objJson.lista;
                         s.append("<option value='' > </option>");
@@ -79,7 +79,7 @@
                             $(".num_paso").val($(".td_num" + $(this).val()).text());
                             $(".co_paso").val($(".td_co" + $(this).val()).text());
                             $("#select-proceso").val($(".td_id_pro" + $(this).val()).text());
-                            $(".id_p").val($(".id_paso"+$(this).val()));
+                            $(".id_p").val($(".id_paso" + $(this).val()));
 
 
                             $("#btn-registrar").val("Modificar");
@@ -118,7 +118,7 @@
                 <tr><td>Código:<td><input type="text" name="cod" class="co_paso" required=""maxlength="6"  /></td></tr>
                 <tr><td>Proceso:<td>
                         <select name="proceso" required=""  id="select-proceso">
-
+                            <option value="">[SELECCIONE]</option>
                         </select></td></tr>
                 <input type="hidden" name="opc" value="Registrar"  class="opc"/>
                 <input type="hidden" name="id" value=""  class="id_p"/>

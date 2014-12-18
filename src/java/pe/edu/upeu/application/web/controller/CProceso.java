@@ -58,7 +58,7 @@ public class CProceso extends HttpServlet {
 
 
             }
-            if (opc.equals("Listar2")) {
+            if (opc.equals("Listar")) {
                 List<Map<String, ?>> lista=p.List_Proceso();
                 rpta.put("rpta","1");
                 rpta.put("lista",lista);
