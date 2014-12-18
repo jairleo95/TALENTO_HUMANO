@@ -182,6 +182,24 @@
                                     </label>
                                 </section>
                                 <section class="col col-5" id="titulo">
+                                    <label class="select" id="titulo">Departamento:
+                                        <select name="DEPARTAMENTO_ID" required="" class="input-lg" id="selec_dep">
+                                            <option>[SELECCIONE]</option>
+                                        </select>  </label>
+                                </section>
+                                <section class="col col-5" id="titulo">
+                                    <label class="select" id="titulo">Area:
+                                        <select name="AREA_ID" required="" class="input-lg" id="Selec_Area">
+                                            <option>[SELECCIONE]</option>
+                                        </select>  </label>
+                                </section>
+                                <section class="col col-5" id="titulo">
+                                    <label class="select" id="titulo">Seccion:
+                                        <select name="SECCION_ID" required="" class="input-lg" id="select_sec">
+                                            <option>[SELECCIONE]</option>
+                                        </select>  </label>
+                                </section>
+                                <section class="col col-5" id="titulo">
                                     <label class="select" id="titulo">Puesto:
                                         <select name="PUESTO_ID" required="" class="input-lg">
                                             <%  for (int j = 0; j < List_Puesto.size(); j++) {%>
@@ -465,18 +483,18 @@
                             <div class="">
                                 <section >
                                     <label class="textarea" id="titulo">Observación:  </label>
-                                        <textarea  name="OBSERVACION"  class="input-lg" cols="35" rows="6"></textarea>
+                                    <textarea  name="OBSERVACION"  class="input-lg" cols="35" rows="6"></textarea>
                                 </section>
-                          
+
                             </div>
-                            
+
                             <!--<div>
                               <section>
                                 <label class="textarea" id="titulo">Observación2:</label>										
                                 <textarea rows="5" rows="6" name="comment" placeholder=""></textarea> 
                             </section>
                             </div>-->
-                            
+
                         </fieldset>
                         <fieldset>
                             <div class="row">
@@ -1076,6 +1094,7 @@
                 var b = $("#selec_dep");
                 var c = $("#Selec_Area");
                 var d = $("#select_sec");
+                $.post("../../  ")
                 $("#select_mod").change(
                         function() {
                             // alert("?MODALIDAD="+$("#select_mod").val());
@@ -1090,7 +1109,20 @@
                                 }
                             });
                         });
+                $("#select_mod").change(
+                        function() {
+                            // alert("?MODALIDAD="+$("#select_mod").val());
 
+                            $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function(objJson) {
+                                a.empty();
+                                var list = objJson.lista;
+                                if (list.length !== 0) {
+                                    for (var i = 0; i < list.length; i++) {
+                                        a.append('<option value="' + list[i].id_submodalidad + '">' + list[i].de_submod + '</option>');
+                                    }
+                                }
+                            });
+                        });
 
             });
     </script>
