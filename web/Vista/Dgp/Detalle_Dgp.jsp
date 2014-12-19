@@ -23,9 +23,8 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/font-awesome.min.css">
         <title>Detalle DGP</title>
 
+
         <style type="text/css">
-
-
             table{
                 //font-weight:bold ;
                 width: 50px;
@@ -37,51 +36,36 @@
                 text-align: left;
 
             }
-            /* div{
-                 font-family:verdana;
-                 padding:2%;
-                 border-radius:10px;
-                 border:10px solid #BDCACF;  
-                 width: 50%;
-                 margin-left: 2%;
-                 margin-right: 2%;
-                 margin-top: 2%;
-             }*/
-
-
             body{
 
                 margin-left: auto;
                 margin-right: auto  ;
-                //width: 45%;
+               width: 45%;
                 // margin: 0;
             }
-            .titulo{
 
-
-                background-color: #474747;
-                padding: 0.5%;
-
-                font-family: arial;
-                font-size: 130%;
-                text-align: center;
-                color: white;
-            }
             .ct{
                 text-align: center;   
             }
 
-            .header{
-
-
-                background-color: #0575f4;
+            #header{
                 padding: 0%;
-
                 font-family: verdana;
                 font-size: 130%;
                 text-align: center;
-                color: black;
+                color:#474747;
 
+            }
+          
+
+            @media screen and (max-width: 1100px) {
+                body {
+                     width: 60%;
+                }
+            }
+            @media screen and (max-width: 800px) {
+                body {
+                     width: auto;
             }
 
 
@@ -106,7 +90,7 @@
                     %>
 
 
-                    <tr><td colspan="2" class="header"><i class="fa fa-file"></i> Información Contractual</td></tr>
+                    <tr><td colspan="2" class="text-info table-bordered" id="header"><i class="fa fa-file"></i> Información Contractual</td></tr>
                     <!--<label style="color: black; //font-family: cursive;"><h2><%=d.getNo_req()%></h2></label>
                     --><tr><td class="text-info table-bordered" style="text-align:align;">Fecha Desde:</td><td><%=d.getFe_desde()%></td></tr>
                     <tr ><td class="text-info table-bordered">Fecha Hasta:</td><td><%=d.getFe_hasta()%></td></tr>
