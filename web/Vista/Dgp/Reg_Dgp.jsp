@@ -349,7 +349,7 @@
                                                     </div>
                                                     <div class="row">
                                                         <section class="col col-3" name="">
-                                                            <label class="select" id="titu">Banco:
+                                                            <label class="select" id="titu">Cuenta Sueldo - Banco:
                                                                 <select name="BANCO" id="banco" required="">
                                                                     <option value="" selected="" disabled="" >[Selecione]</option>
                                                                     <option value="0" >Ninguno</option>

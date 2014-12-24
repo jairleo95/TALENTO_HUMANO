@@ -34,6 +34,10 @@
                     out.println("Requerimiento: Tiempo Parcial");
                     idreq = "REQ-0003";
                 }
+                if (text.equals("5")) {
+                    out.println("Requerimiento: Contrato Extranjero");
+                    idreq = "REQ-0005";
+                }
                     %>
                 </h1></center>
         </div>
@@ -103,7 +107,12 @@
                     <% }%>
 
                 <td><div ><a href="../../trabajador?idtr=<%=tr.getId_trabajador()%>&opc=list"><%=tr.getAp_paterno().toUpperCase() + " " + tr.getAp_materno().toUpperCase() + " " + tr.getNo_trabajador().toUpperCase()%></a></div></td>
-                <td><%=tr.getNo_carrera()%></td>
+                <td><%if (tr.getNo_carrera() != null) {
+                        out.println(tr.getNo_carrera());
+                    } else {
+                        out.println("Ninguna");
+                    }
+                    %></td>
                 <td>
                     <%if (tr.getEs_proceso() > 0) {
                             out.print("Tiene requerimiento en proceso");

@@ -5,7 +5,6 @@
     HttpSession sesion = request.getSession();
     String id_user = (String) sesion.getAttribute("IDUSER");
     if (id_user != null) {
-
         Usuario us = new Usuario();
 %>
 <jsp:useBean id="listarURL" scope="application" class="java.util.ArrayList"/>
@@ -353,23 +352,6 @@
                         <ul>
                             <li>
                                 <a href="Vista/Dgp/Requerimiento.jsp" target="myframe"><i class="fa fa-lg fa-fw fa-file"></i> En Planilla</a>
-                                <!--  <ul>
-                                      <li>
-                                          <a href="Vista/Dgp/Generar_Dgp.jsp?text=1" target="myframe">Tiempo Conpleto</a>
-                                      </li>
-                                      <li>
-                                          <a href="Vista/Dgp/Generar_Dgp.jsp?text=2" target="myframe">Medio Tiempo</a>
-                                      </li>
-                                      <li>
-                                          <a href="Vista/Dgp/Generar_Dgp.jsp?text=3" target="myframe">Tiempo Parcial</a>
-                                      </li>
-                                      <li>
-                                          <a href="otro.html" target="myframe">Extranjero</a>
-                                      </li>
-                                      <li>
-                                          <a href="#" target="myframe">Tiempo Parcial - Trabajador Docente</a>
-                                      </li>
-                                  </ul>-->
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-lg fa-fw fa-file"></i> Fuera de Planilla</a>

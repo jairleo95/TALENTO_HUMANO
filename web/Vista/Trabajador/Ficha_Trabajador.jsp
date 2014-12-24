@@ -65,7 +65,7 @@
                         <label class="control-label" >DNI:</label><br>
                         <input type="text"  class="form-control"  onKeyPress="return checkIt(event)" name="dni" maxlength="8">
                     </div>
-                    <input type="hidden" name="opc" value="Buscar">
+                    <input type="hidden" name="opc" value="Buscar_Trabajador">
                     <div class="form-group">
                         <br>
                         <input class="btn btn-primary"  type="submit" name="busqueda"  value="Buscar">

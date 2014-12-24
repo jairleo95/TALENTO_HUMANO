@@ -63,6 +63,7 @@ public class CTrabajador extends HttpServlet {
             String Text = "";
             opc = (String) request.getParameter("opc");
             Text = (String) request.getParameter("text");
+            String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
 
             if (opc.equals("Form_Reg")) {
                 getServletContext().setAttribute("List_Carrera", li.List_Carrera());
@@ -72,7 +73,7 @@ public class CTrabajador extends HttpServlet {
                 getServletContext().setAttribute("List_Situacion_Educativa", li.List_Situacion_Educativa());
                 getServletContext().setAttribute("Listar_via", dir.Listar_via());
                 getServletContext().setAttribute("Listar_zona", dir.Listar_zona());
-                
+
                 response.sendRedirect("Vista/Trabajador/Reg_Trabajador.jsp");
 
             }
@@ -154,26 +155,37 @@ public class CTrabajador extends HttpServlet {
                 }
             }
             if (opc.equals("Buscar")) {
-                String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
                 String Buscar = request.getParameter("busqueda");
                 String dni = request.getParameter("dni");
                 String nom = request.getParameter("nom");
                 String ape_mat = request.getParameter("ape_mat");
                 String ape_pat = request.getParameter("ape_pat");
-                String all = request.getParameter("all");
+                // String all = request.getParameter("all");
 
-                if (("Buscar".equals(Buscar) & (!"".equals(dni) | !"".equals(nom) | !"".equals(ape_mat) | !"".equals(ape_pat))) | "Todos".equals(all)) {
+                if (("Buscar".equals(Buscar) & (!"".equals(dni) | !"".equals(nom) | !"".equals(ape_mat) | !"".equals(ape_pat)))) {
                     String busc = (String) request.getParameter("busc");
                     if (busc != null) {
                         getServletContext().setAttribute("ListarTrabajador2", tr.ListarTrabajador(iddep, dni, nom, ape_pat, ape_mat));
                         getServletContext().setAttribute(nom, dgp.VAL_OPC_DGP(dni));
                         response.sendRedirect("Vista/Dgp/Generar_Dgp.jsp?text=" + Text);
-                    } else {
-                        getServletContext().setAttribute("ListarTrabajador", tr.ListarTrabajador(iddep, dni, nom, ape_pat, ape_mat));
-                        response.sendRedirect("Vista/Trabajador/Ficha_Trabajador.jsp");
-                        out.println("putazo");
-
                     }
+                } else {
+                    response.sendRedirect("Vista/Dgp/Generar_Dgp.jsp?text=" + Text);
+
+                }
+            }
+            if (opc.equals("Buscar_Trabajador")) {
+                String Buscar = request.getParameter("busqueda");
+                String dni = request.getParameter("dni");
+                String nom = request.getParameter("nom");
+                String ape_mat = request.getParameter("ape_mat");
+                String ape_pat = request.getParameter("ape_pat");
+                if (("Buscar".equals(Buscar) & (!"".equals(dni) | !"".equals(nom) | !"".equals(ape_mat) | !"".equals(ape_pat)))) {
+                    getServletContext().setAttribute("ListarTrabajador", tr.ListarTrabajador(iddep, dni, nom, ape_pat, ape_mat));
+                    getServletContext().setAttribute(nom, dgp.VAL_OPC_DGP(dni));
+                    response.sendRedirect("Vista/Trabajador/Ficha_Trabajador.jsp");
+                } else {
+                    response.sendRedirect("Vista/Trabajador/Ficha_Trabajador.jsp");
                 }
             }
             if ("list".equals(opc)) {

@@ -177,7 +177,7 @@
                             </div><!--/ End 3rd service -->
                             <div class="col-md-3 col-sm-3">
                                 <div class="service-content">
-                                    <a href="#."><span class="service-icon"><i class="fa fa-flask img-circle wow flipInX"></i></span></a>
+                                    <a href="Generar_Dgp.jsp?text=5"><span class="service-icon"><i class="fa fa-flask img-circle wow flipInX"></i></span></a>
                                     <h3>Extranjero</h3>
                                     <p>
                                       
