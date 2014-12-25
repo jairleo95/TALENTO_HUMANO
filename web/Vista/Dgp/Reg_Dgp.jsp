@@ -389,7 +389,7 @@
 
                                                     </div>
                                                     <div  class="row" id="centro-costo_1" >
-                                                        <section class="col col-4"><label class="select" id="titu">Centro de Costo N1:<select name="CENTRO_COSTOS_1" ><option value="0">----</option></select></label></section>
+                                                        <section class="col col-4"><label class="select" id="titu">Centro de Costo N1:<select name="CENTRO_COSTOS_1" id="select-cc" required=""><option value="">[SELECCIONE]</option></select></label></section>
                                                         <section class="col col-4"><label class="input" id="titu">%<input name="por_cen_costo_1" max="100" maxlength="3" type="text" value="100"  id="porcentaje_cc"/></label></section>
                                                         <section class="col col-4"><label class="btn"><button type="button" class="btn btn-default" id="btn-agregar-cc" >Agregar</button></label></section>
                                                     </div>
@@ -896,8 +896,24 @@
 
             }
         }
-        $(document).ready(function() {
+        function listar_cc() {
+            var select_cc = $("#select-cc");
+            $.post("../../centro_costo?opc=Listar_cc", function(objJson) {
+              //  select_cc.empty();
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                for (var i = 0; i < lista.length; i++) {
+                    select_cc.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
+                }
+               
+            });
 
+        }
+        $(document).ready(function() {
+            listar_cc();
 
             $(".texto-h").keyup(
                     function() {

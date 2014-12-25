@@ -31,12 +31,12 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select * from rht";
+            String sql = "select * from rhtr_centro_costo where  id_departamento='" + iddep.trim() + "' ";
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
                 rec.put("id", rs.getString("id_centro_costo"));
-                rec.put("nombre", rs.getString("no_centro_costo"));
+                rec.put("nombre", rs.getString("de_centro_costo"));
                 Lista.add(rec);
             }
             rs.close();

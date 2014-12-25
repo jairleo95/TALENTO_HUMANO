@@ -5,15 +5,19 @@
  */
 package pe.edu.upeu.application.web.controller;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import pe.edu.upeu.application.dao.Centro_CostoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceCentro_CostosDAO;
 
 /**
  *
@@ -37,17 +41,24 @@ public class CCentro_Costo extends HttpServlet {
         PrintWriter out = response.getWriter();
         Map<String, Object> rpta = new HashMap<String, Object>();
         String opc = request.getParameter("opc");
-        HttpSession sesion =request.getSession(true);
-        String iddep= (String)sesion.getAttribute("DEPARTAMENTO_ID");
+        HttpSession sesion = request.getSession(true);
+        String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
+        InterfaceCentro_CostosDAO cc = new Centro_CostoDAO();
         try {
-            if (opc.equals("")) {
-
+            if (opc.equals("Listar_cc")) {
+                List<Map<String, ?>> list = cc.List_centro_costo(iddep);
+                rpta.put("rpta", "1");
+                rpta.put("lista", list);
             }
-            
-            
 
-        } finally {
+        } catch (Exception e) {
+            rpta.put("rpta", "-1");
+            rpta.put("mensaje", e.getMessage());
         }
+        Gson gson = new Gson();
+        out.println(gson.toJson(rpta));
+        out.flush();
+        out.close();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
