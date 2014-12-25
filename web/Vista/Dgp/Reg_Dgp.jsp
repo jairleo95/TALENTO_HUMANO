@@ -67,7 +67,7 @@
         <link rel="stylesheet" href="../../css/Css_Formulario/form.css"  type="text/css" > 
         <script language="javascript" type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
         <script language="javascript" type="text/javascript">
-            $(document).ready(function () {
+            $(document).ready(function() {
                 $(".contenido").hide();
                 /*TEMPORAL*/
                 //Planilla
@@ -100,9 +100,9 @@
 
         <script>
             $(document).ready(
-                    function () {
+                    function() {
                         $("#sueldo").keyup(
-                                function () {
+                                function() {
                                     var x = parseFloat($("#sueldo").val());
                                     var y = parseFloat($("#bono_al").val());
                                     var z = parseFloat($("#bev").val());
@@ -112,7 +112,7 @@
                                 }
                         );
                         $("#bono_al").keyup(
-                                function () {
+                                function() {
                                     var x = parseFloat($("#sueldo").val());
                                     var y = parseFloat($("#bono_al").val());
                                     var z = parseFloat($("#bev").val());
@@ -121,7 +121,7 @@
                                 }
                         );
                         $("#bev").keyup(
-                                function () {
+                                function() {
                                     var x = parseFloat($("#sueldo").val());
                                     var y = parseFloat($("#bono_al").val());
                                     var z = parseFloat($("#bev").val());
@@ -159,11 +159,11 @@
     </head>
     <body>   
         <script>
-            $(document).ready(function () {
+            $(document).ready(function() {
                 var b = $("#alerta_dgp");
                 // $("#alerta_dgp").hide();
                 function listar() {
-                    $.post("../../plazo_dgp", "opc=Listar", function (objJson) {
+                    $.post("../../plazo_dgp", "opc=Listar", function(objJson) {
                         b.empty();
                         var lista = objJson.lista;
                         if (objJson.rpta == -1) {
@@ -396,7 +396,7 @@
                                                     <code class="ver"></code>
                                                     <script type="text/javascript">
                                                         $(document).ready(
-                                                                function () {
+                                                                function() {
                                                                     $("#no_cuen").hide();
                                                                     $("#no_cuen_ban").hide();
                                                                     $("#generar").hide();
@@ -408,7 +408,7 @@
                                                                     var texto = "";
                                                                     var r = "";
 
-                                                                    $('#btn-agregar-cc').click(function () {
+                                                                    $('#btn-agregar-cc').click(function() {
                                                                         texto += '<div  class="row" id="centro-costo_' + ag + '" >';
                                                                         texto += '<section class="col col-4"><label class="select" id="titu">Centro de Costo N' + ag + ':<select name="CENTRO_COSTOS_' + ag + '" ><option value="0">----</option></select></label></section>';
                                                                         texto += '<section class="col col-4"><label class="input" id="titu">%<input name="por_cen_costo" type="text" value=""  id="porcentaje_cc"/></label></section>';
@@ -421,7 +421,7 @@
                                                                         ag++;
                                                                     });
 
-                                                                    $("#banco").change(function () {
+                                                                    $("#banco").change(function() {
                                                                         if ($("#banco").val() == '1') {
                                                                             $("#generar").hide();
                                                                             $("#no_cuen").show();
@@ -466,8 +466,11 @@
                                                                             $("#nu_cuen").val("");
                                                                             $("#no_cuen_ban").hide();
                                                                             $("#nu_cuen_ban").val("");
+                                                                            $("#no_cuen_otros").show();
+                                                                            $("#nu_cuen_otros").val("BBVA");
                                                                             $("#generar").show();
                                                                             $("#subscription").attr("required", "required");
+                                                                            $("#nu_cuen_otros").attr("required", "required");
                                                                         }
 
 
@@ -776,7 +779,7 @@
                     $(".cont_sabado").hide();
                     $(".cont_domingo").hide();
                     $("#lunes").change(
-                            function () {
+                            function() {
                                 if ($(this).val() == 1) {
                                     $("#show_1").show();
                                 }
@@ -787,7 +790,7 @@
                             }
                     );
                     $("#martes").change(
-                            function () {
+                            function() {
                                 if ($(this).val() == 1) {
                                     $("#show_2").show();
                                 }
@@ -798,7 +801,7 @@
                             }
                     );
                     $("#miercoles").change(
-                            function () {
+                            function() {
                                 if ($(this).val() == 1) {
                                     $("#show_3").show();
                                 }
@@ -809,7 +812,7 @@
                             }
                     );
                     $("#jueves").change(
-                            function () {
+                            function() {
                                 if ($(this).val() == 1) {
                                     $("#show_4").show();
                                 }
@@ -820,7 +823,7 @@
                             }
                     );
                     $("#viernes").change(
-                            function () {
+                            function() {
                                 if ($(this).val() == 1) {
                                     $("#show_5").show();
                                 }
@@ -831,7 +834,7 @@
                             }
                     );
                     $("#sabado").change(
-                            function () {
+                            function() {
                                 if ($(this).val() == 1) {
                                     $("#show_6").show();
                                 }
@@ -842,7 +845,7 @@
                             }
                     );
                     $("#domingo").change(
-                            function () {
+                            function() {
                                 if ($(this).val() == 1) {
                                     $("#show_7").show();
                                 }
@@ -893,16 +896,16 @@
 
             }
         }
-        $(document).ready(function () {
+        $(document).ready(function() {
 
 
             $(".texto-h").keyup(
-                    function () {
+                    function() {
                         calcularHoras();
                     }
             );
             $("#horario").change(
-                    function () {
+                    function() {
                         if ($(this).val() == 0) {
                             $(".cont_lunes").hide();
                             $(".cont_martes").hide();
@@ -995,17 +998,17 @@
                             document.getElementById("HORA_HASTA_vie1").value = "13:00";
                             document.getElementById("HORA_DESDE_sab1").value = "00:00";
                             document.getElementById("HORA_HASTA_sab1").value = "00:00";
-                              document.getElementById("HORA_DESDE_dom1").value = "00:00";
-                             document.getElementById("HORA_HASTA_dom1").value = "00:00";
-                             document.getElementById("HORA_DESDE_dom2").value = "00:00";
-                             document.getElementById("HORA_HASTA_dom2").value = "00:00";
+                            document.getElementById("HORA_DESDE_dom1").value = "00:00";
+                            document.getElementById("HORA_HASTA_dom1").value = "00:00";
+                            document.getElementById("HORA_DESDE_dom2").value = "00:00";
+                            document.getElementById("HORA_HASTA_dom2").value = "00:00";
                         }
                         calcularHoras();
                     }
             );
         });</script>
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             //$("#sueldo").numeric();
             $("#sueldo").mask("99999.99", {placeholder: "0"});
@@ -1014,13 +1017,13 @@
             var scntDiv = $('#show_1');
             var i = $('#show_1 .texto-h').size() + 1;
             var s = $('#show_1 .tr-count').size() + 1;
-            $('#addScnt').click(function () {
+            $('#addScnt').click(function() {
                 $('<tr><td>T' + s + ' :</td><td><input type="text"   name="HORA_DESDE_lun' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_lun' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_lun' + i + '" value="lun" ><input type="hidden" name="USER_CREACION_lun' + i + '"> <a href="#" id="remScnt">-</a></td></tr>').appendTo(scntDiv);
                 i++;
                 s++;
                 return false;
             });
-            $('#remScnt').click(function () {
+            $('#remScnt').click(function() {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -1031,18 +1034,18 @@
             });
         });
         //MARTES
-        $(function () {
+        $(function() {
             var scntDiv = $('#show_2');
             var i = $('#show_2 .texto-h').size() + 1;
             var s = $('#show_2 .tr-count_2').size() + 1;
-            $('#add_2').click(function () {
+            $('#add_2').click(function() {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_mar' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_mar' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_mar' + i + '" value="mar" ><input type="hidden" name="USER_CREACION_mar' + i + '"> <a href="#" id="remove_2">-</a></td></tr>').appendTo(scntDiv);
                 i++;
                 s++;
                 return false;
             });
-            $('#remove_2').click(function () {
+            $('#remove_2').click(function() {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -1053,18 +1056,18 @@
             });
         });
         //MIERCOLES
-        $(function () {
+        $(function() {
             var scntDiv = $('#show_3');
             var i = $('#show_3 .texto-h').size() + 1;
             var s = $('#show_3 .tr-count_3').size() + 1;
-            $('#add_3').click(function () {
+            $('#add_3').click(function() {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_mie' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_mie' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_mie' + i + '" value="mie" ><input type="hidden" name="USER_CREACION_mie' + i + '"> <a href="#" id="remove_3">-</a></td></tr>').appendTo(scntDiv);
                 i++;
                 s++;
                 return false;
             });
-            $('#remove_3').click(function () {
+            $('#remove_3').click(function() {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -1075,18 +1078,18 @@
             });
         });
         //JUEVES
-        $(function () {
+        $(function() {
             var scntDiv = $('#show_4');
             var i = $('#show_4 .texto-h').size() + 1;
             var s = $('#show_4 .tr-count_4').size() + 1;
-            $('#add_4').click(function () {
+            $('#add_4').click(function() {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_jue' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_jue' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_jue' + i + '" value="jue" ><input type="hidden" name="USER_CREACION_jue' + i + '"> <a href="#" id="remove_4">-</a></td></tr>').appendTo(scntDiv);
                 i++;
                 s++;
                 return false;
             });
-            $('#remove_4').click(function () {
+            $('#remove_4').click(function() {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -1097,18 +1100,18 @@
             });
         });
         //VIERNES
-        $(function () {
+        $(function() {
             var scntDiv = $('#show_5');
             var i = $('#show_5 .texto-h').size() + 1;
             var s = $('#show_5 .tr-count_5').size() + 1;
-            $('#add_5').click(function () {
+            $('#add_5').click(function() {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_vie' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_vie' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_vie' + i + '" value="vie" ><input type="hidden" name="USER_CREACION_vie' + i + '"> <a href="#" id="remove_5">-</a></td></tr>').appendTo(scntDiv);
                 i++;
                 s++;
                 return false;
             });
-            $('#remove_5').click(function () {
+            $('#remove_5').click(function() {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -1119,18 +1122,18 @@
             });
         });
         //DOMINGO
-        $(function () {
+        $(function() {
             var scntDiv = $('#show_6');
             var i = $('#show_6 .texto-h').size() + 1;
             var s = $('#show_6 .tr-count_6').size() + 1;
-            $('#add_6').click(function () {
+            $('#add_6').click(function() {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_dom' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_dom' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_dom' + i + '" value="dom" ><input type="hidden" name="USER_CREACION_dom' + i + '"> <a href="#" id="remove_6">-</a></td></tr>').appendTo(scntDiv);
                 i++;
                 s++;
                 return false;
             });
-            $('#remove_6').click(function () {
+            $('#remove_6').click(function() {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -1221,7 +1224,7 @@
 
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             pageSetUp();
             var $checkoutForm = $('#checkout-form').validate({
@@ -1325,7 +1328,7 @@
                     }
                 },
                 // Do not change code below
-                errorPlacement: function (error, element) {
+                errorPlacement: function(error, element) {
                     error.insertAfter(element.parent());
                 }
             });
@@ -1393,7 +1396,7 @@
                     }
                 },
                 // Do not change code below
-                errorPlacement: function (error, element) {
+                errorPlacement: function(error, element) {
                     error.insertAfter(element.parent());
                 }
             });
@@ -1444,7 +1447,7 @@
                     }
                 },
                 // Do not change code below
-                errorPlacement: function (error, element) {
+                errorPlacement: function(error, element) {
                     error.insertAfter(element.parent());
                 }
             });
@@ -1482,15 +1485,15 @@
                     }
                 },
                 // Ajax form submition
-                submitHandler: function (form) {
+                submitHandler: function(form) {
                     $(form).ajaxSubmit({
-                        success: function () {
+                        success: function() {
                             $("#comment-form").addClass('submited');
                         }
                     });
                 },
                 // Do not change code below
-                errorPlacement: function (error, element) {
+                errorPlacement: function(error, element) {
                     error.insertAfter(element.parent());
                 }
             });
@@ -1523,15 +1526,15 @@
                     }
                 },
                 // Ajax form submition
-                submitHandler: function (form) {
+                submitHandler: function(form) {
                     $(form).ajaxSubmit({
-                        success: function () {
+                        success: function() {
                             $("#contact-form").addClass('submited');
                         }
                     });
                 },
                 // Do not change code below
-                errorPlacement: function (error, element) {
+                errorPlacement: function(error, element) {
                     error.insertAfter(element.parent());
                 }
             });
@@ -1559,7 +1562,7 @@
                     }
                 },
                 // Do not change code below
-                errorPlacement: function (error, element) {
+                errorPlacement: function(error, element) {
                     error.insertAfter(element.parent());
                 }
             });
@@ -1603,7 +1606,7 @@
                     }
                 },
                 // Do not change code below
-                errorPlacement: function (error, element) {
+                errorPlacement: function(error, element) {
                     error.insertAfter(element.parent());
                 }
             });
@@ -1612,7 +1615,7 @@
                 dateFormat: 'dd.mm.yy',
                 prevText: '<i class="fa fa-chevron-left"></i>',
                 nextText: '<i class="fa fa-chevron-right"></i>',
-                onSelect: function (selectedDate) {
+                onSelect: function(selectedDate) {
                     $('#finishdate').datepicker('option', 'minDate', selectedDate);
                 }
             });
@@ -1620,7 +1623,7 @@
                 dateFormat: 'dd.mm.yy',
                 prevText: '<i class="fa fa-chevron-left"></i>',
                 nextText: '<i class="fa fa-chevron-right"></i>',
-                onSelect: function (selectedDate) {
+                onSelect: function(selectedDate) {
                     $('#startdate').datepicker('option', 'maxDate', selectedDate);
                 }
             });
@@ -1633,7 +1636,7 @@
 
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             pageSetUp();
         })
@@ -1645,7 +1648,7 @@
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
         _gaq.push(['_trackPageview']);
-        (function () {
+        (function() {
             var ga = document.createElement('script');
             ga.type = 'text/javascript';
             ga.async = true;

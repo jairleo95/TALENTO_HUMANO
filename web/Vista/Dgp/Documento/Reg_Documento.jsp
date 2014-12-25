@@ -162,7 +162,7 @@
 
                                                         <td class="caji">
                                                             <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005"))) {%>
-                                                            <input type="text" <%if (d.getEs_obligatorio().equals("1")) {out.println(" required='required' ");}%> name="lob_description<%=i + 1%>">
+                                                            <input type="text"  name="lob_description<%=i + 1%>">
                                                             <% } else { %>
                                                             <% if (d.getDe_documento_adjunto() == null) { %>
                                                             <label class="null" >No Registrado</label>
@@ -221,7 +221,7 @@
 
                                                     <td class="caji">
                                                         <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005"))) {%>
-                                                        <input type="text" <%if (d.getEs_obligatorio().equals("1")) {out.println(" required='required' ");}%> name="lob_description<%=i + 1%>">
+                                                        <input type="text"  name="lob_description<%=i + 1%>">
                                                         <% } else { %>
                                                         <% if (d.getDe_documento_adjunto() == null) { %>
                                                         <label class="null" >No Registrado</label>
@@ -292,7 +292,7 @@
 
                                                     <td class="caji">
                                                         <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005"))) {%>
-                                                        <input type="text" <%if (d.getEs_obligatorio().equals("1")) {out.println(" required='required' ");}%> name="lob_description<%=i + 1%>">
+                                                        <input type="text"  name="lob_description<%=i + 1%>">
                                                         <% } else { %>
                                                         <% if (d.getDe_documento_adjunto() == null) { %>
                                                         <label class="null" >No Registrado</label>
@@ -356,7 +356,7 @@
 
                                                     <td class="caji">
                                                         <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005"))) {%>
-                                                        <input type="text" <%if (d.getEs_obligatorio().equals("1")) {out.println(" required='required' ");}%> name="lob_description<%=i + 1%>">
+                                                        <input type="text"  name="lob_description<%=i + 1%>">
                                                         <% } else { %>
                                                         <% if (d.getDe_documento_adjunto() == null) { %>
                                                         <label class="null" >No Registrado</label>
@@ -398,7 +398,7 @@
                                                 <%} else if (!d.getTi_documento().trim().equals("DNIH") & !d.getTi_documento().trim().equals("DNIC") & !d.getTi_documento().trim().equals("ACMA") & !d.getTi_documento().trim().equals("COFE") & !d.getTi_documento().trim().equals("DOCA")) {
                                                 %>
                                                 <tr>
-                                                    <td class="caji"><strong><%=d.getDocumento() + d.getEs_obligatorio()%></strong></td>
+                                                    <td class="caji"><strong><%=d.getDocumento()%></strong></td>
 
                                                     <td class="caji">
                                                         <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005"))) {%>
@@ -413,10 +413,7 @@
                                                     </td>
                                                     <td class="caji">
                                                         <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003"))) {%>
-                                                        <input type="text"  <%if (d.getEs_obligatorio().equals("1")) {
-                                                                out.println(" required='required' ");
-                                                            }
-                                                               %> name="lob_description<%=i + 1%>">
+                                                        <input type="text"   name="lob_description<%=i + 1%>">
                                                         <% } else { %>
                                                         <% if (d.getDe_documento_adjunto() == null) { %>
                                                         <label class="null" >No Registrado</label>

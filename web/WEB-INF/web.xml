@@ -72,6 +72,10 @@
         <servlet-name>CDir_Puesto</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CDir_Puesto</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CCentro_Costo</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CCentro_Costo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
         <url-pattern>/trabajador</url-pattern>
@@ -143,6 +147,10 @@
     <servlet-mapping>
         <servlet-name>CDir_Puesto</servlet-name>
         <url-pattern>/Direccion_Puesto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CCentro_Costo</servlet-name>
+        <url-pattern>/centro_costo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

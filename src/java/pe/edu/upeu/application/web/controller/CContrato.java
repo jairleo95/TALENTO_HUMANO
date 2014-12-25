@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import pe.edu.upeu.application.dao.AnnoDAO;
 import pe.edu.upeu.application.dao.AreaDAO;
-import pe.edu.upeu.application.dao.Centro_CostosDAO;
+import pe.edu.upeu.application.dao.Centro_CostoDAO;
 import pe.edu.upeu.application.dao.ContratoDAO;
 import pe.edu.upeu.application.dao.Datos_Hijo_TrabajadorDAO;
 import pe.edu.upeu.application.dao.DgpDAO;
@@ -73,7 +73,7 @@ public class CContrato extends HttpServlet {
     InterfacePlantillaDAO pl = new PlantillaDAO();
     InterfaceUsuarioDAO usu = new UsuarioDAO();
     InterfaceTrabajadorDAO tr = new TrabajadorDAO();
-    InterfaceCentro_CostosDAO cc = new Centro_CostosDAO();
+    InterfaceCentro_CostosDAO cc = new Centro_CostoDAO();
     InterfaceDireccionDAO dir = new DireccionDAO();
     InterfaceGrupo_ocupacionesDAO gr = new GrupoOcupacionesDAO();
     InterfaceSub_ModalidadDAO sub = new Sub_ModalidadDAO();
@@ -193,7 +193,7 @@ public class CContrato extends HttpServlet {
                 String ES_TI_CONTRATACION = request.getParameter("TI_CONTRATACION");
                 Double CA_BEV = Double.parseDouble(request.getParameter("BEV"));
 
-               // out.println("sdñogjlkgjlksdjlk");
+                // out.println("sdñogjlkgjlksdjlk");
                 con.INSERT_CONTRATO(ID_CONTRATO, ID_DGP, FE_DESDE, FE_HASTA, FE_CESE, ID_FUNC, LI_CONDICION, CA_SUELDO, CA_REINTEGRO, CA_ASIG_FAMILIAR, HO_SEMANA, NU_HORAS_LAB, DIA_CONTRATO, TI_TRABAJADOR, LI_REGIMEN_LABORAL, ES_DISCAPACIDAD, TI_CONTRATO, LI_REGIMEN_PENSIONARIO, ES_CONTRATO_TRABAJADOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, US_IP, FE_VACACIO_INI, FE_VACACIO_FIN, ES_CONTRATO, ID_FILIAL, ID_DIRECCION, ID_DEPARTAMENTO, ID_AREA, ID_SEC, ID_PUESTO, CA_BONO_ALIMENTO, LI_TIPO_CONVENIO, ES_FIRMO_CONTRATO, NU_CONTRATO, DE_OBSERVACION, ES_APOYO, TI_HORA_PAGO, NU_DOCUMENTO, ID_ANNO, ES_ENTREGAR_DOC_REGLAMENTOS, ES_REGISTRO_HUELLA, DE_REGISTRO_SISTEM_REMU, ID_TRABAJADOR, ID_CENTRO_COSTO, CA_SUELDO_TOTAL, ID_REGIMEN_LABORAL, ID_MODALIDAD, ID_SUB_MODALIDAD, CO_GR_OCUPACION, FE_SUSCRIPCION, CO_TI_MONEDA, CO_TI_REM_VARIAB, DE_REMU_ESPECIE, DE_RUC_EMP_TRAB, CO_SUCURSAL, DE_MYPE, ES_TI_CONTRATACION, CA_BEV);
 
                 /*Cambiar este for con un trigger al momento de insertar*/
