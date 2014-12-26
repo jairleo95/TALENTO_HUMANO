@@ -50,6 +50,23 @@ public class CCentro_Costo extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", list);
             }
+            if (opc.equals("Listar_dir")) {
+                List<Map<String, ?>> list = cc.Direccion_CC();
+                rpta.put("rpta", "1");
+                rpta.put("lista", list);
+            }
+            if (opc.equals("Listar_dep")) {
+                String id = request.getParameter("id_dir");
+                List<Map<String, ?>> list = cc.Departamento_CC(id);
+                rpta.put("rpta", "1");
+                rpta.put("lista", list);
+            }
+            if (opc.equals("Listar_CC")) {
+                String id = request.getParameter("id_dep");
+                List<Map<String, ?>> list = cc.Centro_Costo_Dep(id);
+                rpta.put("rpta", "1");
+                rpta.put("lista", list);
+            }
 
         } catch (Exception e) {
             rpta.put("rpta", "-1");

@@ -96,8 +96,6 @@
                 font-weight: bold;
             }
         </style>
-
-
         <script>
             $(document).ready(
                     function() {
@@ -171,8 +169,6 @@
                             return;
                         }
                         for (var i = 0; i < lista.length; i++) {
-
-
                             b.append("<div class='alert alert-danger alert-block' ><a class='close' data-dismiss='alert' href='#'>×</a><h4 class='alert-heading'>" + lista[i].nom + "</h4>" + lista[i].det + " , Fecha Plazo " + lista[i].desde + " al " + lista[i].hasta + "</div>");
                         }
                     });
@@ -393,6 +389,14 @@
                                                         <section class="col col-4"><label class="input" id="titu">%<input name="por_cen_costo_1" max="100" maxlength="3" type="text" value="100"  id="porcentaje_cc"/></label></section>
                                                         <section class="col col-4"><label class="btn"><button type="button" class="btn btn-default" id="btn-agregar-cc" >Agregar</button></label></section>
                                                     </div>
+                                                    <div  class="row" id="centro-costo_" >
+                                                        <section class="col col-4"><label class="select" id="titu">Centro de Costo :
+                                                                <select required="" id="cc-dir"><option value="">[DIRECCION]</option></select>
+                                                                <select required="" id="cc-dep"><option value="">[DEPARTAMENTO]</option></select>
+                                                                <select name="CENTRO_COSTOS_" id="cc_dep" required=""><option value="">[CENTRO COSTO]</option></select></label></section>
+                                                        <section class="col col-4"><label class="input" id="titu">%<input name="por_cen_costo_1" max="100" maxlength="3" type="text" value="100"  id="porcentaje_cc"/></label></section>
+                                                        <section class="col col-4"><label class="btn"><button type="button" class="btn btn-default" id="btn-agregar-cc" >Agregar</button></label></section>
+                                                    </div>
                                                     <code class="ver"></code>
                                                     <script type="text/javascript">
                                                         $(document).ready(
@@ -415,8 +419,8 @@
                                                                         texto += '<section class="col col-4"><label class="btn"><button type="button" class="btn btn-default"  onclick=" $(\'#centro-costo_' + ag + '\').remove()"  >Remover</button></label></section>';
                                                                         texto += '</div>';
                                                                         agregar.append(texto);
-                                                                        alert($("#por_cen_costo").val());
-                                                                        // $(".ver").text(texto);
+                                                                        // alert($("#por_cen_costo").val());
+                                                                        //$(".ver").text(texto);
                                                                         texto = "";
                                                                         ag++;
                                                                     });
@@ -899,7 +903,7 @@
         function listar_cc() {
             var select_cc = $("#select-cc");
             $.post("../../centro_costo?opc=Listar_cc", function(objJson) {
-              //  select_cc.empty();
+                //  select_cc.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
                     return;
@@ -908,8 +912,56 @@
                 for (var i = 0; i < lista.length; i++) {
                     select_cc.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
                 }
-               
+
             });
+            var cc_dir = $("#cc-dir");
+            $.post("../../centro_costo?opc=Listar_dir", function(objJson) {
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                for (var i = 0; i < lista.length; i++) {
+                    cc_dir.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
+                }
+            });
+
+            $("#cc-dir").change(function() {
+                var cc_dep = $("#cc-dep");
+                $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + $("#cc-dir").val(), function(objJson) {
+                    cc_dep.empty();
+                    cc_dep.append("<option value=''>[DEPARTAMENTO]</option>");
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    var lista = objJson.lista;
+                    for (var i = 0; i < lista.length; i++) {
+                        cc_dep.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
+                    }
+                });
+
+            });
+            $("#cc-dep").change(function() {
+                var centro_costo = $("#cc_dep");
+                $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + $("#cc-dep").val(), function(objJson) {
+                    centro_costo.empty();
+                    centro_costo.append("<option value=''>[CENTRO COSTO]</option>");
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    var lista = objJson.lista;
+                    for (var i = 0; i < lista.length; i++) {
+                        centro_costo.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
+                    }
+                });
+
+            });
+
+
+
+
 
         }
         $(document).ready(function() {

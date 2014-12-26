@@ -76,4 +76,88 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
         return list;
     }
 
+    @Override
+    public List<Map<String, ?>> Direccion_CC() {
+
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select distinct(d.id_direccion) as id_direccion, d.no_direccion    from rhtr_centro_costo cc, rhtx_departamento dp , rhtx_direccion d where dp.id_departamento = cc.id_departamento and  dp.id_direccion = d.id_direccion";
+            ResultSet rs = this.cnn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("id_direccion"));
+                rec.put("nombre", rs.getString("no_direccion"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
+    }
+
+    @Override
+    public List<Map<String, ?>> Departamento_CC(String iddir) {
+
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select  distinct (cc.id_departamento) as id_departamento,dp.no_dep   from rhtr_centro_costo cc, rhtx_departamento dp , rhtx_direccion d where dp.id_departamento = cc.id_departamento and  dp.id_direccion = d.id_direccion and d.id_direccion='" + iddir + "'";
+            ResultSet rs = this.cnn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("id_departamento"));
+                rec.put("nombre", rs.getString("no_dep"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
+    }
+
+    @Override
+    public List<Map<String, ?>> Centro_Costo_Dep(String iddep) {
+
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select  cc.id_centro_costo,cc.de_centro_costo  from rhtr_centro_costo cc, rhtx_departamento dp , rhtx_direccion d where dp.id_departamento = cc.id_departamento and  dp.id_direccion = d.id_direccion and cc.id_departamento='" + iddep + "'";
+            ResultSet rs = this.cnn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("id_centro_costo"));
+                rec.put("nombre", rs.getString("de_centro_costo"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
+    }
+
 }
