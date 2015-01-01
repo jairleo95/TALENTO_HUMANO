@@ -340,12 +340,10 @@
                                                                 Certificado de Salud : <input type="text" name="CERTIFICADO_SALUD" required="">
                                                             </label>
                                                         </section>
-
-
                                                     </div>
                                                     <div class="row">
                                                         <section class="col col-3" name="">
-                                                            <label class="select" id="titu">Cuenta Sueldo - Banco:
+                                                            <label class="select" id="titu">Cta Sueldo - Banco:
                                                                 <select name="BANCO" id="banco" required="">
                                                                     <option value="" selected="" disabled="" >[Selecione]</option>
                                                                     <option value="0" >Ninguno</option>
@@ -385,18 +383,12 @@
 
                                                     </div>
                                                     <div  class="row" id="centro-costo_1" >
-                                                        <section class="col col-4"><label class="select" id="titu">Centro de Costo N1:<select name="CENTRO_COSTOS_1" id="select-cc" required=""><option value="">[SELECCIONE]</option></select></label></section>
-                                                        <section class="col col-4"><label class="input" id="titu">%<input name="por_cen_costo_1" max="100" maxlength="3" type="text" value="100"  id="porcentaje_cc"/></label></section>
+                                                        <section class="col col-4"><label class="select" id="titu">Centro de Costo Nº 1:<select name="CENTRO_COSTOS_1" class="select-cc" required=""><option value="">[SELECCIONE]</option></select></label></section>
+                                                        <section class="col col-4"><label class="input" id="titu">%<input name="PORCENTAJE_1" max="100" maxlength="3" type="text" value="100"  id="porcentaje_cc"/></label></section>
                                                         <section class="col col-4"><label class="btn"><button type="button" class="btn btn-default" id="btn-agregar-cc" >Agregar</button></label></section>
                                                     </div>
-                                                    <div  class="row" id="centro-costo_" >
-                                                        <section class="col col-4"><label class="select" id="titu">Centro de Costo :
-                                                                <select required="" id="cc-dir"><option value="">[DIRECCION]</option></select>
-                                                                <select required="" id="cc-dep"><option value="">[DEPARTAMENTO]</option></select>
-                                                                <select name="CENTRO_COSTOS_" id="cc_dep" required=""><option value="">[CENTRO COSTO]</option></select></label></section>
-                                                        <section class="col col-4"><label class="input" id="titu">%<input name="por_cen_costo_1" max="100" maxlength="3" type="text" value="100"  id="porcentaje_cc"/></label></section>
-                                                        <section class="col col-4"><label class="btn"><button type="button" class="btn btn-default" id="btn-agregar-cc" >Agregar</button></label></section>
-                                                    </div>
+                                                    <input type="text" value="1" name="numero" class="cant-input" />
+
                                                     <code class="ver"></code>
                                                     <script type="text/javascript">
                                                         $(document).ready(
@@ -405,23 +397,25 @@
                                                                     $("#no_cuen_ban").hide();
                                                                     $("#generar").hide();
                                                                     $("#no_cuen_otros").hide();
-
-
                                                                     var agregar = $('#fila-agregar');
                                                                     var ag = $('#fila-agregar #porcentaje_cc').size() + 1;
                                                                     var texto = "";
-                                                                    var r = "";
-
+                                                                    //  var r = "";
                                                                     $('#btn-agregar-cc').click(function() {
-                                                                        texto += '<div  class="row" id="centro-costo_' + ag + '" >';
-                                                                        texto += '<section class="col col-4"><label class="select" id="titu">Centro de Costo N' + ag + ':<select name="CENTRO_COSTOS_' + ag + '" ><option value="0">----</option></select></label></section>';
-                                                                        texto += '<section class="col col-4"><label class="input" id="titu">%<input name="por_cen_costo" type="text" value=""  id="porcentaje_cc"/></label></section>';
-                                                                        texto += '<section class="col col-4"><label class="btn"><button type="button" class="btn btn-default"  onclick=" $(\'#centro-costo_' + ag + '\').remove()"  >Remover</button></label></section>';
+                                                                        texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + ag + ':</label>';
+                                                                        texto += '<div  class="row centro-costo_' + ag + '" >';
+                                                                        texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
+                                                                        texto += '<section class="col col-3"><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
+                                                                        texto += '<section class="col col-3"><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ag + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
+                                                                        texto += '<section class="col col-2"><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '"  min="0"   type="text" required="" id="porcentaje_cc"/><button type="button" class="remover' + ag + '">Remover</button></label></section>';
                                                                         texto += '</div>';
                                                                         agregar.append(texto);
+                                                                        listar_cc(ag);
                                                                         // alert($("#por_cen_costo").val());
                                                                         //$(".ver").text(texto);
                                                                         texto = "";
+                                                                        $(".cant-input").val(ag);
+
                                                                         ag++;
                                                                     });
 
@@ -476,16 +470,9 @@
                                                                             $("#subscription").attr("required", "required");
                                                                             $("#nu_cuen_otros").attr("required", "required");
                                                                         }
-
-
-
-
                                                                     });
                                                                 }
                                                         );</script>
-
-
-
                                                     <input type="hidden" name="IDREQUERIMIENTO"  id="combito"  value="<%=idreq%>">
                                                     <div id="div_2" class="contenido" style="display: none">
                                                         <table  class="table">
@@ -493,8 +480,6 @@
                                                             <tr><td class="td">Horario de Capacitacion:</td><td><input type="text" name="HORARIO_CAPACITACION"  ></td></tr>   
                                                             <tr><td class="td">Horario de Refrigerio:</td><td><input type="text" name="HORARIO_REFRIGERIO"  ></td></tr>  
                                                             <tr><td class="td">Dias de Capacitacion:</td><td><input type="text" name="DIAS_CAPACITACION" ></td></tr>  
-
-
                                                         </table>
                                                     </div  >
 
@@ -668,16 +653,7 @@
                                                             <input type="hidden" name="DIA_mar2" value="mar" >    
 
                                                             <tr><td colspan="2"><a href="#" id="add_2">+</a></td></tr>
-
-
-
-
-
                                                         </table>
-
-
-
-
                                                         <table id="show_3" class="cont_miercoles">     
                                                             <tr ><td align="center" colspan="2">Miercoles</td></tr>
                                                             <tr class="tr-count_3"><td>T1 :</td><td><input type="text" name="HORA_DESDE_mie1" id="HORA_DESDE_mier1" class="texto-h" ></td>           
@@ -863,7 +839,6 @@
 
         );</script>
     <script  language="javascript" type="text/javascript">
-
         function calcularHoras() {
             var dias_semana = new Array("lun", "mar", "mier", "jue", "vie", "sab", "dom");
             var acum = 0;
@@ -900,8 +875,8 @@
 
             }
         }
-        function listar_cc() {
-            var select_cc = $("#select-cc");
+        function listar_cc(num) {
+            var select_cc = $(".select-cc");
             $.post("../../centro_costo?opc=Listar_cc", function(objJson) {
                 //  select_cc.empty();
                 if (objJson.rpta == -1) {
@@ -914,7 +889,7 @@
                 }
 
             });
-            var cc_dir = $("#cc-dir");
+            var cc_dir = $(".cc-dir" + num);
             $.post("../../centro_costo?opc=Listar_dir", function(objJson) {
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -926,9 +901,9 @@
                 }
             });
 
-            $("#cc-dir").change(function() {
-                var cc_dep = $("#cc-dep");
-                $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + $("#cc-dir").val(), function(objJson) {
+            $(".cc-dir" + num).change(function() {
+                var cc_dep = $(".cc-dep" + num);
+                $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + $(this).val(), function(objJson) {
                     cc_dep.empty();
                     cc_dep.append("<option value=''>[DEPARTAMENTO]</option>");
                     if (objJson.rpta == -1) {
@@ -942,9 +917,9 @@
                 });
 
             });
-            $("#cc-dep").change(function() {
-                var centro_costo = $("#cc_dep");
-                $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + $("#cc-dep").val(), function(objJson) {
+            $(".cc-dep" + num).change(function() {
+                var centro_costo = $(".centro_costo" + num);
+                $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + $(this).val(), function(objJson) {
                     centro_costo.empty();
                     centro_costo.append("<option value=''>[CENTRO COSTO]</option>");
                     if (objJson.rpta == -1) {
@@ -958,11 +933,10 @@
                 });
 
             });
+            $(".remover" + num).click(function() {
+                $(".centro-costo_" + num).remove();
 
-
-
-
-
+            });
         }
         $(document).ready(function() {
             listar_cc();
@@ -1226,10 +1200,8 @@
             document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
         }
     </script>
-
     <!-- IMPORTANT: APP CONFIG -->
     <script src="../../js/app.config.js"></script>
-
     <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
     <script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
 
@@ -1726,5 +1698,4 @@
         })();
 
     </script>
-
 </html>

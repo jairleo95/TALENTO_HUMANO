@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import pe.edu.upeu.application.dao.AreaDAO;
 import pe.edu.upeu.application.dao.AutorizacionDAO;
+import pe.edu.upeu.application.dao.Detalle_Centro_Costo_DAO;
 import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.DocumentoDAO;
 import pe.edu.upeu.application.dao.HorarioDAO;
@@ -26,6 +27,7 @@ import pe.edu.upeu.application.dao.TrabajadorDAO;
 import pe.edu.upeu.application.dao.UsuarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAreaDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDetalle_Centro_Costo;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceHorarioDAO;
@@ -76,6 +78,7 @@ public class CDgp extends HttpServlet {
         InterfaceHorarioDAO IHor = new HorarioDAO();
         InterfaceListaDAO Ilis = new ListaDAO();
         InterfaceDocumentoDAO doc = new DocumentoDAO();
+        InterfaceDetalle_Centro_Costo dcc = new Detalle_Centro_Costo_DAO();
 
         //try {
         if (opc.equals("Registrar")) {
@@ -106,20 +109,30 @@ public class CDgp extends HttpServlet {
             String DE_ANTECEDENTES_POLICIALES = request.getParameter("ANTECEDENTES_POLICIALES");
             String DE_CERTIFICADO_SALUD = request.getParameter("CERTIFICADO_SALUD");
             String DE_MONTO_HONORARIO = request.getParameter("MONTO_HONORARIO");
-             String NO_BANCO = request.getParameter("BANCO");
-            String NU_CUENTA = (request.getParameter("CUENTA")== null ) ? "no tiene":request.getParameter("CUENTA");
-           // String NU_CUENTA = request.getParameter("CUENTA");
+            String NO_BANCO = request.getParameter("BANCO");
+            String NU_CUENTA = (request.getParameter("CUENTA") == null) ? "no tiene" : request.getParameter("CUENTA");
+            // String NU_CUENTA = request.getParameter("CUENTA");
             //String NU_CUENTA_BANC = (request.getParameter("CUENTA_BANC") == null) ? "0" : "no tiene";
             String NU_CUENTA_BANC = request.getParameter("CUENTA_BANC");
             String ES_GEN_NU_CUENTA = (request.getParameter("GEN_NU_CUEN") == null) ? "0" : "1";
             String NO_BANCO_OTROS = request.getParameter("BANCO_OTROS");
-            
+            int NUMERO = Integer.parseInt(request.getParameter("numero"));
+
             dgp.INSERT_DGP(null, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO, DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION, ES_DGP, iduser, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, CA_CENTRO_COSTOS, DE_ANTECEDENTES_POLICIALES, DE_CERTIFICADO_SALUD, DE_MONTO_HONORARIO, NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEN_NU_CUENTA, NO_BANCO_OTROS);
 
             //out.print(NU_CUENTA);
             //out.print(NU_CUENTA_BANC);
             String iddgp = dgp.MAX_ID_DGP();
             String idrp = IReq.id_det_req_proc(iddgp);
+
+            for (int g = 1; g <= NUMERO; g++) {
+                String ID_CENTRO_COSTO = request.getParameter("CENTRO_COSTOS_" + g);
+                double porcentaje = Double.parseDouble(request.getParameter("PORCENTAJE_" + g));
+                if (ID_CENTRO_COSTO != null && porcentaje != 0.0) {
+                    dcc.INSERT_DETALLE_CENTRO_COSTO(null, ID_CENTRO_COSTO, iddgp, porcentaje, "1", iduser, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO);
+                }
+            }
+
             List<String> list = a.Det_Autorizacion(idrp);
             a.Insert_Autorizacion("", iddgp, "1", "P1", "12312", iduser, "", "31/07/14", "3213", list.get(1), idrp, list.get(0));
             //HORARIO
@@ -167,7 +180,7 @@ public class CDgp extends HttpServlet {
             getServletContext().setAttribute("List_Hijos", doc.List_Hijos(ID_TRABAJADOR));
             getServletContext().setAttribute("List_Conyugue", doc.List_Conyugue(ID_TRABAJADOR));
 
-           response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&pro=pr_dgp");
+            response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&pro=pr_dgp");
             // response.sendRedirect("Vista/Dgp/Horario/Reg_Horario.jsp?iddgp=" + iddgp + "&idtr=" + ID_TRABAJADOR + "&opc=rd");
 
         }

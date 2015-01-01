@@ -25,5 +25,4 @@ public class FactoryConnectionDB {
                 return null;
         }
     }
-            
 }
