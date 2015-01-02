@@ -232,6 +232,8 @@
                                                         <br>
 
                                                     </div>
+                                                    <br>
+
                                                 </header>
 
                                                 <fieldset id="fila-agregar">
@@ -244,21 +246,54 @@
                                                             V_Ficha_Trab_Num_C tr = new V_Ficha_Trab_Num_C();
                                                             tr = (V_Ficha_Trab_Num_C) Listar_Trabajador_id.get(i);
                                                     %>
-                                                    <section>
-                                                        <label class="label" id="titu">Trabajador :</label>
-                                                        <label class="input" style="color: red; font-weight: bold;">
-                                                            <%=tr.getAp_paterno() + " " + tr.getAp_materno() + " " + tr.getNo_trabajador()%>
-                                                            <input type="hidden" value="<%=tr.getId_trabajador()%>" name="IDDATOS_TRABAJADOR" class="input-xs">
-                                                            <% }
-                                                                if (Listar_Trabajador_id.size() == 0) { %>   
-                                                            <%}%>
-                                                        </label>
-                                                    </section>
+                                                    <div class="row">
+                                                        <section class="col col-6">
+                                                            <label class="label" id="titu">Trabajador :</label>
+                                                            <label class="input" style="color: red; font-weight: bold;">
+                                                                <%=tr.getAp_paterno() + " " + tr.getAp_materno() + " " + tr.getNo_trabajador()%>
+                                                                <input type="hidden" value="<%=tr.getId_trabajador()%>" name="IDDATOS_TRABAJADOR" class="id_tr input-xs">
+                                                                <% }
+                                                                    if (Listar_Trabajador_id.size() == 0) { %>   
+                                                                <%}%>
+                                                            </label>
+                                                        </section>
+                                                        <section  class="col col-6">
+                                                            <label class="select" id="titu">DGP ANTERIORES
+                                                                <select  class="btn-list-req" >
+                                                                    <option value="" selected=""  >[SELECCIONE]</option>
+
+                                                                </select>
+                                                            </label>
+                                                        </section>
+                                                    </div>
+                                                    <script>$(document).ready(function() {
+                                                            var lista_dgp = $(".btn-list-req");
+                                                            $.post("../../dgp", "opc=Listar_Req&idtr=" + $(".id_tr").val(), function(objJson) {
+                                                                if (objJson.rpta == -1) {
+                                                                    alert(objJson.mensaje);
+                                                                    return;
+                                                                }
+                                                                var lista = objJson.lista;
+                                                                if (lista.length == 0) {
+                                                                    lista_dgp.empty();
+                                                                        lista_dgp.append('<option value="">[NO TIENE]</option>');
+                                                                }else{
+                                                                for (var t = 0; t < lista.length; t++) {
+                                                                    lista_dgp.append('<option value="' + lista[t].id + '">' + lista[t].desc + '</option>');
+                                                                }}
+
+
+                                                            });
+
+                                                            $(".btn-list-req").change(function() {
+                                                            });
+                                                        });
+                                                    </script>
                                                     <section>
                                                         <label class="label" id="titu">Puesto | Seccion | Area:</label>
                                                         <label class="select">
                                                             <select name="IDPUESTO"  required="" >
-                                                                <option value="">[Seleccionar]</option>
+                                                                <option value="">[SELECCIONE]</option>
 
                                                                 <%
                                                                     for (int j = 0; j < List_Puesto.size(); j++) {
@@ -387,7 +422,7 @@
                                                         <section class="col col-4"><label class="input" id="titu">%<input name="PORCENTAJE_1" max="100" maxlength="3" type="text" value="100"  id="porcentaje_cc"/></label></section>
                                                         <section class="col col-4"><label class="btn"><button type="button" class="btn btn-default" id="btn-agregar-cc" >Agregar</button></label></section>
                                                     </div>
-                                                    <input type="text" value="1" name="numero" class="cant-input" />
+                                                    <input type="hidden" value="1" name="numero" class="cant-input" />
 
                                                     <code class="ver"></code>
                                                     <script type="text/javascript">
@@ -555,6 +590,7 @@
                                                 </header>
 
                                                 <fieldset>
+
                                                     <section>
                                                         <label class="label" id="titu">Opcion :</label>
                                                         <label class="select">

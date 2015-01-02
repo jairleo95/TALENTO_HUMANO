@@ -9,7 +9,9 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -530,6 +532,33 @@ public class DgpDAO implements InterfaceDgpDAO {
         } finally {
             this.conn.close();
         }
+    }
+
+    @Override
+    public List<Map<String, ?>> list_Req(String id) {
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select id_dgp,trim(to_char(fe_desde,'month'))||' - '||trim(to_char(fe_hasta,'month'))||' - '||trim(to_char(fe_hasta,'YYYY'))||' | '||r.no_req as descripcion from rhtm_dgp d,rhtr_requerimiento r where r.id_requerimiento = d.id_requerimiento and d.es_dgp ='1' and d.id_trabajador='"+id+"'";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("id_dgp"));
+                rec.put("desc", rs.getString("descripcion"));
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return lista;
     }
 
 }
