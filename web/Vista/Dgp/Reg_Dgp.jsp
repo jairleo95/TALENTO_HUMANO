@@ -67,7 +67,7 @@
         <link rel="stylesheet" href="../../css/Css_Formulario/form.css"  type="text/css" > 
         <script language="javascript" type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
         <script language="javascript" type="text/javascript">
-            $(document).ready(function() {
+            $(document).ready(function () {
                 $(".contenido").hide();
                 /*TEMPORAL*/
                 //Planilla
@@ -98,9 +98,9 @@
         </style>
         <script>
             $(document).ready(
-                    function() {
+                    function () {
                         $("#sueldo").keyup(
-                                function() {
+                                function () {
                                     var x = parseFloat($("#sueldo").val());
                                     var y = parseFloat($("#bono_al").val());
                                     var z = parseFloat($("#bev").val());
@@ -110,7 +110,7 @@
                                 }
                         );
                         $("#bono_al").keyup(
-                                function() {
+                                function () {
                                     var x = parseFloat($("#sueldo").val());
                                     var y = parseFloat($("#bono_al").val());
                                     var z = parseFloat($("#bev").val());
@@ -119,7 +119,7 @@
                                 }
                         );
                         $("#bev").keyup(
-                                function() {
+                                function () {
                                     var x = parseFloat($("#sueldo").val());
                                     var y = parseFloat($("#bono_al").val());
                                     var z = parseFloat($("#bev").val());
@@ -157,11 +157,11 @@
     </head>
     <body>   
         <script>
-            $(document).ready(function() {
+            $(document).ready(function () {
                 var b = $("#alerta_dgp");
                 // $("#alerta_dgp").hide();
                 function listar() {
-                    $.post("../../plazo_dgp", "opc=Listar", function(objJson) {
+                    $.post("../../plazo_dgp", "opc=Listar", function (objJson) {
                         b.empty();
                         var lista = objJson.lista;
                         if (objJson.rpta == -1) {
@@ -266,9 +266,9 @@
                                                             </label>
                                                         </section>
                                                     </div>
-                                                    <script>$(document).ready(function() {
+                                                    <script>$(document).ready(function () {
                                                             var lista_dgp = $(".btn-list-req");
-                                                            $.post("../../dgp", "opc=Listar_Req&idtr=" + $(".id_tr").val(), function(objJson) {
+                                                            $.post("../../dgp", "opc=Listar_Req&idtr=" + $(".id_tr").val(), function (objJson) {
                                                                 if (objJson.rpta == -1) {
                                                                     alert(objJson.mensaje);
                                                                     return;
@@ -276,16 +276,17 @@
                                                                 var lista = objJson.lista;
                                                                 if (lista.length == 0) {
                                                                     lista_dgp.empty();
-                                                                        lista_dgp.append('<option value="">[NO TIENE]</option>');
-                                                                }else{
-                                                                for (var t = 0; t < lista.length; t++) {
-                                                                    lista_dgp.append('<option value="' + lista[t].id + '">' + lista[t].desc + '</option>');
-                                                                }}
+                                                                    lista_dgp.append('<option value="">[NO TIENE]</option>');
+                                                                } else {
+                                                                    for (var t = 0; t < lista.length; t++) {
+                                                                        lista_dgp.append('<option value="' + lista[t].id + '">' + lista[t].desc + '</option>');
+                                                                    }
+                                                                }
 
 
                                                             });
 
-                                                            $(".btn-list-req").change(function() {
+                                                            $(".btn-list-req").change(function () {
                                                             });
                                                         });
                                                     </script>
@@ -419,7 +420,7 @@
                                                     </div>
                                                     <div  class="row" id="centro-costo_1" >
                                                         <section class="col col-4"><label class="select" id="titu">Centro de Costo Nº 1:<select name="CENTRO_COSTOS_1" class="select-cc" required=""><option value="">[SELECCIONE]</option></select></label></section>
-                                                        <section class="col col-4"><label class="input" id="titu">%<input name="PORCENTAJE_1" max="100" maxlength="3" type="text" value="100"  id="porcentaje_cc"/></label></section>
+                                                        <section class="col col-4"><label class="input" id="titu">%<input name="PORCENTAJE_1" max="100" maxlength="3" type="text" value="100"  class="porcentaje_cc"/></label></section>
                                                         <section class="col col-4"><label class="btn"><button type="button" class="btn btn-default" id="btn-agregar-cc" >Agregar</button></label></section>
                                                     </div>
                                                     <input type="hidden" value="1" name="numero" class="cant-input" />
@@ -427,25 +428,33 @@
                                                     <code class="ver"></code>
                                                     <script type="text/javascript">
                                                         $(document).ready(
-                                                                function() {
+                                                                function () {
                                                                     $("#no_cuen").hide();
                                                                     $("#no_cuen_ban").hide();
                                                                     $("#generar").hide();
                                                                     $("#no_cuen_otros").hide();
                                                                     var agregar = $('#fila-agregar');
-                                                                    var ag = $('#fila-agregar #porcentaje_cc').size() + 1;
+                                                                    var ag = $('#fila-agregar .porcentaje_cc').size() + 1;
                                                                     var texto = "";
                                                                     //  var r = "";
-                                                                    $('#btn-agregar-cc').click(function() {
+                                                                    $('#btn-agregar-cc').click(function () {
                                                                         texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + ag + ':</label>';
                                                                         texto += '<div  class="row centro-costo_' + ag + '" >';
                                                                         texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
                                                                         texto += '<section class="col col-3"><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
                                                                         texto += '<section class="col col-3"><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ag + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
-                                                                        texto += '<section class="col col-2"><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '"  min="0"   type="text" required="" id="porcentaje_cc"/><button type="button" class="remover' + ag + '">Remover</button></label></section>';
+                                                                        texto += '<section class="col col-2"><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '"  min="0"   type="text" required="" class="porcentaje_cc"/><button type="button" class="remover' + ag + '">Remover</button></label></section>';
                                                                         texto += '</div>';
                                                                         agregar.append(texto);
                                                                         listar_cc(ag);
+
+                                                                        var c_porcentaje = $(".porcentaje_cc").size();
+                                                                        $(".porcentaje_cc").val(Math.round((100 / c_porcentaje) * 100) / 100);
+                                                                        
+                                                                        $(".porcentaje_cc").change(function(){
+                                                                             var actual = $(this).val();
+                                                                             $(".porcentaje_cc").size()-1;
+                                                                        });
                                                                         // alert($("#por_cen_costo").val());
                                                                         //$(".ver").text(texto);
                                                                         texto = "";
@@ -454,7 +463,7 @@
                                                                         ag++;
                                                                     });
 
-                                                                    $("#banco").change(function() {
+                                                                    $("#banco").change(function () {
                                                                         if ($("#banco").val() == '1') {
                                                                             $("#generar").hide();
                                                                             $("#no_cuen").show();
@@ -795,7 +804,7 @@
                     $(".cont_sabado").hide();
                     $(".cont_domingo").hide();
                     $("#lunes").change(
-                            function() {
+                            function () {
                                 if ($(this).val() == 1) {
                                     $("#show_1").show();
                                 }
@@ -806,7 +815,7 @@
                             }
                     );
                     $("#martes").change(
-                            function() {
+                            function () {
                                 if ($(this).val() == 1) {
                                     $("#show_2").show();
                                 }
@@ -817,7 +826,7 @@
                             }
                     );
                     $("#miercoles").change(
-                            function() {
+                            function () {
                                 if ($(this).val() == 1) {
                                     $("#show_3").show();
                                 }
@@ -828,7 +837,7 @@
                             }
                     );
                     $("#jueves").change(
-                            function() {
+                            function () {
                                 if ($(this).val() == 1) {
                                     $("#show_4").show();
                                 }
@@ -839,7 +848,7 @@
                             }
                     );
                     $("#viernes").change(
-                            function() {
+                            function () {
                                 if ($(this).val() == 1) {
                                     $("#show_5").show();
                                 }
@@ -850,7 +859,7 @@
                             }
                     );
                     $("#sabado").change(
-                            function() {
+                            function () {
                                 if ($(this).val() == 1) {
                                     $("#show_6").show();
                                 }
@@ -861,7 +870,7 @@
                             }
                     );
                     $("#domingo").change(
-                            function() {
+                            function () {
                                 if ($(this).val() == 1) {
                                     $("#show_7").show();
                                 }
@@ -913,7 +922,7 @@
         }
         function listar_cc(num) {
             var select_cc = $(".select-cc");
-            $.post("../../centro_costo?opc=Listar_cc", function(objJson) {
+            $.post("../../centro_costo?opc=Listar_cc", function (objJson) {
                 //  select_cc.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -926,7 +935,7 @@
 
             });
             var cc_dir = $(".cc-dir" + num);
-            $.post("../../centro_costo?opc=Listar_dir", function(objJson) {
+            $.post("../../centro_costo?opc=Listar_dir", function (objJson) {
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
                     return;
@@ -937,9 +946,9 @@
                 }
             });
 
-            $(".cc-dir" + num).change(function() {
+            $(".cc-dir" + num).change(function () {
                 var cc_dep = $(".cc-dep" + num);
-                $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + $(this).val(), function(objJson) {
+                $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + $(this).val(), function (objJson) {
                     cc_dep.empty();
                     cc_dep.append("<option value=''>[DEPARTAMENTO]</option>");
                     if (objJson.rpta == -1) {
@@ -953,9 +962,9 @@
                 });
 
             });
-            $(".cc-dep" + num).change(function() {
+            $(".cc-dep" + num).change(function () {
                 var centro_costo = $(".centro_costo" + num);
-                $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + $(this).val(), function(objJson) {
+                $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + $(this).val(), function (objJson) {
                     centro_costo.empty();
                     centro_costo.append("<option value=''>[CENTRO COSTO]</option>");
                     if (objJson.rpta == -1) {
@@ -969,21 +978,21 @@
                 });
 
             });
-            $(".remover" + num).click(function() {
+            $(".remover" + num).click(function () {
                 $(".centro-costo_" + num).remove();
 
             });
         }
-        $(document).ready(function() {
+        $(document).ready(function () {
             listar_cc();
 
             $(".texto-h").keyup(
-                    function() {
+                    function () {
                         calcularHoras();
                     }
             );
             $("#horario").change(
-                    function() {
+                    function () {
                         if ($(this).val() == 0) {
                             $(".cont_lunes").hide();
                             $(".cont_martes").hide();
@@ -1086,7 +1095,7 @@
             );
         });</script>
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             //$("#sueldo").numeric();
             $("#sueldo").mask("99999.99", {placeholder: "0"});
@@ -1095,13 +1104,13 @@
             var scntDiv = $('#show_1');
             var i = $('#show_1 .texto-h').size() + 1;
             var s = $('#show_1 .tr-count').size() + 1;
-            $('#addScnt').click(function() {
+            $('#addScnt').click(function () {
                 $('<tr><td>T' + s + ' :</td><td><input type="text"   name="HORA_DESDE_lun' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_lun' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_lun' + i + '" value="lun" ><input type="hidden" name="USER_CREACION_lun' + i + '"> <a href="#" id="remScnt">-</a></td></tr>').appendTo(scntDiv);
                 i++;
                 s++;
                 return false;
             });
-            $('#remScnt').click(function() {
+            $('#remScnt').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -1112,18 +1121,18 @@
             });
         });
         //MARTES
-        $(function() {
+        $(function () {
             var scntDiv = $('#show_2');
             var i = $('#show_2 .texto-h').size() + 1;
             var s = $('#show_2 .tr-count_2').size() + 1;
-            $('#add_2').click(function() {
+            $('#add_2').click(function () {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_mar' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_mar' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_mar' + i + '" value="mar" ><input type="hidden" name="USER_CREACION_mar' + i + '"> <a href="#" id="remove_2">-</a></td></tr>').appendTo(scntDiv);
                 i++;
                 s++;
                 return false;
             });
-            $('#remove_2').click(function() {
+            $('#remove_2').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -1134,18 +1143,18 @@
             });
         });
         //MIERCOLES
-        $(function() {
+        $(function () {
             var scntDiv = $('#show_3');
             var i = $('#show_3 .texto-h').size() + 1;
             var s = $('#show_3 .tr-count_3').size() + 1;
-            $('#add_3').click(function() {
+            $('#add_3').click(function () {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_mie' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_mie' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_mie' + i + '" value="mie" ><input type="hidden" name="USER_CREACION_mie' + i + '"> <a href="#" id="remove_3">-</a></td></tr>').appendTo(scntDiv);
                 i++;
                 s++;
                 return false;
             });
-            $('#remove_3').click(function() {
+            $('#remove_3').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -1156,18 +1165,18 @@
             });
         });
         //JUEVES
-        $(function() {
+        $(function () {
             var scntDiv = $('#show_4');
             var i = $('#show_4 .texto-h').size() + 1;
             var s = $('#show_4 .tr-count_4').size() + 1;
-            $('#add_4').click(function() {
+            $('#add_4').click(function () {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_jue' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_jue' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_jue' + i + '" value="jue" ><input type="hidden" name="USER_CREACION_jue' + i + '"> <a href="#" id="remove_4">-</a></td></tr>').appendTo(scntDiv);
                 i++;
                 s++;
                 return false;
             });
-            $('#remove_4').click(function() {
+            $('#remove_4').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -1178,18 +1187,18 @@
             });
         });
         //VIERNES
-        $(function() {
+        $(function () {
             var scntDiv = $('#show_5');
             var i = $('#show_5 .texto-h').size() + 1;
             var s = $('#show_5 .tr-count_5').size() + 1;
-            $('#add_5').click(function() {
+            $('#add_5').click(function () {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_vie' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_vie' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_vie' + i + '" value="vie" ><input type="hidden" name="USER_CREACION_vie' + i + '"> <a href="#" id="remove_5">-</a></td></tr>').appendTo(scntDiv);
                 i++;
                 s++;
                 return false;
             });
-            $('#remove_5').click(function() {
+            $('#remove_5').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -1200,18 +1209,18 @@
             });
         });
         //DOMINGO
-        $(function() {
+        $(function () {
             var scntDiv = $('#show_6');
             var i = $('#show_6 .texto-h').size() + 1;
             var s = $('#show_6 .tr-count_6').size() + 1;
-            $('#add_6').click(function() {
+            $('#add_6').click(function () {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_dom' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_dom' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_dom' + i + '" value="dom" ><input type="hidden" name="USER_CREACION_dom' + i + '"> <a href="#" id="remove_6">-</a></td></tr>').appendTo(scntDiv);
                 i++;
                 s++;
                 return false;
             });
-            $('#remove_6').click(function() {
+            $('#remove_6').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -1300,7 +1309,7 @@
 
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             pageSetUp();
             var $checkoutForm = $('#checkout-form').validate({
@@ -1404,7 +1413,7 @@
                     }
                 },
                 // Do not change code below
-                errorPlacement: function(error, element) {
+                errorPlacement: function (error, element) {
                     error.insertAfter(element.parent());
                 }
             });
@@ -1472,7 +1481,7 @@
                     }
                 },
                 // Do not change code below
-                errorPlacement: function(error, element) {
+                errorPlacement: function (error, element) {
                     error.insertAfter(element.parent());
                 }
             });
@@ -1523,7 +1532,7 @@
                     }
                 },
                 // Do not change code below
-                errorPlacement: function(error, element) {
+                errorPlacement: function (error, element) {
                     error.insertAfter(element.parent());
                 }
             });
@@ -1561,15 +1570,15 @@
                     }
                 },
                 // Ajax form submition
-                submitHandler: function(form) {
+                submitHandler: function (form) {
                     $(form).ajaxSubmit({
-                        success: function() {
+                        success: function () {
                             $("#comment-form").addClass('submited');
                         }
                     });
                 },
                 // Do not change code below
-                errorPlacement: function(error, element) {
+                errorPlacement: function (error, element) {
                     error.insertAfter(element.parent());
                 }
             });
@@ -1602,15 +1611,15 @@
                     }
                 },
                 // Ajax form submition
-                submitHandler: function(form) {
+                submitHandler: function (form) {
                     $(form).ajaxSubmit({
-                        success: function() {
+                        success: function () {
                             $("#contact-form").addClass('submited');
                         }
                     });
                 },
                 // Do not change code below
-                errorPlacement: function(error, element) {
+                errorPlacement: function (error, element) {
                     error.insertAfter(element.parent());
                 }
             });
@@ -1638,7 +1647,7 @@
                     }
                 },
                 // Do not change code below
-                errorPlacement: function(error, element) {
+                errorPlacement: function (error, element) {
                     error.insertAfter(element.parent());
                 }
             });
@@ -1682,7 +1691,7 @@
                     }
                 },
                 // Do not change code below
-                errorPlacement: function(error, element) {
+                errorPlacement: function (error, element) {
                     error.insertAfter(element.parent());
                 }
             });
@@ -1691,7 +1700,7 @@
                 dateFormat: 'dd.mm.yy',
                 prevText: '<i class="fa fa-chevron-left"></i>',
                 nextText: '<i class="fa fa-chevron-right"></i>',
-                onSelect: function(selectedDate) {
+                onSelect: function (selectedDate) {
                     $('#finishdate').datepicker('option', 'minDate', selectedDate);
                 }
             });
@@ -1699,7 +1708,7 @@
                 dateFormat: 'dd.mm.yy',
                 prevText: '<i class="fa fa-chevron-left"></i>',
                 nextText: '<i class="fa fa-chevron-right"></i>',
-                onSelect: function(selectedDate) {
+                onSelect: function (selectedDate) {
                     $('#startdate').datepicker('option', 'maxDate', selectedDate);
                 }
             });
@@ -1712,7 +1721,7 @@
 
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             pageSetUp();
         })
@@ -1724,7 +1733,7 @@
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
         _gaq.push(['_trackPageview']);
-        (function() {
+        (function () {
             var ga = document.createElement('script');
             ga.type = 'text/javascript';
             ga.async = true;
