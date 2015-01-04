@@ -420,103 +420,15 @@
                                                     </div>
                                                     <div  class="row" id="centro-costo_1" >
                                                         <section class="col col-4"><label class="select" id="titu">Centro de Costo Nº 1:<select name="CENTRO_COSTOS_1" class="select-cc" required=""><option value="">[SELECCIONE]</option></select></label></section>
-                                                        <section class="col col-4"><label class="input" id="titu">%<input name="PORCENTAJE_1" max="100" maxlength="3" type="text" value="100"  class="porcentaje_cc"/></label></section>
-                                                        <section class="col col-4"><label class="btn"><button type="button" class="btn btn-default" id="btn-agregar-cc" >Agregar</button></label></section>
+                                                        <section class="col col-2"><label class="input" id="titu">%<input name="PORCENTAJE_1"  type="text" value="100"  class="porcentaje_cc"/></label></section>
+
+
+                                                        <section class="col col-2"><label class="btn"><button type="button" class="btn btn-default" id="btn-agregar-cc" >Agregar</button></label></section>
+                                                        <section class="col col-2"><label class="input" style="font-weight: bold;color:red;">% Total :<input  readonly="" name="TOTAL_PORCENTAJE" max="100" min="100" maxlength="3" type="text" class="total_porcentaje"  /></label></section>
                                                     </div>
                                                     <input type="hidden" value="1" name="numero" class="cant-input" />
 
                                                     <code class="ver"></code>
-                                                    <script type="text/javascript">
-                                                        $(document).ready(
-                                                                function () {
-                                                                    $("#no_cuen").hide();
-                                                                    $("#no_cuen_ban").hide();
-                                                                    $("#generar").hide();
-                                                                    $("#no_cuen_otros").hide();
-                                                                    var agregar = $('#fila-agregar');
-                                                                    var ag = $('#fila-agregar .porcentaje_cc').size() + 1;
-                                                                    var texto = "";
-                                                                    //  var r = "";
-                                                                    $('#btn-agregar-cc').click(function () {
-                                                                        texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + ag + ':</label>';
-                                                                        texto += '<div  class="row centro-costo_' + ag + '" >';
-                                                                        texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
-                                                                        texto += '<section class="col col-3"><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
-                                                                        texto += '<section class="col col-3"><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ag + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
-                                                                        texto += '<section class="col col-2"><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '"  min="0"   type="text" required="" class="porcentaje_cc"/><button type="button" class="remover' + ag + '">Remover</button></label></section>';
-                                                                        texto += '</div>';
-                                                                        agregar.append(texto);
-                                                                        listar_cc(ag);
-
-                                                                        var c_porcentaje = $(".porcentaje_cc").size();
-                                                                        $(".porcentaje_cc").val(Math.round((100 / c_porcentaje) * 100) / 100);
-                                                                        
-                                                                        $(".porcentaje_cc").change(function(){
-                                                                             var actual = $(this).val();
-                                                                             $(".porcentaje_cc").size()-1;
-                                                                        });
-                                                                        // alert($("#por_cen_costo").val());
-                                                                        //$(".ver").text(texto);
-                                                                        texto = "";
-                                                                        $(".cant-input").val(ag);
-
-                                                                        ag++;
-                                                                    });
-
-                                                                    $("#banco").change(function () {
-                                                                        if ($("#banco").val() == '1') {
-                                                                            $("#generar").hide();
-                                                                            $("#no_cuen").show();
-                                                                            $("#nu_cuen").val("");
-                                                                            $("#nu_cuen").attr("required", "required");
-                                                                            $("#no_cuen_ban").hide();
-                                                                            $("#nu_cuen_ban").val("");
-                                                                            $("#subscription").attr('checked', false);
-                                                                            $("#nu_cuen").attr("maxlength", "21");
-                                                                            $("#nu_cuen").mask("0011-9999999999999999", {placeholder: "X"});
-                                                                            $("#no_cuen_otros").hide();
-                                                                            $("#nu_cuen_otros").val("");
-                                                                        }
-                                                                        if ($("#banco").val() == '2') {
-                                                                            $("#generar").hide();
-                                                                            $("#subscription").attr('checked', false);
-                                                                            $("#no_cuen_ban").hide();
-                                                                            $("#nu_cuen_ban").val("");
-                                                                            $("#no_cuen").show();
-                                                                            $("#nu_cuen").val("");
-                                                                            $("#nu_cuen").attr("required", "required");
-                                                                            $("#nu_cuen").attr("maxlength", "14");
-                                                                            $("#nu_cuen").mask("99999999999999", {placeholder: "X"});
-                                                                            $("#no_cuen_otros").hide();
-                                                                            $("#nu_cuen_otros").val("");
-                                                                        }
-                                                                        if ($("#banco").val() == '3') {
-                                                                            $("#no_cuen").show();
-                                                                            $("#no_cuen").val("");
-                                                                            $("#nu_cuen").attr("required", "required");
-                                                                            $("#no_cuen_ban").show();
-                                                                            $("#no_cuen_ban").val("");
-                                                                            $("#nu_cuen_ban").attr("required", "required");
-                                                                            $("#no_cuen_otros").show();
-                                                                            $("#nu_cuen_otros").val("");
-                                                                            $("#nu_cuen_otros").attr("required", "required");
-                                                                            $("#generar").hide();
-                                                                            $("#subscription").attr('checked', false);
-                                                                        }
-                                                                        if ($("#banco").val() == '0') {
-                                                                            $("#no_cuen").hide();
-                                                                            $("#nu_cuen").val("");
-                                                                            $("#no_cuen_ban").hide();
-                                                                            $("#nu_cuen_ban").val("");
-                                                                            $("#no_cuen_otros").show();
-                                                                            $("#nu_cuen_otros").val("BBVA");
-                                                                            $("#generar").show();
-                                                                            $("#subscription").attr("required", "required");
-                                                                            $("#nu_cuen_otros").attr("required", "required");
-                                                                        }
-                                                                    });
-                                                                }
-                                                        );</script>
                                                     <input type="hidden" name="IDREQUERIMIENTO"  id="combito"  value="<%=idreq%>">
                                                     <div id="div_2" class="contenido" style="display: none">
                                                         <table  class="table">
@@ -792,6 +704,7 @@
         </div>
 
     </body>
+    
     <script language="javascript" type="text/javascript">
         $(document).ready(
                 function mostrar() {
@@ -945,7 +858,6 @@
                     cc_dir.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
                 }
             });
-
             $(".cc-dir" + num).change(function () {
                 var cc_dep = $(".cc-dep" + num);
                 $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + $(this).val(), function (objJson) {
@@ -960,7 +872,6 @@
                         cc_dep.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
                     }
                 });
-
             });
             $(".cc-dep" + num).change(function () {
                 var centro_costo = $(".centro_costo" + num);
@@ -976,16 +887,111 @@
                         centro_costo.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
                     }
                 });
-
             });
             $(".remover" + num).click(function () {
                 $(".centro-costo_" + num).remove();
+                 sumn_porcen_total();
 
             });
         }
-        $(document).ready(function () {
-            listar_cc();
+        function sumn_porcen_total() {
 
+                        var acum = 0;
+                        $.each($(".porcentaje_cc"), function () {
+                            acum = acum + parseFloat($(this).val());
+                        });
+                        $(".total_porcentaje").val(acum);
+                    }
+        $(document).ready(function () {
+            
+                    
+                    sumn_porcen_total();
+                    $("#no_cuen").hide();
+                    $("#no_cuen_ban").hide();
+                    $("#generar").hide();
+                    $("#no_cuen_otros").hide();
+                    var agregar = $('#fila-agregar');
+                    var ag = $('#fila-agregar .porcentaje_cc').size() + 1;
+                    var texto = "";
+
+                    //  var r = "";
+                    $('#btn-agregar-cc').click(function () {
+                        texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + ag + ':</label>';
+                        texto += '<div  class="row centro-costo_' + ag + '" >';
+                        texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
+                        texto += '<section class="col col-3"><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
+                        texto += '<section class="col col-3"><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ag + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
+                        texto += '<section class="col col-2"><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '"  min="0"   type="text" required="" class="porcentaje_cc"/><button type="button" class="remover' + ag + '">Remover</button></label></section>';
+                        texto += '</div>';
+                        agregar.append(texto);
+                        listar_cc(ag);
+                        var c_porcentaje = $(".porcentaje_cc").size();
+                        $(".porcentaje_cc").val(Math.round((100 / c_porcentaje) * 100) / 100);
+                        sumn_porcen_total();
+                        // alert($("#por_cen_costo").val());
+                        //$(".ver").text(texto);
+                        texto = "";
+                        $(".cant-input").val(ag);
+                        ag++;
+                        $(".porcentaje_cc").keyup(function () {
+                            sumn_porcen_total();
+                        });
+
+                    });
+                    $("#banco").change(function () {
+                        if ($("#banco").val() == '1') {
+                            $("#generar").hide();
+                            $("#no_cuen").show();
+                            $("#nu_cuen").val("");
+                            $("#nu_cuen").attr("required", "required");
+                            $("#no_cuen_ban").hide();
+                            $("#nu_cuen_ban").val("");
+                            $("#subscription").attr('checked', false);
+                            $("#nu_cuen").attr("maxlength", "21");
+                            $("#nu_cuen").mask("0011-9999999999999999", {placeholder: "X"});
+                            $("#no_cuen_otros").hide();
+                            $("#nu_cuen_otros").val("");
+                        }
+                        if ($("#banco").val() == '2') {
+                            $("#generar").hide();
+                            $("#subscription").attr('checked', false);
+                            $("#no_cuen_ban").hide();
+                            $("#nu_cuen_ban").val("");
+                            $("#no_cuen").show();
+                            $("#nu_cuen").val("");
+                            $("#nu_cuen").attr("required", "required");
+                            $("#nu_cuen").attr("maxlength", "14");
+                            $("#nu_cuen").mask("99999999999999", {placeholder: "X"});
+                            $("#no_cuen_otros").hide();
+                            $("#nu_cuen_otros").val("");
+                        }
+                        if ($("#banco").val() == '3') {
+                            $("#no_cuen").show();
+                            $("#no_cuen").val("");
+                            $("#nu_cuen").attr("required", "required");
+                            $("#no_cuen_ban").show();
+                            $("#no_cuen_ban").val("");
+                            $("#nu_cuen_ban").attr("required", "required");
+                            $("#no_cuen_otros").show();
+                            $("#nu_cuen_otros").val("");
+                            $("#nu_cuen_otros").attr("required", "required");
+                            $("#generar").hide();
+                            $("#subscription").attr('checked', false);
+                        }
+                        if ($("#banco").val() == '0') {
+                            $("#no_cuen").hide();
+                            $("#nu_cuen").val("");
+                            $("#no_cuen_ban").hide();
+                            $("#nu_cuen_ban").val("");
+                            $("#no_cuen_otros").show();
+                            $("#nu_cuen_otros").val("BBVA");
+                            $("#generar").show();
+                            $("#subscription").attr("required", "required");
+                            $("#nu_cuen_otros").attr("required", "required");
+                        }
+                    });
+            
+            listar_cc();
             $(".texto-h").keyup(
                     function () {
                         calcularHoras();
@@ -1057,7 +1063,6 @@
                             $("#show_5").show();
                             //    $("#show_6").show();
                             $("#show_7").hide();
-
                             $("#lunes").val(1);
                             $("#martes").val(1);
                             $("#miercoles").val(1);
