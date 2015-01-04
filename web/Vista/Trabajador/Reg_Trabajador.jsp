@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.model.Tipo_Documento"%>
 <%@page import="pe.edu.upeu.application.model.Via"%>
 <%@page import="pe.edu.upeu.application.model.Zona"%>
 <%@page import="pe.edu.upeu.application.model.Ub_Departamento"%>
@@ -19,6 +20,7 @@
 <jsp:useBean id="List_Situacion_Educativa" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_zona" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_via" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_tipo_doc" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html lang="en-us">
     <head>
@@ -79,7 +81,7 @@
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <script type="text/javascript">
             $(document).ready(
-                    function() {
+                    function () {
 
 
                         var tip = $("#pro_dir_l");
@@ -87,7 +89,7 @@
                         var rg = $("#dep_dir_l").val();
                         var data = "id_dep=" + rg + "&opc=dep_nac";
                         tip.append('<option value="">Cargando...</option>').val('');
-                        $.post("../../ubigeo", data, function(objJson) {
+                        $.post("../../ubigeo", data, function (objJson) {
                             tip.empty();
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
@@ -113,7 +115,7 @@
                         var rg = $("#pro_dir_l").val();
                         var data = "id_dist=" + rg + "&opc=pro_nac";
                         ti.append('<option value="">Cargando...</option>').val('');
-                        $.post("../../ubigeo", data, function(objJson) {
+                        $.post("../../ubigeo", data, function (objJson) {
                             ti.empty();
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
@@ -134,11 +136,12 @@
 
 
 
-                        $(".doc").attr("maxlength", "8");
-                        $(".doc").attr("minlength", "8");
-                        $(".doc").val("");
+                        $(".doc, .doc_c").attr("maxlength", "8");
+                        $(".doc, .doc_c").attr("minlength", "8");
+                        $(".doc, .doc_c").val("");
+
                         $("#nac").change(
-                                function() {
+                                function () {
                                     if ($("#nac").val() != "NAC-0193") {
                                         $("#dist").hide();
                                         $("#dist_nac").val("DST-001832");
@@ -152,7 +155,7 @@
                                 }
                         );
 
-                        $("#sit_edu").change(function() {
+                        $("#sit_edu").change(function () {
                             if ($("#sit_edu").val() == 'SED-0011' | $("#sit_edu").val() == 'SED-0013' | $("#sit_edu").val() == 'SED-0014'
                                     | $("#sit_edu").val() == 'SED-0015'
                                     | $("#sit_edu").val() == 'SED-0016' | $("#sit_edu").val() == 'SED-0017'
@@ -175,7 +178,7 @@
 
                         });
 
-                        $("#es_inst_p").change(function() {
+                        $("#es_inst_p").change(function () {
                             if ($("#inst_peru").val() == "1") {
                                 $("#regimen").show();
                                 $("#egreso").show();
@@ -194,28 +197,43 @@
                         });
 
                         $(".select-doc").change(
-                                function() {
+                                function () {
                                     $(".doc").val("");
                                     if ($(".select-doc").val() == 1) {
-                                        $("#doc").numeric(false, function() {
+                                        $("#doc").numeric(false, function () {
                                         });
                                         $(".doc").attr("maxlength", "8");
                                         $(".doc").attr("minlength", "8");
-                                        // $(".doc").val("");
 
                                     }
-                                    if ($(".select-doc").val() == 2) {
+                                    else {
 
                                         $("#doc").removeNumeric();
                                         $(".doc").attr("maxlength", "10");
                                         $(".doc").removeAttr("minlength");
                                         //    $(".doc").val("");
                                     }
-                                    if ($(".select-doc").val() == 3) {
-                                        $("#doc").removeNumeric();
-                                        $(".doc").attr("maxlength", "10");
-                                        $(".doc").removeAttr("minlength");
+
+                                }
+                        );
+                        $(".select-doc_c").change(
+                                function () {
+                                    $(".doc_c").val("");
+                                    if ($(".select-doc_c").val() == 1) {
+                                        $(".doc_c").numeric(false, function () {
+                                        });
+                                        $(".doc_c").attr("maxlength", "8");
+                                        $(".doc_c").attr("minlength", "8");
+
                                     }
+                                    else {
+
+                                        $(".doc_c").removeNumeric();
+                                        $(".doc_c").attr("maxlength", "10");
+                                        $(".doc_c").removeAttr("minlength");
+                                        //    $(".doc").val("");
+                                    }
+
                                 }
                         );
                     }
@@ -224,10 +242,10 @@
         <!--Alerta para la edad -->
         <script type="text/javascript">
             $(document).ready(
-                    function() {
+                    function () {
                         $(".alerta-req").hide();
                         $("#edad").change(
-                                function() {
+                                function () {
                                     $(".alerta-req").hide();
                                     var fecha = $("#edad").val();
                                     var fechaActual = new Date();
@@ -350,7 +368,7 @@
                                                                 <a href="#tab3" data-toggle="tab"> <span class="step">3</span> <span class="title">Aspecto Social</span> </a>
                                                             </li>
                                                             <li data-target="#step4">
-                                                                <a href="#tab4" data-toggle="tab"> <span class="step">4</span> <span class="title">Datos Adicionales</span> </a>
+                                                                <a href="#tab4" data-toggle="tab"> <span class="step">4</span> <span class="title">Datos Familiares</span> </a>
                                                             </li>
 
 
@@ -495,9 +513,19 @@
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select name="TIPO_DOC" class="form-control input-lg select-doc"  required="">
                                                                                 <option value="">[Tipo Documento]</option>
-                                                                                <option value="1" selected="selected" >DNI</option>
-                                                                                <option value="2">Carné de Extranjeria</option>
-                                                                                <option value="3">Pasaporte</option>
+
+                                                                                <%
+                                                                                    for (int h = 0; h < Listar_tipo_doc.size(); h++) {
+                                                                                        Tipo_Documento tdoc = new Tipo_Documento();
+                                                                                        tdoc = (Tipo_Documento) Listar_tipo_doc.get(h);
+                                                                                        if (tdoc.getId_tipo_doc_ident().trim().equals("1")) {
+                                                                                %>
+                                                                                <option selected="selected" value="<%=tdoc.getId_tipo_doc_ident()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
+                                                                                <%} else {%>
+
+                                                                                <option value="<%=tdoc.getId_tipo_doc_ident()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
+                                                                                <%}
+                                                                                    }%>
                                                                             </select>
 
                                                                         </div>
@@ -595,9 +623,9 @@
                                                             </div>
                                                             <script>
                                                                 $(document).ready(
-                                                                        function() {
+                                                                        function () {
                                                                             $("#sis_pens").change(
-                                                                                    function() {
+                                                                                    function () {
                                                                                         if ($("#sis_pens").val() != "1") {
                                                                                             $("#nom_afp").val("6");
                                                                                             $("#nom_afp").attr("disabled", true);
@@ -804,9 +832,9 @@
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select name="DIR_DOM_A_D1_ID" id="DOM_A_D1" class="form-control input-lg"  required="">
                                                                                 <option value="">[Seleccione Via]</option>
-                                                                                <%for(int i=0;i<Listar_via.size();i++){
-                                                                                Via zo=new Via();
-                                                                                zo=(Via)Listar_via.get(i);%>    
+                                                                                <%for (int i = 0; i < Listar_via.size(); i++) {
+                                                                                        Via zo = new Via();
+                                                                                        zo = (Via) Listar_via.get(i);%>    
                                                                                 <option value="<%=zo.getId_via()%>"><%=zo.getDe_via()%></option>
                                                                                 <%}%>
                                                                             </select>   
@@ -828,9 +856,9 @@
                                                                 </div>
                                                                 <script>
                                                                     $(document).ready(
-                                                                            function() {
+                                                                            function () {
                                                                                 $("#DOM_A_D3").change(
-                                                                                        function() {
+                                                                                        function () {
                                                                                             if ($("#DOM_A_D3").val() == "3") {
                                                                                                 $("#DOM_A_D4").val("Sin Numero");
                                                                                             } else {
@@ -841,7 +869,7 @@
                                                                                         }
                                                                                 );
                                                                                 $("#DOM_LEG_D3").change(
-                                                                                        function() {
+                                                                                        function () {
                                                                                             if ($("#DOM_LEG_D3").val() == "3") {
                                                                                                 $("#DOM_LEG_D4").val("Sin Numero");
                                                                                             } else {
@@ -852,7 +880,7 @@
                                                                                         }
                                                                                 );
                                                                                 $("#reli").change(
-                                                                                        function() {
+                                                                                        function () {
                                                                                             if ($("#reli").val() == "1") {
                                                                                                 $("#igle").attr("required", "required")
                                                                                             } else {
@@ -906,11 +934,11 @@
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select name="DIR_DOM_A_D5_ID" id="DOM_A_D5" class="form-control input-lg"  required="">
-                                                                                
+
                                                                                 <option value="">[Seleccione Zona]</option>
-                                                                                <%for(int i=0;i<Listar_zona.size();i++){
-                                                                                Zona zo=new Zona();
-                                                                                zo=(Zona)Listar_zona.get(i);%>    
+                                                                                <%for (int i = 0; i < Listar_zona.size(); i++) {
+                                                                                        Zona zo = new Zona();
+                                                                                        zo = (Zona) Listar_zona.get(i);%>    
                                                                                 <option value="<%=zo.getId_zona()%>"><%=zo.getDe_zona()%></option>
                                                                                 <%}%>
                                                                             </select>
@@ -1004,9 +1032,9 @@
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select name="DIR_DOM_LEG_D1_ID"  id="DOM_LEG_D1" class="form-control input-lg"  required="">
                                                                                 <option value="">[Seleccione Via]</option>
-                                                                               <%for(int i=0;i<Listar_via.size();i++){
-                                                                                Via zo=new Via();
-                                                                                zo=(Via)Listar_via.get(i);%>    
+                                                                                <%for (int i = 0; i < Listar_via.size(); i++) {
+                                                                                        Via zo = new Via();
+                                                                                        zo = (Via) Listar_via.get(i);%>    
                                                                                 <option value="<%=zo.getId_via()%>"><%=zo.getDe_via()%></option>
                                                                                 <%}%>
                                                                             </select>
@@ -1064,9 +1092,9 @@
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select name="DIR_DOM_LEG_D5_ID"  id="DOM_LEG_D5" class="form-control input-lg"  required="">
                                                                                 <option value="">[Seleccione Zona]</option>
-                                                                                <%for(int i=0;i<Listar_zona.size();i++){
-                                                                                Zona zo=new Zona();
-                                                                                zo=(Zona)Listar_zona.get(i);%>    
+                                                                                <%for (int i = 0; i < Listar_zona.size(); i++) {
+                                                                                        Zona zo = new Zona();
+                                                                                        zo = (Zona) Listar_zona.get(i);%>    
                                                                                 <option value="<%=zo.getId_zona()%>"><%=zo.getDe_zona()%></option>
                                                                                 <%}%>
                                                                             </select>
@@ -1131,11 +1159,6 @@
                                                                 </div>
 
                                                             </div>
-                                                        </div>
-
-
-                                                        <div class="tab-pane" id="tab4">
-                                                            <strong>Paso 4</strong><br> 
                                                             <h3>- Ingresos de Quinta Categoria</h3>
 
                                                             <div class="row">
@@ -1268,7 +1291,133 @@
 
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-suitcase fa-lg fa-fw"></i></span>
-                                                                            <textarea name="ING_QTA_CAT_OTRAS_EMPRESAS"  placeholder="Otras Empresas"  class="form-control input-lg"  cols="60" rows="6" maxlength="500" ></textarea>
+                                                                            <textarea  name="ING_QTA_CAT_OTRAS_EMPRESAS"  placeholder="Otras Empresas"  class="form-control input-lg"  cols="60" rows="6" maxlength="500" ></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="tab-pane" id="tab4">
+                                                            <br>
+                                                            <h3><strong>Paso 4</strong> - DATOS DE PADRE Y MADRE</h3>
+
+                                                            <div class="row">
+
+                                                                <div class="col-sm-6">
+
+                                                                    <div class="form-group">
+
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
+                                                                            <input type="text" class="form-control input-group-sm" name="APELLIDOS_NOMBRES_PADRE" placeholder="Apellidos y nombres del Padre" required="">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+
+                                                                    <div class="form-group">
+
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
+                                                                            <input type="text"  class="form-control input-group-sm" name="APELLIDOS_NOMBRES_MADRE" placeholder="Apellidos y nombre del Madre" required="">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <h3><strong>Paso 5</strong> - DATOS DEL CONYUGUE</h3>
+
+                                                            <div class="row"> 
+                                                                <div class="col-sm-3">
+
+                                                                    <div class="form-group">
+
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-male fa-lg fa-fw"></i></span>
+
+
+                                                                            <select name="TRABAJA_UPEU_CONYUGUE" required="" class="form-control input-group-sm select-conyugue" >
+                                                                                <option value="" selected=""  disabled="">¿Trabaja Upeu Conyugue?</option>
+                                                                                <option value="1">Si</option>
+                                                                                <option value="0">No</option>
+
+                                                                            </select> 
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3">
+
+                                                                    <div class="form-group">
+
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
+
+                                                                            <input type="text" name="APELLIDO_NOMBRES_CONYUGUE" placeholder="Apellidos y Nombres" required="" class="nom_c form-control input-group-sm" maxlength="110">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3">
+
+                                                                    <div class="form-group">
+
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-calendar fa-lg fa-fw"></i></span>
+
+                                                                            <input type="date" name="FECHA_NAC_CONYUGUE" placeholder="Fecha de Nacimiento dd/mm/yy" class="date f_nac form-control input-group-sm" required="">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3">
+
+                                                                    <div class="form-group">
+
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-file fa-lg fa-fw"></i></span>
+                                                                            <select name="TIPO_DOC_ID" required="" class="ti_documento form-control input-group-sm select-doc_c">
+                                                                                <option value="">[Tipo Documento]</option>
+
+                                                                                <%
+                                                                                    for (int h = 0; h < Listar_tipo_doc.size(); h++) {
+                                                                                        Tipo_Documento tdoc = new Tipo_Documento();
+                                                                                        tdoc = (Tipo_Documento) Listar_tipo_doc.get(h);
+                                                                                        if (tdoc.getId_tipo_doc_ident().trim().equals("1")) {
+                                                                                %>
+                                                                                <option selected="selected" value="<%=tdoc.getId_tipo_doc_ident()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
+                                                                                <%} else {%>
+
+                                                                                <option value="<%=tdoc.getId_tipo_doc_ident()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
+                                                                                <%}
+                                                                                    }%>
+                                                                            </select> 
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-file fa-lg fa-fw"></i></span>
+                                                                            <input type="text" name="NRO_DOC" placeholder="Nro de Documento" maxlength="10" class="num_doc form-control input-group-sm doc_c" required="">
+                                                                            <input type="hidden" class="cony"  name="CONYUGUE"/>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-file fa-lg fa-fw"></i></span>
+                                                                            <select name="INSCRIPCION_VIG_ESSALUD" required=""  class="form-control input-group-sm" >
+                                                                                <option value="" selected="" >[Inscripción Vigente en Essalud]</option>
+                                                                                <option value="1">Si</option>
+                                                                                <option value="0">No</option>
+
+                                                                            </select> 
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1316,219 +1465,6 @@
                         </article>
                         <!-- WIDGET END -->
 
-                        <!-- NEW WIDGET START -->
-                        <article class="col-sm-12 col-md-12 col-lg-6">
-
-                            <!-- Widget ID (each widget will need unique ID)-->
-                            <div class="jarviswidget" id="wid-id-2" data-widget-editbutton="false" data-widget-deletebutton="false" >
-                                <!-- widget options:
-                                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-                
-                                data-widget-colorbutton="false"
-                                data-widget-editbutton="false"
-                                data-widget-togglebutton="false"
-                                data-widget-deletebutton="false"
-                                data-widget-fullscreenbutton="false"
-                                data-widget-custombutton="false"
-                                data-widget-collapsed="true"
-                                data-widget-sortable="false"
-                
-                                -->
-                                <header>
-                                    <h2>Fuel Wizard </h2>
-
-                                </header>
-
-                                <!-- widget div-->
-                                <div>
-
-                                    <!-- widget edit box -->
-                                    <div class="jarviswidget-editbox">
-                                        <!-- This area used as dropdown edit box -->
-
-                                    </div>
-                                    <!-- end widget edit box -->
-
-                                    <!-- widget content -->
-                                    <div class="widget-body fuelux">
-
-                                        <div class="wizard">
-                                            <ul class="steps">
-                                                <li data-target="#step1" class="active">
-                                                    <span class="badge badge-info">1</span>Step 1<span class="chevron"></span>
-                                                </li>
-                                                <li data-target="#step2">
-                                                    <span class="badge">2</span>Step 2<span class="chevron"></span>
-                                                </li>
-                                                <li data-target="#step3">
-                                                    <span class="badge">3</span>Step 3<span class="chevron"></span>
-                                                </li>
-                                                <li data-target="#step4">
-                                                    <span class="badge">4</span>Step 4<span class="chevron"></span>
-                                                </li>
-                                                <li data-target="#step5">
-                                                    <span class="badge">5</span>Step 5<span class="chevron"></span>
-                                                </li>
-                                            </ul>
-                                            <div class="actions">
-                                                <button type="button" class="btn btn-sm btn-primary btn-prev">
-                                                    <i class="fa fa-arrow-left"></i>Prev
-                                                </button>
-                                                <button type="button" class="btn btn-sm btn-success btn-next" data-last="Finish">
-                                                    Next<i class="fa fa-arrow-right"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="step-content">
-                                            <form class="form-horizontal" id="fuelux-wizard" method="post" >
-
-                                                <div class="step-pane active" id="step1">
-                                                    <h3><strong>Step 1 </strong> - Validation states</h3>
-
-                                                    <!-- wizard form starts here -->
-                                                    <fieldset>
-
-                                                        <div class="form-group has-warning">
-                                                            <label class="col-md-2 control-label">Input warning</label>
-                                                            <div class="col-md-10">
-                                                                <div class="input-group">
-                                                                    <input class="form-control" type="text">
-                                                                    <span class="input-group-addon"><i class="fa fa-warning"></i></span>
-                                                                </div>
-                                                                <span class="help-block">Something may have gone wrong</span>
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group has-error">
-                                                            <label class="col-md-2 control-label">Input error</label>
-                                                            <div class="col-md-10">
-                                                                <div class="input-group">
-                                                                    <input class="form-control" type="text">
-                                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-remove-circle"></i></span>
-                                                                </div>
-                                                                <span class="help-block"><i class="fa fa-warning"></i> Please correct the error</span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group has-success">
-                                                            <label class="col-md-2 control-label">Input success</label>
-                                                            <div class="col-md-10">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-                                                                    <input class="form-control" type="text">
-                                                                    <span class="input-group-addon"><i class="fa fa-check"></i></span>
-                                                                </div>
-                                                                <span class="help-block">Something may have gone wrong</span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label class="control-label col-md-2">Input icon success</label>
-                                                            <div class="col-md-10">
-                                                                <div class="row">
-                                                                    <div class="col-sm-12">
-
-                                                                        <div class="input-icon-left">
-                                                                            <i class="fa txt-color-green fa-check"></i>
-                                                                            <input class="form-control" placeholder="Left Icon" type="text">
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </fieldset>
-
-                                                </div>
-
-                                                <div class="step-pane" id="step2">
-                                                    <h3><strong>Step 2 </strong> - Alerts</h3>
-
-                                                    <div class="alert alert-warning fade in">
-                                                        <button class="close" data-dismiss="alert">
-                                                            ×
-                                                        </button>
-                                                        <i class="fa-fw fa fa-warning"></i>
-                                                        <strong>Warning</strong> Your monthly traffic is reaching limit.
-                                                    </div>
-
-                                                    <div class="alert alert-success fade in">
-                                                        <button class="close" data-dismiss="alert">
-                                                            ×
-                                                        </button>
-                                                        <i class="fa-fw fa fa-check"></i>
-                                                        <strong>Success</strong> The page has been added.
-                                                    </div>
-
-                                                    <div class="alert alert-info fade in">
-                                                        <button class="close" data-dismiss="alert">
-                                                            ×
-                                                        </button>
-                                                        <i class="fa-fw fa fa-info"></i>
-                                                        <strong>Info!</strong> You have 198 unread messages.
-                                                    </div>
-
-                                                    <div class="alert alert-danger fade in">
-                                                        <button class="close" data-dismiss="alert">
-                                                            ×
-                                                        </button>
-                                                        <i class="fa-fw fa fa-times"></i>
-                                                        <strong>Error!</strong> The daily cronjob has failed.
-                                                    </div>
-
-                                                </div>
-
-                                                <div class="step-pane" id="step3">
-                                                    <h3><strong>Step 3 </strong> - Wizard continued</h3>
-                                                    <br>
-                                                    <br>
-                                                    <h1 class="text-center text-primary"> This will be your Step 3 </h1>
-                                                    <br>
-                                                    <br>
-                                                    <br>
-                                                    <br>
-                                                </div>
-
-                                                <div class="step-pane" id="step4">
-                                                    <h3><strong>Step 4 </strong> - Wizard continued...</h3>
-                                                    <br>
-                                                    <br>
-                                                    <h1 class="text-center text-danger"> This will be your Step 4 </h1>
-                                                    <br>
-                                                    <br>
-                                                    <br>
-                                                    <br>
-                                                </div>
-
-                                                <div class="step-pane" id="step5">
-                                                    <h3><strong>Step 5 </strong> - Finished!</h3>
-                                                    <br>
-                                                    <br>
-                                                    <h1 class="text-center text-success"><i class="fa fa-check"></i> Congratulations!
-                                                        <br>
-                                                        <small>Click finish to end wizard</small></h1>
-                                                    <br>
-                                                    <br>
-                                                    <br>
-                                                    <br>
-                                                </div>
-
-                                            </form>
-                                        </div>
-
-                                    </div>
-                                    <!-- end widget content -->
-
-                                </div>
-                                <!-- end widget div -->
-
-                            </div>
-                            <!-- end widget -->
-
-                        </article>
-                        <!-- WIDGET END -->
 
                     </div>
 
@@ -1537,515 +1473,684 @@
                 </section>
                 <!-- end widget grid -->
 
+
             </div>
             <!-- END MAIN CONTENT -->
 
         </div>
-        <!-- END MAIN PANEL -->
+    <center>                                                                       <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Encontrar Conyugue</h4>
+                    </div>
+                    <div class="modal-body">
 
+                        <div class="row">
+                            <div id="contenido">
+                                <div >
 
-        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
+                                    <form class="form-inline" id="frm_filtro" method="post" name="formulario"  >
 
-        <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-        <script>
-                                                                    if (!window.jQuery) {
-                                                                        document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
-                                                                    }
-        </script>
+                                        <div class="row">
+                                            <div class="form-group" >
+                                                <label class="control-label" >Nombres</label><br>
+                                                <input type="text"  class="form-control"  name="nom" maxlength="80" >
+                                            </div>
+                                            <div class="form-group" >
+                                                <label class="control-label" >Apellido Paterno</label><br>
+                                                <input type="text"  class="form-control"  name="ap_pa" maxlength="80">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label" >Apellido Materno</label><br>
+                                                <input type="text"  class="form-control"  name="ap_ma" maxlength="80" >
+                                            </div>
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-        <script>
-                                                                    if (!window.jQuery.ui) {
-                                                                        document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                                                                    }
-        </script>
+                                            <div class="form-group">
+                                                <label class="control-label" >DNI:</label><br>
+                                                <input type="text"  class="form-control"  onKeyPress="return checkIt(event)"   name="dni" maxlength="8">
+                                            </div>
+                                        </div>
 
-        <!-- IMPORTANT: APP CONFIG -->
-        <script src="../../js/app.config.js"></script>
+                                        <div class="row">
 
-        <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
-        <script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
+                                            <div class="form-group">                            
+                                                <button type="button" class="btn btn-primary" id="btnfiltrar" >Buscar</button>
+                                            </div>
+                                            <div class="form-group">  
+                                                <a href="javascript:;"  id="btncancel" class="btn btn-primary" >Cancelar</a>
+                                            </div>
 
-        <!-- BOOTSTRAP JS -->
-        <script src="../../js/bootstrap/bootstrap.min.js"></script>
+                                        </div>
 
-        <!-- CUSTOM NOTIFICATION -->
-        <script src="../../js/notification/SmartNotification.min.js"></script>
+                                    </form>
 
-        <!-- JARVIS WIDGETS -->
-        <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
+                                </div> 
 
-        <!-- EASY PIE CHARTS -->
-        <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+                                <hr/>
 
-        <!-- SPARKLINES -->
-        <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
+                                <table  id="data"  >
+                                    <thead class="tab_cabe">
+                                        <tr>
+                                            <td><span title="NOMBRE_AP">Nombres y Apellidos</span></td>
+                                            <td><span  >DNI</span></td>
+                                            <td></td>
 
-        <!-- JQUERY VALIDATE -->
-        <script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
+                                        </tr>
+                                    </thead>
 
-        <!-- JQUERY MASKED INPUT -->
-        <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+                                    <tbody class="tbodys">
+                                    </tbody>
+                                </table>
 
-        <!-- JQUERY SELECT2 INPUT -->
-        <script src="../../js/plugin/select2/select2.min.js"></script>
-
-        <!-- JQUERY UI + Bootstrap Slider -->
-        <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
-
-        <!-- browser msie issue fix -->
-        <script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
-
-        <!-- FastClick: For mobile devices -->
-        <script src="../../js/plugin/fastclick/fastclick.min.js"></script>
-
-        <!--[if IE 8]>
-        
-        <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
-        
-        <![endif]-->
-
-        <!-- Demo purpose only -->
-        <script src="../../js/demo.min.js"></script>
-
-        <!-- MAIN APP JS FILE -->
-        <script src="../../js/app.min.js"></script>
-
-        <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
-        <!-- Voice command : plugin -->
-        <script src="../../js/speech/voicecommand.min.js"></script>
-
-        <!-- PAGE RELATED PLUGIN(S) -->
-        <script src="../../js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
-        <script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
-        <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
-
-        <script type="text/javascript">
-
-                                                                    // DO NOT REMOVE : GLOBAL FUNCTIONS!
-
-                                                                    $(document).ready(function() {
-
-                                                                        pageSetUp();
+                            </div>
+                        </div>
 
 
 
-                                                                        //Bootstrap Wizard Validations
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-salir-busc"  data-dismiss="modal">Salir</button>
 
-                                                                        var $validator = $("#wizard-1").validate({
-                                                                            rules: {
-                                                                                email: {
-                                                                                    required: true,
-                                                                                    email: "Your email address must be in the format of name@domain.com"
-                                                                                },
-                                                                                fname: {
-                                                                                    required: true
-                                                                                },
-                                                                                lname: {
-                                                                                    required: true
-                                                                                },
-                                                                                country: {
-                                                                                    required: true
-                                                                                },
-                                                                                city: {
-                                                                                    required: true
-                                                                                },
-                                                                                postal: {
-                                                                                    required: true,
-                                                                                    minlength: 4
-                                                                                },
-                                                                                wphone: {
-                                                                                    required: true,
-                                                                                    minlength: 10
-                                                                                },
-                                                                                hphone: {
-                                                                                    required: true,
-                                                                                    minlength: 10
-                                                                                }
-                                                                            },
-                                                                            messages: {
-                                                                                fname: "Please specify your First name",
-                                                                                lname: "Please specify your Last name",
-                                                                                email: {
-                                                                                    required: "We need your email address to contact you",
-                                                                                    email: "Your email address must be in the format of name@domain.com"
-                                                                                }
-                                                                            },
-                                                                            highlight: function(element) {
-                                                                                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-                                                                            },
-                                                                            unhighlight: function(element) {
-                                                                                $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
-                                                                            },
-                                                                            errorElement: 'span',
-                                                                            errorClass: 'help-block',
-                                                                            errorPlacement: function(error, element) {
-                                                                                if (element.parent('.input-group').length) {
-                                                                                    error.insertAfter(element.parent());
-                                                                                } else {
-                                                                                    error.insertAfter(element);
-                                                                                }
-                                                                            }
-                                                                        });
-
-                                                                        $('#bootstrap-wizard-1').bootstrapWizard({
-                                                                            'tabClass': 'form-wizard',
-                                                                            'onNext': function(tab, navigation, index) {
-                                                                                var $valid = $("#wizard-1").valid();
-                                                                                if (!$valid) {
-                                                                                    $validator.focusInvalid();
-                                                                                    return false;
-                                                                                } else {
-                                                                                    $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass(
-                                                                                            'complete');
-                                                                                    $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).find('.step')
-                                                                                            .html('<i class="fa fa-check"></i>');
-                                                                                }
-                                                                            }
-                                                                        });
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <button  data-toggle="modal" data-target="#myModal" id="btn-mostrar" hidden="">
+            Launch demo modal
+        </button>
+    </center>
+    <!-- END MAIN PANEL -->
 
 
-                                                                        // fuelux wizard
-                                                                        var wizard = $('.wizard').wizard();
+    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+    <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
 
-                                                                        wizard.on('finished', function(e, data) {
-                                                                            //$("#fuelux-wizard").submit();
-                                                                            //console.log("submitted!");
-                                                                            $.smallBox({
-                                                                                title: "Congratulations! Your form was submitted",
-                                                                                content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
-                                                                                color: "#5F895F",
-                                                                                iconSmall: "fa fa-check bounce animated",
-                                                                                timeout: 4000
-                                                                            });
+    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script>
+                                                    if (!window.jQuery) {
+                                                        document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                                                    }
+    </script>
 
-                                                                        });
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script>
+                                                    if (!window.jQuery.ui) {
+                                                        document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                                                    }
+    </script>
+
+    <!-- IMPORTANT: APP CONFIG -->
+    <script src="../../js/app.config.js"></script>
+
+    <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
+    <script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
+
+    <!-- BOOTSTRAP JS -->
+    <script src="../../js/bootstrap/bootstrap.min.js"></script>
+
+    <!-- CUSTOM NOTIFICATION -->
+    <script src="../../js/notification/SmartNotification.min.js"></script>
+
+    <!-- JARVIS WIDGETS -->
+    <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
+
+    <!-- EASY PIE CHARTS -->
+    <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+
+    <!-- SPARKLINES -->
+    <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
+
+    <!-- JQUERY VALIDATE -->
+    <script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
+
+    <!-- JQUERY MASKED INPUT -->
+    <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+
+    <!-- JQUERY SELECT2 INPUT -->
+    <script src="../../js/plugin/select2/select2.min.js"></script>
+
+    <!-- JQUERY UI + Bootstrap Slider -->
+    <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+
+    <!-- browser msie issue fix -->
+    <script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+
+    <!-- FastClick: For mobile devices -->
+    <script src="../../js/plugin/fastclick/fastclick.min.js"></script>
+
+    <!--[if IE 8]>
+    
+    <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+    
+    <![endif]-->
+
+    <!-- Demo purpose only -->
+    <script src="../../js/demo.min.js"></script>
+
+    <!-- MAIN APP JS FILE -->
+    <script src="../../js/app.min.js"></script>
+
+    <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
+    <!-- Voice command : plugin -->
+    <script src="../../js/speech/voicecommand.min.js"></script>
+
+    <!-- PAGE RELATED PLUGIN(S) -->
+    <script src="../../js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+    <script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
+    <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
+
+    <script type="text/javascript">
+
+                                                    // DO NOT REMOVE : GLOBAL FUNCTIONS!
+
+                                                    $(document).ready(function () {
+
+                                                        pageSetUp();
 
 
-                                                                    })
 
-        </script>
+                                                        //Bootstrap Wizard Validations
 
-        <!-- Your GOOGLE ANALYTICS CODE Below -->
-        <script type="text/javascript">
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-            _gaq.push(['_trackPageview']);
+                                                        var $validator = $("#wizard-1").validate({
+                                                            rules: {
+                                                                email: {
+                                                                    required: true,
+                                                                    email: "Your email address must be in the format of name@domain.com"
+                                                                },
+                                                                fname: {
+                                                                    required: true
+                                                                },
+                                                                lname: {
+                                                                    required: true
+                                                                },
+                                                                country: {
+                                                                    required: true
+                                                                },
+                                                                city: {
+                                                                    required: true
+                                                                },
+                                                                postal: {
+                                                                    required: true,
+                                                                    minlength: 4
+                                                                },
+                                                                wphone: {
+                                                                    required: true,
+                                                                    minlength: 10
+                                                                },
+                                                                hphone: {
+                                                                    required: true,
+                                                                    minlength: 10
+                                                                }
+                                                            },
+                                                            messages: {
+                                                                fname: "Please specify your First name",
+                                                                lname: "Please specify your Last name",
+                                                                email: {
+                                                                    required: "We need your email address to contact you",
+                                                                    email: "Your email address must be in the format of name@domain.com"
+                                                                }
+                                                            },
+                                                            highlight: function (element) {
+                                                                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                                                            },
+                                                            unhighlight: function (element) {
+                                                                $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+                                                            },
+                                                            errorElement: 'span',
+                                                            errorClass: 'help-block',
+                                                            errorPlacement: function (error, element) {
+                                                                if (element.parent('.input-group').length) {
+                                                                    error.insertAfter(element.parent());
+                                                                } else {
+                                                                    error.insertAfter(element);
+                                                                }
+                                                            }
+                                                        });
 
-            (function() {
-                var ga = document.createElement('script');
-                ga.type = 'text/javascript';
-                ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(ga, s);
-            })();
+                                                        $('#bootstrap-wizard-1').bootstrapWizard({
+                                                            'tabClass': 'form-wizard',
+                                                            'onNext': function (tab, navigation, index) {
+                                                                var $valid = $("#wizard-1").valid();
+                                                                if (!$valid) {
+                                                                    $validator.focusInvalid();
+                                                                    return false;
+                                                                } else {
+                                                                    $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass(
+                                                                            'complete');
+                                                                    $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).find('.step')
+                                                                            .html('<i class="fa fa-check"></i>');
+                                                                }
+                                                            }
+                                                        });
 
-        </script>
 
-        <!--Solo numeros -->
-        <script type="text/javascript">
-            $("#docs").numeric();
-            $("#doc").numeric(false, function() {
-                alert("Solo Numeros Enteros");
-                this.value = "";
-                this.focus();
+                                                        // fuelux wizard
+                                                        var wizard = $('.wizard').wizard();
+
+                                                        wizard.on('finished', function (e, data) {
+                                                            //$("#fuelux-wizard").submit();
+                                                            //console.log("submitted!");
+                                                            $.smallBox({
+                                                                title: "Congratulations! Your form was submitted",
+                                                                content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
+                                                                color: "#5F895F",
+                                                                iconSmall: "fa fa-check bounce animated",
+                                                                timeout: 4000
+                                                            });
+
+                                                        });
+
+
+                                                    })
+
+    </script>
+
+    <!-- Your GOOGLE ANALYTICS CODE Below -->
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+
+    <!--Solo numeros -->
+    <script type="text/javascript">
+        $("#docs, .doc_c").numeric();
+        $("#doc, .doc_c").numeric(false, function () {
+            alert("Solo Numeros Enteros");
+            this.value = "";
+            this.focus();
+        });
+        $(".positive").numeric({negative: false}, function () {
+            alert("No negative values");
+            this.value = "";
+            this.focus();
+        });
+        $(".positive-integer").numeric({decimal: false, negative: false}, function () {
+            alert("Positive integers only");
+            this.value = "";
+            this.focus();
+        });
+
+        $("#remove").click(
+                function (e)
+                {
+                    e.preventDefault();
+                    $(".numeric,.integer,.positive").removeNumeric();
+                }
+        );
+    </script>
+
+    <!--boton duplicar-->
+    <script>
+        function  duplicar() {
+
+            var DAD1 = $("#DOM_A_D1").val();
+            var DAD2 = $("#DOM_A_D2").val();
+            var DAD3 = $("#DOM_A_D3").val();
+            var DAD4 = $("#DOM_A_D4").val();
+            var DAD5 = $("#DOM_A_D5").val();
+            var DAD6 = $("#DOM_A_D6").val();
+
+            var DEP_A = $("#dep_dir_a").val();
+
+
+            var DADIS = $("#DOM_A_DISTRITO").val();
+            var PRO_ACT = $("#pro_dir_a").val();
+
+            $("#DOM_LEG_D1").val(DAD1);
+            $("#DOM_LEG_D2").val(DAD2);
+            $("#DOM_LEG_D3").val(DAD3);
+            $("#DOM_LEG_D4").val(DAD4);
+            $("#DOM_LEG_D5").val(DAD5);
+            $("#DOM_LEG_D6").val(DAD6);
+            $("#DOM_LEG_DISTRITO").val(DADIS);
+            $("#dep_dir_l").val(DEP_A);
+            $("#pro_dir_l").val(PRO_ACT);
+
+        }
+
+
+    </script>
+    <!--Select dinamicos-->
+    <script type="text/javascript">
+        /*Ubigeo*/
+        $("#dep_nac").change(function () {
+            var ti = $("#pro_nac");
+            ti.empty();
+            var rg = $("#dep_nac").val();
+            var data = "id_dep=" + rg + "&opc=dep_nac";
+            ti.append('<option value="">Cargando...</option>').val('');
+            $.post("../../ubigeo", data, function (objJson) {
+                ti.empty();
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                if (lista.length > 0) {
+                    ti.append("<option value=''>[Seleccione]</option>");
+                } else {
+                    ti.append("<option value=''>[]</option>");
+                }
+                for (var i = 0; i < lista.length; i++) {
+                    var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                    ti.append(item);
+                }
             });
-            $(".positive").numeric({negative: false}, function() {
-                alert("No negative values");
-                this.value = "";
-                this.focus();
+        });
+        $("#pro_nac").change(function () {
+            var ti = $("#dist_nac");
+            ti.empty();
+            var rg = $("#pro_nac").val();
+            var data = "id_dist=" + rg + "&opc=pro_nac";
+            ti.append('<option value="">Cargando...</option>').val('');
+            $.post("../../ubigeo", data, function (objJson) {
+                ti.empty();
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                if (lista.length > 0) {
+                    ti.append("<option value=''>[Seleccione]</option>");
+                } else {
+                    ti.append("<option value=''>[]</option>");
+                }
+                for (var i = 0; i < lista.length; i++) {
+                    var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                    ti.append(item);
+                }
             });
-            $(".positive-integer").numeric({decimal: false, negative: false}, function() {
-                alert("Positive integers only");
-                this.value = "";
-                this.focus();
+        });
+        $("#dep_dir_a").change(function () {
+            var ti = $("#pro_dir_a");
+            ti.empty();
+            var rg = $("#dep_dir_a").val();
+            var data = "id_dep=" + rg + "&opc=dep_nac";
+            ti.append('<option value="">Cargando...</option>').val('');
+            $.post("../../ubigeo", data, function (objJson) {
+                ti.empty();
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                if (lista.length > 0) {
+                    ti.append("<option value=''>[Seleccione]</option>");
+                } else {
+                    ti.append("<option value=''>[]</option>");
+                }
+                for (var i = 0; i < lista.length; i++) {
+                    var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                    ti.append(item);
+                }
+            });
+        });
+        $("#pro_dir_a").change(function () {
+            var ti = $("#DOM_A_DISTRITO");
+            ti.empty();
+            var rg = $("#pro_dir_a").val();
+            var data = "id_dist=" + rg + "&opc=pro_nac";
+            ti.append('<option value="">Cargando...</option>').val('');
+            $.post("../../ubigeo", data, function (objJson) {
+                ti.empty();
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                if (lista.length > 0) {
+                    ti.append("<option value=''>[Seleccione]</option>");
+                } else {
+                    ti.append("<option value=''>[]</option>");
+                }
+                for (var i = 0; i < lista.length; i++) {
+                    var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                    ti.append(item);
+                }
+            });
+        });
+        $("#dep_dir_l").change(function () {
+            var ti = $("#pro_dir_l");
+            ti.empty();
+            var rg = $("#dep_dir_l").val();
+            var data = "id_dep=" + rg + "&opc=dep_nac";
+            ti.append('<option value="">Cargando...</option>').val('');
+            $.post("../../ubigeo", data, function (objJson) {
+                ti.empty();
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                if (lista.length > 0) {
+                    ti.append("<option value=''>[Seleccione]</option>");
+                } else {
+                    ti.append("<option value=''>[]</option>");
+                }
+                for (var i = 0; i < lista.length; i++) {
+                    var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                    ti.append(item);
+                }
+            });
+        });
+        $("#pro_dir_l").change(function () {
+            var ti = $("#DOM_LEG_DISTRITO");
+            ti.empty();
+            var rg = $("#pro_dir_l").val();
+            var data = "id_dist=" + rg + "&opc=pro_nac";
+            ti.append('<option value="">Cargando...</option>').val('');
+            $.post("../../ubigeo", data, function (objJson) {
+                ti.empty();
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                if (lista.length > 0) {
+                    ti.append("<option value=''>[Seleccione]</option>");
+                } else {
+                    ti.append("<option value=''>[]</option>");
+                }
+                for (var i = 0; i < lista.length; i++) {
+                    var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                    ti.append(item);
+                }
+            });
+        });
+
+
+
+
+        /*Datos Academicos*/
+        $("#rg").change(function () {
+            var ti = $("#ti_inst");
+            ti.empty();
+            var rg = $("#rg").val();
+            var data = "regimen=" + rg + "&opc=ti_inst";
+
+            ti.append('<option value="">Cargando...</option>').val('');
+            $.post("../../detalle_carrera", data, function (objJson) {
+                ti.empty();
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                if (lista.length > 0) {
+                    ti.append("<option value=''>[Seleccione]</option>");
+                } else {
+                    ti.append("<option value=''>[]</option>");
+                }
+                for (var i = 0; i < lista.length; i++) {
+                    var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                    ti.append(item);
+                }
+            });
+        });
+
+
+        $("#ti_inst").change(function () {
+            var inst = $("#inst");
+            inst.empty();
+            var ti = $("#ti_inst").val();
+            /* if (sucursal == '000') {
+             return;
+             }*/
+            var data = "ti=" + ti + "&opc=institucion";
+            inst.append('<option value="">Cargando...</option>').val('');
+            $.post("../../detalle_carrera", data, function (objJson) {
+                inst.empty();
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                if (lista.length > 0) {
+                    inst.append("<option value='0'>[Seleccione]</option>");
+                } else {
+                    inst.append("<option value='0'>[]</option>");
+                }
+                for (var i = 0; i < lista.length; i++) {
+                    var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                    inst.append(item);
+                }
+            });
+        });
+        $("#inst").change(function () {
+            var carr = $("#carrera");
+            carr.empty();
+            var insti = $("#inst").val();
+            /* if (sucursal == '000') {
+             return;
+             }*/
+            var data = "inst=" + insti + "&opc=carrera";
+            carr.append('<option value="">Cargando...</option>').val('');
+            $.post("../../detalle_carrera", data, function (objJson) {
+                carr.empty();
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                if (lista.length > 0) {
+                    carr.append("<option value='0'>[Seleccione]</option>");
+                } else {
+                    carr.append("<option value='0'>[]</option>");
+                }
+                for (var i = 0; i < lista.length; i++) {
+                    var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                    carr.append(item);
+                }
+            });
+        });
+        /*$("#cboCuenta").change(function() {
+         var cuenta = $("#cboCuenta").val();
+         if (cuenta == "0") {
+         return;
+         }
+         alert("Cuenta: " + cuenta);
+         });*/
+    </script>
+    <script>
+        $(document).ready(function () {
+            var b = $(".tbodys");
+
+            $("#btnfiltrar").click(
+                    function () {
+
+
+                        $.post("../../ajax/Ajax_Conyugue/Ajax_Busc_Conyug.jsp", $("#frm_filtro").serialize(), function (objJson) {
+                            b.empty();
+                            var list = objJson.lista;
+                            for (var i = 0; i < list.length; i++) {
+                                b.append("<tr>");
+                                b.append("<td>" + list[i].NOM + " " + list[i].AP_PA + " " + list[i].AP_MA + "</td>");
+                                b.append("<td>" + list[i].NU_DOC + "</td>");
+                                b.append("<input type ='hidden' class='trab_" + i + "' value='" + list[i].ID_TRAB + "' />");
+                                b.append("<input type ='hidden' class='nac_" + i + "' value='" + list[i].NAC + "' />");
+                                b.append("<input type ='hidden' class='dni_" + i + "' value='" + list[i].NU_DOC + "' />");
+                                b.append("<input type ='hidden' class='tipo_" + i + "' value='" + list[i].TIPO + "' />");
+                                b.append("<input type ='hidden' class='nom_ape_" + i + "' value='" + list[i].NOM + " " + list[i].AP_PA + " " + list[i].AP_MA + "' />");
+                                b.append('<td><button type="button" class="btn btn-primary btn-add-conyugue" value="' + i + '" data-dismiss="modal">Agregar</button></td>');
+
+                                b.append("</tr>");
+
+                            }
+
+                            $(".btn-add-conyugue").click(function () {
+                                var v = $(this).val();
+                                $(".nom_c").val($(".nom_ape_" + v).val());
+                                $(".f_nac").val($(".nac_" + v).val());
+                                $(".ti_documento").val($(".tipo_" + v).val());
+                                $(".num_doc").val($(".dni_" + v).val());
+                                $(".cony").val($(".trab_" + v).val());
+
+
+
+
+                                //$(".select-conyugue").val("1");
+                            });
+                        }
+                        );
+
+
+
+                    });
+            $(".btn-salir-busc, .close").click(function () {
+
+                $(".select-conyugue").val("0");
             });
 
-            $("#remove").click(
-                    function(e)
-                    {
-                        e.preventDefault();
-                        $(".numeric,.integer,.positive").removeNumeric();
-                    }
-            );
-        </script>
 
-        <!--boton duplicar-->
-        <script>
-            function  duplicar() {
+            $(".select-conyugue").change(function () {
+                if ($(this).val() == "1") {
+                    $("#btn-mostrar").click();
+                }
+                if ($(this).val() == "0") {
+                    $(".nom_c").val("");
+                    $(".f_nac").val("");
+                    $(".ti_documento").val("");
+                    $(".num_doc").val("");
+                    $(".cony").val("");
 
-                var DAD1 = $("#DOM_A_D1").val();
-                var DAD2 = $("#DOM_A_D2").val();
-                var DAD3 = $("#DOM_A_D3").val();
-                var DAD4 = $("#DOM_A_D4").val();
-                var DAD5 = $("#DOM_A_D5").val();
-                var DAD6 = $("#DOM_A_D6").val();
-
-                var DEP_A = $("#dep_dir_a").val();
-
-
-                var DADIS = $("#DOM_A_DISTRITO").val();
-                var PRO_ACT = $("#pro_dir_a").val();
-
-                $("#DOM_LEG_D1").val(DAD1);
-                $("#DOM_LEG_D2").val(DAD2);
-                $("#DOM_LEG_D3").val(DAD3);
-                $("#DOM_LEG_D4").val(DAD4);
-                $("#DOM_LEG_D5").val(DAD5);
-                $("#DOM_LEG_D6").val(DAD6);
-                $("#DOM_LEG_DISTRITO").val(DADIS);
-                $("#dep_dir_l").val(DEP_A);
-                $("#pro_dir_l").val(PRO_ACT);
+                }
 
             }
+            );
+            $("#btncancel").click(
+                    function () {
+                        document.formulario.reset();
+                        b.empty();
+                        html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'
+                        $(".tbodys").html(html);
+                    }
+            );
+
+        }
+        );
 
 
-        </script>
-        <!--Select dinamicos-->
-        <script type="text/javascript">
-            /*Ubigeo*/
-            $("#dep_nac").change(function() {
-                var ti = $("#pro_nac");
-                ti.empty();
-                var rg = $("#dep_nac").val();
-                var data = "id_dep=" + rg + "&opc=dep_nac";
-                ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
-                    ti.empty();
-                    if (objJson.rpta == -1) {
-                        alert(objJson.mensaje);
-                        return;
-                    }
-                    var lista = objJson.lista;
-                    if (lista.length > 0) {
-                        ti.append("<option value=''>[Seleccione]</option>");
-                    } else {
-                        ti.append("<option value=''>[]</option>");
-                    }
-                    for (var i = 0; i < lista.length; i++) {
-                        var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                        ti.append(item);
-                    }
-                });
-            });
-            $("#pro_nac").change(function() {
-                var ti = $("#dist_nac");
-                ti.empty();
-                var rg = $("#pro_nac").val();
-                var data = "id_dist=" + rg + "&opc=pro_nac";
-                ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
-                    ti.empty();
-                    if (objJson.rpta == -1) {
-                        alert(objJson.mensaje);
-                        return;
-                    }
-                    var lista = objJson.lista;
-                    if (lista.length > 0) {
-                        ti.append("<option value=''>[Seleccione]</option>");
-                    } else {
-                        ti.append("<option value=''>[]</option>");
-                    }
-                    for (var i = 0; i < lista.length; i++) {
-                        var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                        ti.append(item);
-                    }
-                });
-            });
-            $("#dep_dir_a").change(function() {
-                var ti = $("#pro_dir_a");
-                ti.empty();
-                var rg = $("#dep_dir_a").val();
-                var data = "id_dep=" + rg + "&opc=dep_nac";
-                ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
-                    ti.empty();
-                    if (objJson.rpta == -1) {
-                        alert(objJson.mensaje);
-                        return;
-                    }
-                    var lista = objJson.lista;
-                    if (lista.length > 0) {
-                        ti.append("<option value=''>[Seleccione]</option>");
-                    } else {
-                        ti.append("<option value=''>[]</option>");
-                    }
-                    for (var i = 0; i < lista.length; i++) {
-                        var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                        ti.append(item);
-                    }
-                });
-            });
-            $("#pro_dir_a").change(function() {
-                var ti = $("#DOM_A_DISTRITO");
-                ti.empty();
-                var rg = $("#pro_dir_a").val();
-                var data = "id_dist=" + rg + "&opc=pro_nac";
-                ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
-                    ti.empty();
-                    if (objJson.rpta == -1) {
-                        alert(objJson.mensaje);
-                        return;
-                    }
-                    var lista = objJson.lista;
-                    if (lista.length > 0) {
-                        ti.append("<option value=''>[Seleccione]</option>");
-                    } else {
-                        ti.append("<option value=''>[]</option>");
-                    }
-                    for (var i = 0; i < lista.length; i++) {
-                        var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                        ti.append(item);
-                    }
-                });
-            });
-            $("#dep_dir_l").change(function() {
-                var ti = $("#pro_dir_l");
-                ti.empty();
-                var rg = $("#dep_dir_l").val();
-                var data = "id_dep=" + rg + "&opc=dep_nac";
-                ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
-                    ti.empty();
-                    if (objJson.rpta == -1) {
-                        alert(objJson.mensaje);
-                        return;
-                    }
-                    var lista = objJson.lista;
-                    if (lista.length > 0) {
-                        ti.append("<option value=''>[Seleccione]</option>");
-                    } else {
-                        ti.append("<option value=''>[]</option>");
-                    }
-                    for (var i = 0; i < lista.length; i++) {
-                        var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                        ti.append(item);
-                    }
-                });
-            });
-            $("#pro_dir_l").change(function() {
-                var ti = $("#DOM_LEG_DISTRITO");
-                ti.empty();
-                var rg = $("#pro_dir_l").val();
-                var data = "id_dist=" + rg + "&opc=pro_nac";
-                ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
-                    ti.empty();
-                    if (objJson.rpta == -1) {
-                        alert(objJson.mensaje);
-                        return;
-                    }
-                    var lista = objJson.lista;
-                    if (lista.length > 0) {
-                        ti.append("<option value=''>[Seleccione]</option>");
-                    } else {
-                        ti.append("<option value=''>[]</option>");
-                    }
-                    for (var i = 0; i < lista.length; i++) {
-                        var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                        ti.append(item);
-                    }
-                });
-            });
+    </script>
 
-
-
-
-            /*Datos Academicos*/
-            $("#rg").change(function() {
-                var ti = $("#ti_inst");
-                ti.empty();
-                var rg = $("#rg").val();
-                var data = "regimen=" + rg + "&opc=ti_inst";
-
-                ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../detalle_carrera", data, function(objJson) {
-                    ti.empty();
-                    if (objJson.rpta == -1) {
-                        alert(objJson.mensaje);
-                        return;
-                    }
-                    var lista = objJson.lista;
-                    if (lista.length > 0) {
-                        ti.append("<option value=''>[Seleccione]</option>");
-                    } else {
-                        ti.append("<option value=''>[]</option>");
-                    }
-                    for (var i = 0; i < lista.length; i++) {
-                        var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                        ti.append(item);
-                    }
-                });
-            });
-
-
-            $("#ti_inst").change(function() {
-                var inst = $("#inst");
-                inst.empty();
-                var ti = $("#ti_inst").val();
-                /* if (sucursal == '000') {
-                 return;
-                 }*/
-                var data = "ti=" + ti + "&opc=institucion";
-                inst.append('<option value="">Cargando...</option>').val('');
-                $.post("../../detalle_carrera", data, function(objJson) {
-                    inst.empty();
-                    if (objJson.rpta == -1) {
-                        alert(objJson.mensaje);
-                        return;
-                    }
-                    var lista = objJson.lista;
-                    if (lista.length > 0) {
-                        inst.append("<option value='0'>[Seleccione]</option>");
-                    } else {
-                        inst.append("<option value='0'>[]</option>");
-                    }
-                    for (var i = 0; i < lista.length; i++) {
-                        var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                        inst.append(item);
-                    }
-                });
-            });
-            $("#inst").change(function() {
-                var carr = $("#carrera");
-                carr.empty();
-                var insti = $("#inst").val();
-                /* if (sucursal == '000') {
-                 return;
-                 }*/
-                var data = "inst=" + insti + "&opc=carrera";
-                carr.append('<option value="">Cargando...</option>').val('');
-                $.post("../../detalle_carrera", data, function(objJson) {
-                    carr.empty();
-                    if (objJson.rpta == -1) {
-                        alert(objJson.mensaje);
-                        return;
-                    }
-                    var lista = objJson.lista;
-                    if (lista.length > 0) {
-                        carr.append("<option value='0'>[Seleccione]</option>");
-                    } else {
-                        carr.append("<option value='0'>[]</option>");
-                    }
-                    for (var i = 0; i < lista.length; i++) {
-                        var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                        carr.append(item);
-                    }
-                });
-            });
-            /*$("#cboCuenta").change(function() {
-             var cuenta = $("#cboCuenta").val();
-             if (cuenta == "0") {
-             return;
-             }
-             alert("Cuenta: " + cuenta);
-             });*/
-        </script>
-
-    </body>
+</body>
 
 </html>

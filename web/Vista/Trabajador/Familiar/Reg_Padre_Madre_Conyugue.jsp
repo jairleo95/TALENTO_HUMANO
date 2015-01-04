@@ -84,7 +84,7 @@
                     <form action="../../../familiar" id="checkout-form" class="smart-form" novalidate="novalidate">
 
                         <header>
-                            <b>DATOS DEL PADRE Y MADRE </b>
+                            <b>DATOS DE PADRE Y MADRE </b>
                         </header>
                         <fieldset>
                             <div class="row">
@@ -157,7 +157,8 @@
                                         </select> 
                                         <i></i> </label>
                                 </section>
-                            </div>                        
+                            </div>   
+                            
                         </fieldset>
                         <input type="hidden" name="opc"  class="submit" value="REGISTRAR">
                         <footer>

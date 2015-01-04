@@ -17,12 +17,14 @@ import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.DireccionDAO;
 import pe.edu.upeu.application.dao.DocumentoDAO;
 import pe.edu.upeu.application.dao.ListaDAO;
+import pe.edu.upeu.application.dao.Tipo_DocumentoDAO;
 import pe.edu.upeu.application.dao.TrabajadorDAO;
 import pe.edu.upeu.application.dao.UbigeoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceTipo_DocumentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUbigeoDAO;
 
@@ -58,7 +60,7 @@ public class CTrabajador extends HttpServlet {
             InterfaceDocumentoDAO d = new DocumentoDAO();
             InterfaceDgpDAO dgp = new DgpDAO();
             InterfaceDireccionDAO dir = new DireccionDAO();
-
+            InterfaceTipo_DocumentoDAO tdoc= new Tipo_DocumentoDAO();
             String opc = "";
             String Text = "";
             opc = (String) request.getParameter("opc");
@@ -73,7 +75,8 @@ public class CTrabajador extends HttpServlet {
                 getServletContext().setAttribute("List_Situacion_Educativa", li.List_Situacion_Educativa());
                 getServletContext().setAttribute("Listar_via", dir.Listar_via());
                 getServletContext().setAttribute("Listar_zona", dir.Listar_zona());
-
+                getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
+                
                 response.sendRedirect("Vista/Trabajador/Reg_Trabajador.jsp");
 
             }
