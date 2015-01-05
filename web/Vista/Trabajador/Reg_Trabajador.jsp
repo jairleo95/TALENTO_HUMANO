@@ -1416,123 +1416,122 @@
                                                                 </div>
                                                             </div>
 
-                                                            <h3><strong>Paso 6</strong> - DATOS DE HIJO(S)</h3>    
-                                                            <div class="row">
-                                                                <div class="col-sm-3">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="APELLIDO_P_H" placeholder="Apellido Paterno"  maxlength="30" class="form-control input-group-sm" required="">
+                                                            <h3><strong>Paso 6</strong> - DATOS DE HIJO(S)</h3>   
+                                                                <div class="row">
+                                                                    <div class="col-sm-3">
+                                                                        <div class="form-group">
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
+                                                                                <input type="text" name="APELLIDO_P_H" placeholder="Apellido Paterno"  maxlength="30" class="form-control input-group-sm" required="">
 
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-sm-3">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text"  name="APELLIDO_M_H" placeholder="Apellido Materno"  maxlength="30" class="form-control input-group-sm" required="">
+                                                                    <div class="col-sm-3">
+                                                                        <div class="form-group">
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
+                                                                                <input type="text"  name="APELLIDO_M_H" placeholder="Apellido Materno"  maxlength="30" class="form-control input-group-sm" required="">
 
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-sm-3">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text"  name="NOMBRE_H" placeholder="Nombres"  maxlength="30" class="form-control input-group-sm" required="">
+                                                                    <div class="col-sm-2">
+                                                                        <div class="form-group">
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
+                                                                                <input type="text"  name="NOMBRE_H" placeholder="Nombres"  maxlength="30" class="form-control input-group-sm" required="">
 
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-sm-3">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="date" name="FECHA_NAC_H" placeholder="Fecha de Nacimiento dd/mm/yy"  class="form-control input-group-sm"  required="">
+                                                                    <div class="col-sm-2">
+                                                                        <div class="form-group">
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
+                                                                                <input type="date" name="FECHA_NAC_H" placeholder="Fecha de Nacimiento dd/mm/yy"  class="form-control input-group-sm"  required="">
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-sm-3">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <select name="SEXO_H" required="" class="form-control input-group-sm" >
-                                                                                <option value="" selected=""  >[Sexo]</option>
-                                                                                <option value="M">Masculino</option>
-                                                                                <option value="F">Femenino</option>
+                                                                    <div class="col-sm-2">
+                                                                        <div class="form-group">
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
+                                                                                <select name="SEXO_H" required="" class="form-control input-group-sm" >
+                                                                                    <option value="" selected=""  >[Sexo]</option>
+                                                                                    <option value="M">Masculino</option>
+                                                                                    <option value="F">Femenino</option>
 
-                                                                            </select> 
+                                                                                </select> 
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <select name="TIPO_DOC_ID_H"  class="form-control input-group-sm"  required="">
-                                                                                <option value="">[Tipo Documento]</option>
-                                                                                <%
-                                                                                    for (int h = 0; h < Listar_tipo_doc.size(); h++) {
-                                                                                        Tipo_Documento tdoc = new Tipo_Documento();
-                                                                                        tdoc = (Tipo_Documento) Listar_tipo_doc.get(h);
-                                                                                        if (tdoc.getId_tipo_doc_ident().trim().equals("1")) {
-                                                                                %>
-                                                                                <option selected="selected" value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
-                                                                                <%} else {%>
+                                                                <div class="row">
+                                                                    
+                                                                    <div class="col-sm-3">
+                                                                        <div class="form-group">
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
+                                                                                <select name="TIPO_DOC_ID_H"  class="form-control input-group-sm"  required="">
+                                                                                    <option value="">[Tipo Documento]</option>
+                                                                                    <%
+                                                                                        for (int h = 0; h < Listar_tipo_doc.size(); h++) {
+                                                                                            Tipo_Documento tdoc = new Tipo_Documento();
+                                                                                            tdoc = (Tipo_Documento) Listar_tipo_doc.get(h);
+                                                                                            if (tdoc.getId_tipo_doc_ident().trim().equals("1")) {
+                                                                                    %>
+                                                                                    <option selected="selected" value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
+                                                                                    <%} else {%>
 
-                                                                                <option value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
-                                                                                <%}
-                                                                                    }%>
-                                                                            </select>
+                                                                                    <option value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
+                                                                                    <%}
+                                                                                        }%>
+                                                                                </select>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-sm-3">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="NRO_DOC_H"  class="form-control input-group-sm" placeholder="Nro de Documento" maxlength="10" required="">
+                                                                    <div class="col-sm-3">
+                                                                        <div class="form-group">
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
+                                                                                <input type="text" name="NRO_DOC_H"  class="form-control input-group-sm" placeholder="Nro de Documento" maxlength="10" required="">
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-sm-3">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <select name="INSCRIPCION_VIG_ESSALUD_H" required=""  class="form-control input-group-sm">
-                                                                                <option value="" selected="" disabled="">[Inscripción Vigente en Essalud]</option>
-                                                                                <option value="1">Si</option>
-                                                                                <option value="0">No</option>
+                                                                    <div class="col-sm-3">
+                                                                        <div class="form-group">
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
+                                                                                <select name="INSCRIPCION_VIG_ESSALUD_H" required=""  class="form-control input-group-sm">
+                                                                                    <option value="" selected="" disabled="">[Inscripción Vigente en Essalud]</option>
+                                                                                    <option value="1">Si</option>
+                                                                                    <option value="0">No</option>
+                                                                                </select> 
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                                <div class="col-sm-3">
+                                                                        <div class="form-group">
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
+                                                                                <select name="ESTUD_NIV_SUPERIOR_H" class="form-control input-group-sm" required="">
+                                                                                    <option value="" selected="" disabled="">Estudio de Nivel Superior</option>
+                                                                                    <option value="1">Si</option>
+                                                                                    <option value="0">No</option>
 
-                                                                            </select> 
+                                                                                </select> 
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-sm-3">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <select name="ESTUD_NIV_SUPERIOR_H" class="form-control input-group-sm" required="">
-                                                                                <option value="" selected="" disabled="">Estudio de Nivel Superior</option>
-                                                                                <option value="1">Si</option>
-                                                                                <option value="0">No</option>
-
-                                                                            </select> 
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
+                                                           
+                                                            <button type="button" class="btn-reg-hijo">
+                                                                Registrar Hijo
+                                                            </button>
                                                             <input type="submit" name="opc"  class="submit btn btn-primary btn-lg" value="Registrar">
 
                                                         </div>
-
-
                                                         <div class="form-actions">
                                                             <div class="row">
                                                                 <div class="col-sm-12">
@@ -1556,8 +1555,9 @@
 
                                                     </div>
                                                 </div>
-                                            </form>
                                         </div>
+                                        </form>
+
 
                                     </div>
                                     <!-- end widget content -->
@@ -2196,9 +2196,9 @@
                                 b.append("<input type ='hidden' class='dni_" + i + "' value='" + list[i].NU_DOC + "' />");
                                 b.append("<input type ='hidden' class='tipo_" + i + "' value='" + list[i].TIPO + "' />");
                                 b.append("<input type ='hidden' class='nom_ape_" + i + "' value='" + list[i].NOM + " " + list[i].AP_PA + " " + list[i].AP_MA + "' />");
-                                if (typeof(list[i].ID_C) === "undefined") {
-                                    
-                                   b.append('<td><button type="button" class="btn btn-primary btn-add-conyugue" value="' + i + '" data-dismiss="modal">Agregar</button></td>');
+                                if (typeof (list[i].ID_C) === "undefined") {
+
+                                    b.append('<td><button type="button" class="btn btn-primary btn-add-conyugue" value="' + i + '" data-dismiss="modal">Agregar</button></td>');
                                 } else {
                                     b.append('<td>Tiene conyugue</td>');
                                 }
