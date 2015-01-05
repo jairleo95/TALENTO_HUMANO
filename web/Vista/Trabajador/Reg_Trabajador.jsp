@@ -1472,7 +1472,6 @@
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select name="TIPO_DOC_ID_H"  class="form-control input-group-sm"  required="">
                                                                                 <option value="">[Tipo Documento]</option>
-
                                                                                 <%
                                                                                     for (int h = 0; h < Listar_tipo_doc.size(); h++) {
                                                                                         Tipo_Documento tdoc = new Tipo_Documento();
@@ -1603,22 +1602,22 @@
 
                                         <div class="row">
                                             <div class="form-group" >
-                                                <label class="control-label" >Nombres</label>
+                                                <label class="control-label" >Nombres</label><br>
                                                 <input type="text"  class="form-control"  name="nom" maxlength="80" >
                                             </div>
                                             <div class="form-group" >
-                                                <label class="control-label" >Apellido Paterno</label>
+                                                <label class="control-label" >Apellido Paterno</label><br>
                                                 <input type="text"  class="form-control"  name="ap_pa" maxlength="80">
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="form-group">
-                                                <label class="control-label" >Apellido Materno</label>
+                                                <label class="control-label" >Apellido Materno</label><br>
                                                 <input type="text"  class="form-control"  name="ap_ma" maxlength="80" >
                                             </div>
 
                                             <div class="form-group">
-                                                <label class="control-label" >DNI:</label>
+                                                <label class="control-label" >DNI:</label><br>
                                                 <input type="text"  class="form-control"  onKeyPress="return checkIt(event)"   name="dni" maxlength="8">
                                             </div>
                                         </div>
@@ -2195,8 +2194,12 @@
                                 b.append("<input type ='hidden' class='dni_" + i + "' value='" + list[i].NU_DOC + "' />");
                                 b.append("<input type ='hidden' class='tipo_" + i + "' value='" + list[i].TIPO + "' />");
                                 b.append("<input type ='hidden' class='nom_ape_" + i + "' value='" + list[i].NOM + " " + list[i].AP_PA + " " + list[i].AP_MA + "' />");
-                                b.append('<td><button type="button" class="btn btn-primary btn-add-conyugue" value="' + i + '" data-dismiss="modal">Agregar</button></td>');
-
+                                if (typeof(list[i].ID_C) === "undefined") {
+                                    
+                                   b.append('<td><button type="button" class="btn btn-primary btn-add-conyugue" value="' + i + '" data-dismiss="modal">Agregar</button></td>');
+                                } else {
+                                    b.append('<td>Tiene conyugue</td>');
+                                }
                                 b.append("</tr>");
 
                             }

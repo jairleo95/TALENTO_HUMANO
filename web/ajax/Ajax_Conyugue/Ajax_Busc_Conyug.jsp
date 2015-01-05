@@ -32,9 +32,7 @@
         String ape_ma = request.getParameter("ap_ma");
         
         if (true) {
-
-            String sql = "select  NO_TRABAJADOR, AP_MATERNO,AP_PATERNO, NU_DOC,TI_DOC, to_char(FE_NAC,'yyyy-mm-dd') as fe_nac, id_trabajador  from RHVD_LIST_EMPLEADO WHERE NO_TRABAJADOR IS NOT NULL  ";
-            
+            String sql = "select  ID_CONYUGUE,ID_EMPLEADO,NO_TRABAJADOR, AP_MATERNO,AP_PATERNO, NU_DOC,TI_DOC, to_char(FE_NAC,'yyyy-mm-dd') as fe_nac, id_trabajador  from RHVD_LIST_EMPLEADO WHERE NO_TRABAJADOR IS NOT NULL   ";
             nom = nom.toUpperCase();
             dni = dni.toUpperCase();
             ape_pa = ape_pa.toUpperCase();
@@ -63,6 +61,7 @@
                 rec.put("ID_TRAB", rs.getString("id_trabajador"));
                 rec.put("TIPO", rs.getString("TI_DOC"));
                 rec.put("NAC", rs.getString("FE_NAC"));
+                rec.put("ID_C", rs.getString("ID_CONYUGUE"));
                 
                 
                 //rec.put("id_dgp", rs.getString("id_dgp"));
