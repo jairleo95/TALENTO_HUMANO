@@ -511,10 +511,10 @@
                                                                                         tdoc = (Tipo_Documento) Listar_tipo_doc.get(h);
                                                                                         if (tdoc.getId_tipo_doc_ident().trim().equals("1")) {
                                                                                 %>
-                                                                                <option selected="selected" value="<%=tdoc.getId_tipo_doc_ident()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
+                                                                                <option selected="selected" value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
                                                                                 <%} else {%>
 
-                                                                                <option value="<%=tdoc.getId_tipo_doc_ident()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
+                                                                                <option value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
                                                                                 <%}
                                                                                     }%>
                                                                             </select>
@@ -618,13 +618,15 @@
                                                                             $("#sis_pens").change(
                                                                                     function () {
                                                                                         if ($("#sis_pens").val() != "1") {
-                                                                                            $("#nom_afp").val("6");
+                                                                                            $(".n_afp").remove();
                                                                                             $("#nom_afp").attr("disabled", true);
+                                                                                            $(".afp").append('<input name="NOMBRE_AFP_ID" type="hidden" class="n_afp" value="6"/>');
                                                                                         }
                                                                                         if ($("#sis_pens").val() == "1") {
 
                                                                                             $("#nom_afp").val("");
                                                                                             $("#nom_afp").removeAttr("disabled");
+                                                                                            $(".n_afp").remove();
                                                                                         }
                                                                                     }
                                                                             );
@@ -652,7 +654,7 @@
 
                                                                 <div class="col-sm-3">
                                                                     <div class="form-group">
-                                                                        <div class="input-group">
+                                                                        <div class="input-group afp" >
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select name="NOMBRE_AFP_ID" class="form-control input-group-sm" id="nom_afp" required=""  >
                                                                                 <option value="">[Nombre AFP]</option>
@@ -668,7 +670,7 @@
                                                                 </div>
                                                                 <div class="col-sm-3">
                                                                     <div class="form-group">
-                                                                        <div class="input-group">
+                                                                        <div class="input-group" >
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select name="AFILIADO_ESSALUD_ID" class="form-control input-group-sm"  required="">
                                                                                 <option value="">[Afiliado ESSALUD-VIDA]</option>
@@ -1376,10 +1378,10 @@
                                                                                         tdoc = (Tipo_Documento) Listar_tipo_doc.get(h);
                                                                                         if (tdoc.getId_tipo_doc_ident().trim().equals("1")) {
                                                                                 %>
-                                                                                <option selected="selected" value="<%=tdoc.getId_tipo_doc_ident()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
+                                                                                <option selected="selected" value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
                                                                                 <%} else {%>
 
-                                                                                <option value="<%=tdoc.getId_tipo_doc_ident()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
+                                                                                <option value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
                                                                                 <%}
                                                                                     }%>
                                                                             </select> 
@@ -1478,10 +1480,10 @@
                                                                                         tdoc = (Tipo_Documento) Listar_tipo_doc.get(h);
                                                                                         if (tdoc.getId_tipo_doc_ident().trim().equals("1")) {
                                                                                 %>
-                                                                                <option selected="selected" value="<%=tdoc.getId_tipo_doc_ident()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
+                                                                                <option selected="selected" value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
                                                                                 <%} else {%>
 
-                                                                                <option value="<%=tdoc.getId_tipo_doc_ident()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
+                                                                                <option value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
                                                                                 <%}
                                                                                     }%>
                                                                             </select>

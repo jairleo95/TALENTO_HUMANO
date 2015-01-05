@@ -384,4 +384,18 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         return Max;
     }
 
+    @Override
+    public void UPDATE_ID_CONYUGUE(String id_conyugue, String id_trabajador) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_UPDATE_ID_CONYUGUE(?, ?)} ");
+            cst.setString(1, id_conyugue);
+            cst.setString(2, id_trabajador);
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        }
+    }
+
 }
