@@ -7,6 +7,7 @@
 package pe.edu.upeu.application.dao_imp;
 
 import java.util.List;
+import java.util.Map;
 import pe.edu.upeu.application.model.Departamento;
 
 /**
@@ -15,4 +16,6 @@ import pe.edu.upeu.application.model.Departamento;
  */
 public interface InterfaceDepartamentoDAO {
     public List<Departamento> List_Departamento();
+    public List<Map<String, ?>> List_departamento_2();
+    public List<Map<String, ?>> dep_id(String id_pu);
 }

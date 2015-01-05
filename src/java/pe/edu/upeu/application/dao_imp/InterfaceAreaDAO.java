@@ -7,6 +7,7 @@
 package pe.edu.upeu.application.dao_imp;
 
 import java.util.List;
+import java.util.Map;
 import pe.edu.upeu.application.model.Area;
 
 /**
@@ -16,4 +17,6 @@ import pe.edu.upeu.application.model.Area;
 public interface InterfaceAreaDAO {
       public List<Area> List_Area();
       public List<Area> List_Area_ID(String id_departamento);
+      public List<Map<String, ?>> List_area_id_json(String id_dep);
+      public List<Map<String, ?>> selec_area(String id_pu);
 }

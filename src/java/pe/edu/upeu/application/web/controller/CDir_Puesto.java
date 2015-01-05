@@ -5,15 +5,25 @@
  */
 package pe.edu.upeu.application.web.controller;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import pe.edu.upeu.application.dao.AreaDAO;
+import pe.edu.upeu.application.dao.DepartamentoDao;
+import pe.edu.upeu.application.dao.PuestoDAO;
+import pe.edu.upeu.application.dao.SeccionDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceAreaDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDepartamentoDAO;
+import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceSeccionDAO;
 
 /**
  *
@@ -31,18 +41,64 @@ public class CDir_Puesto extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    InterfaceDepartamentoDAO dep = new DepartamentoDao();
+    InterfaceAreaDAO are = new AreaDAO();
+    InterfaceSeccionDAO sec = new SeccionDAO();
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-         Map<String, Object> rpta = new HashMap<String, Object>();
+        Map<String, Object> rpta = new HashMap<String, Object>();
         String opc = request.getParameter("opc");
         PrintWriter out = response.getWriter();
         try {
-            
-        } finally {
-            out.close();
+            if (opc.equals("Listar")) {
+                List<Map<String, ?>> lista = dep.List_departamento_2();
+                //List<Map<String, ?>> lista2 = dep.dep_id(id_pu);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+                //rpta.put("lista2", lista2);
+            }
+            if (opc.equals("Listar_area")) {
+                String id_dep = request.getParameter("id_dep");
+                List<Map<String, ?>> lista = are.List_area_id_json(id_dep);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
+            if (opc.equals("Listar_sec")) {
+                String id_are = request.getParameter("id_are");
+                List<Map<String, ?>> lista = sec.List_sec_id(id_are);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
+            if (opc.equals("selec_dep")) {
+                String id_pu = request.getParameter("id_pu");
+                List<Map<String, ?>> lista = dep.dep_id(id_pu);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
+            if (opc.equals("selec_are")) {
+                String id_pu = request.getParameter("id_pu");
+                List<Map<String, ?>> lista = are.selec_area(id_pu);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
+            if (opc.equals("selec_sec")) {
+                String id_pu = request.getParameter("id_pu");
+                List<Map<String, ?>> lista = sec.selec_sec(id_pu);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
+
+        } catch (Exception e) {
+            rpta.put("rpta", "-1");
+            rpta.put("mensaje", e.getMessage());
         }
+        Gson gson = new Gson();
+        out.print(gson.toJson(rpta));
+        out.flush();
+        out.close();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -183,25 +183,25 @@
                                 </section>
                                 <section class="col col-5" id="titulo">
                                     <label class="select" id="titulo">Departamento:
-                                        <select name="DEPARTAMENTO_ID" required="" class="input-lg" id="selec_dep">
+                                        <select name="DEPARTAMENTO_ID" class="input-lg" id="selec_dep">
                                             <option>[SELECCIONE]</option>
                                         </select>  </label>
                                 </section>
                                 <section class="col col-5" id="titulo">
                                     <label class="select" id="titulo">Area:
-                                        <select name="AREA_ID" required="" class="input-lg" id="Selec_Area">
+                                        <select name="AREA_ID" class="input-lg" id="Selec_Area">
                                             <option>[SELECCIONE]</option>
                                         </select>  </label>
                                 </section>
                                 <section class="col col-5" id="titulo">
                                     <label class="select" id="titulo">Seccion:
-                                        <select name="SECCION_ID" required="" class="input-lg" id="select_sec">
+                                        <select name="SECCION_ID" class="input-lg" id="select_sec">
                                             <option>[SELECCIONE]</option>
                                         </select>  </label>
                                 </section>
                                 <section class="col col-5" id="titulo">
                                     <label class="select" id="titulo">Puesto:
-                                        <select name="PUESTO_ID" required="" class="input-lg">
+                                        <select name="PUESTO_ID" required="" class="input-lg" id="pu_id_se">
                                             <%  for (int j = 0; j < List_Puesto.size(); j++) {%>
                                             <%Puesto p = new Puesto();
                                                 p = (Puesto) List_Puesto.get(j);
@@ -502,7 +502,7 @@
                                     <label class="select" id="titulo">Situación Actual:
                                         <select name="ESTADO_CONTRATO" class="input-lg" required="">
                                             <option value="">[SELECCIONE]</option>
-                                            <option value="1" selected>Activo</option>
+                                            <option value="1" selected="" >Activo</option>
                                             <option value="2">Término de Contrato</option>
                                             <option value="3">Renuncia Voluntaria</option>
                                             <option value="4">Traslado a otra Filial/Institucion</option>
@@ -1090,8 +1090,8 @@
     <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
     <script>
             $(document).ready(function() {
+                Listar_dep();
                 var a = $("#select-sub-mod");
-                var b = $("#selec_dep");
                 var c = $("#Selec_Area");
                 var d = $("#select_sec");
                 $.post("../../  ")
@@ -1109,21 +1109,65 @@
                                 }
                             });
                         });
-                $("#select_mod").change(
+                $("#selec_dep").change(
                         function() {
-                            // alert("?MODALIDAD="+$("#select_mod").val());
+                           //alert("?MODALIDAD="+$("#select_mod").val());
 
-                            $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function(objJson) {
-                                a.empty();
+                            $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function(objJson) {
+                                c.empty();
                                 var list = objJson.lista;
+                                c.append("<option value='' > [SELECCIONE] </option>");
                                 if (list.length !== 0) {
                                     for (var i = 0; i < list.length; i++) {
-                                        a.append('<option value="' + list[i].id_submodalidad + '">' + list[i].de_submod + '</option>');
+                                        c.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
                                     }
+                                } else {
+                                    c.append("<option value='' > [no hay] </option>");
                                 }
                             });
                         });
+                $("#Selec_Area").change(
+                        function() {
+                            // alert("?MODALIDAD="+$("#select_mod").val());
 
+                            $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function(objJson) {
+                                d.empty();
+                                var list = objJson.lista;
+                                d.append("<option value='' > [SELECCIONE] </option>");
+                                if (list.length !== 0) {
+                                    for (var i = 0; i < list.length; i++) {
+                                        d.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+                                    }
+                                } else {
+                                    d.append("<option value='' > [no hay] </option>");
+                                }
+                            });
+                        });
+                $("#btn-registrar").click(
+                        function() {
+                            var pr = $("#select-proceso").val();
+                            $.post("../../paso", $("#form-paso").serialize(), function() {
+                                Listar_Paso(pr);
+                            });
+                            $("#btn-registrar").val("Registrar Paso");
+                            $(".opc").val("Registrar");
+                            $("#form-paso")[0].reset();
+
+                            return false;
+                        }
+                );
+                function Listar_dep() {
+                    var s = $("#selec_dep");
+                    $.post("../../Direccion_Puesto", "opc=Listar", function(objJson) {
+                        s.empty();
+                        var lista = objJson.lista;
+                        s.append("<option value='' > [SELECCIONE] </option>");
+                        for (var j = 0; j < lista.length; j++) {
+                            s.append("<option value='" + lista[j].id + "' > " + lista[j].nom + "</option>");
+                        }
+                    });
+                }
+                
             });
     </script>
 </html>
