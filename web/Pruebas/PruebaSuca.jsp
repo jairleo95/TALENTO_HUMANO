@@ -16,9 +16,9 @@
     <body>
         <h1>Hello World!</h1>
   <form action="../contrato" method="GET">
-        <input type="hidden" name="iddgp" value="DGP-000005">
-        <input type="hidden" name="idtr" value="TRB-000704">
-        <input type="hidden" name="opc" value="Detalle_Contractual">
+        <input type="text" name="iddgp" value="DGP-000005">
+        <input type="text" name="idtr" value="TRB-000704">
+        <input type="" name="opc" value="Detalle_Contractual">
         <input type="submit" >
     </form>
       

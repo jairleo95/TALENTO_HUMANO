@@ -21,9 +21,9 @@ for (int j = 0; j < 4; j++) {
 list.add("Jair");
 list.add("Alex");
 list.add("Suca");
-jsonText = list.toString();
+//jsonText = list.toString();
 }
-out.print(jsonText);
+out.print(list);
         %>
     </body>
 </html>
