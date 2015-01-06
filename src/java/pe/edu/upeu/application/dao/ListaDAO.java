@@ -182,6 +182,8 @@ public class ListaDAO implements InterfaceListaDAO {
         list.add("Prima");
         list.add("Profuturo");
         list.add("Horizonte");
+        list.add("Habitat");
+        list.add("Ninguno");
         return list;
     }
 
