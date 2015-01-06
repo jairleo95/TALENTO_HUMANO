@@ -1,5 +1,3 @@
-<%@page import="pe.edu.upeu.application.model.V_Privilegio"%>
-<jsp:useBean id="LIST_MODULO" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
     <head>
@@ -10,9 +8,10 @@
         <meta name="description" content="Responsive Retina-Friendly Menu with different, size-dependent layouts" />
         <meta name="keywords" content="responsive menu, retina-ready, icon font, media queries, css3, transition, mobile" />
         <meta name="author" content="Codrops" />
-        <link rel="stylesheet" type="text/css" href="css/Css_Modulos/default.css" />
-        <link rel="stylesheet" type="text/css" href="css/Css_Modulos/component.css" />
-        <script src="js/Js_Modulos/modernizr.custom.js"></script>
+        <link rel="shortcut icon" href="../favicon.ico"> 
+        <link rel="stylesheet" type="text/css" href="css/default.css" />
+        <link rel="stylesheet" type="text/css" href="css/component.css" />
+        <script src="js/modernizr.custom.js"></script>
     </head>
     <body>
         <div class="container">	
@@ -27,32 +26,61 @@
             <div class="main clearfix">
                 <nav id="menu" class="nav">					
                     <ul>
-                        <%for (int i = 0; i < LIST_MODULO.size(); i++) {
-                                V_Privilegio m = new V_Privilegio();
-                                m = (V_Privilegio) LIST_MODULO.get(i);
-                        %>
                         <li>
-                            <form id="form_<%=i%>" action="menu" method="POST">
-                                <input type="hidden" name="opc" value="List_Privilegios"/>
-                                <input type="hidden" name="idmod" value="<%=m.getId_modulo()%>"/>
-                             
-                         
-                                <a   onclick="document.getElementById('form_<%=i%>').submit();"  href="#" >
+                            <a href="#">
                                 <span class="icon">
-                                    <i aria-hidden="true" class="<%=m.getIc_modulo()%>"></i>
+                                    <i aria-hidden="true" class="icon-home"></i>
                                 </span>
-                                <span><%=m.getNo_modulo()%></span>
-                            </a>   </form>
+                                <span>Home</span>
+                            </a>
                         </li>
-                        <%}%>
+                        <li>
+                            <a href="#">
+                                <span class="icon"> 
+                                    <i aria-hidden="true" class="icon-services"></i>
+                                </span>
+                                <span>Services</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="icon">
+                                    <i aria-hidden="true" class="icon-portfolio"></i>
+                                </span>
+                                <span>Portfolio</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="icon">
+                                    <i aria-hidden="true" class="icon-blog"></i>
+                                </span>
+                                <span>Blog</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="icon">
+                                    <i aria-hidden="true" class="icon-team"></i>
+                                </span>
+                                <span>The team</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="icon">
+                                    <i aria-hidden="true" class="icon-contact"></i>
+                                </span>
+                                <span>Contact</span>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
-                    
             </div>
         </div><!-- /container -->
         <script>
             //  The function to change the class
-            var changeClass = function (r, className1, className2) {
+            var changeClass = function(r, className1, className2) {
                 var regex = new RegExp("(?:^|\\s+)" + className1 + "(?:\\s+|$)");
                 if (regex.test(r.className)) {
                     r.className = r.className.replace(regex, ' ' + className2 + ' ');
@@ -68,12 +96,12 @@
             menuElements.insertAdjacentHTML('afterBegin', '<button type="button" id="menutoggle" class="navtoogle" aria-hidden="true"><i aria-hidden="true" class="icon-menu"> </i> Menu</button>');
 
             //  Toggle the class on click to show / hide the menu
-            document.getElementById('menutoggle').onclick = function () {
+            document.getElementById('menutoggle').onclick = function() {
                 changeClass(this, 'navtoogle active', 'navtoogle');
             }
 
             // http://tympanus.net/codrops/2013/05/08/responsive-retina-ready-menu/comment-page-2/#comment-438918
-            document.onclick = function (e) {
+            document.onclick = function(e) {
                 var mobileButton = document.getElementById('menutoggle'),
                         buttonStyle = mobileButton.currentStyle ? mobileButton.currentStyle.display : getComputedStyle(mobileButton, null).display;
 

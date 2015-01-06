@@ -74,7 +74,8 @@ public class Cindex extends HttpServlet {
             sesion.setAttribute("DEPARTAMENTO_ID", user.getId_departamento());
             sesion.setAttribute("PUESTO", user.getNo_puesto());
 
-            getServletContext().setAttribute("listarURL", Irol.listarURL(user.getId_rol()));
+            getServletContext().setAttribute("LIST_MODULO", Irol.LISTAR_MODULOS(user.getId_rol()));
+            //getServletContext().setAttribute("listarURL", Irol.listarURL(user.getId_rol()));
            /* getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
             getServletContext().setAttribute("List_Carrera", li.List_Carrera());
             getServletContext().setAttribute("List_Nacionalidad", li.List_Nacionalidad());

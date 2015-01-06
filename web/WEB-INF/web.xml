@@ -28,10 +28,6 @@
         <servlet-class>pe.edu.upeu.application.web.controller.CAutorizacion</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CMenu</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CMenu</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>CError</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CError</servlet-class>
     </servlet>
@@ -79,6 +75,10 @@
         <servlet-name>CCentro_Costo</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CCentro_Costo</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CMenu</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CMenu</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
         <url-pattern>/trabajador</url-pattern>
@@ -102,10 +102,6 @@
     <servlet-mapping>
         <servlet-name>Cindex</servlet-name>
         <url-pattern>/valida</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CMenu</servlet-name>
-        <url-pattern>/menu</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CError</servlet-name>
@@ -154,6 +150,10 @@
     <servlet-mapping>
         <servlet-name>CCentro_Costo</servlet-name>
         <url-pattern>/centro_costo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CMenu</servlet-name>
+        <url-pattern>/menu</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>300</session-timeout>
