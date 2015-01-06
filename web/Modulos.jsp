@@ -8,10 +8,9 @@
         <meta name="description" content="Responsive Retina-Friendly Menu with different, size-dependent layouts" />
         <meta name="keywords" content="responsive menu, retina-ready, icon font, media queries, css3, transition, mobile" />
         <meta name="author" content="Codrops" />
-        <link rel="shortcut icon" href="../favicon.ico"> 
-        <link rel="stylesheet" type="text/css" href="css/default.css" />
-        <link rel="stylesheet" type="text/css" href="css/component.css" />
-        <script src="js/modernizr.custom.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/Css_Modulos/default.css" />
+        <link rel="stylesheet" type="text/css" href="css/Css_Modulos/component.css" />
+        <script src="js/Js_Modulos/modernizr.custom.js"></script>
     </head>
     <body>
         <div class="container">	

@@ -28,7 +28,7 @@ public class CMenu extends HttpServlet {
         String user = (String) sesion.getAttribute("USER");
 
         if (opc == null) {
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Modulo/index.html");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Modulos.jsp");
             dispatcher.forward(request, response);
         } else if (opc != null & user != null) {
             if (opc.equals("logout")) {
