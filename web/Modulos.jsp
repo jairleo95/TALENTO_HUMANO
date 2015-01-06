@@ -32,19 +32,17 @@
                                 m = (V_Privilegio) LIST_MODULO.get(i);
                         %>
                         <li>
-                            <form name="form_<%=i%>" action="menu" method="POST">
+                            <form id="form_<%=i%>" action="menu" method="POST">
                                 <input type="hidden" name="opc" value="List_Privilegios"/>
                                 <input type="hidden" name="idmod" value="<%=m.getId_modulo()%>"/>
-                                <button type="submit">
-                                    asdasas
-                                </button>
-                            </form>
-                                <a   onclick="document.url.submit('form_<%=i%>');" href="#" >
+                             
+                         
+                                <a   onclick="document.getElementById('form_<%=i%>').submit();"  href="#" >
                                 <span class="icon">
                                     <i aria-hidden="true" class="<%=m.getIc_modulo()%>"></i>
                                 </span>
                                 <span><%=m.getNo_modulo()%></span>
-                            </a>
+                            </a>   </form>
                         </li>
                         <%}%>
                     </ul>
