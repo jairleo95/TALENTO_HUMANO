@@ -11,21 +11,25 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-        <script type="text/javascript" src="js/JQuery/jQuery.js" ></script>
-    
-    <script>
-        $(document).ready(
-                function(){
-                    $(".fecha").change(function(){
-                      
-        $(".ver").text($(".fecha").val());
-                        
-                    });
-                });
-        
-    </script> 
+
     <body>
         <input  type="date" class="fecha"/>
         <p class="ver"></p>
+
+
+        <script type="text/javascript" src="js/JQuery/jQuery.js" ></script>
+
+
+        <script>
+            $(document).ready(
+                    function() {
+                        $(".fecha").change(function() {
+
+                            $(".ver").text($(".fecha").val());
+
+                        });
+                    });
+
+        </script> 
     </body>
 </html>

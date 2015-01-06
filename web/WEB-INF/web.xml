@@ -156,7 +156,7 @@
         <url-pattern>/centro_costo</url-pattern>
     </servlet-mapping>
     <session-config>
-        <session-timeout>30</session-timeout>
+        <session-timeout>300</session-timeout>
     </session-config>
     <error-page>
         <error-code>404</error-code>

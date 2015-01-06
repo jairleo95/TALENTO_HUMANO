@@ -9,16 +9,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-        <script type="text/javascript" src="../js/JQuery/jQuery.js"></script>
         <title>JSP Page</title>
     </head>
     <body>
         <form action="../../dgp" method="GET">
-            <input type="date" id="date" name="date">
 
 
 
-            <input type="submit" value="Enviar"  name="Enviar">
+            
 
             <%
             Connection cx = Conexion.getConex();
@@ -38,7 +36,7 @@
            cst.execute();
 
         %>
-            <p id="s"></p>
+            <p></p>
         </form>
     </body>
 </html>

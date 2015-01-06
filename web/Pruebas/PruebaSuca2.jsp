@@ -14,9 +14,9 @@
     </head>
     <body>
         <form  action="../documento" method="get">
-            <input type="hidden" name="opc" value="enviar">
-            <input type="hidden" name="idtr" value="DGP-000821">
-            <input type="hidden" name="iddgp" value="TRB-000543">
+            <input type="text" name="opc" value="enviar">
+            <input type="text" name="idtr" value="DGP-000821">
+            <input type="text" name="iddgp" value="TRB-000543">
             <input type="submit">
         </form>
         <h1>Hello World!</h1>
