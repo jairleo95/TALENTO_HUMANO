@@ -191,7 +191,7 @@ public class RolDAO implements InterfaceRolDAO {
     public List<V_Privilegio> LISTAR_MODULOS(String idrol) {
 
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = " select DISTINCT(ID_MODULO) AS ID_MODULO,NO_MODULO ,DE_MODULO, IC_MODULO from  RHVD_PRIVILEGIO WHERE ID_ROL='" + idrol + "'  ";
+        String sql = " select DISTINCT(ID_MODULO) AS ID_MODULO,NO_MODULO ,DE_MODULO, IC_MODULO,ID_ROL from  RHVD_PRIVILEGIO WHERE ID_ROL='" + idrol + "'  ";
         List<V_Privilegio> list = new ArrayList<V_Privilegio>();
         try {
             ResultSet rs = this.conn.query(sql);
