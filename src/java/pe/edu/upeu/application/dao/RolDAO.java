@@ -52,9 +52,9 @@ public class RolDAO implements InterfaceRolDAO {
     }
 
     @Override
-    public List<V_Privilegio> listarURL(String idrol) {
+    public List<V_Privilegio> listarURL(String idrol, String id_modulo) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from  RHVD_PRIVILEGIO where ID_ROL='" + idrol + "'";
+        String sql = "select * from  RHVD_PRIVILEGIO where ID_ROL='" + idrol + "' and id_modulo='" + id_modulo + "'";
         List<V_Privilegio> list = new ArrayList<V_Privilegio>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -83,7 +83,7 @@ public class RolDAO implements InterfaceRolDAO {
     public void INSERT_ROLES(String no_rol) {
         CallableStatement cst;
         try {
-            String id_rol="";
+            String id_rol = "";
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             cst = conn.conex.prepareCall("{CALL RHSP_INSERT_ROL( ?,?)}");
             cst.setString(1, id_rol);
@@ -126,7 +126,7 @@ public class RolDAO implements InterfaceRolDAO {
     @Override
     public List<Privilegio_Rol> Listar_Rol_Privilegio(String id_rol) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT P.NO_LINK, e.ES_DETALLE_PRIVILEGIO,e.ID_DETALLE_PRIVILEGIO FROM RHTD_DETALLE_PRIVILEGIO e , RHTR_ROL r, RHTV_PRIVILEGIO WHERE e.ID_ROL = r.ID_ROL AND e.ID_PRIVILEGIO=P.ID_PRIVILEGIO AND e.ID_ROL ='"+id_rol+"'";
+        String sql = "SELECT P.NO_LINK, e.ES_DETALLE_PRIVILEGIO,e.ID_DETALLE_PRIVILEGIO FROM RHTD_DETALLE_PRIVILEGIO e , RHTR_ROL r, RHTV_PRIVILEGIO WHERE e.ID_ROL = r.ID_ROL AND e.ID_PRIVILEGIO=P.ID_PRIVILEGIO AND e.ID_ROL ='" + id_rol + "'";
         List<Privilegio_Rol> list = new ArrayList<Privilegio_Rol>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -142,13 +142,13 @@ public class RolDAO implements InterfaceRolDAO {
             this.conn.close();
         }
         return list;
-        
+
     }
 
     @Override
     public List<Rol> Listar_Rol_id(String id_rol) {
-         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT NO_ROL, ID_ROL ,ES_ROL FROM RHTR_ROL WHERE ID_ROL='"+id_rol +"'";
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT NO_ROL, ID_ROL ,ES_ROL FROM RHTR_ROL WHERE ID_ROL='" + id_rol + "'";
         List<Rol> list = new ArrayList<Rol>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -159,7 +159,7 @@ public class RolDAO implements InterfaceRolDAO {
                 d.setEs_rol(rs.getString("es_rol"));
                 list.add(d);
             }
-            
+
         } catch (SQLException e) {
         } finally {
             this.conn.close();
@@ -185,6 +185,34 @@ public class RolDAO implements InterfaceRolDAO {
 
     @Override
     public void Eliminar_rol(String id_Rol) {
+    }
+
+    @Override
+    public List<V_Privilegio> LISTAR_MODULOS(String idrol) {
+
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = " select DISTINCT(ID_MODULO) AS ID_MODULO,NO_MODULO ,DE_MODULO, IC_MODULO from  RHVD_PRIVILEGIO WHERE ID_ROL='" + idrol + "'  ";
+        List<V_Privilegio> list = new ArrayList<V_Privilegio>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                V_Privilegio d = new V_Privilegio();
+                d.setId_rol(rs.getString("id_rol"));
+                d.setId_modulo(rs.getString("id_modulo"));
+                d.setNo_modulo(rs.getString("no_modulo"));
+                d.setIc_modulo(rs.getString("IC_MODULO"));
+                d.setDe_modulo(rs.getString("de_modulo"));
+                list.add(d);
+
+            }
+
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+
+        return list;
+
     }
 
 }

@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import pe.edu.upeu.application.dao.RolDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceRolDAO;
 
 /**
  *
@@ -22,12 +24,15 @@ public class CMenu extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        InterfaceRolDAO Irol = new RolDAO();
         String opc = request.getParameter("opc");
 
         HttpSession sesion = request.getSession(true);
         String user = (String) sesion.getAttribute("USER");
+        String idrol = (String) sesion.getAttribute("IDROL");
 
         if (opc == null) {
+
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Principal_3.jsp");
             dispatcher.forward(request, response);
         } else if (opc != null & user != null) {
@@ -36,11 +41,17 @@ public class CMenu extends HttpServlet {
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
                 dispatcher.forward(request, response);
             }
-
-        }
-        else{
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+            if (opc.equals("List_Privilegios")) {
+                String id_modulo = request.getParameter("idmod");
+                getServletContext().setAttribute("listarURL", Irol.listarURL(idrol, id_modulo));
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Principal_3.jsp");
                 dispatcher.forward(request, response);
+
+            }
+
+        } else {
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+            dispatcher.forward(request, response);
         }
     }
 
