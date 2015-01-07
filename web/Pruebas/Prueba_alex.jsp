@@ -12,31 +12,42 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="../../dgp" method="GET">
+        <table>
+            <tr>
+                <td bgcolor="black" >Nombre</td>
+                <td bgcolor="#000000">Apellido</td>
+                <td bgcolor="#000000">
+                    <input type="checkbox" name="all" id="all"
+                           onclick="checkAll();" />
+                </td>
+            </tr>
+            <tr>
+                <td>Jim</td>
+                <td>Penaloza</td>
+                <td><input name="id01" type="checkbox" id="id01" /></td>
+            </tr>
+            <tr>
+                <td>Jose Luis </td>
+                <td>Prado</td>
+                <td><input name="id02" type="checkbox" id="id02" /></td>
+            </tr>
+            <tr>
+                <td>Joseph</td>
+                <td>Mondragon</td>
+                <td><input name="id03" type="checkbox" id="id03" /></td>
+            </tr>
+        </table>
 
-
-
-            
-
-            <%
-            Connection cx = Conexion.getConex();
-     CallableStatement cst = cx.prepareCall("{CALL RHSP_INSERT_AUTORIZACION( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
-            cst.setString(1, null);
-            cst.setString(2, "DGP-000823");
-            cst.setString(3, "1");
-            cst.setString(4, "PU1");
-            cst.setString(5, "123412312");
-            cst.setString(6, "qwerrtrewq");
-            cst.setString(7, "qweqweqwee");
-            cst.setString(8, "31/07/14");
-            cst.setString(9, "3213");
-            cst.setString(10, "PUT-000136");
-            cst.setString(11, "DRP-000001");
-            cst.setString(12, "PAS-000001");
-           cst.execute();
-
-        %>
-            <p></p>
-        </form>
+        <script>
+            function checkAll() {
+                var nodoCheck = document.getElementsByTagName("input");
+                var varCheck = document.getElementById("all").checked;
+                for (i = 0; i < nodoCheck.length; i++) {
+                    if (nodoCheck[i].type == "checkbox" && nodoCheck[i].name != "all" && nodoCheck[i].disabled == false) {
+                        nodoCheck[i].checked = varCheck;
+                    }
+                }
+            }
+        </script>
     </body>
 </html>
