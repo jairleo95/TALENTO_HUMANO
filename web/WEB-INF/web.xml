@@ -79,6 +79,10 @@
         <servlet-name>CMenu</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CMenu</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CVacaciones</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CVacaciones</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
         <url-pattern>/trabajador</url-pattern>
@@ -154,6 +158,10 @@
     <servlet-mapping>
         <servlet-name>CMenu</servlet-name>
         <url-pattern>/menu</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CVacaciones</servlet-name>
+        <url-pattern>/vacaciones</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>300</session-timeout>
