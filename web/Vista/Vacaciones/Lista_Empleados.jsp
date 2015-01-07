@@ -123,8 +123,8 @@
                                                                                                                                             <th data-hide="phone,tablet">Puesto</th>
                                                                                                                                             <th data-hide="phone,tablet">Fecha Inicio</th>
                                                                                                                                             <th data-hide="phone,tablet">Fecha Fin</th>
-                                                                                                                                            <th data-hide="phone,tablet">Vacaciones<center><input type="checkbox" name="all" id="all" onclick="checkAll();
-                                                                                                                                                                                                  " /></center></th>
+                                                                                                                                            <th class="sorting_asc_disabled" >Vacacionweqes<center><input type="checkbox" name="all" id="all" onclick="checkAll();"></center></th>
+
                                                                                                                                         </tr>
                                                                                                                                     </thead>
                                                                                                                                     <tbody>
@@ -170,9 +170,9 @@
                                                                                                                                                         <!-- WIDGET END -->
                                                                                                                                                         <footer>
                                                                                                                                                             <center>
-                                                                                                                                                            <button type="submit" class="btn btn-primary">
-                                                                                                                                                                Enviar Lista de  Empelados  
-                                                                                                                                                                </center>
+                                                                                                                                                                <button type="submit" class="btn btn-primary">
+                                                                                                                                                                    Enviar Lista de  Empelados  
+                                                                                                                                                            </center>
                                                                                                                                                         </footer>
                                                                                                                                                         </div>
                                                                                                                                                         <!-- end row -->
@@ -268,6 +268,7 @@
                                                                                                                                                         <script src="../../js/speech/voicecommand.min.js"></script>
 
                                                                                                                                                         <!-- PAGE RELATED PLUGIN(S) -->
+                                                                                                                                                        <script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
                                                                                                                                                         <script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>
                                                                                                                                                         <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
                                                                                                                                                         <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>

@@ -42,10 +42,9 @@ public class CVacaciones extends HttpServlet {
         
         if (opc.equals("Listar")) {
 
-            //String iddepa = (String) sesion.getAttribute("DEPARTAMENTO_ID");
-            //getServletContext().setAttribute("List_Empleado", Iem.Listar_Empleado(iddepa));
+           
+            getServletContext().setAttribute("List_Empleado", Iem.Listar_Empleado());
 
-            //out.print(Iem.Listar_Empleado(iddepa).size());
 
             response.sendRedirect("Vista/Vacaciones/Lista_Empleados.jsp");
         }

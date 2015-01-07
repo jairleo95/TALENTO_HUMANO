@@ -17,5 +17,6 @@ public interface InterfaceEmpleadoDAO {
     public String Id_Puesto_Personal(String ide);
     public void VALIDAR_EMPLEADO(String id_tra);
     public List<V_List_Empleado> Listar_Empleado(String Departamento);
+    public List<V_List_Empleado> Listar_Empleado();
     public List<V_List_Empleado>Listar_Emp();
 }
