@@ -95,8 +95,8 @@
                                                                                         
                                                                                                                         -->
                                                                                                                         <header>
-                                                                                                                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                                                                                                            <h2>Lista de Empleados</h2>
+                                                                                                                            <span class="widget-icon"> </span>
+                                                                                                                            <h2>Empleados</h2>
 
                                                                                                                         </header>
 
@@ -123,8 +123,8 @@
                                                                                                                                             <th data-hide="phone,tablet">Puesto</th>
                                                                                                                                             <th data-hide="phone,tablet">Fecha Inicio</th>
                                                                                                                                             <th data-hide="phone,tablet">Fecha Fin</th>
-                                                                                                                                            <th data-hide="phone,tablet">Vacaciones<input type="checkbox" name="all" id="all" onclick="checkAll();
-                                                                                                                                                    " /></th>
+                                                                                                                                            <th data-hide="phone,tablet">Vacaciones<center><input type="checkbox" name="all" id="all" onclick="checkAll();
+                                                                                                                                                                                                  " /></center></th>
                                                                                                                                         </tr>
                                                                                                                                     </thead>
                                                                                                                                     <tbody>
@@ -148,13 +148,14 @@
                                                                                                                                                         <td><%=e.getNo_puesto()%></td>
                                                                                                                                                         <td><%=e.getFe_desde()%></td>
                                                                                                                                                         <td><%=e.getFe_hasta()%></td>
-                                                                                                                                                        <td><input type="checkbox" /></td>
+                                                                                                                                                        <td><center><input type="checkbox" /></center></td>
                                                                                                                                                         </tr>
                                                                                                                                                         <%}%> 
 
 
                                                                                                                                                         </tbody>
                                                                                                                                                         </table>
+
 
                                                                                                                                                         </div>
                                                                                                                                                         <!-- end widget content -->
@@ -167,9 +168,13 @@
 
                                                                                                                                                         </article>
                                                                                                                                                         <!-- WIDGET END -->
-
+                                                                                                                                                        <footer>
+                                                                                                                                                            <center>
+                                                                                                                                                            <button type="submit" class="btn btn-primary">
+                                                                                                                                                                Enviar Lista de  Empelados  
+                                                                                                                                                                </center>
+                                                                                                                                                        </footer>
                                                                                                                                                         </div>
-
                                                                                                                                                         <!-- end row -->
 
                                                                                                                                                         <!-- end row -->
@@ -195,16 +200,16 @@
                                                                                                                                                         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
                                                                                                                                                         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
                                                                                                                                                         <script>
-                                                                                                                                                                                                        if (!window.jQuery) {
-                                                                                                                                                                                                        document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
-                                                                                                                                                                                                        }
+                                                                                                                                                if (!window.jQuery) {
+                                                                                                                                                    document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
+                                                                                                                                                }
                                                                                                                                                         </script>
 
                                                                                                                                                         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
                                                                                                                                                         <script>
-                                                                                                                                                                                                        if (!window.jQuery.ui) {
-                                                                                                                                                                                                        document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                                                                                                                                                                                                        }
+                                                                                                                                                if (!window.jQuery.ui) {
+                                                                                                                                                    document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                                                                                                                                                }
                                                                                                                                                         </script>
 
                                                                                                                                                         <!-- IMPORTANT: APP CONFIG -->
@@ -263,22 +268,21 @@
                                                                                                                                                         <script src="../../js/speech/voicecommand.min.js"></script>
 
                                                                                                                                                         <!-- PAGE RELATED PLUGIN(S) -->
-                                                                                                                                                        <script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
                                                                                                                                                         <script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>
                                                                                                                                                         <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
                                                                                                                                                         <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
                                                                                                                                                         <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
 
                                                                                                                                                         <script>
-                                                                                                                                                                                                    function checkAll() {
-                                                                                                                                                                                                        var nodoCheck = document.getElementsByTagName("input");
-                                                                                                                                                                                                        var varCheck = document.getElementById("all").checked;
-                                                                                                                                                                                                        for (i = 0; i < nodoCheck.length; i++) {
-                                                                                                                                                                                                        if (nodoCheck[i].type == "checkbox" && nodoCheck[i].name != "all" && nodoCheck[i].disabled == false) {
-                                                                                                                                                                                                        nodoCheck[i].checked = varCheck;
-                                                                                                                                                                                                        }
-                                                                                                                                                                                                        }
-                                                                                                                                                                                                      }
+                                                                                                                                                function checkAll() {
+                                                                                                                                                    var nodoCheck = document.getElementsByTagName("input");
+                                                                                                                                                    var varCheck = document.getElementById("all").checked;
+                                                                                                                                                    for (i = 0; i < nodoCheck.length; i++) {
+                                                                                                                                                        if (nodoCheck[i].type == "checkbox" && nodoCheck[i].name != "all" && nodoCheck[i].disabled == false) {
+                                                                                                                                                            nodoCheck[i].checked = varCheck;
+                                                                                                                                                        }
+                                                                                                                                                    }
+                                                                                                                                                }
                                                                                                                                                         </script>
 
                                                                                                                                                         <script type="text/javascript">
@@ -290,7 +294,7 @@
                                                                                                                                                                 pageSetUp();
 
                                                                                                                                                                 /* // DOM Position key index //
-                                                                                                         
+                                                                                                                                                                 
                                                                                                                                                                  l - Length changing (dropdown)
                                                                                                                                                                  f - Filtering input (search)
                                                                                                                                                                  t - The Table! (datatable)
@@ -301,7 +305,7 @@
                                                                                                                                                                  <"#id" and > - div with an id
                                                                                                                                                                  <"class" and > - div with a class
                                                                                                                                                                  <"#id.class" and > - div with an id and class
-                                                                                                         
+                                                                                                                                                                 
                                                                                                                                                                  Also see: http://legacy.datatables.net/usage/features
                                                                                                                                                                  */
 
