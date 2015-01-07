@@ -33,8 +33,8 @@ public class PasoDAO implements InterfacePasoDAO {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "select * from rhtc_pasos ";
-            sql += (Proceso!=null)?" where   id_proceso='"+Proceso+ "'":"";
-            sql +=" order by id_pasos";
+            sql += (Proceso != null) ? " where   id_proceso='" + Proceso + "'" : "";
+            sql += " order by  to_number(substr( nu_pasos,2,length(nu_pasos))) ";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
 
@@ -56,7 +56,7 @@ public class PasoDAO implements InterfacePasoDAO {
             try {
                 this.conn.close();
             } catch (Exception e) {
-            
+
             }
         }
         return lista;
@@ -90,6 +90,18 @@ public class PasoDAO implements InterfacePasoDAO {
             this.conn.close();
         }
 
+    }
+
+    @Override
+    public void UPDATE_NU_PASO(String ID_PASO, String NU_PASO) {
+
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = " UPDATE RHTC_PASOS SET NU_PASOS='" + NU_PASO.trim() + "' WHERE ID_PASOS='" + ID_PASO.trim() + "'";
+            this.conn.ejecutar(sql);
+        } catch (Exception e) {
+            this.conn.close();
+        }
     }
 
 }

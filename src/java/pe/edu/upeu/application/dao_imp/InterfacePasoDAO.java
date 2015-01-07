@@ -18,5 +18,6 @@ public interface InterfacePasoDAO {
 
     public void INSERT_PASOS(String ID_PASOS, String ID_PROCESO, String DE_PASOS, String NU_PASOS, String CO_PASOS);
     public void DELETE_PASOS(String ID_PASOS);
+    public void UPDATE_NU_PASO(String ID_PASO,String NU_PASO);
 
 }

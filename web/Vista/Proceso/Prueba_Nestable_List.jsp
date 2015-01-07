@@ -142,7 +142,7 @@
                                                     </tr>
                                                 </thead>
 
-                                                <tbody  class="tbodys" >
+                                                <tbody  class="tbodys" style=" ">
 
                                                 </tbody>
 
@@ -155,51 +155,31 @@
                                     <div class="widget-body">
 
                                         <div id="nestable-menu">
-                                            <button type="button" class="btn btn-default" data-action="expand-all">
-                                                Expandir Todo
-                                            </button>
-                                            <button type="button" class="btn btn-default" data-action="collapse-all">
-                                                Agrupar Todo
-                                            </button>
+
                                             <button type="button" class="btn btn-default Generar" data-action="collapse-all">
-                                                Generar Numeros de Pasos
+                                                Generar Pasos
                                             </button>
                                         </div>
                                         <div class="row">
 
 
-                                            <div class="col-sm-6 col-lg-4">
+                                            <div class="col-sm-6 col-lg-12">
 
                                                 <h6>Lista de requerimientos</h6>
+                                                <style>
+                                                    .div{
+                                                        border-style: solid;
+                                                        border-color: #ff0000 #0000ff;
+                                                    }
+                                                    label{
+                                                        margin-left: 10px;
+                                                    }
+                                                </style>
 
-                                                <div class="dd" id="nestable">
-                                                    <ol class="dd-list">
-                                                        <li class="dd-item dd3-item" data-id="1">
-                                                            <div class="dd-handle dd3-handle">
-                                                                Drag
-                                                            </div>
-                                                            <div class="dd3-content">
-                                                                <label class="item_req"> Item 13 </label>
+                                                <div class="dd" id="nestable" >
+                                                    <ol class="dd-list" style="width: 1054px;" >
 
-                                                                <div class="pull-right">
-                                                                    <div class="checkbox no-margin">
-                                                                        <label>
-                                                                            <input type="checkbox" class="checkbox style-0" checked="checked">
-                                                                            <span class="font-xs">Checkbox 1</span>
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
 
-                                                            </div>
-                                                        </li>
-                                                        <li class="dd-item dd3-item" data-id="2">
-                                                            <div class="dd-handle dd3-handle">
-                                                                Drag
-                                                            </div>
-                                                            <div class="dd3-content">
-                                                                <label class="item_req"> Item 14 </label>
-                                                            </div>
-                                                        </li>
 
                                                     </ol>
                                                 </div>
@@ -337,11 +317,22 @@
 
                     $.each($(".item_req"), function () {
                         $(this).text("P" + num);
+
+
                         num++;
                     });
                     num = 1;
+
+                    for (var f = 0; f < 3; f++) {
+                        //alert($(".id_paso" + f).val() + " - " + $(".item_"+f).text());
+                        $.post("../../paso", "opc=Update_nu_paso&nu_paso=" + $(".item_" + f).text() + "&paso=" + $(".id_paso" + f).val(), function () {
+
+                        });
+                    }
+                   
+                    Listar_Paso($("#select-proceso").val());
                 });
-                
+
                 listar_Proceso();
                 Listar_Paso($("#select-proceso").val());
 
@@ -376,10 +367,12 @@
                             // alert($(this).val());
                         });
                 var b = $(".tbodys");
+                var c = $(".dd-list");
                 function Listar_Paso(proceso) {
 
                     $.post("../../paso", "opc=Listar&proceso=" + proceso, function (objJson) {
                         b.empty();
+                        c.empty();
                         var lista = objJson.lista;
                         if (objJson.rpta == -1) {
                             alert(objJson.mensaje);
@@ -393,15 +386,28 @@
                             b.append("<td  class='td_co" + i + "'><label>" + lista[i].co + "</label></td>");
                             b.append("<td class='td_id_pro" + i + "' >" + lista[i].proceso_id + "</td>");
                             b.append("<input type='text' name='id' value='" + lista[i].id + "'  class='id_paso" + i + "'/>");
-                            b.append("<td><button class='btn-editar' value='" + i + "' >Editar</button><button class='btn-eliminar' value='" + i + "' >Eliminar</button></td>");
                             b.append("</tr>");
+                        }
+                        for (var i = 0; i < lista.length; i++) {
+                            c.append('<li class="dd-item dd3-item"  ><div class="dd-handle dd3-handle">Drag</div><div class="dd3-content"><label class="item_req item_' + i + '">' + lista[i].num + ' </label> ' +
+                                    '<div class="pull-right"><button class="btn btn-primary btn-editar" value="' + i + '" > Editar</button></div>' +
+                                    '<div class="pull-right"><button class="btn btn-primary btn-eliminar" value="' + i + '" > Eliminar</button></div>' +
+                                    '<div class="pull-right"><label >' + lista[i].det + '</label></div>' +
+                                    '<div class="pull-right"><label >' + lista[i].co + '</label></div>' +
+                                    '<input type="text" name="id" value="' + lista[i].id + '"  class="id_paso' + i + '"/>' +
+                                    '</div> </li>');
+
                         }
                         $(".Generar").click(function () {
                             var num = $(".tbodys tr").size();
 
                             for (var f = 0; f < num; f++) {
                                 $(".td_num" + f).text("P" + (f + 1));
+
                             }
+
+
+
                         });
                         $(".btn-editar").click(function () {
                             $(".desc_paso").val($(".td_det" + $(this).val()).text());
