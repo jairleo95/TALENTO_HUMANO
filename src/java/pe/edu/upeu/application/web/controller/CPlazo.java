@@ -71,6 +71,11 @@ public class CPlazo extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
+            if (opc.equals("Listar_Plazo")) {
+                List<Map<String, ?>> lista = pl.Listar_Plazo();
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
             if (opc.equals("Eliminar")) {
                 String id = request.getParameter("plz");
                 pl.REMOVE_PLAZO(id);

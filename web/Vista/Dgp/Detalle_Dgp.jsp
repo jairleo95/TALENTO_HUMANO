@@ -105,7 +105,7 @@
                     <input type="hidden" name="idreq" value="<%=d.getId_requerimiento().trim()%>">
                     </tr>
                     <tr><td class="text-info table-bordered">BEV: </td><td><%=d.getDe_bev()%></td></tr>
-                    <tr><td class="text-info table-bordered">Centro de Costos: </td><td><%=d.getCa_centro_costos()%></td></tr>
+                    <tr><td class="text-info table-bordered">Centro de Costos: </td><td></td></tr>
                     <%if (d.getDe_antecedentes_policiales().equals("1")) {%>
                     <tr><td class="text-info table-bordered">Antecedentes Policiales: </td><td>No</td></tr>
                     <%} else {%>
@@ -172,26 +172,14 @@
                         }%>
 
                     <tr style="color: red;">
-                        <% InterfaceUsuarioDAO us = new UsuarioDAO();
-                            Usuario u = new Usuario();
+                        <% 
                             if (d.getUs_modif() != null) { %>
                         <td class="text-info table-bordered">Modificado por:</td>
-                        <td><%
-                            for (int j = 0; j < us.List_ID_User(d.getUs_modif()).size(); j++) {
-
-                                u = (Usuario) LIST_ID_USER.get(j);
-                                out.print(u.getId_rol());
-                            }%>
-                        </td>
+                        <td></td>
                         <%}%>
 
                         <% if (d.getUs_creacion() != null) {%>
-                        <td class="text-info table-bordered">Creado por:</td><td><%
-                            //$list_us=$mdu->LIST_ID_USER($list[$index][19]);
-                            for (int k = 0; k < us.List_ID_User(d.getUs_creacion()).size(); k++) {
-                                out.print(u.getId_rol());
-                            }
-                            %></td>
+                        <td class="text-info table-bordered">Creado por:</td><td></td>
                             <%}%>
                     </tr>
                     <%}%> 

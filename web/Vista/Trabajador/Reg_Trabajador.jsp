@@ -1468,7 +1468,6 @@
                                                                 </div>
                                                             </div>
                                                             <div class="row">
-
                                                                 <div class="col-sm-3">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
@@ -1520,6 +1519,7 @@
                                                                                 <option value="1">Si</option>
                                                                                 <option value="0">No</option>
                                                                             </select> 
+                                                                            <input type="hidden" name="num_hijo"  value="0" class="num_hijo"/>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1546,9 +1546,7 @@
                                                                     <tbody class="tabla-hijo">
                                                                     </tbody>
                                                                 </table>
-
                                                             </div>
-
                                                             <code class="codigo"></code>
                                                             <input type="submit" name="opc"  class="submit btn btn-primary btn-lg" value="Registrar">
                                                             <script>$(document).ready(function () {
@@ -1644,9 +1642,10 @@
 
                                                                             });
                                                                         });
-
+                                                                        $(".num_hijo").val(p);
                                                                         p++;
                                                                         texto_h = "";
+
                                                                     });
                                                                 });</script>
                                                         </div>

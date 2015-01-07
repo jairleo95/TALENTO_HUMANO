@@ -79,8 +79,7 @@
                                                                                                                 <!-- NEW WIDGET START -->
                                                                                                                 <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-
-                                                                                                                    <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-3" data-widget-editbutton="false">
+                                                                                                                    <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false">
                                                                                                                         <!-- widget options:
                                                                                                                         usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
                                                                                         
@@ -95,8 +94,8 @@
                                                                                         
                                                                                                                         -->
                                                                                                                         <header>
-                                                                                                                            <span class="widget-icon"> </span>
-                                                                                                                            <h2>Empleados</h2>
+                                                                                                                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                                                                                                            <h2>Column Filters </h2>
 
                                                                                                                         </header>
 
@@ -113,17 +112,53 @@
                                                                                                                             <!-- widget content -->
                                                                                                                             <div class="widget-body no-padding">
 
-                                                                                                                                <table id="datatable_tabletools" class="table table-striped table-bordered table-hover" width="100%">
+                                                                                                                                <table id="datatable_fixed_column"  class="table table-striped table-bordered" width="100%">
+
                                                                                                                                     <thead>
                                                                                                                                         <tr>
-                                                                                                                                            <th data-hide="phone">ID</th>
-                                                                                                                                            <th data-class="expand">Nombres y Apellidos</th>
-                                                                                                                                            <th>Área</th>
-                                                                                                                                            <th data-hide="phone">Sección</th>
-                                                                                                                                            <th data-hide="phone,tablet">Puesto</th>
-                                                                                                                                            <th data-hide="phone,tablet">Fecha Inicio</th>
-                                                                                                                                            <th data-hide="phone,tablet">Fecha Fin</th>
+                                                                                                                                            <th class="hasinput" style="width:17%">
+                                                                                                                                                <input type="text" class="form-control" placeholder="Filter Name" />
+                                                                                                                                            </th>
+                                                                                                                                            <th class="hasinput" style="width:18%">
+                                                                                                                                                <div class="input-group">
+                                                                                                                                                    <input class="form-control" placeholder="Filter Position" type="text">
+                                                                                                                                                        <span class="input-group-addon">
+                                                                                                                                                            <span class="onoffswitch">
+                                                                                                                                                                <input type="checkbox" name="start_interval" class="onoffswitch-checkbox" id="st3">
+                                                                                                                                                                    <label class="onoffswitch-label" for="st3"> 
+                                                                                                                                                                        <span class="onoffswitch-inner" data-swchon-text="YES" data-swchoff-text="NO"></span> 
+                                                                                                                                                                        <span class="onoffswitch-switch"></span> 
+                                                                                                                                                                    </label> 
+                                                                                                                                                            </span>
+                                                                                                                                                        </span>
+                                                                                                                                                </div>
+
+
+                                                                                                                                            </th>
+                                                                                                                                            <th class="hasinput" style="width:16%">
+                                                                                                                                                <input type="text" class="form-control" placeholder="Filter Office" />
+                                                                                                                                            </th>
+                                                                                                                                            <th class="hasinput" style="width:17%">
+                                                                                                                                                <input type="text" class="form-control" placeholder="Filter Age" />
+                                                                                                                                            </th>
+                                                                                                                                            <th class="hasinput icon-addon">
+                                                                                                                                                <input id="dateselect_filter" type="text" placeholder="Filter Date" class="form-control datepicker" data-dateformat="yy/mm/dd">
+                                                                                                                                                    <label for="dateselect_filter" class="glyphicon glyphicon-calendar no-margin padding-top-15" rel="tooltip" title="" data-original-title="Filter Date"></label>
+                                                                                                                                            </th>
+                                                                                                                                            <th class="hasinput" style="width:16%">
+                                                                                                                                                <input type="text" class="form-control" placeholder="Filter Salary" />
+                                                                                                                                            </th>
+                                                                                                                                        </tr>
+                                                                                                                                        <tr>
+                                                                                                                                            <th data-class="expand">Name</th>
+                                                                                                                                            <th>Position</th>
+                                                                                                                                            <th data-hide="phone">Office</th>
+                                                                                                                                            <th data-hide="phone">Age</th>
+                                                                                                                                            <th data-hide="phone,tablet">Start date</th>
+                                                                                                                                            <th data-hide="phone,tablet">Salary</th>
+                                                                                                                                            <th data-hide="phone,tablet">Salary</th>
                                                                                                                                             <th class="sorting_asc_disabled" >Vacacionweqes<center><input type="checkbox" name="all" id="all" onclick="checkAll();"></center></th>
+
 
                                                                                                                                         </tr>
                                                                                                                                     </thead>
@@ -154,8 +189,10 @@
 
 
                                                                                                                                                         </tbody>
-                                                                                                                                                        </table>
 
+
+
+                                                                                                                                                        </table>
 
                                                                                                                                                         </div>
                                                                                                                                                         <!-- end widget content -->
@@ -164,6 +201,7 @@
                                                                                                                                                         <!-- end widget div -->
 
                                                                                                                                                         </div>
+
 
 
                                                                                                                                                         </article>
@@ -200,16 +238,16 @@
                                                                                                                                                         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
                                                                                                                                                         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
                                                                                                                                                         <script>
-                                                                                                                                                if (!window.jQuery) {
-                                                                                                                                                    document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
-                                                                                                                                                }
+                                                                                                                                                            if (!window.jQuery) {
+                                                                                                                                                                document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
+                                                                                                                                                            }
                                                                                                                                                         </script>
 
                                                                                                                                                         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
                                                                                                                                                         <script>
-                                                                                                                                                if (!window.jQuery.ui) {
-                                                                                                                                                    document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                                                                                                                                                }
+                                                                                                                                                            if (!window.jQuery.ui) {
+                                                                                                                                                                document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                                                                                                                                                            }
                                                                                                                                                         </script>
 
                                                                                                                                                         <!-- IMPORTANT: APP CONFIG -->
@@ -275,22 +313,22 @@
                                                                                                                                                         <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
 
                                                                                                                                                         <script>
-                                                                                                                                                function checkAll() {
-                                                                                                                                                    var nodoCheck = document.getElementsByTagName("input");
-                                                                                                                                                    var varCheck = document.getElementById("all").checked;
-                                                                                                                                                    for (i = 0; i < nodoCheck.length; i++) {
-                                                                                                                                                        if (nodoCheck[i].type == "checkbox" && nodoCheck[i].name != "all" && nodoCheck[i].disabled == false) {
-                                                                                                                                                            nodoCheck[i].checked = varCheck;
-                                                                                                                                                        }
-                                                                                                                                                    }
-                                                                                                                                                }
+                                                                                                                                                            function checkAll() {
+                                                                                                                                                                var nodoCheck = document.getElementsByTagName("input");
+                                                                                                                                                                var varCheck = document.getElementById("all").checked;
+                                                                                                                                                                for (i = 0; i < nodoCheck.length; i++) {
+                                                                                                                                                                    if (nodoCheck[i].type == "checkbox" && nodoCheck[i].name != "all" && nodoCheck[i].disabled == false) {
+                                                                                                                                                                        nodoCheck[i].checked = varCheck;
+                                                                                                                                                                    }
+                                                                                                                                                                }
+                                                                                                                                                            }
                                                                                                                                                         </script>
 
                                                                                                                                                         <script type="text/javascript">
 
                                                                                                                                                             // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-                                                                                                                                                            $(document).ready(function() {
+                                                                                                                                                            $(document).ready(function () {
 
                                                                                                                                                                 pageSetUp();
 
@@ -326,16 +364,16 @@
                                                                                                                                                                             "t" +
                                                                                                                                                                             "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
                                                                                                                                                                     "autoWidth": true,
-                                                                                                                                                                    "preDrawCallback": function() {
+                                                                                                                                                                    "preDrawCallback": function () {
                                                                                                                                                                         // Initialize the responsive datatables helper once.
                                                                                                                                                                         if (!responsiveHelper_dt_basic) {
                                                                                                                                                                             responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
                                                                                                                                                                         }
                                                                                                                                                                     },
-                                                                                                                                                                    "rowCallback": function(nRow) {
+                                                                                                                                                                    "rowCallback": function (nRow) {
                                                                                                                                                                         responsiveHelper_dt_basic.createExpandIcon(nRow);
                                                                                                                                                                     },
-                                                                                                                                                                    "drawCallback": function(oSettings) {
+                                                                                                                                                                    "drawCallback": function (oSettings) {
                                                                                                                                                                         responsiveHelper_dt_basic.respond();
                                                                                                                                                                     }
                                                                                                                                                                 });
@@ -354,16 +392,16 @@
                                                                                                                                                                             "t" +
                                                                                                                                                                             "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
                                                                                                                                                                     "autoWidth": true,
-                                                                                                                                                                    "preDrawCallback": function() {
+                                                                                                                                                                    "preDrawCallback": function () {
                                                                                                                                                                         // Initialize the responsive datatables helper once.
                                                                                                                                                                         if (!responsiveHelper_datatable_fixed_column) {
                                                                                                                                                                             responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
                                                                                                                                                                         }
                                                                                                                                                                     },
-                                                                                                                                                                    "rowCallback": function(nRow) {
+                                                                                                                                                                    "rowCallback": function (nRow) {
                                                                                                                                                                         responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
                                                                                                                                                                     },
-                                                                                                                                                                    "drawCallback": function(oSettings) {
+                                                                                                                                                                    "drawCallback": function (oSettings) {
                                                                                                                                                                         responsiveHelper_datatable_fixed_column.respond();
                                                                                                                                                                     }
 
@@ -373,7 +411,7 @@
                                                                                                                                                                 $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
 
                                                                                                                                                                 // Apply the filter
-                                                                                                                                                                $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function() {
+                                                                                                                                                                $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
 
                                                                                                                                                                     otable
                                                                                                                                                                             .column($(this).parent().index() + ':visible')
@@ -389,16 +427,16 @@
                                                                                                                                                                             "t" +
                                                                                                                                                                             "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
                                                                                                                                                                     "autoWidth": true,
-                                                                                                                                                                    "preDrawCallback": function() {
+                                                                                                                                                                    "preDrawCallback": function () {
                                                                                                                                                                         // Initialize the responsive datatables helper once.
                                                                                                                                                                         if (!responsiveHelper_datatable_col_reorder) {
                                                                                                                                                                             responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
                                                                                                                                                                         }
                                                                                                                                                                     },
-                                                                                                                                                                    "rowCallback": function(nRow) {
+                                                                                                                                                                    "rowCallback": function (nRow) {
                                                                                                                                                                         responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
                                                                                                                                                                     },
-                                                                                                                                                                    "drawCallback": function(oSettings) {
+                                                                                                                                                                    "drawCallback": function (oSettings) {
                                                                                                                                                                         responsiveHelper_datatable_col_reorder.respond();
                                                                                                                                                                     }
                                                                                                                                                                 });
@@ -431,16 +469,16 @@
                                                                                                                                                                         "sSwfPath": "../../js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
                                                                                                                                                                     },
                                                                                                                                                                     "autoWidth": true,
-                                                                                                                                                                    "preDrawCallback": function() {
+                                                                                                                                                                    "preDrawCallback": function () {
                                                                                                                                                                         // Initialize the responsive datatables helper once.
                                                                                                                                                                         if (!responsiveHelper_datatable_tabletools) {
                                                                                                                                                                             responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
                                                                                                                                                                         }
                                                                                                                                                                     },
-                                                                                                                                                                    "rowCallback": function(nRow) {
+                                                                                                                                                                    "rowCallback": function (nRow) {
                                                                                                                                                                         responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
                                                                                                                                                                     },
-                                                                                                                                                                    "drawCallback": function(oSettings) {
+                                                                                                                                                                    "drawCallback": function (oSettings) {
                                                                                                                                                                         responsiveHelper_datatable_tabletools.respond();
                                                                                                                                                                     }
                                                                                                                                                                 });
@@ -457,7 +495,7 @@
                                                                                                                                                             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
                                                                                                                                                             _gaq.push(['_trackPageview']);
 
-                                                                                                                                                            (function() {
+                                                                                                                                                            (function () {
                                                                                                                                                                 var ga = document.createElement('script');
                                                                                                                                                                 ga.type = 'text/javascript';
                                                                                                                                                                 ga.async = true;

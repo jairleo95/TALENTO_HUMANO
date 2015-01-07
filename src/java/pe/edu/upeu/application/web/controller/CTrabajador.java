@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import pe.edu.upeu.application.dao.Datos_Hijo_TrabajadorDAO;
 import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.DireccionDAO;
 import pe.edu.upeu.application.dao.DocumentoDAO;
@@ -21,6 +22,7 @@ import pe.edu.upeu.application.dao.Padre_Madre_ConyugueDAO;
 import pe.edu.upeu.application.dao.Tipo_DocumentoDAO;
 import pe.edu.upeu.application.dao.TrabajadorDAO;
 import pe.edu.upeu.application.dao.UbigeoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDatos_Hijo_Trabajador;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO;
@@ -69,6 +71,7 @@ public class CTrabajador extends HttpServlet {
             Text = (String) request.getParameter("text");
             String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
             InterfacePadre_Madre_ConyugueDAO pmc = new Padre_Madre_ConyugueDAO();
+            InterfaceDatos_Hijo_Trabajador h = new Datos_Hijo_TrabajadorDAO();
 
             if (opc.equals("Form_Reg")) {
                 getServletContext().setAttribute("List_Carrera", li.List_Carrera());
@@ -79,9 +82,7 @@ public class CTrabajador extends HttpServlet {
                 getServletContext().setAttribute("Listar_via", dir.Listar_via());
                 getServletContext().setAttribute("Listar_zona", dir.Listar_zona());
                 getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
-
                 response.sendRedirect("Vista/Trabajador/Reg_Trabajador.jsp");
-
             }
             if (opc.equals("Registrar")) {
                 String AP_PATERNO = request.getParameter("APELLIDO_P");
@@ -156,20 +157,30 @@ public class CTrabajador extends HttpServlet {
                 String NU_DOC_C = request.getParameter("NRO_DOC_C");
                 String LI_INSCRIPCION_VIG_ESSALUD_C = request.getParameter("INSCRIPCION_VIG_ESSALUD");
                 String ID_CONYUGUE = request.getParameter("CONYUGUE");
+                int num_hijo = Integer.parseInt(request.getParameter("num_hijo"));
 
                 tr.INSERT_TRABAJADOR(null, AP_PATERNO, AP_MATERNO, NO_TRABAJADOR, TI_DOC, NU_DOC, ES_CIVIL, FE_NAC, ID_NACIONALIDAD, ID_DEPARTAMENTO, ID_PROVINCIA, ID_DISTRITO, TE_TRABAJADOR, CL_TRA, DI_CORREO_PERSONAL, DI_CORREO_INST, CO_SISTEMA_PENSIONARIO, LI_NIVEL_EDUCATIVO, REGIMEN, ES_INST_PERU, CARRERA, DE_ANNO_EGRESO, CM_OTROS_ESTUDIOS, ES_SEXO, LI_GRUPO_SANGUINEO, DE_REFERENCIA, LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, ID_NO_AFP, ES_AFILIADO_ESSALUD, LI_TIPO_TRABAJADOR, CA_TIPO_HORA_PAGO_REFEERENCIAL, ES_FACTOR_RH, LI_DI_DOM_A_D1, DI_DOM_A_D2, LI_DI_DOM_A_D3, DI_DOM_A_D4, LI_DI_DOM_A_D5, DI_DOM_A_D6, DI_DOM_A_REF, ID_DI_DOM_A_DISTRITO, LI_DI_DOM_LEG_D1, DI_DOM_LEG_D2, LI_DI_DOM_LEG_D3, DI_DOM_LEG_D4, LI_DI_DOM_LEG_D5, DI_DOM_LEG_D6, ID_DI_DOM_LEG_DISTRITO, CA_ING_QTA_CAT_EMPRESA, CA_ING_QTA_CAT_RUC, CA_ING_QTA_CAT_OTRAS_EMPRESAS, CM_OBSERVACIONES, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, AP_NOMBRES_PADRE, AP_NOMBRES_MADRE,
                         ES_TRABAJA_UPEU_C, AP_NOMBRES_C, FE_NAC_C, ID_TIPO_DOC_C, NU_DOC_C, LI_INSCRIPCION_VIG_ESSALUD_C, ID_CONYUGUE);
                 String idtr = tr.MAX_ID_DATOS_TRABAJADOR();
                 tr.UPDATE_ID_CONYUGUE(idtr, ID_CONYUGUE);
+                for (int i = 1; i <= num_hijo; i++) {
+                    String AP_PATERNO_H = request.getParameter("APELLIDO_P_H" + i);
+                    String AP_MATERNO_H = request.getParameter("APELLIDO_M_H" + i);
+                    String NO_HIJO_TRABAJADOR = request.getParameter("NOMBRE_H" + i);
+                    String FE_NACIMIENTO = request.getParameter("FECHA_NAC_H" + i);
+                    String ES_SEXO_H = request.getParameter("SEXO_H" + i);
+                    String ES_TIPO_DOC = request.getParameter("TIPO_DOC_ID_H" + i);
+                    String NU_DOC_H = request.getParameter("NRO_DOC_H" + i);
+                    String ES_PRESENTA_DOCUMENTO = null;
+                    String ES_INSCRIPCION_VIG_ESSALUD = request.getParameter("ESSALUD_H" + i);
+                    String ES_ESTUDIO_NIV_SUPERIOR = request.getParameter("EST_SUP_H" + i);
+                    String ES_DATOS_HIJO_TRABAJADOR = "1";
+                    h.INSERT_DATOS_HIJO_TRABAJADOR(null, idtr, AP_PATERNO_H, AP_MATERNO_H, NO_HIJO_TRABAJADOR, FE_NACIMIENTO, ES_SEXO_H, ES_TIPO_DOC, NU_DOC_H, ES_PRESENTA_DOCUMENTO, ES_INSCRIPCION_VIG_ESSALUD, ES_ESTUDIO_NIV_SUPERIOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, ES_DATOS_HIJO_TRABAJADOR);
+
+                }
 
                 getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-                //getServletContext().setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));
-                //  if (ES_CIVIL.equals("1")) {
                 response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr + "&a=t");
-
-                // } else {
-                // response.sendRedirect("Vista/Trabajador/Familiar/Reg_Padre_Madre_Conyugue.jsp?idtr=" + idtr + "");
-                // }
             }
             if (opc.equals("Buscar")) {
                 String Buscar = request.getParameter("busqueda");
