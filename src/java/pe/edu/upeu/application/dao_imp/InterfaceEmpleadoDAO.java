@@ -8,6 +8,7 @@ package pe.edu.upeu.application.dao_imp;
 
 import java.util.List;
 import pe.edu.upeu.application.model.V_List_Empleado;
+import pe.edu.upeu.application.model.X_Lis_Empleados;
 
 /**
  *
@@ -18,4 +19,5 @@ public interface InterfaceEmpleadoDAO {
     public void VALIDAR_EMPLEADO(String id_tra);
     public List<V_List_Empleado> Listar_Empleado(String Departamento);
     public List<V_List_Empleado>Listar_Emp();
+    public List<X_Lis_Empleados>Buscar_Empl(String no_emp,String app_emp,String apm_emp,String Nu_doc ,String id_dep);
 }

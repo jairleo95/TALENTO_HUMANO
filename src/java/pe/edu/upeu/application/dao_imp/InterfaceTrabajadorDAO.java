@@ -31,4 +31,6 @@ public interface InterfaceTrabajadorDAO {
     public String MAX_ID_DATOS_TRABAJADOR();
 
     public void UPDATE_ID_CONYUGUE(String id_conyugue, String id_trabajador);
+    
+    public String tipo_planilla(String id_trabajador);
 }

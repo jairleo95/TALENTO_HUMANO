@@ -83,6 +83,10 @@
         <servlet-name>CVacaciones</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CVacaciones</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>C_Renuncias</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.C_Renuncias</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
         <url-pattern>/trabajador</url-pattern>
@@ -163,15 +167,11 @@
         <servlet-name>CVacaciones</servlet-name>
         <url-pattern>/vacaciones</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>C_Renuncias</servlet-name>
+        <url-pattern>/Renuncias</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>300</session-timeout>
     </session-config>
-    <error-page>
-        <error-code>404</error-code>
-        <location>/Vista/Error/error404.html</location>
-    </error-page>
-    <error-page>
-        <error-code>501</error-code>
-        <location>/Vista/Error/error500.html</location>
-    </error-page>
 </web-app>

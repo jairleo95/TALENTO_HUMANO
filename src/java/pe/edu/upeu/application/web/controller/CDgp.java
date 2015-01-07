@@ -213,6 +213,24 @@ public class CDgp extends HttpServlet {
                 getServletContext().setAttribute("Listar_Trabajador_id", tr.ListaridTrabajador(idtr));
                 response.sendRedirect("Vista/Dgp/Reg_Dgp.jsp?idreq=" + idreq);
             }
+            if (opc.equals("Reg_renuncia")) {
+                String iddeph=request.getParameter("idep");
+                /* TEMPORAL*/
+                String Tipo_planilla=tr.tipo_planilla(idtr);
+                if (Tipo_planilla.equals("TPL-0001")) {
+                    idreq = "REQ-0015";
+                }
+                if (Tipo_planilla.equals("TPL-0002")) {
+                    idreq = "REQ-0016";
+                }
+                if (Tipo_planilla.equals("TPL-0003")) {
+                    idreq = "REQ-0017";
+                }
+                out.print(iddeph+idtr+idreq+iddep);
+                //getServletContext().setAttribute("List_Puesto", pu.List_Puesto_Dep(iddep));
+                //getServletContext().setAttribute("Listar_Trabajador_id", tr.ListaridTrabajador(idtr));
+                //response.sendRedirect("Vista/Renuncias/Reg_Dgp_Renuncia.jsp?idreq=" + idreq);
+            }
 
             if (opc.equals("rd")) {
 
@@ -317,11 +335,11 @@ public class CDgp extends HttpServlet {
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());
-        }
+        }/*
         Gson gson = new Gson();
         out.print(gson.toJson(rpta));
         out.flush();
-        out.close();
+        out.close();*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

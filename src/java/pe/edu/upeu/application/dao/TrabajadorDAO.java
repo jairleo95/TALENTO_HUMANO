@@ -398,4 +398,20 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         }
     }
 
+    @Override
+    public String tipo_planilla(String id_trabajador) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT ID_TIPO_PLANILLA FROM RHTM_CONTRATO WHERE ID_TRABAJADOR='"+id_trabajador+"' and ES_CONTRATO='1'";
+        String id_pl = null;
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                id_pl = rs.getString(1);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return id_pl;
+    }
 }

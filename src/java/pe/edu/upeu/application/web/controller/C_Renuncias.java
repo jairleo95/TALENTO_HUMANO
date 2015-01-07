@@ -5,21 +5,23 @@
  */
 package pe.edu.upeu.application.web.controller;
 
+import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import pe.edu.upeu.application.dao.EmpleadoDAO;
-import pe.edu.upeu.application.dao_imp.InterfaceEmpleadoDAO;
+import pe.edu.upeu.application.dao.TrabajadorDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 
 /**
  *
- * @author Admin
+ * @author joserodrigo
  */
-public class CEmpleado extends HttpServlet {
+public class C_Renuncias extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,60 +32,35 @@ public class CEmpleado extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        HttpSession sesion = request.getSession(true);
-        InterfaceEmpleadoDAO Iem = new EmpleadoDAO();
-        String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
         String opc = request.getParameter("opc");
+        HttpSession sesion = request.getSession(true);
+        String idtr = request.getParameter("idtr");
+        String idreq = request.getParameter("idreq");
+        InterfaceTrabajadorDAO tr = new TrabajadorDAO();
+        String iddep = (String)sesion.getAttribute("DEPARTAMENTO_ID");
 
-        if (opc.equals("Eva_Emp")) {
-            response.sendRedirect("Vista/Empleado/Evaluacion_Empleado.jsp");
-        }
-        if (opc.equals("Reg_Evaluar_Emp")) {
-
-        }
-        if (opc.equals("Reporte")) {
-
-            String iddepa = (String) sesion.getAttribute("DEPARTAMENTO_ID");
-            getServletContext().setAttribute("List_Empleado", Iem.Listar_Empleado(iddepa));
-
-            out.print(Iem.Listar_Empleado(iddepa).size());
-
-            response.sendRedirect("Vista/Empleado/Filtro_Empleado.jsp?iddepa");
-        }
-        if (opc.equals("Listar_empleados")) {
-            String Buscar = request.getParameter("busqueda");
-            String dni = request.getParameter("dni");
-            String nom = request.getParameter("nom");
-            String ape_mat = request.getParameter("ape_mat");
-            String ape_pat = request.getParameter("ape_pat");
-            String Text = (String) request.getParameter("text");
-            String busc = request.getParameter("busc");
-
-            
-            // String all = request.getParameter("all");
-
-            if (("Buscar".equals(Buscar) & (!"".equals(dni) | !"".equals(nom) | !"".equals(ape_mat) | !"".equals(ape_pat)))) {
-                            //out.print(Text+Buscar+dni+nom+ape_mat+ape_pat+busc+iddep+"");
-                if (busc != null) {
-                   getServletContext().setAttribute("Buscar_Empl", Iem.Buscar_Empl(nom, ape_pat, ape_mat, dni, iddep));
-                    response.sendRedirect("Vista/Renuncias/Generar_dgp_renuncia.jsp?text=" + Text);
-                    //out.print(Text+Buscar+dni+nom+ape_mat+ape_pat+iddep+"");
-                }
-            } else {
-                response.sendRedirect("Vista/Renuncias/Generar_dgp_renuncia.jsp?text=" + Text);
-                //out.print(Text+Buscar+dni+nom+ape_mat+ape_pat+iddep+"");
+        if ("Reg_renuncia".equals(request.getParameter("opc"))) {
+            String Tipo_planilla = tr.tipo_planilla(idtr);
+            /*if (Tipo_planilla.equals("TPL-0001")) {
+                idreq = "REQ-0015";
             }
+            if (Tipo_planilla.equals("TPL-0002")) {
+                idreq = "REQ-0016";
+            }
+            if (Tipo_planilla.equals("TPL-0003")) {
+                idreq = "REQ-0017";
+            }*/
+            out.print(Tipo_planilla+idtr + idreq + iddep);
+           // getServletContext().setAttribute("List_Puesto", pu.List_Puesto_Dep(iddep));
+          //  getServletContext().setAttribute("Listar_Trabajador_id", tr.ListaridTrabajador(idtr));
+            //response.sendRedirect("Vista/Renuncias/Reg_Dgp_Renuncia.jsp?idreq=" + idreq);
         }
 
-        try {
-
-        } finally {
-            out.close();
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
