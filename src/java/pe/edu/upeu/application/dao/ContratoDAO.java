@@ -270,7 +270,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 aitd.setDe_bev(rs.getDouble("de_bev"));
                 aitd.setCa_centro_costos(rs.getDouble("ca_centro_costos"));
                 aitd.setDe_antecedentes_policiales(rs.getString("de_antecedentes_policiales"));
-                aitd.setDe_certificado_salud(rs.getString("de_certificado_salud"));
+               // aitd.setDe_certificado_salud(rs.getString("de_certificado_salud"));
                 aitd.setDe_monto_honorario(rs.getString("de_monto_honorario"));
                 list.add(aitd);
             }

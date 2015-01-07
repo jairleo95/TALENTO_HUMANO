@@ -1468,7 +1468,6 @@
                                                                 </div>
                                                             </div>
                                                             <div class="row">
-
                                                                 <div class="col-sm-3">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
@@ -1520,12 +1519,14 @@
                                                                                 <option value="1">Si</option>
                                                                                 <option value="0">No</option>
                                                                             </select> 
+                                                                            <input type="hidden" name="num_hijo"  value="0" class="num_hijo"/>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div> <button type="button" class="btn-reg-hijo btn btn-info">
-                                                                Agregar Hijo
-                                                            </button>
+                                                            </div> 
+                                                            <div class="btn-mant">
+                                                                <button type="button" class="btn-reg-hijo btn btn-info">Agregar Hijo</button>
+                                                            </div>
                                                             <div class="row">
                                                                 <table class="table" style="margin-top:1%;">
                                                                     <thead>
@@ -1545,9 +1546,7 @@
                                                                     <tbody class="tabla-hijo">
                                                                     </tbody>
                                                                 </table>
-
                                                             </div>
-
                                                             <code class="codigo"></code>
                                                             <input type="submit" name="opc"  class="submit btn btn-primary btn-lg" value="Registrar">
                                                             <script>$(document).ready(function () {
@@ -1556,30 +1555,94 @@
                                                                     $(".btn-reg-hijo").click(function () {
 
                                                                         var tabla_hijo = $(".tabla-hijo");
-                                                                        var ap_pat = $(".i_app_h").val();
-                                                                        var ap_mat = $(".i_apm_h").val();
-                                                                        var nombre = $(".i_no_h").val();
-                                                                        var fe_nac = $(".i_fnac_h").val();
-                                                                        var sexo = $(".i_sexo_h").val();
-                                                                        var t_doc = $(".i_tdoc_h").val();
-                                                                        var ndoc = $(".i_ndoc_h").val();
-                                                                        var essalud = $(".i_essalud_h").val();
-                                                                        var es_sup = $(".i_es_sup_h").val();
+                                                                        var ap_pat = $(".i_app_h");
+                                                                        var ap_mat = $(".i_apm_h");
+                                                                        var nombre = $(".i_no_h");
+                                                                        var fe_nac = $(".i_fnac_h");
+                                                                        var sexo = $(".i_sexo_h");
+                                                                        var t_doc = $(".i_tdoc_h");
+                                                                        var ndoc = $(".i_ndoc_h");
+                                                                        var essalud = $(".i_essalud_h");
+                                                                        var es_sup = $(".i_es_sup_h");
 
                                                                         texto_h += ("<tr class='tr-hijo_" + p + "'>");
-                                                                        texto_h += ('<td>' + ap_pat + '<input type="hidden" value="' + ap_pat + '" name="APELLIDO_P_H' + p + '" class="ap_p_h"/></td>');
-                                                                        texto_h += ('<td>' + ap_mat + '<input type="hidden" value="' + ap_mat + '" name="APELLIDO_M_H' + p + '" class="ap_m_h"/></td>');
-                                                                        texto_h += ('<td>' + nombre + '<input type="hidden" value="' + nombre + '" name="NOMBRE_H' + p + '" class="no_h"/></td>');
-                                                                        texto_h += ('<td>' + fe_nac + '<input type="hidden" value="' + fe_nac + '" name="FECHA_NAC_H' + p + '" class="fe_n_h"/></td>');
-                                                                        texto_h += (' <td>' + sexo + '<input type="hidden" value="' + sexo + '" name="SEXO_H' + p + '" class="sex_h"/></td>');
-                                                                        texto_h += ('<td>' + t_doc + '<input type="hidden" value="' + t_doc + '" name="TIPO_DOC_ID_H' + p + '" class="ti_doc_h"/></td>');
-                                                                        texto_h += ('<td>' + ndoc + '<input type="hidden" value="' + ndoc + '" name="NRO_DOC_H' + p + '" class="nu_doc_h"/></td>');
-                                                                        texto_h += ('<td>' + essalud + '<input type="hidden" value="' + essalud + '" name="ESSALUD_H' + p + '" class="essalud_h"/></td>');
-                                                                        texto_h += ('<td>' + es_sup + '<input type="hidden" value="' + es_sup + '" name="EST_SUP_H' + p + '" class="es_sup_h"/></td>');
-                                                                        texto_h += ('<td><a href="javascript:void(0);" class="btn btn-danger" onclick="$(\'.tr-hijo_' + p + '\').remove();">Quitar</a> <a class="btn btn-success" href="javascript:void(0);">Modificar</a></td>');
+                                                                        texto_h += ('<td ><label class="td-ap_pat' + p + '">' + ap_pat.val() + '</label><input type="hidden" value="' + ap_pat.val() + '" name="APELLIDO_P_H' + p + '" class="ap_p_h_' + p + '"/></td>');
+                                                                        texto_h += ('<td ><label class="td-ap_mat' + p + '">' + ap_mat.val() + '</label><input type="hidden" value="' + ap_mat.val() + '" name="APELLIDO_M_H' + p + '" class="ap_m_h_' + p + '"/></td>');
+                                                                        texto_h += ('<td ><label class="td-nom' + p + '">' + nombre.val() + '</label><input type="hidden" value="' + nombre.val() + '" name="NOMBRE_H' + p + '" class="no_h_' + p + '"/></td>');
+                                                                        texto_h += ('<td ><label class="td-fe_nac' + p + '">' + fe_nac.val() + '</label><input type="hidden" value="' + fe_nac.val() + '" name="FECHA_NAC_H' + p + '" class="fe_n_h_' + p + '"/></td>');
+                                                                        texto_h += (' <td ><label class="td-sex' + p + '">' + sexo.val() + '</label><input type="hidden" value="' + sexo.val() + '" name="SEXO_H' + p + '" class="sex_h_' + p + '"/></td>');
+                                                                        texto_h += ('<td ><label class="td-tdoc' + p + '">' + t_doc.val() + '</label><input type="hidden" value="' + t_doc.val() + '" name="TIPO_DOC_ID_H' + p + '" class="ti_doc_h_' + p + '"/></td>');
+                                                                        texto_h += ('<td ><label class="td-ndoc' + p + '">' + ndoc.val() + '</label><input type="hidden" value="' + ndoc.val() + '" name="NRO_DOC_H' + p + '" class="nu_doc_h_' + p + '"/></td>');
+                                                                        texto_h += ('<td ><label class="td-essalud' + p + '">' + essalud.val() + '</label><input type="hidden" value="' + essalud.val() + '" name="ESSALUD_H' + p + '" class="essalud_h_' + p + '"/></td>');
+                                                                        texto_h += ('<td ><label class="td-es_sup' + p + '">' + es_sup.val() + '</label><input type="hidden" value="' + es_sup.val() + '" name="EST_SUP_H' + p + '" class="es_sup_h_' + p + '"/></td>');
+                                                                        texto_h += ('<td><a href="javascript:void(0);" class="btn btn-danger" onclick="$(\'.tr-hijo_' + p + '\').remove();">Quitar</a> <button class="btn btn-success btn-modificar_' + p + '" href="javascript:void(0);" type="button" value="' + p + '">Modificar</button></td>');
                                                                         texto_h += ("</tr>");
                                                                         tabla_hijo.append(texto_h);
                                                                         // $(".codigo").text(texto_h);
+
+
+                                                                        ap_pat.val("");
+                                                                        ap_mat.val("");
+                                                                        nombre.val("");
+                                                                        fe_nac.val("");
+                                                                        sexo.val("");
+                                                                        t_doc.val("");
+                                                                        ndoc.val("");
+                                                                        essalud.val("");
+                                                                        es_sup.val("");
+
+                                                                        $(".btn-modificar_" + p).click(function () {
+                                                                            ap_pat.val($(".ap_p_h_" + $(this).val()).val());
+                                                                            ap_mat.val($(".ap_m_h_" + $(this).val()).val());
+                                                                            nombre.val($(".no_h_" + $(this).val()).val());
+                                                                            fe_nac.val($(".fe_n_h_" + $(this).val()).val());
+                                                                            sexo.val($(".sex_h_" + $(this).val()).val());
+                                                                            t_doc.val($(".ti_doc_h_" + $(this).val()).val());
+                                                                            ndoc.val($(".nu_doc_h_" + $(this).val()).val());
+                                                                            essalud.val($(".essalud_h_" + $(this).val()).val());
+                                                                            es_sup.val($(".es_sup_h_" + $(this).val()).val());
+
+                                                                            $(".btn-reg-hijo").hide();
+                                                                            $(".btn-mant").append('<button type="button" value="' + $(this).val() + '" class="btn-mod-hijo btn btn-info">Modificar Hijo</button>');
+                                                                            $(".btn-mod-hijo").click(function () {
+
+                                                                                $(".ap_p_h_" + $(this).val()).val(ap_pat.val());
+                                                                                $(".ap_m_h_" + $(this).val()).val(ap_mat.val());
+                                                                                $(".no_h_" + $(this).val()).val(nombre.val());
+                                                                                $(".fe_n_h_" + $(this).val()).val(fe_nac.val());
+                                                                                $(".sex_h_" + $(this).val()).val(sexo.val());
+                                                                                $(".ti_doc_h_" + $(this).val()).val(t_doc.val());
+                                                                                $(".nu_doc_h_" + $(this).val()).val(ndoc.val());
+                                                                                $(".essalud_h_" + $(this).val()).val(essalud.val());
+                                                                                $(".es_sup_h_" + $(this).val()).val(es_sup.val());
+
+                                                                                $(".td-ap_pat" + $(this).val()).text(ap_pat.val());
+                                                                                $(".td-ap_mat" + $(this).val()).text(ap_mat.val());
+                                                                                $(".td-nom" + $(this).val()).text(nombre.val());
+                                                                                $(".td-fe_nac" + $(this).val()).text(fe_nac.val());
+                                                                                $(".td-sex" + $(this).val()).text(sexo.val());
+                                                                                $(".td-tdoc" + $(this).val()).text(t_doc.val());
+                                                                                $(".td-ndoc" + $(this).val()).text(ndoc.val());
+                                                                                $(".td-essalud" + $(this).val()).text(essalud.val());
+                                                                                $(".td-es_sup" + $(this).val()).text(es_sup.val());
+
+                                                                                ap_pat.val("");
+                                                                                ap_mat.val("");
+                                                                                nombre.val("");
+                                                                                fe_nac.val("");
+                                                                                sexo.val("");
+                                                                                t_doc.val("");
+                                                                                ndoc.val("");
+                                                                                essalud.val("");
+                                                                                es_sup.val("");
+                                                                                $(".btn-reg-hijo").show();
+                                                                                $(".btn-mod-hijo").remove();
+
+
+
+                                                                            });
+                                                                        });
+                                                                        $(".num_hijo").val(p);
                                                                         p++;
                                                                         texto_h = "";
 

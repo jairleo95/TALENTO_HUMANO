@@ -32,8 +32,39 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select id_plazo,no_plazo,det_alerta ,to_char(fe_desde,'yyyy-mm-dd')  as fe_desde ,to_char(fe_hasta,'yyyy-mm-dd')  as fe_hasta  from rhtr_plazo where es_plazo ='1'";
-            sql += (t_List != null) ? "" : " and SYSDATE BETWEEN FE_DESDE AND FE_HASTA";
+            String sql = "select id_plazo,no_plazo,det_alerta ,to_char(fe_desde,'yyyy-mm-dd')  as fe_desde ,to_char(fe_hasta,'yyyy-mm-dd')  as fe_hasta  from rhtr_plazo where es_plazo ='1' and SYSDATE BETWEEN FE_DESDE AND FE_HASTA";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("id_plazo"));
+                rec.put("nom", rs.getString("no_plazo"));
+                rec.put("det", rs.getString("DET_ALERTA"));
+                rec.put("desde", rs.getString("FE_DESDE"));
+                rec.put("hasta", rs.getString("FE_HASTA"));
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return lista;
+
+    }
+    @Override
+    public List<Map<String, ?>> Listar_Plazo() {
+
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select id_plazo,no_plazo,det_alerta ,to_char(fe_desde,'yyyy-mm-dd')  as fe_desde ,to_char(fe_hasta,'yyyy-mm-dd')  as fe_hasta  from rhtr_plazo where es_plazo ='1' ";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
 
