@@ -10,10 +10,11 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-
-    <center><label class="title">MANTENIMIENTO ROLES</label><form class="form" action="../../../Roles" method="post"> <table class="table">              
+    <center><label class="title">MANTENIMIENTO ROLES</label><form class="form" action="../../../Roles" method="post">
+            <table class="table">              
                 <tr><td>Nombre:</td><td><input type="text" name="NOMBRE" class="text-box" ></td></tr>                    
-                <tr><td colspan="2"><input type="submit" name="opc"  class="submit" value="REGISTRAR"></td></tr>
+                <tr><td>Estado:</td><td><input type="checkbox" name="ESTADO" class="text-box" value="1" id="ch"></td></tr>           
+                <tr><td colspan="2"><input type="submit" name="opc"  class="submit" value="REGISTRAR" id="but"></td></tr>
             </table>
         </form>
     </center>

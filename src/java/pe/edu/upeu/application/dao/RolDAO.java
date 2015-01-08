@@ -80,14 +80,15 @@ public class RolDAO implements InterfaceRolDAO {
     }
 
     @Override
-    public void INSERT_ROLES(String no_rol) {
+    public void INSERT_ROLES(String no_rol, String es_rol) {
         CallableStatement cst;
         try {
             String id_rol = "";
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            cst = conn.conex.prepareCall("{CALL RHSP_INSERT_ROL( ?,?)}");
+            cst = conn.conex.prepareCall("{CALL RHSP_INSERT_ROL( ?,?,?)}");
             cst.setString(1, id_rol);
             cst.setString(2, no_rol);
+            cst.setString(3, es_rol);
             cst.execute();
         } catch (SQLException ex) {
         } finally {

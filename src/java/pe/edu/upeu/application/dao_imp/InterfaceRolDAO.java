@@ -24,7 +24,7 @@ public interface InterfaceRolDAO {
 
     public List<V_Privilegio> LISTAR_MODULOS(String idrol);
 
-    public void INSERT_ROLES(String no_rol);
+    public void INSERT_ROLES(String no_rol, String es_rol);
 
     public void Mod_Rol(String Id_rol, String No_Rol, String Es_Rol);
 

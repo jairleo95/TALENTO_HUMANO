@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pe.edu.upeu.application.web.controller;
 
 import java.io.IOException;
@@ -14,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.JCheckBox;
 import pe.edu.upeu.application.dao.PrivilegioDAO;
 import pe.edu.upeu.application.dao.RolDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePrivilegioDAO;
@@ -25,7 +25,9 @@ import pe.edu.upeu.application.dao_imp.InterfaceRolDAO;
  */
 @WebServlet(name = "CRoles", urlPatterns = {"/Roles"})
 public class CRoles extends HttpServlet {
-    InterfaceRolDAO rol=new RolDAO();
+
+    InterfaceRolDAO rol = new RolDAO();
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,49 +41,57 @@ public class CRoles extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        
         String opc = request.getParameter("opc");
         HttpSession sesion = request.getSession(true);
         String iduser = (String) sesion.getAttribute("IDUSER");
         try {
-            if(opc.equals("Listar_Rol")){
+            if (opc.equals("Listar_Rol")) {
                 getServletContext().setAttribute("List_Rol", rol.List_Rol());
                 response.sendRedirect("Vista/Usuario/Rol_Privilegio/Reg_Roles.jsp");
             }
-            if(opc.equals("Modificar_Rol")){
-                String idrol=request.getParameter("idrol");
+            if (opc.equals("Modificar_Rol")) {
+                String idrol = request.getParameter("idrol");
                 getServletContext().setAttribute("Listar_Rol_id", rol.Listar_Rol_id(idrol));
                 getServletContext().setAttribute("List_Rol", rol.List_Rol());
                 response.sendRedirect("Vista/Usuario/Rol_Privilegio/Mod_Rol.jsp");
             }
-            if(opc.equals("Modificar")){
-                String idrol=request.getParameter("id_rol");
-                String no_rol=request.getParameter("Nombre_Rol");
-                String Es_rol=request.getParameter("Es_rol");
+            if (opc.equals("Modificar")) {
+                String idrol = request.getParameter("id_rol");
+                String no_rol = request.getParameter("Nombre_Rol");
+                String Es_rol = request.getParameter("Es_rol");
                 rol.Mod_Rol(idrol, no_rol, Es_rol);
                 getServletContext().setAttribute("List_Rol", rol.List_Rol());
                 response.sendRedirect("Vista/Usuario/Rol_Privilegio/Reg_Roles.jsp");
             }
-            if(opc.equals("Activar_Rol")){
-                String idrol=request.getParameter("idrol");
+            if (opc.equals("Activar_Rol")) {
+                String idrol = request.getParameter("idrol");
                 rol.Activar_Roles(idrol);
                 getServletContext().setAttribute("List_Rol", rol.List_Rol());
                 response.sendRedirect("Vista/Usuario/Rol_Privilegio/Reg_Roles.jsp");
             }
-            if(opc.equals("Desactivar_Rol")){
-                String idrol=request.getParameter("idrol");
+            if (opc.equals("Desactivar_Rol")) {
+                String idrol = request.getParameter("idrol");
                 rol.Desactivar_Roles(idrol);
                 getServletContext().setAttribute("List_Rol", rol.List_Rol());
                 response.sendRedirect("Vista/Usuario/Rol_Privilegio/Reg_Roles.jsp");
             }
-            if(opc.equals("Eliminar_Rol")){
-                String idrol=request.getParameter("idrol");
+            if (opc.equals("Eliminar_Rol")) {
+                String idrol = request.getParameter("idrol");
                 rol.Desactivar_Roles(idrol);
                 getServletContext().setAttribute("List_Rol", rol.List_Rol());
                 response.sendRedirect("Vista/Usuario/Rol_Privilegio/List_Roles.jsp");
             }
-            if(opc.equals("REGISTRAR")){
-                String no_rol=request.getParameter("NOMBRE");
-                rol.INSERT_ROLES(no_rol);
+            if (opc.equals("REGISTRAR")) {
+                String no_rol = request.getParameter("NOMBRE");
+                String ESTADO =request.getParameter("ESTADO");
+                if(ESTADO==null){
+                    ESTADO="0";
+                    rol.INSERT_ROLES(no_rol, ESTADO);
+                }else {
+                    rol.INSERT_ROLES(no_rol, ESTADO);
+                }
+                out.print(request.getParameter("ESTADO"));
                 getServletContext().setAttribute("List_Rol", rol.List_Rol());
                 response.sendRedirect("Vista/Usuario/Rol_Privilegio/Reg_Roles.jsp");
             }
