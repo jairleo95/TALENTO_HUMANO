@@ -37,10 +37,19 @@ public class X_List_De_Autorizacion {
     private String us_no_tr;
     private String us_no_puesto;
     private String us_no_area;
+
+    public String getNo_usuario() {
+        return no_usuario;
+    }
+
+    public void setNo_usuario(String no_usuario) {
+        this.no_usuario = no_usuario;
+    }
     private String us_no_dep;
     private String no_puesto;
+    private String no_usuario;
 
-    public X_List_De_Autorizacion(String co_pasos, String de_pasos, String es_autorizacion, String fe_creacion, String id_autorizacion, String id_departamento, String id_detalle_pasos, String id_detalle_req_proceso, String id_dgp, String id_direccion, String id_pasos, String id_proceso, String id_puesto, String id_requerimiento, String no_proceso, String nu_pasos, String us_creacion, String AP_PATERNO, String AP_MATERNO, String NO_TRABAJADOR, String CA_SUELDO, String us_ap_p, String us_ap_mat, String us_no_tr, String us_no_puesto, String us_no_area, String us_no_dep, String no_puesto) {
+    public X_List_De_Autorizacion(String co_pasos, String de_pasos, String es_autorizacion, String fe_creacion, String id_autorizacion, String id_departamento, String id_detalle_pasos, String id_detalle_req_proceso, String id_dgp, String id_direccion, String id_pasos, String id_proceso, String id_puesto, String id_requerimiento, String no_proceso, String nu_pasos, String us_creacion, String AP_PATERNO, String AP_MATERNO, String NO_TRABAJADOR, String CA_SUELDO, String us_ap_p, String us_ap_mat, String us_no_tr, String us_no_puesto, String us_no_area, String us_no_dep, String no_puesto,String no_usuario) {
         this.co_pasos = co_pasos;
         this.de_pasos = de_pasos;
         this.es_autorizacion = es_autorizacion;
@@ -69,6 +78,7 @@ public class X_List_De_Autorizacion {
         this.us_no_area = us_no_area;
         this.us_no_dep = us_no_dep;
         this.no_puesto = no_puesto;
+        this.no_usuario= no_usuario;
     }
     public X_List_De_Autorizacion() {
         this.co_pasos = "";
@@ -99,6 +109,7 @@ public class X_List_De_Autorizacion {
         this.us_no_area = "";
         this.us_no_dep = "";
         this.no_puesto = "";
+        this.no_usuario = "";
     }
 
     public String getCo_pasos() {

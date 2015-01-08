@@ -116,6 +116,7 @@
                                                     <th data-class="expand"><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Estado</th>
                                                     <th data-hide="phone"><i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i> Encargado</th>
                                                     <th>Cargo Encargado</th>
+                                                    <th > Usuario</th>
                                                     <th data-hide="phone,tablet"><i class="fa fa-fw fa-map-marker txt-color-blue hidden-md hidden-sm hidden-xs"></i> Area</th>
                                                     <th data-hide="phone,tablet">Departamento</th>
                                                     <th data-hide="phone,tablet"><i class="fa fa-fw fa-calendar txt-color-blue hidden-md hidden-sm hidden-xs"></i> Detalle</th>
@@ -137,6 +138,7 @@
                                                         <% }%></td>
                                                     <td ><%=a.getUs_ap_p().toUpperCase() + " " + a.getUs_ap_mat().toUpperCase() + " " + a.getUs_no_tr().toUpperCase()%></td> 
                                                     <td  ><%=a.getUs_no_puesto()%></td> 
+                                                    <td  ><%=a.getNo_usuario()%></td> 
                                                     <td ><%=a.getUs_no_area()%></td> 
                                                     <td ><%=a.getUs_no_dep()%></td> 
                                                     <td ><%=a.getDe_pasos()%></td> 
