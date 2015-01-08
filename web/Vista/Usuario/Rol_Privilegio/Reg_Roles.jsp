@@ -11,7 +11,7 @@ and open the template in the editor.
     </head>
     <body>
 
-    <center><label class="title">MANTENIMIENTO ROLES</label><form class="form" action="../Control/ControlRoles.php" method="post"> <table class="table">              
+    <center><label class="title">MANTENIMIENTO ROLES</label><form class="form" action="../../../Roles" method="post"> <table class="table">              
                 <tr><td>Nombre:</td><td><input type="text" name="NOMBRE" class="text-box" ></td></tr>                    
                 <tr><td colspan="2"><input type="submit" name="opc"  class="submit" value="REGISTRAR"></td></tr>
             </table>

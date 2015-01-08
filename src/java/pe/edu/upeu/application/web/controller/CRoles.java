@@ -79,6 +79,12 @@ public class CRoles extends HttpServlet {
                 getServletContext().setAttribute("List_Rol", rol.List_Rol());
                 response.sendRedirect("Vista/Usuario/Rol_Privilegio/List_Roles.jsp");
             }
+            if(opc.equals("REGISTRAR")){
+                String no_rol=request.getParameter("NOMBRE");
+                rol.INSERT_ROLES(no_rol);
+                getServletContext().setAttribute("List_Rol", rol.List_Rol());
+                response.sendRedirect("Vista/Usuario/Rol_Privilegio/Reg_Roles.jsp");
+            }
         } finally {
             out.close();
         }

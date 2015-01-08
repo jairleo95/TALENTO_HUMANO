@@ -19,6 +19,6 @@ public interface InterfaceCentro_CostosDAO {
     public List<Map<String, ?>> Direccion_CC();
     public List<Map<String, ?>> Departamento_CC(String iddir);
     public List<Map<String, ?>> Centro_Costo_Dep(String iddep);
-
     public List<Centro_Costos> List_centro_costo();
+    //public List<String>
 }

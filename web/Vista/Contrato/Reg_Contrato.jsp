@@ -223,6 +223,7 @@
                                                     Centro_Costos c = new Centro_Costos();
                                                     c = (Centro_Costos) List_centro_costo.get(h);
                                             %>
+                                            
                                             <option value="<%=c.getId_centro_costo()%>"><%=c.getDe_centro_costo()%></option>
                                             <%}%>
                                         </select>  </label>
