@@ -318,7 +318,7 @@
                             <iframe name="contenido" id="contenido"  class="autoHeight" src="../../contrato?idtr=<%=idtr%>&opc=Detalle_Contractual" width="100%" height="100%" ></iframe>
                         </div>
                         <div class="tab-pane fade" id="s8">                            
-                            <iframe name="contenido" id="contenido"  class="autoHeight" src="../../empleado?opc=Eva_Emp" width="100%" height="100%" ></iframe>
+                            <iframe name="contenido" id="contenido"  class="autoHeight" src="../../empleado?opc=Eva_Emp&idtr=<%=idtr%>" width="100%" height="100%" ></iframe>
                         </div>
                     </div>
 

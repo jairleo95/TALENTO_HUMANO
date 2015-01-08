@@ -14,7 +14,6 @@ import pe.edu.upeu.application.dao_imp.InterfaceEmpleadoDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.V_List_Empleado;
-import pe.edu.upeu.application.model.X_Lis_Empleados;
 
 /**
  *
@@ -306,39 +305,36 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
     }
 
     @Override
-    public List<X_Lis_Empleados> Buscar_Empl(String no_emp, String app_emp, String apm_emp, String Nu_doc, String id_dep) {
-        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT t.ID_TRABAJADOR,t.NU_DOC ,e.ID_EMPLEADO,t.AP_PATERNO,t.AP_MATERNO,t.NO_TRABAJADOR FROM RHTD_EMPLEADO e,RHTM_TRABAJADOR t WHERE e.ID_TRABAJADOR=t.ID_TRABAJADOR and e.ES_EMPLEADO='1'";
-        sql += (!"".equals(Nu_doc)) ? " and t.NU_DOC='" + Nu_doc + "'" : "";
-        sql += (!"".equals(no_emp)) ? " and upper(t.NO_TRABAJADOR) like '%" + no_emp.trim() + "%'" : "";
-        sql += (!"".equals(app_emp)) ? " and upper(t.AP_PATERNO) like '%" + app_emp.trim() + "%'" : "";
-        sql += (!"".equals(apm_emp)) ? " and upper(t.AP_MATERNO) like '%" + apm_emp.trim() + "%'" : "";
-        sql += " order by t.ID_TRABAJADOR desc";
-
-        List<X_Lis_Empleados> list = new ArrayList<X_Lis_Empleados>();
+    public void Insert_Evaluacion_Emp(String ID_EVALUACION_EMP, String ES_EVALUACION, String RE_EVALUACION, String ID_EMPLEADO) {
         try {
-            ResultSet rs = this.conn.query(sql);
-
-            while (rs.next()) {
-                X_Lis_Empleados v = new X_Lis_Empleados();
-                v.setId_trabajador(rs.getString("id_trabajador"));
-                v.setNu_doc(rs.getString("nu_doc"));
-                v.setId_empleado(rs.getString("id_empleado"));
-                v.setAp_paterno(rs.getString("ap_paterno"));
-                v.setAp_materno(rs.getString("ap_materno"));
-                v.setNo_trabajador(rs.getString("no_trabajador"));
-               // v.setAr_foto(rs.getString("ar_foto"));
-                list.add(v);
-            }
-
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement eva = this.conn.conex.prepareCall("{CALL RHSP_INSERT_EVALUACION_EMP( ?, ?, ?, ?)}");
+            eva.setString(1, null);
+            eva.setString(2, ES_EVALUACION);
+            eva.setString(3, RE_EVALUACION);
+            eva.setString(4, ID_EMPLEADO);
+            eva.execute();
         } catch (SQLException e) {
-
-            System.err.println("Error :" + e.getMessage());
-
+            throw new RuntimeException(e.getMessage());
         } finally {
             this.conn.close();
         }
-        return list;
+    }
+
+    @Override
+    public String ID_Empleado(String idtr) {
+       this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select ID_EMPLEADO from RHTD_EMPLEADO WHERE ID_TRABAJADOR='" + idtr + "'";
+        String idemp = null;
+        try {
+            ResultSet rs = this.conn.query(sql);
+            rs.next();
+            idemp = rs.getString("ID_EMPLEADO");
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return idemp;
     }
 
 }

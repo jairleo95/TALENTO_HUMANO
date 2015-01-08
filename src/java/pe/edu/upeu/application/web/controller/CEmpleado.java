@@ -34,16 +34,26 @@ public class CEmpleado extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        HttpSession sesion = request.getSession(true);
+
         InterfaceEmpleadoDAO Iem = new EmpleadoDAO();
-        String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
+
+        HttpSession sesion = request.getSession(true);
         String opc = request.getParameter("opc");
 
         if (opc.equals("Eva_Emp")) {
-            response.sendRedirect("Vista/Empleado/Evaluacion_Empleado.jsp");
+            
+            response.sendRedirect("Vista/Empleado/Evaluacion_Empleado.jsp?idtr="+request.getParameter("idtr"));
         }
         if (opc.equals("Reg_Evaluar_Emp")) {
-
+            
+          String ID_EVALUACION_EMP = null;
+          String ES_EVALUACION = request.getParameter("ESTADO") ;
+          String RE_EVALUACION = request.getParameter("RE_EVALUACION");
+          String ID_TRABAJADOR = request.getParameter("ID_TRABAJADOR");
+          
+          String ID_EMPLEADO = Iem.ID_Empleado(ID_TRABAJADOR);
+          Iem.Insert_Evaluacion_Emp(ID_EVALUACION_EMP, ES_EVALUACION, RE_EVALUACION, ID_EMPLEADO);
+           response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" +ID_TRABAJADOR );
         }
         if (opc.equals("Reporte")) {
 
@@ -52,31 +62,7 @@ public class CEmpleado extends HttpServlet {
 
             out.print(Iem.Listar_Empleado(iddepa).size());
 
-            response.sendRedirect("Vista/Empleado/Filtro_Empleado.jsp?iddepa");
-        }
-        if (opc.equals("Listar_empleados")) {
-            String Buscar = request.getParameter("busqueda");
-            String dni = request.getParameter("dni");
-            String nom = request.getParameter("nom");
-            String ape_mat = request.getParameter("ape_mat");
-            String ape_pat = request.getParameter("ape_pat");
-            String Text = (String) request.getParameter("text");
-            String busc = request.getParameter("busc");
-
-            
-            // String all = request.getParameter("all");
-
-            if (("Buscar".equals(Buscar) & (!"".equals(dni) | !"".equals(nom) | !"".equals(ape_mat) | !"".equals(ape_pat)))) {
-                            //out.print(Text+Buscar+dni+nom+ape_mat+ape_pat+busc+iddep+"");
-                if (busc != null) {
-                   getServletContext().setAttribute("Buscar_Empl", Iem.Buscar_Empl(nom, ape_pat, ape_mat, dni, iddep));
-                    response.sendRedirect("Vista/Renuncias/Generar_dgp_renuncia.jsp?text=" + Text);
-                    //out.print(Text+Buscar+dni+nom+ape_mat+ape_pat+iddep+"");
-                }
-            } else {
-                response.sendRedirect("Vista/Renuncias/Generar_dgp_renuncia.jsp?text=" + Text);
-                //out.print(Text+Buscar+dni+nom+ape_mat+ape_pat+iddep+"");
-            }
+            response.sendRedirect("Vista/Empleado/Filtro_Empleado.jsp?idtr");
         }
 
         try {
