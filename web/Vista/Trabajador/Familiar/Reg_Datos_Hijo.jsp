@@ -115,8 +115,8 @@
                                     <label class="select">
                                         <select name="TIPO_DOC_ID" required="" class="select-conyugue">
                                             <option value="" selected=""  disabled="">Tipo de Documento</option>
-                                            <option value="M">DNI</option>
-                                            <option value="F">Partida</option>
+                                            <option value="1">DNI</option>
+                                            <option value="0">Partida</option>
                                         </select> 
                                         <i></i> </label>
                                 </section>

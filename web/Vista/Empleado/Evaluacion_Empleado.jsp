@@ -117,7 +117,7 @@
                         
                         <input type="hidden" value="Reg_Evaluar_Emp" name="opc"/>
                         <input type="hidden" value="1" name="ESTADO"/>
-                        <input type="hidden" name="ID_TRABAJADOR" value="<%=request.getParameter("idtr")%>"  >
+                        <input type="text" name="ID_TRABAJADOR" value="<%=request.getParameter("idtr")%>"  >
                         <footer>
                             <button type="submit" class="btn btn-primary" name="opc">
                                 Registrar

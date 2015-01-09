@@ -114,7 +114,7 @@
                                                             if (h.getEs_tipo_doc().trim().equals("1")) {
                                                                 out.println("Dni");
                                                             }
-                                                            if (h.getEs_tipo_doc().trim().equals("2")) {
+                                                            if (h.getEs_tipo_doc().trim().equals("0")) {
                                                                 out.println("Partida");
                                                             }
                                                         %>
@@ -146,7 +146,9 @@
                                                         
                                                         <% if (rol1.trim().equals("ROL-0002")|rol1.trim().equals("ROL-0005")) {%>
                                                         
-                                                        <a href="../../../familiar?idhijo=<%=h.getId_datos_hijos_trabajador()%>&idtr=<%=h.getId_trabajador()%>&opc=modificar" ><img src="../../../imagenes/lapiz.png" alt="" width="25px" height="25px"/></a></td>
+                                                        <a href="../../../familiar?idhijo=<%=h.getId_datos_hijos_trabajador()%>&idtr=<%=h.getId_trabajador()%>&opc=modificar" >
+                                                            <img src="../../../imagenes/lapiz.png" alt="" width="25px" height="25px"/></a>
+                                                    </td>
                                                     <td><a href="../../../familiar?idhijo=<%=h.getId_datos_hijos_trabajador()%>&idtr=<%=h.getId_trabajador()%>&opc=eliminar" >
                                                             <img src="../../../imagenes/eliminar.png" alt=""   width="25px" height="25px"/></a></td> 
                                                             <%}%>

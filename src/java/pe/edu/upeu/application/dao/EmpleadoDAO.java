@@ -13,6 +13,7 @@ import java.util.List;
 import pe.edu.upeu.application.dao_imp.InterfaceEmpleadoDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
+import pe.edu.upeu.application.model.Evaluacion_Emp;
 import pe.edu.upeu.application.model.V_List_Empleado;
 
 /**
@@ -335,6 +336,43 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
             this.conn.close();
         }
         return idemp;
+    }
+
+    @Override
+    public String ES_Empleado(String idemp) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "Select ES_EVALUACION FROM RHTD_EVALUACION_EMP WHERE ID_EMPLEADO='"+idemp+"' ";
+        String es_eva = null;
+        try {
+            ResultSet rs = this.conn.query(sql);
+            rs.next();
+            es_eva = rs.getString("ES_EVALUACION");
+        } catch (Exception e) {
+        } finally {
+            this.conn.close();
+        }
+        return es_eva;
+    }
+
+    @Override
+    public List<Evaluacion_Emp> Listar_Evaluacion_Emp(String id_emp) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT RE_EVALUACION, ES_EVALUACION FROM RHTD_EVALUACION_EMP WHERE ID_EMPLEADO = '"+id_emp+"'";
+        List<Evaluacion_Emp> List = new ArrayList<Evaluacion_Emp>();
+        try{
+            ResultSet rs = this.conn.query(sql);
+            while(rs.next()){
+            Evaluacion_Emp eva = new Evaluacion_Emp();
+            eva.setRe_evaluacion(rs.getString("re_evaluacion"));
+            eva.setEs_evaluacion(rs.getString("es_evaluacion"));
+            List.add(eva);
+            }
+        }catch(Exception e){
+        }finally{
+            this.conn.close();
+        }
+        return List;
+        
     }
 
 }
