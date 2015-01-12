@@ -5,6 +5,7 @@
  */
 package pe.edu.upeu.application.dao;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.AbstractList;
@@ -160,4 +161,70 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
         return Lista;
     }
 
+    @Override
+    public List<Map<String, ?>> List_centr_id(String id_dgp) {
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "SELECT (C.ID_CENTRO_COSTO) as id_centro ,(C.DE_CENTRO_COSTO) as no_centro,(d.ID_DETALLE_CENTRO_COSTO)as id_det_cen FROM RHTR_CENTRO_COSTO C, RHTD_DETALLE_CENTRO_COSTO d where d.ID_DGP='"+id_dgp.trim()+"' and C.ID_CENTRO_COSTO=d.ID_CENTRO_COSTO";
+            ResultSet rs = this.cnn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("id_centro"));
+                rec.put("nombre", rs.getString("no_centro"));
+                rec.put("id_det_ce", rs.getString("id_det_cen"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
+    }
+
+    @Override
+    public void Mod_det_centro(String id_cent_cos,String id_contrato) {
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.cnn.conex.prepareCall("{CALL RHSP_MOD_DET_CEN_C_IDT(?, ? )} ");
+            cst.setString(1, id_cent_cos);
+            cst.setString(2, id_contrato);
+            cst.execute();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } finally {
+            this.cnn.close();
+        }
+    }
+
+    @Override
+    public List<Centro_Costos> Lis_c_c_id_contr(String id_contrato) {
+        this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT c.ID_CENTRO_COSTO ,c.DE_CENTRO_COSTO ,c.CO_CENTRO_COSTO, c.ID_DEPARTAMENTO, d.CA_PORCENTAJE FROM RHTR_CENTRO_COSTO c,RHTD_DETALLE_CENTRO_COSTO d where d.ID_CENTRO_COSTO=c.ID_CENTRO_COSTO and  d.ID_CONTRATO='"+id_contrato.trim()+"'";
+        List<Centro_Costos> list = new ArrayList<Centro_Costos>();
+        try {
+            ResultSet rs = this.cnn.query(sql);
+            while (rs.next()) {
+                Centro_Costos d = new Centro_Costos();
+                d.setId_centro_costo(rs.getString("ID_CENTRO_COSTO"));
+                d.setDe_centro_costo(rs.getString("DE_CENTRO_COSTO"));
+                d.setCo_centro_costo(rs.getString("CO_CENTRO_COSTO"));
+                d.setId_departamento(rs.getString("ID_DEPARTAMENTO"));
+                d.setCa_porcentaje(rs.getString("CA_PORCENTAJE"));
+                list.add(d);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.cnn.close();
+        }
+
+        return list;
+    }
 }

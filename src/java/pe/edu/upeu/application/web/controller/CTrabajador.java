@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import pe.edu.upeu.application.dao.Centro_CostoDAO;
+import pe.edu.upeu.application.dao.ContratoDAO;
 import pe.edu.upeu.application.dao.Datos_Hijo_TrabajadorDAO;
 import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.DireccionDAO;
@@ -22,6 +24,8 @@ import pe.edu.upeu.application.dao.Padre_Madre_ConyugueDAO;
 import pe.edu.upeu.application.dao.Tipo_DocumentoDAO;
 import pe.edu.upeu.application.dao.TrabajadorDAO;
 import pe.edu.upeu.application.dao.UbigeoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceCentro_CostosDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceContratoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDatos_Hijo_Trabajador;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
@@ -64,7 +68,9 @@ public class CTrabajador extends HttpServlet {
             InterfaceDocumentoDAO d = new DocumentoDAO();
             InterfaceDgpDAO dgp = new DgpDAO();
             InterfaceDireccionDAO dir = new DireccionDAO();
+            InterfaceCentro_CostosDAO cc = new Centro_CostoDAO();
             InterfaceTipo_DocumentoDAO tdoc = new Tipo_DocumentoDAO();
+            InterfaceContratoDAO con=new ContratoDAO();
             String opc = "";
             String Text = "";
             opc = (String) request.getParameter("opc");
@@ -228,6 +234,8 @@ public class CTrabajador extends HttpServlet {
             }
             if ("aut".equals(opc)) {
                 String idtr = request.getParameter("idtr");
+                String id_contrato=con.Buscar_id_contrato_x_idtr(idtr);
+                getServletContext().setAttribute("Lis_c_c_id_contr",cc.Lis_c_c_id_contr(id_contrato));
                 String iddgp = request.getParameter("iddetalle_dgp");
                 String puesto_id = request.getParameter("puesto_id");
                 String cod = request.getParameter("cod");

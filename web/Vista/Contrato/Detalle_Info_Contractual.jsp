@@ -29,6 +29,7 @@
 <jsp:useBean id="Listar_Sub_mo" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_grup_ocu" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Usuario" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Lis_c_c_id_contr" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -154,7 +155,7 @@
                             <%} else {%>
                             <option value="<%=x.getId_anno()%>"><%=x.getNo_anno()%></option>
                             <%}
-                                }%>
+                                }List_Anno_Id_Tr_DGP.clear();%>
                         </select> </td><td><input type="hidden" name="idtr" value="<%=n.getId_trabajador()%>"></td>
                     <td><input name="opc" value="actualizar" type="submit"></td></tr>
             </table>
@@ -168,17 +169,14 @@
                 <tr><td class="text-info table-bordered"><strong>Departamento:</strong></td><td colspan="6"><p><%=n.getNo_dep()%> </p></td></tr>
                 <tr><td class="text-info table-bordered"><strong>Area:</strong></td><td colspan="6"><p><%=n.getNo_area()%> </td></p></tr>
                 <tr><td class="text-info table-bordered"><strong>Sección:</strong></td><td colspan="6"><p><%=n.getNo_seccion()%> </p></td></tr>
-                <tr><td class="text-info table-bordered"><strong>Centro de Costos:</strong></td>
-                    <%if (!n.getId_centro_costo().trim().equals("0")) {
-                            for (int ce = 0; ce < List_centro_costo.size(); ce++) {
-                                Centro_Costos cen = new Centro_Costos();
-                                cen = (Centro_Costos) List_centro_costo.get(ce);
-                                if (cen.getId_centro_costo().trim().equals(n.getId_centro_costo().trim())) {%>
-                    <td colspan="6"><p><%=cen.getDe_centro_costo()%></p></td><%}
-                        }
-                    } else {%>
-                    <td colspan="6"><p>No definido</p></td>
-                    <%}%> </tr>
+                <% 
+                if(Lis_c_c_id_contr.size()>0){
+                    for(int q=0;q<Lis_c_c_id_contr.size();q++){
+                        Centro_Costos cc=new Centro_Costos();
+                        cc=(Centro_Costos)Lis_c_c_id_contr.get(q);
+    %>
+    <tr><td class="text-info table-bordered"><strong>Centro conto Nº <%=q+1%></strong></td><td colspan="2"><p><%=cc.getDe_centro_costo()%></p></td><td class="text-info table-bordered" colspan="2"><strong>Porcentaje</strong></td><td colspan="2"><p><%=cc.getCa_porcentaje()%> %</p> </td></tr><%}}else{%>
+                    <tr><td class="text-info table-bordered"><strong>Centro conto </strong></td><td colspan="6"><p>No tiene</p></td></tr><%}Lis_c_c_id_contr.clear();%>
                 <tr><td class="text-info table-bordered"><strong>Puesto:</strong></td><td colspan="6"><p><%=n.getNo_puesto()%></p></td> </tr>
                 <tr><td class="text-info table-bordered"><strong>Condición:</strong></td> <td colspan="6"><p><%
                     if (!n.getLi_condicion().equals(null)) {
@@ -440,6 +438,6 @@
         </form>
         <%}
                 }
-            }%>
+            }List_id_Contrato_DGP.clear();%>
     </center>
 </body>

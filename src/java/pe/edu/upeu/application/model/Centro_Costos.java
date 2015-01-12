@@ -19,8 +19,9 @@ package pe.edu.upeu.application.model;
     private String fe_creacion;
     private String us_modif;
     private String fe_modif;
+    private String ca_porcentaje;
 
-    public Centro_Costos(String id_centro_costo, String co_centro_costo, String de_centro_costo, String id_departamento, String us_creacion, String fe_creacion, String us_modif, String fe_modif) {
+    public Centro_Costos(String id_centro_costo, String co_centro_costo, String de_centro_costo, String id_departamento, String us_creacion, String fe_creacion, String us_modif, String fe_modif,String ca_porcentaje) {
         this.id_centro_costo = id_centro_costo;
         this.co_centro_costo = co_centro_costo;
         this.de_centro_costo = de_centro_costo;
@@ -29,6 +30,7 @@ package pe.edu.upeu.application.model;
         this.fe_creacion = fe_creacion;
         this.us_modif = us_modif;
         this.fe_modif = fe_modif;
+        this.ca_porcentaje = ca_porcentaje;
     }
     public Centro_Costos() {
         this.id_centro_costo = "";
@@ -39,6 +41,15 @@ package pe.edu.upeu.application.model;
         this.fe_creacion = "";
         this.us_modif = "";
         this.fe_modif = "";
+        this.ca_porcentaje = "";
+    }
+
+    public String getCa_porcentaje() {
+        return ca_porcentaje;
+    }
+
+    public void setCa_porcentaje(String ca_porcentaje) {
+        this.ca_porcentaje = ca_porcentaje;
     }
 
     public String getId_centro_costo() {
