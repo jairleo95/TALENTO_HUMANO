@@ -287,7 +287,7 @@
 
                                                             lista_dgp.change(function () {
                                                                 $("#horario").val("2");
-                                                                 list_horario($("#horario").val());
+                                                                list_horario($("#horario").val());
                                                             });
 
 
@@ -344,17 +344,17 @@
                                                     <div class="row">
                                                         <section class="col col-3" >
                                                             <label class="input" id="titu">Sueldo :
-                                                                <input type="text" name="SUELDO" required="" value="0.0"  id="sueldo" >
+                                                                <input type="text" name="SUELDO" required="" maxlength="13" value="0.0"  id="sueldo" >
                                                             </label>
                                                         </section>
                                                         <section class="col col-3">
                                                             <label class="input"  id="titu"> 
-                                                                Bono de Alimentos :<input type="text" required="" value="0.0" name="BONO_ALIMENTARIO"  id="bono_al">
+                                                                Bono de Alimentos :<input type="text" maxlength="13" required="" value="0.0" name="BONO_ALIMENTARIO"  id="bono_al">
                                                             </label>
                                                         </section>
                                                         <section class="col col-3">
                                                             <label class="input"  id="titu"> 
-                                                                BEV :<input type="text" name="BEV"  value="0.0" id="bev">
+                                                                BEV :<input type="text" name="BEV" maxlength="13" value="0.0" id="bev">
                                                             </label>
                                                         </section>
                                                         <section class="col col-3">
@@ -1117,10 +1117,12 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            //$("#sueldo").numeric();
-           /* $("#sueldo").mask("99999.99", {placeholder: "0"});
-            $("#bono_al").mask("99999.99", {placeholder: "0"});
-            $("#bev").mask("99999.99", {placeholder: "0"});*/
+            $("#sueldo").numeric();
+            $("#bono_al").numeric();
+            $("#bev").numeric();
+            /* $("#sueldo").mask("99999.99", {placeholder: "0"});
+             $("#bono_al").mask("99999.99", {placeholder: "0"});
+             $("#bev").mask("99999.99", {placeholder: "0"});*/
             var scntDiv = $('#show_1');
             var i = $('#show_1 .texto-h').size() + 1;
             var s = $('#show_1 .tr-count').size() + 1;
