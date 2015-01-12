@@ -15,10 +15,8 @@ import java.util.Map;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
-import pe.edu.upeu.application.model.DGP;
 import pe.edu.upeu.application.model.V_Det_DGP;
 import pe.edu.upeu.application.model.V_Es_Requerimiento;
-import pe.edu.upeu.application.model.V_Estado_req;
 import pe.edu.upeu.application.model.X_List_det_dgp;
 import pe.edu.upeu.application.model.X_List_dgp_by;
 import pe.edu.upeu.application.model.X_User_dgp;
@@ -167,7 +165,7 @@ public class DgpDAO implements InterfaceDgpDAO {
                 x.setIp_usuario(rs.getString("ip_usuario"));
                 x.setCa_bono_alimentario(rs.getDouble("ca_bono_alimentario"));
                 x.setDe_bev(rs.getDouble("de_bev"));
-              //  x.setCa_centro_costos(rs.getDouble("ca_centro_costos"));
+                //  x.setCa_centro_costos(rs.getDouble("ca_centro_costos"));
                 x.setDe_antecedentes_policiales(rs.getString("de_antecedentes_policiales"));
                 x.setDe_certificado_salud(rs.getString("es_certificado_salud"));
                 x.setDe_monto_honorario(rs.getString("de_monto_honorario"));
@@ -394,7 +392,7 @@ public class DgpDAO implements InterfaceDgpDAO {
                 x.setNo_req(rs.getString("no_req"));
                 x.setCa_bono_alimentario(rs.getDouble("ca_bono_alimentario"));
                 x.setDe_bev(rs.getDouble("de_bev"));
-              //  x.setCa_centro_costos(rs.getDouble("ca_centro_costos"));
+                //  x.setCa_centro_costos(rs.getDouble("ca_centro_costos"));
                 x.setDe_antecedentes_policiales(rs.getString("de_antecedentes_policiales"));
                 x.setDe_certificado_salud(rs.getString("es_certificado_salud"));
                 x.setNo_banco(rs.getString("no_banco"));
@@ -539,7 +537,7 @@ public class DgpDAO implements InterfaceDgpDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select   id_contrato,id_dgp,fe_desde ||' - ' || fe_hasta ||' | '|| NO_PUESTO as descripcion from RHVD_LIST_CONTRATO where id_trabajador='"+id+"'";
+            String sql = "select   id_contrato,id_dgp,fe_desde ||' - ' || fe_hasta ||' | '|| NO_PUESTO as descripcion from RHVD_LIST_CONTRATO where id_trabajador='" + id + "'";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -559,6 +557,35 @@ public class DgpDAO implements InterfaceDgpDAO {
             }
         }
         return lista;
+    }
+
+    @Override
+    public List<Map<String, ?>> Cargar_Datos_Dgp(String id) {
+
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("id_dgp"));
+                rec.put("desc", rs.getString("descripcion"));
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return lista;
+
     }
 
 }

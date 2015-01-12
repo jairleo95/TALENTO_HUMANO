@@ -91,6 +91,12 @@ public class CDgp extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
+            if (opc.equals("Listar_Datos")) {
+                String id_tr = request.getParameter("idc");
+                List<Map<String, ?>> lista = dgp.list_Req(id_tr);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
 
             if (opc.equals("Registrar")) {
                 String FE_DESDE = request.getParameter("FEC_DESDE");
