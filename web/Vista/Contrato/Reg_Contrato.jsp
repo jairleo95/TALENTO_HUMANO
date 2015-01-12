@@ -1253,7 +1253,7 @@
                     });
                 }
                 /*function(){
-                    if($("#id_rol_s").val()==''){
+                    if($("#id_rol_s").val()=='ROL-0001'){
                         
                     }
                 }*/
