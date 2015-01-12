@@ -89,7 +89,6 @@
 
             });</script>
 
-
         <style>
 
             .td{
@@ -286,8 +285,12 @@
 
                                                             });
 
-                                                            $(".btn-list-req").change(function () {
+                                                            lista_dgp.change(function () {
+                                                                $("#horario").val("2");
+                                                                 list_horario($("#horario").val());
                                                             });
+
+
                                                         });
                                                     </script>
                                                     <section>
@@ -907,6 +910,109 @@
             });
             $(".total_porcentaje").val(acum);
         }
+
+        function list_horario(valor) {
+
+
+            if (valor == 0) {
+                $(".cont_lunes").hide();
+                $(".cont_martes").hide();
+                $(".cont_miercoles").hide();
+                $(".cont_jueves").hide();
+                $(".cont_viernes").hide();
+                $(".cont_sabado").hide();
+                $(".cont_domingo").hide();
+                $("#lunes").val(2);
+                $("#martes").val(2);
+                $("#miercoles").val(2);
+                $("#jueves").val(2);
+                $("#viernes").val(2);
+                $("#sabado").val(2);
+                $("#domingo").val(2);
+            }
+            if (valor == 1) {
+                $("#show_1").show();
+                $("#show_2").show();
+                $("#show_3").show();
+                $("#show_4").show();
+                $("#show_5").show();
+                //    $("#show_6").show();
+                $("#show_7").show();
+                $("#lunes").val(1);
+                $("#martes").val(1);
+                $("#miercoles").val(1);
+                $("#jueves").val(1);
+                $("#viernes").val(1);
+                //$("#sabado").val(1);
+                $("#domingo").val(1);
+                document.getElementById("HORA_DESDE_lun1").value = "7:50";
+                document.getElementById("HORA_HASTA_lun1").value = "12:30";
+                document.getElementById("HORA_DESDE_lun2").value = "13:30";
+                document.getElementById("HORA_HASTA_lun2").value = "17:30";
+                document.getElementById("HORA_DESDE_mar1").value = "7:50";
+                document.getElementById("HORA_HASTA_mar1").value = "12:30";
+                document.getElementById("HORA_DESDE_mar2").value = "13:30";
+                document.getElementById("HORA_HASTA_mar2").value = "17:30";
+                document.getElementById("HORA_DESDE_mier1").value = "7:50";
+                document.getElementById("HORA_HASTA_mier1").value = "12:30";
+                document.getElementById("HORA_DESDE_mier2").value = "13:30";
+                document.getElementById("HORA_HASTA_mier2").value = "17:30";
+                document.getElementById("HORA_DESDE_jue1").value = "7:50";
+                document.getElementById("HORA_HASTA_jue1").value = "12:30";
+                document.getElementById("HORA_DESDE_jue2").value = "13:30";
+                document.getElementById("HORA_HASTA_jue2").value = "17:30";
+                document.getElementById("HORA_DESDE_vie1").value = "7:50";
+                document.getElementById("HORA_HASTA_vie1").value = "12:30";
+                document.getElementById("HORA_DESDE_sab1").value = "00:00";
+                document.getElementById("HORA_HASTA_sab1").value = "00:00";
+                document.getElementById("HORA_DESDE_dom1").value = "7:50";
+                document.getElementById("HORA_HASTA_dom1").value = "12:30";
+                document.getElementById("HORA_DESDE_dom2").value = "13:30";
+                document.getElementById("HORA_HASTA_dom2").value = "17:30";
+            }
+            if (valor == 2) {
+                $("#show_1").show();
+                $("#show_2").show();
+                $("#show_3").show();
+                $("#show_4").show();
+                $("#show_5").show();
+                //    $("#show_6").show();
+                $("#show_7").hide();
+                $("#lunes").val(1);
+                $("#martes").val(1);
+                $("#miercoles").val(1);
+                $("#jueves").val(1);
+                $("#viernes").val(1);
+                //$("#sabado").val(1);
+                $("#domingo").val(2);
+                document.getElementById("HORA_DESDE_lun1").value = "7:30";
+                document.getElementById("HORA_HASTA_lun1").value = "12:30";
+                document.getElementById("HORA_DESDE_lun2").value = "13:30";
+                document.getElementById("HORA_HASTA_lun2").value = "17:30";
+                document.getElementById("HORA_DESDE_mar1").value = "7:30";
+                document.getElementById("HORA_HASTA_mar1").value = "12:30";
+                document.getElementById("HORA_DESDE_mar2").value = "13:30";
+                document.getElementById("HORA_HASTA_mar2").value = "17:30";
+                document.getElementById("HORA_DESDE_mier1").value = "7:30";
+                document.getElementById("HORA_HASTA_mier1").value = "12:30";
+                document.getElementById("HORA_DESDE_mier2").value = "13:30";
+                document.getElementById("HORA_HASTA_mier2").value = "17:30";
+                document.getElementById("HORA_DESDE_jue1").value = "7:30";
+                document.getElementById("HORA_HASTA_jue1").value = "12:30";
+                document.getElementById("HORA_DESDE_jue2").value = "13:30";
+                document.getElementById("HORA_HASTA_jue2").value = "17:30";
+                document.getElementById("HORA_DESDE_vie1").value = "7:30";
+                document.getElementById("HORA_HASTA_vie1").value = "13:00";
+                document.getElementById("HORA_DESDE_sab1").value = "00:00";
+                document.getElementById("HORA_HASTA_sab1").value = "00:00";
+                document.getElementById("HORA_DESDE_dom1").value = "00:00";
+                document.getElementById("HORA_HASTA_dom1").value = "00:00";
+                document.getElementById("HORA_DESDE_dom2").value = "00:00";
+                document.getElementById("HORA_HASTA_dom2").value = "00:00";
+            }
+            calcularHoras();
+        }
+
         $(document).ready(function () {
 
 
@@ -1004,103 +1110,7 @@
             );
             $("#horario").change(
                     function () {
-                        if ($(this).val() == 0) {
-                            $(".cont_lunes").hide();
-                            $(".cont_martes").hide();
-                            $(".cont_miercoles").hide();
-                            $(".cont_jueves").hide();
-                            $(".cont_viernes").hide();
-                            $(".cont_sabado").hide();
-                            $(".cont_domingo").hide();
-                            $("#lunes").val(2);
-                            $("#martes").val(2);
-                            $("#miercoles").val(2);
-                            $("#jueves").val(2);
-                            $("#viernes").val(2);
-                            $("#sabado").val(2);
-                            $("#domingo").val(2);
-                        }
-                        if ($(this).val() == 1) {
-                            $("#show_1").show();
-                            $("#show_2").show();
-                            $("#show_3").show();
-                            $("#show_4").show();
-                            $("#show_5").show();
-                            //    $("#show_6").show();
-                            $("#show_7").show();
-                            $("#lunes").val(1);
-                            $("#martes").val(1);
-                            $("#miercoles").val(1);
-                            $("#jueves").val(1);
-                            $("#viernes").val(1);
-                            //$("#sabado").val(1);
-                            $("#domingo").val(1);
-                            document.getElementById("HORA_DESDE_lun1").value = "7:50";
-                            document.getElementById("HORA_HASTA_lun1").value = "12:30";
-                            document.getElementById("HORA_DESDE_lun2").value = "13:30";
-                            document.getElementById("HORA_HASTA_lun2").value = "17:30";
-                            document.getElementById("HORA_DESDE_mar1").value = "7:50";
-                            document.getElementById("HORA_HASTA_mar1").value = "12:30";
-                            document.getElementById("HORA_DESDE_mar2").value = "13:30";
-                            document.getElementById("HORA_HASTA_mar2").value = "17:30";
-                            document.getElementById("HORA_DESDE_mier1").value = "7:50";
-                            document.getElementById("HORA_HASTA_mier1").value = "12:30";
-                            document.getElementById("HORA_DESDE_mier2").value = "13:30";
-                            document.getElementById("HORA_HASTA_mier2").value = "17:30";
-                            document.getElementById("HORA_DESDE_jue1").value = "7:50";
-                            document.getElementById("HORA_HASTA_jue1").value = "12:30";
-                            document.getElementById("HORA_DESDE_jue2").value = "13:30";
-                            document.getElementById("HORA_HASTA_jue2").value = "17:30";
-                            document.getElementById("HORA_DESDE_vie1").value = "7:50";
-                            document.getElementById("HORA_HASTA_vie1").value = "12:30";
-                            document.getElementById("HORA_DESDE_sab1").value = "00:00";
-                            document.getElementById("HORA_HASTA_sab1").value = "00:00";
-                            document.getElementById("HORA_DESDE_dom1").value = "7:50";
-                            document.getElementById("HORA_HASTA_dom1").value = "12:30";
-                            document.getElementById("HORA_DESDE_dom2").value = "13:30";
-                            document.getElementById("HORA_HASTA_dom2").value = "17:30";
-                        }
-                        if ($(this).val() == 2) {
-                            $("#show_1").show();
-                            $("#show_2").show();
-                            $("#show_3").show();
-                            $("#show_4").show();
-                            $("#show_5").show();
-                            //    $("#show_6").show();
-                            $("#show_7").hide();
-                            $("#lunes").val(1);
-                            $("#martes").val(1);
-                            $("#miercoles").val(1);
-                            $("#jueves").val(1);
-                            $("#viernes").val(1);
-                            //$("#sabado").val(1);
-                            $("#domingo").val(2);
-                            document.getElementById("HORA_DESDE_lun1").value = "7:30";
-                            document.getElementById("HORA_HASTA_lun1").value = "12:30";
-                            document.getElementById("HORA_DESDE_lun2").value = "13:30";
-                            document.getElementById("HORA_HASTA_lun2").value = "17:30";
-                            document.getElementById("HORA_DESDE_mar1").value = "7:30";
-                            document.getElementById("HORA_HASTA_mar1").value = "12:30";
-                            document.getElementById("HORA_DESDE_mar2").value = "13:30";
-                            document.getElementById("HORA_HASTA_mar2").value = "17:30";
-                            document.getElementById("HORA_DESDE_mier1").value = "7:30";
-                            document.getElementById("HORA_HASTA_mier1").value = "12:30";
-                            document.getElementById("HORA_DESDE_mier2").value = "13:30";
-                            document.getElementById("HORA_HASTA_mier2").value = "17:30";
-                            document.getElementById("HORA_DESDE_jue1").value = "7:30";
-                            document.getElementById("HORA_HASTA_jue1").value = "12:30";
-                            document.getElementById("HORA_DESDE_jue2").value = "13:30";
-                            document.getElementById("HORA_HASTA_jue2").value = "17:30";
-                            document.getElementById("HORA_DESDE_vie1").value = "7:30";
-                            document.getElementById("HORA_HASTA_vie1").value = "13:00";
-                            document.getElementById("HORA_DESDE_sab1").value = "00:00";
-                            document.getElementById("HORA_HASTA_sab1").value = "00:00";
-                            document.getElementById("HORA_DESDE_dom1").value = "00:00";
-                            document.getElementById("HORA_HASTA_dom1").value = "00:00";
-                            document.getElementById("HORA_DESDE_dom2").value = "00:00";
-                            document.getElementById("HORA_HASTA_dom2").value = "00:00";
-                        }
-                        calcularHoras();
+                        list_horario($(this).val());
                     }
             );
         });</script>
@@ -1108,9 +1118,9 @@
         $(document).ready(function () {
 
             //$("#sueldo").numeric();
-            $("#sueldo").mask("99999.99", {placeholder: "0"});
+           /* $("#sueldo").mask("99999.99", {placeholder: "0"});
             $("#bono_al").mask("99999.99", {placeholder: "0"});
-            $("#bev").mask("99999.99", {placeholder: "0"});
+            $("#bev").mask("99999.99", {placeholder: "0"});*/
             var scntDiv = $('#show_1');
             var i = $('#show_1 .texto-h').size() + 1;
             var s = $('#show_1 .tr-count').size() + 1;

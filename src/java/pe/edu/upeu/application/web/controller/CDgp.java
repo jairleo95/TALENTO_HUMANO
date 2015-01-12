@@ -335,11 +335,11 @@ public class CDgp extends HttpServlet {
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());
-        }/*
+        }
         Gson gson = new Gson();
         out.print(gson.toJson(rpta));
         out.flush();
-        out.close();*/
+        out.close();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
