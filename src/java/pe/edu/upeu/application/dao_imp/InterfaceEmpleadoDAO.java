@@ -24,4 +24,5 @@ public interface InterfaceEmpleadoDAO {
     public String ID_Empleado (String idtr);
     public String ES_Empleado (String idemp);
     public List<Evaluacion_Emp> Listar_Evaluacion_Emp (String id_emp);
+    public void Mod_Evaluacion_emp ( String RE_EVALUACION, String ID_EMPLEADO);
 }

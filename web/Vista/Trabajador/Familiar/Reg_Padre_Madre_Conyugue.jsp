@@ -124,7 +124,7 @@
                                     </label>
                                 </section>
 
-                                <section class="col col-6"><labe>Fecha de Nacimiento</labe>
+                                <section class="col col-6"><label>Fecha de Nacimiento</label>
                                     <label class="input"> <i class="icon-append fa fa-calendar"></i>
                                         <input type="date" name="FECHA_NAC_CONYUGUE" placeholder="Fecha de Nacimiento dd/mm/yy" class="date f_nac" required="">
                                     </label>

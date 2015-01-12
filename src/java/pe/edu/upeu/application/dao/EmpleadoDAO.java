@@ -357,14 +357,16 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
     @Override
     public List<Evaluacion_Emp> Listar_Evaluacion_Emp(String id_emp) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT RE_EVALUACION, ES_EVALUACION FROM RHTD_EVALUACION_EMP WHERE ID_EMPLEADO = '"+id_emp+"'";
+        String sql = "SELECT * FROM RHTD_EVALUACION_EMP WHERE ID_EMPLEADO = '"+id_emp+"'";
         List<Evaluacion_Emp> List = new ArrayList<Evaluacion_Emp>();
         try{
             ResultSet rs = this.conn.query(sql);
             while(rs.next()){
             Evaluacion_Emp eva = new Evaluacion_Emp();
+            eva.setId_evaluacion_emp("id_evaluacion_emp");
             eva.setRe_evaluacion(rs.getString("re_evaluacion"));
             eva.setEs_evaluacion(rs.getString("es_evaluacion"));
+            eva.setId_empleado("id_empleado");
             List.add(eva);
             }
         }catch(Exception e){
@@ -373,6 +375,21 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
         }
         return List;
         
+    }
+
+    @Override
+    public void Mod_Evaluacion_emp(String ID_EVALUACION_EMP, String RE_EVALUACION) {
+        CallableStatement cst;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = conn.conex.prepareCall("{CALL RHSP_MOD_EVALUACION_EMP( ?, ?)}");
+            cst.setString(1, RE_EVALUACION);
+            cst.setString(2, ID_EVALUACION_EMP);
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        }
     }
 
 }

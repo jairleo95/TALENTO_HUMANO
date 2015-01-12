@@ -48,13 +48,13 @@ public class CEmpleado extends HttpServlet {
             getServletContext().setAttribute("LIST_EVALUACION", Iem.Listar_Evaluacion_Emp(ID_Empleado));
            if(estado!=null){
             if(estado.equals("1")){
-            response.sendRedirect("Vista/Empleado/List_Evaluacion_Emp.jsp");      
+            response.sendRedirect("Vista/Empleado/List_Evaluacion_Emp.jsp?idemp="+ID_Empleado);      
             } else{
-            response.sendRedirect("Vista/Empleado/Evaluacion_Empleado.jsp?idtr="+request.getParameter("idtr"));
+            response.sendRedirect("Vista/Empleado/Evaluacion_Empleado.jsp?idtr="+ID_Trabajador);
             }
            }
             else{
-            response.sendRedirect("Vista/Empleado/Evaluacion_Empleado.jsp?idtr="+request.getParameter("idtr"));
+            response.sendRedirect("Vista/Empleado/Evaluacion_Empleado.jsp?idtr="+ID_Trabajador);
             }
             
             
@@ -69,8 +69,17 @@ public class CEmpleado extends HttpServlet {
           String ID_EMPLEADO = Iem.ID_Empleado(ID_TRABAJADOR);
           Iem.Insert_Evaluacion_Emp(ID_EVALUACION_EMP, ES_EVALUACION, RE_EVALUACION, ID_EMPLEADO);
           getServletContext().setAttribute("LIST_EVALUACION", Iem.Listar_Evaluacion_Emp(ID_EMPLEADO));
-           response.sendRedirect("Vista/Empleado/List_Evaluacion_Emp.jsp" );
+           response.sendRedirect("Vista/Empleado/List_Evaluacion_Emp.jsp?idemp="+ID_EMPLEADO );
         }
+        if(opc.equals("Editar")){
+            String ID_EMP = request.getParameter("idemp");
+         
+          getServletContext().setAttribute("LIST_EVALUACION", Iem.Listar_Evaluacion_Emp(ID_EMP));
+            
+           response.sendRedirect("Vista/Empleado/Mod_Evaluacion_Emp.jsp?idemp="+ID_EMP);
+        }
+       
+        
         if (opc.equals("Reporte")) {
 
             String iddepa = (String) sesion.getAttribute("DEPARTAMENTO_ID");
