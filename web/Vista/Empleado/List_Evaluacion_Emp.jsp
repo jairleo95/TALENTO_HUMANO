@@ -21,6 +21,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <form align="center" action="../../empleado" >
         <table id="datatable_tabletools" class="table table-striped table-bordered table-hover" width="100%" >
             <thead>
                 <tr>
@@ -67,16 +68,16 @@
                         %>    
                     </td>
                     <td>
+                         <input type="hidden" name="idemp" value="<%=request.getParameter("idemp")%>"> 
                       <input class="btn btn-success" type="submit" name="opc" value="Editar">  
                     </td>
                     <%}%>
             <div>
-                <input type="text" value="<%=request.getParameter("idemp")%>"> 
             </div>
             
         </tr>
     </tbody>
 </table>
-
+</form>
 </body>
 </html>

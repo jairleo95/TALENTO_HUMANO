@@ -79,6 +79,14 @@ public class CEmpleado extends HttpServlet {
            response.sendRedirect("Vista/Empleado/Mod_Evaluacion_Emp.jsp?idemp="+ID_EMP);
         }
        
+        if(opc.equals("modificar")){
+            String RE_EVALUACION = request.getParameter("RE_EVALUACION");
+            String ID_EMPLEADO = request.getParameter("ID_EMPLEADO");
+            Iem.Mod_Evaluacion_emp(RE_EVALUACION, ID_EMPLEADO);
+            getServletContext().setAttribute("LIST_EVALUACION", Iem.Listar_Evaluacion_Emp(ID_EMPLEADO));
+            response.sendRedirect("Vista/Empleado/List_Evaluacion_Emp.jsp?idemp="+ID_EMPLEADO );
+            
+        }
         
         if (opc.equals("Reporte")) {
 

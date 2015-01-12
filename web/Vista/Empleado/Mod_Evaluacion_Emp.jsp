@@ -103,8 +103,7 @@
                            for (int i = 0; i < LIST_EVALUACION.size(); i++) {
                         Evaluacion_Emp e = new Evaluacion_Emp();
                         e = (Evaluacion_Emp) LIST_EVALUACION.get(i);
-                        out.print(e.getRe_evaluacion());
-                                
+
                         %>
 
                         <fieldset >
@@ -167,7 +166,7 @@
                         </fieldset>
 
                         <input type="hidden" value="modificar" name="opc"/>
-                        <input type="text" name="ID_EMPLEADO" value="<%=request.getParameter("idemp")%>"  >
+                        <input type="hidden" name="ID_EMPLEADO" value="<%=request.getParameter("idemp")%>"  >
                         <footer>
                             <button type="submit" class="btn btn-primary" name="opc">
                                 Modificar

@@ -378,13 +378,13 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
     }
 
     @Override
-    public void Mod_Evaluacion_emp(String ID_EVALUACION_EMP, String RE_EVALUACION) {
+    public void Mod_Evaluacion_emp(String RE_EVALUACION, String ID_EMPLEADO) {
         CallableStatement cst;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             cst = conn.conex.prepareCall("{CALL RHSP_MOD_EVALUACION_EMP( ?, ?)}");
             cst.setString(1, RE_EVALUACION);
-            cst.setString(2, ID_EVALUACION_EMP);
+            cst.setString(2, ID_EMPLEADO);
             cst.execute();
         } catch (SQLException ex) {
         } finally {
