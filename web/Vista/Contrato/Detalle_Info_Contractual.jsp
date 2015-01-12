@@ -164,18 +164,22 @@
             
                 <% for (int p = 0; p < List_id_Contrato_DGP.size(); p++) {%>
                 <table class="table table-hover table-striped  table-responsive">
-                <tr><td class="text-info table-bordered"><strong>Desde: <%=n.getId_contrato()%></strong></td><td colspan="2"><%=n.getFe_desde()%></td><td class="text-info table-bordered" colspan="2"><strong>Hasta:</strong></td><td colspan="2"><%=n.getFe_hasta()%></td></tr>
+                <tr><td class="text-info table-bordered"><strong>Desde: </strong></td><td colspan="2"><%=n.getFe_desde()%></td><td class="text-info table-bordered" colspan="2"><strong>Hasta:</strong></td><td colspan="2"><%=n.getFe_hasta()%></td></tr>
                 <tr><td class="text-info table-bordered"><strong>Dirección:</strong></td><td colspan="6"><p><%=n.getNo_direccion()%> </p></td></tr>
                 <tr><td class="text-info table-bordered"><strong>Departamento:</strong></td><td colspan="6"><p><%=n.getNo_dep()%> </p></td></tr>
                 <tr><td class="text-info table-bordered"><strong>Area:</strong></td><td colspan="6"><p><%=n.getNo_area()%> </td></p></tr>
                 <tr><td class="text-info table-bordered"><strong>Sección:</strong></td><td colspan="6"><p><%=n.getNo_seccion()%> </p></td></tr>
                 <% 
                 if(Lis_c_c_id_contr.size()>0){
+                    Double cantidad = 0.0;
                     for(int q=0;q<Lis_c_c_id_contr.size();q++){
                         Centro_Costos cc=new Centro_Costos();
                         cc=(Centro_Costos)Lis_c_c_id_contr.get(q);
+                        
+                        cantidad=Double.parseDouble(cc.getCa_porcentaje())+cantidad;
     %>
-    <tr><td class="text-info table-bordered"><strong>Centro conto Nº <%=q+1%></strong></td><td colspan="2"><p><%=cc.getDe_centro_costo()%></p></td><td class="text-info table-bordered" colspan="2"><strong>Porcentaje</strong></td><td colspan="2"><p><%=cc.getCa_porcentaje()%> %</p> </td></tr><%}}else{%>
+    <tr><td class="text-info table-bordered"><strong>Centro conto Nº <%=q+1%>:</strong></td><td colspan="2"><p><%=cc.getDe_centro_costo()%></p></td><td class="text-info table-bordered" colspan="2"><strong>Porcentaje</strong></td><td colspan="2"><p><%=cc.getCa_porcentaje()%> %</p> </td></tr><%}%>
+                <tr><td class="text-info table-bordered"><strong>Total Porcentaje:</strong></td><td colspan="6"><p><%=cantidad%> %</p></td></tr><%}else{%>
                     <tr><td class="text-info table-bordered"><strong>Centro conto </strong></td><td colspan="6"><p>No tiene</p></td></tr><%}Lis_c_c_id_contr.clear();%>
                 <tr><td class="text-info table-bordered"><strong>Puesto:</strong></td><td colspan="6"><p><%=n.getNo_puesto()%></p></td> </tr>
                 <tr><td class="text-info table-bordered"><strong>Condición:</strong></td> <td colspan="6"><p><%
@@ -242,7 +246,7 @@
                     <td colspan="6">NO TIENE</td> 
                     <%}%>
                 </tr>
-                <tr><td class="text-info table-bordered"><strong>Tipo de Contratacion</strong></td><td colspan="6"><%
+                <tr><td class="text-info table-bordered"><strong>Tipo de Contratacion:</strong></td><td colspan="6"><%
                     if (n.getEs_ti_contratacion() != null) {
                         if (n.getEs_ti_contratacion().trim().equals("I")) {
                             out.println("INICIO");
@@ -264,12 +268,12 @@
                         }
                     } else {%><td colspan="6"> NO DEFINIDO</td><%}%>
                 </tr>
-                <tr><td class="text-info table-bordered"> Fecha de Suscripcion</td><td><%if (n.getFe_suscripcion() != null) {
+                <tr><td class="text-info table-bordered"> Fecha de Suscripcion:</td><td><%if (n.getFe_suscripcion() != null) {
                         out.print(n.getFe_suscripcion());
                     } else {
                         out.print("NO DEFINIDO");
                     }%> </td></tr>
-                <tr><td class="text-info table-bordered"><strong>Tipo moneda de pago</strong></td><td colspan="6"><%
+                <tr><td class="text-info table-bordered"><strong>Tipo moneda de pago:</strong></td><td colspan="6"><%
                     if (n.getCo_ti_moneda() != null) {
                         if (n.getCo_ti_moneda().trim().equals("01")) {
                             out.println("SOLES");

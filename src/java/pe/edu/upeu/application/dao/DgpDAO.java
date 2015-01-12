@@ -539,7 +539,7 @@ public class DgpDAO implements InterfaceDgpDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select id_dgp,trim(to_char(fe_desde,'month'))||' - '||trim(to_char(fe_hasta,'month'))||' - '||trim(to_char(fe_hasta,'YYYY'))||' | '||r.no_req as descripcion from rhtm_dgp d,rhtr_requerimiento r where r.id_requerimiento = d.id_requerimiento and d.es_dgp ='1' and d.id_trabajador='"+id+"'";
+            String sql = "select   id_contrato,id_dgp,fe_desde ||' - ' || fe_hasta ||' | '|| NO_PUESTO as descripcion from RHVD_LIST_CONTRATO where id_trabajador='"+id+"'";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
