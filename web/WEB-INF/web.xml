@@ -91,6 +91,14 @@
         <servlet-name>CFormato_Horario</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CFormato_Horario</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CRemuneracion</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CRemuneracion</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CModulo</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CModulo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
         <url-pattern>/trabajador</url-pattern>
@@ -178,6 +186,14 @@
     <servlet-mapping>
         <servlet-name>CFormato_Horario</servlet-name>
         <url-pattern>/formato_horario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CRemuneracion</servlet-name>
+        <url-pattern>/remuneracion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CModulo</servlet-name>
+        <url-pattern>/modulo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>300</session-timeout>

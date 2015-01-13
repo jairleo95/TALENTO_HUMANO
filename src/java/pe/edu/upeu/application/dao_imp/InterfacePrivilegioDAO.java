@@ -7,6 +7,7 @@
 package pe.edu.upeu.application.dao_imp;
 
 import java.util.List;
+import java.util.Map;
 import pe.edu.upeu.application.model.Privilegio;
 import pe.edu.upeu.application.model.Privilegio_Rol;
 import pe.edu.upeu.application.model.V_Privilegio_Rol;
@@ -26,4 +27,6 @@ public interface InterfacePrivilegioDAO {
     public void Mod_Priv(String id_Priv,String No_link,String Es_priv,String di_url,String ic_link);
     public List<Privilegio>List_Pri_Id(String id_Priv);
     public List<V_Privilegio_Rol>List_Pr_Rol();
+    public List<Map<String,?>> List_Priv();
+    public List<Map<String,?>> List_Priv_Mod();
 }

@@ -10,7 +10,9 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import pe.edu.upeu.application.dao_imp.InterfacePrivilegioDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -183,6 +185,68 @@ public class PrivilegioDAO implements InterfacePrivilegioDAO{
         this.conn.close();
         }        
       return list;
+    }
+
+    @Override
+    public List<Map<String, ?>> List_Priv() {
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "Select * from rhtv_privilegio order by NO_LINK";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id_prv", rs.getString("ID_PRIVILEGIO"));
+                rec.put("no_prv", rs.getString("NO_LINK"));
+                rec.put("di_prv", rs.getString("DI_URL"));
+                rec.put("es_prv", rs.getString("ES_PRIVILEGIO"));
+                rec.put("ic_prv", rs.getString("IC_LINK"));
+                rec.put("id_m_prv", rs.getString("ID_MODULO"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
+    }
+
+    @Override
+    public List<Map<String, ?>> List_Priv_Mod() {
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "SELECT m.ID_MODULO,m.NO_MODULO,m.ES_MODULO,p.ID_PRIVILEGIO,p.NO_LINK,p.ES_PRIVILEGIO FROM RHTV_PRIVILEGIO p, RHTV_MODULO m WHERE p.ID_MODULO = m.ID_MODULO ORDER by m.ID_MODULO, p.NO_LINK ";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id_md", rs.getString("ID_MODULO"));
+                rec.put("no_md", rs.getString("NO_MODULO"));
+                rec.put("es_md", rs.getString("ES_MODULO"));
+                rec.put("id_pr", rs.getString("ID_PRIVILEGIO"));
+                rec.put("no_pr", rs.getString("NO_LINK"));
+                rec.put("es_pr", rs.getString("ES_PRIVILEGIO"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
     }
     
 }

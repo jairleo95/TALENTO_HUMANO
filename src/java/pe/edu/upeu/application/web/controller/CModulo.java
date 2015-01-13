@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package pe.edu.upeu.application.web.controller;
 
 import com.google.gson.Gson;
@@ -12,25 +13,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import pe.edu.upeu.application.dao.AreaDAO;
-import pe.edu.upeu.application.dao.DepartamentoDao;
-import pe.edu.upeu.application.dao.PuestoDAO;
-import pe.edu.upeu.application.dao.SeccionDAO;
-import pe.edu.upeu.application.dao_imp.InterfaceAreaDAO;
-import pe.edu.upeu.application.dao_imp.InterfaceDepartamentoDAO;
-import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
-import pe.edu.upeu.application.dao_imp.InterfaceSeccionDAO;
+import pe.edu.upeu.application.dao.ModuloDAO;
+import pe.edu.upeu.application.dao.PrivilegioDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceModuloDAO;
+import pe.edu.upeu.application.dao_imp.InterfacePrivilegioDAO;
 
 /**
  *
  * @author joserodrigo
  */
-@WebServlet(name = "CDir_Puesto", urlPatterns = {"/Direccion_Puesto"})
-public class CDir_Puesto extends HttpServlet {
+public class CModulo extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,58 +36,36 @@ public class CDir_Puesto extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    InterfaceDepartamentoDAO dep = new DepartamentoDao();
-    InterfaceAreaDAO are = new AreaDAO();
-    InterfaceSeccionDAO sec = new SeccionDAO();
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        Map<String, Object> rpta = new HashMap<String, Object>();
-        String opc = request.getParameter("opc");
         PrintWriter out = response.getWriter();
+        Map<String, Object> rpta = new HashMap<String, Object>();
+        InterfaceModuloDAO modu=new ModuloDAO();
+        InterfacePrivilegioDAO prv=new PrivilegioDAO();
         try {
-            if (opc.equals("Listar")) {
-                List<Map<String, ?>> lista = dep.List_departamento_2();
-                //List<Map<String, ?>> lista2 = dep.dep_id(id_pu);
+            String opc=request.getParameter("opc");
+            if(opc.equals("lis_mod")){
+                List<Map<String, ?>> list = modu.List_Modulo();
                 rpta.put("rpta", "1");
-                rpta.put("lista", lista);
-                //rpta.put("lista2", lista2);
+                rpta.put("lista", list);
             }
-            if (opc.equals("Listar_area")) {
-                String id_dep = request.getParameter("id_dep");
-                List<Map<String, ?>> lista = are.List_area_id_json(id_dep);
+            if(opc.equals("lis_req")){
+                List<Map<String, ?>> list = prv.List_Priv();
                 rpta.put("rpta", "1");
-                rpta.put("lista", lista);
+                rpta.put("lista", list);
             }
-            if (opc.equals("Listar_sec")) {
-                String id_are = request.getParameter("id_are");
-                List<Map<String, ?>> lista = sec.List_sec_id(id_are);
+            if(opc.equals("lis_pr_mod")){
+                List<Map<String, ?>> list = prv.List_Priv_Mod();
                 rpta.put("rpta", "1");
-                rpta.put("lista", lista);
+                rpta.put("lista", list);
             }
-            if (opc.equals("selec_dep")) {
-                String id_pu = request.getParameter("id_pu");
-                List<Map<String, ?>> lista = dep.dep_id(id_pu);
+            if(opc.equals("lis_pr_mod_x_id")){
+                List<Map<String, ?>> list = prv.List_Priv_Mod();
                 rpta.put("rpta", "1");
-                rpta.put("lista", lista);
+                rpta.put("lista", list);
             }
-            if (opc.equals("selec_are")) {
-                String id_pu = request.getParameter("id_pu");
-                List<Map<String, ?>> lista = are.selec_area(id_pu);
-                rpta.put("rpta", "1");
-                rpta.put("lista", lista);
-            }
-            if (opc.equals("selec_sec")) {
-                String id_pu = request.getParameter("id_pu");
-                List<Map<String, ?>> lista = sec.selec_sec(id_pu);
-                rpta.put("rpta", "1");
-                rpta.put("lista", lista);
-            }
-           /* if(opc.equals("")){
-                
-            }*/
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());
