@@ -581,7 +581,7 @@
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-phone fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="TELEFONO" id="doc" placeholder="Teléfono"  data-mask="+99 (999) 999-9999" data-mask-placeholder= "X"   formnovalidate maxlength="50" class="form-control input-group-sm" >
+                                                                            <input type="text" name="TELEFONO"  placeholder="Teléfono"  data-mask="+51 (999) 999-9999" data-mask-placeholder= "X"   formnovalidate maxlength="50" value="" class="form-control input-group-sm" >
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -589,7 +589,7 @@
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-mobile fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="CELULAR" id="doc" placeholder="Celular"  data-mask="999-999-999" data-mask-placeholder= "X" formnovalidate maxlength="38" class="form-control input-group-sm" >
+                                                                            <input type="text" name="CELULAR"  placeholder="Celular"  data-mask="999-999-999" data-mask-placeholder= "X" formnovalidate maxlength="38" class="form-control input-group-sm" >
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -621,6 +621,7 @@
                                                                                             $(".n_afp").remove();
                                                                                             $("#nom_afp").attr("disabled", true);
                                                                                             $(".afp").append('<input name="NOMBRE_AFP_ID" type="hidden" class="n_afp" value="6"/>');
+                                                                                            $("#nom_afp").val("6");
                                                                                         }
                                                                                         if ($("#sis_pens").val() == "1") {
 
@@ -645,7 +646,6 @@
                                                                                 <option value="">[Sistema Pensionario]</option>
                                                                                 <option value="1">AFP</option>
                                                                                 <option value="2">ONP</option>
-                                                                                <option value="3">Ninguno</option>
                                                                                 <option value="4">Sin Régimen Provisional(jubilado, cesante).</option>
                                                                             </select>
                                                                         </div>
