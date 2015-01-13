@@ -23,4 +23,5 @@ public interface InterfaceCentro_CostosDAO {
     public List<Map<String, ?>> List_centr_id(String id_dgp);
     public void Mod_det_centro(String id_det_cen, String id_contrato);
     public List<Centro_Costos> Lis_c_c_id_contr(String id_contrato);
+    public  List<Map<String, ?>> Cargar_cc_dgp(String id_dgp);
 }

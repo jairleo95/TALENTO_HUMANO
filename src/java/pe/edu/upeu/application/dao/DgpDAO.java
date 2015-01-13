@@ -541,7 +541,7 @@ public class DgpDAO implements InterfaceDgpDAO {
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
-                rec.put("id", rs.getString("id_dgp"));
+                rec.put("id", rs.getString("id_contrato"));
                 rec.put("desc", rs.getString("descripcion"));
                 lista.add(rec);
             }
@@ -565,7 +565,7 @@ public class DgpDAO implements InterfaceDgpDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = " select   c.id_contrato,c.id_dgp,c.CA_SUELDO,c.CA_BONO_ALIMENTO,c.CA_BEV ,c.CA_SUELDO_TOTAL ,d.DE_ANTECEDENTES_POLICIALES,d.ES_CERTIFICADO_SALUD ,d.NO_BANCO,d.NO_BANCO_OTROS,d.ES_GEN_NU_CUENTA,d.NU_CUENTA,d.NU_CUENTA_BANC from RHVD_LIST_CONTRATO c  left outer join RHVD_DET_DGP d on (d.ID_DGP = c.ID_DGP) where d.id_dgp='" + id + "'";
+            String sql = " select   c.id_contrato,c.id_dgp,c.CA_SUELDO,c.CA_BONO_ALIMENTO,c.CA_BEV ,c.CA_SUELDO_TOTAL ,d.DE_ANTECEDENTES_POLICIALES,d.ES_CERTIFICADO_SALUD ,d.NO_BANCO,d.NO_BANCO_OTROS,d.ES_GEN_NU_CUENTA,d.NU_CUENTA,d.NU_CUENTA_BANC from RHVD_LIST_CONTRATO c  left outer join RHVD_DET_DGP d on (d.ID_DGP = c.ID_DGP) where c.id_contrato='" + id + "'";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();

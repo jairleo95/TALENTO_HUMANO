@@ -166,7 +166,7 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT (C.ID_CENTRO_COSTO) as id_centro ,(C.DE_CENTRO_COSTO) as no_centro,(d.ID_DETALLE_CENTRO_COSTO)as id_det_cen FROM RHTR_CENTRO_COSTO C, RHTD_DETALLE_CENTRO_COSTO d where d.ID_DGP='"+id_dgp.trim()+"' and C.ID_CENTRO_COSTO=d.ID_CENTRO_COSTO";
+            String sql = "SELECT (C.ID_CENTRO_COSTO) as id_centro ,(C.DE_CENTRO_COSTO) as no_centro,(d.ID_DETALLE_CENTRO_COSTO)as id_det_cen FROM RHTR_CENTRO_COSTO C, RHTD_DETALLE_CENTRO_COSTO d where d.ID_DGP='" + id_dgp.trim() + "' and C.ID_CENTRO_COSTO=d.ID_CENTRO_COSTO";
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -190,7 +190,7 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
     }
 
     @Override
-    public void Mod_det_centro(String id_cent_cos,String id_contrato) {
+    public void Mod_det_centro(String id_cent_cos, String id_contrato) {
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.cnn.conex.prepareCall("{CALL RHSP_MOD_DET_CEN_C_IDT(?, ? )} ");
@@ -207,7 +207,7 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
     @Override
     public List<Centro_Costos> Lis_c_c_id_contr(String id_contrato) {
         this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT c.ID_CENTRO_COSTO ,c.DE_CENTRO_COSTO ,c.CO_CENTRO_COSTO, c.ID_DEPARTAMENTO, d.CA_PORCENTAJE FROM RHTR_CENTRO_COSTO c,RHTD_DETALLE_CENTRO_COSTO d where d.ID_CENTRO_COSTO=c.ID_CENTRO_COSTO and  d.ID_CONTRATO='"+id_contrato.trim()+"'";
+        String sql = "SELECT c.ID_CENTRO_COSTO ,c.DE_CENTRO_COSTO ,c.CO_CENTRO_COSTO, c.ID_DEPARTAMENTO, d.CA_PORCENTAJE FROM RHTR_CENTRO_COSTO c,RHTD_DETALLE_CENTRO_COSTO d where d.ID_CENTRO_COSTO=c.ID_CENTRO_COSTO and  d.ID_CONTRATO='" + id_contrato.trim() + "'";
         List<Centro_Costos> list = new ArrayList<Centro_Costos>();
         try {
             ResultSet rs = this.cnn.query(sql);
@@ -226,5 +226,37 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
         }
 
         return list;
+    }
+
+    @Override
+    public List<Map<String, ?>> Cargar_cc_dgp(String id_dgp) {
+
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select  CC.ID_DGP , cc.ID_CENTRO_COSTO,d.ID_DIRECCION,c.ID_DEPARTAMENTO,c.ID_AREA,cc.CA_PORCENTAJE,c.DE_CENTRO_COSTO from RHTD_DETALLE_CENTRO_COSTO cc , RHTR_CENTRO_COSTO c , RHTX_DIRECCION d , RHTX_DEPARTAMENTO dp where cc.ID_CENTRO_COSTO = c.ID_CENTRO_COSTO  and dp.ID_DEPARTAMENTO = c.ID_DEPARTAMENTO  and cc.ES_DETALLE_CC='1'  and dp.ID_DIRECCION = d.ID_DIRECCION and id_dgp='DGP-000262'";
+            ResultSet rs = this.cnn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id_cc", rs.getString("id_centro_costo"));
+                rec.put("id_dir", rs.getString("id_direccion"));
+                rec.put("id_dep", rs.getString("id_departamento"));
+                rec.put("id_area", rs.getString("id_area"));
+                rec.put("porcent_cc", rs.getString("ca_porcentaje"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
+
     }
 }

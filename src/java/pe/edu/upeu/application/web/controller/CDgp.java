@@ -92,8 +92,8 @@ public class CDgp extends HttpServlet {
                 rpta.put("lista", lista);
             }
             if (opc.equals("Listar_Datos")) {
-                String id_tr = request.getParameter("idc");
-                List<Map<String, ?>> lista = dgp.list_Req(id_tr);
+                String id_c = request.getParameter("idc");
+                List<Map<String, ?>> lista = dgp.Cargar_Datos_Dgp(id_c);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
@@ -128,7 +128,7 @@ public class CDgp extends HttpServlet {
                 String DE_MONTO_HONORARIO = request.getParameter("MONTO_HONORARIO");
                 String NO_BANCO = request.getParameter("BANCO");
                 String NU_CUENTA = (request.getParameter("CUENTA") == null) ? "no tiene" : request.getParameter("CUENTA");
-            // String NU_CUENTA = request.getParameter("CUENTA");
+                // String NU_CUENTA = request.getParameter("CUENTA");
                 //String NU_CUENTA_BANC = (request.getParameter("CUENTA_BANC") == null) ? "0" : "no tiene";
                 String NU_CUENTA_BANC = request.getParameter("CUENTA_BANC");
                 String ES_GEN_NU_CUENTA = (request.getParameter("GEN_NU_CUEN") == null) ? "0" : "1";
@@ -137,7 +137,7 @@ public class CDgp extends HttpServlet {
 
                 dgp.INSERT_DGP(null, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO, DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION, ES_DGP, iduser, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, CA_CENTRO_COSTOS, DE_ANTECEDENTES_POLICIALES, DE_CERTIFICADO_SALUD, DE_MONTO_HONORARIO, NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEN_NU_CUENTA, NO_BANCO_OTROS);
 
-            //out.print(NU_CUENTA);
+                //out.print(NU_CUENTA);
                 //out.print(NU_CUENTA_BANC);
                 String iddgp = dgp.MAX_ID_DGP();
                 String idrp = IReq.id_det_req_proc(iddgp);
@@ -220,9 +220,9 @@ public class CDgp extends HttpServlet {
                 response.sendRedirect("Vista/Dgp/Reg_Dgp.jsp?idreq=" + idreq);
             }
             if (opc.equals("Reg_renuncia")) {
-                String iddeph=request.getParameter("idep");
+                String iddeph = request.getParameter("idep");
                 /* TEMPORAL*/
-                String Tipo_planilla=tr.tipo_planilla(idtr);
+                String Tipo_planilla = tr.tipo_planilla(idtr);
                 if (Tipo_planilla.equals("TPL-0001")) {
                     idreq = "REQ-0015";
                 }
@@ -232,7 +232,7 @@ public class CDgp extends HttpServlet {
                 if (Tipo_planilla.equals("TPL-0003")) {
                     idreq = "REQ-0017";
                 }
-                out.print(iddeph+idtr+idreq+iddep);
+                out.print(iddeph + idtr + idreq + iddep);
                 //getServletContext().setAttribute("List_Puesto", pu.List_Puesto_Dep(iddep));
                 //getServletContext().setAttribute("Listar_Trabajador_id", tr.ListaridTrabajador(idtr));
                 //response.sendRedirect("Vista/Renuncias/Reg_Dgp_Renuncia.jsp?idreq=" + idreq);
