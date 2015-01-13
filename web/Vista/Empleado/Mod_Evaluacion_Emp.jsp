@@ -110,7 +110,6 @@
                             <center>
                                 <section class="col col-4" id="sec">
                                     <label class="select" >
-                                        
                                         <select name="RE_EVALUACION" required="" class="input-lg">
                                             <%
                                                 if (e.getRe_evaluacion().equals("0")) {

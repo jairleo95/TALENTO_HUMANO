@@ -39,6 +39,7 @@ public class CFamiliar extends HttpServlet {
         HttpSession sesion = request.getSession(true);
         
         String user = (String) sesion.getAttribute("IDUSER");
+        
         String opc = request.getParameter("opc");
         CConversion c = new CConversion();
         

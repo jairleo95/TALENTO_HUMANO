@@ -38,6 +38,7 @@ public class CEmpleado extends HttpServlet {
         InterfaceEmpleadoDAO Iem = new EmpleadoDAO();
 
         HttpSession sesion = request.getSession(true);
+        
         String opc = request.getParameter("opc");
 
         if (opc.equals("Eva_Emp")) {
