@@ -1,3 +1,4 @@
+
 <%-- 
     Document   : Pruebas_SELECT
     Created on : 18-ago-2014, 10:37:25
@@ -22,7 +23,6 @@
   try{ 
   // esta línea es opcional... 
    out.println("<option value=\"-1\" selected> Selecciona una opcion</option>"); 
-
   // comienzo el ciclo con el rango de valores dado. 
   for (int i=startValue; i<(endValue+1); i++){ 
   // si el valor actual corresponde al valor del ciclo, 
@@ -40,12 +40,10 @@
 } 
 %> 
 <% 
-
 java.util.GregorianCalendar cal = new java.util.GregorianCalendar(); 
     int day = cal.get(cal.DAY_OF_MONTH); 
     int month = (cal.get(cal.MONTH)) + 1; 
     int year = cal.get(cal.YEAR); 
-
 %>
 <table> 
    <h1>construcción dinámica de menús de selección</h1> 
@@ -73,10 +71,9 @@ java.util.GregorianCalendar cal = new java.util.GregorianCalendar();
      </tr> 
    </table> 
       <%
-      public void writeCountryMenu(Connection connection, javax.servlet.jsp.JspWriter out, int currentValue){ 
+      /*public void writeCountryMenu(Connection connection, javax.servlet.jsp.JspWriter out, int currentValue){ 
    try{ 
      String sqlString = " SELECT id,Name from T_Countries order by orderview "; 
-
      Statement stmt = connection.createStatement(); 
      ResultSet rs = stmt.executeQuery(sqlString); 
      while (rs.next()){ 
@@ -88,12 +85,10 @@ java.util.GregorianCalendar cal = new java.util.GregorianCalendar();
      } 
      rs.close(); 
    stmt.close(); 
-
    }catch(Exception e){ 
      System.out.println(e); 
    } 
-  }
-
+  }*/
       %>
     </body>
 </html>
