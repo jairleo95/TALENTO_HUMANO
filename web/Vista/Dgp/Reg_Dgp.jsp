@@ -286,6 +286,11 @@
                                                             });
 
                                                             lista_dgp.change(function () {
+                                                                $.post("../../dgp", "", function (objJson) {
+                                                                    
+
+                                                                });
+
                                                                 $("#horario").val("2");
                                                                 list_horario($("#horario").val());
                                                             });

@@ -56,4 +56,5 @@ public interface InterfaceDgpDAO {
     public List<V_Es_Requerimiento> List_Incomplet(String iddep);
     
     public List<Map<String, ?>> list_Req(String id);
+    public List<Map<String, ?>> Cargar_Datos_Dgp(String id);
 }
