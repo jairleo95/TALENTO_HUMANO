@@ -75,7 +75,7 @@
                 </table>
             </div>
             <table class="table table-striped table-bordered table-hover">
-                <input type="text" name="idtra" value="<%=pmc.getId_trabajador().trim()%>">
+                <input type="hidden" name="idtra" value="<%=pmc.getId_trabajador().trim()%>">
                 <%}%>
                 
                 <tr><td colspan="2"></td><td><input class="btn btn-success" type="submit" name="opc" value="Editar"></td></tr>

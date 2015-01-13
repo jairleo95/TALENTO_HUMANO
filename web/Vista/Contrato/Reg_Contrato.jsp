@@ -119,7 +119,7 @@
             <header>
                 <!--<div   class="header" style=" width:100%; border:2px solid red">Detalle del Trabajador</div> -->
                 <div class="header">
-                    <span class="widget-icon"> <i class="fa fa-edit"></i> Información Contractual</span>
+                    <span class="widget-icon"> <i class="fa fa-edit"></i> DGP</span>
                 </div>
             </header>
 

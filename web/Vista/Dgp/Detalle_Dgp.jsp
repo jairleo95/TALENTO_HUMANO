@@ -90,7 +90,7 @@
                     %>
 
 
-                    <tr><td colspan="2" class="text-info table-bordered" id="header"><i class="fa fa-file"></i> Información Contractual</td></tr>
+                    <tr><td colspan="2" class="text-info table-bordered" id="header"><i class="fa fa-file"></i> DGP </td></tr>
                     <!--<label style="color: black; //font-family: cursive;"><h2><%=d.getNo_req()%></h2></label>
                     --><tr><td class="text-info table-bordered" style="text-align:align;">Fecha Desde:</td><td><%=d.getFe_desde()%></td></tr>
                     <tr ><td class="text-info table-bordered">Fecha Hasta:</td><td><%=d.getFe_hasta()%></td></tr>
