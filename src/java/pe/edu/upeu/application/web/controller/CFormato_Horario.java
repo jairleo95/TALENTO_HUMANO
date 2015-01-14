@@ -99,25 +99,31 @@ public class CFormato_Horario extends HttpServlet {
                 String ID_FORMATO_HORARIO = request.getParameter(null);
                 String ID_TIPO_HORARIO = request.getParameter("IDTIPOHORARIO");
                 String ES_F_HORARIO = request.getParameter("ESTADO");
-                
-                for (int i = 0; i < dia.size(); i++) {
-                for (int j = 0; j < dia.size(); j++) {
-                    String HO_DESDE = request.getParameter("HORA_DESDE_" + dia.get(i) + j);
-                    String HO_HASTA = request.getParameter("HORA_HASTA_" + dia.get(i) + j);
-                    String NO_TURNO = request.getParameter("TURNO_" + dia.get(i) + j);
-                    String NO_DIA = request.getParameter("DIA_" + dia.get(i) + j);
 
-                    if (HO_DESDE != null&NO_DIA!=null&HO_HASTA!=null) {
-                        if (!HO_HASTA.equals("")&!HO_DESDE.equals("")&!NO_DIA.equals("")) {
-                            Ifh.Insert_Formato_Horario(ID_FORMATO_HORARIO, NO_TURNO, NO_DIA, HO_DESDE, HO_HASTA, ES_F_HORARIO, ID_TIPO_HORARIO);
+                for (int i = 0; i < dia.size(); i++) {
+                    for (int j = 0; j < dia.size(); j++) {
+                        String HO_DESDE = request.getParameter("HORA_DESDE_" + dia.get(i) + j);
+                        String HO_HASTA = request.getParameter("HORA_HASTA_" + dia.get(i) + j);
+                        String NO_TURNO = request.getParameter("TURNO_" + dia.get(i) + j);
+                        String NO_DIA = request.getParameter("DIA_" + dia.get(i) + j);
+
+                        if (HO_DESDE != null & NO_DIA != null & HO_HASTA != null) {
+                            if (!HO_HASTA.equals("") & !HO_DESDE.equals("") & !NO_DIA.equals("")) {
+                                Ifh.Insert_Formato_Horario(ID_FORMATO_HORARIO, NO_TURNO, NO_DIA, HO_DESDE, HO_HASTA, ES_F_HORARIO, ID_TIPO_HORARIO);
+                            }
                         }
                     }
-                }
 
-            }
+                }
             }
             if (opc.equals("Listar_Tip_Horario")) {
                 List<Map<String, ?>> lista = Ifh.List_Tipo_Horario();
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
+            if (opc.equals("Listar_Horario")) {
+                String id = request.getParameter("id");
+                List<Map<String, ?>> lista = Ifh.List_Formato_h(id)
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }

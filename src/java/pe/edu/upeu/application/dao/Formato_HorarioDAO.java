@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.eclipse.jdt.internal.compiler.apt.model.Factory;
 import pe.edu.upeu.application.dao_imp.InterfaceFormato_HorarioDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -93,7 +92,7 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
     @Override
     public List<Formato_Horario> Listar_Formato_Horario(String idth) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "Select * from RHTR_FORMATO_HORARIO  where ID_TIPO_HORARIO ='"+idth+"' ";
+        String sql = "Select * from RHTR_FORMATO_HORARIO  where ID_TIPO_HORARIO ='" + idth + "' ";
         List<Formato_Horario> list = new ArrayList<Formato_Horario>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -115,13 +114,14 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
         }
         return list;
     }
-       @Override
+
+    @Override
     public List<Map<String, ?>> List_Tipo_Horario() {
 
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select  * from RHTR_TIPO_HORARIO where trim(es_horario) ='0'";
+            String sql = "select  * from RHTR_TIPO_HORARIO where trim(es_horario) ='1'";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -143,6 +143,36 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
         }
         return Lista;
 
+    }
+
+    @Override
+    public List<Map<String, ?>> List_Formato_h(String id_th) {
+
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select  *  from RHTR_FORMATO_HORARIO  where ID_TIPO_HORARIO='TIH-000001' order by ID_FORMATO_HORARIO asc ";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("turno", rs.getString("NO_TURNO"));
+                rec.put("dia", rs.getString("no_dia"));
+                rec.put("desde", rs.getString("ho_desde"));
+                rec.put("hasta", rs.getString("ho_hasta"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
     }
 
 }

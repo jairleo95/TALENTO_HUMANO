@@ -1,5 +1,4 @@
 
-
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
 <%@page import="pe.edu.upeu.application.model.Requerimiento"%>
 <%@page import="pe.edu.upeu.application.model.V_Puesto_Direccion"%>
@@ -591,7 +590,7 @@
                                                     <div class="row">
                                                         <section class="col col-2">
                                                             <label class="select" id="titu">LUNES
-                                                                <select id="lunes" >
+                                                                <select id=select_lun >
                                                                     <option value="1">Habilitado</option>
                                                                     <option value="2" selected="">Deshabilitado</option>
                                                                 </select>
@@ -599,7 +598,7 @@
                                                         </section>
                                                         <section class="col col-2">
                                                             <label class="select" id="titu">MARTES
-                                                                <select id="martes" >
+                                                                <select id=select_mar >
                                                                     <option value="1">Habilitado</option>
                                                                     <option value="2" selected="">Deshabilitado</option>
                                                                 </select>
@@ -607,7 +606,7 @@
                                                         </section>
                                                         <section class="col col-2" >
                                                             <label class="select" id="titu">MIERCOLES
-                                                                <select id="miercoles"  >
+                                                                <select id=select_mier  >
                                                                     <option value="1">Habilitado</option>
                                                                     <option value="2" selected="">Deshabilitado</option>
                                                                 </select>
@@ -615,7 +614,7 @@
                                                         </section>
                                                         <section class="col col-2">
                                                             <label class="select" id="titu">JUEVES
-                                                                <select id="jueves"  >
+                                                                <select id=select_jue  >
                                                                     <option value="1">Habilitado</option>
                                                                     <option value="2" selected="">Deshabilitado</option>
                                                                 </select> 
@@ -623,7 +622,7 @@
                                                         </section>
                                                         <section class="col col-2">
                                                             <label class="select" id="titu">VIERNES
-                                                                <select id="viernes"  >
+                                                                <select id=select_vie  >
                                                                     <option value="1">Habilitado</option>
                                                                     <option value="2" selected="">Deshabilitado</option>
                                                                 </select>
@@ -631,7 +630,7 @@
                                                         </section>
                                                         <section class="col col-2">
                                                             <label class="select" id="titu">SABADO
-                                                                <select id="sabado"  >
+                                                                <select id=select_sab  >
                                                                     <option value="1">Habilitado</option>
                                                                     <option value="2" selected="">Deshabilitado</option>
                                                                 </select>
@@ -640,7 +639,7 @@
 
                                                         <section class="col col-2">
                                                             <label class="select" id="titu">DOMINGO
-                                                                <select id="domingo" >
+                                                                <select id=select_dom >
 
                                                                     <option value="1">Habilitado</option>
                                                                     <option value="2" selected="">Deshabilitado</option>
@@ -649,83 +648,37 @@
                                                         </section>
                                                     </div>
                                                     <div class="input-desp">
-                                                        <table style="" id="show_1" class="cont_lunes"> 
+                                                        <table style="" id="show_lun" class="cont_lun"> 
                                                             <tr><td align="center" colspan="2">Lunes</td></tr>
-                                                            <tr class="tr-count"><td>T1 :</td><td><input type="text" name="HORA_DESDE_lun1" class="HORA_DESDE_lun1" ></td>      
-                                                                <td><input type="text" name="HORA_HASTA_lun1"  class="HORA_HASTA_lun1" ></td></tr>         
-                                                            <input type="hidden" name="DIA_lun1" value="lun" >                    
 
-                                                            <tr class="tr-count"><td>T2 :</td><td><input type="text" name="HORA_DESDE_lun2"  class="HORA_DESDE_lun2" ></td>           
-                                                                <td ><input type="text" name="HORA_HASTA_lun2"  class="HORA_HASTA_lun2" ><a  id="remScnt" >-</a></td></tr>      
-                                                            <input type="hidden" name="DIA_lun2" value="lun">                    
-                                                            <tr><td colspan="2"><a href="#" id="addScnt">+</a></td></tr>
 
                                                         </table>
 
-                                                        <table id="show_2" class="cont_martes">     
+                                                        <table id="show_mar" class="cont_mar">     
                                                             <tr><td align="center" colspan="2">Martes</td></tr>
-                                                            <tr class="tr-count_2"><td>T1 :</td><td><input type="text" name="HORA_DESDE_mar1"  class="HORA_DESDE_mar1" ></td>             
-                                                                <td><input type="text" name="HORA_HASTA_mar1"  class="HORA_HASTA_mar1" ></td></tr>         
-                                                            <input type="hidden" name="DIA_mar1" value="mar" >                    
 
-                                                            <tr class="tr-count_2"><td>T2 :</td><td><input type="text" name="HORA_DESDE_mar2"  class="HORA_DESDE_mar2" ></td>             
-                                                                <td><input type="text" name="HORA_HASTA_mar2"   class="HORA_HASTA_mar2" ><a href="#" id="remove_2">-</a></td></tr>         
-                                                            <input type="hidden" name="DIA_mar2" value="mar" >    
-
-                                                            <tr><td colspan="2"><a href="#" id="add_2">+</a></td></tr>
                                                         </table>
-                                                        <table id="show_3" class="cont_miercoles">     
+                                                        <table id="show_mie" class="cont_mie">     
                                                             <tr ><td align="center" colspan="2">Miercoles</td></tr>
-                                                            <tr class="tr-count_3"><td>T1 :</td><td><input type="text" name="HORA_DESDE_mie1"  class="HORA_DESDE_mie1" ></td>           
-                                                                <td><input type="text" name="HORA_HASTA_mie1" class="HORA_HASTA_mie1" ></td></tr>         
-                                                            <input type="hidden" name="DIA_mie1" value="mie">                    
 
-
-
-                                                            <tr class="tr-count_3"><td>T2 :</td><td><input type="text" name="HORA_DESDE_mie2" class="HORA_DESDE_mie2" ></td>           
-                                                                <td><input type="text" name="HORA_HASTA_mie2"  class="HORA_HASTA_mie2" ><a href="#" id="remove_3">-</a></td></tr>         
-                                                            <input type="hidden" name="DIA_mie2" value="mie"  >                    
-
-                                                            <tr><td colspan="2"><a href="#" id="add_3">+</a></td></tr>
                                                         </table>
 
 
-                                                        <table id="show_4" class="cont_jueves">     
+                                                        <table id="show_jue" class="cont_jue">     
                                                             <tr><td align="center" colspan="2">Jueves</td></tr>
-                                                            <tr class="tr-count_4"><td>T1 :</td><td><input type="text" name="HORA_DESDE_jue1" class="HORA_DESDE_jue1" /></td>            
-                                                                <td><input type="text" name="HORA_HASTA_jue1" class="HORA_HASTA_jue1"  ></td></tr>         
-                                                            <input type="hidden" name="DIA_jue1" value="jue"  >           
 
-
-                                                            <tr class="tr-count_4"><td>T2 :</td><td><input type="text" name="HORA_DESDE_jue2" class="HORA_DESDE_jue2" ></td>          
-                                                                <td><input type="text" name="HORA_HASTA_jue2" class="HORA_HASTA_jue2"  ><a href="#" id="remove_4">-</a></td></tr>         
-                                                            <input type="hidden" name="DIA_jue2" value="jue"  >                    
-                                                            <tr><td colspan="2"><a href="#" id="add_4">+</a></td></tr>
                                                         </table>
-                                                        <table id="show_5" class="cont_viernes">     
+                                                        <table id="show_vie" class="cont_vie">     
                                                             <tr><td align="center" colspan="2">Viernes</td></tr>
-                                                            <tr class="tr-count_5"><td>T1 :</td><td><input type="text" name="HORA_DESDE_vie1"  class="HORA_DESDE_vie1"  ></td>
-                                                                <td><input type="text" name="HORA_HASTA_vie1" class="HORA_HASTA_vie1" ></td></tr>         
-                                                            <input type="hidden" name="DIA_vie1" value="vie"  >                    
-                                                            <tr><td colspan="2"><a href="#" id="add_5">+</a></td></tr>
-                                                        </table>
-                                                        <table id="show_6" class="cont_sabado">     
-                                                            <tr><td align="center" colspan="2">Sábado</td></tr>
-                                                            <tr class="tr-count_6"><td>T1 :</td><td><input type="text" name="HORA_DESDE_sab1"  class="HORA_DESDE_sab1"  ></td>
-                                                                <td><input type="text" name="HORA_HASTA_sab1" class="HORA_HASTA_sab1"  ></td></tr>         
-                                                            <input type="hidden" name="DIA_sab1" value="sab"  />                    
-                                                            <tr><td colspan="2"><a href="#" id="add_6">+</a></td></tr>
-                                                        </table>
-                                                        <table id="show_7" class="cont_domingo" >
-                                                            <tr><td align="center" colspan="2">Domingo</td></tr>
-                                                            <tr class="tr-count_7"><td>T1 :</td><td><input type="text" name="HORA_DESDE_dom1"  class="HORA_DESDE_dom1"  ></td>
-                                                                <td><input type="text" name="HORA_HASTA_dom1"  class="HORA_HASTA_dom1"  ></td></tr>         
-                                                            <input type="hidden" name="DIA_dom1" value="dom" >                    
 
-                                                            <tr class="tr-count_7"><td>T2 :</td><td><input type="text" name="HORA_DESDE_dom2"  class="HORA_DESDE_dom2"  ></td>
-                                                                <td><input type="text" name="HORA_HASTA_dom2"  class="HORA_HASTA_dom2"  ><a href="#" id="remove_7">-</a></td></tr>         
-                                                            <input type="hidden" name="DIA_dom2" value="dom"  >                    
-                                                            <tr><td colspan="2"><a href="#" id="add_7">+</a></td></tr>
+                                                        </table>
+                                                        <table id="show_sab" class="cont_sab">     
+                                                            <tr><td align="center" colspan="2">Sábado</td></tr>
+
+                                                        </table>
+                                                        <table id="show_dom" class="cont_dom" >
+                                                            <tr><td align="center" colspan="2">Domingo</td></tr>
+
                                                         </table>
                                                         <div class="h_total" style="color: red; font-weight: bold;">Horas Totales : 00:00 horas</div>
                                                         <input  readonly="" type="text" name="horas_totales" class="h_total" required="" max="48"/>
@@ -773,87 +726,89 @@
         $(document).ready(
                 function mostrar() {
                     $(".texto-h").mask("99:99", {placeholder: "X"});
-                    $(".cont_lunes").hide();
-                    $(".cont_martes").hide();
-                    $(".cont_miercoles").hide();
-                    $(".cont_jueves").hide();
-                    $(".cont_viernes").hide();
-                    $(".cont_sabado").hide();
-                    $(".cont_domingo").hide();
-                    $("#lunes").change(
+                    $(".cont_lun").hide();
+                    $(".cont_mar").hide();
+                    $(".cont_mie").hide();
+                    $(".cont_jue").hide();
+                    $(".cont_vie").hide();
+                    $(".cont_sab").hide();
+                    $(".cont_dom").hide();
+
+
+                    $("#select_lun").change(
                             function () {
                                 if ($(this).val() == 1) {
-                                    $("#show_1").show();
+                                    $("#show_lun").show();
                                 }
                                 if ($(this).val() == 2) {
-                                    $(".cont_lunes").hide();
-                                    $("#show_1 input").val("");
+                                    $(".cont_lun").hide();
+                                    $("#show_lun input").val("");
                                 }
                             }
                     );
-                    $("#martes").change(
+                    $("#select_mar").change(
                             function () {
                                 if ($(this).val() == 1) {
-                                    $("#show_2").show();
+                                    $("#show_mar").show();
                                 }
                                 if ($(this).val() == 2) {
-                                    $(".cont_martes").hide();
-                                    $("#show_2 input").val("");
+                                    $(".cont_mar").hide();
+                                    $("#show_mar input").val("");
                                 }
                             }
                     );
-                    $("#miercoles").change(
+                    $("#select_mie").change(
                             function () {
                                 if ($(this).val() == 1) {
-                                    $("#show_3").show();
+                                    $("#show_mie").show();
                                 }
                                 if ($(this).val() == 2) {
-                                    $(".cont_miercoles").hide();
-                                    $("#show_3 input").val("00:00");
+                                    $(".cont_mie").hide();
+                                    $("#show_mie input").val("00:00");
                                 }
                             }
                     );
-                    $("#jueves").change(
+                    $("#select_jue").change(
                             function () {
                                 if ($(this).val() == 1) {
-                                    $("#show_4").show();
+                                    $("#show_jue").show();
                                 }
                                 if ($(this).val() == 2) {
-                                    $(".cont_jueves").hide();
-                                    $("#show_4 input").val("");
+                                    $(".cont_jue").hide();
+                                    $("#show_jue input").val("");
                                 }
                             }
                     );
-                    $("#viernes").change(
+                    $("#select_vie").change(
                             function () {
                                 if ($(this).val() == 1) {
-                                    $("#show_5").show();
+                                    $("#show_vie").show();
                                 }
                                 if ($(this).val() == 2) {
-                                    $(".cont_viernes").hide();
-                                    $("#show_5 input").val("");
+                                    $(".cont_vie").hide();
+                                    $("#show_vie input").val("");
                                 }
                             }
                     );
-                    $("#sabado").change(
+                    $("#select_sab").change(
                             function () {
                                 if ($(this).val() == 1) {
-                                    $("#show_6").show();
+                                    $("#show_sab").show();
                                 }
                                 if ($(this).val() == 2) {
-                                    $(".cont_sabado").hide();
-                                    $("#show_6 input").val("");
+                                    $(".cont_sab").hide();
+                                    $("#show_sab input").val("");
                                 }
                             }
                     );
-                    $("#domingo").change(
+                    $("#select_dom").change(
                             function () {
                                 if ($(this).val() == 1) {
-                                    $("#show_7").show();
+                                    $("#show_dom").show();
                                 }
                                 if ($(this).val() == 2) {
-                                    $(".cont_domingo").hide();
-                                    $("#show_7 input").val("");
+                                    $(".cont_dom").hide();
+                                    $("#show_dom input").val("");
                                 }
                             }
                     );
@@ -866,12 +821,12 @@
             var acum = 0;
             for (var i = 0; i < dias_semana.length; i++) {
 
-                for (var j = 0, max = 5; j < max; j++) {
+                for (var j = 0, max = 1; j < max; j++) {
                     var horaTurno = 0;
                     //var str = $("#HORA_DESDE_" + dias_semana[i] + j).val();
 
-                    var Desde = $(".HORA_DESDE_" + dias_semana[i] + j).val();
-                    var Hasta = $(".HORA_HASTA_" + dias_semana[i] + j).val();
+                    var Desde = $(".HORA_DESDE_" + dias_semana[i] + (j + 1)).val();
+                    var Hasta = $(".HORA_HASTA_" + dias_semana[i] + (j + 1)).val();
                     if ($(".HORA_DESDE_" + dias_semana[i] + j).val() == null) {
                         Desde = "00:00";
                         Hasta = "00:00";
@@ -881,7 +836,7 @@
                     var arrDesde = Desde.split(":");
                     var arrHasta = Hasta.split(":");
                     horaTurno = (((parseInt(arrHasta[0]) * 60) + (parseInt(arrHasta[1]))) - ((parseInt(arrDesde[0]) * 60) + (parseInt(arrDesde[1]))));
-                    //alert(horaTurno);
+                    alert(horaTurno + Desde + ".HORA_DESDE_" + dias_semana[i] + (j + 1));
 
                     acum = acum + horaTurno;
                     // }
@@ -1020,105 +975,60 @@
 
 
             if (valor == 0) {
-                $(".cont_lunes").hide();
-                $(".cont_martes").hide();
-                $(".cont_miercoles").hide();
-                $(".cont_jueves").hide();
-                $(".cont_viernes").hide();
-                $(".cont_sabado").hide();
-                $(".cont_domingo").hide();
-                $("#lunes").val(2);
-                $("#martes").val(2);
-                $("#miercoles").val(2);
-                $("#jueves").val(2);
-                $("#viernes").val(2);
-                $("#sabado").val(2);
-                $("#domingo").val(2);
-            }
-            if (valor == 1) {
-                $("#show_1").show();
-                $("#show_2").show();
-                $("#show_3").show();
-                $("#show_4").show();
-                $("#show_5").show();
-                //    $("#show_6").show();
-                $("#show_7").show();
-                $("#lunes").val(1);
-                $("#martes").val(1);
-                $("#miercoles").val(1);
-                $("#jueves").val(1);
-                $("#viernes").val(1);
-                //$("#sabado").val(1);
-                $("#domingo").val(1);
-                $(".HORA_DESDE_lun1").val("7:50");
-                $(".HORA_HASTA_lun1").val("12:30");
-                $(".HORA_DESDE_lun2").val("13:30");
-                $(".HORA_HASTA_lun2").val("17:30");
-                $(".HORA_DESDE_mar1").val("7:50");
-                $(".HORA_HASTA_mar1").val("12:30");
-                $(".HORA_DESDE_mar2").val("13:30");
-                $(".HORA_HASTA_mar2").val("17:30");
-                $(".HORA_DESDE_mie1").val("7:50");
-                $(".HORA_HASTA_mie1").val("12:30");
-                $(".HORA_DESDE_mie2").val("13:30");
-                $(".HORA_HASTA_mie2").val("17:30");
-                $(".HORA_DESDE_jue1").val("7:50");
-                $(".HORA_HASTA_jue1").val("12:30");
-                $(".HORA_DESDE_jue2").val("13:30");
-                $(".HORA_HASTA_jue2").val("17:30");
-                $(".HORA_DESDE_vie1").val("7:50");
-                $(".HORA_HASTA_vie1").val("12:30");
-                $(".HORA_DESDE_sab1").val("00:00");
-                $(".HORA_HASTA_sab1").val("00:00");
-                $(".HORA_DESDE_dom1").val("7:50");
-                $(".HORA_HASTA_dom1").val("12:30");
-                $(".HORA_DESDE_dom2").val("13:30");
-                $(".HORA_HASTA_dom2").val("17:30");
-            }
-            if (valor == 2) {
-                $("#show_1").show();
-                $("#show_2").show();
-                $("#show_3").show();
-                $("#show_4").show();
-                $("#show_5").show();
-                //    $("#show_6").show();
-                $("#show_7").hide();
-                $("#lunes").val(1);
-                $("#martes").val(1);
-                $("#miercoles").val(1);
-                $("#jueves").val(1);
-                $("#viernes").val(1);
-                //$("#sabado").val(1);
-                $("#domingo").val(2);
+                $(".cont_lun").hide();
+                $(".cont_mar").hide();
+                $(".cont_mie").hide();
+                $(".cont_jue").hide();
+                $(".cont_vie").hide();
+                $(".cont_sab").hide();
+                $(".cont_dom").hide();
+                $("#select_lun").val(2);
+                $("#select_mar").val(2);
+                $("#select_mie").val(2);
+                $("#select_jue").val(2);
+                $("#select_vie").val(2);
+                $("#select_sab").val(2);
+                $("#select_dom").val(2);
+            } else {
 
 
+                var dias_semana = new Array("lun", "mar", "mie", "jue", "vie", "sab", "dom");
+                $.post("../../formato_horario", "opc=Listar_Horario&id=" + valor, function (objJson) {
+                    var lista = objJson.lista;
+                    for (var f = 0; f < dias_semana.length; f++) {
+                          var d = 0;
+                        for (var i = 0; i < lista.length; i++) {
+                          
+                            if (dias_semana[f] == lista[i].dia) {
+                                var scntDiv = $('#show_' + dias_semana[f]);
+                                $(".cont_" + dias_semana[f]).show();
+                                $("#select_" + dias_semana[f]).val(1);
 
-                $(".HORA_DESDE_lun1").val("7:30");
-                $(".HORA_HASTA_lun1").val("12:30");
-                $(".HORA_DESDE_lun2").val("13:30");
-                $(".HORA_HASTA_lun2").val("17:30");
-                $(".HORA_DESDE_mar1").val("7:30");
-                $(".HORA_HASTA_mar1").val("12:30");
-                $(".HORA_DESDE_mar2").val("13:30");
-                $(".HORA_HASTA_mar2").val("17:30");
-                $(".HORA_DESDE_mie1").val("7:30");
-                $(".HORA_HASTA_mie1").val("12:30");
-                $(".HORA_DESDE_mie2").val("13:30");
-                $(".HORA_HASTA_mie2").val("17:30");
-                $(".HORA_DESDE_jue1").val("7:30");
-                $(".HORA_HASTA_jue1").val("12:30");
-                $(".HORA_DESDE_jue2").val("13:30");
-                $(".HORA_HASTA_jue2").val("17:30");
-                $(".HORA_DESDE_vie1").val("7:30");
-                $(".HORA_HASTA_vie1").val("13:00");
-                $(".HORA_DESDE_sab1").val("00:00");
-                $(".HORA_HASTA_sab1").val("00:00");
-                $(".HORA_DESDE_dom1").val("00:00");
-                $(".HORA_HASTA_dom1").val("00:00");
-                $(".HORA_DESDE_dom2").val("00:00");
-                $(".HORA_HASTA_dom2").val("00:00");
+                                $('<tr><td>HORA_DESDE_' + dias_semana[f] + (d + 1) + 'T' + (d + 1) + ' :</td><td><input type="text"   class="texto-h HORA_DESDE_' + dias_semana[f] + (d + 1) + '"   name="HORA_DESDE_' + dias_semana[f] + (d + 1)
+                                        + '" value="' + lista[i].desde + '"  /></td><td><input type="text"  class="texto-h HORA_HASTA_' + dias_semana[f] + (d + 1) + '"  value="' + lista[i].hasta + '" name="HORA_HASTA_' + dias_semana[f] + (d + 1)
+                                        + '" /><input type="hidden" name="DIA_' + dias_semana[f] + (d + 1)
+                                        + '" value="' + dias_semana[f] + '" ><a href="#" class="remove_' + (d + 1) + '">-</a></td></tr>').appendTo(scntDiv);
+
+
+                               
+                                d++;
+                            }
+                            // alert(dias_semana[f]);
+
+                        }
+                    }
+                    calcularHoras();
+                    $(".texto-h").keyup(
+                            function () {
+                                calcularHoras();
+                            }
+                    );
+
+                });
+
             }
-            calcularHoras();
+
+
         }
 
         function cuenta_bancaria(banco) {
@@ -1233,7 +1143,6 @@
                 for (var i = 0; i < lista.length; i++) {
                     horario.append('<option value="' + lista[i].id + '" >' + lista[i].nombre + '</option>');
                 }
-                
 
             });
         }
@@ -1260,11 +1169,7 @@
             });
 
             listar_cc();
-            $(".texto-h").keyup(
-                    function () {
-                        calcularHoras();
-                    }
-            );
+
             $("#horario").change(
                     function () {
                         list_horario($(this).val());
@@ -1282,11 +1187,15 @@
             /* $("#sueldo").mask("99999.99", {placeholder: "0"});
              $("#bono_al").mask("99999.99", {placeholder: "0"});
              $("#bev").mask("99999.99", {placeholder: "0"});*/
-            var scntDiv = $('#show_1');
-            var i = $('#show_1 .texto-h').size() + 1;
-            var s = $('#show_1 .tr-count').size() + 1;
+            var scntDiv = $('#show_lun');
+            var i = $('#show_lun .texto-h').size() + 1;
+            var s = $('#show_lun .tr-count').size() + 1;
             $('#addScnt').click(function () {
-                $('<tr><td>T' + s + ' :</td><td><input type="text"   name="HORA_DESDE_lun' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_lun' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_lun' + i + '" value="lun" ><input type="hidden" name="USER_CREACION_lun' + i + '"> <a href="#" id="remScnt">-</a></td></tr>').appendTo(scntDiv);
+                $('<tr><td>T' + s + ' :</td><td><input type="text"   name="HORA_DESDE_lun' + i
+                        + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_lun' + i
+                        + '" value="" placeholder=" " /><input type="hidden" name="DIA_lun' + i
+                        + '" value="lun" ><input type="hidden" name="USER_CREACION_lun' + i
+                        + '"> <a href="#" id="remScnt">-</a></td></tr>').appendTo(scntDiv);
                 i++;
                 s++;
                 return false;
@@ -1303,9 +1212,9 @@
         });
         //MARTES
         $(function () {
-            var scntDiv = $('#show_2');
-            var i = $('#show_2 .texto-h').size() + 1;
-            var s = $('#show_2 .tr-count_2').size() + 1;
+            var scntDiv = $('#show_mar');
+            var i = $('#show_mar .texto-h').size() + 1;
+            var s = $('#show_mar .tr-count_2').size() + 1;
             $('#add_2').click(function () {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_mar' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_mar' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_mar' + i + '" value="mar" ><input type="hidden" name="USER_CREACION_mar' + i + '"> <a href="#" id="remove_2">-</a></td></tr>').appendTo(scntDiv);
@@ -1313,7 +1222,7 @@
                 s++;
                 return false;
             });
-            $('#remove_2').click(function () {
+            $('.remove_2').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -1325,9 +1234,9 @@
         });
         //MIERCOLES
         $(function () {
-            var scntDiv = $('#show_3');
-            var i = $('#show_3 .texto-h').size() + 1;
-            var s = $('#show_3 .tr-count_3').size() + 1;
+            var scntDiv = $('#show_mie');
+            var i = $('#show_mie .texto-h').size() + 1;
+            var s = $('#show_mie .tr-count_3').size() + 1;
             $('#add_3').click(function () {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_mie' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_mie' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_mie' + i + '" value="mie" ><input type="hidden" name="USER_CREACION_mie' + i + '"> <a href="#" id="remove_3">-</a></td></tr>').appendTo(scntDiv);
@@ -1335,7 +1244,7 @@
                 s++;
                 return false;
             });
-            $('#remove_3').click(function () {
+            $('.remove_3').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -1347,9 +1256,9 @@
         });
         //JUEVES
         $(function () {
-            var scntDiv = $('#show_4');
-            var i = $('#show_4 .texto-h').size() + 1;
-            var s = $('#show_4 .tr-count_4').size() + 1;
+            var scntDiv = $('#show_jue');
+            var i = $('#show_jue .texto-h').size() + 1;
+            var s = $('#show_jue .tr-count_4').size() + 1;
             $('#add_4').click(function () {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_jue' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_jue' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_jue' + i + '" value="jue" ><input type="hidden" name="USER_CREACION_jue' + i + '"> <a href="#" id="remove_4">-</a></td></tr>').appendTo(scntDiv);
@@ -1357,7 +1266,7 @@
                 s++;
                 return false;
             });
-            $('#remove_4').click(function () {
+            $('.remove_4').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -1369,9 +1278,9 @@
         });
         //VIERNES
         $(function () {
-            var scntDiv = $('#show_5');
-            var i = $('#show_5 .texto-h').size() + 1;
-            var s = $('#show_5 .tr-count_5').size() + 1;
+            var scntDiv = $('#show_vie');
+            var i = $('#show_vie .texto-h').size() + 1;
+            var s = $('#show_vie .tr-count_5').size() + 1;
             $('#add_5').click(function () {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_vie' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_vie' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_vie' + i + '" value="vie" ><input type="hidden" name="USER_CREACION_vie' + i + '"> <a href="#" id="remove_5">-</a></td></tr>').appendTo(scntDiv);
@@ -1379,7 +1288,7 @@
                 s++;
                 return false;
             });
-            $('#remove_5').click(function () {
+            $('.remove_5').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -1391,9 +1300,9 @@
         });
         //DOMINGO
         $(function () {
-            var scntDiv = $('#show_6');
-            var i = $('#show_6 .texto-h').size() + 1;
-            var s = $('#show_6 .tr-count_6').size() + 1;
+            var scntDiv = $('#show_sab');
+            var i = $('#show_sab .texto-h').size() + 1;
+            var s = $('#show_sab .tr-count_6').size() + 1;
             $('#add_6').click(function () {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_dom' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_dom' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_dom' + i + '" value="dom" ><input type="hidden" name="USER_CREACION_dom' + i + '"> <a href="#" id="remove_6">-</a></td></tr>').appendTo(scntDiv);
@@ -1401,7 +1310,7 @@
                 s++;
                 return false;
             });
-            $('#remove_6').click(function () {
+            $('.remove_6').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
