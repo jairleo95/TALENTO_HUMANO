@@ -76,36 +76,34 @@ public class CFormato_Horario extends HttpServlet {
             if (opc.equals("Registrar_Formato")) {
 
             }
+
+            if (opc.equals("Registrar_Formato")) {
+
+            }
+
+            if (opc.equals("Registrar_Formato")) {
+
+            }
             if (opc.equals("Listar_Formato")) {
                 getServletContext().setAttribute("List_Tipo_Horario", Ifh.Listar_Tipo_Horario());
                 response.sendRedirect("Vista/Formato_Horario/Detalle_Formato_Horario.jsp");
             }
 
-            if (opc.equals("REGISTRAR")) {
-                String ID_FORMATO_HORARIO = null;
-                String NO_TURNO = request.getParameter("NO_TURNO");
-                String NO_DIA = request.getParameter("NO_DIA");
-                String HO_DESDE = request.getParameter("HO_DESDE");
-                String HO_HASTA = request.getParameter("HO_HASTA");
-                String ES_F_HORARIO = request.getParameter("ES_F_HORARIO");
-                String ID_TIPO_HORARIO = request.getParameter("ID_TIPO_HORARIO");
-
-                Ifh.Insert_Formato_Horario(ID_FORMATO_HORARIO, NO_TURNO, NO_DIA, HO_DESDE, HO_HASTA, ES_F_HORARIO, ID_TIPO_HORARIO);
-                getServletContext().setAttribute("LIST_FORMATO_HORARIO", Ifh.Listar_Formato_Horario(ID_TIPO_HORARIO));
-                response.sendRedirect("Vista/Formato_Horario/Reg_Formato_Horario.jsp");
-
-            }
             if (opc.equals("REGISTRAR_FOR_HORARIO")) {
                 String ID_FORMATO_HORARIO = request.getParameter(null);
                 String ID_TIPO_HORARIO = request.getParameter("IDTIPOHORARIO");
                 String ES_F_HORARIO = request.getParameter("ESTADO");
 
+                
                 for (int i = 0; i < dia.size(); i++) {
-                    for (int j = 0; j < dia.size(); j++) {
-                        String HO_DESDE = request.getParameter("HORA_DESDE_" + dia.get(i) + j);
-                        String HO_HASTA = request.getParameter("HORA_HASTA_" + dia.get(i) + j);
-                        String NO_TURNO = request.getParameter("TURNO_" + dia.get(i) + j);
-                        String NO_DIA = request.getParameter("DIA_" + dia.get(i) + j);
+                for (int j = 0; j < 10; j++) {
+                    String HO_DESDE = request.getParameter("HORA_DESDE_" + dia.get(i) + j);
+                    String HO_HASTA = request.getParameter("HORA_HASTA_" + dia.get(i) + j);
+                    String NO_TURNO = request.getParameter("TURNO_" + dia.get(i) + j);
+                    String NO_DIA = request.getParameter("DIA_" + dia.get(i) + j);
+
+
+          
 
                         if (HO_DESDE != null & NO_DIA != null & HO_HASTA != null) {
                             if (!HO_HASTA.equals("") & !HO_DESDE.equals("") & !NO_DIA.equals("")) {
@@ -115,18 +113,33 @@ public class CFormato_Horario extends HttpServlet {
                     }
 
                 }
+                getServletContext().setAttribute("List_Tipo_Horario", Ifh.Listar_Tipo_Horario());
+                response.sendRedirect("Vista/Formato_Horario/Detalle_Formato_Horario.jsp");
+
+                
+
             }
+            if(opc.equals("LISTAR_FORMATO_HORARIO")){
+                    String ID_TIPO_HORARIO = request.getParameter("idth");
+                    String nofor = request.getParameter("nofor");
+                    getServletContext().setAttribute("LISTAR_FORMATO_HORARIO",Ifh.Listar_Formato_Horario(ID_TIPO_HORARIO) );
+                    response.sendRedirect("Vista/Formato_Horario/List_Formato_Horario.jsp?nofor="+ nofor +"");
+                }
             if (opc.equals("Listar_Tip_Horario")) {
                 List<Map<String, ?>> lista = Ifh.List_Tipo_Horario();
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
+
             if (opc.equals("Listar_Horario")) {
                 String id = request.getParameter("id");
                 List<Map<String, ?>> lista = Ifh.List_Formato_h(id)
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
+
+            
+
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());
