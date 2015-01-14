@@ -12,10 +12,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <title>JSP Page</title>
         <link rel="stylesheet" href="../../../css/Css_Lista/listas.css" />
+        <link rel="stylesheet" href="../../../css/bootstrap.min.css">
 
     </head>
     <body>
-        <table>
+        <table class="table-bordered table-responsive table-mailbox">
             <tr><td class="cajita">Nro</td>
                 <td class="cajita">Rol</td>
                 <td class="cajita">Estado</td>

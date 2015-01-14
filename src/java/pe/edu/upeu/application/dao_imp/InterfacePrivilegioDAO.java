@@ -17,7 +17,7 @@ import pe.edu.upeu.application.model.V_Privilegio_Rol;
  * @author Admin
  */
 public interface InterfacePrivilegioDAO {
-    public void Insert_Privilegio(String No_Link, String Di_url, String Es_privilegio,String Ic_Link);
+    public void Insert_Privilegio(String No_Link, String Di_url, String Es_privilegio,String Ic_Link,String Modulo);
     public boolean Insert_Proceso();
     public boolean Insert_Detalle_Privilegio();
     public List<Privilegio> List_Privilegio();
@@ -29,4 +29,5 @@ public interface InterfacePrivilegioDAO {
     public List<V_Privilegio_Rol>List_Pr_Rol();
     public List<Map<String,?>> List_Priv();
     public List<Map<String,?>> List_Priv_Mod();
+    public List<Map<String,?>> List_Priv_Mod_x_id(String id_mod);
 }

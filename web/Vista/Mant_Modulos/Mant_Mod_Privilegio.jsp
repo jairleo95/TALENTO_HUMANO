@@ -22,25 +22,27 @@
         <div id="contenido">
             <div class="form-group row">
                 <center>
-                    <table>
-                        <tr><td colspan="3"><label>MODULO:</label></td>
-                            <td colspan="3">
-                                <select class="form-control" name="id_modulo" required="" id="selec_mod">
-                                    <option >[SELECCIONAR]</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr><td colspan="3"><label>PRIVILEGIO:</label></td>
-                            <td colspan="3">
-                                <select class="form-control" name="id_req" required="" id="selec_reque">
-                                    <option>[SELECCIONAR]</option>
-                                </select>
-                            </td>
-                        </tr>
+                    <form  class="form-modulo" action="">
                         <table>
-                            <tr><td colspan="6"><button class="btn btn-primary" name="" id="btn_req" >REGISTRAR</button></td></tr>
+                            <tr><td colspan="3"><label>MODULO:</label></td>
+                                <td colspan="3">
+                                    <select class="selec_id_modulo form-control" name="id_modulo" required="" id="selec_modulo">
+                                        <option >[SELECCIONAR]</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr><td colspan="3"><label>PRIVILEGIO:</label></td>
+                                <td colspan="3">
+                                    <select class="form-control" name="id_privi" required="" id="selec_priv">
+                                        <option>[SELECCIONAR]</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <input  type="hidden" name="opc" value="Registrar"/>
+                            <tr><td colspan="6"><button class="btn btn-primary" name="" id="btn_prv" >REGISTRAR</button></td></tr>
 
                         </table>
+                    </form>
                 </center>
             </div>
             <div class="container" >
@@ -53,10 +55,11 @@
                                 <td><span title="es_md">ESTADO MODULO </span></td>
                                 <td><span title="no_pr">PRIVILEGIO</span></td>
                                 <td><span title="es_pr">ESTADO MODULO PRIV.</span></td>
-                                <td colspan="3"><span>OPCIONES</span></td>
+                                <td colspan="2"><span>OPCIONES</span></td>
                             </tr>
                         </thead>
                         <tbody class="tbodys" id="list">
+
                         </tbody>
                     </table>
                 </center>
@@ -64,71 +67,103 @@
         </div>
     </body>
     <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
+    <script src="../../js/libs/jquery-ui-1.10.3.min.js"></script>
     <script>
         $(document).ready(function() {
             list_modulo();
             list_Priv();
-            list_Priv_mod()
+            //lerta_decir('asas');
+            //list_Priv_mod();
             function list_modulo() {
-                var mo = $("#selec_mod");
+                var mo = $("#selec_modulo");
                 $.post("../../modulo", "opc=lis_mod", function(objJson) {
                     mo.empty();
                     var lista = objJson.lista;
                     mo.append("<option value''>[SELECCIONAR]</option>");
                     for (var i = 0; i <= lista.length; i++) {
-                        mo.append("<option value'" + lista[i].id_mod + "'>" + lista[i].no_mod + "</option>");
+                        mo.append("<option value='" + lista[i].id_mod + "' >" + lista[i].no_mod + "</option>");
                     }
 
                 });
             }
             function list_Priv() {
-                var mo = $("#selec_reque");
+                var mo = $("#selec_priv");
                 $.post("../../modulo", "opc=lis_req", function(objJson) {
                     mo.empty();
                     var lista = objJson.lista;
-                    mo.append("<option value''>[SELECCIONAR]</option>");
+                    mo.append("<option value=''>[SELECCIONAR]</option>");
                     for (var i = 0; i <= lista.length; i++) {
-                        mo.append("<option value'" + lista[i].id_prv + "'>" + lista[i].no_prv + "</option>");
+                        mo.append("<option value='" + lista[i].id_prv + "'>" + lista[i].no_prv + "</option>");
                     }
                 });
             }
-            /*function list_Priv_mod() {
-             var mo = $(".tbodys");
-             $.post("../../modulo", "opc=lis_pr_mod", function(objJson) {
-             mo.empty();
-             var lista = objJson.lista;
-             var nroe = 1;
-             for (var i = 0; i <= lista.length; i++) {
-             nroe = nroe + i;
-             mo.append("<tr>");
-             mo.append("<td>" + nroe + "</td>");
-             mo.append("<td>" + lista[i].no_md + "</td>");
-             if (lista[i].es_md == '1') {
-             mo.append("<td><p>ACTIVADO</p></td>");
-             } else {
-             mo.append("<td><p>DESACTIVADO</p></td>");
-             }
-             mo.append("<td><p>" + lista[i].no_pr + "</p></td>");
-             if (lista[i].es_pr == '1') {
-             mo.append("<td><p>ACTIVADO</p></td>");
-             } else {
-             mo.append("<td><p>DESACTIVADO</p></td>");
-             }
-             //mo.append("<td><a><img src='../../imagenes/lapiz.png' alt="" width='25px' height='25px'/></a></td>");
-             //mo.append("<td><a><img src='../../imagenes/eliminar.png' alt="" width='25px' height='25px'/></a></td>");
-             // mo.append("<td><a><img src='../../imagenes/Aprobado.png' alt="" width='25px' height='25px'/></a></td>");
-             mo.append("</tr>");
-             
-             nroe = 1;
-             }
-             });
-             }*/
-            $("#selec_mod").change(
+
+            $("#selec_modulo").change(
                     function() {
-                        var a=$(".tbodys");
-                        $.post("",""+""+$("#selec_mod").val(),function(objJson){
-                            
+                        Listar();
+                    });
+            function Listar() {
+                var a = $("#list");
+                $.post("../../modulo", "opc=lis_pr_mod_x_id&" + "id_modulo=" + $("#selec_modulo").val(), function(objJson) {
+
+                    a.empty();
+                    var lista = objJson.lista;
+                    var nroe = 1;
+                    if (lista.length > 0) {
+                        for (var i = 0; i < lista.length; i++) {
+                            nroe = nroe + i;
+                            a.append("<tr>");
+                            a.append("<td align='center'>" + nroe + "</td>");
+                            a.append("<td align='center'>" + lista[i].no_md + "</td>");
+                            if (lista[i].es_md == '1') {
+                                a.append("<td align='center'><p>ACTIVADO</p></td>");
+                            } else {
+                                a.append("<td align='center'><p>DESACTIVADO</p></td>");
+                            }
+                            a.append("<td><p>" + lista[i].no_pr + "</p></td>");
+                            if (lista[i].es_pr == '1') {
+                                a.append("<td align='center'><p>ACTIVADO</p></td>");
+                            } else {
+                                a.append("<td align='center'><p>DESACTIVADO</p></td>");
+                            }
+                            if (lista[i].id_md == 'MOD-0010') {
+                                a.append('<td align="center"><button value=' + lista[i].id_pr + ' class="btn_activar" disabled="">Activar</button></td>');
+                                a.append('<td align="center"><button value=' + lista[i].id_pr + ' class="btn_desactiva" disabled="">Desactivar</button></td>');
+                            } else {
+                                a.append("<td align='center'><button value=" + lista[i].id_pr + " class='btn_activar'>Activar</button></td>");
+                                a.append("<td align='center'><button value=" + lista[i].id_pr + " class='btn_desactivar'>Desactivar</button></td>");
+                            }
+                            // a.append("<td align='center'><a onclick='activar_priv('"+lista[i].no_pr+"');'>Desactivar</button></a></td>");
+                            //a.append("");
+                            $(".btn_desactivar").click(
+                                    function() {
+                                        $.post("../../modulo", "opc=desactivar_pri_mod&" + "id_privilegio=" + $(this).val(), function() {
+                                            alert($(this).val());
+                                        });
+                                        Listar();
+                                    });
+                            $(".btn_activar").click(
+                                    function() {
+                                        $.post("../../modulo", "opc=activar_pri_mod&" + "id_pr=" + $(this).val(), function() {
+                                        });
+                                        Listar();
+                                    });
+                            nroe = 1;
+                        }
+                    } else {
+                        a.append('<tr><td colspan="10" align="center">No tiene Privilegios</td></tr>');
+                    }
+
+                });
+            }
+            $("#btn_prv").click(
+                    function() {
+                        $.post("../../modulo", $(".form-modulo").serialize(), function(objJson) {
+                            //alert(objJson.rpta);
+                            //alert($(".form-modulo").serialize());
+                            Listar();
                         });
+                        return false;
                     });
         });
     </script>

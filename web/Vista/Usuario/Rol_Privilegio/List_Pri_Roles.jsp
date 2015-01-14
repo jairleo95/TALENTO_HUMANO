@@ -12,9 +12,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title></title>
         <link rel="stylesheet" href="../../../css/Css_Lista/listas.css" />
+        <link rel="stylesheet" href="../../../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../../css/Css_Formulario/form.css"  type="text/css" >
     </head>
     <body>
-        <table>
+        <table class="table-bordered table-responsive ">
             <tr>
                 <td> Rol</td>
                 <td> Privilegio</td>

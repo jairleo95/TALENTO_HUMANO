@@ -13,20 +13,43 @@
         <title class="title" >Registrar Privilegio</title>
         <form action="../../../Privilegio"> 
             <center><label class="title"> Registrar Rol</label>
-            <table class="table" >  
-                <tr><td>Nombre de Privilegio:</td><td ><input type="text" name="No_Link" class=""></td></tr>
-                <tr><td>direccion url</td><td ><input type="text" name="Di_url" class=""></td></tr>
-                <tr><td>direccion icono</td><td ><input type="text" name="Ic_Link" class=""></td></tr>
-                <tr><td>Estado Privilegio</td><td>
-                        <select name="Es_privilegio"  required="">
-                            <option  value="1">Activado</option>
-                            <option  value="0">Desactivado</option>
-                        </select>
-                    </td></tr>                           
-                <tr><td colspan="2"><input type="submit" value="REGISTRAR PRIVILEGIO" name="opc"></td></tr>
-            </table>
-           </center>
+                <table class="table" >  
+                    <tr><td>Modulo:</td>
+                        <td >
+                            <select class="select_modulo" name="modulo" required="">
+                            </select>
+                        </td>
+                    </tr>
+                    <tr><td>Nombre de Privilegio:</td><td ><input type="text" name="No_Link" class=""></td></tr>
+                    <tr><td>direccion url</td><td ><input type="text" name="Di_url" class=""></td></tr>
+                    <tr><td>direccion icono</td><td ><input type="text" name="Ic_Link" class=""></td></tr>
+                    <tr><td>Estado Privilegio</td><td>
+                            <select name="Es_privilegio"  required="">
+                                <option  value="1">Activado</option>
+                                <option  value="0">Desactivado</option>
+                            </select>
+                        </td></tr>                           
+                    <tr><td colspan="2"><input type="submit" value="REGISTRAR PRIVILEGIO" name="opc"></td></tr>
+                </table>
+            </center>
         </form>
     </body>
+    <script type="text/javascript" src="../../../js/JQuery/jQuery.js"></script>
+    <script>
+        $(document).ready(function() {
+        list_modulo();    
+        function list_modulo() {
+                var mo = $(".select_modulo");
+                $.post("../../../modulo", "opc=lis_mod", function(objJson) {
+                    mo.empty();
+                    var lista = objJson.lista;
+                    mo.append("<option value=''>[SELECCIONAR]</option>");
+                    for (var i = 0; i <= lista.length; i++) {
+                        mo.append("<option value='" + lista[i].id_mod + "' >" + lista[i].no_mod + "</option>");
+                    }
+                });
+            }
+        })
+    </script>
 </html>
 <%@include file="List_Privilegios.jsp" %>

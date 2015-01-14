@@ -28,17 +28,18 @@ public class PrivilegioDAO implements InterfacePrivilegioDAO{
     ConexionBD conn;
     
     @Override
-    public void Insert_Privilegio(String No_Link, String Di_url, String Es_privilegio,String Ic_Link) {
+    public void Insert_Privilegio(String No_Link, String Di_url, String Es_privilegio,String Ic_Link,String Modulo) {
         CallableStatement cst;
         try {
             String id_Priv="";
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            cst = conn.conex.prepareCall("{CALL RHSP_INSERT_PRIV(?,?,?,?,?)}");
+            cst = conn.conex.prepareCall("{CALL RHSP_INSERT_PRIV(?,?,?,?,?,?)}");
             cst.setString(1, id_Priv);
             cst.setString(2, No_Link);
             cst.setString(3, Di_url);
             cst.setString(4, Es_privilegio);
             cst.setString(5, Ic_Link);
+            cst.setString(6, Modulo);
             cst.execute();
         } catch (SQLException ex) {
         } finally {
@@ -59,17 +60,18 @@ public class PrivilegioDAO implements InterfacePrivilegioDAO{
     @Override
     public List<Privilegio> List_Privilegio() {
         this.conn=FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "Select * from rhtv_privilegio order by id_privilegio ";
+        String sql = "Select p.ID_PRIVILEGIO , p.NO_LINK , p.IC_LINK, p.ES_PRIVILEGIO, p.DI_URL, m.NO_MODULO from rhtv_privilegio p,RHTV_MODULO m where p.ID_MODULO =m.ID_MODULO order by m.NO_MODULO,p.NO_LINK";
         List<Privilegio> list= new ArrayList<Privilegio>();
         try {
             ResultSet rs = this.conn.query(sql);
             
             while (rs.next()) {   
                 Privilegio p = new Privilegio();
-                p.setDi_url(rs.getString("di_url"));
-                p.setEs_privilegio(rs.getString("es_privilegio"));
-                p.setId_privilegio(rs.getString("id_privilegio"));
-                p.setNo_link(rs.getString("no_link"));
+                p.setDi_url(rs.getString("DI_URL"));
+                p.setEs_privilegio(rs.getString("ES_PRIVILEGIO"));
+                p.setId_privilegio(rs.getString("ID_PRIVILEGIO"));
+                p.setNo_link(rs.getString("NO_LINK"));
+                p.setNo_modulo(rs.getString("NO_MODULO"));
                 list.add(p);
             }
         } catch (SQLException e) {
@@ -129,7 +131,7 @@ public class PrivilegioDAO implements InterfacePrivilegioDAO{
     @Override
     public List<Privilegio> List_Pri_Id(String id_Priv) {
          this.conn=FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "Select * from rhtv_privilegio where ID_PRIVILEGIO='"+id_Priv +"' ";
+        String sql = "Select * from rhtv_privilegio where ID_PRIVILEGIO='"+id_Priv.trim() +"'";
         List<Privilegio> list= new ArrayList<Privilegio>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -224,6 +226,37 @@ public class PrivilegioDAO implements InterfacePrivilegioDAO{
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "SELECT m.ID_MODULO,m.NO_MODULO,m.ES_MODULO,p.ID_PRIVILEGIO,p.NO_LINK,p.ES_PRIVILEGIO FROM RHTV_PRIVILEGIO p, RHTV_MODULO m WHERE p.ID_MODULO = m.ID_MODULO ORDER by m.ID_MODULO, p.NO_LINK ";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id_md", rs.getString("ID_MODULO"));
+                rec.put("no_md", rs.getString("NO_MODULO"));
+                rec.put("es_md", rs.getString("ES_MODULO"));
+                rec.put("id_pr", rs.getString("ID_PRIVILEGIO"));
+                rec.put("no_pr", rs.getString("NO_LINK"));
+                rec.put("es_pr", rs.getString("ES_PRIVILEGIO"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
+    }
+
+    @Override
+    public List<Map<String, ?>> List_Priv_Mod_x_id(String id_mod) {
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "SELECT m.ID_MODULO,m.NO_MODULO,m.ES_MODULO,p.ID_PRIVILEGIO,p.NO_LINK,p.ES_PRIVILEGIO FROM RHTV_PRIVILEGIO p,RHTV_MODULO m WHERE m.ID_MODULO=p.ID_MODULO and m.ID_MODULO='"+id_mod.trim()+"' ORDER by p.NO_LINK";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
