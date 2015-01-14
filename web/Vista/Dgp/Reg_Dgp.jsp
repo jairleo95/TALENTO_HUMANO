@@ -320,17 +320,17 @@
                                                                 $.post("../../centro_costo", "opc=Cargar_cc_DGP&id_c=" + $(this).val(), function (objJson) {
                                                                     var lista = objJson.lista;
 
-                                                                    for (var i = 0; i < lista.length ; i++) {
+                                                                    for (var i = 0; i < lista.length; i++) {
                                                                         var dep_actual = $(".dep_actual").val();
                                                                         if (lista[i].id_dep == dep_actual) {
-                                                                            $(".centro_costo1" ).val(lista[i].id_cc);
+                                                                            $(".centro_costo1").val(lista[i].id_cc);
                                                                             $(".porcentaje_cc").val(lista[i].porcent_cc);
-                                                                        } else{
+                                                                        } else {
                                                                             var arr_cc = [lista[i].id_dir, lista[i].id_dep, "0", lista[i].porcent_cc, lista[i].id_cc];
                                                                             agregar_centro_costo("1", arr_cc);
                                                                             //alert();
 
-            }
+                                                                        }
 
 
                                                                     }
@@ -651,12 +651,12 @@
                                                     <div class="input-desp">
                                                         <table style="" id="show_1" class="cont_lunes"> 
                                                             <tr><td align="center" colspan="2">Lunes</td></tr>
-                                                            <tr class="tr-count"><td>T1 :</td><td><input type="text" name="HORA_DESDE_lun1" id="HORA_DESDE_lun1" class="texto-h" ></td>      
-                                                                <td><input type="text" name="HORA_HASTA_lun1" id="HORA_HASTA_lun1" class="texto-h" ></td></tr>         
+                                                            <tr class="tr-count"><td>T1 :</td><td><input type="text" name="HORA_DESDE_lun1" class="HORA_DESDE_lun1" ></td>      
+                                                                <td><input type="text" name="HORA_HASTA_lun1"  class="HORA_HASTA_lun1" ></td></tr>         
                                                             <input type="hidden" name="DIA_lun1" value="lun" >                    
 
-                                                            <tr class="tr-count"><td>T2 :</td><td><input type="text" name="HORA_DESDE_lun2" id="HORA_DESDE_lun2" class="texto-h" ></td>           
-                                                                <td ><input type="text" name="HORA_HASTA_lun2" id="HORA_HASTA_lun2" class="texto-h" ><a  id="remScnt" >-</a></td></tr>      
+                                                            <tr class="tr-count"><td>T2 :</td><td><input type="text" name="HORA_DESDE_lun2"  class="HORA_DESDE_lun2" ></td>           
+                                                                <td ><input type="text" name="HORA_HASTA_lun2"  class="HORA_HASTA_lun2" ><a  id="remScnt" >-</a></td></tr>      
                                                             <input type="hidden" name="DIA_lun2" value="lun">                    
                                                             <tr><td colspan="2"><a href="#" id="addScnt">+</a></td></tr>
 
@@ -664,26 +664,26 @@
 
                                                         <table id="show_2" class="cont_martes">     
                                                             <tr><td align="center" colspan="2">Martes</td></tr>
-                                                            <tr class="tr-count_2"><td>T1 :</td><td><input type="text" name="HORA_DESDE_mar1" id="HORA_DESDE_mar1" class="texto-h" ></td>             
-                                                                <td><input type="text" name="HORA_HASTA_mar1" id="HORA_HASTA_mar1" class="texto-h" ></td></tr>         
+                                                            <tr class="tr-count_2"><td>T1 :</td><td><input type="text" name="HORA_DESDE_mar1"  class="HORA_DESDE_mar1" ></td>             
+                                                                <td><input type="text" name="HORA_HASTA_mar1"  class="HORA_HASTA_mar1" ></td></tr>         
                                                             <input type="hidden" name="DIA_mar1" value="mar" >                    
 
-                                                            <tr class="tr-count_2"><td>T2 :</td><td><input type="text" name="HORA_DESDE_mar2" id="HORA_DESDE_mar2" class="texto-h" ></td>             
-                                                                <td><input type="text" name="HORA_HASTA_mar2"  id="HORA_HASTA_mar2" class="texto-h" ><a href="#" id="remove_2">-</a></td></tr>         
+                                                            <tr class="tr-count_2"><td>T2 :</td><td><input type="text" name="HORA_DESDE_mar2"  class="HORA_DESDE_mar2" ></td>             
+                                                                <td><input type="text" name="HORA_HASTA_mar2"   class="HORA_HASTA_mar2" ><a href="#" id="remove_2">-</a></td></tr>         
                                                             <input type="hidden" name="DIA_mar2" value="mar" >    
 
                                                             <tr><td colspan="2"><a href="#" id="add_2">+</a></td></tr>
                                                         </table>
                                                         <table id="show_3" class="cont_miercoles">     
                                                             <tr ><td align="center" colspan="2">Miercoles</td></tr>
-                                                            <tr class="tr-count_3"><td>T1 :</td><td><input type="text" name="HORA_DESDE_mie1" id="HORA_DESDE_mier1" class="texto-h" ></td>           
-                                                                <td><input type="text" name="HORA_HASTA_mie1" id="HORA_HASTA_mier1" ></td></tr>         
+                                                            <tr class="tr-count_3"><td>T1 :</td><td><input type="text" name="HORA_DESDE_mie1"  class="HORA_DESDE_mie1" ></td>           
+                                                                <td><input type="text" name="HORA_HASTA_mie1" class="HORA_HASTA_mie1" ></td></tr>         
                                                             <input type="hidden" name="DIA_mie1" value="mie">                    
 
 
 
-                                                            <tr class="tr-count_3"><td>T2 :</td><td><input type="text" name="HORA_DESDE_mie2" id="HORA_DESDE_mier2" class="texto-h" ></td>           
-                                                                <td><input type="text" name="HORA_HASTA_mie2" id="HORA_HASTA_mier2" class="texto-h" ><a href="#" id="remove_3">-</a></td></tr>         
+                                                            <tr class="tr-count_3"><td>T2 :</td><td><input type="text" name="HORA_DESDE_mie2" class="HORA_DESDE_mie2" ></td>           
+                                                                <td><input type="text" name="HORA_HASTA_mie2"  class="HORA_HASTA_mie2" ><a href="#" id="remove_3">-</a></td></tr>         
                                                             <input type="hidden" name="DIA_mie2" value="mie"  >                    
 
                                                             <tr><td colspan="2"><a href="#" id="add_3">+</a></td></tr>
@@ -692,38 +692,38 @@
 
                                                         <table id="show_4" class="cont_jueves">     
                                                             <tr><td align="center" colspan="2">Jueves</td></tr>
-                                                            <tr class="tr-count_4"><td>T1 :</td><td><input type="text" name="HORA_DESDE_jue1" id="HORA_DESDE_jue1" class="texto-h" ></td>            
-                                                                <td><input type="text" name="HORA_HASTA_jue1" id="HORA_HASTA_jue1" class="texto-h" ></td></tr>         
+                                                            <tr class="tr-count_4"><td>T1 :</td><td><input type="text" name="HORA_DESDE_jue1" class="HORA_DESDE_jue1" /></td>            
+                                                                <td><input type="text" name="HORA_HASTA_jue1" class="HORA_HASTA_jue1"  ></td></tr>         
                                                             <input type="hidden" name="DIA_jue1" value="jue"  >           
 
 
-                                                            <tr class="tr-count_4"><td>T2 :</td><td><input type="text" name="HORA_DESDE_jue2" id="HORA_DESDE_jue2" class="texto-h" ></td>          
-                                                                <td><input type="text" name="HORA_HASTA_jue2" id="HORA_HASTA_jue2" class="texto-h" ><a href="#" id="remove_4">-</a></td></tr>         
+                                                            <tr class="tr-count_4"><td>T2 :</td><td><input type="text" name="HORA_DESDE_jue2" class="HORA_DESDE_jue2" ></td>          
+                                                                <td><input type="text" name="HORA_HASTA_jue2" class="HORA_HASTA_jue2"  ><a href="#" id="remove_4">-</a></td></tr>         
                                                             <input type="hidden" name="DIA_jue2" value="jue"  >                    
                                                             <tr><td colspan="2"><a href="#" id="add_4">+</a></td></tr>
                                                         </table>
                                                         <table id="show_5" class="cont_viernes">     
                                                             <tr><td align="center" colspan="2">Viernes</td></tr>
-                                                            <tr class="tr-count_5"><td>T1 :</td><td><input type="text" name="HORA_DESDE_vie1"  id="HORA_DESDE_vie1" class="texto-h" ></td>
-                                                                <td><input type="text" name="HORA_HASTA_vie1" id="HORA_HASTA_vie1" class="texto-h" ></td></tr>         
+                                                            <tr class="tr-count_5"><td>T1 :</td><td><input type="text" name="HORA_DESDE_vie1"  class="HORA_DESDE_vie1"  ></td>
+                                                                <td><input type="text" name="HORA_HASTA_vie1" class="HORA_HASTA_vie1" ></td></tr>         
                                                             <input type="hidden" name="DIA_vie1" value="vie"  >                    
                                                             <tr><td colspan="2"><a href="#" id="add_5">+</a></td></tr>
                                                         </table>
                                                         <table id="show_6" class="cont_sabado">     
                                                             <tr><td align="center" colspan="2">Sábado</td></tr>
-                                                            <tr class="tr-count_6"><td>T1 :</td><td><input type="text" name="HORA_DESDE_sab1"  id="HORA_DESDE_sab1" class="texto-h" ></td>
-                                                                <td><input type="text" name="HORA_HASTA_sab1" id="HORA_HASTA_sab1" class="texto-h" ></td></tr>         
+                                                            <tr class="tr-count_6"><td>T1 :</td><td><input type="text" name="HORA_DESDE_sab1"  class="HORA_DESDE_sab1"  ></td>
+                                                                <td><input type="text" name="HORA_HASTA_sab1" class="HORA_HASTA_sab1"  ></td></tr>         
                                                             <input type="hidden" name="DIA_sab1" value="sab"  />                    
                                                             <tr><td colspan="2"><a href="#" id="add_6">+</a></td></tr>
                                                         </table>
                                                         <table id="show_7" class="cont_domingo" >
                                                             <tr><td align="center" colspan="2">Domingo</td></tr>
-                                                            <tr class="tr-count_7"><td>T1 :</td><td><input type="text" name="HORA_DESDE_dom1"  id="HORA_DESDE_dom1" class="texto-h" ></td>
-                                                                <td><input type="text" name="HORA_HASTA_dom1"  id="HORA_HASTA_dom1" class="texto-h" ></td></tr>         
+                                                            <tr class="tr-count_7"><td>T1 :</td><td><input type="text" name="HORA_DESDE_dom1"  class="HORA_DESDE_dom1"  ></td>
+                                                                <td><input type="text" name="HORA_HASTA_dom1"  class="HORA_HASTA_dom1"  ></td></tr>         
                                                             <input type="hidden" name="DIA_dom1" value="dom" >                    
 
-                                                            <tr class="tr-count_7"><td>T2 :</td><td><input type="text" name="HORA_DESDE_dom2"  id="HORA_DESDE_dom2" class="texto-h" ></td>
-                                                                <td><input type="text" name="HORA_HASTA_dom2"  id="HORA_HASTA_dom2" class="texto-h" ><a href="#" id="remove_7">-</a></td></tr>         
+                                                            <tr class="tr-count_7"><td>T2 :</td><td><input type="text" name="HORA_DESDE_dom2"  class="HORA_DESDE_dom2"  ></td>
+                                                                <td><input type="text" name="HORA_HASTA_dom2"  class="HORA_HASTA_dom2"  ><a href="#" id="remove_7">-</a></td></tr>         
                                                             <input type="hidden" name="DIA_dom2" value="dom"  >                    
                                                             <tr><td colspan="2"><a href="#" id="add_7">+</a></td></tr>
                                                         </table>
@@ -862,7 +862,7 @@
         );</script>
     <script  language="javascript" type="text/javascript">
         function calcularHoras() {
-            var dias_semana = new Array("lun", "mar", "mier", "jue", "vie", "sab", "dom");
+            var dias_semana = new Array("lun", "mar", "mie", "jue", "vie", "sab", "dom");
             var acum = 0;
             for (var i = 0; i < dias_semana.length; i++) {
 
@@ -870,9 +870,9 @@
                     var horaTurno = 0;
                     //var str = $("#HORA_DESDE_" + dias_semana[i] + j).val();
 
-                    var Desde = $("#HORA_DESDE_" + dias_semana[i] + j).val();
-                    var Hasta = $("#HORA_HASTA_" + dias_semana[i] + j).val();
-                    if ($("#HORA_DESDE_" + dias_semana[i] + j).val() == null) {
+                    var Desde = $(".HORA_DESDE_" + dias_semana[i] + j).val();
+                    var Hasta = $(".HORA_HASTA_" + dias_semana[i] + j).val();
+                    if ($(".HORA_DESDE_" + dias_semana[i] + j).val() == null) {
                         Desde = "00:00";
                         Hasta = "00:00";
                     }
@@ -1050,30 +1050,30 @@
                 $("#viernes").val(1);
                 //$("#sabado").val(1);
                 $("#domingo").val(1);
-                document.getElementById("HORA_DESDE_lun1").value = "7:50";
-                document.getElementById("HORA_HASTA_lun1").value = "12:30";
-                document.getElementById("HORA_DESDE_lun2").value = "13:30";
-                document.getElementById("HORA_HASTA_lun2").value = "17:30";
-                document.getElementById("HORA_DESDE_mar1").value = "7:50";
-                document.getElementById("HORA_HASTA_mar1").value = "12:30";
-                document.getElementById("HORA_DESDE_mar2").value = "13:30";
-                document.getElementById("HORA_HASTA_mar2").value = "17:30";
-                document.getElementById("HORA_DESDE_mier1").value = "7:50";
-                document.getElementById("HORA_HASTA_mier1").value = "12:30";
-                document.getElementById("HORA_DESDE_mier2").value = "13:30";
-                document.getElementById("HORA_HASTA_mier2").value = "17:30";
-                document.getElementById("HORA_DESDE_jue1").value = "7:50";
-                document.getElementById("HORA_HASTA_jue1").value = "12:30";
-                document.getElementById("HORA_DESDE_jue2").value = "13:30";
-                document.getElementById("HORA_HASTA_jue2").value = "17:30";
-                document.getElementById("HORA_DESDE_vie1").value = "7:50";
-                document.getElementById("HORA_HASTA_vie1").value = "12:30";
-                document.getElementById("HORA_DESDE_sab1").value = "00:00";
-                document.getElementById("HORA_HASTA_sab1").value = "00:00";
-                document.getElementById("HORA_DESDE_dom1").value = "7:50";
-                document.getElementById("HORA_HASTA_dom1").value = "12:30";
-                document.getElementById("HORA_DESDE_dom2").value = "13:30";
-                document.getElementById("HORA_HASTA_dom2").value = "17:30";
+                $(".HORA_DESDE_lun1").val("7:50");
+                $(".HORA_HASTA_lun1").val("12:30");
+                $(".HORA_DESDE_lun2").val("13:30");
+                $(".HORA_HASTA_lun2").val("17:30");
+                $(".HORA_DESDE_mar1").val("7:50");
+                $(".HORA_HASTA_mar1").val("12:30");
+                $(".HORA_DESDE_mar2").val("13:30");
+                $(".HORA_HASTA_mar2").val("17:30");
+                $(".HORA_DESDE_mie1").val("7:50");
+                $(".HORA_HASTA_mie1").val("12:30");
+                $(".HORA_DESDE_mie2").val("13:30");
+                $(".HORA_HASTA_mie2").val("17:30");
+                $(".HORA_DESDE_jue1").val("7:50");
+                $(".HORA_HASTA_jue1").val("12:30");
+                $(".HORA_DESDE_jue2").val("13:30");
+                $(".HORA_HASTA_jue2").val("17:30");
+                $(".HORA_DESDE_vie1").val("7:50");
+                $(".HORA_HASTA_vie1").val("12:30");
+                $(".HORA_DESDE_sab1").val("00:00");
+                $(".HORA_HASTA_sab1").val("00:00");
+                $(".HORA_DESDE_dom1").val("7:50");
+                $(".HORA_HASTA_dom1").val("12:30");
+                $(".HORA_DESDE_dom2").val("13:30");
+                $(".HORA_HASTA_dom2").val("17:30");
             }
             if (valor == 2) {
                 $("#show_1").show();
@@ -1090,30 +1090,33 @@
                 $("#viernes").val(1);
                 //$("#sabado").val(1);
                 $("#domingo").val(2);
-                document.getElementById("HORA_DESDE_lun1").value = "7:30";
-                document.getElementById("HORA_HASTA_lun1").value = "12:30";
-                document.getElementById("HORA_DESDE_lun2").value = "13:30";
-                document.getElementById("HORA_HASTA_lun2").value = "17:30";
-                document.getElementById("HORA_DESDE_mar1").value = "7:30";
-                document.getElementById("HORA_HASTA_mar1").value = "12:30";
-                document.getElementById("HORA_DESDE_mar2").value = "13:30";
-                document.getElementById("HORA_HASTA_mar2").value = "17:30";
-                document.getElementById("HORA_DESDE_mier1").value = "7:30";
-                document.getElementById("HORA_HASTA_mier1").value = "12:30";
-                document.getElementById("HORA_DESDE_mier2").value = "13:30";
-                document.getElementById("HORA_HASTA_mier2").value = "17:30";
-                document.getElementById("HORA_DESDE_jue1").value = "7:30";
-                document.getElementById("HORA_HASTA_jue1").value = "12:30";
-                document.getElementById("HORA_DESDE_jue2").value = "13:30";
-                document.getElementById("HORA_HASTA_jue2").value = "17:30";
-                document.getElementById("HORA_DESDE_vie1").value = "7:30";
-                document.getElementById("HORA_HASTA_vie1").value = "13:00";
-                document.getElementById("HORA_DESDE_sab1").value = "00:00";
-                document.getElementById("HORA_HASTA_sab1").value = "00:00";
-                document.getElementById("HORA_DESDE_dom1").value = "00:00";
-                document.getElementById("HORA_HASTA_dom1").value = "00:00";
-                document.getElementById("HORA_DESDE_dom2").value = "00:00";
-                document.getElementById("HORA_HASTA_dom2").value = "00:00";
+
+
+
+                $(".HORA_DESDE_lun1").val("7:30");
+                $(".HORA_HASTA_lun1").val("12:30");
+                $(".HORA_DESDE_lun2").val("13:30");
+                $(".HORA_HASTA_lun2").val("17:30");
+                $(".HORA_DESDE_mar1").val("7:30");
+                $(".HORA_HASTA_mar1").val("12:30");
+                $(".HORA_DESDE_mar2").val("13:30");
+                $(".HORA_HASTA_mar2").val("17:30");
+                $(".HORA_DESDE_mie1").val("7:30");
+                $(".HORA_HASTA_mie1").val("12:30");
+                $(".HORA_DESDE_mie2").val("13:30");
+                $(".HORA_HASTA_mie2").val("17:30");
+                $(".HORA_DESDE_jue1").val("7:30");
+                $(".HORA_HASTA_jue1").val("12:30");
+                $(".HORA_DESDE_jue2").val("13:30");
+                $(".HORA_HASTA_jue2").val("17:30");
+                $(".HORA_DESDE_vie1").val("7:30");
+                $(".HORA_HASTA_vie1").val("13:00");
+                $(".HORA_DESDE_sab1").val("00:00");
+                $(".HORA_HASTA_sab1").val("00:00");
+                $(".HORA_DESDE_dom1").val("00:00");
+                $(".HORA_HASTA_dom1").val("00:00");
+                $(".HORA_DESDE_dom2").val("00:00");
+                $(".HORA_HASTA_dom2").val("00:00");
             }
             calcularHoras();
         }
@@ -1215,9 +1218,28 @@
                 sumn_porcen_total();
             });
         }
+
+        function listar_tipo_horario() {
+            $.post("../../formato_horario", "opc=Listar_Tip_Horario", function (objJson) {
+
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                var horario = $("#horario");
+                horario.empty();
+                horario.append('<option value="" >[SELECCIONE]</option>');
+                for (var i = 0; i < lista.length; i++) {
+                    horario.append('<option value="' + lista[i].id + '" >' + lista[i].nombre + '</option>');
+                }
+                
+
+            });
+        }
         $(document).ready(function () {
 
-
+            listar_tipo_horario();
             sumn_porcen_total();
             $("#no_cuen").hide();
             $("#no_cuen_ban").hide();
@@ -1248,7 +1270,9 @@
                         list_horario($(this).val());
                     }
             );
-        });</script>
+        }
+        )
+                ;</script>
     <script type="text/javascript">
         $(document).ready(function () {
 

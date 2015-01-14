@@ -5,14 +5,20 @@
  */
 package pe.edu.upeu.application.web.controller;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import pe.edu.upeu.application.dao.Carrera_UniversidadDAO;
 import pe.edu.upeu.application.dao.Formato_HorarioDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceCarrera_UniversidadDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceFormato_HorarioDAO;
 
 /**
@@ -32,7 +38,8 @@ public class CFormato_Horario extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
 
         HttpSession sesion = request.getSession(true);
@@ -40,6 +47,8 @@ public class CFormato_Horario extends HttpServlet {
         InterfaceFormato_HorarioDAO Ifh = new Formato_HorarioDAO();
 
         String opc = request.getParameter("opc");
+        Map<String, Object> rpta = new HashMap<String, Object>();
+        InterfaceCarrera_UniversidadDAO model = new Carrera_UniversidadDAO();
         try {
 
             if (opc.equals("registrar")) {
@@ -52,7 +61,7 @@ public class CFormato_Horario extends HttpServlet {
                 Ifh.Insert_Horario(ID_TIPO_HORARIO, NO_HORARIO, DE_HORARIO, ES_HORARIO, CA_HORAS);
                 getServletContext().setAttribute("List_Tipo_Horario", Ifh.Listar_Tipo_Horario());
                 response.sendRedirect("Vista/Formato_Horario/Detalle_Formato_Horario.jsp");
-                
+
             }
 
             if (opc.equals("Registrar_Formato")) {
@@ -64,10 +73,20 @@ public class CFormato_Horario extends HttpServlet {
             if (opc.equals("Modificar_Formato")) {
 
             }
+            if (opc.equals("Listar_Tip_Horario")) {
+                List<Map<String, ?>> lista = Ifh.List_Tipo_Horario();
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
         } catch (Exception e) {
-            out.print(e.getMessage());
+            rpta.put("rpta", "-1");
+            rpta.put("mensaje", e.getMessage());
         }
 
+        Gson gson = new Gson();
+        out.print(gson.toJson(rpta));
+        out.flush();
+        out.close();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
