@@ -7,6 +7,8 @@ package pe.edu.upeu.application.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -40,6 +42,13 @@ public class CFormato_Horario extends HttpServlet {
         InterfaceFormato_HorarioDAO Ifh = new Formato_HorarioDAO();
 
         String opc = request.getParameter("opc");
+        List<String> dia = new ArrayList<String>();
+        dia.add("lun");
+        dia.add("mar");
+        dia.add("mie");
+        dia.add("jue");
+        dia.add("vie");
+        dia.add("dom");
         try {
 
             if (opc.equals("registrar")) {
@@ -52,17 +61,47 @@ public class CFormato_Horario extends HttpServlet {
                 Ifh.Insert_Horario(ID_TIPO_HORARIO, NO_HORARIO, DE_HORARIO, ES_HORARIO, CA_HORAS);
                 getServletContext().setAttribute("List_Tipo_Horario", Ifh.Listar_Tipo_Horario());
                 response.sendRedirect("Vista/Formato_Horario/Detalle_Formato_Horario.jsp");
-                
-            }
-
-            if (opc.equals("Registrar_Formato")) {
 
             }
             if (opc.equals("Listar_Formato")) {
+                getServletContext().setAttribute("List_Tipo_Horario", Ifh.Listar_Tipo_Horario());
+                response.sendRedirect("Vista/Formato_Horario/Detalle_Formato_Horario.jsp");
+            }
+
+            if (opc.equals("REGISTRAR")) {
+                String ID_FORMATO_HORARIO = null;
+                String NO_TURNO = request.getParameter("NO_TURNO");
+                String NO_DIA = request.getParameter("NO_DIA");
+                String HO_DESDE = request.getParameter("HO_DESDE");
+                String HO_HASTA = request.getParameter("HO_HASTA");
+                String ES_F_HORARIO = request.getParameter("ES_F_HORARIO");
+                String ID_TIPO_HORARIO = request.getParameter("ID_TIPO_HORARIO");
+
+                Ifh.Insert_Formato_Horario(ID_FORMATO_HORARIO, NO_TURNO, NO_DIA, HO_DESDE, HO_HASTA, ES_F_HORARIO, ID_TIPO_HORARIO);
+                getServletContext().setAttribute("LIST_FORMATO_HORARIO", Ifh.Listar_Formato_Horario(ID_TIPO_HORARIO));
+                response.sendRedirect("Vista/Formato_Horario/Reg_Formato_Horario.jsp");
 
             }
-            if (opc.equals("Modificar_Formato")) {
+            if (opc.equals("REGISTRAR_FOR_HORARIO")) {
+                String ID_FORMATO_HORARIO = request.getParameter(null);
+                String ID_TIPO_HORARIO = request.getParameter("IDTIPOHORARIO");
+                String ES_F_HORARIO = request.getParameter("ESTADO");
+                
+                for (int i = 0; i < dia.size(); i++) {
+                for (int j = 0; j < dia.size(); j++) {
+                    String HO_DESDE = request.getParameter("HORA_DESDE_" + dia.get(i) + j);
+                    String HO_HASTA = request.getParameter("HORA_HASTA_" + dia.get(i) + j);
+                    String NO_TURNO = request.getParameter("TURNO_" + dia.get(i) + j);
+                    String NO_DIA = request.getParameter("DIA_" + dia.get(i) + j);
 
+                    if (HO_DESDE != null&NO_DIA!=null&HO_HASTA!=null) {
+                        if (!HO_HASTA.equals("")&!HO_DESDE.equals("")&!NO_DIA.equals("")) {
+                            Ifh.Insert_Formato_Horario(ID_FORMATO_HORARIO, NO_TURNO, NO_DIA, HO_DESDE, HO_HASTA, ES_F_HORARIO, ID_TIPO_HORARIO);
+                        }
+                    }
+                }
+
+            }
             }
         } catch (Exception e) {
             out.print(e.getMessage());

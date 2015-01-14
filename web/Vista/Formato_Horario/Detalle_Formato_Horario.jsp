@@ -55,11 +55,10 @@
                     <td><%=th.getDe_horario()%></td>
                     <td><%=th.getCa_horas()%></td>
                     <td> 
-                        <a href="Reg_Formato_Horario.jsp?idth="<%=th.getId_tipo_horario()%> >Establecer Horarios</a>
-                        
-                    </td>
+                        <a href="Reg_Formato_Horario.jsp?idth=<%=th.getId_tipo_horario()%>&nofor=<%=th.getNo_horario()%>">Establecer Horarios</a>
+                   </td>
                     <td>
-                        <a >Eliminar</a>
+                        <a href="">Eliminar</a>
                     </td>
                     </tbody>
                     <%}%>
