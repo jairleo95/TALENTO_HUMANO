@@ -570,6 +570,7 @@ public class DgpDAO implements InterfaceDgpDAO {
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
                 rec.put("id", rs.getString("id_dgp"));
+                rec.put("id_c", rs.getString("id_contrato"));
                 rec.put("sueldo", rs.getString("ca_sueldo"));
                 rec.put("bono_alimentario", rs.getString("ca_bono_alimento"));
                 rec.put("bev", rs.getString("ca_bev"));

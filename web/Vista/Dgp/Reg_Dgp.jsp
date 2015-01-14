@@ -95,6 +95,10 @@
                 font-weight: bold;
             }
         </style>
+        <%
+            HttpSession sesion = request.getSession(true);
+            String id_dep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
+        %>
         <script>
 
             function calcular_sueldo_total() {
@@ -313,16 +317,22 @@
 
 
                                                                 });
-                                                                $.post("../../centro_costo", "opc=Cargar_cc_DGP&iddgp=" + $(this).val(), function (objJson) {
+                                                                $.post("../../centro_costo", "opc=Cargar_cc_DGP&id_c=" + $(this).val(), function (objJson) {
                                                                     var lista = objJson.lista;
 
+                                                                    for (var i = 0; i < lista.length ; i++) {
+                                                                        var dep_actual = $(".dep_actual").val();
+                                                                        if (lista[i].id_dep == dep_actual) {
+                                                                            $(".centro_costo1" ).val(lista[i].id_cc);
+                                                                            $(".porcentaje_cc").val(lista[i].porcent_cc);
+                                                                        } else{
+                                                                            var arr_cc = [lista[i].id_dir, lista[i].id_dep, "0", lista[i].porcent_cc, lista[i].id_cc];
+                                                                            agregar_centro_costo("1", arr_cc);
+                                                                            //alert();
+
+            }
 
 
-                                                                    for (var i = 0; i < lista.length - 1; i++) {
-                                                                        $(".centro_costo" + (i + 1)).val("CCT-0025");
-                                                                        $(".cc-dir2").val("DIR-0002");
-                                                                        var arr_cc = ["DIR-0002", "DPT-0009", "0", "50", "CCT-0239"];
-                                                                        agregar_centro_costo("1", arr_cc);
                                                                     }
 
 
@@ -719,6 +729,7 @@
                                                         </table>
                                                         <div class="h_total" style="color: red; font-weight: bold;">Horas Totales : 00:00 horas</div>
                                                         <input  readonly="" type="text" name="horas_totales" class="h_total" required="" max="48"/>
+                                                        <input  type="text" name="dep_actual" value="<%=id_dep%>" class="dep_actual" />
                                                     </div>
                                                 </fieldset>
                                                 <footer>
@@ -886,6 +897,67 @@
 
             }
         }
+        function listar_dep_cc(x, opc, arr_cc) {
+
+            var cc_dep = $(".cc-dep" + x);
+            $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + $(".cc-dir" + x).val(), function (objJson) {
+
+                cc_dep.empty();
+                cc_dep.append("<option value=''>[DEPARTAMENTO]</option>");
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                for (var i = 0; i < lista.length; i++) {
+                    if (opc == "1") {
+                        if (arr_cc[1] == lista[i].id) {
+                            cc_dep.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
+                            listar_centro_costo(x, opc, arr_cc);
+
+
+                        } else {
+                            cc_dep.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
+                        }
+                    } else {
+                        cc_dep.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
+                    }
+
+                }
+            });
+
+        }
+        function listar_centro_costo(x, opc, arr_cc) {
+
+            var centro_costo = $(".centro_costo" + x);
+            $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + $(".cc-dep" + x).val(), function (objJson) {
+                centro_costo.empty();
+                centro_costo.append("<option value=''>[CENTRO COSTO]</option>");
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                for (var i = 0; i < lista.length; i++) {
+
+
+                    if (opc == "1") {
+                        if (arr_cc[4] == lista[i].id) {
+                            centro_costo.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
+
+
+
+                        } else {
+                            centro_costo.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
+                        }
+                    } else {
+                        centro_costo.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
+                    }
+
+                }
+            });
+
+        }
         function listar_cc(num, opc, arr_cc) {
             var select_cc = $(".select-cc");
             $.post("../../centro_costo?opc=Listar_cc", function (objJson) {
@@ -911,6 +983,8 @@
                     if (opc == "1") {
                         if (arr_cc[0] == lista[i].id) {
                             cc_dir.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
+                            listar_dep_cc(num, opc, arr_cc);
+
                         } else {
                             cc_dir.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
                         }
@@ -920,34 +994,12 @@
                 }
             });
             $(".cc-dir" + num).change(function () {
-                var cc_dep = $(".cc-dep" + num);
-                $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + $(this).val(), function (objJson) {
-                    cc_dep.empty();
-                    cc_dep.append("<option value=''>[DEPARTAMENTO]</option>");
-                    if (objJson.rpta == -1) {
-                        alert(objJson.mensaje);
-                        return;
-                    }
-                    var lista = objJson.lista;
-                    for (var i = 0; i < lista.length; i++) {
-                        cc_dep.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                    }
-                });
+
+                listar_dep_cc(num, "0", arr_cc);
             });
             $(".cc-dep" + num).change(function () {
-                var centro_costo = $(".centro_costo" + num);
-                $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + $(this).val(), function (objJson) {
-                    centro_costo.empty();
-                    centro_costo.append("<option value=''>[CENTRO COSTO]</option>");
-                    if (objJson.rpta == -1) {
-                        alert(objJson.mensaje);
-                        return;
-                    }
-                    var lista = objJson.lista;
-                    for (var i = 0; i < lista.length; i++) {
-                        centro_costo.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                    }
-                });
+
+                listar_centro_costo(num, "0", arr_cc);
             });
             $(".remover" + num).click(function () {
                 $(".centro-costo_" + num).remove();
