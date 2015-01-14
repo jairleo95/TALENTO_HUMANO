@@ -114,6 +114,8 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
             this.conn.close();
         }
         return list;
+    }
+       @Override
     public List<Map<String, ?>> List_Tipo_Horario() {
 
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
