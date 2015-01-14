@@ -48,14 +48,20 @@
                     </thead>
                     <%for (int i = 0; i < List_Tipo_Horario.size(); i++) {
                              Tipo_Horario th = new Tipo_Horario();
-                             th = (Tipo_Horario) List_Tipo_Horario.get(i);%>
+                             th = (Tipo_Horario) List_Tipo_Horario.get(i);
+                             
+                    ;%>
                     <tbody>
                     <td><%=i%></td>
                     <td><%=th.getNo_horario()%></td>
                     <td><%=th.getDe_horario()%></td>
                     <td><%=th.getCa_horas()%></td>
                     <td> 
+                        <%if (th.getCa_formato().equals("0")) {%>
                         <a href="Reg_Formato_Horario.jsp?idth=<%=th.getId_tipo_horario()%>&nofor=<%=th.getNo_horario()%>">Establecer Horarios</a>
+                        <%}else{%>
+                        <a href="../../formato_horario?opc=LISTAR_FORMATO_HORARIO&idth=<%=th.getId_tipo_horario()%>&nofor=<%=th.getNo_horario()%>">Ver</a>
+                        <%}%>
                    </td>
                     <td>
                         <a href="">Eliminar</a>

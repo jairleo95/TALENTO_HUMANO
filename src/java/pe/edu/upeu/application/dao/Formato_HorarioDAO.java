@@ -47,7 +47,7 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
     @Override
     public List<Tipo_Horario> Listar_Tipo_Horario() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT * FROM RHTR_TIPO_HORARIO ";
+        String sql = "SELECT id_tipo_horario,no_horario,de_horario,es_horario,ca_horas,es_turno_formato_h(ID_TIPO_HORARIO) as  ca_formato FROM RHTR_TIPO_HORARIO";
         List<Tipo_Horario> list = new ArrayList<Tipo_Horario>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -59,6 +59,7 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
                 tih.setDe_horario(rs.getString("de_horario"));
                 tih.setEs_horario(rs.getString("es_horario"));
                 tih.setCa_horas(rs.getDouble("ca_horas"));
+                tih.setCa_formato(rs.getString("ca_formato"));
                 list.add(tih);
             }
         } catch (Exception e) {
@@ -91,7 +92,7 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
     @Override
     public List<Formato_Horario> Listar_Formato_Horario(String idth) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "Select * from RHTR_FORMATO_HORARIO  where ID_TIPO_HORARIO ='"+idth+"' ";
+        String sql = "Select * from RHTR_FORMATO_HORARIO  where ID_TIPO_HORARIO ='" + idth + "' ";
         List<Formato_Horario> list = new ArrayList<Formato_Horario>();
         try {
             ResultSet rs = this.conn.query(sql);
