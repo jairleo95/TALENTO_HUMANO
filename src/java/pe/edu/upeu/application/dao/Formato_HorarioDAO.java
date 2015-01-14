@@ -125,8 +125,8 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
-                rec.put("id", rs.getString("id_tipo_horario"));
-                rec.put("nombre", rs.getString("no_horario"));
+                rec.put("id", rs.getString("ID_TIPO_HORARIO"));
+                rec.put("nombre", rs.getString("NO_HORARIO"));
 
                 Lista.add(rec);
             }
