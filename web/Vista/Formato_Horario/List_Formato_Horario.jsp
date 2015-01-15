@@ -90,9 +90,9 @@
               int g = 0;
                     for (int j = 0; j < LISTAR_FORMATO_HORARIO.size(); j++) {
                                 Formato_Horario fh = new Formato_Horario();
-                                fh = (Formato_Horario) LISTAR_FORMATO_HORARIO.get(j);
-                               
-                            if(fh.getNo_dia().trim().equals(l.List_D()[i][0])){
+                                fh = (Formato_Horario) LISTAR_FORMATO_HORARIO.get(j);  %>                                 
+                                
+                       <%     if(fh.getNo_dia().trim().equals(l.List_D()[i][0])){
                             if (g == 0) {
                         %>
                 <table > 
@@ -106,14 +106,13 @@
                         <td><b><input type="text"  disabled="" value="<%=fh.getHo_desde()%>"></b></td>      
                         <td><b><input type="text"  disabled="" value="<%=fh.getHo_hasta()%>"></b></td>
                     </tr>         
-                    <%}
-                         g++;   }
-                    }%>
+                    <%          }%>
+                    <% g++;
+                            }%>
+                    <%  }%>
                 </table>
-                    <% 
-                           
-                 } 
-                %>
+                    <%}%>
+                    
             </div>
         </form>
     </center>

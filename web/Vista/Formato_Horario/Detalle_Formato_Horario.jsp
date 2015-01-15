@@ -23,12 +23,12 @@
         <form action="../../formato_horario">
             <fieldset>
                 NOMBRE DEL FORMATO:<br>
-                <input name="NO_HORARIO"  size="40" /><br>
+                <input name="NO_HORARIO"  size="40" required=""/><br>
                 COMENTARIO:<br>
                 <textarea name="DE_HORARIO" rows="4"></textarea>
             </fieldset>
             <footer>
-                <input type="hidden" name="ES_HORARIO" value="1">
+                <input type="hidden" name="ES_HORARIO" value="1" >
                 <input type="hidden" name="opc" value="registrar">
                 <input type="hidden" name="CA_HORAS" value="0">
                 <button type="submit" name="opc">
@@ -39,11 +39,11 @@
                 <table id="datatable_tabletools" class="table table-striped table-bordered table-hover" width="100%" >
                     <thead>
                         <tr>
-                            <th width="10%">Nr</th>
+                            <th width="5%">Nr</th>
                             <th>Nombre</th>
-                            <th>Observación</th>
-                            <th width="10%">Cant.Horas</th>
-                            <th colspan="2">Opción</th>
+                            <th width="40%">Observación</th>
+                            <th width="7%">Cant.Horas</th>
+                            <th >Opción</th>
                         </tr>
                     </thead>
                     <%for (int i = 0; i < List_Tipo_Horario.size(); i++) {
@@ -52,20 +52,18 @@
                              
                     ;%>
                     <tbody>
-                    <td><%=i%></td>
+                    <td><center><%=i%></center></td>
                     <td><%=th.getNo_horario()%></td>
                     <td><%=th.getDe_horario()%></td>
                     <td><%=th.getCa_horas()%></td>
-                    <td> 
+                    <td><center>
                         <%if (th.getCa_formato().equals("0")) {%>
                         <a href="Reg_Formato_Horario.jsp?idth=<%=th.getId_tipo_horario()%>&nofor=<%=th.getNo_horario()%>">Establecer Horarios</a>
                         <%}else{%>
                         <a href="../../formato_horario?opc=LISTAR_FORMATO_HORARIO&idth=<%=th.getId_tipo_horario()%>&nofor=<%=th.getNo_horario()%>">Ver</a>
                         <%}%>
-                   </td>
-                    <td>
-                        <a href="">Eliminar</a>
-                    </td>
+                   </center> </td>
+                   
                     </tbody>
                     <%}%>
                 </table>
