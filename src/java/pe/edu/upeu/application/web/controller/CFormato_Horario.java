@@ -133,7 +133,7 @@ public class CFormato_Horario extends HttpServlet {
 
             if (opc.equals("Listar_Horario")) {
                 String id = request.getParameter("id");
-                List<Map<String, ?>> lista = Ifh.List_Formato_h(id)
+                List<Map<String, ?>> lista = Ifh.List_Formato_h(id);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
