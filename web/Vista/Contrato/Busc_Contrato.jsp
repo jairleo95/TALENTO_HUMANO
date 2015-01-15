@@ -20,7 +20,7 @@
         <title>Contratos</title>
     </head>
     <body>  
-        <form class="form-inline" id="frm_filtro2" method="post" action="" name="formulario">
+        <form class="form-inline" id="frm_filtro2" method="post" action="../../Imprimir" name="formulario">
             <div class="spacing">
                 <center><h1 class="spacing" style="font-weight: bold;">CONTRATOS</h1></center> 
             </div>
@@ -122,7 +122,7 @@
                                     <td ><span title="FECHA_CREACION">Fecha de Contratación</span></td>
                                     <td ><span >Opcion</span></td>
                                     <td ><span >Imprimir</span></td>
-                                    <td><button type="button" class="btn btn-primary" id="btns"> Seleccionar todo</button><button type="button" class="btn btn-primary" id="btns2"> Seleccionar </button><input type="submit" class="btn btn-primary" id="asa" value="Imprimir"></td>
+                                    <td><button type="button" class="btn btn-primary" id="btns"> Seleccionar todo</button><input type="submit"name="opc" class="btn btn-primary" id="asa" value="Imprimir"></td>
 
 
                                 </tr>

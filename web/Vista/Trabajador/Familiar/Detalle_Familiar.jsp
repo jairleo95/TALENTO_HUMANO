@@ -20,7 +20,7 @@
             String rol = (String) sesion.getAttribute("IDROL");
         %>
 
-        <%if (List_PMC.size() != 0) {%>
+        <%if (List_PMC.size() != 0  ) {%>
         <form align="center" action="../../../familiar">
             <div>
                 <table class="table table-striped table-bordered table-hover" >
