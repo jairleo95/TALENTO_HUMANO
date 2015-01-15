@@ -66,7 +66,7 @@
         <link rel="apple-touch-startup-image" href="../../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-
+        
     </head>
     <body class="">
         <!-- HEADER -->
@@ -111,7 +111,7 @@
                                 -->
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-pencil"></i> </span>
-                                    <h2>CK Editor (Full version) </h2>				
+                                    <h2> </h2>				
 
                                 </header>
 
@@ -127,17 +127,18 @@
 
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">
-                                        <textarea name="ckeditor">
-                                        <%
-                                            InterfaceTrabajadorDAO tr = new TrabajadorDAO();
-                                            for (int s = 0; s < lista.size(); s++) {
-                                                for (int i = 0; i < tr.LIST_DAT_TR_PLANTILLA(lista.get(s).toString()).size(); i++) {
-                                                    X_List_dat_tr_plantilla p = new X_List_dat_tr_plantilla();
-                                                    p = (X_List_dat_tr_plantilla) tr.LIST_DAT_TR_PLANTILLA(lista.get(s).toString()).get(i);
-                                        %>
+                                        <input type="hidden" id="cantidad" value="<%=lista.size()%>">
+                                        <textarea name="ckeditor">  
+                                            <%
+                                                InterfaceTrabajadorDAO tr = new TrabajadorDAO();
+                                                for (int s = 0; s < lista.size(); s++) {
+                                                    for (int i = 0; i < tr.LIST_DAT_TR_PLANTILLA(lista.get(s).toString()).size(); i++) {
+                                                        X_List_dat_tr_plantilla p = new X_List_dat_tr_plantilla();
+                                                        p = (X_List_dat_tr_plantilla) tr.LIST_DAT_TR_PLANTILLA(lista.get(s).toString()).get(i);
+                                            %>
                                         
  <h2 style="text-align:center"><strong>CONTRATO DE TRABAJO A PLAZO FIJO Y BAJO MODALIDAD</strong></h2>
-                <p>Conste por el presente documento el contrato de trabajo a plazo fijo y sujeto a modalidad por 
+                <p id="p1<%=s%>">Conste por el presente documento el contrato de trabajo a plazo fijo y sujeto a modalidad por 
 
                     Servicio Específico, conforme lo dispone el Art. 63 del T.U.O del D. Leg. 728, Ley de Productividad y 
 
@@ -147,34 +148,34 @@
 
                     central, Ñaña, Lurigancho-Chosica, a quien se le denominará <strong>"EMPLEADOR"</strong>, representada por su 
 
-                    Apoderado Mg. Julio Cesar Rengifo Peña, con DNI No. 06690086,; y de la otra parte <strong><%=p.getAp_paterno().toUpperCase() + " " + p.getNo_trabajador().toUpperCase() + " " + p.getAp_materno().toUpperCase()%></strong> , con DNI Nº(<strong><%=p.getNu_doc()%></strong>), domiciliado(a) en (<strong>
+                    Apoderado Mg. Julio Cesar Rengifo Peña, con DNI No. 06690086,; y de la otra parte <strong id="p1"><%=p.getAp_paterno().toUpperCase() + " " + p.getNo_trabajador().toUpperCase() + " " + p.getAp_materno().toUpperCase()%></strong> , con DNI Nº(<strong id="p12"><%=p.getNu_doc()%></strong>), domiciliado(a) en (<strong id="nr2">
                                                     <%                InterfaceListaDAO l = new ListaDAO();
-                                                        for (int b = 0; b < l.List_Dom_D1_Id().size(); b++) {
-                                                            if (p.getLi_di_dom_a_d1().trim().equals(b + 1 + "")) {
-                                                                out.println(l.List_Dom_D1_Id().get(b));
-                                                            }
+                                                        /*for (int b = 0; b < l.List_Dom_D1_Id().size(); b++) {
+                                                         if (p.getLi_di_dom_a_d1().trim().equals(b + 1 + "")) {
+                                                         out.println(l.List_Dom_D1_Id().get(b));
+                                                         }
 
-                                                        }
+                                                         }
 
-                                                        if (p.getLi_di_dom_a_d3().trim().equals("1")) {
-                                                            out.println(" " + p.getDi_dom_a_d2() + " Numero");
-                                                        }
-                                                        if (p.getLi_di_dom_a_d3().trim().equals("2")) {
-                                                            out.println(" " + p.getDi_dom_a_d2() + " Lote");
-                                                        }
-                                                        if (p.getLi_di_dom_a_d3().trim().equals("3")) {
-                                                            out.println(" " + p.getDi_dom_a_d2() + " S/N");
-                                                        }
+                                                         if (p.getLi_di_dom_a_d3().trim().equals("1")) {
+                                                         out.println(" " + p.getDi_dom_a_d2() + " Numero");
+                                                         }
+                                                         if (p.getLi_di_dom_a_d3().trim().equals("2")) {
+                                                         out.println(" " + p.getDi_dom_a_d2() + " Lote");
+                                                         }
+                                                         if (p.getLi_di_dom_a_d3().trim().equals("3")) {
+                                                         out.println(" " + p.getDi_dom_a_d2() + " S/N");
+                                                         }
 
-                                                        for (int c = 0; c < l.List_Dom_D5_Id().size(); c++) {
-                                                            if (p.getLi_di_dom_a_d5().trim().equals(c + 1 + "")) {
-                                                                out.println(" " + p.getDi_dom_a_d4() + " " + l.List_Dom_D5_Id().get(c));
-                                                            }
+                                                         for (int c = 0; c < l.List_Dom_D5_Id().size(); c++) {
+                                                         if (p.getLi_di_dom_a_d5().trim().equals(c + 1 + "")) {
+                                                         out.println(" " + p.getDi_dom_a_d4() + " " + l.List_Dom_D5_Id().get(c));
+                                                         }
 
-                                                        }
-                                                        out.println(" " + p.getDi_dom_a_d6());
+                                                         }
+                                                         out.println(" " + p.getDi_dom_a_d6());*/
 
-                                                    %></strong>),<%=p.getNo_ub_distrito()%><strong> </strong>, a quien se le denominará el (la) <strong>"TRABAJADOR(A)</strong>, en los términos y condiciones 
+                                                    %></strong>),<%=p.getNo_ub_distrito()%>  <strong> </strong>, a quien se le denominará el (la) <strong>"TRABAJADOR(A)</strong>, en los términos y condiciones 
 
                     siguientes:</p>
 
@@ -188,7 +189,7 @@
 
                     del Campus Universitario.</p>
 
-                <p><strong>SEGUNDA:</strong> El EMPLEADOR requiere de personal temporal en las áreas de la <strong><%=p.getNo_dep()%></strong>, con el objeto de diseñar detalladamente los requerimientos del sistema académico, 
+                <p id="p2<%=s%>"><strong>SEGUNDA:</strong> El EMPLEADOR requiere de personal temporal en las áreas de la <strong id="nro2"><%/*=p.getNo_dep()*/%></strong>, con el objeto de diseñar detalladamente los requerimientos del sistema académico, 
 
                     programando nuevos módulos, reportes o actualizaciones de módulos, diseñar detalladamente los 
 
@@ -202,15 +203,15 @@
 
                     específico.
 
-                <p><strong>TERCERA:</strong> EL EMPLEADOR de acuerdo con la condición expresada en la segunda cláusula, contrata al 
+                <p id="p3<%=s%>"><strong>TERCERA:</strong> EL EMPLEADOR de acuerdo con la condición expresada en la segunda cláusula, contrata al 
 
-                    (la) TRABAJADOR (A) para que se desempeñe como <strong><%=p.getNo_puesto()%></strong>.</p> 
+                    (la) TRABAJADOR (A) para que se desempeñe como <strong id="nro3"><%/*=p.getNo_puesto()*/%></strong>.</p> 
 
-                <p><strong>CUARTA:</strong> EL EMPLEAOR en virtud del presente documento, contrata, al (la) TRABAJADOR (A) desde el 
+                <p id="p4<%=s%>"><strong>CUARTA:</strong> EL EMPLEAOR en virtud del presente documento, contrata, al (la) TRABAJADOR (A) desde el 
 
-                    <strong><%=p.getFe_desde()%></strong> hasta el <strong><%=p.getFe_hasta()%></strong>.</p>
+                    <strong id="nro4"><%/*=p.getFe_desde()*/%></strong> hasta el <strong><%/*=p.getFe_hasta()*/%></strong>.</p>
 
-                <p><strong>QUINTA:</strong> EL (la) TRABAJADOR (A) percibirá una remuneración mensual de S/ <strong><%=p.getCa_sueldo()%></strong>. 
+                <p id="p5<%=s%>"><strong>QUINTA:</strong> EL (la) TRABAJADOR (A) percibirá una remuneración mensual de S/ <strong id="nro5"><%/*=p.getCa_sueldo()*/%></strong>. 
 
                     (Nuevos Soles), como retribución por las labores realizadas en la jornada y horario laboral establecido por 
 
@@ -242,62 +243,63 @@
 
                     en forma expresa, con la sola limitación de presentar su carta de renuncia con 30 días de anticipación.</p>
 
-                <p><strong>NOVENA:</strong> En todo lo no previsto en el presente contrato se aplicará la Ley vigente de nuestro país.
+                <p id="p6<%=s%>"><strong>NOVENA:</strong> En todo lo no previsto en el presente contrato se aplicará la Ley vigente de nuestro país.
 
                     Estando de acuerdo en todo el contenido del presente contrato, firmamos en señal de conformidad, en 
 
-                    Ñaña, Chosica, Lima, al <strong><%=p.getFecha_actual()%></strong>.
+                    Ñaña, Chosica, Lima, al <strong id="nro6"><%/*=p.getFecha_actual()*/%></strong>.
 
                 </p>
-                <br>	
-                <br>	
-                <br>	
-    </script>
+                
+
+    
  <div><table  style="width: 100%;  height: 50px; text-align:center; "id="asdglñhsdkgohk" ><tr><td align="center">______________________________<br><br>EMPLEADOR</td>
-                        <td align="center">_______________________________<br><br>TRABAJADOR(A)</td></tr></div></table>
-<table>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+                        <td align="center">_______________________________<br><br>TRABAJADOR(A)</td></tr></div><tbody id="tbodys"></tbody>
 </table>
+     
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
                                             <%
-                                }
-                            }%>
+
+                                                    }
+                                                }%>
                                         </textarea>						
+                                        
 
                                     </div>
                                     <!-- end widget content -->
@@ -323,11 +325,70 @@
             <!-- END MAIN CONTENT -->
 
         </div>
+        <button id="ordenar" class="orden">orden</button>
+        <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
         <script>
             $(document).ready(function() {
+                alert();
+                ordenar();
+                function ordenar() {
+                    var a = $("#tbodys").val();
+                    var cantidad = 0;
+                    var text = "";
+                    cantidad = $("#cantidad").val();
+                    for (var i = 0; i < cantidad; i++) {
+                        var p1 = $("#p1" + i).val();
+                        var p2 = $("#p2" + i).val();
+                        var p3 = $("#p3" + i).val();
+                        var p4 = $("#p4" + i).val();
+                        var p5 = $("#p5" + i).val();
+                        var p6 = $("#p6" + i).val();
+                        if (p1.length > 880) {
+                        } else {
+                            text += ("<br>");
+
+                        }
+                        if (p2.length > 550) {
+
+                        } else {
+                            text += ("<br>");
+                        }
+                        if (p3.length > 220) {
+
+                        } else {
+                            text += ("<br>");
+                        }
+                        if (p4.length > 220) {
+
+                        } else {
+                            text += ("<br>");
+                        }
+                        if (p5.length > 330) {
+                        } else {
+                            text += ("<br>");
+                        }
+                        if (p6.length > 330) {
+                        } else {
+                            text += ("<br>");
+                        }
+                    }
+                    a.append(text);
+                }
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
+                
                 $("#letra").click(function() {
-                   // alert("alknaklsdn");
+                    // alert("alknaklsdn");
                 });
+                /*$("#ordenar").click(
+                        
+                        function() {
+                            alert();
+                            //ordenar();
+                        });*/
+                
 
             });
 
