@@ -123,6 +123,7 @@ public class CFormato_Horario extends HttpServlet {
                     String ID_TIPO_HORARIO = request.getParameter("idth");
                     String nofor = request.getParameter("nofor");
                     getServletContext().setAttribute("LISTAR_FORMATO_HORARIO",Ifh.Listar_Formato_Horario(ID_TIPO_HORARIO) );
+                    getServletContext().setAttribute("List_D", Ifh.List_D());
                     response.sendRedirect("Vista/Formato_Horario/List_Formato_Horario.jsp?nofor="+ nofor +"");
                 }
             if (opc.equals("Listar_Tip_Horario")) {
