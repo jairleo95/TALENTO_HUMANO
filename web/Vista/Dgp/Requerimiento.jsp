@@ -142,10 +142,12 @@
 
 
             <!-- MAIN CONTENT -->
-            <div id="content" style="margin: 0px;">
-             
+            <div id="content" style="margin: 0px;" >
+                
+                <%String opc = request.getParameter("opc");
+                    if(opc.equals("Planilla")){%>
 
-                <section id="service" class="wow fadeInUp" style="margin: 0px;">
+                <section id="service" class="wow fadeInUp" style="margin: 0px; ">
                     <div class="container" style="margin: 0px; margin-top: 2%;">
                         <div class="row">
                             <div class="col-md-3 col-sm-3">
@@ -196,7 +198,59 @@
                         </div>
                     </div>
                 </section><!-- Service box end -->
-
+                <%}else if(opc.equals("FueraDePlanilla")){%>
+                <section id="service" class="wow fadeInUp" style="margin: 0px; ">
+                    <div class="container" style="margin: 0px; margin-top: 2%;">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-3">
+                                <div class="service-content">
+                                    <a href="Generar_Dgp.jsp?text=1"><span class="service-icon"><i class="fa fa-briefcase img-circle wow flipInX"></i></span></a>
+                                    <h3>Practicas Profesionales</h3>
+                                    <p>
+                                   
+                                    </p>
+                                </div>
+                            </div><!--/ End first service -->
+                            <div class="col-md-3 col-sm-3">
+                                <div class="service-content">
+                                    <a href="Generar_Dgp.jsp?text=2"><span class="service-icon"><i class="fa fa-briefcase img-circle wow flipInX"></i></span></a>
+                                    <h3>Practicas Pre Profesionales</h3>
+                                    <p>
+                                    
+                                    </p>
+                                </div>
+                            </div><!--/ End 2nd service -->
+                            <div class="col-md-3 col-sm-3">
+                                <div class="service-content">
+                                    <a href=Generar_Dgp.jsp?text=1><span class="service-icon"><i class="fa fa-cogs img-circle wow flipInX"></i></span></a>
+                                    <h3>Convenio Laboral Juvenil</h3>
+                                    <p>
+                                       
+                                    </p>
+                                </div>
+                            </div><!--/ End 3rd service -->
+                            <div class="col-md-3 col-sm-3">
+                                <div class="service-content">
+                                    <a href="Generar_Dgp.jsp?text=5"><span class="service-icon"><i class="fa fa-flask img-circle wow flipInX"></i></span></a>
+                                    <h3>Locación de Servicios</h3>
+                                    <p>
+                                      
+                                    </p>
+                                </div>
+                            </div><!--/ End 4th service -->
+                            <div class="col-md-3 col-sm-3">
+                                <div class="service-content last">
+                                    <a href="#."><span class="service-icon"><i class="fa fa-cogs img-circle wow flipInX"></i></span></a>
+                                    <h3>No Domiciliado <br>(Expositores extranjeros)</h3>
+                                    <p>
+                                      
+                                    </p>
+                                </div>
+                            </div><!--/ End 4th service -->
+                        </div>
+                    </div>
+                </section><!-- Service box end -->
+                <%}%>
                 <!-- end widget grid -->
 
             </div>
