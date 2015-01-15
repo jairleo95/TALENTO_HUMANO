@@ -71,8 +71,9 @@ public class CFamiliar extends HttpServlet {
             String idtr = request.getParameter("idtr");
             getServletContext().setAttribute("List_PMC", pmc.List_PMC(idtr));
             getServletContext().setAttribute("LISTA_HIJOS", h.LISTA_HIJOS(idtr));
-             getServletContext().setAttribute("LISTA_HIJO", h.LISTA_HIJOS(idtr));
+            getServletContext().setAttribute("LISTA_HIJO", h.LISTA_HIJOS(idtr));
             // out.println(idtr);
+            //out.print(h.LISTA_HIJOS(idtr).size());
             response.sendRedirect("Vista/Trabajador/Familiar/Detalle_Familiar.jsp?idtr="+idtr);
         }
         if (opc.equals("REGISTRAR HIJO")) {

@@ -12,6 +12,7 @@
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceListaDAO"%>
 <%@page import="pe.edu.upeu.application.model.X_List_dat_tr_plantilla"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:useBean id="lista" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html lang="">
     <head>
@@ -127,12 +128,12 @@
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">
                                         <textarea name="ckeditor">
-                                        <% String[] Imprimir = request.getParameterValues("Imprimir");
+                                        <%
                                             InterfaceTrabajadorDAO tr = new TrabajadorDAO();
-                                            for (int s = 0; s < Imprimir.length; s++) {
-                                                for (int i = 0; i < tr.LIST_DAT_TR_PLANTILLA(Imprimir[s]).size(); i++) {
+                                            for (int s = 0; s < lista.size(); s++) {
+                                                for (int i = 0; i < tr.LIST_DAT_TR_PLANTILLA(lista.get(s).toString()).size(); i++) {
                                                     X_List_dat_tr_plantilla p = new X_List_dat_tr_plantilla();
-                                                    p = (X_List_dat_tr_plantilla) tr.LIST_DAT_TR_PLANTILLA(Imprimir[s]).get(i);
+                                                    p = (X_List_dat_tr_plantilla) tr.LIST_DAT_TR_PLANTILLA(lista.get(s).toString()).get(i);
                                         %>
                                         
  <h2 style="text-align:center"><strong>CONTRATO DE TRABAJO A PLAZO FIJO Y BAJO MODALIDAD</strong></h2>
