@@ -107,7 +107,7 @@ public class CFormato_Horario extends HttpServlet {
                         }
                     }
                 }
-                
+                getServletContext().setAttribute("List_Tipo_Horario", Ifh.Listar_Tipo_Horario());
                 response.sendRedirect("Vista/Formato_Horario/Detalle_Formato_Horario.jsp");
 
             }

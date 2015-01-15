@@ -82,91 +82,157 @@
             <input type="hidden" name="NOMRBE"  value="<%=noFor%>"  >
 
             <div class="input-desp">
-                <table style="" id="show_1" class="cont_lunes"> 
-                    <tr><td align="center" colspan="2">Lunes</td></tr>
-                    <tr class="tr-count">
-                        <td>T1 :</td>
-                        <%for (int i = 0; i < LISTAR_FORMATO_HORARIO.size(); i++) {
+                <%for (int i = 0; i < LISTAR_FORMATO_HORARIO.size(); i++) {
                                 Formato_Horario fh = new Formato_Horario();
                                 fh = (Formato_Horario) LISTAR_FORMATO_HORARIO.get(i);
-                            }
+                            if(fh.getNo_dia().equals("lun")){
+                                i=i+1;
+                            
                         %>
-                        <td><input type="text"  id="HORA_DESDE_lun1" class="texto-h" value=""></td>      
-                        <td><input type="text"  id="HORA_HASTA_lun1" class="texto-h" value=""></td>
-                    </tr>                         
+                <table style="" id="show_1" class="cont_lunes"> 
+                    <tr><td align="center" colspan="2">Lunes</td></tr>
+                    
+                    <%  for (int j = 0; j < LISTAR_FORMATO_HORARIO.size(); j++) {
+                                Formato_Horario fh1 = new Formato_Horario();
+                                fh1 = (Formato_Horario) LISTAR_FORMATO_HORARIO.get(j);
+                    if(fh1.getNo_turno().trim().equals("T1")&fh1.getNo_dia().trim().equals("lun")){%>
+                    <tr class="tr-count">
+                        <td>T1 :</td>
+                        <td><input type="text"  id="HORA_DESDE_lun1" class="texto-h" value="<%=fh1.getHo_desde()%>"></td>      
+                        <td><input type="text"  id="HORA_HASTA_lun1" class="texto-h" value="<%=fh1.getHo_hasta()%>"></td>
+                    </tr>         
+                    <%}else if (fh1.getNo_turno().trim().equals("T2")&fh1.getNo_dia().trim().equals("lun")){%>
                     <tr class="tr-count">
                         <td>T2 :</td>
-                        <td><input type="text"  id="HORA_DESDE_lun2" class="texto-h" ></td>           
-                        <td ><input type="text" id="HORA_HASTA_lun2" class="texto-h" > </td>
-                    </tr>      
+                        <td><input type="text"  id="HORA_DESDE_lun2" class="texto-h" value="<%=fh1.getHo_desde()%>"></td>           
+                        <td><input type="text" id="HORA_HASTA_lun2" class="texto-h" value="<%=fh1.getHo_hasta()%>"> </td>
+                    </tr>
+                    <%}
+                    }%>
                 </table>
-
-                <table id="show_2" class="cont_martes">     
+                    <%}
+                if(fh.getNo_dia().equals("mar")){
+                                i=i+1;
+                    %>
+                <table style="" id="show_1" class="cont_lunes"> 
                     <tr><td align="center" colspan="2">Martes</td></tr>
-                    <tr class="tr-count_2">
+                    
+                    <%  for (int j = 0; j < LISTAR_FORMATO_HORARIO.size(); j++) {
+                                Formato_Horario fh1 = new Formato_Horario();
+                                fh1 = (Formato_Horario) LISTAR_FORMATO_HORARIO.get(j);
+                            if(fh1.getNo_turno().trim().equals("T1")&fh1.getNo_dia().trim().equals("mar")){%>
+                    <tr class="tr-count">
                         <td>T1 :</td>
-                        <td><input type="text" id="HORA_DESDE_mar1" class="texto-h" ></td>             
-                        <td><input type="text" id="HORA_HASTA_mar1" class="texto-h" ></td></tr>         
-                    <tr class="tr-count_2">
+                        <td><input type="text"  id="HORA_DESDE_lun1" class="texto-h" value="<%=fh1.getHo_desde()%>"></td>      
+                        <td><input type="text"  id="HORA_HASTA_lun1" class="texto-h" value="<%=fh1.getHo_hasta()%>"></td>
+                    </tr>         
+                    <%}else if (fh1.getNo_turno().trim().equals("T2")&fh1.getNo_dia().trim().equals("mar")){%>
+                    <tr class="tr-count">
                         <td>T2 :</td>
-                        <td><input type="text" name="HORA_DESDE_mar2" id="HORA_DESDE_mar2" class="texto-h" ></td>             
-                        <td><input type="text" name="HORA_HASTA_mar2"  id="HORA_HASTA_mar2" class="texto-h" ></td></tr>         
+                        <td><input type="text"  id="HORA_DESDE_lun2" class="texto-h" value="<%=fh1.getHo_desde()%>"></td>           
+                        <td><input type="text" id="HORA_HASTA_lun2" class="texto-h" value="<%=fh1.getHo_hasta()%>"> </td>
+                    </tr>
+                    <%}
+                    }%>
                 </table>
-
-                <table id="show_3" class="cont_miercoles">     
-                    <tr ><td align="center" colspan="2">Miercoles</td></tr>
-                    <tr class="tr-count_3">
+                <%}
+                if(fh.getNo_dia().equals("mie")){
+                                i=i+1;
+                %>
+                <table style="" id="show_1" class="cont_lunes"> 
+                    <tr><td align="center" colspan="2">Miercoles</td></tr>
+                    
+                    <%  for (int j = 0; j < LISTAR_FORMATO_HORARIO.size(); j++) {
+                                Formato_Horario fh1 = new Formato_Horario();
+                                fh1 = (Formato_Horario) LISTAR_FORMATO_HORARIO.get(j);
+                            if(fh1.getNo_turno().trim().equals("T1")&fh1.getNo_dia().trim().equals("mie")){%>
+                    <tr class="tr-count">
                         <td>T1 :</td>
-                        <td><input type="text" id="HORA_DESDE_mier1" class="texto-h" ></td>           
-                        <td><input type="text" id="HORA_HASTA_mier1" class="texto-h" ></td></tr>         
-                    <tr class="tr-count_3">
+                        <td><input type="text"  id="HORA_DESDE_lun1" class="texto-h" value="<%=fh1.getHo_desde()%>"></td>      
+                        <td><input type="text"  id="HORA_HASTA_lun1" class="texto-h" value="<%=fh1.getHo_hasta()%>"></td>
+                    </tr>         
+                    <%}else if (fh1.getNo_turno().trim().equals("T2")&fh1.getNo_dia().trim().equals("mie")){%>
+                    <tr class="tr-count">
                         <td>T2 :</td>
-                        <td><input type="text" id="HORA_DESDE_mier2" class="texto-h" ></td>           
-                        <td><input type="text" id="HORA_HASTA_mier2" class="texto-h" ></td></tr>         
+                        <td><input type="text"  id="HORA_DESDE_lun2" class="texto-h" value="<%=fh1.getHo_desde()%>"></td>           
+                        <td><input type="text" id="HORA_HASTA_lun2" class="texto-h" value="<%=fh1.getHo_hasta()%>"> </td>
+                    </tr>
+                    <%}
+                    }%>
                 </table>
-
-
-                <table id="show_4" class="cont_jueves">     
+                <%}
+                if(fh.getNo_dia().equals("jue")){
+                                i=i+1;%>
+                <table style="" id="show_1" class="cont_lunes"> 
                     <tr><td align="center" colspan="2">Jueves</td></tr>
-                    <tr class="tr-count_4">
+                    
+                    <%  for (int j = 0; j < LISTAR_FORMATO_HORARIO.size(); j++) {
+                                Formato_Horario fh1 = new Formato_Horario();
+                                fh1 = (Formato_Horario) LISTAR_FORMATO_HORARIO.get(j);
+                            if(fh1.getNo_turno().trim().equals("T1")&fh1.getNo_dia().trim().equals("jue")){%>
+                    <tr class="tr-count">
                         <td>T1 :</td>
-                        <td><input type="text" id="HORA_DESDE_jue1" class="texto-h" ></td>            
-                        <td><input type="text" id="HORA_HASTA_jue1" class="texto-h" ></td></tr>         
-                    <tr class="tr-count_4">
-                        <td>T2 :</td><td>
-                            <input type="text" id="HORA_DESDE_jue2" class="texto-h" ></td>          
-                        <td><input type="text" id="HORA_HASTA_jue2" class="texto-h" ><a href="#" id="remove_4">-</a></td></tr>         
-                    <input type="hidden" name="DIA_jue2" value="jue" class="texto-h" >
-                    <input type="hidden" name="TURNO_jue2" value="T2" >
-                    <tr><td colspan="2"><a href="#" id="add_4">+</a></td></tr>
+                        <td><input type="text"  id="HORA_DESDE_lun1" class="texto-h" value="<%=fh1.getHo_desde()%>"></td>      
+                        <td><input type="text"  id="HORA_HASTA_lun1" class="texto-h" value="<%=fh1.getHo_hasta()%>"></td>
+                    </tr>         
+                    <%}else if (fh1.getNo_turno().trim().equals("T2")&fh1.getNo_dia().trim().equals("jue")){%>
+                    <tr class="tr-count">
+                        <td>T2 :</td>
+                        <td><input type="text"  id="HORA_DESDE_lun2" class="texto-h" value="<%=fh1.getHo_desde()%>"></td>           
+                        <td><input type="text" id="HORA_HASTA_lun2" class="texto-h" value="<%=fh1.getHo_hasta()%>"> </td>
+                    </tr>
+                    <%}
+                    }%>
                 </table>
-
-
-                <table id="show_5" class="cont_viernes">     
+                <%}
+                if(fh.getNo_dia().equals("vie")){
+                                i=i+1;%>
+                <table style="" id="show_1" class="cont_lunes"> 
                     <tr><td align="center" colspan="2">Viernes</td></tr>
-                    <tr class="tr-count_5">
+                    
+                    <%  for (int j = 0; j < LISTAR_FORMATO_HORARIO.size(); j++) {
+                                Formato_Horario fh1 = new Formato_Horario();
+                                fh1 = (Formato_Horario) LISTAR_FORMATO_HORARIO.get(j);
+                            if(fh1.getNo_turno().trim().equals("T1")&fh1.getNo_dia().trim().equals("vie")){%>
+                    <tr class="tr-count">
                         <td>T1 :</td>
-                        <td><input type="text" name="HORA_DESDE_vie1"  id="HORA_DESDE_vie1" class="texto-h" ></td>
-                        <td><input type="text" name="HORA_HASTA_vie1" id="HORA_HASTA_vie1" class="texto-h" ></td></tr>         
-                    <input type="hidden" name="DIA_vie1" value="vie" class="texto-h" >   
-                    <input type="hidden" name="TURNO_vie1" value="T1" >
-                    <tr><td colspan="2"><a href="#" id="add_5">+</a></td></tr>
+                        <td><input type="text"  id="HORA_DESDE_lun1" class="texto-h" value="<%=fh1.getHo_desde()%>"></td>      
+                        <td><input type="text"  id="HORA_HASTA_lun1" class="texto-h" value="<%=fh1.getHo_hasta()%>"></td>
+                    </tr>         
+                    <%}else if (fh1.getNo_turno().trim().equals("T2")&fh1.getNo_dia().trim().equals("vie")){%>
+                    <tr class="tr-count">
+                        <td>T2 :</td>
+                        <td><input type="text"  id="HORA_DESDE_lun2" class="texto-h" value="<%=fh1.getHo_desde()%>"></td>           
+                        <td><input type="text" id="HORA_HASTA_lun2" class="texto-h" value="<%=fh1.getHo_hasta()%>"> </td>
+                    </tr>
+                    <%}
+                    }%>
                 </table>
-                
-                <table id="show_6" class="cont_domingo" >
+                <%}if(fh.getNo_dia().equals("dom")){
+                                i=i+1;%>
+                <table style="" id="show_1" class="cont_lunes"> 
                     <tr><td align="center" colspan="2">Domingo</td></tr>
-                    <tr class="tr-count_6"><td>T1 :</td><td><input type="text" name="HORA_DESDE_dom1"  id="HORA_DESDE_dom1" class="texto-h" ></td>
-                        <td><input type="text" name="HORA_HASTA_dom1"  id="HORA_HASTA_dom1" class="texto-h" ></td></tr>         
-                    <input type="hidden" name="DIA_dom1" value="dom" class="texto-h" >                    
-                    <input type="hidden" name="TURNO_dom1" value="T1" >
-
-
-                    <tr class="tr-count_6"><td>T2 :</td><td><input type="text" name="HORA_DESDE_dom2"  id="HORA_DESDE_dom2" class="texto-h" ></td>
-                        <td><input type="text" name="HORA_HASTA_dom2"  id="HORA_HASTA_dom2" class="texto-h" ><a href="#" id="remove_6">-</a></td></tr>         
-                    <input type="hidden" name="DIA_dom2" value="dom" class="texto-h" >                    
-                    <input type="hidden" name="TURNO_dom2" value="T2" >
-                    <tr><td colspan="2"><a href="#" id="add_6">+</a></td></tr>
+                    
+                    <%  for (int j = 0; j < LISTAR_FORMATO_HORARIO.size(); j++) {
+                                Formato_Horario fh1 = new Formato_Horario();
+                                fh1 = (Formato_Horario) LISTAR_FORMATO_HORARIO.get(j);
+                            if(fh1.getNo_turno().trim().equals("T1")&fh1.getNo_dia().trim().equals("dom")){%>
+                    <tr class="tr-count">
+                        <td>T1 :</td>
+                        <td><input type="text"  id="HORA_DESDE_lun1" class="texto-h" value="<%=fh1.getHo_desde()%>"></td>      
+                        <td><input type="text"  id="HORA_HASTA_lun1" class="texto-h" value="<%=fh1.getHo_hasta()%>"></td>
+                    </tr>         
+                    <%}else if (fh1.getNo_turno().trim().equals("T2")&fh1.getNo_dia().trim().equals("dom")){%>
+                    <tr class="tr-count">
+                        <td>T2 :</td>
+                        <td><input type="text"  id="HORA_DESDE_lun2" class="texto-h" value="<%=fh1.getHo_desde()%>"></td>           
+                        <td><input type="text" id="HORA_HASTA_lun2" class="texto-h" value="<%=fh1.getHo_hasta()%>"> </td>
+                    </tr>
+                    <%}
+                    }%>
                 </table>
+                <%   } 
+                }%>
             </div>
         </form>
     </center>
