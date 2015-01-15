@@ -25,12 +25,17 @@ import pe.edu.upeu.application.dao.ContratoDAO;
 import pe.edu.upeu.application.dao.Datos_Hijo_TrabajadorDAO;
 import pe.edu.upeu.application.dao.Detalle_Centro_Costo_DAO;
 import pe.edu.upeu.application.dao.DgpDAO;
+import pe.edu.upeu.application.dao.DireccionDAO;
 import pe.edu.upeu.application.dao.DocumentoDAO;
+import pe.edu.upeu.application.dao.EmpleadoDAO;
 import pe.edu.upeu.application.dao.GrupoOcupacionesDAO;
 import pe.edu.upeu.application.dao.HorarioDAO;
 import pe.edu.upeu.application.dao.ListaDAO;
+import pe.edu.upeu.application.dao.PlantillaDAO;
 import pe.edu.upeu.application.dao.PuestoDAO;
 import pe.edu.upeu.application.dao.RequerimientoDAO;
+import pe.edu.upeu.application.dao.SeccionDAO;
+import pe.edu.upeu.application.dao.Sub_ModalidadDAO;
 import pe.edu.upeu.application.dao.TrabajadorDAO;
 import pe.edu.upeu.application.dao.UsuarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAnnoDAO;
@@ -41,12 +46,17 @@ import pe.edu.upeu.application.dao_imp.InterfaceContratoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDatos_Hijo_Trabajador;
 import pe.edu.upeu.application.dao_imp.InterfaceDetalle_Centro_Costo;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceEmpleadoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceGrupo_ocupacionesDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceHorarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
+import pe.edu.upeu.application.dao_imp.InterfacePlantillaDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceSeccionDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceSub_ModalidadDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO;
 
@@ -102,6 +112,16 @@ public class CDgp extends HttpServlet {
         InterfaceCentro_CostosDAO cc = new Centro_CostoDAO();
         InterfaceDatos_Hijo_Trabajador dht = new Datos_Hijo_TrabajadorDAO();
         InterfaceGrupo_ocupacionesDAO gr = new GrupoOcupacionesDAO();
+
+        InterfaceSeccionDAO seccion = new SeccionDAO();
+        InterfaceListaDAO l = new ListaDAO();
+        InterfaceSeccionDAO sec = new SeccionDAO();
+        InterfaceEmpleadoDAO emp = new EmpleadoDAO();
+        InterfacePlantillaDAO pl = new PlantillaDAO();
+        InterfaceUsuarioDAO usu = new UsuarioDAO();
+        InterfaceDireccionDAO dir = new DireccionDAO();
+        InterfaceSub_ModalidadDAO sub = new Sub_ModalidadDAO();
+
         try {
             if (opc.equals("Listar_Req")) {
                 String id_tr = request.getParameter("idtr");
@@ -304,13 +324,31 @@ public class CDgp extends HttpServlet {
                         // out.println(num);
                         response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp?num=" + asig);
                     } else if (num == 0 & idrol.trim().equals("ROL-0006") & dgp.LIST_ID_DGP(ID_DGP).get(0).getEs_dgp().equals("1")) {
-                        out.print("Ver Contrato");
+                        String ida1 = anno.List_Anno_Max_Cont(idtr);
+
+                        getServletContext().setAttribute("List_id_Contrato_DGP", con.List_id_Contrato_DGP(idtr, ida1));
+                        getServletContext().setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr));
+                        getServletContext().setAttribute("List_Jefe", l.List_Jefe());
+                        getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
+                        //getServletContext().setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
+                        getServletContext().setAttribute("List_ID_User", usu.List_ID_User(iduser));
+                        getServletContext().setAttribute("List_Usuario", usu.List_Usuario());
+                        getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
+                        getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
+                        getServletContext().setAttribute("List_centro_costo", cc.List_centro_costo());
+                        getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
+                        getServletContext().setAttribute("List_modalidad", con.List_modalidad());
+                        getServletContext().setAttribute("Listar_Sub_mo", sub.Listar_Sub_mo());
+                        getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
+                        response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp?ida1=" + ida1);
                     }
                 } else {
-                    out.print("Ver req");
+  
+ response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&idgp=" + ID_DGP);
+            
                 }
 
-                // response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&idgp=" + ID_DGP);
+                //response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&idgp=" + ID_DGP);
             }
             if (opc.equals("Seguimiento")) {
                 String iddgp = request.getParameter("iddgp");
