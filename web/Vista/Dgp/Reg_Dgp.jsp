@@ -262,7 +262,7 @@
                                                             </label>
                                                         </section>
                                                         <section  class="col col-6">
-                                                            <label class="select" id="titu">DGP ANTERIORES
+                                                            <label class="select" id="titu">CARGAR DATOS
                                                                 <select  class="btn-list-req" >
                                                                     <option value="" selected=""  >[SELECCIONE]</option>
 
@@ -345,7 +345,7 @@
                                                             });
                                                         });
                                                     </script>
-                                                    <button type="button" class="cl">verr</button>
+                                                 
                                                     <section>
                                                         <label class="label" id="titu">Puesto | Seccion | Area:</label>
                                                         <label class="select">
@@ -575,7 +575,7 @@
                                                 <fieldset>
 
                                                     <section>
-                                                        <label class="label" id="titu">Opcion :</label>
+                                                        <label class="label" id="titu">Tipo de Horario :</label>
                                                         <label class="select">
 
                                                             <select id="horario" required="" >
@@ -682,7 +682,7 @@
                                                         </table>
                                                         <div class="h_total" style="color: red; font-weight: bold;">Horas Totales : 00:00 horas</div>
                                                         <input  readonly="" type="text" name="horas_totales" class="h_total" required="" max="48"/>
-                                                        <input  type="text" name="dep_actual" value="<%=id_dep%>" class="dep_actual" />
+                                                        <input  type="hidden" name="dep_actual" value="<%=id_dep%>" class="dep_actual" />
                                                     </div>
                                                 </fieldset>
                                                 <footer>
@@ -821,13 +821,13 @@
             var acum = 0;
             for (var i = 0; i < dias_semana.length; i++) {
 
-                for (var j = 0, max = 1; j < max; j++) {
+                for (var j = 0, max = 5; j < max; j++) {
                     var horaTurno = 0;
                     //var str = $("#HORA_DESDE_" + dias_semana[i] + j).val();
 
                     var Desde = $(".HORA_DESDE_" + dias_semana[i] + (j + 1)).val();
                     var Hasta = $(".HORA_HASTA_" + dias_semana[i] + (j + 1)).val();
-                    if ($(".HORA_DESDE_" + dias_semana[i] + j).val() == null) {
+                    if ($(".HORA_DESDE_" + dias_semana[i] + (j+1)).val() == null) {
                         Desde = "00:00";
                         Hasta = "00:00";
                     }
@@ -836,7 +836,7 @@
                     var arrDesde = Desde.split(":");
                     var arrHasta = Hasta.split(":");
                     horaTurno = (((parseInt(arrHasta[0]) * 60) + (parseInt(arrHasta[1]))) - ((parseInt(arrDesde[0]) * 60) + (parseInt(arrDesde[1]))));
-                    alert(horaTurno + Desde + ".HORA_DESDE_" + dias_semana[i] + (j + 1));
+                   // alert(horaTurno + Desde + ".HORA_DESDE_" + dias_semana[i] + (j + 1));
 
                     acum = acum + horaTurno;
                     // }
@@ -993,18 +993,22 @@
 
 
                 var dias_semana = new Array("lun", "mar", "mie", "jue", "vie", "sab", "dom");
+                    $(".tr-dia").remove();
                 $.post("../../formato_horario", "opc=Listar_Horario&id=" + valor, function (objJson) {
                     var lista = objJson.lista;
                     for (var f = 0; f < dias_semana.length; f++) {
+                    
                           var d = 0;
                         for (var i = 0; i < lista.length; i++) {
                           
                             if (dias_semana[f] == lista[i].dia) {
                                 var scntDiv = $('#show_' + dias_semana[f]);
+                               
                                 $(".cont_" + dias_semana[f]).show();
+                                 
                                 $("#select_" + dias_semana[f]).val(1);
 
-                                $('<tr><td>HORA_DESDE_' + dias_semana[f] + (d + 1) + 'T' + (d + 1) + ' :</td><td><input type="text"   class="texto-h HORA_DESDE_' + dias_semana[f] + (d + 1) + '"   name="HORA_DESDE_' + dias_semana[f] + (d + 1)
+                                $('<tr class="tr-dia" ><td>T' + (d + 1) + ' :</td><td><input type="text"   class="texto-h HORA_DESDE_' + dias_semana[f] + (d + 1) + '"   name="HORA_DESDE_' + dias_semana[f] + (d + 1)
                                         + '" value="' + lista[i].desde + '"  /></td><td><input type="text"  class="texto-h HORA_HASTA_' + dias_semana[f] + (d + 1) + '"  value="' + lista[i].hasta + '" name="HORA_HASTA_' + dias_semana[f] + (d + 1)
                                         + '" /><input type="hidden" name="DIA_' + dias_semana[f] + (d + 1)
                                         + '" value="' + dias_semana[f] + '" ><a href="#" class="remove_' + (d + 1) + '">-</a></td></tr>').appendTo(scntDiv);

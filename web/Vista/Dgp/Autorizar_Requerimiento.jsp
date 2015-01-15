@@ -257,7 +257,7 @@
                                                     <td ><%=a.getNo_area()%></td>      
                                                     <td ><%=a.getNo_req()%></td>      
 
-                                                    <td style="color: red; font-weight: bold;"><%=a.getDe_pasos()%></td>
+                                                    <td style="color: red; font-weight: bold;"><a href="../../trabajador?idtr=<%=a.getId_trabajador()%>&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&iddetalle_dgp=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&cod=<%=a.getCo_pasos()%>&idpasos=<%=a.getId_pasos()%>&autorizacion=1&opc=aut&nup=<%=a.getNu_pasos()%>"><%=a.getDe_pasos()%></a></td>
 
                                                     <% if (dep.equals("DPT-0019")) {%>
                                                     <td ><%=a.getFe_creacion()%></td>
