@@ -9,7 +9,9 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.eclipse.jdt.internal.compiler.apt.model.Factory;
 import pe.edu.upeu.application.dao_imp.InterfaceFormato_HorarioDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
@@ -113,6 +115,35 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
             this.conn.close();
         }
         return list;
+    }
+       @Override
+    public List<Map<String, ?>> List_Tipo_Horario() {
+
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select  * from RHTR_TIPO_HORARIO where trim(es_horario) ='0'";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("ID_TIPO_HORARIO"));
+                rec.put("nombre", rs.getString("NO_HORARIO"));
+
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
+
     }
 
 }
