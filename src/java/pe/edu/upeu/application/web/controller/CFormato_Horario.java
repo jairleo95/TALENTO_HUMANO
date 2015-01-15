@@ -124,11 +124,7 @@ public class CFormato_Horario extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
-            if (opc.equals("Listar_Tip_Horario")) {
-                List<Map<String, ?>> lista = Ifh.List_Tipo_Horario();
-                rpta.put("rpta", "1");
-                rpta.put("lista", lista);
-            }
+            
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());
