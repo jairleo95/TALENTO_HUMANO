@@ -76,6 +76,10 @@ public class CFormato_Horario extends HttpServlet {
             if (opc.equals("Registrar_Formato")) {
 
             }
+
+            if (opc.equals("Registrar_Formato")) {
+
+            }
             if (opc.equals("Listar_Formato")) {
                 getServletContext().setAttribute("List_Tipo_Horario", Ifh.Listar_Tipo_Horario());
                 response.sendRedirect("Vista/Formato_Horario/Detalle_Formato_Horario.jsp");
@@ -111,6 +115,11 @@ public class CFormato_Horario extends HttpServlet {
                     getServletContext().setAttribute("LISTAR_FORMATO_HORARIO",Ifh.Listar_Formato_Horario(ID_TIPO_HORARIO) );
                     response.sendRedirect("Vista/Formato_Horario/List_Formato_Horario.jsp?nofor="+ nofor +"");
                 }
+            if (opc.equals("Listar_Tip_Horario")) {
+                List<Map<String, ?>> lista = Ifh.List_Tipo_Horario();
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());
