@@ -22,4 +22,6 @@ public interface InterfaceFormato_HorarioDAO {
     public List<Map<String, ?>> List_Formato_h(String id_th);
     public void Insert_Formato_Horario(String ID_FORMATO_HORARIO, String NO_TURNO, String NO_DIA, String HO_DESDE, String HO_HASTA, String ES_F_HORARIO, String ID_TIPO_HORARIO);
     public List<Formato_Horario> Listar_Formato_Horario(String idth);
+    public String [][]List_D();
+    
 }

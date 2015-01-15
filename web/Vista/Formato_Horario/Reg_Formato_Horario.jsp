@@ -70,14 +70,8 @@
 
     </head>
     <body>
-        <!--<select id="horario" >
-            <option value="0">Editable</option>
-            <option value="1">Horario Tiempo Completo</option>
-        </select>-->
         <b><label><%=noFor%></label></b>
-        <br> 
-        <br> 
-        <br> 
+        
     <center>
         <form class="form" action="../../formato_horario" method="POST"> 
             <table class="tab-horario">
@@ -435,7 +429,7 @@
 
         $('#add_2').live('click', function() {
 
-            $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_mar' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_mar' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_mar' + i + '" value="mar" ><input type="hidden" name="USER_CREACION_mar' + i + '"> <a href="#" id="remove_2">-</a></td></tr>').appendTo(scntDiv);
+            $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_mar' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_mar' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_mar' + i + '" value="mar" ><input type="hidden" name="TURNO_mar' + i + '" value="T'+i+'" ><a href="#" id="remove_2">-</a></td></tr>').appendTo(scntDiv);
 
             i++;
             s++;
