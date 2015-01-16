@@ -213,6 +213,21 @@ public class CDgp extends HttpServlet {
                 if (idreq.equals("3")) {
                     idreq = "REQ-0003";
                 }
+                if (idreq.equals("7")) {
+                    idreq = "REQ-0007";
+                }
+                if (idreq.equals("8")) {
+                    idreq = "REQ-0008";
+                }
+                if (idreq.equals("9")) {
+                    idreq = "REQ-0009";
+                }
+                if (idreq.equals("10")) {
+                    idreq = "REQ-0010";
+                }
+                if (idreq.equals("11")) {
+                    idreq = "REQ-0011";
+                }
 
                 getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
                 getServletContext().setAttribute("List_Puesto", pu.List_Puesto_Dep(iddep));

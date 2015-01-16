@@ -1,4 +1,5 @@
 
+<%@page import="org.apache.jasper.tagplugins.jstl.core.When"%>
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
 <%@page import="pe.edu.upeu.application.model.Requerimiento"%>
 <%@page import="pe.edu.upeu.application.model.V_Puesto_Direccion"%>
@@ -65,90 +66,13 @@
 
         <link rel="stylesheet" href="../../css/Css_Formulario/form.css"  type="text/css" > 
         <script language="javascript" type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
-        <script language="javascript" type="text/javascript">
-            $(document).ready(function () {
-                $(".contenido").hide();
-                /*TEMPORAL*/
-                //Planilla
-                //if ($("#combito").val()=="REQ-0001" | $("#combito").val() == "REQ-0002" | $("#combito").val() == "REQ-0003" | $(this).val() == "REQ-0004" | $(this).val() == "REQ-0005" | $(this).val() == "REQ-0006") {
-                if (true) {
-                    $(".contenido").hide();
-                    $("#div_1").show();
-                }
-                //Fuera PLanilla
-                if ($("#combito").val() == 7 | $(this).val() == 8 | $(this).val() == 9) {
-                    $(".contenido").hide();
-                    $("#div_2").show();
-                }
-                //Otros
-                if ($("#combito").val() == 10 | $(this).val() == 11 | $(this).val() == 12) {
-                    $(".contenido").hide();
-                    $("#div_3").show();
-                }
-
-            });</script>
+        
 
         <style>
 
             .td{
                 font-weight: bold;
             }
-        </style>
-        <%
-            HttpSession sesion = request.getSession(true);
-            String id_dep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
-        %>
-        <script>
-
-            function calcular_sueldo_total() {
-                var x = parseFloat($("#sueldo").val());
-                var y = parseFloat($("#bono_al").val());
-                var z = parseFloat($("#bev").val());
-                var v = x + y + z;
-                $("#suel_total").text(Math.round(v * 100) / 100);
-            }
-            $(document).ready(
-                    function () {
-
-
-
-
-                        $("#sueldo").keyup(
-                                function () {
-                                    calcular_sueldo_total();
-
-                                }
-                        );
-                        $("#bono_al").keyup(
-                                function () {
-                                    calcular_sueldo_total();
-                                }
-                        );
-                        $("#bev").keyup(
-                                function () {
-                                    calcular_sueldo_total();
-                                }
-                        );
-
-
-                    }
-
-
-
-            );</script>
-        <script>
-            /*$(".texto-h").setMask("29:59").keypress(
-             function () {
-             var currentMask = $(this).data('mask').mask;*/
-            //var newMask = $(this).val().match(/^2.*/) ? "23:59" : "29:59";
-            /*  if (newMask != currentMask) {
-             $(this).setMask(newMask);
-             }
-             });
-             $(".texto-h").attr("data-mask", "29:59");*/
-
-        </script>
-        <style type="text/css">
 
             #titu{
 
@@ -157,28 +81,15 @@
                 // color: blue;
             }
         </style>
+        
+         <%
+            HttpSession sesion = request.getSession(true);
+            String id_dep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
+        %>
 
     </head>
     <body>   
-        <script>
-            $(document).ready(function () {
-                var b = $("#alerta_dgp");
-                // $("#alerta_dgp").hide();
-                function listar() {
-                    $.post("../../plazo_dgp", "opc=Listar", function (objJson) {
-                        b.empty();
-                        var lista = objJson.lista;
-                        if (objJson.rpta == -1) {
-                            alert(objJson.mensaje);
-                            return;
-                        }
-                        for (var i = 0; i < lista.length; i++) {
-                            b.append("<div class='alert alert-danger alert-block' ><a class='close' data-dismiss='alert' href='#'>×</a><h4 class='alert-heading'>" + lista[i].nom + "</h4>" + lista[i].det + " , Fecha Plazo " + lista[i].desde + " al " + lista[i].hasta + "</div>");
-                        }
-                    });
-                }
-                listar();
-            });</script>
+        
 
         <div id="main" role="main" style="margin: 0px;">
 
@@ -361,6 +272,7 @@
                                                             </select>
                                                         </label>
                                                     </section>
+                                                                     
                                                     <section>
                                                         <label class="label" id="titu">Requerimiento :</label>
                                                         <label class="select">
@@ -400,6 +312,9 @@
                                                                 <input type="text" name="SUELDO" required="" maxlength="13" value="0.0"  id="sueldo" >
                                                             </label>
                                                         </section>
+                                                          <%if(idreq.equals("REQ-0001")||idreq.equals("REQ-0002")||idreq.equals("REQ-0003")||idreq.equals("REQ-0005")){
+                                                                
+                                                                %> 
                                                         <section class="col col-3">
                                                             <label class="input"  id="titu"> 
                                                                 Bono de Alimentos :<input type="text" maxlength="13" required="" value="0.0" name="BONO_ALIMENTARIO"  id="bono_al">
@@ -417,7 +332,7 @@
                                                         </section>
                                                     </div>
                                                     <div  class="row" >
-                                                        <section class="col col-4">
+                                                        <section class="col col-3">
                                                             <label class="select" id="titu">
                                                                 Antecedentes Policiales :<select name="ANTECEDENTES_POLICIALES" class="ant_policiales" >
                                                                     <option value="" >[SELECCIONE]</option>
@@ -427,10 +342,10 @@
                                                             </label>
 
                                                         </section>
-                                                        <section class="col col-4">
+                                                        <section class="col col-3">
 
                                                             <label class="select" id="titu">
-                                                                Certificado de Salud : 
+                                                                 Certificado de Salud: 
                                                                 <select name="CERTIFICADO_SALUD" required=""  class="essalud">
                                                                     <option value="">[SELECCIONE]</option>
                                                                     <option value="1">Si</option>
@@ -438,7 +353,15 @@
                                                                 </select>
                                                             </label>
                                                         </section>
+                                                        
+                                                        <section class="col col-4" >
+                                                            <label class="input" id="titu"> <br>RUC:
+                                                                <input type="text" name="RUC" id="" maxlength="20">
+                                                            </label>
+                                                        
+                                                            </section>
                                                     </div>
+                                                            
                                                     <div class="row">
                                                         <section class="col col-3" name="">
                                                             <label class="select" id="titu">Cta Sueldo - Banco:
@@ -465,7 +388,7 @@
                                                             </label>
 
                                                         </section>
-                                                        <section class="col col-3"  id="no_cuen_ban">
+                                                        <section class="col col-4"  id="no_cuen_ban">
 
                                                             <label class="input" id="titu">Nro Cuenta Bancaria:
                                                                 <input type="text" name="CUENTA_BANC" id="nu_cuen_ban">
@@ -480,6 +403,8 @@
                                                         </section>
 
                                                     </div>
+                                                        <%}%>
+                                                    <%if(idreq.equals("REQ-0007")||idreq.equals("REQ-0008")|| idreq.equals("REQ-0009")||idreq.equals("REQ-0001")||idreq.equals("REQ-0002")||idreq.equals("REQ-0003")||idreq.equals("REQ-0005")){%>
                                                     <div  class="row" id="centro-costo_1" >
                                                         <section class="col col-4"><label class="select" id="titu">Centro de Costo Nº 1:<select name="CENTRO_COSTOS_1" class="select-cc centro_costo1" required=""><option value="">[SELECCIONE]</option></select></label></section>
                                                         <section class="col col-2"><label class="input" id="titu">%<input name="PORCENTAJE_1"  type="text" value="100"  class="porcentaje_cc"/></label></section>
@@ -489,7 +414,7 @@
                                                         <section class="col col-2"><label class="input" style="font-weight: bold;color:red;">% Total :<input  readonly="" name="TOTAL_PORCENTAJE" max="100" min="100" maxlength="3" type="text" class="total_porcentaje"  /></label></section>
                                                     </div>
                                                     <input type="hidden" value="1" name="numero" class="cant-input" />
-
+                                                    <%}%>
                                                     <code class="ver"></code>
                                                     <input type="hidden" name="IDREQUERIMIENTO"  id="combito"  value="<%=idreq%>">
                                                     <div id="div_2" class="contenido" style="display: none">
@@ -511,7 +436,7 @@
                                                             <tr><td class="td">Domicilio Fiscal:</td><td><input type="text" name="DOMICILIO_FISCAL"  ></td></tr>    
                                                         </table>
                                                     </div>
-
+                                                   
                                                 </fieldset>
                                             </div>
 
@@ -721,7 +646,97 @@
         </div>
 
     </body>
+    <script>
+    <script>
+            $(document).ready(function () {
+                var b = $("#alerta_dgp");
+                // $("#alerta_dgp").hide();
+                function listar() {
+                    $.post("../../plazo_dgp", "opc=Listar", function (objJson) {
+                        b.empty();
+                        var lista = objJson.lista;
+                        if (objJson.rpta == -1) {
+                            alert(objJson.mensaje);
+                            return;
+                        }
+                        for (var i = 0; i < lista.length; i++) {
+                            b.append("<div class='alert alert-danger alert-block' ><a class='close' data-dismiss='alert' href='#'>×</a><h4 class='alert-heading'>" + lista[i].nom + "</h4>" + lista[i].det + " , Fecha Plazo " + lista[i].desde + " al " + lista[i].hasta + "</div>");
+                        }
+                    });
+                }
+                listar();
+            });</script>
 
+            function calcular_sueldo_total() {
+                var x = parseFloat($("#sueldo").val());
+                var y = parseFloat($("#bono_al").val());
+                var z = parseFloat($("#bev").val());
+                var v = x + y + z;
+                $("#suel_total").text(Math.round(v * 100) / 100);
+            }
+            $(document).ready(
+                    function () {
+
+
+
+
+                        $("#sueldo").keyup(
+                                function () {
+                                    calcular_sueldo_total();
+
+                                }
+                        );
+                        $("#bono_al").keyup(
+                                function () {
+                                    calcular_sueldo_total();
+                                }
+                        );
+                        $("#bev").keyup(
+                                function () {
+                                    calcular_sueldo_total();
+                                }
+                        );
+
+
+                    }
+
+
+
+            );</script>
+    <script>
+            /*$(".texto-h").setMask("29:59").keypress(
+             function () {
+             var currentMask = $(this).data('mask').mask;*/
+            //var newMask = $(this).val().match(/^2.*/) ? "23:59" : "29:59";
+            /*  if (newMask != currentMask) {
+             $(this).setMask(newMask);
+             }
+             });
+             $(".texto-h").attr("data-mask", "29:59");*/
+
+        </script>
+    <script language="javascript" type="text/javascript">
+            $(document).ready(function () {
+                $(".contenido").hide();
+                /*TEMPORAL*/
+                //Planilla
+                //if ($("#combito").val()=="REQ-0001" | $("#combito").val() == "REQ-0002" | $("#combito").val() == "REQ-0003" | $(this).val() == "REQ-0004" | $(this).val() == "REQ-0005" | $(this).val() == "REQ-0006") {
+                if (true) {
+                    $(".contenido").hide();
+                    $("#div_1").show();
+                }
+                //Fuera PLanilla
+                if ($("#combito").val() == 7 | $(this).val() == 8 | $(this).val() == 9) {
+                    $(".contenido").hide();
+                    $("#div_2").show();
+                }
+                //Otros
+                if ($("#combito").val() == 10 | $(this).val() == 11 | $(this).val() == 12) {
+                    $(".contenido").hide();
+                    $("#div_3").show();
+                }
+
+            });</script>
     <script language="javascript" type="text/javascript">
         $(document).ready(
                 function mostrar() {

@@ -204,7 +204,7 @@
                         <div class="row">
                             <div class="col-md-3 col-sm-3">
                                 <div class="service-content">
-                                    <a href="Generar_Dgp.jsp?text=1"><span class="service-icon"><i class="fa fa-briefcase img-circle wow flipInX"></i></span></a>
+                                    <a href="Generar_Dgp.jsp?text=7"><span class="service-icon"><i class="fa fa-briefcase img-circle wow flipInX"></i></span></a>
                                     <h3>Practicas Profesionales</h3>
                                     <p>
                                    
@@ -213,7 +213,7 @@
                             </div><!--/ End first service -->
                             <div class="col-md-3 col-sm-3">
                                 <div class="service-content">
-                                    <a href="Generar_Dgp.jsp?text=2"><span class="service-icon"><i class="fa fa-briefcase img-circle wow flipInX"></i></span></a>
+                                    <a href="Generar_Dgp.jsp?text=8"><span class="service-icon"><i class="fa fa-briefcase img-circle wow flipInX"></i></span></a>
                                     <h3>Practicas Pre Profesionales</h3>
                                     <p>
                                     
@@ -222,7 +222,7 @@
                             </div><!--/ End 2nd service -->
                             <div class="col-md-3 col-sm-3">
                                 <div class="service-content">
-                                    <a href=Generar_Dgp.jsp?text=1><span class="service-icon"><i class="fa fa-cogs img-circle wow flipInX"></i></span></a>
+                                    <a href="Generar_Dgp.jsp?text=9"><span class="service-icon"><i class="fa fa-cogs img-circle wow flipInX"></i></span></a>
                                     <h3>Convenio Laboral Juvenil</h3>
                                     <p>
                                        
@@ -231,7 +231,7 @@
                             </div><!--/ End 3rd service -->
                             <div class="col-md-3 col-sm-3">
                                 <div class="service-content">
-                                    <a href="Generar_Dgp.jsp?text=5"><span class="service-icon"><i class="fa fa-flask img-circle wow flipInX"></i></span></a>
+                                    <a href="Generar_Dgp.jsp?text=10"><span class="service-icon"><i class="fa fa-flask img-circle wow flipInX"></i></span></a>
                                     <h3>Locación de Servicios</h3>
                                     <p>
                                       
@@ -240,8 +240,8 @@
                             </div><!--/ End 4th service -->
                             <div class="col-md-3 col-sm-3">
                                 <div class="service-content last">
-                                    <a href="#."><span class="service-icon"><i class="fa fa-cogs img-circle wow flipInX"></i></span></a>
-                                    <h3>No Domiciliado <br>(Expositores extranjeros)</h3>
+                                    <a href="Generar_Dgp.jsp?text=11"><span class="service-icon"><i class="fa fa-cogs img-circle wow flipInX"></i></span></a>
+                                    <h3>No Domiciliado (Expositores extranjeros)</h3>
                                     <p>
                                       
                                     </p>

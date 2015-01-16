@@ -38,6 +38,26 @@
                     out.println("Requerimiento: Contrato Extranjero");
                     idreq = "REQ-0005";
                 }
+                if (text.equals("7")) {
+                    out.println("Requerimiento: Practicas Pre Profesionales");
+                    idreq = "REQ-0007";
+                }
+                if (text.equals("8")) {
+                    out.println("Requerimiento: Practicas Profesionales");
+                    idreq = "REQ-0008";
+                }
+                if (text.equals("9")) {
+                    out.println("Requerimiento: Convenio Laboral");
+                    idreq = "REQ-0009";
+                }
+                if (text.equals("10")) {
+                    out.println("Requerimiento: Locación de Servicios");
+                    idreq = "REQ-0010";
+                }
+                if (text.equals("11")) {
+                    out.println("Requerimiento: No Domiciliado");
+                    idreq = "REQ-0011";
+                }
                     %>
                 </h1></center>
         </div>
