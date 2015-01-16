@@ -159,6 +159,7 @@
 
                     <%
                         String num = request.getParameter("num");
+                        
                         if (d.getEs_dgp() != null) {
                             if (num.equals("0") & d.getEs_dgp().equals("0") & idrol.trim().equals("ROL-0006")) {
 
