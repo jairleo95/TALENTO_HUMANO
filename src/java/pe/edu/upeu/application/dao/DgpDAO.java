@@ -604,4 +604,32 @@ public class DgpDAO implements InterfaceDgpDAO {
 
     }
 
+    @Override
+    public void NO_NULL() {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("alter table RHTM_DGP MODIFY (CA_BONO_ALIMENTARIO not null, DE_BEV not null, ES_GEN_NU_CUENTA not null)");
+            cst.execute();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } finally {
+            this.conn.close();
+        }
+    }
+
+    @Override
+    public void NULL() {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("alter table RHTM_DGP MODIFY (CA_BONO_ALIMENTARIO null, DE_BEV null, ES_GEN_NU_CUENTA null)");
+            cst.execute();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } finally {
+            this.conn.close();
+        }
+    }
+
 }
