@@ -46,7 +46,6 @@ public class CImprimir extends HttpServlet {
                 }
                 getServletContext().setAttribute("lista", list);
                 response.sendRedirect("Vista/Contrato/Plantilla/Editor_Plantilla2.jsp");
-
             }
         } finally {
             out.close();

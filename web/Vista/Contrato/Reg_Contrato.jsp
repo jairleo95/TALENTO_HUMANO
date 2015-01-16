@@ -153,6 +153,8 @@
                         <fieldset id="fila-agregar">
                             <div class="row" >
                                 <input type="hidden" name="id_rol_ses" id="id_rol_s" value="<%=id_rol%>">
+                                <input type="hidden" name="TIPO_PLANILLA"  value="<%=d.getId_tipo_planilla()%>">
+                                <input type="hidden" name="HORARIO"  value="<%=d.getId_detalle_horario()%>">
                                 <section class="col col-2">
                                     <label class="select" id="titulo">Año:
                                         <select name="AÑO_ID" required="" class="input-group-sm">
@@ -396,7 +398,7 @@
                                                     Grupo_Ocupaciones g = new Grupo_Ocupaciones();
                                                     g = (Grupo_Ocupaciones) List_grup_ocu.get(gr);
                                             %>
-                                            <option value="<%=g.getCo_grupo_ocupacion()%>"><%=g.getDe_grupo_ocupacion()%></option>
+                                            <option value="<%=g.getId_grupo_ocupacion()%>"><%=g.getDe_grupo_ocupacion()%></option>
                                             <%}%>
                                         </select>
                                     </label>
@@ -521,6 +523,10 @@
                                         </select>
                                     </label>
                                 </section>
+                                <%
+                                    if (d.getId_tipo_planilla().trim().equals("TPL-0001")) {
+
+                                %>
                                 <section class="col col-4">
                                     <label class="select" id="titulo">Tipo Convenio:
                                         <select name="TIPO_CONVENIO" class="input-group-sm" required="">
@@ -531,6 +537,7 @@
                                         </select>
                                     </label>
                                 </section>
+                                <%}%>
                             </div>
                         </fieldset>
 
@@ -605,16 +612,19 @@
                             <input type="hidden" name="ESTADO" value="1" class="text-box" > 
                             <input type="hidden" value="<%=d.getId_trabajador()%>" name="IDDATOS_TRABAJADOR" class="text-box" >
                             <input type="hidden" value="ARE-0022" name="AREA_ID" class="text-box" >
+                           
                         </fieldset>
 
 
 
 
                         <footer>
+                           
                             <input type="hidden" name="opc"   value="REGISTRAR CONTRATO">
                             <button type="submit" id="submit" class="btn btn-primary">
                                 REGISTRAR CONTRATO
                             </button>
+                              <button type="button" class="btn btn-success ">Ver Horario</button>
                         </footer>
 
 

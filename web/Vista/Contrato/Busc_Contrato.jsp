@@ -112,6 +112,7 @@
                         <table     id="data" class="table">
                             <thead class="tab_cabe">
                                 <tr class="tr" >
+                                    <td>Nro</td>
                                     <td style="width: 230px;"><span title="NOM_APE">Nombres y Apellidos</span></td>
                                     <td ><span title="FEC_DESDE">Fecha Desde</span></td>
                                     <td ><span title="FEC_HASTA">Fecha Hasta</span></td>
@@ -159,8 +160,11 @@
                         $.post("../../ajax/Ajax_Contrato/Ajax_Contrato.jsp", $("#frm_filtro2").serialize(), function(objJson) {
                             b.empty();
                             var list = objJson.lista;
+                            var nuro=1;
                             for (var i = 0; i < list.length; i++) {
+                                nuro=nuro+i;
                                 b.append("<tr>");
+                                b.append("<td>"+nuro+"</td>");
                                 b.append("<td><p>" + list[i].nom_ape + "</p></td>");
                                 b.append("<td>" + list[i].fe_desde + "</td>");
                                 b.append("<td>" + list[i].fe_hasta + "</td>");
@@ -172,7 +176,7 @@
                                 b.append('<td><a class="btn-warming" href="../../contrato?opc=Detalle_Contractual&idtr=' + list[i].id_trabajador + '">Ver detalle</a> </td>');
                                 b.append('<td><input type="checkbox" id="imp" name="Imprimir" value="' + list[i].id_contrato + '"></td>');
                                 b.append("</tr>");
-
+                                nuro=1;
 
                             }
                             if (list.length !== 0) {

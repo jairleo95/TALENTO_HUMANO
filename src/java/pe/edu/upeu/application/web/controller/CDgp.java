@@ -122,7 +122,7 @@ public class CDgp extends HttpServlet {
         InterfaceDireccionDAO dir = new DireccionDAO();
         InterfaceSub_ModalidadDAO sub = new Sub_ModalidadDAO();
 
-        try {
+       // try {
             if (opc.equals("Listar_Req")) {
                 String id_tr = request.getParameter("idtr");
                 List<Map<String, ?>> lista = dgp.list_Req(id_tr);
@@ -343,6 +343,7 @@ public class CDgp extends HttpServlet {
                         int asig = dht.ASIGNACION_F(ID_TRABAJADOR);
                         // out.println(num);
                         response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp?num=" + asig);
+
                     } else if (num == 0 & idrol.trim().equals("ROL-0006") & dgp.LIST_ID_DGP(ID_DGP).get(0).getEs_dgp().equals("1")) {
                         String ida1 = anno.List_Anno_Max_Cont(idtr);
 
@@ -363,9 +364,9 @@ public class CDgp extends HttpServlet {
                         response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp?ida1=" + ida1);
                     }
                 } else {
-  
- response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&idgp=" + ID_DGP);
-            
+
+                    response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&idgp=" + ID_DGP);
+
                 }
 
                 //response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&idgp=" + ID_DGP);
@@ -441,10 +442,11 @@ public class CDgp extends HttpServlet {
                 response.sendRedirect("Vista/Dgp/List_req_incompl.jsp");
             }
 
-        } catch (Exception e) {
-            rpta.put("rpta", "-1");
-            rpta.put("mensaje", e.getMessage());
-        }
+        //} catch (Exception e) {
+            /*rpta.put("rpta", "-1");
+             rpta.put("mensaje", e.getMessage());*/
+         /*   out.print(e.getMessage());
+        }*/
         Gson gson = new Gson();
         out.print(gson.toJson(rpta));
         out.flush();
