@@ -34,20 +34,8 @@ public class V_Det_DGP {
     private String fe_creacion;
     private String us_modif;
     private String fe_modif;
-    private String ip_usuario;
-    private String no_req;
-    private Double ca_bono_alimentario;
-    private Double de_bev;
-    private Double ca_centro_costos;
-    private String de_antecedentes_policiales;
-    private String de_certificado_salud;
-    private String no_banco;
-    private String nu_cuenta;
-    private String nu_cuenta_banc;
-    private String es_gen_nu_cuenta;
-    private String no_banco_otros;
 
-    public V_Det_DGP(String id_dgp, String fe_desde, String fe_hasta, Double ca_sueldo, String de_dias_trabajo, String no_puesto, String id_puesto, String id_requerimiento, String id_trabajador, String co_ruc, String de_lugar_servicio, String de_servicio, String de_periodo_pago, String de_domicilio_fiscal, String de_subvencion, String de_horario_capacitacion, String de_horario_refrigerio, String de_dias_capacitacion, String es_dgp, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String ip_usuario, String no_req, Double ca_bono_alimentario, Double de_bev, Double ca_centro_costos, String de_antecedentes_policiales, String de_certificado_salud, String no_banco, String nu_cuenta, String nu_cuenta_banc, String es_gen_nu_cuenta, String no_banco_otros) {
+    public V_Det_DGP(String id_dgp, String fe_desde, String fe_hasta, Double ca_sueldo, String de_dias_trabajo, String no_puesto, String id_puesto, String id_requerimiento, String id_trabajador, String co_ruc, String de_lugar_servicio, String de_servicio, String de_periodo_pago, String de_domicilio_fiscal, String de_subvencion, String de_horario_capacitacion, String de_horario_refrigerio, String de_dias_capacitacion, String es_dgp, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String ip_usuario, String no_req, Double ca_bono_alimentario, Double de_bev, String de_antecedentes_policiales, String es_certificado_salud, String no_banco, String nu_cuenta, String nu_cuenta_banc, String es_gen_nu_cuenta, String no_banco_otros, String id_departamento, String id_direccion, String id_seccion, String id_area, String id_tipo_planilla, String ti_planilla,String id_detalle_horario) {
         this.id_dgp = id_dgp;
         this.fe_desde = fe_desde;
         this.fe_hasta = fe_hasta;
@@ -75,16 +63,22 @@ public class V_Det_DGP {
         this.no_req = no_req;
         this.ca_bono_alimentario = ca_bono_alimentario;
         this.de_bev = de_bev;
-        this.ca_centro_costos = ca_centro_costos;
         this.de_antecedentes_policiales = de_antecedentes_policiales;
-        this.de_certificado_salud = de_certificado_salud;
-        this.no_banco= no_banco;
-        this.nu_cuenta =  nu_cuenta;
+        this.es_certificado_salud = es_certificado_salud;
+        this.no_banco = no_banco;
+        this.nu_cuenta = nu_cuenta;
         this.nu_cuenta_banc = nu_cuenta_banc;
         this.es_gen_nu_cuenta = es_gen_nu_cuenta;
         this.no_banco_otros = no_banco_otros;
+        this.id_departamento = id_departamento;
+        this.id_direccion = id_direccion;
+        this.id_seccion = id_seccion;
+        this.id_area = id_area;
+        this.id_tipo_planilla = id_tipo_planilla;
+        this.ti_planilla = ti_planilla;
+        this.id_detalle_horario = id_detalle_horario;
     }
-    
+
     public V_Det_DGP() {
         this.id_dgp = "";
         this.fe_desde = "";
@@ -113,14 +107,46 @@ public class V_Det_DGP {
         this.no_req = "";
         this.ca_bono_alimentario = 0.0;
         this.de_bev = 0.0;
-        this.ca_centro_costos = 0.0;
         this.de_antecedentes_policiales = "";
-        this.de_certificado_salud = "";
-        this.no_banco ="";
-        this.nu_cuenta ="";
+        this.es_certificado_salud = "";
+        this.no_banco = "";
+        this.nu_cuenta = "";
         this.nu_cuenta_banc = "";
-        this.es_gen_nu_cuenta ="";
+        this.es_gen_nu_cuenta = "";
         this.no_banco_otros = "";
+        this.id_departamento = "";
+        this.id_direccion = "";
+        this.id_seccion = "";
+        this.id_area = "";
+        this.id_tipo_planilla = "";
+        this.ti_planilla = "";
+        this.id_detalle_horario = "";
+    }
+    private String ip_usuario;
+    private String no_req;
+    private Double ca_bono_alimentario;
+    private Double de_bev;
+    private String de_antecedentes_policiales;
+    private String es_certificado_salud;
+    private String no_banco;
+    private String nu_cuenta;
+    private String nu_cuenta_banc;
+    private String es_gen_nu_cuenta;
+    private String no_banco_otros;
+    private String id_departamento;
+    private String id_direccion;
+    private String id_seccion;
+    private String id_area;
+    private String id_tipo_planilla;
+    private String ti_planilla;
+    private String id_detalle_horario;
+
+    public String getId_detalle_horario() {
+        return id_detalle_horario;
+    }
+
+    public void setId_detalle_horario(String id_detalle_horario) {
+        this.id_detalle_horario = id_detalle_horario;
     }
 
     public String getId_dgp() {
@@ -339,14 +365,6 @@ public class V_Det_DGP {
         this.de_bev = de_bev;
     }
 
-    public Double getCa_centro_costos() {
-        return ca_centro_costos;
-    }
-
-    public void setCa_centro_costos(Double ca_centro_costos) {
-        this.ca_centro_costos = ca_centro_costos;
-    }
-
     public String getDe_antecedentes_policiales() {
         return de_antecedentes_policiales;
     }
@@ -355,13 +373,14 @@ public class V_Det_DGP {
         this.de_antecedentes_policiales = de_antecedentes_policiales;
     }
 
-    public String getDe_certificado_salud() {
-        return de_certificado_salud;
+    public String getEs_certificado_salud() {
+        return es_certificado_salud;
     }
 
-    public void setDe_certificado_salud(String de_certificado_salud) {
-        this.de_certificado_salud = de_certificado_salud;
+    public void setEs_certificado_salud(String es_certificado_salud) {
+        this.es_certificado_salud = es_certificado_salud;
     }
+
     public String getNo_banco() {
         return no_banco;
     }
@@ -393,12 +412,60 @@ public class V_Det_DGP {
     public void setEs_gen_nu_cuenta(String es_gen_nu_cuenta) {
         this.es_gen_nu_cuenta = es_gen_nu_cuenta;
     }
-    
+
     public String getNo_banco_otros() {
         return no_banco_otros;
     }
 
     public void setNo_banco_otros(String no_banco_otros) {
         this.no_banco_otros = no_banco_otros;
+    }
+
+    public String getId_departamento() {
+        return id_departamento;
+    }
+
+    public void setId_departamento(String id_departamento) {
+        this.id_departamento = id_departamento;
+    }
+
+    public String getId_direccion() {
+        return id_direccion;
+    }
+
+    public void setId_direccion(String id_direccion) {
+        this.id_direccion = id_direccion;
+    }
+
+    public String getId_seccion() {
+        return id_seccion;
+    }
+
+    public void setId_seccion(String id_seccion) {
+        this.id_seccion = id_seccion;
+    }
+
+    public String getId_area() {
+        return id_area;
+    }
+
+    public void setId_area(String id_area) {
+        this.id_area = id_area;
+    }
+
+    public String getId_tipo_planilla() {
+        return id_tipo_planilla;
+    }
+
+    public void setId_tipo_planilla(String id_tipo_planilla) {
+        this.id_tipo_planilla = id_tipo_planilla;
+    }
+
+    public String getTi_planilla() {
+        return ti_planilla;
+    }
+
+    public void setTi_planilla(String ti_planilla) {
+        this.ti_planilla = ti_planilla;
     }
 }
