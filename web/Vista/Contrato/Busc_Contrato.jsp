@@ -154,7 +154,6 @@
              });
              */
             $("#asa").hide();
-
             $("#btnbuscar").click(
                     function() {
                         $.post("../../ajax/Ajax_Contrato/Ajax_Contrato.jsp", $("#frm_filtro2").serialize(), function(objJson) {
@@ -177,14 +176,12 @@
                                 b.append('<td><input type="checkbox" id="imp" name="Imprimir" value="' + list[i].id_contrato + '"></td>');
                                 b.append("</tr>");
                                 nuro=1;
-
                             }
                             if (list.length !== 0) {
                                 $("#asa").show();
                             }
                             $("#btns").click(
                                     function() {
-
                                         $("#gg :checkbox").attr('checked', true);
                                         $('#imp').is(':checked');
                                         alerta(checkboxValues.push($("#imp").val()));
@@ -200,8 +197,6 @@
                                         });
                                      
                                     });
-
-
                         }
                         );
                     }
@@ -224,11 +219,8 @@
                         $(".tbodys").html(html);
                     }
             );
-
         }
         );
-
-
     </script>
 
 </html>
