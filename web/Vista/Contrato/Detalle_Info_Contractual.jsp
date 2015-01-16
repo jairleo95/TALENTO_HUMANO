@@ -155,32 +155,34 @@
                             <%} else {%>
                             <option value="<%=x.getId_anno()%>"><%=x.getNo_anno()%></option>
                             <%}
-                                }List_Anno_Id_Tr_DGP.clear();%>
+                                }
+                                List_Anno_Id_Tr_DGP.clear();%>
                         </select> </td><td><input type="hidden" name="idtr" value="<%=n.getId_trabajador()%>"></td>
                     <td><input name="opc" value="actualizar" type="submit"></td></tr>
             </table>
         </form>
         <form>
-            
-                <% for (int p = 0; p < List_id_Contrato_DGP.size(); p++) {%>
-                <table class="table table-hover table-striped  table-responsive">
+
+            <% for (int p = 0; p < List_id_Contrato_DGP.size(); p++) {%>
+            <table class="table table-hover table-striped  table-responsive">
                 <tr><td class="text-info table-bordered"><strong>Desde: </strong></td><td colspan="2"><%=n.getFe_desde()%></td><td class="text-info table-bordered" colspan="2"><strong>Hasta:</strong></td><td colspan="2"><%=n.getFe_hasta()%></td></tr>
                 <tr><td class="text-info table-bordered"><strong>Dirección:</strong></td><td colspan="6"><p><%=n.getNo_direccion()%> </p></td></tr>
                 <tr><td class="text-info table-bordered"><strong>Departamento:</strong></td><td colspan="6"><p><%=n.getNo_dep()%> </p></td></tr>
                 <tr><td class="text-info table-bordered"><strong>Area:</strong></td><td colspan="6"><p><%=n.getNo_area()%> </td></p></tr>
                 <tr><td class="text-info table-bordered"><strong>Sección:</strong></td><td colspan="6"><p><%=n.getNo_seccion()%> </p></td></tr>
-                <% 
-                if(Lis_c_c_id_contr.size()>0){
-                    Double cantidad = 0.0;
-                    for(int q=0;q<Lis_c_c_id_contr.size();q++){
-                        Centro_Costos cc=new Centro_Costos();
-                        cc=(Centro_Costos)Lis_c_c_id_contr.get(q);
-                        
-                        cantidad=Double.parseDouble(cc.getCa_porcentaje())+cantidad;
-    %>
-    <tr><td class="text-info table-bordered"><strong>Centro conto Nº <%=q+1%>:</strong></td><td colspan="2"><p><%=cc.getDe_centro_costo()%></p></td><td class="text-info table-bordered" colspan="2"><strong>Porcentaje</strong></td><td colspan="2"><p><%=cc.getCa_porcentaje()%> %</p> </td></tr><%}%>
-                <tr><td class="text-info table-bordered"><strong>Total Porcentaje:</strong></td><td colspan="6"><p><%=cantidad%> %</p></td></tr><%}else{%>
-                    <tr><td class="text-info table-bordered"><strong>Centro conto </strong></td><td colspan="6"><p>No tiene</p></td></tr><%}Lis_c_c_id_contr.clear();%>
+                <%
+                    if (Lis_c_c_id_contr.size() > 0) {
+                        Double cantidad = 0.0;
+                        for (int q = 0; q < Lis_c_c_id_contr.size(); q++) {
+                            Centro_Costos cc = new Centro_Costos();
+                            cc = (Centro_Costos) Lis_c_c_id_contr.get(q);
+
+                            cantidad = Double.parseDouble(cc.getCa_porcentaje()) + cantidad;
+                %>
+                <tr><td class="text-info table-bordered"><strong>Centro conto Nº <%=q + 1%>:</strong></td><td colspan="2"><p><%=cc.getDe_centro_costo()%></p></td><td class="text-info table-bordered" colspan="2"><strong>Porcentaje</strong></td><td colspan="2"><p><%=cc.getCa_porcentaje()%> %</p> </td></tr><%}%>
+                <tr><td class="text-info table-bordered"><strong>Total Porcentaje:</strong></td><td colspan="6"><p><%=cantidad%> %</p></td></tr><%} else {%>
+                <tr><td class="text-info table-bordered"><strong>Centro conto </strong></td><td colspan="6"><p>No tiene</p></td></tr><%}
+                        Lis_c_c_id_contr.clear();%>
                 <tr><td class="text-info table-bordered"><strong>Puesto:</strong></td><td colspan="6"><p><%=n.getNo_puesto()%></p></td> </tr>
                 <tr><td class="text-info table-bordered"><strong>Condición:</strong></td> <td colspan="6"><p><%
                     if (!n.getLi_condicion().equals(null)) {
@@ -221,30 +223,14 @@
                     <%}%>
                 </tr>
                 <tr><td class="text-info table-bordered"><strong>Modalidad:</strong></td>
-                    <%if (n.getId_modalidad() != null) {
-                            for (int l = 0; l < List_modalidad.size(); l++) {
-                                Modalidad mo = new Modalidad();
-                                mo = (Modalidad) List_modalidad.get(l);
-                                if (n.getId_modalidad().equals(mo.getId_modalidad())) {%>
-                    <td colspan="6"><%=mo.getDe_modalidad()%> </td>
-                    <%}
-                        }
-                    } else {%>
-                    <td colspan="6">NO DEFINIDO</td> 
-                    <%}%>
+
+                    <td colspan="6"><%=n.getDe_modalidad()%> </td>
+
                 </tr>
                 <tr><td class="text-info table-bordered"><strong>Sub_Modalidad:</strong></td>
-                    <%if (n.getId_sub_modalidad() != null) {
-                            for (int l = 0; l < Listar_Sub_mo.size(); l++) {
-                                Sub_Modalidad smo = new Sub_Modalidad();
-                                smo = (Sub_Modalidad) Listar_Sub_mo.get(l);
-                                if (n.getId_sub_modalidad().trim().equals(smo.getId_sub_modalidad().trim())) {%>
-                    <td colspan="6"><%=smo.getDe_sub_modalidad()%> </td>
-                    <%}
-                        }
-                    } else {%>
-                    <td colspan="6">NO TIENE</td> 
-                    <%}%>
+
+                    <td colspan="6"><%=n.getDe_sub_modalidad()%> </td>
+
                 </tr>
                 <tr><td class="text-info table-bordered"><strong>Tipo de Contratacion:</strong></td><td colspan="6"><%
                     if (n.getEs_ti_contratacion() != null) {
@@ -258,15 +244,9 @@
                         out.print("NO DEFINIDO");
                     }%> </td></tr> 
                 <tr><td class="text-info table-bordered"><strong>Codigo de Grupo de Ocupaciones:</strong></td>
-                    <%if (n.getCo_gr_ocupacion() != null) {
-                            for (int gr = 0; gr < List_grup_ocu.size(); gr++) {
-                                Grupo_Ocupaciones g = new Grupo_Ocupaciones();
-                                g = (Grupo_Ocupaciones) List_grup_ocu.get(gr);
-                                if (n.getCo_gr_ocupacion().trim().equals(g.getCo_grupo_ocupacion().trim())) {%>
-                    <td colspan="6"><%=g.getDe_grupo_ocupacion()%> </td>
-                    <%}
-                        }
-                    } else {%><td colspan="6"> NO DEFINIDO</td><%}%>
+
+                    <td colspan="6"><%=n.getDe_grupo_ocupacion()%> </td>
+
                 </tr>
                 <tr><td class="text-info table-bordered"> Fecha de Suscripcion:</td><td><%if (n.getFe_suscripcion() != null) {
                         out.print(n.getFe_suscripcion());
@@ -322,7 +302,7 @@
                     </td></tr>   
                 <tr><td class="text-info table-bordered"><strong>Tipo de Contrato:</strong></td><td colspan="6">
                         <%for (int k = 0; k < List_tipo_contrato.size(); k++) {
-                            
+
                                 if (n.getTi_contrato().trim().equals(k + 1 + "")) {
                                     out.println(List_tipo_contrato.get(k));
                                 }
@@ -442,6 +422,7 @@
         </form>
         <%}
                 }
-            }List_id_Contrato_DGP.clear();%>
+            }
+            List_id_Contrato_DGP.clear();%>
     </center>
 </body>
