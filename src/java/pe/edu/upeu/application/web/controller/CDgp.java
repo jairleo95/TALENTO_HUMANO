@@ -17,26 +17,46 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import pe.edu.upeu.application.dao.AnnoDAO;
 import pe.edu.upeu.application.dao.AreaDAO;
 import pe.edu.upeu.application.dao.AutorizacionDAO;
+import pe.edu.upeu.application.dao.Centro_CostoDAO;
+import pe.edu.upeu.application.dao.ContratoDAO;
+import pe.edu.upeu.application.dao.Datos_Hijo_TrabajadorDAO;
 import pe.edu.upeu.application.dao.Detalle_Centro_Costo_DAO;
 import pe.edu.upeu.application.dao.DgpDAO;
+import pe.edu.upeu.application.dao.DireccionDAO;
 import pe.edu.upeu.application.dao.DocumentoDAO;
+import pe.edu.upeu.application.dao.EmpleadoDAO;
+import pe.edu.upeu.application.dao.GrupoOcupacionesDAO;
 import pe.edu.upeu.application.dao.HorarioDAO;
 import pe.edu.upeu.application.dao.ListaDAO;
+import pe.edu.upeu.application.dao.PlantillaDAO;
 import pe.edu.upeu.application.dao.PuestoDAO;
 import pe.edu.upeu.application.dao.RequerimientoDAO;
+import pe.edu.upeu.application.dao.SeccionDAO;
+import pe.edu.upeu.application.dao.Sub_ModalidadDAO;
 import pe.edu.upeu.application.dao.TrabajadorDAO;
 import pe.edu.upeu.application.dao.UsuarioDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceAnnoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAreaDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceCentro_CostosDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceContratoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDatos_Hijo_Trabajador;
 import pe.edu.upeu.application.dao_imp.InterfaceDetalle_Centro_Costo;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceEmpleadoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceGrupo_ocupacionesDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceHorarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
+import pe.edu.upeu.application.dao_imp.InterfacePlantillaDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceSeccionDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceSub_ModalidadDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO;
 
@@ -67,6 +87,8 @@ public class CDgp extends HttpServlet {
         String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
         String idpuesto = (String) sesion.getAttribute("PUESTO_ID");
         String iduser = (String) sesion.getAttribute("IDUSER");
+        String idrol = (String) sesion.getAttribute("IDROL");
+
         String idtr = request.getParameter("idtr");
         // String iddepa = request.getParameter("iddep");
         String idreq = request.getParameter("idreq");
@@ -84,7 +106,23 @@ public class CDgp extends HttpServlet {
         InterfaceDocumentoDAO doc = new DocumentoDAO();
         InterfaceDetalle_Centro_Costo dcc = new Detalle_Centro_Costo_DAO();
         Map<String, Object> rpta = new HashMap<String, Object>();
-        try {
+        InterfaceAnnoDAO anno = new AnnoDAO();
+        InterfacePuestoDAO puesto = new PuestoDAO();
+        InterfaceContratoDAO con = new ContratoDAO();
+        InterfaceCentro_CostosDAO cc = new Centro_CostoDAO();
+        InterfaceDatos_Hijo_Trabajador dht = new Datos_Hijo_TrabajadorDAO();
+        InterfaceGrupo_ocupacionesDAO gr = new GrupoOcupacionesDAO();
+
+        InterfaceSeccionDAO seccion = new SeccionDAO();
+        InterfaceListaDAO l = new ListaDAO();
+        InterfaceSeccionDAO sec = new SeccionDAO();
+        InterfaceEmpleadoDAO emp = new EmpleadoDAO();
+        InterfacePlantillaDAO pl = new PlantillaDAO();
+        InterfaceUsuarioDAO usu = new UsuarioDAO();
+        InterfaceDireccionDAO dir = new DireccionDAO();
+        InterfaceSub_ModalidadDAO sub = new Sub_ModalidadDAO();
+
+       // try {
             if (opc.equals("Listar_Req")) {
                 String id_tr = request.getParameter("idtr");
                 List<Map<String, ?>> lista = dgp.list_Req(id_tr);
@@ -134,9 +172,15 @@ public class CDgp extends HttpServlet {
                 String ES_GEN_NU_CUENTA = (request.getParameter("GEN_NU_CUEN") == null) ? "0" : "1";
                 String NO_BANCO_OTROS = request.getParameter("BANCO_OTROS");
                 int NUMERO = Integer.parseInt(request.getParameter("numero"));
-
+                
+                if (ID_REQUERIMIENTO.equals("REQ-0007")) {
+                dgp.NULL();
+                }
+               
                 dgp.INSERT_DGP(null, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO, DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION, ES_DGP, iduser, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, CA_CENTRO_COSTOS, DE_ANTECEDENTES_POLICIALES, DE_CERTIFICADO_SALUD, DE_MONTO_HONORARIO, NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEN_NU_CUENTA, NO_BANCO_OTROS);
-
+                if (ID_REQUERIMIENTO.equals("REQ-0007")) {
+                dgp.NO_NULL();
+                }
                 //out.print(NU_CUENTA);
                 //out.print(NU_CUENTA_BANC);
                 String iddgp = dgp.MAX_ID_DGP();
@@ -201,6 +245,7 @@ public class CDgp extends HttpServlet {
                 // response.sendRedirect("Vista/Dgp/Horario/Reg_Horario.jsp?iddgp=" + iddgp + "&idtr=" + ID_TRABAJADOR + "&opc=rd");
 
             }
+            
             if (opc.equals("Reg_form")) {
 
                 /* TEMPORAL*/
@@ -212,6 +257,21 @@ public class CDgp extends HttpServlet {
                 }
                 if (idreq.equals("3")) {
                     idreq = "REQ-0003";
+                }
+                if (idreq.equals("7")) {
+                    idreq = "REQ-0007";
+                }
+                if (idreq.equals("8")) {
+                    idreq = "REQ-0008";
+                }
+                if (idreq.equals("9")) {
+                    idreq = "REQ-0009";
+                }
+                if (idreq.equals("10")) {
+                    idreq = "REQ-0010";
+                }
+                if (idreq.equals("11")) {
+                    idreq = "REQ-0011";
                 }
 
                 getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
@@ -265,7 +325,53 @@ public class CDgp extends HttpServlet {
                 int num = dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
                 getServletContext().setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
 
-                response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&idgp=" + ID_DGP);
+                if (idrol.trim().equals("ROL-0006")) {
+
+                    if (num == 0 & idrol.trim().equals("ROL-0006") & dgp.LIST_ID_DGP(ID_DGP).get(0).getEs_dgp().equals("0")) {
+
+                        String iddgp = request.getParameter("iddgp");
+
+                        getServletContext().setAttribute("List_Anno", anno.List_Anno());
+                        getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(iddgp));
+                        getServletContext().setAttribute("List_Puesto", puesto.List_Puesto());
+
+                        //getServletContext().setAttribute("LISTA_RH_SECCION", seccion.LISTA_RH_SECCION());
+                        getServletContext().setAttribute("List_anno_max", anno.List_anno_max());
+                        getServletContext().setAttribute("List_modalidad", con.List_modalidad());
+                        getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
+                        getServletContext().setAttribute("List_centro_costo", cc.List_centro_costo());
+                        //getServletContext().setAttribute("Listar_Direccion", dir.Listar_Direccion());
+                        getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
+                        int asig = dht.ASIGNACION_F(ID_TRABAJADOR);
+                        // out.println(num);
+                        response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp?num=" + asig);
+
+                    } else if (num == 0 & idrol.trim().equals("ROL-0006") & dgp.LIST_ID_DGP(ID_DGP).get(0).getEs_dgp().equals("1")) {
+                        String ida1 = anno.List_Anno_Max_Cont(idtr);
+
+                        getServletContext().setAttribute("List_id_Contrato_DGP", con.List_id_Contrato_DGP(idtr, ida1));
+                        getServletContext().setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr));
+                        getServletContext().setAttribute("List_Jefe", l.List_Jefe());
+                        getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
+                        //getServletContext().setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
+                        getServletContext().setAttribute("List_ID_User", usu.List_ID_User(iduser));
+                        getServletContext().setAttribute("List_Usuario", usu.List_Usuario());
+                        getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
+                        getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
+                        getServletContext().setAttribute("List_centro_costo", cc.List_centro_costo());
+                        getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
+                        getServletContext().setAttribute("List_modalidad", con.List_modalidad());
+                        getServletContext().setAttribute("Listar_Sub_mo", sub.Listar_Sub_mo());
+                        getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
+                        response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp?ida1=" + ida1);
+                    }
+                } else {
+
+                    response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&idgp=" + ID_DGP);
+
+                }
+
+                //response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&idgp=" + ID_DGP);
             }
             if (opc.equals("Seguimiento")) {
                 String iddgp = request.getParameter("iddgp");
@@ -338,10 +444,11 @@ public class CDgp extends HttpServlet {
                 response.sendRedirect("Vista/Dgp/List_req_incompl.jsp");
             }
 
-        } catch (Exception e) {
-            rpta.put("rpta", "-1");
-            rpta.put("mensaje", e.getMessage());
-        }
+        //} catch (Exception e) {
+            /*rpta.put("rpta", "-1");
+             rpta.put("mensaje", e.getMessage());*/
+         /*   out.print(e.getMessage());
+        }*/
         Gson gson = new Gson();
         out.print(gson.toJson(rpta));
         out.flush();

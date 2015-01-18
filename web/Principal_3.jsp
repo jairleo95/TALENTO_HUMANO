@@ -351,27 +351,11 @@
                         <a href="#"><i class="fa fa-lg fa-fw fa-windows"></i> <span class="menu-item-parent">Generar Requerimiento</span></a>
                         <ul>
                             <li>
-                                <a href="Vista/Dgp/Requerimiento.jsp" target="myframe"><i class="fa fa-lg fa-fw fa-file"></i> En Planilla</a>
+                                <a href="Vista/Dgp/Requerimiento.jsp?opc=Planilla" target="myframe"><i class="fa fa-lg fa-fw fa-file"></i> En Planilla</a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-lg fa-fw fa-file"></i> Fuera de Planilla</a>
-                                <ul>
-                                    <li>
-                                        <a href="#">Practicas Profesionales</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Practicas Pre Profesionales</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Convenio Laboral Juvenil</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Locación de Servicios</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">No Domiciliado (Expositores extranjeros)</a>
-                                    </li>
-                                </ul>
+                                <a href="Vista/Dgp/Requerimiento.jsp?opc=FueraDePlanilla" target="myframe"><i class="fa fa-lg fa-fw fa-file"></i> Fuera de Planilla</a>
+                                
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-lg fa-fw fa-file"></i>Anulación de Requerimiento</a>

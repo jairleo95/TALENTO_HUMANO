@@ -3,6 +3,8 @@
     Created on : 13/01/2015, 10:24:45 AM
     Author     : Alex
 --%>
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceFormato_HorarioDAO"%>
+<%@page import="pe.edu.upeu.application.dao.Formato_HorarioDAO"%>
 <%@page import="pe.edu.upeu.application.model.Formato_Horario"%>
 <jsp:useBean id="LISTAR_FORMATO_HORARIO" scope="application" class="java.util.ArrayList" />
 <!DOCTYPE html>
@@ -82,395 +84,41 @@
             <input type="hidden" name="NOMRBE"  value="<%=noFor%>"  >
 
             <div class="input-desp">
-                <%for (int i = 0; i < LISTAR_FORMATO_HORARIO.size(); i++) {
+                <% InterfaceFormato_HorarioDAO l = new Formato_HorarioDAO();
+                
+                for (int i = 0; i < l.List_D().length; i++) {
+              int g = 0;
+                    for (int j = 0; j < LISTAR_FORMATO_HORARIO.size(); j++) {
                                 Formato_Horario fh = new Formato_Horario();
-                                fh = (Formato_Horario) LISTAR_FORMATO_HORARIO.get(i);
-                            if(fh.getNo_dia().equals("lun")){
-                                i=i+1;
-                            
+                                fh = (Formato_Horario) LISTAR_FORMATO_HORARIO.get(j);  %>                                 
+                                
+                       <%     if(fh.getNo_dia().trim().equals(l.List_D()[i][0])){
+                            if (g == 0) {
                         %>
-                <table style="" id="show_1" class="cont_lunes"> 
-                    <tr><td align="center" colspan="2">Lunes</td></tr>
+                <table > 
+
+                    <tr><td align="center" colspan="2"><%=l.List_D()[i][1] %></td></tr>
                     
-                    <%  for (int j = 0; j < LISTAR_FORMATO_HORARIO.size(); j++) {
-                                Formato_Horario fh1 = new Formato_Horario();
-                                fh1 = (Formato_Horario) LISTAR_FORMATO_HORARIO.get(j);
-                    if(fh1.getNo_turno().trim().equals("T1")&fh1.getNo_dia().trim().equals("lun")){%>
-                    <tr class="tr-count">
-                        <td>T1 :</td>
-                        <td><input type="text"  id="HORA_DESDE_lun1" class="texto-h" value="<%=fh1.getHo_desde()%>"></td>      
-                        <td><input type="text"  id="HORA_HASTA_lun1" class="texto-h" value="<%=fh1.getHo_hasta()%>"></td>
+                    <% } 
+                    if(fh.getNo_turno().trim().equals("T"+(g+1)+"")){%>
+                    <tr >
+                        <td>T<%=g+1%>:</td>
+                        <td><b><input type="text"  disabled="" value="<%=fh.getHo_desde()%>"></b></td>      
+                        <td><b><input type="text"  disabled="" value="<%=fh.getHo_hasta()%>"></b></td>
                     </tr>         
-                    <%}else if (fh1.getNo_turno().trim().equals("T2")&fh1.getNo_dia().trim().equals("lun")){%>
-                    <tr class="tr-count">
-                        <td>T2 :</td>
-                        <td><input type="text"  id="HORA_DESDE_lun2" class="texto-h" value="<%=fh1.getHo_desde()%>"></td>           
-                        <td><input type="text" id="HORA_HASTA_lun2" class="texto-h" value="<%=fh1.getHo_hasta()%>"> </td>
-                    </tr>
-                    <%}
-                    }%>
+                    <%          }%>
+                    <% g++;
+                            }%>
+                    <%  }%>
                 </table>
-                    <%}
-                if(fh.getNo_dia().equals("mar")){
-                                i=i+1;
-                    %>
-                <table style="" id="show_1" class="cont_lunes"> 
-                    <tr><td align="center" colspan="2">Martes</td></tr>
+                    <%}%>
                     
-                    <%  for (int j = 0; j < LISTAR_FORMATO_HORARIO.size(); j++) {
-                                Formato_Horario fh1 = new Formato_Horario();
-                                fh1 = (Formato_Horario) LISTAR_FORMATO_HORARIO.get(j);
-                            if(fh1.getNo_turno().trim().equals("T1")&fh1.getNo_dia().trim().equals("mar")){%>
-                    <tr class="tr-count">
-                        <td>T1 :</td>
-                        <td><input type="text"  id="HORA_DESDE_lun1" class="texto-h" value="<%=fh1.getHo_desde()%>"></td>      
-                        <td><input type="text"  id="HORA_HASTA_lun1" class="texto-h" value="<%=fh1.getHo_hasta()%>"></td>
-                    </tr>         
-                    <%}else if (fh1.getNo_turno().trim().equals("T2")&fh1.getNo_dia().trim().equals("mar")){%>
-                    <tr class="tr-count">
-                        <td>T2 :</td>
-                        <td><input type="text"  id="HORA_DESDE_lun2" class="texto-h" value="<%=fh1.getHo_desde()%>"></td>           
-                        <td><input type="text" id="HORA_HASTA_lun2" class="texto-h" value="<%=fh1.getHo_hasta()%>"> </td>
-                    </tr>
-                    <%}
-                    }%>
-                </table>
-                <%}
-                if(fh.getNo_dia().equals("mie")){
-                                i=i+1;
-                %>
-                <table style="" id="show_1" class="cont_lunes"> 
-                    <tr><td align="center" colspan="2">Miercoles</td></tr>
-                    
-                    <%  for (int j = 0; j < LISTAR_FORMATO_HORARIO.size(); j++) {
-                                Formato_Horario fh1 = new Formato_Horario();
-                                fh1 = (Formato_Horario) LISTAR_FORMATO_HORARIO.get(j);
-                            if(fh1.getNo_turno().trim().equals("T1")&fh1.getNo_dia().trim().equals("mie")){%>
-                    <tr class="tr-count">
-                        <td>T1 :</td>
-                        <td><input type="text"  id="HORA_DESDE_lun1" class="texto-h" value="<%=fh1.getHo_desde()%>"></td>      
-                        <td><input type="text"  id="HORA_HASTA_lun1" class="texto-h" value="<%=fh1.getHo_hasta()%>"></td>
-                    </tr>         
-                    <%}else if (fh1.getNo_turno().trim().equals("T2")&fh1.getNo_dia().trim().equals("mie")){%>
-                    <tr class="tr-count">
-                        <td>T2 :</td>
-                        <td><input type="text"  id="HORA_DESDE_lun2" class="texto-h" value="<%=fh1.getHo_desde()%>"></td>           
-                        <td><input type="text" id="HORA_HASTA_lun2" class="texto-h" value="<%=fh1.getHo_hasta()%>"> </td>
-                    </tr>
-                    <%}
-                    }%>
-                </table>
-                <%}
-                if(fh.getNo_dia().equals("jue")){
-                                i=i+1;%>
-                <table style="" id="show_1" class="cont_lunes"> 
-                    <tr><td align="center" colspan="2">Jueves</td></tr>
-                    
-                    <%  for (int j = 0; j < LISTAR_FORMATO_HORARIO.size(); j++) {
-                                Formato_Horario fh1 = new Formato_Horario();
-                                fh1 = (Formato_Horario) LISTAR_FORMATO_HORARIO.get(j);
-                            if(fh1.getNo_turno().trim().equals("T1")&fh1.getNo_dia().trim().equals("jue")){%>
-                    <tr class="tr-count">
-                        <td>T1 :</td>
-                        <td><input type="text"  id="HORA_DESDE_lun1" class="texto-h" value="<%=fh1.getHo_desde()%>"></td>      
-                        <td><input type="text"  id="HORA_HASTA_lun1" class="texto-h" value="<%=fh1.getHo_hasta()%>"></td>
-                    </tr>         
-                    <%}else if (fh1.getNo_turno().trim().equals("T2")&fh1.getNo_dia().trim().equals("jue")){%>
-                    <tr class="tr-count">
-                        <td>T2 :</td>
-                        <td><input type="text"  id="HORA_DESDE_lun2" class="texto-h" value="<%=fh1.getHo_desde()%>"></td>           
-                        <td><input type="text" id="HORA_HASTA_lun2" class="texto-h" value="<%=fh1.getHo_hasta()%>"> </td>
-                    </tr>
-                    <%}
-                    }%>
-                </table>
-                <%}
-                if(fh.getNo_dia().equals("vie")){
-                                i=i+1;%>
-                <table style="" id="show_1" class="cont_lunes"> 
-                    <tr><td align="center" colspan="2">Viernes</td></tr>
-                    
-                    <%  for (int j = 0; j < LISTAR_FORMATO_HORARIO.size(); j++) {
-                                Formato_Horario fh1 = new Formato_Horario();
-                                fh1 = (Formato_Horario) LISTAR_FORMATO_HORARIO.get(j);
-                            if(fh1.getNo_turno().trim().equals("T1")&fh1.getNo_dia().trim().equals("vie")){%>
-                    <tr class="tr-count">
-                        <td>T1 :</td>
-                        <td><input type="text"  id="HORA_DESDE_lun1" class="texto-h" value="<%=fh1.getHo_desde()%>"></td>      
-                        <td><input type="text"  id="HORA_HASTA_lun1" class="texto-h" value="<%=fh1.getHo_hasta()%>"></td>
-                    </tr>         
-                    <%}else if (fh1.getNo_turno().trim().equals("T2")&fh1.getNo_dia().trim().equals("vie")){%>
-                    <tr class="tr-count">
-                        <td>T2 :</td>
-                        <td><input type="text"  id="HORA_DESDE_lun2" class="texto-h" value="<%=fh1.getHo_desde()%>"></td>           
-                        <td><input type="text" id="HORA_HASTA_lun2" class="texto-h" value="<%=fh1.getHo_hasta()%>"> </td>
-                    </tr>
-                    <%}
-                    }%>
-                </table>
-                <%}if(fh.getNo_dia().equals("dom")){
-                                i=i+1;%>
-                <table style="" id="show_1" class="cont_lunes"> 
-                    <tr><td align="center" colspan="2">Domingo</td></tr>
-                    
-                    <%  for (int j = 0; j < LISTAR_FORMATO_HORARIO.size(); j++) {
-                                Formato_Horario fh1 = new Formato_Horario();
-                                fh1 = (Formato_Horario) LISTAR_FORMATO_HORARIO.get(j);
-                            if(fh1.getNo_turno().trim().equals("T1")&fh1.getNo_dia().trim().equals("dom")){%>
-                    <tr class="tr-count">
-                        <td>T1 :</td>
-                        <td><input type="text"  id="HORA_DESDE_lun1" class="texto-h" value="<%=fh1.getHo_desde()%>"></td>      
-                        <td><input type="text"  id="HORA_HASTA_lun1" class="texto-h" value="<%=fh1.getHo_hasta()%>"></td>
-                    </tr>         
-                    <%}else if (fh1.getNo_turno().trim().equals("T2")&fh1.getNo_dia().trim().equals("dom")){%>
-                    <tr class="tr-count">
-                        <td>T2 :</td>
-                        <td><input type="text"  id="HORA_DESDE_lun2" class="texto-h" value="<%=fh1.getHo_desde()%>"></td>           
-                        <td><input type="text" id="HORA_HASTA_lun2" class="texto-h" value="<%=fh1.getHo_hasta()%>"> </td>
-                    </tr>
-                    <%}
-                    }%>
-                </table>
-                <%   } 
-                }%>
             </div>
         </form>
     </center>
-    <br><br>
+ 
 
 </body>
 
-<script language="javascript" type="text/javascript">
-    $(document).ready(
-            function mostrar() {
-                $(".cont_lunes").hide();
-                $(".cont_martes").hide();
-                $(".cont_miercoles").hide();
-                $(".cont_jueves").hide();
-                $(".cont_viernes").hide();
-                $(".cont_domingo").hide();
-
-                $("#lunes").change(
-                        function() {
-                            if ($(this).val() == 1) {
-                                $("#show_1").show();
-                            }
-                            if ($(this).val() == 2) {
-                                $(".cont_lunes").hide();
-                                $("#show_1 input").val("");
-                            }
-                        }
-                );
-
-                $("#martes").change(
-                        function() {
-                            if ($(this).val() == 1) {
-                                $("#show_2").show();
-                            }
-                            if ($(this).val() == 2) {
-                                $(".cont_martes").hide();
-                                $("#show_2 input").val("");
-                            }
-                        }
-                );
-                $("#miercoles").change(
-                        function() {
-                            if ($(this).val() == 1) {
-                                $("#show_3").show();
-                            }
-                            if ($(this).val() == 2) {
-                                $(".cont_miercoles").hide();
-                                $("#show_1 input").val("");
-                            }
-                        }
-                );
-                $("#jueves").change(
-                        function() {
-                            if ($(this).val() == 1) {
-                                $("#show_4").show();
-                            }
-                            if ($(this).val() == 2) {
-                                $(".cont_jueves").hide();
-                                $("#show_1 input").val("");
-                            }
-                        }
-                );
-                $("#viernes").change(
-                        function() {
-                            if ($(this).val() == 1) {
-                                $("#show_5").show();
-                            }
-                            if ($(this).val() == 2) {
-                                $(".cont_viernes").hide();
-                                $("#show_1 input").val("");
-                            }
-                        }
-                );
-                $("#domingo").change(
-                        function() {
-                            if ($(this).val() == 1) {
-                                $("#show_6").show();
-                            }
-                            if ($(this).val() == 2) {
-                                $(".cont_domingo").hide();
-                                $("#show_1 input").val("");
-                            }
-                        }
-                );
-
-
-            }
-
-    );
-
-</script>
-
-<script type="text/javascript">
-    $(function() {
-        var scntDiv = $('#show_1');
-        var i = $('#show_1 .texto-h').size() + 1;
-        var s = $('#show_1 .tr-count').size() + 1;
-
-        $('#addScnt').live('click', function() {
-
-            $('<tr><td>T' + s + ' :</td><td><input type="text"   name="HORA_DESDE_lun' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_lun' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_lun' + i + '" value="lun" ><input type="hidden" name="TURNO_lun' + i + '" value="T'+i-2+'" > <a href="#" id="remScnt">-</a></td></tr>').appendTo(scntDiv);
-
-            i++;
-            s++;
-            return false;
-        });
-        $('#remScnt').live('click', function() {
-            if (i > 2) {
-                $(this).parents('tr').remove();
-                //  $("#tr-d").remove();           
-                i--;
-                s--;
-            }
-            return false;
-        });
-    });
-
-    //MARTES
-    $(function() {
-        var scntDiv = $('#show_2');
-        var i = $('#show_2 .texto-h').size() + 1;
-        var s = $('#show_2 .tr-count_2').size() + 1;
-
-        $('#add_2').live('click', function() {
-
-            $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_mar' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_mar' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_mar' + i + '" value="mar" ><input type="hidden" name="USER_CREACION_mar' + i + '"> <a href="#" id="remove_2">-</a></td></tr>').appendTo(scntDiv);
-
-            i++;
-            s++;
-            return false;
-        });
-        $('#remove_2').live('click', function() {
-            if (i > 2) {
-                $(this).parents('tr').remove();
-                //  $("#tr-d").remove();           
-                i--;
-                s--;
-            }
-            return false;
-        });
-    });
-    //MIERCOLES
-    $(function() {
-        var scntDiv = $('#show_3');
-        var i = $('#show_3 .texto-h').size() + 1;
-        var s = $('#show_3 .tr-count_3').size() + 1;
-
-        $('#add_3').live('click', function() {
-
-            $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_mie' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_mie' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_mie' + i + '" value="mie" ><input type="hidden" name="USER_CREACION_mie' + i + '"> <a href="#" id="remove_3">-</a></td></tr>').appendTo(scntDiv);
-
-            i++;
-            s++;
-            return false;
-        });
-        $('#remove_3').live('click', function() {
-            if (i > 2) {
-                $(this).parents('tr').remove();
-                //  $("#tr-d").remove();           
-                i--;
-                s--;
-            }
-            return false;
-        });
-    });
-    //JUEVES
-    $(function() {
-        var scntDiv = $('#show_4');
-        var i = $('#show_4 .texto-h').size() + 1;
-        var s = $('#show_4 .tr-count_4').size() + 1;
-
-        $('#add_4').live('click', function() {
-
-            $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_jue' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_jue' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_jue' + i + '" value="jue" ><input type="hidden" name="USER_CREACION_jue' + i + '"> <a href="#" id="remove_4">-</a></td></tr>').appendTo(scntDiv);
-
-            i++;
-            s++;
-            return false;
-        });
-        $('#remove_4').live('click', function() {
-            if (i > 2) {
-                $(this).parents('tr').remove();
-                //  $("#tr-d").remove();           
-                i--;
-                s--;
-            }
-            return false;
-        });
-    });
-    //VIERNES
-    $(function() {
-        var scntDiv = $('#show_5');
-        var i = $('#show_5 .texto-h').size() + 1;
-        var s = $('#show_5 .tr-count_5').size() + 1;
-
-        $('#add_5').live('click', function() {
-
-            $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_vie' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_vie' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_vie' + i + '" value="vie" ><input type="hidden" name="USER_CREACION_vie' + i + '"> <a href="#" id="remove_5">-</a></td></tr>').appendTo(scntDiv);
-
-            i++;
-            s++;
-            return false;
-        });
-        $('#remove_5').live('click', function() {
-            if (i > 2) {
-                $(this).parents('tr').remove();
-                //  $("#tr-d").remove();           
-                i--;
-                s--;
-            }
-            return false;
-        });
-    });
-    //DOMINGO
-    $(function() {
-        var scntDiv = $('#show_6');
-        var i = $('#show_6 .texto-h').size() + 1;
-        var s = $('#show_6 .tr-count_6').size() + 1;
-
-        $('#add_6').live('click', function() {
-
-            $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_dom' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_dom' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_dom' + i + '" value="dom" ><input type="hidden" name="USER_CREACION_dom' + i + '"> <a href="#" id="remove_6">-</a></td></tr>').appendTo(scntDiv);
-
-            i++;
-            s++;
-            return false;
-        });
-        $('#remove_6').live('click', function() {
-            if (i > 2) {
-                $(this).parents('tr').remove();
-                //  $("#tr-d").remove();           
-                i--;
-                s--;
-            }
-            return false;
-        });
-    });
-
-</script>
 
 </html>

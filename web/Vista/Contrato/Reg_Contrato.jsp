@@ -74,8 +74,7 @@
             #titulo{
 
                 font-weight: bold;
-                color: black;
-                // color: blue;
+                color: #005cac;
             }
 
             .header{
@@ -119,7 +118,7 @@
             <header>
                 <!--<div   class="header" style=" width:100%; border:2px solid red">Detalle del Trabajador</div> -->
                 <div class="header">
-                    <span class="widget-icon"> <i class="fa fa-edit"></i> DGP</span>
+                    <span class="widget-icon"> <i class="fa fa-edit"></i> Ficha Contractual</span>
                 </div>
             </header>
 
@@ -154,9 +153,11 @@
                         <fieldset id="fila-agregar">
                             <div class="row" >
                                 <input type="hidden" name="id_rol_ses" id="id_rol_s" value="<%=id_rol%>">
+                                <input type="hidden" name="TIPO_PLANILLA"  value="<%=d.getId_tipo_planilla()%>">
+                                <input type="hidden" name="HORARIO"  value="<%=d.getId_detalle_horario()%>">
                                 <section class="col col-2">
                                     <label class="select" id="titulo">Año:
-                                        <select name="AÑO_ID" required="" class="input-lg">
+                                        <select name="AÑO_ID" required="" class="input-group-sm">
                                             <%  for (int i = 0; i < List_Anno.size(); i++) {
                                                     Anno a = new Anno();
                                                     for (int e = 0; e < List_anno_max.size(); e++) {
@@ -175,35 +176,35 @@
                                 <input type="hidden" name="IDDETALLE_DGP" value="<%=d.getId_dgp()%>" class="text-box" id="id_dgp" >
                                 <section class="col col-2">
                                     <label class="input" id="titulo">Desde: 
-                                        <input type="date" name="FEC_DESDE" value="<%=d.getFe_desde()%>" class="date input-lg" required="">
+                                        <input type="date" name="FEC_DESDE" value="<%=d.getFe_desde()%>" class="date input-group-sm" required="">
                                     </label>
                                 </section>
                                 <section class="col col-2">
                                     <label class="input" id="titulo">Hasta: 
-                                        <input type="date" name="FEC_HASTA" value="<%=d.getFe_hasta()%>" class="input-lg" required="">
+                                        <input type="date" name="FEC_HASTA" value="<%=d.getFe_hasta()%>" class="input-group-sm" required="">
                                     </label>
                                 </section>
                                 <section class="col col-5" id="titulo">
                                     <label class="select" id="titulo">Departamento:
-                                        <select name="DEPARTAMENTO_ID" class="input-lg" id="selec_dep">
+                                        <select name="DEPARTAMENTO_ID" class="input-group-sm" id="selec_dep">
                                             <option value="">[SELECCIONE]</option>
                                         </select>  </label>
                                 </section>
                                 <section class="col col-5" id="titulo">
                                     <label class="select" id="titulo">Area:
-                                        <select name="AREA_ID" class="input-lg" id="Selec_Area">
+                                        <select name="AREA_ID" class="input-group-sm" id="Selec_Area">
                                             <option value="">[SELECCIONE]</option>
                                         </select>  </label>
                                 </section>
                                 <section class="col col-5" id="titulo">
                                     <label class="select" id="titulo">Seccion:
-                                        <select name="SECCION_ID" class="input-lg" id="select_sec">
+                                        <select name="SECCION_ID" class="input-group-sm" id="select_sec">
                                             <option value="">[SELECCIONE]</option>
                                         </select>  </label>
                                 </section>
                                 <section class="col col-5" id="titulo">
                                     <label class="select" id="titulo">Puesto:
-                                        <select name="PUESTO_ID" required="" class="input-lg" id="pu_id_se">
+                                        <select name="PUESTO_ID" required="" class="input-group-sm" id="pu_id_se">
                                             <%  for (int j = 0; j < List_Puesto.size(); j++) {%>
                                             <%Puesto p = new Puesto();
                                                 p = (Puesto) List_Puesto.get(j);
@@ -219,7 +220,7 @@
                                 </section>
                                 <section class="col col-5">
                                     <label class="select" id="titulo">Condición:
-                                        <select name="CONDICION" class="input-lg" required="">
+                                        <select name="CONDICION" class="input-group-sm" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <option value="1">Contratado</option>
                                             <option value="2">Contratado Independiente</option>
@@ -239,39 +240,39 @@
 
                                 <section class="col col-2">
                                     <label class="input" id="titulo">Remuneración:
-                                        <input type="text" name="SUELDO" value="<%=d.getCa_sueldo()%>" class="input-lg">
+                                        <input type="text" name="SUELDO" value="<%=d.getCa_sueldo()%>" class="input-group-sm">
                                     </label>
                                 </section>
                                 <section class="col col-1">
                                     <label class="input" id="titulo">Reintegro:
-                                        <input type="text" name="REINTEGRO" value="0" class="input-lg">
+                                        <input type="text" name="REINTEGRO" value="0" class="input-group-sm">
                                     </label>
                                 </section>
                                 <section class="col col-2">
                                     <label class="input" id="titulo">Bono Alimentario:
-                                        <input type="text" name="BONO_ALIMENTO" value="<%=d.getCa_bono_alimentario()%>" class="input-lg">
+                                        <input type="text" name="BONO_ALIMENTO" value="<%=d.getCa_bono_alimentario()%>" class="input-group-sm">
                                     </label>
                                 </section>
                                 <section class="col col-1">
                                     <label class="input" id="titulo">BEV:
-                                        <input type="text" name="BEV" value="<%=d.getDe_bev()%>" class="input-lg">
+                                        <input type="text" name="BEV" value="<%=d.getDe_bev()%>" class="input-group-sm">
                                     </label>
                                 </section>
 
                                 <section class="col col-2">
                                     <label class="input" id="titulo">Sueldo Total:
-                                        <input type="text" name="TOTAL_SUELDO" value="<%=d.getCa_bono_alimentario() + d.getCa_sueldo() + d.getDe_bev()%>" class="input-lg">
+                                        <input type="text" name="TOTAL_SUELDO" value="<%=d.getCa_bono_alimentario() + d.getCa_sueldo() + d.getDe_bev()%>" class="input-group-sm">
                                     </label>
                                 </section>
                                 <section class="col col-2">
                                     <label class="input" id="titulo">Tipo Horas Pago:
-                                        <input type="text" name="TIPO_HORA_PAGO" value="0" class="input-lg">
+                                        <input type="text" name="TIPO_HORA_PAGO" value="0" class="input-group-sm">
                                     </label>
                                 </section>
                                 <%int total = Integer.parseInt(request.getParameter("num")); %>
                                 <section class="col col-2" >
                                     <label class="input" id="titulo">Asignanción Familiar:
-                                        <input type="text" name="ASIG_FAMILIAR" <%if (total == 0) {%>value="0" <%} else {%> value="75.0" <%}%> class="input-lg">
+                                        <input type="text" name="ASIG_FAMILIAR" <%if (total == 0) {%>value="0" <%} else {%> value="75.0" <%}%> class="input-group-sm">
                                     </label>
                                 </section>
                             </div>
@@ -348,7 +349,7 @@
                             <div class="row">
                                 <section class="col col-4">
                                     <label class="select" id="titulo">Regimen Laboral Mintra:
-                                        <select name="REG_LAB_MINTRA" class="input-lg" required="">
+                                        <select name="REG_LAB_MINTRA" class="input-group-sm" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <%for (int q = 0; q < list_reg_labo.size(); q++) {
                                                     Regimen_Laboral re = new Regimen_Laboral();
@@ -361,7 +362,7 @@
                                 </section>
                                 <section class="col col-4">
                                     <label class="select" id="titulo">Modalidad:
-                                        <select name="MODALIDAD" class="input-lg" id="select_mod" required="">
+                                        <select name="MODALIDAD" class="input-group-sm" id="select_mod" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <%for (int l = 0; l < List_modalidad.size(); l++) {
                                                     Modalidad mo = new Modalidad();
@@ -375,14 +376,14 @@
                                 </section>
                                 <section class="col col-4">
                                     <label class="select" id="titulo">SUB-Modalidad:
-                                        <select name="SUB_MODALIDAD" class="input-lg" id="select-sub-mod" required="">
+                                        <select name="SUB_MODALIDAD" class="input-group-sm" id="select-sub-mod" required="">
                                             <option value="">[SELECCIONE]</option>
                                         </select>
                                     </label>
                                 </section>
                                 <section class="col col-4">
                                     <label class="select" id="titulo">Tipo Contratación:
-                                        <select name="REG_LAB_MINTRA" class="input-lg" required="">
+                                        <select name="REG_LAB_MINTRA" class="input-group-sm" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <option value="I">INICIO</option>
                                             <option value="R">RENOVACION</option>
@@ -391,25 +392,25 @@
                                 </section>
                                 <section class="col col-4">
                                     <label class="select" id="titulo">Codigo Grupo de Ocupaciones:
-                                        <select name="CO_GRUPO_OCU" class="input-lg" required="">
+                                        <select name="CO_GRUPO_OCU" class="input-group-sm" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <%for (int gr = 0; gr < List_grup_ocu.size(); gr++) {
                                                     Grupo_Ocupaciones g = new Grupo_Ocupaciones();
                                                     g = (Grupo_Ocupaciones) List_grup_ocu.get(gr);
                                             %>
-                                            <option value="<%=g.getCo_grupo_ocupacion()%>"><%=g.getDe_grupo_ocupacion()%></option>
+                                            <option value="<%=g.getId_grupo_ocupacion()%>"><%=g.getDe_grupo_ocupacion()%></option>
                                             <%}%>
                                         </select>
                                     </label>
                                 </section>
                                 <section class="col col-4">
                                     <label class="input" id="titulo">Fecha de Suscripción: 
-                                        <input type="date" name="FECHA_SUSCRIPCION" placeholder="" class="input-lg" required="">
+                                        <input type="date" name="FECHA_SUSCRIPCION" placeholder="" class="input-group-sm" required="">
                                     </label>
                                 </section>
                                 <section class="col col-4">
                                     <label class="select" id="titulo">Tipo de Modeda:
-                                        <select name="TIPO_MONEDA" class="input-lg" required="">
+                                        <select name="TIPO_MONEDA" class="input-group-sm" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <option value="01">SOLES</option>
                                             <option value="02">DOLARES</option>
@@ -419,7 +420,7 @@
                                 </section>
                                 <section class="col col-4">
                                     <label class="select" id="titulo">Tipo Remuneracion Variable:
-                                        <select name="REM_VARIABLE" class="input-lg" required="">
+                                        <select name="REM_VARIABLE" class="input-group-sm" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <option value="1">DESTAJO</option>
                                             <option value="2">COMISIONES</option>
@@ -429,7 +430,7 @@
                                 </section>
                                 <section class="col col-4">
                                     <label class="select" id="titulo">Remuneración en Especie:
-                                        <select name="REM_ESPECIE" class="input-lg" required="">
+                                        <select name="REM_ESPECIE" class="input-group-sm" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <option value="1">SI</option>
                                             <option value="0">NO</option>
@@ -447,19 +448,19 @@
                                 </section>
                                 <section class="col col-2">
                                     <label class="input" id="titulo">Semanal:
-                                        <input type="text" name="HORAS_SEMANA" value="48" class="input-lg" required="">
+                                        <input type="text" name="HORAS_SEMANA" value="48" class="input-group-sm" required="">
                                     </label>
                                 </section>
                                 </section>
                                 <section class="col col-2">
                                     <label class="input" id="titulo">Mensual:
-                                        <input type="text" name="NRO_HORAS_LAB" value="192" class="input-lg" required="">
+                                        <input type="text" name="NRO_HORAS_LAB" value="192" class="input-group-sm" required="">
                                     </label>
                                 </section>
                                 </section>
                                 <section class="col col-2">
                                     <label class="input" id="titulo">Dias:
-                                        <input type="text" name="DIAS" value="30" class="input-lg" required="">
+                                        <input type="text" name="DIAS" value="30" class="input-group-sm" required="">
                                     </label>
                                 </section>
                             </div>
@@ -469,7 +470,7 @@
                             <div class="row">
                                 <section class="col col-4">
                                     <label class="select" id="titulo">Tipo Trabajador.
-                                        <select name="TIPO_TRABAJADOR" class="input-lg" required="">
+                                        <select name="TIPO_TRABAJADOR" class="input-group-sm" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <option value="1" selected>Empleado</option>
                                             <option value="2">Obrero</option>
@@ -478,7 +479,7 @@
                                 </section>
                                 <section class="col col-4">
                                     <label class="select" id="titulo">Regimen Laboral: 
-                                        <select name="REGIMEN_LABORAL" class="input-lg" required="">
+                                        <select name="REGIMEN_LABORAL" class="input-group-sm" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <option value="1" selected>Privado</option>
                                             <option value="2" selected>Público</option>
@@ -487,7 +488,7 @@
                                 </section>
                                 <section class="col col-4">
                                     <label class="select" id="titulo"> Discapacidad:
-                                        <select name="DISCAPACIDAD" class="input-lg" required="">
+                                        <select name="DISCAPACIDAD" class="input-group-sm" required="">
                                             <option value="">[SLECCIONE]</option>
                                             <option value="1" selected>No</option>
                                             <option value="2">Si</option>
@@ -496,7 +497,7 @@
                                 </section>
                                 <section class="col col-4">
                                     <label class="select" id="titulo">Regimen Pensionario:
-                                        <select name="REGIMEN_PENSIONARIO" class="input-lg" required="">
+                                        <select name="REGIMEN_PENSIONARIO" class="input-group-sm" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <option value="1" selected>Privado</option>
                                             <option value="2">SNP</option>
@@ -505,7 +506,7 @@
                                 </section>
                                 <section class="col col-4">
                                     <label class="select" id="titulo">Tipo Contrato::
-                                        <select name="TIPO_CONTRATO" class="input-lg" required="">
+                                        <select name="TIPO_CONTRATO" class="input-group-sm" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <option value="1">Necesidad de Mercado</option>
                                             <option value="2">Incremento de Actividad</option>
@@ -522,9 +523,13 @@
                                         </select>
                                     </label>
                                 </section>
+                                <%
+                                    if (d.getId_tipo_planilla().trim().equals("TPL-0001")) {
+
+                                %>
                                 <section class="col col-4">
                                     <label class="select" id="titulo">Tipo Convenio:
-                                        <select name="TIPO_CONVENIO" class="input-lg" required="">
+                                        <select name="TIPO_CONVENIO" class="input-group-sm" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <option value="1">CLJ</option>
                                             <option value="2">PPP</option>
@@ -532,15 +537,16 @@
                                         </select>
                                     </label>
                                 </section>
+                                <%}%>
                             </div>
                         </fieldset>
 
 
                         <fieldset>
                             <div class="">
-                                <section >
+                                <section class="col col-12">
                                     <label class="textarea" id="titulo">Observación:  </label>
-                                    <textarea  name="OBSERVACION"  class="input-lg" cols="35" rows="6"></textarea>
+                                    <textarea  name="OBSERVACION"  class="input-group-sm " cols="35" rows="6"></textarea>
                                 </section>
 
                             </div>
@@ -555,9 +561,9 @@
                         </fieldset>
                         <fieldset>
                             <div class="row">
-                                <section class="col col-4">
+                                <!--<section class="col col-4">
                                     <label class="select" id="titulo">Situación Actual:
-                                        <select name="ESTADO_CONTRATO" class="input-lg" required="">
+                                        <select name="ESTADO_CONTRATO" class="input-group-sm" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <option value="1" selected="" >Activo</option>
                                             <option value="2">Término de Contrato</option>
@@ -568,10 +574,10 @@
                                             <option value="7">Abandono de Trabajo</option>
                                         </select>
                                     </label>
-                                </section>
+                                </section>-->
                                 <section class="col col-4">
                                     <label class="select" id="titulo">Filial donde Trabaja:
-                                        <select name="FILIAL" class="input-lg" required="">
+                                        <select name="FILIAL" class="input-group-sm" required="">
                                             <option value="">[SELECCIONE]</option>
                                             <option value="1" selected >Lima</option>
                                             <option value="2">Juliaca</option>
@@ -579,24 +585,24 @@
                                         </select>
                                     </label>
                                 </section>
-                                <section class="col col-4">
+                                <!--<section class="col col-4">
                                     <label class="input" id="titulo">Fecha Cese: 
-                                        <input type="date" name="FEC_CESE"  class="input-lg" required="">
+                                        <input type="date" name="FEC_CESE"  class="input-group-sm" required="">
                                     </label>
-                                </section>
+                                </section>-->
                                 <section class="col col-4">
                                     <label class="input" id="titulo">RUC UPEU:
-                                        <input type="text" name="EMP_RUC" value="20138122256" maxlength="20" class="input-lg" required="">
+                                        <input type="text" name="EMP_RUC" value="20138122256" maxlength="20" class="input-group-sm" required="">
                                     </label>
                                 </section>
                                 <section class="col col-4">
                                     <label class="input" id="titulo">Cod. Sucursal:
-                                        <input type="text" name="SUCURSAL" value="-1" maxlength="3" class="input-lg" required="">
+                                        <input type="text" name="SUCURSAL" value="-1" maxlength="3" class="input-group-sm" required="">
                                     </label>
                                 </section>
                                 <section class="col col-4">
                                     <label class="input" id="titulo">MYPE:
-                                        <input type="text" name="MYPE" value="N"  maxlength="2" class="input-lg" required="">
+                                        <input type="text" name="MYPE" value="N"  maxlength="2" class="input-group-sm" required="">
                                     </label>
                                 </section>
                             </div>
@@ -606,17 +612,19 @@
                             <input type="hidden" name="ESTADO" value="1" class="text-box" > 
                             <input type="hidden" value="<%=d.getId_trabajador()%>" name="IDDATOS_TRABAJADOR" class="text-box" >
                             <input type="hidden" value="ARE-0022" name="AREA_ID" class="text-box" >
+                           
                         </fieldset>
 
 
 
 
                         <footer>
-                            <input type="submit" name="opc"  class="submit" value="REGISTRAR CONTRATO">
-                            <!--<input type="hidden" name="opc"  class="text-box" >
+                           
+                            <input type="hidden" name="opc"   value="REGISTRAR CONTRATO">
                             <button type="submit" id="submit" class="btn btn-primary">
                                 REGISTRAR CONTRATO
-                            </button>-->
+                            </button>
+                              <button type="button" class="btn btn-success ">Ver Horario</button>
                         </footer>
 
 
@@ -721,7 +729,7 @@
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-            $(document).ready(function() {
+            $(document).ready(function () {
 
                 pageSetUp();
 
@@ -820,7 +828,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -889,7 +897,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -941,7 +949,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -980,15 +988,15 @@
                         }
                     },
                     // Ajax form submition
-                    submitHandler: function(form) {
+                    submitHandler: function (form) {
                         $(form).ajaxSubmit({
-                            success: function() {
+                            success: function () {
                                 $("#comment-form").addClass('submited');
                             }
                         });
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1022,15 +1030,15 @@
                         }
                     },
                     // Ajax form submition
-                    submitHandler: function(form) {
+                    submitHandler: function (form) {
                         $(form).ajaxSubmit({
-                            success: function() {
+                            success: function () {
                                 $("#contact-form").addClass('submited');
                             }
                         });
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1059,7 +1067,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1104,7 +1112,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1114,7 +1122,7 @@
                     dateFormat: 'dd.mm.yy',
                     prevText: '<i class="fa fa-chevron-left"></i>',
                     nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function(selectedDate) {
+                    onSelect: function (selectedDate) {
                         $('#finishdate').datepicker('option', 'minDate', selectedDate);
                     }
                 });
@@ -1123,7 +1131,7 @@
                     dateFormat: 'dd.mm.yy',
                     prevText: '<i class="fa fa-chevron-left"></i>',
                     nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function(selectedDate) {
+                    onSelect: function (selectedDate) {
                         $('#startdate').datepicker('option', 'maxDate', selectedDate);
                     }
                 });
@@ -1140,7 +1148,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function() {
+            (function () {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
@@ -1153,7 +1161,7 @@
     </body>
     <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
     <script>
-            $(document).ready(function() {
+            $(document).ready(function () {
                 Listar_dep();
                 Listar_centro_costo();
                 var a = $("#select-sub-mod");
@@ -1161,10 +1169,10 @@
                 var d = $("#select_sec");
                 $.post("../../  ")
                 $("#select_mod").change(
-                        function() {
+                        function () {
                             // alert("?MODALIDAD="+$("#select_mod").val());
 
-                            $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function(objJson) {
+                            $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function (objJson) {
                                 a.empty();
                                 var list = objJson.lista;
                                 if (list.length !== 0) {
@@ -1175,10 +1183,10 @@
                             });
                         });
                 $("#selec_dep").change(
-                        function() {
+                        function () {
                             //alert("?MODALIDAD="+$("#select_mod").val());
 
-                            $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function(objJson) {
+                            $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function (objJson) {
                                 c.empty();
                                 var list = objJson.lista;
                                 c.append("<option value='' > [SELECCIONE] </option>");
@@ -1192,10 +1200,10 @@
                             });
                         });
                 $("#Selec_Area").change(
-                        function() {
+                        function () {
                             // alert("?MODALIDAD="+$("#select_mod").val());
 
-                            $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function(objJson) {
+                            $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function (objJson) {
                                 d.empty();
                                 var list = objJson.lista;
                                 d.append("<option value='' > [SELECCIONE] </option>");
@@ -1209,9 +1217,9 @@
                             });
                         });
                 $("#btn-registrar").click(
-                        function() {
+                        function () {
                             var pr = $("#select-proceso").val();
-                            $.post("../../paso", $("#form-paso").serialize(), function() {
+                            $.post("../../paso", $("#form-paso").serialize(), function () {
                                 Listar_Paso(pr);
                             });
                             $("#btn-registrar").val("Registrar Paso");
@@ -1224,7 +1232,7 @@
                 function Listar_dep() {
                     var s = $("#selec_dep");
 
-                    $.post("../../Direccion_Puesto", "opc=Listar", function(objJson) {
+                    $.post("../../Direccion_Puesto", "opc=Listar", function (objJson) {
                         s.empty();
                         var lista = objJson.lista;
                         s.append("<option value='' > [SELECCIONE] </option>");
@@ -1235,23 +1243,23 @@
                 }
                 function Listar_centro_costo() {
                     var x = $("#fila-agregar");
-                    $.post("../../centro_costo", "opc=Listar_centro_id&" + "id_dgp=" + $("#id_dgp").val(), function(objJson) {
+                    $.post("../../centro_costo", "opc=Listar_centro_id&" + "id_dgp=" + $("#id_dgp").val(), function (objJson) {
                         var lista = objJson.lista;
                         var numero = 1;
                         x.append('<div  class="row centro-costo_' + numero + '" >');
                         for (var i = 0; i < lista.length; i++) {
                             numero = numero + i;
                             if ($("#id_rol_s").val() == 'ROL-0001') {
-                                x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-lg"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section><div class="form-group"><button type="button" class="btn btn-primary" id="Seleccionar_centro" >Buscar</button></div>');
+                                x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section><div class="form-group"><button type="button" class="btn btn-primary" id="Seleccionar_centro" >Buscar</button></div>');
                             } else {
-                                x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-lg"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section>');
+                                x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section>');
                             }
 
                         }
                         x.append('</div><table><tr><td><td><input type="hidden" name="can_centro_cos" value="' + lista.length + '"></td></tr></table>');
-                       
+
                     });
-                    
+
                 }
                 /*function(){
                  if($("#id_rol_s").val()==''){

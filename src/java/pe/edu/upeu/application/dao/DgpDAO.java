@@ -392,14 +392,20 @@ public class DgpDAO implements InterfaceDgpDAO {
                 x.setNo_req(rs.getString("no_req"));
                 x.setCa_bono_alimentario(rs.getDouble("ca_bono_alimentario"));
                 x.setDe_bev(rs.getDouble("de_bev"));
-                //  x.setCa_centro_costos(rs.getDouble("ca_centro_costos"));
                 x.setDe_antecedentes_policiales(rs.getString("de_antecedentes_policiales"));
-                x.setDe_certificado_salud(rs.getString("es_certificado_salud"));
+                x.setEs_certificado_salud(rs.getString("es_certificado_salud"));
                 x.setNo_banco(rs.getString("no_banco"));
                 x.setNu_cuenta(rs.getString("nu_cuenta"));
                 x.setNu_cuenta_banc(rs.getString("nu_cuenta_banc"));
                 x.setEs_gen_nu_cuenta(rs.getString("es_gen_nu_cuenta"));
                 x.setNo_banco_otros(rs.getString("no_banco_otros"));
+                x.setId_departamento(rs.getString("id_departamento"));
+                x.setId_direccion(rs.getString("id_direccion"));
+                x.setId_seccion(rs.getString("id_seccion"));
+                x.setId_area(rs.getString("id_area"));
+                x.setId_tipo_planilla(rs.getString("id_tipo_planilla"));
+                x.setTi_planilla(rs.getString("ti_planilla"));
+                x.setId_detalle_horario(rs.getString("id_detalle_horario"));
                 Lista.add(x);
             }
         } catch (SQLException e) {
@@ -596,6 +602,34 @@ public class DgpDAO implements InterfaceDgpDAO {
         }
         return lista;
 
+    }
+
+    @Override
+    public void NO_NULL() {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("alter table RHTM_DGP MODIFY (CA_BONO_ALIMENTARIO not null, DE_BEV not null, ES_GEN_NU_CUENTA not null)");
+            cst.execute();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } finally {
+            this.conn.close();
+        }
+    }
+
+    @Override
+    public void NULL() {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("alter table RHTM_DGP MODIFY (CA_BONO_ALIMENTARIO null, DE_BEV null, ES_GEN_NU_CUENTA null)");
+            cst.execute();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } finally {
+            this.conn.close();
+        }
     }
 
 }

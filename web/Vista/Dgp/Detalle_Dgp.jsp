@@ -111,7 +111,7 @@
                     <%} else {%>
                     <tr><td class="text-info table-bordered">Antecedentes Policiales: </td><td>Si</td></tr>
                     <%}%> 
-                    <tr><td class="text-info table-bordered">Certificado de Salud: </td><td><%=d.getDe_certificado_salud()%></td></tr>
+                    <tr><td class="text-info table-bordered">Certificado de Salud: </td><td><%=d.getEs_certificado_salud()%></td></tr>
                     <tr style="color: red;"><td class="text-info table-bordered" >Sueldo Total : S/.</td><td><%=(d.getCa_sueldo() + d.getCa_bono_alimentario() + d.getDe_bev())%></td></tr>
                     <tr style="color: red;"><td class="text-info table-bordered" >Documentos Adjuntos : </td><td><a href="../../documento?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a></td></tr>
 
@@ -159,6 +159,7 @@
 
                     <%
                         String num = request.getParameter("num");
+                        
                         if (d.getEs_dgp() != null) {
                             if (num.equals("0") & d.getEs_dgp().equals("0") & idrol.trim().equals("ROL-0006")) {
 

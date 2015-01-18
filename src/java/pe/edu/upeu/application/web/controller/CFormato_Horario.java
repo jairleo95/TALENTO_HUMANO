@@ -57,6 +57,7 @@ public class CFormato_Horario extends HttpServlet {
         dia.add("mie");
         dia.add("jue");
         dia.add("vie");
+        dia.add("sab");
         dia.add("dom");
         try {
 
@@ -73,17 +74,6 @@ public class CFormato_Horario extends HttpServlet {
 
             }
 
-            if (opc.equals("Registrar_Formato")) {
-
-            }
-
-            if (opc.equals("Registrar_Formato")) {
-
-            }
-
-            if (opc.equals("Registrar_Formato")) {
-
-            }
             if (opc.equals("Listar_Formato")) {
                 getServletContext().setAttribute("List_Tipo_Horario", Ifh.Listar_Tipo_Horario());
                 response.sendRedirect("Vista/Formato_Horario/Detalle_Formato_Horario.jsp");
@@ -123,6 +113,7 @@ public class CFormato_Horario extends HttpServlet {
                     String ID_TIPO_HORARIO = request.getParameter("idth");
                     String nofor = request.getParameter("nofor");
                     getServletContext().setAttribute("LISTAR_FORMATO_HORARIO",Ifh.Listar_Formato_Horario(ID_TIPO_HORARIO) );
+                    getServletContext().setAttribute("List_D", Ifh.List_D());
                     response.sendRedirect("Vista/Formato_Horario/List_Formato_Horario.jsp?nofor="+ nofor +"");
                 }
             if (opc.equals("Listar_Tip_Horario")) {

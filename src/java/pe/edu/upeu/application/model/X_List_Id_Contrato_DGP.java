@@ -17,7 +17,6 @@ public class X_List_Id_Contrato_DGP {
     private String fe_hasta;
     private String fe_cese;
     private String id_func;
-    private String no_area;
     private String li_condicion;
     private Double ca_sueldo;
     private Double ca_reintegro;
@@ -40,13 +39,8 @@ public class X_List_Id_Contrato_DGP {
     private String fe_vacacio_fin;
     private String es_contrato;
     private String id_filial;
-    private String id_direccion;
-    private String id_departamento;
-    private String id_area;
-    private String id_seccion;
     private String id_puesto;
     private Double ca_bono_alimento;
-    private String es_jefe;
     private String li_tipo_convenio;
     private String es_firmo_contrato;
     private Double nu_contrato;
@@ -59,28 +53,35 @@ public class X_List_Id_Contrato_DGP {
     private String es_registro_huella;
     private String de_registro_sistem_remu;
     private String id_trabajador;
-    private String no_puesto;
-    private String no_seccion;
-    private String no_dep;
-    private String no_direccion;
-    private String ca_bev;
-    private String ca_sueldo_total;
+    private Double ca_sueldo_total;
     private String id_regimen_laboral;
-    private String id_modalidad;
     private String id_sub_modalidad;
-    private String es_ti_contratacion;
-    private String co_gr_ocupacion;
+    private String id_grupo_ocupacion;
     private String fe_suscripcion;
     private String co_ti_moneda;
+    private String co_ti_rem_variab;
+    private String de_remu_especie;
+    private String de_ruc_emp_trab;
+    private String co_sucursal;
+    private String de_mype;
+    private String es_ti_contratacion;
+    private Double ca_bev;
+    private String no_puesto;
+    private String no_seccion;
+    private String no_area;
+    private String no_dep;
+    private String no_direccion;
+    private String de_grupo_ocupacion;
+    private String de_sub_modalidad;
+    private String de_modalidad;
 
-    public X_List_Id_Contrato_DGP(String id_contrato, String id_dgp, String fe_desde, String fe_hasta, String fe_cese, String id_func, String no_area, String li_condicion, Double ca_sueldo, Double ca_reintegro, Double ca_asig_familiar, Double ho_semana, Double nu_horas_lab, Double dia_contrato, String ti_trabajador, String li_regimen_laboral, String es_discapacidad, String ti_contrato, String li_regimen_pensionario, String es_contrato_trabajador, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String us_ip, String fe_vacacio_ini, String fe_vacacio_fin, String es_contrato, String id_filial, String id_direccion, String id_departamento, String id_area, String id_seccion, String id_puesto, Double ca_bono_alimento, String es_jefe, String li_tipo_convenio, String es_firmo_contrato, Double nu_contrato, String de_observacion, String es_apoyo, String ti_hora_pago, String nu_documento, String id_anno, String es_entregar_doc_reglamentos, String es_registro_huella, String de_registro_sistem_remu, String id_trabajador, String no_puesto, String no_seccion, String no_dep, String no_direccion, String ca_bev,String ca_sueldo_total, String id_regimen_laboral, String id_modalidad, String id_sub_modalidad, String es_ti_contratacion, String co_gr_ocupacion , String fe_suscripcion, String co_ti_moneda) {
+    public X_List_Id_Contrato_DGP(String id_contrato, String id_dgp, String fe_desde, String fe_hasta, String fe_cese, String id_func, String li_condicion, Double ca_sueldo, Double ca_reintegro, Double ca_asig_familiar, Double ho_semana, Double nu_horas_lab, Double dia_contrato, String ti_trabajador, String li_regimen_laboral, String es_discapacidad, String ti_contrato, String li_regimen_pensionario, String es_contrato_trabajador, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String us_ip, String fe_vacacio_ini, String fe_vacacio_fin, String es_contrato, String id_filial, String id_puesto, Double ca_bono_alimento, String li_tipo_convenio, String es_firmo_contrato, Double nu_contrato, String de_observacion, String es_apoyo, String ti_hora_pago, String nu_documento, String id_anno, String es_entregar_doc_reglamentos, String es_registro_huella, String de_registro_sistem_remu, String id_trabajador, Double ca_sueldo_total, String id_regimen_laboral, String id_sub_modalidad, String id_grupo_ocupacion, String fe_suscripcion, String co_ti_moneda, String co_ti_rem_variab, String de_remu_especie, String de_ruc_emp_trab, String co_sucursal, String de_mype, String es_ti_contratacion, Double ca_bev, String no_puesto, String no_seccion, String no_area, String no_dep, String no_direccion, String de_grupo_ocupacion, String de_sub_modalidad, String de_modalidad) {
         this.id_contrato = id_contrato;
         this.id_dgp = id_dgp;
         this.fe_desde = fe_desde;
         this.fe_hasta = fe_hasta;
         this.fe_cese = fe_cese;
         this.id_func = id_func;
-        this.no_area = no_area;
         this.li_condicion = li_condicion;
         this.ca_sueldo = ca_sueldo;
         this.ca_reintegro = ca_reintegro;
@@ -103,13 +104,8 @@ public class X_List_Id_Contrato_DGP {
         this.fe_vacacio_fin = fe_vacacio_fin;
         this.es_contrato = es_contrato;
         this.id_filial = id_filial;
-        this.id_direccion = id_direccion;
-        this.id_departamento = id_departamento;
-        this.id_area = id_area;
-        this.id_seccion = id_seccion;
         this.id_puesto = id_puesto;
         this.ca_bono_alimento = ca_bono_alimento;
-        this.es_jefe = es_jefe;
         this.li_tipo_convenio = li_tipo_convenio;
         this.es_firmo_contrato = es_firmo_contrato;
         this.nu_contrato = nu_contrato;
@@ -122,19 +118,27 @@ public class X_List_Id_Contrato_DGP {
         this.es_registro_huella = es_registro_huella;
         this.de_registro_sistem_remu = de_registro_sistem_remu;
         this.id_trabajador = id_trabajador;
-        this.no_puesto = no_puesto;
-        this.no_seccion = no_seccion;
-        this.no_dep = no_dep;
-        this.no_direccion = no_direccion;
-        this.ca_bev = ca_bev;
         this.ca_sueldo_total = ca_sueldo_total;
         this.id_regimen_laboral = id_regimen_laboral;
-        this.id_modalidad = id_modalidad;
         this.id_sub_modalidad = id_sub_modalidad;
-        this.es_ti_contratacion = es_ti_contratacion;
-        this.co_gr_ocupacion = co_gr_ocupacion;
+        this.id_grupo_ocupacion = id_grupo_ocupacion;
         this.fe_suscripcion = fe_suscripcion;
         this.co_ti_moneda = co_ti_moneda;
+        this.co_ti_rem_variab = co_ti_rem_variab;
+        this.de_remu_especie = de_remu_especie;
+        this.de_ruc_emp_trab = de_ruc_emp_trab;
+        this.co_sucursal = co_sucursal;
+        this.de_mype = de_mype;
+        this.es_ti_contratacion = es_ti_contratacion;
+        this.ca_bev = ca_bev;
+        this.no_puesto = no_puesto;
+        this.no_seccion = no_seccion;
+        this.no_area = no_area;
+        this.no_dep = no_dep;
+        this.no_direccion = no_direccion;
+        this.de_grupo_ocupacion = de_grupo_ocupacion;
+        this.de_sub_modalidad = de_sub_modalidad;
+        this.de_modalidad = de_modalidad;
     }
 
     public X_List_Id_Contrato_DGP() {
@@ -144,7 +148,6 @@ public class X_List_Id_Contrato_DGP {
         this.fe_hasta = "";
         this.fe_cese = "";
         this.id_func = "";
-        this.no_area = "";
         this.li_condicion = "";
         this.ca_sueldo = 0.0;
         this.ca_reintegro = 0.0;
@@ -167,13 +170,8 @@ public class X_List_Id_Contrato_DGP {
         this.fe_vacacio_fin = "";
         this.es_contrato = "";
         this.id_filial = "";
-        this.id_direccion = "";
-        this.id_departamento = "";
-        this.id_area = "";
-        this.id_seccion = "";
         this.id_puesto = "";
         this.ca_bono_alimento = 0.0;
-        this.es_jefe = "";
         this.li_tipo_convenio = "";
         this.es_firmo_contrato = "";
         this.nu_contrato = 0.0;
@@ -186,51 +184,43 @@ public class X_List_Id_Contrato_DGP {
         this.es_registro_huella = "";
         this.de_registro_sistem_remu = "";
         this.id_trabajador = "";
-        this.no_puesto = "";
-        this.no_seccion = "";
-        this.no_dep = "";
-        this.no_direccion = "";
-        this.ca_bev = "";
-        this.ca_sueldo_total = "";
+        this.ca_sueldo_total = 0.0;
         this.id_regimen_laboral = "";
-        this.id_modalidad = "";
         this.id_sub_modalidad = "";
-        this.es_ti_contratacion = "";
-        this.co_gr_ocupacion = "";
+        this.id_grupo_ocupacion = "";
         this.fe_suscripcion = "";
         this.co_ti_moneda = "";
+        this.co_ti_rem_variab = "";
+        this.de_remu_especie = "";
+        this.de_ruc_emp_trab = "";
+        this.co_sucursal = "";
+        this.de_mype = "";
+        this.es_ti_contratacion = "";
+        this.ca_bev = 0.0;
+        this.no_puesto = "";
+        this.no_seccion = "";
+        this.no_area = "";
+        this.no_dep = "";
+        this.no_direccion = "";
+        this.de_grupo_ocupacion = "";
+        this.de_modalidad = "";
+        this.de_sub_modalidad = "";
     }
 
-    public String getNo_puesto() {
-        return no_puesto;
+    public String getDe_sub_modalidad() {
+        return de_sub_modalidad;
     }
 
-    public void setNo_puesto(String no_puesto) {
-        this.no_puesto = no_puesto;
+    public void setDe_sub_modalidad(String de_sub_modalidad) {
+        this.de_sub_modalidad = de_sub_modalidad;
     }
 
-    public String getNo_seccion() {
-        return no_seccion;
+    public String getDe_modalidad() {
+        return de_modalidad;
     }
 
-    public void setNo_seccion(String no_seccion) {
-        this.no_seccion = no_seccion;
-    }
-
-    public String getNo_dep() {
-        return no_dep;
-    }
-
-    public void setNo_dep(String no_dep) {
-        this.no_dep = no_dep;
-    }
-
-    public String getNo_direccion() {
-        return no_direccion;
-    }
-
-    public void setNo_direccion(String no_direccion) {
-        this.no_direccion = no_direccion;
+    public void setDe_modalidad(String de_modalidad) {
+        this.de_modalidad = de_modalidad;
     }
 
     public String getId_contrato() {
@@ -457,38 +447,6 @@ public class X_List_Id_Contrato_DGP {
         this.id_filial = id_filial;
     }
 
-    public String getId_direccion() {
-        return id_direccion;
-    }
-
-    public void setId_direccion(String id_direccion) {
-        this.id_direccion = id_direccion;
-    }
-
-    public String getId_departamento() {
-        return id_departamento;
-    }
-
-    public void setId_departamento(String id_departamento) {
-        this.id_departamento = id_departamento;
-    }
-
-    public String getId_area() {
-        return id_area;
-    }
-
-    public void setId_area(String id_area) {
-        this.id_area = id_area;
-    }
-
-    public String getId_seccion() {
-        return id_seccion;
-    }
-
-    public void setId_seccion(String id_seccion) {
-        this.id_seccion = id_seccion;
-    }
-
     public String getId_puesto() {
         return id_puesto;
     }
@@ -503,14 +461,6 @@ public class X_List_Id_Contrato_DGP {
 
     public void setCa_bono_alimento(Double ca_bono_alimento) {
         this.ca_bono_alimento = ca_bono_alimento;
-    }
-
-    public String getEs_jefe() {
-        return es_jefe;
-    }
-
-    public void setEs_jefe(String es_jefe) {
-        this.es_jefe = es_jefe;
     }
 
     public String getLi_tipo_convenio() {
@@ -609,27 +559,11 @@ public class X_List_Id_Contrato_DGP {
         this.id_trabajador = id_trabajador;
     }
 
-    public String getNo_area() {
-        return no_area;
-    }
-
-    public void setNo_area(String no_area) {
-        this.no_area = no_area;
-    }
-
-    public String getCa_bev() {
-        return ca_bev;
-    }
-
-    public void setCa_bev(String ca_bev) {
-        this.ca_bev = ca_bev;
-    }
-
-    public String getCa_sueldo_total() {
+    public Double getCa_sueldo_total() {
         return ca_sueldo_total;
     }
 
-    public void setCa_sueldo_total(String ca_sueldo_total) {
+    public void setCa_sueldo_total(Double ca_sueldo_total) {
         this.ca_sueldo_total = ca_sueldo_total;
     }
 
@@ -641,14 +575,6 @@ public class X_List_Id_Contrato_DGP {
         this.id_regimen_laboral = id_regimen_laboral;
     }
 
-    public String getId_modalidad() {
-        return id_modalidad;
-    }
-
-    public void setId_modalidad(String id_modalidad) {
-        this.id_modalidad = id_modalidad;
-    }
-
     public String getId_sub_modalidad() {
         return id_sub_modalidad;
     }
@@ -657,20 +583,12 @@ public class X_List_Id_Contrato_DGP {
         this.id_sub_modalidad = id_sub_modalidad;
     }
 
-    public String getEs_ti_contratacion() {
-        return es_ti_contratacion;
+    public String getId_grupo_ocupacion() {
+        return id_grupo_ocupacion;
     }
 
-    public void setEs_ti_contratacion(String es_ti_contratacion) {
-        this.es_ti_contratacion = es_ti_contratacion;
-    }
-
-    public String getCo_gr_ocupacion() {
-        return co_gr_ocupacion;
-    }
-
-    public void setCo_gr_ocupacion(String co_gr_ocupacion) {
-        this.co_gr_ocupacion = co_gr_ocupacion;
+    public void setId_grupo_ocupacion(String id_grupo_ocupacion) {
+        this.id_grupo_ocupacion = id_grupo_ocupacion;
     }
 
     public String getFe_suscripcion() {
@@ -688,5 +606,109 @@ public class X_List_Id_Contrato_DGP {
     public void setCo_ti_moneda(String co_ti_moneda) {
         this.co_ti_moneda = co_ti_moneda;
     }
-    
+
+    public String getCo_ti_rem_variab() {
+        return co_ti_rem_variab;
+    }
+
+    public void setCo_ti_rem_variab(String co_ti_rem_variab) {
+        this.co_ti_rem_variab = co_ti_rem_variab;
+    }
+
+    public String getDe_remu_especie() {
+        return de_remu_especie;
+    }
+
+    public void setDe_remu_especie(String de_remu_especie) {
+        this.de_remu_especie = de_remu_especie;
+    }
+
+    public String getDe_ruc_emp_trab() {
+        return de_ruc_emp_trab;
+    }
+
+    public void setDe_ruc_emp_trab(String de_ruc_emp_trab) {
+        this.de_ruc_emp_trab = de_ruc_emp_trab;
+    }
+
+    public String getCo_sucursal() {
+        return co_sucursal;
+    }
+
+    public void setCo_sucursal(String co_sucursal) {
+        this.co_sucursal = co_sucursal;
+    }
+
+    public String getDe_mype() {
+        return de_mype;
+    }
+
+    public void setDe_mype(String de_mype) {
+        this.de_mype = de_mype;
+    }
+
+    public String getEs_ti_contratacion() {
+        return es_ti_contratacion;
+    }
+
+    public void setEs_ti_contratacion(String es_ti_contratacion) {
+        this.es_ti_contratacion = es_ti_contratacion;
+    }
+
+    public Double getCa_bev() {
+        return ca_bev;
+    }
+
+    public void setCa_bev(Double ca_bev) {
+        this.ca_bev = ca_bev;
+    }
+
+    public String getNo_puesto() {
+        return no_puesto;
+    }
+
+    public void setNo_puesto(String no_puesto) {
+        this.no_puesto = no_puesto;
+    }
+
+    public String getNo_seccion() {
+        return no_seccion;
+    }
+
+    public void setNo_seccion(String no_seccion) {
+        this.no_seccion = no_seccion;
+    }
+
+    public String getNo_area() {
+        return no_area;
+    }
+
+    public void setNo_area(String no_area) {
+        this.no_area = no_area;
+    }
+
+    public String getNo_dep() {
+        return no_dep;
+    }
+
+    public void setNo_dep(String no_dep) {
+        this.no_dep = no_dep;
+    }
+
+    public String getNo_direccion() {
+        return no_direccion;
+    }
+
+    public void setNo_direccion(String no_direccion) {
+        this.no_direccion = no_direccion;
+    }
+
+    public String getDe_grupo_ocupacion() {
+        return de_grupo_ocupacion;
+    }
+
+    public void setDe_grupo_ocupacion(String de_grupo_ocupacion) {
+        this.de_grupo_ocupacion = de_grupo_ocupacion;
+    }
+
 }

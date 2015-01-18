@@ -99,6 +99,10 @@
         <servlet-name>CModulo</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CModulo</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CImprimir</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CImprimir</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
         <url-pattern>/trabajador</url-pattern>
@@ -194,6 +198,10 @@
     <servlet-mapping>
         <servlet-name>CModulo</servlet-name>
         <url-pattern>/modulo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CImprimir</servlet-name>
+        <url-pattern>/Imprimir</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>300</session-timeout>

@@ -148,11 +148,10 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
 
     @Override
     public List<Map<String, ?>> List_Formato_h(String id_th) {
-
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select  *  from RHTR_FORMATO_HORARIO  where ID_TIPO_HORARIO='TIH-000001' order by ID_FORMATO_HORARIO asc ";
+            String sql = "select  *  from RHTR_FORMATO_HORARIO  where ID_TIPO_HORARIO='"+id_th+"' order by ID_FORMATO_HORARIO asc ";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -174,6 +173,33 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
             }
         }
         return Lista;
+    }
+
+    @Override
+    public String[][] List_D() {
+        String[][] l = new String[7][2];
+        l[0][0] = "lun";
+        l[0][1] = "Lunes";
+
+        l[1][0] = "mar";
+        l[1][1] = "Martes";
+
+        l[2][0] = "mie";
+        l[2][1] = "Miercoles";
+
+        l[3][0] = "jue";
+        l[3][1] = "Jueves";
+
+        l[4][0] = "vie";
+        l[4][1] = "Viernes";
+
+        l[5][0] = "sab";
+        l[5][1] = "Sabado";
+
+        l[6][0] = "dom";
+        l[6][1] = "Domingo";
+
+        return l;
     }
 
 }

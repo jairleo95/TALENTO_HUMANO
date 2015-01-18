@@ -99,8 +99,8 @@ public class CHorario extends HttpServlet {
                     String hora_hasta = request.getParameter("HORA_HASTA_" + dia.get(i) + j);
                     String d = request.getParameter("DIA_" + dia.get(i) + j);
 
-                    if (hora_desde != null&d!=null&hora_hasta!=null) {
-                        if (!hora_hasta.equals("")&!hora_desde.equals("")&!d.equals("")) {
+                    if (hora_desde != null & d != null & hora_hasta != null) {
+                        if (!hora_hasta.equals("") & !hora_desde.equals("") & !d.equals("")) {
                             IHor.Insert_Horario(null,
                                     hora_desde,
                                     hora_hasta,
@@ -115,8 +115,8 @@ public class CHorario extends HttpServlet {
 
             getServletContext().setAttribute("List_V_Horario", IHor.List_V_Horario(ID_DGP));
             getServletContext().setAttribute("List_H", Ilis.List_H());
-out.print(ID_DGP);
-           response.sendRedirect("Vista/Dgp/Horario/Detalle_Horario.jsp?iddgp=" + ID_DGP + "&idtr=" + ID_TRABAJJADOR + "&P2=1");
+//out.print(ID_DGP);
+            response.sendRedirect("Vista/Dgp/Horario/Detalle_Horario.jsp?iddgp=" + ID_DGP + "&idtr=" + ID_TRABAJJADOR + "&P2=1");
         }
 
         if (opc.equals("Listar")) {

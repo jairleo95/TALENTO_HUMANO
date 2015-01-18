@@ -70,14 +70,8 @@
 
     </head>
     <body>
-        <!--<select id="horario" >
-            <option value="0">Editable</option>
-            <option value="1">Horario Tiempo Completo</option>
-        </select>-->
         <b><label><%=noFor%></label></b>
-        <br> 
-        <br> 
-        <br> 
+
     <center>
         <form class="form" action="../../formato_horario" method="POST"> 
             <table class="tab-horario">
@@ -123,6 +117,13 @@
                         </select>
 
                     </td>
+                    <td><label class="title">SABADO</label>
+                        <select id="sabado" >
+
+                            <option value="1">Habilitado</option>
+                            <option value="2" selected="">Deshabilitado</option>
+                        </select>
+                    </td>
                     <td><label class="title">DOMINGO</label>
                         <select id="domingo" >
 
@@ -135,7 +136,7 @@
 
             <br>
             <br>
-            <input type="text" name="IDTIPOHORARIO"  value="<%=idth%>"  >
+            <input type="hidden" name="IDTIPOHORARIO"  value="<%=idth%>"  >
             <input type="hidden" name="NOMRBE"  value="<%=noFor%>"  >
             <input type="hidden" name="ESTADO"  value="1"  >
 
@@ -153,11 +154,11 @@
                     <tr class="tr-count">
                         <td>T2 :</td>
                         <td><input type="text" name="HORA_DESDE_lun2" id="HORA_DESDE_lun2" class="texto-h" ></td>           
-                        <td ><input type="text" name="HORA_HASTA_lun2" id="HORA_HASTA_lun2" class="texto-h" > <a href="#" id="remScnt">-</a></td>
+                        <td ><input type="text" name="HORA_HASTA_lun2" id="HORA_HASTA_lun2" class="texto-h" > <a href="#" id="remove_1">-</a></td>
                     </tr>      
                     <input type="hidden" name="DIA_lun2" value="lun" >
                     <input type="hidden" name="TURNO_lun2" value="T2" > 
-                    <tr><td colspan="2"><a href="#" id="addScnt">+</a></td></tr>
+                    <tr><td colspan="2"><a href="#" id="add_1">+</a></td></tr>
                 </table>
 
                 <table id="show_2" class="cont_martes">     
@@ -187,7 +188,7 @@
                         <td><input type="text" name="HORA_HASTA_mie1" id="HORA_HASTA_mier1" class="texto-h" ></td></tr>         
                     <input type="hidden" name="DIA_mie1" value="mie" class="texto-h" >                    
                     <input type="hidden" name="TURNO_mie1" value="T1" >
-                   
+
                     <tr class="tr-count_3">
                         <td>T2 :</td>
                         <td><input type="text" name="HORA_DESDE_mie2" id="HORA_DESDE_mier2" class="texto-h" ></td>           
@@ -227,20 +228,31 @@
                     <input type="hidden" name="TURNO_vie1" value="T1" >
                     <tr><td colspan="2"><a href="#" id="add_5">+</a></td></tr>
                 </table>
-                
-                <table id="show_6" class="cont_domingo" >
+
+                <table id="show_6" class="cont_sabado">     
+                    <tr><td align="center" colspan="2">Sabado</td></tr>
+                    <tr class="tr-count_6">
+                        <td>T2 :</td><td>
+                            <input type="text" name="HORA_DESDE_sab1" id="HORA_DESDE_sab2" class="texto-h" ></td>          
+                        <td><input type="text" name="HORA_HASTA_sab1" id="HORA_HASTA_sab2" class="texto-h" ></tr>         
+                    <input type="hidden" name="DIA_sab1" value="sab" class="texto-h" >
+                    <input type="hidden" name="TURNO_sab1" value="T1" >
+                    <tr><td colspan="2"><a href="#" id="add_6">+</a></td></tr>
+                </table>
+
+                <table id="show_7" class="cont_domingo" >
                     <tr><td align="center" colspan="2">Domingo</td></tr>
-                    <tr class="tr-count_6"><td>T1 :</td><td><input type="text" name="HORA_DESDE_dom1"  id="HORA_DESDE_dom1" class="texto-h" ></td>
+                    <tr class="tr-count_7"><td>T1 :</td><td><input type="text" name="HORA_DESDE_dom1"  id="HORA_DESDE_dom1" class="texto-h" ></td>
                         <td><input type="text" name="HORA_HASTA_dom1"  id="HORA_HASTA_dom1" class="texto-h" ></td></tr>         
                     <input type="hidden" name="DIA_dom1" value="dom" class="texto-h" >                    
                     <input type="hidden" name="TURNO_dom1" value="T1" >
 
 
                     <tr class="tr-count_6"><td>T2 :</td><td><input type="text" name="HORA_DESDE_dom2"  id="HORA_DESDE_dom2" class="texto-h" ></td>
-                        <td><input type="text" name="HORA_HASTA_dom2"  id="HORA_HASTA_dom2" class="texto-h" ><a href="#" id="remove_6">-</a></td></tr>         
+                        <td><input type="text" name="HORA_HASTA_dom2"  id="HORA_HASTA_dom2" class="texto-h" ><a href="#" id="remove_7">-</a></td></tr>         
                     <input type="hidden" name="DIA_dom2" value="dom" class="texto-h" >                    
                     <input type="hidden" name="TURNO_dom2" value="T2" >
-                    <tr><td colspan="2"><a href="#" id="add_6">+</a></td></tr>
+                    <tr><td colspan="2"><a href="#" id="add_7">+</a></td></tr>
                 </table>
             </div>
             <br>
@@ -259,6 +271,7 @@
                 $(".cont_miercoles").hide();
                 $(".cont_jueves").hide();
                 $(".cont_viernes").hide();
+                $(".cont_sabado").hide();
                 $(".cont_domingo").hide();
 
                 $("#lunes").change(
@@ -317,13 +330,24 @@
                             }
                         }
                 );
-                $("#domingo").change(
+                $("#sabado").change(
                         function() {
                             if ($(this).val() == 1) {
                                 $("#show_6").show();
                             }
                             if ($(this).val() == 2) {
                                 $(".cont_domingo").hide();
+                                $("#show_1 input").val("");
+                            }
+                        }
+                );
+                $("#domingo").change(
+                        function() {
+                            if ($(this).val() == 1) {
+                                $("#show_7").show();
+                            }
+                            if ($(this).val() == 2) {
+                                $(".cont_sabado").hide();
                                 $("#show_1 input").val("");
                             }
                         }
@@ -335,88 +359,21 @@
     );
 
 </script>
-<script  language="javascript" type="text/javascript">
-    $(document).ready(function() {
-        $("#horario").change(
-                function() {
-                    if ($(this).val() == 0) {
-                        $(".cont_lunes").hide();
-                        $(".cont_martes").hide();
-                        $(".cont_miercoles").hide();
-                        $(".cont_jueves").hide();
-                        $(".cont_viernes").hide();
-                        $(".cont_domingo").hide();
-
-                    }
-                    if ($(this).val() == 1) {
-                        $("#show_1").show();
-                        $("#show_2").show();
-                        $("#show_3").show();
-                        $("#show_4").show();
-                        $("#show_5").show();
-                        $("#show_6").show();
-
-
-                        $("#lunes").val(1);
-                        $("#martes").val(1);
-                        $("#miercoles").val(1);
-                        $("#jueves").val(1);
-                        $("#viernes").val(1);
-                        $("#sabado").val(1);
-                        $("#domingo").val(1);
-
-                        document.getElementById("HORA_DESDE_lun1").value = "7:50";
-                        document.getElementById("HORA_HASTA_lun1").value = "12:30";
-                        document.getElementById("HORA_DESDE_lun2").value = "13:30";
-                        document.getElementById("HORA_HASTA_lun2").value = "17:30";
-
-                        document.getElementById("HORA_DESDE_mar1").value = "7:50";
-                        document.getElementById("HORA_HASTA_mar1").value = "12:30";
-                        document.getElementById("HORA_DESDE_mar2").value = "13:30";
-                        document.getElementById("HORA_HASTA_mar2").value = "17:30";
-
-                        document.getElementById("HORA_DESDE_mier1").value = "7:50";
-                        document.getElementById("HORA_HASTA_mier1").value = "12:30";
-                        document.getElementById("HORA_DESDE_mier2").value = "13:30";
-                        document.getElementById("HORA_HASTA_mier2").value = "17:30";
-
-                        document.getElementById("HORA_DESDE_jue1").value = "7:50";
-                        document.getElementById("HORA_HASTA_jue1").value = "12:30";
-                        document.getElementById("HORA_DESDE_jue2").value = "13:30";
-                        document.getElementById("HORA_HASTA_jue2").value = "17:30";
-
-                        document.getElementById("HORA_DESDE_vie1").value = "7:50";
-                        document.getElementById("HORA_HASTA_vie1").value = "12:30";
-
-                        document.getElementById("HORA_DESDE_dom1").value = "7:50";
-                        document.getElementById("HORA_HASTA_dom1").value = "12:30";
-                        document.getElementById("HORA_DESDE_dom2").value = "13:30";
-                        document.getElementById("HORA_HASTA_dom2").value = "17:30";
-
-
-                    }
-
-                }
-        );
-    });
-
-
-</script>
 <script type="text/javascript">
     $(function() {
         var scntDiv = $('#show_1');
         var i = $('#show_1 .texto-h').size() + 1;
         var s = $('#show_1 .tr-count').size() + 1;
 
-        $('#addScnt').live('click', function() {
+        $('#add_1').live('click', function() {
 
-            $('<tr><td>T' + s + ' :</td><td><input type="text"   name="HORA_DESDE_lun' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_lun' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_lun' + i + '" value="lun" ><input type="hidden" name="TURNO_lun' + i + '" value="T'+i-2+'" > <a href="#" id="remScnt">-</a></td></tr>').appendTo(scntDiv);
+            $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_lun' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_lun' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_lun' + i + '" value="lun" ><input type="hidden" name="TURNO_lun' + i + '" value="T' + s + '" ><a href="#" id="remove_1">-</a></td></tr>').appendTo(scntDiv);
 
             i++;
             s++;
             return false;
         });
-        $('#remScnt').live('click', function() {
+        $('#remove_1').live('click', function() {
             if (i > 2) {
                 $(this).parents('tr').remove();
                 //  $("#tr-d").remove();           
@@ -435,7 +392,7 @@
 
         $('#add_2').live('click', function() {
 
-            $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_mar' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_mar' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_mar' + i + '" value="mar" ><input type="hidden" name="USER_CREACION_mar' + i + '"> <a href="#" id="remove_2">-</a></td></tr>').appendTo(scntDiv);
+            $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_mar' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_mar' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_mar' + i + '" value="mar" ><input type="hidden" name="TURNO_mar' + i + '" value="T' + s + '" ><a href="#" id="remove_2">-</a></td></tr>').appendTo(scntDiv);
 
             i++;
             s++;
@@ -459,7 +416,7 @@
 
         $('#add_3').live('click', function() {
 
-            $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_mie' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_mie' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_mie' + i + '" value="mie" ><input type="hidden" name="USER_CREACION_mie' + i + '"> <a href="#" id="remove_3">-</a></td></tr>').appendTo(scntDiv);
+            $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_mie' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_mie' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_mie' + i + '" value="mie" ><input type="hidden" name="TURNO_mie' + i + '" value="T' + s + '" > <a href="#" id="remove_3">-</a></td></tr>').appendTo(scntDiv);
 
             i++;
             s++;
@@ -483,7 +440,7 @@
 
         $('#add_4').live('click', function() {
 
-            $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_jue' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_jue' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_jue' + i + '" value="jue" ><input type="hidden" name="USER_CREACION_jue' + i + '"> <a href="#" id="remove_4">-</a></td></tr>').appendTo(scntDiv);
+            $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_jue' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_jue' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_jue' + i + '" value="jue" ><input type="hidden" name="TURNO_jue' + i + '" value="T' + s + '" > <a href="#" id="remove_4">-</a></td></tr>').appendTo(scntDiv);
 
             i++;
             s++;
@@ -507,7 +464,7 @@
 
         $('#add_5').live('click', function() {
 
-            $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_vie' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_vie' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_vie' + i + '" value="vie" ><input type="hidden" name="USER_CREACION_vie' + i + '"> <a href="#" id="remove_5">-</a></td></tr>').appendTo(scntDiv);
+            $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_vie' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_vie' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_vie' + i + '" value="vie" ><input type="hidden" name="TURNO_vie' + i + '" value="T' + s + '" > <a href="#" id="remove_5">-</a></td></tr>').appendTo(scntDiv);
 
             i++;
             s++;
@@ -523,7 +480,7 @@
             return false;
         });
     });
-    //DOMINGO
+    //SABADO
     $(function() {
         var scntDiv = $('#show_6');
         var i = $('#show_6 .texto-h').size() + 1;
@@ -531,7 +488,7 @@
 
         $('#add_6').live('click', function() {
 
-            $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_dom' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_dom' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_dom' + i + '" value="dom" ><input type="hidden" name="USER_CREACION_dom' + i + '"> <a href="#" id="remove_6">-</a></td></tr>').appendTo(scntDiv);
+            $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_sab' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_sab' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_sab' + i + '" value="sab" ><input type="hidden" name="TURNO_sab' + i + '" value="T' + s + '" > <a href="#" id="remove_6">-</a></td></tr>').appendTo(scntDiv);
 
             i++;
             s++;
@@ -546,7 +503,33 @@
             }
             return false;
         });
-    });
+    }
+            );
+    //DOMINGO
+    $(function() {
+        var scntDiv = $('#show_7');
+        var i = $('#show_7 .texto-h').size() + 1;
+        var s = $('#show_7 .tr-count_7').size() + 1;
+
+        $('#add_6').live('click', function() {
+
+            $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_dom' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_dom' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_dom' + i + '" value="dom" ><input type="hidden" name="TURNO_dom' + i + '" value="T' + s + '" > <a href="#" id="remove_7">-</a></td></tr>').appendTo(scntDiv);
+
+            i++;
+            s++;
+            return false;
+        });
+        $('#remove_7').live('click', function() {
+            if (i > 2) {
+                $(this).parents('tr').remove();
+                //  $("#tr-d").remove();           
+                i--;
+                s--;
+            }
+            return false;
+        });
+    }
+            );
 
 </script>
 

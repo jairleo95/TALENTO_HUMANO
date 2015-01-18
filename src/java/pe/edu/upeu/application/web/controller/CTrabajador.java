@@ -70,7 +70,7 @@ public class CTrabajador extends HttpServlet {
             InterfaceDireccionDAO dir = new DireccionDAO();
             InterfaceCentro_CostosDAO cc = new Centro_CostoDAO();
             InterfaceTipo_DocumentoDAO tdoc = new Tipo_DocumentoDAO();
-            InterfaceContratoDAO con=new ContratoDAO();
+            InterfaceContratoDAO con = new ContratoDAO();
             String opc = "";
             String Text = "";
             opc = (String) request.getParameter("opc");
@@ -234,8 +234,11 @@ public class CTrabajador extends HttpServlet {
             }
             if ("aut".equals(opc)) {
                 String idtr = request.getParameter("idtr");
-                String id_contrato=con.Buscar_id_contrato_x_idtr(idtr);
-                getServletContext().setAttribute("Lis_c_c_id_contr",cc.Lis_c_c_id_contr(id_contrato));
+                String id_contrato = con.Buscar_id_contrato_x_idtr(idtr);
+                /*if (cc.Lis_c_c_id_contr(id_contrato).size() > 0) {
+                 getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_contrato));
+                 }
+                 */
                 String iddgp = request.getParameter("iddetalle_dgp");
                 String puesto_id = request.getParameter("puesto_id");
                 String cod = request.getParameter("cod");
@@ -244,7 +247,7 @@ public class CTrabajador extends HttpServlet {
                 String np = request.getParameter("nup");
                 getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
                 getServletContext().setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));
-//            out.println(li.List_Auto_mostrar(idrol).size());
+
                 response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&aut=1&dgp=" + iddgp + "&p=" + puesto_id + "&c=" + cod + "&pas=" + idpasos + "&drp=" + drp + "&np=" + np);
             }
 
