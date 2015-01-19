@@ -1155,7 +1155,7 @@
 
 
 
-            })
+            });
 
         </script>
 
@@ -1185,6 +1185,7 @@
                 var c = $("#Selec_Area");
                 var d = $("#select_sec");
                 var b = $("#selec_dep");
+                var d = $("#pu_id_se");
                 // $.post("../../  ")
                 $("#select_mod").change(
                         function () {
@@ -1193,6 +1194,7 @@
                             $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function (objJson) {
                                 a.empty();
                                 var list = objJson.lista;
+                                a.append("<option value='' > [SELECCIONE] </option>");
                                 if (list.length !== 0) {
                                     for (var i = 0; i < list.length; i++) {
                                         a.append('<option value="' + list[i].id_submodalidad + '">' + list[i].de_submod + '</option>');
@@ -1229,7 +1231,7 @@
                                 b.append("<option value='' > [SELECCIONE] </option>");
                                 if (list.length !== 0) {
                                     for (var i = 0; i < list.length; i++) {
-                                        b.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+                                        b.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
                                     }
                                 } else {
                                     b.append("<option value='' > [] </option>");
@@ -1242,6 +1244,7 @@
 
                             $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function (objJson) {
                                 d.empty();
+
                                 var list = objJson.lista;
                                 d.append("<option value='' > [SELECCIONE] </option>");
                                 if (list.length !== 0) {
@@ -1250,6 +1253,22 @@
                                     }
                                 } else {
                                     d.append("<option value='' > [no hay] </option>");
+                                }
+                            });
+                        });
+                $("#select_sec").change(
+                        function () {
+                            $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function (objJson) {
+                                e.empty();
+                                var list = objJson.lista;
+                                e.append("<option value='' > [SELECCIONE] </option>");
+                                if (list.length !== 0) {
+                                    for (var i = 0; i < list.length; i++) {
+                                        e.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+                                    }
+                                } else {
+                                    e.empty();
+                                    e.append("<option value='' > [] </option>");
                                 }
                             });
                         });
@@ -1291,18 +1310,12 @@
                             } else {
                                 x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section>');
                             }
-
                         }
                         x.append('</div><table><tr><td><td><input type="hidden" name="can_centro_cos" value="' + lista.length + '"></td></tr></table>');
 
                     });
 
                 }
-                /*function(){
-                 if($("#id_rol_s").val()==''){
-                 
-                 }
-                 }*/
 
             });
     </script>

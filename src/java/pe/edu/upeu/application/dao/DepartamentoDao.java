@@ -105,12 +105,12 @@ public class DepartamentoDao implements InterfaceDepartamentoDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select * from rhtx_deparatamento where id_departamento ='" + id + "'";
+            String sql = "select * from rhtx_departamento where id_direccion ='" + id + "'";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
                 rec.put("id", rs.getString("id_departamento"));
-                rec.put("nombre", rs.getString("no_departamento"));
+                rec.put("nombre", rs.getString("no_dep"));
                 lista.add(rec);
             }
             rs.close();
