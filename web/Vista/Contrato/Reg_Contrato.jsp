@@ -12,6 +12,7 @@
 
 <jsp:useBean id="List_Anno" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Puesto" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_Direccion" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="LIST_ID_DGP" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="ASIGNACION_F" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_anno_max" scope="application" class="java.util.ArrayList"/>
@@ -184,25 +185,40 @@
                                         <input type="date" name="FEC_HASTA" value="<%=d.getFe_hasta()%>" class="input-group-sm" required="">
                                     </label>
                                 </section>
-                                <section class="col col-5" id="titulo">
+                                <section class="col col-3" id="titulo">
+                                    <label class="select" id="titulo">Dirección:
+                                        <select name="DIRECCION" class="input-group-sm" id="select_dir">
+
+
+                                            <option value="">[SELECCIONE]</option>
+                                            <%for (int g = 0; g < Listar_Direccion.size(); g++) {
+                                                    Direccion di = new Direccion();
+                                                    di = (Direccion) Listar_Direccion.get(g);
+                                            %>
+                                            <option value="<%=di.getId_direccion()%>"><%=di.getNo_direccion()%></option>
+
+                                            <%}%>
+                                        </select>  </label>
+                                </section>
+                                <section class="col col-3" id="titulo">
                                     <label class="select" id="titulo">Departamento:
                                         <select name="DEPARTAMENTO_ID" class="input-group-sm" id="selec_dep">
                                             <option value="">[SELECCIONE]</option>
                                         </select>  </label>
                                 </section>
-                                <section class="col col-5" id="titulo">
+                                <section class="col col-3" id="titulo">
                                     <label class="select" id="titulo">Area:
                                         <select name="AREA_ID" class="input-group-sm" id="Selec_Area">
                                             <option value="">[SELECCIONE]</option>
                                         </select>  </label>
                                 </section>
-                                <section class="col col-5" id="titulo">
-                                    <label class="select" id="titulo">Seccion:
+                                <section class="col col-3" id="titulo">
+                                    <label class="select" id="titulo">Sección:
                                         <select name="SECCION_ID" class="input-group-sm" id="select_sec">
                                             <option value="">[SELECCIONE]</option>
                                         </select>  </label>
                                 </section>
-                                <section class="col col-5" id="titulo">
+                                <section class="col col-3" id="titulo">
                                     <label class="select" id="titulo">Puesto:
                                         <select name="PUESTO_ID" required="" class="input-group-sm" id="pu_id_se">
                                             <%  for (int j = 0; j < List_Puesto.size(); j++) {%>
@@ -218,7 +234,7 @@
                                                 }%>
                                         </select>  </label>
                                 </section>
-                                <section class="col col-5">
+                                <section class="col col-3">
                                     <label class="select" id="titulo">Condición:
                                         <select name="CONDICION" class="input-group-sm" required="">
                                             <option value="">[SELECCIONE]</option>
@@ -575,7 +591,7 @@
                                         </select>
                                     </label>
                                 </section>-->
-                                <section class="col col-4">
+                                <section class="col col-3">
                                     <label class="select" id="titulo">Filial donde Trabaja:
                                         <select name="FILIAL" class="input-group-sm" required="">
                                             <option value="">[SELECCIONE]</option>
@@ -590,17 +606,17 @@
                                         <input type="date" name="FEC_CESE"  class="input-group-sm" required="">
                                     </label>
                                 </section>-->
-                                <section class="col col-4">
+                                <section class="col col-3">
                                     <label class="input" id="titulo">RUC UPEU:
                                         <input type="text" name="EMP_RUC" value="20138122256" maxlength="20" class="input-group-sm" required="">
                                     </label>
                                 </section>
-                                <section class="col col-4">
+                                <section class="col col-3">
                                     <label class="input" id="titulo">Cod. Sucursal:
                                         <input type="text" name="SUCURSAL" value="-1" maxlength="3" class="input-group-sm" required="">
                                     </label>
                                 </section>
-                                <section class="col col-4">
+                                <section class="col col-3">
                                     <label class="input" id="titulo">MYPE:
                                         <input type="text" name="MYPE" value="N"  maxlength="2" class="input-group-sm" required="">
                                     </label>
@@ -612,19 +628,20 @@
                             <input type="hidden" name="ESTADO" value="1" class="text-box" > 
                             <input type="hidden" value="<%=d.getId_trabajador()%>" name="IDDATOS_TRABAJADOR" class="text-box" >
                             <input type="hidden" value="ARE-0022" name="AREA_ID" class="text-box" >
-                           
+
                         </fieldset>
 
 
 
 
                         <footer>
-                           
+
                             <input type="hidden" name="opc"   value="REGISTRAR CONTRATO">
                             <button type="submit" id="submit" class="btn btn-primary">
                                 REGISTRAR CONTRATO
                             </button>
-                              <button type="button" class="btn btn-success ">Ver Horario</button>
+                            <a type="button" class="btn btn-success" href="../../horario?iddgp=<%=d.getId_dgp()%>&opc=Listar">Ver Horario</a>
+                            <a type="button" class="btn btn-success" href="../../documento?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a>
                         </footer>
 
 
@@ -1167,7 +1184,8 @@
                 var a = $("#select-sub-mod");
                 var c = $("#Selec_Area");
                 var d = $("#select_sec");
-                $.post("../../  ")
+                var b = $("#selec_dep");
+                // $.post("../../  ")
                 $("#select_mod").change(
                         function () {
                             // alert("?MODALIDAD="+$("#select_mod").val());
@@ -1196,6 +1214,25 @@
                                     }
                                 } else {
                                     c.append("<option value='' > [no hay] </option>");
+                                }
+                            });
+                        });
+                $("#select_dir").change(
+                        function () {
+                            $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $("#select_dir").val(), function (objJson) {
+                                b.empty();
+                                if (objJson.rpta == -1) {
+                                    alert(objJson.mensaje);
+                                    return;
+                                }
+                                var list = objJson.lista;
+                                b.append("<option value='' > [SELECCIONE] </option>");
+                                if (list.length !== 0) {
+                                    for (var i = 0; i < list.length; i++) {
+                                        b.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+                                    }
+                                } else {
+                                    b.append("<option value='' > [] </option>");
                                 }
                             });
                         });

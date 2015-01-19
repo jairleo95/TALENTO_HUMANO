@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pe.edu.upeu.application.dao_imp;
 
 import java.util.List;
@@ -16,7 +15,14 @@ import pe.edu.upeu.application.model.Zona;
  * @author joserodrigo
  */
 public interface InterfaceDireccionDAO {
-    public List<Direccion> Listar_Direccion(); 
-    public List<Via> Listar_via(); 
-    public List<Zona> Listar_zona(); 
+
+    /**
+     * direccion del organigrama de la universidad
+     */
+    public List<Direccion> Listar_Direccion();
+    /*direccion de ubicacion geografica*/
+
+    public List<Via> Listar_via();
+
+    public List<Zona> Listar_zona();
 }

@@ -355,7 +355,7 @@
                         <input type="hidden" name="IDPASOS" value="<%=id_pasos%>"   >
                         <tr><td><input type="hidden" name="opc"  class="submit" value="Aceptar"/></td></tr>
                         <button class="btn btn-labeled btn-success" type="submit">
-                            <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>APROBAR 
+                            <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>ENVIAR 
                         </button>
                     </table>
                 </form>
