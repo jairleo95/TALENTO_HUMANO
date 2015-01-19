@@ -189,7 +189,7 @@
                     if (t.getNo_ar_foto() == null) {
                 %>
                 <tr><td class="td2" ><a class="btn btn-primary" href="../Usuario/Subir_Foto.jsp?idtr=<%=idtr%>" style="position: relative; margin: 0px; " >Subir foto</a><img style=" border: 3px solid grey ; position:relative;  margin: 0px; " src="../../imagenes/avatar_default.jpg"  width="100"  height="100"> </td>
-                
+
                     <%
                     } else {%>
                 <tr><td class="td2"><img style="border: 3px solid grey ; position:absolute; left:0.5%; top: 6% " src="../Usuario/Fotos/<%=t.getAr_foto()%>"  width="100"  height="100"></td>
@@ -339,6 +339,12 @@
 
             %>
             <center>
+                <%                    int vnc = Integer.parseInt(request.getParameter("vnc"));
+
+                    if (vnc > 0) {
+
+
+                %>
                 <form class="form" action="../../autorizacion" method="post" > 
                     <table > 
                         <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
@@ -353,6 +359,9 @@
                         </button>
                     </table>
                 </form>
+                <%
+                    }
+                %>
                 <form action="../../autorizacion" method="post">
                     <table>
                         <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
