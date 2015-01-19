@@ -366,6 +366,8 @@ public class CDgp extends HttpServlet {
                     getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
                     response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp?ida1=" + ida1);
                 }
+                
+                out.print("sñmzdlñzdlkgm");
             } else {
 
                 response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&idgp=" + ID_DGP);

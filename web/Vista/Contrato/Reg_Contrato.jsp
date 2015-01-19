@@ -1185,7 +1185,7 @@
                 var c = $("#Selec_Area");
                 var d = $("#select_sec");
                 var b = $("#selec_dep");
-                var d = $("#pu_id_se");
+                var e = $("#pu_id_se");
                 // $.post("../../  ")
                 $("#select_mod").change(
                         function () {
@@ -1260,11 +1260,15 @@
                         function () {
                             $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function (objJson) {
                                 e.empty();
+                                  if (objJson.rpta == -1) {
+                                    alert(objJson.mensaje);
+                                    return;
+                                }
                                 var list = objJson.lista;
                                 e.append("<option value='' > [SELECCIONE] </option>");
                                 if (list.length !== 0) {
                                     for (var i = 0; i < list.length; i++) {
-                                        e.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+                                        e.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
                                     }
                                 } else {
                                     e.empty();

@@ -44,6 +44,7 @@ public class CDir_Puesto extends HttpServlet {
     InterfaceDepartamentoDAO dep = new DepartamentoDao();
     InterfaceAreaDAO are = new AreaDAO();
     InterfaceSeccionDAO sec = new SeccionDAO();
+    InterfacePuestoDAO p = new PuestoDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -99,6 +100,12 @@ public class CDir_Puesto extends HttpServlet {
             if (opc.equals("selec_sec")) {
                 String id_pu = request.getParameter("id_pu");
                 List<Map<String, ?>> lista = sec.selec_sec(id_pu);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
+            if (opc.equals("Listar_pu_id")) {
+                String id = request.getParameter("id");
+                List<Map<String, ?>> lista = p.Listar_Puesto_id(id);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }

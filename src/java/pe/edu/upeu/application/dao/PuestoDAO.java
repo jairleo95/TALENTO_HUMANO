@@ -8,7 +8,9 @@ package pe.edu.upeu.application.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -32,6 +34,7 @@ public class PuestoDAO implements InterfacePuestoDAO {
     public boolean Eliminar_Puesto() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
     @Override
     public List<Puesto> List_Puesto() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -56,16 +59,17 @@ public class PuestoDAO implements InterfacePuestoDAO {
         }
         return list;
     }
- @Override
+
+    @Override
     public List<V_Puesto_Direccion> List_Puesto_Dep(String id_departamento) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select  * from RHVD_PUESTO_DIRECCION where id_departamento='"+id_departamento.trim()+"' ORDER BY no_puesto,no_seccion,no_area ASC";
+        String sql = "select  * from RHVD_PUESTO_DIRECCION where id_departamento='" + id_departamento.trim() + "' ORDER BY no_puesto,no_seccion,no_area ASC";
         List<V_Puesto_Direccion> list = new ArrayList<V_Puesto_Direccion>();
         try {
             ResultSet rs = this.conn.query(sql);
 
             while (rs.next()) {
-                V_Puesto_Direccion  p = new V_Puesto_Direccion();
+                V_Puesto_Direccion p = new V_Puesto_Direccion();
                 p.setNo_direccion(rs.getString("no_direccion"));
                 p.setId_direccion(rs.getString("id_direccion"));
                 p.setNo_dep(rs.getString("no_dep"));
@@ -84,7 +88,8 @@ public class PuestoDAO implements InterfacePuestoDAO {
         }
         return list;
     }
- @Override
+
+    @Override
     public List<V_Puesto_Direccion> List_Det_Puesto() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "select  * from RHVD_PUESTO_DIRECCION ";
@@ -93,7 +98,7 @@ public class PuestoDAO implements InterfacePuestoDAO {
             ResultSet rs = this.conn.query(sql);
 
             while (rs.next()) {
-                V_Puesto_Direccion  p = new V_Puesto_Direccion();
+                V_Puesto_Direccion p = new V_Puesto_Direccion();
                 p.setId_area(rs.getString("id_area"));
                 p.setId_departamento(rs.getString("id_departamento"));
                 p.setId_direccion(rs.getString("id_direccion"));
@@ -104,7 +109,7 @@ public class PuestoDAO implements InterfacePuestoDAO {
                 p.setNo_direccion(rs.getString("no_direccion"));
                 p.setNo_puesto(rs.getString("no_puesto"));
                 p.setNo_seccion(rs.getString("no_seccion"));
-                
+
                 list.add(p);
             }
         } catch (SQLException e) {
@@ -113,6 +118,7 @@ public class PuestoDAO implements InterfacePuestoDAO {
         }
         return list;
     }
+
     @Override
     public List<Puesto> List_Id_Puesto(String id_puesto) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -150,6 +156,37 @@ public class PuestoDAO implements InterfacePuestoDAO {
             this.conn.close();
         }
         return true;
+    }
+
+    @Override
+    public List<Map<String, ?>> Listar_Puesto_id(String id) {
+
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = " select  *  from rhtr_puesto where id_seccion='" + id + "' ";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("id_puesto"));
+                rec.put("nombre", rs.getString("no_puesto"));
+
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de puestos");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return lista;
+
     }
 
 }
