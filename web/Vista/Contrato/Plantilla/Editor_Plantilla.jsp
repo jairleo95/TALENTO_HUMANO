@@ -277,14 +277,16 @@
             <!-- END MAIN CONTENT -->
 
         </div>
-                                    <script>
-                                        $(document).ready(function(){
-                                            $("#letra").click(function(){alert("alknaklsdn");});
-                                            
-                                        });
-                                        
-                                    </script>
-                                    <table id="letra" style="margin: 0;"><tr><td></td></tr></table>
+        <script>
+            $(document).ready(function () {
+                $("#letra").click(function () {
+                    alert("alknaklsdn");
+                });
+
+            });
+
+        </script>
+        <table id="letra" style="margin: 0;"><tr><td></td></tr></table>
         <!--================================================== -->
 
         <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->

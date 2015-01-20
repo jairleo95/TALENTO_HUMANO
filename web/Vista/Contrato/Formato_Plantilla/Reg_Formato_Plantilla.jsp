@@ -6,11 +6,10 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 <html>
     <head>
         <meta charset="utf-8">
-        <title>API Usage &mdash; CKEditor Sample</title>
+        <title>Crear Formatos</title>
         <script src="../../../HTML_version/js/plugin/ckeditor/ckeditor.js"></script>
         <link href="../../../HTML_version/js/plugin/ckeditor/samples/sample.css" rel="stylesheet">
         <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
-
         <script>
 
 // The instanceReady event is fired, when an instance of CKEditor has finished
@@ -154,13 +153,41 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
     </head>
 
-    <button  onclick="procesar_texto();" type="button">Procesar </button>
 
     <body>
-        <form class="ckeditor_form" action="newjsp1.jsp" method="post">
+        <label>Dirección:</label>
+        <select name="DIRECCION">
+            <option value="">[SELECCIONE]</option>
+            <option value="0">[TODO]</option>
+        </select>
+        <label>Departamento:</label>
+        <select name="DEPARTAMENTO">
+            <option value="">[SELECCIONE]</option>
+            <option value="0">[TODO]</option>
+        </select>
+        <label>Area:</label>
+        <select name="AREA">
+            <option value="">[SELECCIONE]</option>
+            <option value="0">[TODO]</option>
+        </select>
+        <label>Sección:</label>
+        <select name="SECCION">
+            <option value="">[SELECCIONE]</option>
+            <option value="0">[TODO]</option>
+        </select>
+        <label>Puesto:</label>
+        <select name="PUESTO">
+            <option value="">[SELECCIONE]</option>
+            <option value="0">[TODO]</option>
+            <option value="1">Direccion General de Sistemas</option>
+        </select>
+        <br>
+        <br>
+
+        <button  onclick="procesar_texto();" type="button">Procesar </button>
+
+        <form class="ckeditor_form" action="../../../formato_plantilla" method="post">
             <textarea cols="100" id="editor1" name="editor1" rows="10">
-
-
             </textarea>
             <script>
                 // Replace the <textarea id="editor1"> with an CKEditor instance.
@@ -177,12 +204,14 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                 doc.getById('exec-link').hide();
                         }
                     }
-                });
+                    , height: '700px'});
             </script>
 
             <p id="eMessage"></p>
 
             <div id="eButtons" style="display: none">
+                <input type="submit" value="Registrar Formato" onclick="leer();">
+                <br>
                 <input id="exec-bold" onclick="ExecuteCommand('bold');" type="button" value="Execute &quot;bold&quot; Command">
                 <input id="exec-link" onclick="ExecuteCommand('link');" type="button" value="Execute &quot;link&quot; Command">
                 <input onclick="Focus();" type="button" value="Focus">
@@ -195,7 +224,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 <br>
                 <br>
                 <input onclick="InsertText();" type="button" value="Insert Text">
-                <input type="submit" value="ss" onclick="leer();">
+
                 <br>
                 <textarea cols="100" id="txtArea" rows="3">   First line with some leading whitespaces.
 
