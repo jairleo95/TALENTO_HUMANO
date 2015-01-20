@@ -1204,10 +1204,12 @@
                         });
                 $("#selec_dep").change(
                         function () {
-                            //alert("?MODALIDAD="+$("#select_mod").val());
-
                             $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function (objJson) {
                                 c.empty();
+                                  if (objJson.rpta == -1) {
+                                    alert(objJson.mensaje);
+                                    return;
+                                }
                                 var list = objJson.lista;
                                 c.append("<option value='' > [SELECCIONE] </option>");
                                 if (list.length !== 0) {
@@ -1240,8 +1242,6 @@
                         });
                 $("#Selec_Area").change(
                         function () {
-                            // alert("?MODALIDAD="+$("#select_mod").val());
-
                             $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function (objJson) {
                                 d.empty();
 

@@ -6,6 +6,7 @@
 package pe.edu.upeu.application.dao_imp;
 
 import java.util.List;
+import java.util.Map;
 import pe.edu.upeu.application.model.Direccion;
 import pe.edu.upeu.application.model.Via;
 import pe.edu.upeu.application.model.Zona;
@@ -20,6 +21,7 @@ public interface InterfaceDireccionDAO {
      * direccion del organigrama de la universidad
      */
     public List<Direccion> Listar_Direccion();
+       public List<Map<String, ?>> List_Direccion();
     /*direccion de ubicacion geografica*/
 
     public List<Via> Listar_via();

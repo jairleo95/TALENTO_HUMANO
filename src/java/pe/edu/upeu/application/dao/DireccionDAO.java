@@ -8,7 +8,9 @@ package pe.edu.upeu.application.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -51,7 +53,7 @@ public class DireccionDAO implements InterfaceDireccionDAO {
 
     @Override
     public List<Via> Listar_via() {
-         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = " select * from RHTX_VIA";
         List<Via> Lista = new ArrayList<Via>();
         try {
@@ -74,7 +76,7 @@ public class DireccionDAO implements InterfaceDireccionDAO {
 
     @Override
     public List<Zona> Listar_zona() {
-         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = " select * from RHTX_ZONA";
         List<Zona> Lista = new ArrayList<Zona>();
         try {
@@ -93,6 +95,35 @@ public class DireccionDAO implements InterfaceDireccionDAO {
             this.conn.close();
         }
         return Lista;
+    }
+
+    @Override
+    public List<Map<String, ?>> List_Direccion() {
+
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select * from rhtx_direccion";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("id_direccion"));
+                rec.put("nombre", rs.getString("no_direccion"));
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de direcciones...");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return lista;
     }
 
 }

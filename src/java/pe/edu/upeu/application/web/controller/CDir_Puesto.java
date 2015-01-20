@@ -18,10 +18,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import pe.edu.upeu.application.dao.AreaDAO;
 import pe.edu.upeu.application.dao.DepartamentoDao;
+import pe.edu.upeu.application.dao.DireccionDAO;
 import pe.edu.upeu.application.dao.PuestoDAO;
 import pe.edu.upeu.application.dao.SeccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAreaDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDepartamentoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceSeccionDAO;
 
@@ -45,6 +47,7 @@ public class CDir_Puesto extends HttpServlet {
     InterfaceAreaDAO are = new AreaDAO();
     InterfaceSeccionDAO sec = new SeccionDAO();
     InterfacePuestoDAO p = new PuestoDAO();
+    InterfaceDireccionDAO dir = new DireccionDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -106,6 +109,11 @@ public class CDir_Puesto extends HttpServlet {
             if (opc.equals("Listar_pu_id")) {
                 String id = request.getParameter("id");
                 List<Map<String, ?>> lista = p.Listar_Puesto_id(id);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
+            if (opc.equals("Listar_direccion")) {
+                List<Map<String, ?>> lista = dir.List_Direccion();
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }

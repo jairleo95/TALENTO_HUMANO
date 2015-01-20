@@ -52,7 +52,7 @@ public class CFormato_Plantilla extends HttpServlet {
                 } else {
                     ubicacion = direccion_raiz + "/Vista/Contratp/Formato_Plantilla/Formato/";
                 }
-                File archivo = new File(ubicacion + "texto_2.txt");
+                File archivo = new File(ubicacion + "texto_4.txt");
                 FileWriter escribir = new FileWriter(archivo, true);
                 escribir.write(texto_html);
                 escribir.close();
@@ -66,7 +66,7 @@ public class CFormato_Plantilla extends HttpServlet {
                 } else {
                     ubicacion = direccion_raiz + "/Vista/Contratp/Formato_Plantilla/Formato/";
                 }
-                FileReader lector = new FileReader(ubicacion + "texto_2.txt");
+                FileReader lector = new FileReader(ubicacion + "texto_4.txt");
                 BufferedReader contenido = new BufferedReader(lector);
                 while ((texto = contenido.readLine()) != null) {
                     imprimir = imprimir + texto;

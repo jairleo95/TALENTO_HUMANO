@@ -147,15 +147,132 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 var editor = CKEDITOR.instances.editor1.getData();
                 ap.append("<input type='hidden' value='" + editor + "' name='valor'>");
             }
+            function lis_dep(b) {
+
+                $.post("../../../Direccion_Puesto", "opc=Listar_direccion", function (objJson) {
+                    b.empty();
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    var list = objJson.lista;
+                    b.append("<option value='' > [SELECCIONE] </option>");
+                    b.append("<option value='0' > [TODOS] </option>");
+                    if (list.length !== 0) {
+                        for (var i = 0; i < list.length; i++) {
+                            b.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
+                        }
+                    } else {
+                        b.append("<option value='' > [] </option>");
+                    }
+                });
+            }
+            function  lis_dir_id(d, valor) {
+
+
+                $.post("../../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + valor, function (objJson) {
+                    d.empty();
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    var list = objJson.lista;
+                    d.append("<option value='' > [SELECCIONE] </option>");
+                    d.append("<option value='0' > [TODOS] </option>");
+                    if (list.length !== 0) {
+                        for (var i = 0; i < list.length; i++) {
+                            d.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
+                        }
+                    } else {
+                        d.append("<option value='' > [] </option>");
+                    }
+                });
+
+            }
+            function list_area_id(c, valor) {
+
+
+                $.post("../../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + valor, function (objJson) {
+                    c.empty();
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    var list = objJson.lista;
+                    c.append("<option value='' > [SELECCIONE] </option>");
+                    if (list.length !== 0) {
+                        for (var i = 0; i < list.length; i++) {
+                            c.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+                        }
+                    } else {
+                        c.append("<option value='' > [no hay] </option>");
+                    }
+                });
+
+            }
+            function list_sec_id(d, valor) {
+                $.post("../../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + valor, function (objJson) {
+                    d.empty();
+                    var list = objJson.lista;
+                    d.append("<option value='' > [SELECCIONE] </option>");
+                    d.append("<option value='0' > [TODOS] </option>");
+                    if (list.length !== 0) {
+                        for (var i = 0; i < list.length; i++) {
+                            d.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+                        }
+                    } else {
+                        d.append("<option value='' > [no hay] </option>");
+                    }
+                });
+
+            }
+
             $(document).ready(function () {
                 var editor = CKEDITOR.instances.editor1;
-                //  editor.setData("<p>putossss</p>");
-
                 $.post("../../../formato_plantilla", "opc=Listar", function (objJson) {
                     var imprimir = objJson.imprimir;
                     editor.setData(imprimir);
                 });
 
+                var b = $(".dir");
+                lis_dep(b);
+
+                b.change(function () {
+                    var d = $(".dep");
+                    var valor = $(this).val();
+                    lis_dir_id(d, valor);
+                });
+
+                $(".dep").change(function () {
+                    list_area_id($(".area"), $(this).val());
+                });
+
+                $(".area").change(function () {
+                    var d = $(".seccion");
+                    list_sec_id(d, $(this).val());
+                });
+
+                $(".seccion").change(function () {
+                    var e = $(".puesto");
+                    $.post("../../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $(this).val(), function (objJson) {
+                        e.empty();
+                        if (objJson.rpta == -1) {
+                            alert(objJson.mensaje);
+                            return;
+                        }
+                        var list = objJson.lista;
+                        e.append("<option value='' > [SELECCIONE] </option>");
+                        e.append("<option value='0' > [TODOS] </option>");
+                        if (list.length !== 0) {
+                            for (var i = 0; i < list.length; i++) {
+                                e.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
+                            }
+                        } else {
+                            e.empty();
+                            e.append("<option value='' > [] </option>");
+                        }
+                    });
+                });
             });
 
         </script>
@@ -163,27 +280,27 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     </head>
     <body>
         <label>Dirección:</label>
-        <select name="DIRECCION">
+        <select class="dir" name="DIRECCION">
             <option value="">[SELECCIONE]</option>
             <option value="0">[TODO]</option>
         </select>
         <label>Departamento:</label>
-        <select name="DEPARTAMENTO">
+        <select name="DEPARTAMENTO" class="dep">
             <option value="">[SELECCIONE]</option>
             <option value="0">[TODO]</option>
         </select>
         <label>Area:</label>
-        <select name="AREA">
+        <select name="AREA" class="area">
             <option value="">[SELECCIONE]</option>
             <option value="0">[TODO]</option>
         </select>
         <label>Sección:</label>
-        <select name="SECCION">
+        <select name="SECCION" class="seccion">
             <option value="">[SELECCIONE]</option>
             <option value="0">[TODO]</option>
         </select>
         <label>Puesto:</label>
-        <select name="PUESTO">
+        <select name="PUESTO" class="puesto">
             <option value="">[SELECCIONE]</option>
             <option value="0">[TODO]</option>
             <option value="1">Direccion General de Sistemas</option>
@@ -211,12 +328,13 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                 doc.getById('exec-link').hide();
                         }
                     }
-                    , height: '700px'});
+                    , height: '800px'});
             </script>
 
             <p id="eMessage"></p>
 
             <div id="eButtons" style="display: none">
+                <input  type="hidden" name="opc" value="Registrar"/>
                 <input type="submit" value="Registrar Formato" onclick="leer();">
                 <br>
                 <input id="exec-bold" onclick="ExecuteCommand('bold');" type="button" value="Execute &quot;bold&quot; Command">
