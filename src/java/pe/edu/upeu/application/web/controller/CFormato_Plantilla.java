@@ -40,9 +40,12 @@ public class CFormato_Plantilla extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
         Map<String, Object> rpta = new HashMap<String, Object>();
-        
+
         String opc = request.getParameter("opc");
         try {
+            if (opc.equals("asignar")) {
+                response.sendRedirect("Vista/Contrato/Formato_Plantilla/Reg_Formato_Plantilla.jsp");
+            }
             String direccion_raiz = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1);
             if (opc.equals("Registrar")) {
                 String texto_html = request.getParameter("valor");
@@ -62,7 +65,7 @@ public class CFormato_Plantilla extends HttpServlet {
                     escribir.write(texto_html);
                     escribir.close();
                 } else {
-                    
+
                     FileWriter escribir = new FileWriter(archivo);
                     escribir.write(texto_html);
                     escribir.close();
@@ -70,6 +73,7 @@ public class CFormato_Plantilla extends HttpServlet {
                 }
                 response.sendRedirect("Vista/Contrato/Formato_Plantilla/Reg_Formato_Plantilla.jsp");
             }
+
             if (opc.equals("Listar")) {
                 String texto = "";
                 String ubicacion = "";
@@ -87,7 +91,7 @@ public class CFormato_Plantilla extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("imprimir", imprimir);
             }
-            
+
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());
