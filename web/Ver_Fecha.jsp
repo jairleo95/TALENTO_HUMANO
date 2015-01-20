@@ -37,12 +37,12 @@
 
                         $(".btn_texto").click(function () {
                             var menu = {
-                                "[nombre]": "Jair",
-                                "[ape_p]": "sss",
-                                "[ape_m]": "fff"
+                                "[nombre]": "Jair Samuel",
+                                "[ape_p]": "Santos",
+                                "[ape_m]": "Gonzales",
+                                "[sexo]": "Masculino"
                             };
                             var string_texto = "";
-                            //   var arr = ["[nombre]", "[ape_p]", "[ape_m]"];
                             var texto = $(".label_texto").text();
                             var arr_text;
                             for (var key in menu) {
@@ -51,12 +51,10 @@
                                 for (var g = 0; g < arr_text.length; g++) {
                                     string_texto = string_texto + arr_text[g] + (((g + 1) == arr_text.length) ? "" : " " + val + " ");
                                 }
-                               // texto = string_texto;
-                               // alert(texto);
-                                
+                                texto = string_texto;
+                                string_texto = "";
                             }
-
-                            $(".ver").text(string_texto);
+                            $(".ver").text(texto);
 
 
                         });
@@ -67,6 +65,6 @@
         </script> 
         <button class="btn_texto" type="button">Procesar </button>
 
-        <label class="label_texto">Hola [nombre] [ape_p] [ape_m] este es  un texto donde pued reconocer [nombre] cualquier tipo de campo que este dentro de mi rango desde la base de datos</label>
+        <label class="label_texto">Hola [nombre] [ape_p] [ape_m] este es [sexo] un texto donde pued reconocer [nombre] cualquier tipo de campo que este dentro de mi rango desde la base de datos</label>
     </body>
 </html>
