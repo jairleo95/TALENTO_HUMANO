@@ -166,7 +166,7 @@ public class CDgp extends HttpServlet {
                 DE_BEV = 0.0;
             } else {
                  CA_BONO_ALIMENTARIO = Double.parseDouble(request.getParameter("BONO_ALIMENTARIO"));
-                double DE_BEV = Double.parseDouble(request.getParameter("BEV"));
+                DE_BEV = Double.parseDouble(request.getParameter("BEV"));
             }
 
             String DE_ANTECEDENTES_POLICIALES = request.getParameter("ANTECEDENTES_POLICIALES");

@@ -424,17 +424,27 @@
                                                                 <textarea rows=4 name="DESCRIPCION_SERVICIO"></textarea> 
                                                             </label>
                                                         </section>
-
-                                                        <section class="col col-6" >
-                                                            <label class="input" id="titu"> Periodo de Pago:
-                                                                <input type="text" name="PERIODO_PAGO" id="" required="" >
+                                                        <section class="col col-2">
+                                                            <label class="btn">
+                                                                <button type="button" class="btn btn-default btn-agregar-cc" id="btn-agregar-cc" >Agregar</button>
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-2" >
+                                                            <label class="input" id="titu"> CUOTA:
+                                                                <input type="text" name="CUOTA_1" id="cuota" required="" value="1" >
                                                             </label>
                                                         </section>
                                                         <section class="col col-6" >
                                                             <label class="input" id="titu">Fecha a Pagar :
-                                                                <input type="date" name="FEC_PAGAR" id="datepicker" required="" >
+                                                                <input type="date" name="FEC_PAGAR_1" id="datepicker" required="" >
                                                             </label>
                                                         </section>
+                                                        <section class="col col-3" >
+                                                            <label class="input" id="titu">Monto :
+                                                                <input type="text" name="MONTO_1" required=""  value="0.0"  id="monto" >
+                                                            </label>
+                                                        </section>
+                                                        
                                                     </div>
 
                                                     <%}%>
