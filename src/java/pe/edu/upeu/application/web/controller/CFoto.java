@@ -111,7 +111,7 @@ public class CFoto extends HttpServlet {
             out.println("Archivo subido correctamente");
              out.println(no_original);
              out.println(nombre_archivo);
-             out.println(sizeInBytes);*/
+             out.println(sizeInBytes);
         } catch (Exception e) {
             out.print(e.getMessage());
         } finally {
