@@ -63,6 +63,8 @@ public class CFoto extends HttpServlet {
             f.setSizeThreshold(1024);
             f.setRepository(new File(ubicacion));
             ServletFileUpload upload = new ServletFileUpload(f);
+            
+            
             List<FileItem> p = upload.parseRequest(request);
             String idtr = null;
             String nombre_archivo = null;

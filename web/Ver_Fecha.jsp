@@ -14,7 +14,7 @@
 
     <body>
         <input  type="date" class="fecha"/>
-        <p class="ver"></p>
+        <div class="ver"></div>
 
 
         <script type="text/javascript" src="js/JQuery/jQuery.js" ></script>
@@ -22,14 +22,51 @@
 
         <script>
             $(document).ready(
-                    function() {
-                        $(".fecha").change(function() {
+                    function () {
+                        $(".fecha").change(function () {
 
                             $(".ver").text($(".fecha").val());
 
                         });
+
+
+
+
+
+
+
+                        $(".btn_texto").click(function () {
+                            var menu = {
+                                "[nombre]": "Jair",
+                                "[ape_p]": "sss",
+                                "[ape_m]": "fff"
+                            };
+                            var string_texto = "";
+                            //   var arr = ["[nombre]", "[ape_p]", "[ape_m]"];
+                            var texto = $(".label_texto").text();
+                            var arr_text;
+                            for (var key in menu) {
+                                var val = menu[key];
+                                arr_text = texto.split(key);
+                                for (var g = 0; g < arr_text.length; g++) {
+                                    string_texto = string_texto + arr_text[g] + (((g + 1) == arr_text.length) ? "" : " " + val + " ");
+                                }
+                               // texto = string_texto;
+                               // alert(texto);
+                                
+                            }
+
+                            $(".ver").text(string_texto);
+
+
+                        });
+
+
                     });
 
         </script> 
+        <button class="btn_texto" type="button">Procesar </button>
+
+        <label class="label_texto">Hola [nombre] [ape_p] [ape_m] este es  un texto donde pued reconocer [nombre] cualquier tipo de campo que este dentro de mi rango desde la base de datos</label>
     </body>
 </html>
