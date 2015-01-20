@@ -51,7 +51,14 @@ public class CFoto extends HttpServlet {
         InterfaceTrabajadorDAO tr = new TrabajadorDAO();
 
         try {
-            String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "\\Vista\\Usuario\\Fotos";
+
+            String ubicacion = "";
+            if (System.getProperty("sun.desktop").trim().equals("windows")) {
+                ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "\\Vista\\Usuario\\Fotos";
+            } else {
+                ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "/Vista/Usuario/Fotos/";
+            }
+
             DiskFileItemFactory f = new DiskFileItemFactory();
             f.setSizeThreshold(1024);
             f.setRepository(new File(ubicacion));
@@ -104,7 +111,9 @@ public class CFoto extends HttpServlet {
             out.println("Archivo subido correctamente");
              out.println(no_original);
              out.println(nombre_archivo);
-             out.println(sizeInBytes);
+             out.println(sizeInBytes);*/
+        } catch (Exception e) {
+            out.print(e.getMessage());
         } finally {
             out.close();
         }

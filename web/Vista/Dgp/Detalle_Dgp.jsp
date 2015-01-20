@@ -100,7 +100,7 @@
                      <tr><td class="td-det">Horario:</td><td><?//echo $list[$index][5];?></td></tr>
                     -->
                     <tr><td Class="text-info table-bordered">Puesto:</td><td><%=d.getNo_puesto()%></td></tr>
-                    <tr><td class="text-info table-bordered">Horario:</td><td><a href="../../horario?iddgp=<%=d.getId_dgp()%>&opc=Listar ">Ver Horario</a></td></tr>
+                    <tr><td class="text-info table-bordered">Horario:</td><td><a href="../../horario?iddgp=<%=d.getId_dgp()%>&opc=Listar">Ver Horario</a></td></tr>
                     <input type="hidden" name="iddgp" value="<%=d.getId_dgp().trim()%>">
                     <input type="hidden" name="idreq" value="<%=d.getId_requerimiento().trim()%>">
                     </tr>

@@ -54,7 +54,7 @@ public interface InterfaceDgpDAO {
     public void MOD_REQUE(String ID_DGP, String FE_DESDE, String FE_HASTA, double CA_SUELDO, String ID_PUESTO, String ID_REQUERIMIENTO,  double CA_BONO_ALIMENTARIO, double DE_BEV, double CA_CENTRO_COSTOS, String DE_ANTECEDENTES_POLICIALES, String DE_CERTIFICADO_SALUD);
 
     public List<V_Es_Requerimiento> List_Incomplet(String iddep);
-    
+    public int VALIDAR_DGP_CONTRATO(String id);
     public List<Map<String, ?>> list_Req(String id);
     public List<Map<String, ?>> Cargar_Datos_Dgp(String id);
     public void NO_NULL();

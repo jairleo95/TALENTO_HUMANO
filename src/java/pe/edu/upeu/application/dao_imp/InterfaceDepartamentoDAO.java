@@ -18,4 +18,5 @@ public interface InterfaceDepartamentoDAO {
     public List<Departamento> List_Departamento();
     public List<Map<String, ?>> List_departamento_2();
     public List<Map<String, ?>> dep_id(String id_pu);
+    public List<Map<String, ?>> Listar_dep_id(String id);
 }

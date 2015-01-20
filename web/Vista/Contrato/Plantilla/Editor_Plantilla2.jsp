@@ -66,12 +66,11 @@
         <link rel="apple-touch-startup-image" href="../../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-
     </head>
     <body class="">
         <!-- HEADER -->
         <header id="">
-            
+
 
         </header>
 
@@ -127,9 +126,9 @@
 
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">
-                                        
+
                                         <input type="hidden" id="cantidad" value="<%=lista.size()%>">
-                                        <div name="ckeditor">  
+                                        <div name="ckeditor" id="ckeditor2">  
                                             <%
                                                 InterfaceTrabajadorDAO tr = new TrabajadorDAO();
                                                 for (int s = 0; s < lista.size(); s++) {
@@ -139,125 +138,59 @@
                                             %>
 
                                             <h2 style="text-align:center"><strong>CONTRATO DE TRABAJO A PLAZO FIJO Y BAJO MODALIDAD</strong></h2>
-                                            <p id="" class="p10">Conste por el presente documento el contrato de trabajo a plazo fijo y sujeto a modalidad por 
+                                            <p id="p1<%=s%>" >Conste por el presente documento el contrato de trabajo a plazo fijo y sujeto a modalidad por Servicio Específico, conforme lo dispone el Art. 63 del T.U.O del D. Leg. 728, Ley de Productividad y Competitividad Laboral (D.S. Nº 003-97-TR), que celebran de una parte la <strong>UNIVERSIDAD PERUANA UNIÓN</strong>, con RUC Nº 20138122256, con domicilio en Villa Unión s/n, altura del Km. 19 de la carretera central, Ñaña, Lurigancho-Chosica, a quien se le denominará <strong>"EMPLEADOR"</strong>, representada por su Apoderado Mg. Julio Cesar Rengifo Peña, con DNI No. 06690086,; y de la otra parte <strong id="p1"><%=p.getAp_paterno().toUpperCase() + " " + p.getNo_trabajador().toUpperCase() + " " + p.getAp_materno().toUpperCase()%></strong> , con DNI Nº(<strong id="p12"><%=p.getNu_doc()%></strong>), domiciliado(a) en (<strong id="nr2">
+                                                    <%              InterfaceListaDAO l = new ListaDAO();
+                                                        for (int b = 0; b < l.List_Dom_D1_Id().size(); b++) {
+                                                            if (p.getLi_di_dom_a_d1().trim().equals(b + 1 + "")) {
+                                                                out.println(l.List_Dom_D1_Id().get(b));
+                                                            }
 
-                                                Servicio Específico, conforme lo dispone el Art. 63 del T.U.O del D. Leg. 728, Ley de Productividad y 
+                                                        }
 
-                                                Competitividad Laboral (D.S. Nº 003-97-TR), que celebran de una parte la <strong>UNIVERSIDAD PERUANA 
+                                                        if (p.getLi_di_dom_a_d3().trim().equals("1")) {
+                                                            out.println(" " + p.getDi_dom_a_d2() + " Numero");
+                                                        }
+                                                        if (p.getLi_di_dom_a_d3().trim().equals("2")) {
+                                                            out.println(" " + p.getDi_dom_a_d2() + " Lote");
+                                                        }
+                                                        if (p.getLi_di_dom_a_d3().trim().equals("3")) {
+                                                            out.println(" " + p.getDi_dom_a_d2() + " S/N");
+                                                        }
 
-                                                    UNIÓN</strong>, con RUC Nº 20138122256, con domicilio en Villa Unión s/n, altura del Km. 19 de la carretera 
+                                                        for (int c = 0; c < l.List_Dom_D5_Id().size(); c++) {
+                                                            if (p.getLi_di_dom_a_d5().trim().equals(c + 1 + "")) {
+                                                                out.println(" " + p.getDi_dom_a_d4() + " " + l.List_Dom_D5_Id().get(c));
+                                                            }
 
-                                                central, Ñaña, Lurigancho-Chosica, a quien se le denominará <strong>"EMPLEADOR"</strong>, representada por su 
+                                                        }
+                                                        out.println(" " + p.getDi_dom_a_d6());
 
-                                                Apoderado Mg. Julio Cesar Rengifo Peña, con DNI No. 06690086,; y de la otra parte <strong id="p1"><%=p.getAp_paterno().toUpperCase() + " " + p.getNo_trabajador().toUpperCase() + " " + p.getAp_materno().toUpperCase()%></strong> , con DNI Nº(<strong id="p12"><%=p.getNu_doc()%></strong>), domiciliado(a) en (<strong id="nr2">
-                                                    <%                InterfaceListaDAO l = new ListaDAO();
-                                                        /*for (int b = 0; b < l.List_Dom_D1_Id().size(); b++) {
-                                                         if (p.getLi_di_dom_a_d1().trim().equals(b + 1 + "")) {
-                                                         out.println(l.List_Dom_D1_Id().get(b));
-                                                         }
-
-                                                         }
-
-                                                         if (p.getLi_di_dom_a_d3().trim().equals("1")) {
-                                                         out.println(" " + p.getDi_dom_a_d2() + " Numero");
-                                                         }
-                                                         if (p.getLi_di_dom_a_d3().trim().equals("2")) {
-                                                         out.println(" " + p.getDi_dom_a_d2() + " Lote");
-                                                         }
-                                                         if (p.getLi_di_dom_a_d3().trim().equals("3")) {
-                                                         out.println(" " + p.getDi_dom_a_d2() + " S/N");
-                                                         }
-
-                                                         for (int c = 0; c < l.List_Dom_D5_Id().size(); c++) {
-                                                         if (p.getLi_di_dom_a_d5().trim().equals(c + 1 + "")) {
-                                                         out.println(" " + p.getDi_dom_a_d4() + " " + l.List_Dom_D5_Id().get(c));
-                                                         }
-
-                                                         }
-                                                         out.println(" " + p.getDi_dom_a_d6());*/
-
-                                                    %></strong>),<%=p.getNo_ub_distrito()%>  <strong> </strong>, a quien se le denominará el (la) <strong>"TRABAJADOR(A)</strong>, en los términos y condiciones 
-
-                                                siguientes:</p>
+                                                    %></strong>),<%=p.getNo_ub_distrito()%>  <strong> </strong>, a quien se le denominará el (la) <strong>"TRABAJADOR(A)</strong>, en los términos y condiciones siguientes:</p>
 
                                             <p><strong>PRIMERA:</strong> EL EMPLEADOR tiene por actividad principal la educación en todos sus niveles.
+                                                El (la)TRABAJADOR (A) conoce que la Universidad Peruana Unión es parte integrante del sistema educativo Adventista, normado y regulada bajo prácticas, costumbres, principios éticos morales, por lo que acepta respetar, observar y cumplir estos principios practicados por esta institución, dentro y fuera del Campus Universitario.</p>
 
-                                                El (la)TRABAJADOR (A) conoce que la Universidad Peruana Unión es parte integrante del sistema 
+                                            <p id="p2<%=s%>" ><strong>SEGUNDA:</strong> El EMPLEADOR requiere de personal temporal en las áreas de la <strong id="nro2"><%=p.getNo_dep()%></strong>, con el objeto de diseñar detalladamente los requerimientos del sistema académico, programando nuevos módulos, reportes o actualizaciones de módulos, diseñar detalladamente los requerimientos de cada proyecto asignado, programando adecuadamente los módulos del sistema, apoyar en el mantenimiento de los recursos informáticos o brindar soporte técnico especializado a los equipos y sistemas solventando problemas o requerimientos de los usuarios; en consecuencia, el EMPLEADOR ha visto por conveniente contratar al TRABAJADOR (A), bajo la modalidad de servicio específico.</p>
 
-                                                educativo Adventista, normado y regulada bajo prácticas, costumbres, principios éticos morales, por lo 
+                                            <p id="p3<%=s%>"><strong>TERCERA:</strong> <span class="aa<%=s%>">EL EMPLEADOR de acuerdo con la condición expresada en la segunda cláusula</span>, contrata al (la) TRABAJADOR (A) para que se desempeñe como <strong id="nro3"><%=p.getNo_puesto()%></strong>.</p> 
 
-                                                que acepta respetar, observar y cumplir estos principios practicados por esta institución, dentro y fuera 
+                                            <p id="p4<%=s%>"><strong>CUARTA:</strong> EL EMPLEAOR en virtud del presente documento, contrata, al (la) TRABAJADOR (A) desde el <strong id="nro4"><%=p.getFe_desde()%></strong> hasta el <strong><%=p.getFe_hasta()%></strong>.</p>
 
-                                                del Campus Universitario.</p>
+                                            <p id="p5<%=s%>"><strong>QUINTA:</strong> EL (la) TRABAJADOR (A) percibirá una remuneración mensual de S/ <strong id="nro5"><%=p.getCa_sueldo()%></strong>. (Nuevos Soles), como retribución por las labores realizadas en la jornada y horario laboral establecido por el EMPLEADOR, la que será de 48 horas semanales.</p>
 
-                                            <p id="p2<%=s%>"><strong>SEGUNDA:</strong> El EMPLEADOR requiere de personal temporal en las áreas de la <strong id="nro2"><%/*=p.getNo_dep()*/%></strong>, con el objeto de diseñar detalladamente los requerimientos del sistema académico, 
+                                            <p><strong>SEXTA:</strong> EL (la) TRABAJADOR (A) se obliga a prestar sus servicios con eficiencia, puntualidad y bajo principio de subordinación, cumplir con las directivas de sus jefes y de su Centro de Labor y con lo que dispone El Reglamento General Interno de Trabajo, Reglamento de Trabajo en Sobretiempo, Reglamento de Seguridad y Salud en el Trabajo, Recomendaciones sobre Seguridad y Salud en el Trabajo y demás políticas, que por su función le son entregados a la suscripción del presente contrato, caso contrario se resolverá el presente contrato conforme las normas laborales vigentes.</p>
 
-                                                programando nuevos módulos, reportes o actualizaciones de módulos, diseñar detalladamente los 
+                                            <p><strong>SÉPTIMA:</strong> EL (LA) TRABAJADOR (A) conoce y acepta que al término del plazo fijado en la cláusula CUARTA del presente contrato, éste quedará extinguido automáticamente sin obligación de aviso previo o comunicación alguna. EL EMPLEADOR sin perjuicio de lo indicado en las cláusulas anteriores, podrá dar por terminado el presente contrato si EL (la) TRABAJADOR (A) incurre en alguna de las causales de despido conforme a las leyes vigentes.</p>
 
-                                                requerimientos de cada proyecto asignado, programando adecuadamente los módulos del sistema, 
+                                            <p><strong>OCTAVA:</strong> EL (LA) TRABAJADOR (A), en cualquier momento, podrá dar por terminada la relación laboral en forma expresa, con la sola limitación de presentar su carta de renuncia con 30 días de anticipación.</p>
 
-                                                apoyar en el mantenimiento de los recursos informáticos o brindar soporte técnico especializado a 
-
-                                                los equipos y sistemas solventando problemas o requerimientos de los usuarios; en consecuencia, el 
-
-                                                EMPLEADOR ha visto por conveniente contratar al TRABAJADOR (A), bajo la modalidad de servicio 
-
-                                                específico.
-
-                                            <p id="p3<%=s%>"><strong>TERCERA:</strong> EL EMPLEADOR de acuerdo con la condición expresada en la segunda cláusula, contrata al 
-
-                                                (la) TRABAJADOR (A) para que se desempeñe como <strong id="nro3"><%/*=p.getNo_puesto()*/%></strong>.</p> 
-
-                                            <p id="p4<%=s%>"><strong>CUARTA:</strong> EL EMPLEAOR en virtud del presente documento, contrata, al (la) TRABAJADOR (A) desde el 
-
-                                                <strong id="nro4"><%/*=p.getFe_desde()*/%></strong> hasta el <strong><%/*=p.getFe_hasta()*/%></strong>.</p>
-
-                                            <p id="p5<%=s%>"><strong>QUINTA:</strong> EL (la) TRABAJADOR (A) percibirá una remuneración mensual de S/ <strong id="nro5"><%/*=p.getCa_sueldo()*/%></strong>. 
-
-                                                (Nuevos Soles), como retribución por las labores realizadas en la jornada y horario laboral establecido por 
-
-                                                el EMPLEADOR, la que será de 48 horas semanales.</p>
-                                            <div class="cla">  asasa</div>
-
-                                            <p><strong>SEXTA:</strong> EL (la) TRABAJADOR (A) se obliga a prestar sus servicios con eficiencia, puntualidad y bajo 
-
-                                                principio de subordinación, cumplir con las directivas de sus jefes y de su Centro de Labor y con lo que 
-
-                                                dispone El Reglamento General Interno de Trabajo, Reglamento de Trabajo en Sobretiempo, Reglamento 
-
-                                                de Seguridad y Salud en el Trabajo, Recomendaciones sobre Seguridad y Salud en el Trabajo y demás 
-
-                                                políticas, que por su función le son entregados a la suscripción del presente contrato, caso contrario se 
-
-                                                resolverá el presente contrato conforme las normas laborales vigentes.</p>
-
-                                            <p><strong>SÉPTIMA:</strong> EL (LA) TRABAJADOR (A) conoce y acepta que al término del plazo fijado en la cláusula 
-
-                                                CUARTA del presente contrato, éste quedará extinguido automáticamente sin obligación de aviso previo 
-
-                                                o comunicación alguna. EL EMPLEADOR sin perjuicio de lo indicado en las cláusulas anteriores, podrá 
-
-                                                dar por terminado el presente contrato si EL (la) TRABAJADOR (A) incurre en alguna de las causales de 
-
-                                                despido conforme a las leyes vigentes.</p>
-
-                                            <p><strong>OCTAVA:</strong> EL (LA) TRABAJADOR (A), en cualquier momento, podrá dar por terminada la relación laboral 
-
-                                                en forma expresa, con la sola limitación de presentar su carta de renuncia con 30 días de anticipación.</p>
-
-                                            <p id="p6<%=s%>"><strong>NOVENA:</strong> En todo lo no previsto en el presente contrato se aplicará la Ley vigente de nuestro país.
-
-                                                Estando de acuerdo en todo el contenido del presente contrato, firmamos en señal de conformidad, en 
-
-                                                Ñaña, Chosica, Lima, al <strong id="nro6"><%/*=p.getFecha_actual()*/%></strong>.
-
-                                            </p>
-
-
+                                            <p id="p6<%=s%>"><strong>NOVENA:</strong> En todo lo no previsto en el presente contrato se aplicará la Ley vigente de nuestro país.Estando de acuerdo en todo el contenido del presente contrato, firmamos en señal de conformidad, en Ñaña, Chosica, Lima, al <strong id="nro6"><%=p.getFecha_actual()%></strong>.</p>
 
                                             <div><table  style="width: 100%;  height: 50px; text-align:center; "id="asdglñhsdkgohk" ><tr><td align="center">______________________________<br><br>EMPLEADOR</td>
-                                                        <td align="center">_______________________________<br><br>TRABAJADOR(A)</td></tr></div><tbody id="tbodys"></tbody>
+                                                        <td align="center">_______________________________<br><br>TRABAJADOR(A)</td></tr></div>
                                             </table>
+                                            <table>
+                                                <tbody id="tbodys<%=s%>"></tbody></table>
                                             <br>
                                             <br>
                                             <br>
@@ -292,6 +225,7 @@
                                             <br>
                                             <br>
                                             <br>
+
 
                                             <%
 
@@ -324,13 +258,12 @@
             <!-- END MAIN CONTENT -->
 
         </div>
-        <button id="ordenar" class="orden">orden</button>
-        <button id="btns">asa</button>
+        <button id="btn">mirar</button>
         <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
         <script>
             $(document).ready(function() {
 
-                
+
                 /*$("#ordenar").click(
                  
                  function() {
@@ -429,20 +362,58 @@
 
             $(document).ready(function() {
                 CKEDITOR.replace('ckeditor', {height: '600px', startupFocus: true});
-                $("#ordenar").click(function() {
-                    //alert($("#cantidad").val());
-                    var elemen=$(".p10").text().length;
-                    alert(elemen);
-                    var a=$(".p10");
-                    a.empty();
-                    a.append('asasasdsdsdsaaaaaaaaaaaaaaaa');
-                  // var aa=
-                    //alert();
-                });
-                $("#btns").click(function (){
-                    $(".cla").text('asasasdsdsdsaaaaaaaaaaaaaaaa');
-                });
-                
+                ordenar();
+                //CKEDITOR.config.contentsCss='/new.js';
+                function ordenar(f) {
+                    var cantidad = $("#cantidad").val();
+                    $("#btn").click(
+                            function() {
+                                alert($(".aa0").text());
+                            });
+                    alert($("#ckeditor2").text().length);
+
+                    //var linea = $("#p128").val().split();
+                    alert(linea);
+                    for (var i = 0; i < cantidad; i++) {
+                        var div = $("#tbodys" + i);
+                        if ($("#p1" + i).text().length > 1150) {
+                            div.append("<br />");
+                        } else if ($("#p1" + i).text().length > 950) {
+                            div.append("<br />");
+                            div.append("<br />");
+                        } else {
+                            div.append("<br />");
+                            div.append("<br />");
+                            div.append("<br />");
+                        }
+                        if ($("#p2" + i).text().length > 770) {
+                        } else {
+                            div.append("<br />");
+                        }
+                        if ($("#p3" + i).text().length > 210) {
+                        } else {
+                            div.append("<br />");
+                        }
+                        if ($("#p4" + i).text().length > 210) {
+                        } else {
+                            div.append("<br />");
+                        }
+                        if ($("#p5" + i).text().length > 310) {
+                        } else {
+                            div.append("<br />");
+                        }
+                        if ($("#p6" + i).text().length > 310) {
+                        } else {
+                            div.append("<br />");
+
+                        }
+                    }
+                }
+
+
+                // var aa=
+                //alert();
+
             });
 
         </script>

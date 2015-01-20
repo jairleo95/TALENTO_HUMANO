@@ -31,4 +31,6 @@ public interface InterfacePuestoDAO {
     public List<Puesto> List_Id_Puesto(String id_puesto);
 
     public boolean Modif_Puesto(String id_puesto, String no_puesto, String no_corto_pu, String es_puesto, String id_seccion, String co_grupo);
+    
+    public List<Map<String, ?>> Listar_Puesto_id(String id);
 }

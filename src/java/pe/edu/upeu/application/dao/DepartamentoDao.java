@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pe.edu.upeu.application.dao;
 
 import java.sql.ResultSet;
@@ -21,18 +20,19 @@ import pe.edu.upeu.application.model.Departamento;
  *
  * @author Admin
  */
-public class DepartamentoDao implements InterfaceDepartamentoDAO{
+public class DepartamentoDao implements InterfaceDepartamentoDAO {
+
     ConexionBD conn;
-    
+
     @Override
     public List<Departamento> List_Departamento() {
-        this.conn= FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "select * from rhtx_departamento";
         List<Departamento> list = new ArrayList<Departamento>();
         try {
             ResultSet rs = this.conn.query(sql);
             Departamento d = new Departamento();
-            while (rs.next()) {                
+            while (rs.next()) {
                 d.setEs_departamento(rs.getString("es_departamento"));
                 d.setId_departamento(rs.getString("id_departamento"));
                 d.setId_direccion(rs.getString("id_direccion"));
@@ -40,8 +40,8 @@ public class DepartamentoDao implements InterfaceDepartamentoDAO{
                 d.setNo_dep(rs.getString("no_dep"));
             }
         } catch (SQLException e) {
-        }finally{
-        this.conn.close();
+        } finally {
+            this.conn.close();
         }
         return list;
     }
@@ -78,7 +78,7 @@ public class DepartamentoDao implements InterfaceDepartamentoDAO{
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT ID_DEPARTAMENTO FROM RHTD_AREA WHERE ID_AREA=(SELECT ID_AREA FROM RHTR_SECCION where ID_SECCION=(SELECT ID_SECCION from RHTR_PUESTO where ID_PUESTO='"+id_pu.trim()+"'))";
+            String sql = "SELECT ID_DEPARTAMENTO FROM RHTD_AREA WHERE ID_AREA=(SELECT ID_AREA FROM RHTR_SECCION where ID_SECCION=(SELECT ID_SECCION from RHTR_PUESTO where ID_PUESTO='" + id_pu.trim() + "'))";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -98,5 +98,34 @@ public class DepartamentoDao implements InterfaceDepartamentoDAO{
         }
         return lista;
     }
-    
+
+    @Override
+    public List<Map<String, ?>> Listar_dep_id(String id) {
+
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select * from rhtx_departamento where id_direccion ='" + id + "'";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("id_departamento"));
+                rec.put("nombre", rs.getString("no_dep"));
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de deparatamentos");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return lista;
+    }
+
 }
