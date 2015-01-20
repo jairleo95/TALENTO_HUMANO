@@ -158,25 +158,37 @@ public class CDgp extends HttpServlet {
             String US_MODIF = request.getParameter("USER_MODIF");
             String FE_MODIF = request.getParameter("FECHA_MODIF");
             String IP_USUARIO = request.getParameter("USUARIO_IP");
-            double CA_BONO_ALIMENTARIO = Double.parseDouble(request.getParameter("BONO_ALIMENTARIO"));
-            double DE_BEV = Double.parseDouble(request.getParameter("BEV"));
+            double CA_BONO_ALIMENTARIO = 0.0;
+            double DE_BEV = 0.0;
             double CA_CENTRO_COSTOS = 0.0;
+            if (ID_REQUERIMIENTO.equals("REQ-0007") || ID_REQUERIMIENTO.equals("REQ-0008") || ID_REQUERIMIENTO.equals("REQ-0009") || ID_REQUERIMIENTO.equals("REQ-0010") || ID_REQUERIMIENTO.equals("REQ-0011")) {
+                CA_BONO_ALIMENTARIO = 0.0;
+                DE_BEV = 0.0;
+            } else {
+                 CA_BONO_ALIMENTARIO = Double.parseDouble(request.getParameter("BONO_ALIMENTARIO"));
+                double DE_BEV = Double.parseDouble(request.getParameter("BEV"));
+            }
+
             String DE_ANTECEDENTES_POLICIALES = request.getParameter("ANTECEDENTES_POLICIALES");
             String DE_CERTIFICADO_SALUD = request.getParameter("CERTIFICADO_SALUD");
             String DE_MONTO_HONORARIO = request.getParameter("MONTO_HONORARIO");
             String NO_BANCO = request.getParameter("BANCO");
             String NU_CUENTA = (request.getParameter("CUENTA") == null) ? "no tiene" : request.getParameter("CUENTA");
-                // String NU_CUENTA = request.getParameter("CUENTA");
+            // String NU_CUENTA = request.getParameter("CUENTA");
             //String NU_CUENTA_BANC = (request.getParameter("CUENTA_BANC") == null) ? "0" : "no tiene";
             String NU_CUENTA_BANC = request.getParameter("CUENTA_BANC");
             String ES_GEN_NU_CUENTA = (request.getParameter("GEN_NU_CUEN") == null) ? "0" : "1";
             String NO_BANCO_OTROS = request.getParameter("BANCO_OTROS");
-            int NUMERO = Integer.parseInt(request.getParameter("numero"));
+            int NUMERO = 0;
+            if (ID_REQUERIMIENTO.equals("REQ-0010") || ID_REQUERIMIENTO.equals("REQ-0011")) {
+                NUMERO = 0;
+            }else{
+            NUMERO=Integer.parseInt(request.getParameter("numero"));
+            }
 
-   
             dgp.INSERT_DGP(null, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO, DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION, ES_DGP, iduser, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, CA_CENTRO_COSTOS, DE_ANTECEDENTES_POLICIALES, DE_CERTIFICADO_SALUD, DE_MONTO_HONORARIO, NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEN_NU_CUENTA, NO_BANCO_OTROS);
 
-                //out.print(NU_CUENTA);
+            //out.print(NU_CUENTA);
             //out.print(NU_CUENTA_BANC);
             String iddgp = dgp.MAX_ID_DGP();
             String idrp = IReq.id_det_req_proc(iddgp);
@@ -288,7 +300,7 @@ public class CDgp extends HttpServlet {
                 idreq = "REQ-0017";
             }
             out.print(iddeph + idtr + idreq + iddep);
-                //getServletContext().setAttribute("List_Puesto", pu.List_Puesto_Dep(iddep));
+            //getServletContext().setAttribute("List_Puesto", pu.List_Puesto_Dep(iddep));
             //getServletContext().setAttribute("Listar_Trabajador_id", tr.ListaridTrabajador(idtr));
             //response.sendRedirect("Vista/Renuncias/Reg_Dgp_Renuncia.jsp?idreq=" + idreq);
         }
@@ -361,7 +373,7 @@ public class CDgp extends HttpServlet {
                     getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
                     response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp?ida1=" + ida1);
                 }
-                
+
                 out.print("sñmzdlñzdlkgm");
             } else {
 

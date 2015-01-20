@@ -287,7 +287,7 @@
                                                                         if (idreq.equals(r.getId_requerimiento())) {
                                                                 %>
                                                                 <option value="<%=r.getId_requerimiento()%>" selected=""  ><%=r.getNo_req()%></option>
-
+                                                                <input type="text" value="<%=r.getId_requerimiento()%>">
                                                                 <%} else {%>
                                                                 <option value="<%=r.getId_requerimiento()%>"><%=r.getNo_req()%></option>                      
                                                                 <%                          }
