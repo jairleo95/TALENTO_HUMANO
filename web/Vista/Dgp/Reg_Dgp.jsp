@@ -434,16 +434,17 @@
                                                                 <input type="text" name="CUOTA_1" id="cuota" required="" value="N°1" >
                                                             </label>
                                                         </section>
-                                                        <section class="col col-5" >
+                                                        <section class="col col-4" >
                                                             <label class="input" id="titu">Fecha a Pagar :
                                                                 <input type="date" name="FEC_PAGAR_1" id="datepicker" required="" >
                                                             </label>
                                                         </section>
-                                                        <section class="col col-3" >
+                                                        <section class="col col-4" >
                                                             <label class="input" id="titu">Monto :
                                                                 <input type="text" name="MONTO_1" required=""  value="0.0"  class="monto" >
                                                             </label>
                                                         </section>
+                                                        <input type="hidden" value="1" name="cant" class="cant" />
 
                                                     </div>
 
@@ -716,19 +717,17 @@
             texto += '<section class="col col-2" ><label class="input" id="titu">';
             texto += '<input type="text" name="CUOTA_' + cantidad + ' id="cuota" required="" value="N° ' + cantidad + '" >';
             texto += '</label></section>';
-            texto += '<section class="col col-5" ><label class="input" id="titu">';
+            texto += '<section class="col col-4" ><label class="input" id="titu">';
             texto += '<input type="date" name="FEC_PAGAR_' + cantidad + '" id="datepicker" required="" >';
             texto += '</label></section>';
-            texto += '<section class="col col-3" ><label class="input" id="titu">';
+            texto += '<section class="col col-4" ><label class="input" id="titu">';
             texto += '<input type="text" name="MONTO_' + cantidad + '" required=""  value=""  class="monto" >';
             texto += '</label></section>';
 
             agregar.append(texto);
             periodo_pago(cantidad);
-            
         });
-        
-
+        $(".cant").val(cantidad);
         $(document).ready(
                 function() {
                     $("#sueldo").keyup(
