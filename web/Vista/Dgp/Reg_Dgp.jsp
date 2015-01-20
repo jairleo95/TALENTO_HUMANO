@@ -444,6 +444,7 @@
                                                                 <input type="text" name="MONTO_1" required=""  value="0.0"  class="monto" >
                                                             </label>
                                                         </section>
+                                                        <input type="hidden" value="1" name="ES_PERIODO" />
                                                         <input type="hidden" value="1" name="cant" class="cant" />
 
                                                     </div>

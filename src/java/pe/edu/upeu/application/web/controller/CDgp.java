@@ -165,7 +165,7 @@ public class CDgp extends HttpServlet {
                 CA_BONO_ALIMENTARIO = 0.0;
                 DE_BEV = 0.0;
             } else {
-                 CA_BONO_ALIMENTARIO = Double.parseDouble(request.getParameter("BONO_ALIMENTARIO"));
+                CA_BONO_ALIMENTARIO = Double.parseDouble(request.getParameter("BONO_ALIMENTARIO"));
                 DE_BEV = Double.parseDouble(request.getParameter("BEV"));
             }
 
@@ -180,31 +180,34 @@ public class CDgp extends HttpServlet {
             String ES_GEN_NU_CUENTA = (request.getParameter("GEN_NU_CUEN") == null) ? "0" : "1";
             String NO_BANCO_OTROS = request.getParameter("BANCO_OTROS");
             int NUMERO = 0;
+            int cantidad = 0;
             if (ID_REQUERIMIENTO.equals("REQ-0010") || ID_REQUERIMIENTO.equals("REQ-0011")) {
                 NUMERO = 0;
-            }else{
-            NUMERO=Integer.parseInt(request.getParameter("numero"));
+                cantidad = Integer.parseInt(request.getParameter("cant"));
+            } else {
+                NUMERO = Integer.parseInt(request.getParameter("numero"));
+                cantidad =0;
             }
 
             dgp.INSERT_DGP(null, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO, DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION, ES_DGP, iduser, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, CA_CENTRO_COSTOS, DE_ANTECEDENTES_POLICIALES, DE_CERTIFICADO_SALUD, DE_MONTO_HONORARIO, NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEN_NU_CUENTA, NO_BANCO_OTROS);
+
             
-            String ID_PERIODO_PAG0 = null;
-            int NU_CUOTA = Integer.parseInt(request.getParameter("CUOTA"));
-            String FE_PAGAR = request.getParameter("FE_PAGAR");
-            double CA_MONTO = Double.parseDouble(request.getParameter("MONTO"));
-            String ES_PER_PAGO = request.getParameter("ES_PERIODO");
-            
+
             //out.print(NU_CUENTA);
             //out.print(NU_CUENTA_BANC);
             String iddgp = dgp.MAX_ID_DGP();
             String idrp = IReq.id_det_req_proc(iddgp);
 
             
-            
-            
-            
-            
-            
+            for (int i = 0; i < cantidad; i++) {
+                String ID_PERIODO_PAG0 = null;
+                int NU_CUOTA = Integer.parseInt(request.getParameter("CUOTA_"+ i));
+                String FE_PAGAR = request.getParameter("FEC_PAGAR_"+ i);
+                double CA_MONTO = Double.parseDouble(request.getParameter("MONTO_"+ i));
+                String ID_DGP = iddgp;
+                String ES_PER_PAGO = request.getParameter("ES_PERIODO");
+                
+            }
             for (int g = 1; g <= NUMERO; g++) {
                 String ID_CENTRO_COSTO = request.getParameter("CENTRO_COSTOS_" + g);
                 double porcentaje = Double.parseDouble(request.getParameter("PORCENTAJE_" + g));
