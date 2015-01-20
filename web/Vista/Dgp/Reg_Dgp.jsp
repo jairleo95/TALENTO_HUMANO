@@ -441,7 +441,7 @@
                                                         </section>
                                                         <section class="col col-3" >
                                                             <label class="input" id="titu">Monto :
-                                                                <input type="text" name="MONTO_1" required=""  value="0.0"  id="monto" >
+                                                                <input type="text" name="MONTO_1" required=""  value="0.0"  class="monto" >
                                                             </label>
                                                         </section>
 
@@ -720,26 +720,31 @@
             texto += '<input type="date" name="FEC_PAGAR_' + cantidad + '" id="datepicker" required="" >';
             texto += '</label></section>';
             texto += '<section class="col col-3" ><label class="input" id="titu">';
-            texto += '<input type="text" name="MONTO_' + cantidad + '" required=""  value=""  id="monto" >';
+            texto += '<input type="text" name="MONTO_' + cantidad + '" required=""  value=""  class="monto" >';
             texto += '</label></section>';
 
             agregar.append(texto);
+            periodo_pago(cantidad);
+            
         });
-        function monto(){
-           var sueldo = parseFloat($("#sueldo").val());
-           $("#monto").val(sueldo);
-           
-        }
+        
+
         $(document).ready(
-                
                 function() {
                     $("#sueldo").keyup(
-                            function(){
-                            monto();    
+                            function() {
+                                var sueldo = parseFloat($("#sueldo").val());
+                                $(".monto").val(Math.round(sueldo));
                             });
                 }
         );
-
+        function periodo_pago(cantidad) {
+            var sueldo = parseFloat($("#sueldo").val());
+            var p_p = sueldo / cantidad;
+            $.each($(".monto"), function() {
+                 $(".monto").val(p_p);
+            });
+        }
         function calcular_sueldo_total() {
             var x = parseFloat($("#sueldo").val());
             var y = parseFloat($("#bono_al").val());
@@ -749,14 +754,9 @@
         }
         $(document).ready(
                 function() {
-
-
-
-
                     $("#sueldo").keyup(
                             function() {
                                 calcular_sueldo_total();
-
                             }
                     );
                     $("#bono_al").keyup(
@@ -769,12 +769,7 @@
                                 calcular_sueldo_total();
                             }
                     );
-
-
                 }
-
-
-
         );</script>
     <script>
         /*$(".texto-h").setMask("29:59").keypress(
