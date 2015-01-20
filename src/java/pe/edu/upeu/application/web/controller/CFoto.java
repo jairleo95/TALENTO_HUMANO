@@ -101,10 +101,10 @@ public class CFoto extends HttpServlet {
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             Thread.sleep(2000);
             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr);
-            /*out.println("Archivo subido correctamente");
+            out.println("Archivo subido correctamente");
              out.println(no_original);
              out.println(nombre_archivo);
-             out.println(sizeInBytes);*/
+             out.println(sizeInBytes);
         } finally {
             out.close();
         }

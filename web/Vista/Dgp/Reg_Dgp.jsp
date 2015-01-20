@@ -676,7 +676,7 @@
 
     </body>
     <script>
-        < script >
+     //   < script >
                 $(document).ready(function() {
             var b = $("#alerta_dgp");
             // $("#alerta_dgp").hide();
@@ -694,7 +694,7 @@
                 });
             }
             listar();
-        });</script>
+        });
 
     function calcular_sueldo_total() {
     var x = parseFloat($("#sueldo").val());
