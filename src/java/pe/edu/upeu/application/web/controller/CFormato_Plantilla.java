@@ -40,7 +40,7 @@ public class CFormato_Plantilla extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
         Map<String, Object> rpta = new HashMap<String, Object>();
-
+        
         String opc = request.getParameter("opc");
         try {
             String direccion_raiz = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1);
@@ -50,12 +50,25 @@ public class CFormato_Plantilla extends HttpServlet {
                 if (System.getProperty("sun.desktop").trim().equals("windows")) {
                     ubicacion = direccion_raiz + "\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
                 } else {
-                    ubicacion = direccion_raiz + "/Vista/Contratp/Formato_Plantilla/Formato/";
+                    ubicacion = direccion_raiz + "/Vista/Contrato/Formato_Plantilla/Formato/";
                 }
-                File archivo = new File(ubicacion + "texto_4.txt");
-                FileWriter escribir = new FileWriter(archivo, true);
-                escribir.write(texto_html);
-                escribir.close();
+                File archivo = new File(ubicacion + "Plantilla_PLC-000001.txt");
+                if (archivo.exists()) {
+                    //  archivo.delete();
+                    // out.print("asfsfsafsdf");
+                    FileWriter escribir = new FileWriter(archivo);
+                    // aqui se hace un append al archivo existente
+                    //FileWriter escribir = new FileWriter(archivo,true);
+                    escribir.write(texto_html);
+                    escribir.close();
+                } else {
+                    
+                    FileWriter escribir = new FileWriter(archivo);
+                    escribir.write(texto_html);
+                    escribir.close();
+                    out.print(ubicacion);
+                }
+                response.sendRedirect("Vista/Contrato/Formato_Plantilla/Reg_Formato_Plantilla.jsp");
             }
             if (opc.equals("Listar")) {
                 String texto = "";
@@ -64,9 +77,9 @@ public class CFormato_Plantilla extends HttpServlet {
                 if (System.getProperty("sun.desktop").trim().equals("windows")) {
                     ubicacion = direccion_raiz + "\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
                 } else {
-                    ubicacion = direccion_raiz + "/Vista/Contratp/Formato_Plantilla/Formato/";
+                    ubicacion = direccion_raiz + "/Vista/Contrato/Formato_Plantilla/Formato/";
                 }
-                FileReader lector = new FileReader(ubicacion + "texto_4.txt");
+                FileReader lector = new FileReader(ubicacion + "Plantilla_PLC-000001.txt");
                 BufferedReader contenido = new BufferedReader(lector);
                 while ((texto = contenido.readLine()) != null) {
                     imprimir = imprimir + texto;
@@ -74,7 +87,7 @@ public class CFormato_Plantilla extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("imprimir", imprimir);
             }
-
+            
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());
