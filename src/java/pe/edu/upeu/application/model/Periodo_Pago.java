@@ -12,15 +12,15 @@ package pe.edu.upeu.application.model;
  */
 public class Periodo_Pago {
     private String id_periodo_pago;
-    private int nu_cuenta;
+    private Double nu_cuota;
     private String fe_pagar;
     private Double ca_monto;
     private String id_dgp;
     private String es_per_pago;
 
-    public Periodo_Pago(String id_periodo_pago, int nu_cuenta, String fe_pagar, Double ca_monto, String id_dgp, String es_per_pago) {
+    public Periodo_Pago(String id_periodo_pago, Double nu_cuenta, String fe_pagar, Double ca_monto, String id_dgp, String es_per_pago) {
         this.id_periodo_pago = id_periodo_pago;
-        this.nu_cuenta = nu_cuenta;
+        this.nu_cuota = nu_cuenta;
         this.fe_pagar = fe_pagar;
         this.ca_monto = ca_monto;
         this.id_dgp = id_dgp;
@@ -29,7 +29,7 @@ public class Periodo_Pago {
 
     public Periodo_Pago() {
         this.id_periodo_pago = "";
-        this.nu_cuenta = 0;
+        this.nu_cuota = 0.0;
         this.fe_pagar = "";
         this.ca_monto = 0.0;
         this.id_dgp = "";
@@ -44,12 +44,12 @@ public class Periodo_Pago {
         this.id_periodo_pago = id_periodo_pago;
     }
 
-    public int getNu_cuenta() {
-        return nu_cuenta;
+    public Double getNu_cuenta() {
+        return nu_cuota;
     }
 
-    public void setNu_cuenta(int nu_cuenta) {
-        this.nu_cuenta = nu_cuenta;
+    public void setNu_cuenta(Double nu_cuenta) {
+        this.nu_cuota = nu_cuenta;
     }
 
     public String getFe_pagar() {

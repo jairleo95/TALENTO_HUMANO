@@ -31,6 +31,7 @@ import pe.edu.upeu.application.dao.EmpleadoDAO;
 import pe.edu.upeu.application.dao.GrupoOcupacionesDAO;
 import pe.edu.upeu.application.dao.HorarioDAO;
 import pe.edu.upeu.application.dao.ListaDAO;
+import pe.edu.upeu.application.dao.Periodo_PagoDAO;
 import pe.edu.upeu.application.dao.PlantillaDAO;
 import pe.edu.upeu.application.dao.PuestoDAO;
 import pe.edu.upeu.application.dao.RequerimientoDAO;
@@ -52,6 +53,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceEmpleadoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceGrupo_ocupacionesDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceHorarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
+import pe.edu.upeu.application.dao_imp.InterfacePeriodo_PagoDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePlantillaDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
@@ -121,7 +123,7 @@ public class CDgp extends HttpServlet {
         InterfaceUsuarioDAO usu = new UsuarioDAO();
         InterfaceDireccionDAO dir = new DireccionDAO();
         InterfaceSub_ModalidadDAO sub = new Sub_ModalidadDAO();
-
+        InterfacePeriodo_PagoDAO pp = new Periodo_PagoDAO();
         // try {
         if (opc.equals("Listar_Req")) {
             String id_tr = request.getParameter("idtr");
@@ -183,7 +185,7 @@ public class CDgp extends HttpServlet {
             int cantidad = 0;
             if (ID_REQUERIMIENTO.equals("REQ-0010") || ID_REQUERIMIENTO.equals("REQ-0011")) {
                 NUMERO = 0;
-                cantidad = Integer.parseInt(request.getParameter("cant"));
+                cantidad = Integer.parseInt(request.getParameter("CANT"));
             } else {
                 NUMERO = Integer.parseInt(request.getParameter("numero"));
                 cantidad =0;
@@ -198,16 +200,20 @@ public class CDgp extends HttpServlet {
             String iddgp = dgp.MAX_ID_DGP();
             String idrp = IReq.id_det_req_proc(iddgp);
 
-            
             for (int i = 0; i < cantidad; i++) {
                 String ID_PERIODO_PAG0 = null;
-                int NU_CUOTA = Integer.parseInt(request.getParameter("CUOTA_"+ i));
-                String FE_PAGAR = request.getParameter("FEC_PAGAR_"+ i);
-                double CA_MONTO = Double.parseDouble(request.getParameter("MONTO_"+ i));
+                double NU_CUOTA = 0.0;
+               // double NU_CUOTA = request.getParameter("CUOTA_"+ i);
+                String FE_PAGAR = "28/12/12";
+                //String FE_PAGAR = request.getParameter("FEC_PAGAR_" + i);
+                //double CA_MONTO = 0.0;
+                double CA_MONTO = Double.parseDouble(request.getParameter("MONTO_" + i));
                 String ID_DGP = iddgp;
                 String ES_PER_PAGO = request.getParameter("ES_PERIODO");
-                
+                pp.InsetarPeriodo_Pago(ID_PERIODO_PAG0, NU_CUOTA, FE_PAGAR, CA_MONTO, ID_DGP, ES_PER_PAGO);
+               
             }
+            
             for (int g = 1; g <= NUMERO; g++) {
                 String ID_CENTRO_COSTO = request.getParameter("CENTRO_COSTOS_" + g);
                 double porcentaje = Double.parseDouble(request.getParameter("PORCENTAJE_" + g));

@@ -10,6 +10,7 @@ package pe.edu.upeu.application.dao_imp;
  *
  * @author Alex
  */
-public class InterfacePeriodo_PagoDAO {
+public interface InterfacePeriodo_PagoDAO {
+    public void InsetarPeriodo_Pago (String ID_PERIODO_PAGO, Double NU_CUOTA, String FE_PAGAR, Double CA_MONTO, String ID_DGP , String ES_PER_PAGO );
     
 }

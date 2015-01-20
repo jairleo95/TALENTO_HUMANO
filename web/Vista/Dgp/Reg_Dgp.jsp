@@ -287,7 +287,6 @@
                                                                         if (idreq.equals(r.getId_requerimiento())) {
                                                                 %>
                                                                 <option value="<%=r.getId_requerimiento()%>" selected=""  ><%=r.getNo_req()%></option>
-                                                                <input type="text" value="<%=r.getId_requerimiento()%>">
                                                                 <%} else {%>
                                                                 <option value="<%=r.getId_requerimiento()%>"><%=r.getNo_req()%></option>                      
                                                                 <%                          }
@@ -431,7 +430,7 @@
                                                         </section>
                                                         <section class="col col-2" >
                                                             <label class="input" id="titu"> CUOTA:
-                                                                <input type="text" name="CUOTA_1" id="cuota" required="" value="N°1" >
+                                                                <input type="text" name="CUOTA_1" id="cuota" required="" value="1" >
                                                             </label>
                                                         </section>
                                                         <section class="col col-4" >
@@ -445,7 +444,7 @@
                                                             </label>
                                                         </section>
                                                         <input type="hidden" value="1" name="ES_PERIODO" />
-                                                        <input type="hidden" value="1" name="cant" class="cant" />
+                                                        <input type="hidden" value="1" name="CANT" class="cant" />
 
                                                     </div>
 
@@ -706,8 +705,7 @@
             listar();
         });
         var cantidad = 1;
-        var agregar = $('#fila-agregar');
-        var texto = "";
+       
         $("#btn_add").click(function() {
             var agregar = $('#fila-agregar');
             var texto = "";
@@ -716,19 +714,21 @@
             texto += '<button type="button" class="btn btn-default" id="less_add" >Eliminar</button>';
             texto += '</label></section>';
             texto += '<section class="col col-2" ><label class="input" id="titu">';
-            texto += '<input type="text" name="CUOTA_' + cantidad + ' id="cuota" required="" value="N° ' + cantidad + '" >';
+            texto += '<input type="text" name="CUOTA_' + cantidad + ' id="cuota" required="" value="' + cantidad + '" >';
             texto += '</label></section>';
             texto += '<section class="col col-4" ><label class="input" id="titu">';
             texto += '<input type="date" name="FEC_PAGAR_' + cantidad + '" id="datepicker" required="" >';
             texto += '</label></section>';
             texto += '<section class="col col-4" ><label class="input" id="titu">';
-            texto += '<input type="text" name="MONTO_' + cantidad + '" required=""  value=""  class="monto" >';
+            texto += '<input type="text" name="MONTO_' + cantidad + '" required="" class="monto" >';
             texto += '</label></section>';
 
             agregar.append(texto);
             periodo_pago(cantidad);
+            $(".cant").val(cantidad);
+            //alert($(".cant").val())
         });
-        $(".cant").val(cantidad);
+        
         $(document).ready(
                 function() {
                     $("#sueldo").keyup(
