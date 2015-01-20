@@ -143,10 +143,10 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
                 editor.setData(texto);
             }
-            function leer(){
-                var ap=$(".ckeditor_form");
-                var editor=CKEDITOR.instances.editor1.getData();
-                ap.append("<input type='hidden' value='"+editor+"' name='valor'>");
+            function leer() {
+                var ap = $(".ckeditor_form");
+                var editor = CKEDITOR.instances.editor1.getData();
+                ap.append("<input type='hidden' value='" + editor + "' name='valor'>");
                 //al
             }
 
@@ -158,7 +158,10 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
     <body>
         <form class="ckeditor_form" action="newjsp1.jsp" method="post">
-            <textarea cols="100" id="editor1" name="editor1" rows="10">&lt;p&gt;This is some &lt;strong&gt;sample text&lt;/strong&gt;. You are using &lt;a href="http://ckeditor.com/"&gt;CKEditor&lt;/a&gt;.&lt;/p&gt;</textarea>
+            <textarea cols="100" id="editor1" name="editor1" rows="10">
+
+
+            </textarea>
             <script>
                 // Replace the <textarea id="editor1"> with an CKEditor instance.
                 CKEDITOR.replace('editor1', {
@@ -177,8 +180,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 });
             </script>
 
-            <p id="eMessage">
-            </p>
+            <p id="eMessage"></p>
 
             <div id="eButtons" style="display: none">
                 <input id="exec-bold" onclick="ExecuteCommand('bold');" type="button" value="Execute &quot;bold&quot; Command">
