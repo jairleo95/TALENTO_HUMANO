@@ -5,10 +5,15 @@
  */
 package pe.edu.upeu.application.web.controller;
 
+import com.google.gson.Gson;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,28 +36,56 @@ public class CFormato_Plantilla extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        String texto_html = request.getParameter("valor");
+        Map<String, Object> rpta = new HashMap<String, Object>();
+
+        String opc = request.getParameter("opc");
         try {
-            String ubicacion = "";
-            if (System.getProperty("sun.desktop").trim().equals("windows")) {
-                ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
-            } else {
-                ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "/Vista/Contratp/Formato_Plantilla/Formato/";
+            String direccion_raiz = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1);
+            if (opc.equals("Registrar")) {
+                String texto_html = request.getParameter("valor");
+                String ubicacion = "";
+                if (System.getProperty("sun.desktop").trim().equals("windows")) {
+                    ubicacion = direccion_raiz + "\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
+                } else {
+                    ubicacion = direccion_raiz + "/Vista/Contratp/Formato_Plantilla/Formato/";
+                }
+                File archivo = new File(ubicacion + "texto_2.txt");
+                FileWriter escribir = new FileWriter(archivo, true);
+                escribir.write(texto_html);
+                escribir.close();
             }
-            File archivo = new File(ubicacion + "texto_2.txt");
-            FileWriter escribir = new FileWriter(archivo, true);
-            escribir.write(texto_html);
-            escribir.close();
+            if (opc.equals("Listar")) {
+                String texto = "";
+                String ubicacion = "";
+                String imprimir = "";
+                if (System.getProperty("sun.desktop").trim().equals("windows")) {
+                    ubicacion = direccion_raiz + "\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
+                } else {
+                    ubicacion = direccion_raiz + "/Vista/Contratp/Formato_Plantilla/Formato/";
+                }
+                FileReader lector = new FileReader(ubicacion + "texto_2.txt");
+                BufferedReader contenido = new BufferedReader(lector);
+                while ((texto = contenido.readLine()) != null) {
+                    imprimir = imprimir + texto;
+                }
+                rpta.put("rpta", "1");
+                rpta.put("imprimir", imprimir);
+            }
 
         } catch (Exception e) {
-            out.println("Error al escribir");
+            rpta.put("rpta", "-1");
+            rpta.put("mensaje", e.getMessage());
         }
+        Gson gson = new Gson();
+        out.println(gson.toJson(rpta));
+        out.flush();
+        out.close();
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

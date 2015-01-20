@@ -146,14 +146,21 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 var ap = $(".ckeditor_form");
                 var editor = CKEDITOR.instances.editor1.getData();
                 ap.append("<input type='hidden' value='" + editor + "' name='valor'>");
-                //al
             }
+            $(document).ready(function () {
+                var editor = CKEDITOR.instances.editor1;
+                //  editor.setData("<p>putossss</p>");
+
+                $.post("../../../formato_plantilla", "opc=Listar", function (objJson) {
+                    var imprimir = objJson.imprimir;
+                    editor.setData(imprimir);
+                });
+
+            });
 
         </script>
 
     </head>
-
-
     <body>
         <label>Dirección:</label>
         <select name="DIRECCION">
