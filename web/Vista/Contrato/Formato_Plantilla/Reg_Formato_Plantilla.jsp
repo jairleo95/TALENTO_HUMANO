@@ -11,7 +11,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         <link href="../../../HTML_version/js/plugin/ckeditor/samples/sample.css" rel="stylesheet">
         <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
         <script>
-
 // The instanceReady event is fired, when an instance of CKEditor has finished
 // its initialization.
             CKEDITOR.on('instanceReady', function (ev) {
@@ -139,7 +138,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     texto = string_texto;
                     string_texto = "";
                 }
-
                 editor.setData(texto);
             }
             function leer() {
