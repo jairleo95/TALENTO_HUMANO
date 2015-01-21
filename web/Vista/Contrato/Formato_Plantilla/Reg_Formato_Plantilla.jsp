@@ -13,7 +13,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         <script>
 // The instanceReady event is fired, when an instance of CKEditor has finished
 // its initialization.
-            CKEDITOR.on('instanceReady', function (ev) {
+            CKEDITOR.on('instanceReady', function(ev) {
                 // Show the editor name and description in the browser status bar.
                 document.getElementById('eMessage').innerHTML = 'Instance <code>' + ev.editor.name + '<\/code> loaded.';
 
@@ -121,9 +121,21 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             function procesar_texto() {
                 var menu = {
                     "[nombre]": "Jair",
-                    "[ape_p]": "Santos",
-                    "[ape_m]": "Gonzales",
-                    "[sexo]": "Masculino"
+                    "[app]": "Santos",
+                    "[apm]": "Gonzales",
+                    "[sexo]": "Masculino",
+                    "[dni]": "",
+                    "[dir]": "",
+                    "[prov]": "",
+                    "[dist]": "",
+                    "[dep]": "",
+                    "[desde]": "",
+                    "[hasta]": "",
+                    "[puesto]": "",
+                    "[fe_actual]": "",
+                    "[sueldo]": "",
+                    "[horas]": "",
+                    "[cursos]": ""
                 };
                 var editor = CKEDITOR.instances.editor1;
                 var string_texto = "";
@@ -147,7 +159,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             }
             function lis_dep(b) {
 
-                $.post("../../../Direccion_Puesto", "opc=Listar_direccion", function (objJson) {
+                $.post("../../../Direccion_Puesto", "opc=Listar_direccion", function(objJson) {
                     b.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -168,7 +180,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             function  lis_dir_id(d, valor) {
 
 
-                $.post("../../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + valor, function (objJson) {
+                $.post("../../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + valor, function(objJson) {
                     d.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -190,7 +202,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             function list_area_id(c, valor) {
 
 
-                $.post("../../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + valor, function (objJson) {
+                $.post("../../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + valor, function(objJson) {
                     c.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -209,7 +221,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
             }
             function list_sec_id(d, valor) {
-                $.post("../../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + valor, function (objJson) {
+                $.post("../../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + valor, function(objJson) {
                     d.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -230,7 +242,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             }
             function list_plantillas(valor) {
                 var d = $(".tbody-plantilla");
-                $.post("../../../formato_plantilla", "opc=Cargar_Plantillas&" + "id=" + valor, function (objJson) {
+                $.post("../../../formato_plantilla", "opc=Cargar_Plantillas&" + "id=" + valor, function(objJson) {
                     d.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -251,7 +263,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         d.append("<tr><td colspan='3'>No existen Plantillas</td></tr>");
                     }
 
-                    $(".btn-cargar_pl").click(function () {
+                    $(".btn-cargar_pl").click(function() {
                         //alert();
                         mostrar_plantilla($(".plantilla" + $(this).val()).val());
 
@@ -263,7 +275,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             }
             function mostrar_plantilla(valor) {
                 var editor = CKEDITOR.instances.editor1;
-                $.post("../../../formato_plantilla", "opc=Listar&id=" + valor, function (objJson) {
+                $.post("../../../formato_plantilla", "opc=Listar&id=" + valor, function(objJson) {
                     var imprimir = objJson.imprimir;
                     editor.setData(imprimir);
                 });
@@ -272,13 +284,13 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
 
 
-            $(document).ready(function () {
+            $(document).ready(function() {
 
                 // mostrar_plantilla();
                 var b = $(".dir");
                 lis_dep(b);
 
-                b.change(function () {
+                b.change(function() {
                     var d = $(".dep");
                     var valor = $(this).val();
                     lis_dir_id(d, valor);
@@ -286,18 +298,18 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
                 });
 
-                $(".dep").change(function () {
+                $(".dep").change(function() {
                     list_area_id($(".area"), $(this).val());
                 });
 
-                $(".area").change(function () {
+                $(".area").change(function() {
                     var d = $(".seccion");
                     list_sec_id(d, $(this).val());
                 });
 
-                $(".seccion").change(function () {
+                $(".seccion").change(function() {
                     var e = $(".puesto");
-                    $.post("../../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $(this).val(), function (objJson) {
+                    $.post("../../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $(this).val(), function(objJson) {
                         e.empty();
                         if (objJson.rpta == -1) {
                             alert(objJson.mensaje);
@@ -375,7 +387,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         focus: onFocus,
                         blur: onBlur,
                         // Check for availability of corresponding plugins.
-                        pluginsLoaded: function (evt) {
+                        pluginsLoaded: function(evt) {
                             var doc = CKEDITOR.document, ed = evt.editor;
                             if (!ed.getCommand('bold'))
                                 doc.getById('exec-bold').hide();
