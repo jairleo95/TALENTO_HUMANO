@@ -151,7 +151,7 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select  *  from RHTR_FORMATO_HORARIO  where ID_TIPO_HORARIO='"+id_th+"' order by ID_FORMATO_HORARIO asc ";
+            String sql = "select  *  from RHTR_FORMATO_HORARIO  where ID_TIPO_HORARIO='" + id_th + "' order by ID_FORMATO_HORARIO asc ";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -200,6 +200,37 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
         l[6][1] = "Domingo";
 
         return l;
+    }
+
+    @Override
+    public List<Map<String, ?>> Lista_Plantilla_Puesto(String id) {
+
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select   pc.ID_PLANTILLA_CONTRACTUAL,pc.NO_PLANTILLA,pc.NO_ARCHIVO,pp.ID_PLANTILLA_PUESTO,pp.ID_DEPARTAMENTO,pp.ID_DIRECCION,pp.ID_AREA,pp.ID_SECCION,pp.ID_PUESTO  from RHTC_PLANTILLA_CONTRACTUAL pc , RHTC_PLANTILLA_PUESTO pp where pp.ID_PLANTILLA_CONTRACTUAL = pc.ID_PLANTILLA_CONTRACTUAL and pp.ES_PLANTILLA_PUESTO='1' and pc.ES_PLAN_CONTRACTUAL='1'";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id_plantilla", rs.getString("ID_PLANTILLA_CONTRACTUAL"));
+                rec.put("nombre", rs.getString("NO_PLANTILLA"));
+                rec.put("plantilla", rs.getString("NO_ARCHIVO"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al listar las plantillas...");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return Lista;
+
     }
 
 }

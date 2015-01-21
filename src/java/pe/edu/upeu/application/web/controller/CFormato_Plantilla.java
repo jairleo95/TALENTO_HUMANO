@@ -13,11 +13,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import pe.edu.upeu.application.dao.Formato_HorarioDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceFormato_HorarioDAO;
+import pe.edu.upeu.application.model.Formato_Horario;
 
 /**
  *
@@ -40,6 +44,7 @@ public class CFormato_Plantilla extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
         Map<String, Object> rpta = new HashMap<String, Object>();
+        InterfaceFormato_HorarioDAO f = new Formato_HorarioDAO();
 
         String opc = request.getParameter("opc");
         try {
@@ -47,15 +52,16 @@ public class CFormato_Plantilla extends HttpServlet {
                 response.sendRedirect("Vista/Contrato/Formato_Plantilla/Reg_Formato_Plantilla.jsp");
             }
             String direccion_raiz = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1);
-            if (opc.equals("Registrar")) {
+            if (opc.equals("Actualizar")) {
                 String texto_html = request.getParameter("valor");
+                String id = request.getParameter("id");
                 String ubicacion = "";
                 if (System.getProperty("sun.desktop").trim().equals("windows")) {
                     ubicacion = direccion_raiz + "\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
                 } else {
                     ubicacion = direccion_raiz + "/Vista/Contrato/Formato_Plantilla/Formato/";
                 }
-                File archivo = new File(ubicacion + "Plantilla_PLC-000001.txt");
+                File archivo = new File(ubicacion + id);
                 if (archivo.exists()) {
                     //  archivo.delete();
                     // out.print("asfsfsafsdf");
@@ -65,7 +71,6 @@ public class CFormato_Plantilla extends HttpServlet {
                     escribir.write(texto_html);
                     escribir.close();
                 } else {
-
                     FileWriter escribir = new FileWriter(archivo);
                     escribir.write(texto_html);
                     escribir.close();
@@ -78,18 +83,25 @@ public class CFormato_Plantilla extends HttpServlet {
                 String texto = "";
                 String ubicacion = "";
                 String imprimir = "";
+                String no_archivo = request.getParameter("id");
                 if (System.getProperty("sun.desktop").trim().equals("windows")) {
                     ubicacion = direccion_raiz + "\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
                 } else {
                     ubicacion = direccion_raiz + "/Vista/Contrato/Formato_Plantilla/Formato/";
                 }
-                FileReader lector = new FileReader(ubicacion + "Plantilla_PLC-000001.txt");
+                FileReader lector = new FileReader(ubicacion + no_archivo);
                 BufferedReader contenido = new BufferedReader(lector);
                 while ((texto = contenido.readLine()) != null) {
                     imprimir = imprimir + texto;
                 }
                 rpta.put("rpta", "1");
                 rpta.put("imprimir", imprimir);
+            }
+            if (opc.equals("Cargar_Plantillas")) {
+                String id = request.getParameter("id");
+                List<Map<String, ?>> lista = f.Lista_Plantilla_Puesto(id);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
             }
 
         } catch (Exception e) {

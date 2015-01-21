@@ -145,7 +145,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             function leer() {
                 var ap = $(".ckeditor_form");
                 var editor = CKEDITOR.instances.editor1.getData();
-                ap.append("<input type='hidden' value='" + editor + "' name='valor'>");
+                ap.append("<input type='text' value='" + editor + "' name='valor'>");
             }
             function lis_dep(b) {
 
@@ -213,6 +213,10 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             function list_sec_id(d, valor) {
                 $.post("../../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + valor, function (objJson) {
                     d.empty();
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
                     var list = objJson.lista;
                     d.append("<option value='' > [SELECCIONE] </option>");
                     d.append("<option value='0' > [TODOS] </option>");
@@ -226,14 +230,53 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 });
 
             }
+            function list_plantillas(valor) {
+                var d = $(".tbody-plantilla");
+                $.post("../../../formato_plantilla", "opc=Cargar_Plantillas&" + "id=" + valor, function (objJson) {
+                    d.empty();
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    var list = objJson.lista;
+                    if (list.length !== 0) {
+                        for (var i = 0; i < list.length; i++) {
+                            d.append('<tr>');
+                            d.append('<td>' + (i + 1) + '</td>');
+                            d.append('<td>' + list[i].nombre + '</td>');
+                            d.append('<input type="hidden" value="' + list[i].id_plantilla + '" class="id_plantilla' + i + '" />');
+                            d.append('<input type="hidden" value="' + list[i].plantilla + '" class="plantilla' + i + '" />');
+                            d.append('<td><button type="button" value="' + i + '" class="btn-cargar_pl">Cargar</button></td>');
+                            d.append('</tr>');
+                        }
+                    } else {
+                        d.append("<tr><td colspan='3'>No existen Plantillas</td></tr>");
+                    }
 
-            $(document).ready(function () {
+                    $(".btn-cargar_pl").click(function () {
+                        //alert();
+                        mostrar_plantilla($(".plantilla" + $(this).val()).val());
+
+                        $(".id_pl").val($(".plantilla" + $(this).val()).val());
+                    });
+
+                });
+
+            }
+            function mostrar_plantilla(valor) {
                 var editor = CKEDITOR.instances.editor1;
-                $.post("../../../formato_plantilla", "opc=Listar", function (objJson) {
+                $.post("../../../formato_plantilla", "opc=Listar&id=" + valor, function (objJson) {
                     var imprimir = objJson.imprimir;
                     editor.setData(imprimir);
                 });
 
+            }
+
+
+
+            $(document).ready(function () {
+
+                // mostrar_plantilla();
                 var b = $(".dir");
                 lis_dep(b);
 
@@ -241,6 +284,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     var d = $(".dep");
                     var valor = $(this).val();
                     lis_dir_id(d, valor);
+                    list_plantillas(valor);
+
                 });
 
                 $(".dep").change(function () {
@@ -307,7 +352,19 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         </select>
         <br>
         <br>
+        <table class="table" border="1">
+            <thead>
+                <tr>
+                    <td>Nro</td>
+                    <td>Nombre Plantilla</td>
+                    <td>Acciones</td>
+                </tr>
+            </thead>
+            <tbody class="tbody-plantilla">
 
+            </tbody>
+
+        </table>
         <button  onclick="procesar_texto();" type="button">Procesar </button>
 
         <form class="ckeditor_form" action="../../../formato_plantilla" method="post">
@@ -334,8 +391,9 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             <p id="eMessage"></p>
 
             <div id="eButtons" style="display: none">
-                <input  type="hidden" name="opc" value="Registrar"/>
-                <input type="submit" value="Registrar Formato" onclick="leer();">
+                <input  type="hidden" name="opc" value="Actualizar"/>
+                <input  type="text" name="id" value="" class="id_pl"/>
+                <input type="submit" value="Actualizar Formato" onclick="leer();">
                 <br>
                 <input id="exec-bold" onclick="ExecuteCommand('bold');" type="button" value="Execute &quot;bold&quot; Command">
                 <input id="exec-link" onclick="ExecuteCommand('link');" type="button" value="Execute &quot;link&quot; Command">
@@ -349,11 +407,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 <br>
                 <br>
                 <input onclick="InsertText();" type="button" value="Insert Text">
-
                 <br>
-                <textarea cols="100" id="txtArea" rows="3">   First line with some leading whitespaces.
-
-Second line of text preceded by two line breaks.</textarea>
+                <textarea cols="100" id="txtArea" rows="3">   First line with some leading whitespaces.Second line of text preceded by two line breaks.</textarea>
                 <br>
                 <br>
                 <input onclick="CheckDirty();" type="button" value="checkDirty()">
@@ -363,4 +418,3 @@ Second line of text preceded by two line breaks.</textarea>
 
     </body>
 </html>
-
