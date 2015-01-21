@@ -138,15 +138,32 @@
                                                     </td> 
                                                     <% if (r.getAr_foto() == null) {%>
                                                     <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30">
-                                                        <a style="margin-left: 3%;" href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a><%if (r.getEs_dgp().equals("2")) {out.print(" <span class='label label-danger'>Fuera de Proceso</span>");}else{out.print(" <span class='label label-primary'>En Proceso</span>");}%>
+                                                        <a style="margin-left: 3%;" href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a><%if (r.getEs_dgp().equals("2")) {
+                                                                out.print(" <span class='label label-danger'>Fuera de Proceso</span>");
+                                                            } else {
+                                                                out.print(" <span class='label label-primary'>En Proceso</span>");
+                                                            }%>
 
-                                                        <div class="progress" style="margin: 0px;"><div class="<%if (r.getEs_dgp().equals("2")) {out.print("progress-bar bg-color-red");}else{out.print("progress-bar bg-color-teal");}%>" aria-valuetransitiongoal="<%=r.getEs_porcent()%>"></div></div>
+                                                        <div class="progress" style="margin: 0px;"><div class="<%if (r.getEs_dgp().equals("2")) {
+                                                                out.print("progress-bar bg-color-red");
+                                                            } else {
+                                                                out.print("progress-bar bg-color-teal");
+                                                            }%>" aria-valuetransitiongoal="<%=r.getEs_porcent()%>"></div></div>
+                                                        <label><%=r.getEs_proceso_aut()%></label>
                                                     </td>
                                                     <% } else {%>
-                                                    <td><img src="../Usuario/Fotos/<%=r.getAr_foto()%>"  width="30"  height="30"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a> <%if (r.getEs_dgp().equals("2")) {out.print(" <span class='label label-danger'>Fuera de Proceso</span>");}else{out.print(" <span class='label label-primary'>En Proceso</span>");}%>
-                                                        <div class="progress" style="margin: 0px;"><div  class="<%if (r.getEs_dgp().equals("2")) {out.print("progress-bar bg-color-red");}else{out.print("progress-bar bg-color-teal");}%>" aria-valuetransitiongoal="<%=r.getEs_porcent()%>"></div></div></td>
-                                                            
-                                                    <% }%>
+                                                    <td><img src="../Usuario/Fotos/<%=r.getAr_foto()%>"  width="30"  height="30"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a> <%if (r.getEs_dgp().equals("2")) {
+                                                            out.print(" <span class='label label-danger'>Fuera de Proceso</span>");
+                                                        } else {
+                                                            out.print(" <span class='label label-primary'>En Proceso</span>");
+                                                        }%>
+                                                        <div class="progress" style="margin: 0px;"><div  class="<%if (r.getEs_dgp().equals("2")) {
+                                                                out.print("progress-bar bg-color-red");
+                                                            } else {
+                                                                out.print("progress-bar bg-color-teal");
+                                                            }%>" aria-valuetransitiongoal="<%=r.getEs_porcent()%>"></div></div>
+                                                        <label><%=r.getEs_proceso_aut()%></label> </td>
+                                                        <% }%>
                                                 </tr>
                                                 <% }
                                                     LIST_DGP_PROCESO.clear();%>
