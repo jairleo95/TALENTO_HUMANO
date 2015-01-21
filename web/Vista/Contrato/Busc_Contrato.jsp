@@ -51,7 +51,7 @@
                             <div class="form-group">  
                                 <label>Area :</label><br>
                                 <select name="area" class="form-control" style="width: 250px" >
-                                    <option value="0">[Seleccione]</option>
+                                    <option value="">[Seleccione]</option>
                                     <%for (int i = 0; i < List_Area.size(); i++) {
                                             Area a = new Area();
                                             a = (Area) List_Area.get(i);
@@ -64,7 +64,9 @@
                         <div class="row">
                             <div class="form-group" >
                                 <label>Puesto :</label><br>
-                                <input type="text" name="puesto" class="form-control" style="width: 250px" />
+                                <select name="puesto_select" class="form-control" id="select_pu" style="width: 250px"> 
+                                    <option value="">[Seleccione]</option>
+                                </select>
                             </div>
 
                             <div class="form-group">
@@ -123,6 +125,7 @@
                                     <td ><span title="FECHA_CREACION">Fecha de Contratación</span></td>
                                     <td ><span >Opcion</span></td>
                                     <td ><span >Imprimir</span></td>
+                                    <td id="seleccionar_pl"><span >seleccionar</span></td>
                                     <td><button type="button" class="btn btn-primary" id="btns"> Seleccionar todo</button><input type="submit"name="opc" class="btn btn-primary" id="asa" value="Imprimir"></td>
 
 
@@ -143,6 +146,7 @@
     <script>
         $(document).ready(function() {
             var b = $(".tbodys");
+             list_puesto();
             /* $.ajax({
              data:$("#frm_filtro2").serialize(),
              type:"POST",
@@ -153,17 +157,20 @@
              
              });
              */
+
+            $("#seleccionar_pl").hide();
             $("#asa").hide();
             $("#btnbuscar").click(
                     function() {
                         $.post("../../ajax/Ajax_Contrato/Ajax_Contrato.jsp", $("#frm_filtro2").serialize(), function(objJson) {
                             b.empty();
+                            //alert($("#select_pu").val());
                             var list = objJson.lista;
-                            var nuro=1;
+                            var nuro = 1;
                             for (var i = 0; i < list.length; i++) {
-                                nuro=nuro+i;
+                                nuro = nuro + i;
                                 b.append("<tr>");
-                                b.append("<td>"+nuro+"</td>");
+                                b.append("<td>" + nuro + "</td>");
                                 b.append("<td><p>" + list[i].nom_ape + "</p></td>");
                                 b.append("<td>" + list[i].fe_desde + "</td>");
                                 b.append("<td>" + list[i].fe_hasta + "</td>");
@@ -173,9 +180,10 @@
                                 b.append("<td>" + list[i].ca_sueldo + '</td>');
                                 b.append("<td>" + list[i].fecha_contratacion + "</td>");
                                 b.append('<td><a class="btn-warming" href="../../contrato?opc=Detalle_Contractual&idtr=' + list[i].id_trabajador + '">Ver detalle</a> </td>');
+                                //b.append('<td id="sel' + i + '"></td>');
                                 b.append('<td><input type="checkbox" id="imp" name="Imprimir" value="' + list[i].id_contrato + '"></td>');
                                 b.append("</tr>");
-                                nuro=1;
+                                nuro = 1;
                             }
                             if (list.length !== 0) {
                                 $("#asa").show();
@@ -192,10 +200,9 @@
 //recorremos todos los checkbox seleccionados con .each
                                         $('input[name="orderBox[]"]:checked').each(function() {
                                             //$(this).val() es el valor del checkbox correspondiente
-                                             checkboxValues.push($(this).val());
-                                             alert(checkboxValues.push($(this).val()));
+                                            checkboxValues.push($(this).val());
+                                            alert(checkboxValues.push($(this).val()));
                                         });
-                                     
                                     });
                         }
                         );
@@ -219,8 +226,25 @@
                         $(".tbodys").html(html);
                     }
             );
-        }
-        );
+            /*$("#imp").change(
+                    function() {
+                        $.post("../../plantilla_contractual", "opc=List_planti&" + "idtr=" + $("#imp").val(), function(objJson) {
+
+                        });
+                    });*/
+            function list_puesto() {
+                var a = $("#select_pu");
+                $.post("../../plantilla_contractual","opc=Listpuesto", function(objJson){
+                    var list = objJson.lista;
+                    a.empty();
+                    a.append("<option value=''>[SELECCIONAR]</option>");
+                    for (var i = 0; i < list.length; i++) {
+                        a.append("<option value='" + list[i].id + "'>" + list[i].nombre + "</option>");
+                    }
+                });
+            }
+
+        });
     </script>
 
 </html>

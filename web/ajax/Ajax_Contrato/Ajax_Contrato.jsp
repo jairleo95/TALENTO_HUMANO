@@ -41,10 +41,10 @@
             seccion = seccion.toUpperCase();
             puesto = puesto.toUpperCase();
 
-           sql += (!"".equals(nom_ape)) ? " AND  upper(NOM_APE)  like '%" + nom_ape + "%'" : "";
+            sql += (!"".equals(nom_ape)) ? " AND  upper(NOM_APE)  like '%" + nom_ape + "%'" : "";
             sql += (!"".equals(sueldo)) ? "  and upper(CA_SUELDO_TOTAL) like '%" + sueldo + "%'" : "";
-            sql += (!"".equals(puesto)) ? "  and upper(NO_PUESTO) like '%" + puesto + "%'" : "";
-//             sql +=(!"".equals(area))?"  and id_area='"+area.trim()+"'":"";
+            //sql += (!"".equals(puesto)) ? "  and ID_PUESTO ='"+puesto+"'" : "";
+//            sql +=(!"".equals(area))?"  and id_area='"+area.trim()+"'":"";
             sql += (!"".equals(seccion)) ? "  and upper(no_seccion) like'%" + seccion + "%'" : "";
             //sql += (!"".equals(iduser)) ? "  and us_creacion='" + iduser.trim() + "'" : "";
             // sql +=(!"".equals(proceso))?"  and dp.id_proceso='"+proceso+"'":"";
@@ -54,6 +54,7 @@
              if(!"".equals(order)){
              sql +="ORDER BY A.ID_AUTORIZACION ,"+order;
              }*/
+            
             cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
 
             ResultSet rs = cnn.query(sql);

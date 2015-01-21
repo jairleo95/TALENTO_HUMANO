@@ -107,6 +107,10 @@
         <servlet-name>CFormato_Plantilla</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CFormato_Plantilla</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CPlantilla_Contractual</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CPlantilla_Contractual</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
         <url-pattern>/trabajador</url-pattern>
@@ -210,6 +214,10 @@
     <servlet-mapping>
         <servlet-name>CFormato_Plantilla</servlet-name>
         <url-pattern>/formato_plantilla</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CPlantilla_Contractual</servlet-name>
+        <url-pattern>/plantilla_contractual</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>300</session-timeout>
