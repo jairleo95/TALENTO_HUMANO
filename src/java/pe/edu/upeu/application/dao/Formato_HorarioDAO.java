@@ -212,6 +212,7 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
             if (id.substring(0, 3).equals("PUT")) {
                 sql += " and pp.id_puesto='" + id.trim() + "'";
             }
+            
             if (id.substring(0, 3).equals("DIR")) {
                 sql += " and pp.ID_DIRECCION='" + id.trim() + "'";
             }

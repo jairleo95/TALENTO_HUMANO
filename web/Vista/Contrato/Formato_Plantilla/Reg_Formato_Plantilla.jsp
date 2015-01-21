@@ -369,14 +369,10 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 </tr>
             </thead>
             <tbody class="tbody-plantilla">
-
             </tbody>
-
         </table>
         <button  onclick="procesar_texto();" type="button">Procesar </button>
-
         <h3>EDITAR PLANTILLAS</h3>
-
         <form class="ckeditor_form" action="../../../formato_plantilla" method="post">
             <textarea cols="100" id="editor1" name="editor1" rows="10">
             </textarea>
@@ -397,18 +393,12 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     }
                     , height: '800px'});
             </script>
-
-
-
-            <div id="eButtons" style="display: none">
+            <div id="eButtons" >
                 <input  type="hidden" name="opc" value="Actualizar"/>
                 <input  type="hidden" name="id" value="" class="id_pl"/>
                 <input type="submit" value="Actualizar Formato" onclick="leer();">
-
             </div>
         </form>
-
         <h3>ASIGNAR PLANTILLAS</h3>
-
     </body>
 </html>
