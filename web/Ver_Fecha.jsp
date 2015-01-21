@@ -30,11 +30,8 @@
                         });
 
 
-
-                        $(".procesar").click(function () {
-                            
-
-                        });
+                        var t = "PUT-000004";
+                        alert(t.substring(0, 3));
 
 
 

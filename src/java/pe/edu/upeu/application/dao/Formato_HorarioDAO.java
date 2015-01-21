@@ -209,6 +209,22 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "select   pc.ID_PLANTILLA_CONTRACTUAL,pc.NO_PLANTILLA,pc.NO_ARCHIVO,pp.ID_PLANTILLA_PUESTO,pp.ID_DEPARTAMENTO,pp.ID_DIRECCION,pp.ID_AREA,pp.ID_SECCION,pp.ID_PUESTO  from RHTC_PLANTILLA_CONTRACTUAL pc , RHTC_PLANTILLA_PUESTO pp where pp.ID_PLANTILLA_CONTRACTUAL = pc.ID_PLANTILLA_CONTRACTUAL and pp.ES_PLANTILLA_PUESTO='1' and pc.ES_PLAN_CONTRACTUAL='1'";
+            if (id.substring(0, 3).equals("PUT")) {
+                sql += " and pp.id_puesto='" + id.trim() + "'";
+            }
+            if (id.substring(0, 3).equals("DIR")) {
+                sql += " and pp.ID_DIRECCION='" + id.trim() + "'";
+            }
+            if (id.substring(0, 3).equals("DPT")) {
+                sql += " and pp.ID_DEPARTAMENTO='" + id.trim() + "'";
+            }
+            if (id.substring(0, 3).equals("ARE")) {
+                sql += " and pp.ID_AREA='" + id.trim() + "'";
+            }
+            if (id.substring(0, 3).equals("SEC")) {
+                sql += " and pp.ID_SECCION='" + id.trim() + "'";
+            }
+
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();

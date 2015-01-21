@@ -13,7 +13,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         <script>
 // The instanceReady event is fired, when an instance of CKEditor has finished
 // its initialization.
-            CKEDITOR.on('instanceReady', function(ev) {
+            CKEDITOR.on('instanceReady', function (ev) {
                 // Show the editor name and description in the browser status bar.
                 document.getElementById('eMessage').innerHTML = 'Instance <code>' + ev.editor.name + '<\/code> loaded.';
 
@@ -159,15 +159,14 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             }
             function lis_dep(b) {
 
-                $.post("../../../Direccion_Puesto", "opc=Listar_direccion", function(objJson) {
+                $.post("../../../Direccion_Puesto", "opc=Listar_direccion", function (objJson) {
                     b.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
                         return;
                     }
                     var list = objJson.lista;
-                    b.append("<option value='' > [SELECCIONE] </option>");
-                    b.append("<option value='0' > [TODOS] </option>");
+                    b.append("<option value='0' selected=''> [TODOS] </option>");
                     if (list.length !== 0) {
                         for (var i = 0; i < list.length; i++) {
                             b.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
@@ -180,15 +179,14 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             function  lis_dir_id(d, valor) {
 
 
-                $.post("../../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + valor, function(objJson) {
+                $.post("../../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + valor, function (objJson) {
                     d.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
                         return;
                     }
                     var list = objJson.lista;
-                    d.append("<option value='' > [SELECCIONE] </option>");
-                    d.append("<option value='0' > [TODOS] </option>");
+                    d.append("<option value='0' selected=''> [TODOS] </option>");
                     if (list.length !== 0) {
                         for (var i = 0; i < list.length; i++) {
                             d.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
@@ -202,14 +200,14 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             function list_area_id(c, valor) {
 
 
-                $.post("../../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + valor, function(objJson) {
+                $.post("../../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + valor, function (objJson) {
                     c.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
                         return;
                     }
                     var list = objJson.lista;
-                    c.append("<option value='' > [SELECCIONE] </option>");
+                    c.append("<option value='0'selected='' > [TODOS] </option>");
                     if (list.length !== 0) {
                         for (var i = 0; i < list.length; i++) {
                             c.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
@@ -221,15 +219,14 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
             }
             function list_sec_id(d, valor) {
-                $.post("../../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + valor, function(objJson) {
+                $.post("../../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + valor, function (objJson) {
                     d.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
                         return;
                     }
                     var list = objJson.lista;
-                    d.append("<option value='' > [SELECCIONE] </option>");
-                    d.append("<option value='0' > [TODOS] </option>");
+                    d.append("<option value='0' selected='' > [TODOS] </option>");
                     if (list.length !== 0) {
                         for (var i = 0; i < list.length; i++) {
                             d.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
@@ -242,7 +239,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             }
             function list_plantillas(valor) {
                 var d = $(".tbody-plantilla");
-                $.post("../../../formato_plantilla", "opc=Cargar_Plantillas&" + "id=" + valor, function(objJson) {
+                $.post("../../../formato_plantilla", "opc=Cargar_Plantillas&" + "id=" + valor, function (objJson) {
                     d.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -263,8 +260,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         d.append("<tr><td colspan='3'>No existen Plantillas</td></tr>");
                     }
 
-                    $(".btn-cargar_pl").click(function() {
-                        //alert();
+                    $(".btn-cargar_pl").click(function () {
                         mostrar_plantilla($(".plantilla" + $(this).val()).val());
 
                         $(".id_pl").val($(".plantilla" + $(this).val()).val());
@@ -275,49 +271,49 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             }
             function mostrar_plantilla(valor) {
                 var editor = CKEDITOR.instances.editor1;
-                $.post("../../../formato_plantilla", "opc=Listar&id=" + valor, function(objJson) {
+                $.post("../../../formato_plantilla", "opc=Listar&id=" + valor, function (objJson) {
                     var imprimir = objJson.imprimir;
                     editor.setData(imprimir);
                 });
 
             }
-
-
-
-            $(document).ready(function() {
-
+            $(document).ready(function () {
                 // mostrar_plantilla();
                 var b = $(".dir");
                 lis_dep(b);
 
-                b.change(function() {
+                b.change(function () {
                     var d = $(".dep");
                     var valor = $(this).val();
                     lis_dir_id(d, valor);
+
                     list_plantillas(valor);
 
                 });
 
-                $(".dep").change(function() {
+                $(".dep").change(function () {
                     list_area_id($(".area"), $(this).val());
+                    list_plantillas($(this).val());
                 });
 
-                $(".area").change(function() {
+                $(".area").change(function () {
                     var d = $(".seccion");
                     list_sec_id(d, $(this).val());
+                    list_plantillas($(this).val());
                 });
 
-                $(".seccion").change(function() {
+                $(".seccion").change(function () {
+                    list_plantillas($(this).val());
+
                     var e = $(".puesto");
-                    $.post("../../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $(this).val(), function(objJson) {
+                    $.post("../../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $(this).val(), function (objJson) {
                         e.empty();
                         if (objJson.rpta == -1) {
                             alert(objJson.mensaje);
                             return;
                         }
                         var list = objJson.lista;
-                        e.append("<option value='' > [SELECCIONE] </option>");
-                        e.append("<option value='0' > [TODOS] </option>");
+                        e.append("<option value='0' selected='' > [TODOS] </option>");
                         if (list.length !== 0) {
                             for (var i = 0; i < list.length; i++) {
                                 e.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
@@ -328,12 +324,19 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         }
                     });
                 });
+
+                $(".puesto").change(function () {
+                    list_plantillas($(this).val());
+
+                });
             });
 
         </script>
 
     </head>
+
     <body>
+        <h3>CARGAR PLANTILLAS</h3>
         <label>Dirección:</label>
         <select class="dir" name="DIRECCION">
             <option value="">[SELECCIONE]</option>
@@ -341,24 +344,19 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         </select>
         <label>Departamento:</label>
         <select name="DEPARTAMENTO" class="dep">
-            <option value="">[SELECCIONE]</option>
             <option value="0">[TODO]</option>
         </select>
         <label>Area:</label>
         <select name="AREA" class="area">
-            <option value="">[SELECCIONE]</option>
             <option value="0">[TODO]</option>
         </select>
         <label>Sección:</label>
         <select name="SECCION" class="seccion">
-            <option value="">[SELECCIONE]</option>
             <option value="0">[TODO]</option>
         </select>
         <label>Puesto:</label>
         <select name="PUESTO" class="puesto">
-            <option value="">[SELECCIONE]</option>
             <option value="0">[TODO]</option>
-            <option value="1">Direccion General de Sistemas</option>
         </select>
         <br>
         <br>
@@ -377,6 +375,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         </table>
         <button  onclick="procesar_texto();" type="button">Procesar </button>
 
+        <h3>EDITAR PLANTILLAS</h3>
+
         <form class="ckeditor_form" action="../../../formato_plantilla" method="post">
             <textarea cols="100" id="editor1" name="editor1" rows="10">
             </textarea>
@@ -387,7 +387,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         focus: onFocus,
                         blur: onBlur,
                         // Check for availability of corresponding plugins.
-                        pluginsLoaded: function(evt) {
+                        pluginsLoaded: function (evt) {
                             var doc = CKEDITOR.document, ed = evt.editor;
                             if (!ed.getCommand('bold'))
                                 doc.getById('exec-bold').hide();
@@ -398,33 +398,17 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     , height: '800px'});
             </script>
 
-            <p id="eMessage"></p>
+
 
             <div id="eButtons" style="display: none">
                 <input  type="hidden" name="opc" value="Actualizar"/>
-                <input  type="text" name="id" value="" class="id_pl"/>
+                <input  type="hidden" name="id" value="" class="id_pl"/>
                 <input type="submit" value="Actualizar Formato" onclick="leer();">
-                <br>
-                <input id="exec-bold" onclick="ExecuteCommand('bold');" type="button" value="Execute &quot;bold&quot; Command">
-                <input id="exec-link" onclick="ExecuteCommand('link');" type="button" value="Execute &quot;link&quot; Command">
-                <input onclick="Focus();" type="button" value="Focus">
-                <br><br>
-                <input onclick="InsertHTML();" type="button" value="Insert HTML">
-                <input onclick="SetContents();" type="button" value="Set Editor Contents">
-                <input onclick="GetContents();" type="button" value="Get Editor Contents (XHTML)">
-                <br>
-                <textarea cols="100" id="htmlArea" rows="3">&lt;h2&gt;Test&lt;/h2&gt;&lt;p&gt;This is some &lt;a href="/Test1.html"&gt;sample&lt;/a&gt; HTML code.&lt;/p&gt;</textarea>
-                <br>
-                <br>
-                <input onclick="InsertText();" type="button" value="Insert Text">
-                <br>
-                <textarea cols="100" id="txtArea" rows="3">   First line with some leading whitespaces.Second line of text preceded by two line breaks.</textarea>
-                <br>
-                <br>
-                <input onclick="CheckDirty();" type="button" value="checkDirty()">
-                <input onclick="ResetDirty();" type="button" value="resetDirty()">
+
             </div>
         </form>
+
+        <h3>ASIGNAR PLANTILLAS</h3>
 
     </body>
 </html>
