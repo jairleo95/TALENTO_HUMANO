@@ -265,17 +265,6 @@ public class CContrato extends HttpServlet {
                 String ape_pat = request.getParameter("ape_pat");
                 // String all = request.getParameter("all");
 
-            //response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp");
-             response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp?ida1=" + ida1);
-        }
-        if (opc.equals("Buscar")) {
-                String Buscar = request.getParameter("busqueda");
-                String dni = request.getParameter("dni");
-                String nom = request.getParameter("nom");
-                String ape_mat = request.getParameter("ape_mat");
-                String ape_pat = request.getParameter("ape_pat");
-                // String all = request.getParameter("all");
-
                 if (("Buscar".equals(Buscar) & (!"".equals(dni) | !"".equals(nom) | !"".equals(ape_mat) | !"".equals(ape_pat)))) {
                     String busc = (String) request.getParameter("busc");
                     if (busc != null) {
