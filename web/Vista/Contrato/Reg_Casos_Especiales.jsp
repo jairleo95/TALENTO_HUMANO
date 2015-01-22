@@ -18,12 +18,12 @@
 <%@page import="pe.edu.upeu.application.model.Trabajador"%>
 
 <!--CONTRATO-->
-<jsp:useBean id="List_Anno" scope="application" class="java.util.ArrayList"/>
+
+<jsp:useBean id="LISTAR_ANNO" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Puesto" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_Direccion" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="LIST_ID_DGP" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="ASIGNACION_F" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_anno_max" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_modalidad" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="list_reg_labo" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_centro_costo" scope="application" class="java.util.ArrayList"/>
@@ -170,20 +170,18 @@
                                                     <div class="row" >
                                                         <section class="col col-2">
                                                             <label class="select" id="titu">Año:
-                                                                <select name="AÑO_ID" required="" class="input-group-sm">
-                                                                    <%  for (int i = 0; i < List_Anno.size(); i++) {
+                                                                <select name="" required="" class="input-group-sm">
+                                                                   <%  String MAX = request.getParameter("MAX_ID");
+                                                                       for (int i = 0; i < LISTAR_ANNO.size(); i++) {
                                                                             Anno a = new Anno();
-                                                                            for (int e = 0; e < List_anno_max.size(); e++) {
-                                                                                Anno w = new Anno();
-                                                                                w = (Anno) List_anno_max.get(e);
-                                                                                a = (Anno) List_Anno.get(i);%>
-                                                                    <%if (a.getId_anno().trim() != w.getId_anno().trim() && a.getId_anno().equals("")) {%>
-                                                                    <option value="<%=a.getId_anno()%>" selected="selected"><%=a.getNo_anno()%></option>
-                                                                    <%} else {%>
-                                                                    <option value="<%=w.getId_anno()%>"><%=w.getNo_anno()%></option>
-                                                                    <%}
-                                                                            }
-                                                                        }%>
+                                                                            a = (Anno) LISTAR_ANNO.get(i);
+                                                                          if(a.getId_anno().trim().equals(MAX)){
+                                                                     %>
+                                                                     <option value="<%=a.getId_anno()%>" selected="selected" ><%=a.getNo_anno()%></option> 
+                                                                    <%}%>
+                                                                    <option value="<%=a.getId_anno()%>" ><%=a.getNo_anno()%></option>            
+                                                                            <%}%>
+                                                                    
                                                                 </select> 
                                                             </label>
                                                         </section>
@@ -293,6 +291,32 @@
                                                         <section class="col col-2" >
                                                             <label class="input" id="titu">Asignanción Familiar:
                                                                 <input type="text" name="ASIG_FAMILIAR" value="0"  class="input-group-sm">
+                                                            </label>
+                                                        </section>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div  class="row" id="centro-costo_1" >
+                                                        <section class="col col-4">
+                                                            <label class="select" id="titu">Centro de Costo Nº 1:
+                                                                <select name="CENTRO_COSTOS_1" class="select-cc centro_costo1" required="">
+                                                                    <option value="">[SELECCIONE]</option>
+                                                                </select>
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-2">
+                                                            <label class="input" id="titu">%
+                                                                <input name="PORCENTAJE_1"  type="text" value="100"  class="porcentaje_cc"/>
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-2">
+                                                            <label class="btn">
+                                                                <button type="button" class="btn btn-default btn-agregar-cc" id="btn-agregar-cc" >Agregar</button>
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-2">
+                                                            <label class="input" style="font-weight: bold;color:red;">% Total :
+                                                                <input  readonly="" name="TOTAL_PORCENTAJE" max="100" min="100" maxlength="3" type="text" class="total_porcentaje"  />
                                                             </label>
                                                         </section>
                                                     </div>
@@ -556,6 +580,16 @@
                                                     <input type="hidden" value="ARE-0022" name="AREA_ID" class="text-box" >
 
                                                 </fieldset>
+                                                <footer>
+                                                    <input  type="hidden" name="opc" value="REG_CASOS_ESP">
+                                                    <button type="submit" class="btn btn-primary" name="opc">
+                                                        Siguiente
+                                                    </button>
+                                                    <button type="button" class="btn btn-default" onclick="window.history.back();">
+                                                        Regresar
+                                                    </button>
+
+                                                </footer>
                                             </form>
 
                                         </div>
@@ -733,7 +767,7 @@
                                                    <!-- <input  type="hidden" name="dep_actual" value="<%//=id_dep%>" class="dep_actual" />-->
                                                 </div>
                                             </fieldset>
-                                           <footer>
+                                            <footer>
                                                 <input  type="hidden" name="opc" value="REG_CASOS_ESP">
                                                 <button type="submit" class="btn btn-primary" name="opc">
                                                     Siguiente
@@ -741,7 +775,7 @@
                                                 <button type="button" class="btn btn-default" onclick="window.history.back();">
                                                     Regresar
                                                 </button>
-                                                
+
                                             </footer>
 
                                         </div>
@@ -1034,7 +1068,8 @@
                 if (opc == "1") {
                     if (arr_cc[1] == lista[i].id) {
                         cc_dep.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
-                        listar_centro_costo(x, opc, arr_cc);
+
+                        (x, opc, arr_cc);
 
 
                     } else {
@@ -2002,6 +2037,134 @@
         s.parentNode.insertBefore(ga, s);
     })();
 
+</script>
+<script>
+    $(document).ready(function() {
+        Listar_dep();
+
+        var a = $("#select-sub-mod");
+        var c = $("#Selec_Area");
+        var d = $("#select_sec");
+        var b = $("#selec_dep");
+        var e = $("#pu_id_se");
+        // $.post("../../  ")
+        $("#select_mod").change(
+                function() {
+                    // alert("?MODALIDAD="+$("#select_mod").val());
+
+                    $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function(objJson) {
+                        a.empty();
+                        var list = objJson.lista;
+                        a.append("<option value='' > [SELECCIONE] </option>");
+                        if (list.length !== 0) {
+                            for (var i = 0; i < list.length; i++) {
+                                a.append('<option value="' + list[i].id_submodalidad + '">' + list[i].de_submod + '</option>');
+                            }
+                        }
+                    });
+                });
+        $("#selec_dep").change(
+                function() {
+                    $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function(objJson) {
+                        c.empty();
+                        if (objJson.rpta == -1) {
+                            alert(objJson.mensaje);
+                            return;
+                        }
+                        var list = objJson.lista;
+                        c.append("<option value='' > [SELECCIONE] </option>");
+                        if (list.length !== 0) {
+                            for (var i = 0; i < list.length; i++) {
+                                c.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+                            }
+                        } else {
+                            c.append("<option value='' > [no hay] </option>");
+                        }
+                    });
+                });
+        $("#select_dir").change(
+                function() {
+                    $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $("#select_dir").val(), function(objJson) {
+                        b.empty();
+                        if (objJson.rpta == -1) {
+                            alert(objJson.mensaje);
+                            return;
+                        }
+                        var list = objJson.lista;
+                        b.append("<option value='' > [SELECCIONE] </option>");
+                        if (list.length !== 0) {
+                            for (var i = 0; i < list.length; i++) {
+                                b.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
+                            }
+                        } else {
+                            b.append("<option value='' > [] </option>");
+                        }
+                    });
+                });
+        $("#Selec_Area").change(
+                function() {
+                    $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function(objJson) {
+                        d.empty();
+
+                        var list = objJson.lista;
+                        d.append("<option value='' > [SELECCIONE] </option>");
+                        if (list.length !== 0) {
+                            for (var i = 0; i < list.length; i++) {
+                                d.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+                            }
+                        } else {
+                            d.append("<option value='' > [no hay] </option>");
+                        }
+                    });
+                });
+        $("#select_sec").change(
+                function() {
+                    $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function(objJson) {
+                        e.empty();
+                        if (objJson.rpta == -1) {
+                            alert(objJson.mensaje);
+                            return;
+                        }
+                        var list = objJson.lista;
+                        e.append("<option value='' > [SELECCIONE] </option>");
+                        if (list.length !== 0) {
+                            for (var i = 0; i < list.length; i++) {
+                                e.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
+                            }
+                        } else {
+                            e.empty();
+                            e.append("<option value='' > [] </option>");
+                        }
+                    });
+                });
+        $("#btn-registrar").click(
+                function() {
+                    var pr = $("#select-proceso").val();
+                    $.post("../../paso", $("#form-paso").serialize(), function() {
+                        Listar_Paso(pr);
+                    });
+                    $("#btn-registrar").val("Registrar Paso");
+                    $(".opc").val("Registrar");
+                    $("#form-paso")[0].reset();
+
+                    return false;
+                }
+        );
+        function Listar_dep() {
+            var s = $("#selec_dep");
+
+            $.post("../../Direccion_Puesto", "opc=Listar", function(objJson) {
+                s.empty();
+                var lista = objJson.lista;
+                s.append("<option value='' > [SELECCIONE] </option>");
+                for (var j = 0; j < lista.length; j++) {
+                    s.append("<option value='" + lista[j].id + "' > " + lista[j].nom + "</option>");
+                }
+            });
+        }
+
+
+    });
 </script>
 </html>
 

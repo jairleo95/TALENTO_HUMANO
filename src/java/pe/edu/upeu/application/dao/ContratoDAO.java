@@ -13,6 +13,7 @@ import java.util.List;
 import pe.edu.upeu.application.dao_imp.InterfaceContratoDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
+import pe.edu.upeu.application.model.Anno;
 import pe.edu.upeu.application.model.List_Rh_Contrato_Fec;
 import pe.edu.upeu.application.model.Modalidad;
 import pe.edu.upeu.application.model.Regimen_Laboral;
@@ -389,6 +390,49 @@ public class ContratoDAO implements InterfaceContratoDAO {
             this.conn.close();
         }
         return id_Tr;
+    }
+
+    @Override
+    public String ID_MAX_ANNO() {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select 'ANN-'||lpad(to_char(MAX(TO_NUMBER(SUBSTR(ID_ANNO,5,8)))),6,'0') from RHTR_ANNO ";
+        String id_anno = null;
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                id_anno = rs.getString(1);
+            }
+        } catch (SQLException e) {
+
+        } finally {
+            this.conn.close();
+        }
+        return id_anno;
+    }
+
+    @Override
+    public List<Anno> LIST_ANNO() {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = " select * from RHTR_ANNO  ";
+        List<Anno> list = new ArrayList<Anno>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+
+            while (rs.next()) {
+               Anno a = new Anno();
+                a.setId_anno(rs.getString("id_anno"));
+                a.setNo_anno(rs.getString("no_anno"));
+                a.setDe_anno(rs.getString("de_anno"));
+                a.setFe_desde(rs.getString("fe_desde"));
+                a.setFe_hasta(rs.getString("fe_hasta"));
+                a.setDe_observacion(rs.getString("de_observacion"));
+                list.add(a);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return list;
     }
 
 }

@@ -9,13 +9,13 @@
         <link rel="stylesheet" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
-
         <title></title>
     </head>
     <body>
     <center>
         <div class="spacing" >
             <center><h1 class="spacing" style="font-weight: bold;">
+                    BUSCAR TRABAJADOR
                     <%
                 HttpSession sesion = request.getSession(true);
                 String text = request.getParameter("text");
@@ -26,7 +26,7 @@
         </div>
         <hr/>
         <div>
-            <form method="post" action="../../trabajador" class="form-inline">                    
+            <form method="post" action="../../contrato" class="form-inline">                    
                 <div class="form-group">
                     <label class="control-label">Nombres:</label><br>
                     <input type="text"  class="form-control"  name="nom">
@@ -101,9 +101,9 @@
                             out.print("Tiene requerimiento en proceso");
                         } else {
                     %>
-                    <a href="../../dgp?idtr=<%=tr.getId_trabajador()%>&iddep=<%=iddep%>&opc=Reg_form" class="btn bg-color-teal txt-color-white">Elaborar Contrato</a>
+                    <a href="../../contrato?idtr=<%=tr.getId_trabajador()%>&iddep=<%=iddep%>&opc=LIST_FORMULARIO" class="btn bg-color-teal txt-color-white">Elaborar Contrato</a>
                     <%}%>
-                </td>
+                </td>   
             </tr>
             <%
                         }
