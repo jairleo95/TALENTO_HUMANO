@@ -9,7 +9,8 @@
         <link type="text/css" rel="stylesheet" href="../../../css/Css_Detalle/style.css"> 
         <link rel="stylesheet" type="text/css" media="screen" href="../../../HTML_version/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../HTML_version/css/font-awesome.min.css">
-        <script src=" ../../../../../js1/jquery-1.11.1.min.js" type="text/javascript"></script>
+       <!-- <script type="text/javascript" src="../../../js-steps/jquery-1.11.1.js" "></script>-->
+       <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
         <title>Familiares</title>
 
     </head>

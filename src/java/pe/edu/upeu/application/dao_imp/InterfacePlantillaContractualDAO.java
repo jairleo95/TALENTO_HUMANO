@@ -13,5 +13,5 @@ import java.util.Map;
  * @author joserodrigo
  */
 public interface InterfacePlantillaContractualDAO {
-    public List<Map<String,?>> List_PLantillas(String id_dir,String id_dep,String id_area,String id_sec,String id_puesto);
+    public List<Map<String,?>> List_PLantillas(String id_puesto);
 }

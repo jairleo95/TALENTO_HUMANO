@@ -129,9 +129,9 @@
     <body>
     <center>
 
-        <%  if (List_id_Contrato_DGP.size() == 0) {%>
-        <h3>Aun no se ha hecho Contrato.</h3>
-        <%}/* else {*/%>
+        <%%>
+ 
+        <%/* else {*/%>
 
         <%
 

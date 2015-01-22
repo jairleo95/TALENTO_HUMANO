@@ -51,9 +51,9 @@ public class AnnoDAO implements InterfaceAnnoDAO {
     @Override
     public String List_Anno_Max_Cont(String id_Trabajador) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select d.id_anno from (select a.id_anno,rhc.id_contrato,rhc.id_dgp ,rhc.id_trabajador from RHTM_CONTRATO rhc ,  RHTR_ANNO a where  rhc.id_anno=a.id_anno and a.id_anno =( select 'ANN-'||lpad(to_char(MAX(TO_NUMBER(SUBSTR(ID_ANNO,5,8)))),6,'0') from RHTR_ANNO)) d left outer join RHTM_DGP dgp on (d.id_dgp = dgp.id_dgp) where d.id_trabajador='"+id_Trabajador+"'";
+        String sql = "SELECT ID_ANNO FROM RHTR_ANNO WHERE ID_ANNO=(SELECT 'ANN-'||lpad(TO_CHAR(MAX(TO_NUMBER(SUBSTR(ID_ANNO,5,8)))),6,'0')FROM(SELECT f.id_anno,f.no_anno,f.id_trabajador FROM (SELECT a.id_anno, a.no_anno , r.id_dgp , r.id_trabajador FROM RHTR_ANNO a ,RHTM_CONTRATO r WHERE a.id_anno=r.id_anno AND r.ES_CONTRATO_TRABAJADOR=1)f WHERE f.id_trabajador='"+id_Trabajador.trim()+"' ORDER BY f.no_anno DESC))";
         ResultSet rs = this.conn.query(sql);
-        String id = "";
+        String id = null;
 
         try {
             rs.next();
@@ -63,9 +63,7 @@ public class AnnoDAO implements InterfaceAnnoDAO {
         } finally {
             this.conn.close();
         }
-
         return id;
-
     }
 
     @Override
@@ -95,12 +93,30 @@ public class AnnoDAO implements InterfaceAnnoDAO {
             this.conn.close();
         }
         return a;
-        
     }
-
     @Override
     public List<Anno> List_anno_ma() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    @Override
+    public List<Anno> List_Anno_trabajador(String idtr) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT f.id_anno,f.no_anno,f.id_trabajador FROM(SELECT a.id_anno, a.no_anno ,r.id_dgp ,r.id_trabajador FROM RHTR_ANNO a ,RHTM_CONTRATO r WHERE a.id_anno  =r.id_anno AND r.ES_CONTRATO_TRABAJADOR=1)f WHERE f.id_trabajador='"+idtr.trim()+"' ORDER BY f.no_anno DESC";
+        List<Anno> list = new ArrayList<Anno>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+
+            while (rs.next()) {
+                Anno a = new Anno();
+                a.setId_anno(rs.getString("id_anno"));
+                a.setNo_anno(rs.getString("no_anno"));
+                list.add(a);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return list;
+    }
 }
