@@ -32,7 +32,7 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select id_plazo,no_plazo,det_alerta ,to_char(fe_desde,'yyyy-mm-dd')  as fe_desde ,to_char(fe_hasta,'yyyy-mm-dd')  as fe_hasta  from rhtr_plazo where es_plazo ='1' and SYSDATE BETWEEN FE_DESDE AND FE_HASTA";
+            String sql = "select id_plazo,no_plazo,det_alerta ,to_char(fe_desde,'yyyy-mm-dd')  as fe_desde ,to_char(fe_hasta,'yyyy-mm-dd')  as fe_hasta  from rhtr_plazo where es_plazo ='1' and id_requerimiento='0' and SYSDATE BETWEEN FE_DESDE AND FE_HASTA";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
 
@@ -58,13 +58,14 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
         return lista;
 
     }
+
     @Override
     public List<Map<String, ?>> Listar_Plazo() {
 
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select id_plazo,no_plazo,det_alerta ,to_char(fe_desde,'yyyy-mm-dd')  as fe_desde ,to_char(fe_hasta,'yyyy-mm-dd')  as fe_hasta  from rhtr_plazo where es_plazo ='1' ";
+            String sql = " select id_plazo,no_plazo,det_alerta ,to_char(fe_desde,'yyyy-mm-dd')  as fe_desde ,to_char(fe_hasta,'yyyy-mm-dd')  as fe_hasta, r.ID_TIPO_PLANILLA,p.ID_REQUERIMIENTO ,r.NO_REQ,t.TI_PLANILLA from rhtr_plazo p ,rhtr_requerimiento r , RHTR_TIPO_PLANILLA t where es_plazo ='1' and r.ID_REQUERIMIENTO = p.ID_REQUERIMIENTO and t.ID_TIPO_PLANILLA = r.ID_TIPO_PLANILLA union select id_plazo,no_plazo,det_alerta ,to_char(fe_desde,'yyyy-mm-dd')  as fe_desde ,to_char(fe_hasta,'yyyy-mm-dd')  as fe_hasta, '0','0' ,'Todos  los requerimientos','Todos las planillas' from rhtr_plazo  where es_plazo='1' and ID_REQUERIMIENTO='0'";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
 
@@ -74,6 +75,9 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
                 rec.put("det", rs.getString("DET_ALERTA"));
                 rec.put("desde", rs.getString("FE_DESDE"));
                 rec.put("hasta", rs.getString("FE_HASTA"));
+                rec.put("id_req", rs.getString("id_requerimiento"));
+                rec.put("req", rs.getString("no_req"));
+                rec.put("planilla", rs.getString("ti_planilla"));
                 lista.add(rec);
             }
             rs.close();
@@ -92,20 +96,29 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
     }
 
     @Override
-    public void INSERT_PLAZO(String ID_PLAZO, String NO_PLAZO, String DET_ALERTA, String FE_DESDE, String FE_HASTA, String ES_PLAZO) {
+    public void INSERT_PLAZO(String ID_PLAZO, String NO_PLAZO, String DET_ALERTA, String FE_DESDE, String FE_HASTA, String ES_PLAZO, String ID_REQUERIMIENTO) {
         try {
 
-            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_PLAZO( ?, ?, ?, ?, ?, ?)}");
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_PLAZO( ?, ?, ?, ?, ?, ?,?)}");
             cst.setString(1, null);
             cst.setString(2, NO_PLAZO);
             cst.setString(3, DET_ALERTA);
             cst.setString(4, c.convertFecha(FE_DESDE));
             cst.setString(5, c.convertFecha(FE_HASTA));
             cst.setString(6, "1");
+            cst.setString(7, ID_REQUERIMIENTO.trim());
             cst.execute();
-        } catch (SQLException ex) {
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 

@@ -54,7 +54,8 @@ public class CPlazo extends HttpServlet {
                 String DET_ALERTA = request.getParameter("descripcion");
                 String FE_DESDE = request.getParameter("desde");
                 String FE_HASTA = request.getParameter("hasta");
-                pl.INSERT_PLAZO(null, NO_PLAZO, DET_ALERTA, FE_DESDE, FE_HASTA, null);
+                String ID_REQ = request.getParameter("id_req");
+                pl.INSERT_PLAZO(null, NO_PLAZO, DET_ALERTA, FE_DESDE, FE_HASTA, null, ID_REQ.trim());
             }
             if (opc.equals("Modificar")) {
 

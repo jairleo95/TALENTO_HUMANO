@@ -6,6 +6,7 @@
 package pe.edu.upeu.application.dao_imp;
 
 import java.util.List;
+import pe.edu.upeu.application.model.Anno;
 import pe.edu.upeu.application.model.List_Rh_Contrato_Fec;
 import pe.edu.upeu.application.model.Modalidad;
 import pe.edu.upeu.application.model.Regimen_Laboral;
@@ -42,4 +43,8 @@ public interface InterfaceContratoDAO {
     public String Buscar_id_tr(String id_dgp);
 
     public String Buscar_id_contrato_x_idtr(String idtr);
+    
+    public String ID_MAX_ANNO();
+    
+    public List<Anno> LIST_ANNO() ;
 }

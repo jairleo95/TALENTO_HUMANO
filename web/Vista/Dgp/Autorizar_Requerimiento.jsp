@@ -170,14 +170,16 @@
 
                                                     <th data-hide="phone,tablet"><strong>Foto</strong> </th>
                                                     <th data-class="expand" ><strong>Apellidos Y Nombres</strong></th>
+
                                                     <th data-hide="phone,tablet"><strong>Puesto</strong></th>
                                                     <th data-hide="phone,tablet"><strong>Sección</strong></th>
                                                     <th data-hide="phone,tablet"><strong>Area</strong></th>
-                                                    <th data-hide="phone,tablet"><strong>Motivo</strong></th>
+                                                    <th data-hide="phone,tablet"><strong>Requerimiento</strong></th>
                                                     <!--  <td>Departamento</td>-->
                                                     <th data-hide="phone,tablet"><strong>Descripcion</strong></th>
                                                         <% if (dep.equals("DPT-0019")) {%>
-                                                    <th  data-hide="phone,tablet">Fecha de Creación</th>
+                                                    <th  data-hide="phone,tablet">Fecha de Creación</th>  
+                                                    <th data-class="expand" ><strong>¿Cumplio Plazos?</strong></th>
                                                         <%}%>
                                                 </tr>
                                             </thead>
@@ -261,7 +263,13 @@
 
                                                     <% if (dep.equals("DPT-0019")) {%>
                                                     <td ><%=a.getFe_creacion()%></td>
-                                                    <%}%>
+
+                                                    <td><%if (a.getVal_plazo() > 0) {
+                                                            out.print(" <span class='label label-danger'>No cumplio</span>");
+                                                        } else {
+                                                            out.print(" <span class='label label-primary'>Cumplio Plazo</span>");
+                                                        }%></td>
+                                                        <%}%>
                                                 </tr>
                                                 <% }
                                                     List_id_Autorizacion.clear();%>
