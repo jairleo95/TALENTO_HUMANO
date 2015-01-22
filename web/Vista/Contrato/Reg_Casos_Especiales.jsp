@@ -184,7 +184,8 @@
                                                                     <%}
                                                                             }
                                                                         }%>
-                                                                </select>  </label>
+                                                                </select> 
+                                                            </label>
                                                         </section>
                                                         <section class="col col-2">
                                                             <label class="input" id="titu">Desde: 
@@ -734,8 +735,7 @@
                                             </fieldset>
                                            <footer>
                                                 <input  type="hidden" name="opc" value="REG_CASOS_ESP">
-                                                
-                                                <button type="submit" class="btn btn-primary">
+                                                <button type="submit" class="btn btn-primary" name="opc">
                                                     Siguiente
                                                 </button>
                                                 <button type="button" class="btn btn-default" onclick="window.history.back();">

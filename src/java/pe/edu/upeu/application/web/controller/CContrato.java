@@ -120,19 +120,19 @@ public class CContrato extends HttpServlet {
             getServletContext().setAttribute("List_id_Contrato_DGP", con.List_id_Contrato_DGP(idtr, ida1));
 
             out.println(ida1);
-             getServletContext().setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr));
-             getServletContext().setAttribute("List_Jefe", l.List_Jefe());
-             getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
-             //getServletContext().setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
-             getServletContext().setAttribute("List_ID_User", usu.List_ID_User(iduser));
-             getServletContext().setAttribute("List_Usuario", usu.List_Usuario());
-             getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
-             getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
-             getServletContext().setAttribute("List_centro_costo", cc.List_centro_costo());
-             getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
-             getServletContext().setAttribute("List_modalidad", con.List_modalidad());
-             getServletContext().setAttribute("Listar_Sub_mo", sub.Listar_Sub_mo());
-             getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
+            getServletContext().setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr));
+            getServletContext().setAttribute("List_Jefe", l.List_Jefe());
+            getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
+            //getServletContext().setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
+            getServletContext().setAttribute("List_ID_User", usu.List_ID_User(iduser));
+            getServletContext().setAttribute("List_Usuario", usu.List_Usuario());
+            getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
+            getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
+            getServletContext().setAttribute("List_centro_costo", cc.List_centro_costo());
+            getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
+            getServletContext().setAttribute("List_modalidad", con.List_modalidad());
+            getServletContext().setAttribute("Listar_Sub_mo", sub.Listar_Sub_mo());
+            getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
             //  response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp?ida1=" + ida1);
         }
         if (opc.equals("REGISTRAR CONTRATO")) {
@@ -237,8 +237,31 @@ public class CContrato extends HttpServlet {
             getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
             //getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());*/
 
+            //response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp");
+            // response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp?ida1=" + ida1);
+        }
+
+        if (opc.equals("LIST_FORMULARIO")) {
+            String US_CREACION = iduser;
+            /*Cambiar este for con un trigger al momento de insertar*/
+
+            /*---*/
+            getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
+            getServletContext().setAttribute("List_centro_costo", cc.List_centro_costo());
+            getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
+            getServletContext().setAttribute("List_modalidad", con.List_modalidad());
+            getServletContext().setAttribute("Listar_Sub_mo", sub.Listar_Sub_mo());
+            getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
+            getServletContext().setAttribute("Listar_Sub_mo", sub.Listar_Sub_mo());
+            getServletContext().setAttribute("Listar_Direccion", dir.Listar_Direccion());
+            getServletContext().setAttribute("List_Jefe", l.List_Jefe());
+            getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
+            getServletContext().setAttribute("List_ID_User", usu.List_ID_User(US_CREACION));
+            getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
+            getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
+            //getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());*/
+
             response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp");
-           // response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp?ida1=" + ida1);
         }
 
         if (opc.equals("REG_CASOS_ESP")) {
