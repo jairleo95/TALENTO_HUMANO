@@ -265,42 +265,6 @@ public class CContrato extends HttpServlet {
                 String ape_pat = request.getParameter("ape_pat");
                 // String all = request.getParameter("all");
 
-                if (("Buscar".equals(Buscar) & (!"".equals(dni) | !"".equals(nom) | !"".equals(ape_mat) | !"".equals(ape_pat)))) {
-                    String busc = (String) request.getParameter("busc");
-                    if (busc != null) {
-                        getServletContext().setAttribute("ListarTrabajador2", tr.ListarTrabajador(iddep, dni, nom, ape_pat, ape_mat));
-                        getServletContext().setAttribute(nom, dgp.VAL_OPC_DGP(dni));
-                        response.sendRedirect("Vista/Contrato/Gen_Contrato_CE.jsp");
-                    }
-                } else {
-                    response.sendRedirect("Vista/Contrato/Gen_Contrato_CE.jsp");
-
-                }
-            }
-
-        if (opc.equals("LIST_FORMULARIO")) {
-            
-            
-            String US_CREACION = iduser;
-            String idtr1 = request.getParameter("idtr");
-           
-
-           // getServletContext().setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr1));
-            getServletContext().setAttribute("LISTAR_ANNO", con.LIST_ANNO());
-            String MAX_ID = con.ID_MAX_ANNO();
-             getServletContext().setAttribute("Listar_Direccion", dir.Listar_Direccion());
-            getServletContext().setAttribute("List_Jefe", l.List_Jefe());
-            getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
-            getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
-            getServletContext().setAttribute("List_modalidad", con.List_modalidad());
-            //getServletContext().setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
-            getServletContext().setAttribute("List_ID_User", usu.List_ID_User(US_CREACION));
-            getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
-            getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
-            getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
-            
-
-            response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp?idmax="+ MAX_ID);
             //response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp");
              response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp?ida1=" + ida1);
         }
