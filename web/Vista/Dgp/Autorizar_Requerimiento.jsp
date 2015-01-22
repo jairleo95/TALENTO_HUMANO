@@ -265,14 +265,22 @@
                                                     <td ><%=a.getFe_creacion()%></td>
 
                                                     <td><%if (a.getVal_plazo() > 0) {
-                                                            out.print(" <span class='label label-danger'>No cumplio</span>");
-                                                        } else {
-                                                            out.print(" <span class='label label-primary'>Cumplio Plazo</span>");
-                                                        }%></td>
-                                                        <%}%>
-                                                </tr>
-                                                <% }
-                                                    List_id_Autorizacion.clear();%>
+
+                                                        %>
+                                                        <a href="javascript:void(0);" class="label label-danger" rel="popover-hover" data-placement="top" data-original-title="Record de plazos cumplidos" data-content="<%=a.getVer_list_plazo()%>" data-html="true"> <strong>No cumplio plazos</strong></a></td>
+                                                        <%                                                        } else {
+
+
+                                                        %>
+                                            <a href="javascript:void(0);" class="label label-primary" rel="popover-hover" data-placement="top" data-original-title="Record de plazos cumplidos " data-content="<%=a.getVer_list_plazo()%>" data-html="true"> <strong>Cumplio plazos</strong></a></td>
+
+                                            <%                                                                    }%>
+
+
+                                            <%}%>
+                                            </tr>
+                                            <% }
+                                                List_id_Autorizacion.clear();%>
                                             </tbody>
                                         </table>
 
