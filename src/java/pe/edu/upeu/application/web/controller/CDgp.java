@@ -200,17 +200,15 @@ public class CDgp extends HttpServlet {
             String iddgp = dgp.MAX_ID_DGP();
             String idrp = IReq.id_det_req_proc(iddgp);
 
-            for (int i = 0; i < cantidad; i++) {
+            for (int i = 1; i <= cantidad; i++) {
                 String ID_PERIODO_PAG0 = null;
-                double NU_CUOTA = 0.0;
-               // double NU_CUOTA = request.getParameter("CUOTA_"+ i);
-                String FE_PAGAR = "28/12/12";
-                //String FE_PAGAR = request.getParameter("FEC_PAGAR_" + i);
-                //double CA_MONTO = 0.0;
+                double NU_CUOTA = Double.parseDouble(request.getParameter("CUOTA_"+ i));
+                String FE_PAGAR = request.getParameter("FEC_PAGAR_" + i);
                 double CA_MONTO = Double.parseDouble(request.getParameter("MONTO_" + i));
                 String ID_DGP = iddgp;
                 String ES_PER_PAGO = request.getParameter("ES_PERIODO");
                 pp.InsetarPeriodo_Pago(ID_PERIODO_PAG0, NU_CUOTA, FE_PAGAR, CA_MONTO, ID_DGP, ES_PER_PAGO);
+                
                
             }
             

@@ -28,7 +28,7 @@ public class Periodo_PagoDAO implements InterfacePeriodo_PagoDAO{
             CallableStatement pp = this.conn.conex.prepareCall("{CALL RHSP_INSERT_PERIODO_PAGO(?, ?, ?, ?, ?, ? )}");
             pp.setString(1, null);
             pp.setDouble(2, NU_CUOTA);
-            pp.setString(3, FE_PAGAR);
+            pp.setString(3, c.convertFecha(FE_PAGAR));
             pp.setDouble(4, CA_MONTO);
             pp.setString(5, ID_DGP );
             pp.setString(6, ES_PER_PAGO);

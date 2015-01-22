@@ -294,8 +294,7 @@
                                                             </label>
                                                         </section>
                                                     </div>
-                                                </fieldset>
-                                                <fieldset>
+                                           
                                                     <div  class="row" id="centro-costo_1" >
                                                         <section class="col col-4">
                                                             <label class="select" id="titu">Centro de Costo Nº 1:
@@ -803,65 +802,7 @@
 
 </body>
 <script>
-    $(document).ready(function() {
-        var b = $("#alerta_dgp");
-        // $("#alerta_dgp").hide();
-        function listar() {
-            $.post("../../plazo_dgp", "opc=Listar", function(objJson) {
-                b.empty();
-                var lista = objJson.lista;
-                if (objJson.rpta == -1) {
-                    alert(objJson.mensaje);
-                    return;
-                }
-                for (var i = 0; i < lista.length; i++) {
-                    b.append("<div class='alert alert-danger alert-block' ><a class='close' data-dismiss='alert' href='#'>×</a><h4 class='alert-heading'>" + lista[i].nom + "</h4>" + lista[i].det + " , Fecha Plazo " + lista[i].desde + " al " + lista[i].hasta + "</div>");
-                }
-            });
-        }
-        listar();
-    });
-    var cantidad = 1;
-
-    $("#btn_add").click(function() {
-        var agregar = $('#fila-agregar');
-        var texto = "";
-        cantidad++;
-        texto += '<section class="col col-2"><label class="btn">';
-        texto += '<button type="button" class="btn btn-default" id="less_add" >Eliminar</button>';
-        texto += '</label></section>';
-        texto += '<section class="col col-2" ><label class="input" id="titu">';
-        texto += '<input type="text" name="CUOTA_' + cantidad + ' id="cuota" required="" value="' + cantidad + '" >';
-        texto += '</label></section>';
-        texto += '<section class="col col-4" ><label class="input" id="titu">';
-        texto += '<input type="date" name="FEC_PAGAR_' + cantidad + '" id="datepicker" required="" >';
-        texto += '</label></section>';
-        texto += '<section class="col col-4" ><label class="input" id="titu">';
-        texto += '<input type="text" name="MONTO_' + cantidad + '" required="" class="monto" >';
-        texto += '</label></section>';
-
-        agregar.append(texto);
-        periodo_pago(cantidad);
-        $(".cant").val(cantidad);
-        //alert($(".cant").val())
-    });
-
-    $(document).ready(
-            function() {
-                $("#sueldo").keyup(
-                        function() {
-                            var sueldo = parseFloat($("#sueldo").val());
-                            $(".monto").val(Math.round(sueldo));
-                        });
-            }
-    );
-    function periodo_pago(cantidad) {
-        var sueldo = parseFloat($("#sueldo").val());
-        var p_p = sueldo / cantidad;
-        $.each($(".monto"), function() {
-            $(".monto").val(p_p);
-        });
-    }
+   
     function calcular_sueldo_total() {
         var x = parseFloat($("#sueldo").val());
         var y = parseFloat($("#bono_al").val());

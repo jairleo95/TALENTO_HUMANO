@@ -714,7 +714,7 @@
             texto += '<button type="button" class="btn btn-default" id="less_add" >Eliminar</button>';
             texto += '</label></section>';
             texto += '<section class="col col-2" ><label class="input" id="titu">';
-            texto += '<input type="text" name="CUOTA_' + cantidad + ' id="cuota" required="" value="' + cantidad + '" >';
+            texto += '<input type="text" name="CUOTA_' + cantidad + '" id="cuota" required="" value="' + cantidad + '" >';
             texto += '</label></section>';
             texto += '<section class="col col-4" ><label class="input" id="titu">';
             texto += '<input type="date" name="FEC_PAGAR_' + cantidad + '" id="datepicker" required="" >';
