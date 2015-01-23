@@ -355,7 +355,7 @@
                             </li>
                             <li>
                                 <a href="Vista/Dgp/Requerimiento.jsp?opc=FueraDePlanilla" target="myframe"><i class="fa fa-lg fa-fw fa-file"></i> Fuera de Planilla</a>
-                                
+
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-lg fa-fw fa-file"></i>Anulación de Requerimiento</a>
@@ -409,7 +409,7 @@
 
                 <!-- breadcrumb -->
                 <ol class="breadcrumb">
-                    <li><%out.println("DEPARTAMENTO DE  " + ((String) sesion.getAttribute("DEPARTAMENTO")).toUpperCase()+ " - AREA DE "  +((String) sesion.getAttribute("AREA")).toUpperCase()); %></li>
+                    <li><%out.println("DEPARTAMENTO DE  " + ((String) sesion.getAttribute("DEPARTAMENTO")).toUpperCase() + " / AREA DE " + ((String) sesion.getAttribute("AREA")).toUpperCase() + " / SECCION DE " + ((String) sesion.getAttribute("SECCION")).toUpperCase() + " / PUESTO DE " + ((String) sesion.getAttribute("PUESTO")).toUpperCase()); %></li>
                 </ol>
                 <!-- end breadcrumb -->
 

@@ -71,6 +71,7 @@ public class Cindex extends HttpServlet {
             sesion.setAttribute("AREA_ID", user.getId_area());
             sesion.setAttribute("AREA", user.getNo_area());
             sesion.setAttribute("DEPARTAMENTO", user.getNo_dep());
+            sesion.setAttribute("SECCION", user.getNo_seccion());
             sesion.setAttribute("DEPARTAMENTO_ID", user.getId_departamento());
             sesion.setAttribute("PUESTO", user.getNo_puesto());
 

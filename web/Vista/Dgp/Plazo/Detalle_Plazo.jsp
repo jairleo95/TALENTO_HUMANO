@@ -85,7 +85,7 @@
                     %>
                     <div class="row">
 
-                        <h2 class="row-seperator-header"><i class="fa fa-file"></i>REQUERIMIENTO : <%=d.getNo_req()%> </h2>
+                        <center> <h2 class="row-seperator-header"> <label style="color:blue;"> <%=d.getNo_req()%> </label></h2></center>
                         <!-- NEW WIDGET START -->
                         <article class="col-sm-12 col-md-12 col-lg-12">
                             <!-- end widget -->

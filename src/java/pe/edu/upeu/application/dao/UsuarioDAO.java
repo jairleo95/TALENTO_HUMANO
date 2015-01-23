@@ -74,6 +74,7 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
                 us.setNo_dep(rs.getString("no_dep"));
                 us.setId_departamento(rs.getString("id_departamento"));
                 us.setNo_puesto(rs.getString("no_puesto"));
+                us.setNo_seccion(rs.getString("no_seccion"));
                 list.add(us);
             }
         } catch (SQLException e) {

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pe.edu.upeu.application.web.controller;
 
 /**
@@ -11,17 +10,32 @@ package pe.edu.upeu.application.web.controller;
  * @author Admin
  */
 public class CConversion {
-     public String convertFecha(String fecha) {
-        String f[] = fecha.split("-");
-        return f[2] + "/" + f[1] + "/" + f[0];
-    }
+    /*public String convertFecha(String fecha) {
+     String f[] = fecha.split("-");
+     return f[2] + "/" + f[1] + "/" + f[0];
+     }
      public String convertFecha2(String fecha){
-         String f[]=fecha.split("/");
-         return f[0]+"-"+f[1]+"-"+f[2];
+     String f[]=fecha.split("/");
+     return f[0]+"-"+f[1]+"-"+f[2];
      }
      public String convertFecha3(String fecha){
-         String f[]=fecha.split("/");
-         return f[2]+"-"+f[1]+"-"+f[0];
-     }
+     String f[]=fecha.split("/");
+     return f[2]+"-"+f[1]+"-"+f[0];
+     }*/
+
+    public String convertFecha(String fecha) {
+        String f[] = fecha.split("-");
+        return "04-JUN-14";
+    }
+
+    public String convertFecha2(String fecha) {
+        String f[] = fecha.split("/");
+        return "04-JUN-14";
+    }
+
+    public String convertFecha3(String fecha) {
+        String f[] = fecha.split("/");
+        return "04-JUN-14";
+    }
 
 }
