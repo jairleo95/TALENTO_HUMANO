@@ -15,6 +15,7 @@ import java.util.Map;
 import pe.edu.upeu.application.dao_imp.InterfacePlazo_DgpDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
+import pe.edu.upeu.application.model.V_Dgp_Plazo;
 import pe.edu.upeu.application.web.controller.CConversion;
 
 /**
@@ -151,6 +152,42 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
         } catch (Exception e) {
             this.conn.close();
         }
+
+    }
+
+    @Override
+    public List<V_Dgp_Plazo> Lista_detalle_plazo(String id) {
+
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select * from rhvd_dgp_plazo where id_dgp='" + id + "'";
+        List<V_Dgp_Plazo> list = new ArrayList<V_Dgp_Plazo>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                V_Dgp_Plazo v = new V_Dgp_Plazo();
+
+                v.setNo_trabajador(rs.getString("no_trabajador"));
+                v.setAp_paterno(rs.getString("ap_paterno"));
+                v.setAp_materno(rs.getString("ap_materno"));
+                v.setNo_puesto(rs.getString("no_puesto"));
+                v.setId_plazo(rs.getString("id_plazo"));
+                v.setNo_plazo(rs.getString("no_plazo"));
+                v.setFe_desde(rs.getString("fe_desde"));
+                v.setFe_hasta(rs.getString("fe_hasta"));
+                v.setId_requerimiento(rs.getString("id_requerimiento"));
+                v.setId_dgp(rs.getString("id_dgp"));
+                v.setId_trabajador(rs.getString("id_trabajador"));
+                v.setFe_creacion(rs.getString("fe_creacion"));
+                v.setEs_plazo_cumplido(rs.getString("es_plazo_cumplido"));
+                v.setNo_req(rs.getString("no_req"));
+                v.setDet_alerta(rs.getString("det_alerta"));
+                list.add(v);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return list;
 
     }
 
