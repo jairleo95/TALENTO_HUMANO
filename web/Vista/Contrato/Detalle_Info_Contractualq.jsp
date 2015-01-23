@@ -163,8 +163,9 @@
                     });
                 });</script>
         </form>
-                        <form action="">
-            <div>
+
+        <div>
+            <form action="">
                 <%
 
                     CConversion c = new CConversion();
@@ -198,7 +199,7 @@
                     <tr><td class="text-info table-bordered"><strong>Centro conto Nº <%=q + 1%>:</strong></td><td colspan="2"><p><%=cc.getDe_centro_costo()%></p></td><td class="text-info table-bordered" colspan="2"><strong>Porcentaje</strong></td><td colspan="2"><p><%=cc.getCa_porcentaje()%> %</p> </td></tr><%}%>
                     <tr><td class="text-info table-bordered"><strong>Total Porcentaje:</strong></td><td colspan="6"><p><%=cantidad%> %</p></td></tr><%} else {%>
                     <tr><td class="text-info table-bordered"><strong>Centro conto </strong></td><td colspan="6"><p>No tiene</p></td></tr><%}
-                    Lis_c_c_id_contr.clear();%>
+                        Lis_c_c_id_contr.clear();%>
                     <tr><td class="text-info table-bordered"><strong>Puesto:</strong></td><td colspan="6"><p><%=n.getNo_puesto()%></p><input type="hidden" class="id_pu" value="<%=n.getId_puesto()%>"></td> </tr>
                     <tr><td class="text-info table-bordered"><strong>Condición:</strong></td> <td colspan="6"><p><%
                         if (n.getLi_condicion() != null) {
@@ -336,7 +337,7 @@
                         }
                             %> </td></tr>   
                     <tr><td class="text-info table-bordered"><strong>¿Firmo contrato?:</strong></td><td colspan="6"><%
-                    if (idrol.trim().equals("ROL-0006") && n.getEs_firmo_contrato() == null) {%>
+                        if (idrol.trim().equals("ROL-0006") && n.getEs_firmo_contrato() == null) {%>
                             <a href="../../contrato?fc=s&idc=<%=n.getId_trabajador()%>"  class="boton">SI</a>o<a href="../Control/ControlContrato.php?fc=n&idc=<?echo $list_rhc[$index][0];?>" class="boton">NO</a>
                             <%} else {
 
@@ -391,6 +392,10 @@
                                 } else {
                                     out.print("NO DEFINIDO");
                                 }%> </td></tr>   
+                </table>
+            </form>
+            <div>
+                <table>
                     <!--   <tr><td>Nro. Documento:</td><td><? /*echo $list_rhc[$index][43];?> </td></tr>   
                    <tr><td>Pares:</td><td><? echo $list_rhc[$index][36];?> </td></tr>   
                      <tr><td>Apoyo:</td><td><? echo $list_rhc[$index][41];*/?> </td></tr>   -->
@@ -437,6 +442,8 @@
                     <%}%>
                 </table>
             </div>
+        </div>
+                <form action="../../plantilla_contractual" method="post">
             <div class="Contenido">
                 <table>
                     <thead class="tab_cabe">
@@ -452,6 +459,7 @@
                 </table>
             </div>
         </form>
+
         <%}
             }
             List_contra_x_idcto.clear();%>
@@ -465,18 +473,18 @@
                 // alert($(".id_pu").val());
                 $.post("../../plantilla_contractual", "opc=List_planti&" + "id_pu=" + $(".id_pu").val(), function(objJson) {
                     $(".Contenido").show();
+                    t.empty();
                     var lista = objJson.lista;
-                    alert(lista.length);
                     if (lista.length !== 0) {
                         for (var i = 0; i < lista.length; i++) {
                             t.append('<tr>');
                             t.append('<td>' + (i + 1) + '</td>');
                             t.append('<td>' + lista[i].nom_pl + '</td>');
                             t.append('<input type="hidden" value="' + lista[i].id + '" class="id_plantilla' + i + '" />');
-                            t.append('<input type="hidden" value="' + lista[i].no_arch + '" class="plantilla' + i + '" />');
-                            t.append('<td><button value="' + i + '" class="btn-cargar_pl">Cargar</button></td>');
+                            t.append('<input type="radio" id="imp" name="Imprimir" value="' + lista[i].no_arch + '">');
                             t.append('</tr>');
                         }
+                        t.append('<tr><td><input type="submit" name="opc" value"cargar"></td></tr>');
                     } else {
                     }
 

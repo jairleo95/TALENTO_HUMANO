@@ -58,6 +58,14 @@ public class CPlantilla_Contractual extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", list);
             }
+            if (opc.equals("cargar")) {
+                String no_arch[]=request.getParameterValues("Imprimir");
+                String noarch="";
+                for(int i=0;i<no_arch.length;i++){
+                noarch=no_arch[i];
+                }
+                response.sendRedirect("/Vista/Contrato/Formato_Plantilla/reg_formato.jsp?no_arc="+no_arch);
+            }
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());

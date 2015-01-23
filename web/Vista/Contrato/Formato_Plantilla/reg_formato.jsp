@@ -281,6 +281,9 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 // mostrar_plantilla();
                 var b = $(".dir");
                 lis_dep(b);
+                function mostrars(){
+                    
+                }
 
                 b.change(function () {
                     var d = $(".dep");
