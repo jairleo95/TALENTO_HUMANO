@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.model.Anno"%>
 <%@page import="pe.edu.upeu.application.model.Grupo_Ocupaciones"%>
 <%@page import="pe.edu.upeu.application.model.Sub_Modalidad"%>
 <%@page import="pe.edu.upeu.application.model.Modalidad"%>
@@ -15,21 +16,15 @@
 <%@page import="pe.edu.upeu.application.model.X_List_Id_Contrato_DGP"%>
 <%@page import="pe.edu.upeu.application.model.X_List_Anno_Id_Tr_DGP"%>
 
-<jsp:useBean id="List_id_Contrato_DGP" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Anno_Id_Tr_DGP" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Jefe" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_contra_x_idcto" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Situacion_Actual" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Planilla" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_ID_User" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="list_Condicion_contrato" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_tipo_contrato" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_centro_costo" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="list_reg_labo" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_modalidad" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="Listar_Sub_mo" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_grup_ocu" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Usuario" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="Lis_c_c_id_contr" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Anno_trabajador" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -37,6 +32,7 @@
         <link type="text/css" rel="stylesheet" href="../../css/Css_Detalle/CSS_DETALLE.css">  
         <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/font-awesome.min.css">
+             <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
         <style type="text/css">
             body{
 
@@ -128,11 +124,45 @@
     </head>
     <body>
     <center>
+        <form action="../../contrato" method="get">
+            <%String idanno = request.getParameter("anno");
+              if (idanno == null) {%>
 
-        <%%>
- 
-        <%/* else {*/%>
-
+            <div>   
+                <table class="table table-hover table-striped  table-responsive">
+                    <td> <strong>NO TIENE CONTRATO</strong> </td>
+                </table>
+            </div>
+            <%
+        } else {%>
+            <div>
+                <table class="table table-hover table-striped  table-responsive" style="border-radius: 30px ">
+                    <tr><td><select name="ida" class="anno" >
+                                <%
+                                    String anno = request.getParameter("anno");
+                                    String ID_CTO = request.getParameter("id_cto");
+                                    for (int cv = 0; cv < List_Anno_trabajador.size(); cv++) {
+                                        Anno an = new Anno();
+                                        an = (Anno) List_Anno_trabajador.get(cv);
+                                        if (an.getId_contrato().equals(ID_CTO)) {
+                                %><option value="<%=an.getId_contrato()%>" selected=""><%=an.getNo_anno() + " " + (cv + 1)%></option><%
+                                } else {
+                                %><option value="<%=an.getId_contrato()%>"><%=an.getNo_anno() + " " + (cv + 1)%></option><%
+                                        }
+                                    }%>
+                            </select> 
+                        </td>
+                        <td><input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>"></td>
+                        <td><input type="hidden" name="opc" value="actualizar" ></td></tr><button type="submit"  style="display:none" class="btn_act"   >Actualizar</button>
+                </table>
+            </div>
+                        <script>$(document).ready(function(){
+                            $(".anno").change(function(){
+                                $(".btn_act").click();
+                                
+                            });
+                        });</script>
+        
         <%
 
             CConversion c = new CConversion();
@@ -141,30 +171,13 @@
             String idrol = (String) Sesion.getAttribute("IDROL");
 
         %>
-        <%for (int b = 0; b < List_id_Contrato_DGP.size(); b++) {
+        <%for (int b = 0; b < List_contra_x_idcto.size(); b++) {
                 X_List_Id_Contrato_DGP n = new X_List_Id_Contrato_DGP();
-                n = (X_List_Id_Contrato_DGP) List_id_Contrato_DGP.get(b);
+                n = (X_List_Id_Contrato_DGP) List_contra_x_idcto.get(b);
         %>
-        <form align="center" class="form" action="../../contrato" method="post" >
-            <table class="table table-hover table-striped  table-responsive" style="border-radius: 30px ">
-                <tr><td><select name="ida">
-                            <%  for (int o = 0; o < List_Anno_Id_Tr_DGP.size(); o++) {%>
-                            <%X_List_Anno_Id_Tr_DGP x = new X_List_Anno_Id_Tr_DGP();
-                                x = (X_List_Anno_Id_Tr_DGP) List_Anno_Id_Tr_DGP.get(o);%>
-                            <%  if (request.getParameter("ida1").trim().equals(x.getId_anno().trim())) {%>
-                            <option value="<%=x.getId_anno()%>" selected="selected"><%=x.getNo_anno()%></option>
-                            <%} else {%>
-                            <option value="<%=x.getId_anno()%>"><%=x.getNo_anno()%></option>
-                            <%}
-                                }
-                                List_Anno_Id_Tr_DGP.clear();%>
-                        </select> </td><td><input type="hidden" name="idtr" value="<%=n.getId_trabajador()%>"></td>
-                    <td><input name="opc" value="actualizar" type="submit"></td></tr>
-            </table>
-        </form>
         <form>
 
-            <% for (int p = 0; p < List_id_Contrato_DGP.size(); p++) {%>
+            <% for (int p = 0; p < List_contra_x_idcto.size(); p++) {%>
             <table class="table table-hover table-striped  table-responsive">
                 <tr><td class="text-info table-bordered"><strong>Desde: </strong></td><td colspan="2"><%=n.getFe_desde()%></td><td class="text-info table-bordered" colspan="2"><strong>Hasta:</strong></td><td colspan="2"><%=n.getFe_hasta()%></td></tr>
                 <tr><td class="text-info table-bordered"><strong>Dirección:</strong></td><td colspan="6"><p><%=n.getNo_direccion()%> </p></td></tr>
@@ -186,7 +199,7 @@
                     Lis_c_c_id_contr.clear();%>
                 <tr><td class="text-info table-bordered"><strong>Puesto:</strong></td><td colspan="6"><p><%=n.getNo_puesto()%></p></td> </tr>
                 <tr><td class="text-info table-bordered"><strong>Condición:</strong></td> <td colspan="6"><p><%
-                    if (!n.getLi_condicion().equals(null)) {
+                    if (n.getLi_condicion() != null) {
                         for (int h = 0; h < list_Condicion_contrato.size(); h++) {
 
                             if (n.getLi_condicion().trim().equals(h + 1 + "")) {
@@ -438,14 +451,16 @@
         </div>
         <%}
             }
-            //}
-            List_id_Contrato_DGP.clear();%>
+            List_contra_x_idcto.clear();%>
     </center>
+    <%}%>
+    </form>
     <script>
         $(document).ready(function() {
             $(".PLANTI").click(function() {
 
             });
         });
+        
     </script>
 </body>

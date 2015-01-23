@@ -227,6 +227,12 @@ public class CTrabajador extends HttpServlet {
                 getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
                 response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim());
             }
+            if ("actualizar".equals(opc)) {
+                String idtr = request.getParameter("idtr");
+                String id_anno = request.getParameter("id_anno");
+                getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+                response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim());
+            }
             if ("Documento_Trabajador".equals(opc)) {
                 String idtr = request.getParameter("idtr");
                 getServletContext().setAttribute("List_Id_Doc_Trab", d.List_Id_Doc_Trab(idtr));
