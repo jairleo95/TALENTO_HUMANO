@@ -185,8 +185,6 @@
                                                                 </select> 
                                                             </label>
                                                         </section>
-                                                                   
-                                                    <input type="text" value="<%=request.getParameter("MAX_ID") %>" name="" class="text-box" >
                                                         <section class="col col-2">
                                                             <label class="input" id="titu">Desde: 
                                                                 <input type="date" name="FEC_DESDE"  class="date input-group-sm" required="">
@@ -315,8 +313,13 @@
                                                                 <input  readonly="" name="TOTAL_PORCENTAJE" max="100" min="100" maxlength="3" type="text" class="total_porcentaje"  />
                                                             </label>
                                                         </section>
-                                                        <input name="CANT" value="1" type="hidden"/>
+                                                        <input name="CANT" value="1" type="hidden" class="cant"/>
+                                                        
                                                     </div>
+                                                                <div class="row">
+                                                                    <code class="ver"></code>
+                                                                </div>
+                                                                
                                                 </fieldset>
                                                 <fieldset>
                                                     <div class="row">
@@ -545,7 +548,7 @@
                                                         </section>
                                                     </div>
                                                     <%String idtr = request.getParameter("idtr1");%>
-                                                    <input type="text" value="<%=idtr %>" name="IDDATOS_TRABAJADOR" class="text-box" >
+                                                    <input type="hidden" value="<%=idtr %>" name="IDDATOS_TRABAJADOR" class="text-box" >
                                                     <input type="hidden" name="ENTREGAR_DOC_REGLAMENTOS"  value="0" class="text-box" >
                                                     <input type="hidden" name="REGISTRO_HUELLA"  value="0" class="text-box" > 
                                                     <input type="hidden" name="REGISTRO_SISTEM_REMU" value="0" class="text-box" >
@@ -1216,6 +1219,7 @@
 
     function agregar_centro_costo(opc, arr_cc) {
 
+        
         if (opc == "1") {
             texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + ag + ':</label>';
             texto += '<div  class="row centro-costo_' + ag + '" >';
@@ -1227,6 +1231,7 @@
 
             agregar.append(texto);
             listar_cc(ag, opc, arr_cc);
+            
 
             sumn_porcen_total();
         } else {
@@ -1243,14 +1248,14 @@
             $(".porcentaje_cc").val(Math.round((100 / c_porcentaje) * 100) / 100);
             sumn_porcen_total();
         }
-
-
+        $(".ver").text(texto); 
         texto = "";
-        $(".cant-input").val(ag);
+        $(".cant").val(ag);
         ag++;
         $(".porcentaje_cc").keyup(function() {
             sumn_porcen_total();
         });
+        
     }
 
     function listar_tipo_horario() {
@@ -1283,7 +1288,9 @@
 
         //  var r = "";
         $('#btn-agregar-cc').click(function() {
+            
             agregar_centro_costo();
+            alert($(".cant").val());
 
 
         });
