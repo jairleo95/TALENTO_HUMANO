@@ -216,7 +216,7 @@ public class CDgp extends HttpServlet {
                 String ID_CENTRO_COSTO = request.getParameter("CENTRO_COSTOS_" + g);
                 double porcentaje = Double.parseDouble(request.getParameter("PORCENTAJE_" + g));
                 if (ID_CENTRO_COSTO != null && porcentaje != 0.0) {
-                    dcc.INSERT_DETALLE_CENTRO_COSTO(null, ID_CENTRO_COSTO, iddgp, porcentaje, "1", iduser, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO);
+                    dcc.INSERT_DETALLE_CENTRO_COSTO(null, ID_CENTRO_COSTO, iddgp, porcentaje, IP_USUARIO,  iduser, FE_CREACION, US_MODIF, FE_MODIF,null,"1");
                 }
             }
 

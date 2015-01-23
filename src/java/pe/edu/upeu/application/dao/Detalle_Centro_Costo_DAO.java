@@ -22,20 +22,21 @@ public class Detalle_Centro_Costo_DAO implements InterfaceDetalle_Centro_Costo {
     CConversion c = new CConversion();
 
     @Override
-    public void INSERT_DETALLE_CENTRO_COSTO(String ID_DETALLE_CENTRO_COSTO, String ID_CENTRO_COSTO, String ID_DGP, Double CA_PORCENTAJE, String ES_DETALLE_CC, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO) {
+    public void INSERT_DETALLE_CENTRO_COSTO(String ID_DETALLE_CENTRO_COSTO, String ID_CENTRO_COSTO, String ID_DGP, Double CA_PORCENTAJE, String IP_USUARIO, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String ID_CONTRATO, String ES_DETALLE_CC) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DETALLE_CC( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )} ");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DETALLE_CC( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?)} ");
             cst.setString(1, null);
             cst.setString(2, ID_CENTRO_COSTO);
             cst.setString(3, ID_DGP);
             cst.setDouble(4, CA_PORCENTAJE);
-            cst.setString(5, ES_DETALLE_CC);
+            cst.setString(5, IP_USUARIO);
             cst.setString(6, US_CREACION);
             cst.setString(7, FE_CREACION);
             cst.setString(8, US_MODIF);
             cst.setString(9, FE_MODIF);
-            cst.setString(10, IP_USUARIO);
+            cst.setString(10, ID_CONTRATO);
+            cst.setString(11, ES_DETALLE_CC);
             cst.execute();
         } catch (SQLException ex) {
             throw new RuntimeException(ex.getMessage());

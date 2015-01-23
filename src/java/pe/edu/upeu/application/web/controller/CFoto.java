@@ -49,22 +49,21 @@ public class CFoto extends HttpServlet {
         PrintWriter out = response.getWriter();
         InterfaceFotos_TrabajadorDAO foto = new Fotos_TrabajadorDAO();
         InterfaceTrabajadorDAO tr = new TrabajadorDAO();
-
+        String ubicacion = "";
         try {
 
-            String ubicacion = "";
             if (System.getProperty("sun.desktop").trim().equals("windows")) {
                 ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "\\Vista\\Usuario\\Fotos";
             } else {
                 ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "/Vista/Usuario/Fotos/";
             }
+            out.print(ubicacion);
 
             DiskFileItemFactory f = new DiskFileItemFactory();
             f.setSizeThreshold(1024);
             f.setRepository(new File(ubicacion));
             ServletFileUpload upload = new ServletFileUpload(f);
-            
-            
+
             List<FileItem> p = upload.parseRequest(request);
             String idtr = null;
             String nombre_archivo = null;
@@ -109,13 +108,14 @@ public class CFoto extends HttpServlet {
 
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             Thread.sleep(2000);
-            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr);
-            out.println("Archivo subido correctamente");
+           // response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr);
+            /*  out.println("Archivo subido correctamente");
              out.println(no_original);
              out.println(nombre_archivo);
-             out.println(sizeInBytes);
+             out.println(sizeInBytes);*/
         } catch (Exception e) {
             out.print(e.getMessage());
+            out.print(ubicacion);
         } finally {
             out.close();
         }

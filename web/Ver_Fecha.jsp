@@ -13,6 +13,8 @@
     </head>
 
     <body>
+        la fecha : <%=request.getParameter("fecha")%>
+
         <input  type="date" class="fecha"/>
         <div class="ver"></div>
 

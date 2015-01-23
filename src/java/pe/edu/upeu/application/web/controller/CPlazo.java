@@ -82,6 +82,12 @@ public class CPlazo extends HttpServlet {
                 pl.REMOVE_PLAZO(id);
 
             }
+            if (opc.equals("Ver_detalle_plazo")) {
+                String iddgp=request.getParameter("iddgp");
+                
+                getServletContext().setAttribute("Lista_detalle_plazo", pl.Lista_detalle_plazo(iddgp));
+                response.sendRedirect("Vista/Dgp/Plazo/Detalle_Plazo.jsp");
+            }
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());

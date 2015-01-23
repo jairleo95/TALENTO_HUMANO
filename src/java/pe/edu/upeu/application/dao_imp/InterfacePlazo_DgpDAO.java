@@ -7,6 +7,7 @@ package pe.edu.upeu.application.dao_imp;
 
 import java.util.List;
 import java.util.Map;
+import pe.edu.upeu.application.model.V_Dgp_Plazo;
 
 /**
  *
@@ -15,6 +16,8 @@ import java.util.Map;
 public interface InterfacePlazo_DgpDAO {
 
     public List<Map<String, ?>> List_Plazo(String t_list);
+
+    public List<V_Dgp_Plazo> Lista_detalle_plazo(String id);
 
     public List<Map<String, ?>> Listar_Plazo();
 
