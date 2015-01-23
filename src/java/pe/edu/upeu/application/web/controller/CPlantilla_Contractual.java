@@ -48,9 +48,10 @@ public class CPlantilla_Contractual extends HttpServlet {
         Map<String, Object> rpta = new HashMap<String, Object>();
         try {
             if (opc.equals("List_planti")) {
-                String idtr = request.getParameter("idtr");
-                
-                // List<Map<String,?>> list=pl.List_PLantillas(idtr);
+                String idpu = request.getParameter("id_pu");
+                List<Map<String,?>> list=pl.List_PLantillas(idpu);
+                rpta.put("rpta", "1");
+                rpta.put("lista", list);
             }
             if (opc.equals("Listpuesto")) {
                 List<Map<String, ?>> list = pu.List_puesto();
