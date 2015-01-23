@@ -171,20 +171,22 @@
                                                         <section class="col col-2">
                                                             <label class="select" id="titu">Año:
                                                                 <select name="" required="" class="input-group-sm">
-                                                                   <%  String MAX = request.getParameter("MAX_ID");
-                                                                       for (int i = 0; i < LISTAR_ANNO.size(); i++) {
+                                                                    <%  String MAX = request.getParameter("MAX_ID");
+                                                                        for (int i = 0; i < LISTAR_ANNO.size(); i++) {
                                                                             Anno a = new Anno();
                                                                             a = (Anno) LISTAR_ANNO.get(i);
-                                                                          if(a.getId_anno().trim().equals(MAX)){
-                                                                     %>
-                                                                     <option value="<%=a.getId_anno()%>" selected="selected" ><%=a.getNo_anno()%></option> 
+                                                                            if (a.getId_anno().trim().equals(MAX)) {
+                                                                    %>
+                                                                    <option value="<%=a.getId_anno()%>" selected="selected" ><%=a.getNo_anno()%></option> 
                                                                     <%}%>
                                                                     <option value="<%=a.getId_anno()%>" ><%=a.getNo_anno()%></option>            
-                                                                            <%}%>
-                                                                    
+                                                                    <%}%>
+
                                                                 </select> 
                                                             </label>
                                                         </section>
+                                                                   
+                                                    <input type="text" value="<%=request.getParameter("MAX_ID") %>" name="" class="text-box" >
                                                         <section class="col col-2">
                                                             <label class="input" id="titu">Desde: 
                                                                 <input type="date" name="FEC_DESDE"  class="date input-group-sm" required="">
@@ -230,14 +232,9 @@
                                                         </section>
                                                         <section class="col col-3" id="titulo">
                                                             <label class="select" id="titu">Puesto:
-                                                                <select name="PUESTO_ID" required="" class="input-group-sm" id="pu_id_se">
-                                                                    <%  for (int j = 0; j < List_Puesto.size(); j++) {
-                                                                            Puesto p = new Puesto();
-                                                                            p = (Puesto) List_Puesto.get(j);
-                                                                    %>  
-                                                                    <option value="<%=p.getId_puesto()%>"><%=p.getNo_puesto()%></option>
-
-                                                                    <%}%>
+                                                                
+                                                                <select name="PUESTO_ID"class="input-group-sm" id="pu_id_se">
+                                                                    <option value="">[SELECCIONE]</option>
                                                                 </select>  </label>
                                                         </section>
                                                         <section class="col col-3">
@@ -294,7 +291,7 @@
                                                             </label>
                                                         </section>
                                                     </div>
-                                           
+
                                                     <div  class="row" id="centro-costo_1" >
                                                         <section class="col col-4">
                                                             <label class="select" id="titu">Centro de Costo Nº 1:
@@ -318,33 +315,9 @@
                                                                 <input  readonly="" name="TOTAL_PORCENTAJE" max="100" min="100" maxlength="3" type="text" class="total_porcentaje"  />
                                                             </label>
                                                         </section>
+                                                        <input name="CANT" value="1" type="hidden"/>
                                                     </div>
                                                 </fieldset>
-                                                <!--<fieldset>
-                                                    <div  class="row" id="centro-costo_1" >
-                                                    <section class="col col-4">
-                                                        <label class="select" id="titu">Centro de Costo Nº 1:
-                                                            <select name="CENTRO_COSTOS_1" class="select-cc centro_costo1" required="">
-                                                                <option value="">[SELECCIONE]</option>
-                                                            </select>
-                                                        </label>
-                                                    </section>
-                                                    <section class="col col-2">
-                                                        <label class="input" id="titu">%
-                                                            <input name="PORCENTAJE_1"  type="text" value="100"  class="porcentaje_cc"/>
-                                                        </label></section>
-                                                    <section class="col col-2">
-                                                        <label class="btn">
-                                                            <button type="button" class="btn btn-default btn-agregar-cc" id="btn-agregar-cc" >Agregar</button>
-                                                        </label>
-                                                    </section>
-                                                    <section class="col col-2">
-                                                        <label class="input" style="font-weight: bold;color:red;">% Total :
-                                                            <input  readonly="" name="TOTAL_PORCENTAJE" max="100" min="100" maxlength="3" type="text" class="total_porcentaje"  />
-                                                        </label>
-                                                    </section>
-                                                </div>
-                                                </fieldset>-->
                                                 <fieldset>
                                                     <div class="row">
                                                         <section class="col col-4">
@@ -571,11 +544,13 @@
                                                             </label>
                                                         </section>
                                                     </div>
+                                                    <%String idtr = request.getParameter("idtr1");%>
+                                                    <input type="text" value="<%=idtr %>" name="IDDATOS_TRABAJADOR" class="text-box" >
                                                     <input type="hidden" name="ENTREGAR_DOC_REGLAMENTOS"  value="0" class="text-box" >
                                                     <input type="hidden" name="REGISTRO_HUELLA"  value="0" class="text-box" > 
                                                     <input type="hidden" name="REGISTRO_SISTEM_REMU" value="0" class="text-box" >
                                                     <input type="hidden" name="ESTADO" value="1" class="text-box" > 
-                                                    <!--<input type="hidden" value="<//%=d.getId_trabajador()%>" name="IDDATOS_TRABAJADOR" class="text-box" >-->
+                                                    <input type="hidden" value="<%=idtr %>" name="IDDATOS_TRABAJADOR" class="text-box" >
                                                     <input type="hidden" value="ARE-0022" name="AREA_ID" class="text-box" >
 
                                                 </fieldset>
@@ -802,7 +777,7 @@
 
 </body>
 <script>
-   
+
     function calcular_sueldo_total() {
         var x = parseFloat($("#sueldo").val());
         var y = parseFloat($("#bono_al").val());
@@ -827,7 +802,9 @@
                             calcular_sueldo_total();
                         }
                 );
+
             }
+
     );</script>
 <script>
     /*$(".texto-h").setMask("29:59").keypress(
@@ -1055,6 +1032,7 @@
         });
 
     }
+
     function listar_cc(num, opc, arr_cc) {
         var select_cc = $(".select-cc");
         $.post("../../centro_costo?opc=Listar_cc", function(objJson) {
@@ -1980,132 +1958,150 @@
 
 </script>
 <script>
-    $(document).ready(function() {
-        Listar_dep();
+            $(document).ready(function () {
+                Listar_dep();
+                Listar_centro_costo();
+                var a = $("#select-sub-mod");
+                var c = $("#Selec_Area");
+                var d = $("#select_sec");
+                var b = $("#selec_dep");
+                var e = $("#pu_id_se");
+                // $.post("../../  ")
+                $("#select_mod").change(
+                        function () {
+                            // alert("?MODALIDAD="+$("#select_mod").val());
 
-        var a = $("#select-sub-mod");
-        var c = $("#Selec_Area");
-        var d = $("#select_sec");
-        var b = $("#selec_dep");
-        var e = $("#pu_id_se");
-        // $.post("../../  ")
-        $("#select_mod").change(
-                function() {
-                    // alert("?MODALIDAD="+$("#select_mod").val());
+                            $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function (objJson) {
+                                a.empty();
+                                var list = objJson.lista;
+                                a.append("<option value='' > [SELECCIONE] </option>");
+                                if (list.length !== 0) {
+                                    for (var i = 0; i < list.length; i++) {
+                                        a.append('<option value="' + list[i].id_submodalidad + '">' + list[i].de_submod + '</option>');
+                                    }
+                                }
+                            });
+                        });
+                $("#selec_dep").change(
+                        function () {
+                            $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function (objJson) {
+                                c.empty();
+                                  if (objJson.rpta == -1) {
+                                    alert(objJson.mensaje);
+                                    return;
+                                }
+                                var list = objJson.lista;
+                                c.append("<option value='' > [SELECCIONE] </option>");
+                                if (list.length !== 0) {
+                                    for (var i = 0; i < list.length; i++) {
+                                        c.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+                                    }
+                                } else {
+                                    c.append("<option value='' > [no hay] </option>");
+                                }
+                            });
+                        });
+                $("#select_dir").change(
+                        function () {
+                            $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $("#select_dir").val(), function (objJson) {
+                                b.empty();
+                                if (objJson.rpta == -1) {
+                                    alert(objJson.mensaje);
+                                    return;
+                                }
+                                var list = objJson.lista;
+                                b.append("<option value='' > [SELECCIONE] </option>");
+                                if (list.length !== 0) {
+                                    for (var i = 0; i < list.length; i++) {
+                                        b.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
+                                    }
+                                } else {
+                                    b.append("<option value='' > [] </option>");
+                                }
+                            });
+                        });
+                $("#Selec_Area").change(
+                        function () {
+                            $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function (objJson) {
+                                d.empty();
 
-                    $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function(objJson) {
-                        a.empty();
-                        var list = objJson.lista;
-                        a.append("<option value='' > [SELECCIONE] </option>");
-                        if (list.length !== 0) {
-                            for (var i = 0; i < list.length; i++) {
-                                a.append('<option value="' + list[i].id_submodalidad + '">' + list[i].de_submod + '</option>');
-                            }
-                        }
-                    });
-                });
-        $("#selec_dep").change(
-                function() {
-                    $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function(objJson) {
-                        c.empty();
-                        if (objJson.rpta == -1) {
-                            alert(objJson.mensaje);
-                            return;
-                        }
-                        var list = objJson.lista;
-                        c.append("<option value='' > [SELECCIONE] </option>");
-                        if (list.length !== 0) {
-                            for (var i = 0; i < list.length; i++) {
-                                c.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
-                            }
-                        } else {
-                            c.append("<option value='' > [no hay] </option>");
-                        }
-                    });
-                });
-        $("#select_dir").change(
-                function() {
-                    $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $("#select_dir").val(), function(objJson) {
-                        b.empty();
-                        if (objJson.rpta == -1) {
-                            alert(objJson.mensaje);
-                            return;
-                        }
-                        var list = objJson.lista;
-                        b.append("<option value='' > [SELECCIONE] </option>");
-                        if (list.length !== 0) {
-                            for (var i = 0; i < list.length; i++) {
-                                b.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
-                            }
-                        } else {
-                            b.append("<option value='' > [] </option>");
-                        }
-                    });
-                });
-        $("#Selec_Area").change(
-                function() {
-                    $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function(objJson) {
-                        d.empty();
+                                var list = objJson.lista;
+                                d.append("<option value='' > [SELECCIONE] </option>");
+                                if (list.length !== 0) {
+                                    for (var i = 0; i < list.length; i++) {
+                                        d.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+                                    }
+                                } else {
+                                    d.append("<option value='' > [no hay] </option>");
+                                }
+                            });
+                        });
+                $("#select_sec").change(
+                        function () {
+                            $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function (objJson) {
+                                e.empty();
+                                  if (objJson.rpta == -1) {
+                                    alert(objJson.mensaje);
+                                    return;
+                                }
+                                var list = objJson.lista;
+                                e.append("<option value='' > [SELECCIONE] </option>");
+                                if (list.length !== 0) {
+                                    for (var i = 0; i < list.length; i++) {
+                                        e.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
+                                    }
+                                } else {
+                                    e.empty();
+                                    e.append("<option value='' > [] </option>");
+                                }
+                            });
+                        });
+                $("#btn-registrar").click(
+                        function () {
+                            var pr = $("#select-proceso").val();
+                            $.post("../../paso", $("#form-paso").serialize(), function () {
+                                Listar_Paso(pr);
+                            });
+                            $("#btn-registrar").val("Registrar Paso");
+                            $(".opc").val("Registrar");
+                            $("#form-paso")[0].reset();
 
-                        var list = objJson.lista;
-                        d.append("<option value='' > [SELECCIONE] </option>");
-                        if (list.length !== 0) {
-                            for (var i = 0; i < list.length; i++) {
-                                d.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
-                            }
-                        } else {
-                            d.append("<option value='' > [no hay] </option>");
+                            return false;
                         }
-                    });
-                });
-        $("#select_sec").change(
-                function() {
-                    $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function(objJson) {
-                        e.empty();
-                        if (objJson.rpta == -1) {
-                            alert(objJson.mensaje);
-                            return;
-                        }
-                        var list = objJson.lista;
-                        e.append("<option value='' > [SELECCIONE] </option>");
-                        if (list.length !== 0) {
-                            for (var i = 0; i < list.length; i++) {
-                                e.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
-                            }
-                        } else {
-                            e.empty();
-                            e.append("<option value='' > [] </option>");
-                        }
-                    });
-                });
-        $("#btn-registrar").click(
-                function() {
-                    var pr = $("#select-proceso").val();
-                    $.post("../../paso", $("#form-paso").serialize(), function() {
-                        Listar_Paso(pr);
-                    });
-                    $("#btn-registrar").val("Registrar Paso");
-                    $(".opc").val("Registrar");
-                    $("#form-paso")[0].reset();
+                );
+                function Listar_dep() {
+                    var s = $("#selec_dep");
 
-                    return false;
+                    $.post("../../Direccion_Puesto", "opc=Listar", function (objJson) {
+                        s.empty();
+                        var lista = objJson.lista;
+                        s.append("<option value='' > [SELECCIONE] </option>");
+                        for (var j = 0; j < lista.length; j++) {
+                            s.append("<option value='" + lista[j].id + "' > " + lista[j].nom + "</option>");
+                        }
+                    });
                 }
-        );
-        function Listar_dep() {
-            var s = $("#selec_dep");
+                function Listar_centro_costo() {
+                    var x = $("#fila-agregar");
+                    $.post("../../centro_costo", "opc=Listar_centro_id&" + "id_dgp=" + $("#id_dgp").val(), function (objJson) {
+                        var lista = objJson.lista;
+                        var numero = 1;
+                        x.append('<div  class="row centro-costo_' + numero + '" >');
+                        for (var i = 0; i < lista.length; i++) {
+                            numero = numero + i;
+                            if ($("#id_rol_s").val() == 'ROL-0001') {
+                                x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section><div class="form-group"><button type="button" class="btn btn-primary" id="Seleccionar_centro" >Buscar</button></div>');
+                            } else {
+                                x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section>');
+                            }
+                        }
+                        x.append('</div><table><tr><td><td><input type="hidden" name="can_centro_cos" value="' + lista.length + '"></td></tr></table>');
 
-            $.post("../../Direccion_Puesto", "opc=Listar", function(objJson) {
-                s.empty();
-                var lista = objJson.lista;
-                s.append("<option value='' > [SELECCIONE] </option>");
-                for (var j = 0; j < lista.length; j++) {
-                    s.append("<option value='" + lista[j].id + "' > " + lista[j].nom + "</option>");
+                    });
+
                 }
+
             });
-        }
-
-
-    });
-</script>
+    </script>
 </html>
 

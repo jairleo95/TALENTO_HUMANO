@@ -47,4 +47,6 @@ public interface InterfaceContratoDAO {
     public String ID_MAX_ANNO();
     
     public List<Anno> LIST_ANNO() ;
+    
+    public String MAX_ID_CONTRATO();
 }
