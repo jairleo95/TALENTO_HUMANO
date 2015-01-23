@@ -85,7 +85,7 @@
                     %>
                     <div class="row">
 
-                        <h2 class="row-seperator-header"><i class="fa fa-plus"></i><%=d.getNo_req()%> </h2>
+                        <h2 class="row-seperator-header"><i class="fa fa-file"></i>REQUERIMIENTO : <%=d.getNo_req()%> </h2>
                         <!-- NEW WIDGET START -->
                         <article class="col-sm-12 col-md-12 col-lg-12">
                             <!-- end widget -->
@@ -138,10 +138,10 @@
 
                                                 %>
                                                 <li class="">
-                                                    <a href="#tab-r<%=(i + 1)%>" data-toggle="tab"><%if (pl.getEs_plazo_cumplido().equals("1")) {
+                                                    <a href="#tab-r<%=(i + 1)%>" data-toggle="tab"><%if (Integer.parseInt(pl.getEs_plazo_cumplido()) == 0) {
                                                             out.print("<span class='badge bg-color-red txt-color-white fa-fw fa fa-times'>.</span>");
                                                         } else {
-                                                           out.print("<span class='badge bg-color-green txt-color-white fa-fw fa fa-check'>.</span>");
+                                                            out.print("<span class='badge bg-color-green txt-color-white fa-fw fa fa-check'>.</span>");
                                                         }
 
                                                         %>  <%="Plazo Nº" + (i + 1)%> </a>
@@ -160,7 +160,17 @@
 
 
                                                     <p>
-                                                        <%=p.getDet_alerta()%>
+                                                        <strong> Nombre : </strong> <%=p.getNo_plazo()%><br>
+                                                        <strong> Descripción : </strong> <%=p.getDet_alerta()%><br>
+                                                        <strong> Fecha inicio de plazo : </strong> <%=p.getFe_desde()%><br>
+                                                        <strong> Fecha fin de plazo : </strong> <%=p.getFe_hasta()%><br>
+                                                        <strong style="color:blue;"> Fecha en que se elaboró requerimiento : </strong> <%=p.getFe_creacion()%><br>
+
+                                                        <%if (Integer.parseInt(p.getEs_plazo_cumplido()) == 0) {
+                                                                out.print("<strong style='color:red;'> Estado : </strong>Fuera de plazo");
+                                                            } else {
+                                                                out.print("<strong style='color:green;'>Estado : </strong> Dentro de Plazo");
+                                                            }%><br>
                                                     </p>
                                                 </div>
 
