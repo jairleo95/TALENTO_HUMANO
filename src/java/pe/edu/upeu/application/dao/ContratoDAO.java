@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.naming.spi.DirStateFactory;
 import pe.edu.upeu.application.dao_imp.InterfaceContratoDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -536,5 +537,20 @@ public class ContratoDAO implements InterfaceContratoDAO {
         }
         return list;
     }
-
+        @Override
+    public String MAX_ID_CONTRATO() {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECt 'CTO-'||MAX(SUBSTR(ID_CONTRATO,5,8)) FROM RHTM_CONTRATO";
+        String Maxcto=null;
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while(rs.next()){
+             Maxcto = rs.getString(1);
+            }
+        } catch (Exception e) {
+        } finally{
+            this.conn.close();
+        }
+        return Maxcto;
+    }
 }

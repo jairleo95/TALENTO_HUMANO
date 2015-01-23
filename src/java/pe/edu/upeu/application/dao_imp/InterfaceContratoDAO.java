@@ -51,4 +51,6 @@ public interface InterfaceContratoDAO {
     public String Contrato_max(String id_tr);
     
     public List<X_List_Id_Contrato_DGP> List_contra_x_idcto(String id_ctos);
+    
+    public String MAX_ID_CONTRATO();
 }
