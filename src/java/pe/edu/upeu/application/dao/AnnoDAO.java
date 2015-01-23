@@ -102,7 +102,7 @@ public class AnnoDAO implements InterfaceAnnoDAO {
     @Override
     public List<Anno> List_Anno_trabajador(String idtr) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT f.id_anno,f.no_anno,f.id_trabajador FROM(SELECT a.id_anno, a.no_anno ,r.id_dgp ,r.id_trabajador FROM RHTR_ANNO a ,RHTM_CONTRATO r WHERE a.id_anno  =r.id_anno AND r.ES_CONTRATO_TRABAJADOR=1)f WHERE f.id_trabajador='"+idtr.trim()+"' ORDER BY f.no_anno DESC";
+        String sql = " SELECT f.id_anno,f.no_anno,f.id_trabajador,f.ID_CONTRATO FROM(SELECT a.id_anno, a.no_anno ,r.id_dgp ,r.id_trabajador,r.ID_CONTRATO FROM RHTR_ANNO a ,RHTM_CONTRATO r WHERE a.id_anno  =r.id_anno AND r.ES_CONTRATO_TRABAJADOR=1)f WHERE f.id_trabajador='"+idtr.trim()+"' ORDER BY f.no_anno DESC";
         List<Anno> list = new ArrayList<Anno>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -111,6 +111,7 @@ public class AnnoDAO implements InterfaceAnnoDAO {
                 Anno a = new Anno();
                 a.setId_anno(rs.getString("id_anno"));
                 a.setNo_anno(rs.getString("no_anno"));
+                a.setId_contrato(rs.getString("id_contrato"));
                 list.add(a);
             }
         } catch (SQLException e) {

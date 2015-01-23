@@ -17,23 +17,26 @@ public class Anno {
     private String fe_desde;
     private String fe_hasta;
     private String de_observacion;
+    private String id_contrato;
 
-    public Anno(String id_anno, String no_anno, String de_anno, String fe_desde, String fe_hasta, String de_observacion) {
+    public Anno(String id_anno, String no_anno, String de_anno, String fe_desde, String fe_hasta, String de_observacion, String id_contrato) {
         this.id_anno = id_anno;
         this.no_anno = no_anno;
         this.de_anno = de_anno;
         this.fe_desde = fe_desde;
         this.fe_hasta = fe_hasta;
         this.de_observacion = de_observacion;
+        this.id_contrato = id_contrato;
     }
 
     public Anno() {
-        this.id_anno = id_anno;
-        this.no_anno = no_anno;
-        this.de_anno = de_anno;
-        this.fe_desde = fe_desde;
-        this.fe_hasta = fe_hasta;
-        this.de_observacion = de_observacion;
+        this.id_anno = "";
+        this.no_anno = "";
+        this.de_anno = "";
+        this.fe_desde = "";
+        this.fe_hasta = "";
+        this.de_observacion = "";
+        this.id_contrato = "";
     }
 
     public String getId_anno() {
@@ -82,6 +85,14 @@ public class Anno {
 
     public void setDe_observacion(String de_observacion) {
         this.de_observacion = de_observacion;
+    }
+
+    public String getId_contrato() {
+        return id_contrato;
+    }
+
+    public void setId_contrato(String id_contrato) {
+        this.id_contrato = id_contrato;
     }
     
     
