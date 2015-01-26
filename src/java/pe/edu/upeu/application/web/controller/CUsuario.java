@@ -123,6 +123,12 @@ public class CUsuario extends HttpServlet {
             //getServletContext().setAttribute("List_Usuario_var", usu.List_Usuario_var());
             //response.sendRedirect("Vista/Usuario/List_Usuario.jsp");
         }
+        if (opc.equals("Ver_Perfil")) {
+            String id = request.getParameter("id");
+            getServletContext().setAttribute("Lista_Usuarios", usu.List_Usuario_var_id(id));
+            response.sendRedirect("Vista/Usuario/Perfil_Usuario.jsp");
+
+        }
 
     }
 
