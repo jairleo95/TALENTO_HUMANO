@@ -395,13 +395,14 @@ public class CContrato extends HttpServlet {
             dia.add("dom");
 
             String ID_DETALLE_HORARIO = null;
-
             String ES_DETALLE_HORARIO = "1";
             String ES_HORARIO = "1";
+            String ID_TIPO_HORARIO = request.getParameter("ID_TIPO_HORARIO");
+            String ES_MOD_FARMATO = "1";
 
-            IHor.Insert_Detalle_Horario(ID_DETALLE_HORARIO, null, ES_DETALLE_HORARIO, iduser, null, null, null);
+            IHor.Insert_Det_Hor_Casos_Esp(null, ID_DGP, ES_DETALLE_HORARIO, iduser, FE_CREACION, US_MODIF, FE_MODIF, ID_TIPO_HORARIO, ES_MOD_FARMATO);
 
-            ID_DETALLE_HORARIO = IHor.Max_id_Detalle_Horario();
+            //ID_DETALLE_HORARIO = IHor.Max_id_Detalle_Horario();
 
             for (int i = 0; i < dia.size(); i++) {
                 for (int j = 0; j < 10; j++) {
@@ -436,7 +437,10 @@ public class CContrato extends HttpServlet {
             //getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());*/
 
             //response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp" );
-            out.print(ID_DETALLE_HORARIO);
+            out.println(ID_DETALLE_HORARIO);
+            out.println(ES_DETALLE_HORARIO);
+            out.println(iduser);
+            out.println(ID_TIPO_HORARIO);
            
             
         }

@@ -8,8 +8,11 @@ package pe.edu.upeu.application.dao;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pe.edu.upeu.application.dao_imp.InterfaceDatos_Hijo_Trabajador;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -51,6 +54,8 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
             cst.setString(18, "1");
             cst.execute();
         } catch (SQLException ex) {
+        } catch (ParseException ex) {
+            Logger.getLogger(Datos_Hijo_TrabajadorDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             this.conn.close();
         }
@@ -128,6 +133,8 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
             cst.setString(10, ES_ESTUDIO_NIV_SUPERIOR);
             cst.execute();
         } catch (SQLException ex) {
+        } catch (ParseException ex) {
+            Logger.getLogger(Datos_Hijo_TrabajadorDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             this.conn.close();
         }

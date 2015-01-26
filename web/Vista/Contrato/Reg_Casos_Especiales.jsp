@@ -549,7 +549,7 @@
                                                         </section>
                                                     </div>
                                                     <%String idtr = request.getParameter("idtr");%>
-                                                    <input type="text" value="<%=idtr %>" name="IDDATOS_TRABAJADOR" class="text-box" >
+                                                    <input type="hidden" value="<%=idtr %>" name="IDDATOS_TRABAJADOR" class="text-box" >
                                                     <input type="hidden" name="ENTREGAR_DOC_REGLAMENTOS"  value="0" class="text-box" >
                                                     <input type="hidden" name="REGISTRO_HUELLA"  value="0" class="text-box" > 
                                                     <input type="hidden" name="REGISTRO_SISTEM_REMU" value="0" class="text-box" >
@@ -638,10 +638,8 @@
                                                     <label class="label" id="titu">Tipo de Horario :</label>
                                                     <label class="select">
 
-                                                        <select id="horario" required="" >
-                                                            <option value="">[SELECCIONE]</option>
-                                                            <option value="0">Editable</option>
-
+                                                        <select id="horario" required="" name="ID_TIPO_HORARIO">
+                                                            <!-- function listar_tipo_horario-->
                                                         </select>
 
                                                     </label>
