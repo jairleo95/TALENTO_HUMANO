@@ -4,6 +4,8 @@
     Author     : ALFA 3
 --%>
 
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -68,5 +70,12 @@
         <button class="btn_texto" type="button">Procesar </button>
 
         <label class="label_texto">Hola [nombre] [ape_p] [ape_m] este es [sexo] un texto donde pued reconocer [nombre] cualquier tipo de campo que este dentro de mi rango desde la base de datos</label>
+
+        <%
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse("2012-05-01");
+            String formattedDate = new SimpleDateFormat("dd-MMM-yy").format(date);
+            
+            out.println(formattedDate);
+        %>
     </body>
 </html>
