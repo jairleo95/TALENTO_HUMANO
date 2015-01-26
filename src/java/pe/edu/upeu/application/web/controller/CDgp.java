@@ -402,11 +402,12 @@ public class CDgp extends HttpServlet {
                     getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
                     getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
                     getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
-                    out.print(id_cto + ida1 + idtr);
-                    response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1.trim() + "&idtr=" + idtr.trim() + "&id_cto=" + id_cto);
+                    //out.print(con.List_contra_x_idcto(id_cto).size());
+
+                    response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1 + "&idtr=" + idtr.trim() + "&id_cto=" + id_cto);
                 }
 
-                out.print("sñmzdlñzdlkgm");
+                //  out.print("sñmzdlñzdlkgm");
             } else {
 
                 response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&idgp=" + ID_DGP);
