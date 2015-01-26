@@ -150,15 +150,37 @@
                                                             </li>
                                                             <li>
                                                                 <p class="text-muted">
-                                                                    <i class="fa fa-envelope"></i>&nbsp;&nbsp;<a href="mailto:simmons@smartadmin">ceo@smartadmin.com</a>
+                                                                    <i class="fa fa-envelope"></i>&nbsp;&nbsp;<a href="mailto:simmons@smartadmin"><%=vu.getNo_usuario()%></a>
                                                                 </p>
                                                             </li>
                                                             <li>
                                                                 <p class="text-muted">
-                                                                    <i class="fa fa-skype"></i>&nbsp;&nbsp;<span class="txt-color-darken">john12</span>
+                                                                    <i class="fa fa-skype"></i>&nbsp;&nbsp;<span class="txt-color-darken">password</span>
                                                                 </p>
                                                             </li>
                                                             <li>
+                                                            
+                                                             <li>
+                                                                <p class="text-muted">
+                                                                    <i class="fa fa-skype"></i>&nbsp;&nbsp;<span class="txt-color-darken">celular</span>
+                                                                </p>
+                                                            </li>
+                                                             <li>
+                                                                <p class="text-muted">
+                                                                    <i class="fa fa-skype"></i>&nbsp;&nbsp;<span class="txt-color-darken">Direccion</span>
+                                                                </p>
+                                                            </li>
+                                                             
+                                                             <li>
+                                                                <p class="text-muted">
+                                                                    <i class="fa fa-skype"></i>&nbsp;&nbsp;<span class="txt-color-darken">foto</span>
+                                                                </p>
+                                                            </li>
+                                                             <li>
+                                                                <p class="text-muted">
+                                                                    <i class="fa fa-skype"></i>&nbsp;&nbsp;<span class="txt-color-darken">Religion</span>
+                                                                </p>
+                                                            </li>
                                                                 <p class="text-muted">
                                                                     <i class="fa fa-calendar"></i>&nbsp;&nbsp;<span class="txt-color-darken">Free after <a href="javascript:void(0);" rel="tooltip" title="" data-placement="top" data-original-title="Create an Appointment">4:30 PM</a></span>
                                                                 </p>
