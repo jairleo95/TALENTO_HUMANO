@@ -8,8 +8,11 @@ package pe.edu.upeu.application.dao;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.naming.spi.DirStateFactory;
 import pe.edu.upeu.application.dao_imp.InterfaceContratoDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
@@ -100,6 +103,8 @@ public class ContratoDAO implements InterfaceContratoDAO {
         } catch (SQLException ex) {
             throw new RuntimeException(ex.getMessage());
 
+        } catch (ParseException ex) {
+            Logger.getLogger(ContratoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             this.conn.close();
         }

@@ -8,8 +8,11 @@ package pe.edu.upeu.application.dao;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static oracle.security.o3logon.b.a;
 import pe.edu.upeu.application.dao_imp.InterfacePadre_Madre_ConyugueDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
@@ -50,6 +53,8 @@ public class Padre_Madre_ConyugueDAO implements InterfacePadre_Madre_ConyugueDAO
             cst.execute();
         } catch (SQLException ex) {
             
+        } catch (ParseException ex) {
+            Logger.getLogger(Padre_Madre_ConyugueDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             this.conn.close();
         }

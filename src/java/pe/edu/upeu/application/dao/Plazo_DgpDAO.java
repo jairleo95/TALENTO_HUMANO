@@ -8,10 +8,13 @@ package pe.edu.upeu.application.dao;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pe.edu.upeu.application.dao_imp.InterfacePlazo_DgpDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -137,6 +140,8 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
             cst.setString(6, "1");
             cst.execute();
         } catch (SQLException ex) {
+        } catch (ParseException ex) {
+            Logger.getLogger(Plazo_DgpDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             this.conn.close();
         }

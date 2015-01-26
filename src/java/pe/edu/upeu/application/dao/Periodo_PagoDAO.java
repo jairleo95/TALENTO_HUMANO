@@ -8,6 +8,9 @@ package pe.edu.upeu.application.dao;
 
 import java.sql.CallableStatement;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pe.edu.upeu.application.dao_imp.InterfacePeriodo_PagoDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -36,6 +39,8 @@ public class Periodo_PagoDAO implements InterfacePeriodo_PagoDAO{
 
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
+        } catch (ParseException ex) {
+            Logger.getLogger(Periodo_PagoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             this.conn.close();
         }

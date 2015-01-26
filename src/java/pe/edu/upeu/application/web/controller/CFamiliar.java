@@ -7,6 +7,9 @@ package pe.edu.upeu.application.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -138,27 +141,32 @@ public class CFamiliar extends HttpServlet {
            response.sendRedirect("Vista/Trabajador/Familiar/Mod_Padre_Madre_Conyugue.jsp?idtr=" + idtr);
         }
         if(opc.equals("MODIFICAR PMC")){
-            String AP_NOMBRES_PADRE = request.getParameter("APELLIDOS_NOMBRES_PADRE");
-            String AP_NOMBRES_MADRE = request.getParameter("APELLIDOS_NOMBRES_MADRE");
-            String ES_TRABAJA_UPEU_CONYUGUE = request.getParameter("TRABAJA_UPEU_CONYUGUE");
-            String AP_NOMBRES_CONYUGUE = request.getParameter("APELLIDO_NOMBRES_CONYUGUE");
-            String FE_NAC_CONYUGUE = c.convertFecha(request.getParameter("FECHA_NAC_CONYUGUE"));
-            String TI_DOC_ID = request.getParameter("TIPO_DOC_ID");
-            String NU_DOC = request.getParameter("NRO_DOC");
-            String LI_INSCRIPCION_VIG_ESSALUD = request.getParameter("INSCRIPCION_VIG_ESSALUD");
-            String US_MODIF = "";
-            String FE_MODIF = "";
-            String ID_TRABAJADOR = request.getParameter("idtr");
-           // out.print(opc+"   "+AP_NOMBRES_PADRE+AP_NOMBRES_MADRE+ES_TRABAJA_UPEU_CONYUGUE+AP_NOMBRES_CONYUGUE+FE_NAC_CONYUGUE+TI_DOC_ID+ NU_DOC + LI_INSCRIPCION_VIG_ESSALUD + US_MODIF+FE_MODIF + ID_TRABAJADOR+"");
-            pmc.MOD_PADRE_MADRE_CONYUGUE(AP_NOMBRES_PADRE, AP_NOMBRES_MADRE, ES_TRABAJA_UPEU_CONYUGUE, AP_NOMBRES_CONYUGUE, FE_NAC_CONYUGUE, TI_DOC_ID, NU_DOC, LI_INSCRIPCION_VIG_ESSALUD, US_MODIF, FE_MODIF, ID_TRABAJADOR);
-         
-            
-        
-            getServletContext().setAttribute("List_PMC", pmc.List_PMC(ID_TRABAJADOR));
-            getServletContext().setAttribute("LISTA_HIJOS", h.LISTA_HIJOS(ID_TRABAJADOR));
-             getServletContext().setAttribute("LISTA_HIJO", h.LISTA_HIJOS(ID_TRABAJADOR));
-            // out.println(idtr);
-            response.sendRedirect("Vista/Trabajador/Familiar/Detalle_Familiar.jsp?idtr="+ID_TRABAJADOR);
+            try {
+                String AP_NOMBRES_PADRE = request.getParameter("APELLIDOS_NOMBRES_PADRE");
+                String AP_NOMBRES_MADRE = request.getParameter("APELLIDOS_NOMBRES_MADRE");
+                String ES_TRABAJA_UPEU_CONYUGUE = request.getParameter("TRABAJA_UPEU_CONYUGUE");
+                String AP_NOMBRES_CONYUGUE = request.getParameter("APELLIDO_NOMBRES_CONYUGUE");
+                
+                String FE_NAC_CONYUGUE = c.convertFecha(request.getParameter("FECHA_NAC_CONYUGUE"));
+                String TI_DOC_ID = request.getParameter("TIPO_DOC_ID");
+                String NU_DOC = request.getParameter("NRO_DOC");
+                String LI_INSCRIPCION_VIG_ESSALUD = request.getParameter("INSCRIPCION_VIG_ESSALUD");
+                String US_MODIF = "";
+                String FE_MODIF = "";
+                String ID_TRABAJADOR = request.getParameter("idtr");
+                // out.print(opc+"   "+AP_NOMBRES_PADRE+AP_NOMBRES_MADRE+ES_TRABAJA_UPEU_CONYUGUE+AP_NOMBRES_CONYUGUE+FE_NAC_CONYUGUE+TI_DOC_ID+ NU_DOC + LI_INSCRIPCION_VIG_ESSALUD + US_MODIF+FE_MODIF + ID_TRABAJADOR+"");
+                pmc.MOD_PADRE_MADRE_CONYUGUE(AP_NOMBRES_PADRE, AP_NOMBRES_MADRE, ES_TRABAJA_UPEU_CONYUGUE, AP_NOMBRES_CONYUGUE, FE_NAC_CONYUGUE, TI_DOC_ID, NU_DOC, LI_INSCRIPCION_VIG_ESSALUD, US_MODIF, FE_MODIF, ID_TRABAJADOR);
+                
+                
+                
+                getServletContext().setAttribute("List_PMC", pmc.List_PMC(ID_TRABAJADOR));
+                getServletContext().setAttribute("LISTA_HIJOS", h.LISTA_HIJOS(ID_TRABAJADOR));
+                getServletContext().setAttribute("LISTA_HIJO", h.LISTA_HIJOS(ID_TRABAJADOR));
+                // out.println(idtr);
+                response.sendRedirect("Vista/Trabajador/Familiar/Detalle_Familiar.jsp?idtr="+ID_TRABAJADOR);
+            } catch (ParseException ex) {
+                Logger.getLogger(CFamiliar.class.getName()).log(Level.SEVERE, null, ex);
+            }
            }
         if(opc.equals("MODIFICAR REQUERIMIENTO")){
             
