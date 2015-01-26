@@ -1,11 +1,14 @@
-<%@page import="pe.edu.upeu.application.dao.ListaDAO"%>
-<%@page import="pe.edu.upeu.application.dao_imp.InterfaceListaDAO"%>
+
+<%@page import="java.util.GregorianCalendar"%>
 <!DOCTYPE html>
 <!--
 Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or http://ckeditor.com/license
 -->
+<%@page import="pe.edu.upeu.application.dao.ListaDAO"%>
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceListaDAO"%>
 <%@page import="pe.edu.upeu.application.model.X_List_Id_Contrato_DGP"%>
+<%@page import="java.util.Calendar;"%>
 <jsp:useBean id="List_contra_x_idcto" scope="application" class="java.util.ArrayList"/>
 <html>
     <head>
@@ -17,6 +20,38 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         <%for (int i = 0; i < List_contra_x_idcto.size(); i++) {
                 X_List_Id_Contrato_DGP n = new X_List_Id_Contrato_DGP();
                 n = (X_List_Id_Contrato_DGP) List_contra_x_idcto.get(i);
+                InterfaceListaDAO l = new ListaDAO();
+                String Direccion = "";
+                for (int b = 0; b < l.List_Dom_D1_Id().size(); b++) {
+                    if (n.getLi_di_dom_a_d1().trim().equals(b + 1 + "")) {
+                        Direccion += l.List_Dom_D1_Id().get(b);
+                    }
+                }
+                if (n.getLi_di_dom_a_d3().trim().equals("1")) {
+                    Direccion += " " + n.getDi_dom_a_d2() + " Numero";
+                }
+                if (n.getLi_di_dom_a_d3().trim().equals("2")) {
+                    Direccion += " " + n.getDi_dom_a_d2() + " Lote";
+                }
+                if (n.getLi_di_dom_a_d3().trim().equals("3")) {
+                    Direccion += " " + n.getDi_dom_a_d2() + " S/N";
+                }
+                for (int c = 0; c < l.List_Dom_D5_Id().size(); c++) {
+                    if (n.getLi_di_dom_a_d5().trim().equals(c + 1 + "")) {
+                        Direccion += " " + n.getDi_dom_a_d4() + " " + l.List_Dom_D5_Id().get(c);
+                    }
+                }
+                Direccion += " " + n.getDi_dom_a_d6();
+
+                Calendar fecha = new GregorianCalendar();
+                int año = fecha.get(Calendar.YEAR);
+                int mes = fecha.get(Calendar.MONTH);
+                int dia = fecha.get(Calendar.DAY_OF_MONTH);
+                int hora = fecha.get(Calendar.HOUR_OF_DAY);
+                int minuto = fecha.get(Calendar.MINUTE);
+                int segundo = fecha.get(Calendar.SECOND);
+               String fecha_actual="";
+
         %>
         <script>
 // The instanceReady event is fired, when an instance of CKEditor has finished
@@ -131,47 +166,20 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 var diasSemana = new Array("Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado");
                 var f = new Date();
                 var menu = {
-                    "[nombre]": "",
-                    "[app]": "Santos",
-                    "[apm]": "Gonzales",
-                    "[sexo]": "Masculino",
+                    "[nombre]": "<%=n.getNo_trabajador()%>",
+                    "[app]": "<%=n.getAp_paterno()%>",
+                    "[apm]": "<%=n.getAp_materno()%>",
                     "[dni]": "<%=n.getNu_documento()%>",
-                    "[dir]": "<% InterfaceListaDAO l = new ListaDAO();
-                    for (int b = 0; b < l.List_Dom_D1_Id().size(); b++) {
-                        if (n.getLi_di_dom_a_d1().trim().equals(b + 1 + "")) {
-                            out.println(l.List_Dom_D1_Id().get(b));
-                        }
-
-                    }
-
-                    if (n.getLi_di_dom_a_d3().trim().equals("1")) {
-                        out.println(" " + n.getDi_dom_leg_d2()+ " Numero");
-                    }
-                    if (n.getLi_di_dom_a_d3().trim().equals("2")) {
-                        out.println(" " + n.getDi_dom_leg_d2() + " Lote");
-                    }
-                    if (n.getLi_di_dom_a_d3().trim().equals("3")) {
-                        out.println(" " + n.getDi_dom_leg_d2() + " S/N");
-                    }
-
-                    for (int c = 0; c < l.List_Dom_D5_Id().size(); c++) {
-                        if (n.getLi_di_dom_a_d5().trim().equals(c + 1 + "")) {
-                            out.println(" " + n.getDi_dom_a_d4() + " " + l.List_Dom_D5_Id().get(c));
-                        }
-
-                    }
-                    out.println(" " + n.getDi_dom_a_d6());
-
-                        %>",
-                    "[prov]": "",
-                    "[dist]": "",
-                    "[dep]": "",
+                    "[dir]": "<%=Direccion%>",
+                    "[prov]": "<%=n.getNo_provincia()%>",
+                    "[dist]": "<%=n.getNo_distrito()%>",
+                    "[dep]": "<%=n.getNo_dep()%>",
                     "[desde]": "<%=n.getFe_desde()%>",
                     "[hasta]": "<%=n.getFe_hasta()%>",
                     "[puesto]": "<%=n.getNo_puesto()%>",
                     "[fe_actual]": "",
                     "[sueldo]": "<%=n.getCa_sueldo_total()%>",
-                    "[horas]": "",
+                    "[horas]": "<%=n.getNu_horas_lab()%>",
                     "[cursos]": ""
                 };
                 var editor = CKEDITOR.instances.editor1;
@@ -211,7 +219,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             $(document).ready(function() {
                 $("#actu").hide();
                 mostrars();
-                
+
 
             });
 
@@ -220,6 +228,33 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     </head>
 
     <body style="height: 1080px">
+        <div> <%
+            for (int b = 0; b < l.List_Dom_D1_Id().size(); b++) {
+                if (n.getLi_di_dom_a_d1().trim().equals(b + 1 + "")) {
+                    out.println(l.List_Dom_D1_Id().get(b));
+                }
+
+            }
+
+            if (n.getLi_di_dom_a_d3().trim().equals("1")) {
+                out.println(" " + n.getDi_dom_a_d2() + " Numero");
+            }
+            if (n.getLi_di_dom_a_d3().trim().equals("2")) {
+                out.println(" " + n.getDi_dom_a_d2() + " Lote");
+            }
+            if (n.getLi_di_dom_a_d3().trim().equals("3")) {
+                out.println(" " + n.getDi_dom_a_d2() + " S/N");
+            }
+
+            for (int c = 0; c < l.List_Dom_D5_Id().size(); c++) {
+                if (n.getLi_di_dom_a_d5().trim().equals(c + 1 + "")) {
+                    out.println(" " + n.getDi_dom_a_d4() + " " + l.List_Dom_D5_Id().get(c));
+                }
+
+            }
+            out.println(" " + n.getDi_dom_a_d6());
+
+            %></div>
         <h3>CARGAR PLANTILLAS</h3>
         <%String no_ar = request.getParameter("no_arc");%>
         <input type="hidden" id="no_arch" class="no_arc" value="<%=no_ar%>">

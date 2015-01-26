@@ -537,11 +537,13 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 v.setAp_paterno(rs.getString("ap_paterno"));
                 v.setAp_materno(rs.getString("ap_materno"));
                 v.setLi_di_dom_a_d1(rs.getString("li_di_dom_a_d1"));
-                v.setDi_dom_leg_d2(rs.getString("di_dom_leg_d2"));
+                v.setDi_dom_a_d2(rs.getString("di_dom_a_d2"));
                 v.setLi_di_dom_a_d3(rs.getString("li_di_dom_a_d3"));
                 v.setDi_dom_a_d4(rs.getString("di_dom_a_d4"));
                 v.setLi_di_dom_a_d5(rs.getString("li_di_dom_a_d5"));
                 v.setDi_dom_a_d6(rs.getString("di_dom_a_d6"));
+                v.setNo_distrito(rs.getString("no_distrito"));
+                v.setNo_provincia(rs.getString("no_provincia"));
                 list.add(v);
             }
         } catch (SQLException e) {
