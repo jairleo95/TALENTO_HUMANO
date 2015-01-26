@@ -297,9 +297,9 @@
                             out.print("NO DEFINIDO");
                         }%> </td></tr>   
                     <tr><td class="text-info table-bordered"><strong>Régimen Laboral:</strong></td><td colspan="6">
-                            <%if (n.getLi_regimen_laboral().trim().equals("1")) {
+                            <%if (n.getLi_regimen_laboral() == "1") {
                                     out.println("Privado");
-                                } else if (n.getLi_regimen_laboral().trim().equals("1")) {
+                                } else if (n.getLi_regimen_laboral() == "1") {
                                     out.println("Publico");
                                 } else if (n.getLi_regimen_laboral() == null) {
                                     out.println("NO DEFINIDO");
@@ -318,29 +318,36 @@
                         }%> 
                         </td></tr>   
                     <tr><td class="text-info table-bordered"><strong>Tipo de Contrato:</strong></td><td colspan="6">
-                            <%for (int k = 0; k < List_tipo_contrato.size(); k++) {
-
-                                    if (n.getTi_contrato().trim().equals(k + 1 + "")) {
-                                        out.println(List_tipo_contrato.get(k));
+                            <%if (n.getTi_contrato() != null) {
+                                    for (int k = 0; k < List_tipo_contrato.size(); k++) {
+                                        if (n.getTi_contrato() == k + 1 + "") {
+                                            out.print(List_tipo_contrato.get(k));
+                                        }
                                     }
+                                } else {
+                                    out.print("NO DEFINIDO");
                                 }%> 
                         </td></tr>   
                     <tr><td class="text-info table-bordered"><strong>Tipo de Convenio:</strong></td><td colspan="6"><%
-                        if (n.getLi_tipo_convenio().trim().equals("1")) {
-                            out.println("CLJ");
-                        }
-                        if (n.getLi_tipo_convenio().trim().equals("2")) {
-                            out.println("PPP");
-                        }
-                        if (n.getLi_tipo_convenio().trim().equals("3")) {
-                            out.println("PP");
+                        if (n.getLi_tipo_convenio() != null) {
+                            if (n.getLi_tipo_convenio() == ("1")) {
+                                out.println("CLJ");
+                            }
+                            if (n.getLi_tipo_convenio() == ("2")) {
+                                out.println("PPP");
+                            }
+                            if (n.getLi_tipo_convenio() == ("3")) {
+                                out.println("PP");
+                            }
+                        } else {
+                            out.println("NO DEFINIDO");
+
                         }
                             %> </td></tr>   
                     <tr><td class="text-info table-bordered"><strong>¿Firmo contrato?:</strong></td><td colspan="6"><%
                         if (idrol.trim().equals("ROL-0006") && n.getEs_firmo_contrato() == null) {%>
-                            <a href="../../contrato?fc=s&idc=<%=n.getId_trabajador()%>"  class="boton">SI</a>o<a href="../Control/ControlContrato.php?fc=n&idc=<?echo $list_rhc[$index][0];?>" class="boton">NO</a>
+                            <a href="../../contrato?fc=s&idc=<%=n.getId_trabajador()%>"  class="boton">SI</a>o<a href="" class="boton">NO</a>
                             <%} else {
-
                                     if (n.getEs_firmo_contrato() != null) {
                                         if (n.getEs_firmo_contrato().equals("1")) {
                                             out.println("Si");
@@ -361,11 +368,15 @@
                             out.print("SIN OBSERVACIONES");
                         }%> </td></tr>   
                     <tr><td class="text-info table-bordered"><strong>Régimen Pensionario:</strong></td><td colspan="6"><%
-                        if (n.getLi_regimen_pensionario().trim().equals("1")) {
-                            out.println("Privado");
-                        }
-                        if (n.getLi_regimen_pensionario().trim().equals("2")) {
-                            out.println("SNP");
+                        if (n.getLi_regimen_pensionario() != null) {
+                            if (n.getLi_regimen_pensionario() == ("1")) {
+                                out.println("Privado");
+                            }
+                            if (n.getLi_regimen_pensionario() == ("2")) {
+                                out.println("SNP");
+                            }
+                        } else {
+                            out.println("NO DEFINIDO");
                         }
                             %> </td></tr>   
                     <tr><td class="text-info table-bordered"><strong>Situacion Actual:</strong></td><td colspan="6"><%
@@ -408,10 +419,9 @@
                         /* <tr><td class="text-info table-bordered" colspan="2"></td><td ><input class="button blue"  type="submit" value="Editar"></td>*/
 
                         /*}
-                         }*/
-                        if (List_Planilla.size() == 0) {%>
+                         }*/%>
                     <tr><td class="text-info" colspan="8" style="text-align:center"><input class="button blue"  type="hidden" value="Editar"><button  class="PLANTI button blue">Mostrar Plantillas</button></td></tr>
-                            <%}%>
+                    >
 
                     <tr> <%if (n.getUs_modif() != null && n.getFe_modif() != null) {%>
                         <td class="text-info table-bordered"><strong>Modificado por:</strong></td>
@@ -443,15 +453,16 @@
                 </table>
             </div>
         </div>
-                <form action="../../plantilla_contractual" method="post">
+        <form action="../../plantilla_contractual" method="post" class="formu">
             <div class="Contenido">
                 <table>
                     <thead class="tab_cabe">
                         <tr class="tr" >
                             <td class="td">Nro</td>
-                            <td style="width: 230px;" class="td"><span title="nom_pl">NOMBRE PLANTILLA</span></td>
-                            <td class="td"><span >Opcion</span></td>
-                        </tr>
+                    <input type="hidden" name="idtraba" value="<%=n.getId_contrato()%>">
+                    <td style="width: 230px;" class="td"><span title="nom_pl">NOMBRE PLANTILLA</span></td>
+                    <td class="td"><span >Opcion</span></td>
+                    </tr>
                     </thead>
                     <tbody class="tbodys" id="gg">
 
@@ -481,18 +492,26 @@
                             t.append('<td>' + (i + 1) + '</td>');
                             t.append('<td>' + lista[i].nom_pl + '</td>');
                             t.append('<input type="hidden" value="' + lista[i].id + '" class="id_plantilla' + i + '" />');
-                            t.append('<input type="radio" id="imp" name="Imprimir" value="' + lista[i].no_arch + '">');
+                            t.append('<input type="radio" id="imp" name="Imprimir" value="' + lista[i].nom_ar + '">');
                             t.append('</tr>');
                         }
-                        t.append('<tr><td><input type="submit" name="opc" value"cargar"></td></tr>');
+                        t.append('<tr><td><button type="submit" >Cargar</button></td></tr>');
+                        t.append('<tr><td><input type="hidden"  name="opc" value="cargar"></td></tr>');
                     } else {
                     }
 
-                    $(".btn-cargar_pl").click(function() {
-                        mostrar_plantilla($(".plantilla" + $(this).val()).val());
-                        $(".id_pl").val($(".plantilla" + $(this).val()).val());
-                    });
                 });
+            });
+            $(".formu").submit(function() {
+                 var radio = $("input[type='radio']:checked").length;
+                if (radio == "") {
+                    $('.error2').text("Seleccione un radio button");
+                        alert("Seleccione un radio button");
+                        return false;
+                } else {
+                        $('.errors').hide();
+                        return true;
+                }
             });
         });
 
