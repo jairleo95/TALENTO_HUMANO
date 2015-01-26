@@ -119,7 +119,7 @@ public class CContrato extends HttpServlet {
         if (opc.equals("Detalle_Contractual")) {
             String idtr = request.getParameter("idtr");
             String ida1 = a.List_Anno_Max_Cont(idtr);
-            String id_cto=con.Contrato_max(idtr);
+            String id_cto = con.Contrato_max(idtr);
             getServletContext().setAttribute("List_Anno_trabajador", a.List_Anno_trabajador(idtr));
             getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(idtr));
             getServletContext().setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_cto));
@@ -129,13 +129,13 @@ public class CContrato extends HttpServlet {
             getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
             getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
             getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
-            out.print(id_cto+ida1+idtr);
-            response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1.trim()+"&idtr="+idtr.trim()+"&id_cto="+id_cto);
+            out.print(id_cto + ida1 + idtr);
+            response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1.trim() + "&idtr=" + idtr.trim() + "&id_cto=" + id_cto);
         }
-        if (opc.equals( "actualizar")) {
+        if (opc.equals("actualizar")) {
             String ida1 = request.getParameter("ida");
             String idtr = request.getParameter("idtr");
-            String id_cto =request.getParameter("ida");
+            String id_cto = request.getParameter("ida");
             getServletContext().setAttribute("List_Anno_trabajador", a.List_Anno_trabajador(idtr));
             getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(idtr));
             getServletContext().setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_cto));
@@ -145,7 +145,7 @@ public class CContrato extends HttpServlet {
             getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
             getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
             getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
-            response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1.trim()+"&idtr="+idtr.trim()+"&id_cto="+id_cto);
+            response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1.trim() + "&idtr=" + idtr.trim() + "&id_cto=" + id_cto);
         }
         if (opc.equals("REGISTRAR CONTRATO")) {
             String ID_CONTRATO = "";
@@ -183,7 +183,7 @@ public class CContrato extends HttpServlet {
             String ID_SEC = sec.ID_SECCION(ID_PUESTO).trim();
             Double CA_BONO_ALIMENTO = Double.parseDouble(request.getParameter("BONO_ALIMENTO"));
             String LI_TIPO_CONVENIO = request.getParameter("TIPO_CONVENIO");
-            String ES_FIRMO_CONTRATO = "1";
+            String ES_FIRMO_CONTRATO = "0";
             Double NU_CONTRATO = 0.0;/*Double.parseDouble(request.getParameter("NU_CONTRATO"));*/
 
             String DE_OBSERVACION = request.getParameter("OBSERVACION");
@@ -213,7 +213,7 @@ public class CContrato extends HttpServlet {
             Double CA_BEV = Double.parseDouble(request.getParameter("BEV"));
             String ID_TIPO_PLANILLA = request.getParameter("TIPO_PLANILLA");
             String ES_REMUNERACION_PROCESADO = null;
-            String ID_HORARIO = "HORARIO";
+            String ID_HORARIO = request.getParameter("HORARIO");
 
             int cantidad_centro = Integer.parseInt(request.getParameter("can_centro_cos"));
             con.INSERT_CONTRATO(ID_CONTRATO, ID_DGP, FE_DESDE, FE_HASTA, FE_CESE, ID_FUNC, LI_CONDICION, CA_SUELDO, CA_REINTEGRO, CA_ASIG_FAMILIAR, HO_SEMANA, NU_HORAS_LAB, DIA_CONTRATO, TI_TRABAJADOR, LI_REGIMEN_LABORAL, ES_DISCAPACIDAD, TI_CONTRATO, LI_REGIMEN_PENSIONARIO, ES_CONTRATO_TRABAJADOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, US_IP, FE_VACACIO_INI, FE_VACACIO_FIN, ES_CONTRATO, ID_FILIAL, ID_PUESTO, CA_BONO_ALIMENTO, LI_TIPO_CONVENIO, ES_FIRMO_CONTRATO, NU_CONTRATO, DE_OBSERVACION, ES_APOYO, TI_HORA_PAGO, NU_DOCUMENTO, ID_ANNO, ES_ENTREGAR_DOC_REGLAMENTOS, ES_REGISTRO_HUELLA, DE_REGISTRO_SISTEM_REMU, ID_TRABAJADOR, CA_SUELDO_TOTAL, ID_REGIMEN_LABORAL, ID_MODALIDAD, ID_SUB_MODALIDAD, CO_GR_OCUPACION, FE_SUSCRIPCION, CO_TI_MONEDA, CO_TI_REM_VARIAB, DE_REMU_ESPECIE, DE_RUC_EMP_TRAB, CO_SUCURSAL, DE_MYPE, ES_TI_CONTRATACION, CA_BEV, ID_TIPO_PLANILLA, ES_REMUNERACION_PROCESADO, ID_HORARIO);
@@ -249,40 +249,38 @@ public class CContrato extends HttpServlet {
             getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
             //getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());*/
             //response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp");
-             response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp?ida1=" + ida1);
+            response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp?ida1=" + ida1);
         }
         if (opc.equals("Buscar")) {
-                String Buscar = request.getParameter("busqueda");
-                String dni = request.getParameter("dni");
-                String nom = request.getParameter("nom");
-                String ape_mat = request.getParameter("ape_mat");
-                String ape_pat = request.getParameter("ape_pat");
-                // String all = request.getParameter("all");
+            String Buscar = request.getParameter("busqueda");
+            String dni = request.getParameter("dni");
+            String nom = request.getParameter("nom");
+            String ape_mat = request.getParameter("ape_mat");
+            String ape_pat = request.getParameter("ape_pat");
+            // String all = request.getParameter("all");
 
-                if (("Buscar".equals(Buscar) & (!"".equals(dni) | !"".equals(nom) | !"".equals(ape_mat) | !"".equals(ape_pat)))) {
-                    String busc = (String) request.getParameter("busc");
-                    if (busc != null) {
-                        getServletContext().setAttribute("ListarTrabajador2", tr.ListarTrabajador(iddep, dni, nom, ape_pat, ape_mat));
-                        getServletContext().setAttribute(nom, dgp.VAL_OPC_DGP(dni));
-                        response.sendRedirect("Vista/Contrato/Gen_Contrato_CE.jsp");
-                    }
-                } else {
+            if (("Buscar".equals(Buscar) & (!"".equals(dni) | !"".equals(nom) | !"".equals(ape_mat) | !"".equals(ape_pat)))) {
+                String busc = (String) request.getParameter("busc");
+                if (busc != null) {
+                    getServletContext().setAttribute("ListarTrabajador2", tr.ListarTrabajador(iddep, dni, nom, ape_pat, ape_mat));
+                    getServletContext().setAttribute(nom, dgp.VAL_OPC_DGP(dni));
                     response.sendRedirect("Vista/Contrato/Gen_Contrato_CE.jsp");
-
                 }
+            } else {
+                response.sendRedirect("Vista/Contrato/Gen_Contrato_CE.jsp");
+
             }
+        }
 
         if (opc.equals("LIST_FORMULARIO")) {
-            
-            
+
             String US_CREACION = iduser;
             String idtr = request.getParameter("idtr");
-           
 
-           // getServletContext().setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr1));
+            // getServletContext().setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr1));
             getServletContext().setAttribute("LISTAR_ANNO", con.LIST_ANNO());
             String MAX_ID = con.ID_MAX_ANNO();
-             getServletContext().setAttribute("Listar_Direccion", dir.Listar_Direccion());
+            getServletContext().setAttribute("Listar_Direccion", dir.Listar_Direccion());
             getServletContext().setAttribute("List_Jefe", l.List_Jefe());
             getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
             getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
@@ -293,13 +291,13 @@ public class CContrato extends HttpServlet {
             getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
             getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
             getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
-            
+
             out.print(MAX_ID);
-            response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp?idmax="+ MAX_ID+"&idtr="+ idtr);
+            response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp?idmax=" + MAX_ID + "&idtr=" + idtr);
         }
 
         if (opc.equals("REG_CASOS_ESP")) {
-            
+
             String ID_CONTRATO = "";
             String ID_DGP = "";
             String ID_ANNO = request.getParameter("AÑO_ID");
@@ -369,19 +367,18 @@ public class CContrato extends HttpServlet {
 
             String ES_REMUNERACION_PROCESADO = null;
 
-             con.INSERT_CONTRATO(ID_CONTRATO, ID_DGP, FE_DESDE, FE_HASTA, FE_CESE, ID_FUNC, LI_CONDICION, CA_SUELDO, CA_REINTEGRO, CA_ASIG_FAMILIAR, HO_SEMANA, NU_HORAS_LAB, DIA_CONTRATO, TI_TRABAJADOR, LI_REGIMEN_LABORAL, ES_DISCAPACIDAD, TI_CONTRATO, LI_REGIMEN_PENSIONARIO, ES_CONTRATO_TRABAJADOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, US_IP, FE_VACACIO_INI, FE_VACACIO_FIN, ES_CONTRATO, ID_FILIAL, ID_PUESTO, CA_BONO_ALIMENTO, LI_TIPO_CONVENIO, ES_FIRMO_CONTRATO, NU_CONTRATO, DE_OBSERVACION, ES_APOYO, TI_HORA_PAGO, NU_DOCUMENTO, ID_ANNO, ES_ENTREGAR_DOC_REGLAMENTOS, ES_REGISTRO_HUELLA, DE_REGISTRO_SISTEM_REMU, ID_TRABAJADOR, CA_SUELDO_TOTAL, ID_REGIMEN_LABORAL, ID_MODALIDAD, ID_SUB_MODALIDAD, CO_GR_OCUPACION, FE_SUSCRIPCION, CO_TI_MONEDA, CO_TI_REM_VARIAB, DE_REMU_ESPECIE, DE_RUC_EMP_TRAB, CO_SUCURSAL, DE_MYPE, ES_TI_CONTRATACION, CA_BEV, ID_TIPO_PLANILLA, ES_REMUNERACION_PROCESADO, ID_HORARIO);
+            con.INSERT_CONTRATO(ID_CONTRATO, ID_DGP, FE_DESDE, FE_HASTA, FE_CESE, ID_FUNC, LI_CONDICION, CA_SUELDO, CA_REINTEGRO, CA_ASIG_FAMILIAR, HO_SEMANA, NU_HORAS_LAB, DIA_CONTRATO, TI_TRABAJADOR, LI_REGIMEN_LABORAL, ES_DISCAPACIDAD, TI_CONTRATO, LI_REGIMEN_PENSIONARIO, ES_CONTRATO_TRABAJADOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, US_IP, FE_VACACIO_INI, FE_VACACIO_FIN, ES_CONTRATO, ID_FILIAL, ID_PUESTO, CA_BONO_ALIMENTO, LI_TIPO_CONVENIO, ES_FIRMO_CONTRATO, NU_CONTRATO, DE_OBSERVACION, ES_APOYO, TI_HORA_PAGO, NU_DOCUMENTO, ID_ANNO, ES_ENTREGAR_DOC_REGLAMENTOS, ES_REGISTRO_HUELLA, DE_REGISTRO_SISTEM_REMU, ID_TRABAJADOR, CA_SUELDO_TOTAL, ID_REGIMEN_LABORAL, ID_MODALIDAD, ID_SUB_MODALIDAD, CO_GR_OCUPACION, FE_SUSCRIPCION, CO_TI_MONEDA, CO_TI_REM_VARIAB, DE_REMU_ESPECIE, DE_RUC_EMP_TRAB, CO_SUCURSAL, DE_MYPE, ES_TI_CONTRATACION, CA_BEV, ID_TIPO_PLANILLA, ES_REMUNERACION_PROCESADO, ID_HORARIO);
 
             //--------- CENTRO COSTOS --------------
             String IP_USUARIO = request.getParameter("USUARIO_IP");
             int cant_cc = Integer.parseInt(request.getParameter("CANT"));
             String idcto = con.MAX_ID_CONTRATO();
-              for (int g = 1; g <= cant_cc; g++) {
+            for (int g = 1; g <= cant_cc; g++) {
                 String ID_CENTRO_COSTO = request.getParameter("CENTRO_COSTOS_" + g);
                 double porcentaje = Double.parseDouble(request.getParameter("PORCENTAJE_" + g));
-                 if (ID_CENTRO_COSTO != null && porcentaje != 0.0) {
-               dcc.INSERT_DETALLE_CENTRO_COSTO(null, ID_CENTRO_COSTO, null, porcentaje, IP_USUARIO,  iduser, FE_CREACION, US_MODIF, FE_MODIF,idcto,"1");
-                    
-                    
+                if (ID_CENTRO_COSTO != null && porcentaje != 0.0) {
+                    dcc.INSERT_DETALLE_CENTRO_COSTO(null, ID_CENTRO_COSTO, null, porcentaje, IP_USUARIO, iduser, FE_CREACION, US_MODIF, FE_MODIF, idcto, "1");
+
                 }
             }
             //------------- HORARIO ------------
@@ -426,7 +423,7 @@ public class CContrato extends HttpServlet {
             /*Cambiar este for con un trigger al momento de insertar*/
             //for (int i = 0; i < con.List_Rh_Contrato_Idtr().size(); i++) {
             //    emp.VALIDAR_EMPLEADO(con.List_Rh_Contrato_Idtr().get(i));
-           // }
+            // }
             /*---*/
             // getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_contrato));
             getServletContext().setAttribute("List_Jefe", l.List_Jefe());
@@ -436,12 +433,9 @@ public class CContrato extends HttpServlet {
             getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
             //getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());*/
 
-            response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp" );
+            response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp");
 
-           
-            
         }
- 
 
         if (opc.equals("Buscar")) {
             getServletContext().setAttribute("List_Area", area.List_Area());
