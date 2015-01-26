@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.model.V_Usuario"%>
 <%@page import="pe.edu.upeu.application.model.V_Var_Usuario"%>
 <jsp:useBean id="Lista_Usuarios" scope="application" class="java.util.ArrayList" />
 <!DOCTYPE html>
@@ -87,8 +88,8 @@
                                         <div class="row">
                                             <%
 
-                                            V_Var_Usuario  vu=  new V_Var_Usuario();
-                                            vu=(V_Var_Usuario)Lista_Usuarios.get(0);
+                                            V_Usuario  vu=  new V_Usuario();
+                                            vu=(V_Usuario)Lista_Usuarios.get(0);
                                             %>
                                             <div class="col-sm-12">
                                                 <div id="myCarousel" class="carousel fade profile-carousel">
@@ -137,7 +138,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <h1><%=vu.getNo_usuario()%> <span class="semi-bold">Doe</span>
+                                                        <h1><%=vu.getNo_usuario()%> <span class="semi-bold"><%=vu.getCl_tra()%></span>
                                                             <br>
                                                             <small> CEO, SmartAdmin</small></h1>
 

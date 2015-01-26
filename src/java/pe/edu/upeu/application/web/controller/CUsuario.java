@@ -125,7 +125,7 @@ public class CUsuario extends HttpServlet {
         }
         if (opc.equals("Ver_Perfil")) {
             String id = request.getParameter("id");
-            getServletContext().setAttribute("Lista_Usuarios", usu.List_Usuario_var_id(id));
+            getServletContext().setAttribute("Lista_Usuarios", usu.Val_Usuario(id));
             response.sendRedirect("Vista/Usuario/Perfil_Usuario.jsp");
 
         }

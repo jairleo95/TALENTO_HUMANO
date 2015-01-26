@@ -25,59 +25,6 @@ public class V_Usuario {
     private String no_dep;
     private String id_departamento;
     private String no_direccion;
-    private String id_direccion;
-    private String id_seccion;
-    private String no_seccion;
-    private String no_trabajador;
-    private String ap_paterno;
-    private String ap_materno;
-    private String fe_creacion;
-
-    public V_Usuario(String id_trabajador, String id_usuario, String id_rol, String id_empleado, String no_usuario, String pw_usuario, String no_puesto, String id_puesto, String no_area, String id_area, String no_dep, String id_departamento, String no_direccion, String id_direccion, String id_seccion, String no_seccion, String no_trabajador, String ap_paterno, String ap_materno, String fe_creacion) {
-        this.id_trabajador = id_trabajador;
-        this.id_usuario = id_usuario;
-        this.id_rol = id_rol;
-        this.id_empleado = id_empleado;
-        this.no_usuario = no_usuario;
-        this.pw_usuario = pw_usuario;
-        this.no_puesto = no_puesto;
-        this.id_puesto = id_puesto;
-        this.no_area = no_area;
-        this.id_area = id_area;
-        this.no_dep = no_dep;
-        this.id_departamento = id_departamento;
-        this.no_direccion = no_direccion;
-        this.id_direccion = id_direccion;
-        this.id_seccion = id_seccion;
-        this.no_seccion = no_seccion;
-        this.no_trabajador = no_trabajador;
-        this.ap_paterno = ap_paterno;
-        this.ap_materno = ap_materno;
-        this.fe_creacion = fe_creacion;
-    }
-    
-    public V_Usuario() {
-        this.id_trabajador = "";
-        this.id_usuario = "";
-        this.id_rol = "";
-        this.id_empleado = "";
-        this.no_usuario = "";
-        this.pw_usuario = "";
-        this.no_puesto = "";
-        this.id_puesto = "";
-        this.no_area = "";
-        this.id_area = "";
-        this.no_dep = "";
-        this.id_departamento = "";
-        this.no_direccion = "";
-        this.id_direccion = "";
-        this.id_seccion = "";
-        this.no_seccion = "";
-        this.no_trabajador = "";
-        this.ap_paterno = "";
-        this.ap_materno = "";
-        this.fe_creacion = "";
-    }
 
     public String getId_trabajador() {
         return id_trabajador;
@@ -238,5 +185,244 @@ public class V_Usuario {
     public void setFe_creacion(String fe_creacion) {
         this.fe_creacion = fe_creacion;
     }
-    
+
+    public String getCl_tra() {
+        return cl_tra;
+    }
+
+    public void setCl_tra(String cl_tra) {
+        this.cl_tra = cl_tra;
+    }
+
+    public String getTe_trabajador() {
+        return te_trabajador;
+    }
+
+    public void setTe_trabajador(String te_trabajador) {
+        this.te_trabajador = te_trabajador;
+    }
+
+    public String getLi_di_dom_a_d1() {
+        return li_di_dom_a_d1;
+    }
+
+    public void setLi_di_dom_a_d1(String li_di_dom_a_d1) {
+        this.li_di_dom_a_d1 = li_di_dom_a_d1;
+    }
+
+    public String getDi_dom_a_d2() {
+        return di_dom_a_d2;
+    }
+
+    public void setDi_dom_a_d2(String di_dom_a_d2) {
+        this.di_dom_a_d2 = di_dom_a_d2;
+    }
+
+    public String getLi_di_dom_a_d3() {
+        return li_di_dom_a_d3;
+    }
+
+    public void setLi_di_dom_a_d3(String li_di_dom_a_d3) {
+        this.li_di_dom_a_d3 = li_di_dom_a_d3;
+    }
+
+    public String getDi_dom_a_d4() {
+        return di_dom_a_d4;
+    }
+
+    public void setDi_dom_a_d4(String di_dom_a_d4) {
+        this.di_dom_a_d4 = di_dom_a_d4;
+    }
+
+    public String getLi_di_dom_a_d5() {
+        return li_di_dom_a_d5;
+    }
+
+    public void setLi_di_dom_a_d5(String li_di_dom_a_d5) {
+        this.li_di_dom_a_d5 = li_di_dom_a_d5;
+    }
+
+    public String getDi_dom_a_d6() {
+        return di_dom_a_d6;
+    }
+
+    public void setDi_dom_a_d6(String di_dom_a_d6) {
+        this.di_dom_a_d6 = di_dom_a_d6;
+    }
+
+    public String getDi_dom_a_ref() {
+        return di_dom_a_ref;
+    }
+
+    public void setDi_dom_a_ref(String di_dom_a_ref) {
+        this.di_dom_a_ref = di_dom_a_ref;
+    }
+
+    public String getDi_correo_personal() {
+        return di_correo_personal;
+    }
+
+    public void setDi_correo_personal(String di_correo_personal) {
+        this.di_correo_personal = di_correo_personal;
+    }
+
+    public String getDi_correo_inst() {
+        return di_correo_inst;
+    }
+
+    public void setDi_correo_inst(String di_correo_inst) {
+        this.di_correo_inst = di_correo_inst;
+    }
+
+    public String getLi_religion() {
+        return li_religion;
+    }
+
+    public void setLi_religion(String li_religion) {
+        this.li_religion = li_religion;
+    }
+
+    public String getNo_iglesia() {
+        return no_iglesia;
+    }
+
+    public void setNo_iglesia(String no_iglesia) {
+        this.no_iglesia = no_iglesia;
+    }
+
+    public String getDe_cargo() {
+        return de_cargo;
+    }
+
+    public void setDe_cargo(String de_cargo) {
+        this.de_cargo = de_cargo;
+    }
+
+    public String getLi_autoridad() {
+        return li_autoridad;
+    }
+
+    public void setLi_autoridad(String li_autoridad) {
+        this.li_autoridad = li_autoridad;
+    }
+
+    public String getNo_ap_autoridad() {
+        return no_ap_autoridad;
+    }
+
+    public void setNo_ap_autoridad(String no_ap_autoridad) {
+        this.no_ap_autoridad = no_ap_autoridad;
+    }
+
+    public String getCl_autoridad() {
+        return cl_autoridad;
+    }
+
+    public void setCl_autoridad(String cl_autoridad) {
+        this.cl_autoridad = cl_autoridad;
+    }
+    private String id_direccion;
+    private String id_seccion;
+    private String no_seccion;
+    private String no_trabajador;
+    private String ap_paterno;
+    private String ap_materno;
+    private String fe_creacion;
+    private String cl_tra;
+    private String te_trabajador;
+    private String li_di_dom_a_d1;
+    private String di_dom_a_d2;
+    private String li_di_dom_a_d3;
+    private String di_dom_a_d4;
+    private String li_di_dom_a_d5;
+    private String di_dom_a_d6;
+    private String di_dom_a_ref;
+    private String di_correo_personal;
+    private String di_correo_inst;
+    private String li_religion;
+    private String no_iglesia;
+    private String de_cargo;
+    private String li_autoridad;
+    private String no_ap_autoridad;
+    private String cl_autoridad;
+
+    public V_Usuario(String id_trabajador, String id_usuario, String id_rol, String id_empleado, String no_usuario, String pw_usuario, String no_puesto, String id_puesto, String no_area, String id_area, String no_dep, String id_departamento, String no_direccion, String id_direccion, String id_seccion, String no_seccion, String no_trabajador, String ap_paterno, String ap_materno, String fe_creacion, String cl_tra, String te_trabajador, String li_di_dom_a_d1, String di_dom_a_d2, String li_di_dom_a_d3, String di_dom_a_d4, String li_di_dom_a_d5, String di_dom_a_d6, String di_dom_a_ref, String di_correo_personal, String di_correo_inst, String li_religion, String no_iglesia, String de_cargo, String li_autoridad, String no_ap_autoridad, String cl_autoridad) {
+        this.id_trabajador = id_trabajador;
+        this.id_usuario = id_usuario;
+        this.id_rol = id_rol;
+        this.id_empleado = id_empleado;
+        this.no_usuario = no_usuario;
+        this.pw_usuario = pw_usuario;
+        this.no_puesto = no_puesto;
+        this.id_puesto = id_puesto;
+        this.no_area = no_area;
+        this.id_area = id_area;
+        this.no_dep = no_dep;
+        this.id_departamento = id_departamento;
+        this.no_direccion = no_direccion;
+        this.id_direccion = id_direccion;
+        this.id_seccion = id_seccion;
+        this.no_seccion = no_seccion;
+        this.no_trabajador = no_trabajador;
+        this.ap_paterno = ap_paterno;
+        this.ap_materno = ap_materno;
+        this.fe_creacion = fe_creacion;
+        this.cl_tra = cl_tra;
+        this.te_trabajador = te_trabajador;
+        this.li_di_dom_a_d1 = li_di_dom_a_d1;
+        this.di_dom_a_d2 = di_dom_a_d2;
+        this.li_di_dom_a_d3 = li_di_dom_a_d3;
+        this.di_dom_a_d4 = di_dom_a_d4;
+        this.li_di_dom_a_d5 = li_di_dom_a_d5;
+        this.di_dom_a_d6 = di_dom_a_d6;
+        this.di_dom_a_ref = di_dom_a_ref;
+        this.di_correo_personal = di_correo_personal;
+        this.di_correo_inst = di_correo_inst;
+        this.li_religion = li_religion;
+        this.no_iglesia = no_iglesia;
+        this.de_cargo = de_cargo;
+        this.li_autoridad = li_autoridad;
+        this.no_ap_autoridad = no_ap_autoridad;
+        this.cl_autoridad = cl_autoridad;
+    }
+    public V_Usuario() {
+        this.id_trabajador = "";
+        this.id_usuario = "";
+        this.id_rol = "";
+        this.id_empleado = "";
+        this.no_usuario = "";
+        this.pw_usuario = "";
+        this.no_puesto = "";
+        this.id_puesto = "";
+        this.no_area = "";
+        this.id_area = "";
+        this.no_dep = "";
+        this.id_departamento = "";
+        this.no_direccion = "";
+        this.id_direccion = "";
+        this.id_seccion = "";
+        this.no_seccion = "";
+        this.no_trabajador = "";
+        this.ap_paterno = "";
+        this.ap_materno = "";
+        this.fe_creacion = "";
+        this.cl_tra = "";
+        this.te_trabajador = "";
+        this.li_di_dom_a_d1 = "";
+        this.di_dom_a_d2 = "";
+        this.li_di_dom_a_d3 = "";
+        this.di_dom_a_d4 = "";
+        this.li_di_dom_a_d5 = "";
+        this.di_dom_a_d6 = "";
+        this.di_dom_a_ref = "";
+        this.di_correo_personal = "";
+        this.di_correo_inst = "";
+        this.li_religion = "";
+        this.no_iglesia = "";
+        this.de_cargo = "";
+        this.li_autoridad = "";
+        this.no_ap_autoridad = "";
+        this.cl_autoridad = "";
+    }
+
 }

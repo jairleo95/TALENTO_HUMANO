@@ -31,7 +31,7 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
     @Override
     public List<Usuario> List_Usuario() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql="SELECT * FROM RHTC_USUARIO";
+        String sql = "SELECT * FROM RHTC_USUARIO";
         List<Usuario> list = new ArrayList<Usuario>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -143,19 +143,47 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
         try {
             ResultSet rs = this.conn.query(sql.toString());
             while (rs.next()) {
-                V_Usuario us = new V_Usuario();
-                us.setId_usuario(rs.getString("id_usuario"));
-                us.setId_rol(rs.getString("id_rol"));
-                us.setId_empleado(rs.getString("id_empleado"));
-                us.setNo_usuario(rs.getString("no_usuario"));
-                us.setPw_usuario(rs.getString("pw_usuario"));
-                us.setId_puesto(rs.getString("id_puesto"));
-                us.setId_area(rs.getString("id_area"));
-                us.setNo_area(rs.getString("no_area"));
-                us.setNo_dep(rs.getString("no_dep"));
-                us.setId_departamento(rs.getString("id_departamento"));
-                us.setNo_puesto(rs.getString("no_puesto"));
-                list.add(us);
+                V_Usuario v = new V_Usuario();
+
+                v.setId_trabajador(rs.getString("id_trabajador"));
+                v.setId_usuario(rs.getString("id_usuario"));
+                v.setId_rol(rs.getString("id_rol"));
+                v.setId_empleado(rs.getString("id_empleado"));
+                v.setNo_usuario(rs.getString("no_usuario"));
+                v.setPw_usuario(rs.getString("pw_usuario"));
+                v.setNo_puesto(rs.getString("no_puesto"));
+                v.setId_puesto(rs.getString("id_puesto"));
+                v.setNo_area(rs.getString("no_area"));
+                v.setId_area(rs.getString("id_area"));
+                v.setNo_dep(rs.getString("no_dep"));
+                v.setId_departamento(rs.getString("id_departamento"));
+                v.setNo_direccion(rs.getString("no_direccion"));
+                v.setId_direccion(rs.getString("id_direccion"));
+                v.setId_seccion(rs.getString("id_seccion"));
+                v.setNo_seccion(rs.getString("no_seccion"));
+                v.setNo_trabajador(rs.getString("no_trabajador"));
+                v.setAp_paterno(rs.getString("ap_paterno"));
+                v.setAp_materno(rs.getString("ap_materno"));
+                v.setFe_creacion(rs.getString("fe_creacion"));
+                v.setCl_tra(rs.getString("cl_tra"));
+                v.setTe_trabajador(rs.getString("te_trabajador"));
+                v.setLi_di_dom_a_d1(rs.getString("li_di_dom_a_d1"));
+                v.setDi_dom_a_d2(rs.getString("di_dom_a_d2"));
+                v.setLi_di_dom_a_d3(rs.getString("li_di_dom_a_d3"));
+                v.setDi_dom_a_d4(rs.getString("di_dom_a_d4"));
+                v.setLi_di_dom_a_d5(rs.getString("li_di_dom_a_d5"));
+                v.setDi_dom_a_d6(rs.getString("di_dom_a_d6"));
+                v.setDi_dom_a_ref(rs.getString("di_dom_a_ref"));
+                v.setDi_correo_personal(rs.getString("di_correo_personal"));
+                v.setDi_correo_inst(rs.getString("di_correo_inst"));
+                v.setLi_religion(rs.getString("li_religion"));
+                v.setNo_iglesia(rs.getString("no_iglesia"));
+                v.setDe_cargo(rs.getString("de_cargo"));
+                v.setLi_autoridad(rs.getString("li_autoridad"));
+                v.setNo_ap_autoridad(rs.getString("no_ap_autoridad"));
+                v.setCl_autoridad(rs.getString("cl_autoridad"));
+
+                list.add(v);
             }
         } catch (SQLException e) {
         } finally {
@@ -167,27 +195,29 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
 
     @Override
     public void Mod_Pw(String id_usuario, String usuario, String clave) {
-       CallableStatement cst;
+        CallableStatement cst;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             cst = conn.conex.prepareCall("{CALL RHSP_MOD_USUARIO_CL( ?,?,?)}");
-            cst.setString(1,id_usuario );
-            cst.setString(2, usuario );
+            cst.setString(1, id_usuario);
+            cst.setString(2, usuario);
             cst.setString(3, clave);
             cst.execute();
         } catch (SQLException ex) {
         } finally {
             this.conn.close();
-        }   
+        }
     }
+
     @Override
     public void Delete_Usuario(String ID) {
-        
+
     }
+
     @Override
     public List<Usuario> List_ID_User(String id_user) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql="select * from RHTC_USUARIO where ID_USUARIO ='"+id_user+"'";
+        String sql = "select * from RHTC_USUARIO where ID_USUARIO ='" + id_user + "'";
         List<Usuario> list = new ArrayList<Usuario>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -209,9 +239,9 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
 
     @Override
     public void Insert_usuario(String No_usuario, String pw_usuario, String id_emp, String id_rol, String es_usuario) {
-       CallableStatement cst;
+        CallableStatement cst;
         try {
-            String id_usuario="";
+            String id_usuario = "";
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             cst = conn.conex.prepareCall("{CALL RHSP_INSERT_USUARIO( ?,?,?,?,?,?)}");
             cst.setString(1, id_usuario);
@@ -224,7 +254,7 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
         } catch (SQLException ex) {
         } finally {
             this.conn.close();
-        }   
+        }
     }
 
     @Override
@@ -267,7 +297,7 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
     @Override
     public List<V_Var_Usuario> List_Usuario_var_id(String id_usu) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from RHVD_VAR_USUARIO where id_usuario='"+id_usu+"'";
+        String sql = "select * from RHVD_VAR_USUARIO where id_usuario='" + id_usu + "'";
         List<V_Var_Usuario> list = new ArrayList<V_Var_Usuario>();
         try {
             ResultSet rs = this.conn.query(sql.toString());
@@ -314,7 +344,7 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
         } catch (SQLException ex) {
         } finally {
             this.conn.close();
-        } 
+        }
     }
 
     @Override
@@ -328,7 +358,7 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
         } catch (SQLException ex) {
         } finally {
             this.conn.close();
-        } 
+        }
     }
 
     @Override
@@ -342,6 +372,6 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
         } catch (SQLException ex) {
         } finally {
             this.conn.close();
-        } 
+        }
     }
 }
