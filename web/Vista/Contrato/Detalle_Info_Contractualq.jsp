@@ -473,7 +473,7 @@
 
         <%}
             }
-            List_contra_x_idcto.clear();%>
+%>
     </center>
     <%}%>
     <script>

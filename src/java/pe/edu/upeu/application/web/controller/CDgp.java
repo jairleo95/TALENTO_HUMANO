@@ -404,7 +404,7 @@ public class CDgp extends HttpServlet {
                     getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
                     //out.print(con.List_contra_x_idcto(id_cto).size());
 
-                    response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1 + "&idtr=" + idtr.trim() + "&id_cto=" + id_cto);
+                    response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1 + "&idtr=" + idtr + "&id_cto=" + id_cto);
                 }
 
                 //  out.print("sñmzdlñzdlkgm");
