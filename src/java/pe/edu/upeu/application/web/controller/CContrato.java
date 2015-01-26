@@ -385,7 +385,7 @@ public class CContrato extends HttpServlet {
                 }
             }
             //------------- HORARIO ------------
-            /*List<String> dia = new ArrayList<String>();
+            List<String> dia = new ArrayList<String>();
             dia.add("lun");
             dia.add("mar");
             dia.add("mie");
@@ -399,7 +399,7 @@ public class CContrato extends HttpServlet {
             String ES_DETALLE_HORARIO = "1";
             String ES_HORARIO = "1";
 
-           // IHor.Insert_Detalle_Horario(ID_DETALLE_HORARIO, null, ES_DETALLE_HORARIO, iduser, null, null, null);
+            IHor.Insert_Detalle_Horario(ID_DETALLE_HORARIO, null, ES_DETALLE_HORARIO, iduser, null, null, null);
 
             ID_DETALLE_HORARIO = IHor.Max_id_Detalle_Horario();
 
@@ -422,7 +422,6 @@ public class CContrato extends HttpServlet {
                 }
 
             }
-*/
             /*Cambiar este for con un trigger al momento de insertar*/
             //for (int i = 0; i < con.List_Rh_Contrato_Idtr().size(); i++) {
             //    emp.VALIDAR_EMPLEADO(con.List_Rh_Contrato_Idtr().get(i));
