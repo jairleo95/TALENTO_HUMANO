@@ -402,7 +402,7 @@ public class CContrato extends HttpServlet {
 
             IHor.Insert_Det_Hor_Casos_Esp(null, ID_DGP, ES_DETALLE_HORARIO, iduser, FE_CREACION, US_MODIF, FE_MODIF, ID_TIPO_HORARIO, ES_MOD_FARMATO);
 
-            //ID_DETALLE_HORARIO = IHor.Max_id_Detalle_Horario();
+            ID_DETALLE_HORARIO = IHor.Max_id_Detalle_Horario();
 
             for (int i = 0; i < dia.size(); i++) {
                 for (int j = 0; j < 10; j++) {
@@ -412,12 +412,12 @@ public class CContrato extends HttpServlet {
 
                     if (hora_desde != null & d != null & hora_hasta != null) {
                         if (!hora_hasta.equals("") & !hora_desde.equals("") & !d.equals("")) {
-                           /* IHor.Insert_Horario(null,
+                            IHor.Insert_Horario(null,
                                     hora_desde,
                                     hora_hasta,
                                     d,
                                     ES_HORARIO,
-                                    ID_DETALLE_HORARIO);*/
+                                    ID_DETALLE_HORARIO);
                         }
                     }
                 }
@@ -436,11 +436,8 @@ public class CContrato extends HttpServlet {
             getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
             //getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());*/
 
-            //response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp" );
-            out.println(ID_DETALLE_HORARIO);
-            out.println(ES_DETALLE_HORARIO);
-            out.println(iduser);
-            out.println(ID_TIPO_HORARIO);
+            response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp" );
+
            
             
         }

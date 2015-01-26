@@ -121,7 +121,7 @@ public class HorarioDAO implements InterfaceHorarioDAO {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DETALLE_HORARIO( ?, ?, ?, ?,?, ?, ?, ?, ?)}");
             cst.setString(1, null);
-            cst.setString(2, null);
+            cst.setString(2, ID_DGP);
             cst.setString(3, ES_DE_HOR);
             cst.setString(4, US_CRE);
             cst.setString(5, US_MODIF);
@@ -133,9 +133,7 @@ public class HorarioDAO implements InterfaceHorarioDAO {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        } catch (Exception ex) {
-            Logger.getLogger(AutorizacionDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
+        }finally {
             this.conn.close();
         }
     }
