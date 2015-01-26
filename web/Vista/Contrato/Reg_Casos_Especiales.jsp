@@ -114,9 +114,9 @@
     </head>
     <body>   
 
-
+       
         <div id="main" role="main" style="margin: 0px;">
-
+             <form id="checkout-form" action="../../contrato"  novalidate="novalidate">
 
             <div id="content">
                 <section id="widget-grid" class="">
@@ -165,19 +165,19 @@
 
                                                 </div>
                                             </header>
-                                            <form id="checkout-form" action="../../contrato"  novalidate="novalidate">
+                                            
                                                 <fieldset id="fila-agregar">
                                                     <div class="row" >
                                                         <section class="col col-2">
                                                             <label class="select" id="titu">Año:
-                                                                <select name="" required="" class="input-group-sm">
+                                                                <select name="AÑO_ID" required="" class="input-group-sm">
                                                                     <%  String MAX = request.getParameter("MAX_ID");
                                                                         for (int i = 0; i < LISTAR_ANNO.size(); i++) {
                                                                             Anno a = new Anno();
                                                                             a = (Anno) LISTAR_ANNO.get(i);
                                                                             if (a.getId_anno().trim().equals(MAX)) {
                                                                     %>
-                                                                    <option value="<%=a.getId_anno()%>" selected="selected" ><%=a.getNo_anno()%></option> 
+                                                                    <option value="<%=a.getId_anno()%>" selected="selected"  ><%=a.getNo_anno()%></option> 
                                                                     <%}%>
                                                                     <option value="<%=a.getId_anno()%>" ><%=a.getNo_anno()%></option>            
                                                                     <%}%>
@@ -547,8 +547,8 @@
                                                             </label>
                                                         </section>
                                                     </div>
-                                                    <%String idtr = request.getParameter("idtr1");%>
-                                                    <input type="hidden" value="<%=idtr %>" name="IDDATOS_TRABAJADOR" class="text-box" >
+                                                    <%String idtr = request.getParameter("idtr");%>
+                                                    <input type="text" value="<%=idtr %>" name="IDDATOS_TRABAJADOR" class="text-box" >
                                                     <input type="hidden" name="ENTREGAR_DOC_REGLAMENTOS"  value="0" class="text-box" >
                                                     <input type="hidden" name="REGISTRO_HUELLA"  value="0" class="text-box" > 
                                                     <input type="hidden" name="REGISTRO_SISTEM_REMU" value="0" class="text-box" >
@@ -566,7 +566,7 @@
                                                     </button>
 
                                                 </footer>
-                                            </form>
+                                           
 
                                         </div>
 
@@ -773,11 +773,13 @@
 
             </div>
 
-        </section>
-    </div>
-</div>
+       </form>
+                                                
+        </div>                                      
+    
+                                                 
 
-</body>
+    </body>
 <script>
 
     function calcular_sueldo_total() {
@@ -1247,7 +1249,7 @@
             $(".porcentaje_cc").val(Math.round((100 / c_porcentaje) * 100) / 100);
             sumn_porcen_total();
         }
-        $(".ver").text(texto); 
+        //$(".ver").text(texto); 
         texto = "";
         $(".cant").val(ag);
         ag++;
@@ -1289,7 +1291,7 @@
         $('#btn-agregar-cc').click(function() {
             
             agregar_centro_costo();
-            alert($(".cant").val());
+            //alert($(".cant").val());
 
 
         });

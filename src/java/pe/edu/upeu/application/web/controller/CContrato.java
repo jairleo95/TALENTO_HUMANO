@@ -276,7 +276,7 @@ public class CContrato extends HttpServlet {
             
             
             String US_CREACION = iduser;
-            String idtr1 = request.getParameter("idtr");
+            String idtr = request.getParameter("idtr");
            
 
            // getServletContext().setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr1));
@@ -294,8 +294,8 @@ public class CContrato extends HttpServlet {
             getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
             getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
             
-
-            response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp?idmax="+ MAX_ID+"&idtr="+ idtr1);
+            out.print(MAX_ID);
+            response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp?idmax="+ MAX_ID+"&idtr="+ idtr);
         }
 
         if (opc.equals("REG_CASOS_ESP")) {
@@ -430,14 +430,13 @@ public class CContrato extends HttpServlet {
             // getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_contrato));
             getServletContext().setAttribute("List_Jefe", l.List_Jefe());
             getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
-            getServletContext().setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
             getServletContext().setAttribute("List_ID_User", usu.List_ID_User(US_CREACION));
             getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
             getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
             //getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());*/
 
-           // response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp?ida1=" + ida1);
-            //response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp" );
+            response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp" );
+           
             
         }
  
