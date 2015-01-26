@@ -30,7 +30,7 @@ public class AnnoDAO implements InterfaceAnnoDAO {
         List<Anno> list = new ArrayList<Anno>();
         try {
             ResultSet rs = this.conn.query(sql);
-
+            
             while (rs.next()) {
                 Anno a = new Anno();
                 a.setId_anno(rs.getString("id_anno"));

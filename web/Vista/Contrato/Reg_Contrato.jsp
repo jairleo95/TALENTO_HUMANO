@@ -161,14 +161,15 @@
                                         <select name="AÑO_ID" required="" class="input-group-sm">
                                             <%  for (int i = 0; i < List_Anno.size(); i++) {
                                                     Anno a = new Anno();
+                                                    a = (Anno) List_Anno.get(i);
                                                     for (int e = 0; e < List_anno_max.size(); e++) {
                                                         Anno w = new Anno();
                                                         w = (Anno) List_anno_max.get(e);
-                                                        a = (Anno) List_Anno.get(i);%>
-                                            <%if (a.getId_anno().trim() != w.getId_anno().trim() && a.getId_anno().equals("")) {%>
+                                                        %>
+                                                        <%if (a.getId_anno().trim().equals(w.getId_anno())) {%>
                                             <option value="<%=a.getId_anno()%>" selected="selected"><%=a.getNo_anno()%></option>
                                             <%} else {%>
-                                            <option value="<%=w.getId_anno()%>"><%=w.getNo_anno()%></option>
+                                            <option value="<%=a.getId_anno()%>"><%=a.getNo_anno()%></option>
                                             <%}
                                                     }
                                                 }%>

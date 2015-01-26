@@ -74,8 +74,18 @@ public class X_List_Id_Contrato_DGP {
     private String de_grupo_ocupacion;
     private String de_sub_modalidad;
     private String de_modalidad;
+    private String no_trabajador;
+    private String ap_paterno;
+    private String ap_materno;
+    private String li_di_dom_a_d1;
+    private String di_dom_leg_d2;
+    private String li_di_dom_a_d3;
+    private String di_dom_a_d4;
+    private String li_di_dom_a_d5;
+    private String di_dom_a_d6;
 
-    public X_List_Id_Contrato_DGP(String id_contrato, String id_dgp, String fe_desde, String fe_hasta, String fe_cese, String id_func, String li_condicion, Double ca_sueldo, Double ca_reintegro, Double ca_asig_familiar, Double ho_semana, Double nu_horas_lab, Double dia_contrato, String ti_trabajador, String li_regimen_laboral, String es_discapacidad, String ti_contrato, String li_regimen_pensionario, String es_contrato_trabajador, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String us_ip, String fe_vacacio_ini, String fe_vacacio_fin, String es_contrato, String id_filial, String id_puesto, Double ca_bono_alimento, String li_tipo_convenio, String es_firmo_contrato, Double nu_contrato, String de_observacion, String es_apoyo, String ti_hora_pago, String nu_documento, String id_anno, String es_entregar_doc_reglamentos, String es_registro_huella, String de_registro_sistem_remu, String id_trabajador, Double ca_sueldo_total, String id_regimen_laboral, String id_sub_modalidad, String id_grupo_ocupacion, String fe_suscripcion, String co_ti_moneda, String co_ti_rem_variab, String de_remu_especie, String de_ruc_emp_trab, String co_sucursal, String de_mype, String es_ti_contratacion, Double ca_bev, String no_puesto, String no_seccion, String no_area, String no_dep, String no_direccion, String de_grupo_ocupacion, String de_sub_modalidad, String de_modalidad) {
+
+    public X_List_Id_Contrato_DGP(String id_contrato, String id_dgp, String fe_desde, String fe_hasta, String fe_cese, String id_func, String li_condicion, Double ca_sueldo, Double ca_reintegro, Double ca_asig_familiar, Double ho_semana, Double nu_horas_lab, Double dia_contrato, String ti_trabajador, String li_regimen_laboral, String es_discapacidad, String ti_contrato, String li_regimen_pensionario, String es_contrato_trabajador, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String us_ip, String fe_vacacio_ini, String fe_vacacio_fin, String es_contrato, String id_filial, String id_puesto, Double ca_bono_alimento, String li_tipo_convenio, String es_firmo_contrato, Double nu_contrato, String de_observacion, String es_apoyo, String ti_hora_pago, String nu_documento, String id_anno, String es_entregar_doc_reglamentos, String es_registro_huella, String de_registro_sistem_remu, String id_trabajador, Double ca_sueldo_total, String id_regimen_laboral, String id_sub_modalidad, String id_grupo_ocupacion, String fe_suscripcion, String co_ti_moneda, String co_ti_rem_variab, String de_remu_especie, String de_ruc_emp_trab, String co_sucursal, String de_mype, String es_ti_contratacion, Double ca_bev, String no_puesto, String no_seccion, String no_area, String no_dep, String no_direccion, String de_grupo_ocupacion, String de_sub_modalidad, String de_modalidad, String no_trabajador, String ap_paterno,String ap_materno,String li_di_dom_a_d1,String di_dom_leg_d2,String li_di_dom_a_d3,String di_dom_a_d4,String li_di_dom_a_d5,String di_dom_a_d6) {
         this.id_contrato = id_contrato;
         this.id_dgp = id_dgp;
         this.fe_desde = fe_desde;
@@ -139,6 +149,15 @@ public class X_List_Id_Contrato_DGP {
         this.de_grupo_ocupacion = de_grupo_ocupacion;
         this.de_sub_modalidad = de_sub_modalidad;
         this.de_modalidad = de_modalidad;
+        this.no_trabajador = no_trabajador;
+        this.ap_paterno = ap_paterno;
+        this.ap_materno = ap_materno;
+        this.li_di_dom_a_d1 = li_di_dom_a_d1;
+        this.di_dom_leg_d2 = di_dom_leg_d2;
+        this.li_di_dom_a_d3 = li_di_dom_a_d3;
+        this.di_dom_a_d4 = di_dom_a_d4;
+        this.li_di_dom_a_d5 = li_di_dom_a_d5;
+        this.di_dom_a_d6 = di_dom_a_d6;
     }
 
     public X_List_Id_Contrato_DGP() {
@@ -205,6 +224,87 @@ public class X_List_Id_Contrato_DGP {
         this.de_grupo_ocupacion = "";
         this.de_modalidad = "";
         this.de_sub_modalidad = "";
+        this.no_trabajador = "";
+        this.ap_paterno = "";
+        this.ap_materno = "";
+        this.li_di_dom_a_d1 = "";
+        this.di_dom_leg_d2 = "";
+        this.li_di_dom_a_d3 = "";
+        this.di_dom_a_d4 = "";
+        this.li_di_dom_a_d5 = "";
+        this.di_dom_a_d6 = "";
+    }
+
+    public String getNo_trabajador() {
+        return no_trabajador;
+    }
+
+    public void setNo_trabajador(String no_trabajador) {
+        this.no_trabajador = no_trabajador;
+    }
+
+    public String getAp_paterno() {
+        return ap_paterno;
+    }
+
+    public void setAp_paterno(String ap_paterno) {
+        this.ap_paterno = ap_paterno;
+    }
+
+    public String getAp_materno() {
+        return ap_materno;
+    }
+
+    public void setAp_materno(String ap_materno) {
+        this.ap_materno = ap_materno;
+    }
+
+    public String getLi_di_dom_a_d1() {
+        return li_di_dom_a_d1;
+    }
+
+    public void setLi_di_dom_a_d1(String li_di_dom_a_d1) {
+        this.li_di_dom_a_d1 = li_di_dom_a_d1;
+    }
+
+    public String getDi_dom_leg_d2() {
+        return di_dom_leg_d2;
+    }
+
+    public void setDi_dom_leg_d2(String di_dom_leg_d2) {
+        this.di_dom_leg_d2 = di_dom_leg_d2;
+    }
+
+    public String getLi_di_dom_a_d3() {
+        return li_di_dom_a_d3;
+    }
+
+    public void setLi_di_dom_a_d3(String li_di_dom_a_d3) {
+        this.li_di_dom_a_d3 = li_di_dom_a_d3;
+    }
+
+    public String getDi_dom_a_d4() {
+        return di_dom_a_d4;
+    }
+
+    public void setDi_dom_a_d4(String di_dom_a_d4) {
+        this.di_dom_a_d4 = di_dom_a_d4;
+    }
+
+    public String getLi_di_dom_a_d5() {
+        return li_di_dom_a_d5;
+    }
+
+    public void setLi_di_dom_a_d5(String li_di_dom_a_d5) {
+        this.li_di_dom_a_d5 = li_di_dom_a_d5;
+    }
+
+    public String getDi_dom_a_d6() {
+        return di_dom_a_d6;
+    }
+
+    public void setDi_dom_a_d6(String di_dom_a_d6) {
+        this.di_dom_a_d6 = di_dom_a_d6;
     }
 
     public String getDe_sub_modalidad() {

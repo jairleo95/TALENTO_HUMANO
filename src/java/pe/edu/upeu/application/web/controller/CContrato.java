@@ -104,7 +104,7 @@ public class CContrato extends HttpServlet {
             getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(iddgp));
             getServletContext().setAttribute("List_Puesto", puesto.List_Puesto());
             getServletContext().setAttribute("Listar_Direccion", dir.Listar_Direccion());
-
+            
             //getServletContext().setAttribute("LISTA_RH_SECCION", seccion.LISTA_RH_SECCION());
             getServletContext().setAttribute("List_anno_max", a.List_anno_max());
             getServletContext().setAttribute("List_modalidad", con.List_modalidad());

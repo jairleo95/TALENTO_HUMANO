@@ -533,7 +533,15 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 v.setFe_vacacio_fin(rs.getString("fe_vacacio_fin"));
                 v.setDe_sub_modalidad(rs.getString("de_sub_modalidad"));
                 v.setDe_modalidad(rs.getString("de_modalidad"));
-
+                v.setNo_trabajador(rs.getString("no_trabajador"));
+                v.setAp_paterno(rs.getString("ap_paterno"));
+                v.setAp_materno(rs.getString("ap_materno"));
+                v.setLi_di_dom_a_d1(rs.getString("li_di_dom_a_d1"));
+                v.setDi_dom_leg_d2(rs.getString("di_dom_leg_d2"));
+                v.setLi_di_dom_a_d3(rs.getString("li_di_dom_a_d3"));
+                v.setDi_dom_a_d4(rs.getString("di_dom_a_d4"));
+                v.setLi_di_dom_a_d5(rs.getString("li_di_dom_a_d5"));
+                v.setDi_dom_a_d6(rs.getString("di_dom_a_d6"));
                 list.add(v);
             }
         } catch (SQLException e) {

@@ -134,7 +134,33 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     "[apm]": "Gonzales",
                     "[sexo]": "Masculino",
                     "[dni]": "<%=n.getNu_documento()%>",
-                    "[dir]": "",
+                    "[dir]": "<% InterfaceListaDAO l = new ListaDAO();
+                    for (int b = 0; b < l.List_Dom_D1_Id().size(); b++) {
+                        if (n.getLi_di_dom_a_d1().trim().equals(b + 1 + "")) {
+                            out.println(l.List_Dom_D1_Id().get(b));
+                        }
+
+                    }
+
+                    if (n.getLi_di_dom_a_d3().trim().equals("1")) {
+                        out.println(" " + n.getDi_dom_leg_d2()+ " Numero");
+                    }
+                    if (n.getLi_di_dom_a_d3().trim().equals("2")) {
+                        out.println(" " + n.getDi_dom_leg_d2() + " Lote");
+                    }
+                    if (n.getLi_di_dom_a_d3().trim().equals("3")) {
+                        out.println(" " + n.getDi_dom_leg_d2() + " S/N");
+                    }
+
+                    for (int c = 0; c < l.List_Dom_D5_Id().size(); c++) {
+                        if (n.getLi_di_dom_a_d5().trim().equals(c + 1 + "")) {
+                            out.println(" " + n.getDi_dom_a_d4() + " " + l.List_Dom_D5_Id().get(c));
+                        }
+
+                    }
+                    out.println(" " + n.getDi_dom_a_d6());
+
+                        %>",
                     "[prov]": "",
                     "[dist]": "",
                     "[dep]": "",

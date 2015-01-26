@@ -28,7 +28,7 @@
                 %>   
 
                 <tr><td colspan="2"><div class="title">Direccion Domicilio Actual</div></td></tr> 
-                <tr><td class="text-info">Dirección :</td><td><%                InterfaceListaDAO l = new ListaDAO();
+                <tr><td class="text-info">Dirección :</td><td><% InterfaceListaDAO l = new ListaDAO();
                     for (int b = 0; b < l.List_Dom_D1_Id().size(); b++) {
                         if (trb.getLi_di_dom_a_d1().trim().equals(b + 1 + "")) {
                             out.println(l.List_Dom_D1_Id().get(b));
