@@ -545,7 +545,7 @@
                                 %>
                                 <section class="col col-4">
                                     <label class="select" id="titulo">Tipo Convenio:
-                                        <select name="TIPO_CONVENIO" class="input-group-sm" required="">
+                                        <select name="TIPO_CONVENIO" class="input-group-sm" >
                                             <option value="">[SELECCIONE]</option>
                                             <option value="1">CLJ</option>
                                             <option value="2">PPP</option>

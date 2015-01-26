@@ -188,12 +188,10 @@ public class CDgp extends HttpServlet {
                 cantidad = Integer.parseInt(request.getParameter("CANT"));
             } else {
                 NUMERO = Integer.parseInt(request.getParameter("numero"));
-                cantidad =0;
+                cantidad = 0;
             }
 
             dgp.INSERT_DGP(null, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO, DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION, ES_DGP, iduser, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, CA_CENTRO_COSTOS, DE_ANTECEDENTES_POLICIALES, DE_CERTIFICADO_SALUD, DE_MONTO_HONORARIO, NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEN_NU_CUENTA, NO_BANCO_OTROS);
-
-            
 
             //out.print(NU_CUENTA);
             //out.print(NU_CUENTA_BANC);
@@ -202,21 +200,20 @@ public class CDgp extends HttpServlet {
 
             for (int i = 1; i <= cantidad; i++) {
                 String ID_PERIODO_PAG0 = null;
-                double NU_CUOTA = Double.parseDouble(request.getParameter("CUOTA_"+ i));
+                double NU_CUOTA = Double.parseDouble(request.getParameter("CUOTA_" + i));
                 String FE_PAGAR = request.getParameter("FEC_PAGAR_" + i);
                 double CA_MONTO = Double.parseDouble(request.getParameter("MONTO_" + i));
                 String ID_DGP = iddgp;
                 String ES_PER_PAGO = request.getParameter("ES_PERIODO");
                 pp.InsetarPeriodo_Pago(ID_PERIODO_PAG0, NU_CUOTA, FE_PAGAR, CA_MONTO, ID_DGP, ES_PER_PAGO);
-                
-               
+
             }
-            
+
             for (int g = 1; g <= NUMERO; g++) {
                 String ID_CENTRO_COSTO = request.getParameter("CENTRO_COSTOS_" + g);
                 double porcentaje = Double.parseDouble(request.getParameter("PORCENTAJE_" + g));
                 if (ID_CENTRO_COSTO != null && porcentaje != 0.0) {
-                    dcc.INSERT_DETALLE_CENTRO_COSTO(null, ID_CENTRO_COSTO, iddgp, porcentaje, IP_USUARIO,  iduser, FE_CREACION, US_MODIF, FE_MODIF,null,"1");
+                    dcc.INSERT_DETALLE_CENTRO_COSTO(null, ID_CENTRO_COSTO, iddgp, porcentaje, IP_USUARIO, iduser, FE_CREACION, US_MODIF, FE_MODIF, null, "1");
                 }
             }
 
@@ -391,6 +388,22 @@ public class CDgp extends HttpServlet {
                     getServletContext().setAttribute("Listar_Sub_mo", sub.Listar_Sub_mo());
                     getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
                     response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp?ida1=" + ida1);
+                } else {
+
+                    //String idtr = request.getParameter("idtr");
+                    String ida1 = anno.List_Anno_Max_Cont(idtr);
+                    String id_cto = con.Contrato_max(idtr);
+                    getServletContext().setAttribute("List_Anno_trabajador", anno.List_Anno_trabajador(idtr));
+                    getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(idtr));
+                    getServletContext().setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_cto));
+                    getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
+                    //getServletContext().setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
+                    getServletContext().setAttribute("List_Usuario", usu.List_Usuario());
+                    getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
+                    getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
+                    getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
+                    out.print(id_cto + ida1 + idtr);
+                    response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1.trim() + "&idtr=" + idtr.trim() + "&id_cto=" + id_cto);
                 }
 
                 out.print("sñmzdlñzdlkgm");
