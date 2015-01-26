@@ -421,7 +421,7 @@
                         /*}
                          }*/%>
                     <tr><td class="text-info" colspan="8" style="text-align:center"><input class="button blue"  type="hidden" value="Editar"><button  class="PLANTI button blue">Mostrar Plantillas</button></td></tr>
-                    >
+                    
 
                     <tr> <%if (n.getUs_modif() != null && n.getFe_modif() != null) {%>
                         <td class="text-info table-bordered"><strong>Modificado por:</strong></td>
