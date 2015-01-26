@@ -76,6 +76,7 @@
                 <td>Nombre</td>
                 <td>Carrera</td>
                 <td>Acciones</td>
+                <td>ID</td>
             </tr>
             <% for (int i = 0; i < ListarTrabajador2.size(); i++) {
                     V_Ficha_Trab_Num_C tr = new V_Ficha_Trab_Num_C();
@@ -103,7 +104,10 @@
                     %>
                     <a href="../../contrato?idtr=<%=tr.getId_trabajador()%>&iddep=<%=iddep%>&opc=LIST_FORMULARIO" class="btn bg-color-teal txt-color-white">Elaborar Contrato</a>
                     <%}%>
-                </td>   
+                </td> 
+                <td>
+                    <%=tr.getId_trabajador() %>
+                </td>
             </tr>
             <%
                         }

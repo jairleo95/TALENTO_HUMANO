@@ -276,7 +276,7 @@ public class CContrato extends HttpServlet {
             
             
             String US_CREACION = iduser;
-            String idtr1 = request.getParameter("idtr");
+            String idtr = request.getParameter("idtr");
            
 
            // getServletContext().setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr1));
@@ -294,8 +294,8 @@ public class CContrato extends HttpServlet {
             getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
             getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
             
-
-            response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp?idmax="+ MAX_ID+"&idtr="+ idtr1);
+            out.print(MAX_ID);
+            response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp?idmax="+ MAX_ID+"&idtr="+ idtr);
         }
 
         if (opc.equals("REG_CASOS_ESP")) {
@@ -385,7 +385,7 @@ public class CContrato extends HttpServlet {
                 }
             }
             //------------- HORARIO ------------
-            /*List<String> dia = new ArrayList<String>();
+            List<String> dia = new ArrayList<String>();
             dia.add("lun");
             dia.add("mar");
             dia.add("mie");
@@ -399,7 +399,7 @@ public class CContrato extends HttpServlet {
             String ES_DETALLE_HORARIO = "1";
             String ES_HORARIO = "1";
 
-           // IHor.Insert_Detalle_Horario(ID_DETALLE_HORARIO, null, ES_DETALLE_HORARIO, iduser, null, null, null);
+            IHor.Insert_Detalle_Horario(ID_DETALLE_HORARIO, null, ES_DETALLE_HORARIO, iduser, null, null, null);
 
             ID_DETALLE_HORARIO = IHor.Max_id_Detalle_Horario();
 
@@ -422,7 +422,6 @@ public class CContrato extends HttpServlet {
                 }
 
             }
-*/
             /*Cambiar este for con un trigger al momento de insertar*/
             //for (int i = 0; i < con.List_Rh_Contrato_Idtr().size(); i++) {
             //    emp.VALIDAR_EMPLEADO(con.List_Rh_Contrato_Idtr().get(i));
@@ -431,14 +430,13 @@ public class CContrato extends HttpServlet {
             // getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_contrato));
             getServletContext().setAttribute("List_Jefe", l.List_Jefe());
             getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
-            getServletContext().setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
             getServletContext().setAttribute("List_ID_User", usu.List_ID_User(US_CREACION));
             getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
             getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
             //getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());*/
 
-           // response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp?ida1=" + ida1);
-            //response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp" );
+            response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp" );
+           
             
         }
  
