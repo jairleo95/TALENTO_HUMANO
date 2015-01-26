@@ -1,3 +1,5 @@
+<%@page import="pe.edu.upeu.application.dao.ListaDAO"%>
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceListaDAO"%>
 <!DOCTYPE html>
 <!--
 Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
