@@ -51,7 +51,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 int minuto = fecha.get(Calendar.MINUTE);
                 int segundo = fecha.get(Calendar.SECOND);
                String fecha_actual="";
-
+               
+               
         %>
         <script>
 // The instanceReady event is fired, when an instance of CKEditor has finished
