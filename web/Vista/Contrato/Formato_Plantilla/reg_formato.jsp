@@ -176,16 +176,14 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             }
             function mostrars() {
                 //var no_ar=$("#no_arch");
-                alert($(".no_arc").val());
+                //alert($(".no_arc").val());
                 mostrar_plantilla($(".no_arc").val());
                 // $(".id_pl").val($(".plantilla" + $(this).val()).val());
             }
             $(document).ready(function() {
-
-                // mostrar_plantilla();
-
-                // alert($(".no_arc").val());
+                $("#actu").hide();
                 mostrars();
+                
 
             });
 
@@ -222,10 +220,9 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             <div id="eButtons" >
                 <input  type="hidden" name="opc" value="Actualizar"/>
                 <input  type="hidden" name="id" value="" class="id_pl"/>
-                <input type="submit" value="Actualizar Formato" onclick="leer();">
+                <input type="submit" value="Actualizar Formato" id="actu" onclick="leer();">
             </div>
         </form>
-        <h3>ASIGNAR PLANTILLAS</h3>
     </body>
     <%}%>
 </html>
