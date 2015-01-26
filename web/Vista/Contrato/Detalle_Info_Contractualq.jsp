@@ -433,7 +433,7 @@
                             <%}%>
                         </td>
                         <%}%>
-                        <% if (n.getFe_modif() == null && n.getFe_creacion() != null) {%>
+                        <% if (n.getUs_creacion() == null && n.getFe_creacion() != null) {%>
                         <td class="text-danger text-info text-center "><strong>Creado por:</strong></td>
                         <%if (n.getUs_creacion() != null) {
                                 for (int f = 0; f < List_Usuario.size(); f++) {
