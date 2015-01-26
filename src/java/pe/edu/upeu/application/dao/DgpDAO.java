@@ -8,10 +8,13 @@ package pe.edu.upeu.application.dao;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -76,6 +79,8 @@ public class DgpDAO implements InterfaceDgpDAO {
 
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
+        } catch (ParseException ex) {
+            Logger.getLogger(DgpDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             this.conn.close();
         }

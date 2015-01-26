@@ -168,6 +168,7 @@
                                             
                                                 <fieldset id="fila-agregar">
                                                     <div class="row" >
+                                                        
                                                         <section class="col col-2">
                                                             <label class="select" id="titu">Año:
                                                                 <select name="AÑO_ID" required="" class="input-group-sm">
