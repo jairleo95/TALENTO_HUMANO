@@ -276,6 +276,8 @@ public class CContrato extends HttpServlet {
 
             String US_CREACION = iduser;
             String idtr = request.getParameter("idtr");
+            String nom = request.getParameter("nom");
+            int cant_hijos = dht.ASIGNACION_F(idtr);
 
             // getServletContext().setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr1));
             getServletContext().setAttribute("LISTAR_ANNO", con.LIST_ANNO());
@@ -291,9 +293,8 @@ public class CContrato extends HttpServlet {
             getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
             getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
             getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
-
-            out.print(MAX_ID);
-            response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp?idmax=" + MAX_ID + "&idtr=" + idtr);
+            
+            response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp?idmax=" + MAX_ID + "&idtr=" + idtr + "&nom=" + nom + "&cant_hijos=" + cant_hijos);
         }
 
         if (opc.equals("REG_CASOS_ESP")) {

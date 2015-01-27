@@ -102,7 +102,8 @@
                             out.print("Tiene requerimiento en proceso");
                         } else {
                     %>
-                    <a href="../../contrato?idtr=<%=tr.getId_trabajador()%>&iddep=<%=iddep%>&opc=LIST_FORMULARIO" class="btn bg-color-teal txt-color-white">Elaborar Contrato</a>
+                    <%String nom = tr.getAp_paterno().toUpperCase() + " " + tr.getAp_materno().toUpperCase() + " " + tr.getNo_trabajador().toUpperCase();%>
+                    <a href="../../contrato?idtr=<%=tr.getId_trabajador()%>&iddep=<%=iddep%>&nom=<%=nom%>&opc=LIST_FORMULARIO" class="btn bg-color-teal txt-color-white">Elaborar Contrato</a>
                     <%}%>
                 </td> 
                 <td>

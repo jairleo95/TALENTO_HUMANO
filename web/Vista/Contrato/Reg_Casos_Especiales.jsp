@@ -161,6 +161,8 @@
 
                                                     <div class="spacing">
                                                         <center><h1 class="spacing" style="font-weight: bold; margin: 0px;  color: #005cac;"> Ficha Contractual</h1></center>
+                                                            <%String nom = request.getParameter("nom");%>
+                                                        <label style="font-weight: bold; color:#0F0F0F; ">Trabajador: <%=nom%> </label>
                                                         <br>
 
                                                     </div>
@@ -193,7 +195,7 @@
                                                         </section>
                                                         <section class="col col-2">
                                                             <label class="input" id="titu">Hasta: 
-                                                                <input type="date" name="FEC_HASTA"  class="input-group-sm" required="">
+                                                                <input type="date" name="FEC_HASTA"  class="input-group-sm">
                                                             </label>
                                                         </section>
                                                         <section class="col col-3" id="titulo">
@@ -232,7 +234,7 @@
                                                         <section class="col col-3" id="titulo">
                                                             <label class="select" id="titu">Puesto:
 
-                                                                <select name="PUESTO_ID"class="input-group-sm" id="pu_id_se">
+                                                                <select name="PUESTO_ID"class="input-group-sm" id="pu_id_se" required="">
                                                                     <option value="">[SELECCIONE]</option>
                                                                 </select>  </label>
                                                         </section>
@@ -255,7 +257,7 @@
                                                     <div class="row">
                                                         <section class="col col-2">
                                                             <label class="input" id="titu">Remuneración:
-                                                                <input type="text" name="SUELDO" id="remu"  class="input-group-sm">
+                                                                <input type="text" name="SUELDO" id="remu" value="0"  class="input-group-sm">
                                                             </label>
                                                         </section>
                                                         <section class="col col-1">
@@ -265,12 +267,12 @@
                                                         </section>
                                                         <section class="col col-2">
                                                             <label class="input" id="titu">Bono Alimentario:
-                                                                <input type="text" name="BONO_ALIMENTO" id="bono_al" class="input-group-sm">
+                                                                <input type="text" name="BONO_ALIMENTO" id="bono_al" value="0" class="input-group-sm">
                                                             </label>
                                                         </section>
                                                         <section class="col col-1">
                                                             <label class="input" id="titu">BEV:
-                                                                <input type="text" name="BEV"  id="bev" class="input-group-sm">
+                                                                <input type="text" name="BEV"  id="bev" value="0" class="input-group-sm">
                                                             </label>
                                                         </section>
 
@@ -285,8 +287,9 @@
                                                             </label>
                                                         </section>
                                                         <section class="col col-2" >
+                                                            <%int cant_hijos = Integer.parseInt(request.getParameter("cant_hijos"));%>
                                                             <label class="input" id="titu">Asignanción Familiar:
-                                                                <input type="text" name="ASIG_FAMILIAR" value="0"  class="input-group-sm">
+                                                                <input type="text" name="ASIG_FAMILIAR" <%if(cant_hijos == 0){%> value="0" <%}else{%> value="75" <%}%>  class="input-group-sm">
                                                             </label>
                                                         </section>
                                                     </div>
@@ -780,7 +783,7 @@
 
     </body>
     <script>
-
+        
         function calcular_sueldo_total() {
             var x = parseFloat($("#remu").val());
             var y = parseFloat($("#bono_al").val());
@@ -812,7 +815,7 @@
     </script>
     <script>
         function Sueldo_Total() {
-            
+
             var a = parseFloat($("#remu").val());
             var b = parseFloat($("#bono_al").val());
             var c = parseFloat($("#bev").val());
@@ -2007,19 +2010,32 @@
             var e = $("#pu_id_se");
             // $.post("../../  ")
             $("#select_mod").change(
-                    function() {
-                        // alert("?MODALIDAD="+$("#select_mod").val());
+                     function() {
+                       //  alert($(this).val());
 
+                       
                         $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function(objJson) {
                             a.empty();
                             var list = objJson.lista;
                             a.append("<option value='' > [SELECCIONE] </option>");
                             if (list.length !== 0) {
                                 for (var i = 0; i < list.length; i++) {
-                                    a.append('<option value="' + list[i].id_submodalidad + '">' + list[i].de_submod + '</option>');
+                                    if ($("#select_mod").val()==='MOD-0004'  ) {
+                                        a.append('<option value="' + list[i].id_submodalidad + '" selected="">' + list[i].de_submod + '</option>');
+                                       // alert();
+                                    }
+                                    else {
+                                       
+                                        a.append('<option value="' + list[i].id_submodalidad + '">' + list[i].de_submod + '</option>');
+                                    }
+
                                 }
                             }
                         });
+
+
+
+
                     });
             $("#selec_dep").change(
                     function() {
