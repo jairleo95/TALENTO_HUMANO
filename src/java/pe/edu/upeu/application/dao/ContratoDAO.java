@@ -43,7 +43,11 @@ public class ContratoDAO implements InterfaceContratoDAO {
             cst.setString(1, null);
             cst.setString(2, ID_DGP);
             cst.setString(3, c.convertFecha(FE_DESDE));
-            cst.setString(4, c.convertFecha(FE_HASTA));
+            if(FE_HASTA.equals("")){
+            cst.setString(4, FE_HASTA);
+            }else{
+            cst.setString(4, c.convertFecha(FE_HASTA));    
+            }
             cst.setString(5, FE_CESE);
             cst.setString(6, ID_FUNC);
             cst.setString(7, LI_CONDICION);
