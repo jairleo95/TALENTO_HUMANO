@@ -380,6 +380,7 @@
 
                     <li>
                         <a href="<%=dp.getDi_url()%>" target="myframe" title="<%=dp.getNo_link()%>"><i class="<%=dp.getIc_link().trim()%>"></i> <span class="menu-item-parent"><%=dp.getNo_link()%></span></a>
+                   
                     </li>
                     <%}
                         }%>
@@ -553,7 +554,7 @@
                     <a href="#gallery.html" class="jarvismetro-tile big-cubes bg-color-greenLight"> <span class="iconbox"> <i class="fa fa-picture-o fa-4x"></i> <span>Galeria </span> </span> </a>
                 </li>
                 <li>
-                    <a href="Usuario?opc=Ver_Perfil&id=<%=(String)sesion.getAttribute("IDUSER")%>" class="jarvismetro-tile big-cubes selected bg-color-pinkDark"> <span class="iconbox"> <i class="fa fa-user fa-4x"></i> <span>Mi Perfil </span> </span> </a>
+                    <a href="Usuario?opc=Ver_Perfil&id=<%=(String)sesion.getAttribute("IDUSER")%>" target="myframe" title="SS" class="jarvismetro-tile big-cubes selected bg-color-pinkDark"  > <span class="iconbox"> <i class="fa fa-user fa-4x"></i> <span>Mi Perfil </span> </span> </a>
                 </li>
             </ul>
         </div>

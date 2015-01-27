@@ -8,6 +8,8 @@ package pe.edu.upeu.application.web.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,6 +24,7 @@ import pe.edu.upeu.application.dao.Datos_Hijo_TrabajadorDAO;
 import pe.edu.upeu.application.dao.Detalle_Centro_Costo_DAO;
 import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.DireccionDAO;
+import pe.edu.upeu.application.dao.DocumentoDAO;
 import pe.edu.upeu.application.dao.EmpleadoDAO;
 import pe.edu.upeu.application.dao.GrupoOcupacionesDAO;
 import pe.edu.upeu.application.dao.HorarioDAO;
@@ -40,6 +43,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceDatos_Hijo_Trabajador;
 import pe.edu.upeu.application.dao_imp.InterfaceDetalle_Centro_Costo;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceEmpleadoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceGrupo_ocupacionesDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceHorarioDAO;
@@ -85,6 +89,7 @@ public class CContrato extends HttpServlet {
     InterfaceDireccionDAO dir = new DireccionDAO();
     InterfaceGrupo_ocupacionesDAO gr = new GrupoOcupacionesDAO();
     InterfaceSub_ModalidadDAO sub = new Sub_ModalidadDAO();
+    InterfaceDocumentoDAO doc = new DocumentoDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -95,6 +100,8 @@ public class CContrato extends HttpServlet {
         HttpSession sesion = request.getSession(true);
         String iduser = (String) sesion.getAttribute("IDUSER");
         String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
+        String idpuesto = (String) sesion.getAttribute("PUESTO_ID");
+        String idrol = (String) sesion.getAttribute("IDROL");
         //try {
         if (opc.equals("enviar")) {
             String iddgp = request.getParameter("iddgp");
@@ -276,7 +283,20 @@ public class CContrato extends HttpServlet {
 
             String US_CREACION = iduser;
             String idtr = request.getParameter("idtr");
-
+            String nom = request.getParameter("nom");
+            int cant_hijos = dht.ASIGNACION_F(idtr);
+            Calendar fecha1 = Calendar.getInstance();
+            
+            Calendar fecha = new GregorianCalendar();
+            int año = fecha.get(Calendar.YEAR);
+            int mes = fecha.get(Calendar.MONTH);
+            int dia = fecha.get(Calendar.DAY_OF_MONTH);
+            String fe_subs = "";
+            if(mes < 9){
+            fe_subs = año+"-"+"0"+(mes+1)+"-"+dia;
+            }else{
+            fe_subs = año+"-"+(mes+1)+"-"+dia;    
+            }
             // getServletContext().setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr1));
             getServletContext().setAttribute("LISTAR_ANNO", con.LIST_ANNO());
             String MAX_ID = con.ID_MAX_ANNO();
@@ -291,9 +311,10 @@ public class CContrato extends HttpServlet {
             getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
             getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
             getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
-
-            out.print(MAX_ID);
-            response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp?idmax=" + MAX_ID + "&idtr=" + idtr);
+            
+         
+            response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp?idmax=" + MAX_ID + "&idtr=" + idtr + "&nom=" + nom + "&cant_hijos=" + cant_hijos + "&fe_subs=" +fe_subs);
+ 
         }
 
         if (opc.equals("REG_CASOS_ESP")) {
@@ -321,9 +342,9 @@ public class CContrato extends HttpServlet {
             Double CA_REINTEGRO = Double.parseDouble(request.getParameter("REINTEGRO"));
             Double CA_BONO_ALIMENTO = Double.parseDouble(request.getParameter("BONO_ALIMENTO"));
             Double CA_BEV = Double.parseDouble(request.getParameter("BEV"));
-            Double CA_SUELDO_TOTAL = Double.parseDouble(request.getParameter("TOTAL_SUELDO"));
+           Double CA_SUELDO_TOTAL = Double.parseDouble(request.getParameter("TOTAL_SUELDO"));
             String TI_HORA_PAGO = request.getParameter("TIPO_HORA_PAGO");
-            Double CA_ASIG_FAMILIAR = Double.parseDouble(request.getParameter("ASIG_FAMILIAR"));
+           Double CA_ASIG_FAMILIAR = Double.parseDouble(request.getParameter("ASIG_FAMILIAR"));
             String ES_TI_CONTRATACION = request.getParameter("TI_CONTRATACION");
             String CO_GR_OCUPACION = request.getParameter("CO_GRUPO_OCU");
             String FE_SUSCRIPCION = request.getParameter("FECHA_SUSCRIPCION");
@@ -420,20 +441,22 @@ public class CContrato extends HttpServlet {
                 }
 
             }
-            /*Cambiar este for con un trigger al momento de insertar*/
-            //for (int i = 0; i < con.List_Rh_Contrato_Idtr().size(); i++) {
-            //    emp.VALIDAR_EMPLEADO(con.List_Rh_Contrato_Idtr().get(i));
-            // }
-            /*---*/
-            // getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_contrato));
             getServletContext().setAttribute("List_Jefe", l.List_Jefe());
             getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
             getServletContext().setAttribute("List_ID_User", usu.List_ID_User(US_CREACION));
             getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
             getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
-            //getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());*/
+            getServletContext().setAttribute("List_tipo_contrato", doc.List_Adventista(idcto)  );
+            
+            getServletContext().setAttribute("List_doc_req_pla", doc.List_Doc_CE());
+            int i = doc.List_Req_nacionalidad(ID_TRABAJADOR);
+            int num_ad = doc.List_Adventista(ID_TRABAJADOR);
+            getServletContext().setAttribute("List_Hijos", doc.List_Hijos(ID_TRABAJADOR));
+            getServletContext().setAttribute("List_Conyugue", doc.List_Conyugue(ID_TRABAJADOR));
 
-            response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp");
+            //out.print(i);
+            //out.print(num_ad);
+            response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac="+i+"&num_ad="+num_ad);
 
         }
 

@@ -94,7 +94,7 @@
                                             <div class="col-sm-12">
                                                 <div id="myCarousel" class="carousel fade profile-carousel">
                                                     <div class="air air-bottom-right padding-10">
-                                                        <a href="javascript:void(0);" class="btn txt-color-white bg-color-teal btn-sm"><i class="fa fa-check"></i> Follow</a>&nbsp; <a href="javascript:void(0);" class="btn txt-color-white bg-color-pinkDark btn-sm"><i class="fa fa-link"></i> Connect</a>
+                                                        <a href="javascript:void(0);" class="btn txt-color-white bg-color-teal btn-sm"><i class="fa fa-check"></i>Regresar</a>&nbsp; <a href="../inicio.jsp" class="btn txt-color-white bg-color-pinkDark btn-sm"><i class="fa fa-link"></i> Connect</a>
                                                     </div>
                                                     <div class="air air-top-left padding-10">
                                                         <h4 class="txt-color-white font-md">Jan 1, 2014</h4>
@@ -140,7 +140,7 @@
                                                     <div class="col-sm-6">
                                                         <h1><%=vu.getNo_usuario()%> <span class="semi-bold"><%=vu.getCl_tra()%></span>
                                                             <br>
-                                                            <small> CEO, SmartAdmin</small></h1>
+                                                            <small> <a href="editarPerfil.jsp">Editar Perfil</a></small></h1>
 
                                                         <ul class="list-unstyled">
                                                             <li>
@@ -150,20 +150,45 @@
                                                             </li>
                                                             <li>
                                                                 <p class="text-muted">
-                                                                    <i class="fa fa-envelope"></i>&nbsp;&nbsp;<a href="mailto:simmons@smartadmin">ceo@smartadmin.com</a>
+                                                                    <i class="fa fa-envelope"></i>&nbsp;&nbsp;<a href="mailto:simmons@smartadmin"><%=vu.getDi_correo_personal()%></a>
                                                                 </p>
                                                             </li>
                                                             <li>
                                                                 <p class="text-muted">
-                                                                    <i class="fa fa-skype"></i>&nbsp;&nbsp;<span class="txt-color-darken">john12</span>
+                                                                    <i class="fa fa-paw"></i>&nbsp;&nbsp;<span class="txt-color-darken">password</span>
+                                                                    <input class="form-control" disabled="disabled" placeholder="Password field" type="password" value="mypassword">
                                                                 </p>
                                                             </li>
                                                             <li>
+                                                            
+                                                             <li>
+                                                                <p class="text-muted">
+                                                                    <i class="fa fa-phone-square"></i>&nbsp;&nbsp;<span class="txt-color-darken"><%=vu.getCl_tra()%></span>
+                                                                </p>
+                                                            </li>
+                                                             <li>
+                                                                <p class="text-muted">
+                                                                    <i class="fa fa-archive"></i>&nbsp;&nbsp;<span class="txt-color-darken"><%=vu.getNo_direccion()%></span>
+                                                                </p>
+                                                            </li>
+                                                               
+                                                             <li>
+                                                                <p class="text-muted">
+                                                                    <i class="fa fa-picture-o"></i>&nbsp;&nbsp;<span class="txt-color-darken">foto</span>
+                                                                </p>
+                                                            </li>
+                                                             <li>
+                                                                <p class="text-muted">
+                                                                    <i class="fa fa-archive"></i>&nbsp;&nbsp;<span class="txt-color-darken"><%=vu.getLi_religion()%></span>
+                                                                </p>
+                                                            </li>
                                                                 <p class="text-muted">
                                                                     <i class="fa fa-calendar"></i>&nbsp;&nbsp;<span class="txt-color-darken">Free after <a href="javascript:void(0);" rel="tooltip" title="" data-placement="top" data-original-title="Create an Appointment">4:30 PM</a></span>
                                                                 </p>
                                                             </li>
                                                         </ul>
+                                                                 
+             
                                                         <br>
                                                         <p class="font-md">
                                                             <i>A little about me...</i>
@@ -180,9 +205,9 @@
                                                         <br>
 
                                                     </div>
-                                                    <div class="col-sm-3">
-                                                        <h1><small>Connections</small></h1>
-                                                        <ul class="list-inline friends-list">
+                                                           <!--<div class="col-sm-3">
+                                                           <h1><small>Connections</small></h1>
+                                                            <ul class="list-inline friends-list">
                                                             <li><img src="img/avatars/1.png" alt="friend-1">
                                                             </li>
                                                             <li><img src="img/avatars/2.png" alt="friend-2">
@@ -210,7 +235,7 @@
                                                             </li>
                                                         </ul>
 
-                                                    </div>
+                                                    </div>-->
 
                                                 </div>
 

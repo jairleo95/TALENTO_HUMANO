@@ -171,7 +171,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     @Override
     public int List_Req_nacionalidad(String id_trabajador) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select count(id_nacionalidad) as num from rhtm_trabajador where id_trabajador not in ( select id_trabajador from rhtm_trabajador where id_nacionalidad != 'NAC-0044') and id_trabajador='" + id_trabajador.trim() + "'";
+        String sql = "select count(id_nacionalidad) as num from rhtm_trabajador where id_trabajador not in ( select id_trabajador from rhtm_trabajador where id_nacionalidad != 'NAC-0193') and id_trabajador='" + id_trabajador.trim() + "'";
         int nacionalidad = 0;
         try {
             ResultSet rs = this.conn.query(sql);
@@ -269,6 +269,34 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
         } finally {
             this.conn.close();
         }
+    }
+
+    @Override
+    public List<V_Reg_Dgp_Tra> List_Doc_CE() {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = " SELECT f.ti_documento,f.documento,da.no_archivo,f.es_obligatorio, da.ar_dato_archivo, da.de_documento_adjunto,da.es_documento_adjunto,f.id_document,da.id_contrato,da.id_dgp FROM (SELECT dr.id_documentos AS id_document , dr.id_tipo_planilla    AS id_tipo_plani ,dr.id_requerimiento    AS id_requerimient ,dr.documento,dr.ti_planilla,dr.planilla AS planilla ,dr.id_requerimiento,dr.TI_DOCUMENTO,dr.es_obligatorio FROM rhvd_doc_plant_req dr, RHTR_REQUERIMIENTO r  WHERE dr.id_requerimiento = r.id_requerimiento and dr.ID_REQUERIMIENTO = 'REQ-0019')f LEFT OUTER JOIN (select * from rhtv_documento_adjunto where id_contrato = '') da ON (f.id_document = da.id_documentos )";
+        List<V_Reg_Dgp_Tra> list = new ArrayList<V_Reg_Dgp_Tra>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            V_Reg_Dgp_Tra d = new V_Reg_Dgp_Tra();
+            while (rs.next()) {
+               d.setTi_documento(rs.getString("ti_documento"));
+               d.setDocumento(rs.getString("documento"));
+               d.setNo_archivo(rs.getString("no_archivo"));
+               d.setEs_obligatorio(rs.getString("es_obligatorio"));
+               d.setAr_dato_archivo(rs.getString("ar_dato_archivo"));
+               d.setDe_documento_adjunto(rs.getString("de_documento_adjunto"));
+               d.setEs_documento_adjunto(rs.getString("es_documento_adjunto"));
+               d.setId_document(rs.getString("id_document"));
+               d.setId_contrato(rs.getString("id_contrato"));
+               d.setId_dgp(rs.getString("id_dgp"));
+               list.add(d);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return list;
     }
 
 }
