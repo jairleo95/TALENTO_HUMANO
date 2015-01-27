@@ -198,7 +198,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <%for (int i = 0; i < LIST_DGP_PROCESO.size(); i++) {
+                                                <%
+                                                    InterfaceDgpDAO d = new DgpDAO();
+                                                    for (int i = 0; i < LIST_DGP_PROCESO.size(); i++) {
                                                         V_Es_Requerimiento r = new V_Es_Requerimiento();
                                                         r = (V_Es_Requerimiento) LIST_DGP_PROCESO.get(i);
                                                 %>
@@ -230,12 +232,12 @@
                                                                 out.print(" <span class='label label-primary'>En Proceso</span>");
                                                             }%>
 
-                                                        <div class="progress" style="margin: 0px;"><div class="<%if (r.getEs_dgp().equals("2")) {
-                                                                out.print("progress-bar bg-color-red");
-                                                            } else {
-                                                                out.print("progress-bar bg-color-teal");
-                                                            }%>" aria-valuetransitiongoal="<%=r.getEs_porcent()%>"></div></div>
-                                                        <label><%=r.getEs_proceso_aut()%></label>
+                                                        <div class="new-progress" >
+                                                            <%
+                                                                out.println(d.Imprimir_det_proceso(r.getId_dgp(), r.getId_detalle_req_proceso()));
+                                                            %>
+                                                        </div>
+
                                                     </td>
                                                     <% } else {%>
                                                     <td><img src="../Usuario/Fotos/<%=r.getAr_foto()%>"  width="30"  height="30"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a> <%if (r.getEs_dgp().equals("2")) {
@@ -247,10 +249,7 @@
 
                                                         <div class="new-progress" >
                                                             <%
-                                                                InterfaceDgpDAO d = new DgpDAO();
-
-                                                               out.println(d.Imprimir_det_proceso(r.getId_dgp(), r.getId_detalle_req_proceso()));
-                                                                
+                                                                out.println(d.Imprimir_det_proceso(r.getId_dgp(), r.getId_detalle_req_proceso()));
                                                             %>
                                                         </div>
 
