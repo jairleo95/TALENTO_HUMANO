@@ -313,6 +313,7 @@ public class DgpDAO implements InterfaceDgpDAO {
                 v.setEs_porcent(rs.getString("ES_PORCENT"));
                 v.setEs_dgp(rs.getString("ES_DGP"));
                 v.setEs_proceso_aut(rs.getString("es_proceso_aut"));
+                v.setId_detalle_req_proceso(rs.getString("id_detalle_req_proceso"));
                 Lista.add(v);
             }
         } catch (SQLException e) {
@@ -610,7 +611,129 @@ public class DgpDAO implements InterfaceDgpDAO {
 
     }
 
-    
+    @Override
+    public String Imprimir_det_proceso(String iddgp, String idrp) {
+
+        String cadena = "";
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "SELECT f.de_pasos, "
+                    + "  f.nu_pasos "
+                    + "FROM "
+                    + "  (SELECT p.id_pasos, "
+                    + "    p.id_proceso, "
+                    + "    rp.id_detalle_req_proceso, "
+                    + "    p.de_pasos, "
+                    + "    p.nu_pasos, "
+                    + "    p.co_pasos, "
+                    + "    pro.no_proceso, "
+                    + "    rp.id_direccion, "
+                    + "    rp.id_departamento, "
+                    + "    rp.id_requerimiento "
+                    + "  FROM rhtc_pasos p , "
+                    + "    rhtv_proceso pro, "
+                    + "    rhtr_detalle_req_proceso rp "
+                    + "  WHERE pro.id_proceso = p.id_proceso "
+                    + "  AND rp.id_proceso    = pro.id_proceso "
+                    + "  AND rp.ES_REQ_PROCESO='1' "
+                    + "  AND p.ES_PASOS       ='1' "
+                    + "  ) f "
+                    + "LEFT OUTER JOIN "
+                    + "  (SELECT pu.NO_PUESTO, "
+                    + "    du.NO_USUARIO, "
+                    + "    a.co_pasos, "
+                    + "    a.DE_PASOS, "
+                    + "    a.es_autorizacion, "
+                    + "    a.fe_creacion, "
+                    + "    a.id_autorizacion, "
+                    + "    a.id_departamento, "
+                    + "    a.id_detalle_pasos, "
+                    + "    a.id_detalle_req_proceso, "
+                    + "    a.id_dgp, "
+                    + "    a.id_direccion, "
+                    + "    a.id_pasos, "
+                    + "    a.id_proceso, "
+                    + "    a.id_puesto, "
+                    + "    a.id_requerimiento, "
+                    + "    a.no_proceso, "
+                    + "    a.nu_pasos, "
+                    + "    a.us_creacion , "
+                    + "    dt.AP_PATERNO, "
+                    + "    dt.AP_MATERNO, "
+                    + "    dt.NO_TRABAJADOR, "
+                    + "    dgp.CA_SUELDO, "
+                    + "    du.AP_PATERNO    AS us_ap_p, "
+                    + "    du.AP_MATERNO    AS us_ap_mat , "
+                    + "    du.NO_TRABAJADOR AS us_no_tr, "
+                    + "    du.NO_PUESTO     AS us_no_puesto, "
+                    + "    du.NO_AREA       AS us_no_area, "
+                    + "    du.NO_DEP        AS us_no_dep "
+                    + "  FROM "
+                    + "    (SELECT a.id_detalle_req_proceso, "
+                    + "      a.id_dgp, "
+                    + "      a.id_pasos, "
+                    + "      d.id_proceso, "
+                    + "      d.id_detalle_pasos , "
+                    + "      d.DE_PASOS, "
+                    + "      d.NU_PASOS, "
+                    + "      d.CO_PASOS , "
+                    + "      d.no_proceso , "
+                    + "      d.id_puesto, "
+                    + "      d.id_direccion, "
+                    + "      d.id_departamento , "
+                    + "      d.id_requerimiento , "
+                    + "      a.id_autorizacion, "
+                    + "      a.fe_creacion, "
+                    + "      a.es_autorizacion, "
+                    + "      a.us_creacion "
+                    + "    FROM "
+                    + "      (SELECT * FROM rhvd_req_paso_pu "
+                    + "      ) d "
+                    + "    LEFT OUTER JOIN rhtv_autorizacion a "
+                    + "    ON ( a.id_pasos             =d.id_pasos "
+                    + "    AND d.id_pasos              =a.id_pasos "
+                    + "    AND d.id_puesto             =a.id_puesto "
+                    + "    AND d.id_detalle_req_proceso=a.id_detalle_req_proceso) "
+                    + "    ) a , "
+                    + "    rhtm_dgp dgp , "
+                    + "    rhtm_trabajador dt , "
+                    + "    rhvd_usuario du , "
+                    + "    rhvd_puesto_direccion pu "
+                    + "  WHERE dgp.id_dgp                 =a.id_dgp "
+                    + "  AND dt.id_trabajador             = dgp.id_trabajador "
+                    + "  AND du.id_usuario                =a.us_creacion "
+                    + "  AND dgp.id_puesto                =pu.id_puesto "
+                    + "  AND dgp.id_dgp                   ='" + iddgp + "' "
+                    + "  ) s ON ( s.ID_DETALLE_REQ_PROCESO=f.ID_DETALLE_REQ_PROCESO "
+                    + "AND f.id_pasos                     =s.id_pasos ) "
+                    + "WHERE f.ID_DETALLE_REQ_PROCESO     ='" + idrp + "' "
+                    + "ORDER BY to_number(SUBSTR(f.nu_pasos,2,LENGTH(f.nu_pasos))) ASC";
+            ResultSet rs = this.conn.query(sql);
+            int i = 0;
+            while (rs.next()) {
+                i++;
+                if (i == 1) {
+                    cadena = cadena + " <div class=\"new-circle done\" rel=\"popover-hover\" data-placement=\"top\" data-original-title=\"Detalle de Proceso\" data-content=\"" + rs.getString("nu_pasos") + " | " + rs.getString("de_pasos") + " \" data-html=\"true\"><span class=\"new-label\">2</span><span class=\"new-title\">" + rs.getString("nu_pasos") + "</span> </div>";
+                } else {
+                    cadena = cadena + " <span class=\"new-bar done\"></span> <div class=\"new-circle done\" rel=\"popover-hover\" data-placement=\"top\" data-original-title=\"Detalle de Proceso\" data-content=\"" + rs.getString("nu_pasos") + " | " + rs.getString("de_pasos") + " \" data-html=\"true\"><span class=\"new-label\">2</span><span class=\"new-title\">" + rs.getString("nu_pasos") + "</span> </div>";
+
+                }
+
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return cadena;
+
+    }
 
     @Override
     public int VALIDAR_DGP_CONTRATO(String id) {

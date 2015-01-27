@@ -1,4 +1,10 @@
+<%@page import="java.util.Iterator"%>
+<%@page import="pe.edu.upeu.application.dao.DgpDAO"%>
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceDgpDAO"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
 <%@page import="pe.edu.upeu.application.model.V_Es_Requerimiento"%>
+
 <jsp:useBean class="java.util.ArrayList" id="LIST_DGP_PROCESO" scope="application" />
 <!DOCTYPE html>
 <html lang="en-us">
@@ -238,69 +244,14 @@
                                                             out.print(" <span class='label label-primary'>En Proceso</span>");
                                                         }%>
 
-                                                        <label><%=r.getEs_proceso_aut()%></label> 
 
                                                         <div class="new-progress" >
-                                                            <div class="new-circle done">
-                                                                <span class="new-label">1</span>
-                                                                <span class="new-title">P1</span>
-                                                            </div>
-                                                            <span class="new-bar done"></span>
-                                                            <div class="new-circle done">
-                                                                <span class="new-label">2</span>
-                                                                <span class="new-title">P2</span>
-                                                            </div>
-                                                            <span class="new-bar half"></span>
-                                                            <div class="new-circle active">
-                                                                <span class="new-label">3</span>
-                                                                <span class="new-title">P3</span>
-                                                            </div>
-                                                            <span class="new-bar"></span>
-                                                            <div class="new-circle">
-                                                                <span class="new-label">4</span>
-                                                                <span class="new-title">P4</span>
-                                                            </div>
-                                                            <span class="new-bar"></span>
-                                                            <div class="new-circle">
-                                                                <span class="new-label">5</span>
-                                                                <span class="new-title">P5</span>
-                                                            </div>
-                                                            <span class="new-bar"></span>
-                                                            <div class="new-circle">
-                                                                <span class="new-label">6</span>
-                                                                <span class="new-title">P6</span>
-                                                            </div>
-                                                            <span class="new-bar"></span>
-                                                            <div class="new-circle">
-                                                                <span class="new-label">7</span>
-                                                                <span class="new-title">xx</span>
-                                                            </div>
-                                                            <span class="new-bar"></span>
-                                                            <div class="new-circle">
-                                                                <span class="new-label">8</span>
-                                                                <span class="new-title">xx</span>
-                                                            </div>
-                                                            <span class="new-bar"></span>
-                                                            <div class="new-circle">
-                                                                <span class="new-label">9</span>
-                                                                <span class="new-title">xx</span>
-                                                            </div>
-                                                            <span class="new-bar"></span>
-                                                            <div class="new-circle">
-                                                                <span class="new-label">10</span>
-                                                                <span class="new-title">xx</span>
-                                                            </div>
-                                                            <span class="new-bar"></span>
-                                                            <div class="new-circle">
-                                                                <span class="new-label">11</span>
-                                                                <span class="new-title">xx</span>
-                                                            </div>
-                                                            <span class="new-bar"></span>
-                                                            <div class="new-circle"  rel="popover-hover" data-placement="top" data-original-title="Detalle de Proceso"
-                                                                 data-content="P1 | Elaboracion DGP | Secretaria" data-html="true">
-                                                                <span class="new-label"> 12</span>
-                                                                <span class="new-title">xx</span>
-                                                            </div>
+                                                            <%
+                                                                InterfaceDgpDAO d = new DgpDAO();
+
+                                                               out.println(d.Imprimir_det_proceso(r.getId_dgp(), r.getId_detalle_req_proceso()));
+                                                                
+                                                            %>
                                                         </div>
 
 

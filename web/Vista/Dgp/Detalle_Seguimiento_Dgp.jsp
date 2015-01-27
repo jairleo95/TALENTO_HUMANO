@@ -137,7 +137,6 @@
 
                                                         <img src="../../imagenes/Aprobado.png" width="20" height="20">
                                                         <% }
-                                                            //if (true) {
                                                             if (a.getEs_autorizacion().equals("2")) {
                                                         %>
                                                         <img src="../../imagenes/Desaprobado.png" width="20" height="20">
@@ -145,7 +144,13 @@
                                                         } else {%>
                                                         No registrado
                                                         <%}%></td>
-                                                    <td ><%=a.getUs_ap_p().toUpperCase() + " " + a.getUs_ap_mat().toUpperCase() + " " + a.getUs_no_tr().toUpperCase()%></td> 
+                                                    <td ><%
+                                                        if (a.getUs_ap_mat() != null) {
+                                                            out.println(a.getUs_ap_p().toUpperCase() + " " + a.getUs_ap_mat().toUpperCase() + " " + a.getUs_no_tr().toUpperCase());
+                                                        } else {
+                                                            out.println("No Registrado");
+                                                        }
+                                                        %></td> 
                                                     <td  ><%=a.getUs_no_puesto()%></td> 
                                                     <td  ><%=a.getNo_usuario()%></td> 
                                                     <td ><%=a.getUs_no_area()%></td> 
@@ -169,7 +174,7 @@
 
                                             <%}
                                                     }
-                                                    }%>
+                                                }%>
 
                                             </tr> 
 
