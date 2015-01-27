@@ -449,7 +449,7 @@ public class CContrato extends HttpServlet {
             getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
             //getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());*/
 
-            response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp");
+            response.sendRedirect("Vista/Dgp/Documento/Reg_Documento_CE.jsp");
 
         }
 

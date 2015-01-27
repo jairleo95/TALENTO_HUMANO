@@ -278,7 +278,7 @@
 
                                                         <section class="col col-2">
                                                             <label class="input" id="titu">Sueldo Total:
-                                                                <input type="text" name="TOTAL_SUELDO" value="" id="sueldo_total"class="input-group-sm">
+                                                                <input type="text" name="TOTAL_SUELDO" value="" id="sueldo_total"class="input-group-sm" selected="">
                                                             </label>
                                                         </section>
                                                         <section class="col col-2">
@@ -289,7 +289,7 @@
                                                         <section class="col col-2" >
                                                             <%int cant_hijos = Integer.parseInt(request.getParameter("cant_hijos"));%>
                                                             <label class="input" id="titu">Asignanción Familiar:
-                                                                <input type="text" name="ASIG_FAMILIAR" <%if (cant_hijos == 0) {%> value="0" <%} else {%> value="75" <%}%>  class="input-group-sm">
+                                                                <input type="text" name="ASIG_FAMILIAR" <%if (cant_hijos == 0) {%> value="0" <%} else {%> value="75" <%}%> disabled="" class="input-group-sm">
                                                             </label>
                                                         </section>
                                                     </div>
