@@ -16,13 +16,15 @@ public class Documentos {
     private String id_tipo_planilla;
     private String es_documento;
     private String ti_documento;
+    private String id_requerimiento;
 
-    public Documentos(String id_documentos, String no_documento, String id_tipo_planilla, String es_documento, String ti_documento) {
+    public Documentos(String id_documentos, String no_documento, String id_tipo_planilla, String es_documento, String ti_documento, String id_requerimiento) {
         this.id_documentos = id_documentos;
         this.no_documento = no_documento;
         this.id_tipo_planilla = id_tipo_planilla;
         this.es_documento = es_documento;
         this.ti_documento = ti_documento;
+        this.id_requerimiento = id_requerimiento;
     }
 
     public Documentos() {
@@ -31,8 +33,18 @@ public class Documentos {
         this.id_tipo_planilla = "";
         this.es_documento = "";
         this.ti_documento = "";
+        this.id_requerimiento = "";
     }
 
+    public String getId_requerimiento() {
+        return id_requerimiento;
+    }
+
+    public void setId_requerimiento(String id_requerimiento) {
+        this.id_requerimiento = id_requerimiento;
+    }
+
+    
     public String getId_documentos() {
         return id_documentos;
     }

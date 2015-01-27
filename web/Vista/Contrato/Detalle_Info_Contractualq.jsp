@@ -199,8 +199,7 @@
                     %>
                     <tr><td class="text-info table-bordered"><strong>Centro conto Nº <%=q + 1%>:</strong></td><td colspan="2"><p><%=cc.getDe_centro_costo()%></p></td><td class="text-info table-bordered" colspan="2"><strong>Porcentaje</strong></td><td colspan="2"><p><%=cc.getCa_porcentaje()%> %</p> </td></tr><%}%>
                     <tr><td class="text-info table-bordered"><strong>Total Porcentaje:</strong></td><td colspan="6"><p><%=cantidad%> %</p></td></tr><%} else {%>
-                    <tr><td class="text-info table-bordered"><strong>Centro conto </strong></td><td colspan="6"><p>No tiene</p></td></tr><%}
-                        Lis_c_c_id_contr.clear();%>
+                    <tr><td class="text-info table-bordered"><strong>Centro conto </strong></td><td colspan="6"><p>No tiene</p></td></tr><%}%>
                     <tr><td class="text-info table-bordered"><strong>Puesto:</strong></td><td colspan="6"><p><%=n.getNo_puesto()%></p><input type="hidden" class="id_pu" value="<%=n.getId_puesto()%>"></td> </tr>
                     <tr><td class="text-info table-bordered"><strong>Condición:</strong></td> <td colspan="6"><p><%
                         if (n.getLi_condicion() != null) {
@@ -403,7 +402,48 @@
                                     out.print(n.getFe_cese());
                                 } else {
                                     out.print("NO DEFINIDO");
-                                }%> </td></tr>   
+                                }%> </td></tr>  
+                    <!--   <tr><td>Nro. Documento:</td><td><? /*echo $list_rhc[$index][43];?> </td></tr>   
+                   <tr><td>Pares:</td><td><? echo $list_rhc[$index][36];?> </td></tr>   
+                     <tr><td>Apoyo:</td><td><? echo $list_rhc[$index][41];*/?> </td></tr>   -->
+
+                
+                    
+
+                     <tr><%if (n.getUs_modif() != null && n.getFe_modif() != null) {%>
+                        <td class="text-info table-bordered"><strong>Modificado por:</strong></td>
+                        <td><%for (int f = 0; f < List_Usuario.size(); f++) {
+                                Usuario u = new Usuario();
+                                u = (Usuario) List_Usuario.get(f);
+                                if (n.getUs_modif().trim().equals(u.getId_usuario().trim())) {
+                                    out.println(u.getNo_usuario());%>
+                            <%}%>
+                        </td>
+                        <%}}else{%>
+                        <% if (n.getUs_creacion() != null && n.getFe_creacion() != null) {%>
+                        <td class="text-danger text-info text-center "><strong>Creado por:</strong></td>
+                        <%if (n.getUs_creacion() != null) {
+                                for (int f = 0; f < List_Usuario.size(); f++) {
+                                    Usuario u = new Usuario();
+                                    u = (Usuario) List_Usuario.get(f);
+                                    if (n.getUs_creacion().equals(u.getId_usuario())) {%>
+                        <td class="text-info text-center"><%=u.getNo_usuario()%></td>
+                        <%}
+                            }
+                        } else {%>
+                        <td>NO INGRESADO</td>
+                        <%}%>
+                        <%}%>
+                    </tr>
+                    <tr></tr>
+
+                    <%}%>
+                    
+                    
+                    
+                    
+                    
+                    
                 </table>
             </form>
             <div>
@@ -422,35 +462,7 @@
                         /*}
                          }*/%>
                     <tr><td class="text-info" colspan="8" style="text-align:center"><input class="button blue"  type="hidden" value="Editar"><button  class="PLANTI button blue">Mostrar Plantillas</button></td></tr>
-                    
 
-                    <tr> <%if (n.getUs_modif() != null && n.getFe_modif() != null) {%>
-                        <td class="text-info table-bordered"><strong>Modificado por:</strong></td>
-                        <td><%for (int f = 0; f < List_Usuario.size(); f++) {
-                                Usuario u = new Usuario();
-                                u = (Usuario) List_Usuario.get(f);
-                                if (n.getUs_modif().equals(u.getId_usuario())) {
-                                    out.println(u.getNo_usuario());%>
-                            <%}%>
-                        </td>
-                        <%}%>
-                        <% if (n.getUs_creacion() == null && n.getFe_creacion() != null) {%>
-                        <td class="text-danger text-info text-center "><strong>Creado por:</strong></td>
-                        <%if (n.getUs_creacion() != null) {
-                                for (int f = 0; f < List_Usuario.size(); f++) {
-                                    Usuario u = new Usuario();
-                                    u = (Usuario) List_Usuario.get(f);
-                                    if (n.getUs_creacion().equals(u.getId_usuario())) {%>
-                        <td class="text-info text-center"><%=u.getNo_usuario()%></td>
-                        <%}
-                            }
-                        } else {%>
-                        <td>NO INGRESADO</td>
-                        <%}%>
-                        <%}%>
-                    </tr>
-
-                    <%}%>
                 </table>
             </div>
         </div>

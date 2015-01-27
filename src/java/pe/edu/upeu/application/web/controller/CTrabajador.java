@@ -19,6 +19,7 @@ import pe.edu.upeu.application.dao.Datos_Hijo_TrabajadorDAO;
 import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.DireccionDAO;
 import pe.edu.upeu.application.dao.DocumentoDAO;
+import pe.edu.upeu.application.dao.EmpleadoDAO;
 import pe.edu.upeu.application.dao.ListaDAO;
 import pe.edu.upeu.application.dao.Padre_Madre_ConyugueDAO;
 import pe.edu.upeu.application.dao.Tipo_DocumentoDAO;
@@ -30,6 +31,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceDatos_Hijo_Trabajador;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceEmpleadoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePadre_Madre_ConyugueDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTipo_DocumentoDAO;
@@ -66,6 +68,7 @@ public class CTrabajador extends HttpServlet {
             InterfaceUbigeoDAO ub = new UbigeoDAO();
             InterfaceTrabajadorDAO tr = new TrabajadorDAO();
             InterfaceDocumentoDAO d = new DocumentoDAO();
+            InterfaceEmpleadoDAO em = new EmpleadoDAO();
             InterfaceDgpDAO dgp = new DgpDAO();
             InterfaceDireccionDAO dir = new DireccionDAO();
             InterfaceCentro_CostosDAO cc = new Centro_CostoDAO();
@@ -252,10 +255,34 @@ public class CTrabajador extends HttpServlet {
                 String drp = request.getParameter("IDDETALLE_REQ_PROCESO");
                 String np = request.getParameter("nup");
                 int num_c_dgp = dgp.VALIDAR_DGP_CONTRATO(iddgp);
+                int val_aps=em.val_cod_aps_empleado(idtr);
+                getServletContext().setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
                 getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
                 getServletContext().setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));
-
-                response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&aut=1&dgp=" + iddgp + "&p=" + puesto_id + "&c=" + cod + "&pas=" + idpasos + "&drp=" + drp + "&np=" + np + "&vnc=" + num_c_dgp);
+                response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&aut=1&dgp=" + iddgp + "&p=" + puesto_id + "&c=" + cod + "&pas=" + idpasos + "&drp=" + drp + "&np=" + np + "&vnc=" + num_c_dgp+"&val_aps="+val_aps);
+            }
+            if ("registrar_aps".equals(opc)) {
+                String idtr = request.getParameter("idtr");
+                String id_contrato = con.Buscar_id_contrato_x_idtr(idtr);
+                /*if (cc.Lis_c_c_id_contr(id_contrato).size() > 0) {
+                 getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_contrato));
+                 }
+                 */
+                
+                String iddgp = request.getParameter("iddetalle_dgp");
+                String puesto_id = request.getParameter("puesto_id");
+                String cod = request.getParameter("cod");
+                String idpasos = request.getParameter("idpasos");
+                String drp = request.getParameter("IDDETALLE_REQ_PROCESO");
+                String np = request.getParameter("nup");
+                int co_aps = Integer.parseInt(request.getParameter("cod_aps"));
+                em.Reg_aps(idtr, co_aps);
+                int num_c_dgp = dgp.VALIDAR_DGP_CONTRATO(iddgp);
+                int val_aps=em.val_cod_aps_empleado(idtr);
+                getServletContext().setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
+                getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+                getServletContext().setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));
+                response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&aut=1&dgp=" + iddgp + "&p=" + puesto_id + "&c=" + cod + "&pas=" + idpasos + "&drp=" + drp + "&np=" + np + "&vnc=" + num_c_dgp+"&val_aps="+val_aps);
             }
 
         } catch (Exception e) {

@@ -66,7 +66,7 @@
             String rol = (String) sesion.getAttribute("IDROL");
             int n_nac = Integer.parseInt(request.getParameter("n_nac"));
             int num_ad = Integer.parseInt(request.getParameter("num_ad"));
-            String id_dgp = "";
+            //String id_dgp = "";
         %>
         <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
 
@@ -446,10 +446,11 @@
                                                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
                                                 </tr>  
                                                 <input type="hidden" name="iddgp" value="<%=d.getIddgp()%>">
+                                                <input type="hidden" name="iddgp" value="<%=d.getId_contrato() %>">
                                                 <input type="hidden" name="idtr" value="<%=d.getId_trabajador().trim()%>">
                                                 <% }
                                                         i++;
-                                                        id_dgp = d.getIddgp();
+                                                        //id_dgp = d.getIddgp();
                                                     }%>
 
 

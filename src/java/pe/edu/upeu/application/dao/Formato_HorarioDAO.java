@@ -208,24 +208,24 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select   pc.ID_PLANTILLA_CONTRACTUAL,pc.NO_PLANTILLA,pc.NO_ARCHIVO,pp.ID_PLANTILLA_PUESTO,pp.ID_DEPARTAMENTO,pp.ID_DIRECCION,pp.ID_AREA,pp.ID_SECCION,pp.ID_PUESTO  from RHTC_PLANTILLA_CONTRACTUAL pc , RHTC_PLANTILLA_PUESTO pp where pp.ID_PLANTILLA_CONTRACTUAL = pc.ID_PLANTILLA_CONTRACTUAL and pp.ES_PLANTILLA_PUESTO='1' and pc.ES_PLAN_CONTRACTUAL='1'";
+            String sql = "select   pc.ID_PLANTILLA_CONTRACTUAL,pc.NO_PLANTILLA,pc.NO_ARCHIVO  from RHTC_PLANTILLA_CONTRACTUAL pc , RHTC_PLANTILLA_PUESTO pp where pp.ID_PLANTILLA_CONTRACTUAL = pc.ID_PLANTILLA_CONTRACTUAL and pp.ES_PLANTILLA_PUESTO='1' and pc.ES_PLAN_CONTRACTUAL='1'";
             if (id.substring(0, 3).equals("PUT")) {
                 sql += " and pp.id_puesto='" + id.trim() + "'";
             }
             
             if (id.substring(0, 3).equals("DIR")) {
-                sql += " and pp.ID_DIRECCION='" + id.trim() + "'";
+                sql += " and pp.ID_DIRECCION='" + id.trim() + "' or pp.ID_DIRECCION='0' and pp.ID_DEPARTAMENTO='0' and pp.ID_AREA='0' and  pp.ID_SECCION='0'";
             }
             if (id.substring(0, 3).equals("DPT")) {
-                sql += " and pp.ID_DEPARTAMENTO='" + id.trim() + "'";
+                sql += " and pp.ID_DEPARTAMENTO='" + id.trim() + "' or pp.ID_DIRECCION='0' and pp.ID_DEPARTAMENTO='0' and pp.ID_AREA='0' and  pp.ID_SECCION='0'";
             }
             if (id.substring(0, 3).equals("ARE")) {
-                sql += " and pp.ID_AREA='" + id.trim() + "'";
+                sql += " and pp.ID_AREA='" + id.trim() + "' or pp.ID_AREA='0'";
             }
             if (id.substring(0, 3).equals("SEC")) {
-                sql += " and pp.ID_SECCION='" + id.trim() + "'";
+                sql += " and pp.ID_SECCION='" + id.trim() + "' or pp.ID_SECCION='0'";
             }
-
+            sql+="group by pc.ID_PLANTILLA_CONTRACTUAL,pc.NO_PLANTILLA,pc.NO_PLANTILLA,pc.NO_ARCHIVO ";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();

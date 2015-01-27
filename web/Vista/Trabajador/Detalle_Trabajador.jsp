@@ -1,10 +1,13 @@
 
 
+<%@page import="pe.edu.upeu.application.model.Empleado"%>
+<%@page import="javax.print.DocFlavor.STRING"%>
 <%@page import="pe.edu.upeu.application.model.Auto_Mostrar"%>
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
 <%@page import="pe.edu.upeu.application.model.Trabajador"%>
 <jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Auto_mostrar" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="id_empleadox_ide" scope="application" class="java.util.ArrayList"/>
 
 <!DOCTYPE html>
 
@@ -68,6 +71,7 @@
         <link rel="apple-touch-startup-image" href="../../HTML_version/img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../HTML_version/img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../HTML_version/img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+        
         <style type="text/css">
             body{
 
@@ -133,18 +137,7 @@
 
 
         </style>
-        <script type="text/javascript">
-            $(document).ready(
-                    function () {
-                        $(".item-m").click(
-                                function () {
-                                    $("#titulo-c").text($(this).text());
-                                }
-                        );
-                    }
-            );
 
-        </script>
     </head>
 
     <%if (request.getParameter("a") != null) {
@@ -166,13 +159,16 @@
 
             String idtr = t.getId_trabajador().trim();
             String aut = request.getParameter("aut");
+            String idtra = request.getParameter("idtr");
             HttpSession sesion = request.getSession(true);
             String idp = (String) sesion.getAttribute("p");
+            String idrol = (String) sesion.getAttribute("IDROL");
             String iddgp = request.getParameter("dgp");
             String cod = request.getParameter("c");
             String iddrp = request.getParameter("drp");
             String id_pasos = request.getParameter("pas");
             String nropaso = request.getParameter("np");
+            int val_aps = Integer.parseInt(request.getParameter("val_aps"));
 //if ($_REQUEST["CR"]=1){ %>
         <script type="text/javascript">
             // alerta_dt_ingresados();
@@ -196,20 +192,55 @@
                         <%}%>
                     <td>
                         <div>
-                            <table   class="info-det">
-                                <%
-                                    for (int index = 0; index < ListaridTrabajador.size(); index++) {
-                                        V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
-                                        trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
+                            <form action="../../trabajador" method="post">
+                                <table   class="info-det">
+                                    <%
+                                        for (int index = 0; index < ListaridTrabajador.size(); index++) {
+                                            V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
+                                            trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
 
-                                %>
+                                    %>
+                                    <td>
+                                        <table>
+                                            <tr><td class="td">Nombre :</td><td class="td1"><%=trb.getNo_trabajador().toUpperCase()%></td></tr>
+                                            <tr><td class="td">Apellido Paterno :</td><td class="td1"><%=trb.getAp_paterno().toUpperCase()%></td></tr>
+                                            <tr><td class="td">Apellido Materno :</td><td class="td1"><%=trb.getAp_materno().toUpperCase()%></td></tr>
+                                            <tr><td class="td">Fecha de Nacimiento :</td><td class="td1"><%=trb.getFe_nac()%></td></tr>
+                                        </table>
+                                    </td>
+                                    <%String ID_ROL = (String) sesion.getAttribute("IDROL");
+                                        for (int e = 0; e < id_empleadox_ide.size(); e++) {
+                                            Empleado emp = new Empleado();
+                                            emp = (Empleado) id_empleadox_ide.get(e);
+                                            if (ID_ROL.trim().equals("ROL-0009")) {
+                                                if (val_aps > 0) {%>
 
-                                <tr><td class="td">Nombre :</td><td class="td1"><%=trb.getNo_trabajador().toUpperCase()%></td></tr>
-                                <tr><td class="td">Apellido Paterno :</td><td class="td1"><%=trb.getAp_paterno().toUpperCase()%></td></tr>
-                                <tr><td class="td">Apellido Materno :</td><td class="td1"><%=trb.getAp_materno().toUpperCase()%></td></tr>
-                                <tr><td class="td">Fecha de Nacimiento :</td><td class="td1"><%=trb.getFe_nac()%></td></tr>
-
-                            </table>
+                                    <td>
+                                        <table class="info-det">
+                                            <tr><td class="td" colspan="3">Codigo APS:</td></tr>
+                                            <tr><td class="td" colspan="2"><%=emp.getCo_aps()%></td></tr>
+                                        </table>
+                                    </td>
+                                    <%} else {%>
+                                    <td>
+                                        <table class="info-det">
+                                            <input type="hidden" name="iddetalle_dgp" value="<%=iddgp%>">
+                                            <input type="hidden" name="puesto_id" value="<%=idp%>">
+                                            <input type="hidden" name="cod" value="<%=cod%>">
+                                            <input type="hidden" name="idpasos" value="<%=id_pasos%>">
+                                            <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>">
+                                            <input type="hidden"name="nup" value="<%=nropaso%>">
+                                            <input type="hidden" name="idtr" value="<%=idtra%>">
+                                            <tr><td class="td" colspan="2">Registrar codigo APS</td></tr>
+                                            <tr><td><input type="text" id="cod_ap" name="cod_aps" maxlength="6"></td></tr>
+                                            <tr><td><button value="registrar_aps" name="opc">Registrar</button></td></tr>
+                                        </table>
+                                    </td>
+                                    <%}
+                                            }
+                                        }%>
+                                </table>
+                            </form>
                         </div>
                     </td>
                 </tr>
@@ -339,10 +370,9 @@
 
             %>
             <center>
-                <%                    int vnc = Integer.parseInt(request.getParameter("vnc"));
-
-                    if (vnc > 0) {
-
+                <%                    if (idrol.trim().equals("ROL-0006")) {
+                        int vnc = Integer.parseInt(request.getParameter("vnc"));
+                        if (vnc > 0) {
 
                 %>
                 <form class="form" action="../../autorizacion" method="post" > 
@@ -361,7 +391,46 @@
                 </form>
                 <%
                     }
+                } else {
+
+                    if (idrol.trim().equals("ROL-0009")) {
+                        if (val_aps > 0) {
+
                 %>
+
+                <form class="form" action="../../autorizacion" method="post" > 
+                    <table > 
+                        <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
+                        <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
+                        <input type="hidden" name="COD" value="<%=cod%>"  >               
+                        <input type="hidden" name="PUESTO_ID" value="<%=idp%>" >  
+                        <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
+                        <input type="hidden" name="IDPASOS" value="<%=id_pasos%>"   >
+                        <tr><td><input type="hidden" name="opc"  class="submit" value="Aceptar"/></td></tr>
+                        <button class="btn btn-labeled btn-success" type="submit">
+                            <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>ENVIAR 
+                        </button>
+                    </table>
+                </form>
+                <%}
+                } else {%>
+                <form class="form" action="../../autorizacion" method="post" > 
+                    <table > 
+                        <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
+                        <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
+                        <input type="hidden" name="COD" value="<%=cod%>"  >               
+                        <input type="hidden" name="PUESTO_ID" value="<%=idp%>" >  
+                        <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
+                        <input type="hidden" name="IDPASOS" value="<%=id_pasos%>"   >
+                        <tr><td><input type="hidden" name="opc"  class="submit" value="Aceptar"/></td></tr>
+                        <button class="btn btn-labeled btn-success" type="submit">
+                            <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>ENVIAR 
+                        </button>
+                    </table>
+                </form>
+
+                <%}
+                    }%>
                 <form action="../../autorizacion" method="post">
                     <table>
                         <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
@@ -378,13 +447,14 @@
                 </form>   
             </center>
             <%}
-                }%>
+                }
+            %>
         </div>
-        
+
         <script src="../../js/JQuery/jQuery.js"></script>
         <script src="../../js/Js_dlmenu/jquery.dlmenu.js"></script>
         <script>
-            $(function () {
+            $(function() {
                 $('#dl-menu').dlmenu({
                     animationClasses: {classin: 'dl-animate-in-2', classout: 'dl-animate-out-2'}
                 });
@@ -448,14 +518,15 @@
 
         <!-- PAGE RELATED PLUGIN(S) -->
         <script src="../../HTML_version/js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+        <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <script type="text/javascript">
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-            $(document).ready(function () {
-
+            $(document).ready(function() {
+                
                 pageSetUp();
-
+                $("#cod_ap").numeric();
                 /*
                  * Autostart Carousel
                  */
@@ -478,7 +549,7 @@
                 /*
                  * Smart Notifications
                  */
-                $('#eg1').click(function (e) {
+                $('#eg1').click(function(e) {
 
                     $.bigBox({
                         title: "Big Information box",
@@ -494,7 +565,7 @@
 
                 })
 
-                $('#eg2').click(function (e) {
+                $('#eg2').click(function(e) {
 
                     $.bigBox({
                         title: "Big Information box",
@@ -508,7 +579,7 @@
                     e.preventDefault();
                 })
 
-                $('#eg3').click(function (e) {
+                $('#eg3').click(function(e) {
 
                     $.bigBox({
                         title: "Shield is up and running!",
@@ -523,7 +594,7 @@
 
                 })
 
-                $('#eg4').click(function (e) {
+                $('#eg4').click(function(e) {
 
                     $.bigBox({
                         title: "Success Message Example",
@@ -532,7 +603,7 @@
                         //timeout: 8000,
                         icon: "fa fa-check",
                         number: "4"
-                    }, function () {
+                    }, function() {
                         closedthis();
                     });
 
@@ -542,7 +613,7 @@
 
 
 
-                $('#eg5').click(function () {
+                $('#eg5').click(function() {
 
                     $.smallBox({
                         title: "Ding Dong!",
@@ -556,7 +627,7 @@
 
 
 
-                $('#eg6').click(function () {
+                $('#eg6').click(function() {
 
                     $.smallBox({
                         title: "Big Information box",
@@ -568,7 +639,7 @@
 
                 })
 
-                $('#eg7').click(function () {
+                $('#eg7').click(function() {
 
                     $.smallBox({
                         title: "James Simmons liked your comment",
@@ -594,12 +665,12 @@
                  * SmartAlerts
                  */
                 // With Callback
-                $("#smart-mod-eg1").click(function (e) {
+                $("#smart-mod-eg1").click(function(e) {
                     $.SmartMessageBox({
                         title: "Smart Alert!",
                         content: "This is a confirmation box. Can be programmed for button callback",
                         buttons: '[No][Yes]'
-                    }, function (ButtonPressed) {
+                    }, function(ButtonPressed) {
                         if (ButtonPressed === "Yes") {
 
                             $.smallBox({
@@ -624,7 +695,7 @@
                     e.preventDefault();
                 })
                 // With Input
-                $("#smart-mod-eg2").click(function (e) {
+                $("#smart-mod-eg2").click(function(e) {
 
                     $.SmartMessageBox({
                         title: "Smart Alert: Input",
@@ -632,14 +703,14 @@
                         buttons: "[Accept]",
                         input: "text",
                         placeholder: "Enter your user name"
-                    }, function (ButtonPress, Value) {
+                    }, function(ButtonPress, Value) {
                         alert(ButtonPress + " " + Value);
                     });
 
                     e.preventDefault();
                 })
                 // With Buttons
-                $("#smart-mod-eg3").click(function (e) {
+                $("#smart-mod-eg3").click(function(e) {
 
                     $.SmartMessageBox({
                         title: "Smart Notification: Buttons",
@@ -650,7 +721,7 @@
                     e.preventDefault();
                 })
                 // With Select
-                $("#smart-mod-eg4").click(function (e) {
+                $("#smart-mod-eg4").click(function(e) {
 
                     $.SmartMessageBox({
                         title: "Smart Alert: Select",
@@ -658,7 +729,7 @@
                         buttons: "[Done]",
                         input: "select",
                         options: "[Costa Rica][United States][Autralia][Spain]"
-                    }, function (ButtonPress, Value) {
+                    }, function(ButtonPress, Value) {
                         alert(ButtonPress + " " + Value);
                     });
 
@@ -666,7 +737,7 @@
                 });
 
                 // With Login
-                $("#smart-mod-eg5").click(function (e) {
+                $("#smart-mod-eg5").click(function(e) {
 
                     $.SmartMessageBox({
                         title: "Login form",
@@ -674,7 +745,7 @@
                         buttons: "[Cancel][Accept]",
                         input: "text",
                         placeholder: "Enter your user name"
-                    }, function (ButtonPress, Value) {
+                    }, function(ButtonPress, Value) {
                         if (ButtonPress == "Cancel") {
                             alert("Why did you cancel that? :(");
                             return 0;
@@ -688,7 +759,7 @@
                             buttons: "[Login]",
                             input: "password",
                             placeholder: "Password"
-                        }, function (ButtonPress, Value) {
+                        }, function(ButtonPress, Value) {
                             alert("Username: " + ValueOriginal + " and your password is: " + Value);
                         });
                     });
@@ -707,7 +778,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function () {
+            (function() {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
@@ -715,6 +786,14 @@
                 var s = document.getElementsByTagName('script')[0];
                 s.parentNode.insertBefore(ga, s);
             })();
+
+        </script>
+        <script type="text/javascript">
+            $(document).ready(
+                    function() {
+                        
+                        
+                    });
 
         </script>
         <%}%>

@@ -13,6 +13,7 @@ import java.util.List;
 import pe.edu.upeu.application.dao_imp.InterfaceEmpleadoDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
+import pe.edu.upeu.application.model.Empleado;
 import pe.edu.upeu.application.model.Evaluacion_Emp;
 import pe.edu.upeu.application.model.V_List_Empleado;
 
@@ -161,7 +162,8 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
         }
         return list;
     }
-     @Override
+
+    @Override
     public List<V_List_Empleado> Listar_Empleado() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "SELECT * FROM RHVD_LIST_EMPLEADO ";
@@ -324,7 +326,7 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
 
     @Override
     public String ID_Empleado(String idtr) {
-       this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "select ID_EMPLEADO from RHTD_EMPLEADO WHERE ID_TRABAJADOR='" + idtr + "'";
         String idemp = null;
         try {
@@ -341,7 +343,7 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
     @Override
     public String ES_Empleado(String idemp) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "Select ES_EVALUACION FROM RHTD_EVALUACION_EMP WHERE ID_EMPLEADO='"+idemp+"' ";
+        String sql = "Select ES_EVALUACION FROM RHTD_EVALUACION_EMP WHERE ID_EMPLEADO='" + idemp + "' ";
         String es_eva = null;
         try {
             ResultSet rs = this.conn.query(sql);
@@ -357,24 +359,24 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
     @Override
     public List<Evaluacion_Emp> Listar_Evaluacion_Emp(String id_emp) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT * FROM RHTD_EVALUACION_EMP WHERE ID_EMPLEADO = '"+id_emp+"'";
+        String sql = "SELECT * FROM RHTD_EVALUACION_EMP WHERE ID_EMPLEADO = '" + id_emp + "'";
         List<Evaluacion_Emp> List = new ArrayList<Evaluacion_Emp>();
-        try{
+        try {
             ResultSet rs = this.conn.query(sql);
-            while(rs.next()){
-            Evaluacion_Emp eva = new Evaluacion_Emp();
-            eva.setId_evaluacion_emp("id_evaluacion_emp");
-            eva.setRe_evaluacion(rs.getString("re_evaluacion"));
-            eva.setEs_evaluacion(rs.getString("es_evaluacion"));
-            eva.setId_empleado("id_empleado");
-            List.add(eva);
+            while (rs.next()) {
+                Evaluacion_Emp eva = new Evaluacion_Emp();
+                eva.setId_evaluacion_emp("id_evaluacion_emp");
+                eva.setRe_evaluacion(rs.getString("re_evaluacion"));
+                eva.setEs_evaluacion(rs.getString("es_evaluacion"));
+                eva.setId_empleado("id_empleado");
+                List.add(eva);
             }
-        }catch(Exception e){
-        }finally{
+        } catch (Exception e) {
+        } finally {
             this.conn.close();
         }
         return List;
-        
+
     }
 
     @Override
@@ -385,6 +387,74 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
             cst = conn.conex.prepareCall("{CALL RHSP_MOD_EVALUACION_EMP( ?, ?)}");
             cst.setString(1, RE_EVALUACION);
             cst.setString(2, ID_EMPLEADO);
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        }
+    }
+
+    @Override
+    public List<Empleado> id_empleadox_ide(String ide) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT * FROM RHTD_EMPLEADO WHERE ID_TRABAJADOR = '" + ide.trim() + "'";
+        List<Empleado> List = new ArrayList<Empleado>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Empleado eva = new Empleado();
+                eva.setId_empleado("id_empleado");
+                eva.setId_trabajador(rs.getString("id_trabajador"));
+                eva.setCo_aps(rs.getString("co_aps"));
+                eva.setCo_huella_digital("co_huella_digital");
+                eva.setEs_empleado("es_empleado");
+                List.add(eva);
+            }
+        } catch (Exception e) {
+        } finally {
+            this.conn.close();
+        }
+        return List;
+    }
+
+    @Override
+    public int val_cod_aps_empleado(String idtr) {
+        int num_c = 0;
+        String valor = "";
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select CO_APS from RHTD_EMPLEADO where ID_TRABAJADOR='" + idtr.trim() + "'";
+            ResultSet rs = this.conn.query(sql);
+            rs.next();
+            valor = rs.getString(1);
+            rs.close();
+            if (valor != null) {
+                num_c = 1;
+            } else {
+                num_c = 0;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al valdiar contratos por requerimientos");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return num_c;
+    }
+
+    @Override
+    public void Reg_aps(String idtr,int aps) {
+        CallableStatement cst;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = conn.conex.prepareCall("{CALL RHSP_MOD_APS( ?, ?)}");
+            cst.setString(1, idtr);
+            cst.setInt(2, aps);
             cst.execute();
         } catch (SQLException ex) {
         } finally {

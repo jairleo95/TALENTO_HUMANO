@@ -43,16 +43,15 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 }
                 Direccion += " " + n.getDi_dom_a_d6();
 
-                Calendar fecha = new GregorianCalendar();
-                int año = fecha.get(Calendar.YEAR);
-                int mes = fecha.get(Calendar.MONTH);
-                int dia = fecha.get(Calendar.DAY_OF_MONTH);
-                int hora = fecha.get(Calendar.HOUR_OF_DAY);
-                int minuto = fecha.get(Calendar.MINUTE);
-                int segundo = fecha.get(Calendar.SECOND);
-               String fecha_actual="";
-               
-               
+                String fecha = n.getFe_sus();
+                String fechasus = "";
+                if (fecha != null) {
+                    String f[] = fecha.split("/");
+                    fechasus = f[0] + " de " + f[1] + " del " + f[2];
+                } else {
+                    fechasus = "NO TIENE";
+                }
+
         %>
         <script>
 // The instanceReady event is fired, when an instance of CKEditor has finished
@@ -163,9 +162,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             }
 
             function procesar_texto() {
-                var meses = new Array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
-                var diasSemana = new Array("Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado");
-                var f = new Date();
                 var menu = {
                     "[nombre]": "<%=n.getNo_trabajador()%>",
                     "[app]": "<%=n.getAp_paterno()%>",
@@ -178,7 +174,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     "[desde]": "<%=n.getFe_desde()%>",
                     "[hasta]": "<%=n.getFe_hasta()%>",
                     "[puesto]": "<%=n.getNo_puesto()%>",
-                    "[fe_actual]": "",
+                    "[fe_actual]":"<%=fechasus%>",
                     "[sueldo]": "<%=n.getCa_sueldo_total()%>",
                     "[horas]": "<%=n.getNu_horas_lab()%>",
                     "[cursos]": ""
@@ -220,8 +216,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             $(document).ready(function() {
                 $("#actu").hide();
                 mostrars();
-
-
+                $(".procesar").click(alert("por q puta no funciona"));
             });
 
         </script>
@@ -229,37 +224,10 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     </head>
 
     <body style="height: 1080px">
-        <div> <%
-            for (int b = 0; b < l.List_Dom_D1_Id().size(); b++) {
-                if (n.getLi_di_dom_a_d1().trim().equals(b + 1 + "")) {
-                    out.println(l.List_Dom_D1_Id().get(b));
-                }
-
-            }
-
-            if (n.getLi_di_dom_a_d3().trim().equals("1")) {
-                out.println(" " + n.getDi_dom_a_d2() + " Numero");
-            }
-            if (n.getLi_di_dom_a_d3().trim().equals("2")) {
-                out.println(" " + n.getDi_dom_a_d2() + " Lote");
-            }
-            if (n.getLi_di_dom_a_d3().trim().equals("3")) {
-                out.println(" " + n.getDi_dom_a_d2() + " S/N");
-            }
-
-            for (int c = 0; c < l.List_Dom_D5_Id().size(); c++) {
-                if (n.getLi_di_dom_a_d5().trim().equals(c + 1 + "")) {
-                    out.println(" " + n.getDi_dom_a_d4() + " " + l.List_Dom_D5_Id().get(c));
-                }
-
-            }
-            out.println(" " + n.getDi_dom_a_d6());
-
-            %></div>
         <h3>CARGAR PLANTILLAS</h3>
         <%String no_ar = request.getParameter("no_arc");%>
         <input type="hidden" id="no_arch" class="no_arc" value="<%=no_ar%>">
-        <button  onclick="procesar_texto();" type="button">Procesar </button>
+        <button class="procesar" type="button" style="display:none">Procesar </button>
         <h3>EDITAR PLANTILLAS</h3>
         <form class="ckeditor_form" action="../../../formato_plantilla" method="post">
             <textarea cols="100" id="editor1" name="editor1" rows="10">
@@ -281,6 +249,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     }
                     , height: '800px'});
             </script>
+
             <div id="eButtons" >
                 <input  type="hidden" name="opc" value="Actualizar"/>
                 <input  type="hidden" name="id" value="" class="id_pl"/>
