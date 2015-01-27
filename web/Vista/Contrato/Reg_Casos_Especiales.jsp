@@ -289,7 +289,7 @@
                                                         <section class="col col-2" >
                                                             <%int cant_hijos = Integer.parseInt(request.getParameter("cant_hijos"));%>
                                                             <label class="input" id="titu">Asignanción Familiar:
-                                                                <input type="text" name="ASIG_FAMILIAR" <%if(cant_hijos == 0){%> value="0" <%}else{%> value="75" <%}%>  class="input-group-sm">
+                                                                <input type="text" name="ASIG_FAMILIAR" <%if (cant_hijos == 0) {%> value="0" <%} else {%> value="75" <%}%>  class="input-group-sm">
                                                             </label>
                                                         </section>
                                                     </div>
@@ -384,8 +384,9 @@
                                                             </label>
                                                         </section>
                                                         <section class="col col-4">
+                                                            <%String Fecha = request.getParameter("fe_subs");%>
                                                             <label class="input" id="titu">Fecha de Suscripción: 
-                                                                <input type="date" name="FECHA_SUSCRIPCION" placeholder="" class="input-group-sm" required="">
+                                                                <input id="suscripcion" type="date" name="FECHA_SUSCRIPCION"  class="input-group-sm" required="" value="<%=Fecha%>">
                                                             </label>
                                                         </section>
                                                         <section class="col col-4">
@@ -560,7 +561,7 @@
                                                     <input type="hidden" value="ARE-0022" name="AREA_ID" class="text-box" >
 
                                                 </fieldset>
-                                               
+
 
                                             </div>
 
@@ -773,36 +774,16 @@
 
     </body>
     <script>
-        
-        function calcular_sueldo_total() {
-            var x = parseFloat($("#remu").val());
-            var y = parseFloat($("#bono_al").val());
-            var z = parseFloat($("#bev").val());
-            var v = x + y + z;
-            $("#suel_total").text(Math.round(v * 100) / 100);
-        }
+
         $(document).ready(
-                function() {
-                    $("#sueldo").keyup(
-                            function() {
-                                calcular_sueldo_total();
-                            }
-                    );
-                    $("#bono_al").keyup(
-                            function() {
-                                calcular_sueldo_total();
-                            }
-                    );
-                    $("#bev").keyup(
-                            function() {
-                                calcular_sueldo_total();
-                            }
-                    );
+                    
+                    function Fecha_Actual() {
+                        var fecha = "<%=Fecha%>";
+                        document.getElementById("suscripcion").value = fecha;
+                    }
+                
 
-                }
-
-        );
-    </script>
+        );</script>
     <script>
         function Sueldo_Total() {
 
@@ -830,10 +811,7 @@
                             }
                     );
                 }
-        );
-
-
-    </script>    
+        );</script>    
     <script>
         /*$(".texto-h").setMask("29:59").keypress(
          function () {
@@ -879,8 +857,6 @@
                     $(".cont_vie").hide();
                     $(".cont_sab").hide();
                     $(".cont_dom").hide();
-
-
                     $("#select_lun").change(
                             function() {
                                 if ($(this).val() == 1) {
@@ -1014,10 +990,7 @@
                     if (opc == "1") {
                         if (arr_cc[1] == lista[i].id) {
                             cc_dep.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
-
                             (x, opc, arr_cc);
-
-
                         } else {
                             cc_dep.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
                         }
@@ -1027,7 +1000,6 @@
 
                 }
             });
-
         }
         function listar_centro_costo(x, opc, arr_cc) {
 
@@ -1046,9 +1018,6 @@
                     if (opc == "1") {
                         if (arr_cc[4] == lista[i].id) {
                             centro_costo.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
-
-
-
                         } else {
                             centro_costo.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
                         }
@@ -1058,7 +1027,6 @@
 
                 }
             });
-
         }
 
         function listar_cc(num, opc, arr_cc) {
@@ -1087,7 +1055,6 @@
                         if (arr_cc[0] == lista[i].id) {
                             cc_dir.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
                             listar_dep_cc(num, opc, arr_cc);
-
                         } else {
                             cc_dir.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
                         }
@@ -1107,7 +1074,6 @@
             $(".remover" + num).click(function() {
                 $(".centro-costo_" + num).remove();
                 sumn_porcen_total();
-
             });
         }
         function sumn_porcen_total() {
@@ -1151,18 +1117,12 @@
 
                             if (dias_semana[f] == lista[i].dia) {
                                 var scntDiv = $('#show_' + dias_semana[f]);
-
                                 $(".cont_" + dias_semana[f]).show();
-
                                 $("#select_" + dias_semana[f]).val(1);
-
                                 $('<tr class="tr-dia" ><td>T' + (d + 1) + ' :</td><td><input type="text"   class="texto-h HORA_DESDE_' + dias_semana[f] + (d + 1) + '"   name="HORA_DESDE_' + dias_semana[f] + (d + 1)
                                         + '" value="' + lista[i].desde + '"  /></td><td><input type="text"  class="texto-h HORA_HASTA_' + dias_semana[f] + (d + 1) + '"  value="' + lista[i].hasta + '" name="HORA_HASTA_' + dias_semana[f] + (d + 1)
                                         + '" /><input type="hidden" name="DIA_' + dias_semana[f] + (d + 1)
                                         + '" value="' + dias_semana[f] + '" ><a href="#" class="remove_' + (d + 1) + '">-</a></td></tr>').appendTo(scntDiv);
-
-
-
                                 d++;
                             }
                             // alert(dias_semana[f]);
@@ -1175,9 +1135,7 @@
                                 calcularHoras();
                             }
                     );
-
                 });
-
             }
 
 
@@ -1241,7 +1199,6 @@
         var agregar = $('#fila-agregar');
         var ag = $('#fila-agregar .porcentaje_cc').size() + 1;
         var texto = "";
-
         function agregar_centro_costo(opc, arr_cc) {
 
 
@@ -1253,11 +1210,8 @@
                 texto += '<section class="col col-3"><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ag + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
                 texto += '<section class="col col-2"><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '"  min="0"   type="text" required="" value="' + arr_cc[3] + '" class="porcentaje_cc"/><button type="button" class="remover' + ag + '">Remover</button></label></section>';
                 texto += '</div>';
-
                 agregar.append(texto);
                 listar_cc(ag, opc, arr_cc);
-
-
                 sumn_porcen_total();
             } else {
                 texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + ag + ':</label>';
@@ -1280,7 +1234,6 @@
             $(".porcentaje_cc").keyup(function() {
                 sumn_porcen_total();
             });
-
         }
 
         function listar_tipo_horario() {
@@ -1308,9 +1261,6 @@
             $("#no_cuen_ban").hide();
             $("#generar").hide();
             $("#no_cuen_otros").hide();
-
-
-
             //  var r = "";
             $('#btn-agregar-cc').click(function() {
 
@@ -1321,11 +1271,8 @@
             });
             $("#banco").change(function() {
                 cuenta_bancaria($(this).val());
-
             });
-
             listar_cc();
-
             $("#horario").change(
                     function() {
                         list_horario($(this).val());
@@ -1986,9 +1933,7 @@
             ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
             var s = document.getElementsByTagName('script')[0];
             s.parentNode.insertBefore(ga, s);
-        })();
-
-    </script>
+        })();</script>
     <script>
         $(document).ready(function() {
             Listar_dep();
@@ -2000,32 +1945,28 @@
             var e = $("#pu_id_se");
             // $.post("../../  ")
             $("#select_mod").change(
-                     function() {
-                       //  alert($(this).val());
+                    function() {
+                        //  alert($(this).val());
 
-                       
+
                         $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function(objJson) {
                             a.empty();
                             var list = objJson.lista;
                             a.append("<option value='' > [SELECCIONE] </option>");
                             if (list.length !== 0) {
                                 for (var i = 0; i < list.length; i++) {
-                                    if ($("#select_mod").val()==='MOD-0004'  ) {
+                                    if ($("#select_mod").val() === 'MOD-0004') {
                                         a.append('<option value="' + list[i].id_submodalidad + '" selected="">' + list[i].de_submod + '</option>');
-                                       // alert();
+                                        // alert();
                                     }
                                     else {
-                                       
+
                                         a.append('<option value="' + list[i].id_submodalidad + '">' + list[i].de_submod + '</option>');
                                     }
 
                                 }
                             }
                         });
-
-
-
-
                     });
             $("#selec_dep").change(
                     function() {
@@ -2069,7 +2010,6 @@
                     function() {
                         $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function(objJson) {
                             d.empty();
-
                             var list = objJson.lista;
                             d.append("<option value='' > [SELECCIONE] </option>");
                             if (list.length !== 0) {
@@ -2110,13 +2050,11 @@
                         $("#btn-registrar").val("Registrar Paso");
                         $(".opc").val("Registrar");
                         $("#form-paso")[0].reset();
-
                         return false;
                     }
             );
             function Listar_dep() {
                 var s = $("#selec_dep");
-
                 $.post("../../Direccion_Puesto", "opc=Listar", function(objJson) {
                     s.empty();
                     var lista = objJson.lista;
@@ -2141,9 +2079,7 @@
                         }
                     }
                     x.append('</div><table><tr><td><td><input type="hidden" name="can_centro_cos" value="' + lista.length + '"></td></tr></table>');
-
                 });
-
             }
 
         });

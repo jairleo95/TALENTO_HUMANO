@@ -8,6 +8,8 @@ package pe.edu.upeu.application.web.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -278,7 +280,18 @@ public class CContrato extends HttpServlet {
             String idtr = request.getParameter("idtr");
             String nom = request.getParameter("nom");
             int cant_hijos = dht.ASIGNACION_F(idtr);
-
+            Calendar fecha1 = Calendar.getInstance();
+            
+            Calendar fecha = new GregorianCalendar();
+            int año = fecha.get(Calendar.YEAR);
+            int mes = fecha.get(Calendar.MONTH);
+            int dia = fecha.get(Calendar.DAY_OF_MONTH);
+            String fe_subs = "";
+            if(mes < 9){
+            fe_subs = año+"-"+"0"+(mes+1)+"-"+dia;
+            }else{
+            fe_subs = año+"-"+(mes+1)+"-"+dia;    
+            }
             // getServletContext().setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr1));
             getServletContext().setAttribute("LISTAR_ANNO", con.LIST_ANNO());
             String MAX_ID = con.ID_MAX_ANNO();
@@ -294,7 +307,9 @@ public class CContrato extends HttpServlet {
             getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
             getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
             
-            response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp?idmax=" + MAX_ID + "&idtr=" + idtr + "&nom=" + nom + "&cant_hijos=" + cant_hijos);
+         
+            response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp?idmax=" + MAX_ID + "&idtr=" + idtr + "&nom=" + nom + "&cant_hijos=" + cant_hijos + "&fe_subs=" +fe_subs);
+ 
         }
 
         if (opc.equals("REG_CASOS_ESP")) {
