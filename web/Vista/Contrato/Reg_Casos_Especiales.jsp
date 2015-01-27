@@ -560,17 +560,7 @@
                                                     <input type="hidden" value="ARE-0022" name="AREA_ID" class="text-box" >
 
                                                 </fieldset>
-                                                <footer>
-                                                    <input  type="hidden" name="opc" value="REG_CASOS_ESP">
-                                                    <button type="submit" class="btn btn-primary" name="opc">
-                                                        Siguiente
-                                                    </button>
-                                                    <button type="button" class="btn btn-default" onclick="window.history.back();">
-                                                        Regresar
-                                                    </button>
-
-                                                </footer>
-
+                                               
 
                                             </div>
 
