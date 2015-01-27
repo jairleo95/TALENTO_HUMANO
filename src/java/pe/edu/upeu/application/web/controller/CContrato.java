@@ -24,6 +24,7 @@ import pe.edu.upeu.application.dao.Datos_Hijo_TrabajadorDAO;
 import pe.edu.upeu.application.dao.Detalle_Centro_Costo_DAO;
 import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.DireccionDAO;
+import pe.edu.upeu.application.dao.DocumentoDAO;
 import pe.edu.upeu.application.dao.EmpleadoDAO;
 import pe.edu.upeu.application.dao.GrupoOcupacionesDAO;
 import pe.edu.upeu.application.dao.HorarioDAO;
@@ -42,6 +43,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceDatos_Hijo_Trabajador;
 import pe.edu.upeu.application.dao_imp.InterfaceDetalle_Centro_Costo;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceEmpleadoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceGrupo_ocupacionesDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceHorarioDAO;
@@ -87,6 +89,7 @@ public class CContrato extends HttpServlet {
     InterfaceDireccionDAO dir = new DireccionDAO();
     InterfaceGrupo_ocupacionesDAO gr = new GrupoOcupacionesDAO();
     InterfaceSub_ModalidadDAO sub = new Sub_ModalidadDAO();
+    InterfaceDocumentoDAO doc = new DocumentoDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -97,6 +100,8 @@ public class CContrato extends HttpServlet {
         HttpSession sesion = request.getSession(true);
         String iduser = (String) sesion.getAttribute("IDUSER");
         String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
+        String idpuesto = (String) sesion.getAttribute("PUESTO_ID");
+        String idrol = (String) sesion.getAttribute("IDROL");
         //try {
         if (opc.equals("enviar")) {
             String iddgp = request.getParameter("iddgp");
@@ -436,23 +441,22 @@ public class CContrato extends HttpServlet {
                 }
 
             }
-            /*Cambiar este for con un trigger al momento de insertar*/
-            //for (int i = 0; i < con.List_Rh_Contrato_Idtr().size(); i++) {
-            //    emp.VALIDAR_EMPLEADO(con.List_Rh_Contrato_Idtr().get(i));
-            // }
-            /*---*/
-            // getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_contrato));
             getServletContext().setAttribute("List_Jefe", l.List_Jefe());
             getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
             getServletContext().setAttribute("List_ID_User", usu.List_ID_User(US_CREACION));
             getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
             getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
-            //getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());*/
+            getServletContext().setAttribute("List_tipo_contrato", doc.List_Adventista(idcto)  );
             
-            //out.println("Fecha Desde: "+ FE_DESDE);
-            //out.println("Fecha Desde: "+ FE_HASTA);
-            //out.println("Fecha Subscripcion: "+ FE_SUSCRIPCION);
-            response.sendRedirect("Vista/Dgp/Documento/Reg_Documento_CE.jsp");
+            getServletContext().setAttribute("List_doc_req_pla", doc.List_Doc_CE());
+            int i = doc.List_Req_nacionalidad(ID_TRABAJADOR);
+            int num_ad = doc.List_Adventista(ID_TRABAJADOR);
+            getServletContext().setAttribute("List_Hijos", doc.List_Hijos(ID_TRABAJADOR));
+            getServletContext().setAttribute("List_Conyugue", doc.List_Conyugue(ID_TRABAJADOR));
+
+            //out.print(i);
+            //out.print(num_ad);
+            response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac="+i+"&num_ad="+num_ad);
 
         }
 
