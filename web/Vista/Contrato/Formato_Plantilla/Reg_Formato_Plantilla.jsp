@@ -277,6 +277,14 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 });
 
             }
+            function Crear() {
+                var editor = CKEDITOR.instances.editor1;
+                $.post("../../../formato_plantilla", "opc=Crear_Plantilla&no_pl=" + $(".nombre_pl").val(), function (objJson) {
+                    var imprimir = objJson.imprimir;
+                    editor.setData(imprimir);
+                });
+
+            }
             $(document).ready(function () {
                 // mostrar_plantilla();
                 var b = $(".dir");
@@ -371,6 +379,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             <tbody class="tbody-plantilla">
             </tbody>
         </table>
+        <br><strong>NOMBRE PLANTILLA</strong><br>
+        <input type="text" class="nombre_pl"><br><br>
         <button  onclick="procesar_texto();" type="button">Procesar </button>
         <h3>EDITAR PLANTILLAS</h3>
         <form class="ckeditor_form" action="../../../formato_plantilla" method="post">
@@ -397,6 +407,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 <input  type="hidden" name="opc" value="Actualizar"/>
                 <input  type="hidden" name="id" value="" class="id_pl"/>
                 <input type="submit" value="Actualizar Formato" onclick="leer();">
+                <input type="submit" value="Crear nuevo" onclick="">
             </div>
         </form>
         <h3>ASIGNAR PLANTILLAS</h3>

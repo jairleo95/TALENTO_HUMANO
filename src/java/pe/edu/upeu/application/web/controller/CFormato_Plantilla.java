@@ -20,7 +20,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import pe.edu.upeu.application.dao.Formato_HorarioDAO;
+import pe.edu.upeu.application.dao.PlantillaContractualDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceFormato_HorarioDAO;
+import pe.edu.upeu.application.dao_imp.InterfacePlantillaContractualDAO;
 import pe.edu.upeu.application.model.Formato_Horario;
 
 /**
@@ -45,6 +47,7 @@ public class CFormato_Plantilla extends HttpServlet {
         PrintWriter out = response.getWriter();
         Map<String, Object> rpta = new HashMap<String, Object>();
         InterfaceFormato_HorarioDAO f = new Formato_HorarioDAO();
+        InterfacePlantillaContractualDAO pl = new PlantillaContractualDAO();
 
         String opc = request.getParameter("opc");
         try {
@@ -102,6 +105,21 @@ public class CFormato_Plantilla extends HttpServlet {
                 List<Map<String, ?>> lista = f.Lista_Plantilla_Puesto(id);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
+            }
+            if (opc.equals("Crear_Plantilla")) {
+                String ubicacion = "";
+                String no_pl = request.getParameter("no_pl");
+                pl.Crear_Plantilla(no_pl);
+                String no_arch=pl.Obt_no_arch();
+                if (System.getProperty("sun.desktop").trim().equals("windows")) {
+                    ubicacion = direccion_raiz + "\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
+                } else {
+                    ubicacion = direccion_raiz + "/Vista/Contrato/Formato_Plantilla/Formato/";
+                }
+                File archivo = new File(ubicacion + no_arch);
+                FileWriter escribir = new FileWriter(archivo, true);
+                escribir.write("");
+                escribir.close();
             }
 
         } catch (Exception e) {

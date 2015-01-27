@@ -14,4 +14,6 @@ import java.util.Map;
  */
 public interface InterfacePlantillaContractualDAO {
     public List<Map<String,?>> List_PLantillas(String id_puesto);
+    public void Crear_Plantilla(String no_pl);
+    public String Obt_no_arch();
 }

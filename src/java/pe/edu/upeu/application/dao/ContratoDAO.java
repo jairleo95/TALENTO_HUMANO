@@ -444,7 +444,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
     @Override
     public String Contrato_max(String id_tr) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT 'CTO-'||lpad(to_char(MAX(TO_NUMBER(SUBSTR(cc.ID_CONTRATO,5,8)))),6,'0')  FROM RHTM_CONTRATO cc where ID_ANNO=(SELECT ID_ANNO FROM RHTR_ANNO WHERE ID_ANNO=(SELECT 'ANN-'||lpad(TO_CHAR(MAX(TO_NUMBER(SUBSTR(ID_ANNO,5,8)))),6,'0')FROM(SELECT f.id_anno,f.no_anno,f.id_trabajador FROM (SELECT a.id_anno, a.no_anno , r.id_dgp , r.id_trabajador FROM RHTR_ANNO a ,RHTM_CONTRATO r WHERE a.id_anno=r.id_anno AND r.ES_CONTRATO_TRABAJADOR=1)f WHERE f.id_trabajador='"+id_tr.trim()+"' ORDER BY f.no_anno DESC))) and cc.ID_TRABAJADOR='"+id_tr.trim()+"'";
+        String sql = "SELECT ID_CONTRATO FROM RHTM_CONTRATO where ID_CONTRATO=(SELECT 'CTO-'||lpad(to_char(MAX(TO_NUMBER(SUBSTR(cc.ID_CONTRATO,5,8)))),6,'0')  FROM RHTM_CONTRATO cc where ID_ANNO=(SELECT ID_ANNO FROM RHTR_ANNO WHERE ID_ANNO=(SELECT 'ANN-'||lpad(TO_CHAR(MAX(TO_NUMBER(SUBSTR(ID_ANNO,5,8)))),6,'0')FROM(SELECT f.id_anno,f.no_anno,f.id_trabajador FROM (SELECT a.id_anno, a.no_anno , r.id_dgp , r.id_trabajador FROM RHTR_ANNO a ,RHTM_CONTRATO r WHERE a.id_anno=r.id_anno AND r.ES_CONTRATO_TRABAJADOR=1)f WHERE f.id_trabajador='"+id_tr.trim()+"' ORDER BY f.no_anno DESC))) and cc.ID_TRABAJADOR='"+id_tr.trim()+"')";
         String id_anno = null;
         try {
             ResultSet rs = this.conn.query(sql);
@@ -544,6 +544,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 v.setDi_dom_a_d6(rs.getString("di_dom_a_d6"));
                 v.setNo_distrito(rs.getString("no_distrito"));
                 v.setNo_provincia(rs.getString("no_provincia"));
+                v.setNo_provincia(rs.getString("fe_sus"));
                 list.add(v);
             }
         } catch (SQLException e) {
