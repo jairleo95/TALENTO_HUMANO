@@ -101,12 +101,22 @@ public class CFormato_Plantilla extends HttpServlet {
                 rpta.put("imprimir", imprimir);
             }
             if (opc.equals("Cargar_Plantillas")) {
-                String id = request.getParameter("id");
-                List<Map<String, ?>> lista = f.Lista_Plantilla_Puesto(id);
+                String id_dir = request.getParameter("id_dir");
+                String id_dep = request.getParameter("id_dep");
+                String id_are = request.getParameter("id_are");
+                String id_sec = request.getParameter("sec");
+                String id_pu = request.getParameter("id_pu");
+                List<Map<String, ?>> lista = pl.List_PLanti_x_sel(id_pu,id_sec,id_are,id_dep,id_dir);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
             if (opc.equals("Crear_Plantilla")) {
+                String texto_html = request.getParameter("valor");
+                String DEP = request.getParameter("valor");
+                String AREA = request.getParameter("valor");
+                String SEC = request.getParameter("valor");
+                String DIR = request.getParameter("valor");
+                String PUES = request.getParameter("valor");
                 String ubicacion = "";
                 String no_pl = request.getParameter("no_pl");
                 pl.Crear_Plantilla(no_pl);
@@ -118,8 +128,9 @@ public class CFormato_Plantilla extends HttpServlet {
                 }
                 File archivo = new File(ubicacion + no_arch);
                 FileWriter escribir = new FileWriter(archivo, true);
-                escribir.write("");
+                escribir.write(texto_html);
                 escribir.close();
+                response.sendRedirect("Vista/Contrato/Formato_Plantilla/Reg_Formato_Plantilla.jsp");
             }
 
         } catch (Exception e) {

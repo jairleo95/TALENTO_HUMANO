@@ -60,7 +60,7 @@ public class PlantillaContractualDAO implements InterfacePlantillaContractualDAO
     public void Crear_Plantilla(String no_pl) {
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.cnn.conex.prepareCall("{CALL  RHSP_INSERT_PLANTILLA( ?,?,?,?,?,?,?,? )} ");
+            CallableStatement cst = this.cnn.conex.prepareCall("{CALL RHSP_INSERT_PLANTILLA( ?,?,?,?,?,?,?,? )} ");
             cst.setString(1, null);
             cst.setString(2, no_pl);
             cst.setString(3, null);
@@ -94,6 +94,34 @@ public class PlantillaContractualDAO implements InterfacePlantillaContractualDAO
             this.cnn.close();
         }
         return no_archivo;
+    }
+
+    @Override
+    public List<Map<String, ?>> List_PLanti_x_sel(String id_pu, String id_sec, String id_are, String id_dep, String id_dir) {
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "SELECT (pl.ID_PLANTILLA_CONTRACTUAL)AS id_platilla_c,(pl.NO_PLANTILLA)AS no_plantilla,(pl.NO_ARCHIVO)AS no_arch FROM RHTC_PLANTILLA_PUESTO p,RHTC_PLANTILLA_CONTRACTUAL pl WHERE p.ID_PUESTO ='"+id_pu.trim()+"' AND pl.ID_PLANTILLA_CONTRACTUAL = p.ID_PLANTILLA_CONTRACTUAL AND p.ES_PLANTILLA_PUESTO ='1' UNION SELECT pl.ID_PLANTILLA_CONTRACTUAL, pl.NO_PLANTILLA, pl.NO_ARCHIVO from RHTC_PLANTILLA_CONTRACTUAL pl,RHTC_PLANTILLA_PUESTO p WHERE p.ID_SECCION='"+id_sec.trim()+"' AND p.ID_PUESTO ='0' AND pl.ID_PLANTILLA_CONTRACTUAL = p.ID_PLANTILLA_CONTRACTUAL AND p.ES_PLANTILLA_PUESTO ='1' UNION SELECT pl.ID_PLANTILLA_CONTRACTUAL, pl.NO_PLANTILLA, pl.NO_ARCHIVO FROM RHTC_PLANTILLA_PUESTO p, RHTC_PLANTILLA_CONTRACTUAL pl WHERE p.ID_AREA ='"+id_are.trim()+"' AND p.ID_SECCION='0' AND p.ID_PUESTO ='0' AND pl.ID_PLANTILLA_CONTRACTUAL = p.ID_PLANTILLA_CONTRACTUAL AND p.ES_PLANTILLA_PUESTO ='1' UNION SELECT pl.ID_PLANTILLA_CONTRACTUAL, pl.NO_PLANTILLA, pl.NO_ARCHIVO FROM RHTC_PLANTILLA_PUESTO p, RHTC_PLANTILLA_CONTRACTUAL pl WHERE p.ID_DEPARTAMENTO ='"+id_dep.trim()+"' AND p.ID_AREA ='0' AND p.ID_SECCION ='0' AND p.ID_PUESTO ='0' AND pl.ID_PLANTILLA_CONTRACTUAL = p.ID_PLANTILLA_CONTRACTUAL AND p.ES_PLANTILLA_PUESTO       ='1' UNION SELECT pl.ID_PLANTILLA_CONTRACTUAL, pl.NO_PLANTILLA, pl.NO_ARCHIVO FROM RHTC_PLANTILLA_PUESTO p, RHTC_PLANTILLA_CONTRACTUAL pl WHERE p.ID_DIRECCION ='"+id_dir.trim()+"' AND p.ID_DEPARTAMENTO ='0' AND p.ID_AREA ='0' AND p.ID_SECCION ='0' AND p.ID_PUESTO ='0'AND pl.ID_PLANTILLA_CONTRACTUAL = p.ID_PLANTILLA_CONTRACTUAL AND p.ES_PLANTILLA_PUESTO ='1' UNION SELECT pl.ID_PLANTILLA_CONTRACTUAL, pl.NO_PLANTILLA, pl.NO_ARCHIVO FROM RHTC_PLANTILLA_PUESTO p, RHTC_PLANTILLA_CONTRACTUAL pl WHERE p.ID_DIRECCION ='0' AND p.ID_DEPARTAMENTO ='0' AND p.ID_AREA='0' AND p.ID_SECCION ='0' AND p.ID_PUESTO ='0' AND pl.ID_PLANTILLA_CONTRACTUAL = p.ID_PLANTILLA_CONTRACTUAL AND p.ES_PLANTILLA_PUESTO ='1'";
+            ResultSet rs = this.cnn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("ID_PLANTILLA_CONTRACTUAL"));
+                rec.put("nom_pl", rs.getString("NO_PLANTILLA"));
+                rec.put("nom_ar", rs.getString("NO_ARCHIVO"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
     }
 
 }
