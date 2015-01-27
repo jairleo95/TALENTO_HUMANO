@@ -42,7 +42,125 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
     @Override
     public List<X_List_De_Autorizacion> List_Detalle_Autorizacion(String iddgp, String idrp) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select  pu.NO_PUESTO,du.NO_USUARIO,a.co_pasos,a.DE_PASOS,a.es_autorizacion,a.fe_creacion,a.id_autorizacion,a.id_departamento,a.id_detalle_pasos,a.id_detalle_req_proceso,a.id_dgp,a.id_direccion,a.id_pasos,a.id_proceso,a.id_puesto,a.id_requerimiento,a.no_proceso,a.nu_pasos,a.us_creacion ,  dt.AP_PATERNO,dt.AP_MATERNO,dt.NO_TRABAJADOR,dgp.CA_SUELDO, du.AP_PATERNO as us_ap_p,du.AP_MATERNO as us_ap_mat ,du.NO_TRABAJADOR as  us_no_tr,du.NO_PUESTO as us_no_puesto,du.NO_AREA as us_no_area,du.NO_DEP as us_no_dep   from ( select a.id_detalle_req_proceso,a.id_dgp, a.id_pasos,d.id_proceso,d.id_detalle_pasos , d.DE_PASOS,d.NU_PASOS,d.CO_PASOS , d.no_proceso ,d.id_puesto,d.id_direccion,d.id_departamento , d.id_requerimiento ,a.id_autorizacion,a.fe_creacion,a.es_autorizacion,a.us_creacion from ( select * from rhvd_req_paso_pu where id_detalle_req_proceso='" + idrp.trim() + "') d left outer join rhtv_autorizacion a on ( a.id_pasos=d.id_pasos and a.id_dgp='" + iddgp.trim() + "' and d.id_pasos=a.id_pasos and d.id_puesto=a.id_puesto) ) a ,rhtm_dgp dgp , rhtm_trabajador dt , rhvd_usuario du ,rhvd_puesto_direccion pu where dgp.id_dgp=a.id_dgp and dt.id_trabajador = dgp.id_trabajador and du.id_usuario=a.us_creacion  and dgp.id_puesto=pu.id_puesto order by a.id_pasos asc";
+        String sql = "SELECT f.co_pasos, " +
+"  f.de_pasos, " +
+"  s.es_autorizacion, " +
+"  s.fe_creacion, " +
+"  s.id_autorizacion, " +
+"  s.id_departamento, " +
+"  s.id_detalle_pasos, " +
+"  s.id_detalle_req_proceso, " +
+"  s.id_dgp, " +
+"  s.id_direccion, " +
+"  s.id_pasos, " +
+"  s.id_proceso, " +
+"  s.id_puesto, " +
+"  s.id_requerimiento, " +
+"  s.no_proceso, " +
+"  s.nu_pasos, " +
+"  s.us_creacion, " +
+"  s.ap_paterno, " +
+"  s.ap_materno, " +
+"  s.no_trabajador, " +
+"  s.ca_sueldo, " +
+"  s.us_ap_p, " +
+"  s.us_ap_mat, " +
+"  s.us_no_tr, " +
+"  s.us_no_area, " +
+"  s.us_no_puesto, " +
+"  s.us_no_dep, " +
+"  s.no_puesto, " +
+"  s.no_usuario " +
+"FROM " +
+"  (SELECT p.id_pasos, " +
+"    p.id_proceso, " +
+"    rp.id_detalle_req_proceso, " +
+"    p.de_pasos, " +
+"    p.nu_pasos, " +
+"    p.co_pasos, " +
+"    pro.no_proceso, " +
+"    rp.id_direccion, " +
+"    rp.id_departamento, " +
+"    rp.id_requerimiento " +
+"  FROM rhtc_pasos p , " +
+"    rhtv_proceso pro, " +
+"    rhtr_detalle_req_proceso rp " +
+"  WHERE pro.id_proceso = p.id_proceso " +
+"  AND rp.id_proceso    = pro.id_proceso " +
+"  AND rp.ES_REQ_PROCESO='1' " +
+"  AND p.ES_PASOS       ='1' " +
+"  ) f " +
+"LEFT OUTER JOIN " +
+"  (SELECT pu.NO_PUESTO, " +
+"    du.NO_USUARIO, " +
+"    a.co_pasos, " +
+"    a.DE_PASOS, " +
+"    a.es_autorizacion, " +
+"    a.fe_creacion, " +
+"    a.id_autorizacion, " +
+"    a.id_departamento, " +
+"    a.id_detalle_pasos, " +
+"    a.id_detalle_req_proceso, " +
+"    a.id_dgp, " +
+"    a.id_direccion, " +
+"    a.id_pasos, " +
+"    a.id_proceso, " +
+"    a.id_puesto, " +
+"    a.id_requerimiento, " +
+"    a.no_proceso, " +
+"    a.nu_pasos, " +
+"    a.us_creacion , " +
+"    dt.AP_PATERNO, " +
+"    dt.AP_MATERNO, " +
+"    dt.NO_TRABAJADOR, " +
+"    dgp.CA_SUELDO, " +
+"    du.AP_PATERNO    AS us_ap_p, " +
+"    du.AP_MATERNO    AS us_ap_mat , " +
+"    du.NO_TRABAJADOR AS us_no_tr, " +
+"    du.NO_PUESTO     AS us_no_puesto, " +
+"    du.NO_AREA       AS us_no_area, " +
+"    du.NO_DEP        AS us_no_dep " +
+"  FROM " +
+"    (SELECT a.id_detalle_req_proceso, " +
+"      a.id_dgp, " +
+"      a.id_pasos, " +
+"      d.id_proceso, " +
+"      d.id_detalle_pasos , " +
+"      d.DE_PASOS, " +
+"      d.NU_PASOS, " +
+"      d.CO_PASOS , " +
+"      d.no_proceso , " +
+"      d.id_puesto, " +
+"      d.id_direccion, " +
+"      d.id_departamento , " +
+"      d.id_requerimiento , " +
+"      a.id_autorizacion, " +
+"      a.fe_creacion, " +
+"      a.es_autorizacion, " +
+"      a.us_creacion " +
+"    FROM " +
+"      (SELECT * FROM rhvd_req_paso_pu " +
+"      ) d " +
+"    LEFT OUTER JOIN rhtv_autorizacion a " +
+"    ON ( a.id_pasos             =d.id_pasos " +
+"    AND d.id_pasos              =a.id_pasos " +
+"    AND d.id_puesto             =a.id_puesto " +
+"    AND d.id_detalle_req_proceso=a.id_detalle_req_proceso) " +
+"    ) a , " +
+"    rhtm_dgp dgp , " +
+"    rhtm_trabajador dt , " +
+"    rhvd_usuario du , " +
+"    rhvd_puesto_direccion pu " +
+"  WHERE dgp.id_dgp     =a.id_dgp " +
+"  AND dt.id_trabajador = dgp.id_trabajador " +
+"  AND du.id_usuario    =a.us_creacion " +
+"  AND dgp.id_puesto    =pu.id_puesto " +
+"  AND dgp.id_dgp       ='DGP-000270' " +
+"  ORDER BY a.id_pasos ASC " +
+"  ) s ON ( s.ID_DETALLE_REQ_PROCESO=f.ID_DETALLE_REQ_PROCESO " +
+"AND f.id_pasos                     =s.id_pasos ) " +
+"WHERE f.ID_DETALLE_REQ_PROCESO     ='DRP-000010'"
+;
         List<X_List_De_Autorizacion> list = new ArrayList<X_List_De_Autorizacion>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -74,10 +192,10 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 x.setUs_no_tr(rs.getString("us_no_tr"));
                 x.setUs_no_puesto(rs.getString("us_no_puesto"));
                 x.setUs_no_area(rs.getString("us_no_area"));
-                x.setUs_no_dep(rs.getString("us_no_dep"));
+              /*  x.setUs_no_dep(rs.getString("us_no_dep"));
                 x.setNo_puesto(rs.getString("no_puesto"));
-                x.setNo_usuario(rs.getString("NO_USUARIO"));
-
+                x.setNo_usuario(rs.getString("NO_USUARIO"));*/
+        
                 list.add(x);
             }
 

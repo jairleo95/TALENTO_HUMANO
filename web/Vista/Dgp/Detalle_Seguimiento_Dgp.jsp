@@ -129,13 +129,22 @@
                                                 %>
                                                 <tr >
                                                     <td class="caji"><%=a.getNu_pasos()%></td>
-                                                    <td class="caji" ><% if (a.getEs_autorizacion().equals("1")) { %>
+                                                    <td class="caji" >
+                                                        <%
+                                                            if (a.getEs_autorizacion() != null) {
+
+                                                                if (a.getEs_autorizacion().equals("1")) { %>
+
                                                         <img src="../../imagenes/Aprobado.png" width="20" height="20">
                                                         <% }
+                                                            //if (true) {
                                                             if (a.getEs_autorizacion().equals("2")) {
                                                         %>
                                                         <img src="../../imagenes/Desaprobado.png" width="20" height="20">
-                                                        <% }%></td>
+                                                        <% }
+                                                        } else {%>
+                                                        No registrado
+                                                        <%}%></td>
                                                     <td ><%=a.getUs_ap_p().toUpperCase() + " " + a.getUs_ap_mat().toUpperCase() + " " + a.getUs_no_tr().toUpperCase()%></td> 
                                                     <td  ><%=a.getUs_no_puesto()%></td> 
                                                     <td  ><%=a.getNo_usuario()%></td> 
@@ -144,7 +153,10 @@
                                                     <td ><%=a.getDe_pasos()%></td> 
 
                                                     <%
-                                                        if (a.getEs_autorizacion().equals("2") & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005"))) {
+                                                        //if () {
+                                                        if (a.getEs_autorizacion() != null) {
+
+                                                            if (a.getEs_autorizacion().equals("2") & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005"))) {
 
                                                     %>
 
@@ -155,8 +167,9 @@
                                                 </p>
                                             </div>
 
-                                            <%}%>
-                                            <% }%>
+                                            <%}
+                                                    }
+                                                    }%>
 
                                             </tr> 
 
