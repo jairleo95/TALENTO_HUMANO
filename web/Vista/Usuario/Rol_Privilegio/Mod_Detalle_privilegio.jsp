@@ -1,3 +1,9 @@
+<%
+    HttpSession sesion = request.getSession();
+    String id_user = (String) sesion.getAttribute("IDUSER");
+    if (id_user != null) {
+        Usuario us = new Usuario();
+%>
 <%@page import="pe.edu.upeu.application.model.X_Detalle_Privilegio"%>
 <%@page import="pe.edu.upeu.application.model.Rol"%>
 <%@page import="pe.edu.upeu.application.model.Privilegio"%>
@@ -105,3 +111,7 @@
 </script>
 </html>
 <%@include file="List_Pri_Roles.jsp" %>
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+%>

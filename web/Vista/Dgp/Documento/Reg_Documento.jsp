@@ -1,3 +1,10 @@
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
+<%
+    HttpSession sesion = request.getSession();
+    String id_user = (String) sesion.getAttribute("IDUSER");
+    if (id_user != null) {
+        Usuario us = new Usuario();
+%>
 <%@page import="pe.edu.upeu.application.model.Datos_Hijo_Trabajador"%>
 <%@page import="pe.edu.upeu.application.model.Padre_Madre_Conyugue"%>
 <%@page import="pe.edu.upeu.application.model.V_Reg_Dgp_Tra"%>
@@ -62,10 +69,12 @@
     </head>
     <body class="">
         <%
-            HttpSession sesion = request.getSession(true);
-            String rol = (String) sesion.getAttribute("IDROL");
+            HttpSession sesion_1 = request.getSession(true);
+            String rol = (String) sesion_1.getAttribute("IDROL");
             int n_nac = Integer.parseInt(request.getParameter("n_nac"));
             int num_ad = Integer.parseInt(request.getParameter("num_ad"));
+            String id_ctr = "";
+            
             //String id_dgp = "";
         %>
         <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
@@ -154,7 +163,7 @@
                                                             <% } else { %>
                                                             <% if (d.getNo_archivo() == null) { %>
                                                             <label class="null">No Registrado</label>
-                                                            <% } else {%>
+                                                            <% } else {%>   
                                                             <a href="Ver_Doc.jsp?nom_doc=<%=d.getAr_dato_archivo()%>"><%=d.getNo_archivo()%></a>
 
                                                             <% }
@@ -447,11 +456,12 @@
                                                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
                                                 </tr>  
                                                 <input type="hidden" name="iddgp" value="<%=d.getIddgp()%>">
-                                                <input type="hidden" name="idctr" value="<%=request.getParameter("idctr")%>">
+                                                <input type="text" name="idctr" value="<%=request.getParameter("idctr")%>">
                                                 <input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>">
                                                 <% }
                                                         i++;
                                                         //id_dgp = d.getIddgp();
+                                                        
                                                     }%>
 
 
@@ -483,10 +493,11 @@
                                                 <a class="btn btn-success" href="../../../dgp?iddgp=<%=request.getParameter("iddgp")%>&idtr=<%=request.getParameter("idtr")%>&opc=rd"><i class="fa fa-check"></i> CONTINUAR</a>
                                                 <% }
                                                     }
-                                                    if(request.getParameter("sub") != null){
-                                                    if(request.getParameter("sub").equals("Doc_CE")){
+                                                    if(request.getParameter("dce") != null){
+                                                    if(request.getParameter("dce").equals("Doc_CE")){
+                                                        out.println("<input  type='hidden' value='CE' name='P2'/>");
                                                 %>
-                                                <a class="btn btn-success" href="../../../dgp?idctr=<%=request.getParameter("idctr")%>&idtr=<%=request.getParameter("idtr")%>&opc=rd"><i class="fa fa-check"></i> CONTINUAR</a>
+                                                <!--<a class="btn btn-success" href="../../../dgp?idctr=<%=request.getParameter("idctr")%>&idtr=<%=request.getParameter("idtr")%>&opc=rd"><i class="fa fa-check"></i> CONTINUAR</a>-->
                                                 <%}
                                                     }%>
 
@@ -1051,3 +1062,7 @@
         </script>
     </body>
 </html>
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+%>

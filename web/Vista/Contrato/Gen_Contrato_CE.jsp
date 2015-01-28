@@ -1,4 +1,10 @@
-
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
+<%
+    HttpSession sesion = request.getSession();
+    String id_user = (String) sesion.getAttribute("IDUSER");
+    if (id_user != null) {
+        Usuario us = new Usuario();
+%>
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
 <jsp:useBean id="ListarTrabajador2" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
@@ -17,7 +23,7 @@
             <center><h1 class="spacing" style="font-weight: bold;">
                     BUSCAR TRABAJADOR
                     <%
-                HttpSession sesion = request.getSession(true);
+                HttpSession sesion_1 = request.getSession(true);
                 String text = request.getParameter("text");
                 String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
 
@@ -123,3 +129,10 @@
 
 </body>
 </html>
+
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+
+
+%>

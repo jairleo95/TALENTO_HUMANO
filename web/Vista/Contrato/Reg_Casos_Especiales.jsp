@@ -1,3 +1,11 @@
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
+<%
+    HttpSession sesion = request.getSession();
+    String id_user = (String) sesion.getAttribute("IDUSER");
+    if (id_user != null) {
+        Usuario us = new Usuario();
+%>
+
 <%-- 
     Document   : Reg_Casos_Especiales
     Created on : 21/01/2015, 09:46:47 AM
@@ -2084,4 +2092,7 @@
         });
     </script>
 </html>
-
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+%>
