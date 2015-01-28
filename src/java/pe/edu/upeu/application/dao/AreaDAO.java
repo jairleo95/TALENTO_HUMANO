@@ -84,8 +84,8 @@ public class AreaDAO implements InterfaceAreaDAO {
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
-                rec.put("id", rs.getString("id_area"));
-                rec.put("nom", rs.getString("no_area"));
+                rec.put("id", rs.getString("ID_AREA"));
+                rec.put("nom", rs.getString("NO_AREA"));
                 lista.add(rec);
             }
             rs.close();

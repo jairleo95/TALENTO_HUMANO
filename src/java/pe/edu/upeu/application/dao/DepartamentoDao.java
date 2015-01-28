@@ -78,11 +78,11 @@ public class DepartamentoDao implements InterfaceDepartamentoDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT ID_DEPARTAMENTO FROM RHTD_AREA WHERE ID_AREA=(SELECT ID_AREA FROM RHTR_SECCION where ID_SECCION=(SELECT ID_SECCION from RHTR_PUESTO where ID_PUESTO='" + id_pu.trim() + "'))";
+            String sql = "SELECT ID_DEPARTAMENTO FROM RHVD_PUESTO_DIRECCION where ID_PUESTO='"+id_pu.trim()+"'";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
-                rec.put("id", rs.getString("id_departamento"));
+                rec.put("id", rs.getString("ID_DEPARTAMENTO"));
                 lista.add(rec);
             }
             rs.close();
@@ -105,12 +105,12 @@ public class DepartamentoDao implements InterfaceDepartamentoDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select * from rhtx_departamento where id_direccion ='" + id + "'";
+            String sql = "SELECT ID_DEPARTAMENTO, NO_DEP FROM RHVD_PUESTO_DIRECCION WHERE ID_DIRECCION='"+id+"' GROUP BY ID_DEPARTAMENTO, NO_DEP";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
-                rec.put("id", rs.getString("id_departamento"));
-                rec.put("nombre", rs.getString("no_dep"));
+                rec.put("id", rs.getString("ID_DEPARTAMENTO"));
+                rec.put("nombre", rs.getString("NO_DEP"));
                 lista.add(rec);
             }
             rs.close();
