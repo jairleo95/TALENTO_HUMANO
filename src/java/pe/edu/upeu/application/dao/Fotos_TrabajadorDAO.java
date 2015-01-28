@@ -49,9 +49,16 @@ public class Fotos_TrabajadorDAO implements InterfaceFotos_TrabajadorDAO {
             cst.setString(6, TI_AR_FOTO);
             cst.setString(7, ID_TRABAJADOR);
             cst.execute();
-        } catch (SQLException ex) {
+        } catch (SQLException e) {  
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
         } finally {
-            this.cnn.close();
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+                 throw new RuntimeException(e.getMessage());
+            }
         }
     }
 

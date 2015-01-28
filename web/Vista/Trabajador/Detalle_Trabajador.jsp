@@ -188,7 +188,17 @@
 
                 <%                    if (t.getNo_ar_foto() == null) {
                 %>
-                <tr><td class="td2" ><a class="btn btn-primary" href="../Usuario/Subir_Foto.jsp?idtr=<%=idtr%>" style="position: relative; margin: 0px; " >Subir foto</a><img style=" border: 3px solid grey ; position:relative;  margin: 0px; " src="../../imagenes/avatar_default.jpg"  width="100"  height="100"> </td>
+                <tr><td class="td2" >
+                       <!-- <a class="btn btn-primary" href="../Usuario/Subir_Foto.jsp?idtr=<%=idtr%>" style="position: relative; margin: 0px; " >Subir foto</a>-->
+                        <img style=" border: 3px solid grey ; position:relative;  margin: 0px; cursor: pointer"  class="ver_foto"  src="../../imagenes/avatar_default.jpg"  width="100"  height="100"> 
+                        <form action="../../foto" method="POST" enctype="multipart/form-data" class="form-subir-foto">
+
+                            <input type="hidden" name="idtr" class="idtr" id="input-file" value="<%=t.getId_trabajador()%>">
+                            <input style="display:none" class="file-foto" type="file" name="archivo" required="">
+
+
+                        </form>
+                    </td>
 
                     <%
                     } else {%>
@@ -801,6 +811,57 @@
 
                     });
 
+        </script>
+        <script type="text/javascript" language="javascript">
+            $('.ver_foto').click(function () {
+                $(".file-foto").click();
+
+            });
+            $(window).load(function () {
+
+                $(function () {
+                    $('.file-foto').change(function (e) {
+
+                        if (this.files[0].size <= 500000) {
+                            var jForm = new FormData();
+
+                            jForm.append("idtr", $('.idtr').val());
+                            jForm.append("archivo", $('.file-foto').get(0).files[0]);
+                            $.ajax({
+                                type: "POST",
+                                url: "../../foto",
+                                cache: false,
+                                processData: false,
+                                contentType: false,
+                                data: jForm
+                            }).done(function (f) {
+                                $(".mensaje").text(f);
+                            });
+                            addImage(e);
+                           // alert("Archivo permitido");
+                        } else {
+                            alert("Archivo no permitido, su tamaño debe ser menor a 500 KB");
+                            $(this).val('');
+                        }
+
+
+                    });
+                    function addImage(e) {
+                        var file = e.target.files[0],
+                                imageType = /image.*/;
+
+                        if (!file.type.match(imageType))
+                            return;
+                        var reader = new FileReader();
+                        reader.onload = fileOnload;
+                        reader.readAsDataURL(file);
+                    }
+                    function fileOnload(e) {
+                        var result = e.target.result;
+                        $('.ver_foto').attr("src", result);
+                    }
+                });
+            });
         </script>
         <%}%>
     </body>

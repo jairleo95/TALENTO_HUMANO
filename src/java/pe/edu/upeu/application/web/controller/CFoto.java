@@ -106,16 +106,16 @@ public class CFoto extends HttpServlet {
 
             foto.INSERT_FOTOS_TRABAJADOR(null, null, nombre_archivo, no_original, no_original, String.valueOf(sizeInBytes), idtr);
 
-            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-            Thread.sleep(2000);
+            //getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            //Thread.sleep(2000);
            // response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr);
-            /*  out.println("Archivo subido correctamente");
+            // out.println("Archivo subido correctamente");
              out.println(no_original);
              out.println(nombre_archivo);
-             out.println(sizeInBytes);*/
+             out.println(sizeInBytes);
         } catch (Exception e) {
             out.print(e.getMessage());
-            out.print(ubicacion);
+            //out.print(ubicacion);
         } 
     }
 

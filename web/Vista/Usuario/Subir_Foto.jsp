@@ -21,26 +21,42 @@
     </head>
     <body>
     <center>
-        <form action="../../foto" method="get" enctype="multipart/form-data" class="form-subir-foto">
+        <form action="../../foto" method="POST" enctype="multipart/form-data" class="form-subir-foto">
             <table>
-                <input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>">
-                <tr><td>Abrir Imagen:</td><td><input style="display: none" class="file-foto" type="file" name="archivo" required=""></td></tr>
+                <input type="hidden" name="idtr" class="idtr" id="input-file" value="<%=request.getParameter("idtr")%>">
+                <tr><td>Abrir Imagen:</td><td><input style="display: " class="file-foto" type="file" name="archivo" required=""></td></tr>
                 <tr><td><input type="submit" value="Subir"></td><td><input type="reset"></td></tr>
             </table>
         </form>    
     </center>
     <img src="Fotos/122629_TRB-000811_IMAGEN6.PNG.png" class="ver_foto" style='cursor: pointer'/>
+    <label class="mensaje"></label>
 </body>
 <script type="text/javascript" language="javascript">
     $('.ver_foto').click(function () {
         $(".file-foto").click();
-        alert($(".form-subir-foto").serialize());
+
     });
     $(window).load(function () {
 
         $(function () {
             $('.file-foto').change(function (e) {
+
                 if (this.files[0].size <= 500000) {
+                    var jForm = new FormData();
+
+                    jForm.append("idtr", $('.idtr').val());
+                    jForm.append("archivo", $('.file-foto').get(0).files[0]);
+                    $.ajax({
+                        type: "POST",
+                        url: "../../foto",
+                        cache: false,
+                        processData: false,
+                        contentType: false,
+                        data: jForm
+                    }).done(function (f) {
+                        $(".mensaje").text(f);
+                    });
                     addImage(e);
                     alert("Archivo permitido");
                 } else {
@@ -50,19 +66,16 @@
 
 
             });
-
             function addImage(e) {
                 var file = e.target.files[0],
                         imageType = /image.*/;
 
                 if (!file.type.match(imageType))
                     return;
-
                 var reader = new FileReader();
                 reader.onload = fileOnload;
                 reader.readAsDataURL(file);
             }
-
             function fileOnload(e) {
                 var result = e.target.result;
                 $('.ver_foto').attr("src", result);
