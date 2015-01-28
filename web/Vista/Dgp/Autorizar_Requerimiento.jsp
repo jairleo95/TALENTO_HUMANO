@@ -187,6 +187,7 @@
                                                         <%if (idrol.trim().equals("ROL-0006")) {
 
                                                         %>
+                                                    <th data-class="expand" ><strong>¿Contrato Elaborado?</strong></th>
                                                     <th data-class="expand" ><strong>¿Firmo Contrato?</strong></th>
                                                     <th data-class="expand" ><strong>Enviar a Rem.</strong></th>
                                                         <%}
@@ -288,8 +289,28 @@
                                             <%if (idrol.trim().equals("ROL-0006")) {
 
                                             %>
-                                            <td ><%=a.getElab_contrato()%></td> 
-                                            <td ><%=a.getVal_firm_contrato()%></td> 
+
+                                            <td ><%                                                if (Integer.parseInt(a.getElab_contrato()) == 0) {
+                                                    out.println("No");
+                                                } else {
+                                                    out.println("Si");
+                                                }
+                                                %></td> 
+                                            <td ><%                                                if (Integer.parseInt(a.getVal_firm_contrato()) == 0) {
+                                                    out.println("No");
+                                                } else {
+                                                    out.println("Si");
+                                                }
+                                                %></td>
+                                            <td><%
+                                                if (Integer.parseInt(a.getVal_firm_contrato()) != 0 & Integer.parseInt(a.getElab_contrato()) != 0) {
+out.println("Enviar");
+                                                }else{
+                                                    out.println("¡Falta Procesar!");
+                                                }
+
+                                                %></td>
+
                                             <%}%>
 
 

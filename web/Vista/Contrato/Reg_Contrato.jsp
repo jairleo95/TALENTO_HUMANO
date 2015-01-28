@@ -634,7 +634,7 @@
                                 </section>
                                 <section class="col col-3">
                                     <label class="select" id="titulo">Plantilla de Contrato:
-                                        <select name="FILIAL" class="input-group-sm" required="">
+                                        <select name="FILIAL" class="input-group-sm" >
                                             <option value="">[SELECCIONE]</option>
                                         </select>
                                     </label>
