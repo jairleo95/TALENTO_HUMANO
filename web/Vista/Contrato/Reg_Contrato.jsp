@@ -651,7 +651,10 @@
 
 
 
-
+                        <input type="hidden" value="<%=d.getId_departamento()%>" class="dep_pu">
+                        <input type="hidden" value="<%=d.getId_area()%>" class="area_pu">
+                        <input type="hidden" value="<%=d.getId_direccion()%>" class="dir_pu">
+                        <input type="hidden" value="<%=d.getId_seccion()%>" class="sec_pu">
                         <footer>
 
                             <input type="hidden" name="opc"   value="REGISTRAR CONTRATO">
@@ -764,7 +767,7 @@
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-            $(document).ready(function() {
+            $(document).ready(function () {
 
                 pageSetUp();
 
@@ -863,7 +866,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -932,7 +935,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -984,7 +987,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1023,15 +1026,15 @@
                         }
                     },
                     // Ajax form submition
-                    submitHandler: function(form) {
+                    submitHandler: function (form) {
                         $(form).ajaxSubmit({
-                            success: function() {
+                            success: function () {
                                 $("#comment-form").addClass('submited');
                             }
                         });
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1065,15 +1068,15 @@
                         }
                     },
                     // Ajax form submition
-                    submitHandler: function(form) {
+                    submitHandler: function (form) {
                         $(form).ajaxSubmit({
-                            success: function() {
+                            success: function () {
                                 $("#contact-form").addClass('submited');
                             }
                         });
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1102,7 +1105,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1147,7 +1150,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1157,7 +1160,7 @@
                     dateFormat: 'dd.mm.yy',
                     prevText: '<i class="fa fa-chevron-left"></i>',
                     nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function(selectedDate) {
+                    onSelect: function (selectedDate) {
                         $('#finishdate').datepicker('option', 'minDate', selectedDate);
                     }
                 });
@@ -1166,7 +1169,7 @@
                     dateFormat: 'dd.mm.yy',
                     prevText: '<i class="fa fa-chevron-left"></i>',
                     nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function(selectedDate) {
+                    onSelect: function (selectedDate) {
                         $('#startdate').datepicker('option', 'maxDate', selectedDate);
                     }
                 });
@@ -1183,7 +1186,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function() {
+            (function () {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
@@ -1196,83 +1199,54 @@
     </body>
     <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
     <script>
-            function Seleccionar_dep() {
-                var lbl = $(".sec_dep");
-                $.post("../../Direccion_Puesto", "opc=select_dep&" + "id_pu=" + $(".pu_id_se").val(), function(objJson) {
-                    var lista = objJson.lista;
-                    for (var i = 0; i < lista.length; i++) {
-                        lbl.append('<input type="hidden" class="id_dep_con" value="' + lista[i].id + '">');
-                    }
 
-                });
-            }
-            function selec_area() {
-                var lbl = $(".sec_are");
-                $.post("../../Direccion_Puesto", "opc=selec_are&" + "id_pu=" + $(".pu_id_se").val(), function(objJson) {
-                    var lista = objJson.lista;
-                    for (var i = 0; i < lista.length; i++) {
-                        lbl.append('<input type="hidden" class="id_are_con" id="id_are_con" value="' + lista[i].id + '">');
-                    }
-
-                });
-            }
             function Listar_dep() {
                 var s = $(".selec_dep");
-
-                $.post("../../Direccion_Puesto", "opc=Listar&" + "id_dir=" + $(".select_dir").val(), function(objJson) {
+                $.post("../../Direccion_Puesto", "opc=Listar&" + "id_dir=" + $(".dir_pu").val(), function (objJson) {
                     s.empty();
                     var lista = objJson.lista;
                     s.append("<option value='' > [SELECCIONE] </option>");
                     for (var j = 0; j < lista.length; j++) {
-                        if ($(".id_dep_con").val() == lista[j].id) {
+                        if ($(".dep_pu").val() == lista[j].id) {
                             s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nombre + "</option>");
+
                         } else {
                             s.append("<option value='" + lista[j].id + "'> " + lista[j].nombre + "</option>");
                         }
                     }
-                    selec_area();
-                    Listar_area();
+
+
                 });
             }
             function Listar_area() {
                 var s = $(".Selec_Area");
 
-                $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function(objJson) {
+                $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $(".dep_pu").val(), function (objJson) {
                     s.empty();
                     var lista = objJson.lista;
                     s.append("<option value='' > [SELECCIONE] </option>");
                     for (var j = 0; j < lista.length; j++) {
 
-                        if ($(".id_are_con").val() == lista[j].id) {
+                        if ($(".area_pu").val() == lista[j].id) {
                             s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nom + "</option>");
                         } else {
                             s.append("<option value='" + lista[j].id + "'> " + lista[j].nom + "</option>");
                         }
                     }
-                    selec_sec();
-                    Listar_sec();
-                });
-            }
-            function selec_sec() {
-                var lbl = $(".sec_sec");
-                $.post("../../Direccion_Puesto", "opc=selec_sec&" + "id_pu=" + $(".pu_id_se").val(), function(objJson) {
-                    var lista = objJson.lista;
-                    for (var i = 0; i < lista.length; i++) {
-                        lbl.append('<input type="hidden" class="id_sec_con" id="id_secc_con" value="' + lista[i].id + '">');
-                    }
 
                 });
             }
+
             function Listar_sec() {
-                var s = $(".select_sec");
+                var s = $("#select_sec");
 
-                $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function(objJson) {
+                $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $(".area_pu").val(), function (objJson) {
                     s.empty();
                     var lista = objJson.lista;
                     s.append("<option value='' > [SELECCIONE] </option>");
                     for (var j = 0; j < lista.length; j++) {
 
-                        if ($("#id_secc_con").val() == lista[j].id) {
+                        if ($(".sec_pu").val() == lista[j].id) {
                             s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nom + "</option>");
                         } else {
                             s.append("<option value='" + lista[j].id + "'> " + lista[j].nom + "</option>");
@@ -1280,10 +1254,12 @@
                     }
                 });
             }
-            $(document).ready(function() {
+            $(document).ready(function () {
                 Listar_centro_costo();
-                Seleccionar_dep();
+
                 Listar_dep();
+                Listar_sec();
+                Listar_area();
 
 
                 var a = $("#select-sub-mod");
@@ -1293,10 +1269,10 @@
                 var e = $("#pu_id_se");
                 // $.post("../../  ")
                 $("#select_mod").change(
-                        function() {
+                        function () {
                             // alert("?MODALIDAD="+$("#select_mod").val());
 
-                            $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function(objJson) {
+                            $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function (objJson) {
                                 a.empty();
                                 var list = objJson.lista;
                                 a.append("<option value='' > [SELECCIONE] </option>");
@@ -1308,8 +1284,8 @@
                             });
                         });
                 $("#selec_dep").change(
-                        function() {
-                            $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function(objJson) {
+                        function () {
+                            $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function (objJson) {
                                 c.empty();
                                 if (objJson.rpta == -1) {
                                     alert(objJson.mensaje);
@@ -1327,8 +1303,8 @@
                             });
                         });
                 $("#select_dir").change(
-                        function() {
-                            $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $("#select_dir").val(), function(objJson) {
+                        function () {
+                            $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $("#select_dir").val(), function (objJson) {
                                 b.empty();
                                 if (objJson.rpta == -1) {
                                     alert(objJson.mensaje);
@@ -1346,8 +1322,8 @@
                             });
                         });
                 $("#Selec_Area").change(
-                        function() {
-                            $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function(objJson) {
+                        function () {
+                            $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function (objJson) {
                                 d.empty();
 
                                 var list = objJson.lista;
@@ -1362,8 +1338,8 @@
                             });
                         });
                 $("#select_sec").change(
-                        function() {
-                            $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function(objJson) {
+                        function () {
+                            $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function (objJson) {
                                 e.empty();
                                 if (objJson.rpta == -1) {
                                     alert(objJson.mensaje);
@@ -1382,9 +1358,9 @@
                             });
                         });
                 $("#btn-registrar").click(
-                        function() {
+                        function () {
                             var pr = $("#select-proceso").val();
-                            $.post("../../paso", $("#form-paso").serialize(), function() {
+                            $.post("../../paso", $("#form-paso").serialize(), function () {
                                 Listar_Paso(pr);
                             });
                             $("#btn-registrar").val("Registrar Paso");
@@ -1400,7 +1376,7 @@
 
                 function Listar_centro_costo() {
                     var x = $("#fila-agregar");
-                    $.post("../../centro_costo", "opc=Listar_centro_id&" + "id_dgp=" + $("#id_dgp").val(), function(objJson) {
+                    $.post("../../centro_costo", "opc=Listar_centro_id&" + "id_dgp=" + $("#id_dgp").val(), function (objJson) {
                         var lista = objJson.lista;
                         var numero = 1;
                         x.append('<div  class="row centro-costo_' + numero + '" >');
