@@ -140,6 +140,7 @@
             </div>
             <%
             } else {%>
+            <a class="btn btn-primary" href="../../contrato?opc=Subir_Contrato" >Subir Contrato Firmado</a>
             <div>
                 <table class="table table-hover table-striped  table-responsive" style="border-radius: 30px ">
                     <tr><td><select name="ida" class="anno" >
@@ -161,15 +162,15 @@
                         <td><input type="hidden" name="opc" value="actualizar" ></td></tr><button type="submit"  style="display:none" class="btn_act"   >Actualizar</button>
                 </table>
             </div>
-            <script>$(document).ready(function() {
-                    $(".anno").change(function() {
+            <script>$(document).ready(function () {
+                    $(".anno").change(function () {
                         $(".btn_act").click();
 
                     });
                 });</script>
         </form>
 
-                       
+
         <div>
             <form action="">
                 <%
@@ -412,10 +413,10 @@
                    <tr><td>Pares:</td><td><? echo $list_rhc[$index][36];?> </td></tr>   
                      <tr><td>Apoyo:</td><td><? echo $list_rhc[$index][41];*/?> </td></tr>   -->
 
-                
-                    
 
-                     <tr><%if (n.getUs_modif() != null && n.getFe_modif() != null) {%>
+
+
+                    <tr><%if (n.getUs_modif() != null && n.getFe_modif() != null) {%>
                         <td class="text-info table-bordered"><strong>Modificado por:</strong></td>
                         <td><%for (int f = 0; f < List_Usuario.size(); f++) {
                                 Usuario u = new Usuario();
@@ -424,7 +425,8 @@
                                     out.println(u.getNo_usuario());%>
                             <%}%>
                         </td>
-                        <%}}else{%>
+                        <%}
+                        } else {%>
                         <% if (n.getUs_creacion() != null && n.getFe_creacion() != null) {%>
                         <td class="text-danger text-info text-center "><strong>Creado por:</strong></td>
                         <%if (n.getUs_creacion() != null) {
@@ -443,12 +445,12 @@
                     <tr></tr>
 
                     <%}%>
-                    
-                    
-                    
-                    
-                    
-                    
+
+
+
+
+
+
                 </table>
             </form>
             <div>
@@ -491,16 +493,16 @@
 
         <%}
             }
-%>
+        %>
     </center>
     <%}%>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".Contenido").hide();
-            $(".PLANTI").click(function() {
+            $(".PLANTI").click(function () {
                 var t = $(".tbodys");
                 // alert($(".id_pu").val());
-                $.post("../../plantilla_contractual", "opc=List_planti&" + "id_pu=" + $(".id_pu").val(), function(objJson) {
+                $.post("../../plantilla_contractual", "opc=List_planti&" + "id_pu=" + $(".id_pu").val(), function (objJson) {
                     $(".Contenido").show();
                     t.empty();
                     var lista = objJson.lista;
@@ -520,7 +522,7 @@
 
                 });
             });
-            $(".formu").submit(function() {
+            $(".formu").submit(function () {
                  var radio = $("input[type='radio']:checked").length;
                 if (radio == "") {
                     $('.error2').text("Seleccione un radio button");

@@ -111,6 +111,10 @@
         <servlet-name>CPlantilla_Contractual</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CPlantilla_Contractual</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CContrato_Archivo_Adjunto</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CContrato_Archivo_Adjunto</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
         <url-pattern>/trabajador</url-pattern>
@@ -218,6 +222,10 @@
     <servlet-mapping>
         <servlet-name>CPlantilla_Contractual</servlet-name>
         <url-pattern>/plantilla_contractual</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CContrato_Archivo_Adjunto</servlet-name>
+        <url-pattern>/contrato_adjunto</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>300</session-timeout>
