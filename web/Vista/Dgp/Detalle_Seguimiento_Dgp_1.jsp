@@ -3,7 +3,6 @@
     HttpSession sesion_1 = request.getSession();
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
     if (id_user_1 != null) {
-        Usuario us = new Usuario();
 %>
 <jsp:useBean class="java.util.ArrayList" id="Det_Autorizacion" scope="application" />
 <%@page import="pe.edu.upeu.application.model.X_List_De_Autorizacion"%>

@@ -1,8 +1,7 @@
 <%
-    HttpSession sesion_1 = request.getSession();
-    String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
-    if (id_user_1 != null) {
-        Usuario us = new Usuario();
+    HttpSession sesion = request.getSession();
+    String id_user = (String) sesion.getAttribute("IDUSER");
+    if (id_user != null) {
 %>
 
 <%@page import="pe.edu.upeu.application.model.Usuario"%>

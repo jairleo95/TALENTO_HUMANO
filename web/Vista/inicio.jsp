@@ -3,7 +3,6 @@
     HttpSession sesion_1 = request.getSession();
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
     if (id_user_1 != null) {
-        Usuario us = new Usuario();
 %>
 <%-- 
     Document   : inicio
