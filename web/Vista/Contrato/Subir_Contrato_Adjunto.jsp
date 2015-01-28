@@ -283,9 +283,25 @@
                     myDropzone.removeAllFiles();
                 });
                 myDropzone.on("addedfile", function (file) {
-                    $.post("../../contrato_adjunto", "idc=" + $(".idc").val() + "&archivo=" + file.name, function (mensaje) {
-                        alert(mensaje);
+                    /* $.post("../../contrato_adjunto", "idc=" + $(".idc").val() + "&archivo=" + file.name, function (mensaje) {
+                     alert(mensaje);
+                     });*/
+
+                    var jForm = new FormData();
+
+                    jForm.append("idc", $('.idc').val());
+                    jForm.append("archivo", file);
+                    $.ajax({
+                        type: "POST",
+                        url: "../../contrato_adjunto",
+                        cache: false,
+                        processData: false,
+                        contentType: false,
+                        data: jForm
+                    }).done(function (f) {
+                        alert(f);
                     });
+
 
                 });
 
