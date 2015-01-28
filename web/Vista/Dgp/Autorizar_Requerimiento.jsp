@@ -6,7 +6,6 @@
 %>
 <%@page import="pe.edu.upeu.application.dao.DgpDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceDgpDAO"%>
-<a href="Busc_Req_Autorizado.jsp"></a>
 <%@page import="pe.edu.upeu.application.model.V_Autorizar_Dgp"%>
 <jsp:useBean id="List_id_Autorizacion" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
@@ -14,8 +13,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <title>Autorizacion</title>
-
-
         <link rel="stylesheet" href="../../css/bootstrap.min.css">
         <meta name="description" content="">
         <meta name="author" content="">
