@@ -71,7 +71,7 @@
         <link rel="apple-touch-startup-image" href="../../HTML_version/img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../HTML_version/img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../HTML_version/img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-        
+
         <style type="text/css">
             body{
 
@@ -168,8 +168,8 @@
             String iddrp = request.getParameter("drp");
             String id_pasos = request.getParameter("pas");
             String nropaso = request.getParameter("np");
-            int val_aps = Integer.parseInt(request.getParameter("val_aps"));
-//if ($_REQUEST["CR"]=1){ %>
+
+        %>
         <script type="text/javascript">
             // alerta_dt_ingresados();
         </script>
@@ -180,11 +180,9 @@
             <table  style="background-color: white " class="table-det" cellpadding="0">
 
 
-                <%
-
-                    if (t.getNo_ar_foto() == null) {
+                <%                    if (t.getNo_ar_foto() == null) {
                 %>
-                <tr><td class="td2" ><a class="btn btn-header" href="../Usuario/Subir_Foto.jsp?idtr=<%=idtr%>" style="position: relative; margin: 0px; " >Subir foto</a><img style=" border: 3px solid grey ; position:relative;  margin: 0px; " src="../../imagenes/avatar_default.jpg"  width="100"  height="100"> </td>
+                <tr><td class="td2" ><a class="btn btn-primary" href="../Usuario/Subir_Foto.jsp?idtr=<%=idtr%>" style="position: relative; margin: 0px; " >Subir foto</a><img style=" border: 3px solid grey ; position:relative;  margin: 0px; " src="../../imagenes/avatar_default.jpg"  width="100"  height="100"> </td>
 
                     <%
                     } else {%>
@@ -213,6 +211,7 @@
                                             Empleado emp = new Empleado();
                                             emp = (Empleado) id_empleadox_ide.get(e);
                                             if (ID_ROL.trim().equals("ROL-0009")) {
+                                                int val_aps = Integer.parseInt(request.getParameter("val_aps"));
                                                 if (val_aps > 0) {%>
 
                                     <td>
@@ -394,6 +393,7 @@
                 } else {
 
                     if (idrol.trim().equals("ROL-0009")) {
+                        int val_aps = Integer.parseInt(request.getParameter("val_aps"));
                         if (val_aps > 0) {
 
                 %>
@@ -454,7 +454,7 @@
         <script src="../../js/JQuery/jQuery.js"></script>
         <script src="../../js/Js_dlmenu/jquery.dlmenu.js"></script>
         <script>
-            $(function() {
+            $(function () {
                 $('#dl-menu').dlmenu({
                     animationClasses: {classin: 'dl-animate-in-2', classout: 'dl-animate-out-2'}
                 });
@@ -523,8 +523,8 @@
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-            $(document).ready(function() {
-                
+            $(document).ready(function () {
+
                 pageSetUp();
                 $("#cod_ap").numeric();
                 /*
@@ -549,7 +549,7 @@
                 /*
                  * Smart Notifications
                  */
-                $('#eg1').click(function(e) {
+                $('#eg1').click(function (e) {
 
                     $.bigBox({
                         title: "Big Information box",
@@ -565,7 +565,7 @@
 
                 })
 
-                $('#eg2').click(function(e) {
+                $('#eg2').click(function (e) {
 
                     $.bigBox({
                         title: "Big Information box",
@@ -579,7 +579,7 @@
                     e.preventDefault();
                 })
 
-                $('#eg3').click(function(e) {
+                $('#eg3').click(function (e) {
 
                     $.bigBox({
                         title: "Shield is up and running!",
@@ -594,7 +594,7 @@
 
                 })
 
-                $('#eg4').click(function(e) {
+                $('#eg4').click(function (e) {
 
                     $.bigBox({
                         title: "Success Message Example",
@@ -603,7 +603,7 @@
                         //timeout: 8000,
                         icon: "fa fa-check",
                         number: "4"
-                    }, function() {
+                    }, function () {
                         closedthis();
                     });
 
@@ -613,7 +613,7 @@
 
 
 
-                $('#eg5').click(function() {
+                $('#eg5').click(function () {
 
                     $.smallBox({
                         title: "Ding Dong!",
@@ -627,7 +627,7 @@
 
 
 
-                $('#eg6').click(function() {
+                $('#eg6').click(function () {
 
                     $.smallBox({
                         title: "Big Information box",
@@ -639,7 +639,7 @@
 
                 })
 
-                $('#eg7').click(function() {
+                $('#eg7').click(function () {
 
                     $.smallBox({
                         title: "James Simmons liked your comment",
@@ -665,12 +665,12 @@
                  * SmartAlerts
                  */
                 // With Callback
-                $("#smart-mod-eg1").click(function(e) {
+                $("#smart-mod-eg1").click(function (e) {
                     $.SmartMessageBox({
                         title: "Smart Alert!",
                         content: "This is a confirmation box. Can be programmed for button callback",
                         buttons: '[No][Yes]'
-                    }, function(ButtonPressed) {
+                    }, function (ButtonPressed) {
                         if (ButtonPressed === "Yes") {
 
                             $.smallBox({
@@ -695,7 +695,7 @@
                     e.preventDefault();
                 })
                 // With Input
-                $("#smart-mod-eg2").click(function(e) {
+                $("#smart-mod-eg2").click(function (e) {
 
                     $.SmartMessageBox({
                         title: "Smart Alert: Input",
@@ -703,14 +703,14 @@
                         buttons: "[Accept]",
                         input: "text",
                         placeholder: "Enter your user name"
-                    }, function(ButtonPress, Value) {
+                    }, function (ButtonPress, Value) {
                         alert(ButtonPress + " " + Value);
                     });
 
                     e.preventDefault();
                 })
                 // With Buttons
-                $("#smart-mod-eg3").click(function(e) {
+                $("#smart-mod-eg3").click(function (e) {
 
                     $.SmartMessageBox({
                         title: "Smart Notification: Buttons",
@@ -721,7 +721,7 @@
                     e.preventDefault();
                 })
                 // With Select
-                $("#smart-mod-eg4").click(function(e) {
+                $("#smart-mod-eg4").click(function (e) {
 
                     $.SmartMessageBox({
                         title: "Smart Alert: Select",
@@ -729,7 +729,7 @@
                         buttons: "[Done]",
                         input: "select",
                         options: "[Costa Rica][United States][Autralia][Spain]"
-                    }, function(ButtonPress, Value) {
+                    }, function (ButtonPress, Value) {
                         alert(ButtonPress + " " + Value);
                     });
 
@@ -737,7 +737,7 @@
                 });
 
                 // With Login
-                $("#smart-mod-eg5").click(function(e) {
+                $("#smart-mod-eg5").click(function (e) {
 
                     $.SmartMessageBox({
                         title: "Login form",
@@ -745,7 +745,7 @@
                         buttons: "[Cancel][Accept]",
                         input: "text",
                         placeholder: "Enter your user name"
-                    }, function(ButtonPress, Value) {
+                    }, function (ButtonPress, Value) {
                         if (ButtonPress == "Cancel") {
                             alert("Why did you cancel that? :(");
                             return 0;
@@ -759,7 +759,7 @@
                             buttons: "[Login]",
                             input: "password",
                             placeholder: "Password"
-                        }, function(ButtonPress, Value) {
+                        }, function (ButtonPress, Value) {
                             alert("Username: " + ValueOriginal + " and your password is: " + Value);
                         });
                     });
@@ -778,7 +778,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function() {
+            (function () {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
@@ -790,9 +790,9 @@
         </script>
         <script type="text/javascript">
             $(document).ready(
-                    function() {
-                        
-                        
+                    function () {
+
+
                     });
 
         </script>

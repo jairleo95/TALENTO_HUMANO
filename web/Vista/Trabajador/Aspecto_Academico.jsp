@@ -36,7 +36,7 @@
                 <tr><td class="text-info">Otros Estudios:</td><td><%if(trb.getCm_otros_estudios()==null){out.print("NINGUNA");}else{out.print(trb.getCm_otros_estudios());}%></td></tr>
                 <tr><td  class="text-info">Correo Institucional:</td><td><%=trb.getDi_correo_inst()%></td></tr>
                 <%}%>
-                <tr><td colspan="2"><input class=""  type="submit" value="Editar"></td></tr>
+               <!-- <tr><td colspan="2"><input class=""  type="submit" value="Editar"></td></tr>-->
             </table>
         </form>
 

@@ -144,7 +144,7 @@
                         %></td></tr>
                 <tr><td class="text-info">Nombres y Apellidos:</td><td><%if(trb.getNo_ap_autoridad()==null){out.print("SIN REGISTRAR");}else{out.print(trb.getNo_ap_autoridad());}%></td></tr>
                 <tr><td class="text-info">Telefono/Celular:</td><td><%if(trb.getCl_autoridad()==null){out.print("SIN REGISTRAR");}else{out.print(trb.getCl_autoridad());}%></td></tr>
-                <td colspan="2"><input class="btn btn-success"  type="submit" value="Editar"></td>
+               <!-- <td colspan="2"><input class="btn btn-success"  type="submit" value="Editar"></td>-->
                     <%}%>
                 <tr></tr>
             </table>
