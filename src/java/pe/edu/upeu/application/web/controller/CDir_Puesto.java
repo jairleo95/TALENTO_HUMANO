@@ -48,7 +48,7 @@ public class CDir_Puesto extends HttpServlet {
     InterfaceSeccionDAO sec = new SeccionDAO();
     InterfacePuestoDAO p = new PuestoDAO();
     InterfaceDireccionDAO dir = new DireccionDAO();
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
@@ -78,6 +78,7 @@ public class CDir_Puesto extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
+
             if (opc.equals("Listar_dir")) {
                 String id_dep = request.getParameter("id_dep");
                 List<Map<String, ?>> lista = are.List_area_id_json(id_dep);

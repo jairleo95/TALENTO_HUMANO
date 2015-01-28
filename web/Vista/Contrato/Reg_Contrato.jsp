@@ -223,9 +223,9 @@
                                             <option value="">[SELECCIONE]</option>
                                         </select>  </label>
                                 </section>
-                                <section class="col col-3" id="titulo">
+                                <section class="sec_sec col col-3" id="titulo">
                                     <label class="select" id="titulo">Sección:
-                                        <select name="SECCION_ID" class="input-group-sm" id="select_sec">
+                                        <select name="SECCION_ID" class="select_sec input-group-sm" id="select_sec">
                                             <option value="">[SELECCIONE]</option>
                                         </select>  </label>
                                 </section>
@@ -1211,7 +1211,7 @@
                 $.post("../../Direccion_Puesto", "opc=selec_are&" + "id_pu=" + $(".pu_id_se").val(), function(objJson) {
                     var lista = objJson.lista;
                     for (var i = 0; i < lista.length; i++) {
-                        lbl.append('<input type="hidden" class="id_are_con" value="' + lista[i].id + '">');
+                        lbl.append('<input type="hidden" class="id_are_con" id="id_are_con" value="' + lista[i].id + '">');
                     }
 
                 });
@@ -1230,18 +1230,49 @@
                             s.append("<option value='" + lista[j].id + "'> " + lista[j].nombre + "</option>");
                         }
                     }
+                    selec_area();
+                    Listar_area();
                 });
             }
             function Listar_area() {
                 var s = $(".Selec_Area");
 
-                $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $(".selec_dep").val(), function(objJson) {
+                $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function(objJson) {
                     s.empty();
                     var lista = objJson.lista;
-                    alert(lista.length);
                     s.append("<option value='' > [SELECCIONE] </option>");
                     for (var j = 0; j < lista.length; j++) {
+
                         if ($(".id_are_con").val() == lista[j].id) {
+                            s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nom + "</option>");
+                        } else {
+                            s.append("<option value='" + lista[j].id + "'> " + lista[j].nom + "</option>");
+                        }
+                    }
+                    selec_sec();
+                    Listar_sec();
+                });
+            }
+            function selec_sec() {
+                var lbl = $(".sec_sec");
+                $.post("../../Direccion_Puesto", "opc=selec_sec&" + "id_pu=" + $(".pu_id_se").val(), function(objJson) {
+                    var lista = objJson.lista;
+                    for (var i = 0; i < lista.length; i++) {
+                        lbl.append('<input type="hidden" class="id_sec_con" id="id_secc_con" value="' + lista[i].id + '">');
+                    }
+
+                });
+            }
+            function Listar_sec() {
+                var s = $(".select_sec");
+
+                $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function(objJson) {
+                    s.empty();
+                    var lista = objJson.lista;
+                    s.append("<option value='' > [SELECCIONE] </option>");
+                    for (var j = 0; j < lista.length; j++) {
+
+                        if ($("#id_secc_con").val() == lista[j].id) {
                             s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nom + "</option>");
                         } else {
                             s.append("<option value='" + lista[j].id + "'> " + lista[j].nom + "</option>");
@@ -1253,9 +1284,8 @@
                 Listar_centro_costo();
                 Seleccionar_dep();
                 Listar_dep();
-                selec_area();
-                Listar_area();
-                
+
+
                 var a = $("#select-sub-mod");
                 var c = $("#Selec_Area");
                 var d = $("#select_sec");
