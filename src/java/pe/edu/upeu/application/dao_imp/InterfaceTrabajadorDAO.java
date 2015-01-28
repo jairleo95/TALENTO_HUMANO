@@ -33,4 +33,6 @@ public interface InterfaceTrabajadorDAO {
     public void UPDATE_ID_CONYUGUE(String id_conyugue, String id_trabajador);
     
     public String tipo_planilla(String id_trabajador);
+    
+    public void INSERT_HIST_RELIGION(String ID_HIST_INFO_REL, String LI_RELIGION, String NO_IGLESIA, String DE_CARGO, String LI_AUTORIDAD, String NO_AP_AUTORIDAD,String CL_AUTORIDAD, String ES_HIST_INFO_REL, String ID_TRABAJADOR);
 }

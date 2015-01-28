@@ -3,7 +3,6 @@
     HttpSession sesion = request.getSession();
     String id_user = (String) sesion.getAttribute("IDUSER");
     if (id_user != null) {
-        Usuario us = new Usuario();
 %>
 <%@page import="pe.edu.upeu.application.model.V_Horario"%>
 <%@page import="pe.edu.upeu.application.model.Detalle_Horario"%>

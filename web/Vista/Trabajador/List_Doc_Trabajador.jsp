@@ -3,7 +3,6 @@
     HttpSession sesion_1 = request.getSession();
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
     if (id_user_1 != null) {
-        Usuario us = new Usuario();
 %>
 <%@page import="pe.edu.upeu.application.model.V_Documento_Trabajador"%>
 <jsp:useBean id="List_Id_Doc_Trab" scope="application" class="java.util.ArrayList"/>
