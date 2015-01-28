@@ -24,6 +24,8 @@ public interface InterfacePuestoDAO {
 
     public List<Puesto> List_Puesto();
 
+    public String List_Puesto_x_iddgp(String id_dgp);
+
     public List<V_Puesto_Direccion> List_Puesto_Dep(String id_departamento);
 
     public List<V_Puesto_Direccion> List_Det_Puesto();
@@ -31,8 +33,8 @@ public interface InterfacePuestoDAO {
     public List<Puesto> List_Id_Puesto(String id_puesto);
 
     public boolean Modif_Puesto(String id_puesto, String no_puesto, String no_corto_pu, String es_puesto, String id_seccion, String co_grupo);
-    
+
     public List<Map<String, ?>> Listar_Puesto_id(String id);
-    
-    public List<Map<String,?>> List_puesto();
+
+    public List<Map<String, ?>> List_puesto();
 }

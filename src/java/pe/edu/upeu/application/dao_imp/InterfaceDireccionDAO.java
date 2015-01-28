@@ -19,6 +19,7 @@ public interface InterfaceDireccionDAO {
 
     /**
      * direccion del organigrama de la universidad
+     * @return 
      */
     public List<Direccion> Listar_Direccion();
        public List<Map<String, ?>> List_Direccion();

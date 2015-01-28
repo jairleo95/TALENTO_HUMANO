@@ -106,7 +106,7 @@ public class CContrato extends HttpServlet {
         if (opc.equals("enviar")) {
             String iddgp = request.getParameter("iddgp");
             String idtr = request.getParameter("idtr");
-
+            String id_dir = puesto.List_Puesto_x_iddgp(iddgp);
             getServletContext().setAttribute("List_Anno", a.List_Anno());
             getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(iddgp));
             getServletContext().setAttribute("List_Puesto", puesto.List_Puesto());
@@ -120,8 +120,8 @@ public class CContrato extends HttpServlet {
             //getServletContext().setAttribute("Listar_Direccion", dir.Listar_Direccion());
             getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
             int num = dht.ASIGNACION_F(idtr);
-            // out.println(num);
-            response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp?num=" + num);
+            out.print(id_dir);
+            response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp?num=" + num+"&id_direc="+id_dir);
         }
         if (opc.equals("Detalle_Contractual")) {
             String idtr = request.getParameter("idtr");

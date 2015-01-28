@@ -353,7 +353,7 @@ public class CDgp extends HttpServlet {
                 if (num == 0 & idrol.trim().equals("ROL-0006") & dgp.LIST_ID_DGP(ID_DGP).get(0).getEs_dgp().equals("0")) {
 
                     String iddgp = request.getParameter("iddgp");
-
+                    String id_dir = puesto.List_Puesto_x_iddgp(iddgp);
                     getServletContext().setAttribute("List_Anno", anno.List_Anno());
                     getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(iddgp));
                     getServletContext().setAttribute("List_Puesto", puesto.List_Puesto());
@@ -367,8 +367,8 @@ public class CDgp extends HttpServlet {
                     //getServletContext().setAttribute("Listar_Direccion", dir.Listar_Direccion());
                     getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
                     int asig = dht.ASIGNACION_F(ID_TRABAJADOR);
-                    // out.println(num);
-                    response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp?num=" + asig);
+                     //out.println(id_dir);
+                    response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp?num=" + asig+"&id_direc="+id_dir);
 
                 } else if (num == 0 & idrol.trim().equals("ROL-0006") & dgp.LIST_ID_DGP(ID_DGP).get(0).getEs_dgp().equals("1")) {
                     String ida1 = anno.List_Anno_Max_Cont(idtr);

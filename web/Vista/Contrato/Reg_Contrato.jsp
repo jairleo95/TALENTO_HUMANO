@@ -165,8 +165,8 @@
                                                     for (int e = 0; e < List_anno_max.size(); e++) {
                                                         Anno w = new Anno();
                                                         w = (Anno) List_anno_max.get(e);
-                                                        %>
-                                                        <%if (a.getId_anno().trim().equals(w.getId_anno())) {%>
+                                            %>
+                                            <%if (a.getId_anno().trim().equals(w.getId_anno())) {%>
                                             <option value="<%=a.getId_anno()%>" selected="selected"><%=a.getNo_anno()%></option>
                                             <%} else {%>
                                             <option value="<%=a.getId_anno()%>"><%=a.getNo_anno()%></option>
@@ -188,28 +188,32 @@
                                 </section>
                                 <section class="col col-3" id="titulo">
                                     <label class="select" id="titulo">Dirección:
-                                        <select name="DIRECCION" class="input-group-sm" id="select_dir">
+                                        <select name="DIRECCION" class="select_dir input-group-sm" id="select_dir">
 
 
                                             <option value="">[SELECCIONE]</option>
                                             <%for (int g = 0; g < Listar_Direccion.size(); g++) {
                                                     Direccion di = new Direccion();
                                                     di = (Direccion) Listar_Direccion.get(g);
+                                                    String id_direc = request.getParameter("id_direc");
+                                                    if (id_direc.trim().equals(di.getId_direccion().trim())) {
                                             %>
+                                            <option value="<%=di.getId_direccion()%>" selected=""><%=di.getNo_direccion()%></option>
+                                            <%} else {%>
                                             <option value="<%=di.getId_direccion()%>"><%=di.getNo_direccion()%></option>
-
-                                            <%}%>
+                                            <%}
+                                                }%>
                                         </select>  </label>
                                 </section>
-                                <section class="col col-3" id="titulo">
+                                <section class="sec_dep col col-3" id="titulo">
                                     <label class="select" id="titulo">Departamento:
-                                        <select name="DEPARTAMENTO_ID" class="input-group-sm" id="selec_dep">
+                                        <select name="DEPARTAMENTO_ID" class="selec_dep input-group-sm"  id="selec_dep">
                                             <option value="">[SELECCIONE]</option>
                                         </select>  </label>
                                 </section>
-                                <section class="col col-3" id="titulo">
+                                <section class="sec_are col col-3" id="titulo">
                                     <label class="select" id="titulo">Area:
-                                        <select name="AREA_ID" class="input-group-sm" id="Selec_Area">
+                                        <select name="AREA_ID" class="Selec_Area input-group-sm" id="Selec_Area">
                                             <option value="">[SELECCIONE]</option>
                                         </select>  </label>
                                 </section>
@@ -221,7 +225,7 @@
                                 </section>
                                 <section class="col col-3" id="titulo">
                                     <label class="select" id="titulo">Puesto:
-                                        <select name="PUESTO_ID" required="" class="input-group-sm" id="pu_id_se">
+                                        <select name="PUESTO_ID" required="" class="pu_id_se input-group-sm" id="pu_id_se">
                                             <%  for (int j = 0; j < List_Puesto.size(); j++) {%>
                                             <%Puesto p = new Puesto();
                                                 p = (Puesto) List_Puesto.get(j);
@@ -622,6 +626,13 @@
                                         <input type="text" name="MYPE" value="N"  maxlength="2" class="input-group-sm" required="">
                                     </label>
                                 </section>
+                                <section class="col col-3">
+                                    <label class="select" id="titulo">Plantilla de Contrato:
+                                        <select name="FILIAL" class="input-group-sm" required="">
+                                            <option value="">[SELECCIONE]</option>
+                                        </select>
+                                    </label>
+                                </section>
                             </div>
                             <input type="hidden" name="ENTREGAR_DOC_REGLAMENTOS"  value="0" class="text-box" >
                             <input type="hidden" name="REGISTRO_HUELLA"  value="0" class="text-box" > 
@@ -747,7 +758,7 @@
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-            $(document).ready(function () {
+            $(document).ready(function() {
 
                 pageSetUp();
 
@@ -846,7 +857,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -915,7 +926,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -967,7 +978,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1006,15 +1017,15 @@
                         }
                     },
                     // Ajax form submition
-                    submitHandler: function (form) {
+                    submitHandler: function(form) {
                         $(form).ajaxSubmit({
-                            success: function () {
+                            success: function() {
                                 $("#comment-form").addClass('submited');
                             }
                         });
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1048,15 +1059,15 @@
                         }
                     },
                     // Ajax form submition
-                    submitHandler: function (form) {
+                    submitHandler: function(form) {
                         $(form).ajaxSubmit({
-                            success: function () {
+                            success: function() {
                                 $("#contact-form").addClass('submited');
                             }
                         });
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1085,7 +1096,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1130,7 +1141,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1140,7 +1151,7 @@
                     dateFormat: 'dd.mm.yy',
                     prevText: '<i class="fa fa-chevron-left"></i>',
                     nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function (selectedDate) {
+                    onSelect: function(selectedDate) {
                         $('#finishdate').datepicker('option', 'minDate', selectedDate);
                     }
                 });
@@ -1149,7 +1160,7 @@
                     dateFormat: 'dd.mm.yy',
                     prevText: '<i class="fa fa-chevron-left"></i>',
                     nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function (selectedDate) {
+                    onSelect: function(selectedDate) {
                         $('#startdate').datepicker('option', 'maxDate', selectedDate);
                     }
                 });
@@ -1166,7 +1177,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function () {
+            (function() {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
@@ -1179,9 +1190,66 @@
     </body>
     <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
     <script>
-            $(document).ready(function () {
-                Listar_dep();
+            function Seleccionar_dep() {
+                var lbl = $(".sec_dep");
+                $.post("../../Direccion_Puesto", "opc=select_dep&" + "id_pu=" + $(".pu_id_se").val(), function(objJson) {
+                    var lista = objJson.lista;
+                    for (var i = 0; i < lista.length; i++) {
+                        lbl.append('<input type="hidden" class="id_dep_con" value="' + lista[i].id + '">');
+                    }
+
+                });
+            }
+            function selec_area() {
+                var lbl = $(".sec_are");
+                $.post("../../Direccion_Puesto", "opc=selec_are&" + "id_pu=" + $(".pu_id_se").val(), function(objJson) {
+                    var lista = objJson.lista;
+                    for (var i = 0; i < lista.length; i++) {
+                        lbl.append('<input type="hidden" class="id_are_con" value="' + lista[i].id + '">');
+                    }
+
+                });
+            }
+            function Listar_dep() {
+                var s = $(".selec_dep");
+
+                $.post("../../Direccion_Puesto", "opc=Listar&" + "id_dir=" + $(".select_dir").val(), function(objJson) {
+                    s.empty();
+                    var lista = objJson.lista;
+                    s.append("<option value='' > [SELECCIONE] </option>");
+                    for (var j = 0; j < lista.length; j++) {
+                        if ($(".id_dep_con").val() == lista[j].id) {
+                            s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nombre + "</option>");
+                        } else {
+                            s.append("<option value='" + lista[j].id + "'> " + lista[j].nombre + "</option>");
+                        }
+                    }
+                });
+            }
+            function Listar_area() {
+                var s = $(".Selec_Area");
+
+                $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $(".selec_dep").val(), function(objJson) {
+                    s.empty();
+                    var lista = objJson.lista;
+                    alert(lista.length);
+                    s.append("<option value='' > [SELECCIONE] </option>");
+                    for (var j = 0; j < lista.length; j++) {
+                        if ($(".id_are_con").val() == lista[j].id) {
+                            s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nom + "</option>");
+                        } else {
+                            s.append("<option value='" + lista[j].id + "'> " + lista[j].nom + "</option>");
+                        }
+                    }
+                });
+            }
+            $(document).ready(function() {
                 Listar_centro_costo();
+                Seleccionar_dep();
+                Listar_dep();
+                selec_area();
+                Listar_area();
+                
                 var a = $("#select-sub-mod");
                 var c = $("#Selec_Area");
                 var d = $("#select_sec");
@@ -1189,10 +1257,10 @@
                 var e = $("#pu_id_se");
                 // $.post("../../  ")
                 $("#select_mod").change(
-                        function () {
+                        function() {
                             // alert("?MODALIDAD="+$("#select_mod").val());
 
-                            $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function (objJson) {
+                            $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function(objJson) {
                                 a.empty();
                                 var list = objJson.lista;
                                 a.append("<option value='' > [SELECCIONE] </option>");
@@ -1204,10 +1272,10 @@
                             });
                         });
                 $("#selec_dep").change(
-                        function () {
-                            $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function (objJson) {
+                        function() {
+                            $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function(objJson) {
                                 c.empty();
-                                  if (objJson.rpta == -1) {
+                                if (objJson.rpta == -1) {
                                     alert(objJson.mensaje);
                                     return;
                                 }
@@ -1223,8 +1291,8 @@
                             });
                         });
                 $("#select_dir").change(
-                        function () {
-                            $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $("#select_dir").val(), function (objJson) {
+                        function() {
+                            $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $("#select_dir").val(), function(objJson) {
                                 b.empty();
                                 if (objJson.rpta == -1) {
                                     alert(objJson.mensaje);
@@ -1242,8 +1310,8 @@
                             });
                         });
                 $("#Selec_Area").change(
-                        function () {
-                            $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function (objJson) {
+                        function() {
+                            $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function(objJson) {
                                 d.empty();
 
                                 var list = objJson.lista;
@@ -1258,10 +1326,10 @@
                             });
                         });
                 $("#select_sec").change(
-                        function () {
-                            $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function (objJson) {
+                        function() {
+                            $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function(objJson) {
                                 e.empty();
-                                  if (objJson.rpta == -1) {
+                                if (objJson.rpta == -1) {
                                     alert(objJson.mensaje);
                                     return;
                                 }
@@ -1278,9 +1346,9 @@
                             });
                         });
                 $("#btn-registrar").click(
-                        function () {
+                        function() {
                             var pr = $("#select-proceso").val();
-                            $.post("../../paso", $("#form-paso").serialize(), function () {
+                            $.post("../../paso", $("#form-paso").serialize(), function() {
                                 Listar_Paso(pr);
                             });
                             $("#btn-registrar").val("Registrar Paso");
@@ -1290,21 +1358,13 @@
                             return false;
                         }
                 );
-                function Listar_dep() {
-                    var s = $("#selec_dep");
 
-                    $.post("../../Direccion_Puesto", "opc=Listar", function (objJson) {
-                        s.empty();
-                        var lista = objJson.lista;
-                        s.append("<option value='' > [SELECCIONE] </option>");
-                        for (var j = 0; j < lista.length; j++) {
-                            s.append("<option value='" + lista[j].id + "' > " + lista[j].nom + "</option>");
-                        }
-                    });
-                }
+
+
+
                 function Listar_centro_costo() {
                     var x = $("#fila-agregar");
-                    $.post("../../centro_costo", "opc=Listar_centro_id&" + "id_dgp=" + $("#id_dgp").val(), function (objJson) {
+                    $.post("../../centro_costo", "opc=Listar_centro_id&" + "id_dgp=" + $("#id_dgp").val(), function(objJson) {
                         var lista = objJson.lista;
                         var numero = 1;
                         x.append('<div  class="row centro-costo_' + numero + '" >');
@@ -1321,6 +1381,7 @@
                     });
 
                 }
+
 
             });
     </script>

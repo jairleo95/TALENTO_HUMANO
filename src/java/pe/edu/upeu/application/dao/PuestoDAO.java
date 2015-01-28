@@ -210,12 +210,30 @@ public class PuestoDAO implements InterfacePuestoDAO {
             throw new RuntimeException("Error al cargar la lista de puestos");
         } finally {
             try {
-                this.conn.close();
+                this.conn.close();  
             } catch (Exception e) {
                 throw new RuntimeException(e.getMessage());
             }
         }
         return lista;
+    }
+
+    @Override
+    public String List_Puesto_x_iddgp(String id_dgp) {
+
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT v.ID_DIRECCION FROM RHVD_PUESTO_DIRECCION v where v.ID_PUESTO=(SELECT d.ID_PUESTO FROM RHTM_DGP d where d.id_dgp='"+id_dgp.trim()+"')";
+        String Maxdgp = null;
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Maxdgp = rs.getString(1);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return Maxdgp;
     }
     
 

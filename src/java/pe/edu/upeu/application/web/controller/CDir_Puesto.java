@@ -48,7 +48,7 @@ public class CDir_Puesto extends HttpServlet {
     InterfaceSeccionDAO sec = new SeccionDAO();
     InterfacePuestoDAO p = new PuestoDAO();
     InterfaceDireccionDAO dir = new DireccionDAO();
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
@@ -58,7 +58,15 @@ public class CDir_Puesto extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             if (opc.equals("Listar")) {
-                List<Map<String, ?>> lista = dep.List_departamento_2();
+                String id_dir = request.getParameter("id_dir");
+                List<Map<String, ?>> lista = dep.Listar_dep_id(id_dir);
+                //List<Map<String, ?>> lista2 = dep.dep_id(id_pu);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+                //rpta.put("lista2", lista2);
+            }
+            if (opc.equals("Listar_Dir")) {
+                List<Map<String, ?>> lista = dir.List_Direccion();
                 //List<Map<String, ?>> lista2 = dep.dep_id(id_pu);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
@@ -117,7 +125,13 @@ public class CDir_Puesto extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
-
+            /* seleccion de id por puestos para reg_contratos*/
+            if (opc.endsWith("select_dep")) {
+                String id_pu = request.getParameter("id_pu");
+                List<Map<String, ?>> lista = dep.dep_id(id_pu);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());
