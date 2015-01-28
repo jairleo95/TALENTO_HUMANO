@@ -14,30 +14,53 @@
     </head>
     <body>
     <center>
-        <form action="../../foto" method="post" enctype="multipart/form-data" class="form-subir-foto">
+        <form action="../../foto" method="get" enctype="multipart/form-data" class="form-subir-foto">
             <table>
-                <!-- <tr><td>Trabajador:</td><td> <input type="text" name="IDDATOS_TRABAJADOR"></td></tr>-->
                 <input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>">
-                <tr><td>Abrir Imagen:</td><td><input class="file-foto" type="file" name="archivo" required=""></td></tr>
-                <!---<tr><td>Descripción:</td><td><input type="text" name="lob_description"></td></tr>-->
+                <tr><td>Abrir Imagen:</td><td><input style="display: none" class="file-foto" type="file" name="archivo" required=""></td></tr>
                 <tr><td><input type="submit" value="Subir"></td><td><input type="reset"></td></tr>
             </table>
         </form>    
     </center>
     <img src="Fotos/122629_TRB-000811_IMAGEN6.PNG.png" class="ver_foto" style='cursor: pointer'/>
 </body>
-
-<script>
-    $('.file-foto').bind('change', function () {
-        if (this.files[0].size <= 500000) {
-            alert("Archivo permitido");
-        } else {
-            alert("Archivo no permitido, su tamaño debe ser menor a 500 KB");
-            $(this).val('');
-        }
-    });
+<script type="text/javascript" language="javascript">
     $('.ver_foto').click(function () {
-        alert();
+        $(".file-foto").click();
+        alert($(".form-subir-foto").serialize());
+    });
+    $(window).load(function () {
+
+        $(function () {
+            $('.file-foto').change(function (e) {
+                if (this.files[0].size <= 500000) {
+                    addImage(e);
+                    alert("Archivo permitido");
+                } else {
+                    alert("Archivo no permitido, su tamaño debe ser menor a 500 KB");
+                    $(this).val('');
+                }
+
+
+            });
+
+            function addImage(e) {
+                var file = e.target.files[0],
+                        imageType = /image.*/;
+
+                if (!file.type.match(imageType))
+                    return;
+
+                var reader = new FileReader();
+                reader.onload = fileOnload;
+                reader.readAsDataURL(file);
+            }
+
+            function fileOnload(e) {
+                var result = e.target.result;
+                $('.ver_foto').attr("src", result);
+            }
+        });
     });
 </script>
 </html>

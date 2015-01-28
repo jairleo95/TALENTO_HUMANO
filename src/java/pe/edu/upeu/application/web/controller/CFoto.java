@@ -116,9 +116,7 @@ public class CFoto extends HttpServlet {
         } catch (Exception e) {
             out.print(e.getMessage());
             out.print(ubicacion);
-        } finally {
-            out.close();
-        }
+        } 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
