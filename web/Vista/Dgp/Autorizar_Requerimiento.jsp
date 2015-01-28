@@ -184,9 +184,13 @@
                                                         <% if (dep.equals("DPT-0019")) {%>
                                                     <th  data-hide="phone,tablet">Fecha de Creación</th>  
                                                     <th data-class="expand" ><strong>¿Cumplio Plazos?</strong></th>
+                                                        <%if (idrol.trim().equals("ROL-0006")) {
+
+                                                        %>
                                                     <th data-class="expand" ><strong>¿Firmo Contrato?</strong></th>
                                                     <th data-class="expand" ><strong>Enviar a Rem.</strong></th>
-                                                        <%}%>
+                                                        <%}
+                                                            }%>
                                                 </tr>
                                             </thead>
                                             <tbody> 
@@ -281,7 +285,7 @@
                                             <a href="../../plazo_dgp?opc=Ver_detalle_plazo&iddgp=<%=a.getId_dgp()%>" class="label label-primary" rel="popover-hover" data-placement="top" data-original-title="Record de plazos cumplidos " data-content="<%=a.getVer_list_plazo()%>" data-html="true"> <strong>Cumplio plazos</strong></a></td>
 
                                             <%                                                                    }%>
-                                            <%if (idrol.equals("")) {
+                                            <%if (idrol.trim().equals("ROL-0006")) {
 
                                             %>
                                             <td ><%=a.getElab_contrato()%></td> 
