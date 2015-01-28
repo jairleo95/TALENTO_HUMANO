@@ -419,4 +419,26 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         }
         return id_pl;
     }
+
+
+    @Override
+    public void INSERT_HIST_RELIGION(String ID_HIST_INFO_REL, String LI_RELIGION, String NO_IGLESIA, String DE_CARGO, String LI_AUTORIDAD, String NO_AP_AUTORIDAD, String CL_AUTORIDAD, String ES_HIST_INFO_REL, String ID_TRABAJADOR ) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_HIST_INFO_REL( ?, ?, ?, ?, ?, ?, ?, ? ,?)} ");
+            cst.setString(1, null);
+            cst.setString(2, LI_RELIGION);
+            cst.setString(3, NO_IGLESIA);
+            cst.setString(4, DE_CARGO);
+            cst.setString(5, LI_AUTORIDAD);
+            cst.setString(6, NO_AP_AUTORIDAD);
+            cst.setString(7, CL_AUTORIDAD);
+            cst.setString(8, ES_HIST_INFO_REL);
+            cst.setString(9, ID_TRABAJADOR);
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        }
+    }
 }

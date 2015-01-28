@@ -1,3 +1,9 @@
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
+<%
+    HttpSession sesion_1 = request.getSession();
+    String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
+    if (id_user_1 != null) {
+%>
 <%@page import="pe.edu.upeu.application.model.V_Usuario"%>
 <%@page import="pe.edu.upeu.application.model.V_Var_Usuario"%>
 <jsp:useBean id="Lista_Usuarios" scope="application" class="java.util.ArrayList" />
@@ -745,3 +751,7 @@
     </body>
 
 </html>
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+%>

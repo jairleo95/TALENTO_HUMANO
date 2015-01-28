@@ -1,3 +1,10 @@
+
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
+<%
+    HttpSession sesion = request.getSession();
+    String id_user = (String) sesion.getAttribute("IDUSER");
+    if (id_user != null) {
+%>
 <%@page import="pe.edu.upeu.application.model.Tipo_Documento"%>
 <%@page import="pe.edu.upeu.application.model.Via"%>
 <%@page import="pe.edu.upeu.application.model.Zona"%>
@@ -8,9 +15,9 @@
 <%@page import="pe.edu.upeu.application.model.V_Ubigeo"%>
 <%@page import="pe.edu.upeu.application.model.Nacionalidad"%>
 <%
-    HttpSession sesion = request.getSession(true);
-    String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
-    String iduser = (String) sesion.getAttribute("IDUSER");
+    HttpSession sesion_1 = request.getSession(true);
+    String iddep = (String) sesion_1.getAttribute("DEPARTAMENTO_ID");
+    String iduser = (String) sesion_1.getAttribute("IDUSER");
 
 %>
 <jsp:useBean id="List_Nacionalidad" scope="application" class="java.util.ArrayList"/>
@@ -2381,3 +2388,9 @@
 </body>
 
 </html>
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+
+
+%>

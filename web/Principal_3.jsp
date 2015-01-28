@@ -1,12 +1,13 @@
-<%@page import="pe.edu.upeu.application.model.V_Privilegio"%>
-<%@page import="pe.edu.upeu.application.model.V_Usuario"%>
-<%@page import="pe.edu.upeu.application.model.Usuario"%>
+
 <%
     HttpSession sesion = request.getSession();
     String id_user = (String) sesion.getAttribute("IDUSER");
     if (id_user != null) {
         Usuario us = new Usuario();
 %>
+<%@page import="pe.edu.upeu.application.model.V_Privilegio"%>
+<%@page import="pe.edu.upeu.application.model.V_Usuario"%>
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
 <jsp:useBean id="listarURL" scope="application" class="java.util.ArrayList"/>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

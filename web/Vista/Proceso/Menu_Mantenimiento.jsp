@@ -1,3 +1,9 @@
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
+<%
+    HttpSession sesion_1 = request.getSession();
+    String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
+    if (id_user_1 != null) {
+%>
 <%-- 
     Document   : Mantenimiento_Proceso
     Created on : 14-nov-2014, 1:52:51
@@ -25,3 +31,7 @@
 
 </body>
 </html>
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+%>

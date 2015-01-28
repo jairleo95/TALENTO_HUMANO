@@ -1,3 +1,8 @@
+<%
+    HttpSession sesion = request.getSession();
+    String id_user = (String) sesion.getAttribute("IDUSER");
+    if (id_user != null) {
+%>
 <%@page import="pe.edu.upeu.application.model.Rol"%>
 <jsp:useBean id="Listar_Rol_id" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
@@ -39,3 +44,7 @@
     </body>
 </html>
 <%@include file="List_Roles.jsp" %>
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+%>

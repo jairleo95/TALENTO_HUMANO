@@ -1,3 +1,9 @@
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
+<%
+    HttpSession sesion = request.getSession();
+    String id_user = (String) sesion.getAttribute("IDUSER");
+    if (id_user != null) {
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -543,3 +549,7 @@
 </script>
 
 </html>
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+%>

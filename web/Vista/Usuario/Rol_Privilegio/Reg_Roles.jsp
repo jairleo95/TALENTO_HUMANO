@@ -1,3 +1,8 @@
+<%
+    HttpSession sesion = request.getSession();
+    String id_user = (String) sesion.getAttribute("IDUSER");
+    if (id_user != null) {
+%>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -22,3 +27,7 @@ and open the template in the editor.
 </body>
 </html>
 <%@include  file="List_Roles.jsp"%>
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+%>

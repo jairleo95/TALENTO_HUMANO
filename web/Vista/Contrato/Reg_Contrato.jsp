@@ -1,3 +1,9 @@
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
+<%
+    HttpSession sesion = request.getSession();
+    String id_user = (String) sesion.getAttribute("IDUSER");
+    if (id_user != null) {
+%>
 <%@page import="pe.edu.upeu.application.model.Grupo_Ocupaciones"%>
 <%@page import="pe.edu.upeu.application.model.Direccion"%>
 <%@page import="pe.edu.upeu.application.model.Centro_Costos"%>
@@ -66,7 +72,7 @@
         <link rel="apple-touch-startup-image" href="../../HTML_version/img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../HTML_version/img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../HTML_version/img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-        <% HttpSession sesion = request.getSession(true);
+        <% HttpSession sesion_1 = request.getSession(true);
             String iduser = (String) sesion.getAttribute("IDUSER");
             String id_rol = (String) session.getAttribute("IDROL");%>
         <link rel="stylesheet" type="text/css"  href="../../css/Css_Formulario/form.css">
@@ -1386,3 +1392,7 @@
             });
     </script>
 </html>
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+%>

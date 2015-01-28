@@ -1,3 +1,9 @@
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
+<%
+    HttpSession sesion_1 = request.getSession();
+    String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
+    if (id_user_1 != null) {
+%>
 <%-- 
     Document   : Reporte_emp_x_ti_con
     Created on : 12-ene-2015, 16:56:16
@@ -15,3 +21,7 @@
         <h1>Hello World!</h1>
     </body>
 </html>
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+%>

@@ -1,3 +1,9 @@
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
+<%
+    HttpSession sesion = request.getSession();
+    String id_user = (String) sesion.getAttribute("IDUSER");
+    if (id_user != null) {
+%>
 <%@page import="pe.edu.upeu.application.model.Datos_Hijo_Trabajador"%>
 <%@page import="pe.edu.upeu.application.model.Padre_Madre_Conyugue"%>
 <%@page import="pe.edu.upeu.application.model.V_Reg_Dgp_Tra"%>
@@ -66,8 +72,8 @@
     <body>
         <%
 
-            HttpSession sesion = request.getSession(true);
-            String rol = (String) sesion.getAttribute("IDROL");
+            HttpSession sesion_1 = request.getSession(true);
+            String rol = (String) sesion_1.getAttribute("IDROL");
             int n_nac = Integer.parseInt(request.getParameter("n_nac"));
             int num_ad = Integer.parseInt(request.getParameter("num_ad"));
             String id_dgp = "";
@@ -427,3 +433,7 @@
     </center>
 </body>
 </html>
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+%>

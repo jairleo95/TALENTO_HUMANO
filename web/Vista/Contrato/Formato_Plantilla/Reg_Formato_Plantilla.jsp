@@ -1,8 +1,16 @@
+
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
+<%
+    HttpSession sesion = request.getSession();
+    String id_user = (String) sesion.getAttribute("IDUSER");
+    if (id_user != null) {
+%>
 <!DOCTYPE html>
 <!--
 Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or http://ckeditor.com/license
 -->
+
 <html>
     <head>
         <meta charset="utf-8">
@@ -405,3 +413,10 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         <h3>ASIGNAR PLANTILLAS</h3>
     </body>
 </html>
+
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+
+
+%>

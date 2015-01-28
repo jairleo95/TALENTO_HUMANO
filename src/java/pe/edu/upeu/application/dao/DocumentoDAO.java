@@ -245,11 +245,11 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     }
 
     @Override
-    public void INSERT_DOCUMENTO_ADJUNTO(String ID_DOCUMENTO_ADJUNTO, String ID_DGP, String ID_DOCUMENTOS, String ES_DOCUMENTO_ADJUNTO, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String DE_DOCUMENTO_ADJUNTO, String AR_DATO_ARCHIVO, String NO_ARCHIVO, String TA_ARCHIVO, String AR_FILE_TYPE) {
+    public void INSERT_DOCUMENTO_ADJUNTO(String ID_DOCUMENTO_ADJUNTO, String ID_DGP, String ID_DOCUMENTOS, String ES_DOCUMENTO_ADJUNTO, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String DE_DOCUMENTO_ADJUNTO, String AR_DATO_ARCHIVO, String NO_ARCHIVO, String TA_ARCHIVO, String AR_FILE_TYPE, String ID_CONTRATO ) {
         ConexionBD conn;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DOCUMENTO_ADJUNTO( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DOCUMENTO_ADJUNTO( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
             cst.setString(1, null);
             cst.setString(2, ID_DGP);
             cst.setString(3, ID_DOCUMENTOS);
@@ -264,6 +264,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
             cst.setString(12, NO_ARCHIVO);
             cst.setString(13, TA_ARCHIVO);
             cst.setString(14, AR_FILE_TYPE);
+            cst.setString(15, ID_CONTRATO);
             cst.execute();
         } catch (SQLException ex) {
         } finally {

@@ -342,9 +342,9 @@ public class CContrato extends HttpServlet {
             Double CA_REINTEGRO = Double.parseDouble(request.getParameter("REINTEGRO"));
             Double CA_BONO_ALIMENTO = Double.parseDouble(request.getParameter("BONO_ALIMENTO"));
             Double CA_BEV = Double.parseDouble(request.getParameter("BEV"));
-           Double CA_SUELDO_TOTAL = Double.parseDouble(request.getParameter("TOTAL_SUELDO"));
+            Double CA_SUELDO_TOTAL = Double.parseDouble(request.getParameter("TOTAL_SUELDO"));
             String TI_HORA_PAGO = request.getParameter("TIPO_HORA_PAGO");
-           Double CA_ASIG_FAMILIAR = Double.parseDouble(request.getParameter("ASIG_FAMILIAR"));
+            Double CA_ASIG_FAMILIAR = Double.parseDouble(request.getParameter("ASIG_FAMILIAR"));
             String ES_TI_CONTRATACION = request.getParameter("TI_CONTRATACION");
             String CO_GR_OCUPACION = request.getParameter("CO_GRUPO_OCU");
             String FE_SUSCRIPCION = request.getParameter("FECHA_SUSCRIPCION");
@@ -457,7 +457,7 @@ public class CContrato extends HttpServlet {
             //out.print(i);
             String idctr = con.Contrato_max(ID_TRABAJADOR);
             //out.print(num_ad);
-            response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac="+i+"&num_ad="+num_ad+"&idtr="+ID_TRABAJADOR+"&idctr="+idctr);
+            response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac="+i+"&num_ad="+num_ad+"&idtr="+ID_TRABAJADOR+"&idctr="+idctr+"&dce=Doc_CE");
 
         }
 

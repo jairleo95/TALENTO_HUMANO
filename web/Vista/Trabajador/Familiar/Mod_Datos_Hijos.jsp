@@ -1,3 +1,8 @@
+<%
+    HttpSession sesion = request.getSession();
+    String id_user = (String) sesion.getAttribute("IDUSER");
+    if (id_user != null) {
+%>
 <%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="pe.edu.upeu.application.model.Datos_Hijo_Trabajador"%>
 
@@ -120,3 +125,7 @@
 </body>
 </html>
 <%@include  file="List_Hijo.jsp"%>
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+%>

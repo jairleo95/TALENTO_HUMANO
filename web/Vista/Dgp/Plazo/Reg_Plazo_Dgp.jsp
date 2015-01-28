@@ -1,3 +1,9 @@
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
+<%
+    HttpSession sesion = request.getSession();
+    String id_user = (String) sesion.getAttribute("IDUSER");
+    if (id_user != null) {
+%>
 <%-- 
 Document   : Reg_Plazo_Dgp
 Created on : 08-nov-2014, 15:58:07
@@ -178,3 +184,7 @@ Author     : JAIR
 
 </body>
 </html>
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+%>

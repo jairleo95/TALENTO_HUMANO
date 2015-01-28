@@ -1,4 +1,8 @@
-
+<%
+    HttpSession sesion = request.getSession();
+    String id_user = (String) sesion.getAttribute("IDUSER");
+    if (id_user != null) {
+%>
 <%@page import="pe.edu.upeu.application.model.Privilegio"%>
 <jsp:useBean id="List_Pri_Id" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
@@ -42,3 +46,7 @@
     </body>
 </html>
 <%@include file="List_Privilegios.jsp" %>
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+%>

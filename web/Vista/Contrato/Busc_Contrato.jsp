@@ -1,12 +1,20 @@
+
+<%
+    HttpSession sesion = request.getSession();
+    String id_user = (String) sesion.getAttribute("IDUSER");
+    if (id_user != null) {
+        
+%>
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%@page import="pe.edu.upeu.application.model.Requerimiento"%>
 <%@page import="pe.edu.upeu.application.model.Area"%>
 <jsp:useBean id="List_Area" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean class="java.util.ArrayList" scope="application"  id="Listar_Requerimiento"/>
 <%
-    HttpSession sesion = request.getSession(true);
-    String id_user = (String) sesion.getAttribute("IDUSER");
+    HttpSession sesion_1 = request.getSession(true);
+    String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
     String id_dep = (String) sesion.getAttribute("ID_DEPARTAMENTO");
-    if (id_user != "") {
+    if (id_user_1 != "") {
 %>
 <!DOCTYPE html>
 <html>
@@ -249,3 +257,9 @@
 
 </html>
 <%        }%>
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+
+
+%>

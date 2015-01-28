@@ -1,3 +1,9 @@
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
+<%
+    HttpSession sesion_1 = request.getSession();
+    String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
+    if (id_user_1 != null) {
+%>
 <%@page import="pe.edu.upeu.application.dao.ListaDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceListaDAO"%>
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
@@ -144,7 +150,7 @@
                         %></td></tr>
                 <tr><td class="text-info">Nombres y Apellidos:</td><td><%if(trb.getNo_ap_autoridad()==null){out.print("SIN REGISTRAR");}else{out.print(trb.getNo_ap_autoridad());}%></td></tr>
                 <tr><td class="text-info">Telefono/Celular:</td><td><%if(trb.getCl_autoridad()==null){out.print("SIN REGISTRAR");}else{out.print(trb.getCl_autoridad());}%></td></tr>
-                <td colspan="2"><input class="btn btn-success"  type="submit" value="Editar"></td>
+               <!-- <td colspan="2"><input class="btn btn-success"  type="submit" value="Editar"></td>-->
                     <%}%>
                 <tr></tr>
             </table>
@@ -152,3 +158,7 @@
 
     </body>
 </html>
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+%>

@@ -1,4 +1,9 @@
-
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
+<%
+    HttpSession sesion = request.getSession();
+    String id_user = (String) sesion.getAttribute("IDUSER");
+    if (id_user != null) {
+%>
 <%@page import="java.util.GregorianCalendar"%>
 <!DOCTYPE html>
 <!--
@@ -259,3 +264,10 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     </body>
     <%}%>
 </html>
+
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+
+
+%>

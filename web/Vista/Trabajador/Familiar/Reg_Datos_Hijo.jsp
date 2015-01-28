@@ -1,4 +1,8 @@
-
+<%
+    HttpSession sesion = request.getSession();
+    String id_user = (String) sesion.getAttribute("IDUSER");
+    if (id_user != null) {
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -683,3 +687,7 @@
     </body>
 </html>
 <%@include file="List_Hijo.jsp" %>
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+%>

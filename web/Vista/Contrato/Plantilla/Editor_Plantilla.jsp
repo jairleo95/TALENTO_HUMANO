@@ -1,3 +1,9 @@
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
+<%
+    HttpSession sesion = request.getSession();
+    String id_user = (String) sesion.getAttribute("IDUSER");
+    if (id_user != null) {
+%>
 <%-- 
     Document   : Editor_Plantilla
     Created on : 12-oct-2014, 10:44:45
@@ -399,3 +405,8 @@
     </body>
 
 </html>
+
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+%>

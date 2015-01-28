@@ -1,3 +1,8 @@
+<%
+    HttpSession sesion = request.getSession();
+    String id_user = (String) sesion.getAttribute("IDUSER");
+    if (id_user != null) {
+%>
 <%-- 
     Document   : List_Roles
     Created on : 31-oct-2014, 12:36:30
@@ -20,3 +25,8 @@
     </body>
 </html>
 <%@include file="List_Privilegios.jsp" %>
+
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+%>

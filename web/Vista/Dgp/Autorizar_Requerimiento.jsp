@@ -1,5 +1,12 @@
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
+<%
+    HttpSession sesion = request.getSession();
+    String id_user = (String) sesion.getAttribute("IDUSER");
+    if (id_user != null) {
+%>
 <%@page import="pe.edu.upeu.application.dao.DgpDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceDgpDAO"%>
+<a href="Busc_Req_Autorizado.jsp"></a>
 <%@page import="pe.edu.upeu.application.model.V_Autorizar_Dgp"%>
 <jsp:useBean id="List_id_Autorizacion" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
@@ -154,9 +161,9 @@
                                         <!-- This area used as dropdown edit box -->
                                         <%
 
-                                            HttpSession sesion = request.getSession(true);
-                                            String idrol = (String) sesion.getAttribute("IDROL");
-                                            String dep = (String) sesion.getAttribute("DEPARTAMENTO_ID");%>
+                                            HttpSession sesion_1 = request.getSession(true);
+                                            String idrol = (String) sesion_1.getAttribute("IDROL");
+                                            String dep = (String) sesion_1.getAttribute("DEPARTAMENTO_ID");%>
                                     </div>
                                     <!-- end widget edit box -->
 
@@ -590,4 +597,7 @@
     </script>
 
 </html>
-
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+%>
