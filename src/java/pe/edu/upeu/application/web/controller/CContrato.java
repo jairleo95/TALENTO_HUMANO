@@ -140,7 +140,8 @@ public class CContrato extends HttpServlet {
             response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1.trim() + "&idtr=" + idtr.trim() + "&id_cto=" + id_cto);
         }
         if (opc.equals("Subir_Contrato")) {
-            response.sendRedirect("Vista/Contrato/Subir_Contrato_Adjunto.jsp");
+
+            response.sendRedirect("Vista/Contrato/Subir_Contrato_Adjunto.jsp?idc=" + request.getParameter("idtc"));
         }
         if (opc.equals("actualizar")) {
             String ida1 = request.getParameter("ida");

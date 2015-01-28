@@ -51,7 +51,6 @@ public class CFoto extends HttpServlet {
         InterfaceTrabajadorDAO tr = new TrabajadorDAO();
         String ubicacion = "";
         try {
-
             if (System.getProperty("sun.desktop").trim().equals("windows")) {
                 ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "\\Vista\\Usuario\\Fotos";
             } else {

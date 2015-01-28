@@ -5,12 +5,23 @@
  */
 package pe.edu.upeu.application.web.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Iterator;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import pe.edu.upeu.application.dao.ContratoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceContratoDAO;
+import pe.edu.upeu.application.model.Renombrar;
 
 /**
  *
@@ -30,18 +41,70 @@ public class CContrato_Archivo_Adjunto extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CContrato_Archivo_Adjunto</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CContrato_Archivo_Adjunto at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        PrintWriter out = response.getWriter();
+        String ubicacion = "";
+        InterfaceContratoDAO c = new ContratoDAO();
+        try {
+            if (System.getProperty("sun.desktop").trim().equals("windows")) {
+                ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "\\Vista\\Contrato\\Contratos_Adjuntos";
+            } else {
+                ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "/Vista/Contrato/Contratos_Adjuntos/";
+            }
+            DiskFileItemFactory f = new DiskFileItemFactory();
+            f.setSizeThreshold(500);
+            f.setRepository(new File(ubicacion));
+            ServletFileUpload upload = new ServletFileUpload(f);
+            List<FileItem> p = upload.parseRequest(request);
+            String idc = null;
+            String nombre_archivo = null;
+            String no_original = null;
+            long sizeInBytes = 0;
+            Iterator it = p.iterator();
+            while (it.hasNext()) {
+
+                FileItem item = (FileItem) it.next();
+
+                if (item.isFormField()) {
+
+                    String nombre = item.getFieldName();
+                    String valor = item.getString();
+                    if (nombre.equals("idc") & idc == null) {
+                        idc = valor;
+                    }
+
+                } else {
+
+                    String fieldName = item.getFieldName();
+                    sizeInBytes = item.getSize();
+                    Calendar fecha = new GregorianCalendar();
+                    int hora = fecha.get(Calendar.HOUR_OF_DAY);
+                    int min = fecha.get(Calendar.MINUTE);
+                    int sec = fecha.get(Calendar.SECOND);
+                    if (fieldName.equals("archivo")) {
+                        nombre_archivo = String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + idc + "_" + item.getName().toUpperCase();
+                        no_original = item.getName();
+                        Thread thread = new Thread(new Renombrar(item, ubicacion, nombre_archivo));
+                        thread.start();
+                    } else {
+                        no_original = no_original;
+                        nombre_archivo = nombre_archivo;
+                    }
+
+                }
+
+            }
+            c.INSERT_CONTRATO_ADJUNTO(null, idc, nombre_archivo, no_original, null, null, null, null, null, null);
+            //getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            //Thread.sleep(2000);
+            // response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr);
+            // out.println("Archivo subido correctamente");
+            out.println(no_original);
+            out.println(nombre_archivo);
+            out.println(sizeInBytes);
+        } catch (Exception e) {
+            out.println(e.getMessage());
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

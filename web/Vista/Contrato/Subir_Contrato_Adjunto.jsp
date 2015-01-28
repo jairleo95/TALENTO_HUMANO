@@ -130,7 +130,7 @@
 
                                         <form action="../../contrato_adjunto" class="dropzone" id="mydropzone"  enctype="multipart/form-data">
 
-
+                                            <input type="text" class="idc" name="idc" value="<%=request.getParameter("idc")%>">
                                         </form>
 
                                     </div>
@@ -283,10 +283,10 @@
                     myDropzone.removeAllFiles();
                 });
                 myDropzone.on("addedfile", function (file) {
-                    $.post("../../foto", "", function () {
-                        alert(file.name);  
+                    $.post("../../contrato_adjunto", "idc=" + $(".idc").val() + "&archivo=" + file.name, function (mensaje) {
+                        alert(mensaje);
                     });
-                  
+
                 });
 
 
