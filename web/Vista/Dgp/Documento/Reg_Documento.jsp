@@ -72,6 +72,7 @@
 
 
         <!-- MAIN PANEL -->
+     
         <div id="main" role="main" style="margin: 0px;">
             <!-- MAIN CONTENT -->
             <div id="content">
@@ -148,7 +149,7 @@
                                                         <td class="caji"><strong><%=d.getDocumento()%></strong></td>
 
                                                         <td class="caji">
-                                                            <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003"))) {%>
+                                                            <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007"))) {%>
                                                             <input type="file" <%if (d.getEs_obligatorio().equals("1")) {out.println(" required='required' ");}%> name="lob_upload<%=i + 1%>">
                                                             <% } else { %>
                                                             <% if (d.getNo_archivo() == null) { %>
@@ -161,7 +162,7 @@
                                                         </td>
 
                                                         <td class="caji">
-                                                            <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005"))) {%>
+                                                            <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
                                                             <input type="text"  name="lob_description<%=i + 1%>">
                                                             <% } else { %>
                                                             <% if (d.getDe_documento_adjunto() == null) { %>
@@ -173,7 +174,7 @@
                                                             <% } %>    
                                                         </td>
                                                         <td class="caji">
-                                                            <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005"))) {%>
+                                                            <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                                     <% } else { %>
                                                                     <% if (d.getEs_documento_adjunto() == null) { %>
@@ -207,7 +208,7 @@
                                                     <td class="caji"><strong><%=d.getDocumento()%></strong></td>
 
                                                     <td class="caji">
-                                                        <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005"))) {%>
+                                                        <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005")| rol.trim().equals("ROL-0007"))) {%>
                                                         <input type="file" <%if (d.getEs_obligatorio().equals("1")) {out.println(" required='required' ");}%> name="lob_upload<%=i + 1%>">
                                                         <% } else { %>
                                                         <% if (d.getNo_archivo() == null) { %>
@@ -220,7 +221,7 @@
                                                     </td>
 
                                                     <td class="caji">
-                                                        <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005"))) {%>
+                                                        <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005")| rol.trim().equals("ROL-0007"))) {%>
                                                         <input type="text"  name="lob_description<%=i + 1%>">
                                                         <% } else { %>
                                                         <% if (d.getDe_documento_adjunto() == null) { %>
@@ -232,7 +233,7 @@
                                                         <% } %>    
                                                     </td>
                                                     <td class="caji">
-                                                        <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005"))) {%>
+                                                        <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
                                                        <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                                 <% } else { %>
                                                                 <% if (d.getEs_documento_adjunto() == null) { %>
@@ -278,7 +279,7 @@
                                                         </strong></td>
 
                                                     <td class="caji">
-                                                        <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005"))) {%>
+                                                        <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
                                                         <input type="file" <%if (d.getEs_obligatorio().equals("1")) {out.println(" required='required' ");}%> name="lob_upload<%=i + 1%>">
                                                         <% } else { %>
                                                         <% if (d.getNo_archivo() == null) { %>
@@ -291,7 +292,7 @@
                                                     </td>
 
                                                     <td class="caji">
-                                                        <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005"))) {%>
+                                                        <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005")| rol.trim().equals("ROL-0007"))) {%>
                                                         <input type="text"  name="lob_description<%=i + 1%>">
                                                         <% } else { %>
                                                         <% if (d.getDe_documento_adjunto() == null) { %>
@@ -303,7 +304,7 @@
                                                         <% } %>    
                                                     </td>
                                                     <td class="caji">
-                                                        <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005"))) {%>
+                                                        <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
                                                       <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                                 <% } else { %>
                                                                 <% if (d.getEs_documento_adjunto() == null) { %>
@@ -342,7 +343,7 @@
 
 
                                                     <td class="caji">
-                                                        <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003"))) {%>
+                                                        <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") )) {%>
                                                         <input type="file"  <%if (d.getEs_obligatorio().equals("1")) {out.println(" required='required' ");}%> name="lob_upload<%=i + 1%>">
                                                         <% } else { %>
                                                         <% if (d.getNo_archivo() == null) { %>
@@ -355,7 +356,7 @@
                                                     </td>
 
                                                     <td class="caji">
-                                                        <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005"))) {%>
+                                                        <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
                                                         <input type="text"  name="lob_description<%=i + 1%>">
                                                         <% } else { %>
                                                         <% if (d.getDe_documento_adjunto() == null) { %>
@@ -367,7 +368,7 @@
                                                         <% } %>    
                                                     </td>
                                                     <td class="caji">
-                                                        <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005"))) {%>
+                                                        <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
                                                        <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                                 <% } else { %>
                                                                 <% if (d.getEs_documento_adjunto() == null) { %>
@@ -401,7 +402,7 @@
                                                     <td class="caji"><strong><%=d.getDocumento()%></strong></td>
 
                                                     <td class="caji">
-                                                        <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005"))) {%>
+                                                        <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005")| rol.trim().equals("ROL-0007"))) {%>
                                                         <input type="file" <%if (d.getEs_obligatorio().equals("1")) {out.println(" required='required' ");}%> name="lob_upload<%=i + 1%>">
                                                         <% } else { %>
                                                         <% if (d.getNo_archivo() == null) { %>
@@ -412,7 +413,7 @@
                                                             } %>
                                                     </td>
                                                     <td class="caji">
-                                                        <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003"))) {%>
+                                                        <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003")| rol.trim().equals("ROL-0007"))) {%>
                                                         <input type="text"   name="lob_description<%=i + 1%>">
                                                         <% } else { %>
                                                         <% if (d.getDe_documento_adjunto() == null) { %>
@@ -424,7 +425,7 @@
                                                         <% } %>    
                                                     </td>
                                                     <td class="caji">
-                                                        <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005"))) {%>
+                                                        <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005")| rol.trim().equals("ROL-0007"))) {%>
                                                                 <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                                 <% } else { %>
                                                                 <% if (d.getEs_documento_adjunto() == null) { %>
@@ -446,8 +447,8 @@
                                                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
                                                 </tr>  
                                                 <input type="hidden" name="iddgp" value="<%=d.getIddgp()%>">
-                                                <input type="hidden" name="iddgp" value="<%=d.getId_contrato() %>">
-                                                <input type="hidden" name="idtr" value="<%=d.getId_trabajador().trim()%>">
+                                                <input type="hidden" name="idctr" value="<%=request.getParameter("idctr")%>">
+                                                <input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>">
                                                 <% }
                                                         i++;
                                                         //id_dgp = d.getIddgp();
@@ -457,7 +458,7 @@
 
 
                                                 <input type="hidden" name="num" value="<%=i + 1%>">
-                                                <% if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003")) { %>
+                                                <% if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007")) { %>
                                                 <tr><td><input type="hidden" value="Registrar" name="opc"></td></tr>
 
                                                 <% } %>
@@ -481,6 +482,12 @@
 
                                                 <a class="btn btn-success" href="../../../dgp?iddgp=<%=request.getParameter("iddgp")%>&idtr=<%=request.getParameter("idtr")%>&opc=rd"><i class="fa fa-check"></i> CONTINUAR</a>
                                                 <% }
+                                                    }
+                                                    if(request.getParameter("sub") != null){
+                                                    if(request.getParameter("sub").equals("Doc_CE")){
+                                                %>
+                                                <a class="btn btn-success" href="../../../dgp?idctr=<%=request.getParameter("idctr")%>&idtr=<%=request.getParameter("idtr")%>&opc=rd"><i class="fa fa-check"></i> CONTINUAR</a>
+                                                <%}
                                                     }%>
 
                                                 <button type="submit" class="btn btn-primary">

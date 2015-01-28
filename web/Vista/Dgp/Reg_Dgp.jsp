@@ -705,7 +705,7 @@
             listar();
         });
         var cantidad = 1;
-       
+
         $("#btn_add").click(function() {
             var agregar = $('#fila-agregar');
             var texto = "";
@@ -728,7 +728,7 @@
             $(".cant").val(cantidad);
             //alert($(".cant").val())
         });
-        
+
         $(document).ready(
                 function() {
                     $("#sueldo").keyup(
@@ -742,7 +742,7 @@
             var sueldo = parseFloat($("#sueldo").val());
             var p_p = sueldo / cantidad;
             $.each($(".monto"), function() {
-                 $(".monto").val(p_p);
+                $(".monto").val(p_p);
             });
         }
         function calcular_sueldo_total() {

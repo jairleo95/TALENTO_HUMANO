@@ -80,7 +80,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     @Override
     public List<Datos_Hijo_Trabajador> List_Hijos(String id_trabajador) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from RHTD_DATOS_HIJO_TRABAJADOR where id_trabajador='" + id_trabajador.trim() + "' and (sysdate-fe_nacimiento)/360>18";
+        String sql = "select * from RHTD_DATOS_HIJO_TRABAJADOR where id_trabajador='" + id_trabajador.trim() + "' and (sysdate-fe_nacimiento)/360<18";
         List<Datos_Hijo_Trabajador> list = new ArrayList<Datos_Hijo_Trabajador>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -171,7 +171,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     @Override
     public int List_Req_nacionalidad(String id_trabajador) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select count(id_nacionalidad) as num from rhtm_trabajador where id_trabajador not in ( select id_trabajador from rhtm_trabajador where id_nacionalidad != 'NAC-0193') and id_trabajador='" + id_trabajador.trim() + "'";
+        String sql = "select count(id_nacionalidad) as num from rhtm_trabajador where id_trabajador not in ( select id_trabajador from rhtm_trabajador where id_nacionalidad = 'NAC-0193') and id_trabajador='" + id_trabajador.trim() + "'";
         int nacionalidad = 0;
         try {
             ResultSet rs = this.conn.query(sql);
@@ -278,8 +278,8 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
         List<V_Reg_Dgp_Tra> list = new ArrayList<V_Reg_Dgp_Tra>();
         try {
             ResultSet rs = this.conn.query(sql);
-            V_Reg_Dgp_Tra d = new V_Reg_Dgp_Tra();
             while (rs.next()) {
+                V_Reg_Dgp_Tra d = new V_Reg_Dgp_Tra();
                d.setTi_documento(rs.getString("ti_documento"));
                d.setDocumento(rs.getString("documento"));
                d.setNo_archivo(rs.getString("no_archivo"));

@@ -455,8 +455,9 @@ public class CContrato extends HttpServlet {
             getServletContext().setAttribute("List_Conyugue", doc.List_Conyugue(ID_TRABAJADOR));
 
             //out.print(i);
+            String idctr = con.Contrato_max(ID_TRABAJADOR);
             //out.print(num_ad);
-            response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac="+i+"&num_ad="+num_ad);
+            response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac="+i+"&num_ad="+num_ad+"&idtr="+ID_TRABAJADOR+"&idctr="+idctr);
 
         }
 
