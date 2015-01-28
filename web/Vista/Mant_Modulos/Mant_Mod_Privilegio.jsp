@@ -1,3 +1,10 @@
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
+<%
+    HttpSession sesion_1 = request.getSession();
+    String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
+    if (id_user_1 != null) {
+        Usuario us = new Usuario();
+%>
 <%-- 
     Document   : Mant_Mod_Privilegio
     Created on : 13-ene-2015, 17:44:48
@@ -168,3 +175,8 @@
         });
     </script>
 </html>
+
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+%>

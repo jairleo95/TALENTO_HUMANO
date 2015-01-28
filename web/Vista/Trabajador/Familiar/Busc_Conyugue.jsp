@@ -1,3 +1,10 @@
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
+<%
+    HttpSession sesion_1 = request.getSession();
+    String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
+    if (id_user_1 != null) {
+        Usuario us = new Usuario();
+%>
 <%-- 
     Document   : Busc_Familiar
     Created on : 08/10/2014, 09:51:39 AM
@@ -126,3 +133,7 @@
 
 </script>
 </html>
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+%>

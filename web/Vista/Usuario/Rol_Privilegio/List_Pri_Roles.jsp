@@ -1,3 +1,10 @@
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
+<%
+    HttpSession sesion_1 = request.getSession();
+    String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
+    if (id_user_1 != null) {
+        Usuario us = new Usuario();
+%>
 <%-- 
     Document   : List_Pri_Roles
     Created on : 17-nov-2014, 20:27:48
@@ -40,3 +47,7 @@
         </table>
     </body>
 </html>
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+%>

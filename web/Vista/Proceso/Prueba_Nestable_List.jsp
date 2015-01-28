@@ -1,3 +1,10 @@
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
+<%
+    HttpSession sesion_1 = request.getSession();
+    String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
+    if (id_user_1 != null) {
+        Usuario us = new Usuario();
+%>
 <%-- 
     Document   : Prueba_Nestable_List
     Created on : 07-ene-2015, 15:23:08
@@ -502,3 +509,7 @@
     </body>
 
 </html>
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+%>
