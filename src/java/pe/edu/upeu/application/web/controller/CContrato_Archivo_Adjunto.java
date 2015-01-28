@@ -51,60 +51,79 @@ public class CContrato_Archivo_Adjunto extends HttpServlet {
                 ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "/Vista/Contrato/Contratos_Adjuntos/";
             }
             DiskFileItemFactory f = new DiskFileItemFactory();
-            f.setSizeThreshold(500);
+            
+            if (f.getSizeThreshold() <= 500000) {
+                 out.print("adassd");
+            } else {
+                out.print("putopoooo");
+            }
             f.setRepository(new File(ubicacion));
+            
             ServletFileUpload upload = new ServletFileUpload(f);
+           
             List<FileItem> p = upload.parseRequest(request);
             String idc = null;
             String nombre_archivo = null;
             String no_original = null;
-            long sizeInBytes = 0;
+            long tamaño = 0;
+            //  long sizeInBytes = 0;
             Iterator it = p.iterator();
             while (it.hasNext()) {
-
+                
                 FileItem item = (FileItem) it.next();
-
+                
                 if (item.isFormField()) {
-
+                    
                     String nombre = item.getFieldName();
                     String valor = item.getString();
                     if (nombre.equals("idc") & idc == null) {
                         idc = valor;
                     }
-
+                    
                 } else {
-
-                    String fieldName = item.getFieldName();
-                    sizeInBytes = item.getSize();
-                    Calendar fecha = new GregorianCalendar();
-                    int hora = fecha.get(Calendar.HOUR_OF_DAY);
-                    int min = fecha.get(Calendar.MINUTE);
-                    int sec = fecha.get(Calendar.SECOND);
-                    if (fieldName.equals("archivo")) {
-                        nombre_archivo = String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + idc + "_" + item.getName().toUpperCase();
-                        no_original = item.getName();
-                        Thread thread = new Thread(new Renombrar(item, ubicacion, nombre_archivo));
-                        thread.start();
-                    } else {
-                        no_original = no_original;
-                        nombre_archivo = nombre_archivo;
+                    tamaño = item.getSize();
+                    if (tamaño <= 500000) {
+                        
+                        String fieldName = item.getFieldName();
+                        
+                        Calendar fecha = new GregorianCalendar();
+                        int hora = fecha.get(Calendar.HOUR_OF_DAY);
+                        int min = fecha.get(Calendar.MINUTE);
+                        int sec = fecha.get(Calendar.SECOND);
+                        if (fieldName.equals("archivo")) {
+                            nombre_archivo = String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + idc + "_" + item.getName().toUpperCase();
+                            no_original = item.getName();
+                            Thread thread = new Thread(new Renombrar(item, ubicacion, nombre_archivo));
+                            thread.start();
+                        } else {
+                            no_original = no_original;
+                            nombre_archivo = nombre_archivo;
+                        }
+                        
                     }
-
                 }
-
+                
             }
-            c.INSERT_CONTRATO_ADJUNTO(null, idc, nombre_archivo, no_original, null, null, null, null, null, null);
+            if (tamaño <= 500000) {
+                if (nombre_archivo != null) {
+                    c.INSERT_CONTRATO_ADJUNTO(null, idc, nombre_archivo, no_original, null, null, null, null, null, null);
+                }
+                out.println(no_original);
+                out.println(nombre_archivo);
+                out.println(tamaño);
+            } else {
+                out.print("No se permite subir archivos mayores a 0.5MB");
+                out.print( upload.getFileSizeMax());
+            }
+
             //getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             //Thread.sleep(2000);
             // response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr);
             // out.println("Archivo subido correctamente");
-            out.println(no_original);
-            out.println(nombre_archivo);
-            out.println(sizeInBytes);
         } catch (Exception e) {
             out.println(e.getMessage());
         }
-
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -299,7 +299,7 @@
                         contentType: false,
                         data: jForm
                     }).done(function (f) {
-                        alert(f);
+                        alert("Archivo Subido correctamente!");
                     });
 
 

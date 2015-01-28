@@ -584,7 +584,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
             cst.setString(2, ID_CONTRATO);
             cst.setString(3, NO_ARCHIVO);
             cst.setString(4, NO_ARCHIVO_ORIGINAL);
-            cst.setString(5, ES_CONTRATO_ADJUNTO);
+            cst.setString(5, "1");
             cst.setString(6, IP_USUARIO);
             cst.setString(7, US_CREACION);
             cst.setString(8, FE_CREACION);
