@@ -133,12 +133,6 @@ public class CDir_Puesto extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
-            if (opc.equals("Listar_are")) {
-                String id_dep = request.getParameter("id_dep");
-                List<Map<String, ?>> lista = are.selec_area_x_id_pu(id_dep);
-                rpta.put("rpta", "1");
-                rpta.put("lista", lista);
-            }
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());
