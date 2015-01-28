@@ -1235,10 +1235,10 @@
             function Listar_area() {
                 var s = $(".Selec_Area");
 
-                $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $(".selec_dep").val(), function(objJson) {
+                $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function(objJson) {
                     s.empty();
                     var lista = objJson.lista;
-                    alert(lista.length);
+                    alert($("#selec_dep").val());
                     s.append("<option value='' > [SELECCIONE] </option>");
                     for (var j = 0; j < lista.length; j++) {
                         if ($(".id_are_con").val() == lista[j].id) {

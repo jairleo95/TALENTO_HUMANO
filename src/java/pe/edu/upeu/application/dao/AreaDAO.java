@@ -128,5 +128,10 @@ public class AreaDAO implements InterfaceAreaDAO {
         return lista;
     }
 
+    @Override
+    public List<Map<String, ?>> selec_area_x_id_pu(String id_de) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
 }
