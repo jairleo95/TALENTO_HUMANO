@@ -100,16 +100,17 @@ public class CFormato_Plantilla extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("imprimir", imprimir);
             }
-            if (opc.equals("Cargar_Plantillas")) {
+            if (opc.equals("List_Plamtillas")) {
                 String id_dir = request.getParameter("id_dir");
                 String id_dep = request.getParameter("id_dep");
                 String id_are = request.getParameter("id_are");
                 String id_sec = request.getParameter("sec");
                 String id_pu = request.getParameter("id_pu");
-                List<Map<String, ?>> lista = pl.List_PLanti_x_sel(id_pu,id_sec,id_are,id_dep,id_dir);
+                List<Map<String, ?>> lista = pl.List_PLant_x_sel(id_pu,id_sec,id_are,id_dep,id_dir);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
+            
             if (opc.equals("Crear_Plantilla")) {
                 String texto_html = request.getParameter("valor");
                 String DEP = request.getParameter("valor");

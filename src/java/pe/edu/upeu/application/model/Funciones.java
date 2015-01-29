@@ -19,8 +19,9 @@ public class Funciones {
     private String us_modif;
     private String fe_modif;
     private String id_puesto;
+    private String no_puesto;
 
-    public Funciones(String id_fucion, String de_funcion, String es_funcion, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String id_puesto) {
+    public Funciones(String id_fucion, String de_funcion, String es_funcion, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String id_puesto,String no_puesto) {
         this.id_fucion = id_fucion;
         this.de_funcion = de_funcion;
         this.es_funcion = es_funcion;
@@ -29,6 +30,7 @@ public class Funciones {
         this.us_modif = us_modif;
         this.fe_modif = fe_modif;
         this.id_puesto = id_puesto;
+        this.no_puesto = no_puesto;
     }
     public Funciones() {
         this.id_fucion = "";
@@ -39,6 +41,15 @@ public class Funciones {
         this.us_modif = "";
         this.fe_modif = "";
         this.id_puesto = "";
+        this.no_puesto = "";
+    }
+
+    public String getNo_puesto() {
+        return no_puesto;
+    }
+
+    public void setNo_puesto(String no_puesto) {
+        this.no_puesto = no_puesto;
     }
 
     public String getId_fucion() {
