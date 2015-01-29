@@ -1,9 +1,10 @@
-<%@page import="pe.edu.upeu.application.model.Usuario"%>
+
 <%
-    HttpSession sesion_1 = request.getSession();
-    String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
-    if (id_user_1 != null) {
+    HttpSession sesion_ = request.getSession();
+    String id_user_ = (String) sesion_.getAttribute("IDUSER");
+    if (id_user_ != null) {
 %>
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%@page import="pe.edu.upeu.application.model.Padre_Madre_Conyugue"%>
 <jsp:useBean id="List_PMC" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="LISTA_HIJOS" scope="application" class="java.util.ArrayList"/>
@@ -15,8 +16,8 @@
         <link type="text/css" rel="stylesheet" href="../../../css/Css_Detalle/style.css"> 
         <link rel="stylesheet" type="text/css" media="screen" href="../../../HTML_version/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../HTML_version/css/font-awesome.min.css">
-       <!-- <script type="text/javascript" src="../../../js-steps/jquery-1.11.1.js" "></script>-->
-       <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
+        <!-- <script type="text/javascript" src="../../../js-steps/jquery-1.11.1.js" "></script>-->
+        <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
         <title>Familiares</title>
 
     </head>
@@ -27,7 +28,7 @@
             String rol = (String) sesion.getAttribute("IDROL");
         %>
 
-        <%if (List_PMC.size() != 0  ) {%>
+        <%if (List_PMC.size() != 0) {%>
         <form align="center" action="../../../familiar">
             <div>
                 <table class="table table-striped table-bordered table-hover" >
@@ -84,35 +85,33 @@
             <table class="table table-striped table-bordered table-hover">
                 <input type="hidden" name="idtra" value="<%=pmc.getId_trabajador().trim()%>">
                 <%}%>
-                
+
                 <tr><td colspan="2"></td><td><input class="btn btn-success" type="submit" name="opc" value="Editar"></td></tr>
             </table>
         </form>
         <%} else {%>
         <center>
             <label>Aun no se ha registrado los datos del familiar</label>
-            <%  if (rol.trim().equals("ROL-0002")|rol.trim().equals("ROL-0005")) {%>
+            <%  if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005")) {%>
             <a href="Reg_Padre_Madre_Conyugue.jsp?idtr=<%=request.getParameter("idtr")%>">Registrar</a>
             <%}%>
         </center>
-        <% } %>
+        <% }%>
     </center>
 </body>
 </html>
 <center>
     <%@include file="List_Hijo.jsp" %>
-    <%
+    <%        if (LISTA_HIJOS.size() != 0) {
+            if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005")) {%>
 
-        if (LISTA_HIJOS.size() != 0) {
-    if (rol.trim().equals("ROL-0002")|rol.trim().equals("ROL-0005")) {%>
-     
     <a href="Reg_Datos_Hijo.jsp?idtr=<%=request.getParameter("idtr")%>" class="button blue">Agregar un hijo</a>
     <%}%>
     <%} else {%>
 
     <label>No se ha registrado ningun Hijo(a)</label><br>
-    
-    <%  if (rol.trim().equals("ROL-0002")|rol.trim().equals("ROL-0005")) {%>
+
+    <%  if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005")) {%>
     <a href="Reg_Datos_Hijo.jsp?idtr=<%=request.getParameter("idtr")%>" class="">Registrar</a>
     <%}%>
 </center>

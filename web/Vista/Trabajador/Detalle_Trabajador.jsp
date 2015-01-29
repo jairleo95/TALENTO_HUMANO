@@ -320,9 +320,12 @@
                         <li >
                             <a href="#s7" data-toggle="tab"><i class="fa fa-file-text fa-gear"></i> Información Contractual </a>
                         </li>
+                        <%if (idrol.trim().equals("ROL-0007")) {
+                        %>
                         <li >
                             <a href="#s8" data-toggle="tab"><i class="fa fa-file-text fa-gear"></i> Evaluacion de Emleado</a>
                         </li>
+                        <%}%>
                     </ul>
                     <div id="myTabContent1" class="tab-content padding-10">
                         <div class="tab-pane fade in active" id="s1">
@@ -362,9 +365,12 @@
                         <div class="tab-pane fade" id="s7">                            
                             <iframe name="contenido" id="contenido"  class="autoHeight" src="../../contrato?idtr=<%=idtr%>&opc=Detalle_Contractual" width="100%" height="100%" ></iframe>
                         </div>
+                        <%if (idrol.trim().equals("ROL-0007")) {
+                        %>
                         <div class="tab-pane fade" id="s8">                            
                             <iframe name="contenido" id="contenido"  class="autoHeight" src="../../empleado?opc=Eva_Emp&idtr=<%=idtr%>" width="100%" height="100%" ></iframe>
                         </div>
+                        <%}%>
                     </div>
 
                 </div>
@@ -837,7 +843,7 @@
                                 $(".mensaje").text(f);
                             });
                             addImage(e);
-                           // alert("Archivo permitido");
+                            // alert("Archivo permitido");
                         } else {
                             alert("Archivo no permitido, su tamaño debe ser menor a 500 KB");
                             $(this).val('');
