@@ -231,7 +231,7 @@
 
                                                     <th data-hide="phone,tablet"><strong>Puesto</strong></th>
                                                     <th data-hide="phone,tablet"><strong>Area</strong></th>
-                                                    <th data-hide="phone,tablet"><strong>Depto.</strong></th>
+                                                    <th data-hide="phone,tablet"><strong>Departamento</strong></th>
                                                     <th data-hide="phone,tablet"><strong>Requerimiento</strong></th>
                                                     <!--  <td>Departamento</td>-->
                                                     <th data-hide="phone,tablet"><strong>Descripcion</strong></th>

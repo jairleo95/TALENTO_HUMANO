@@ -420,7 +420,7 @@
                         <input type="hidden" name="IDPASOS" value="<%=id_pasos%>"   >
                         <tr><td><input type="hidden" name="opc"  class="submit" value="Aceptar"/></td></tr>
                         <button class="btn btn-labeled btn-success" type="submit">
-                            <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>ENVIAR 
+                            <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>PROCESAR 
                         </button>
                     </table>
                 </form>
@@ -460,7 +460,7 @@
                         <input type="hidden" name="IDPASOS" value="<%=id_pasos%>"   >
                         <tr><td><input type="hidden" name="opc"  class="submit" value="Aceptar"/></td></tr>
                         <button class="btn btn-labeled btn-success" type="submit">
-                            <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>ENVIAR 
+                            <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>AUTORIZAR REQUERIMIENTO 
                         </button>
                     </table>
                 </form>
