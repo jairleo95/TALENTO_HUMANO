@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.model.Centro_Costos"%>
 <%
     HttpSession sesion_1 = request.getSession();
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
@@ -14,6 +15,7 @@
 <jsp:useBean id="LIST_ID_DGP" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="VALIDAR_DGP_CONTR" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="LIST_ID_USER" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Cargar_cc_dgp" scope="application" class="java.util.ArrayList"/>
 
 <!DOCTYPE html>
 <html>
@@ -116,7 +118,7 @@
                         <%}%> 
                         <tr><td class="text-info table-bordered">Certificado de Salud: </td><td class="text-info table-bordered" ><%=d.getEs_certificado_salud()%></td></tr>
 
-  
+
                         <!--<tr><td class="td-det">Ruc:</td><td><?echo $list[$index][9];?></td></tr>
                         <tr><td class="td-det">Lugar de Servicio:</td><td><?echo $list[$index][10];?></td></tr>
                         <tr><td class="td-det">Periodo de Pago:</td><td><?echo $list[$index][12];?></td></tr>
@@ -156,11 +158,22 @@
 
                             <% if (d.getUs_creacion() != null) {%>
                             <td class="text-info table-bordered">Creado por:</td><td colspan="2" class="text-info table-bordered"><%=d.getUs_creacion()%></td>
-                            <%}else{%>
+                            <%} else {%>
                             <td class="text-info table-bordered">Creado por:</td><td colspan="2" class="text-info table-bordered">No registrado</td>
                             <%}%>
                         </tr>
-
+                        <tr>
+                            <%if (Cargar_cc_dgp.size() > 0) {
+                                    for (int p = 0; p < Cargar_cc_dgp.size(); p++) {
+                                        Centro_Costos cc = new Centro_Costos();
+                                        cc = (Centro_Costos) Cargar_cc_dgp.get(p);
+                            %>
+                            <td class="text-info table-bordered">Centro de costo Nro <%=p++%></td><td class="text-info table-bordered"><%=cc.getDe_centro_costo()%></td>
+                            <%}
+                            } else {%>
+                            <td class="text-info table-bordered">Centro de costo </td><td class="text-info table-bordered">No tiene Centro de costo </td>
+                            <%}%>
+                        </tr>
 
 
 
@@ -172,7 +185,7 @@
                         <% if (idrol.trim().equals("ROL-0002") | idrol.trim().equals("ROL-0005") | idrol.trim().equals("ROL-0003")) {%>
                     </table>
                     <table>
-                        <tr><td><input class="btn btn-primary" type="submit"  value="Modificar"></td><td> </td><td><a class="btn btn-primary" href="../../documento?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a></td><td><a class="btn btn-primary" href="../../horario?iddgp=<%=d.getId_dgp()%>&opc=Listar">Ver Horario</a></td></tr><%}%>
+                        <tr><td> </td><td><a class="btn btn-success" href="../../documento?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a></td><td><a class="btn btn-success" href="../../horario?iddgp=<%=d.getId_dgp()%>&opc=Listar">Ver Horario</a></td></tr><%}%>
                     </table>      
                     <%}%> 
                 </form>

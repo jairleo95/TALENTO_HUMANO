@@ -129,8 +129,30 @@ public class AreaDAO implements InterfaceAreaDAO {
     }
 
     @Override
-    public List<Map<String, ?>> selec_area_x_id_pu(String id_de) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Map<String, ?>> List_area_id_d(String id_dep) {
+       List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "Select * from rhtd_area where id_departamento='"+id_dep.trim()+"' order by no_area";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("ID_AREA"));
+                rec.put("nombre", rs.getString("NO_AREA"));
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return lista;
     }
 
 
