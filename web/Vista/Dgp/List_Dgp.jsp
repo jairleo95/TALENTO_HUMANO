@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.model.Trabajador"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
     HttpSession sesion_1 = request.getSession();
@@ -6,6 +7,7 @@
 %>
 <%@page import="pe.edu.upeu.application.model.X_List_det_dgp"%>
 <jsp:useBean id="List_Det_Dgp" scope="application" class="java.util.ArrayList"/>  
+<jsp:useBean id="List_Trb_Mod_Rel" scope="application" class="java.util.ArrayList"/>  
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en-us">
     <head>
@@ -20,11 +22,11 @@
 
                         <!-- Basic Styles -->
                         <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
-                        <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
+                            <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
 
-                        <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
-                        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
-                        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
+                                <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+                                <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
+                                    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
 
                                         <!-- SmartAdmin RTL Support is under construction
                                                  This RTL CSS will be released in version 1.5
@@ -135,8 +137,7 @@
 
                                                                                                                                     </thead>
                                                                                                                                     <tbody>
-                                                                                                                                        <% 
-
+                                                                                                                                        <%
                                                                                                                                             for (int i = 0; i < List_Det_Dgp.size(); i++) {
                                                                                                                                                 X_List_det_dgp x = new X_List_det_dgp();
                                                                                                                                                 x = (X_List_det_dgp) List_Det_Dgp.get(i); %>
@@ -158,8 +159,9 @@
                                                                                                                                                 }
                                                                                                                                                 %></td>
                                                                                                                                         </tr>
-                                                                                                                                        <%}List_Det_Dgp.clear();%>
-                                                                                                                                    
+                                                                                                                                        <%}
+                                                                                                                                            List_Det_Dgp.clear();%>
+
 
 
                                                                                                                                     </tbody>
@@ -171,7 +173,7 @@
                                                                                                                         </div>
                                                                                                                         <!-- end widget div -->
 
-                                                                                                                   
+
 
                                                                                                                 </article>
                                                                                                                 <!-- WIDGET END -->
@@ -191,6 +193,133 @@
                                                                                                 </div>
                                                                                                 <!-- END MAIN PANEL -->
 
+                                                                                                <!-- MAIN PANEL -->
+                                                                                                <div id="main" role="main" style="margin-left: 0px;">
+
+
+                                                                                                    <!-- REPORTE DE TRABAJADORES MODICADOS EN RELIGION -->
+                                                                                                    <!-- MAIN CONTENT -->
+                                                                                                    <div id="content">
+
+
+
+                                                                                                        <!-- widget grid -->
+                                                                                                        <section id="widget-grid" class="">
+
+                                                                                                            <!-- row -->
+                                                                                                            <div class="row">
+
+                                                                                                                <!-- NEW WIDGET START -->
+                                                                                                                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+
+                                                                                                                    <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-3" data-widget-editbutton="false">
+                                                                                                                        <!-- widget options:
+                                                                                                                        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+                                                                                        
+                                                                                                                        data-widget-colorbutton="false"
+                                                                                                                        data-widget-editbutton="false"
+                                                                                                                        data-widget-togglebutton="false"
+                                                                                                                        data-widget-deletebutton="false"
+                                                                                                                        data-widget-fullscreenbutton="false"
+                                                                                                                        data-widget-custombutton="false"
+                                                                                                                        data-widget-collapsed="true"
+                                                                                                                        data-widget-sortable="false"
+                                                                                        
+                                                                                                                        -->
+                                                                                                                        <header>
+                                                                                                                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                                                                                                            <h2>Reporte de Trabajadores Modificados</h2>
+
+                                                                                                                        </header>
+
+                                                                                                                        <!-- widget div-->
+                                                                                                                        <div>
+
+                                                                                                                            <!-- widget edit box -->
+                                                                                                                            <div class="jarviswidget-editbox">
+                                                                                                                                <!-- This area used as dropdown edit box -->
+
+                                                                                                                            </div>
+                                                                                                                            <!-- end widget edit box -->
+
+                                                                                                                            <!-- widget content -->
+                                                                                                                            <div class="widget-body no-padding">
+
+                                                                                                                                <table id="datatable_tabletools" class="table table-striped table-bordered table-hover" width="100%">
+                                                                                                                                    <thead>
+                                                                                                                                        <tr>
+                                                                                                                                            <th data-hide="phone">ID</th>
+                                                                                                                                            <th data-class="expand">Nombres y Apellidos</th>
+                                                                                                                                            <th>DNI</th>
+                                                                                                                                            <th data-hide="phone">Religión</th>
+                                                                                                                                            <th data-hide="phone,tablet">E-mail</th>
+                                                                                                                                            <th data-hide="phone,tablet">Celular</th>
+                                                                                                                                        </tr>
+                                                                                                                                    </thead>
+                                                                                                                                    <tbody>
+                                                                                                                                        <% for (int i = 0; i < List_Trb_Mod_Rel.size(); i++) {
+                                                                                                                                                Trabajador e = new Trabajador();
+                                                                                                                                                e = (Trabajador) List_Trb_Mod_Rel.get(i);
+                                                                                                                                        %>
+                                                                                                                                        <tr>
+                                                                                                                                            <td><%out.print(i + 1);%></td>
+
+                                                                                                                                            <td>
+                                                                                                                                                <a href="../../trabajador?idtr=<%=e.getId_trabajador()%>&opc=list"><%=e.getNo_trabajador().toUpperCase() + " " + e.getAp_paterno().toUpperCase() + " " + e.getAp_materno().toUpperCase()%></a></td>
+                                                                                                                                            <td><%=e.getNu_doc_c()%></td>
+                                                                                                                                            <td>
+                                                                                                                                                <%
+                                                                                                                                                    if (e.getLi_religion().trim().equals("1")) {
+                                                                                                                                                        out.print("Adventista");
+                                                                                                                                                    }
+                                                                                                                                                    if (e.getLi_religion().trim().equals("2")) {
+                                                                                                                                                        out.print("Católico");
+                                                                                                                                                    }
+                                                                                                                                                    if (e.getLi_religion().trim().equals("3")) {
+                                                                                                                                                        out.print("Otros");
+                                                                                                                                                    }%>
+                                                                                                                                            </td>
+                                                                                                                                            <td><%=e.getDi_correo_personal()%></td>
+                                                                                                                                            <td align="center">
+                                                                                                                                                <%if (e.getCl_tra()== null) {
+                                                                                                                                                    out.print("---");
+                                                                                                                                                    }%>
+                                                                                                                                            </td>
+                                                                                                                                            
+                                                                                                                                        </tr>
+                                                                                                                                        <%}%> 
+
+
+                                                                                                                                    </tbody>
+                                                                                                                                </table>
+
+                                                                                                                            </div>
+                                                                                                                            <!-- end widget content -->
+
+                                                                                                                        </div>
+                                                                                                                        <!-- end widget div -->
+
+                                                                                                                    </div>
+
+
+                                                                                                                </article>
+                                                                                                                <!-- WIDGET END -->
+
+                                                                                                            </div>
+
+                                                                                                            <!-- end row -->
+
+                                                                                                            <!-- end row -->
+
+                                                                                                        </section>
+                                                                                                        <!-- end widget grid -->
+
+                                                                                                    </div>
+                                                                                                    <!-- END MAIN CONTENT -->
+
+                                                                                                </div>
+                                                                                                <!-- END MAIN PANEL -->
 
 
 
@@ -1124,7 +1253,7 @@
                                                                                             </body>
 
                                                                                             </html>
-<%} else {
-        response.sendRedirect("/TALENTO_HUMANO/");
-    }
-%>                                                                                                                                        
+                                                                                            <%} else {
+                                                                                                    response.sendRedirect("/TALENTO_HUMANO/");
+                                                                                                }
+                                                                                            %>                                                                                                                                        

@@ -37,4 +37,6 @@ public interface InterfaceTrabajadorDAO {
     public void INSERT_HIST_RELIGION(String ID_HIST_INFO_REL, String LI_RELIGION, String NO_IGLESIA, String DE_CARGO, String LI_AUTORIDAD, String NO_AP_AUTORIDAD,String CL_AUTORIDAD, String ES_HIST_INFO_REL, String ID_TRABAJADOR, String iduser, String FE_MODIF);
     
     public void MOD_ASP_REL ( String LI_RELIGION, String NO_IGLESIA, String DE_CARGO, String LI_AUTORIDAD, String NO_AP_AUTORIDAD,String CL_AUTORIDAD, String ID_TRABAJADOR);
+    
+    public List<Trabajador> LIST_TRABAJADOR_MOD_REL ();
 }

@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
+import pe.edu.upeu.application.model.Trabajador;
 import pe.edu.upeu.application.model.V_Ficha_Trab_Num_C;
 import pe.edu.upeu.application.model.X_List_dat_tr_plantilla;
 import pe.edu.upeu.application.web.controller.CConversion;
@@ -460,5 +461,31 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         } finally {
             this.conn.close();
         }
+    }
+
+    @Override
+    public List<Trabajador> LIST_TRABAJADOR_MOD_REL() {
+    this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select id_trabajador, NO_TRABAJADOR , AP_PATERNO , AP_MATERNO  ,NU_DOC_C , LI_RELIGION ,DI_CORREO_PERSONAL, CL_TRA from RHTM_TRABAJADOR where ID_TRABAJADOR in (select ID_TRABAJADOR from RHTR_HIST_INFO_REL )";
+        List<Trabajador> Lista = new ArrayList<Trabajador>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Trabajador x = new Trabajador();
+                x.setId_trabajador(rs.getString("id_trabajador"));
+                x.setNo_trabajador(rs.getString("no_trabajador"));
+                x.setAp_paterno(rs.getString("ap_paterno"));
+                x.setAp_materno(rs.getString("ap_materno"));
+                x.setNu_doc_c(rs.getString("nu_doc_c"));
+                x.setLi_religion(rs.getString("li_religion"));
+                x.setDi_correo_personal(rs.getString("di_correo_personal"));
+                x.setCl_tra(rs.getString("cl_tra"));
+                Lista.add(x);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return Lista;
     }
 }
