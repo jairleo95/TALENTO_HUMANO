@@ -41,7 +41,8 @@ public class CPlantilla_Contractual extends HttpServlet {
      */
     InterfacePlantillaContractualDAO pl = new PlantillaContractualDAO();
     InterfacePuestoDAO pu = new PuestoDAO();
-    InterfaceTrabajadorDAO tr=new TrabajadorDAO();
+    InterfaceTrabajadorDAO tr = new TrabajadorDAO();
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("UTF-8");
@@ -53,7 +54,7 @@ public class CPlantilla_Contractual extends HttpServlet {
         try {
             if (opc.equals("List_planti")) {
                 String idpu = request.getParameter("id_pu");
-                List<Map<String,?>> list=pl.List_PLantillas(idpu);
+                List<Map<String, ?>> list = pl.List_PLantillas(idpu);
                 rpta.put("rpta", "1");
                 rpta.put("lista", list);
             }
@@ -63,11 +64,20 @@ public class CPlantilla_Contractual extends HttpServlet {
                 rpta.put("lista", list);
             }
             if (opc.equals("cargar")) {
-                String no_arch=request.getParameter("Imprimir");
-                String idtraba=request.getParameter("idtraba");
-                getServletContext().setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(idtraba));
+                String no_arch = request.getParameter("Imprimir");
+                String id_con = request.getParameter("id_con");
+                getServletContext().setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_con));
                 //getServletContext().setAttribute("", tr.Calculaedad(idtraba));
-                response.sendRedirect("Vista/Contrato/Formato_Plantilla/reg_formato.jsp?no_arc="+no_arch);
+                response.sendRedirect("Vista/Contrato/Formato_Plantilla/reg_formato.jsp?no_arc=" + no_arch);
+            }
+            if (opc.equals("Imprimir")) {
+                String id_planti_con=request.getParameter("id_plan_contr");
+                String no_arch=pl.List_pl_con_x_id(id_planti_con);
+                String id_con = request.getParameter("id_con");
+                getServletContext().setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_con));
+                getServletContext().setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_con));
+                out.print("ya esta aca"+no_arch);
+                response.sendRedirect("Vista/Contrato/Formato_Plantilla/reg_formato.jsp?no_arc=" + no_arch);
             }
         } catch (Exception e) {
             rpta.put("rpta", "-1");

@@ -19,6 +19,7 @@ import javax.naming.spi.DirStateFactory;
 import pe.edu.upeu.application.dao_imp.InterfacePlantillaContractualDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
+import pe.edu.upeu.application.model.Plantilla_Contractual;
 
 /**
  *
@@ -122,6 +123,24 @@ public class PlantillaContractualDAO implements InterfacePlantillaContractualDAO
             }
         }
         return Lista;
+    }
+
+    @Override
+    public String List_pl_con_x_id(String id_plan_con) {
+       this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT NO_ARCHIVO FROM RHTC_PLANTILLA_CONTRACTUAL WHERE ID_PLANTILLA_CONTRACTUAL='"+id_plan_con.trim()+"'";
+        String no_archivo = null;
+        try {
+            ResultSet rs = this.cnn.query(sql);
+            while (rs.next()) {
+                no_archivo = rs.getString(1);
+            }
+        } catch (SQLException e) {
+
+        } finally {
+            this.cnn.close();
+        }
+        return no_archivo;
     }
 
 }

@@ -20,6 +20,7 @@ import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Anno;
 import pe.edu.upeu.application.model.List_Rh_Contrato_Fec;
 import pe.edu.upeu.application.model.Modalidad;
+import pe.edu.upeu.application.model.Plantilla_Contractual;
 import pe.edu.upeu.application.model.Regimen_Laboral;
 import pe.edu.upeu.application.model.Sub_Modalidad;
 import pe.edu.upeu.application.model.X_List_Anno_Id_Tr_DGP;
@@ -36,17 +37,17 @@ public class ContratoDAO implements InterfaceContratoDAO {
     CConversion c = new CConversion();
 
     @Override
-    public void INSERT_CONTRATO(String ID_CONTRATO, String ID_DGP, String FE_DESDE, String FE_HASTA, String FE_CESE, String ID_FUNC, String LI_CONDICION, Double CA_SUELDO, Double CA_REINTEGRO, Double CA_ASIG_FAMILIAR, Double HO_SEMANA, Double NU_HORAS_LAB, Double DIA_CONTRATO, String TI_TRABAJADOR, String LI_REGIMEN_LABORAL, String ES_DISCAPACIDAD, String TI_CONTRATO, String LI_REGIMEN_PENSIONARIO, String ES_CONTRATO_TRABAJADOR, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String US_IP, String FE_VACACIO_INI, String FE_VACACIO_FIN, String ES_CONTRATO, String ID_FILIAL, String ID_PUESTO, Double CA_BONO_ALIMENTO, String LI_TIPO_CONVENIO, String ES_FIRMO_CONTRATO, Double NU_CONTRATO, String DE_OBSERVACION, String ES_APOYO, String TI_HORA_PAGO, String NU_DOCUMENTO, String ID_ANNO, String ES_ENTREGAR_DOC_REGLAMENTOS, String ES_REGISTRO_HUELLA, String DE_REGISTRO_SISTEM_REMU, String ID_TRABAJADOR, Double CA_SUELDO_TOTAL, String ID_REGIMEN_LABORAL, String ID_MODALIDAD, String ID_SUB_MODALIDAD, String CO_GR_OCUPACION, String FE_SUSCRIPCION, String CO_TI_MONEDA, String CO_TI_REM_VARIAB, String DE_REMU_ESPECIE, String DE_RUC_EMP_TRAB, String CO_SUCURSAL, String DE_MYPE, String ES_TI_CONTRATACION, Double CA_BEV, String ID_TIPO_PLANILLA, String ES_REMUNERACION_PROCESADO, String ID_HORARIO) {
+    public void INSERT_CONTRATO(String ID_CONTRATO, String ID_DGP, String FE_DESDE, String FE_HASTA, String FE_CESE, String ID_FUNC, String LI_CONDICION, Double CA_SUELDO, Double CA_REINTEGRO, Double CA_ASIG_FAMILIAR, Double HO_SEMANA, Double NU_HORAS_LAB, Double DIA_CONTRATO, String TI_TRABAJADOR, String LI_REGIMEN_LABORAL, String ES_DISCAPACIDAD, String TI_CONTRATO, String LI_REGIMEN_PENSIONARIO, String ES_CONTRATO_TRABAJADOR, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String US_IP, String FE_VACACIO_INI, String FE_VACACIO_FIN, String ES_CONTRATO, String ID_FILIAL, String ID_PUESTO, Double CA_BONO_ALIMENTO, String LI_TIPO_CONVENIO, String ES_FIRMO_CONTRATO, Double NU_CONTRATO, String DE_OBSERVACION, String ES_APOYO, String TI_HORA_PAGO, String NU_DOCUMENTO, String ID_ANNO, String ES_ENTREGAR_DOC_REGLAMENTOS, String ES_REGISTRO_HUELLA, String DE_REGISTRO_SISTEM_REMU, String ID_TRABAJADOR, Double CA_SUELDO_TOTAL, String ID_REGIMEN_LABORAL, String ID_MODALIDAD, String ID_SUB_MODALIDAD, String CO_GR_OCUPACION, String FE_SUSCRIPCION, String CO_TI_MONEDA, String CO_TI_REM_VARIAB, String DE_REMU_ESPECIE, String DE_RUC_EMP_TRAB, String CO_SUCURSAL, String DE_MYPE, String ES_TI_CONTRATACION, Double CA_BEV, String ID_TIPO_PLANILLA, String ES_REMUNERACION_PROCESADO, String ID_HORARIO,String ID_PLANTILLA_CONTRACTUAL) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_CONTRATO( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )} ");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_CONTRATO( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? )} ");
             cst.setString(1, null);
             cst.setString(2, ID_DGP);
             cst.setString(3, c.convertFecha(FE_DESDE));
-            if(FE_HASTA.equals("")){
-            cst.setString(4, FE_HASTA);
-            }else{
-            cst.setString(4, c.convertFecha(FE_HASTA));    
+            if (FE_HASTA.equals("")) {
+                cst.setString(4, FE_HASTA);
+            } else {
+                cst.setString(4, c.convertFecha(FE_HASTA));
             }
             cst.setString(5, FE_CESE);
             cst.setString(6, ID_FUNC);
@@ -103,6 +104,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
             cst.setString(57, ID_TIPO_PLANILLA);
             cst.setString(58, "0");
             cst.setString(59, ID_HORARIO);
+            cst.setString(60, ID_PLANTILLA_CONTRACTUAL);
             cst.execute();
         } catch (SQLException ex) {
             throw new RuntimeException(ex.getMessage());
@@ -429,7 +431,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
             ResultSet rs = this.conn.query(sql);
 
             while (rs.next()) {
-               Anno a = new Anno();
+                Anno a = new Anno();
                 a.setId_anno(rs.getString("id_anno"));
                 a.setNo_anno(rs.getString("no_anno"));
                 a.setDe_anno(rs.getString("de_anno"));
@@ -448,7 +450,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
     @Override
     public String Contrato_max(String id_tr) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT ID_CONTRATO FROM RHTM_CONTRATO where ID_CONTRATO=(SELECT 'CTO-'||lpad(to_char(MAX(TO_NUMBER(SUBSTR(cc.ID_CONTRATO,5,8)))),6,'0')  FROM RHTM_CONTRATO cc where ID_ANNO=(SELECT ID_ANNO FROM RHTR_ANNO WHERE ID_ANNO=(SELECT 'ANN-'||lpad(TO_CHAR(MAX(TO_NUMBER(SUBSTR(ID_ANNO,5,8)))),6,'0')FROM(SELECT f.id_anno,f.no_anno,f.id_trabajador FROM (SELECT a.id_anno, a.no_anno , r.id_dgp , r.id_trabajador FROM RHTR_ANNO a ,RHTM_CONTRATO r WHERE a.id_anno=r.id_anno AND r.ES_CONTRATO_TRABAJADOR=1)f WHERE f.id_trabajador='"+id_tr.trim()+"' ORDER BY f.no_anno DESC))) and cc.ID_TRABAJADOR='"+id_tr.trim()+"')";
+        String sql = "SELECT ID_CONTRATO FROM RHTM_CONTRATO where ID_CONTRATO=(SELECT 'CTO-'||lpad(to_char(MAX(TO_NUMBER(SUBSTR(cc.ID_CONTRATO,5,8)))),6,'0')  FROM RHTM_CONTRATO cc where ID_ANNO=(SELECT ID_ANNO FROM RHTR_ANNO WHERE ID_ANNO=(SELECT 'ANN-'||lpad(TO_CHAR(MAX(TO_NUMBER(SUBSTR(ID_ANNO,5,8)))),6,'0')FROM(SELECT f.id_anno,f.no_anno,f.id_trabajador FROM (SELECT a.id_anno, a.no_anno , r.id_dgp , r.id_trabajador FROM RHTR_ANNO a ,RHTM_CONTRATO r WHERE a.id_anno=r.id_anno AND r.ES_CONTRATO_TRABAJADOR=1)f WHERE f.id_trabajador='" + id_tr.trim() + "' ORDER BY f.no_anno DESC))) and cc.ID_TRABAJADOR='" + id_tr.trim() + "')";
         String id_anno = null;
         try {
             ResultSet rs = this.conn.query(sql);
@@ -467,7 +469,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
     public List<X_List_Id_Contrato_DGP> List_contra_x_idcto(String id_cto) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         //String sql = "select c.id_contrato, c.id_dgp, c.fe_desde, c.fe_hasta, c.fe_cese, c.id_func, pd.no_area,c.li_condicion , c.ca_sueldo,c.ca_reintegro,c.ca_asig_familiar, c.ho_semana,c.nu_horas_lab,c.dia_contrato,c.ti_trabajador,c.li_regimen_laboral,c.es_discapacidad,c.ti_contrato,c.li_regimen_pensionario, c.es_contrato_trabajador,c.us_creacion,c.fe_creacion,c.us_modif,c.fe_modif,c.us_ip,c.fe_vacacio_ini,c.fe_vacacio_fin,c.es_contrato,c.id_filial,pd.id_direccion,pd.id_departamento,pd.id_area,pd.id_seccion,pd.id_puesto,c.ca_bono_alimento,c.es_jefe,c.li_tipo_convenio,c.es_firmo_contrato,c.nu_contrato,c.de_observacion,c.es_apoyo,c.ti_hora_pago,c.nu_documento,c.id_anno,c.es_entregar_doc_reglamentos,c.es_registro_huella,c.de_registro_sistem_remu,c.id_trabajador, pd.no_puesto,pd.no_seccion, pd.no_dep,pd.no_direccion from rhtm_contrato c, RHVD_puesto_direccion pd   where c.id_puesto = pd.id_puesto and c.es_contrato='1' and c.id_trabajador='" + id_trabajador + "' and c.ID_ANNO='" + id_anno + "'";
-        String sql = "SELECT * FROM RHVD_CONTRATOS_HISTORIAL WHERE ID_CONTRATO='"+id_cto+"'";
+        String sql = "SELECT * FROM RHVD_CONTRATOS_HISTORIAL WHERE ID_CONTRATO='" + id_cto + "'";
         List<X_List_Id_Contrato_DGP> list = new ArrayList<X_List_Id_Contrato_DGP>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -549,6 +551,9 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 v.setNo_distrito(rs.getString("no_distrito"));
                 v.setNo_provincia(rs.getString("no_provincia"));
                 v.setNo_provincia(rs.getString("fe_sus"));
+                v.setId_plantilla_contractual(rs.getString("id_plantilla_contractual"));
+                v.setFe_has(rs.getString("fe_has"));
+                v.setFe_des(rs.getString("fe_des"));
                 list.add(v);
             }
         } catch (SQLException e) {
@@ -557,20 +562,50 @@ public class ContratoDAO implements InterfaceContratoDAO {
         }
         return list;
     }
-        @Override
+
+    @Override
     public String MAX_ID_CONTRATO() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "SELECt 'CTO-'||MAX(SUBSTR(ID_CONTRATO,5,8)) FROM RHTM_CONTRATO";
-        String Maxcto=null;
+        String Maxcto = null;
         try {
             ResultSet rs = this.conn.query(sql);
-            while(rs.next()){
-             Maxcto = rs.getString(1);
+            while (rs.next()) {
+                Maxcto = rs.getString(1);
             }
         } catch (Exception e) {
-        } finally{
+        } finally {
             this.conn.close();
         }
         return Maxcto;
+    }
+
+    @Override
+    public void INSERT_CONTRATO_ADJUNTO(String ID_CONTRATO_ADJUNTO, String ID_CONTRATO, String NO_ARCHIVO, String NO_ARCHIVO_ORIGINAL, String ES_CONTRATO_ADJUNTO, String IP_USUARIO, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_CONTRATO_ADJUNTO ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )} ");
+            cst.setString(1, null);
+            cst.setString(2, ID_CONTRATO);
+            cst.setString(3, NO_ARCHIVO);
+            cst.setString(4, NO_ARCHIVO_ORIGINAL);
+            cst.setString(5, "1");
+            cst.setString(6, IP_USUARIO);
+            cst.setString(7, US_CREACION);
+            cst.setString(8, FE_CREACION);
+            cst.setString(9, US_MODIF);
+            cst.setString(10, FE_MODIF);
+            cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al insertar archivo");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
     }
 }

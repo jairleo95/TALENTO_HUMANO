@@ -140,7 +140,7 @@
             </div>
             <%
             } else {%>
-            <a class="btn btn-primary" href="../../contrato?opc=Subir_Contrato" >Subir Contrato Firmado</a>
+
             <div>
                 <table class="table table-hover table-striped  table-responsive" style="border-radius: 30px ">
                     <tr><td><select name="ida" class="anno" >
@@ -162,6 +162,7 @@
                         <td><input type="hidden" name="opc" value="actualizar" ></td></tr><button type="submit"  style="display:none" class="btn_act"   >Actualizar</button>
                 </table>
             </div>
+
             <script>$(document).ready(function () {
                     $(".anno").change(function () {
                         $(".btn_act").click();
@@ -185,9 +186,11 @@
                         X_List_Id_Contrato_DGP n = new X_List_Id_Contrato_DGP();
                         n = (X_List_Id_Contrato_DGP) List_contra_x_idcto.get(b);
                 %>
-
+                <a class="btn btn-primary" href="../../contrato?opc=Subir_Contrato&idc=<%=n.getId_contrato()%>" >Subir Contrato Firmado</a>
 
                 <% for (int p = 0; p < List_contra_x_idcto.size(); p++) {%>
+
+
                 <table class="table table-hover table-striped  table-responsive">
                     <tr><td class="text-info table-bordered"><strong>Desde: </strong></td><td colspan="2"><%=n.getFe_desde()%></td><td class="text-info table-bordered" colspan="2"><strong>Hasta:</strong></td><td colspan="2"><%=n.getFe_hasta()%></td></tr>
                     <tr><td class="text-info table-bordered"><strong>Dirección:</strong></td><td colspan="6"><p><%=n.getNo_direccion()%> </p></td></tr>
@@ -468,7 +471,6 @@
 
                         /*}
                          }*/%>
-                    <tr><td class="text-info" colspan="8" style="text-align:center"><input class="button blue"  type="hidden" value="Editar"><button  class="PLANTI button blue">Mostrar Plantillas</button></td></tr>
 
                 </table>
             </div>
@@ -476,17 +478,11 @@
         <form action="../../plantilla_contractual" method="post" class="formu">
             <div class="Contenido">
                 <table>
-                    <thead class="tab_cabe">
-                        <tr class="tr" >
-                            <td class="td">Nro</td>
-                    <input type="hidden" name="idtraba" value="<%=n.getId_contrato()%>">
-                    <td style="width: 230px;" class="td"><span title="nom_pl">NOMBRE PLANTILLA</span></td>
-                    <td class="td"><span >Opcion</span></td>
-                    </tr>
-                    </thead>
-                    <tbody class="tbodys" id="gg">
-
-                    </tbody>
+                    <td><input type="hidden" name="id_plan_contr" value="<%=n.getId_plantilla_contractual()%>"></td>
+                    <td><input type="hidden" name="idtraba" value="<%=n.getId_trabajador()%>"></td>
+                    <td><input type="text" name="id_con" value="<%=n.getId_contrato()%>"></td>
+                    <td><input type="text" name="id_con" value="<%=n.getFe_sus()%>"></td>
+                    <tr><td class="text-info" colspan="8" style="text-align:center"><input class="button blue"  type="hidden" value="Editar"><button name="opc" value="Imprimir" class="PLANTI button blue">Mostrar Plantillas</button></td></tr>
                 </table>
             </div>
         </form>
@@ -495,47 +491,8 @@
             }
         %>
     </center>
+    
     <%}%>
-    <script>
-        $(document).ready(function () {
-            $(".Contenido").hide();
-            $(".PLANTI").click(function () {
-                var t = $(".tbodys");
-                // alert($(".id_pu").val());
-                $.post("../../plantilla_contractual", "opc=List_planti&" + "id_pu=" + $(".id_pu").val(), function (objJson) {
-                    $(".Contenido").show();
-                    t.empty();
-                    var lista = objJson.lista;
-                    if (lista.length !== 0) {
-                        for (var i = 0; i < lista.length; i++) {
-                            t.append('<tr>');
-                            t.append('<td>' + (i + 1) + '</td>');
-                            t.append('<td>' + lista[i].nom_pl + '</td>');
-                            t.append('<input type="hidden" value="' + lista[i].id + '" class="id_plantilla' + i + '" />');
-                            t.append('<input type="radio" id="imp" name="Imprimir" value="' + lista[i].nom_ar + '">');
-                            t.append('</tr>');
-                        }
-                        t.append('<tr><td><button type="submit" >Cargar</button></td></tr>');
-                        t.append('<tr><td><input type="hidden"  name="opc" value="cargar"></td></tr>');
-                    } else {
-                    }
-
-                });
-            });
-            $(".formu").submit(function () {
-                 var radio = $("input[type='radio']:checked").length;
-                if (radio == "") {
-                    $('.error2').text("Seleccione un radio button");
-                        alert("Seleccione un radio button");
-                        return false;
-                } else {
-                        $('.errors').hide();
-                        return true;
-                }
-            });
-        });
-
-    </script>
 </body>
 <%} else {
         response.sendRedirect("/TALENTO_HUMANO/");
