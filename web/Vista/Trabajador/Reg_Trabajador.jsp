@@ -118,6 +118,7 @@
                         ti.append('<option value="">Cargando...</option>').val('');
                         $.post("../../ubigeo", data, function (objJson) {
                             ti.empty();
+                            
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
                                 return;

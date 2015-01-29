@@ -73,14 +73,14 @@
             int n_nac = Integer.parseInt(request.getParameter("n_nac"));
             int num_ad = Integer.parseInt(request.getParameter("num_ad"));
             String id_ctr = "";
-            
+
             //String id_dgp = "";
         %>
         <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
 
 
         <!-- MAIN PANEL -->
-     
+
         <div id="main" role="main" style="margin: 0px;">
             <!-- MAIN CONTENT -->
             <div id="content">
@@ -158,7 +158,9 @@
 
                                                         <td class="caji">
                                                             <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007"))) {%>
-                                                            <input type="file" <%if (d.getEs_obligatorio().equals("1")) {out.println(" required='required' ");}%> name="lob_upload<%=i + 1%>">
+                                                            <input type="file" <%if (d.getEs_obligatorio().equals("1")) {
+                                                                    out.println(" required='required' ");
+                                                                }%> name="lob_upload<%=i + 1%>">
                                                             <% } else { %>
                                                             <% if (d.getNo_archivo() == null) { %>
                                                             <label class="null">No Registrado</label>
@@ -183,24 +185,24 @@
                                                         </td>
                                                         <td class="caji">
                                                             <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
-                                                           <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
-                                                                    <% } else { %>
-                                                                    <% if (d.getEs_documento_adjunto() == null) { %>
+                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
+                                                                <% } else { %>
+                                                                <% if (d.getEs_documento_adjunto() == null) { %>
 
                                                             <label class="null">No Registrado</label>
                                                             <% } else { %>
                                                             <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
 
-                                                               
+
                                                                 <%
                                                                 } else {
-                                                                    
+
                                                                 %>
                                                                 <img src="Desaprobado.png" width="20" height="20">
                                                             </label>
-                                                                <% }
-                                                                        }
-                                                                    }%>
+                                                            <% }
+                                                                    }
+                                                                }%>
                                                         </td>
                                                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
                                                 </tr>  
@@ -216,8 +218,10 @@
                                                     <td class="caji"><strong><%=d.getDocumento()%></strong></td>
 
                                                     <td class="caji">
-                                                        <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005")| rol.trim().equals("ROL-0007"))) {%>
-                                                        <input type="file" <%if (d.getEs_obligatorio().equals("1")) {out.println(" required='required' ");}%> name="lob_upload<%=i + 1%>">
+                                                        <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
+                                                        <input type="file" <%if (d.getEs_obligatorio().equals("1")) {
+                                                                out.println(" required='required' ");
+                                                            }%> name="lob_upload<%=i + 1%>">
                                                         <% } else { %>
                                                         <% if (d.getNo_archivo() == null) { %>
                                                         <label class="null">No Registrado</label>
@@ -229,7 +233,7 @@
                                                     </td>
 
                                                     <td class="caji">
-                                                        <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005")| rol.trim().equals("ROL-0007"))) {%>
+                                                        <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
                                                         <input type="text"  name="lob_description<%=i + 1%>">
                                                         <% } else { %>
                                                         <% if (d.getDe_documento_adjunto() == null) { %>
@@ -242,9 +246,9 @@
                                                     </td>
                                                     <td class="caji">
                                                         <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
-                                                       <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
-                                                                <% } else { %>
-                                                                <% if (d.getEs_documento_adjunto() == null) { %>
+                                                        <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
+                                                            <% } else { %>
+                                                            <% if (d.getEs_documento_adjunto() == null) { %>
 
                                                         <label class="null">No Registrado</label>
                                                         <% } else { %>
@@ -254,13 +258,13 @@
                                                             <img src="Aprobado.png" width="20" height="20">
                                                             <%
                                                             } else {
-                                                                
+
                                                             %>
-                                                         <img src="Desaprobado.png" width="20" height="20">
+                                                            <img src="Desaprobado.png" width="20" height="20">
                                                         </label>
-                                                            <% }
-                                                                    }
-                                                                }%>
+                                                        <% }
+                                                                }
+                                                            }%>
                                                     </td>
                                                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
                                                 </tr>  
@@ -288,71 +292,9 @@
 
                                                     <td class="caji">
                                                         <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
-                                                        <input type="file" <%if (d.getEs_obligatorio().equals("1")) {out.println(" required='required' ");}%> name="lob_upload<%=i + 1%>">
-                                                        <% } else { %>
-                                                        <% if (d.getNo_archivo() == null) { %>
-                                                        <label class="null">No Registrado</label>
-                                                        <% } else {%>
-                                                        <a href="Ver_Doc.jsp?nom_doc=<%=d.getAr_dato_archivo()%>"><%=d.getNo_archivo()%></a>
-
-                                                        <% }
-                                                            } %>
-                                                    </td>
-
-                                                    <td class="caji">
-                                                        <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005")| rol.trim().equals("ROL-0007"))) {%>
-                                                        <input type="text"  name="lob_description<%=i + 1%>">
-                                                        <% } else { %>
-                                                        <% if (d.getDe_documento_adjunto() == null) { %>
-                                                        <label class="null" >No Registrado</label>
-                                                        <% } else {%>
-                                                        <label> <%=d.getDe_documento_adjunto()%></label>
-
-                                                        <% } %>
-                                                        <% } %>    
-                                                    </td>
-                                                    <td class="caji">
-                                                        <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
-                                                      <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
-                                                                <% } else { %>
-                                                                <% if (d.getEs_documento_adjunto() == null) { %>
-
-                                                        <label class="null">No Registrado</label>
-                                                        <% } else { %>
-                                                        <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
-                                                            <img src="Aprobado.png" width="20" height="20">
-                                                            <%
-                                                            } else {
-                                                               
-                                                            %>
-                                                         <img src="Desaprobado.png" width="20" height="20">
-                                                        </label>
-                                                            <% }
-                                                                    }
-                                                                }%>
-                                                    </td>
-                                                <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
-                                                </tr>  
-
-
-
-                                                <% } %>
-                                                <% } %>
-
-                                                <%  if (d.getTi_documento().trim().equals("DNIH")) {%>
-                                                <%for (int kk = 0; kk < List_Hijos.size(); kk++) {
-                                                        Datos_Hijo_Trabajador h = new Datos_Hijo_Trabajador();
-                                                        h = (Datos_Hijo_Trabajador) List_Hijos.get(kk);
-                                                %>
-
-
-                                                <tr>
-                                                    <td class="caji"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td>
-
-
-                                                    <td class="caji">
-                                                        <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") )) {%>
-                                                        <input type="file"  <%if (d.getEs_obligatorio().equals("1")) {out.println(" required='required' ");}%> name="lob_upload<%=i + 1%>">
+                                                        <input type="file" <%if (d.getEs_obligatorio().equals("1")) {
+                                                                out.println(" required='required' ");
+                                                            }%> name="lob_upload<%=i + 1%>">
                                                         <% } else { %>
                                                         <% if (d.getNo_archivo() == null) { %>
                                                         <label class="null">No Registrado</label>
@@ -377,9 +319,75 @@
                                                     </td>
                                                     <td class="caji">
                                                         <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
-                                                       <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
-                                                                <% } else { %>
-                                                                <% if (d.getEs_documento_adjunto() == null) { %>
+                                                        <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
+                                                            <% } else { %>
+                                                            <% if (d.getEs_documento_adjunto() == null) { %>
+
+                                                        <label class="null">No Registrado</label>
+                                                        <% } else { %>
+                                                        <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
+                                                            <img src="Aprobado.png" width="20" height="20">
+                                                            <%
+                                                            } else {
+
+                                                            %>
+                                                            <img src="Desaprobado.png" width="20" height="20">
+                                                        </label>
+                                                        <% }
+                                                                }
+                                                            }%>
+                                                    </td>
+                                                <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
+                                                </tr>  
+
+
+
+                                                <% } %>
+                                                <% } %>
+
+                                                <%  if (d.getTi_documento().trim().equals("DNIH")) {%>
+                                                <%for (int kk = 0; kk < List_Hijos.size(); kk++) {
+                                                        Datos_Hijo_Trabajador h = new Datos_Hijo_Trabajador();
+                                                        h = (Datos_Hijo_Trabajador) List_Hijos.get(kk);
+                                                %>
+
+
+                                                <tr>
+                                                    <td class="caji"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td>
+
+
+                                                    <td class="caji">
+                                                        <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007"))) {%>
+                                                        <input type="file"  <%if (d.getEs_obligatorio().equals("1")) {
+                                                                out.println(" required='required' ");
+                                                            }%> name="lob_upload<%=i + 1%>">
+                                                        <% } else { %>
+                                                        <% if (d.getNo_archivo() == null) { %>
+                                                        <label class="null">No Registrado</label>
+                                                        <% } else {%>
+                                                        <a href="Ver_Doc.jsp?nom_doc=<%=d.getAr_dato_archivo()%>"><%=d.getNo_archivo()%></a>
+
+                                                        <% }
+                                                            } %>
+                                                    </td>
+
+                                                    <td class="caji">
+                                                        <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
+                                                        <input type="text"  name="lob_description<%=i + 1%>">
+                                                        <% } else { %>
+                                                        <% if (d.getDe_documento_adjunto() == null) { %>
+                                                        <label class="null" >No Registrado</label>
+                                                        <% } else {%>
+                                                        <label> <%=d.getDe_documento_adjunto()%></label>
+
+                                                        <% } %>
+                                                        <% } %>    
+                                                    </td>
+                                                    <td class="caji">
+                                                        <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
+                                                        <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
+                                                            <% } else { %>
+                                                            <% if (d.getEs_documento_adjunto() == null) { %>
 
                                                         <label class="null">No Registrado</label>
                                                         <% } else { %>
@@ -388,13 +396,13 @@
                                                             <img src="Aprobado.png" width="20" height="20">
                                                             <%
                                                             } else {
-                                                             
+
                                                             %>
-                                                         <img src="Desaprobado.png" width="20" height="20">
+                                                            <img src="Desaprobado.png" width="20" height="20">
                                                         </label>
-                                                            <% }
-                                                                    }
-                                                                }%>
+                                                        <% }
+                                                                }
+                                                            }%>
                                                     </td>
                                                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
                                                 </tr>  
@@ -410,8 +418,10 @@
                                                     <td class="caji"><strong><%=d.getDocumento()%></strong></td>
 
                                                     <td class="caji">
-                                                        <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005")| rol.trim().equals("ROL-0007"))) {%>
-                                                        <input type="file" <%if (d.getEs_obligatorio().equals("1")) {out.println(" required='required' ");}%> name="lob_upload<%=i + 1%>">
+                                                        <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
+                                                        <input type="file" <%if (d.getEs_obligatorio().equals("1")) {
+                                                                out.println(" required='required' ");
+                                                            }%> name="lob_upload<%=i + 1%>">
                                                         <% } else { %>
                                                         <% if (d.getNo_archivo() == null) { %>
                                                         <label class="null">No Registrado</label>
@@ -421,7 +431,7 @@
                                                             } %>
                                                     </td>
                                                     <td class="caji">
-                                                        <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003")| rol.trim().equals("ROL-0007"))) {%>
+                                                        <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007"))) {%>
                                                         <input type="text"   name="lob_description<%=i + 1%>">
                                                         <% } else { %>
                                                         <% if (d.getDe_documento_adjunto() == null) { %>
@@ -433,10 +443,10 @@
                                                         <% } %>    
                                                     </td>
                                                     <td class="caji">
-                                                        <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005")| rol.trim().equals("ROL-0007"))) {%>
-                                                                <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
-                                                                <% } else { %>
-                                                                <% if (d.getEs_documento_adjunto() == null) { %>
+                                                        <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
+                                                        <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
+                                                            <% } else { %>
+                                                            <% if (d.getEs_documento_adjunto() == null) { %>
 
                                                         <label class="null">No Registrado</label>
                                                         <% } else { %>
@@ -444,13 +454,13 @@
                                                             <img src="Aprobado.png" width="20" height="20">
                                                             <%
                                                             } else {
-                                                               
+
                                                             %>
-                                                         <img src="Desaprobado.png" width="20" height="20">
+                                                            <img src="Desaprobado.png" width="20" height="20">
                                                         </label>
-                                                            <% }
-                                                                    }
-                                                                }%>
+                                                        <% }
+                                                                }
+                                                            }%>
                                                     </td>
                                                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
                                                 </tr>  
@@ -460,7 +470,7 @@
                                                 <% }
                                                         i++;
                                                         //id_dgp = d.getIddgp();
-                                                        
+
                                                     }%>
 
 
@@ -492,9 +502,9 @@
                                                 <a class="btn btn-success" href="../../../dgp?iddgp=<%=request.getParameter("iddgp")%>&idtr=<%=request.getParameter("idtr")%>&opc=rd"><i class="fa fa-check"></i> CONTINUAR</a>
                                                 <% }
                                                     }
-                                                    if(request.getParameter("dce") != null){
-                                                    if(request.getParameter("dce").equals("Doc_CE")){
-                                                        out.println("<input  type='hidden' value='CE' name='P2'/>");
+                                                    if (request.getParameter("dce") != null) {
+                                                        if (request.getParameter("dce").equals("Doc_CE")) {
+                                                            out.println("<input  type='hidden' value='CE' name='P2'/>");
                                                 %>
                                                 <!--<a class="btn btn-success" href="../../../dgp?idctr=<%=request.getParameter("idctr")%>&idtr=<%=request.getParameter("idtr")%>&opc=rd"><i class="fa fa-check"></i> CONTINUAR</a>-->
                                                 <%}

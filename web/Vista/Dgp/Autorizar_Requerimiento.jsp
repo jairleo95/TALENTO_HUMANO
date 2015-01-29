@@ -13,7 +13,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <title>Autorizacion</title>
-        <link rel="stylesheet" href="../../css/bootstrap.min.css">
+
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -122,12 +122,16 @@
                     <!-- row -->
                     <div class="row">
 
+
                         <!-- NEW WIDGET START -->
                         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
                             <div id="alerta_dgp">
 
+
                             </div>
+
+
 
                             <!-- Widget ID (each widget will need unique ID)-->
                             <div class="jarviswidget jarviswidget-color-red" id="wid-id-0" data-widget-editbutton="false">
@@ -161,11 +165,47 @@
                                             HttpSession sesion_1 = request.getSession(true);
                                             String idrol = (String) sesion_1.getAttribute("IDROL");
                                             String dep = (String) sesion_1.getAttribute("DEPARTAMENTO_ID");%>
+
+
                                     </div>
                                     <!-- end widget edit box -->
 
+                                    <script>
+                                        $(document).ready(function () {
+                                            $(".btn_pro_firma").click(function () {
+                                                $.each($(".firm_contr"), function () {
+                                                    //alert($(this).val());
+                                                    if ($(this).prop('checked')) {
+                                                        $.ajax({
+                                                            url: "../../autorizacion",
+                                                            type: "POST",
+                                                            data: "opc=Aceptar" + $(".val_aut" + $(this).val()).val()
+                                                        }).done(function () {
+                                                            //$(".btn_cargar").click();
+                                                            // window.location.href = "../../autorizacion";
+                                                        });
+                                                        $.ajax({
+                                                            url: "../../contrato",
+                                                            type: "POST",
+                                                            data: "opc=Actualizar_Firma" + $(".val_firm" + $(this).val()).val()
+                                                        }).done(function () {
+                                                            //$(".btn_cargar").click();
+
+                                                            //  alert(t);
+                                                        });
+                                                        
+                                                        //  alert($(".val_aut" + $(this).val()).val());
+
+                                                    }
+                                                });
+                                                window.location.href = "../../autorizacion";
+
+                                            });
+                                        });
+                                    </script>
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">
+                                        <button type="button" class="btn btn-success btn_pro_firma">Procesar Firmas</button>
 
                                         <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                                             <thead>			                
@@ -269,20 +309,21 @@
                                                     <td ><%=a.getNo_seccion()%></td> 
                                                     <td ><%=a.getNo_area()%></td>      
                                                     <td ><%=a.getNo_req()%></td>      
+                                            <input type="text" class="val_aut<%=(f + 1)%>" value="&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&IDDETALLE_DGP=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&COD=<%=a.getCo_pasos()%>&IDPASOS=<%=a.getId_pasos()%>&NROPASO=<%=a.getNu_pasos()%>&IDTR=<%=a.getId_trabajador()%>"/>
+                                            <input type="text" class="val_firm<%=(f + 1)%>" value="&IDDETALLE_DGP=<%=a.getId_dgp()%>&IDTR=<%=a.getId_trabajador()%>"/>
+                                            <td style="color: red; font-weight: bold;"><a href="../../trabajador?idtr=<%=a.getId_trabajador()%>&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&iddetalle_dgp=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&cod=<%=a.getCo_pasos()%>&idpasos=<%=a.getId_pasos()%>&autorizacion=1&opc=aut&nup=<%=a.getNu_pasos()%>"><%=a.getDe_pasos()%></a></td>
 
-                                                    <td style="color: red; font-weight: bold;"><a href="../../trabajador?idtr=<%=a.getId_trabajador()%>&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&iddetalle_dgp=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&cod=<%=a.getCo_pasos()%>&idpasos=<%=a.getId_pasos()%>&autorizacion=1&opc=aut&nup=<%=a.getNu_pasos()%>"><%=a.getDe_pasos()%></a></td>
+                                            <% if (dep.equals("DPT-0019")) {%>
+                                            <td ><%=a.getFe_creacion()%></td>
 
-                                                    <% if (dep.equals("DPT-0019")) {%>
-                                                    <td ><%=a.getFe_creacion()%></td>
+                                            <td><%if (a.getVal_plazo() > 0) {
 
-                                                    <td><%if (a.getVal_plazo() > 0) {
-
-                                                        %>
-                                                        <a href="../../plazo_dgp?opc=Ver_detalle_plazo&iddgp=<%=a.getId_dgp()%>" class="label label-danger" rel="popover-hover" data-placement="top" data-original-title="Record de plazos cumplidos" data-content="<%=a.getVer_list_plazo()%>" data-html="true"> <strong>No cumplio plazos</strong></a></td>
-                                                        <%                                                        } else {
+                                                %>
+                                                <a href="../../plazo_dgp?opc=Ver_detalle_plazo&iddgp=<%=a.getId_dgp()%>" class="label label-danger" rel="popover-hover" data-placement="top" data-original-title="Record de plazos cumplidos" data-content="<%=a.getVer_list_plazo()%>" data-html="true"> <strong>No cumplio plazos</strong></a></td>
+                                                <%                                                        } else {
 
 
-                                                        %>
+                                                %>
                                             <a href="../../plazo_dgp?opc=Ver_detalle_plazo&iddgp=<%=a.getId_dgp()%>" class="label label-primary" rel="popover-hover" data-placement="top" data-original-title="Record de plazos cumplidos " data-content="<%=a.getVer_list_plazo()%>" data-html="true"> <strong>Cumplio plazos</strong></a></td>
 
                                             <%                                                                    }%>
@@ -296,16 +337,28 @@
                                                     out.println("Si");
                                                 }
                                                 %></td> 
-                                            <td ><%                                                if (Integer.parseInt(a.getVal_firm_contrato()) == 0) {
-                                                    out.println("No");
-                                                } else {
-                                                    out.println("Si");
-                                                }
+                                            <td ><%
+                                                if (Integer.parseInt(a.getVal_firm_contrato()) == 0) {
+
+                                                    if (Integer.parseInt(a.getElab_contrato()) == 0) {
+                                                        out.println("!Falta procesar¡");
+                                                    } else {
+                                                %>
+                                                <div class="smart-form">
+                                                    <label class="toggle"><input type="checkbox" value="<%=(f + 1)%>"  class="firm_contr"  name="estado" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
+                                                </div>
+
+                                                <%
+                                                        }
+                                                    } else {
+
+                                                        out.println("Si");
+                                                    }
                                                 %></td>
                                             <td><%
                                                 if (Integer.parseInt(a.getVal_firm_contrato()) != 0 & Integer.parseInt(a.getElab_contrato()) != 0) {
-out.println("Enviar");
-                                                }else{
+                                                    out.println("Enviar");
+                                                } else {
                                                     out.println("¡Falta Procesar!");
                                                 }
 
@@ -363,16 +416,16 @@ out.println("Enviar");
     <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script>
-            if (!window.jQuery) {
-                document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
-            }
+                                        if (!window.jQuery) {
+                                            document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
+                                        }
     </script>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script>
-            if (!window.jQuery.ui) {
-                document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-            }
+                                        if (!window.jQuery.ui) {
+                                            document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                                        }
     </script>
 
     <!-- IMPORTANT: APP CONFIG -->
@@ -431,174 +484,176 @@ out.println("Enviar");
     <script src="../../js/speech/voicecommand.min.js"></script>
 
     <!-- PAGE RELATED PLUGIN(S) -->
+    <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
     <script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
     <script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>
     <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
     <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
     <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
 
+
     <script type="text/javascript">
 
-            // DO NOT REMOVE : GLOBAL FUNCTIONS!
+                                        // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-            $(document).ready(function () {
+                                        $(document).ready(function () {
 
-                pageSetUp();
+                                            pageSetUp();
 
-                /* // DOM Position key index //
-                 
-                 l - Length changing (dropdown)
-                 f - Filtering input (search)
-                 t - The Table! (datatable)
-                 i - Information (records)
-                 p - Pagination (paging)
-                 r - pRocessing 
-                 < and > - div elements
-                 <"#id" and > - div with an id
-                 <"class" and > - div with a class
-                 <"#id.class" and > - div with an id and class
-                 
-                 Also see: http://legacy.datatables.net/usage/features
-                 */
+                                            /* // DOM Position key index //
+                                             
+                                             l - Length changing (dropdown)
+                                             f - Filtering input (search)
+                                             t - The Table! (datatable)
+                                             i - Information (records)
+                                             p - Pagination (paging)
+                                             r - pRocessing 
+                                             < and > - div elements
+                                             <"#id" and > - div with an id
+                                             <"class" and > - div with a class
+                                             <"#id.class" and > - div with an id and class
+                                             
+                                             Also see: http://legacy.datatables.net/usage/features
+                                             */
 
-                /* BASIC ;*/
-                var responsiveHelper_dt_basic = undefined;
-                var responsiveHelper_datatable_fixed_column = undefined;
-                var responsiveHelper_datatable_col_reorder = undefined;
-                var responsiveHelper_datatable_tabletools = undefined;
+                                            /* BASIC ;*/
+                                            var responsiveHelper_dt_basic = undefined;
+                                            var responsiveHelper_datatable_fixed_column = undefined;
+                                            var responsiveHelper_datatable_col_reorder = undefined;
+                                            var responsiveHelper_datatable_tabletools = undefined;
 
-                var breakpointDefinition = {
-                    tablet: 1024,
-                    phone: 480
-                };
+                                            var breakpointDefinition = {
+                                                tablet: 1024,
+                                                phone: 480
+                                            };
 
-                $('#dt_basic').dataTable({
-                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
-                            "t" +
-                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                    "autoWidth": true,
-                    "preDrawCallback": function () {
-                        // Initialize the responsive datatables helper once.
-                        if (!responsiveHelper_dt_basic) {
-                            responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
-                        }
-                    },
-                    "rowCallback": function (nRow) {
-                        responsiveHelper_dt_basic.createExpandIcon(nRow);
-                    },
-                    "drawCallback": function (oSettings) {
-                        responsiveHelper_dt_basic.respond();
-                    }
-                });
+                                            $('#dt_basic').dataTable({
+                                                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
+                                                        "t" +
+                                                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                                                "autoWidth": true,
+                                                "preDrawCallback": function () {
+                                                    // Initialize the responsive datatables helper once.
+                                                    if (!responsiveHelper_dt_basic) {
+                                                        responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
+                                                    }
+                                                },
+                                                "rowCallback": function (nRow) {
+                                                    responsiveHelper_dt_basic.createExpandIcon(nRow);
+                                                },
+                                                "drawCallback": function (oSettings) {
+                                                    responsiveHelper_dt_basic.respond();
+                                                }
+                                            });
 
-                /* END BASIC */
+                                            /* END BASIC */
 
-                /* COLUMN FILTER  */
-                var otable = $('#datatable_fixed_column').DataTable({
-                    //"bFilter": false,
-                    //"bInfo": false,
-                    //"bLengthChange": false
-                    //"bAutoWidth": false,
-                    //"bPaginate": false,
-                    //"bStateSave": true // saves sort state using localStorage
-                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>" +
-                            "t" +
-                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                    "autoWidth": true,
-                    "preDrawCallback": function () {
-                        // Initialize the responsive datatables helper once.
-                        if (!responsiveHelper_datatable_fixed_column) {
-                            responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
-                        }
-                    },
-                    "rowCallback": function (nRow) {
-                        responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
-                    },
-                    "drawCallback": function (oSettings) {
-                        responsiveHelper_datatable_fixed_column.respond();
-                    }
+                                            /* COLUMN FILTER  */
+                                            var otable = $('#datatable_fixed_column').DataTable({
+                                                //"bFilter": false,
+                                                //"bInfo": false,
+                                                //"bLengthChange": false
+                                                //"bAutoWidth": false,
+                                                //"bPaginate": false,
+                                                //"bStateSave": true // saves sort state using localStorage
+                                                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>" +
+                                                        "t" +
+                                                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                                                "autoWidth": true,
+                                                "preDrawCallback": function () {
+                                                    // Initialize the responsive datatables helper once.
+                                                    if (!responsiveHelper_datatable_fixed_column) {
+                                                        responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
+                                                    }
+                                                },
+                                                "rowCallback": function (nRow) {
+                                                    responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
+                                                },
+                                                "drawCallback": function (oSettings) {
+                                                    responsiveHelper_datatable_fixed_column.respond();
+                                                }
 
-                });
+                                            });
 
-                // custom toolbar
-                $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
+                                            // custom toolbar
+                                            $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
 
-                // Apply the filter
-                $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
+                                            // Apply the filter
+                                            $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
 
-                    otable
-                            .column($(this).parent().index() + ':visible')
-                            .search(this.value)
-                            .draw();
+                                                otable
+                                                        .column($(this).parent().index() + ':visible')
+                                                        .search(this.value)
+                                                        .draw();
 
-                });
-                /* END COLUMN FILTER */
+                                            });
+                                            /* END COLUMN FILTER */
 
-                /* COLUMN SHOW - HIDE */
-                $('#datatable_col_reorder').dataTable({
-                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'C>r>" +
-                            "t" +
-                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                    "autoWidth": true,
-                    "preDrawCallback": function () {
-                        // Initialize the responsive datatables helper once.
-                        if (!responsiveHelper_datatable_col_reorder) {
-                            responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
-                        }
-                    },
-                    "rowCallback": function (nRow) {
-                        responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
-                    },
-                    "drawCallback": function (oSettings) {
-                        responsiveHelper_datatable_col_reorder.respond();
-                    }
-                });
+                                            /* COLUMN SHOW - HIDE */
+                                            $('#datatable_col_reorder').dataTable({
+                                                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'C>r>" +
+                                                        "t" +
+                                                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
+                                                "autoWidth": true,
+                                                "preDrawCallback": function () {
+                                                    // Initialize the responsive datatables helper once.
+                                                    if (!responsiveHelper_datatable_col_reorder) {
+                                                        responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
+                                                    }
+                                                },
+                                                "rowCallback": function (nRow) {
+                                                    responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
+                                                },
+                                                "drawCallback": function (oSettings) {
+                                                    responsiveHelper_datatable_col_reorder.respond();
+                                                }
+                                            });
 
-                /* END COLUMN SHOW - HIDE */
+                                            /* END COLUMN SHOW - HIDE */
 
-                /* TABLETOOLS */
-                $('#datatable_tabletools').dataTable({
-                    // Tabletools options: 
-                    //   https://datatables.net/extensions/tabletools/button_options
-                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>" +
-                            "t" +
-                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                    "oTableTools": {
-                        "aButtons": [
-                            "copy",
-                            "csv",
-                            "xls",
-                            {
-                                "sExtends": "pdf",
-                                "sTitle": "SmartAdmin_PDF",
-                                "sPdfMessage": "SmartAdmin PDF Export",
-                                "sPdfSize": "letter"
-                            },
-                            {
-                                "sExtends": "print",
-                                "sMessage": "Generated by SmartAdmin <i>(press Esc to close)</i>"
-                            }
-                        ],
-                        "sSwfPath": "js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
-                    },
-                    "autoWidth": true,
-                    "preDrawCallback": function () {
-                        // Initialize the responsive datatables helper once.
-                        if (!responsiveHelper_datatable_tabletools) {
-                            responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
-                        }
-                    },
-                    "rowCallback": function (nRow) {
-                        responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
-                    },
-                    "drawCallback": function (oSettings) {
-                        responsiveHelper_datatable_tabletools.respond();
-                    }
-                });
+                                            /* TABLETOOLS */
+                                            $('#datatable_tabletools').dataTable({
+                                                // Tabletools options: 
+                                                //   https://datatables.net/extensions/tabletools/button_options
+                                                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>" +
+                                                        "t" +
+                                                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
+                                                "oTableTools": {
+                                                    "aButtons": [
+                                                        "copy",
+                                                        "csv",
+                                                        "xls",
+                                                        {
+                                                            "sExtends": "pdf",
+                                                            "sTitle": "SmartAdmin_PDF",
+                                                            "sPdfMessage": "SmartAdmin PDF Export",
+                                                            "sPdfSize": "letter"
+                                                        },
+                                                        {
+                                                            "sExtends": "print",
+                                                            "sMessage": "Generated by SmartAdmin <i>(press Esc to close)</i>"
+                                                        }
+                                                    ],
+                                                    "sSwfPath": "js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
+                                                },
+                                                "autoWidth": true,
+                                                "preDrawCallback": function () {
+                                                    // Initialize the responsive datatables helper once.
+                                                    if (!responsiveHelper_datatable_tabletools) {
+                                                        responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
+                                                    }
+                                                },
+                                                "rowCallback": function (nRow) {
+                                                    responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
+                                                },
+                                                "drawCallback": function (oSettings) {
+                                                    responsiveHelper_datatable_tabletools.respond();
+                                                }
+                                            });
 
-                /* END TABLETOOLS */
+                                            /* END TABLETOOLS */
 
-            })
+                                        })
 
     </script>
 
