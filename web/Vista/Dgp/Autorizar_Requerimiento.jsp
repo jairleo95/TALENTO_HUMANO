@@ -81,7 +81,7 @@
             if (request.getParameter("r").equals("ok")) {
     %>
 
-    <body onload="ok()" class="body">
+    <body onload='exito("Procesado con exito!", "Usted ha realizado una autorización correctamente.");' class="body">
         <%
             }
         } else {
@@ -89,7 +89,9 @@
     <body class="body"  >
         <%}%> 
         <script>
+
             $(document).ready(function () {
+
                 var b = $("#alerta_dgp");
                 // $("#alerta_dgp").hide();
                 function listar() {
@@ -107,9 +109,7 @@
                     });
                 }
                 listar();
-
             });
-
         </script>
 
         <!-- MAIN PANEL -->
@@ -129,6 +129,7 @@
                             <div id="alerta_dgp">
 
                             </div>
+
 
                             <!-- Widget ID (each widget will need unique ID)-->
                             <div class="jarviswidget jarviswidget-color-red" id="wid-id-0" data-widget-editbutton="false">
@@ -168,35 +169,52 @@
                                     <!-- end widget edit box -->
 
                                     <script>
+                                        function exito(titulo, mensaje) {
+                                            $.smallBox({
+                                                title: titulo,
+                                                content: mensaje,
+                                                color: "#739E73",
+                                                iconSmall: "fa fa-cloud",
+                                                timeout: 3000
+                                            });
+                                        }
                                         $(document).ready(function () {
                                             $(".btn_pro_firma").click(function () {
-                                                $.each($(".firm_contr"), function () {
-                                                    //alert($(this).val());
-                                                    if ($(this).prop('checked')) {
-                                                        $.ajax({
-                                                            url: "../../autorizacion",
-                                                            type: "POST",
-                                                            data: "opc=Aceptar" + $(".val_aut" + $(this).val()).val()
-                                                        }).done(function () {
-                                                            //$(".btn_cargar").click();
-                                                            // window.location.href = "../../autorizacion";
-                                                        });
-                                                        $.ajax({
-                                                            url: "../../contrato",
-                                                            type: "POST",
-                                                            data: "opc=Actualizar_Firma" + $(".val_firm" + $(this).val()).val()
-                                                        }).done(function () {
-                                                            //$(".btn_cargar").click();
 
-                                                            //  alert(t);
-                                                        });
-                                                        window.location.href = "../../autorizacion";
-                                                        //  alert($(".val_aut" + $(this).val()).val());
+                                                // 
+                                                try {
+                                                    $.each($(".firm_contr"), function () {
+                                                        //alert($(this).val());
+                                                        if ($(this).prop('checked')) {
+                                                            $.ajax({
+                                                                url: "../../contrato",
+                                                                type: "POST",
+                                                                data: "opc=Actualizar_Firma" + $(".val_firm" + $(this).val()).val()
+                                                            }).done(function () {
 
-                                                    }
-                                                });
+                                                            });
+                                                            $.ajax({
+                                                                url: "../../autorizacion",
+                                                                type: "POST",
+                                                                data: "opc=Aceptar" + $(".val_aut" + $(this).val()).val()
+                                                            }).done(function () {
 
+                                                                window.location.href = "../../autorizacion";
+                                                            });
+                                                        }
+                                                    });
+                                                   // exito("Procesado correctamente!", "Las firmas de cada trabajador han sido procesadas con exito.");
+
+                                                }
+                                                catch (err) {
+                                                    alert(err.message);
+                                                } finally {
+
+
+                                                }
                                             });
+
+
                                         });
                                     </script>
                                     <!-- widget content -->
@@ -232,7 +250,6 @@
                                             </thead>
                                             <tbody> 
                                                 <%
-
                                                     String iddgp = request.getParameter("iddgp");
                                                     String idtr = request.getParameter("idtr");
                                                     InterfaceDgpDAO dgp = new DgpDAO();
@@ -413,14 +430,14 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script>
                                         if (!window.jQuery) {
-                                            document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
+                                            document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
                                         }
     </script>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script>
                                         if (!window.jQuery.ui) {
-                                            document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                                            document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
                                         }
     </script>
 
@@ -495,6 +512,9 @@
                                         $(document).ready(function () {
 
                                             pageSetUp();
+                                            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+                                                $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+                                            });
 
                                             /* // DOM Position key index //
                                              
