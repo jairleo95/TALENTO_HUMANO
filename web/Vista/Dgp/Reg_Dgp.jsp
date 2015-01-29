@@ -170,6 +170,7 @@
                                                             tr = (V_Ficha_Trab_Num_C) Listar_Trabajador_id.get(i);
                                                     %>
                                                     <div class="row">
+                                                        <input value= "<%=tr.getId_trabajador() %>"  type="hidden" id="" />
                                                         <section class="col col-6">
                                                             <label class="label" id="titu">Trabajador :</label>
                                                             <label class="input" style="color: red; font-weight: bold;">
@@ -361,8 +362,12 @@
                                                             </label>
                                                         </section>
                                                     </div>
-                                                    <div class="row">
-                                                        <section class="col col-3" name="">
+                                                        
+                                                       <%String es_cue_sue=request.getParameter("es_cs");
+                                                       if(es_cue_sue.equals("0")){%>
+                                                       
+                                                          <div class="row"> 
+                                                              <section class="col col-3" name="">
                                                             <label class="select" id="titu">Cta Sueldo - Banco:
                                                                 <select name="BANCO" id="banco" required="">
                                                                     <option value="" selected="" disabled="" >[Selecione]</option>
@@ -402,6 +407,9 @@
                                                         </section>
 
                                                     </div>
+                                                      <%}
+                                                       %>
+                                                        
                                                     <%}
                                                         if (idreq.equals("REQ-0010")) {%>  
                                                     <div class="">
