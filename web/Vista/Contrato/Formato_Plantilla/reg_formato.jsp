@@ -1,15 +1,20 @@
-<%@page import="pe.edu.upeu.application.model.Usuario"%>
+
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%
     HttpSession sesion = request.getSession();
     String id_user = (String) sesion.getAttribute("IDUSER");
     if (id_user != null) {
 %>
-<%@page import="java.util.GregorianCalendar"%>
+
 <!DOCTYPE html>
 <!--
 Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or http://ckeditor.com/license
 -->
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
+<%@page import="java.util.GregorianCalendar"%>
 <%@page import="pe.edu.upeu.application.dao.ListaDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceListaDAO"%>
 <%@page import="pe.edu.upeu.application.model.X_List_Id_Contrato_DGP"%>
@@ -23,6 +28,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         <link href="../../../HTML_version/js/plugin/ckeditor/samples/sample.css" rel="stylesheet">
         <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
         <%
+        String no_arch =request.getParameter("no_arch ");
+        if(no_arch !=null){
             for (int i = 0; i < List_contra_x_idcto.size(); i++) {
                 X_List_Id_Contrato_DGP n = new X_List_Id_Contrato_DGP();
                 n = (X_List_Id_Contrato_DGP) List_contra_x_idcto.get(i);
@@ -33,7 +40,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         Direccion += l.List_Dom_D1_Id().get(b);
                     }
                 }
-                if (n.getLi_di_dom_a_d3().trim().equals("1")) {
+               if (n.getLi_di_dom_a_d3().trim().equals("1")) {
                     Direccion += " " + n.getDi_dom_a_d2() + " Numero";
                 }
                 if (n.getLi_di_dom_a_d3().trim().equals("2")) {
@@ -51,26 +58,32 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
                 String fecha = n.getFe_sus();
                 String fechasus = "";
-                if (fecha != "") {
-                    String f[] = fecha.split("/");
-                    fechasus = f[0] + " de " + f[1] + " del " + f[2];
+                if (fecha != ""&fecha!=null) {
+                    if (System.getProperty("sun.desktop").trim().equals("windows")) {
+                        String f[] = fecha.split("/");
+                       fechasus = f[0] + " de " + f[1] + " del " + f[2];
+                    } else {
+                        Date date = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
+                        String fecha_convertida = new SimpleDateFormat("dd-MMM-yy").format(date);
+                        fechasus= fecha_convertida;
+                    }                  
                 } else {
                     fechasus = "NO TIENE";
                 }
-                String fecha2 = n.getFe_des();
+                String fecha2 = n.getFe_des().trim();
                 String fechades = "";
-                if (fecha2 != "") {
-                    String f[] = fecha.split("/");
-                    fechades = f[0] + " de " + f[1] + " del " + f[2];
+                if (fecha2 != "" & fecha2 != null) {
+                    String f[] = fecha2.split("/");
+                   fechades = f[0] + " de " + f[1] + " del " + f[2];
                 } else {
                     fechades = "NO TIENE";
                 }
-                fecha2 = n.getFe_has();
+                fecha2 = n.getFe_has().trim();
                 String fechahas = "";
-                if (fecha2 != "") {
-                    String f[] = fecha.split("/");
+                if (fecha2 != "" & fecha != null) {
+                    String f[] = fecha2.split("/");
                     fechahas = f[0] + " de " + f[1] + " del " + f[2];
-                }else {
+                } else {
                     fechahas = "NO TIENE";
                 }
         %>
@@ -249,10 +262,11 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
     <body style="height: 1080px">
         <h3>CARGAR PLANTILLAS</h3>
-        <%String no_ar = request.getParameter("no_arc");%>
+        <%String no_ar = request.getParameter("no_arc");
+       %>
         <input type="hidden" id="no_arch" class="no_arc" value="<%=no_ar%>">
         <button class="procesar" type="button" onclick="procesar_texto();">Procesar </button>
-        <h3>EDITAR PLANTILLAS</h3>
+        <h3>EDITAR PLANTILLAS <%=fechades%></h3>
         <form class="ckeditor_form" action="../../../formato_plantilla" method="post">
             <textarea cols="100" id="editor1" name="editor1" rows="10">
             </textarea>
@@ -285,6 +299,10 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 <input type="submit" value="Actualizar Formato" id="actu" onclick="leer();">
             </div>
         </form>
+        <%}}else{%>
+        <table>
+            <td><h1>Plantilla_no_registrada</h1></td>
+        </table>
         <%}%>
     </body>
 
