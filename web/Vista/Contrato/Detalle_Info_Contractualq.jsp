@@ -186,8 +186,11 @@
                         X_List_Id_Contrato_DGP n = new X_List_Id_Contrato_DGP();
                         n = (X_List_Id_Contrato_DGP) List_contra_x_idcto.get(b);
                 %>
-                <a class="btn btn-primary" href="../../contrato?opc=Subir_Contrato&idc=<%=n.getId_contrato()%>" >Subir Contrato Firmado</a>
 
+                <%if (idrol.trim().equals("ROL-0006") || idrol.trim().equals("ROL-0002")) {
+                %> 
+                <a class="btn btn-primary" href="../../contrato?opc=Subir_Contrato&idc=<%=n.getId_contrato()%>" >Subir Contrato Firmado</a>
+                <%}%>
                 <% for (int p = 0; p < List_contra_x_idcto.size(); p++) {%>
 
 
@@ -490,7 +493,7 @@
             }
         %>
     </center>
-    
+
     <%}%>
 </body>
 <%} else {

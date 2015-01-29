@@ -163,8 +163,6 @@
                                             HttpSession sesion_1 = request.getSession(true);
                                             String idrol = (String) sesion_1.getAttribute("IDROL");
                                             String dep = (String) sesion_1.getAttribute("DEPARTAMENTO_ID");%>
-
-
                                     </div>
                                     <!-- end widget edit box -->
 
@@ -179,6 +177,22 @@
                                             });
                                         }
                                         $(document).ready(function () {
+
+                                            $(".btn_pro_remuneracion").click(function () {
+                                                $.each($(".env_rem"), function () {
+                                                    if ($(this).prop('checked')) {
+                                                        $.ajax({
+                                                            url: "../../autorizacion",
+                                                            type: "POST",
+                                                            data: "opc=Aceptar" + $(".val_aut" + $(this).val()).val()
+                                                        }).done(function () {
+
+                                                            window.location.href = "../../autorizacion";
+                                                        });
+                                                    }
+                                                });
+
+                                            });
                                             $(".btn_pro_firma").click(function () {
 
                                                 // 
@@ -219,34 +233,38 @@
                                     </script>
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">
+                                        <%if (idrol.trim().equals("ROL-0006")) {
+                                        %>
                                         <button type="button" class="btn btn-success btn_pro_firma">Procesar Firmas</button>
-
+                                        <button type="button" class="btn btn-default btn_pro_remuneracion">Enviar a remuneraciones</button>
+                                        <%}%>
                                         <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
-                                            <thead>			                
-                                                <tr > <th><strong>Acción</strong></th>
-                                                    <th data-hide="phone,tablet"><strong>Nro</strong></th>
+                                            <thead>
+                                            <th data-hide="phone,tablet"><strong>Nro</strong></th>
+                                            <tr > <th><strong>Acción</strong></th>
 
-                                                    <th data-hide="phone,tablet"><strong>Foto</strong> </th>
-                                                    <th data-class="expand" ><strong>Apellidos Y Nombres</strong></th>
 
-                                                    <th data-hide="phone,tablet"><strong>Puesto</strong></th>
-                                                    <th data-hide="phone,tablet"><strong>Area</strong></th>
-                                                    <th data-hide="phone,tablet"><strong>Depto.</strong></th>
-                                                    <th data-hide="phone,tablet"><strong>Requerimiento</strong></th>
-                                                    <!--  <td>Departamento</td>-->
-                                                    <th data-hide="phone,tablet"><strong>Descripcion</strong></th>
-                                                        <% if (dep.equals("DPT-0019")) {%>
-                                                    <th  data-hide="phone,tablet">Fecha de Creación</th>  
-                                                    <th data-class="expand" ><strong>¿Cumplio Plazos?</strong></th>
-                                                        <%if (idrol.trim().equals("ROL-0006")) {
+                                                <th data-hide="phone,tablet"><strong>Foto</strong> </th>
+                                                <th data-class="expand" ><strong>Apellidos Y Nombres</strong></th>
 
-                                                        %>
-                                                    <th data-class="expand" ><strong>¿Contrato Elaborado?</strong></th>
-                                                    <th data-class="expand" ><strong>¿Firmo Contrato?</strong></th>
-                                                    <th data-class="expand" ><strong>Enviar a Rem.</strong></th>
-                                                        <%}
-                                                            }%>
-                                                </tr>
+                                                <th data-hide="phone,tablet"><strong>Puesto</strong></th>
+                                                <th data-hide="phone,tablet"><strong>Area</strong></th>
+                                                <th data-hide="phone,tablet"><strong>Departamento</strong></th>
+                                                <th data-hide="phone,tablet"><strong>Requerimiento</strong></th>
+                                                <!--  <td>Departamento</td>-->
+                                                <th data-hide="phone,tablet"><strong>Descripcion</strong></th>
+                                                    <% if (dep.equals("DPT-0019")) {%>
+                                                <th  data-hide="phone,tablet">Fecha de Creación</th>  
+                                                <th data-class="expand" ><strong>¿Cumplio Plazos?</strong></th>
+                                                    <%if (idrol.trim().equals("ROL-0006")) {
+
+                                                    %>
+                                                <th data-class="expand" ><strong>¿Contrato Elaborado?</strong></th>
+                                                <th data-class="expand" ><strong>¿Firmo Contrato?</strong></th>
+                                                <th data-class="expand" ><strong>Enviar a Rem.</strong></th>
+                                                    <%}
+                                                        }%>
+                                            </tr>
                                             </thead>
                                             <tbody> 
                                                 <%
@@ -265,6 +283,8 @@
                                                 %>
 
                                                 <tr>
+
+                                                    <td><%=f + 1%></td>
                                                     <td>
                                                         <div class="btn-group">
                                                             <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -311,7 +331,6 @@
 
 
                                                     </td>
-                                                    <td><%=f + 1%></td>
                                                     <% if (a.getAr_foto() == null) {%>
                                                     <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30"></td>
                                                         <% } else {%>
@@ -371,10 +390,14 @@
                                                 %></td>
                                             <td><%
                                                 if (Integer.parseInt(a.getVal_firm_contrato()) != 0 & Integer.parseInt(a.getElab_contrato()) != 0) {
-                                                    out.println("Enviar");
-                                                } else {
-                                                    out.println("¡Falta Procesar!");
-                                                }
+                                                %>
+                                                <div class="smart-form">
+                                                    <label class="toggle"><input type="checkbox" value="<%=(f + 1)%>"  class="env_rem"  name="estado" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
+                                                </div>
+                                                <%
+                                                    } else {
+                                                        out.println("¡Falta Procesar!");
+                                                    }
 
                                                 %></td>
 
