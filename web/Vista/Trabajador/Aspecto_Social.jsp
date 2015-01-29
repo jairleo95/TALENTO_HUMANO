@@ -24,16 +24,18 @@
     </head>
     <body>
 
-        <form align="center">
+        <form align="center" action="../../trabajador"  >
             <table class="table table-hover table-striped table-bordered table-responsive" style="border-radius: 30px ">
                 <%for (int index = 0; index < ListaridTrabajador.size(); index++) {
                         V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
                         trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
-
-
                 %>   
 
-                <tr><td colspan="2"><div class="title">Direccion Domicilio Actual</div></td></tr> 
+                <tr>
+                    <td colspan="2">
+                        <div class="title">Direccion Domicilio Actual</div>
+                    </td>
+                </tr> 
                 <tr><td class="text-info">Dirección :</td><td><% InterfaceListaDAO l = new ListaDAO();
                     for (int b = 0; b < l.List_Dom_D1_Id().size(); b++) {
                         if (trb.getLi_di_dom_a_d1().trim().equals(b + 1 + "")) {
@@ -119,7 +121,15 @@
                         out.print(trb.getCa_ing_qta_cat_otras_empresas());
                     }%></td></tr>
 
-                <tr><td colspan="2"><div class="title">Información Religiosa</div></td></tr>
+                <tr>
+                    <td >
+                        <div class="title">Información Religiosa</div>
+                    </td>
+                    <td >
+                        <input type="hidden" name="idtr" value="<%=trb.getIdtr()%>">  
+                        <input class="btn btn-success" type="submit" name="opc" value="EditarAR">  
+                    </td>
+                </tr>
                 <tr><td class="text-info">Religión:</td><td><%
 
                     if (trb.getLi_religion().equals("1")) {
@@ -135,13 +145,13 @@
                 <tr><td class="text-info">Cargo en la Iglesia:</td><td><%if(trb.getDe_cargo()==null){out.print("SIN REGISTRAR");}else{out.print(trb.getDe_cargo());}%></td></tr>
                 <tr><td class="text-info">Autoridad:</td><td><%
                     if (trb.getLi_autoridad() != null) {
-                        if (trb.getLi_autoridad().equals("1")) {
+                        if (trb.getLi_autoridad().trim().equals("1")) {
                             out.println("Pastor");
                         }
-                        if (trb.getLi_autoridad().equals("2")) {
+                        if (trb.getLi_autoridad().trim().equals("2")) {
                             out.println("Pastor");
                         }
-                        if (trb.getLi_autoridad().equals("3")) {
+                        if (trb.getLi_autoridad().trim().equals("3")) {
                             out.println("Sacerdote");
                         }
                     }else{

@@ -406,7 +406,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
     @Override
     public String tipo_planilla(String id_trabajador) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT ID_TIPO_PLANILLA FROM RHTM_CONTRATO WHERE ID_TRABAJADOR='"+id_trabajador+"' and ES_CONTRATO='1'";
+        String sql = "SELECT ID_TIPO_PLANILLA FROM RHTM_CONTRATO WHERE ID_TRABAJADOR='" + id_trabajador + "' and ES_CONTRATO='1'";
         String id_pl = null;
         try {
             ResultSet rs = this.conn.query(sql);
@@ -420,12 +420,11 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         return id_pl;
     }
 
-
     @Override
-    public void INSERT_HIST_RELIGION(String ID_HIST_INFO_REL, String LI_RELIGION, String NO_IGLESIA, String DE_CARGO, String LI_AUTORIDAD, String NO_AP_AUTORIDAD, String CL_AUTORIDAD, String ES_HIST_INFO_REL, String ID_TRABAJADOR ) {
+    public void INSERT_HIST_RELIGION(String ID_HIST_INFO_REL, String LI_RELIGION, String NO_IGLESIA, String DE_CARGO, String LI_AUTORIDAD, String NO_AP_AUTORIDAD, String CL_AUTORIDAD, String ES_HIST_INFO_REL, String ID_TRABAJADOR, String iduser, String FE_MODIF) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_HIST_INFO_REL( ?, ?, ?, ?, ?, ?, ?, ? ,?)} ");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_HIST_INFO_REL( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)} ");
             cst.setString(1, null);
             cst.setString(2, LI_RELIGION);
             cst.setString(3, NO_IGLESIA);
@@ -435,6 +434,27 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(7, CL_AUTORIDAD);
             cst.setString(8, ES_HIST_INFO_REL);
             cst.setString(9, ID_TRABAJADOR);
+            cst.setString(10, iduser);
+            cst.setString(11, FE_MODIF);
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        }
+    }
+
+    @Override
+    public void MOD_ASP_REL( String LI_RELIGION, String NO_IGLESIA, String DE_CARGO, String LI_AUTORIDAD, String NO_AP_AUTORIDAD, String CL_AUTORIDAD, String ID_TRABAJADOR) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_RELIGION_TRA( ?, ?, ?, ?, ?, ?, ?)} ");
+            cst.setString(1, LI_RELIGION);
+            cst.setString(2, NO_IGLESIA);
+            cst.setString(3, DE_CARGO);
+            cst.setString(4, LI_AUTORIDAD);
+            cst.setString(5, NO_AP_AUTORIDAD);
+            cst.setString(6, CL_AUTORIDAD);
+            cst.setString(7, ID_TRABAJADOR);
             cst.execute();
         } catch (SQLException ex) {
         } finally {
