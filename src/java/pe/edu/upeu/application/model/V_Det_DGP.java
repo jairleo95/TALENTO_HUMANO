@@ -35,7 +35,12 @@ public class V_Det_DGP {
     private String us_modif;
     private String fe_modif;
 
-    public V_Det_DGP(String id_dgp, String fe_desde, String fe_hasta, Double ca_sueldo, String de_dias_trabajo, String no_puesto, String id_puesto, String id_requerimiento, String id_trabajador, String co_ruc, String de_lugar_servicio, String de_servicio, String de_periodo_pago, String de_domicilio_fiscal, String de_subvencion, String de_horario_capacitacion, String de_horario_refrigerio, String de_dias_capacitacion, String es_dgp, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String ip_usuario, String no_req, Double ca_bono_alimentario, Double de_bev, String de_antecedentes_policiales, String es_certificado_salud, String no_banco, String nu_cuenta, String nu_cuenta_banc, String es_gen_nu_cuenta, String no_banco_otros, String id_departamento, String id_direccion, String id_seccion, String id_area, String id_tipo_planilla, String ti_planilla,String id_detalle_horario) {
+    public V_Det_DGP(String id_dgp, String fe_desde, String fe_hasta, Double ca_sueldo, String de_dias_trabajo, String no_puesto, String id_puesto, String id_requerimiento,
+            String id_trabajador, String co_ruc, String de_lugar_servicio, String de_servicio, String de_periodo_pago, String de_domicilio_fiscal, String de_subvencion,
+            String de_horario_capacitacion, String de_horario_refrigerio, String de_dias_capacitacion, String es_dgp, String us_creacion, String fe_creacion, String us_modif,
+            String fe_modif, String ip_usuario, String no_req, Double ca_bono_alimentario, Double de_bev, String de_antecedentes_policiales, String es_certificado_salud,
+            String no_banco, String nu_cuenta, String nu_cuenta_banc, String es_gen_nu_cuenta, String no_banco_otros, String id_departamento, String id_direccion,
+            String id_seccion, String id_area, String id_tipo_planilla, String ti_planilla, String id_detalle_horario, String no_dep) {
         this.id_dgp = id_dgp;
         this.fe_desde = fe_desde;
         this.fe_hasta = fe_hasta;
@@ -72,6 +77,7 @@ public class V_Det_DGP {
         this.id_tipo_planilla = id_tipo_planilla;
         this.ti_planilla = ti_planilla;
         this.id_detalle_horario = id_detalle_horario;
+        this.no_dep = no_dep;
     }
 
     public V_Det_DGP() {
@@ -104,11 +110,6 @@ public class V_Det_DGP {
         this.de_bev = 0.0;
         this.de_antecedentes_policiales = "";
         this.es_certificado_salud = "";
-        this.no_banco = "";
-        this.nu_cuenta = "";
-        this.nu_cuenta_banc = "";
-        this.es_gen_nu_cuenta = "";
-        this.no_banco_otros = "";
         this.id_departamento = "";
         this.id_direccion = "";
         this.id_seccion = "";
@@ -116,6 +117,7 @@ public class V_Det_DGP {
         this.id_tipo_planilla = "";
         this.ti_planilla = "";
         this.id_detalle_horario = "";
+        this.no_dep = "";
     }
     private String ip_usuario;
     private String no_req;
@@ -123,11 +125,7 @@ public class V_Det_DGP {
     private Double de_bev;
     private String de_antecedentes_policiales;
     private String es_certificado_salud;
-    private String no_banco;
-    private String nu_cuenta;
-    private String nu_cuenta_banc;
-    private String es_gen_nu_cuenta;
-    private String no_banco_otros;
+
     private String id_departamento;
     private String id_direccion;
     private String id_seccion;
@@ -135,6 +133,15 @@ public class V_Det_DGP {
     private String id_tipo_planilla;
     private String ti_planilla;
     private String id_detalle_horario;
+    private String no_dep;
+
+    public String getNo_dep() {
+        return no_dep;
+    }
+
+    public void setNo_dep(String no_dep) {
+        this.no_dep = no_dep;
+    }
 
     public String getId_detalle_horario() {
         return id_detalle_horario;
@@ -375,6 +382,7 @@ public class V_Det_DGP {
     public void setEs_certificado_salud(String es_certificado_salud) {
         this.es_certificado_salud = es_certificado_salud;
     }
+
     public String getId_departamento() {
         return id_departamento;
     }

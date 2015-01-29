@@ -1,4 +1,4 @@
-<%@page import="pe.edu.upeu.application.model.Centro_Costos"%>
+
 <%
     HttpSession sesion_1 = request.getSession();
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
@@ -102,9 +102,7 @@
                         <tr><td class="text-info table-bordered">BEV: </td><td class="text-info table-bordered"><%=d.getDe_bev()%></td></tr>
                         <tr><td class="text-info table-bordered">Bono Alimentario : S/.</td><td  class="text-info table-bordered"><%=d.getCa_bono_alimentario()%></td></tr>
                         <tr style="color: red;"><td class="text-info table-bordered" >Sueldo Total : S/.</td><td class=" table-bordered" style="color-text:red; "><%=(d.getCa_sueldo() + d.getCa_bono_alimentario() + d.getDe_bev())%></td></tr>
-                        <!-- <tr><td class="td-det">Dias de Trabajo:</td><td><?//echo $list[$index][4];?></td></tr>
-                         <tr><td class="td-det">Horario:</td><td><?//echo $list[$index][5];?></td></tr>
-                        -->
+                        <tr><td  Class="text-info table-bordered">Departamento:</td><td class="text-info table-bordered"><%=d.getNo_dep()%></td></tr>
                         <tr><td  Class="text-info table-bordered">Puesto:</td><td class="text-info table-bordered"><%=d.getNo_puesto()%></td></tr>
                         <input type="hidden" name="iddgp" value="<%=d.getId_dgp().trim()%>">
                         <input type="hidden" name="idreq" value="<%=d.getId_requerimiento().trim()%>">

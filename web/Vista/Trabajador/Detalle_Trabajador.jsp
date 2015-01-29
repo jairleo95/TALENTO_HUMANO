@@ -312,7 +312,7 @@
                             <a href="#s4" data-toggle="tab"><i class="fa fa-group fa-gear"></i> Familiares </a>
                         </li>
                         <li >
-                            <a href="#s5" data-toggle="tab"><i class="fa fa-file-o fa-gear"></i> Requerimientos </a>
+                            <a href="#s5" data-toggle="tab"><i class="fa fa-file-o fa-gear"></i> Historial de Requerimientos </a>
                         </li>
                         <li >
                             <a href="#s6" data-toggle="tab"><i class="fa fa-file fa-gear"></i> Documentación </a>
@@ -320,29 +320,26 @@
                         <li >
                             <a href="#s7" data-toggle="tab"><i class="fa fa-file-text fa-gear"></i> Información Contractual </a>
                         </li>
+                        <%if (idrol.trim().equals("ROL-0007")) {
+                        %>
                         <li >
-                            <a href="#s8" data-toggle="tab"><i class="fa fa-file-text fa-gear"></i> Evaluacion de Emleado</a>
+                            <a href="#s8" data-toggle="tab"><i class="fa fa-file-text fa-gear"></i> Evaluación de Emleado</a>
                         </li>
+                        <%}%>
+                        <%  if (List_Auto_mostrar.size() == 1 && aut != null) {%>
+                        <li >
+                            <a href="#s9" data-toggle="tab"><i class="fa fa-file-text fa-gear"></i> Datos de Requerimientos</a>
+                        </li>
+                        <%}%>
                     </ul>
                     <div id="myTabContent1" class="tab-content padding-10">
-                        <div class="tab-pane fade in active" id="s1">
+                        <div class="tab-pane fade <%if (aut != null) {
 
-                            <%
-                                if (List_Auto_mostrar.size() == 1) {
-                                    for (int r = 0; r < List_Auto_mostrar.size(); r++) {
-                                        Auto_Mostrar a = new Auto_Mostrar();
-                                        a = (Auto_Mostrar) List_Auto_mostrar.get(r);
-                            %>
-
-                            <iframe name="contenido" id="contenido"  class="autoHeight" src="<%=a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getIdtr()%>" width="100%" height="100%" ></iframe>
-                            <%
-                                    List_Auto_mostrar.clear();
-                                }
-
-                            } else { %>
+                            } else  {
+                                out.print(" in active");
+                            }
+                             %>" id="s1">
                             <iframe name="contenido" id="contenido"  class="autoHeight" src="Datos_Generales.jsp" width="100%" height="100%" ></iframe>
-                            <%}%>
-
                         </div>
                         <div class="tab-pane fade" id="s2">                           
                             <iframe name="contenido" id="contenido"  class="autoHeight" src="Aspecto_Academico.jsp" width="100%" height="100%" ></iframe>                           
@@ -362,9 +359,33 @@
                         <div class="tab-pane fade" id="s7">                            
                             <iframe name="contenido" id="contenido"  class="autoHeight" src="../../contrato?idtr=<%=idtr%>&opc=Detalle_Contractual" width="100%" height="100%" ></iframe>
                         </div>
+
+                        <%if (idrol.trim().equals("ROL-0007")) {
+                        %>
                         <div class="tab-pane fade" id="s8">                            
                             <iframe name="contenido" id="contenido"  class="autoHeight" src="../../empleado?opc=Eva_Emp&idtr=<%=idtr%>" width="100%" height="100%" ></iframe>
                         </div>
+                        <%}%> 
+
+                        <%
+                            if (List_Auto_mostrar.size() == 1) {
+                                for (int r = 0; r < List_Auto_mostrar.size(); r++) {
+                                    Auto_Mostrar a = new Auto_Mostrar();
+                                    a = (Auto_Mostrar) List_Auto_mostrar.get(r);
+                        %>
+                        <div class="tab-pane fade  in active" id="s9">  
+                            <iframe name="contenido" id="contenido"  class="autoHeight" src="<%=a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getIdtr()%>" width="100%" height="100%" ></iframe>
+                            <%
+                                    List_Auto_mostrar.clear();
+                                }
+                            %>
+                        </div>
+
+                        <%
+                            } %>
+
+
+
                     </div>
 
                 </div>
@@ -837,7 +858,7 @@
                                 $(".mensaje").text(f);
                             });
                             addImage(e);
-                           // alert("Archivo permitido");
+                            // alert("Archivo permitido");
                         } else {
                             alert("Archivo no permitido, su tamaño debe ser menor a 500 KB");
                             $(this).val('');

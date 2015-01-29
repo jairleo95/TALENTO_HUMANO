@@ -249,6 +249,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 v.setVer_list_plazo(rs.getString("ver_list_plazo"));
                 v.setElab_contrato(rs.getString("elab_contrato"));
                 v.setVal_firm_contrato(rs.getString("val_firm_contrato"));
+                v.setNo_dep(rs.getString("no_dep"));
                 list.add(v);
             }
 

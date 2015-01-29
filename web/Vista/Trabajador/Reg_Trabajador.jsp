@@ -869,9 +869,30 @@
                                                         </div>  
                                                                              
                                                         <script>
+                                                            function estado_civil(es_civil){
+                                                                if(es_civil == '1' || es_civil == '3' || es_civil == '4' || es_civil == '5'){
+                                                                    alert("estado civil");
+                                                                    //remove required
+                                                                    
+                                                                    $("#tra_upeu_con").hide();
+                                                                    $("#nom_ape_con").removeAttr('required');
+                                                                    $("#nac_con").removeAttr('required');
+                                                                    $("#doc_con");
+                                                                    $("#num_con").removeAttr('required');
+                                                                    $("#ins_vig_con").removeAttr('required');
+                                                                    //add disabled
+                                                                    $("#tra_upeu_con").attr("required", "required");
+                                                                    $("#nom_ape_con").attr("required", "required");
+                                                                    $("#nac_con").attr("required", "required");
+                                                                    $("#doc_con").attr("required", "required");
+                                                                    $("#num_con").attr("required", "required");
+                                                                    $("#ins_vig_con").attr("required", "required");
+                                                                    
+                                                                }
+                                                               
+                                                            }
 
                                                             function cuenta_bancaria(banco) {
-
 
                                                                 if (banco == '1') {
                                                                     $("#generar").hide();
