@@ -39,4 +39,7 @@ public interface InterfaceTrabajadorDAO {
     public void MOD_ASP_REL ( String LI_RELIGION, String NO_IGLESIA, String DE_CARGO, String LI_AUTORIDAD, String NO_AP_AUTORIDAD,String CL_AUTORIDAD, String ID_TRABAJADOR);
     
     public List<Trabajador> LIST_TRABAJADOR_MOD_REL ();
+     
+    public void INSERT_CUENTA_SUELDO(String ID_CUENTA_SUELDO,String NO_BANCO, String NU_CUENTA, String NU_CUENTA_BANC, String ES_GEM_NU_CUENTA, String NO_BANCO_OTROS, String ID_TRABAJADOR);
+ 
 }

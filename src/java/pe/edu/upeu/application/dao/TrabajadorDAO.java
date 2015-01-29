@@ -488,4 +488,22 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         }
         return Lista;
     }
+    @Override
+    public void INSERT_CUENTA_SUELDO(String ID_CUENTA_SUELDO, String NO_BANCO, String NU_CUENTA, String NU_CUENTA_BANC, String ES_GEM_NU_CUENTA, String NO_BANCO_OTROS, String ID_TRABAJADOR) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_CUENTA_SUELDO( ?, ?, ?, ?, ?, ?, ?)} ");
+            cst.setString(1, null);
+            cst.setString(2,NO_BANCO);
+            cst.setString(3,NU_CUENTA);
+            cst.setString(4,NU_CUENTA_BANC );
+            cst.setString(5,ES_GEM_NU_CUENTA);
+            cst.setString(6,NO_BANCO_OTROS);
+            cst.setString(7,ID_TRABAJADOR);
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        }
+    }
 }
