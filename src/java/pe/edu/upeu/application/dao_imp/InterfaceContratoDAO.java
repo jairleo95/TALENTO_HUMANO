@@ -53,5 +53,9 @@ public interface InterfaceContratoDAO {
     public List<X_List_Id_Contrato_DGP> List_contra_x_idcto(String id_ctos);
     
     public String MAX_ID_CONTRATO();
+
     public void INSERT_CONTRATO_ADJUNTO(String ID_CONTRATO_ADJUNTO, String ID_CONTRATO, String NO_ARCHIVO, String NO_ARCHIVO_ORIGINAL, String ES_CONTRATO_ADJUNTO, String IP_USUARIO, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF);
+
+    public void UPDATE_FIRMA(String ID_TR,String IDDGP);
+
 }

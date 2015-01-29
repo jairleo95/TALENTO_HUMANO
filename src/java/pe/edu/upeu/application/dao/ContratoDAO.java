@@ -608,4 +608,27 @@ public class ContratoDAO implements InterfaceContratoDAO {
             }
         }
     }
+
+    @Override
+    public void UPDATE_FIRMA(String ID_TR, String IDDGP) {
+
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_UPDATE_ES_FIRMA( ?,?)} ");
+            cst.setString(1, IDDGP);
+            cst.setString(2, ID_TR.trim());
+            cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al ACTUALIZAR CONTRATO");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+}
+        }
+
+    }
 }

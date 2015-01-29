@@ -146,6 +146,12 @@ public class CContrato extends HttpServlet {
 
             response.sendRedirect("Vista/Contrato/Subir_Contrato_Adjunto.jsp?idc=" + request.getParameter("idc"));
         }
+        if (opc.equals("Actualizar_Firma")) {
+            String idtr = request.getParameter("IDTR");
+            String iddgp = request.getParameter("IDDETALLE_DGP");
+            con.UPDATE_FIRMA(idtr, iddgp);
+
+        }
         if (opc.equals("actualizar")) {
             String ida1 = request.getParameter("ida");
             String idtr = request.getParameter("idtr");
@@ -161,6 +167,7 @@ public class CContrato extends HttpServlet {
             getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
             response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1.trim() + "&idtr=" + idtr.trim() + "&id_cto=" + id_cto);
         }
+        
         if (opc.equals("REGISTRAR CONTRATO")) {
             String ID_CONTRATO = "";
             String ID_DGP = request.getParameter("IDDETALLE_DGP");

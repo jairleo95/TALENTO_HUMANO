@@ -13,7 +13,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <title>Autorizacion</title>
-        <link rel="stylesheet" href="../../css/bootstrap.min.css">
+
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -122,6 +122,7 @@
                     <!-- row -->
                     <div class="row">
 
+
                         <!-- NEW WIDGET START -->
                         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
@@ -161,11 +162,46 @@
                                             HttpSession sesion_1 = request.getSession(true);
                                             String idrol = (String) sesion_1.getAttribute("IDROL");
                                             String dep = (String) sesion_1.getAttribute("DEPARTAMENTO_ID");%>
+
+
                                     </div>
                                     <!-- end widget edit box -->
 
+                                    <script>
+                                        $(document).ready(function () {
+                                            $(".btn_pro_firma").click(function () {
+                                                $.each($(".firm_contr"), function () {
+                                                    //alert($(this).val());
+                                                    if ($(this).prop('checked')) {
+                                                        $.ajax({
+                                                            url: "../../autorizacion",
+                                                            type: "POST",
+                                                            data: "opc=Aceptar" + $(".val_aut" + $(this).val()).val()
+                                                        }).done(function () {
+                                                            //$(".btn_cargar").click();
+                                                            // window.location.href = "../../autorizacion";
+                                                        });
+                                                        $.ajax({
+                                                            url: "../../contrato",
+                                                            type: "POST",
+                                                            data: "opc=Actualizar_Firma" + $(".val_firm" + $(this).val()).val()
+                                                        }).done(function () {
+                                                            //$(".btn_cargar").click();
+
+                                                            //  alert(t);
+                                                        });
+                                                        window.location.href = "../../autorizacion";
+                                                        //  alert($(".val_aut" + $(this).val()).val());
+
+                                                    }
+                                                });
+
+                                            });
+                                        });
+                                    </script>
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">
+                                        <button type="button" class="btn btn-success btn_pro_firma">Procesar Firmas</button>
 
                                         <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                                             <thead>			                
@@ -269,7 +305,8 @@
                                                     <td ><%=a.getNo_seccion()%></td> 
                                                     <td ><%=a.getNo_area()%></td>      
                                                     <td ><%=a.getNo_req()%></td>      
-
+                                            <input type="text" class="val_aut<%=(f + 1)%>" value="&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&IDDETALLE_DGP=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&COD=<%=a.getCo_pasos()%>&IDPASOS=<%=a.getId_pasos()%>&NROPASO=<%=a.getNu_pasos()%>&IDTR=<%=a.getId_trabajador()%>"/>
+                                            <input type="text" class="val_firm<%=(f + 1)%>" value="&IDDETALLE_DGP=<%=a.getId_dgp()%>&IDTR=<%=a.getId_trabajador()%>"/>
                                                     <td style="color: red; font-weight: bold;"><a href="../../trabajador?idtr=<%=a.getId_trabajador()%>&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&iddetalle_dgp=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&cod=<%=a.getCo_pasos()%>&idpasos=<%=a.getId_pasos()%>&autorizacion=1&opc=aut&nup=<%=a.getNu_pasos()%>"><%=a.getDe_pasos()%></a></td>
 
                                                     <% if (dep.equals("DPT-0019")) {%>
@@ -296,16 +333,28 @@
                                                     out.println("Si");
                                                 }
                                                 %></td> 
-                                            <td ><%                                                if (Integer.parseInt(a.getVal_firm_contrato()) == 0) {
-                                                    out.println("No");
+                                            <td ><%
+                                                if (Integer.parseInt(a.getVal_firm_contrato()) == 0) {
+
+                                                    if (Integer.parseInt(a.getElab_contrato()) == 0) {
+                                                        out.println("!Falta procesar¡");
                                                 } else {
+                                                %>
+                                                <div class="smart-form">
+                                                    <label class="toggle"><input type="checkbox" value="<%=(f + 1)%>"  class="firm_contr"  name="estado" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
+                                                </div>
+
+                                                <%
+                                                        }
+                                                    } else {
+
                                                     out.println("Si");
                                                 }
                                                 %></td>
                                             <td><%
                                                 if (Integer.parseInt(a.getVal_firm_contrato()) != 0 & Integer.parseInt(a.getElab_contrato()) != 0) {
-out.println("Enviar");
-                                                }else{
+                                                    out.println("Enviar");
+                                                } else {
                                                     out.println("¡Falta Procesar!");
                                                 }
 
@@ -431,11 +480,13 @@ out.println("Enviar");
     <script src="../../js/speech/voicecommand.min.js"></script>
 
     <!-- PAGE RELATED PLUGIN(S) -->
+    <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
     <script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
     <script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>
     <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
     <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
     <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
+
 
     <script type="text/javascript">
 
