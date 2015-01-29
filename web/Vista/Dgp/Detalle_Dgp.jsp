@@ -80,6 +80,7 @@
                 <form action="../../dgp">
 
 
+
                     <table class="table table-hover table-striped  table-responsive">
                         <%
                             String iddgp = "";
@@ -91,34 +92,31 @@
                                 d = (V_Det_DGP) LIST_ID_DGP.get(i);
                                 iddgp = d.getId_dgp();
                         %>
-
-
                         <tr><td colspan="2" class="text-info table-bordered" id="header"><i class="fa fa-file"></i> REQUERIMIENTO : <%=d.getNo_req()%> </td></tr>
                         <!--<label style="color: black; //font-family: cursive;"><h2><%=d.getNo_req()%></h2></label>
-                        --><tr><td class="text-info table-bordered" style="text-align:align;">Fecha Desde:</td><td><%=d.getFe_desde()%></td></tr>
-                        <tr ><td class="text-info table-bordered">Fecha Hasta:</td><td><%=d.getFe_hasta()%></td></tr>
-                        <tr><td class="text-info table-bordered">Sueldo : S/.</td><td><%=d.getCa_sueldo()%></td></tr>
-                        <tr><td class="text-info table-bordered">BEV: </td><td><%=d.getDe_bev()%></td></tr>
-                        <tr><td class="text-info table-bordered">Bono Alimentario : S/.</td><td><%=d.getCa_bono_alimentario()%></td></tr>
-                        <tr style="color: red;"><td class="text-info table-bordered" >Sueldo Total : S/.</td><td><%=(d.getCa_sueldo() + d.getCa_bono_alimentario() + d.getDe_bev())%></td></tr>
+                        --><tr><td  class="text-info table-bordered" style="text-align:align;">Fecha Desde:</td><td class="text-info table-bordered"><%=d.getFe_desde()%></td></tr>
+                        <tr ><td class="text-info table-bordered">Fecha Hasta:</td><td class="text-info table-bordered"><%=d.getFe_hasta()%></td></tr>
+                        <tr><td class="text-info table-bordered">Sueldo : S/.</td><td class="text-info table-bordered"><%=d.getCa_sueldo()%></td></tr>
+                        <tr><td class="text-info table-bordered">BEV: </td><td class="text-info table-bordered"><%=d.getDe_bev()%></td></tr>
+                        <tr><td class="text-info table-bordered">Bono Alimentario : S/.</td><td  class="text-info table-bordered"><%=d.getCa_bono_alimentario()%></td></tr>
+                        <tr style="color: red;"><td class="text-info table-bordered" >Sueldo Total : S/.</td><td class=" table-bordered" style="color-text:red; "><%=(d.getCa_sueldo() + d.getCa_bono_alimentario() + d.getDe_bev())%></td></tr>
                         <!-- <tr><td class="td-det">Dias de Trabajo:</td><td><?//echo $list[$index][4];?></td></tr>
                          <tr><td class="td-det">Horario:</td><td><?//echo $list[$index][5];?></td></tr>
                         -->
-                        <tr><td Class="text-info table-bordered">Puesto:</td><td><%=d.getNo_puesto()%></td></tr>
-                        <tr><td class="text-info table-bordered">Horario:</td><td><a href="../../horario?iddgp=<%=d.getId_dgp()%>&opc=Listar">Ver Horario</a></td></tr>
+                        <tr><td  Class="text-info table-bordered">Puesto:</td><td class="text-info table-bordered"><%=d.getNo_puesto()%></td></tr>
                         <input type="hidden" name="iddgp" value="<%=d.getId_dgp().trim()%>">
                         <input type="hidden" name="idreq" value="<%=d.getId_requerimiento().trim()%>">
-                        </tr>
 
-                        <tr><td class="text-info table-bordered">Centro de Costos: </td><td></td></tr>
+
+                        <!--<td><table class="table table-hover table-striped  table-responsive"><tbody><td class="text-info table-bordered">Centro de Costos: </td><td><a href="" >Ver Horario</a></td></tbody></table></td>-->
                         <%if (d.getDe_antecedentes_policiales().equals("1")) {%>
-                        <tr><td class="text-info table-bordered">Antecedentes Policiales: </td><td>No</td></tr>
+                        <tr><td class="text-info table-bordered">Antecedentes Policiales: </td><td class="text-info table-bordered">No</td></tr>
                         <%} else {%>
-                        <tr><td class="text-info table-bordered">Antecedentes Policiales: </td><td>Si</td></tr>
+                        <tr><td class="text-info table-bordered">Antecedentes Policiales: </td><td class="text-info table-bordered">Si</td></tr>
                         <%}%> 
-                        <tr><td class="text-info table-bordered">Certificado de Salud: </td><td><%=d.getEs_certificado_salud()%></td></tr>
+                        <tr><td class="text-info table-bordered">Certificado de Salud: </td><td class="text-info table-bordered" ><%=d.getEs_certificado_salud()%></td></tr>
 
-                        <tr style="color: red;"><td class="text-info table-bordered" >Documentos Adjuntos : </td><td><a href="../../documento?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a></td></tr>      
+  
                         <!--<tr><td class="td-det">Ruc:</td><td><?echo $list[$index][9];?></td></tr>
                         <tr><td class="td-det">Lugar de Servicio:</td><td><?echo $list[$index][10];?></td></tr>
                         <tr><td class="td-det">Periodo de Pago:</td><td><?echo $list[$index][12];?></td></tr>
@@ -127,10 +125,10 @@
                         <tr><td class="td-det">Dias Capacitación:</td><td><?echo $list[$index][17];?></td></tr>
                         <tr><td class="td-det">Subvención:</td><td><?echo $list[$index][14];?></td></tr>
                         ->
-                        
            
                         <!--<tr><td colspan="2"></td><td><input class="btn btn-success" style="width: 100px" type="submit" value="Editar"></td>
                         -->               
+
 
 
 
@@ -142,10 +140,10 @@
 
                         %>
 
-                        <td  colspan="2" class="ct"><a href="../../contrato?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=enviar">Hacer Contrato</a></td></tr>
+                        <tr> <td  colspan="3" class="ct"><a href="../../contrato?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=enviar">Hacer Contrato</a></td></tr>
                         <%}
                             if (d.getEs_dgp().equals("1") & num.equals("0") & !"ROL-0006".equals(idrol.trim())) {%>
-                        <td colspan="2" class="ct"><a href="">Ver Contrato</a></td></tr>
+                        <tr><td colspan="3" class="ct"><a href="">Ver Contrato</a></td></tr>
                         <%}
                             }%>
 
@@ -153,14 +151,16 @@
                             <%
                                 if (d.getUs_modif() != null) { %>
                             <td class="text-info table-bordered">Modificado por:</td>
-                            <td></td>
+                            <td colspan="2"></td>
                             <%}%>
 
                             <% if (d.getUs_creacion() != null) {%>
-                            <td class="text-info table-bordered">Creado por:</td><td></td>
+                            <td class="text-info table-bordered">Creado por:</td><td colspan="2" class="text-info table-bordered"><%=d.getUs_creacion()%></td>
+                            <%}else{%>
+                            <td class="text-info table-bordered">Creado por:</td><td colspan="2" class="text-info table-bordered">No registrado</td>
                             <%}%>
                         </tr>
-                        <%}%> 
+
 
 
 
@@ -169,8 +169,12 @@
 
                         <input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>">
                         <input type="hidden" name="opc" value="MODIFICAR REQUERIMIENTO">   
-                        <% if (idrol.trim().equals("ROL-0002") | idrol.trim().equals("ROL-0005") | idrol.trim().equals("ROL-0003")) { %>
-                        <tr><td><input type="submit"  value="Modificar"></td><td></td></tr><%}%>
+                        <% if (idrol.trim().equals("ROL-0002") | idrol.trim().equals("ROL-0005") | idrol.trim().equals("ROL-0003")) {%>
+                    </table>
+                    <table>
+                        <tr><td><input class="btn btn-primary" type="submit"  value="Modificar"></td><td> </td><td><a class="btn btn-primary" href="../../documento?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a></td><td><a class="btn btn-primary" href="../../horario?iddgp=<%=d.getId_dgp()%>&opc=Listar">Ver Horario</a></td></tr><%}%>
+                    </table>      
+                    <%}%> 
                 </form>
 
                 <% if (request.getParameter("opc") != null) {

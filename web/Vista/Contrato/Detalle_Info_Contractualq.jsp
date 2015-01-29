@@ -143,7 +143,7 @@
 
             <div>
                 <table class="table table-hover table-striped  table-responsive" style="border-radius: 30px ">
-                    <tr><td><select name="ida" class="anno" >
+                    <tr><td align="right"><select name="ida" class="anno " >
                                 <%
                                     String anno = request.getParameter("anno");
                                     String ID_CTO = request.getParameter("id_cto");
@@ -159,7 +159,7 @@
                             </select> 
                         </td>
                         <td><input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>"></td>
-                        <td><input type="hidden" name="opc" value="actualizar" ></td></tr><button type="submit"  style="display:none" class="btn_act"   >Actualizar</button>
+                        <td><input type="hidden" name="opc" value="actualizar" ></td><button type="submit"  style="display:none" class="btn_act"   >Actualizar</button></tr>
                 </table>
             </div>
 
@@ -192,11 +192,11 @@
 
 
                 <table class="table table-hover table-striped  table-responsive">
-                    <tr><td class="text-info table-bordered"><strong>Desde: </strong></td><td colspan="2"><%=n.getFe_desde()%></td><td class="text-info table-bordered" colspan="2"><strong>Hasta:</strong></td><td colspan="2"><%=n.getFe_hasta()%></td></tr>
-                    <tr><td class="text-info table-bordered"><strong>Dirección:</strong></td><td colspan="6"><p><%=n.getNo_direccion()%> </p></td></tr>
-                    <tr><td class="text-info table-bordered"><strong>Departamento:</strong></td><td colspan="6"><p><%=n.getNo_dep()%> </p></td></tr>
-                    <tr><td class="text-info table-bordered"><strong>Area:</strong></td><td colspan="6"><p><%=n.getNo_area()%> </td></p></tr>
-                    <tr><td class="text-info table-bordered"><strong>Sección:</strong></td><td colspan="6"><p><%=n.getNo_seccion()%> </p></td></tr>
+                    <tr><td class="text-info table-bordered"><strong>Desde: </strong></td><td colspan="2"><%=n.getFe_desde()%></td><td class="text-info table-bordered" colspan="2"><strong>Hasta:</strong></td><td class="table-bordered" colspan="2"><%=n.getFe_hasta()%></td></tr>
+                    <tr><td class="text-info table-bordered"><strong>Dirección:</strong></td><td colspan="6" class="table-bordered" ><p><%=n.getNo_direccion()%> </p></td></tr>
+                    <tr><td class="text-info table-bordered"><strong>Departamento:</strong></td><td colspan="6" class="table-bordered" ><p><%=n.getNo_dep()%> </p></td></tr>
+                    <tr><td class="text-info table-bordered"><strong>Area:</strong></td><td colspan="6" class="table-bordered" ><p><%=n.getNo_area()%> </td></p></tr>
+                    <tr><td class="text-info table-bordered"><strong>Sección:</strong></td><td colspan="6" class="table-bordered" ><p><%=n.getNo_seccion()%> </p></td></tr>
                     <%
                         if (Lis_c_c_id_contr.size() > 0) {
                             Double cantidad = 0.0;
@@ -206,11 +206,11 @@
 
                                 cantidad = Double.parseDouble(cc.getCa_porcentaje()) + cantidad;
                     %>
-                    <tr><td class="text-info table-bordered"><strong>Centro conto Nº <%=q + 1%>:</strong></td><td colspan="2"><p><%=cc.getDe_centro_costo()%></p></td><td class="text-info table-bordered" colspan="2"><strong>Porcentaje</strong></td><td colspan="2"><p><%=cc.getCa_porcentaje()%> %</p> </td></tr><%}%>
-                    <tr><td class="text-info table-bordered"><strong>Total Porcentaje:</strong></td><td colspan="6"><p><%=cantidad%> %</p></td></tr><%} else {%>
-                    <tr><td class="text-info table-bordered"><strong>Centro conto </strong></td><td colspan="6"><p>No tiene</p></td></tr><%}%>
-                    <tr><td class="text-info table-bordered"><strong>Puesto:</strong></td><td colspan="6"><p><%=n.getNo_puesto()%></p><input type="hidden" class="id_pu" value="<%=n.getId_puesto()%>"></td> </tr>
-                    <tr><td class="text-info table-bordered"><strong>Condición:</strong></td> <td colspan="6"><p><%
+                    <tr><td class="text-info table-bordered"><strong>Centro conto Nº <%=q + 1%>:</strong></td><td colspan="2" class="table-bordered" ><p><%=cc.getDe_centro_costo()%></p></td><td class="text-info table-bordered" colspan="2"><strong>Porcentaje</strong></td><td colspan="2"><p><%=cc.getCa_porcentaje()%> %</p> </td></tr><%}%>
+                    <tr><td class="text-info table-bordered"><strong>Total Porcentaje:</strong></td><td colspan="6" class="table-bordered" ><p><%=cantidad%> %</p></td></tr><%} else {%>
+                    <tr><td class="text-info table-bordered"><strong>Centro conto </strong></td><td colspan="6" class="table-bordered" ><p>No tiene</p></td></tr><%}%>
+                    <tr><td class="text-info table-bordered"><strong>Puesto:</strong></td><td colspan="6" class="table-bordered" ><p><%=n.getNo_puesto()%></p><input type="hidden" class="id_pu" value="<%=n.getId_puesto()%>"></td> </tr>
+                    <tr><td class="text-info table-bordered"><strong>Condición:</strong></td> <td colspan="6" class="table-bordered" ><p><%
                         if (n.getLi_condicion() != null) {
                             for (int h = 0; h < list_Condicion_contrato.size(); h++) {
 
@@ -222,43 +222,43 @@
                             out.print("No tiene");
                         }%> </p></td></tr>
                     <!--<tr><td>Funcion:</td><td><? /*echo $list_rhc[$index][5];*/?> </td></tr>-->
-                    <tr><td class="text-info table-bordered"><strong>Sueldo:</strong></td><td><%=n.getCa_sueldo()%></td><td class="text-info table-bordered" colspan="1"><strong>Reintegro:</strong></td><td colspan="1"><%=n.getCa_reintegro()%></td><td class="text-info table-bordered" colspan="2"><strong>Bono Alimentario:</strong></td><td><%=n.getCa_bono_alimento()%> </td></tr>
-                    <tr><td class="text-info table-bordered"><strong>Bev:</strong></td><td colspan="6"><%if (n.getCa_bev() != null) {
+                    <tr><td class="text-info table-bordered"><strong>Sueldo:</strong></td><td><%=n.getCa_sueldo()%></td><td class="text-info table-bordered" colspan="1"><strong>Reintegro:</strong></td><td colspan="1"><%=n.getCa_reintegro()%></td><td class="text-info table-bordered" colspan="2"><strong>Bono Alimentario:</strong></td><td class="table-bordered" ><%=n.getCa_bono_alimento()%> </td></tr>
+                    <tr><td class="text-info table-bordered"><strong>Bev:</strong></td><td class="table-bordered"  colspan="6"><%if (n.getCa_bev() != null) {
                             out.print(n.getCa_bev());
                         } else {
                             out.print("0");
                         }%> </td></tr>
-                    <tr><td class="text-info table-bordered"><strong>Sueldo Total:</strong></td><td colspan="6"><%if (n.getCa_sueldo_total() != null) {
+                    <tr><td class="text-info table-bordered"><strong>Sueldo Total:</strong></td><td class="table-bordered" colspan="6"><%if (n.getCa_sueldo_total() != null) {
                             out.print(n.getCa_sueldo_total());
                         } else {
                             out.print("0");
                         }%> </td></tr>
-                    <tr><td class="text-info table-bordered"><strong>Tipo Pago Horas:</strong></td><td colspan="6"><%=n.getTi_hora_pago()%> </td></tr>
-                    <tr><td class="text-info table-bordered"><strong>Asignación Familiar:</strong></td><td colspan="6"><%= "S/." + n.getCa_asig_familiar()%> </td></tr>
+                    <tr><td class="text-info table-bordered"><strong>Tipo Pago Horas:</strong></td><td class="table-bordered"  colspan="6"><%=n.getTi_hora_pago()%> </td></tr>
+                    <tr><td class="text-info table-bordered"><strong>Asignación Familiar:</strong></td><td class="table-bordered"  class="table-bordered" colspan="6"><%= "S/." + n.getCa_asig_familiar()%> </td></tr>
                     <tr><td class="text-info table-bordered"><strong>Regimen Laboral Mintra:</strong></td>
                         <% if (n.getId_regimen_laboral() != null) {
                                 for (int q = 0; q < list_reg_labo.size(); q++) {
                                     Regimen_Laboral re = new Regimen_Laboral();
                                     re = (Regimen_Laboral) list_reg_labo.get(q);
                                     if (n.getId_regimen_laboral().equals(re.getId_regimen_laboral())) {%>
-                        <td colspan="6"><%=re.getDe_regimen_l()%> </td>
+                        <td class="table-bordered"  class="table-bordered"  colspan="6"><%=re.getDe_regimen_l()%> </td>
                         <%}
                             }
                         } else {%>
-                        <td colspan="6">NO DEFINIDO</td> 
+                        <td class="table-bordered"  colspan="6">NO DEFINIDO</td> 
                         <%}%>
                     </tr>
                     <tr><td class="text-info table-bordered"><strong>Modalidad:</strong></td>
 
-                        <td colspan="6"><%=n.getDe_modalidad()%> </td>
+                        <td class="table-bordered"  colspan="6"><%=n.getDe_modalidad()%> </td>
 
                     </tr>
                     <tr><td class="text-info table-bordered"><strong>Sub_Modalidad:</strong></td>
 
-                        <td colspan="6"><%=n.getDe_sub_modalidad()%> </td>
+                        <td class="table-bordered"  colspan="6"><%=n.getDe_sub_modalidad()%> </td>
 
                     </tr>
-                    <tr><td class="text-info table-bordered"><strong>Tipo de Contratacion:</strong></td><td colspan="6"><%
+                    <tr><td class="text-info table-bordered"><strong>Tipo de Contratacion:</strong></td><td class="table-bordered"  colspan="6"><%
                         if (n.getEs_ti_contratacion() != null) {
                             if (n.getEs_ti_contratacion().trim().equals("I")) {
                                 out.println("INICIO");
@@ -271,15 +271,15 @@
                         }%> </td></tr> 
                     <tr><td class="text-info table-bordered"><strong>Codigo de Grupo de Ocupaciones:</strong></td>
 
-                        <td colspan="6"><%=n.getDe_grupo_ocupacion()%> </td>
+                        <td class="table-bordered"  colspan="6"><%=n.getDe_grupo_ocupacion()%> </td>
 
                     </tr>
-                    <tr><td class="text-info table-bordered"> Fecha de Suscripcion:</td><td colspan="6"><%if (n.getFe_suscripcion() != null) {
+                    <tr><td class="text-info table-bordered"> Fecha de Suscripcion:</td><td class="table-bordered"  colspan="6"><%if (n.getFe_suscripcion() != null) {
                             out.print(n.getFe_suscripcion());
                         } else {
                             out.print("NO DEFINIDO");
                         }%> </td></tr>
-                    <tr><td class="text-info table-bordered"><strong>Tipo moneda de pago:</strong></td><td colspan="6"><%
+                    <tr><td class="text-info table-bordered"><strong>Tipo moneda de pago:</strong></td><td class="table-bordered"  colspan="6"><%
                         if (n.getCo_ti_moneda() != null) {
                             if (n.getCo_ti_moneda().trim().equals("01")) {
                                 out.println("SOLES");
@@ -293,8 +293,8 @@
                         } else {
                             out.print("NO DEFINIDO");
                         }%> </td></tr> 
-                    <tr><td class="text-info table-bordered"><strong>Horas:</strong></td><td class="text-info"><strong>Semanal:</strong></td><td><%=n.getHo_semana()%></td><td class="text-info"><strong>Mensual:</strong></td><td><%=n.getNu_horas_lab() + " h"%></td><td class="text-info"><strong>Dias:</strong></td><td> <%=n.getDia_contrato() + " d"%></td></tr>
-                    <tr><td class="text-info table-bordered"><strong>Tipo de Trabajador:</strong></td><td colspan="6"><%
+                    <tr><td class="text-info table-bordered"><strong>Horas:</strong></td><td class="text-info"><strong>Semanal:</strong></td><td><%=n.getHo_semana()%></td><td class="text-info"><strong>Mensual:</strong></td><td><%=n.getNu_horas_lab() + " h"%></td><td class="text-info"><strong>Dias:</strong></td><td class="table-bordered" > <%=n.getDia_contrato() + " d"%></td></tr>
+                    <tr><td class="text-info table-bordered"><strong>Tipo de Trabajador:</strong></td><td class="table-bordered"  colspan="6"><%
                         if (n.getCo_ti_moneda() != null) {
                             if (n.getTi_trabajador().equals("1")) {
                                 out.println("Trabajador");
@@ -305,7 +305,7 @@
                         } else {
                             out.print("NO DEFINIDO");
                         }%> </td></tr>   
-                    <tr><td class="text-info table-bordered"><strong>Régimen Laboral:</strong></td><td colspan="6">
+                    <tr><td class="text-info table-bordered"><strong>Régimen Laboral:</strong></td><td class="table-bordered"  colspan="6">
                             <%if (n.getLi_regimen_laboral() == "1") {
                                     out.println("Privado");
                                 } else if (n.getLi_regimen_laboral() == "1") {
@@ -314,7 +314,7 @@
                                     out.println("NO DEFINIDO");
                                 }%> </td></tr>   
                     <!--<tr><td class="text-info table-bordered"><strong>Vacaciones:</strong></td><td class="text-info" colspan="2"><strong>Desde:</strong></td><td colspan="2"> <%=n.getFe_vacacio_ini()%> </td><td class="text-info" ><strong >Hasta:</strong></td><td colspan="2"> <%=n.getFe_vacacio_fin()%> </td></tr>   -->
-                    <tr><td class="text-info table-bordered"><strong>Discapacidad:</strong></td><td colspan="6"><%
+                    <tr><td class="text-info table-bordered"><strong>Discapacidad:</strong></td><td class="table-bordered" colspan="6"><%
                         if (n.getEs_discapacidad() != null) {
                             if (n.getEs_discapacidad().equals("1")) {
                                 out.println("No");
@@ -326,7 +326,7 @@
                             out.println("DATO NO INGRESADO ");
                         }%> 
                         </td></tr>   
-                    <tr><td class="text-info table-bordered"><strong>Tipo de Contrato:</strong></td><td colspan="6">
+                    <tr><td class="text-info table-bordered"><strong>Tipo de Contrato:</strong></td><td class="table-bordered" colspan="6">
                             <%if (n.getTi_contrato() != null) {
                                     for (int k = 0; k < List_tipo_contrato.size(); k++) {
                                         if (n.getTi_contrato() == k + 1 + "") {
@@ -337,7 +337,7 @@
                                     out.print("NO DEFINIDO");
                                 }%> 
                         </td></tr>   
-                    <tr><td class="text-info table-bordered"><strong>Tipo de Convenio:</strong></td><td colspan="6"><%
+                    <tr><td class="text-info table-bordered"><strong>Tipo de Convenio:</strong></td><td class="table-bordered" colspan="6"><%
                         if (n.getLi_tipo_convenio() != null) {
                             if (n.getLi_tipo_convenio() == ("1")) {
                                 out.println("CLJ");
@@ -353,7 +353,7 @@
 
                         }
                             %> </td></tr>   
-                    <tr><td class="text-info table-bordered"><strong>¿Firmo contrato?:</strong></td><td colspan="6"><%
+                    <tr><td class="text-info table-bordered"><strong>¿Firmo contrato?:</strong></td><td class="table-bordered" colspan="6"><%
                         if (idrol.trim().equals("ROL-0006") && n.getEs_firmo_contrato() == null) {%>
                             <a href="../../contrato?fc=s&idc=<%=n.getId_trabajador()%>"  class="boton">SI</a>o<a href="" class="boton">NO</a>
                             <%} else {
@@ -371,12 +371,12 @@
                                 }%></td></tr>
 
                     <!--  <tr><td>Nro. de Contrato:</td><td><?/* echo $list_rhc[$index][39];*/?> </td></tr>   -->
-                    <tr><td class="text-info table-bordered"><strong>Observaciones:</strong></td><td colspan="6"><%if (n.getDe_observacion() != null) {
+                    <tr><td class="text-info table-bordered"><strong>Observaciones:</strong></td><td class="table-bordered" colspan="6"><%if (n.getDe_observacion() != null) {
                             out.print(n.getDe_observacion());
                         } else {
                             out.print("SIN OBSERVACIONES");
                         }%> </td></tr>   
-                    <tr><td class="text-info table-bordered"><strong>Régimen Pensionario:</strong></td><td colspan="6"><%
+                    <tr><td class="text-info table-bordered"><strong>Régimen Pensionario:</strong></td><td class="table-bordered" colspan="6"><%
                         if (n.getLi_regimen_pensionario() != null) {
                             if (n.getLi_regimen_pensionario() == ("1")) {
                                 out.println("Privado");
@@ -388,14 +388,14 @@
                             out.println("NO DEFINIDO");
                         }
                             %> </td></tr>   
-                    <tr><td class="text-info table-bordered"><strong>Situacion Actual:</strong></td><td colspan="6"><%
+                    <tr><td class="text-info table-bordered"><strong>Situacion Actual:</strong></td><td class="table-bordered" colspan="6"><%
                         for (int t = 0; t < List_Situacion_Actual.size(); t++) {
                             if (n.getEs_contrato().trim().equals(t + 1 + "")) {
                             %><%=List_Situacion_Actual.get(0)%>
                             <%}
                                 }
                             %> </td></tr>   
-                    <tr><td class="text-info table-bordered"><strong>Filial donde Trabaja:</strong></td><td colspan="6"><%
+                    <tr><td class="text-info table-bordered"><strong>Filial donde Trabaja:</strong></td><td class="table-bordered" colspan="6"><%
                         if (n.getId_filial().trim().equals(1 + "")) {
                             out.println("Lima");%>
                             <% }
