@@ -22,7 +22,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         <script src="../../../HTML_version/js/plugin/ckeditor/ckeditor.js"></script>
         <link href="../../../HTML_version/js/plugin/ckeditor/samples/sample.css" rel="stylesheet">
         <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
-        <%for (int i = 0; i < List_contra_x_idcto.size(); i++) {
+        <%
+            for (int i = 0; i < List_contra_x_idcto.size(); i++) {
                 X_List_Id_Contrato_DGP n = new X_List_Id_Contrato_DGP();
                 n = (X_List_Id_Contrato_DGP) List_contra_x_idcto.get(i);
                 InterfaceListaDAO l = new ListaDAO();
@@ -50,13 +51,28 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
                 String fecha = n.getFe_sus();
                 String fechasus = "";
-                if (fecha != null) {
+                if (fecha != "") {
                     String f[] = fecha.split("/");
                     fechasus = f[0] + " de " + f[1] + " del " + f[2];
                 } else {
                     fechasus = "NO TIENE";
                 }
-
+                String fecha2 = n.getFe_des();
+                String fechades = "";
+                if (fecha2 != "") {
+                    String f[] = fecha.split("/");
+                    fechades = f[0] + " de " + f[1] + " del " + f[2];
+                } else {
+                    fechades = "NO TIENE";
+                }
+                fecha2 = n.getFe_has();
+                String fechahas = "";
+                if (fecha2 != "") {
+                    String f[] = fecha.split("/");
+                    fechahas = f[0] + " de " + f[1] + " del " + f[2];
+                }else {
+                    fechahas = "NO TIENE";
+                }
         %>
         <script>
 // The instanceReady event is fired, when an instance of CKEditor has finished
@@ -176,10 +192,10 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     "[prov]": "<%=n.getNo_provincia()%>",
                     "[dist]": "<%=n.getNo_distrito()%>",
                     "[dep]": "<%=n.getNo_dep()%>",
-                    "[desde]": "<%=n.getFe_desde()%>",
-                    "[hasta]": "<%=n.getFe_hasta()%>",
+                    "[desde]": "<%=fechades%>",
+                    "[hasta]": "<%=fechahas%>",
                     "[puesto]": "<%=n.getNo_puesto()%>",
-                    "[fe_actual]":"<%=fechasus%>",
+                    "[fe_actual]": "<%=fechasus%>",
                     "[sueldo]": "<%=n.getCa_sueldo_total()%>",
                     "[horas]": "<%=n.getNu_horas_lab()%>",
                     "[cursos]": ""
@@ -209,6 +225,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 $.post("../../../formato_plantilla", "opc=Listar&id=" + valor, function(objJson) {
                     var imprimir = objJson.imprimir;
                     editor.setData(imprimir);
+                    procesar_texto();
                 });
 
             }
@@ -216,12 +233,14 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 //var no_ar=$("#no_arch");
                 //alert($(".no_arc").val());
                 mostrar_plantilla($(".no_arc").val());
+
                 // $(".id_pl").val($(".plantilla" + $(this).val()).val());
             }
             $(document).ready(function() {
                 $("#actu").hide();
                 mostrars();
-                $(".procesar").click(alert("por q puta no funciona"));
+
+
             });
 
         </script>
@@ -232,7 +251,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         <h3>CARGAR PLANTILLAS</h3>
         <%String no_ar = request.getParameter("no_arc");%>
         <input type="hidden" id="no_arch" class="no_arc" value="<%=no_ar%>">
-        <button class="procesar" type="button" style="display:none">Procesar </button>
+        <button class="procesar" type="button" onclick="procesar_texto();">Procesar </button>
         <h3>EDITAR PLANTILLAS</h3>
         <form class="ckeditor_form" action="../../../formato_plantilla" method="post">
             <textarea cols="100" id="editor1" name="editor1" rows="10">
@@ -254,15 +273,21 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     }
                     , height: '800px'});
             </script>
-
+            <script>
+                $(document).ready(function() {
+                    $(".procesar").click();
+                }
+                );
+            </script>
             <div id="eButtons" >
                 <input  type="hidden" name="opc" value="Actualizar"/>
                 <input  type="hidden" name="id" value="" class="id_pl"/>
                 <input type="submit" value="Actualizar Formato" id="actu" onclick="leer();">
             </div>
         </form>
+        <%}%>
     </body>
-    <%}%>
+
 </html>
 
 <%} else {

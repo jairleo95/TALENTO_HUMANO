@@ -20,6 +20,7 @@ import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Anno;
 import pe.edu.upeu.application.model.List_Rh_Contrato_Fec;
 import pe.edu.upeu.application.model.Modalidad;
+import pe.edu.upeu.application.model.Plantilla_Contractual;
 import pe.edu.upeu.application.model.Regimen_Laboral;
 import pe.edu.upeu.application.model.Sub_Modalidad;
 import pe.edu.upeu.application.model.X_List_Anno_Id_Tr_DGP;
@@ -36,10 +37,10 @@ public class ContratoDAO implements InterfaceContratoDAO {
     CConversion c = new CConversion();
 
     @Override
-    public void INSERT_CONTRATO(String ID_CONTRATO, String ID_DGP, String FE_DESDE, String FE_HASTA, String FE_CESE, String ID_FUNC, String LI_CONDICION, Double CA_SUELDO, Double CA_REINTEGRO, Double CA_ASIG_FAMILIAR, Double HO_SEMANA, Double NU_HORAS_LAB, Double DIA_CONTRATO, String TI_TRABAJADOR, String LI_REGIMEN_LABORAL, String ES_DISCAPACIDAD, String TI_CONTRATO, String LI_REGIMEN_PENSIONARIO, String ES_CONTRATO_TRABAJADOR, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String US_IP, String FE_VACACIO_INI, String FE_VACACIO_FIN, String ES_CONTRATO, String ID_FILIAL, String ID_PUESTO, Double CA_BONO_ALIMENTO, String LI_TIPO_CONVENIO, String ES_FIRMO_CONTRATO, Double NU_CONTRATO, String DE_OBSERVACION, String ES_APOYO, String TI_HORA_PAGO, String NU_DOCUMENTO, String ID_ANNO, String ES_ENTREGAR_DOC_REGLAMENTOS, String ES_REGISTRO_HUELLA, String DE_REGISTRO_SISTEM_REMU, String ID_TRABAJADOR, Double CA_SUELDO_TOTAL, String ID_REGIMEN_LABORAL, String ID_MODALIDAD, String ID_SUB_MODALIDAD, String CO_GR_OCUPACION, String FE_SUSCRIPCION, String CO_TI_MONEDA, String CO_TI_REM_VARIAB, String DE_REMU_ESPECIE, String DE_RUC_EMP_TRAB, String CO_SUCURSAL, String DE_MYPE, String ES_TI_CONTRATACION, Double CA_BEV, String ID_TIPO_PLANILLA, String ES_REMUNERACION_PROCESADO, String ID_HORARIO) {
+    public void INSERT_CONTRATO(String ID_CONTRATO, String ID_DGP, String FE_DESDE, String FE_HASTA, String FE_CESE, String ID_FUNC, String LI_CONDICION, Double CA_SUELDO, Double CA_REINTEGRO, Double CA_ASIG_FAMILIAR, Double HO_SEMANA, Double NU_HORAS_LAB, Double DIA_CONTRATO, String TI_TRABAJADOR, String LI_REGIMEN_LABORAL, String ES_DISCAPACIDAD, String TI_CONTRATO, String LI_REGIMEN_PENSIONARIO, String ES_CONTRATO_TRABAJADOR, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String US_IP, String FE_VACACIO_INI, String FE_VACACIO_FIN, String ES_CONTRATO, String ID_FILIAL, String ID_PUESTO, Double CA_BONO_ALIMENTO, String LI_TIPO_CONVENIO, String ES_FIRMO_CONTRATO, Double NU_CONTRATO, String DE_OBSERVACION, String ES_APOYO, String TI_HORA_PAGO, String NU_DOCUMENTO, String ID_ANNO, String ES_ENTREGAR_DOC_REGLAMENTOS, String ES_REGISTRO_HUELLA, String DE_REGISTRO_SISTEM_REMU, String ID_TRABAJADOR, Double CA_SUELDO_TOTAL, String ID_REGIMEN_LABORAL, String ID_MODALIDAD, String ID_SUB_MODALIDAD, String CO_GR_OCUPACION, String FE_SUSCRIPCION, String CO_TI_MONEDA, String CO_TI_REM_VARIAB, String DE_REMU_ESPECIE, String DE_RUC_EMP_TRAB, String CO_SUCURSAL, String DE_MYPE, String ES_TI_CONTRATACION, Double CA_BEV, String ID_TIPO_PLANILLA, String ES_REMUNERACION_PROCESADO, String ID_HORARIO,String ID_PLANTILLA_CONTRACTUAL) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_CONTRATO( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )} ");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_CONTRATO( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? )} ");
             cst.setString(1, null);
             cst.setString(2, ID_DGP);
             cst.setString(3, c.convertFecha(FE_DESDE));
@@ -103,6 +104,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
             cst.setString(57, ID_TIPO_PLANILLA);
             cst.setString(58, "0");
             cst.setString(59, ID_HORARIO);
+            cst.setString(60, ID_PLANTILLA_CONTRACTUAL);
             cst.execute();
         } catch (SQLException ex) {
             throw new RuntimeException(ex.getMessage());
@@ -549,6 +551,9 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 v.setNo_distrito(rs.getString("no_distrito"));
                 v.setNo_provincia(rs.getString("no_provincia"));
                 v.setNo_provincia(rs.getString("fe_sus"));
+                v.setId_plantilla_contractual(rs.getString("id_plantilla_contractual"));
+                v.setFe_has(rs.getString("fe_has"));
+                v.setFe_des(rs.getString("fe_des"));
                 list.add(v);
             }
         } catch (SQLException e) {

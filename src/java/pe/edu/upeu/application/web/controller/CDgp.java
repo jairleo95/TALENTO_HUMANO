@@ -372,7 +372,7 @@ public class CDgp extends HttpServlet {
 
                 } else if (num == 0 & idrol.trim().equals("ROL-0006") & dgp.LIST_ID_DGP(ID_DGP).get(0).getEs_dgp().equals("1")) {
                     String ida1 = anno.List_Anno_Max_Cont(idtr);
-
+                    
                     getServletContext().setAttribute("List_id_Contrato_DGP", con.List_id_Contrato_DGP(idtr, ida1));
                     getServletContext().setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr));
                     getServletContext().setAttribute("List_Jefe", l.List_Jefe());
