@@ -140,6 +140,7 @@
             </div>
             <%
             } else {%>
+
             <div>
                 <table class="table table-hover table-striped  table-responsive" style="border-radius: 30px ">
                     <tr><td><select name="ida" class="anno" >
@@ -161,15 +162,16 @@
                         <td><input type="hidden" name="opc" value="actualizar" ></td></tr><button type="submit"  style="display:none" class="btn_act"   >Actualizar</button>
                 </table>
             </div>
-            <script>$(document).ready(function() {
-                    $(".anno").change(function() {
+
+            <script>$(document).ready(function () {
+                    $(".anno").change(function () {
                         $(".btn_act").click();
 
                     });
                 });</script>
         </form>
 
-                       
+
         <div>
             <form action="">
                 <%
@@ -184,9 +186,11 @@
                         X_List_Id_Contrato_DGP n = new X_List_Id_Contrato_DGP();
                         n = (X_List_Id_Contrato_DGP) List_contra_x_idcto.get(b);
                 %>
-
+                <a class="btn btn-primary" href="../../contrato?opc=Subir_Contrato&idc=<%=n.getId_contrato()%>" >Subir Contrato Firmado</a>
 
                 <% for (int p = 0; p < List_contra_x_idcto.size(); p++) {%>
+
+
                 <table class="table table-hover table-striped  table-responsive">
                     <tr><td class="text-info table-bordered"><strong>Desde: </strong></td><td colspan="2"><%=n.getFe_desde()%></td><td class="text-info table-bordered" colspan="2"><strong>Hasta:</strong></td><td colspan="2"><%=n.getFe_hasta()%></td></tr>
                     <tr><td class="text-info table-bordered"><strong>Dirección:</strong></td><td colspan="6"><p><%=n.getNo_direccion()%> </p></td></tr>
@@ -412,10 +416,10 @@
                    <tr><td>Pares:</td><td><? echo $list_rhc[$index][36];?> </td></tr>   
                      <tr><td>Apoyo:</td><td><? echo $list_rhc[$index][41];*/?> </td></tr>   -->
 
-                
-                    
 
-                     <tr><%if (n.getUs_modif() != null && n.getFe_modif() != null) {%>
+
+
+                    <tr><%if (n.getUs_modif() != null && n.getFe_modif() != null) {%>
                         <td class="text-info table-bordered"><strong>Modificado por:</strong></td>
                         <td><%for (int f = 0; f < List_Usuario.size(); f++) {
                                 Usuario u = new Usuario();
@@ -424,7 +428,8 @@
                                     out.println(u.getNo_usuario());%>
                             <%}%>
                         </td>
-                        <%}}else{%>
+                        <%}
+                        } else {%>
                         <% if (n.getUs_creacion() != null && n.getFe_creacion() != null) {%>
                         <td class="text-danger text-info text-center "><strong>Creado por:</strong></td>
                         <%if (n.getUs_creacion() != null) {
@@ -443,12 +448,12 @@
                     <tr></tr>
 
                     <%}%>
-                    
-                    
-                    
-                    
-                    
-                    
+
+
+
+
+
+
                 </table>
             </form>
             <div>
@@ -484,7 +489,7 @@
 
         <%}
             }
-%>
+        %>
     </center>
     <%}%>
 </body>

@@ -12,27 +12,22 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-import pe.edu.upeu.application.dao.Fotos_TrabajadorDAO;
-import pe.edu.upeu.application.dao.TrabajadorDAO;
-import pe.edu.upeu.application.dao_imp.InterfaceFotos_TrabajadorDAO;
-import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
+import pe.edu.upeu.application.dao.ContratoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceContratoDAO;
 import pe.edu.upeu.application.model.Renombrar;
 
 /**
  *
  * @author ALFA 3
  */
-public class CFoto extends HttpServlet {
+public class CContrato_Archivo_Adjunto extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,78 +39,91 @@ public class CFoto extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, FileUploadException, Exception {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        InterfaceFotos_TrabajadorDAO foto = new Fotos_TrabajadorDAO();
-        InterfaceTrabajadorDAO tr = new TrabajadorDAO();
         String ubicacion = "";
+        InterfaceContratoDAO c = new ContratoDAO();
         try {
             if (System.getProperty("sun.desktop").trim().equals("windows")) {
-                ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "\\Vista\\Usuario\\Fotos";
+                ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "\\Vista\\Contrato\\Contratos_Adjuntos";
             } else {
-                ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "/Vista/Usuario/Fotos/";
+                ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "/Vista/Contrato/Contratos_Adjuntos/";
             }
-            out.print(ubicacion);
-
             DiskFileItemFactory f = new DiskFileItemFactory();
-            f.setSizeThreshold(1024);
+            
+            if (f.getSizeThreshold() <= 500000) {
+                 out.print("adassd");
+            } else {
+                out.print("putopoooo");
+            }
             f.setRepository(new File(ubicacion));
+            
             ServletFileUpload upload = new ServletFileUpload(f);
-
+           
             List<FileItem> p = upload.parseRequest(request);
-            String idtr = null;
+            String idc = null;
             String nombre_archivo = null;
             String no_original = null;
-            long sizeInBytes = 0;
+            long tamaño = 0;
+            //  long sizeInBytes = 0;
             Iterator it = p.iterator();
             while (it.hasNext()) {
-
+                
                 FileItem item = (FileItem) it.next();
-
+                
                 if (item.isFormField()) {
-
+                    
                     String nombre = item.getFieldName();
                     String valor = item.getString();
-                    if (nombre.equals("idtr") & idtr == null) {
-                        idtr = valor;
+                    if (nombre.equals("idc") & idc == null) {
+                        idc = valor;
                     }
-
+                    
                 } else {
-
-                    String fieldName = item.getFieldName();
-                    sizeInBytes = item.getSize();
-                    Calendar fecha = new GregorianCalendar();
-                    int hora = fecha.get(Calendar.HOUR_OF_DAY);
-                    int min = fecha.get(Calendar.MINUTE);
-                    int sec = fecha.get(Calendar.SECOND);
-                    if (fieldName.equals("archivo")) {
-                        nombre_archivo = String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + idtr + "_" + item.getName().toUpperCase();
-                        no_original = item.getName();
-                        Thread thread = new Thread(new Renombrar(item, ubicacion, nombre_archivo));
-                        thread.start();
-                    } else {
-                        no_original = no_original;
-                        nombre_archivo = nombre_archivo;
+                    tamaño = item.getSize();
+                    if (tamaño <= 500000) {
+                        
+                        String fieldName = item.getFieldName();
+                        
+                        Calendar fecha = new GregorianCalendar();
+                        int hora = fecha.get(Calendar.HOUR_OF_DAY);
+                        int min = fecha.get(Calendar.MINUTE);
+                        int sec = fecha.get(Calendar.SECOND);
+                        if (fieldName.equals("archivo")) {
+                            nombre_archivo = String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + idc + "_" + item.getName().toUpperCase();
+                            no_original = item.getName();
+                            Thread thread = new Thread(new Renombrar(item, ubicacion, nombre_archivo));
+                            thread.start();
+                        } else {
+                            no_original = no_original;
+                            nombre_archivo = nombre_archivo;
+                        }
+                        
                     }
-
                 }
-
+                
             }
-
-            foto.INSERT_FOTOS_TRABAJADOR(null, null, nombre_archivo, no_original, no_original, String.valueOf(sizeInBytes), idtr);
+            if (tamaño <= 500000) {
+                if (nombre_archivo != null) {
+                    c.INSERT_CONTRATO_ADJUNTO(null, idc, nombre_archivo, no_original, null, null, null, null, null, null);
+                }
+                out.println(no_original);
+                out.println(nombre_archivo);
+                out.println(tamaño);
+            } else {
+                out.print("No se permite subir archivos mayores a 0.5MB");
+                out.print( upload.getFileSizeMax());
+            }
 
             //getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             //Thread.sleep(2000);
-           // response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr);
+            // response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr);
             // out.println("Archivo subido correctamente");
-             out.println(no_original);
-             out.println(nombre_archivo);
-             out.println(sizeInBytes);
         } catch (Exception e) {
-            out.print(e.getMessage());
-            //out.print(ubicacion);
-        } 
+            out.println(e.getMessage());
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -130,11 +138,7 @@ public class CFoto extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(CFoto.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -148,11 +152,7 @@ public class CFoto extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(CFoto.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

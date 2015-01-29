@@ -171,7 +171,7 @@ public class CTrabajador extends HttpServlet {
                 tr.INSERT_TRABAJADOR(null, AP_PATERNO, AP_MATERNO, NO_TRABAJADOR, TI_DOC, NU_DOC, ES_CIVIL, FE_NAC, ID_NACIONALIDAD, ID_DEPARTAMENTO, ID_PROVINCIA, ID_DISTRITO, TE_TRABAJADOR, CL_TRA, DI_CORREO_PERSONAL, DI_CORREO_INST, CO_SISTEMA_PENSIONARIO, LI_NIVEL_EDUCATIVO, REGIMEN, ES_INST_PERU, CARRERA, DE_ANNO_EGRESO, CM_OTROS_ESTUDIOS, ES_SEXO, LI_GRUPO_SANGUINEO, DE_REFERENCIA, LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, ID_NO_AFP, ES_AFILIADO_ESSALUD, LI_TIPO_TRABAJADOR, CA_TIPO_HORA_PAGO_REFEERENCIAL, ES_FACTOR_RH, LI_DI_DOM_A_D1, DI_DOM_A_D2, LI_DI_DOM_A_D3, DI_DOM_A_D4, LI_DI_DOM_A_D5, DI_DOM_A_D6, DI_DOM_A_REF, ID_DI_DOM_A_DISTRITO, LI_DI_DOM_LEG_D1, DI_DOM_LEG_D2, LI_DI_DOM_LEG_D3, DI_DOM_LEG_D4, LI_DI_DOM_LEG_D5, DI_DOM_LEG_D6, ID_DI_DOM_LEG_DISTRITO, CA_ING_QTA_CAT_EMPRESA, CA_ING_QTA_CAT_RUC, CA_ING_QTA_CAT_OTRAS_EMPRESAS, CM_OBSERVACIONES, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, AP_NOMBRES_PADRE, AP_NOMBRES_MADRE,
                 ES_TRABAJA_UPEU_C, AP_NOMBRES_C, FE_NAC_C, ID_TIPO_DOC_C, NU_DOC_C, LI_INSCRIPCION_VIG_ESSALUD_C, ID_CONYUGUE);
                 String idtr = tr.MAX_ID_DATOS_TRABAJADOR();
-                tr.INSERT_HIST_RELIGION(null, LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, "1", idtr);
+                tr.INSERT_HIST_RELIGION(null, LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, "1", idtr,iduser,FE_MODIF);
                 tr.UPDATE_ID_CONYUGUE(idtr, ID_CONYUGUE);
                 for (int i = 1; i <= num_hijo; i++) {
                     String AP_PATERNO_H = request.getParameter("APELLIDO_P_H" + i);
@@ -284,6 +284,27 @@ public class CTrabajador extends HttpServlet {
                 getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
                 getServletContext().setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));
                 response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&aut=1&dgp=" + iddgp + "&p=" + puesto_id + "&c=" + cod + "&pas=" + idpasos + "&drp=" + drp + "&np=" + np + "&vnc=" + num_c_dgp+"&val_aps="+val_aps);
+            }
+            if("EditarAR".equals(opc)){
+               String idtr = request.getParameter("idtr");
+                getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+               response.sendRedirect("Vista/Trabajador/Historial_Religion/Mod_Asp_Religioso.jsp?idtr="+idtr+"&iduser="+iduser);
+            }
+            if("Modificar".equals(opc)){
+                String idtr = request.getParameter("idtr");
+                String LI_RELIGION = request.getParameter("RELIGION");
+                String NO_IGLESIA = request.getParameter("IGLESIA");
+                String DE_CARGO = request.getParameter("CARGO");
+                String LI_AUTORIDAD = request.getParameter("AUTORIDAD");
+                String NO_AP_AUTORIDAD = request.getParameter("AUT_APELLIDOSNOMBRES");
+                String CL_AUTORIDAD = request.getParameter("AUT_CELULAR");
+                String FE_MODIF = "";
+                out.print(idtr);
+                tr.INSERT_HIST_RELIGION(null, LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, "1", idtr ,iduser,FE_MODIF);
+                tr.MOD_ASP_REL(LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, idtr);
+                getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+                response.sendRedirect("Vista/Trabajador/Aspecto_Social.jsp");
+                
             }
 
         } catch (Exception e) {
