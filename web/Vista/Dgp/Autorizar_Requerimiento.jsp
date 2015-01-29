@@ -203,7 +203,7 @@
                                                             });
                                                         }
                                                     });
-                                                   // exito("Procesado correctamente!", "Las firmas de cada trabajador han sido procesadas con exito.");
+                                                    // exito("Procesado correctamente!", "Las firmas de cada trabajador han sido procesadas con exito.");
 
                                                 }
                                                 catch (err) {
@@ -230,8 +230,8 @@
                                                     <th data-class="expand" ><strong>Apellidos Y Nombres</strong></th>
 
                                                     <th data-hide="phone,tablet"><strong>Puesto</strong></th>
-                                                    <th data-hide="phone,tablet"><strong>Sección</strong></th>
                                                     <th data-hide="phone,tablet"><strong>Area</strong></th>
+                                                    <th data-hide="phone,tablet"><strong>Depto.</strong></th>
                                                     <th data-hide="phone,tablet"><strong>Requerimiento</strong></th>
                                                     <!--  <td>Departamento</td>-->
                                                     <th data-hide="phone,tablet"><strong>Descripcion</strong></th>
@@ -319,8 +319,9 @@
                                                         <% }%>
                                                     <td ><%=a.getAp_paterno() + " " + a.getAp_materno() + " " + a.getNo_trabajador()%></td>
                                                     <td ><%=a.getNo_puesto()%></td>   
-                                                    <td ><%=a.getNo_seccion()%></td> 
+
                                                     <td ><%=a.getNo_area()%></td>      
+                                                    <td ><%=a.getNo_dep()%></td>      
                                                     <td ><%=a.getNo_req()%></td>      
                                             <input type="hidden" class="val_aut<%=(f + 1)%>" value="&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&IDDETALLE_DGP=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&COD=<%=a.getCo_pasos()%>&IDPASOS=<%=a.getId_pasos()%>&NROPASO=<%=a.getNu_pasos()%>&IDTR=<%=a.getId_trabajador()%>"/>
                                             <input type="hidden" class="val_firm<%=(f + 1)%>" value="&IDDETALLE_DGP=<%=a.getId_dgp()%>&IDTR=<%=a.getId_trabajador()%>"/>
