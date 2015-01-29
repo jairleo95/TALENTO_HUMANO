@@ -18,6 +18,6 @@ public interface InterfaceAreaDAO {
       public List<Area> List_Area();
       public List<Area> List_Area_ID(String id_departamento);
       public List<Map<String, ?>> List_area_id_json(String id_dep);
+      public List<Map<String, ?>> List_area_id_d(String id_dep);
       public List<Map<String, ?>> selec_area(String id_pu);
-      public List<Map<String, ?>> selec_area_x_id_pu(String ìd_dep);
 }

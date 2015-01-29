@@ -115,16 +115,16 @@ public class CFormato_Plantilla extends HttpServlet {
 
             if (opc.equals("Crear_Plantilla")) {
                 String texto_html = request.getParameter("valor");
-                String DEP = request.getParameter("DEPARTAMENTO");
-                String AREA = request.getParameter("AREA");
-                String SEC = request.getParameter("SECCION");
-                String DIR = request.getParameter("DIRECCION");
-                String PUES = request.getParameter("PUESTO");
+                String DEP = request.getParameter("id_dep_asig");
+                String AREA = request.getParameter("id_are_asig");
+                String SEC = request.getParameter("id_sec_asig");
+                String DIR = request.getParameter("id_di_asig");
+                String PUES = request.getParameter("id_pu_asig");
                 String ubicacion = "";
                 String no_pl = request.getParameter("no_pl");
                 pl.Crear_Plantilla(no_pl);
                 String id_pl = pl.ob_id_pl_max();
-                pl.Insertar_pertenencia(id_pl,DIR,DEP,AREA,SEC,PUES,iduser);
+                pl.Insertar_pertenencia(id_pl, DIR, DEP, AREA, SEC, PUES, iduser);
                 String no_arch = pl.Obt_no_arch();
                 if (System.getProperty("sun.desktop").trim().equals("windows")) {
                     ubicacion = direccion_raiz + "\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
@@ -134,7 +134,8 @@ public class CFormato_Plantilla extends HttpServlet {
                 File archivo = new File(ubicacion + no_arch);
                 FileWriter escribir = new FileWriter(archivo, true);
                 escribir.write(texto_html);
-                escribir.close();
+                escribir.close();   
+                out.print(DIR+DEP + AREA + SEC  + PUES);
                 response.sendRedirect("Vista/Contrato/Formato_Plantilla/Reg_Formato_Plantilla.jsp");
             }
 

@@ -176,11 +176,11 @@ public class PlantillaContractualDAO implements InterfacePlantillaContractualDAO
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.cnn.conex.prepareCall("{CALL RHSP_INSERT_PLANTILLA_PUEST( ?,?,?,?,?,?,? )} ");
-            cst.setString(1, id_plt_con);
-            cst.setString(2, dir);
-            cst.setString(3, dep);
-            cst.setString(4, area);
-            cst.setString(5, sec);
+            cst.setString(1, id_plt_con.trim());
+            cst.setString(2, dir.trim());
+            cst.setString(3, dep.trim());
+            cst.setString(4, area.trim());
+            cst.setString(5, sec.trim());
             cst.setString(6, puesto);
             cst.setString(7, id_user);
             cst.execute();
