@@ -409,6 +409,8 @@ public class DgpDAO implements InterfaceDgpDAO {
                 x.setTi_planilla(rs.getString("ti_planilla"));
                 x.setNo_dep(rs.getString("no_dep"));
                 x.setId_detalle_horario(rs.getString("id_detalle_horario"));
+                x.setNo_usuario_crea(rs.getString("no_usuario_crea"));
+                x.setNo_usuario_mod(rs.getString("no_usuario_mod"));
                 Lista.add(x);
             }
         } catch (SQLException e) {

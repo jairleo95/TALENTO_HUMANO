@@ -1,4 +1,5 @@
 
+<%@page import="pe.edu.upeu.application.model.Centro_Costos"%>
 <%
     HttpSession sesion_1 = request.getSession();
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
@@ -147,19 +148,28 @@
                         <%}
                             }%>
 
-                        <tr style="color: red;">
-                            <%
-                                if (d.getUs_modif() != null) { %>
-                            <td class="text-info table-bordered">Modificado por:</td>
-                            <td colspan="2"></td>
-                            <%}%>
-
-                            <% if (d.getUs_creacion() != null) {%>
-                            <td class="text-info table-bordered">Creado por:</td><td colspan="2" class="text-info table-bordered"><%=d.getUs_creacion()%></td>
+                        <% if (d.getUs_creacion() != null) {%>
+                        <tr style="color: red;"><td class="text-info table-bordered">Creado por:</td><td colspan="2" class="text-info table-bordered"><%=d.getNo_usuario_crea()%></td></tr>
                             <%} else {%>
-                            <td class="text-info table-bordered">Creado por:</td><td colspan="2" class="text-info table-bordered">No registrado</td>
+                        <tr style="color: red;"><td class="text-info table-bordered">Usuario Creador:</td><td colspan="2" class="text-info table-bordered">No Registrado</td></tr>
+                        <%}%>
+                        <%if (d.getUs_modif() != null) {%>
+                        <tr style="color: red;"><td class="text-info table-bordered">Ultima Modificacion por:</td><td class="table-bordered" colspan="2"><%=d.getNo_usuario_mod()%></td></tr>
+                            <%} else {%>
+                        <tr style="color: red;"><td class="text-info table-bordered">Modificaciones</td><td class=" table-bordered">Sin Modificaciones</td></tr>
+                        <%}%>
+
+
+                        <%if (d.getFe_modif() == null) {%>
+                        <tr><td class="text-info table-bordered">fecha Modificacion</td><td colspan="2" class="text-info table-bordered">Sin Modificaciones</td></tr>
+                            <%} else {%>
+                        <tr><td class="text-info table-bordered">Fecha de Modificacion:</td><td colspan="2" class="text-info table-bordered"><%=d.getFe_modif()%></td></tr>
                             <%}%>
-                        </tr>
+                        <%if (d.getFe_creacion()== null) {%>
+                        <tr><td class="text-info table-bordered">fecha Creacion:</td><td colspan="2" class="text-info table-bordered">Sin Modificaciones</td></tr>
+                            <%} else {%>
+                        <tr><td class="text-info table-bordered">Fecha de Creacion:</td><td colspan="2" class="text-info table-bordered"><%=d.getFe_modif()%></td></tr>
+                            <%}%>
                         <tr>
                             <%if (Cargar_cc_dgp.size() > 0) {
                                     for (int p = 0; p < Cargar_cc_dgp.size(); p++) {

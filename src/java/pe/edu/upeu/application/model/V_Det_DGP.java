@@ -34,13 +34,16 @@ public class V_Det_DGP {
     private String fe_creacion;
     private String us_modif;
     private String fe_modif;
+    private String no_usuario_crea;
+    private String no_usuario_mod;
+
 
     public V_Det_DGP(String id_dgp, String fe_desde, String fe_hasta, Double ca_sueldo, String de_dias_trabajo, String no_puesto, String id_puesto, String id_requerimiento,
             String id_trabajador, String co_ruc, String de_lugar_servicio, String de_servicio, String de_periodo_pago, String de_domicilio_fiscal, String de_subvencion,
             String de_horario_capacitacion, String de_horario_refrigerio, String de_dias_capacitacion, String es_dgp, String us_creacion, String fe_creacion, String us_modif,
             String fe_modif, String ip_usuario, String no_req, Double ca_bono_alimentario, Double de_bev, String de_antecedentes_policiales, String es_certificado_salud,
             String no_banco, String nu_cuenta, String nu_cuenta_banc, String es_gen_nu_cuenta, String no_banco_otros, String id_departamento, String id_direccion,
-            String id_seccion, String id_area, String id_tipo_planilla, String ti_planilla, String id_detalle_horario, String no_dep) {
+            String id_seccion, String id_area, String id_tipo_planilla, String ti_planilla, String id_detalle_horario, String no_dep,String no_usuario_crea,String no_usuario_mod) {
         this.id_dgp = id_dgp;
         this.fe_desde = fe_desde;
         this.fe_hasta = fe_hasta;
@@ -78,6 +81,8 @@ public class V_Det_DGP {
         this.ti_planilla = ti_planilla;
         this.id_detalle_horario = id_detalle_horario;
         this.no_dep = no_dep;
+        this.no_usuario_crea = no_usuario_crea;
+        this.no_usuario_mod = no_usuario_mod;
     }
 
     public V_Det_DGP() {
@@ -118,6 +123,8 @@ public class V_Det_DGP {
         this.ti_planilla = "";
         this.id_detalle_horario = "";
         this.no_dep = "";
+        this.no_usuario_crea = "";
+        this.no_usuario_mod = "";
     }
     private String ip_usuario;
     private String no_req;
@@ -134,6 +141,22 @@ public class V_Det_DGP {
     private String ti_planilla;
     private String id_detalle_horario;
     private String no_dep;
+
+    public String getNo_usuario_crea() {
+        return no_usuario_crea;
+    }
+
+    public void setNo_usuario_crea(String no_usuario_crea) {
+        this.no_usuario_crea = no_usuario_crea;
+    }
+
+    public String getNo_usuario_mod() {
+        return no_usuario_mod;
+    }
+
+    public void setNo_usuario_mod(String no_usuario_mod) {
+        this.no_usuario_mod = no_usuario_mod;
+    }
 
     public String getNo_dep() {
         return no_dep;

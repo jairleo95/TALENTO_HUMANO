@@ -53,6 +53,16 @@ public class CFormato_Plantilla extends HttpServlet {
         String iduser = (String) sesion.getAttribute("IDUSER");
         String opc = request.getParameter("opc");
         try {
+            if (opc.equals("Asignar")) {
+                String DEP = request.getParameter("id_dep_asig");
+                String AREA = request.getParameter("id_are_asig");
+                String SEC = request.getParameter("id_sec_asig");
+                String DIR = request.getParameter("id_di_asig");
+                String PUES = request.getParameter("id_pu_asig");
+                String id = request.getParameter("id_pc");
+                pl.Insertar_pertenencia(id, DIR, DEP, AREA, SEC, PUES, iduser);
+                response.sendRedirect("Vista/Contrato/Formato_Plantilla/Reg_Formato_Plantilla.jsp");
+            }
             if (opc.equals("asignar")) {
                 response.sendRedirect("Vista/Contrato/Formato_Plantilla/Reg_Formato_Plantilla.jsp");
             }
@@ -134,8 +144,8 @@ public class CFormato_Plantilla extends HttpServlet {
                 File archivo = new File(ubicacion + no_arch);
                 FileWriter escribir = new FileWriter(archivo, true);
                 escribir.write(texto_html);
-                escribir.close();   
-                out.print(DIR+DEP + AREA + SEC  + PUES);
+                escribir.close();
+                out.print(DIR + DEP + AREA + SEC + PUES);
                 response.sendRedirect("Vista/Contrato/Formato_Plantilla/Reg_Formato_Plantilla.jsp");
             }
 
