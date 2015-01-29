@@ -65,11 +65,6 @@ public class V_Det_DGP {
         this.de_bev = de_bev;
         this.de_antecedentes_policiales = de_antecedentes_policiales;
         this.es_certificado_salud = es_certificado_salud;
-        this.no_banco = no_banco;
-        this.nu_cuenta = nu_cuenta;
-        this.nu_cuenta_banc = nu_cuenta_banc;
-        this.es_gen_nu_cuenta = es_gen_nu_cuenta;
-        this.no_banco_otros = no_banco_otros;
         this.id_departamento = id_departamento;
         this.id_direccion = id_direccion;
         this.id_seccion = id_seccion;
@@ -380,47 +375,6 @@ public class V_Det_DGP {
     public void setEs_certificado_salud(String es_certificado_salud) {
         this.es_certificado_salud = es_certificado_salud;
     }
-
-    public String getNo_banco() {
-        return no_banco;
-    }
-
-    public void setNo_banco(String no_banco) {
-        this.no_banco = no_banco;
-    }
-
-    public String getNu_cuenta() {
-        return nu_cuenta;
-    }
-
-    public void setNu_cuenta(String nu_cuenta) {
-        this.nu_cuenta = nu_cuenta;
-    }
-
-    public String getNu_cuenta_banc() {
-        return nu_cuenta_banc;
-    }
-
-    public void setNu_cuenta_banc(String nu_cuenta_banc) {
-        this.nu_cuenta_banc = nu_cuenta_banc;
-    }
-
-    public String getEs_gen_nu_cuenta() {
-        return es_gen_nu_cuenta;
-    }
-
-    public void setEs_gen_nu_cuenta(String es_gen_nu_cuenta) {
-        this.es_gen_nu_cuenta = es_gen_nu_cuenta;
-    }
-
-    public String getNo_banco_otros() {
-        return no_banco_otros;
-    }
-
-    public void setNo_banco_otros(String no_banco_otros) {
-        this.no_banco_otros = no_banco_otros;
-    }
-
     public String getId_departamento() {
         return id_departamento;
     }

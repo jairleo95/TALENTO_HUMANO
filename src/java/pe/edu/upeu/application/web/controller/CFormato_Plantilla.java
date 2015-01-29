@@ -19,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import pe.edu.upeu.application.dao.Formato_HorarioDAO;
 import pe.edu.upeu.application.dao.PlantillaContractualDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceFormato_HorarioDAO;
@@ -48,7 +49,8 @@ public class CFormato_Plantilla extends HttpServlet {
         Map<String, Object> rpta = new HashMap<String, Object>();
         InterfaceFormato_HorarioDAO f = new Formato_HorarioDAO();
         InterfacePlantillaContractualDAO pl = new PlantillaContractualDAO();
-
+        HttpSession sesion = request.getSession(true);
+        String iduser = (String) sesion.getAttribute("IDUSER");
         String opc = request.getParameter("opc");
         try {
             if (opc.equals("asignar")) {
@@ -106,22 +108,24 @@ public class CFormato_Plantilla extends HttpServlet {
                 String id_are = request.getParameter("id_are");
                 String id_sec = request.getParameter("sec");
                 String id_pu = request.getParameter("id_pu");
-                List<Map<String, ?>> lista = pl.List_PLant_x_sel(id_pu,id_sec,id_are,id_dep,id_dir);
+                List<Map<String, ?>> lista = pl.List_PLant_x_sel(id_pu, id_sec, id_are, id_dep, id_dir);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
-            
+
             if (opc.equals("Crear_Plantilla")) {
                 String texto_html = request.getParameter("valor");
-                String DEP = request.getParameter("valor");
-                String AREA = request.getParameter("valor");
-                String SEC = request.getParameter("valor");
-                String DIR = request.getParameter("valor");
-                String PUES = request.getParameter("valor");
+                String DEP = request.getParameter("DEPARTAMENTO");
+                String AREA = request.getParameter("AREA");
+                String SEC = request.getParameter("SECCION");
+                String DIR = request.getParameter("DIRECCION");
+                String PUES = request.getParameter("PUESTO");
                 String ubicacion = "";
                 String no_pl = request.getParameter("no_pl");
                 pl.Crear_Plantilla(no_pl);
-                String no_arch=pl.Obt_no_arch();
+                String id_pl = pl.ob_id_pl_max();
+                pl.Insertar_pertenencia(id_pl,DIR,DEP,AREA,SEC,PUES,iduser);
+                String no_arch = pl.Obt_no_arch();
                 if (System.getProperty("sun.desktop").trim().equals("windows")) {
                     ubicacion = direccion_raiz + "\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
                 } else {

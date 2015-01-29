@@ -23,6 +23,7 @@
 
         <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
         <link type="text/css" rel="stylesheet" href="../../css/Css_Reporte/Reportes.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../HTML_version/css/bootstrap.min.css">
         <link type="text/css" rel="stylesheet" href="../../css/Css_Formulario/form.css">
         <link rel="stylesheet" href="../../css/bootstrap.min.css">
         <title>Contratos</title>

@@ -401,11 +401,6 @@ public class DgpDAO implements InterfaceDgpDAO {
                 x.setDe_bev(rs.getDouble("de_bev"));
                 x.setDe_antecedentes_policiales(rs.getString("de_antecedentes_policiales"));
                 x.setEs_certificado_salud(rs.getString("es_certificado_salud"));
-                x.setNo_banco(rs.getString("no_banco"));
-                x.setNu_cuenta(rs.getString("nu_cuenta"));
-                x.setNu_cuenta_banc(rs.getString("nu_cuenta_banc"));
-                x.setEs_gen_nu_cuenta(rs.getString("es_gen_nu_cuenta"));
-                x.setNo_banco_otros(rs.getString("no_banco_otros"));
                 x.setId_departamento(rs.getString("id_departamento"));
                 x.setId_direccion(rs.getString("id_direccion"));
                 x.setId_seccion(rs.getString("id_seccion"));

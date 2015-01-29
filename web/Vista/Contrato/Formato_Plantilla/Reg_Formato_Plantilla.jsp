@@ -19,7 +19,37 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         <link type="text/css" rel="stylesheet" href="../../../css/Css_Reporte/Reportes.css">
         <link type="text/css" rel="stylesheet" href="../../../css/Css_Formulario/form.css">
         <link href="../../../HTML_version/js/plugin/ckeditor/samples/sample.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../HTML_version/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../HTML_version/css/font-awesome.min.css">
+        <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../HTML_version/css/smartadmin-production.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../HTML_version/css/smartadmin-skins.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../HTML_version/css/demo.min.css">
+
+        <!-- FAVICONS -->
+        <link rel="shortcut icon" href="../../../HTML_version/img/favicon/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="../../../HTML_version/img/favicon/favicon.ico" type="image/x-icon">
+
+        <!-- GOOGLE FONT -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+
+        <!-- Specifying a Webpage Icon for Web Clip 
+                 Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
+        <link rel="apple-touch-icon" href="../../../HTML_version/img/splash/sptouch-icon-iphone.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../../HTML_version/img/splash/touch-icon-ipad.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../../HTML_version/img/splash/touch-icon-iphone-retina.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../../HTML_version/img/splash/touch-icon-ipad-retina.png">
+
+        <!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+        <!-- Startup image for web apps -->
+        <link rel="apple-touch-startup-image" href="../../../HTML_version/img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+        <link rel="apple-touch-startup-image" href="../../../HTML_version/img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+        <link rel="apple-touch-startup-image" href="../../../HTML_version/img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
+        <link rel="stylesheet" type="text/css"  href="../../../css/Css_Formulario/form.css">
         <script>
 // The instanceReady event is fired, when an instance of CKEditor has finished
 // its initialization.
@@ -323,20 +353,22 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                  
                  }*/
                 $(".dep").change(function() {
-
+                    Listar_Plantilla();
                     list_area_id($(".area"), $(this).val());
+
                     //list_plantillas($(this).val());
                 });
 
                 $(".area").change(function() {
                     var d = $(".seccion");
+                    Listar_Plantilla()
                     list_sec_id(d, $(this).val());
                     //list_plantillas($(this).val());
                 });
 
                 $(".seccion").change(function() {
                     //list_plantillas($(this).val());
-
+                    Listar_Plantilla()
                     var e = $(".puesto");
                     $.post("../../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $(this).val(), function(objJson) {
                         e.empty();
@@ -358,6 +390,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 });
 
                 $(".puesto").change(function() {
+                    Listar_Plantilla()
                     //list_plantillas($(this).val());
 
                 });
@@ -367,48 +400,53 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
     </head>
 
-    <body>
-        <h3>CARGAR PLANTILLAS</h3>
-        <label>Dirección:</label>
-        <select class="dir" id="dir" name="DIRECCION">
-            <option value="">[SELECCIONE]</option>
-            <option value="">[TODO]</option>
-        </select>
-        <label>Departamento:</label>
-        <select class="dep" id="dep" name="DEPARTAMENTO" >
-            <option value="">[TODO]</option>
-        </select>
-        <label>Area:</label>
-        <select class="area" id="area" name="AREA" >
-            <option value="">[TODO]</option>
-        </select>
-        <label>Sección:</label>
-        <select class="seccion" id="seccion" name="SECCION" >
-            <option value="">[TODO]</option>
-        </select>
-        <label>Puesto:</label>
-        <select class="puesto" id="puesto" name="PUESTO" >
-            <option value="">[TODO]</option>
-        </select>
-        <br>
-        <br>
-        <table class="table" border="1">
-            <thead>
-                <tr>
-                    <td>Nro</td>
-                    <td>Nombre Plantilla</td>
-                    <td>Acciones</td>
-                </tr>
-            </thead>
-            <tbody class="tbody-plantilla">
-            </tbody>
-        </table>
+    <body align="center">
+    <center>
+        <div class="row" >
 
+            <h3>CARGAR PLANTILLAS</h3>
+            <section class="col col-4" >
+                <label>Dirección:
+                    <select class="dir col  " id="dir" name="DIRECCION" required="">
+                        <option value="">[SELECCIONE]</option>
+                        <option value="0">[TODO]</option>
+                    </select>    </label>
+            </section>
 
+            <label>Departamento:
+                <select class="dep col " id="dep" name="DEPARTAMENTO" >
+                    <option value="0">[TODO]</option>
+                </select></label>
+            <label>Area:
+                <select class="area col" id="area" name="AREA" >
+                    <option value="0">[TODO]</option>
+                </select></label>
+            <label>Sección:
+                <select class="seccion col" id="seccion" name="SECCION" >
+                    <option value="0">[TODO]</option>
+                </select></label>
+            <label>Puesto:
+                <select class="puesto col" id="puesto" name="PUESTO" >
+                    <option value="0">[TODO]</option>
+                </select></label>
+            <br>
+            <br>
+            <table class="table" border="1">
+                <thead>
+                    <tr>
+                        <td>Nro</td>
+                        <td>Nombre Plantilla</td>
+                        <td>Acciones</td>
+                    </tr>
+                </thead>
+                <tbody class="tbody-plantilla">
+                </tbody>
+            </table>
+        </div>
         <h3>EDITAR PLANTILLAS</h3>
         <form class="ckeditor_form" action="../../../formato_plantilla" method="post">
             <br><strong>NOMBRE PLANTILLA</strong><br>
-            <input type="text" class="nombre_pl" name="no_pl"><br><br>
+            <input type="text" class="nombre_pl form-control" name="no_pl"><br><br>
             <button  onclick="procesar_texto();" type="button">Procesar </button>
             <textarea cols="100" id="editor1" name="editor1" rows="10">
             </textarea>
@@ -420,6 +458,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         blur: onBlur,
                         // Check for availability of corresponding plugins.
                         pluginsLoaded: function(evt) {
+                            
+                            
                             var doc = CKEDITOR.document, ed = evt.editor;
                             if (!ed.getCommand('bold'))
                                 doc.getById('exec-bold').hide();
@@ -436,6 +476,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             </div>
         </form>
         <h3>ASIGNAR PLANTILLAS</h3>
+        </center>
     </body>
 </html>
 
