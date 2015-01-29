@@ -72,8 +72,9 @@ public class Trabajador {
     private String us_modif;
     private String fe_modif;
     private String ip_usuario;
+    private String nu_doc_c;
 
-    public Trabajador(String id_trabajador, String ap_paterno, String ap_materno, String no_trabajador, String ti_doc, String nu_doc, String es_civil, String fe_nac, String id_nacionalidad, String id_departamento, String id_provincia, String id_distrito, String te_trabajador, String cl_tra, String di_correo_personal, String di_correo_inst, String co_sistema_pensionario, String li_nivel_educativo, String li_grado_academico, String li_titulo_profesional, String id_carrera, String id_universidad, String cm_otros_estudios, String es_sexo, String li_grupo_sanguineo, String de_referencia, String li_religion, String no_iglesia, String de_cargo, String li_autoridad, String no_ap_autoridad, String cl_autoridad, String id_no_afp, String es_afiliado_essalud, String li_tipo_trabajador, String ca_tipo_hora_pago_refeerencial, String es_factor_rh, String li_di_dom_a_d1, String di_dom_a_d2, String li_di_dom_a_d3, String di_dom_a_d4, String li_di_dom_a_d5, String di_dom_a_d6, String di_dom_a_ref, String id_di_dom_a_distrito, String li_di_dom_leg_d1, String di_dom_leg_d2, String li_di_dom_leg_d3, String di_dom_leg_d4, String li_di_dom_leg_d5, String di_dom_leg_d6, String id_di_dom_leg_distrito, String ca_ing_qta_cat_empresa, String ca_ing_qta_cat_ruc, String ca_ing_qta_cat_otras_empresas, String cm_observaciones, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String ip_usuario) {
+    public Trabajador(String id_trabajador, String ap_paterno, String ap_materno, String no_trabajador, String ti_doc, String nu_doc, String es_civil, String fe_nac, String id_nacionalidad, String id_departamento, String id_provincia, String id_distrito, String te_trabajador, String cl_tra, String di_correo_personal, String di_correo_inst, String co_sistema_pensionario, String li_nivel_educativo, String li_grado_academico, String li_titulo_profesional, String id_carrera, String id_universidad, String cm_otros_estudios, String es_sexo, String li_grupo_sanguineo, String de_referencia, String li_religion, String no_iglesia, String de_cargo, String li_autoridad, String no_ap_autoridad, String cl_autoridad, String id_no_afp, String es_afiliado_essalud, String li_tipo_trabajador, String ca_tipo_hora_pago_refeerencial, String es_factor_rh, String li_di_dom_a_d1, String di_dom_a_d2, String li_di_dom_a_d3, String di_dom_a_d4, String li_di_dom_a_d5, String di_dom_a_d6, String di_dom_a_ref, String id_di_dom_a_distrito, String li_di_dom_leg_d1, String di_dom_leg_d2, String li_di_dom_leg_d3, String di_dom_leg_d4, String li_di_dom_leg_d5, String di_dom_leg_d6, String id_di_dom_leg_distrito, String ca_ing_qta_cat_empresa, String ca_ing_qta_cat_ruc, String ca_ing_qta_cat_otras_empresas, String cm_observaciones, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String ip_usuario, String nu_doc_c) {
         this.id_trabajador = id_trabajador;
         this.ap_paterno = ap_paterno;
         this.ap_materno = ap_materno;
@@ -135,6 +136,7 @@ public class Trabajador {
         this.us_modif = us_modif;
         this.fe_modif = fe_modif;
         this.ip_usuario = ip_usuario;
+        this.nu_doc_c = nu_doc_c;
     }
     
      public Trabajador() {
@@ -199,8 +201,18 @@ public class Trabajador {
         this.us_modif = "";
         this.fe_modif = "";
         this.ip_usuario = "";
+        this.nu_doc_c = "";
     }
 
+    public String getNu_doc_c() {
+        return nu_doc_c;
+    }
+
+    public void setNu_doc_c(String nu_doc_c) {
+        this.nu_doc_c = nu_doc_c;
+    }
+
+        
     public String getId_trabajador() {
         return id_trabajador;
     }
