@@ -22,4 +22,6 @@ public interface InterfacePlantillaContractualDAO {
     public String Obt_no_arch();
     public String List_pl_con_x_id(String id_plan_con);
     public String ob_id_pl_max();
+    public void Activar_pl_pu(String id_pp,String id_user);
+    public void Desactivar_pl_pu(String id_pp,String id_user);
 }

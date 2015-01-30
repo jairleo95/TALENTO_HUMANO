@@ -122,7 +122,14 @@ public class CFormato_Plantilla extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
-
+            if (opc.equals("activar_pp")) {
+                String id_pp=request.getParameter("id_pp");
+                pl.Activar_pl_pu(id_pp,iduser);
+            }
+            if (opc.equals("Desactivar_pp")) {
+                String id_pp=request.getParameter("id_pp");
+                pl.Desactivar_pl_pu(id_pp,iduser);
+            }
             if (opc.equals("Crear_Plantilla")) {
                 String texto_html = request.getParameter("valor");
                 String DEP = request.getParameter("id_dep_asig");
