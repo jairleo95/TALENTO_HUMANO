@@ -491,7 +491,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 <h3>CARGAR PLANTILLAS</h3>
                 <section class="col col-4" >
                     <label>Dirección:
-                        <select class="dir col  " id="dir" name="id_di" required="">
+                        <select class="dir col  " id="dir" name="id_di" >
                             <option value="">[SELECCIONE]</option>
                             <option value="">[TODO]</option>
                         </select>   
@@ -542,7 +542,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 <h3>ASIGNAR PLANTILLAS</h3>
                 <section class="col col-4" >
                     <label>Dirección:
-                        <select class="dir_as col  " id="dir_as" name="id_di_asig" required="">
+                        <select class="dir_as col  " id="dir_as" name="id_di_asig" >
                             <option value="">[SELECCIONE]</option>
                             <option value="0">[TODO]</option>
                         </select>   
@@ -580,7 +580,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             <h3>EDITAR PLANTILLAS</h3>
 
             <br><strong>NOMBRE PLANTILLA</strong><br>
-            <input type="text" class="nombre_pl form-control" name="no_pl" required=""><br><br>
+            <input type="text" class="nombre_pl form-control" name="no_pl" ><br><br>
             <button  onclick="procesar_texto();" type="button">Procesar </button>
             <textarea cols="100" id="editor1" name="editor1" rows="10">
             </textarea>
