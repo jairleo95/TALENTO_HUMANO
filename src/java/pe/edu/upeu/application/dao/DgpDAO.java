@@ -37,7 +37,7 @@ public class DgpDAO implements InterfaceDgpDAO {
     CConversion c = new CConversion();
 
     @Override
-    public void INSERT_DGP(String ID_DGP, String FE_DESDE, String FE_HASTA, double CA_SUELDO, String DE_DIAS_TRABAJO, String ID_PUESTO, String ID_REQUERIMIENTO, String ID_TRABAJADOR, String CO_RUC, String DE_LUGAR_SERVICIO, String DE_SERVICIO, String DE_PERIODO_PAGO, String DE_DOMICILIO_FISCAL, String DE_SUBVENCION, String DE_HORARIO_CAPACITACION, String DE_HORARIO_REFRIGERIO, String DE_DIAS_CAPACITACION, String ES_DGP, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, double CA_BONO_ALIMENTARIO, double DE_BEV, double CA_CENTRO_COSTOS, String DE_ANTECEDENTES_POLICIALES, String DE_CERTIFICADO_SALUD, String DE_MONTO_HONORARIO, String NO_BANCO, String NU_CUENTA, String NU_CUENTA_BANC, String ES_GEN_NU_CUEN, String NO_BANCO_OTROS) {
+    public void INSERT_DGP(String ID_DGP, String FE_DESDE, String FE_HASTA, double CA_SUELDO, String DE_DIAS_TRABAJO, String ID_PUESTO, String ID_REQUERIMIENTO, String ID_TRABAJADOR, String CO_RUC, String DE_LUGAR_SERVICIO, String DE_SERVICIO, String DE_PERIODO_PAGO, String DE_DOMICILIO_FISCAL, String DE_SUBVENCION, String DE_HORARIO_CAPACITACION, String DE_HORARIO_REFRIGERIO, String DE_DIAS_CAPACITACION, String ES_DGP, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, double CA_BONO_ALIMENTARIO, double DE_BEV, String DE_ANTECEDENTES_POLICIALES, String ES_CERTIFICADO_SALUD, String DE_MONTO_HONORARIO) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DGP( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
@@ -66,15 +66,9 @@ public class DgpDAO implements InterfaceDgpDAO {
             cst.setString(23, IP_USUARIO);
             cst.setDouble(24, CA_BONO_ALIMENTARIO);
             cst.setDouble(25, DE_BEV);
-            cst.setDouble(26, CA_CENTRO_COSTOS);
-            cst.setString(27, DE_ANTECEDENTES_POLICIALES);
-            cst.setString(28, DE_CERTIFICADO_SALUD);
-            cst.setString(29, DE_MONTO_HONORARIO);
-            cst.setString(30, NO_BANCO);
-            cst.setString(31, NU_CUENTA);
-            cst.setString(32, NU_CUENTA_BANC);
-            cst.setString(33, ES_GEN_NU_CUEN);
-            cst.setString(34, NO_BANCO_OTROS);
+            cst.setString(26, DE_ANTECEDENTES_POLICIALES);
+            cst.setString(27, ES_CERTIFICADO_SALUD);
+            cst.setString(28, DE_MONTO_HONORARIO);            
             cst.execute();
 
         } catch (SQLException e) {

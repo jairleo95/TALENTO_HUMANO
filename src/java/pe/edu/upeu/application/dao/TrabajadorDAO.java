@@ -485,10 +485,10 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         return Lista;
     }
     @Override
-    public void INSERT_CUENTA_SUELDO(String ID_CUENTA_SUELDO, String NO_BANCO, String NU_CUENTA, String NU_CUENTA_BANC, String ES_GEM_NU_CUENTA, String NO_BANCO_OTROS, String ID_TRABAJADOR) {
+    public void INSERT_CUENTA_SUELDO(String ID_CUENTA_SUELDO, String NO_BANCO, String NU_CUENTA, String NU_CUENTA_BANC, String ES_GEM_NU_CUENTA, String NO_BANCO_OTROS, String ID_TRABAJADOR, String ES_CUENTA_SUELDO) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_CUENTA_SUELDO( ?, ?, ?, ?, ?, ?, ?)} ");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_CUENTA_SUELDO( ?, ?, ?, ?, ?, ?, ?, ?)} ");
             cst.setString(1, null);
             cst.setString(2,NO_BANCO);
             cst.setString(3,NU_CUENTA);
@@ -496,6 +496,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(5,ES_GEM_NU_CUENTA);
             cst.setString(6,NO_BANCO_OTROS);
             cst.setString(7,ID_TRABAJADOR);
+            cst.setString(8,ES_CUENTA_SUELDO);
             cst.execute();
         } catch (SQLException ex) {
         } finally {
@@ -506,7 +507,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
     @Override
     public String CuentaSueldoTra(String ID_TRABAJADOR) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select ES_GEM_NU_CUENTA from RHTD_CUENTA_SUELDO where ID_TRABAJADOR = '"+ID_TRABAJADOR+"'";
+        String sql = "select ES_CUENTA_SUELDO from RHTD_CUENTA_SUELDO where ID_TRABAJADOR = '"+ID_TRABAJADOR+"'";
         String es_cs = null;
         try {
             ResultSet rs = this.conn.query(sql);
@@ -519,4 +520,24 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         }
         return es_cs;
     }
+
+    @Override
+    public void MODIF_CUENTA_SUELDO(String NO_BANCO, String NU_CUENTA, String NU_CUENTA_BANC, String ES_GEM_NU_CUENTA, String NO_BANCO_OTROS, String ID_TRABAJADOR, String ES_CUENTA_SUELDO ) {
+         try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_CUENTA_SUELDO( ?, ?, ?, ?, ?, ?, ?)} ");
+            cst.setString(1, NO_BANCO);
+            cst.setString(2, NU_CUENTA);
+            cst.setString(3, NU_CUENTA_BANC);
+            cst.setString(4, ES_GEM_NU_CUENTA);
+            cst.setString(5, NO_BANCO_OTROS);
+            cst.setString(6, ID_TRABAJADOR);
+            cst.setString(7, ES_CUENTA_SUELDO);
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        }
+    }
+    
 }

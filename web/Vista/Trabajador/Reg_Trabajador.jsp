@@ -866,7 +866,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div> 
-                                                            <input type="hidden" value="0" name="ES_NU_CUENTA" id="es_cuenta"/>
+                                                            <input type="hidden" value="0" name="ES_CUENTA_SUELDO" id="es_cuenta"/>
                                                         </div>  
 
                                                         <script>
