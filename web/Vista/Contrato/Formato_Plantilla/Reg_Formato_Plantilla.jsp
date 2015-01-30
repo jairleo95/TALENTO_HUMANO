@@ -205,13 +205,13 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         return;
                     }
                     var list = objJson.lista;
-                    b.append("<option value='0' selected=''> [TODOS] </option>");
+                    b.append("<option value='' selected=''> [TODOS] </option>");
                     if (list.length !== 0) {
                         for (var i = 0; i < list.length; i++) {
                             b.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
                         }
                     } else {
-                        b.append("<option value='0' > [] </option>");
+                        b.append("<option value='' > [] </option>");
                     }
                 });
             }
@@ -225,13 +225,13 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         return;
                     }
                     var list = objJson.lista;
-                    d.append("<option value='0' selected=''> [TODOS] </option>");
+                    d.append("<option value='' selected=''> [TODOS] </option>");
                     if (list.length !== 0) {
                         for (var i = 0; i < list.length; i++) {
                             d.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
                         }
                     } else {
-                        d.append("<option value='0' > [] </option>");
+                        d.append("<option value='' > [] </option>");
                     }
                 });
 
@@ -246,13 +246,13 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         return;
                     }
                     var list = objJson.lista;
-                    c.append("<option value='0' selected='' > [TODOS] </option>");
+                    c.append("<option value='' selected='' > [TODOS] </option>");
                     if (list.length !== 0) {
                         for (var i = 0; i < list.length; i++) {
                             c.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
                         }
                     } else {
-                        c.append("<option value='0' > [no hay] </option>");
+                        c.append("<option value='' > [no hay] </option>");
                     }
                 });
 
@@ -265,13 +265,13 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         return;
                     }
                     var list = objJson.lista;
-                    d.append("<option value='0' selected='0' > [TODOS] </option>");
+                    d.append("<option value='' selected='' > [TODOS] </option>");
                     if (list.length !== 0) {
                         for (var i = 0; i < list.length; i++) {
                             d.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
                         }
                     } else {
-                        d.append("<option value='0' > [no hay] </option>");
+                        d.append("<option value='' > [no hay] </option>");
                     }
                 });
 
@@ -289,28 +289,75 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 var d = $(".tbody-plantilla");
                 $.post("../../../formato_plantilla", "opc=List_Plamtillas&" + "id_dir=" + $(".dir").val() + "&id_dep=" + $(".dep").val() + "&id_are=" + $(".area").val() + "&sec=" + $(".seccion").val() + "&id_pu=" + $(".puesto").val(), function(objJson) {
                     d.empty();
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
                     var list = objJson.lista;
-                    alert($(".dir").val() + $(".dep").val() + $(".area").val() + $(".seccion").val() + $(".puesto").val());
-                    alert(list.length);
                     if (list.length > 0) {
                         for (var i = 0; i < list.length; i++) {
                             d.append('<tr>');
-                            d.append('<td>' + (i + 1) + '</td>');
-                            d.append('<td>' + list[i].nom_pl + '</td>');
+                            d.append('<td align="center">' + (i + 1) + '</td>');
+                            d.append('<td align="center">' + list[i].nom_pl + '</td>');
+                            if (list[i].es_pl === '1') {
+                                d.append('<td align="center">Activado</td>');
+                            } else {
+                                d.append('<td align="center">Desactivado</td>');
+                            }
                             d.append('<input type="hidden" value="' + list[i].id + '" class="id_plantilla' + i + '" />');
                             d.append('<input type="hidden" value="' + list[i].nom_ar + '" class="plantilla' + i + '" />');
+                            d.append('<input type="hidden" value="' + list[i].id_pp + '" class="idplpu' + i + '" />');
                             d.append('<td><button type="button" value="' + i + '" class="btn-cargar_pl">Cargar</button></td>');
-                            d.append('</tr>');
+                            if (list[i].es_pl === '1') {
+                                d.append('<td align="center" ><button style="width: 100px" type="button" value="' + i + '" class="btn-Desac_pl">Desactivar</button></td>');
+                            } else {
+                                d.append('<td align="center"><button style="width: 100px" type="button" value="' + i + '" class="btn-Activ_pl">Activar</button></td>');
+                            }
                         }
-                    } else {
+                        d.append('</tr>');
+                    }
+                    else {
                         d.append("<tr><td>NO HAY PLANTILLAS</td></tr>");
                     }
                     $(".btn-cargar_pl").click(function() {
+                        alert($(".plantilla" + $(this).val()).val());
                         mostrar_plantilla($(".plantilla" + $(this).val()).val());
                         $(".id_pl").val($(".plantilla" + $(this).val()).val());
                         $(".id_pc").val($(".id_plantilla" + $(this).val()).val());
                     });
+                    $(".btn-Desac_pl").click(function() {
+                        var r = jQuery(confirm("Esta seguro de Modificar"));
+                        if (r === true) {
+                        } else {
+                            var idpp = $(".idplpu" + $(this).val()).val();
+                            var opc = "Desactivar_pp";
+                            Desac_Plantilla(idpp, opc);
+                            Listar_Plantilla();
+                        }
+                    });
+                    $(".btn-Activ_pl").click(function() {
+                        var r = jQuery(confirm("Esta seguro de Modificar",false));
+                        if (r == true) {
+                        } else {
+                            var idpp = $(".idplpu" + $(this).val()).val();
+                            var opc = "activar_pp";
+                            Activar_Plantilla(idpp, opc);
+                            Listar_Plantilla();
+                        }
+                       /* var person = jQuery(prompt("Please enter your name", ""));
+                        if (person != null) {
+                            document.getElementById("demo").innerHTML =
+                                    "Hello " + person + "! How are you today?";
+                        }*/
+                    });
                 });
+            }
+            function Activar_Plantilla(id_pp, opc) {
+                $.post("../../../formato_plantilla", "opc=" + opc + "&id_pp=" + id_pp, function() {
+                });
+            }
+            function Desac_Plantilla(id_pp, opc) {
+                $.post("../../../formato_plantilla", "opc=" + opc + "&id_pp=" + id_pp);
             }
             function  lis_sel(d, valor, opc) {
 
@@ -386,14 +433,14 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                             return;
                         }
                         var list = objJson.lista;
-                        e.append("<option value='0' selected='' > [TODOS] </option>");
+                        e.append("<option value='' selected='' > [TODOS] </option>");
                         if (list.length !== 0) {
                             for (var i = 0; i < list.length; i++) {
                                 e.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
                             }
                         } else {
                             e.empty();
-                            e.append("<option value='0' > [] </option>");
+                            e.append("<option value='' > [] </option>");
                         }
                     });
                 });
@@ -444,48 +491,49 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 <h3>CARGAR PLANTILLAS</h3>
                 <section class="col col-4" >
                     <label>Dirección:
-                        <select class="dir col  " id="dir" name="id_di" required="">
+                        <select class="dir col  " id="dir" name="id_di" >
                             <option value="">[SELECCIONE]</option>
-                            <option value="0">[TODO]</option>
+                            <option value="">[TODO]</option>
                         </select>   
                     </label>
                 </section>
                 <section class="col col-4" >
                     <label>Departamento:
                         <select class="dep col " id="dep" name="id_dep" >
-                            <option value="0">[TODO]</option>
+                            <option value="">[TODO]</option>
                         </select>
                     </label>
                 </section>
                 <section class="col col-4" >
                     <label>Area:
                         <select class="area col" id="area" name="id_are" >
-                            <option value="0">[TODO]</option>
+                            <option value="">[TODO]</option>
                         </select>
                     </label>
                 </section>
                 <section class="col col-4" >
                     <label>Sección:
                         <select class="seccion col" id="seccion" name="id_sec" >
-                            <option value="0">[TODO]</option>
+                            <option value="">[TODO]</option>
                         </select>
                     </label>
                 </section>
                 <section class="col col-4" >
                     <label>Puesto:
                         <select class="puesto col" id="puesto" name="id_pu" >
-                            <option value="0">[TODO]</option>
+                            <option value="">[TODO]</option>
                         </select>
                     </label>
                 </section>
                 <br>
                 <br>
-                <table class="table" border="1">
+                <table class="table table-hover table-responsive"  >
                     <thead>
                         <tr>
-                            <td>Nro</td>
-                            <td>Nombre Plantilla</td>
-                            <td>Acciones</td>
+                            <td align="center" >Nro</td>
+                            <td align="center">Nombre Plantilla</td>
+                            <td align="center">Estado Plantilla Puesto</td>
+                            <td colspan="2">Acciones</td>
                         </tr>
                     </thead>
                     <tbody class="tbody-plantilla">
@@ -494,7 +542,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 <h3>ASIGNAR PLANTILLAS</h3>
                 <section class="col col-4" >
                     <label>Dirección:
-                        <select class="dir_as col  " id="dir_as" name="id_di_asig" required="">
+                        <select class="dir_as col  " id="dir_as" name="id_di_asig" >
                             <option value="">[SELECCIONE]</option>
                             <option value="0">[TODO]</option>
                         </select>   
@@ -532,7 +580,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             <h3>EDITAR PLANTILLAS</h3>
 
             <br><strong>NOMBRE PLANTILLA</strong><br>
-            <input type="text" class="nombre_pl form-control" name="no_pl" required=""><br><br>
+            <input type="text" class="nombre_pl form-control" name="no_pl" ><br><br>
             <button  onclick="procesar_texto();" type="button">Procesar </button>
             <textarea cols="100" id="editor1" name="editor1" rows="10">
             </textarea>

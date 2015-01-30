@@ -55,6 +55,7 @@
                     <br>
                     <input class="btn btn-primary"  type="submit" name="busqueda"  value="Buscar">
                     <a href="?cancel=true&text=<%=text%>" class="btn btn-primary" role="button">Cancelar</a>
+                    <a href="../../contrato?opc=Reporte_CE" class="btn btn-success" role="button">Empleados</a>
                 </div>
 
             </form>
