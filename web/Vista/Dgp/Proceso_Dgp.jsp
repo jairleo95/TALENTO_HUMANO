@@ -204,67 +204,69 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <%
-                                                    InterfaceDgpDAO d = new DgpDAO();
-                                                    for (int i = 0; i < LIST_DGP_PROCESO.size(); i++) {
-                                                        V_Es_Requerimiento r = new V_Es_Requerimiento();
-                                                        r = (V_Es_Requerimiento) LIST_DGP_PROCESO.get(i);
-                                                %>
-                                                <tr>
-                                                    <td><strong><%=i + 1%></strong></td>
-                                                    <td>
-                                                        <div class="btn-group">
-                                                            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                                                Accion <span class="caret"></span>
-                                                            </button>
-                                                            <ul class="dropdown-menu">
+                                            <input type="hidden" value="<%=LIST_DGP_PROCESO.size()%>" class="tamaño"/>
+                                            <%
+                                                InterfaceDgpDAO d = new DgpDAO();
+                                                for (int i = 0; i < LIST_DGP_PROCESO.size(); i++) {
+                                                    V_Es_Requerimiento r = new V_Es_Requerimiento();
+                                                    r = (V_Es_Requerimiento) LIST_DGP_PROCESO.get(i);
+                                            %>
+                                            <tr>
+                                                <td><strong><%=i + 1%></strong></td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                            Accion <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu">
 
-                                                                <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=User_Aut">Usuarios - Prox. Autorizacion</a></li>
-                                                                <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=Seguimiento">Ver Historial</a> </li>
-                                                                <li><a href="../../documento?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a></li>
-                                                                <li><a href="../../comentario?iddgp=<%=r.getId_dgp().trim()%>&opc=Comentar_Dgp">Comentarios</a></li>    
-                                                                <li class="divider"></li><li>
-                                                                <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Detalle">Ver Requerimiento</a> </li>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
+                                                            <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=User_Aut">Usuarios - Prox. Autorizacion</a></li>
+                                                            <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=Seguimiento">Ver Historial</a> </li>
+                                                            <li><a href="../../documento?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a></li>
+                                                            <li><a href="../../comentario?iddgp=<%=r.getId_dgp().trim()%>&opc=Comentar_Dgp">Comentarios</a></li>    
+                                                            <li class="divider"></li><li>
+                                                            <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Detalle">Ver Requerimiento</a> </li>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
 
-                                                    </td> 
-                                                    <% if (r.getAr_foto() == null) {%>
-                                                    <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30">
-                                                        <a style="margin-left: 3%;" href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a><%if (r.getEs_dgp().equals("2")) {
-                                                                out.print(" <span class='label label-danger'>Fuera de Proceso</span>");
-                                                            } else {
-                                                                out.print(" <span class='label label-primary'>En Proceso</span>");
-                                                            }%>
-
-                                                        <div class="new-progress" >
-                                                            <%
-                                                                out.println(d.Imprimir_det_proceso(r.getId_dgp(), r.getId_detalle_req_proceso()));
-                                                            %>
-                                                        </div>
-
-                                                    </td>
-                                                    <% } else {%>
-                                                    <td><img src="../Usuario/Fotos/<%=r.getAr_foto()%>"  width="30"  height="30"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a> <%if (r.getEs_dgp().equals("2")) {
+                                                </td> 
+                                                <% if (r.getAr_foto() == null) {%>
+                                                <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30">
+                                                    <a style="margin-left: 3%;" href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a><%if (r.getEs_dgp().equals("2")) {
                                                             out.print(" <span class='label label-danger'>Fuera de Proceso</span>");
                                                         } else {
                                                             out.print(" <span class='label label-primary'>En Proceso</span>");
                                                         }%>
 
+                                                    <div class="new-progress prog_aut<%=(i + 1)%>"  >
+                                                        <%
+                                                            out.println(d.Imprimir_det_proceso(r.getId_dgp(), r.getId_detalle_req_proceso()));
+                                                        %>
+                                                    </div>
+                                                    <input type="text" class="num_aut<%=(i + 1)%>" value="<%=r.getAut_actual()%>"/>
 
-                                                        <div class="new-progress" >
-                                                            <%
-                                                                out.println(d.Imprimir_det_proceso(r.getId_dgp(), r.getId_detalle_req_proceso()));
-                                                            %>
-                                                        </div>
+                                                </td>
+                                                <% } else {%>
+                                                <td><img src="../Usuario/Fotos/<%=r.getAr_foto()%>"  width="30"  height="30"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a> <%if (r.getEs_dgp().equals("2")) {
+                                                        out.print(" <span class='label label-danger'>Fuera de Proceso</span>");
+                                                    } else {
+                                                        out.print(" <span class='label label-primary'>En Proceso</span>");
+                                                    }%>
 
 
-                                                    </td>
-                                                    <% }%>
-                                                </tr>
-                                                <% }
-                                                    LIST_DGP_PROCESO.clear();%>
+                                                    <div class="new-progress prog_aut<%=(i + 1)%>" >
+                                                        <%
+                                                            out.println(d.Imprimir_det_proceso(r.getId_dgp(), r.getId_detalle_req_proceso()));
+                                                        %>
+                                                    </div>
+
+                                                    <input type="text" class="num_aut<%=(i + 1)%>" value="<%=r.getAut_actual()%>"/>
+                                                </td>
+                                                <% }%>
+                                            </tr>
+                                            <% }
+                                                LIST_DGP_PROCESO.clear();%>
 
 
                                             </tbody>
@@ -812,30 +814,44 @@
 
         </script>
         <script type="text/javascript">
-            var i = 1;
-            $('.new-progress .new-circle').removeClass().addClass('new-circle');
-            $('.new-progress .new-bar').removeClass().addClass('new-bar');
-            setInterval(function () {
-                if (i < 8) {
-                    $('.new-progress .new-circle:nth-of-type(' + i + ')').addClass('active');
+            function iterar_aut(s, t) {
+                var i = 1;
+                $('.prog_aut' + s + ' .new-circle').removeClass().addClass('new-circle');
+                $('.prog_aut' + s + ' .new-bar').removeClass().addClass('new-bar');
 
-                    $('.new-progress .new-circle:nth-of-type(' + (i - 1) + ')').removeClass('active').addClass('done');
+                setInterval(function () {
+                    if (i < t) {
+                        $('.prog_aut' + s + ' .new-circle:nth-of-type(' + i + ')').addClass('active');
 
-                    $('.new-progress .new-circle:nth-of-type(' + (i - 1) + ') .new-label').html('&#10003;');
+                        $('.prog_aut' + s + ' .new-circle:nth-of-type(' + (i - 1) + ')').removeClass('active').addClass('done');
 
-                    $('.new-progress .new-bar:nth-of-type(' + (i - 1) + ')').addClass('active');
+                        $('.prog_aut' + s + ' .new-circle:nth-of-type(' + (i - 1) + ') .new-label').html('&#10003;');
 
-                    $('.new-progress .new-bar:nth-of-type(' + (i - 2) + ')').removeClass('active').addClass('done');
+                        $('.prog_aut' + s + ' .new-bar:nth-of-type(' + (i - 1) + ')').addClass('active');
 
-                    i++;
+                        $('.prog_aut' + s + ' .new-bar:nth-of-type(' + (i - 2) + ')').removeClass('active').addClass('done');
 
-                    if (i == 0) {
-                        $('.new-progress .new-bar').removeClass().addClass('new-bar');
-                        $('.new-progress div.new-circle').removeClass().addClass('new-circle');
-                        i = 1;
+                        i++;
+
+                        if (i == 0) {
+                            $('.prog_aut' + s + ' .new-bar').removeClass().addClass('new-bar');
+                            $('.prog_aut' + s + '  div.new-circle').removeClass().addClass('new-circle');
+                            i = 1;
+                        }
                     }
+                }, 50);
+            }
+            $(document).ready(function () {
+                for (var u = 0; u < $(".tamaño").val() + 1; u++) {
+                    iterar_aut(u, parseInt($(".num_aut" +u ).val()) + 2);
                 }
-            }, 100);
+
+
+
+                //$('.new-progress .new-bar').removeClass().addClass('new-bar');
+
+
+            });
 
         </script>
 

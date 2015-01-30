@@ -308,6 +308,7 @@ public class DgpDAO implements InterfaceDgpDAO {
                 v.setEs_dgp(rs.getString("ES_DGP"));
                 v.setEs_proceso_aut(rs.getString("es_proceso_aut"));
                 v.setId_detalle_req_proceso(rs.getString("id_detalle_req_proceso"));
+                v.setAut_actual(rs.getString("aut_actual"));
                 Lista.add(v);
             }
         } catch (SQLException e) {
