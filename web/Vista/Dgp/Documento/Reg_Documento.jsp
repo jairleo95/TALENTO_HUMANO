@@ -465,7 +465,7 @@
                                                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
                                                 </tr>  
                                                 <input type="hidden" name="iddgp" value="<%=d.getIddgp()%>">
-                                                <input type="text" name="idctr" value="<%=request.getParameter("idctr")%>">
+                                                <input type="hidden" name="idctr" value="<%=request.getParameter("idctr")%>">
                                                 <input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>">
                                                 <% }
                                                         i++;
