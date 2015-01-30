@@ -544,19 +544,26 @@
                                                                 <input type="date" name="FEC_CESE"  class="input-group-sm" required="">
                                                             </label>
                                                         </section>-->
-                                                        <section class="col col-3">
+                                                        <section class="col col-2">
                                                             <label class="input" id="titu">RUC UPEU:
                                                                 <input type="text" name="EMP_RUC" value="20138122256" maxlength="20" class="input-group-sm" required="">
                                                             </label>
                                                         </section>
-                                                        <section class="col col-3">
+                                                        <section class="col col-2">
                                                             <label class="input" id="titu">Cod. Sucursal:
                                                                 <input type="text" name="SUCURSAL" value="-1" maxlength="3" class="input-group-sm" required="">
                                                             </label>
                                                         </section>
-                                                        <section class="col col-3">
+                                                        <section class="col col-2">
                                                             <label class="input" id="titu">MYPE:
                                                                 <input type="text" name="MYPE" value="N"  maxlength="2" class="input-group-sm" required="">
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-3">
+                                                            <label class="select" id="titu">Plantilla de Contrato:
+                                                                <select name="id_plantilla_contractual" class="con_pl_pu input-group-sm" required="">
+                                                                    <option value="">[SELECCIONE]</option>
+                                                                </select>
                                                             </label>
                                                         </section>
                                                     </div>
@@ -784,11 +791,11 @@
     <script>
 
         $(document).ready(
-                    function(){
-                        document.getElementById("sueldo_total").readOnly = true;
-                        document.getElementById("asig_fa").readOnly = true;
-                        
-                    }
+                function() {
+                    document.getElementById("sueldo_total").readOnly = true;
+                    document.getElementById("asig_fa").readOnly = true;
+
+                }
         );</script>
     <script>
         function Sueldo_Total() {
@@ -1944,6 +1951,7 @@
         $(document).ready(function() {
             Listar_dep();
             Listar_centro_costo();
+            Listar_Plantilla();
             var a = $("#select-sub-mod");
             var c = $("#Selec_Area");
             var d = $("#select_sec");
@@ -2085,6 +2093,18 @@
                         }
                     }
                     x.append('</div><table><tr><td><td><input type="hidden" name="can_centro_cos" value="' + lista.length + '"></td></tr></table>');
+                });
+            }
+             function Listar_plantilla() {
+                var s = $(".con_pl_pu");
+
+                $.post("../../plantilla_contractual", "opc=List_planti&" + "id_pu=" + $(".id_pu_dgp").val(), function(objJson) {
+                    s.empty();
+                    var lista = objJson.lista;
+                    s.append("<option value='' > [SELECCIONE] </option>");
+                    for (var i = 0; i < lista.length; i++) {
+                        s.append("<option value='" + lista[i].id + "'> " + lista[i].nom_pl + "</option>");
+                    }
                 });
             }
 

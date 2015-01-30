@@ -484,6 +484,10 @@ public class CContrato extends HttpServlet {
             response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&idtr=" + ID_TRABAJADOR + "&idctr=" + idctr + "&dce=Doc_CE");
 
         }
+        if (opc.equals("Reporte_CE")) {
+            getServletContext().setAttribute("List_Casos_Esp", con.LIST_CASOS_ESPECIALES() );
+            response.sendRedirect("Vista/Contrato/Filtro_Contrato_CE.jsp");
+        }
 
         if (opc.equals("Buscar")) {
             getServletContext().setAttribute("List_Area", area.List_Area());

@@ -11,6 +11,7 @@ import pe.edu.upeu.application.model.List_Rh_Contrato_Fec;
 import pe.edu.upeu.application.model.Modalidad;
 import pe.edu.upeu.application.model.Regimen_Laboral;
 import pe.edu.upeu.application.model.Sub_Modalidad;
+import pe.edu.upeu.application.model.V_List_Empleado;
 import pe.edu.upeu.application.model.X_List_Anno_Id_Tr_DGP;
 import pe.edu.upeu.application.model.X_List_Id_Contrato_DGP;
 
@@ -57,5 +58,7 @@ public interface InterfaceContratoDAO {
     public void INSERT_CONTRATO_ADJUNTO(String ID_CONTRATO_ADJUNTO, String ID_CONTRATO, String NO_ARCHIVO, String NO_ARCHIVO_ORIGINAL, String ES_CONTRATO_ADJUNTO, String IP_USUARIO, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF);
 
     public void UPDATE_FIRMA(String ID_TR,String IDDGP);
+    
+    public List<V_List_Empleado> LIST_CASOS_ESPECIALES();
 
 }

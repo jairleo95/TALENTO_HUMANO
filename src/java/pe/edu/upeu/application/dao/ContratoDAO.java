@@ -23,6 +23,7 @@ import pe.edu.upeu.application.model.Modalidad;
 import pe.edu.upeu.application.model.Plantilla_Contractual;
 import pe.edu.upeu.application.model.Regimen_Laboral;
 import pe.edu.upeu.application.model.Sub_Modalidad;
+import pe.edu.upeu.application.model.V_List_Empleado;
 import pe.edu.upeu.application.model.X_List_Anno_Id_Tr_DGP;
 import pe.edu.upeu.application.model.X_List_Id_Contrato_DGP;
 import pe.edu.upeu.application.web.controller.CConversion;
@@ -631,4 +632,34 @@ public class ContratoDAO implements InterfaceContratoDAO {
         }
 
     }
+
+    @Override
+    public List<V_List_Empleado> LIST_CASOS_ESPECIALES() {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select * from RHVD_LIST_EMPLEADO where ID_TRABAJADOR IN (select DISTINCT ID_TRABAJADOR from RHTM_CONTRATO where ID_DGP is null ) and FE_CREACION_CONTRATO  like '%15'";
+        List<V_List_Empleado> list = new ArrayList<V_List_Empleado>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                V_List_Empleado v = new V_List_Empleado();
+                v.setNo_trabajador(rs.getString("no_trabajador"));
+                v.setAp_paterno(rs.getString("ap_paterno"));
+                v.setAp_materno(rs.getString("ap_materno"));
+                v.setNo_area(rs.getString("no_area"));
+                v.setNo_seccion(rs.getString("no_seccion"));
+                v.setNo_puesto(rs.getString("no_puesto"));
+                v.setFe_desde(rs.getString("fe_desde"));
+                v.setFe_hasta(rs.getString("fe_hasta"));
+                v.setFe_hasta(rs.getString("fe_hasta"));
+                v.setCa_sueldo(rs.getDouble("ca_sueldo"));
+                list.add(v);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return list;
+    }
+
+
 }

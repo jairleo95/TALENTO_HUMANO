@@ -94,7 +94,7 @@ public class CEmpleado extends HttpServlet {
             String iddepa = (String) sesion.getAttribute("DEPARTAMENTO_ID");
             getServletContext().setAttribute("List_Empleado", Iem.Listar_Empleado(iddepa));
 
-            out.print(Iem.Listar_Empleado(iddepa).size());
+            //out.print(Iem.Listar_Empleado(iddepa).size());
 
             response.sendRedirect("Vista/Empleado/Filtro_Empleado.jsp?idtr");
         }
