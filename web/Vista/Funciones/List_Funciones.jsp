@@ -10,18 +10,20 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <title>JSP Page</title>
+        <link href="../../css/Css_Lista/listas.css" rel="stylesheet" type="text/css"/>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <title>Funciones</title>
     </head>
     <body>
         <h1>Funciones</h1>
-        <table> 
+        <table class="table-bordered table-responsive table-mailbox"> 
             <thead>
                 <tr>
-                    <td>Nro</td>
-                    <td>Detalle Funcion</td>
-                    <td>Estado</td>
-                    <td>Puesto</td>
-                    <td colspan="2">Opcion</td>
+                    <td class="cajita">Nro</td>
+                    <td class="cajita">Detalle Funcion</td>
+                    <td class="cajita">Estado</td>
+                    <td class="cajita">Puesto</td>
+                    <td class="cajita" colspan="2">Opcion</td>
                 </tr>
             </thead>
             <tbody>
@@ -30,12 +32,12 @@
                     Funciones f=new Funciones();
                     f=(Funciones)Listar_funciones.get(i);
                     %>
-                    <td><%=i+1%></td>
-                    <td><%=f.getDe_funcion()%></td>
-                    <td><%=f.getEs_funcion()%></td>
-                    <td><%=f.getNo_puesto()%></td>
-                    <td><a href=""> Modificar</a></td>
-                    <td><a href=""> Eliminar</a></td>
+                    <td class="cajita"><%=i+1%></td>
+                    <td class="cajita"><%=f.getDe_funcion()%></td>
+                    <td class="cajita"><%=f.getEs_funcion()%></td>
+                    <td class="cajita"><%=f.getNo_puesto()%></td>
+                    <td class="caji"><a href=""><img src="../../imagenes/lapiz.png" alt="" width="25px" height="25px"/></a></td>
+                    <td class="caji"><a href=""><img src="../../imagenes/eliminar.png" alt=""   width="25px" height="25px"/></a></td>
                 </tr>
                 <%}%>
             </tbody>
