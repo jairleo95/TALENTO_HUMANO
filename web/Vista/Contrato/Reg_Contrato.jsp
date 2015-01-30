@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
     HttpSession sesion = request.getSession();
@@ -142,7 +143,7 @@
                 <!-- widget content -->
                 <div class="widget-body no-padding">
 
-                    <%
+                    <%CConversion c=new CConversion();
                         for (int u = 0; u < LIST_ID_DGP.size(); u++) {
                             V_Det_DGP d = new V_Det_DGP();
                             d = (V_Det_DGP) LIST_ID_DGP.get(u);
@@ -181,10 +182,9 @@
                                                 }%>
                                         </select>  </label>
                                 </section  >
-                                <input type="hidden" name="IDDETALLE_DGP" value="<%=d.getId_dgp()%>" class="text-box" id="id_dgp" >
-                                <section class="col col-2">
+                                <input type="hidden" name="IDDETALLE_DGP" value="<%=d.getId_dgp()%>" class="text-box" id="id_dgp" >                               <section class="col col-2">
                                     <label class="input" id="titulo">Desde: 
-                                        <input type="date" name="FEC_DESDE" value="<%=d.getFe_desde()%>" class="date input-group-sm" required="">
+                                        <input type="date" name="FEC_DESDE" value="<%=d.getFe_desde()%>" class=" input-group-sm" required="">
                                     </label>
                                 </section>
                                 <section class="col col-2">
@@ -1280,6 +1280,8 @@
                 var d = $("#select_sec");
                 var b = $("#selec_dep");
                 var e = $("#pu_id_se");
+                $(".date").keyup(function(){
+                        $(".conteni").val($(".date").val());});
                 // $.post("../../  ")
                 $("#select_mod").change(
                         function() {
