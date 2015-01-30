@@ -240,9 +240,8 @@
                                         <%}%>
                                         <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                                             <thead>
-                                            <th data-hide="phone,tablet"><strong>Nro</strong></th>
-                                            <tr > <th><strong>Acción</strong></th>
-
+                                                <tr data-hide="phone,tablet"> <th><strong>Nro</strong></th>
+                                            <th ><strong>Acción</strong></th>
 
                                                 <th data-hide="phone,tablet"><strong>Foto</strong> </th>
                                                 <th data-class="expand" ><strong>Apellidos Y Nombres</strong></th>
@@ -283,8 +282,7 @@
                                                 %>
 
                                                 <tr>
-
-                                                    <td><%=f + 1%></td>
+                                                       <td><%=f + 1%></td>
                                                     <td>
                                                         <div class="btn-group">
                                                             <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -331,6 +329,7 @@
 
 
                                                     </td>
+                                                 
                                                     <% if (a.getAr_foto() == null) {%>
                                                     <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30"></td>
                                                         <% } else {%>
