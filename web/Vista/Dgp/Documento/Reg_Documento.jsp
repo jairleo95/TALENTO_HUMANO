@@ -466,7 +466,7 @@
                                                 </tr>  
                                                 <input type="hidden" name="iddgp" value="<%=d.getIddgp()%>">
                                                 <input type="hidden" name="idctr" value="<%=request.getParameter("idctr")%>">
-                                                <input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>">
+                                                <input type="text" name="idtr" value="<%=request.getParameter("idtr")%>">
                                                 <% }
                                                         i++;
                                                         //id_dgp = d.getIddgp();
