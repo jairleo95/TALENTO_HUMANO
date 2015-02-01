@@ -31,8 +31,6 @@ public class V_Ficha_Trab_Num_C {
     private String id_situacion_educativa;
     private String li_reg_inst_educativa;
     private String es_inst_educ_peru;
-    private String n;
-    private String nn;
     private String cm_otros_estudios;
     private String es_sexo;
     private String li_grupo_sanguineo;
@@ -55,56 +53,8 @@ public class V_Ficha_Trab_Num_C {
     private String li_di_dom_a_d5;
     private String di_dom_a_d6;
     private String di_dom_a_ref;
-    private String di_dom_a_distrito;
-    private String li_di_dom_leg_d1;
-    private String di_dom_leg_d2;
-    private String li_di_dom_leg_d3;
-    private String di_dom_leg_d4;
-    private String li_di_dom_leg_d5;
-    private String di_dom_leg_d6;
-    private String di_dom_leg_distrito;
-    private String ca_ing_qta_cat_empresa;
-    private String ca_ing_qta_cat_ruc;
-    private String ca_ing_qta_cat_otras_empresas;
-    private String cm_observaciones;
-    private String us_creacion;
-    private String fe_creacion;
-    private String us_modif;
-    private String fe_modif;
-    private String ip_usuario;
-    private String id_usuario_creacion;
-    private String id_universidad_carrera;
-    private String id_nacionalidad;
-    private String distrito_nac;
-    private String no_s_educativa;
-    private String no_carrera;
-    private String no_universidad;
-    private String ar_foto;
-    private String de_foto;
-    private String id_foto;
-    private String no_ar_foto;
-    private String ta_ar_foto;
-    private String idtr;
-    private Double nu_contrato;
-    private int es_proceso;
 
-    public String getNo_s_educativa() {
-        return no_s_educativa;
-    }
-
-    public void setNo_s_educativa(String no_s_educativa) {
-        this.no_s_educativa = no_s_educativa;
-    }
-
-    public int getEs_proceso() {
-        return es_proceso;
-    }
-
-    public void setEs_proceso(int es_proceso) {
-        this.es_proceso = es_proceso;
-    }
-
-    public V_Ficha_Trab_Num_C(String id_trabajador, String ap_paterno, String ap_materno, String no_trabajador, String ti_doc, String nu_doc, String es_civil, String fe_nac, String no_nacionalidad, String no_departamento, String no_provincia, String no_distrito, String te_trabajador, String cl_tra, String di_correo_personal, String di_correo_inst, String co_sistema_pensionario, String id_situacion_educativa, String li_reg_inst_educativa, String es_inst_educ_peru, String n, String nn, String cm_otros_estudios, String es_sexo, String li_grupo_sanguineo, String de_referencia, String li_religion, String no_iglesia, String de_cargo, String li_autoridad, String no_ap_autoridad, String cl_autoridad, String id_no_afp, String es_afiliado_essalud, String li_tipo_trabajador, String ca_tipo_hora_pago_refeerencial, String es_factor_rh, String li_di_dom_a_d1, String di_dom_a_d2, String li_di_dom_a_d3, String di_dom_a_d4, String li_di_dom_a_d5, String di_dom_a_d6, String di_dom_a_ref, String di_dom_a_distrito, String li_di_dom_leg_d1, String di_dom_leg_d2, String li_di_dom_leg_d3, String di_dom_leg_d4, String li_di_dom_leg_d5, String di_dom_leg_d6, String di_dom_leg_distrito, String ca_ing_qta_cat_empresa, String ca_ing_qta_cat_ruc, String ca_ing_qta_cat_otras_empresas, String cm_observaciones, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String ip_usuario, String id_usuario_creacion, String id_universidad_carrera, String id_nacionalidad, String distrito_nac, String no_s_educativa, String no_carrera, String no_universidad, String ar_foto, String de_foto, String id_foto, String no_ar_foto, String ta_ar_foto, String idtr, Double nu_contrato,int es_proceso) {
+    public V_Ficha_Trab_Num_C(String id_trabajador, String ap_paterno, String ap_materno, String no_trabajador, String ti_doc, String nu_doc, String es_civil, String fe_nac, String no_nacionalidad, String no_departamento, String no_provincia, String no_distrito, String te_trabajador, String cl_tra, String di_correo_personal, String di_correo_inst, String co_sistema_pensionario, String id_situacion_educativa, String li_reg_inst_educativa, String es_inst_educ_peru, String cm_otros_estudios, String es_sexo, String li_grupo_sanguineo, String de_referencia, String li_religion, String no_iglesia, String de_cargo, String li_autoridad, String no_ap_autoridad, String cl_autoridad, String id_no_afp, String es_afiliado_essalud, String li_tipo_trabajador, String ca_tipo_hora_pago_refeerencial, String es_factor_rh, String li_di_dom_a_d1, String di_dom_a_d2, String li_di_dom_a_d3, String di_dom_a_d4, String li_di_dom_a_d5, String di_dom_a_d6, String di_dom_a_ref, String di_dom_a_distrito, String li_di_dom_leg_d1, String di_dom_leg_d2, String li_di_dom_leg_d3, String di_dom_leg_d4, String li_di_dom_leg_d5, String di_dom_leg_d6, String di_dom_leg_distrito, String ca_ing_qta_cat_empresa, String ca_ing_qta_cat_ruc, String ca_ing_qta_cat_otras_empresas, String cm_observaciones, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String ip_usuario, String id_usuario_creacion, String id_universidad_carrera, String id_nacionalidad, String distrito_nac, String no_s_educativa, String ap_nombres_madre, String ap_nombres_padre, String es_trabaja_upeu_c, String ap_nombres_c, String fe_nac_c, String id_tipo_doc_c, String nu_doc_c, String li_inscripcion_vig_essalud_c, String id_conyugue, String no_carrera, String no_universidad, String ar_foto, String de_foto, String id_foto, String no_ar_foto, String ta_ar_foto, int es_proceso) {
         this.id_trabajador = id_trabajador;
         this.ap_paterno = ap_paterno;
         this.ap_materno = ap_materno;
@@ -125,8 +75,6 @@ public class V_Ficha_Trab_Num_C {
         this.id_situacion_educativa = id_situacion_educativa;
         this.li_reg_inst_educativa = li_reg_inst_educativa;
         this.es_inst_educ_peru = es_inst_educ_peru;
-        this.n = n;
-        this.nn = nn;
         this.cm_otros_estudios = cm_otros_estudios;
         this.es_sexo = es_sexo;
         this.li_grupo_sanguineo = li_grupo_sanguineo;
@@ -171,6 +119,15 @@ public class V_Ficha_Trab_Num_C {
         this.id_nacionalidad = id_nacionalidad;
         this.distrito_nac = distrito_nac;
         this.no_s_educativa = no_s_educativa;
+        this.ap_nombres_madre = ap_nombres_madre;
+        this.ap_nombres_padre = ap_nombres_padre;
+        this.es_trabaja_upeu_c = es_trabaja_upeu_c;
+        this.ap_nombres_c = ap_nombres_c;
+        this.fe_nac_c = fe_nac_c;
+        this.id_tipo_doc_c = id_tipo_doc_c;
+        this.nu_doc_c = nu_doc_c;
+        this.li_inscripcion_vig_essalud_c = li_inscripcion_vig_essalud_c;
+        this.id_conyugue = id_conyugue;
         this.no_carrera = no_carrera;
         this.no_universidad = no_universidad;
         this.ar_foto = ar_foto;
@@ -178,88 +135,54 @@ public class V_Ficha_Trab_Num_C {
         this.id_foto = id_foto;
         this.no_ar_foto = no_ar_foto;
         this.ta_ar_foto = ta_ar_foto;
-        this.idtr = idtr;
-        this.nu_contrato = nu_contrato;
         this.es_proceso = es_proceso;
     }
+    private String di_dom_a_distrito;
+    private String li_di_dom_leg_d1;
+    private String di_dom_leg_d2;
+    private String li_di_dom_leg_d3;
+    private String di_dom_leg_d4;
+    private String li_di_dom_leg_d5;
+    private String di_dom_leg_d6;
+    private String di_dom_leg_distrito;
+    private String ca_ing_qta_cat_empresa;
+    private String ca_ing_qta_cat_ruc;
+    private String ca_ing_qta_cat_otras_empresas;
+    private String cm_observaciones;
+    private String us_creacion;
+    private String fe_creacion;
+    private String us_modif;
+    private String fe_modif;
+    private String ip_usuario;
+    private String id_usuario_creacion;
+    private String id_universidad_carrera;
+    private String id_nacionalidad;
+    private String distrito_nac;
+    private String no_s_educativa;
+    private String ap_nombres_madre;
+    private String ap_nombres_padre;
+    private String es_trabaja_upeu_c;
+    private String ap_nombres_c;
+    private String fe_nac_c;
+    private String id_tipo_doc_c;
+    private String nu_doc_c;
+    private String li_inscripcion_vig_essalud_c;
+    private String id_conyugue;
+    private String no_carrera;
+    private String no_universidad;
+    private String ar_foto;
+    private String de_foto;
+    private String id_foto;
+    private String no_ar_foto;
+    private String ta_ar_foto;
+    private int es_proceso;
 
-    public V_Ficha_Trab_Num_C() {
-        this.id_trabajador = "";
-        this.ap_paterno = "";
-        this.ap_materno = "";
-        this.no_trabajador = "";
-        this.ti_doc = "";
-        this.nu_doc = "";
-        this.es_civil = "";
-        this.fe_nac = "";
-        this.no_nacionalidad = "";
-        this.no_departamento = "";
-        this.no_provincia = "";
-        this.no_distrito = "";
-        this.te_trabajador = "";
-        this.cl_tra = "";
-        this.di_correo_personal = "";
-        this.di_correo_inst = "";
-        this.co_sistema_pensionario = "";
-        this.id_situacion_educativa = "";
-        this.li_reg_inst_educativa = "";
-        this.es_inst_educ_peru = "";
-        this.n = "";
-        this.nn = "";
-        this.cm_otros_estudios = "";
-        this.es_sexo = "";
-        this.li_grupo_sanguineo = "";
-        this.de_referencia = "";
-        this.li_religion = "";
-        this.no_iglesia = "";
-        this.de_cargo = "";
-        this.li_autoridad = "";
-        this.no_ap_autoridad = "";
-        this.cl_autoridad = "";
-        this.id_no_afp = "";
-        this.es_afiliado_essalud = "";
-        this.li_tipo_trabajador = "";
-        this.ca_tipo_hora_pago_refeerencial = "";
-        this.es_factor_rh = "";
-        this.li_di_dom_a_d1 = "";
-        this.di_dom_a_d2 = "";
-        this.li_di_dom_a_d3 = "";
-        this.di_dom_a_d4 = "";
-        this.li_di_dom_a_d5 = "";
-        this.di_dom_a_d6 = "";
-        this.di_dom_a_ref = "";
-        this.di_dom_a_distrito = "";
-        this.li_di_dom_leg_d1 = "";
-        this.di_dom_leg_d2 = "";
-        this.li_di_dom_leg_d3 = "";
-        this.di_dom_leg_d4 = "";
-        this.li_di_dom_leg_d5 = "";
-        this.di_dom_leg_d6 = "";
-        this.di_dom_leg_distrito = "";
-        this.ca_ing_qta_cat_empresa = "";
-        this.ca_ing_qta_cat_ruc = "";
-        this.ca_ing_qta_cat_otras_empresas = "";
-        this.cm_observaciones = "";
-        this.us_creacion = "";
-        this.fe_creacion = "";
-        this.us_modif = "";
-        this.fe_modif = "";
-        this.ip_usuario = "";
-        this.id_usuario_creacion = "";
-        this.id_universidad_carrera = "";
-        this.id_nacionalidad = "";
-        this.distrito_nac = "";
-        this.no_s_educativa = "";
-        this.no_carrera = "";
-        this.no_universidad = "";
-        this.ar_foto = "";
-        this.de_foto = "";
-        this.id_foto = "";
-        this.no_ar_foto = "";
-        this.ta_ar_foto = "";
-        this.idtr = "";
-        this.nu_contrato = 0.0;
-        this.es_proceso = 0;
+    public int getEs_proceso() {
+        return es_proceso;
+    }
+
+    public void setEs_proceso(int es_proceso) {
+        this.es_proceso = es_proceso;
     }
 
     public String getId_trabajador() {
@@ -420,22 +343,6 @@ public class V_Ficha_Trab_Num_C {
 
     public void setEs_inst_educ_peru(String es_inst_educ_peru) {
         this.es_inst_educ_peru = es_inst_educ_peru;
-    }
-
-    public String getN() {
-        return n;
-    }
-
-    public void setN(String n) {
-        this.n = n;
-    }
-
-    public String getNn() {
-        return nn;
-    }
-
-    public void setNn(String nn) {
-        this.nn = nn;
     }
 
     public String getCm_otros_estudios() {
@@ -782,12 +689,84 @@ public class V_Ficha_Trab_Num_C {
         this.distrito_nac = distrito_nac;
     }
 
-    public String getLi_nivel_educativo() {
+    public String getNo_s_educativa() {
         return no_s_educativa;
     }
 
-    public void setLi_nivel_educativo(String no_s_educativa) {
+    public void setNo_s_educativa(String no_s_educativa) {
         this.no_s_educativa = no_s_educativa;
+    }
+
+    public String getAp_nombres_madre() {
+        return ap_nombres_madre;
+    }
+
+    public void setAp_nombres_madre(String ap_nombres_madre) {
+        this.ap_nombres_madre = ap_nombres_madre;
+    }
+
+    public String getAp_nombres_padre() {
+        return ap_nombres_padre;
+    }
+
+    public void setAp_nombres_padre(String ap_nombres_padre) {
+        this.ap_nombres_padre = ap_nombres_padre;
+    }
+
+    public String getEs_trabaja_upeu_c() {
+        return es_trabaja_upeu_c;
+    }
+
+    public void setEs_trabaja_upeu_c(String es_trabaja_upeu_c) {
+        this.es_trabaja_upeu_c = es_trabaja_upeu_c;
+    }
+
+    public String getAp_nombres_c() {
+        return ap_nombres_c;
+    }
+
+    public void setAp_nombres_c(String ap_nombres_c) {
+        this.ap_nombres_c = ap_nombres_c;
+    }
+
+    public String getFe_nac_c() {
+        return fe_nac_c;
+    }
+
+    public void setFe_nac_c(String fe_nac_c) {
+        this.fe_nac_c = fe_nac_c;
+    }
+
+    public String getId_tipo_doc_c() {
+        return id_tipo_doc_c;
+    }
+
+    public void setId_tipo_doc_c(String id_tipo_doc_c) {
+        this.id_tipo_doc_c = id_tipo_doc_c;
+    }
+
+    public String getNu_doc_c() {
+        return nu_doc_c;
+    }
+
+    public void setNu_doc_c(String nu_doc_c) {
+        this.nu_doc_c = nu_doc_c;
+    }
+
+    public String getLi_inscripcion_vig_essalud_c() {
+        return li_inscripcion_vig_essalud_c;
+    }
+
+    public void setLi_inscripcion_vig_essalud_c(String li_inscripcion_vig_essalud_c) {
+        this.li_inscripcion_vig_essalud_c = li_inscripcion_vig_essalud_c;
+    }
+
+    public String getId_conyugue() {
+        return id_conyugue;
+    }
+
+    public void setId_conyugue(String id_conyugue) {
+        this.id_conyugue = id_conyugue;
     }
 
     public String getNo_carrera() {
@@ -846,20 +825,88 @@ public class V_Ficha_Trab_Num_C {
         this.ta_ar_foto = ta_ar_foto;
     }
 
-    public String getIdtr() {
-        return idtr;
-    }
-
-    public void setIdtr(String idtr) {
-        this.idtr = idtr;
-    }
-
-    public Double getNu_contrato() {
-        return nu_contrato;
-    }
-
-    public void setNu_contrato(Double nu_contrato) {
-        this.nu_contrato = nu_contrato;
+    public V_Ficha_Trab_Num_C() {
+        this.id_trabajador = "";
+        this.ap_paterno = "";
+        this.ap_materno = "";
+        this.no_trabajador = "";
+        this.ti_doc = "";
+        this.nu_doc = "";
+        this.es_civil = "";
+        this.fe_nac = "";
+        this.no_nacionalidad = "";
+        this.no_departamento = "";
+        this.no_provincia = "";
+        this.no_distrito = "";
+        this.te_trabajador = "";
+        this.cl_tra = "";
+        this.di_correo_personal = "";
+        this.di_correo_inst = "";
+        this.co_sistema_pensionario = "";
+        this.id_situacion_educativa = "";
+        this.li_reg_inst_educativa = "";
+        this.es_inst_educ_peru = "";
+        this.cm_otros_estudios = "";
+        this.es_sexo = "";
+        this.li_grupo_sanguineo = "";
+        this.de_referencia = "";
+        this.li_religion = "";
+        this.no_iglesia = "";
+        this.de_cargo = "";
+        this.li_autoridad = "";
+        this.no_ap_autoridad = "";
+        this.cl_autoridad = "";
+        this.id_no_afp = "";
+        this.es_afiliado_essalud = "";
+        this.li_tipo_trabajador = "";
+        this.ca_tipo_hora_pago_refeerencial = "";
+        this.es_factor_rh = "";
+        this.li_di_dom_a_d1 = "";
+        this.di_dom_a_d2 = "";
+        this.li_di_dom_a_d3 = "";
+        this.di_dom_a_d4 = "";
+        this.li_di_dom_a_d5 = "";
+        this.di_dom_a_d6 = "";
+        this.di_dom_a_ref = "";
+        this.di_dom_a_distrito = "";
+        this.li_di_dom_leg_d1 = "";
+        this.di_dom_leg_d2 = "";
+        this.li_di_dom_leg_d3 = "";
+        this.di_dom_leg_d4 = "";
+        this.li_di_dom_leg_d5 = "";
+        this.di_dom_leg_d6 = "";
+        this.di_dom_leg_distrito = "";
+        this.ca_ing_qta_cat_empresa = "";
+        this.ca_ing_qta_cat_ruc = "";
+        this.ca_ing_qta_cat_otras_empresas = "";
+        this.cm_observaciones = "";
+        this.us_creacion = "";
+        this.fe_creacion = "";
+        this.us_modif = "";
+        this.fe_modif = "";
+        this.ip_usuario = "";
+        this.id_usuario_creacion = "";
+        this.id_universidad_carrera = "";
+        this.id_nacionalidad = "";
+        this.distrito_nac = "";
+        this.no_s_educativa = "";
+        this.ap_nombres_madre = "";
+        this.ap_nombres_padre = "";
+        this.es_trabaja_upeu_c = "";
+        this.ap_nombres_c = "";
+        this.fe_nac_c = "";
+        this.id_tipo_doc_c = "";
+        this.nu_doc_c = "";
+        this.li_inscripcion_vig_essalud_c = "";
+        this.id_conyugue = "";
+        this.no_carrera = "";
+        this.no_universidad = "";
+        this.ar_foto = "";
+        this.de_foto = "";
+        this.id_foto = "";
+        this.no_ar_foto = "";
+        this.ta_ar_foto = "";
+        this.es_proceso = 0;
     }
 
 }

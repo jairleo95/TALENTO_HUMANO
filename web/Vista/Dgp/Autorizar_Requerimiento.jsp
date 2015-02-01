@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <title>Autorizacion</title>
+        <title>Autorización</title>
 
         <meta name="description" content="">
         <meta name="author" content="">
@@ -241,29 +241,30 @@
                                         <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                                             <thead>
                                                 <tr data-hide="phone,tablet"> <th><strong>Nro</strong></th>
-                                            <th ><strong>Acción</strong></th>
+                                                    <th ><strong>Acción</strong></th>
 
-                                                <th data-hide="phone,tablet"><strong>Foto</strong> </th>
-                                                <th data-class="expand" ><strong>Apellidos Y Nombres</strong></th>
+                                                    <th data-hide="phone,tablet"><strong>Foto</strong> </th>
+                                                    <th data-class="expand" ><strong>Apellidos Y Nombres</strong></th>
 
-                                                <th data-hide="phone,tablet"><strong>Puesto</strong></th>
-                                                <th data-hide="phone,tablet"><strong>Area</strong></th>
-                                                <th data-hide="phone,tablet"><strong>Departamento</strong></th>
-                                                <th data-hide="phone,tablet"><strong>Requerimiento</strong></th>
-                                                <!--  <td>Departamento</td>-->
-                                                <th data-hide="phone,tablet"><strong>Descripcion</strong></th>
-                                                    <% if (dep.equals("DPT-0019")) {%>
-                                                <th  data-hide="phone,tablet">Fecha de Creación</th>  
-                                                <th data-class="expand" ><strong>¿Cumplio Plazos?</strong></th>
-                                                    <%if (idrol.trim().equals("ROL-0006")) {
+                                                    <th data-hide="phone,tablet"><strong>Puesto</strong></th>
+                                                    <th data-hide="phone,tablet"><strong>Area</strong></th>
+                                                    <th data-hide="phone,tablet"><strong>Departamento</strong></th>
+                                                    <th data-hide="phone,tablet"><strong>Requerimiento</strong></th>
+                                                    <!--  <td>Departamento</td>-->
+                                                    <th data-hide="phone,tablet"><strong>Descripción</strong></th>
+                                                       <th  data-hide="phone,tablet">Fecha de Creación</th>  
+                                                        <% if (dep.equals("DPT-0019")) {%>
+                                                 
+                                                    <th data-class="expand" ><strong>¿Cumplio Plazos?</strong></th>
+                                                        <%if (idrol.trim().equals("ROL-0006")) {
 
-                                                    %>
-                                                <th data-class="expand" ><strong>¿Contrato Elaborado?</strong></th>
-                                                <th data-class="expand" ><strong>¿Firmo Contrato?</strong></th>
-                                                <th data-class="expand" ><strong>Enviar a Rem.</strong></th>
-                                                    <%}
+                                                        %>
+                                                    <th data-class="expand" ><strong>¿Contrato Elaborado?</strong></th>
+                                                    <th data-class="expand" ><strong>¿Firmo Contrato?</strong></th>
+                                                    <th data-class="expand" ><strong>Enviar a Rem.</strong></th>
+                                                        <%}
                                                         }%>
-                                            </tr>
+                                                </tr>
                                             </thead>
                                             <tbody> 
                                                 <%
@@ -282,7 +283,7 @@
                                                 %>
 
                                                 <tr>
-                                                       <td><%=f + 1%></td>
+                                                    <td><%=f + 1%></td>
                                                     <td>
                                                         <div class="btn-group">
                                                             <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -329,7 +330,7 @@
 
 
                                                     </td>
-                                                 
+
                                                     <% if (a.getAr_foto() == null) {%>
                                                     <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30"></td>
                                                         <% } else {%>
@@ -344,9 +345,9 @@
                                             <input type="hidden" class="val_aut<%=(f + 1)%>" value="&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&IDDETALLE_DGP=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&COD=<%=a.getCo_pasos()%>&IDPASOS=<%=a.getId_pasos()%>&NROPASO=<%=a.getNu_pasos()%>&IDTR=<%=a.getId_trabajador()%>"/>
                                             <input type="hidden" class="val_firm<%=(f + 1)%>" value="&IDDETALLE_DGP=<%=a.getId_dgp()%>&IDTR=<%=a.getId_trabajador()%>"/>
                                             <td style="color: red; font-weight: bold;"><a href="../../trabajador?idtr=<%=a.getId_trabajador()%>&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&iddetalle_dgp=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&cod=<%=a.getCo_pasos()%>&idpasos=<%=a.getId_pasos()%>&autorizacion=1&opc=aut&nup=<%=a.getNu_pasos()%>"><%=a.getDe_pasos()%></a></td>
-
-                                            <% if (dep.equals("DPT-0019")) {%>
                                             <td ><%=a.getFe_creacion()%></td>
+                                            <% if (dep.equals("DPT-0019")) {%>
+
 
                                             <td><%if (a.getVal_plazo() > 0) {
 

@@ -126,7 +126,7 @@
                         <div class="title">Información Religiosa</div>
                     </td>
                     <td >
-                        <input type="hidden" name="idtr" value="<%=trb.getIdtr()%>">  
+                        <input type="hidden" name="idtr" value="<%=trb.getId_trabajador()%>">  
                         <input class="btn btn-success" type="submit" name="opc" value="EditarAR">  
                     </td>
                 </tr>

@@ -67,8 +67,6 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
             while (rs.next()) {
                 V_List_Empleado v = new V_List_Empleado();
                 v.setEs_inst_educ_peru(rs.getString("es_inst_educ_peru"));
-                v.setN(rs.getString("n"));
-                v.setNn(rs.getString("nn"));
                 v.setCm_otros_estudios(rs.getString("cm_otros_estudios"));
                 v.setEs_sexo(rs.getString("es_sexo"));
                 v.setLi_grupo_sanguineo(rs.getString("li_grupo_sanguineo"));

@@ -168,6 +168,7 @@
             HttpSession sesion = request.getSession(true);
             String idp = (String) sesion.getAttribute("p");
             String idrol = (String) sesion.getAttribute("IDROL");
+            String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
             String iddgp = request.getParameter("dgp");
             String cod = request.getParameter("c");
             String iddrp = request.getParameter("drp");
@@ -299,27 +300,31 @@
 
                     <hr class="simple">
                     <ul id="myTab1" class="nav nav-tabs bordered">
+                        <%if (iddep.equals("DPT-0019")) {
+                        %>
                         <li >
-                            <a href="#s1" data-toggle="tab"><i class="fa fa-male fa-gear"></i> Información General </a>
+                            <a href="#s1" data-toggle="tab"><i class="fa fa-file-text fa-gear"></i> Información Contractual </a>
+                        </li>
+                        <%}%>
+                        <li >
+                            <a href="#s2" data-toggle="tab"><i class="fa fa-male fa-gear"></i> Información General </a>
                         </li>
                         <li>
-                            <a href="#s2" data-toggle="tab"><i class="fa fa-graduation-cap fa-gear"></i> Aspecto Académico</a>
+                            <a href="#s3" data-toggle="tab"><i class="fa fa-graduation-cap fa-gear"></i> Aspecto Académico</a>
                         </li>
                         <li >
-                            <a href="#s3" data-toggle="tab"><i class="fa fa-home fa-gear"></i> Aspecto Social </a>
+                            <a href="#s4" data-toggle="tab"><i class="fa fa-home fa-gear"></i> Aspecto Social </a>
                         </li>
                         <li >
-                            <a href="#s4" data-toggle="tab"><i class="fa fa-group fa-gear"></i> Familiares </a>
+                            <a href="#s5" data-toggle="tab"><i class="fa fa-group fa-gear"></i> Familiares </a>
                         </li>
                         <li >
-                            <a href="#s5" data-toggle="tab"><i class="fa fa-file-o fa-gear"></i> Historial de Requerimientos </a>
+                            <a href="#s6" data-toggle="tab"><i class="fa fa-file-o fa-gear"></i> Historial de Requerimientos </a>
                         </li>
                         <li >
-                            <a href="#s6" data-toggle="tab"><i class="fa fa-file fa-gear"></i> Documentación </a>
+                            <a href="#s7" data-toggle="tab"><i class="fa fa-file fa-gear"></i> Documentación </a>
                         </li>
-                        <li >
-                            <a href="#s7" data-toggle="tab"><i class="fa fa-file-text fa-gear"></i> Información Contractual </a>
-                        </li>
+
                         <%if (idrol.trim().equals("ROL-0007")) {
                         %>
                         <li >
@@ -333,32 +338,36 @@
                         <%}%>
                     </ul>
                     <div id="myTabContent1" class="tab-content padding-10">
-                        <div class="tab-pane fade <%if (aut != null) {
-
-                            } else  {
-                                out.print(" in active");
-                            }
-                             %>" id="s1">
-                            <iframe name="contenido" id="contenido"  class="autoHeight" src="Datos_Generales.jsp" width="100%" height="100%" ></iframe>
-                        </div>
-                        <div class="tab-pane fade" id="s2">                           
-                            <iframe name="contenido" id="contenido"  class="autoHeight" src="Aspecto_Academico.jsp" width="100%" height="100%" ></iframe>                           
-                        </div>
-                        <div class="tab-pane fade" id="s3">                            
-                            <iframe name="contenido" id="contenido"  class="autoHeight" src="Aspecto_Social.jsp" width="100%" height="100%" ></iframe>                           
-                        </div>
-                        <div class="tab-pane fade" id="s4">                            
-                            <iframe name="contenido" id="contenido"  class="autoHeight" src="../../familiar?idtr=<%=idtr%>&opc=Detalle_Familiar" width="100%" height="100%" ></iframe>
-                        </div>
-                        <div class="tab-pane fade" id="s5">                            
-                            <iframe name="contenido" id="contenido"  class="autoHeight" src="../../dgp?idtr=<%=idtr%>&opc=List_Dgp_Tr" width="100%" height="100%" ></iframe>
-                        </div>
-                        <div class="tab-pane fade" id="s6">                            
-                            <iframe name="contenido" id="contenido"  class="autoHeight" src="../../trabajador?idtr=<%=idtr%>&opc=Documento_Trabajador" width="100%" height="100%" ></iframe>
-                        </div>
-                        <div class="tab-pane fade" id="s7">                            
+                        <%if (iddep.equals("DPT-0019")) {
+                        %>
+                        <div class="tab-pane fade" id="s1">                            
                             <iframe name="contenido" id="contenido"  class="autoHeight" src="../../contrato?idtr=<%=idtr%>&opc=Detalle_Contractual" width="100%" height="100%" ></iframe>
                         </div>
+                        <%}%>
+                        <div class="tab-pane fade <%if (aut != null) {
+
+                            } else {
+                                out.print(" in active");
+                            }
+                             %>" id="s2">
+                            <iframe name="contenido" id="contenido"  class="autoHeight" src="Datos_Generales.jsp" width="100%" height="100%" ></iframe>
+                        </div>
+                        <div class="tab-pane fade" id="s3">                           
+                            <iframe name="contenido" id="contenido"  class="autoHeight" src="Aspecto_Academico.jsp" width="100%" height="100%" ></iframe>                           
+                        </div>
+                        <div class="tab-pane fade" id="s4">                            
+                            <iframe name="contenido" id="contenido"  class="autoHeight" src="Aspecto_Social.jsp" width="100%" height="100%" ></iframe>                           
+                        </div>
+                        <div class="tab-pane fade" id="s5">                            
+                            <iframe name="contenido" id="contenido"  class="autoHeight" src="../../familiar?idtr=<%=idtr%>&opc=Detalle_Familiar" width="100%" height="100%" ></iframe>
+                        </div>
+                        <div class="tab-pane fade" id="s6">                            
+                            <iframe name="contenido" id="contenido"  class="autoHeight" src="../../dgp?idtr=<%=idtr%>&opc=List_Dgp_Tr" width="100%" height="100%" ></iframe>
+                        </div>
+                        <div class="tab-pane fade" id="s7">                            
+                            <iframe name="contenido" id="contenido"  class="autoHeight" src="../../trabajador?idtr=<%=idtr%>&opc=Documento_Trabajador" width="100%" height="100%" ></iframe>
+                        </div>
+
 
                         <%if (idrol.trim().equals("ROL-0007")) {
                         %>

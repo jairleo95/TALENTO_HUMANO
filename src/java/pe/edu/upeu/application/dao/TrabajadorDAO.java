@@ -30,7 +30,6 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
     CConversion c = new CConversion();
     ConexionBD conn;
 
-
     @Override
     public void INSERT_TRABAJADOR(String ID_TRABAJADOR, String AP_PATERNO, String AP_MATERNO, String NO_TRABAJADOR, String TI_DOC, String NU_DOC, String ES_CIVIL, String FE_NAC, String ID_NACIONALIDAD, String ID_DEPARTAMENTO, String ID_PROVINCIA, String ID_DISTRITO, String TE_TRABAJADOR, String CL_TRA, String DI_CORREO_PERSONAL, String DI_CORREO_INST, String CO_SISTEMA_PENSIONARIO, String ID_SITUACION_EDUCATIVA, String LI_REG_INST_EDUCATIVA, String ES_INST_EDUC_PERU, String ID_UNIVERSIDAD_CARRERA, String DE_ANNO_EGRESO, String CM_OTROS_ESTUDIOS, String ES_SEXO, String LI_GRUPO_SANGUINEO, String DE_REFERENCIA, String LI_RELIGION, String NO_IGLESIA, String DE_CARGO, String LI_AUTORIDAD, String NO_AP_AUTORIDAD, String CL_AUTORIDAD, String ID_NO_AFP, String ES_AFILIADO_ESSALUD, String LI_TIPO_TRABAJADOR, String CA_TIPO_HORA_PAGO_REFEERENCIAL, String ES_FACTOR_RH, String LI_DI_DOM_A_D1, String DI_DOM_A_D2, String LI_DI_DOM_A_D3, String DI_DOM_A_D4, String LI_DI_DOM_A_D5, String DI_DOM_A_D6, String DI_DOM_A_REF, String ID_DI_DOM_A_DISTRITO, String LI_DI_DOM_LEG_D1, String DI_DOM_LEG_D2, String LI_DI_DOM_LEG_D3, String DI_DOM_LEG_D4, String LI_DI_DOM_LEG_D5, String DI_DOM_LEG_D6, String ID_DI_DOM_LEG_DISTRITO, String CA_ING_QTA_CAT_EMPRESA, String CA_ING_QTA_CAT_RUC, String CA_ING_QTA_CAT_OTRAS_EMPRESAS, String CM_OBSERVACIONES, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String AP_NOMBRES_PADRE, String AP_NOMBRES_MADRE, String ES_TRABAJA_UPEU_C, String AP_NOMBRES_C, String FE_NAC_C, String ID_TIPO_DOC_C, String NU_DOC_C, String LI_INSCRIPCION_VIG_ESSALUD_C, String ID_CONYUGUE) {
         try {
@@ -126,7 +125,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
 
          }*/
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select d.*, ES_PROCESO_TRABAJADOR(d.id_trabajador) as es_proceso from (select * from RHVD_FICHA_TRAB_NUM_C) d, RHVD_USUARIO u where u.id_usuario= d.id_usuario_creacion ";
+        String sql = "select d.*, ES_PROCESO_TRABAJADOR(d.id_trabajador) as es_proceso from (select * from RHVD_TRABAJADOR) d, RHVD_USUARIO u where u.id_usuario= d.id_usuario_creacion ";
         nom = nom.toUpperCase();
         ape_p = ape_p.toUpperCase();
         ape_m = ape_m.toUpperCase();
@@ -142,7 +141,46 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
 
             while (rs.next()) {
                 V_Ficha_Trab_Num_C v = new V_Ficha_Trab_Num_C();
-
+                v.setNo_s_educativa(rs.getString("no_s_educativa"));
+                v.setAp_nombres_madre(rs.getString("ap_nombres_madre"));
+                v.setAp_nombres_padre(rs.getString("ap_nombres_padre"));
+                v.setEs_trabaja_upeu_c(rs.getString("es_trabaja_upeu_c"));
+                v.setAp_nombres_c(rs.getString("ap_nombres_c"));
+                v.setFe_nac_c(rs.getString("fe_nac_c"));
+                v.setId_tipo_doc_c(rs.getString("id_tipo_doc_c"));
+                v.setNu_doc_c(rs.getString("nu_doc_c"));
+                v.setLi_inscripcion_vig_essalud_c(rs.getString("li_inscripcion_vig_essalud_c"));
+                v.setId_conyugue(rs.getString("id_conyugue"));
+                v.setNo_carrera(rs.getString("no_carrera"));
+                v.setNo_universidad(rs.getString("no_universidad"));
+                v.setAr_foto(rs.getString("ar_foto"));
+                v.setDe_foto(rs.getString("de_foto"));
+                v.setId_foto(rs.getString("id_foto"));
+                v.setNo_ar_foto(rs.getString("no_ar_foto"));
+                v.setTa_ar_foto(rs.getString("ta_ar_foto"));
+                v.setId_trabajador(rs.getString("id_trabajador"));
+                v.setAp_paterno(rs.getString("ap_paterno"));
+                v.setAp_materno(rs.getString("ap_materno"));
+                v.setNo_trabajador(rs.getString("no_trabajador"));
+                v.setTi_doc(rs.getString("ti_doc"));
+                v.setNu_doc(rs.getString("nu_doc"));
+                v.setEs_civil(rs.getString("es_civil"));
+                v.setFe_nac(rs.getString("fe_nac"));
+                v.setNo_nacionalidad(rs.getString("no_nacionalidad"));
+                v.setNo_departamento(rs.getString("no_departamento"));
+                v.setNo_provincia(rs.getString("no_provincia"));
+                v.setNo_distrito(rs.getString("no_distrito"));
+                v.setTe_trabajador(rs.getString("te_trabajador"));
+                v.setCl_tra(rs.getString("cl_tra"));
+                v.setDi_correo_personal(rs.getString("di_correo_personal"));
+                v.setDi_correo_inst(rs.getString("di_correo_inst"));
+                v.setCo_sistema_pensionario(rs.getString("co_sistema_pensionario"));
+                v.setId_situacion_educativa(rs.getString("id_situacion_educativa"));
+                v.setLi_reg_inst_educativa(rs.getString("li_reg_inst_educativa"));
+                v.setEs_inst_educ_peru(rs.getString("es_inst_educ_peru"));
+                v.setCm_otros_estudios(rs.getString("cm_otros_estudios"));
+                v.setEs_sexo(rs.getString("es_sexo"));
+                v.setLi_grupo_sanguineo(rs.getString("li_grupo_sanguineo"));
                 v.setDe_referencia(rs.getString("de_referencia"));
                 v.setLi_religion(rs.getString("li_religion"));
                 v.setNo_iglesia(rs.getString("no_iglesia"));
@@ -183,41 +221,6 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 v.setId_universidad_carrera(rs.getString("id_universidad_carrera"));
                 v.setId_nacionalidad(rs.getString("id_nacionalidad"));
                 v.setDistrito_nac(rs.getString("distrito_nac"));
-                v.setLi_nivel_educativo(rs.getString("NO_S_EDUCATIVA"));
-                v.setNo_carrera(rs.getString("no_carrera"));
-                v.setNo_universidad(rs.getString("no_universidad"));
-                v.setAr_foto(rs.getString("ar_foto"));
-                v.setDe_foto(rs.getString("de_foto"));
-                v.setId_foto(rs.getString("id_foto"));
-                v.setNo_ar_foto(rs.getString("no_ar_foto"));
-                v.setTa_ar_foto(rs.getString("ta_ar_foto"));
-                v.setIdtr(rs.getString("idtr"));
-                v.setNu_contrato(rs.getDouble("nu_contrato"));
-                v.setId_trabajador(rs.getString("id_trabajador"));
-                v.setAp_paterno(rs.getString("ap_paterno"));
-                v.setAp_materno(rs.getString("ap_materno"));
-                v.setNo_trabajador(rs.getString("no_trabajador"));
-                v.setTi_doc(rs.getString("ti_doc"));
-                v.setNu_doc(rs.getString("nu_doc"));
-                v.setEs_civil(rs.getString("es_civil"));
-                v.setFe_nac(rs.getString("fe_nac"));
-                v.setNo_nacionalidad(rs.getString("no_nacionalidad"));
-                v.setNo_departamento(rs.getString("no_departamento"));
-                v.setNo_provincia(rs.getString("no_provincia"));
-                v.setNo_distrito(rs.getString("no_distrito"));
-                v.setTe_trabajador(rs.getString("te_trabajador"));
-                v.setCl_tra(rs.getString("cl_tra"));
-                v.setDi_correo_personal(rs.getString("di_correo_personal"));
-                v.setDi_correo_inst(rs.getString("di_correo_inst"));
-                v.setCo_sistema_pensionario(rs.getString("co_sistema_pensionario"));
-                v.setId_situacion_educativa(rs.getString("id_situacion_educativa"));
-                v.setLi_reg_inst_educativa(rs.getString("li_reg_inst_educativa"));
-                v.setEs_inst_educ_peru(rs.getString("es_inst_educ_peru"));
-                v.setN(rs.getString("n"));
-                v.setNn(rs.getString("nn"));
-                v.setCm_otros_estudios(rs.getString("cm_otros_estudios"));
-                v.setEs_sexo(rs.getString("es_sexo"));
-                v.setLi_grupo_sanguineo(rs.getString("li_grupo_sanguineo"));
                 v.setEs_proceso(rs.getInt("es_proceso"));
                 list.add(v);
             }
@@ -235,13 +238,54 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
     @Override
     public List<V_Ficha_Trab_Num_C> ListaridTrabajador(String id) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from RHVD_FICHA_TRAB_NUM_C where ID_TRABAJADOR='" + id + "'";
+        String sql = "select * from RHVD_TRABAJADOR where ID_TRABAJADOR='" + id + "'";
         List<V_Ficha_Trab_Num_C> list = new ArrayList<V_Ficha_Trab_Num_C>();
         try {
             ResultSet rs = this.conn.query(sql);
 
             while (rs.next()) {
                 V_Ficha_Trab_Num_C v = new V_Ficha_Trab_Num_C();
+
+                v.setNo_s_educativa(rs.getString("no_s_educativa"));
+                v.setAp_nombres_madre(rs.getString("ap_nombres_madre"));
+                v.setAp_nombres_padre(rs.getString("ap_nombres_padre"));
+                v.setEs_trabaja_upeu_c(rs.getString("es_trabaja_upeu_c"));
+                v.setAp_nombres_c(rs.getString("ap_nombres_c"));
+                v.setFe_nac_c(rs.getString("fe_nac_c"));
+                v.setId_tipo_doc_c(rs.getString("id_tipo_doc_c"));
+                v.setNu_doc_c(rs.getString("nu_doc_c"));
+                v.setLi_inscripcion_vig_essalud_c(rs.getString("li_inscripcion_vig_essalud_c"));
+                v.setId_conyugue(rs.getString("id_conyugue"));
+                v.setNo_carrera(rs.getString("no_carrera"));
+                v.setNo_universidad(rs.getString("no_universidad"));
+                v.setAr_foto(rs.getString("ar_foto"));
+                v.setDe_foto(rs.getString("de_foto"));
+                v.setId_foto(rs.getString("id_foto"));
+                v.setNo_ar_foto(rs.getString("no_ar_foto"));
+                v.setTa_ar_foto(rs.getString("ta_ar_foto"));
+                v.setId_trabajador(rs.getString("id_trabajador"));
+                v.setAp_paterno(rs.getString("ap_paterno"));
+                v.setAp_materno(rs.getString("ap_materno"));
+                v.setNo_trabajador(rs.getString("no_trabajador"));
+                v.setTi_doc(rs.getString("ti_doc"));
+                v.setNu_doc(rs.getString("nu_doc"));
+                v.setEs_civil(rs.getString("es_civil"));
+                v.setFe_nac(rs.getString("fe_nac"));
+                v.setNo_nacionalidad(rs.getString("no_nacionalidad"));
+                v.setNo_departamento(rs.getString("no_departamento"));
+                v.setNo_provincia(rs.getString("no_provincia"));
+                v.setNo_distrito(rs.getString("no_distrito"));
+                v.setTe_trabajador(rs.getString("te_trabajador"));
+                v.setCl_tra(rs.getString("cl_tra"));
+                v.setDi_correo_personal(rs.getString("di_correo_personal"));
+                v.setDi_correo_inst(rs.getString("di_correo_inst"));
+                v.setCo_sistema_pensionario(rs.getString("co_sistema_pensionario"));
+                v.setId_situacion_educativa(rs.getString("id_situacion_educativa"));
+                v.setLi_reg_inst_educativa(rs.getString("li_reg_inst_educativa"));
+                v.setEs_inst_educ_peru(rs.getString("es_inst_educ_peru"));
+                v.setCm_otros_estudios(rs.getString("cm_otros_estudios"));
+                v.setEs_sexo(rs.getString("es_sexo"));
+                v.setLi_grupo_sanguineo(rs.getString("li_grupo_sanguineo"));
                 v.setDe_referencia(rs.getString("de_referencia"));
                 v.setLi_religion(rs.getString("li_religion"));
                 v.setNo_iglesia(rs.getString("no_iglesia"));
@@ -282,41 +326,6 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 v.setId_universidad_carrera(rs.getString("id_universidad_carrera"));
                 v.setId_nacionalidad(rs.getString("id_nacionalidad"));
                 v.setDistrito_nac(rs.getString("distrito_nac"));
-                v.setLi_nivel_educativo(rs.getString("NO_S_EDUCATIVA"));
-                v.setNo_carrera(rs.getString("no_carrera"));
-                v.setNo_universidad(rs.getString("no_universidad"));
-                v.setAr_foto(rs.getString("ar_foto"));
-                v.setDe_foto(rs.getString("de_foto"));
-                v.setId_foto(rs.getString("id_foto"));
-                v.setNo_ar_foto(rs.getString("no_ar_foto"));
-                v.setTa_ar_foto(rs.getString("ta_ar_foto"));
-                v.setIdtr(rs.getString("idtr"));
-                v.setNu_contrato(rs.getDouble("nu_contrato"));
-                v.setId_trabajador(rs.getString("id_trabajador"));
-                v.setAp_paterno(rs.getString("ap_paterno"));
-                v.setAp_materno(rs.getString("ap_materno"));
-                v.setNo_trabajador(rs.getString("no_trabajador"));
-                v.setTi_doc(rs.getString("ti_doc"));
-                v.setNu_doc(rs.getString("nu_doc"));
-                v.setEs_civil(rs.getString("es_civil"));
-                v.setFe_nac(rs.getString("fe_nac"));
-                v.setNo_nacionalidad(rs.getString("no_nacionalidad"));
-                v.setNo_departamento(rs.getString("no_departamento"));
-                v.setNo_provincia(rs.getString("no_provincia"));
-                v.setNo_distrito(rs.getString("no_distrito"));
-                v.setTe_trabajador(rs.getString("te_trabajador"));
-                v.setCl_tra(rs.getString("cl_tra"));
-                v.setDi_correo_personal(rs.getString("di_correo_personal"));
-                v.setDi_correo_inst(rs.getString("di_correo_inst"));
-                v.setCo_sistema_pensionario(rs.getString("co_sistema_pensionario"));
-                v.setId_situacion_educativa(rs.getString("id_situacion_educativa"));
-                v.setLi_reg_inst_educativa(rs.getString("li_reg_inst_educativa"));
-                v.setEs_inst_educ_peru(rs.getString("es_inst_educ_peru"));
-                v.setN(rs.getString("n"));
-                v.setNn(rs.getString("nn"));
-                v.setCm_otros_estudios(rs.getString("cm_otros_estudios"));
-                v.setEs_sexo(rs.getString("es_sexo"));
-                v.setLi_grupo_sanguineo(rs.getString("li_grupo_sanguineo"));
                 list.add(v);
             }
 
@@ -441,10 +450,10 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
     }
 
     @Override
-    public void MOD_ASP_REL( String LI_RELIGION, String NO_IGLESIA, String DE_CARGO, String LI_AUTORIDAD, String NO_AP_AUTORIDAD, String CL_AUTORIDAD, String ID_TRABAJADOR) {
+    public void MOD_ASP_REL(String LI_RELIGION, String NO_IGLESIA, String DE_CARGO, String LI_AUTORIDAD, String NO_AP_AUTORIDAD, String CL_AUTORIDAD, String ID_TRABAJADOR) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_RELIGION_TRA( ?, ?, ?, ?, ?, ?, ?)} ");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_RELIGION_TRA( ?, ?, ?, ?, ?, ?, ?)} ");
             cst.setString(1, LI_RELIGION);
             cst.setString(2, NO_IGLESIA);
             cst.setString(3, DE_CARGO);
@@ -461,7 +470,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
 
     @Override
     public List<Trabajador> LIST_TRABAJADOR_MOD_REL() {
-    this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "select id_trabajador, NO_TRABAJADOR , AP_PATERNO , AP_MATERNO  ,NU_DOC_C , LI_RELIGION ,DI_CORREO_PERSONAL, CL_TRA from RHTM_TRABAJADOR where ID_TRABAJADOR in (select ID_TRABAJADOR from RHTR_HIST_INFO_REL )";
         List<Trabajador> Lista = new ArrayList<Trabajador>();
         try {
@@ -484,19 +493,20 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         }
         return Lista;
     }
+
     @Override
     public void INSERT_CUENTA_SUELDO(String ID_CUENTA_SUELDO, String NO_BANCO, String NU_CUENTA, String NU_CUENTA_BANC, String ES_GEM_NU_CUENTA, String NO_BANCO_OTROS, String ID_TRABAJADOR, String ES_CUENTA_SUELDO) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_CUENTA_SUELDO( ?, ?, ?, ?, ?, ?, ?, ?)} ");
             cst.setString(1, null);
-            cst.setString(2,NO_BANCO);
-            cst.setString(3,NU_CUENTA);
-            cst.setString(4,NU_CUENTA_BANC );
-            cst.setString(5,ES_GEM_NU_CUENTA);
-            cst.setString(6,NO_BANCO_OTROS);
-            cst.setString(7,ID_TRABAJADOR);
-            cst.setString(8,ES_CUENTA_SUELDO);
+            cst.setString(2, NO_BANCO);
+            cst.setString(3, NU_CUENTA);
+            cst.setString(4, NU_CUENTA_BANC);
+            cst.setString(5, ES_GEM_NU_CUENTA);
+            cst.setString(6, NO_BANCO_OTROS);
+            cst.setString(7, ID_TRABAJADOR);
+            cst.setString(8, ES_CUENTA_SUELDO);
             cst.execute();
         } catch (SQLException ex) {
         } finally {
@@ -507,7 +517,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
     @Override
     public String CuentaSueldoTra(String ID_TRABAJADOR) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select ES_CUENTA_SUELDO from RHTD_CUENTA_SUELDO where ID_TRABAJADOR = '"+ID_TRABAJADOR+"'";
+        String sql = "select ES_CUENTA_SUELDO from RHTD_CUENTA_SUELDO where ID_TRABAJADOR = '" + ID_TRABAJADOR + "'";
         String es_cs = null;
         try {
             ResultSet rs = this.conn.query(sql);
@@ -522,10 +532,10 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
     }
 
     @Override
-    public void MODIF_CUENTA_SUELDO(String NO_BANCO, String NU_CUENTA, String NU_CUENTA_BANC, String ES_GEM_NU_CUENTA, String NO_BANCO_OTROS, String ID_TRABAJADOR, String ES_CUENTA_SUELDO ) {
-         try {
+    public void MODIF_CUENTA_SUELDO(String NO_BANCO, String NU_CUENTA, String NU_CUENTA_BANC, String ES_GEM_NU_CUENTA, String NO_BANCO_OTROS, String ID_TRABAJADOR, String ES_CUENTA_SUELDO) {
+        try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_CUENTA_SUELDO( ?, ?, ?, ?, ?, ?, ?)} ");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_CUENTA_SUELDO( ?, ?, ?, ?, ?, ?, ?)} ");
             cst.setString(1, NO_BANCO);
             cst.setString(2, NU_CUENTA);
             cst.setString(3, NU_CUENTA_BANC);
@@ -539,5 +549,5 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             this.conn.close();
         }
     }
-    
+
 }
