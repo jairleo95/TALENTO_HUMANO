@@ -42,6 +42,15 @@ public class V_Autorizar_Dgp {
     private String elab_contrato;
     private String val_firm_contrato;
     private String no_dep;
+    private String mes_creacion;
+
+    public String getMes_creacion() {
+        return mes_creacion;
+    }
+
+    public void setMes_creacion(String mes_creacion) {
+        this.mes_creacion = mes_creacion;
+    }
 
     public String getNo_dep() {
         return no_dep;
@@ -72,7 +81,7 @@ public class V_Autorizar_Dgp {
             String no_puesto, String nu_pasos, String id_dgp, String co_pasos, String id_detalle_req_proceso, String de_pasos, String id_departamento, String id_puesto,
             String id_requerimiento, String id_tipo_planilla, String no_req, String id_pasos, String no_usuario, String id_usuario, String no_seccion, String no_area,
             String ar_foto, String de_foto, String id_foto, String no_ar_foto, String ta_ar_foto, String ti_ar_foto, String fe_creacion, int val_plazo, String ver_list_plazo,
-            String elab_contrato, String val_firm_contrato, String no_dep) {
+            String elab_contrato, String val_firm_contrato, String no_dep,String mes_creacion) {
         this.id_trabajador = id_trabajador;
         this.no_trabajador = no_trabajador;
         this.ap_paterno = ap_paterno;
@@ -105,6 +114,7 @@ public class V_Autorizar_Dgp {
         this.elab_contrato = elab_contrato;
         this.val_firm_contrato = val_firm_contrato;
         this.no_dep = no_dep;
+        this.mes_creacion = mes_creacion;
     }
 
     public V_Autorizar_Dgp() {
@@ -140,6 +150,7 @@ public class V_Autorizar_Dgp {
         this.val_firm_contrato = "";
         this.no_dep = "";
         this.val_plazo = 0;
+        this.mes_creacion = "";
     }
 
     public String getVer_list_plazo() {
