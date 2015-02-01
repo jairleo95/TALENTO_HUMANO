@@ -411,54 +411,56 @@
 
                                                     </div>
                                                     <%} else { %>
-                                                    <INPUT type="text" value="12312">
                                                     <%for (int i = 0; i < list_Cuenta_Sueldo.size(); i++) {
                                                             Cuenta_Sueldo cs = new Cuenta_Sueldo();
                                                             cs = (Cuenta_Sueldo) list_Cuenta_Sueldo.get(i);
-                                                            
 
                                                     %>
-                                                    <input type="text" value="asdas">
-                                                    <input type="text" value="<%=cs.getId_trajador() %>">
-                                                    <input type="text" value="<%=cs.getNu_cuenta() %>">
                                                     <div class="row"> 
-                                                         <%if (cs.getNo_banco().equals("2")) { %>
+
                                                         <section class="col col-3" name="">
                                                             <label class="select" id="titu" >Cta Sueldo - Banco:
-                                                                <select name="BANCO" id="banco" required="" disabled="">
-                                                                    <option value="2" >BCP</option>
+                                                                <select name="BANCO"  required="" disabled="">
+                                                                    <%if (cs.getNo_banco().equals("0")) { %>
+                                                                    <option >Ninguno</option>
+                                                                    <%}
+                                                                        if (cs.getNo_banco().equals("1")) {%>
+                                                                    <option >BBVA</option>
+                                                                    <%}
+                                                                        if (cs.getNo_banco().equals("2")) { %>
+                                                                    <option >BCP</option>
+                                                                    <%}
+                                                                       if (cs.getNo_banco().equals("3")) { %>
+                                                                    <option >Otros</option>
+                                                                    <% }%>
                                                                 </select>
                                                             </label>
                                                         </section>
-                                                        <% }%>
-                                                       <!-- <section class="col col-3" id="no_cuen_otros">
-
-                                                            <label class="input" id="titu">Nombre Banco :
-                                                                <input type="text" name="BANCO_OTROS"  id="nu_cuen_otros" maxlength="30"   />
-                                                            </label>
-
-                                                        </section>
-                                                        <section class="col col-4" id="no_cuen">
-
-                                                            <label class="input" id="titu">Nro Cuenta :
-                                                                <input type="text" name="CUENTA"  id="nu_cuen" maxlength="30"   />
-                                                            </label>
-
-                                                        </section>
-                                                        <section class="col col-4"  id="no_cuen_ban">
-
-                                                            <label class="input" id="titu">Nro Cuenta Bancaria:
-                                                                <input type="text" name="CUENTA_BANC" id="nu_cuen_ban">
-                                                            </label>
-
-                                                        </section>
-
-                                                        <section class="col col-3" id="generar">
-                                                            <label class="checkbox" >
-                                                                <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="1">
-                                                                <i></i>Generar Nro de Cuenta Bancaria</label>
-                                                        </section>-->
-
+                                                                <%if( cs.getNo_banco_otros()!= null){%>
+                                                        <section class="col col-3">
+                                                             <label class="input" id="titu">Nombre Banco :
+                                                                 <input type="text" disabled="" value="<%=cs.getNo_banco_otros()%>"   />
+                                                             </label>
+                                                         </section>
+                                                             <%}if( cs.getNu_cuenta()!= null){%>
+                                                         <section class="col col-4">
+                                                             <label class="input" id="titu">Nro Cuenta :
+                                                                 <input type="text" disabled="" value="<%=cs.getNu_cuenta()%>"   />
+                                                             </label>
+                                                         </section>
+                                                              <%}if( cs.getNu_cuenta_banc()!= null){%>
+                                                         <section class="col col-4">
+                                                             <label class="input" id="titu">Nro Cuenta Bancaria:
+                                                                 <input type="text" disabled="" value="<%=cs.getNu_cuenta_banc() %>">
+                                                             </label>
+                                                         </section>
+                                                                 <%} if(cs.getEs_gem_nu_cuenta().equals("1")){%>
+                                                         <section class="col col-3" >
+                                                             <label class="checkbox" >
+                                                                 <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="1">
+                                                                 <i></i>Generar Nro de Cuenta Bancaria</label>
+                                                         </section>
+                                                           <%}%>
                                                     </div>
 
 
@@ -1990,7 +1992,7 @@
 
     </script>
 </html>
-<%}else {
+<%} else {
         response.sendRedirect("/TALENTO_HUMANO/");
     }
 %>
