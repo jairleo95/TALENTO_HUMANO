@@ -1,4 +1,5 @@
 
+<%@page import="pe.edu.upeu.application.model.Cuenta_Sueldo"%>
 <%
     HttpSession sesion_1 = request.getSession();
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
@@ -16,6 +17,7 @@
 <jsp:useBean id="List_Puesto" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Det_Puesto" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_Requerimiento" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="list_Cuenta_Sueldo" scope="application" class="java.util.ArrayList"/>
 
 <!DOCTYPE html >
 <html>
@@ -90,8 +92,7 @@
 
         </style>
 
-        <%
-            HttpSession sesion = request.getSession(true);
+        <%            HttpSession sesion = request.getSession(true);
             String id_dep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
         %>
 
@@ -170,7 +171,7 @@
                                                             tr = (V_Ficha_Trab_Num_C) Listar_Trabajador_id.get(i);
                                                     %>
                                                     <div class="row">
-                                                        <input value= "<%=tr.getId_trabajador() %>"  type="hidden" id="" />
+                                                        <input value= "<%=tr.getId_trabajador()%>"  type="hidden" id="" />
                                                         <section class="col col-6">
                                                             <label class="label" id="titu">Trabajador :</label>
                                                             <label class="input" style="color: red; font-weight: bold;">
@@ -362,14 +363,14 @@
                                                             </label>
                                                         </section>
                                                     </div>
-                                                        
-                                                       <%String es_cue_sue=request.getParameter("es_cs");%>
-                                                       <input type="hidden" name="ESTADO" value="<%=es_cue_sue %>">
-                                                       <%if(es_cue_sue.equals("0")){%>
-                                                       
-                                                       <input type="hidden" name="ES_CUENTA_SUELDO" value="1" />
-                                                          <div class="row"> 
-                                                              <section class="col col-3" name="">
+
+                                                    <%String es_cue_sue = request.getParameter("es_cs");%>
+                                                    <input type="text" name="ESTADO" value="<%=es_cue_sue%>">
+                                                    <%if (es_cue_sue.equals("0")) {%>
+
+                                                    <input type="hidden" name="ES_CUENTA_SUELDO" value="1" />
+                                                    <div class="row"> 
+                                                        <section class="col col-3" name="">
                                                             <label class="select" id="titu">Cta Sueldo - Banco:
                                                                 <select name="BANCO" id="banco" required="">
                                                                     <option value="" selected="" disabled="" >[Selecione]</option>
@@ -409,10 +410,63 @@
                                                         </section>
 
                                                     </div>
-                                                      <%}
-                                                       %>
-                                                        
-                                                    <%}
+                                                    <%} else { %>
+                                                    <%for (int i = 0; i < list_Cuenta_Sueldo.size(); i++) {
+                                                            Cuenta_Sueldo cs = new Cuenta_Sueldo();
+                                                            cs = (Cuenta_Sueldo) list_Cuenta_Sueldo.get(i);
+
+                                                    %>
+                                                    <div class="row"> 
+
+                                                        <section class="col col-3" name="">
+                                                            <label class="select" id="titu" >Cta Sueldo - Banco:
+                                                                <select name="BANCO"  required="" disabled="">
+                                                                    <%if (cs.getNo_banco().equals("0")) { %>
+                                                                    <option >Ninguno</option>
+                                                                    <%}
+                                                                        if (cs.getNo_banco().equals("1")) {%>
+                                                                    <option >BBVA</option>
+                                                                    <%}
+                                                                        if (cs.getNo_banco().equals("2")) { %>
+                                                                    <option >BCP</option>
+                                                                    <%}
+                                                                       if (cs.getNo_banco().equals("3")) { %>
+                                                                    <option >Otros</option>
+                                                                    <% }%>
+                                                                </select>
+                                                            </label>
+                                                        </section>
+                                                                <%if( cs.getNo_banco_otros()!= null){%>
+                                                        <section class="col col-3">
+                                                             <label class="input" id="titu">Nombre Banco :
+                                                                 <input type="text" disabled="" value="<%=cs.getNo_banco_otros()%>"   />
+                                                             </label>
+                                                         </section>
+                                                             <%}if( cs.getNu_cuenta()!= null){%>
+                                                         <section class="col col-4">
+                                                             <label class="input" id="titu">Nro Cuenta :
+                                                                 <input type="text" disabled="" value="<%=cs.getNu_cuenta()%>"   />
+                                                             </label>
+                                                         </section>
+                                                              <%}if( cs.getNu_cuenta_banc()!= null){%>
+                                                         <section class="col col-4">
+                                                             <label class="input" id="titu">Nro Cuenta Bancaria:
+                                                                 <input type="text" disabled="" value="<%=cs.getNu_cuenta_banc() %>">
+                                                             </label>
+                                                         </section>
+                                                                 <%} if(cs.getEs_gem_nu_cuenta().equals("1")){%>
+                                                         <section class="col col-3" >
+                                                             <label class="checkbox" >
+                                                                 <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="1">
+                                                                 <i></i>Generar Nro de Cuenta Bancaria</label>
+                                                         </section>
+                                                           <%}%>
+                                                    </div>
+
+
+                                                    <%          }
+                                                            }
+                                                        }
                                                         if (idreq.equals("REQ-0010")) {%>  
                                                     <div class="">
                                                         <section class="col col-4" >

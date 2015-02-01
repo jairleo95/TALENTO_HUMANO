@@ -13,6 +13,7 @@ import java.util.List;
 import pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
+import pe.edu.upeu.application.model.Cuenta_Sueldo;
 import pe.edu.upeu.application.model.Datos_Hijo_Trabajador;
 import pe.edu.upeu.application.model.Documentos;
 import pe.edu.upeu.application.model.Padre_Madre_Conyugue;

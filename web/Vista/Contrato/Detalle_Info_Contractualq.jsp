@@ -483,7 +483,7 @@
                 <table>
                     <td><input type="hidden" name="id_plan_contr" value="<%=n.getId_plantilla_contractual()%>"></td>
                     <td><input type="hidden" name="idtraba" value="<%=n.getId_trabajador()%>"></td>
-                    <td><input type="text" name="id_con" value="<%=n.getId_contrato()%>"></td>
+                    <td><input type="hidden" name="id_con" value="<%=n.getId_contrato()%>"></td>
                     <tr><td class="text-info" colspan="8" style="text-align:center"><input class="button blue"  type="hidden" value="Editar"><button name="opc" value="Imprimir" class="PLANTI button blue">Mostrar Plantillas</button></td></tr>
                 </table>
             </div>

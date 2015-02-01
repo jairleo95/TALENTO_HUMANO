@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
+import pe.edu.upeu.application.model.Cuenta_Sueldo;
 import pe.edu.upeu.application.model.V_Det_DGP;
 import pe.edu.upeu.application.model.V_Es_Requerimiento;
 import pe.edu.upeu.application.model.X_List_det_dgp;
@@ -68,7 +69,7 @@ public class DgpDAO implements InterfaceDgpDAO {
             cst.setDouble(25, DE_BEV);
             cst.setString(26, DE_ANTECEDENTES_POLICIALES);
             cst.setString(27, ES_CERTIFICADO_SALUD);
-            cst.setString(28, DE_MONTO_HONORARIO);            
+            cst.setString(28, DE_MONTO_HONORARIO);
             cst.execute();
 
         } catch (SQLException e) {
@@ -752,6 +753,34 @@ public class DgpDAO implements InterfaceDgpDAO {
         }
         return num_c;
 
+    }
+
+    @Override
+    public List<Cuenta_Sueldo> LIST_CUEN_SUEL(String id_trabajador) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT * FROM RHTD_CUENTA_SUELDO WHERE ID_TRABAJADOR = '" + id_trabajador + "' ";
+        List<Cuenta_Sueldo> list = new ArrayList<Cuenta_Sueldo>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Cuenta_Sueldo cs = new Cuenta_Sueldo();
+
+                cs.setId_cuenta_sueldo(rs.getString("id_cuenta_sueldo"));
+                cs.setNo_banco(rs.getString("no_banco"));
+                cs.setNu_cuenta(rs.getString("nu_cuenta"));
+                cs.setNu_cuenta_banc(rs.getString("nu_cuenta_banc"));
+                cs.setEs_gem_nu_cuenta(rs.getString("es_gem_nu_cuenta"));
+                cs.setNo_banco_otros(rs.getString("no_banco_otros"));
+                cs.setId_trajador(rs.getString("id_trabajador"));
+                cs.setEs_cuenta_sueldo(rs.getString("es_cuenta_sueldo"));
+                list.add(cs);
+            }
+        } catch (SQLException e) {
+           throw new RuntimeException(e.getMessage());
+        } finally {
+            this.conn.close();
+        }
+        return list;
     }
 
 }

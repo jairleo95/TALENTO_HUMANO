@@ -7,6 +7,7 @@ package pe.edu.upeu.application.dao_imp;
 
 import java.util.List;
 import java.util.Map;
+import pe.edu.upeu.application.model.Cuenta_Sueldo;
 import pe.edu.upeu.application.model.DGP;
 import pe.edu.upeu.application.model.V_Det_DGP;
 import pe.edu.upeu.application.model.V_Es_Requerimiento;
@@ -25,7 +26,7 @@ public interface InterfaceDgpDAO {
 
     public List<X_User_dgp> USER_DGP(String id_dgp);
 
-    public void INSERT_DGP(String ID_DGP, String FE_DESDE, String FE_HASTA, double CA_SUELDO, String DE_DIAS_TRABAJO, String ID_PUESTO, String ID_REQUERIMIENTO, String ID_TRABAJADOR, String CO_RUC, String DE_LUGAR_SERVICIO, String DE_SERVICIO, String DE_PERIODO_PAGO, String DE_DOMICILIO_FISCAL, String DE_SUBVENCION, String DE_HORARIO_CAPACITACION, String DE_HORARIO_REFRIGERIO, String DE_DIAS_CAPACITACION, String ES_DGP, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, double CA_BONO_ALIMENTARIO, double DE_BEV, String DE_ANTECEDENTES_POLICIALES, String ES_CERTIFICADO_SALUD, String DE_MONTO_HONORARIO );
+    public void INSERT_DGP(String ID_DGP, String FE_DESDE, String FE_HASTA, double CA_SUELDO, String DE_DIAS_TRABAJO, String ID_PUESTO, String ID_REQUERIMIENTO, String ID_TRABAJADOR, String CO_RUC, String DE_LUGAR_SERVICIO, String DE_SERVICIO, String DE_PERIODO_PAGO, String DE_DOMICILIO_FISCAL, String DE_SUBVENCION, String DE_HORARIO_CAPACITACION, String DE_HORARIO_REFRIGERIO, String DE_DIAS_CAPACITACION, String ES_DGP, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, double CA_BONO_ALIMENTARIO, double DE_BEV, String DE_ANTECEDENTES_POLICIALES, String ES_CERTIFICADO_SALUD, String DE_MONTO_HONORARIO);
 
     public List<x_List_Id_Trab_Dgp> LIST_ID_TRAB_DGP(String id);
 
@@ -34,6 +35,7 @@ public interface InterfaceDgpDAO {
     public List<X_List_dgp_by> LIST_DGP_BY(String id_user);
 
     public void VAL_DGP_PASOS();
+
     public void HABILITAR_DGP(String IDDGP);
 
     public List<V_Es_Requerimiento> LIST_DGP_PROCESO(String id_dep);
@@ -49,15 +51,21 @@ public interface InterfaceDgpDAO {
     public int VALIDAR_DGP_CONTR(String id_dgp, String id_tr);
 
     public void REG_DGP_FINAL(String IDDGP);
+
     public void RECHAZAR_DGP(String IDDGP);
-    
-    public void MOD_REQUE(String ID_DGP, String FE_DESDE, String FE_HASTA, double CA_SUELDO, String ID_PUESTO, String ID_REQUERIMIENTO,  double CA_BONO_ALIMENTARIO, double DE_BEV, double CA_CENTRO_COSTOS, String DE_ANTECEDENTES_POLICIALES, String DE_CERTIFICADO_SALUD);
+
+    public void MOD_REQUE(String ID_DGP, String FE_DESDE, String FE_HASTA, double CA_SUELDO, String ID_PUESTO, String ID_REQUERIMIENTO, double CA_BONO_ALIMENTARIO, double DE_BEV, double CA_CENTRO_COSTOS, String DE_ANTECEDENTES_POLICIALES, String DE_CERTIFICADO_SALUD);
 
     public List<V_Es_Requerimiento> List_Incomplet(String iddep);
+
     public int VALIDAR_DGP_CONTRATO(String id);
+
     public List<Map<String, ?>> list_Req(String id);
+
     public List<Map<String, ?>> Cargar_Datos_Dgp(String id);
-     public String Imprimir_det_proceso(String iddgp, String idrp) ;
-     
+
+    public String Imprimir_det_proceso(String iddgp, String idrp);
+
+    public List<Cuenta_Sueldo> LIST_CUEN_SUEL(String id_trabajador);
 
 }

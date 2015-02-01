@@ -557,9 +557,16 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 v.setFe_des(rs.getString("fe_des"));
                 list.add(v);
             }
-        } catch (SQLException e) {
+        }catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al insertar archivo");
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
