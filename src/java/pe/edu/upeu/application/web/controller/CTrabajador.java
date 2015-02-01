@@ -258,7 +258,7 @@ public class CTrabajador extends HttpServlet {
                 /*if (cc.Lis_c_c_id_contr(id_contrato).size() > 0) {
                  getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_contrato));
                  }
-                 */
+                 */int val_aps=0;
                 String iddgp = request.getParameter("iddetalle_dgp");
                 String puesto_id = request.getParameter("puesto_id");
                 String cod = request.getParameter("cod");
@@ -266,7 +266,7 @@ public class CTrabajador extends HttpServlet {
                 String drp = request.getParameter("IDDETALLE_REQ_PROCESO");
                 String np = request.getParameter("nup");
                 int num_c_dgp = dgp.VALIDAR_DGP_CONTRATO(iddgp);
-                int val_aps=em.val_cod_aps_empleado(idtr);
+                 val_aps=em.val_cod_aps_empleado(idtr);
                 getServletContext().setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
                 getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
                 getServletContext().setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));

@@ -419,13 +419,15 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
     public int val_cod_aps_empleado(String idtr) {
         int num_c = 0;
         String valor = "";
+          this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+          String sql = "select CO_APS from RHTD_EMPLEADO where ID_TRABAJADOR='" + idtr + "'";
         try {
-            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select CO_APS from RHTD_EMPLEADO where ID_TRABAJADOR='" + idtr.trim() + "'";
+          
+            
             ResultSet rs = this.conn.query(sql);
             rs.next();
-            valor = rs.getString(1);
-            rs.close();
+            valor = rs.getString("CO_APS");
+           
             if (valor != null) {
                 num_c = 1;
             } else {
