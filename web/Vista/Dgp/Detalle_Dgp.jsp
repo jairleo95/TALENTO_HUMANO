@@ -116,7 +116,7 @@
                         <tr><td class="text-info table-bordered">Antecedentes Policiales: </td><td class="text-info table-bordered">Si</td></tr>
                         <%}%> 
                         <tr><td class="text-info table-bordered">Certificado de Salud: </td><td class="text-info table-bordered" ><%=d.getEs_certificado_salud()%></td></tr>
-
+                        
 
                         <!--<tr><td class="td-det">Ruc:</td><td><?echo $list[$index][9];?></td></tr>
                         <tr><td class="td-det">Lugar de Servicio:</td><td><?echo $list[$index][10];?></td></tr>
@@ -182,11 +182,16 @@
                             <td class="text-info table-bordered">Centro de costo </td><td class="text-info table-bordered">No tiene Centro de costo </td>
                             <%}%>
                         </tr>
-
-
-
-
-
+                        <%if(d.getLi_motivo().equals("1")){%>
+                        <tr><td class="text-info table-bordered">Motivo :</td><td colspan="2" class="text-info table-bordered">Trabajador Nuevo</td></tr>
+                       <%}if(d.getLi_motivo().equals("2")){%>
+                        <tr><td class="text-info table-bordered">Motivo:</td><td colspan="2" class="text-info table-bordered">Renovación</td></tr>
+                         <%}
+                       if(d.getEs_mfl().equals("1")){%>
+                          <tr><td class="text-info table-bordered">MFL:</td><td colspan="2" class="text-info table-bordered">Si</td></tr>
+                         <%}if(d.getEs_mfl().equals("0")){%>
+                          <tr><td class="text-info table-bordered">MFL:</td><td colspan="2" class="text-info table-bordered">No</td></tr>
+                          <%}%>
 
                         <input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>">
                         <input type="hidden" name="opc" value="MODIFICAR REQUERIMIENTO">   

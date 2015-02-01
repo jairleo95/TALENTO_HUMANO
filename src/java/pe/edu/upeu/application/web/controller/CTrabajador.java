@@ -270,6 +270,8 @@ public class CTrabajador extends HttpServlet {
                 getServletContext().setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
                 getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
                 getServletContext().setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));
+                getServletContext().setAttribute("List_", li.List_Auto_mostrar(idrol));
+                
                 response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&aut=1&dgp=" + iddgp + "&p=" + puesto_id + "&c=" + cod + "&pas=" + idpasos + "&drp=" + drp + "&np=" + np + "&vnc=" + num_c_dgp+"&val_aps="+val_aps);
             }
             if ("registrar_aps".equals(opc)) {
