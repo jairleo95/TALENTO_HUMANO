@@ -244,7 +244,7 @@
                                                             out.println(d.Imprimir_det_proceso(r.getId_dgp(), r.getId_detalle_req_proceso()));
                                                         %>
                                                     </div>
-                                                    <input type="text" class="num_aut<%=(i + 1)%>" value="<%=r.getAut_actual()%>"/>
+                                                        <input type="hidden" class="num_aut<%=(i + 1)%>" value="<%=r.getAut_actual()%>"/>
 
                                                 </td>
                                                 <% } else {%>
@@ -261,7 +261,7 @@
                                                         %>
                                                     </div>
 
-                                                    <input type="text" class="num_aut<%=(i + 1)%>" value="<%=r.getAut_actual()%>"/>
+                                                        <input type="hidden" class="num_aut<%=(i + 1)%>" value="<%=r.getAut_actual()%>"/>
                                                 </td>
                                                 <% }%>
                                             </tr>

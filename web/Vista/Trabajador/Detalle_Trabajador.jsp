@@ -383,7 +383,7 @@
                                     a = (Auto_Mostrar) List_Auto_mostrar.get(r);
                         %>
                         <div class="tab-pane fade  in active" id="s9">  
-                            <iframe name="contenido" id="contenido"  class="autoHeight" src="<%=a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getIdtr()%>" width="100%" height="100%" ></iframe>
+                            <iframe name="contenido" id="contenido"  class="autoHeight" src="<%=a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getId_trabajador()%>" width="100%" height="100%" ></iframe>
                             <%
                                     List_Auto_mostrar.clear();
                                 }
