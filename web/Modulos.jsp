@@ -17,10 +17,10 @@
     <body>
         <div class="container">	
             <!-- Codrops top bar -->
-            <div class="codrops-top clearfix">
+            <!--<div class="codrops-top clearfix">
                 <a class="codrops-icon codrops-icon-prev" href="http://tympanus.net/Development/PageTransitions/"><span>Previous Demo</span></a>
                 <span class="right"><a class="codrops-icon codrops-icon-drop" href="http://tympanus.net/codrops/?p=14991"><span>Back to the Codrops Article</span></a></span>
-            </div>
+            </div>-->
             <header>
                 <h1 style="color:black">Gestión de Talento Humano <span><strong>¡Bienvenido!</strong> </span></h1>	
             </header>
