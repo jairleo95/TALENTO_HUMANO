@@ -581,36 +581,37 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             <button type="submit" value="Asignar" onclick="leer();" name="opc">Asignar Plantilla</button>
             <button  onclick="procesar_texto();" type="button">Procesar </button>
             <form>
-            <input type="text" class="nombre_pl form-control" name="no_pl" ><br><br>
-            <textarea cols="100" id="editor1" name="editor1" rows="10">
-            </textarea>
-            <script>
-                // Replace the <textarea id="editor1"> with an CKEditor instance.
-                CKEDITOR.replace('editor1', {
-                    on: {
-                        focus: onFocus,
-                        blur: onBlur,
-                        // Check for availability of corresponding plugins.
-                        pluginsLoaded: function(evt) {
+                <input type="text" class="nombre_pl form-control" name="no_pl" ><br><br>
+                <textarea cols="100" id="editor1" name="editor1" rows="10">
+                </textarea>
+                <script>
+                    // Replace the <textarea id="editor1"> with an CKEditor instance.
+                    CKEDITOR.replace('editor1', {
+                        on: {
+                            focus: onFocus,
+                            blur: onBlur,
+                            // Check for availability of corresponding plugins.
+                            pluginsLoaded: function(evt) {
 
 
-                            var doc = CKEDITOR.document, ed = evt.editor;
-                            if (!ed.getCommand('bold'))
-                                doc.getById('exec-bold').hide();
-                            if (!ed.getCommand('link'))
-                                doc.getById('exec-link').hide();
+                                var doc = CKEDITOR.document, ed = evt.editor;
+                                if (!ed.getCommand('bold'))
+                                    doc.getById('exec-bold').hide();
+                                if (!ed.getCommand('link'))
+                                    doc.getById('exec-link').hide();
+                            }
+
                         }
-                    }
-                    , height: '800px'});
-            </script>
-            <div id="eButtons" >
-                <input  type="hidden" name="id" value="" class="id_pl"/>
-                <input  type="hidden" name="id_pc" value="" class="id_pc"/>
-                <button type="submit" value="Actualizar" onclick="leer();" name="opc">Actualizar Plantilla</button>
-                <button type="submit" value="Crear_Plantilla" name="opc" onclick="leer();">Crear Plantilla</button>
-            </div>
-        </form>
-        <h3>ASIGNAR PLANTILLAS</h3>
+                        , height: '800px', width: "1200px"});
+                </script>
+                <div id="eButtons" >
+                    <input  type="hidden" name="id" value="" class="id_pl"/>
+                    <input  type="hidden" name="id_pc" value="" class="id_pc"/>
+                    <button type="submit" value="Actualizar" onclick="leer();" name="opc">Actualizar Plantilla</button>
+                    <button type="submit" value="Crear_Plantilla" name="opc" onclick="leer();">Crear Plantilla</button>
+                </div>
+            </form>
+            <h3>ASIGNAR PLANTILLAS</h3>
     </center>
 </body>
 </html>

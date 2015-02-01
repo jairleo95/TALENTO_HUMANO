@@ -102,6 +102,7 @@ CKEDITOR.stylesSet.add( 'default', [
 		},
 		styles: {
 			'border-collapse': 'collapse'
+                        
 		}
 	},
 

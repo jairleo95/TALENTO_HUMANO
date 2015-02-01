@@ -28,64 +28,64 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         <link href="../../../HTML_version/js/plugin/ckeditor/samples/sample.css" rel="stylesheet">
         <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
         <%
-        String no_arch =request.getParameter("no_arc");
-        if(no_arch !=null){
-            for (int i = 0; i < List_contra_x_idcto.size(); i++) {
-                X_List_Id_Contrato_DGP n = new X_List_Id_Contrato_DGP();
-                n = (X_List_Id_Contrato_DGP) List_contra_x_idcto.get(i);
-                InterfaceListaDAO l = new ListaDAO();
-                String Direccion = "";
-                for (int b = 0; b < l.List_Dom_D1_Id().size(); b++) {
-                    if (n.getLi_di_dom_a_d1().trim().equals(b + 1 + "")) {
-                        Direccion += l.List_Dom_D1_Id().get(b);
+            String no_arch = request.getParameter("no_arc");
+            if (no_arch != null) {
+                for (int i = 0; i < List_contra_x_idcto.size(); i++) {
+                    X_List_Id_Contrato_DGP n = new X_List_Id_Contrato_DGP();
+                    n = (X_List_Id_Contrato_DGP) List_contra_x_idcto.get(i);
+                    InterfaceListaDAO l = new ListaDAO();
+                    String Direccion = "";
+                    for (int b = 0; b < l.List_Dom_D1_Id().size(); b++) {
+                        if (n.getLi_di_dom_a_d1().trim().equals(b + 1 + "")) {
+                            Direccion += l.List_Dom_D1_Id().get(b);
+                        }
                     }
-                }
-               if (n.getLi_di_dom_a_d3().trim().equals("1")) {
-                    Direccion += " " + n.getDi_dom_a_d2() + " Numero";
-                }
-                if (n.getLi_di_dom_a_d3().trim().equals("2")) {
-                    Direccion += " " + n.getDi_dom_a_d2() + " Lote";
-                }
-                if (n.getLi_di_dom_a_d3().trim().equals("3")) {
-                    Direccion += " " + n.getDi_dom_a_d2() + " S/N";
-                }
-                for (int c = 0; c < l.List_Dom_D5_Id().size(); c++) {
-                    if (n.getLi_di_dom_a_d5().trim().equals(c + 1 + "")) {
-                        Direccion += " " + n.getDi_dom_a_d4() + " " + l.List_Dom_D5_Id().get(c);
+                    if (n.getLi_di_dom_a_d3().trim().equals("1")) {
+                        Direccion += " " + n.getDi_dom_a_d2() + " Numero";
                     }
-                }
-                Direccion += " " + n.getDi_dom_a_d6();
+                    if (n.getLi_di_dom_a_d3().trim().equals("2")) {
+                        Direccion += " " + n.getDi_dom_a_d2() + " Lote";
+                    }
+                    if (n.getLi_di_dom_a_d3().trim().equals("3")) {
+                        Direccion += " " + n.getDi_dom_a_d2() + " S/N";
+                    }
+                    for (int c = 0; c < l.List_Dom_D5_Id().size(); c++) {
+                        if (n.getLi_di_dom_a_d5().trim().equals(c + 1 + "")) {
+                            Direccion += " " + n.getDi_dom_a_d4() + " " + l.List_Dom_D5_Id().get(c);
+                        }
+                    }
+                    Direccion += " " + n.getDi_dom_a_d6();
 
-                String fecha = n.getFe_sus();
-                String fechasus = "";
-                if (fecha != ""&fecha!=null) {
-                    if (System.getProperty("sun.desktop").trim().equals("windows")) {
-                        String f[] = fecha.split("/");
-                       fechasus = f[0] + " de " + f[1] + " del " + f[2];
+                    String fecha = n.getFe_sus();
+                    String fechasus = "";
+                    if (fecha != "" & fecha != null) {
+                        if (System.getProperty("sun.desktop").trim().equals("windows")) {
+                            String f[] = fecha.split("/");
+                            fechasus = f[0] + " de " + f[1] + " del " + f[2];
+                        } else {
+                            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
+                            String fecha_convertida = new SimpleDateFormat("dd-MMM-yy").format(date);
+                            fechasus = fecha_convertida;
+                        }
                     } else {
-                        Date date = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
-                        String fecha_convertida = new SimpleDateFormat("dd-MMM-yy").format(date);
-                        fechasus= fecha_convertida;
-                    }                  
-                } else {
-                    fechasus = "NO TIENE";
-                }
-                String fecha2 = n.getFe_des().trim();
-                String fechades = "";
-                if (fecha2 != "" & fecha2 != null) {
-                    String f[] = fecha2.split("/");
-                   fechades = f[0] + " de " + f[1] + " del " + f[2];
-                } else {
-                    fechades = "NO TIENE";
-                }
-                fecha2 = n.getFe_has().trim();
-                String fechahas = "";
-                if (fecha2 != "" & fecha != null) {
-                    String f[] = fecha2.split("/");
-                    fechahas = f[0] + " de " + f[1] + " del " + f[2];
-                } else {
-                    fechahas = "NO TIENE";
-                }
+                        fechasus = "NO TIENE";
+                    }
+                    String fecha2 = n.getFe_des().trim();
+                    String fechades = "";
+                    if (fecha2 != "" & fecha2 != null) {
+                        String f[] = fecha2.split("/");
+                        fechades = f[0] + " de " + f[1] + " del " + f[2];
+                    } else {
+                        fechades = "NO TIENE";
+                    }
+                    fecha2 = n.getFe_has().trim();
+                    String fechahas = "";
+                    if (fecha2 != "" & fecha != null) {
+                        String f[] = fecha2.split("/");
+                        fechahas = f[0] + " de " + f[1] + " del " + f[2];
+                    } else {
+                        fechahas = "NO TIENE";
+                    }
         %>
         <script>
 // The instanceReady event is fired, when an instance of CKEditor has finished
@@ -93,16 +93,13 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             CKEDITOR.on('instanceReady', function(ev) {
                 // Show the editor name and description in the browser status bar.
                 document.getElementById('eMessage').innerHTML = 'Instance <code>' + ev.editor.name + '<\/code> loaded.';
-
                 // Show this sample buttons.
                 document.getElementById('eButtons').style.display = 'block';
             });
-
             function InsertHTML() {
                 // Get the editor instance that we want to interact with.
                 var editor = CKEDITOR.instances.editor1;
                 var value = document.getElementById('htmlArea').value;
-
                 // Check the active editing mode.
                 if (editor.mode == 'wysiwyg')
                 {
@@ -118,7 +115,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 // Get the editor instance that we want to interact with.
                 var editor = CKEDITOR.instances.editor1;
                 var value = document.getElementById('txtArea').value;
-
                 // Check the active editing mode.
                 if (editor.mode == 'wysiwyg')
                 {
@@ -134,7 +130,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 // Get the editor instance that we want to interact with.
                 var editor = CKEDITOR.instances.editor1;
                 var value = document.getElementById('htmlArea').value;
-
                 // Set editor contents (replace current contents).
                 // http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-setData
                 editor.setData(value);
@@ -143,7 +138,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             function GetContents() {
                 // Get the editor instance that you want to interact with.
                 var editor = CKEDITOR.instances.editor1;
-
                 // Get editor contents
                 // http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-getData
                 alert(editor.getData());
@@ -153,7 +147,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             function ExecuteCommand(commandName) {
                 // Get the editor instance that we want to interact with.
                 var editor = CKEDITOR.instances.editor1;
-
                 // Check the active editing mode.
                 if (editor.mode == 'wysiwyg')
                 {
@@ -240,30 +233,24 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     editor.setData(imprimir);
                     procesar_texto();
                 });
-
             }
             function mostrars() {
                 //var no_ar=$("#no_arch");
                 //alert($(".no_arc").val());
                 mostrar_plantilla($(".no_arc").val());
-
                 // $(".id_pl").val($(".plantilla" + $(this).val()).val());
             }
             $(document).ready(function() {
                 $("#actu").hide();
                 mostrars();
-
-
-            });
-
-        </script>
+            });</script>
 
     </head>
 
     <body style="height: 1080px">
         <h3>CARGAR PLANTILLAS</h3>
         <%String no_ar = request.getParameter("no_arc");
-       %>
+        %>
         <input type="hidden" id="no_arch" class="no_arc" value="<%=no_ar%>">
         <button class="procesar" type="button" onclick="procesar_texto();">Procesar </button>
         <h3>EDITAR PLANTILLAS <%=fechades%></h3>
@@ -285,21 +272,20 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                 doc.getById('exec-link').hide();
                         }
                     }
-                    , height: '800px'});
-            </script>
+                    , height: '800px'},);</script>
             <script>
                 $(document).ready(function() {
                     $(".procesar").click();
                 }
-                );
-            </script>
+                );</script>
             <div id="eButtons" >
                 <input  type="hidden" name="opc" value="Actualizar"/>
                 <input  type="hidden" name="id" value="" class="id_pl"/>
                 <input type="submit" value="Actualizar Formato" id="actu" onclick="leer();">
             </div>
         </form>
-        <%}}else{%>
+        <%}
+        } else {%>
         <table>
             <td><h1>Plantilla_no_registrada</h1></td>
         </table>
