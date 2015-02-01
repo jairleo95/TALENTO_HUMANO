@@ -27,11 +27,12 @@
         <script>
             $(document).ready(
                     function () {
-                        $(".fecha").keypress(function () {
+                        $(".fecha").keyup(function () {
 
                             var arr_date = $(this).val().split("-");
                             if (arr_date[0].length > 4) {
-                                return false;
+                                //return false;
+                                $(this).val("");
                                 alert("fecha no valida");
                                 
                             }
