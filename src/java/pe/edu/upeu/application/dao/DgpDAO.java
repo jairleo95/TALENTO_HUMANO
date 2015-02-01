@@ -310,6 +310,8 @@ public class DgpDAO implements InterfaceDgpDAO {
                 v.setEs_proceso_aut(rs.getString("es_proceso_aut"));
                 v.setId_detalle_req_proceso(rs.getString("id_detalle_req_proceso"));
                 v.setAut_actual(rs.getString("aut_actual"));
+                v.setMes_creacion(rs.getString("mes_creacion"));
+                v.setFe_creacion(rs.getString("fe_creacion"));
                 Lista.add(v);
             }
         } catch (SQLException e) {
@@ -776,7 +778,7 @@ public class DgpDAO implements InterfaceDgpDAO {
                 list.add(cs);
             }
         } catch (SQLException e) {
-           throw new RuntimeException(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         } finally {
             this.conn.close();
         }

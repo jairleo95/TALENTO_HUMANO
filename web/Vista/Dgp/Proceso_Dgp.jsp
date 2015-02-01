@@ -199,7 +199,9 @@
                                             <thead>			                
                                                 <tr>
                                                     <th data-hide="phone">Nro</th>
+                                                     <th>MES</th>
                                                     <th><i class="fa fa-fw fa-building text-muted hidden-md hidden-sm hidden-xs"></i> Acciones</th>
+                                                   
                                                     <th>Nombre</th>
                                                 </tr>
                                             </thead>
@@ -212,7 +214,8 @@
                                                     r = (V_Es_Requerimiento) LIST_DGP_PROCESO.get(i);
                                             %>
                                             <tr>
-                                                <td><strong><%=i + 1%></strong></td>
+                                                <td><%=r.getId_detalle_req_proceso()%><strong><%=i + 1%></strong></td>
+                                                <td><%=r.getMes_creacion()%></td>
                                                 <td>
                                                     <div class="btn-group">
                                                         <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -244,7 +247,7 @@
                                                             out.println(d.Imprimir_det_proceso(r.getId_dgp(), r.getId_detalle_req_proceso()));
                                                         %>
                                                     </div>
-                                                        <input type="hidden" class="num_aut<%=(i + 1)%>" value="<%=r.getAut_actual()%>"/>
+                                                    <input type="hidden" class="num_aut<%=(i + 1)%>" value="<%=r.getAut_actual()%>"/>
 
                                                 </td>
                                                 <% } else {%>
@@ -261,7 +264,7 @@
                                                         %>
                                                     </div>
 
-                                                        <input type="hidden" class="num_aut<%=(i + 1)%>" value="<%=r.getAut_actual()%>"/>
+                                                    <input type="hidden" class="num_aut<%=(i + 1)%>" value="<%=r.getAut_actual()%>"/>
                                                 </td>
                                                 <% }%>
                                             </tr>
@@ -432,7 +435,7 @@
                     phone: 480
                 };
 
-                /* $('#dt_basic').dataTable({
+                $('#dt_basic').dataTable({
                  "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
                  "t" +
                  "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
@@ -445,11 +448,14 @@
                  },
                  "rowCallback": function (nRow) {
                  responsiveHelper_dt_basic.createExpandIcon(nRow);
+                 
                  },
                  "drawCallback": function (oSettings) {
                  responsiveHelper_dt_basic.respond();
+                 
+                 
                  }
-                 });*/
+                 });
 
                 /* END BASIC */
 
@@ -477,6 +483,7 @@
                     "drawCallback": function (oSettings) {
                         responsiveHelper_datatable_fixed_column.respond();
                     }
+                    
 
                 });
 
@@ -842,9 +849,9 @@
                 }, 50);
             }
             $(document).ready(function () {
-                for (var u = 0; u < $(".tamaño").val() + 1; u++) {
-                    iterar_aut(u, parseInt($(".num_aut" +u ).val()) + 2);
-                }
+               /* for (var u = 0; u < $(".tamaño").val() + 1; u++) {
+                    iterar_aut(u, parseInt($(".num_aut" + u).val()) + 2);
+                }*/
 
 
 
