@@ -15,7 +15,7 @@
     </head>
 
     <body>
-        la fecha : <%=request.getParameter("fecha")%>
+
 
         <input  type="date" class="fecha"/>
         <div class="ver"></div>
@@ -27,15 +27,20 @@
         <script>
             $(document).ready(
                     function () {
-                        $(".fecha").change(function () {
+                        $(".fecha").keypress(function () {
 
-                            $(".ver").text($(".fecha").val());
-
+                            var arr_date = $(this).val().split("-");
+                            if (arr_date[0].length > 4) {
+                                return false;
+                                alert("fecha no valida");
+                                
+                            }
+                            
+      //  $(".ver").text(arr_date[0].length);
                         });
 
 
-                        var t = "PUT-000004";
-                        alert(t.substring(0, 3));
+
 
 
 
@@ -74,7 +79,7 @@
         <%
             Date date = new SimpleDateFormat("yyyy-MM-dd").parse("2012-05-01");
             String formattedDate = new SimpleDateFormat("dd-MMM-yy").format(date);
-            
+
             out.println(formattedDate);
         %>
     </body>
