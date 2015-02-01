@@ -384,7 +384,7 @@ response.sendRedirect("Vista/Dgp/Reg_Dgp.jsp?idreq=" + idreq + "&es_cs=" + ES_CU
                     getServletContext().setAttribute("List_anno_max", anno.List_anno_max());
                     getServletContext().setAttribute("List_modalidad", con.List_modalidad());
                     getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
-                    getServletContext().setAttribute("List_centro_costo", cc.List_centro_costo());
+                   // getServletContext().setAttribute("List_centro_costo", cc.List_centro_costo());
                     //getServletContext().setAttribute("Listar_Direccion", dir.Listar_Direccion());
                     getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
                     

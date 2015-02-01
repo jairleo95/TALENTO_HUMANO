@@ -272,7 +272,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                 doc.getById('exec-link').hide();
                         }
                     }
-                    , height: '800px'},);</script>
+                    , height: '800px'});</script>
             <script>
                 $(document).ready(function() {
                     $(".procesar").click();
