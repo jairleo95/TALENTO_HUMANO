@@ -306,7 +306,7 @@
                                                             <div class="row" >
                                                         <section class="col col-6">
                                                             <label class="select" id="titu">
-                                                                Motivo :<select name="ANTECEDENTES_POLICIALES" class="ant_policiales" required="" >
+                                                                Motivo :<select name="MOTIVO" class="ant_policiales" required="" >
                                                                     <option value="" >[SELECCIONE]</option>
                                                                     <option value="1" selected="">Trabajdor Nuevo</option>
                                                                     <option value="2">Renovación</option>
@@ -316,7 +316,7 @@
                                                         </section>
                                                         <section class="col col-2" style=" margin-top:2%;">
                                                             <label class="toggle" id="titu" > MFL:
-                                                                <input type="checkbox" value="1"   name="" name="checkbox-toggle" >
+                                                                <input type="checkbox" value="1"   name="MFL" name="checkbox-toggle" >
                                                                 <i data-swchon-text="SI" data-swchoff-text="NO"></i>
                                                             </label>
                                                         </section>
