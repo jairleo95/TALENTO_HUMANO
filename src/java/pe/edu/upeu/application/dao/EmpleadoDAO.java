@@ -418,21 +418,12 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
     @Override
     public int val_cod_aps_empleado(String idtr) {
         int num_c = 0;
-        String valor = "";
           this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-          String sql = "select CO_APS from RHTD_EMPLEADO where ID_TRABAJADOR='" + idtr + "'";
+          String sql = "select COUNT(CO_APS) from RHTD_EMPLEADO where ID_TRABAJADOR='" + idtr + "' AND co_aps is not null";
         try {
-          
-            
             ResultSet rs = this.conn.query(sql);
             rs.next();
-            valor = rs.getString("CO_APS");
-           
-            if (valor != null) {
-                num_c = 1;
-            } else {
-                num_c = 0;
-            }
+            num_c = rs.getInt(1);
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
