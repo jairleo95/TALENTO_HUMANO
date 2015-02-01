@@ -242,6 +242,7 @@
                                             <thead>
                                                 <tr data-hide="phone,tablet"> <th><strong>Nro</strong></th>
                                                     <th ><strong>Acción</strong></th>
+                                                    <th ><strong>MES</strong></th>
 
                                                     <th data-hide="phone,tablet"><strong>Foto</strong> </th>
                                                     <th data-class="expand" ><strong>Apellidos Y Nombres</strong></th>
@@ -330,7 +331,7 @@
 
 
                                                     </td>
-
+ <td ><%=a.getMes_creacion()%></td>   
                                                     <% if (a.getAr_foto() == null) {%>
                                                     <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30"></td>
                                                         <% } else {%>

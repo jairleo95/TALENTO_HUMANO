@@ -212,9 +212,9 @@ public class CDocumento extends HttpServlet {
 
                 }
                 //Thread.sleep(1000);
-                if (desc != null) {
+                if (nombre_archivo != null) {
                     
-                    if (!desc.equals("")) {
+                    if (!nombre_archivo.equals("")) {
                         
                         estado = ((estado == null) ? "0" : estado);
                         d.INSERT_DOCUMENTO_ADJUNTO(null, iddgp, iddoc, estado, user, null, null, null, null, desc, nombre_archivo, no_original, null, null, id_ctr);
@@ -239,9 +239,8 @@ public class CDocumento extends HttpServlet {
             getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
             getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
             
-            out.print(id_ctr);
+            out.print(iddgp);
             out.print(idtr);
-
             if (pr != null) {
                 if (pr.equals("enter")) {
                      response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr + "&iddgp=" + iddgp);

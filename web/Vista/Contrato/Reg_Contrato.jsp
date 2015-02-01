@@ -27,6 +27,7 @@
 <jsp:useBean id="list_reg_labo" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_centro_costo" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_grup_ocu" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_dgp" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html >
 <html>
     <head>
@@ -112,7 +113,7 @@
 
         <div id="main" role="main" style="margin:0px;">
             <div id="content" >
-              <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
+                <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
 
                     <!-- widget options:
                             usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
@@ -164,7 +165,27 @@
                             <form action="../../contrato" id="checkout-form" class="smart-form"  method="POST" novalidate="novalidate">
 
                                 <fieldset id="fila-agregar">
-
+                                    <div class="row">
+                                        <section class="col col-2">
+                                            <label class="select" id="titulo">Motivo :
+                                                <select disabled=""  class="input-group-sm">
+                                                    <%if (d.getLi_motivo().trim().equals("1")) {%>
+                                                    <option  selected="selected">Trabajador Nuevo</option>   
+                                                    <%} else {%>
+                                                    <option  selected="selected">renovación</option>   
+                                                    <%}%>
+                                                </select>  
+                                            </label>
+                                        </section >
+                                        <section class="col col-1" style=" margin-top:2%;">
+                                            <label class="toggle" id="titulo" > MFL:
+                                                <input type="checkbox" value="0" name="checkbox-toggle" disabled="" >
+                                                <%if (d.getEs_mfl().trim().equals("1")) {%>
+                                                <i data-swchoff-text="NO"  data-swchon-text="SI"></i>       
+                                                 <%}%>
+                                            </label>
+                                        </section>
+                                    </div>
                                     <div class="row" >
                                         <input type="hidden" name="id_rol_ses" id="id_rol_s" value="<%=id_rol%>">
                                         <input type="hidden" name="TIPO_PLANILLA"  value="<%=d.getId_tipo_planilla()%>">
@@ -191,12 +212,12 @@
 
                                         <input type="hidden" name="IDDETALLE_DGP" value="<%=d.getId_dgp()%>" class="text-box" id="id_dgp" >                               <section class="col col-2">
                                             <label class="input" id="titulo">Desde: 
-                                                <input type="date" name="FEC_DESDE" value="<%=d.getFe_desde()%>" class=" input-group-sm" required="">
+                                                <input type="date" name="FEC_DESDE" value="<%=c.convertFecha3(d.getFe_desde())%>" class=" input-group-sm" required="">
                                             </label>
                                         </section>
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Hasta: 
-                                                <input type="date" name="FEC_HASTA" value="<%=d.getFe_hasta()%>" class="input-group-sm" required="">
+                                                <input type="date" name="FEC_HASTA" value="<%=c.convertFecha3(d.getFe_hasta())%>" class="input-group-sm" required="">
                                             </label>
                                         </section>
                                         <section class="col col-3" id="titulo">
@@ -215,7 +236,7 @@
                                                     <%} else {%>
                                                     <option value="<%=di.getId_direccion()%>"><%=di.getNo_direccion()%></option>
                                                     <%}
-                                                }%>
+                                                        }%>
                                                 </select>  </label>
                                         </section>
                                         <section class="sec_dep col col-3" id="titulo">
@@ -249,7 +270,7 @@
                                                     <option value="<%=p.getId_puesto()%>"><%=p.getNo_puesto()%></option>
 
                                                     <%}
-                                                }%>
+                                                        }%>
                                                 </select>  </label>
                                         </section>
                                         <section class="col col-3">
@@ -679,7 +700,7 @@
                                 </tbody>
                             </table>
                             <%}
-                        }%>
+                                }%>
                         </div>
                         <!-- end widget content -->
 
@@ -781,7 +802,7 @@
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-            $(document).ready(function () {
+            $(document).ready(function() {
 
                 pageSetUp();
 
@@ -880,7 +901,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -949,7 +970,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1001,7 +1022,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1040,15 +1061,15 @@
                         }
                     },
                     // Ajax form submition
-                    submitHandler: function (form) {
+                    submitHandler: function(form) {
                         $(form).ajaxSubmit({
-                            success: function () {
+                            success: function() {
                                 $("#comment-form").addClass('submited');
                             }
                         });
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1082,15 +1103,15 @@
                         }
                     },
                     // Ajax form submition
-                    submitHandler: function (form) {
+                    submitHandler: function(form) {
                         $(form).ajaxSubmit({
-                            success: function () {
+                            success: function() {
                                 $("#contact-form").addClass('submited');
                             }
                         });
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1119,7 +1140,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1164,7 +1185,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1174,7 +1195,7 @@
                     dateFormat: 'dd.mm.yy',
                     prevText: '<i class="fa fa-chevron-left"></i>',
                     nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function (selectedDate) {
+                    onSelect: function(selectedDate) {
                         $('#finishdate').datepicker('option', 'minDate', selectedDate);
                     }
                 });
@@ -1183,7 +1204,7 @@
                     dateFormat: 'dd.mm.yy',
                     prevText: '<i class="fa fa-chevron-left"></i>',
                     nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function (selectedDate) {
+                    onSelect: function(selectedDate) {
                         $('#startdate').datepicker('option', 'maxDate', selectedDate);
                     }
                 });
@@ -1202,7 +1223,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function () {
+            (function() {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
@@ -1215,218 +1236,218 @@
     </body>
     <script>
 
-            function Listar_dep() {
-                var s = $(".selec_dep");
-                $.post("../../Direccion_Puesto", "opc=Listar&" + "id_dir=" + $(".dir_pu").val(), function (objJson) {
-                    s.empty();
-                    var lista = objJson.lista;
-                    s.append("<option value='' > [SELECCIONE] </option>");
-                    for (var j = 0; j < lista.length; j++) {
-                        if ($(".dep_pu").val() == lista[j].id) {
-                            s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nombre + "</option>");
+        function Listar_dep() {
+            var s = $(".selec_dep");
+            $.post("../../Direccion_Puesto", "opc=Listar&" + "id_dir=" + $(".dir_pu").val(), function(objJson) {
+                s.empty();
+                var lista = objJson.lista;
+                s.append("<option value='' > [SELECCIONE] </option>");
+                for (var j = 0; j < lista.length; j++) {
+                    if ($(".dep_pu").val() == lista[j].id) {
+                        s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nombre + "</option>");
 
-                        } else {
-                            s.append("<option value='" + lista[j].id + "'> " + lista[j].nombre + "</option>");
-                        }
+                    } else {
+                        s.append("<option value='" + lista[j].id + "'> " + lista[j].nombre + "</option>");
                     }
-
-
-                });
-            }
-            function Listar_area() {
-                var s = $(".Selec_Area");
-
-                $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $(".dep_pu").val(), function (objJson) {
-                    s.empty();
-                    var lista = objJson.lista;
-                    s.append("<option value='' > [SELECCIONE] </option>");
-                    for (var j = 0; j < lista.length; j++) {
-
-                        if ($(".area_pu").val() == lista[j].id) {
-                            s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nom + "</option>");
-                        } else {
-                            s.append("<option value='" + lista[j].id + "'> " + lista[j].nom + "</option>");
-                        }
-                    }
-
-                });
-            }
-
-            function Listar_sec() {
-                var s = $("#select_sec");
-
-                $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $(".area_pu").val(), function (objJson) {
-                    s.empty();
-                    var lista = objJson.lista;
-                    s.append("<option value='' > [SELECCIONE] </option>");
-                    for (var j = 0; j < lista.length; j++) {
-
-                        if ($(".sec_pu").val() == lista[j].id) {
-                            s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nom + "</option>");
-                        } else {
-                            s.append("<option value='" + lista[j].id + "'> " + lista[j].nom + "</option>");
-                        }
-                    }
-                });
-            }
-            function Listar_plantilla() {
-                var s = $(".con_pl_pu");
-
-                $.post("../../plantilla_contractual", "opc=List_planti&" + "id_pu=" + $(".id_pu_dgp").val(), function (objJson) {
-                    s.empty();
-                    var lista = objJson.lista;
-                    s.append("<option value='' > [SELECCIONE] </option>");
-                    for (var i = 0; i < lista.length; i++) {
-                        s.append("<option value='" + lista[i].id + "'> " + lista[i].nom_pl + "</option>");
-                    }
-                });
-            }
-            $(document).ready(function () {
-                Listar_centro_costo();
-
-                Listar_dep();
-                Listar_sec();
-                Listar_area();
-                Listar_plantilla();
-
-                var a = $("#select-sub-mod");
-                var c = $("#Selec_Area");
-                var d = $("#select_sec");
-                var b = $("#selec_dep");
-                var e = $("#pu_id_se");
-                $(".date").keyup(function () {
-                    $(".conteni").val($(".date").val());
-                });
-                // $.post("../../  ")
-                $("#select_mod").change(
-                        function () {
-                            // alert("?MODALIDAD="+$("#select_mod").val());
-
-                            $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function (objJson) {
-                                a.empty();
-                                var list = objJson.lista;
-                                a.append("<option value='' > [SELECCIONE] </option>");
-                                if (list.length !== 0) {
-                                    for (var i = 0; i < list.length; i++) {
-                                        a.append('<option value="' + list[i].id_submodalidad + '">' + list[i].de_submod + '</option>');
-                                    }
-                                }
-                            });
-                        });
-                $("#selec_dep").change(
-                        function () {
-                            $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function (objJson) {
-                                c.empty();
-                                if (objJson.rpta == -1) {
-                                    alert(objJson.mensaje);
-                                    return;
-                                }
-                                var list = objJson.lista;
-                                c.append("<option value='' > [SELECCIONE] </option>");
-                                if (list.length !== 0) {
-                                    for (var i = 0; i < list.length; i++) {
-                                        c.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
-                                    }
-                                } else {
-                                    c.append("<option value='' > [no hay] </option>");
-                                }
-                            });
-                        });
-                $("#select_dir").change(
-                        function () {
-                            $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $("#select_dir").val(), function (objJson) {
-                                b.empty();
-                                if (objJson.rpta == -1) {
-                                    alert(objJson.mensaje);
-                                    return;
-                                }
-                                var list = objJson.lista;
-                                b.append("<option value='' > [SELECCIONE] </option>");
-                                if (list.length !== 0) {
-                                    for (var i = 0; i < list.length; i++) {
-                                        b.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
-                                    }
-                                } else {
-                                    b.append("<option value='' > [] </option>");
-                                }
-                            });
-                        });
-                $("#Selec_Area").change(
-                        function () {
-                            $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function (objJson) {
-                                d.empty();
-
-                                var list = objJson.lista;
-                                d.append("<option value='' > [SELECCIONE] </option>");
-                                if (list.length !== 0) {
-                                    for (var i = 0; i < list.length; i++) {
-                                        d.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
-                                    }
-                                } else {
-                                    d.append("<option value='' > [no hay] </option>");
-                                }
-                            });
-                        });
-                $("#select_sec").change(
-                        function () {
-                            $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function (objJson) {
-                                e.empty();
-                                if (objJson.rpta == -1) {
-                                    alert(objJson.mensaje);
-                                    return;
-                                }
-                                var list = objJson.lista;
-                                e.append("<option value='' > [SELECCIONE] </option>");
-                                if (list.length !== 0) {
-                                    for (var i = 0; i < list.length; i++) {
-                                        e.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
-                                    }
-                                } else {
-                                    e.empty();
-                                    e.append("<option value='' > [] </option>");
-                                }
-                            });
-                        });
-                $("#btn-registrar").click(
-                        function () {
-                            var pr = $("#select-proceso").val();
-                            $.post("../../paso", $("#form-paso").serialize(), function () {
-                                Listar_Paso(pr);
-                            });
-                            $("#btn-registrar").val("Registrar Paso");
-                            $(".opc").val("Registrar");
-                            $("#form-paso")[0].reset();
-
-                            return false;
-                        }
-                );
-
-
-
-
-                function Listar_centro_costo() {
-                    var x = $("#fila-agregar");
-                    $.post("../../centro_costo", "opc=Listar_centro_id&" + "id_dgp=" + $("#id_dgp").val(), function (objJson) {
-                        var lista = objJson.lista;
-                        var numero = 1;
-                        x.append('<div  class="row centro-costo_' + numero + '" >');
-                        for (var i = 0; i < lista.length; i++) {
-                            numero = numero + i;
-                            if ($("#id_rol_s").val() == 'ROL-0001') {
-                                x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section><div class="form-group"><button type="button" class="btn btn-primary" id="Seleccionar_centro" >Buscar</button></div>');
-                            } else {
-                                x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section>');
-                            }
-                        }
-                        x.append('</div><table><tr><td><td><input type="hidden" name="can_centro_cos" value="' + lista.length + '"></td></tr></table>');
-
-                    });
-
                 }
 
 
-            }
+            });
+        }
+        function Listar_area() {
+            var s = $(".Selec_Area");
+
+            $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $(".dep_pu").val(), function(objJson) {
+                s.empty();
+                var lista = objJson.lista;
+                s.append("<option value='' > [SELECCIONE] </option>");
+                for (var j = 0; j < lista.length; j++) {
+
+                    if ($(".area_pu").val() == lista[j].id) {
+                        s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nom + "</option>");
+                    } else {
+                        s.append("<option value='" + lista[j].id + "'> " + lista[j].nom + "</option>");
+                    }
+                }
+
+            });
+        }
+
+        function Listar_sec() {
+            var s = $("#select_sec");
+
+            $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $(".area_pu").val(), function(objJson) {
+                s.empty();
+                var lista = objJson.lista;
+                s.append("<option value='' > [SELECCIONE] </option>");
+                for (var j = 0; j < lista.length; j++) {
+
+                    if ($(".sec_pu").val() == lista[j].id) {
+                        s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nom + "</option>");
+                    } else {
+                        s.append("<option value='" + lista[j].id + "'> " + lista[j].nom + "</option>");
+                    }
+                }
+            });
+        }
+        function Listar_plantilla() {
+            var s = $(".con_pl_pu");
+
+            $.post("../../plantilla_contractual", "opc=List_planti&" + "id_pu=" + $(".id_pu_dgp").val(), function(objJson) {
+                s.empty();
+                var lista = objJson.lista;
+                s.append("<option value='' > [SELECCIONE] </option>");
+                for (var i = 0; i < lista.length; i++) {
+                    s.append("<option value='" + lista[i].id + "'> " + lista[i].nom_pl + "</option>");
+                }
+            });
+        }
+        $(document).ready(function() {
+            Listar_centro_costo();
+
+            Listar_dep();
+            Listar_sec();
+            Listar_area();
+            Listar_plantilla();
+
+            var a = $("#select-sub-mod");
+            var c = $("#Selec_Area");
+            var d = $("#select_sec");
+            var b = $("#selec_dep");
+            var e = $("#pu_id_se");
+            $(".date").keyup(function() {
+                $(".conteni").val($(".date").val());
+            });
+            // $.post("../../  ")
+            $("#select_mod").change(
+                    function() {
+                        // alert("?MODALIDAD="+$("#select_mod").val());
+
+                        $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function(objJson) {
+                            a.empty();
+                            var list = objJson.lista;
+                            a.append("<option value='' > [SELECCIONE] </option>");
+                            if (list.length !== 0) {
+                                for (var i = 0; i < list.length; i++) {
+                                    a.append('<option value="' + list[i].id_submodalidad + '">' + list[i].de_submod + '</option>');
+                                }
+                            }
+                        });
+                    });
+            $("#selec_dep").change(
+                    function() {
+                        $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function(objJson) {
+                            c.empty();
+                            if (objJson.rpta == -1) {
+                                alert(objJson.mensaje);
+                                return;
+                            }
+                            var list = objJson.lista;
+                            c.append("<option value='' > [SELECCIONE] </option>");
+                            if (list.length !== 0) {
+                                for (var i = 0; i < list.length; i++) {
+                                    c.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+                                }
+                            } else {
+                                c.append("<option value='' > [no hay] </option>");
+                            }
+                        });
+                    });
+            $("#select_dir").change(
+                    function() {
+                        $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $("#select_dir").val(), function(objJson) {
+                            b.empty();
+                            if (objJson.rpta == -1) {
+                                alert(objJson.mensaje);
+                                return;
+                            }
+                            var list = objJson.lista;
+                            b.append("<option value='' > [SELECCIONE] </option>");
+                            if (list.length !== 0) {
+                                for (var i = 0; i < list.length; i++) {
+                                    b.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
+                                }
+                            } else {
+                                b.append("<option value='' > [] </option>");
+                            }
+                        });
+                    });
+            $("#Selec_Area").change(
+                    function() {
+                        $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function(objJson) {
+                            d.empty();
+
+                            var list = objJson.lista;
+                            d.append("<option value='' > [SELECCIONE] </option>");
+                            if (list.length !== 0) {
+                                for (var i = 0; i < list.length; i++) {
+                                    d.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+                                }
+                            } else {
+                                d.append("<option value='' > [no hay] </option>");
+                            }
+                        });
+                    });
+            $("#select_sec").change(
+                    function() {
+                        $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function(objJson) {
+                            e.empty();
+                            if (objJson.rpta == -1) {
+                                alert(objJson.mensaje);
+                                return;
+                            }
+                            var list = objJson.lista;
+                            e.append("<option value='' > [SELECCIONE] </option>");
+                            if (list.length !== 0) {
+                                for (var i = 0; i < list.length; i++) {
+                                    e.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
+                                }
+                            } else {
+                                e.empty();
+                                e.append("<option value='' > [] </option>");
+                            }
+                        });
+                    });
+            $("#btn-registrar").click(
+                    function() {
+                        var pr = $("#select-proceso").val();
+                        $.post("../../paso", $("#form-paso").serialize(), function() {
+                            Listar_Paso(pr);
+                        });
+                        $("#btn-registrar").val("Registrar Paso");
+                        $(".opc").val("Registrar");
+                        $("#form-paso")[0].reset();
+
+                        return false;
+                    }
             );
+
+
+
+
+            function Listar_centro_costo() {
+                var x = $("#fila-agregar");
+                $.post("../../centro_costo", "opc=Listar_centro_id&" + "id_dgp=" + $("#id_dgp").val(), function(objJson) {
+                    var lista = objJson.lista;
+                    var numero = 1;
+                    x.append('<div  class="row centro-costo_' + numero + '" >');
+                    for (var i = 0; i < lista.length; i++) {
+                        numero = numero + i;
+                        if ($("#id_rol_s").val() == 'ROL-0001') {
+                            x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section><div class="form-group"><button type="button" class="btn btn-primary" id="Seleccionar_centro" >Buscar</button></div>');
+                        } else {
+                            x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section>');
+                        }
+                    }
+                    x.append('</div><table><tr><td><td><input type="hidden" name="can_centro_cos" value="' + lista.length + '"></td></tr></table>');
+
+                });
+
+            }
+
+
+        }
+        );
     </script>
 </html>
 <%} else {

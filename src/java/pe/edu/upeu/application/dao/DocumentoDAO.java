@@ -196,6 +196,22 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
 
             while (rs.next()) {
                 V_Reg_Dgp_Tra v = new V_Reg_Dgp_Tra();
+                v.setTi_documento(rs.getString("ti_documento"));
+                v.setEs_obligatorio(rs.getString("es_obligatorio"));
+                v.setId_documento_adjunto(rs.getString("id_documento_adjunto"));
+                v.setId_dgp(rs.getString("id_dgp"));
+                v.setId_documentos(rs.getString("id_documentos"));
+                v.setEs_documento_adjunto(rs.getString("es_documento_adjunto"));
+                v.setUs_creacion(rs.getString("us_creacion"));
+                v.setFe_creacion(rs.getString("fe_creacion"));
+                v.setUs_modif(rs.getString("us_modif"));
+                v.setFe_modif(rs.getString("fe_modif"));
+                v.setIp_usuario(rs.getString("ip_usuario"));
+                v.setDe_documento_adjunto(rs.getString("de_documento_adjunto"));
+                v.setAr_dato_archivo(rs.getString("ar_dato_archivo"));
+                v.setNo_archivo(rs.getString("no_archivo"));
+                v.setTa_archivo(rs.getString("ta_archivo"));
+                v.setAr_file_type(rs.getString("ar_file_type"));
                 v.setId_document(rs.getString("id_document"));
                 v.setId_tipo_plani(rs.getString("id_tipo_plani"));
                 v.setId_requerimient(rs.getString("id_requerimient"));
@@ -221,32 +237,24 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
                 v.setDe_horario_refrigerio(rs.getString("de_horario_refrigerio"));
                 v.setDe_dias_capacitacion(rs.getString("de_dias_capacitacion"));
                 v.setEs_dgp(rs.getString("es_dgp"));
-                v.setTi_documento(rs.getString("ti_documento"));
-                v.setId_documento_adjunto(rs.getString("id_documento_adjunto"));
-                v.setId_documentos(rs.getString("id_documentos"));
-                v.setEs_documento_adjunto(rs.getString("es_documento_adjunto"));
-                v.setUs_creacion(rs.getString("us_creacion"));
-                v.setFe_creacion(rs.getString("fe_creacion"));
-                v.setUs_modif(rs.getString("us_modif"));
-                v.setFe_modif(rs.getString("fe_modif"));
-                v.setIp_usuario(rs.getString("ip_usuario"));
-                v.setDe_documento_adjunto(rs.getString("de_documento_adjunto"));
-                v.setAr_dato_archivo(rs.getString("ar_dato_archivo"));
-                v.setNo_archivo(rs.getString("no_archivo"));
-                v.setTa_archivo(rs.getString("ta_archivo"));
-                v.setAr_file_type(rs.getString("ar_file_type"));
-                v.setEs_obligatorio(rs.getString("es_obligatorio"));
                 x.add(v);
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return x;
     }
 
     @Override
-    public void INSERT_DOCUMENTO_ADJUNTO(String ID_DOCUMENTO_ADJUNTO, String ID_DGP, String ID_DOCUMENTOS, String ES_DOCUMENTO_ADJUNTO, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String DE_DOCUMENTO_ADJUNTO, String AR_DATO_ARCHIVO, String NO_ARCHIVO, String TA_ARCHIVO, String AR_FILE_TYPE, String ID_CONTRATO ) {
+    public void INSERT_DOCUMENTO_ADJUNTO(String ID_DOCUMENTO_ADJUNTO, String ID_DGP, String ID_DOCUMENTOS, String ES_DOCUMENTO_ADJUNTO, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String DE_DOCUMENTO_ADJUNTO, String AR_DATO_ARCHIVO, String NO_ARCHIVO, String TA_ARCHIVO, String AR_FILE_TYPE, String ID_CONTRATO) {
         ConexionBD conn;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -267,9 +275,16 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
             cst.setString(14, AR_FILE_TYPE);
             cst.setString(15, ID_CONTRATO);
             cst.execute();
-        } catch (SQLException ex) {
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
@@ -282,17 +297,17 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 V_Reg_Dgp_Tra d = new V_Reg_Dgp_Tra();
-               d.setTi_documento(rs.getString("ti_documento"));
-               d.setDocumento(rs.getString("documento"));
-               d.setNo_archivo(rs.getString("no_archivo"));
-               d.setEs_obligatorio(rs.getString("es_obligatorio"));
-               d.setAr_dato_archivo(rs.getString("ar_dato_archivo"));
-               d.setDe_documento_adjunto(rs.getString("de_documento_adjunto"));
-               d.setEs_documento_adjunto(rs.getString("es_documento_adjunto"));
-               d.setId_document(rs.getString("id_document"));
-               d.setId_contrato(rs.getString("id_contrato"));
-               d.setId_dgp(rs.getString("id_dgp"));
-               list.add(d);
+                d.setTi_documento(rs.getString("ti_documento"));
+                d.setDocumento(rs.getString("documento"));
+                d.setNo_archivo(rs.getString("no_archivo"));
+                d.setEs_obligatorio(rs.getString("es_obligatorio"));
+                d.setAr_dato_archivo(rs.getString("ar_dato_archivo"));
+                d.setDe_documento_adjunto(rs.getString("de_documento_adjunto"));
+                d.setEs_documento_adjunto(rs.getString("es_documento_adjunto"));
+                d.setId_document(rs.getString("id_document"));
+                d.setId_contrato(rs.getString("id_contrato"));
+                d.setId_dgp(rs.getString("id_dgp"));
+                list.add(d);
             }
         } catch (SQLException e) {
         } finally {

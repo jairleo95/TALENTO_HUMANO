@@ -303,6 +303,25 @@
                                                             </select> 
                                                         </label>
                                                     </section>
+                                                            <div class="row" >
+                                                        <section class="col col-6">
+                                                            <label class="select" id="titu">
+                                                                Motivo :<select name="MOTIVO" class="ant_policiales" required="" >
+                                                                    <option value="" >[SELECCIONE]</option>
+                                                                    <option value="1" selected="">Trabajdor Nuevo</option>
+                                                                    <option value="2">Renovación</option>
+                                                                </select>
+                                                            </label>
+
+                                                        </section>
+                                                        <section class="col col-2" style=" margin-top:2%;">
+                                                            <label class="toggle" id="titu" > MFL:
+                                                                <input type="checkbox" value="1"   name="MFL" name="checkbox-toggle" >
+                                                                <i data-swchon-text="SI" data-swchoff-text="NO"></i>
+                                                            </label>
+                                                        </section>
+                                                    </div>
+
                                                     <div class="row">
                                                         <section class="col col-6" >
                                                             <label class="input" id="titu">Fecha de Inicio :
@@ -430,37 +449,40 @@
                                                                         if (cs.getNo_banco().equals("2")) { %>
                                                                     <option >BCP</option>
                                                                     <%}
-                                                                       if (cs.getNo_banco().equals("3")) { %>
+                                                                        if (cs.getNo_banco().equals("3")) { %>
                                                                     <option >Otros</option>
                                                                     <% }%>
                                                                 </select>
                                                             </label>
                                                         </section>
-                                                                <%if( cs.getNo_banco_otros()!= null){%>
+                                                        <%if (cs.getNo_banco_otros() != null) {%>
                                                         <section class="col col-3">
-                                                             <label class="input" id="titu">Nombre Banco :
-                                                                 <input type="text" disabled="" value="<%=cs.getNo_banco_otros()%>"   />
-                                                             </label>
-                                                         </section>
-                                                             <%}if( cs.getNu_cuenta()!= null){%>
-                                                         <section class="col col-4">
-                                                             <label class="input" id="titu">Nro Cuenta :
-                                                                 <input type="text" disabled="" value="<%=cs.getNu_cuenta()%>"   />
-                                                             </label>
-                                                         </section>
-                                                              <%}if( cs.getNu_cuenta_banc()!= null){%>
-                                                         <section class="col col-4">
-                                                             <label class="input" id="titu">Nro Cuenta Bancaria:
-                                                                 <input type="text" disabled="" value="<%=cs.getNu_cuenta_banc() %>">
-                                                             </label>
-                                                         </section>
-                                                                 <%} if(cs.getEs_gem_nu_cuenta().equals("1")){%>
-                                                         <section class="col col-3" >
-                                                             <label class="checkbox" >
-                                                                 <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="1">
-                                                                 <i></i>Generar Nro de Cuenta Bancaria</label>
-                                                         </section>
-                                                           <%}%>
+                                                            <label class="input" id="titu">Nombre Banco :
+                                                                <input type="text" disabled="" value="<%=cs.getNo_banco_otros()%>"   />
+                                                            </label>
+                                                        </section>
+                                                        <%}
+                                                                 if (cs.getNu_cuenta() != null) {%>
+                                                        <section class="col col-4">
+                                                            <label class="input" id="titu">Nro Cuenta :
+                                                                <input type="text" disabled="" value="<%=cs.getNu_cuenta()%>"   />
+                                                            </label>
+                                                        </section>
+                                                        <%}
+                                                                  if (cs.getNu_cuenta_banc() != null) {%>
+                                                        <section class="col col-4">
+                                                            <label class="input" id="titu">Nro Cuenta Bancaria:
+                                                                <input type="text" disabled="" value="<%=cs.getNu_cuenta_banc()%>">
+                                                            </label>
+                                                        </section>
+                                                        <%}
+                                                                     if (cs.getEs_gem_nu_cuenta().equals("1")) {%>
+                                                        <section class="col col-3" >
+                                                            <label class="checkbox" >
+                                                                <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="1">
+                                                                <i></i>Generar Nro de Cuenta Bancaria</label>
+                                                        </section>
+                                                        <%}%>
                                                     </div>
 
 

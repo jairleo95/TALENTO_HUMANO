@@ -131,13 +131,8 @@
     <center>
         <form action="../../contrato" method="get">
             <%String idanno = request.getParameter("anno");
-                if (idanno == null) {%>
-
-            <div>   
-                <table class="table table-hover table-striped  table-responsive">
-                    <td> <strong>NO TIENE CONTRATO</strong> </td>
-                </table>
-            </div>
+                if (List_contra_x_idcto.size() == 0) {%>
+            <h3>Aun no se ha hecho Contrato.</h3>
             <%
             } else {%>
 
