@@ -551,7 +551,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 v.setDi_dom_a_d6(rs.getString("di_dom_a_d6"));
                 v.setNo_distrito(rs.getString("no_distrito"));
                 v.setNo_provincia(rs.getString("no_provincia"));
-                v.setNo_provincia(rs.getString("fe_sus"));
+                v.setFe_sus(rs.getString("fe_sus"));
                 v.setId_plantilla_contractual(rs.getString("id_plantilla_contractual"));
                 v.setFe_has(rs.getString("fe_has"));
                 v.setFe_des(rs.getString("fe_des"));

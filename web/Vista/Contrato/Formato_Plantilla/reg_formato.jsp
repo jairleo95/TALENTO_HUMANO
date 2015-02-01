@@ -208,7 +208,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     "[desde]": "<%=fechades%>",
                     "[hasta]": "<%=fechahas%>",
                     "[puesto]": "<%=n.getNo_puesto()%>",
-                    "[fe_actual]": "<%=fechasus%>",
+                    "[fe_suscripcion]": "<%=fechasus%>",
                     "[sueldo]": "<%=n.getCa_sueldo_total()%>",
                     "[horas]": "<%=n.getNu_horas_lab()%>",
                     "[cursos]": ""

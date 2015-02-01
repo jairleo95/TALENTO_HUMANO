@@ -17,7 +17,7 @@ public interface InterfacePlantillaContractualDAO {
     public List<Map<String,?>> List_PLantillas(String id_puesto);
     public List<Map<String,?>> List_PLanti_x_sel(String id_pu, String id_sec, String id_are, String id_dep,String id_dir);
     public List<Map<String,?>> List_PLant_x_sel(String id_pu, String id_sec, String id_are, String id_dep,String id_dir);
-    public void Crear_Plantilla(String no_pl);
+    public void Crear_Plantilla(String no_pl,String User_crea);
     public void Insertar_pertenencia(String id_plt_con,String dir,String dep,String area,String sec,String puesto,String id_user);
     public String Obt_no_arch();
     public String List_pl_con_x_id(String id_plan_con);

@@ -58,14 +58,14 @@ public class PlantillaContractualDAO implements InterfacePlantillaContractualDAO
     }
 
     @Override
-    public void Crear_Plantilla(String no_pl) {
+    public void Crear_Plantilla(String no_pl,String User_crea) {
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.cnn.conex.prepareCall("{CALL RHSP_INSERT_PLANTILLA( ?,?,?,?,?,?,?,? )} ");
             cst.setString(1, null);
             cst.setString(2, no_pl);
             cst.setString(3, null);
-            cst.setString(4, null);
+            cst.setString(4, User_crea.trim());
             cst.setString(5, null);
             cst.setString(6, null);
             cst.setString(7, null);

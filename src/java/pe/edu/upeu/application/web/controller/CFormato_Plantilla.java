@@ -139,7 +139,7 @@ public class CFormato_Plantilla extends HttpServlet {
                 String PUES = request.getParameter("id_pu_asig");
                 String ubicacion = "";
                 String no_pl = request.getParameter("no_pl");
-                pl.Crear_Plantilla(no_pl);
+                pl.Crear_Plantilla(no_pl,iduser);
                 String id_pl = pl.ob_id_pl_max();
                 pl.Insertar_pertenencia(id_pl, DIR, DEP, AREA, SEC, PUES, iduser);
                 String no_arch = pl.Obt_no_arch();
