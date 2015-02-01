@@ -161,14 +161,14 @@
 
 
                         <%if (d.getFe_modif() == null) {%>
-                        <tr><td class="text-info table-bordered">fecha Modificacion</td><td colspan="2" class="text-info table-bordered">Sin Modificaciones</td></tr>
+                        <tr><td class="text-info table-bordered">Fecha Modificacion</td><td colspan="2" class="text-info table-bordered">Sin Modificaciones</td></tr>
                             <%} else {%>
                         <tr><td class="text-info table-bordered">Fecha de Modificacion:</td><td colspan="2" class="text-info table-bordered"><%=d.getFe_modif()%></td></tr>
                             <%}%>
                         <%if (d.getFe_creacion()== null) {%>
                         <tr><td class="text-info table-bordered">fecha Creacion:</td><td colspan="2" class="text-info table-bordered">Sin Modificaciones</td></tr>
                             <%} else {%>
-                        <tr><td class="text-info table-bordered">Fecha de Creacion:</td><td colspan="2" class="text-info table-bordered"><%=d.getFe_modif()%></td></tr>
+                        <tr><td class="text-info table-bordered">Fecha de Creacion:</td><td colspan="2" class="text-info table-bordered"><%=d.getFe_creacion()%></td></tr>
                             <%}%>
                         <tr>
                             <%if (Cargar_cc_dgp.size() > 0) {
