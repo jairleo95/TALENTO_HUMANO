@@ -1478,7 +1478,7 @@
 
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text" class="form-control input-group-sm" name="APELLIDOS_NOMBRES_PADRE" placeholder="Apellidos y nombres del Padre" required="">
+                                                                            <input type="text" class="form-control input-group-sm" name="APELLIDOS_NOMBRES_PADRE" placeholder="Apellidos y nombres del Padre" required="" maxlength="50">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1488,7 +1488,7 @@
 
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text"  class="form-control input-group-sm" name="APELLIDOS_NOMBRES_MADRE" placeholder="Apellidos y nombre del Madre" required="">
+                                                                            <input type="text"  class="form-control input-group-sm" name="APELLIDOS_NOMBRES_MADRE" placeholder="Apellidos y nombre del Madre" required="" maxlength="50">
                                                                         </div>
                                                                     </div>
                                                                 </div>

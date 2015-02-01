@@ -326,38 +326,34 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         $(".id_pc").val($(".id_plantilla" + $(this).val()).val());
                     });
                     $(".btn-Desac_pl").click(function() {
-                        var r = jQuery(confirm("Esta seguro de Modificar"));
-                        if (r === true) {
-                        } else {
-                            var idpp = $(".idplpu" + $(this).val()).val();
-                            var opc = "Desactivar_pp";
-                            Desac_Plantilla(idpp, opc);
-                            Listar_Plantilla();
-                        }
+
+                        var idpp = $(".idplpu" + $(this).val()).val();
+                        var opc = "Desactivar_pp";
+                        Desac_Plantilla(idpp, opc);
+
                     });
                     $(".btn-Activ_pl").click(function() {
-                        var r = jQuery(confirm("Esta seguro de Modificar",false));
-                        if (r == true) {
-                        } else {
-                            var idpp = $(".idplpu" + $(this).val()).val();
-                            var opc = "activar_pp";
-                            Activar_Plantilla(idpp, opc);
-                            Listar_Plantilla();
-                        }
-                       /* var person = jQuery(prompt("Please enter your name", ""));
-                        if (person != null) {
-                            document.getElementById("demo").innerHTML =
-                                    "Hello " + person + "! How are you today?";
-                        }*/
+
+                        var idpp = $(".idplpu" + $(this).val()).val();
+                        var opc = "activar_pp";
+                        Activar_Plantilla(idpp, opc);
+                        /* var person = jQuery(prompt("Please enter your name", ""));
+                         if (person != null) {
+                         document.getElementById("demo").innerHTML =
+                         "Hello " + person + "! How are you today?";
+                         }*/
                     });
                 });
             }
             function Activar_Plantilla(id_pp, opc) {
                 $.post("../../../formato_plantilla", "opc=" + opc + "&id_pp=" + id_pp, function() {
+                    Listar_Plantilla();
                 });
             }
             function Desac_Plantilla(id_pp, opc) {
-                $.post("../../../formato_plantilla", "opc=" + opc + "&id_pp=" + id_pp);
+                $.post("../../../formato_plantilla", "opc=" + opc + "&id_pp=" + id_pp, function() {
+                    Listar_Plantilla();
+                });
             }
             function  lis_sel(d, valor, opc) {
 
@@ -580,8 +576,12 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             <h3>EDITAR PLANTILLAS</h3>
 
             <br><strong>NOMBRE PLANTILLA</strong><br>
-            <input type="text" class="nombre_pl form-control" name="no_pl" ><br><br>
+
+
+            <button type="submit" value="Asignar" onclick="leer();" name="opc">Asignar Plantilla</button>
             <button  onclick="procesar_texto();" type="button">Procesar </button>
+            <form>
+            <input type="text" class="nombre_pl form-control" name="no_pl" ><br><br>
             <textarea cols="100" id="editor1" name="editor1" rows="10">
             </textarea>
             <script>
@@ -607,7 +607,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 <input  type="hidden" name="id" value="" class="id_pl"/>
                 <input  type="hidden" name="id_pc" value="" class="id_pc"/>
                 <button type="submit" value="Actualizar" onclick="leer();" name="opc">Actualizar Plantilla</button>
-                <button type="submit" value="Asignar" onclick="leer();" name="opc">Asignar Plantilla</button>
                 <button type="submit" value="Crear_Plantilla" name="opc" onclick="leer();">Crear Plantilla</button>
             </div>
         </form>

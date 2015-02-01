@@ -107,6 +107,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(70, ID_CONYUGUE);
             cst.execute();
         } catch (SQLException ex) {
+              throw new RuntimeException(ex.getMessage());
         } catch (ParseException ex) {
             Logger.getLogger(TrabajadorDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

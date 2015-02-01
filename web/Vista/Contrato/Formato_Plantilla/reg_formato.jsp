@@ -28,7 +28,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         <link href="../../../HTML_version/js/plugin/ckeditor/samples/sample.css" rel="stylesheet">
         <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
         <%
-        String no_arch =request.getParameter("no_arch ");
+        String no_arch =request.getParameter("no_arc");
         if(no_arch !=null){
             for (int i = 0; i < List_contra_x_idcto.size(); i++) {
                 X_List_Id_Contrato_DGP n = new X_List_Id_Contrato_DGP();
