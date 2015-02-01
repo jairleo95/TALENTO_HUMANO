@@ -100,7 +100,11 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(63, AP_NOMBRES_MADRE);
             cst.setString(64, ES_TRABAJA_UPEU_C);
             cst.setString(65, AP_NOMBRES_C);
+            if(FE_NAC_C != null ){
             cst.setString(66, c.convertFecha(FE_NAC_C));
+            }else{
+            cst.setString(66, FE_NAC_C);
+            }
             cst.setString(67, ID_TIPO_DOC_C);
             cst.setString(68, NU_DOC_C);
             cst.setString(69, LI_INSCRIPCION_VIG_ESSALUD_C);

@@ -365,7 +365,7 @@
                                                     </div>
 
                                                     <%String es_cue_sue = request.getParameter("es_cs");%>
-                                                    <input type="text" name="ESTADO" value="<%=es_cue_sue%>">
+                                                    <input type="hidden" name="ESTADO" value="<%=es_cue_sue%>">
                                                     <%if (es_cue_sue.equals("0")) {%>
 
                                                     <input type="hidden" name="ES_CUENTA_SUELDO" value="1" />
