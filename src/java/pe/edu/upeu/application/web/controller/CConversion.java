@@ -17,14 +17,14 @@ public class CConversion {
 
     public String convertFecha(String fecha) throws ParseException {
         String f[] = fecha.split("-");
-        if (System.getProperty("sun.desktop").trim().equals("windows")) {
+     /*   if (System.getProperty("sun.desktop").trim().equals("windows")) {
             return f[2] + "/" + f[1] + "/" + f[0];
-        } else {
+        } else {*/
 
             Date date = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
             String fecha_convertida = new SimpleDateFormat("dd-MMM-yy").format(date);
             return fecha_convertida.toUpperCase();
-        }
+       // }
 
     }
 
