@@ -272,7 +272,7 @@ public class CDgp extends HttpServlet {
             int num_ad = doc.List_Adventista(ID_TRABAJADOR);
             getServletContext().setAttribute("List_Hijos", doc.List_Hijos(ID_TRABAJADOR));
             getServletContext().setAttribute("List_Conyugue", doc.List_Conyugue(ID_TRABAJADOR));
-
+            
             response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&pro=pr_dgp");
             // response.sendRedirect("Vista/Dgp/Horario/Reg_Horario.jsp?iddgp=" + iddgp + "&idtr=" + ID_TRABAJADOR + "&opc=rd");
 
@@ -311,7 +311,9 @@ public class CDgp extends HttpServlet {
             getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
             getServletContext().setAttribute("List_Puesto", pu.List_Puesto_Dep(iddep));
             getServletContext().setAttribute("Listar_Trabajador_id", tr.ListaridTrabajador(idtr));
-            response.sendRedirect("Vista/Dgp/Reg_Dgp.jsp?idreq=" + idreq + "&es_cs=" + ES_CUENTA_SUELDO);
+            getServletContext().setAttribute("list_Cuenta_Sueldo", dgp.LIST_CUEN_SUEL(idtr));
+
+response.sendRedirect("Vista/Dgp/Reg_Dgp.jsp?idreq=" + idreq + "&es_cs=" + ES_CUENTA_SUELDO);
         }
         if (opc.equals("Reg_renuncia")) {
             String iddeph = request.getParameter("idep");
