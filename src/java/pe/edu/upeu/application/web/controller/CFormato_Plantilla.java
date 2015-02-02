@@ -89,7 +89,6 @@ public class CFormato_Plantilla extends HttpServlet {
                     FileWriter escribir = new FileWriter(archivo);
                     escribir.write(texto_html);
                     escribir.close();
-                    out.print(ubicacion);
                 }
                 response.sendRedirect("Vista/Contrato/Formato_Plantilla/Reg_Formato_Plantilla.jsp");
             }
