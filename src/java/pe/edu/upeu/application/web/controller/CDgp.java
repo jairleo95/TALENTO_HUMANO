@@ -249,8 +249,11 @@ public class CDgp extends HttpServlet {
 
             String ES_DETALLE_HORARIO = "1";
             String ES_HORARIO = "1";
+            String ID_TIPO_HORARIO = request.getParameter("HORARIO");
+            String ES_MOD_FORMATO = "1";
 
-            IHor.Insert_Detalle_Horario(ID_DETALLE_HORARIO, iddgp, ES_DETALLE_HORARIO, iduser, null, null, null);
+            
+            IHor.Insert_Detalle_Horario(ID_DETALLE_HORARIO, iddgp, ES_DETALLE_HORARIO, iduser, null, null, null,ID_TIPO_HORARIO,ES_MOD_FORMATO);
 
             ID_DETALLE_HORARIO = IHor.Max_id_Detalle_Horario();
 
