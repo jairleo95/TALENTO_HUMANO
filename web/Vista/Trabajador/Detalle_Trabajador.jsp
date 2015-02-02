@@ -149,7 +149,7 @@
             if (request.getParameter("a").equals("t")) {
     %>
 
-    <body onload="alerta_dt_ingresados()">
+    <body onload="closedthis();">
 
         <%
             }
@@ -176,9 +176,7 @@
             String nropaso = request.getParameter("np");
 
         %>
-        <script type="text/javascript">
-            // alerta_dt_ingresados();
-        </script>
+
 
         <!--Begin Detalle Trabajador-->
         <div   class="titulo" style=" width:100%;">Detalle del Trabajador</div> 
@@ -635,6 +633,7 @@
                 });
 
 
+
                 /*
                  * Smart Notifications
                  */
@@ -742,11 +741,11 @@
 
                 function closedthis() {
                     $.smallBox({
-                        title: "Great! You just closed that last alert!",
-                        content: "This message will be gone in 5 seconds!",
+                        title: "¡Ficha de trabajador registrada correctamente!",
+                        content: "ya puede visualizar toda la informacion del trabajador...",
                         color: "#739E73",
-                        iconSmall: "fa fa-cloud",
-                        timeout: 5000
+                        iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                        timeout: 6000
                     });
                 }
 

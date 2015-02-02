@@ -67,10 +67,10 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <style type="text/css">
             *, *:after, *:before {
-                margin: 0;
+            /*    margin: 0;
                 padding: 0;
                 box-sizing: border-box;
-                font-family: "Open Sans";
+                font-family: "Open Sans";*/
             }
 
 
