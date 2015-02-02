@@ -27,7 +27,7 @@ public class FuncionDAO implements InterfaceFuncionDAO{
     @Override
     public List<Funciones> Listar_funciones() {
          this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT f.ID_FUNCION,f.DE_FUNCION,f.ES_FUNCION,f.US_CREACION,f.FE_CREACION,f.US_MODIF,f.FE_MODIF,f.ID_PUESTO,p.NO_PUESTO FROM RHTD_FUNCION f, RHTR_PUESTO p where f.ID_PUESTO=p.ID_PUESTO ";
+        String sql = "SELECT f.ID_FUNCION,f.DE_FUNCION,f.ES_FUNCION,f.US_CREACION,f.FE_CREACION,f.US_MODIF,f.FE_MODIF,f.ID_PUESTO,p.NO_PUESTO FROM RHTD_FUNCION f LEFT OUTER JOIN RHTR_PUESTO p ON( p.ID_PUESTO = f.ID_PUESTO)";
         List<Funciones> Lista = new ArrayList<Funciones>();
         try {
             ResultSet rs = this.cnn.query(sql);

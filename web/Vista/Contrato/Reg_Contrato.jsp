@@ -179,10 +179,13 @@
                                         </section >
                                         <section class="col col-1" style=" margin-top:2%;">
                                             <label class="toggle" id="titulo" > MFL:
-                                                <input type="checkbox" value="0" name="checkbox-toggle" disabled="" >
-                                                <%if (d.getEs_mfl().trim().equals("1")) {%>
+                                                 <%if (d.getEs_mfl().trim().equals("1")) {%>
+                                                 <input type="checkbox" name="checkbox-toggle" disabled="" checked="" >
+                                                 <%}else{%>
+                                                 <input type="checkbox" name="checkbox-toggle" disabled=""  >
+                                                  <%}%>
                                                 <i data-swchoff-text="NO"  data-swchon-text="SI"></i>       
-                                                 <%}%>
+                                                
                                             </label>
                                         </section>
                                     </div>

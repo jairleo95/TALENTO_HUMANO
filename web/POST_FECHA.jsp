@@ -152,8 +152,8 @@
                 <span class="new-title">xx</span>
             </div>
         </div>
-
-
+<%String direccion_raiz = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11);%>
+<%out.print(direccion_raiz);%>
     </body>
     <script type="text/javascript">
         var i = 1;
