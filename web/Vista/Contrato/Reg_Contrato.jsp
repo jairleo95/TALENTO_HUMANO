@@ -212,12 +212,12 @@
 
                                         <input type="hidden" name="IDDETALLE_DGP" value="<%=d.getId_dgp()%>" class="text-box" id="id_dgp" >                               <section class="col col-2">
                                             <label class="input" id="titulo">Desde: 
-                                                <input type="date" name="FEC_DESDE" value="<%=d.getFe_desde()%>" class=" input-group-sm" required="">
+                                                <input type="date" name="FEC_DESDE" value="<%=c.convertFecha3(d.getFe_desde())%>" class=" input-group-sm" required="">
                                             </label>
                                         </section>
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Hasta: 
-                                                <input type="date" name="FEC_HASTA" value="<%=d.getFe_hasta()%>" class="input-group-sm" required="">
+                                                <input type="date" name="FEC_HASTA" value="<%=c.convertFecha3(d.getFe_hasta())%>" class="input-group-sm" required="">
                                             </label>
                                         </section>
                                         <section class="col col-3" id="titulo">

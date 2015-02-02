@@ -34,7 +34,7 @@ public class CConversion {
     }
 
     public String convertFecha3(String fecha) {
-        String f[] = fecha.split("/");
+        String f[] = fecha.split("-");
         return f[2] + "-" + f[1] + "-" + f[0];
     }
     public String convertFecha4(String fecha) {

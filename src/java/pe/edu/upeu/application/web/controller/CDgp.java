@@ -394,8 +394,20 @@ response.sendRedirect("Vista/Dgp/Reg_Dgp.jsp?idreq=" + idreq + "&es_cs=" + ES_CU
 
                 } else if (num == 0 & idrol.trim().equals("ROL-0006") & dgp.LIST_ID_DGP(ID_DGP).get(0).getEs_dgp().equals("1")) {
                     String ida1 = anno.List_Anno_Max_Cont(idtr);
+                     
+                    String id_cto = con.Contrato_max(idtr);
+                    getServletContext().setAttribute("List_Anno_trabajador", anno.List_Anno_trabajador(idtr));
+                    getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(idtr));
+                    getServletContext().setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_cto));
+                    getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
+                    //getServletContext().setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
+                    getServletContext().setAttribute("List_Usuario", usu.List_Usuario());
+                    getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
+                    getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
+                    getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
+                    response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1 + "&idtr=" + idtr + "&id_cto=" + id_cto);
 
-                    getServletContext().setAttribute("List_id_Contrato_DGP", con.List_id_Contrato_DGP(idtr, ida1));
+                    /*getServletContext().setAttribute("List_id_Contrato_DGP", con.List_id_Contrato_DGP(idtr, ida1));
                     getServletContext().setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr));
                     getServletContext().setAttribute("List_Jefe", l.List_Jefe());
                     getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
@@ -409,7 +421,7 @@ response.sendRedirect("Vista/Dgp/Reg_Dgp.jsp?idreq=" + idreq + "&es_cs=" + ES_CU
                     getServletContext().setAttribute("List_modalidad", con.List_modalidad());
                     getServletContext().setAttribute("Listar_Sub_mo", sub.Listar_Sub_mo());
                     getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
-                    response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp?ida1=" + ida1);
+                    response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp?ida1=" + ida1);*/
                 } else {
 
                     //String idtr = request.getParameter("idtr");
@@ -424,8 +436,6 @@ response.sendRedirect("Vista/Dgp/Reg_Dgp.jsp?idreq=" + idreq + "&es_cs=" + ES_CU
                     getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
                     getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
                     getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
-                    //out.print(con.List_contra_x_idcto(id_cto).size());
-
                     response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1 + "&idtr=" + idtr + "&id_cto=" + id_cto);
                 }
 
