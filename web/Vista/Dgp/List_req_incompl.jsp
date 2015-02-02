@@ -149,7 +149,9 @@
 
                                                                 <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=User_Aut">Requerimientos</a></li>
                                                                 <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=Seguimiento">Horario</a> </li>
-                                                                <li><a href="../../documento?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Ver_Documento">Documentos</a></li> 
+                                                                <li><a href="../../documento?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=
+                                                                       
+                                                                       ">Documentos</a></li> 
                                                                
                                                                 <li class="divider"></li>
                                                                 <li>
