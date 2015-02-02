@@ -636,7 +636,7 @@
                                                         <label class="label" id="titu">Tipo de Horario :</label>
                                                         <label class="select">
 
-                                                            <select id="horario" required="" >
+                                                            <select id="horario" required="" name="HORARIO" >
                                                                 <option value="">[SELECCIONE]</option>
                                                                 <option value="0">Editable</option>
 
