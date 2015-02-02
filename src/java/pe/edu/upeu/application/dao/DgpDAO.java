@@ -737,8 +737,8 @@ public class DgpDAO implements InterfaceDgpDAO {
                     if (rs.getString("es_autorizacion").equals("2")) {
                         cadena = cadena
                                 + " <span class=\"new-bar done\"></span> "
-                                + "<div class=\"new-circle done\" rel=\"popover-hover\" data-placement=\"top\" data-original-title=\"Detalle de Proceso\" data-content=\"" + rs.getString("nu_pasos") + " | " + rs.getString("de_pasos") + " \" data-html=\"true\">"
-                                + "<span class=\"new-label\">X</span>"
+                                + "<div  class=\"new-circle rechazo\" rel=\"popover-hover\" data-placement=\"top\" data-original-title=\"Detalle de Proceso\" data-content=\"" + rs.getString("nu_pasos") + " | " + rs.getString("de_pasos") + " \" data-html=\"true\">"
+                                + "<span style='color:white; font:bold;' class=\"new-label fa fa-warning\"></span>"
                                 + "<span class=\"new-title\">" + rs.getString("nu_pasos") + "</span>"
                                 + " </div>";
 

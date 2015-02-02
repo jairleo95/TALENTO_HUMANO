@@ -120,6 +120,11 @@
             .new-progress .new-bar.done,
             .new-progress .new-circle.done {
                 background: #eee;
+                color:black;
+            }
+            .new-progress .new-circle.rechazo {
+                background: #a90329;
+                 color: #b5b5ba;
             }
             .new-progress .new-bar.active {
                 background: linear-gradient(to right, #EEE 40%, #FFF 60%);
@@ -130,7 +135,7 @@
                 box-shadow: inset 0 0 2px rgba(0,0,0,.2);
             }
             .new-progress .new-circle.done .new-title {
-                color: #444;
+                color: #b5b5ba;
             }
             .new-progress .new-circle.active .new-label {
                 color: #FFF;
@@ -138,7 +143,7 @@
                 box-shadow: inset 0 0 2px rgba(0,0,0,.2);
             }
             .new-progress .new-circle.active .new-title {
-                color: #0c95be;
+                color: black;
             }
             .new-progress .new-circle.done .new-label:hover, .new-circle:hover{
 
@@ -203,6 +208,8 @@
                                                     <th><i class="fa fa-fw fa-building text-muted hidden-md hidden-sm hidden-xs"></i> Acciones</th>
                                                    
                                                     <th>Nombre</th>
+                                                    <th>Proceso</th>
+                                                    <th>Estado</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -236,36 +243,44 @@
                                                 </td> 
                                                 <% if (r.getAr_foto() == null) {%>
                                                 <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30">
-                                                    <a style="margin-left: 3%;" href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a><%if (r.getEs_dgp().equals("2")) {
+                                                    <a style="margin-left: 3%;" href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> 
+                                          
+                                                        <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a>
+
+                                                    
+                                                    <input type="hidden" class="num_aut<%=(i + 1)%>" value="<%=r.getAut_actual()%>"/>
+
+                                                </td>
+                                                <td><div class="new-progress prog_aut<%=(i + 1)%>"  >
+                                                        <%
+                                                            out.println(d.Imprimir_det_proceso(r.getId_dgp(), r.getId_detalle_req_proceso()));
+                                                        %>
+                                                    </div></td>
+                                                    <td><%if (r.getEs_dgp().equals("2")) {
                                                             out.print(" <span class='label label-danger'>Fuera de Proceso</span>");
                                                         } else {
                                                             out.print(" <span class='label label-primary'>En Proceso</span>");
-                                                        }%>
+                                                        }%></td>
+                                                <% } else {%>
+                                                <td><img src="../Usuario/Fotos/<%=r.getAr_foto()%>"  width="30"  height="30"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> 
+                                    
+                                                        <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a> 
 
-                                                    <div class="new-progress prog_aut<%=(i + 1)%>"  >
+
+                                                   
+
+                                                    <input type="hidden" class="num_aut<%=(i + 1)%>" value="<%=r.getAut_actual()%>"/>
+                                                </td>
+                                                <td><div class="new-progress prog_aut<%=(i + 1)%>"  >
                                                         <%
                                                             out.println(d.Imprimir_det_proceso(r.getId_dgp(), r.getId_detalle_req_proceso()));
                                                         %>
-                                                    </div>
-                                                    <input type="hidden" class="num_aut<%=(i + 1)%>" value="<%=r.getAut_actual()%>"/>
-
-                                                </td>
-                                                <% } else {%>
-                                                <td><img src="../Usuario/Fotos/<%=r.getAr_foto()%>"  width="30"  height="30"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a> <%if (r.getEs_dgp().equals("2")) {
+                                                    </div></td>
+                                                    <td>  <%if (r.getEs_dgp().equals("2")) {
                                                         out.print(" <span class='label label-danger'>Fuera de Proceso</span>");
                                                     } else {
                                                         out.print(" <span class='label label-primary'>En Proceso</span>");
-                                                    }%>
-
-
-                                                    <div class="new-progress prog_aut<%=(i + 1)%>" >
-                                                        <%
-                                                            out.println(d.Imprimir_det_proceso(r.getId_dgp(), r.getId_detalle_req_proceso()));
-                                                        %>
-                                                    </div>
-
-                                                    <input type="hidden" class="num_aut<%=(i + 1)%>" value="<%=r.getAut_actual()%>"/>
-                                                </td>
+                                                    }%></td>
                                                 <% }%>
                                             </tr>
                                             <% }
