@@ -35,13 +35,13 @@
         <script src="../../js/modernizr.custom.js"></script>
 
         <!-- Estilos plantilla-->
-        <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
 
 
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
-        <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/smartadmin-production.min.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/smartadmin-skins.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
 
         <!-- SmartAdmin RTL Support is under construction
                  This RTL CSS will be released in version 1.5
@@ -52,30 +52,30 @@
         <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
 
         <!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
-        <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/demo.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/demo.min.css">
 
         <!-- FAVICONS -->
-        <link rel="shortcut icon" href="../../HTML_version/img/favicon/favicon.ico" type="image/x-icon">
-        <link rel="icon" href="../../HTML_version/img/favicon/favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="../../img/favicon/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="../../img/favicon/favicon.ico" type="image/x-icon">
 
         <!-- GOOGLE FONT -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
 
         <!-- Specifying a Webpage Icon for Web Clip 
                  Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
-        <link rel="apple-touch-icon" href="../../HTML_version/img/splash/sptouch-icon-iphone.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="../../HTML_version/img/splash/touch-icon-ipad.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="../../HTML_version/img/splash/touch-icon-iphone-retina.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="../../HTML_version/img/splash/touch-icon-ipad-retina.png">
+        <link rel="apple-touch-icon" href="../../img/splash/sptouch-icon-iphone.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../img/splash/touch-icon-ipad.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../img/splash/touch-icon-iphone-retina.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../img/splash/touch-icon-ipad-retina.png">
 
         <!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
         <!-- Startup image for web apps -->
-        <link rel="apple-touch-startup-image" href="../../HTML_version/img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
-        <link rel="apple-touch-startup-image" href="../../HTML_version/img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
-        <link rel="apple-touch-startup-image" href="../../HTML_version/img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+        <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+        <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+        <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
 
         <style type="text/css">
             body{
@@ -149,7 +149,7 @@
             if (request.getParameter("a").equals("t")) {
     %>
 
-    <body onload="alerta_dt_ingresados()">
+    <body onload="closedthis();">
 
         <%
             }
@@ -176,9 +176,7 @@
             String nropaso = request.getParameter("np");
 
         %>
-        <script type="text/javascript">
-            // alerta_dt_ingresados();
-        </script>
+
 
         <!--Begin Detalle Trabajador-->
         <div   class="titulo" style=" width:100%;">Detalle del Trabajador</div> 
@@ -419,7 +417,7 @@
                         if (vnc > 0) {
 
                 %>
-                <form class="form" action="../../autorizacion" method="post" > 
+                <form class="form-aut" action="../../autorizacion" method="post" > 
                     <table > 
                         <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
                         <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
@@ -428,7 +426,7 @@
                         <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
                         <input type="hidden" name="IDPASOS" value="<%=id_pasos%>"   >
                         <tr><td><input type="hidden" name="opc"  class="submit" value="Aceptar"/></td></tr>
-                        <button class="btn btn-labeled btn-success" type="submit">
+                        <button class="btn btn-labeled btn-success btn-autor" type="submit">
                             <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>PROCESAR 
                         </button>
                     </table>
@@ -443,7 +441,7 @@
 
                 %>
 
-                <form class="form" action="../../autorizacion" method="post" > 
+                <form class="form-aut" action="../../autorizacion" method="post" > 
                     <table > 
                         <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
                         <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
@@ -452,14 +450,14 @@
                         <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
                         <input type="hidden" name="IDPASOS" value="<%=id_pasos%>"   >
                         <tr><td><input type="hidden" name="opc"  class="submit" value="Aceptar"/></td></tr>
-                        <button class="btn btn-labeled btn-success" type="submit">
+                        <button class="btn btn-labeled btn-success btn-autor" type="submit">
                             <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>ENVIAR 
                         </button>
                     </table>
                 </form>
                 <%}
                 } else {%>
-                <form class="form" action="../../autorizacion" method="post" > 
+                <form class="form-aut" action="../../autorizacion" method="post" > 
                     <table > 
                         <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
                         <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
@@ -468,15 +466,16 @@
                         <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
                         <input type="hidden" name="IDPASOS" value="<%=id_pasos%>"   >
                         <tr><td><input type="hidden" name="opc"  class="submit" value="Aceptar"/></td></tr>
-                        <button class="btn btn-labeled btn-success" type="submit">
+                        <button class="btn btn-labeled btn-success btn-autor" type="submit">
                             <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>AUTORIZAR REQUERIMIENTO 
                         </button>
+
                     </table>
                 </form>
 
                 <%}
                     }%>
-                <form action="../../autorizacion" method="post">
+                <form class="form-rech" action="../../autorizacion" method="post">
                     <table>
                         <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
                         <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
@@ -485,7 +484,7 @@
                         <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
                         <input type="hidden" name="IDPASOS" value="<%=id_pasos%>" 
                                <tr><td><input type="hidden" name="opc"  class="submit" value="Rechazar"/></td></tr>
-                        <button class="btn btn-labeled btn-danger" type="submit">
+                        <button class="btn btn-labeled btn-danger btn-rech" type="submit">
                             <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span>RECHAZAR 
                         </button>
                     </table>
@@ -495,6 +494,45 @@
                 }
             %>
         </div>
+        <script>
+            $(document).ready(function () {
+
+                $(".btn-autor").click(function (e) {
+                    $.SmartMessageBox({
+                        title: "Alerta de Confirmación!",
+                        content: "¿Esta totalmente seguro de autorizar este requerimiento?",
+                        buttons: '[No][Yes]'
+                    }, function (ButtonPressed) {
+                        if (ButtonPressed === "Yes") {
+                            // return true;
+                            $(".form-aut").submit();
+                        }
+                        if (ButtonPressed === "No") {
+                            return false;
+                        }
+
+                    });
+                    e.preventDefault();
+                });
+                $(".btn-rech").click(function (e) {
+                    $.SmartMessageBox({
+                        title: "Alerta de Confirmación!",
+                        content: "¿Esta totalmente seguro de rechazar este requerimiento?",
+                        buttons: '[No][Yes]'
+                    }, function (ButtonPressed) {
+                        if (ButtonPressed === "Yes") {
+                            $(".form-rech").submit();
+                        }
+                        if (ButtonPressed === "No") {
+                            return false;
+                        }
+
+                    });
+                    e.preventDefault();
+                });
+
+            });
+        </script>
 
         <script src="../../js/JQuery/jQuery.js"></script>
         <script src="../../js/Js_dlmenu/jquery.dlmenu.js"></script>
@@ -507,43 +545,43 @@
         </script>
 
         <!-- IMPORTANT: APP CONFIG -->
-        <script src="../../HTML_version/js/app.config.js"></script>
+        <script src="../../js/app.config.js"></script>
 
         <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
-        <script src="../../HTML_version/js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
+        <script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
 
         <!-- BOOTSTRAP JS -->
-        <script src="../../HTML_version/js/bootstrap/bootstrap.min.js"></script>
+        <script src="../../js/bootstrap/bootstrap.min.js"></script>
 
         <!-- CUSTOM NOTIFICATION -->
-        <script src="../../HTML_version/js/notification/SmartNotification.min.js"></script>
+        <script src="../../js/notification/SmartNotification.min.js"></script>
 
         <!-- JARVIS WIDGETS -->
-        <script src="../../HTML_version/js/smartwidgets/jarvis.widget.min.js"></script>
+        <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
 
         <!-- EASY PIE CHARTS -->
-        <script src="../../HTML_version/js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+        <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
 
         <!-- SPARKLINES -->
-        <script src="../../HTML_version/js/plugin/sparkline/jquery.sparkline.min.js"></script>
+        <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
 
         <!-- JQUERY VALIDATE -->
-        <script src="../../HTML_version/js/plugin/jquery-validate/jquery.validate.min.js"></script>
+        <script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
 
         <!-- JQUERY MASKED INPUT -->
-        <script src="../../HTML_version/js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+        <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
 
         <!-- JQUERY SELECT2 INPUT -->
-        <script src="../../HTML_version/js/plugin/select2/select2.min.js"></script>
+        <script src="../../js/plugin/select2/select2.min.js"></script>
 
         <!-- JQUERY UI + Bootstrap Slider -->
-        <script src="../../HTML_version/js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+        <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
 
         <!-- browser msie issue fix -->
-        <script src="../../HTML_version/js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+        <script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
 
         <!-- FastClick: For mobile devices -->
-        <script src="../../HTML_version/js/plugin/fastclick/fastclick.min.js"></script>
+        <script src="../../js/plugin/fastclick/fastclick.min.js"></script>
 
         <!--[if IE 8]>
 
@@ -552,17 +590,17 @@
         <![endif]-->
 
         <!-- Demo purpose only -->
-        <script src="../../HTML_version/js/demo.min.js"></script>
+        <script src="../../js/demo.min.js"></script>
 
         <!-- MAIN APP JS FILE -->
-        <script src="../../HTML_version/js/app.min.js"></script>
+        <script src="../../js/app.min.js"></script>
 
         <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
         <!-- Voice command : plugin -->
-        <script src="../../HTML_version/js/speech/voicecommand.min.js"></script>
+        <script src="../../js/speech/voicecommand.min.js"></script>
 
         <!-- PAGE RELATED PLUGIN(S) -->
-        <script src="../../HTML_version/js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+        <script src="../../js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <script type="text/javascript">
 
@@ -571,6 +609,10 @@
             $(document).ready(function () {
 
                 pageSetUp();
+
+                $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+                    $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+                });
                 $("#cod_ap").numeric();
                 /*
                  * Autostart Carousel
@@ -589,6 +631,7 @@
                 $('.progress-bar').progressbar({
                     display_text: 'fill'
                 });
+
 
 
                 /*
@@ -698,11 +741,11 @@
 
                 function closedthis() {
                     $.smallBox({
-                        title: "Great! You just closed that last alert!",
-                        content: "This message will be gone in 5 seconds!",
+                        title: "¡Ficha de trabajador registrada correctamente!",
+                        content: "ya puede visualizar toda la informacion del trabajador...",
                         color: "#739E73",
-                        iconSmall: "fa fa-cloud",
-                        timeout: 5000
+                        iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                        timeout: 6000
                     });
                 }
 
