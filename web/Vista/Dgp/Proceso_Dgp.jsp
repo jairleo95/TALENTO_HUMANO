@@ -142,7 +142,7 @@
             }
             .new-progress .new-circle.done .new-label:hover, .new-circle:hover{
 
-                background-color:blue; 
+              //  background-color:blue; 
             }
 
         </style>
