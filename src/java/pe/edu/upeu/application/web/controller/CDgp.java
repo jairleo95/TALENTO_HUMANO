@@ -368,7 +368,7 @@ response.sendRedirect("Vista/Dgp/Reg_Dgp.jsp?idreq=" + idreq + "&es_cs=" + ES_CU
             String ID_DGP = request.getParameter("iddgp");
             String ID_TRABAJADOR = request.getParameter("idtr");
             getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(ID_DGP));
-            getServletContext().setAttribute("Cargar_cc_dgp", cc.Cargar_cc_dgp(ID_DGP));
+            getServletContext().setAttribute("Cargar_dcc_dgp", cc.Cargar_dcc_dgp(ID_DGP));
             int num = dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
             getServletContext().setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
 
@@ -520,7 +520,8 @@ response.sendRedirect("Vista/Dgp/Reg_Dgp.jsp?idreq=" + idreq + "&es_cs=" + ES_CU
         }
         if (opc.equals("Incompleto")) {
             getServletContext().setAttribute("List_Incomplet", dgp.List_Incomplet(iddep));
-            response.sendRedirect("Vista/Dgp/List_req_incompl.jsp");
+            out.print(iddep);
+            //response.sendRedirect("Vista/Dgp/List_req_incompl.jsp");
         }
 
         //} catch (Exception e) {
