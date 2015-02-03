@@ -8,6 +8,7 @@ package pe.edu.upeu.application.dao_imp;
 import java.util.List;
 import java.util.Map;
 import pe.edu.upeu.application.model.Centro_Costos;
+import pe.edu.upeu.application.model.Detalle_Centro_Costo;
 
 /**
  *
@@ -25,4 +26,5 @@ public interface InterfaceCentro_CostosDAO {
     public List<Centro_Costos> Lis_c_c_id_contr(String id_contrato);
     public List<Centro_Costos> Lis_c_c_id_dgp(String id_dgp);
     public  List<Map<String, ?>> Cargar_cc_dgp(String id_dgp);
+    public  List<Detalle_Centro_Costo> Cargar_dcc_dgp(String id_dgp);
 }
