@@ -90,6 +90,8 @@ public class CTrabajador extends HttpServlet {
                 getServletContext().setAttribute("Listar_via", dir.Listar_via());
                 getServletContext().setAttribute("Listar_zona", dir.Listar_zona());
                 getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
+                getServletContext().setAttribute("list_año", li.lista_años());
+                
                 response.sendRedirect("Vista/Trabajador/Reg_Trabajador.jsp");
             }
             if (opc.equals("Registrar")) {

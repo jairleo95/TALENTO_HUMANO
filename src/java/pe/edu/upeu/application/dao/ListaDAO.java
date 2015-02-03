@@ -123,7 +123,7 @@ public class ListaDAO implements InterfaceListaDAO {
             while (rs.next()) {
                 Auto_Mostrar am = new Auto_Mostrar();
                 am.setDi_url(rs.getString("di_url"));
-               // am.setId_auto_mostrar(rs.getString("id_auto_mostrar"));
+                // am.setId_auto_mostrar(rs.getString("id_auto_mostrar"));
                 //    am.setId_rol(rs.getString("id_rol"));
                 list.add(am);
             }
@@ -344,6 +344,28 @@ public class ListaDAO implements InterfaceListaDAO {
                 n.setNo_s_educativa(rs.getString("no_s_educativa"));
                 n.setEs_s_educativa(rs.getString("es_s_educativa"));
                 list.add(n);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return list;
+
+    }
+
+    @Override
+    public List<String> lista_años() {
+
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+
+        List<String> list = new ArrayList<String>();
+        try {
+
+            for (int i = 0; i < 50; i++) {
+                String sql = "select  to_number(to_char(sysdate,'yyyy')) - " + i + " from dual";
+                ResultSet rs = this.conn.query(sql);
+                rs.next();
+                list.add(rs.getString(1).trim());
             }
         } catch (SQLException e) {
         } finally {
