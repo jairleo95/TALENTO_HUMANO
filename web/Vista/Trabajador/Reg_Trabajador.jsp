@@ -260,7 +260,6 @@
                                     if (mmCumple.substr(0, 1) == 0) {
                                         mmCumple = mmCumple.substring(1, 2);
                                     }
-//retiramos el primer cero de la izquierda
                                     if (diaCumple.substr(0, 1) == 0) {
                                         diaCumple = diaCumple.substring(1, 2);
                                     }
@@ -269,10 +268,9 @@
                                     if ((mmActual < mmCumple) || (mmActual == mmCumple && diaActual < diaCumple)) {
                                         edad--;
                                     }
-
                                     $(".edad").text(edad + " años");
                                     if (edad < 18) {
-                                        $(".alerta-req").show();
+
                                     }
 
                                 }
@@ -429,11 +427,10 @@
                                                                 <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-child fa-lg fa-fw"></i></span>
-                                                                            <input type="date" name="FECHA_NAC" required=""  id="edad" placeholder="Fecha de Nacimiento" class="form-control input-group-sm" >
-                                                                            <p class="edad">
-                                                                            <div class="alerta-req" style="display: none;">Es un menor de edad</div>
-                                                                            </p>
+                                                                            <span class="input-group-addon"><i class="fa fa-child fa-lg fa-fw"></i><label class="edad"></label></span>
+
+                                                                            <input type="date" name="FECHA_NAC" required=""  id="edad" placeholder="Fecha de Nacimiento" class="form-control input-group-sm fecha" >
+
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -792,9 +789,9 @@
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
                                                                             <select    name="A_EGRESO"class="form-control input-group-sm" required="" >
-                                                                                 <option value="">[SELECCIONE]</option>
-                                                                               <% for(int jj=0;jj<list_año.size();jj++){%>
-                                                                               <option value="<%=list_año.get(jj)%>"><%=list_año.get(jj)%></option>
+                                                                                <option value="">[SELECCIONE]</option>
+                                                                                <% for (int jj = 0; jj < list_año.size(); jj++) {%>
+                                                                                <option value="<%=list_año.get(jj)%>"><%=list_año.get(jj)%></option>
                                                                                 <%}%>
                                                                             </select>
                                                                         </div>
@@ -1015,11 +1012,25 @@
                                                                 <script>
                                                                     $(document).ready(
                                                                             function () {
+
                                                                                 $("#no_cuen").hide();
                                                                                 $("#no_cuen_ban").hide();
                                                                                 $("#generar").hide();
                                                                                 $("#no_cuen_otros").hide();
                                                                                 //alert($("#es_cuenta").val());
+
+                                                                                $(".fecha").keyup(function () {
+
+                                                                                    /*var arr_date = $(this).val().split("-");
+                                                                                     if (arr_date[0].length > 4) {
+                                                                                     //return false;
+                                                                                     $(this).val("");
+                                                                                     $(".edad").val("");
+                                                                                     alert("fecha no valida");
+                                                                                     
+                                                                                     }*/
+
+                                                                                });
 
                                                                                 $("#banco").change(function () {
                                                                                     cuenta_bancaria($(this).val());
@@ -2060,7 +2071,6 @@
 
 
 
-                                                        //Bootstrap Wizard Validations
 
                                                         var $validator = $("#wizard-1").validate({
                                                             rules: {
@@ -2068,6 +2078,19 @@
                                                                     required: true,
                                                                     email: "Your email address must be in the format of name@domain.com"
                                                                 },
+                                                                FECHA_NAC: {
+                                                                    required: true,
+                                                                    val_fecha: true
+                                                                }
+                                                                ,
+                                                                FECHA_NAC_H: {
+                                                                    val_fecha: true
+                                                                }
+                                                                ,
+                                                                FECHA_NAC_CONYUGUE: {
+                                                                    val_fecha: true
+                                                                }
+                                                                ,
                                                                 fname: {
                                                                     required: true
                                                                 },
@@ -2117,6 +2140,10 @@
                                                                 }
                                                             }
                                                         });
+                                                        jQuery.validator.addMethod("val_fecha", function (value, element) {
+                                                            var d = value.split("-");
+                                                            return this.optional(element) || String(parseInt(d[0])).length == 4;
+                                                        }, "¡Fecha ingresada invalida!");
 
                                                         $('#bootstrap-wizard-1').bootstrapWizard({
                                                             'tabClass': 'form-wizard',

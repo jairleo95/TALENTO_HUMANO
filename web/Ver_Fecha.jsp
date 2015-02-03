@@ -36,8 +36,7 @@
                                 alert("fecha no valida");
                                 
                             }
-                            
-      //  $(".ver").text(arr_date[0].length);
+
                         });
 
 
