@@ -1,6 +1,6 @@
 <p style="text-align:center"><span style="font-size:11px"><strong>CONTRATO DE TRABAJO A PLAZO FIJO Y BAJO MODALIDAD</strong></span></p>
 
-<p style="text-align:justify"><span style="font-size:11px">Conste por el presente documento el contrato de trabajo a plazo fijo y sujeto a modalidad por Servicio Específico, conforme lo dispone el Art. 63  del T.U.O del D. Leg. 728, Ley de Productividad y Competitividad Laboral (D.S. Nº 003-97-TR), que celebran de una parte la <strong>UNIVERSIDAD PERUANA UNIÓN</strong>, con RUC Nº 20138122256, con domicilio en Villa Unión s/n, altura del Km. 19 de la carretera central, Ñaña, Lurigancho-Chosica, a quien se le denominará <strong>"EMPLEADOR"</strong>, representada por su Apoderado Mg. Julio Cesar Rengifo Peña, con DNI No. 06690086,; y de la otra parte [nombre][<u>app</u>][apm] , con DNI Nº[dni], domiciliado(a) en[dir], [prov], a quien se le denominará el (la) <strong>"TRABAJADOR?(A)</strong>, en los términos y condiciones siguientes:</span></p>
+<p style="text-align:justify"><span style="font-size:11px">Conste por el presente documento el contrato de trabajo a plazo fijo y sujeto a modalidad por Servicio Específico, conforme lo dispone el Art. 63  del T.U.O del D. Leg. 728, Ley de Productividad y Competitividad Laboral (D.S. Nº 003-97-TR), que celebran de una parte la <strong>UNIVERSIDAD PERUANA UNIÓN</strong>, con RUC Nº 20138122256, con domicilio en Villa Unión s/n, altura del Km. 19 de la carretera central, Ñaña, Lurigancho-Chosica, a quien se le denominará <strong>"EMPLEADOR"</strong>, representada por su Apoderado Mg. Julio Cesar Rengifo Peña, con DNI No. 06690086,; y de la otra parte [nombre][app][apm] , con DNI Nº[dni], domiciliado(a) en[dir], [prov], a quien se le denominará el (la) <strong>"TRABAJADOR?(A)</strong>, en los términos y condiciones siguientes:</span></p>
 
 <p style="text-align:justify"><span style="font-size:11px">PRIMERA: EL EMPLEADOR tiene por actividad principal la educación en todos sus niveles.</span></p>
 
@@ -22,7 +22,7 @@
 
 <p style="text-align:justify"><span style="font-size:11px">NOVENA: En todo lo no previsto en el presente contrato se aplicará la Ley vigente de nuestro país.</span></p>
 
-<p style="text-align:justify"><span style="font-size:11px">Estando de acuerdo en todo el contenido del presente contrato, firmamos en señal de conformidad, en Ñaña, Chosica, Lima, al [fe_actual].</span></p>
+<p style="text-align:justify"><span style="font-size:11px">Estando de acuerdo en todo el contenido del presente contrato, firmamos en señal de conformidad, en Ñaña, Chosica, Lima, al [fe_suscripcion].</span></p>
 
 <p style="text-align:justify">                       <img alt="" src="http://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Firma_Salvador_Allende.svg/800px-Firma_Salvador_Allende.svg.png" style="height:40px; position:absolute; width:131px" /></p>
 

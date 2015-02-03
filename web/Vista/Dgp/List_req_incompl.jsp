@@ -148,10 +148,8 @@
                                                             <ul class="dropdown-menu">
 
                                                                 <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=User_Aut">Requerimientos</a></li>
-                                                                <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=Seguimiento">Horario</a> </li>
-                                                                <li><a href="../../documento?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=
-                                                                       
-                                                                       ">Documentos</a></li> 
+                                                                <li><a href="../../horario?iddgp=<%=r.getId_dgp()%>&opc=Listar">Horario</a> </li>
+                                                                <li><a href="../../documento?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Listar_doc">Documentos</a></li> 
                                                                
                                                                 <li class="divider"></li>
                                                                 <li>
