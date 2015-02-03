@@ -5,13 +5,16 @@
  */
 
 package pe.edu.upeu.application.dao;
-
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pe.edu.upeu.application.dao_imp.InterfaceFuncionDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -34,7 +37,15 @@ public class FuncionDAO implements InterfaceFuncionDAO{
 
             while (rs.next()) {
                 Funciones x = new Funciones();
-                x.setId_fucion(rs.getString("ID_FUNCION"));
+                /*Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id_fu", rs.getString("ID_FUNCION"));
+                rec.put("es_fu", rs.getString("ES_FUNCION"));
+                rec.put("us_cr", rs.getString("US_CREACION"));
+                rec.put("fe_cr", rs.getString("FE_CREACION"));
+                rec.put("us_mo", rs.getString("US_MODIF"));
+                rec.put("fe_mo", rs.getString("FE_MODIF"));
+                rec.put("id_pu", rs.getString("ID_PUESTO"));
+                rec.put("no_fu", rs.getString("NO_PUESTO"));*/
                 x.setDe_funcion(rs.getString("DE_FUNCION"));
                 x.setEs_funcion(rs.getString("ES_FUNCION"));
                 x.setUs_creacion(rs.getString("US_CREACION"));
@@ -44,7 +55,9 @@ public class FuncionDAO implements InterfaceFuncionDAO{
                 x.setId_puesto(rs.getString("ID_PUESTO"));
                 x.setNo_puesto(rs.getString("NO_PUESTO"));
                 Lista.add(x);
+                //Lista.add(rec);
             }
+            rs.close();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } finally {
@@ -81,5 +94,22 @@ public class FuncionDAO implements InterfaceFuncionDAO{
             }
         }
         return Lista;
+    }
+
+    @Override
+    public void Insertar_funcion(String id_pu, String de_fu, String user_crea) {
+         try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.cnn.conex.prepareCall("{CALL RHSP_INSERT_FUNCION( ?, ?, ?)}");
+            cst.setString(1, id_pu.trim());
+            cst.setString(2, de_fu.trim());
+            cst.setString(3, user_crea.trim());
+            cst.execute();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }  finally {
+            this.cnn.close();
+        }
     }
 }

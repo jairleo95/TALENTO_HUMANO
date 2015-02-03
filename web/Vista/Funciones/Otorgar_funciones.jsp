@@ -19,36 +19,34 @@
     </head>
     <body>
         <div class="contenido">
-            <form class="form">
-                <label>Puestos</label><br>
-                <select class="idpu text-box chosen-select">
-                    <% for (int i = 0; i < List_Puesto.size(); i++) {
-                            Puesto p = new Puesto();
-                            p = (Puesto) List_Puesto.get(i);
-                    %>
-                    <option value="<%=p.getId_puesto()%>"><%=p.getNo_puesto()%></option>
-                    <%}%>
-                </select><br>
-                <label>Funciones</label><br>
-                <select class="text-box chosen-select">
-                    <%for (int i = 0; i < Listar_funciones.size(); i++) {
-                            Funciones f = new Funciones();
-                            f = (Funciones) Listar_funciones.get(i);
-                    %>
-                    <option class="optlist" value="<%=f.getId_fucion()%>"><%=f.getDe_funcion()%></option>
-                    <%}%>
-                </select><br>
-                <input type="submit" name="opc"  class="submit" value="Otorgar Funcion">
-            </form>
+            <label>Puestos</label><br>
+            <select class="idpu text-box chosen-select">
+                <% for (int i = 0; i < List_Puesto.size(); i++) {
+                        Puesto p = new Puesto();
+                        p = (Puesto) List_Puesto.get(i);
+                %>
+                <option value="<%=p.getId_puesto()%>"><%=p.getNo_puesto()%></option>
+                <%}%>
+            </select><br>
+            <label>Funciones</label><br>
+            <select class="ifun text-box chosen-select">
+                <%for (int i = 0; i < Listar_funciones.size(); i++) {
+                        Funciones f = new Funciones();
+                        f = (Funciones) Listar_funciones.get(i);
+                %>
+                <option class="optlist" value="<%=f.getDe_funcion()%>"><%=f.getDe_funcion()%></option>
+                <%}%>
+            </select><br>
+            <button name="opc"  class="btnotorgar submit" value="Otorgar Funcion">Otorgar Funcion</button> 
         </div>
         <div>
             <table>
                 <thead>
                     <tr>
-                        <th class="cajita">Nro</td>
-                        <th class="cajita"><span title="nom_fu">Detalle Funcion</span></td>
-                        <th class="cajita" > <span title="es_fu">Estado</span>></td>
-                        <th class="cajita"> <span title="es_fu">Puesto</span>></td>
+                        <th class="cajita">Nro</th>
+                        <th class="cajita"><span title="nom_fu">Detalle Funcion</span></th>
+                        <th class="cajita" > <span title="es_fu">Estado</span></th>
+                        <th class="cajita"> <span title="es_fu">Puesto</span></th>
                     </tr>
                 </thead>
                 <tbody class="tbodys">
@@ -62,6 +60,16 @@
             //alert();
             $(".idpu").change(function() {
                 //alert();
+                listar_tabla();
+            });
+            $(".btnotorgar").click(function() {
+                var id_puesto = $(".idpu").val();
+                $.post("../../funcion", "opc=otorgar" + "&id_puesto=" + id_puesto + "&de_funcion=" + $(".ifun").val(), function() {
+                    listar_tabla();
+                });
+                
+            });
+            function listar_tabla() {
                 var id_puesto = $(".idpu").val();
                 var ap = $(".tbodys");
                 $.post("../../funcion", "opc=listar_x_puesto" + "&id_puesto=" + id_puesto, function(objJson) {
@@ -71,17 +79,17 @@
                         for (var i = 0; i < list.length; i++) {
                             ap.append("<tr>");
                             ap.append("<td>" + (i + 1) + "</td>");
-                            ap.append("<td>" + list[i].id_fu + "</td>");
                             ap.append("<td>" + list[i].nom_fu + "</td>");
                             ap.append("<td>" + list[i].es_fu + "</td>");
                             ap.append("<td>" + list[i].no_pu + "</td>");
                             ap.append("</tr>");
                         }
                     } else {
-                        ap.append("<tr><td> Sin nunguna funcion</td></tr>")
+                        ap.append("<tr><td> Sin ninguna funcion</td></tr>");
                     }
                 });
-            });
+            }
+
         });
     </script>
 </html>

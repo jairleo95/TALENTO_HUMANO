@@ -59,14 +59,13 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     String fecha = n.getFe_sus();
                     String fechasus = "";
                     if (fecha != "" & fecha != null) {
-                        if (System.getProperty("sun.desktop").trim().equals("windows")) {
-                            String f[] = fecha.split("/");
-                            fechasus = f[0] + " de " + f[1] + " del " + f[2];
-                        } else {
-                            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
-                            String fecha_convertida = new SimpleDateFormat("dd-MMM-yy").format(date);
-                            fechasus = fecha_convertida;
-                        }
+                        /*if (System.getProperty("sun.desktop").trim().equals("windows")) {
+                         String f[] = fecha.split("/");
+                         fechasus = f[0] + " de " + f[1] + " del " + f[2];
+                         } else {*/
+                        String f[] = fecha.split("/");
+                        fechasus = f[0] + " de " + f[1] + " del " + f[2];
+                        /* }*/
                     } else {
                         fechasus = "NO TIENE";
                     }
