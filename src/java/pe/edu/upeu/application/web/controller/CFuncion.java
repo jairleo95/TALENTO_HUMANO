@@ -8,6 +8,7 @@ package pe.edu.upeu.application.web.controller;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ import pe.edu.upeu.application.dao.FuncionDAO;
 import pe.edu.upeu.application.dao.PuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceFuncionDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
+import pe.edu.upeu.application.model.Puesto;
 
 /**
  *
@@ -44,7 +46,7 @@ public class CFuncion extends HttpServlet {
         Map<String, Object> rpta = new HashMap<String, Object>();
         String opc = request.getParameter("opc");
         HttpSession sesion = request.getSession(true);
-        String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
+        String id_user = (String) sesion.getAttribute("IDUSER");
         InterfaceFuncionDAO f = new FuncionDAO();
         InterfacePuestoDAO p = new PuestoDAO();
         /* TODO output your page here. You may use following sample code. */
@@ -55,6 +57,9 @@ public class CFuncion extends HttpServlet {
             if (opc.equals("Listar")) {
                 getServletContext().setAttribute("Listar_funciones", f.Listar_funciones());
                 response.sendRedirect("Vista/Funciones/List_Funciones.jsp");
+                /*List<Map<String, ?>> list = f.Listar_funciones();
+                rptaS.put("rpta", "1");
+                rptaS.put("lista", list);*/
             }
             if (opc.equals("listar_x_puesto")) {
                 String id_pu = request.getParameter("id_puesto");
@@ -66,6 +71,16 @@ public class CFuncion extends HttpServlet {
                 getServletContext().setAttribute("List_Puesto", p.List_Puesto());
                 getServletContext().setAttribute("Listar_funciones", f.Listar_funciones());
                 response.sendRedirect("Vista/Funciones/Otorgar_funciones.jsp");
+            }
+            if (opc.equals("otorgar")) {
+                String id_puesto=request.getParameter("id_puesto");
+                String de_funcion=request.getParameter("de_funcion");
+                f.Insertar_funcion(id_puesto, de_funcion, id_user);
+            }
+            if(opc.equals("list_pu")){
+                List<Map<String, ?>> list = p.List_puesto();
+                rpta.put("rpta", "1");
+                rpta.put("lista", list);
             }
         } catch (Exception e) {
             rpta.put("rpta", "-1");
