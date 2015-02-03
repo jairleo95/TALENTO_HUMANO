@@ -94,7 +94,7 @@
                                 data-widget-sortable="false"
 
                                 -->
-                            
+
 
                                 <!-- widget div-->
                                 <div>
@@ -121,22 +121,22 @@
                                             <tbody>
 
                                                 <%  if (List_Id_Doc_Trab.size() == 0) {%>
-                                            <td colspan="5" style="text-align: center"><h2>No se ha registrado ningun documento...</h2></td>
-                                            <%}%>
-                                            <%for (int i = 0; i < List_Id_Doc_Trab.size(); i++) {
-                                                    V_Documento_Trabajador d = new V_Documento_Trabajador();
-                                                    d = (V_Documento_Trabajador) List_Id_Doc_Trab.get(i);
-                                            %>
-                                            <tr>
-                                                <td ><%=i + 1%></td>
-                                                <td ><%=d.getNo_documento()%></td>
-                                                <td ><a href="../Dgp/Documento/Ver_Doc.jsp?nom_doc=<%=d.getAr_dato_archivo()%>"><%=d.getNo_documento()%></a></td>
 
-                                                <td ><%=d.getDe_documento_adjunto()%></td>
-                                                <td><%=d.getNo_req()%></td>
+                                                <%}%>
+                                                <%for (int i = 0; i < List_Id_Doc_Trab.size(); i++) {
+                                                        V_Documento_Trabajador d = new V_Documento_Trabajador();
+                                                        d = (V_Documento_Trabajador) List_Id_Doc_Trab.get(i);
+                                                %>
+                                                <tr>
+                                                    <td ><%=i + 1%></td>
+                                                    <td ><%=d.getNo_documento()%></td>
+                                                    <td ><a href="../Dgp/Documento/Ver_Doc.jsp?nom_doc=<%=d.getAr_dato_archivo()%>"><%=d.getNo_documento()%></a></td>
 
-                                            </tr>
-                                            <% }%>
+                                                    <td ><%=d.getDe_documento_adjunto()%></td>
+                                                    <td><%=d.getNo_req()%></td>
+
+                                                </tr>
+                                                <% }%>
                                             </tbody>
                                         </table>
                                     </div>
@@ -272,7 +272,7 @@
             /* dark red  */
             var $chrt_mono = "#000";
 
-            $(document).ready(function() {
+            $(document).ready(function () {
 
                 // DO NOT REMOVE : GLOBAL FUNCTIONS!
                 pageSetUp();
@@ -401,7 +401,7 @@
                         }
                     });
 
-                    $("#sin-chart").bind("plotclick", function(event, pos, item) {
+                    $("#sin-chart").bind("plotclick", function (event, pos, item) {
                         if (item) {
                             $("#clickdata").text("You clicked point " + item.dataIndex + " in " + item.series.label + ".");
                             plot.highlight(item.series, item.datapoint);
@@ -691,7 +691,7 @@
                             tickDecimals: 0
                         },
                         yaxis: {
-                            tickFormatter: function(v) {
+                            tickFormatter: function (v) {
                                 return v + " cm";
                             }
                         },
@@ -722,7 +722,7 @@
                                 label: {
                                     show: false,
                                     radius: 2 / 3,
-                                    formatter: function(label, series) {
+                                    formatter: function (label, series) {
                                         return '<div style="font-size:11px;text-align:center;padding:4px;color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
                                     },
                                     threshold: 0.1
@@ -848,7 +848,7 @@
 
                     // setup control widget
                     var updateInterval = 1000;
-                    $("#updating-chart").val(updateInterval).change(function() {
+                    $("#updating-chart").val(updateInterval).change(function () {
                         var v = $(this).val();
                         if (v && !isNaN(+v)) {
                             updateInterval = +v;
@@ -912,7 +912,7 @@
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-            $(document).ready(function() {
+            $(document).ready(function () {
 
                 pageSetUp();
 
@@ -948,16 +948,16 @@
                             "t" +
                             "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
                     "autoWidth": true,
-                    "preDrawCallback": function() {
+                    "preDrawCallback": function () {
                         // Initialize the responsive datatables helper once.
                         if (!responsiveHelper_dt_basic) {
                             responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
                         }
                     },
-                    "rowCallback": function(nRow) {
+                    "rowCallback": function (nRow) {
                         responsiveHelper_dt_basic.createExpandIcon(nRow);
                     },
-                    "drawCallback": function(oSettings) {
+                    "drawCallback": function (oSettings) {
                         responsiveHelper_dt_basic.respond();
                     }
                 });
@@ -976,16 +976,16 @@
                             "t" +
                             "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
                     "autoWidth": true,
-                    "preDrawCallback": function() {
+                    "preDrawCallback": function () {
                         // Initialize the responsive datatables helper once.
                         if (!responsiveHelper_datatable_fixed_column) {
                             responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
                         }
                     },
-                    "rowCallback": function(nRow) {
+                    "rowCallback": function (nRow) {
                         responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
                     },
-                    "drawCallback": function(oSettings) {
+                    "drawCallback": function (oSettings) {
                         responsiveHelper_datatable_fixed_column.respond();
                     }
 
@@ -995,7 +995,7 @@
                 $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
 
                 // Apply the filter
-                $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function() {
+                $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
 
                     otable
                             .column($(this).parent().index() + ':visible')
@@ -1011,16 +1011,16 @@
                             "t" +
                             "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
                     "autoWidth": true,
-                    "preDrawCallback": function() {
+                    "preDrawCallback": function () {
                         // Initialize the responsive datatables helper once.
                         if (!responsiveHelper_datatable_col_reorder) {
                             responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
                         }
                     },
-                    "rowCallback": function(nRow) {
+                    "rowCallback": function (nRow) {
                         responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
                     },
-                    "drawCallback": function(oSettings) {
+                    "drawCallback": function (oSettings) {
                         responsiveHelper_datatable_col_reorder.respond();
                     }
                 });
@@ -1053,16 +1053,16 @@
                         "sSwfPath": "../../js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
                     },
                     "autoWidth": true,
-                    "preDrawCallback": function() {
+                    "preDrawCallback": function () {
                         // Initialize the responsive datatables helper once.
                         if (!responsiveHelper_datatable_tabletools) {
                             responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
                         }
                     },
-                    "rowCallback": function(nRow) {
+                    "rowCallback": function (nRow) {
                         responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
                     },
-                    "drawCallback": function(oSettings) {
+                    "drawCallback": function (oSettings) {
                         responsiveHelper_datatable_tabletools.respond();
                     }
                 });
@@ -1079,7 +1079,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function() {
+            (function () {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
