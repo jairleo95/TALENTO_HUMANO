@@ -80,7 +80,14 @@ public class CFuncion extends HttpServlet {
             if(opc.equals("list_pu")){
                 List<Map<String, ?>> list = p.List_puesto();
                 rpta.put("rpta", "1");
-                rpta.put("lista", list);
+                rpta.put("lista", list);                
+            }
+            if(opc.equals("edit_function")){
+                String id_fun=request.getParameter("id_fun");
+                String de_fun=request.getParameter("de_fun");
+                String es_fun=request.getParameter("es_fun");
+                String id_pu=request.getParameter("id_pu");
+                f.Modificar_funcion(id_fun, es_fun, de_fun, id_pu, id_user);
             }
         } catch (Exception e) {
             rpta.put("rpta", "-1");
