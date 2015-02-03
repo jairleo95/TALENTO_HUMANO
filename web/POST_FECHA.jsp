@@ -153,7 +153,7 @@
             </div>
         </div>
 <%="SELECT f.de_pasos, "
-                    + "  f.nu_pasos,s.es_autorizacion "
+                    + "  f.nu_pasos ,s.es_autorizacion, rhfu_count_aut_dgp ('') as count_aut "
                     + "FROM "
                     + "  (SELECT p.id_pasos, "
                     + "    p.id_proceso, "

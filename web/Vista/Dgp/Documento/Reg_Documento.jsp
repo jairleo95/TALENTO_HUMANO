@@ -275,6 +275,7 @@
                                                 <%  if (d.getTi_documento().trim().equals("DNIC") | d.getTi_documento().trim().equals("ACMA")) {%>
 
                                                 <%
+                                                    
                                                     for (int kj = 0; kj < List_Conyugue.size(); kj++) {
                                                         Padre_Madre_Conyugue co = new Padre_Madre_Conyugue();
                                                         co = (Padre_Madre_Conyugue) List_Conyugue.get(kj);

@@ -120,28 +120,15 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     @Override
     public List<Padre_Madre_Conyugue> List_Conyugue(String id_trabajador) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT * FROM rhtd_padre_madre_conyugue where ap_nombres_conyugue is not null and id_trabajador='" + id_trabajador.trim() + "'";
+        String sql = "SELECT * FROM rhtm_trabajador where AP_NOMBRES_C is not null and id_trabajador='" + id_trabajador.trim() + "'";
         List<Padre_Madre_Conyugue> list = new ArrayList<Padre_Madre_Conyugue>();
         try {
             ResultSet rs = this.conn.query(sql);
 
             while (rs.next()) {
                 Padre_Madre_Conyugue pmc = new Padre_Madre_Conyugue();
-                pmc.setAp_nombres_conyugue(rs.getString("Ap_nombres_conyugue"));
-                pmc.setAp_nombres_madre(rs.getString("ap_nombres_madre"));
-                pmc.setAp_nombres_padre(rs.getString("ap_nombres_padre"));
-                pmc.setEs_trabaja_upeu_conyugue(rs.getString("es_trabaja_upeu_conyugue"));
-                pmc.setFe_creacion(rs.getString("fe_creacion"));
-                pmc.setFe_modif(rs.getString("fe_modif"));
-                pmc.setFe_nac_conyugue(rs.getString("fe_nac_conyugue"));
-                pmc.setId_padre_madre_conyugue(rs.getString("id_padre_madre_conyugue"));
-                pmc.setId_trabajador(rs.getString("id_trabajador"));
-                pmc.setIp_usuario(rs.getString("ip_usuario"));
-                pmc.setLi_inscripcion_vig_essalud(rs.getString("li_inscripcion_vig_essalud"));
-                pmc.setNu_doc(rs.getString("nu_doc"));
-                pmc.setTi_doc_id(rs.getString("Ti_doc_id"));
-                pmc.setUs_creacion(rs.getString("us_creacion"));
-                pmc.setUs_modif(rs.getString("us_modif"));
+                pmc.setAp_nombres_conyugue(rs.getString("AP_NOMBRES_C"));
+
                 list.add(pmc);
             }
         } catch (SQLException e) {

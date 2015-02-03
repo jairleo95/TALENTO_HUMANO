@@ -180,14 +180,10 @@
                                             <%}
                                                     }
                                                 }%>
-
                                             </tr> 
-
                                             </tbody>
                                         </table>
-
                                     </div>
-
                                     <!-- end widget content -->
 
                                 </div>

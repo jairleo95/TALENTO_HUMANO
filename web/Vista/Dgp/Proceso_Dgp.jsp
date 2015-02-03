@@ -205,11 +205,11 @@
                                                 <tr>
                                                     <th data-hide="phone">Nro</th>
                                                      <th>MES</th>
-                                                    <th><i class="fa fa-fw fa-building text-muted hidden-md hidden-sm hidden-xs"></i> Acciones</th>
+                                                    <th data-hide="phone,tablet"><i class="fa fa-fw fa-building text-muted hidden-md hidden-sm hidden-xs"></i> Acciones</th>
                                                    
-                                                    <th>Nombre</th>
-                                                    <th>Proceso</th>
-                                                    <th>Estado</th>
+                                                    <th data-class="expand">Nombre</th>
+                                                    <th data-hide="phone,tablet">Proceso</th>
+                                                    <th >Estado</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
