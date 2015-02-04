@@ -57,13 +57,15 @@ public class CFuncion extends HttpServlet {
             if (opc.equals("Listar")) {
                 getServletContext().setAttribute("Listar_funciones", f.Listar_funciones());
                 response.sendRedirect("Vista/Funciones/List_Funciones.jsp");
-                /*List<Map<String, ?>> list = f.Listar_funciones();
-                rptaS.put("rpta", "1");
-                rptaS.put("lista", list);*/
             }
             if (opc.equals("listar_x_puesto")) {
                 String id_pu = request.getParameter("id_puesto");
                 List<Map<String, ?>> list = f.Listar_fun_x_pu(id_pu);
+                rpta.put("rpta", "1");
+                rpta.put("lista", list);
+            }
+            if (opc.equals("listarF")) {
+                List<Map<String, ?>> list = f.Listar_Funciones();
                 rpta.put("rpta", "1");
                 rpta.put("lista", list);
             }
@@ -80,14 +82,18 @@ public class CFuncion extends HttpServlet {
             if(opc.equals("list_pu")){
                 List<Map<String, ?>> list = p.List_puesto();
                 rpta.put("rpta", "1");
-                rpta.put("lista", list);                
+                rpta.put("lista", list);
             }
-            if(opc.equals("edit_function")){
-                String id_fun=request.getParameter("id_fun");
-                String de_fun=request.getParameter("de_fun");
-                String es_fun=request.getParameter("es_fun");
-                String id_pu=request.getParameter("id_pu");
-                f.Modificar_funcion(id_fun, es_fun, de_fun, id_pu, id_user);
+            if (opc.equals("del_fun")) {
+                String id_funcion=request.getParameter("id_fun");
+                f.Eliminar_funcion(id_funcion);
+            }
+            if (opc.equals("edit_function")) {
+                String id_funcion=request.getParameter("id_fun");
+                String de_funcion=request.getParameter("de_fun");
+                String es_funcion=request.getParameter("es_fun");
+                String id_puesto=request.getParameter("id_pu");
+                f.Modificar_funcion(id_funcion, es_funcion, de_funcion, id_puesto, id_user);
             }
         } catch (Exception e) {
             rpta.put("rpta", "-1");

@@ -179,13 +179,13 @@
                                         </section >
                                         <section class="col col-1" style=" margin-top:2%;">
                                             <label class="toggle" id="titulo" > MFL:
-                                                <%if (d.getEs_mfl().trim().equals("1")) {%>
-                                                <input type="checkbox" name="checkbox-toggle" disabled="" checked="" >
-                                                <%}else{%>
-                                                <input type="checkbox" name="checkbox-toggle" disabled=""  >
-                                                <%}%>
+                                                 <%if (d.getEs_mfl().trim().equals("1")) {%>
+                                                 <input type="checkbox" name="checkbox-toggle" disabled="" checked="" >
+                                                 <%}else{%>
+                                                 <input type="checkbox" name="checkbox-toggle" disabled=""  >
+                                                  <%}%>
                                                 <i data-swchoff-text="NO"  data-swchon-text="SI"></i>       
-
+                                                
                                             </label>
                                         </section>
                                     </div>
@@ -805,7 +805,7 @@
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-            $(document).ready(function () {
+            $(document).ready(function() {
 
                 pageSetUp();
 
@@ -814,15 +814,6 @@
                     rules: {
                         fname: {
                             required: true
-                        },
-                        FEC_DESDE: {
-                            val_fecha:true
-                        },
-                        FEC_HASTA: {
-                            val_fecha:true
-                        },
-                        FECHA_SUSCRIPCION: {
-                            val_fecha:true
                         },
                         lname: {
                             required: true
@@ -913,14 +904,10 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
-                jQuery.validator.addMethod("val_fecha", function (value, element) {
-                    var d = value.split("-");
-                    return this.optional(element) || String(parseInt(d[0])).length == 4;
-                }, "¡Fecha ingresada invalida!");
 
                 var $registerForm = $("#smart-form-register").validate({
                     // Rules for form validation
@@ -986,7 +973,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1038,7 +1025,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1077,15 +1064,15 @@
                         }
                     },
                     // Ajax form submition
-                    submitHandler: function (form) {
+                    submitHandler: function(form) {
                         $(form).ajaxSubmit({
-                            success: function () {
+                            success: function() {
                                 $("#comment-form").addClass('submited');
                             }
                         });
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1119,15 +1106,15 @@
                         }
                     },
                     // Ajax form submition
-                    submitHandler: function (form) {
+                    submitHandler: function(form) {
                         $(form).ajaxSubmit({
-                            success: function () {
+                            success: function() {
                                 $("#contact-form").addClass('submited');
                             }
                         });
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1156,7 +1143,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1201,7 +1188,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1211,7 +1198,7 @@
                     dateFormat: 'dd.mm.yy',
                     prevText: '<i class="fa fa-chevron-left"></i>',
                     nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function (selectedDate) {
+                    onSelect: function(selectedDate) {
                         $('#finishdate').datepicker('option', 'minDate', selectedDate);
                     }
                 });
@@ -1220,7 +1207,7 @@
                     dateFormat: 'dd.mm.yy',
                     prevText: '<i class="fa fa-chevron-left"></i>',
                     nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function (selectedDate) {
+                    onSelect: function(selectedDate) {
                         $('#startdate').datepicker('option', 'maxDate', selectedDate);
                     }
                 });
@@ -1239,7 +1226,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function () {
+            (function() {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
@@ -1254,7 +1241,7 @@
 
         function Listar_dep() {
             var s = $(".selec_dep");
-            $.post("../../Direccion_Puesto", "opc=Listar&" + "id_dir=" + $(".dir_pu").val(), function (objJson) {
+            $.post("../../Direccion_Puesto", "opc=Listar&" + "id_dir=" + $(".dir_pu").val(), function(objJson) {
                 s.empty();
                 var lista = objJson.lista;
                 s.append("<option value='' > [SELECCIONE] </option>");
@@ -1273,7 +1260,7 @@
         function Listar_area() {
             var s = $(".Selec_Area");
 
-            $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $(".dep_pu").val(), function (objJson) {
+            $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $(".dep_pu").val(), function(objJson) {
                 s.empty();
                 var lista = objJson.lista;
                 s.append("<option value='' > [SELECCIONE] </option>");
@@ -1292,7 +1279,7 @@
         function Listar_sec() {
             var s = $("#select_sec");
 
-            $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $(".area_pu").val(), function (objJson) {
+            $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $(".area_pu").val(), function(objJson) {
                 s.empty();
                 var lista = objJson.lista;
                 s.append("<option value='' > [SELECCIONE] </option>");
@@ -1309,7 +1296,7 @@
         function Listar_plantilla() {
             var s = $(".con_pl_pu");
 
-            $.post("../../plantilla_contractual", "opc=List_planti&" + "id_pu=" + $(".id_pu_dgp").val(), function (objJson) {
+            $.post("../../plantilla_contractual", "opc=List_planti&" + "id_pu=" + $(".id_pu_dgp").val(), function(objJson) {
                 s.empty();
                 var lista = objJson.lista;
                 s.append("<option value='' > [SELECCIONE] </option>");
@@ -1318,7 +1305,7 @@
                 }
             });
         }
-        $(document).ready(function () {
+        $(document).ready(function() {
             Listar_centro_costo();
 
             Listar_dep();
@@ -1331,15 +1318,15 @@
             var d = $("#select_sec");
             var b = $("#selec_dep");
             var e = $("#pu_id_se");
-            $(".date").keyup(function () {
+            $(".date").keyup(function() {
                 $(".conteni").val($(".date").val());
             });
             // $.post("../../  ")
             $("#select_mod").change(
-                    function () {
+                    function() {
                         // alert("?MODALIDAD="+$("#select_mod").val());
 
-                        $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function (objJson) {
+                        $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function(objJson) {
                             a.empty();
                             var list = objJson.lista;
                             a.append("<option value='' > [SELECCIONE] </option>");
@@ -1351,8 +1338,8 @@
                         });
                     });
             $("#selec_dep").change(
-                    function () {
-                        $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function (objJson) {
+                    function() {
+                        $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function(objJson) {
                             c.empty();
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
@@ -1370,8 +1357,8 @@
                         });
                     });
             $("#select_dir").change(
-                    function () {
-                        $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $("#select_dir").val(), function (objJson) {
+                    function() {
+                        $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $("#select_dir").val(), function(objJson) {
                             b.empty();
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
@@ -1389,8 +1376,8 @@
                         });
                     });
             $("#Selec_Area").change(
-                    function () {
-                        $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function (objJson) {
+                    function() {
+                        $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function(objJson) {
                             d.empty();
 
                             var list = objJson.lista;
@@ -1405,8 +1392,8 @@
                         });
                     });
             $("#select_sec").change(
-                    function () {
-                        $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function (objJson) {
+                    function() {
+                        $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function(objJson) {
                             e.empty();
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
@@ -1425,9 +1412,9 @@
                         });
                     });
             $("#btn-registrar").click(
-                    function () {
+                    function() {
                         var pr = $("#select-proceso").val();
-                        $.post("../../paso", $("#form-paso").serialize(), function () {
+                        $.post("../../paso", $("#form-paso").serialize(), function() {
                             Listar_Paso(pr);
                         });
                         $("#btn-registrar").val("Registrar Paso");
@@ -1443,7 +1430,7 @@
 
             function Listar_centro_costo() {
                 var x = $("#fila-agregar");
-                $.post("../../centro_costo", "opc=Listar_centro_id&" + "id_dgp=" + $("#id_dgp").val(), function (objJson) {
+                $.post("../../centro_costo", "opc=Listar_centro_id&" + "id_dgp=" + $("#id_dgp").val(), function(objJson) {
                     var lista = objJson.lista;
                     var numero = 1;
                     x.append('<div  class="row centro-costo_' + numero + '" >');
@@ -1454,7 +1441,7 @@
                         } else {
                             x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section>');
                         }
-                        numero = 1;
+                        numero=1;
                     }
                     x.append('</div><table><tr><td><td><input type="hidden" name="can_centro_cos" value="' + lista.length + '"></td></tr></table>');
 

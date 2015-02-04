@@ -28,7 +28,6 @@
 <jsp:useBean id="Listar_zona" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_via" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_tipo_doc" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="list_año" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html lang="en-us">
     <head>
@@ -89,13 +88,13 @@
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <script type="text/javascript">
             $(document).ready(
-                    function () {
+                    function() {
                         var tip = $("#pro_dir_l");
                         tip.empty();
                         var rg = $("#dep_dir_l").val();
                         var data = "id_dep=" + rg + "&opc=dep_nac";
                         tip.append('<option value="">Cargando...</option>').val('');
-                        $.post("../../ubigeo", data, function (objJson) {
+                        $.post("../../ubigeo", data, function(objJson) {
                             tip.empty();
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
@@ -117,7 +116,7 @@
                         var rg = $("#pro_dir_l").val();
                         var data = "id_dist=" + rg + "&opc=pro_nac";
                         ti.append('<option value="">Cargando...</option>').val('');
-                        $.post("../../ubigeo", data, function (objJson) {
+                        $.post("../../ubigeo", data, function(objJson) {
                             ti.empty();
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
@@ -140,7 +139,7 @@
                         $(".doc, .doc_c").val("");
 
                         $("#nac").change(
-                                function () {
+                                function() {
                                     if ($("#nac").val() != "NAC-0193") {
                                         $("#dist").hide();
                                         $("#dist_nac").val("DST-001832");
@@ -154,7 +153,7 @@
                                 }
                         );
 
-                        $("#sit_edu").change(function () {
+                        $("#sit_edu").change(function() {
                             if ($("#sit_edu").val() == 'SED-0011' | $("#sit_edu").val() == 'SED-0013' | $("#sit_edu").val() == 'SED-0014'
                                     | $("#sit_edu").val() == 'SED-0015'
                                     | $("#sit_edu").val() == 'SED-0016' | $("#sit_edu").val() == 'SED-0017'
@@ -177,7 +176,7 @@
 
                         });
 
-                        $("#es_inst_p").change(function () {
+                        $("#es_inst_p").change(function() {
                             if ($("#inst_peru").val() == "1") {
                                 $("#regimen").show();
                                 $("#egreso").show();
@@ -196,10 +195,10 @@
                         });
 
                         $(".select-doc").change(
-                                function () {
+                                function() {
                                     $(".doc").val("");
                                     if ($(".select-doc").val() == 1) {
-                                        $("#doc").numeric(false, function () {
+                                        $("#doc").numeric(false, function() {
                                         });
                                         $(".doc").attr("maxlength", "8");
                                         $(".doc").attr("minlength", "8");
@@ -217,10 +216,10 @@
                                 }
                         );
                         $(".select-doc_c").change(
-                                function () {
+                                function() {
                                     $(".doc_c").val("");
                                     if ($(".select-doc_c").val() == 1) {
-                                        $(".doc_c").numeric(false, function () {
+                                        $(".doc_c").numeric(false, function() {
                                         });
                                         $(".doc_c").attr("maxlength", "8");
                                         $(".doc_c").attr("minlength", "8");
@@ -242,10 +241,10 @@
         <!--Alerta para la edad -->
         <script type="text/javascript">
             $(document).ready(
-                    function () {
+                    function() {
                         $(".alerta-req").hide();
                         $("#edad").change(
-                                function () {
+                                function() {
                                     $(".alerta-req").hide();
                                     var fecha = $("#edad").val();
                                     var fechaActual = new Date();
@@ -260,6 +259,7 @@
                                     if (mmCumple.substr(0, 1) == 0) {
                                         mmCumple = mmCumple.substring(1, 2);
                                     }
+//retiramos el primer cero de la izquierda
                                     if (diaCumple.substr(0, 1) == 0) {
                                         diaCumple = diaCumple.substring(1, 2);
                                     }
@@ -268,9 +268,10 @@
                                     if ((mmActual < mmCumple) || (mmActual == mmCumple && diaActual < diaCumple)) {
                                         edad--;
                                     }
+
                                     $(".edad").text(edad + " años");
                                     if (edad < 18) {
-
+                                        $(".alerta-req").show();
                                     }
 
                                 }
@@ -427,10 +428,11 @@
                                                                 <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-child fa-lg fa-fw"></i><label class="edad"></label></span>
-
-                                                                            <input type="date" name="FECHA_NAC" required=""  id="edad" placeholder="Fecha de Nacimiento" class="form-control input-group-sm fecha" >
-
+                                                                            <span class="input-group-addon"><i class="fa fa-child fa-lg fa-fw"></i></span>
+                                                                            <input type="date" name="FECHA_NAC" required=""  id="edad" placeholder="Fecha de Nacimiento" class="form-control input-group-sm" >
+                                                                            <p class="edad">
+                                                                            <div class="alerta-req" style="display: none;">Es un menor de edad</div>
+                                                                            </p>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -620,9 +622,9 @@
                                                             </div>
                                                             <script>
                                                                 $(document).ready(
-                                                                        function () {
+                                                                        function() {
                                                                             $("#sis_pens").change(
-                                                                                    function () {
+                                                                                    function() {
                                                                                         if ($("#sis_pens").val() != "1") {
                                                                                             $(".n_afp").remove();
                                                                                             $("#nom_afp").attr("disabled", true);
@@ -784,16 +786,11 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-4" id="egreso" style="display: none"><label>Año Egreso:</label>
+                                                                <div class="col-sm-4" id="egreso" style="display: none">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
-                                                                            <select    name="A_EGRESO"class="form-control input-group-sm" required="" >
-                                                                                <option value="">[SELECCIONE]</option>
-                                                                                <% for (int jj = 0; jj < list_año.size(); jj++) {%>
-                                                                                <option value="<%=list_año.get(jj)%>"><%=list_año.get(jj)%></option>
-                                                                                <%}%>
-                                                                            </select>
+                                                                            <input class="form-control input-group-sm"  placeholder="Año Egreso" type="text"   maxlength="4" minlength="4"   name="A_EGRESO" >
                                                                         </div>
                                                                     </div>
                                                                 </div>                        
@@ -878,13 +875,13 @@
                                                                     // alert("estado civil");
 
                                                                     //REMOVE REQUIRED
-                                                                    $("#tra_upeu_con").removeAttr('required');
-                                                                    $("#nom_ape_con").removeAttr('required');
-                                                                    $("#nac_con").removeAttr('required');
-                                                                    $("#doc_con").removeAttr('required');
-                                                                    $("#num_con").removeAttr('required');
-                                                                    $("#ins_vig_con").removeAttr('required');
-
+                                                                     $("#tra_upeu_con").removeAttr('required');
+                                                                     $("#nom_ape_con").removeAttr('required');
+                                                                     $("#nac_con").removeAttr('required');
+                                                                     $("#doc_con").removeAttr('required');
+                                                                     $("#num_con").removeAttr('required');
+                                                                     $("#ins_vig_con").removeAttr('required');
+                                                                     
                                                                     //ADD DISABLED
                                                                     document.getElementById("tra_upeu_con").disabled = true;
                                                                     document.getElementById("nom_ape_con").disabled = true;
@@ -893,17 +890,17 @@
                                                                     document.getElementById("num_con").disabled = true;
                                                                     document.getElementById("ins_vig_con").disabled = true;
                                                                 }
-                                                                if (es_civil == '2' || es_civil == '6') {
+                                                                if (es_civil == '2' || es_civil == '6' ) {
                                                                     // alert("estado civil");
 
                                                                     //REMOVE REQUIRED
-                                                                    $("#tra_upeu_con").attr("required", "required");
-                                                                    $("#nom_ape_con").attr("required", "required");
-                                                                    $("#nac_con").attr("required", "required");
-                                                                    $("#doc_con").attr("required", "required");
-                                                                    $("#num_con").attr("required", "required");
-                                                                    $("#ins_vig_con").removeAttr("required", "required");
-
+                                                                     $("#tra_upeu_con").attr("required", "required");
+                                                                     $("#nom_ape_con").attr("required", "required");
+                                                                     $("#nac_con").attr("required", "required");
+                                                                     $("#doc_con").attr("required", "required");
+                                                                     $("#num_con").attr("required", "required");
+                                                                     $("#ins_vig_con").removeAttr("required", "required");
+                                                                     
                                                                     //ADD DISABLED
                                                                     document.getElementById("tra_upeu_con").disabled = false;
                                                                     document.getElementById("nom_ape_con").disabled = false;
@@ -1011,38 +1008,24 @@
                                                                 </div>
                                                                 <script>
                                                                     $(document).ready(
-                                                                            function () {
-
+                                                                            function() {
                                                                                 $("#no_cuen").hide();
                                                                                 $("#no_cuen_ban").hide();
                                                                                 $("#generar").hide();
                                                                                 $("#no_cuen_otros").hide();
                                                                                 //alert($("#es_cuenta").val());
 
-                                                                                $(".fecha").keyup(function () {
-
-                                                                                    /*var arr_date = $(this).val().split("-");
-                                                                                     if (arr_date[0].length > 4) {
-                                                                                     //return false;
-                                                                                     $(this).val("");
-                                                                                     $(".edad").val("");
-                                                                                     alert("fecha no valida");
-                                                                                     
-                                                                                     }*/
-
-                                                                                });
-
-                                                                                $("#banco").change(function () {
+                                                                                $("#banco").change(function() {
                                                                                     cuenta_bancaria($(this).val());
                                                                                     $("#es_cuenta").val(1);
                                                                                     //  alert($("#es_cuenta").val());
                                                                                 });
 
-                                                                                $("#es_civil").change(function () {
+                                                                                $("#es_civil").change(function() {
                                                                                     estado_civil($(this).val());
                                                                                 });
                                                                                 $("#DOM_A_D3").change(
-                                                                                        function () {
+                                                                                        function() {
                                                                                             if ($("#DOM_A_D3").val() == "3") {
                                                                                                 $("#DOM_A_D4").val("Sin Numero");
                                                                                             } else {
@@ -1053,7 +1036,7 @@
                                                                                         }
                                                                                 );
                                                                                 $("#DOM_LEG_D3").change(
-                                                                                        function () {
+                                                                                        function() {
                                                                                             if ($("#DOM_LEG_D3").val() == "3") {
                                                                                                 $("#DOM_LEG_D4").val("Sin Numero");
                                                                                             } else {
@@ -1064,7 +1047,7 @@
                                                                                         }
                                                                                 );
                                                                                 $("#reli").change(
-                                                                                        function () {
+                                                                                        function() {
                                                                                             if ($("#reli").val() == "1") {
                                                                                                 $("#igle").attr("required", "required")
                                                                                             } else {
@@ -1740,10 +1723,10 @@
                                                             </div>
                                                             <code class="codigo"></code>
                                                             <input type="submit" name="opc"  class="submit btn btn-primary btn-lg" value="Registrar">
-                                                            <script>$(document).ready(function () {
+                                                            <script>$(document).ready(function() {
                                                                     var p = 1;
                                                                     var texto_h = "";
-                                                                    $(".btn-reg-hijo").click(function () {
+                                                                    $(".btn-reg-hijo").click(function() {
 
                                                                         var tabla_hijo = $(".tabla-hijo");
                                                                         var ap_pat = $(".i_app_h");
@@ -1782,7 +1765,7 @@
                                                                         essalud.val("");
                                                                         es_sup.val("");
 
-                                                                        $(".btn-modificar_" + p).click(function () {
+                                                                        $(".btn-modificar_" + p).click(function() {
                                                                             ap_pat.val($(".ap_p_h_" + $(this).val()).val());
                                                                             ap_mat.val($(".ap_m_h_" + $(this).val()).val());
                                                                             nombre.val($(".no_h_" + $(this).val()).val());
@@ -1795,7 +1778,7 @@
 
                                                                             $(".btn-reg-hijo").hide();
                                                                             $(".btn-mant").append('<button type="button" value="' + $(this).val() + '" class="btn-mod-hijo btn btn-info">Modificar Hijo</button>');
-                                                                            $(".btn-mod-hijo").click(function () {
+                                                                            $(".btn-mod-hijo").click(function() {
 
                                                                                 $(".ap_p_h_" + $(this).val()).val(ap_pat.val());
                                                                                 $(".ap_m_h_" + $(this).val()).val(ap_mat.val());
@@ -2065,12 +2048,13 @@
 
                                                     // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-                                                    $(document).ready(function () {
+                                                    $(document).ready(function() {
 
                                                         pageSetUp();
 
 
 
+                                                        //Bootstrap Wizard Validations
 
                                                         var $validator = $("#wizard-1").validate({
                                                             rules: {
@@ -2078,19 +2062,6 @@
                                                                     required: true,
                                                                     email: "Your email address must be in the format of name@domain.com"
                                                                 },
-                                                                FECHA_NAC: {
-                                                                    required: true,
-                                                                    val_fecha: true
-                                                                }
-                                                                ,
-                                                                FECHA_NAC_H: {
-                                                                    val_fecha: true
-                                                                }
-                                                                ,
-                                                                FECHA_NAC_CONYUGUE: {
-                                                                    val_fecha: true
-                                                                }
-                                                                ,
                                                                 fname: {
                                                                     required: true
                                                                 },
@@ -2124,15 +2095,15 @@
                                                                     email: "Your email address must be in the format of name@domain.com"
                                                                 }
                                                             },
-                                                            highlight: function (element) {
+                                                            highlight: function(element) {
                                                                 $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
                                                             },
-                                                            unhighlight: function (element) {
+                                                            unhighlight: function(element) {
                                                                 $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
                                                             },
                                                             errorElement: 'span',
                                                             errorClass: 'help-block',
-                                                            errorPlacement: function (error, element) {
+                                                            errorPlacement: function(error, element) {
                                                                 if (element.parent('.input-group').length) {
                                                                     error.insertAfter(element.parent());
                                                                 } else {
@@ -2140,14 +2111,10 @@
                                                                 }
                                                             }
                                                         });
-                                                        jQuery.validator.addMethod("val_fecha", function (value, element) {
-                                                            var d = value.split("-");
-                                                            return this.optional(element) || String(parseInt(d[0])).length == 4;
-                                                        }, "¡Fecha ingresada invalida!");
 
                                                         $('#bootstrap-wizard-1').bootstrapWizard({
                                                             'tabClass': 'form-wizard',
-                                                            'onNext': function (tab, navigation, index) {
+                                                            'onNext': function(tab, navigation, index) {
                                                                 var $valid = $("#wizard-1").valid();
                                                                 if (!$valid) {
                                                                     $validator.focusInvalid();
@@ -2165,7 +2132,7 @@
                                                         // fuelux wizard
                                                         var wizard = $('.wizard').wizard();
 
-                                                        wizard.on('finished', function (e, data) {
+                                                        wizard.on('finished', function(e, data) {
                                                             //$("#fuelux-wizard").submit();
                                                             //console.log("submitted!");
                                                             $.smallBox({
@@ -2189,7 +2156,7 @@
         _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
         _gaq.push(['_trackPageview']);
 
-        (function () {
+        (function() {
             var ga = document.createElement('script');
             ga.type = 'text/javascript';
             ga.async = true;
@@ -2203,24 +2170,24 @@
     <!--Solo numeros -->
     <script type="text/javascript">
         $("#docs, .doc_c").numeric();
-        $("#doc, .doc_c").numeric(false, function () {
+        $("#doc, .doc_c").numeric(false, function() {
             alert("Solo Numeros Enteros");
             this.value = "";
             this.focus();
         });
-        $(".positive").numeric({negative: false}, function () {
+        $(".positive").numeric({negative: false}, function() {
             alert("No negative values");
             this.value = "";
             this.focus();
         });
-        $(".positive-integer").numeric({decimal: false, negative: false}, function () {
+        $(".positive-integer").numeric({decimal: false, negative: false}, function() {
             alert("Positive integers only");
             this.value = "";
             this.focus();
         });
 
         $("#remove").click(
-                function (e)
+                function(e)
                 {
                     e.preventDefault();
                     $(".numeric,.integer,.positive").removeNumeric();
@@ -2262,13 +2229,13 @@
     <!--Select dinamicos-->
     <script type="text/javascript">
         /*Ubigeo*/
-        $("#dep_nac").change(function () {
+        $("#dep_nac").change(function() {
             var ti = $("#pro_nac");
             ti.empty();
             var rg = $("#dep_nac").val();
             var data = "id_dep=" + rg + "&opc=dep_nac";
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../ubigeo", data, function (objJson) {
+            $.post("../../ubigeo", data, function(objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2286,13 +2253,13 @@
                 }
             });
         });
-        $("#pro_nac").change(function () {
+        $("#pro_nac").change(function() {
             var ti = $("#dist_nac");
             ti.empty();
             var rg = $("#pro_nac").val();
             var data = "id_dist=" + rg + "&opc=pro_nac";
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../ubigeo", data, function (objJson) {
+            $.post("../../ubigeo", data, function(objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2310,13 +2277,13 @@
                 }
             });
         });
-        $("#dep_dir_a").change(function () {
+        $("#dep_dir_a").change(function() {
             var ti = $("#pro_dir_a");
             ti.empty();
             var rg = $("#dep_dir_a").val();
             var data = "id_dep=" + rg + "&opc=dep_nac";
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../ubigeo", data, function (objJson) {
+            $.post("../../ubigeo", data, function(objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2334,13 +2301,13 @@
                 }
             });
         });
-        $("#pro_dir_a").change(function () {
+        $("#pro_dir_a").change(function() {
             var ti = $("#DOM_A_DISTRITO");
             ti.empty();
             var rg = $("#pro_dir_a").val();
             var data = "id_dist=" + rg + "&opc=pro_nac";
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../ubigeo", data, function (objJson) {
+            $.post("../../ubigeo", data, function(objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2358,13 +2325,13 @@
                 }
             });
         });
-        $("#dep_dir_l").change(function () {
+        $("#dep_dir_l").change(function() {
             var ti = $("#pro_dir_l");
             ti.empty();
             var rg = $("#dep_dir_l").val();
             var data = "id_dep=" + rg + "&opc=dep_nac";
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../ubigeo", data, function (objJson) {
+            $.post("../../ubigeo", data, function(objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2382,13 +2349,13 @@
                 }
             });
         });
-        $("#pro_dir_l").change(function () {
+        $("#pro_dir_l").change(function() {
             var ti = $("#DOM_LEG_DISTRITO");
             ti.empty();
             var rg = $("#pro_dir_l").val();
             var data = "id_dist=" + rg + "&opc=pro_nac";
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../ubigeo", data, function (objJson) {
+            $.post("../../ubigeo", data, function(objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2411,14 +2378,14 @@
 
 
         /*Datos Academicos*/
-        $("#rg").change(function () {
+        $("#rg").change(function() {
             var ti = $("#ti_inst");
             ti.empty();
             var rg = $("#rg").val();
             var data = "regimen=" + rg + "&opc=ti_inst";
 
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../detalle_carrera", data, function (objJson) {
+            $.post("../../detalle_carrera", data, function(objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2438,7 +2405,7 @@
         });
 
 
-        $("#ti_inst").change(function () {
+        $("#ti_inst").change(function() {
             var inst = $("#inst");
             inst.empty();
             var ti = $("#ti_inst").val();
@@ -2447,7 +2414,7 @@
              }*/
             var data = "ti=" + ti + "&opc=institucion";
             inst.append('<option value="">Cargando...</option>').val('');
-            $.post("../../detalle_carrera", data, function (objJson) {
+            $.post("../../detalle_carrera", data, function(objJson) {
                 inst.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2465,7 +2432,7 @@
                 }
             });
         });
-        $("#inst").change(function () {
+        $("#inst").change(function() {
             var carr = $("#carrera");
             carr.empty();
             var insti = $("#inst").val();
@@ -2474,7 +2441,7 @@
              }*/
             var data = "inst=" + insti + "&opc=carrera";
             carr.append('<option value="">Cargando...</option>').val('');
-            $.post("../../detalle_carrera", data, function (objJson) {
+            $.post("../../detalle_carrera", data, function(objJson) {
                 carr.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2501,14 +2468,14 @@
          });*/
     </script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             var b = $(".tbodys");
 
             $("#btnfiltrar").click(
-                    function () {
+                    function() {
 
 
-                        $.post("../../ajax/Ajax_Conyugue/Ajax_Busc_Conyug.jsp", $("#frm_filtro").serialize(), function (objJson) {
+                        $.post("../../ajax/Ajax_Conyugue/Ajax_Busc_Conyug.jsp", $("#frm_filtro").serialize(), function(objJson) {
                             b.empty();
                             var list = objJson.lista;
                             for (var i = 0; i < list.length; i++) {
@@ -2530,7 +2497,7 @@
 
                             }
 
-                            $(".btn-add-conyugue").click(function () {
+                            $(".btn-add-conyugue").click(function() {
                                 var v = $(this).val();
                                 $(".nom_c").val($(".nom_ape_" + v).val());
                                 $(".f_nac").val($(".nac_" + v).val());
@@ -2549,13 +2516,13 @@
 
 
                     });
-            $(".btn-salir-busc, .close").click(function () {
+            $(".btn-salir-busc, .close").click(function() {
 
                 $(".select-conyugue").val("0");
             });
 
 
-            $(".select-conyugue").change(function () {
+            $(".select-conyugue").change(function() {
                 if ($(this).val() == "1") {
                     $("#btn-mostrar").click();
                 }
@@ -2571,7 +2538,7 @@
             }
             );
             $("#btncancel").click(
-                    function () {
+                    function() {
                         document.formulario.reset();
                         b.empty();
                         html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'

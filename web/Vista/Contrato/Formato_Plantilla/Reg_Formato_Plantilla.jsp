@@ -482,48 +482,114 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     <body align="center">
     <center>
         <form class="ckeditor_form" action="../../../formato_plantilla" method="post">
-            <div class="row" >
+            <div class="row" style="margin:0px" >
+                <table>
+                    <td><table >
+                            <TR><h3>CARGAR PLANTILLAS</h3></TR>
+                            <TR><section class="col col-4" >
+                                <label>Dirección:
+                                    <select class="dir col  " id="dir" name="id_di" >
+                                        <option value="">[SELECCIONE]</option>
+                                        <option value="">[TODO]</option>
+                                    </select>   
+                                </label>
+                            </section>
 
-                <h3>CARGAR PLANTILLAS</h3>
-                <section class="col col-4" >
-                    <label>Dirección:
-                        <select class="dir col  " id="dir" name="id_di" >
-                            <option value="">[SELECCIONE]</option>
-                            <option value="">[TODO]</option>
-                        </select>   
-                    </label>
-                </section>
-                <section class="col col-4" >
-                    <label>Departamento:
-                        <select class="dep col " id="dep" name="id_dep" >
-                            <option value="">[TODO]</option>
-                        </select>
-                    </label>
-                </section>
-                <section class="col col-4" >
-                    <label>Area:
-                        <select class="area col" id="area" name="id_are" >
-                            <option value="">[TODO]</option>
-                        </select>
-                    </label>
-                </section>
-                <section class="col col-4" >
-                    <label>Sección:
-                        <select class="seccion col" id="seccion" name="id_sec" >
-                            <option value="">[TODO]</option>
-                        </select>
-                    </label>
-                </section>
-                <section class="col col-4" >
-                    <label>Puesto:
-                        <select class="puesto col" id="puesto" name="id_pu" >
-                            <option value="">[TODO]</option>
-                        </select>
-                    </label>
-                </section>
-                <br>
-                <br>
-                <table class="table table-hover table-responsive"  >
+                            <section class="col col-4" >
+                                <label>Departamento:
+                                    <select class="dep col " id="dep" name="id_dep" >
+                                        <option value="">[TODO]</option>
+                                    </select>
+                                </label>
+                            </section>
+                            <section class="col col-4" >
+                                <label>Area:
+                                    <select class="area col" id="area" name="id_are" >
+                                        <option value="">[TODO]</option>
+                                    </select>
+                                </label>
+                            </section>
+
+                            <section class="col col-4" >
+                                <label>Sección:
+                                    <select class="seccion col" id="seccion" name="id_sec" >
+                                        <option value="">[TODO]</option>
+                                    </select>
+                                </label>
+                            </section>
+                            <section class="col col-4" >
+                                <label>Puesto:
+                                    <select class="puesto col" id="puesto" name="id_pu" >
+                                        <option value="">[TODO]</option>
+                                    </select>
+                                </label>
+                            </section></TR>
+                            <br>
+                            <br>
+
+                            <h3>ASIGNAR PLANTILLAS</h3>
+                            <TR><section class="col col-4" >
+                                <label>Dirección:
+                                    <select class="dir_as col  " id="dir_as" name="id_di_asig" >
+                                        <option value="">[SELECCIONE]</option>
+                                        <option value="0">[TODO]</option>
+                                    </select>   
+                                </label>
+                            </section>
+                            <section class="col col-4" >
+                                <label>Departamento:
+                                    <select class="dep_as col " id="dep_as" name="id_dep_asig" >
+                                        <option value="0">[TODO]</option>
+                                    </select>
+                                </label>
+                            </section>
+                            <section class="col col-4" >
+                                <label>Area:
+                                    <select class="area_as col" id="area_as" name="id_are_asig" >
+                                        <option value="0">[TODO]</option>
+                                    </select>
+                                </label>
+                            </section>
+                            <section class="col col-4" >
+                                <label>Sección:
+                                    <select class="seccion_as col" id="seccion_as" name="id_sec_asig" >
+                                        <option value="0">[TODO]</option>
+                                    </select>
+                                </label>
+                            </section>
+                            <section class="col col-4" >
+                                <label>Puesto:
+                                    <select class="puesto_as col" id="puesto_as" name="id_pu_asig" >
+                                        <option value="0">[TODO]</option>
+                                    </select>
+                                </label>
+                            </section></tr>
+
+                        </table>
+                    </td>
+                    <td><table>
+                            <tr>
+                                <td><h2>Nomenclatura</h2></td>
+                                <td><h2>Significado</h2></td>
+                            </tr>
+                            <tr><td>[nombre]</td><td>Nombre del trabajador</td></tr>
+                            <tr><td>[app]</td><td>Apellido Paterno del trabajador</td></tr>
+                            <tr><td>[apm]</td><td>Apellido Materno del trabajador</td></tr>
+                            <tr><td>[dni]</td><td>Dni del trabajador</td></tr>
+                            <tr><td>[dir]</td><td>direccion del trabajador</td></tr>
+                            <tr><td>[prov]</td><td>Provincia actual</td></tr>
+                            <tr><td>[dist]</td><td>Distrito en el que estan</td></tr>
+                            <tr><td>[dep]</td><td>Departamento en donde se va a desenpeñar</td></tr>
+                            <tr><td>[desde]</td><td>fecha de Inicio del contrato</td></tr>
+                            <tr><td>[hasta]</td><td>Fecha de Fin del contrato</td></tr>
+                            <tr><td>[puesto]</td><td>Puesto que va a desempeñar</td></tr>
+                            <tr><td>[fe_suscripcion]</td><td>Fecha de suscripcion</td></tr>
+                            <tr><td>[sueldo]</td><td>Sueldo del trabajador</td></tr>
+                            <tr><td>[horas]</td><td>Horas de trabajo semanales</td></tr>
+                            <tr><td>[cursos]</td><td>Cuesos que va enseñar (en el caso que sea docente)</td></tr>
+                            <tr><td>[funciones]</td><td>Funciones que va a desempeñar en el puesto</td></tr>
+                        </table>         
+                    </td>
                     <thead>
                         <tr>
                             <td align="center" >Nro</td>
@@ -535,43 +601,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     <tbody class="tbody-plantilla">
                     </tbody>
                 </table>
-                <h3>ASIGNAR PLANTILLAS</h3>
-                <section class="col col-4" >
-                    <label>Dirección:
-                        <select class="dir_as col  " id="dir_as" name="id_di_asig" >
-                            <option value="">[SELECCIONE]</option>
-                            <option value="0">[TODO]</option>
-                        </select>   
-                    </label>
-                </section>
-                <section class="col col-4" >
-                    <label>Departamento:
-                        <select class="dep_as col " id="dep_as" name="id_dep_asig" >
-                            <option value="0">[TODO]</option>
-                        </select>
-                    </label>
-                </section>
-                <section class="col col-4" >
-                    <label>Area:
-                        <select class="area_as col" id="area_as" name="id_are_asig" >
-                            <option value="0">[TODO]</option>
-                        </select>
-                    </label>
-                </section>
-                <section class="col col-4" >
-                    <label>Sección:
-                        <select class="seccion_as col" id="seccion_as" name="id_sec_asig" >
-                            <option value="0">[TODO]</option>
-                        </select>
-                    </label>
-                </section>
-                <section class="col col-4" >
-                    <label>Puesto:
-                        <select class="puesto_as col" id="puesto_as" name="id_pu_asig" >
-                            <option value="0">[TODO]</option>
-                        </select>
-                    </label>
-                </section>
             </div>
             <h3>EDITAR PLANTILLAS</h3>
 
