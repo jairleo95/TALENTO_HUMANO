@@ -520,8 +520,7 @@ response.sendRedirect("Vista/Dgp/Reg_Dgp.jsp?idreq=" + idreq + "&es_cs=" + ES_CU
         }
         if (opc.equals("Incompleto")) {
             getServletContext().setAttribute("List_Incomplet", dgp.List_Incomplet(iddep));
-            out.print(iddep);
-            //response.sendRedirect("Vista/Dgp/List_req_incompl.jsp");
+            response.sendRedirect("Vista/Dgp/List_req_incompl.jsp");
         }
 
         //} catch (Exception e) {
