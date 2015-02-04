@@ -19,10 +19,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.FileUploadException;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import pe.edu.upeu.application.dao.DocumentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO;
 import pe.edu.upeu.application.model.Renombrar;
@@ -124,12 +124,15 @@ public class CDocumento extends HttpServlet {
                 } else {
                     response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&iddgp=" + dgp+"&pro=pr_dgp");
                 }
-                out.print(can_doc);
+                //out.print(can_doc);
             }
         } else {
 
             //------>   ./var/www/html/files/   (con: pwd)
             String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "\\Vista\\Dgp\\Documento\\Archivo";
+          //  String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
+          
+            
             DiskFileItemFactory f = new DiskFileItemFactory();
             f.setSizeThreshold(1024);
             f.setRepository(new File(ubicacion));
@@ -252,9 +255,9 @@ public class CDocumento extends HttpServlet {
             getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
             getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
 
-            out.print(pr);
+           /* out.print(pr);
             out.print(iddgp);
-            out.print(idtr);
+            out.print(idtr);*/
             if (pr != null) {
                 if (pr.equals("enter")) {
                     response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr + "&iddgp=" + iddgp);

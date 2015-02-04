@@ -18,10 +18,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.FileUploadException;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
 import pe.edu.upeu.application.dao.Fotos_TrabajadorDAO;
 import pe.edu.upeu.application.dao.TrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceFotos_TrabajadorDAO;
@@ -51,12 +52,15 @@ public class CFoto extends HttpServlet {
         InterfaceTrabajadorDAO tr = new TrabajadorDAO();
         String ubicacion = "";
         try {
-            if (System.getProperty("sun.desktop").trim().equals("windows")) {
+           /* if (System.getProperty("sun.desktop").trim().equals("windows")) {
                 ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "\\Vista\\Usuario\\Fotos";
             } else {
                 ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "/Vista/Usuario/Fotos/";
-            }
-            out.print(ubicacion);
+            }*/
+              ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Usuario/Fotos/";
+          
+            
+            //out.print(ubicacion);
 
             DiskFileItemFactory f = new DiskFileItemFactory();
             f.setSizeThreshold(1024);
