@@ -381,7 +381,7 @@
                                                             <div class="row">
                                                                 <div class="col-sm-4">
 
-                                                                    <div class="form-group">
+                                                                    <div class="form-group">Apellido Paterno
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <input type="text" name="APELLIDO_P"  required="" id="fname" placeholder="Apellido Paterno"  class="form-control input-group-sm"  onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
@@ -390,7 +390,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-4">
-                                                                    <div class="form-group">
+                                                                    <div class="form-group">Apellido Paterno
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <input type="text" name="APELLIDO_M" required=""  id="lname" placeholder="Apellido Materno" class="form-control input-group-sm" onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
@@ -399,7 +399,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-4">
-                                                                    <div class="form-group">
+                                                                    <div class="form-group">Apellido Paterno
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <input type="text" name="NOMBRES" required=""  id="lname" placeholder="Nombres" class="form-control input-group-sm" onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
@@ -412,7 +412,7 @@
 
                                                             <div class="row">
                                                                 <div class="col-sm-4">
-                                                                    <div class="form-group">
+                                                                    <div class="form-group">Apellido Paterno
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select name="SEXO" class="form-control input-group-sm"  required="">
@@ -425,7 +425,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-4">
-                                                                    <div class="form-group">
+                                                                    <div class="form-group">Apellido Paterno
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-child fa-lg fa-fw"></i><label class="edad"></label></span>
 
@@ -435,7 +435,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-4">
-                                                                    <div class="form-group">
+                                                                    <div class="form-group">Apellido Paterno
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-flag fa-lg fa-fw"></i></span>
                                                                             <select name="NACIONALIDAD" class="form-control input-group-sm"  id="nac" required="" >
