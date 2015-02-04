@@ -172,12 +172,14 @@
                         <tr><td class="text-info table-bordered">Fecha de Creacion:</td><td colspan="2" class="text-info table-bordered"><%=d.getFe_creacion()%></td></tr>
                             <%}%>
                         <tr>
-                            <%if (Cargar_dcc_dgp.size() > 0) {
+                            <%out.print(Cargar_dcc_dgp.size());
+                           
+                        if (Cargar_dcc_dgp.size() > 0) {
                                     for (int p = 0; p < Cargar_dcc_dgp.size(); p++) {
-                                        Detalle_Centro_Costo cc = new Detalle_Centro_Costo();
-                                        cc = (Detalle_Centro_Costo) Cargar_dcc_dgp.get(p);
+                                        Detalle_Centro_Costo dcc = new Detalle_Centro_Costo();
+                                        dcc = (Detalle_Centro_Costo) Cargar_dcc_dgp.get(p);
                             %>
-                            <td class="text-info table-bordered">Centro de costo Nro <%=p+1%></td><td class="text-info table-bordered"><%=cc.getDe_centro_costo()%></td>
+                            <td class="text-info table-bordered">Centro de costo Nro <%=p+1%></td><td class="text-info table-bordered"><%=dcc.getDe_centro_costo() %></td>
                             <%}
                             } else {%>
                             <td class="text-info table-bordered">Centro de costo </td><td class="text-info table-bordered">No tiene Centro de costo </td>

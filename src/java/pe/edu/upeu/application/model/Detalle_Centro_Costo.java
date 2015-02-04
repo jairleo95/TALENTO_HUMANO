@@ -11,14 +11,17 @@ package pe.edu.upeu.application.model;
  * @author Alex
  */
 public class Detalle_Centro_Costo {
-    private String id_centro_costo ;
-    private String id_direccion ;
-    private String id_departamento ;
-    private String id_area ;
-    private Double ca_porcentaje ;
-    private String de_centro_costo ;
+    
+    private String id_dgp;
+    private String id_centro_costo;
+    private String id_direccion;
+    private String id_departamento;
+    private String id_area;
+    private Double ca_porcentaje;
+    private String de_centro_costo;
 
-    public Detalle_Centro_Costo(String id_centro_costo, String id_direccion, String id_departamento, String id_area, Double ca_porcentaje, String de_centro_costo) {
+    public Detalle_Centro_Costo(String id_dgp, String id_centro_costo, String id_direccion, String id_departamento, String id_area, Double ca_porcentaje, String de_centro_costo) {
+        this.id_dgp = id_dgp;
         this.id_centro_costo = id_centro_costo;
         this.id_direccion = id_direccion;
         this.id_departamento = id_departamento;
@@ -26,8 +29,9 @@ public class Detalle_Centro_Costo {
         this.ca_porcentaje = ca_porcentaje;
         this.de_centro_costo = de_centro_costo;
     }
-
+    
     public Detalle_Centro_Costo() {
+        this.id_dgp = "";
         this.id_centro_costo = "";
         this.id_direccion = "";
         this.id_departamento = "";
@@ -35,7 +39,24 @@ public class Detalle_Centro_Costo {
         this.ca_porcentaje = 0.0;
         this.de_centro_costo = "";
     }
+
+    public String getDe_centro_costo() {
+        return de_centro_costo;
+    }
+
+    public void setDe_centro_costo(String de_centro_costo) {
+        this.de_centro_costo = de_centro_costo;
+    }
+
     
+    public String getId_dgp() {
+        return id_dgp;
+    }
+
+    public void setId_dgp(String id_dgp) {
+        this.id_dgp = id_dgp;
+    }
+
     public String getId_centro_costo() {
         return id_centro_costo;
     }
@@ -75,14 +96,5 @@ public class Detalle_Centro_Costo {
     public void setCa_porcentaje(Double ca_porcentaje) {
         this.ca_porcentaje = ca_porcentaje;
     }
-
-    public String getDe_centro_costo() {
-        return de_centro_costo;
-    }
-
-    public void setDe_centro_costo(String de_centro_costo) {
-        this.de_centro_costo = de_centro_costo;
-    }
-    
     
 }
