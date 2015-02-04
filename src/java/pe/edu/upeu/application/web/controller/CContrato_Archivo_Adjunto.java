@@ -16,9 +16,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import pe.edu.upeu.application.dao.ContratoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceContratoDAO;
 import pe.edu.upeu.application.model.Renombrar;
@@ -51,16 +51,16 @@ public class CContrato_Archivo_Adjunto extends HttpServlet {
                 ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "/Vista/Contrato/Contratos_Adjuntos/";
             }
             DiskFileItemFactory f = new DiskFileItemFactory();
-            
+
             if (f.getSizeThreshold() <= 500000) {
-                 out.print("adassd");
+                out.print("adassd");
             } else {
                 out.print("putopoooo");
             }
             f.setRepository(new File(ubicacion));
-            
+
             ServletFileUpload upload = new ServletFileUpload(f);
-           
+
             List<FileItem> p = upload.parseRequest(request);
             String idc = null;
             String nombre_archivo = null;
@@ -69,23 +69,23 @@ public class CContrato_Archivo_Adjunto extends HttpServlet {
             //  long sizeInBytes = 0;
             Iterator it = p.iterator();
             while (it.hasNext()) {
-                
+
                 FileItem item = (FileItem) it.next();
-                
+
                 if (item.isFormField()) {
-                    
+
                     String nombre = item.getFieldName();
                     String valor = item.getString();
                     if (nombre.equals("idc") & idc == null) {
                         idc = valor;
                     }
-                    
+
                 } else {
                     tamaño = item.getSize();
                     if (tamaño <= 500000) {
-                        
+
                         String fieldName = item.getFieldName();
-                        
+
                         Calendar fecha = new GregorianCalendar();
                         int hora = fecha.get(Calendar.HOUR_OF_DAY);
                         int min = fecha.get(Calendar.MINUTE);
@@ -99,10 +99,10 @@ public class CContrato_Archivo_Adjunto extends HttpServlet {
                             no_original = no_original;
                             nombre_archivo = nombre_archivo;
                         }
-                        
+
                     }
                 }
-                
+
             }
             if (tamaño <= 500000) {
                 if (nombre_archivo != null) {
@@ -113,7 +113,7 @@ public class CContrato_Archivo_Adjunto extends HttpServlet {
                 out.println(tamaño);
             } else {
                 out.print("No se permite subir archivos mayores a 0.5MB");
-                out.print( upload.getFileSizeMax());
+                out.print(upload.getFileSizeMax());
             }
 
             //getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
@@ -123,7 +123,7 @@ public class CContrato_Archivo_Adjunto extends HttpServlet {
         } catch (Exception e) {
             out.println(e.getMessage());
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

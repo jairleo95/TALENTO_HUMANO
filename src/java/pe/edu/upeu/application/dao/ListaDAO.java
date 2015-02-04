@@ -353,4 +353,26 @@ public class ListaDAO implements InterfaceListaDAO {
 
     }
 
+    @Override
+    public List<String> lista_años() {
+
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+
+        List<String> list = new ArrayList<String>();
+        try {
+
+            for (int i = 0; i < 50; i++) {
+                String sql = "select  to_number(to_char(sysdate,'yyyy')) - " + i + " from dual";
+                ResultSet rs = this.conn.query(sql);
+                rs.next();
+                list.add(rs.getString(1).trim());
+}
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return list;
+
+    }
+
 }
