@@ -103,7 +103,6 @@
                             return;
                         }
                         for (var i = 0; i < lista.length; i++) {
-
                             b.append("<div class='alert alert-danger alert-block' ><a class='close' data-dismiss='alert' href='#'>×</a><h4 class='alert-heading'>" + lista[i].nom + "</h4>" + lista[i].det + " , Fecha Plazo " + lista[i].desde + " al " + lista[i].hasta + "</div>");
                         }
                     });
@@ -149,9 +148,7 @@
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
                                     <h2>Requerimientos por Autorizar</h2>
-
                                 </header>
-
                                 <!-- widget div-->
                                 <div>
 
@@ -165,7 +162,6 @@
                                             String dep = (String) sesion_1.getAttribute("DEPARTAMENTO_ID");%>
                                     </div>
                                     <!-- end widget edit box -->
-
                                     <script>
                                         function exito(titulo, mensaje) {
                                             $.smallBox({
@@ -194,8 +190,6 @@
 
                                             });
                                             $(".btn_pro_firma").click(function () {
-
-                                                // 
                                                 try {
                                                     $.each($(".firm_contr"), function () {
                                                         //alert($(this).val());
@@ -223,9 +217,35 @@
                                                 catch (err) {
                                                     alert(err.message);
                                                 } finally {
+                                                }
+                                            });
+                                            $(".btn_cod_aps").click(function () {
 
+                                                for (var r = 1; r <= parseInt($(".num_aps").val()); r++) {
+                                                    if ($(".cod_aps" + r).val() != "") {
+                                                        $.ajax({
+                                                            url: "../../trabajador",
+                                                            type: "POST",
+                                                            data: "opc=reg_aps_masivo&cod=" + $(".cod_aps" + r).val() + "&idtr=" + $(".idtr" + r).val()
+                                                        }).done(function () {
+
+                                                        });
+                                                        $.ajax({
+                                                            url: "../../autorizacion",
+                                                            type: "POST",
+                                                            data: "opc=Aceptar" + $(".val_aut" + r).val()
+                                                        }).done(function () {
+                                                            window.location.href = "../../autorizacion";
+                                                        });
+
+                                                    }
 
                                                 }
+                                                //  $.each($(".cod_aps"), function () {
+
+                                                /**/
+
+                                                //   });
                                             });
 
 
@@ -238,10 +258,13 @@
                                         <button type="button" class="btn btn-success btn_pro_firma">Procesar Firmas</button>
                                         <button type="button" class="btn btn-default btn_pro_remuneracion">Enviar a remuneraciones</button>
                                         <%}%>
+                                        <%if (idrol.trim().equals("ROL-0009")) {%>
+                                        <button type="button" class="btn btn-success btn_cod_aps">Procesar codigos</button>
+                                        <%}%>
                                         <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                                             <thead>
                                                 <tr data-hide="phone,tablet"> <th><strong>Nro</strong></th>
-                                                    <th ><strong>Acción</strong></th>
+                                                    <th data-hide="phone,tablet"><strong>Acción</strong></th>
                                                     <th ><strong>MES</strong></th>
 
                                                     <th data-hide="phone,tablet"><strong>Foto</strong> </th>
@@ -253,24 +276,28 @@
                                                     <th data-hide="phone,tablet"><strong>Requerimiento</strong></th>
                                                     <!--  <td>Departamento</td>-->
                                                     <th data-hide="phone,tablet"><strong>Descripción</strong></th>
-                                                       <th  data-hide="phone,tablet">Fecha de Creación</th>  
+                                                    <th  data-hide="phone,tablet">Fecha de Creación</th>  
                                                         <% if (dep.equals("DPT-0019")) {%>
-                                                 
-                                                    <th data-class="expand" ><strong>¿Cumplio Plazos?</strong></th>
+
+                                                    <th  ><strong>¿Cumplio Plazos?</strong></th>
                                                         <%if (idrol.trim().equals("ROL-0006")) {
 
                                                         %>
-                                                    <th data-class="expand" ><strong>¿Contrato Elaborado?</strong></th>
-                                                    <th data-class="expand" ><strong>¿Firmo Contrato?</strong></th>
-                                                    <th data-class="expand" ><strong>Enviar a Rem.</strong></th>
+                                                    <th ><strong>¿Contrato Elaborado?</strong></th>
+                                                    <th  ><strong>¿Firmo Contrato?</strong></th>
+                                                    <th ><strong>Enviar a Rem.</strong></th>
                                                         <%}
-                                                        }%>
+                                                            }%>
+                                                        <%if (idrol.trim().equals("ROL-0009")) {%>
+                                                    <th><strong>Código APS</strong></th>
+                                                        <%}%>
                                                 </tr>
                                             </thead>
                                             <tbody> 
                                                 <%
                                                     String iddgp = request.getParameter("iddgp");
                                                     String idtr = request.getParameter("idtr");
+                                                    int num_cod_aps = 0;
                                                     InterfaceDgpDAO dgp = new DgpDAO();
                                                     if (t == 0) {
                                                 %>
@@ -331,7 +358,7 @@
 
 
                                                     </td>
- <td ><%=a.getMes_creacion()%></td>   
+                                                    <td ><%=a.getMes_creacion()%></td>   
                                                     <% if (a.getAr_foto() == null) {%>
                                                     <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30"></td>
                                                         <% } else {%>
@@ -389,6 +416,8 @@
                                                         out.println("Si");
                                                     }
                                                 %></td>
+
+
                                             <td><%
                                                 if (Integer.parseInt(a.getVal_firm_contrato()) != 0 & Integer.parseInt(a.getElab_contrato()) != 0) {
                                                 %>
@@ -403,7 +432,16 @@
                                                 %></td>
 
                                             <%}%>
-
+                                            <%if (idrol.trim().equals("ROL-0009")) {%>
+                                            <%if (a.getVal_cod_aps_empleado() == 0) {
+                                                    num_cod_aps++;
+                                            %>
+                                            <td><input type="text" name="cod_aps" maxlength="6" class="cod_aps<%=(f + 1)%>" style="width:50px"/></td>
+                                            <input type="hidden" name="idtr"  class="idtr<%=(f + 1)%>" value="<%=a.getId_trabajador()%>" />
+                                            <%} else {%>
+                                            <td></td>
+                                            <%}
+                                                }%>
 
                                             </tr>
                                             <% }
@@ -411,8 +449,7 @@
                                                 List_id_Autorizacion.clear();%>
                                             </tbody>
                                         </table>
-
-
+                                                <input class="num_aps" type="hidden" value="<%=num_cod_aps%>" />
                                     </div>
                                     <!-- end widget content -->
 
@@ -528,6 +565,7 @@
     <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
     <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
     <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
+    <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
 
 
     <script type="text/javascript">
@@ -540,6 +578,7 @@
                                             $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                                                 $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                                             });
+                                            $(".cod_aps").numeric();
 
                                             /* // DOM Position key index //
                                              

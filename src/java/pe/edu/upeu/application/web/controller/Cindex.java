@@ -57,6 +57,8 @@ public class Cindex extends HttpServlet {
 
         if (Usuario.equals("") && Clave.equals("")) {
             out.print("ERROR");
+        
+            
         } else if (us.Val_Usuario(Usuario, Clave).size() == 1) {
             List<V_Usuario> u = us.Val_Usuario(Usuario, Clave);
             V_Usuario user = new V_Usuario();

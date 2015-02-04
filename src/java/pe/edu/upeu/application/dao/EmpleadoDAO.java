@@ -418,8 +418,8 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
     @Override
     public int val_cod_aps_empleado(String idtr) {
         int num_c = 0;
-          this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-          String sql = "select COUNT(CO_APS) from RHTD_EMPLEADO where ID_TRABAJADOR='" + idtr + "' AND co_aps is not null";
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select COUNT(CO_APS) from RHTD_EMPLEADO where ID_TRABAJADOR='" + idtr + "' AND co_aps is not null";
         try {
             ResultSet rs = this.conn.query(sql);
             rs.next();
@@ -427,7 +427,7 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("Error al valdiar contratos por requerimientos");
+            throw new RuntimeException("Error al validar codigo aps");
         } finally {
             try {
                 this.conn.close();
@@ -439,7 +439,7 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
     }
 
     @Override
-    public void Reg_aps(String idtr,int aps) {
+    public void Reg_aps(String idtr, int aps) {
         CallableStatement cst;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -447,9 +447,16 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
             cst.setString(1, idtr);
             cst.setInt(2, aps);
             cst.execute();
-        } catch (SQLException ex) {
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al registrar codigo APS");
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 

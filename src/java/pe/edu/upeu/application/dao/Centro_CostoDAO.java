@@ -17,6 +17,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceCentro_CostosDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Centro_Costos;
+import pe.edu.upeu.application.model.Detalle_Centro_Costo;
 
 /**
  *
@@ -283,5 +284,30 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
         }
 
         return list;
+    }
+    @Override
+    public List<Detalle_Centro_Costo> Cargar_dcc_dgp(String id) {
+        this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select  CC.ID_DGP , cc.ID_CENTRO_COSTO,d.ID_DIRECCION,c.ID_DEPARTAMENTO,c.ID_AREA,cc.CA_PORCENTAJE,c.DE_CENTRO_COSTO from RHTD_DETALLE_CENTRO_COSTO cc , RHTR_CENTRO_COSTO c , RHTX_DIRECCION d , RHTX_DEPARTAMENTO dp where cc.ID_CENTRO_COSTO = c.ID_CENTRO_COSTO  and dp.ID_DEPARTAMENTO = c.ID_DEPARTAMENTO  and cc.ES_DETALLE_CC='1'  and dp.ID_DIRECCION = d.ID_DIRECCION and cc.id_dgp='" + id + "'";
+        List<Detalle_Centro_Costo> Lista = new ArrayList<Detalle_Centro_Costo>();
+        try {
+            ResultSet rs = this.cnn.query(sql);
+            while (rs.next()) {
+                Detalle_Centro_Costo d = new Detalle_Centro_Costo();
+                d.setId_centro_costo(rs.getString("id_centro_costo"));
+                d.setId_direccion(rs.getString("id_direccion"));
+                d.setId_departamento(rs.getString("id_departamento"));
+                d.setId_area(rs.getString("id_area"));
+                d.setCa_porcentaje(rs.getDouble("ca_porcentaje"));
+                d.setDe_centro_costo(rs.getString("de_centro_costo"));
+                Lista.add(d);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.cnn.close();
+        }
+
+        return Lista;
+
     }
 }
