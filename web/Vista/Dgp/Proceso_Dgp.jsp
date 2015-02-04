@@ -221,7 +221,7 @@
                                                     r = (V_Es_Requerimiento) LIST_DGP_PROCESO.get(i);
                                             %>
                                             <tr>
-                                                <td><%=r.getId_detalle_req_proceso()%><strong><%=i + 1%></strong></td>
+                                                <td><strong><%=i + 1%></strong></td>
                                                 <td><%=r.getMes_creacion()%></td>
                                                 <td>
                                                     <div class="btn-group">
