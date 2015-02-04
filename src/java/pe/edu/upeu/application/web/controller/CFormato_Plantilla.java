@@ -24,7 +24,6 @@ import pe.edu.upeu.application.dao.Formato_HorarioDAO;
 import pe.edu.upeu.application.dao.PlantillaContractualDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceFormato_HorarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePlantillaContractualDAO;
-import pe.edu.upeu.application.model.Formato_Horario;
 
 /**
  *
@@ -71,15 +70,14 @@ public class CFormato_Plantilla extends HttpServlet {
                 String texto_html = request.getParameter("valor");
                 String id = request.getParameter("id");
                 String ubicacion = "";
-                if (System.getProperty("sun.desktop").trim().equals("windows")) {
+               /* if (System.getProperty("sun.desktop").trim().equals("windows")) {
                     ubicacion = direccion_raiz + "\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
-                } else {
-                    ubicacion = direccion_raiz + "/Vista/Contrato/Formato_Plantilla/Formato/";
-                }
+                } else {*/
+                    ubicacion ="/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Contrato/Formato_Plantilla/Formato/";
+               // }
                 File archivo = new File(ubicacion + id);
                 if (archivo.exists()) {
                     //  archivo.delete();
-                    // out.print("asfsfsafsdf");
                     FileWriter escribir = new FileWriter(archivo);
                     // aqui se hace un append al archivo existente
                     //FileWriter escribir = new FileWriter(archivo,true);
@@ -98,11 +96,11 @@ public class CFormato_Plantilla extends HttpServlet {
                 String ubicacion = "";
                 String imprimir = "";
                 String no_archivo = request.getParameter("id");
-                if (System.getProperty("sun.desktop").trim().equals("windows")) {
+             /*   if (System.getProperty("sun.desktop").trim().equals("windows")) {
                     ubicacion = direccion_raiz + "\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
-                } else {
-                    ubicacion = direccion_raiz + "/Vista/Contrato/Formato_Plantilla/Formato/";
-                }
+                } else {*/
+                ubicacion ="/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Contrato/Formato_Plantilla/Formato/";
+              //  }
                 FileReader lector = new FileReader(ubicacion + no_archivo);
                 BufferedReader contenido = new BufferedReader(lector);
                 while ((texto = contenido.readLine()) != null) {
@@ -142,11 +140,12 @@ public class CFormato_Plantilla extends HttpServlet {
                 String id_pl = pl.ob_id_pl_max();
                 pl.Insertar_pertenencia(id_pl, DIR, DEP, AREA, SEC, PUES, iduser);
                 String no_arch = pl.Obt_no_arch();
-                if (System.getProperty("sun.desktop").trim().equals("windows")) {
+                /*if (System.getProperty("sun.desktop").trim().equals("windows")) {
                     ubicacion = direccion_raiz + "\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
-                } else {
+                } else {*/
                     ubicacion = direccion_raiz + "/Vista/Contrato/Formato_Plantilla/Formato/";
-                }
+                     ubicacion ="/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Contrato/Formato_Plantilla/Formato/";
+                //}
                 File archivo = new File(ubicacion + no_arch);
                 FileWriter escribir = new FileWriter(archivo, true);
                 escribir.write(texto_html);
