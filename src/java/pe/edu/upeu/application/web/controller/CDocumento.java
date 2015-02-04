@@ -23,6 +23,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.servlet.ServletRequestContext;
 import pe.edu.upeu.application.dao.DocumentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO;
 import pe.edu.upeu.application.model.Renombrar;
@@ -129,16 +130,16 @@ public class CDocumento extends HttpServlet {
             } else {
 
                 //------>   ./var/www/html/files/   (con: pwd)
-                //String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "\\Vista\\Dgp\\Documento\\Archivo";
-                 String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
+                // String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "\\Vista\\Dgp\\Documento\\Archivo";
+                String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
 
                 DiskFileItemFactory f = new DiskFileItemFactory();
                 f.setSizeThreshold(1024);
                 f.setRepository(new File(ubicacion));
                 ServletFileUpload upload = new ServletFileUpload(f);
-
+                ServletRequestContext src = new ServletRequestContext(request);
                 try {
-                    List<FileItem> p = upload.parseRequest(request);
+                    List<FileItem> p = upload.parseRequest(src);
                     int num_filas = 0;
                     String iddgp = null;
                     String pr = null;
@@ -192,10 +193,10 @@ public class CDocumento extends HttpServlet {
                                 estado = (nombre.equals("estado" + i)) ? valor : estado;
 
                             } else {
-                        //uploaded files will come here.  
+                                //uploaded files will come here.  
                                 // FileItem file = item;
                                 String fieldName = item.getFieldName();
-                        //String fileName = item.getName();
+                                //String fileName = item.getName();
                                 //String contentType = item.getContentType();
                                 //boolean isInMemory = item.isInMemory();
                                 //long sizeInBytes = item.getSize();
@@ -206,7 +207,7 @@ public class CDocumento extends HttpServlet {
                                 int min = fecha.get(Calendar.MINUTE);
                                 int sec = fecha.get(Calendar.SECOND);
 
-                        // File files = new File(ubicacion, nombre_archivo);
+                                // File files = new File(ubicacion, nombre_archivo);
                                 //  no_original = (fieldName.equals("lob_upload" + i)) ? item.getName() : no_original;
                                 if (fieldName.equals("lob_upload" + i)) {
                                     nombre_archivo = String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + num + iddgp + "_" + item.getName().toUpperCase();
@@ -219,7 +220,7 @@ public class CDocumento extends HttpServlet {
                                 }
                         // nombre_archivo = (fieldName.equals("lob_upload" + i)) ? String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + num + iddgp + "_" + item.getName().toUpperCase() : nombre_archivo;
 
-                        //nombre_archivo = (fieldName.equals("lob_upload" + i)) ?String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + num + iddgp + "_" + item.getName().toUpperCase() : nombre_archivo;
+                                //nombre_archivo = (fieldName.equals("lob_upload" + i)) ?String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + num + iddgp + "_" + item.getName().toUpperCase() : nombre_archivo;
                                 // out.println(no_original);
                                 //no_original = item.getName();
                                 //item.write(files);
