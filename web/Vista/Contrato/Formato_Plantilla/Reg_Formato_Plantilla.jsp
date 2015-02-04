@@ -13,43 +13,36 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
 <html>
     <head>
-        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+        <meta name="descripcion" content>
+        <meta name="author"content>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <title>Crear Formatos</title>
-        <script src="../../../HTML_version/js/plugin/ckeditor/ckeditor.js"></script>
-        <link type="text/css" rel="stylesheet" href="../../../css/Css_Reporte/Reportes.css">
-        <link type="text/css" rel="stylesheet" href="../../../css/Css_Formulario/form.css">
-        <link href="../../../HTML_version/js/plugin/ckeditor/samples/sample.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" media="screen" href="../../../HTML_version/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="../../../HTML_version/css/font-awesome.min.css">
-        <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
-        <link rel="stylesheet" type="text/css" media="screen" href="../../../HTML_version/css/smartadmin-production.min.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="../../../HTML_version/css/smartadmin-skins.min.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="../../../HTML_version/css/demo.min.css">
-
-        <!-- FAVICONS -->
-        <link rel="shortcut icon" href="../../../HTML_version/img/favicon/favicon.ico" type="image/x-icon">
-        <link rel="icon" href="../../../HTML_version/img/favicon/favicon.ico" type="image/x-icon">
-
-        <!-- GOOGLE FONT -->
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
-
-        <!-- Specifying a Webpage Icon for Web Clip 
-                 Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
-        <link rel="apple-touch-icon" href="../../../HTML_version/img/splash/sptouch-icon-iphone.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="../../../HTML_version/img/splash/touch-icon-ipad.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="../../../HTML_version/img/splash/touch-icon-iphone-retina.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="../../../HTML_version/img/splash/touch-icon-ipad-retina.png">
-
-        <!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
+        <script src="../../../js/plugin/ckeditor/ckeditor.js"></script>
+        <link href="../../../js/plugin/ckeditor/samples/sample.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-skins.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/demo.min.css">
+        <link rel="shortcut icon" href="../../../img/favicon/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="../../../img/favicon/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" href="../../../img/splash/sptouch-icon-iphone.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../../img/splash/touch-icon-ipad.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../../img/splash/touch-icon-iphone-retina.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../../img/splash/touch-icon-ipad-retina.png">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
         <!-- Startup image for web apps -->
-        <link rel="apple-touch-startup-image" href="../../../HTML_version/img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
-        <link rel="apple-touch-startup-image" href="../../../HTML_version/img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
-        <link rel="apple-touch-startup-image" href="../../../HTML_version/img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+        <link rel="apple-touch-startup-image" href="../../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+        <link rel="apple-touch-startup-image" href="../../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+        <link rel="apple-touch-startup-image" href="../../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
-        <link rel="stylesheet" type="text/css"  href="../../../css/Css_Formulario/form.css">
+        <script type="text/javascript" src="../../../js/Js_Alerta/alertify.js"></script>
+        <link rel="stylesheet" href="../../../css/Css_Alerta/alertify.core.css" />
+        <link rel="stylesheet" href="../../../css/Css_Alerta/alertify.default.css" />
+        <script type="text/javascript"  src="../../../js/Js_Alerta/Alertas.js"></script>
         <script>
 // The instanceReady event is fired, when an instance of CKEditor has finished
 // its initialization.
@@ -479,170 +472,378 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
     </head>
 
-    <body align="center">
-    <center>
-        <form class="ckeditor_form" action="../../../formato_plantilla" method="post">
-            <div class="row" style="margin:0px" >
-                <table>
-                    <td><table >
-                            <TR><h3>CARGAR PLANTILLAS</h3></TR>
-                            <TR><section class="col col-4" >
-                                <label>Dirección:
-                                    <select class="dir col  " id="dir" name="id_di" >
-                                        <option value="">[SELECCIONE]</option>
-                                        <option value="">[TODO]</option>
-                                    </select>   
-                                </label>
-                            </section>
+    <body class="body  desktop-detected pace-done" style="cursor: auto;">
 
-                            <section class="col col-4" >
-                                <label>Departamento:
-                                    <select class="dep col " id="dep" name="id_dep" >
-                                        <option value="">[TODO]</option>
-                                    </select>
-                                </label>
-                            </section>
-                            <section class="col col-4" >
-                                <label>Area:
-                                    <select class="area col" id="area" name="id_are" >
-                                        <option value="">[TODO]</option>
-                                    </select>
-                                </label>
-                            </section>
+        <div id="main"  >
+            <div id="content" style="margin-left: 0px;">
+                <section id="widget-grid" class="">
 
-                            <section class="col col-4" >
-                                <label>Sección:
-                                    <select class="seccion col" id="seccion" name="id_sec" >
-                                        <option value="">[TODO]</option>
-                                    </select>
-                                </label>
-                            </section>
-                            <section class="col col-4" >
-                                <label>Puesto:
-                                    <select class="puesto col" id="puesto" name="id_pu" >
-                                        <option value="">[TODO]</option>
-                                    </select>
-                                </label>
-                            </section></TR>
-                            <br>
-                            <br>
+                    <h1>Mant. Plantillas</h1>
 
-                            <h3>ASIGNAR PLANTILLAS</h3>
-                            <TR><section class="col col-4" >
-                                <label>Dirección:
-                                    <select class="dir_as col  " id="dir_as" name="id_di_asig" >
-                                        <option value="">[SELECCIONE]</option>
-                                        <option value="0">[TODO]</option>
-                                    </select>   
-                                </label>
-                            </section>
-                            <section class="col col-4" >
-                                <label>Departamento:
-                                    <select class="dep_as col " id="dep_as" name="id_dep_asig" >
-                                        <option value="0">[TODO]</option>
-                                    </select>
-                                </label>
-                            </section>
-                            <section class="col col-4" >
-                                <label>Area:
-                                    <select class="area_as col" id="area_as" name="id_are_asig" >
-                                        <option value="0">[TODO]</option>
-                                    </select>
-                                </label>
-                            </section>
-                            <section class="col col-4" >
-                                <label>Sección:
-                                    <select class="seccion_as col" id="seccion_as" name="id_sec_asig" >
-                                        <option value="0">[TODO]</option>
-                                    </select>
-                                </label>
-                            </section>
-                            <section class="col col-4" >
-                                <label>Puesto:
-                                    <select class="puesto_as col" id="puesto_as" name="id_pu_asig" >
-                                        <option value="0">[TODO]</option>
-                                    </select>
-                                </label>
-                            </section></tr>
 
-                        </table>
-                    </td>
-                    <td><table>
-                            <tr>
-                                <td><h2>Nomenclatura</h2></td>
-                                <td><h2>Significado</h2></td>
-                            </tr>
-                            <tr><td>[nombre]</td><td>Nombre del trabajador</td></tr>
-                            <tr><td>[app]</td><td>Apellido Paterno del trabajador</td></tr>
-                            <tr><td>[apm]</td><td>Apellido Materno del trabajador</td></tr>
-                            <tr><td>[dni]</td><td>Dni del trabajador</td></tr>
-                            <tr><td>[dir]</td><td>direccion del trabajador</td></tr>
-                            <tr><td>[prov]</td><td>Provincia actual</td></tr>
-                            <tr><td>[dist]</td><td>Distrito en el que estan</td></tr>
-                            <tr><td>[dep]</td><td>Departamento en donde se va a desenpeñar</td></tr>
-                            <tr><td>[desde]</td><td>fecha de Inicio del contrato</td></tr>
-                            <tr><td>[hasta]</td><td>Fecha de Fin del contrato</td></tr>
-                            <tr><td>[puesto]</td><td>Puesto que va a desempeñar</td></tr>
-                            <tr><td>[fe_suscripcion]</td><td>Fecha de suscripcion</td></tr>
-                            <tr><td>[sueldo]</td><td>Sueldo del trabajador</td></tr>
-                            <tr><td>[horas]</td><td>Horas de trabajo semanales</td></tr>
-                            <tr><td>[cursos]</td><td>Cuesos que va enseñar (en el caso que sea docente)</td></tr>
-                            <tr><td>[funciones]</td><td>Funciones que va a desempeñar en el puesto</td></tr>
-                        </table>         
-                    </td>
-                    <thead>
-                        <tr>
-                            <td align="center" >Nro</td>
-                            <td align="center">Nombre Plantilla</td>
-                            <td align="center">Estado Plantilla Puesto</td>
-                            <td colspan="2">Acciones</td>
-                        </tr>
-                    </thead>
-                    <tbody class="tbody-plantilla">
-                    </tbody>
-                </table>
+                    <div class="row">
+                        <article class="col-sm-12 col-md-12 col-lg-12">
+                            <div class="jarviswidget" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+                                <header><span class="widget-icon"><i class="fa fa-table"></i></span>
+                                    <h2>Instrucciones </h2>
+                                </header>
+                                <div>
+                                    <div class="jarviswidget-editbox">
+                                        <!-- This area used as dropdown edit box -->
+
+                                    </div>
+                                    <div class="widget-body no-padding">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Nro</th>
+                                                        <th><i class="fa fa-building"></i>Nomenclatura</th>
+                                                        <th><i class="fa fa-calendar"></i>Significado</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ><td>1</td><td>[nombre]</td><td>Nombre del trabajador</td></tr>
+                                                    <tr><td>2</td><td>[app]</td><td>Apellido Paterno del trabajador</td></tr>
+                                                    <tr><td>3</td><td>[apm]</td><td>Apellido Materno del trabajador</td></tr>
+                                                    <tr><td>4</td><td>[dni]</td><td>Dni del trabajador</td></tr>
+                                                    <tr><td>5</td><td>[dir]</td><td>direccion del trabajador</td></tr>
+                                                    <tr><td>6</td><td>[prov]</td><td>Provincia actual</td></tr>
+                                                    <tr><td>7</td><td>[dist]</td><td>Distrito en el que estan</td></tr>
+                                                    <tr><td>8</td><td>[dep]</td><td>Departamento en donde se va a desenpeñar</td></tr>
+                                                    <tr><td>9</td><td>[desde]</td><td>fecha de Inicio del contrato</td></tr>
+                                                    <tr><td>10</td><td>[hasta]</td><td>Fecha de Fin del contrato</td></tr>
+                                                    <tr><td>11</td><td>[puesto]</td><td>Puesto que va a desempeñar</td></tr>
+                                                    <tr><td>12</td><td>[fe_suscripcion]</td><td>Fecha de suscripcion</td></tr>
+                                                    <tr><td>13</td><td>[sueldo]</td><td>Sueldo del trabajador</td></tr>
+                                                    <tr><td>14</td><td>[horas]</td><td>Horas de trabajo semanales</td></tr>
+                                                    <tr><td>15</td><td>[cursos]</td><td>Cuesos que va enseñar (en el caso que sea docente)</td></tr>
+                                                    <tr><td>16</td><td>[funciones]</td><td>Funciones que va a desempeñar en el puesto</td></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="row">
+
+                        <!-- NEW COL START -->
+                        <article class="col-sm-12 col-md-12 col-lg-12">
+
+                            <!-- Widget ID (each widget will need unique ID)-->
+                            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-colorbutton="true"  >
+                                <!-- widget options:
+                                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                                data-widget-colorbutton="false"
+                                data-widget-editbutton="false"
+                                data-widget-togglebutton="false"
+                                data-widget-deletebutton="false"
+                                data-widget-fullscreenbutton="false"
+                                data-widget-custombutton="false"
+                                data-widget-collapsed="true"
+                                data-widget-sortable="false"
+
+                                -->
+                                <header>
+                                    <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                                    <h2>Basic Form Elements </h2>
+
+                                </header>
+
+                                <!-- widget div-->
+                                <div>
+
+                                    <!-- widget edit box -->
+                                    <div class="jarviswidget-editbox">
+                                        <!-- This area used as dropdown edit box -->
+
+                                    </div>
+                                    <!-- end widget edit box -->
+
+                                    <!-- widget content -->
+                                    <div class="widget-body no-padding">
+
+                                        <form action="../../../formato_plantilla" method="post">
+                                            <h3>CARGAR PLANTILLAS</h3>
+                                            <section class="col col-4" >
+                                                <label>Dirección:
+                                                    <select class="dir col  " id="dir" name="id_di" >
+                                                        <option value="">[SELECCIONE]</option>
+                                                        <option value="">[TODO]</option>
+                                                    </select>   
+                                                </label>
+                                            </section>
+
+                                            <section class="col col-4" >
+                                                <label>Departamento:
+                                                    <select class="dep col " id="dep" name="id_dep" >
+                                                        <option value="">[TODO]</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <section class="col col-4" >
+                                                <label>Area:
+                                                    <select class="area col" id="area" name="id_are" >
+                                                        <option value="">[TODO]</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+
+                                            <section class="col col-4" >
+                                                <label>Sección:
+                                                    <select class="seccion col" id="seccion" name="id_sec" >
+                                                        <option value="">[TODO]</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <section class="col col-4" >
+                                                <label>Puesto:
+                                                    <select class="puesto col" id="puesto" name="id_pu" >
+                                                        <option value="">[TODO]</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <br>
+                                            <br>
+
+                                            <h3>ASIGNAR PLANTILLAS</h3>
+                                            <section class="col col-4" >
+                                                <label>Dirección:
+                                                    <select class="dir_as col  " id="dir_as" name="id_di_asig" >
+                                                        <option value="">[SELECCIONE]</option>
+                                                        <option value="0">[TODO]</option>
+                                                    </select>   
+                                                </label>
+                                            </section>
+                                            <section class="col col-4" >
+                                                <label>Departamento:
+                                                    <select class="dep_as col " id="dep_as" name="id_dep_asig" >
+                                                        <option value="0">[TODO]</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <section class="col col-4" >
+                                                <label>Area:
+                                                    <select class="area_as col" id="area_as" name="id_are_asig" >
+                                                        <option value="0">[TODO]</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <section class="col col-4" >
+                                                <label>Sección:
+                                                    <select class="seccion_as col" id="seccion_as" name="id_sec_asig" >
+                                                        <option value="0">[TODO]</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <section class="col col-4" >
+                                                <label>Puesto:
+                                                    <select class="puesto_as col" id="puesto_as" name="id_pu_asig" >
+                                                        <option value="0">[TODO]</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <td align="center" >Nro</td>
+                                                        <td align="center">Nombre Plantilla</td>
+                                                        <td align="center">Estado Plantilla Puesto</td>
+                                                        <td colspan="2">Acciones</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="tbody-plantilla">
+                                                </tbody>
+                                            </table>
+
+
+                                            <h3>EDITAR PLANTILLAS</h3>
+
+                                            <br><strong>NOMBRE PLANTILLA</strong><br>
+
+
+                                            <button type="submit" value="Asignar" onclick="leer();" name="opc">Asignar Plantilla</button>
+                                            <button  onclick="procesar_texto();" type="button">Procesar </button>
+
+                                            <input type="text" class="nombre_pl form-control" name="no_pl" ><br><br>
+                                            <textarea cols="100" id="editor1" name="editor1" rows="10">
+                                            </textarea>
+                                            <script>
+                                                // Replace the <textarea id="editor1"> with an CKEditor instance.
+                                                CKEDITOR.replace('editor1', {
+                                                    on: {
+                                                        focus: onFocus,
+                                                        blur: onBlur,
+                                                        // Check for availability of corresponding plugins.
+                                                        pluginsLoaded: function(evt) {
+
+
+                                                            var doc = CKEDITOR.document, ed = evt.editor;
+                                                            if (!ed.getCommand('bold'))
+                                                                doc.getById('exec-bold').hide();
+                                                            if (!ed.getCommand('link'))
+                                                                doc.getById('exec-link').hide();
+                                                        }
+
+                                                    }
+                                                });
+                                            </script>
+                                            <div id="eButtons" >
+                                                <input  type="hidden" name="id" value="" class="id_pl"/>
+                                                <input  type="hidden" name="id_pc" value="" class="id_pc"/>
+                                                <button type="submit" value="Actualizar" onclick="leer();" name="opc">Actualizar Plantilla</button>
+                                                <button type="submit" value="Crear_Plantilla" name="opc" onclick="leer();">Crear Plantilla</button>
+                                            </div>
+                                            <div id="shortcut">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#inbox.html" class="jarvismetro-tile big-cubes bg-color-blue"> <span class="iconbox"> <i class="fa fa-envelope fa-4x"></i> <span>Mail <span class="label pull-right bg-color-darken">14</span></span> </span> </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#calendar.html" class="jarvismetro-tile big-cubes bg-color-orangeDark"> <span class="iconbox"> <i class="fa fa-calendar fa-4x"></i> <span>Calendar</span> </span> </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#gmap-xml.html" class="jarvismetro-tile big-cubes bg-color-purple"> <span class="iconbox"> <i class="fa fa-map-marker fa-4x"></i> <span>Maps</span> </span> </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#invoice.html" class="jarvismetro-tile big-cubes bg-color-blueDark"> <span class="iconbox"> <i class="fa fa-book fa-4x"></i> <span>Invoice <span class="label pull-right bg-color-darken">99</span></span> </span> </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#gallery.html" class="jarvismetro-tile big-cubes bg-color-greenLight"> <span class="iconbox"> <i class="fa fa-picture-o fa-4x"></i> <span>Gallery </span> </span> </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="jarvismetro-tile big-cubes selected bg-color-pinkDark"> <span class="iconbox"> <i class="fa fa-user fa-4x"></i> <span>My Profile </span> </span> </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                    <!-- end widget content -->
+
+                                </div>
+                                <!-- end widget div -->
+
+                            </div>
+                            <!-- end widget -->
+
+                        </article>
+                        <!-- END COL -->
+
+
+                    </div>
+
+                </section>
+
             </div>
-            <h3>EDITAR PLANTILLAS</h3>
-
-            <br><strong>NOMBRE PLANTILLA</strong><br>
+        </div>
 
 
-            <button type="submit" value="Asignar" onclick="leer();" name="opc">Asignar Plantilla</button>
-            <button  onclick="procesar_texto();" type="button">Procesar </button>
-            <form>
-                <input type="text" class="nombre_pl form-control" name="no_pl" ><br><br>
-                <textarea cols="100" id="editor1" name="editor1" rows="10">
-                </textarea>
-                <script>
-                    // Replace the <textarea id="editor1"> with an CKEditor instance.
-                    CKEDITOR.replace('editor1', {
-                        on: {
-                            focus: onFocus,
-                            blur: onBlur,
-                            // Check for availability of corresponding plugins.
-                            pluginsLoaded: function(evt) {
+        <h3>ASIGNAR PLANTILLAS</h3>
+    </body>
+    <script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>
+
+    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script>
+                                                if (!window.jQuery) {
+                                                    document.write('<script src="../../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                                                }
+    </script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script>
+                                                if (!window.jQuery.ui) {
+                                                    document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                                                }
+    </script>
+
+    <!-- IMPORTANT: APP CONFIG -->
+    <script src="../../../js/app.config.js"></script>
+
+    <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
+    <script src="../../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
+
+    <!-- BOOTSTRAP JS -->
+    <script src="../../../js/bootstrap/bootstrap.min.js"></script>
+
+    <!-- CUSTOM NOTIFICATION -->
+    <script src="../../../js/notification/SmartNotification.min.js"></script>
+
+    <!-- JARVIS WIDGETS -->
+    <script src="../../../js/smartwidgets/jarvis.widget.min.js"></script>
+
+    <!-- EASY PIE CHARTS -->
+    <script src="../../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+
+    <!-- SPARKLINES -->
+    <script src="../../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
+
+    <!-- JQUERY VALIDATE -->
+    <script src="../../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
+
+    <!-- JQUERY MASKED INPUT -->
+    <script src="../../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+
+    <!-- JQUERY SELECT2 INPUT -->
+    <script src="../../../js/plugin/select2/select2.min.js"></script>
+
+    <!-- JQUERY UI + Bootstrap Slider -->
+    <script src="../../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+
+    <!-- browser msie issue fix -->
+    <script src="../../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+
+    <!-- FastClick: For mobile devices -->
+    <script src="../../../js/plugin/fastclick/fastclick.min.js"></script>
+
+    <!--[if IE 8]>
+
+    <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+
+    <![endif]-->
+
+    <!-- Demo purpose only -->
+    <script src="../../../HTML_version/js/demo.min.js"></script>
+
+    <!-- MAIN APP JS FILE -->
+    <script src="../../../HTML_version/js/app.min.js"></script>
+
+    <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
+    <!-- Voice command : plugin -->
+    <script src="../../../HTML_version/js/speech/voicecommand.min.js"></script>
+
+    <!-- PAGE RELATED PLUGIN(S) -->
 
 
-                                var doc = CKEDITOR.document, ed = evt.editor;
-                                if (!ed.getCommand('bold'))
-                                    doc.getById('exec-bold').hide();
-                                if (!ed.getCommand('link'))
-                                    doc.getById('exec-link').hide();
-                            }
+    <script type="text/javascript">
+                                                // DO NOT REMOVE : GLOBAL FUNCTIONS!
+                                                $(document).ready(function() {
+                                                    pageSetUp();
+                                                })
 
-                        }
-                        , height: '800px', width: "1200px"});
-                </script>
-                <div id="eButtons" >
-                    <input  type="hidden" name="id" value="" class="id_pl"/>
-                    <input  type="hidden" name="id_pc" value="" class="id_pc"/>
-                    <button type="submit" value="Actualizar" onclick="leer();" name="opc">Actualizar Plantilla</button>
-                    <button type="submit" value="Crear_Plantilla" name="opc" onclick="leer();">Crear Plantilla</button>
-                </div>
-            </form>
-            <h3>ASIGNAR PLANTILLAS</h3>
-    </center>
-</body>
+    </script>
+
+    <!-- Your GOOGLE ANALYTICS CODE Below -->
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+
 </html>
 
 <%} else {

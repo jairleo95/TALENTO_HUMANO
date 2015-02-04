@@ -75,6 +75,59 @@
     <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
     <script src="../../js/libs/jquery-ui-1.10.3.min.js"></script>
     <script>
+        function Listar() {
+            var a = $("#list");
+            $.post("../../modulo", "opc=lis_pr_mod_x_id&" + "id_modulo=" + $("#selec_modulo").val(), function(objJson) {
+
+                a.empty();
+                var lista = objJson.lista;
+                var nroe = 1;
+                if (lista.length > 0) {
+                    for (var i = 0; i < lista.length; i++) {
+                        nroe = nroe + i;
+                        a.append("<tr>");
+                        a.append("<td align='center'>" + nroe + "</td>");
+                        a.append("<td align='center'>" + lista[i].no_md + "</td>");
+                        if (lista[i].es_md == '1') {
+                            a.append("<td align='center'><p>ACTIVADO</p></td>");
+                        } else {
+                            a.append("<td align='center'><p>DESACTIVADO</p></td>");
+                        }
+                        a.append("<td><p>" + lista[i].no_pr + "</p></td>");
+                        if (lista[i].es_pr == '1') {
+                            a.append("<td align='center'><p>ACTIVADO</p></td>");
+                        } else {
+                            a.append("<td align='center'><p>DESACTIVADO</p></td>");
+                        }
+                        if (lista[i].id_md == 'MOD-0010') {
+                            a.append('<td align="center"><button value=' + lista[i].id_pr + ' class="btn_activar" disabled="">Activar</button></td>');
+                            a.append('<td align="center"><button value=' + lista[i].id_pr + ' class="btn_desactiva" disabled="">Desactivar</button></td>');
+                        } else {
+                            a.append("<td align='center'><button value=" + lista[i].id_pr + " class='btn_activar'>Activar</button></td>");
+                            a.append("<td align='center'><button value=" + lista[i].id_pr + " class='btn_desactivar'>Desactivar</button></td>");
+                        }
+                        $(".btn_desactivar").click(
+                                function() {
+                                    $.post("../../modulo", "opc=desactivar_pri_mod&" + "id_privilegio=" + $(this).val(), function() {
+                                        Listar();
+                                    });
+
+                                });
+                        $(".btn_activar").click(
+                                function() {
+                                    $.post("../../modulo", "opc=activar_pri_mod&" + "id_pr=" + $(this).val(), function() {
+                                        Listar();
+                                    });
+                                });
+                        nroe = 1;
+                    }
+                } else {
+                    a.append('<tr><td colspan="10" align="center">No tiene Privilegios</td></tr>');
+                }
+
+            });
+        }
+
         $(document).ready(function() {
             list_modulo();
             list_Priv();
@@ -108,60 +161,7 @@
                     function() {
                         Listar();
                     });
-            function Listar() {
-                var a = $("#list");
-                $.post("../../modulo", "opc=lis_pr_mod_x_id&" + "id_modulo=" + $("#selec_modulo").val(), function(objJson) {
 
-                    a.empty();
-                    var lista = objJson.lista;
-                    var nroe = 1;
-                    if (lista.length > 0) {
-                        for (var i = 0; i < lista.length; i++) {
-                            nroe = nroe + i;
-                            a.append("<tr>");
-                            a.append("<td align='center'>" + nroe + "</td>");
-                            a.append("<td align='center'>" + lista[i].no_md + "</td>");
-                            if (lista[i].es_md == '1') {
-                                a.append("<td align='center'><p>ACTIVADO</p></td>");
-                            } else {
-                                a.append("<td align='center'><p>DESACTIVADO</p></td>");
-                            }
-                            a.append("<td><p>" + lista[i].no_pr + "</p></td>");
-                            if (lista[i].es_pr == '1') {
-                                a.append("<td align='center'><p>ACTIVADO</p></td>");
-                            } else {
-                                a.append("<td align='center'><p>DESACTIVADO</p></td>");
-                            }
-                            if (lista[i].id_md == 'MOD-0010') {
-                                a.append('<td align="center"><button value=' + lista[i].id_pr + ' class="btn_activar" disabled="">Activar</button></td>');
-                                a.append('<td align="center"><button value=' + lista[i].id_pr + ' class="btn_desactiva" disabled="">Desactivar</button></td>');
-                            } else {
-                                a.append("<td align='center'><button value=" + lista[i].id_pr + " class='btn_activar'>Activar</button></td>");
-                                a.append("<td align='center'><button value=" + lista[i].id_pr + " class='btn_desactivar'>Desactivar</button></td>");
-                            }
-                            // a.append("<td align='center'><a onclick='activar_priv('"+lista[i].no_pr+"');'>Desactivar</button></a></td>");
-                            //a.append("");
-                            $(".btn_desactivar").click(
-                                    function() {
-                                        $.post("../../modulo", "opc=desactivar_pri_mod&" + "id_privilegio=" + $(this).val(), function() {
-                                            alert($(this).val());
-                                        });
-                                        Listar();
-                                    });
-                            $(".btn_activar").click(
-                                    function() {
-                                        $.post("../../modulo", "opc=activar_pri_mod&" + "id_pr=" + $(this).val(), function() {
-                                        });
-                                        Listar();
-                                    });
-                            nroe = 1;
-                        }
-                    } else {
-                        a.append('<tr><td colspan="10" align="center">No tiene Privilegios</td></tr>');
-                    }
-
-                });
-            }
             $("#btn_prv").click(
                     function() {
                         $.post("../../modulo", $(".form-modulo").serialize(), function(objJson) {
