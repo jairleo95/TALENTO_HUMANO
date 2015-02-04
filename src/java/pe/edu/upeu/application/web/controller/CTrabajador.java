@@ -326,7 +326,11 @@ public class CTrabajador extends HttpServlet {
             response.sendRedirect("Vista/Trabajador/Aspecto_Social.jsp");
 
         }
-
+        
+        if (opc.equals("Editar_Dat_Gen")){
+             String idtr = request.getParameter("idtr");
+             response.sendRedirect("Vista/Trabajador/Mod_Datos_Generales.jsp");
+        }
         /* } catch (Exception e) {
          out.println(e.getMessage());
          } finally {

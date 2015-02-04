@@ -14,7 +14,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-       <form align="center" action="../../../trabajador"  >
+        <form align="center" action="../../../trabajador"  >
             <fieldset>
                 <%for (int index = 0; index < ListaridTrabajador.size(); index++) {
                         V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
@@ -56,8 +56,8 @@
                     <section class="col col-2">
                         <label class="select" id="titu">Autoridad:
                             <select name="AUTORIDAD" class="input-group-sm">
-                                <option value="" >[SELECCIONE]</option> 
-                                <%if (trb.getLi_autoridad().trim().equals("1")) {%>
+                                <% if (trb.getLi_autoridad() != null) {
+                                        if (trb.getLi_autoridad().trim().equals("1")) {%>
                                 <option value="1" selected="">Pastor</option> 
                                 <option value="2" >Primer Anciano</option> 
                                 <option value="3" >Sacerdote</option> 
@@ -71,6 +71,12 @@
                                 <option value="1" >Pastor</option> 
                                 <option value="2" >Primer Anciano</option> 
                                 <option value="3" selected="">Sacerdote</option> 
+                                <%}
+                                } else {%>
+                                <option value="" selected="" >[SELECCIONE]</option>
+                                <option value="1" >Pastor</option> 
+                                <option value="2" >Primer Anciano</option> 
+                                <option value="3" >Sacerdote</option> 
                                 <%}%>
                             </select> 
                         </label>
@@ -85,12 +91,12 @@
                             <input  class="input-group-sm" type="text" name="AUT_CELULAR" value="<%=trb.getCl_autoridad()%>">
                         </label>
                     </section>
-                        <%String idtr = request.getParameter("idtr");%>
-                        <input type="text" value="<%=idtr %>" name="idtr">
-                        <input type="submit" value="Modificar" name="opc">
-              
+                    <%String idtr = request.getParameter("idtr");%>
+                    <input type="text" value="<%=idtr%>" name="idtr">
+                    <input type="submit" value="Modificar" name="opc">
+
                 </div>
-                         <%}%>
+                <%}%>
             </fieldset>
         </form>
     </body>

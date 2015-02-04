@@ -104,6 +104,10 @@
                         %></td></tr>
 
                <!-- <tr><td colspan="2"><input class="btn btn-success" style="height: 140%; width: 30%;"  type="submit" value="Editar"></td></tr>-->
+                        <tr>
+                            <%String IDTR = trb.getId_trabajador(); %>
+                            <td colspan="2"><a class="btn btn-success" href="../../trabajador?opc=Editar_Dat_Gen&idtr=<%=IDTR %>">EDITAR</a>
+                        </tr>
                         <%}%>
             </table>
         </form>
