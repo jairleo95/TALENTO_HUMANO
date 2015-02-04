@@ -13,7 +13,7 @@
         <title>Subidor Devtroce</title>
     </head>
     <body>
-        <form action=index.jsp method=post enctype=multipart/form-data>
+        <form action=index_gg.jsp method=post enctype=multipart/form-data>
             <table>
                 <tr>
                     <td>Fichero</td>
@@ -38,7 +38,6 @@
             if (ServletFileUpload.isMultipartContent(src)) {
                 DiskFileItemFactory factory = new DiskFileItemFactory((1024 * 1024), destino);
                 ServletFileUpload upload = new ServletFileUpload(factory);
-
                 java.util.List lista = upload.parseRequest(src);
                 File file = null;
                 java.util.Iterator it = lista.iterator();
