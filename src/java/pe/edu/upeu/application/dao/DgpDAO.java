@@ -618,7 +618,7 @@ public class DgpDAO implements InterfaceDgpDAO {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "SELECT f.de_pasos, "
-                    + "  f.nu_pasos ,s.es_autorizacion, rhfu_count_aut_dgp ('" + iddgp + "') as count_aut,rhfu_detalle_puesto_aut ('"+idrp+"',f.id_pasos) as puesto_aut  "
+                    + "  f.nu_pasos ,s.es_autorizacion, rhfu_count_aut_dgp ('" + iddgp + "') as count_aut "
                     + "FROM "
                     + "  (SELECT p.id_pasos, "
                     + "    p.id_proceso, "
@@ -718,15 +718,15 @@ public class DgpDAO implements InterfaceDgpDAO {
 
                         if (i == 1) {
                             cadena = cadena
-                                    + " <div class=\"new-circle done\" rel=\"popover-hover\" data-placement=\"top\" data-original-title=\""+rs.getString("de_pasos") +"\" data-content=\""
-                                    +rs.getString("puesto_aut")+"\" data-html=\"true\">"
+                                    + " <div class=\"new-circle done\" rel=\"popover-hover\" data-placement=\"top\" data-original-title=\"Detalle de Proceso\" data-content=\""
+                                    + rs.getString("nu_pasos") + " | " + rs.getString("de_pasos") + " \" data-html=\"true\">"
                                     + "<span class=\"new-label\">&#10004;</span>"
                                     + "<span class=\"new-title\">" + rs.getString("nu_pasos") + "</span> "
                                     + "</div>";
                         } else {
                             cadena = cadena
                                     + " <span class=\"new-bar done\"></span> "
-                                    + "<div class=\"new-circle done\" rel=\"popover-hover\" data-placement=\"top\" data-original-title=\""+rs.getString("de_pasos") +"\" data-content=\""+rs.getString("puesto_aut")+" \" data-html=\"true\">"
+                                    + "<div class=\"new-circle done\" rel=\"popover-hover\" data-placement=\"top\" data-original-title=\"Detalle de Proceso\" data-content=\"" + rs.getString("nu_pasos") + " | " + rs.getString("de_pasos") + " \" data-html=\"true\">"
                                     + "<span class=\"new-label\">&#10004;</span>"
                                     + "<span class=\"new-title\">" + rs.getString("nu_pasos") + "</span>"
                                     + " </div>";
@@ -737,7 +737,7 @@ public class DgpDAO implements InterfaceDgpDAO {
                     if (rs.getString("es_autorizacion").equals("2")) {
                         cadena = cadena
                                 + " <span class=\"new-bar done\"></span> "
-                                + "<div  class=\"new-circle rechazo\" rel=\"popover-hover\" data-placement=\"top\" data-original-title=\""+rs.getString("de_pasos") +"\" data-content=\" "+rs.getString("puesto_aut")+" \" data-html=\"true\">"
+                                + "<div  class=\"new-circle rechazo\" rel=\"popover-hover\" data-placement=\"top\" data-original-title=\"Detalle de Proceso\" data-content=\"" + rs.getString("nu_pasos") + " | " + rs.getString("de_pasos") + " \" data-html=\"true\">"
                                 + "<span style='color:white; font:bold;' class=\"new-label fa fa-warning\"></span>"
                                 + "<span class=\"new-title\">" + rs.getString("nu_pasos") + "</span>"
                                 + " </div>";
@@ -749,7 +749,7 @@ public class DgpDAO implements InterfaceDgpDAO {
                     //if (false) {
                         cadena = cadena
                                 + " <span class=\"new-bar active\"></span> "
-                                + "<div class=\"new-circle active\" rel=\"popover-hover\" data-placement=\"top\" data-original-title=\""+rs.getString("de_pasos") +"\" data-content=\""+rs.getString("puesto_aut")+" \" data-html=\"true\">"
+                                + "<div class=\"new-circle active\" rel=\"popover-hover\" data-placement=\"top\" data-original-title=\"Detalle de Proceso\" data-content=\"" + rs.getString("nu_pasos") + " | " + rs.getString("de_pasos") + " \" data-html=\"true\">"
                                 + "<span class=\"new-label fa fa-inbox\"></span>"
                                 + "<span class=\"new-title\">" + rs.getString("nu_pasos") + "</span>"
                                 + " </div>";
@@ -757,7 +757,7 @@ public class DgpDAO implements InterfaceDgpDAO {
                     } else {
                         cadena = cadena
                                 + " <span class=\"new-bar \"></span> "
-                                + "<div class=\"new-circle\" rel=\"popover-hover\" data-placement=\"top\" data-original-title=\""+rs.getString("de_pasos") +"\" data-content=\""+rs.getString("puesto_aut")+" \" data-html=\"true\">"
+                                + "<div class=\"new-circle\" rel=\"popover-hover\" data-placement=\"top\" data-original-title=\"Detalle de Proceso\" data-content=\"" + rs.getString("nu_pasos") + " | " + rs.getString("de_pasos") + " \" data-html=\"true\">"
                                 + "<span class=\"new-label fa fa-lock\"></span>"
                                 + "<span class=\"new-title\">" + rs.getString("nu_pasos") + "</span>"
                                 + " </div>";

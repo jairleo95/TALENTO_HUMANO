@@ -93,7 +93,7 @@
                 </center>
                 </thead>
                 <tbody>
-                    <%                        int i = 0;
+                    <%int i = 0;
                         for (int z = 0; z < List_doc_req_pla.size(); z++) {
                             V_Reg_Dgp_Tra d = new V_Reg_Dgp_Tra();
                             d = (V_Reg_Dgp_Tra) List_doc_req_pla.get(z);

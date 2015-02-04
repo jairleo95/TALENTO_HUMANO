@@ -227,7 +227,7 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
         }
 
         return list;
-
+        
     }
 
     @Override
@@ -263,6 +263,29 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
     }
 
     @Override
+    public List<Centro_Costos> Lis_c_c_id_dgp(String id_dgp) {
+        this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT c.ID_CENTRO_COSTO ,c.DE_CENTRO_COSTO ,c.CO_CENTRO_COSTO, c.ID_DEPARTAMENTO, d.CA_PORCENTAJE FROM RHTR_CENTRO_COSTO c,RHTD_DETALLE_CENTRO_COSTO d where d.ID_CENTRO_COSTO=c.ID_CENTRO_COSTO and  d.ID_DGP ='"+id_dgp.trim()+"';";
+        List<Centro_Costos> list = new ArrayList<Centro_Costos>();
+        try {
+            ResultSet rs = this.cnn.query(sql);
+            while (rs.next()) {
+                Centro_Costos d = new Centro_Costos();
+                d.setId_centro_costo(rs.getString("ID_CENTRO_COSTO"));
+                d.setDe_centro_costo(rs.getString("DE_CENTRO_COSTO"));
+                d.setCo_centro_costo(rs.getString("CO_CENTRO_COSTO"));
+                d.setId_departamento(rs.getString("ID_DEPARTAMENTO"));
+                d.setCa_porcentaje(rs.getString("CA_PORCENTAJE"));
+                list.add(d);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.cnn.close();
+        }
+
+        return list;
+    }
+    @Override
     public List<Detalle_Centro_Costo> Cargar_dcc_dgp(String id) {
         this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "select  CC.ID_DGP , cc.ID_CENTRO_COSTO,d.ID_DIRECCION,c.ID_DEPARTAMENTO,c.ID_AREA,cc.CA_PORCENTAJE,c.DE_CENTRO_COSTO from RHTD_DETALLE_CENTRO_COSTO cc , RHTR_CENTRO_COSTO c , RHTX_DIRECCION d , RHTX_DEPARTAMENTO dp where cc.ID_CENTRO_COSTO = c.ID_CENTRO_COSTO  and dp.ID_DEPARTAMENTO = c.ID_DEPARTAMENTO  and cc.ES_DETALLE_CC='1'  and dp.ID_DIRECCION = d.ID_DIRECCION and cc.id_dgp='" + id + "'";
@@ -286,29 +309,5 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
 
         return Lista;
 
-    }
-
-    @Override
-    public List<Centro_Costos> Lis_c_c_id_dgp(String id_dgp) {
-        this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT c.ID_CENTRO_COSTO ,c.DE_CENTRO_COSTO ,c.CO_CENTRO_COSTO, c.ID_DEPARTAMENTO, d.CA_PORCENTAJE FROM RHTR_CENTRO_COSTO c,RHTD_DETALLE_CENTRO_COSTO d where d.ID_CENTRO_COSTO=c.ID_CENTRO_COSTO and  d.ID_DGP ='" + id_dgp.trim() + "';";
-        List<Centro_Costos> list = new ArrayList<Centro_Costos>();
-        try {
-            ResultSet rs = this.cnn.query(sql);
-            while (rs.next()) {
-                Centro_Costos d = new Centro_Costos();
-                d.setId_centro_costo(rs.getString("ID_CENTRO_COSTO"));
-                d.setDe_centro_costo(rs.getString("DE_CENTRO_COSTO"));
-                d.setCo_centro_costo(rs.getString("CO_CENTRO_COSTO"));
-                d.setId_departamento(rs.getString("ID_DEPARTAMENTO"));
-                d.setCa_porcentaje(rs.getString("CA_PORCENTAJE"));
-                list.add(d);
-            }
-        } catch (SQLException e) {
-        } finally {
-            this.cnn.close();
-        }
-
-        return list;
     }
 }

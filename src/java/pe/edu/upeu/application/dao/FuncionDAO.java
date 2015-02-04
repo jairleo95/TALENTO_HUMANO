@@ -135,18 +135,4 @@ public class FuncionDAO implements InterfaceFuncionDAO {
         }
         return ok;
     }
-
-    @Override
-    public void Eliminar_funcion(String id_fun) {
-        CallableStatement cst;
-        try {
-            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            cst = cnn.conex.prepareCall("{CALL RHSP_ELIMINAR_FUNCION(?)}");
-            cst.setString(1, id_fun);
-            cst.execute();
-        } catch (SQLException ex) {
-        } finally {
-            this.cnn.close();
-        }
-    }
 }

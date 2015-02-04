@@ -89,10 +89,6 @@ public class CFuncion extends HttpServlet {
                 String id_pu=request.getParameter("id_pu");
                 f.Modificar_funcion(id_fun, es_fun, de_fun, id_pu, id_user);
             }
-            if (opc.equals("del_funcion")) {
-                String idFuncion= request.getParameter("id_fun");
-                f.Eliminar_funcion(idFuncion);
-            }
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());
