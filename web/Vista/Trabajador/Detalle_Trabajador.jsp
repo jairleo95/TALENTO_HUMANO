@@ -301,99 +301,61 @@
                         <%if (iddep.equals("DPT-0019")) {
                         %>
                         <li >
-                            <a href="#s1" data-toggle="tab"><i class="fa fa-file-text fa-gear"></i> Información Contractual </a>
+                            <a href="../../contrato?idtr=<%=idtr%>&opc=Detalle_Contractual" target="myframe2"  data-toggle="tab" ><i class="fa fa-file-text fa-gear"></i> Información Contractual </a>
                         </li>
                         <%}%>
                         <li >
-                            <a href="#s2" data-toggle="tab"><i class="fa fa-male fa-gear"></i> Información General </a>
+                            <a href="Datos_Generales.jsp" target="myframe2"  ><i class="fa fa-male fa-gear"></i> Información General </a>
                         </li>
                         <li>
-                            <a href="#s3" data-toggle="tab"><i class="fa fa-graduation-cap fa-gear"></i> Aspecto Académico</a>
+                            <a href="Aspecto_Academico.jsp" target="myframe2"><i class="fa fa-graduation-cap fa-gear"></i> Aspecto Académico</a>
                         </li>
                         <li >
-                            <a href="#s4" data-toggle="tab"><i class="fa fa-home fa-gear"></i> Aspecto Social </a>
+                            <a href="Aspecto_Social.jsp" target="myframe2"><i class="fa fa-home fa-gear"></i> Aspecto Social </a>
                         </li>
                         <li >
-                            <a href="#s5" data-toggle="tab"><i class="fa fa-group fa-gear"></i> Familiares </a>
+                            <a href="../../familiar?idtr=<%=idtr%>&opc=Detalle_Familiar" target="myframe2"><i class="fa fa-group fa-gear"></i> Familiares </a>
                         </li>
                         <li >
-                            <a href="#s6" data-toggle="tab"><i class="fa fa-file-o fa-gear"></i> Historial de Requerimientos </a>
+                            <a href="../../dgp?idtr=<%=idtr%>&opc=List_Dgp_Tr" target="myframe2"><i class="fa fa-file-o fa-gear"></i> Historial de Requerimientos </a>
                         </li>
                         <li >
-                            <a href="#s7" data-toggle="tab"><i class="fa fa-file fa-gear"></i> Documentación </a>
+                            <a href="../../trabajador?idtr=<%=idtr%>&opc=Documento_Trabajador" target="myframe2"><i class="fa fa-file fa-gear"></i> Documentación </a>
                         </li>
 
                         <%if (idrol.trim().equals("ROL-0007")) {
                         %>
                         <li >
-                            <a href="#s8" data-toggle="tab"><i class="fa fa-file-text fa-gear"></i> Evaluación de Emleado</a>
+                            <a href="../../empleado?opc=Eva_Emp&idtr=<%=idtr%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Evaluación de Emleado</a>
                         </li>
                         <%}%>
-                        <%  if (List_Auto_mostrar.size() == 1 && aut != null) {%>
-                        <li >
-                            <a href="#s9" data-toggle="tab"><i class="fa fa-file-text fa-gear"></i> Datos de Requerimientos</a>
-                        </li>
-                        <%}%>
-                    </ul>
-                    <div id="myTabContent1" class="tab-content padding-10">
-                        <%if (iddep.equals("DPT-0019")) {
-                        %>
-                        <div class="tab-pane fade" id="s1">                            
-                            <iframe name="contenido" id="contenido"  class="autoHeight" src="../../contrato?idtr=<%=idtr%>&opc=Detalle_Contractual" width="100%" height="100%" ></iframe>
-                        </div>
-                        <%}%>
-                        <div class="tab-pane fade <%if (aut != null) {
-                            } else {
-                                out.print(" in active");
-                            }
-                             %>" id="s2">
-                            <iframe name="contenido" id="contenido"  class="autoHeight" src="Datos_Generales.jsp" width="100%" height="100%" ></iframe>
-                        </div>
-                        <div class="tab-pane fade" id="s3">                           
-                            <iframe name="contenido" id="contenido"  class="autoHeight" src="Aspecto_Academico.jsp" width="100%" height="100%" ></iframe>                           
-                        </div>
-                        <div class="tab-pane fade" id="s4">                            
-                            <iframe name="contenido" id="contenido"  class="autoHeight" src="Aspecto_Social.jsp" width="100%" height="100%" ></iframe>                           
-                        </div>
-                        <div class="tab-pane fade" id="s5">                            
-                            <iframe name="contenido" id="contenidofa"  class="autoHeight" src="../../familiar?idtr=<%=idtr%>&opc=Detalle_Familiar" width="100%" height="100%" ></iframe>
-                        </div>
-                        <div class="tab-pane fade" id="s6">                            
-                            <iframe name="contenido" id="contenido"  class="autoHeight" src="../../dgp?idtr=<%=idtr%>&opc=List_Dgp_Tr" width="100%" height="100%" ></iframe>
-                        </div>
-                        <div class="tab-pane fade" id="s7">                            
-                            <iframe name="contenido" id="contenido"  class="autoHeight" src="../../trabajador?idtr=<%=idtr%>&opc=Documento_Trabajador" width="100%" height="100%" ></iframe>
-                        </div>
-                        
-                        <%if (idrol.trim().equals("ROL-0007")) {
-                        %>
-                        <div class="tab-pane fade" id="s8">                            
-                            <iframe name="contenido" id="contenido"  class="autoHeight" src="../../empleado?opc=Eva_Emp&idtr=<%=idtr%>" width="100%" height="100%" ></iframe>
-                        </div>
-                        <%}%> 
-
-                        <%
-                            if (List_Auto_mostrar.size() == 1) {
+                        <%  if (List_Auto_mostrar.size() == 1 && aut != null) {
                                 for (int r = 0; r < List_Auto_mostrar.size(); r++) {
                                     Auto_Mostrar a = new Auto_Mostrar();
                                     a = (Auto_Mostrar) List_Auto_mostrar.get(r);
                         %>
-                        <div class="tab-pane fade  in active" id="s9">  
-                            <iframe name="contenido" id="contenido"  class="autoHeight" src="<%=a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getId_trabajador()%>" width="100%" height="100%" ></iframe>
-                            <%
-                                    List_Auto_mostrar.clear();
-                                }
-                            %>
-                        </div>
+                        <li >
+                            <a href="<%=a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getId_trabajador()%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Datos de Requerimientos</a>
+                        </li>
+                        <%}
 
-                        <%
-                            } %>
-
-
-
+                            }%>
+                    </ul>
+                    <div id="myTabContent1" class="tab-content padding-10">
+                        <%  if (List_Auto_mostrar.size() == 1 && aut != null) {
+                                for (int r = 0; r < List_Auto_mostrar.size(); r++) {
+                                    Auto_Mostrar a = new Auto_Mostrar();
+                                    a = (Auto_Mostrar) List_Auto_mostrar.get(r);
+                        %>
+                        <iframe id="myframe2" name="myframe2" class="autoHeight" src="<%=a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getId_trabajador()%>" width="100%" height="100%" ></iframe>
+                        <%}
+                            List_Auto_mostrar.clear();
+                        } else {%>
+                        <iframe id="myframe2" name="myframe2" width="100%" height="800" scrolling="si" frameborder="0" src="Datos_Generales.jsp"></iframe>
+                        <%}%>
                     </div>
-
                 </div>
+
                 <!-- end widget content -->
 
             </div>
@@ -528,9 +490,9 @@
                     });
                     e.preventDefault();
                 });
-
-            });
-        </script>
+            }
+            )
+                    ;</script>
 
         <script src="../../js/JQuery/jQuery.js"></script>
         <script src="../../js/Js_dlmenu/jquery.dlmenu.js"></script>
@@ -539,8 +501,7 @@
                 $('#dl-menu').dlmenu({
                     animationClasses: {classin: 'dl-animate-in-2', classout: 'dl-animate-out-2'}
                 });
-            });
-        </script>
+            });</script>
 
         <!-- IMPORTANT: APP CONFIG -->
         <script src="../../js/app.config.js"></script>
@@ -607,7 +568,6 @@
             $(document).ready(function() {
 
                 pageSetUp();
-
                 $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
                     $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                 });
@@ -623,15 +583,11 @@
                     interval: 3000,
                     cycle: true
                 });
-
                 // Fill all progress bars with animation
 
                 $('.progress-bar').progressbar({
                     display_text: 'fill'
                 });
-
-
-
                 /*
                  * Smart Notifications
                  */
@@ -646,9 +602,7 @@
                         number: "1",
                         timeout: 6000
                     });
-
                     e.preventDefault();
-
                 })
 
                 $('#eg2').click(function(e) {
@@ -661,7 +615,6 @@
                         icon: "fa fa-bell swing animated",
                         number: "2"
                     });
-
                     e.preventDefault();
                 })
 
@@ -675,9 +628,7 @@
                         icon: "fa fa-shield fadeInLeft animated",
                         number: "3"
                     });
-
                     e.preventDefault();
-
                 })
 
                 $('#eg4').click(function(e) {
@@ -692,9 +643,7 @@
                     }, function() {
                         closedthis();
                     });
-
                     e.preventDefault();
-
                 })
 
 
@@ -708,11 +657,7 @@
                         //timeout: 8000,
                         icon: "fa fa-bell swing animated"
                     });
-
                 });
-
-
-
                 $('#eg6').click(function() {
 
                     $.smallBox({
@@ -722,7 +667,6 @@
                         //timeout: 8000,
                         icon: "fa fa-bell"
                     });
-
                 })
 
                 $('#eg7').click(function() {
@@ -734,7 +678,6 @@
                         iconSmall: "fa fa-thumbs-up bounce animated",
                         timeout: 4000
                     });
-
                 })
 
                 function closedthis() {
@@ -792,7 +735,6 @@
                     }, function(ButtonPress, Value) {
                         alert(ButtonPress + " " + Value);
                     });
-
                     e.preventDefault();
                 })
                 // With Buttons
@@ -803,7 +745,6 @@
                         content: "Lots of buttons to go...",
                         buttons: '[Need?][You][Do][Buttons][Many][How]'
                     });
-
                     e.preventDefault();
                 })
                 // With Select
@@ -818,10 +759,8 @@
                     }, function(ButtonPress, Value) {
                         alert(ButtonPress + " " + Value);
                     });
-
                     e.preventDefault();
                 });
-
                 // With Login
                 $("#smart-mod-eg5").click(function(e) {
 
@@ -849,11 +788,8 @@
                             alert("Username: " + ValueOriginal + " and your password is: " + Value);
                         });
                     });
-
                     e.preventDefault();
                 });
-
-
             })
 
         </script>
@@ -863,7 +799,6 @@
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
-
             (function() {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
@@ -871,21 +806,16 @@
                 ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
                 var s = document.getElementsByTagName('script')[0];
                 s.parentNode.insertBefore(ga, s);
-            })();
-
-        </script>
+            })();</script>
         <script type="text/javascript">
             $(document).ready(
                     function() {
 
 
-                    });
-
-        </script>
+                    });</script>
         <script type="text/javascript" language="javascript">
             $('.ver_foto').click(function() {
                 $(".file-foto").click();
-
             });
             $(window).load(function() {
 
@@ -894,7 +824,6 @@
 
                         if (this.files[0].size <= 500000) {
                             var jForm = new FormData();
-
                             jForm.append("idtr", $('.idtr').val());
                             jForm.append("archivo", $('.file-foto').get(0).files[0]);
                             $.ajax({
@@ -919,7 +848,6 @@
                     function addImage(e) {
                         var file = e.target.files[0],
                                 imageType = /image.*/;
-
                         if (!file.type.match(imageType))
                             return;
                         var reader = new FileReader();
