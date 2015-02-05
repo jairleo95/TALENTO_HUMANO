@@ -368,7 +368,7 @@
                                                                 <div class="col-sm-4">
 
                                                                     <div class="form-group">
-                                                                        <label >Apellido Paterno </label>
+                                                                        <label >Apellido Paterno:</label>
                                                                             <div class="input-group">
                                                                                 <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                                 <input type="text" name="APELLIDO_P"  required="" id="fname"   class="form-control input-group-sm"  onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
@@ -378,19 +378,20 @@
                                                                 </div>
                                                                 <div class="col-sm-4">
                                                                     <div class="form-group">
-                                                                          <label >Apellido Paterno</label>
+                                                                          <label >Apellido Materno:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="APELLIDO_M" required=""  id="lname" placeholder="Apellido Materno" class="form-control input-group-sm" onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
+                                                                            <input type="text" name="APELLIDO_M" required=""  id="lname"  class="form-control input-group-sm" onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
 
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-4">
-                                                                    <div class="form-group">Apellido Paterno
+                                                                    <div class="form-group">
+                                                                        <label>Nombre(s):</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="NOMBRES" required=""  id="lname" placeholder="Nombres" class="form-control input-group-sm" onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
+                                                                            <input type="text" name="NOMBRES" required=""  id="lname"  class="form-control input-group-sm" onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
 
                                                                         </div>
                                                                     </div>
@@ -400,11 +401,12 @@
 
                                                             <div class="row">
                                                                 <div class="col-sm-4">
-                                                                    <div class="form-group">Apellido Paterno
+                                                                    <div class="form-group">
+                                                                        <label>Sexo:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select name="SEXO" class="form-control input-group-sm"  required="">
-                                                                                <option value="">[Sexo]</option>
+                                                                                <option value="">[SELLECCIONE]</option>
                                                                                 <option value="M">Masculino</option>
                                                                                 <option value="F">Femenino</option>
 
@@ -413,21 +415,23 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-4">
-                                                                    <div class="form-group">Apellido Paterno
+                                                                    <div class="form-group">
+                                                                        <label>Fecha Nacimiento:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-child fa-lg fa-fw"></i><label class="edad"></label></span>
 
-                                                                            <input type="date" name="FECHA_NAC" required=""  id="edad" placeholder="Fecha de Nacimiento" class="form-control input-group-sm fecha" >
+                                                                            <input type="date" name="FECHA_NAC" required=""  id="edad"  class="form-control input-group-sm fecha" >
 
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-4">
-                                                                    <div class="form-group">Apellido Paterno
+                                                                    <div class="form-group">
+                                                                        <label>Nacionalidad:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-flag fa-lg fa-fw"></i></span>
                                                                             <select name="NACIONALIDAD" class="form-control input-group-sm"  id="nac" required="" >
-                                                                                <option value="" selected="selected">Nacionalidad</option>
+                                                                                <option value="" selected="selected">[SELECCIONE]</option>
                                                                                 <%for (int s = 0; s < List_Nacionalidad.size(); s++) {
                                                                                         Nacionalidad nac = new Nacionalidad();
                                                                                         nac = (Nacionalidad) List_Nacionalidad.get(s);
@@ -449,10 +453,11 @@
                                                             <div class="row" id="dist">
                                                                 <div class="col-sm-4">
                                                                     <div class="form-group">
+                                                                        <label>Departamemto:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select  class="form-control input-group-sm" id="dep_nac" name="name" required="">
-                                                                                <option value="" selected="selected">[Departamento]</option>
+                                                                                <option value="" selected="selected">[SELECCIONE]</option>
                                                                                 <%for (int d = 0; d < List_Departamento.size(); d++) {
                                                                                         Ub_Departamento dep = new Ub_Departamento();
                                                                                         dep = (Ub_Departamento) List_Departamento.get(d);
@@ -467,10 +472,11 @@
                                                                 </div>
                                                                 <div class="col-sm-4">
                                                                     <div class="form-group">
+                                                                        <label>Provincia:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select class="form-control input-group-sm" id="pro_nac" name="" id="dist_nac" required="">
-                                                                                <option value="" selected="selected">[Provincia]</option>
+                                                                                <option value="" selected="selected">[SELECCIONE]</option>
 
                                                                             </select>
                                                                         </div>
@@ -478,10 +484,11 @@
                                                                 </div>
                                                                 <div class="col-sm-4">
                                                                     <div class="form-group">
+                                                                        <label>Distrito:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select class="form-control input-group-sm" name="DISTRITO" id="dist_nac" required="">
-                                                                                <option value="" selected="selected">[Distrito]</option>
+                                                                                <option value="" selected="selected">[SELECCIONE]</option>
                                                                                 <option value="DST-001832" >EXTRANJERO</option>
 
                                                                             </select>
@@ -494,10 +501,11 @@
                                                             <div class="row" >
                                                                 <div class="col-sm-4">
                                                                     <div class="form-group">
+                                                                        <label>Tipo de Documento:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select name="TIPO_DOC" class="form-control input-group-sm select-doc"  required="">
-                                                                                <option value="">[Tipo Documento]</option>
+                                                                                <option value="">[SELECCIONE]</option>
 
                                                                                 <%
                                                                                     for (int h = 0; h < Listar_tipo_doc.size(); h++) {
@@ -518,19 +526,21 @@
                                                                 </div>
                                                                 <div class="col-sm-4">
                                                                     <div class="form-group">
+                                                                        <label>Nro de Documento:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-list-alt fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="NRO_DOC" id="doc" placeholder="Numero Documento" required="" maxlength="10" class="form-control input-group-sm doc" >
+                                                                            <input type="text" name="NRO_DOC" id="doc"  required="" maxlength="10" class="form-control input-group-sm doc" >
 
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-4">
                                                                     <div class="form-group">
+                                                                        <label>Estado Civil:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select id="es_civil" name="ESTADO_CIVIL" class="form-control input-group-sm"  required="">
-                                                                                <option value="">[Estado Civil]</option>
+                                                                                <option value="">[SELECCIONE]</option>
                                                                                 <option value="1">Soltero(a)</option>
                                                                                 <option value="2">Casado(a)</option>
                                                                                 <option value="3">Divorciado(a)</option>
@@ -547,10 +557,11 @@
 
                                                                 <div class="col-sm-3">
                                                                     <div class="form-group">
+                                                                        <label>Grupo Sanguineo:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-group fa-lg fa-fw"></i></span>
                                                                             <select name="GRUPO_SANGUINEO" class="form-control input-group-sm"  required="">
-                                                                                <option value="">[Grupo Sanguineo]</option>
+                                                                                <option value="">[SELECCIONE]</option>
                                                                                 <option value="1">A</option>
                                                                                 <option value="2">B</option>
                                                                                 <option value="3">AB</option>
@@ -561,10 +572,11 @@
                                                                 </div>
                                                                 <div class="col-sm-3">
                                                                     <div class="form-group">
+                                                                        <label>Factro RH:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select name="FACTOR_RH_ID" class="form-control input-group-sm"  required="">
-                                                                                <option value="">[Factor RH]</option>
+                                                                                <option value="">[SELECCIONE]</option>
                                                                                 <option value="1">Positivo</option>
                                                                                 <option value="2">Negativo</option>
                                                                             </select>
@@ -573,17 +585,19 @@
                                                                 </div>
                                                                 <div class="col-sm-3">
                                                                     <div class="form-group">
+                                                                        <label>Telefono:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-phone fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="TELEFONO"  placeholder="Teléfono"  data-mask="(99) 999-9999" data-mask-placeholder= "X"   formnovalidate maxlength="50" value="" class="form-control input-group-sm telefono" >
+                                                                            <input type="text" name="TELEFONO"    data-mask="(99) 999-9999" data-mask-placeholder= "X"   formnovalidate maxlength="50" value="" class="form-control input-group-sm telefono" >
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-3">
                                                                     <div class="form-group">
+                                                                        <label>Celular:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-mobile fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="CELULAR"  placeholder="Celular"  data-mask="999-999-999" data-mask-placeholder= "X" formnovalidate maxlength="38" class="form-control input-group-sm" >
+                                                                            <input type="text" name="CELULAR"   data-mask="999-999-999" data-mask-placeholder= "X" formnovalidate maxlength="38" class="form-control input-group-sm" >
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -591,53 +605,34 @@
                                                             <div class="row">
                                                                 <div class="col-sm-6">
                                                                     <div class="form-group">
+                                                                        <label>Correo Personal:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-envelope fa-lg fa-fw"></i></span>
-                                                                            <input type="email" name="CORREO_PERSONAL"  placeholder="Correo Personal"  required=""  maxlength="100" class="form-control input-group-sm" >
+                                                                            <input type="email" name="CORREO_PERSONAL"   required=""  maxlength="100" class="form-control input-group-sm" >
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-6">
                                                                     <div class="form-group">
+                                                                        <label>Correo Institucional:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-envelope fa-lg fa-fw"></i></span>
-                                                                            <input type="email" name="CORREO_INST"  placeholder="Correo Institucional"  required=""  maxlength="100" class="form-control input-group-sm" >
+                                                                            <input type="email" name="CORREO_INST"   required=""  maxlength="100" class="form-control input-group-sm" >
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <script>
-                                                                $(document).ready(
-                                                                        function() {
-                                                                            $("#sis_pens").change(
-                                                                                    function() {
-                                                                                        if ($("#sis_pens").val() != "1") {
-                                                                                            $(".n_afp").remove();
-                                                                                            $("#nom_afp").attr("disabled", true);
-                                                                                            $(".afp").append('<input name="NOMBRE_AFP_ID" type="hidden" class="n_afp" value="6"/>');
-                                                                                            $("#nom_afp").val("6");
-                                                                                        }
-                                                                                        if ($("#sis_pens").val() == "1") {
-
-                                                                                            $("#nom_afp").val("");
-                                                                                            $("#nom_afp").removeAttr("disabled");
-                                                                                            $(".n_afp").remove();
-                                                                                        }
-                                                                                    }
-                                                                            );
-
-                                                                        });
-
-                                                            </script>
+                                                           
 
                                                             <div class="row">
 
                                                                 <div class="col-sm-3">
                                                                     <div class="form-group">
+                                                                        <label>Sistema Pensionario:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select name="SISTEMA_PENSIONARIO" class="form-control input-group-sm"  id="sis_pens" required="">
-                                                                                <option value="">[Sistema Pensionario]</option>
+                                                                                <option value="">[SELECCIONE]</option>
                                                                                 <option value="1">AFP</option>
                                                                                 <option value="2">ONP</option>
                                                                                 <option value="4">Sin Régimen Provisional(jubilado, cesante).</option>
@@ -648,10 +643,11 @@
 
                                                                 <div class="col-sm-3">
                                                                     <div class="form-group">
+                                                                        <label>Nombre AFP:</label>
                                                                         <div class="input-group afp" >
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select name="NOMBRE_AFP_ID" class="form-control input-group-sm" id="nom_afp" required=""  >
-                                                                                <option value="">[Nombre AFP]</option>
+                                                                                <option value="">[SELECCIONE]</option>
                                                                                 <option value="1">Integra</option>
                                                                                 <option value="2">Prima</option>
                                                                                 <option value="3">Profuturo</option>
@@ -664,10 +660,11 @@
                                                                 </div>
                                                                 <div class="col-sm-3">
                                                                     <div class="form-group">
+                                                                        <label>Afiliado ESSALUD-VIDA:</label>
                                                                         <div class="input-group" >
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select name="AFILIADO_ESSALUD_ID" class="form-control input-group-sm"  required="">
-                                                                                <option value="">[Afiliado ESSALUD-VIDA]</option>
+                                                                                <option value="">[SELECCIONE]</option>
                                                                                 <option value="1">Si</option>
                                                                                 <option value="2">No</option>
                                                                             </select>
@@ -676,10 +673,11 @@
                                                                 </div>
                                                                 <div class="col-sm-3">
                                                                     <div class="form-group">
+                                                                        <label>Tipo Trabajador:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select name="TIPO_TRABAJADOR_ID" class="form-control input-group-sm"  required="">
-                                                                                <option value="">[Tipo Trabajador]</option>
+                                                                                <option value="">[SELECCIONE]</option>
                                                                                 <option value="T" selected >Trabajador</option>
                                                                                 <option value="A">Alumno</option>
                                                                             </select>
@@ -690,1165 +688,6 @@
 
 
                                                         </div>
-
-                                                        <div class="tab-pane" id="tab2">
-
-                                                            <h3><strong>Paso 2</strong> - Aspecto Académico</h3>
-
-                                                            <div class="row">
-                                                                <div class="col-sm-4">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
-                                                                            <select name="NIVEL_EDUCATIVO" class="form-control input-group-sm" id="sit_edu" required>
-                                                                                <option value="" selected="selected" >[Situación Educativa]</option>
-                                                                                <%for (int s = 0; s < List_Situacion_Educativa.size(); s++) {
-                                                                                        Situacion_Educativa e = new Situacion_Educativa();
-                                                                                        e = (Situacion_Educativa) List_Situacion_Educativa.get(s);
-                                                                                %>
-                                                                                <option value="<%=e.getId_situacion_educativa()%>"><%=e.getNo_s_educativa()%></option>
-                                                                                <%}%>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-4" id="es_inst_p"style="display: none">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
-                                                                            <select class="form-control input-group-sm" id="inst_peru" name="ES_INST_PERU" required>
-                                                                                <option value="" selected="selected" >[¿Estudio en una institucion educativa del Perú?]</option>
-                                                                                <option value="1">Si</option>
-                                                                                <option value="2">No</option>
-
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-4" id="regimen" style="display: none">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
-                                                                            <select class="form-control input-group-sm" id="rg" name="REGIMEN" required>
-                                                                                <option value="" selected="selected">[Regimen de la Institución Educativa]</option>
-                                                                                <option value="1">Publica</option>
-                                                                                <option value="2">Privada</option>
-
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-sm-4" id="ti" style="display: none">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
-                                                                            <select class="form-control input-group-sm" id="ti_inst"  required>
-                                                                                <option value="" selected="selected">[Tipo de Institución]</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-4" id="institucion" style="display: none">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
-                                                                            <select class="form-control input-group-sm" id="inst"  required>
-                                                                                <option value="" selected="selected">[Institución]</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-4" id="carr" style="display: none">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
-                                                                            <select class="form-control input-group-sm" id="carrera" name="CARRERA" required>
-                                                                                <option value="" selected="selected">[Carrera]</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-4" id="egreso" style="display: none"><label>Año Egreso:</label>
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
-                                                                            <select    name="A_EGRESO"class="form-control input-group-sm" required="" >
-                                                                                <option value="">[SELECCIONE]</option>
-                                                                                <% for (int jj = 0; jj < list_año.size(); jj++) {%>
-                                                                                <option value="<%=list_año.get(jj)%>"><%=list_año.get(jj)%></option>
-                                                                                <%}%>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>                        
-                                                                <div class="col-sm-4">   <label>Tipo Hora Pago Referencial:</label>
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-money fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm" value="0"  placeholder="Tipo Hora Pago Referencial" type="text" name="TIPO_HORA_PAGO_REFEERENCIAL" maxlength="6">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!--  <input pattern=".{3,}" required title="3 characters minimum">
-                                                            <input pattern=".{5,10}" required title="5 to 10 characters">-->
-                                                            <div class="row">
-
-                                                                <div class="col-sm-10">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-align-justify fa-lg fa-fw"></i></span>
-                                                                            <textarea name="OTROS_ESTUDIOS"  placeholder="Otros Estudios"  class="form-control input-group-sm" class="text-box" cols="60" rows="6" maxlength="500"></textarea>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-
-
-                                                            <h3>- Cuenta Sueldo </h3>
-                                                            <div class="col-sm-4" id="" >
-                                                                <div class="form-group">
-                                                                    <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
-                                                                        <select name="BANCO" id="banco" class="form-control input-group-sm">
-                                                                            <option value="" selected="" disabled="" >[BANCO]</option>
-                                                                            <option value="0" >Ninguno</option>
-                                                                            <option value="1" >BBVA</option>
-                                                                            <option value="2" >BCP</option>
-                                                                            <option value="3" >Otros</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-4" id="no_cuen_otros" >
-                                                                <div class="form-group">
-                                                                    <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
-                                                                        <input class="form-control input-group-sm"  placeholder="Nombre del Banco" type="text" name="BANCO_OTROS"  id="nu_cuen_otros" maxlength="30"   />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-4" id="no_cuen" >
-                                                                <div class="form-group">
-                                                                    <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
-                                                                        <input placeholder="Nro de Cuenta" class="form-control input-group-sm" type="text" name="CUENTA"  id="nu_cuen" maxlength="30"   />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-4" id="no_cuen_ban" >
-                                                                <div class="form-group">
-                                                                    <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
-                                                                        <input placeholder="Nro de Cuenta Bancaria" class="form-control input-group-sm" type="text" name="CUENTA_BANC" id="nu_cuen_ban">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-4" id="generar" >
-                                                                <div class="form-group">
-                                                                    <div class="input-g">
-                                                                        <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="1">
-                                                                        <i></i>Generar Nro de Cuenta Bancaria
-                                                                    </div>
-                                                                </div>
-                                                            </div> 
-                                                            <input type="hidden" value="0" name="ES_CUENTA_SUELDO" id="es_cuenta"/>
-                                                        </div>  
-
-                                                        <script>
-                                                            function estado_civil(es_civil) {
-                                                                if (es_civil == '1' || es_civil == '3' || es_civil == '4' || es_civil == '5') {
-                                                                    // alert("estado civil");
-
-                                                                    //REMOVE REQUIRED
-                                                                    $("#tra_upeu_con").removeAttr('required');
-                                                                    $("#nom_ape_con").removeAttr('required');
-                                                                    $("#nac_con").removeAttr('required');
-                                                                    $("#doc_con").removeAttr('required');
-                                                                    $("#num_con").removeAttr('required');
-                                                                    $("#ins_vig_con").removeAttr('required');
-
-                                                                    //ADD DISABLED
-                                                                    document.getElementById("tra_upeu_con").disabled = true;
-                                                                    document.getElementById("nom_ape_con").disabled = true;
-                                                                    document.getElementById("nac_con").disabled = true;
-                                                                    document.getElementById("doc_con").disabled = true;
-                                                                    document.getElementById("num_con").disabled = true;
-                                                                    document.getElementById("ins_vig_con").disabled = true;
-                                                                }
-                                                                if (es_civil == '2' || es_civil == '6') {
-                                                                    // alert("estado civil");
-
-                                                                    //REMOVE REQUIRED
-                                                                    $("#tra_upeu_con").attr("required", "required");
-                                                                    $("#nom_ape_con").attr("required", "required");
-                                                                    $("#nac_con").attr("required", "required");
-                                                                    $("#doc_con").attr("required", "required");
-                                                                    $("#num_con").attr("required", "required");
-                                                                    $("#ins_vig_con").removeAttr("required", "required");
-
-                                                                    //ADD DISABLED
-                                                                    document.getElementById("tra_upeu_con").disabled = false;
-                                                                    document.getElementById("nom_ape_con").disabled = false;
-                                                                    document.getElementById("nac_con").disabled = false;
-                                                                    document.getElementById("doc_con").disabled = false;
-                                                                    document.getElementById("num_con").disabled = false;
-                                                                    document.getElementById("ins_vig_con").disabled = false;
-                                                                }
-
-                                                            }
-
-                                                            function cuenta_bancaria(banco) {
-
-                                                                if (banco == '1') {
-                                                                    $("#generar").hide();
-                                                                    $("#no_cuen").show();
-                                                                    $("#nu_cuen").val("");
-                                                                    $("#nu_cuen").attr("required", "required");
-                                                                    $("#no_cuen_ban").hide();
-                                                                    $("#nu_cuen_ban").val("");
-                                                                    $("#subscription").attr('checked', false);
-                                                                    $("#nu_cuen").attr("maxlength", "21");
-                                                                    $("#nu_cuen").mask("0011-9999999999999999", {placeholder: "X"});
-                                                                    $("#no_cuen_otros").hide();
-                                                                    $("#nu_cuen_otros").val("");
-                                                                }
-                                                                if (banco == '2') {
-                                                                    $("#generar").hide();
-                                                                    $("#subscription").attr('checked', false);
-                                                                    $("#no_cuen_ban").hide();
-                                                                    $("#nu_cuen_ban").val("");
-                                                                    $("#no_cuen").show();
-                                                                    $("#nu_cuen").val("");
-                                                                    $("#nu_cuen").attr("required", "required");
-                                                                    $("#nu_cuen").attr("maxlength", "14");
-                                                                    $("#nu_cuen").mask("99999999999999", {placeholder: "X"});
-                                                                    $("#no_cuen_otros").hide();
-                                                                    $("#nu_cuen_otros").val("");
-                                                                }
-                                                                if (banco == '3') {
-                                                                    $("#no_cuen").show();
-                                                                    $("#no_cuen").val("");
-                                                                    $("#nu_cuen").attr("required", "required");
-                                                                    $("#no_cuen_ban").show();
-                                                                    $("#no_cuen_ban").val("");
-                                                                    $("#nu_cuen_ban").attr("required", "required");
-                                                                    $("#no_cuen_otros").show();
-                                                                    $("#nu_cuen_otros").val("");
-                                                                    $("#nu_cuen_otros").attr("required", "required");
-                                                                    $("#generar").hide();
-                                                                    $("#subscription").attr('checked', false);
-                                                                }
-                                                                if (banco == '0') {
-                                                                    $("#no_cuen").hide();
-                                                                    $("#nu_cuen").val("");
-                                                                    $("#no_cuen_ban").hide();
-                                                                    $("#nu_cuen_ban").val("");
-                                                                    $("#no_cuen_otros").show();
-                                                                    $("#nu_cuen_otros").val("BBVA");
-                                                                    $("#generar").show();
-                                                                    $("#subscription").attr("required", "required");
-                                                                    $("#nu_cuen_otros").attr("required", "required");
-                                                                }
-
-                                                            }
-
-                                                        </script> 
-
-                                                        <div class="tab-pane" id="tab3">
-
-                                                            <strong>Paso 3</strong>
-                                                            <h3>-Domicilio Actual del Trabajador</h3>
-                                                            <label>Direccion :</label>
-                                                            <div class="row">
-
-                                                                <div class="col-sm-3">
-
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select name="DIR_DOM_A_D1_ID" id="DOM_A_D1" class="form-control input-group-sm"  required="">
-                                                                                <option value="">[Seleccione Via]</option>
-                                                                                <%for (int i = 0; i < Listar_via.size(); i++) {
-                                                                                        Via zo = new Via();
-                                                                                        zo = (Via) Listar_via.get(i);%>    
-                                                                                <option value="<%=zo.getId_via()%>"><%=zo.getDe_via()%></option>
-                                                                                <%}%>
-                                                                            </select>   
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-
-                                                                <div class="col-sm-3">
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"    placeholder="" type="text" name="DIR_DOM_A_D2" id="DOM_A_D2" maxlength="100">
-
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <script>
-                                                                    $(document).ready(
-                                                                            function() {
-
-                                                                                $("#no_cuen").hide();
-                                                                                $("#no_cuen_ban").hide();
-                                                                                $("#generar").hide();
-                                                                                $("#no_cuen_otros").hide();
-                                                                                //alert($("#es_cuenta").val());
-
-                                                                                $(".fecha").keyup(function() {
-
-                                                                                    /*var arr_date = $(this).val().split("-");
-                                                                                     if (arr_date[0].length > 4) {
-                                                                                     //return false;
-                                                                                     $(this).val("");
-                                                                                     $(".edad").val("");
-                                                                                     alert("fecha no valida");
-                                                                                     
-                                                                                     }*/
-
-                                                                                });
-
-                                                                                $("#banco").change(function() {
-                                                                                    cuenta_bancaria($(this).val());
-                                                                                    $("#es_cuenta").val(1);
-                                                                                    //  alert($("#es_cuenta").val());
-                                                                                });
-
-                                                                                $("#es_civil").change(function() {
-                                                                                    estado_civil($(this).val());
-                                                                                });
-                                                                                $("#DOM_A_D3").change(
-                                                                                        function() {
-                                                                                            if ($("#DOM_A_D3").val() == "3") {
-                                                                                                $("#DOM_A_D4").val("Sin Numero");
-                                                                                            } else {
-
-                                                                                                $("#DOM_A_D4").val("");
-                                                                                            }
-
-                                                                                        }
-                                                                                );
-                                                                                $("#DOM_LEG_D3").change(
-                                                                                        function() {
-                                                                                            if ($("#DOM_LEG_D3").val() == "3") {
-                                                                                                $("#DOM_LEG_D4").val("Sin Numero");
-                                                                                            } else {
-
-                                                                                                $("#DOM_LEG_D4").val("");
-                                                                                            }
-
-                                                                                        }
-                                                                                );
-                                                                                $("#reli").change(
-                                                                                        function() {
-                                                                                            if ($("#reli").val() == "1") {
-                                                                                                $("#igle").attr("required", "required")
-                                                                                            } else {
-
-                                                                                                $("#igle").removeAttr("required");
-                                                                                            }
-
-                                                                                        }
-                                                                                );
-
-                                                                            });
-
-                                                                </script>
-                                                                <div class="col-sm-3">
-
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select name="DIR_DOM_A_D3_ID" id="DOM_A_D3" class="form-control input-group-sm"  required="">
-                                                                                <option value="">[Seleccione]</option>
-                                                                                <option value="1">Número</option>
-                                                                                <option value="2">Lote</option>
-                                                                                <option value="3">S/N</option>
-                                                                                <option value="4">Km</option>
-                                                                                <option value="5">Block</option>
-                                                                                <option value="6">Etapa</option>
-                                                                                <option value="7">Departamento</option>
-                                                                                <option value="8">Interior</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-3">
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"    placeholder="" type="text" name="DIR_DOM_A_D4" id="DOM_A_D4" maxlength="100">
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-sm-4">
-
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select name="DIR_DOM_A_D5_ID" id="DOM_A_D5" class="form-control input-group-sm"  required="">
-
-                                                                                <option value="">[Seleccione Zona]</option>
-                                                                                <%for (int i = 0; i < Listar_zona.size(); i++) {
-                                                                                        Zona zo = new Zona();
-                                                                                        zo = (Zona) Listar_zona.get(i);%>    
-                                                                                <option value="<%=zo.getId_zona()%>"><%=zo.getDe_zona()%></option>
-                                                                                <%}%>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-4">
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"    placeholder="" type="text" name="DIR_DOM_A_D6" id="DOM_A_D6" maxlength="100">
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-4">
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"    placeholder="Referencia" type="text" name="DIR_DOM_A_REF" id="DOM_A_REF" maxlength="200">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-
-                                                            <div class="row">
-                                                                <div class="col-sm-3">
-
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select  id="dep_dir_a" class="form-control input-group-sm"  required="">
-                                                                                <option value="">[Departamento]</option>
-                                                                                <%for (int d = 0; d < List_Departamento.size(); d++) {
-                                                                                        Ub_Departamento dep = new Ub_Departamento();
-                                                                                        dep = (Ub_Departamento) List_Departamento.get(d);
-
-                                                                                %>
-                                                                                <option value="<%=dep.getId_departamento()%>" ><%=dep.getNo_departamento()%></option>
-                                                                                <%}%>
-
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-3">
-
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select  id="pro_dir_a" class="form-control input-group-sm"  required="">
-                                                                                <option value="">[Provincia]</option>
-
-
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-3">
-
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select name="DIR_DOM_A_DISTRITO_ID"  id="DOM_A_DISTRITO" class="form-control input-group-sm"  required="">
-                                                                                <option value="">[Distrito]</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <button onclick="duplicar();
-                                                                        return false;"  class="btn btn-primary" id="btn-duplicar">Duplicar</button>
-
-
-
-                                                            </div>
-
-                                                            <h3>- Domicilio Legal (segun DNI)</h3>
-                                                            <label>Direccion :</label>
-                                                            <div class="row">
-                                                                <div class="col-sm-3">
-
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select name="DIR_DOM_LEG_D1_ID"  id="DOM_LEG_D1" class="form-control input-group-sm"  required="">
-                                                                                <option value="">[Seleccione Via]</option>
-                                                                                <%for (int i = 0; i < Listar_via.size(); i++) {
-                                                                                        Via zo = new Via();
-                                                                                        zo = (Via) Listar_via.get(i);%>    
-                                                                                <option value="<%=zo.getId_via()%>"><%=zo.getDe_via()%></option>
-                                                                                <%}%>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-3">
-
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"    placeholder="" type="text" name="DIR_DOM_LEG_D2" id="DOM_LEG_D2" maxlength="100">
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-3">
-
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select name="DIR_DOM_LEG_D3_ID"  id="DOM_LEG_D3" class="form-control input-group-sm"  required="">
-                                                                                <option value="">[Seleccione]</option>
-                                                                                <option value="1">Número</option>
-                                                                                <option value="2">Lote</option>
-                                                                                <option value="3">S/N</option>
-                                                                                <option value="4">Km</option>
-                                                                                <option value="5">Block</option>
-                                                                                <option value="6">Etapa</option>
-                                                                                <option value="7">Departamento</option>
-                                                                                <option value="8">Interior</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-3">
-
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"    placeholder="" type="text" name="DIR_DOM_LEG_D4" id="DOM_LEG_D4" maxlength="100">
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select name="DIR_DOM_LEG_D5_ID"  id="DOM_LEG_D5" class="form-control input-group-sm"  required="">
-                                                                                <option value="">[Seleccione Zona]</option>
-                                                                                <%for (int i = 0; i < Listar_zona.size(); i++) {
-                                                                                        Zona zo = new Zona();
-                                                                                        zo = (Zona) Listar_zona.get(i);%>    
-                                                                                <option value="<%=zo.getId_zona()%>"><%=zo.getDe_zona()%></option>
-                                                                                <%}%>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6">
-
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"    placeholder="" type="text" name="DIR_DOM_LEG_D6" id="DOM_LEG_D6" maxlength="100">
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-
-
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-sm-4">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select   id="dep_dir_l" class="form-control input-group-sm"  required="">
-                                                                                <option value="">[Departamento]</option>
-                                                                                <%for (int d = 0; d < List_Departamento.size(); d++) {
-                                                                                        Ub_Departamento dep = new Ub_Departamento();
-                                                                                        dep = (Ub_Departamento) List_Departamento.get(d);
-
-                                                                                %>
-                                                                                <option value="<%=dep.getId_departamento()%>" ><%=dep.getNo_departamento()%></option>
-                                                                                <%}%>
-
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-4">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select   id="pro_dir_l" class="form-control input-group-sm"  required="">
-                                                                                <option value="">[Provincia]</option>
-
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-4">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select   name="DIR_DOM_LEG_DISTRITO_ID"   id="DOM_LEG_DISTRITO" class="form-control input-group-sm"  required="">
-                                                                                <option value="">[Distrito]</option>
-
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-                                                            <h3>- Ingresos de Quinta Categoria</h3>
-
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-suitcase fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"    placeholder="Empresa" type="text" name="ING_QTA_CAT_EMPRESA"  maxlength="100">
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6">
-
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-file-o fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"    placeholder="RUC" type="text" name="ING_QTA_CAT_RUC"  maxlength="20">
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-
-                                                            </div>
-                                                            <div class="row">
-
-                                                                <div class="col-sm-12">
-
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-suitcase fa-lg fa-fw"></i></span>
-                                                                            <textarea name="ING_QTA_CAT_OTRAS_EMPRESAS"  placeholder="Otras Empresas"  class="form-control input-group-sm"  cols="60" rows="6" maxlength="500" ></textarea>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <h3>- Informacion Religiosa</h3>
-
-                                                            <div class="row">
-                                                                <div class="col-sm-4">
-
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
-                                                                            <select  class="form-control input-group-sm"  id="reli" required="" name="RELIGION">
-                                                                                <option value="">[Religión]</option>
-                                                                                <option value="1">Adventista</option>
-                                                                                <option value="2">Catolico</option>
-                                                                                <option value="3">Otros</option>
-                                                                            </select>   
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-4">
-
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"    placeholder="Iglesia" type="text" name="IGLESIA"   maxlength="30" id="igle">
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-4">
-
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-male fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"    placeholder="Cargo en la Iglesia" type="text" name="CARGO"  maxlength="30">
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-                                                            <div class="row"> 
-                                                                <div class="col-sm-3">
-
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-male fa-lg fa-fw"></i></span>
-                                                                            <select  name="AUTORIDAD" class="form-control input-group-sm"   >
-                                                                                <option value="">[Autoridad]</option>
-                                                                                <option value="1">Pastor</option>
-                                                                                <option value="2">Primer Anciano</option>
-                                                                                <option value="3">Sacerdote</option>
-                                                                            </select>   
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-3">
-
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"    placeholder="Nombres y Apellidos" type="text" name="AUT_APELLIDOSNOMBRES"  maxlength="90">
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-3">
-
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-mobile-phone fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"    placeholder="Telefono/Celular" type="text" name="AUT_CELULAR"  maxlength="20">
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-
-                                                                <div class="col-sm-12">
-
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-suitcase fa-lg fa-fw"></i></span>
-                                                                            <textarea  name="ING_QTA_CAT_OTRAS_EMPRESAS"  placeholder="Otras Empresas"  class="form-control input-group-sm"  cols="60" rows="6" maxlength="500" ></textarea>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div class="tab-pane" id="tab4">
-
-                                                            <h3><strong>Paso 4</strong> - DATOS DE PADRE Y MADRE</h3>
-
-                                                            <div class="row">
-
-                                                                <div class="col-sm-6">
-
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text" class="form-control input-group-sm" name="APELLIDOS_NOMBRES_PADRE" placeholder="Apellidos y nombres del Padre" required="" maxlength="50">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6">
-
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text"  class="form-control input-group-sm" name="APELLIDOS_NOMBRES_MADRE" placeholder="Apellidos y nombre del Madre" required="" maxlength="50">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <h3><strong>Paso 5</strong> - DATOS DEL CONYUGUE</h3>
-
-                                                            <div class="row"> 
-                                                                <div class="col-sm-3">
-
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-male fa-lg fa-fw"></i></span>
-
-
-                                                                            <select  id="tra_upeu_con" name="TRABAJA_UPEU_CONYUGUE" required="" class="form-control input-group-sm select-conyugue" >
-                                                                                <option value="" selected=""  disabled="">¿Trabaja Upeu Conyugue?</option>
-                                                                                <option value="1">Si</option>
-                                                                                <option value="0">No</option>
-
-                                                                            </select> 
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-3">
-
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-
-                                                                            <input id="nom_ape_con" type="text" name="APELLIDO_NOMBRES_CONYUGUE" placeholder="Apellidos y Nombres" required="" class="nom_c form-control input-group-sm" maxlength="110">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-3">
-
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-calendar fa-lg fa-fw"></i></span>
-
-                                                                            <input id="nac_con" type="date" name="FECHA_NAC_CONYUGUE" placeholder="Fecha de Nacimiento dd/mm/yy" class="date f_nac form-control input-group-sm" required="">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-3">
-
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-file fa-lg fa-fw"></i></span>
-                                                                            <select id="doc_con" name="TIPO_DOC_ID" required="" class="ti_documento form-control input-group-sm select-doc_c">
-                                                                                <option value="">[Tipo Documento]</option>
-
-                                                                                <%
-                                                                                    for (int h = 0; h < Listar_tipo_doc.size(); h++) {
-                                                                                        Tipo_Documento tdoc = new Tipo_Documento();
-                                                                                        tdoc = (Tipo_Documento) Listar_tipo_doc.get(h);
-                                                                                        if (tdoc.getId_tipo_doc_ident().trim().equals("1")) {
-                                                                                %>
-                                                                                <option selected="selected" value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
-                                                                                <%} else {%>
-
-                                                                                <option value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
-                                                                                <%}
-                                                                                    }%>
-                                                                            </select> 
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-file fa-lg fa-fw"></i></span>
-                                                                            <input id="num_con" type="text" name="NRO_DOC_C" placeholder="Nro de Documento" maxlength="10" class="num_doc form-control input-group-sm doc_c" required="">
-                                                                            <input type="hidden" class="cony"  name="CONYUGUE"/>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-file fa-lg fa-fw"></i></span>
-                                                                            <select id="ins_vig_con" name="INSCRIPCION_VIG_ESSALUD" required=""  class="form-control input-group-sm" >
-                                                                                <option value="" selected="" >[Inscripción Vigente en Essalud]</option>
-                                                                                <option value="1">Si</option>
-                                                                                <option value="0">No</option>
-
-                                                                            </select> 
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <h3><strong>Paso 6</strong> - DATOS DE HIJO(S)</h3>   
-                                                            <div class="row">
-                                                                <div class="col-sm-3">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="APELLIDO_P_H" placeholder="Apellido Paterno"  maxlength="30" class="form-control input-group-sm i_app_h" />
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-3">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text"  name="APELLIDO_M_H" placeholder="Apellido Materno"  maxlength="30" class="form-control input-group-sm i_apm_h" />
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-2">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text"  name="NOMBRE_H" placeholder="Nombres"  maxlength="30" class="form-control input-group-sm i_no_h" />
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-2">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="date" name="FECHA_NAC_H" placeholder="Fecha de Nacimiento dd/mm/yy"  class="form-control input-group-sm i_fnac_h"  />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-2">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <select name="SEXO_H" class="form-control input-group-sm i_sexo_h" >
-                                                                                <option value="" selected=""  >[Sexo]</option>
-                                                                                <option value="M">Masculino</option>
-                                                                                <option value="F">Femenino</option>
-
-                                                                            </select> 
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-sm-3">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <select name="TIPO_DOC_ID_H"  class="form-control input-group-sm i_tdoc_h"  >
-                                                                                <option value="">[Tipo Documento]</option>
-                                                                                <%
-                                                                                    for (int h = 0; h < Listar_tipo_doc.size(); h++) {
-                                                                                        Tipo_Documento tdoc = new Tipo_Documento();
-                                                                                        tdoc = (Tipo_Documento) Listar_tipo_doc.get(h);
-                                                                                        if (tdoc.getId_tipo_doc_ident().trim().equals("1")) {
-                                                                                %>
-                                                                                <option selected="selected" value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
-                                                                                <%} else {%>
-
-                                                                                <option value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
-                                                                                <%}
-                                                                                    }%>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-3">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="NRO_DOC_H"  class="form-control input-group-sm i_ndoc_h" placeholder="Nro de Documento" maxlength="10" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-3">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <select name="INSCRIPCION_VIG_ESSALUD_H"   class="form-control input-group-sm i_essalud_h">
-                                                                                <option value="" selected="" disabled="">[Inscripción Vigente en Essalud]</option>
-                                                                                <option value="1">Si</option>
-                                                                                <option value="0">No</option>
-                                                                            </select> 
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-3">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <select name="ESTUD_NIV_SUPERIOR_H" class="form-control input-group-sm i_es_sup_h" >
-                                                                                <option value="" selected="" disabled="">Estudio de Nivel Superior</option>
-                                                                                <option value="1">Si</option>
-                                                                                <option value="0">No</option>
-                                                                            </select> 
-                                                                            <input type="hidden" name="num_hijo"  value="0" class="num_hijo"/>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div> 
-                                                            <div class="btn-mant">
-                                                                <button type="button" class="btn-reg-hijo btn btn-info">Agregar Hijo</button>
-                                                            </div>
-                                                            <div class="row">
-                                                                <table class="table" style="margin-top:1%;">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Apellido P.</th>
-                                                                            <th>Apellido M.</th>
-                                                                            <th>Nombres</th>
-                                                                            <th>Fecha Nac.</th>
-                                                                            <th>Sexo</th>
-                                                                            <th>Tip. Doc</th>
-                                                                            <th>Nro. Doc</th>
-                                                                            <th>Essalud</th>
-                                                                            <th>Est. Superiores</th>
-                                                                            <th></th>
-                                                                        </tr>        
-                                                                    </thead>
-                                                                    <tbody class="tabla-hijo">
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                            <code class="codigo"></code>
-                                                            <input type="submit" name="opc"  class="submit btn btn-primary btn-lg" value="Registrar">
-                                                            <script>$(document).ready(function() {
-                                                                    var p = 1;
-                                                                    var texto_h = "";
-                                                                    $(".btn-reg-hijo").click(function() {
-
-                                                                        var tabla_hijo = $(".tabla-hijo");
-                                                                        var ap_pat = $(".i_app_h");
-                                                                        var ap_mat = $(".i_apm_h");
-                                                                        var nombre = $(".i_no_h");
-                                                                        var fe_nac = $(".i_fnac_h");
-                                                                        var sexo = $(".i_sexo_h");
-                                                                        var t_doc = $(".i_tdoc_h");
-                                                                        var ndoc = $(".i_ndoc_h");
-                                                                        var essalud = $(".i_essalud_h");
-                                                                        var es_sup = $(".i_es_sup_h");
-
-                                                                        texto_h += ("<tr class='tr-hijo_" + p + "'>");
-                                                                        texto_h += ('<td ><label class="td-ap_pat' + p + '">' + ap_pat.val() + '</label><input type="hidden" value="' + ap_pat.val() + '" name="APELLIDO_P_H' + p + '" class="ap_p_h_' + p + '"/></td>');
-                                                                        texto_h += ('<td ><label class="td-ap_mat' + p + '">' + ap_mat.val() + '</label><input type="hidden" value="' + ap_mat.val() + '" name="APELLIDO_M_H' + p + '" class="ap_m_h_' + p + '"/></td>');
-                                                                        texto_h += ('<td ><label class="td-nom' + p + '">' + nombre.val() + '</label><input type="hidden" value="' + nombre.val() + '" name="NOMBRE_H' + p + '" class="no_h_' + p + '"/></td>');
-                                                                        texto_h += ('<td ><label class="td-fe_nac' + p + '">' + fe_nac.val() + '</label><input type="hidden" value="' + fe_nac.val() + '" name="FECHA_NAC_H' + p + '" class="fe_n_h_' + p + '"/></td>');
-                                                                        texto_h += (' <td ><label class="td-sex' + p + '">' + sexo.val() + '</label><input type="hidden" value="' + sexo.val() + '" name="SEXO_H' + p + '" class="sex_h_' + p + '"/></td>');
-                                                                        texto_h += ('<td ><label class="td-tdoc' + p + '">' + t_doc.val() + '</label><input type="hidden" value="' + t_doc.val() + '" name="TIPO_DOC_ID_H' + p + '" class="ti_doc_h_' + p + '"/></td>');
-                                                                        texto_h += ('<td ><label class="td-ndoc' + p + '">' + ndoc.val() + '</label><input type="hidden" value="' + ndoc.val() + '" name="NRO_DOC_H' + p + '" class="nu_doc_h_' + p + '"/></td>');
-                                                                        texto_h += ('<td ><label class="td-essalud' + p + '">' + essalud.val() + '</label><input type="hidden" value="' + essalud.val() + '" name="ESSALUD_H' + p + '" class="essalud_h_' + p + '"/></td>');
-                                                                        texto_h += ('<td ><label class="td-es_sup' + p + '">' + es_sup.val() + '</label><input type="hidden" value="' + es_sup.val() + '" name="EST_SUP_H' + p + '" class="es_sup_h_' + p + '"/></td>');
-                                                                        texto_h += ('<td><a href="javascript:void(0);" class="btn btn-danger" onclick="$(\'.tr-hijo_' + p + '\').remove();">Quitar</a> <button class="btn btn-success btn-modificar_' + p + '" href="javascript:void(0);" type="button" value="' + p + '">Modificar</button></td>');
-                                                                        texto_h += ("</tr>");
-                                                                        tabla_hijo.append(texto_h);
-                                                                        // $(".codigo").text(texto_h);
-
-
-                                                                        ap_pat.val("");
-                                                                        ap_mat.val("");
-                                                                        nombre.val("");
-                                                                        fe_nac.val("");
-                                                                        sexo.val("");
-                                                                        t_doc.val("");
-                                                                        ndoc.val("");
-                                                                        essalud.val("");
-                                                                        es_sup.val("");
-
-                                                                        $(".btn-modificar_" + p).click(function() {
-                                                                            ap_pat.val($(".ap_p_h_" + $(this).val()).val());
-                                                                            ap_mat.val($(".ap_m_h_" + $(this).val()).val());
-                                                                            nombre.val($(".no_h_" + $(this).val()).val());
-                                                                            fe_nac.val($(".fe_n_h_" + $(this).val()).val());
-                                                                            sexo.val($(".sex_h_" + $(this).val()).val());
-                                                                            t_doc.val($(".ti_doc_h_" + $(this).val()).val());
-                                                                            ndoc.val($(".nu_doc_h_" + $(this).val()).val());
-                                                                            essalud.val($(".essalud_h_" + $(this).val()).val());
-                                                                            es_sup.val($(".es_sup_h_" + $(this).val()).val());
-
-                                                                            $(".btn-reg-hijo").hide();
-                                                                            $(".btn-mant").append('<button type="button" value="' + $(this).val() + '" class="btn-mod-hijo btn btn-info">Modificar Hijo</button>');
-                                                                            $(".btn-mod-hijo").click(function() {
-
-                                                                                $(".ap_p_h_" + $(this).val()).val(ap_pat.val());
-                                                                                $(".ap_m_h_" + $(this).val()).val(ap_mat.val());
-                                                                                $(".no_h_" + $(this).val()).val(nombre.val());
-                                                                                $(".fe_n_h_" + $(this).val()).val(fe_nac.val());
-                                                                                $(".sex_h_" + $(this).val()).val(sexo.val());
-                                                                                $(".ti_doc_h_" + $(this).val()).val(t_doc.val());
-                                                                                $(".nu_doc_h_" + $(this).val()).val(ndoc.val());
-                                                                                $(".essalud_h_" + $(this).val()).val(essalud.val());
-                                                                                $(".es_sup_h_" + $(this).val()).val(es_sup.val());
-
-                                                                                $(".td-ap_pat" + $(this).val()).text(ap_pat.val());
-                                                                                $(".td-ap_mat" + $(this).val()).text(ap_mat.val());
-                                                                                $(".td-nom" + $(this).val()).text(nombre.val());
-                                                                                $(".td-fe_nac" + $(this).val()).text(fe_nac.val());
-                                                                                $(".td-sex" + $(this).val()).text(sexo.val());
-                                                                                $(".td-tdoc" + $(this).val()).text(t_doc.val());
-                                                                                $(".td-ndoc" + $(this).val()).text(ndoc.val());
-                                                                                $(".td-essalud" + $(this).val()).text(essalud.val());
-                                                                                $(".td-es_sup" + $(this).val()).text(es_sup.val());
-
-                                                                                ap_pat.val("");
-                                                                                ap_mat.val("");
-                                                                                nombre.val("");
-                                                                                fe_nac.val("");
-                                                                                sexo.val("");
-                                                                                t_doc.val("");
-                                                                                ndoc.val("");
-                                                                                essalud.val("");
-                                                                                es_sup.val("");
-                                                                                $(".btn-reg-hijo").show();
-                                                                                $(".btn-mod-hijo").remove();
-
-
-
-                                                                            });
-                                                                        });
-                                                                        $(".num_hijo").val(p);
-                                                                        p++;
-                                                                        texto_h = "";
-
-                                                                    });
-                                                                });</script>
-                                                        </div>
-                                                        <div class="form-actions">
-                                                            <div class="row">
-                                                                <div class="col-sm-12">
-                                                                    <ul class="pager wizard no-margin">
-                                                                        <!--<li class="previous first disabled">
-                                                                        <a href="javascript:void(0);" class="btn btn-lg btn-default"> First </a>
-                                                                        </li>-->
-                                                                        <li class="previous disabled">
-                                                                            <a href="javascript:void(0);" class="btn btn-lg btn-default"> Atras </a>
-                                                                        </li>
-                                                                        <!--<li class="next last">
-                                                                        <a href="javascript:void(0);" class="btn btn-lg btn-primary"> Last </a>
-                                                                        </li>-->
-                                                                        <li class="next">
-                                                                            <a href="javascript:void(0);" class="btn btn-lg txt-color-darken"> Siguiente </a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
                                                     </div>
                                                 </div>
                                         </div>
@@ -2048,7 +887,296 @@
     <script src="../../js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
     <script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
+    <script>$(document).ready(function() {
+                                                                    var p = 1;
+                                                                    var texto_h = "";
+                                                                    $(".btn-reg-hijo").click(function() {
 
+                                                                        var tabla_hijo = $(".tabla-hijo");
+                                                                        var ap_pat = $(".i_app_h");
+                                                                        var ap_mat = $(".i_apm_h");
+                                                                        var nombre = $(".i_no_h");
+                                                                        var fe_nac = $(".i_fnac_h");
+                                                                        var sexo = $(".i_sexo_h");
+                                                                        var t_doc = $(".i_tdoc_h");
+                                                                        var ndoc = $(".i_ndoc_h");
+                                                                        var essalud = $(".i_essalud_h");
+                                                                        var es_sup = $(".i_es_sup_h");
+
+                                                                        texto_h += ("<tr class='tr-hijo_" + p + "'>");
+                                                                        texto_h += ('<td ><label class="td-ap_pat' + p + '">' + ap_pat.val() + '</label><input type="hidden" value="' + ap_pat.val() + '" name="APELLIDO_P_H' + p + '" class="ap_p_h_' + p + '"/></td>');
+                                                                        texto_h += ('<td ><label class="td-ap_mat' + p + '">' + ap_mat.val() + '</label><input type="hidden" value="' + ap_mat.val() + '" name="APELLIDO_M_H' + p + '" class="ap_m_h_' + p + '"/></td>');
+                                                                        texto_h += ('<td ><label class="td-nom' + p + '">' + nombre.val() + '</label><input type="hidden" value="' + nombre.val() + '" name="NOMBRE_H' + p + '" class="no_h_' + p + '"/></td>');
+                                                                        texto_h += ('<td ><label class="td-fe_nac' + p + '">' + fe_nac.val() + '</label><input type="hidden" value="' + fe_nac.val() + '" name="FECHA_NAC_H' + p + '" class="fe_n_h_' + p + '"/></td>');
+                                                                        texto_h += (' <td ><label class="td-sex' + p + '">' + sexo.val() + '</label><input type="hidden" value="' + sexo.val() + '" name="SEXO_H' + p + '" class="sex_h_' + p + '"/></td>');
+                                                                        texto_h += ('<td ><label class="td-tdoc' + p + '">' + t_doc.val() + '</label><input type="hidden" value="' + t_doc.val() + '" name="TIPO_DOC_ID_H' + p + '" class="ti_doc_h_' + p + '"/></td>');
+                                                                        texto_h += ('<td ><label class="td-ndoc' + p + '">' + ndoc.val() + '</label><input type="hidden" value="' + ndoc.val() + '" name="NRO_DOC_H' + p + '" class="nu_doc_h_' + p + '"/></td>');
+                                                                        texto_h += ('<td ><label class="td-essalud' + p + '">' + essalud.val() + '</label><input type="hidden" value="' + essalud.val() + '" name="ESSALUD_H' + p + '" class="essalud_h_' + p + '"/></td>');
+                                                                        texto_h += ('<td ><label class="td-es_sup' + p + '">' + es_sup.val() + '</label><input type="hidden" value="' + es_sup.val() + '" name="EST_SUP_H' + p + '" class="es_sup_h_' + p + '"/></td>');
+                                                                        texto_h += ('<td><a href="javascript:void(0);" class="btn btn-danger" onclick="$(\'.tr-hijo_' + p + '\').remove();">Quitar</a> <button class="btn btn-success btn-modificar_' + p + '" href="javascript:void(0);" type="button" value="' + p + '">Modificar</button></td>');
+                                                                        texto_h += ("</tr>");
+                                                                        tabla_hijo.append(texto_h);
+                                                                        // $(".codigo").text(texto_h);
+
+
+                                                                        ap_pat.val("");
+                                                                        ap_mat.val("");
+                                                                        nombre.val("");
+                                                                        fe_nac.val("");
+                                                                        sexo.val("");
+                                                                        t_doc.val("");
+                                                                        ndoc.val("");
+                                                                        essalud.val("");
+                                                                        es_sup.val("");
+
+                                                                        $(".btn-modificar_" + p).click(function() {
+                                                                            ap_pat.val($(".ap_p_h_" + $(this).val()).val());
+                                                                            ap_mat.val($(".ap_m_h_" + $(this).val()).val());
+                                                                            nombre.val($(".no_h_" + $(this).val()).val());
+                                                                            fe_nac.val($(".fe_n_h_" + $(this).val()).val());
+                                                                            sexo.val($(".sex_h_" + $(this).val()).val());
+                                                                            t_doc.val($(".ti_doc_h_" + $(this).val()).val());
+                                                                            ndoc.val($(".nu_doc_h_" + $(this).val()).val());
+                                                                            essalud.val($(".essalud_h_" + $(this).val()).val());
+                                                                            es_sup.val($(".es_sup_h_" + $(this).val()).val());
+
+                                                                            $(".btn-reg-hijo").hide();
+                                                                            $(".btn-mant").append('<button type="button" value="' + $(this).val() + '" class="btn-mod-hijo btn btn-info">Modificar Hijo</button>');
+                                                                            $(".btn-mod-hijo").click(function() {
+
+                                                                                $(".ap_p_h_" + $(this).val()).val(ap_pat.val());
+                                                                                $(".ap_m_h_" + $(this).val()).val(ap_mat.val());
+                                                                                $(".no_h_" + $(this).val()).val(nombre.val());
+                                                                                $(".fe_n_h_" + $(this).val()).val(fe_nac.val());
+                                                                                $(".sex_h_" + $(this).val()).val(sexo.val());
+                                                                                $(".ti_doc_h_" + $(this).val()).val(t_doc.val());
+                                                                                $(".nu_doc_h_" + $(this).val()).val(ndoc.val());
+                                                                                $(".essalud_h_" + $(this).val()).val(essalud.val());
+                                                                                $(".es_sup_h_" + $(this).val()).val(es_sup.val());
+
+                                                                                $(".td-ap_pat" + $(this).val()).text(ap_pat.val());
+                                                                                $(".td-ap_mat" + $(this).val()).text(ap_mat.val());
+                                                                                $(".td-nom" + $(this).val()).text(nombre.val());
+                                                                                $(".td-fe_nac" + $(this).val()).text(fe_nac.val());
+                                                                                $(".td-sex" + $(this).val()).text(sexo.val());
+                                                                                $(".td-tdoc" + $(this).val()).text(t_doc.val());
+                                                                                $(".td-ndoc" + $(this).val()).text(ndoc.val());
+                                                                                $(".td-essalud" + $(this).val()).text(essalud.val());
+                                                                                $(".td-es_sup" + $(this).val()).text(es_sup.val());
+
+                                                                                ap_pat.val("");
+                                                                                ap_mat.val("");
+                                                                                nombre.val("");
+                                                                                fe_nac.val("");
+                                                                                sexo.val("");
+                                                                                t_doc.val("");
+                                                                                ndoc.val("");
+                                                                                essalud.val("");
+                                                                                es_sup.val("");
+                                                                                $(".btn-reg-hijo").show();
+                                                                                $(".btn-mod-hijo").remove();
+
+
+
+                                                                            });
+                                                                        });
+                                                                        $(".num_hijo").val(p);
+                                                                        p++;
+                                                                        texto_h = "";
+
+                                                                    });
+                                                                });</script>
+    <script>
+                                                                    $(document).ready(
+                                                                            function() {
+
+                                                                                $("#no_cuen").hide();
+                                                                                $("#no_cuen_ban").hide();
+                                                                                $("#generar").hide();
+                                                                                $("#no_cuen_otros").hide();
+                                                                                //alert($("#es_cuenta").val());
+
+                                                                                $(".fecha").keyup(function() {
+
+                                                                                    /*var arr_date = $(this).val().split("-");
+                                                                                     if (arr_date[0].length > 4) {
+                                                                                     //return false;
+                                                                                     $(this).val("");
+                                                                                     $(".edad").val("");
+                                                                                     alert("fecha no valida");
+                                                                                     
+                                                                                     }*/
+
+                                                                                });
+
+                                                                                $("#banco").change(function() {
+                                                                                    cuenta_bancaria($(this).val());
+                                                                                    $("#es_cuenta").val(1);
+                                                                                    //  alert($("#es_cuenta").val());
+                                                                                });
+
+                                                                                $("#es_civil").change(function() {
+                                                                                    estado_civil($(this).val());
+                                                                                });
+                                                                                $("#DOM_A_D3").change(
+                                                                                        function() {
+                                                                                            if ($("#DOM_A_D3").val() == "3") {
+                                                                                                $("#DOM_A_D4").val("Sin Numero");
+                                                                                            } else {
+
+                                                                                                $("#DOM_A_D4").val("");
+                                                                                            }
+
+                                                                                        }
+                                                                                );
+                                                                                $("#DOM_LEG_D3").change(
+                                                                                        function() {
+                                                                                            if ($("#DOM_LEG_D3").val() == "3") {
+                                                                                                $("#DOM_LEG_D4").val("Sin Numero");
+                                                                                            } else {
+
+                                                                                                $("#DOM_LEG_D4").val("");
+                                                                                            }
+
+                                                                                        }
+                                                                                );
+                                                                                $("#reli").change(
+                                                                                        function() {
+                                                                                            if ($("#reli").val() == "1") {
+                                                                                                $("#igle").attr("required", "required")
+                                                                                            } else {
+
+                                                                                                $("#igle").removeAttr("required");
+                                                                                            }
+
+                                                                                        }
+                                                                                );
+
+                                                                            });
+
+                                                                </script>
+    <script>
+                                                            function estado_civil(es_civil) {
+                                                                if (es_civil == '1' || es_civil == '3' || es_civil == '4' || es_civil == '5') {
+                                                                    // alert("estado civil");
+
+                                                                    //REMOVE REQUIRED
+                                                                    $("#tra_upeu_con").removeAttr('required');
+                                                                    $("#nom_ape_con").removeAttr('required');
+                                                                    $("#nac_con").removeAttr('required');
+                                                                    $("#doc_con").removeAttr('required');
+                                                                    $("#num_con").removeAttr('required');
+                                                                    $("#ins_vig_con").removeAttr('required');
+
+                                                                    //ADD DISABLED
+                                                                    document.getElementById("tra_upeu_con").disabled = true;
+                                                                    document.getElementById("nom_ape_con").disabled = true;
+                                                                    document.getElementById("nac_con").disabled = true;
+                                                                    document.getElementById("doc_con").disabled = true;
+                                                                    document.getElementById("num_con").disabled = true;
+                                                                    document.getElementById("ins_vig_con").disabled = true;
+                                                                }
+                                                                if (es_civil == '2' || es_civil == '6') {
+                                                                    // alert("estado civil");
+
+                                                                    //REMOVE REQUIRED
+                                                                    $("#tra_upeu_con").attr("required", "required");
+                                                                    $("#nom_ape_con").attr("required", "required");
+                                                                    $("#nac_con").attr("required", "required");
+                                                                    $("#doc_con").attr("required", "required");
+                                                                    $("#num_con").attr("required", "required");
+                                                                    $("#ins_vig_con").removeAttr("required", "required");
+
+                                                                    //ADD DISABLED
+                                                                    document.getElementById("tra_upeu_con").disabled = false;
+                                                                    document.getElementById("nom_ape_con").disabled = false;
+                                                                    document.getElementById("nac_con").disabled = false;
+                                                                    document.getElementById("doc_con").disabled = false;
+                                                                    document.getElementById("num_con").disabled = false;
+                                                                    document.getElementById("ins_vig_con").disabled = false;
+                                                                }
+
+                                                            }
+
+                                                            function cuenta_bancaria(banco) {
+
+                                                                if (banco == '1') {
+                                                                    $("#generar").hide();
+                                                                    $("#no_cuen").show();
+                                                                    $("#nu_cuen").val("");
+                                                                    $("#nu_cuen").attr("required", "required");
+                                                                    $("#no_cuen_ban").hide();
+                                                                    $("#nu_cuen_ban").val("");
+                                                                    $("#subscription").attr('checked', false);
+                                                                    $("#nu_cuen").attr("maxlength", "21");
+                                                                    $("#nu_cuen").mask("0011-9999999999999999", {placeholder: "X"});
+                                                                    $("#no_cuen_otros").hide();
+                                                                    $("#nu_cuen_otros").val("");
+                                                                }
+                                                                if (banco == '2') {
+                                                                    $("#generar").hide();
+                                                                    $("#subscription").attr('checked', false);
+                                                                    $("#no_cuen_ban").hide();
+                                                                    $("#nu_cuen_ban").val("");
+                                                                    $("#no_cuen").show();
+                                                                    $("#nu_cuen").val("");
+                                                                    $("#nu_cuen").attr("required", "required");
+                                                                    $("#nu_cuen").attr("maxlength", "14");
+                                                                    $("#nu_cuen").mask("99999999999999", {placeholder: "X"});
+                                                                    $("#no_cuen_otros").hide();
+                                                                    $("#nu_cuen_otros").val("");
+                                                                }
+                                                                if (banco == '3') {
+                                                                    $("#no_cuen").show();
+                                                                    $("#no_cuen").val("");
+                                                                    $("#nu_cuen").attr("required", "required");
+                                                                    $("#no_cuen_ban").show();
+                                                                    $("#no_cuen_ban").val("");
+                                                                    $("#nu_cuen_ban").attr("required", "required");
+                                                                    $("#no_cuen_otros").show();
+                                                                    $("#nu_cuen_otros").val("");
+                                                                    $("#nu_cuen_otros").attr("required", "required");
+                                                                    $("#generar").hide();
+                                                                    $("#subscription").attr('checked', false);
+                                                                }
+                                                                if (banco == '0') {
+                                                                    $("#no_cuen").hide();
+                                                                    $("#nu_cuen").val("");
+                                                                    $("#no_cuen_ban").hide();
+                                                                    $("#nu_cuen_ban").val("");
+                                                                    $("#no_cuen_otros").show();
+                                                                    $("#nu_cuen_otros").val("BBVA");
+                                                                    $("#generar").show();
+                                                                    $("#subscription").attr("required", "required");
+                                                                    $("#nu_cuen_otros").attr("required", "required");
+                                                                }
+
+                                                            }
+
+                                                        </script> 
+ <script>
+                                                                $(document).ready(
+                                                                        function() {
+                                                                            $("#sis_pens").change(
+                                                                                    function() {
+                                                                                        if ($("#sis_pens").val() != "1") {
+                                                                                            $(".n_afp").remove();
+                                                                                            $("#nom_afp").attr("disabled", true);
+                                                                                            $(".afp").append('<input name="NOMBRE_AFP_ID" type="hidden" class="n_afp" value="6"/>');
+                                                                                            $("#nom_afp").val("6");
+                                                                                        }
+                                                                                        if ($("#sis_pens").val() == "1") {
+
+                                                                                            $("#nom_afp").val("");
+                                                                                            $("#nom_afp").removeAttr("disabled");
+                                                                                            $(".n_afp").remove();
+                                                                                        }
+                                                                                    }
+                                                                            );
+
+                                                                        });
+
+                                                            </script>
     <script type="text/javascript">
 
                                                     // DO NOT REMOVE : GLOBAL FUNCTIONS!
