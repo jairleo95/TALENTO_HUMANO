@@ -251,7 +251,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         <%String no_ar = request.getParameter("no_arc");
         %>
         <input type="hidden" id="no_arch" class="no_arc" value="<%=no_ar%>">
-        <button class="procesar" type="button" onclick="procesar_texto();">Procesar </button>
         <h3>EDITAR PLANTILLAS <%=fechades%></h3>
         <form class="ckeditor_form" action="../../../formato_plantilla" method="post">
             <textarea cols="100" id="editor1" name="editor1" rows="10">

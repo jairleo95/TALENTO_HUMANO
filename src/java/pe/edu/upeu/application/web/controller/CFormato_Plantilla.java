@@ -65,7 +65,7 @@ public class CFormato_Plantilla extends HttpServlet {
             if (opc.equals("asignar")) {
                 response.sendRedirect("Vista/Contrato/Formato_Plantilla/Reg_Formato_Plantilla.jsp");
             }
-            String direccion_raiz = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"web";
+           // String direccion_raiz = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"web";
             if (opc.equals("Actualizar")) {
                 String texto_html = request.getParameter("valor");
                 String id = request.getParameter("id");
@@ -143,7 +143,7 @@ public class CFormato_Plantilla extends HttpServlet {
                 /*if (System.getProperty("sun.desktop").trim().equals("windows")) {
                     ubicacion = direccion_raiz + "\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
                 } else {*/
-                    ubicacion = direccion_raiz + "/Vista/Contrato/Formato_Plantilla/Formato/";
+                    //ubicacion = direccion_raiz + "/Vista/Contrato/Formato_Plantilla/Formato/";
                      ubicacion ="/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Contrato/Formato_Plantilla/Formato/";
                 //}
                 File archivo = new File(ubicacion + no_arch);
