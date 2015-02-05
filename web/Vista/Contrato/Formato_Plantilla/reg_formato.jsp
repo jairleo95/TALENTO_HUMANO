@@ -240,11 +240,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 // $(".id_pl").val($(".plantilla" + $(this).val()).val());
             }
             $(document).ready(function() {
-                $.ajaxSetup({
-                    'beforeSend': function(xhr) {
-                        xhr.overrideMimeType('text/html; charset=iso-8859-1');
-                    }
-                });
                 $("#actu").hide();
                 mostrars();
             });</script>

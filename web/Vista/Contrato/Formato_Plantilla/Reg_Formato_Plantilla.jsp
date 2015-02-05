@@ -409,16 +409,10 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             }
 
             $(document).ready(function() {
-                // mostrar_plantilla();
                 var b = $(".dir");
                 lis_dep(b);
                 var c = $(".dir_as");
                 list_dir(c);
-                $.ajaxSetup({
-                    'beforeSend': function(xhr) {
-                        xhr.overrideMimeType('text/html; charset=iso-8859-1');
-                    }
-                });
                 $("#dir").change(function() {
                     var d = $(".dep");
                     var valor = $("#dir").val();
