@@ -115,7 +115,7 @@ public class CTrabajador extends HttpServlet {
             String CARRERA = request.getParameter("CARRERA");
             String REGIMEN = request.getParameter("REGIMEN");
             String ES_INST_PERU = request.getParameter("ES_INST_PERU");
-            String DE_ANNO_EGRESO = request.getParameter("DE_ANNO_EGRESO");
+            String DE_ANNO_EGRESO = request.getParameter("A_EGRESO");
             String CM_OTROS_ESTUDIOS = request.getParameter("OTROS_ESTUDIOS");
             String ES_SEXO = request.getParameter("SEXO");
             String LI_GRUPO_SANGUINEO = request.getParameter("GRUPO_SANGUINEO");

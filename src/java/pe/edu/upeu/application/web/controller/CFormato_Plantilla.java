@@ -51,6 +51,7 @@ public class CFormato_Plantilla extends HttpServlet {
         HttpSession sesion = request.getSession(true);
         String iduser = (String) sesion.getAttribute("IDUSER");
         String opc = request.getParameter("opc");
+        if(iduser!=null){
         try {
             if (opc.equals("Asignar")) {
                 String DEP = request.getParameter("id_dep_asig");
@@ -160,6 +161,10 @@ public class CFormato_Plantilla extends HttpServlet {
         out.println(gson.toJson(rpta));
         out.flush();
         out.close();
+        }else{
+        response.sendRedirect("/TALENTO_HUMANO/");
+        }
+        
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

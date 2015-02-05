@@ -788,7 +788,7 @@
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
-                                                                            <select    name="A_EGRESO"class="form-control input-group-sm" required="" >
+                                                                            <select    name="A_EGRESO" class="form-control input-group-sm" required="" >
                                                                                 <option value="">[SELECCIONE]</option>
                                                                                 <% for (int jj = 0; jj < list_año.size(); jj++) {%>
                                                                                 <option value="<%=list_año.get(jj)%>"><%=list_año.get(jj)%></option>
