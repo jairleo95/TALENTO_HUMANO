@@ -18,8 +18,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         <meta name="author" content>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <title>Crear Formatos</title>
-        
-       <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
+
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/font-awesome.min.css">
 
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
@@ -59,10 +59,10 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         <link rel="apple-touch-startup-image" href="../../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-        
+
         <script src="../../../js/plugin/ckeditor/ckeditor.js"></script>
         <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
-      
+
         <script>
 // The instanceReady event is fired, when an instance of CKEditor has finished
 // its initialization.
@@ -414,6 +414,11 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 lis_dep(b);
                 var c = $(".dir_as");
                 list_dir(c);
+                $.ajaxSetup({
+                    'beforeSend': function(xhr) {
+                        xhr.overrideMimeType('text/html; charset=iso-8859-1');
+                    }
+                });
                 $("#dir").change(function() {
                     var d = $(".dep");
                     var valor = $("#dir").val();
@@ -506,7 +511,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
 
                     <div class="row">
-                     <article class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
                             <div class="jarviswidget" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
                                 <header><span class="widget-icon"><i class="fa fa-table"></i></span>
                                     <h2>Instrucciones </h2>
@@ -549,7 +554,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                 </div>
                             </div>
                         </article>
-             
+
 
                         <!-- NEW COL START -->
                         <article class="col-sm-12 col-md-12 col-lg-9">
@@ -771,16 +776,16 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script>
-                                                if (!window.jQuery) {
-                                                    document.write('<script src="../../../js/libs/jquery-2.0.2.min.js"><\/script>');
-                                                }
+                                                    if (!window.jQuery) {
+                                                        document.write('<script src="../../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                                                    }
     </script>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script>
-                                                if (!window.jQuery.ui) {
-                                                    document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                                                }
+                                                    if (!window.jQuery.ui) {
+                                                        document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                                                    }
     </script>
 
     <!-- IMPORTANT: APP CONFIG -->
@@ -842,10 +847,10 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
 
     <script type="text/javascript">
-                                             // DO NOT REMOVE : GLOBAL FUNCTIONS!
-                                                $(document).ready(function() {
-                                                    pageSetUp();
-                                                })
+                                                    // DO NOT REMOVE : GLOBAL FUNCTIONS!
+                                                    $(document).ready(function() {
+                                                        pageSetUp();
+                                                    })
 
     </script>
 
