@@ -36,6 +36,7 @@
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
         <title>Registrar Trabajador</title>
+        
         <meta name="description" content="">
         <meta name="author" content="">
 

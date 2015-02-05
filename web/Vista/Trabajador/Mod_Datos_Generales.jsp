@@ -288,6 +288,9 @@
                 margin: 1%;
                 margin-left:  6%;
             }
+            label{
+                font-weight: bold;
+            }
         </style>
 
 
@@ -336,7 +339,7 @@
                                 -->
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-check"></i> </span>
-                                    <h2>FICHA DE TRABAJADOR</h2>
+                                    <h2>MODIFICAR INFORMACIÓN GENERAL</h2>
 
                                 </header>
 
@@ -365,7 +368,7 @@
                                                                 <div class="col-sm-4">
 
                                                                     <div class="form-group">
-                                                                        <label style="font-weight: bold;">Apellido Paterno </label>
+                                                                        <label >Apellido Paterno </label>
                                                                             <div class="input-group">
                                                                                 <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                                 <input type="text" name="APELLIDO_P"  required="" id="fname"   class="form-control input-group-sm"  onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
@@ -374,7 +377,8 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-4">
-                                                                    <div class="form-group">Apellido Paterno
+                                                                    <div class="form-group">
+                                                                          <label >Apellido Paterno</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <input type="text" name="APELLIDO_M" required=""  id="lname" placeholder="Apellido Materno" class="form-control input-group-sm" onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
