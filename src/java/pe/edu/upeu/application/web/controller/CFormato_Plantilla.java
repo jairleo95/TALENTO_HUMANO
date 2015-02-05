@@ -143,7 +143,7 @@ public class CFormato_Plantilla extends HttpServlet {
                 /*if (System.getProperty("sun.desktop").trim().equals("windows")) {
                     ubicacion = direccion_raiz + "\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
                 } else {*/
-                    ubicacion = direccion_raiz + "/Vista/Contrato/Formato_Plantilla/Formato/";
+                    //ubicacion = direccion_raiz + "/Vista/Contrato/Formato_Plantilla/Formato/";
                      ubicacion ="/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Contrato/Formato_Plantilla/Formato/";
                 //}
                 File archivo = new File(ubicacion + no_arch);
