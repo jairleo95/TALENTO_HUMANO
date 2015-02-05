@@ -587,7 +587,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">
 
-                                        <form action="../../../formato_plantilla" method="post">
+                                        <form class="ckeditor_form" action="../../../formato_plantilla" method="post">
                                             <h3>CARGAR PLANTILLAS</h3>
                                             <section class="col col-4" >
                                                 <label>Dirección:
