@@ -329,8 +329,13 @@ public class CTrabajador extends HttpServlet {
         
         if (opc.equals("Editar_Dat_Gen")){
              String idtr = request.getParameter("idtr");
+             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+             getServletContext().setAttribute("List_Nacionalidad", li.List_Nacionalidad());
+             getServletContext().setAttribute("List_Departamento", ub.List_Departamento());
+             getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
              response.sendRedirect("Vista/Trabajador/Mod_Datos_Generales.jsp");
         }
+        
         /* } catch (Exception e) {
          out.println(e.getMessage());
          } finally {
