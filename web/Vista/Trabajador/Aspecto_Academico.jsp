@@ -24,7 +24,7 @@
 
 
         <form align="center">
-        <table class="table table-striped table-hover table-responsive">
+            <table class="table table-striped table-hover table-responsive">
                 <%for (int index = 0; index < ListaridTrabajador.size(); index++) {
                         V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
                         trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
@@ -34,15 +34,31 @@
                         %></td></tr>
                 <tr><td class="text-info">Grado Academico:</td><td><%
                         %></td></tr>
-                <tr><td class="text-info">Carrera:</td><td><%if(trb.getNo_carrera()==null){out.print("NINGUNA");}else{out.print(trb.getNo_carrera());}%></td></tr>
+                <tr><td class="text-info">Carrera:</td><td><%if (trb.getNo_carrera() == null) {
+                        out.print("NINGUNA");
+                    } else {
+                        out.print(trb.getNo_carrera());
+                    }%></td></tr>
                 <tr><td class="text-info">Titulo Profesional:</td><td><%
                         %></td></tr>
-                <tr><td class="text-info">Centro de Estudios:</td><td><%if(trb.getNo_universidad()==null){out.print("NINGUNA");}else{out.print(trb.getNo_universidad());}%></td></tr>
+                <tr><td class="text-info">Centro de Estudios:</td><td><%if (trb.getNo_universidad() == null) {
+                        out.print("NINGUNA");
+                    } else {
+                        out.print(trb.getNo_universidad());
+                    }%></td></tr>
                 <tr><td class="text-info">Tipo de Hora Referencial:</td><td><%=trb.getCa_tipo_hora_pago_refeerencial()%></td></tr>
-                <tr><td class="text-info">Otros Estudios:</td><td><%if(trb.getCm_otros_estudios()==null){out.print("NINGUNA");}else{out.print(trb.getCm_otros_estudios());}%></td></tr>
+                <tr><td class="text-info">Otros Estudios:</td><td><%if (trb.getCm_otros_estudios() == null) {
+                        out.print("NINGUNA");
+                    } else {
+                        out.print(trb.getCm_otros_estudios());
+                    }%></td></tr>
                 <tr><td  class="text-info">Correo Institucional:</td><td><%=trb.getDi_correo_inst()%></td></tr>
+                <tr>
+                    <%String IDTR = trb.getId_trabajador();%>
+                    <td colspan="2"><a class="btn btn-success" href="../../trabajador?opc=Editar_Asp_Acad&idtr=<%=IDTR%>">EDITAR</a>
+                </tr>
                 <%}%>
-               <!-- <tr><td colspan="2"><input class=""  type="submit" value="Editar"></td></tr>-->
+                <!-- <tr><td colspan="2"><input class=""  type="submit" value="Editar"></td></tr>-->
             </table>
         </form>
 
