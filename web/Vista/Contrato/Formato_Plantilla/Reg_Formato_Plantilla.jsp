@@ -293,6 +293,10 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             function mostrar_plantilla(valor) {
                 var editor = CKEDITOR.instances.editor1;
                 $.post("../../../formato_plantilla", "opc=Listar&id=" + valor, function(objJson) {
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
                     var imprimir = objJson.imprimir;
                     editor.setData(imprimir);
                 });
