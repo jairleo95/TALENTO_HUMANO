@@ -65,7 +65,7 @@
                             <label for="exampleInputEmail1">Clave Actual:</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input id="epasswordActual" type="password" class="form-control input-group-sm" required autofocus="" placeholder="clave actual"  name="passwordActual" maxlength="100">
+                                <input id="epasswordActual" type="password" class="form-control input-group-sm" value="<%=vu.getPw_usuario()%>" required autofocus="" placeholder="clave actual"  name="passwordActual" maxlength="100">
                             </div>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
                             <label for="exampleInputEmail1">Clave nueva:</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input id="epasswordNew1" type="password" class="form-control input-group-sm" required autofocus="" placeholder=" clave nueva"  name="passwordNew1"  maxlength="100">
+                                <input id="epasswordNew1" type="password" class="form-control input-group-sm"  required autofocus="" placeholder=" clave nueva"  name="passwordNew1"  maxlength="100">
                             </div>
                         </div>
                     </div>
@@ -254,10 +254,16 @@
                                     <option value="">[Seleccione Via]</option>
                                     <%for (int i = 0; i < Listar_via.size(); i++) {
                                             Via zo = new Via();
-                                            zo = (Via) Listar_via.get(i);%>    
+                                            zo = (Via) Listar_via.get(i);%> 
+                                            <% if(zo.getId_via().trim().equals(zo.getId_via().trim())){%>
+                                            <option value="<%=zo.getId_via()%>" selected=""><%=zo.getDe_via()%></option>
+                                            <%}else{%>
+                                            
                                     <option value="<%=zo.getId_via()%>"><%=zo.getDe_via()%></option>
                                     <%}%>
-                                </select>   
+                                    <%}%>
+                                </select>
+                
                             </div>
                         </div>
                     </div>
@@ -268,7 +274,7 @@
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input class="form-control input-group-sm" required autofocus=""    placeholder="---" type="text" name="DIR_DOM_A_D2" id="DOM_A_D2" maxlength="100">
+                                <input class="form-control input-group-sm" required autofocus="" value="<%=vu.getDi_dom_a_d2()%>"   placeholder="---" type="text" name="DIR_DOM_A_D2" id="DOM_A_D2" maxlength="100">
 
                             </div>
                         </div>
@@ -338,7 +344,7 @@
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input class="form-control input-group-sm"  required autofocus=""   placeholder="---" type="text" name="DIR_DOM_A_D4" id="DOM_A_D4" maxlength="100">
+                                <input class="form-control input-group-sm"  required autofocus="" value="<%=vu.getDi_dom_a_d4()%>"  placeholder="---" type="text" name="DIR_DOM_A_D4" id="DOM_A_D4" maxlength="100">
 
                             </div>
                         </div>
@@ -352,13 +358,18 @@
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <select name="DIR_DOM_A_D5_ID" id="DOM_A_D5" class="form-control input-group-sm"  required="">
+                                <select name="DIR_DOM_A_D5_ID" id="DOM_A_D5" class="form-control input-group-sm" required="">
 
                                     <option value="">[Seleccione Zona]</option>
                                     <%for (int i = 0; i < Listar_zona.size(); i++) {
                                             Zona zo = new Zona();
-                                            zo = (Zona) Listar_zona.get(i);%>    
+                                            zo = (Zona) Listar_zona.get(i);%> 
+                                              <% if(zo.getId_zona().trim().equals(zo.getId_zona().trim())){%>
+                                            <option value="<%=zo.getId_zona()%>" selected=""><%=zo.getDe_zona()%></option>
+                                            <%}else{%>
+                                            
                                     <option value="<%=zo.getId_zona()%>"><%=zo.getDe_zona()%></option>
+                                    <%}%>
                                     <%}%>
                                 </select>
                             </div>
@@ -369,7 +380,7 @@
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input class="form-control input-group-sm"  required autofocus=""   placeholder="---" type="text" name="DIR_DOM_A_D6" id="DOM_A_D6" maxlength="100">
+                                <input class="form-control input-group-sm"  required autofocus="" value="<%=vu.getDi_dom_a_d6()%>"  placeholder="---" type="text" name="DIR_DOM_A_D6" id="DOM_A_D6" maxlength="100">
 
                             </div>
                         </div>
@@ -379,7 +390,7 @@
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input class="form-control input-group-sm"  required autofocus=""   placeholder="Referencia" type="text" name="DIR_DOM_A_REF" id="DOM_A_REF" maxlength="200">
+                                <input class="form-control input-group-sm"  required autofocus="" value="<%=vu.getDi_dom_a_ref()%>"   placeholder="Referencia" type="text" name="DIR_DOM_A_REF" id="DOM_A_REF" maxlength="300">
                             </div>
                         </div>
                     </div>
@@ -398,9 +409,12 @@
                                     <%for (int d = 0; d < List_Departamento.size(); d++) {
                                             Ub_Departamento dep = new Ub_Departamento();
                                             dep = (Ub_Departamento) List_Departamento.get(d);
-
-                                    %>
+                                          %>
+                                      <% if(dep.getId_departamento().trim().equals(dep.getId_departamento().trim())){%>
+                                            <option value="<%=dep.getId_departamento()%>" selected=""><%=dep.getNo_departamento()%></option>
+                                            <%}else{%>
                                     <option value="<%=dep.getId_departamento()%>" ><%=dep.getNo_departamento()%></option>
+                                    <%}%>
                                     <%}%>
 
                                 </select>

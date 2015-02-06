@@ -151,7 +151,7 @@
                                                         <ul class="list-unstyled">
                                                               <li>
                                                                 <p class="text-muted">
-                                                                    <i class="fa fa-unlock" ></i>&nbsp;<input disabled="disabled" type="password" value="mypassword">
+                                                                    <i class="fa fa-unlock" ></i>&nbsp;<input disabled="disabled" type="password" value="<%=vu.getPw_usuario()%>">
                                                                     
                                                                 </p>
                                                             </li>
@@ -168,14 +168,14 @@
                                                           
                                                             <li>
                                                             
-                                                             <li>
-                                                                <p class="text-muted">
-                                                                    <i class="fa fa-mobile-phone"></i>&nbsp;&nbsp;<span class="txt-color-darken"><%=vu.getCl_tra()%></span>
+                                                             <li >
+                                                                <p class="text-muted" >
+                                                                    <i class="fa fa-mobile-phone" ></i>&nbsp;&nbsp;<span class="txt-color-darken" ><%=vu.getCl_tra()%></span>
                                                                 </p>
                                                             </li>
                                                              <li>
                                                                 <p class="text-muted">
-                                                                    <i class="fa fa-archive"></i>&nbsp;&nbsp;<span class="txt-color-darken"><%=vu.getDi_dom_a_d6()+vu.getDi_dom_a_ref()%></span>
+                                                                    <i class="fa fa-archive"></i>&nbsp;&nbsp;<span class="txt-color-darken"><%=vu.getDi_dom_a_d2()+vu.getDi_dom_a_d4()+vu.getDi_dom_a_d6()+vu.getDi_dom_a_ref()%></span>
                                                                 </p>
                                                             </li>
                                                                
