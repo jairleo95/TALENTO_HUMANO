@@ -561,10 +561,10 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_TRA_DET_GEN( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)} ");
             cst.setString(1,AP_PATERNO );
-            cst.setString(2,AP_PATERNO );
+            cst.setString(2,AP_MATERNO );
             cst.setString(3,NO_TRABAJADOR );
-            cst.setString(4,TI_DOC );
-            cst.setString(5,NU_DOC );
+            cst.setString(4,TI_DOC);
+            cst.setString(5,NU_DOC);
             cst.setString(6,ES_CIVIL );
             cst.setString(7,c.convertFecha(FE_NAC));
             cst.setString(8,ID_NACIONALIDAD );
@@ -582,14 +582,18 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(20, ES_AFILIADO_ESSALUD);
             cst.setString(21, LI_TIPO_TRABAJADOR);
             cst.setString(22, ES_FACTOR_RH);
-            cst.setString(23, ID_TRABAJADOR);
+            cst.setString(23, ID_TRABAJADOR.trim());
             cst.execute();
-        } catch (SQLException ex) {
-              throw new RuntimeException(ex.getMessage());
-        } catch (ParseException ex) {
-            Logger.getLogger(TrabajadorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 

@@ -1,68 +1,647 @@
-<%@page import="pe.edu.upeu.application.model.Usuario"%>
-<%
-    HttpSession sesion_1 = request.getSession();
-    String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
-    if (id_user_1 != null) {
-%>
 <%@page import="pe.edu.upeu.application.model.V_Var_Usuario"%>
 <%@page import="pe.edu.upeu.application.model.V_Usuario"%>
+<%@page import="pe.edu.upeu.application.model.Via"%>
+<%@page import="pe.edu.upeu.application.model.Zona"%>
+<%@page import="pe.edu.upeu.application.model.Ub_Departamento"%>
+<%@page import="pe.edu.upeu.application.model.V_Ubigeo"%>
+<%@page import="pe.edu.upeu.application.model.Nacionalidad"%>
+<%
+    HttpSession sesion = request.getSession(true);
+    String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
+    String iduser = (String) sesion.getAttribute("IDUSER");
+
+%>
 <jsp:useBean id="Lista_Usuarios" scope="application" class="java.util.ArrayList" />
+<jsp:useBean id="List_Nacionalidad" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Departamento" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_zona" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_via" scope="application" class="java.util.ArrayList"/>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/Css_Bootstrap/bootstrap-responsive">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
+
+
         <title>JSP Page</title>
-        
-            <link href="../../css/Css_Bootstrap/bootstrap.css" rel="stylesheet" />
+        <style type="text/css">
+            *{
+                margin: 0 auto;
+            }
+            #caja{
+                width: 900px;
+            }
+        </style>
+
 
     </head>
     <body>
-         <% 
-             V_Usuario  vu=  new V_Usuario();
-           vu=(V_Usuario)Lista_Usuarios.get(0);
-                                            %>
-                                            <form class="bg-danger"action="linea" method="POST" >
-            
-            usuario : <input class="input-small" placeholder="Email" type="text" name="nombre" value="<%=vu.getNo_usuario()%> ">
-          
-            password : <input type="text" name="pasword" value="<%=vu.getPw_usuario()%> "><br> <br>
-            
-            telefono : <input type="text" name="filtro"value="<%=vu.getCl_tra()%> "><br> <br>
-            
-            Direccion : <input type="text" name="filtro"value="<%=vu.getId_direccion()%> "><br> <br>
-            
-            correo : <input type="text" name="filtro"value=" <%=vu.getDi_correo_personal()%> "><br><br>
-            
-            foto : <input type="text" name="filtro"value="<%=vu.getDi_correo_personal()%> "><br><br>
-            
-            
-            
-            religion : <input type="text" name="filtro"value="<%=vu.getLi_religion()%> "><br><br>
-            
-            
- 
-            <input type="Submit" name="nuevo" class="btn btn-primary" value="Nuevo" >
-                   <input type="Submit" name="guardar" class="btn btn-primary" value="Guardar" id="idguardar">
-                   <input type="Submit" name="buscar" class="btn btn-primary" value="Buscar" >
- 
-        </form>
-           <!-- <form action="Chequeo" method="post">
-                <center>
-                <span class="style6">Usuario:</span>
-                <input type="text" name="usuario" size=20></center><br>
-                <center>
-                <span class="style6">Contraseña:</span>
-                <input type="Password" name="clave" size=20></center><br>
-                
-                
-                <center><input type="submit" value="enviar"></center><br>
-              </form>-->
+        <% for (int o = 0; o < Lista_Usuarios.size(); o++) {
+                V_Usuario vu = new V_Usuario();
+                vu = (V_Usuario) Lista_Usuarios.get(o);%>
+        <div id="caja">
+            <h3>-Modificar Perfil Usuario</h3>
+            <hr>
+
+            <form class="form" name="formName" action="../../Usuario"  method="post">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Usuario:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                <input type="text" class="form-control input-group-sm" value="<%=vu.getNo_usuario()%>"  required autofocus="" name="NOMBRE_USUARIO" id="DOM_A_D2" maxlength="100">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Clave Actual:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                <input id="epasswordActual" type="password" class="form-control input-group-sm" required autofocus="" placeholder="clave actual"  name="passwordActual" maxlength="100">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Clave nueva:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                <input id="epasswordNew1" type="password" class="form-control input-group-sm" required autofocus="" placeholder=" clave nueva"  name="passwordNew1"  maxlength="100">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Confirme la clave Nueva:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                <input type="password" class="form-control input-group-sm" required autofocus="" placeholder="confirmar clave " name="passwordNew2" id="DOM_A_D2" maxlength="100">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <script type="text/javascript">
+<!--
+
+                        function validate_password()
+                        {
+                            //Cogemos los valores actuales del formulario
+                            pasActual = document.formName.passwordActual;
+                            pasNew1 = document.formName.passwordNew1;
+                            pasNew2 = document.formName.passwordNew2;
+                            //Cogemos los id's para mostrar los posibles errores
+                            id_epassActual = document.getElementById("epasswordActual");
+                            id_epassNew = document.getElementById("epasswordNew1");
+
+                            //Patron para los numeros
+                            var patron1 = new RegExp("[0-9]+");
+                            //Patron para las letras
+                            var patron2 = new RegExp("[a-zA-Z]+");
+
+                            if (pasNew1.value == pasNew2.value && pasNew1.value.length >= 6 && pasActual.value != "" && pasNew1.value.search(patron1) >= 0 && pasNew1.value.search(patron2) >= 0) {
+                                //Todo correcto!!!
+                                return true;
+                            } else {
+                                if (pasNew1.value.length < 6)
+                                    id_epassNew.innerHTML = "La longitud mínima tiene que ser de 6 caracteres";
+                                else if (pasNew1.value != pasNew2.value)
+                                    id_epassNew.innerHTML = "La copia de la nueva contraseña  coincide";
+                                else if (pasNew1.value.search(patron1) < 0 || pasNew1.value.search(patron2) < 0)
+                                    id_epassNew.innerHTML = "La contraseña tiene que tener numeros y letras";
+                                else
+                                    id_epassNew.innerHTML = "";
+                                if (pasActual.value == "")
+                                    id_epassActual.innerHTML = "Indicar tu contraseña actual";
+                                else
+                                    id_epassActual.innerHTML = "";
+                                return false;
+                            }
+                        }
+-->
+                    </script>
+
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">telefono:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                <input class="form-control input-group-sm"    placeholder="" type="text" name="TEL_USUARIO" id="DOM_A_D2" data-mask="(99) 999-999" maxlength="8" value="<%=vu.getTe_trabajador()%> ">
+                                   
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Celular:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                <input class="form-control input-group-sm"    placeholder="" type="text" name="CEL_USUARIO" id="DOM_A_D2" data-mask="(99) 999-9999" maxlength="9" value="<%=vu.getCl_tra()%> ">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">correo:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                <input class="form-control input-group-sm"    placeholder="" type="text" name="CORREO_USAURIO" id="DOM_A_REFAA" maxlength="30" value="<%=vu.getDi_correo_personal()%> " >
+
+                            </div>
+                        </div>
+                    </div> 
+                </div> 
+
+
+                <script type="text/javascript">
+                        $(document).ready(
+                                function() {
+                                    var tip = $("#pro_dir_l");
+                                    tip.empty();
+                                    var rg = $("#dep_dir_l").val();
+                                    var data = "id_dep=" + rg + "&opc=dep_nac";
+                                    tip.append('<option value="">Cargando...</option>').val('');
+                                    $.post("../../ubigeo", data, function(objJson) {
+                                        tip.empty();
+                                        if (objJson.rpta == -1) {
+                                            alert(objJson.mensaje);
+                                            return;
+                                        }
+                                        var lista = objJson.lista;
+                                        if (lista.length > 0) {
+                                            tip.append("<option value=''>[Seleccione]</option>");
+                                        } else {
+                                            tip.append("<option value=''>[]</option>");
+                                        }
+                                        for (var i = 0; i < lista.length; i++) {
+                                            var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                                            tip.append(item);
+                                        }
+                                    });
+                                    var ti = $("#DOM_LEG_DISTRITO");
+                                    ti.empty();
+                                    var rg = $("#pro_dir_l").val();
+                                    var data = "id_dist=" + rg + "&opc=pro_nac";
+                                    ti.append('<option value="">Cargando...</option>').val('');
+                                    $.post("../../ubigeo", data, function(objJson) {
+                                        ti.empty();
+                                        if (objJson.rpta == -1) {
+                                            alert(objJson.mensaje);
+                                            return;
+                                        }
+                                        var lista = objJson.lista;
+                                        if (lista.length > 0) {
+                                            ti.append("<option value=''>[Seleccione]</option>");
+                                        } else {
+                                            ti.append("<option value=''>[]</option>");
+                                        }
+                                        for (var i = 0; i < lista.length; i++) {
+                                            var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                                            ti.append(item);
+                                        }
+                                    });
+
+                                    $(".doc, .doc_c").attr("maxlength", "8");
+                                    $(".doc, .doc_c").attr("minlength", "8");
+                                    $(".doc, .doc_c").val("");
+
+                                    $("#nac").change(
+                                            function() {
+                                                if ($("#nac").val() != "NAC-0193") {
+                                                    $("#dist").hide();
+                                                    $("#dist_nac").val("DST-001832");
+
+
+                                                }
+                                                if ($("#nac").val() == "NAC-0193") {
+
+                                                    $("#dist").show();
+                                                }
+                                            }
+                                    );
+
+
+
+
+
+
+                                }
+                        );
+                </script> <br>
+
+                <h3>-Domicilio Actual del usuario</h3>
+                <label>Direccion :</label>
+                <div class="row">
+
+                    <div class="col-sm-3">
+
+                        <div class="form-group">
+
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                <select name="DIR_DOM_A_D1_ID" id="DOM_A_D1" class="form-control input-group-sm"  required="">
+                                    <option value="">[Seleccione Via]</option>
+                                    <%for (int i = 0; i < Listar_via.size(); i++) {
+                                            Via zo = new Via();
+                                            zo = (Via) Listar_via.get(i);%>    
+                                    <option value="<%=zo.getId_via()%>"><%=zo.getDe_via()%></option>
+                                    <%}%>
+                                </select>   
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-3">
+                        <div class="form-group">
+
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                <input class="form-control input-group-sm" required autofocus=""    placeholder="---" type="text" name="DIR_DOM_A_D2" id="DOM_A_D2" maxlength="100">
+
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        $(document).ready(
+                                function() {
+                                    $("#DOM_A_D3").change(
+                                            function() {
+                                                if ($("#DOM_A_D3").val() == "3") {
+                                                    $("#DOM_A_D4").val("Sin Numero");
+                                                } else {
+
+                                                    $("#DOM_A_D4").val("");
+                                                }
+
+                                            }
+                                    );
+                                    $("#DOM_LEG_D3").change(
+                                            function() {
+                                                if ($("#DOM_LEG_D3").val() == "3") {
+                                                    $("#DOM_LEG_D4").val("Sin Numero");
+                                                } else {
+
+                                                    $("#DOM_LEG_D4").val("");
+                                                }
+
+                                            }
+                                    );
+                                    $("#reli").change(
+                                            function() {
+                                                if ($("#reli").val() == "1") {
+                                                    $("#igle").attr("required", "required")
+                                                } else {
+
+                                                    $("#igle").removeAttr("required");
+                                                }
+
+                                            }
+                                    );
+
+                                });
+
+                    </script>
+                    <div class="col-sm-3">
+
+                        <div class="form-group">
+
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                <select name="DIR_DOM_A_D3_ID" id="DOM_A_D3" class="form-control input-group-sm"  required="">
+                                    <option value="">[Seleccione]</option>
+                                    <option value="1">Número</option>
+                                    <option value="2">Lote</option>
+                                    <option value="3">S/N</option>
+                                    <option value="4">Km</option>
+                                    <option value="5">Block</option>
+                                    <option value="6">Etapa</option>
+                                    <option value="7">Departamento</option>
+                                    <option value="8">Interior</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                <input class="form-control input-group-sm"  required autofocus=""   placeholder="---" type="text" name="DIR_DOM_A_D4" id="DOM_A_D4" maxlength="100">
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+
+                        <div class="form-group">
+
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                <select name="DIR_DOM_A_D5_ID" id="DOM_A_D5" class="form-control input-group-sm"  required="">
+
+                                    <option value="">[Seleccione Zona]</option>
+                                    <%for (int i = 0; i < Listar_zona.size(); i++) {
+                                            Zona zo = new Zona();
+                                            zo = (Zona) Listar_zona.get(i);%>    
+                                    <option value="<%=zo.getId_zona()%>"><%=zo.getDe_zona()%></option>
+                                    <%}%>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                <input class="form-control input-group-sm"  required autofocus=""   placeholder="---" type="text" name="DIR_DOM_A_D6" id="DOM_A_D6" maxlength="100">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                <input class="form-control input-group-sm"  required autofocus=""   placeholder="Referencia" type="text" name="DIR_DOM_A_REF" id="DOM_A_REF" maxlength="200">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3">
+
+                        <div class="form-group">
+
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                <select  id="dep_dir_a" class="form-control input-group-sm"  required="" name="ID_DEPARTAMENTO">
+                                    <option value="">[Departamento]</option>
+                                    <%for (int d = 0; d < List_Departamento.size(); d++) {
+                                            Ub_Departamento dep = new Ub_Departamento();
+                                            dep = (Ub_Departamento) List_Departamento.get(d);
+
+                                    %>
+                                    <option value="<%=dep.getId_departamento()%>" ><%=dep.getNo_departamento()%></option>
+                                    <%}%>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+
+                        <div class="form-group">
+
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                <select  id="pro_dir_a" class="form-control input-group-sm"  required="" name="ID_PROVINCIA">
+                                    <option value="">[Provincia]</option>
+
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+
+                        <div class="form-group">
+
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                <select name="DIR_DOM_A_DISTRITO_ID"  id="DOM_A_DISTRITO" class="form-control input-group-sm"   required="" >
+                                    <option value="">[Distrito]</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<button onclick="duplicar();
+                            return false;"  class="btn btn-primary" id="btn-duplicar">Duplicar</button>-->
+
+
+
+                </div><br>
+                <input type="text" value="<%=vu.getId_usuario()%>" name="idus" />
+                <input type="hidden" value="opc" name="editar_Perfil" />
+                <input type="Submit" name="opc" class="btn btn-primary" id="idus" value="Modificar" >
+                <input type="Submit" name="Nuevo" class="btn btn-primary" value="Nuevo" >
+                <button type="submit" class="btn btn-success">
+                    TERMINAR
+                </button>
+
+                <h2>...</h2>
+                <%}%>
+
+
+            </form>
+
+        </div>
+
+
+        <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <script>
+                        if (!window.jQuery) {
+                            document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                        }
+        </script>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+        <script>
+                        if (!window.jQuery.ui) {
+                            document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                        }
+        </script>
+
+
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+                var ga = document.createElement('script');
+                ga.type = 'text/javascript';
+                ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(ga, s);
+            })();
+
+        </script>
+
+        <!--Solo numeros -->
+
+
+
+        <!--Select dinamicos-->
+        <script type="text/javascript">
+            /*Ubigeo*/
+            $("#dep_nac").change(function() {
+                var ti = $("#pro_nac");
+                ti.empty();
+                var rg = $("#dep_nac").val();
+                var data = "id_dep=" + rg + "&opc=dep_nac";
+                ti.append('<option value="">Cargando...</option>').val('');
+                $.post("../../ubigeo", data, function(objJson) {
+                    ti.empty();
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    var lista = objJson.lista;
+                    if (lista.length > 0) {
+                        ti.append("<option value=''>[Seleccione]</option>");
+                    } else {
+                        ti.append("<option value=''>[]</option>");
+                    }
+                    for (var i = 0; i < lista.length; i++) {
+                        var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                        ti.append(item);
+                    }
+                });
+            });
+            $("#pro_nac").change(function() {
+                var ti = $("#dist_nac");
+                ti.empty();
+                var rg = $("#pro_nac").val();
+                var data = "id_dist=" + rg + "&opc=pro_nac";
+                ti.append('<option value="">Cargando...</option>').val('');
+                $.post("../../ubigeo", data, function(objJson) {
+                    ti.empty();
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    var lista = objJson.lista;
+                    if (lista.length > 0) {
+                        ti.append("<option value=''>[Seleccione]</option>");
+                    } else {
+                        ti.append("<option value=''>[]</option>");
+                    }
+                    for (var i = 0; i < lista.length; i++) {
+                        var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                        ti.append(item);
+                    }
+                });
+            });
+            $("#dep_dir_a").change(function() {
+                var ti = $("#pro_dir_a");
+                ti.empty();
+                var rg = $("#dep_dir_a").val();
+                var data = "id_dep=" + rg + "&opc=dep_nac";
+                ti.append('<option value="">Cargando...</option>').val('');
+                $.post("../../ubigeo", data, function(objJson) {
+                    ti.empty();
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    var lista = objJson.lista;
+                    if (lista.length > 0) {
+                        ti.append("<option value=''>[Seleccione]</option>");
+                        for (var i = 0; i < lista.length; i++) {
+                            var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                            ti.append(item);
+                        }
+                    } else {
+                        ti.append("<option value=''>[]</option>");
+                    }
+
+                });
+            });
+            $("#pro_dir_a").change(function() {
+                var ti = $("#DOM_A_DISTRITO");
+                ti.empty();
+                var rg = $("#pro_dir_a").val();
+                var data = "id_dist=" + rg + "&opc=pro_nac";
+                ti.append('<option value="">Cargando...</option>').val('');
+                $.post("../../ubigeo", data, function(objJson) {
+                    ti.empty();
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    var lista = objJson.lista;
+                    if (lista.length > 0) {
+                        ti.append("<option value=''>[Seleccione]</option>");
+                    } else {
+                        ti.append("<option value=''>[]</option>");
+                    }
+                    for (var i = 0; i < lista.length; i++) {
+                        var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                        ti.append(item);
+                    }
+                });
+            });
+            $("#dep_dir_l").change(function() {
+                var ti = $("#pro_dir_l");
+                ti.empty();
+                var rg = $("#dep_dir_l").val();
+                var data = "id_dep=" + rg + "&opc=dep_nac";
+                ti.append('<option value="">Cargando...</option>').val('');
+                $.post("../../ubigeo", data, function(objJson) {
+                    ti.empty();
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    var lista = objJson.lista;
+                    if (lista.length > 0) {
+                        ti.append("<option value=''>[Seleccione]</option>");
+                    } else {
+                        ti.append("<option value=''>[]</option>");
+                    }
+                    for (var i = 0; i < lista.length; i++) {
+                        var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                        ti.append(item);
+                    }
+                });
+            });
+            $("#pro_dir_l").change(function() {
+                var ti = $("#DOM_LEG_DISTRITO");
+                ti.empty();
+                var rg = $("#pro_dir_l").val();
+                var data = "id_dist=" + rg + "&opc=pro_nac";
+                ti.append('<option value="">Cargando...</option>').val('');
+                $.post("../../ubigeo", data, function(objJson) {
+                    ti.empty();
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    var lista = objJson.lista;
+                    if (lista.length > 0) {
+                        ti.append("<option value=''>[Seleccione]</option>");
+                    } else {
+                        ti.append("<option value=''>[]</option>");
+                    }
+                    for (var i = 0; i < lista.length; i++) {
+                        var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                        ti.append(item);
+                    }
+                });
+            });
+
+        </script>
+
     </body>
 </html>
-
-<%} else {
-        response.sendRedirect("/TALENTO_HUMANO/");
-    }
-%>
