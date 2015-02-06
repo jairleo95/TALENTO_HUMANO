@@ -196,12 +196,12 @@ public class CDgp extends HttpServlet {
             }
             String LI_MOTIVO = request.getParameter("MOTIVO");
             String ES_MFL = request.getParameter("MFL");
-            if(ES_MFL != null){
-             ES_MFL = "1";
-            }else{
-             ES_MFL = "0";
+            if (ES_MFL != null) {
+                ES_MFL = "1";
+            } else {
+                ES_MFL = "0";
             }
-            
+
             dgp.INSERT_DGP(null, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO, DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION, ES_DGP, iduser, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, DE_ANTECEDENTES_POLICIALES, ES_CERTIFICADO_SALUD, DE_MONTO_HONORARIO, LI_MOTIVO, ES_MFL);
             String iddgp = dgp.MAX_ID_DGP();
             String ESTADO = request.getParameter("ESTADO");
@@ -234,7 +234,7 @@ public class CDgp extends HttpServlet {
             }
 
             List<String> list = a.Det_Autorizacion(idrp);
-            a.Insert_Autorizacion("", iddgp, "1", "P1", "12312", iduser, "", "31/07/14", "3213", list.get(1), idrp, list.get(0));
+            a.Insert_Autorizacion("", iddgp, "1", "P1", "12312", iduser, "", "", "", list.get(1), idrp, list.get(0));
             //HORARIO
             List<String> dia = new ArrayList<String>();
             dia.add("lun");
@@ -252,8 +252,7 @@ public class CDgp extends HttpServlet {
             String ID_TIPO_HORARIO = request.getParameter("HORARIO");
             String ES_MOD_FORMATO = "1";
 
-            
-            IHor.Insert_Detalle_Horario(ID_DETALLE_HORARIO, iddgp, ES_DETALLE_HORARIO, iduser, null, null, null,ID_TIPO_HORARIO,ES_MOD_FORMATO);
+            IHor.Insert_Detalle_Horario(ID_DETALLE_HORARIO, iddgp, ES_DETALLE_HORARIO, iduser, null, null, null, ID_TIPO_HORARIO, ES_MOD_FORMATO);
 
             ID_DETALLE_HORARIO = IHor.Max_id_Detalle_Horario();
 
@@ -282,8 +281,8 @@ public class CDgp extends HttpServlet {
             int num_ad = doc.List_Adventista(ID_TRABAJADOR);
             getServletContext().setAttribute("List_Hijos", doc.List_Hijos(ID_TRABAJADOR));
             getServletContext().setAttribute("List_Conyugue", doc.List_Conyugue(ID_TRABAJADOR));
-            
-            response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&pro=pr_dgp&idtr="+ID_TRABAJADOR);
+
+            response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&pro=pr_dgp&idtr=" + ID_TRABAJADOR);
             // response.sendRedirect("Vista/Dgp/Horario/Reg_Horario.jsp?iddgp=" + iddgp + "&idtr=" + ID_TRABAJADOR + "&opc=rd");
 
         }
@@ -323,7 +322,7 @@ public class CDgp extends HttpServlet {
             getServletContext().setAttribute("Listar_Trabajador_id", tr.ListaridTrabajador(idtr));
             getServletContext().setAttribute("list_Cuenta_Sueldo", dgp.LIST_CUEN_SUEL(idtr));
 
-response.sendRedirect("Vista/Dgp/Reg_Dgp.jsp?idreq=" + idreq + "&es_cs=" + ES_CUENTA_SUELDO);
+            response.sendRedirect("Vista/Dgp/Reg_Dgp.jsp?idreq=" + idreq + "&es_cs=" + ES_CUENTA_SUELDO);
         }
         if (opc.equals("Reg_renuncia")) {
             String iddeph = request.getParameter("idep");
@@ -387,17 +386,17 @@ response.sendRedirect("Vista/Dgp/Reg_Dgp.jsp?idreq=" + idreq + "&es_cs=" + ES_CU
                     getServletContext().setAttribute("List_anno_max", anno.List_anno_max());
                     getServletContext().setAttribute("List_modalidad", con.List_modalidad());
                     getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
-                   // getServletContext().setAttribute("List_centro_costo", cc.List_centro_costo());
+                    // getServletContext().setAttribute("List_centro_costo", cc.List_centro_costo());
                     //getServletContext().setAttribute("Listar_Direccion", dir.Listar_Direccion());
                     getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
-                    
+
                     int asig = dht.ASIGNACION_F(ID_TRABAJADOR);
                     //out.println(id_dir);
                     response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp?num=" + asig + "&id_direc=" + id_dir);
 
                 } else if (num == 0 & idrol.trim().equals("ROL-0006") & dgp.LIST_ID_DGP(ID_DGP).get(0).getEs_dgp().equals("1")) {
                     String ida1 = anno.List_Anno_Max_Cont(idtr);
-                     
+
                     String id_cto = con.Contrato_max(idtr);
                     getServletContext().setAttribute("List_Anno_trabajador", anno.List_Anno_trabajador(idtr));
                     getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(idtr));
@@ -411,20 +410,20 @@ response.sendRedirect("Vista/Dgp/Reg_Dgp.jsp?idreq=" + idreq + "&es_cs=" + ES_CU
                     response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1 + "&idtr=" + idtr + "&id_cto=" + id_cto);
 
                     /*getServletContext().setAttribute("List_id_Contrato_DGP", con.List_id_Contrato_DGP(idtr, ida1));
-                    getServletContext().setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr));
-                    getServletContext().setAttribute("List_Jefe", l.List_Jefe());
-                    getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
-                    //getServletContext().setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
-                    getServletContext().setAttribute("List_ID_User", usu.List_ID_User(iduser));
-                    getServletContext().setAttribute("List_Usuario", usu.List_Usuario());
-                    getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
-                    getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
-                    getServletContext().setAttribute("List_centro_costo", cc.List_centro_costo());
-                    getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
-                    getServletContext().setAttribute("List_modalidad", con.List_modalidad());
-                    getServletContext().setAttribute("Listar_Sub_mo", sub.Listar_Sub_mo());
-                    getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
-                    response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp?ida1=" + ida1);*/
+                     getServletContext().setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr));
+                     getServletContext().setAttribute("List_Jefe", l.List_Jefe());
+                     getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
+                     //getServletContext().setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
+                     getServletContext().setAttribute("List_ID_User", usu.List_ID_User(iduser));
+                     getServletContext().setAttribute("List_Usuario", usu.List_Usuario());
+                     getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
+                     getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
+                     getServletContext().setAttribute("List_centro_costo", cc.List_centro_costo());
+                     getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
+                     getServletContext().setAttribute("List_modalidad", con.List_modalidad());
+                     getServletContext().setAttribute("Listar_Sub_mo", sub.Listar_Sub_mo());
+                     getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
+                     response.sendRedirect("Vista/Contrato/Detalle_Info_Contractual.jsp?ida1=" + ida1);*/
                 } else {
 
                     //String idtr = request.getParameter("idtr");
