@@ -7,6 +7,9 @@ package pe.edu.upeu.application.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -38,6 +41,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceTipo_DocumentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUbigeoDAO;
 
+
 /**
  *
  * @author Alfa.sistemas
@@ -62,6 +66,7 @@ public class CTrabajador extends HttpServlet {
         String idrol = (String) sesion.getAttribute("IDROL");
         String iduser = (String) sesion.getAttribute("IDUSER");
 
+        CConversion c = new CConversion();
         InterfaceListaDAO li = new ListaDAO();
         // InterfaceDgpDAO dgp = new DgpDAO();
         InterfaceUbigeoDAO ub = new UbigeoDAO();
@@ -365,14 +370,21 @@ public class CTrabajador extends HttpServlet {
 
             tr.MOD_DAT_GEN(AP_PATERNO, AP_MATERNO, NO_TRABAJADOR, TI_DOC, NU_DOC, ES_CIVIL, FE_NAC, ID_NACIONALIDAD, ID_DEPARTAMENTO, ID_PROVINCIA, ID_DISTRITO, TE_TRABAJADOR, CL_TRA, DI_CORREO_PERSONAL, DI_CORREO_INST, CO_SISTEMA_PENSIONARIO, ES_SEXO, LI_GRUPO_SANGUINEO, ID_NO_AFP, ES_AFILIADO_ESSALUD, LI_TIPO_TRABAJADOR, ES_FACTOR_RH, idtr);
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+           //out.print(ES_CIVIL);
+            /*try {
+                String FECHA = c.convertFecha(FE_NAC);
+                out.print(FECHA);
+                
+                // response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp");
+            } catch (ParseException ex) {
+                Logger.getLogger(CTrabajador.class.getName()).log(Level.SEVERE, null, ex);
+            }*/
             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp");
         }
-
-        /* } catch (Exception e) {
-         out.println(e.getMessage());
-         } finally {
-         out.close();
-         }*/
+        if (opc.equals("Editar_Asp_Acad")) {
+        String idtr = request.getParameter("idtr");
+        response.sendRedirect("Vista/Trabajador/Mod_Aspecto_Academico.jsp?idtr=" + idtr);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
