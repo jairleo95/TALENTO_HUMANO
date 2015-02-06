@@ -41,6 +41,10 @@
                 <tr><td class="text-info">Tipo de Hora Referencial:</td><td><%=trb.getCa_tipo_hora_pago_refeerencial()%></td></tr>
                 <tr><td class="text-info">Otros Estudios:</td><td><%if(trb.getCm_otros_estudios()==null){out.print("NINGUNA");}else{out.print(trb.getCm_otros_estudios());}%></td></tr>
                 <tr><td  class="text-info">Correo Institucional:</td><td><%=trb.getDi_correo_inst()%></td></tr>
+                 <tr>
+                            <%String IDTR = trb.getId_trabajador(); %>
+                            <td colspan="2"><a class="btn btn-success" href="../../trabajador?opc=Editar_Asp_Acad&idtr=<%=IDTR %>">EDITAR</a></td>
+                        </tr>
                 <%}%>
                <!-- <tr><td colspan="2"><input class=""  type="submit" value="Editar"></td></tr>-->
             </table>

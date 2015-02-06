@@ -195,6 +195,7 @@ public class CDocumento extends HttpServlet {
                                 estado = (nombre.equals("estado" + i)) ? valor : estado;
                             } else {
                                 String fieldName = item.getFieldName();
+                               
                                 num++;
                                 Calendar fecha = new GregorianCalendar();
                                 int hora = fecha.get(Calendar.HOUR_OF_DAY);
@@ -204,7 +205,7 @@ public class CDocumento extends HttpServlet {
                                 if (fieldName.equals("archivos" + i) & item.getName() != null) {
                                     if (!item.getName().equals("")) {
                                         out.println(item.getFieldName() + " : " + item.getName());
-                                        
+
                                         nombre_archivo = String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + num + iddgp + "_" + item.getName().toUpperCase();
                                         no_original = item.getName();
                                         /*Thread thread = new Thread(new Renombrar(item, ubicacion, nombre_archivo));
@@ -221,7 +222,7 @@ public class CDocumento extends HttpServlet {
                         if (nombre_archivo != null) {
 
                             if (!nombre_archivo.equals("")) {
-                                 out.println( iddoc);
+                                out.println(iddoc);
                                 estado = ((estado == null) ? "0" : estado);
                                 // d.INSERT_DOCUMENTO_ADJUNTO(null, iddgp, iddoc, estado, user, null, null, null, null, desc, nombre_archivo, no_original, null, null, id_ctr);
 

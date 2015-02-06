@@ -16,7 +16,7 @@ public class FactoryConnectionDB {
     public static String[] configMYSQL = {"bd_almacen", "root", "root"};
     public static String[] configORACLE = {"procesosrh", "gestionrrhh", "procesrh-db.upeu", "1521", "upeu"};
 
-    public static ConexionBD open(int typeDB) {
+    public static ConexionBD open(int typeDB) { 
         switch (typeDB) {
             case FactoryConnectionDB.MYSQL:
                 return new MYSQLConnectionDB(configMYSQL);

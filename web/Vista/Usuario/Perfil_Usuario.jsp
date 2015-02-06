@@ -144,37 +144,38 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <h1><%=vu.getNo_usuario()%> <span class="semi-bold"><%=vu.getCl_tra()%></span>
+                                                        <h1><%=vu.getNo_usuario()%> <span class="semi-bold">telf: <%=vu.getTe_trabajador()%></span>
                                                             <br>
-                                                            <small> <a href="editarPerfil.jsp">Editar Perfil</a></small></h1>
+                                                            <small> <a href="../../Usuario?opc=editar_Perfil&id=<%=(String)sesion_1.getAttribute("IDUSER")%>">Editar Perfil</a></small></h1>
 
                                                         <ul class="list-unstyled">
-                                                            <li>
+                                                              <li>
                                                                 <p class="text-muted">
-                                                                    <i class="fa fa-phone"></i>&nbsp;&nbsp;(<span class="txt-color-darken">313</span>) <span class="txt-color-darken">464</span> - <span class="txt-color-darken">6473</span>
+                                                                    <i class="fa fa-unlock" ></i>&nbsp;<input disabled="disabled" type="password" value="<%=vu.getPw_usuario()%>">
+                                                                    
                                                                 </p>
                                                             </li>
                                                             <li>
                                                                 <p class="text-muted">
-                                                                    <i class="fa fa-envelope"></i>&nbsp;&nbsp;<a href="mailto:simmons@smartadmin"><%=vu.getDi_correo_personal()%></a>
+                                                                    <i class="fa fa-phone"></i>&nbsp;&nbsp;(<span class="txt-color-darken"><%=vu.getTe_trabajador()%></span>)
                                                                 </p>
                                                             </li>
                                                             <li>
                                                                 <p class="text-muted">
-                                                                    <i class="fa fa-paw"></i>&nbsp;&nbsp;<span class="txt-color-darken">password</span>
-                                                                    <input class="form-control" disabled="disabled" placeholder="Password field" type="password" value="mypassword">
+                                                                    <i class="fa fa-envelope"></i>&nbsp;&nbsp;<a href=""><%=vu.getDi_correo_personal()%></a>
                                                                 </p>
                                                             </li>
+                                                          
                                                             <li>
                                                             
-                                                             <li>
-                                                                <p class="text-muted">
-                                                                    <i class="fa fa-phone-square"></i>&nbsp;&nbsp;<span class="txt-color-darken"><%=vu.getCl_tra()%></span>
+                                                             <li >
+                                                                <p class="text-muted" >
+                                                                    <i class="fa fa-mobile-phone" ></i>&nbsp;&nbsp;<span class="txt-color-darken" ><%=vu.getCl_tra()%></span>
                                                                 </p>
                                                             </li>
                                                              <li>
                                                                 <p class="text-muted">
-                                                                    <i class="fa fa-archive"></i>&nbsp;&nbsp;<span class="txt-color-darken"><%=vu.getNo_direccion()%></span>
+                                                                    <i class="fa fa-archive"></i>&nbsp;&nbsp;<span class="txt-color-darken"><%=vu.getDi_dom_a_d2()+vu.getDi_dom_a_d4()+vu.getDi_dom_a_d6()+vu.getDi_dom_a_ref()%></span>
                                                                 </p>
                                                             </li>
                                                                
@@ -183,11 +184,8 @@
                                                                     <i class="fa fa-picture-o"></i>&nbsp;&nbsp;<span class="txt-color-darken">foto</span>
                                                                 </p>
                                                             </li>
-                                                             <li>
-                                                                <p class="text-muted">
-                                                                    <i class="fa fa-archive"></i>&nbsp;&nbsp;<span class="txt-color-darken"><%=vu.getLi_religion()%></span>
-                                                                </p>
-                                                            </li>
+                                                            
+                                                            <li>
                                                                 <p class="text-muted">
                                                                     <i class="fa fa-calendar"></i>&nbsp;&nbsp;<span class="txt-color-darken">Free after <a href="javascript:void(0);" rel="tooltip" title="" data-placement="top" data-original-title="Create an Appointment">4:30 PM</a></span>
                                                                 </p>
@@ -209,230 +207,21 @@
                                                         <a href="javascript:void(0);" class="btn btn-default btn-xs"><i class="fa fa-envelope-o"></i> Send Message</a>
                                                         <br>
                                                         <br>
-
-                                                    </div>
-                                                           <!--<div class="col-sm-3">
-                                                           <h1><small>Connections</small></h1>
-                                                            <ul class="list-inline friends-list">
-                                                            <li><img src="img/avatars/1.png" alt="friend-1">
-                                                            </li>
-                                                            <li><img src="img/avatars/2.png" alt="friend-2">
-                                                            </li>
-                                                            <li><img src="img/avatars/3.png" alt="friend-3">
-                                                            </li>
-                                                            <li><img src="img/avatars/4.png" alt="friend-4">
-                                                            </li>
-                                                            <li><img src="img/avatars/5.png" alt="friend-5">
-                                                            </li>
-                                                            <li><img src="img/avatars/male.png" alt="friend-6">
-                                                            </li>
-                                                            <li>
-                                                                <a href="javascript:void(0);">413 more</a>
-                                                            </li>
-                                                        </ul>
-
-                                                        <h1><small>Recent visitors</small></h1>
-                                                        <ul class="list-inline friends-list">
-                                                            <li><img src="img/avatars/male.png" alt="friend-1">
-                                                            </li>
-                                                            <li><img src="img/avatars/female.png" alt="friend-2">
-                                                            </li>
-                                                            <li><img src="img/avatars/female.png" alt="friend-3">
-                                                            </li>
-                                                        </ul>
-
-                                                    </div>-->
-
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="row">
-
-                                            <div class="col-sm-12">
-
-                                                <hr>
-
-                                                <div class="padding-10">
-
-                                                    <ul class="nav nav-tabs tabs-pull-right">
-                                                        <li class="active">
-                                                            <a href="#a1" data-toggle="tab">Recent Articles</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#a2" data-toggle="tab">New Members</a>
-                                                        </li>
-                                                        <li class="pull-left">
+                                                      <ul class="nav nav-tabs tabs-pull-right">
+                                                       <li class="pull-left">
                                                             <span class="margin-top-10 display-inline"><i class="fa fa-rss text-success"></i> Activity</span>
                                                         </li>
                                                     </ul>
 
-                                                    <div class="tab-content padding-top-10">
-                                                        <div class="tab-pane fade in active" id="a1">
-
-                                                            <div class="row">
-
-                                                                <div class="col-xs-2 col-sm-1">
-                                                                    <time datetime="2014-09-20" class="icon">
-                                                                        <strong>Jan</strong>
-                                                                        <span>10</span>
-                                                                    </time>
-                                                                </div>
-
-                                                                <div class="col-xs-10 col-sm-11">
-                                                                    <h6 class="no-margin"><a href="javascript:void(0);">Allice in Wonderland</a></h6>
-                                                                    <p>
-                                                                        Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi Nam eget dui.
-                                                                        Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero,
-                                                                        sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel.
-                                                                    </p>
-                                                                </div>
-
-                                                                <div class="col-sm-12">
-
-                                                                    <hr>
-
-                                                                </div>
-
-                                                                <div class="col-xs-2 col-sm-1">
-                                                                    <time datetime="2014-09-20" class="icon">
-                                                                        <strong>Jan</strong>
-                                                                        <span>10</span>
-                                                                    </time>
-                                                                </div>
-
-                                                                <div class="col-xs-10 col-sm-11">
-                                                                    <h6 class="no-margin"><a href="javascript:void(0);">World Report</a></h6>
-                                                                    <p>
-                                                                        Morning our be dry. Life also third land after first beginning to evening cattle created let subdue you'll winged don't Face firmament.
-                                                                        You winged you're was Fruit divided signs lights i living cattle yielding over light life life sea, so deep.
-                                                                        Abundantly given years bring were after. Greater you're meat beast creeping behold he unto She'd doesn't. Replenish brought kind gathering Meat.
-                                                                    </p>
-                                                                </div>
-
-                                                                <div class="col-sm-12">
-
-                                                                    <br>
-
-                                                                </div>
-
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="tab-pane fade" id="a2">
-
-                                                            <div class="alert alert-info fade in">
-                                                                <button class="close" data-dismiss="alert">
-                                                                    ×
-                                                                </button>
-                                                                <i class="fa-fw fa fa-info"></i>
-                                                                <strong>51 new members </strong>joined today!
-                                                            </div>
-
-                                                            <div class="user" title="email@company.com">
-                                                                <img src="img/avatars/female.png" alt="demo user"><a href="javascript:void(0);">Jenn Wilson</a>
-                                                                <div class="email">
-                                                                    travis@company.com
-                                                                </div>
-                                                            </div>
-                                                            <div class="user" title="email@company.com">
-                                                                <img src="img/avatars/male.png" alt="demo user"><a href="javascript:void(0);">Marshall Hitt</a>
-                                                                <div class="email">
-                                                                    marshall@company.com
-                                                                </div>
-                                                            </div>
-                                                            <div class="user" title="email@company.com">
-                                                                <img src="img/avatars/male.png" alt="demo user"><a href="javascript:void(0);">Joe Cadena</a>
-                                                                <div class="email">
-                                                                    joe@company.com
-                                                                </div>
-                                                            </div>
-                                                            <div class="user" title="email@company.com">
-                                                                <img src="img/avatars/male.png" alt="demo user"><a href="javascript:void(0);">Mike McBride</a>
-                                                                <div class="email">
-                                                                    mike@company.com
-                                                                </div>
-                                                            </div>
-                                                            <div class="user" title="email@company.com">
-                                                                <img src="img/avatars/male.png" alt="demo user"><a href="javascript:void(0);">Travis Wilson</a>
-                                                                <div class="email">
-                                                                    travis@company.com
-                                                                </div>
-                                                            </div>
-                                                            <div class="user" title="email@company.com">
-                                                                <img src="img/avatars/male.png" alt="demo user"><a href="javascript:void(0);">Marshall Hitt</a>
-                                                                <div class="email">
-                                                                    marshall@company.com
-                                                                </div>
-                                                            </div>
-                                                            <div class="user" title="Joe Cadena joe@company.com">
-                                                                <img src="img/avatars/male.png" alt="demo user"><a href="javascript:void(0);">Joe Cadena</a>
-                                                                <div class="email">
-                                                                    joe@company.com
-                                                                </div>
-                                                            </div>
-                                                            <div class="user" title="email@company.com">
-                                                                <img src="img/avatars/male.png" alt="demo user"><a href="javascript:void(0);">Mike McBride</a>
-                                                                <div class="email">
-                                                                    mike@company.com
-                                                                </div>
-                                                            </div>
-                                                            <div class="user" title="email@company.com">
-                                                                <img src="img/avatars/male.png" alt="demo user"><a href="javascript:void(0);">Marshall Hitt</a>
-                                                                <div class="email">
-                                                                    marshall@company.com
-                                                                </div>
-                                                            </div>
-                                                            <div class="user" title="email@company.com">
-                                                                <img src="img/avatars/male.png" alt="demo user"><a href="javascript:void(0);">Joe Cadena</a>
-                                                                <div class="email">
-                                                                    joe@company.com
-                                                                </div>
-                                                            </div>
-                                                            <div class="user" title="email@company.com">
-                                                                <img src="img/avatars/male.png" alt="demo user"><a href="javascript:void(0);"> Mike McBride</a>
-                                                                <div class="email">
-                                                                    mike@company.com
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="text-center">
-                                                                <ul class="pagination pagination-sm">
-                                                                    <li class="disabled">
-                                                                        <a href="javascript:void(0);">Prev</a>
-                                                                    </li>
-                                                                    <li class="active">
-                                                                        <a href="javascript:void(0);">1</a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="javascript:void(0);">2</a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="javascript:void(0);">3</a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="javascript:void(0);">...</a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="javascript:void(0);">99</a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="javascript:void(0);">Next</a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-
-                                                        </div><!-- end tab -->
                                                     </div>
+                                                         
 
                                                 </div>
 
                                             </div>
 
                                         </div>
-                                        <!-- end row -->
+
 
                                     </div>
 
@@ -468,7 +257,7 @@
                                             </ul>
                                         </div> 
                                     </div>
-                                    <div class="chat-body no-padding profile-message">
+                                    <!--<div class="chat-body no-padding profile-message">
                                         <ul>
                                             <li class="message">
                                                 <img src="img/avatars/sunny.png" class="online" alt="sunny">
@@ -522,7 +311,7 @@
                                             </li>
                                         </ul>
 
-                                    </div>
+                                    </div>-->
 
                                     <div class="timeline-seperator text-center"> <span>11:30PM November 27th, 2013</span>
                                         <div class="btn-group pull-right">
@@ -540,7 +329,7 @@
                                             </ul>
                                         </div> 
                                     </div>
-                                    <div class="chat-body no-padding profile-message">
+                                    <!--<div class="chat-body no-padding profile-message">
                                         <ul>
                                             <li class="message">
                                                 <img src="img/avatars/1.png" class="online" alt="user">
@@ -613,7 +402,7 @@
                                             </li>
                                         </ul>
 
-                                    </div>
+                                    </div>-->
 
 
                                 </div>
@@ -632,18 +421,8 @@
             <!-- END MAIN CONTENT -->
 
         </div>
-        <!-- END MAIN PANEL -->
+    
 
-        <!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
-        Note: These tiles are completely responsive,
-        you can add as many as you like
-        -->
-
-        <!-- END SHORTCUT AREA -->
-
-        <!--================================================== -->
-
-        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
         <script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>
 
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->

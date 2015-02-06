@@ -826,7 +826,7 @@
                                                                                 <option value="1" selected="">Si</option>
                                                                                 <option value="2">No</option>
                                                                                 <%}
-                                                                                    if (t.getEs_afiliado_essalud().trim().equals("1")) {%>
+                                                                                    if (t.getEs_afiliado_essalud().trim().equals("2")) {%>
                                                                                 <option value="1">Si</option>
                                                                                 <option value="2" selected="">No</option>
                                                                                 <%}%>
@@ -855,7 +855,7 @@
                                                                 </div>
                                                             </div>
                                                             <% CConversion c = new CConversion();%>
-                                                            <input type="text" value="<%=t.getNo_distrito()%>">                
+                                                            <input type="text" value="<%=t.getFe_nac()%>">                
                                                             <%String idtr = request.getParameter("idtr");%>
                                                             <input type="hidden" name="idtr" value="<%=idtr%>"/>
                                                             <input type="hidden" name="opc" value="Modificar_Dat_Gen">
