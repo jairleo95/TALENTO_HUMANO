@@ -497,16 +497,17 @@
                                                                         <label>Provincia:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select class="form-control input-group-sm" id="pro_nac" name="" id="dist_nac" required="">
+                                                                            <select class="form-control input-group-sm" id="pro_nac" name=""  required="">
                                                                                 <option value="" selected="">[SELECCIONE]</option>
                                                                                 <%for (int j = 0; j < List_Provincia.size(); j++) {
                                                                                         Ub_Provincia pro = new Ub_Provincia();
                                                                                         pro = (Ub_Provincia) List_Provincia.get(j);
-                                                                                        
-                                                                                %>
-                                                                               
+                                                                                        if(pro.getNo_provincia().trim().equals(t.getNo_provincia())){%>
+                                                                                <option value="<%=pro.getId_provincia()%>" selected=""><%=pro.getNo_provincia()%></option>
+                                                                                <%}else{%>
                                                                                 <option value="<%=pro.getId_provincia()%>" ><%=pro.getNo_provincia()%></option>
-                                                                                <%}%>
+                                                                                <%}
+                                                                                }%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -519,7 +520,16 @@
                                                                             <select class="form-control input-group-sm" name="DISTRITO" id="dist_nac" required="">
                                                                                 <option value="" selected="">[SELECCIONE]</option>
                                                                                 <option value="DST-001832" >EXTRANJERO</option>
-
+                                                                                 <%for (int q = 0; q < List_Distrito.size(); q++) {
+                                                                                        Ub_Distrito dis = new Ub_Distrito();
+                                                                                        dis = (Ub_Distrito) List_Distrito.get(q);
+                                                                                        if(dis.getNo_distrito().trim().equals(t.getNo_distrito())){
+                                                                                 %>
+                                                                                 <option value="<%=dis.getId_distrito()%>" selected=""><%=dis.getNo_distrito()%></option>
+                                                                                <%}else{%>      
+                                                                                <option value="<%=dis.getId_distrito()%>" ><%=dis.getNo_distrito()%></option>
+                                                                                <%}
+                                                                                }%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -845,7 +855,7 @@
                                                                 </div>
                                                             </div>
                                                             <% CConversion c = new CConversion();%>
-                                                            <input type="text" value="<%=t.getFe_nac()%>">                
+                                                            <input type="text" value="<%=t.getNo_distrito()%>">                
                                                             <%String idtr = request.getParameter("idtr");%>
                                                             <input type="hidden" name="idtr" value="<%=idtr%>"/>
                                                             <input type="hidden" name="opc" value="Modificar_Dat_Gen">
