@@ -127,7 +127,7 @@
 
 
                                         <!--<form action="../../../documento" method="post" enctype="multipart/form-data" class="smart-form" novalidate="novalidate" id="checkout-form">-->
-                                        <form action="../../../documento" method="post" enctype="multipart/form-data" class="smart-form" >
+                                        <form action="../../../documento" method="post" enctype="multipart/form-data" class="smart-form" novalidate="">
 
 
 
@@ -154,9 +154,9 @@
                                                     <%  if (n_nac != 0) {%>
                                                     <tr>
 
-                                                        <td class="caji"><strong><%=d.getDocumento()%></strong></td>
+                                                        <td ><strong><%=d.getDocumento()%></strong></td>
 
-                                                        <td class="caji">
+                                                        <td class="caji<%=(i + 1)%>">
                                                             <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007"))) {%>
                                                             <input type="file" <%if (d.getEs_obligatorio().equals("1")) {
                                                                     out.println(" required='required' ");
@@ -169,9 +169,10 @@
 
                                                             <% }
                                                                 } %>
+
                                                         </td>
 
-                                                        <td class="caji">
+                                                        <td>
                                                             <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
                                                             <input type="text"  name="lob_description<%=i + 1%>">
                                                             <% } else { %>
@@ -181,9 +182,11 @@
                                                             <label> <%=d.getDe_documento_adjunto()%></label>
 
                                                             <% } %>
-                                                            <% } %>    
+                                                            <% } %>
+
+
                                                         </td>
-                                                        <td class="caji">
+                                                        <td>
                                                             <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
                                                             <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                                 <% } else { %>
@@ -215,9 +218,9 @@
                                                 <%  if (d.getTi_documento().trim().equals("COFE")) {%>
                                                 <%  if (num_ad != 0) {%>
                                                 <tr>
-                                                    <td class="caji"><strong><%=d.getDocumento()%></strong></td>
+                                                    <td ><strong><%=d.getDocumento()%></strong></td>
 
-                                                    <td class="caji">
+                                                    <td class="caji<%=(i + 1)%>">
                                                         <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
                                                         <input type="file" <%if (d.getEs_obligatorio().equals("1")) {
                                                                 out.println(" required='required' ");
@@ -229,10 +232,11 @@
                                                         <a href="Ver_Doc.jsp?nom_doc=<%=d.getAr_dato_archivo()%>"><%=d.getNo_archivo()%></a>
 
                                                         <% }
-                                                            } %>
+                                                            }%>
+
                                                     </td>
 
-                                                    <td class="caji">
+                                                    <td >
                                                         <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
                                                         <input type="text"  name="lob_description<%=i + 1%>">
                                                         <% } else { %>
@@ -244,7 +248,7 @@
                                                         <% } %>
                                                         <% } %>    
                                                     </td>
-                                                    <td class="caji">
+                                                    <td >
                                                         <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
                                                         <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                             <% } else { %>
@@ -283,7 +287,7 @@
 
 
                                                 <tr>
-                                                    <td class="caji"  ><strong><%  if (d.getTi_documento().trim().equals("ACMA")) {
+                                                    <td ><strong><%  if (d.getTi_documento().trim().equals("ACMA")) {
                                                             out.println("ACTA DE MATRIMONIO CON: <p style='color:red;' >" + co.getAp_nombres_conyugue() + "</p>");
                                                         }
                                                         if (d.getTi_documento().trim().equals("DNIC")) {
@@ -291,7 +295,7 @@
                                                         }%>
                                                         </strong></td>
 
-                                                    <td class="caji">
+                                                    <td class="caji<%=(i + 1)%>">
                                                         <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
                                                         <input type="file" <%if (d.getEs_obligatorio().equals("1")) {
                                                                 out.println(" required='required' ");
@@ -304,9 +308,10 @@
 
                                                         <% }
                                                             } %>
+
                                                     </td>
 
-                                                    <td class="caji">
+                                                    <td >
                                                         <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
                                                         <input type="text"  name="lob_description<%=i + 1%>">
                                                         <% } else { %>
@@ -316,9 +321,10 @@
                                                         <label> <%=d.getDe_documento_adjunto()%></label>
 
                                                         <% } %>
-                                                        <% } %>    
+                                                        <% } %>   
+
                                                     </td>
-                                                    <td class="caji">
+                                                    <td >
                                                         <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
                                                         <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                             <% } else { %>
@@ -354,10 +360,10 @@
 
 
                                                 <tr>
-                                                    <td class="caji"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td>
+                                                    <td ><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td>
 
 
-                                                    <td class="caji">
+                                                    <td class="caji<%=(i + 1)%>">
                                                         <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007"))) {%>
                                                         <input type="file"  <%if (d.getEs_obligatorio().equals("1")) {
                                                                 out.println(" required='required' ");
@@ -372,7 +378,7 @@
                                                             } %>
                                                     </td>
 
-                                                    <td class="caji">
+                                                    <td >
                                                         <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
                                                         <input type="text"  name="lob_description<%=i + 1%>">
                                                         <% } else { %>
@@ -384,7 +390,7 @@
                                                         <% } %>
                                                         <% } %>    
                                                     </td>
-                                                    <td class="caji">
+                                                    <td >
                                                         <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
                                                         <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                             <% } else { %>
@@ -416,9 +422,9 @@
                                                 <%} else if (!d.getTi_documento().trim().equals("DNIH") & !d.getTi_documento().trim().equals("DNIC") & !d.getTi_documento().trim().equals("ACMA") & !d.getTi_documento().trim().equals("COFE") & !d.getTi_documento().trim().equals("DOCA")) {
                                                 %>
                                                 <tr>
-                                                    <td class="caji"><strong><%=d.getDocumento()%></strong></td>
+                                                    <td ><strong><%=d.getDocumento()%></strong></td>
 
-                                                    <td class="caji">
+                                                    <td class="caji<%=(i + 1)%>">
                                                         <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
                                                         <input type="file" <%if (d.getEs_obligatorio().equals("1")) {
                                                                 out.println(" required='required' ");
@@ -430,8 +436,11 @@
                                                         <a href="Ver_Doc.jsp?nom_doc=<%=d.getAr_dato_archivo()%>"><%=d.getNo_archivo()%></a>
                                                         <% }
                                                             } %>
+                                                        <div class="form-group">
+                                                            <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#" name="archivos<%=(i+1)%>" >
+                                                        </div>
                                                     </td>
-                                                    <td class="caji">
+                                                    <td >
                                                         <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007"))) {%>
                                                         <input type="text"   name="lob_description<%=i + 1%>">
                                                         <% } else { %>
@@ -443,7 +452,7 @@
                                                         <% } %>
                                                         <% } %>    
                                                     </td>
-                                                    <td class="caji">
+                                                    <td >
                                                         <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
                                                         <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                             <% } else { %>
@@ -637,433 +646,489 @@
 
         <!-- PAGE RELATED PLUGIN(S) -->
         <script src="../../../js/plugin/jquery-form/jquery-form.min.js"></script>
-
+        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/Css_Bootstrap/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="../../../js/bootstrap/fileinput.js" type="text/javascript"></script>
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
+        <script>
+                                                    $(document).ready(function () {
+                                                        $("#file-0").fileinput({
+                                                            'allowedFileExtensions': ['jpg', 'png', 'gif'],
+                                                        });
+                                                        $("#file-1").fileinput({
+                                                            initialPreview: ["<img src='Desert.jpg' class='file-preview-image'>", "<img src='Jellyfish.jpg' class='file-preview-image'>"],
+                                                            initialPreviewConfig: [
+                                                                {caption: 'Desert.jpg', width: '120px', url: '#'},
+                                                                {caption: 'Jellyfish.jpg', width: '120px', url: '#'},
+                                                            ],
+                                                            uploadUrl: '#',
+                                                            allowedFileExtensions: ['jpg', 'png', 'gif'],
+                                                            overwriteInitial: false,
+                                                            maxFileSize: 1000,
+                                                            maxFilesNum: 10,
+                                                            //allowedFileTypes: ['image', 'video', 'flash'],
+                                                            slugCallback: function (filename) {
+                                                                return filename.replace('(', '_').replace(']', '_');
+                                                            }
+                                                        });
+                                                        /*
+                                                         $(".file").on('fileselect', function(event, n, l) {
+                                                         alert('File Selected. Name: ' + l + ', Num: ' + n);
+                                                         });
+                                                         */
+                                                        $("#file-3").fileinput({
+                                                            showUpload: false,
+                                                            showCaption: false,
+                                                            browseClass: "btn btn-primary btn-lg",
+                                                            fileType: "any"
+                                                        });
+                                                        $("#file-4").fileinput({
+                                                            uploadExtraData: [
+                                                                {kvId: '10'}
+                                                            ],
+                                                        });
+                                                        $(".btn-warning").on('click', function () {
+                                                            if ($('#file-4').attr('disabled')) {
+                                                                $('#file-4').fileinput('enable');
+                                                            } else {
+                                                                $('#file-4').fileinput('disable');
+                                                            }
+                                                        });
+                                                        $(".btn-info").on('click', function () {
+                                                            $('#file-4').fileinput('refresh', {previewClass: 'bg-info'});
+                                                        });
+                                                    });
+        </script>
 
         <script type="text/javascript">
 
-                                                    // DO NOT REMOVE : GLOBAL FUNCTIONS!
+            // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-                                                    $(document).ready(function() {
+            $(document).ready(function () {
 
-                                                        pageSetUp();
-                                                        $(".DD").change(function() {
-
-                                                            $(".div-holi").text($(".DD").val());
-
-                                                        });
-
-                                                        /*  $("#exampleInputFile2").click(function(){
-                                                         var input=$(this);
-                                                         input.replaceWith(input.val('').clone(true));
-                                                         });
-                                                         */
-
-                                                        var $checkoutForm = $('#checkout-form').validate({
-                                                            // Rules for form validation
-                                                            rules: {
-                                                                fname: {
-                                                                    required: true
-                                                                },
-                                                                lname: {
-                                                                    required: true
-                                                                },
-                                                                email: {
-                                                                    required: true,
-                                                                    email: true
-                                                                },
-                                                                phone: {
-                                                                    required: true
-                                                                },
-                                                                country: {
-                                                                    required: true
-                                                                },
-                                                                city: {
-                                                                    required: true
-                                                                },
-                                                                code: {
-                                                                    required: true,
-                                                                    digits: true
-                                                                },
-                                                                address: {
-                                                                    required: true
-                                                                },
-                                                                name: {
-                                                                    required: true
-                                                                },
-                                                                card: {
-                                                                    required: true,
-                                                                    creditcard: true
-                                                                },
-                                                                cvv: {
-                                                                    required: true,
-                                                                    digits: true
-                                                                },
-                                                                month: {
-                                                                    required: true
-                                                                },
-                                                                year: {
-                                                                    required: true,
-                                                                    digits: true
-                                                                }
-                                                            },
-                                                            // Messages for form validation
-                                                            messages: {
-                                                                fname: {
-                                                                    required: 'Please enter your first name'
-                                                                },
-                                                                lname: {
-                                                                    required: 'Please enter your last name'
-                                                                },
-                                                                email: {
-                                                                    required: 'Please enter your email address',
-                                                                    email: 'Please enter a VALID email address'
-                                                                },
-                                                                phone: {
-                                                                    required: 'Please enter your phone number'
-                                                                },
-                                                                country: {
-                                                                    required: 'Please select your country'
-                                                                },
-                                                                city: {
-                                                                    required: 'Please enter your city'
-                                                                },
-                                                                code: {
-                                                                    required: 'Please enter code',
-                                                                    digits: 'Digits only please'
-                                                                },
-                                                                address: {
-                                                                    required: 'Please enter your full address'
-                                                                },
-                                                                name: {
-                                                                    required: 'Please enter name on your card'
-                                                                },
-                                                                card: {
-                                                                    required: 'Please enter your card number'
-                                                                },
-                                                                cvv: {
-                                                                    required: 'Enter CVV2',
-                                                                    digits: 'Digits only'
-                                                                },
-                                                                month: {
-                                                                    required: 'Select month'
-                                                                },
-                                                                year: {
-                                                                    required: 'Enter year',
-                                                                    digits: 'Digits only please'
-                                                                }
-                                                            },
-                                                            // Do not change code below
-                                                            errorPlacement: function(error, element) {
-                                                                error.insertAfter(element.parent());
-                                                            }
-                                                        });
-
-                                                        var $registerForm = $("#smart-form-register").validate({
-                                                            // Rules for form validation
-                                                            rules: {
-                                                                username: {
-                                                                    required: true
-                                                                },
-                                                                email: {
-                                                                    required: true,
-                                                                    email: true
-                                                                },
-                                                                password: {
-                                                                    required: true,
-                                                                    minlength: 3,
-                                                                    maxlength: 20
-                                                                },
-                                                                passwordConfirm: {
-                                                                    required: true,
-                                                                    minlength: 3,
-                                                                    maxlength: 20,
-                                                                    equalTo: '#password'
-                                                                },
-                                                                firstname: {
-                                                                    required: true
-                                                                },
-                                                                lastname: {
-                                                                    required: true
-                                                                },
-                                                                gender: {
-                                                                    required: true
-                                                                },
-                                                                terms: {
-                                                                    required: true
-                                                                }
-                                                            },
-                                                            // Messages for form validation
-                                                            messages: {
-                                                                login: {
-                                                                    required: 'Please enter your login'
-                                                                },
-                                                                email: {
-                                                                    required: 'Please enter your email address',
-                                                                    email: 'Please enter a VALID email address'
-                                                                },
-                                                                password: {
-                                                                    required: 'Please enter your password'
-                                                                },
-                                                                passwordConfirm: {
-                                                                    required: 'Please enter your password one more time',
-                                                                    equalTo: 'Please enter the same password as above'
-                                                                },
-                                                                firstname: {
-                                                                    required: 'Please select your first name'
-                                                                },
-                                                                lastname: {
-                                                                    required: 'Please select your last name'
-                                                                },
-                                                                gender: {
-                                                                    required: 'Please select your gender'
-                                                                },
-                                                                terms: {
-                                                                    required: 'You must agree with Terms and Conditions'
-                                                                }
-                                                            },
-                                                            // Do not change code below
-                                                            errorPlacement: function(error, element) {
-                                                                error.insertAfter(element.parent());
-                                                            }
-                                                        });
-
-                                                        var $reviewForm = $("#review-form").validate({
-                                                            // Rules for form validation
-                                                            rules: {
-                                                                name: {
-                                                                    required: true
-                                                                },
-                                                                email: {
-                                                                    required: true,
-                                                                    email: true
-                                                                },
-                                                                review: {
-                                                                    required: true,
-                                                                    minlength: 20
-                                                                },
-                                                                quality: {
-                                                                    required: true
-                                                                },
-                                                                reliability: {
-                                                                    required: true
-                                                                },
-                                                                overall: {
-                                                                    required: true
-                                                                }
-                                                            },
-                                                            // Messages for form validation
-                                                            messages: {
-                                                                name: {
-                                                                    required: 'Please enter your name'
-                                                                },
-                                                                email: {
-                                                                    required: 'Please enter your email address',
-                                                                    email: '<i class="fa fa-warning"></i><strong>Please enter a VALID email addres</strong>'
-                                                                },
-                                                                review: {
-                                                                    required: 'Please enter your review'
-                                                                },
-                                                                quality: {
-                                                                    required: 'Please rate quality of the product'
-                                                                },
-                                                                reliability: {
-                                                                    required: 'Please rate reliability of the product'
-                                                                },
-                                                                overall: {
-                                                                    required: 'Please rate the product'
-                                                                }
-                                                            },
-                                                            // Do not change code below
-                                                            errorPlacement: function(error, element) {
-                                                                error.insertAfter(element.parent());
-                                                            }
-                                                        });
-
-                                                        var $commentForm = $("#comment-form").validate({
-                                                            // Rules for form validation
-                                                            rules: {
-                                                                name: {
-                                                                    required: true
-                                                                },
-                                                                email: {
-                                                                    required: true,
-                                                                    email: true
-                                                                },
-                                                                url: {
-                                                                    url: true
-                                                                },
-                                                                comment: {
-                                                                    required: true
-                                                                }
-                                                            },
-                                                            // Messages for form validation
-                                                            messages: {
-                                                                name: {
-                                                                    required: 'Enter your name',
-                                                                },
-                                                                email: {
-                                                                    required: 'Enter your email address',
-                                                                    email: 'Enter a VALID email'
-                                                                },
-                                                                url: {
-                                                                    email: 'Enter a VALID url'
-                                                                },
-                                                                comment: {
-                                                                    required: 'Please enter your comment'
-                                                                }
-                                                            },
-                                                            // Ajax form submition
-                                                            submitHandler: function(form) {
-                                                                $(form).ajaxSubmit({
-                                                                    success: function() {
-                                                                        $("#comment-form").addClass('submited');
-                                                                    }
-                                                                });
-                                                            },
-                                                            // Do not change code below
-                                                            errorPlacement: function(error, element) {
-                                                                error.insertAfter(element.parent());
-                                                            }
-                                                        });
-
-                                                        var $contactForm = $("#contact-form").validate({
-                                                            // Rules for form validation
-                                                            rules: {
-                                                                name: {
-                                                                    required: true
-                                                                },
-                                                                email: {
-                                                                    required: true,
-                                                                    email: true
-                                                                },
-                                                                message: {
-                                                                    required: true,
-                                                                    minlength: 10
-                                                                }
-                                                            },
-                                                            // Messages for form validation
-                                                            messages: {
-                                                                name: {
-                                                                    required: 'Please enter your name',
-                                                                },
-                                                                email: {
-                                                                    required: 'Please enter your email address',
-                                                                    email: 'Please enter a VALID email address'
-                                                                },
-                                                                message: {
-                                                                    required: 'Please enter your message'
-                                                                }
-                                                            },
-                                                            // Ajax form submition
-                                                            submitHandler: function(form) {
-                                                                $(form).ajaxSubmit({
-                                                                    success: function() {
-                                                                        $("#contact-form").addClass('submited');
-                                                                    }
-                                                                });
-                                                            },
-                                                            // Do not change code below
-                                                            errorPlacement: function(error, element) {
-                                                                error.insertAfter(element.parent());
-                                                            }
-                                                        });
-
-                                                        var $loginForm = $("#login-form").validate({
-                                                            // Rules for form validation
-                                                            rules: {
-                                                                email: {
-                                                                    required: true,
-                                                                    email: true
-                                                                },
-                                                                password: {
-                                                                    required: true,
-                                                                    minlength: 3,
-                                                                    maxlength: 20
-                                                                }
-                                                            },
-                                                            // Messages for form validation
-                                                            messages: {
-                                                                email: {
-                                                                    required: 'Please enter your email address',
-                                                                    email: 'Please enter a VALID email address'
-                                                                },
-                                                                password: {
-                                                                    required: 'Please enter your password'
-                                                                }
-                                                            },
-                                                            // Do not change code below
-                                                            errorPlacement: function(error, element) {
-                                                                error.insertAfter(element.parent());
-                                                            }
-                                                        });
-
-                                                        var $orderForm = $("#order-form").validate({
-                                                            // Rules for form validation
-                                                            rules: {
-                                                                name: {
-                                                                    required: true
-                                                                },
-                                                                email: {
-                                                                    required: true,
-                                                                    email: true
-                                                                },
-                                                                phone: {
-                                                                    required: true
-                                                                },
-                                                                interested: {
-                                                                    required: true
-                                                                },
-                                                                budget: {
-                                                                    required: true
-                                                                }
-                                                            },
-                                                            // Messages for form validation
-                                                            messages: {
-                                                                name: {
-                                                                    required: 'Please enter your name'
-                                                                },
-                                                                email: {
-                                                                    required: 'Please enter your email address',
-                                                                    email: 'Please enter a VALID email address'
-                                                                },
-                                                                phone: {
-                                                                    required: 'Please enter your phone number'
-                                                                },
-                                                                interested: {
-                                                                    required: 'Please select interested service'
-                                                                },
-                                                                budget: {
-                                                                    required: 'Please select your budget'
-                                                                }
-                                                            },
-                                                            // Do not change code below
-                                                            errorPlacement: function(error, element) {
-                                                                error.insertAfter(element.parent());
-                                                            }
-                                                        });
-
-                                                        // START AND FINISH DATE
-                                                        $('#startdate').datepicker({
-                                                            dateFormat: 'dd.mm.yy',
-                                                            prevText: '<i class="fa fa-chevron-left"></i>',
-                                                            nextText: '<i class="fa fa-chevron-right"></i>',
-                                                            onSelect: function(selectedDate) {
-                                                                $('#finishdate').datepicker('option', 'minDate', selectedDate);
-                                                            }
-                                                        });
-
-                                                        $('#finishdate').datepicker({
-                                                            dateFormat: 'dd.mm.yy',
-                                                            prevText: '<i class="fa fa-chevron-left"></i>',
-                                                            nextText: '<i class="fa fa-chevron-right"></i>',
-                                                            onSelect: function(selectedDate) {
-                                                                $('#startdate').datepicker('option', 'maxDate', selectedDate);
-                                                            }
-                                                        });
+                pageSetUp();
 
 
 
-                                                    })
+                $(".DD").change(function () {
+
+                    $(".div-holi").text($(".DD").val());
+
+                });
+
+                /*  $("#exampleInputFile2").click(function(){
+                 var input=$(this);
+                 input.replaceWith(input.val('').clone(true));
+                 });
+                 */
+
+                var $checkoutForm = $('#checkout-form').validate({
+                    // Rules for form validation
+                    rules: {
+                        fname: {
+                            required: true
+                        },
+                        lname: {
+                            required: true
+                        },
+                        email: {
+                            required: true,
+                            email: true
+                        },
+                        phone: {
+                            required: true
+                        },
+                        country: {
+                            required: true
+                        },
+                        city: {
+                            required: true
+                        },
+                        code: {
+                            required: true,
+                            digits: true
+                        },
+                        address: {
+                            required: true
+                        },
+                        name: {
+                            required: true
+                        },
+                        card: {
+                            required: true,
+                            creditcard: true
+                        },
+                        cvv: {
+                            required: true,
+                            digits: true
+                        },
+                        month: {
+                            required: true
+                        },
+                        year: {
+                            required: true,
+                            digits: true
+                        }
+                    },
+                    // Messages for form validation
+                    messages: {
+                        fname: {
+                            required: 'Please enter your first name'
+                        },
+                        lname: {
+                            required: 'Please enter your last name'
+                        },
+                        email: {
+                            required: 'Please enter your email address',
+                            email: 'Please enter a VALID email address'
+                        },
+                        phone: {
+                            required: 'Please enter your phone number'
+                        },
+                        country: {
+                            required: 'Please select your country'
+                        },
+                        city: {
+                            required: 'Please enter your city'
+                        },
+                        code: {
+                            required: 'Please enter code',
+                            digits: 'Digits only please'
+                        },
+                        address: {
+                            required: 'Please enter your full address'
+                        },
+                        name: {
+                            required: 'Please enter name on your card'
+                        },
+                        card: {
+                            required: 'Please enter your card number'
+                        },
+                        cvv: {
+                            required: 'Enter CVV2',
+                            digits: 'Digits only'
+                        },
+                        month: {
+                            required: 'Select month'
+                        },
+                        year: {
+                            required: 'Enter year',
+                            digits: 'Digits only please'
+                        }
+                    },
+                    // Do not change code below
+                    errorPlacement: function (error, element) {
+                        error.insertAfter(element.parent());
+                    }
+                });
+
+                var $registerForm = $("#smart-form-register").validate({
+                    // Rules for form validation
+                    rules: {
+                        username: {
+                            required: true
+                        },
+                        email: {
+                            required: true,
+                            email: true
+                        },
+                        password: {
+                            required: true,
+                            minlength: 3,
+                            maxlength: 20
+                        },
+                        passwordConfirm: {
+                            required: true,
+                            minlength: 3,
+                            maxlength: 20,
+                            equalTo: '#password'
+                        },
+                        firstname: {
+                            required: true
+                        },
+                        lastname: {
+                            required: true
+                        },
+                        gender: {
+                            required: true
+                        },
+                        terms: {
+                            required: true
+                        }
+                    },
+                    // Messages for form validation
+                    messages: {
+                        login: {
+                            required: 'Please enter your login'
+                        },
+                        email: {
+                            required: 'Please enter your email address',
+                            email: 'Please enter a VALID email address'
+                        },
+                        password: {
+                            required: 'Please enter your password'
+                        },
+                        passwordConfirm: {
+                            required: 'Please enter your password one more time',
+                            equalTo: 'Please enter the same password as above'
+                        },
+                        firstname: {
+                            required: 'Please select your first name'
+                        },
+                        lastname: {
+                            required: 'Please select your last name'
+                        },
+                        gender: {
+                            required: 'Please select your gender'
+                        },
+                        terms: {
+                            required: 'You must agree with Terms and Conditions'
+                        }
+                    },
+                    // Do not change code below
+                    errorPlacement: function (error, element) {
+                        error.insertAfter(element.parent());
+                    }
+                });
+
+                var $reviewForm = $("#review-form").validate({
+                    // Rules for form validation
+                    rules: {
+                        name: {
+                            required: true
+                        },
+                        email: {
+                            required: true,
+                            email: true
+                        },
+                        review: {
+                            required: true,
+                            minlength: 20
+                        },
+                        quality: {
+                            required: true
+                        },
+                        reliability: {
+                            required: true
+                        },
+                        overall: {
+                            required: true
+                        }
+                    },
+                    // Messages for form validation
+                    messages: {
+                        name: {
+                            required: 'Please enter your name'
+                        },
+                        email: {
+                            required: 'Please enter your email address',
+                            email: '<i class="fa fa-warning"></i><strong>Please enter a VALID email addres</strong>'
+                        },
+                        review: {
+                            required: 'Please enter your review'
+                        },
+                        quality: {
+                            required: 'Please rate quality of the product'
+                        },
+                        reliability: {
+                            required: 'Please rate reliability of the product'
+                        },
+                        overall: {
+                            required: 'Please rate the product'
+                        }
+                    },
+                    // Do not change code below
+                    errorPlacement: function (error, element) {
+                        error.insertAfter(element.parent());
+                    }
+                });
+
+                var $commentForm = $("#comment-form").validate({
+                    // Rules for form validation
+                    rules: {
+                        name: {
+                            required: true
+                        },
+                        email: {
+                            required: true,
+                            email: true
+                        },
+                        url: {
+                            url: true
+                        },
+                        comment: {
+                            required: true
+                        }
+                    },
+                    // Messages for form validation
+                    messages: {
+                        name: {
+                            required: 'Enter your name',
+                        },
+                        email: {
+                            required: 'Enter your email address',
+                            email: 'Enter a VALID email'
+                        },
+                        url: {
+                            email: 'Enter a VALID url'
+                        },
+                        comment: {
+                            required: 'Please enter your comment'
+                        }
+                    },
+                    // Ajax form submition
+                    submitHandler: function (form) {
+                        $(form).ajaxSubmit({
+                            success: function () {
+                                $("#comment-form").addClass('submited');
+                            }
+                        });
+                    },
+                    // Do not change code below
+                    errorPlacement: function (error, element) {
+                        error.insertAfter(element.parent());
+                    }
+                });
+
+                var $contactForm = $("#contact-form").validate({
+                    // Rules for form validation
+                    rules: {
+                        name: {
+                            required: true
+                        },
+                        email: {
+                            required: true,
+                            email: true
+                        },
+                        message: {
+                            required: true,
+                            minlength: 10
+                        }
+                    },
+                    // Messages for form validation
+                    messages: {
+                        name: {
+                            required: 'Please enter your name',
+                        },
+                        email: {
+                            required: 'Please enter your email address',
+                            email: 'Please enter a VALID email address'
+                        },
+                        message: {
+                            required: 'Please enter your message'
+                        }
+                    },
+                    // Ajax form submition
+                    submitHandler: function (form) {
+                        $(form).ajaxSubmit({
+                            success: function () {
+                                $("#contact-form").addClass('submited');
+                            }
+                        });
+                    },
+                    // Do not change code below
+                    errorPlacement: function (error, element) {
+                        error.insertAfter(element.parent());
+                    }
+                });
+
+                var $loginForm = $("#login-form").validate({
+                    // Rules for form validation
+                    rules: {
+                        email: {
+                            required: true,
+                            email: true
+                        },
+                        password: {
+                            required: true,
+                            minlength: 3,
+                            maxlength: 20
+                        }
+                    },
+                    // Messages for form validation
+                    messages: {
+                        email: {
+                            required: 'Please enter your email address',
+                            email: 'Please enter a VALID email address'
+                        },
+                        password: {
+                            required: 'Please enter your password'
+                        }
+                    },
+                    // Do not change code below
+                    errorPlacement: function (error, element) {
+                        error.insertAfter(element.parent());
+                    }
+                });
+
+                var $orderForm = $("#order-form").validate({
+                    // Rules for form validation
+                    rules: {
+                        name: {
+                            required: true
+                        },
+                        email: {
+                            required: true,
+                            email: true
+                        },
+                        phone: {
+                            required: true
+                        },
+                        interested: {
+                            required: true
+                        },
+                        budget: {
+                            required: true
+                        }
+                    },
+                    // Messages for form validation
+                    messages: {
+                        name: {
+                            required: 'Please enter your name'
+                        },
+                        email: {
+                            required: 'Please enter your email address',
+                            email: 'Please enter a VALID email address'
+                        },
+                        phone: {
+                            required: 'Please enter your phone number'
+                        },
+                        interested: {
+                            required: 'Please select interested service'
+                        },
+                        budget: {
+                            required: 'Please select your budget'
+                        }
+                    },
+                    // Do not change code below
+                    errorPlacement: function (error, element) {
+                        error.insertAfter(element.parent());
+                    }
+                });
+
+                // START AND FINISH DATE
+                $('#startdate').datepicker({
+                    dateFormat: 'dd.mm.yy',
+                    prevText: '<i class="fa fa-chevron-left"></i>',
+                    nextText: '<i class="fa fa-chevron-right"></i>',
+                    onSelect: function (selectedDate) {
+                        $('#finishdate').datepicker('option', 'minDate', selectedDate);
+                    }
+                });
+
+                $('#finishdate').datepicker({
+                    dateFormat: 'dd.mm.yy',
+                    prevText: '<i class="fa fa-chevron-left"></i>',
+                    nextText: '<i class="fa fa-chevron-right"></i>',
+                    onSelect: function (selectedDate) {
+                        $('#startdate').datepicker('option', 'maxDate', selectedDate);
+                    }
+                });
+
+
+
+            })
 
         </script>
         <!-- Your GOOGLE ANALYTICS CODE Below -->
@@ -1072,7 +1137,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function() {
+            (function () {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;

@@ -337,7 +337,7 @@
                                                     <div class="row">
                                                         <section class="col col-3" >
                                                             <label class="input" id="titu">Sueldo :
-                                                                <input type="text" name="SUELDO" required="" maxlength="13" value="0.0"  id="sueldo" >
+                                                                <input type="text" name="SUELDO" required="" maxlength="13" value=""  id="sueldo" >
                                                             </label>
                                                         </section>
                                                         <%if (idreq.equals("REQ-0001") || idreq.equals("REQ-0002") || idreq.equals("REQ-0003") || idreq.equals("REQ-0005")) {
@@ -345,7 +345,7 @@
                                                         %> 
                                                         <section class="col col-3">
                                                             <label class="input"  id="titu"> 
-                                                                Bono de Alimentos :<input type="text" maxlength="13" required="" value="0.0" name="BONO_ALIMENTARIO"  id="bono_al">
+                                                                Bono de Alimentos :<input type="text" maxlength="13"  value="0.0" name="BONO_ALIMENTARIO"  id="bono_al">
                                                             </label>
                                                         </section>
                                                         <section class="col col-3">
