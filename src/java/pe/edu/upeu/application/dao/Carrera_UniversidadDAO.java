@@ -13,6 +13,8 @@ import java.util.Map;
 import pe.edu.upeu.application.dao_imp.InterfaceCarrera_UniversidadDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
+import pe.edu.upeu.application.model.Tipo_Institucion;
+import pe.edu.upeu.application.model.Universidad;
 
 /**
  *
@@ -104,5 +106,27 @@ public class Carrera_UniversidadDAO implements InterfaceCarrera_UniversidadDAO {
             }
         }
         return lista;
+    }
+
+    @Override
+    public List<Tipo_Institucion> List_Tipo_Ins() {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select * from rhtr_tipo_institucion ";
+        List<Tipo_Institucion> list = new ArrayList<Tipo_Institucion>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+
+            while (rs.next()) {
+                Tipo_Institucion ti = new Tipo_Institucion();
+                ti.setId_tipo_institucion(rs.getString("id_tipo_institucion"));
+                ti.setNo_tipo_institucion(rs.getString("no_tipo_institucion"));
+              
+                list.add(ti);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return list;
     }
 }
