@@ -1,4 +1,5 @@
 
+<%@page import="pe.edu.upeu.application.model.Cuenta_Sueldo"%>
 <%@page import="pe.edu.upeu.application.model.Tipo_Institucion"%>
 <%@page import="pe.edu.upeu.application.model.Ub_Distrito"%>
 <%@page import="pe.edu.upeu.application.model.Ub_Provincia"%>
@@ -10,15 +11,12 @@
     if (id_user != null) {
 %>
 <%@page import="pe.edu.upeu.application.model.Tipo_Documento"%>
-<%@page import="pe.edu.upeu.application.model.Via"%>
-<%@page import="pe.edu.upeu.application.model.Zona"%>
 <%@page import="pe.edu.upeu.application.model.Ub_Departamento"%>
 <%@page import="pe.edu.upeu.application.model.Situacion_Educativa"%>
 <%@page import="pe.edu.upeu.application.model.Universidad"%>
 <%@page import="pe.edu.upeu.application.model.Carrera"%>
 <%@page import="pe.edu.upeu.application.model.V_Ubigeo"%>
 <%@page import="pe.edu.upeu.application.model.Nacionalidad"%>
-<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 
 <%
     HttpSession sesion_1 = request.getSession(true);
@@ -27,10 +25,7 @@
 
 %>
 
-
-<jsp:useBean id="Listar_zona" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="Listar_via" scope="application" class="java.util.ArrayList"/>
-
+<jsp:useBean id="List_Cuenta_Sueldo" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="list_año" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_tipo_institucion" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Universidad" scope="application" class="java.util.ArrayList"/>
@@ -246,6 +241,8 @@
 
                                 }
                         );
+                        //MOSTRAR ASPECTO ACADEMICO PARA MODIFICAR
+
                         if ($("#sit_edu").val() == 'SED-0011' | $("#sit_edu").val() == 'SED-0013' | $("#sit_edu").val() == 'SED-0014'
                                 | $("#sit_edu").val() == 'SED-0015'
                                 | $("#sit_edu").val() == 'SED-0016' | $("#sit_edu").val() == 'SED-0017'
@@ -262,7 +259,6 @@
                             $("#ti").hide();
                             $("#institucion").hide();
                             $("#carr").hide();
-
                         }
 
                         if ($("#inst_peru").val() == "1") {
@@ -279,6 +275,9 @@
                             $("#carr").hide();
 
                         }
+
+                        //MOSTRAR CUENTA SUELDO PARA MODIFICAR
+                       
                     }
             );
         </script>
@@ -481,12 +480,24 @@
                                                                             <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
                                                                             <select class="form-control input-group-sm" id="ti_inst"  required>
                                                                                 <option value="" selected="selected">[SELECCIONE]</option>
-                                                                                <%for (int r = 0; r < List_tipo_institucion.size(); r++) {
-                                                                                        Tipo_Institucion ti = new Tipo_Institucion();
-                                                                                        ti = (Tipo_Institucion) List_tipo_institucion.get(r);
+
+                                                                                <%for (int y = 0; y < List_Universidad.size(); y++) {
+                                                                                        Universidad un = new Universidad();
+                                                                                        un = (Universidad) List_Universidad.get(y);
+                                                                                        if (t.getNo_universidad().trim().equals(un.getNo_universidad().trim())) {
+
+                                                                                            for (int r = 0; r < List_tipo_institucion.size(); r++) {
+                                                                                                Tipo_Institucion ti = new Tipo_Institucion();
+                                                                                                ti = (Tipo_Institucion) List_tipo_institucion.get(r);
+
+                                                                                                if (un.getId_tipo_institucion().trim().equals(ti.getId_tipo_institucion().trim())) {
                                                                                 %>
-                                                                                <option  value="<%=ti.getId_tipo_institucion()%>"><%=ti.getNo_tipo_institucion()%></option>
-                                                                                <%}%>
+                                                                                <option  value="<%=ti.getId_tipo_institucion()%>" selected=""><%=ti.getNo_tipo_institucion()%></option>
+                                                                                <%
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -501,11 +512,11 @@
                                                                                 <%for (int w = 0; w < List_Universidad.size(); w++) {
                                                                                         Universidad u = new Universidad();
                                                                                         u = (Universidad) List_Universidad.get(w);
-                                                                                if(u.getNo_universidad().trim().equals(t.getNo_universidad().trim())){
+                                                                                        if (u.getNo_universidad().trim().equals(t.getNo_universidad().trim())) {
                                                                                 %>
                                                                                 <option value="<%=u.getId_universidad()%>" selected=""><%=u.getNo_universidad()%></option>
-                                                                                <%}else{%>
-                                                                                <option value="<%=u.getId_universidad() %>"><%=u.getNo_universidad() %></option>
+                                                                                <%} else {%>
+                                                                                <option value="<%=u.getId_universidad()%>"><%=u.getNo_universidad()%></option>
                                                                                 <%}
                                                                                     }%>
                                                                             </select>
@@ -528,7 +539,7 @@
                                                                                 <%} else {%>
                                                                                 <option value="<%=c.getId_carrera()%>" > <%=c.getNo_carrera()%></option>
                                                                                 <%}
-                                                                                   }%>
+                                                                                    }%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -541,12 +552,13 @@
                                                                             <select    name="A_EGRESO" class="form-control input-group-sm" required="" >
                                                                                 <option value="">[SELECCIONE]</option>
                                                                                 <% for (int jj = 0; jj < list_año.size(); jj++) {
-                                                                                    if(t.getDe_anno_egreso().trim().equals(list_año.get(jj))){;
+                                                                                        if (t.getDe_anno_egreso().trim().equals(list_año.get(jj))) {;
                                                                                 %>
                                                                                 <option value="<%=list_año.get(jj)%>" selected=""><%=list_año.get(jj)%></option>
-                                                                                <%}else{%>
+                                                                                <%} else {%>
                                                                                 <option value="<%=list_año.get(jj)%>"><%=list_año.get(jj)%></option>
-                                                                                <%}}%>
+                                                                                <%}
+                                                                                    }%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -571,7 +583,7 @@
                                                                         <label>Otros Estudios:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-align-justify fa-lg fa-fw"></i></span>
-                                                                            <textarea name="OTROS_ESTUDIOS"  class="form-control input-group-sm" class="text-box" cols="60" rows="6" maxlength="500"><%=t.getCm_otros_estudios() %></textarea>
+                                                                            <textarea name="OTROS_ESTUDIOS"  class="form-control input-group-sm" class="text-box" cols="60" rows="6" maxlength="500"><%=t.getCm_otros_estudios()%></textarea>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -586,11 +598,41 @@
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
                                                                         <select name="BANCO" id="banco" class="form-control input-group-sm">
-                                                                            <option value="" selected="" disabled="" >[SELECCIONE]</option>
-                                                                            <option value="0" >Ninguno</option>
+                                                                            <option value=""  disabled="" >[SELECCIONE]</option>
+                                                                            <%for (int u = 0; u < List_Cuenta_Sueldo.size(); u++) {
+                                                                                    Cuenta_Sueldo cs = new Cuenta_Sueldo();
+                                                                                    cs = (Cuenta_Sueldo) List_Cuenta_Sueldo.get(u);
+                                                                                   
+                                                                                        if (cs.getNo_banco().trim().equals("0")) {
+                                                                            %>
+                                                                            <option value="0" selected="">Ninguno</option>
                                                                             <option value="1" >BBVA</option>
                                                                             <option value="2" >BCP</option>
                                                                             <option value="3" >Otros</option>
+                                                                            <%}
+                                                                                if (cs.getNo_banco().trim().equals("1")) {
+                                                                            %>
+                                                                            <option value="0" >Ninguno</option>
+                                                                            <option value="1" selected="" >BBVA</option>
+                                                                            <option value="2" >BCP</option>
+                                                                            <option value="3" >Otros</option>
+                                                                            <%}
+                                                                                if (cs.getNo_banco().trim().equals("2")) {
+                                                                            %>
+                                                                            <option value="0" >Ninguno</option>
+                                                                            <option value="1" >BBVA</option>
+                                                                            <option value="2" selected="">BCP</option>
+                                                                            <option value="3" >Otros</option>
+                                                                            <%}
+                                                                                if (cs.getNo_banco().trim().equals("3")) {
+                                                                            %>
+                                                                            <option value="0" >Ninguno</option>
+                                                                            <option value="1" >BBVA</option>
+                                                                            <option value="2" >BCP</option>
+                                                                            <option value="3" selected="">Otros</option>
+                                                                            <%}
+                                                                                    
+                                                                                }%>
                                                                         </select>
                                                                     </div>
                                                                 </div>
@@ -1019,7 +1061,7 @@
                 $("#no_cuen_ban").hide();
                 $("#nu_cuen_ban").val("");
                 $("#no_cuen_otros").show();
-                $("#nu_cuen_otros").val("BBVA");
+                $("#nu_cuen_otros").val("");
                 $("#generar").show();
                 $("#subscription").attr("required", "required");
                 $("#nu_cuen_otros").attr("required", "required");
@@ -1451,6 +1493,7 @@
                 }
             });
         });
+
         $("#inst").change(function() {
             var carr = $("#carrera");
             carr.empty();
@@ -1574,10 +1617,7 @@
 </body>
 
 </html>
-<%}
-
-    
-        else {
+<%} else {
         response.sendRedirect("/TALENTO_HUMANO/");
     }
 

@@ -378,11 +378,13 @@ public class CTrabajador extends HttpServlet {
         if (opc.equals("Editar_Asp_Acad")) {
             String idtr = request.getParameter("idtr");
             
+            getServletContext().setAttribute("List_Cuenta_Sueldo",tr.List_Cuenta_Sueldo(idtr) );
             getServletContext().setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
             getServletContext().setAttribute("list_año", li.lista_años());
             getServletContext().setAttribute("List_Universidad", li.List_Universidad());
             getServletContext().setAttribute("List_Carrera", li.List_Carrera());
             getServletContext().setAttribute("List_Situacion_Educativa", li.List_Situacion_Educativa());
+            
             response.sendRedirect("Vista/Trabajador/Mod_Aspecto_Academico.jsp?idtr=" + idtr);
         }
     }
