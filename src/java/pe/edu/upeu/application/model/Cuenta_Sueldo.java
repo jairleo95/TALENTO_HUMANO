@@ -17,17 +17,17 @@ public class Cuenta_Sueldo {
     private String nu_cuenta_banc;
     private String es_gem_nu_cuenta;
     private String no_banco_otros;
-    private String id_trajador;
+    private String id_trabajador;
     private String es_cuenta_sueldo;
 
-    public Cuenta_Sueldo(String id_cuenta_sueldo, String no_banco, String nu_cuenta, String nu_cuenta_banc, String es_gem_nu_cuenta, String no_banco_otros, String id_trajador, String es_cuenta_sueldo) {
+    public Cuenta_Sueldo(String id_cuenta_sueldo, String no_banco, String nu_cuenta, String nu_cuenta_banc, String es_gem_nu_cuenta, String no_banco_otros, String id_trabajador, String es_cuenta_sueldo) {
         this.id_cuenta_sueldo = id_cuenta_sueldo;
         this.no_banco = no_banco;
         this.nu_cuenta = nu_cuenta;
         this.nu_cuenta_banc = nu_cuenta_banc;
         this.es_gem_nu_cuenta = es_gem_nu_cuenta;
         this.no_banco_otros = no_banco_otros;
-        this.id_trajador = id_trajador;
+        this.id_trabajador = id_trabajador;
         this.es_cuenta_sueldo = es_cuenta_sueldo;
     }
     
@@ -38,7 +38,7 @@ public class Cuenta_Sueldo {
         this.nu_cuenta_banc = "";
         this.es_gem_nu_cuenta = "";
         this.no_banco_otros = "";
-        this.id_trajador = "";
+        this.id_trabajador = "";
         this.es_cuenta_sueldo = "";
     }
     
@@ -92,12 +92,12 @@ public class Cuenta_Sueldo {
         this.no_banco_otros = no_banco_otros;
     }
 
-    public String getId_trajador() {
-        return id_trajador;
+    public String getId_trabajador() {
+        return id_trabajador;
     }
 
-    public void setId_trajador(String id_trajador) {
-        this.id_trajador = id_trajador;
+    public void setId_trabajador(String id_trajador) {
+        this.id_trabajador = id_trajador;
     }
 
     public String getEs_cuenta_sueldo() {

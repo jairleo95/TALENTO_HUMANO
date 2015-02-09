@@ -107,7 +107,8 @@ public class CFuncion extends HttpServlet {
             if (opc.equals("otorgar")) {
                 String id_puesto=request.getParameter("id_puesto");
                 String de_funcion=request.getParameter("de_funcion");
-                f.Insertar_funcion(id_puesto, de_funcion, id_user);
+                String ti_funcion=request.getParameter("ti_funcion");
+                f.Insertar_funcion(id_puesto, de_funcion, id_user, ti_funcion);
             }
             if(opc.equals("list_pu")){
                 List<Map<String, ?>> list = p.List_puesto();
@@ -123,7 +124,8 @@ public class CFuncion extends HttpServlet {
                 String de_funcion=request.getParameter("de_fun");
                 String es_funcion=request.getParameter("es_fun");
                 String id_puesto=request.getParameter("id_pu");
-                f.Modificar_funcion(id_funcion, es_funcion, de_funcion, id_puesto, id_user);
+                String ti_funcion=request.getParameter("ti_funcion");
+                f.Modificar_funcion(id_funcion, es_funcion, de_funcion, id_puesto, id_user, ti_funcion);
             }
         } catch (Exception e) {
             rpta.put("rpta", "-1");

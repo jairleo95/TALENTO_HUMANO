@@ -1,4 +1,6 @@
 
+<%@page import="pe.edu.upeu.application.model.Cuenta_Sueldo"%>
+<%@page import="pe.edu.upeu.application.model.Tipo_Institucion"%>
 <%@page import="pe.edu.upeu.application.model.Ub_Distrito"%>
 <%@page import="pe.edu.upeu.application.model.Ub_Provincia"%>
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
@@ -9,15 +11,12 @@
     if (id_user != null) {
 %>
 <%@page import="pe.edu.upeu.application.model.Tipo_Documento"%>
-<%@page import="pe.edu.upeu.application.model.Via"%>
-<%@page import="pe.edu.upeu.application.model.Zona"%>
 <%@page import="pe.edu.upeu.application.model.Ub_Departamento"%>
 <%@page import="pe.edu.upeu.application.model.Situacion_Educativa"%>
 <%@page import="pe.edu.upeu.application.model.Universidad"%>
 <%@page import="pe.edu.upeu.application.model.Carrera"%>
 <%@page import="pe.edu.upeu.application.model.V_Ubigeo"%>
 <%@page import="pe.edu.upeu.application.model.Nacionalidad"%>
-<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 
 <%
     HttpSession sesion_1 = request.getSession(true);
@@ -25,19 +24,14 @@
     String iduser = (String) sesion_1.getAttribute("IDUSER");
 
 %>
-<jsp:useBean id="List_Carrera" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Universidad" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Situacion_Educativa" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="Listar_zona" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="Listar_via" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="list_año" scope="application" class="java.util.ArrayList"/>
 
+<jsp:useBean id="List_Cuenta_Sueldo" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="list_año" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_tipo_institucion" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Universidad" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Nacionalidad" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Departamento" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Provincia" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Distrito" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="Listar_tipo_doc" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Carrera" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Situacion_Educativa" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html lang="en-us">
     <head>
@@ -247,6 +241,43 @@
 
                                 }
                         );
+                        //MOSTRAR ASPECTO ACADEMICO PARA MODIFICAR
+
+                        if ($("#sit_edu").val() == 'SED-0011' | $("#sit_edu").val() == 'SED-0013' | $("#sit_edu").val() == 'SED-0014'
+                                | $("#sit_edu").val() == 'SED-0015'
+                                | $("#sit_edu").val() == 'SED-0016' | $("#sit_edu").val() == 'SED-0017'
+                                | $("#sit_edu").val() == 'SED-0017' | $("#sit_edu").val() == 'SED-0018'
+                                | $("#sit_edu").val() == 'SED-0019' | $("#sit_edu").val() == 'SED-0020'
+                                | $("#sit_edu").val() == 'SED-0021') {
+
+                            $("#es_inst_p").show();
+
+                        } else {
+                            $("#es_inst_p").hide();
+                            $("#regimen").hide();
+                            $("#egreso").hide();
+                            $("#ti").hide();
+                            $("#institucion").hide();
+                            $("#carr").hide();
+                        }
+
+                        if ($("#inst_peru").val() == "1") {
+                            $("#regimen").show();
+                            $("#egreso").show();
+                            $("#ti").show();
+                            $("#institucion").show();
+                            $("#carr").show();
+                        } else {
+                            $("#regimen").hide();
+                            $("#egreso").hide();
+                            $("#ti").hide();
+                            $("#institucion").hide();
+                            $("#carr").hide();
+
+                        }
+
+                        //MOSTRAR CUENTA SUELDO PARA MODIFICAR
+                       
                     }
             );
         </script>
@@ -390,13 +421,18 @@
                                                                                 <%for (int s = 0; s < List_Situacion_Educativa.size(); s++) {
                                                                                         Situacion_Educativa e = new Situacion_Educativa();
                                                                                         e = (Situacion_Educativa) List_Situacion_Educativa.get(s);
-                                                                                %>
+                                                                                        if (e.getNo_s_educativa().trim().equals(t.getNo_s_educativa())) {%>
+                                                                                <option value="<%=e.getId_situacion_educativa()%>" selected=""><%=e.getNo_s_educativa()%></option>
+                                                                                <%} else {%>
                                                                                 <option value="<%=e.getId_situacion_educativa()%>"><%=e.getNo_s_educativa()%></option>
-                                                                                <%}%>
+                                                                                <%}
+                                                                                    }%>
                                                                             </select>
+                                                                           <!-- <input type="text" value="<%=t.getId_situacion_educativa()%>">-->
                                                                         </div>
                                                                     </div>
                                                                 </div>
+
                                                                 <div class="col-sm-4" id="es_inst_p"style="display: none">
                                                                     <div class="form-group">
                                                                         <label>¿Estudio en una institucion educativa del Perú?</label>
@@ -404,29 +440,37 @@
                                                                             <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
                                                                             <select class="form-control input-group-sm" id="inst_peru" name="ES_INST_PERU" required>
                                                                                 <option value="" selected="selected" >[SELECCIONE]</option>
-                                                                                <option value="1">Si</option>
+                                                                                <%if (t.getEs_inst_educ_peru().trim().equals("1")) {%>
+                                                                                <option value="1" selected="">Si</option>
                                                                                 <option value="2">No</option>
-
+                                                                                <%}
+                                                                                    if (t.getEs_inst_educ_peru().trim().equals("2")) {%>
+                                                                                <option value="1">Si</option>
+                                                                                <option value="2" selected="">No</option>
+                                                                                <%}%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-4" id="regimen" style="display: none">
-                                                                    <div class="form-group">+
+                                                                    <div class="form-group">
                                                                         <label>Regimen de la Institución Educativa:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
                                                                             <select class="form-control input-group-sm" id="rg" name="REGIMEN" required>
                                                                                 <option value="" selected="selected">[SELECCIONE]</option>
-                                                                                <option value="1">Publica</option>
+                                                                                <%if (t.getLi_reg_inst_educativa().trim().equals("1")) {%>
+                                                                                <option value="1" selected="">Publica</option>
                                                                                 <option value="2">Privada</option>
-
+                                                                                <%}
+                                                                                    if (t.getLi_reg_inst_educativa().trim().equals("2")) {%>
+                                                                                <option value="1">Publica</option>
+                                                                                <option value="2" selected="">Privada</option>
+                                                                                <%}%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-
-
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-sm-4" id="ti" style="display: none">
@@ -436,6 +480,24 @@
                                                                             <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
                                                                             <select class="form-control input-group-sm" id="ti_inst"  required>
                                                                                 <option value="" selected="selected">[SELECCIONE]</option>
+
+                                                                                <%for (int y = 0; y < List_Universidad.size(); y++) {
+                                                                                        Universidad un = new Universidad();
+                                                                                        un = (Universidad) List_Universidad.get(y);
+                                                                                        if (t.getNo_universidad().trim().equals(un.getNo_universidad().trim())) {
+
+                                                                                            for (int r = 0; r < List_tipo_institucion.size(); r++) {
+                                                                                                Tipo_Institucion ti = new Tipo_Institucion();
+                                                                                                ti = (Tipo_Institucion) List_tipo_institucion.get(r);
+
+                                                                                                if (un.getId_tipo_institucion().trim().equals(ti.getId_tipo_institucion().trim())) {
+                                                                                %>
+                                                                                <option  value="<%=ti.getId_tipo_institucion()%>" selected=""><%=ti.getNo_tipo_institucion()%></option>
+                                                                                <%
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -447,6 +509,16 @@
                                                                             <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
                                                                             <select class="form-control input-group-sm" id="inst"  required>
                                                                                 <option value="" selected="selected">[SELECCIONE]</option>
+                                                                                <%for (int w = 0; w < List_Universidad.size(); w++) {
+                                                                                        Universidad u = new Universidad();
+                                                                                        u = (Universidad) List_Universidad.get(w);
+                                                                                        if (u.getNo_universidad().trim().equals(t.getNo_universidad().trim())) {
+                                                                                %>
+                                                                                <option value="<%=u.getId_universidad()%>" selected=""><%=u.getNo_universidad()%></option>
+                                                                                <%} else {%>
+                                                                                <option value="<%=u.getId_universidad()%>"><%=u.getNo_universidad()%></option>
+                                                                                <%}
+                                                                                    }%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -457,7 +529,17 @@
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
                                                                             <select class="form-control input-group-sm" id="carrera" name="CARRERA" required>
-                                                                                <option value="" selected="selected">[SELECCIONE]</option>
+                                                                                <option value="" >[SELECCIONE]</option>
+                                                                                <% for (int q = 0; q < List_Carrera.size(); q++) {
+                                                                                        Carrera c = new Carrera();
+                                                                                        c = (Carrera) List_Carrera.get(q);
+                                                                                        if (c.getNo_carrera().trim().equals(t.getNo_carrera().trim())) {
+                                                                                %>
+                                                                                <option value="<%=c.getId_carrera()%>" selected="" > <%=c.getNo_carrera()%></option>
+                                                                                <%} else {%>
+                                                                                <option value="<%=c.getId_carrera()%>" > <%=c.getNo_carrera()%></option>
+                                                                                <%}
+                                                                                    }%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -469,19 +551,25 @@
                                                                             <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
                                                                             <select    name="A_EGRESO" class="form-control input-group-sm" required="" >
                                                                                 <option value="">[SELECCIONE]</option>
-                                                                                <% for (int jj = 0; jj < list_año.size(); jj++) {%>
+                                                                                <% for (int jj = 0; jj < list_año.size(); jj++) {
+                                                                                        if (t.getDe_anno_egreso().trim().equals(list_año.get(jj))) {;
+                                                                                %>
+                                                                                <option value="<%=list_año.get(jj)%>" selected=""><%=list_año.get(jj)%></option>
+                                                                                <%} else {%>
                                                                                 <option value="<%=list_año.get(jj)%>"><%=list_año.get(jj)%></option>
-                                                                                <%}%>
+                                                                                <%}
+                                                                                    }%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
-                                                                </div>                        
+                                                                </div>
+
                                                                 <div class="col-sm-4">   
                                                                     <div class="form-group">
                                                                         <label>Tipo Hora Pago Referencial:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-money fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm" value="0"   type="text" name="TIPO_HORA_PAGO_REFEERENCIAL" maxlength="6">
+                                                                            <input class="form-control input-group-sm" value="<%=t.getCa_tipo_hora_pago_refeerencial()%>"   type="text" name="TIPO_HORA_PAGO_REFEERENCIAL" maxlength="6">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -495,7 +583,7 @@
                                                                         <label>Otros Estudios:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-align-justify fa-lg fa-fw"></i></span>
-                                                                            <textarea name="OTROS_ESTUDIOS"   class="form-control input-group-sm" class="text-box" cols="60" rows="6" maxlength="500"></textarea>
+                                                                            <textarea name="OTROS_ESTUDIOS"  class="form-control input-group-sm" class="text-box" cols="60" rows="6" maxlength="500"><%=t.getCm_otros_estudios()%></textarea>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -510,11 +598,41 @@
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
                                                                         <select name="BANCO" id="banco" class="form-control input-group-sm">
-                                                                            <option value="" selected="" disabled="" >[SELECCIONE]</option>
-                                                                            <option value="0" >Ninguno</option>
+                                                                            <option value=""  disabled="" >[SELECCIONE]</option>
+                                                                            <%for (int u = 0; u < List_Cuenta_Sueldo.size(); u++) {
+                                                                                    Cuenta_Sueldo cs = new Cuenta_Sueldo();
+                                                                                    cs = (Cuenta_Sueldo) List_Cuenta_Sueldo.get(u);
+                                                                                   
+                                                                                        if (cs.getNo_banco().trim().equals("0")) {
+                                                                            %>
+                                                                            <option value="0" selected="">Ninguno</option>
                                                                             <option value="1" >BBVA</option>
                                                                             <option value="2" >BCP</option>
                                                                             <option value="3" >Otros</option>
+                                                                            <%}
+                                                                                if (cs.getNo_banco().trim().equals("1")) {
+                                                                            %>
+                                                                            <option value="0" >Ninguno</option>
+                                                                            <option value="1" selected="" >BBVA</option>
+                                                                            <option value="2" >BCP</option>
+                                                                            <option value="3" >Otros</option>
+                                                                            <%}
+                                                                                if (cs.getNo_banco().trim().equals("2")) {
+                                                                            %>
+                                                                            <option value="0" >Ninguno</option>
+                                                                            <option value="1" >BBVA</option>
+                                                                            <option value="2" selected="">BCP</option>
+                                                                            <option value="3" >Otros</option>
+                                                                            <%}
+                                                                                if (cs.getNo_banco().trim().equals("3")) {
+                                                                            %>
+                                                                            <option value="0" >Ninguno</option>
+                                                                            <option value="1" >BBVA</option>
+                                                                            <option value="2" >BCP</option>
+                                                                            <option value="3" selected="">Otros</option>
+                                                                            <%}
+                                                                                    
+                                                                                }%>
                                                                         </select>
                                                                     </div>
                                                                 </div>
@@ -555,15 +673,15 @@
                                                                 </div>
                                                             </div> 
                                                             <input type="hidden" value="0" name="ES_CUENTA_SUELDO" id="es_cuenta"/>
-                                                                          
+
                                                             <%String idtr = request.getParameter("idtr");%>
                                                             <input type="hidden" name="idtr" value="<%=idtr%>"/>
                                                             <input type="hidden" name="opc" value="Modificar_Dat_Gen">
                                                             <footer>
-                                                            <center>
-                                                                <button type="submit" value="" name="opc"> MODIFICAR</button>
-                                                            </center>
-                                                                </footer>
+                                                                <center>
+                                                                    <button type="submit" value="" name="opc"> MODIFICAR</button>
+                                                                </center>
+                                                            </footer>
 
                                                         </div>
                                                     </div>
@@ -614,16 +732,16 @@
     <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script>
-                                                                                if (!window.jQuery) {
-                                                                                    document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
-                                                                                }
+            if (!window.jQuery) {
+                document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+            }
     </script>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script>
-                                                                                if (!window.jQuery.ui) {
-                                                                                    document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                                                                                }
+            if (!window.jQuery.ui) {
+                document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+            }
     </script>
 
     <!-- IMPORTANT: APP CONFIG -->
@@ -686,104 +804,104 @@
     <script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script>$(document).ready(function() {
-                                                                                    var p = 1;
-                                                                                    var texto_h = "";
-                                                                                    $(".btn-reg-hijo").click(function() {
+                var p = 1;
+                var texto_h = "";
+                $(".btn-reg-hijo").click(function() {
 
-                                                                                        var tabla_hijo = $(".tabla-hijo");
-                                                                                        var ap_pat = $(".i_app_h");
-                                                                                        var ap_mat = $(".i_apm_h");
-                                                                                        var nombre = $(".i_no_h");
-                                                                                        var fe_nac = $(".i_fnac_h");
-                                                                                        var sexo = $(".i_sexo_h");
-                                                                                        var t_doc = $(".i_tdoc_h");
-                                                                                        var ndoc = $(".i_ndoc_h");
-                                                                                        var essalud = $(".i_essalud_h");
-                                                                                        var es_sup = $(".i_es_sup_h");
+                    var tabla_hijo = $(".tabla-hijo");
+                    var ap_pat = $(".i_app_h");
+                    var ap_mat = $(".i_apm_h");
+                    var nombre = $(".i_no_h");
+                    var fe_nac = $(".i_fnac_h");
+                    var sexo = $(".i_sexo_h");
+                    var t_doc = $(".i_tdoc_h");
+                    var ndoc = $(".i_ndoc_h");
+                    var essalud = $(".i_essalud_h");
+                    var es_sup = $(".i_es_sup_h");
 
-                                                                                        texto_h += ("<tr class='tr-hijo_" + p + "'>");
-                                                                                        texto_h += ('<td ><label class="td-ap_pat' + p + '">' + ap_pat.val() + '</label><input type="hidden" value="' + ap_pat.val() + '" name="APELLIDO_P_H' + p + '" class="ap_p_h_' + p + '"/></td>');
-                                                                                        texto_h += ('<td ><label class="td-ap_mat' + p + '">' + ap_mat.val() + '</label><input type="hidden" value="' + ap_mat.val() + '" name="APELLIDO_M_H' + p + '" class="ap_m_h_' + p + '"/></td>');
-                                                                                        texto_h += ('<td ><label class="td-nom' + p + '">' + nombre.val() + '</label><input type="hidden" value="' + nombre.val() + '" name="NOMBRE_H' + p + '" class="no_h_' + p + '"/></td>');
-                                                                                        texto_h += ('<td ><label class="td-fe_nac' + p + '">' + fe_nac.val() + '</label><input type="hidden" value="' + fe_nac.val() + '" name="FECHA_NAC_H' + p + '" class="fe_n_h_' + p + '"/></td>');
-                                                                                        texto_h += (' <td ><label class="td-sex' + p + '">' + sexo.val() + '</label><input type="hidden" value="' + sexo.val() + '" name="SEXO_H' + p + '" class="sex_h_' + p + '"/></td>');
-                                                                                        texto_h += ('<td ><label class="td-tdoc' + p + '">' + t_doc.val() + '</label><input type="hidden" value="' + t_doc.val() + '" name="TIPO_DOC_ID_H' + p + '" class="ti_doc_h_' + p + '"/></td>');
-                                                                                        texto_h += ('<td ><label class="td-ndoc' + p + '">' + ndoc.val() + '</label><input type="hidden" value="' + ndoc.val() + '" name="NRO_DOC_H' + p + '" class="nu_doc_h_' + p + '"/></td>');
-                                                                                        texto_h += ('<td ><label class="td-essalud' + p + '">' + essalud.val() + '</label><input type="hidden" value="' + essalud.val() + '" name="ESSALUD_H' + p + '" class="essalud_h_' + p + '"/></td>');
-                                                                                        texto_h += ('<td ><label class="td-es_sup' + p + '">' + es_sup.val() + '</label><input type="hidden" value="' + es_sup.val() + '" name="EST_SUP_H' + p + '" class="es_sup_h_' + p + '"/></td>');
-                                                                                        texto_h += ('<td><a href="javascript:void(0);" class="btn btn-danger" onclick="$(\'.tr-hijo_' + p + '\').remove();">Quitar</a> <button class="btn btn-success btn-modificar_' + p + '" href="javascript:void(0);" type="button" value="' + p + '">Modificar</button></td>');
-                                                                                        texto_h += ("</tr>");
-                                                                                        tabla_hijo.append(texto_h);
-                                                                                        // $(".codigo").text(texto_h);
-
-
-                                                                                        ap_pat.val("");
-                                                                                        ap_mat.val("");
-                                                                                        nombre.val("");
-                                                                                        fe_nac.val("");
-                                                                                        sexo.val("");
-                                                                                        t_doc.val("");
-                                                                                        ndoc.val("");
-                                                                                        essalud.val("");
-                                                                                        es_sup.val("");
-
-                                                                                        $(".btn-modificar_" + p).click(function() {
-                                                                                            ap_pat.val($(".ap_p_h_" + $(this).val()).val());
-                                                                                            ap_mat.val($(".ap_m_h_" + $(this).val()).val());
-                                                                                            nombre.val($(".no_h_" + $(this).val()).val());
-                                                                                            fe_nac.val($(".fe_n_h_" + $(this).val()).val());
-                                                                                            sexo.val($(".sex_h_" + $(this).val()).val());
-                                                                                            t_doc.val($(".ti_doc_h_" + $(this).val()).val());
-                                                                                            ndoc.val($(".nu_doc_h_" + $(this).val()).val());
-                                                                                            essalud.val($(".essalud_h_" + $(this).val()).val());
-                                                                                            es_sup.val($(".es_sup_h_" + $(this).val()).val());
-
-                                                                                            $(".btn-reg-hijo").hide();
-                                                                                            $(".btn-mant").append('<button type="button" value="' + $(this).val() + '" class="btn-mod-hijo btn btn-info">Modificar Hijo</button>');
-                                                                                            $(".btn-mod-hijo").click(function() {
-
-                                                                                                $(".ap_p_h_" + $(this).val()).val(ap_pat.val());
-                                                                                                $(".ap_m_h_" + $(this).val()).val(ap_mat.val());
-                                                                                                $(".no_h_" + $(this).val()).val(nombre.val());
-                                                                                                $(".fe_n_h_" + $(this).val()).val(fe_nac.val());
-                                                                                                $(".sex_h_" + $(this).val()).val(sexo.val());
-                                                                                                $(".ti_doc_h_" + $(this).val()).val(t_doc.val());
-                                                                                                $(".nu_doc_h_" + $(this).val()).val(ndoc.val());
-                                                                                                $(".essalud_h_" + $(this).val()).val(essalud.val());
-                                                                                                $(".es_sup_h_" + $(this).val()).val(es_sup.val());
-
-                                                                                                $(".td-ap_pat" + $(this).val()).text(ap_pat.val());
-                                                                                                $(".td-ap_mat" + $(this).val()).text(ap_mat.val());
-                                                                                                $(".td-nom" + $(this).val()).text(nombre.val());
-                                                                                                $(".td-fe_nac" + $(this).val()).text(fe_nac.val());
-                                                                                                $(".td-sex" + $(this).val()).text(sexo.val());
-                                                                                                $(".td-tdoc" + $(this).val()).text(t_doc.val());
-                                                                                                $(".td-ndoc" + $(this).val()).text(ndoc.val());
-                                                                                                $(".td-essalud" + $(this).val()).text(essalud.val());
-                                                                                                $(".td-es_sup" + $(this).val()).text(es_sup.val());
-
-                                                                                                ap_pat.val("");
-                                                                                                ap_mat.val("");
-                                                                                                nombre.val("");
-                                                                                                fe_nac.val("");
-                                                                                                sexo.val("");
-                                                                                                t_doc.val("");
-                                                                                                ndoc.val("");
-                                                                                                essalud.val("");
-                                                                                                es_sup.val("");
-                                                                                                $(".btn-reg-hijo").show();
-                                                                                                $(".btn-mod-hijo").remove();
+                    texto_h += ("<tr class='tr-hijo_" + p + "'>");
+                    texto_h += ('<td ><label class="td-ap_pat' + p + '">' + ap_pat.val() + '</label><input type="hidden" value="' + ap_pat.val() + '" name="APELLIDO_P_H' + p + '" class="ap_p_h_' + p + '"/></td>');
+                    texto_h += ('<td ><label class="td-ap_mat' + p + '">' + ap_mat.val() + '</label><input type="hidden" value="' + ap_mat.val() + '" name="APELLIDO_M_H' + p + '" class="ap_m_h_' + p + '"/></td>');
+                    texto_h += ('<td ><label class="td-nom' + p + '">' + nombre.val() + '</label><input type="hidden" value="' + nombre.val() + '" name="NOMBRE_H' + p + '" class="no_h_' + p + '"/></td>');
+                    texto_h += ('<td ><label class="td-fe_nac' + p + '">' + fe_nac.val() + '</label><input type="hidden" value="' + fe_nac.val() + '" name="FECHA_NAC_H' + p + '" class="fe_n_h_' + p + '"/></td>');
+                    texto_h += (' <td ><label class="td-sex' + p + '">' + sexo.val() + '</label><input type="hidden" value="' + sexo.val() + '" name="SEXO_H' + p + '" class="sex_h_' + p + '"/></td>');
+                    texto_h += ('<td ><label class="td-tdoc' + p + '">' + t_doc.val() + '</label><input type="hidden" value="' + t_doc.val() + '" name="TIPO_DOC_ID_H' + p + '" class="ti_doc_h_' + p + '"/></td>');
+                    texto_h += ('<td ><label class="td-ndoc' + p + '">' + ndoc.val() + '</label><input type="hidden" value="' + ndoc.val() + '" name="NRO_DOC_H' + p + '" class="nu_doc_h_' + p + '"/></td>');
+                    texto_h += ('<td ><label class="td-essalud' + p + '">' + essalud.val() + '</label><input type="hidden" value="' + essalud.val() + '" name="ESSALUD_H' + p + '" class="essalud_h_' + p + '"/></td>');
+                    texto_h += ('<td ><label class="td-es_sup' + p + '">' + es_sup.val() + '</label><input type="hidden" value="' + es_sup.val() + '" name="EST_SUP_H' + p + '" class="es_sup_h_' + p + '"/></td>');
+                    texto_h += ('<td><a href="javascript:void(0);" class="btn btn-danger" onclick="$(\'.tr-hijo_' + p + '\').remove();">Quitar</a> <button class="btn btn-success btn-modificar_' + p + '" href="javascript:void(0);" type="button" value="' + p + '">Modificar</button></td>');
+                    texto_h += ("</tr>");
+                    tabla_hijo.append(texto_h);
+                    // $(".codigo").text(texto_h);
 
 
+                    ap_pat.val("");
+                    ap_mat.val("");
+                    nombre.val("");
+                    fe_nac.val("");
+                    sexo.val("");
+                    t_doc.val("");
+                    ndoc.val("");
+                    essalud.val("");
+                    es_sup.val("");
 
-                                                                                            });
-                                                                                        });
-                                                                                        $(".num_hijo").val(p);
-                                                                                        p++;
-                                                                                        texto_h = "";
+                    $(".btn-modificar_" + p).click(function() {
+                        ap_pat.val($(".ap_p_h_" + $(this).val()).val());
+                        ap_mat.val($(".ap_m_h_" + $(this).val()).val());
+                        nombre.val($(".no_h_" + $(this).val()).val());
+                        fe_nac.val($(".fe_n_h_" + $(this).val()).val());
+                        sexo.val($(".sex_h_" + $(this).val()).val());
+                        t_doc.val($(".ti_doc_h_" + $(this).val()).val());
+                        ndoc.val($(".nu_doc_h_" + $(this).val()).val());
+                        essalud.val($(".essalud_h_" + $(this).val()).val());
+                        es_sup.val($(".es_sup_h_" + $(this).val()).val());
 
-                                                                                    });
-                                                                                });</script>
+                        $(".btn-reg-hijo").hide();
+                        $(".btn-mant").append('<button type="button" value="' + $(this).val() + '" class="btn-mod-hijo btn btn-info">Modificar Hijo</button>');
+                        $(".btn-mod-hijo").click(function() {
+
+                            $(".ap_p_h_" + $(this).val()).val(ap_pat.val());
+                            $(".ap_m_h_" + $(this).val()).val(ap_mat.val());
+                            $(".no_h_" + $(this).val()).val(nombre.val());
+                            $(".fe_n_h_" + $(this).val()).val(fe_nac.val());
+                            $(".sex_h_" + $(this).val()).val(sexo.val());
+                            $(".ti_doc_h_" + $(this).val()).val(t_doc.val());
+                            $(".nu_doc_h_" + $(this).val()).val(ndoc.val());
+                            $(".essalud_h_" + $(this).val()).val(essalud.val());
+                            $(".es_sup_h_" + $(this).val()).val(es_sup.val());
+
+                            $(".td-ap_pat" + $(this).val()).text(ap_pat.val());
+                            $(".td-ap_mat" + $(this).val()).text(ap_mat.val());
+                            $(".td-nom" + $(this).val()).text(nombre.val());
+                            $(".td-fe_nac" + $(this).val()).text(fe_nac.val());
+                            $(".td-sex" + $(this).val()).text(sexo.val());
+                            $(".td-tdoc" + $(this).val()).text(t_doc.val());
+                            $(".td-ndoc" + $(this).val()).text(ndoc.val());
+                            $(".td-essalud" + $(this).val()).text(essalud.val());
+                            $(".td-es_sup" + $(this).val()).text(es_sup.val());
+
+                            ap_pat.val("");
+                            ap_mat.val("");
+                            nombre.val("");
+                            fe_nac.val("");
+                            sexo.val("");
+                            t_doc.val("");
+                            ndoc.val("");
+                            essalud.val("");
+                            es_sup.val("");
+                            $(".btn-reg-hijo").show();
+                            $(".btn-mod-hijo").remove();
+
+
+
+                        });
+                    });
+                    $(".num_hijo").val(p);
+                    p++;
+                    texto_h = "";
+
+                });
+            });</script>
     <script>
         $(document).ready(
                 function() {
@@ -943,7 +1061,7 @@
                 $("#no_cuen_ban").hide();
                 $("#nu_cuen_ban").val("");
                 $("#no_cuen_otros").show();
-                $("#nu_cuen_otros").val("BBVA");
+                $("#nu_cuen_otros").val("");
                 $("#generar").show();
                 $("#subscription").attr("required", "required");
                 $("#nu_cuen_otros").attr("required", "required");
@@ -1375,6 +1493,7 @@
                 }
             });
         });
+
         $("#inst").change(function() {
             var carr = $("#carrera");
             carr.empty();

@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
+import pe.edu.upeu.application.model.Cuenta_Sueldo;
 import pe.edu.upeu.application.model.Trabajador;
 import pe.edu.upeu.application.model.V_Ficha_Trab_Num_C;
 import pe.edu.upeu.application.model.X_List_dat_tr_plantilla;
@@ -331,6 +332,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 v.setId_universidad_carrera(rs.getString("id_universidad_carrera"));
                 v.setId_nacionalidad(rs.getString("id_nacionalidad"));
                 v.setDistrito_nac(rs.getString("distrito_nac"));
+                v.setDe_anno_egreso(rs.getString("de_anno_egreso"));
                 list.add(v);
             }
 
@@ -595,6 +597,41 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 throw new RuntimeException(e.getMessage());
             }
         }
+    }
+
+    @Override
+    public List<Cuenta_Sueldo> List_Cuenta_Sueldo(String idtr) {
+         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT * FROM RHTD_CUENTA_SUELDO WHERE ID_TRABAJADOR = '"+idtr+"'";
+        List<Cuenta_Sueldo> list = new ArrayList<Cuenta_Sueldo>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+
+            while (rs.next()) {
+                Cuenta_Sueldo cs = new Cuenta_Sueldo();
+                cs.setId_cuenta_sueldo(rs.getString("Id_cuenta_sueldo"));
+                cs.setNo_banco(rs.getString("no_banco"));
+                cs.setNu_cuenta(rs.getString("nu_cuenta"));
+                cs.setNu_cuenta_banc(rs.getString("nu_cuenta_banc"));
+                cs.setEs_gem_nu_cuenta(rs.getString("es_gem_nu_cuenta"));
+                cs.setNo_banco_otros(rs.getString("no_banco_otros"));
+                cs.setId_trabajador(rs.getString("id_trabajador"));
+                cs.setEs_cuenta_sueldo(rs.getString("es_cuenta_sueldo"));
+                list.add(cs);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return list;
     }
 
 }
