@@ -335,7 +335,7 @@
 
                         });
                     }
-                   
+
                     Listar_Paso($("#select-proceso").val());
                 });
 

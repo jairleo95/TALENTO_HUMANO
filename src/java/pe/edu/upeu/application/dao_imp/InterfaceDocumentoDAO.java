@@ -6,6 +6,7 @@
 package pe.edu.upeu.application.dao_imp;
 
 import java.util.List;
+import java.util.Map;
 import pe.edu.upeu.application.model.Cuenta_Sueldo;
 import pe.edu.upeu.application.model.Datos_Hijo_Trabajador;
 import pe.edu.upeu.application.model.Documentos;
@@ -20,6 +21,8 @@ import pe.edu.upeu.application.model.V_Reg_Dgp_Tra;
 public interface InterfaceDocumentoDAO {
 
     public List<V_Documento_Trabajador> List_Id_Doc_Trab(String id_trabajador);
+
+    public String List_files(String id);
 
     public List<Documentos> List_Documentos();
 
@@ -41,6 +44,7 @@ public interface InterfaceDocumentoDAO {
     public List<V_Reg_Dgp_Tra> List_Doc_CE();
 
     public void INSERT_ARCHIVO_DOCUMENTO(String ID_ARCHIVO_DOCUMENTO, String ID_DOCUMENTO_ADJUNTO, String NO_FILE, String NO_ORIGINAL, String ES_FILE);
+
     public void INSERT_DGP_DOC_ADJ(String ID_DGP_DOC_ADJ, String ID_DGP, String ID_DOCUMENTO_ADJUNTO, String ES_DGP_DOC_ADJ);
 
 }

@@ -252,7 +252,7 @@ public class CDocumento extends HttpServlet {
 
             }
 
-            /*
+            
              getServletContext().setAttribute("List_doc_req_pla", d.List_doc_req_pla(iddgp, idtr));
 
              int s = d.List_Req_nacionalidad(idtr);
@@ -269,7 +269,7 @@ public class CDocumento extends HttpServlet {
              } else {
              response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&iddgp=" + iddgp);
              }
-             */
+             
             /*} catch (FileUploadException e) {
              out.println("Error : " + e.getMessage());
              }*/
