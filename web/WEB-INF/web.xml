@@ -123,6 +123,10 @@
         <servlet-name>CFuncion</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CFuncion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Reporte</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CReporte</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
         <url-pattern>/trabajador</url-pattern>
@@ -242,6 +246,10 @@
     <servlet-mapping>
         <servlet-name>CFuncion</servlet-name>
         <url-pattern>/funcion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Reporte</servlet-name>
+        <url-pattern>/reporte</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>300</session-timeout>
