@@ -375,6 +375,7 @@ public class CTrabajador extends HttpServlet {
         }
         if (opc.equals("Editar_Asp_Acad")) {
         String idtr = request.getParameter("idtr");
+        getServletContext().setAttribute("List_Situacion_Educativa", li.List_Situacion_Educativa());    
         response.sendRedirect("Vista/Trabajador/Mod_Aspecto_Academico.jsp?idtr=" + idtr);
         }
     }

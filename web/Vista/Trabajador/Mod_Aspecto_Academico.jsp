@@ -33,11 +33,7 @@
 <jsp:useBean id="list_año" scope="application" class="java.util.ArrayList"/>
 
 <jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Nacionalidad" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Departamento" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Provincia" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Distrito" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="Listar_tipo_doc" scope="application" class="java.util.ArrayList"/>
+
 <!DOCTYPE html>
 <html lang="en-us">
     <head>
@@ -187,7 +183,7 @@
                             }
 
                         });
-
+                        
                         $("#es_inst_p").change(function() {
                             if ($("#inst_peru").val() == "1") {
                                 $("#regimen").show();
@@ -247,6 +243,39 @@
 
                                 }
                         );
+                             if ($("#sit_edu").val() == 'SED-0011' | $("#sit_edu").val() == 'SED-0013' | $("#sit_edu").val() == 'SED-0014'
+                                    | $("#sit_edu").val() == 'SED-0015'
+                                    | $("#sit_edu").val() == 'SED-0016' | $("#sit_edu").val() == 'SED-0017'
+                                    | $("#sit_edu").val() == 'SED-0017' | $("#sit_edu").val() == 'SED-0018'
+                                    | $("#sit_edu").val() == 'SED-0019' | $("#sit_edu").val() == 'SED-0020'
+                                    | $("#sit_edu").val() == 'SED-0021') {
+
+                                $("#es_inst_p").show();
+
+                            }else {
+                                $("#es_inst_p").hide();
+                                $("#regimen").hide();
+                                $("#egreso").hide();
+                                $("#ti").hide();
+                                $("#institucion").hide();
+                                $("#carr").hide();
+
+                            }
+                            
+                             if ($("#inst_peru").val() == "1") {
+                                $("#regimen").show();
+                                $("#egreso").show();
+                                $("#ti").show();
+                                $("#institucion").show();
+                                $("#carr").show();
+                            } else {
+                                $("#regimen").hide();
+                                $("#egreso").hide();
+                                $("#ti").hide();
+                                $("#institucion").hide();
+                                $("#carr").hide();
+
+                            }
                     }
             );
         </script>
@@ -390,13 +419,18 @@
                                                                                 <%for (int s = 0; s < List_Situacion_Educativa.size(); s++) {
                                                                                         Situacion_Educativa e = new Situacion_Educativa();
                                                                                         e = (Situacion_Educativa) List_Situacion_Educativa.get(s);
-                                                                                %>
+                                                                                        if (e.getNo_s_educativa().trim().equals(t.getNo_s_educativa())) {%>
+                                                                                <option value="<%=e.getId_situacion_educativa()%>" selected=""><%=e.getNo_s_educativa()%></option>
+                                                                                <%} else {%>
                                                                                 <option value="<%=e.getId_situacion_educativa()%>"><%=e.getNo_s_educativa()%></option>
-                                                                                <%}%>
+                                                                                <%}
+                                                                                } %>
                                                                             </select>
+                                                                           <!-- <input type="text" value="<%=t.getId_situacion_educativa()%>">-->
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                                
                                                                 <div class="col-sm-4" id="es_inst_p"style="display: none">
                                                                     <div class="form-group">
                                                                         <label>¿Estudio en una institucion educativa del Perú?</label>
@@ -404,29 +438,35 @@
                                                                             <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
                                                                             <select class="form-control input-group-sm" id="inst_peru" name="ES_INST_PERU" required>
                                                                                 <option value="" selected="selected" >[SELECCIONE]</option>
-                                                                                <option value="1">Si</option>
+                                                                                <%if(t.getEs_inst_educ_peru().trim().equals("1")){%>
+                                                                                <option value="1" selected="">Si</option>
                                                                                 <option value="2">No</option>
-
+                                                                                <%}if(t.getEs_inst_educ_peru().trim().equals("2")){%>
+                                                                                <option value="1">Si</option>
+                                                                                <option value="2" selected="">No</option>
+                                                                                <%}%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-4" id="regimen" style="display: none">
-                                                                    <div class="form-group">+
+                                                                    <div class="form-group">
                                                                         <label>Regimen de la Institución Educativa:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
                                                                             <select class="form-control input-group-sm" id="rg" name="REGIMEN" required>
                                                                                 <option value="" selected="selected">[SELECCIONE]</option>
-                                                                                <option value="1">Publica</option>
+                                                                                <%if(t.getLi_reg_inst_educativa().trim().equals("1")){%>
+                                                                                <option value="1" selected="">Publica</option>
                                                                                 <option value="2">Privada</option>
-
+                                                                                <%}if(t.getLi_reg_inst_educativa().trim().equals("2")){%>
+                                                                                <option value="1">Publica</option>
+                                                                                <option value="2" selected="">Privada</option>
+                                                                                <%}%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-
-
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-sm-4" id="ti" style="display: none">
@@ -436,6 +476,7 @@
                                                                             <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
                                                                             <select class="form-control input-group-sm" id="ti_inst"  required>
                                                                                 <option value="" selected="selected">[SELECCIONE]</option>
+                                                                                
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -475,7 +516,8 @@
                                                                             </select>
                                                                         </div>
                                                                     </div>
-                                                                </div>                        
+                                                                </div>
+                                                                
                                                                 <div class="col-sm-4">   
                                                                     <div class="form-group">
                                                                         <label>Tipo Hora Pago Referencial:</label>
@@ -555,15 +597,15 @@
                                                                 </div>
                                                             </div> 
                                                             <input type="hidden" value="0" name="ES_CUENTA_SUELDO" id="es_cuenta"/>
-                                                                          
+
                                                             <%String idtr = request.getParameter("idtr");%>
                                                             <input type="hidden" name="idtr" value="<%=idtr%>"/>
                                                             <input type="hidden" name="opc" value="Modificar_Dat_Gen">
                                                             <footer>
-                                                            <center>
-                                                                <button type="submit" value="" name="opc"> MODIFICAR</button>
-                                                            </center>
-                                                                </footer>
+                                                                <center>
+                                                                    <button type="submit" value="" name="opc"> MODIFICAR</button>
+                                                                </center>
+                                                            </footer>
 
                                                         </div>
                                                     </div>
@@ -614,16 +656,16 @@
     <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script>
-                                                                                if (!window.jQuery) {
-                                                                                    document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
-                                                                                }
+            if (!window.jQuery) {
+                document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+            }
     </script>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script>
-                                                                                if (!window.jQuery.ui) {
-                                                                                    document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                                                                                }
+            if (!window.jQuery.ui) {
+                document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+            }
     </script>
 
     <!-- IMPORTANT: APP CONFIG -->
@@ -686,104 +728,104 @@
     <script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script>$(document).ready(function() {
-                                                                                    var p = 1;
-                                                                                    var texto_h = "";
-                                                                                    $(".btn-reg-hijo").click(function() {
+                var p = 1;
+                var texto_h = "";
+                $(".btn-reg-hijo").click(function() {
 
-                                                                                        var tabla_hijo = $(".tabla-hijo");
-                                                                                        var ap_pat = $(".i_app_h");
-                                                                                        var ap_mat = $(".i_apm_h");
-                                                                                        var nombre = $(".i_no_h");
-                                                                                        var fe_nac = $(".i_fnac_h");
-                                                                                        var sexo = $(".i_sexo_h");
-                                                                                        var t_doc = $(".i_tdoc_h");
-                                                                                        var ndoc = $(".i_ndoc_h");
-                                                                                        var essalud = $(".i_essalud_h");
-                                                                                        var es_sup = $(".i_es_sup_h");
+                    var tabla_hijo = $(".tabla-hijo");
+                    var ap_pat = $(".i_app_h");
+                    var ap_mat = $(".i_apm_h");
+                    var nombre = $(".i_no_h");
+                    var fe_nac = $(".i_fnac_h");
+                    var sexo = $(".i_sexo_h");
+                    var t_doc = $(".i_tdoc_h");
+                    var ndoc = $(".i_ndoc_h");
+                    var essalud = $(".i_essalud_h");
+                    var es_sup = $(".i_es_sup_h");
 
-                                                                                        texto_h += ("<tr class='tr-hijo_" + p + "'>");
-                                                                                        texto_h += ('<td ><label class="td-ap_pat' + p + '">' + ap_pat.val() + '</label><input type="hidden" value="' + ap_pat.val() + '" name="APELLIDO_P_H' + p + '" class="ap_p_h_' + p + '"/></td>');
-                                                                                        texto_h += ('<td ><label class="td-ap_mat' + p + '">' + ap_mat.val() + '</label><input type="hidden" value="' + ap_mat.val() + '" name="APELLIDO_M_H' + p + '" class="ap_m_h_' + p + '"/></td>');
-                                                                                        texto_h += ('<td ><label class="td-nom' + p + '">' + nombre.val() + '</label><input type="hidden" value="' + nombre.val() + '" name="NOMBRE_H' + p + '" class="no_h_' + p + '"/></td>');
-                                                                                        texto_h += ('<td ><label class="td-fe_nac' + p + '">' + fe_nac.val() + '</label><input type="hidden" value="' + fe_nac.val() + '" name="FECHA_NAC_H' + p + '" class="fe_n_h_' + p + '"/></td>');
-                                                                                        texto_h += (' <td ><label class="td-sex' + p + '">' + sexo.val() + '</label><input type="hidden" value="' + sexo.val() + '" name="SEXO_H' + p + '" class="sex_h_' + p + '"/></td>');
-                                                                                        texto_h += ('<td ><label class="td-tdoc' + p + '">' + t_doc.val() + '</label><input type="hidden" value="' + t_doc.val() + '" name="TIPO_DOC_ID_H' + p + '" class="ti_doc_h_' + p + '"/></td>');
-                                                                                        texto_h += ('<td ><label class="td-ndoc' + p + '">' + ndoc.val() + '</label><input type="hidden" value="' + ndoc.val() + '" name="NRO_DOC_H' + p + '" class="nu_doc_h_' + p + '"/></td>');
-                                                                                        texto_h += ('<td ><label class="td-essalud' + p + '">' + essalud.val() + '</label><input type="hidden" value="' + essalud.val() + '" name="ESSALUD_H' + p + '" class="essalud_h_' + p + '"/></td>');
-                                                                                        texto_h += ('<td ><label class="td-es_sup' + p + '">' + es_sup.val() + '</label><input type="hidden" value="' + es_sup.val() + '" name="EST_SUP_H' + p + '" class="es_sup_h_' + p + '"/></td>');
-                                                                                        texto_h += ('<td><a href="javascript:void(0);" class="btn btn-danger" onclick="$(\'.tr-hijo_' + p + '\').remove();">Quitar</a> <button class="btn btn-success btn-modificar_' + p + '" href="javascript:void(0);" type="button" value="' + p + '">Modificar</button></td>');
-                                                                                        texto_h += ("</tr>");
-                                                                                        tabla_hijo.append(texto_h);
-                                                                                        // $(".codigo").text(texto_h);
-
-
-                                                                                        ap_pat.val("");
-                                                                                        ap_mat.val("");
-                                                                                        nombre.val("");
-                                                                                        fe_nac.val("");
-                                                                                        sexo.val("");
-                                                                                        t_doc.val("");
-                                                                                        ndoc.val("");
-                                                                                        essalud.val("");
-                                                                                        es_sup.val("");
-
-                                                                                        $(".btn-modificar_" + p).click(function() {
-                                                                                            ap_pat.val($(".ap_p_h_" + $(this).val()).val());
-                                                                                            ap_mat.val($(".ap_m_h_" + $(this).val()).val());
-                                                                                            nombre.val($(".no_h_" + $(this).val()).val());
-                                                                                            fe_nac.val($(".fe_n_h_" + $(this).val()).val());
-                                                                                            sexo.val($(".sex_h_" + $(this).val()).val());
-                                                                                            t_doc.val($(".ti_doc_h_" + $(this).val()).val());
-                                                                                            ndoc.val($(".nu_doc_h_" + $(this).val()).val());
-                                                                                            essalud.val($(".essalud_h_" + $(this).val()).val());
-                                                                                            es_sup.val($(".es_sup_h_" + $(this).val()).val());
-
-                                                                                            $(".btn-reg-hijo").hide();
-                                                                                            $(".btn-mant").append('<button type="button" value="' + $(this).val() + '" class="btn-mod-hijo btn btn-info">Modificar Hijo</button>');
-                                                                                            $(".btn-mod-hijo").click(function() {
-
-                                                                                                $(".ap_p_h_" + $(this).val()).val(ap_pat.val());
-                                                                                                $(".ap_m_h_" + $(this).val()).val(ap_mat.val());
-                                                                                                $(".no_h_" + $(this).val()).val(nombre.val());
-                                                                                                $(".fe_n_h_" + $(this).val()).val(fe_nac.val());
-                                                                                                $(".sex_h_" + $(this).val()).val(sexo.val());
-                                                                                                $(".ti_doc_h_" + $(this).val()).val(t_doc.val());
-                                                                                                $(".nu_doc_h_" + $(this).val()).val(ndoc.val());
-                                                                                                $(".essalud_h_" + $(this).val()).val(essalud.val());
-                                                                                                $(".es_sup_h_" + $(this).val()).val(es_sup.val());
-
-                                                                                                $(".td-ap_pat" + $(this).val()).text(ap_pat.val());
-                                                                                                $(".td-ap_mat" + $(this).val()).text(ap_mat.val());
-                                                                                                $(".td-nom" + $(this).val()).text(nombre.val());
-                                                                                                $(".td-fe_nac" + $(this).val()).text(fe_nac.val());
-                                                                                                $(".td-sex" + $(this).val()).text(sexo.val());
-                                                                                                $(".td-tdoc" + $(this).val()).text(t_doc.val());
-                                                                                                $(".td-ndoc" + $(this).val()).text(ndoc.val());
-                                                                                                $(".td-essalud" + $(this).val()).text(essalud.val());
-                                                                                                $(".td-es_sup" + $(this).val()).text(es_sup.val());
-
-                                                                                                ap_pat.val("");
-                                                                                                ap_mat.val("");
-                                                                                                nombre.val("");
-                                                                                                fe_nac.val("");
-                                                                                                sexo.val("");
-                                                                                                t_doc.val("");
-                                                                                                ndoc.val("");
-                                                                                                essalud.val("");
-                                                                                                es_sup.val("");
-                                                                                                $(".btn-reg-hijo").show();
-                                                                                                $(".btn-mod-hijo").remove();
+                    texto_h += ("<tr class='tr-hijo_" + p + "'>");
+                    texto_h += ('<td ><label class="td-ap_pat' + p + '">' + ap_pat.val() + '</label><input type="hidden" value="' + ap_pat.val() + '" name="APELLIDO_P_H' + p + '" class="ap_p_h_' + p + '"/></td>');
+                    texto_h += ('<td ><label class="td-ap_mat' + p + '">' + ap_mat.val() + '</label><input type="hidden" value="' + ap_mat.val() + '" name="APELLIDO_M_H' + p + '" class="ap_m_h_' + p + '"/></td>');
+                    texto_h += ('<td ><label class="td-nom' + p + '">' + nombre.val() + '</label><input type="hidden" value="' + nombre.val() + '" name="NOMBRE_H' + p + '" class="no_h_' + p + '"/></td>');
+                    texto_h += ('<td ><label class="td-fe_nac' + p + '">' + fe_nac.val() + '</label><input type="hidden" value="' + fe_nac.val() + '" name="FECHA_NAC_H' + p + '" class="fe_n_h_' + p + '"/></td>');
+                    texto_h += (' <td ><label class="td-sex' + p + '">' + sexo.val() + '</label><input type="hidden" value="' + sexo.val() + '" name="SEXO_H' + p + '" class="sex_h_' + p + '"/></td>');
+                    texto_h += ('<td ><label class="td-tdoc' + p + '">' + t_doc.val() + '</label><input type="hidden" value="' + t_doc.val() + '" name="TIPO_DOC_ID_H' + p + '" class="ti_doc_h_' + p + '"/></td>');
+                    texto_h += ('<td ><label class="td-ndoc' + p + '">' + ndoc.val() + '</label><input type="hidden" value="' + ndoc.val() + '" name="NRO_DOC_H' + p + '" class="nu_doc_h_' + p + '"/></td>');
+                    texto_h += ('<td ><label class="td-essalud' + p + '">' + essalud.val() + '</label><input type="hidden" value="' + essalud.val() + '" name="ESSALUD_H' + p + '" class="essalud_h_' + p + '"/></td>');
+                    texto_h += ('<td ><label class="td-es_sup' + p + '">' + es_sup.val() + '</label><input type="hidden" value="' + es_sup.val() + '" name="EST_SUP_H' + p + '" class="es_sup_h_' + p + '"/></td>');
+                    texto_h += ('<td><a href="javascript:void(0);" class="btn btn-danger" onclick="$(\'.tr-hijo_' + p + '\').remove();">Quitar</a> <button class="btn btn-success btn-modificar_' + p + '" href="javascript:void(0);" type="button" value="' + p + '">Modificar</button></td>');
+                    texto_h += ("</tr>");
+                    tabla_hijo.append(texto_h);
+                    // $(".codigo").text(texto_h);
 
 
+                    ap_pat.val("");
+                    ap_mat.val("");
+                    nombre.val("");
+                    fe_nac.val("");
+                    sexo.val("");
+                    t_doc.val("");
+                    ndoc.val("");
+                    essalud.val("");
+                    es_sup.val("");
 
-                                                                                            });
-                                                                                        });
-                                                                                        $(".num_hijo").val(p);
-                                                                                        p++;
-                                                                                        texto_h = "";
+                    $(".btn-modificar_" + p).click(function() {
+                        ap_pat.val($(".ap_p_h_" + $(this).val()).val());
+                        ap_mat.val($(".ap_m_h_" + $(this).val()).val());
+                        nombre.val($(".no_h_" + $(this).val()).val());
+                        fe_nac.val($(".fe_n_h_" + $(this).val()).val());
+                        sexo.val($(".sex_h_" + $(this).val()).val());
+                        t_doc.val($(".ti_doc_h_" + $(this).val()).val());
+                        ndoc.val($(".nu_doc_h_" + $(this).val()).val());
+                        essalud.val($(".essalud_h_" + $(this).val()).val());
+                        es_sup.val($(".es_sup_h_" + $(this).val()).val());
 
-                                                                                    });
-                                                                                });</script>
+                        $(".btn-reg-hijo").hide();
+                        $(".btn-mant").append('<button type="button" value="' + $(this).val() + '" class="btn-mod-hijo btn btn-info">Modificar Hijo</button>');
+                        $(".btn-mod-hijo").click(function() {
+
+                            $(".ap_p_h_" + $(this).val()).val(ap_pat.val());
+                            $(".ap_m_h_" + $(this).val()).val(ap_mat.val());
+                            $(".no_h_" + $(this).val()).val(nombre.val());
+                            $(".fe_n_h_" + $(this).val()).val(fe_nac.val());
+                            $(".sex_h_" + $(this).val()).val(sexo.val());
+                            $(".ti_doc_h_" + $(this).val()).val(t_doc.val());
+                            $(".nu_doc_h_" + $(this).val()).val(ndoc.val());
+                            $(".essalud_h_" + $(this).val()).val(essalud.val());
+                            $(".es_sup_h_" + $(this).val()).val(es_sup.val());
+
+                            $(".td-ap_pat" + $(this).val()).text(ap_pat.val());
+                            $(".td-ap_mat" + $(this).val()).text(ap_mat.val());
+                            $(".td-nom" + $(this).val()).text(nombre.val());
+                            $(".td-fe_nac" + $(this).val()).text(fe_nac.val());
+                            $(".td-sex" + $(this).val()).text(sexo.val());
+                            $(".td-tdoc" + $(this).val()).text(t_doc.val());
+                            $(".td-ndoc" + $(this).val()).text(ndoc.val());
+                            $(".td-essalud" + $(this).val()).text(essalud.val());
+                            $(".td-es_sup" + $(this).val()).text(es_sup.val());
+
+                            ap_pat.val("");
+                            ap_mat.val("");
+                            nombre.val("");
+                            fe_nac.val("");
+                            sexo.val("");
+                            t_doc.val("");
+                            ndoc.val("");
+                            essalud.val("");
+                            es_sup.val("");
+                            $(".btn-reg-hijo").show();
+                            $(".btn-mod-hijo").remove();
+
+
+
+                        });
+                    });
+                    $(".num_hijo").val(p);
+                    p++;
+                    texto_h = "";
+
+                });
+            });</script>
     <script>
         $(document).ready(
                 function() {
