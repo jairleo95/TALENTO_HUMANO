@@ -15,6 +15,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceUbigeoDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Ub_Departamento;
+import pe.edu.upeu.application.model.Ub_Distrito;
 import pe.edu.upeu.application.model.Ub_Provincia;
 import pe.edu.upeu.application.model.V_Ubigeo;
 
@@ -56,8 +57,9 @@ public class UbigeoDAO implements InterfaceUbigeoDAO {
         List<Ub_Provincia> list = new ArrayList<Ub_Provincia>();
         try {
             ResultSet rs = this.conn.query(sql);
-            Ub_Provincia p = new Ub_Provincia();
+            
             while (rs.next()) {
+                Ub_Provincia p = new Ub_Provincia();
                 p.setId_departamento(rs.getString("id_departamento"));
                 p.setId_provincia(rs.getString("id_provincia"));
                 p.setNo_provincia(rs.getString("no_provincia"));
@@ -150,6 +152,27 @@ public class UbigeoDAO implements InterfaceUbigeoDAO {
 
         }
         return lista;
+    }
+
+    @Override
+    public List<Ub_Distrito> List_DistritoTra() {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select * from rhtx_ub_distrito order by no_distrito";
+        List<Ub_Distrito> list = new ArrayList<Ub_Distrito>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Ub_Distrito d = new Ub_Distrito();
+                d.setId_distrito(rs.getString("id_distrito"));
+                d.setNo_distrito(rs.getString("no_distrito"));
+                d.setId_provincia(rs.getString("id_provincia"));
+                list.add(d);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return list;
     }
 
 }

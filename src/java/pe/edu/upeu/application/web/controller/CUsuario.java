@@ -12,11 +12,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import pe.edu.upeu.application.dao.DireccionDAO;
 import pe.edu.upeu.application.dao.EmpleadoDAO;
+import pe.edu.upeu.application.dao.ListaDAO;
 import pe.edu.upeu.application.dao.RolDAO;
+import pe.edu.upeu.application.dao.UbigeoDAO;
 import pe.edu.upeu.application.dao.UsuarioDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceEmpleadoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRolDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceUbigeoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO;
 
 /**
@@ -29,6 +36,9 @@ public class CUsuario extends HttpServlet {
     InterfaceUsuarioDAO usu = new UsuarioDAO();
     InterfaceEmpleadoDAO emp = new EmpleadoDAO();
     InterfaceRolDAO rol = new RolDAO();
+    InterfaceListaDAO li = new ListaDAO();
+    InterfaceUbigeoDAO ub = new UbigeoDAO();
+    InterfaceDireccionDAO dir = new DireccionDAO();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,8 +53,9 @@ public class CUsuario extends HttpServlet {
             throws ServletException, IOException {
         String opc = request.getParameter("opc");
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession sesion_1 = request.getSession();
         PrintWriter out = response.getWriter();
-
+        String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
         if ("Reg_Usuario".equals(opc)) {
             getServletContext().setAttribute("List_Usuario", usu.List_Usuario());
             getServletContext().setAttribute("Listar_Emp", emp.Listar_Emp());
@@ -128,6 +139,46 @@ public class CUsuario extends HttpServlet {
             getServletContext().setAttribute("Lista_Usuarios", usu.Val_Usuario(id));
             response.sendRedirect("Vista/Usuario/Perfil_Usuario.jsp");
 
+        }
+
+        if (opc.equals("editar_Perfil")) {
+
+            out.print(id_user_1);
+            getServletContext().setAttribute("List_Usuario_var", usu.List_Usuario_var_id(id_user_1));
+            getServletContext().setAttribute("List_Usuario_var", usu.List_Usuario_var());
+            getServletContext().setAttribute("List_Nacionalidad", li.List_Nacionalidad());
+            getServletContext().setAttribute("List_Departamento", ub.List_Departamento());
+            getServletContext().setAttribute("Listar_via", dir.Listar_via());
+            getServletContext().setAttribute("Listar_zona", dir.Listar_zona());
+            getServletContext().setAttribute("Lista_Usuarios", usu.Val_Usuario(id_user_1));
+            response.sendRedirect("Vista/Usuario/editarPerfil.jsp");
+        }
+
+        if ("Modificar".equals(opc)) {
+            String NO_USUARIO = request.getParameter("NOMBRE_USUARIO");
+            String CLA_NUEVA = request.getParameter("passwordNew1");
+            String TE_TRABAJADOR = request.getParameter("TEL_USUARIO");
+            String CL_TRABAJADOR = request.getParameter("CEL_USUARIO");
+            String CORREO_PERSONAL = request.getParameter("CORREO_USAURIO");
+            String id_dep = request.getParameter("ID_DEPARTAMENTO");
+            String id_prov = request.getParameter("ID_PROVINCIA");
+            String DIR_DOM_A_DISTRITO_ID = request.getParameter("DIR_DOM_A_DISTRITO_ID");
+            String DIR_DOM_A_D1_ID = request.getParameter("DIR_DOM_A_D1_ID");
+            String DIR_DOM_A_D2 = request.getParameter("DIR_DOM_A_D2");
+            String DIR_DOM_A_D3_ID = request.getParameter("DIR_DOM_A_D3_ID");
+            String DIR_DOM_A_D4 = request.getParameter("DIR_DOM_A_D4");
+            String DIR_DOM_A_D5_ID = request.getParameter("DIR_DOM_A_D5_ID");
+            String DIR_DOM_A_D6 = request.getParameter("DIR_DOM_A_D6");
+            String DIR_DOM_A_REF = request.getParameter("DIR_DOM_A_REF");
+
+            //usu.Mod_perfil(null, NO_USUARIO, PW, TE_TRABAJADOR, CL_TRABAJADOR, CORREO_PERSONAL, VIA, DIR_2, DIR_3, DIR_4, DIR_5, DIR_6,REF,ID_DIST);
+            // getServletContext().setAttribute("ListaridUsuario", usu.List_Usuario_var_id(idus));
+            //response.sendRedirect("Vista/Usuario/editarPerfil.jsp");
+            out.print(NO_USUARIO + CLA_NUEVA + TE_TRABAJADOR + CL_TRABAJADOR + CORREO_PERSONAL + id_user_1);
+            out.print(DIR_DOM_A_D1_ID + DIR_DOM_A_D2 + DIR_DOM_A_D3_ID + DIR_DOM_A_D4 + DIR_DOM_A_D5_ID + DIR_DOM_A_D6 + DIR_DOM_A_REF + DIR_DOM_A_DISTRITO_ID + id_dep + id_prov);
+            usu.Mod_perfil(id_user_1, NO_USUARIO, CLA_NUEVA, TE_TRABAJADOR, CL_TRABAJADOR, CORREO_PERSONAL, id_dep, id_prov, DIR_DOM_A_D1_ID, DIR_DOM_A_D2, DIR_DOM_A_D3_ID, DIR_DOM_A_D4, DIR_DOM_A_D5_ID, DIR_DOM_A_D6, DIR_DOM_A_REF, DIR_DOM_A_DISTRITO_ID);
+            getServletContext().setAttribute("Lista_Usuarios", usu.Val_Usuario(id_user_1));
+            response.sendRedirect("Vista/Usuario/Perfil_Usuario.jsp");
         }
 
     }

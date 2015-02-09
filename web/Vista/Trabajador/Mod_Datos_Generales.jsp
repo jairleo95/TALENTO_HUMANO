@@ -1,4 +1,6 @@
 
+<%@page import="pe.edu.upeu.application.model.Ub_Distrito"%>
+<%@page import="pe.edu.upeu.application.model.Ub_Provincia"%>
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
@@ -15,6 +17,8 @@
 <%@page import="pe.edu.upeu.application.model.Carrera"%>
 <%@page import="pe.edu.upeu.application.model.V_Ubigeo"%>
 <%@page import="pe.edu.upeu.application.model.Nacionalidad"%>
+<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
+
 <%
     HttpSession sesion_1 = request.getSession(true);
     String iddep = (String) sesion_1.getAttribute("DEPARTAMENTO_ID");
@@ -31,6 +35,8 @@
 <jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Nacionalidad" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Departamento" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Provincia" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Distrito" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_tipo_doc" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html lang="en-us">
@@ -451,9 +457,9 @@
                                                                                         if (nac.getNo_nacionalidad().equals(t.getNo_nacionalidad())) {
                                                                                 %>
                                                                                 <option value="<%=nac.getId_nacionalidad()%>" selected="" ><%=nac.getNo_nacionalidad()%></option>
-                                                                                <%}%>
+                                                                                <%}else{%>
                                                                                 <option value="<%=nac.getId_nacionalidad()%>" ><%=nac.getNo_nacionalidad()%></option>
-                                                                                <%
+                                                                                <%}
                                                                                     }%>
                                                                             </select>
                                                                         </div>
@@ -474,12 +480,13 @@
                                                                                 <%for (int d = 0; d < List_Departamento.size(); d++) {
                                                                                         Ub_Departamento dep = new Ub_Departamento();
                                                                                         dep = (Ub_Departamento) List_Departamento.get(d);
-                                                                                        if (dep.getNo_departamento().equals(t.getNo_departamento())) {
+                                                                                       if(dep.getNo_departamento().equals(t.getNo_departamento())){
                                                                                 %>
-                                                                                <option value="<%=dep.getId_departamento()%>" selected="" ><%=dep.getNo_departamento()%></option>
-                                                                                <%}%>
+                                                                                <option value="<%=dep.getId_departamento()%>" selected=""><%=dep.getNo_departamento()%></option>
+                                                                                <%}else{%>
                                                                                 <option value="<%=dep.getId_departamento()%>" ><%=dep.getNo_departamento()%></option>
-                                                                                <%}%>
+                                                                                <%}
+                                                                                }%>
 
                                                                             </select>
                                                                         </div>
@@ -490,9 +497,17 @@
                                                                         <label>Provincia:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select class="form-control input-group-sm" id="pro_nac" name="" id="dist_nac" required="">
+                                                                            <select class="form-control input-group-sm" id="pro_nac" name=""  required="">
                                                                                 <option value="" selected="">[SELECCIONE]</option>
-
+                                                                                <%for (int j = 0; j < List_Provincia.size(); j++) {
+                                                                                        Ub_Provincia pro = new Ub_Provincia();
+                                                                                        pro = (Ub_Provincia) List_Provincia.get(j);
+                                                                                        if(pro.getNo_provincia().trim().equals(t.getNo_provincia())){%>
+                                                                                <option value="<%=pro.getId_provincia()%>" selected=""><%=pro.getNo_provincia()%></option>
+                                                                                <%}else{%>
+                                                                                <option value="<%=pro.getId_provincia()%>" ><%=pro.getNo_provincia()%></option>
+                                                                                <%}
+                                                                                }%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -505,7 +520,16 @@
                                                                             <select class="form-control input-group-sm" name="DISTRITO" id="dist_nac" required="">
                                                                                 <option value="" selected="">[SELECCIONE]</option>
                                                                                 <option value="DST-001832" >EXTRANJERO</option>
-
+                                                                                 <%for (int q = 0; q < List_Distrito.size(); q++) {
+                                                                                        Ub_Distrito dis = new Ub_Distrito();
+                                                                                        dis = (Ub_Distrito) List_Distrito.get(q);
+                                                                                        if(dis.getNo_distrito().trim().equals(t.getNo_distrito())){
+                                                                                 %>
+                                                                                 <option value="<%=dis.getId_distrito()%>" selected=""><%=dis.getNo_distrito()%></option>
+                                                                                <%}else{%>      
+                                                                                <option value="<%=dis.getId_distrito()%>" ><%=dis.getNo_distrito()%></option>
+                                                                                <%}
+                                                                                }%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -527,9 +551,9 @@
                                                                                         Tipo_Documento tdoc = new Tipo_Documento();
                                                                                         tdoc = (Tipo_Documento) Listar_tipo_doc.get(h);
                                                                                         if (t.getTi_doc().trim().equals(tdoc.getId_tipo_doc_ident().trim())) {
-                                                                                    %>
+                                                                                %>
                                                                                 <option value="<%=tdoc.getId_tipo_doc_ident().trim()%>" selected="" ><%=tdoc.getDe_tdoc_abreviada()%></option>
-                                                                                    <%}else{%>
+                                                                                <%} else {%>
                                                                                 <option value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
                                                                                 <%}
                                                                                     }%>
@@ -543,7 +567,7 @@
                                                                         <label>Nro de Documento:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-list-alt fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="NRO_DOC" value="<%=t.getNu_doc() %>" id="doc"  required="" maxlength="10" class="form-control input-group-sm doc" >
+                                                                            <input type="text" name="NRO_DOC" value="<%=t.getNu_doc()%>" id="doc"  required="" maxlength="10" class="form-control input-group-sm doc" >
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -554,42 +578,47 @@
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select id="es_civil" name="ESTADO_CIVIL" class="form-control input-group-sm"  required="">
                                                                                 <option value="">[SELECCIONE]</option>
-                                                                                <%if(t.getEs_civil().trim().equals("1")){%>
+                                                                                <%if (t.getEs_civil().trim().equals("1")) {%>
                                                                                 <option value="1" selected="">Soltero(a)</option>
                                                                                 <option value="2">Casado(a)</option>
                                                                                 <option value="3">Divorciado(a)</option>
                                                                                 <option value="4">Viudo(a)</option>
                                                                                 <option value="5">Separado(a)</option>
                                                                                 <option value="6">Conviviente(a)</option>
-                                                                                <%}if(t.getEs_civil().trim().equals("2")){%>
+                                                                                <%}
+                                                                                    if (t.getEs_civil().trim().equals("2")) {%>
                                                                                 <option value="1">Soltero(a)</option>
                                                                                 <option value="2" selected="">Casado(a)</option>
                                                                                 <option value="3">Divorciado(a)</option>
                                                                                 <option value="4">Viudo(a)</option>
                                                                                 <option value="5">Separado(a)</option>
                                                                                 <option value="6">Conviviente(a)</option>
-                                                                                <%}if(t.getEs_civil().trim().equals("3")){%>
+                                                                                <%}
+                                                                                    if (t.getEs_civil().trim().equals("3")) {%>
                                                                                 <option value="1">Soltero(a)</option>
                                                                                 <option value="2">Casado(a)</option>
                                                                                 <option value="3" selected="">Divorciado(a)</option>
                                                                                 <option value="4">Viudo(a)</option>
                                                                                 <option value="5">Separado(a)</option>
                                                                                 <option value="6">Conviviente(a)</option>
-                                                                                <%}if(t.getEs_civil().trim().equals("4")){%>
+                                                                                <%}
+                                                                                    if (t.getEs_civil().trim().equals("4")) {%>
                                                                                 <option value="1">Soltero(a)</option>
                                                                                 <option value="2">Casado(a)</option>
                                                                                 <option value="3">Divorciado(a)</option>
                                                                                 <option value="4" selected="">Viudo(a)</option>
                                                                                 <option value="5">Separado(a)</option>
                                                                                 <option value="6">Conviviente(a)</option>
-                                                                                <%}if(t.getEs_civil().trim().equals("5")){%>
+                                                                                <%}
+                                                                                    if (t.getEs_civil().trim().equals("5")) {%>
                                                                                 <option value="1">Soltero(a)</option>
                                                                                 <option value="2">Casado(a)</option>
                                                                                 <option value="3">Divorciado(a)</option>
                                                                                 <option value="4">Viudo(a)</option>
                                                                                 <option value="5" selected="">Separado(a)</option>
                                                                                 <option value="6">Conviviente(a)</option>
-                                                                                <%}if(t.getEs_civil().trim().equals("6")){%>
+                                                                                <%}
+                                                                                    if (t.getEs_civil().trim().equals("6")) {%>
                                                                                 <option value="1">Soltero(a)</option>
                                                                                 <option value="2">Casado(a)</option>
                                                                                 <option value="3">Divorciado(a)</option>
@@ -612,22 +641,25 @@
                                                                             <span class="input-group-addon"><i class="fa fa-group fa-lg fa-fw"></i></span>
                                                                             <select name="GRUPO_SANGUINEO" class="form-control input-group-sm"  required="">
                                                                                 <option value="">[SELECCIONE]</option>
-                                                                                <%if(t.getLi_grupo_sanguineo().trim().equals("1") ){%>
+                                                                                <%if (t.getLi_grupo_sanguineo().trim().equals("1")) {%>
                                                                                 <option value="1" selected="">A</option>
                                                                                 <option value="2">B</option>
                                                                                 <option value="3">AB</option>
                                                                                 <option value="4">0</option>
-                                                                                <%}if(t.getLi_grupo_sanguineo().trim().equals("2") ){%>
+                                                                                <%}
+                                                                                    if (t.getLi_grupo_sanguineo().trim().equals("2")) {%>
                                                                                 <option value="1">A</option>
                                                                                 <option value="2" selected="">B</option>
                                                                                 <option value="3">AB</option>
                                                                                 <option value="4">0</option>
-                                                                                <%}if(t.getLi_grupo_sanguineo().trim().equals("3") ){%>
+                                                                                <%}
+                                                                                    if (t.getLi_grupo_sanguineo().trim().equals("3")) {%>
                                                                                 <option value="1">A</option>
                                                                                 <option value="2">B</option>
                                                                                 <option value="3" selected="">AB</option>
                                                                                 <option value="4">0</option>
-                                                                                <%}if(t.getLi_grupo_sanguineo().trim().equals("4") ){%>
+                                                                                <%}
+                                                                                    if (t.getLi_grupo_sanguineo().trim().equals("4")) {%>
                                                                                 <option value="1">A</option>
                                                                                 <option value="2">B</option>
                                                                                 <option value="3">AB</option>
@@ -644,10 +676,11 @@
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select name="FACTOR_RH_ID" class="form-control input-group-sm"  required="">
                                                                                 <option value="">[SELECCIONE]</option>
-                                                                                <%if(t.getEs_factor_rh().trim().equals("1")){%>
+                                                                                <%if (t.getEs_factor_rh().trim().equals("1")) {%>
                                                                                 <option value="1" selected="">Positivo</option>
                                                                                 <option value="2">Negativo</option>
-                                                                                <%}if(t.getEs_factor_rh().trim().equals("2")){%>
+                                                                                <%}
+                                                                                    if (t.getEs_factor_rh().trim().equals("2")) {%>
                                                                                 <option value="1">Positivo</option>
                                                                                 <option value="2" selected="">Negativo</option>
                                                                                 <%}%>
@@ -680,7 +713,7 @@
                                                                         <label>Correo Personal:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-envelope fa-lg fa-fw"></i></span>
-                                                                            <input type="email" name="CORREO_PERSONAL"  value="<%=t.getDi_correo_personal() %>" required=""  maxlength="100" class="form-control input-group-sm" >
+                                                                            <input type="email" name="CORREO_PERSONAL"  value="<%=t.getDi_correo_personal()%>" required=""  maxlength="100" class="form-control input-group-sm" >
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -689,7 +722,7 @@
                                                                         <label>Correo Institucional:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-envelope fa-lg fa-fw"></i></span>
-                                                                            <input type="email" name="CORREO_INST"  value="<%=t.getDi_correo_inst() %>" required=""  maxlength="100" class="form-control input-group-sm" >
+                                                                            <input type="email" name="CORREO_INST"  value="<%=t.getDi_correo_inst()%>" required=""  maxlength="100" class="form-control input-group-sm" >
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -703,9 +736,21 @@
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select name="SISTEMA_PENSIONARIO" class="form-control input-group-sm"  id="sis_pens" required="">
                                                                                 <option value="">[SELECCIONE]</option>
-                                                                                <option value="1">AFP</option>
+                                                                                <%if (t.getCo_sistema_pensionario().trim().equals("1")) {%>
+                                                                                <option value="1" selected="">AFP</option>
                                                                                 <option value="2">ONP</option>
                                                                                 <option value="4">Sin Régimen Provisional(jubilado, cesante).</option>
+                                                                                <%}
+                                                                                    if (t.getCo_sistema_pensionario().trim().equals("2")) {%>
+                                                                                <option value="1">AFP</option>
+                                                                                <option value="2" selected="">ONP</option>
+                                                                                <option value="4">Sin Régimen Provisional(jubilado, cesante).</option>
+                                                                                <%}
+                                                                                    if (t.getCo_sistema_pensionario().trim().equals("4")) {%>
+                                                                                <option value="1">AFP</option>
+                                                                                <option value="2">ONP</option>
+                                                                                <option value="4" selected="">Sin Régimen Provisional(jubilado, cesante).</option>
+                                                                                <%}%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -718,12 +763,54 @@
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select name="NOMBRE_AFP_ID" class="form-control input-group-sm" id="nom_afp" required=""  >
                                                                                 <option value="">[SELECCIONE]</option>
-                                                                                <option value="1">Integra</option>
+                                                                                <%if (t.getId_no_afp().trim().equals("1")) {%>
+                                                                                <option value="1" selected="">Integra</option>
                                                                                 <option value="2">Prima</option>
                                                                                 <option value="3">Profuturo</option>
                                                                                 <option value="4">Horizonte</option>
                                                                                 <option value="5">Habitat</option>
                                                                                 <option value="6">Ninguno</option>
+                                                                                <%}
+                                                                                    if (t.getId_no_afp().trim().equals("2")) {%>
+                                                                                <option value="1">Integra</option>
+                                                                                <option value="2" selected="">Prima</option>
+                                                                                <option value="3">Profuturo</option>
+                                                                                <option value="4">Horizonte</option>
+                                                                                <option value="5">Habitat</option>
+                                                                                <option value="6">Ninguno</option>
+                                                                                <%}
+                                                                                    if (t.getId_no_afp().trim().equals("3")) {%>
+                                                                                <option value="1">Integra</option>
+                                                                                <option value="2">Prima</option>
+                                                                                <option value="3" selected="">Profuturo</option>
+                                                                                <option value="4">Horizonte</option>
+                                                                                <option value="5">Habitat</option>
+                                                                                <option value="6">Ninguno</option>
+                                                                                <%}
+                                                                                    if (t.getId_no_afp().trim().equals("4")) {%>
+                                                                                <option value="1">Integra</option>
+                                                                                <option value="2">Prima</option>
+                                                                                <option value="3">Profuturo</option>
+                                                                                <option value="4" selected="">Horizonte</option>
+                                                                                <option value="5">Habitat</option>
+                                                                                <option value="6">Ninguno</option>
+                                                                                <%}
+                                                                                    if (t.getId_no_afp().trim().equals("5")) {%>
+                                                                                <option value="1">Integra</option>
+                                                                                <option value="2">Prima</option>
+                                                                                <option value="3">Profuturo</option>
+                                                                                <option value="4">Horizonte</option>
+                                                                                <option value="5" selected="">Habitat</option>
+                                                                                <option value="6">Ninguno</option>
+                                                                                <%}
+                                                                                    if (t.getId_no_afp().trim().equals("6")) {%>
+                                                                                <option value="1">Integra</option>
+                                                                                <option value="2">Prima</option>
+                                                                                <option value="3">Profuturo</option>
+                                                                                <option value="4">Horizonte</option>
+                                                                                <option value="5">Habitat</option>
+                                                                                <option value="6" selected="">Ninguno</option>
+                                                                                <%}%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -735,8 +822,14 @@
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select name="AFILIADO_ESSALUD_ID" class="form-control input-group-sm"  required="">
                                                                                 <option value="">[SELECCIONE]</option>
-                                                                                <option value="1">Si</option>
+                                                                                <%if (t.getEs_afiliado_essalud().trim().equals("1")) {%>
+                                                                                <option value="1" selected="">Si</option>
                                                                                 <option value="2">No</option>
+                                                                                <%}
+                                                                                    if (t.getEs_afiliado_essalud().trim().equals("2")) {%>
+                                                                                <option value="1">Si</option>
+                                                                                <option value="2" selected="">No</option>
+                                                                                <%}%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -748,14 +841,28 @@
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select name="TIPO_TRABAJADOR_ID" class="form-control input-group-sm"  required="">
                                                                                 <option value="">[SELECCIONE]</option>
+                                                                                <%if (t.getLi_tipo_trabajador().trim().equals("T")) {%>
                                                                                 <option value="T" selected >Trabajador</option>
                                                                                 <option value="A">Alumno</option>
+                                                                                <%}
+                                                                                    if (t.getLi_tipo_trabajador().trim().equals("A")) {%>
+                                                                                <option value="T">Trabajador</option>
+                                                                                <option value="A" selected="">Alumno</option>
+                                                                                <%}%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <% CConversion c = new CConversion();%>
+                                                            <input type="text" value="<%=t.getFe_nac()%>">                
+                                                            <%String idtr = request.getParameter("idtr");%>
+                                                            <input type="hidden" name="idtr" value="<%=idtr%>"/>
+                                                            <input type="hidden" name="opc" value="Modificar_Dat_Gen">
 
+                                                            <center>
+                                                                <button type="submit" value="" name="opc"> MODIFICAR</button>
+                                                            </center>
 
                                                         </div>
                                                     </div>
@@ -791,90 +898,8 @@
             <!-- END MAIN CONTENT -->
 
         </div>
-    <center>                                                                       <!-- Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                            &times;
-                        </button>
-                        <h4 class="modal-title" id="myModalLabel">Encontrar Conyugue</h4>
-                    </div>
-                    <div class="modal-body">
+    <center>                                                                     
 
-                        <div class="row">
-                            <div id="contenido">
-                                <div >
-
-                                    <form class="form-inline" id="frm_filtro" method="post" name="formulario"  >
-
-                                        <div class="row">
-                                            <div class="form-group" >
-                                                <label class="control-label" >Nombres</label><br>
-                                                <input type="text"  class="form-control"  name="nom" maxlength="80" >
-                                            </div>
-                                            <div class="form-group" >
-                                                <label class="control-label" >Apellido Paterno</label><br>
-                                                <input type="text"  class="form-control"  name="ap_pa" maxlength="80">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group">
-                                                <label class="control-label" >Apellido Materno</label><br>
-                                                <input type="text"  class="form-control"  name="ap_ma" maxlength="80" >
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="control-label" >DNI:</label><br>
-                                                <input type="text"  class="form-control"  onKeyPress="return checkIt(event)"   name="dni" maxlength="8">
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-
-                                            <div class="form-group">                            
-                                                <button type="button" class="btn btn-primary" id="btnfiltrar" >Buscar</button>
-                                            </div>
-                                            <div class="form-group">  
-                                                <a href="javascript:;"  id="btncancel" class="btn btn-primary" >Cancelar</a>
-                                            </div>
-
-                                        </div>
-
-                                    </form>
-
-                                </div> 
-
-                                <hr/>
-
-                                <table  id="data"  >
-                                    <thead class="tab_cabe">
-                                        <tr>
-                                            <td><span title="NOMBRE_AP">Nombres y Apellidos</span></td>
-                                            <td><span  >DNI</span></td>
-                                            <td></td>
-
-                                        </tr>
-                                    </thead>
-
-                                    <tbody class="tbodys">
-                                    </tbody>
-                                </table>
-
-                            </div>
-                        </div>
-
-
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default btn-salir-busc"  data-dismiss="modal">Salir</button>
-
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
         <button  data-toggle="modal" data-target="#myModal" id="btn-mostrar" hidden="">
             Launch demo modal
         </button>
@@ -888,16 +913,16 @@
     <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script>
-                                                    if (!window.jQuery) {
-                                                        document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
-                                                    }
+                                                                                if (!window.jQuery) {
+                                                                                    document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                                                                                }
     </script>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script>
-                                                    if (!window.jQuery.ui) {
-                                                        document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                                                    }
+                                                                                if (!window.jQuery.ui) {
+                                                                                    document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                                                                                }
     </script>
 
     <!-- IMPORTANT: APP CONFIG -->
@@ -960,104 +985,104 @@
     <script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script>$(document).ready(function() {
-                                                        var p = 1;
-                                                        var texto_h = "";
-                                                        $(".btn-reg-hijo").click(function() {
+                                                                                    var p = 1;
+                                                                                    var texto_h = "";
+                                                                                    $(".btn-reg-hijo").click(function() {
 
-                                                            var tabla_hijo = $(".tabla-hijo");
-                                                            var ap_pat = $(".i_app_h");
-                                                            var ap_mat = $(".i_apm_h");
-                                                            var nombre = $(".i_no_h");
-                                                            var fe_nac = $(".i_fnac_h");
-                                                            var sexo = $(".i_sexo_h");
-                                                            var t_doc = $(".i_tdoc_h");
-                                                            var ndoc = $(".i_ndoc_h");
-                                                            var essalud = $(".i_essalud_h");
-                                                            var es_sup = $(".i_es_sup_h");
+                                                                                        var tabla_hijo = $(".tabla-hijo");
+                                                                                        var ap_pat = $(".i_app_h");
+                                                                                        var ap_mat = $(".i_apm_h");
+                                                                                        var nombre = $(".i_no_h");
+                                                                                        var fe_nac = $(".i_fnac_h");
+                                                                                        var sexo = $(".i_sexo_h");
+                                                                                        var t_doc = $(".i_tdoc_h");
+                                                                                        var ndoc = $(".i_ndoc_h");
+                                                                                        var essalud = $(".i_essalud_h");
+                                                                                        var es_sup = $(".i_es_sup_h");
 
-                                                            texto_h += ("<tr class='tr-hijo_" + p + "'>");
-                                                            texto_h += ('<td ><label class="td-ap_pat' + p + '">' + ap_pat.val() + '</label><input type="hidden" value="' + ap_pat.val() + '" name="APELLIDO_P_H' + p + '" class="ap_p_h_' + p + '"/></td>');
-                                                            texto_h += ('<td ><label class="td-ap_mat' + p + '">' + ap_mat.val() + '</label><input type="hidden" value="' + ap_mat.val() + '" name="APELLIDO_M_H' + p + '" class="ap_m_h_' + p + '"/></td>');
-                                                            texto_h += ('<td ><label class="td-nom' + p + '">' + nombre.val() + '</label><input type="hidden" value="' + nombre.val() + '" name="NOMBRE_H' + p + '" class="no_h_' + p + '"/></td>');
-                                                            texto_h += ('<td ><label class="td-fe_nac' + p + '">' + fe_nac.val() + '</label><input type="hidden" value="' + fe_nac.val() + '" name="FECHA_NAC_H' + p + '" class="fe_n_h_' + p + '"/></td>');
-                                                            texto_h += (' <td ><label class="td-sex' + p + '">' + sexo.val() + '</label><input type="hidden" value="' + sexo.val() + '" name="SEXO_H' + p + '" class="sex_h_' + p + '"/></td>');
-                                                            texto_h += ('<td ><label class="td-tdoc' + p + '">' + t_doc.val() + '</label><input type="hidden" value="' + t_doc.val() + '" name="TIPO_DOC_ID_H' + p + '" class="ti_doc_h_' + p + '"/></td>');
-                                                            texto_h += ('<td ><label class="td-ndoc' + p + '">' + ndoc.val() + '</label><input type="hidden" value="' + ndoc.val() + '" name="NRO_DOC_H' + p + '" class="nu_doc_h_' + p + '"/></td>');
-                                                            texto_h += ('<td ><label class="td-essalud' + p + '">' + essalud.val() + '</label><input type="hidden" value="' + essalud.val() + '" name="ESSALUD_H' + p + '" class="essalud_h_' + p + '"/></td>');
-                                                            texto_h += ('<td ><label class="td-es_sup' + p + '">' + es_sup.val() + '</label><input type="hidden" value="' + es_sup.val() + '" name="EST_SUP_H' + p + '" class="es_sup_h_' + p + '"/></td>');
-                                                            texto_h += ('<td><a href="javascript:void(0);" class="btn btn-danger" onclick="$(\'.tr-hijo_' + p + '\').remove();">Quitar</a> <button class="btn btn-success btn-modificar_' + p + '" href="javascript:void(0);" type="button" value="' + p + '">Modificar</button></td>');
-                                                            texto_h += ("</tr>");
-                                                            tabla_hijo.append(texto_h);
-                                                            // $(".codigo").text(texto_h);
-
-
-                                                            ap_pat.val("");
-                                                            ap_mat.val("");
-                                                            nombre.val("");
-                                                            fe_nac.val("");
-                                                            sexo.val("");
-                                                            t_doc.val("");
-                                                            ndoc.val("");
-                                                            essalud.val("");
-                                                            es_sup.val("");
-
-                                                            $(".btn-modificar_" + p).click(function() {
-                                                                ap_pat.val($(".ap_p_h_" + $(this).val()).val());
-                                                                ap_mat.val($(".ap_m_h_" + $(this).val()).val());
-                                                                nombre.val($(".no_h_" + $(this).val()).val());
-                                                                fe_nac.val($(".fe_n_h_" + $(this).val()).val());
-                                                                sexo.val($(".sex_h_" + $(this).val()).val());
-                                                                t_doc.val($(".ti_doc_h_" + $(this).val()).val());
-                                                                ndoc.val($(".nu_doc_h_" + $(this).val()).val());
-                                                                essalud.val($(".essalud_h_" + $(this).val()).val());
-                                                                es_sup.val($(".es_sup_h_" + $(this).val()).val());
-
-                                                                $(".btn-reg-hijo").hide();
-                                                                $(".btn-mant").append('<button type="button" value="' + $(this).val() + '" class="btn-mod-hijo btn btn-info">Modificar Hijo</button>');
-                                                                $(".btn-mod-hijo").click(function() {
-
-                                                                    $(".ap_p_h_" + $(this).val()).val(ap_pat.val());
-                                                                    $(".ap_m_h_" + $(this).val()).val(ap_mat.val());
-                                                                    $(".no_h_" + $(this).val()).val(nombre.val());
-                                                                    $(".fe_n_h_" + $(this).val()).val(fe_nac.val());
-                                                                    $(".sex_h_" + $(this).val()).val(sexo.val());
-                                                                    $(".ti_doc_h_" + $(this).val()).val(t_doc.val());
-                                                                    $(".nu_doc_h_" + $(this).val()).val(ndoc.val());
-                                                                    $(".essalud_h_" + $(this).val()).val(essalud.val());
-                                                                    $(".es_sup_h_" + $(this).val()).val(es_sup.val());
-
-                                                                    $(".td-ap_pat" + $(this).val()).text(ap_pat.val());
-                                                                    $(".td-ap_mat" + $(this).val()).text(ap_mat.val());
-                                                                    $(".td-nom" + $(this).val()).text(nombre.val());
-                                                                    $(".td-fe_nac" + $(this).val()).text(fe_nac.val());
-                                                                    $(".td-sex" + $(this).val()).text(sexo.val());
-                                                                    $(".td-tdoc" + $(this).val()).text(t_doc.val());
-                                                                    $(".td-ndoc" + $(this).val()).text(ndoc.val());
-                                                                    $(".td-essalud" + $(this).val()).text(essalud.val());
-                                                                    $(".td-es_sup" + $(this).val()).text(es_sup.val());
-
-                                                                    ap_pat.val("");
-                                                                    ap_mat.val("");
-                                                                    nombre.val("");
-                                                                    fe_nac.val("");
-                                                                    sexo.val("");
-                                                                    t_doc.val("");
-                                                                    ndoc.val("");
-                                                                    essalud.val("");
-                                                                    es_sup.val("");
-                                                                    $(".btn-reg-hijo").show();
-                                                                    $(".btn-mod-hijo").remove();
+                                                                                        texto_h += ("<tr class='tr-hijo_" + p + "'>");
+                                                                                        texto_h += ('<td ><label class="td-ap_pat' + p + '">' + ap_pat.val() + '</label><input type="hidden" value="' + ap_pat.val() + '" name="APELLIDO_P_H' + p + '" class="ap_p_h_' + p + '"/></td>');
+                                                                                        texto_h += ('<td ><label class="td-ap_mat' + p + '">' + ap_mat.val() + '</label><input type="hidden" value="' + ap_mat.val() + '" name="APELLIDO_M_H' + p + '" class="ap_m_h_' + p + '"/></td>');
+                                                                                        texto_h += ('<td ><label class="td-nom' + p + '">' + nombre.val() + '</label><input type="hidden" value="' + nombre.val() + '" name="NOMBRE_H' + p + '" class="no_h_' + p + '"/></td>');
+                                                                                        texto_h += ('<td ><label class="td-fe_nac' + p + '">' + fe_nac.val() + '</label><input type="hidden" value="' + fe_nac.val() + '" name="FECHA_NAC_H' + p + '" class="fe_n_h_' + p + '"/></td>');
+                                                                                        texto_h += (' <td ><label class="td-sex' + p + '">' + sexo.val() + '</label><input type="hidden" value="' + sexo.val() + '" name="SEXO_H' + p + '" class="sex_h_' + p + '"/></td>');
+                                                                                        texto_h += ('<td ><label class="td-tdoc' + p + '">' + t_doc.val() + '</label><input type="hidden" value="' + t_doc.val() + '" name="TIPO_DOC_ID_H' + p + '" class="ti_doc_h_' + p + '"/></td>');
+                                                                                        texto_h += ('<td ><label class="td-ndoc' + p + '">' + ndoc.val() + '</label><input type="hidden" value="' + ndoc.val() + '" name="NRO_DOC_H' + p + '" class="nu_doc_h_' + p + '"/></td>');
+                                                                                        texto_h += ('<td ><label class="td-essalud' + p + '">' + essalud.val() + '</label><input type="hidden" value="' + essalud.val() + '" name="ESSALUD_H' + p + '" class="essalud_h_' + p + '"/></td>');
+                                                                                        texto_h += ('<td ><label class="td-es_sup' + p + '">' + es_sup.val() + '</label><input type="hidden" value="' + es_sup.val() + '" name="EST_SUP_H' + p + '" class="es_sup_h_' + p + '"/></td>');
+                                                                                        texto_h += ('<td><a href="javascript:void(0);" class="btn btn-danger" onclick="$(\'.tr-hijo_' + p + '\').remove();">Quitar</a> <button class="btn btn-success btn-modificar_' + p + '" href="javascript:void(0);" type="button" value="' + p + '">Modificar</button></td>');
+                                                                                        texto_h += ("</tr>");
+                                                                                        tabla_hijo.append(texto_h);
+                                                                                        // $(".codigo").text(texto_h);
 
 
+                                                                                        ap_pat.val("");
+                                                                                        ap_mat.val("");
+                                                                                        nombre.val("");
+                                                                                        fe_nac.val("");
+                                                                                        sexo.val("");
+                                                                                        t_doc.val("");
+                                                                                        ndoc.val("");
+                                                                                        essalud.val("");
+                                                                                        es_sup.val("");
 
-                                                                });
-                                                            });
-                                                            $(".num_hijo").val(p);
-                                                            p++;
-                                                            texto_h = "";
+                                                                                        $(".btn-modificar_" + p).click(function() {
+                                                                                            ap_pat.val($(".ap_p_h_" + $(this).val()).val());
+                                                                                            ap_mat.val($(".ap_m_h_" + $(this).val()).val());
+                                                                                            nombre.val($(".no_h_" + $(this).val()).val());
+                                                                                            fe_nac.val($(".fe_n_h_" + $(this).val()).val());
+                                                                                            sexo.val($(".sex_h_" + $(this).val()).val());
+                                                                                            t_doc.val($(".ti_doc_h_" + $(this).val()).val());
+                                                                                            ndoc.val($(".nu_doc_h_" + $(this).val()).val());
+                                                                                            essalud.val($(".essalud_h_" + $(this).val()).val());
+                                                                                            es_sup.val($(".es_sup_h_" + $(this).val()).val());
 
-                                                        });
-                                                    });</script>
+                                                                                            $(".btn-reg-hijo").hide();
+                                                                                            $(".btn-mant").append('<button type="button" value="' + $(this).val() + '" class="btn-mod-hijo btn btn-info">Modificar Hijo</button>');
+                                                                                            $(".btn-mod-hijo").click(function() {
+
+                                                                                                $(".ap_p_h_" + $(this).val()).val(ap_pat.val());
+                                                                                                $(".ap_m_h_" + $(this).val()).val(ap_mat.val());
+                                                                                                $(".no_h_" + $(this).val()).val(nombre.val());
+                                                                                                $(".fe_n_h_" + $(this).val()).val(fe_nac.val());
+                                                                                                $(".sex_h_" + $(this).val()).val(sexo.val());
+                                                                                                $(".ti_doc_h_" + $(this).val()).val(t_doc.val());
+                                                                                                $(".nu_doc_h_" + $(this).val()).val(ndoc.val());
+                                                                                                $(".essalud_h_" + $(this).val()).val(essalud.val());
+                                                                                                $(".es_sup_h_" + $(this).val()).val(es_sup.val());
+
+                                                                                                $(".td-ap_pat" + $(this).val()).text(ap_pat.val());
+                                                                                                $(".td-ap_mat" + $(this).val()).text(ap_mat.val());
+                                                                                                $(".td-nom" + $(this).val()).text(nombre.val());
+                                                                                                $(".td-fe_nac" + $(this).val()).text(fe_nac.val());
+                                                                                                $(".td-sex" + $(this).val()).text(sexo.val());
+                                                                                                $(".td-tdoc" + $(this).val()).text(t_doc.val());
+                                                                                                $(".td-ndoc" + $(this).val()).text(ndoc.val());
+                                                                                                $(".td-essalud" + $(this).val()).text(essalud.val());
+                                                                                                $(".td-es_sup" + $(this).val()).text(es_sup.val());
+
+                                                                                                ap_pat.val("");
+                                                                                                ap_mat.val("");
+                                                                                                nombre.val("");
+                                                                                                fe_nac.val("");
+                                                                                                sexo.val("");
+                                                                                                t_doc.val("");
+                                                                                                ndoc.val("");
+                                                                                                essalud.val("");
+                                                                                                es_sup.val("");
+                                                                                                $(".btn-reg-hijo").show();
+                                                                                                $(".btn-mod-hijo").remove();
+
+
+
+                                                                                            });
+                                                                                        });
+                                                                                        $(".num_hijo").val(p);
+                                                                                        p++;
+                                                                                        texto_h = "";
+
+                                                                                    });
+                                                                                });</script>
     <script>
         $(document).ready(
                 function() {

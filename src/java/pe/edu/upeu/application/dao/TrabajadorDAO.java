@@ -555,4 +555,46 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         }
     }
 
+    @Override
+    public void MOD_DAT_GEN( String AP_PATERNO, String AP_MATERNO, String NO_TRABAJADOR, String TI_DOC, String NU_DOC, String ES_CIVIL, String FE_NAC, String ID_NACIONALIDAD, String ID_DEPARTAMENTO, String ID_PROVINCIA, String ID_DISTRITO, String TE_TRABAJADOR, String CL_TRA, String DI_CORREO_PERSONAL, String DI_CORREO_INST, String CO_SISTEMA_PENSIONARIO, String ES_SEXO, String LI_GRUPO_SANGUINEO, String ID_NO_AFP, String ES_AFILIADO_ESSALUD, String LI_TIPO_TRABAJADOR, String ES_FACTOR_RH ,String ID_TRABAJADOR) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_TRA_DET_GEN( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)} ");
+            cst.setString(1,AP_PATERNO );
+            cst.setString(2,AP_MATERNO );
+            cst.setString(3,NO_TRABAJADOR );
+            cst.setString(4,TI_DOC);
+            cst.setString(5,NU_DOC);
+            cst.setString(6,ES_CIVIL );
+            cst.setString(7,c.convertFecha(FE_NAC));
+            cst.setString(8,ID_NACIONALIDAD );
+            cst.setString(9,ID_DEPARTAMENTO );
+            cst.setString(10,ID_PROVINCIA );
+            cst.setString(11,ID_DISTRITO );
+            cst.setString(12, TE_TRABAJADOR);
+            cst.setString(13, CL_TRA);
+            cst.setString(14, DI_CORREO_PERSONAL);
+            cst.setString(15, DI_CORREO_INST);
+            cst.setString(16, CO_SISTEMA_PENSIONARIO);
+            cst.setString(17, ES_SEXO);
+            cst.setString(18, LI_GRUPO_SANGUINEO);
+            cst.setString(19, ID_NO_AFP);
+            cst.setString(20, ES_AFILIADO_ESSALUD);
+            cst.setString(21, LI_TIPO_TRABAJADOR);
+            cst.setString(22, ES_FACTOR_RH);
+            cst.setString(23, ID_TRABAJADOR.trim());
+            cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+    }
+
 }

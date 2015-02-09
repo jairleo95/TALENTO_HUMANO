@@ -422,6 +422,7 @@
                                                 <%} else if (!d.getTi_documento().trim().equals("DNIH") & !d.getTi_documento().trim().equals("DNIC") & !d.getTi_documento().trim().equals("ACMA") & !d.getTi_documento().trim().equals("COFE") & !d.getTi_documento().trim().equals("DOCA")) {
                                                 %>
                                                 <tr>
+                                                          <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
                                                     <td ><strong><%=d.getDocumento()%></strong></td>
 
                                                     <td class="caji<%=(i + 1)%>">
@@ -472,7 +473,7 @@
                                                                 }
                                                             }%>
                                                     </td>
-                                                <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
+                                          
                                                 </tr>  
                                                 <input type="hidden" name="iddgp" value="<%=d.getIddgp()%>">
                                                 <input type="hidden" name="idctr" value="<%=request.getParameter("idctr")%>">

@@ -23,7 +23,7 @@
         <ul>
     <li><a href="Mant_Proceso.jsp"  target="myframe">Procesos</a> </li>
     <li><a href="Mant_Tipo_Requerimiento.jsp"  target="myframe">Requerimiento</a></li>
-    <li><a href="Mant_Paso.jsp"  target="myframe">Pasos</a></li>
+    <li><a href="Prueba_Nestable_List.jsp"  target="myframe">Pasos</a></li>
     <li><a href="Mant_Paso_Puesto.jsp"  target="myframe">Paso - Puesto</a></li>
     <li><a href="Mant_Req_Proceso.jsp"  target="myframe">Requerimiento - Proceso</a></li>
     </ul>
