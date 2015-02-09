@@ -634,4 +634,56 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         return list;
     }
 
+    @Override
+    public void MOD_ASPEC_ACADEM(String LI_NIVEL_EDUCATIVO, String CARRERA, String REGIMEN, String ES_INS_PERU, String DE_ANNO_EGRESO, String CM_OTROS_ESTUDIOS, String CA_TIPO_HORA_PAGO_REFERENCIAL, String ID_TRABAJADOR) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_TRA_ASP_ACAD( ?, ?, ?, ?, ?, ?, ?, ?)} ");
+            cst.setString(1,LI_NIVEL_EDUCATIVO);
+            cst.setString(2,REGIMEN);
+            cst.setString(3,ES_INS_PERU);
+            cst.setString(4,CARRERA);
+            cst.setString(5,DE_ANNO_EGRESO);
+            cst.setString(6,CM_OTROS_ESTUDIOS);
+            cst.setString(7,CA_TIPO_HORA_PAGO_REFERENCIAL);
+            cst.setString(8,ID_TRABAJADOR);
+            cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+    }
+
+    @Override
+    public void MOD_CUENTA_SUELDO(String NO_BANCO, String NU_CUENTA, String NU_CUENTA_BANC, String ES_GEM_NU_CUENTA, String NO_BANCO_OTROS_SP, String ID_TRABAJADOR) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_TRA_CUEN_SUELDO( ?, ?, ?, ?, ?, ?)} ");
+            cst.setString(1,NO_BANCO);
+            cst.setString(2,NU_CUENTA);
+            cst.setString(3,NU_CUENTA_BANC);
+            cst.setString(4,ES_GEM_NU_CUENTA);
+            cst.setString(5,NO_BANCO_OTROS_SP);
+            cst.setString(6,ID_TRABAJADOR);
+            cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+    }
+
 }

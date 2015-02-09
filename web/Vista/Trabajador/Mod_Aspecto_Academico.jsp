@@ -277,7 +277,7 @@
                         }
 
                         //MOSTRAR CUENTA SUELDO PARA MODIFICAR
-                       
+
                     }
             );
         </script>
@@ -602,8 +602,8 @@
                                                                             <%for (int u = 0; u < List_Cuenta_Sueldo.size(); u++) {
                                                                                     Cuenta_Sueldo cs = new Cuenta_Sueldo();
                                                                                     cs = (Cuenta_Sueldo) List_Cuenta_Sueldo.get(u);
-                                                                                   
-                                                                                        if (cs.getNo_banco().trim().equals("0")) {
+
+                                                                                    if (cs.getNo_banco().trim().equals("0")) {
                                                                             %>
                                                                             <option value="0" selected="">Ninguno</option>
                                                                             <option value="1" >BBVA</option>
@@ -631,8 +631,8 @@
                                                                             <option value="2" >BCP</option>
                                                                             <option value="3" selected="">Otros</option>
                                                                             <%}
-                                                                                    
-                                                                                }%>
+
+                                                                            %>
                                                                         </select>
                                                                     </div>
                                                                 </div>
@@ -642,7 +642,7 @@
                                                                     <label>Nombre del Banco:</label>
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
-                                                                        <input class="form-control input-group-sm"   type="text" name="BANCO_OTROS"  id="nu_cuen_otros" maxlength="30"   />
+                                                                        <input class="form-control input-group-sm"  value="<%=cs.getNo_banco_otros()%>" type="text" name="BANCO_OTROS"  id="nu_cuen_otros" maxlength="30"   />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -651,16 +651,16 @@
                                                                     <label>Nro de Cuenta:</label>
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
-                                                                        <input class="form-control input-group-sm" type="text" name="CUENTA"  id="nu_cuen" maxlength="30"   />
+                                                                        <input class="form-control input-group-sm" value="<%=cs.getNu_cuenta()%>" type="text" name="CUENTA"  id="nu_cuen" maxlength="30"   />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-4" id="no_cuen_ban" >
                                                                 <div class="form-group">
-                                                                    <label>nro de Cuenta Bancaria:</label>
+                                                                    <label>Nro de Cuenta Bancaria:</label>
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
-                                                                        <input  class="form-control input-group-sm" type="text" name="CUENTA_BANC" id="nu_cuen_ban">
+                                                                        <input  class="form-control input-group-sm" value="<%=cs.getNu_cuenta_banc()%>" type="text" name="CUENTA_BANC" id="nu_cuen_ban">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -672,11 +672,12 @@
                                                                     </div>
                                                                 </div>
                                                             </div> 
+                                                            <%}%>
                                                             <input type="hidden" value="0" name="ES_CUENTA_SUELDO" id="es_cuenta"/>
 
                                                             <%String idtr = request.getParameter("idtr");%>
                                                             <input type="hidden" name="idtr" value="<%=idtr%>"/>
-                                                            <input type="hidden" name="opc" value="Modificar_Dat_Gen">
+                                                            <input type="hidden" name="opc" value="Modificar_Asp_Acad">
                                                             <footer>
                                                                 <center>
                                                                     <button type="submit" value="" name="opc"> MODIFICAR</button>
@@ -905,11 +906,26 @@
     <script>
         $(document).ready(
                 function() {
-
                     $("#no_cuen").hide();
                     $("#no_cuen_ban").hide();
                     $("#generar").hide();
                     $("#no_cuen_otros").hide();
+                    if ($("#banco").val() == "1") {
+                        $("#no_cuen").show();
+                    }
+                    if ($("#banco").val() == "2") {
+                        $("#no_cuen").show();
+                    }
+                    if ($("#banco").val() == "3") {
+                        $("#no_cuen").show();
+                        $("#no_cuen_ban").show();
+                        $("#no_cuen_otros").show();
+                    }
+                    if ($("#banco").val() == "0") {
+                        $("#generar").show();
+                        $("#no_cuen_otros").show();
+                    }
+
                     //alert($("#es_cuenta").val());
 
                     $(".fecha").keyup(function() {
@@ -1061,7 +1077,8 @@
                 $("#no_cuen_ban").hide();
                 $("#nu_cuen_ban").val("");
                 $("#no_cuen_otros").show();
-                $("#nu_cuen_otros").val("");
+                $("#nu_cuen_otros").val("BBVA Banco Continental");
+                document.getElementById("nu_cuen_otros").disabled = true;
                 $("#generar").show();
                 $("#subscription").attr("required", "required");
                 $("#nu_cuen_otros").attr("required", "required");
