@@ -7,6 +7,7 @@ package pe.edu.upeu.application.dao_imp;
 
 import java.util.List;
 import java.util.Map;
+import pe.edu.upeu.application.model.Datos_Generales;
 
 /**
  *
@@ -15,5 +16,5 @@ import java.util.Map;
 public interface InterfaceReporteDAO {
 
     public List<Map<String,?>> Contrato_Mes();
-    
+    public List<Datos_Generales> Reporte_Datos_Generales();
 }
