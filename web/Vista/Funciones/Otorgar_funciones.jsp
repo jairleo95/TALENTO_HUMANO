@@ -18,7 +18,6 @@
 <jsp:useBean id="List_Area" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="LISTA_RH_SECCION" scope="application" class="java.util.ArrayList"/>
 <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<link href="../../css/Css_Formulario/form.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
 <!DOCTYPE html>
 <html>
@@ -28,34 +27,41 @@
         <style>
             *{
                 margin: auto;
-            }
-            body {
-
+                font-size: 13px;
             }
             .contenedor {
-                margin-top:0;/*lo que quieras poner de margin arriba*/
-                margin-right:25%;
+               margin-top:0;
+                margin-right:5%;
+                margin-left: 5%;
                 margin-bottom:0;
-                text-align:right;  
-            }
-            .text-box{
-                width: 60%;
+                text-align:left;
             }
             .btnotorgar{
                 padding-top: 10px;
                 width: 40%;
             }
+            .form-group{
+                width: 45%;
+            }
             .tabla{
-                text-align:center; 
+                margin-top: 30px;
+                width: 90%;
+                text-align: center;
+            }
+            td{
+                height: 40px;
+            }
+            thead{
+                background: #cccccc;
             }
         </style>
     </head>
     <body>
-        <div class="contenedor">
+        <div class="contenedor form-inline">
 
             <div class="direccion form-group">
                 <label>Direccion</label>
-                <select class="iddi text-box chosen-select">
+                <select class="iddi form-control">
                     <option value="0">-Seleccione-</option>
                     <% for (int i = 0; i < Listar_Direccion.size(); i++) {
                             Direccion d = new Direccion();
@@ -65,10 +71,10 @@
                     <%}%>
                 </select>
             </div>
-
+                
             <div class="departamento form-group">
                 <label>Departamento</label>
-                <select class="idde text-box chosen-select">
+                <select class="idde text-box chosen-select form-control">
                     <option value="0">-Seleccione-</option>
                     <%
                         for (int i = 0; i < List_Departamento.size(); i++) {
@@ -82,7 +88,7 @@
 
             <div class="area form-group">
                 <label>Area</label>
-                <select class="idar text-box chosen-select">
+                <select class="idar text-box chosen-select form-control">
                     <option value="0">-Seleccione-</option>
                     <% for (int i = 0; i < List_Area.size(); i++) {
                             Area a = new Area();
@@ -95,7 +101,7 @@
 
             <div class="seccion form-group">
                 <label>Seccion</label>
-                <select class="idse text-box chosen-select">
+                <select class="idse text-box chosen-select form-control">
                     <option value="0">-Seleccione-</option>
                     <% for (int i = 0; i < LISTA_RH_SECCION.size(); i++) {
                             Seccion s = new Seccion();
@@ -108,7 +114,7 @@
 
             <div class="puestos form-group">
                 <label>Puestos</label>
-                <select class="idpu text-box chosen-select">
+                <select class="idpu text-box chosen-select form-control">
                     <option value="0">-Seleccione-</option>
                     <% for (int i = 0; i < List_Puesto.size(); i++) {
                             Puesto p = new Puesto();
@@ -121,7 +127,7 @@
 
             <div class="funciones form-group">
                 <label>Funciones</label>
-                <select class="ifun text-box chosen-select">
+                <select class="ifun text-box chosen-select form-control">
                     <option value="0">-Seleccione-</option>
                     <%for (int i = 0; i < Listar_funciones.size(); i++) {
                             Funciones f = new Funciones();
@@ -131,28 +137,35 @@
                     <%}%>
                 </select>
             </div>
+            <div class="tipo form-group">
+                <label>Tipo</label>
+                <select class="tifun text-box chosen-select form-control">
+                    <option value="0">-Selelccione-</option>
+                    <option value="1">Principal</option>
+                    <option value="2">Secundaria</option>
+                </select>
+            </div>
         </div>
     <center><button name="opc"  class="btnotorgar btn btn-primary btn-block" value="Otorgar Funcion">Otorgar Funcion</button></center>
-
     <div class="tabla">
-        <table class="table">
+        <table class="table table-bordered table-responsive">
             <thead>
                 <tr>
                     <td>Nro</td>
                     <td>Detalle Funcion</td>
                     <td>Estado</td>
                     <td>Puesto</td>
+                    <td>Tipo</td>
                 </tr>
             </thead>
-            <tbody class="tbodys table-hover">
-                
+            <tbody class="tbodys">
             </tbody>
         </table>
     </div>
 </body>
 <script>
     $(document).ready(function() {
-        var idDireccion, idDep, idArea, idSeccion, idPuesto, idFuncion;
+        var idDireccion, idDep, idArea, idSeccion, tipoFuncion;
         $(".idpu").change(function() {
             listar_tabla();
         });
@@ -205,9 +218,14 @@
                 }
             }
         });
+        $('.tifun').change(function() {
+            if ($(this).val() !== 0) {
+                tipoFuncion = $(this).val();
+            }
+        });
         $(".btnotorgar").click(function() {
             var id_puesto = $(".idpu").val();
-            $.post("../../funcion", "opc=otorgar" + "&id_puesto=" + id_puesto + "&de_funcion=" + $(".ifun").val(), function() {
+            $.post("../../funcion", "opc=otorgar" + "&id_puesto=" + id_puesto + "&de_funcion=" + $(".ifun").val() + "&ti_funcion=" + tipoFuncion, function() {
                 listar_tabla();
             });
 
@@ -223,12 +241,23 @@
                         ap.append("<tr>");
                         ap.append("<td>" + (i + 1) + "</td>");
                         ap.append("<td>" + list[i].nom_fu + "</td>");
-                        ap.append("<td>" + list[i].es_fu + "</td>");
+                        if (list[i].es_fu == 1) {
+                            ap.append("<td>Activa</td>");
+                        } else if (list[i].es_fu == 0) {
+                            ap.append("<td>Desactiva</td>");
+                        }
+                        ;
                         ap.append("<td>" + list[i].no_pu + "</td>");
+                        if (list[i].ti_fu == 1) {
+                            ap.append("<td>Principal</td>");
+                        } else if (list[i].ti_fu == 2) {
+                            ap.append("<td>Secundaria</td>");
+                        }
+                        ;
                         ap.append("</tr>");
                     }
                 } else {
-                    ap.append("<tr><td> Sin ninguna funcion</td></tr>");
+                    $('.body').append("<p class='bg-info'>Sin ninguna funcion</p>");
                 }
             });
         }
