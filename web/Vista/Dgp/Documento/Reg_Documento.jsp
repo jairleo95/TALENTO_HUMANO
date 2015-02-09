@@ -1,3 +1,5 @@
+<%@page import="pe.edu.upeu.application.dao.DocumentoDAO"%>
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
     HttpSession sesion = request.getSession();
@@ -73,6 +75,7 @@
             int n_nac = Integer.parseInt(request.getParameter("n_nac"));
             int num_ad = Integer.parseInt(request.getParameter("num_ad"));
             String id_ctr = "";
+            InterfaceDocumentoDAO doc_ = new DocumentoDAO();
 
             //String id_dgp = "";
         %>
@@ -157,16 +160,17 @@
                                                         <td ><strong><%=d.getDocumento()%></strong></td>
 
                                                         <td class="caji<%=(i + 1)%>">
-                                                            <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007"))) {%>
-                                                            <input type="file" <%if (d.getEs_obligatorio().equals("1")) {
-                                                                    out.println(" required='required' ");
-                                                                }%> name="lob_upload<%=i + 1%>">
+                                                            <% if (d.getId_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007"))) {%>
+                                                            <div class="form-group">
+                                                                <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  <%if (d.getEs_obligatorio().equals("1")) {
+                                                                        out.println(" required='required' ");
+                                                                    }%> name="archivos<%=(i + 1)%>" >
+                                                            </div>
                                                             <% } else { %>
-                                                            <% if (d.getNo_archivo() == null) { %>
+                                                            <% if (d.getId_documento_adjunto() == null) { %>
                                                             <label class="null">No Registrado</label>
                                                             <% } else {%>   
-                                                            <a href="Ver_Doc.jsp?nom_doc=<%=d.getAr_dato_archivo()%>"><%=d.getNo_archivo()%></a>
-
+                                                            ¡mostrar!
                                                             <% }
                                                                 } %>
 
@@ -221,15 +225,17 @@
                                                     <td ><strong><%=d.getDocumento()%></strong></td>
 
                                                     <td class="caji<%=(i + 1)%>">
-                                                        <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
-                                                        <input type="file" <%if (d.getEs_obligatorio().equals("1")) {
-                                                                out.println(" required='required' ");
-                                                            }%> name="lob_upload<%=i + 1%>">
+                                                        <% if (d.getId_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
+                                                        <div class="form-group">
+                                                            <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  <%if (d.getEs_obligatorio().equals("1")) {
+                                                                    out.println(" required='required' ");
+                                                                }%> name="archivos<%=(i + 1)%>" >
+                                                        </div>
                                                         <% } else { %>
-                                                        <% if (d.getNo_archivo() == null) { %>
+                                                        <% if (d.getId_documento_adjunto() == null) { %>
                                                         <label class="null">No Registrado</label>
                                                         <% } else {%>
-                                                        <a href="Ver_Doc.jsp?nom_doc=<%=d.getAr_dato_archivo()%>"><%=d.getNo_archivo()%></a>
+                                                        ¡mostrar!
 
                                                         <% }
                                                             }%>
@@ -296,15 +302,17 @@
                                                         </strong></td>
 
                                                     <td class="caji<%=(i + 1)%>">
-                                                        <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
-                                                        <input type="file" <%if (d.getEs_obligatorio().equals("1")) {
-                                                                out.println(" required='required' ");
-                                                            }%> name="lob_upload<%=i + 1%>">
+                                                        <% if (d.getId_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
+                                                        <div class="form-group">
+                                                            <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  <%if (d.getEs_obligatorio().equals("1")) {
+                                                                    out.println(" required='required' ");
+                                                                }%> name="archivos<%=(i + 1)%>" >
+                                                        </div>
                                                         <% } else { %>
-                                                        <% if (d.getNo_archivo() == null) { %>
+                                                        <% if (d.getId_documento_adjunto() == null) { %>
                                                         <label class="null">No Registrado</label>
                                                         <% } else {%>
-                                                        <a href="Ver_Doc.jsp?nom_doc=<%=d.getAr_dato_archivo()%>"><%=d.getNo_archivo()%></a>
+                                                        ¡mostrar!
 
                                                         <% }
                                                             } %>
@@ -364,15 +372,20 @@
 
 
                                                     <td class="caji<%=(i + 1)%>">
-                                                        <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007"))) {%>
-                                                        <input type="file"  <%if (d.getEs_obligatorio().equals("1")) {
-                                                                out.println(" required='required' ");
-                                                            }%> name="lob_upload<%=i + 1%>">
+                                                        <% if (d.getId_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007"))) {%>
+                                                        <div class="form-group">
+                                                            <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  <%if (d.getEs_obligatorio().equals("1")) {
+                                                                    out.println(" required='required' ");
+                                                                }%> name="archivos<%=(i + 1)%>" >
+                                                        </div>
                                                         <% } else { %>
-                                                        <% if (d.getNo_archivo() == null) { %>
+                                                        <% if (d.getId_documento_adjunto() == null) { %>
                                                         <label class="null">No Registrado</label>
                                                         <% } else {%>
-                                                        <a href="Ver_Doc.jsp?nom_doc=<%=d.getAr_dato_archivo()%>"><%=d.getNo_archivo()%></a>
+                                                        <%
+                                                            out.print(doc_.List_files(d.getId_documento_adjunto().trim()));
+                                                        %>
+
 
                                                         <% }
                                                             } %>
@@ -422,58 +435,67 @@
                                                 <%} else if (!d.getTi_documento().trim().equals("DNIH") & !d.getTi_documento().trim().equals("DNIC") & !d.getTi_documento().trim().equals("ACMA") & !d.getTi_documento().trim().equals("COFE") & !d.getTi_documento().trim().equals("DOCA")) {
                                                 %>
                                                 <tr>
-                                                          <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
-                                                    <td ><strong><%=d.getDocumento()%></strong></td>
+                                                <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
+                                                <td ><strong><%=d.getDocumento()%></strong></td>
 
-                                                    <td class="caji<%=(i + 1)%>">
-                                                        <% if (d.getNo_archivo() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
-                                                        <input type="file" <%if (d.getEs_obligatorio().equals("1")) {
+
+                                                <td class="caji<%=(i + 1)%>">
+                                                    <% if (d.getId_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007"))) {%>
+                                                    <div class="form-group">
+                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  <%if (d.getEs_obligatorio().equals("1")) {
                                                                 out.println(" required='required' ");
-                                                            }%> name="lob_upload<%=i + 1%>">
-                                                        <% } else { %>
-                                                        <% if (d.getNo_archivo() == null) { %>
-                                                        <label class="null">No Registrado</label>
-                                                        <% } else {%>
-                                                        <a href="Ver_Doc.jsp?nom_doc=<%=d.getAr_dato_archivo()%>"><%=d.getNo_archivo()%></a>
-                                                        <% }
-                                                            } %>
-                                                        <div class="form-group">
-                                                            <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#" name="archivos<%=(i+1)%>" >
-                                                        </div>
-                                                    </td>
-                                                    <td >
-                                                        <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007"))) {%>
-                                                        <input type="text"   name="lob_description<%=i + 1%>">
-                                                        <% } else { %>
-                                                        <% if (d.getDe_documento_adjunto() == null) { %>
-                                                        <label class="null" >No Registrado</label>
-                                                        <% } else {%>
-                                                        <label> <%=d.getDe_documento_adjunto()%></label>
+                                                            }%> name="archivos<%=(i + 1)%>" >
+                                                    </div>
 
-                                                        <% } %>
-                                                        <% } %>    
-                                                    </td>
-                                                    <td >
-                                                        <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
-                                                        <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
-                                                            <% } else { %>
-                                                            <% if (d.getEs_documento_adjunto() == null) { %>
+                                                    <% } else { %>
+                                                    <% if (d.getId_documento_adjunto() == null) { %>
+                                                    <label class="null">No Registrado</label>
+                                                    <% } else {%>
+                                                    <%
+                                                        out.print(doc_.List_files(d.getId_documento_adjunto().trim()));
+                                                    %>
 
-                                                        <label class="null">No Registrado</label>
+                                                    <% }
+                                                        } %>
+                                                </td>
+
+
+
+                                                <td >
+                                                    <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007"))) {%>
+                                                    <input type="text"   name="lob_description<%=i + 1%>">
+                                                    <% } else { %>
+
+
+                                                    <% if (d.getDe_documento_adjunto() == null) { %>
+                                                    <label class="null" >No Registrado</label>
+                                                    <% } else {%>
+                                                    <label> <%=d.getDe_documento_adjunto()%></label>
+
+                                                    <% } %>
+                                                    <% } %>    
+                                                </td>
+                                                <td >
+                                                    <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
+                                                    <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                         <% } else { %>
-                                                        <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
-                                                            <img src="Aprobado.png" width="20" height="20">
-                                                            <%
-                                                            } else {
+                                                        <% if (d.getEs_documento_adjunto() == null) { %>
 
-                                                            %>
-                                                            <img src="Desaprobado.png" width="20" height="20">
-                                                        </label>
-                                                        <% }
-                                                                }
-                                                            }%>
-                                                    </td>
-                                          
+                                                    <label class="null">No Registrado</label>
+                                                    <% } else { %>
+                                                    <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
+                                                        <img src="Aprobado.png" width="20" height="20">
+                                                        <%
+                                                        } else {
+
+                                                        %>
+                                                        <img src="Desaprobado.png" width="20" height="20">
+                                                    </label>
+                                                    <% }
+                                                            }
+                                                        }%>
+                                                </td>
+
                                                 </tr>  
                                                 <input type="hidden" name="iddgp" value="<%=d.getIddgp()%>">
                                                 <input type="hidden" name="idctr" value="<%=request.getParameter("idctr")%>">

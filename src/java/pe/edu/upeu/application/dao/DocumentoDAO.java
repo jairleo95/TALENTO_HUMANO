@@ -8,8 +8,11 @@ package pe.edu.upeu.application.dao;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -53,6 +56,35 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
         }
 
         return list;
+    }
+
+    @Override
+    public String List_files(String id) {
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        String texto_html = "";
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select a.NO_FILE,a.NO_ORIGINAL  from RHTV_ARCHIVO_DOCUMENTO a ,  RHTV_DOCUMENTO_ADJUNTO d where d.ID_DOCUMENTO_ADJUNTO = a.ID_DOCUMENTO_ADJUNTO  and  a.id_documento_adjunto='" + id + "' and a.ES_FILE='1'";
+            ResultSet rs = this.conn.query(sql);
+
+            while (rs.next()) {
+
+                texto_html = texto_html + "<img src=\"Archivo/" + rs.getString("NO_FILE") + "\" />";
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return texto_html;
     }
 
     @Override
@@ -183,22 +215,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
 
             while (rs.next()) {
                 V_Reg_Dgp_Tra v = new V_Reg_Dgp_Tra();
-                v.setTi_documento(rs.getString("ti_documento"));
-                v.setEs_obligatorio(rs.getString("es_obligatorio"));
-                v.setId_documento_adjunto(rs.getString("id_documento_adjunto"));
-                v.setId_dgp(rs.getString("id_dgp"));
-                v.setId_documentos(rs.getString("id_documentos"));
-                v.setEs_documento_adjunto(rs.getString("es_documento_adjunto"));
-                v.setUs_creacion(rs.getString("us_creacion"));
-                v.setFe_creacion(rs.getString("fe_creacion"));
-                v.setUs_modif(rs.getString("us_modif"));
-                v.setFe_modif(rs.getString("fe_modif"));
-                v.setIp_usuario(rs.getString("ip_usuario"));
-                v.setDe_documento_adjunto(rs.getString("de_documento_adjunto"));
-                v.setAr_dato_archivo(rs.getString("ar_dato_archivo"));
-                v.setNo_archivo(rs.getString("no_archivo"));
-                v.setTa_archivo(rs.getString("ta_archivo"));
-                v.setAr_file_type(rs.getString("ar_file_type"));
+
                 v.setId_document(rs.getString("id_document"));
                 v.setId_tipo_plani(rs.getString("id_tipo_plani"));
                 v.setId_requerimient(rs.getString("id_requerimient"));
@@ -210,7 +227,6 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
                 v.setFe_hasta(rs.getString("fe_hasta"));
                 v.setCa_sueldo(rs.getDouble("ca_sueldo"));
                 v.setDe_dias_trabajo(rs.getString("de_dias_trabajo"));
-                v.setHorario(rs.getString("horario"));
                 v.setId_puesto(rs.getString("id_puesto"));
                 v.setId_requerimiento(rs.getString("id_requerimiento"));
                 v.setId_trabajador(rs.getString("id_trabajador"));
@@ -224,6 +240,21 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
                 v.setDe_horario_refrigerio(rs.getString("de_horario_refrigerio"));
                 v.setDe_dias_capacitacion(rs.getString("de_dias_capacitacion"));
                 v.setEs_dgp(rs.getString("es_dgp"));
+                v.setTi_documento(rs.getString("ti_documento"));
+                v.setEs_obligatorio(rs.getString("es_obligatorio"));
+                v.setId_documento_adjunto(rs.getString("id_documento_adjunto"));
+                v.setId_documentos(rs.getString("id_documentos"));
+                v.setEs_documento_adjunto(rs.getString("es_documento_adjunto"));
+                v.setUs_creacion(rs.getString("us_creacion"));
+                v.setFe_creacion(rs.getString("fe_creacion"));
+                v.setUs_modif(rs.getString("us_modif"));
+                v.setFe_modif(rs.getString("fe_modif"));
+                v.setIp_usuario(rs.getString("ip_usuario"));
+                v.setDe_documento_adjunto(rs.getString("de_documento_adjunto"));
+                v.setId_contrato(rs.getString("id_contrato"));
+                v.setEs_rec_fisico(rs.getString("es_rec_fisico"));
+                v.setNo_usuario(rs.getString("no_usuario"));
+                v.setId_dgp(rs.getString("id_dgp"));
                 x.add(v);
             }
         } catch (SQLException e) {
@@ -241,31 +272,79 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     }
 
     @Override
-    public void INSERT_DOCUMENTO_ADJUNTO(String ID_DOCUMENTO_ADJUNTO, String ID_DGP, String ID_DOCUMENTOS, String ES_DOCUMENTO_ADJUNTO, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String DE_DOCUMENTO_ADJUNTO, String AR_DATO_ARCHIVO, String NO_ARCHIVO, String TA_ARCHIVO, String AR_FILE_TYPE, String ID_CONTRATO) {
-        ConexionBD conn;
+    public void INSERT_DGP_DOC_ADJ(String ID_DGP_DOC_ADJ, String ID_DGP, String ID_DOCUMENTO_ADJUNTO, String ES_DGP_DOC_ADJ) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DOCUMENTO_ADJUNTO( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DGP_DOC_ADJ( ?, ?, ?, ? )} ");
             cst.setString(1, null);
-            cst.setString(2, ID_DGP);
-            cst.setString(3, ID_DOCUMENTOS);
-            cst.setString(4, ES_DOCUMENTO_ADJUNTO);
-            cst.setString(5, US_CREACION);
-            cst.setString(6, FE_CREACION);
-            cst.setString(7, US_MODIF);
-            cst.setString(8, FE_MODIF);
-            cst.setString(9, IP_USUARIO);
-            cst.setString(10, DE_DOCUMENTO_ADJUNTO);
-            cst.setString(11, AR_DATO_ARCHIVO);
-            cst.setString(12, NO_ARCHIVO);
-            cst.setString(13, TA_ARCHIVO);
-            cst.setString(14, AR_FILE_TYPE);
-            cst.setString(15, ID_CONTRATO);
+            cst.setString(2, ID_DGP.trim());
+            cst.setString(3, ID_DOCUMENTO_ADJUNTO.trim());
+            cst.setString(4, ES_DGP_DOC_ADJ);
             cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
             throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+    }
+
+    @Override
+    public String INSERT_DOCUMENTO_ADJUNTO(String ID_DOCUMENTO_ADJUNTO, String ID_DOCUMENTOS, String ES_DOCUMENTO_ADJUNTO, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String DE_DOCUMENTO_ADJUNTO, String NO_USUARIO, String ES_REC_FISICO, String ID_CONTRATO) {
+
+        String id = "";
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DOCUMENTO_ADJUNTO( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?)}");
+            cst.setString(1, null);
+            cst.setString(2, ID_DOCUMENTOS);
+            cst.setString(3, ES_DOCUMENTO_ADJUNTO);
+            cst.setString(4, US_CREACION);
+            cst.setString(5, FE_CREACION);
+            cst.setString(6, US_MODIF);
+            cst.setString(7, FE_MODIF);
+            cst.setString(8, IP_USUARIO);
+            cst.setString(9, DE_DOCUMENTO_ADJUNTO);
+            cst.setString(10, NO_USUARIO);
+            cst.setString(11, ES_REC_FISICO);
+            cst.setString(12, ID_CONTRATO);
+            cst.registerOutParameter(13, Types.CHAR);
+            cst.execute();
+            id = cst.getString(13);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR :" + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return id;
+    }
+
+    @Override
+    public void INSERT_ARCHIVO_DOCUMENTO(String ID_ARCHIVO_DOCUMENTO, String ID_DOCUMENTO_ADJUNTO, String NO_FILE, String NO_ORIGINAL, String ES_FILE) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_ARCHIVO_DOCUMENTO( ?, ?, ?, ?, ? )} ");
+            cst.setString(1, null);
+            cst.setString(2, ID_DOCUMENTO_ADJUNTO.trim());
+            cst.setString(3, NO_FILE);
+            cst.setString(4, NO_ORIGINAL);
+            cst.setString(5, "1");
+            cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR :" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -286,9 +365,9 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
                 V_Reg_Dgp_Tra d = new V_Reg_Dgp_Tra();
                 d.setTi_documento(rs.getString("ti_documento"));
                 d.setDocumento(rs.getString("documento"));
-                d.setNo_archivo(rs.getString("no_archivo"));
+//                d.setNo_archivo(rs.getString("no_archivo"));
                 d.setEs_obligatorio(rs.getString("es_obligatorio"));
-                d.setAr_dato_archivo(rs.getString("ar_dato_archivo"));
+                //              d.setAr_dato_archivo(rs.getString("ar_dato_archivo"));
                 d.setDe_documento_adjunto(rs.getString("de_documento_adjunto"));
                 d.setEs_documento_adjunto(rs.getString("es_documento_adjunto"));
                 d.setId_document(rs.getString("id_document"));
@@ -306,7 +385,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     @Override
     public int count_documentos(String id_dgp) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT count(*) FROM RHTV_DOCUMENTO_ADJUNTO where ID_DGP='"+id_dgp.trim()+"'";
+        String sql = "SELECT count(*) FROM RHTV_DOCUMENTO_ADJUNTO where ID_DGP='" + id_dgp.trim() + "'";
         int num = 0;
         try {
             ResultSet rs = this.conn.query(sql);

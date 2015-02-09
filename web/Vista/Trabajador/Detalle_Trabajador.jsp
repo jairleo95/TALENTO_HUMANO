@@ -155,7 +155,7 @@
             }
         } else {
         %>
-    <body>
+    <body >
         <%}%>
         <%
 
@@ -564,10 +564,20 @@
         <script type="text/javascript">
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
+function closedthis() {
+                    $.smallBox({
+                        title: "¡Ficha de trabajador registrada correctamente!",
+                        content: "ya puede visualizar toda la informacion del trabajador...",
+                        color: "#739E73",
+                        iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                        timeout: 6000
+                    });
+                }
 
             $(document).ready(function() {
 
                 pageSetUp();
+                
                 $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
                     $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                 });
@@ -680,16 +690,7 @@
                     });
                 })
 
-                function closedthis() {
-                    $.smallBox({
-                        title: "¡Ficha de trabajador registrada correctamente!",
-                        content: "ya puede visualizar toda la informacion del trabajador...",
-                        color: "#739E73",
-                        iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                        timeout: 6000
-                    });
-                }
-
+                
                 /*
                  * SmartAlerts
                  */

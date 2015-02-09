@@ -824,7 +824,7 @@ public class DgpDAO implements InterfaceDgpDAO {
                 cs.setNu_cuenta_banc(rs.getString("nu_cuenta_banc"));
                 cs.setEs_gem_nu_cuenta(rs.getString("es_gem_nu_cuenta"));
                 cs.setNo_banco_otros(rs.getString("no_banco_otros"));
-                cs.setId_trajador(rs.getString("id_trabajador"));
+                cs.setId_trabajador(rs.getString("id_trabajador"));
                 cs.setEs_cuenta_sueldo(rs.getString("es_cuenta_sueldo"));
                 list.add(cs);
             }
