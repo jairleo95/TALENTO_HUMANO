@@ -1,4 +1,5 @@
 
+<%@page import="pe.edu.upeu.application.model.Tipo_Institucion"%>
 <%@page import="pe.edu.upeu.application.model.Ub_Distrito"%>
 <%@page import="pe.edu.upeu.application.model.Ub_Provincia"%>
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
@@ -25,15 +26,17 @@
     String iduser = (String) sesion_1.getAttribute("IDUSER");
 
 %>
-<jsp:useBean id="List_Carrera" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Universidad" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Situacion_Educativa" scope="application" class="java.util.ArrayList"/>
+
+
 <jsp:useBean id="Listar_zona" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_via" scope="application" class="java.util.ArrayList"/>
+
 <jsp:useBean id="list_año" scope="application" class="java.util.ArrayList"/>
-
+<jsp:useBean id="List_tipo_institucion" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Universidad" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
-
+<jsp:useBean id="List_Carrera" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Situacion_Educativa" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html lang="en-us">
     <head>
@@ -183,7 +186,7 @@
                             }
 
                         });
-                        
+
                         $("#es_inst_p").change(function() {
                             if ($("#inst_peru").val() == "1") {
                                 $("#regimen").show();
@@ -243,39 +246,39 @@
 
                                 }
                         );
-                             if ($("#sit_edu").val() == 'SED-0011' | $("#sit_edu").val() == 'SED-0013' | $("#sit_edu").val() == 'SED-0014'
-                                    | $("#sit_edu").val() == 'SED-0015'
-                                    | $("#sit_edu").val() == 'SED-0016' | $("#sit_edu").val() == 'SED-0017'
-                                    | $("#sit_edu").val() == 'SED-0017' | $("#sit_edu").val() == 'SED-0018'
-                                    | $("#sit_edu").val() == 'SED-0019' | $("#sit_edu").val() == 'SED-0020'
-                                    | $("#sit_edu").val() == 'SED-0021') {
+                        if ($("#sit_edu").val() == 'SED-0011' | $("#sit_edu").val() == 'SED-0013' | $("#sit_edu").val() == 'SED-0014'
+                                | $("#sit_edu").val() == 'SED-0015'
+                                | $("#sit_edu").val() == 'SED-0016' | $("#sit_edu").val() == 'SED-0017'
+                                | $("#sit_edu").val() == 'SED-0017' | $("#sit_edu").val() == 'SED-0018'
+                                | $("#sit_edu").val() == 'SED-0019' | $("#sit_edu").val() == 'SED-0020'
+                                | $("#sit_edu").val() == 'SED-0021') {
 
-                                $("#es_inst_p").show();
+                            $("#es_inst_p").show();
 
-                            }else {
-                                $("#es_inst_p").hide();
-                                $("#regimen").hide();
-                                $("#egreso").hide();
-                                $("#ti").hide();
-                                $("#institucion").hide();
-                                $("#carr").hide();
+                        } else {
+                            $("#es_inst_p").hide();
+                            $("#regimen").hide();
+                            $("#egreso").hide();
+                            $("#ti").hide();
+                            $("#institucion").hide();
+                            $("#carr").hide();
 
-                            }
-                            
-                             if ($("#inst_peru").val() == "1") {
-                                $("#regimen").show();
-                                $("#egreso").show();
-                                $("#ti").show();
-                                $("#institucion").show();
-                                $("#carr").show();
-                            } else {
-                                $("#regimen").hide();
-                                $("#egreso").hide();
-                                $("#ti").hide();
-                                $("#institucion").hide();
-                                $("#carr").hide();
+                        }
 
-                            }
+                        if ($("#inst_peru").val() == "1") {
+                            $("#regimen").show();
+                            $("#egreso").show();
+                            $("#ti").show();
+                            $("#institucion").show();
+                            $("#carr").show();
+                        } else {
+                            $("#regimen").hide();
+                            $("#egreso").hide();
+                            $("#ti").hide();
+                            $("#institucion").hide();
+                            $("#carr").hide();
+
+                        }
                     }
             );
         </script>
@@ -424,13 +427,13 @@
                                                                                 <%} else {%>
                                                                                 <option value="<%=e.getId_situacion_educativa()%>"><%=e.getNo_s_educativa()%></option>
                                                                                 <%}
-                                                                                } %>
+                                                                                    }%>
                                                                             </select>
                                                                            <!-- <input type="text" value="<%=t.getId_situacion_educativa()%>">-->
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                
+
                                                                 <div class="col-sm-4" id="es_inst_p"style="display: none">
                                                                     <div class="form-group">
                                                                         <label>¿Estudio en una institucion educativa del Perú?</label>
@@ -438,10 +441,11 @@
                                                                             <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
                                                                             <select class="form-control input-group-sm" id="inst_peru" name="ES_INST_PERU" required>
                                                                                 <option value="" selected="selected" >[SELECCIONE]</option>
-                                                                                <%if(t.getEs_inst_educ_peru().trim().equals("1")){%>
+                                                                                <%if (t.getEs_inst_educ_peru().trim().equals("1")) {%>
                                                                                 <option value="1" selected="">Si</option>
                                                                                 <option value="2">No</option>
-                                                                                <%}if(t.getEs_inst_educ_peru().trim().equals("2")){%>
+                                                                                <%}
+                                                                                    if (t.getEs_inst_educ_peru().trim().equals("2")) {%>
                                                                                 <option value="1">Si</option>
                                                                                 <option value="2" selected="">No</option>
                                                                                 <%}%>
@@ -456,10 +460,11 @@
                                                                             <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
                                                                             <select class="form-control input-group-sm" id="rg" name="REGIMEN" required>
                                                                                 <option value="" selected="selected">[SELECCIONE]</option>
-                                                                                <%if(t.getLi_reg_inst_educativa().trim().equals("1")){%>
+                                                                                <%if (t.getLi_reg_inst_educativa().trim().equals("1")) {%>
                                                                                 <option value="1" selected="">Publica</option>
                                                                                 <option value="2">Privada</option>
-                                                                                <%}if(t.getLi_reg_inst_educativa().trim().equals("2")){%>
+                                                                                <%}
+                                                                                    if (t.getLi_reg_inst_educativa().trim().equals("2")) {%>
                                                                                 <option value="1">Publica</option>
                                                                                 <option value="2" selected="">Privada</option>
                                                                                 <%}%>
@@ -476,7 +481,12 @@
                                                                             <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
                                                                             <select class="form-control input-group-sm" id="ti_inst"  required>
                                                                                 <option value="" selected="selected">[SELECCIONE]</option>
-                                                                                
+                                                                                <%for (int r = 0; r < List_tipo_institucion.size(); r++) {
+                                                                                        Tipo_Institucion ti = new Tipo_Institucion();
+                                                                                        ti = (Tipo_Institucion) List_tipo_institucion.get(r);
+                                                                                %>
+                                                                                <option  value="<%=ti.getId_tipo_institucion()%>"><%=ti.getNo_tipo_institucion()%></option>
+                                                                                <%}%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -488,6 +498,16 @@
                                                                             <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
                                                                             <select class="form-control input-group-sm" id="inst"  required>
                                                                                 <option value="" selected="selected">[SELECCIONE]</option>
+                                                                                <%for (int w = 0; w < List_Universidad.size(); w++) {
+                                                                                        Universidad u = new Universidad();
+                                                                                        u = (Universidad) List_Universidad.get(w);
+                                                                                if(u.getNo_universidad().trim().equals(t.getNo_universidad().trim())){
+                                                                                %>
+                                                                                <option value="<%=u.getId_universidad()%>" selected=""><%=u.getNo_universidad()%></option>
+                                                                                <%}else{%>
+                                                                                <option value="<%=u.getId_universidad() %>"><%=u.getNo_universidad() %></option>
+                                                                                <%}
+                                                                                    }%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -498,7 +518,17 @@
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
                                                                             <select class="form-control input-group-sm" id="carrera" name="CARRERA" required>
-                                                                                <option value="" selected="selected">[SELECCIONE]</option>
+                                                                                <option value="" >[SELECCIONE]</option>
+                                                                                <% for (int q = 0; q < List_Carrera.size(); q++) {
+                                                                                        Carrera c = new Carrera();
+                                                                                        c = (Carrera) List_Carrera.get(q);
+                                                                                        if (c.getNo_carrera().trim().equals(t.getNo_carrera().trim())) {
+                                                                                %>
+                                                                                <option value="<%=c.getId_carrera()%>" selected="" > <%=c.getNo_carrera()%></option>
+                                                                                <%} else {%>
+                                                                                <option value="<%=c.getId_carrera()%>" > <%=c.getNo_carrera()%></option>
+                                                                                <%}
+                                                                                   }%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -510,20 +540,24 @@
                                                                             <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
                                                                             <select    name="A_EGRESO" class="form-control input-group-sm" required="" >
                                                                                 <option value="">[SELECCIONE]</option>
-                                                                                <% for (int jj = 0; jj < list_año.size(); jj++) {%>
+                                                                                <% for (int jj = 0; jj < list_año.size(); jj++) {
+                                                                                    if(t.getDe_anno_egreso().trim().equals(list_año.get(jj))){;
+                                                                                %>
+                                                                                <option value="<%=list_año.get(jj)%>" selected=""><%=list_año.get(jj)%></option>
+                                                                                <%}else{%>
                                                                                 <option value="<%=list_año.get(jj)%>"><%=list_año.get(jj)%></option>
-                                                                                <%}%>
+                                                                                <%}}%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                
+
                                                                 <div class="col-sm-4">   
                                                                     <div class="form-group">
                                                                         <label>Tipo Hora Pago Referencial:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-money fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm" value="0"   type="text" name="TIPO_HORA_PAGO_REFEERENCIAL" maxlength="6">
+                                                                            <input class="form-control input-group-sm" value="<%=t.getCa_tipo_hora_pago_refeerencial()%>"   type="text" name="TIPO_HORA_PAGO_REFEERENCIAL" maxlength="6">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -537,7 +571,7 @@
                                                                         <label>Otros Estudios:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-align-justify fa-lg fa-fw"></i></span>
-                                                                            <textarea name="OTROS_ESTUDIOS"   class="form-control input-group-sm" class="text-box" cols="60" rows="6" maxlength="500"></textarea>
+                                                                            <textarea name="OTROS_ESTUDIOS"  class="form-control input-group-sm" class="text-box" cols="60" rows="6" maxlength="500"><%=t.getCm_otros_estudios() %></textarea>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1540,7 +1574,10 @@
 </body>
 
 </html>
-<%} else {
+<%}
+
+    
+        else {
         response.sendRedirect("/TALENTO_HUMANO/");
     }
 

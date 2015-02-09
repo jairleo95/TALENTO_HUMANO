@@ -331,6 +331,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 v.setId_universidad_carrera(rs.getString("id_universidad_carrera"));
                 v.setId_nacionalidad(rs.getString("id_nacionalidad"));
                 v.setDistrito_nac(rs.getString("distrito_nac"));
+                v.setDe_anno_egreso(rs.getString("de_anno_egreso"));
                 list.add(v);
             }
 

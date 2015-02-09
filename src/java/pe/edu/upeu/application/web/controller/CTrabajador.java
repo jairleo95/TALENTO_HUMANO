@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import pe.edu.upeu.application.dao.Carrera_UniversidadDAO;
 import pe.edu.upeu.application.dao.Centro_CostoDAO;
 import pe.edu.upeu.application.dao.ContratoDAO;
 import pe.edu.upeu.application.dao.Datos_Hijo_TrabajadorDAO;
@@ -28,6 +29,7 @@ import pe.edu.upeu.application.dao.Padre_Madre_ConyugueDAO;
 import pe.edu.upeu.application.dao.Tipo_DocumentoDAO;
 import pe.edu.upeu.application.dao.TrabajadorDAO;
 import pe.edu.upeu.application.dao.UbigeoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceCarrera_UniversidadDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceCentro_CostosDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceContratoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDatos_Hijo_Trabajador;
@@ -40,7 +42,6 @@ import pe.edu.upeu.application.dao_imp.InterfacePadre_Madre_ConyugueDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTipo_DocumentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUbigeoDAO;
-
 
 /**
  *
@@ -78,6 +79,7 @@ public class CTrabajador extends HttpServlet {
         InterfaceCentro_CostosDAO cc = new Centro_CostoDAO();
         InterfaceTipo_DocumentoDAO tdoc = new Tipo_DocumentoDAO();
         InterfaceContratoDAO con = new ContratoDAO();
+        InterfaceCarrera_UniversidadDAO cu = new  Carrera_UniversidadDAO();
         String opc = "";
         String Text = "";
         opc = (String) request.getParameter("opc");
@@ -362,21 +364,26 @@ public class CTrabajador extends HttpServlet {
             String CL_TRA = request.getParameter("CELULAR");
             String DI_CORREO_PERSONAL = request.getParameter("CORREO_PERSONAL");
             String DI_CORREO_INST = request.getParameter("CORREO_INST");
-            String CO_SISTEMA_PENSIONARIO = request.getParameter("SISTEMA_PENSIONARIO");            
+            String CO_SISTEMA_PENSIONARIO = request.getParameter("SISTEMA_PENSIONARIO");
             String ID_NO_AFP = request.getParameter("NOMBRE_AFP_ID");
             String ES_AFILIADO_ESSALUD = request.getParameter("AFILIADO_ESSALUD_ID");
-            String LI_TIPO_TRABAJADOR = request.getParameter("TIPO_TRABAJADOR_ID");        
+            String LI_TIPO_TRABAJADOR = request.getParameter("TIPO_TRABAJADOR_ID");
             String idtr = request.getParameter("idtr");
 
             tr.MOD_DAT_GEN(AP_PATERNO, AP_MATERNO, NO_TRABAJADOR, TI_DOC, NU_DOC, ES_CIVIL, FE_NAC, ID_NACIONALIDAD, ID_DEPARTAMENTO, ID_PROVINCIA, ID_DISTRITO, TE_TRABAJADOR, CL_TRA, DI_CORREO_PERSONAL, DI_CORREO_INST, CO_SISTEMA_PENSIONARIO, ES_SEXO, LI_GRUPO_SANGUINEO, ID_NO_AFP, ES_AFILIADO_ESSALUD, LI_TIPO_TRABAJADOR, ES_FACTOR_RH, idtr);
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-           
+
             response.sendRedirect("Vista/Trabajador/Datos_Generales.jsp?idtr=" + idtr);
         }
         if (opc.equals("Editar_Asp_Acad")) {
-        String idtr = request.getParameter("idtr");
-        getServletContext().setAttribute("List_Situacion_Educativa", li.List_Situacion_Educativa());    
-        response.sendRedirect("Vista/Trabajador/Mod_Aspecto_Academico.jsp?idtr=" + idtr);
+            String idtr = request.getParameter("idtr");
+            
+            getServletContext().setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
+            getServletContext().setAttribute("list_año", li.lista_años());
+            getServletContext().setAttribute("List_Universidad", li.List_Universidad());
+            getServletContext().setAttribute("List_Carrera", li.List_Carrera());
+            getServletContext().setAttribute("List_Situacion_Educativa", li.List_Situacion_Educativa());
+            response.sendRedirect("Vista/Trabajador/Mod_Aspecto_Academico.jsp?idtr=" + idtr);
         }
     }
 
