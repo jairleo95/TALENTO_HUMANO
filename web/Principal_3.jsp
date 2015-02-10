@@ -359,6 +359,10 @@
 
                             </li>
                             <li>
+                                <a href="Vista/Academico/Carga_Academica/Rep_Carga_Academica.jsp" target="myframe"><i class="fa fa-lg fa-fw fa-file"></i>Carga Academica <span class="badge pull-right inbox-badge bg-color-blue">¡Nuevo!</span></a>
+
+                            </li>
+                            <li>
                                 <a href="#"><i class="fa fa-lg fa-fw fa-file"></i>Anulación de Requerimiento</a>
                                 <ul>
                                     <li>
@@ -381,7 +385,7 @@
 
                     <li>
                         <a href="<%=dp.getDi_url()%>" target="myframe" title="<%=dp.getNo_link()%>"><i class="<%=dp.getIc_link().trim()%>"></i> <span class="menu-item-parent"><%=dp.getNo_link()%></span></a>
-                   
+
                     </li>
                     <%}
                         }%>
@@ -411,7 +415,7 @@
 
                 <!-- breadcrumb -->
                 <ol class="breadcrumb">
-                    <li><%out.println("DEPARTAMENTO DE  " + ((String) sesion.getAttribute("DEPARTAMENTO")).toUpperCase() + " / AREA DE " + ((String) sesion.getAttribute("AREA")).toUpperCase() + " / SECCION DE " + ((String) sesion.getAttribute("SECCION")).toUpperCase() + " / PUESTO DE " + ((String) sesion.getAttribute("PUESTO")).toUpperCase()); %></li>
+                    <li><%out.println("DEPARTAMENTO DE  " + ((String) sesion.getAttribute("DEPARTAMENTO")).toUpperCase() + " / AREA DE " + ((String) sesion.getAttribute("AREA")).toUpperCase() + " / SECCION DE " + ((String) sesion.getAttribute("SECCION")).toUpperCase() + " / PUESTO DE " + ((String) sesion.getAttribute("PUESTO")).toUpperCase());%></li>
                 </ol>
                 <!-- end breadcrumb -->
 
@@ -555,7 +559,7 @@
                     <a href="#gallery.html" class="jarvismetro-tile big-cubes bg-color-greenLight"> <span class="iconbox"> <i class="fa fa-picture-o fa-4x"></i> <span>Galeria </span> </span> </a>
                 </li>
                 <li>
-                    <a href="Usuario?opc=Ver_Perfil&id=<%=(String)sesion.getAttribute("IDUSER")%>" target="myframe" title="SS" class="jarvismetro-tile big-cubes selected bg-color-pinkDark"  > <span class="iconbox"> <i class="fa fa-user fa-4x"></i> <span>Mi Perfil </span> </span> </a>
+                    <a href="Usuario?opc=Ver_Perfil&id=<%=(String) sesion.getAttribute("IDUSER")%>" target="myframe" title="SS" class="jarvismetro-tile big-cubes selected bg-color-pinkDark"  > <span class="iconbox"> <i class="fa fa-user fa-4x"></i> <span>Mi Perfil </span> </span> </a>
                 </li>
             </ul>
         </div>

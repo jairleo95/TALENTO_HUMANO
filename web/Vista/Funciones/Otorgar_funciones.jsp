@@ -30,18 +30,20 @@
                 font-size: 13px;
             }
             .contenedor {
-               margin-top:0;
-                margin-right:5%;
-                margin-left: 5%;
-                margin-bottom:0;
+                margin-right:20%;
+                margin-left: 20%;
+                margin-bottom:10px;
                 text-align:left;
+                padding-left: 10px;
+                padding-right: 10px;
+                padding-bottom: 10px;
             }
             .btnotorgar{
                 padding-top: 10px;
                 width: 40%;
             }
-            .form-group{
-                width: 45%;
+            select{
+                width: 100px;;
             }
             .tabla{
                 margin-top: 30px;
@@ -57,8 +59,7 @@
         </style>
     </head>
     <body>
-        <div class="contenedor form-inline">
-
+        <div class="contenedor">
             <div class="direccion form-group">
                 <label>Direccion</label>
                 <select class="iddi form-control">
@@ -71,7 +72,7 @@
                     <%}%>
                 </select>
             </div>
-                
+
             <div class="departamento form-group">
                 <label>Departamento</label>
                 <select class="idde text-box chosen-select form-control">
@@ -127,7 +128,7 @@
 
             <div class="funciones form-group">
                 <label>Funciones</label>
-                <select class="ifun text-box chosen-select form-control">
+                <%--<select class="ifun text-box chosen-select form-control">
                     <option value="0">-Seleccione-</option>
                     <%for (int i = 0; i < Listar_funciones.size(); i++) {
                             Funciones f = new Funciones();
@@ -135,7 +136,8 @@
                     %>
                     <option class="optlist" value="<%=f.getDe_funcion()%>"><%=f.getDe_funcion()%></option>
                     <%}%>
-                </select>
+                </select>--%>
+                <input type="text" class=" ifun form-control" placeholder="Nombre de la Funcion" required="">
             </div>
             <div class="tipo form-group">
                 <label>Tipo</label>
@@ -145,7 +147,9 @@
                     <option value="2">Secundaria</option>
                 </select>
             </div>
+            <div class="alerta alert alert-danger" role="alert"><strong class="msg"></strong></div>     
         </div>
+
     <center><button name="opc"  class="btnotorgar btn btn-primary btn-block" value="Otorgar Funcion">Otorgar Funcion</button></center>
     <div class="tabla">
         <table class="table table-bordered table-responsive">
@@ -164,12 +168,15 @@
     </div>
 </body>
 <script>
+    $('.alerta').hide();
     $(document).ready(function() {
         var idDireccion, idDep, idArea, idSeccion, tipoFuncion;
+        var validar = false;
         $(".idpu").change(function() {
             listar_tabla();
         });
         $(".iddi").change(function() {
+            $('.idde').val(0);
             idDireccion = $(this).val();
             var a = $(".idde option");
             for (var i = 0; i < a.size(); i++) {
@@ -180,7 +187,11 @@
                     $(".dep" + i).show();
                 }
             }
-
+            $('.idde').val(0);
+            $('.idar').val(0);
+            $('.idse').val(0);
+            $('.idpu').val(0);
+            validar_dir();
         });
         $(".idde").change(function() {
             idDep = $(this).val();
@@ -193,6 +204,11 @@
                     $(".area" + i).show();
                 }
             }
+            $('.idar').val(0);
+            $('.idse').val(0);
+            $('.idpu').val(0);
+            validar_dep();
+            validar_dir();
         });
         $(".idar").change(function() {
             idArea = $(this).val();
@@ -205,6 +221,10 @@
                     $(".sec" + i).show();
                 }
             }
+            $('.idse').val(0);
+            $('.idpu').val(0);
+            validar_ar();
+            validar_dep();
         });
         $(".idse").change(function() {
             idSeccion = $(this).val();
@@ -217,18 +237,47 @@
                     $(".puest" + i).show();
                 }
             }
+            $('.idpu').val(0);
+            validar_sec();
+            validar_ar();
+        });
+        $('.idpu').change(function() {
+            validar_pu();
+            validar_sec();
+        });
+        $('.ifun').change(function() {
+            validar_fun();
+            validar_pu();
         });
         $('.tifun').change(function() {
             if ($(this).val() !== 0) {
                 tipoFuncion = $(this).val();
             }
+            if ($(this).val() == 0) {
+                $('.alerta').show();
+                $('.msg').text('Seleccionar Tipo !')
+            } else {
+                $('.alerta').hide();
+            }
         });
         $(".btnotorgar").click(function() {
-            var id_puesto = $(".idpu").val();
-            $.post("../../funcion", "opc=otorgar" + "&id_puesto=" + id_puesto + "&de_funcion=" + $(".ifun").val() + "&ti_funcion=" + tipoFuncion, function() {
-                listar_tabla();
-            });
-
+            if (validar_dir() == true && validar_dep() == true && validar_ar() == true && validar_sec() == true && validar_pu() == true && validar_fun() == true && validar_tip() == true) {
+                var id_puesto = $(".idpu").val();
+                alert(id_puesto+$(".ifun").val()+tipoFuncion);
+                $.post("../../funcion", "opc=otorgar" + "&id_puesto=" + id_puesto + "&de_funcion=" + $(".ifun").val() + "&ti_funcion=" + tipoFuncion, function() {
+                    listar_tabla();
+                    $('.iddi').val(0);
+                    $('.idde').val(0);
+                    $('.idar').val(0);
+                    $('.idse').val(0);
+                    $('.idpu').val(0);
+                    $('.tifun').val(0);
+                    $('.ifun').val("");
+                });
+            } else {
+                $('.alerta').show();
+                $('.msg').text('Falta seleccionar algunos Elementos !')
+            }
         });
         function listar_tabla() {
             var id_puesto = $(".idpu").val();
@@ -261,7 +310,68 @@
                 }
             });
         }
-
+        function validar_dir() {
+            if ($('.iddi').val() == 0) {
+                $('.alerta').show();
+                $('.msg').text('Seleccionar Direccion !')
+                return false;
+            } else {
+                $('.alerta').hide();
+                return true;
+            }
+        }
+        function validar_dep() {
+            if ($('.idde').val() == 0) {
+                $('.alerta').show();
+                $('.msg').text('Seleccionar Departamento !')
+                return false;
+            } else {
+                $('.alerta').hide();
+                return true;
+            }
+        }
+        function validar_ar() {
+            if ($('.idar').val() == 0) {
+                $('.alerta').show();
+                $('.msg').text('Seleccionar Area !')
+                return false;
+            } else {
+                $('.alerta').hide();
+                return true;
+            }
+        }
+        function validar_sec() {
+            if ($('.idse').val() == 0) {
+                $('.alerta').show();
+                $('.msg').text('Seleccionar Seccion !')
+            } else {
+                $('.alerta').hide();
+            }
+        }
+        function validar_pu() {
+            if ($('.idpu').val() == 0) {
+                $('.alerta').show();
+                $('.msg').text('Seleccionar Puesto !')
+            } else {
+                $('.alerta').hide();
+            }
+        }
+        function validar_tip() {
+            if ($('.tifun').val() == 0) {
+                $('.alerta').show();
+                $('.msg').text('Seleccionar Tipo !')
+            } else {
+                $('.alerta').hide();
+            }
+        }
+        function validar_fun() {
+            if ($('.ifun').val() == "") {
+                $('.alerta').show();
+                $('.msg').text('Escribir Funcion !')
+            } else {
+                $('.alerta').hide();
+            }
+        }
     });
 </script>
 </html>
