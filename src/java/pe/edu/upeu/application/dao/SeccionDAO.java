@@ -169,5 +169,25 @@ public class SeccionDAO implements InterfaceSeccionDAO{
         }
         return lista;
     }
+
+    @Override
+    public List<Seccion> LISTA_RH_SECCION_LIMA() {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT NO_SECCION FROM RHVD_PUESTO_DIRECCION where ID_DIRECCION='DIR-0002' OR ID_DIRECCION='DIR-0001' OR ID_DIRECCION='DIR-0003' OR ID_DIRECCION='DIR-0004' GROUP BY NO_SECCION ORDER by NO_SECCION";
+        List<Seccion> list = new ArrayList<Seccion>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+          
+            while (rs.next()) {
+                  Seccion n = new Seccion();
+                n.setNo_seccion(rs.getString("NO_SECCION"));
+                list.add(n);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return list;
+    }
     
 }

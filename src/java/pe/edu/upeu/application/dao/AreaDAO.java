@@ -155,5 +155,25 @@ public class AreaDAO implements InterfaceAreaDAO {
         return lista;
     }
 
+    @Override
+    public List<Area> List_Area_Lima() {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT NO_AREA FROM RHVD_PUESTO_DIRECCION where ID_DIRECCION='DIR-0002' OR ID_DIRECCION='DIR-0001' OR ID_DIRECCION='DIR-0003' OR ID_DIRECCION='DIR-0004' GROUP BY NO_AREA ORDER by NO_AREA";
+        List<Area> list = new ArrayList<Area>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+
+            while (rs.next()) {
+                Area a = new Area();
+                a.setNo_area(rs.getString("no_area"));
+                list.add(a);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return list;
+    }
+
 
 }

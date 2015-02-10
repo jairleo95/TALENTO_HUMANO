@@ -129,4 +129,23 @@ public class DepartamentoDao implements InterfaceDepartamentoDAO {
         return lista;
     }
 
+    @Override
+    public List<Departamento> List_Departamento_Lima() {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT NO_DEP FROM RHVD_PUESTO_DIRECCION where ID_DIRECCION='DIR-0002' OR ID_DIRECCION='DIR-0001' OR ID_DIRECCION='DIR-0003' OR ID_DIRECCION='DIR-0004' GROUP BY NO_DEP ORDER by NO_DEP";
+        List<Departamento> list = new ArrayList<Departamento>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Departamento d = new Departamento();
+                d.setNo_dep(rs.getString("no_dep"));
+                list.add(d);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return list;
+    }
+
 }

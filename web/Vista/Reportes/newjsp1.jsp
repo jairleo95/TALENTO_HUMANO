@@ -19,7 +19,6 @@
         <script type="text/javascript" src="../../js/DataTables-1.10.4/media/js/site.js_=5276b3f2bd86cf7d24e4cbe150c3a87e"></script>
         <script type="text/javascript" src="../../js/DataTables-1.10.4/media/js/dynamic.php" async></script>
         <script type="text/javascript" language="javascript" src="../../js/DataTables-1.10.4/extensions/TableTools/js/dataTables.tableTools.js"></script>
-        <script type="text/javascript" language="javascript" src="../../js/DataTables-1.10.4/media/js/copy_csv_xls_pdf.swf"></script>
         <script type="text/javascript">
 
 

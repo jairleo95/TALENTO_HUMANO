@@ -16,6 +16,7 @@ import pe.edu.upeu.application.model.Area;
  */
 public interface InterfaceAreaDAO {
       public List<Area> List_Area();
+      public List<Area> List_Area_Lima();
       public List<Area> List_Area_ID(String id_departamento);
       public List<Map<String, ?>> List_area_id_json(String id_dep);
       public List<Map<String, ?>> List_area_id_d(String id_dep);

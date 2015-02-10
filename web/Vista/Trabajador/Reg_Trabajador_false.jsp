@@ -377,7 +377,7 @@
                                 <option value="3">Divorciado(a)</option>
                                 <option value="4">Viudo(a)</option>
                                 <option value="5">Separado(a)</option>
-                                <option value="6">Conviviente(a)</option>
+                                <option value="6">Conviviente</option>
                             </select></div>
                     </td></tr>   
                 <tr><td>Grupo Sanguineo:</td><td>

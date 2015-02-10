@@ -11,8 +11,22 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import pe.edu.upeu.application.dao.AreaDAO;
+import pe.edu.upeu.application.dao.Carrera_UniversidadDAO;
+import pe.edu.upeu.application.dao.DepartamentoDao;
+import pe.edu.upeu.application.dao.NacionalidadDAO;
+import pe.edu.upeu.application.dao.PuestoDAO;
 import pe.edu.upeu.application.dao.ReporteDAO;
+import pe.edu.upeu.application.dao.SeccionDAO;
+import pe.edu.upeu.application.dao.SituacionEducativaDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceAreaDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceCarrera_UniversidadDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDepartamentoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceNacionalidadDAO;
+import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceReporteDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceSeccionDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceSituacionEducativaDAO;
 
 /**
  *
@@ -30,7 +44,13 @@ public class CReporte extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     InterfaceReporteDAO r = new ReporteDAO();
-
+    InterfaceDepartamentoDAO d = new DepartamentoDao();
+    InterfaceAreaDAO a = new AreaDAO();
+    InterfaceSeccionDAO s = new SeccionDAO();
+    InterfacePuestoDAO p = new PuestoDAO();
+    InterfaceNacionalidadDAO n = new NacionalidadDAO();
+    InterfaceSituacionEducativaDAO se=new SituacionEducativaDAO();
+    InterfaceCarrera_UniversidadDAO ca=new Carrera_UniversidadDAO();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -39,6 +59,13 @@ public class CReporte extends HttpServlet {
             String opc = request.getParameter("opc");
             if (opc.equals("reporte1")) {
                 getServletContext().setAttribute("Reporte_Datos_Generales", r.Reporte_Datos_Generales());
+                getServletContext().setAttribute("List_Departamento_Lima", d.List_Departamento_Lima());
+                getServletContext().setAttribute("List_Area_Lima", a.List_Area_Lima());
+                getServletContext().setAttribute("LISTA_RH_SECCION_LIMA", s.LISTA_RH_SECCION_LIMA());
+                getServletContext().setAttribute("List_Puesto_lima", p.List_Puesto_lima());
+                getServletContext().setAttribute("List_Nacionalidad", n.List_Nacionalidad());
+                getServletContext().setAttribute("List_SituacionEducativa", se.List_SituacionEducativa());
+                getServletContext().setAttribute("List_Carrera", ca.List_Carrera());
                 response.sendRedirect("Vista/Reportes/newjsp.jsp");
             }
         }
