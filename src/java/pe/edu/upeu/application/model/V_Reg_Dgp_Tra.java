@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pe.edu.upeu.application.model;
 
 /**
@@ -11,145 +10,46 @@ package pe.edu.upeu.application.model;
  * @author Jose
  */
 public class V_Reg_Dgp_Tra {
+
     private String id_document;
-private String id_tipo_plani;
-private String id_requerimient;
-private String documento;
-private String ti_planilla;
-private String planilla;
-private String iddgp;
-private String fe_desde;
-private String fe_hasta;
-private double ca_sueldo;
-private String de_dias_trabajo;
-private String horario;
-private String id_puesto;
-private String id_requerimiento;
-private String id_trabajador;
-private String co_ruc;
-private String de_lugar_servicio;
-private String de_servicio;
-private String de_periodo_pago;
-private String de_domicilio_fiscal;
-private String de_subvencion;
-private String de_horario_capacitacion;
-private String de_horario_refrigerio;
-private String de_dias_capacitacion;
-private String es_dgp;
-private String ti_documento;
-private String id_documento_adjunto;
-private String id_dgp;
-private String id_documentos;
-private String es_documento_adjunto;
-private String us_creacion;
-private String fe_creacion;
-private String us_modif;
-private String fe_modif;
-private String ip_usuario;
-private String de_documento_adjunto;
-private String ar_dato_archivo;
-private String no_archivo;
-private String ta_archivo;
-private String ar_file_type;
-private String es_obligatorio;
-private String id_contrato;
-
-    public V_Reg_Dgp_Tra(String id_document, String id_tipo_plani, String id_requerimient, String documento, String ti_planilla, String planilla, String iddgp, String fe_desde, String fe_hasta, double ca_sueldo, String de_dias_trabajo, String horario, String id_puesto, String id_requerimiento, String id_trabajador, String co_ruc, String de_lugar_servicio, String de_servicio, String de_periodo_pago, String de_domicilio_fiscal, String de_subvencion, String de_horario_capacitacion, String de_horario_refrigerio, String de_dias_capacitacion, String es_dgp, String ti_documento, String id_documento_adjunto, String id_dgp, String id_documentos, String es_documento_adjunto, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String ip_usuario, String de_documento_adjunto, String ar_dato_archivo, String no_archivo, String ta_archivo, String ar_file_type,String es_obligatorio, String id_contrato) {
-        this.id_document = id_document;
-        this.id_tipo_plani = id_tipo_plani;
-        this.id_requerimient = id_requerimient;
-        this.documento = documento;
-        this.ti_planilla = ti_planilla;
-        this.planilla = planilla;
-        this.iddgp = iddgp;
-        this.fe_desde = fe_desde;
-        this.fe_hasta = fe_hasta;
-        this.ca_sueldo = ca_sueldo;
-        this.de_dias_trabajo = de_dias_trabajo;
-        this.horario = horario;
-        this.id_puesto = id_puesto;
-        this.id_requerimiento = id_requerimiento;
-        this.id_trabajador = id_trabajador;
-        this.co_ruc = co_ruc;
-        this.de_lugar_servicio = de_lugar_servicio;
-        this.de_servicio = de_servicio;
-        this.de_periodo_pago = de_periodo_pago;
-        this.de_domicilio_fiscal = de_domicilio_fiscal;
-        this.de_subvencion = de_subvencion;
-        this.de_horario_capacitacion = de_horario_capacitacion;
-        this.de_horario_refrigerio = de_horario_refrigerio;
-        this.de_dias_capacitacion = de_dias_capacitacion;
-        this.es_dgp = es_dgp;
-        this.ti_documento = ti_documento;
-        this.id_documento_adjunto = id_documento_adjunto;
-        this.id_dgp = id_dgp;
-        this.id_documentos = id_documentos;
-        this.es_documento_adjunto = es_documento_adjunto;
-        this.us_creacion = us_creacion;
-        this.fe_creacion = fe_creacion;
-        this.us_modif = us_modif;
-        this.fe_modif = fe_modif;
-        this.ip_usuario = ip_usuario;
-        this.de_documento_adjunto = de_documento_adjunto;
-        this.ar_dato_archivo = ar_dato_archivo;
-        this.no_archivo = no_archivo;
-        this.ta_archivo = ta_archivo;
-        this.ar_file_type = ar_file_type;
-        this.es_obligatorio = es_obligatorio;
-        this.id_contrato = id_contrato;
-    }
-    public V_Reg_Dgp_Tra() {
-        this.id_document = "";
-        this.id_tipo_plani = "";
-        this.id_requerimient = "";
-        this.documento = "";
-        this.ti_planilla = "";
-        this.planilla = "";
-        this.iddgp = "";
-        this.fe_desde = "";
-        this.fe_hasta = "";
-        this.ca_sueldo = 0;
-        this.de_dias_trabajo = "";
-        this.horario = "";
-        this.id_puesto = "";
-        this.id_requerimiento = "";
-        this.id_trabajador = "";
-        this.co_ruc = "";
-        this.de_lugar_servicio = "";
-        this.de_servicio = "";
-        this.de_periodo_pago = "";
-        this.de_domicilio_fiscal = "";
-        this.de_subvencion = "";
-        this.de_horario_capacitacion = "";
-        this.de_horario_refrigerio = "";
-        this.de_dias_capacitacion = "";
-        this.es_dgp = "";
-        this.ti_documento = "";
-        this.id_documento_adjunto = "";
-        this.id_dgp = "";
-        this.id_documentos = "";
-        this.es_documento_adjunto = "";
-        this.us_creacion = "";
-        this.fe_creacion = "";
-        this.us_modif = "";
-        this.fe_modif = "";
-        this.ip_usuario = "";
-        this.de_documento_adjunto = "";
-        this.ar_dato_archivo = "";
-        this.no_archivo = "";
-        this.ta_archivo = "";
-        this.ar_file_type = "";
-         this.es_obligatorio = "";
-         this.id_contrato = "";
-    }
-
-    public String getId_contrato() {
-        return id_contrato;
-    }
-
-    public void setId_contrato(String id_contrato) {
-        this.id_contrato = id_contrato;
-    }
+    private String id_tipo_plani;
+    private String id_requerimient;
+    private String documento;
+    private String ti_planilla;
+    private String planilla;
+    private String iddgp;
+    private String fe_desde;
+    private String fe_hasta;
+    private Double ca_sueldo;
+    private String de_dias_trabajo;
+    private String id_puesto;
+    private String id_requerimiento;
+    private String id_trabajador;
+    private String co_ruc;
+    private String de_lugar_servicio;
+    private String de_servicio;
+    private String de_periodo_pago;
+    private String de_domicilio_fiscal;
+    private String de_subvencion;
+    private String de_horario_capacitacion;
+    private String de_horario_refrigerio;
+    private String de_dias_capacitacion;
+    private String es_dgp;
+    private String ti_documento;
+    private String es_obligatorio;
+    private String id_documento_adjunto;
+    private String id_documentos;
+    private String es_documento_adjunto;
+    private String us_creacion;
+    private String fe_creacion;
+    private String us_modif;
+    private String fe_modif;
+    private String ip_usuario;
+    private String de_documento_adjunto;
+    private String id_contrato;
+    private String es_rec_fisico;
+    private String no_usuario;
+    private String id_dgp;
 
     public String getId_document() {
         return id_document;
@@ -163,8 +63,8 @@ private String id_contrato;
         return id_tipo_plani;
     }
 
-    public void setId_tipo_plani(String id_tipo_plant) {
-        this.id_tipo_plani = id_tipo_plant;
+    public void setId_tipo_plani(String id_tipo_plani) {
+        this.id_tipo_plani = id_tipo_plani;
     }
 
     public String getId_requerimient() {
@@ -223,11 +123,11 @@ private String id_contrato;
         this.fe_hasta = fe_hasta;
     }
 
-    public double getCa_sueldo() {
+    public Double getCa_sueldo() {
         return ca_sueldo;
     }
 
-    public void setCa_sueldo(double ca_sueldo) {
+    public void setCa_sueldo(Double ca_sueldo) {
         this.ca_sueldo = ca_sueldo;
     }
 
@@ -237,14 +137,6 @@ private String id_contrato;
 
     public void setDe_dias_trabajo(String de_dias_trabajo) {
         this.de_dias_trabajo = de_dias_trabajo;
-    }
-
-    public String getHorario() {
-        return horario;
-    }
-
-    public void setHorario(String horario) {
-        this.horario = horario;
     }
 
     public String getId_puesto() {
@@ -359,20 +251,20 @@ private String id_contrato;
         this.ti_documento = ti_documento;
     }
 
+    public String getEs_obligatorio() {
+        return es_obligatorio;
+    }
+
+    public void setEs_obligatorio(String es_obligatorio) {
+        this.es_obligatorio = es_obligatorio;
+    }
+
     public String getId_documento_adjunto() {
         return id_documento_adjunto;
     }
 
     public void setId_documento_adjunto(String id_documento_adjunto) {
         this.id_documento_adjunto = id_documento_adjunto;
-    }
-
-    public String getId_dgp() {
-        return id_dgp;
-    }
-
-    public void setId_dgp(String id_dgp) {
-        this.id_dgp = id_dgp;
     }
 
     public String getId_documentos() {
@@ -439,44 +331,120 @@ private String id_contrato;
         this.de_documento_adjunto = de_documento_adjunto;
     }
 
-    public String getAr_dato_archivo() {
-        return ar_dato_archivo;
+    public String getId_contrato() {
+        return id_contrato;
     }
 
-    public void setAr_dato_archivo(String ar_dato_archivo) {
-        this.ar_dato_archivo = ar_dato_archivo;
+    public void setId_contrato(String id_contrato) {
+        this.id_contrato = id_contrato;
     }
 
-    public String getNo_archivo() {
-        return no_archivo;
+    public String getEs_rec_fisico() {
+        return es_rec_fisico;
     }
 
-    public void setNo_archivo(String no_archivo) {
-        this.no_archivo = no_archivo;
+    public void setEs_rec_fisico(String es_rec_fisico) {
+        this.es_rec_fisico = es_rec_fisico;
     }
 
-    public String getTa_archivo() {
-        return ta_archivo;
+    public String getNo_usuario() {
+        return no_usuario;
     }
 
-    public void setTa_archivo(String ta_archivo) {
-        this.ta_archivo = ta_archivo;
+    public void setNo_usuario(String no_usuario) {
+        this.no_usuario = no_usuario;
     }
 
-    public String getAr_file_type() {
-        return ar_file_type;
+    public String getId_dgp() {
+        return id_dgp;
     }
 
-    public void setAr_file_type(String ar_file_type) {
-        this.ar_file_type = ar_file_type;
+    public void setId_dgp(String id_dgp) {
+        this.id_dgp = id_dgp;
     }
 
-    public String getEs_obligatorio() {
-        return es_obligatorio;
-    }
-
-    public void setEs_obligatorio(String es_obligatorio) {
+    public V_Reg_Dgp_Tra(String id_document, String id_tipo_plani, String id_requerimient, String documento, String ti_planilla, String planilla, String iddgp, String fe_desde, String fe_hasta, Double ca_sueldo, String de_dias_trabajo, String id_puesto, String id_requerimiento, String id_trabajador, String co_ruc, String de_lugar_servicio, String de_servicio, String de_periodo_pago, String de_domicilio_fiscal, String de_subvencion, String de_horario_capacitacion, String de_horario_refrigerio, String de_dias_capacitacion, String es_dgp, String ti_documento, String es_obligatorio, String id_documento_adjunto, String id_documentos, String es_documento_adjunto, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String ip_usuario, String de_documento_adjunto, String id_contrato, String es_rec_fisico, String no_usuario, String id_dgp) {
+        this.id_document = id_document;
+        this.id_tipo_plani = id_tipo_plani;
+        this.id_requerimient = id_requerimient;
+        this.documento = documento;
+        this.ti_planilla = ti_planilla;
+        this.planilla = planilla;
+        this.iddgp = iddgp;
+        this.fe_desde = fe_desde;
+        this.fe_hasta = fe_hasta;
+        this.ca_sueldo = ca_sueldo;
+        this.de_dias_trabajo = de_dias_trabajo;
+        this.id_puesto = id_puesto;
+        this.id_requerimiento = id_requerimiento;
+        this.id_trabajador = id_trabajador;
+        this.co_ruc = co_ruc;
+        this.de_lugar_servicio = de_lugar_servicio;
+        this.de_servicio = de_servicio;
+        this.de_periodo_pago = de_periodo_pago;
+        this.de_domicilio_fiscal = de_domicilio_fiscal;
+        this.de_subvencion = de_subvencion;
+        this.de_horario_capacitacion = de_horario_capacitacion;
+        this.de_horario_refrigerio = de_horario_refrigerio;
+        this.de_dias_capacitacion = de_dias_capacitacion;
+        this.es_dgp = es_dgp;
+        this.ti_documento = ti_documento;
         this.es_obligatorio = es_obligatorio;
+        this.id_documento_adjunto = id_documento_adjunto;
+        this.id_documentos = id_documentos;
+        this.es_documento_adjunto = es_documento_adjunto;
+        this.us_creacion = us_creacion;
+        this.fe_creacion = fe_creacion;
+        this.us_modif = us_modif;
+        this.fe_modif = fe_modif;
+        this.ip_usuario = ip_usuario;
+        this.de_documento_adjunto = de_documento_adjunto;
+        this.id_contrato = id_contrato;
+        this.es_rec_fisico = es_rec_fisico;
+        this.no_usuario = no_usuario;
+        this.id_dgp = id_dgp;
     }
-    
+
+    public V_Reg_Dgp_Tra() {
+        this.id_document = "";
+        this.id_tipo_plani = "";
+        this.id_requerimient = "";
+        this.documento = "";
+        this.ti_planilla = "";
+        this.planilla = "";
+        this.iddgp = "";
+        this.fe_desde = "";
+        this.fe_hasta = "";
+        this.ca_sueldo = 0.0;
+        this.de_dias_trabajo = "";
+        this.id_puesto = "";
+        this.id_requerimiento = "";
+        this.id_trabajador = "";
+        this.co_ruc = "";
+        this.de_lugar_servicio = "";
+        this.de_servicio = "";
+        this.de_periodo_pago = "";
+        this.de_domicilio_fiscal = "";
+        this.de_subvencion = "";
+        this.de_horario_capacitacion = "";
+        this.de_horario_refrigerio = "";
+        this.de_dias_capacitacion = "";
+        this.es_dgp = "";
+        this.ti_documento = "";
+        this.es_obligatorio = "";
+        this.id_documento_adjunto = "";
+        this.id_documentos = "";
+        this.es_documento_adjunto = "";
+        this.us_creacion = "";
+        this.fe_creacion = "";
+        this.us_modif = "";
+        this.fe_modif = "";
+        this.ip_usuario = "";
+        this.de_documento_adjunto = "";
+        this.id_contrato = "";
+        this.es_rec_fisico = "";
+        this.no_usuario = "";
+        this.id_dgp = "";
+    }
+
 }

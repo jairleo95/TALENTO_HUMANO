@@ -46,7 +46,6 @@ public class CCarrera_Institucion extends HttpServlet {
         InterfaceCarrera_UniversidadDAO model = new Carrera_UniversidadDAO();
         String opc = request.getParameter("opc");
         try {
-
             if (opc.equals("institucion")) {
                 String id = request.getParameter("ti");
                 List<Map<String, ?>> lista = model.Istitucion(id);

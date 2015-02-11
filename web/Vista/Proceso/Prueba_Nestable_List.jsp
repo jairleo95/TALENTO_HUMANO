@@ -117,43 +117,43 @@
                                 <div>
 
                                     <div class="row">
-                                        <center>
-                                            <h1>Mantenimiento de Pasos</h1>
 
-                                            <form  method="post" id="form-paso" >
-                                                <table>
-                                                    <tr ><td >Descripción :<td><textarea type="text" name="desc" required="" maxlength="300" rows="5" cols="50" class="desc_paso" ></textarea></td></tr>
-                                                    <tr><td>Numero :<td><input name="num" required="" class="num_paso" maxlength="6"> </td></tr>
-                                                    <tr><td>Código:<td><input type="text" name="cod" class="co_paso" required=""maxlength="6"  /></td></tr>
-                                                    <tr><td>Proceso:<td>
-                                                            <select name="proceso" required=""  id="select-proceso">
-                                                                <option value="">[SELECCIONE]</option>
-                                                            </select></td></tr>
-                                                    <input type="hidden" name="opc" value="Registrar"  class="opc"/>
-                                                    <input type="hidden" name="id" value=""  class="id_p"/>
-                                                    <tr><td><input type="submit" id="btn-registrar" name="Enviar" value="Registrar Paso" /></td></tr>
-                                                </table>
-                                            </form>
+                                        <h1>Mantenimiento de Pasos</h1>
 
-                                            <table border='1'>
-                                                <thead>
-                                                    <tr>
-                                                        <td>Nro</td>
-                                                        <td>Descripción</td>
-                                                        <td>Número</td>
-                                                        <td>Codigo</td>
-                                                        <td>Proceso</td>
-                                                        <td>Editar</td>
-
-                                                    </tr>
-                                                </thead>
-
-                                                <tbody  class="tbodys" style=" ">
-
-                                                </tbody>
-
+                                        <form  method="post" id="form-paso" >
+                                            <table>
+                                                <tr ><td >Descripción :<td><textarea type="text" name="desc" required="" maxlength="300" rows="5" cols="50" class="desc_paso" ></textarea></td></tr>
+                                                <tr><td>Numero :<td><input name="num" required="" class="num_paso" maxlength="6"> </td></tr>
+                                                <tr><td>Código:<td><input type="text" name="cod" class="co_paso" required=""maxlength="6"  /></td></tr>
+                                                <tr><td>Proceso:<td>
+                                                        <select name="proceso" required=""  id="select-proceso">
+                                                            <option value="">[SELECCIONE]</option>
+                                                        </select></td></tr>
+                                                <input type="hidden" name="opc" value="Registrar"  class="opc"/>
+                                                <input type="hidden" name="id" value=""  class="id_p"/>
+                                                <tr><td><input type="submit" id="btn-registrar" name="Enviar" value="Registrar Paso" /></td></tr>
                                             </table>
-                                        </center>
+                                        </form>
+
+                                        <table border='1'>
+                                            <thead>
+                                                <tr>
+                                                    <td>Nro</td>
+                                                    <td>Descripción</td>
+                                                    <td>Número</td>
+                                                    <td>Codigo</td>
+                                                    <td>Proceso</td>
+                                                    <td>Editar</td>
+
+                                                </tr>
+                                            </thead>
+
+                                            <tbody  class="tbodys" style=" display: none;">
+
+                                            </tbody>
+
+                                        </table>
+
                                     </div>
                                     <!-- end widget edit box -->
 
@@ -171,7 +171,7 @@
 
                                             <div class="col-sm-6 col-lg-12">
 
-                                                <h6>Lista de requerimientos</h6>
+                                                <h6>Lista de pasos</h6>
                                                 <style>
                                                     .div{
                                                         border-style: solid;
@@ -183,7 +183,7 @@
                                                 </style>
 
                                                 <div class="dd" id="nestable" >
-                                                    <ol class="dd-list" style="width: 1054px;" >
+                                                    <ol class="dd-list" style="width: 1024px;" >
 
 
 
@@ -191,6 +191,23 @@
                                                 </div>
 
                                             </div>
+
+                                        </div>
+                                        <div class="row" >
+                                            <table border="1">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Usuario</th>
+                                                        <th>Puesto</th>
+                                                        <th>Area</th>
+                                                        <th>Departamento</th>
+                                                        <th>Dirección</th>
+                                                    </tr></thead>
+                                                <tbody class="tbody-puesto">
+
+                                                </tbody>
+                                            </table>
+
 
                                         </div>
 
@@ -335,7 +352,7 @@
 
                         });
                     }
-                   
+
                     Listar_Paso($("#select-proceso").val());
                 });
 
@@ -396,11 +413,12 @@
                         }
                         for (var i = 0; i < lista.length; i++) {
                             c.append('<li class="dd-item dd3-item"  ><div class="dd-handle dd3-handle">Drag</div><div class="dd3-content"><label class="item_req item_' + i + '">' + lista[i].num + ' </label> ' +
+                                    '<div class="pull-right"><button class="btn btn-success btn-cargar-puesto" value="' + i + '" > Ver Puestos</button></div>' +
                                     '<div class="pull-right"><button class="btn btn-primary btn-editar" value="' + i + '" > Editar</button></div>' +
                                     '<div class="pull-right"><button class="btn btn-primary btn-eliminar" value="' + i + '" > Eliminar</button></div>' +
                                     '<div class="pull-right"><label >' + lista[i].det + '</label></div>' +
                                     '<div class="pull-right"><label >' + lista[i].co + '</label></div>' +
-                                    '<input type="text" name="id" value="' + lista[i].id + '"  class="id_paso' + i + '"/>' +
+                                    '<input type="hidden" name="id" value="' + lista[i].id + '"  class="id_paso' + i + '"/>' +
                                     '</div> </li>');
 
                         }
@@ -413,6 +431,35 @@
                             }
 
 
+
+                        });
+
+                        $(".btn-cargar-puesto").click(function () {
+
+
+                            var tbody_p = $(".tbody-puesto");
+                            var texto = "";
+                            $.post("../../paso", "opc=Paso_Puesto&id=" + $(".id_paso" + $(this).val()).val(), function (objJson) {
+                                if (objJson.rpta == -1) {
+                                    alert(objJson.mensaje);
+                                    return;
+                                }
+                                tbody_p.empty();
+                                var lista = objJson.lista;
+                                for (var h = 0; h < lista.length; h++) {
+                                    texto += "<tr>";
+                                    texto += "<td>" + lista[h].usuario + "</td>";
+                                    texto += "<td>" + lista[h].puesto + "</td>";
+                                    texto += "<td>" + lista[h].area + "</td>";
+                                    texto += "<td>" + lista[h].dep + "</td>";
+                                    texto += "<td>" + lista[h].direccion + "</td>";
+                                    texto += "</tr>";
+                                }
+                                tbody_p.append(texto);
+                                
+                                texto = "";
+
+                            });
 
                         });
                         $(".btn-editar").click(function () {

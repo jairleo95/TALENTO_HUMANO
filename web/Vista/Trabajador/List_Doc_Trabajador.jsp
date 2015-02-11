@@ -121,7 +121,7 @@
                                             <tbody>
 
                                                 <%  if (List_Id_Doc_Trab.size() == 0) {%>
-                                            <td colspan="5" style="text-align: center"><h2>No se ha registrado ningun documento...</h2></td>
+                                           
                                             <%}%>
                                             <%for (int i = 0; i < List_Id_Doc_Trab.size(); i++) {
                                                     V_Documento_Trabajador d = new V_Documento_Trabajador();

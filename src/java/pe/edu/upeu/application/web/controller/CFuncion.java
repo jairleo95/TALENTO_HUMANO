@@ -17,10 +17,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import pe.edu.upeu.application.dao.AreaDAO;
+import pe.edu.upeu.application.dao.DepartamentoDao;
+import pe.edu.upeu.application.dao.DireccionDAO;
 import pe.edu.upeu.application.dao.FuncionDAO;
 import pe.edu.upeu.application.dao.PuestoDAO;
+import pe.edu.upeu.application.dao.SeccionDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceAreaDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDepartamentoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceFuncionDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceSeccionDAO;
 import pe.edu.upeu.application.model.Puesto;
 
 /**
@@ -49,9 +57,22 @@ public class CFuncion extends HttpServlet {
         String id_user = (String) sesion.getAttribute("IDUSER");
         InterfaceFuncionDAO f = new FuncionDAO();
         InterfacePuestoDAO p = new PuestoDAO();
+        InterfaceDireccionDAO di = new DireccionDAO();
+        InterfaceDepartamentoDAO de = new DepartamentoDao();
+        InterfaceAreaDAO ar = new AreaDAO();
+        InterfaceSeccionDAO se = new SeccionDAO();
         /* TODO output your page here. You may use following sample code. */
         try {
             if (opc.equals("princpal_funcion")) {
+                response.sendRedirect("Vista/Funciones/Priv_Funciones.jsp");
+            }
+            if (opc.equals("listar_todo")) {
+                getServletContext().setAttribute("Listar_funciones", f.Listar_funciones());
+                getServletContext().setAttribute("Listar_Direccion", di.Listar_Direccion());
+                getServletContext().setAttribute("List_Departamento", de.List_Departamento());
+                getServletContext().setAttribute("List_Area", ar.List_Area());
+                getServletContext().setAttribute("LISTA_RH_SECCION", se.LISTA_RH_SECCION());
+                getServletContext().setAttribute("List_Puesto", p.List_Puesto());
                 response.sendRedirect("Vista/Funciones/Priv_Funciones.jsp");
             }
             if (opc.equals("Listar")) {
@@ -69,15 +90,25 @@ public class CFuncion extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", list);
             }
+            if (opc.equals("listar_Direccion")) {
+                List<Map<String, ?>> list = f.Listar_Funciones();
+                rpta.put("rpta", "1");
+                rpta.put("lista", list);
+            }
             if (opc.equals("otorgar_funciones")) {
                 getServletContext().setAttribute("List_Puesto", p.List_Puesto());
                 getServletContext().setAttribute("Listar_funciones", f.Listar_funciones());
+                getServletContext().setAttribute("Listar_Direccion", di.Listar_Direccion());
+                getServletContext().setAttribute("List_Departamento", de.List_Departamento());
+                getServletContext().setAttribute("List_Area", ar.List_Area());
+                getServletContext().setAttribute("LISTA_RH_SECCION", se.LISTA_RH_SECCION());
                 response.sendRedirect("Vista/Funciones/Otorgar_funciones.jsp");
             }
             if (opc.equals("otorgar")) {
                 String id_puesto=request.getParameter("id_puesto");
                 String de_funcion=request.getParameter("de_funcion");
-                f.Insertar_funcion(id_puesto, de_funcion, id_user);
+                String ti_funcion=request.getParameter("ti_funcion");
+                f.Insertar_funcion(id_puesto, de_funcion, id_user, ti_funcion);
             }
             if(opc.equals("list_pu")){
                 List<Map<String, ?>> list = p.List_puesto();
@@ -93,7 +124,8 @@ public class CFuncion extends HttpServlet {
                 String de_funcion=request.getParameter("de_fun");
                 String es_funcion=request.getParameter("es_fun");
                 String id_puesto=request.getParameter("id_pu");
-                f.Modificar_funcion(id_funcion, es_funcion, de_funcion, id_puesto, id_user);
+                String ti_funcion=request.getParameter("ti_funcion");
+                f.Modificar_funcion(id_funcion, es_funcion, de_funcion, id_puesto, id_user, ti_funcion);
             }
         } catch (Exception e) {
             rpta.put("rpta", "-1");

@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
+import pe.edu.upeu.application.model.Cuenta_Sueldo;
 import pe.edu.upeu.application.model.Trabajador;
 import pe.edu.upeu.application.model.V_Ficha_Trab_Num_C;
 import pe.edu.upeu.application.model.X_List_dat_tr_plantilla;
@@ -331,6 +332,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 v.setId_universidad_carrera(rs.getString("id_universidad_carrera"));
                 v.setId_nacionalidad(rs.getString("id_nacionalidad"));
                 v.setDistrito_nac(rs.getString("distrito_nac"));
+                v.setDe_anno_egreso(rs.getString("de_anno_egreso"));
                 list.add(v);
             }
 
@@ -583,6 +585,93 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(21, LI_TIPO_TRABAJADOR);
             cst.setString(22, ES_FACTOR_RH);
             cst.setString(23, ID_TRABAJADOR.trim());
+            cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+    }
+
+    @Override
+    public List<Cuenta_Sueldo> List_Cuenta_Sueldo(String idtr) {
+         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT * FROM RHTD_CUENTA_SUELDO WHERE ID_TRABAJADOR = '"+idtr+"'";
+        List<Cuenta_Sueldo> list = new ArrayList<Cuenta_Sueldo>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+
+            while (rs.next()) {
+                Cuenta_Sueldo cs = new Cuenta_Sueldo();
+                cs.setId_cuenta_sueldo(rs.getString("Id_cuenta_sueldo"));
+                cs.setNo_banco(rs.getString("no_banco"));
+                cs.setNu_cuenta(rs.getString("nu_cuenta"));
+                cs.setNu_cuenta_banc(rs.getString("nu_cuenta_banc"));
+                cs.setEs_gem_nu_cuenta(rs.getString("es_gem_nu_cuenta"));
+                cs.setNo_banco_otros(rs.getString("no_banco_otros"));
+                cs.setId_trabajador(rs.getString("id_trabajador"));
+                cs.setEs_cuenta_sueldo(rs.getString("es_cuenta_sueldo"));
+                list.add(cs);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public void MOD_ASPEC_ACADEM(String LI_NIVEL_EDUCATIVO, String CARRERA, String REGIMEN, String ES_INS_PERU, String DE_ANNO_EGRESO, String CM_OTROS_ESTUDIOS, String CA_TIPO_HORA_PAGO_REFERENCIAL, String ID_TRABAJADOR) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_TRA_ASP_ACAD( ?, ?, ?, ?, ?, ?, ?, ?)} ");
+            cst.setString(1,LI_NIVEL_EDUCATIVO);
+            cst.setString(2,REGIMEN);
+            cst.setString(3,ES_INS_PERU);
+            cst.setString(4,CARRERA);
+            cst.setString(5,DE_ANNO_EGRESO);
+            cst.setString(6,CM_OTROS_ESTUDIOS);
+            cst.setString(7,CA_TIPO_HORA_PAGO_REFERENCIAL);
+            cst.setString(8,ID_TRABAJADOR);
+            cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+    }
+
+    @Override
+    public void MOD_CUENTA_SUELDO(String NO_BANCO, String NU_CUENTA, String NU_CUENTA_BANC, String ES_GEM_NU_CUENTA, String NO_BANCO_OTROS_SP, String ID_TRABAJADOR) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_TRA_CUEN_SUELDO( ?, ?, ?, ?, ?, ?)} ");
+            cst.setString(1,NO_BANCO);
+            cst.setString(2,NU_CUENTA);
+            cst.setString(3,NU_CUENTA_BANC);
+            cst.setString(4,ES_GEM_NU_CUENTA);
+            cst.setString(5,NO_BANCO_OTROS_SP);
+            cst.setString(6,ID_TRABAJADOR);
             cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());

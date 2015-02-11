@@ -17,6 +17,8 @@ public interface InterfaceSeccionDAO {
 
     public List<Seccion> LISTA_RH_SECCION();
 
+    public List<Seccion> LISTA_RH_SECCION_LIMA();
+
     public String ID_SECCION(String id_puesto);
 
     public List<Map<String, ?>> List_sec_id(String id_are);

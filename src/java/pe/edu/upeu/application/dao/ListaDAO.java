@@ -103,6 +103,8 @@ public class ListaDAO implements InterfaceListaDAO {
                 Universidad u = new Universidad();
                 u.setId_universidad(rs.getString("id_universidad"));
                 u.setNo_universidad(rs.getString("no_universidad"));
+                u.setCo_universidad(rs.getString("co_universidad"));
+                u.setId_tipo_institucion(rs.getString("id_tipo_institucion"));
                 list.add(u);
             }
         } catch (SQLException e) {

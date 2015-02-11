@@ -24,6 +24,8 @@ public interface InterfacePuestoDAO {
 
     public List<Puesto> List_Puesto();
 
+    public List<Puesto> List_Puesto_lima();
+
     public String List_Puesto_x_iddgp(String id_dgp);
 
     public List<V_Puesto_Direccion> List_Puesto_Dep(String id_departamento);

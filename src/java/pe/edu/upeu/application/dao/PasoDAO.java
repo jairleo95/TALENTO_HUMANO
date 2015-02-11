@@ -64,6 +64,44 @@ public class PasoDAO implements InterfacePasoDAO {
     }
 
     @Override
+    public List<Map<String, ?>> List_Paso_x_Puesto(String id) {
+
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select d.*,u.no_usuario  from (\n"
+                    + "select  pd.* ,p.ID_PASOS from RHTD_DETALLE_PASOS p , RHVD_PUESTO_DIRECCION pd where pd.ID_PUESTO = p.ID_PUESTO and p.ES_DETALLE_PASOS='1') d  left outer join  rhvd_usuario u on( u.ID_PUESTO = d.ID_PUESTO) where d.ID_PASOS='"+id+"' ";
+
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("id_puesto"));
+                rec.put("dep", rs.getString("no_dep"));
+                rec.put("puesto", rs.getString("no_puesto"));
+                rec.put("area", rs.getString("no_area"));
+                rec.put("direccion", rs.getString("no_direccion"));
+                rec.put("usuario", rs.getString("no_usuario"));
+
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+
+            }
+        }
+        return lista;
+
+    }
+
+    @Override
     public void INSERT_PASOS(String ID_PASOS, String ID_PROCESO, String DE_PASOS, String NU_PASOS, String CO_PASOS) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
