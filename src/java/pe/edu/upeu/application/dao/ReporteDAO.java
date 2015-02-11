@@ -44,7 +44,7 @@ public class ReporteDAO implements InterfaceReporteDAO {
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Datos_Generales v = new Datos_Generales();
-                v.setCo_aps(rs.getDouble("CO_APS"));
+                v.setCo_aps(rs.getString("CO_APS"));
                 v.setNo_dep(rs.getString("NO_DEP"));
                 v.setNo_area(rs.getString("NO_AREA"));
                 v.setNo_seccion(rs.getString("NO_SECCION"));
