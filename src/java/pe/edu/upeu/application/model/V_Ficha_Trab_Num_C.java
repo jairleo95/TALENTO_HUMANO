@@ -93,8 +93,10 @@ public class V_Ficha_Trab_Num_C {
     private String no_ar_foto;
     private String ta_ar_foto;
     private int es_proceso;
+    private String id_carrera;
+    
 
-    public V_Ficha_Trab_Num_C(String id_trabajador, String ap_paterno, String ap_materno, String no_trabajador, String ti_doc, String nu_doc, String es_civil, String fe_nac, String no_nacionalidad, String no_departamento, String no_provincia, String no_distrito, String te_trabajador, String cl_tra, String di_correo_personal, String di_correo_inst, String co_sistema_pensionario, String id_situacion_educativa, String li_reg_inst_educativa, String es_inst_educ_peru, String cm_otros_estudios, String es_sexo, String li_grupo_sanguineo, String de_referencia, String li_religion, String no_iglesia, String de_cargo, String li_autoridad, String no_ap_autoridad, String cl_autoridad, String id_no_afp, String es_afiliado_essalud, String li_tipo_trabajador, String ca_tipo_hora_pago_refeerencial, String es_factor_rh, String li_di_dom_a_d1, String di_dom_a_d2, String li_di_dom_a_d3, String di_dom_a_d4, String li_di_dom_a_d5, String di_dom_a_d6, String di_dom_a_ref, String di_dom_a_distrito, String li_di_dom_leg_d1, String di_dom_leg_d2, String li_di_dom_leg_d3, String di_dom_leg_d4, String li_di_dom_leg_d5, String di_dom_leg_d6, String di_dom_leg_distrito, String ca_ing_qta_cat_empresa, String ca_ing_qta_cat_ruc, String ca_ing_qta_cat_otras_empresas, String cm_observaciones, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String ip_usuario, String id_usuario_creacion, String id_universidad_carrera, String id_nacionalidad, String distrito_nac, String no_s_educativa, String ap_nombres_madre, String ap_nombres_padre, String es_trabaja_upeu_c, String ap_nombres_c, String fe_nac_c, String id_tipo_doc_c, String nu_doc_c, String li_inscripcion_vig_essalud_c, String id_conyugue, String no_carrera, String no_universidad, String ar_foto, String de_foto, String id_foto, String no_ar_foto, String ta_ar_foto, int es_proceso , String de_anno_egreso) {
+    public V_Ficha_Trab_Num_C(String id_trabajador, String ap_paterno, String ap_materno, String no_trabajador, String ti_doc, String nu_doc, String es_civil, String fe_nac, String no_nacionalidad, String no_departamento, String no_provincia, String no_distrito, String te_trabajador, String cl_tra, String di_correo_personal, String di_correo_inst, String co_sistema_pensionario, String id_situacion_educativa, String li_reg_inst_educativa, String es_inst_educ_peru, String cm_otros_estudios, String es_sexo, String li_grupo_sanguineo, String de_referencia, String li_religion, String no_iglesia, String de_cargo, String li_autoridad, String no_ap_autoridad, String cl_autoridad, String id_no_afp, String es_afiliado_essalud, String li_tipo_trabajador, String ca_tipo_hora_pago_refeerencial, String es_factor_rh, String li_di_dom_a_d1, String di_dom_a_d2, String li_di_dom_a_d3, String di_dom_a_d4, String li_di_dom_a_d5, String di_dom_a_d6, String di_dom_a_ref, String di_dom_a_distrito, String li_di_dom_leg_d1, String di_dom_leg_d2, String li_di_dom_leg_d3, String di_dom_leg_d4, String li_di_dom_leg_d5, String di_dom_leg_d6, String di_dom_leg_distrito, String ca_ing_qta_cat_empresa, String ca_ing_qta_cat_ruc, String ca_ing_qta_cat_otras_empresas, String cm_observaciones, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String ip_usuario, String id_usuario_creacion, String id_universidad_carrera, String id_nacionalidad, String distrito_nac, String no_s_educativa, String ap_nombres_madre, String ap_nombres_padre, String es_trabaja_upeu_c, String ap_nombres_c, String fe_nac_c, String id_tipo_doc_c, String nu_doc_c, String li_inscripcion_vig_essalud_c, String id_conyugue, String no_carrera, String no_universidad, String ar_foto, String de_foto, String id_foto, String no_ar_foto, String ta_ar_foto, int es_proceso , String de_anno_egreso, String id_carrera) {
         this.id_trabajador = id_trabajador;
         this.ap_paterno = ap_paterno;
         this.ap_materno = ap_materno;
@@ -177,9 +179,10 @@ public class V_Ficha_Trab_Num_C {
         this.ta_ar_foto = ta_ar_foto;
         this.es_proceso = es_proceso;
         this.de_anno_egreso = de_anno_egreso;
+        this.id_carrera = id_carrera;
     }
     
-
+    
     public int getEs_proceso() {
         return es_proceso;
     }
@@ -834,6 +837,14 @@ public class V_Ficha_Trab_Num_C {
     public void setDe_anno_egreso(String de_anno_egreso) {
         this.de_anno_egreso = de_anno_egreso;
     }
+
+    public String getId_carrera() {
+        return id_carrera;
+    }
+
+    public void setId_carrera(String id_carrera) {
+        this.id_carrera = id_carrera;
+    }
     
     
 
@@ -920,6 +931,7 @@ public class V_Ficha_Trab_Num_C {
         this.ta_ar_foto = "";
         this.es_proceso = 0;
         this.de_anno_egreso = "";
+        this.id_carrera = "";
     }
 
 }

@@ -117,62 +117,64 @@
                                 <div>
 
                                     <div class="row">
-                                        <center>
-                                            <h1>Mantenimiento de Pasos</h1>
 
-                                            <form  method="post" id="form-paso" >
-                                                <table>
-                                                    <tr ><td >Descripción :<td><textarea type="text" name="desc" required="" maxlength="300" rows="5" cols="50" class="desc_paso" ></textarea></td></tr>
-                                                    <tr><td>Numero :<td><input name="num" required="" class="num_paso" maxlength="6"> </td></tr>
-                                                    <tr><td>Código:<td><input type="text" name="cod" class="co_paso" required=""maxlength="6"  /></td></tr>
-                                                    <tr><td>Proceso:<td>
-                                                            <select name="proceso" required=""  id="select-proceso">
-                                                                <option value="">[SELECCIONE]</option>
-                                                            </select></td></tr>
-                                                    <input type="hidden" name="opc" value="Registrar"  class="opc"/>
-                                                    <input type="hidden" name="id" value=""  class="id_p"/>
-                                                    <tr><td><input type="submit" id="btn-registrar" name="Enviar" value="Registrar Paso" /></td></tr>
-                                                </table>
-                                            </form>
+                                        <h1>Mantenimiento de Pasos</h1>
 
-                                            <table border='1'>
-                                                <thead>
-                                                    <tr>
-                                                        <td>Nro</td>
-                                                        <td>Descripción</td>
-                                                        <td>Número</td>
-                                                        <td>Codigo</td>
-                                                        <td>Proceso</td>
-                                                        <td>Editar</td>
-
-                                                    </tr>
-                                                </thead>
-
-                                                <tbody  class="tbodys" style=" ">
-
-                                                </tbody>
-
+                                        <form  method="post" id="form-paso" >
+                                            <table>
+                                                <tr ><td >Descripción :<td><textarea type="text" name="desc" required="" maxlength="300" rows="5" cols="50" class="desc_paso" ></textarea></td></tr>
+                                                <tr><td>Numero Paso :<td><input name="num" required=""  maxlength="3" class="num_paso" maxlength="6"> </td></tr>
+                                                <tr><td>Código:<td><input type="text" name="cod" class="co_paso" required=""maxlength="6"  /></td></tr>
+                                                <tr><td>Proceso:<td>
+                                                        <select name="proceso" required=""  id="select-proceso">
+                                                            <option value="">[SELECCIONE]</option>
+                                                        </select></td></tr>
+                                                <input type="hidden" name="opc" value="Registrar"  class="opc"/>
+                                                <input type="hidden" name="id" value=""  class="id_p"/>
+                                                <tr><td><input type="submit" id="btn-registrar" name="Enviar" value="Registrar Paso" /></td></tr>
                                             </table>
-                                        </center>
+                                        </form>
+                                        <h2>Lista de pasos Deshabilitados :<strong><label class="lb-list_pasos"></label></strong> </h2>
+                                        <table border='1'>
+                                            <thead>
+                                                <tr>
+                                                    <td>Nro</td>
+                                                    <td>Descripción</td>
+                                                    <td>Número</td>
+                                                    <td>Codigo</td>
+                                                    <td>Proceso</td>
+                                                    <td>Editar</td>
+
+                                                </tr>
+                                            </thead>
+
+                                            <tbody  class="tbodys" style=" display: none;">
+
+                                            </tbody>
+
+                                        </table>
+
                                     </div>
                                     <!-- end widget edit box -->
 
                                     <!-- widget content -->
                                     <div class="widget-body">
 
-                                        <div id="nestable-menu">
 
-                                            <button type="button" class="btn btn-default Generar" data-action="collapse-all">
-                                                Generar Pasos
-                                            </button>
-                                        </div>
+
+
+
                                         <div class="row">
 
 
                                             <div class="col-sm-6 col-lg-12">
 
-                                                <h6>Lista de requerimientos</h6>
-                                                <style>
+                                                <h2>Lista de pasos Habilitados :<strong><label class="lb-list_pasos"></label></strong> </h2>
+
+                                                <button type="button" class="btn btn-default Generar" data-action="collapse-all">
+                                                    Generar Pasos
+                                                </button>
+                                                <br><style>
                                                     .div{
                                                         border-style: solid;
                                                         border-color: #ff0000 #0000ff;
@@ -183,7 +185,7 @@
                                                 </style>
 
                                                 <div class="dd" id="nestable" >
-                                                    <ol class="dd-list" style="width: 1054px;" >
+                                                    <ol class="dd-list" style="width: 1024px;" >
 
 
 
@@ -191,6 +193,24 @@
                                                 </div>
 
                                             </div>
+
+                                        </div>
+                                        <div class="row" >
+                                            <h2>Lista de puestos :<strong><label class="lb-list_puesto"></label></strong> </h2>
+                                            <table border="1">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Usuario</th>
+                                                        <th>Puesto</th>
+                                                        <th>Area</th>
+                                                        <th>Departamento</th>
+                                                        <th>Dirección</th>
+                                                    </tr></thead>
+                                                <tbody class="tbody-puesto">
+
+                                                </tbody>
+                                            </table>
+
 
                                         </div>
 
@@ -361,7 +381,7 @@
                     $.post("../../Proceso", "opc=Listar", function (objJson) {
                         s.empty();
                         var lista = objJson.lista;
-                        s.append("<option value='' > </option>");
+                        s.append("<option value='' selected >[SELECCIONE]</option>");
                         for (var j = 0; j < lista.length; j++) {
                             s.append("<option value='" + lista[j].id + "' > " + lista[j].nom + "</option>");
                         }
@@ -369,14 +389,19 @@
                 }
                 $("#select-proceso").change(
                         function () {
+
+
+                            $(".lb-list_pasos").text($(this).find(":selected").text());
+
                             Listar_Paso($(this).val());
+
                             // alert($(this).val());
                         });
                 var b = $(".tbodys");
                 var c = $(".dd-list");
                 function Listar_Paso(proceso) {
 
-                    $.post("../../paso", "opc=Listar&proceso=" + proceso, function (objJson) {
+                    $.post("../../paso", "opc=Listar_habilitados&proceso=" + proceso, function (objJson) {
                         b.empty();
                         c.empty();
                         var lista = objJson.lista;
@@ -384,6 +409,7 @@
                             alert(objJson.mensaje);
                             return;
                         }
+
                         for (var i = 0; i < lista.length; i++) {
                             b.append("<tr class='editar-tr" + i + "' >");
                             b.append("<td >" + (i + 1) + "</td>");
@@ -396,11 +422,13 @@
                         }
                         for (var i = 0; i < lista.length; i++) {
                             c.append('<li class="dd-item dd3-item"  ><div class="dd-handle dd3-handle">Drag</div><div class="dd3-content"><label class="item_req item_' + i + '">' + lista[i].num + ' </label> ' +
+                                    '<div class="pull-right"><button class="btn btn-success btn-cargar-puesto" value="' + i + '" > Ver Puestos</button></div>' +
                                     '<div class="pull-right"><button class="btn btn-primary btn-editar" value="' + i + '" > Editar</button></div>' +
                                     '<div class="pull-right"><button class="btn btn-primary btn-eliminar" value="' + i + '" > Eliminar</button></div>' +
                                     '<div class="pull-right"><label >' + lista[i].det + '</label></div>' +
-                                    '<div class="pull-right"><label >' + lista[i].co + '</label></div>' +
-                                    '<input type="text" name="id" value="' + lista[i].id + '"  class="id_paso' + i + '"/>' +
+                                    // '<div class="pull-right"><label >' + lista[i].co + '</label></div>' +
+                                    '<input type="hidden"  value="' + lista[i].det + '"  class="det_p_' + i + '"/>' +
+                                    '<input type="hidden" name="id" value="' + lista[i].id + '"  class="id_paso' + i + '"/>' +
                                     '</div> </li>');
 
                         }
@@ -413,6 +441,35 @@
                             }
 
 
+
+                        });
+
+                        $(".btn-cargar-puesto").click(function () {
+
+                            $(".lb-list_puesto").text($(".det_p_" + $(this).val()).val());
+                            var tbody_p = $(".tbody-puesto");
+                            var texto = "";
+                            $.post("../../paso", "opc=Paso_Puesto&id=" + $(".id_paso" + $(this).val()).val(), function (objJson) {
+                                if (objJson.rpta == -1) {
+                                    alert(objJson.mensaje);
+                                    return;
+                                }
+                                tbody_p.empty();
+                                var lista = objJson.lista;
+                                for (var h = 0; h < lista.length; h++) {
+                                    texto += "<tr>";
+                                    texto += "<td>" + lista[h].usuario + "</td>";
+                                    texto += "<td>" + lista[h].puesto + "</td>";
+                                    texto += "<td>" + lista[h].area + "</td>";
+                                    texto += "<td>" + lista[h].dep + "</td>";
+                                    texto += "<td>" + lista[h].direccion + "</td>";
+                                    texto += "</tr>";
+                                }
+                                tbody_p.append(texto);
+
+                                texto = "";
+
+                            });
 
                         });
                         $(".btn-editar").click(function () {

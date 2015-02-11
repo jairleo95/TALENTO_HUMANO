@@ -1,3 +1,8 @@
+<%@page import="pe.edu.upeu.application.model.Ub_Distrito"%>
+<%@page import="pe.edu.upeu.application.model.Ub_Provincia"%>
+<%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
+<%@page import="pe.edu.upeu.application.dao.ListaDAO"%>
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceListaDAO"%>
 <%@page import="pe.edu.upeu.application.model.V_Var_Usuario"%>
 <%@page import="pe.edu.upeu.application.model.V_Usuario"%>
 <%@page import="pe.edu.upeu.application.model.Via"%>
@@ -16,7 +21,9 @@
 <jsp:useBean id="List_Departamento" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_zona" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_via" scope="application" class="java.util.ArrayList"/>
-
+<jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Provincia" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Distrito" scope="application" class="java.util.ArrayList"/>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -44,6 +51,7 @@
         <% for (int o = 0; o < Lista_Usuarios.size(); o++) {
                 V_Usuario vu = new V_Usuario();
                 vu = (V_Usuario) Lista_Usuarios.get(o);%>
+
         <div id="caja">
             <h3>-Modificar Perfil Usuario</h3>
             <hr>
@@ -55,7 +63,7 @@
                             <label for="exampleInputEmail1">Usuario:</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input type="text" class="form-control input-group-sm" value="<%=vu.getNo_usuario()%>"  required autofocus="" name="NOMBRE_USUARIO" id="DOM_A_D2" maxlength="100">
+                                <input type="text" class="form-control input-group-sm" value="<%=vu.getNo_usuario()%>"  required autofocus="" name="NOMBRE_USUARIO" id="DOM_A_D2" maxlength="15">
 
                             </div>
                         </div>
@@ -65,7 +73,7 @@
                             <label for="exampleInputEmail1">Clave Actual:</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input id="epasswordActual" type="password" class="form-control input-group-sm" value="<%=vu.getPw_usuario()%>" required autofocus="" placeholder="clave actual"  name="passwordActual" maxlength="100">
+                                <input id="epasswordActual" type="password" class="form-control input-group-sm" value="<%=vu.getPw_usuario().trim()%>" required autofocus="" placeholder="clave actual"  name="passwordActual" maxlength="24">
                             </div>
                         </div>
                     </div>
@@ -74,7 +82,7 @@
                             <label for="exampleInputEmail1">Clave nueva:</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input id="epasswordNew1" type="password" class="form-control input-group-sm"  required autofocus="" placeholder=" clave nueva"  name="passwordNew1"  maxlength="100">
+                                <input id="epasswordNew1" type="password" class="form-control input-group-sm"  required autofocus="" placeholder=" clave nueva"  name="passwordNew1"  maxlength="24">
                             </div>
                         </div>
                     </div>
@@ -83,7 +91,7 @@
                             <label for="exampleInputEmail1">Confirme la clave Nueva:</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input type="password" class="form-control input-group-sm" required autofocus="" placeholder="confirmar clave " name="passwordNew2" id="DOM_A_D2" maxlength="100">
+                                <input type="password" class="form-control input-group-sm" required autofocus="" placeholder="confirmar clave " name="passwordNew2" id="DOM_A_D2" maxlength="24">
                             </div>
                         </div>
                     </div>
@@ -134,8 +142,8 @@
                             <label for="exampleInputEmail1">telefono:</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input class="form-control input-group-sm"    placeholder="" type="text" name="TEL_USUARIO" id="DOM_A_D2" data-mask="(99) 999-999" maxlength="8" value="<%=vu.getTe_trabajador()%> ">
-                                   
+                                <input class="form-control input-group-sm"    placeholder="" type="text" name="TEL_USUARIO" id="DOM_A_D2" data-mask="(99) 999-999" maxlength="8" value="<%=vu.getTe_trabajador().trim()%> ">
+
                             </div>
                         </div>
                     </div>
@@ -145,7 +153,7 @@
                             <label for="exampleInputEmail1">Celular:</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input class="form-control input-group-sm"    placeholder="" type="text" name="CEL_USUARIO" id="DOM_A_D2" data-mask="(99) 999-9999" maxlength="9" value="<%=vu.getCl_tra()%> ">
+                                <input class="form-control input-group-sm"    placeholder="" type="text" name="CEL_USUARIO" id="DOM_A_D2" data-mask="(99) 999-9999" maxlength="9" value="<%=vu.getCl_tra().trim()%> ">
 
                             </div>
                         </div>
@@ -156,7 +164,7 @@
                             <label for="exampleInputEmail1">correo:</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input class="form-control input-group-sm"    placeholder="" type="text" name="CORREO_USAURIO" id="DOM_A_REFAA" maxlength="30" value="<%=vu.getDi_correo_personal()%> " >
+                                <input class="form-control input-group-sm"    placeholder="" type="text" name="CORREO_USAURIO" id="DOM_A_REFAA" maxlength="30" value="<%=vu.getDi_correo_personal().trim()%> " >
 
                             </div>
                         </div>
@@ -255,16 +263,17 @@
                                     <%for (int i = 0; i < Listar_via.size(); i++) {
                                             Via zo = new Via();
                                             zo = (Via) Listar_via.get(i);%> 
-                                            <% if(zo.getId_via().trim().equals(zo.getId_via().trim())){%>
-                                            <option value="<%=zo.getId_via()%>" selected=""><%=zo.getDe_via()%></option>
-                                            <%}else{%>
-                                            
+                                    <% if (zo.getId_via().trim().equals(vu.getLi_di_dom_a_d1().trim())) {%>
+                                    <option value="<%=zo.getId_via()%>" selected=""><%=zo.getDe_via()%></option>
+                                    <%} else {%>
+
                                     <option value="<%=zo.getId_via()%>"><%=zo.getDe_via()%></option>
                                     <%}%>
                                     <%}%>
                                 </select>
-                
+
                             </div>
+
                         </div>
                     </div>
 
@@ -274,7 +283,7 @@
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input class="form-control input-group-sm" required autofocus="" value="<%=vu.getDi_dom_a_d2()%>"   placeholder="---" type="text" name="DIR_DOM_A_D2" id="DOM_A_D2" maxlength="100">
+                                <input class="form-control input-group-sm" required autofocus="" value="<%=vu.getDi_dom_a_d2().trim()%>"   placeholder="---" type="text" name="DIR_DOM_A_D2" id="DOM_A_D2" maxlength="100">
 
                             </div>
                         </div>
@@ -325,8 +334,79 @@
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <select name="DIR_DOM_A_D3_ID" id="DOM_A_D3" class="form-control input-group-sm"  required="">
+                               <select name="DIR_DOM_A_D3_ID" id="DOM_A_D3" class="form-control input-group-sm"  required="">
                                     <option value="">[Seleccione]</option>
+                                    <%if (vu.getLi_di_dom_a_d3().trim().equals("1")) {%>
+                                     <option value="1" selected="">Numero</option>
+                                     <option value="2">Lote</option>
+                                    <option value="3">S/N</option>
+                                    <option value="4">Km</option>
+                                    <option value="5">Block</option>
+                                    <option value="6">Etapa</option>
+                                    <option value="7">Departamento</option>
+                                    <option value="8">Interior</option>
+                                    <%}
+                                    if (vu.getLi_di_dom_a_d3().trim().equals("2")) {%>
+                                    <option value="1">Número</option>
+                                    <option value="2" selected="">Lote</option>
+                                    <option value="3">S/N</option>
+                                    <option value="4">Km</option>
+                                    <option value="5">Block</option>
+                                    <option value="6">Etapa</option>
+                                    <option value="7">Departamento</option>
+                                    <option value="8">Interior</option>
+                                    <%}
+                                    if (vu.getLi_di_dom_a_d3().trim().equals("3")){%>
+                                    <option value="1">Número</option>
+                                    <option value="2" >Lote</option>
+                                    <option value="3" selected="">S/N</option>
+                                    <option value="4">Km</option>
+                                    <option value="5">Block</option>
+                                    <option value="6">Etapa</option>
+                                    <option value="7">Departamento</option>
+                                    <option value="8">Interior</option>
+                                    <%}
+                                       if (vu.getLi_di_dom_a_d3().trim().endsWith("4")){%>
+                                    <option value="1">Número</option>
+                                    <option value="2">Lote</option>
+                                    <option value="3">S/N</option>
+                                    <option value="4" selected="">Km</option>
+                                    <option value="5">Block</option>
+                                    <option value="6">Etapa</option>
+                                    <option value="7">Departamento</option>
+                                    <option value="8">Interior</option>
+                                    <%}
+                                       if (vu.getLi_di_dom_a_d3().trim().endsWith("5")){%>
+                                    <option value="1">Número</option>
+                                    <option value="2">Lote</option>
+                                    <option value="3">S/N</option>
+                                    <option value="4" >Km</option>
+                                    <option value="5" selected="">Block</option>
+                                    <option value="6">Etapa</option>
+                                    <option value="7">Departamento</option>
+                                    <option value="8">Interior</option>
+                                    <%}
+                                       if (vu.getLi_di_dom_a_d3().trim().endsWith("6")){%>
+                                    <option value="1">Número</option>
+                                    <option value="2">Lote</option>
+                                    <option value="3">S/N</option>
+                                    <option value="4">Km</option>
+                                    <option value="5">Block</option>
+                                    <option value="6" selected="">Etapa</option>
+                                    <option value="7">Departamento</option>
+                                    <option value="8">Interior</option>
+                                    <%}
+                                       if (vu.getLi_di_dom_a_d3().trim().endsWith("7")){%>
+                                    <option value="1">Número</option>
+                                    <option value="2">Lote</option>
+                                    <option value="3">S/N</option>
+                                    <option value="4">Km</option>
+                                    <option value="5">Block</option>
+                                    <option value="6">Etapa</option>
+                                    <option value="7" selected="">Departamento</option>
+                                    <option value="8">Interior</option>
+                                    <%}
+                                       if (vu.getLi_di_dom_a_d3().trim().endsWith("8")){%>
                                     <option value="1">Número</option>
                                     <option value="2">Lote</option>
                                     <option value="3">S/N</option>
@@ -334,7 +414,8 @@
                                     <option value="5">Block</option>
                                     <option value="6">Etapa</option>
                                     <option value="7">Departamento</option>
-                                    <option value="8">Interior</option>
+                                    <option value="8" selected="">Interior</option>
+                                    <%}%>
                                 </select>
                             </div>
                         </div>
@@ -344,7 +425,7 @@
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input class="form-control input-group-sm"  required autofocus="" value="<%=vu.getDi_dom_a_d4()%>"  placeholder="---" type="text" name="DIR_DOM_A_D4" id="DOM_A_D4" maxlength="100">
+                                <input class="form-control input-group-sm"  required autofocus="" value="<%=vu.getDi_dom_a_d4().trim()%>"  placeholder="---" type="text" name="DIR_DOM_A_D4" id="DOM_A_D4" maxlength="50">
 
                             </div>
                         </div>
@@ -364,11 +445,11 @@
                                     <%for (int i = 0; i < Listar_zona.size(); i++) {
                                             Zona zo = new Zona();
                                             zo = (Zona) Listar_zona.get(i);%> 
-                                              <% if(zo.getId_zona().trim().equals(zo.getId_zona().trim())){%>
-                                            <option value="<%=zo.getId_zona()%>" selected=""><%=zo.getDe_zona()%></option>
-                                            <%}else{%>
-                                            
-                                    <option value="<%=zo.getId_zona()%>"><%=zo.getDe_zona()%></option>
+                                    <% if (zo.getId_zona().trim().equals(vu.getLi_di_dom_a_d1().trim())) {%>
+                                    <option value="<%=zo.getId_zona()%>" selected=""><%=zo.getDe_zona()%></option>
+                                    <%} else {%>
+
+                                    <option value="<%=zo.getId_zona()%>" ><%=zo.getDe_zona()%></option>
                                     <%}%>
                                     <%}%>
                                 </select>
@@ -380,7 +461,7 @@
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input class="form-control input-group-sm"  required autofocus="" value="<%=vu.getDi_dom_a_d6()%>"  placeholder="---" type="text" name="DIR_DOM_A_D6" id="DOM_A_D6" maxlength="100">
+                                <input class="form-control input-group-sm"  required autofocus="" value="<%=vu.getDi_dom_a_d6().trim()%>"  placeholder="---" type="text" name="DIR_DOM_A_D6" id="DOM_A_D6" maxlength="50">
 
                             </div>
                         </div>
@@ -390,7 +471,7 @@
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input class="form-control input-group-sm"  required autofocus="" value="<%=vu.getDi_dom_a_ref()%>"   placeholder="Referencia" type="text" name="DIR_DOM_A_REF" id="DOM_A_REF" maxlength="300">
+                                <input class="form-control input-group-sm"  required autofocus="" value="<%=vu.getDi_dom_a_ref().trim()%>"   placeholder="Referencia" type="text" name="DIR_DOM_A_REF" id="DOM_A_REF" maxlength="50">
                             </div>
                         </div>
                     </div>
@@ -403,21 +484,23 @@
                         <div class="form-group">
 
                             <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                  <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+
                                 <select  id="dep_dir_a" class="form-control input-group-sm"  required="" name="ID_DEPARTAMENTO">
-                                    <option value="">[Departamento]</option>
+                                    <option value="" selected="selected">[Departamento]</option>
                                     <%for (int d = 0; d < List_Departamento.size(); d++) {
                                             Ub_Departamento dep = new Ub_Departamento();
                                             dep = (Ub_Departamento) List_Departamento.get(d);
-                                          %>
-                                      <% if(dep.getId_departamento().trim().equals(dep.getId_departamento().trim())){%>
-                                            <option value="<%=dep.getId_departamento()%>" selected=""><%=dep.getNo_departamento()%></option>
-                                            <%}else{%>
+                                            if (dep.getId_departamento().trim().equals(vu.getId_departamento_ub().trim())) {
+                                    %>
+                                    <option value="<%=dep.getId_departamento()%>" selected=""><%=dep.getNo_departamento()%></option>
+                                    <%} else {%>
                                     <option value="<%=dep.getId_departamento()%>" ><%=dep.getNo_departamento()%></option>
-                                    <%}%>
-                                    <%}%>
+                                    <%}
+                                        }%>
 
                                 </select>
+
                             </div>
                         </div>
                     </div>
@@ -428,10 +511,20 @@
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                 <select  id="pro_dir_a" class="form-control input-group-sm"  required="" name="ID_PROVINCIA">
-                                    <option value="">[Provincia]</option>
-
-
+                                    <option value="" selected="selected" >[Provincia]</option>
+                                    <%for (int j = 0; j < List_Provincia.size(); j++) {
+                                            Ub_Provincia pro = new Ub_Provincia();
+                                            pro = (Ub_Provincia) List_Provincia.get(j);
+                                           if(pro.getId_provincia().trim().equals(vu.getId_provincia_ub().trim())){
+                                    %>
+                                     <option value="<%=pro.getId_provincia()%>" selected=""><%=pro.getNo_provincia()%></option>
+                                     <%}else{%>
+                                     <option value="<%=pro.getId_provincia()%>" ><%=pro.getNo_provincia()%></option>
+                                     <%}
+                                     }%>
                                 </select>
+                                
+                              
                             </div>
                         </div>
                     </div>
@@ -443,6 +536,16 @@
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                 <select name="DIR_DOM_A_DISTRITO_ID"  id="DOM_A_DISTRITO" class="form-control input-group-sm"   required="" >
                                     <option value="">[Distrito]</option>
+                                     <%for (int q = 0; q < List_Distrito.size(); q++) {
+                                             Ub_Distrito dis = new Ub_Distrito();
+                                              dis = (Ub_Distrito) List_Distrito.get(q);
+                                           if(dis.getNo_distrito().trim().equals(vu.getId_distrito_ub().trim())){
+                                                                                 %>
+                                       <option value="<%=dis.getId_distrito()%>" selected=""><%=dis.getNo_distrito()%></option>
+                                       <%}else{%>      
+                                       <option value="<%=dis.getId_distrito()%>" ><%=dis.getNo_distrito()%></option>
+                                         <%}
+                                         }%>
                                 </select>
                             </div>
                         </div>
@@ -450,16 +553,12 @@
                     <!--<button onclick="duplicar();
                             return false;"  class="btn btn-primary" id="btn-duplicar">Duplicar</button>-->
 
-
-
                 </div><br>
-                <input type="text" value="<%=vu.getId_usuario()%>" name="idus" />
+                <input type="text" value="<%=vu.getId_trabajador().trim()%>" name="ID_TR"/>
+                <input type="text" value="<%=vu.getId_usuario().trim()%>" name="idus" />
                 <input type="hidden" value="opc" name="editar_Perfil" />
                 <input type="Submit" name="opc" class="btn btn-primary" id="idus" value="Modificar" >
                 <input type="Submit" name="Nuevo" class="btn btn-primary" value="Nuevo" >
-                <button type="submit" class="btn btn-success">
-                    TERMINAR
-                </button>
 
                 <h2>...</h2>
                 <%}%>

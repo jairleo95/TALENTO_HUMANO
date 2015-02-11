@@ -338,7 +338,7 @@
                 traditional href="" links. See documentation for details.
                 -->
 
-                <ul>
+                <ul >
 
                     <%
                         for (int i = 0; i < listarURL.size(); i++) {
@@ -348,7 +348,7 @@
                     %>
 
                     <%  if (dp.getId_privilegio().equals("PRV-000012")) {%>
-                    <li>
+                    <li class="li-privilegio">
                         <a href="#"><i class="fa fa-lg fa-fw fa-windows"></i> <span class="menu-item-parent">Generar Requerimiento</span></a>
                         <ul>
                             <li>
@@ -383,9 +383,8 @@
 
                     <%} else {%>
 
-                    <li>
+                    <li class="li-privilegio">
                         <a href="<%=dp.getDi_url()%>" target="myframe" title="<%=dp.getNo_link()%>"><i class="<%=dp.getIc_link().trim()%>"></i> <span class="menu-item-parent"><%=dp.getNo_link()%></span></a>
-
                     </li>
                     <%}
                         }%>
@@ -665,6 +664,10 @@
                  */
                 $(".menu-item-parent").parent().click(function () {
                     $(".titulo_menu").text($(this).text());
+                });
+                $(".li-privilegio").click(function(){
+                    $(".li-privilegio").removeClass("active");
+                    $(this).addClass("active");
                 });
                 $(".js-status-update a").click(function () {
                     var selText = $(this).text();

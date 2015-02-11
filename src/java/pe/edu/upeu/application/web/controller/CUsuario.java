@@ -170,13 +170,9 @@ public class CUsuario extends HttpServlet {
             String DIR_DOM_A_D5_ID = request.getParameter("DIR_DOM_A_D5_ID");
             String DIR_DOM_A_D6 = request.getParameter("DIR_DOM_A_D6");
             String DIR_DOM_A_REF = request.getParameter("DIR_DOM_A_REF");
+             String ID_TRABAJADOR = request.getParameter("ID_TR");
 
-            //usu.Mod_perfil(null, NO_USUARIO, PW, TE_TRABAJADOR, CL_TRABAJADOR, CORREO_PERSONAL, VIA, DIR_2, DIR_3, DIR_4, DIR_5, DIR_6,REF,ID_DIST);
-            // getServletContext().setAttribute("ListaridUsuario", usu.List_Usuario_var_id(idus));
-            //response.sendRedirect("Vista/Usuario/editarPerfil.jsp");
-            out.print(NO_USUARIO + CLA_NUEVA + TE_TRABAJADOR + CL_TRABAJADOR + CORREO_PERSONAL + id_user_1);
-            out.print(DIR_DOM_A_D1_ID + DIR_DOM_A_D2 + DIR_DOM_A_D3_ID + DIR_DOM_A_D4 + DIR_DOM_A_D5_ID + DIR_DOM_A_D6 + DIR_DOM_A_REF + DIR_DOM_A_DISTRITO_ID + id_dep + id_prov);
-            usu.Mod_perfil(id_user_1, NO_USUARIO, CLA_NUEVA, TE_TRABAJADOR, CL_TRABAJADOR, CORREO_PERSONAL, id_dep, id_prov, DIR_DOM_A_D1_ID, DIR_DOM_A_D2, DIR_DOM_A_D3_ID, DIR_DOM_A_D4, DIR_DOM_A_D5_ID, DIR_DOM_A_D6, DIR_DOM_A_REF, DIR_DOM_A_DISTRITO_ID);
+            usu.Mod_perfil(id_user_1, NO_USUARIO, CLA_NUEVA, TE_TRABAJADOR, CL_TRABAJADOR, CORREO_PERSONAL, id_dep, id_prov, DIR_DOM_A_D1_ID, DIR_DOM_A_D2, DIR_DOM_A_D3_ID, DIR_DOM_A_D4, DIR_DOM_A_D5_ID, DIR_DOM_A_D6, DIR_DOM_A_REF, DIR_DOM_A_DISTRITO_ID ,ID_TRABAJADOR);
             getServletContext().setAttribute("Lista_Usuarios", usu.Val_Usuario(id_user_1));
             response.sendRedirect("Vista/Usuario/Perfil_Usuario.jsp");
         }

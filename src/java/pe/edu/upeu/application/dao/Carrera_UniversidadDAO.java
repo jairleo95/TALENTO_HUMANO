@@ -82,7 +82,7 @@ public class Carrera_UniversidadDAO implements InterfaceCarrera_UniversidadDAO {
     }
 
     @Override
-    public List<Map<String, ?>> Carrera(String id) {
+    public List<Map<String, ?>> Carrera_Id_universidad(String id) {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);

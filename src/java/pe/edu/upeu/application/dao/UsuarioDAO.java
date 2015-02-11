@@ -182,6 +182,12 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
                 v.setLi_autoridad(rs.getString("li_autoridad"));
                 v.setNo_ap_autoridad(rs.getString("no_ap_autoridad"));
                 v.setCl_autoridad(rs.getString("cl_autoridad"));
+                v.setId_distrito_ub(rs.getString("id_distrito_ub"));
+                v.setId_provincia_ub(rs.getString("id_provincia_ub"));
+                v.setId_departamento_ub(rs.getString("id_departamento_ub"));
+                v.setNo_departamento_ub(rs.getString("no_departamento_ub"));
+                v.setNo_provincia_ub(rs.getString("no_provincia_ub"));
+                v.setNo_distrito_ub(rs.getString("no_distrito_ub"));
 
                 list.add(v);
             }
@@ -377,12 +383,12 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
 
     @Override
     public void Mod_perfil(String ID_USUARIO, String NO_USUARIO, String PW_USUARIO, String TE_TRABAJADOR, String CL_TRA, String DI_CORREO_PERSONAL, String ID_DEPARTAMENTO, String ID_PROVINCIA, String LI_DI_DOM_A_D1, String DI_DOM_A_D2,
-            String LI_DI_DOM_A_D3, String DI_DOM_A_D4, String LI_DI_DOM_A_D5, String DI_DOM_A_D6, String DI_DOM_A_REF, String ID_DI_DOM_A_DISTRITO) {
+            String LI_DI_DOM_A_D3, String DI_DOM_A_D4, String LI_DI_DOM_A_D5, String DI_DOM_A_D6, String DI_DOM_A_REF, String ID_DI_DOM_A_DISTRITO, String ID_TRABAJADOR) {
         CallableStatement cst;
         try {
 
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            cst = conn.conex.prepareCall("{CALL RHSP_MOD_PERFIL( ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+            cst = conn.conex.prepareCall("{CALL RHSP_MOD_PERFIL( ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
             cst.setString(1, ID_USUARIO);
             cst.setString(2, NO_USUARIO);
             cst.setString(3, PW_USUARIO);
@@ -400,17 +406,15 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
             cst.setString(15, DI_DOM_A_REF);
             cst.setString(16, ID_DI_DOM_A_DISTRITO);
 
+            cst.setString(17, ID_TRABAJADOR);
+
             cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
             throw new RuntimeException("Error al modificar perfil de  usuario...");
         } finally {
-            try {
-                this.conn.close();
-            } catch (Exception e) {
-                throw new RuntimeException(e.getMessage());
-            }
+            this.conn.close();
         }
 
     }
