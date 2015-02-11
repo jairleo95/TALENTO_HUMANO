@@ -10,6 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Carga Academica</title>
+        <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
     </head>
     <body>
     <center>
@@ -50,10 +51,14 @@
             <br>
 
         </form>
+        <button type="button" class="listar">
+            Listar
+        </button>
         <table border="1">
             <thead>
                 <tr>
-                    <th>DNI</th>
+                    <th>Tipo Doc</th>
+                    <th>Num. Doc</th>
                     <th>APELLIDOS Y NOMBRES</th>
                     <th>ESCUELA</th>
                     <th>FACULTAD</th>
@@ -63,11 +68,46 @@
                 </tr>
 
             </thead>
-            <tbody>
-                <tr><td></td></tr>
+            <tbody class="tbody-carga">
+           
 
             </tbody>
         </table>
     </center>
 </body>
+<script>
+
+    (function ($) {
+        $(document).ready(function () {
+            $('#cargador').show();
+
+            var url = 'http://localhost/demo/data.php';
+
+            $(".listar").click(function () {
+                  $('.tbody-carga').empty();
+
+                $.post(url, function (data) {
+                    $('#cargador').hide();
+                    $('#listaDoc').show();
+                    $.each(data, function (i, campo) {
+                        $('.tbody-carga').append('<tr>');
+                        $('.tbody-carga').append('<td>' + campo.tipodocumento +'</td>');
+                        $('.tbody-carga').append('<td>' + campo.numerodocumento +'</td>');
+                        $('.tbody-carga').append('<td>' + campo.apepat+' '+campo.apemat+' '+campo.nombre + '</td>');
+                        $('.tbody-carga').append('<td>' + campo.eap +'</td>');
+                        $('.tbody-carga').append('<td>' + campo.facultad+ '</td>');
+                        $('.tbody-carga').append('<td>' + campo.dni +'</td>');
+                        $('.tbody-carga').append('<td>' + campo.dni +'</td>');
+                        $('.tbody-carga').append('<td>' + campo.dni +'</td>');
+                        $('.tbody-carga').append('</tr>');
+                    });
+                });
+            });
+
+
+
+        });
+    })(jQuery);
+
+</script>
 </html>
