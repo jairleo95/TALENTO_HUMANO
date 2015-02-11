@@ -1,3 +1,5 @@
+<%@page import="pe.edu.upeu.application.model.Ub_Distrito"%>
+<%@page import="pe.edu.upeu.application.model.Ub_Provincia"%>
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
 <%@page import="pe.edu.upeu.application.dao.ListaDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceListaDAO"%>
@@ -20,6 +22,8 @@
 <jsp:useBean id="Listar_zona" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_via" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Provincia" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Distrito" scope="application" class="java.util.ArrayList"/>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -47,7 +51,7 @@
         <% for (int o = 0; o < Lista_Usuarios.size(); o++) {
                 V_Usuario vu = new V_Usuario();
                 vu = (V_Usuario) Lista_Usuarios.get(o);%>
-                
+
         <div id="caja">
             <h3>-Modificar Perfil Usuario</h3>
             <hr>
@@ -139,7 +143,7 @@
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                 <input class="form-control input-group-sm"    placeholder="" type="text" name="TEL_USUARIO" id="DOM_A_D2" data-mask="(99) 999-999" maxlength="8" value="<%=vu.getTe_trabajador().trim()%> ">
-                                   
+
                             </div>
                         </div>
                     </div>
@@ -259,17 +263,17 @@
                                     <%for (int i = 0; i < Listar_via.size(); i++) {
                                             Via zo = new Via();
                                             zo = (Via) Listar_via.get(i);%> 
-                                            <% if(zo.getId_via().trim().equals(vu.getDi_dom_a_d2().trim())){%>
-                                            <option value="<%=zo.getId_via()%>" selected=""><%=zo.getDe_via()%></option>
-                                            <%}else{%>
-                                            
+                                    <% if (zo.getId_via().trim().equals(vu.getDi_dom_a_d2().trim())) {%>
+                                    <option value="<%=zo.getId_via()%>" selected=""><%=zo.getDe_via()%></option>
+                                    <%} else {%>
+
                                     <option value="<%=zo.getId_via()%>"><%=zo.getDe_via()%></option>
                                     <%}%>
                                     <%}%>
                                 </select>
-                
+
                             </div>
-                 
+
                         </div>
                     </div>
 
@@ -369,10 +373,10 @@
                                     <%for (int i = 0; i < Listar_zona.size(); i++) {
                                             Zona zo = new Zona();
                                             zo = (Zona) Listar_zona.get(i);%> 
-                                              <% if(zo.getId_zona().trim().equals(zo.getId_zona().trim())){%>
-                                            <option value="<%=zo.getId_zona()%>" selected=""><%=zo.getDe_zona()%></option>
-                                            <%}else{%>
-                                            
+                                    <% if (zo.getId_zona().trim().equals(zo.getId_zona().trim())) {%>
+                                    <option value="<%=zo.getId_zona()%>" selected=""><%=zo.getDe_zona()%></option>
+                                    <%} else {%>
+
                                     <option value="<%=zo.getId_zona()%>" ><%=zo.getDe_zona()%></option>
                                     <%}%>
                                     <%}%>
@@ -408,22 +412,23 @@
                         <div class="form-group">
 
                             <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                  <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+
                                 <select  id="dep_dir_a" class="form-control input-group-sm"  required="" name="ID_DEPARTAMENTO">
-                                    <option value="">[Departamento]</option>
+                                    <option value="" selected="selected">[Departamento]</option>
                                     <%for (int d = 0; d < List_Departamento.size(); d++) {
                                             Ub_Departamento dep = new Ub_Departamento();
-                                            dep = (Ub_Departamento) List_Departamento.get(d);%>
-                                            
-                                         <% if(dep.getId_departamento().trim().equals(vu.getId_departamento())){%>
-                                            <option value="<%=dep.getId_departamento().trim()%>" selected=""><%=dep.getNo_departamento()%></option>
-                                            <%}else{%>
-                                     
-                                           <option value="<%=dep.getId_departamento()%>" ><%=dep.getNo_departamento()%></option>
-                                    <%}%>
-                                      <%}%>
+                                            dep = (Ub_Departamento) List_Departamento.get(d);
+                                            if (dep.getId_departamento().trim().equals(vu.getId_departamento_ub().trim())) {
+                                    %>
+                                    <option value="<%=dep.getId_departamento()%>" selected=""><%=dep.getNo_departamento()%></option>
+                                    <%} else {%>
+                                    <option value="<%=dep.getId_departamento()%>" ><%=dep.getNo_departamento()%></option>
+                                    <%}
+                                        }%>
 
                                 </select>
+
                             </div>
                         </div>
                     </div>
@@ -434,10 +439,21 @@
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                 <select  id="pro_dir_a" class="form-control input-group-sm"  required="" name="ID_PROVINCIA">
-                                    <option value="">[Provincia]</option>
+                                    <option value="" selected="selected">[Provincia]</option>
+                                    <%for (int j = 0; j < List_Provincia.size(); j++) {
+                                            Ub_Provincia pro = new Ub_Provincia();
+                                            pro = (Ub_Provincia) List_Provincia.get(j);
+                                           if(pro.getId_provincia().trim().equals(vu.getId_provincia_ub().trim())){%>
+                                     <option value="<%=pro.getId_provincia()%>" selected=""><%=pro.getNo_provincia()%></option>
+                                     <%}else{%>
+                                     <option value="<%=pro.getId_provincia()%>" ><%=pro.getNo_provincia()%></option>
+                                     <%}
+                                     }%>
 
 
                                 </select>
+                                <select> <option value="" selected="selected"><%=vu.getId_provincia_ub().trim()%></option></select>
+                              
                             </div>
                         </div>
                     </div>
@@ -449,6 +465,16 @@
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                 <select name="DIR_DOM_A_DISTRITO_ID"  id="DOM_A_DISTRITO" class="form-control input-group-sm"   required="" >
                                     <option value="">[Distrito]</option>
+                                     <%for (int q = 0; q < List_Distrito.size(); q++) {
+                                             Ub_Distrito dis = new Ub_Distrito();
+                                                                                        dis = (Ub_Distrito) List_Distrito.get(q);
+                                                                                        if(dis.getNo_distrito().trim().equals(vu.getId_distrito_ub().trim())){
+                                                                                 %>
+                                                                                 <option value="<%=dis.getId_distrito()%>" selected=""><%=dis.getNo_distrito()%></option>
+                                                                                <%}else{%>      
+                                                                                <option value="<%=dis.getId_distrito()%>" ><%=dis.getNo_distrito()%></option>
+                                                                                <%}
+                                                                                }%>
                                 </select>
                             </div>
                         </div>
@@ -462,7 +488,7 @@
                 <input type="hidden" value="opc" name="editar_Perfil" />
                 <input type="Submit" name="opc" class="btn btn-primary" id="idus" value="Modificar" >
                 <input type="Submit" name="Nuevo" class="btn btn-primary" value="Nuevo" >
-               
+
                 <h2>...</h2>
                 <%}%>
 
