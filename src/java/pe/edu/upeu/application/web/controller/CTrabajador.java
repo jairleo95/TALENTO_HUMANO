@@ -79,7 +79,7 @@ public class CTrabajador extends HttpServlet {
         InterfaceCentro_CostosDAO cc = new Centro_CostoDAO();
         InterfaceTipo_DocumentoDAO tdoc = new Tipo_DocumentoDAO();
         InterfaceContratoDAO con = new ContratoDAO();
-        InterfaceCarrera_UniversidadDAO cu = new  Carrera_UniversidadDAO();
+        InterfaceCarrera_UniversidadDAO cu = new Carrera_UniversidadDAO();
         String opc = "";
         String Text = "";
         opc = (String) request.getParameter("opc");
@@ -377,17 +377,17 @@ public class CTrabajador extends HttpServlet {
         }
         if (opc.equals("Editar_Asp_Acad")) {
             String idtr = request.getParameter("idtr");
-            
-            getServletContext().setAttribute("List_Cuenta_Sueldo",tr.List_Cuenta_Sueldo(idtr) );
+
+            getServletContext().setAttribute("List_Cuenta_Sueldo", tr.List_Cuenta_Sueldo(idtr));
             getServletContext().setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
             getServletContext().setAttribute("list_año", li.lista_años());
             getServletContext().setAttribute("List_Universidad", li.List_Universidad());
             getServletContext().setAttribute("List_Carrera", li.List_Carrera());
             getServletContext().setAttribute("List_Situacion_Educativa", li.List_Situacion_Educativa());
-            
+
             response.sendRedirect("Vista/Trabajador/Mod_Aspecto_Academico.jsp?idtr=" + idtr);
         }
-        if (opc.equals("Modificar_Asp_Acad")){
+        if (opc.equals("Modificar_Asp_Acad")) {
             String idtr = request.getParameter("idtr");
             //ASPECTO ACADEMICO
             String LI_NIVEL_EDUCATIVO = request.getParameter("NIVEL_EDUCATIVO");
@@ -397,9 +397,10 @@ public class CTrabajador extends HttpServlet {
             String DE_ANNO_EGRESO = request.getParameter("A_EGRESO");
             String CM_OTROS_ESTUDIOS = request.getParameter("OTROS_ESTUDIOS");
             String CA_TIPO_HORA_PAGO_REFEERENCIAL = request.getParameter("TIPO_HORA_PAGO_REFEERENCIAL");
-            
+
             tr.MOD_ASPEC_ACADEM(LI_NIVEL_EDUCATIVO, REGIMEN, ES_INST_PERU, CARRERA, DE_ANNO_EGRESO, CM_OTROS_ESTUDIOS, CA_TIPO_HORA_PAGO_REFEERENCIAL, idtr);
-             //REGISTRAR EN TABLA CUENTA SUELDO
+            //out.print(CARRERA);
+            //REGISTRAR EN TABLA CUENTA SUELDO
             String NO_BANCO = request.getParameter("BANCO");
             String NU_CUENTA = (request.getParameter("CUENTA") == null) ? "no tiene" : request.getParameter("CUENTA");
             //String NU_CUENTA_BANC = (request.getParameter("CUENTA_BANC") == null) ? "0" : "no tiene";
@@ -407,9 +408,10 @@ public class CTrabajador extends HttpServlet {
             String ES_GEM_NU_CUENTA = (request.getParameter("GEN_NU_CUEN") == null) ? "0" : "1";
             String NO_BANCO_OTROS = request.getParameter("BANCO_OTROS");
             
-            //tr.MOD_CUENTA_SUELDO(NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEM_NU_CUENTA, NO_BANCO_OTROS, idtr);
-            response.sendRedirect("Vista/Trabajador/Aspecto_Academico.jsp?idtr=" + idtr);
-            }
+            tr.MOD_CUENTA_SUELDO(NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEM_NU_CUENTA, NO_BANCO_OTROS, idtr);
+            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+           response.sendRedirect("Vista/Trabajador/Aspecto_Academico.jsp?idtr=" + idtr);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

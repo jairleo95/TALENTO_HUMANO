@@ -98,10 +98,10 @@
             pu = $('.puesto');
             es = $('.estado');
             ti = $('.tipo');
-            es.append("<option>--Seleccione--</option>");
+            es.append("<option value='-1'>--Seleccione--</option>");
             es.append("<option value='1'>Activa</option>");
             es.append("<option value ='0'>Desactiva</option>");
-            ti.append("<option>--Seleccione--</option>");
+            ti.append("<option value='0'>--Seleccione--</option>");
             ti.append("<option value='1'>Principal</option>");
             ti.append("<option value ='2'>Secundaria</option>");
             llenar_puesto();
@@ -158,9 +158,9 @@
                             valor = $(this).val();
                             idFuncion = $(".btnIdFun" + valor).val();
                             $('.deFunc').val($(".defun" + valor).text());
-                            $('.estado').val($(".esfun" + valor).text());
+                            $('.estado').val(-1);
                             $('.puesto').val($(".nopu" + valor).text());
-                            $('.tipo').val($(".tifu" + valor).text());
+                            $('.tipo').val(0);
                         });
                 $('.del').click(function() {
                     valor = $(this).val();

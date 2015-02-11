@@ -18,6 +18,7 @@ import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Cuenta_Sueldo;
 import pe.edu.upeu.application.model.Trabajador;
+import pe.edu.upeu.application.model.Universidad_Carrera;
 import pe.edu.upeu.application.model.V_Ficha_Trab_Num_C;
 import pe.edu.upeu.application.model.X_List_dat_tr_plantilla;
 import pe.edu.upeu.application.web.controller.CConversion;
@@ -333,6 +334,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 v.setId_nacionalidad(rs.getString("id_nacionalidad"));
                 v.setDistrito_nac(rs.getString("distrito_nac"));
                 v.setDe_anno_egreso(rs.getString("de_anno_egreso"));
+                v.setId_carrera(rs.getString("id_carrera"));
                 list.add(v);
             }
 
@@ -635,7 +637,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
     }
 
     @Override
-    public void MOD_ASPEC_ACADEM(String LI_NIVEL_EDUCATIVO, String CARRERA, String REGIMEN, String ES_INS_PERU, String DE_ANNO_EGRESO, String CM_OTROS_ESTUDIOS, String CA_TIPO_HORA_PAGO_REFERENCIAL, String ID_TRABAJADOR) {
+    public void MOD_ASPEC_ACADEM(String LI_NIVEL_EDUCATIVO,String REGIMEN, String ES_INS_PERU, String CARRERA, String DE_ANNO_EGRESO, String CM_OTROS_ESTUDIOS, String CA_TIPO_HORA_PAGO_REFERENCIAL, String ID_TRABAJADOR) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_TRA_ASP_ACAD( ?, ?, ?, ?, ?, ?, ?, ?)} ");
@@ -685,5 +687,38 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             }
         }
     }
+
+    @Override
+    public List<Universidad_Carrera> List_Uni_Carr() {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT * FROM RHTX_UNIVERSIDAD_CARRERA";
+        List<Universidad_Carrera> list = new ArrayList<Universidad_Carrera>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+
+            while (rs.next()) {
+                Universidad_Carrera cs = new Universidad_Carrera();
+                cs.setId_universidad_carrera(rs.getString("id_universidad_carrera"));
+                cs.setId_carrera(rs.getString("id_carrera"));
+                cs.setId_universidad(rs.getString("id_universidad"));
+                cs.setEs_uni_carr(rs.getString("es_uni_carr"));
+
+                list.add(cs);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return list;
+    }
+
 
 }

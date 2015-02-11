@@ -32,9 +32,13 @@
                 %>   
 
                 <tr>
-                    <td colspan="2">
+                    <td >
                         <div class="title">Direccion Domicilio Actual</div>
                     </td>
+
+                    <%String IDTR = trb.getId_trabajador();%>
+                    <td ><a class="btn btn-success" href="../../trabajador?opc=Editar_Dat_Gen&idtr=<%=IDTR%>">EDITAR</a></td>
+
                 </tr> 
                 <tr><td class="text-info">Dirección :</td><td><% InterfaceListaDAO l = new ListaDAO();
                     for (int b = 0; b < l.List_Dom_D1_Id().size(); b++) {
@@ -98,7 +102,7 @@
                         }
 
                     }
-                    
+
                     out.println(" " + trb.getDi_dom_leg_d6());
 
                         %></td></tr>
@@ -127,7 +131,8 @@
                     </td>
                     <td >
                         <input type="hidden" name="idtr" value="<%=trb.getId_trabajador()%>">  
-                        <input class="btn btn-success" type="submit" name="opc" value="EditarAR">  
+                        <input type="hidden" type="submit" name="opc" value="EditarAR">  
+                        <input class="btn btn-success" type="submit"  value="EDITAR">  
                     </td>
                 </tr>
                 <tr><td class="text-info">Religión:</td><td><%
@@ -141,8 +146,16 @@
                     if (trb.getLi_religion().equals("3")) {
                         out.println("Otros");
                     }%></td></tr>
-                <tr><td class="text-info">Iglesia:</td><td><%if(trb.getNo_iglesia()==null){out.print("SIN REGISTRAR");}else{out.print(trb.getNo_iglesia());}%></td></tr>
-                <tr><td class="text-info">Cargo en la Iglesia:</td><td><%if(trb.getDe_cargo()==null){out.print("SIN REGISTRAR");}else{out.print(trb.getDe_cargo());}%></td></tr>
+                <tr><td class="text-info">Iglesia:</td><td><%if (trb.getNo_iglesia() == null) {
+                        out.print("SIN REGISTRAR");
+                    } else {
+                        out.print(trb.getNo_iglesia());
+                    }%></td></tr>
+                <tr><td class="text-info">Cargo en la Iglesia:</td><td><%if (trb.getDe_cargo() == null) {
+                        out.print("SIN REGISTRAR");
+                    } else {
+                        out.print(trb.getDe_cargo());
+                    }%></td></tr>
                 <tr><td class="text-info">Autoridad:</td><td><%
                     if (trb.getLi_autoridad() != null) {
                         if (trb.getLi_autoridad().trim().equals("1")) {
@@ -154,14 +167,23 @@
                         if (trb.getLi_autoridad().trim().equals("3")) {
                             out.println("Sacerdote");
                         }
-                    }else{
-                    out.print("SIN REGISTRAR");}
+                    } else {
+                        out.print("SIN REGISTRAR");
+                    }
 
                         %></td></tr>
-                <tr><td class="text-info">Nombres y Apellidos:</td><td><%if(trb.getNo_ap_autoridad()==null){out.print("SIN REGISTRAR");}else{out.print(trb.getNo_ap_autoridad());}%></td></tr>
-                <tr><td class="text-info">Telefono/Celular:</td><td><%if(trb.getCl_autoridad()==null){out.print("SIN REGISTRAR");}else{out.print(trb.getCl_autoridad());}%></td></tr>
-               <!-- <td colspan="2"><input class="btn btn-success"  type="submit" value="Editar"></td>-->
-                    <%}%>
+                <tr><td class="text-info">Nombres y Apellidos:</td><td><%if (trb.getNo_ap_autoridad() == null) {
+                        out.print("SIN REGISTRAR");
+                    } else {
+                        out.print(trb.getNo_ap_autoridad());
+                    }%></td></tr>
+                <tr><td class="text-info">Telefono/Celular:</td><td><%if (trb.getCl_autoridad() == null) {
+                        out.print("SIN REGISTRAR");
+                    } else {
+                        out.print(trb.getCl_autoridad());
+                    }%></td></tr>
+                <!-- <td colspan="2"><input class="btn btn-success"  type="submit" value="Editar"></td>-->
+                <%}%>
                 <tr></tr>
             </table>
         </form>
