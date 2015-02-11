@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public interface InterfacePasoDAO {
 
-    public List<Map<String, ?>> List_Paso(String proceso);
+    public List<Map<String, ?>> List_Paso_Habilitado(String proceso);
 
     public void INSERT_PASOS(String ID_PASOS, String ID_PROCESO, String DE_PASOS, String NU_PASOS, String CO_PASOS);
     public void DELETE_PASOS(String ID_PASOS);
