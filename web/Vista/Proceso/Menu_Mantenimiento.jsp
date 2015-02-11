@@ -21,13 +21,13 @@
     <body>
         <h1></h1>
         <ul>
-    <li><a href="Mant_Proceso.jsp"  target="myframe">Procesos</a> </li>
-    <li><a href="Mant_Tipo_Requerimiento.jsp"  target="myframe">Requerimiento</a></li>
-    <li><a href="Prueba_Nestable_List.jsp"  target="myframe">Pasos</a></li>
-    <li><a href="Mant_Paso_Puesto.jsp"  target="myframe">Paso - Puesto</a></li>
-    <li><a href="Mant_Req_Proceso.jsp"  target="myframe">Requerimiento - Proceso</a></li>
+    <li><a href="Mant_Proceso.jsp"  target="myframe3">Procesos</a> </li>
+    <li><a href="Mant_Tipo_Requerimiento.jsp"  target="myframe3">Requerimiento</a></li>
+    <li><a href="Prueba_Nestable_List.jsp"  target="myframe3">Pasos</a></li>
+    <li><a href="Mant_Paso_Puesto.jsp"  target="myframe3">Paso - Puesto</a></li>
+    <li><a href="Mant_Req_Proceso.jsp"  target="myframe3">Requerimiento - Proceso</a></li>
     </ul>
-    <iframe id="myframe" name="myframe" width="100%" height="800" scrolling="si" frameborder="0" src="Edit_Paso.jsp" />
+    <iframe id="myframe" name="myframe3" width="100%" height="800" scrolling="si" frameborder="0" src="Prueba_Nestable_List.jsp" />
 
 </body>
 </html>

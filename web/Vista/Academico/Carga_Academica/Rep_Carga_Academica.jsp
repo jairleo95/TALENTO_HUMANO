@@ -28,7 +28,6 @@
                 <option></option>
             </select>
             <br>
-            
             <label>Carrera :</label><select>
                 <option></option>
             </select>
