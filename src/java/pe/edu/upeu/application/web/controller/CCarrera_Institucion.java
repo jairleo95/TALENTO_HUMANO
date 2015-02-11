@@ -62,7 +62,7 @@ public class CCarrera_Institucion extends HttpServlet {
             if (opc.equals("carrera")) {
                 String reg = request.getParameter("inst");
 
-                List<Map<String, ?>> lista = model.Carrera(reg);
+                List<Map<String, ?>> lista = model.Carrera_Id_universidad(reg);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }

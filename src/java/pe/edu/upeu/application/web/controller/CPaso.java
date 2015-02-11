@@ -42,9 +42,9 @@ public class CPaso extends HttpServlet {
         Map<String, Object> rpta = new HashMap<String, Object>();
         try {
             String opc = request.getParameter("opc");
-            if (opc.equals("Listar")) {
+            if (opc.equals("Listar_habilitados")) {
                 String id = request.getParameter("proceso");
-                List<Map<String, ?>> lista = p.List_Paso(id);
+                List<Map<String, ?>> lista = p.List_Paso_Habilitado(id);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
 
