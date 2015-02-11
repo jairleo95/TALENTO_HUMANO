@@ -263,7 +263,7 @@
                                     <%for (int i = 0; i < Listar_via.size(); i++) {
                                             Via zo = new Via();
                                             zo = (Via) Listar_via.get(i);%> 
-                                    <% if (zo.getId_via().trim().equals(vu.getDi_dom_a_d2().trim())) {%>
+                                    <% if (zo.getId_via().trim().equals(vu.getLi_di_dom_a_d1().trim())) {%>
                                     <option value="<%=zo.getId_via()%>" selected=""><%=zo.getDe_via()%></option>
                                     <%} else {%>
 
@@ -334,8 +334,79 @@
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <select name="DIR_DOM_A_D3_ID" id="DOM_A_D3" class="form-control input-group-sm"  required="">
+                               <select name="DIR_DOM_A_D3_ID" id="DOM_A_D3" class="form-control input-group-sm"  required="">
                                     <option value="">[Seleccione]</option>
+                                    <%if (vu.getLi_di_dom_a_d3().trim().equals("1")) {%>
+                                     <option value="1" selected="">Numero</option>
+                                     <option value="2">Lote</option>
+                                    <option value="3">S/N</option>
+                                    <option value="4">Km</option>
+                                    <option value="5">Block</option>
+                                    <option value="6">Etapa</option>
+                                    <option value="7">Departamento</option>
+                                    <option value="8">Interior</option>
+                                    <%}
+                                    if (vu.getLi_di_dom_a_d3().trim().equals("2")) {%>
+                                    <option value="1">Número</option>
+                                    <option value="2" selected="">Lote</option>
+                                    <option value="3">S/N</option>
+                                    <option value="4">Km</option>
+                                    <option value="5">Block</option>
+                                    <option value="6">Etapa</option>
+                                    <option value="7">Departamento</option>
+                                    <option value="8">Interior</option>
+                                    <%}
+                                    if (vu.getLi_di_dom_a_d3().trim().equals("3")){%>
+                                    <option value="1">Número</option>
+                                    <option value="2" >Lote</option>
+                                    <option value="3" selected="">S/N</option>
+                                    <option value="4">Km</option>
+                                    <option value="5">Block</option>
+                                    <option value="6">Etapa</option>
+                                    <option value="7">Departamento</option>
+                                    <option value="8">Interior</option>
+                                    <%}
+                                       if (vu.getLi_di_dom_a_d3().trim().endsWith("4")){%>
+                                    <option value="1">Número</option>
+                                    <option value="2">Lote</option>
+                                    <option value="3">S/N</option>
+                                    <option value="4" selected="">Km</option>
+                                    <option value="5">Block</option>
+                                    <option value="6">Etapa</option>
+                                    <option value="7">Departamento</option>
+                                    <option value="8">Interior</option>
+                                    <%}
+                                       if (vu.getLi_di_dom_a_d3().trim().endsWith("5")){%>
+                                    <option value="1">Número</option>
+                                    <option value="2">Lote</option>
+                                    <option value="3">S/N</option>
+                                    <option value="4" >Km</option>
+                                    <option value="5" selected="">Block</option>
+                                    <option value="6">Etapa</option>
+                                    <option value="7">Departamento</option>
+                                    <option value="8">Interior</option>
+                                    <%}
+                                       if (vu.getLi_di_dom_a_d3().trim().endsWith("6")){%>
+                                    <option value="1">Número</option>
+                                    <option value="2">Lote</option>
+                                    <option value="3">S/N</option>
+                                    <option value="4">Km</option>
+                                    <option value="5">Block</option>
+                                    <option value="6" selected="">Etapa</option>
+                                    <option value="7">Departamento</option>
+                                    <option value="8">Interior</option>
+                                    <%}
+                                       if (vu.getLi_di_dom_a_d3().trim().endsWith("7")){%>
+                                    <option value="1">Número</option>
+                                    <option value="2">Lote</option>
+                                    <option value="3">S/N</option>
+                                    <option value="4">Km</option>
+                                    <option value="5">Block</option>
+                                    <option value="6">Etapa</option>
+                                    <option value="7" selected="">Departamento</option>
+                                    <option value="8">Interior</option>
+                                    <%}
+                                       if (vu.getLi_di_dom_a_d3().trim().endsWith("8")){%>
                                     <option value="1">Número</option>
                                     <option value="2">Lote</option>
                                     <option value="3">S/N</option>
@@ -343,7 +414,8 @@
                                     <option value="5">Block</option>
                                     <option value="6">Etapa</option>
                                     <option value="7">Departamento</option>
-                                    <option value="8">Interior</option>
+                                    <option value="8" selected="">Interior</option>
+                                    <%}%>
                                 </select>
                             </div>
                         </div>
@@ -373,7 +445,7 @@
                                     <%for (int i = 0; i < Listar_zona.size(); i++) {
                                             Zona zo = new Zona();
                                             zo = (Zona) Listar_zona.get(i);%> 
-                                    <% if (zo.getId_zona().trim().equals(zo.getId_zona().trim())) {%>
+                                    <% if (zo.getId_zona().trim().equals(vu.getLi_di_dom_a_d1().trim())) {%>
                                     <option value="<%=zo.getId_zona()%>" selected=""><%=zo.getDe_zona()%></option>
                                     <%} else {%>
 
@@ -439,20 +511,19 @@
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                 <select  id="pro_dir_a" class="form-control input-group-sm"  required="" name="ID_PROVINCIA">
-                                    <option value="" selected="selected">[Provincia]</option>
+                                    <option value="" selected="selected" >[Provincia]</option>
                                     <%for (int j = 0; j < List_Provincia.size(); j++) {
                                             Ub_Provincia pro = new Ub_Provincia();
                                             pro = (Ub_Provincia) List_Provincia.get(j);
-                                           if(pro.getId_provincia().trim().equals(vu.getId_provincia_ub().trim())){%>
+                                           if(pro.getId_provincia().trim().equals(vu.getId_provincia_ub().trim())){
+                                    %>
                                      <option value="<%=pro.getId_provincia()%>" selected=""><%=pro.getNo_provincia()%></option>
                                      <%}else{%>
                                      <option value="<%=pro.getId_provincia()%>" ><%=pro.getNo_provincia()%></option>
                                      <%}
                                      }%>
-
-
                                 </select>
-                                <select> <option value="" selected="selected"><%=vu.getId_provincia_ub().trim()%></option></select>
+                                
                               
                             </div>
                         </div>
@@ -467,14 +538,14 @@
                                     <option value="">[Distrito]</option>
                                      <%for (int q = 0; q < List_Distrito.size(); q++) {
                                              Ub_Distrito dis = new Ub_Distrito();
-                                                                                        dis = (Ub_Distrito) List_Distrito.get(q);
-                                                                                        if(dis.getNo_distrito().trim().equals(vu.getId_distrito_ub().trim())){
+                                              dis = (Ub_Distrito) List_Distrito.get(q);
+                                           if(dis.getNo_distrito().trim().equals(vu.getId_distrito_ub().trim())){
                                                                                  %>
-                                                                                 <option value="<%=dis.getId_distrito()%>" selected=""><%=dis.getNo_distrito()%></option>
-                                                                                <%}else{%>      
-                                                                                <option value="<%=dis.getId_distrito()%>" ><%=dis.getNo_distrito()%></option>
-                                                                                <%}
-                                                                                }%>
+                                       <option value="<%=dis.getId_distrito()%>" selected=""><%=dis.getNo_distrito()%></option>
+                                       <%}else{%>      
+                                       <option value="<%=dis.getId_distrito()%>" ><%=dis.getNo_distrito()%></option>
+                                         <%}
+                                         }%>
                                 </select>
                             </div>
                         </div>
