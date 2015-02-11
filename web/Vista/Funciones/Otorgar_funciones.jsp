@@ -127,7 +127,7 @@
             </div>
 
             <div class="funciones form-group">
-                <label>Funciones</label>
+                <label>Detalle de Funcion</label>
                 <%--<select class="ifun text-box chosen-select form-control">
                     <option value="0">-Seleccione-</option>
                     <%for (int i = 0; i < Listar_funciones.size(); i++) {
@@ -138,6 +138,14 @@
                     <%}%>
                 </select>--%>
                 <input type="text" class=" ifun form-control" placeholder="Nombre de la Funcion" required="">
+            </div>
+            <div class="estado form-group">
+                <label>Estado</label>
+                <select class="estado text-box chosen-select form-control">
+                    <option value="0">-Selelccione-</option>
+                    <option value="1">Activada</option>
+                    <option value="2">Desactivada</option>
+                </select>
             </div>
             <div class="tipo form-group">
                 <label>Tipo</label>
@@ -155,11 +163,12 @@
         <table class="table table-bordered table-responsive">
             <thead>
                 <tr>
-                    <td>Nro</td>
-                    <td>Detalle Funcion</td>
-                    <td>Estado</td>
-                    <td>Puesto</td>
-                    <td>Tipo</td>
+                    <td><center>Nro</center></td>
+                    <td><center>Detalle Funcion</center></td>
+                    <td><center>Estado</center></td>
+                    <td><center>Puesto</center></td>
+                    <td><center>Tipo</center></td>
+                    <td colspan="2"><center>Opcion</center></td>
                 </tr>
             </thead>
             <tbody class="tbodys">
@@ -171,7 +180,6 @@
     $('.alerta').hide();
     $(document).ready(function() {
         var idDireccion, idDep, idArea, idSeccion, tipoFuncion;
-        var validar = false;
         $(".idpu").change(function() {
             listar_tabla();
         });
@@ -253,17 +261,12 @@
             if ($(this).val() !== 0) {
                 tipoFuncion = $(this).val();
             }
-            if ($(this).val() == 0) {
-                $('.alerta').show();
-                $('.msg').text('Seleccionar Tipo !')
-            } else {
-                $('.alerta').hide();
-            }
+            validar_tip();
+            validar_fun();
         });
         $(".btnotorgar").click(function() {
             if (validar_dir() == true && validar_dep() == true && validar_ar() == true && validar_sec() == true && validar_pu() == true && validar_fun() == true && validar_tip() == true) {
                 var id_puesto = $(".idpu").val();
-                alert(id_puesto+$(".ifun").val()+tipoFuncion);
                 $.post("../../funcion", "opc=otorgar" + "&id_puesto=" + id_puesto + "&de_funcion=" + $(".ifun").val() + "&ti_funcion=" + tipoFuncion, function() {
                     listar_tabla();
                     $('.iddi').val(0);
@@ -288,21 +291,23 @@
                 if (list.length > 0) {
                     for (var i = 0; i < list.length; i++) {
                         ap.append("<tr>");
-                        ap.append("<td>" + (i + 1) + "</td>");
-                        ap.append("<td>" + list[i].nom_fu + "</td>");
+                        ap.append("<td><center>" + (i + 1) + "</center></td>");
+                        ap.append("<td><center>" + list[i].nom_fu + "</center></td>");
                         if (list[i].es_fu == 1) {
-                            ap.append("<td>Activa</td>");
+                            ap.append("<td><center>Activada</center></td>");
                         } else if (list[i].es_fu == 0) {
-                            ap.append("<td>Desactiva</td>");
+                            ap.append("<td><center>Desactivada</center></td>");
                         }
                         ;
-                        ap.append("<td>" + list[i].no_pu + "</td>");
+                        ap.append("<td><center>" + list[i].no_pu + "</center></td>");
                         if (list[i].ti_fu == 1) {
-                            ap.append("<td>Principal</td>");
+                            ap.append("<td><center>Principal</center></td>");
                         } else if (list[i].ti_fu == 2) {
-                            ap.append("<td>Secundaria</td>");
+                            ap.append("<td><center>Secundaria</center></td>");
                         }
                         ;
+                        ap.append("<td class = 'btnedit' ><center> <button class = 'edit btn btn-primary' value = '" + i + "' > Editar </button></center></td >");
+                        ap.append("<td class = 'btndel' ><center> <button class = 'del btn btn-danger' value = '" + i + "' > Eliminar </button></center></td >");
                         ap.append("</tr>");
                     }
                 } else {
@@ -313,7 +318,7 @@
         function validar_dir() {
             if ($('.iddi').val() == 0) {
                 $('.alerta').show();
-                $('.msg').text('Seleccionar Direccion !')
+                $('.msg').text('Seleccionar Direccion !');
                 return false;
             } else {
                 $('.alerta').hide();
@@ -323,7 +328,7 @@
         function validar_dep() {
             if ($('.idde').val() == 0) {
                 $('.alerta').show();
-                $('.msg').text('Seleccionar Departamento !')
+                $('.msg').text('Seleccionar Departamento !');
                 return false;
             } else {
                 $('.alerta').hide();
@@ -333,7 +338,7 @@
         function validar_ar() {
             if ($('.idar').val() == 0) {
                 $('.alerta').show();
-                $('.msg').text('Seleccionar Area !')
+                $('.msg').text('Seleccionar Area !');
                 return false;
             } else {
                 $('.alerta').hide();
@@ -343,33 +348,51 @@
         function validar_sec() {
             if ($('.idse').val() == 0) {
                 $('.alerta').show();
-                $('.msg').text('Seleccionar Seccion !')
+                $('.msg').text('Seleccionar Seccion !');
+                return false;
             } else {
                 $('.alerta').hide();
+                return true;
             }
         }
         function validar_pu() {
             if ($('.idpu').val() == 0) {
                 $('.alerta').show();
-                $('.msg').text('Seleccionar Puesto !')
+                $('.msg').text('Seleccionar Puesto !');
+                return false;
             } else {
                 $('.alerta').hide();
+                return true;
             }
         }
         function validar_tip() {
             if ($('.tifun').val() == 0) {
                 $('.alerta').show();
-                $('.msg').text('Seleccionar Tipo !')
+                $('.msg').text('Seleccionar Tipo !');
+                return false;
             } else {
                 $('.alerta').hide();
+                return true;
             }
         }
         function validar_fun() {
             if ($('.ifun').val() == "") {
                 $('.alerta').show();
-                $('.msg').text('Escribir Funcion !')
+                $('.msg').text('Escribir Funcion !');
+                return false;
             } else {
                 $('.alerta').hide();
+                return true;
+            }
+        }
+        function validar_est() {
+            if ($('.estado').val() == 0) {
+                $('.alerta').show();
+                $('.msg').text('Seleccionar Estado !');
+                return false;
+            } else {
+                $('.alerta').hide();
+                return true;
             }
         }
     });
