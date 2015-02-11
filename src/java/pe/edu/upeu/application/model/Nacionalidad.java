@@ -13,15 +13,26 @@ public class Nacionalidad {
 
     private String id_nacionalidad;
     private String no_nacionalidad;
+    private String co_nacionalidad;
 
-    public Nacionalidad(String id_nacionalidad, String no_nacionalidad) {
+    public Nacionalidad(String id_nacionalidad, String no_nacionalidad,String co_nacionalidad) {
         this.id_nacionalidad = id_nacionalidad;
         this.no_nacionalidad = no_nacionalidad;
+        this.co_nacionalidad = co_nacionalidad;
     }
 
     public Nacionalidad() {
         this.id_nacionalidad = "";
         this.no_nacionalidad = "";
+        this.co_nacionalidad = "";
+    }
+
+    public String getCo_nacionalidad() {
+        return co_nacionalidad;
+    }
+
+    public void setCo_nacionalidad(String co_nacionalidad) {
+        this.co_nacionalidad = co_nacionalidad;
     }
 
     public String getId_nacionalidad() {
