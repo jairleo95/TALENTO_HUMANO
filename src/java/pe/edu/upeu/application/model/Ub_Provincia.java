@@ -14,17 +14,20 @@ public class Ub_Provincia {
     private String id_provincia;
     private String no_provincia;
     private String id_departamento;
+    private String co_provincia;
 
-    public Ub_Provincia(String id_provincia, String no_provincia, String id_departamento) {
+    public Ub_Provincia(String id_provincia, String no_provincia, String id_departamento, String co_provincia) {
         this.id_provincia = id_provincia;
         this.no_provincia = no_provincia;
         this.id_departamento = id_departamento;
+        this.co_provincia = co_provincia;
     }
 
     public Ub_Provincia() {
         this.id_provincia = "";
         this.no_provincia = "";
         this.id_departamento = "";
+        this.co_provincia = "";
     }
 
     public String getId_provincia() {
@@ -51,4 +54,14 @@ public class Ub_Provincia {
         this.id_departamento = id_departamento;
     }
 
+    public String getCo_provincia() {
+        return co_provincia;
+    }
+
+    public void setCo_provincia(String co_provincia) {
+        this.co_provincia = co_provincia;
+    }
+
+  
+    
 }

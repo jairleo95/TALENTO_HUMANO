@@ -30,9 +30,9 @@
             String rol = (String) sesion.getAttribute("IDROL");
         %>
 
-        <%if (true) {
-                V_Ficha_Trab_Num_C tr = new V_Ficha_Trab_Num_C();
-                tr = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(0);
+        <%
+            V_Ficha_Trab_Num_C tr = new V_Ficha_Trab_Num_C();
+            tr = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(0);
         %>
         <form align="center" action="../../../familiar">
             <div>
@@ -128,20 +128,18 @@
                     </td></tr>
                 <input type="hidden" name="idtra" value="<%=tr.getId_trabajador().trim()%>">
                 <tr><td colspan="2"><input class="btn btn-success" type="submit" name="opc" value="Editar"></td></tr>
-                        <%}else{%>
-                
-                <tr><td colspan="2"> <a class="btn btn-success" href="../../../familiar?opc=Editar&idtra="<%=tr.getId_trabajador().trim()%>>Agregar Cónyugue</a></td></tr>
+                        <%} else {%>
+
+
+
+                <tr><td colspan="2"> <label>Aun no se ha registrado los datos del cónyugue</label><br></td></tr> 
+                        <%  if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005")) {%>
+                <tr><td colspan="2"> <a class="btn btn-success" href=Reg_Padre_Madre_Conyugue.jsp?idtr=<%=request.getParameter("idtr")%>">Agregar Cónyugue</a></td></tr>
+                <%}%>
                 <%}%>
             </table>
         </form>
-        <%} else {%>
-        <center>
-            <label>Aun no se ha registrado los datos del familiar</label><br>
-            <%  if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005")) {%>
-            <a href="Reg_Padre_Madre_Conyugue.jsp?idtr=<%=request.getParameter("idtr")%>" class="btn btn-primary">Registrar</a>
-            <%}%>
-        </center>
-        <% }%>
+
     </center>
     <br>
     <center>

@@ -57,12 +57,14 @@ public class UbigeoDAO implements InterfaceUbigeoDAO {
         List<Ub_Provincia> list = new ArrayList<Ub_Provincia>();
         try {
             ResultSet rs = this.conn.query(sql);
-            
+
             while (rs.next()) {
                 Ub_Provincia p = new Ub_Provincia();
-                p.setId_departamento(rs.getString("id_departamento"));
+
                 p.setId_provincia(rs.getString("id_provincia"));
                 p.setNo_provincia(rs.getString("no_provincia"));
+                p.setId_departamento(rs.getString("id_departamento"));
+                p.setCo_provincia(rs.getString("co_provincia"));
                 list.add(p);
             }
         } catch (SQLException e) {
@@ -129,8 +131,8 @@ public class UbigeoDAO implements InterfaceUbigeoDAO {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "select id_distrito,no_distrito from rhtx_ub_distrito ";
-            
-               sql += (!id.equals("")) ? " where id_provincia='" + id.trim() + "'" : "";
+
+            sql += (!id.equals("")) ? " where id_provincia='" + id.trim() + "'" : "";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> l = new HashMap<String, Object>();

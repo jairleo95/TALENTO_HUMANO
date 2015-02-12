@@ -70,7 +70,7 @@
 
             <header>
                 <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                <h2><b>DATOS DEL PADRE, MADRE Y CONYUGUE</b></h2>				
+                <h2><b>DATOS DEL CONYUGUE</b></h2>				
 
             </header>
 
@@ -90,30 +90,12 @@
                     <form action="../../../familiar" id="checkout-form" class="smart-form" novalidate="novalidate">
 
                         <header>
-                            <b>DATOS DE PADRE Y MADRE </b>
-                        </header>
-                        <fieldset>
-                            <div class="row">
-                                <section class="col col-6">
-                                    <label class="input"> <i class="icon-prepend fa fa-user"></i>
-                                        <input type="text" name="APELLIDOS_NOMBRES_PADRE" placeholder="Apellidos y nombre del Padre" required="">
-                                    </label>
-                                </section>
-                                <section class="col col-6">
-                                    <label class="input"> <i class="icon-prepend fa fa-user"></i>
-                                        <input type="text" name="APELLIDOS_NOMBRES_MADRE" placeholder="Apellidos y nombre del Madre" required="">
-                                    </label>
-                                </section>
-                            </div>
-
-                        </fieldset>
-                        <header>
                             <b>DATOS DEL CONYUGUE</b> 				
                         </header>
                         <fieldset>
                             <div class="row">
 
-                                <section class="col col-5">
+                                <section class="col col-4">
                                     <label class="select">
                                         <select name="TRABAJA_UPEU_CONYUGUE" required="" class="select-conyugue">
                                             <option value="" selected=""  disabled="">¿Trabaja Upeu Conyugue?</option>
@@ -126,17 +108,18 @@
 
                                 <section class="col col-4">
                                     <label class="input">
-                                        <input type="text" name="APELLIDO_NOMBRES_CONYUGUE" placeholder="Apellidos y Nombres" required="" class="nom_c" maxlength="110">
+                                        <input type="text" name="APELLIDO_NOMBRES_CONYUGUE" placeholder="Apellidos y Nombres" required="" class="nom_c" maxlength="70">
                                     </label>
                                 </section>
 
-                                <section class="col col-6"><label>Fecha de Nacimiento</label>
+                                <section class="col col-4">
                                     <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                                        <input type="date" name="FECHA_NAC_CONYUGUE" placeholder="Fecha de Nacimiento dd/mm/yy" class="date f_nac" required="">
+                                        <input type="date" name="FECHA_NAC_CONYUGUE" class="date f_nac" required="">
                                     </label>
                                 </section>
-
-                                <section class="col col-5">
+                            </div>
+                            <div class="row">
+                                <section class="col col-4">
                                     <label class="select">
                                         <select name="TIPO_DOC_ID" required="" class="ti_documento">
                                             <option value="" selected="" disabled="">Tipo de Documento</option>
@@ -146,14 +129,14 @@
                                         </select> 
                                         <i></i> </label>
                                 </section>
-                                <section class="col col-3">
+                                <section class="col col-4">
                                     <label class="input">
                                         <input type="text" name="NRO_DOC" placeholder="Nro de Documento" maxlength="10" class="num_doc" required="">
                                     </label>
                                 </section>
                                 <input type="hidden" class="cony"  name="CONYUGUE"/>
 
-                                <section class="col col-5">
+                                <section class="col col-4">
                                     <label class="select">
                                         <select name="INSCRIPCION_VIG_ESSALUD" required="">
                                             <option value="" selected="" disabled="">Inscripción Vigente en Essalud</option>
@@ -164,11 +147,11 @@
                                         <i></i> </label>
                                 </section>
                             </div>   
-                            
+
                         </fieldset>
-                        <input type="hidden" name="opc"  class="submit" value="REGISTRAR">
+                        <input type="hidden" name="opc"  class="submit" value="Registrar Conyugue">
                         <footer>
-                            <input type="hidden" name="IDDATOS_TRABAJADOR"  value="<%=request.getParameter("idtr")%>" class="text-box" >  
+                            <input type="text" name="idtr"  value="<%=request.getParameter("idtr")%>" class="text-box" >  
                             <button type="submit" class="btn btn-primary" name="opc">
                                 Registrar
                             </button>
