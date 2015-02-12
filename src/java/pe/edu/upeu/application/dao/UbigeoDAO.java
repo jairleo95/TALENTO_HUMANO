@@ -41,6 +41,8 @@ public class UbigeoDAO implements InterfaceUbigeoDAO {
                 vp.setNo_departamento(rs.getString("no_departamento"));
                 vp.setNo_distrito(rs.getString("no_distrito"));
                 vp.setNo_provincia(rs.getString("no_provincia"));
+                vp.setId_departamento(rs.getString("id_departamento"));
+                vp.setId_provincia(rs.getString("id_provincia"));
                 list.add(vp);
             }
         } catch (SQLException e) {
@@ -95,13 +97,63 @@ public class UbigeoDAO implements InterfaceUbigeoDAO {
         return list;
     }
 
+    
+
+    @Override
+    public List<Ub_Distrito> List_DistritoTra() {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select * from rhtx_ub_distrito order by no_distrito";
+        List<Ub_Distrito> list = new ArrayList<Ub_Distrito>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Ub_Distrito d = new Ub_Distrito();
+                d.setId_distrito(rs.getString("id_distrito"));
+                d.setNo_distrito(rs.getString("no_distrito"));
+                d.setId_provincia(rs.getString("id_provincia"));
+                list.add(d);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return list;
+    }
+
+    @Override
+    public List<Map<String, ?>> Departamento() {
+         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select id_departamento,no_departamento from rhtx_ub_departamento";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> l = new HashMap<String, Object>();
+                l.put("id", rs.getString("id_departamento"));
+                l.put("descripcion", rs.getString("no_departamento"));
+                lista.add(l);
+            }
+            rs.close();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+
+        }
+        return lista;
+    }
     @Override
     public List<Map<String, ?>> Provincia(String id) {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select id_provincia,no_provincia from rhtx_ub_provincia";
-            sql += (!id.equals("")) ? " where id_departamento='" + id.trim() + "'" : "";
+            String sql = "select id_provincia,no_provincia from rhtx_ub_provincia where id_departamento='" + id.trim() + "'";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> l = new HashMap<String, Object>();
@@ -130,9 +182,8 @@ public class UbigeoDAO implements InterfaceUbigeoDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select id_distrito,no_distrito from rhtx_ub_distrito ";
-
-            sql += (!id.equals("")) ? " where id_provincia='" + id.trim() + "'" : "";
+            String sql = "select id_distrito,no_distrito from rhtx_ub_distrito where id_provincia = '"+id.trim()+"'";
+           // sql += (!id.equals("")) ? " where id_provincia='" + id.trim() + "'" : "";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> l = new HashMap<String, Object>();
@@ -154,27 +205,6 @@ public class UbigeoDAO implements InterfaceUbigeoDAO {
 
         }
         return lista;
-    }
-
-    @Override
-    public List<Ub_Distrito> List_DistritoTra() {
-        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from rhtx_ub_distrito order by no_distrito";
-        List<Ub_Distrito> list = new ArrayList<Ub_Distrito>();
-        try {
-            ResultSet rs = this.conn.query(sql);
-            while (rs.next()) {
-                Ub_Distrito d = new Ub_Distrito();
-                d.setId_distrito(rs.getString("id_distrito"));
-                d.setNo_distrito(rs.getString("no_distrito"));
-                d.setId_provincia(rs.getString("id_provincia"));
-                list.add(d);
-            }
-        } catch (SQLException e) {
-        } finally {
-            this.conn.close();
-        }
-        return list;
     }
 
 }

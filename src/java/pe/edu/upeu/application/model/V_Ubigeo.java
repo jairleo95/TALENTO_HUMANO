@@ -15,12 +15,16 @@ public class V_Ubigeo {
     private String no_distrito;
     private String no_provincia;
     private String no_departamento;
+    private String id_departamento;
+    private String id_provincia;
 
-    public V_Ubigeo(String id_distrito, String no_distrito, String no_provincia, String no_departamento) {
+    public V_Ubigeo(String id_distrito, String no_distrito, String no_provincia, String no_departamento, String id_departamento, String id_provincia) {
         this.id_distrito = id_distrito;
         this.no_distrito = no_distrito;
         this.no_provincia = no_provincia;
         this.no_departamento = no_departamento;
+        this.id_departamento = id_departamento;
+        this.id_provincia = id_provincia;
     }
 
     public V_Ubigeo() {
@@ -28,6 +32,8 @@ public class V_Ubigeo {
         this.no_distrito = "";
         this.no_provincia = "";
         this.no_departamento = "";
+        this.id_departamento = "";
+        this.id_provincia = "";
     }
 
     public String getId_distrito() {
@@ -60,6 +66,22 @@ public class V_Ubigeo {
 
     public void setNo_departamento(String no_departamento) {
         this.no_departamento = no_departamento;
+    }
+
+    public String getId_departamento() {
+        return id_departamento;
+    }
+
+    public void setId_departamento(String id_departamento) {
+        this.id_departamento = id_departamento;
+    }
+
+    public String getId_provincia() {
+        return id_provincia;
+    }
+
+    public void setId_provincia(String id_provincia) {
+        this.id_provincia = id_provincia;
     }
     
     

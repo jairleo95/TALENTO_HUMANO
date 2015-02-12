@@ -401,6 +401,7 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("List_Distrito", ub.List_DistritoTra());
             getServletContext().setAttribute("List_Ubigeo", ub.List_Distrito());
             getServletContext().setAttribute("List_Departamento", ub.List_Departamento());
+            
             //  out.print(ub.List_Provincia().size());   
             response.sendRedirect("Vista/Trabajador/Mod_Aspecto_Social.jsp?idtr=" + idtr);
         }
@@ -425,6 +426,7 @@ public class CTrabajador extends HttpServlet {
             String CA_ING_QTA_CAT_RUC = request.getParameter("ING_QTA_CAT_RUC");
             String CA_ING_QTA_CAT_OTRAS_EMPRESAS = request.getParameter("ING_QTA_CAT_OTRAS_EMPRESAS");
             
+            tr.MOD_ASPEC_SOCIAL(LI_DI_DOM_A_D1, DI_DOM_A_D2, LI_DI_DOM_A_D3, DI_DOM_A_D4, LI_DI_DOM_A_D5, DI_DOM_A_D6, DI_DOM_A_REF, ID_DI_DOM_A_DISTRITO, LI_DI_DOM_LEG_D1, DI_DOM_LEG_D2, LI_DI_DOM_LEG_D3, DI_DOM_LEG_D4, LI_DI_DOM_LEG_D5, DI_DOM_LEG_D6, ID_DI_DOM_LEG_DISTRITO, CA_ING_QTA_CAT_EMPRESA, CA_ING_QTA_CAT_RUC, CA_ING_QTA_CAT_OTRAS_EMPRESAS, idtr);
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             response.sendRedirect("Vista/Trabajador/Aspecto_Social.jsp?idtr=" + idtr);
         }
