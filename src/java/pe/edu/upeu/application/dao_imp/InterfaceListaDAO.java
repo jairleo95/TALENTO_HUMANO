@@ -34,6 +34,7 @@ public interface InterfaceListaDAO {
     public List<String> List_Nivel_Educativo();
     public List<String> List_Grado_Academico();
     public List<String> List_Dom_D1_Id();
+    public List<String> List_Dom_D3_Id();
     public List<String> List_Dom_D5_Id();
     public List<String> List_Jefe();
     public List<String> list_Condicion_contrato();

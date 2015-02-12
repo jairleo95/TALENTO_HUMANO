@@ -203,6 +203,7 @@ public class ListaDAO implements InterfaceListaDAO {
         list.add("Superior Post Grado Completo");
         return list;
     }
+    
 
     @Override
     public List<String> List_Grado_Academico() {
@@ -230,7 +231,22 @@ public class ListaDAO implements InterfaceListaDAO {
         list.add("Block");
         return list;
     }
-
+    
+    
+    @Override
+    public List<String> List_Dom_D3_Id() {
+         List<String> list = new ArrayList<String>();
+        list.add("Numero");
+        list.add("Lote");
+        list.add("S/N");
+        list.add("Km");
+        list.add("Block");
+        list.add("Etapa");
+        list.add("Departamento");
+        list.add("Interior");
+        return list;
+    }
+    
     @Override
     public List<String> List_Dom_D5_Id() {
         List<String> list = new ArrayList<String>();
@@ -376,5 +392,6 @@ public class ListaDAO implements InterfaceListaDAO {
         return list;
 
     }
+
 
 }

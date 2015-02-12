@@ -37,7 +37,7 @@
                     </td>
 
                     <%String IDTR = trb.getId_trabajador();%>
-                    <td ><a class="btn btn-success" href="../../trabajador?opc=Editar_Dat_Gen&idtr=<%=IDTR%>">EDITAR</a></td>
+                    <td ><a class="btn btn-success" href="../../trabajador?opc=Editar_Asp_Soc&idtr=<%=IDTR%>">EDITAR</a></td>
 
                 </tr> 
                 <tr><td class="text-info">Dirección :</td><td><% InterfaceListaDAO l = new ListaDAO();
@@ -130,8 +130,8 @@
                         <div class="title">Información Religiosa</div>
                     </td>
                     <td >
-                        <input type="hidden" name="idtr" value="<%=trb.getId_trabajador()%>">  
-                        <input type="hidden" type="submit" name="opc" value="EditarAR">  
+                        <input type="hidden" name="idtr" value="<%=IDTR %>">  
+                        <input type="hidden" type="submit" name="opc" value="Editar_Asp_Rel">  
                         <input class="btn btn-success" type="submit"  value="EDITAR">  
                     </td>
                 </tr>

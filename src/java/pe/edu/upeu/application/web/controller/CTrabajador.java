@@ -312,27 +312,7 @@ public class CTrabajador extends HttpServlet {
             em.Reg_aps(idtr, co_aps);
 
         }
-        if ("EditarAR".equals(opc)) {
-            String idtr = request.getParameter("idtr");
-            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-            response.sendRedirect("Vista/Trabajador/Historial_Religion/Mod_Asp_Religioso.jsp?idtr=" + idtr + "&iduser=" + iduser);
-        }
-        if ("Modificar".equals(opc)) {
-            String idtr = request.getParameter("idtr");
-            String LI_RELIGION = request.getParameter("RELIGION");
-            String NO_IGLESIA = request.getParameter("IGLESIA");
-            String DE_CARGO = request.getParameter("CARGO");
-            String LI_AUTORIDAD = request.getParameter("AUTORIDAD");
-            String NO_AP_AUTORIDAD = request.getParameter("AUT_APELLIDOSNOMBRES");
-            String CL_AUTORIDAD = request.getParameter("AUT_CELULAR");
-            String FE_MODIF = "";
-            out.print(idtr);
-            tr.INSERT_HIST_RELIGION(null, LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, "1", idtr, iduser, FE_MODIF);
-            tr.MOD_ASP_REL(LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, idtr);
-            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-            response.sendRedirect("Vista/Trabajador/Aspecto_Social.jsp");
-
-        }
+       
 
         if (opc.equals("Editar_Dat_Gen")) {
             String idtr = request.getParameter("idtr");
@@ -412,6 +392,42 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
            response.sendRedirect("Vista/Trabajador/Aspecto_Academico.jsp?idtr=" + idtr);
         }
+        if(opc.equals("Editar_Asp_Soc")){
+         String idtr = request.getParameter("idtr");
+          getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+              getServletContext().setAttribute("Listar_via", dir.Listar_via());
+            getServletContext().setAttribute("Listar_zona", dir.Listar_zona());
+            getServletContext().setAttribute("ListarDir_Dom", li.List_Dom_D3_Id() );
+            getServletContext().setAttribute("List_Provincia", ub.List_Provincia());
+            getServletContext().setAttribute("List_Distrito", ub.List_DistritoTra());
+               getServletContext().setAttribute("List_Departamento", ub.List_Departamento());
+          response.sendRedirect("Vista/Trabajador/Mod_Aspecto_Social.jsp?idtr=" + idtr );
+        }
+        if(opc.equals("Modificar_Asp_Soc")){
+        
+        }
+         if ("Editar_Asp_Rel".equals(opc)) {
+            String idtr = request.getParameter("idtr");
+            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            response.sendRedirect("Vista/Trabajador/Historial_Religion/Mod_Asp_Religioso.jsp?idtr=" + idtr + "&iduser=" + iduser);
+        }
+        if ("Modificar_Asp_Rel".equals(opc)) {
+            String idtr = request.getParameter("idtr");
+            String LI_RELIGION = request.getParameter("RELIGION");
+            String NO_IGLESIA = request.getParameter("IGLESIA");
+            String DE_CARGO = request.getParameter("CARGO");
+            String LI_AUTORIDAD = request.getParameter("AUTORIDAD");
+            String NO_AP_AUTORIDAD = request.getParameter("AUT_APELLIDOSNOMBRES");
+            String CL_AUTORIDAD = request.getParameter("AUT_CELULAR");
+            String FE_MODIF = "";
+            out.print(idtr);
+            tr.INSERT_HIST_RELIGION(null, LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, "1", idtr, iduser, FE_MODIF);
+            tr.MOD_ASP_REL(LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, idtr);
+            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            response.sendRedirect("Vista/Trabajador/Aspecto_Social.jsp");
+
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

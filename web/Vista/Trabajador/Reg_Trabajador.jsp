@@ -1009,75 +1009,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <script>
-                                                                    $(document).ready(
-                                                                            function () {
-
-                                                                                $("#no_cuen").hide();
-                                                                                $("#no_cuen_ban").hide();
-                                                                                $("#generar").hide();
-                                                                                $("#no_cuen_otros").hide();
-                                                                                //alert($("#es_cuenta").val());
-
-                                                                                $(".fecha").keyup(function () {
-
-                                                                                    /*var arr_date = $(this).val().split("-");
-                                                                                     if (arr_date[0].length > 4) {
-                                                                                     //return false;
-                                                                                     $(this).val("");
-                                                                                     $(".edad").val("");
-                                                                                     alert("fecha no valida");
-                                                                                     
-                                                                                     }*/
-
-                                                                                });
-
-                                                                                $("#banco").change(function () {
-                                                                                    cuenta_bancaria($(this).val());
-                                                                                    $("#es_cuenta").val(1);
-                                                                                    //  alert($("#es_cuenta").val());
-                                                                                });
-
-                                                                                $("#es_civil").change(function () {
-                                                                                    estado_civil($(this).val());
-                                                                                });
-                                                                                $("#DOM_A_D3").change(
-                                                                                        function () {
-                                                                                            if ($("#DOM_A_D3").val() == "3") {
-                                                                                                $("#DOM_A_D4").val("Sin Numero");
-                                                                                            } else {
-
-                                                                                                $("#DOM_A_D4").val("");
-                                                                                            }
-
-                                                                                        }
-                                                                                );
-                                                                                $("#DOM_LEG_D3").change(
-                                                                                        function () {
-                                                                                            if ($("#DOM_LEG_D3").val() == "3") {
-                                                                                                $("#DOM_LEG_D4").val("Sin Numero");
-                                                                                            } else {
-
-                                                                                                $("#DOM_LEG_D4").val("");
-                                                                                            }
-
-                                                                                        }
-                                                                                );
-                                                                                $("#reli").change(
-                                                                                        function () {
-                                                                                            if ($("#reli").val() == "1") {
-                                                                                                $("#igle").attr("required", "required")
-                                                                                            } else {
-
-                                                                                                $("#igle").removeAttr("required");
-                                                                                            }
-
-                                                                                        }
-                                                                                );
-
-                                                                            });
-
-                                                                </script>
+                                                                
                                                                 <div class="col-sm-3">
 
                                                                     <div class="form-group">
