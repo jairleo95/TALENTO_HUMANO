@@ -334,11 +334,11 @@
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                               <select name="DIR_DOM_A_D3_ID" id="DOM_A_D3" class="form-control input-group-sm"  required="">
+                                <select name="DIR_DOM_A_D3_ID" id="DOM_A_D3" class="form-control input-group-sm"  required="">
                                     <option value="">[Seleccione]</option>
                                     <%if (vu.getLi_di_dom_a_d3().trim().equals("1")) {%>
-                                     <option value="1" selected="">Numero</option>
-                                     <option value="2">Lote</option>
+                                    <option value="1" selected="">Numero</option>
+                                    <option value="2">Lote</option>
                                     <option value="3">S/N</option>
                                     <option value="4">Km</option>
                                     <option value="5">Block</option>
@@ -346,7 +346,7 @@
                                     <option value="7">Departamento</option>
                                     <option value="8">Interior</option>
                                     <%}
-                                    if (vu.getLi_di_dom_a_d3().trim().equals("2")) {%>
+                                        if (vu.getLi_di_dom_a_d3().trim().equals("2")) {%>
                                     <option value="1">Número</option>
                                     <option value="2" selected="">Lote</option>
                                     <option value="3">S/N</option>
@@ -356,7 +356,7 @@
                                     <option value="7">Departamento</option>
                                     <option value="8">Interior</option>
                                     <%}
-                                    if (vu.getLi_di_dom_a_d3().trim().equals("3")){%>
+                                        if (vu.getLi_di_dom_a_d3().trim().equals("3")) {%>
                                     <option value="1">Número</option>
                                     <option value="2" >Lote</option>
                                     <option value="3" selected="">S/N</option>
@@ -366,7 +366,7 @@
                                     <option value="7">Departamento</option>
                                     <option value="8">Interior</option>
                                     <%}
-                                       if (vu.getLi_di_dom_a_d3().trim().endsWith("4")){%>
+                                        if (vu.getLi_di_dom_a_d3().trim().endsWith("4")) {%>
                                     <option value="1">Número</option>
                                     <option value="2">Lote</option>
                                     <option value="3">S/N</option>
@@ -376,7 +376,7 @@
                                     <option value="7">Departamento</option>
                                     <option value="8">Interior</option>
                                     <%}
-                                       if (vu.getLi_di_dom_a_d3().trim().endsWith("5")){%>
+                                        if (vu.getLi_di_dom_a_d3().trim().endsWith("5")) {%>
                                     <option value="1">Número</option>
                                     <option value="2">Lote</option>
                                     <option value="3">S/N</option>
@@ -386,7 +386,7 @@
                                     <option value="7">Departamento</option>
                                     <option value="8">Interior</option>
                                     <%}
-                                       if (vu.getLi_di_dom_a_d3().trim().endsWith("6")){%>
+                                        if (vu.getLi_di_dom_a_d3().trim().endsWith("6")) {%>
                                     <option value="1">Número</option>
                                     <option value="2">Lote</option>
                                     <option value="3">S/N</option>
@@ -396,7 +396,7 @@
                                     <option value="7">Departamento</option>
                                     <option value="8">Interior</option>
                                     <%}
-                                       if (vu.getLi_di_dom_a_d3().trim().endsWith("7")){%>
+                                        if (vu.getLi_di_dom_a_d3().trim().endsWith("7")) {%>
                                     <option value="1">Número</option>
                                     <option value="2">Lote</option>
                                     <option value="3">S/N</option>
@@ -406,7 +406,7 @@
                                     <option value="7" selected="">Departamento</option>
                                     <option value="8">Interior</option>
                                     <%}
-                                       if (vu.getLi_di_dom_a_d3().trim().endsWith("8")){%>
+                                        if (vu.getLi_di_dom_a_d3().trim().endsWith("8")) {%>
                                     <option value="1">Número</option>
                                     <option value="2">Lote</option>
                                     <option value="3">S/N</option>
@@ -484,7 +484,7 @@
                         <div class="form-group">
 
                             <div class="input-group">
-                                  <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
 
                                 <select  id="dep_dir_a" class="form-control input-group-sm"  required="" name="ID_DEPARTAMENTO">
                                     <option value="" selected="selected">[Departamento]</option>
@@ -511,41 +511,45 @@
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                 <select  id="pro_dir_a" class="form-control input-group-sm"  required="" name="ID_PROVINCIA">
-                                    <option value="" selected="selected" >[Provincia]</option>
+                                    <option value="" selected="">[Provincia]</option>
                                     <%for (int j = 0; j < List_Provincia.size(); j++) {
                                             Ub_Provincia pro = new Ub_Provincia();
                                             pro = (Ub_Provincia) List_Provincia.get(j);
-                                           if(pro.getId_provincia().trim().equals(vu.getId_provincia_ub().trim())){
-                                    %>
-                                     <option value="<%=pro.getId_provincia()%>" selected=""><%=pro.getNo_provincia()%></option>
-                                     <%}else{%>
-                                     <option value="<%=pro.getId_provincia()%>" ><%=pro.getNo_provincia()%></option>
-                                     <%}
-                                     }%>
+                                            if (pro.getId_provincia().trim().equals(vu.getId_provincia_ub().trim())) {%>
+                                    <option value="<%=pro.getId_provincia()%>" selected=""><%=pro.getNo_provincia()%></option>
+                                    <%} else {%>
+                                    <option value="<%=pro.getId_provincia()%>" ><%=pro.getNo_provincia()%></option>
+                                    <%}
+                                         }%>
+
+
                                 </select>
-                                
-                              
+
+
                             </div>
                         </div>
                     </div>
+
                     <div class="col-sm-3">
 
                         <div class="form-group">
 
                             <div class="input-group">
+
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                 <select name="DIR_DOM_A_DISTRITO_ID"  id="DOM_A_DISTRITO" class="form-control input-group-sm"   required="" >
                                     <option value="">[Distrito]</option>
-                                     <%for (int q = 0; q < List_Distrito.size(); q++) {
-                                             Ub_Distrito dis = new Ub_Distrito();
-                                              dis = (Ub_Distrito) List_Distrito.get(q);
-                                           if(dis.getNo_distrito().trim().equals(vu.getId_distrito_ub().trim())){
-                                                                                 %>
-                                       <option value="<%=dis.getId_distrito()%>" selected=""><%=dis.getNo_distrito()%></option>
-                                       <%}else{%>      
-                                       <option value="<%=dis.getId_distrito()%>" ><%=dis.getNo_distrito()%></option>
-                                         <%}
-                                         }%>
+                                    <%for (int q = 0; q < List_Distrito.size(); q++) {
+                                            V_Ubigeo ub_d = new V_Ubigeo();
+                                            ub_d = (V_Ubigeo) List_Distrito.get(q);
+                                            if(ub_d.getId_distrito().trim().equals(vu.getId_distrito_ub().trim())){
+                                    %>
+
+                                    <option value="<%=ub_d.getId_distrito()%>" selected=""><%=ub_d.getNo_distrito() %></option>
+                                    <%}else{%>
+                                    <option value="<%=ub_d.getId_distrito()%>" ><%=ub_d.getNo_distrito()%></option>
+                                    <%}
+                                     }%>
                                 </select>
                             </div>
                         </div>

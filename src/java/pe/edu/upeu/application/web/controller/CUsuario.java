@@ -148,6 +148,8 @@ public class CUsuario extends HttpServlet {
             getServletContext().setAttribute("List_Usuario_var", usu.List_Usuario_var());
             getServletContext().setAttribute("List_Nacionalidad", li.List_Nacionalidad());
             getServletContext().setAttribute("List_Departamento", ub.List_Departamento());
+            getServletContext().setAttribute("List_Provincia", ub.List_Provincia());
+            getServletContext().setAttribute("List_Distrito", ub.List_Distrito());
             getServletContext().setAttribute("Listar_via", dir.Listar_via());
             getServletContext().setAttribute("Listar_zona", dir.Listar_zona());
             getServletContext().setAttribute("Lista_Usuarios", usu.Val_Usuario(id_user_1));
