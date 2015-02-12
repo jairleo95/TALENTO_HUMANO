@@ -693,7 +693,7 @@
                                                                         <label>Telefono:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-phone fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="TELEFONO"  value="<%=t.getTe_trabajador()%>"  data-mask="(99) 999-9999" data-mask-placeholder= "X"   formnovalidate maxlength="50" value="" class="form-control input-group-sm telefono" >
+                                                                            <input type="text" name="TELEFONO"  value="<%=t.getTe_trabajador()%>"  data-mask="(99) 999-9999" data-mask-placeholder= "X"   maxlength="50"  class="form-control input-group-sm telefono" >
                                                                         </div>
                                                                     </div>
                                                                 </div>
