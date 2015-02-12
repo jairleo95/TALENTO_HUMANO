@@ -41,6 +41,8 @@ public class UbigeoDAO implements InterfaceUbigeoDAO {
                 vp.setNo_departamento(rs.getString("no_departamento"));
                 vp.setNo_distrito(rs.getString("no_distrito"));
                 vp.setNo_provincia(rs.getString("no_provincia"));
+                vp.setId_departamento(rs.getString("id_departamento"));
+                vp.setId_provincia(rs.getString("id_provincia"));
                 list.add(vp);
             }
         } catch (SQLException e) {
@@ -175,6 +177,35 @@ public class UbigeoDAO implements InterfaceUbigeoDAO {
             this.conn.close();
         }
         return list;
+    }
+
+    @Override
+    public List<Map<String, ?>> Departamento() {
+         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select id_departamento,no_departamento from rhtx_ub_departamento";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> l = new HashMap<String, Object>();
+                l.put("id", rs.getString("id_departamento"));
+                l.put("descripcion", rs.getString("no_departamento"));
+                lista.add(l);
+            }
+            rs.close();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+
+        }
+        return lista;
     }
 
 }

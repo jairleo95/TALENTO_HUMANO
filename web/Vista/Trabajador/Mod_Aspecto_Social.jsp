@@ -374,6 +374,11 @@
                                                 <%for (int i = 0; i < ListaridTrabajador.size(); i++) {
                                                         V_Ficha_Trab_Num_C t = new V_Ficha_Trab_Num_C();
                                                         t = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(i);
+
+                                                        for (int j = 0; j < List_Ubigeo.size(); j++) {
+                                                            V_Ubigeo vu = new V_Ubigeo();
+                                                            vu = (V_Ubigeo) List_Ubigeo.get(j);
+
                                                 %>
 
                                                 <div id="bootstrap-wizard-1" class="col-sm-12">
@@ -582,9 +587,9 @@
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select name="DIR_DOM_LEG_D1_ID"  id="DOM_LEG_D1" class="form-control input-group-sm"  required="">
                                                                                 <option value="">[Seleccione Via]</option>
-                                                                                <%for (int j = 0; j < Listar_via.size(); j++) {
+                                                                                <%for (int k = 0; k < Listar_via.size(); k++) {
                                                                                         Via zo = new Via();
-                                                                                        zo = (Via) Listar_via.get(j);
+                                                                                        zo = (Via) Listar_via.get(k);
                                                                                         if (t.getLi_di_dom_leg_d1().trim().equals(zo.getId_via().trim())) {%>    
                                                                                 <option value="<%=zo.getId_via()%>" selected=""><%=zo.getDe_via()%></option>
                                                                                 <%} else {%>
@@ -789,6 +794,16 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <%if (t.getId_di_dom_a_distrito().trim().equals(vu.getId_distrito())) {%>
+                                                    <input type="hidden" value="<%=vu.getId_departamento()%>" class="dep_a">                   
+                                                    <input type="hidden" value="<%=vu.getId_provincia()%>" class="pro_a">                   
+                                                    <input type="hidden" value="<%=vu.getId_distrito()%>" class="sec_a">   
+                                                    <%}
+                                                        if (t.getId_di_dom_leg_distrito().trim().equals(vu.getId_distrito())) {%>
+                                                    <input type="hidden" value="<%=vu.getId_departamento() %>" class="dep_leg">                   
+                                                    <input type="hidden" value="<%=vu.getId_provincia() %>" class="pro_leg">                   
+                                                    <input type="hidden" value="<%=vu.getId_distrito() %>" class="sec_leg">   
+                                                    <%}%>
                                                     <%String idtr = request.getParameter("idtr");%>
                                                     <input type="hidden" name="idtr" value="<%=idtr%>"/>
                                                     <input type="hidden" name="opc" value="Modificar_Asp_Soc">
@@ -797,7 +812,8 @@
                                                             <button type="submit" value="" name="opc"> MODIFICAR</button>
                                                         </center>
                                                     </footer>
-                                                    <%}%>
+                                                    <%}
+                                                        }%>
                                             </form>
                                         </div>
 

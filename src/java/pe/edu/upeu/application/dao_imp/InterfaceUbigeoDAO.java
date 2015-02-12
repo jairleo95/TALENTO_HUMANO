@@ -23,6 +23,7 @@ public interface InterfaceUbigeoDAO {
     public List<Ub_Provincia> List_Provincia();
     public List<Ub_Departamento> List_Departamento();
    
+    public List<Map<String,?>> Departamento();
     public List<Map<String,?>> Provincia(String id);
     public List<Map<String,?>> Distrito(String id);
     
