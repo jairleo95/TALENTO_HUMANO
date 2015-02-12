@@ -4,6 +4,7 @@
     String id_user = (String) sesion.getAttribute("IDUSER");
     if (id_user != null) {
         Usuario us = new Usuario();
+        String id_rol = (String) sesion.getAttribute("IDROL");
 %>
 <%@page import="pe.edu.upeu.application.model.V_Privilegio"%>
 <%@page import="pe.edu.upeu.application.model.V_Usuario"%>
@@ -338,7 +339,7 @@
                 traditional href="" links. See documentation for details.
                 -->
 
-                <ul>
+                <ul >
 
                     <%
                         for (int i = 0; i < listarURL.size(); i++) {
@@ -348,9 +349,11 @@
                     %>
 
                     <%  if (dp.getId_privilegio().equals("PRV-000012")) {%>
-                    <li>
+                    <li class="li-privilegio">
                         <a href="#"><i class="fa fa-lg fa-fw fa-windows"></i> <span class="menu-item-parent">Generar Requerimiento</span></a>
                         <ul>
+                            <%if (!id_rol.trim().equals("ROL-0011")) {
+                            %>
                             <li>
                                 <a href="Vista/Dgp/Requerimiento.jsp?opc=Planilla" target="myframe"><i class="fa fa-lg fa-fw fa-file"></i> En Planilla</a>
                             </li>
@@ -358,10 +361,7 @@
                                 <a href="Vista/Dgp/Requerimiento.jsp?opc=FueraDePlanilla" target="myframe"><i class="fa fa-lg fa-fw fa-file"></i> Fuera de Planilla</a>
 
                             </li>
-                            <li>
-                                <a href="Vista/Academico/Carga_Academica/Rep_Carga_Academica.jsp" target="myframe"><i class="fa fa-lg fa-fw fa-file"></i>Carga Academica <span class="badge pull-right inbox-badge bg-color-blue">¡Nuevo!</span></a>
 
-                            </li>
                             <li>
                                 <a href="#"><i class="fa fa-lg fa-fw fa-file"></i>Anulación de Requerimiento</a>
                                 <ul>
@@ -374,7 +374,12 @@
 
                                 </ul>
                             </li>
+                            <%}else{%>
+                            <li>
+                                <a href="Vista/Academico/Carga_Academica/Rep_Carga_Academica.jsp" target="myframe"><i class="fa fa-lg fa-fw fa-file"></i>Carga Academica <span class="badge pull-right inbox-badge bg-color-blue">¡Nuevo!</span></a>
 
+                            </li>
+                            <%}%>
                         </ul>
                     </li>
 
@@ -383,9 +388,8 @@
 
                     <%} else {%>
 
-                    <li>
+                    <li class="li-privilegio">
                         <a href="<%=dp.getDi_url()%>" target="myframe" title="<%=dp.getNo_link()%>"><i class="<%=dp.getIc_link().trim()%>"></i> <span class="menu-item-parent"><%=dp.getNo_link()%></span></a>
-
                     </li>
                     <%}
                         }%>
@@ -665,6 +669,10 @@
                  */
                 $(".menu-item-parent").parent().click(function () {
                     $(".titulo_menu").text($(this).text());
+                });
+                $(".li-privilegio").click(function () {
+                    $(".li-privilegio").removeClass("active");
+                    $(this).addClass("active");
                 });
                 $(".js-status-update a").click(function () {
                     var selText = $(this).text();

@@ -10,13 +10,19 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Carga Academica</title>
+        <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
     </head>
     <body>
     <center>
         <h1>CARGA ACADEMICA</h1>
         <form action="">
-            <label>Semestre :</label><select>
-                <option></option>
+            <label>Semestre :</label><select class="semestre">
+                <option value="">[SELECCIONE]</option>
+                <option value="2015-1">2015-1</option>
+                <option value="2015-0">2015-0</option>
+                <option value="2014-2">2014-2</option>
+                <option value="2014-1">2014-1</option>
+                <option value="2014-0">2014-0</option>
             </select>
             <br>
             <label>Area o Sede :</label><select>
@@ -50,24 +56,66 @@
             <br>
 
         </form>
+        <button type="button" class="listar">
+            Listar
+        </button>
         <table border="1">
             <thead>
                 <tr>
-                    <th>DNI</th>
+                    <th>Tipo Doc</th>
+                    <th>Num. Doc</th>
                     <th>APELLIDOS Y NOMBRES</th>
                     <th>ESCUELA</th>
                     <th>FACULTAD</th>
                     <th>CICLO</th>
                     <th>FECHA INICIO</th>
                     <th>FECHA CESE</th>
+                    <th>ACCIONES</th>
                 </tr>
 
             </thead>
-            <tbody>
-                <tr><td></td></tr>
+            <tbody class="tbody-carga">
+
 
             </tbody>
         </table>
     </center>
 </body>
+<script>
+
+    (function ($) {
+        $(document).ready(function () {
+
+            var url = 'http://localhost/demo/data.php';
+
+            $(".semestre").change(function () {
+
+                $('.tbody-carga').empty();
+                $('.tbody-carga').append("<tr><td colspan='9' >Cargando... </td></tr>");
+                $.post(url, "semestre=" + $(".semestre").val(), function (data) {
+
+
+                    $('.tbody-carga').empty();
+                    $.each(data, function (i, campo) {
+                        $('.tbody-carga').append('<tr>');
+                        $('.tbody-carga').append('<td>' + campo.tipodocumento + '</td>');
+                        $('.tbody-carga').append('<td>' + campo.numerodocumento + '</td>');
+                        $('.tbody-carga').append('<td>' + campo.apepat + ' ' + campo.apemat + ' ' + campo.nombre + '</td>');
+                        $('.tbody-carga').append('<td>' + campo.eap + '</td>');
+                        $('.tbody-carga').append('<td>' + campo.facultad + '</td>');
+                        $('.tbody-carga').append('<td>' + campo.dni + '</td>');
+                        $('.tbody-carga').append('<td>' + campo.dni + '</td>');
+                        $('.tbody-carga').append('<td>' + campo.dni + '</td>');
+                        $('.tbody-carga').append('<td><button type="button">Completar datos</button><a href="Horario_Academico.jsp?dni=' + campo.numerodocumento + '&semestre='+$(".semestre").val()+'">Ver Cursos</a></td>');
+                        $('.tbody-carga').append('</tr>');
+                    });
+                });
+            });
+
+
+
+        });
+    })(jQuery);
+
+</script>
 </html>
