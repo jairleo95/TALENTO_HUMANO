@@ -32,6 +32,7 @@
 <jsp:useBean id="Listar_via" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="ListarDir_Dom" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="list_año" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Ubigeo" scope="application" class="java.util.ArrayList"/>
 
 <jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Nacionalidad" scope="application" class="java.util.ArrayList"/>
@@ -429,7 +430,7 @@
                                                                             <select name="DIR_DOM_A_D3_ID" id="DOM_A_D3" class="form-control input-group-sm"  required="">
                                                                                 <option value="">[Seleccione]</option>
                                                                                 <%for (int w = 0; w < ListarDir_Dom.size(); w++) {
-                                                                                        String num = Integer.toString(w+1);
+                                                                                        String num = Integer.toString(w + 1);
                                                                                         if (t.getLi_di_dom_a_d3().trim().equals(num)) {
                                                                                 %>    
                                                                                 <option value="<%=num%>" selected=""><%=ListarDir_Dom.get(w)%></option>
@@ -488,7 +489,7 @@
                                                                 </div>
                                                                 <div class="col-sm-4">
                                                                     <div class="form-group">
-
+                                                                         <label>Referencia:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-group-sm"    value="<%=t.getDi_dom_a_ref()%>" type="text" name="DIR_DOM_A_REF" id="DOM_A_REF" maxlength="200">
@@ -502,46 +503,64 @@
                                                                 <div class="col-sm-3">
 
                                                                     <div class="form-group">
-
+                                                                        <label>Departamento:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select  id="dep_dir_a" class="form-control input-group-sm"  required="">
-                                                                                
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                               <div class="col-sm-3">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select   id="pro_dir_l" class="form-control input-group-sm"  required="">
-                                                                                
-                                                                                    
+                                                                                <option value="">[Departamento]</option>
+                                                                                <%for (int m = 0; m < List_Ubigeo.size(); m++) {
+                                                                                        V_Ubigeo u = new V_Ubigeo();
+                                                                                        u = (V_Ubigeo) List_Ubigeo.get(m);
+                                                                                        if (t.getId_di_dom_a_distrito().trim().equals(u.getId_distrito().trim())) {
+                                                                                %>
+                                                                                <option value=""  selected=""><%=u.getNo_departamento()%></option>
+                                                                                <%} else {%>
+                                                                                <option value="" ><%=u.getNo_departamento()%></option>
+                                                                                <%}
+                                                                                    }%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-3">
-
                                                                     <div class="form-group">
-
+                                                                        <label>Provincia:</label>
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <select   id="pro_dir_a" class="form-control input-group-sm"  required="">
+                                                                                <option value="">[Provincia]</option>
+                                                                                <%for (int m = 0; m < List_Ubigeo.size(); m++) {
+                                                                                        V_Ubigeo u = new V_Ubigeo();
+                                                                                        u = (V_Ubigeo) List_Ubigeo.get(m);
+                                                                                        if (t.getId_di_dom_a_distrito().trim().equals(u.getId_distrito().trim())) {
+                                                                                %>
+                                                                                <option value=""  selected=""><%=u.getNo_provincia()%></option>
+                                                                                <%} else {%>
+                                                                                <option value="" ><%=u.getNo_provincia()%></option>
+                                                                                <%}
+                                                                                    }%>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <div class="form-group">
+                                                                        <label>Distrito:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select name="DIR_DOM_A_DISTRITO_ID"  id="DOM_A_DISTRITO" class="form-control input-group-sm"  required="">
                                                                                 <option value="">[Distrito]</option>
-                                                                                <%for (int d = 0; d < List_Distrito.size(); d++) {
-                                                                                        Ub_Distrito dep = new Ub_Distrito();
-                                                                                        dep = (Ub_Distrito) List_Distrito.get(d);
-                                                                                        if (t.getId_di_dom_a_distrito().equals(dep.getId_distrito().trim())) {
+                                                                                <%for (int m = 0; m < List_Ubigeo.size(); m++) {
+                                                                                        V_Ubigeo u = new V_Ubigeo();
+                                                                                        u = (V_Ubigeo) List_Ubigeo.get(m);
+                                                                                        if (t.getId_di_dom_a_distrito().trim().equals(u.getId_distrito().trim())) {
                                                                                 %>
-                                                                                <option value="<%=dep.getId_distrito()%>" selected="" ><%=dep.getNo_distrito()%></option>
+                                                                                <option value="<%=u.getId_distrito()%>"  selected=""><%=u.getNo_distrito()%></option>
                                                                                 <%} else {%>
-                                                                                <option value="<%=dep.getId_distrito()%>" ><%=dep.getNo_distrito()%></option>
+                                                                                <option value="<%=u.getId_distrito()%>" ><%=u.getNo_distrito()%></option>
                                                                                 <%}
                                                                                     }%>
                                                                             </select>
-                                                                            <input type="text" value="<%=t.getId_di_dom_a_distrito() %>" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -566,12 +585,12 @@
                                                                                 <%for (int j = 0; j < Listar_via.size(); j++) {
                                                                                         Via zo = new Via();
                                                                                         zo = (Via) Listar_via.get(j);
-                                                                                if(t.getLi_di_dom_leg_d1().trim().equals(zo.getId_via().trim())){%>    
+                                                                                        if (t.getLi_di_dom_leg_d1().trim().equals(zo.getId_via().trim())) {%>    
                                                                                 <option value="<%=zo.getId_via()%>" selected=""><%=zo.getDe_via()%></option>
-                                                                                <%}else{%>
+                                                                                <%} else {%>
                                                                                 <option value="<%=zo.getId_via()%>"><%=zo.getDe_via()%></option>
                                                                                 <%}
-                                                                                }%>
+                                                                                    }%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -582,7 +601,7 @@
 
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"   value="<%=t.getDi_dom_leg_d2() %>" type="text" name="DIR_DOM_LEG_D2" id="DOM_LEG_D2" maxlength="100">
+                                                                            <input class="form-control input-group-sm"   value="<%=t.getDi_dom_leg_d2()%>" type="text" name="DIR_DOM_LEG_D2" id="DOM_LEG_D2" maxlength="100">
 
                                                                         </div>
                                                                     </div>
@@ -596,15 +615,15 @@
                                                                             <select name="DIR_DOM_LEG_D3_ID"  id="DOM_LEG_D3" class="form-control input-group-sm"  required="">
                                                                                 <option value="">[Seleccione]</option>
                                                                                 <%for (int x = 0; x < ListarDir_Dom.size(); x++) {
-                                                                                        String num = Integer.toString(x+1);
-                                                                                        if(t.getLi_di_dom_leg_d3().trim().equals(num)){
+                                                                                        String num = Integer.toString(x + 1);
+                                                                                        if (t.getLi_di_dom_leg_d3().trim().equals(num)) {
                                                                                 %>
                                                                                 <option value="<%=num%>" selected ><%=ListarDir_Dom.get(x)%></option>
-                                                                                <%}else{%>
+                                                                                <%} else {%>
                                                                                 <option value="<%=num%>" ><%=ListarDir_Dom.get(x)%></option>
-                                                                               <% }
-                                                                                        }%>
-                                                                               
+                                                                                <% }
+                                                                                    }%>
+
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -631,9 +650,14 @@
                                                                                 <option value="">[Seleccione Zona]</option>
                                                                                 <%for (int q = 0; q < Listar_zona.size(); q++) {
                                                                                         Zona zo = new Zona();
-                                                                                        zo = (Zona) Listar_zona.get(q);%>    
+                                                                                        zo = (Zona) Listar_zona.get(q);
+                                                                                if(t.getLi_di_dom_leg_d5().trim().equals(zo.getId_zona().trim())){
+                                                                                %>    
+                                                                                <option value="<%=zo.getId_zona()%>" selected=""><%=zo.getDe_zona()%></option>
+                                                                                <%}else{%>
                                                                                 <option value="<%=zo.getId_zona()%>"><%=zo.getDe_zona()%></option>
-                                                                                <%}%>
+                                                                                <%}
+                                                                                }%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -644,7 +668,7 @@
 
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"    value="<%=t.getDi_dom_leg_d6() %>" type="text" name="DIR_DOM_LEG_D6" id="DOM_LEG_D6" maxlength="100">
+                                                                            <input class="form-control input-group-sm"    value="<%=t.getDi_dom_leg_d6()%>" type="text" name="DIR_DOM_LEG_D6" id="DOM_LEG_D6" maxlength="100">
 
                                                                         </div>
                                                                     </div>
@@ -656,43 +680,65 @@
                                                             <div class="row">
                                                                 <div class="col-sm-4">
                                                                     <div class="form-group">
+                                                                         <label>Departamento:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select   id="dep_dir_l" class="form-control input-group-sm"  required="">
-                                                                                
+                                                                                <option value="">[Departamento]</option>
+                                                                                <%for (int m = 0; m < List_Ubigeo.size(); m++) {
+                                                                                        V_Ubigeo u = new V_Ubigeo();
+                                                                                        u = (V_Ubigeo) List_Ubigeo.get(m);
+                                                                                        if (t.getId_di_dom_leg_distrito().trim().equals(u.getId_distrito().trim())) {
+                                                                                %>
+                                                                                <option value=""  selected=""><%=u.getNo_departamento()%></option>
+                                                                                <%} else {%>
+                                                                                <option value="" ><%=u.getNo_departamento()%></option>
+                                                                                <%}
+                                                                                    }%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-4">
                                                                     <div class="form-group">
+                                                                         <label>Provincia:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select   id="pro_dir_l" class="form-control input-group-sm"  required="">
-                                                                                
-                                                                                    
+                                                                                <option value="">[Provincia]</option>
+                                                                                <%for (int m = 0; m < List_Ubigeo.size(); m++) {
+                                                                                        V_Ubigeo u = new V_Ubigeo();
+                                                                                        u = (V_Ubigeo) List_Ubigeo.get(m);
+                                                                                        if (t.getId_di_dom_leg_distrito().trim().equals(u.getId_distrito().trim())) {
+                                                                                %>
+                                                                                <option value=""  selected=""><%=u.getNo_provincia()%></option>
+                                                                                <%} else {%>
+                                                                                <option value="" ><%=u.getNo_provincia()%></option>
+                                                                                <%}
+                                                                                    }%>
+
                                                                             </select>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-4">
                                                                     <div class="form-group">
+                                                                         <label>Distrito:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select   name="DIR_DOM_LEG_DISTRITO_ID"   id="DOM_LEG_DISTRITO" class="form-control input-group-sm"  required="">
                                                                                 <option value="">[Distrito]</option>
-                                                                                <%for (int d = 0; d < List_Distrito.size(); d++) {
-                                                                                        Ub_Distrito dis = new Ub_Distrito();
-                                                                                        dis = (Ub_Distrito) List_Distrito.get(d);
-                                                                                        if (t.getId_di_dom_leg_distrito().trim().equals(dis.getId_distrito().trim())) {
+                                                                                <%for (int m = 0; m < List_Ubigeo.size(); m++) {
+                                                                                        V_Ubigeo u = new V_Ubigeo();
+                                                                                        u = (V_Ubigeo) List_Ubigeo.get(m);
+                                                                                        if (t.getId_di_dom_leg_distrito().trim().equals(u.getId_distrito().trim())) {
                                                                                 %>
-                                                                                <option value="<%=dis.getId_distrito()%>" selected="" ><%=dis.getNo_distrito()%></option>
+                                                                                <option value="<%=u.getId_distrito()%>"  selected=""><%=u.getNo_distrito()%></option>
                                                                                 <%} else {%>
-                                                                                <option value="<%=dis.getId_distrito()%>" ><%=dis.getNo_distrito()%></option>
+                                                                                <option value="<%=u.getId_distrito()%>" ><%=u.getNo_distrito()%></option>
                                                                                 <%}
                                                                                     }%>
                                                                             </select>
-                                                                            <input type="text" value="<%=t.getId_di_dom_leg_distrito()%>" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -704,7 +750,7 @@
                                                                 <div class="col-sm-6">
 
                                                                     <div class="form-group">
-
+                                                                         <label>Empresa:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-suitcase fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-group-sm"  value="<%=t.getCa_ing_qta_cat_empresa()%>" type="text" name="ING_QTA_CAT_EMPRESA"  maxlength="100">
@@ -715,10 +761,10 @@
                                                                 <div class="col-sm-6">
 
                                                                     <div class="form-group">
-
+                                                                         <label>RUC:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-file-o fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"   value="<%=t.getCa_ing_qta_cat_ruc() %>" type="text" name="ING_QTA_CAT_RUC"  maxlength="20">
+                                                                            <input class="form-control input-group-sm"   value="<%=t.getCa_ing_qta_cat_ruc()%>" type="text" name="ING_QTA_CAT_RUC"  maxlength="20">
 
                                                                         </div>
                                                                     </div>
@@ -731,10 +777,10 @@
                                                                 <div class="col-sm-12">
 
                                                                     <div class="form-group">
-
+                                                                         <label>Otras Empresas:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-suitcase fa-lg fa-fw"></i></span>
-                                                                            <textarea name="ING_QTA_CAT_OTRAS_EMPRESAS"  value="<%=t.getCa_ing_qta_cat_otras_empresas() %>"  class="form-control input-group-sm"  cols="60" rows="6" maxlength="500" ></textarea>
+                                                                            <textarea name="ING_QTA_CAT_OTRAS_EMPRESAS"   class="form-control input-group-sm"  cols="60" rows="6" maxlength="500" ><%=t.getCa_ing_qta_cat_otras_empresas()%></textarea>
                                                                         </div>
                                                                     </div>
                                                                 </div>

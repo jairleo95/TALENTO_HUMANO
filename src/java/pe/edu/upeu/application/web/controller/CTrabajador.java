@@ -400,6 +400,7 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("ListarDir_Dom", li.List_Dom_D3_Id() );
             getServletContext().setAttribute("List_Provincia", ub.List_Provincia());
             getServletContext().setAttribute("List_Distrito", ub.List_DistritoTra());
+            getServletContext().setAttribute("List_Ubigeo", ub.List_Distrito());
                getServletContext().setAttribute("List_Departamento", ub.List_Departamento());
           //  out.print(ub.List_Provincia().size());   
           response.sendRedirect("Vista/Trabajador/Mod_Aspecto_Social.jsp?idtr=" + idtr );
