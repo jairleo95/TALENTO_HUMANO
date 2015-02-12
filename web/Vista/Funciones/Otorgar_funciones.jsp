@@ -31,7 +31,7 @@
             }
             .caja{
                 width: 90%;
-                height: 400px;
+                height: 450px;
             }
             .contenedor {
                 text-align:left;
@@ -65,7 +65,6 @@
                 clear:both;
                 width: 50%;
                 height: 130px;
-                //border: solid 1px #000000;
             }
             select{
                 width: 100px;;
@@ -80,6 +79,14 @@
             }
             thead{
                 background: #cccccc;
+            }
+            .edit{
+                margin: 3px;
+                width: 80%;
+            }
+            .del{
+                margin: 3px;
+                width: 70%; 
             }
         </style>
     </head>
@@ -101,7 +108,7 @@
 
                 <div class="departamento form-group">
                     <label>2.Departamento</label>
-                    <select class="idde text-box chosen-select form-control">
+                    <select class="idde form-control">
                         <option value="0">-Seleccione-</option>
                         <%
                             for (int i = 0; i < List_Departamento.size(); i++) {
@@ -115,7 +122,7 @@
 
                 <div class="area form-group">
                     <label>3.Area</label>
-                    <select class="idar text-box chosen-select form-control">
+                    <select class="idar form-control">
                         <option value="0">-Seleccione-</option>
                         <% for (int i = 0; i < List_Area.size(); i++) {
                                 Area a = new Area();
@@ -128,7 +135,7 @@
 
                 <div class="seccion form-group">
                     <label>4.Seccion</label>
-                    <select class="idse text-box chosen-select form-control">
+                    <select class="idse form-control">
                         <option value="0">-Seleccione-</option>
                         <% for (int i = 0; i < LISTA_RH_SECCION.size(); i++) {
                                 Seccion s = new Seccion();
@@ -142,7 +149,7 @@
             <div class="contenedor2">
                 <div class="puestos form-group">
                     <label>5.Puesto</label>
-                    <select class="idpu text-box chosen-select form-control">
+                    <select class="idpu form-control input-group-sm">
                         <option value="0">-Seleccione-</option>
                         <% for (int i = 0; i < List_Puesto.size(); i++) {
                                 Puesto p = new Puesto();
@@ -159,7 +166,7 @@
                 </div>
                 <div class="estadoF form-group">
                     <label>7.Estado de la Funcion</label>
-                    <select class="estado text-box chosen-select form-control">
+                    <select class="estado form-control">
                         <option value="0">-Selelccione-</option>
                         <option value="1">Activada</option>
                         <option value="2">Desactivada</option>
@@ -167,7 +174,7 @@
                 </div>
                 <div class="tipo form-group">
                     <label>8.Tipo de Funcion</label>
-                    <select class="tifun text-box chosen-select form-control">
+                    <select class="tifun  form-control">
                         <option value="0">-Selelccione-</option>
                         <option value="1">Principal</option>
                         <option value="2">Secundaria</option>
@@ -291,22 +298,19 @@
                 validar_fun();
             });
             $(".btnotorgar").click(function() {
-                if (validar_dir() == true && validar_dep() == true && validar_ar() == true && validar_sec() == true && validar_pu() == true && validar_fun() == true && validar_tip() == true) {
+                if (validar_est() == true && validar_dir() == true && validar_dep() == true && validar_ar() == true && validar_sec() == true && validar_pu() == true && validar_fun() == true && validar_tip() == true) {
                     var id_puesto = $(".idpu").val();
                     if ($(this).val() == 1) {
                         $.post("../../funcion", "opc=otorgar" + "&id_puesto=" + id_puesto + "&de_funcion=" + $(".ifun").val() + "&ti_funcion=" + tipoFuncion, function() {
+                            $('.iddi').focus();
+                            listar_tabla();
                         });
                     } else if ($(this).val() == 2) {
                         $.post("../../funcion", "opc=edit_function" + "&id_fun=" + idFuncion + "&de_fun=" + $('.ifun').val() + "&es_fun=" + $('.estado').val() + "&id_pu=" + id_puesto + "&ti_funcion=" + $('.tifun').val(), function() {
-                            $('.idpu').val(0);
-                            $('.tifun').val(0);
-                            $('.estado').val(1);
-                            $('.ifun').val("");
-                            $('.btnotorgar').val('1');
-                            $('.btnotorgar').text('Otorgar Funcion');
+                            $('.iddi').focus();
+                            listar_tabla();
                         });
                     }
-                    listar_tabla();
                     mensajeI();
                 } else {
                     $('.alerta').show();
@@ -314,19 +318,17 @@
                 }
             });
             function mensajeI() {
-                $('.btnotorgar').blur();
-                $('.informacion').show();
-                $('.informacion').fadeIn();
+                $('.informacion').fadeOut();
+                $('.informacion').fadeIn(1000);
                 $('.msgi').text("Operacion realizada con Exito !");
-                $('.informacion').fadeTo(4000, 0, function() {
-                    $('.informacion').hide();
-                });
+                $('.informacion').fadeOut(2000);
             }
             ;
             $('.btnLimpiar').click(function() {
                 limpiar();
             });
             function limpiar() {
+                $('.iddi').focus();
                 $('.iddi').val(0);
                 $('.idde').val(0);
                 $('.idar').val(0);
