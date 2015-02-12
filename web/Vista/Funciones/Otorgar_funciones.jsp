@@ -319,7 +319,7 @@
                 $('.informacion').fadeIn();
                 $('.msgi').text("Operacion realizada con Exito !");
                 $('.informacion').fadeTo(4000, 0, function() {
-                    $('.informacion').hide(1000);
+                    $('.informacion').hide();
                 });
             }
             ;
