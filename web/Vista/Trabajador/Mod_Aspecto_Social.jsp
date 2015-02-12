@@ -489,7 +489,7 @@
                                                                 </div>
                                                                 <div class="col-sm-4">
                                                                     <div class="form-group">
-                                                                         <label>Referencia:</label>
+                                                                        <label>Referencia:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-group-sm"    value="<%=t.getDi_dom_a_ref()%>" type="text" name="DIR_DOM_A_REF" id="DOM_A_REF" maxlength="200">
@@ -651,13 +651,13 @@
                                                                                 <%for (int q = 0; q < Listar_zona.size(); q++) {
                                                                                         Zona zo = new Zona();
                                                                                         zo = (Zona) Listar_zona.get(q);
-                                                                                if(t.getLi_di_dom_leg_d5().trim().equals(zo.getId_zona().trim())){
+                                                                                        if (t.getLi_di_dom_leg_d5().trim().equals(zo.getId_zona().trim())) {
                                                                                 %>    
                                                                                 <option value="<%=zo.getId_zona()%>" selected=""><%=zo.getDe_zona()%></option>
-                                                                                <%}else{%>
+                                                                                <%} else {%>
                                                                                 <option value="<%=zo.getId_zona()%>"><%=zo.getDe_zona()%></option>
                                                                                 <%}
-                                                                                }%>
+                                                                                    }%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -680,7 +680,7 @@
                                                             <div class="row">
                                                                 <div class="col-sm-4">
                                                                     <div class="form-group">
-                                                                         <label>Departamento:</label>
+                                                                        <label>Departamento:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select   id="dep_dir_l" class="form-control input-group-sm"  required="">
@@ -700,8 +700,8 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-4">
-                                                                    <div class="form-group">
-                                                                         <label>Provincia:</label>
+                                                                    <div class="form-group"><%=t.getId_di_dom_leg_distrito()%>
+                                                                        <label>Provincia:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select   id="pro_dir_l" class="form-control input-group-sm"  required="">
@@ -718,12 +718,13 @@
                                                                                     }%>
 
                                                                             </select>
+                                                                            
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-4">
                                                                     <div class="form-group">
-                                                                         <label>Distrito:</label>
+                                                                        <label>Distrito:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select   name="DIR_DOM_LEG_DISTRITO_ID"   id="DOM_LEG_DISTRITO" class="form-control input-group-sm"  required="">
@@ -750,7 +751,7 @@
                                                                 <div class="col-sm-6">
 
                                                                     <div class="form-group">
-                                                                         <label>Empresa:</label>
+                                                                        <label>Empresa:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-suitcase fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-group-sm"  value="<%=t.getCa_ing_qta_cat_empresa()%>" type="text" name="ING_QTA_CAT_EMPRESA"  maxlength="100">
@@ -761,7 +762,7 @@
                                                                 <div class="col-sm-6">
 
                                                                     <div class="form-group">
-                                                                         <label>RUC:</label>
+                                                                        <label>RUC:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-file-o fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-group-sm"   value="<%=t.getCa_ing_qta_cat_ruc()%>" type="text" name="ING_QTA_CAT_RUC"  maxlength="20">
@@ -777,7 +778,7 @@
                                                                 <div class="col-sm-12">
 
                                                                     <div class="form-group">
-                                                                         <label>Otras Empresas:</label>
+                                                                        <label>Otras Empresas:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-suitcase fa-lg fa-fw"></i></span>
                                                                             <textarea name="ING_QTA_CAT_OTRAS_EMPRESAS"   class="form-control input-group-sm"  cols="60" rows="6" maxlength="500" ><%=t.getCa_ing_qta_cat_otras_empresas()%></textarea>
@@ -789,6 +790,14 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <%String idtr = request.getParameter("idtr");%>
+                                                    <input type="hidden" name="idtr" value="<%=idtr%>"/>
+                                                    <input type="hidden" name="opc" value="Modificar_Asp_Soc">
+                                                    <footer>
+                                                        <center>
+                                                            <button type="submit" value="" name="opc"> MODIFICAR</button>
+                                                        </center>
+                                                    </footer>
                                                     <%}%>
                                             </form>
                                         </div>
