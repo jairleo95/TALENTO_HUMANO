@@ -4,6 +4,7 @@
     Author     : ALFA 3
 --%>
 
+<%@page import="java.net.InetAddress"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -81,7 +82,13 @@
             Date date = new SimpleDateFormat("yyyy-MM-dd").parse("2012-05-01");
             String formattedDate = new SimpleDateFormat("dd-MMM-yy").format(date);
 
-            out.println(formattedDate);
+            out.println("<br>");
+            out.println(InetAddress.getLocalHost());
+            out.println(InetAddress.getLocalHost().getHostAddress());
+
+ 
+            
+            
         %>
     </body>
 </html>

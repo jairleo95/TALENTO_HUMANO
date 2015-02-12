@@ -43,16 +43,16 @@ public class Padre_Madre_ConyugueDAO implements InterfacePadre_Madre_ConyugueDAO
             cst.setString(6, LI_INSCRIPCION_VIG_ESSALUD);
             cst.setString(7, US_MODIF);
             cst.setString(8, FE_MODIF);
-           // cst.setString(9, InetAddress.getLocalHost().getHostAddress());
-            cst.setString(9, null);
+            cst.setString(9, InetAddress.getLocalHost().getHostAddress());
+            //cst.setString(9, null);
             cst.setString(10, ID_TRABAJADOR);
             cst.setString(11, ID_CONYUGUE);
             cst.execute();
         } catch (SQLException ex) {
             throw new RuntimeException(ex.getMessage());
-        }  /*catch (UnknownHostException ex) {
-            Logger.getLogger(Padre_Madre_ConyugueDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } */catch (Exception e) {
+        } catch (UnknownHostException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
             throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
             try {
