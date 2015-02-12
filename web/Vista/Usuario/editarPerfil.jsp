@@ -97,46 +97,6 @@
                     </div>
 
 
-                    <script type="text/javascript">
-<!--
-
-                        function validate_password()
-                        {
-                            //Cogemos los valores actuales del formulario
-                            pasActual = document.formName.passwordActual;
-                            pasNew1 = document.formName.passwordNew1;
-                            pasNew2 = document.formName.passwordNew2;
-                            //Cogemos los id's para mostrar los posibles errores
-                            id_epassActual = document.getElementById("epasswordActual");
-                            id_epassNew = document.getElementById("epasswordNew1");
-
-                            //Patron para los numeros
-                            var patron1 = new RegExp("[0-9]+");
-                            //Patron para las letras
-                            var patron2 = new RegExp("[a-zA-Z]+");
-
-                            if (pasNew1.value == pasNew2.value && pasNew1.value.length >= 6 && pasActual.value != "" && pasNew1.value.search(patron1) >= 0 && pasNew1.value.search(patron2) >= 0) {
-                                //Todo correcto!!!
-                                return true;
-                            } else {
-                                if (pasNew1.value.length < 6)
-                                    id_epassNew.innerHTML = "La longitud mínima tiene que ser de 6 caracteres";
-                                else if (pasNew1.value != pasNew2.value)
-                                    id_epassNew.innerHTML = "La copia de la nueva contraseña  coincide";
-                                else if (pasNew1.value.search(patron1) < 0 || pasNew1.value.search(patron2) < 0)
-                                    id_epassNew.innerHTML = "La contraseña tiene que tener numeros y letras";
-                                else
-                                    id_epassNew.innerHTML = "";
-                                if (pasActual.value == "")
-                                    id_epassActual.innerHTML = "Indicar tu contraseña actual";
-                                else
-                                    id_epassActual.innerHTML = "";
-                                return false;
-                            }
-                        }
--->
-                    </script>
-
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label for="exampleInputEmail1">telefono:</label>
@@ -173,79 +133,79 @@
 
 
                 <script type="text/javascript">
-                        $(document).ready(
-                                function() {
-                                    var tip = $("#pro_dir_l");
+                    $(document).ready(
+                            function () {
+                                var tip = $("#pro_dir_l");
+                                tip.empty();
+                                var rg = $("#dep_dir_l").val();
+                                var data = "id_dep=" + rg + "&opc=dep_nac";
+                                tip.append('<option value="">Cargando...</option>').val('');
+                                $.post("../../ubigeo", data, function (objJson) {
                                     tip.empty();
-                                    var rg = $("#dep_dir_l").val();
-                                    var data = "id_dep=" + rg + "&opc=dep_nac";
-                                    tip.append('<option value="">Cargando...</option>').val('');
-                                    $.post("../../ubigeo", data, function(objJson) {
-                                        tip.empty();
-                                        if (objJson.rpta == -1) {
-                                            alert(objJson.mensaje);
-                                            return;
-                                        }
-                                        var lista = objJson.lista;
-                                        if (lista.length > 0) {
-                                            tip.append("<option value=''>[Seleccione]</option>");
-                                        } else {
-                                            tip.append("<option value=''>[]</option>");
-                                        }
-                                        for (var i = 0; i < lista.length; i++) {
-                                            var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                                            tip.append(item);
-                                        }
-                                    });
-                                    var ti = $("#DOM_LEG_DISTRITO");
+                                    if (objJson.rpta == -1) {
+                                        alert(objJson.mensaje);
+                                        return;
+                                    }
+                                    var lista = objJson.lista;
+                                    if (lista.length > 0) {
+                                        tip.append("<option value=''>[Seleccione]</option>");
+                                    } else {
+                                        tip.append("<option value=''>[]</option>");
+                                    }
+                                    for (var i = 0; i < lista.length; i++) {
+                                        var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                                        tip.append(item);
+                                    }
+                                });
+                                var ti = $("#DOM_LEG_DISTRITO");
+                                ti.empty();
+                                var rg = $("#pro_dir_l").val();
+                                var data = "id_dist=" + rg + "&opc=pro_nac";
+                                ti.append('<option value="">Cargando...</option>').val('');
+                                $.post("../../ubigeo", data, function (objJson) {
                                     ti.empty();
-                                    var rg = $("#pro_dir_l").val();
-                                    var data = "id_dist=" + rg + "&opc=pro_nac";
-                                    ti.append('<option value="">Cargando...</option>').val('');
-                                    $.post("../../ubigeo", data, function(objJson) {
-                                        ti.empty();
-                                        if (objJson.rpta == -1) {
-                                            alert(objJson.mensaje);
-                                            return;
-                                        }
-                                        var lista = objJson.lista;
-                                        if (lista.length > 0) {
-                                            ti.append("<option value=''>[Seleccione]</option>");
-                                        } else {
-                                            ti.append("<option value=''>[]</option>");
-                                        }
-                                        for (var i = 0; i < lista.length; i++) {
-                                            var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                                            ti.append(item);
-                                        }
-                                    });
+                                    if (objJson.rpta == -1) {
+                                        alert(objJson.mensaje);
+                                        return;
+                                    }
+                                    var lista = objJson.lista;
+                                    if (lista.length > 0) {
+                                        ti.append("<option value=''>[Seleccione]</option>");
+                                    } else {
+                                        ti.append("<option value=''>[]</option>");
+                                    }
+                                    for (var i = 0; i < lista.length; i++) {
+                                        var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                                        ti.append(item);
+                                    }
+                                });
 
-                                    $(".doc, .doc_c").attr("maxlength", "8");
-                                    $(".doc, .doc_c").attr("minlength", "8");
-                                    $(".doc, .doc_c").val("");
+                                $(".doc, .doc_c").attr("maxlength", "8");
+                                $(".doc, .doc_c").attr("minlength", "8");
+                                $(".doc, .doc_c").val("");
 
-                                    $("#nac").change(
-                                            function() {
-                                                if ($("#nac").val() != "NAC-0193") {
-                                                    $("#dist").hide();
-                                                    $("#dist_nac").val("DST-001832");
+                                $("#nac").change(
+                                        function () {
+                                            if ($("#nac").val() != "NAC-0193") {
+                                                $("#dist").hide();
+                                                $("#dist_nac").val("DST-001832");
 
 
-                                                }
-                                                if ($("#nac").val() == "NAC-0193") {
-
-                                                    $("#dist").show();
-                                                }
                                             }
-                                    );
+                                            if ($("#nac").val() == "NAC-0193") {
+
+                                                $("#dist").show();
+                                            }
+                                        }
+                                );
 
 
 
 
 
 
-                                }
-                        );
+                            }
+                    );
                 </script> <br>
 
                 <h3>-Domicilio Actual del usuario</h3>
@@ -290,9 +250,9 @@
                     </div>
                     <script>
                         $(document).ready(
-                                function() {
+                                function () {
                                     $("#DOM_A_D3").change(
-                                            function() {
+                                            function () {
                                                 if ($("#DOM_A_D3").val() == "3") {
                                                     $("#DOM_A_D4").val("Sin Numero");
                                                 } else {
@@ -303,7 +263,7 @@
                                             }
                                     );
                                     $("#DOM_LEG_D3").change(
-                                            function() {
+                                            function () {
                                                 if ($("#DOM_LEG_D3").val() == "3") {
                                                     $("#DOM_LEG_D4").val("Sin Numero");
                                                 } else {
@@ -314,7 +274,7 @@
                                             }
                                     );
                                     $("#reli").change(
-                                            function() {
+                                            function () {
                                                 if ($("#reli").val() == "1") {
                                                     $("#igle").attr("required", "required")
                                                 } else {
@@ -520,7 +480,7 @@
                                     <%} else {%>
                                     <option value="<%=pro.getId_provincia()%>" ><%=pro.getNo_provincia()%></option>
                                     <%}
-                                         }%>
+                                        }%>
 
 
                                 </select>
@@ -542,14 +502,14 @@
                                     <%for (int q = 0; q < List_Distrito.size(); q++) {
                                             V_Ubigeo ub_d = new V_Ubigeo();
                                             ub_d = (V_Ubigeo) List_Distrito.get(q);
-                                            if(ub_d.getId_distrito().trim().equals(vu.getId_distrito_ub().trim())){
+                                            if (ub_d.getId_distrito().trim().equals(vu.getId_distrito_ub().trim())) {
                                     %>
 
-                                    <option value="<%=ub_d.getId_distrito()%>" selected=""><%=ub_d.getNo_distrito() %></option>
-                                    <%}else{%>
+                                    <option value="<%=ub_d.getId_distrito()%>" selected=""><%=ub_d.getNo_distrito()%></option>
+                                    <%} else {%>
                                     <option value="<%=ub_d.getId_distrito()%>" ><%=ub_d.getNo_distrito()%></option>
                                     <%}
-                                     }%>
+                                        }%>
                                 </select>
                             </div>
                         </div>
@@ -587,6 +547,90 @@
                             document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
                         }
         </script>
+        <script type="text/javascript">
+
+            // DO NOT REMOVE : GLOBAL FUNCTIONS!
+
+            $(document).ready(function () {
+                alert()
+                pageSetUp();
+
+
+
+
+                var $validator = $("#wizard-1").validate({
+                    rules: {
+                        email: {
+                            required: true,
+                            email: "Your email address must be in the format of name@domain.com"
+                        }
+
+
+                    },
+                    messages: {
+                        fname: "Please specify your First name",
+                        lname: "Please specify your Last name",
+                        email: {
+                            required: "We need your email address to contact you",
+                            email: "Your email address must be in the format of name@domain.com"
+                        }
+                    },
+                    highlight: function (element) {
+                        $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                    },
+                    unhighlight: function (element) {
+                        $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+                    },
+                    errorElement: 'span',
+                    errorClass: 'help-block',
+                    errorPlacement: function (error, element) {
+                        if (element.parent('.input-group').length) {
+                            error.insertAfter(element.parent());
+                        } else {
+                            error.insertAfter(element);
+                        }
+                    }
+                });
+
+
+                $('#bootstrap-wizard-1').bootstrapWizard({
+                    'tabClass': 'form-wizard',
+                    'onNext': function (tab, navigation, index) {
+                        var $valid = $("#wizard-1").valid();
+                        if (!$valid) {
+                            $validator.focusInvalid();
+                            return false;
+                        } else {
+                            $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass(
+                                    'complete');
+                            $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).find('.step')
+                                    .html('<i class="fa fa-check"></i>');
+                        }
+                    }
+                });
+
+
+                // fuelux wizard
+                var wizard = $('.wizard').wizard();
+
+                wizard.on('finished', function (e, data) {
+                    //$("#fuelux-wizard").submit();
+                    //console.log("submitted!");
+                    $.smallBox({
+                        title: "Congratulations! Your form was submitted",
+                        content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
+                        color: "#5F895F",
+                        iconSmall: "fa fa-check bounce animated",
+                        timeout: 4000
+                    });
+
+                });
+
+
+            })
+
+        </script>
+
 
 
         <script type="text/javascript">
@@ -594,7 +638,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function() {
+            (function () {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
@@ -612,13 +656,13 @@
         <!--Select dinamicos-->
         <script type="text/javascript">
             /*Ubigeo*/
-            $("#dep_nac").change(function() {
+            $("#dep_nac").change(function () {
                 var ti = $("#pro_nac");
                 ti.empty();
                 var rg = $("#dep_nac").val();
                 var data = "id_dep=" + rg + "&opc=dep_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
+                $.post("../../ubigeo", data, function (objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -636,13 +680,13 @@
                     }
                 });
             });
-            $("#pro_nac").change(function() {
+            $("#pro_nac").change(function () {
                 var ti = $("#dist_nac");
                 ti.empty();
                 var rg = $("#pro_nac").val();
                 var data = "id_dist=" + rg + "&opc=pro_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
+                $.post("../../ubigeo", data, function (objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -660,13 +704,13 @@
                     }
                 });
             });
-            $("#dep_dir_a").change(function() {
+            $("#dep_dir_a").change(function () {
                 var ti = $("#pro_dir_a");
                 ti.empty();
                 var rg = $("#dep_dir_a").val();
                 var data = "id_dep=" + rg + "&opc=dep_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
+                $.post("../../ubigeo", data, function (objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -685,13 +729,13 @@
 
                 });
             });
-            $("#pro_dir_a").change(function() {
+            $("#pro_dir_a").change(function () {
                 var ti = $("#DOM_A_DISTRITO");
                 ti.empty();
                 var rg = $("#pro_dir_a").val();
                 var data = "id_dist=" + rg + "&opc=pro_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
+                $.post("../../ubigeo", data, function (objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -709,13 +753,13 @@
                     }
                 });
             });
-            $("#dep_dir_l").change(function() {
+            $("#dep_dir_l").change(function () {
                 var ti = $("#pro_dir_l");
                 ti.empty();
                 var rg = $("#dep_dir_l").val();
                 var data = "id_dep=" + rg + "&opc=dep_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
+                $.post("../../ubigeo", data, function (objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -733,13 +777,13 @@
                     }
                 });
             });
-            $("#pro_dir_l").change(function() {
+            $("#pro_dir_l").change(function () {
                 var ti = $("#DOM_LEG_DISTRITO");
                 ti.empty();
                 var rg = $("#pro_dir_l").val();
                 var data = "id_dist=" + rg + "&opc=pro_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
+                $.post("../../ubigeo", data, function (objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
