@@ -68,28 +68,28 @@
                             </div>
                         </div>
                     </div>
-                           <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-		<!-- Button trigger modal -->
-                            <div class="form-group">
-                             <label for="exampleInputEmail1">Contraseña:</label>
-                           <div class="input-group">
-                           <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-		          <a data-toggle="modal" href="#myModal" class="form-control input-group-sm"><i class="fa fa-circle-arrow-up fa-lg"></i> Editar Clave</a>
-	                  </div>
-                         </div>
-                         </div>
-                       <div class="col-sm-3">
+                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                        <!-- Button trigger modal -->
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Contraseña:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                <a data-toggle="modal" href="#myModal" class="form-control input-group-sm"><i class="fa fa-circle-arrow-up fa-lg"></i> Editar Clave</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
                         <div class="form-group">
                             <label for="exampleInputEmail1">telefono:</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                 <input class="form-control input-group-sm telefono"   placeholder=""  type="text" name="TEL_USUARIO" data-mask="(99) 999-9999"  maxlength="50" value="<%=vu.getTe_trabajador().trim()%> ">
-                                
+
                             </div>
                         </div>
                     </div>
 
-                    
+
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Celular:</label>
@@ -503,78 +503,78 @@
                 <input type="text" value="<%=vu.getId_trabajador().trim()%>" name="ID_TR"/>
                 <input type="text" value="<%=vu.getId_usuario().trim()%>" name="idus" />
                 <input type="hidden" value="opc" name="editar_Perfil" />
-                
+
                 <input type="Submit" name="opc" class="btn btn-primary" id="idus" value="Modificar" >
-                
+
 
                 <h2>...</h2>
                 <%}%>
 
 
             </form>
-                 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-					&times;
-				</button>
-				
-			</div>
-			<div class="modal-body no-padding">
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
 
-				<form id="wizard-1" novalidate="novalidate"  class="form" >
-
-							<fieldset>
-								 <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Clave Actual:</label>
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input id="epasswordActual" type="password" class="form-control input-group-sm" value="" required autofocus="" placeholder=""  name="passwordActual" maxlength="24">
-                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Clave nueva:</label>
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input id="epasswordNew1" type="password" class="form-control input-group-sm confirmPWD"  required autofocus="" placeholder=""  name="passwordNew1"  maxlength="24">
-                            </div>
+                        <div class="modal-body no-padding">
+
+                            <form id="wizard-2" novalidate="novalidate" method="post" action="../../Modulos.jsp" class="form" >
+
+                                <fieldset>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Clave Actual:</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                <input id="epasswordActual" type="password" class="form-control input-group-sm" value="" required autofocus="" placeholder=""  name="passwordActual" maxlength="24">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Clave nueva:</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                <input id="epasswordNew1" type="password" class="form-control input-group-sm confirmPWD"  required autofocus="" placeholder=""  name="passwordNew1"  maxlength="24">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Confirme la clave </label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                <input type="password" class="form-control input-group-sm" required autofocus="" placeholder="" name="passwordNew2" id="DOM_A_D2" maxlength="24">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </fieldset>
+
+                                <footer>
+                                    <button type="submit" class="btn btn-primary">
+                                        save
+                                    </button>
+                                    <button type="button" class="btn btn-default"  data-dismiss="modal" aria-hidden="true" >
+                                        Cancel
+                                    </button>
+
+                                </footer>
+                            </form>						
+
+
                         </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Confirme la clave </label>
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input type="password" class="form-control input-group-sm" required autofocus="" placeholder="" name="passwordNew2" id="DOM_A_D2" maxlength="24">
-                            </div>
-                        </div>
-                    </div>
 
-							
-							</fieldset>
-							
-							<footer>
-								<button type="submit" class="btn btn-primary">
-									save
-								</button>
-								<button type="button" class="btn btn-default" data-dismiss="modificar">
-									Cancel
-								</button>
-
-							</footer>
-						</form>						
-						
-
-			</div>
-
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
 
         </div>
 
@@ -585,16 +585,16 @@
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
-                            if (!window.jQuery) {
-                                document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
-                            }
+                        if (!window.jQuery) {
+                            document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                        }
         </script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script>
-                            if (!window.jQuery.ui) {
-                                document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                            }
+                        if (!window.jQuery.ui) {
+                            document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                        }
         </script>
 
         <!-- IMPORTANT: APP CONFIG -->
@@ -672,7 +672,50 @@
                                     },
                                     passwordNew1: {
                                         required: true
-                                     
+
+
+                                    },
+                                    passwordNew2: {
+                                        required: true,
+                                        equalTo: ".confirmPWD"
+
+                                    }
+
+
+                                },
+                                messages: {
+                                    fname: "Please specify your First name",
+                                    lname: "Please specify your Last name",
+                                    email: {
+                                        required: "We need your email address to contact you",
+                                        email: "Your email address must be in the format of name@domain.com"
+                                    }
+                                },
+                                highlight: function(element) {
+                                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                                },
+                                unhighlight: function(element) {
+                                    $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+                                },
+                                errorElement: 'span',
+                                errorClass: 'help-block',
+                                errorPlacement: function(error, element) {
+                                    if (element.parent('.input-group').length) {
+                                        error.insertAfter(element.parent());
+                                    } else {
+                                        error.insertAfter(element);
+                                    }
+                                }
+                            });
+                            var $validator = $("#wizard-2").validate({
+                                rules: {
+                                    email: {
+                                        required: true,
+                                        email: "Your email address must be in the format of name@domain.com"
+                                    },
+                                    passwordNew1: {
+                                        required: true
+
 
                                     },
                                     passwordNew2: {
@@ -919,7 +962,7 @@
             });
 
         </script>
-       
+
 
 
     </body>
