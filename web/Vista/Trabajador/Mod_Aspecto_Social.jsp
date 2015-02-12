@@ -377,9 +377,20 @@
 
                                                         for (int j = 0; j < List_Ubigeo.size(); j++) {
                                                             V_Ubigeo vu = new V_Ubigeo();
-                                                            vu = (V_Ubigeo) List_Ubigeo.get(j);
+                                                            vu = (V_Ubigeo) List_Ubigeo.get(j);%>
+                                                            <%if (t.getId_di_dom_a_distrito().trim().equals(vu.getId_distrito())) {%>
+                                                    <input type="hidden" value="<%=vu.getId_departamento()%>" class="dep_a">                   
+                                                    <input type="hidden" value="<%=vu.getId_provincia()%>" class="pro_a">                   
+                                                    <input type="hidden" value="<%=vu.getId_distrito()%>" class="dis_a">                   
+                                                    <%}
+                                                        if (t.getId_di_dom_leg_distrito().trim().equals(vu.getId_distrito())) {%>
+                                                    <input type="hidden" value="<%=vu.getId_departamento()%>" class="dep_leg">                   
+                                                    <input type="hidden" value="<%=vu.getId_provincia()%>" class="pro_leg">                   
+                                                    <input type="hidden" value="<%=vu.getId_distrito() %>" class="dis_leg">                   
+                                                    <%}
+                                                        }%>
 
-                                                %>
+                                               
 
                                                 <div id="bootstrap-wizard-1" class="col-sm-12">
 
@@ -511,18 +522,8 @@
                                                                         <label>Departamento:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select  id="dep_dir_a" class="form-control input-group-sm"  required="">
-                                                                                <option value="">[Departamento]</option>
-                                                                                <%for (int m = 0; m < List_Ubigeo.size(); m++) {
-                                                                                        V_Ubigeo u = new V_Ubigeo();
-                                                                                        u = (V_Ubigeo) List_Ubigeo.get(m);
-                                                                                        if (t.getId_di_dom_a_distrito().trim().equals(u.getId_distrito().trim())) {
-                                                                                %>
-                                                                                <option value=""  selected=""><%=u.getNo_departamento()%></option>
-                                                                                <%} else {%>
-                                                                                <option value="" ><%=u.getNo_departamento()%></option>
-                                                                                <%}
-                                                                                    }%>
+                                                                            <select  id="dep_dir_a" class="dep_dir_a form-control input-group-sm"  required="">
+
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -532,18 +533,8 @@
                                                                         <label>Provincia:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select   id="pro_dir_a" class="form-control input-group-sm"  required="">
-                                                                                <option value="">[Provincia]</option>
-                                                                                <%for (int m = 0; m < List_Ubigeo.size(); m++) {
-                                                                                        V_Ubigeo u = new V_Ubigeo();
-                                                                                        u = (V_Ubigeo) List_Ubigeo.get(m);
-                                                                                        if (t.getId_di_dom_a_distrito().trim().equals(u.getId_distrito().trim())) {
-                                                                                %>
-                                                                                <option value=""  selected=""><%=u.getNo_provincia()%></option>
-                                                                                <%} else {%>
-                                                                                <option value="" ><%=u.getNo_provincia()%></option>
-                                                                                <%}
-                                                                                    }%>
+                                                                            <select   id="pro_dir_a" class="pro_dir_a form-control input-group-sm"  required="">
+                                                                                
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -553,18 +544,8 @@
                                                                         <label>Distrito:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select name="DIR_DOM_A_DISTRITO_ID"  id="DOM_A_DISTRITO" class="form-control input-group-sm"  required="">
-                                                                                <option value="">[Distrito]</option>
-                                                                                <%for (int m = 0; m < List_Ubigeo.size(); m++) {
-                                                                                        V_Ubigeo u = new V_Ubigeo();
-                                                                                        u = (V_Ubigeo) List_Ubigeo.get(m);
-                                                                                        if (t.getId_di_dom_a_distrito().trim().equals(u.getId_distrito().trim())) {
-                                                                                %>
-                                                                                <option value="<%=u.getId_distrito()%>"  selected=""><%=u.getNo_distrito()%></option>
-                                                                                <%} else {%>
-                                                                                <option value="<%=u.getId_distrito()%>" ><%=u.getNo_distrito()%></option>
-                                                                                <%}
-                                                                                    }%>
+                                                                            <select name="DIR_DOM_A_DISTRITO_ID"  id="DOM_A_DISTRITO" class="dis_dir_a form-control input-group-sm"  required="">
+                                                                                
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -688,18 +669,8 @@
                                                                         <label>Departamento:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select   id="dep_dir_l" class="form-control input-group-sm"  required="">
-                                                                                <option value="">[Departamento]</option>
-                                                                                <%for (int m = 0; m < List_Ubigeo.size(); m++) {
-                                                                                        V_Ubigeo u = new V_Ubigeo();
-                                                                                        u = (V_Ubigeo) List_Ubigeo.get(m);
-                                                                                        if (t.getId_di_dom_leg_distrito().trim().equals(u.getId_distrito().trim())) {
-                                                                                %>
-                                                                                <option value=""  selected=""><%=u.getNo_departamento()%></option>
-                                                                                <%} else {%>
-                                                                                <option value="" ><%=u.getNo_departamento()%></option>
-                                                                                <%}
-                                                                                    }%>
+                                                                            <select   id="dep_dir_l" class="dep_dir_l form-control input-group-sm"  required="">
+                                                                                
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -709,18 +680,7 @@
                                                                         <label>Provincia:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select   id="pro_dir_l" class="form-control input-group-sm"  required="">
-                                                                                <option value="">[Provincia]</option>
-                                                                                <%for (int m = 0; m < List_Ubigeo.size(); m++) {
-                                                                                        V_Ubigeo u = new V_Ubigeo();
-                                                                                        u = (V_Ubigeo) List_Ubigeo.get(m);
-                                                                                        if (t.getId_di_dom_leg_distrito().trim().equals(u.getId_distrito().trim())) {
-                                                                                %>
-                                                                                <option value=""  selected=""><%=u.getNo_provincia()%></option>
-                                                                                <%} else {%>
-                                                                                <option value="" ><%=u.getNo_provincia()%></option>
-                                                                                <%}
-                                                                                    }%>
+                                                                            <select   id="pro_dir_l" class="pro_dir_l form-control input-group-sm"  required="">
 
                                                                             </select>
                                                                         </div>
@@ -731,18 +691,8 @@
                                                                         <label>Distrito:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select   name="DIR_DOM_LEG_DISTRITO_ID"   id="DOM_LEG_DISTRITO" class="form-control input-group-sm"  required="">
-                                                                                <option value="">[Distrito]</option>
-                                                                                <%for (int m = 0; m < List_Ubigeo.size(); m++) {
-                                                                                        V_Ubigeo u = new V_Ubigeo();
-                                                                                        u = (V_Ubigeo) List_Ubigeo.get(m);
-                                                                                        if (t.getId_di_dom_leg_distrito().trim().equals(u.getId_distrito().trim())) {
-                                                                                %>
-                                                                                <option value="<%=u.getId_distrito()%>"  selected=""><%=u.getNo_distrito()%></option>
-                                                                                <%} else {%>
-                                                                                <option value="<%=u.getId_distrito()%>" ><%=u.getNo_distrito()%></option>
-                                                                                <%}
-                                                                                    }%>
+                                                                            <select   name="DIR_DOM_LEG_DISTRITO_ID"   id="DOM_LEG_DISTRITO" class="dis_dir_l form-control input-group-sm"  required="">
+                                                                                
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -794,16 +744,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <%if (t.getId_di_dom_a_distrito().trim().equals(vu.getId_distrito())) {%>
-                                                    <input type="hidden" value="<%=vu.getId_departamento()%>" class="dep_a">                   
-                                                    <input type="hidden" value="<%=vu.getId_provincia()%>" class="pro_a">                   
-                                                    <input type="hidden" value="<%=vu.getId_distrito()%>" class="sec_a">   
-                                                    <%}
-                                                        if (t.getId_di_dom_leg_distrito().trim().equals(vu.getId_distrito())) {%>
-                                                    <input type="hidden" value="<%=vu.getId_departamento() %>" class="dep_leg">                   
-                                                    <input type="hidden" value="<%=vu.getId_provincia() %>" class="pro_leg">                   
-                                                    <input type="hidden" value="<%=vu.getId_distrito() %>" class="sec_leg">   
-                                                    <%}%>
+                                                    
                                                     <%String idtr = request.getParameter("idtr");%>
                                                     <input type="hidden" name="idtr" value="<%=idtr%>"/>
                                                     <input type="hidden" name="opc" value="Modificar_Asp_Soc">
@@ -812,21 +753,22 @@
                                                             <button type="submit" value="" name="opc"> MODIFICAR</button>
                                                         </center>
                                                     </footer>
-                                                    <%}
+                                                    <%
                                                         }%>
+                                                </div>
                                             </form>
+
+
+
+
                                         </div>
-
-
+                                        <!-- end widget content -->
 
                                     </div>
-                                    <!-- end widget content -->
+                                    <!-- end widget div -->
 
                                 </div>
-                                <!-- end widget div -->
-
-                            </div>
-                            <!-- end widget -->
+                                <!-- end widget -->
 
                         </article>
                         <!-- WIDGET END -->
@@ -930,7 +872,9 @@
     <script src="../../js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
     <script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
-    <script>$(document).ready(function() {
+
+    <script>
+                                                                    $(document).ready(function() {
                                                                         var p = 1;
                                                                         var texto_h = "";
                                                                         $(".btn-reg-hijo").click(function() {
@@ -1195,11 +1139,121 @@
             }
 
         }
+        function Listar_Departamento_A() {
+            var s = $(".dep_dir_a");
+            $.post("../../ubigeo", "opc=Listar_D", function(objJson) {
+                s.empty();
+                var lista = objJson.lista;
+                s.append("<option value='' > [SELECCIONE] </option>");
+                for (var j = 0; j < lista.length; j++) {
+                    if ($(".dep_a").val() == lista[j].id) {
+                        s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].descripcion + "</option>");
+
+                    } else {
+                        s.append("<option value='" + lista[j].id + "'> " + lista[j].descripcion + "</option>");
+                    }
+                }
+
+            });
+        }
+        function Listar_Provincia_A() {
+           
+            var s = $(".pro_dir_a");
+            $.post("../../ubigeo", "opc=Listar_P&"+"id_dep=" + $(".dep_a").val() , function(objJson) {
+                s.empty();
+                var lista = objJson.lista;
+                s.append("<option value='' > [SELECCIONE] </option>");
+                for (var j = 0; j < lista.length; j++) {
+                    if ($(".pro_a").val() == lista[j].id) {
+                        s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].descripcion + "</option>");
+
+                    } else {
+                        s.append("<option value='" + lista[j].id + "'> " + lista[j].descripcion + "</option>");
+                    }
+                }
+
+            });
+        }
+        function Listar_Distrito_A() {
+            var s = $(".dis_dir_a");
+             $.post("../../ubigeo", "opc=Listar_Di&"+"id_pro=" + $(".pro_a").val() , function(objJson) {
+                s.empty();
+                var lista = objJson.lista;
+                s.append("<option value='' > [SELECCIONE] </option>");
+                for (var j = 0; j < lista.length; j++) {
+                    if ($(".dis_a").val() == lista[j].id) {
+                        s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].descripcion + "</option>");
+
+                    } else {
+                        s.append("<option value='" + lista[j].id + "'> " + lista[j].descripcion + "</option>");
+                    }
+                }
+
+            });
+        }
+        function Listar_Departamento_Leg() {
+            var s = $(".dep_dir_l");
+            $.post("../../ubigeo", "opc=Listar_D", function(objJson) {
+                s.empty();
+                var lista = objJson.lista;
+                s.append("<option value='' > [SELECCIONE] </option>");
+                for (var j = 0; j < lista.length; j++) {
+                    if ($(".dep_leg").val() == lista[j].id) {
+                        s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].descripcion + "</option>");
+
+                    } else {
+                        s.append("<option value='" + lista[j].id + "'> " + lista[j].descripcion + "</option>");
+                    }
+                }
+
+            });
+        }
+        function Listar_Provincia_Leg() {
+           
+            var s = $(".pro_dir_l");
+            $.post("../../ubigeo", "opc=Listar_P&"+"id_dep=" + $(".dep_leg").val() , function(objJson) {
+                s.empty();
+                var lista = objJson.lista;
+                s.append("<option value='' > [SELECCIONE] </option>");
+                for (var j = 0; j < lista.length; j++) {
+                    if ($(".pro_leg").val() == lista[j].id) {
+                        s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].descripcion + "</option>");
+
+                    } else {
+                        s.append("<option value='" + lista[j].id + "'> " + lista[j].descripcion + "</option>");
+                    }
+                }
+
+            });
+        }
+        function Listar_Distrito_Leg() {
+            var s = $(".dis_dir_l");
+             $.post("../../ubigeo", "opc=Listar_Di&"+"id_pro=" + $(".pro_leg").val() , function(objJson) {
+                s.empty();
+                var lista = objJson.lista;
+                s.append("<option value='' > [SELECCIONE] </option>");
+                for (var j = 0; j < lista.length; j++) {
+                    if ($(".dis_leg").val() == lista[j].id) {
+                        s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].descripcion + "</option>");
+
+                    } else {
+                        s.append("<option value='" + lista[j].id + "'> " + lista[j].descripcion + "</option>");
+                    }
+                }
+
+            });
+        }
 
     </script> 
     <script>
         $(document).ready(
                 function() {
+                    Listar_Departamento_A();
+                    Listar_Provincia_A();
+                    Listar_Distrito_A();
+                    Listar_Departamento_Leg();
+                    Listar_Provincia_Leg();
+                    Listar_Distrito_Leg();
                     $("#sis_pens").change(
                             function() {
                                 if ($("#sis_pens").val() != "1") {
@@ -1218,6 +1272,7 @@
                     );
 
                 });
+                
 
     </script>
     <script type="text/javascript">
