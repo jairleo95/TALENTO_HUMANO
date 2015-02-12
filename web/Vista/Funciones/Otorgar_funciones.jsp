@@ -56,9 +56,16 @@
                 float: right;
                 width: 49%;
             }
+            .alert{
+                margin-top: 60px;
+                clear:both;
+            }
             .opciones{
+                padding-top:20px;
                 clear:both;
                 width: 50%;
+                height: 130px;
+                //border: solid 1px #000000;
             }
             select{
                 width: 100px;;
@@ -148,15 +155,6 @@
 
                 <div class="funciones form-group">
                     <label>6.Detalle de Funcion</label>
-                    <%--<select class="ifun text-box chosen-select form-control">
-                        <option value="0">-Seleccione-</option>
-                        <%for (int i = 0; i < Listar_funciones.size(); i++) {
-                                Funciones f = new Funciones();
-                                f = (Funciones) Listar_funciones.get(i);
-                        %>
-                        <option class="optlist" value="<%=f.getDe_funcion()%>"><%=f.getDe_funcion()%></option>
-                        <%}%>
-                    </select>--%>
                     <input type="text" class=" ifun form-control" placeholder="Nombre de la Funcion" required="">
                 </div>
                 <div class="estadoF form-group">
@@ -178,10 +176,10 @@
 
             </div>
             <div class="opciones">
-                <div class="alerta alert alert-danger" role="alert"><strong class="msg"></strong></div>
-                <div class="informacion alert alert-success" role="alert"><strong class="msgi"></strong></div>
                 <button name="opc"  class="btnotorgar btn btn-primary btn-block" value="1">Otorgar Funcion</button>
                 <button name="opc1"  class="btnLimpiar btn btn-default btn-block" value="1">Limpiar</button>
+                <div class="alerta alert alert-danger" role="alert"><center><strong class="msg"></strong></center></div>
+                <div class="informacion alert alert-success" role="alert"><center><strong class="msgi"></strong></center></div>
             </div>
         </div>
 
@@ -206,6 +204,7 @@
         $('.alerta').hide();
         $('.informacion').hide();
         $(document).ready(function() {
+            limpiar();
             var idDireccion, idDep, idArea, idSeccion, tipoFuncion, idValue, idFuncion, idPuesto;
             $(".idpu").change(function() {
                 listar_tabla();
@@ -296,22 +295,34 @@
                     var id_puesto = $(".idpu").val();
                     if ($(this).val() == 1) {
                         $.post("../../funcion", "opc=otorgar" + "&id_puesto=" + id_puesto + "&de_funcion=" + $(".ifun").val() + "&ti_funcion=" + tipoFuncion, function() {
-                            $('.informacion').show();
-                            $('.msgi').text("Funcion otorgada con Exito !");
                         });
                     } else if ($(this).val() == 2) {
                         $.post("../../funcion", "opc=edit_function" + "&id_fun=" + idFuncion + "&de_fun=" + $('.ifun').val() + "&es_fun=" + $('.estado').val() + "&id_pu=" + id_puesto + "&ti_funcion=" + $('.tifun').val(), function() {
-                            $('.informacion').show();
-                            $('.msgi').text("Funcion editada con Exito !");
+                            $('.idpu').val(0);
+                            $('.tifun').val(0);
+                            $('.estado').val(1);
+                            $('.ifun').val("");
+                            $('.btnotorgar').val('1');
+                            $('.btnotorgar').text('Otorgar Funcion');
                         });
                     }
                     listar_tabla();
-
+                    mensajeI();
                 } else {
                     $('.alerta').show();
                     $('.msg').text('Falta seleccionar algunos Elementos !');
                 }
             });
+            function mensajeI() {
+                $('.btnotorgar').blur();
+                $('.informacion').show();
+                $('.informacion').fadeIn();
+                $('.msgi').text("Operacion realizada con Exito !");
+                $('.informacion').fadeTo(4000, 0, function() {
+                    $('.informacion').hide(1000);
+                });
+            }
+            ;
             $('.btnLimpiar').click(function() {
                 limpiar();
             });
@@ -322,7 +333,7 @@
                 $('.idse').val(0);
                 $('.idpu').val(0);
                 $('.tifun').val(0);
-                $('.estado').val(0);
+                $('.estado').val(1);
                 $('.ifun').val("");
                 $('.btnotorgar').val('1');
                 $('.btnotorgar').text('Otorgar Funcion');
@@ -361,12 +372,12 @@
                     $('.edit').click(function() {
                         idValue = $(this).val();
                         idFuncion = $('.btnIdFun' + idValue).val();
-                        idPuesto =
-                                $('.ifun').val($('.nombre_funcion' + idValue).text());
+                        idPuesto = $('.ifun').val($('.nombre_funcion' + idValue).text());
                         $('.estado').val($('.estado_funcion' + idValue).attr('id'));
                         $('.tifun').val($('.tipo_funcion' + idValue).attr('id'));
                         $('.btnotorgar').val('2');
                         $('.btnotorgar').text('Editar Funcion');
+                        $('.ifun').focus();
                     });
                     $('.del').click(function() {
                         idValue = $(this).val();
