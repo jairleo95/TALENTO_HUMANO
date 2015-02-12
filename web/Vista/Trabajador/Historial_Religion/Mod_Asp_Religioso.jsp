@@ -92,8 +92,9 @@
                         </label>
                     </section>
                     <%String idtr = request.getParameter("idtr");%>
-                    <input type="text" value="<%=idtr%>" name="idtr">
-                    <input type="submit" value="Modificar" name="opc">
+                    <input type="hidden" value="<%=idtr%>" name="idtr">
+                    <input type="hidden" value="Modificar_Asp_Rel" name="opc">
+                    <input type="submit" value="Modificar" >
 
                 </div>
                 <%}%>

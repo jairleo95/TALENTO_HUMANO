@@ -335,6 +335,11 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 v.setDistrito_nac(rs.getString("distrito_nac"));
                 v.setDe_anno_egreso(rs.getString("de_anno_egreso"));
                 v.setId_carrera(rs.getString("id_carrera"));
+                v.setId_distrito(rs.getString("id_distrito"));
+                v.setId_provincia(rs.getString("id_provincia"));
+                v.setId_departamento(rs.getString("id_departamento"));
+                v.setId_di_dom_a_distrito(rs.getString("id_di_dom_a_distrito"));
+                v.setId_di_dom_leg_distrito(rs.getString("id_di_dom_leg_distrito"));
                 list.add(v);
             }
 

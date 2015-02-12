@@ -567,6 +567,7 @@ public class DgpDAO implements InterfaceDgpDAO {
             try {
                 this.conn.close();
             } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
             }
         }
         return lista;

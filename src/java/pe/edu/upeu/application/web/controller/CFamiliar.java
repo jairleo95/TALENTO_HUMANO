@@ -40,35 +40,31 @@ public class CFamiliar extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         HttpSession sesion = request.getSession(true);
-        
+
         String user = (String) sesion.getAttribute("IDUSER");
-        
+
         String opc = request.getParameter("opc");
         CConversion c = new CConversion();
-        
+
         InterfaceDatos_Hijo_Trabajador h = new Datos_Hijo_TrabajadorDAO();
         InterfacePadre_Madre_ConyugueDAO pmc = new Padre_Madre_ConyugueDAO();
 
         /*try {*/
-        if (opc.equals("REGISTRAR")) {
-            String ID_PADRE_MADRE_CONYUGUE = null;
-            String AP_NOMBRES_PADRE = request.getParameter("APELLIDOS_NOMBRES_PADRE");
-            String AP_NOMBRES_MADRE = request.getParameter("APELLIDOS_NOMBRES_MADRE");
+        if (opc.equals("Registrar Conyugue")) {
             String ES_TRABAJA_UPEU_CONYUGUE = request.getParameter("TRABAJA_UPEU_CONYUGUE");
             String AP_NOMBRES_CONYUGUE = request.getParameter("APELLIDO_NOMBRES_CONYUGUE");
             String FE_NAC_CONYUGUE = request.getParameter("FECHA_NAC_CONYUGUE");
             String TI_DOC_ID = request.getParameter("TIPO_DOC_ID");
             String NU_DOC = request.getParameter("NRO_DOC");
             String LI_INSCRIPCION_VIG_ESSALUD = request.getParameter("INSCRIPCION_VIG_ESSALUD");
-            String US_CREACION = null;
-            String FE_CREACION = null;
-            String US_MODIF = null;
-            String FE_MODIF = null;
-            String IP_USUARIO = null;
-            String ID_TRABAJADOR = request.getParameter("IDDATOS_TRABAJADOR");
+            String ID_TRABAJADOR = request.getParameter("idtr");
             String ID_CONYUGUE = request.getParameter("CONYUGUE");
-            pmc.INSERT_PADRE_MADRE_CONYUGUE(ID_PADRE_MADRE_CONYUGUE, AP_NOMBRES_PADRE, AP_NOMBRES_MADRE, ES_TRABAJA_UPEU_CONYUGUE, AP_NOMBRES_CONYUGUE, FE_NAC_CONYUGUE, TI_DOC_ID, NU_DOC, LI_INSCRIPCION_VIG_ESSALUD, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, ID_TRABAJADOR,  ID_CONYUGUE);
-            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + ID_TRABAJADOR);
+
+            pmc.INSERT_PADRE_MADRE_CONYUGUE(ES_TRABAJA_UPEU_CONYUGUE, AP_NOMBRES_CONYUGUE, FE_NAC_CONYUGUE, TI_DOC_ID, NU_DOC, LI_INSCRIPCION_VIG_ESSALUD, user, null, null, ID_TRABAJADOR, ID_CONYUGUE);
+            getServletContext().setAttribute("List_PMC", pmc.List_PMC(ID_TRABAJADOR));
+            getServletContext().setAttribute("LISTA_HIJOS", h.LISTA_HIJOS(ID_TRABAJADOR));
+            getServletContext().setAttribute("LISTA_HIJO", h.LISTA_HIJOS(ID_TRABAJADOR));
+            response.sendRedirect("Vista/Trabajador/Familiar/Detalle_Familiar.jsp?idtr=" + ID_TRABAJADOR);
         }
         if (opc.equals("Detalle_Familiar")) {
             String idtr = request.getParameter("idtr");
@@ -77,7 +73,7 @@ public class CFamiliar extends HttpServlet {
             getServletContext().setAttribute("LISTA_HIJO", h.LISTA_HIJOS(idtr));
             // out.println(idtr);
             //out.print(h.LISTA_HIJOS(idtr).size());
-            response.sendRedirect("Vista/Trabajador/Familiar/Detalle_Familiar.jsp?idtr="+idtr);
+            response.sendRedirect("Vista/Trabajador/Familiar/Detalle_Familiar.jsp?idtr=" + idtr);
         }
         if (opc.equals("REGISTRAR HIJO")) {
             String ID_DATOS_HIJOS_TRABAJADOR = null;
@@ -102,22 +98,22 @@ public class CFamiliar extends HttpServlet {
             getServletContext().setAttribute("LISTA_HIJO", h.LISTA_HIJOS(ID_TRABAJADOR));
             response.sendRedirect("Vista/Trabajador/Familiar/Reg_Datos_Hijo.jsp");
         }
-        if(opc.equals("eliminar")){
-           String id_hijo = request.getParameter("idhijo");
-           String id_tr = request.getParameter("idtr");
-            out.print(id_hijo+"   "+id_tr+"");
+        if (opc.equals("eliminar")) {
+            String id_hijo = request.getParameter("idhijo");
+            String id_tr = request.getParameter("idtr");
+            out.print(id_hijo + "   " + id_tr + "");
             h.ELIMINAR_HIJO(id_hijo, id_tr);
             getServletContext().setAttribute("LISTA_HIJO", h.LISTA_HIJOS(id_tr));
-           response.sendRedirect("Vista/Trabajador/Familiar/Detalle_Familiar.jsp?idtr=" + id_tr);
+            response.sendRedirect("Vista/Trabajador/Familiar/Detalle_Familiar.jsp?idtr=" + id_tr);
         }
-        if(opc.equals("modificar")){
-            String idhijo=request.getParameter("idhijo");
-            String idtr=request.getParameter("idtr");
-            getServletContext().setAttribute("Lista_hijo_individual", h.LISTA_HIJO(idhijo,idtr));
-           response.sendRedirect("Vista/Trabajador/Familiar/Mod_Datos_Hijos.jsp");
+        if (opc.equals("modificar")) {
+            String idhijo = request.getParameter("idhijo");
+            String idtr = request.getParameter("idtr");
+            getServletContext().setAttribute("Lista_hijo_individual", h.LISTA_HIJO(idhijo, idtr));
+            response.sendRedirect("Vista/Trabajador/Familiar/Mod_Datos_Hijos.jsp");
         }
-        if(opc.equals("MODIFICAR HIJO")){
-            String idtr=request.getParameter("idtr");
+        if (opc.equals("MODIFICAR HIJO")) {
+            String idtr = request.getParameter("idtr");
             String ID_DATOS_HIJOS_TRABAJADOR = request.getParameter("idhijo");
             String AP_PATERNO = request.getParameter("APELLIDO_P");
             String AP_MATERNO = request.getParameter("APELLIDO_M");
@@ -131,22 +127,22 @@ public class CFamiliar extends HttpServlet {
             h.MOD_HIJOS_TRAB(ID_DATOS_HIJOS_TRABAJADOR, AP_PATERNO, AP_MATERNO, NO_HIJO_TRABAJADOR, FE_NACIMIENTO, ES_SEXO, ES_TIPO_DOC, NU_DOC, ES_INSCRIPCION_VIG_ESSALUD, ES_ESTUDIO_NIV_SUPERIOR);
             getServletContext().setAttribute("List_PMC", pmc.List_PMC(idtr));
             getServletContext().setAttribute("LISTA_HIJOS", h.LISTA_HIJOS(idtr));
-             getServletContext().setAttribute("LISTA_HIJO", h.LISTA_HIJOS(idtr));
+            getServletContext().setAttribute("LISTA_HIJO", h.LISTA_HIJOS(idtr));
             response.sendRedirect("Vista/Trabajador/Familiar/Detalle_Familiar.jsp?idtr=" + idtr);
         }
-        if(opc.equals("Editar")){
-           String idtr=request.getParameter("idtra");
-           //out.print(opc+"   "+idtr);
-           getServletContext().setAttribute("List_PMC", pmc.List_PMC(idtr));
-           response.sendRedirect("Vista/Trabajador/Familiar/Mod_Padre_Madre_Conyugue.jsp?idtr=" + idtr);
+        if (opc.equals("Editar")) {
+            String idtr = request.getParameter("idtra");
+            //out.print(opc+"   "+idtr);
+            getServletContext().setAttribute("List_PMC", pmc.List_PMC(idtr));
+            response.sendRedirect("Vista/Trabajador/Familiar/Mod_Padre_Madre_Conyugue.jsp?idtr=" + idtr);
         }
-        if(opc.equals("MODIFICAR PMC")){
+        if (opc.equals("MODIFICAR PMC")) {
             try {
                 String AP_NOMBRES_PADRE = request.getParameter("APELLIDOS_NOMBRES_PADRE");
                 String AP_NOMBRES_MADRE = request.getParameter("APELLIDOS_NOMBRES_MADRE");
                 String ES_TRABAJA_UPEU_CONYUGUE = request.getParameter("TRABAJA_UPEU_CONYUGUE");
                 String AP_NOMBRES_CONYUGUE = request.getParameter("APELLIDO_NOMBRES_CONYUGUE");
-                
+
                 String FE_NAC_CONYUGUE = c.convertFecha(request.getParameter("FECHA_NAC_CONYUGUE"));
                 String TI_DOC_ID = request.getParameter("TIPO_DOC_ID");
                 String NU_DOC = request.getParameter("NRO_DOC");
@@ -156,24 +152,19 @@ public class CFamiliar extends HttpServlet {
                 String ID_TRABAJADOR = request.getParameter("idtr");
                 // out.print(opc+"   "+AP_NOMBRES_PADRE+AP_NOMBRES_MADRE+ES_TRABAJA_UPEU_CONYUGUE+AP_NOMBRES_CONYUGUE+FE_NAC_CONYUGUE+TI_DOC_ID+ NU_DOC + LI_INSCRIPCION_VIG_ESSALUD + US_MODIF+FE_MODIF + ID_TRABAJADOR+"");
                 pmc.MOD_PADRE_MADRE_CONYUGUE(AP_NOMBRES_PADRE, AP_NOMBRES_MADRE, ES_TRABAJA_UPEU_CONYUGUE, AP_NOMBRES_CONYUGUE, FE_NAC_CONYUGUE, TI_DOC_ID, NU_DOC, LI_INSCRIPCION_VIG_ESSALUD, US_MODIF, FE_MODIF, ID_TRABAJADOR);
-                
-                
-                
+
                 getServletContext().setAttribute("List_PMC", pmc.List_PMC(ID_TRABAJADOR));
                 getServletContext().setAttribute("LISTA_HIJOS", h.LISTA_HIJOS(ID_TRABAJADOR));
                 getServletContext().setAttribute("LISTA_HIJO", h.LISTA_HIJOS(ID_TRABAJADOR));
                 // out.println(idtr);
-                response.sendRedirect("Vista/Trabajador/Familiar/Detalle_Familiar.jsp?idtr="+ID_TRABAJADOR);
+                response.sendRedirect("Vista/Trabajador/Familiar/Detalle_Familiar.jsp?idtr=" + ID_TRABAJADOR);
             } catch (ParseException ex) {
                 Logger.getLogger(CFamiliar.class.getName()).log(Level.SEVERE, null, ex);
             }
-           }
-        if(opc.equals("MODIFICAR REQUERIMIENTO")){
-            
-           }
-       }
-            
-        
+        }
+
+    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

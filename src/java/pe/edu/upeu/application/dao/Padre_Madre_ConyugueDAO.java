@@ -5,15 +5,15 @@
  */
 package pe.edu.upeu.application.dao;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import static oracle.security.o3logon.b.a;
+
 import pe.edu.upeu.application.dao_imp.InterfacePadre_Madre_ConyugueDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -27,36 +27,39 @@ import pe.edu.upeu.application.web.controller.CConversion;
 public class Padre_Madre_ConyugueDAO implements InterfacePadre_Madre_ConyugueDAO {
 
     ConexionBD conn;
-    CConversion c=new CConversion();
+    CConversion c = new CConversion();
+
     @Override
-    public void INSERT_PADRE_MADRE_CONYUGUE(String ID_PADRE_MADRE_CONYUGUE, String AP_NOMBRES_PADRE, String AP_NOMBRES_MADRE, String ES_TRABAJA_UPEU_CONYUGUE, String AP_NOMBRES_CONYUGUE, String FE_NAC_CONYUGUE, String TI_DOC_ID, String NU_DOC, String LI_INSCRIPCION_VIG_ESSALUD, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String ID_TRABAJADOR, String ID_CONYUGUE) {
+    public void INSERT_PADRE_MADRE_CONYUGUE(String ES_TRABAJA_UPEU_CONYUGUE, String AP_NOMBRES_CONYUGUE, String FE_NAC_CONYUGUE, String TI_DOC_ID, String NU_DOC, String LI_INSCRIPCION_VIG_ESSALUD, String US_MODIF, String FE_MODIF, String IP_USUARIO, String ID_TRABAJADOR, String ID_CONYUGUE) {
         CallableStatement cst;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            cst = conn.conex.prepareCall("{CALL RHSP_INSERT_PMC( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)}");
-            cst.setString(1, ID_PADRE_MADRE_CONYUGUE);
-            cst.setString(2, AP_NOMBRES_PADRE);
-            cst.setString(3, AP_NOMBRES_MADRE);
-            cst.setString(4, ES_TRABAJA_UPEU_CONYUGUE);
-            cst.setString(5, AP_NOMBRES_CONYUGUE);
-            cst.setString(6, c.convertFecha(FE_NAC_CONYUGUE));
-            cst.setString(7, TI_DOC_ID);
-            cst.setString(8, NU_DOC);
-            cst.setString(9, LI_INSCRIPCION_VIG_ESSALUD);
-            cst.setString(10, US_CREACION);
-            cst.setString(11, FE_CREACION);
-            cst.setString(12, US_MODIF);
-            cst.setString(13, FE_MODIF);
-            cst.setString(14, IP_USUARIO);
-            cst.setString(15, ID_TRABAJADOR);
-            cst.setString(16, ID_TRABAJADOR);
+            cst = conn.conex.prepareCall("{CALL RHSP_INSERT_CONYUGUE(  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+            cst.setString(1, ES_TRABAJA_UPEU_CONYUGUE);
+            cst.setString(2, AP_NOMBRES_CONYUGUE);
+            cst.setString(3, c.convertFecha(FE_NAC_CONYUGUE));
+            cst.setString(4, TI_DOC_ID);
+            cst.setString(5, NU_DOC);
+            cst.setString(6, LI_INSCRIPCION_VIG_ESSALUD);
+            cst.setString(7, US_MODIF);
+            cst.setString(8, FE_MODIF);
+           // cst.setString(9, InetAddress.getLocalHost().getHostAddress());
+            cst.setString(9, null);
+            cst.setString(10, ID_TRABAJADOR);
+            cst.setString(11, ID_CONYUGUE);
             cst.execute();
         } catch (SQLException ex) {
-            
-        } catch (ParseException ex) {
+            throw new RuntimeException(ex.getMessage());
+        }  /*catch (UnknownHostException ex) {
             Logger.getLogger(Padre_Madre_ConyugueDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } */catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
@@ -96,7 +99,7 @@ public class Padre_Madre_ConyugueDAO implements InterfacePadre_Madre_ConyugueDAO
 
     @Override
     public void MOD_PADRE_MADRE_CONYUGUE(String AP_NOMBRES_PADRE, String AP_NOMBRES_MADRE, String ES_TRABAJA_UPEU_CONYUGUE, String AP_NOMBRES_CONYUGUE, String FE_NAC_CONYUGUE, String TI_DOC_ID, String NU_DOC, String LI_INSCRIPCION_VIG_ESSALUD, String US_MODIF, String FE_MODIF, String ID_TRABAJADOR) {
-    CallableStatement cst;
+        CallableStatement cst;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             cst = conn.conex.prepareCall("{CALL RHSP_MOD_PADRE_MAD_CON( ?, ?, ?, ?, ?, ?, ?, ?, ? )}");
