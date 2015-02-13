@@ -197,6 +197,16 @@
                                         </div>
                                         <div class="row" >
                                             <h2>Lista de puestos :<strong><label class="lb-list_puesto"></label></strong> </h2>
+                                            <form action="" method="post" class="form_puesto" style="display:none;">
+                                                <label>Dirección</label><select class="sl_dir"></select>
+                                                <label>Departamento:</label><select class="sl_dep"></select>
+                                                <label>Area:</label><select class="sl_area"></select>
+                                                <label>Sección:</label><select class="sl_sec"></select>
+                                                <label>Puesto:</label><select class="sl_puesto"></select>
+                                                <button type="button">
+                                                    Agregar Puesto
+                                                </button>
+                                            </form>
                                             <table border="1">
                                                 <thead>
                                                     <tr>
@@ -336,8 +346,123 @@
         <script type="text/javascript">
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
+            function  list_put_id(d, valor) {
 
+
+                $.post("../../Direccion_Puesto", "opc=" + "Listar_pu_id" + "&" + "id=" + valor, function (objJson) {
+                    d.empty();
+                    d.append("<option value='' > [SELECCIONE] </option>");
+                    var list = objJson.lista;
+
+                    if (list.length !== 0) {
+                        for (var i = 0; i < list.length; i++) {
+                            d.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
+                        }
+                    } else {
+                        d.append("<option value='0' > [] </option>");
+                    }
+                });
+
+            }
+
+            function  lis_dir_id(d, valor) {
+
+
+                $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + valor, function (objJson) {
+                    d.empty();
+                    d.append("<option value='' > [SELECCIONE] </option>");
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    var list = objJson.lista;
+                    if (list.length !== 0) {
+                        for (var i = 0; i < list.length; i++) {
+                            d.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
+                        }
+                    } else {
+                        d.append("<option value='' > [] </option>");
+                    }
+                });
+
+            }
+            function list_area_id(c, valor) {
+
+
+                $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + valor, function (objJson) {
+                    c.empty();
+                    c.append("<option value='' > [SELECCIONE] </option>");
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    var list = objJson.lista;
+                    if (list.length !== 0) {
+                        for (var i = 0; i < list.length; i++) {
+                            c.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+                        }
+                    } else {
+                        c.append("<option value='' > [] </option>");
+                    }
+                });
+
+            }
+            function list_sec_id(d, valor) {
+                $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + valor, function (objJson) {
+                    d.empty();
+                    d.append("<option value='' > [SELECCIONE] </option>");
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    var list = objJson.lista;
+                    if (list.length !== 0) {
+                        for (var i = 0; i < list.length; i++) {
+                            d.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+                        }
+                    } else {
+                        d.append("<option value='' > [no hay] </option>");
+                    }
+                });
+
+            }
+            function list_dir(c) {
+                $.post("../../Direccion_Puesto", "opc=Listar_direccion", function (objJson) {
+                    c.empty();
+                    c.append("<option value='' > [SELECCIONE] </option>");
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    var list = objJson.lista;
+                    if (list.length !== 0) {
+                        for (var i = 0; i < list.length; i++) {
+                            c.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
+                        }
+                    } else {
+                        c.append("<option value='0' > [] </option>");
+                    }
+                });
+            }
             $(document).ready(function () {
+                $(".form_puesto").hide();
+
+                list_dir($(".sl_dir"));
+                $(".sl_dir").change(function () {
+                    lis_dir_id($(".sl_dep"), $(this).val());
+
+                });
+
+                $(".sl_dep").change(function () {
+                    list_area_id($(".sl_area"), $(this).val());
+                });
+                $(".sl_area").change(function () {
+                    list_sec_id($(".sl_sec"), $(this).val());
+                });
+                $(".sl_sec").change(function () {
+                    list_put_id($(".sl_puesto"), $(this).val());
+                });
+
                 var num = 1;
                 $(".Generar").click(function () {
 
@@ -394,6 +519,7 @@
                             $(".lb-list_pasos").text($(this).find(":selected").text());
 
                             Listar_Paso($(this).val());
+                            $(".form_puesto").hide();
 
                             // alert($(this).val());
                         });
@@ -468,6 +594,7 @@
                                 tbody_p.append(texto);
 
                                 texto = "";
+                                $(".form_puesto").show();
 
                             });
 
