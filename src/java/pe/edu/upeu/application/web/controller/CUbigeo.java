@@ -64,6 +64,23 @@ public class CUbigeo extends HttpServlet {
                 rpta.put("lista", lista);
 
             }
+            if (opc.equals("Listar_D")) {
+                List<Map<String, ?>> lista = ub.Departamento();
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
+            if (opc.equals("Listar_P")) {
+                String id = request.getParameter("id_dep");
+                List<Map<String, ?>> lista = ub.Provincia(id);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
+            if (opc.equals("Listar_Di")) {
+                String id = request.getParameter("id_pro");
+                List<Map<String, ?>> lista = ub.Distrito(id);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());

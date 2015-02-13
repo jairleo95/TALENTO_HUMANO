@@ -13,6 +13,8 @@
 </head>
 
 <body >
+    <input type="hidden"  class="dni_tr"  value="<%=request.getParameter("dni")%>"  />
+    <input type="hidden"  class="semestre"  value="<%=request.getParameter("semestre")%>"  />
     <div id="myDiv"></div>
 
 
@@ -41,23 +43,8 @@
                     <tr>
                     <form name="datos">
                         <td colspan="3" align="center" valign="top">
-                            <strong>CURSOS MATRICULADOS</strong> -
-                            Carga Academica
-                            <select name="f_carga_id" onChange="document.datos.submit()">
-
-                                <option	value="2014-2" selected  >2014-2</option>
-
-                                <option	value="2014-1"   >2014-1</option>
-
-                                <option	value="2013-2"   >2013-2</option>
-
-                                <option	value="2013-1"   >2013-1</option>
-
-                                <option	value="2012-2"   >2012-2</option>
-
-                                <option	value="2012-1"   >2012-1</option>
-
-                            </select>
+                            <strong>CURSOS MATRICULADOS</strong> 
+                            
                         </td>
                     </form>
         </tr>
@@ -87,10 +74,10 @@
                 var columna = 0;
                 var g = 0;
 
-                $.post(url, "", function (data) {
+                $.post(url, "semestre=" + $(".semestre").val(), function (data) {
 
                     $.each(data, function (f, campo) {
-                        if (campo.dni == '42001721') {
+                        if (campo.numerodocumento == $(".dni_tr").val()) {
 
                             $('.tbody-cursos').append('<tr><td >' + (g + 1) + '.</td><td><b>' + campo.nombrecurso + '</b></td><td ><li> ' + campo.nombre + '</li><li>Ing.Sist. Ciclo:6</li></td></tr>');
 
@@ -364,7 +351,7 @@
 </body>
 
 <html>
-<%} else {
-        response.sendRedirect("/TALENTO_HUMANO/");
-    }
-%>
+    <%} else {
+            response.sendRedirect("/TALENTO_HUMANO/");
+        }
+    %>
