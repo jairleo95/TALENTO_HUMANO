@@ -323,7 +323,7 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("List_Provincia", ub.List_Provincia());
             getServletContext().setAttribute("List_Distrito", ub.List_DistritoTra());
             getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
-            out.print(ub.List_DistritoTra().size());
+            
             response.sendRedirect("Vista/Trabajador/Mod_Datos_Generales.jsp?idtr=" + idtr);
         }
         if (opc.equals("Modificar_Dat_Gen")) {
