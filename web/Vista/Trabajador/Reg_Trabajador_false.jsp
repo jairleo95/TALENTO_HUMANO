@@ -434,7 +434,7 @@
                         <select name="AFILIADO_ESSALUD_ID" class="text-box">
                             <option value="">----</option>
                             <option value="1">Si</option>
-                            <option value="2">No</option>
+                            <option value="0">No</option>
                         </select></td></tr> 
                 <tr><td>Tipo Trabajador:</td><td>
                         <select  name="TIPO_TRABAJADOR_ID" class="text-box" >
