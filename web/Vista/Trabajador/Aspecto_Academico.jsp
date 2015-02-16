@@ -1,3 +1,6 @@
+<%@page import="pe.edu.upeu.application.model.Cuenta_Sueldo"%>
+<%@page import="pe.edu.upeu.application.dao.Carrera_UniversidadDAO"%>
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceCarrera_UniversidadDAO"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
     HttpSession sesion_1 = request.getSession();
@@ -10,6 +13,7 @@
 <%@page import="pe.edu.upeu.application.model.Trabajador"%>
 <%@page import="pe.edu.upeu.application.model.Trabajador"%>
 <jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Cuenta_Sueldo" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,35 +28,89 @@
 
 
         <form align="center">
-        <table class="table table-striped table-hover table-responsive">
-                <%for (int index = 0; index < ListaridTrabajador.size(); index++) {
+            <table class="table table-striped table-hover table-responsive">
+                <%
+                    InterfaceCarrera_UniversidadDAO icu = new Carrera_UniversidadDAO();
+                    for (int index = 0; index < ListaridTrabajador.size(); index++) {
                         V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
                         trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
 
                 %>   
-                <tr><td class="text-info">Situacion Educativa:</td><td><%out.println(trb.getNo_s_educativa());
-                        %></td></tr>
-                <tr><td class="text-info">Grado Academico:</td><td><%
-                        %></td></tr>
-                <tr><td class="text-info">Carrera:</td><td><%if(trb.getNo_carrera()==null){out.print("NINGUNA");}else{out.print(trb.getNo_carrera());}%></td></tr>
-                <tr><td class="text-info">Titulo Profesional:</td><td><%
-                        %></td></tr>
-                <tr><td class="text-info">Centro de Estudios:</td><td><%if(trb.getNo_universidad()==null){out.print("NINGUNA");}else{out.print(trb.getNo_universidad());}%></td></tr>
+                <tr><td class="text-info">Situacion Educativa:</td><td><%out.println(trb.getNo_s_educativa());%></td></tr>
+                <tr><td class="text-info">I.E.Peruana:</td>
+                    <td>
+                        <%if (trb.getEs_inst_educ_peru() == null) {
+                                out.print("no registrado");
+                            } else {
+                                if (trb.getEs_inst_educ_peru().trim().equals("1")) {
+                                    out.print("Si");
+                                } else {
+                                    out.print("No");
+                                }
+                            }%>
+                    </td>
+                </tr>
+                <tr><td class="text-info">Regimen.I.E:</td><td>
+                        <%if (trb.getLi_reg_inst_educativa() == null) {
+                                out.print("no registrado");
+                            } else {
+                                if (trb.getLi_reg_inst_educativa().trim().equals("1")) {
+                                    out.print("Pública");
+                                } else {
+                                    out.print("Privada");
+                                }
+                            }%>
+                    </td></tr>
+                <tr><td class="text-info">Tipo.I.E:</td>
+                    <td>
+                    </td>
+                </tr>
+                <tr><td class="text-info">Centro de Estudios:</td><td></td></tr>
+                <!--<tr><td class="text-info">Grado Acádemico:</td><td><%%></td></tr>-->
+                <tr><td class="text-info">Carrera:</td><td><%if (trb.getNo_carrera() == null) {
+                        out.print("NINGUNA");
+                    } else {
+                        out.print(trb.getNo_carrera());
+                    }%></td></tr>
+                <!--<tr><td class="text-info">Titulo Profesional:</td><td><%%></td></tr>-->
+                <tr><td class="text-info">Código Universitario:</td><td><%if(trb.getCo_universitario()==null){out.print("no registrado");}else{out.print(trb.getCo_universitario());}%></td></tr>
                 <tr><td class="text-info">Tipo de Hora Referencial:</td><td><%=trb.getCa_tipo_hora_pago_refeerencial()%></td></tr>
-                <tr><td class="text-info">Otros Estudios:</td><td><%if(trb.getCm_otros_estudios()==null){out.print("NINGUNA");}else{out.print(trb.getCm_otros_estudios());}%></td></tr>
-                <tr><td  class="text-info">Correo Institucional:</td><td><%=trb.getDi_correo_inst()%></td></tr>
-                 <tr>
-                            <%String IDTR = trb.getId_trabajador(); %>
-                            <td colspan="2"><a class="btn btn-success" href="../../trabajador?opc=Editar_Asp_Acad&idtr=<%=IDTR %>">EDITAR</a></td>
-                        </tr>
+                <tr><td class="text-info">Año Egreso:</td><td><%if(trb.getDe_anno_egreso()==null){out.print("no registrado");}else{out.print(trb.getDe_anno_egreso());}%></td></tr>
+                <tr><td class="text-info">Otros Estudios:</td><td><%if (trb.getCm_otros_estudios() == null) {
+                        out.print("NINGUNA");
+                    } else {
+                        out.print(trb.getCm_otros_estudios());
+                    }%></td></tr>
+                <tr><td class="text-info" colspan="2" >CUENTA SUELDO</td></tr>
+                <%if(List_Cuenta_Sueldo.size()>0){%>
+                <tr><td class="text-info" colspan="2" >CUENTA SUELDO</td></tr>
+                <%for (int k = 0; k < List_Cuenta_Sueldo.size(); k++) {
+                        Cuenta_Sueldo cs = new Cuenta_Sueldo();
+                        cs = (Cuenta_Sueldo) List_Cuenta_Sueldo.get(k);
+                %>
+                <tr><td class="text-info">Banco:</td><td><%if(cs.getNo_banco()==null){out.print("no registrado");}else{out.print(cs.getNo_banco());}%></td></tr>
+                <tr><td class="text-info">Nro de Cuenta:</td><td><%if(cs.getNu_cuenta()==null){out.print("no registrado");}else{out.print(cs.getNu_cuenta());}%></td></td></tr>
+                <tr><td class="text-info">Nro de Cuenta Bancaria:</td><td><%if(cs.getNu_cuenta_banc()==null){out.print("no registrado");}else{out.print(cs.getNu_cuenta_banc());}%></td></td></tr>
+                <tr><td class="text-info">Genero Nro de Cuenta Bancaria:</td><td></td></tr>
+                <tr>
+                    <%}
+                }else{%>
+                <tr><td class="text-info" colspan="2" >no registrado</td></tr>
                 <%}%>
-               <!-- <tr><td colspan="2"><input class=""  type="submit" value="Editar"></td></tr>-->
+                <%String IDTR = trb.getId_trabajador();%>
+                    <td colspan="2"><a class="btn btn-success" href="../../trabajador?opc=Editar_Asp_Acad&idtr=<%=IDTR%>">EDITAR</a></td>
+                </tr>
+                <%}%>
+                <!-- <tr><td colspan="2"><input class=""  type="submit" value="Editar"></td></tr>-->
             </table>
         </form>
 
     </body>
 </html>
-<%} else {
+<%}
+
+    
+        else {
         response.sendRedirect("/TALENTO_HUMANO/");
     }
 %>
