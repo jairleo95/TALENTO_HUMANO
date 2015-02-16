@@ -223,6 +223,7 @@
                                                         <th>Area</th>
                                                         <th>Departamento</th>
                                                         <th>Dirección</th>
+                                                        <th>Acciones</th>
                                                     </tr></thead>
                                                 <tbody class="tbody-puesto">
 
@@ -476,17 +477,18 @@
 
                     $.each($(".item_req"), function () {
                         $(this).text("P" + num);
-
-
                         num++;
                     });
                     num = 1;
 
                     for (var f = 0; f < 3; f++) {
                         //alert($(".id_paso" + f).val() + " - " + $(".item_"+f).text());
-                        $.post("../../paso", "opc=Update_nu_paso&nu_paso=" + $(".item_" + f).text() + "&paso=" + $(".id_paso" + f).val(), function () {
-
-                        });
+                       /* $.post("../../paso", "opc=Update_nu_paso&nu_paso=" + $(".item_" + f).text() + "&paso=" + $(".id_paso" + f).val(), function (objJson) {
+                            if (objJson.rpta == -1) {
+                                alert(objJson.mensaje);
+                                return;
+                            }
+                        });*/
                     }
 
                     Listar_Paso($("#select-proceso").val());
@@ -528,21 +530,22 @@
 
                             Listar_Paso($(this).val());
                             $(".form_puesto").hide();
+                            $(".tbody-puesto").empty();
 
                             // alert($(this).val());
                         });
 
                 $(".btn-agregar-p").click(function () {
                     if ($(".form_puesto").valid()) {
-                         $.ajax({
-                         url: "../../Direccion_Puesto",
-                         data: $(".form_puesto").serialize()+"&opc=Reg_puesto_paso"
-                         }).done(function () {
-                         alert("¡Registrado Exitosamente!");
-                         }).fail(function(objJson){
-                         alert(objJson.mensaje);
-                         
-                         });
+                        $.ajax({
+                            url: "../../Direccion_Puesto",
+                            data: $(".form_puesto").serialize() + "&opc=Reg_puesto_paso"
+                        }).done(function () {
+                            alert("¡Registrado Exitosamente!");
+                        }).fail(function (objJson) {
+                            alert(objJson.mensaje);
+
+                        });
                         alert("aad");
 
                     } else {

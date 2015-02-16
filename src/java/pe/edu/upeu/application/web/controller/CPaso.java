@@ -74,7 +74,6 @@ public class CPaso extends HttpServlet {
             if (opc.equals("Update_nu_paso")) {
                 String ID_PASO = request.getParameter("paso");
                 String NU_PASO = request.getParameter("nu_paso");
-
                 p.UPDATE_NU_PASO(ID_PASO, NU_PASO);
             }
             if (opc.equals("Modificar")) {
