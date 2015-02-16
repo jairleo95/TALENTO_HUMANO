@@ -3,96 +3,89 @@
     Created on : 29-ene-2015, 7:04:56
     Author     : joserodrigo
 --%>
-<%@page import="javax.swing.JOptionPane"%>
-<%@page import="pe.edu.upeu.application.model.Seccion"%>
-<%@page import="pe.edu.upeu.application.model.Area"%>
-<%@page import="pe.edu.upeu.application.model.Departamento"%>
 <%@page import="pe.edu.upeu.application.model.Direccion"%>
-<%@page import="pe.edu.upeu.application.model.Funciones"%>
-<%@page import="pe.edu.upeu.application.model.Puesto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:useBean id="List_Puesto" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="Listar_funciones" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_Direccion" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Departamento" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Area" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="LISTA_RH_SECCION" scope="application" class="java.util.ArrayList"/>
 <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
-<!--<link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">-->
+<link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
 <link href="../../css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
+<style>
+    *{
+        margin: auto;
+        font-size: 13px;
+    }
+    .caja{
+        width: 90%;
+        height: 400px;
+    }
+    .contenedor {
+        text-align:left;
+        float: left;
+        padding-left: 10px;
+        padding-right: 10px;
+        width: 49%;
+    }
+    .contenedor2{
+        text-align:left;
+        float: right;
+        padding-left: 10px;
+        padding-right: 10px;
+        width: 49%;
+    }
+    .btnotorgar{
+        float:left;
+        margin-top:5px;
+        width: 49%;
+    }
+    .btnLimpiar{
+        float: right;
+        width: 49%;
+    }
+    .alert{
+        margin-top: 60px;
+        clear:both;
+    }
+    .opciones{
+        padding-top:20px;
+        clear:both;
+        width: 50%;
+        height: 130px;
+    }
+    select{
+        width: 100px;;
+
+    }
+    .tabla{
+        margin-top: 30px;
+        width: 90%;
+        text-align: center;
+    }
+    td{
+        height: 40px;
+    }
+    thead{
+        background: #cccccc;
+    }
+    .edit{
+        margin: 3px;
+        width: 80%;
+    }
+    .del{
+        margin: 3px;
+        width: 70%; 
+    }
+    .cambio{
+        border-color :#7DC27D;
+        background-color: #F0FFF0;
+    }
+</style>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <style>
-            *{
-                margin: auto;
-                font-size: 13px;
-            }
-            .caja{
-                width: 90%;
-                height: 400px;
-            }
-            .contenedor {
-                text-align:left;
-                float: left;
-                padding-left: 10px;
-                padding-right: 10px;
-                width: 49%;
-            }
-            .contenedor2{
-                text-align:left;
-                float: right;
-                padding-left: 10px;
-                padding-right: 10px;
-                width: 49%;
-            }
-            .btnotorgar{
-                float:left;
-                margin-top:5px;
-                width: 49%;
-            }
-            .btnLimpiar{
-                float: right;
-                width: 49%;
-            }
-            .alert{
-                margin-top: 60px;
-                clear:both;
-            }
-            .opciones{
-                padding-top:20px;
-                clear:both;
-                width: 50%;
-                height: 130px;
-            }
-            select{
-                width: 100px;;
-                
-            }
-            .tabla{
-                margin-top: 30px;
-                width: 90%;
-                text-align: center;
-            }
-            td{
-                height: 40px;
-            }
-            thead{
-                background: #cccccc;
-            }
-            .edit{
-                margin: 3px;
-                width: 80%;
-            }
-            .del{
-                margin: 3px;
-                width: 70%; 
-            }
-        </style>
+        <title>JSP Page</title>        
     </head>
     <body>
         <div class="caja">
@@ -117,7 +110,7 @@
                     <label class="select">
                         <select class="idde">
                             <option value="0">[Seleccione]</option>
-                            
+
                         </select>
                         <i></i> </label>
                 </section>
@@ -127,7 +120,7 @@
                     <label class="select">
                         <select class="idar">
                             <option value="0">[Seleccione]</option>
-                            
+
                         </select>
                         <i></i> </label>
                 </section>
@@ -146,8 +139,7 @@
                     <label>5.Puesto</label>
                     <label class="select">
                         <select class="idpu">
-                            <option value="0">[Seleccione]</option>
-                            
+                            <option value="0">[Seleccione]</option>                            
                         </select>
                         <i></i> </label>
                 </section>
@@ -192,12 +184,12 @@
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <td><center>Nro</center></td>
-                <td><center>Detalle Funcion</center></td>
-                <td><center>Estado</center></td>
-                <td><center>Puesto</center></td>
-                <td><center>Tipo</center></td>
-                <td colspan="2"><center>Opcion</center></td>
+                        <td><center><strong>Nro</strong></center></td>
+                <td><center><strong>Detalle Funcion</strong></center></td>
+                <td><center><strong>Estado</strong></center></td>
+                <td><center><strong>Puesto</strong></center></td>
+                <td><center><strong>Tipo</strong></center></td>
+                <td colspan="2"><center><strong>Opcion</strong></center></td>
                 </tr>
                 </thead>
                 <tbody class="tbodys">
@@ -342,32 +334,43 @@
                 validar_tip();
                 validar_fun();
             });
+            $('.estado').change(function() {
+            });
             $(".btnotorgar").click(function() {
                 if (validar_est() == true && validar_dir() == true && validar_dep() == true && validar_ar() == true && validar_sec() == true && validar_pu() == true && validar_fun() == true && validar_tip() == true) {
                     var id_puesto = $(".idpu").val();
                     if ($(this).val() == 1) {
                         $.post("../../funcion", "opc=otorgar" + "&id_puesto=" + id_puesto + "&de_funcion=" + $(".ifun").val() + "&ti_funcion=" + tipoFuncion, function() {
-                            $('.iddi').focus();
                             listar_tabla();
+                            $('.informacion').fadeOut();
+                            $('.informacion').fadeIn();
+                            $('.msgi').text("Funcion Otorgada con exito!");
+                            $('.informacion').fadeOut(1000, function() {
+                                var msg = confirm("¿Desea crear una nueva funcion?");
+                                if (msg == true) {
+                                    limpiar();
+                                } else {
+                                    $('.ifun').val("");
+                                    $('.ifun').focus();
+                                }
+                            });
+
                         });
                     } else if ($(this).val() == 2) {
                         $.post("../../funcion", "opc=edit_function" + "&id_fun=" + idFuncion + "&de_fun=" + $('.ifun').val() + "&es_fun=" + $('.estado').val() + "&id_pu=" + id_puesto + "&ti_funcion=" + $('.tifun').val(), function() {
                             $('.iddi').focus();
                             listar_tabla();
+                            $('.informacion').fadeOut();
+                            $('.informacion').fadeIn();
+                            $('.msgi').text("Funcion Editada con Exito !");
+                            $('.informacion').fadeOut(1000);
                         });
                     }
-                    mensajeI();
                 } else {
                     $('.alerta').show();
                     $('.msg').text('Falta seleccionar algunos Elementos !');
                 }
             });
-            function mensajeI() {
-                $('.informacion').fadeOut();
-                $('.informacion').fadeIn(1000);
-                $('.msgi').text("Operacion realizada con Exito !");
-                $('.informacion').fadeOut(2000);
-            }
             ;
             $('.btnLimpiar').click(function() {
                 limpiar();
@@ -380,24 +383,26 @@
                 $('.idde').append("<option value='0'>[Seleccione]</option>");
                 $('.idde').val(0);
                 //-----------
-                $('.idar').empty() ;
+                $('.idar').empty();
                 $('.idar').append("<option value='0'>[Seleccione]</option>");
                 $('.idar').val(0);
                 //-----------
-                $('.idse').empty() ;
+                $('.idse').empty();
                 $('.idse').append("<option value='0'>[Seleccione]</option>");
                 $('.idse').val(0);
                 //-----------
-                $('.idpu').empty() ;
+                $('.idpu').empty();
                 $('.idpu').append("<option value='0'>[Seleccione]</option>");
                 $('.idpu').val(0);
                 //-----------
+                $('.tifun').val(0);
                 $('.estado').val(1);
                 $('.ifun').val("");
                 $('.btnotorgar').val('1');
                 $('.btnotorgar').text('Otorgar Funcion');
+                $('.btnLimpiar').text('Limpiar');
                 $('.tbodys').empty();
-                $('.estado').prop( "disabled", true );
+                $('.estado').prop("disabled", true);
             }
             //LISTAR TABLA
             function listar_tabla() {
@@ -413,19 +418,19 @@
                             ap.append("<td class='nombre_funcion" + i + "'><center>" + list[i].nom_fu + "</center></td>");
                             if (list[i].es_fu == 1) {
                                 ap.append("<td class='estado_funcion" + i + "' id=" + list[i].es_fu + "><center>Activada</center></td>");
-                                $('.estado_funcion'+i).css("background-color","#CECEF6");
+                                $('.estado_funcion' + i).css("background-color", "#CECEF6");
                             } else if (list[i].es_fu == 2) {
                                 ap.append("<td class='estado_funcion" + i + "' id=" + list[i].es_fu + "><center>Desactivada</center></td>");
-                                $('.estado_funcion'+i).css("background-color","#F3E2A9");
+                                $('.estado_funcion' + i).css("background-color", "#F3E2A9");
                             }
                             ;
                             ap.append("<td class='nombre_puesto" + i + "'><center>" + list[i].no_pu + "</center></td>");
                             if (list[i].ti_fu == 1) {
                                 ap.append("<td class='tipo_funcion" + i + "' id=" + list[i].ti_fu + "><center>Principal</center></td>");
-                                $('.tipo_funcion'+i).css("background-color","#CECEF6");
+                                $('.tipo_funcion' + i).css("background-color", "#CECEF6");
                             } else if (list[i].ti_fu == 2) {
                                 ap.append("<td class='tipo_funcion" + i + "' id=" + list[i].ti_fu + "><center>Secundaria</center></td>");
-                                $('.tipo_funcion'+i).css("background-color","#F3E2A9");
+                                $('.tipo_funcion' + i).css("background-color", "#F3E2A9");
                             }
                             ;
                             ap.append("<td class = 'btnedit' ><center> <button class = 'edit btn btn-primary' value = '" + i + "' > Editar </button></center></td >");
@@ -441,8 +446,9 @@
                         $('.tifun').val($('.tipo_funcion' + idValue).attr('id'));
                         $('.btnotorgar').val('2');
                         $('.btnotorgar').text('Editar Funcion');
+                        $('.btnLimpiar').text('Crear nuevo');
                         $('.ifun').focus();
-                        $('.estado').prop( "disabled", false );
+                        $('.estado').prop("disabled", false);
                     });
                     $('.del').click(function() {
                         idValue = $(this).val();
