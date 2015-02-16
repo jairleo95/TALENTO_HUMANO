@@ -87,9 +87,15 @@
                     <%}%>
                 </tr>
                 <tr><td  class="text-info">Celular:</td><td><%=trb.getCl_tra()%></td></tr>
-                <tr><td  class="text-info">Correo:</td><td><%=trb.getDi_correo_personal()%></td></tr>
-
-
+                <tr><td  class="text-info">Correo Personal:</td><td><%=trb.getDi_correo_personal()%></td></tr>
+                <tr>
+                    <td  class="text-info">Correo Institucional:</td>
+                    <%if(trb.getDi_correo_inst() == null ){%>
+                    <td>no registrado</td>
+                    <%}else{%>
+                    <td><%=trb.getDi_correo_inst()%></td>
+                    <%}%>
+                </tr>
 
                 <tr><td   class="text-info">Sistema Pensionario:</td><td><%
                     if (trb.getCo_sistema_pensionario() != null) {

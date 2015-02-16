@@ -439,13 +439,18 @@
                                                                             <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
                                                                             <select class="form-control input-group-sm" id="inst_peru" name="ES_INST_PERU" required>
                                                                                 <option value="" selected="selected" >[SELECCIONE]</option>
-                                                                                <%if (t.getEs_inst_educ_peru().trim().equals("1")) {%>
+                                                                                <% if (t.getEs_inst_educ_peru() != null) {
+                                                                                        if (t.getEs_inst_educ_peru().trim().equals("1")) {%>
                                                                                 <option value="1" selected="">Si</option>
                                                                                 <option value="2">No</option>
                                                                                 <%}
                                                                                     if (t.getEs_inst_educ_peru().trim().equals("2")) {%>
                                                                                 <option value="1">Si</option>
                                                                                 <option value="2" selected="">No</option>
+                                                                                <%}
+                                                                                } else {%>
+                                                                                <option value="1">Si</option>
+                                                                                <option value="2">No</option>
                                                                                 <%}%>
                                                                             </select>
                                                                         </div>
@@ -458,13 +463,18 @@
                                                                             <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
                                                                             <select class="form-control input-group-sm" id="rg" name="REGIMEN" required>
                                                                                 <option value="" selected="selected">[SELECCIONE]</option>
-                                                                                <%if (t.getLi_reg_inst_educativa().trim().equals("1")) {%>
+                                                                                <%if (t.getLi_reg_inst_educativa() != null) {
+                                                                                        if (t.getLi_reg_inst_educativa().trim().equals("1")) {%>
                                                                                 <option value="1" selected="">Publica</option>
                                                                                 <option value="2">Privada</option>
                                                                                 <%}
                                                                                     if (t.getLi_reg_inst_educativa().trim().equals("2")) {%>
                                                                                 <option value="1">Publica</option>
                                                                                 <option value="2" selected="">Privada</option>
+                                                                                <%}
+                                                                                } else {%>
+                                                                                <option value="1">Publica</option>
+                                                                                <option value="2">Privada</option>
                                                                                 <%}%>
                                                                             </select>
                                                                         </div>
@@ -480,7 +490,8 @@
                                                                         <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
                                                                         <select class="form-control input-group-sm" id="ti_inst"  required>
                                                                             <option value="" selected="selected">[SELECCIONE]</option>
-                                                                            <%for (int y = 0; y < List_Universidad.size(); y++) {
+                                                                            <% if(t.getNo_universidad() != null )
+                                                                                for (int y = 0; y < List_Universidad.size(); y++) {
                                                                                     Universidad un = new Universidad();
                                                                                     un = (Universidad) List_Universidad.get(y);
                                                                                     if (t.getNo_universidad().trim().equals(un.getNo_universidad().trim())) {
@@ -498,7 +509,6 @@
                                                                                         List_tipo_institucion.clear();
                                                                                     }
                                                                                 }
-                                                                              
 
                                                                             %>
 
@@ -515,7 +525,8 @@
                                                                         <select class="form-control input-group-sm" id="inst"  required name="UNIVERSIDAD">
                                                                             <option value="" selected="selected">[SELECCIONE]</option>
 
-                                                                            <%for (int w = 0; w < List_Universidad.size(); w++) {
+                                                                            <%if(t.getNo_universidad() != null){
+                                                                            for (int w = 0; w < List_Universidad.size(); w++) {
                                                                                     Universidad u = new Universidad();
                                                                                     u = (Universidad) List_Universidad.get(w);
                                                                                     if (u.getNo_universidad().trim().equals(t.getNo_universidad().trim())) {
@@ -525,6 +536,7 @@
                                                                             <option value="<%=u.getId_universidad()%>" > <%=u.getNo_universidad()%></option>
                                                                             <%}
                                                                                 }
+                                                                            }
                                                                                 List_Universidad.clear(); %>
                                                                         </select>
                                                                     </div>
@@ -537,7 +549,8 @@
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
                                                                         <select class="form-control input-group-sm" id="carrera" name="CARRERA" required>
                                                                             <option value="" >[SELECCIONE]</option>
-                                                                            <% for (int q = 0; q < List_Carrera.size(); q++) {
+                                                                            <% if(t.getId_universidad_carrera() != null ){
+                                                                                for (int q = 0; q < List_Carrera.size(); q++) {
                                                                                     Carrera c = new Carrera();
                                                                                     c = (Carrera) List_Carrera.get(q);
                                                                                     if (c.getNo_carrera().trim().equals(t.getNo_carrera().trim())) {
@@ -547,12 +560,27 @@
                                                                             <option value="<%=c.getId_carrera()%>" > <%=c.getNo_carrera()%></option>
                                                                             <%}
                                                                                 }
+                                                                            }
                                                                                 List_Carrera.clear(); %>
                                                                         </select>
 
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                             
+                                                            <div class="col-sm-4">   
+                                                                <div class="form-group">
+                                                                    <label>Codigo Universitario:</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
+                                                                        <%if(t.getCo_universitario() != null){%>
+                                                                        <input class="form-control input-group-sm" value="<%=t.getCo_universitario() %>"   type="text" name="CO_UNIVERSITARIO" maxlength="9">
+                                                                        <%}else{%>
+                                                                        <input class="form-control input-group-sm" value="<%%>"   type="text" name="CO_UNIVERSITARIO" maxlength="9">
+                                                                        <%}%>
+                                                                    </div>
+                                                                </div>
+                                                            </div>           
                                                             <div class="col-sm-4" id="egreso" style="display: none">
                                                                 <div class="form-group">
                                                                     <label>Año Egreso:</label>
@@ -560,15 +588,22 @@
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
                                                                         <select    name="A_EGRESO" class="form-control input-group-sm" required="" >
                                                                             <option value="">[SELECCIONE]</option>
-                                                                            <% for (int jj = 0; jj < list_año.size(); jj++) {
-                                                                                    if (t.getDe_anno_egreso().trim().equals(list_año.get(jj))) {;
+                                                                            <% if(t.getDe_anno_egreso() != null){
+                                                                                for (int jj = 0; jj < list_año.size(); jj++) {
+                                                                                    if (t.getDe_anno_egreso().trim().equals(list_año.get(jj))) {
                                                                             %>
                                                                             <option value="<%=list_año.get(jj)%>" selected=""><%=list_año.get(jj)%></option>
                                                                             <%} else {%>
                                                                             <option value="<%=list_año.get(jj)%>"><%=list_año.get(jj)%></option>
                                                                             <%}
                                                                                 }
-                                                                                list_año.clear();%>
+                                                                            }else{
+                                                                             for (int jj = 0; jj < list_año.size(); jj++) {%>
+                                                                           
+                                                                            <option value="<%=list_año.get(jj)%>"><%=list_año.get(jj)%></option>
+                                                                            <%}
+                                                                                }
+                                                                            %>
                                                                         </select>
                                                                     </div>
                                                                 </div>
@@ -593,7 +628,11 @@
                                                                     <label>Otros Estudios:</label>
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-align-justify fa-lg fa-fw"></i></span>
+                                                                        <%if(t.getCm_otros_estudios() != null){%>
                                                                         <textarea name="OTROS_ESTUDIOS"  class="form-control input-group-sm" class="text-box" cols="60" rows="6" maxlength="500"><%=t.getCm_otros_estudios()%></textarea>
+                                                                        <%}else{%>
+                                                                        <textarea name="OTROS_ESTUDIOS"  class="form-control input-group-sm" class="text-box" cols="60" rows="6" maxlength="500"></textarea>
+                                                                        <%}%>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -612,7 +651,7 @@
                                                                         <%for (int u = 0; u < List_Cuenta_Sueldo.size(); u++) {
                                                                                 Cuenta_Sueldo cs = new Cuenta_Sueldo();
                                                                                 cs = (Cuenta_Sueldo) List_Cuenta_Sueldo.get(u);
-
+                                                                                
                                                                                 if (cs.getNo_banco().trim().equals("0")) {
                                                                         %>
                                                                         <option value="0" selected="">Ninguno</option>
