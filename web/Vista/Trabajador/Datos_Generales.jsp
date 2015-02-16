@@ -29,7 +29,7 @@
                 %>           
                 <tr><td class="text-info">Nacionalidad:</td><td><%=trb.getNo_nacionalidad()%></td></tr>
 
-                <tr><td  class="text-info">Distrito:</td><td><%=trb.getNo_distrito()%></td></tr>
+                <tr><td  class="text-info">Dpto/Prov/Dtto</td><td><%=trb.getNo_departamento()+"/"+trb.getNo_provincia()+"/"+trb.getNo_distrito()%></td></tr>
                 <tr><td  class="text-info">Tipo Documento:</td><td>
                         <%
                             InterfaceListaDAO list = new ListaDAO();
@@ -79,7 +79,13 @@
                     }
                         %></td></tr>
 
-                <tr><td  class="text-info">Telefono:</td><td><%=trb.getTe_trabajador()%></td></tr>
+                <tr><td  class="text-info">Telefono:</td>
+                    <%if(trb.getTe_trabajador() == null){%>
+                    <td>no registrado</td>
+                   <% }else{%>
+                    <td><%=trb.getTe_trabajador()%></td>
+                    <%}%>
+                </tr>
                 <tr><td  class="text-info">Celular:</td><td><%=trb.getCl_tra()%></td></tr>
                 <tr><td  class="text-info">Correo:</td><td><%=trb.getDi_correo_personal()%></td></tr>
 
@@ -112,7 +118,7 @@
                     <td><%                        if (trb.getEs_afiliado_essalud().equals("1")) {
                             out.println("Si");
                         }
-                        if (trb.getEs_afiliado_essalud().equals("2")) {
+                        if (trb.getEs_afiliado_essalud().equals("0")) {
                             out.println("Si");
                         }else{
                          out.print("no registrado");
@@ -125,7 +131,7 @@
                     }
                     if (trb.getLi_tipo_trabajador().trim().equals("A")) {
                         out.println("Alumno");
-                    }else{
+                    }if(trb.getLi_tipo_trabajador() == null ){
                          out.print("no registrado");
                         }
                         %></td></tr>
