@@ -507,6 +507,7 @@ alert('Has dicho que no');
                             </div>
                         </div>
                     </div>
+                                
                     <!--<button onclick="duplicar();
                             return false;"  class="btn btn-primary" id="btn-duplicar">Duplicar</button>-->
 
@@ -522,6 +523,8 @@ alert('Has dicho que no');
 
 
             </form>
+                
+    
             <!-- Modal -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
@@ -534,7 +537,7 @@ alert('Has dicho que no');
                         </div>
                         <div class="modal-body no-padding">
 
-                            <form id="wizard-2" novalidate="novalidate" method="post" action="../../Modulos.jsp" class="form" >
+                            <form id="wizard-2" novalidate="novalidate" method="post" action="../../Vista/Usuario/editarPerfil.jsp" class="form" >
 
                                 <fieldset>
                                     <div class="col-sm-4">
@@ -581,6 +584,7 @@ alert('Has dicho que no');
 
 
                         </div>
+                        
 
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
@@ -799,6 +803,7 @@ alert('Has dicho que no');
                         })
 
         </script>
+       
 
 
 
