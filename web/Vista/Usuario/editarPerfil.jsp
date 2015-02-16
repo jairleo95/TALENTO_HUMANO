@@ -33,6 +33,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/Css_Bootstrap/bootstrap-responsive">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
+        
 
 
         <title>JSP Page</title>
@@ -45,6 +46,16 @@
             }
         </style>
 
+<script LANGUAGE="JavaScript">
+function mi_alerta () {
+confirmar=confirm("¿Estas seguro de modificar?"); 
+if (confirmar) 
+// si pulsamos en aceptar
+alert('Has dicho que si');
+else 
+// si pulsamos en cancelar
+alert('Has dicho que no');
+        }</script>
 
     </head>
     <body>
@@ -503,9 +514,8 @@
                 <input type="text" value="<%=vu.getId_trabajador().trim()%>" name="ID_TR"/>
                 <input type="text" value="<%=vu.getId_usuario().trim()%>" name="idus" />
                 <input type="hidden" value="opc" name="editar_Perfil" />
-
-                <input type="Submit" name="opc" class="btn btn-primary" id="idus" value="Modificar" >
-
+                <input type="Submit" onClick="mi_alerta()" name="opc" class="btn btn-primary" id="idus" value="Modificar" >
+            
 
                 <h2>...</h2>
                 <%}%>

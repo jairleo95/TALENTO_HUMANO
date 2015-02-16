@@ -135,11 +135,7 @@
                                                         <img src="../../img/avatars/sunny-big.png" alt="demo user">
                                                         <div class="padding-10">
                                                             <h4 class="font-md"><strong>1,543</strong>
-                                                                <br>
-                                                                <small>Followers</small></h4>
-                                                            <br>
-                                                            <h4 class="font-md"><strong>419</strong>
-                                                                <br>
+                                                              
                                                                 <small>Connections</small></h4>
                                                         </div>
                                                     </div>
@@ -175,34 +171,32 @@
                                                             </li>
                                                              <li>
                                                                 <p class="text-muted">
-                                                                    <i class="fa fa-archive"></i>&nbsp;&nbsp;<span class="txt-color-darken"><%=vu.getDi_dom_a_d2()+vu.getDi_dom_a_d4()+vu.getDi_dom_a_d6()+vu.getDi_dom_a_ref()%></span>
+                                                                    <i class="fa  fa-th"></i>&nbsp;&nbsp;<span class="txt-color-darken"><%=vu.getLi_di_dom_a_d1()+vu.getDi_dom_a_d2()+vu.getDi_dom_a_d4()+vu.getDi_dom_a_d6()+vu.getDi_dom_a_ref()%></span>
                                                                 </p>
                                                             </li>
-                                                               
+                                                          
+                                                               <li>
+                                                                <p class="text-muted">
+                                                                    <i class="fa  fa-tasks"></i>&nbsp;&nbsp;<span class="txt-color-darken"><%=vu.getNo_departamento_ub()%></span>
+                                                                </p>
+                                                            </li>
                                                              <li>
                                                                 <p class="text-muted">
-                                                                    <i class="fa fa-picture-o"></i>&nbsp;&nbsp;<span class="txt-color-darken">foto</span>
+                                                                    <i class="fa fa-tasks"></i>&nbsp;&nbsp;<span class="txt-color-darken"><%=vu.getNo_provincia_ub()%></span>
+                                                                </p>
+                                                            </li>
+                                                             <li>
+                                                                <p class="text-muted">
+                                                                    <i class="fa fa-tasks"></i>&nbsp;&nbsp;<span class="txt-color-darken"><%=vu.getNo_distrito_ub()%></span>
                                                                 </p>
                                                             </li>
                                                             
-                                                            <li>
-                                                                <p class="text-muted">
-                                                                    <i class="fa fa-calendar"></i>&nbsp;&nbsp;<span class="txt-color-darken">Free after <a href="javascript:void(0);" rel="tooltip" title="" data-placement="top" data-original-title="Create an Appointment">4:30 PM</a></span>
-                                                                </p>
-                                                            </li>
+                                                        
                                                         </ul>
                                                                  
              
-                                                        <br>
-                                                        <p class="font-md">
-                                                            <i>A little about me...</i>
-                                                        </p>
-                                                        <p>
-
-                                                            Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio
-                                                            cumque nihil impedit quo minus id quod maxime placeat facere
-
-                                                        </p>
+                                                 
+                                                      
                                                         <br>
                                                         <a href="javascript:void(0);" class="btn btn-default btn-xs"><i class="fa fa-envelope-o"></i> Send Message</a>
                                                         <br>
@@ -240,79 +234,6 @@
                                             <a href="javascript:void(0);" class="btn btn-link profile-link-btn" rel="tooltip" data-placement="bottom" title="Add File"><i class="fa fa-file"></i></a>
                                         </div>
                                     </form>
-
-                                    <div class="timeline-seperator text-center"> <span>10:30PM January 1st, 2013</span>
-                                        <div class="btn-group pull-right">
-                                            <a href="javascript:void(0);" data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle"><span class="caret single"></span></a>
-                                            <ul class="dropdown-menu text-left">
-                                                <li>
-                                                    <a href="javascript:void(0);">Hide this post</a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:void(0);">Hide future posts from this user</a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:void(0);">Mark as spam</a>
-                                                </li>
-                                            </ul>
-                                        </div> 
-                                    </div>
-                                    <!--<div class="chat-body no-padding profile-message">
-                                        <ul>
-                                            <li class="message">
-                                                <img src="img/avatars/sunny.png" class="online" alt="sunny">
-                                                <span class="message-text"> <a href="javascript:void(0);" class="username">John Doe <small class="text-muted pull-right ultra-light"> 2 Minutes ago </small></a> Can't divide were divide fish forth fish to. Was can't form the, living life grass darkness very
-                                                    image let unto fowl isn't in blessed fill life yielding above all moved </span>
-                                                <ul class="list-inline font-xs">
-                                                    <li>
-                                                        <a href="javascript:void(0);" class="text-info"><i class="fa fa-reply"></i> Reply</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" class="text-danger"><i class="fa fa-thumbs-up"></i> Like</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" class="text-muted">Show All Comments (14)</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" class="text-primary">Edit</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" class="text-danger">Delete</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="message message-reply">
-                                                <img src="img/avatars/3.png" class="online" alt="user">
-                                                <span class="message-text"> <a href="javascript:void(0);" class="username">Serman Syla</a> Haha! Yeah I know what you mean. Thanks for the file Sadi! <i class="fa fa-smile-o txt-color-orange"></i> </span>
-
-                                                <ul class="list-inline font-xs">
-                                                    <li>
-                                                        <a href="javascript:void(0);" class="text-muted">1 minute ago </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" class="text-danger"><i class="fa fa-thumbs-up"></i> Like</a>
-                                                    </li>
-                                                </ul>
-
-                                            </li>
-                                            <li class="message message-reply">
-                                                <img src="img/avatars/4.png" class="online" alt="user">
-                                                <span class="message-text"> <a href="javascript:void(0);" class="username">Sadi Orlaf </a> Haha! Yeah I know what you mean. Thanks for the file Sadi! <i class="fa fa-smile-o txt-color-orange"></i> </span>
-
-                                                <ul class="list-inline font-xs">
-                                                    <li>
-                                                        <a href="javascript:void(0);" class="text-muted">a moment ago </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" class="text-danger"><i class="fa fa-thumbs-up"></i> Like</a>
-                                                    </li>
-                                                </ul>
-                                                <input class="form-control input-xs" placeholder="Type and enter" type="text">
-                                            </li>
-                                        </ul>
-
-                                    </div>-->
-
                                     <div class="timeline-seperator text-center"> <span>11:30PM November 27th, 2013</span>
                                         <div class="btn-group pull-right">
                                             <a href="javascript:void(0);" data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle"><span class="caret single"></span></a>
@@ -329,82 +250,7 @@
                                             </ul>
                                         </div> 
                                     </div>
-                                    <!--<div class="chat-body no-padding profile-message">
-                                        <ul>
-                                            <li class="message">
-                                                <img src="img/avatars/1.png" class="online" alt="user">
-                                                <span class="message-text"> <a href="javascript:void(0);" class="username">John Doe <small class="text-muted pull-right ultra-light"> 2 Minutes ago </small></a> Can't divide were divide fish forth fish to. Was can't form the, living life grass darkness very image let unto fowl isn't in blessed fill life yielding above all moved </span>
-                                                <ul class="list-inline font-xs">
-                                                    <li>
-                                                        <a href="javascript:void(0);" class="text-info"><i class="fa fa-reply"></i> Reply</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" class="text-danger"><i class="fa fa-thumbs-up"></i> Like</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" class="text-muted">Show All Comments (14)</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" class="text-primary">Hide</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="message message-reply">
-                                                <img src="img/avatars/3.png" class="online" alt="user">
-                                                <span class="message-text"> <a href="javascript:void(0);" class="username">Serman Syla</a> Haha! Yeah I know what you mean. Thanks for the file Sadi! <i class="fa fa-smile-o txt-color-orange"></i> </span>
-
-                                                <ul class="list-inline font-xs">
-                                                    <li>
-                                                        <a href="javascript:void(0);" class="text-muted">1 minute ago </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" class="text-danger"><i class="fa fa-thumbs-up"></i> Like</a>
-                                                    </li>
-                                                </ul>
-
-                                            </li>
-                                            <li class="message message-reply">
-                                                <img src="img/avatars/4.png" class="online" alt="user">
-                                                <span class="message-text"> <a href="javascript:void(0);" class="username">Sadi Orlaf </a> Haha! Yeah I know what you mean. Thanks for the file Sadi! <i class="fa fa-smile-o txt-color-orange"></i> </span>
-
-                                                <ul class="list-inline font-xs">
-                                                    <li>
-                                                        <a href="javascript:void(0);" class="text-muted">a moment ago </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" class="text-danger"><i class="fa fa-thumbs-up"></i> Like</a>
-                                                    </li>
-                                                </ul>
-
-                                            </li>
-                                            <li class="message message-reply">
-                                                <img src="img/avatars/4.png" class="online" alt="user">
-                                                <span class="message-text"> <a href="javascript:void(0);" class="username">Sadi Orlaf </a> Haha! Yeah I know what you mean. Thanks for the file Sadi! <i class="fa fa-smile-o txt-color-orange"></i> </span>
-
-                                                <ul class="list-inline font-xs">
-                                                    <li>
-                                                        <a href="javascript:void(0);" class="text-muted">a moment ago </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" class="text-danger"><i class="fa fa-thumbs-up"></i> Like</a>
-                                                    </li>
-                                                </ul>
-
-                                            </li>
-                                            <li>
-                                                <div class="input-group wall-comment-reply">
-                                                    <input id="btn-input" type="text" class="form-control" placeholder="Type your message here...">
-                                                    <span class="input-group-btn">
-                                                        <button class="btn btn-primary" id="btn-chat">
-                                                            <i class="fa fa-reply"></i> Reply
-                                                        </button> </span>
-                                                </div>
-                                            </li>
-                                        </ul>
-
-                                    </div>-->
-
-
+                                   
                                 </div>
                             </div>
 
@@ -511,6 +357,49 @@
         </script>
 
         <!-- Your GOOGLE ANALYTICS CODE Below -->
+        
+        <div id="dialog_simple" title="Dialog Simple Title">
+	<p>
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+	</p>
+</div>
+
+<div id="dialog-message" title="Dialog Simple Title">
+	<p>
+		Esta seguro de modificar?
+	</p>
+
+	<div class="hr hr-12 hr-double"></div>
+
+	
+		Currently using
+		<b>36% of your storage space</b>
+		<div class="progress progress-striped active no-margin">
+			<div class="progress-bar progress-primary" role="progressbar" style="width: 36%"></div>
+		</div>
+                <div id="addtab" title="<div class='widget-header'><h4><i class='fa fa-plus'></i> Add another tab</h4></div>">
+
+				<form>
+
+					<fieldset>
+						<input name="authenticity_token" type="hidden">
+						<div class="form-group">
+							<label>Tab Title</label>
+							<input class="form-control" id="tab_title" value="" placeholder="Text field" type="text">
+						</div>
+
+						<div class="form-group">
+							<label>Content</label>
+							<textarea class="form-control" name="tab_content" id="tab_content" placeholder="Tab Content" rows="3"></textarea>
+						</div>
+
+					</fieldset>
+
+				</form>
+
+			</div>
+	
+</div><!-- #dialog-message -->
         <script type="text/javascript">
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
@@ -524,8 +413,159 @@
                 var s = document.getElementsByTagName('script')[0];
                 s.parentNode.insertBefore(ga, s);
             })();
-
+          
+                       
         </script>
+        <div class="well well-sm well-light">
+			<h3>Dialogue</h3>
+			<a href="#" id="dialog_link" class="btn btn-info"> Open Dialog </a>
+			&nbsp;
+			<a href="#" id="modal_link" class="btn bg-color-purple txt-color-white"> Open Modal Dialog </a>
+		</div>
+        
+        		<script type="text/javascript">
+		
+		// DO NOT REMOVE : GLOBAL FUNCTIONS!
+		
+		$(document).ready(function() {
+			
+			pageSetUp();
+			
+		
+			$.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
+				_title : function(title) {
+					if (!this.options.title) {
+						title.html("&#160;");
+					} else {
+						title.html(this.options.title);
+					}
+				}
+			}));
+		
+/*
+			* DIALOG SIMPLE
+			*/
+		
+			// Dialog click
+			$('#dialog_link').click(function() {
+				$('#dialog_simple').dialog('open');
+				return false;
+		
+			});
+		
+			$('#dialog_simple').dialog({
+				autoOpen : false,
+				width : 600,
+				resizable : false,
+				modal : true,
+				title : "<div class='widget-header'><h4><i class='fa fa-warning'></i> Empty the recycle bin?</h4></div>",
+				buttons : [{
+					html : "<i class='fa fa-trash-o'></i>&nbsp; Delete all items",
+					"class" : "btn btn-danger",
+					click : function() {
+						$(this).dialog("close");
+					}
+				}, {
+					html : "<i class='fa fa-times'></i>&nbsp; Cancel",
+					"class" : "btn btn-default",
+					click : function() {
+						$(this).dialog("close");
+					}
+				}]
+			});
+		
+			/*
+			* DIALOG HEADER ICON
+			*/
+		
+			// Modal Link
+			$('#modal_link').click(function() {
+				$('#dialog-message').dialog('open');
+				return false;
+			});
+		
+			$("#dialog-message").dialog({
+				autoOpen : false,
+				modal : true,
+				title : "<div class='widget-header'><h4><i class='icon-ok'></i> jQuery UI Dialog</h4></div>",
+				buttons : [{
+					html : "Cancel",
+					"class" : "btn btn-default",
+					click : function() {
+						$(this).dialog("close");
+					}
+				}, {
+					html : "<i class='fa fa-check'></i>&nbsp; OK",
+					"class" : "btn btn-primary",
+					click : function() {
+						$(this).dialog("close");
+					}
+				}]
+		
+			});
+		
+			/*
+			 * Remove focus from buttons
+			 */
+			$('.ui-dialog :button').blur();
+		
+			/*
+			 * Just Tabs
+			 */
+		
+			$('#tabs').tabs();
+		
+			/*
+			 *  Simple tabs adding and removing
+			 */
+		
+			$('#tabs2').tabs();
+		
+			// Dynamic tabs
+		
+			// modal dialog init: custom buttons and a "close" callback reseting the form inside
+			var dialog = $("#addtab").dialog({
+				autoOpen : false,
+				width : 600,
+				resizable : false,
+				modal : true,
+				buttons : [{
+					html : "<i class='fa fa-times'></i>&nbsp; Cancel",
+					"class" : "btn btn-default",
+					click : function() {
+						$(this).dialog("close");
+		
+					}
+				}, {
+		
+					html : "<i class='fa fa-plus'></i>&nbsp; Add",
+					"class" : "btn btn-danger",
+					click : function() {
+						addTab();
+						$(this).dialog("close");
+					}
+				}]
+			});
+		
+			
+		
+			
+			$("#add_tab").button().click(function() {
+				dialog.dialog("open");
+			});
+		
+			// close icon: removing the tab on click
+			$("#tabs2").on("click", 'span.delete-tab', function() {
+		
+				var panelId = $(this).closest("li").remove().attr("aria-controls");
+				$("#" + panelId).remove();
+				tabs.tabs("refresh");
+			});
+		
+		
+		});
+
+		</script>
 
     </body>
 

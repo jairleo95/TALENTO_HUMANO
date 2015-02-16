@@ -18,6 +18,9 @@
 <jsp:useBean id="List_Area" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="LISTA_RH_SECCION" scope="application" class="java.util.ArrayList"/>
 <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
+<!--<link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">-->
+<link href="../../css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
 <!DOCTYPE html>
 <html>
@@ -31,7 +34,7 @@
             }
             .caja{
                 width: 90%;
-                height: 450px;
+                height: 400px;
             }
             .contenedor {
                 text-align:left;
@@ -68,6 +71,7 @@
             }
             select{
                 width: 100px;;
+                
             }
             .tabla{
                 margin-top: 30px;
@@ -92,96 +96,90 @@
     </head>
     <body>
         <div class="caja">
-            <div class="contenedor">
-                <div class="direccion form-group">
+            <form class="contenedor smart-form">
+                <section class="direccion">
                     <label>1.Direccion</label>
-                    <select class="iddi form-control">
-                        <option value="0">-Seleccione-</option>
-                        <% for (int i = 0; i < Listar_Direccion.size(); i++) {
-                                Direccion d = new Direccion();
-                                d = (Direccion) Listar_Direccion.get(i);
-                        %>
-                        <option value="<%=d.getId_direccion()%>"><%=d.getNo_direccion()%></option>
-                        <%}%>
-                    </select>
-                </div>
+                    <label class="select">
+                        <select class="iddi">
+                            <option value="0">[Seleccione]</option>
+                            <% for (int i = 0; i < Listar_Direccion.size(); i++) {
+                                    Direccion d = new Direccion();
+                                    d = (Direccion) Listar_Direccion.get(i);
+                            %>
+                            <option value="<%=d.getId_direccion()%>"><%=d.getNo_direccion()%></option>
+                            <%}%>
+                        </select>
+                        <i></i> </label>
+                </section>
 
-                <div class="departamento form-group">
+                <section class="departamento">
                     <label>2.Departamento</label>
-                    <select class="idde form-control">
-                        <option value="0">-Seleccione-</option>
-                        <%
-                            for (int i = 0; i < List_Departamento.size(); i++) {
-                                Departamento de = new Departamento();
-                                de = (Departamento) List_Departamento.get(i);
-                        %>
-                        <option class="dep<%=i%>" id="<%=de.getId_direccion()%>" value="<%=de.getId_departamento()%>"><%=de.getNo_dep()%></option>
-                        <%}%>
-                    </select>
-                </div>
+                    <label class="select">
+                        <select class="idde">
+                            <option value="0">[Seleccione]</option>
+                            
+                        </select>
+                        <i></i> </label>
+                </section>
 
-                <div class="area form-group">
+                <section class="area ">
                     <label>3.Area</label>
-                    <select class="idar form-control">
-                        <option value="0">-Seleccione-</option>
-                        <% for (int i = 0; i < List_Area.size(); i++) {
-                                Area a = new Area();
-                                a = (Area) List_Area.get(i);
-                        %>
-                        <option class="area<%=i%>" id="<%=a.getId_departamento()%>" value="<%=a.getId_area()%>" ><%=a.getNo_area()%></option>
-                        <%}%>
-                    </select>
-                </div>
+                    <label class="select">
+                        <select class="idar">
+                            <option value="0">[Seleccione]</option>
+                            
+                        </select>
+                        <i></i> </label>
+                </section>
 
-                <div class="seccion form-group">
+                <section class="seccion ">
                     <label>4.Seccion</label>
-                    <select class="idse form-control">
-                        <option value="0">-Seleccione-</option>
-                        <% for (int i = 0; i < LISTA_RH_SECCION.size(); i++) {
-                                Seccion s = new Seccion();
-                                s = (Seccion) LISTA_RH_SECCION.get(i);
-                        %>
-                        <option class="sec<%=i%>" id="<%=s.getId_area()%>" value="<%=s.getId_seccion()%>"><%=s.getNo_seccion()%></option>
-                        <%}%>
-                    </select>
-                </div>
-            </div>
-            <div class="contenedor2">
-                <div class="puestos form-group">
+                    <label class="select">
+                        <select class="idse">
+                            <option value="0">[Seleccione]</option>
+                        </select>
+                        <i></i> </label>
+                </section>
+            </form>
+            <form class="contenedor2 smart-form">
+                <section class="puestos">
                     <label>5.Puesto</label>
-                    <select class="idpu form-control input-group-sm">
-                        <option value="0">-Seleccione-</option>
-                        <% for (int i = 0; i < List_Puesto.size(); i++) {
-                                Puesto p = new Puesto();
-                                p = (Puesto) List_Puesto.get(i);
-                        %>
-                        <option class="puest<%=i%>"  id="<%=p.getId_seccion()%>" value="<%=p.getId_puesto()%>"><%=p.getNo_puesto()%></option>
-                        <%}%>
-                    </select>
-                </div>
+                    <label class="select">
+                        <select class="idpu">
+                            <option value="0">[Seleccione]</option>
+                            
+                        </select>
+                        <i></i> </label>
+                </section>
 
-                <div class="funciones form-group">
+                <section class="funciones">
                     <label>6.Detalle de Funcion</label>
-                    <input type="text" class=" ifun form-control" placeholder="Nombre de la Funcion" required="">
-                </div>
-                <div class="estadoF form-group">
+                    <label class="input">
+                        <input type="text" class=" ifun input-sm" placeholder="Nombre de la Funcion" style="height:32px;" >
+                    </label>                    
+                </section>
+                <section class="estadoF">
                     <label>7.Estado de la Funcion</label>
-                    <select class="estado form-control">
-                        <option value="0">-Selelccione-</option>
-                        <option value="1">Activada</option>
-                        <option value="2">Desactivada</option>
-                    </select>
-                </div>
-                <div class="tipo form-group">
+                    <label class="select">
+                        <select class="estado" disabled="">
+                            <option value="0">[Selelccione]</option>
+                            <option value="1">Activada</option>
+                            <option value="2">Desactivada</option>
+                        </select>
+                        <i></i> </label>
+                </section>
+                <section class="tipo">
                     <label>8.Tipo de Funcion</label>
-                    <select class="tifun  form-control">
-                        <option value="0">-Selelccione-</option>
-                        <option value="1">Principal</option>
-                        <option value="2">Secundaria</option>
-                    </select>
-                </div>
+                    <label class="select">
+                        <select class="tifun">
+                            <option value="0">[Selelccione]</option>
+                            <option value="1">Principal</option>
+                            <option value="2">Secundaria</option>
+                        </select>
+                        <i></i> </label>
+                </section>
 
-            </div>
+            </form>
             <div class="opciones">
                 <button name="opc"  class="btnotorgar btn btn-primary btn-block" value="1">Otorgar Funcion</button>
                 <button name="opc1"  class="btnLimpiar btn btn-default btn-block" value="1">Limpiar</button>
@@ -190,8 +188,8 @@
             </div>
         </div>
 
-        <div class="tabla">
-            <table class="table table-bordered table-responsive">
+        <div class="tabla table-responsive">
+            <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
                         <td><center>Nro</center></td>
@@ -217,17 +215,28 @@
                 listar_tabla();
             });
             $(".iddi").change(function() {
-                $('.idde').val(0);
                 idDireccion = $(this).val();
-                var a = $(".idde option");
-                for (var i = 0; i < a.size(); i++) {
-                    var id = $(".dep" + i).attr('id');
-                    if (id !== idDireccion) {
-                        $(".dep" + i).hide();
-                    } else {
-                        $(".dep" + i).show();
+                var ti = $('.idde');
+                ti.empty();
+                var data = "opc=direccion" + "&idDireccion=" + idDireccion;
+                ti.append('<option value="">Cargando...</option>').val('');
+                $.post("../../funcion", data, function(objJson) {
+                    ti.empty();
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
                     }
-                }
+                    var lista = objJson.lista;
+                    if (lista.length > 0) {
+                        ti.append("<option value='0'>[Seleccione]</option>");
+                    } else {
+                        ti.append("<option value='0'>[]</option>");
+                    }
+                    for (var i = 0; i < lista.length; i++) {
+                        var item = "<option value='" + lista[i].id_de + "'>" + lista[i].nom_de + "</option>";
+                        ti.append(item);
+                    }
+                });
                 $('.idde').val(0);
                 $('.idar').val(0);
                 $('.idse').val(0);
@@ -236,15 +245,27 @@
             });
             $(".idde").change(function() {
                 idDep = $(this).val();
-                var a = $(".idar option");
-                for (var i = 0; i < a.size(); i++) {
-                    var id = $(".area" + i).attr('id');
-                    if (id !== idDep) {
-                        $(".area" + i).hide();
-                    } else {
-                        $(".area" + i).show();
+                var ti = $('.idar');
+                ti.empty();
+                var data = "opc=departamento" + "&idDepartamento=" + idDep;
+                ti.append('<option value="">Cargando...</option>').val('');
+                $.post("../../funcion", data, function(objJson) {
+                    ti.empty();
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
                     }
-                }
+                    var lista = objJson.lista;
+                    if (lista.length > 0) {
+                        ti.append("<option value='0'>[Seleccione]</option>");
+                    } else {
+                        ti.append("<option value='0'>[]</option>");
+                    }
+                    for (var i = 0; i < lista.length; i++) {
+                        var item = "<option value='" + lista[i].id_ar + "'>" + lista[i].nom_ar + "</option>";
+                        ti.append(item);
+                    }
+                });
                 $('.idar').val(0);
                 $('.idse').val(0);
                 $('.idpu').val(0);
@@ -253,15 +274,27 @@
             });
             $(".idar").change(function() {
                 idArea = $(this).val();
-                var a = $(".idse option");
-                for (var i = 0; i < a.size(); i++) {
-                    var id = $(".sec" + i).attr('id');
-                    if (id !== idArea) {
-                        $(".sec" + i).hide();
-                    } else {
-                        $(".sec" + i).show();
+                var ti = $('.idse');
+                ti.empty();
+                var data = "opc=area" + "&idArea=" + idArea;
+                ti.append('<option value="">Cargando...</option>').val('');
+                $.post("../../funcion", data, function(objJson) {
+                    ti.empty();
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
                     }
-                }
+                    var lista = objJson.lista;
+                    if (lista.length > 0) {
+                        ti.append("<option value='0'>[Seleccione]</option>");
+                    } else {
+                        ti.append("<option value='0'>[]</option>");
+                    }
+                    for (var i = 0; i < lista.length; i++) {
+                        var item = "<option value='" + lista[i].id_se + "'>" + lista[i].nom_se + "</option>";
+                        ti.append(item);
+                    }
+                });
                 $('.idse').val(0);
                 $('.idpu').val(0);
                 validar_ar();
@@ -269,15 +302,27 @@
             });
             $(".idse").change(function() {
                 idSeccion = $(this).val();
-                var a = $(".idpu option");
-                for (var i = 0; i < a.size(); i++) {
-                    var id = $(".puest" + i).attr('id');
-                    if (id !== idSeccion) {
-                        $(".puest" + i).hide();
-                    } else {
-                        $(".puest" + i).show();
+                var ti = $('.idpu');
+                ti.empty();
+                var data = "opc=seccion" + "&idSeccion=" + idSeccion;
+                ti.append('<option value="">Cargando...</option>').val('');
+                $.post("../../funcion", data, function(objJson) {
+                    ti.empty();
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
                     }
-                }
+                    var lista = objJson.lista;
+                    if (lista.length > 0) {
+                        ti.append("<option value='0'>[Seleccione]</option>");
+                    } else {
+                        ti.append("<option value='0'>[]</option>");
+                    }
+                    for (var i = 0; i < lista.length; i++) {
+                        var item = "<option value='" + lista[i].id_pu + "'>" + lista[i].nom_pu + "</option>";
+                        ti.append(item);
+                    }
+                });
                 $('.idpu').val(0);
                 validar_sec();
                 validar_ar();
@@ -330,16 +375,29 @@
             function limpiar() {
                 $('.iddi').focus();
                 $('.iddi').val(0);
+                //-----------
+                $('.idde').empty();
+                $('.idde').append("<option value='0'>[Seleccione]</option>");
                 $('.idde').val(0);
+                //-----------
+                $('.idar').empty() ;
+                $('.idar').append("<option value='0'>[Seleccione]</option>");
                 $('.idar').val(0);
+                //-----------
+                $('.idse').empty() ;
+                $('.idse').append("<option value='0'>[Seleccione]</option>");
                 $('.idse').val(0);
+                //-----------
+                $('.idpu').empty() ;
+                $('.idpu').append("<option value='0'>[Seleccione]</option>");
                 $('.idpu').val(0);
-                $('.tifun').val(0);
+                //-----------
                 $('.estado').val(1);
                 $('.ifun').val("");
                 $('.btnotorgar').val('1');
                 $('.btnotorgar').text('Otorgar Funcion');
                 $('.tbodys').empty();
+                $('.estado').prop( "disabled", true );
             }
             //LISTAR TABLA
             function listar_tabla() {
@@ -355,15 +413,19 @@
                             ap.append("<td class='nombre_funcion" + i + "'><center>" + list[i].nom_fu + "</center></td>");
                             if (list[i].es_fu == 1) {
                                 ap.append("<td class='estado_funcion" + i + "' id=" + list[i].es_fu + "><center>Activada</center></td>");
+                                $('.estado_funcion'+i).css("background-color","#CECEF6");
                             } else if (list[i].es_fu == 2) {
                                 ap.append("<td class='estado_funcion" + i + "' id=" + list[i].es_fu + "><center>Desactivada</center></td>");
+                                $('.estado_funcion'+i).css("background-color","#F3E2A9");
                             }
                             ;
                             ap.append("<td class='nombre_puesto" + i + "'><center>" + list[i].no_pu + "</center></td>");
                             if (list[i].ti_fu == 1) {
                                 ap.append("<td class='tipo_funcion" + i + "' id=" + list[i].ti_fu + "><center>Principal</center></td>");
+                                $('.tipo_funcion'+i).css("background-color","#CECEF6");
                             } else if (list[i].ti_fu == 2) {
                                 ap.append("<td class='tipo_funcion" + i + "' id=" + list[i].ti_fu + "><center>Secundaria</center></td>");
+                                $('.tipo_funcion'+i).css("background-color","#F3E2A9");
                             }
                             ;
                             ap.append("<td class = 'btnedit' ><center> <button class = 'edit btn btn-primary' value = '" + i + "' > Editar </button></center></td >");
@@ -380,6 +442,7 @@
                         $('.btnotorgar').val('2');
                         $('.btnotorgar').text('Editar Funcion');
                         $('.ifun').focus();
+                        $('.estado').prop( "disabled", false );
                     });
                     $('.del').click(function() {
                         idValue = $(this).val();

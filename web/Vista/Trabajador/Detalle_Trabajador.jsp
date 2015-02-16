@@ -181,6 +181,10 @@
         <!--Begin Detalle Trabajador-->
         <div   class="titulo" style=" width:100%;">Detalle del Trabajador</div> 
         <div  class="jarviswidget well" id="wid-id-3" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
+
+            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                Trabajador Nuevo
+            </button>
             <table  style="background-color: white " class="table-det" cellpadding="0">
 
 
@@ -454,15 +458,91 @@
                 }
             %>
         </div>
-        <script>
-            $(document).ready(function() {
 
-                $(".btn-autor").click(function(e) {
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Article Post</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="category"> Fecha de Inicio:</label>
+                                        <input type="date" class="form-control" value="" placeholder="Date" required />
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="category"> Fecha de Cese:</label>
+                                        <input type="date" class="form-control" value="" placeholder="Date" required />
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="category"> Tipo de Hora Pago:</label>
+                                        <input type="text" class="form-control" value="" placeholder="0.0" required />
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="category"> Horas Laborables:</label>
+                                        <input type="text" class="form-control" value="" placeholder="0" required />
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <label for="category" > <strong>CUOTAS</strong></label>
+                                <br>
+                            <div class="row">
+                                
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="category"> MES 1 :</label>
+                                        <input type="text" class="form-control" value="" placeholder="0" required />
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    Cancelar
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    Guardar
+                                </button>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <script>
+            $(document).ready(function () {
+
+                $(".btn-autor").click(function (e) {
                     $.SmartMessageBox({
                         title: "Alerta de Confirmación!",
                         content: "¿Esta totalmente seguro de autorizar este requerimiento?",
                         buttons: '[No][Yes]'
-                    }, function(ButtonPressed) {
+                    }, function (ButtonPressed) {
                         if (ButtonPressed === "Yes") {
                             // return true;
                             $(".form-aut").submit();
@@ -474,12 +554,12 @@
                     });
                     e.preventDefault();
                 });
-                $(".btn-rech").click(function(e) {
+                $(".btn-rech").click(function (e) {
                     $.SmartMessageBox({
                         title: "Alerta de Confirmación!",
                         content: "¿Esta totalmente seguro de rechazar este requerimiento?",
                         buttons: '[No][Yes]'
-                    }, function(ButtonPressed) {
+                    }, function (ButtonPressed) {
                         if (ButtonPressed === "Yes") {
                             $(".form-rech").submit();
                         }
@@ -497,7 +577,7 @@
         <script src="../../js/JQuery/jQuery.js"></script>
         <script src="../../js/Js_dlmenu/jquery.dlmenu.js"></script>
         <script>
-            $(function() {
+            $(function () {
                 $('#dl-menu').dlmenu({
                     animationClasses: {classin: 'dl-animate-in-2', classout: 'dl-animate-out-2'}
                 });
@@ -564,21 +644,21 @@
         <script type="text/javascript">
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
-function closedthis() {
-                    $.smallBox({
-                        title: "¡Ficha de trabajador registrada correctamente!",
-                        content: "ya puede visualizar toda la informacion del trabajador...",
-                        color: "#739E73",
-                        iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                        timeout: 6000
-                    });
-                }
+            function closedthis() {
+                $.smallBox({
+                    title: "¡Ficha de trabajador registrada correctamente!",
+                    content: "ya puede visualizar toda la informacion del trabajador...",
+                    color: "#739E73",
+                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                    timeout: 6000
+                });
+            }
 
-            $(document).ready(function() {
+            $(document).ready(function () {
 
                 pageSetUp();
-                
-                $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
+
+                $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                     $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                 });
                 $("#cod_ap").numeric();
@@ -601,7 +681,7 @@ function closedthis() {
                 /*
                  * Smart Notifications
                  */
-                $('#eg1').click(function(e) {
+                $('#eg1').click(function (e) {
 
                     $.bigBox({
                         title: "Big Information box",
@@ -615,7 +695,7 @@ function closedthis() {
                     e.preventDefault();
                 })
 
-                $('#eg2').click(function(e) {
+                $('#eg2').click(function (e) {
 
                     $.bigBox({
                         title: "Big Information box",
@@ -628,7 +708,7 @@ function closedthis() {
                     e.preventDefault();
                 })
 
-                $('#eg3').click(function(e) {
+                $('#eg3').click(function (e) {
 
                     $.bigBox({
                         title: "Shield is up and running!",
@@ -641,7 +721,7 @@ function closedthis() {
                     e.preventDefault();
                 })
 
-                $('#eg4').click(function(e) {
+                $('#eg4').click(function (e) {
 
                     $.bigBox({
                         title: "Success Message Example",
@@ -650,7 +730,7 @@ function closedthis() {
                         //timeout: 8000,
                         icon: "fa fa-check",
                         number: "4"
-                    }, function() {
+                    }, function () {
                         closedthis();
                     });
                     e.preventDefault();
@@ -658,7 +738,7 @@ function closedthis() {
 
 
 
-                $('#eg5').click(function() {
+                $('#eg5').click(function () {
 
                     $.smallBox({
                         title: "Ding Dong!",
@@ -668,7 +748,7 @@ function closedthis() {
                         icon: "fa fa-bell swing animated"
                     });
                 });
-                $('#eg6').click(function() {
+                $('#eg6').click(function () {
 
                     $.smallBox({
                         title: "Big Information box",
@@ -679,7 +759,7 @@ function closedthis() {
                     });
                 })
 
-                $('#eg7').click(function() {
+                $('#eg7').click(function () {
 
                     $.smallBox({
                         title: "James Simmons liked your comment",
@@ -690,17 +770,17 @@ function closedthis() {
                     });
                 })
 
-                
+
                 /*
                  * SmartAlerts
                  */
                 // With Callback
-                $("#smart-mod-eg1").click(function(e) {
+                $("#smart-mod-eg1").click(function (e) {
                     $.SmartMessageBox({
                         title: "Smart Alert!",
                         content: "This is a confirmation box. Can be programmed for button callback",
                         buttons: '[No][Yes]'
-                    }, function(ButtonPressed) {
+                    }, function (ButtonPressed) {
                         if (ButtonPressed === "Yes") {
 
                             $.smallBox({
@@ -725,7 +805,7 @@ function closedthis() {
                     e.preventDefault();
                 })
                 // With Input
-                $("#smart-mod-eg2").click(function(e) {
+                $("#smart-mod-eg2").click(function (e) {
 
                     $.SmartMessageBox({
                         title: "Smart Alert: Input",
@@ -733,13 +813,13 @@ function closedthis() {
                         buttons: "[Accept]",
                         input: "text",
                         placeholder: "Enter your user name"
-                    }, function(ButtonPress, Value) {
+                    }, function (ButtonPress, Value) {
                         alert(ButtonPress + " " + Value);
                     });
                     e.preventDefault();
                 })
                 // With Buttons
-                $("#smart-mod-eg3").click(function(e) {
+                $("#smart-mod-eg3").click(function (e) {
 
                     $.SmartMessageBox({
                         title: "Smart Notification: Buttons",
@@ -749,7 +829,7 @@ function closedthis() {
                     e.preventDefault();
                 })
                 // With Select
-                $("#smart-mod-eg4").click(function(e) {
+                $("#smart-mod-eg4").click(function (e) {
 
                     $.SmartMessageBox({
                         title: "Smart Alert: Select",
@@ -757,13 +837,13 @@ function closedthis() {
                         buttons: "[Done]",
                         input: "select",
                         options: "[Costa Rica][United States][Autralia][Spain]"
-                    }, function(ButtonPress, Value) {
+                    }, function (ButtonPress, Value) {
                         alert(ButtonPress + " " + Value);
                     });
                     e.preventDefault();
                 });
                 // With Login
-                $("#smart-mod-eg5").click(function(e) {
+                $("#smart-mod-eg5").click(function (e) {
 
                     $.SmartMessageBox({
                         title: "Login form",
@@ -771,7 +851,7 @@ function closedthis() {
                         buttons: "[Cancel][Accept]",
                         input: "text",
                         placeholder: "Enter your user name"
-                    }, function(ButtonPress, Value) {
+                    }, function (ButtonPress, Value) {
                         if (ButtonPress == "Cancel") {
                             alert("Why did you cancel that? :(");
                             return 0;
@@ -785,7 +865,7 @@ function closedthis() {
                             buttons: "[Login]",
                             input: "password",
                             placeholder: "Password"
-                        }, function(ButtonPress, Value) {
+                        }, function (ButtonPress, Value) {
                             alert("Username: " + ValueOriginal + " and your password is: " + Value);
                         });
                     });
@@ -800,7 +880,7 @@ function closedthis() {
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
-            (function() {
+            (function () {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
@@ -810,18 +890,18 @@ function closedthis() {
             })();</script>
         <script type="text/javascript">
             $(document).ready(
-                    function() {
+                    function () {
 
 
                     });</script>
         <script type="text/javascript" language="javascript">
-            $('.ver_foto').click(function() {
+            $('.ver_foto').click(function () {
                 $(".file-foto").click();
             });
-            $(window).load(function() {
+            $(window).load(function () {
 
-                $(function() {
-                    $('.file-foto').change(function(e) {
+                $(function () {
+                    $('.file-foto').change(function (e) {
 
                         if (this.files[0].size <= 500000) {
                             var jForm = new FormData();
@@ -834,7 +914,7 @@ function closedthis() {
                                 processData: false,
                                 contentType: false,
                                 data: jForm
-                            }).done(function(f) {
+                            }).done(function (f) {
                                 $(".mensaje").text(f);
                             });
                             addImage(e);
