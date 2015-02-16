@@ -17,7 +17,7 @@
         <meta charset="utf-8">
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
-        <title> SmartAdmin </title>
+        <title> Mantenimiento de Proceso </title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -198,12 +198,20 @@
                                         <div class="row" >
                                             <h2>Lista de puestos :<strong><label class="lb-list_puesto"></label></strong> </h2>
                                             <form action="" method="post" class="form_puesto" style="display:none;">
-                                                <label>Dirección</label><select class="sl_dir"></select>
-                                                <label>Departamento:</label><select class="sl_dep"></select>
-                                                <label>Area:</label><select class="sl_area"></select>
-                                                <label>Sección:</label><select class="sl_sec"></select>
-                                                <label>Puesto:</label><select class="sl_puesto"></select>
-                                                <button type="button">
+                                                <label>Dirección</label><select class="sl_dir" required="" ></select>
+                                                <label>Departamento:</label><select class="sl_dep" required=""></select>
+                                                <label>Area:</label><select class="sl_area" required=""></select>
+                                                <label>Sección:</label><select class="sl_sec" required=""></select>
+                                                <label>Puesto:</label><select name="id_pu" class="sl_puesto" required=""></select>
+                                                <input type="hidden" value="" name="idpasos" class="id_pasos"  />
+                                                <br>
+                                                Código Puesto :<select class="co_puesto" name="co_pasos">
+                                                    <option value=""></option>
+                                                    <option value="SECR">Secretaria de Area</option>
+                                                    <option value="JEFE">Jefe de Area</option>
+                                                </select>
+                                                <br>
+                                                <button type="button" class="btn-agregar-p">
                                                     Agregar Puesto
                                                 </button>
                                             </form>
@@ -523,6 +531,26 @@
 
                             // alert($(this).val());
                         });
+
+                $(".btn-agregar-p").click(function () {
+                    if ($(".form_puesto").valid()) {
+                         $.ajax({
+                         url: "../../Direccion_Puesto",
+                         data: $(".form_puesto").serialize()+"&opc=Reg_puesto_paso"
+                         }).done(function () {
+                         alert("¡Registrado Exitosamente!");
+                         }).fail(function(objJson){
+                         alert(objJson.mensaje);
+                         
+                         });
+                        alert("aad");
+
+                    } else {
+                        alert("Completar campos requeridos...");
+                    }
+
+                    ///alert($(".sl_puesto").val());
+                });
                 var b = $(".tbodys");
                 var c = $(".dd-list");
                 function Listar_Paso(proceso) {
@@ -575,6 +603,7 @@
                             $(".lb-list_puesto").text($(".det_p_" + $(this).val()).val());
                             var tbody_p = $(".tbody-puesto");
                             var texto = "";
+                            $(".id_pasos").val($(".id_paso" + $(this).val()).val());
                             $.post("../../paso", "opc=Paso_Puesto&id=" + $(".id_paso" + $(this).val()).val(), function (objJson) {
                                 if (objJson.rpta == -1) {
                                     alert(objJson.mensaje);

@@ -20,6 +20,8 @@ public interface InterfacePuestoDAO {
 
     public boolean Guardar_Puesto();
 
+    public void Registrar_Puesto_Paso(String ID_DETALLE_PASOS, String ID_PASOS, String ID_PUESTO, String ES_DETALLE_PASOS, String CO_PUESTO);
+
     public boolean Eliminar_Puesto();
 
     public List<Puesto> List_Puesto();
