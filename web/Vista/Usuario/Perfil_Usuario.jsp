@@ -127,36 +127,43 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-sm-12">
+                                            <div class="col-sm-24">
 
                                                 <div class="row">
 
                                                     <div class="col-sm-3 profile-pic">
                                                         <img src="../../img/avatars/sunny-big.png" alt="demo user">
                                                         <div class="padding-10">
-                                                            <h4 class="font-md"><strong>1,543</strong>
+                                                            <h3 class="font-md"><strong>1,543</strong>
                                                               
-                                                                <small>Connections</small></h4>
+                                                                <small><a href="../../Usuario?opc=editar_Perfil&id=<%=(String)sesion_1.getAttribute("IDUSER")%>">Editar Perfil</a></small></h3>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <h1><%=vu.getNo_usuario()%> <span class="semi-bold">telf: <%=vu.getTe_trabajador()%></span>
+                                                        <h1><%=vu.getNo_usuario()%> <span class="semi-bold">telf: <%=vu.getTe_trabajador()%></span></h1>
                                                             <br>
-                                                            <small> <a href="../../Usuario?opc=editar_Perfil&id=<%=(String)sesion_1.getAttribute("IDUSER")%>">Editar Perfil</a></small></h1>
+                        
 
                                                         <ul class="list-unstyled">
                                                               <li>
                                                                 <p class="text-muted">
-                                                                    <i class="fa fa-unlock" ></i>&nbsp;<input disabled="disabled" type="password" value="<%=vu.getPw_usuario()%>">
+                                                                    <i class="fa fa-unlock" ></i>&nbsp;<input  type="password" value="<%=vu.getPw_usuario().trim()%>">
                                                                     
                                                                 </p>
                                                             </li>
+                                                            
                                                             <li>
                                                                 <p class="text-muted">
                                                                     <i class="fa fa-phone"></i>&nbsp;&nbsp;(<span class="txt-color-darken"><%=vu.getTe_trabajador()%></span>)
                                                                 </p>
                                                             </li>
+                                                             <li >
+                                                                <p class="text-muted" >
+                                                                    <i class="fa fa-mobile-phone" ></i>&nbsp;&nbsp;<span class="txt-color-darken" ><%=vu.getCl_tra()%></span>
+                                                                </p>
+                                                            </li>
                                                             <li>
+                                                                
                                                                 <p class="text-muted">
                                                                     <i class="fa fa-envelope"></i>&nbsp;&nbsp;<a href=""><%=vu.getDi_correo_personal()%></a>
                                                                 </p>
@@ -164,11 +171,7 @@
                                                           
                                                             <li>
                                                             
-                                                             <li >
-                                                                <p class="text-muted" >
-                                                                    <i class="fa fa-mobile-phone" ></i>&nbsp;&nbsp;<span class="txt-color-darken" ><%=vu.getCl_tra()%></span>
-                                                                </p>
-                                                            </li>
+                                                            <h3>Diereccion del Usuario</h3>
                                                              <li>
                                                                 <p class="text-muted">
                                                                     <i class="fa  fa-th"></i>&nbsp;&nbsp;<span class="txt-color-darken"><%=vu.getLi_di_dom_a_d1()+vu.getDi_dom_a_d2()+vu.getDi_dom_a_d4()+vu.getDi_dom_a_d6()+vu.getDi_dom_a_ref()%></span>
@@ -220,38 +223,7 @@
                                     </div>
 
                                 </div>
-                                <div class="col-sm-12 col-md-12 col-lg-6">
-
-                                    <form method="post" class="well padding-bottom-10" onsubmit="return false;">
-                                        <textarea rows="2" class="form-control" placeholder="What are you thinking?"></textarea>
-                                        <div class="margin-top-10">
-                                            <button type="submit" class="btn btn-sm btn-primary pull-right">
-                                                Post
-                                            </button>
-                                            <a href="javascript:void(0);" class="btn btn-link profile-link-btn" rel="tooltip" data-placement="bottom" title="Add Location"><i class="fa fa-location-arrow"></i></a>
-                                            <a href="javascript:void(0);" class="btn btn-link profile-link-btn" rel="tooltip" data-placement="bottom" title="Add Voice"><i class="fa fa-microphone"></i></a>
-                                            <a href="javascript:void(0);" class="btn btn-link profile-link-btn" rel="tooltip" data-placement="bottom" title="Add Photo"><i class="fa fa-camera"></i></a>
-                                            <a href="javascript:void(0);" class="btn btn-link profile-link-btn" rel="tooltip" data-placement="bottom" title="Add File"><i class="fa fa-file"></i></a>
-                                        </div>
-                                    </form>
-                                    <div class="timeline-seperator text-center"> <span>11:30PM November 27th, 2013</span>
-                                        <div class="btn-group pull-right">
-                                            <a href="javascript:void(0);" data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle"><span class="caret single"></span></a>
-                                            <ul class="dropdown-menu text-left">
-                                                <li>
-                                                    <a href="javascript:void(0);">Hide this post</a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:void(0);">Hide future posts from this user</a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:void(0);">Mark as spam</a>
-                                                </li>
-                                            </ul>
-                                        </div> 
-                                    </div>
-                                   
-                                </div>
+                               
                             </div>
 
                         </div>
