@@ -22,7 +22,8 @@ import pe.edu.upeu.application.model.Funciones;
  *
  * @author joserodrigo
  */
-public class FuncionDAO implements InterfaceFuncionDAO{
+public class FuncionDAO implements InterfaceFuncionDAO {
+
     ConexionBD cnn;
 
     @Override
@@ -60,7 +61,7 @@ public class FuncionDAO implements InterfaceFuncionDAO{
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT f.ID_FUNCION,f.DE_FUNCION,f.ES_FUNCION, f.TI_FUNCION,p.ID_PUESTO,p.NO_PUESTO FROM RHTD_FUNCION f,RHTR_PUESTO p where p.ID_PUESTO = f.ID_PUESTO and f.ID_PUESTO='"+id_pu.trim()+"'";
+            String sql = "SELECT f.ID_FUNCION,f.DE_FUNCION,f.ES_FUNCION, f.TI_FUNCION,p.ID_PUESTO,p.NO_PUESTO FROM RHTD_FUNCION f,RHTR_PUESTO p where p.ID_PUESTO = f.ID_PUESTO and f.ID_PUESTO='" + id_pu.trim() + "'";
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -173,4 +174,124 @@ public class FuncionDAO implements InterfaceFuncionDAO{
         }
         return Lista;
     }
+
+    @Override
+    public List<Map<String, ?>> Listar_dep_x_dir(String id_de) {
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select d.ID_DEPARTAMENTO, d.NO_DEP\n"
+                    + "           from rhtx_departamento d, rhtx_direccion r\n"
+                    + "             where d.ID_DIRECCION=r.ID_DIRECCION and d.ID_DIRECCION='" + id_de.trim() + "'";
+            ResultSet rs = this.cnn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id_de", rs.getString("ID_DEPARTAMENTO"));
+                rec.put("nom_de", rs.getString("NO_DEP"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
+    }
+
+    @Override
+    public List<Map<String, ?>> Listar_ar_x_dep(String id_ar) {
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql ="SELECT A.ID_AREA, A.NO_AREA\n" +
+            "FROM RHTD_AREA A, RHTX_DEPARTAMENTO D\n" +
+            "WHERE A.ID_DEPARTAMENTO= D.ID_DEPARTAMENTO\n" +
+            "AND D.ID_DEPARTAMENTO='"+id_ar+"'";
+            ResultSet rs = this.cnn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id_ar", rs.getString("ID_AREA"));
+                rec.put("nom_ar", rs.getString("NO_AREA"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
+    }
+
+    @Override
+    public List<Map<String, ?>> Listar_sec_x_area(String id_se) {
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql ="SELECT S.ID_SECCION, S.NO_SECCION\n" +
+                "FROM RHTD_AREA A, RHTR_SECCION S\n" +
+                "WHERE S.ID_AREA= A.ID_AREA\n" +
+                "AND A.ID_AREA='"+id_se+"'";
+            ResultSet rs = this.cnn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id_se", rs.getString("ID_SECCION"));
+                rec.put("nom_se", rs.getString("NO_SECCION"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
+    }
+
+    @Override
+    public List<Map<String, ?>> Listar_pu_x_sec(String id_pu) {
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql ="SELECT P.ID_PUESTO, P.NO_PUESTO\n" +
+                "FROM RHTR_PUESTO P, RHTR_SECCION S\n" +
+                "WHERE S.ID_SECCION= P.ID_SECCION\n" +
+                "AND P.ID_SECCION='"+id_pu+"'";
+            ResultSet rs = this.cnn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id_pu", rs.getString("ID_PUESTO"));
+                rec.put("nom_pu", rs.getString("NO_PUESTO"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
+    }
+
 }
