@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.model.Cuenta_Sueldo"%>
 <%@page import="pe.edu.upeu.application.dao.Carrera_UniversidadDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceCarrera_UniversidadDAO"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
@@ -12,6 +13,7 @@
 <%@page import="pe.edu.upeu.application.model.Trabajador"%>
 <%@page import="pe.edu.upeu.application.model.Trabajador"%>
 <jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Cuenta_Sueldo" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -80,13 +82,22 @@
                         out.print(trb.getCm_otros_estudios());
                     }%></td></tr>
                 <tr><td class="text-info" colspan="2" >CUENTA SUELDO</td></tr>
-                
-                <tr><td class="text-info">Banco:</td><td></td></tr>
-                <tr><td class="text-info">Nro de Cuenta:</td><td></td></tr>
-                <tr><td class="text-info">Nro de Cuenta Bancaria:</td><td></td></tr>
+                <%if(List_Cuenta_Sueldo.size()>0){%>
+                <tr><td class="text-info" colspan="2" >CUENTA SUELDO</td></tr>
+                <%for (int k = 0; k < List_Cuenta_Sueldo.size(); k++) {
+                        Cuenta_Sueldo cs = new Cuenta_Sueldo();
+                        cs = (Cuenta_Sueldo) List_Cuenta_Sueldo.get(k);
+                %>
+                <tr><td class="text-info">Banco:</td><td><%if(cs.getNo_banco()==null){out.print("no registrado");}else{out.print(cs.getNo_banco());}%></td></tr>
+                <tr><td class="text-info">Nro de Cuenta:</td><td><%if(cs.getNu_cuenta()==null){out.print("no registrado");}else{out.print(cs.getNu_cuenta());}%></td></td></tr>
+                <tr><td class="text-info">Nro de Cuenta Bancaria:</td><td><%if(cs.getNu_cuenta_banc()==null){out.print("no registrado");}else{out.print(cs.getNu_cuenta_banc());}%></td></td></tr>
                 <tr><td class="text-info">Genero Nro de Cuenta Bancaria:</td><td></td></tr>
                 <tr>
-                    <%String IDTR = trb.getId_trabajador();%>
+                    <%}
+                }else{%>
+                <tr><td class="text-info" colspan="2" >no registrado</td></tr>
+                <%}%>
+                <%String IDTR = trb.getId_trabajador();%>
                     <td colspan="2"><a class="btn btn-success" href="../../trabajador?opc=Editar_Asp_Acad&idtr=<%=IDTR%>">EDITAR</a></td>
                 </tr>
                 <%}%>
