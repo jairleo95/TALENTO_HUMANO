@@ -204,6 +204,7 @@
                                                 <label>Sección:</label><select class="sl_sec" required=""></select>
                                                 <label>Puesto:</label><select name="id_pu" class="sl_puesto" required=""></select>
                                                 <input type="hidden" value="" name="idpasos" class="id_pasos"  />
+                                                <input type="hidden" value="" name="nun" class="num_p"  />
                                                 <br>
                                                 Código Puesto :<select class="co_puesto" name="co_pasos">
                                                     <option value=""></option>
@@ -453,6 +454,37 @@
                     }
                 });
             }
+
+            function list_puesto(num) {
+                $(".lb-list_puesto").text($(".det_p_" + num).val());
+                var tbody_p = $(".tbody-puesto");
+                var texto = "";
+                $(".id_pasos").val($(".id_paso" + num).val());
+                $.post("../../paso", "opc=Paso_Puesto&id=" + $(".id_paso" + num).val(), function (objJson) {
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    tbody_p.empty();
+                    var lista = objJson.lista;
+                    for (var h = 0; h < lista.length; h++) {
+                        texto += "<tr>";
+                        texto += "<td>" + lista[h].usuario + "</td>";
+                        texto += "<td>" + lista[h].puesto + "</td>";
+                        texto += "<td>" + lista[h].area + "</td>";
+                        texto += "<td>" + lista[h].dep + "</td>";
+                        texto += "<td>" + lista[h].direccion + "</td>";
+                        texto += "<td><button type='button' class='btn_eliminar'>Eliminar</button>";
+                        texto += "<button class='btn_eliminar'>DesHabilitar</button></td>";
+                        texto += "</tr>";
+                    }
+                    tbody_p.append(texto);
+                    texto = "";
+                    $(".form_puesto").show();
+
+                });
+            }
+
             $(document).ready(function () {
                 $(".form_puesto").hide();
 
@@ -473,26 +505,7 @@
                 });
 
                 var num = 1;
-                $(".Generar").click(function () {
 
-                    $.each($(".item_req"), function () {
-                        $(this).text("P" + num);
-                        num++;
-                    });
-                    num = 1;
-
-                    for (var f = 0; f < 3; f++) {
-                        //alert($(".id_paso" + f).val() + " - " + $(".item_"+f).text());
-                       /* $.post("../../paso", "opc=Update_nu_paso&nu_paso=" + $(".item_" + f).text() + "&paso=" + $(".id_paso" + f).val(), function (objJson) {
-                            if (objJson.rpta == -1) {
-                                alert(objJson.mensaje);
-                                return;
-                            }
-                        });*/
-                    }
-
-                    Listar_Paso($("#select-proceso").val());
-                });
 
                 listar_Proceso();
                 Listar_Paso($("#select-proceso").val());
@@ -541,12 +554,15 @@
                             url: "../../Direccion_Puesto",
                             data: $(".form_puesto").serialize() + "&opc=Reg_puesto_paso"
                         }).done(function () {
+                             list_puesto($(".num_p").val());
                             alert("¡Registrado Exitosamente!");
+                           
                         }).fail(function (objJson) {
                             alert(objJson.mensaje);
+                            alert("sfsf");
 
                         });
-                        alert("aad");
+                     
 
                     } else {
                         alert("Completar campos requeridos...");
@@ -589,47 +605,11 @@
                                     '</div> </li>');
 
                         }
-                        $(".Generar").click(function () {
-                            var num = $(".tbodys tr").size();
-
-                            for (var f = 0; f < num; f++) {
-                                $(".td_num" + f).text("P" + (f + 1));
-
-                            }
-
-
-
-                        });
 
                         $(".btn-cargar-puesto").click(function () {
-
-                            $(".lb-list_puesto").text($(".det_p_" + $(this).val()).val());
-                            var tbody_p = $(".tbody-puesto");
-                            var texto = "";
-                            $(".id_pasos").val($(".id_paso" + $(this).val()).val());
-                            $.post("../../paso", "opc=Paso_Puesto&id=" + $(".id_paso" + $(this).val()).val(), function (objJson) {
-                                if (objJson.rpta == -1) {
-                                    alert(objJson.mensaje);
-                                    return;
-                                }
-                                tbody_p.empty();
-                                var lista = objJson.lista;
-                                for (var h = 0; h < lista.length; h++) {
-                                    texto += "<tr>";
-                                    texto += "<td>" + lista[h].usuario + "</td>";
-                                    texto += "<td>" + lista[h].puesto + "</td>";
-                                    texto += "<td>" + lista[h].area + "</td>";
-                                    texto += "<td>" + lista[h].dep + "</td>";
-                                    texto += "<td>" + lista[h].direccion + "</td>";
-                                    texto += "</tr>";
-                                }
-                                tbody_p.append(texto);
-
-                                texto = "";
-                                $(".form_puesto").show();
-
-                            });
-
+                            var num = $(this).val();
+                            list_puesto(num);
+                            $(".num_p").val($(this).val());
                         });
                         $(".btn-editar").click(function () {
                             $(".desc_paso").val($(".td_det" + $(this).val()).text());
@@ -658,6 +638,27 @@
                     });
 
                 }
+                $(".Generar").click(function () {
+                    var num = $(".tbodys tr").size();
+
+
+                    /*var cant=0;
+                     $.each($(".item_req"), function () {
+                     $(this).text("P" + num);
+                     num++;
+                     cant++;
+                     });
+                     num = 1;*/
+
+                    for (var f = 0; f < num; f++) {
+                        //alert($(".id_paso" + f).val() + " - " + $(".item_"+f).text());
+                        $.post("../../paso", "opc=Update_nu_paso&nu_paso=" + "P" + (f + 1) + "&paso=" + $(".id_paso" + f).val(), function (objJson) {
+                            alert("opc=Update_nu_paso&nu_paso=" + $(".item_" + f).text() + "&paso=" + $(".id_paso" + f).val());
+                        });
+                    }
+
+                    Listar_Paso($("#select-proceso").val());
+                });
 
 
                 pageSetUp();
