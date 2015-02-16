@@ -60,9 +60,16 @@ public class HorarioDAO implements InterfaceHorarioDAO {
                 Vh.setId_horario(rs.getString("id_horario"));
                 list.add(Vh);
             }
-        } catch (SQLException e) {
+         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR: "+e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }

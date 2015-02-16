@@ -5,6 +5,7 @@
  */
 package pe.edu.upeu.application.dao;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -254,6 +255,30 @@ public class PuestoDAO implements InterfacePuestoDAO {
             this.conn.close();
         }
         return list;
+    }
+
+    @Override
+    public void Registrar_Puesto_Paso(String ID_DETALLE_PASOS, String ID_PASOS, String ID_PUESTO, String ES_DETALLE_PASOS, String CO_PUESTO) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DETALLE_PASOS( ?, ?, ?, ?, ? )} ");
+            cst.setString(1, null);
+            cst.setString(2, ID_PASOS);
+            cst.setString(3, ID_PUESTO);
+            cst.setString(4, null);
+            cst.setString(5, CO_PUESTO);
+            cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR: " + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
     }
 
 }
