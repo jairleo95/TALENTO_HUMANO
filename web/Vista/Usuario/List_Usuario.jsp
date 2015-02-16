@@ -11,11 +11,16 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <title>Usuarios</title>
-
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.min.css">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
         <script src="../../js/Js_Sort/modernizr.custom.63321.js" type="text/javascript"></script>
-        <link rel="stylesheet" href="../../css/Css_Sort/style.css" />
+        <!--<link rel="stylesheet" href="../../css/Css_Sort/style.css" />
         <!--Css pannel contact-->
-        <link href="../../css/Css_Sort/stylesContact.css" rel="stylesheet" type="text/css" />
+        <!--<link href="../../css/Css_Sort/stylesContact.css" rel="stylesheet" type="text/css" />
         <!--End Css pannel contact-->
         <script type="text/javascript">
             function changeCSS(cssFile, cssLinkIndex) {
