@@ -147,7 +147,7 @@
                 <section class="funciones">
                     <label>6.Detalle de Funcion</label>
                     <label class="input">
-                        <input type="text" class=" ifun input-sm" placeholder="Nombre de la Funcion" style="height:32px;" >
+                        <input type="text" class=" ifun input-sm" placeholder="Nombre de la Funcion" style="height:32px;" maxlength="500" >
                     </label>                    
                 </section>
                 <section class="estadoF">
@@ -200,6 +200,7 @@
     <script>
         $('.alerta').hide();
         $('.informacion').hide();
+        $.post("../../funcion","opc=otorgar_funciones");
         $(document).ready(function() {
             limpiar();
             var idDireccion, idDep, idArea, idSeccion, tipoFuncion, idValue, idFuncion, idPuesto;
@@ -345,7 +346,7 @@
                             $('.informacion').fadeOut();
                             $('.informacion').fadeIn();
                             $('.msgi').text("Funcion Otorgada con exito!");
-                            $('.informacion').fadeOut(1000, function() {
+                            $('.informacion').fadeOut(700, function() {
                                 var msg = confirm("¿Desea crear una nueva funcion?");
                                 if (msg == true) {
                                     limpiar();
@@ -363,7 +364,9 @@
                             $('.informacion').fadeOut();
                             $('.informacion').fadeIn();
                             $('.msgi').text("Funcion Editada con Exito !");
-                            $('.informacion').fadeOut(1000);
+                            $('.informacion').fadeOut(700, function(){
+                                limpiar();
+                            });
                         });
                     }
                 } else {
