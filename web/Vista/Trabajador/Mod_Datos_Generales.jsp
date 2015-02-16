@@ -457,7 +457,7 @@
                                                                                         if (nac.getNo_nacionalidad().equals(t.getNo_nacionalidad())) {
                                                                                 %>
                                                                                 <option value="<%=nac.getId_nacionalidad()%>" selected="" ><%=nac.getNo_nacionalidad()%></option>
-                                                                                <%}else{%>
+                                                                                <%} else {%>
                                                                                 <option value="<%=nac.getId_nacionalidad()%>" ><%=nac.getNo_nacionalidad()%></option>
                                                                                 <%}
                                                                                     }%>
@@ -480,13 +480,13 @@
                                                                                 <%for (int d = 0; d < List_Departamento.size(); d++) {
                                                                                         Ub_Departamento dep = new Ub_Departamento();
                                                                                         dep = (Ub_Departamento) List_Departamento.get(d);
-                                                                                       if(dep.getNo_departamento().equals(t.getNo_departamento())){
+                                                                                        if (dep.getNo_departamento().equals(t.getNo_departamento())) {
                                                                                 %>
                                                                                 <option value="<%=dep.getId_departamento()%>" selected=""><%=dep.getNo_departamento()%></option>
-                                                                                <%}else{%>
+                                                                                <%} else {%>
                                                                                 <option value="<%=dep.getId_departamento()%>" ><%=dep.getNo_departamento()%></option>
                                                                                 <%}
-                                                                                }%>
+                                                                                    }%>
 
                                                                             </select>
                                                                         </div>
@@ -502,12 +502,12 @@
                                                                                 <%for (int j = 0; j < List_Provincia.size(); j++) {
                                                                                         Ub_Provincia pro = new Ub_Provincia();
                                                                                         pro = (Ub_Provincia) List_Provincia.get(j);
-                                                                                        if(pro.getNo_provincia().trim().equals(t.getNo_provincia())){%>
+                                                                                        if (pro.getNo_provincia().trim().equals(t.getNo_provincia())) {%>
                                                                                 <option value="<%=pro.getId_provincia()%>" selected=""><%=pro.getNo_provincia()%></option>
-                                                                                <%}else{%>
+                                                                                <%} else {%>
                                                                                 <option value="<%=pro.getId_provincia()%>" ><%=pro.getNo_provincia()%></option>
                                                                                 <%}
-                                                                                }%>
+                                                                                    }%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -520,16 +520,16 @@
                                                                             <select class="form-control input-group-sm" name="DISTRITO" id="dist_nac" required="">
                                                                                 <option value="" selected="">[SELECCIONE]</option>
                                                                                 <option value="DST-001832" >EXTRANJERO</option>
-                                                                                 <%for (int q = 0; q < List_Distrito.size(); q++) {
+                                                                                <%for (int q = 0; q < List_Distrito.size(); q++) {
                                                                                         Ub_Distrito dis = new Ub_Distrito();
                                                                                         dis = (Ub_Distrito) List_Distrito.get(q);
-                                                                                        if(dis.getNo_distrito().trim().equals(t.getNo_distrito())){
-                                                                                 %>
-                                                                                 <option value="<%=dis.getId_distrito()%>" selected=""><%=dis.getNo_distrito()%></option>
-                                                                                <%}else{%>      
+                                                                                        if (dis.getNo_distrito().trim().equals(t.getNo_distrito())) {
+                                                                                %>
+                                                                                <option value="<%=dis.getId_distrito()%>" selected=""><%=dis.getNo_distrito()%></option>
+                                                                                <%} else {%>      
                                                                                 <option value="<%=dis.getId_distrito()%>" ><%=dis.getNo_distrito()%></option>
                                                                                 <%}
-                                                                                }%>
+                                                                                    }%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -641,7 +641,9 @@
                                                                             <span class="input-group-addon"><i class="fa fa-group fa-lg fa-fw"></i></span>
                                                                             <select name="GRUPO_SANGUINEO" class="form-control input-group-sm"  required="">
                                                                                 <option value="">[SELECCIONE]</option>
-                                                                                <%if (t.getLi_grupo_sanguineo().trim().equals("1")) {%>
+
+                                                                                <% if (t.getLi_grupo_sanguineo() != null) {
+                                                                                        if (t.getLi_grupo_sanguineo().trim().equals("1")) {%>
                                                                                 <option value="1" selected="">A</option>
                                                                                 <option value="2">B</option>
                                                                                 <option value="3">AB</option>
@@ -664,7 +666,13 @@
                                                                                 <option value="2">B</option>
                                                                                 <option value="3">AB</option>
                                                                                 <option value="4" selected="">0</option>
-                                                                                <%}%>
+                                                                                <%}
+                                                                                } else {%>
+                                                                                <<option value="1">A</option>
+                                                                                <option value="2">B</option>
+                                                                                <option value="3">AB</option>
+                                                                                <option value="4">0</option>
+                                                                                <% }%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -676,13 +684,18 @@
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select name="FACTOR_RH_ID" class="form-control input-group-sm"  required="">
                                                                                 <option value="">[SELECCIONE]</option>
-                                                                                <%if (t.getEs_factor_rh().trim().equals("1")) {%>
+                                                                                <% if (t.getEs_factor_rh() != null) {
+                                                                                        if (t.getEs_factor_rh().trim().equals("1")) {%>
                                                                                 <option value="1" selected="">Positivo</option>
                                                                                 <option value="2">Negativo</option>
                                                                                 <%}
                                                                                     if (t.getEs_factor_rh().trim().equals("2")) {%>
                                                                                 <option value="1">Positivo</option>
                                                                                 <option value="2" selected="">Negativo</option>
+                                                                                <%}
+                                                                                } else {%>
+                                                                                <option value="1">Positivo</option>
+                                                                                <option value="2" >Negativo</option> 
                                                                                 <%}%>
                                                                             </select>
                                                                         </div>
@@ -722,7 +735,11 @@
                                                                         <label>Correo Institucional:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-envelope fa-lg fa-fw"></i></span>
-                                                                            <input type="email" name="CORREO_INST"  value="<%=t.getDi_correo_inst()%>" required=""  maxlength="100" class="form-control input-group-sm" >
+                                                                            <%if(t.getDi_correo_inst() != null ){%>
+                                                                            <input type="email" name="CORREO_INST" value="<%=t.getDi_correo_inst()%>" required=""  maxlength="100" class="form-control input-group-sm" >
+                                                                            <%}else{%>
+                                                                            <input type="email" name="CORREO_INST" value="" required=""  maxlength="100" class="form-control input-group-sm" >
+                                                                            <%}%>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -736,7 +753,8 @@
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select name="SISTEMA_PENSIONARIO" class="form-control input-group-sm"  id="sis_pens" required="">
                                                                                 <option value="">[SELECCIONE]</option>
-                                                                                <%if (t.getCo_sistema_pensionario().trim().equals("1")) {%>
+                                                                                <% if (t.getCo_sistema_pensionario() != null) {
+                                                                                        if (t.getCo_sistema_pensionario().trim().equals("1")) {%>
                                                                                 <option value="1" selected="">AFP</option>
                                                                                 <option value="2">ONP</option>
                                                                                 <option value="4">Sin Régimen Provisional(jubilado, cesante).</option>
@@ -750,6 +768,11 @@
                                                                                 <option value="1">AFP</option>
                                                                                 <option value="2">ONP</option>
                                                                                 <option value="4" selected="">Sin Régimen Provisional(jubilado, cesante).</option>
+                                                                                <%}
+                                                                                } else {%>
+                                                                                <option value="1">AFP</option>
+                                                                                <option value="2">ONP</option>
+                                                                                <option value="4">Sin Régimen Provisional(jubilado, cesante).</option>
                                                                                 <%}%>
                                                                             </select>
                                                                         </div>
@@ -763,7 +786,8 @@
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select name="NOMBRE_AFP_ID" class="form-control input-group-sm" id="nom_afp" required=""  >
                                                                                 <option value="">[SELECCIONE]</option>
-                                                                                <%if (t.getId_no_afp().trim().equals("1")) {%>
+                                                                                <% if (t.getId_no_afp() != null) {
+                                                                                        if (t.getId_no_afp().trim().equals("1")) {%>
                                                                                 <option value="1" selected="">Integra</option>
                                                                                 <option value="2">Prima</option>
                                                                                 <option value="3">Profuturo</option>
@@ -810,6 +834,14 @@
                                                                                 <option value="4">Horizonte</option>
                                                                                 <option value="5">Habitat</option>
                                                                                 <option value="6" selected="">Ninguno</option>
+                                                                                <%}
+                                                                                } else {%>
+                                                                                <option value="1">Integra</option>
+                                                                                <option value="2">Prima</option>
+                                                                                <option value="3">Profuturo</option>
+                                                                                <option value="4">Horizonte</option>
+                                                                                <option value="5">Habitat</option>
+                                                                                <option value="6">Ninguno</option> 
                                                                                 <%}%>
                                                                             </select>
                                                                         </div>
@@ -822,13 +854,18 @@
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select name="AFILIADO_ESSALUD_ID" class="form-control input-group-sm"  required="">
                                                                                 <option value="">[SELECCIONE]</option>
-                                                                                <%if (t.getEs_afiliado_essalud().trim().equals("1")) {%>
+                                                                                <%if (t.getEs_afiliado_essalud() != null) {
+                                                                                        if (t.getEs_afiliado_essalud().trim().equals("1")) {%>
                                                                                 <option value="1" selected="">Si</option>
-                                                                                <option value="2">No</option>
+                                                                                <option value="0">No</option>
                                                                                 <%}
-                                                                                    if (t.getEs_afiliado_essalud().trim().equals("2")) {%>
+                                                                                    if (t.getEs_afiliado_essalud().trim().equals("0")) {%>
                                                                                 <option value="1">Si</option>
-                                                                                <option value="2" selected="">No</option>
+                                                                                <option value="0" selected="">No</option>
+                                                                                <%}
+                                                                                } else {%>
+                                                                                <option value="1">Si</option>
+                                                                                <option value="0">No</option>
                                                                                 <%}%>
                                                                             </select>
                                                                         </div>
@@ -841,13 +878,19 @@
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select name="TIPO_TRABAJADOR_ID" class="form-control input-group-sm"  required="">
                                                                                 <option value="">[SELECCIONE]</option>
-                                                                                <%if (t.getLi_tipo_trabajador().trim().equals("T")) {%>
+
+                                                                                <% if (t.getLi_tipo_trabajador() != null){  
+                                                                                if (t.getLi_tipo_trabajador().trim().equals("T")) {%>
                                                                                 <option value="T" selected >Trabajador</option>
                                                                                 <option value="A">Alumno</option>
                                                                                 <%}
                                                                                     if (t.getLi_tipo_trabajador().trim().equals("A")) {%>
                                                                                 <option value="T">Trabajador</option>
                                                                                 <option value="A" selected="">Alumno</option>
+                                                                                <%}
+                                                                                }else{%>
+                                                                                <option value="T">Trabajador</option>
+                                                                                <option value="A">Alumno</option>
                                                                                 <%}%>
                                                                             </select>
                                                                         </div>
@@ -855,7 +898,7 @@
                                                                 </div>
                                                             </div>
                                                             <% CConversion c = new CConversion();%>
-                                                            <input type="text" value="<%=t.getFe_nac()%>">                
+                                                            <!--<input type="text" value="<%=t.getFe_nac()%>"> -->               
                                                             <%String idtr = request.getParameter("idtr");%>
                                                             <input type="hidden" name="idtr" value="<%=idtr%>"/>
                                                             <input type="hidden" name="opc" value="Modificar_Dat_Gen">

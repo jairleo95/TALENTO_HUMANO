@@ -784,7 +784,15 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-4" id="egreso" style="display: none"><label>Año Egreso:</label>
+                                                                <div class="col-sm-3">   <label>Codigo Universitario:</label>
+                                                                    <div class="form-group">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
+                                                                            <input class="form-control input-group-sm" id="doc" type="text" name="COD_UNI" maxlength="9">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3" id="egreso" style="display: none"><label>Año Egreso:</label>
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
@@ -797,7 +805,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>                        
-                                                                <div class="col-sm-4">   <label>Tipo Hora Pago Referencial:</label>
+                                                                <div class="col-sm-3">   <label>Tipo Hora Pago Referencial:</label>
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-money fa-lg fa-fw"></i></span>

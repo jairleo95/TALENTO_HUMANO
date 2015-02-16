@@ -101,8 +101,7 @@ public class CDir_Puesto extends HttpServlet {
                 rpta.put("lista", lista);
             }
             /*CIERRE*/
-            
-            
+
             if (opc.equals("Listar")) {
                 String id_dir = request.getParameter("id_dir");
                 List<Map<String, ?>> lista = dep.Listar_dep_id(id_dir);
@@ -123,6 +122,13 @@ public class CDir_Puesto extends HttpServlet {
                 rpta.put("lista", lista);
             }
             /* seleccion de id por puestos para reg_contratos*/
+            if (opc.equals("Reg_puesto_paso")) {
+                String idpu = request.getParameter("id_pu");
+                String idpasos = request.getParameter("idpasos");
+                String co_pasos = request.getParameter("co_pasos");
+                p.Registrar_Puesto_Paso(null, idpasos, idpu, null, co_pasos);
+                rpta.put("rpta", "1");
+            }
 
         } catch (Exception e) {
             rpta.put("rpta", "-1");

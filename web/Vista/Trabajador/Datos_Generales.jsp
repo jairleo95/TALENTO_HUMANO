@@ -29,7 +29,7 @@
                 %>           
                 <tr><td class="text-info">Nacionalidad:</td><td><%=trb.getNo_nacionalidad()%></td></tr>
 
-                <tr><td  class="text-info">Distrito:</td><td><%=trb.getNo_distrito()%></td></tr>
+                <tr><td  class="text-info">Dpto/Prov/Dtto</td><td><%=trb.getNo_departamento()+"/"+trb.getNo_provincia()+"/"+trb.getNo_distrito()%></td></tr>
                 <tr><td  class="text-info">Tipo Documento:</td><td>
                         <%
                             InterfaceListaDAO list = new ListaDAO();
@@ -50,65 +50,98 @@
 
                         %></td></tr>
 
-                <tr><td  class="text-info">Grupo Sanguíneo:</td><td><%                    for (int n = 0; n < list.List_Gs().size(); n++) {
-                        if (trb.getLi_grupo_sanguineo().trim().equals(n + 1 + "")) {
-                            out.println(list.List_Gs().get(n));
-                        }
-                    }
-                        %></td></tr>
+                <tr>
+                    <td  class="text-info">Grupo Sanguíneo:</td>
+                    <td>
+                        <%   if (trb.getLi_grupo_sanguineo() != null) {
+                                for (int n = 0; n < list.List_Gs().size(); n++) {
+                                    if (trb.getLi_grupo_sanguineo().trim().equals(n + 1 + "")) {
+                                        out.println(list.List_Gs().get(n));
+                                    }
+
+                                }
+                            } else {
+                                out.print("no registrado");
+                            }
+                        %>
+                    </td>
+                </tr>
                 <tr><td  class="text-info">Factor RH:</td><td><%
-                    if (trb.getEs_factor_rh().equals("1")) {
-                        out.println("Positivo");
-                    }
-                    if (trb.getEs_factor_rh().equals("2")) {
-                        out.println("Negativo");
+                    if (trb.getEs_factor_rh() != null) {
+                        if (trb.getEs_factor_rh().equals("1")) {
+                            out.println("Positivo");
+                        }
+                        if (trb.getEs_factor_rh().equals("2")) {
+                            out.println("Negativo");
+                        }
+                    } else {
+                        out.print("no registrado");
                     }
                         %></td></tr>
 
-                <tr><td  class="text-info">Telefono:</td><td><%=trb.getTe_trabajador()%></td></tr>
+                <tr><td  class="text-info">Telefono:</td>
+                    <%if(trb.getTe_trabajador() == null){%>
+                    <td>no registrado</td>
+                   <% }else{%>
+                    <td><%=trb.getTe_trabajador()%></td>
+                    <%}%>
+                </tr>
                 <tr><td  class="text-info">Celular:</td><td><%=trb.getCl_tra()%></td></tr>
                 <tr><td  class="text-info">Correo:</td><td><%=trb.getDi_correo_personal()%></td></tr>
 
 
 
                 <tr><td   class="text-info">Sistema Pensionario:</td><td><%
-                    for (int d = 0; d < list.List_Sp().size(); d++) {
-                        if (trb.getCo_sistema_pensionario().trim().equals(d + 1 + "")) {
-                            out.println(list.List_Sp().get(d));
+                    if (trb.getCo_sistema_pensionario() != null) {
+                        for (int d = 0; d < list.List_Sp().size(); d++) {
+                            if (trb.getCo_sistema_pensionario().trim().equals(d + 1 + "")) {
+                                out.println(list.List_Sp().get(d));
+                            }
                         }
-                    }                %></td></tr>
+                    } else {
+                        out.print("no registrado");
+                    }%></td></tr>
                 <tr><td  class="text-info">Nombre AFP:</td><td><%
-                    for (int w = 0; w < list.List_Nom_AFP().size(); w++) {
-                        if (trb.getId_no_afp().equals(w + 1 + "")) {
-                            out.println(list.List_Nom_AFP().get(w));
+                    if (trb.getCo_sistema_pensionario() != null) {
+                        for (int w = 0; w < list.List_Nom_AFP().size(); w++) {
+                            if (trb.getId_no_afp().equals(w + 1 + "")) {
+                                out.println(list.List_Nom_AFP().get(w));
+                            }
                         }
+                    } else {
+                        out.print("no registrado");
                     }
 
 
                         %></td></tr>
-                <tr><td  class="text-info">Afiliado a EsSalud-vida:</td><td><%             
-                    if (trb.getEs_afiliado_essalud().equals("1")) {
-                        out.println("Si");
-                    }
-                    if (trb.getEs_afiliado_essalud().equals("2")) {
-                        out.println("Si");
-                    }
-                        %></td></tr>
+                <tr><td  class="text-info">Afiliado a EsSalud-vida:</td>
+                    <td><%                        if (trb.getEs_afiliado_essalud().equals("1")) {
+                            out.println("Si");
+                        }
+                        if (trb.getEs_afiliado_essalud().equals("0")) {
+                            out.println("Si");
+                        }else{
+                         out.print("no registrado");
+                        }
+                        %></td>
+                </tr>
                 <tr><td  class="text-info">Tipo Trabajador:</td><td><%
                     if (trb.getLi_tipo_trabajador().trim().equals("T")) {
                         out.println("Trabajador");
                     }
                     if (trb.getLi_tipo_trabajador().trim().equals("A")) {
                         out.println("Alumno");
-                    }
+                    }if(trb.getLi_tipo_trabajador() == null ){
+                         out.print("no registrado");
+                        }
                         %></td></tr>
 
-               <!-- <tr><td colspan="2"><input class="btn btn-success" style="height: 140%; width: 30%;"  type="submit" value="Editar"></td></tr>-->
-                        <tr>
-                            <%String IDTR = trb.getId_trabajador(); %>
-                            <td colspan="2"><a class="btn btn-success" href="../../trabajador?opc=Editar_Dat_Gen&idtr=<%=IDTR %>">EDITAR</a></td>
-                        </tr>
-                        <%}%>
+                <!-- <tr><td colspan="2"><input class="btn btn-success" style="height: 140%; width: 30%;"  type="submit" value="Editar"></td></tr>-->
+                <tr>
+                    <%String IDTR = trb.getId_trabajador();%>
+                    <td colspan="2"><a class="btn btn-success" href="../../trabajador?opc=Editar_Dat_Gen&idtr=<%=IDTR%>">EDITAR</a></td>
+                </tr>
+                <%}%>
             </table>
         </form>
 

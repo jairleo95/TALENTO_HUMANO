@@ -41,12 +41,15 @@
 
                 </tr> 
                 <tr><td class="text-info">Dirección :</td><td><% InterfaceListaDAO l = new ListaDAO();
+                if(trb.getLi_di_dom_a_d1() != null || trb.getLi_di_dom_a_d3() != null ){
                     for (int b = 0; b < l.List_Dom_D1_Id().size(); b++) {
                         if (trb.getLi_di_dom_a_d1().trim().equals(b + 1 + "")) {
                             out.println(l.List_Dom_D1_Id().get(b));
                         }
 
                     }
+                    
+
 
                     if (trb.getLi_di_dom_a_d3().trim().equals("1")) {
                         out.println(" " + trb.getDi_dom_a_d2() + " Numero");
@@ -65,7 +68,10 @@
 
                     }
                     out.println(" " + trb.getDi_dom_a_d6());
-
+                    
+                     }else{
+                        out.print("no registrado");
+                    }
                         %></td></tr>
 
                 <tr><td class="text-info">Referencia:</td><td><%if (trb.getDe_referencia() == null) {
@@ -79,12 +85,14 @@
                 <tr><td colspan="2"><div class="title">Direccion Segun Dni</div></td></tr>
 
                 <tr><td class="text-info">Dirección :</td><td><%
+                    if(trb.getLi_di_dom_leg_d1() != null || trb.getLi_di_dom_leg_d3() != null){
                     for (int b = 0; b < l.List_Dom_D1_Id().size(); b++) {
                         if (trb.getLi_di_dom_leg_d1().trim().equals(b + 1 + "")) {
                             out.println(l.List_Dom_D1_Id().get(b));
                         }
 
                     }
+                    
 
                     if (trb.getLi_di_dom_leg_d3().trim().equals("1")) {
                         out.println(" " + trb.getDi_dom_leg_d2() + " Numero");
@@ -102,8 +110,11 @@
                         }
 
                     }
-
                     out.println(" " + trb.getDi_dom_leg_d6());
+                    
+                    }else{
+                        out.print("no registrado");
+                    }
 
                         %></td></tr>
                 <tr><td class="text-info">Distrito:</td><td><%=trb.getDi_dom_leg_distrito()%></td></tr>

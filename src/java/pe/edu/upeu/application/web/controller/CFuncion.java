@@ -58,27 +58,13 @@ public class CFuncion extends HttpServlet {
         InterfaceFuncionDAO f = new FuncionDAO();
         InterfacePuestoDAO p = new PuestoDAO();
         InterfaceDireccionDAO di = new DireccionDAO();
-        InterfaceDepartamentoDAO de = new DepartamentoDao();
-        InterfaceAreaDAO ar = new AreaDAO();
-        InterfaceSeccionDAO se = new SeccionDAO();
         /* TODO output your page here. You may use following sample code. */
         try {
             if (opc.equals("princpal_funcion")) {
-                response.sendRedirect("Vista/Funciones/Priv_Funciones.jsp");
-            }
-            if (opc.equals("listar_todo")) {
-                getServletContext().setAttribute("Listar_funciones", f.Listar_funciones());
                 getServletContext().setAttribute("Listar_Direccion", di.Listar_Direccion());
-                getServletContext().setAttribute("List_Departamento", de.List_Departamento());
-                getServletContext().setAttribute("List_Area", ar.List_Area());
-                getServletContext().setAttribute("LISTA_RH_SECCION", se.LISTA_RH_SECCION());
-                getServletContext().setAttribute("List_Puesto", p.List_Puesto());
-                response.sendRedirect("Vista/Funciones/Priv_Funciones.jsp");
+                response.sendRedirect("Vista/Funciones/Otorgar_funciones.jsp");
             }
-            if (opc.equals("Listar")) {
-                getServletContext().setAttribute("Listar_funciones", f.Listar_funciones());
-                response.sendRedirect("Vista/Funciones/List_Funciones.jsp");
-            }
+            
             if (opc.equals("listar_x_puesto")) {
                 String id_pu = request.getParameter("id_puesto");
                 List<Map<String, ?>> list = f.Listar_fun_x_pu(id_pu);
@@ -91,17 +77,12 @@ public class CFuncion extends HttpServlet {
                 rpta.put("lista", list);
             }
             if (opc.equals("listar_Direccion")) {
-                List<Map<String, ?>> list = f.Listar_Funciones();
+                List<Map<String, ?>> list = di.List_Direccion();
                 rpta.put("rpta", "1");
                 rpta.put("lista", list);
             }
             if (opc.equals("otorgar_funciones")) {
-                getServletContext().setAttribute("List_Puesto", p.List_Puesto());
-                getServletContext().setAttribute("Listar_funciones", f.Listar_funciones());
                 getServletContext().setAttribute("Listar_Direccion", di.Listar_Direccion());
-                getServletContext().setAttribute("List_Departamento", de.List_Departamento());
-                getServletContext().setAttribute("List_Area", ar.List_Area());
-                getServletContext().setAttribute("LISTA_RH_SECCION", se.LISTA_RH_SECCION());
                 response.sendRedirect("Vista/Funciones/Otorgar_funciones.jsp");
             }
             if (opc.equals("otorgar")) {
@@ -126,6 +107,30 @@ public class CFuncion extends HttpServlet {
                 String id_puesto=request.getParameter("id_pu");
                 String ti_funcion=request.getParameter("ti_funcion");
                 f.Modificar_funcion(id_funcion, es_funcion, de_funcion, id_puesto, id_user, ti_funcion);
+            }
+            if (opc.equals("direccion")){
+                String id_de=request.getParameter("idDireccion");
+                List<Map<String, ?>> list = f.Listar_dep_x_dir(id_de);
+                rpta.put("rpta", "1");
+                rpta.put("lista", list);
+            }
+            if (opc.equals("departamento")){
+                String id_de=request.getParameter("idDepartamento");
+                List<Map<String, ?>> list = f.Listar_ar_x_dep(id_de);
+                rpta.put("rpta", "1");
+                rpta.put("lista", list);
+            }
+            if (opc.equals("area")){
+                String id_de=request.getParameter("idArea");
+                List<Map<String, ?>> list = f.Listar_sec_x_area(id_de);
+                rpta.put("rpta", "1");
+                rpta.put("lista", list);
+            }
+            if (opc.equals("seccion")){
+                String id_se=request.getParameter("idSeccion");
+                List<Map<String, ?>> list = f.Listar_pu_x_sec(id_se);
+                rpta.put("rpta", "1");
+                rpta.put("lista", list);
             }
         } catch (Exception e) {
             rpta.put("rpta", "-1");
