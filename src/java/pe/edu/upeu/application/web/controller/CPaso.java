@@ -84,6 +84,10 @@ public class CPaso extends HttpServlet {
                 String CO_PASOS = request.getParameter("cod");
                 p.INSERT_PASOS(ID_PASO, ID_PROCESO, DE_PASOS, NU_PASOS, CO_PASOS);
             }
+            if (opc.equals("Eliminar_PP")) {
+                String idpp = request.getParameter("id");
+                p.DELETE_PUESTO_PASO(idpp);
+            }
 
         } catch (Exception e) {
             rpta.put("rpta", "-1");

@@ -20,5 +20,6 @@ public interface InterfacePasoDAO {
     public void DELETE_PASOS(String ID_PASOS);
     public void UPDATE_NU_PASO(String ID_PASO,String NU_PASO);
      public List<Map<String, ?>> List_Paso_x_Puesto(String id) ;
+     public void DELETE_PUESTO_PASO(String IDDP);
 
 }
