@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.model.V_Ubigeo"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
     HttpSession sesion_1 = request.getSession();
@@ -10,6 +11,7 @@
 <%@page import="pe.edu.upeu.application.model.Trabajador"%>
 <%@page import="pe.edu.upeu.application.model.Trabajador"%>
 <jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Ubigeo" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -41,83 +43,102 @@
 
                 </tr> 
                 <tr><td class="text-info">Dirección :</td><td><% InterfaceListaDAO l = new ListaDAO();
-                if(trb.getLi_di_dom_a_d1() != null || trb.getLi_di_dom_a_d3() != null ){
-                    for (int b = 0; b < l.List_Dom_D1_Id().size(); b++) {
-                        if (trb.getLi_di_dom_a_d1().trim().equals(b + 1 + "")) {
-                            out.println(l.List_Dom_D1_Id().get(b));
+                    if (trb.getLi_di_dom_a_d1() != null || trb.getLi_di_dom_a_d3() != null) {
+                        for (int b = 0; b < l.List_Dom_D1_Id().size(); b++) {
+                            if (trb.getLi_di_dom_a_d1().trim().equals(b + 1 + "")) {
+                                out.println(l.List_Dom_D1_Id().get(b));
+                            }
+
                         }
 
-                    }
-                    
-
-
-                    if (trb.getLi_di_dom_a_d3().trim().equals("1")) {
-                        out.println(" " + trb.getDi_dom_a_d2() + " Numero");
-                    }
-                    if (trb.getLi_di_dom_a_d3().trim().equals("2")) {
-                        out.println(" " + trb.getDi_dom_a_d2() + " Lote");
-                    }
-                    if (trb.getLi_di_dom_a_d3().trim().equals("3")) {
-                        out.println(" " + trb.getDi_dom_a_d2() + " S/N");
-                    }
-
-                    for (int c = 0; c < l.List_Dom_D5_Id().size(); c++) {
-                        if (trb.getLi_di_dom_a_d5().trim().equals(c + 1 + "")) {
-                            out.println(" " + trb.getDi_dom_a_d4() + " " + l.List_Dom_D5_Id().get(c));
+                        if (trb.getLi_di_dom_a_d3().trim().equals("1")) {
+                            out.println(" " + trb.getDi_dom_a_d2() + " Numero");
+                        }
+                        if (trb.getLi_di_dom_a_d3().trim().equals("2")) {
+                            out.println(" " + trb.getDi_dom_a_d2() + " Lote");
+                        }
+                        if (trb.getLi_di_dom_a_d3().trim().equals("3")) {
+                            out.println(" " + trb.getDi_dom_a_d2() + " S/N");
                         }
 
-                    }
-                    out.println(" " + trb.getDi_dom_a_d6());
-                    
-                     }else{
+                        for (int c = 0; c < l.List_Dom_D5_Id().size(); c++) {
+                            if (trb.getLi_di_dom_a_d5().trim().equals(c + 1 + "")) {
+                                out.println(" " + trb.getDi_dom_a_d4() + " " + l.List_Dom_D5_Id().get(c));
+                            }
+
+                        }
+                        out.println(" " + trb.getDi_dom_a_d6());
+
+                    } else {
                         out.print("no registrado");
                     }
                         %></td></tr>
 
-                <tr><td class="text-info">Referencia:</td><td><%if (trb.getDe_referencia() == null) {
-                        out.print("NINGUNA");
+                <tr><td class="text-info">Referencia:</td><td><%if (trb.getDi_dom_a_ref() != null) {
+                        out.print(trb.getDi_dom_a_ref());
                     } else {
-                        out.print(trb.getDe_referencia());
+                        out.print("no registrado");
                     }%></td></tr>
-                <tr><td class="text-info">Distrito:</td><td><%=trb.getDi_dom_a_distrito()%></td></tr>
+                <tr><td class="text-info">Dpto / Prov / Dtto:</td>
+                    <%
+                    for (int h = 0; h <List_Ubigeo.size(); h++){
+                        V_Ubigeo vu = new V_Ubigeo();
+                        vu = (V_Ubigeo) List_Ubigeo.get(h);
+                        if(trb.getDi_dom_a_distrito().trim().equals(vu.getNo_distrito())){%>
+                        <td><%=vu.getNo_departamento()+" / "+ vu.getNo_provincia() +" / "+ vu.getNo_distrito() %></td> 
+                        <%}
+                    }
+                %>
+                    
+                </tr>
 
 
                 <tr><td colspan="2"><div class="title">Direccion Segun Dni</div></td></tr>
 
                 <tr><td class="text-info">Dirección :</td><td><%
-                    if(trb.getLi_di_dom_leg_d1() != null || trb.getLi_di_dom_leg_d3() != null){
-                    for (int b = 0; b < l.List_Dom_D1_Id().size(); b++) {
-                        if (trb.getLi_di_dom_leg_d1().trim().equals(b + 1 + "")) {
-                            out.println(l.List_Dom_D1_Id().get(b));
+                    if (trb.getLi_di_dom_leg_d1() != null || trb.getLi_di_dom_leg_d3() != null) {
+                        for (int b = 0; b < l.List_Dom_D1_Id().size(); b++) {
+                            if (trb.getLi_di_dom_leg_d1().trim().equals(b + 1 + "")) {
+                                out.println(l.List_Dom_D1_Id().get(b));
+                            }
+
                         }
 
-                    }
-                    
-
-                    if (trb.getLi_di_dom_leg_d3().trim().equals("1")) {
-                        out.println(" " + trb.getDi_dom_leg_d2() + " Numero");
-                    }
-                    if (trb.getLi_di_dom_leg_d3().trim().equals("2")) {
-                        out.println(" " + trb.getDi_dom_leg_d2() + " Lote");
-                    }
-                    if (trb.getLi_di_dom_leg_d3().trim().equals("3")) {
-                        out.println(" " + trb.getDi_dom_leg_d2() + " S/N");
-                    }
-
-                    for (int c = 0; c < l.List_Dom_D5_Id().size(); c++) {
-                        if (trb.getLi_di_dom_leg_d5().trim().equals(c + 1 + "")) {
-                            out.println(" " + trb.getDi_dom_leg_d4() + " " + l.List_Dom_D5_Id().get(c));
+                        if (trb.getLi_di_dom_leg_d3().trim().equals("1")) {
+                            out.println(" " + trb.getDi_dom_leg_d2() + " Numero");
+                        }
+                        if (trb.getLi_di_dom_leg_d3().trim().equals("2")) {
+                            out.println(" " + trb.getDi_dom_leg_d2() + " Lote");
+                        }
+                        if (trb.getLi_di_dom_leg_d3().trim().equals("3")) {
+                            out.println(" " + trb.getDi_dom_leg_d2() + " S/N");
                         }
 
-                    }
-                    out.println(" " + trb.getDi_dom_leg_d6());
-                    
-                    }else{
+                        for (int c = 0; c < l.List_Dom_D5_Id().size(); c++) {
+                            if (trb.getLi_di_dom_leg_d5().trim().equals(c + 1 + "")) {
+                                out.println(" " + trb.getDi_dom_leg_d4() + " " + l.List_Dom_D5_Id().get(c));
+                            }
+
+                        }
+                        out.println(" " + trb.getDi_dom_leg_d6());
+
+                    } else {
                         out.print("no registrado");
                     }
 
                         %></td></tr>
-                <tr><td class="text-info">Distrito:</td><td><%=trb.getDi_dom_leg_distrito()%></td></tr>
+                <tr><td class="text-info">Dpto / Prov / Dtto</td>
+                    <%
+                    for (int h = 0; h <List_Ubigeo.size(); h++){
+                        V_Ubigeo vu = new V_Ubigeo();
+                        vu = (V_Ubigeo) List_Ubigeo.get(h);
+                        if(trb.getDi_dom_a_distrito().trim().equals(vu.getNo_distrito())){%>
+                        <td><%=vu.getNo_departamento()+" / "+ vu.getNo_provincia() +" / "+ vu.getNo_distrito() %></td> 
+                        <%}
+                    }
+                %>
+                    
+                </tr>
 
                 <tr><td colspan="2"><div class="title">Ingresos de Quinta Categoria</div></td></tr> 
                 <tr><td class="text-info">Empresa:</td><td><%if (trb.getCa_ing_qta_cat_empresa() == null) {
@@ -131,7 +152,7 @@
                         out.print(trb.getCa_ing_qta_cat_ruc());
                     }%></td></tr>
                 <tr><td class="text-info">Otras Empresas:</td><td><%if (trb.getCa_ing_qta_cat_otras_empresas() == null) {
-                        out.print("NINGUNA");
+                        out.print("no registrado");
                     } else {
                         out.print(trb.getCa_ing_qta_cat_otras_empresas());
                     }%></td></tr>
@@ -141,7 +162,7 @@
                         <div class="title">Información Religiosa</div>
                     </td>
                     <td >
-                        <input type="hidden" name="idtr" value="<%=IDTR %>">  
+                        <input type="hidden" name="idtr" value="<%=IDTR%>">  
                         <input type="hidden" type="submit" name="opc" value="Editar_Asp_Rel">  
                         <input class="btn btn-success" type="submit"  value="EDITAR">  
                     </td>
@@ -158,12 +179,12 @@
                         out.println("Otros");
                     }%></td></tr>
                 <tr><td class="text-info">Iglesia:</td><td><%if (trb.getNo_iglesia() == null) {
-                        out.print("SIN REGISTRAR");
+                        out.print("no registrado");
                     } else {
                         out.print(trb.getNo_iglesia());
                     }%></td></tr>
                 <tr><td class="text-info">Cargo en la Iglesia:</td><td><%if (trb.getDe_cargo() == null) {
-                        out.print("SIN REGISTRAR");
+                        out.print("no registrado");
                     } else {
                         out.print(trb.getDe_cargo());
                     }%></td></tr>
@@ -179,17 +200,17 @@
                             out.println("Sacerdote");
                         }
                     } else {
-                        out.print("SIN REGISTRAR");
+                        out.print("no registrado");
                     }
 
                         %></td></tr>
                 <tr><td class="text-info">Nombres y Apellidos:</td><td><%if (trb.getNo_ap_autoridad() == null) {
-                        out.print("SIN REGISTRAR");
+                        out.print("no registrado");
                     } else {
                         out.print(trb.getNo_ap_autoridad());
                     }%></td></tr>
                 <tr><td class="text-info">Telefono/Celular:</td><td><%if (trb.getCl_autoridad() == null) {
-                        out.print("SIN REGISTRAR");
+                        out.print("no registrado");
                     } else {
                         out.print(trb.getCl_autoridad());
                     }%></td></tr>

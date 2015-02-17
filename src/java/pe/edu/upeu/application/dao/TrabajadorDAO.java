@@ -341,6 +341,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 v.setId_departamento(rs.getString("id_departamento"));
                 v.setId_di_dom_a_distrito(rs.getString("id_di_dom_a_distrito"));
                 v.setId_di_dom_leg_distrito(rs.getString("id_di_dom_leg_distrito"));
+                v.setCo_universitario(rs.getString("co_universitario"));
                 list.add(v);
             }
 
@@ -643,10 +644,10 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
     }
 
     @Override
-    public void MOD_ASPEC_ACADEM(String LI_NIVEL_EDUCATIVO,String REGIMEN, String ES_INS_PERU, String CARRERA, String DE_ANNO_EGRESO, String CM_OTROS_ESTUDIOS, String CA_TIPO_HORA_PAGO_REFERENCIAL, String ID_TRABAJADOR) {
+    public void MOD_ASPEC_ACADEM(String LI_NIVEL_EDUCATIVO,String REGIMEN, String ES_INS_PERU, String CARRERA, String DE_ANNO_EGRESO, String CM_OTROS_ESTUDIOS, String CA_TIPO_HORA_PAGO_REFERENCIAL, String ID_TRABAJADOR, String CO_UNIVERSITARIO) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_TRA_ASP_ACAD( ?, ?, ?, ?, ?, ?, ?, ?)} ");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_TRA_ASP_ACAD( ?, ?, ?, ?, ?, ?, ?, ?, ?)} ");
             cst.setString(1,LI_NIVEL_EDUCATIVO);
             cst.setString(2,REGIMEN);
             cst.setString(3,ES_INS_PERU);
@@ -655,6 +656,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(6,CM_OTROS_ESTUDIOS);
             cst.setString(7,CA_TIPO_HORA_PAGO_REFERENCIAL);
             cst.setString(8,ID_TRABAJADOR);
+            cst.setString(9,CO_UNIVERSITARIO);
             cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());

@@ -171,7 +171,7 @@
                             <%} else {%>
                         <tr><td class="text-info table-bordered">Fecha de Creacion:</td><td colspan="2" class="text-info table-bordered"><%=d.getFe_creacion()%></td></tr>
                             <%}%>
-                        <tr>
+                        
                             <%out.print(Cargar_dcc_dgp.size());
                            
                         if (Cargar_dcc_dgp.size() > 0) {
@@ -179,12 +179,12 @@
                                         Detalle_Centro_Costo dcc = new Detalle_Centro_Costo();
                                         dcc = (Detalle_Centro_Costo) Cargar_dcc_dgp.get(p);
                             %>
-                            <td class="text-info table-bordered">Centro de costo Nro <%=p+1%></td><td class="text-info table-bordered"><%=dcc.getDe_centro_costo() %></td>
+                            <tr><td class="text-info table-bordered">Centro de costo Nro <%=p+1%></td><td class="text-info table-bordered"><%=dcc.getDe_centro_costo() %></td></tr>
                             <%}
                             } else {%>
-                            <td class="text-info table-bordered">Centro de costo </td><td class="text-info table-bordered">No tiene Centro de costo </td>
+                            <tr><td class="text-info table-bordered">Centro de costo </td><td class="text-info table-bordered">No tiene Centro de costo </td></tr>
                             <%}%>
-                        </tr>
+                       
                         <%if(d.getLi_motivo().equals("1")){%>
                         <tr><td class="text-info table-bordered">Motivo :</td><td colspan="2" class="text-info table-bordered">Trabajador Nuevo</td></tr>
                        <%}if(d.getLi_motivo().equals("2")){%>
