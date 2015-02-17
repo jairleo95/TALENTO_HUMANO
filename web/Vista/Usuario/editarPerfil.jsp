@@ -94,7 +94,7 @@ alert('Has dicho que no');
                             <label for="exampleInputEmail1">telefono:</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input class="form-control input-group-sm telefono"   placeholder=""  type="text" name="TEL_USUARIO" data-mask="(99) 999-9999"  maxlength="50" value="<%=vu.getTe_trabajador().trim()%> ">
+                                <input class="form-control input-group-sm telefono"   placeholder=""  type="text" name="TEL_USUARIO" data-mask="(99) 999-9999"  maxlength="50" value="<%=vu.getTe_trabajador()%> ">
 
                             </div>
                         </div>
@@ -106,7 +106,7 @@ alert('Has dicho que no');
                             <label for="exampleInputEmail1">Celular:</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input class="form-control input-group-sm telefono"    placeholder="" type="text" name="CEL_USUARIO" data-mask="(99) 999-9999" maxlength="50" value="<%=vu.getCl_tra().trim()%> ">
+                                <input class="form-control input-group-sm telefono"    placeholder="" type="text" name="CEL_USUARIO" data-mask="(99) 999-9999" maxlength="50" value="<%=vu.getCl_tra()%> ">
 
                             </div>
                         </div>
@@ -117,7 +117,7 @@ alert('Has dicho que no');
                             <label for="exampleInputEmail1">correo:</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input class="form-control input-group-sm"    placeholder="" type="text" name="CORREO_USAURIO" id="DOM_A_REFAA" maxlength="30" value="<%=vu.getDi_correo_personal().trim()%> " >
+                                <input class="form-control input-group-sm correo"    placeholder="" type="text" name="CORREO_USAURIO"  data-mask="" maxlength="30" value="<%=vu.getDi_correo_personal()%> " >
 
                             </div>
                         </div>
@@ -216,7 +216,7 @@ alert('Has dicho que no');
                                     <%for (int i = 0; i < Listar_via.size(); i++) {
                                             Via zo = new Via();
                                             zo = (Via) Listar_via.get(i);%> 
-                                    <% if (zo.getId_via().trim().equals(vu.getLi_di_dom_a_d1().trim())) {%>
+                                    <% if (zo.getId_via().equals(vu.getLi_di_dom_a_d1())) {%>
                                     <option value="<%=zo.getId_via()%>" selected=""><%=zo.getDe_via()%></option>
                                     <%} else {%>
 
@@ -236,7 +236,7 @@ alert('Has dicho que no');
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input class="form-control input-group-sm" required autofocus="" value="<%=vu.getDi_dom_a_d2().trim()%>"   placeholder="---" type="text" name="DIR_DOM_A_D2" id="DOM_A_D2" maxlength="100">
+                                <input class="form-control input-group-sm" required autofocus="" data-mask="" value="<%=vu.getDi_dom_a_d2()%>"   placeholder="" type="text" name="DIR_DOM_A_D2" id="DOM_A_D2" maxlength="100">
 
                             </div>
                         </div>
@@ -289,7 +289,7 @@ alert('Has dicho que no');
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                 <select name="DIR_DOM_A_D3_ID" id="DOM_A_D3" class="form-control input-group-sm"  required="">
                                     <option value="">[Seleccione]</option>
-                                    <%if (vu.getLi_di_dom_a_d3().trim().equals("1")) {%>
+                                    <%if (vu.getLi_di_dom_a_d3().equals("1")) {%>
                                     <option value="1" selected="">Numero</option>
                                     <option value="2">Lote</option>
                                     <option value="3">S/N</option>
@@ -299,7 +299,7 @@ alert('Has dicho que no');
                                     <option value="7">Departamento</option>
                                     <option value="8">Interior</option>
                                     <%}
-                                        if (vu.getLi_di_dom_a_d3().trim().equals("2")) {%>
+                                        if (vu.getLi_di_dom_a_d3().equals("2")) {%>
                                     <option value="1">Número</option>
                                     <option value="2" selected="">Lote</option>
                                     <option value="3">S/N</option>
@@ -309,7 +309,7 @@ alert('Has dicho que no');
                                     <option value="7">Departamento</option>
                                     <option value="8">Interior</option>
                                     <%}
-                                        if (vu.getLi_di_dom_a_d3().trim().equals("3")) {%>
+                                        if (vu.getLi_di_dom_a_d3().equals("3")) {%>
                                     <option value="1">Número</option>
                                     <option value="2" >Lote</option>
                                     <option value="3" selected="">S/N</option>
@@ -319,7 +319,7 @@ alert('Has dicho que no');
                                     <option value="7">Departamento</option>
                                     <option value="8">Interior</option>
                                     <%}
-                                        if (vu.getLi_di_dom_a_d3().trim().endsWith("4")) {%>
+                                        if (vu.getLi_di_dom_a_d3().endsWith("4")) {%>
                                     <option value="1">Número</option>
                                     <option value="2">Lote</option>
                                     <option value="3">S/N</option>
@@ -329,7 +329,7 @@ alert('Has dicho que no');
                                     <option value="7">Departamento</option>
                                     <option value="8">Interior</option>
                                     <%}
-                                        if (vu.getLi_di_dom_a_d3().trim().endsWith("5")) {%>
+                                        if (vu.getLi_di_dom_a_d3().endsWith("5")) {%>
                                     <option value="1">Número</option>
                                     <option value="2">Lote</option>
                                     <option value="3">S/N</option>
@@ -339,7 +339,7 @@ alert('Has dicho que no');
                                     <option value="7">Departamento</option>
                                     <option value="8">Interior</option>
                                     <%}
-                                        if (vu.getLi_di_dom_a_d3().trim().endsWith("6")) {%>
+                                        if (vu.getLi_di_dom_a_d3().endsWith("6")) {%>
                                     <option value="1">Número</option>
                                     <option value="2">Lote</option>
                                     <option value="3">S/N</option>
@@ -349,7 +349,7 @@ alert('Has dicho que no');
                                     <option value="7">Departamento</option>
                                     <option value="8">Interior</option>
                                     <%}
-                                        if (vu.getLi_di_dom_a_d3().trim().endsWith("7")) {%>
+                                        if (vu.getLi_di_dom_a_d3().endsWith("7")) {%>
                                     <option value="1">Número</option>
                                     <option value="2">Lote</option>
                                     <option value="3">S/N</option>
@@ -359,7 +359,7 @@ alert('Has dicho que no');
                                     <option value="7" selected="">Departamento</option>
                                     <option value="8">Interior</option>
                                     <%}
-                                        if (vu.getLi_di_dom_a_d3().trim().endsWith("8")) {%>
+                                        if (vu.getLi_di_dom_a_d3().endsWith("8")) {%>
                                     <option value="1">Número</option>
                                     <option value="2">Lote</option>
                                     <option value="3">S/N</option>
@@ -378,7 +378,7 @@ alert('Has dicho que no');
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input class="form-control input-group-sm"  required autofocus="" value="<%=vu.getDi_dom_a_d4().trim()%>"  placeholder="---" type="text" name="DIR_DOM_A_D4" id="DOM_A_D4" maxlength="50">
+                                <input class="form-control input-group-sm"  required autofocus="" data-mask="" value="<%=vu.getDi_dom_a_d4()%>"  placeholder="" type="text" name="DIR_DOM_A_D4" id="DOM_A_D4" maxlength="50">
 
                             </div>
                         </div>
@@ -398,7 +398,7 @@ alert('Has dicho que no');
                                     <%for (int i = 0; i < Listar_zona.size(); i++) {
                                             Zona zo = new Zona();
                                             zo = (Zona) Listar_zona.get(i);%> 
-                                    <% if (zo.getId_zona().trim().equals(vu.getLi_di_dom_a_d1().trim())) {%>
+                                    <% if (zo.getId_zona().equals(vu.getLi_di_dom_a_d1())) {%>
                                     <option value="<%=zo.getId_zona()%>" selected=""><%=zo.getDe_zona()%></option>
                                     <%} else {%>
 
@@ -414,7 +414,7 @@ alert('Has dicho que no');
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input class="form-control input-group-sm"  required autofocus="" value="<%=vu.getDi_dom_a_d6().trim()%>"  placeholder="---" type="text" name="DIR_DOM_A_D6" id="DOM_A_D6" maxlength="50">
+                                <input class="form-control input-group-sm"  required autofocus="" data-mask="" value="<%=vu.getDi_dom_a_d6()%>"  placeholder="" type="text" name="DIR_DOM_A_D6" id="DOM_A_D6" maxlength="50">
 
                             </div>
                         </div>
@@ -424,7 +424,7 @@ alert('Has dicho que no');
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input class="form-control input-group-sm"  required autofocus="" value="<%=vu.getDi_dom_a_ref().trim()%>"   placeholder="Referencia" type="text" name="DIR_DOM_A_REF" id="DOM_A_REF" maxlength="50">
+                                <input class="form-control input-group-sm"  required autofocus="" data-mask="" value="<%=vu.getDi_dom_a_ref()%>"   placeholder="Referencia" type="text" name="DIR_DOM_A_REF" id="DOM_A_REF" maxlength="50">
                             </div>
                         </div>
                     </div>
@@ -444,7 +444,7 @@ alert('Has dicho que no');
                                     <%for (int d = 0; d < List_Departamento.size(); d++) {
                                             Ub_Departamento dep = new Ub_Departamento();
                                             dep = (Ub_Departamento) List_Departamento.get(d);
-                                            if (dep.getId_departamento().trim().equals(vu.getId_departamento_ub().trim())) {
+                                            if (dep.getId_departamento().equals(vu.getId_departamento_ub())) {
                                     %>
                                     <option value="<%=dep.getId_departamento()%>" selected=""><%=dep.getNo_departamento()%></option>
                                     <%} else {%>
@@ -468,7 +468,7 @@ alert('Has dicho que no');
                                     <%for (int j = 0; j < List_Provincia.size(); j++) {
                                             Ub_Provincia pro = new Ub_Provincia();
                                             pro = (Ub_Provincia) List_Provincia.get(j);
-                                            if (pro.getId_provincia().trim().equals(vu.getId_provincia_ub().trim())) {%>
+                                            if (pro.getId_provincia().equals(vu.getId_provincia_ub())) {%>
                                     <option value="<%=pro.getId_provincia()%>" selected=""><%=pro.getNo_provincia()%></option>
                                     <%} else {%>
                                     <option value="<%=pro.getId_provincia()%>" ><%=pro.getNo_provincia()%></option>
@@ -495,7 +495,7 @@ alert('Has dicho que no');
                                     <%for (int q = 0; q < List_Distrito.size(); q++) {
                                             V_Ubigeo ub_d = new V_Ubigeo();
                                             ub_d = (V_Ubigeo) List_Distrito.get(q);
-                                            if (ub_d.getId_distrito().trim().equals(vu.getId_distrito_ub().trim())) {
+                                            if (ub_d.getId_distrito().equals(vu.getId_distrito_ub())) {
                                     %>
 
                                     <option value="<%=ub_d.getId_distrito()%>" selected=""><%=ub_d.getNo_distrito()%></option>
@@ -512,8 +512,8 @@ alert('Has dicho que no');
                             return false;"  class="btn btn-primary" id="btn-duplicar">Duplicar</button>-->
 
                 </div><br>
-                <input type="text" value="<%=vu.getId_trabajador().trim()%>" name="ID_TR"/>
-                <input type="text" value="<%=vu.getId_usuario().trim()%>" name="idus" />
+                <input type="text" value="<%=vu.getId_trabajador()%>" name="ID_TR"/>
+                <input type="text" value="<%=vu.getId_usuario()%>" name="idus" />
                 <input type="hidden" value="opc" name="editar_Perfil" />
                 <input type="Submit" onClick="mi_alerta()" name="opc" class="btn btn-primary" id="idus" value="Modificar" >
             
