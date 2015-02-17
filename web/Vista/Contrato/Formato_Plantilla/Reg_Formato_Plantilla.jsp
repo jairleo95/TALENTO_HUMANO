@@ -66,7 +66,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         <script>
 // The instanceReady event is fired, when an instance of CKEditor has finished
 // its initialization.
-            CKEDITOR.on('instanceReady', function(ev) {
+            CKEDITOR.on('instanceReady', function (ev) {
                 // Show the editor name and description in the browser status bar.
                 document.getElementById('eMessage').innerHTML = 'Instance <code>' + ev.editor.name + '<\/code> loaded.';
 
@@ -211,7 +211,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 ap.append("<input type='hidden' value='" + editor + "' name='valor'>");
             }
             function lis_dep(b) {
-                $.post("../../../Direccion_Puesto", "opc=Listar_direccion", function(objJson) {
+                $.post("../../../Direccion_Puesto", "opc=Listar_direccion", function (objJson) {
                     b.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -231,7 +231,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             function  lis_dir_id(d, valor) {
 
 
-                $.post("../../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + valor, function(objJson) {
+                $.post("../../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + valor, function (objJson) {
                     d.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -252,7 +252,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             function list_area_id(c, valor) {
 
 
-                $.post("../../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + valor, function(objJson) {
+                $.post("../../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + valor, function (objJson) {
                     c.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -271,7 +271,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
             }
             function list_sec_id(d, valor) {
-                $.post("../../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + valor, function(objJson) {
+                $.post("../../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + valor, function (objJson) {
                     d.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -292,7 +292,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
             function mostrar_plantilla(valor) {
                 var editor = CKEDITOR.instances.editor1;
-                $.post("../../../formato_plantilla", "opc=Listar&id=" + valor, function(objJson) {
+                $.post("../../../formato_plantilla", "opc=Listar&id=" + valor, function (objJson) {
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
                         return;
@@ -304,7 +304,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             }
             function Listar_Plantilla() {
                 var d = $(".tbody-plantilla");
-                $.post("../../../formato_plantilla", "opc=List_Plamtillas&" + "id_dir=" + $(".dir").val() + "&id_dep=" + $(".dep").val() + "&id_are=" + $(".area").val() + "&sec=" + $(".seccion").val() + "&id_pu=" + $(".puesto").val(), function(objJson) {
+                $.post("../../../formato_plantilla", "opc=List_Plamtillas&" + "id_dir=" + $(".dir").val() + "&id_dep=" + $(".dep").val() + "&id_are=" + $(".area").val() + "&sec=" + $(".seccion").val() + "&id_pu=" + $(".puesto").val(), function (objJson) {
                     d.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -336,20 +336,20 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     else {
                         d.append("<tr><td>NO HAY PLANTILLAS</td></tr>");
                     }
-                    $(".btn-cargar_pl").click(function() {
+                    $(".btn-cargar_pl").click(function () {
                         alert($(".plantilla" + $(this).val()).val());
                         mostrar_plantilla($(".plantilla" + $(this).val()).val());
                         $(".id_pl").val($(".plantilla" + $(this).val()).val());
                         $(".id_pc").val($(".id_plantilla" + $(this).val()).val());
                     });
-                    $(".btn-Desac_pl").click(function() {
+                    $(".btn-Desac_pl").click(function () {
 
                         var idpp = $(".idplpu" + $(this).val()).val();
                         var opc = "Desactivar_pp";
                         Desac_Plantilla(idpp, opc);
 
                     });
-                    $(".btn-Activ_pl").click(function() {
+                    $(".btn-Activ_pl").click(function () {
 
                         var idpp = $(".idplpu" + $(this).val()).val();
                         var opc = "activar_pp";
@@ -363,19 +363,19 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 });
             }
             function Activar_Plantilla(id_pp, opc) {
-                $.post("../../../formato_plantilla", "opc=" + opc + "&id_pp=" + id_pp, function() {
+                $.post("../../../formato_plantilla", "opc=" + opc + "&id_pp=" + id_pp, function () {
                     Listar_Plantilla();
                 });
             }
             function Desac_Plantilla(id_pp, opc) {
-                $.post("../../../formato_plantilla", "opc=" + opc + "&id_pp=" + id_pp, function() {
+                $.post("../../../formato_plantilla", "opc=" + opc + "&id_pp=" + id_pp, function () {
                     Listar_Plantilla();
                 });
             }
             function  lis_sel(d, valor, opc) {
 
 
-                $.post("../../../Direccion_Puesto", "opc=" + opc + "&" + "id=" + valor, function(objJson) {
+                $.post("../../../Direccion_Puesto", "opc=" + opc + "&" + "id=" + valor, function (objJson) {
                     d.empty();
                     var list = objJson.lista;
                     d.append("<option value='0' selected=''> [TODOS] </option>");
@@ -390,7 +390,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
             }
             function list_dir(c) {
-                $.post("../../../Direccion_Puesto", "opc=Listar_direccion", function(objJson) {
+                $.post("../../../Direccion_Puesto", "opc=Listar_direccion", function (objJson) {
                     c.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -408,37 +408,37 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 });
             }
 
-            $(document).ready(function() {
+            $(document).ready(function () {
                 var b = $(".dir");
                 lis_dep(b);
                 var c = $(".dir_as");
                 list_dir(c);
-                $("#dir").change(function() {
+                $("#dir").change(function () {
                     var d = $(".dep");
                     var valor = $("#dir").val();
                     lis_dir_id(d, valor);
                     Listar_Plantilla();
 
                 });
-                $(".dep").change(function() {
+                $(".dep").change(function () {
                     Listar_Plantilla();
                     list_area_id($(".area"), $(this).val());
 
                     //list_plantillas($(this).val());
                 });
 
-                $(".area").change(function() {
+                $(".area").change(function () {
                     var d = $(".seccion");
                     Listar_Plantilla();
                     list_sec_id(d, $(this).val());
                     //list_plantillas($(this).val());
                 });
 
-                $(".seccion").change(function() {
+                $(".seccion").change(function () {
                     //list_plantillas($(this).val());
                     Listar_Plantilla()
                     var e = $(".puesto");
-                    $.post("../../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $(this).val(), function(objJson) {
+                    $.post("../../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $(this).val(), function (objJson) {
                         e.empty();
                         if (objJson.rpta == -1) {
                             alert(objJson.mensaje);
@@ -456,33 +456,33 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         }
                     });
                 });
-                $(".puesto").change(function() {
+                $(".puesto").change(function () {
                     Listar_Plantilla();
                     //list_plantillas($(this).val());
 
                 });
-                $(".dir_as").change(function() {
+                $(".dir_as").change(function () {
                     var d = $(".dep_as");
                     var valor = $(".dir_as").val();
                     var opc = "Listar_dir_dep";
                     lis_sel(d, valor, opc);
 
                 });
-                $(".dep_as").change(function() {
+                $(".dep_as").change(function () {
                     var d = $(".area_as");
                     var valor = $(".dep_as").val();
                     var opc = "Listar_area2";
                     lis_sel(d, valor, opc);
 
                 });
-                $(".area_as").change(function() {
+                $(".area_as").change(function () {
                     var d = $(".seccion_as");
                     var valor = $(".area_as").val();
                     var opc = "Listar_sec2";
                     lis_sel(d, valor, opc);
 
                 });
-                $(".seccion_as").change(function() {
+                $(".seccion_as").change(function () {
                     var d = $(".puesto_as");
                     var valor = $(".seccion_as").val();
                     var opc = "Listar_pu_id";
@@ -570,7 +570,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                 -->
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                    <h2>Basic Form Elements </h2>
+                                    <h2>Editar Plantillas </h2>
 
                                 </header>
 
@@ -699,7 +699,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                                         focus: onFocus,
                                                         blur: onBlur,
                                                         // Check for availability of corresponding plugins.
-                                                        pluginsLoaded: function(evt) {
+                                                        pluginsLoaded: function (evt) {
 
 
                                                             var doc = CKEDITOR.document, ed = evt.editor;
@@ -709,7 +709,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                                                 doc.getById('exec-link').hide();
                                                         }
 
-                                                    }
+                                                    }, height: '1024px'
                                                 });
                                             </script>
                                             <div id="eButtons" >
@@ -842,7 +842,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
     <script type="text/javascript">
                                                     // DO NOT REMOVE : GLOBAL FUNCTIONS!
-                                                    $(document).ready(function() {
+                                                    $(document).ready(function () {
                                                         pageSetUp();
                                                     })
 
@@ -854,7 +854,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
         _gaq.push(['_trackPageview']);
 
-        (function() {
+        (function () {
             var ga = document.createElement('script');
             ga.type = 'text/javascript';
             ga.async = true;
