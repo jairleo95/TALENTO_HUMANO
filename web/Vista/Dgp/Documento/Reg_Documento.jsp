@@ -130,7 +130,7 @@
 
 
                                         <!--<form action="../../../documento" method="post" enctype="multipart/form-data" class="smart-form" novalidate="novalidate" id="checkout-form">-->
-                                        <form action="../../../documento" method="post" enctype="multipart/form-data" class="smart-form" novalidate="">
+                                        <form action="../../../documento" method="post" enctype="multipart/form-data" class="smart-form" >
 
 
 
@@ -170,7 +170,9 @@
                                                             <% if (d.getId_documento_adjunto() == null) { %>
                                                             <label class="null">No Registrado</label>
                                                             <% } else {%>   
-                                                            ¡mostrar!
+                                                            <%
+                                                                out.print(doc_.List_files(d.getId_documento_adjunto().trim()));
+                                                            %>
                                                             <% }
                                                                 } %>
 
@@ -235,7 +237,9 @@
                                                         <% if (d.getId_documento_adjunto() == null) { %>
                                                         <label class="null">No Registrado</label>
                                                         <% } else {%>
-                                                        ¡mostrar!
+                                                          <%
+                                                        out.print(doc_.List_files(d.getId_documento_adjunto().trim()));
+                                                    %>
 
                                                         <% }
                                                             }%>
@@ -312,7 +316,9 @@
                                                         <% if (d.getId_documento_adjunto() == null) { %>
                                                         <label class="null">No Registrado</label>
                                                         <% } else {%>
-                                                        ¡mostrar!
+                                                        <%
+                                                        out.print(doc_.List_files(d.getId_documento_adjunto().trim()));
+                                                    %>
 
                                                         <% }
                                                             } %>
@@ -533,17 +539,18 @@
 
                                                     if (request.getParameter("P2") != null) {
                                                         if (request.getParameter("P2").equals("TRUE")) {%>
+                                                <input  type='hidden' value='enter' name='P2'/>
 
                                                 <a class="btn btn-success" href="../../../dgp?iddgp=<%=request.getParameter("iddgp")%>&idtr=<%=request.getParameter("idtr")%>&opc=rd"><i class="fa fa-check"></i> CONTINUAR</a>
-                                                <button type="submit" class="btn btn-primary">
+                                                <button type="submit" class="btn btn-primary btn_reg_doc" style="display:none">
                                                     Registrar
                                                 </button>
                                                 <% }
                                                 } else {%>
-                                                <button type="submit" class="btn btn-primary">
+                                                <button type="submit" class="btn btn-primary btn_reg_doc">
                                                     Registrar
                                                 </button>
-                                                <button type="button" onclick="history.back()" class="btn btn-default">
+                                                <button type="button" onclick="history.back()" style="display:none" class="btn btn-default">
                                                     Atrás
                                                 </button>
 
@@ -731,6 +738,16 @@
             $(document).ready(function () {
 
                 pageSetUp();
+                $.each($(".file"), function (i) {
+
+                    if ((i + 1) == 0) {
+                        $(".btn_reg_doc").hide();
+                        alert();
+                    } else {
+                        $(".btn_reg_doc").show();
+                    }
+
+                });
 
 
 
