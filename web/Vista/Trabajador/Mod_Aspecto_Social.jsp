@@ -378,19 +378,19 @@
                                                         for (int j = 0; j < List_Ubigeo.size(); j++) {
                                                             V_Ubigeo vu = new V_Ubigeo();
                                                             vu = (V_Ubigeo) List_Ubigeo.get(j);%>
-                                                            <%if (t.getId_di_dom_a_distrito().trim().equals(vu.getId_distrito())) {%>
-                                                    <input type="hidden" value="<%=vu.getId_departamento()%>" class="dep_a">                   
-                                                    <input type="hidden" value="<%=vu.getId_provincia()%>" class="pro_a">                   
-                                                    <input type="hidden" value="<%=vu.getId_distrito()%>" class="dis_a">                   
-                                                    <%}
-                                                        if (t.getId_di_dom_leg_distrito().trim().equals(vu.getId_distrito())) {%>
-                                                    <input type="hidden" value="<%=vu.getId_departamento()%>" class="dep_leg">                   
-                                                    <input type="hidden" value="<%=vu.getId_provincia()%>" class="pro_leg">                   
-                                                    <input type="hidden" value="<%=vu.getId_distrito() %>" class="dis_leg">                   
-                                                    <%}
-                                                        }%>
+                                                <%if (t.getId_di_dom_a_distrito().trim().equals(vu.getId_distrito())) {%>
+                                                <input type="hidden" value="<%=vu.getId_departamento()%>" class="dep_a">                   
+                                                <input type="hidden" value="<%=vu.getId_provincia()%>" class="pro_a">                   
+                                                <input type="hidden" value="<%=vu.getId_distrito()%>" class="dis_a">                   
+                                                <%}
+                                                    if (t.getId_di_dom_leg_distrito().trim().equals(vu.getId_distrito())) {%>
+                                                <input type="hidden" value="<%=vu.getId_departamento()%>" class="dep_leg">                   
+                                                <input type="hidden" value="<%=vu.getId_provincia()%>" class="pro_leg">                   
+                                                <input type="hidden" value="<%=vu.getId_distrito()%>" class="dis_leg">                   
+                                                <%}
+                                                    }%>
 
-                                               
+
 
                                                 <div id="bootstrap-wizard-1" class="col-sm-12">
 
@@ -410,12 +410,15 @@
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select name="DIR_DOM_A_D1_ID" id="DOM_A_D1" class="form-control input-group-sm"  required="">
                                                                                 <option value="">[Seleccione Via]</option>
-                                                                                <%for (int w = 0; w < Listar_via.size(); w++) {
+                                                                                <%
+                                                                                    for (int w = 0; w < Listar_via.size(); w++) {
                                                                                         Via zo = new Via();
                                                                                         zo = (Via) Listar_via.get(w);
-                                                                                        if (t.getLi_di_dom_a_d1().trim().equals(zo.getId_via().trim())) {%>    
+                                                                                        if (t.getLi_di_dom_a_d1() != null) {
+                                                                                            if (t.getLi_di_dom_a_d1().trim().equals(zo.getId_via().trim())) {%>    
                                                                                 <option value="<%=zo.getId_via()%>" selected="" ><%=zo.getDe_via()%></option>
-                                                                                <%} else {%>
+                                                                                <%}
+                                                                                } else {%>
                                                                                 <option value="<%=zo.getId_via()%>"><%=zo.getDe_via()%></option>
                                                                                 <%}
                                                                                     }%>
@@ -430,7 +433,11 @@
 
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"  value="<%=t.getDi_dom_a_d2()%>" type="text" name="DIR_DOM_A_D2" id="DOM_A_D2" maxlength="100">
+                                                                            <input class="form-control input-group-sm"  value="<%if (t.getDi_dom_a_d2() != null) {
+                                                                                    out.print(t.getDi_dom_a_d2());
+                                                                                } else {
+                                                                                    out.print("");
+                                                                                }%>" type="text" name="DIR_DOM_A_D2" id="DOM_A_D2" maxlength="100">
 
                                                                             </select>
                                                                         </div>
@@ -447,10 +454,12 @@
                                                                                 <option value="">[Seleccione]</option>
                                                                                 <%for (int w = 0; w < ListarDir_Dom.size(); w++) {
                                                                                         String num = Integer.toString(w + 1);
-                                                                                        if (t.getLi_di_dom_a_d3().trim().equals(num)) {
+                                                                                        if (t.getLi_di_dom_a_d3() != null) {
+                                                                                            if (t.getLi_di_dom_a_d3().trim().equals(num)) {
                                                                                 %>    
                                                                                 <option value="<%=num%>" selected=""><%=ListarDir_Dom.get(w)%></option>
-                                                                                <%} else {%>
+                                                                                <%}
+                                                                                } else {%>
                                                                                 <option value="<%=num%>"><%=ListarDir_Dom.get(w)%></option>
                                                                                 <%}
                                                                                     }%>
@@ -483,9 +492,11 @@
                                                                                 <%for (int e = 0; e < Listar_zona.size(); e++) {
                                                                                         Zona zo = new Zona();
                                                                                         zo = (Zona) Listar_zona.get(e);
-                                                                                        if (t.getLi_di_dom_a_d5().trim().equals(zo.getId_zona().trim())) {%>    
+                                                                                        if (t.getLi_di_dom_a_d5() != null) {
+                                                                                            if (t.getLi_di_dom_a_d5().trim().equals(zo.getId_zona().trim())) {%>    
                                                                                 <option value="<%=zo.getId_zona()%>" selected=""><%=zo.getDe_zona()%></option>
-                                                                                <%} else {%>
+                                                                                <%}
+                                                                                } else {%>
                                                                                 <option value="<%=zo.getId_zona()%>"><%=zo.getDe_zona()%></option>
                                                                                 <%}
                                                                                     }%>
@@ -534,7 +545,7 @@
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select   id="pro_dir_a" class="pro_dir_a form-control input-group-sm"  required="">
-                                                                                
+
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -545,7 +556,7 @@
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select name="DIR_DOM_A_DISTRITO_ID"  id="DOM_A_DISTRITO" class="dis_dir_a form-control input-group-sm"  required="">
-                                                                                
+
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -571,9 +582,11 @@
                                                                                 <%for (int k = 0; k < Listar_via.size(); k++) {
                                                                                         Via zo = new Via();
                                                                                         zo = (Via) Listar_via.get(k);
+                                                                                        if(t.getLi_di_dom_leg_d1() != null){
                                                                                         if (t.getLi_di_dom_leg_d1().trim().equals(zo.getId_via().trim())) {%>    
                                                                                 <option value="<%=zo.getId_via()%>" selected=""><%=zo.getDe_via()%></option>
-                                                                                <%} else {%>
+                                                                                <%}
+                                                                                        }else {%>
                                                                                 <option value="<%=zo.getId_via()%>"><%=zo.getDe_via()%></option>
                                                                                 <%}
                                                                                     }%>
@@ -602,10 +615,12 @@
                                                                                 <option value="">[Seleccione]</option>
                                                                                 <%for (int x = 0; x < ListarDir_Dom.size(); x++) {
                                                                                         String num = Integer.toString(x + 1);
+                                                                                        if (t.getLi_di_dom_leg_d3() != null){
                                                                                         if (t.getLi_di_dom_leg_d3().trim().equals(num)) {
                                                                                 %>
                                                                                 <option value="<%=num%>" selected ><%=ListarDir_Dom.get(x)%></option>
-                                                                                <%} else {%>
+                                                                                <%}
+                                                                                        }else {%>
                                                                                 <option value="<%=num%>" ><%=ListarDir_Dom.get(x)%></option>
                                                                                 <% }
                                                                                     }%>
@@ -637,10 +652,12 @@
                                                                                 <%for (int q = 0; q < Listar_zona.size(); q++) {
                                                                                         Zona zo = new Zona();
                                                                                         zo = (Zona) Listar_zona.get(q);
+                                                                                        if(t.getLi_di_dom_leg_d5().trim() != null){
                                                                                         if (t.getLi_di_dom_leg_d5().trim().equals(zo.getId_zona().trim())) {
                                                                                 %>    
                                                                                 <option value="<%=zo.getId_zona()%>" selected=""><%=zo.getDe_zona()%></option>
-                                                                                <%} else {%>
+                                                                                <%}
+                                                                                        }else {%>
                                                                                 <option value="<%=zo.getId_zona()%>"><%=zo.getDe_zona()%></option>
                                                                                 <%}
                                                                                     }%>
@@ -670,7 +687,7 @@
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select   id="dep_dir_l" class="dep_dir_l form-control input-group-sm"  required="">
-                                                                                
+
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -692,7 +709,7 @@
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select   name="DIR_DOM_LEG_DISTRITO_ID"   id="DOM_LEG_DISTRITO" class="dis_dir_l form-control input-group-sm"  required="">
-                                                                                
+
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -744,7 +761,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <%String idtr = request.getParameter("idtr");%>
                                                     <input type="hidden" name="idtr" value="<%=idtr%>"/>
                                                     <input type="hidden" name="opc" value="Modificar_Asp_Soc">
@@ -1157,9 +1174,9 @@
             });
         }
         function Listar_Provincia_A() {
-           
+
             var s = $(".pro_dir_a");
-            $.post("../../ubigeo", "opc=Listar_P&"+"id_dep=" + $(".dep_a").val() , function(objJson) {
+            $.post("../../ubigeo", "opc=Listar_P&" + "id_dep=" + $(".dep_a").val(), function(objJson) {
                 s.empty();
                 var lista = objJson.lista;
                 s.append("<option value='' > [SELECCIONE] </option>");
@@ -1176,7 +1193,7 @@
         }
         function Listar_Distrito_A() {
             var s = $(".dis_dir_a");
-             $.post("../../ubigeo", "opc=Listar_Di&"+"id_pro=" + $(".pro_a").val() , function(objJson) {
+            $.post("../../ubigeo", "opc=Listar_Di&" + "id_pro=" + $(".pro_a").val(), function(objJson) {
                 s.empty();
                 var lista = objJson.lista;
                 s.append("<option value='' > [SELECCIONE] </option>");
@@ -1209,9 +1226,9 @@
             });
         }
         function Listar_Provincia_Leg() {
-           
+
             var s = $(".pro_dir_l");
-            $.post("../../ubigeo", "opc=Listar_P&"+"id_dep=" + $(".dep_leg").val() , function(objJson) {
+            $.post("../../ubigeo", "opc=Listar_P&" + "id_dep=" + $(".dep_leg").val(), function(objJson) {
                 s.empty();
                 var lista = objJson.lista;
                 s.append("<option value='' > [SELECCIONE] </option>");
@@ -1228,7 +1245,7 @@
         }
         function Listar_Distrito_Leg() {
             var s = $(".dis_dir_l");
-             $.post("../../ubigeo", "opc=Listar_Di&"+"id_pro=" + $(".pro_leg").val() , function(objJson) {
+            $.post("../../ubigeo", "opc=Listar_Di&" + "id_pro=" + $(".pro_leg").val(), function(objJson) {
                 s.empty();
                 var lista = objJson.lista;
                 s.append("<option value='' > [SELECCIONE] </option>");
@@ -1272,7 +1289,7 @@
                     );
 
                 });
-                
+
 
     </script>
     <script type="text/javascript">
