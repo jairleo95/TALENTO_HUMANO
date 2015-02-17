@@ -724,7 +724,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-4" id="es_inst_p"style="display: none">
+                                                                <div class="col-sm-4" id="es_inst_p" style="display: none">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>

@@ -11,10 +11,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production.min.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.min.css">
+        <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../css/smartadmin-production.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../css/smartadmin-skins.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
         <title>Mantenimiento de Usuarios</title>
         <!--<link rel="stylesheet" href="../CSS/estilos.css" />
@@ -54,12 +54,12 @@
     </head>
     <body class="body">
         <h1>Mantenimiento a Usuarios de  Personal</h1>
-        <form class="smart-form" action="../../Usuario">
+        <form class="smart-form form-group" action="../../Usuario">
             <div class="row">
                 <section class="col col-4">
                     <label class="label">Empleado:</label>
                     <label class="select">
-                        <select name="IDEMPLEADO">
+                        <select class="form-control" name="IDEMPLEADO">
                             <option value="">[Seleccione]</option>
                             <%for (int i = 0; i < Listar_Emp.size(); i++) {
                                     V_List_Empleado ve = new V_List_Empleado();
@@ -166,7 +166,7 @@
 
 
 </html>
-<%--<%@include file="List_Usuario.jsp" %>--%>
+<%@include file="List_Usuario.jsp" %>
 <%} else {
         response.sendRedirect("/TALENTO_HUMANO/");
     }
