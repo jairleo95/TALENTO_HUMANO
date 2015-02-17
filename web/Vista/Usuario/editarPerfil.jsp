@@ -236,7 +236,7 @@ alert('Has dicho que no');
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input class="form-control input-group-sm" required autofocus="" data-mask="" value="<%=vu.getDi_dom_a_d2()%>"   placeholder="" type="text" name="DIR_DOM_A_D2" id="DOM_A_D2" maxlength="100">
+                                <input class="form-control input-group-sm" required autofocus=""  value="<%=vu.getDi_dom_a_d2()%>"   placeholder="" type="text" name="DIR_DOM_A_D2" id="DOM_A_D2" maxlength="100">
 
                             </div>
                         </div>
