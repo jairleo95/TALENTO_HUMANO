@@ -29,7 +29,7 @@
                 %>           
                 <tr><td class="text-info">Nacionalidad:</td><td><%=trb.getNo_nacionalidad()%></td></tr>
 
-                <tr><td  class="text-info">Dpto/Prov/Dtto</td><td><%=trb.getNo_departamento()+"/"+trb.getNo_provincia()+"/"+trb.getNo_distrito()%></td></tr>
+                <tr><td  class="text-info">Dpto / Prov / Dtto</td><td><%=trb.getNo_departamento() + " / " + trb.getNo_provincia() + " / " + trb.getNo_distrito()%></td></tr>
                 <tr><td  class="text-info">Tipo Documento:</td><td>
                         <%
                             InterfaceListaDAO list = new ListaDAO();
@@ -80,9 +80,9 @@
                         %></td></tr>
 
                 <tr><td  class="text-info">Telefono:</td>
-                    <%if(trb.getTe_trabajador() == null){%>
+                    <%if (trb.getTe_trabajador() == null) {%>
                     <td>no registrado</td>
-                   <% }else{%>
+                    <% } else {%>
                     <td><%=trb.getTe_trabajador()%></td>
                     <%}%>
                 </tr>
@@ -90,9 +90,9 @@
                 <tr><td  class="text-info">Correo Personal:</td><td><%=trb.getDi_correo_personal()%></td></tr>
                 <tr>
                     <td  class="text-info">Correo Institucional:</td>
-                    <%if(trb.getDi_correo_inst() == null ){%>
+                    <%if (trb.getDi_correo_inst() == null) {%>
                     <td>no registrado</td>
-                    <%}else{%>
+                    <%} else {%>
                     <td><%=trb.getDi_correo_inst()%></td>
                     <%}%>
                 </tr>
@@ -118,16 +118,18 @@
                         out.print("no registrado");
                     }
 
-
                         %></td></tr>
                 <tr><td  class="text-info">Afiliado a EsSalud-vida:</td>
-                    <td><%                        if (trb.getEs_afiliado_essalud().equals("1")) {
-                            out.println("Si");
-                        }
-                        if (trb.getEs_afiliado_essalud().equals("0")) {
-                            out.println("Si");
-                        }else{
-                         out.print("no registrado");
+                    <td><%if (trb.getEs_afiliado_essalud() != null) {
+                            if (trb.getEs_afiliado_essalud().equals("1")) {
+                                out.println("Si");
+                            }
+                            if (trb.getEs_afiliado_essalud().equals("0")) {
+                                out.println("No");
+
+                            }
+                        } else {
+                            out.print("no registrado");
                         }
                         %></td>
                 </tr>
@@ -137,9 +139,10 @@
                     }
                     if (trb.getLi_tipo_trabajador().trim().equals("A")) {
                         out.println("Alumno");
-                    }if(trb.getLi_tipo_trabajador() == null ){
-                         out.print("no registrado");
-                        }
+                    }
+                    if (trb.getLi_tipo_trabajador() == null) {
+                        out.print("no registrado");
+                    }
                         %></td></tr>
 
                 <!-- <tr><td colspan="2"><input class="btn btn-success" style="height: 140%; width: 30%;"  type="submit" value="Editar"></td></tr>-->

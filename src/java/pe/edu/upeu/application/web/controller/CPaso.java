@@ -74,7 +74,6 @@ public class CPaso extends HttpServlet {
             if (opc.equals("Update_nu_paso")) {
                 String ID_PASO = request.getParameter("paso");
                 String NU_PASO = request.getParameter("nu_paso");
-
                 p.UPDATE_NU_PASO(ID_PASO, NU_PASO);
             }
             if (opc.equals("Modificar")) {
@@ -84,6 +83,10 @@ public class CPaso extends HttpServlet {
                 String NU_PASOS = request.getParameter("num");
                 String CO_PASOS = request.getParameter("cod");
                 p.INSERT_PASOS(ID_PASO, ID_PROCESO, DE_PASOS, NU_PASOS, CO_PASOS);
+            }
+            if (opc.equals("Eliminar_PP")) {
+                String idpp = request.getParameter("id");
+                p.DELETE_PUESTO_PASO(idpp);
             }
 
         } catch (Exception e) {

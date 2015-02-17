@@ -387,25 +387,17 @@
                                 <!-- widget div-->
                                 <div>
 
-                                    <!-- widget edit box -->
-                                    <div class="jarviswidget-editbox">
-                                        <!-- This area used as dropdown edit box -->
-
-                                    </div>
-                                    <!-- end widget edit box -->
 
                                     <!-- widget content -->
                                     <div class="widget-body">
 
                                         <div class="row">
-                                            <form id="wizard-1" novalidate="novalidate" action="../../trabajador">
-                                                <%for (int i = 0; i < ListaridTrabajador.size(); i++) {
-                                                        V_Ficha_Trab_Num_C t = new V_Ficha_Trab_Num_C();
-                                                        t = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(i);
-                                                %>
-
-                                                <div id="bootstrap-wizard-1" class="col-sm-12">
-
+                                            <div id="bootstrap-wizard-1" class="col-sm-12">
+                                                <form id="wizard-1" novalidate="novalidate" action="../../trabajador">
+                                                    <%for (int i = 0; i < ListaridTrabajador.size(); i++) {
+                                                            V_Ficha_Trab_Num_C t = new V_Ficha_Trab_Num_C();
+                                                            t = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(i);
+                                                    %>
                                                     <div class="tab-content">
                                                         <div class="tab-pane active" id="tab1">
 
@@ -639,7 +631,7 @@
 
                                                         </div>
                                                         <input type="hidden" value="<%=List_Cuenta_Sueldo.size()%>" class="sizecs"/>
-                                                        <div id="cajacs">           
+                                                        <div >           
                                                             <h3>- Cuenta Sueldo </h3>
                                                             <div class="col-sm-4" id="" >
                                                                 <div class="form-group">
@@ -725,7 +717,7 @@
                                                             </div> 
 
                                                             <%}
-                                                            List_Cuenta_Sueldo.clear(); %>
+                                                                List_Cuenta_Sueldo.clear(); %>
                                                             <input type="hidden" value="0" name="ES_CUENTA_SUELDO" id="es_cuenta"/>
 
                                                             <%String idtr = request.getParameter("idtr");%>
@@ -733,137 +725,137 @@
                                                             <input type="hidden" name="opc" value="Modificar_Asp_Acad">
                                                         </div>
                                                     </div>
-                                                    <footer>
+                                                    <div >
                                                         <center>
                                                             <button type="submit" value="" name="opc"> MODIFICAR</button>
                                                         </center>
-                                                    </footer>
+                                                    </div>
                                                     <%}%>
 
-                                            </form>
+                                                </form>
+                                            </div>
                                         </div>
+
+
+
                                     </div>
-
-
+                                    <!-- end widget content -->
 
                                 </div>
-                                <!-- end widget content -->
+                                <!-- end widget div -->
 
                             </div>
-                            <!-- end widget div -->
+                            <!-- end widget -->
+
+                        </article>
+                        <!-- WIDGET END -->
+
 
                     </div>
-                    <!-- end widget -->
 
-                    </article>
-                    <!-- WIDGET END -->
+                    <!-- end row -->
+
+                </section>
+                <!-- end widget grid -->
 
 
             </div>
+            <!-- END MAIN CONTENT -->
 
-            <!-- end row -->
+        </div>
+    <center>                                                                     
 
-        </section>
-        <!-- end widget grid -->
-
-
-    </div>
-    <!-- END MAIN CONTENT -->
-
-</div>
-<center>                                                                     
-
-    <button  data-toggle="modal" data-target="#myModal" id="btn-mostrar" hidden="">
-        Launch demo modal
-    </button>
-</center>
-<!-- END MAIN PANEL -->
+        <button  data-toggle="modal" data-target="#myModal" id="btn-mostrar" hidden="">
+            Launch demo modal
+        </button>
+    </center>
+    <!-- END MAIN PANEL -->
 
 
-<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-<script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
+    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+    <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
 
-<!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-<script>
+    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script>
             if (!window.jQuery) {
                 document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
             }
-</script>
+    </script>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-<script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script>
             if (!window.jQuery.ui) {
                 document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
             }
-</script>
+    </script>
 
-<!-- IMPORTANT: APP CONFIG -->
-<script src="../../js/app.config.js"></script>
+    <!-- IMPORTANT: APP CONFIG -->
+    <script src="../../js/app.config.js"></script>
 
-<!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
-<script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
+    <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
+    <script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
 
-<!-- BOOTSTRAP JS -->
-<script src="../../js/bootstrap/bootstrap.min.js"></script>
+    <!-- BOOTSTRAP JS -->
+    <script src="../../js/bootstrap/bootstrap.min.js"></script>
 
-<!-- CUSTOM NOTIFICATION -->
-<script src="../../js/notification/SmartNotification.min.js"></script>
+    <!-- CUSTOM NOTIFICATION -->
+    <script src="../../js/notification/SmartNotification.min.js"></script>
 
-<!-- JARVIS WIDGETS -->
-<script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
+    <!-- JARVIS WIDGETS -->
+    <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
 
-<!-- EASY PIE CHARTS -->
-<script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+    <!-- EASY PIE CHARTS -->
+    <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
 
-<!-- SPARKLINES -->
-<script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
+    <!-- SPARKLINES -->
+    <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
 
-<!-- JQUERY VALIDATE -->
-<script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
+    <!-- JQUERY VALIDATE -->
+    <script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
 
-<!-- JQUERY MASKED INPUT -->
-<script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+    <!-- JQUERY MASKED INPUT -->
+    <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
 
-<!-- JQUERY SELECT2 INPUT -->
-<script src="../../js/plugin/select2/select2.min.js"></script>
+    <!-- JQUERY SELECT2 INPUT -->
+    <script src="../../js/plugin/select2/select2.min.js"></script>
 
-<!-- JQUERY UI + Bootstrap Slider -->
-<script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+    <!-- JQUERY UI + Bootstrap Slider -->
+    <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
 
-<!-- browser msie issue fix -->
-<script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+    <!-- browser msie issue fix -->
+    <script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
 
-<!-- FastClick: For mobile devices -->
-<script src="../../js/plugin/fastclick/fastclick.min.js"></script>
+    <!-- FastClick: For mobile devices -->
+    <script src="../../js/plugin/fastclick/fastclick.min.js"></script>
 
-<!--[if IE 8]>
+    <!--[if IE 8]>
+    
+    <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+    
+    <![endif]-->
 
-<h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+    <!-- Demo purpose only -->
+    <script src="../../js/demo.min.js"></script>
 
-<![endif]-->
+    <!-- MAIN APP JS FILE -->
+    <script src="../../js/app.min.js"></script>
 
-<!-- Demo purpose only -->
-<script src="../../js/demo.min.js"></script>
+    <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
+    <!-- Voice command : plugin -->
+    <script src="../../js/speech/voicecommand.min.js"></script>
 
-<!-- MAIN APP JS FILE -->
-<script src="../../js/app.min.js"></script>
-
-<!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
-<!-- Voice command : plugin -->
-<script src="../../js/speech/voicecommand.min.js"></script>
-
-<!-- PAGE RELATED PLUGIN(S) -->
-<script src="../../js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
-<script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
-<script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
-<script>$(document).ready(function() {
+    <!-- PAGE RELATED PLUGIN(S) -->
+    <script src="../../js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+    <script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
+    <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
+    <script>$(document).ready(function() {
                 var size_suenta_sueldo = $(".sizecs");
-                if(size_suenta_sueldo.val(0)){
-                    $("#cajacs").hide();
+                if (size_suenta_sueldo.val(0)) {
+                   $("#banco").attr("disabled", true);
                 }
-    
-    
+
+
                 var p = 1;
                 var texto_h = "";
                 $(".btn-reg-hijo").click(function() {
@@ -962,734 +954,734 @@
 
                 });
             });</script>
-<script>
-    $(document).ready(
-            function() {
-                $("#no_cuen").hide();
-                $("#no_cuen_ban").hide();
-                $("#generar").hide();
-                $("#no_cuen_otros").hide();
-                if ($("#banco").val() == "1") {
-                    $("#no_cuen").show();
-                }
-                if ($("#banco").val() == "2") {
-                    $("#no_cuen").show();
-                }
-                if ($("#banco").val() == "3") {
-                    $("#no_cuen").show();
-                    $("#no_cuen_ban").show();
-                    $("#no_cuen_otros").show();
-                }
-                if ($("#banco").val() == "0") {
-                    $("#generar").show();
-                    $("#no_cuen_otros").show();
-                }
-
-                //alert($("#es_cuenta").val());
-
-                $(".fecha").keyup(function() {
-
-                    /*var arr_date = $(this).val().split("-");
-                     if (arr_date[0].length > 4) {
-                     //return false;
-                     $(this).val("");
-                     $(".edad").val("");
-                     alert("fecha no valida");
-                     
-                     }*/
-
-                });
-
-                $("#banco").change(function() {
-                    cuenta_bancaria($(this).val());
-                    $("#es_cuenta").val(1);
-                    //  alert($("#es_cuenta").val());
-                });
-
-                $("#es_civil").change(function() {
-                    estado_civil($(this).val());
-                });
-                $("#DOM_A_D3").change(
-                        function() {
-                            if ($("#DOM_A_D3").val() == "3") {
-                                $("#DOM_A_D4").val("Sin Numero");
-                            } else {
-
-                                $("#DOM_A_D4").val("");
-                            }
-
-                        }
-                );
-                $("#DOM_LEG_D3").change(
-                        function() {
-                            if ($("#DOM_LEG_D3").val() == "3") {
-                                $("#DOM_LEG_D4").val("Sin Numero");
-                            } else {
-
-                                $("#DOM_LEG_D4").val("");
-                            }
-
-                        }
-                );
-                $("#reli").change(
-                        function() {
-                            if ($("#reli").val() == "1") {
-                                $("#igle").attr("required", "required")
-                            } else {
-
-                                $("#igle").removeAttr("required");
-                            }
-
-                        }
-                );
-
-            });
-
-</script>
-<script>
-    function estado_civil(es_civil) {
-        if (es_civil == '1' || es_civil == '3' || es_civil == '4' || es_civil == '5') {
-            // alert("estado civil");
-
-            //REMOVE REQUIRED
-            $("#tra_upeu_con").removeAttr('required');
-            $("#nom_ape_con").removeAttr('required');
-            $("#nac_con").removeAttr('required');
-            $("#doc_con").removeAttr('required');
-            $("#num_con").removeAttr('required');
-            $("#ins_vig_con").removeAttr('required');
-
-            //ADD DISABLED
-            document.getElementById("tra_upeu_con").disabled = true;
-            document.getElementById("nom_ape_con").disabled = true;
-            document.getElementById("nac_con").disabled = true;
-            document.getElementById("doc_con").disabled = true;
-            document.getElementById("num_con").disabled = true;
-            document.getElementById("ins_vig_con").disabled = true;
-        }
-        if (es_civil == '2' || es_civil == '6') {
-            // alert("estado civil");
-
-            //REMOVE REQUIRED
-            $("#tra_upeu_con").attr("required", "required");
-            $("#nom_ape_con").attr("required", "required");
-            $("#nac_con").attr("required", "required");
-            $("#doc_con").attr("required", "required");
-            $("#num_con").attr("required", "required");
-            $("#ins_vig_con").removeAttr("required", "required");
-
-            //ADD DISABLED
-            document.getElementById("tra_upeu_con").disabled = false;
-            document.getElementById("nom_ape_con").disabled = false;
-            document.getElementById("nac_con").disabled = false;
-            document.getElementById("doc_con").disabled = false;
-            document.getElementById("num_con").disabled = false;
-            document.getElementById("ins_vig_con").disabled = false;
-        }
-
-    }
-
-    function cuenta_bancaria(banco) {
-
-        if (banco == '1') {
-            $("#generar").hide();
-            $("#no_cuen").show();
-            $("#nu_cuen").val("");
-            $("#nu_cuen").attr("required", "required");
-            $("#no_cuen_ban").hide();
-            $("#nu_cuen_ban").val("");
-            $("#subscription").attr('checked', false);
-            $("#nu_cuen").attr("maxlength", "21");
-            $("#nu_cuen").mask("0011-9999999999999999", {placeholder: "X"});
-            $("#no_cuen_otros").hide();
-            $("#nu_cuen_otros").val("");
-        }
-        if (banco == '2') {
-            $("#generar").hide();
-            $("#subscription").attr('checked', false);
-            $("#no_cuen_ban").hide();
-            $("#nu_cuen_ban").val("");
-            $("#no_cuen").show();
-            $("#nu_cuen").val("");
-            $("#nu_cuen").attr("required", "required");
-            $("#nu_cuen").attr("maxlength", "14");
-            $("#nu_cuen").mask("99999999999999", {placeholder: "X"});
-            $("#no_cuen_otros").hide();
-            $("#nu_cuen_otros").val("");
-        }
-        if (banco == '3') {
-            $("#no_cuen").show();
-            $("#no_cuen").val("");
-            $("#nu_cuen").attr("required", "required");
-            $("#no_cuen_ban").show();
-            $("#no_cuen_ban").val("");
-            $("#nu_cuen_ban").attr("required", "required");
-            $("#no_cuen_otros").show();
-            $("#nu_cuen_otros").val("");
-            $("#nu_cuen_otros").attr("required", "required");
-            $("#generar").hide();
-            $("#subscription").attr('checked', false);
-            document.getElementById("nu_cuen_otros").disabled = false;
-        }
-        if (banco == '0') {
-            $("#no_cuen").hide();
-            $("#nu_cuen").val("");
-            $("#no_cuen_ban").hide();
-            $("#nu_cuen_ban").val("");
-            $("#no_cuen_otros").show();
-            $("#nu_cuen_otros").val("BBVA Banco Continental");
-            document.getElementById("nu_cuen_otros").disabled = true;
-            $("#generar").show();
-            $("#subscription").attr("required", "required");
-            $("#nu_cuen_otros").attr("required", "required");
-        }
-
-    }
-
-</script> 
-<script>
-    $(document).ready(
-            function() {
-                $("#sis_pens").change(
-                        function() {
-                            if ($("#sis_pens").val() != "1") {
-                                $(".n_afp").remove();
-                                $("#nom_afp").attr("disabled", true);
-                                $(".afp").append('<input name="NOMBRE_AFP_ID" type="hidden" class="n_afp" value="6"/>');
-                                $("#nom_afp").val("6");
-                            }
-                            if ($("#sis_pens").val() == "1") {
-
-                                $("#nom_afp").val("");
-                                $("#nom_afp").removeAttr("disabled");
-                                $(".n_afp").remove();
-                            }
-                        }
-                );
-
-            });
-
-</script>
-<script type="text/javascript">
-
-    // DO NOT REMOVE : GLOBAL FUNCTIONS!
-
-    $(document).ready(function() {
-
-        pageSetUp();
-
-
-
-
-        var $validator = $("#wizard-1").validate({
-            rules: {
-                email: {
-                    required: true,
-                    email: "Your email address must be in the format of name@domain.com"
-                },
-                FECHA_NAC: {
-                    required: true,
-                    val_fecha: true
-                }
-                ,
-                FECHA_NAC_H: {
-                    val_fecha: true
-                }
-                ,
-                fname: {
-                    required: true
-                },
-                lname: {
-                    required: true
-                },
-                country: {
-                    required: true
-                },
-                city: {
-                    required: true
-                },
-                postal: {
-                    required: true,
-                    minlength: 4
-                },
-                wphone: {
-                    required: true,
-                    minlength: 10
-                },
-                hphone: {
-                    required: true,
-                    minlength: 10
-                }
-            },
-            messages: {
-                fname: "Please specify your First name",
-                lname: "Please specify your Last name",
-                email: {
-                    required: "We need your email address to contact you",
-                    email: "Your email address must be in the format of name@domain.com"
-                }
-            },
-            highlight: function(element) {
-                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-            },
-            unhighlight: function(element) {
-                $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
-            },
-            errorElement: 'span',
-            errorClass: 'help-block',
-            errorPlacement: function(error, element) {
-                if (element.parent('.input-group').length) {
-                    error.insertAfter(element.parent());
-                } else {
-                    error.insertAfter(element);
-                }
-            }
-        });
-        jQuery.validator.addMethod("val_fecha", function(value, element) {
-            var d = value.split("-");
-            return this.optional(element) || String(parseInt(d[0])).length == 4;
-        }, "¡Fecha ingresada invalida!");
-
-        $('#bootstrap-wizard-1').bootstrapWizard({
-            'tabClass': 'form-wizard',
-            'onNext': function(tab, navigation, index) {
-                var $valid = $("#wizard-1").valid();
-                if (!$valid) {
-                    $validator.focusInvalid();
-                    return false;
-                } else {
-                    $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass(
-                            'complete');
-                    $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).find('.step')
-                            .html('<i class="fa fa-check"></i>');
-                }
-            }
-        });
-
-
-        // fuelux wizard
-        var wizard = $('.wizard').wizard();
-
-        wizard.on('finished', function(e, data) {
-            //$("#fuelux-wizard").submit();
-            //console.log("submitted!");
-            $.smallBox({
-                title: "Congratulations! Your form was submitted",
-                content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
-                color: "#5F895F",
-                iconSmall: "fa fa-check bounce animated",
-                timeout: 4000
-            });
-
-        });
-
-
-    })
-
-</script>
-
-<!-- Your GOOGLE ANALYTICS CODE Below -->
-<script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-        var ga = document.createElement('script');
-        ga.type = 'text/javascript';
-        ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(ga, s);
-    })();
-
-</script>
-
-<!--Solo numeros -->
-<script type="text/javascript">
-    $("#docs, .doc_c").numeric();
-    $("#doc, .doc_c").numeric(false, function() {
-        alert("Solo Numeros Enteros");
-        this.value = "";
-        this.focus();
-    });
-    $(".positive").numeric({negative: false}, function() {
-        alert("No negative values");
-        this.value = "";
-        this.focus();
-    });
-    $(".positive-integer").numeric({decimal: false, negative: false}, function() {
-        alert("Positive integers only");
-        this.value = "";
-        this.focus();
-    });
-
-    $("#remove").click(
-            function(e)
-            {
-                e.preventDefault();
-                $(".numeric,.integer,.positive").removeNumeric();
-            }
-    );
-</script>
-
-<!--boton duplicar-->
-<script>
-    function  duplicar() {
-
-        var DAD1 = $("#DOM_A_D1").val();
-        var DAD2 = $("#DOM_A_D2").val();
-        var DAD3 = $("#DOM_A_D3").val();
-        var DAD4 = $("#DOM_A_D4").val();
-        var DAD5 = $("#DOM_A_D5").val();
-        var DAD6 = $("#DOM_A_D6").val();
-
-        var DEP_A = $("#dep_dir_a").val();
-
-
-        var DADIS = $("#DOM_A_DISTRITO").val();
-        var PRO_ACT = $("#pro_dir_a").val();
-
-        $("#DOM_LEG_D1").val(DAD1);
-        $("#DOM_LEG_D2").val(DAD2);
-        $("#DOM_LEG_D3").val(DAD3);
-        $("#DOM_LEG_D4").val(DAD4);
-        $("#DOM_LEG_D5").val(DAD5);
-        $("#DOM_LEG_D6").val(DAD6);
-        $("#DOM_LEG_DISTRITO").val(DADIS);
-        $("#dep_dir_l").val(DEP_A);
-        $("#pro_dir_l").val(PRO_ACT);
-
-    }
-
-
-</script>
-<!--Select dinamicos-->
-<script type="text/javascript">
-    /*Ubigeo*/
-    $("#dep_nac").change(function() {
-        var ti = $("#pro_nac");
-        ti.empty();
-        var rg = $("#dep_nac").val();
-        var data = "id_dep=" + rg + "&opc=dep_nac";
-        ti.append('<option value="">Cargando...</option>').val('');
-        $.post("../../ubigeo", data, function(objJson) {
-            ti.empty();
-            if (objJson.rpta == -1) {
-                alert(objJson.mensaje);
-                return;
-            }
-            var lista = objJson.lista;
-            if (lista.length > 0) {
-                ti.append("<option value=''>[Seleccione]</option>");
-            } else {
-                ti.append("<option value=''>[]</option>");
-            }
-            for (var i = 0; i < lista.length; i++) {
-                var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                ti.append(item);
-            }
-        });
-    });
-    $("#pro_nac").change(function() {
-        var ti = $("#dist_nac");
-        ti.empty();
-        var rg = $("#pro_nac").val();
-        var data = "id_dist=" + rg + "&opc=pro_nac";
-        ti.append('<option value="">Cargando...</option>').val('');
-        $.post("../../ubigeo", data, function(objJson) {
-            ti.empty();
-            if (objJson.rpta == -1) {
-                alert(objJson.mensaje);
-                return;
-            }
-            var lista = objJson.lista;
-            if (lista.length > 0) {
-                ti.append("<option value=''>[Seleccione]</option>");
-            } else {
-                ti.append("<option value=''>[]</option>");
-            }
-            for (var i = 0; i < lista.length; i++) {
-                var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                ti.append(item);
-            }
-        });
-    });
-    $("#dep_dir_a").change(function() {
-        var ti = $("#pro_dir_a");
-        ti.empty();
-        var rg = $("#dep_dir_a").val();
-        var data = "id_dep=" + rg + "&opc=dep_nac";
-        ti.append('<option value="">Cargando...</option>').val('');
-        $.post("../../ubigeo", data, function(objJson) {
-            ti.empty();
-            if (objJson.rpta == -1) {
-                alert(objJson.mensaje);
-                return;
-            }
-            var lista = objJson.lista;
-            if (lista.length > 0) {
-                ti.append("<option value=''>[Seleccione]</option>");
-            } else {
-                ti.append("<option value=''>[]</option>");
-            }
-            for (var i = 0; i < lista.length; i++) {
-                var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                ti.append(item);
-            }
-        });
-    });
-    $("#pro_dir_a").change(function() {
-        var ti = $("#DOM_A_DISTRITO");
-        ti.empty();
-        var rg = $("#pro_dir_a").val();
-        var data = "id_dist=" + rg + "&opc=pro_nac";
-        ti.append('<option value="">Cargando...</option>').val('');
-        $.post("../../ubigeo", data, function(objJson) {
-            ti.empty();
-            if (objJson.rpta == -1) {
-                alert(objJson.mensaje);
-                return;
-            }
-            var lista = objJson.lista;
-            if (lista.length > 0) {
-                ti.append("<option value=''>[Seleccione]</option>");
-            } else {
-                ti.append("<option value=''>[]</option>");
-            }
-            for (var i = 0; i < lista.length; i++) {
-                var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                ti.append(item);
-            }
-        });
-    });
-    $("#dep_dir_l").change(function() {
-        var ti = $("#pro_dir_l");
-        ti.empty();
-        var rg = $("#dep_dir_l").val();
-        var data = "id_dep=" + rg + "&opc=dep_nac";
-        ti.append('<option value="">Cargando...</option>').val('');
-        $.post("../../ubigeo", data, function(objJson) {
-            ti.empty();
-            if (objJson.rpta == -1) {
-                alert(objJson.mensaje);
-                return;
-            }
-            var lista = objJson.lista;
-            if (lista.length > 0) {
-                ti.append("<option value=''>[Seleccione]</option>");
-            } else {
-                ti.append("<option value=''>[]</option>");
-            }
-            for (var i = 0; i < lista.length; i++) {
-                var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                ti.append(item);
-            }
-        });
-    });
-    $("#pro_dir_l").change(function() {
-        var ti = $("#DOM_LEG_DISTRITO");
-        ti.empty();
-        var rg = $("#pro_dir_l").val();
-        var data = "id_dist=" + rg + "&opc=pro_nac";
-        ti.append('<option value="">Cargando...</option>').val('');
-        $.post("../../ubigeo", data, function(objJson) {
-            ti.empty();
-            if (objJson.rpta == -1) {
-                alert(objJson.mensaje);
-                return;
-            }
-            var lista = objJson.lista;
-            if (lista.length > 0) {
-                ti.append("<option value=''>[Seleccione]</option>");
-            } else {
-                ti.append("<option value=''>[]</option>");
-            }
-            for (var i = 0; i < lista.length; i++) {
-                var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                ti.append(item);
-            }
-        });
-    });
-
-
-
-
-    /*Datos Academicos*/
-    $("#rg").change(function() {
-        var ti = $("#ti_inst");
-        ti.empty();
-        var rg = $("#rg").val();
-        var data = "regimen=" + rg + "&opc=ti_inst";
-
-        ti.append('<option value="">Cargando...</option>').val('');
-        $.post("../../detalle_carrera", data, function(objJson) {
-            ti.empty();
-            if (objJson.rpta == -1) {
-                alert(objJson.mensaje);
-                return;
-            }
-            var lista = objJson.lista;
-            if (lista.length > 0) {
-                ti.append("<option value=''>[Seleccione]</option>");
-            } else {
-                ti.append("<option value=''>[]</option>");
-            }
-            for (var i = 0; i < lista.length; i++) {
-                var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                ti.append(item);
-            }
-        });
-    });
-
-
-    $("#ti_inst").change(function() {
-        var inst = $("#inst");
-        inst.empty();
-        var ti = $("#ti_inst").val();
-        /* if (sucursal == '000') {
-         return;
-         }*/
-        var data = "ti=" + ti + "&opc=institucion";
-        inst.append('<option value="">Cargando...</option>').val('');
-        $.post("../../detalle_carrera", data, function(objJson) {
-            inst.empty();
-            if (objJson.rpta == -1) {
-                alert(objJson.mensaje);
-                return;
-            }
-            var lista = objJson.lista;
-            if (lista.length > 0) {
-                inst.append("<option value='0'>[Seleccione]</option>");
-            } else {
-                inst.append("<option value='0'>[]</option>");
-            }
-            for (var i = 0; i < lista.length; i++) {
-                var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                inst.append(item);
-            }
-        });
-    });
-
-    $("#inst").change(function() {
-        var carr = $("#carrera");
-        carr.empty();
-        var insti = $("#inst").val();
-        /* if (sucursal == '000') {
-         return;
-         }*/
-        var data = "inst=" + insti + "&opc=carrera";
-        carr.append('<option value="">Cargando...</option>').val('');
-        $.post("../../detalle_carrera", data, function(objJson) {
-            carr.empty();
-            if (objJson.rpta == -1) {
-                alert(objJson.mensaje);
-                return;
-            }
-            var lista = objJson.lista;
-            if (lista.length > 0) {
-                carr.append("<option value='0'>[Seleccione]</option>");
-            } else {
-                carr.append("<option value='0'>[]</option>");
-            }
-            for (var i = 0; i < lista.length; i++) {
-                var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                carr.append(item);
-            }
-        });
-    });
-    /*$("#cboCuenta").change(function() {
-     var cuenta = $("#cboCuenta").val();
-     if (cuenta == "0") {
-     return;
-     }
-     alert("Cuenta: " + cuenta);
-     });*/
-</script>
-<script>
-    $(document).ready(function() {
-        var b = $(".tbodys");
-
-        $("#btnfiltrar").click(
+    <script>
+        $(document).ready(
                 function() {
-
-
-                    $.post("../../ajax/Ajax_Conyugue/Ajax_Busc_Conyug.jsp", $("#frm_filtro").serialize(), function(objJson) {
-                        b.empty();
-                        var list = objJson.lista;
-                        for (var i = 0; i < list.length; i++) {
-                            b.append("<tr>");
-                            b.append("<td>" + list[i].NOM + " " + list[i].AP_PA + " " + list[i].AP_MA + "</td>");
-                            b.append("<td>" + list[i].NU_DOC + "</td>");
-                            b.append("<input type ='hidden' class='trab_" + i + "' value='" + list[i].ID_TRAB + "' />");
-                            b.append("<input type ='hidden' class='nac_" + i + "' value='" + list[i].NAC + "' />");
-                            b.append("<input type ='hidden' class='dni_" + i + "' value='" + list[i].NU_DOC + "' />");
-                            b.append("<input type ='hidden' class='tipo_" + i + "' value='" + list[i].TIPO + "' />");
-                            b.append("<input type ='hidden' class='nom_ape_" + i + "' value='" + list[i].NOM + " " + list[i].AP_PA + " " + list[i].AP_MA + "' />");
-                            if (typeof (list[i].ID_C) === "undefined") {
-
-                                b.append('<td><button type="button" class="btn btn-primary btn-add-conyugue" value="' + i + '" data-dismiss="modal">Agregar</button></td>');
-                            } else {
-                                b.append('<td>Tiene conyugue</td>');
-                            }
-                            b.append("</tr>");
-
-                        }
-
-                        $(".btn-add-conyugue").click(function() {
-                            var v = $(this).val();
-                            $(".nom_c").val($(".nom_ape_" + v).val());
-                            $(".f_nac").val($(".nac_" + v).val());
-                            $(".ti_documento").val($(".tipo_" + v).val());
-                            $(".num_doc").val($(".dni_" + v).val());
-                            $(".cony").val($(".trab_" + v).val());
-
-
-
-
-                            //$(".select-conyugue").val("1");
-                        });
+                    $("#no_cuen").hide();
+                    $("#no_cuen_ban").hide();
+                    $("#generar").hide();
+                    $("#no_cuen_otros").hide();
+                    if ($("#banco").val() == "1") {
+                        $("#no_cuen").show();
                     }
+                    if ($("#banco").val() == "2") {
+                        $("#no_cuen").show();
+                    }
+                    if ($("#banco").val() == "3") {
+                        $("#no_cuen").show();
+                        $("#no_cuen_ban").show();
+                        $("#no_cuen_otros").show();
+                    }
+                    if ($("#banco").val() == "0") {
+                        $("#generar").show();
+                        $("#no_cuen_otros").show();
+                    }
+
+                    //alert($("#es_cuenta").val());
+
+                    $(".fecha").keyup(function() {
+
+                        /*var arr_date = $(this).val().split("-");
+                         if (arr_date[0].length > 4) {
+                         //return false;
+                         $(this).val("");
+                         $(".edad").val("");
+                         alert("fecha no valida");
+                         
+                         }*/
+
+                    });
+
+                    $("#banco").change(function() {
+                        cuenta_bancaria($(this).val());
+                        $("#es_cuenta").val(1);
+                        //  alert($("#es_cuenta").val());
+                    });
+
+                    $("#es_civil").change(function() {
+                        estado_civil($(this).val());
+                    });
+                    $("#DOM_A_D3").change(
+                            function() {
+                                if ($("#DOM_A_D3").val() == "3") {
+                                    $("#DOM_A_D4").val("Sin Numero");
+                                } else {
+
+                                    $("#DOM_A_D4").val("");
+                                }
+
+                            }
+                    );
+                    $("#DOM_LEG_D3").change(
+                            function() {
+                                if ($("#DOM_LEG_D3").val() == "3") {
+                                    $("#DOM_LEG_D4").val("Sin Numero");
+                                } else {
+
+                                    $("#DOM_LEG_D4").val("");
+                                }
+
+                            }
+                    );
+                    $("#reli").change(
+                            function() {
+                                if ($("#reli").val() == "1") {
+                                    $("#igle").attr("required", "required")
+                                } else {
+
+                                    $("#igle").removeAttr("required");
+                                }
+
+                            }
                     );
 
-
-
                 });
-        $(".btn-salir-busc, .close").click(function() {
 
-            $(".select-conyugue").val("0");
-        });
+    </script>
+    <script>
+        function estado_civil(es_civil) {
+            if (es_civil == '1' || es_civil == '3' || es_civil == '4' || es_civil == '5') {
+                // alert("estado civil");
 
+                //REMOVE REQUIRED
+                $("#tra_upeu_con").removeAttr('required');
+                $("#nom_ape_con").removeAttr('required');
+                $("#nac_con").removeAttr('required');
+                $("#doc_con").removeAttr('required');
+                $("#num_con").removeAttr('required');
+                $("#ins_vig_con").removeAttr('required');
 
-        $(".select-conyugue").change(function() {
-            if ($(this).val() == "1") {
-                $("#btn-mostrar").click();
+                //ADD DISABLED
+                document.getElementById("tra_upeu_con").disabled = true;
+                document.getElementById("nom_ape_con").disabled = true;
+                document.getElementById("nac_con").disabled = true;
+                document.getElementById("doc_con").disabled = true;
+                document.getElementById("num_con").disabled = true;
+                document.getElementById("ins_vig_con").disabled = true;
             }
-            if ($(this).val() == "0") {
-                $(".nom_c").val("");
-                $(".f_nac").val("");
-                $(".ti_documento").val("");
-                $(".num_doc").val("");
-                $(".cony").val("");
+            if (es_civil == '2' || es_civil == '6') {
+                // alert("estado civil");
 
+                //REMOVE REQUIRED
+                $("#tra_upeu_con").attr("required", "required");
+                $("#nom_ape_con").attr("required", "required");
+                $("#nac_con").attr("required", "required");
+                $("#doc_con").attr("required", "required");
+                $("#num_con").attr("required", "required");
+                $("#ins_vig_con").removeAttr("required", "required");
+
+                //ADD DISABLED
+                document.getElementById("tra_upeu_con").disabled = false;
+                document.getElementById("nom_ape_con").disabled = false;
+                document.getElementById("nac_con").disabled = false;
+                document.getElementById("doc_con").disabled = false;
+                document.getElementById("num_con").disabled = false;
+                document.getElementById("ins_vig_con").disabled = false;
             }
 
         }
-        );
-        $("#btncancel").click(
+
+        function cuenta_bancaria(banco) {
+
+            if (banco == '1') {
+                $("#generar").hide();
+                $("#no_cuen").show();
+                $("#nu_cuen").val("");
+                $("#nu_cuen").attr("required", "required");
+                $("#no_cuen_ban").hide();
+                $("#nu_cuen_ban").val("");
+                $("#subscription").attr('checked', false);
+                $("#nu_cuen").attr("maxlength", "21");
+                $("#nu_cuen").mask("0011-9999999999999999", {placeholder: "X"});
+                $("#no_cuen_otros").hide();
+                $("#nu_cuen_otros").val("");
+            }
+            if (banco == '2') {
+                $("#generar").hide();
+                $("#subscription").attr('checked', false);
+                $("#no_cuen_ban").hide();
+                $("#nu_cuen_ban").val("");
+                $("#no_cuen").show();
+                $("#nu_cuen").val("");
+                $("#nu_cuen").attr("required", "required");
+                $("#nu_cuen").attr("maxlength", "14");
+                $("#nu_cuen").mask("99999999999999", {placeholder: "X"});
+                $("#no_cuen_otros").hide();
+                $("#nu_cuen_otros").val("");
+            }
+            if (banco == '3') {
+                $("#no_cuen").show();
+                $("#no_cuen").val("");
+                $("#nu_cuen").attr("required", "required");
+                $("#no_cuen_ban").show();
+                $("#no_cuen_ban").val("");
+                $("#nu_cuen_ban").attr("required", "required");
+                $("#no_cuen_otros").show();
+                $("#nu_cuen_otros").val("");
+                $("#nu_cuen_otros").attr("required", "required");
+                $("#generar").hide();
+                $("#subscription").attr('checked', false);
+                document.getElementById("nu_cuen_otros").disabled = false;
+            }
+            if (banco == '0') {
+                $("#no_cuen").hide();
+                $("#nu_cuen").val("");
+                $("#no_cuen_ban").hide();
+                $("#nu_cuen_ban").val("");
+                $("#no_cuen_otros").show();
+                $("#nu_cuen_otros").val("BBVA Banco Continental");
+                document.getElementById("nu_cuen_otros").disabled = true;
+                $("#generar").show();
+                $("#subscription").attr("required", "required");
+                $("#nu_cuen_otros").attr("required", "required");
+            }
+
+        }
+
+    </script> 
+    <script>
+        $(document).ready(
                 function() {
-                    document.formulario.reset();
-                    b.empty();
-                    html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'
-                    $(".tbodys").html(html);
+                    $("#sis_pens").change(
+                            function() {
+                                if ($("#sis_pens").val() != "1") {
+                                    $(".n_afp").remove();
+                                    $("#nom_afp").attr("disabled", true);
+                                    $(".afp").append('<input name="NOMBRE_AFP_ID" type="hidden" class="n_afp" value="6"/>');
+                                    $("#nom_afp").val("6");
+                                }
+                                if ($("#sis_pens").val() == "1") {
+
+                                    $("#nom_afp").val("");
+                                    $("#nom_afp").removeAttr("disabled");
+                                    $(".n_afp").remove();
+                                }
+                            }
+                    );
+
+                });
+
+    </script>
+    <script type="text/javascript">
+
+        // DO NOT REMOVE : GLOBAL FUNCTIONS!
+
+        $(document).ready(function() {
+
+            pageSetUp();
+
+
+
+
+            var $validator = $("#wizard-1").validate({
+                rules: {
+                    email: {
+                        required: true,
+                        email: "Your email address must be in the format of name@domain.com"
+                    },
+                    FECHA_NAC: {
+                        required: true,
+                        val_fecha: true
+                    }
+                    ,
+                    FECHA_NAC_H: {
+                        val_fecha: true
+                    }
+                    ,
+                    fname: {
+                        required: true
+                    },
+                    lname: {
+                        required: true
+                    },
+                    country: {
+                        required: true
+                    },
+                    city: {
+                        required: true
+                    },
+                    postal: {
+                        required: true,
+                        minlength: 4
+                    },
+                    wphone: {
+                        required: true,
+                        minlength: 10
+                    },
+                    hphone: {
+                        required: true,
+                        minlength: 10
+                    }
+                },
+                messages: {
+                    fname: "Please specify your First name",
+                    lname: "Please specify your Last name",
+                    email: {
+                        required: "We need your email address to contact you",
+                        email: "Your email address must be in the format of name@domain.com"
+                    }
+                },
+                highlight: function(element) {
+                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                },
+                unhighlight: function(element) {
+                    $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+                },
+                errorElement: 'span',
+                errorClass: 'help-block',
+                errorPlacement: function(error, element) {
+                    if (element.parent('.input-group').length) {
+                        error.insertAfter(element.parent());
+                    } else {
+                        error.insertAfter(element);
+                    }
+                }
+            });
+            jQuery.validator.addMethod("val_fecha", function(value, element) {
+                var d = value.split("-");
+                return this.optional(element) || String(parseInt(d[0])).length == 4;
+            }, "¡Fecha ingresada invalida!");
+
+            $('#bootstrap-wizard-1').bootstrapWizard({
+                'tabClass': 'form-wizard',
+                'onNext': function(tab, navigation, index) {
+                    var $valid = $("#wizard-1").valid();
+                    if (!$valid) {
+                        $validator.focusInvalid();
+                        return false;
+                    } else {
+                        $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass(
+                                'complete');
+                        $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).find('.step')
+                                .html('<i class="fa fa-check"></i>');
+                    }
+                }
+            });
+
+
+            // fuelux wizard
+            var wizard = $('.wizard').wizard();
+
+            wizard.on('finished', function(e, data) {
+                //$("#fuelux-wizard").submit();
+                //console.log("submitted!");
+                $.smallBox({
+                    title: "Congratulations! Your form was submitted",
+                    content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
+                    color: "#5F895F",
+                    iconSmall: "fa fa-check bounce animated",
+                    timeout: 4000
+                });
+
+            });
+
+
+        })
+
+    </script>
+
+    <!-- Your GOOGLE ANALYTICS CODE Below -->
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+
+    <!--Solo numeros -->
+    <script type="text/javascript">
+        $("#docs, .doc_c").numeric();
+        $("#doc, .doc_c").numeric(false, function() {
+            alert("Solo Numeros Enteros");
+            this.value = "";
+            this.focus();
+        });
+        $(".positive").numeric({negative: false}, function() {
+            alert("No negative values");
+            this.value = "";
+            this.focus();
+        });
+        $(".positive-integer").numeric({decimal: false, negative: false}, function() {
+            alert("Positive integers only");
+            this.value = "";
+            this.focus();
+        });
+
+        $("#remove").click(
+                function(e)
+                {
+                    e.preventDefault();
+                    $(".numeric,.integer,.positive").removeNumeric();
                 }
         );
+    </script>
 
-    }
-    );
+    <!--boton duplicar-->
+    <script>
+        function  duplicar() {
+
+            var DAD1 = $("#DOM_A_D1").val();
+            var DAD2 = $("#DOM_A_D2").val();
+            var DAD3 = $("#DOM_A_D3").val();
+            var DAD4 = $("#DOM_A_D4").val();
+            var DAD5 = $("#DOM_A_D5").val();
+            var DAD6 = $("#DOM_A_D6").val();
+
+            var DEP_A = $("#dep_dir_a").val();
 
 
-</script>
+            var DADIS = $("#DOM_A_DISTRITO").val();
+            var PRO_ACT = $("#pro_dir_a").val();
+
+            $("#DOM_LEG_D1").val(DAD1);
+            $("#DOM_LEG_D2").val(DAD2);
+            $("#DOM_LEG_D3").val(DAD3);
+            $("#DOM_LEG_D4").val(DAD4);
+            $("#DOM_LEG_D5").val(DAD5);
+            $("#DOM_LEG_D6").val(DAD6);
+            $("#DOM_LEG_DISTRITO").val(DADIS);
+            $("#dep_dir_l").val(DEP_A);
+            $("#pro_dir_l").val(PRO_ACT);
+
+        }
+
+
+    </script>
+    <!--Select dinamicos-->
+    <script type="text/javascript">
+        /*Ubigeo*/
+        $("#dep_nac").change(function() {
+            var ti = $("#pro_nac");
+            ti.empty();
+            var rg = $("#dep_nac").val();
+            var data = "id_dep=" + rg + "&opc=dep_nac";
+            ti.append('<option value="">Cargando...</option>').val('');
+            $.post("../../ubigeo", data, function(objJson) {
+                ti.empty();
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                if (lista.length > 0) {
+                    ti.append("<option value=''>[Seleccione]</option>");
+                } else {
+                    ti.append("<option value=''>[]</option>");
+                }
+                for (var i = 0; i < lista.length; i++) {
+                    var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                    ti.append(item);
+                }
+            });
+        });
+        $("#pro_nac").change(function() {
+            var ti = $("#dist_nac");
+            ti.empty();
+            var rg = $("#pro_nac").val();
+            var data = "id_dist=" + rg + "&opc=pro_nac";
+            ti.append('<option value="">Cargando...</option>').val('');
+            $.post("../../ubigeo", data, function(objJson) {
+                ti.empty();
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                if (lista.length > 0) {
+                    ti.append("<option value=''>[Seleccione]</option>");
+                } else {
+                    ti.append("<option value=''>[]</option>");
+                }
+                for (var i = 0; i < lista.length; i++) {
+                    var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                    ti.append(item);
+                }
+            });
+        });
+        $("#dep_dir_a").change(function() {
+            var ti = $("#pro_dir_a");
+            ti.empty();
+            var rg = $("#dep_dir_a").val();
+            var data = "id_dep=" + rg + "&opc=dep_nac";
+            ti.append('<option value="">Cargando...</option>').val('');
+            $.post("../../ubigeo", data, function(objJson) {
+                ti.empty();
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                if (lista.length > 0) {
+                    ti.append("<option value=''>[Seleccione]</option>");
+                } else {
+                    ti.append("<option value=''>[]</option>");
+                }
+                for (var i = 0; i < lista.length; i++) {
+                    var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                    ti.append(item);
+                }
+            });
+        });
+        $("#pro_dir_a").change(function() {
+            var ti = $("#DOM_A_DISTRITO");
+            ti.empty();
+            var rg = $("#pro_dir_a").val();
+            var data = "id_dist=" + rg + "&opc=pro_nac";
+            ti.append('<option value="">Cargando...</option>').val('');
+            $.post("../../ubigeo", data, function(objJson) {
+                ti.empty();
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                if (lista.length > 0) {
+                    ti.append("<option value=''>[Seleccione]</option>");
+                } else {
+                    ti.append("<option value=''>[]</option>");
+                }
+                for (var i = 0; i < lista.length; i++) {
+                    var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                    ti.append(item);
+                }
+            });
+        });
+        $("#dep_dir_l").change(function() {
+            var ti = $("#pro_dir_l");
+            ti.empty();
+            var rg = $("#dep_dir_l").val();
+            var data = "id_dep=" + rg + "&opc=dep_nac";
+            ti.append('<option value="">Cargando...</option>').val('');
+            $.post("../../ubigeo", data, function(objJson) {
+                ti.empty();
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                if (lista.length > 0) {
+                    ti.append("<option value=''>[Seleccione]</option>");
+                } else {
+                    ti.append("<option value=''>[]</option>");
+                }
+                for (var i = 0; i < lista.length; i++) {
+                    var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                    ti.append(item);
+                }
+            });
+        });
+        $("#pro_dir_l").change(function() {
+            var ti = $("#DOM_LEG_DISTRITO");
+            ti.empty();
+            var rg = $("#pro_dir_l").val();
+            var data = "id_dist=" + rg + "&opc=pro_nac";
+            ti.append('<option value="">Cargando...</option>').val('');
+            $.post("../../ubigeo", data, function(objJson) {
+                ti.empty();
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                if (lista.length > 0) {
+                    ti.append("<option value=''>[Seleccione]</option>");
+                } else {
+                    ti.append("<option value=''>[]</option>");
+                }
+                for (var i = 0; i < lista.length; i++) {
+                    var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                    ti.append(item);
+                }
+            });
+        });
+
+
+
+
+        /*Datos Academicos*/
+        $("#rg").change(function() {
+            var ti = $("#ti_inst");
+            ti.empty();
+            var rg = $("#rg").val();
+            var data = "regimen=" + rg + "&opc=ti_inst";
+
+            ti.append('<option value="">Cargando...</option>').val('');
+            $.post("../../detalle_carrera", data, function(objJson) {
+                ti.empty();
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                if (lista.length > 0) {
+                    ti.append("<option value=''>[Seleccione]</option>");
+                } else {
+                    ti.append("<option value=''>[]</option>");
+                }
+                for (var i = 0; i < lista.length; i++) {
+                    var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                    ti.append(item);
+                }
+            });
+        });
+
+
+        $("#ti_inst").change(function() {
+            var inst = $("#inst");
+            inst.empty();
+            var ti = $("#ti_inst").val();
+            /* if (sucursal == '000') {
+             return;
+             }*/
+            var data = "ti=" + ti + "&opc=institucion";
+            inst.append('<option value="">Cargando...</option>').val('');
+            $.post("../../detalle_carrera", data, function(objJson) {
+                inst.empty();
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                if (lista.length > 0) {
+                    inst.append("<option value='0'>[Seleccione]</option>");
+                } else {
+                    inst.append("<option value='0'>[]</option>");
+                }
+                for (var i = 0; i < lista.length; i++) {
+                    var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                    inst.append(item);
+                }
+            });
+        });
+
+        $("#inst").change(function() {
+            var carr = $("#carrera");
+            carr.empty();
+            var insti = $("#inst").val();
+            /* if (sucursal == '000') {
+             return;
+             }*/
+            var data = "inst=" + insti + "&opc=carrera";
+            carr.append('<option value="">Cargando...</option>').val('');
+            $.post("../../detalle_carrera", data, function(objJson) {
+                carr.empty();
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                if (lista.length > 0) {
+                    carr.append("<option value='0'>[Seleccione]</option>");
+                } else {
+                    carr.append("<option value='0'>[]</option>");
+                }
+                for (var i = 0; i < lista.length; i++) {
+                    var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                    carr.append(item);
+                }
+            });
+        });
+        /*$("#cboCuenta").change(function() {
+         var cuenta = $("#cboCuenta").val();
+         if (cuenta == "0") {
+         return;
+         }
+         alert("Cuenta: " + cuenta);
+         });*/
+    </script>
+    <script>
+        $(document).ready(function() {
+            var b = $(".tbodys");
+
+            $("#btnfiltrar").click(
+                    function() {
+
+
+                        $.post("../../ajax/Ajax_Conyugue/Ajax_Busc_Conyug.jsp", $("#frm_filtro").serialize(), function(objJson) {
+                            b.empty();
+                            var list = objJson.lista;
+                            for (var i = 0; i < list.length; i++) {
+                                b.append("<tr>");
+                                b.append("<td>" + list[i].NOM + " " + list[i].AP_PA + " " + list[i].AP_MA + "</td>");
+                                b.append("<td>" + list[i].NU_DOC + "</td>");
+                                b.append("<input type ='hidden' class='trab_" + i + "' value='" + list[i].ID_TRAB + "' />");
+                                b.append("<input type ='hidden' class='nac_" + i + "' value='" + list[i].NAC + "' />");
+                                b.append("<input type ='hidden' class='dni_" + i + "' value='" + list[i].NU_DOC + "' />");
+                                b.append("<input type ='hidden' class='tipo_" + i + "' value='" + list[i].TIPO + "' />");
+                                b.append("<input type ='hidden' class='nom_ape_" + i + "' value='" + list[i].NOM + " " + list[i].AP_PA + " " + list[i].AP_MA + "' />");
+                                if (typeof (list[i].ID_C) === "undefined") {
+
+                                    b.append('<td><button type="button" class="btn btn-primary btn-add-conyugue" value="' + i + '" data-dismiss="modal">Agregar</button></td>');
+                                } else {
+                                    b.append('<td>Tiene conyugue</td>');
+                                }
+                                b.append("</tr>");
+
+                            }
+
+                            $(".btn-add-conyugue").click(function() {
+                                var v = $(this).val();
+                                $(".nom_c").val($(".nom_ape_" + v).val());
+                                $(".f_nac").val($(".nac_" + v).val());
+                                $(".ti_documento").val($(".tipo_" + v).val());
+                                $(".num_doc").val($(".dni_" + v).val());
+                                $(".cony").val($(".trab_" + v).val());
+
+
+
+
+                                //$(".select-conyugue").val("1");
+                            });
+                        }
+                        );
+
+
+
+                    });
+            $(".btn-salir-busc, .close").click(function() {
+
+                $(".select-conyugue").val("0");
+            });
+
+
+            $(".select-conyugue").change(function() {
+                if ($(this).val() == "1") {
+                    $("#btn-mostrar").click();
+                }
+                if ($(this).val() == "0") {
+                    $(".nom_c").val("");
+                    $(".f_nac").val("");
+                    $(".ti_documento").val("");
+                    $(".num_doc").val("");
+                    $(".cony").val("");
+
+                }
+
+            }
+            );
+            $("#btncancel").click(
+                    function() {
+                        document.formulario.reset();
+                        b.empty();
+                        html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'
+                        $(".tbodys").html(html);
+                    }
+            );
+
+        }
+        );
+
+
+    </script>
 
 </body>
 

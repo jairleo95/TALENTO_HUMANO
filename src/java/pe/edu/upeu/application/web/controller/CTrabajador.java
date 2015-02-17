@@ -183,13 +183,13 @@ public class CTrabajador extends HttpServlet {
             String ES_GEM_NU_CUENTA = (request.getParameter("GEN_NU_CUEN") == null) ? "0" : "1";
             String NO_BANCO_OTROS = request.getParameter("BANCO_OTROS");
             String ES_CUENTA_SUELDO = request.getParameter("ES_CUENTA_SUELDO");
-            String CO_UNIVERSITARIO = request.getParameter("COD_UNI"); 
+            String CO_UNIVERSITARIO = request.getParameter("COD_UNI");
 
             tr.INSERT_TRABAJADOR(null, AP_PATERNO, AP_MATERNO, NO_TRABAJADOR, TI_DOC, NU_DOC, ES_CIVIL, FE_NAC, ID_NACIONALIDAD, ID_DEPARTAMENTO, ID_PROVINCIA, ID_DISTRITO, TE_TRABAJADOR, CL_TRA, DI_CORREO_PERSONAL, DI_CORREO_INST, CO_SISTEMA_PENSIONARIO, LI_NIVEL_EDUCATIVO, REGIMEN, ES_INST_PERU, CARRERA, DE_ANNO_EGRESO, CM_OTROS_ESTUDIOS, ES_SEXO, LI_GRUPO_SANGUINEO, DE_REFERENCIA, LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, ID_NO_AFP, ES_AFILIADO_ESSALUD, LI_TIPO_TRABAJADOR, CA_TIPO_HORA_PAGO_REFEERENCIAL, ES_FACTOR_RH, LI_DI_DOM_A_D1, DI_DOM_A_D2, LI_DI_DOM_A_D3, DI_DOM_A_D4, LI_DI_DOM_A_D5, DI_DOM_A_D6, DI_DOM_A_REF, ID_DI_DOM_A_DISTRITO, LI_DI_DOM_LEG_D1, DI_DOM_LEG_D2, LI_DI_DOM_LEG_D3, DI_DOM_LEG_D4, LI_DI_DOM_LEG_D5, DI_DOM_LEG_D6, ID_DI_DOM_LEG_DISTRITO, CA_ING_QTA_CAT_EMPRESA, CA_ING_QTA_CAT_RUC, CA_ING_QTA_CAT_OTRAS_EMPRESAS, CM_OBSERVACIONES, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, AP_NOMBRES_PADRE, AP_NOMBRES_MADRE,
                     ES_TRABAJA_UPEU_C, AP_NOMBRES_C, FE_NAC_C, ID_TIPO_DOC_C, NU_DOC_C, LI_INSCRIPCION_VIG_ESSALUD_C, ID_CONYUGUE, CO_UNIVERSITARIO);
             String idtr = tr.MAX_ID_DATOS_TRABAJADOR();
             tr.INSERT_CUENTA_SUELDO(null, NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEM_NU_CUENTA, NO_BANCO_OTROS, idtr, ES_CUENTA_SUELDO);
-           tr.INSERT_HIST_RELIGION(null, LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, "1", idtr, iduser, FE_MODIF);
+            tr.INSERT_HIST_RELIGION(null, LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, "1", idtr, iduser, FE_MODIF);
 
             tr.UPDATE_ID_CONYUGUE(idtr, ID_CONYUGUE);
             for (int i = 1; i <= num_hijo; i++) {
@@ -204,12 +204,12 @@ public class CTrabajador extends HttpServlet {
                 String ES_INSCRIPCION_VIG_ESSALUD = request.getParameter("ESSALUD_H" + i);
                 String ES_ESTUDIO_NIV_SUPERIOR = request.getParameter("EST_SUP_H" + i);
                 String ES_DATOS_HIJO_TRABAJADOR = "1";
-              h.INSERT_DATOS_HIJO_TRABAJADOR(null, idtr, AP_PATERNO_H, AP_MATERNO_H, NO_HIJO_TRABAJADOR, FE_NACIMIENTO, ES_SEXO_H, ES_TIPO_DOC, NU_DOC_H, ES_PRESENTA_DOCUMENTO, ES_INSCRIPCION_VIG_ESSALUD, ES_ESTUDIO_NIV_SUPERIOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, ES_DATOS_HIJO_TRABAJADOR);
+                h.INSERT_DATOS_HIJO_TRABAJADOR(null, idtr, AP_PATERNO_H, AP_MATERNO_H, NO_HIJO_TRABAJADOR, FE_NACIMIENTO, ES_SEXO_H, ES_TIPO_DOC, NU_DOC_H, ES_PRESENTA_DOCUMENTO, ES_INSCRIPCION_VIG_ESSALUD, ES_ESTUDIO_NIV_SUPERIOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, ES_DATOS_HIJO_TRABAJADOR);
 
             }
 
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-      
+
             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr + "&a=t");
         }
         if (opc.equals("Buscar")) {
@@ -250,6 +250,8 @@ public class CTrabajador extends HttpServlet {
             String idtr = request.getParameter("idtr");
             getServletContext().setAttribute("List_Cuenta_Sueldo", tr.List_Cuenta_Sueldo(idtr));
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            getServletContext().setAttribute("List_Universidad", li.List_Universidad());
+              getServletContext().setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim());
         }
         if ("actualizar".equals(opc)) {
@@ -324,7 +326,7 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("List_Provincia", ub.List_Provincia());
             getServletContext().setAttribute("List_Distrito", ub.List_DistritoTra());
             getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
-            
+
             response.sendRedirect("Vista/Trabajador/Mod_Datos_Generales.jsp?idtr=" + idtr);
         }
         if (opc.equals("Modificar_Dat_Gen")) {
@@ -335,6 +337,7 @@ public class CTrabajador extends HttpServlet {
             String FE_NAC = request.getParameter("FECHA_NAC");
             String ID_NACIONALIDAD = request.getParameter("NACIONALIDAD");
             String ID_DEPARTAMENTO = null;
+
             String ID_PROVINCIA = null;
             String ID_DISTRITO = request.getParameter("DISTRITO");
             String TI_DOC = request.getParameter("TIPO_DOC");
@@ -379,8 +382,9 @@ public class CTrabajador extends HttpServlet {
             String DE_ANNO_EGRESO = request.getParameter("A_EGRESO");
             String CM_OTROS_ESTUDIOS = request.getParameter("OTROS_ESTUDIOS");
             String CA_TIPO_HORA_PAGO_REFEERENCIAL = request.getParameter("TIPO_HORA_PAGO_REFEERENCIAL");
+            String CO_UNIVERSITARIO = request.getParameter("CO_UNIVERSITARIO");
 
-            tr.MOD_ASPEC_ACADEM(LI_NIVEL_EDUCATIVO, REGIMEN, ES_INST_PERU, CARRERA, DE_ANNO_EGRESO, CM_OTROS_ESTUDIOS, CA_TIPO_HORA_PAGO_REFEERENCIAL, idtr);
+            tr.MOD_ASPEC_ACADEM(LI_NIVEL_EDUCATIVO, REGIMEN, ES_INST_PERU, CARRERA, DE_ANNO_EGRESO, CM_OTROS_ESTUDIOS, CA_TIPO_HORA_PAGO_REFEERENCIAL, idtr, CO_UNIVERSITARIO);
             //out.print(CARRERA);
             //REGISTRAR EN TABLA CUENTA SUELDO
             String NO_BANCO = request.getParameter("BANCO");
@@ -404,7 +408,7 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("List_Distrito", ub.List_DistritoTra());
             getServletContext().setAttribute("List_Ubigeo", ub.List_Distrito());
             getServletContext().setAttribute("List_Departamento", ub.List_Departamento());
-            
+
             //  out.print(ub.List_Provincia().size());   
             response.sendRedirect("Vista/Trabajador/Mod_Aspecto_Social.jsp?idtr=" + idtr);
         }
@@ -428,7 +432,7 @@ public class CTrabajador extends HttpServlet {
             String CA_ING_QTA_CAT_EMPRESA = request.getParameter("ING_QTA_CAT_EMPRESA");
             String CA_ING_QTA_CAT_RUC = request.getParameter("ING_QTA_CAT_RUC");
             String CA_ING_QTA_CAT_OTRAS_EMPRESAS = request.getParameter("ING_QTA_CAT_OTRAS_EMPRESAS");
-            
+
             tr.MOD_ASPEC_SOCIAL(LI_DI_DOM_A_D1, DI_DOM_A_D2, LI_DI_DOM_A_D3, DI_DOM_A_D4, LI_DI_DOM_A_D5, DI_DOM_A_D6, DI_DOM_A_REF, ID_DI_DOM_A_DISTRITO, LI_DI_DOM_LEG_D1, DI_DOM_LEG_D2, LI_DI_DOM_LEG_D3, DI_DOM_LEG_D4, LI_DI_DOM_LEG_D5, DI_DOM_LEG_D6, ID_DI_DOM_LEG_DISTRITO, CA_ING_QTA_CAT_EMPRESA, CA_ING_QTA_CAT_RUC, CA_ING_QTA_CAT_OTRAS_EMPRESAS, idtr);
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             response.sendRedirect("Vista/Trabajador/Aspecto_Social.jsp?idtr=" + idtr);
