@@ -154,6 +154,13 @@ public class ListaDAO implements InterfaceListaDAO {
         list.add("DNI");
         list.add("Carne de Extrangeria");
         list.add("Pasaporte");
+        list.add("Carne de Extrangeria");
+        list.add("Pasaporte");
+        list.add("Partida de  Nacimiento");
+        list.add("Libreta Electoral");
+        list.add("Libreta Militar");
+        list.add("Boleta Inscripción Militar");
+        list.add("Permiso para Menores");
         return list;
     }
 

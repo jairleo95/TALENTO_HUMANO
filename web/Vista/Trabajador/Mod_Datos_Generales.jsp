@@ -869,7 +869,7 @@
                                                                                 <%}%>
                                                                             </select>
                                                                         </div>
-                                                                    </div>
+                                                                    </div><%=t.getEs_afiliado_essalud() %>
                                                                 </div>
                                                                 <div class="col-sm-3">
                                                                     <div class="form-group">
