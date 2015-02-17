@@ -380,8 +380,9 @@ public class CTrabajador extends HttpServlet {
             String DE_ANNO_EGRESO = request.getParameter("A_EGRESO");
             String CM_OTROS_ESTUDIOS = request.getParameter("OTROS_ESTUDIOS");
             String CA_TIPO_HORA_PAGO_REFEERENCIAL = request.getParameter("TIPO_HORA_PAGO_REFEERENCIAL");
+            String CO_UNIVERSITARIO = request.getParameter("CO_UNIVERSITARIO");
 
-            tr.MOD_ASPEC_ACADEM(LI_NIVEL_EDUCATIVO, REGIMEN, ES_INST_PERU, CARRERA, DE_ANNO_EGRESO, CM_OTROS_ESTUDIOS, CA_TIPO_HORA_PAGO_REFEERENCIAL, idtr);
+            tr.MOD_ASPEC_ACADEM(LI_NIVEL_EDUCATIVO, REGIMEN, ES_INST_PERU, CARRERA, DE_ANNO_EGRESO, CM_OTROS_ESTUDIOS, CA_TIPO_HORA_PAGO_REFEERENCIAL, idtr, CO_UNIVERSITARIO);
             //out.print(CARRERA);
             //REGISTRAR EN TABLA CUENTA SUELDO
             String NO_BANCO = request.getParameter("BANCO");
