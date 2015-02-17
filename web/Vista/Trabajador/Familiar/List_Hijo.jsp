@@ -139,13 +139,16 @@
                                                         %>
                                                     </td>
                                                     <td>
-                                                        <%
+                                                        <%if(h.getEs_estudio_niv_superior()!=null){
                                                             if (h.getEs_estudio_niv_superior().trim().equals("1")) {
                                                                 out.println("Si");
                                                             }
                                                             if (h.getEs_estudio_niv_superior().trim().equals("0")) {
                                                                 out.println("No");
                                                             }
+                                                        }else{
+                                                            out.print("No");
+                                                        }
                                                         %>
                                                     </td>
                                                     <td> 

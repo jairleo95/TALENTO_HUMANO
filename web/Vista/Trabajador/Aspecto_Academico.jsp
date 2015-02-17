@@ -66,7 +66,7 @@
                             }%>
                     </td></tr>
                 <tr><td class="text-info">Tipo.I.E:</td>
-                    <% if (trb.getNo_universidad() != null)
+                    <% if (trb.getNo_universidad() != null){
                             for (int y = 0; y < List_Universidad.size(); y++) {
                                 Universidad un = new Universidad();
                                 un = (Universidad) List_Universidad.get(y);
@@ -82,14 +82,18 @@
                 <%
                                     }
                                 }
-                                List_tipo_institucion.clear();
+                                ;
                             }
                         }
+                    }else{
 
                 %>
+                <td>no registrado</td>
+                <%}%>
                 </tr>
                 <tr><td class="text-info">Centro de Estudios:</td>
-                    <%if (trb.getNo_universidad() != null) {
+                    <%if (trb.getNo_universidad() != null){
+                    if (trb.getNo_universidad() != null) {
                             for (int w = 0; w < List_Universidad.size(); w++) {
                                 Universidad u = new Universidad();
                                 u = (Universidad) List_Universidad.get(w);
@@ -99,11 +103,14 @@
                     <%}
                             }
                         }
-                        List_Universidad.clear(); %>
+                    }else{
+                       %>
+                       <td>no registrado</td> 
+                       <%}%>
                 </tr>
                 <!--<tr><td class="text-info">Grado Acádemico:</td><td><%%></td></tr>-->
                 <tr><td class="text-info">Carrera:</td><td><%if (trb.getNo_carrera() == null) {
-                        out.print("NINGUNA");
+                        out.print("no registrado");
                     } else {
                         out.print(trb.getNo_carrera());
                     }%></td></tr>
@@ -120,7 +127,7 @@
                         out.print(trb.getDe_anno_egreso());
                     }%></td></tr>
                 <tr><td class="text-info">Otros Estudios:</td><td><%if (trb.getCm_otros_estudios() == null) {
-                        out.print("NINGUNA");
+                        out.print("no resgistrado");
                     } else {
                         out.print(trb.getCm_otros_estudios());
                     }%></td></tr>
