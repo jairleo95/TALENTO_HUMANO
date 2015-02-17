@@ -498,7 +498,7 @@
                                                                             <%
                                                                                                 }
                                                                                             }
-                                                                                            List_tipo_institucion.clear();
+                                                                                            
                                                                                         }
                                                                                     }
 
@@ -529,7 +529,7 @@
                                                                             <%}
                                                                                     }
                                                                                 }
-                                                                                List_Universidad.clear(); %>
+                                                                               %>
                                                                         </select>
                                                                     </div>
                                                                 </div>
@@ -630,7 +630,6 @@
                                                             </div>
 
                                                         </div>
-                                                        <input type="hidden" value="<%=List_Cuenta_Sueldo.size()%>" class="sizecs"/>
                                                         <div >           
                                                             <h3>- Cuenta Sueldo </h3>
                                                             <div class="col-sm-4" id="" >
@@ -643,8 +642,8 @@
                                                                             <%for (int u = 0; u < List_Cuenta_Sueldo.size(); u++) {
                                                                                     Cuenta_Sueldo cs = new Cuenta_Sueldo();
                                                                                     cs = (Cuenta_Sueldo) List_Cuenta_Sueldo.get(u);
-
-                                                                                    if (cs.getNo_banco().trim().equals("0")) {
+                                                                                    if (cs.getNo_banco() != null) {
+                                                                                        if (cs.getNo_banco().trim().equals("0")) {
                                                                             %>
                                                                             <option value="0" selected="">Ninguno</option>
                                                                             <option value="1" >BBVA</option>
@@ -672,8 +671,12 @@
                                                                             <option value="2" >BCP</option>
                                                                             <option value="3" selected="">Otros</option>
                                                                             <%}
-
-                                                                                List_Cuenta_Sueldo.clear();%>
+                                                                            } else {%>
+                                                                            <option value="0" >Ninguno</option>
+                                                                            <option value="1" >BBVA</option>
+                                                                            <option value="2" >BCP</option>
+                                                                            <option value="3" >Otros</option>
+                                                                           <% }%>
                                                                         </select>
                                                                     </div>
                                                                 </div>
@@ -684,7 +687,11 @@
                                                                     <label>Nombre del Banco:</label>
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
-                                                                        <input class="form-control input-group-sm"  value="<%=cs.getNo_banco_otros()%>" type="text" name="BANCO_OTROS"  id="nu_cuen_otros" maxlength="30"   />
+                                                                        <%if (cs.getNo_banco_otros() != null) {%>
+                                                                        <input class="form-control input-group-sm" value="<%=cs.getNo_banco_otros()%>"   type="text" name="BANCO_OTROS" id="nu_cuen_otros" maxlength="30">
+                                                                        <%} else {%>
+                                                                       <input class="form-control input-group-sm" value=""   type="text" name="BANCO_OTROS" id="nu_cuen_otros" maxlength="30">
+                                                                        <%}%>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -693,7 +700,11 @@
                                                                     <label>Nro de Cuenta:</label>
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
-                                                                        <input class="form-control input-group-sm" value="<%=cs.getNu_cuenta()%>" type="text" name="CUENTA"  id="nu_cuen" maxlength="30"   />
+                                                                        <%if (cs.getNu_cuenta() != null) {%>
+                                                                        <input class="form-control input-group-sm" value="<%=cs.getNu_cuenta()%>"   type="text" name="CUENTA" id="nu_cuen" maxlength="30">
+                                                                        <%} else {%>
+                                                                       <input class="form-control input-group-sm" value=""   type="text" name="CUENTA" id="nu_cuen" maxlength="30">
+                                                                        <%}%>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -703,7 +714,11 @@
                                                                     <label>Nro de Cuenta Bancaria:</label>
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
-                                                                        <input  class="form-control input-group-sm" value="<%=cs.getNu_cuenta_banc()%>" type="text" name="CUENTA_BANC" id="nu_cuen_ban">
+                                                                        <%if (cs.getNu_cuenta_banc() != null) {%>
+                                                                        <input class="form-control input-group-sm" value="<%=cs.getNu_cuenta_banc()%>"   type="text" name="CUENTA_BANC" id="nu_cuen_ban" maxlength="30">
+                                                                        <%} else {%>
+                                                                       <input class="form-control input-group-sm" value=""   type="text" name="CUENTA_BANC" id="nu_cuen_ban" maxlength="30">
+                                                                        <%}%>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -717,7 +732,7 @@
                                                             </div> 
 
                                                             <%}
-                                                                List_Cuenta_Sueldo.clear(); %>
+                                                                 %>
                                                             <input type="hidden" value="0" name="ES_CUENTA_SUELDO" id="es_cuenta"/>
 
                                                             <%String idtr = request.getParameter("idtr");%>
@@ -850,10 +865,7 @@
     <script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script>$(document).ready(function() {
-                var size_suenta_sueldo = $(".sizecs");
-                if (size_suenta_sueldo.val(0)) {
-                   $("#banco").attr("disabled", true);
-                }
+
 
 
                 var p = 1;
@@ -1686,7 +1698,7 @@
 </body>
 
 </html>
-<%} else {
+<%}else {
         response.sendRedirect("/TALENTO_HUMANO/");
     }
 
