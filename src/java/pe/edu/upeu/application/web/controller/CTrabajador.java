@@ -251,7 +251,8 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("List_Cuenta_Sueldo", tr.List_Cuenta_Sueldo(idtr));
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             getServletContext().setAttribute("List_Universidad", li.List_Universidad());
-              getServletContext().setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
+            getServletContext().setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
+            getServletContext().setAttribute("List_Ubigeo", ub.List_Distrito());
             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim());
         }
         if ("actualizar".equals(opc)) {

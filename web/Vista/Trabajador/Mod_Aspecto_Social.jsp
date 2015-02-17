@@ -472,7 +472,11 @@
 
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm" value="<%=t.getDi_dom_a_d4()%>" type="text" name="DIR_DOM_A_D4" id="DOM_A_D4" maxlength="100">
+                                                                            <input class="form-control input-group-sm" value="<%if (t.getDi_dom_a_d4() != null) {
+                                                                                    out.print(t.getDi_dom_a_d4());
+                                                                                } else {
+                                                                                    out.print("");
+                                                                                }%>" type="text" name="DIR_DOM_A_D4" id="DOM_A_D4" maxlength="100">
 
                                                                         </div>
                                                                     </div>
@@ -509,7 +513,11 @@
 
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"   value="<%=t.getDi_dom_a_d6()%>" type="text" name="DIR_DOM_A_D6" id="DOM_A_D6" maxlength="100">
+                                                                            <input class="form-control input-group-sm"   value="<%if (t.getDi_dom_a_d6() != null) {
+                                                                                    out.print(t.getDi_dom_a_d6());
+                                                                                } else {
+                                                                                    out.print("");
+                                                                                }%>" type="text" name="DIR_DOM_A_D6" id="DOM_A_D6" maxlength="100">
 
                                                                         </div>
                                                                     </div>
@@ -519,10 +527,15 @@
                                                                         <label>Referencia:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"    value="<%=t.getDi_dom_a_ref()%>" type="text" name="DIR_DOM_A_REF" id="DOM_A_REF" maxlength="200">
+                                                                            <input class="form-control input-group-sm"   value="<%if (t.getDi_dom_a_ref() != null) {
+                                                                                    out.print(t.getDi_dom_a_ref());
+                                                                                } else {
+                                                                                    out.print("");
+                                                                                }%>" type="text" name="DIR_DOM_A_REF" id="DOM_A_REF" maxlength="200">
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                            </div>
 
                                                             </div>
 
@@ -600,7 +613,11 @@
 
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"   value="<%=t.getDi_dom_leg_d2()%>" type="text" name="DIR_DOM_LEG_D2" id="DOM_LEG_D2" maxlength="100">
+                                                                            <input class="form-control input-group-sm"  value="<%if (t.getDi_dom_leg_d2() != null) {
+                                                                                    out.print(t.getDi_dom_leg_d2());
+                                                                                } else {
+                                                                                    out.print("");
+                                                                                }%>"  type="text" name="DIR_DOM_LEG_D2" id="DOM_LEG_D2" maxlength="100">
 
                                                                         </div>
                                                                     </div>
@@ -635,7 +652,11 @@
 
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"    value="<%=t.getDi_dom_leg_d4()%>" type="text" name="DIR_DOM_LEG_D4" id="DOM_LEG_D4" maxlength="100">
+                                                                            <input class="form-control input-group-sm"  value="<%if (t.getDi_dom_leg_d4() != null) {
+                                                                                    out.print(t.getDi_dom_leg_d4());
+                                                                                } else {
+                                                                                    out.print("");
+                                                                                }%>"   type="text" name="DIR_DOM_LEG_D4" id="DOM_LEG_D4" maxlength="100">
 
                                                                         </div>
                                                                     </div>
@@ -652,18 +673,18 @@
                                                                                 <%for (int q = 0; q < Listar_zona.size(); q++) {
                                                                                         Zona zo = new Zona();
                                                                                         zo = (Zona) Listar_zona.get(q);
-                                                                                        if(t.getLi_di_dom_leg_d5().trim() != null){
-                                                                                        if (t.getLi_di_dom_leg_d5().trim().equals(zo.getId_zona().trim())) {
-                                                                                %>    
-                                                                                <option value="<%=zo.getId_zona()%>" selected=""><%=zo.getDe_zona()%></option>
+                                                                                     if (t.getLi_di_dom_leg_d5() != null){
+                                                                                if(t.getLi_di_dom_leg_d5().trim().equals(zo.getId_zona().trim()) ){%>
+                                                                                <option value="<%=zo.getId_zona() %>" selected=""><%=zo.getDe_zona() %></option>
+                                                                                        <%}
+                                                                                     }else{%>
+                                                                                        <option value="<%=zo.getId_zona() %>"><%=zo.getDe_zona() %></option> 
                                                                                 <%}
-                                                                                        }else {%>
-                                                                                <option value="<%=zo.getId_zona()%>"><%=zo.getDe_zona()%></option>
-                                                                                <%}
-                                                                                    }%>
-                                                                            </select>
+                                                                                }%> 
+                                                                           </select>
                                                                         </div>
                                                                     </div>
+                                                                            
                                                                 </div>
                                                                 <div class="col-sm-6">
 
@@ -671,7 +692,11 @@
 
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"    value="<%=t.getDi_dom_leg_d6()%>" type="text" name="DIR_DOM_LEG_D6" id="DOM_LEG_D6" maxlength="100">
+                                                                            <input class="form-control input-group-sm"   value="<%if (t.getDi_dom_leg_d6() != null) {
+                                                                                    out.print(t.getDi_dom_leg_d6());
+                                                                                } else {
+                                                                                    out.print("");
+                                                                                }%>"   type="text" name="DIR_DOM_LEG_D6" id="DOM_LEG_D6" maxlength="100">
 
                                                                         </div>
                                                                     </div>
@@ -693,7 +718,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-4">
-                                                                    <div class="form-group"><%=t.getId_di_dom_leg_distrito()%>
+                                                                    <div class="form-group">
                                                                         <label>Provincia:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
@@ -725,7 +750,11 @@
                                                                         <label>Empresa:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-suitcase fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"  value="<%=t.getCa_ing_qta_cat_empresa()%>" type="text" name="ING_QTA_CAT_EMPRESA"  maxlength="100">
+                                                                            <input class="form-control input-group-sm" value="<%if (t.getCa_ing_qta_cat_empresa() != null) {
+                                                                                    out.print(t.getCa_ing_qta_cat_empresa());
+                                                                                } else {
+                                                                                    out.print("");
+                                                                                }%>"  type="text" name="ING_QTA_CAT_EMPRESA"  maxlength="100">
 
                                                                         </div>
                                                                     </div>
@@ -736,7 +765,11 @@
                                                                         <label>RUC:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-file-o fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"   value="<%=t.getCa_ing_qta_cat_ruc()%>" type="text" name="ING_QTA_CAT_RUC"  maxlength="20">
+                                                                            <input class="form-control input-group-sm" value="<%if (t.getCa_ing_qta_cat_ruc() != null) {
+                                                                                    out.print(t.getCa_ing_qta_cat_ruc());
+                                                                                } else {
+                                                                                    out.print("");
+                                                                                }%>"  type="text" name="ING_QTA_CAT_RUC"  maxlength="20">
 
                                                                         </div>
                                                                     </div>
@@ -752,7 +785,11 @@
                                                                         <label>Otras Empresas:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-suitcase fa-lg fa-fw"></i></span>
-                                                                            <textarea name="ING_QTA_CAT_OTRAS_EMPRESAS"   class="form-control input-group-sm"  cols="60" rows="6" maxlength="500" ><%=t.getCa_ing_qta_cat_otras_empresas()%></textarea>
+                                                                            <textarea name="ING_QTA_CAT_OTRAS_EMPRESAS"   class="form-control input-group-sm"  cols="60" rows="6" maxlength="500" ><%if (t.getCa_ing_qta_cat_otras_empresas() != null) {
+                                                                                    out.print(t.getCa_ing_qta_cat_otras_empresas());
+                                                                                } else {
+                                                                                    out.print("");
+                                                                                }%></textarea>
                                                                         </div>
                                                                     </div>
                                                                 </div>
