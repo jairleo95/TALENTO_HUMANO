@@ -89,7 +89,7 @@ public class PasoDAO implements InterfacePasoDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR: "+e.getMessage());
+            throw new RuntimeException("ERROR: " + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -112,9 +112,16 @@ public class PasoDAO implements InterfacePasoDAO {
             cst.setString(4, NU_PASOS);
             cst.setString(5, CO_PASOS);
             cst.execute();
-        } catch (SQLException ex) {
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR: " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 

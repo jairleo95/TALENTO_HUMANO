@@ -363,7 +363,6 @@
                     d.empty();
                     d.append("<option value='' > [SELECCIONE] </option>");
                     var list = objJson.lista;
-
                     if (list.length !== 0) {
                         for (var i = 0; i < list.length; i++) {
                             d.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
@@ -372,7 +371,6 @@
                         d.append("<option value='0' > [] </option>");
                     }
                 });
-
             }
 
             function  lis_dir_id(d, valor) {
@@ -394,7 +392,6 @@
                         d.append("<option value='' > [] </option>");
                     }
                 });
-
             }
             function list_area_id(c, valor) {
 
@@ -415,7 +412,6 @@
                         c.append("<option value='' > [] </option>");
                     }
                 });
-
             }
             function list_sec_id(d, valor) {
                 $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + valor, function (objJson) {
@@ -434,7 +430,6 @@
                         d.append("<option value='' > [no hay] </option>");
                     }
                 });
-
             }
             function list_dir(c) {
                 $.post("../../Direccion_Puesto", "opc=Listar_direccion", function (objJson) {
@@ -474,7 +469,6 @@
                         texto += "<td>" + lista[h].area + "</td>";
                         texto += "<td>" + lista[h].dep + "</td>";
                         texto += "<td>" + lista[h].direccion + "</td>";
-
                         texto += "<td><button type='button' value='" + h + "' class='btn-eliminar_puesto'>Eliminar</button>";
                         texto += "<input type='hidden' class='iddp" + h + "' value='" + lista[h].idpp + "' />";
                         texto += "<button class='btn_deshabilitar-p' value='" + h + "'>DesHabilitar</button></td>";
@@ -483,14 +477,12 @@
                     tbody_p.append(texto);
                     texto = "";
                     $(".form_puesto").show();
-
-
                     $(".btn-eliminar_puesto").click(
                             function () {
                                 if (confirm("¿Esta Seguro de Eliminar?")) {
-                                        alert(  "opc=Eliminar_PP&id=" + $(".iddp" + $(this).val()).val());
+                                    alert("opc=Eliminar_PP&id=" + $(".iddp" + $(this).val()).val());
                                     $.post("../../paso", "opc=Eliminar_PP&id=" + $(".iddp" + $(this).val()).val(), function (objJson) {
-                                        
+
                                     });
                                 } else {
 
@@ -501,176 +493,162 @@
             }
 
             $(document).ready(function () {
-                $(".form_puesto").hide();
-
-
-
-                list_dir($(".sl_dir"));
-                $(".sl_dir").change(function () {
-                    lis_dir_id($(".sl_dep"), $(this).val());
-
-                });
-
-                $(".sl_dep").change(function () {
-                    list_area_id($(".sl_area"), $(this).val());
-                });
-                $(".sl_area").change(function () {
-                    list_sec_id($(".sl_sec"), $(this).val());
-                });
-                $(".sl_sec").change(function () {
-                    list_put_id($(".sl_puesto"), $(this).val());
-                });
-
-                var num = 1;
-
-
-                listar_Proceso();
-                Listar_Paso($("#select-proceso").val());
-
-
-                $("#btn-registrar").click(
-                        function () {
-                            var pr = $("#select-proceso").val();
-                            $.post("../../paso", $("#form-paso").serialize(), function () {
-                                Listar_Paso(pr);
+            $(".form_puesto").hide();
+                    list_dir($(".sl_dir"));
+                    $(".sl_dir").change(function () {
+            lis_dir_id($(".sl_dep"), $(this).val());
+            });
+                    $(".sl_dep").change(function () {
+            list_area_id($(".sl_area"), $(this).val());
+            });
+                    $(".sl_area").change(function () {
+            list_sec_id($(".sl_sec"), $(this).val());
+            });
+                    $(".sl_sec").change(function () {
+            list_put_id($(".sl_puesto"), $(this).val());
+            });
+                    var num = 1;
+                    listar_Proceso();
+                    Listar_Paso($("#select-proceso").val());
+                    $("#btn-registrar").click(
+                    function () {
+                    var pr = $("#select-proceso").val();
+                            $.post("../../paso", $("#form-paso").serialize(), function (objJson) {
+                            if (objJson.rpta == - 1) {
+                            alert(objJson.mensaje);
+                                    return;
+                            }
+                            Listar_Paso(pr);
                             });
                             $("#btn-registrar").val("Registrar Paso");
                             $(".opc").val("Registrar");
                             $("#form-paso")[0].reset();
-
                             return false;
-                        }
-                );
-                function listar_Proceso() {
+                    }
+            );
+                    function listar_Proceso() {
                     var s = $("#select-proceso");
-                    $.post("../../Proceso", "opc=Listar", function (objJson) {
-                        s.empty();
-                        var lista = objJson.lista;
-                        s.append("<option value='' selected >[SELECCIONE]</option>");
-                        for (var j = 0; j < lista.length; j++) {
+                            $.post("../../Proceso", "opc=Listar", function (objJson) {
+                            s.empty();
+                                    var lista = objJson.lista;
+                                    s.append("<option value='' selected >[SELECCIONE]</option>");
+                                    for (var j = 0; j < lista.length; j++) {
                             s.append("<option value='" + lista[j].id + "' > " + lista[j].nom + "</option>");
-                        }
-                    });
-                }
-                $("#select-proceso").change(
-                        function () {
+                            }
+                            });
+                    }
+            $("#select-proceso").change(
+                    function () {
 
 
-                            $(".lb-list_pasos").text($(this).find(":selected").text());
-
+                    $(".lb-list_pasos").text($(this).find(":selected").text());
                             Listar_Paso($(this).val());
                             $(".form_puesto").hide();
                             $(".tbody-puesto").empty();
-
                             // alert($(this).val());
-                        });
+                    });
+                    $(".btn-agregar-p").click(function () {
+            if ($(".form_puesto").valid()) {
+            $.ajax({
+            url: "../../Direccion_Puesto",
+                    data: $(".form_puesto").serialize() + "&opc=Reg_puesto_paso"
+            }).done(function () {
+            list_puesto($(".num_p").val());
+                    alert("¡Registrado Exitosamente!");
+            }).fail(function (objJson) {
+            alert(objJson.mensaje);
+            });
+            } else {
+            alert("Completar campos requeridos...");
+            }
 
-                $(".btn-agregar-p").click(function () {
-                    if ($(".form_puesto").valid()) {
-                        $.ajax({
-                            url: "../../Direccion_Puesto",
-                            data: $(".form_puesto").serialize() + "&opc=Reg_puesto_paso"
-                        }).done(function () {
-                            list_puesto($(".num_p").val());
-                            alert("¡Registrado Exitosamente!");
-
-                        }).fail(function (objJson) {
+            ///alert($(".sl_puesto").val());
+            });
+                    var b = $(".tbodys");
+                    var c = $(".dd-list");
+                    function Listar_Paso(proceso) {
+                    var txt_append = "";
+                            $.post("../../paso", "opc=Listar_habilitados&proceso=" + proceso, function (objJson) {
+                            b.empty();
+                                    c.empty();
+                                    var lista = objJson.lista;
+                                    if (objJson.rpta == - 1) {
                             alert(objJson.mensaje);
-                            alert("sfsf");
+                                    return;
+                            }
 
-                        });
-
-
-                    } else {
-                        alert("Completar campos requeridos...");
-                    }
-
-                    ///alert($(".sl_puesto").val());
-                });
-                var b = $(".tbodys");
-                var c = $(".dd-list");
-                function Listar_Paso(proceso) {
-
-                    $.post("../../paso", "opc=Listar_habilitados&proceso=" + proceso, function (objJson) {
-                        b.empty();
-                        c.empty();
-                        var lista = objJson.lista;
-                        if (objJson.rpta == -1) {
-                            alert(objJson.mensaje);
-                            return;
-                        }
-
-                        for (var i = 0; i < lista.length; i++) {
+                            for (var i = 0; i < lista.length; i++) {
                             b.append("<tr class='editar-tr" + i + "' >");
-                            b.append("<td >" + (i + 1) + "</td>");
-                            b.append("<td class='td_det" + i + "'>" + lista[i].det + "</td>");
-                            b.append("<td class='td_num" + i + "'><label>" + lista[i].num + "</label></td>");
-                            b.append("<td  class='td_co" + i + "'><label>" + lista[i].co + "</label></td>");
-                            b.append("<td class='td_id_pro" + i + "' >" + lista[i].proceso_id + "</td>");
-                            b.append("<input type='text' name='id' value='" + lista[i].id + "'  class='id_paso" + i + "'/>");
-                            b.append("</tr>");
-                        }
-                        for (var i = 0; i < lista.length; i++) {
-                            c.append('<li class="dd-item dd3-item"  ><div class="dd-handle dd3-handle">Drag</div><div class="dd3-content"><label class="item_req item_' + i + '">' + lista[i].num + ' </label> ' +
+                                    b.append("<td >" + (i + 1) + "</td>");
+                                    b.append("<td class='td_det" + i + "'>" + lista[i].det + "</td>");
+                                    b.append("<td class='td_num" + i + "'><label>" + lista[i].num + "</label></td>");
+                                    b.append("<td  class='td_co" + i + "'><label>" + lista[i].co + "</label></td>");
+                                    b.append("<td class='td_id_pro" + i + "' >" + lista[i].proceso_id + "</td>");
+                                    b.append("<input type='text' name='id' value='" + lista[i].id + "'  class='id_paso" + i + "'/>");
+                                    b.append("</tr>");
+                            }
+                            for (var i = 0; i < lista.length; i++) {
+                            txt_append += '<li class="dd-item dd3-item"  ><div class="dd-handle dd3-handle">Drag</div><div class="dd3-content"><label class="item_req item_' + i + '">' + lista[i].num + ' </label> ' +
                                     '<div class="pull-right"><button class="btn btn-success btn-cargar-puesto" value="' + i + '" > Ver Puestos</button></div>' +
                                     '<div class="pull-right"><button class="btn btn-primary btn-editar" value="' + i + '" > Editar</button></div>' +
-                                    '<div class="pull-right"><button class="btn btn-primary btn-eliminar" value="' + i + '" > Eliminar</button></div>' +
-                                    '<div class="pull-right"><label >' + lista[i].det + '</label></div>' +
-                                    // '<div class="pull-right"><label >' + lista[i].co + '</label></div>' +
-                                    '<input type="hidden"  value="' + lista[i].det + '"  class="det_p_' + i + '"/>' +
-                                    '<input type="hidden" name="id" value="' + lista[i].id + '"  class="id_paso' + i + '"/>' +
-                                    '</div> </li>');
+                                    '<div class="pull-right"><button class="btn btn-primary btn-eliminar" value="' + i + '" > Eliminar</button></div>';
+                                    if (typeof (lista[i].det) === "undefined") {
+                            txt_append += '<div class="pull-right"><label ></label></div>';
+                            } else {
 
-                        }
+                            txt_append += '<div class="pull-right"><label >' + lista[i].det + '</label></div>';
+                            }
 
-                        $(".btn-cargar-puesto").click(function () {
+                            // '<div class="pull-right"><label >' + lista[i].co + '</label></div>' +
+                            txt_append += '<input type="hidden"  value="' +
+                                    lista[i].det + '"  class="det_p_' + i + '"/>' +  '<input type="hidden" name="id" value="' + lista[i].id + '"  class="id_paso' + i + '"/>' +   '</div> </li>';
+                                    txt_append + = "<input  value='" + lista[i].det + "' class='inp_det_" + i + "' />";
+                                    txt_append + = "<input value='" + lista[i].num + "' class='inp_num_" + i + "' />";
+                                    txt_append + = "<input value='" + lista[i].co + "' class='inp_co_" + i + "' />";
+                                    txt_append + = "<input value='" + lista[i].proceso_id + "' class='inp_pro_id_" + i + "' />";
+                            }
+                            c.append(txt_append);
+                                    txt_append = "";
+                                    $(".btn-cargar-puesto").click(function () {
                             var num = $(this).val();
-                            list_puesto(num);
-                            $(".num_p").val($(this).val());
-                        });
-                        $(".btn-editar").click(function () {
+                                    list_puesto(num);
+                                    $(".num_p").val($(this).val());
+                            });
+                                    $(".btn-editar").click(function () {
                             $(".desc_paso").val($(".td_det" + $(this).val()).text());
-                            $(".num_paso").val($(".td_num" + $(this).val()).text());
-                            $(".co_paso").val($(".td_co" + $(this).val()).text());
-                            $("#select-proceso").val($(".td_id_pro" + $(this).val()).text());
-                            $(".id_p").val($(".id_paso" + $(this).val()));
-
-
-                            $("#btn-registrar").val("Modificar");
-                            $(".opc").val("Modificar");
-                        });
-                        $(".btn-eliminar").click(
-                                function () {
+                                    $(".num_paso").val($(".td_num" + $(this).val()).text());
+                                    $(".co_paso").val($(".td_co" + $(this).val()).text());
+                                    $("#select-proceso").val($(".td_id_pro" + $(this).val()).text());
+                                    $(".id_p").val($(".id_paso" + $(this).val()));
+                                    $("#btn-registrar").val("Modificar");
+                                    $(".opc").val("Modificar");
+                            });
+                                    $(".btn-eliminar").click(
+                                    function () {
                                     var pr_e = $("#select-proceso").val();
-                                    if (confirm("¿Esta Seguro de Eliminar?")) {
-                                        $.post("../../paso", "opc=Eliminar&paso=" + $(".id_paso" + $(this).val()).val(), function () {
-                                            Listar_Paso(pr_e);
-                                        });
-                                        //alert($(".id_paso" + $(this).val()).val());
+                                            if (confirm("¿Esta Seguro de Eliminar?")) {
+                                    $.post("../../paso", "opc=Eliminar&paso=" + $(".id_paso" + $(this).val()).val(), function () {
+                                    Listar_Paso(pr_e);
+                                    });
+                                            //alert($(".id_paso" + $(this).val()).val());
                                     } else {
 
                                     }
-                                }
-                        );
-                    });
-
-                }
-                $(".Generar").click(function () {
-                    //var num = $(".tbodys tr").size();
-                    var num = 1;
-
-
+                                    }
+                            );
+                            });
+                    }
+            $(".Generar").click(function () {
+            //var num = $(".tbodys tr").size();
+            var num = 1;
                     $.each($(".item_req"), function () {
-                        $(this).text("P" + num);
-                        num++;
-                        $.post("../../paso", "opc=Update_nu_paso&nu_paso=" + "P" + num + "&paso=" + $(".id_paso" + (num - 1)).val(), function (objJson) {
+                    $(this).text("P" + num);
+                            num++;
+                            $.post("../../paso", "opc=Update_nu_paso&nu_paso=" + "P" + num + "&paso=" + $(".id_paso" + (num - 1)).val(), function (objJson) {
                             alert("opc=Update_nu_paso&nu_paso=" + "P" + num + "&paso=" + $(".id_paso" + (num - 1)).val())
-                        });
-
-
+                            });
                     });
                     num = 1;
-
                     /* for (var f = 0; f < num; f++) {
                      //alert($(".id_paso" + f).val() + " - " + $(".item_"+f).text());
                      
@@ -687,67 +665,57 @@
                     // }*/
 
                     Listar_Paso($("#select-proceso").val());
-                });
+            });
+                    pageSetUp();
+                    // PAGE RELATED SCRIPTS
 
-
-                pageSetUp();
-
-                // PAGE RELATED SCRIPTS
-
-                var updateOutput = function (e) {
+                    var updateOutput = function (e) {
                     var list = e.length ? e : $(e.target), output = list.data('output');
-                    if (window.JSON) {
-                        output.val(window.JSON.stringify(list.nestable('serialize')));
-                        //, null, 2));
+                            if (window.JSON) {
+                    output.val(window.JSON.stringify(list.nestable('serialize')));
+                            //, null, 2));
                     } else {
-                        output.val('JSON browser support required for this demo.');
+                    output.val('JSON browser support required for this demo.');
                     }
-                };
-
-                // activate Nestable for list 1
-                $('#nestable').nestable({
-                    group: 1
-                }).on('change', updateOutput);
-
-                // activate Nestable for list 2
-                $('#nestable2').nestable({
-                    group: 1
-                }).on('change', updateOutput);
-
-                // output initial serialised data
-                updateOutput($('#nestable').data('output', $('#nestable-output')));
-                updateOutput($('#nestable2').data('output', $('#nestable2-output')));
-
-                $('#nestable-menu').on('click', function (e) {
-                    var target = $(e.target), action = target.data('action');
+                    };
+                    // activate Nestable for list 1
+                    $('#nestable').nestable({
+            group: 1
+            }).on('change', updateOutput);
+                    // activate Nestable for list 2
+                    $('#nestable2').nestable({
+            group: 1
+            }).on('change', updateOutput);
+                    // output initial serialised data
+                    updateOutput($('#nestable').data('output', $('#nestable-output')));
+                    updateOutput($('#nestable2').data('output', $('#nestable2-output')));
+                    $('#nestable-menu').on('click', function (e) {
+            var target = $(e.target), action = target.data('action');
                     if (action === 'expand-all') {
-                        $('.dd').nestable('expandAll');
-                    }
-                    if (action === 'collapse-all') {
-                        $('.dd').nestable('collapseAll');
-                    }
-                });
-
-                $('#nestable3').nestable();
-
+            $('.dd').nestable('expandAll');
+            }
+            if (action === 'collapse-all') {
+            $('.dd').nestable('collapseAll');
+            }
+            });
+                    $('#nestable3').nestable();
             })
 
         </script>
 
         <!-- Your GOOGLE ANALYTICS CODE Below -->
         <script type="text/javascript">
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-            _gaq.push(['_trackPageview']);
-
-            (function () {
-                var ga = document.createElement('script');
-                ga.type = 'text/javascript';
-                ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(ga, s);
-            })();
+                    var _gaq = _gaq || [];
+                    _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+                    _gaq.push(['_trackPageview']);
+                    (function () {
+                    var ga = document.createElement('script');
+                            ga.type = 'text/javascript';
+                            ga.async = true;
+                            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                            var s = document.getElementsByTagName('script')[0];
+                            s.parentNode.insertBefore(ga, s);
+                    })();
 
         </script>
 
