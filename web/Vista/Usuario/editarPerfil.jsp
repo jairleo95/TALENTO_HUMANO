@@ -30,10 +30,56 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" media="screen" href="../../css/Css_Bootstrap/bootstrap-responsive">
+
+        <!-- Estilos plantilla-->
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
-        
+
+
+        <!-- Estilos plantilla-->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
+
+
+        <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
+
+        <!-- SmartAdmin RTL Support is under construction
+                 This RTL CSS will be released in version 1.5
+        <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css"> -->
+
+        <!-- We recommend you use "your_style.css" to override SmartAdmin
+             specific styles this will also ensure you retrain your customization with each SmartAdmin update.
+        <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
+
+        <!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/demo.min.css">
+
+        <!-- FAVICONS -->
+        <link rel="shortcut icon" href="../../img/favicon/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="../../img/favicon/favicon.ico" type="image/x-icon">
+
+        <!-- GOOGLE FONT -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+
+        <!-- Specifying a Webpage Icon for Web Clip 
+                 Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
+        <link rel="apple-touch-icon" href="../../img/splash/sptouch-icon-iphone.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../img/splash/touch-icon-ipad.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../img/splash/touch-icon-iphone-retina.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../img/splash/touch-icon-ipad-retina.png">
+
+        <!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+        <!-- Startup image for web apps -->
+        <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+        <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+        <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+
+
 
 
         <title>JSP Page</title>
@@ -46,16 +92,16 @@
             }
         </style>
 
-<script LANGUAGE="JavaScript">
-function mi_alerta () {
-confirmar=confirm("¿Estas seguro de modificar?"); 
-if (confirmar) 
-// si pulsamos en aceptar
-alert('Has dicho que si');
-else 
-// si pulsamos en cancelar
-alert('Has dicho que no');
-        }</script>
+        <script LANGUAGE="JavaScript">
+            function mi_alerta() {
+                confirmar = confirm("¿Estas seguro de modificar?");
+                if (confirmar)
+                    // si pulsamos en aceptar
+                    alert('Has dicho que si');
+                else
+                    // si pulsamos en cancelar
+                    alert('Has dicho que no');
+            }</script>
 
     </head>
     <body>
@@ -117,7 +163,7 @@ alert('Has dicho que no');
                             <label for="exampleInputEmail1">correo:</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input class="form-control input-group-sm correo"    placeholder="" type="text" name="CORREO_USAURIO"  data-mask="" maxlength="30" value="<%=vu.getDi_correo_personal()%> " >
+                                <input class="form-control input-group-sm correo"    placeholder="" type="email" name="CORREO_USAURIO"   maxlength="30" value="<%=vu.getDi_correo_personal()%> " >
 
                             </div>
                         </div>
@@ -127,13 +173,13 @@ alert('Has dicho que no');
 
                 <script type="text/javascript">
                     $(document).ready(
-                            function() {
+                            function () {
                                 var tip = $("#pro_dir_l");
                                 tip.empty();
                                 var rg = $("#dep_dir_l").val();
                                 var data = "id_dep=" + rg + "&opc=dep_nac";
                                 tip.append('<option value="">Cargando...</option>').val('');
-                                $.post("../../ubigeo", data, function(objJson) {
+                                $.post("../../ubigeo", data, function (objJson) {
                                     tip.empty();
                                     if (objJson.rpta == -1) {
                                         alert(objJson.mensaje);
@@ -155,7 +201,7 @@ alert('Has dicho que no');
                                 var rg = $("#pro_dir_l").val();
                                 var data = "id_dist=" + rg + "&opc=pro_nac";
                                 ti.append('<option value="">Cargando...</option>').val('');
-                                $.post("../../ubigeo", data, function(objJson) {
+                                $.post("../../ubigeo", data, function (objJson) {
                                     ti.empty();
                                     if (objJson.rpta == -1) {
                                         alert(objJson.mensaje);
@@ -178,7 +224,7 @@ alert('Has dicho que no');
                                 $(".doc, .doc_c").val("");
 
                                 $("#nac").change(
-                                        function() {
+                                        function () {
                                             if ($("#nac").val() != "NAC-0193") {
                                                 $("#dist").hide();
                                                 $("#dist_nac").val("DST-001832");
@@ -236,16 +282,16 @@ alert('Has dicho que no');
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input class="form-control input-group-sm" required autofocus="" data-mask="" value="<%=vu.getDi_dom_a_d2()%>"   placeholder="" type="text" name="DIR_DOM_A_D2" id="DOM_A_D2" maxlength="100">
+                                <input class="form-control input-group-sm" required autofocus=""  value="<%=vu.getDi_dom_a_d2()%>"   placeholder="" type="text" name="DIR_DOM_A_D2" id="DOM_A_D2" maxlength="100">
 
                             </div>
                         </div>
                     </div>
                     <script>
                         $(document).ready(
-                                function() {
+                                function () {
                                     $("#DOM_A_D3").change(
-                                            function() {
+                                            function () {
                                                 if ($("#DOM_A_D3").val() == "3") {
                                                     $("#DOM_A_D4").val("Sin Numero");
                                                 } else {
@@ -256,7 +302,7 @@ alert('Has dicho que no');
                                             }
                                     );
                                     $("#DOM_LEG_D3").change(
-                                            function() {
+                                            function () {
                                                 if ($("#DOM_LEG_D3").val() == "3") {
                                                     $("#DOM_LEG_D4").val("Sin Numero");
                                                 } else {
@@ -267,7 +313,7 @@ alert('Has dicho que no');
                                             }
                                     );
                                     $("#reli").change(
-                                            function() {
+                                            function () {
                                                 if ($("#reli").val() == "1") {
                                                     $("#igle").attr("required", "required")
                                                 } else {
@@ -378,7 +424,7 @@ alert('Has dicho que no');
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input class="form-control input-group-sm"  required autofocus="" data-mask="" value="<%=vu.getDi_dom_a_d4()%>"  placeholder="" type="text" name="DIR_DOM_A_D4" id="DOM_A_D4" maxlength="50">
+                                <input class="form-control input-group-sm"  required autofocus=""  value="<%=vu.getDi_dom_a_d4()%>"  placeholder="" type="text" name="DIR_DOM_A_D4" id="DOM_A_D4" maxlength="50">
 
                             </div>
                         </div>
@@ -414,7 +460,7 @@ alert('Has dicho que no');
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input class="form-control input-group-sm"  required autofocus="" data-mask="" value="<%=vu.getDi_dom_a_d6()%>"  placeholder="" type="text" name="DIR_DOM_A_D6" id="DOM_A_D6" maxlength="50">
+                                <input class="form-control input-group-sm"  required autofocus=""  value="<%=vu.getDi_dom_a_d6()%>"  placeholder="" type="text" name="DIR_DOM_A_D6" id="DOM_A_D6" maxlength="50">
 
                             </div>
                         </div>
@@ -424,7 +470,7 @@ alert('Has dicho que no');
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                <input class="form-control input-group-sm"  required autofocus="" data-mask="" value="<%=vu.getDi_dom_a_ref()%>"   placeholder="Referencia" type="text" name="DIR_DOM_A_REF" id="DOM_A_REF" maxlength="50">
+                                <input class="form-control input-group-sm"  required autofocus=""  value="<%=vu.getDi_dom_a_ref()%>"   placeholder="Referencia" type="text" name="DIR_DOM_A_REF" id="DOM_A_REF" maxlength="50">
                             </div>
                         </div>
                     </div>
@@ -507,7 +553,7 @@ alert('Has dicho que no');
                             </div>
                         </div>
                     </div>
-                                
+
                     <!--<button onclick="duplicar();
                             return false;"  class="btn btn-primary" id="btn-duplicar">Duplicar</button>-->
 
@@ -515,16 +561,16 @@ alert('Has dicho que no');
                 <input type="text" value="<%=vu.getId_trabajador()%>" name="ID_TR"/>
                 <input type="text" value="<%=vu.getId_usuario()%>" name="idus" />
                 <input type="hidden" value="opc" name="editar_Perfil" />
-                <input type="Submit" onClick="mi_alerta()" name="opc" class="btn btn-primary" id="idus" value="Modificar" >
-            
+                <input type="Submit"  name="opc" class="btn btn-primary btn_modificar" id="idus" value="Modificar" >
+
 
                 <h2>...</h2>
                 <%}%>
 
 
             </form>
-                
-    
+
+
             <!-- Modal -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
@@ -584,7 +630,7 @@ alert('Has dicho que no');
 
 
                         </div>
-                        
+
 
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
@@ -671,10 +717,39 @@ alert('Has dicho que no');
 
                         // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-                        $(document).ready(function() {
+                        $(document).ready(function () {
 
                             pageSetUp();
 
+                            $(".btn_modificar").click(function (e) {
+                                $.SmartMessageBox({
+                                    title: "Smart Alert!",
+                                    content: "This is a confirmation box. Can be programmed for button callback",
+                                    buttons: '[No][Si]'
+                                }, function (ButtonPressed) {
+                                    if (ButtonPressed === "Si") {
+
+                                        $.smallBox({
+                                            title: "Callback function",
+                                            content: "<i class='fa fa-clock-o'></i> <i>You pressed Yes...</i>",
+                                            color: "#659265",
+                                            iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                            timeout: 4000
+                                        });
+                                    }
+                                    if (ButtonPressed === "No") {
+                                        $.smallBox({
+                                            title: "Callback function",
+                                            content: "<i class='fa fa-clock-o'></i> <i>You pressed No...</i>",
+                                            color: "#C46A69",
+                                            iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                            timeout: 4000
+                                        });
+                                    }
+
+                                });
+                                e.preventDefault();
+                            });
 
 
 
@@ -705,15 +780,15 @@ alert('Has dicho que no');
                                         email: "Your email address must be in the format of name@domain.com"
                                     }
                                 },
-                                highlight: function(element) {
+                                highlight: function (element) {
                                     $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
                                 },
-                                unhighlight: function(element) {
+                                unhighlight: function (element) {
                                     $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
                                 },
                                 errorElement: 'span',
                                 errorClass: 'help-block',
-                                errorPlacement: function(error, element) {
+                                errorPlacement: function (error, element) {
                                     if (element.parent('.input-group').length) {
                                         error.insertAfter(element.parent());
                                     } else {
@@ -748,15 +823,15 @@ alert('Has dicho que no');
                                         email: "Your email address must be in the format of name@domain.com"
                                     }
                                 },
-                                highlight: function(element) {
+                                highlight: function (element) {
                                     $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
                                 },
-                                unhighlight: function(element) {
+                                unhighlight: function (element) {
                                     $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
                                 },
                                 errorElement: 'span',
                                 errorClass: 'help-block',
-                                errorPlacement: function(error, element) {
+                                errorPlacement: function (error, element) {
                                     if (element.parent('.input-group').length) {
                                         error.insertAfter(element.parent());
                                     } else {
@@ -768,7 +843,7 @@ alert('Has dicho que no');
 
                             $('#bootstrap-wizard-1').bootstrapWizard({
                                 'tabClass': 'form-wizard',
-                                'onNext': function(tab, navigation, index) {
+                                'onNext': function (tab, navigation, index) {
                                     var $valid = $("#wizard-1").valid();
                                     if (!$valid) {
                                         $validator.focusInvalid();
@@ -786,7 +861,7 @@ alert('Has dicho que no');
                             // fuelux wizard
                             var wizard = $('.wizard').wizard();
 
-                            wizard.on('finished', function(e, data) {
+                            wizard.on('finished', function (e, data) {
                                 //$("#fuelux-wizard").submit();
                                 //console.log("submitted!");
                                 $.smallBox({
@@ -803,7 +878,7 @@ alert('Has dicho que no');
                         })
 
         </script>
-       
+
 
 
 
@@ -812,7 +887,7 @@ alert('Has dicho que no');
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function() {
+            (function () {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
@@ -830,13 +905,13 @@ alert('Has dicho que no');
         <!--Select dinamicos-->
         <script type="text/javascript">
             /*Ubigeo*/
-            $("#dep_nac").change(function() {
+            $("#dep_nac").change(function () {
                 var ti = $("#pro_nac");
                 ti.empty();
                 var rg = $("#dep_nac").val();
                 var data = "id_dep=" + rg + "&opc=dep_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
+                $.post("../../ubigeo", data, function (objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -854,13 +929,13 @@ alert('Has dicho que no');
                     }
                 });
             });
-            $("#pro_nac").change(function() {
+            $("#pro_nac").change(function () {
                 var ti = $("#dist_nac");
                 ti.empty();
                 var rg = $("#pro_nac").val();
                 var data = "id_dist=" + rg + "&opc=pro_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
+                $.post("../../ubigeo", data, function (objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -878,13 +953,13 @@ alert('Has dicho que no');
                     }
                 });
             });
-            $("#dep_dir_a").change(function() {
+            $("#dep_dir_a").change(function () {
                 var ti = $("#pro_dir_a");
                 ti.empty();
                 var rg = $("#dep_dir_a").val();
                 var data = "id_dep=" + rg + "&opc=dep_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
+                $.post("../../ubigeo", data, function (objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -903,13 +978,13 @@ alert('Has dicho que no');
 
                 });
             });
-            $("#pro_dir_a").change(function() {
+            $("#pro_dir_a").change(function () {
                 var ti = $("#DOM_A_DISTRITO");
                 ti.empty();
                 var rg = $("#pro_dir_a").val();
                 var data = "id_dist=" + rg + "&opc=pro_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
+                $.post("../../ubigeo", data, function (objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -927,13 +1002,13 @@ alert('Has dicho que no');
                     }
                 });
             });
-            $("#dep_dir_l").change(function() {
+            $("#dep_dir_l").change(function () {
                 var ti = $("#pro_dir_l");
                 ti.empty();
                 var rg = $("#dep_dir_l").val();
                 var data = "id_dep=" + rg + "&opc=dep_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
+                $.post("../../ubigeo", data, function (objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -951,13 +1026,13 @@ alert('Has dicho que no');
                     }
                 });
             });
-            $("#pro_dir_l").change(function() {
+            $("#pro_dir_l").change(function () {
                 var ti = $("#DOM_LEG_DISTRITO");
                 ti.empty();
                 var rg = $("#pro_dir_l").val();
                 var data = "id_dist=" + rg + "&opc=pro_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
+                $.post("../../ubigeo", data, function (objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
