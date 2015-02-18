@@ -1,5 +1,4 @@
-<%
-    HttpSession sesion = request.getSession();
+<%    HttpSession sesion = request.getSession();
     String id_user = (String) sesion.getAttribute("IDUSER");
     if (id_user != null) {
 %>
@@ -18,31 +17,9 @@ and open the template in the editor.
         <title></title>
         <script type="text/javascript" src="../../js/JQuery/jQuery.js" ></script>
         <style type="text/css">
-
-            .submit{
-                margin:10px;
-                margin-left:0px;
-                width: 100%;
-                height:90%;
-                color:white;
-                background-color: #0575f4 ;
-
-            }
-            .tab-mant{
-                margin:10px;   
-            }   
-            .lab-mant{
-                color:#0575f4;  
-                //font-size:34px; 
-                // margin: 5px;
-            }
-            .body{
-                background-color: #EEE;
-
-            }
-
-            td{
-                text-align: left;
+            .contenedor{
+                margin-left: 1%;
+                width: 98%;
             }
         </style>
         <script>
@@ -79,7 +56,69 @@ and open the template in the editor.
         </script>
     </head>
     <body>
-    <center><label  class="lab-mant">Cambiar Clave</label>
+        <div class="row">
+            <center>
+                <h1>Mantenimiento a Usuarios de  Personal</h1>
+                <hr>
+            </center>
+            <div class="contenedor">
+                <article class="col-sm-12">
+                    <div id="wid-id-0" class="jarviswidget" role="widget">
+                        <div>
+                            <div class="jarviswidget-editbox">
+                            </div>
+                            <div class="widget-body no-padding ">
+                                <form class="smart-form" action="../../Usuario">
+                                    <%for (int i = 0; i < List_ID_User.size(); i++) {
+                                            Usuario u = new Usuario();
+                                            u = (Usuario) List_ID_User.get(i);
+                                    %>
+                                    <fieldset>
+                                        <h2>Cambiar Clave</h2>
+                                    </fieldset>
+                                    <fieldset>
+                                        <section class="col col-3">
+                                            <label class="label">Usuario:</label>
+                                            <label class="input state-disabled">
+                                                <input type="text" name="No_Usuario" value="<%=u.getNo_usuario().trim() %>">
+                                            </label>
+                                        </section>
+                                        <section class="col col-3">
+                                            <label class="label">Clave Antigua:</label>
+                                            <label class="input">
+                                                <input type="text" name="pw_an" value="<%=u.getPw_usuario().trim() %>">
+                                            </label>
+                                        </section>
+                                        <section class="col col-3">
+                                            <label class="label">Clave Nueva:</label>
+                                            <label class="input">
+                                                <input type="password" name="cl_nu" id="cl_nueva" required="">
+                                            </label>                                
+                                        </section>
+                                        <section class="col col-3">
+                                            <label class="label">Repita la Clave Nueva:</label>
+                                            <label class="input">
+                                                <input type="password" name="cl_nu_re" id="cl_repetido" required="">
+                                            </label>                                
+                                        </section>
+                                    </fieldset>
+                                    <footer>
+                                        <input type="hidden" name="opc" value="Modificar_clave_2">
+                                        <input type="hidden" name="iduser" value="<%=u.getId_usuario()%>">
+                                        <input type="submit" class="btn btn-primary btn-sm" value="Cambiar Clave" >
+                                        <input  class="btn btn-default btn-sm" onclick="window.history.back();" value="Atras">
+                                    </footer>
+                                    <%}%>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+
+ <%--   <center><label  class="lab-mant">Cambiar Clave</label>
         <form action="../../Usuario" method="post" onsubmit="return validar();">
             <table>
                 <%for (int i = 0; i < List_ID_User.size(); i++) {
@@ -96,7 +135,7 @@ and open the template in the editor.
             </table>
             <%}%>
         </form>
-    </center>
+    </center>--%>
 </body>
 </html>
 <%@include file="List_Usuario.jsp" %>
