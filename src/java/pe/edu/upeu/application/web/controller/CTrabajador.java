@@ -253,6 +253,7 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("List_Universidad", li.List_Universidad());
             getServletContext().setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
             getServletContext().setAttribute("List_Ubigeo", ub.List_Distrito());
+           
             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim());
         }
         if ("actualizar".equals(opc)) {
@@ -384,7 +385,8 @@ public class CTrabajador extends HttpServlet {
             String CM_OTROS_ESTUDIOS = request.getParameter("OTROS_ESTUDIOS");
             String CA_TIPO_HORA_PAGO_REFEERENCIAL = request.getParameter("TIPO_HORA_PAGO_REFEERENCIAL");
             String CO_UNIVERSITARIO = request.getParameter("CO_UNIVERSITARIO");
-
+            
+            
             tr.MOD_ASPEC_ACADEM(LI_NIVEL_EDUCATIVO, REGIMEN, ES_INST_PERU, CARRERA, DE_ANNO_EGRESO, CM_OTROS_ESTUDIOS, CA_TIPO_HORA_PAGO_REFEERENCIAL, idtr, CO_UNIVERSITARIO);
             //out.print(CARRERA);
             //REGISTRAR EN TABLA CUENTA SUELDO
@@ -397,6 +399,7 @@ public class CTrabajador extends HttpServlet {
 
             tr.MOD_CUENTA_SUELDO(NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEM_NU_CUENTA, NO_BANCO_OTROS, idtr);
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            getServletContext().setAttribute("List_Cuenta_Sueldo", tr.List_Cuenta_Sueldo(idtr));
             response.sendRedirect("Vista/Trabajador/Aspecto_Academico.jsp?idtr=" + idtr);
         }
         if (opc.equals("Editar_Asp_Soc")) {
