@@ -88,7 +88,7 @@
                         out.print("No registrado");
                     }
                         %></td></tr>
-                <tr ><td class="text-info">Documento (cambiar)</td><td class="text-info-left">
+                <tr ><td class="text-info">Tipo Documento:</td><td class="text-info-left">
                         <%if (tr.getId_tipo_doc_c() != null) {
 
                                 if (tr.getId_tipo_doc_c().trim().equals("1")) {
@@ -103,7 +103,7 @@
                             }
                         %>
                     </td></tr>
-                <tr><td class="text-info">Tipo Documento:</td><td class="text-info-left"><%if (tr.getNu_doc_c() != null) {
+                <tr><td class="text-info">Nro Documento:</td><td class="text-info-left"><%if (tr.getNu_doc_c() != null) {
                         out.println(tr.getNu_doc_c());
                     } else {
                         out.print("No registrado");

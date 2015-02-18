@@ -260,39 +260,48 @@
                                                                                 <%
                                                                                     InterfaceListaDAO list = new ListaDAO();
                                                                                     for (int k = 0; k < list.List_Doc().size(); k++) {
-                                                                                        String num = Integer.toString(k+1);
+                                                                                        String num = Integer.toString(k + 1);
                                                                                         if ((num).equals(t.getId_tipo_doc_c())) {%>
-                                                                                        <option value="<%=num%>" selected=""><%= list.List_Doc().get(k) %></option>
-                                                                                        <%}else{%>
-                                                                                        <option value="<%=num%>"><%= list.List_Doc().get(k) %></option>    
-                                                                                   <% }
+                                                                                <option value="<%=num%>" selected=""><%= list.List_Doc().get(k)%></option>
+                                                                                <%} else {%>
+                                                                                <option value="<%=num%>"><%= list.List_Doc().get(k)%></option>    
+                                                                                <% }
                                                                                     }
                                                                                 %>
-                                                                                
+
                                                                             </select>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-3">
                                                                     <div class="form-group">
-                                                                        <label>Apellidos  y Nombres :</label>
+                                                                        <label>Nro de Documento:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm" value="<%if (t.getAp_nombres_c() != null) {
-                                                                                    out.print(t.getAp_nombres_c());
+                                                                            <input class="form-control input-group-sm" value="<%if (t.getNu_doc_c() != null) {
+                                                                                    out.print(t.getNu_doc_c());
                                                                                 } else {
                                                                                     out.print("");
-                                                                                }%>" type="text" name="APELLIDO_NOMBRES_CONYUGUE" id="DOM_A_D4" required="" maxlength="50">
+                                                                                }%>" type="text" name="NRO_DOC"  required="" maxlength="10">
 
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-4">
+
                                                                     <div class="form-group">
-                                                                        <label>Fecha Nacimiento:</label>
+                                                                        <label>Inscripcion Vigente en Essalud:</label>
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-child fa-lg fa-fw"></i><label class="edad"></label></span>
-                                                                            <input type="date" name="FECHA_NAC_CONYUGUE" required="" value="<%=t.getFe_nac_c()%>"  class="form-control input-group-sm fecha" />
+                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <select name="INSCRIPCION_VIG_ESSALUD"  class="form-control input-group-sm" required="">
+                                                                                <%if(t.getLi_inscripcion_vig_essalud_c().trim().equals("1")){%>
+                                                                                <option value="1" selected="">Si</option>
+                                                                                <option value="0">No</option>
+                                                                                <%}else if(t.getLi_inscripcion_vig_essalud_c().trim().equals("0")){%>
+                                                                                <option value="1">Si</option>
+                                                                                <option value="0" selected="">No</option>
+                                                                                <%}%>
+                                                                            </select>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -305,7 +314,7 @@
 
                                                 <%String idtr = request.getParameter("idtr");%>
                                                 <input type="hidden" name="idtr" value="<%=idtr%>"/>
-                                                <input type="hidden" name="opc" value="Modificar_Asp_Soc">
+                                                <input type="hidden" name="opc" value="MODIFICAR_PMC">
                                                 <footer>
                                                     <center>
                                                         <button type="submit" value="" name="opc"> MODIFICAR</button>

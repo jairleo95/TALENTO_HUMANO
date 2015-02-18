@@ -140,7 +140,7 @@ public class CFamiliar extends HttpServlet {
            // out.print(tr.ListaridTrabajador(idtr).size()+"   "+idtr);
            response.sendRedirect("Vista/Trabajador/Familiar/Mod_Familiar.jsp?idtr=" + idtr);
         }
-        if (opc.equals("MODIFICAR PMC")) {
+        if (opc.equals("MODIFICAR_PMC")) {
             try {
                 String AP_NOMBRES_PADRE = request.getParameter("APELLIDOS_NOMBRES_PADRE");
                 String AP_NOMBRES_MADRE = request.getParameter("APELLIDOS_NOMBRES_MADRE");
@@ -151,8 +151,8 @@ public class CFamiliar extends HttpServlet {
                 String TI_DOC_ID = request.getParameter("TIPO_DOC_ID");
                 String NU_DOC = request.getParameter("NRO_DOC");
                 String LI_INSCRIPCION_VIG_ESSALUD = request.getParameter("INSCRIPCION_VIG_ESSALUD");
-                String US_MODIF = "";
-                String FE_MODIF = "";
+                //String US_MODIF = "";
+                //String FE_MODIF = "";
                 String ID_TRABAJADOR = request.getParameter("idtr");
                 // out.print(opc+"   "+AP_NOMBRES_PADRE+AP_NOMBRES_MADRE+ES_TRABAJA_UPEU_CONYUGUE+AP_NOMBRES_CONYUGUE+FE_NAC_CONYUGUE+TI_DOC_ID+ NU_DOC + LI_INSCRIPCION_VIG_ESSALUD + US_MODIF+FE_MODIF + ID_TRABAJADOR+"");
                 pmc.MOD_PADRE_MADRE_CONYUGUE(AP_NOMBRES_PADRE, AP_NOMBRES_MADRE, ES_TRABAJA_UPEU_CONYUGUE, AP_NOMBRES_CONYUGUE, FE_NAC_CONYUGUE, TI_DOC_ID, NU_DOC, LI_INSCRIPCION_VIG_ESSALUD, US_MODIF, FE_MODIF, ID_TRABAJADOR);
