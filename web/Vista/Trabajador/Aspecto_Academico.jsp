@@ -132,13 +132,15 @@
                         out.print(trb.getCm_otros_estudios());
                     }%></td></tr>
                 <tr><td class="text-info" colspan="2" >CUENTA SUELDO</td></tr>
-
-
+                
+                
                 <%for (int k = 0; k < List_Cuenta_Sueldo.size(); k++) {
                         Cuenta_Sueldo cs = new Cuenta_Sueldo();
                         cs = (Cuenta_Sueldo) List_Cuenta_Sueldo.get(k);
                 %>
-                <%if (cs.getNo_banco() != null) {%>
+                <%if(cs.getNo_banco() == null){%>
+                <tr><td class="text-info" colspan="2" style="color:black;">Cuenta Sueldo No Registrado</td></tr>
+                <%}if (cs.getNo_banco() != null) {%>
                 <tr><td class="text-info">Banco:</td>
                     <%if(cs.getNo_banco().trim().equals("0")){%>
                     <td>Ninguno</td>
