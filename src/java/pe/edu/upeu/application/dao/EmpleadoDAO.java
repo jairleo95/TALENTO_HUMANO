@@ -460,4 +460,26 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
         }
     }
 
+    @Override
+    public void Reg_cod_huella(String idtr, int aps) {
+        CallableStatement cst;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = conn.conex.prepareCall("{CALL RHSP_MOD_COD_HUELLA( ?, ?)}");
+            cst.setString(1, idtr);
+            cst.setInt(2, aps);
+            cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al registrar codigo APS");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+    }
+
 }

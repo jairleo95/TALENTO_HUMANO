@@ -247,7 +247,34 @@
 
                                                 //   });
                                             });
+                                            $(".btn_cod_huella").click(function () {
 
+                                                for (var r = 1; r <= parseInt($(".num_huella").val()); r++) {
+                                                    if ($(".cod_huella" + r).val() != "") {
+                                                        $.ajax({
+                                                            url: "../../trabajador",
+                                                            type: "POST",
+                                                            data: "opc=reg_huella_masivo&cod=" + $(".cod_huella" + r).val() + "&idtr=" + $(".idtr" + r).val()
+                                                        }).done(function () {
+
+                                                        });
+                                                        $.ajax({
+                                                            url: "../../autorizacion",
+                                                            type: "POST",
+                                                            data: "opc=Aceptar" + $(".val_aut" + r).val()
+                                                        }).done(function () {
+                                                            window.location.href = "../../autorizacion";
+                                                        });
+
+                                                    }
+
+                                                }
+                                                //  $.each($(".cod_aps"), function () {
+
+                                                /**/
+
+                                                //   });
+                                            });
 
                                         });
                                     </script>
@@ -260,6 +287,9 @@
                                         <%}%>
                                         <%if (idrol.trim().equals("ROL-0009")) {%>
                                         <button type="button" class="btn btn-success btn_cod_aps">Procesar codigos</button>
+                                        <%}%>
+                                        <%if (idrol.trim().equals("ROL-0007")) {%>
+                                        <button type="button" class="btn btn-success btn_cod_huella">Procesar codigos</button>
                                         <%}%>
                                         <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                                             <thead>
@@ -291,6 +321,9 @@
                                                         <%if (idrol.trim().equals("ROL-0009")) {%>
                                                     <th><strong>Código APS</strong></th>
                                                         <%}%>
+                                                        <%if (idrol.trim().equals("ROL-0007")) {%>
+                                                    <th><strong>Código Huella</strong></th>
+                                                        <%}%>
                                                 </tr>
                                             </thead>
                                             <tbody> 
@@ -298,6 +331,7 @@
                                                     String iddgp = request.getParameter("iddgp");
                                                     String idtr = request.getParameter("idtr");
                                                     int num_cod_aps = 0;
+                                                    int num_cod_huella = 0;
                                                     InterfaceDgpDAO dgp = new DgpDAO();
                                                     if (t == 0) {
                                                 %>
@@ -442,7 +476,16 @@
                                             <td></td>
                                             <%}
                                                 }%>
-
+                                             <%if (idrol.trim().equals("ROL-0007")) {%>
+                                            <%if (a.getVal_cod_huella_emp()== 0) {
+                                                    num_cod_huella++;
+                                            %>
+                                            <td><input type="text" name="cod_huella" maxlength="6" class="cod_huella<%=(f + 1)%>" style="width:50px"/></td>
+                                            <input type="hidden" name="idtr"  class="idtr<%=(f + 1)%>" value="<%=a.getId_trabajador()%>" />
+                                            <%} else {%>
+                                            <td></td>
+                                            <%}
+                                                }%>   
                                             </tr>
                                             <% }
                                                 }
@@ -450,6 +493,7 @@
                                             </tbody>
                                         </table>
                                                 <input class="num_aps" type="hidden" value="<%=num_cod_aps%>" />
+                                                <input class="num_huella" type="hidden" value="<%=num_cod_huella%>" />
                                     </div>
                                     <!-- end widget content -->
 

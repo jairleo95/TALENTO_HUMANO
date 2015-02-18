@@ -29,4 +29,5 @@ public interface InterfaceEmpleadoDAO {
     public List<Evaluacion_Emp> Listar_Evaluacion_Emp (String id_emp);
     public void Mod_Evaluacion_emp ( String RE_EVALUACION, String ID_EMPLEADO);
     public void Reg_aps(String idtr,int aps);
+    public void Reg_cod_huella(String idtr,int aps);
 }

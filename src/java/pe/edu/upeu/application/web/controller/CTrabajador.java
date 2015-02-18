@@ -319,6 +319,11 @@ public class CTrabajador extends HttpServlet {
             em.Reg_aps(idtr, co_aps);
 
         }
+        if ("reg_huella_masivo".equals(opc)) {
+            String idtr = request.getParameter("idtr");
+            int cod_huella = Integer.parseInt(request.getParameter("cod"));
+            em.Reg_cod_huella(idtr, cod_huella);
+        }
 
         if (opc.equals("Editar_Dat_Gen")) {
             String idtr = request.getParameter("idtr");

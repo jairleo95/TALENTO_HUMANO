@@ -44,7 +44,16 @@ public class V_Autorizar_Dgp {
     private String no_dep;
     private String mes_creacion;
     private int val_cod_aps_empleado;
+    private int val_cod_huella_emp;
 
+    public int getVal_cod_huella_emp() {
+        return val_cod_huella_emp;
+    }
+
+    public void setVal_cod_huella_emp(int val_cod_huella_emp) {
+        this.val_cod_huella_emp = val_cod_huella_emp;
+    }
+    
     public int getVal_cod_aps_empleado() {
         return val_cod_aps_empleado;
     }
@@ -90,7 +99,7 @@ public class V_Autorizar_Dgp {
             String no_puesto, String nu_pasos, String id_dgp, String co_pasos, String id_detalle_req_proceso, String de_pasos, String id_departamento, String id_puesto,
             String id_requerimiento, String id_tipo_planilla, String no_req, String id_pasos, String no_usuario, String id_usuario, String no_seccion, String no_area,
             String ar_foto, String de_foto, String id_foto, String no_ar_foto, String ta_ar_foto, String ti_ar_foto, String fe_creacion, int val_plazo, String ver_list_plazo,
-            String elab_contrato, String val_firm_contrato, String no_dep,String mes_creacion,int val_cod_aps_empleado) {
+            String elab_contrato, String val_firm_contrato, String no_dep,String mes_creacion,int val_cod_aps_empleado,int val_cod_huella_emp) {
         this.id_trabajador = id_trabajador;
         this.no_trabajador = no_trabajador;
         this.ap_paterno = ap_paterno;
@@ -125,6 +134,7 @@ public class V_Autorizar_Dgp {
         this.no_dep = no_dep;
         this.mes_creacion = mes_creacion;
         this.val_cod_aps_empleado = val_cod_aps_empleado;
+        this.val_cod_huella_emp = val_cod_huella_emp;
     }
 
     public V_Autorizar_Dgp() {
@@ -162,6 +172,7 @@ public class V_Autorizar_Dgp {
         this.val_plazo = 0;
         this.mes_creacion = "";
         this.val_cod_aps_empleado = 0;
+        this.val_cod_huella_emp = 0;
     }
 
     public String getVer_list_plazo() {
