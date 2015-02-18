@@ -638,7 +638,7 @@
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
                                                                         <select name="BANCO" id="banco" class="form-control input-group-sm">
-                                                                            <option value=""  disabled="" >[SELECCIONE]</option>
+                                                                            <option value=""  disabled="" selected="">[SELECCIONE]</option>
                                                                             <%for (int u = 0; u < List_Cuenta_Sueldo.size(); u++) {
                                                                                     Cuenta_Sueldo cs = new Cuenta_Sueldo();
                                                                                     cs = (Cuenta_Sueldo) List_Cuenta_Sueldo.get(u);
@@ -725,7 +725,11 @@
                                                             <div class="col-sm-4" id="generar" >
                                                                 <div class="form-group">
                                                                     <div class="input-g">
-                                                                        <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="1">
+                                                                        <%if(cs.getEs_gem_nu_cuenta().trim().equals("1")){%>
+                                                                        <input type="checkbox" checked="" name="GEN_NU_CUEN" id="subscription"  value="1">
+                                                                        <%}else{%>
+                                                                        <input type="checkbox"  name="GEN_NU_CUEN" id="subscription"  value="1">
+                                                                        <%}%>
                                                                         <i></i>Generar Nro de Cuenta Bancaria
                                                                     </div>
                                                                 </div>
@@ -1133,7 +1137,7 @@
                 $("#nu_cuen_otros").attr("required", "required");
                 $("#generar").hide();
                 $("#subscription").attr('checked', false);
-                document.getElementById("nu_cuen_otros").disabled = false;
+                 document.getElementById("nu_cuen_otros").readOnly = false;
             }
             if (banco == '0') {
                 $("#no_cuen").hide();
@@ -1142,7 +1146,7 @@
                 $("#nu_cuen_ban").val("");
                 $("#no_cuen_otros").show();
                 $("#nu_cuen_otros").val("BBVA Banco Continental");
-                document.getElementById("nu_cuen_otros").disabled = true;
+                document.getElementById("nu_cuen_otros").readOnly = true;
                 $("#generar").show();
                 $("#subscription").attr("required", "required");
                 $("#nu_cuen_otros").attr("required", "required");

@@ -71,37 +71,17 @@
     <body>
         <div id="main" role="main" style="margin-left: 0px;">
             <div id="content">
-                <!-- widget grid -->
                 <section id="widget-grid" class="">
-                    <!-- row -->
                     <div class="row">
-                        <!-- NEW WIDGET START -->
                         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-3" data-widget-editbutton="false">
-                                <!-- widget options:
-                                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-
-                                data-widget-colorbutton="false"
-                                data-widget-editbutton="false"
-                                data-widget-togglebutton="false"
-                                data-widget-deletebutton="false"
-                                data-widget-fullscreenbutton="false"
-                                data-widget-custombutton="false"
-                                data-widget-collapsed="true"
-                                data-widget-sortable="false"
-                                -->
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
                                     <h2>Usuarios</h2>
                                 </header>
-                                <!-- widget div-->
                                 <div>
-                                    <!-- widget edit box -->
                                     <div class="jarviswidget-editbox">
-                                        <!-- This area used as dropdown edit box -->
                                     </div>
-                                    <!-- end widget edit box -->
-                                    <!-- widget content -->
                                     <div class="widget-body no-padding">
                                         <table id="datatable_tabletools" class="table table-striped table-bordered table-hover" width="100%">
                                             <thead>
@@ -117,11 +97,10 @@
                                                     <th>Usuario</th>
                                                     <th>Clave</th>
                                                     <th>Estado</th>
-
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
+                                               
                                                     <%for (int i = 0; i < List_Usuario_var.size(); i++) {
                                                             V_Var_Usuario v = new V_Var_Usuario();
                                                             v = (V_Var_Usuario) List_Usuario_var.get(i);
@@ -159,7 +138,7 @@
 
                                                 </tr>
                                                 <%}%>  
-                                                </tr>
+                                             
                                             </tbody>
                                         </table>
                                     </div>
