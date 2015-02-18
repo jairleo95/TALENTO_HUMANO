@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
     HttpSession sesion_1 = request.getSession();
@@ -211,6 +212,7 @@
                             <form action="../../trabajador" method="post">
                                 <table   class="info-det">
                                     <%
+                                        CConversion c = new CConversion();
                                         for (int index = 0; index < ListaridTrabajador.size(); index++) {
                                             V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
                                             trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
@@ -221,7 +223,7 @@
                                             <tr><td class="td">Nombre :</td><td class="td1"><%=trb.getNo_trabajador().toUpperCase()%></td></tr>
                                             <tr><td class="td">Apellido Paterno :</td><td class="td1"><%=trb.getAp_paterno().toUpperCase()%></td></tr>
                                             <tr><td class="td">Apellido Materno :</td><td class="td1"><%=trb.getAp_materno().toUpperCase()%></td></tr>
-                                            <tr><td class="td">Fecha de Nacimiento :</td><td class="td1"><%=trb.getFe_nac()%></td></tr>
+                                            <tr><td class="td">Fecha de Nacimiento :</td><td class="td1"><%=c.convertFecha5(trb.getFe_nac())%></td></tr>
                                         </table>
                                     </td>
                                     <%String ID_ROL = (String) sesion.getAttribute("IDROL");

@@ -23,89 +23,84 @@
         <script src="../js3/abc.js"></script>
         <script src="../js3/organictabs.jquery.js"></script>-->
         <style type="text/css">
-            /*
-                        .submit{
-                            margin:10px;
-                            margin-left:0px;
-                            width: 100%;
-                            height:90%;
-                            color:white;
-                            background-color: #0575f4 ;
-            
-                        }
-                        .tab-mant{
-                            margin:10px;   
-                        }   
-                        .lab-mant{
-                            color:#0575f4;  
-                            //font-size:34px; 
-                            // margin: 5px;
-                        }
-                        .body{
-                            background-color: #EEE;
-            
-                        }
-            
-                        td{
-                            text-align: left;
-                        } */
+            .contenedor{
+                margin-left: 1%;
+                width: 98%;
+            }
+
         </style>
 
     </head>
     <body class="body">
-        <h1>Mantenimiento a Usuarios de  Personal</h1>
-        <form class="smart-form form-group" action="../../Usuario">
-            <div class="row">
-                <section class="col col-4">
-                    <label class="label">Empleado:</label>
-                    <label class="select">
-                        <select class="form-control" name="IDEMPLEADO">
-                            <option value="">[Seleccione]</option>
-                            <%for (int i = 0; i < Listar_Emp.size(); i++) {
-                                    V_List_Empleado ve = new V_List_Empleado();
-                                    ve = (V_List_Empleado) Listar_Emp.get(i);
-                            %>
-                            <option value="<%=ve.getId_empleado()%>"><%=ve.getNo_trabajador()%><%="     "%><%=ve.getAp_paterno()%><%="    "%><%=ve.getAp_materno()%></option>
-                            <%}%>
-                        </select>
-                        <i></i> </label>
-                </section>
-            </div>
-            <div class="row">
-                <section class="col col-4">
-                    <label class="label">Rol:</label>
-                    <label class="select">
-                        <select name="IDROLES" >
-                            <option value=""></option>
-                            <%for (int i = 0; i < List_Rol.size(); i++) {
-                                    Rol r = new Rol();
-                                    r = (Rol) List_Rol.get(i);
-                            %>
-                            <option value="<%=r.getId_rol()%>"><%=r.getNo_rol()%></option>
-                            <%}%>
-                        </select>
-                    </label>
-                </section>
-            </div>
-            <div class="row">
-                <section class="col col-2">
-                    <label class="label">Usuario:</label>
-                    <label class="input">
-                        <input type="text" required="" name="USUARIO"  >
-                    </label>                                
-                </section>
-                <section class="col col-2">
-                    <label class="label">Clave:</label>
-                    <label class="input">
-                       <input type="password"  required="" name="CLAVE" > 
-                    </label>
-                </section>
-                <input type="submit" name="opc"  class="submit" value="Registrar Usuario">
-            </div>
-            
-               
-            
-        </form>
+        <div class="row">
+            <center>
+                <h1>Mantenimiento a Usuarios de  Personal</h1>
+                <hr>
+            </center>
+                <div class="contenedor">
+                    <article class="col-sm-12">
+                        <div id="wid-id-0" class="jarviswidget" role="widget">
+                            <div>
+                                <div class="jarviswidget-editbox">
+                                </div>
+                                <div class="widget-body no-padding ">
+                                    <form class="smart-form" action="../../Usuario">
+                                        <fieldset>
+                                            <h2>Registro de Usuarios </h2>
+                                        </fieldset>
+                                        <fieldset>
+                                            <section class="col col-3">
+                                                <label class="label">Empleado:</label>
+                                                <label class="select">
+                                                    <select class="form-control" name="IDEMPLEADO">
+                                                        <option value="">[Seleccione]</option>
+                                                        <%for (int i = 0; i < Listar_Emp.size(); i++) {
+                                                                V_List_Empleado ve = new V_List_Empleado();
+                                                                ve = (V_List_Empleado) Listar_Emp.get(i);
+                                                        %>
+                                                        <option value="<%=ve.getId_empleado()%>"><%=ve.getNo_trabajador()%><%="     "%><%=ve.getAp_paterno()%><%="    "%><%=ve.getAp_materno()%></option>
+                                                        <%}%>
+                                                    </select>
+                                                    <i></i> </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">Rol:</label>
+                                                <label class="select">
+                                                    <select class="form-control" name="IDROLES" >
+                                                        <option value="">[Seleccione]</option>
+                                                        <%for (int i = 0; i < List_Rol.size(); i++) {
+                                                                Rol r = new Rol();
+                                                                r = (Rol) List_Rol.get(i);
+                                                        %>
+                                                        <option value="<%=r.getId_rol()%>"><%=r.getNo_rol()%></option>
+                                                        <%}%>
+                                                    </select>
+                                                    <i></i> </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">Usuario:</label>
+                                                <label class="input">
+                                                    <input type="text" required="" name="USUARIO"  >
+                                                    <i></i> </label>                                
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">Clave:</label>
+                                                <label class="input">
+                                                    <input type="password"  required="" name="CLAVE" > 
+                                                    <i></i> </label>
+                                            </section>
+                                        </fieldset>
+                                        <footer>
+                                            <input type="submit" name="opc" class="btn btn-primary btn-sm" value="Registrar Usuario">
+                                            <input type="reset" class="btn btn-default btn-sm" value="Limpiar">
+                                        </footer>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+        </div>
     </body>
     <!--<script src="../js2/prism.jss" type="text/javascript" charset="utf-8"></script>
     <script src="../js2/chosen.jquery.js" type="text/javascript"></script>
@@ -125,45 +120,6 @@
          $(selector).chosen(config[selector]);
          }*/
     </script>
-    <script src="../../js/app.config.js"></script>
-
-    <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
-    <script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
-
-    <!-- BOOTSTRAP JS -->
-    <script src="../../js/bootstrap/bootstrap.min.js"></script>
-
-    <!-- CUSTOM NOTIFICATION -->
-    <script src="../../js/notification/SmartNotification.min.js"></script>
-
-    <!-- JARVIS WIDGETS -->
-    <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
-
-    <!-- EASY PIE CHARTS -->
-    <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
-
-    <!-- SPARKLINES -->
-    <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
-
-    <!-- JQUERY VALIDATE -->
-    <script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
-
-    <!-- JQUERY MASKED INPUT -->
-    <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
-
-    <!-- JQUERY SELECT2 INPUT -->
-    <script src="../../js/plugin/select2/select2.min.js"></script>
-
-    <!-- JQUERY UI + Bootstrap Slider -->
-    <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
-
-    <!-- browser msie issue fix -->
-    <script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
-
-    <!-- FastClick: For mobile devices -->
-    <script src="../../js/plugin/fastclick/fastclick.min.js"></script>
-
-
 
 </html>
 <%@include file="List_Usuario.jsp" %>

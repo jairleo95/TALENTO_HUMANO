@@ -98,19 +98,19 @@ public class Padre_Madre_ConyugueDAO implements InterfacePadre_Madre_ConyugueDAO
     }
 
     @Override
-    public void MOD_PADRE_MADRE_CONYUGUE(String AP_NOMBRES_PADRE, String AP_NOMBRES_MADRE, String ES_TRABAJA_UPEU_CONYUGUE, String AP_NOMBRES_CONYUGUE, String FE_NAC_CONYUGUE, String TI_DOC_ID, String NU_DOC, String LI_INSCRIPCION_VIG_ESSALUD, String US_MODIF, String FE_MODIF, String ID_TRABAJADOR) {
+    public void MOD_PADRE_MADRE_CONYUGUE(String AP_NOMBRES_PADRE, String AP_NOMBRES_MADRE, String ES_TRABAJA_UPEU_CONYUGUE, String AP_NOMBRES_C, String FE_NAC_C, String ID_TIPO_DOC_C, String NU_DOC_C, String LI_INSCRIPCION_VIG_ESSALUD_C, String ID_TRABAJADOR) {
         CallableStatement cst;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            cst = conn.conex.prepareCall("{CALL RHSP_MOD_PADRE_MAD_CON( ?, ?, ?, ?, ?, ?, ?, ?, ? )}");
+            cst = conn.conex.prepareCall("{CALL RHSP_MOD_PADRE_MAD_CON( ?, ?, ?, ?, ?, ?, ?, ? ,?)}");
             cst.setString(1, AP_NOMBRES_PADRE);
             cst.setString(2, AP_NOMBRES_MADRE);
             cst.setString(3, ES_TRABAJA_UPEU_CONYUGUE);
-            cst.setString(4, AP_NOMBRES_CONYUGUE);
-            cst.setString(5, FE_NAC_CONYUGUE);
-            cst.setString(6, TI_DOC_ID);
-            cst.setString(7, NU_DOC);
-            cst.setString(8, LI_INSCRIPCION_VIG_ESSALUD);
+            cst.setString(4, AP_NOMBRES_C);
+            cst.setString(5, FE_NAC_C);
+            cst.setString(6, ID_TIPO_DOC_C);
+            cst.setString(7, NU_DOC_C);
+            cst.setString(8, LI_INSCRIPCION_VIG_ESSALUD_C);
             cst.setString(9, ID_TRABAJADOR);
             cst.execute();
         } catch (SQLException ex) {
