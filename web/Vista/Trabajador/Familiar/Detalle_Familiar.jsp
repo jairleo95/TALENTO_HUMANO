@@ -1,4 +1,5 @@
 
+<%@page import="pe.edu.upeu.application.model.Tipo_Documento"%>
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
 <%
     HttpSession sesion_ = request.getSession();
@@ -10,6 +11,7 @@
 <jsp:useBean id="List_PMC" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="LISTA_HIJOS" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Lista_Tipo_Doc" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -51,6 +53,11 @@
                             out.print("No registrado");
                         }
                             %></td></tr>
+                    <%if(tr.getAp_nombres_madre() == null && tr.getAp_nombres_padre() == null ){%>
+                    <%  if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005")) {%>
+                <tr><td colspan="2"> <a class="btn btn-success" href=Reg_Padre_Madre_Conyugue.jsp?idtr=<%=request.getParameter("idtr")%>">Agregar Padres</a></td></tr>
+                <%}%>
+                <%}%>
                 </table>
             </div>
 
@@ -89,18 +96,17 @@
                     }
                         %></td></tr>
                 <tr ><td class="text-info">Tipo Documento:</td><td class="text-info-left">
-                        <%if (tr.getId_tipo_doc_c() != null) {
-
-                                if (tr.getId_tipo_doc_c().trim().equals("1")) {
-                                    out.println("DNI");
+                        <%if(tr.getId_tipo_doc_c() != null){
+                            for (int h = 0; h < Lista_Tipo_Doc.size(); h++) {
+                                Tipo_Documento td = new Tipo_Documento();
+                                td= (Tipo_Documento) Lista_Tipo_Doc.get(h);
+                                if(tr.getId_tipo_doc_c().trim().equals(td.getId_tipo_doc_ident().trim())){
+                                    out.print(td.getDe_tdoc_abreviada());
                                 }
-                                if (tr.getId_tipo_doc_c().trim().equals("2")) {
-                                    out.println("Pasaporte");
-                                }
-                            } else {
-
-                                out.println("No registrado");
                             }
+                        }else{
+                        out.print("no registrado");
+                        }
                         %>
                     </td></tr>
                 <tr><td class="text-info">Nro Documento:</td><td class="text-info-left"><%if (tr.getNu_doc_c() != null) {
@@ -126,10 +132,7 @@
                             }
                         %>
                     </td></tr>
-                <input type="hidden" name="idtra" value="<%=tr.getId_trabajador().trim()%>">
-                <input type="hidden" name="opc" value="Editar_Familiar">
-                
-                <tr><td colspan="2"><input class="btn btn-success" type="submit" value="EDITAR"></td></tr>
+               
                         <%} else {%>
 
 
@@ -139,6 +142,12 @@
                 <tr><td colspan="2"> <a class="btn btn-success" href=Reg_Padre_Madre_Conyugue.jsp?idtr=<%=request.getParameter("idtr")%>">Agregar Cónyugue</a></td></tr>
                 <%}%>
                 <%}%>
+                <%if(tr.getAp_nombres_c() != null && tr.getAp_nombres_madre() != null && tr.getAp_nombres_padre()!= null ){%>
+                 <input type="hidden" name="idtra" value="<%=tr.getId_trabajador().trim()%>">
+                <input type="hidden" name="opc" value="Editar_Familiar">
+                <tr><td colspan="2"><input class="btn btn-success" type="submit" value="EDITAR"></td></tr>
+                <%}%>
+                
             </table>
         </form>
 

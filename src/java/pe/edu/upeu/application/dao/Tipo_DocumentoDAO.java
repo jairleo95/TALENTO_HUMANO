@@ -25,7 +25,7 @@ public class Tipo_DocumentoDAO implements InterfaceTipo_DocumentoDAO {
     @Override
     public List<Tipo_Documento> Listar_tipo_doc() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from rhtx_tipo_doc_ident";
+        String sql = "select * from rhtx_tipo_doc_ident order by ID_TIPO_DOC_IDENT";
         List<Tipo_Documento> list = new ArrayList<Tipo_Documento>();
         try {
             ResultSet rs = this.conn.query(sql);

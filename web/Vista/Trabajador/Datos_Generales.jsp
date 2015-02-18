@@ -1,3 +1,6 @@
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceTipo_DocumentoDAO"%>
+<%@page import="pe.edu.upeu.application.dao.Tipo_DocumentoDAO"%>
+<%@page import="pe.edu.upeu.application.model.Tipo_Documento"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
     HttpSession sesion_1 = request.getSession();
@@ -33,13 +36,18 @@
                 <tr><td  class="text-info">Tipo Documento:</td><td>
                         <%
                             InterfaceListaDAO list = new ListaDAO();
-                            for (int t = 0; t < list.List_Doc().size(); t++) {
-                                if ((t + 1 + "").equals(trb.getTi_doc())) {
-                                    out.println(list.List_Doc().get(t));
-                                }
-                            }
-                        %>
-                    </td></tr>
+                            InterfaceTipo_DocumentoDAO itd = new Tipo_DocumentoDAO();
+
+                            for (int k = 0; k < itd.Listar_tipo_doc().size(); k++) {
+                                Tipo_Documento td = new Tipo_Documento();
+                                td = (Tipo_Documento) itd.Listar_tipo_doc().get(k);
+                                if (td.getId_tipo_doc_ident().trim().equals(trb.getTi_doc().trim())) {
+                out.print(td.getDe_tdoc_abreviada());
+                 }
+                    }
+                %>
+ 
+                </td></tr>
                 <tr><td  class="text-info">Numero Documento:</td><td><%=trb.getNu_doc()%></td></tr>
                 <tr><td  class="text-info">Estado Civil:</td><td><%
                     for (int r = 0; r < list.List_Estado_Civil().size(); r++) {

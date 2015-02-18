@@ -1,4 +1,7 @@
 
+<%@page import="pe.edu.upeu.application.model.Tipo_Documento"%>
+<%@page import="pe.edu.upeu.application.dao.Tipo_DocumentoDAO"%>
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceTipo_DocumentoDAO"%>
 <%@page import="pe.edu.upeu.application.dao.ListaDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceListaDAO"%>
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
@@ -258,13 +261,15 @@
 
                                                                             <select name="TIPO_DOC_ID"  class="form-control input-group-sm" required="">
                                                                                 <%
-                                                                                    InterfaceListaDAO list = new ListaDAO();
-                                                                                    for (int k = 0; k < list.List_Doc().size(); k++) {
-                                                                                        String num = Integer.toString(k + 1);
-                                                                                        if ((num).equals(t.getId_tipo_doc_c())) {%>
-                                                                                <option value="<%=num%>" selected=""><%= list.List_Doc().get(k)%></option>
+                                                                                    InterfaceTipo_DocumentoDAO itd = new Tipo_DocumentoDAO();
+
+                                                                                    for (int k = 0; k < itd.Listar_tipo_doc().size(); k++) {
+                                                                                        Tipo_Documento td = new Tipo_Documento();
+                                                                                        td = (Tipo_Documento) itd.Listar_tipo_doc().get(k);
+                                                                                        if (td.getId_tipo_doc_ident().trim().equals(t.getId_tipo_doc_c().trim())) {%>
+                                                                                <option value="<%=td.getId_tipo_doc_ident()%>" selected=""><%=td.getDe_tdoc_abreviada()%></option>
                                                                                 <%} else {%>
-                                                                                <option value="<%=num%>"><%= list.List_Doc().get(k)%></option>    
+                                                                                <option value="<%=td.getId_tipo_doc_ident()%>"><%=td.getDe_tdoc_abreviada()%></option>    
                                                                                 <% }
                                                                                     }
                                                                                 %>
@@ -294,10 +299,10 @@
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select name="INSCRIPCION_VIG_ESSALUD"  class="form-control input-group-sm" required="">
-                                                                                <%if(t.getLi_inscripcion_vig_essalud_c().trim().equals("1")){%>
+                                                                                <%if (t.getLi_inscripcion_vig_essalud_c().trim().equals("1")) {%>
                                                                                 <option value="1" selected="">Si</option>
                                                                                 <option value="0">No</option>
-                                                                                <%}else if(t.getLi_inscripcion_vig_essalud_c().trim().equals("0")){%>
+                                                                                <%} else if (t.getLi_inscripcion_vig_essalud_c().trim().equals("0")) {%>
                                                                                 <option value="1">Si</option>
                                                                                 <option value="0" selected="">No</option>
                                                                                 <%}%>

@@ -180,7 +180,7 @@
 
 
         <!--Begin Detalle Trabajador-->
-        <div   class="titulo" style=" width:100%;">Detalle del Trabajador</div> 
+        <div   class="titulo" style=" width:100%;">Datos del Trabajador</div> 
         <div  class="jarviswidget well" id="wid-id-3" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
 
             <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
