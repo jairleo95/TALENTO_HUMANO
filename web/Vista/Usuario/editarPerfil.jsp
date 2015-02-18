@@ -86,16 +86,12 @@
             }
         </style>
 
-        <script LANGUAGE="JavaScript">
-            function mi_alerta() {
-                confirmar = confirm("¿Estas seguro de modificar?");
-                if (confirmar)
-                    // si pulsamos en aceptar
-                    alert('Has dicho que si');
-                else
-                    // si pulsamos en cancelar
-                    alert('Has dicho que no');
-            }</script>
+        <script>
+            function oultar(){
+                document.all.capa.style.visibility="hidden";
+            }
+        </script>
+            
 
     </head>
     <body>
@@ -107,7 +103,7 @@
             <h3>-Modificar Perfil Usuario</h3>
             <hr>
 
-            <form id="wizard-1" novalidate="novalidate"  class="form"  action="../../Usuario"  method="post">
+            <form id="wizard-1" novalidate="novalidate"  class="form form_user"  action="../../Usuario"  method="post">
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="form-group">
@@ -248,7 +244,7 @@
                     <div class="col-sm-3">
 
                         <div class="form-group">
-
+                            <label for="exampleInput">Via</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                 <select name="DIR_DOM_A_D1_ID" id="DOM_A_D1" class="form-control input-group-sm"  required="">
@@ -273,7 +269,7 @@
 
                     <div class="col-sm-3">
                         <div class="form-group">
-
+                              <label for="exampleInput"></label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                 <input class="form-control input-group-sm" required autofocus=""  value="<%=vu.getDi_dom_a_d2()%>"   placeholder="" type="text" name="DIR_DOM_A_D2" id="DOM_A_D2" maxlength="100">
@@ -324,7 +320,7 @@
                     <div class="col-sm-3">
 
                         <div class="form-group">
-
+                            <label for="exampleInput"></label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                 <select name="DIR_DOM_A_D3_ID" id="DOM_A_D3" class="form-control input-group-sm"  required="">
@@ -415,7 +411,7 @@
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
-
+                           <label for="exampleInput"></label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                 <input class="form-control input-group-sm"  required autofocus=""  value="<%=vu.getDi_dom_a_d4()%>"  placeholder="" type="text" name="DIR_DOM_A_D4" id="DOM_A_D4" maxlength="50">
@@ -429,7 +425,7 @@
                     <div class="col-sm-4">
 
                         <div class="form-group">
-
+                            <label for="exampleInput">Zona:</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                 <select name="DIR_DOM_A_D5_ID" id="DOM_A_D5" class="form-control input-group-sm" required="">
@@ -451,7 +447,7 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-
+                           <label for="exampleInput"></label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                 <input class="form-control input-group-sm"  required autofocus=""  value="<%=vu.getDi_dom_a_d6()%>"  placeholder="" type="text" name="DIR_DOM_A_D6" id="DOM_A_D6" maxlength="50">
@@ -461,7 +457,7 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-
+                          <label for="exampleInput"></label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                 <input class="form-control input-group-sm"  required autofocus=""  value="<%=vu.getDi_dom_a_ref()%>"   placeholder="Referencia" type="text" name="DIR_DOM_A_REF" id="DOM_A_REF" maxlength="50">
@@ -475,8 +471,9 @@
                     <div class="col-sm-3">
 
                         <div class="form-group">
-
+                         <label for="exampleInput">Departamento:</label>
                             <div class="input-group">
+                               
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
 
                                 <select  id="dep_dir_a" class="form-control input-group-sm"  required="" name="ID_DEPARTAMENTO">
@@ -500,6 +497,7 @@
                     <div class="col-sm-3">
 
                         <div class="form-group">
+                            <label for="exampleInput">Provincia:</label>
 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
@@ -526,7 +524,7 @@
                     <div class="col-sm-3">
 
                         <div class="form-group">
-
+                             <label for="exampleInput">Distrito:</label>
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
@@ -552,10 +550,11 @@
                             return false;"  class="btn btn-primary" id="btn-duplicar">Duplicar</button>-->
 
                 </div><br>
-                <input type="text" value="<%=vu.getId_trabajador()%>" name="ID_TR"/>
-                <input type="text" value="<%=vu.getId_usuario()%>" name="idus" />
-                <input type="hidden" value="opc" name="editar_Perfil" />
-                <input type="Submit"  name="opc" class="btn btn-primary btn_modificar" id="idus" value="Modificar" >
+             
+                <input  type="text"  disabled="disabled" value="<%=vu.getId_trabajador()%>" name="ID_TR"/>
+                <input  type="text" readonly="readonly"  value="<%=vu.getId_usuario()%>" name="idus" />
+                <input type="hidden" value="Modificar" name="opc" />
+                <input type="Submit"  class="btn btn-primary btn_modificar" id="idus"  value="Modificar" >
 
 
                 <h2>...</h2>
@@ -718,27 +717,15 @@
                             $(".btn_modificar").click(function (e) {
                                 $.SmartMessageBox({
                                     title: "Smart Alert!",
-                                    content: "This is a confirmation box. Can be programmed for button callback",
+                                    content: "Se trata de un cuadro de confirmación. Puede ser programado para el botón de devolución de llamada",
                                     buttons: '[No][Si]'
                                 }, function (ButtonPressed) {
                                     if (ButtonPressed === "Si") {
 
-                                        $.smallBox({
-                                            title: "Callback function",
-                                            content: "<i class='fa fa-clock-o'></i> <i>You pressed Yes...</i>",
-                                            color: "#659265",
-                                            iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                            timeout: 4000
-                                        });
+                                     $(".form_user").submit();
                                     }
                                     if (ButtonPressed === "No") {
-                                        $.smallBox({
-                                            title: "Callback function",
-                                            content: "<i class='fa fa-clock-o'></i> <i>You pressed No...</i>",
-                                            color: "#C46A69",
-                                            iconSmall: "fa fa-times fa-2x fadeInRight animated",
-                                            timeout: 4000
-                                        });
+                                      return false;
                                     }
 
                                 });
