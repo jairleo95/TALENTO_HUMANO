@@ -69,7 +69,7 @@ public class PasoDAO implements InterfacePasoDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select d.*,u.no_usuario   from (select  pd.* ,p.ID_PASOS,p.ID_DETALLE_PASOS from RHTD_DETALLE_PASOS p , RHVD_PUESTO_DIRECCION pd where pd.ID_PUESTO = p.ID_PUESTO and p.ES_DETALLE_PASOS='1') d  left outer join  rhvd_usuario u on( u.ID_PUESTO = d.ID_PUESTO) where d.ID_PASOS='" + id + "' ";
+            String sql = "select  pd.* ,p.ID_PASOS,p.ID_DETALLE_PASOS,p.ES_DETALLE_PASOS from RHTD_DETALLE_PASOS p , RHVD_PUESTO_DIRECCION pd where pd.ID_PUESTO = p.ID_PUESTO  and p.ID_PASOS='" + id + "' ";
 
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
@@ -81,7 +81,7 @@ public class PasoDAO implements InterfacePasoDAO {
                 rec.put("puesto", rs.getString("no_puesto"));
                 rec.put("area", rs.getString("no_area"));
                 rec.put("direccion", rs.getString("no_direccion"));
-                rec.put("usuario", rs.getString("no_usuario"));
+                rec.put("estado", rs.getString("es_detalle_pasos"));
 
                 lista.add(rec);
             }
@@ -111,6 +111,31 @@ public class PasoDAO implements InterfacePasoDAO {
             cst.setString(3, DE_PASOS);
             cst.setString(4, NU_PASOS);
             cst.setString(5, CO_PASOS);
+            cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR: " + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+    }
+
+    @Override
+    public void UPDATE_PASOS(String ID_PASOS, String ID_PROCESO, String DE_PASOS, String NU_PASOS, String CO_PASOS, String ES_PASO) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_UPDATE_PASOS( ?, ?, ?, ?, ? ,?)} ");
+            cst.setString(1, ID_PASOS);
+            cst.setString(2, ID_PROCESO);
+            cst.setString(3, DE_PASOS);
+            cst.setString(4, NU_PASOS);
+            cst.setString(5, CO_PASOS);
+            cst.setString(6, ES_PASO);
             cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
@@ -169,6 +194,29 @@ public class PasoDAO implements InterfacePasoDAO {
         } catch (Exception e) {
             this.conn.close();
         }
+    }
+
+    @Override
+    public void ESTADO_DETALLE_PUESTO(String ID,String ESTADO) {
+
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_ESTADO_DETALLE_PUESTO( ?,?)} ");
+            cst.setString(1, ID);
+            cst.setInt(2, Integer.parseInt(ESTADO));
+            cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR: " + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+
     }
 
 }

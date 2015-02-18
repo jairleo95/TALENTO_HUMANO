@@ -176,7 +176,7 @@
                             </div><!--/ End 2nd service -->
                             <div class="col-md-3 col-sm-3">
                                 <div class="service-content">
-                                    <a href=Generar_Dgp.jsp?text=1><span class="service-icon"><i class="fa fa-comments-o img-circle wow flipInX"></i></span></a>
+                                    <a href=Generar_Dgp.jsp?text=3><span class="service-icon"><i class="fa fa-comments-o img-circle wow flipInX"></i></span></a>
                                     <h3>Tiempo Parcial</h3>
                                     <p>
                                        
@@ -211,7 +211,7 @@
                             <div class="col-md-3 col-sm-3">
                                 <div class="service-content">
                                     <a href="Generar_Dgp.jsp?text=7"><span class="service-icon"><i class="fa fa-briefcase img-circle wow flipInX"></i></span></a>
-                                    <h3>Practicas Profesionales</h3>
+                                    <h3>Practicas Pre Profesionales</h3>
                                     <p>
                                    
                                     </p>
@@ -220,7 +220,7 @@
                             <div class="col-md-3 col-sm-3">
                                 <div class="service-content">
                                     <a href="Generar_Dgp.jsp?text=8"><span class="service-icon"><i class="fa fa-briefcase img-circle wow flipInX"></i></span></a>
-                                    <h3>Practicas Pre Profesionales</h3>
+                                    <h3>Practicas Profesionales</h3>
                                     <p>
                                     
                                     </p>
