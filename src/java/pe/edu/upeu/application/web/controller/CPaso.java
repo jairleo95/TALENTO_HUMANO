@@ -72,9 +72,14 @@ public class CPaso extends HttpServlet {
                 p.INSERT_PASOS(null, ID_PROCESO, DE_PASOS, NU_PASOS, CO_PASOS);
             }
             if (opc.equals("Update_nu_paso")) {
-                String ID_PASO = request.getParameter("paso");
-                String NU_PASO = request.getParameter("nu_paso");
-                p.UPDATE_NU_PASO(ID_PASO, NU_PASO);
+
+                int numero = Integer.parseInt(request.getParameter("num"));
+                for (int i = 1; i <= numero-1; i++) {
+                    String ID_PASO = request.getParameter("id" + i);
+                    String NU_PASO = request.getParameter("numero" + i);
+                    p.UPDATE_NU_PASO(ID_PASO, NU_PASO);
+                }
+
             }
             if (opc.equals("Modificar")) {
                 String ID_PASO = request.getParameter("id");

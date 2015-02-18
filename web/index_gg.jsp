@@ -13,46 +13,6 @@
         <title>Subidor Devtroce</title>
     </head>
     <body>
-        <form action=index_gg.jsp method=post enctype=multipart/form-data>
-            <table>
-                <tr>
-                    <td>Fichero</td>
-                    <td><input type=file name=fichero></td>
-                </tr>
-                <tr><td colspan=2><input type=submit value=enviar name=enviar>
-                    </td>
-                </tr>
-            </table>
-        </form>
-
-        <!-- codigo para subir el fichero al servidor-->
-        <%
-                //Ruta donde se guardara el fichero --/home/dreyna/NetBeansProjects/WebApplication3/web
-            //File destino = new File("/home/dreyna/archivos/");
-            //String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web/archivos/";
-            String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/";
-            out.println(ubicacion);
-            File destino = new File(ubicacion);
-            ServletRequestContext src = new ServletRequestContext(request);
-
-            if (ServletFileUpload.isMultipartContent(src)) {
-                DiskFileItemFactory factory = new DiskFileItemFactory((1024 * 1024), destino);
-                ServletFileUpload upload = new ServletFileUpload(factory);
-                java.util.List lista = upload.parseRequest(src);
-                File file = null;
-                java.util.Iterator it = lista.iterator();
-
-                while (it.hasNext()) {
-                    FileItem item = (FileItem) it.next();
-                    if (item.isFormField()) {
-                        out.println(item.getFieldName() + "<br>");
-                    } else {
-                        file = new File(item.getName());
-                        item.write(new File(destino, file.getName()));
-                        out.println("Fichero subido");
-                    } // end if
-                } // end while
-            } // end if
-%>
+        <%= pageContext.getAttribute("ListaridTrabajador") %>
     </body>
 </html>
