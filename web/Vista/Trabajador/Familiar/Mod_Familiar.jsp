@@ -315,6 +315,7 @@
                                                 <%String idtr = request.getParameter("idtr");%>
                                                 <input type="hidden" name="idtr" value="<%=idtr%>"/>
                                                 <input type="hidden" name="opc" value="MODIFICAR_PMC">
+                                                <input type="text" name="opc" value="<%=t.getFe_nac_c() %>">
                                                 <footer>
                                                     <center>
                                                         <button type="submit" value="" name="opc"> MODIFICAR</button>

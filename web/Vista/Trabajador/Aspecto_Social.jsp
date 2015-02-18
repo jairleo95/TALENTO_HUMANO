@@ -168,7 +168,7 @@
                     </td>
                 </tr>
                 <tr><td class="text-info">Religión:</td><td><%
-
+                if(trb.getLi_autoridad() != null){
                     if (trb.getLi_religion().equals("1")) {
                         out.println("Adventista");
                     }
@@ -177,11 +177,13 @@
                     }
                     if (trb.getLi_religion().equals("3")) {
                         out.println("Otros");
-                    }%></td></tr>
-                <tr><td class="text-info">Iglesia:</td><td><%if (trb.getNo_iglesia() == null) {
-                        out.print("no registrado");
+                    }
+                }else{out.print("no registrado");
+                        }%></td></tr>
+                <tr><td class="text-info">Iglesia:</td><td><%if (trb.getNo_iglesia() != null) {
+                          out.print(trb.getNo_iglesia());
                     } else {
-                        out.print(trb.getNo_iglesia());
+                        out.print("no registrado");
                     }%></td></tr>
                 <tr><td class="text-info">Cargo en la Iglesia:</td><td><%if (trb.getDe_cargo() == null) {
                         out.print("no registrado");
