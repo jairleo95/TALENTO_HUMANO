@@ -17,8 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import pe.edu.upeu.application.dao.Datos_Hijo_TrabajadorDAO;
 import pe.edu.upeu.application.dao.Padre_Madre_ConyugueDAO;
+import pe.edu.upeu.application.dao.TrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDatos_Hijo_Trabajador;
 import pe.edu.upeu.application.dao_imp.InterfacePadre_Madre_ConyugueDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 
 /**
  *
@@ -48,6 +50,7 @@ public class CFamiliar extends HttpServlet {
 
         InterfaceDatos_Hijo_Trabajador h = new Datos_Hijo_TrabajadorDAO();
         InterfacePadre_Madre_ConyugueDAO pmc = new Padre_Madre_ConyugueDAO();
+        InterfaceTrabajadorDAO tr = new  TrabajadorDAO();
 
         /*try {*/
         if (opc.equals("Registrar Conyugue")) {
@@ -130,11 +133,12 @@ public class CFamiliar extends HttpServlet {
             getServletContext().setAttribute("LISTA_HIJO", h.LISTA_HIJOS(idtr));
             response.sendRedirect("Vista/Trabajador/Familiar/Detalle_Familiar.jsp?idtr=" + idtr);
         }
-        if (opc.equals("Editar")) {
+        if (opc.equals("Editar_Familiar")) {
             String idtr = request.getParameter("idtra");
-            //out.print(opc+"   "+idtr);
-            getServletContext().setAttribute("List_PMC", pmc.List_PMC(idtr));
-            response.sendRedirect("Vista/Trabajador/Familiar/Mod_Padre_Madre_Conyugue.jsp?idtr=" + idtr);
+            //getServletContext().setAttribute("List_PMC", pmc.List_PMC(idtr));
+            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+           // out.print(tr.ListaridTrabajador(idtr).size()+"   "+idtr);
+           response.sendRedirect("Vista/Trabajador/Familiar/Mod_Familiar.jsp?idtr=" + idtr);
         }
         if (opc.equals("MODIFICAR PMC")) {
             try {
