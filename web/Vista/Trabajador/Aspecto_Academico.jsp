@@ -66,7 +66,7 @@
                             }%>
                     </td></tr>
                 <tr><td class="text-info">Tipo.I.E:</td>
-                    <% if (trb.getNo_universidad() != null){
+                    <% if (trb.getNo_universidad() != null) {
                             for (int y = 0; y < List_Universidad.size(); y++) {
                                 Universidad un = new Universidad();
                                 un = (Universidad) List_Universidad.get(y);
@@ -79,34 +79,34 @@
                                         if (un.getId_tipo_institucion().trim().equals(ti.getId_tipo_institucion().trim())) {
                     %>
                     <td><%=ti.getNo_tipo_institucion()%></td>
-                <%
+                    <%
                                     }
                                 }
                                 ;
                             }
                         }
-                    }else{
+                    } else {
 
-                %>
-                <td>no registrado</td>
-                <%}%>
+                    %>
+                    <td>no registrado</td>
+                    <%}%>
                 </tr>
                 <tr><td class="text-info">Centro de Estudios:</td>
-                    <%if (trb.getNo_universidad() != null){
-                    if (trb.getNo_universidad() != null) {
-                            for (int w = 0; w < List_Universidad.size(); w++) {
-                                Universidad u = new Universidad();
-                                u = (Universidad) List_Universidad.get(w);
-                                if (u.getNo_universidad().trim().equals(trb.getNo_universidad().trim())) {
+                    <%if (trb.getNo_universidad() != null) {
+                            if (trb.getNo_universidad() != null) {
+                                for (int w = 0; w < List_Universidad.size(); w++) {
+                                    Universidad u = new Universidad();
+                                    u = (Universidad) List_Universidad.get(w);
+                                    if (u.getNo_universidad().trim().equals(trb.getNo_universidad().trim())) {
                     %>
                     <td><%=u.getNo_universidad()%></td>
                     <%}
                             }
                         }
-                    }else{
-                       %>
-                       <td>no registrado</td> 
-                       <%}%>
+                    } else {
+                    %>
+                    <td>no registrado</td> 
+                    <%}%>
                 </tr>
                 <!--<tr><td class="text-info">Grado Acádemico:</td><td><%%></td></tr>-->
                 <tr><td class="text-info">Carrera:</td><td><%if (trb.getNo_carrera() == null) {
@@ -132,32 +132,37 @@
                         out.print(trb.getCm_otros_estudios());
                     }%></td></tr>
                 <tr><td class="text-info" colspan="2" >CUENTA SUELDO</td></tr>
-                <%if (List_Cuenta_Sueldo.size() > 0) {%>
-                <tr><td class="text-info" colspan="2" >CUENTA SUELDO</td></tr>
+
+
                 <%for (int k = 0; k < List_Cuenta_Sueldo.size(); k++) {
                         Cuenta_Sueldo cs = new Cuenta_Sueldo();
                         cs = (Cuenta_Sueldo) List_Cuenta_Sueldo.get(k);
                 %>
-                <tr><td class="text-info">Banco:</td><td><%if (cs.getNo_banco() == null) {
-                        out.print("no registrado");
-                    } else {
-                        out.print(cs.getNo_banco());
-                    }%></td></tr>
-                <tr><td class="text-info">Nro de Cuenta:</td><td><%if (cs.getNu_cuenta() == null) {
-                        out.print("no registrado");
-                    } else {
-                        out.print(cs.getNu_cuenta());
-                    }%></td></td></tr>
-                <tr><td class="text-info">Nro de Cuenta Bancaria:</td><td><%if (cs.getNu_cuenta_banc() == null) {
-                        out.print("no registrado");
-                    } else {
-                        out.print(cs.getNu_cuenta_banc());
-                    }%></td></td></tr>
-                <tr><td class="text-info">Genero Nro de Cuenta Bancaria:</td><td></td></tr>
-                <tr>
-                    <%}
-                    } else {%>
-                <tr><td class="text-info" colspan="2" style="color: black;" >no registrado</td></tr>
+                <%if (cs.getNo_banco() != null) {%>
+                <tr><td class="text-info">Banco:</td>
+                    <%if(cs.getNo_banco().trim().equals("0")){%>
+                    <td>Ninguno</td>
+                    <%}if(cs.getNo_banco().trim().equals("1")){%>
+                    <td>BBVA</td>
+                    <%}if(cs.getNo_banco().trim().equals("2")){%>
+                    <td>BCP</td>
+                    <%}if(cs.getNo_banco().trim().equals("3")){%>
+                    <td>Otros</td>
+                    <%}%>
+                </tr>
+                <%}%>
+                <%if (cs.getNo_banco_otros()!= null) {%>
+                <tr><td class="text-info">Nombre Banco:</td><td><%=cs.getNo_banco_otros()%></td></tr>
+                <%}%>
+                <%if (cs.getNu_cuenta() != null) {%>
+                <tr><td class="text-info">Nro de Cuenta:</td><td><%=cs.getNu_cuenta()%></td></tr>
+                <%}%>
+                <%if (cs.getNu_cuenta_banc() != null) {%>
+                <tr><td class="text-info">Nro de Cuenta Bancaria:</td><td><%=cs.getNu_cuenta_banc()%></td></tr>
+                <%}%>
+                <%if (cs.getEs_gem_nu_cuenta().trim().equals("1")) {%>
+                <tr><td class="text-info" colspan="2" style="color:black;">Nro de Cuenta Generado por RRHH</td></tr>
+                <%}%>
                 <%}%>
                 <%String IDTR = trb.getId_trabajador();%>
                 <td colspan="2"><a class="btn btn-success" href="../../trabajador?opc=Editar_Asp_Acad&idtr=<%=IDTR%>">EDITAR</a></td>

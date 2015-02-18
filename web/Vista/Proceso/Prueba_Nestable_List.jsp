@@ -601,11 +601,11 @@
 
                             // '<div class="pull-right"><label >' + lista[i].co + '</label></div>' +
                             txt_append += '<input type="hidden"  value="' +
-                                    lista[i].det + '"  class="det_p_' + i + '"/>' +  '<input type="hidden" name="id" value="' + lista[i].id + '"  class="id_paso' + i + '"/>' +   '</div> </li>';
-                                    txt_append + = "<input  value='" + lista[i].det + "' class='inp_det_" + i + "' />";
-                                    txt_append + = "<input value='" + lista[i].num + "' class='inp_num_" + i + "' />";
-                                    txt_append + = "<input value='" + lista[i].co + "' class='inp_co_" + i + "' />";
-                                    txt_append + = "<input value='" + lista[i].proceso_id + "' class='inp_pro_id_" + i + "' />";
+                                    lista[i].det + '"  class="det_p_' + i + '"/>' + '<input type="hidden" name="id" value="' + lista[i].id + '"  class="id_paso' + i + '"/>' + '</div> </li>';
+                                    txt_append += '<input  value="' + lista[i].det + '" class="inp_det_' + i + '" />';
+                                    txt_append += '<input value="' + lista[i].num + '" class="inp_num_' + i + '" />';
+                                    txt_append += '<input value="' + lista[i].co + '" class="inp_co_' + i + '" />';
+                                    txt_append += '<input value="' + lista[i].proceso_id + '" class="inp_pro_id_' + i + '" />';
                             }
                             c.append(txt_append);
                                     txt_append = "";
