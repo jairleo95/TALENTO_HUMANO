@@ -189,15 +189,25 @@ public class PasoDAO implements InterfacePasoDAO {
 
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = " UPDATE RHTC_PASOS SET NU_PASOS='" + NU_PASO.trim() + "' WHERE ID_PASOS='" + ID_PASO.trim() + "'";
-            this.conn.ejecutar(sql);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL UPDATE_PASOS_PROCESO(?, ?)} ");
+            cst.setString(1, NU_PASO);
+            cst.setString(2, ID_PASO);
+            cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            this.conn.close();
+            throw new RuntimeException("ERROR: " + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
     @Override
-    public void ESTADO_DETALLE_PUESTO(String ID,String ESTADO) {
+    public void ESTADO_DETALLE_PUESTO(String ID, String ESTADO) {
 
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);

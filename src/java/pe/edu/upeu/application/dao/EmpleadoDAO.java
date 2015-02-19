@@ -404,7 +404,7 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
                 eva.setId_empleado("id_empleado");
                 eva.setId_trabajador(rs.getString("id_trabajador"));
                 eva.setCo_aps(rs.getString("co_aps"));
-                eva.setCo_huella_digital("co_huella_digital");
+                eva.setCo_huella_digital(rs.getString("co_huella_digital"));
                 eva.setEs_empleado("es_empleado");
                 List.add(eva);
             }
@@ -458,6 +458,51 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
                 throw new RuntimeException(e.getMessage());
             }
         }
+    }
+
+    @Override
+    public void Reg_cod_huella(String idtr, int cod_huella) {
+        CallableStatement cst;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = conn.conex.prepareCall("{CALL RHSP_MOD_COD_HUELLA( ?, ?)}");
+            cst.setString(1, idtr.trim());
+            cst.setInt(2, cod_huella);
+            cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al registrar codigo APS");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+    }
+
+    @Override
+    public int val_cod_huella(String idtr) {
+        int num_c = 0;
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select COUNT(CO_HUELLA_DIGITAL) from RHTD_EMPLEADO where ID_TRABAJADOR='" + idtr + "' AND CO_HUELLA_DIGITAL is not null";
+        try {
+            ResultSet rs = this.conn.query(sql);
+            rs.next();
+            num_c = rs.getInt(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al validar codigo aps");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return num_c;
     }
 
 }

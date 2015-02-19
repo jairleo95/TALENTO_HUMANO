@@ -624,7 +624,7 @@
                             b.append("</tr>");
                         }
                         for (var i = 0; i < lista.length; i++) {
-                            txt_append += '<li class="dd-item dd3-item"  ><div class="dd-handle dd3-handle">Drag</div><div class="dd3-content"><label class="item_req item_' + i + '">' + lista[i].num + ' </label> ' +
+                            txt_append += '<li class="dd-item dd3-item"  ><div class="dd-handle dd3-handle">Drag</div><div class="dd3-content"><label class="item_req item_' + (i + 1) + '">' + lista[i].num + ' </label> ' +
                                     '<div class="pull-right"><button class="btn btn-success btn-cargar-puesto" value="' + i + '" > Ver Puestos</button></div>' +
                                     '<div class="pull-right"><button class="btn btn-primary btn-editar" value="' + i + '" > Editar</button></div>' +
                                     '<div class="pull-right"><button class="btn btn-primary btn-eliminar" value="' + i + '" > Eliminar</button></div>';
@@ -680,14 +680,27 @@
                 $(".Generar").click(function () {
                     //var num = $(".tbodys tr").size();
                     var num = 1;
+                    var url = "";
+
+
                     $.each($(".item_req"), function () {
                         $(this).text("P" + num);
                         num++;
-                        $.post("../../paso", "opc=Update_nu_paso&nu_paso=" + "P" + num + "&paso=" + $(".id_paso" + (num - 1)).val(), function (objJson) {
-                            alert("opc=Update_nu_paso&nu_paso=" + "P" + num + "&paso=" + $(".id_paso" + (num - 1)).val())
-                        });
                     });
+                    for (var s = 1; s <= $(".tbodys tr").size(); s++) {
+                        url += "id" + s + "=" + $(".id_paso" + (s - 1)).val() + "&numero" + s + "=" + $(".item_" + s).text() + "&";
+                    }
+                    url = url.substring(0, url.length - 1);
+                       $.post("../../paso", "opc=Update_nu_paso&num=" + num + "&" + url, function (objJson) {
+                     if (objJson.rpta == -1) {
+                     alert(objJson.mensaje);
+                     return;
+                     }
+                     });
+                    alert(url);
+                    url = "";
                     num = 1;
+
                     /* for (var f = 0; f < num; f++) {
                      //alert($(".id_paso" + f).val() + " - " + $(".item_"+f).text());
                      
