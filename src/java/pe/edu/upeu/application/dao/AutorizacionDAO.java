@@ -253,6 +253,8 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 v.setMes_creacion(rs.getString("mes_creacion"));
                 v.setVal_cod_aps_empleado(rs.getInt("VAL_COD_APS_EMPLEADO"));
                 v.setVal_cod_huella(rs.getInt("VAL_COD_HUELLA_EMP"));
+                v.setCo_aps(rs.getInt("CO_APS"));
+                v.setCo_huella_digital(rs.getInt("CO_HUELLA_DIGITAL"));
                 list.add(v);
             }
         } catch (SQLException e) {

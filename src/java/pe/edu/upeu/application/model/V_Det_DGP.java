@@ -43,6 +43,7 @@ public class V_Det_DGP {
     private String no_req;
     private Double ca_bono_alimentario;
     private Double de_bev;
+    private Double ca_bonificacion_p;
     private String de_antecedentes_policiales;
     private String es_certificado_salud;
 
@@ -60,7 +61,7 @@ public class V_Det_DGP {
             String de_horario_capacitacion, String de_horario_refrigerio, String de_dias_capacitacion, String es_dgp, String us_creacion, String fe_creacion, String us_modif,
             String fe_modif, String ip_usuario, String no_req, Double ca_bono_alimentario, Double de_bev, String de_antecedentes_policiales, String es_certificado_salud,
             String no_banco, String nu_cuenta, String nu_cuenta_banc, String es_gen_nu_cuenta, String no_banco_otros, String id_departamento, String id_direccion,
-            String id_seccion, String id_area, String id_tipo_planilla, String ti_planilla, String id_detalle_horario, String no_dep, String no_usuario_crea, String no_usuario_mod, String li_motivo, String es_mfl) {
+            String id_seccion, String id_area, String id_tipo_planilla, String ti_planilla, String id_detalle_horario, String no_dep, String no_usuario_crea, String no_usuario_mod, String li_motivo, String es_mfl,Double ca_bonificacion_p) {
         this.id_dgp = id_dgp;
         this.fe_desde = fe_desde;
         this.fe_hasta = fe_hasta;
@@ -102,6 +103,8 @@ public class V_Det_DGP {
         this.no_usuario_mod = no_usuario_mod;
         this.li_motivo = li_motivo;
         this.es_mfl = es_mfl;
+        this.ca_bonificacion_p = ca_bonificacion_p;
+        
     }
 
     public V_Det_DGP() {
@@ -146,8 +149,17 @@ public class V_Det_DGP {
         this.no_usuario_mod = "";
         this.li_motivo = "";
         this.es_mfl = "";
+        this.ca_bonificacion_p =0.0 ;
     }
 
+    public Double getCa_bonificacion_p() {
+        return ca_bonificacion_p;
+    }
+
+    public void setCa_bonificacion_p(Double ca_bonificacion_p) {
+        this.ca_bonificacion_p = ca_bonificacion_p;
+    }
+    
     public String getNo_usuario_crea() {
         return no_usuario_crea;
     }

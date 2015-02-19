@@ -191,9 +191,9 @@
                                                             </label>
                                                         </section>
                                                     </div>
-                                                    <script>$(document).ready(function () {
+                                                    <script>$(document).ready(function() {
                                                             var lista_dgp = $(".btn-list-req");
-                                                            $.post("../../dgp", "opc=Listar_Req&idtr=" + $(".id_tr").val(), function (objJson) {
+                                                            $.post("../../dgp", "opc=Listar_Req&idtr=" + $(".id_tr").val(), function(objJson) {
                                                                 if (objJson.rpta == -1) {
                                                                     alert(objJson.mensaje);
                                                                     return;
@@ -211,8 +211,8 @@
 
                                                             });
 
-                                                            lista_dgp.change(function () {
-                                                                $.post("../../dgp", "opc=Listar_Datos&idc=" + $(this).val(), function (objJson) {
+                                                            lista_dgp.change(function() {
+                                                                $.post("../../dgp", "opc=Listar_Datos&idc=" + $(this).val(), function(objJson) {
 
                                                                     if (objJson.rpta == -1) {
                                                                         alert(objJson.mensaje);
@@ -237,7 +237,7 @@
 
 
                                                                 });
-                                                                $.post("../../centro_costo", "opc=Cargar_cc_DGP&id_c=" + $(this).val(), function (objJson) {
+                                                                $.post("../../centro_costo", "opc=Cargar_cc_DGP&id_c=" + $(this).val(), function(objJson) {
                                                                     var lista = objJson.lista;
 
                                                                     for (var i = 0; i < lista.length; i++) {
@@ -261,7 +261,7 @@
                                                                 list_horario($("#horario").val());
                                                             });
 
-                                                            $(".cl").click(function () {
+                                                            $(".cl").click(function() {
 
                                                             });
                                                         });
@@ -748,14 +748,13 @@
                                                     </div>
                                                 </fieldset>
                                                 <footer>
-                                                    <button type="submit" class="btn btn-primary">
-                                                        Siguiente
+                                                    <button type="submit" class="btn btn-primary btn-labeled">
+                                                        Siguiente  <i class="fa fa-arrow-circle-right"></i>
                                                     </button>
                                                     <button type="button" class="btn btn-default" onclick="window.history.back();">
-                                                        Regresar
+                                                      <i class="fa fa-arrow-circle-left"></i>  Regresar
                                                     </button>
                                                 </footer>
-
                                             </div>
 
 
@@ -784,11 +783,11 @@
 
     </body>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             var b = $("#alerta_dgp");
             // $("#alerta_dgp").hide();
             function listar() {
-                $.post("../../plazo_dgp", "opc=Listar", function (objJson) {
+                $.post("../../plazo_dgp", "opc=Listar", function(objJson) {
                     b.empty();
                     var lista = objJson.lista;
                     if (objJson.rpta == -1) {
@@ -804,7 +803,7 @@
         });
         var cantidad = 1;
 
-        $("#btn_add").click(function () {
+        $("#btn_add").click(function() {
             var agregar = $('#fila-agregar');
             var texto = "";
             cantidad++;
@@ -828,9 +827,9 @@
         });
 
         $(document).ready(
-                function () {
+                function() {
                     $("#sueldo").keyup(
-                            function () {
+                            function() {
                                 var sueldo = parseFloat($("#sueldo").val());
                                 $(".monto").val(Math.round(sueldo));
                             });
@@ -839,7 +838,7 @@
         function periodo_pago(cantidad) {
             var sueldo = parseFloat($("#sueldo").val());
             var p_p = sueldo / cantidad;
-            $.each($(".monto"), function () {
+            $.each($(".monto"), function() {
                 $(".monto").val(p_p);
             });
         }
@@ -848,28 +847,28 @@
             var y = parseFloat($("#bono_al").val());
             var w = parseFloat($("#bono_pu").val());
             var z = parseFloat($("#bev").val());
-            var v = x + y + z+w;
+            var v = x + y + z + w;
             $("#suel_total").text(Math.round(v * 100) / 100);
         }
         $(document).ready(
-                function () {
+                function() {
                     $("#sueldo").keyup(
-                            function () {
+                            function() {
                                 calcular_sueldo_total();
                             }
                     );
                     $("#bono_al").keyup(
-                            function () {
+                            function() {
                                 calcular_sueldo_total();
                             }
                     );
                     $("#bev").keyup(
-                            function () {
+                            function() {
                                 calcular_sueldo_total();
                             }
                     );
                     $("#bono_pu").keyup(
-                            function () {
+                            function() {
                                 calcular_sueldo_total();
                             }
                     );
@@ -888,7 +887,7 @@
 
     </script>
     <script language="javascript" type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
             $(".contenido").hide();
             /*TEMPORAL*/
             //Planilla
@@ -923,7 +922,7 @@
 
 
                     $("#select_lun").change(
-                            function () {
+                            function() {
                                 if ($(this).val() == 1) {
                                     $("#show_lun").show();
                                 }
@@ -934,7 +933,7 @@
                             }
                     );
                     $("#select_mar").change(
-                            function () {
+                            function() {
                                 if ($(this).val() == 1) {
                                     $("#show_mar").show();
                                 }
@@ -945,7 +944,7 @@
                             }
                     );
                     $("#select_mie").change(
-                            function () {
+                            function() {
                                 if ($(this).val() == 1) {
                                     $("#show_mie").show();
                                 }
@@ -956,7 +955,7 @@
                             }
                     );
                     $("#select_jue").change(
-                            function () {
+                            function() {
                                 if ($(this).val() == 1) {
                                     $("#show_jue").show();
                                 }
@@ -967,7 +966,7 @@
                             }
                     );
                     $("#select_vie").change(
-                            function () {
+                            function() {
                                 if ($(this).val() == 1) {
                                     $("#show_vie").show();
                                 }
@@ -978,7 +977,7 @@
                             }
                     );
                     $("#select_sab").change(
-                            function () {
+                            function() {
                                 if ($(this).val() == 1) {
                                     $("#show_sab").show();
                                 }
@@ -989,7 +988,7 @@
                             }
                     );
                     $("#select_dom").change(
-                            function () {
+                            function() {
                                 if ($(this).val() == 1) {
                                     $("#show_dom").show();
                                 }
@@ -1042,7 +1041,7 @@
         function listar_dep_cc(x, opc, arr_cc) {
 
             var cc_dep = $(".cc-dep" + x);
-            $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + $(".cc-dir" + x).val(), function (objJson) {
+            $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + $(".cc-dir" + x).val(), function(objJson) {
 
                 cc_dep.empty();
                 cc_dep.append("<option value=''>[DEPARTAMENTO]</option>");
@@ -1072,7 +1071,7 @@
         function listar_centro_costo(x, opc, arr_cc) {
 
             var centro_costo = $(".centro_costo" + x);
-            $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + $(".cc-dep" + x).val(), function (objJson) {
+            $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + $(".cc-dep" + x).val(), function(objJson) {
                 centro_costo.empty();
                 centro_costo.append("<option value=''>[CENTRO COSTO]</option>");
                 if (objJson.rpta == -1) {
@@ -1102,7 +1101,7 @@
         }
         function listar_cc(num, opc, arr_cc) {
             var select_cc = $(".select-cc");
-            $.post("../../centro_costo?opc=Listar_cc", function (objJson) {
+            $.post("../../centro_costo?opc=Listar_cc", function(objJson) {
                 //  select_cc.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -1115,7 +1114,7 @@
 
             });
             var cc_dir = $(".cc-dir" + num);
-            $.post("../../centro_costo?opc=Listar_dir", function (objJson) {
+            $.post("../../centro_costo?opc=Listar_dir", function(objJson) {
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
                     return;
@@ -1135,15 +1134,15 @@
                     }
                 }
             });
-            $(".cc-dir" + num).change(function () {
+            $(".cc-dir" + num).change(function() {
 
                 listar_dep_cc(num, "0", arr_cc);
             });
-            $(".cc-dep" + num).change(function () {
+            $(".cc-dep" + num).change(function() {
 
                 listar_centro_costo(num, "0", arr_cc);
             });
-            $(".remover" + num).click(function () {
+            $(".remover" + num).click(function() {
                 $(".centro-costo_" + num).remove();
                 sumn_porcen_total();
 
@@ -1152,7 +1151,7 @@
         function sumn_porcen_total() {
 
             var acum = 0;
-            $.each($(".porcentaje_cc"), function () {
+            $.each($(".porcentaje_cc"), function() {
                 acum = acum + parseFloat($(this).val());
             });
             $(".total_porcentaje").val(acum);
@@ -1181,7 +1180,7 @@
 
                 var dias_semana = new Array("lun", "mar", "mie", "jue", "vie", "sab", "dom");
                 $(".tr-dia").remove();
-                $.post("../../formato_horario", "opc=Listar_Horario&id=" + valor, function (objJson) {
+                $.post("../../formato_horario", "opc=Listar_Horario&id=" + valor, function(objJson) {
                     var lista = objJson.lista;
                     for (var f = 0; f < dias_semana.length; f++) {
 
@@ -1210,7 +1209,7 @@
                     }
                     calcularHoras();
                     $(".texto-h").keyup(
-                            function () {
+                            function() {
                                 calcularHoras();
                             }
                     );
@@ -1315,13 +1314,13 @@
             texto = "";
             $(".cant-input").val(ag);
             ag++;
-            $(".porcentaje_cc").keyup(function () {
+            $(".porcentaje_cc").keyup(function() {
                 sumn_porcen_total();
             });
         }
 
         function listar_tipo_horario() {
-            $.post("../../formato_horario", "opc=Listar_Tip_Horario", function (objJson) {
+            $.post("../../formato_horario", "opc=Listar_Tip_Horario", function(objJson) {
 
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -1337,7 +1336,7 @@
 
             });
         }
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             listar_tipo_horario();
             sumn_porcen_total();
@@ -1349,12 +1348,12 @@
 
 
             //  var r = "";
-            $('#btn-agregar-cc').click(function () {
+            $('#btn-agregar-cc').click(function() {
                 agregar_centro_costo();
 
 
             });
-            $("#banco").change(function () {
+            $("#banco").change(function() {
                 cuenta_bancaria($(this).val());
 
             });
@@ -1362,7 +1361,7 @@
             listar_cc();
 
             $("#horario").change(
-                    function () {
+                    function() {
                         list_horario($(this).val());
                     }
             );
@@ -1370,7 +1369,7 @@
         )
                 ;</script>
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             $("#sueldo").numeric();
             $("#bono_al").numeric();
@@ -1381,7 +1380,7 @@
             var scntDiv = $('#show_lun');
             var i = $('#show_lun .texto-h').size() + 1;
             var s = $('#show_lun .tr-count').size() + 1;
-            $('#addScnt').click(function () {
+            $('#addScnt').click(function() {
                 $('<tr><td>T' + s + ' :</td><td><input type="text"   name="HORA_DESDE_lun' + i
                         + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_lun' + i
                         + '" value="" placeholder=" " /><input type="hidden" name="DIA_lun' + i
@@ -1391,7 +1390,7 @@
                 s++;
                 return false;
             });
-            $('#remScnt').click(function () {
+            $('#remScnt').click(function() {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -1402,18 +1401,18 @@
             });
         });
         //MARTES
-        $(function () {
+        $(function() {
             var scntDiv = $('#show_mar');
             var i = $('#show_mar .texto-h').size() + 1;
             var s = $('#show_mar .tr-count_2').size() + 1;
-            $('#add_2').click(function () {
+            $('#add_2').click(function() {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_mar' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_mar' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_mar' + i + '" value="mar" ><input type="hidden" name="USER_CREACION_mar' + i + '"> <a href="#" id="remove_2">-</a></td></tr>').appendTo(scntDiv);
                 i++;
                 s++;
                 return false;
             });
-            $('.remove_2').click(function () {
+            $('.remove_2').click(function() {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -1424,18 +1423,18 @@
             });
         });
         //MIERCOLES
-        $(function () {
+        $(function() {
             var scntDiv = $('#show_mie');
             var i = $('#show_mie .texto-h').size() + 1;
             var s = $('#show_mie .tr-count_3').size() + 1;
-            $('#add_3').click(function () {
+            $('#add_3').click(function() {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_mie' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_mie' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_mie' + i + '" value="mie" ><input type="hidden" name="USER_CREACION_mie' + i + '"> <a href="#" id="remove_3">-</a></td></tr>').appendTo(scntDiv);
                 i++;
                 s++;
                 return false;
             });
-            $('.remove_3').click(function () {
+            $('.remove_3').click(function() {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -1446,18 +1445,18 @@
             });
         });
         //JUEVES
-        $(function () {
+        $(function() {
             var scntDiv = $('#show_jue');
             var i = $('#show_jue .texto-h').size() + 1;
             var s = $('#show_jue .tr-count_4').size() + 1;
-            $('#add_4').click(function () {
+            $('#add_4').click(function() {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_jue' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_jue' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_jue' + i + '" value="jue" ><input type="hidden" name="USER_CREACION_jue' + i + '"> <a href="#" id="remove_4">-</a></td></tr>').appendTo(scntDiv);
                 i++;
                 s++;
                 return false;
             });
-            $('.remove_4').click(function () {
+            $('.remove_4').click(function() {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -1468,18 +1467,18 @@
             });
         });
         //VIERNES
-        $(function () {
+        $(function() {
             var scntDiv = $('#show_vie');
             var i = $('#show_vie .texto-h').size() + 1;
             var s = $('#show_vie .tr-count_5').size() + 1;
-            $('#add_5').click(function () {
+            $('#add_5').click(function() {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_vie' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_vie' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_vie' + i + '" value="vie" ><input type="hidden" name="USER_CREACION_vie' + i + '"> <a href="#" id="remove_5">-</a></td></tr>').appendTo(scntDiv);
                 i++;
                 s++;
                 return false;
             });
-            $('.remove_5').click(function () {
+            $('.remove_5').click(function() {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -1490,18 +1489,18 @@
             });
         });
         //DOMINGO
-        $(function () {
+        $(function() {
             var scntDiv = $('#show_sab');
             var i = $('#show_sab .texto-h').size() + 1;
             var s = $('#show_sab .tr-count_6').size() + 1;
-            $('#add_6').click(function () {
+            $('#add_6').click(function() {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_dom' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_dom' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_dom' + i + '" value="dom" ><input type="hidden" name="USER_CREACION_dom' + i + '"> <a href="#" id="remove_6">-</a></td></tr>').appendTo(scntDiv);
                 i++;
                 s++;
                 return false;
             });
-            $('.remove_6').click(function () {
+            $('.remove_6').click(function() {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -1590,7 +1589,7 @@
 
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             pageSetUp();
             var $checkoutForm = $('#checkout-form').validate({
@@ -1697,13 +1696,13 @@
                     }
                 },
                 // Do not change code below
-                errorPlacement: function (error, element) {
+                errorPlacement: function(error, element) {
                     error.insertAfter(element.parent());
                 }
             });
 
 
-            jQuery.validator.addMethod("val_fecha", function (value, element) {
+            jQuery.validator.addMethod("val_fecha", function(value, element) {
                 var d = value.split("-");
                 return this.optional(element) || String(parseInt(d[0])).length == 4;
             }, "¡Fecha ingresada invalida!");
@@ -1772,7 +1771,7 @@
                     }
                 },
                 // Do not change code below
-                errorPlacement: function (error, element) {
+                errorPlacement: function(error, element) {
                     error.insertAfter(element.parent());
                 }
             });
@@ -1823,7 +1822,7 @@
                     }
                 },
                 // Do not change code below
-                errorPlacement: function (error, element) {
+                errorPlacement: function(error, element) {
                     error.insertAfter(element.parent());
                 }
             });
@@ -1861,15 +1860,15 @@
                     }
                 },
                 // Ajax form submition
-                submitHandler: function (form) {
+                submitHandler: function(form) {
                     $(form).ajaxSubmit({
-                        success: function () {
+                        success: function() {
                             $("#comment-form").addClass('submited');
                         }
                     });
                 },
                 // Do not change code below
-                errorPlacement: function (error, element) {
+                errorPlacement: function(error, element) {
                     error.insertAfter(element.parent());
                 }
             });
@@ -1902,15 +1901,15 @@
                     }
                 },
                 // Ajax form submition
-                submitHandler: function (form) {
+                submitHandler: function(form) {
                     $(form).ajaxSubmit({
-                        success: function () {
+                        success: function() {
                             $("#contact-form").addClass('submited');
                         }
                     });
                 },
                 // Do not change code below
-                errorPlacement: function (error, element) {
+                errorPlacement: function(error, element) {
                     error.insertAfter(element.parent());
                 }
             });
@@ -1938,7 +1937,7 @@
                     }
                 },
                 // Do not change code below
-                errorPlacement: function (error, element) {
+                errorPlacement: function(error, element) {
                     error.insertAfter(element.parent());
                 }
             });
@@ -1982,7 +1981,7 @@
                     }
                 },
                 // Do not change code below
-                errorPlacement: function (error, element) {
+                errorPlacement: function(error, element) {
                     error.insertAfter(element.parent());
                 }
             });
@@ -1991,7 +1990,7 @@
                 dateFormat: 'dd.mm.yy',
                 prevText: '<i class="fa fa-chevron-left"></i>',
                 nextText: '<i class="fa fa-chevron-right"></i>',
-                onSelect: function (selectedDate) {
+                onSelect: function(selectedDate) {
                     $('#finishdate').datepicker('option', 'minDate', selectedDate);
                 }
             });
@@ -1999,7 +1998,7 @@
                 dateFormat: 'dd.mm.yy',
                 prevText: '<i class="fa fa-chevron-left"></i>',
                 nextText: '<i class="fa fa-chevron-right"></i>',
-                onSelect: function (selectedDate) {
+                onSelect: function(selectedDate) {
                     $('#startdate').datepicker('option', 'maxDate', selectedDate);
                 }
             });
@@ -2012,7 +2011,7 @@
 
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             pageSetUp();
         })
@@ -2024,7 +2023,7 @@
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
         _gaq.push(['_trackPageview']);
-        (function () {
+        (function() {
             var ga = document.createElement('script');
             ga.type = 'text/javascript';
             ga.async = true;
