@@ -227,7 +227,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <label>Apellidos  y Nombres :</label>
                                                                         <div class="input-group">
@@ -278,7 +278,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <label>Nro de Documento:</label>
                                                                         <div class="input-group">
