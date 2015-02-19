@@ -270,7 +270,7 @@ public class CContrato extends HttpServlet {
 
             /*Cambiar este for con un trigger al momento de insertar*/
             for (int i = 0; i < con.List_Rh_Contrato_Idtr().size(); i++) {
-                emp.VALIDAR_EMPLEADO(id_cto);
+                emp.VALIDAR_EMPLEADO(idtr1);
             }
             /*---*/
             String id_contrato = con.Buscar_id_tr(ID_DGP);

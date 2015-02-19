@@ -1,4 +1,5 @@
 
+<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="pe.edu.upeu.application.model.Tipo_Documento"%>
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
 <%
@@ -33,6 +34,8 @@
         %>
 
         <%
+            CConversion c = new CConversion();
+            
             V_Ficha_Trab_Num_C tr = new V_Ficha_Trab_Num_C();
             tr = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(0);
         %>
@@ -55,7 +58,7 @@
                             %></td></tr>
                     <%if(tr.getAp_nombres_madre() == null && tr.getAp_nombres_padre() == null ){%>
                     <%  if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005")) {%>
-                <tr><td colspan="2"> <a class="btn btn-success" href=Reg_Padre_Madre_Conyugue.jsp?idtr=<%=request.getParameter("idtr")%>">Agregar Padres</a></td></tr>
+                <tr><td colspan="2"> <a class="btn btn-success" href=Reg_Padres.jsp?idtr=<%=request.getParameter("idtr")%>">Agregar Padres</a></td></tr>
                 <%}%>
                 <%}%>
                 </table>
@@ -90,7 +93,7 @@
                     }
                         %></td></tr>
                 <tr><td class="text-info">Fecha de Nacimiento:</td><td class="text-info-left"><%if (tr.getFe_nac_c() != null) {
-                        out.print(tr.getFe_nac_c());
+                        out.print(c.convertFecha5(tr.getFe_nac_c()));
                     } else {
                         out.print("No registrado");
                     }
@@ -139,7 +142,7 @@
 
                 <tr><td colspan="2"> <label>Aun no se ha registrado los datos del cónyugue</label><br></td></tr> 
                         <%  if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005")) {%>
-                <tr><td colspan="2"> <a class="btn btn-success" href=Reg_Padre_Madre_Conyugue.jsp?idtr=<%=request.getParameter("idtr")%>">Agregar Cónyugue</a></td></tr>
+                <tr><td colspan="2"> <a class="btn btn-success" href=Reg_Conyugue.jsp?idtr=<%=request.getParameter("idtr")%>">Agregar Cónyugue</a></td></tr>
                 <%}%>
                 <%}%>
                 <%if(tr.getAp_nombres_c() != null && tr.getAp_nombres_madre() != null && tr.getAp_nombres_padre()!= null ){%>
