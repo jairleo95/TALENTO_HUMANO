@@ -18,6 +18,7 @@ import pe.edu.upeu.application.model.V_List_Empleado;
 public interface InterfaceEmpleadoDAO {
     public String Id_Puesto_Personal(String ide);
     public int val_cod_aps_empleado(String idtr);
+    public int val_cod_huella(String idtr);
     public List<Empleado> id_empleadox_ide(String ide);
     public void VALIDAR_EMPLEADO(String id_tra);
     public List<V_List_Empleado> Listar_Empleado(String Departamento);
@@ -29,5 +30,5 @@ public interface InterfaceEmpleadoDAO {
     public List<Evaluacion_Emp> Listar_Evaluacion_Emp (String id_emp);
     public void Mod_Evaluacion_emp ( String RE_EVALUACION, String ID_EMPLEADO);
     public void Reg_aps(String idtr,int aps);
-    public void Reg_cod_huella(String idtr,int aps);
+    public void Reg_cod_huella(String idtr,int cod_huella);
 }

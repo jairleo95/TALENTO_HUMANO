@@ -275,6 +275,7 @@ public class CTrabajador extends HttpServlet {
              }
              */
             int val_aps = 0;
+            int val_huella = 0;
             String iddgp = request.getParameter("iddetalle_dgp");
             String puesto_id = request.getParameter("puesto_id");
             String cod = request.getParameter("cod");
@@ -283,12 +284,13 @@ public class CTrabajador extends HttpServlet {
             String np = request.getParameter("nup");
             int num_c_dgp = dgp.VALIDAR_DGP_CONTRATO(iddgp);
             val_aps = em.val_cod_aps_empleado(idtr);
+            val_huella = em.val_cod_huella(idtr);
             getServletContext().setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             getServletContext().setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));
             getServletContext().setAttribute("List_", li.List_Auto_mostrar(idrol));
 
-            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&aut=1&dgp=" + iddgp + "&p=" + puesto_id + "&c=" + cod + "&pas=" + idpasos + "&drp=" + drp + "&np=" + np + "&vnc=" + num_c_dgp + "&val_aps=" + val_aps);
+            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&aut=1&dgp=" + iddgp + "&p=" + puesto_id + "&c=" + cod + "&pas=" + idpasos + "&drp=" + drp + "&np=" + np + "&vnc=" + num_c_dgp + "&val_aps=" + val_aps+"&val_huella="+val_huella);
         }
         if ("registrar_aps".equals(opc)) {
             String idtr = request.getParameter("idtr");
@@ -297,7 +299,7 @@ public class CTrabajador extends HttpServlet {
              getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_contrato));
              }
              */
-
+            int val_huella = 0;
             String iddgp = request.getParameter("iddetalle_dgp");
             String puesto_id = request.getParameter("puesto_id");
             String cod = request.getParameter("cod");
@@ -308,10 +310,35 @@ public class CTrabajador extends HttpServlet {
             em.Reg_aps(idtr, co_aps);
             int num_c_dgp = dgp.VALIDAR_DGP_CONTRATO(iddgp);
             int val_aps = em.val_cod_aps_empleado(idtr);
+            val_huella = em.val_cod_huella(idtr);
             getServletContext().setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             getServletContext().setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));
-            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&aut=1&dgp=" + iddgp + "&p=" + puesto_id + "&c=" + cod + "&pas=" + idpasos + "&drp=" + drp + "&np=" + np + "&vnc=" + num_c_dgp + "&val_aps=" + val_aps);
+            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&aut=1&dgp=" + iddgp + "&p=" + puesto_id + "&c=" + cod + "&pas=" + idpasos + "&drp=" + drp + "&np=" + np + "&vnc=" + num_c_dgp + "&val_aps=" + val_aps+"&val_huella="+val_huella);
+        }
+        if ("registrar_huella".equals(opc)) {
+            String idtr = request.getParameter("idtr");
+            String id_contrato = con.Buscar_id_contrato_x_idtr(idtr);
+            /*if (cc.Lis_c_c_id_contr(id_contrato).size() > 0) {
+             getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_contrato));
+             }
+             */
+            int val_huella = 0;
+            String iddgp = request.getParameter("iddetalle_dgp");
+            String puesto_id = request.getParameter("puesto_id");
+            String cod = request.getParameter("cod");
+            String idpasos = request.getParameter("idpasos");
+            String drp = request.getParameter("IDDETALLE_REQ_PROCESO");
+            String np = request.getParameter("nup");
+            int co_huella = Integer.parseInt(request.getParameter("cod_huella"));
+            em.Reg_cod_huella(idtr, co_huella);
+            int num_c_dgp = dgp.VALIDAR_DGP_CONTRATO(iddgp);
+            int val_aps = em.val_cod_aps_empleado(idtr);
+            val_huella = em.val_cod_huella(idtr);
+            getServletContext().setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
+            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            getServletContext().setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));
+            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&aut=1&dgp=" + iddgp + "&p=" + puesto_id + "&c=" + cod + "&pas=" + idpasos + "&drp=" + drp + "&np=" + np + "&vnc=" + num_c_dgp + "&val_aps=" + val_aps+"&val_huella="+val_huella);
         }
         if ("reg_aps_masivo".equals(opc)) {
             String idtr = request.getParameter("idtr");
@@ -319,7 +346,7 @@ public class CTrabajador extends HttpServlet {
             em.Reg_aps(idtr, co_aps);
 
         }
-        if ("reg_huella_masivo".equals(opc)) {
+        if ("reg_huella".equals(opc)) {
             String idtr = request.getParameter("idtr");
             int cod_huella = Integer.parseInt(request.getParameter("cod"));
             em.Reg_cod_huella(idtr, cod_huella);
