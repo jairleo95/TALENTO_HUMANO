@@ -350,6 +350,11 @@
                                                         </section>
                                                         <section class="col col-3">
                                                             <label class="input"  id="titu"> 
+                                                                Bonoificaion Puesto :<input type="text" maxlength="13"  value="0.0" name="BONO_PUESTO"  id="bono_pu">
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-3">
+                                                            <label class="input"  id="titu"> 
                                                                 BEV :<input type="text" name="BEV" maxlength="13" value="0.0" id="bev">
                                                             </label>
                                                         </section>
@@ -841,8 +846,9 @@
         function calcular_sueldo_total() {
             var x = parseFloat($("#sueldo").val());
             var y = parseFloat($("#bono_al").val());
+            var w = parseFloat($("#bono_pu").val());
             var z = parseFloat($("#bev").val());
-            var v = x + y + z;
+            var v = x + y + z+w;
             $("#suel_total").text(Math.round(v * 100) / 100);
         }
         $(document).ready(
@@ -858,6 +864,11 @@
                             }
                     );
                     $("#bev").keyup(
+                            function () {
+                                calcular_sueldo_total();
+                            }
+                    );
+                    $("#bono_pu").keyup(
                             function () {
                                 calcular_sueldo_total();
                             }

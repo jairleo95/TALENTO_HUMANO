@@ -385,7 +385,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     @Override
     public int count_documentos(String id_dgp) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT count(*) FROM RHTV_DOCUMENTO_ADJUNTO where ID_DGP='" + id_dgp.trim() + "'";
+        String sql = "SELECT count(*) FROM RHTV_DGP_DOC_ADJ where ID_DGP='" + id_dgp.trim() + "'";
         int num = 0;
         try {
             ResultSet rs = this.conn.query(sql);
