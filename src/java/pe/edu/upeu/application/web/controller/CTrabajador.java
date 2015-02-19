@@ -494,7 +494,6 @@ public class CTrabajador extends HttpServlet {
             response.sendRedirect("Vista/Trabajador/Aspecto_Social.jsp");
 
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
