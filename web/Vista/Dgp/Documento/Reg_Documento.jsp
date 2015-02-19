@@ -545,12 +545,13 @@
                                                 <button type="submit" class="btn btn-primary btn_reg_doc" style="display:none">
                                                     Registrar
                                                 </button>
+                                                
                                                 <% }
                                                 } else {%>
-                                                <button type="submit" class="btn btn-primary btn_reg_doc">
+                                                <button type="submit" class="btn btn-primary btn_reg_doc"style="display:none" >
                                                     Registrar
                                                 </button>
-                                                <button type="button" onclick="history.back()" style="display:none" class="btn btn-default">
+                                                <button type="button" onclick="history.back()"  class="btn btn-default">
                                                     Atrás
                                                 </button>
 
