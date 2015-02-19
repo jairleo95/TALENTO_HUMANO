@@ -387,7 +387,7 @@
                                                                         <label >Apellido Paterno:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="APELLIDO_P" value="<%=t.getAp_paterno()%>" required="" id="fname"   class="form-control input-group-sm"  onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
+                                                                            <input type="text" name="APELLIDO_P" value="<%=t.getAp_paterno()%>" required="" id="fname"   class="form-control input-group-sm"   maxlength="50" >
 
                                                                         </div>
                                                                     </div>
@@ -1369,7 +1369,7 @@
                     }
                 },
                 messages: {
-                    fname: "Please specify your First name",
+                    fname: "Por Favor Ingrese su Apellido Paterno",
                     lname: "Please specify your Last name",
                     email: {
                         required: "We need your email address to contact you",

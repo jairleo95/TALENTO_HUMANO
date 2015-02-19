@@ -187,7 +187,7 @@
                                                                                     out.print(trb.getNo_iglesia());
                                                                                 } else {
                                                                                     out.print("");
-                                                                                }%>" type="text" name="IGLESIA"  required="" id="igle" >
+                                                                                }%>" type="text" name="IGLESIA" id="igle" >
 
                                                                         </div>
                                                                     </div>
@@ -265,7 +265,7 @@
                                                                                     out.print(trb.getCl_autoridad());
                                                                                 } else {
                                                                                     out.print("");
-                                                                                }%>" type="text" name="AUT_CELULAR"  required=""  >
+                                                                                }%>" type="text" name="AUT_CELULAR"    >
 
                                                                         </div>
                                                                     </div>
