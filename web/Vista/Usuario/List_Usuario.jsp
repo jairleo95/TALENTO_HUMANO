@@ -21,7 +21,7 @@
         <!--<link rel="stylesheet" href="../../css/Css_Sort/style.css" />
         <!--Css pannel contact-->
         <!--<link href="../../css/Css_Sort/stylesContact.css" rel="stylesheet" type="text/css" />
-        <!--End Css pannel contact-->
+        <!--End Css pannel contact
         <script type="text/javascript">
             function changeCSS(cssFile, cssLinkIndex) {
 
@@ -48,25 +48,10 @@
 
             //document.writeln(checkAGE())
 
+        </script>-->
+        <script>
+            var valorr= 0;
         </script>
-        <style type="text/css">
-            /*#titulo >h1{
-                text-align: center;
-                color:#a6abad;
-            }
-
-            .container{
-                // padding-bottom: 20px;
-                //height: 650px;
-            }
-            a{
-                color: #0095cd;
-                text-decoration: none;
-            }*/
-
-
-        </style>
-
     </head>
     <body>
         <div id="main" role="main" style="margin-left: 0px;">
@@ -100,24 +85,25 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                               
-                                                    <%for (int i = 0; i < List_Usuario_var.size(); i++) {
-                                                            V_Var_Usuario v = new V_Var_Usuario();
-                                                            v = (V_Var_Usuario) List_Usuario_var.get(i);
-                                                    %>
+
+                                                <%for (int i = 0; i < List_Usuario_var.size(); i++) {
+                                                        V_Var_Usuario v = new V_Var_Usuario();
+                                                        v = (V_Var_Usuario) List_Usuario_var.get(i);
+                                                %>
                                                 <tr>
-                                                    <td><%=i + 1%></td>
+                                                    <td class="valor"><%=i + 1%></td>
                                                     <td>
                                                         <div class="btn-group">
                                                             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                                                 Accion <span class="caret"></span>
                                                             </button>
                                                             <ul class="dropdown-menu" role="menu">
-                                                                <li><a href="../../Usuario?id_Usuaio=<%=v.getId_usuario()%>&opc=Mod_Usuario_con">Editar</a></li>
+                                                                <li><a href="../../Usuario?id_Usuaio=<%=v.getId_usuario()%>&opc=Mod_Usuario_con"  >Editar</a></li>
                                                                 <li><a href="../../Usuario?id_Usuaio=<%=v.getId_usuario()%>&opc=Desac_Usuario_con">Desactivar</a></li>
                                                                 <li class="divider"></li>
-                                                                <li><a href="../../Usuario?id_Usuaio=<%=v.getId_usuario()%>&opc=Activar_Usuario_con">Activar</a></li>                                                                
+                                                                <li><a class="btnActivar<%=i%>">Activar</a></li>                                                                
                                                                 <li><a href="../../Usuario?id_Usuaio=<%=v.getId_usuario()%>&opc=Elim_Usuario_con">Eliminar</a></li>
+                                                                <li><a href="#" id="smart-mod-eg1" class="btn btn-success"> Callback ()</a></li>                                           
                                                             </ul>
                                                         </div>
                                                     </td>
@@ -138,7 +124,7 @@
 
                                                 </tr>
                                                 <%}%>  
-                                             
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -159,54 +145,54 @@
         <!-- END MAIN PANEL -->
 
 
-       <%-- <div class="container">
-            <div id="tablewrapper">
-                <div id="tableheader">
-                    <div class="search">
-                        <select id="columns" onchange="sorter.search('query')"></select>
-                        <input type="text" id="query" onkeyup="sorter.search('query')" />
-                    </div>
-                    <span class="details">
-                        <div>Registros de <span id="startrecord"></span>-<span id="endrecord"></span> de <span id="totalrecords"></span></div>
-                        <div class="btn-reset"><a class="button blue" href="javascript:sorter.reset()">Restaurar</a></div>
-                    </span>
-                </div>
-                <table cellpadding="0" order="0" id="table" class="tinytable table">
-                    <thead class="table-bordered">
-                        <tr>
-                            <th ><h3>ID</h3></th>
-                    <th><h3>Nombres y Apellidos</h3></th>
-                    <th><h3>Rol</h3></th>
-                    <th><h3>Puesto</h3></th>
-                    <th><h3>Sección</h3></th>
-                    <th><h3>Area</h3></th>
-                    <th><h3>Departamento</h3></th>
-                    <th><h3>Usuario</h3></th>
-                    <th><h3>Clave</h3></th>
-                    <th><h3>Estado</h3></th>
-                    <th colspan="4"><h3>Opcion</h3></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <%for (int i = 0; i < List_Usuario_var.size(); i++) {
-                                V_Var_Usuario v = new V_Var_Usuario();
-                                v = (V_Var_Usuario) List_Usuario_var.get(i);
-                        %>
-                        <tr>
-                            <td><%=i + 1%></td>
-                            <td class="name"><a href="../../Usuario?id_Usuario=<%=v.getId_usuario()%>&opc=Mod_Usuario_con"><%=v.getNo_trabajador() + " " + v.getAp_paterno() + " " + v.getAp_materno()%></a></td>
-                            <td><%=v.getNo_rol()%></td>
-                            <td><%=v.getNo_puesto()%></td>
-                            <td><%=v.getNo_seccion()%></td>
-                            <td><%=v.getNo_area()%></td>
-                            <td><%=v.getNo_dep()%></td>
-                            <td><%=v.getNo_usuario()%></td>
-                            <td><a href="../../Usuario?id_Usuaio=<%=v.getId_usuario()%>&opc=Modificar_clave_1"><%=v.getPw_usuario()%> </a></td>
-                            <td><%=v.getEs_usuario()%></td>
-                            <td><a href="../../Usuario?id_Usuaio=<%=v.getId_usuario()%>&opc=Mod_Usuario_con"><img src="../../imagenes/lapiz.png" alt=""   width="25px" height="25px"/></a> </td>
-                            <td><a href="../../Usuario?id_Usuaio=<%=v.getId_usuario()%>&opc=Desac_Usuario_con"><img src="../../imagenes/eliminar.png" alt=""   width="25px" height="25px"/></a> </td>
-                            <td><a href="../../Usuario?id_Usuaio=<%=v.getId_usuario()%>&opc=Activar_Usuario_con"><img src="../../imagenes/Aprobado.png" alt=""   width="25px" height="25px"/></a> </td>
-                            <td><a href="../../Usuario?id_Usuaio=<%=v.getId_usuario()%>&opc=Elim_Usuario_con"><img src="../../imagenes/Desaprobado.png" alt=""   width="25px" height="25px"/></a> </td>
+        <%-- <div class="container">
+             <div id="tablewrapper">
+                 <div id="tableheader">
+                     <div class="search">
+                         <select id="columns" onchange="sorter.search('query')"></select>
+                         <input type="text" id="query" onkeyup="sorter.search('query')" />
+                     </div>
+                     <span class="details">
+                         <div>Registros de <span id="startrecord"></span>-<span id="endrecord"></span> de <span id="totalrecords"></span></div>
+                         <div class="btn-reset"><a class="button blue" href="javascript:sorter.reset()">Restaurar</a></div>
+                     </span>
+                 </div>
+                 <table cellpadding="0" order="0" id="table" class="tinytable table">
+                     <thead class="table-bordered">
+                         <tr>
+                             <th ><h3>ID</h3></th>
+                     <th><h3>Nombres y Apellidos</h3></th>
+                     <th><h3>Rol</h3></th>
+                     <th><h3>Puesto</h3></th>
+                     <th><h3>Sección</h3></th>
+                     <th><h3>Area</h3></th>
+                     <th><h3>Departamento</h3></th>
+                     <th><h3>Usuario</h3></th>
+                     <th><h3>Clave</h3></th>
+                     <th><h3>Estado</h3></th>
+                     <th colspan="4"><h3>Opcion</h3></th>
+                     </tr>
+                     </thead>
+                     <tbody>
+                         <%for (int i = 0; i < List_Usuario_var.size(); i++) {
+                                 V_Var_Usuario v = new V_Var_Usuario();
+                                 v = (V_Var_Usuario) List_Usuario_var.get(i);
+                         %>
+                         <tr>
+                             <td><%=i + 1%></td>
+                             <td class="name"><a href="../../Usuario?id_Usuario=<%=v.getId_usuario()%>&opc=Mod_Usuario_con"><%=v.getNo_trabajador() + " " + v.getAp_paterno() + " " + v.getAp_materno()%></a></td>
+                             <td><%=v.getNo_rol()%></td>
+                             <td><%=v.getNo_puesto()%></td>
+                             <td><%=v.getNo_seccion()%></td>
+                             <td><%=v.getNo_area()%></td>
+                             <td><%=v.getNo_dep()%></td>
+                             <td><%=v.getNo_usuario()%></td>
+                             <td><a href="../../Usuario?id_Usuaio=<%=v.getId_usuario()%>&opc=Modificar_clave_1"><%=v.getPw_usuario()%> </a></td>
+                             <td><%=v.getEs_usuario()%></td>
+                             <td><a href="../../Usuario?id_Usuaio=<%=v.getId_usuario()%>&opc=Mod_Usuario_con"><img src="../../imagenes/lapiz.png" alt=""   width="25px" height="25px"/></a> </td>
+                             <td><a href="../../Usuario?id_Usuaio=<%=v.getId_usuario()%>&opc=Desac_Usuario_con"><img src="../../imagenes/eliminar.png" alt=""   width="25px" height="25px"/></a> </td>
+                             <td><a href="../../Usuario?id_Usuaio=<%=v.getId_usuario()%>&opc=Activar_Usuario_con"><img src="../../imagenes/Aprobado.png" alt=""   width="25px" height="25px"/></a> </td>
+                             <td><a href="../../Usuario?id_Usuaio=<%=v.getId_usuario()%>&opc=Elim_Usuario_con"><img src="../../imagenes/Desaprobado.png" alt=""   width="25px" height="25px"/></a> </td>
 
                         </tr>
                         <%}%>        
@@ -246,7 +232,7 @@
         </div>--%>
 
 
-        <!--<script type="text/javascript" src="../../js/Js_Sort/script.js"></script>-->
+        <!--<script type="text/javascript" src="../../js/Js_Sort/script.js"></script>
         <script type="text/javascript">
             var sorter = new TINY.table.sorter('sorter', 'table', {
                 headclass: 'head', // Header Class //
@@ -275,7 +261,7 @@
                 init: true// Init Now? (true or false) //
 
             });
-        </script>
+        </script>-->
 
 
         <!--Script Open Pannel--->
@@ -560,6 +546,281 @@
                 var s = document.getElementsByTagName('script')[0];
                 s.parentNode.insertBefore(ga, s);
             })();
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                pageSetUp();
+
+                /*
+                 * Autostart Carousel
+                 */
+                $('.carousel.slide').carousel({
+                    interval: 3000,
+                    cycle: true
+                });
+                $('.carousel.fade').carousel({
+                    interval: 3000,
+                    cycle: true
+                });
+
+                // Fill all progress bars with animation
+
+                $('.progress-bar').progressbar({
+                    display_text: 'fill'
+                });
+                $('#eg1').click(function(e) {
+
+                    $.bigBox({
+                        title: "Big Information box",
+                        content: "This message will dissapear in 6 seconds!",
+                        color: "#C46A69",
+                        //timeout: 6000,
+                        icon: "fa fa-warning shake animated",
+                        number: "1",
+                        timeout: 6000
+                    });
+
+                    e.preventDefault();
+
+                })
+
+                $('#eg2').click(function(e) {
+
+                    $.bigBox({
+                        title: "Big Information box",
+                        content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                        color: "#3276B1",
+                        //timeout: 8000,
+                        icon: "fa fa-bell swing animated",
+                        number: "2"
+                    });
+
+                    e.preventDefault();
+                })
+
+                $('#eg3').click(function(e) {
+
+                    $.bigBox({
+                        title: "Shield is up and running!",
+                        content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                        color: "#C79121",
+                        //timeout: 8000,
+                        icon: "fa fa-shield fadeInLeft animated",
+                        number: "3"
+                    });
+
+                    e.preventDefault();
+
+                })
+
+                $('#eg4').click(function(e) {
+
+                    $.bigBox({
+                        title: "Success Message Example",
+                        content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                        color: "#739E73",
+                        //timeout: 8000,
+                        icon: "fa fa-check",
+                        number: "4"
+                    }, function() {
+                        closedthis();
+                    });
+
+                    e.preventDefault();
+
+                })
+
+
+
+                $('#eg5').click(function() {
+
+                    $.smallBox({
+                        title: "Ding Dong!",
+                        content: "Someone's at the door...shall one get it sir? <p class='text-align-right'><a href='javascript:void(0);' class='btn btn-primary btn-sm'>Yes</a> <a href='javascript:void(0);' class='btn btn-danger btn-sm'>No</a></p>",
+                        color: "#296191",
+                        //timeout: 8000,
+                        icon: "fa fa-bell swing animated"
+                    });
+
+                });
+
+
+
+                $('#eg6').click(function() {
+
+                    $.smallBox({
+                        title: "Big Information box",
+                        content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                        color: "#5384AF",
+                        //timeout: 8000,
+                        icon: "fa fa-bell"
+                    });
+
+                })
+
+                $('#eg7').click(function() {
+
+                    $.smallBox({
+                        title: "James Simmons liked your comment",
+                        content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
+                        color: "#296191",
+                        iconSmall: "fa fa-thumbs-up bounce animated",
+                        timeout: 4000
+                    });
+
+                })
+
+                function closedthis() {
+                    $.smallBox({
+                        title: "Great! You just closed that last alert!",
+                        content: "This message will be gone in 5 seconds!",
+                        color: "#739E73",
+                        iconSmall: "fa fa-cloud",
+                        timeout: 5000
+                    });
+                }
+
+                /*
+                 * SmartAlerts
+                 */
+                // With Callback
+                $(".btnActivar"+valorr).click(function(e) {
+                    $.SmartMessageBox({
+                        title: "Activar usuario!",
+                        content: "¿Esta seguro de habilitar el usuario?",
+                        buttons: '[No][Yes]'
+                    }, function(ButtonPressed) {
+                        if (ButtonPressed === "Yes") {
+                            alert($(this).href );
+                            $.post("../../Usuario", "id_Usuaio=" + $('.btnActivar').attr('id') + "&opc=Activar_Usuario_con", function() {
+                                $.smallBox({
+                                    title: "Activar Usuario",
+                                    content: "<i class='fa fa-clock-o'></i> <i>El Usuario ha sido activado </i>",
+                                    color: "#659265",
+                                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                    timeout: 4000
+                                });
+                            });
+
+                        }
+                        if (ButtonPressed === "No") {
+                            $.smallBox({
+                                title: "Callback function",
+                                content: "<i class='fa fa-clock-o'></i> <i>You pressed No...</i>",
+                                color: "#C46A69",
+                                iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                timeout: 4000
+                            });
+                        }
+
+                    });
+                    //e.preventDefault();
+                })
+                $("#smart-mod-eg1").click(function(e) {
+                    $.SmartMessageBox({
+                        title: "Smart Alert!",
+                        content: "This is a confirmation box. Can be programmed for button callback",
+                        buttons: '[No][Yes]'
+                    }, function(ButtonPressed) {
+                        if (ButtonPressed === "Yes") {
+
+                            $.smallBox({
+                                title: "Callback function",
+                                content: "<i class='fa fa-clock-o'></i> <i>You pressed Yes...</i>",
+                                color: "#659265",
+                                iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                timeout: 4000
+                            });
+                        }
+                        if (ButtonPressed === "No") {
+                            $.smallBox({
+                                title: "Callback function",
+                                content: "<i class='fa fa-clock-o'></i> <i>You pressed No...</i>",
+                                color: "#C46A69",
+                                iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                timeout: 4000
+                            });
+                        }
+
+                    });
+                    e.preventDefault();
+                })
+                // With Input
+                $("#smart-mod-eg2").click(function(e) {
+
+                    $.SmartMessageBox({
+                        title: "Smart Alert: Input",
+                        content: "Please enter your user name",
+                        buttons: "[Accept]",
+                        input: "text",
+                        placeholder: "Enter your user name"
+                    }, function(ButtonPress, Value) {
+                        alert(ButtonPress + " " + Value);
+                    });
+
+                    e.preventDefault();
+                })
+                // With Buttons
+                $("#smart-mod-eg3").click(function(e) {
+
+                    $.SmartMessageBox({
+                        title: "Smart Notification: Buttons",
+                        content: "Lots of buttons to go...",
+                        buttons: '[Need?][You][Do][Buttons][Many][How]'
+                    });
+
+                    e.preventDefault();
+                })
+                // With Select
+                $("#smart-mod-eg4").click(function(e) {
+
+                    $.SmartMessageBox({
+                        title: "Smart Alert: Select",
+                        content: "You can even create a group of options.",
+                        buttons: "[Done]",
+                        input: "select",
+                        options: "[Costa Rica][United States][Autralia][Spain]"
+                    }, function(ButtonPress, Value) {
+                        alert(ButtonPress + " " + Value);
+                    });
+
+                    e.preventDefault();
+                });
+
+                // With Login
+                $("#smart-mod-eg5").click(function(e) {
+
+                    $.SmartMessageBox({
+                        title: "Login form",
+                        content: "Please enter your user name",
+                        buttons: "[Cancel][Accept]",
+                        input: "text",
+                        placeholder: "Enter your user name"
+                    }, function(ButtonPress, Value) {
+                        if (ButtonPress == "Cancel") {
+                            alert("Why did you cancel that? :(");
+                            return 0;
+                        }
+
+                        Value1 = Value.toUpperCase();
+                        ValueOriginal = Value;
+                        $.SmartMessageBox({
+                            title: "Hey! <strong>" + Value1 + ",</strong>",
+                            content: "And now please provide your password:",
+                            buttons: "[Login]",
+                            input: "password",
+                            placeholder: "Password"
+                        }, function(ButtonPress, Value) {
+                            alert("Username: " + ValueOriginal + " and your password is: " + Value);
+                        });
+                    });
+
+                    e.preventDefault();
+                });
+
+
+            });
+
         </script>
     </body>
 </html>

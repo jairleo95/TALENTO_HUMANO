@@ -417,10 +417,10 @@
                                                                                         if (t.getLi_di_dom_a_d1() != null) {
                                                                                             if (t.getLi_di_dom_a_d1().trim().equals(zo.getId_via().trim())) {%>    
                                                                                 <option value="<%=zo.getId_via()%>" selected="" ><%=zo.getDe_via()%></option>
-                                                                                <%}
-                                                                                } else {%>
+                                                                                <%} else {%>
                                                                                 <option value="<%=zo.getId_via()%>"><%=zo.getDe_via()%></option>
                                                                                 <%}
+                                                                                        }
                                                                                     }%>
                                                                             </select>   
                                                                         </div>
@@ -458,10 +458,10 @@
                                                                                             if (t.getLi_di_dom_a_d3().trim().equals(num)) {
                                                                                 %>    
                                                                                 <option value="<%=num%>" selected=""><%=ListarDir_Dom.get(w)%></option>
-                                                                                <%}
-                                                                                } else {%>
+                                                                                <%} else {%>
                                                                                 <option value="<%=num%>"><%=ListarDir_Dom.get(w)%></option>
                                                                                 <%}
+                                                                                        }
                                                                                     }%>
                                                                             </select>
                                                                         </div>
@@ -499,10 +499,10 @@
                                                                                         if (t.getLi_di_dom_a_d5() != null) {
                                                                                             if (t.getLi_di_dom_a_d5().trim().equals(zo.getId_zona().trim())) {%>    
                                                                                 <option value="<%=zo.getId_zona()%>" selected=""><%=zo.getDe_zona()%></option>
-                                                                                <%}
-                                                                                } else {%>
+                                                                                <%} else {%>
                                                                                 <option value="<%=zo.getId_zona()%>"><%=zo.getDe_zona()%></option>
                                                                                 <%}
+                                                                                        }
                                                                                     }%>
                                                                             </select>
                                                                         </div>
@@ -537,292 +537,291 @@
                                                                 </div>
                                                             </div>
 
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-sm-3">
+
+                                                                <div class="form-group">
+                                                                    <label>Departamento:</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                        <select  id="dep_dir_a" class="dep_dir_a form-control input-group-sm"  required="">
+
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
                                                             </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="form-group">
+                                                                    <label>Provincia:</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                        <select   id="pro_dir_a" class="pro_dir_a form-control input-group-sm"  required="">
 
-                                                            <div class="row">
-                                                                <div class="col-sm-3">
-
-                                                                    <div class="form-group">
-                                                                        <label>Departamento:</label>
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select  id="dep_dir_a" class="dep_dir_a form-control input-group-sm"  required="">
-
-                                                                            </select>
-                                                                        </div>
+                                                                        </select>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3">
-                                                                    <div class="form-group">
-                                                                        <label>Provincia:</label>
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select   id="pro_dir_a" class="pro_dir_a form-control input-group-sm"  required="">
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="form-group">
+                                                                    <label>Distrito:</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                        <select name="DIR_DOM_A_DISTRITO_ID"  id="DOM_A_DISTRITO" class="dis_dir_a form-control input-group-sm"  required="">
 
-                                                                            </select>
-                                                                        </div>
+                                                                        </select>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3">
-                                                                    <div class="form-group">
-                                                                        <label>Distrito:</label>
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select name="DIR_DOM_A_DISTRITO_ID"  id="DOM_A_DISTRITO" class="dis_dir_a form-control input-group-sm"  required="">
-
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <button onclick="duplicar();
+                                                            </div>
+                                                            <button onclick="duplicar();
                                                                         return false;"  class="btn btn-primary" id="btn-duplicar">Duplicar</button>
 
+                                                        </div>
 
+                                                        <h3>- Domicilio Legal (segun DNI)</h3>
+                                                        <label>Direccion :</label>
+                                                        <div class="row">
+                                                            <div class="col-sm-3">
 
-                                                            </div>
+                                                                <div class="form-group">
 
-                                                            <h3>- Domicilio Legal (segun DNI)</h3>
-                                                            <label>Direccion :</label>
-                                                            <div class="row">
-                                                                <div class="col-sm-3">
-
-                                                                    <div class="form-group">
-
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select name="DIR_DOM_LEG_D1_ID"  id="DOM_LEG_D1" class="form-control input-group-sm"  required="">
-                                                                                <option value="">[Seleccione Via]</option>
-                                                                                <%for (int k = 0; k < Listar_via.size(); k++) {
-                                                                                        Via zo = new Via();
-                                                                                        zo = (Via) Listar_via.get(k);
-                                                                                        if(t.getLi_di_dom_leg_d1() != null){
-                                                                                        if (t.getLi_di_dom_leg_d1().trim().equals(zo.getId_via().trim())) {%>    
-                                                                                <option value="<%=zo.getId_via()%>" selected=""><%=zo.getDe_via()%></option>
-                                                                                <%}
-                                                                                        }else {%>
-                                                                                <option value="<%=zo.getId_via()%>"><%=zo.getDe_via()%></option>
-                                                                                <%}
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                        <select name="DIR_DOM_LEG_D1_ID"  id="DOM_LEG_D1" class="form-control input-group-sm"  required="">
+                                                                            <option value="">[Seleccione Via]</option>
+                                                                            <%for (int k = 0; k < Listar_via.size(); k++) {
+                                                                                    Via zo = new Via();
+                                                                                    zo = (Via) Listar_via.get(k);
+                                                                                    if (t.getLi_di_dom_leg_d1() != null) {
+                                                                                            if (t.getLi_di_dom_leg_d1().trim().equals(zo.getId_via().trim())) {%>    
+                                                                            <option value="<%=zo.getId_via()%>" selected=""><%=zo.getDe_via()%></option>
+                                                                            <%} else {%>
+                                                                            <option value="<%=zo.getId_via()%>"><%=zo.getDe_via()%></option>
+                                                                            <%}
+                                                                                        }
                                                                                     }%>
-                                                                            </select>
-                                                                        </div>
+                                                                        </select>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3">
+                                                            </div>
+                                                            <div class="col-sm-3">
 
-                                                                    <div class="form-group">
+                                                                <div class="form-group">
 
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"  value="<%if (t.getDi_dom_leg_d2() != null) {
-                                                                                    out.print(t.getDi_dom_leg_d2());
-                                                                                } else {
-                                                                                    out.print("");
-                                                                                }%>"  type="text" name="DIR_DOM_LEG_D2" id="DOM_LEG_D2" maxlength="100">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                        <input class="form-control input-group-sm"  value="<%if (t.getDi_dom_leg_d2() != null) {
+                                                                                out.print(t.getDi_dom_leg_d2());
+                                                                            } else {
+                                                                                out.print("");
+                                                                            }%>"  type="text" name="DIR_DOM_LEG_D2" id="DOM_LEG_D2" maxlength="100">
 
-                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3">
+                                                            </div>
+                                                            <div class="col-sm-3">
 
-                                                                    <div class="form-group">
+                                                                <div class="form-group">
 
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select name="DIR_DOM_LEG_D3_ID"  id="DOM_LEG_D3" class="form-control input-group-sm"  required="">
-                                                                                <option value="">[Seleccione]</option>
-                                                                                <%for (int x = 0; x < ListarDir_Dom.size(); x++) {
-                                                                                        String num = Integer.toString(x + 1);
-                                                                                        if (t.getLi_di_dom_leg_d3() != null){
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                        <select name="DIR_DOM_LEG_D3_ID"  id="DOM_LEG_D3" class="form-control input-group-sm"  required="">
+                                                                            <option value="">[Seleccione]</option>
+                                                                            <%for (int x = 0; x < ListarDir_Dom.size(); x++) {
+                                                                                    String num = Integer.toString(x + 1);
+                                                                                    if (t.getLi_di_dom_leg_d3() != null) {
                                                                                         if (t.getLi_di_dom_leg_d3().trim().equals(num)) {
-                                                                                %>
-                                                                                <option value="<%=num%>" selected ><%=ListarDir_Dom.get(x)%></option>
-                                                                                <%}
-                                                                                        }else {%>
-                                                                                <option value="<%=num%>" ><%=ListarDir_Dom.get(x)%></option>
-                                                                                <% }
+                                                                            %>
+                                                                            <option value="<%=num%>" selected ><%=ListarDir_Dom.get(x)%></option>
+                                                                            <%
+                                                                                } else {%>
+                                                                            <option value="<%=num%>" ><%=ListarDir_Dom.get(x)%></option>
+                                                                            <% }
+                                                                                        }
                                                                                     }%>
 
-                                                                            </select>
-                                                                        </div>
+                                                                        </select>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3">
+                                                            </div>
+                                                            <div class="col-sm-3">
 
-                                                                    <div class="form-group">
+                                                                <div class="form-group">
 
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"  value="<%if (t.getDi_dom_leg_d4() != null) {
-                                                                                    out.print(t.getDi_dom_leg_d4());
-                                                                                } else {
-                                                                                    out.print("");
-                                                                                }%>"   type="text" name="DIR_DOM_LEG_D4" id="DOM_LEG_D4" maxlength="100">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                        <input class="form-control input-group-sm"  value="<%if (t.getDi_dom_leg_d4() != null) {
+                                                                                out.print(t.getDi_dom_leg_d4());
+                                                                            } else {
+                                                                                out.print("");
+                                                                            }%>"   type="text" name="DIR_DOM_LEG_D4" id="DOM_LEG_D4" maxlength="100">
 
-                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                        <select name="DIR_DOM_LEG_D5_ID"  id="DOM_LEG_D5" class="form-control input-group-sm"  required="">
+                                                                            <option value="">[Seleccione Zona]</option>
+                                                                            <%for (int q = 0; q < Listar_zona.size(); q++) {
+                                                                                    Zona zo = new Zona();
+                                                                                    zo = (Zona) Listar_zona.get(q);
+                                                                                        if (t.getLi_di_dom_leg_d5() != null) {
+                                                                                            if (t.getLi_di_dom_leg_d5().trim().equals(zo.getId_zona().trim())) {%>
+                                                                            <option value="<%=zo.getId_zona()%>" selected=""><%=zo.getDe_zona()%></option>
+                                                                            <%} else {%>
+                                                                            <option value="<%=zo.getId_zona()%>"><%=zo.getDe_zona()%></option> 
+                                                                            <%}
+                                                                                        }
+                                                                                    }%> 
+                                                                        </select>
                                                                     </div>
                                                                 </div>
 
                                                             </div>
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select name="DIR_DOM_LEG_D5_ID"  id="DOM_LEG_D5" class="form-control input-group-sm"  required="">
-                                                                                <option value="">[Seleccione Zona]</option>
-                                                                                <%for (int q = 0; q < Listar_zona.size(); q++) {
-                                                                                        Zona zo = new Zona();
-                                                                                        zo = (Zona) Listar_zona.get(q);
-                                                                                     if (t.getLi_di_dom_leg_d5() != null){
-                                                                                if(t.getLi_di_dom_leg_d5().trim().equals(zo.getId_zona().trim()) ){%>
-                                                                                <option value="<%=zo.getId_zona() %>" selected=""><%=zo.getDe_zona() %></option>
-                                                                                        <%}
-                                                                                     }else{%>
-                                                                                        <option value="<%=zo.getId_zona() %>"><%=zo.getDe_zona() %></option> 
-                                                                                <%}
-                                                                                }%> 
-                                                                           </select>
-                                                                        </div>
-                                                                    </div>
-                                                                            
-                                                                </div>
-                                                                <div class="col-sm-6">
+                                                            <div class="col-sm-6">
 
-                                                                    <div class="form-group">
+                                                                <div class="form-group">
 
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"   value="<%if (t.getDi_dom_leg_d6() != null) {
-                                                                                    out.print(t.getDi_dom_leg_d6());
-                                                                                } else {
-                                                                                    out.print("");
-                                                                                }%>"   type="text" name="DIR_DOM_LEG_D6" id="DOM_LEG_D6" maxlength="100">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                        <input class="form-control input-group-sm"   value="<%if (t.getDi_dom_leg_d6() != null) {
+                                                                                out.print(t.getDi_dom_leg_d6());
+                                                                            } else {
+                                                                                out.print("");
+                                                                            }%>"   type="text" name="DIR_DOM_LEG_D6" id="DOM_LEG_D6" maxlength="100">
 
-                                                                        </div>
                                                                     </div>
                                                                 </div>
-
-
-
                                                             </div>
-                                                            <div class="row">
-                                                                <div class="col-sm-4">
-                                                                    <div class="form-group">
-                                                                        <label>Departamento:</label>
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select   id="dep_dir_l" class="dep_dir_l form-control input-group-sm"  required="">
 
-                                                                            </select>
-                                                                        </div>
+
+
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group">
+                                                                    <label>Departamento:</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                        <select   id="dep_dir_l" class="dep_dir_l form-control input-group-sm"  required="">
+
+                                                                        </select>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-4">
-                                                                    <div class="form-group">
-                                                                        <label>Provincia:</label>
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select   id="pro_dir_l" class="pro_dir_l form-control input-group-sm"  required="">
-
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-4">
-                                                                    <div class="form-group">
-                                                                        <label>Distrito:</label>
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select   name="DIR_DOM_LEG_DISTRITO_ID"   id="DOM_LEG_DISTRITO" class="dis_dir_l form-control input-group-sm"  required="">
-
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
                                                             </div>
-                                                            <h3>- Ingresos de Quinta Categoria</h3>
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group">
+                                                                    <label>Provincia:</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                        <select   id="pro_dir_l" class="pro_dir_l form-control input-group-sm"  required="">
 
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-
-                                                                    <div class="form-group">
-                                                                        <label>Empresa:</label>
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-suitcase fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm" value="<%if (t.getCa_ing_qta_cat_empresa() != null) {
-                                                                                    out.print(t.getCa_ing_qta_cat_empresa());
-                                                                                } else {
-                                                                                    out.print("");
-                                                                                }%>"  type="text" name="ING_QTA_CAT_EMPRESA"  maxlength="100">
-
-                                                                        </div>
+                                                                        </select>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-6">
-
-                                                                    <div class="form-group">
-                                                                        <label>RUC:</label>
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-file-o fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm" value="<%if (t.getCa_ing_qta_cat_ruc() != null) {
-                                                                                    out.print(t.getCa_ing_qta_cat_ruc());
-                                                                                } else {
-                                                                                    out.print("");
-                                                                                }%>"  type="text" name="ING_QTA_CAT_RUC"  maxlength="20">
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-
                                                             </div>
-                                                            <div class="row">
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group">
+                                                                    <label>Distrito:</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                        <select   name="DIR_DOM_LEG_DISTRITO_ID"   id="DOM_LEG_DISTRITO" class="dis_dir_l form-control input-group-sm"  required="">
 
-                                                                <div class="col-sm-12">
-
-                                                                    <div class="form-group">
-                                                                        <label>Otras Empresas:</label>
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-suitcase fa-lg fa-fw"></i></span>
-                                                                            <textarea name="ING_QTA_CAT_OTRAS_EMPRESAS"   class="form-control input-group-sm"  cols="60" rows="6" maxlength="500" ><%if (t.getCa_ing_qta_cat_otras_empresas() != null) {
-                                                                                    out.print(t.getCa_ing_qta_cat_otras_empresas());
-                                                                                } else {
-                                                                                    out.print("");
-                                                                                }%></textarea>
-                                                                        </div>
+                                                                        </select>
                                                                     </div>
                                                                 </div>
-
-
                                                             </div>
+
+                                                        </div>
+                                                        <h3>- Ingresos de Quinta Categoria</h3>
+
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+
+                                                                <div class="form-group">
+                                                                    <label>Empresa:</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"><i class="fa fa-suitcase fa-lg fa-fw"></i></span>
+                                                                        <input class="form-control input-group-sm" value="<%if (t.getCa_ing_qta_cat_empresa() != null) {
+                                                                                out.print(t.getCa_ing_qta_cat_empresa());
+                                                                            } else {
+                                                                                out.print("");
+                                                                            }%>"  type="text" name="ING_QTA_CAT_EMPRESA"  maxlength="100">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6">
+
+                                                                <div class="form-group">
+                                                                    <label>RUC:</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"><i class="fa fa-file-o fa-lg fa-fw"></i></span>
+                                                                        <input class="form-control input-group-sm" value="<%if (t.getCa_ing_qta_cat_ruc() != null) {
+                                                                                out.print(t.getCa_ing_qta_cat_ruc());
+                                                                            } else {
+                                                                                out.print("");
+                                                                            }%>"  type="text" name="ING_QTA_CAT_RUC"  maxlength="20">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                        <div class="row">
+
+                                                            <div class="col-sm-12">
+
+                                                                <div class="form-group">
+                                                                    <label>Otras Empresas:</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"><i class="fa fa-suitcase fa-lg fa-fw"></i></span>
+                                                                        <textarea name="ING_QTA_CAT_OTRAS_EMPRESAS"   class="form-control input-group-sm"  cols="60" rows="6" maxlength="500" ><%if (t.getCa_ing_qta_cat_otras_empresas() != null) {
+                                                                                out.print(t.getCa_ing_qta_cat_otras_empresas());
+                                                                            } else {
+                                                                                out.print("");
+                                                                            }%></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
                                                         </div>
                                                     </div>
-
-                                                    <%String idtr = request.getParameter("idtr");%>
-                                                    <input type="hidden" name="idtr" value="<%=idtr%>"/>
-                                                    <input type="hidden" name="opc" value="Modificar_Asp_Soc">
-                                                    <footer>
-                                                        <center>
-                                                            <button type="submit" value="" name="opc"> MODIFICAR</button>
-                                                        </center>
-                                                    </footer>
-                                                    <%
-                                                        }%>
                                                 </div>
-                                            </form>
 
-
-
-
+                                                <%String idtr = request.getParameter("idtr");%>
+                                                <input type="hidden" name="idtr" value="<%=idtr%>"/>
+                                                <input type="hidden" name="opc" value="Modificar_Asp_Soc">
+                                                <footer>
+                                                    <center>
+                                                        <button type="submit" value="" name="opc"> MODIFICAR</button>
+                                                    </center>
+                                                </footer>
+                                                <%
+                                                        }%>
                                         </div>
-                                        <!-- end widget content -->
+                                        </form>
+
+
+
 
                                     </div>
-                                    <!-- end widget div -->
+                                    <!-- end widget content -->
 
                                 </div>
-                                <!-- end widget -->
+                                <!-- end widget div -->
+
+                            </div>
+                            <!-- end widget -->
 
                         </article>
                         <!-- WIDGET END -->
@@ -1504,10 +1503,8 @@
             var DAD6 = $("#DOM_A_D6").val();
 
             var DEP_A = $("#dep_dir_a").val();
-
-
-            var DADIS = $("#DOM_A_DISTRITO").val();
             var PRO_ACT = $("#pro_dir_a").val();
+            var DADIS = $("#DOM_A_DISTRITO").val();
 
             $("#DOM_LEG_D1").val(DAD1);
             $("#DOM_LEG_D2").val(DAD2);
@@ -1515,9 +1512,11 @@
             $("#DOM_LEG_D4").val(DAD4);
             $("#DOM_LEG_D5").val(DAD5);
             $("#DOM_LEG_D6").val(DAD6);
-            $("#DOM_LEG_DISTRITO").val(DADIS);
+
             $("#dep_dir_l").val(DEP_A);
             $("#pro_dir_l").val(PRO_ACT);
+            $("#DOM_LEG_DISTRITO").val(DADIS);
+            
 
         }
 
