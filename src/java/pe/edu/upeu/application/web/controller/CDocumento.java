@@ -118,14 +118,17 @@ public class CDocumento extends HttpServlet {
                  
                 int s = d.List_Req_nacionalidad(idtr);
                 int num_ad = d.List_Adventista(idtr);
-               // int can_doc = d.count_documentos(dgp);
+                int can_doc = d.count_documentos(dgp);
               
                 getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
                 getServletContext().setAttribute("List_doc_req_pla", d.List_doc_req_pla(dgp, idtr));
                 getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
+                if (can_doc > 0) {
+                    response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr + "&iddgp=" + dgp);
+                } else {
                 response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&iddgp=" + dgp + "&pro=pr_dgp");
                 
-              
+                }
             }
         } else {
 
