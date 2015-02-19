@@ -392,12 +392,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                            <script>
-                                                                                function mayus {
-                                                                                    
-                                                                                }
-                                                                                
-                                                                            </script>
+                                                                           
                                                                 <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <label >Apellido Materno:</label>
