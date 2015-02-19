@@ -681,7 +681,7 @@
                                                                             <select name="AFILIADO_ESSALUD_ID" class="form-control input-group-sm"  required="">
                                                                                 <option value="">[Afiliado ESSALUD-VIDA]</option>
                                                                                 <option value="1">Si</option>
-                                                                                <option value="2">No</option>
+                                                                                <option value="2" selected="">No</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -1900,7 +1900,8 @@
             <!-- END MAIN CONTENT -->
 
         </div>
-    <center>                                                                       <!-- Modal -->
+    <center>                                                                       
+        <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -1983,7 +1984,8 @@
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
+        </div>
+        <!-- /.modal -->
         <button  data-toggle="modal" data-target="#myModal" id="btn-mostrar" hidden="">
             Launch demo modal
         </button>
@@ -2255,11 +2257,13 @@
             $("#DOM_LEG_D4").val(DAD4);
             $("#DOM_LEG_D5").val(DAD5);
             $("#DOM_LEG_D6").val(DAD6);
-            alert(DADIS);
-
-            list_dist_id_prov(DADIS, $("#DOM_LEG_DISTRITO"));
+            
+           
+            
+            list_prov_id_dep(DEP_A,$("#pro_dir_l"),"1",PRO_ACT)
+            list_dist_id_prov(PRO_ACT, $("#DOM_LEG_DISTRITO"), "1", DADIS);
             //  $("#DOM_LEG_DISTRITO").val(DADIS);
-            // $("#dep_dir_l").val(DEP_A);
+             $("#dep_dir_l").val(DEP_A);
             // $("#pro_dir_l").val(PRO_ACT);
 
         }
@@ -2317,6 +2321,9 @@
                 }
             });
         });
+        
+        // ============ DIRECCION ===========
+        
         $("#dep_dir_a").change(function() {
             var ti = $("#pro_dir_a");
             ti.empty();
@@ -2365,11 +2372,16 @@
                 }
             });
         });
+        //PROVINCIA
         $("#dep_dir_l").change(function() {
             var ti = $("#pro_dir_l");
-            ti.empty();
             var rg = $("#dep_dir_l").val();
-            var data = "id_dep=" + rg + "&opc=dep_nac";
+           list_prov_id_dep (rg,ti,"0","")
+           
+        });
+        
+        function list_prov_id_dep (rg,ti,selected,id_select){
+             var data = "id_dep=" + rg + "&opc=dep_nac";
             ti.append('<option value="">Cargando...</option>').val('');
             $.post("../../ubigeo", data, function(objJson) {
                 ti.empty();
@@ -2379,45 +2391,92 @@
                 }
                 var lista = objJson.lista;
                 if (lista.length > 0) {
-                    ti.append("<option value=''>[Seleccione]</option>");
+                     if (selected == "0") {
+                        ti.append("<option value=''>[Seleccione]</option>");
+                        for (var i = 0; i < lista.length; i++) {
+                            var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                            ti.append(item);
+                        }
+
+                    } else if (selected == "1") {
+
+                        ti.append("<option value=''>[Seleccione]</option>");
+                        for (var i = 0; i < lista.length; i++) {
+                            if (id_select === lista[i].id) {
+                                var item = "<option value='" + lista[i].id + "' selected>" + lista[i].descripcion + "</option>";
+                                ti.append(item);
+                            } else {
+                                var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                                ti.append(item);
+                            }
+
+                        }
+
+                    }
+                 
                 } else {
                     ti.append("<option value=''>[]</option>");
                 }
-                for (var i = 0; i < lista.length; i++) {
-                    var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                    ti.append(item);
-                }
+                
             });
-        });
+            
+        }
+        
+        
+        //DISTRITO
         $("#pro_dir_l").change(function() {
             var ti = $("#DOM_LEG_DISTRITO");
             var rg = $("#pro_dir_l").val();
-            list_dist_id_prov(rg, ti);
-
+            list_dist_id_prov(rg, ti, "0", "");
+         
+         
 
         });
 
-        function list_dist_id_prov(rg, ti) {
+        function list_dist_id_prov(rg, ti, selected, id_select) {
             var data = "id_dist=" + rg + "&opc=pro_nac";
-            ti.empty();
-            ti.append('<option value="">Cargando...</option>').val('');
 
+            ti.append('<option value="">Cargando...</option>').val('');
+            ti.empty();
             $.post("../../ubigeo", data, function(objJson) {
-                ti.empty();
+
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
                     return;
                 }
+
                 var lista = objJson.lista;
+
                 if (lista.length > 0) {
-                    ti.append("<option value=''>[Seleccione]</option>");
+                    if (selected == "0") {
+                        ti.append("<option value=''>[Seleccione]</option>");
+                        for (var i = 0; i < lista.length; i++) {
+                            var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                            ti.append(item);
+                        }
+
+                    } else if (selected == "1") {
+
+                        ti.append("<option value=''>[Seleccione]</option>");
+                        for (var i = 0; i < lista.length; i++) {
+                            if (id_select === lista[i].id) {
+                                var item = "<option value='" + lista[i].id + "' selected>" + lista[i].descripcion + "</option>";
+                                ti.append(item);
+                            } else {
+                                var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                                ti.append(item);
+                            }
+
+                        }
+
+                    }
+
+
                 } else {
                     ti.append("<option value=''>[]</option>");
                 }
-                for (var i = 0; i < lista.length; i++) {
-                    var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                    ti.append(item);
-                }
+
+
             });
 
         }

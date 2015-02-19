@@ -131,7 +131,7 @@
                             <article class="col-sm-12 col-md-12 col-lg">
 
                                 <!-- Widget ID (each widget will need unique ID)-->
-                                <div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-deletebutton="false">
+                                <div class="jarviswidget" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-deletebutton="false">
                                     <!-- widget options:
                                     usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
     
@@ -207,8 +207,7 @@
                                                         </section>
                                                         <section class="col col-3" id="titulo">
                                                             <label class="select" id="titu">Dirección:
-                                                                <select name="DIRECCION" class="input-group-sm" id="select_dir">
-
+                                                                <select name="DIRECCION" class="input-group-sm select_dir" >
 
                                                                     <option value="">[SELECCIONE]</option>
                                                                     <%for (int g = 0; g < Listar_Direccion.size(); g++) {
@@ -218,6 +217,7 @@
                                                                     <option value="<%=di.getId_direccion()%>"><%=di.getNo_direccion()%></option>
 
                                                                     <%}%>
+
                                                                 </select>  </label>
                                                         </section> 
                                                         <section class="col col-3" id="titulo">
@@ -808,6 +808,8 @@
         }
         $(document).ready(
                 function() {
+
+
                     $("#remu").keyup(
                             function() {
                                 Sueldo_Total();
@@ -839,6 +841,7 @@
     </script>
     <script language="javascript" type="text/javascript">
         $(document).ready(function() {
+
             $(".contenido").hide();
             /*TEMPORAL*/
             //Planilla
@@ -862,6 +865,7 @@
     <script language="javascript" type="text/javascript">
         $(document).ready(
                 function mostrar() {
+
                     $(".texto-h").mask("99:99", {placeholder: "X"});
                     $(".cont_lun").hide();
                     $(".cont_mar").hide();
@@ -1514,7 +1518,7 @@
     <script type="text/javascript">
 
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
-
+        
         $(document).ready(function() {
 
             pageSetUp();
@@ -1948,16 +1952,31 @@
             s.parentNode.insertBefore(ga, s);
         })();</script>
     <script>
+        function Listar_plantilla2() {
+            var s = $(".con_pl_pu");
+
+            $.post("../../plantilla_contractual", "opc=List_planti&" + "id_pu=" + $(".id_pu_dgp").val(), function(objJson) {
+                s.empty();
+                var lista = objJson.lista;
+                s.append("<option value='' > [SELECCIONE] </option>");
+                for (var i = 0; i < lista.length; i++) {
+                    s.append("<option value='" + lista[i].id + "'> " + lista[i].nom_pl + "</option>");
+                }
+            });
+        }
         $(document).ready(function() {
+
             Listar_dep();
             Listar_centro_costo();
-            Listar_Plantilla();
+            Listar_plantilla2();
+    
             var a = $("#select-sub-mod");
             var c = $("#Selec_Area");
             var d = $("#select_sec");
             var b = $("#selec_dep");
             var e = $("#pu_id_se");
             // $.post("../../  ")
+
             $("#select_mod").change(
                     function() {
                         //  alert($(this).val());
@@ -1982,6 +2001,7 @@
                             }
                         });
                     });
+                   
             $("#selec_dep").change(
                     function() {
                         $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function(objJson) {
@@ -2001,10 +2021,13 @@
                             }
                         });
                     });
-            $("#select_dir").change(
+
+            $(".select_dir").change(
                     function() {
-                        $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $("#select_dir").val(), function(objJson) {
+                      
+                        $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $(this).val(), function(objJson) {
                             b.empty();
+
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
                                 return;
@@ -2020,6 +2043,8 @@
                             }
                         });
                     });
+                 
+
             $("#Selec_Area").change(
                     function() {
                         $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function(objJson) {
@@ -2035,6 +2060,7 @@
                             }
                         });
                     });
+                      
             $("#select_sec").change(
                     function() {
                         $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function(objJson) {
@@ -2095,18 +2121,7 @@
                     x.append('</div><table><tr><td><td><input type="hidden" name="can_centro_cos" value="' + lista.length + '"></td></tr></table>');
                 });
             }
-             function Listar_plantilla() {
-                var s = $(".con_pl_pu");
 
-                $.post("../../plantilla_contractual", "opc=List_planti&" + "id_pu=" + $(".id_pu_dgp").val(), function(objJson) {
-                    s.empty();
-                    var lista = objJson.lista;
-                    s.append("<option value='' > [SELECCIONE] </option>");
-                    for (var i = 0; i < lista.length; i++) {
-                        s.append("<option value='" + lista[i].id + "'> " + lista[i].nom_pl + "</option>");
-                    }
-                });
-            }
 
         });
     </script>

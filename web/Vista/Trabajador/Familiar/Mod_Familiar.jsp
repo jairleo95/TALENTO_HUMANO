@@ -215,7 +215,7 @@
                                                                         <label>¿ Trabaja en la UPEU ?</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select name="TRABAJA_UPEU_CONYUGUE"   required=""   class="form-control input-group-sm">
+                                                                            <select name="TRABAJA_UPEU_CONYUGUE"   required=""   class="select-conyugue form-control input-group-sm">
                                                                                 <%if (t.getEs_trabaja_upeu_c().trim().equals("1")) {%>
                                                                                 <option value="1" selected="">Si</option>
                                                                                 <option value="0">No</option>
@@ -356,7 +356,91 @@
 
         </div>
     <center>                                                                     
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Encontrar Conyugue</h4>
+                    </div>
+                    <div class="modal-body">
 
+                        <div class="row">
+                            <div id="contenido">
+                                <div >
+
+                                    <form class="form-inline" id="frm_filtro" method="post" name="formulario"  >
+
+                                        <div class="row">
+                                            <div class="form-group" >
+                                                <label class="control-label" >Nombres</label><br>
+                                                <input type="text"  class="form-control"  name="nom" maxlength="80" >
+                                            </div>
+                                            <div class="form-group" >
+                                                <label class="control-label" >Apellido Paterno</label><br>
+                                                <input type="text"  class="form-control"  name="ap_pa" maxlength="80">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label" >Apellido Materno</label><br>
+                                                <input type="text"  class="form-control"  name="ap_ma" maxlength="80" >
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label" >DNI:</label><br>
+                                                <input type="text"  class="form-control"  onKeyPress="return checkIt(event)"   name="dni" maxlength="8">
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="form-group">                            
+                                                <button type="button" class="btn btn-primary" id="btnfiltrar" >Buscar</button>
+                                            </div>
+                                            <div class="form-group">  
+                                                <a href="javascript:;"  id="btncancel" class="btn btn-primary" >Cancelar</a>
+                                            </div>
+
+                                        </div>
+
+                                    </form>
+
+                                </div> 
+
+                                <hr/>
+
+                                <table  id="data"  >
+                                    <thead class="tab_cabe">
+                                        <tr>
+                                            <td><span title="NOMBRE_AP">Nombres y Apellidos</span></td>
+                                            <td><span  >DNI</span></td>
+                                            <td></td>
+
+                                        </tr>
+                                    </thead>
+
+                                    <tbody class="tbodys">
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-salir-busc"  data-dismiss="modal">Salir</button>
+
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
         <button  data-toggle="modal" data-target="#myModal" id="btn-mostrar" hidden="">
             Launch demo modal
         </button>
@@ -442,6 +526,90 @@
     <script src="../../../js/plugin/fuelux/wizard/wizard.min.js"></script>
     <script type="text/javascript" src="../../../js/JQuery/jquery.numeric.js"></script>
 
+<script>
+        $(document).ready(function() {
+            var b = $(".tbodys");
+
+            $("#btnfiltrar").click(
+                    function() {
+
+
+                        $.post("../../../ajax/Ajax_Conyugue/Ajax_Busc_Conyug.jsp", $("#frm_filtro").serialize(), function(objJson) {
+                            b.empty();
+                            var list = objJson.lista;
+                            for (var i = 0; i < list.length; i++) {
+                                b.append("<tr>");
+                                b.append("<td>" + list[i].NOM + " " + list[i].AP_PA + " " + list[i].AP_MA + "</td>");
+                                b.append("<td>" + list[i].NU_DOC + "</td>");
+                                b.append("<input type ='hidden' class='trab_" + i + "' value='" + list[i].ID_TRAB + "' />");
+                                b.append("<input type ='hidden' class='nac_" + i + "' value='" + list[i].NAC + "' />");
+                                b.append("<input type ='hidden' class='dni_" + i + "' value='" + list[i].NU_DOC + "' />");
+                                b.append("<input type ='hidden' class='tipo_" + i + "' value='" + list[i].TIPO + "' />");
+                                b.append("<input type ='hidden' class='nom_ape_" + i + "' value='" + list[i].NOM + " " + list[i].AP_PA + " " + list[i].AP_MA + "' />");
+                                if (typeof (list[i].ID_C) === "undefined") {
+
+                                    b.append('<td><button type="button" class="btn btn-primary btn-add-conyugue" value="' + i + '" data-dismiss="modal">Agregar</button></td>');
+                                } else {
+                                    b.append('<td>Tiene conyugue</td>');
+                                }
+                                b.append("</tr>");
+
+                            }
+
+                            $(".btn-add-conyugue").click(function() {
+                                var v = $(this).val();
+                                $(".nom_c").val($(".nom_ape_" + v).val());
+                                $(".f_nac").val($(".nac_" + v).val());
+                                $(".ti_documento").val($(".tipo_" + v).val());
+                                $(".num_doc").val($(".dni_" + v).val());
+                                $(".cony").val($(".trab_" + v).val());
+
+
+
+
+                                //$(".select-conyugue").val("1");
+                            });
+                        }
+                        );
+
+
+
+                    });
+            $(".btn-salir-busc, .close").click(function() {
+
+                $(".select-conyugue").val("0");
+            });
+
+
+            $(".select-conyugue").change(function() {
+                if ($(this).val() == "1") {
+                    $("#btn-mostrar").click();
+                }
+                if ($(this).val() == "0") {
+                    $(".nom_c").val("");
+                    $(".f_nac").val("");
+                    $(".ti_documento").val("");
+                    $(".num_doc").val("");
+                    $(".cony").val("");
+
+                }
+
+            }
+            );
+            $("#btncancel").click(
+                    function() {
+                        document.formulario.reset();
+                        b.empty();
+                        html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'
+                        $(".tbodys").html(html);
+                    }
+            );
+
+        }
+        );
+
+
+    </script>
 
     <script type="text/javascript">
 
