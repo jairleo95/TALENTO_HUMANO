@@ -481,13 +481,18 @@
                                                             </label>
                                                         </section>
                                                         <%}
-                                                            if (cs.getEs_gem_nu_cuenta().equals("1")) {%>
+                                                            %>
                                                         <section class="col col-3" >
                                                             <label class="checkbox" >
+                                                                <%if (cs.getEs_gem_nu_cuenta().equals("1")) {%>
+                                                                <input type="checkbox" name="GEN_NU_CUEN" checked="" id="subscription"  value="1">
+                                                                <%}else{%>
                                                                 <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="1">
+                                                                <%}%>
                                                                 <i></i>Generar Nro de Cuenta Bancaria</label>
                                                         </section>
-                                                        <%}%>
+                                                        <%
+                                                        %>
                                                     </div>
 
 
