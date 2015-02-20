@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.web.controller.CCriptografiar"%>
 <%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
@@ -175,16 +176,20 @@
             String iddrp = request.getParameter("drp");
             String id_pasos = request.getParameter("pas");
             String nropaso = request.getParameter("np");
+CCriptografiar cripto= new CCriptografiar();
+
+
 
         %>
 
-
+        
         <!--Begin Detalle Trabajador-->
         <div   class="titulo" style=" width:100%;">Datos del Trabajador</div> 
         <div  class="jarviswidget well" id="wid-id-3" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
 
             <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
                 Trabajador Nuevo
+                <%out.print(cripto.Desencriptar("GiZ+Zzda/7fbyfPNPVTtcQ=="));%>
             </button>
             <table  style="background-color: white " class="table-det" cellpadding="0">
 
