@@ -11,11 +11,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <title>Mantenimiento de Usuarios</title>
-        <!--<link rel="stylesheet" href="../CSS/estilos.css" />
-
-        <link rel="stylesheet" href="../CSS/chosen.css">
-        <script src="../js3/abc.js"></script>
-        <script src="../js3/organictabs.jquery.js"></script>-->
         <style type="text/css">
             .contenedor{
                 margin-left: 1%;
@@ -37,7 +32,7 @@
                             <div class="jarviswidget-editbox">
                             </div>
                             <div class="widget-body no-padding ">
-                                <form class="smart-form" action="../../Usuario">
+                                <div class="smart-form">
                                     <%for (int i = 0; i < List_Usuario_var_id.size(); i++) {
                                             V_Var_Usuario v = new V_Var_Usuario();
                                             v = (V_Var_Usuario) List_Usuario_var_id.get(i);
@@ -49,13 +44,13 @@
                                         <section class="col col-4">
                                             <label class="label">Empleado:</label>
                                             <label class="input state-disabled">
-                                                <input type="text" value="<%=v.getNo_trabajador() + " " + v.getAp_paterno() + " " + v.getAp_materno()%>">
+                                                <input type="text" disabled="" value="<%=v.getNo_trabajador() + " " + v.getAp_paterno() + " " + v.getAp_materno()%>">
                                             </label>
                                         </section>
                                         <section class="col col-4">
                                             <label class="label">Rol:</label>
                                             <label class="select">
-                                                <select name="IDROLES">
+                                                <select class="idRol" name="IDROLES">
                                                     <option value="">[Seleccione]</option>
                                                     <%for (int u = 0; u < List_Rol.size(); u++) {
                                                             Rol r = new Rol();
@@ -73,18 +68,18 @@
                                         <section class="col col-4">
                                             <label class="label">Usuario:</label>
                                             <label class="input">
-                                                <input type="text" required="" name="USUARIO" value="<%=v.getNo_usuario().trim()%>">
+                                                <input type="text" class="nUser" required="" name="USUARIO" value="<%=v.getNo_usuario().trim()%>">
                                                 <i></i> </label>                                
                                         </section>
                                     </fieldset>
                                     <footer>
-                                        <input type="hidden" name="opc"  class="submit" value="Mod_Usuario_con_2">
-                                        <input type="hidden" name="ID_USUARIO"  class="submit" value="<%=v.getId_usuario()%> ">
-                                        <input type="submit" class="btn btn-primary btn-sm" value="MODIFICAR ROL USUARIO">
-                                        <input  class="btn btn-default btn-sm" onclick="window.history.back();" value="Atras">
+                                        <!--<input type="hidden" name="opc"  class="submit" value="Mod_Usuario_con_2">-->
+                                        <input type="hidden"  class="idUser" value="<%=v.getId_usuario()%>">
+                                        <button  id="mod" class="btn btn-primary btn-sm" onclick="javascript: editr();">Modificar</button>
+                                        <button  class="btn btn-default btn-sm" onclick="window.history.back();" value="Atras">Atras</button>
                                     </footer>
                                     <%}%>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -92,59 +87,47 @@
             </div>
         </div>
 
-    <%--<center>
-        <label class="lab-mant"> <h1>Mantenimiento Usuarios de  Personal</h1></label>
+    </body>
+    <script type="text/javascript">
+        function editr() {
+            pageSetUp();
+            var rol;
+            var idUsuario;
+            var nUsuario;
+            idUsuario = $('.idUser').val();
+            rol = $('.idRol').val();
+            nUsuario = $('.nUser').val();
+            $.SmartMessageBox({
+                title: "Modificar usuario!",
+                content: "¿Esta seguro de guardar los cambios en el usuario?",
+                buttons: '[No][Yes]'
+            }, function(ButtonPressed) {
+                if (ButtonPressed === "Yes") {
+                    alert(idUsuario + rol + nUsuario);
+                    $.post("../../Usuario", "ID_USUARIO=" + idUsuario + "&IDROLES=" + rol + "&USUARIO=" + nUsuario + "&opc=Mod_Usuario_con_2", function() {
+                        $.smallBox({
+                            title: "Editar Usuario",
+                            content: "<i class='fa fa-clock-o'></i> <i>El Usuario ha sido modificado </i>",
+                            color: "#659265",
+                            iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                            timeout: 4000
+                        });
+                        window.history.back();
+                    });
 
-        <center>
-            <form class="form" action="../../Usuario" method="post"> 
-                <%for (int i = 0; i < List_Usuario_var_id.size(); i++) {
-                        V_Var_Usuario v = new V_Var_Usuario();
-                        v = (V_Var_Usuario) List_Usuario_var_id.get(i);
-                %>
-                <table class="table"> 
-                    <tr><td>Empleado:</td><td><%=v.getNo_trabajador() + " " + v.getAp_paterno() + " " + v.getAp_materno()%></td></tr>  
-                    <tr><td>Rol:</td><td>
-                            <select name="IDROLES" class="text-box chosen-select">
-                                <option value=""></option>
-                                <%for (int u = 0; u < List_Rol.size(); u++) {
-                                        Rol r = new Rol();
-                                        r = (Rol) List_Rol.get(u);
-                                        if (v.getId_rol().trim().equals(r.getId_rol())) {
-                                %>
-                                <option value="<%=r.getId_rol()%>" selected=""><%=r.getNo_rol()%></option>
-                                <%} else {%>
-                                <option value="<%=r.getId_rol()%>"><%=r.getNo_rol()%></option>
-                                <%}%>
-                                <%}%>
-                            </select>
-
-                        </td></tr>  
-                    <tr><td>Usuario:</td><td><input type="text" required="" name="USUARIO" class="text-box" value="<%=v.getNo_usuario().trim()%>"></td></tr>  
-                    <tr><td colspan="2"><input type="hidden" name="opc"  class="submit" value="Mod_Usuario_con_2"><input type="hidden" name="ID_USUARIO"  class="submit" value="<%=v.getId_usuario()%> "><input type="submit" class="submit" value="MODIFICAR ROL USUARIO"></td></tr>
-                            <%}%>
-                </table>
-            </form>
-        </center><br><br>
-    </center>--%>
-</body>
-<!--<script src="../js2/prism.jss" type="text/javascript" charset="utf-8"></script>
-<script src="../js2/chosen.jquery.js" type="text/javascript"></script>
-<script src="../JS/prism.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
-    var config = {
-        '.chosen-select': {},
-        '.chosen-select-deselect': {allow_single_deselect: true},
-        '.chosen-select-no-single': {disable_search_threshold: 10},
-        '.chosen-select-no-results': {no_results_text: 'Oops, nothing found!'},
-        '.chosen-select-width': {width: "95%"}
-    }
-    for (var selector in config) {
-        $(selector).chosen(config[selector]);
-    }
-</script>-->
-
-
-
+                }
+                if (ButtonPressed === "No") {
+                    $.smallBox({
+                        title: "Edtar Usuario",
+                        content: "<i class='fa fa-clock-o'></i> <i>Operacion Cancelada</i>",
+                        color: "#C46A69",
+                        iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                        timeout: 4000
+                    });
+                }
+            });
+        }
+    </script>
 </html>
 <%@include file="List_Usuario.jsp" %>
 <%} else {
