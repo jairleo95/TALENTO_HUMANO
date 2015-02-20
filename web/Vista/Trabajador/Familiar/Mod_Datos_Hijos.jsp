@@ -100,21 +100,25 @@
                 
                 <tr><td>Estudiante de Nivel Superior:</td><td>
                         <select name="ESTUD_NIV_SUPERIOR" class="text-box">
-                            <option  value=""></option>
-                             <%
+                            <option  value="">[SLECCIONE]</option>
+                             <%if(d.getEs_estudio_niv_superior() != null){
                                 if (d.getEs_estudio_niv_superior().equals("1")) {
                             %>
                             <option  value="1" selected="">Si</option>
                             <option  value="0">No</option>
-                             <%}
+                             <%}    
                             %>
-                             <%
+                             <% 
                                 if (d.getEs_estudio_niv_superior().equals("0")) {
                             %>
                             <option  value="1" selected="">Si</option>
                             <option  value="0">No</option>
                              <%}
+                             }else{
                             %>
+                            <option  value="1" >Si</option>
+                            <option  value="0">No</option
+                            <%}%>
                         </select>
                     </td></tr>  
                     <input type="hidden" name="usrmodi" value="" class="submit">

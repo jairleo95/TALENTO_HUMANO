@@ -392,7 +392,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     @Override
     public int count_documentos(String id_dgp) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT count(*) FROM RHTV_DGP_DOC_ADJ where ID_DGP='" + id_dgp.trim() + "'";
+        String sql = "SELECT count(*) FROM RHTV_DGP_DOC_ADJ where ID_DGP='" + id_dgp.trim() + "' and ES_DGP_DOC_ADJ='1'";
         int num = 0;
         try {
             ResultSet rs = this.conn.query(sql);
@@ -404,6 +404,26 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
         }
 
         return num;
+    }
+
+    @Override
+    public void Desactivar_doc(String id_doc_adj) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_DESAC_DOC_ADJ(?)} ");
+            cst.setString(1, id_doc_adj.trim());
+            cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR :" + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
     }
 
 }

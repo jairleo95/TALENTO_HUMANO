@@ -60,6 +60,18 @@ public class CDocumento extends HttpServlet {
 
         // try {
         if (opc != null) {
+            if(opc.equals("Eliminar")){
+                String id_doc_adj=request.getParameter("id_doc");
+                d.Desactivar_doc(id_doc_adj);
+                int s = d.List_Req_nacionalidad(idtr);
+                int num_ad = d.List_Adventista(idtr);
+              
+                getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
+                getServletContext().setAttribute("List_doc_req_pla", d.List_doc_req_pla(dgp, idtr));
+                getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
+                response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&iddgp=" + dgp + "&pro=pr_dgp");
+                
+            }
             if (opc.equals("Ver_Documento")) {
 
                 getServletContext().setAttribute("List_doc_req_pla", d.List_doc_req_pla(dgp, idtr));
@@ -127,7 +139,6 @@ public class CDocumento extends HttpServlet {
                     response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr + "&iddgp=" + dgp);
                 } else {
                 response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&iddgp=" + dgp + "&pro=pr_dgp");
-                
                 }
             }
         } else {

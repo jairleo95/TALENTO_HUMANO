@@ -143,6 +143,7 @@
                                                         <th class="cajita">ADJUNTAR</th>   
                                                         <th class="cajita">DESCRIPCION</th>   
                                                         <th class="cajita">¿RECIBIDO EN FISICO?</th>   
+                                                        <th class="cajita">ACCION</th>   
                                                     </tr>
                                                 </center>
                                                 </thead>
@@ -213,6 +214,9 @@
                                                                     }
                                                                 }%>
                                                         </td>
+                                                        <td>
+                                                            <a type="button"  class="btn btn-warming btn_reg_doc elimi" href="../../../documento?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getId_dgp()%>&idtr=<%=d.getId_trabajador()%>"> Eliminar</a>
+                                                        </td>
                                                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
                                                 </tr>  
 
@@ -237,9 +241,9 @@
                                                         <% if (d.getId_documento_adjunto() == null) { %>
                                                         <label class="null">No Registrado</label>
                                                         <% } else {%>
-                                                          <%
-                                                        out.print(doc_.List_files(d.getId_documento_adjunto().trim()));
-                                                    %>
+                                                        <%
+                                                            out.print(doc_.List_files(d.getId_documento_adjunto().trim()));
+                                                        %>
 
                                                         <% }
                                                             }%>
@@ -280,6 +284,9 @@
                                                                 }
                                                             }%>
                                                     </td>
+                                                    <td>
+                                                        <a type="button"  class="btn btn-warming btn_reg_doc elimi" href="../../../documento?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getId_dgp()%>&idtr=<%=d.getId_trabajador()%>"> Eliminar</a>
+                                                    </td>
                                                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
                                                 </tr>  
 
@@ -317,8 +324,8 @@
                                                         <label class="null">No Registrado</label>
                                                         <% } else {%>
                                                         <%
-                                                        out.print(doc_.List_files(d.getId_documento_adjunto().trim()));
-                                                    %>
+                                                            out.print(doc_.List_files(d.getId_documento_adjunto().trim()));
+                                                        %>
 
                                                         <% }
                                                             } %>
@@ -357,6 +364,9 @@
                                                         <% }
                                                                 }
                                                             }%>
+                                                    </td>
+                                                    <td>
+                                                        <a type="button"  class="btn btn-warming btn_reg_doc elimi" href="../../../documento?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getId_dgp()%>&idtr=<%=d.getId_trabajador()%>"> Eliminar</a>
                                                     </td>
                                                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
                                                 </tr>  
@@ -430,6 +440,9 @@
                                                                 }
                                                             }%>
                                                     </td>
+                                                    <td>
+                                                        <a type="button"  class="btn btn-warming btn_reg_doc elimi" href="../../../documento?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getId_dgp()%>&idtr=<%=d.getId_trabajador()%>"> Eliminar</a>
+                                                    </td>
                                                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
                                                 </tr>  
 
@@ -501,7 +514,9 @@
                                                             }
                                                         }%>
                                                 </td>
-
+                                                <td>
+                                                    <a type="button"  class="btn btn-warming btn_reg_doc elimi"  href="../../../documento?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getId_dgp()%>&idtr=<%=d.getId_trabajador()%>"> Eliminar</a>
+                                                </td>
                                                 </tr>  
                                                 <input type="hidden" name="iddgp" value="<%=d.getIddgp()%>">
                                                 <input type="hidden" name="idctr" value="<%=request.getParameter("idctr")%>">
@@ -542,10 +557,11 @@
                                                 <input  type='hidden' value='enter' name='P2'/>
 
                                                 <a class="btn btn-success" href="../../../dgp?iddgp=<%=request.getParameter("iddgp")%>&idtr=<%=request.getParameter("idtr")%>&opc=rd"><i class="fa fa-check"></i> CONTINUAR</a>
+
                                                 <button type="submit" class="btn btn-primary btn_reg_doc" style="display:none">
                                                     Registrar
                                                 </button>
-                                                
+
                                                 <% }
                                                 } else {%>
                                                 <button type="submit" class="btn btn-primary btn_reg_doc"style="display:none" >
@@ -683,7 +699,7 @@
         <script src="../../../js/bootstrap/fileinput.js" type="text/javascript"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
         <script>
-                                                    $(document).ready(function () {
+                                                    $(document).ready(function() {
                                                         $("#file-0").fileinput({
                                                             'allowedFileExtensions': ['jpg', 'png', 'gif'],
                                                         });
@@ -699,7 +715,7 @@
                                                             maxFileSize: 1000,
                                                             maxFilesNum: 10,
                                                             //allowedFileTypes: ['image', 'video', 'flash'],
-                                                            slugCallback: function (filename) {
+                                                            slugCallback: function(filename) {
                                                                 return filename.replace('(', '_').replace(']', '_');
                                                             }
                                                         });
@@ -719,14 +735,14 @@
                                                                 {kvId: '10'}
                                                             ],
                                                         });
-                                                        $(".btn-warning").on('click', function () {
+                                                        $(".btn-warning").on('click', function() {
                                                             if ($('#file-4').attr('disabled')) {
                                                                 $('#file-4').fileinput('enable');
                                                             } else {
                                                                 $('#file-4').fileinput('disable');
                                                             }
                                                         });
-                                                        $(".btn-info").on('click', function () {
+                                                        $(".btn-info").on('click', function() {
                                                             $('#file-4').fileinput('refresh', {previewClass: 'bg-info'});
                                                         });
                                                     });
@@ -736,10 +752,10 @@
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-            $(document).ready(function () {
+            $(document).ready(function() {
 
                 pageSetUp();
-                $.each($(".file"), function (i) {
+                $.each($(".file"), function(i) {
 
                     if ((i + 1) == 0) {
                         $(".btn_reg_doc").hide();
@@ -752,10 +768,18 @@
 
 
 
-                $(".DD").change(function () {
+                $(".DD").change(function() {
 
                     $(".div-holi").text($(".DD").val());
 
+                });
+                $(".elimi").click(function() {
+                    var msg = confirm('¿tas seguro de eliminar?');
+                    if (msg == true) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 });
 
                 /*  $("#exampleInputFile2").click(function(){
@@ -859,7 +883,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -928,7 +952,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -980,7 +1004,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1019,15 +1043,15 @@
                         }
                     },
                     // Ajax form submition
-                    submitHandler: function (form) {
+                    submitHandler: function(form) {
                         $(form).ajaxSubmit({
-                            success: function () {
+                            success: function() {
                                 $("#comment-form").addClass('submited');
                             }
                         });
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1061,15 +1085,15 @@
                         }
                     },
                     // Ajax form submition
-                    submitHandler: function (form) {
+                    submitHandler: function(form) {
                         $(form).ajaxSubmit({
-                            success: function () {
+                            success: function() {
                                 $("#contact-form").addClass('submited');
                             }
                         });
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1098,7 +1122,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1143,7 +1167,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1153,7 +1177,7 @@
                     dateFormat: 'dd.mm.yy',
                     prevText: '<i class="fa fa-chevron-left"></i>',
                     nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function (selectedDate) {
+                    onSelect: function(selectedDate) {
                         $('#finishdate').datepicker('option', 'minDate', selectedDate);
                     }
                 });
@@ -1162,7 +1186,7 @@
                     dateFormat: 'dd.mm.yy',
                     prevText: '<i class="fa fa-chevron-left"></i>',
                     nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function (selectedDate) {
+                    onSelect: function(selectedDate) {
                         $('#startdate').datepicker('option', 'maxDate', selectedDate);
                     }
                 });
@@ -1178,7 +1202,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function () {
+            (function() {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;

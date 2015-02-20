@@ -54,6 +54,7 @@
         
     </head>
     <body>
+        <%InterfaceTipo_DocumentoDAO idoc = new Tipo_DocumentoDAO(); %>
     <center>
         <!--begin widget-->
         <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
@@ -119,8 +120,14 @@
                                     <label class="select">
                                         <select name="TIPO_DOC_ID" required="" class="select-conyugue">
                                             <option value="" selected=""  disabled="">Tipo de Documento</option>
-                                            <option value="1">DNI</option>
-                                            <option value="0">Partida</option>
+                                            <%for (int i = 0; i < idoc.Listar_tipo_doc().size(); i++) {
+                                                    Tipo_Documento t = new Tipo_Documento();
+                                                    t = (Tipo_Documento) idoc.Listar_tipo_doc().get(i);
+                                                    %>
+                                                    <option value="<%=t.getId_tipo_doc_ident()%>"><%=t.getDe_tdoc_abreviada() %></option>    
+                                                    <%
+                                                }
+                                            %>
                                         </select> 
                                         <i></i> </label>
                                 </section>
