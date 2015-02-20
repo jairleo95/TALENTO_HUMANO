@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 import pe.edu.upeu.application.model.Usuario;
 
@@ -217,7 +218,17 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
 
     @Override
     public void Delete_Usuario(String ID) {
-
+        CallableStatement cst;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = conn.conex.prepareCall("{CALL RHSP_ELIMINAR_USUARIO(?)}");
+            cst.setString(1, ID);
+            cst.execute();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        } finally {
+            this.conn.close();
+        }        
     }
 
     @Override

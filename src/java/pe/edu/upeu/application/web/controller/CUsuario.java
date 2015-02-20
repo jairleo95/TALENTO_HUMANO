@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.JOptionPane;
 import pe.edu.upeu.application.dao.DireccionDAO;
 import pe.edu.upeu.application.dao.EmpleadoDAO;
 import pe.edu.upeu.application.dao.ListaDAO;
@@ -131,8 +132,10 @@ public class CUsuario extends HttpServlet {
             //response.sendRedirect("Vista/Usuario/List_Usuario.jsp");
         }
         if ("Eliminar_Usuario".equals(opc)) {
-            //getServletContext().setAttribute("List_Usuario_var", usu.List_Usuario_var());
-            //response.sendRedirect("Vista/Usuario/List_Usuario.jsp");
+            String idUser= request.getParameter("id_usuario");
+            usu.Delete_Usuario(idUser);
+            getServletContext().setAttribute("List_Usuario_var", usu.List_Usuario_var());
+            response.sendRedirect("Vista/Usuario/List_Usuario.jsp");
         }
         if (opc.equals("Ver_Perfil")) {
             String id = request.getParameter("id");
