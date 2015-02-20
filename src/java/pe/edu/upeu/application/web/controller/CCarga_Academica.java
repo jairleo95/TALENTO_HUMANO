@@ -55,7 +55,7 @@ public class CCarga_Academica extends HttpServlet {
 
         if (opc.equals("Completar_Datos")) {
 
-            String dni = request.getParameter("dni");
+            String dni = request.getParameter("nro_doc");
             String idtr = carga.DNI_ID_TRABAJADOR(dni);
             if (idtr.equals("")) {
 
@@ -69,11 +69,16 @@ public class CCarga_Academica extends HttpServlet {
                 getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
                 getServletContext().setAttribute("list_año", li.lista_años());
 
-                response.sendRedirect("Vista/Trabajador/Reg_Trabajador.jsp");
+                String no_trabajador = request.getParameter("no_tr");
+                String ap_p = request.getParameter("ap_p");
+                String ap_m = request.getParameter("ap_m");
+                String ti_doc = request.getParameter("ti_doc");
+             //   response.sendRedirect("Vista/Trabajador/Reg_Trabajador.jsp?nro_doc=" + dni + "&ap_p=" + ap_p + "&ap_m=" + ap_m + "&ti_doc=" + ti_doc + "&no_tr=" + no_trabajador);
 
             } else {
                 getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-                response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?" + "id=" + cripto.Encriptar("idtr=" + idtr));
+                //response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?" + "id=" + cripto.Encriptar("idtr:" + idtr));
+                response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?" + "idtr=" + idtr);
             }
         }
     }

@@ -104,7 +104,7 @@
                         $('.tbody-carga').append('<td>' + campo.carga + '</td>');
                         $('.tbody-carga').append('<td></td>');
                         $('.tbody-carga').append('<td></td>');
-                        $('.tbody-carga').append('<td><a href="../../../carga_academica?opc=Completar_Datos&dni='+campo.numerodocumento+'">Completar datos</a><a href="Horario_Academico.jsp?dni=' + campo.numerodocumento + '&semestre='+$(".semestre").val()+'">Ver Cursos</a></td>');
+                        $('.tbody-carga').append('<td><a href="../../../carga_academica?opc=Completar_Datos&nro_doc=' + campo.numerodocumento + '&ap_p=' + campo.apepat + '&ap_p=' + campo.apemat + '&no_tr=' + campo.nombre + '&ti_doc=' + campo.tipodocumento + '">Completar datos</a><a href="Horario_Academico.jsp?dni=' + campo.numerodocumento + '&semestre=' + $(".semestre").val() + '">Ver Cursos</a></td>');
                         $('.tbody-carga').append('</tr>');
                     });
                 });
