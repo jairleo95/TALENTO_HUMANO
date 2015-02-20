@@ -253,7 +253,6 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
                 v.setDe_documento_adjunto(rs.getString("de_documento_adjunto"));
                 v.setId_contrato(rs.getString("id_contrato"));
                 v.setEs_rec_fisico(rs.getString("es_rec_fisico"));
-                v.setNo_usuario(rs.getString("no_usuario"));
                 v.setId_dgp(rs.getString("id_dgp"));
                 x.add(v);
             }
@@ -300,7 +299,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
         String id = "";
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DOCUMENTO_ADJUNTO( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?)}");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DOCUMENTO_ADJUNTO( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)}");
             cst.setString(1, null);
             cst.setString(2, ID_DOCUMENTOS);
             cst.setString(3, ES_DOCUMENTO_ADJUNTO);
@@ -312,10 +311,10 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
             cst.setString(9, DE_DOCUMENTO_ADJUNTO);
             cst.setString(10, NO_USUARIO);
             cst.setString(11, ES_REC_FISICO);
-            cst.setString(12, ID_CONTRATO);
-            cst.registerOutParameter(13, Types.CHAR);
+            
+            cst.registerOutParameter(12, Types.CHAR);
             cst.execute();
-            id = cst.getString(13);
+            id = cst.getString(12);
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
