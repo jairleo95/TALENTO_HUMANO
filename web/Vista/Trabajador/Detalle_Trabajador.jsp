@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.web.controller.CCriptografiar"%>
 <%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
@@ -175,6 +176,7 @@
             String iddrp = request.getParameter("drp");
             String id_pasos = request.getParameter("pas");
             String nropaso = request.getParameter("np");
+            CCriptografiar cripto = new CCriptografiar();
 
         %>
 
@@ -185,6 +187,10 @@
 
             <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
                 Trabajador Nuevo
+
+                <%/*
+                     String id =  request.getParameter("id");
+                     out.print(cripto.Desencriptar(id));*/%>
             </button>
             <table  style="background-color: white " class="table-det" cellpadding="0">
 
@@ -488,7 +494,7 @@
                 <%}%>
 
                 <%}
-                                    }%>
+                    }%>
                 <form class="form-rech" action="../../autorizacion" method="post">
                     <table>
                         <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
@@ -585,14 +591,14 @@
         </div><!-- /.modal -->
 
         <script>
-            $(document).ready(function() {
+            $(document).ready(function () {
 
-                $(".btn-autor").click(function(e) {
+                $(".btn-autor").click(function (e) {
                     $.SmartMessageBox({
                         title: "Alerta de Confirmación!",
                         content: "¿Esta totalmente seguro de autorizar este requerimiento?",
                         buttons: '[No][Yes]'
-                    }, function(ButtonPressed) {
+                    }, function (ButtonPressed) {
                         if (ButtonPressed === "Yes") {
                             // return true;
                             $(".form-aut").submit();
@@ -604,12 +610,12 @@
                     });
                     e.preventDefault();
                 });
-                $(".btn-rech").click(function(e) {
+                $(".btn-rech").click(function (e) {
                     $.SmartMessageBox({
                         title: "Alerta de Confirmación!",
                         content: "¿Esta totalmente seguro de rechazar este requerimiento?",
                         buttons: '[No][Yes]'
-                    }, function(ButtonPressed) {
+                    }, function (ButtonPressed) {
                         if (ButtonPressed === "Yes") {
                             $(".form-rech").submit();
                         }
@@ -627,7 +633,7 @@
         <script src="../../js/JQuery/jQuery.js"></script>
         <script src="../../js/Js_dlmenu/jquery.dlmenu.js"></script>
         <script>
-            $(function() {
+            $(function () {
                 $('#dl-menu').dlmenu({
                     animationClasses: {classin: 'dl-animate-in-2', classout: 'dl-animate-out-2'}
                 });
@@ -704,11 +710,11 @@
                 });
             }
 
-            $(document).ready(function() {
+            $(document).ready(function () {
 
                 pageSetUp();
 
-                $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
+                $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                     $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                 });
                 $("#cod_ap").numeric();
@@ -731,7 +737,7 @@
                 /*
                  * Smart Notifications
                  */
-                $('#eg1').click(function(e) {
+                $('#eg1').click(function (e) {
 
                     $.bigBox({
                         title: "Big Information box",
@@ -745,7 +751,7 @@
                     e.preventDefault();
                 })
 
-                $('#eg2').click(function(e) {
+                $('#eg2').click(function (e) {
 
                     $.bigBox({
                         title: "Big Information box",
@@ -758,7 +764,7 @@
                     e.preventDefault();
                 })
 
-                $('#eg3').click(function(e) {
+                $('#eg3').click(function (e) {
 
                     $.bigBox({
                         title: "Shield is up and running!",
@@ -771,7 +777,7 @@
                     e.preventDefault();
                 })
 
-                $('#eg4').click(function(e) {
+                $('#eg4').click(function (e) {
 
                     $.bigBox({
                         title: "Success Message Example",
@@ -780,7 +786,7 @@
                         //timeout: 8000,
                         icon: "fa fa-check",
                         number: "4"
-                    }, function() {
+                    }, function () {
                         closedthis();
                     });
                     e.preventDefault();
@@ -788,7 +794,7 @@
 
 
 
-                $('#eg5').click(function() {
+                $('#eg5').click(function () {
 
                     $.smallBox({
                         title: "Ding Dong!",
@@ -798,7 +804,7 @@
                         icon: "fa fa-bell swing animated"
                     });
                 });
-                $('#eg6').click(function() {
+                $('#eg6').click(function () {
 
                     $.smallBox({
                         title: "Big Information box",
@@ -809,7 +815,7 @@
                     });
                 })
 
-                $('#eg7').click(function() {
+                $('#eg7').click(function () {
 
                     $.smallBox({
                         title: "James Simmons liked your comment",
@@ -825,12 +831,12 @@
                  * SmartAlerts
                  */
                 // With Callback
-                $("#smart-mod-eg1").click(function(e) {
+                $("#smart-mod-eg1").click(function (e) {
                     $.SmartMessageBox({
                         title: "Smart Alert!",
                         content: "This is a confirmation box. Can be programmed for button callback",
                         buttons: '[No][Yes]'
-                    }, function(ButtonPressed) {
+                    }, function (ButtonPressed) {
                         if (ButtonPressed === "Yes") {
 
                             $.smallBox({
@@ -855,7 +861,7 @@
                     e.preventDefault();
                 })
                 // With Input
-                $("#smart-mod-eg2").click(function(e) {
+                $("#smart-mod-eg2").click(function (e) {
 
                     $.SmartMessageBox({
                         title: "Smart Alert: Input",
@@ -863,13 +869,13 @@
                         buttons: "[Accept]",
                         input: "text",
                         placeholder: "Enter your user name"
-                    }, function(ButtonPress, Value) {
+                    }, function (ButtonPress, Value) {
                         alert(ButtonPress + " " + Value);
                     });
                     e.preventDefault();
                 })
                 // With Buttons
-                $("#smart-mod-eg3").click(function(e) {
+                $("#smart-mod-eg3").click(function (e) {
 
                     $.SmartMessageBox({
                         title: "Smart Notification: Buttons",
@@ -879,7 +885,7 @@
                     e.preventDefault();
                 })
                 // With Select
-                $("#smart-mod-eg4").click(function(e) {
+                $("#smart-mod-eg4").click(function (e) {
 
                     $.SmartMessageBox({
                         title: "Smart Alert: Select",
@@ -887,13 +893,13 @@
                         buttons: "[Done]",
                         input: "select",
                         options: "[Costa Rica][United States][Autralia][Spain]"
-                    }, function(ButtonPress, Value) {
+                    }, function (ButtonPress, Value) {
                         alert(ButtonPress + " " + Value);
                     });
                     e.preventDefault();
                 });
                 // With Login
-                $("#smart-mod-eg5").click(function(e) {
+                $("#smart-mod-eg5").click(function (e) {
 
                     $.SmartMessageBox({
                         title: "Login form",
@@ -901,7 +907,7 @@
                         buttons: "[Cancel][Accept]",
                         input: "text",
                         placeholder: "Enter your user name"
-                    }, function(ButtonPress, Value) {
+                    }, function (ButtonPress, Value) {
                         if (ButtonPress == "Cancel") {
                             alert("Why did you cancel that? :(");
                             return 0;
@@ -915,7 +921,7 @@
                             buttons: "[Login]",
                             input: "password",
                             placeholder: "Password"
-                        }, function(ButtonPress, Value) {
+                        }, function (ButtonPress, Value) {
                             alert("Username: " + ValueOriginal + " and your password is: " + Value);
                         });
                     });
@@ -930,7 +936,7 @@
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
-            (function() {
+            (function () {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
@@ -940,18 +946,18 @@
             })();</script>
         <script type="text/javascript">
             $(document).ready(
-                    function() {
+                    function () {
 
 
                     });</script>
         <script type="text/javascript" language="javascript">
-            $('.ver_foto').click(function() {
+            $('.ver_foto').click(function () {
                 $(".file-foto").click();
             });
-            $(window).load(function() {
+            $(window).load(function () {
 
-                $(function() {
-                    $('.file-foto').change(function(e) {
+                $(function () {
+                    $('.file-foto').change(function (e) {
 
                         if (this.files[0].size <= 500000) {
                             var jForm = new FormData();
@@ -964,7 +970,7 @@
                                 processData: false,
                                 contentType: false,
                                 data: jForm
-                            }).done(function(f) {
+                            }).done(function (f) {
                                 $(".mensaje").text(f);
                             });
                             addImage(e);

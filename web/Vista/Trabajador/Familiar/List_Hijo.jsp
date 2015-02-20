@@ -1,3 +1,6 @@
+<%@page import="pe.edu.upeu.application.model.Tipo_Documento"%>
+<%@page import="pe.edu.upeu.application.dao.Tipo_DocumentoDAO"%>
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceTipo_DocumentoDAO"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
     HttpSession sesion_1 = request.getSession();
@@ -55,124 +58,125 @@
 
     </head>
     <body>
-          <%
-           
+        <%
             HttpSession sesion2 = request.getSession(true);
-           String rol1 = (String) sesion2.getAttribute("IDROL"); 
+            String rol1 = (String) sesion2.getAttribute("IDROL");
         %>
 
 
 
 
 
-                                <!-- widget div-->
-                                <div>
+        <!-- widget div-->
+        <div>
 
-                                    <!-- widget edit box -->
-                                    <div class="jarviswidget-editbox">
-                                        <!-- This area used as dropdown edit box -->
+            <!-- widget edit box -->
+            <div class="jarviswidget-editbox">
+                <!-- This area used as dropdown edit box -->
 
-                                    </div>
-                                    <!-- end widget edit box -->
+            </div>
+            <!-- end widget edit box -->
 
-                                    <!-- widget content -->
-                                    <div class="widget-body no-padding">
+            <!-- widget content -->
+            <div class="widget-body no-padding">
 
-                                        <table id="datatable_tabletools" class="table table-striped table-bordered table-hover" width="100%" >
-                                            <thead>
-                                                <tr>
-                                                    <th data-hide="phone">Nro</th>
-                                                    <th data-class="expand">Apellidos y Nombres</th>
-                                                    <th data-hide="phone">Fecha de nacimiento</th>
-                                                    <th data-hide="phone">Sexo</th>
-                                                    <th data-hide="phone,tablet">Tipo de Documento</th>
-                                                    <th data-hide="phone,tablet">Nro Documento</th>
-                                                    <th data-hide="phone,tablet">Essalud</th>
-                                                    <th data-hide="phone,tablet">Est.Nivel Superior</th>
-                                                    <th data-hide="phone,tablet" colspan="2">Opciones</th>
-                                                </tr>
+                <table id="datatable_tabletools" class="table table-striped table-bordered table-hover" width="100%" >
+                    <thead>
+                        <tr>
+                            <th data-hide="phone">Nro</th>
+                            <th data-class="expand">Apellidos y Nombres</th>
+                            <th data-hide="phone">Fecha de nacimiento</th>
+                            <th data-hide="phone">Sexo</th>
+                            <th data-hide="phone,tablet">Tipo de Documento</th>
+                            <th data-hide="phone,tablet">Nro Documento</th>
+                            <th data-hide="phone,tablet">Essalud</th>
+                            <th data-hide="phone,tablet">Est.Nivel Superior</th>
+                            <th data-hide="phone,tablet" colspan="2">Opciones</th>
+                        </tr>
 
-                                            </thead>
-                                            <tbody>
-                                                <%
+                    </thead>
+                    <tbody>
+                        <%
+                            InterfaceTipo_DocumentoDAO itd = new Tipo_DocumentoDAO();
+                            for (int i = 0; i < LISTA_HIJO.size(); i++) {
+                                Datos_Hijo_Trabajador h = new Datos_Hijo_Trabajador();
+                                h = (Datos_Hijo_Trabajador) LISTA_HIJO.get(i);
+                                if (h.getEs_datos_hijo_trabajador().trim().equals("1")) {
+                        %>
+                        <tr>
+                            <td><%out.print(i + 1);%></td>
+                            <td><%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></td>
+                            <td><%=h.getFe_nacimiento()%></td>
+                            <td>
+                                <%
+                                    if (h.getEs_sexo().trim().equals("M")) {
+                                        out.println("Masculino");
+                                    }
+                                    if (h.getEs_sexo().trim().equals("F")) {
+                                        out.println("Femenino");
+                                    }
+                                %>
+                            </td>
+                            <td>
+                                <%
+                                   for (int j =0; j < itd.Listar_tipo_doc().size() ; j++ ){
+                                       Tipo_Documento td = new Tipo_Documento();
+                                       td = (Tipo_Documento) itd.Listar_tipo_doc().get(j);
+                                       if(h.getEs_tipo_doc().trim().equals(td.getId_tipo_doc_ident().trim())){
+                                       out.print(td.getDe_tdoc_abreviada());
+                                       }
+                                   }   
+                                   
+                                %>
+                            </td>
+                            <td><%=h.getNu_doc()%></td>
 
-                                                    for (int i = 0; i < LISTA_HIJO.size(); i++) {
-                                                        Datos_Hijo_Trabajador h = new Datos_Hijo_Trabajador();
-                                                        h = (Datos_Hijo_Trabajador) LISTA_HIJO.get(i);
-                                                        if (h.getEs_datos_hijo_trabajador().trim().equals("1")) {
-                                                %>
-                                                <tr>
-                                                    <td><%out.print(i + 1);%></td>
-                                                    <td><%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></td>
-                                                    <td><%=h.getFe_nacimiento()%></td>
-                                                    <td>
-                                                        <%
-                                                            if (h.getEs_sexo().trim().equals("M")) {
-                                                                out.println("Masculino");
-                                                            }
-                                                            if (h.getEs_sexo().trim().equals("F")) {
-                                                                out.println("Femenino");
-                                                            }
-                                                        %>
-                                                    </td>
-                                                    <td>
-                                                        <%
-                                                            if (h.getEs_tipo_doc().trim().equals("1")) {
-                                                                out.println("Dni");
-                                                            }
-                                                            if (h.getEs_tipo_doc().trim().equals("0")) {
-                                                                out.println("Partida");
-                                                            }
-                                                        %>
-                                                    </td>
-                                                    <td><%=h.getNu_doc()%></td>
 
+                            <td>
+                                <%
+                                    if (h.getEs_inscripcion_vig_essalud().trim().equals("1")) {
+                                        out.println("Si");
+                                    }
+                                    if (h.getEs_inscripcion_vig_essalud().trim().equals("0")) {
+                                        out.println("No");
+                                    }
+                                %>
+                            </td>
+                            <td>
+                                <%if (h.getEs_estudio_niv_superior() != null) {
+                                        if (h.getEs_estudio_niv_superior().trim().equals("1")) {
+                                            out.println("Si");
+                                        }
+                                        if (h.getEs_estudio_niv_superior().trim().equals("0")) {
+                                            out.println("No");
+                                        }
+                                    } else {
+                                        out.print("No");
+                                    }
+                                %>
+                            </td>
+                            <td> 
 
-                                                    <td>
-                                                        <%
-                                                            if (h.getEs_inscripcion_vig_essalud().trim().equals("1")) {
-                                                                out.println("Si");
-                                                            }
-                                                            if (h.getEs_inscripcion_vig_essalud().trim().equals("0")) {
-                                                                out.println("No");
-                                                            }
-                                                        %>
-                                                    </td>
-                                                    <td>
-                                                        <%if(h.getEs_estudio_niv_superior()!=null){
-                                                            if (h.getEs_estudio_niv_superior().trim().equals("1")) {
-                                                                out.println("Si");
-                                                            }
-                                                            if (h.getEs_estudio_niv_superior().trim().equals("0")) {
-                                                                out.println("No");
-                                                            }
-                                                        }else{
-                                                            out.print("No");
-                                                        }
-                                                        %>
-                                                    </td>
-                                                    <td> 
-                                                        
-                                                        <% if (rol1.trim().equals("ROL-0002")|rol1.trim().equals("ROL-0005")) {%>
-                                                        
-                                                        <a href="../../../familiar?idhijo=<%=h.getId_datos_hijos_trabajador()%>&idtr=<%=h.getId_trabajador()%>&opc=modificar" >
-                                                            <img src="../../../imagenes/lapiz.png" alt="" width="25px" height="25px"/></a>
-                                                    </td>
-                                                    <td><a href="../../../familiar?idhijo=<%=h.getId_datos_hijos_trabajador()%>&idtr=<%=h.getId_trabajador()%>&opc=eliminar" >
-                                                            <img src="../../../imagenes/eliminar.png" alt=""   width="25px" height="25px"/></a></td> 
-                                                            <%}%>
-                                                </tr>
-                                                <% }
-                                                    }
-                                                   %>
+                                <% if (rol1.trim().equals("ROL-0002") | rol1.trim().equals("ROL-0005")) {%>
 
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- end widget content -->
+                                <a href="../../../familiar?idhijo=<%=h.getId_datos_hijos_trabajador()%>&idtr=<%=h.getId_trabajador()%>&opc=modificar" >
+                                    <img src="../../../imagenes/lapiz.png" alt="" width="25px" height="25px"/></a>
+                            </td>
+                            <td><a href="../../../familiar?idhijo=<%=h.getId_datos_hijos_trabajador()%>&idtr=<%=h.getId_trabajador()%>&opc=eliminar" >
+                                    <img src="../../../imagenes/eliminar.png" alt=""   width="25px" height="25px"/></a></td> 
+                                    <%}%>
+                        </tr>
+                        <% }
+                            }
+                        %>
 
-                                </div>
-                                <!-- end widget div -->
+                    </tbody>
+                </table>
+            </div>
+            <!-- end widget content -->
+
+        </div>
+        <!-- end widget div -->
 
 
 

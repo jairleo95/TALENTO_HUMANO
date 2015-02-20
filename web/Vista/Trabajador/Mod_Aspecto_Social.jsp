@@ -39,7 +39,7 @@
 <jsp:useBean id="List_Departamento" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Provincia" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Distrito" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="Listar_tipo_doc" scope="application" class="java.util.ArrayList"/>1
+<jsp:useBean id="Listar_tipo_doc" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html lang="en-us">
     <head>
@@ -813,8 +813,9 @@
                                                 </footer>
                                                 <%
                                                         }%>
+                                                         </form>
                                         </div>
-                                        </form>
+                                       
 
 
 
