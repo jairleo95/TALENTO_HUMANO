@@ -316,10 +316,15 @@
                                                 <input type="text" name="BEV" value="<%=d.getDe_bev()%>" class="input-group-sm">
                                             </label>
                                         </section>
+                                        <section class="col col-1">
+                                            <label class="input" id="titulo">Bono puesto:
+                                                <input type="text" name="BEV" value="<%=d.getCa_bonificacion_p()%>" class="input-group-sm">
+                                            </label>
+                                        </section>
 
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Sueldo Total:
-                                                <input type="text" name="TOTAL_SUELDO" value="<%=d.getCa_bono_alimentario() + d.getCa_sueldo() + d.getDe_bev()%>" class="input-group-sm">
+                                                <input type="text" name="TOTAL_SUELDO" value="<%=d.getCa_bono_alimentario() + d.getCa_sueldo() + d.getDe_bev()+d.getCa_bonificacion_p()%>" class="input-group-sm">
                                             </label>
                                         </section>
                                         <section class="col col-2">

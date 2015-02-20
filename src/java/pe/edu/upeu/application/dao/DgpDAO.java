@@ -414,6 +414,7 @@ public class DgpDAO implements InterfaceDgpDAO {
                 x.setNo_usuario_mod(rs.getString("no_usuario_mod"));
                 x.setLi_motivo(rs.getString("li_motivo"));
                 x.setEs_mfl(rs.getString("es_mfl"));
+                x.setCa_bonificacion_p(rs.getDouble("ca_bonificacion_p"));
                 Lista.add(x);
             }
         } catch (SQLException e) {
@@ -493,7 +494,7 @@ public class DgpDAO implements InterfaceDgpDAO {
     public List<V_Es_Requerimiento> List_Incomplet(String iddep) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
 
-        String sql = "select * from RHVD_ESTADO_REQ where ID_DEPARTAMENTO='" + iddep + "' ORDER BY TO_NUMBER(SUBSTR(ID_DGP,5,LENGTH(ID_DGP))) DESC";
+        String sql = "select v.*,d.ID_REQUERIMIENTO,r.NO_REQ,d.FE_CREACION from RHVD_ESTADO_REQ v,RHTM_DGP d,RHTR_REQUERIMIENTO r where  ID_DEPARTAMENTO='" + iddep.trim() + "' and v.ID_DGP = d.ID_DGP and r.ID_REQUERIMIENTO=d.ID_REQUERIMIENTO ORDER BY TO_NUMBER(SUBSTR(v.ID_DGP,5,LENGTH(v.ID_DGP))) DESC";
         //sql += (!"".equals(id_dep)) ? "where ID_DEPARTAMENTO='" + id_dep + "'" : "";
         //sql += "order by ID_DGP";
         List<V_Es_Requerimiento> Lista = new ArrayList<V_Es_Requerimiento>();
@@ -508,6 +509,8 @@ public class DgpDAO implements InterfaceDgpDAO {
                 v.setNo_trabajador(rs.getString("no_trabajador"));
                 v.setId_dgp(rs.getString("id_dgp"));
                 v.setId_departamento(rs.getString("id_departamento"));
+                v.setNo_req(rs.getString("no_req"));
+                v.setFe_creacion(rs.getString("fe_creacion"));
                 Lista.add(v);
             }
         } catch (SQLException e) {

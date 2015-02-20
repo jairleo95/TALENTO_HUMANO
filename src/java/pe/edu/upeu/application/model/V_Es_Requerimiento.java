@@ -31,6 +31,7 @@ public class V_Es_Requerimiento {
     private String aut_actual;
     private String fe_creacion;
     private String mes_creacion;
+    private String no_req;
 
     public String getFe_creacion() {
         return fe_creacion;
@@ -66,7 +67,7 @@ public class V_Es_Requerimiento {
 
     public V_Es_Requerimiento(String id_trabajador, String ap_paterno, String ap_materno, String no_trabajador, String id_dgp, 
             String id_departamento, String ar_foto, String de_foto, String id_foto, String no_ar_foto, String ta_ar_foto, 
-            String es_porcent, String es_dgp, String es_proceso_aut,String id_detalle_req_proceso,String aut_actual,String fe_creacion,String mes_creacion) {
+            String es_porcent, String es_dgp, String es_proceso_aut,String id_detalle_req_proceso,String aut_actual,String fe_creacion,String mes_creacion,String no_req) {
         this.id_trabajador = id_trabajador;
         this.ap_paterno = ap_paterno;
         this.ap_materno = ap_materno;
@@ -85,6 +86,7 @@ public class V_Es_Requerimiento {
         this.aut_actual = aut_actual;
         this.fe_creacion = fe_creacion;
         this.mes_creacion = mes_creacion;
+        this.no_req = no_req;
     }
 
     public V_Es_Requerimiento() {
@@ -106,9 +108,18 @@ public class V_Es_Requerimiento {
         this.aut_actual = "";
         this.fe_creacion = "";
         this.mes_creacion = "";
+        this.no_req = "";
     }
     private String de_foto;
     private String id_foto;
+
+    public String getNo_req() {
+        return no_req;
+    }
+
+    public void setNo_req(String no_req) {
+        this.no_req = no_req;
+    }
 
     public String getId_trabajador() {
         return id_trabajador;

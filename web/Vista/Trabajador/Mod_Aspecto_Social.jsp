@@ -417,10 +417,11 @@
                                                                                         if (t.getLi_di_dom_a_d1() != null) {
                                                                                             if (t.getLi_di_dom_a_d1().trim().equals(zo.getId_via().trim())) {%>    
                                                                                 <option value="<%=zo.getId_via()%>" selected="" ><%=zo.getDe_via()%></option>
-                                                                                <%} else {%>
-                                                                                <option value="<%=zo.getId_via()%>"><%=zo.getDe_via()%></option>
                                                                                 <%}
-                                                                                        }
+                                                                                        }%>
+                                                                                <option value="<%=zo.getId_via()%>"><%=zo.getDe_via()%></option>
+                                                                                <%
+                                                                                        
                                                                                     }%>
                                                                             </select>   
                                                                         </div>
@@ -458,10 +459,11 @@
                                                                                             if (t.getLi_di_dom_a_d3().trim().equals(num)) {
                                                                                 %>    
                                                                                 <option value="<%=num%>" selected=""><%=ListarDir_Dom.get(w)%></option>
-                                                                                <%} else {%>
-                                                                                <option value="<%=num%>"><%=ListarDir_Dom.get(w)%></option>
                                                                                 <%}
-                                                                                        }
+                                                                                        }%>
+                                                                                <option value="<%=num%>"><%=ListarDir_Dom.get(w)%></option>
+                                                                                <%
+                                                                                        
                                                                                     }%>
                                                                             </select>
                                                                         </div>
@@ -499,10 +501,11 @@
                                                                                         if (t.getLi_di_dom_a_d5() != null) {
                                                                                             if (t.getLi_di_dom_a_d5().trim().equals(zo.getId_zona().trim())) {%>    
                                                                                 <option value="<%=zo.getId_zona()%>" selected=""><%=zo.getDe_zona()%></option>
-                                                                                <%} else {%>
+                                                                                <%} 
+                                                                                        }%>
                                                                                 <option value="<%=zo.getId_zona()%>"><%=zo.getDe_zona()%></option>
-                                                                                <%}
-                                                                                        }
+                                                                                <%
+                                                                                       
                                                                                     }%>
                                                                             </select>
                                                                         </div>
@@ -596,10 +599,11 @@
                                                                                     if (t.getLi_di_dom_leg_d1() != null) {
                                                                                             if (t.getLi_di_dom_leg_d1().trim().equals(zo.getId_via().trim())) {%>    
                                                                             <option value="<%=zo.getId_via()%>" selected=""><%=zo.getDe_via()%></option>
-                                                                            <%} else {%>
+                                                                            <%} 
+                                                                                    }%>
                                                                             <option value="<%=zo.getId_via()%>"><%=zo.getDe_via()%></option>
-                                                                            <%}
-                                                                                        }
+                                                                            <%
+                                                                                        
                                                                                     }%>
                                                                         </select>
                                                                     </div>
@@ -634,11 +638,11 @@
                                                                                         if (t.getLi_di_dom_leg_d3().trim().equals(num)) {
                                                                             %>
                                                                             <option value="<%=num%>" selected ><%=ListarDir_Dom.get(x)%></option>
-                                                                            <%
-                                                                                } else {%>
+                                                                            <%}
+                                                                                } %>
                                                                             <option value="<%=num%>" ><%=ListarDir_Dom.get(x)%></option>
-                                                                            <% }
-                                                                                        }
+                                                                            <% 
+                                                                                        
                                                                                     }%>
 
                                                                         </select>
@@ -675,11 +679,12 @@
                                                                                         if (t.getLi_di_dom_leg_d5() != null) {
                                                                                             if (t.getLi_di_dom_leg_d5().trim().equals(zo.getId_zona().trim())) {%>
                                                                             <option value="<%=zo.getId_zona()%>" selected=""><%=zo.getDe_zona()%></option>
-                                                                            <%} else {%>
+                                                                            <%} 
+                                                                                        }%>
                                                                             <option value="<%=zo.getId_zona()%>"><%=zo.getDe_zona()%></option> 
                                                                             <%}
-                                                                                        }
-                                                                                    }%> 
+                                                                                        
+                                                                                    %> 
                                                                         </select>
                                                                     </div>
                                                                 </div>

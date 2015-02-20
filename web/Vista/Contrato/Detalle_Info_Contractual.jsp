@@ -203,6 +203,7 @@
                     }%> </p></td></tr>
                 <!--<tr><td>Funcion:</td><td><? /*echo $list_rhc[$index][5];*/?> </td></tr>-->
                 <tr><td class="text-info table-bordered"><strong>Sueldo:</strong></td><td><%=n.getCa_sueldo()%></td><td class="text-info table-bordered" colspan="1"><strong>Reintegro:</strong></td><td colspan="1"><%=n.getCa_reintegro()%></td><td class="text-info table-bordered" colspan="2"><strong>Bono Alimentario:</strong></td><td><%=n.getCa_bono_alimento()%> </td></tr>
+                <tr><td class="text-info table-bordered"><strong>Asignación Familiar:</strong></td><td colspan="6"><%= "S/." + n.getCa_asig_familiar()%> </td></tr>
                 <tr><td class="text-info table-bordered"><strong>Bev:</strong></td><td colspan="6"><%if (n.getCa_bev() != null) {
                         out.print(n.getCa_bev());
                     } else {
@@ -214,7 +215,7 @@
                         out.print("0");
                     }%> </td></tr>
                 <tr><td class="text-info table-bordered"><strong>Tipo Pago Horas:</strong></td><td colspan="6"><%=n.getTi_hora_pago()%> </td></tr>
-                <tr><td class="text-info table-bordered"><strong>Asignación Familiar:</strong></td><td colspan="6"><%= "S/." + n.getCa_asig_familiar()%> </td></tr>
+                
                 <tr><td class="text-info table-bordered"><strong>Regimen Laboral Mintra:</strong></td>
                     <% if (n.getId_regimen_laboral() != null) {
                             for (int q = 0; q < list_reg_labo.size(); q++) {

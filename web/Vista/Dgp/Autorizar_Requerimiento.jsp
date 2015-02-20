@@ -226,19 +226,15 @@
                                                             url: "../../trabajador",
                                                             type: "POST",
                                                             data: "opc=reg_aps_masivo&cod=" + $(".cod_aps" + r).val() + "&idtr=" + $(".idtr" + r).val()
-                                                        }).done(function () {
-                                                          //  window.location.href = "../../autorizacion";
+                                                        }).done(function() {
                                                         });
-
                                                         $.ajax({
                                                             url: "../../autorizacion",
                                                             type: "POST",
                                                             data: "opc=Aceptar" + $(".val_aut" + r).val()
-                                                        }).done(function () {
+                                                        }).done(function() {
                                                             window.location.href = "../../autorizacion";
                                                         });
-
-
                                                     }
 
                                                 }
@@ -469,7 +465,7 @@
                                             <td><input type="text" name="cod_aps" maxlength="6" class="cod_aps<%=(f + 1)%>" style="width:50px"/></td>
                                             <input type="hidden" name="idtr"  class="idtr<%=(f + 1)%>" value="<%=a.getId_trabajador()%>" />
                                             <%} else {%>
-                                            <td></td>
+                                            <td><strong><%=a.getCo_aps()%></strong></td>
                                             <%}
                                                 }%>
                                             <%if (idrol.trim().equals("ROL-0007")) {%>
@@ -480,7 +476,7 @@
                                             <input type="hidden" name="idtr"  class="idtr<%=(f + 1)%>" value="<%=a.getId_trabajador()%>" />
 
                                             <%} else {%>
-                                            <td></td>
+                                            <td><strong><%=a.getCo_huella_digital()%></strong></td>
                                             <%}
                                                 }%>   
                                             </tr>

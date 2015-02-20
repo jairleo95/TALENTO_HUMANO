@@ -349,6 +349,8 @@ public class CDgp extends HttpServlet {
             String ID_DGP = request.getParameter("iddgp");
             String ID_TRABAJADOR = request.getParameter("idtr");
             getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(ID_DGP));
+            getServletContext().setAttribute("VALIDAR_DGP_CONTR", dgp.VALIDAR_DGP_CONTR(ID_DGP, idtr));
+            getServletContext().setAttribute("Cargar_dcc_dgp", cc.Cargar_dcc_dgp(ID_DGP));
             int num = dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
             getServletContext().setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
             // out.print(ID_DGP);

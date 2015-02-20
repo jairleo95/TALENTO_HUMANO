@@ -125,6 +125,8 @@
                                                     <th data-hide="phone">Nro</th>
                                                     <th data-hide="phone"><i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i> Acciones</th>
                                                     <th>Nombre</th>
+                                                    <th>Nombre requerimiento</th>
+                                                    <th>Fecha creacion</th>
 
                                                 </tr>
                                             </thead>
@@ -149,7 +151,7 @@
 
                                                                <!-- <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=User_Aut">Requerimientos</a></li>-->
                                                                 <!--<li><a href="../../horario?iddgp=<%=r.getId_dgp()%>&opc=Listar">Horario</a> </li>-->
-                                                                <li><a href="../../documento?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Listar_doc">Documentos</a></li> 
+                                                                <li><a href="../../documento?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Listar_doc">Continuar registro</a></li> 
                                                                
                                                                 <li class="divider"></li>
                                                                 <li>
@@ -165,12 +167,14 @@
                                                          */
                                                     %>
 
-                                                    <% if (true) {%>
+                                                    <% if (r.getAr_foto() == null) {%>
                                                     <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30">
                                                         <a style="margin-left: 3%;" href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a></td>
                                                         <% } else {%>
-                                                    <td><img src="Foto.php?idf=<? echo $idf; ?>"  width="60"  height="60"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a></td>
+                                                    <td><img src="../Usuario/Fotos/<%=r.getAr_foto()%>"  width="60"  height="60"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a></td>
                                                         <% }%>
+                                                    <td> <strong><%=r.getNo_req()%></strong></td>
+                                                    <td> <strong><%=r.getFe_creacion()%></strong></td>
 
 
 
