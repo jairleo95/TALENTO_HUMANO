@@ -471,12 +471,7 @@ public class CContrato extends HttpServlet {
 
                     if (hora_desde != null & d != null & hora_hasta != null) {
                         if (!hora_hasta.equals("") & !hora_desde.equals("") & !d.equals("")) {
-                            IHor.Insert_Horario(null,
-                                    hora_desde,
-                                    hora_hasta,
-                                    d,
-                                    ES_HORARIO,
-                                    ID_DETALLE_HORARIO);
+                          IHor.Insert_Horario(null, hora_desde, hora_hasta,d,ES_HORARIO, ID_DETALLE_HORARIO);
                         }
                     }
                 }
@@ -497,7 +492,6 @@ public class CContrato extends HttpServlet {
 
             //out.print(i);
             String idctr = con.Contrato_max(ID_TRABAJADOR);
-            //out.print(num_ad);
             response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&idtr=" + ID_TRABAJADOR + "&idctr=" + idctr + "&dce=Doc_CE");
 
         }

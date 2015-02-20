@@ -357,7 +357,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     @Override
     public List<V_Reg_Dgp_Tra> List_Doc_CE() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = " SELECT f.ti_documento,f.documento,da.no_archivo,f.es_obligatorio, da.ar_dato_archivo, da.de_documento_adjunto,da.es_documento_adjunto,f.id_document,da.id_contrato,da.id_dgp FROM (SELECT dr.id_documentos AS id_document , dr.id_tipo_planilla    AS id_tipo_plani ,dr.id_requerimiento    AS id_requerimient ,dr.documento,dr.ti_planilla,dr.planilla AS planilla ,dr.id_requerimiento,dr.TI_DOCUMENTO,dr.es_obligatorio FROM rhvd_doc_plant_req dr, RHTR_REQUERIMIENTO r  WHERE dr.id_requerimiento = r.id_requerimiento and dr.ID_REQUERIMIENTO = 'REQ-0019')f LEFT OUTER JOIN (select * from rhtv_documento_adjunto where id_contrato = '') da ON (f.id_document = da.id_documentos )";
+        String sql = " SELECT f.ti_documento,   f.documento, f.es_obligatorio,   da.de_documento_adjunto,   da.es_documento_adjunto,  f.id_document, da.id_documento_adjunto,  da.id_contrato, da.es_rec_fisico ,da.id_dgp FROM  (SELECT dr.id_documentos AS id_document ,  dr.id_tipo_planilla    AS id_tipo_plani , dr.id_requerimiento    AS id_requerimient ,  dr.documento,   dr.ti_planilla, dr.planilla AS planilla , dr.id_requerimiento, dr.TI_DOCUMENTO, dr.es_obligatorio FROM rhvd_doc_plant_req dr, RHTR_REQUERIMIENTO r WHERE dr.id_requerimiento = r.id_requerimiento AND dr.ID_REQUERIMIENTO   = 'REQ-0019' )f LEFT OUTER JOIN (SELECT g.*, dd.id_dgp,  dd.id_contrato FROM rhtv_documento_adjunto g, RHTV_DGP_DOC_ADJ dd WHERE dd.id_documento_adjunto =g.id_documento_adjunto) da ON (f.id_document = da.id_documentos )";
         List<V_Reg_Dgp_Tra> list = new ArrayList<V_Reg_Dgp_Tra>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -369,15 +369,22 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
                 d.setEs_obligatorio(rs.getString("es_obligatorio"));
                 //              d.setAr_dato_archivo(rs.getString("ar_dato_archivo"));
                 d.setDe_documento_adjunto(rs.getString("de_documento_adjunto"));
-                d.setEs_documento_adjunto(rs.getString("es_documento_adjunto"));
+                d.setEs_documento_adjunto(rs.getString("es_rec_fisico"));
                 d.setId_document(rs.getString("id_document"));
                 d.setId_contrato(rs.getString("id_contrato"));
                 d.setId_dgp(rs.getString("id_dgp"));
                 list.add(d);
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR :" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
