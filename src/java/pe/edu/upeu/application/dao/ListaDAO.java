@@ -18,6 +18,8 @@ import pe.edu.upeu.application.model.Nacionalidad;
 import pe.edu.upeu.application.model.Proceso;
 import pe.edu.upeu.application.model.Situacion_Educativa;
 import pe.edu.upeu.application.model.Universidad;
+import pe.edu.upeu.application.model.Via;
+import pe.edu.upeu.application.model.Zona;
 
 /**
  *
@@ -221,20 +223,25 @@ public class ListaDAO implements InterfaceListaDAO {
     }
 
     @Override
-    public List<String> List_Dom_D1_Id() {
-        List<String> list = new ArrayList<String>();
-        list.add("Avenida");
-        list.add("Jiron");
-        list.add("Manzana");
-        list.add("Calle");
-        list.add("Pasaje");
-        list.add("Alameda");
-        list.add("Malecon");
-        list.add("Ovalo");
-        list.add("Plaza");
-        list.add("Carretera");
-        list.add("Block");
+    public List<Via> List_Dom_D1_Id() {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select * from rhtx_via";
+        List<Via> list = new ArrayList<Via>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Via am = new Via();
+                am.setCo_via(rs.getString("co_via"));
+                am.setDe_via(rs.getString("de_via"));
+                am.setId_via(rs.getString("id_via"));
+                list.add(am);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
         return list;
+        
     }
     
     
@@ -253,21 +260,25 @@ public class ListaDAO implements InterfaceListaDAO {
     }
     
     @Override
-    public List<String> List_Dom_D5_Id() {
-        List<String> list = new ArrayList<String>();
-        list.add("Urbanizacion");
-        list.add("Pueblo Joven");
-        list.add("Unidad Vecinal");
-        list.add("Conjunto Habitacional");
-        list.add("Asentamiento Humano");
-        list.add("Cooperativa");
-        list.add("Residencial");
-        list.add("Zona Industrial");
-        list.add("Grupo");
-        list.add("Caserio");
-        list.add("Fundo");
-        list.add("Ninguno");
+    public List<Zona> List_Dom_D5_Id() {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select * from rhtx_zona";
+        List<Zona> list = new ArrayList<Zona>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Zona am = new Zona();
+                am.setId_zona(rs.getString("id_zona"));
+                am.setDe_zona(rs.getString("de_zona"));
+                am.setCo_zona(rs.getString("co_zona"));
+                list.add(am);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
         return list;
+        
     }
 
     @Override

@@ -1,3 +1,5 @@
+<%@page import="pe.edu.upeu.application.model.Zona"%>
+<%@page import="pe.edu.upeu.application.model.Via"%>
 <%@page import="pe.edu.upeu.application.model.V_Ubigeo"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
@@ -42,36 +44,57 @@
                     <td ><a class="btn btn-success" href="../../trabajador?opc=Editar_Asp_Soc&idtr=<%=IDTR%>">EDITAR</a></td>
 
                 </tr> 
-                <tr><td class="text-info">Dirección :</td><td><% InterfaceListaDAO l = new ListaDAO();
-                    if (trb.getLi_di_dom_a_d1() != null || trb.getLi_di_dom_a_d3() != null) {
-                        for (int b = 0; b < l.List_Dom_D1_Id().size(); b++) {
-                            if (trb.getLi_di_dom_a_d1().trim().equals(b + 1 + "")) {
-                                out.println(l.List_Dom_D1_Id().get(b));
+                <tr><td class="text-info">Dirección :</td><td>
+                        <% InterfaceListaDAO l = new ListaDAO();
+                            if (trb.getLi_di_dom_a_d1() != null ) {
+                                for (int i = 0; i < l.List_Dom_D1_Id().size(); i++) {
+                                    Via v = new Via();
+                                    v = (Via) l.List_Dom_D1_Id().get(i);
+                                    if (v.getId_via().trim().equals(trb.getLi_di_dom_a_d1().trim())) {
+                                        out.println(v.getDe_via());
+                                    }
+
+                                }
                             }
 
-                        }
-
-                        if (trb.getLi_di_dom_a_d3().trim().equals("1")) {
-                            out.println(" " + trb.getDi_dom_a_d2() + " Numero");
-                        }
-                        if (trb.getLi_di_dom_a_d3().trim().equals("2")) {
-                            out.println(" " + trb.getDi_dom_a_d2() + " Lote");
-                        }
-                        if (trb.getLi_di_dom_a_d3().trim().equals("3")) {
-                            out.println(" " + trb.getDi_dom_a_d2() + " S/N");
-                        }
-
-                        for (int c = 0; c < l.List_Dom_D5_Id().size(); c++) {
-                            if (trb.getLi_di_dom_a_d5().trim().equals(c + 1 + "")) {
-                                out.println(" " + trb.getDi_dom_a_d4() + " " + l.List_Dom_D5_Id().get(c));
+                            if (trb.getDi_dom_a_d2() != null) {
+                                out.print(" " + trb.getDi_dom_a_d2());
+                            } else {
+                                out.print(" -- ");
                             }
 
-                        }
-                        out.println(" " + trb.getDi_dom_a_d6());
+                            if (trb.getLi_di_dom_a_d3() != null) {
+                                for (int j = 0; j < l.List_Dom_D3_Id().size(); j++) {
+                                    String num = Integer.toString(j + 1);
+                                    if (trb.getLi_di_dom_a_d3().trim().equals(num)) {
+                                        out.print(l.List_Dom_D3_Id().get(j));
+                                    }
+                                }
+                            }
 
-                    } else {
-                        out.print("no registrado");
-                    }
+                            if (trb.getDi_dom_a_d4() != null) {
+                                out.print(" " + trb.getDi_dom_a_d4());
+                            } else {
+                                out.print(" -- ");
+                            }
+
+                            if (trb.getLi_di_dom_a_d5()!= null ) {
+                                for (int c = 0; c < l.List_Dom_D5_Id().size(); c++) {
+                                    Zona z = new Zona();
+                                    z = (Zona) l.List_Dom_D5_Id().get(c);
+                                    if (trb.getLi_di_dom_a_d5().trim().equals(z.getId_zona().trim())) {
+                                        out.println(z.getDe_zona());
+                                    }
+
+                                }
+                            }
+
+                            if (trb.getDi_dom_a_d6() != null) {
+                                out.print(" " + trb.getDi_dom_a_d6());
+                            } else {
+                                out.print(" -- ");
+                            }
+
                         %></td></tr>
 
                 <tr><td class="text-info">Referencia:</td><td><%if (trb.getDi_dom_a_ref() != null) {
@@ -81,63 +104,82 @@
                     }%></td></tr>
                 <tr><td class="text-info">Dpto / Prov / Dtto:</td>
                     <%
-                    for (int h = 0; h <List_Ubigeo.size(); h++){
-                        V_Ubigeo vu = new V_Ubigeo();
-                        vu = (V_Ubigeo) List_Ubigeo.get(h);
-                        if(trb.getDi_dom_a_distrito().trim().equals(vu.getNo_distrito())){%>
-                        <td><%=vu.getNo_departamento()+" / "+ vu.getNo_provincia() +" / "+ vu.getNo_distrito() %></td> 
-                        <%}
-                    }
-                %>
-                    
+                        for (int h = 0; h < List_Ubigeo.size(); h++) {
+                            V_Ubigeo vu = new V_Ubigeo();
+                            vu = (V_Ubigeo) List_Ubigeo.get(h);
+                            if (trb.getDi_dom_a_distrito().trim().equals(vu.getNo_distrito())) {%>
+                    <td><%=vu.getNo_departamento() + " / " + vu.getNo_provincia() + " / " + vu.getNo_distrito()%></td> 
+                    <%}
+                        }
+                    %>
+
                 </tr>
 
 
                 <tr><td colspan="2"><div class="title">Direccion Segun Dni</div></td></tr>
 
-                <tr><td class="text-info">Dirección :</td><td><%
-                    if (trb.getLi_di_dom_leg_d1() != null || trb.getLi_di_dom_leg_d3() != null) {
-                        for (int b = 0; b < l.List_Dom_D1_Id().size(); b++) {
-                            if (trb.getLi_di_dom_leg_d1().trim().equals(b + 1 + "")) {
-                                out.println(l.List_Dom_D1_Id().get(b));
+                <tr><td class="text-info">Dirección :</td><td>
+                        <%
+                            if (trb.getLi_di_dom_leg_d1() != null) {
+                                for (int i = 0; i < l.List_Dom_D1_Id().size(); i++) {
+                                    Via v = new Via();
+                                    v = (Via) l.List_Dom_D1_Id().get(i);
+                                    if (v.getId_via().trim().equals(trb.getLi_di_dom_leg_d1().trim())) {
+                                        out.println(v.getDe_via());
+                                    }
+
+                                }
+                            }
+                            if (trb.getDi_dom_leg_d2() != null) {
+                                out.print(" " + trb.getDi_dom_leg_d2());
+                            } else {
+                                out.print(" -- ");
                             }
 
-                        }
-
-                        if (trb.getLi_di_dom_leg_d3().trim().equals("1")) {
-                            out.println(" " + trb.getDi_dom_leg_d2() + " Numero");
-                        }
-                        if (trb.getLi_di_dom_leg_d3().trim().equals("2")) {
-                            out.println(" " + trb.getDi_dom_leg_d2() + " Lote");
-                        }
-                        if (trb.getLi_di_dom_leg_d3().trim().equals("3")) {
-                            out.println(" " + trb.getDi_dom_leg_d2() + " S/N");
-                        }
-
-                        for (int c = 0; c < l.List_Dom_D5_Id().size(); c++) {
-                            if (trb.getLi_di_dom_leg_d5().trim().equals(c + 1 + "")) {
-                                out.println(" " + trb.getDi_dom_leg_d4() + " " + l.List_Dom_D5_Id().get(c));
+                            if (trb.getLi_di_dom_leg_d3() != null) {
+                                for (int j = 0; j < l.List_Dom_D3_Id().size(); j++) {
+                                    String num = Integer.toString(j + 1);
+                                    if (trb.getLi_di_dom_leg_d3().trim().equals(num)) {
+                                        out.print(l.List_Dom_D3_Id().get(j));
+                                    }
+                                }
                             }
 
-                        }
-                        out.println(" " + trb.getDi_dom_leg_d6());
+                            if (trb.getDi_dom_leg_d4() != null) {
+                                out.print(" " + trb.getDi_dom_leg_d4());
+                            } else {
+                                out.print(" -- ");
+                            }
 
-                    } else {
-                        out.print("no registrado");
-                    }
+                            if (trb.getLi_di_dom_leg_d5() != null) {
+                                for (int c = 0; c < l.List_Dom_D5_Id().size(); c++) {
+                                    Zona z = new Zona();
+                                    z = (Zona) l.List_Dom_D5_Id().get(c);
+                                    if (trb.getLi_di_dom_leg_d5().trim().equals(z.getId_zona().trim())) {
+                                        out.println(z.getDe_zona());
+                                    }
+
+                                }
+                            }
+
+                            if (trb.getDi_dom_leg_d6() != null) {
+                                out.print(" " + trb.getDi_dom_leg_d6());
+                            } else {
+                                out.print(" -- ");
+                            }
+
 
                         %></td></tr>
                 <tr><td class="text-info">Dpto / Prov / Dtto</td>
-                    <%
-                    for (int h = 0; h <List_Ubigeo.size(); h++){
-                        V_Ubigeo vu = new V_Ubigeo();
-                        vu = (V_Ubigeo) List_Ubigeo.get(h);
-                        if(trb.getDi_dom_a_distrito().trim().equals(vu.getNo_distrito())){%>
-                        <td><%=vu.getNo_departamento()+" / "+ vu.getNo_provincia() +" / "+ vu.getNo_distrito() %></td> 
-                        <%}
-                    }
-                %>
-                    
+                    <%                        for (int h = 0; h < List_Ubigeo.size(); h++) {
+                            V_Ubigeo vu = new V_Ubigeo();
+                            vu = (V_Ubigeo) List_Ubigeo.get(h);
+                            if (trb.getDi_dom_leg_distrito().trim().equals(vu.getNo_distrito())) {%>
+                    <td><%=vu.getNo_departamento() + " / " + vu.getNo_provincia() + " / " + vu.getNo_distrito()%></td> 
+                    <%}
+                        }
+                    %>
+
                 </tr>
 
                 <tr><td colspan="2"><div class="title">Ingresos de Quinta Categoria</div></td></tr> 
@@ -168,20 +210,21 @@
                     </td>
                 </tr>
                 <tr><td class="text-info">Religión:</td><td><%
-                if(trb.getLi_autoridad() != null){
-                    if (trb.getLi_religion().equals("1")) {
-                        out.println("Adventista");
-                    }
-                    if (trb.getLi_religion().equals("2")) {
-                        out.println("Catolico");
-                    }
-                    if (trb.getLi_religion().equals("3")) {
-                        out.println("Otros");
-                    }
-                }else{out.print("no registrado");
-                        }%></td></tr>
+                    if (trb.getLi_autoridad() != null) {
+                        if (trb.getLi_religion().equals("1")) {
+                            out.println("Adventista");
+                        }
+                        if (trb.getLi_religion().equals("2")) {
+                            out.println("Catolico");
+                        }
+                        if (trb.getLi_religion().equals("3")) {
+                            out.println("Otros");
+                        }
+                    } else {
+                        out.print("no registrado");
+                    }%></td></tr>
                 <tr><td class="text-info">Iglesia:</td><td><%if (trb.getNo_iglesia() != null) {
-                          out.print(trb.getNo_iglesia());
+                        out.print(trb.getNo_iglesia());
                     } else {
                         out.print("no registrado");
                     }%></td></tr>
