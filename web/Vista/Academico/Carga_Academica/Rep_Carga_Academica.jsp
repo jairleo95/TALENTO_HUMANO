@@ -93,8 +93,6 @@
                 $('.tbody-carga').empty();
                 $('.tbody-carga').append("<tr><td colspan='9' >Cargando... </td></tr>");
                 $.post(url, "semestre=" + $(".semestre").val(), function (data) {
-
-
                     $('.tbody-carga').empty();
                     $.each(data, function (i, campo) {
                         $('.tbody-carga').append('<tr>');
@@ -103,9 +101,9 @@
                         $('.tbody-carga').append('<td>' + campo.apepat + ' ' + campo.apemat + ' ' + campo.nombre + '</td>');
                         $('.tbody-carga').append('<td>' + campo.eap + '</td>');
                         $('.tbody-carga').append('<td>' + campo.facultad + '</td>');
-                        $('.tbody-carga').append('<td>' + campo.dni + '</td>');
-                        $('.tbody-carga').append('<td>' + campo.dni + '</td>');
-                        $('.tbody-carga').append('<td>' + campo.dni + '</td>');
+                        $('.tbody-carga').append('<td>' + campo.carga + '</td>');
+                        $('.tbody-carga').append('<td></td>');
+                        $('.tbody-carga').append('<td></td>');
                         $('.tbody-carga').append('<td><button type="button">Completar datos</button><a href="Horario_Academico.jsp?dni=' + campo.numerodocumento + '&semestre='+$(".semestre").val()+'">Ver Cursos</a></td>');
                         $('.tbody-carga').append('</tr>');
                     });
