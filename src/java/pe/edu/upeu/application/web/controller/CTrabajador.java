@@ -445,7 +445,9 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("List_Ubigeo", ub.List_Distrito());
             getServletContext().setAttribute("List_Departamento", ub.List_Departamento());
 
-            //  out.print(ub.List_Provincia().size());   
+             //out.print(dir.Listar_via().size()+"-");   
+              //out.print(dir.Listar_Direccion().size()+"-");   
+              //out.print(dir.Listar_zona().size()+"-");   
             response.sendRedirect("Vista/Trabajador/Mod_Aspecto_Social.jsp?idtr=" + idtr);
         }
         if (opc.equals("Modificar_Asp_Soc")) {
