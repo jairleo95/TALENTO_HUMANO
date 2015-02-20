@@ -106,7 +106,7 @@
                             %>
                             <option  value="1" selected="">Si</option>
                             <option  value="0">No</option>
-                             <%}
+                             <%}    
                             %>
                              <% 
                                 if (d.getEs_estudio_niv_superior().equals("0")) {
