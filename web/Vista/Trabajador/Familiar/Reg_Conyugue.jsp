@@ -134,7 +134,7 @@
                                         <input type="text" name="NRO_DOC" placeholder="Nro de Documento" maxlength="10" class="num_doc" required="">
                                     </label>
                                 </section>
-                                <input type="text" class="cony"  name="CONYUGUE"/>
+                                <input type="hidden" class="cony"  name="CONYUGUE"/>
 
                                 <section class="col col-4">
                                     <label class="select">
@@ -151,7 +151,7 @@
                         </fieldset>
                         <input type="hidden" name="opc"  class="submit" value="Registrar Conyugue">
                         <footer>
-                            <input type="text" name="idtr"  value="<%=request.getParameter("idtr")%>" class="text-box" >  
+                            <input type="hidden" name="idtr"  value="<%=request.getParameter("idtr")%>" class="text-box" >  
                             <button type="submit" class="btn btn-primary" name="opc">
                                 Registrar
                             </button>

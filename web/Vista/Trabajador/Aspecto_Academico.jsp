@@ -167,8 +167,12 @@
                 <%}%>
                 <%}%>
                 <%String IDTR = trb.getId_trabajador();%>
-                <td colspan="2"><a class="btn btn-success" href="../../trabajador?opc=Editar_Asp_Acad&idtr=<%=IDTR%>">EDITAR</a></td>
-                </tr>
+                <td colspan="2">
+                   <a class="btn btn-success btn-labeled"  href="../../trabajador?opc=Editar_Asp_Acad&idtr=<%=IDTR%>"> <span class="btn-label"><i class="glyphicon glyphicon-refresh"></i></span> Editar </a>
+                   
+                </td>
+                
+            </tr>
                 <%}%>
                 <!-- <tr><td colspan="2"><input class=""  type="submit" value="Editar"></td></tr>-->
             </table>

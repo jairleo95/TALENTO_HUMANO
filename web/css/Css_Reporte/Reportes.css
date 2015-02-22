@@ -37,7 +37,7 @@ a:hover{
     color: #00bf00;
 }*/
 tr:hover{
-     background: #bccde3;
+     //background: #bccde3;
     
     
 }
@@ -48,7 +48,7 @@ tr:hover{
     
 }
 .tab_cabe{
- background-color: #0575f4;
+ background-color: #474747;
  text-align: center;
     padding: 5px;
     color: white;
@@ -73,7 +73,7 @@ a:link
 .tinytable .desc, .sortable .asc {background-color:#0284b5;}
 .tinytable .desc h3 {background:url(../images/desc.png) 7px center no-repeat; cursor:pointer; padding-left:18px}
 .tinytable .asc h3 {background:url(../images/asc.png) 7px  center no-repeat; cursor:pointer; padding-left:18px}
-.tinytable .head:hover, .tinytable .desc:hover, .tinytable .asc:hover {text-align:center; color:#fff}
+//.tinytable .head:hover, .tinytable .desc:hover, .tinytable .asc:hover {text-align:center; color:#fff}
 .tinytable .evenrow td {background:#fff}
 .tinytable .oddrow td {background:#ecf2f6}
 .tinytable td.evenselected {background:#ecf2f6}

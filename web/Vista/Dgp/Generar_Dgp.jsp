@@ -12,6 +12,7 @@
         <meta charset="windows-1252">
         <link type="text/css" rel="stylesheet" href="../../css/Css_Reporte/Reportes.css">
         <link rel="stylesheet" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
 
@@ -88,11 +89,12 @@
                 </div>
                 <input type="hidden" name="opc" value="Buscar">
                 <input type="hidden" name="busc" value="Busc">
+                <input type="hidden" name="busqueda" value="Buscar">
                 <input type="hidden" name="text" value="<%=text%>">
                 <div class="form-group">
                     <br>
-                    <input class="btn btn-primary"  type="submit" name="busqueda"  value="Buscar">
-                    <a href="?cancel=true&text=<%=text%>" class="btn btn-primary" role="button">Cancelar</a>
+                    <button type="submit" class="btn btn-labeled btn-default"><span class="btn-label"><i class="fa fa-search"></i></span>Buscar </button>
+                    <a href="?cancel=true&text=<%=text%>" class="btn btn-labeled btn-danger"> <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span>Cancelar </a>
                 </div>
 
             </form>
@@ -144,7 +146,9 @@
                             out.print("Tiene requerimiento en proceso");
                         } else {
                     %>
-                    <a href="../../dgp?idtr=<%=tr.getId_trabajador()%>&idreq=<%=idreq%>&iddep=<%=iddep%>&opc=Reg_form" class="btn bg-color-teal txt-color-white">Elaborar Requerimiento</a>
+                    <a href="../../dgp?idtr=<%=tr.getId_trabajador()%>&idreq=<%=idreq%>&iddep=<%=iddep%>&opc=Reg_form" 
+                       class="btn btn-primary">Elaborar Requerimiento <i class="fa fa-arrow-circle-right"></i></a>
+
                     <%}%>
                 </td>
             </tr>

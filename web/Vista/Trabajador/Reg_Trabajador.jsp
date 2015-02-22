@@ -427,7 +427,7 @@
                                                                 <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-child fa-lg fa-fw"></i><label class="edad"></label></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-calendar fa-lg fa-fw"></i><label class="edad"></label></span>
 
                                                                             <input type="date" name="FECHA_NAC" required=""  id="edad" placeholder="Fecha de Nacimiento" class="form-control input-group-sm fecha" >
 
@@ -540,7 +540,7 @@
                                                                 <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-heart fa-lg fa-fw"></i></span>
                                                                             <select id="es_civil" name="ESTADO_CIVIL" class="form-control input-group-sm"  required="">
                                                                                 <option value="">[Estado Civil]</option>
                                                                                 <option value="1">Soltero(a)</option>
@@ -834,7 +834,7 @@
                                                             <div class="col-sm-4" id="" >
                                                                 <div class="form-group">
                                                                     <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
+                                                                        <span class="input-group-addon"><i class="fa fa-bank fa-lg fa-fw"></i></span>
                                                                         <select name="BANCO" id="banco" class="form-control input-group-sm">
                                                                             <option value="" selected="" disabled="" >[BANCO]</option>
                                                                             <option value="0" >Ninguno</option>
@@ -848,7 +848,7 @@
                                                             <div class="col-sm-4" id="no_cuen_otros" >
                                                                 <div class="form-group">
                                                                     <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
+                                                                        <span class="input-group-addon"><i class="fa fa-bank fa-lg fa-fw"></i></span>
                                                                         <input class="form-control input-group-sm"  placeholder="Nombre del Banco" type="text" name="BANCO_OTROS"  id="nu_cuen_otros" maxlength="30"   />
                                                                     </div>
                                                                 </div>
@@ -856,7 +856,7 @@
                                                             <div class="col-sm-4" id="no_cuen" >
                                                                 <div class="form-group">
                                                                     <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
+                                                                        <span class="input-group-addon"><i class="fa fa-bank fa-lg fa-fw"></i></span>
                                                                         <input placeholder="Nro de Cuenta" class="form-control input-group-sm" type="text" name="CUENTA"  id="nu_cuen" maxlength="30"   />
                                                                     </div>
                                                                 </div>
@@ -864,7 +864,7 @@
                                                             <div class="col-sm-4" id="no_cuen_ban" >
                                                                 <div class="form-group">
                                                                     <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
+                                                                        <span class="input-group-addon"><i class="fa fa-bank fa-lg fa-fw"></i></span>
                                                                         <input placeholder="Nro de Cuenta Bancaria" class="form-control input-group-sm" type="text" name="CUENTA_BANC" id="nu_cuen_ban">
                                                                     </div>
                                                                 </div>
