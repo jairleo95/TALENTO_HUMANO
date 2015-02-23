@@ -17,12 +17,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-       
+
         <title>Fichas de Trabajador</title>
 
         <link type="text/css" rel="stylesheet" href="../../css/Css_Reporte/Reportes.css">
- <link rel="stylesheet" href="../../css/bootstrap.min.css">
-      
+        <link rel="stylesheet" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
+
     </head>
     <SCRIPT LANGUAGE="JavaScript">
         function checkIt(evt) {
@@ -48,8 +51,8 @@
         <div class="container theme-showcase">
 
             <div class="form-group">
-                <label class="control-label">Elaborar Ficha</label><br>
-                <a href="../../trabajador?opc=Form_Reg"    class="btn btn-primary" role="button" >Agregar Nueva Ficha</a>   
+                <label class="control-label">Elaborar Ficha :</label><br>
+                <a href="../../trabajador?opc=Form_Reg" class="btn btn-labeled btn-primary"> <span class="btn-label"><i class="fa fa-edit"></i></span>Agregar Nueva Ficha </a>
             </div>
             <br>
             <div>
@@ -73,11 +76,11 @@
                         <input type="text"  class="form-control"  onKeyPress="return checkIt(event)" name="dni" maxlength="8">
                     </div>
                     <input type="hidden" name="opc" value="Buscar_Trabajador">
+                    <input   type="hidden" name="busqueda"  value="Buscar">
                     <div class="form-group">
                         <br>
-                        <input class="btn btn-primary"  type="submit" name="busqueda"  value="Buscar">
-
-                        <a href="?cancel=true"  class="btn btn-primary" role="button">Cancelar</a>
+                        <button type="submit" class="btn btn-labeled btn-default"><span class="btn-label"><i class="fa fa-search"></i></span>Buscar </button>
+                        <a href="?cancel=true" class="btn btn-labeled btn-danger"> <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span>Cancelar </a>
                     </div>
 
                 </form>
@@ -113,9 +116,9 @@
                     <td><%out.println(i + 1);%></td>         
 
 
-                    <% 
-                    
-if (tr.getAr_foto()==null) {%>
+                    <%
+
+                        if (tr.getAr_foto() == null) {%>
                     <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30"></td>
                         <%} else {%>
                     <td><img src="../Usuario/Fotos/<%=tr.getAr_foto()%>"  width="30"  height="30"></td>
@@ -129,7 +132,9 @@ if (tr.getAr_foto()==null) {%>
                             out.println("Ninguna");
                         }
                         %></td>
-                     <td><a href="../../trabajador?idtr=<%=tr.getId_trabajador()%>&opc=list">Ver Detalle</a></td>
+                    <td>
+                    <a class="btn btn-success btn-labeled" href="../../trabajador?idtr=<%=tr.getId_trabajador()%>&opc=list"> <span class="btn-label"><i class="glyphicon glyphicon-info-sign"></i></span>Ver Datos </a>
+                    </td>
 
                 </tr>
 

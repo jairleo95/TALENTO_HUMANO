@@ -19,8 +19,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <link type="text/css" rel="stylesheet" href="../../css/Css_Detalle/CSS_DETALLE.css">  
-        <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
+         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <script src=" ../../../../js1/jquery-1.11.1.min.js" type="text/javascript"></script>
 
         <title>Aspecto Social</title>
@@ -41,7 +42,9 @@
                     </td>
 
                     <%String IDTR = trb.getId_trabajador();%>
-                    <td ><a class="btn btn-success" href="../../trabajador?opc=Editar_Asp_Soc&idtr=<%=IDTR%>">EDITAR</a></td>
+                    <td>
+                        <a class="btn btn-success btn-labeled" href="../../trabajador?opc=Editar_Asp_Soc&idtr=<%=IDTR%>"> <span class="btn-label"><i class="glyphicon glyphicon-refresh"></i></span> Editar </a>
+                    </td>
 
                 </tr> 
                 <tr><td class="text-info">Dirección :</td><td>
@@ -206,7 +209,8 @@
                     <td >
                         <input type="hidden" name="idtr" value="<%=IDTR%>">  
                         <input type="hidden" type="submit" name="opc" value="Editar_Asp_Rel">  
-                        <input class="btn btn-success" type="submit"  value="EDITAR">  
+                        <input  type="hidden"  value="EDITAR">  
+                         <button class="btn btn-success btn-labeled" href="../../trabajador?opc=Editar_Asp_Soc&idtr=<%=IDTR%>"> <span class="btn-label"><i class="glyphicon glyphicon-refresh"></i></span> Editar </button>
                     </td>
                 </tr>
                 <tr><td class="text-info">Religión:</td><td><%
