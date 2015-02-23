@@ -89,13 +89,13 @@
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <script type="text/javascript">
             $(document).ready(
-                    function() {
+                    function () {
                         var tip = $("#pro_dir_l");
                         tip.empty();
                         var rg = $("#dep_dir_l").val();
                         var data = "id_dep=" + rg + "&opc=dep_nac";
                         tip.append('<option value="">Cargando...</option>').val('');
-                        $.post("../../ubigeo", data, function(objJson) {
+                        $.post("../../ubigeo", data, function (objJson) {
                             tip.empty();
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
@@ -117,7 +117,7 @@
                         var rg = $("#pro_dir_l").val();
                         var data = "id_dist=" + rg + "&opc=pro_nac";
                         ti.append('<option value="">Cargando...</option>').val('');
-                        $.post("../../ubigeo", data, function(objJson) {
+                        $.post("../../ubigeo", data, function (objJson) {
                             ti.empty();
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
@@ -134,13 +134,12 @@
                                 ti.append(item);
                             }
                         });
-
                         $(".doc, .doc_c").attr("maxlength", "8");
                         $(".doc, .doc_c").attr("minlength", "8");
-                        $(".doc, .doc_c").val("");
+                        //  $(".doc, .doc_c").val("");
 
                         $("#nac").change(
-                                function() {
+                                function () {
                                     if ($("#nac").val() != "NAC-0193") {
                                         $("#dist").hide();
                                         $("#dist_nac").val("DST-001832");
@@ -154,7 +153,7 @@
                                 }
                         );
 
-                        $("#sit_edu").change(function() {
+                        $("#sit_edu").change(function () {
                             if ($("#sit_edu").val() == 'SED-0011' | $("#sit_edu").val() == 'SED-0013' | $("#sit_edu").val() == 'SED-0014'
                                     | $("#sit_edu").val() == 'SED-0015'
                                     | $("#sit_edu").val() == 'SED-0016' | $("#sit_edu").val() == 'SED-0017'
@@ -177,7 +176,7 @@
 
                         });
 
-                        $("#es_inst_p").change(function() {
+                        $("#es_inst_p").change(function () {
                             if ($("#inst_peru").val() == "1") {
                                 $("#regimen").show();
                                 $("#egreso").show();
@@ -190,37 +189,32 @@
                                 $("#ti").hide();
                                 $("#institucion").hide();
                                 $("#carr").hide();
-
                             }
-
                         });
 
                         $(".select-doc").change(
-                                function() {
+                                function () {
                                     $(".doc").val("");
                                     if ($(".select-doc").val() == 1) {
-                                        $("#doc").numeric(false, function() {
+                                        $("#doc").numeric(false, function () {
                                         });
                                         $(".doc").attr("maxlength", "8");
                                         $(".doc").attr("minlength", "8");
 
-                                    }
-                                    else {
-
+                                    } else {
                                         $("#doc").removeNumeric();
                                         $(".doc").attr("maxlength", "10");
                                         $(".doc").removeAttr("minlength");
                                         //    $(".doc").val("");
                                     }
                                     $(".doc").focus();
-
                                 }
                         );
                         $(".select-doc_c").change(
-                                function() {
+                                function () {
                                     $(".doc_c").val("");
                                     if ($(".select-doc_c").val() == 1) {
-                                        $(".doc_c").numeric(false, function() {
+                                        $(".doc_c").numeric(false, function () {
                                         });
                                         $(".doc_c").attr("maxlength", "8");
                                         $(".doc_c").attr("minlength", "8");
@@ -242,10 +236,10 @@
         <!--Alerta para la edad -->
         <script type="text/javascript">
             $(document).ready(
-                    function() {
+                    function () {
                         $(".alerta-req").hide();
                         $("#edad").change(
-                                function() {
+                                function () {
                                     $(".alerta-req").hide();
                                     var fecha = $("#edad").val();
                                     var fechaActual = new Date();
@@ -347,7 +341,12 @@
 
                                     </div>
                                     <!-- end widget edit box -->
-
+                                    <%                                        String nombres = request.getParameter("no_tr");
+                                        String app = request.getParameter("ap_p");
+                                        String apm = request.getParameter("ap_m");
+                                        String tidoc = request.getParameter("ti_doc");
+                                        String nro_doc = request.getParameter("nro_doc");
+                                    %>
                                     <!-- widget content -->
                                     <div class="widget-body">
 
@@ -384,8 +383,13 @@
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
+                                                                                <%if (app != null) {
+                                                                                %>
+                                                                            <input type="text" name="APELLIDO_P"  value="<%=app.toUpperCase()%>" required="" id="fname" placeholder="Apellido Paterno"  class="form-control input-group-sm"  onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
+                                                                            <%} else if (app == null) {
+                                                                            %>
                                                                             <input type="text" name="APELLIDO_P"  required="" id="fname" placeholder="Apellido Paterno"  class="form-control input-group-sm"  onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
-
+                                                                            <%}%>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -393,8 +397,13 @@
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
+                                                                                <%if (apm != null) {
+                                                                                %>
+                                                                            <input type="text" name="APELLIDO_M" required="" value="<%=apm.toUpperCase()%>" id="lname" placeholder="Apellido Materno" class="form-control input-group-sm" onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
+                                                                            <%} else if (apm == null) {
+                                                                            %>
                                                                             <input type="text" name="APELLIDO_M" required=""  id="lname" placeholder="Apellido Materno" class="form-control input-group-sm" onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
-
+                                                                            <%}%>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -402,8 +411,14 @@
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="NOMBRES" required=""  id="lname" placeholder="Nombres" class="form-control input-group-sm" onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
+                                                                                <%if (nombres != null) {
+                                                                                %>
+                                                                            <input type="text" name="NOMBRES" required="" value="<%=nombres.toUpperCase()%>"  id="lname" placeholder="Nombres" class="form-control input-group-sm" onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
 
+                                                                            <%} else if (nombres == null) {
+                                                                            %>
+                                                                            <input type="text" name="NOMBRES" required=""  id="lname" placeholder="Nombres" class="form-control input-group-sm" onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
+                                                                            <%}%>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -515,12 +530,43 @@
                                                                                     for (int h = 0; h < Listar_tipo_doc.size(); h++) {
                                                                                         Tipo_Documento tdoc = new Tipo_Documento();
                                                                                         tdoc = (Tipo_Documento) Listar_tipo_doc.get(h);
-                                                                                        if (tdoc.getId_tipo_doc_ident().trim().equals("1")) {
+                                                                                        if (tidoc == null) {
+
+                                                                                            if (tdoc.getId_tipo_doc_ident().trim().equals("1")) {
                                                                                 %>
                                                                                 <option selected="selected" value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
                                                                                 <%} else {%>
 
                                                                                 <option value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
+                                                                                <%}
+                                                                                } else if (tidoc != null) {
+                                                                                    if (tidoc.equals("DNI")) {
+
+                                                                                %>
+                                                                                <%                                                                                        if (tdoc.getId_tipo_doc_ident().trim().equals("1")) {
+                                                                                %>
+                                                                                <option selected="selected" value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
+                                                                                <%} else {%>
+                                                                                <option value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
+                                                                                <%}%>
+
+
+                                                                                <%} else if (tidoc.equals("PAS")) {
+                                                                                %>
+
+                                                                                <%
+                                                                                    if (tdoc.getId_tipo_doc_ident().trim().equals("4")) {
+                                                                                %>
+                                                                                <option selected="selected" value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
+                                                                                <%} else {%>
+                                                                                <option value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
+                                                                                <%}%>
+
+                                                                                <%
+                                                                                    }
+                                                                                %>
+
+
                                                                                 <%}
                                                                                     }%>
                                                                             </select>
@@ -532,8 +578,12 @@
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-list-alt fa-lg fa-fw"></i></span>
+                                                                                <%if (nro_doc != null) {%>
+                                                                            <input type="text" name="NRO_DOC" id="doc" value="<%=nro_doc%>" placeholder="Numero Documento" required="" maxlength="10" class="form-control input-group-sm doc" >
+                                                                            <%} else if (nro_doc == null) {
+                                                                            %>
                                                                             <input type="text" name="NRO_DOC" id="doc" placeholder="Numero Documento" required="" maxlength="10" class="form-control input-group-sm doc" >
-
+                                                                            <%}%>                                                                            
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -620,9 +670,9 @@
                                                             </div>
                                                             <script>
                                                                 $(document).ready(
-                                                                        function() {
+                                                                        function () {
                                                                             $("#sis_pens").change(
-                                                                                    function() {
+                                                                                    function () {
                                                                                         if ($("#sis_pens").val() != "1") {
                                                                                             $(".n_afp").remove();
                                                                                             $("#nom_afp").attr("disabled", true);
@@ -1019,7 +1069,7 @@
                                                                 </div>
                                                                 <script>
                                                                     $(document).ready(
-                                                                            function() {
+                                                                            function () {
 
                                                                                 $("#no_cuen").hide();
                                                                                 $("#no_cuen_ban").hide();
@@ -1027,7 +1077,7 @@
                                                                                 $("#no_cuen_otros").hide();
                                                                                 //alert($("#es_cuenta").val());
 
-                                                                                $(".fecha").keyup(function() {
+                                                                                $(".fecha").keyup(function () {
 
                                                                                     /*var arr_date = $(this).val().split("-");
                                                                                      if (arr_date[0].length > 4) {
@@ -1040,17 +1090,17 @@
 
                                                                                 });
 
-                                                                                $("#banco").change(function() {
+                                                                                $("#banco").change(function () {
                                                                                     cuenta_bancaria($(this).val());
                                                                                     $("#es_cuenta").val(1);
                                                                                     //  alert($("#es_cuenta").val());
                                                                                 });
 
-                                                                                $("#es_civil").change(function() {
+                                                                                $("#es_civil").change(function () {
                                                                                     estado_civil($(this).val());
                                                                                 });
                                                                                 $("#DOM_A_D3").change(
-                                                                                        function() {
+                                                                                        function () {
                                                                                             if ($("#DOM_A_D3").val() == "3") {
                                                                                                 $("#DOM_A_D4").val("Sin Numero");
                                                                                             } else {
@@ -1061,7 +1111,7 @@
                                                                                         }
                                                                                 );
                                                                                 $("#DOM_LEG_D3").change(
-                                                                                        function() {
+                                                                                        function () {
                                                                                             if ($("#DOM_LEG_D3").val() == "3") {
                                                                                                 $("#DOM_LEG_D4").val("Sin Numero");
                                                                                             } else {
@@ -1072,7 +1122,7 @@
                                                                                         }
                                                                                 );
                                                                                 $("#reli").change(
-                                                                                        function() {
+                                                                                        function () {
                                                                                             if ($("#reli").val() == "1") {
                                                                                                 $("#igle").attr("required", "required")
                                                                                             } else {
@@ -1748,10 +1798,10 @@
                                                             </div>
                                                             <code class="codigo"></code>
                                                             <input type="submit" name="opc"  class="submit btn btn-primary btn-lg" value="Registrar">
-                                                            <script>$(document).ready(function() {
+                                                            <script>$(document).ready(function () {
                                                                     var p = 1;
                                                                     var texto_h = "";
-                                                                    $(".btn-reg-hijo").click(function() {
+                                                                    $(".btn-reg-hijo").click(function () {
 
                                                                         var tabla_hijo = $(".tabla-hijo");
                                                                         var ap_pat = $(".i_app_h");
@@ -1790,7 +1840,7 @@
                                                                         essalud.val("");
                                                                         es_sup.val("");
 
-                                                                        $(".btn-modificar_" + p).click(function() {
+                                                                        $(".btn-modificar_" + p).click(function () {
                                                                             ap_pat.val($(".ap_p_h_" + $(this).val()).val());
                                                                             ap_mat.val($(".ap_m_h_" + $(this).val()).val());
                                                                             nombre.val($(".no_h_" + $(this).val()).val());
@@ -1803,7 +1853,7 @@
 
                                                                             $(".btn-reg-hijo").hide();
                                                                             $(".btn-mant").append('<button type="button" value="' + $(this).val() + '" class="btn-mod-hijo btn btn-info">Modificar Hijo</button>');
-                                                                            $(".btn-mod-hijo").click(function() {
+                                                                            $(".btn-mod-hijo").click(function () {
 
                                                                                 $(".ap_p_h_" + $(this).val()).val(ap_pat.val());
                                                                                 $(".ap_m_h_" + $(this).val()).val(ap_mat.val());
@@ -2075,7 +2125,7 @@
 
                                                     // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-                                                    $(document).ready(function() {
+                                                    $(document).ready(function () {
 
                                                         pageSetUp();
 
@@ -2130,15 +2180,15 @@
                                                                     email: "Your email address must be in the format of name@domain.com"
                                                                 }
                                                             },
-                                                            highlight: function(element) {
+                                                            highlight: function (element) {
                                                                 $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
                                                             },
-                                                            unhighlight: function(element) {
+                                                            unhighlight: function (element) {
                                                                 $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
                                                             },
                                                             errorElement: 'span',
                                                             errorClass: 'help-block',
-                                                            errorPlacement: function(error, element) {
+                                                            errorPlacement: function (error, element) {
                                                                 if (element.parent('.input-group').length) {
                                                                     error.insertAfter(element.parent());
                                                                 } else {
@@ -2146,14 +2196,14 @@
                                                                 }
                                                             }
                                                         });
-                                                        jQuery.validator.addMethod("val_fecha", function(value, element) {
+                                                        jQuery.validator.addMethod("val_fecha", function (value, element) {
                                                             var d = value.split("-");
                                                             return this.optional(element) || String(parseInt(d[0])).length == 4;
                                                         }, "¡Fecha ingresada invalida!");
 
                                                         $('#bootstrap-wizard-1').bootstrapWizard({
                                                             'tabClass': 'form-wizard',
-                                                            'onNext': function(tab, navigation, index) {
+                                                            'onNext': function (tab, navigation, index) {
                                                                 var $valid = $("#wizard-1").valid();
                                                                 if (!$valid) {
                                                                     $validator.focusInvalid();
@@ -2171,7 +2221,7 @@
                                                         // fuelux wizard
                                                         var wizard = $('.wizard').wizard();
 
-                                                        wizard.on('finished', function(e, data) {
+                                                        wizard.on('finished', function (e, data) {
                                                             //$("#fuelux-wizard").submit();
                                                             //console.log("submitted!");
                                                             $.smallBox({
@@ -2195,7 +2245,7 @@
         _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
         _gaq.push(['_trackPageview']);
 
-        (function() {
+        (function () {
             var ga = document.createElement('script');
             ga.type = 'text/javascript';
             ga.async = true;
@@ -2209,24 +2259,24 @@
     <!--Solo numeros -->
     <script type="text/javascript">
         $("#docs, .doc_c").numeric();
-        $("#doc, .doc_c").numeric(false, function() {
+        $("#doc, .doc_c").numeric(false, function () {
             alert("Solo Numeros Enteros");
             this.value = "";
             this.focus();
         });
-        $(".positive").numeric({negative: false}, function() {
+        $(".positive").numeric({negative: false}, function () {
             alert("No negative values");
             this.value = "";
             this.focus();
         });
-        $(".positive-integer").numeric({decimal: false, negative: false}, function() {
+        $(".positive-integer").numeric({decimal: false, negative: false}, function () {
             alert("Positive integers only");
             this.value = "";
             this.focus();
         });
 
         $("#remove").click(
-                function(e)
+                function (e)
                 {
                     e.preventDefault();
                     $(".numeric,.integer,.positive").removeNumeric();
@@ -2257,13 +2307,13 @@
             $("#DOM_LEG_D4").val(DAD4);
             $("#DOM_LEG_D5").val(DAD5);
             $("#DOM_LEG_D6").val(DAD6);
-            
-           
-            
-            list_prov_id_dep(DEP_A,$("#pro_dir_l"),"1",PRO_ACT)
+
+
+
+            list_prov_id_dep(DEP_A, $("#pro_dir_l"), "1", PRO_ACT)
             list_dist_id_prov(PRO_ACT, $("#DOM_LEG_DISTRITO"), "1", DADIS);
             //  $("#DOM_LEG_DISTRITO").val(DADIS);
-             $("#dep_dir_l").val(DEP_A);
+            $("#dep_dir_l").val(DEP_A);
             // $("#pro_dir_l").val(PRO_ACT);
 
         }
@@ -2273,13 +2323,13 @@
     <!--Select dinamicos-->
     <script type="text/javascript">
         /*Ubigeo*/
-        $("#dep_nac").change(function() {
+        $("#dep_nac").change(function () {
             var ti = $("#pro_nac");
             ti.empty();
             var rg = $("#dep_nac").val();
             var data = "id_dep=" + rg + "&opc=dep_nac";
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../ubigeo", data, function(objJson) {
+            $.post("../../ubigeo", data, function (objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2297,13 +2347,13 @@
                 }
             });
         });
-        $("#pro_nac").change(function() {
+        $("#pro_nac").change(function () {
             var ti = $("#dist_nac");
             ti.empty();
             var rg = $("#pro_nac").val();
             var data = "id_dist=" + rg + "&opc=pro_nac";
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../ubigeo", data, function(objJson) {
+            $.post("../../ubigeo", data, function (objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2321,16 +2371,16 @@
                 }
             });
         });
-        
+
         // ============ DIRECCION ===========
-        
-        $("#dep_dir_a").change(function() {
+
+        $("#dep_dir_a").change(function () {
             var ti = $("#pro_dir_a");
             ti.empty();
             var rg = $("#dep_dir_a").val();
             var data = "id_dep=" + rg + "&opc=dep_nac";
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../ubigeo", data, function(objJson) {
+            $.post("../../ubigeo", data, function (objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2348,13 +2398,13 @@
                 }
             });
         });
-        $("#pro_dir_a").change(function() {
+        $("#pro_dir_a").change(function () {
             var ti = $("#DOM_A_DISTRITO");
             ti.empty();
             var rg = $("#pro_dir_a").val();
             var data = "id_dist=" + rg + "&opc=pro_nac";
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../ubigeo", data, function(objJson) {
+            $.post("../../ubigeo", data, function (objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2373,17 +2423,17 @@
             });
         });
         //PROVINCIA
-        $("#dep_dir_l").change(function() {
+        $("#dep_dir_l").change(function () {
             var ti = $("#pro_dir_l");
             var rg = $("#dep_dir_l").val();
-           list_prov_id_dep (rg,ti,"0","")
-           
+            list_prov_id_dep(rg, ti, "0", "")
+
         });
-        
-        function list_prov_id_dep (rg,ti,selected,id_select){
-             var data = "id_dep=" + rg + "&opc=dep_nac";
+
+        function list_prov_id_dep(rg, ti, selected, id_select) {
+            var data = "id_dep=" + rg + "&opc=dep_nac";
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../ubigeo", data, function(objJson) {
+            $.post("../../ubigeo", data, function (objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2391,7 +2441,7 @@
                 }
                 var lista = objJson.lista;
                 if (lista.length > 0) {
-                     if (selected == "0") {
+                    if (selected == "0") {
                         ti.append("<option value=''>[Seleccione]</option>");
                         for (var i = 0; i < lista.length; i++) {
                             var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
@@ -2413,23 +2463,23 @@
                         }
 
                     }
-                 
+
                 } else {
                     ti.append("<option value=''>[]</option>");
                 }
-                
+
             });
-            
+
         }
-        
-        
+
+
         //DISTRITO
-        $("#pro_dir_l").change(function() {
+        $("#pro_dir_l").change(function () {
             var ti = $("#DOM_LEG_DISTRITO");
             var rg = $("#pro_dir_l").val();
             list_dist_id_prov(rg, ti, "0", "");
-         
-         
+
+
 
         });
 
@@ -2438,7 +2488,7 @@
 
             ti.append('<option value="">Cargando...</option>').val('');
             ti.empty();
-            $.post("../../ubigeo", data, function(objJson) {
+            $.post("../../ubigeo", data, function (objJson) {
 
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2483,14 +2533,14 @@
 
 
         /*Datos Academicos*/
-        $("#rg").change(function() {
+        $("#rg").change(function () {
             var ti = $("#ti_inst");
             ti.empty();
             var rg = $("#rg").val();
             var data = "regimen=" + rg + "&opc=ti_inst";
 
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../detalle_carrera", data, function(objJson) {
+            $.post("../../detalle_carrera", data, function (objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2510,7 +2560,7 @@
         });
 
 
-        $("#ti_inst").change(function() {
+        $("#ti_inst").change(function () {
             var inst = $("#inst");
             inst.empty();
             var ti = $("#ti_inst").val();
@@ -2519,7 +2569,7 @@
              }*/
             var data = "ti=" + ti + "&opc=institucion";
             inst.append('<option value="">Cargando...</option>').val('');
-            $.post("../../detalle_carrera", data, function(objJson) {
+            $.post("../../detalle_carrera", data, function (objJson) {
                 inst.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2537,7 +2587,7 @@
                 }
             });
         });
-        $("#inst").change(function() {
+        $("#inst").change(function () {
             var carr = $("#carrera");
             carr.empty();
             var insti = $("#inst").val();
@@ -2546,7 +2596,7 @@
              }*/
             var data = "inst=" + insti + "&opc=carrera";
             carr.append('<option value="">Cargando...</option>').val('');
-            $.post("../../detalle_carrera", data, function(objJson) {
+            $.post("../../detalle_carrera", data, function (objJson) {
                 carr.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2573,14 +2623,14 @@
          });*/
     </script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             var b = $(".tbodys");
 
             $("#btnfiltrar").click(
-                    function() {
+                    function () {
 
 
-                        $.post("../../ajax/Ajax_Conyugue/Ajax_Busc_Conyug.jsp", $("#frm_filtro").serialize(), function(objJson) {
+                        $.post("../../ajax/Ajax_Conyugue/Ajax_Busc_Conyug.jsp", $("#frm_filtro").serialize(), function (objJson) {
                             b.empty();
                             var list = objJson.lista;
                             for (var i = 0; i < list.length; i++) {
@@ -2602,7 +2652,7 @@
 
                             }
 
-                            $(".btn-add-conyugue").click(function() {
+                            $(".btn-add-conyugue").click(function () {
                                 var v = $(this).val();
                                 $(".nom_c").val($(".nom_ape_" + v).val());
                                 $(".f_nac").val($(".nac_" + v).val());
@@ -2621,13 +2671,13 @@
 
 
                     });
-            $(".btn-salir-busc, .close").click(function() {
+            $(".btn-salir-busc, .close").click(function () {
 
                 $(".select-conyugue").val("0");
             });
 
 
-            $(".select-conyugue").change(function() {
+            $(".select-conyugue").change(function () {
                 if ($(this).val() == "1") {
                     $("#btn-mostrar").click();
                 }
@@ -2643,7 +2693,7 @@
             }
             );
             $("#btncancel").click(
-                    function() {
+                    function () {
                         document.formulario.reset();
                         b.empty();
                         html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'

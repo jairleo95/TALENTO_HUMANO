@@ -187,28 +187,21 @@
 
             <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
                 Trabajador Nuevo
-
                 <%/*
                      String id =  request.getParameter("id");
                      out.print(cripto.Desencriptar(id));*/%>
             </button>
             <table  style="background-color: white " class="table-det" cellpadding="0">
-
-
                 <%                    if (t.getNo_ar_foto() == null) {
                 %>
                 <tr><td class="td2" >
                        <!-- <a class="btn btn-primary" href="../Usuario/Subir_Foto.jsp?idtr=<%=idtr%>" style="position: relative; margin: 0px; " >Subir foto</a>-->
                         <img style=" border: 3px solid grey ; position:relative;  margin: 0px; cursor: pointer"  class="ver_foto"  src="../../imagenes/avatar_default.jpg"  width="100"  height="100"> 
                         <form action="../../foto" method="POST" enctype="multipart/form-data" class="form-subir-foto">
-
                             <input type="hidden" name="idtr" class="idtr" id="input-file" value="<%=t.getId_trabajador()%>">
                             <input style="display:none" class="file-foto" type="file" name="archivo" required="">
-
-
                         </form>
                     </td>
-
                     <%
                     } else {%>
                 <tr><td class="td2"><img style="border: 3px solid grey ; position:absolute; left:0.5%; top: 6%;" src="../Usuario/Fotos/<%=t.getAr_foto()%>" width="100" height="100" ></td>
