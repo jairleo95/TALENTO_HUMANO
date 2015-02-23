@@ -23,35 +23,51 @@ and open the template in the editor.
             }
         </style>
         <script>
+            $(document).ready(function() {
+               /* var x,y=false;
+                $('.cambiarC').click(function(){
+                    if(validar()==true){
+                        $.post("../../Usuario","opc=Modificar_clave_2&iduser="+$('.iduser').val()+"&No_Usuario="+$('.No_Usuario').val()+"&cl_nu_re="+$('#cl_repetido').val() ,function(){
+                            
+                        });
+                    }else{
+                        $('#cl_nueva').val("");
+                        $('#cl_repetido').val("");
+                    }
+                });
+                function validar(){
+                    if(x==true &&y==true){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                };
+                $('#cl_nueva').change(function() {
+                    $('.nueva1').addClass('state-success');
+                    $('.msgn').empty();
+                    x=true;
+                });
+                $('#cl_repetido').change(function() {
+                    if ($('#cl_nueva').val() != "") {
+                        if ($(this).val() == $('#cl_nueva').val()) {
+                            $('.nueva2').addClass('state-success');
+                            $('.msgr').empty();
+                            y=true;
+                        } else {
+                            $('.nueva2').removeClass('state-success');
+                            $('.nueva2').addClass('state-error');
+                            $('.msgr').text('Las contraseñas no coinciden !');
+                            y=false;
+                        }
 
-
-            function validar() {
-                var p1 = $("#cl_nueva").val();
-                var p2 = $("#cl_repetido").val();
-                var espacios = false;
-                var cont = 0;
-
-                while (!espacios && (cont < p1.length)) {
-                    if (p1.charAt(cont) == " ")
-                        espacios = true;
-                    cont++;
-                }
-                if (espacios) {
-                    alert("La contraseña no puede contener espacios en blanco");
-                    $("#cl_nueva").val("");
-                    $("#cl_repetido").val("");
-                    return false;
-                }
-                if (p1 !== p2) {
-                    alert('La claves nuevas no coincide');
-                    $("#cl_nueva").val("");
-                    $("#cl_repetido").val("");
-                    return false;
-                } else {
-                    return;
-                }
-            }
-
+                    } else {
+                        $('.nueva1').removeClass('state-success');
+                        $('.nueva1').addClass('state-error');
+                        $('.msgn').text('Escribir nueva contraseña !');
+                        x=false;
+                    }
+                });*/
+            });
 
         </script>
     </head>
@@ -68,7 +84,7 @@ and open the template in the editor.
                             <div class="jarviswidget-editbox">
                             </div>
                             <div class="widget-body no-padding ">
-                                <form class="smart-form" action="../../Usuario">
+                                <form class="smart-form">
                                     <%for (int i = 0; i < List_ID_User.size(); i++) {
                                             Usuario u = new Usuario();
                                             u = (Usuario) List_ID_User.get(i);
@@ -80,32 +96,34 @@ and open the template in the editor.
                                         <section class="col col-3">
                                             <label class="label">Usuario:</label>
                                             <label class="input state-disabled">
-                                                <input type="text" name="No_Usuario" value="<%=u.getNo_usuario().trim() %>">
+                                                <input type="text"  disabled="" value="<%=u.getNo_usuario().trim()%>">
                                             </label>
                                         </section>
                                         <section class="col col-3">
                                             <label class="label">Clave Antigua:</label>
-                                            <label class="input">
-                                                <input type="text" name="pw_an" value="<%=u.getPw_usuario().trim() %>">
+                                            <label class="input state-disabled">
+                                                <input type="text" disabled="" name="pw_an" value="<%=u.getPw_usuario().trim()%>">
                                             </label>
                                         </section>
-                                        <section class="col col-3">
+                                        <section class="col col-3 clNueva">
                                             <label class="label">Clave Nueva:</label>
-                                            <label class="input">
+                                            <label class="input nueva1">
                                                 <input type="password" name="cl_nu" id="cl_nueva" required="">
-                                            </label>                                
+                                            </label>
+                                            <div class="msgn note note-error"></div>
                                         </section>
-                                        <section class="col col-3">
+                                        <section class="col col-3 clRepetida">
                                             <label class="label">Repita la Clave Nueva:</label>
-                                            <label class="input">
+                                            <label class="input nueva2">
                                                 <input type="password" name="cl_nu_re" id="cl_repetido" required="">
-                                            </label>                                
+                                            </label>
+                                            <div class="msgr note note-error"></div>
                                         </section>
                                     </fieldset>
                                     <footer>
-                                        <input type="hidden" name="opc" value="Modificar_clave_2">
-                                        <input type="hidden" name="iduser" value="<%=u.getId_usuario()%>">
-                                        <input type="submit" class="btn btn-primary btn-sm" value="Cambiar Clave" >
+                                        <input type="hidden" class="No_Usuario" value="<%=u.getNo_usuario().trim()%>">
+                                        <input type="hidden" class="iduser" value="<%=u.getId_usuario()%>">
+                                        <input  class="btn btn-primary btn-sm cambiarC" value="Cambiar Clave" >
                                         <input  class="btn btn-default btn-sm" onclick="window.history.back();" value="Atras">
                                     </footer>
                                     <%}%>
@@ -116,27 +134,7 @@ and open the template in the editor.
                 </article>
             </div>
         </div>
-
-
- <%--   <center><label  class="lab-mant">Cambiar Clave</label>
-        <form action="../../Usuario" method="post" onsubmit="return validar();">
-            <table>
-                <%for (int i = 0; i < List_ID_User.size(); i++) {
-                        Usuario u = new Usuario();
-                        u = (Usuario) List_ID_User.get(i);
-                %>
-                <input type="hidden" name="iduser" value="<%=u.getId_usuario()%>">
-                <tr><td>Usuario</td><td><input type="text" name="No_Usuario" value="<%=u.getNo_usuario()%>"></td></tr>
-                <tr><td>Clave Antigua:</td><td><input type="TEXT" name="pw_an" value="<%=u.getPw_usuario()%>"></td></tr>
-                <tr><td>Clave  Nueva:</td><td><input type="password" name="cl_nu" id="cl_nueva" required=""></td></tr>
-                <tr><td>Repita la Clave  Nueva:</td><td><input type="password" name="cl_nu_re" id="cl_repetido" required=""></td></tr>
-                <input type="hidden" name="opc" value="Modificar_clave_2">
-                <tr><td colspan="2"><input type="submit"  value="Cambiar Clave" ></td></tr>
-            </table>
-            <%}%>
-        </form>
-    </center>--%>
-</body>
+    </body>
 </html>
 <%@include file="List_Usuario.jsp" %>
 

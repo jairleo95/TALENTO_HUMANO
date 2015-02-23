@@ -42,8 +42,12 @@
                             for (int k = 0; k < itd.Listar_tipo_doc().size(); k++) {
                                 Tipo_Documento td = new Tipo_Documento();
                                 td = (Tipo_Documento) itd.Listar_tipo_doc().get(k);
-                                if (td.getId_tipo_doc_ident().trim().equals(trb.getTi_doc().trim())) {
-                                    out.print(td.getDe_tdoc_abreviada());
+                                if (trb.getTi_doc() != null) {
+                                    if (td.getId_tipo_doc_ident().trim().equals(trb.getTi_doc().trim())) {
+                                        out.print(td.getDe_tdoc_abreviada());
+                                    }
+                                } else {
+                                    out.print("no registrado");
                                 }
                             }
                         %>
