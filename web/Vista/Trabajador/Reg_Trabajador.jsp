@@ -134,10 +134,9 @@
                                 ti.append(item);
                             }
                         });
-
                         $(".doc, .doc_c").attr("maxlength", "8");
                         $(".doc, .doc_c").attr("minlength", "8");
-                      //  $(".doc, .doc_c").val("");
+                        //  $(".doc, .doc_c").val("");
 
                         $("#nac").change(
                                 function () {
@@ -202,7 +201,7 @@
                                         $(".doc").attr("maxlength", "8");
                                         $(".doc").attr("minlength", "8");
 
-                                    }else {
+                                    } else {
                                         $("#doc").removeNumeric();
                                         $(".doc").attr("maxlength", "10");
                                         $(".doc").removeAttr("minlength");
@@ -531,12 +530,43 @@
                                                                                     for (int h = 0; h < Listar_tipo_doc.size(); h++) {
                                                                                         Tipo_Documento tdoc = new Tipo_Documento();
                                                                                         tdoc = (Tipo_Documento) Listar_tipo_doc.get(h);
-                                                                                        if (tdoc.getId_tipo_doc_ident().trim().equals("1")) {
+                                                                                        if (tidoc == null) {
+
+                                                                                            if (tdoc.getId_tipo_doc_ident().trim().equals("1")) {
                                                                                 %>
                                                                                 <option selected="selected" value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
                                                                                 <%} else {%>
 
                                                                                 <option value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
+                                                                                <%}
+                                                                                } else if (tidoc != null) {
+                                                                                    if (tidoc.equals("DNI")) {
+
+                                                                                %>
+                                                                                <%                                                                                        if (tdoc.getId_tipo_doc_ident().trim().equals("1")) {
+                                                                                %>
+                                                                                <option selected="selected" value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
+                                                                                <%} else {%>
+                                                                                <option value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
+                                                                                <%}%>
+
+
+                                                                                <%} else if (tidoc.equals("PAS")) {
+                                                                                %>
+
+                                                                                <%
+                                                                                    if (tdoc.getId_tipo_doc_ident().trim().equals("4")) {
+                                                                                %>
+                                                                                <option selected="selected" value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
+                                                                                <%} else {%>
+                                                                                <option value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
+                                                                                <%}%>
+
+                                                                                <%
+                                                                                    }
+                                                                                %>
+
+
                                                                                 <%}
                                                                                     }%>
                                                                             </select>
