@@ -140,7 +140,7 @@
                                     <div class="widget-body">
 
                                         <div class="row" >
-                                            <form id="wizard-1" novalidate="novalidate" action="../../../familiar">
+                                            <form id="wizard-1" action="../../../familiar">
                                                 <%
                                                     for (int i = 0; i < Lista_hijo_individual.size(); i++) {
                                                         Datos_Hijo_Trabajador d = new Datos_Hijo_Trabajador();
