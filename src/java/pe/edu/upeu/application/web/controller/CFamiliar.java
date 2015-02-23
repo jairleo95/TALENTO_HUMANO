@@ -56,6 +56,7 @@ public class CFamiliar extends HttpServlet {
         InterfaceTipo_DocumentoDAO td = new Tipo_DocumentoDAO();
 
         /*try {*/
+        
         if (opc.equals("Registrar Conyugue")) {
             String ES_TRABAJA_UPEU_CONYUGUE = request.getParameter("TRABAJA_UPEU_CONYUGUE");
             String AP_NOMBRES_CONYUGUE = request.getParameter("APELLIDO_NOMBRES_CONYUGUE");
