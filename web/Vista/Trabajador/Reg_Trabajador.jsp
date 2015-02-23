@@ -1547,7 +1547,7 @@
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
 
-                                                                            <input id="nom_ape_con" type="text" name="APELLIDO_NOMBRES_CONYUGUE" placeholder="Apellidos y Nombres" required="" class="nom_c form-control input-group-sm" maxlength="110">
+                                                                            <input id="nom_ape_con" type="text" name="APELLIDO_NOMBRES_CONYUGUE" placeholder="Apellidos y Nombres" required="" onblur="this.value = this.value.toUpperCase()" class="nom_c form-control input-group-sm" maxlength="110">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1621,7 +1621,7 @@
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="APELLIDO_P_H" placeholder="Apellido Paterno"  maxlength="30" class="form-control input-group-sm i_app_h" />
+                                                                            <input type="text" name="APELLIDO_P_H" placeholder="Apellido Paterno"  maxlength="30" onblur="this.value = this.value.toUpperCase()" class="form-control input-group-sm i_app_h" />
 
                                                                         </div>
                                                                     </div>
@@ -1630,7 +1630,7 @@
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text"  name="APELLIDO_M_H" placeholder="Apellido Materno"  maxlength="30" class="form-control input-group-sm i_apm_h" />
+                                                                            <input type="text"  name="APELLIDO_M_H" placeholder="Apellido Materno"  maxlength="30"  onblur="this.value = this.value.toUpperCase()" class="form-control input-group-sm i_apm_h" />
 
                                                                         </div>
                                                                     </div>
@@ -1639,7 +1639,7 @@
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text"  name="NOMBRE_H" placeholder="Nombres"  maxlength="30" class="form-control input-group-sm i_no_h" />
+                                                                            <input type="text"  name="NOMBRE_H" placeholder="Nombres"  maxlength="30" onblur="this.value = this.value.toUpperCase()" class="form-control input-group-sm i_no_h" />
 
                                                                         </div>
                                                                     </div>

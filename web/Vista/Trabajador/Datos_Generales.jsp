@@ -17,7 +17,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/font-awesome.min.css">
-         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <script src=" ../../../../js1/jquery-1.11.1.min.js" type="text/javascript"></script>
         <title>Datos generales</title>
     </head>
@@ -42,13 +42,17 @@
                             for (int k = 0; k < itd.Listar_tipo_doc().size(); k++) {
                                 Tipo_Documento td = new Tipo_Documento();
                                 td = (Tipo_Documento) itd.Listar_tipo_doc().get(k);
-                                if (td.getId_tipo_doc_ident().trim().equals(trb.getTi_doc().trim())) {
-                out.print(td.getDe_tdoc_abreviada());
-                 }
-                    }
-                %>
- 
-                </td></tr>
+                                if (trb.getTi_doc() != null) {
+                                    if (td.getId_tipo_doc_ident().trim().equals(trb.getTi_doc().trim())) {
+                                        out.print(td.getDe_tdoc_abreviada());
+                                    }
+                                } else {
+                                    out.print("no registrado");
+                                }
+                            }
+                        %>
+
+                    </td></tr>
                 <tr><td  class="text-info">Numero Documento:</td><td><%=trb.getNu_doc()%></td></tr>
                 <tr><td  class="text-info">Estado Civil:</td><td><%
                     for (int r = 0; r < list.List_Estado_Civil().size(); r++) {
@@ -158,7 +162,7 @@
                 <tr>
                     <%String IDTR = trb.getId_trabajador();%>
                     <td colspan="2">
-                    <a class="btn btn-success btn-labeled"  href="../../trabajador?opc=Editar_Dat_Gen&idtr=<%=IDTR%>"> <span class="btn-label"><i class="glyphicon glyphicon-refresh"></i></span> Editar </a>
+                        <a class="btn btn-success btn-labeled"  href="../../trabajador?opc=Editar_Dat_Gen&idtr=<%=IDTR%>"> <span class="btn-label"><i class="glyphicon glyphicon-refresh"></i></span> Editar </a>
                     </td>
                 </tr>
                 <%}%>
