@@ -16,7 +16,7 @@
         <link href="../../css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
         <link href="../../css/smartadmin-production.min.css" rel="stylesheet" type="text/css"/>
         <link href="../../css/smartadmin-skins.min.css" rel="stylesheet" type="text/css"/>
-        
+
     </head>
     <body>
         <div id="main" role="main" style="margin-left: 0px;">
@@ -62,11 +62,8 @@
                                                                 Accion <span class="caret"></span>
                                                             </button>
                                                             <ul class="dropdown-menu" role="menu">
-                                                                <li><a class="activar" id="<%=i%>">Activar<input class="btnId<%=i%>" type="hidden" value="<%=v.getId_usuario()%>"></a></li>
-                                                                <li><a class="desactivar" id="<%=i%>">Desactivar</a></li>
-                                                                <li class="divider"></li>                                                                
                                                                 <li><a class="modificar" href="../../Usuario?id_Usuaio=<%=v.getId_usuario()%>&opc=Mod_Usuario_con"  >Editar</a></li>                                                                
-                                                                <li><a class="eliminar" id="<%=i%>">Eliminar</a></li>
+                                                                <li><a class="eliminar" id="<%=i%>">Eliminar<input class="btnId<%=i%>" type="hidden" value="<%=v.getId_usuario()%>"></a></li>
                                                             </ul>
                                                         </div>
                                                     </td>
@@ -78,8 +75,12 @@
                                                     <td><%=v.getNo_dep()%></td>
                                                     <td><%=v.getNo_usuario()%></td>
                                                     <td><a href="../../Usuario?id_Usuaio=<%=v.getId_usuario()%>&opc=Modificar_clave_1"><%=v.getPw_usuario()%> </a></td>
-                                                    <td><%=v.getEs_usuario()%></td>
-
+                                                    <% if (v.getEs_usuario().equals("1")) {
+                                                    %>
+                                                    <td><button class="desactivar btn btn-warning" id="<%=i%>">Desactivar</button></td>
+                                                    <%} else if (v.getEs_usuario().equals("0")) {%>
+                                                    <td><button class="activar btn btn-success" id="<%=i%>">Activar</button></td>
+                                                    <%}%>
                                                 </tr>
                                                 <%}%> 
                                             </tbody>
@@ -368,23 +369,21 @@
             $(document).ready(function() {
                 pageSetUp();
                 var valorr;
-                var idUser;                
+                var idUser;
                 /*
                  * SmartAlerts
                  */
                 // With Callback
-                
+
                 $(".activar").click(function(e) {
-                    valorr= $(this).attr('id');
-                    idUser= $('.btnId'+valorr).val();
+                    valorr = $(this).attr('id');
+                    idUser = $('.btnId' + valorr).val();
                     $.SmartMessageBox({
                         title: "Activar usuario!",
                         content: "¿Esta seguro de habilitar el usuario?",
-                        buttons: '[No][Yes]'
+                        buttons: '[No][Si]'
                     }, function(ButtonPressed) {
-                        if (ButtonPressed === "Yes") {
-                            alert(valorr);
-                            alert(idUser);
+                        if (ButtonPressed === "Si") {
                             $.post("../../Usuario", "id_Usuaio=" + idUser + "&opc=Activar_Usuario_con", function() {
                                 $.smallBox({
                                     title: "Activar Usuario",
@@ -393,6 +392,7 @@
                                     iconSmall: "fa fa-check fa-2x fadeInRight animated",
                                     timeout: 4000
                                 });
+                                window.location.href = "../../Usuario?opc=Reg_Usuario";
                             });
                         }
                         if (ButtonPressed === "No") {
@@ -404,21 +404,19 @@
                                 timeout: 4000
                             });
                         }
-                        
+
                     });
                     e.preventDefault();
                 })
                 $(".desactivar").click(function(e) {
-                    valorr= $(this).attr('id');
-                    idUser= $('.btnId'+valorr).val();
+                    valorr = $(this).attr('id');
+                    idUser = $('.btnId' + valorr).val();
                     $.SmartMessageBox({
                         title: "Desactivar usuario!",
                         content: "¿Esta seguro de deshabilitar el usuario?",
-                        buttons: '[No][Yes]'
+                        buttons: '[No][Si]'
                     }, function(ButtonPressed) {
-                        if (ButtonPressed === "Yes") {
-                            alert(valorr);
-                            alert(idUser);
+                        if (ButtonPressed === "Si") {
                             $.post("../../Usuario", "id_Usuaio=" + idUser + "&opc=Desac_Usuario_con", function() {
                                 $.smallBox({
                                     title: "Desactivar Usuario",
@@ -427,7 +425,7 @@
                                     iconSmall: "fa fa-check fa-2x fadeInRight animated",
                                     timeout: 4000
                                 });
-                                
+                                window.location.href = "../../Usuario?opc=Reg_Usuario";
                             });
                         }
                         if (ButtonPressed === "No") {
@@ -439,21 +437,19 @@
                                 timeout: 4000
                             });
                         }
-                        
+
                     });
                     e.preventDefault();
                 })
                 $(".eliminar").click(function(e) {
-                    valorr= $(this).attr('id');
-                    idUser= $('.btnId'+valorr).val();
+                    valorr = $(this).attr('id');
+                    idUser = $('.btnId' + valorr).val();
                     $.SmartMessageBox({
                         title: "Eliminar usuario!",
                         content: "¿Esta seguro de eliminar el usuario?",
-                        buttons: '[No][Yes]'
+                        buttons: '[No][Si]'
                     }, function(ButtonPressed) {
-                        if (ButtonPressed === "Yes") {
-                            alert(valorr);
-                            alert(idUser);
+                        if (ButtonPressed === "Si") {
                             $.post("../../Usuario", "id_usuario=" + idUser + "&opc=Eliminar_Usuario", function() {
                                 $.smallBox({
                                     title: "Eliminar Usuario",
@@ -462,7 +458,7 @@
                                     iconSmall: "fa fa-check fa-2x fadeInRight animated",
                                     timeout: 4000
                                 });
-                                
+                                window.location.href = "../../Usuario?opc=Reg_Usuario";
                             });
                         }
                         if (ButtonPressed === "No") {
@@ -474,12 +470,12 @@
                                 timeout: 4000
                             });
                         }
-                        
+
                     });
                     e.preventDefault();
                 })
-                
-    });
+
+            });
         </script>
     </body>
 </html>
