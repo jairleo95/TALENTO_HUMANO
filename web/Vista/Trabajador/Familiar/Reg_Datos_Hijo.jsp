@@ -86,27 +86,27 @@
 
                         <fieldset>
                             <div class="row">
-                                <section class="col col-6">
+                                <section class="col col-4">
                                     <label class="input"> <i class="icon-prepend fa fa-user"></i>
                                         <input type="text" name="APELLIDO_P" placeholder="Apellido Paterno" required="">
                                     </label>
                                 </section>
-                                <section class="col col-6">
+                                <section class="col col-4">
                                     <label class="input"> <i class="icon-prepend fa fa-user"></i>
                                         <input type="text" name="APELLIDO_M" placeholder="Apellido Materno" required="">
                                     </label>
                                 </section>
-                                <section class="col col-6">
+                                <section class="col col-4">
                                     <label class="input"> <i class="icon-prepend fa fa-user"></i>
                                         <input type="text" name="NOMBRE" placeholder="Nombres" required="">
                                     </label>
                                 </section>
-                                <section class="col col-6">
+                                <section class="col col-4">
                                     <label class="input"> <i class="icon-append fa fa-calendar"></i>
                                         <input type="date" name="FECHA_NAC" placeholder="Fecha de Nacimiento dd/mm/yy" class="date" required="">
                                     </label>
                                 </section>
-                                <section class="col col-5">
+                                <section class="col col-4">
                                     <label class="select">
                                         <select name="SEXO" required="" class="select-conyugue">
                                             <option value="" selected=""  disabled="">Sexo</option>
@@ -116,7 +116,7 @@
                                         </select> 
                                         <i></i> </label>
                                 </section>
-                                <section class="col col-5">
+                                <section class="col col-4">
                                     <label class="select">
                                         <select name="TIPO_DOC_ID" required="" class="select-conyugue">
                                             <option value="" selected=""  disabled="">Tipo de Documento</option>
@@ -132,14 +132,14 @@
                                         <i></i> </label>
                                 </section>
 
-                                <section class="col col-3">
+                                <section class="col col-4">
                                     <label class="input">
                                         <input type="text" name="NRO_DOC" placeholder="Nro de Documento" maxlength="10" required="">
                                     </label>
                                 </section>
 
 
-                                <section class="col col-5">
+                                <section class="col col-4">
                                     <label class="select">
                                         <select name="INSCRIPCION_VIG_ESSALUD" required="">
                                             <option value="" selected="" disabled="">Inscripción Vigente en Essalud</option>
@@ -149,7 +149,7 @@
                                         </select> 
                                         <i></i> </label>
                                 </section>
-                                <section class="col col-5">
+                                <section class="col col-4">
                                     <label class="select">
                                         <select name="ESTUD_NIV_SUPERIOR" required="">
                                             <option value="" selected="" disabled="">Estudio de Nivel Superior</option>
@@ -162,7 +162,7 @@
                             </div>                        
                         </fieldset>
                         <input type="hidden" name="opc"  value="REGISTRAR HIJO">
-                        <input type="hidden" name="TRABAJADOR" value="<%=request.getParameter("idtr")%>"  >
+                        <input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>"  >
                         <footer>
                             <button type="submit" class="btn btn-primary" name="opc">
                                 Registrar
@@ -673,7 +673,7 @@
 
             })
 
-        </script>
+        </script>1
 
         <!-- Your GOOGLE ANALYTICS CODE Below -->
         <script type="text/javascript">

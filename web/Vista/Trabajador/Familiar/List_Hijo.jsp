@@ -81,7 +81,7 @@
             <!-- widget content -->
             <div class="widget-body no-padding">
 
-                <table id="datatable_tabletools" class="table table-striped table-bordered table-hover" width="100%" >
+                <table id="datatable_tabletools" class="table table-striped table-bordered table-hover" width="100%" style="margin-left:0.5%;" >
                     <thead>
                         <tr>
                             <th data-hide="phone">Nro</th>
@@ -97,8 +97,7 @@
 
                     </thead>
                     <tbody>
-                        <%
-                           // CConversion c = new CConversion();
+                        <% CConversion co = new CConversion();
                             InterfaceTipo_DocumentoDAO itd = new Tipo_DocumentoDAO();
                             for (int i = 0; i < LISTA_HIJO.size(); i++) {
                                 Datos_Hijo_Trabajador h = new Datos_Hijo_Trabajador();
@@ -108,7 +107,7 @@
                         <tr>
                             <td><%out.print(i + 1);%></td>
                             <td><%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></td>
-                            <td><%=h.getFe_nacimiento()%></td>
+                            <td><%=co.convertFecha5(h.getFe_nacimiento())%></td>
                             <td>
                                 <%
                                     if (h.getEs_sexo().trim().equals("M")) {
