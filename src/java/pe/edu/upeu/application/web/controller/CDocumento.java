@@ -244,7 +244,7 @@ public class CDocumento extends HttpServlet {
                         estado = ((estado == null) ? "0" : estado);
 
                         String id = d.INSERT_DOCUMENTO_ADJUNTO(null, iddoc,"1" , user, null, null, null, null, desc, null, estado, id_ctr);
-                        d.INSERT_DGP_DOC_ADJ(null, iddgp, id, null);
+                        d.INSERT_DGP_DOC_ADJ(null, iddgp, id, null,idtr);
                         for (int t = 0; t < list_files.size(); t++) {
                             String g[] = list_files.get(t).split(":");
 

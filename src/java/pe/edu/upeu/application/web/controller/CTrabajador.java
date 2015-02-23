@@ -208,9 +208,19 @@ public class CTrabajador extends HttpServlet {
 
             }
 
-            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-
-            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr + "&a=t");
+            //getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
+            getServletContext().setAttribute("List_doc_req_pla", d.List_doc_tra(idtr));
+            getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
+            int s = d.List_Req_nacionalidad(idtr);
+            int num_ad = d.List_Adventista(idtr);
+            int count = d.count_documentos_x_tra(idtr);
+            if (count > 0) {
+                response.sendRedirect("Vista/trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr + "&iddgp=" + dgp);
+            } else {
+                response.sendRedirect("Vista/trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&iddgp=" + dgp + "&pro=pr_dgp");
+            }
+            //response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr + "&a=t");
         }
         if (opc.equals("Buscar")) {
             String Buscar = request.getParameter("busqueda");
@@ -291,7 +301,7 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));
             getServletContext().setAttribute("List_", li.List_Auto_mostrar(idrol));
 
-            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&aut=1&dgp=" + iddgp + "&p=" + puesto_id + "&c=" + cod + "&pas=" + idpasos + "&drp=" + drp + "&np=" + np + "&vnc=" + num_c_dgp + "&val_aps=" + val_aps+"&val_huella="+val_huella);
+            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&aut=1&dgp=" + iddgp + "&p=" + puesto_id + "&c=" + cod + "&pas=" + idpasos + "&drp=" + drp + "&np=" + np + "&vnc=" + num_c_dgp + "&val_aps=" + val_aps + "&val_huella=" + val_huella);
         }
         if ("registrar_aps".equals(opc)) {
             String idtr = request.getParameter("idtr");
@@ -315,7 +325,7 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             getServletContext().setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));
-            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&aut=1&dgp=" + iddgp + "&p=" + puesto_id + "&c=" + cod + "&pas=" + idpasos + "&drp=" + drp + "&np=" + np + "&vnc=" + num_c_dgp + "&val_aps=" + val_aps+"&val_huella="+val_huella);
+            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&aut=1&dgp=" + iddgp + "&p=" + puesto_id + "&c=" + cod + "&pas=" + idpasos + "&drp=" + drp + "&np=" + np + "&vnc=" + num_c_dgp + "&val_aps=" + val_aps + "&val_huella=" + val_huella);
         }
         if ("registrar_huella".equals(opc)) {
             String idtr = request.getParameter("idtr");
@@ -339,7 +349,7 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             getServletContext().setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));
-            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&aut=1&dgp=" + iddgp + "&p=" + puesto_id + "&c=" + cod + "&pas=" + idpasos + "&drp=" + drp + "&np=" + np + "&vnc=" + num_c_dgp + "&val_aps=" + val_aps+"&val_huella="+val_huella);
+            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&aut=1&dgp=" + iddgp + "&p=" + puesto_id + "&c=" + cod + "&pas=" + idpasos + "&drp=" + drp + "&np=" + np + "&vnc=" + num_c_dgp + "&val_aps=" + val_aps + "&val_huella=" + val_huella);
         }
         if ("reg_aps_masivo".equals(opc)) {
             String idtr = request.getParameter("idtr");
@@ -418,8 +428,7 @@ public class CTrabajador extends HttpServlet {
             String CM_OTROS_ESTUDIOS = request.getParameter("OTROS_ESTUDIOS");
             String CA_TIPO_HORA_PAGO_REFEERENCIAL = request.getParameter("TIPO_HORA_PAGO_REFEERENCIAL");
             String CO_UNIVERSITARIO = request.getParameter("CO_UNIVERSITARIO");
-            
-            
+
             tr.MOD_ASPEC_ACADEM(LI_NIVEL_EDUCATIVO, REGIMEN, ES_INST_PERU, CARRERA, DE_ANNO_EGRESO, CM_OTROS_ESTUDIOS, CA_TIPO_HORA_PAGO_REFEERENCIAL, idtr, CO_UNIVERSITARIO);
             //out.print(CARRERA);
             //REGISTRAR EN TABLA CUENTA SUELDO
@@ -447,8 +456,8 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("List_Departamento", ub.List_Departamento());
 
              //out.print(dir.Listar_via().size()+"-");   
-              //out.print(dir.Listar_Direccion().size()+"-");   
-              //out.print(dir.Listar_zona().size()+"-");   
+            //out.print(dir.Listar_Direccion().size()+"-");   
+            //out.print(dir.Listar_zona().size()+"-");   
             response.sendRedirect("Vista/Trabajador/Mod_Aspecto_Social.jsp?idtr=" + idtr);
         }
         if (opc.equals("Modificar_Asp_Soc")) {

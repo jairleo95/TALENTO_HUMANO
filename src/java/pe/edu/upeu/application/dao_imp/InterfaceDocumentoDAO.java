@@ -37,6 +37,8 @@ public interface InterfaceDocumentoDAO {
 
     public int count_documentos(String id_dgp);
 
+    public int count_documentos_x_tra(String id_tra);
+
     public List<V_Reg_Dgp_Tra> List_doc_req_pla(String iddg, String idtra);
 
     public String INSERT_DOCUMENTO_ADJUNTO(String ID_DOCUMENTO_ADJUNTO, String ID_DOCUMENTOS, String ES_DOCUMENTO_ADJUNTO, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String DE_DOCUMENTO_ADJUNTO, String NO_USUARIO, String ES_REC_FISICO, String ID_CONTRATO);
@@ -45,8 +47,10 @@ public interface InterfaceDocumentoDAO {
 
     public void INSERT_ARCHIVO_DOCUMENTO(String ID_ARCHIVO_DOCUMENTO, String ID_DOCUMENTO_ADJUNTO, String NO_FILE, String NO_ORIGINAL, String ES_FILE);
 
-    public void INSERT_DGP_DOC_ADJ(String ID_DGP_DOC_ADJ, String ID_DGP, String ID_DOCUMENTO_ADJUNTO, String ES_DGP_DOC_ADJ);
+    public void INSERT_DGP_DOC_ADJ(String ID_DGP_DOC_ADJ, String ID_DGP, String ID_DOCUMENTO_ADJUNTO, String ES_DGP_DOC_ADJ,String idtr);
     
     public void Desactivar_doc(String id_doc_adj);
+    
+    public List<V_Reg_Dgp_Tra> List_doc_tra( String idtra);
 
 }
