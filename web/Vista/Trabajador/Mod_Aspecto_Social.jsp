@@ -808,8 +808,13 @@
                                                 <input type="hidden" name="opc" value="Modificar_Asp_Soc">
                                                 <footer>
                                                     <center>
-                                                        <button type="submit" value="" name="opc"> MODIFICAR</button>
-                                                    </center>
+                                                               <!-- <button type="submit" value="" name="opc"> MODIFICAR</button>-->
+                                                                <button type="submit" class="btn btn-labeled btn-info" name="opc">
+                                                                    <span class="btn-label">
+                                                                        <i class="glyphicon glyphicon-pencil"></i>
+                                                                    </span>Modificar
+                                                                </button>
+                                                            </center>
                                                 </footer>
                                                 <%
                                                         }%>

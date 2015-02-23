@@ -6,6 +6,7 @@
 <%@page import="pe.edu.upeu.application.model.Datos_Hijo_Trabajador"%>
 
 <jsp:useBean id="Lista_hijo_individual" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_tipo_doc" scope="application" class="java.util.ArrayList"/>
 
 <!DOCTYPE html>
 <html>
@@ -238,25 +239,18 @@
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-flag fa-lg fa-fw"></i></span>
                                                                         <select  name="TIPO_DOC_ID" class="form-control input-group-sm"   required="" >
-                                                                            <%if (d.getEs_tipo_doc() != null) {
-                                                                                    if (d.getEs_tipo_doc().equals("1")) {
-                                                                            %>
-                                                                            <option value="1" selected="">DNI</option>
-                                                                            <option value="2">Partida</option>
-                                                                            <%}
-                                                                            %>
+                                                                            <option value="">[SELECCIONE]</option>
                                                                             <%
-                                                                                if (d.getEs_tipo_doc().equals("2")) {
+                                                                                for (int h = 0; h < Listar_tipo_doc.size(); h++) {
+                                                                                    Tipo_Documento tdoc = new Tipo_Documento();
+                                                                                    tdoc = (Tipo_Documento) Listar_tipo_doc.get(h);
+                                                                                    if (d.getEs_tipo_doc().trim().equals(tdoc.getId_tipo_doc_ident().trim())) {
                                                                             %>
-                                                                            <option value="1">DNI</option>
-                                                                            <option value="2" selected="">Partida</option>
+                                                                            <option value="<%=tdoc.getId_tipo_doc_ident().trim()%>" selected="" ><%=tdoc.getDe_tdoc_abreviada()%></option>
+                                                                            <%} else {%>
+                                                                            <option value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
                                                                             <%}
-                                                                            } else {%>
-                                                                            <option value="" >[SELECCIONE]</option>     
-                                                                            <option value="1">DNI</option>
-                                                                            <option value="2" >Partida</option>
-                                                                            <%}
-                                                                            %>
+                                                                                }%>
                                                                         </select>
                                                                     </div>
                                                                 </div>
@@ -330,19 +324,24 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+
                                                         </div>
-
-                                                        <input type="hidden" name="idhijo" value="<%= d.getId_datos_hijos_trabajador()%>">
-                                                        <input type="hidden" name="idtr" value="<%= d.getId_trabajador()%>">
-                                                        <input type="hidden" name="opc" value="MODIFICAR HIJO">
-                                                        <footer>
-                                                            <center>
-                                                                <button type="submit" value="" name="opc"> MODIFICAR</button>
-                                                            </center>
-                                                        </footer>
-                                                        <%}%>
-
                                                     </div>
+
+                                                    <input type="hidden" name="idhijo" value="<%= d.getId_datos_hijos_trabajador()%>">
+                                                    <input type="hidden" name="idtr" value="<%= d.getId_trabajador()%>">
+                                                    <input type="hidden" name="opc" value="MODIFICAR HIJO">
+                                                    <footer>
+                                                        <center>
+                                                            <button type="submit" class="btn btn-labeled btn-info" name="opc">
+                                                                <span class="btn-label">
+                                                                    <i class="glyphicon glyphicon-pencil"></i>
+                                                                </span>Modificar
+                                                            </button>
+                                                        </center>
+                                                    </footer>
+                                                    <%}%>
+
 
 
                                                 </div>

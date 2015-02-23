@@ -132,7 +132,9 @@ public class CFamiliar extends HttpServlet {
             String idhijo = request.getParameter("idhijo");
             String idtr = request.getParameter("idtr");
             getServletContext().setAttribute("Lista_hijo_individual", h.LISTA_HIJO(idhijo, idtr));
+            getServletContext().setAttribute("Listar_tipo_doc", td.Listar_tipo_doc());
             response.sendRedirect("Vista/Trabajador/Familiar/Mod_Datos_Hijos.jsp");
+            
         }
         if (opc.equals("MODIFICAR HIJO")) {
             String idtr = request.getParameter("idtr");

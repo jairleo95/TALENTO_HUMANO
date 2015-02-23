@@ -498,7 +498,7 @@
                                                                             <%
                                                                                                 }
                                                                                             }
-                                                                                            
+
                                                                                         }
                                                                                     }
 
@@ -529,7 +529,7 @@
                                                                             <%}
                                                                                     }
                                                                                 }
-                                                                               %>
+                                                                            %>
                                                                         </select>
                                                                     </div>
                                                                 </div>
@@ -676,7 +676,7 @@
                                                                             <option value="1" >BBVA</option>
                                                                             <option value="2" >BCP</option>
                                                                             <option value="3" >Otros</option>
-                                                                           <% }%>
+                                                                            <% }%>
                                                                         </select>
                                                                     </div>
                                                                 </div>
@@ -687,10 +687,10 @@
                                                                     <label>Nombre del Banco:</label>
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
-                                                                        <%if (cs.getNo_banco_otros() != null) {%>
+                                                                            <%if (cs.getNo_banco_otros() != null) {%>
                                                                         <input class="form-control input-group-sm" value="<%=cs.getNo_banco_otros()%>"   type="text" name="BANCO_OTROS" id="nu_cuen_otros" maxlength="30">
                                                                         <%} else {%>
-                                                                       <input class="form-control input-group-sm" value=""   type="text" name="BANCO_OTROS" id="nu_cuen_otros" maxlength="30">
+                                                                        <input class="form-control input-group-sm" value=""   type="text" name="BANCO_OTROS" id="nu_cuen_otros" maxlength="30">
                                                                         <%}%>
                                                                     </div>
                                                                 </div>
@@ -700,10 +700,10 @@
                                                                     <label>Nro de Cuenta:</label>
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
-                                                                        <%if (cs.getNu_cuenta() != null) {%>
+                                                                            <%if (cs.getNu_cuenta() != null) {%>
                                                                         <input class="form-control input-group-sm" value="<%=cs.getNu_cuenta()%>"   type="text" name="CUENTA" id="nu_cuen" maxlength="30">
                                                                         <%} else {%>
-                                                                       <input class="form-control input-group-sm" value=""   type="text" name="CUENTA" id="nu_cuen" maxlength="30">
+                                                                        <input class="form-control input-group-sm" value=""   type="text" name="CUENTA" id="nu_cuen" maxlength="30">
                                                                         <%}%>
                                                                     </div>
                                                                 </div>
@@ -714,10 +714,10 @@
                                                                     <label>Nro de Cuenta Bancaria:</label>
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
-                                                                        <%if (cs.getNu_cuenta_banc() != null) {%>
+                                                                            <%if (cs.getNu_cuenta_banc() != null) {%>
                                                                         <input class="form-control input-group-sm" value="<%=cs.getNu_cuenta_banc()%>"   type="text" name="CUENTA_BANC" id="nu_cuen_ban" maxlength="30">
                                                                         <%} else {%>
-                                                                       <input class="form-control input-group-sm" value=""   type="text" name="CUENTA_BANC" id="nu_cuen_ban" maxlength="30">
+                                                                        <input class="form-control input-group-sm" value=""   type="text" name="CUENTA_BANC" id="nu_cuen_ban" maxlength="30">
                                                                         <%}%>
                                                                     </div>
                                                                 </div>
@@ -725,9 +725,9 @@
                                                             <div class="col-sm-4" id="generar" >
                                                                 <div class="form-group">
                                                                     <div class="input-g">
-                                                                        <%if(cs.getEs_gem_nu_cuenta().trim().equals("1")){%>
+                                                                        <%if (cs.getEs_gem_nu_cuenta().trim().equals("1")) {%>
                                                                         <input type="checkbox" checked="" name="GEN_NU_CUEN" id="subscription"  value="1">
-                                                                        <%}else{%>
+                                                                        <%} else {%>
                                                                         <input type="checkbox"  name="GEN_NU_CUEN" id="subscription"  value="1">
                                                                         <%}%>
                                                                         <i></i>Generar Nro de Cuenta Bancaria
@@ -736,7 +736,7 @@
                                                             </div> 
 
                                                             <%}
-                                                                 %>
+                                                            %>
                                                             <input type="hidden" value="0" name="ES_CUENTA_SUELDO" id="es_cuenta"/>
 
                                                             <%String idtr = request.getParameter("idtr");%>
@@ -746,7 +746,11 @@
                                                     </div>
                                                     <div >
                                                         <center>
-                                                            <button type="submit" value="" name="opc"> MODIFICAR</button>
+                                                            <button type="submit" class="btn btn-labeled btn-info" name="opc">
+                                                                <span class="btn-label">
+                                                                    <i class="glyphicon glyphicon-pencil"></i>
+                                                                </span>Modificar
+                                                            </button>
                                                         </center>
                                                     </div>
                                                     <%}%>
@@ -1137,7 +1141,7 @@
                 $("#nu_cuen_otros").attr("required", "required");
                 $("#generar").hide();
                 $("#subscription").attr('checked', false);
-                 document.getElementById("nu_cuen_otros").readOnly = false;
+                document.getElementById("nu_cuen_otros").readOnly = false;
             }
             if (banco == '0') {
                 $("#no_cuen").hide();
@@ -1702,7 +1706,7 @@
 </body>
 
 </html>
-<%}else {
+<%} else {
         response.sendRedirect("/TALENTO_HUMANO/");
     }
 
