@@ -263,11 +263,12 @@
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
             $(document).ready(function() {
-
+                alert();
                 pageSetUp();
 
                 var $checkoutForm = $('#checkout-form').validate({
                     // Rules for form validation
+                    
                     rules: {
                         fname: {
                             required: true

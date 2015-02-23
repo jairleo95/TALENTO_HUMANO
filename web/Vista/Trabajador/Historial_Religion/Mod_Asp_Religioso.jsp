@@ -201,7 +201,7 @@
                                                                                     out.print(trb.getDe_cargo());
                                                                                 } else {
                                                                                     out.print("");
-                                                                                }%>" type="text" name="CARGO"  required=""  >
+                                                                                }%>" type="text" name="CARGO" >
 
                                                                         </div>
                                                                     </div>

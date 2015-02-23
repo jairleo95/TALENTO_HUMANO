@@ -330,6 +330,9 @@
             label{
                 font-weight: bold;
             }
+            p{
+                font-weight: bold;
+            }
         </style>
 
 
@@ -722,27 +725,36 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-sm-4" id="generar" >
-                                                                <div class="form-group">
-                                                                    <div class="input-g">
-                                                                        <%if (cs.getEs_gem_nu_cuenta().trim().equals("1")) {%>
-                                                                        <input type="checkbox" checked="" name="GEN_NU_CUEN" id="subscription"  value="1">
-                                                                        <%} else {%>
-                                                                        <input type="checkbox"  name="GEN_NU_CUEN" id="subscription"  value="1">
-                                                                        <%}%>
-                                                                        <i></i>Generar Nro de Cuenta Bancaria
-                                                                    </div>
-                                                                </div>
-                                                            </div> 
-
-                                                            <%}
-                                                            %>
-                                                            <input type="hidden" value="0" name="ES_CUENTA_SUELDO" id="es_cuenta"/>
-
-                                                            <%String idtr = request.getParameter("idtr");%>
-                                                            <input type="hidden" name="idtr" value="<%=idtr%>"/>
-                                                            <input type="hidden" name="opc" value="Modificar_Asp_Acad">
                                                         </div>
+
+                                                        <div class="col-sm-4" id="texto" >
+                                                            <div class="form-group">
+                                                                <div class="input-g">
+                                                                    <p >Autorizo a la UPeU gestionar mi cuenta de sueldo en el BBVA Banco Continental, para tal efecto adjunto copia legible y vigente de mi DNI   </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>   
+                                                        <div class="col-sm-4" id="generar" >
+                                                            <div class="form-group">
+                                                                <div class="input-g">
+                                                                    <%if (cs.getEs_gem_nu_cuenta().trim().equals("1")) {%>
+                                                                    <input type="checkbox" checked="" name="GEN_NU_CUEN" id="subscription"  value="1">
+                                                                    <%} else {%>
+                                                                    <input type="checkbox"  name="GEN_NU_CUEN" id="subscription"  value="1">
+                                                                    <%}%>
+                                                                    <i></i>Generar Nro de Cuenta Bancaria
+                                                                </div>
+                                                            </div>
+                                                        </div> 
+
+                                                        <%}
+                                                        %>
+                                                        <input type="hidden" value="0" name="ES_CUENTA_SUELDO" id="es_cuenta"/>
+
+                                                        <%String idtr = request.getParameter("idtr");%>
+                                                        <input type="hidden" name="idtr" value="<%=idtr%>"/>
+                                                        <input type="hidden" name="opc" value="Modificar_Asp_Acad">
+
                                                     </div>
                                                     <div >
                                                         <center>
@@ -981,6 +993,7 @@
                     $("#no_cuen_ban").hide();
                     $("#generar").hide();
                     $("#no_cuen_otros").hide();
+                    $("#texto").hide();
                     if ($("#banco").val() == "1") {
                         $("#no_cuen").show();
                     }
@@ -995,6 +1008,8 @@
                     if ($("#banco").val() == "0") {
                         $("#generar").show();
                         $("#no_cuen_otros").show();
+                        document.getElementById("nu_cuen_otros").readOnly = true;
+                        $("#texto").show();
                     }
 
                     //alert($("#es_cuenta").val());
@@ -1115,6 +1130,7 @@
                 $("#nu_cuen").mask("0011-9999999999999999", {placeholder: "X"});
                 $("#no_cuen_otros").hide();
                 $("#nu_cuen_otros").val("");
+                 $("#texto").hide();
             }
             if (banco == '2') {
                 $("#generar").hide();
@@ -1128,6 +1144,7 @@
                 $("#nu_cuen").mask("99999999999999", {placeholder: "X"});
                 $("#no_cuen_otros").hide();
                 $("#nu_cuen_otros").val("");
+                 $("#texto").hide();
             }
             if (banco == '3') {
                 $("#no_cuen").show();
@@ -1142,6 +1159,7 @@
                 $("#generar").hide();
                 $("#subscription").attr('checked', false);
                 document.getElementById("nu_cuen_otros").readOnly = false;
+                 $("#texto").hide();
             }
             if (banco == '0') {
                 $("#no_cuen").hide();
@@ -1151,6 +1169,7 @@
                 $("#no_cuen_otros").show();
                 $("#nu_cuen_otros").val("BBVA Banco Continental");
                 document.getElementById("nu_cuen_otros").readOnly = true;
+                $("#texto").show();
                 $("#generar").show();
                 $("#subscription").attr("required", "required");
                 $("#nu_cuen_otros").attr("required", "required");
