@@ -26,8 +26,8 @@ import pe.edu.upeu.application.web.controller.CConversion;
 public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador {
 
     ConexionBD conn;
-    CConversion c=new CConversion();
-    
+    CConversion c = new CConversion();
+
     @Override
     public void INSERT_DATOS_HIJO_TRABAJADOR(String ID_DATOS_HIJOS_TRABAJADOR, String ID_TRABAJADOR, String AP_PATERNO, String AP_MATERNO, String NO_HIJO_TRABAJADOR, String FE_NACIMIENTO, String ES_SEXO, String ES_TIPO_DOC, String NU_DOC, String ES_PRESENTA_DOCUMENTO, String ES_INSCRIPCION_VIG_ESSALUD, String ES_ESTUDIO_NIV_SUPERIOR, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String ES_DATOS_HIJO_TRABAJADOR) {
         CallableStatement cst;
@@ -41,7 +41,7 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
             cst.setString(5, NO_HIJO_TRABAJADOR);
             cst.setString(6, c.convertFecha(FE_NACIMIENTO));
             cst.setString(7, ES_SEXO);
-            cst.setString(8, ES_TIPO_DOC);
+            cst.setString(8, ES_TIPO_DOC.trim());
             cst.setString(9, NU_DOC);
             cst.setString(10, ES_PRESENTA_DOCUMENTO);
             cst.setString(11, ES_INSCRIPCION_VIG_ESSALUD);
@@ -53,18 +53,23 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
             cst.setString(17, IP_USUARIO);
             cst.setString(18, "1");
             cst.execute();
-        } catch (SQLException ex) {
-        } catch (ParseException ex) {
-            Logger.getLogger(Datos_Hijo_TrabajadorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
     @Override
     public List<Datos_Hijo_Trabajador> LISTA_HIJOS(String id) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from RHTD_DATOS_HIJO_TRABAJADOR where ID_TRABAJADOR='" + id.trim() + "'";
+        String sql = "select ID_DATOS_HIJOS_TRABAJADOR, ID_TRABAJADOR,AP_PATERNO,AP_MATERNO,NO_HIJO_TRABAJADOR,TO_CHAR(FE_NACIMIENTO,'yyyy-mm-dd') AS FE_NACIMIENTO, ES_SEXO, ES_TIPO_DOC, NU_DOC, ES_PRESENTA_DOCUMENTO, ES_INSCRIPCION_VIG_ESSALUD, ES_ESTUDIO_NIV_SUPERIOR, US_CREACION,FE_CREACION,US_MODIF,FE_MODIF,IP_USUARIO,ES_DATOS_HIJO_TRABAJADOR from RHTD_DATOS_HIJO_TRABAJADOR where ID_TRABAJADOR='" + id + "'";
         List<Datos_Hijo_Trabajador> Lista = new ArrayList<Datos_Hijo_Trabajador>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -74,7 +79,7 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
                 t.setId_datos_hijos_trabajador(rs.getString("id_datos_hijos_trabajador"));
                 t.setId_trabajador(rs.getString("id_trabajador"));
                 t.setAp_paterno(rs.getString("ap_paterno"));
-                t.setAp_materno(rs.getString("Ap_materno"));
+                t.setAp_materno(rs.getString("ap_materno"));
                 t.setNo_hijo_trabajador(rs.getString("no_hijo_trabajador"));
                 t.setFe_nacimiento(rs.getString("fe_nacimiento"));
                 t.setEs_sexo(rs.getString("es_sexo"));
@@ -116,12 +121,12 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
     }
 
     @Override
-    public void MOD_HIJOS_TRAB(String ID_DATOS_HIJOS_TRABAJADOR, String AP_PATERNO, String AP_MATERNO, String NO_HIJO_TRABAJADOR, String FE_NACIMIENTO, String ES_SEXO, String ES_TIPO_DOC, String NU_DOC,  String ES_INSCRIPCION_VIG_ESSALUD, String ES_ESTUDIO_NIV_SUPERIOR) {
+    public void MOD_HIJOS_TRAB(String ID_DATOS_HIJOS_TRABAJADOR, String AP_PATERNO, String AP_MATERNO, String NO_HIJO_TRABAJADOR, String FE_NACIMIENTO, String ES_SEXO, String ES_TIPO_DOC, String NU_DOC, String ES_INSCRIPCION_VIG_ESSALUD, String ES_ESTUDIO_NIV_SUPERIOR) {
         CallableStatement cst;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             cst = conn.conex.prepareCall("{CALL RHSP_MOD_HIJOS( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )}");
-            cst.setString(1, ID_DATOS_HIJOS_TRABAJADOR );
+            cst.setString(1, ID_DATOS_HIJOS_TRABAJADOR);
             cst.setString(2, AP_PATERNO);
             cst.setString(3, AP_MATERNO);
             cst.setString(4, NO_HIJO_TRABAJADOR);
@@ -142,15 +147,15 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
 
     @Override
     public void ELIMINAR_HIJO(String id_hijo, String id_id_trabajador) {
-         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-         String sql = "UPDATE RHTD_DATOS_HIJO_TRABAJADOR SET ES_DATOS_HIJO_TRABAJADOR = '0' WHERE ID_TRABAJADOR = '"+id_id_trabajador+"' and ID_DATOS_HIJOS_TRABAJADOR = '"+id_hijo+"'";
-         ResultSet rs = this.conn.query(sql);
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "UPDATE RHTD_DATOS_HIJO_TRABAJADOR SET ES_DATOS_HIJO_TRABAJADOR = '0' WHERE ID_TRABAJADOR = '" + id_id_trabajador + "' and ID_DATOS_HIJOS_TRABAJADOR = '" + id_hijo + "'";
+        ResultSet rs = this.conn.query(sql);
     }
 
     @Override
     public List<Datos_Hijo_Trabajador> LISTA_HIJO(String idHijo, String idtr) {
-         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT ID_DATOS_HIJOS_TRABAJADOR,ID_TRABAJADOR,AP_PATERNO,AP_MATERNO,NO_HIJO_TRABAJADOR,to_char(FE_NACIMIENTO,'yyyy-mm-dd')fe_nacimiento , ES_SEXO,ES_TIPO_DOC,NU_DOC, ES_PRESENTA_DOCUMENTO, ES_INSCRIPCION_VIG_ESSALUD, ES_ESTUDIO_NIV_SUPERIOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, ES_DATOS_HIJO_TRABAJADOR from RHTD_DATOS_HIJO_TRABAJADOR where ID_TRABAJADOR='" +idtr.trim()+ "' and ID_DATOS_HIJOS_TRABAJADOR ='"+idHijo.trim()+"'";
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT ID_DATOS_HIJOS_TRABAJADOR,ID_TRABAJADOR,AP_PATERNO,AP_MATERNO,NO_HIJO_TRABAJADOR,to_char(FE_NACIMIENTO,'yyyy-mm-dd')fe_nacimiento , ES_SEXO,ES_TIPO_DOC,NU_DOC, ES_PRESENTA_DOCUMENTO, ES_INSCRIPCION_VIG_ESSALUD, ES_ESTUDIO_NIV_SUPERIOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, ES_DATOS_HIJO_TRABAJADOR from RHTD_DATOS_HIJO_TRABAJADOR where ID_TRABAJADOR='" + idtr.trim() + "' and ID_DATOS_HIJOS_TRABAJADOR ='" + idHijo.trim() + "'";
         List<Datos_Hijo_Trabajador> Lista = new ArrayList<Datos_Hijo_Trabajador>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -181,7 +186,7 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
             this.conn.close();
         }
         return Lista;
-        
+
     }
 
 }

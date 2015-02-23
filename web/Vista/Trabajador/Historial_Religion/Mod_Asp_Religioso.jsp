@@ -152,8 +152,8 @@
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select name="RELIGION"   required=""   class="form-control input-group-sm" id="reli">
                                                                                 <option value="" disabled="" selected="">[SELECCIONE]</option> 
-                                                                                <%if(trb.getLi_religion() != null){
-                                                                                    if (trb.getLi_religion().equals("1")) {%>
+                                                                                <%if (trb.getLi_religion() != null) {
+                                                                                        if (trb.getLi_religion().equals("1")) {%>
                                                                                 <option value="1" selected="">Adventida</option> 
                                                                                 <option value="2" >Catlico</option> 
                                                                                 <option value="3" >Ótros</option> 
@@ -168,7 +168,7 @@
                                                                                 <option value="2" >Catlico</option> 
                                                                                 <option value="3" selected="">Ótros</option> 
                                                                                 <%}
-                                                                                    }else{%>
+                                                                                } else {%>
                                                                                 <option value="1" >Adventida</option> 
                                                                                 <option value="2" >Catlico</option> 
                                                                                 <option value="3" >Ótros</option> 
@@ -201,7 +201,7 @@
                                                                                     out.print(trb.getDe_cargo());
                                                                                 } else {
                                                                                     out.print("");
-                                                                                }%>" type="text" name="CARGO"  required=""  >
+                                                                                }%>" type="text" name="CARGO" >
 
                                                                         </div>
                                                                     </div>
@@ -270,18 +270,22 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                               
-                                                              
+
+
 
                                                             </div>
 
                                                         </div>
-                                                                                  <%String idtr = request.getParameter("idtr");%>
-                                                                <input type="hidden" value="<%=idtr%>" name="idtr">
-                                                                <input type="hidden" value="Modificar_Asp_Rel" name="opc">
-                                                                <center>
-                                                                <input type="submit" value="Modificar" >
-                                                                </center>
+                                                        <%String idtr = request.getParameter("idtr");%>
+                                                        <input type="hidden" value="<%=idtr%>" name="idtr">
+                                                        <input type="hidden" value="Modificar_Asp_Rel" name="opc">
+                                                        <center>
+                                                            <button type="submit" class="btn btn-labeled btn-info" name="opc">
+                                                                <span class="btn-label">
+                                                                    <i class="glyphicon glyphicon-pencil"></i>
+                                                                </span>Modificar
+                                                            </button>
+                                                        </center>
                                                     </div>
                                                 </div>
 

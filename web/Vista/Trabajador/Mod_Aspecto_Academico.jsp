@@ -330,6 +330,9 @@
             label{
                 font-weight: bold;
             }
+            p{
+                font-weight: bold;
+            }
         </style>
 
 
@@ -498,7 +501,7 @@
                                                                             <%
                                                                                                 }
                                                                                             }
-                                                                                            
+
                                                                                         }
                                                                                     }
 
@@ -529,7 +532,7 @@
                                                                             <%}
                                                                                     }
                                                                                 }
-                                                                               %>
+                                                                            %>
                                                                         </select>
                                                                     </div>
                                                                 </div>
@@ -676,7 +679,7 @@
                                                                             <option value="1" >BBVA</option>
                                                                             <option value="2" >BCP</option>
                                                                             <option value="3" >Otros</option>
-                                                                           <% }%>
+                                                                            <% }%>
                                                                         </select>
                                                                     </div>
                                                                 </div>
@@ -687,10 +690,10 @@
                                                                     <label>Nombre del Banco:</label>
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
-                                                                        <%if (cs.getNo_banco_otros() != null) {%>
+                                                                            <%if (cs.getNo_banco_otros() != null) {%>
                                                                         <input class="form-control input-group-sm" value="<%=cs.getNo_banco_otros()%>"   type="text" name="BANCO_OTROS" id="nu_cuen_otros" maxlength="30">
                                                                         <%} else {%>
-                                                                       <input class="form-control input-group-sm" value=""   type="text" name="BANCO_OTROS" id="nu_cuen_otros" maxlength="30">
+                                                                        <input class="form-control input-group-sm" value=""   type="text" name="BANCO_OTROS" id="nu_cuen_otros" maxlength="30">
                                                                         <%}%>
                                                                     </div>
                                                                 </div>
@@ -700,10 +703,10 @@
                                                                     <label>Nro de Cuenta:</label>
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
-                                                                        <%if (cs.getNu_cuenta() != null) {%>
+                                                                            <%if (cs.getNu_cuenta() != null) {%>
                                                                         <input class="form-control input-group-sm" value="<%=cs.getNu_cuenta()%>"   type="text" name="CUENTA" id="nu_cuen" maxlength="30">
                                                                         <%} else {%>
-                                                                       <input class="form-control input-group-sm" value=""   type="text" name="CUENTA" id="nu_cuen" maxlength="30">
+                                                                        <input class="form-control input-group-sm" value=""   type="text" name="CUENTA" id="nu_cuen" maxlength="30">
                                                                         <%}%>
                                                                     </div>
                                                                 </div>
@@ -714,39 +717,52 @@
                                                                     <label>Nro de Cuenta Bancaria:</label>
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
-                                                                        <%if (cs.getNu_cuenta_banc() != null) {%>
+                                                                            <%if (cs.getNu_cuenta_banc() != null) {%>
                                                                         <input class="form-control input-group-sm" value="<%=cs.getNu_cuenta_banc()%>"   type="text" name="CUENTA_BANC" id="nu_cuen_ban" maxlength="30">
                                                                         <%} else {%>
-                                                                       <input class="form-control input-group-sm" value=""   type="text" name="CUENTA_BANC" id="nu_cuen_ban" maxlength="30">
+                                                                        <input class="form-control input-group-sm" value=""   type="text" name="CUENTA_BANC" id="nu_cuen_ban" maxlength="30">
                                                                         <%}%>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-sm-4" id="generar" >
-                                                                <div class="form-group">
-                                                                    <div class="input-g">
-                                                                        <%if(cs.getEs_gem_nu_cuenta().trim().equals("1")){%>
-                                                                        <input type="checkbox" checked="" name="GEN_NU_CUEN" id="subscription"  value="1">
-                                                                        <%}else{%>
-                                                                        <input type="checkbox"  name="GEN_NU_CUEN" id="subscription"  value="1">
-                                                                        <%}%>
-                                                                        <i></i>Generar Nro de Cuenta Bancaria
-                                                                    </div>
-                                                                </div>
-                                                            </div> 
-
-                                                            <%}
-                                                                 %>
-                                                            <input type="hidden" value="0" name="ES_CUENTA_SUELDO" id="es_cuenta"/>
-
-                                                            <%String idtr = request.getParameter("idtr");%>
-                                                            <input type="hidden" name="idtr" value="<%=idtr%>"/>
-                                                            <input type="hidden" name="opc" value="Modificar_Asp_Acad">
                                                         </div>
+
+                                                        <div class="col-sm-4" id="texto" >
+                                                            <div class="form-group">
+                                                                <div class="input-g">
+                                                                    <p >Autorizo a la UPeU gestionar mi cuenta de sueldo en el BBVA Banco Continental, para tal efecto adjunto copia legible y vigente de mi DNI   </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>   
+                                                        <div class="col-sm-4" id="generar" >
+                                                            <div class="form-group">
+                                                                <div class="input-g">
+                                                                    <%if (cs.getEs_gem_nu_cuenta().trim().equals("1")) {%>
+                                                                    <input type="checkbox" checked="" name="GEN_NU_CUEN" id="subscription"  value="1">
+                                                                    <%} else {%>
+                                                                    <input type="checkbox"  name="GEN_NU_CUEN" id="subscription"  value="1">
+                                                                    <%}%>
+                                                                    <i></i>Generar Nro de Cuenta Bancaria
+                                                                </div>
+                                                            </div>
+                                                        </div> 
+
+                                                        <%}
+                                                        %>
+                                                        <input type="hidden" value="0" name="ES_CUENTA_SUELDO" id="es_cuenta"/>
+
+                                                        <%String idtr = request.getParameter("idtr");%>
+                                                        <input type="hidden" name="idtr" value="<%=idtr%>"/>
+                                                        <input type="hidden" name="opc" value="Modificar_Asp_Acad">
+
                                                     </div>
                                                     <div >
                                                         <center>
-                                                            <button type="submit" value="" name="opc"> MODIFICAR</button>
+                                                            <button type="submit" class="btn btn-labeled btn-info" name="opc">
+                                                                <span class="btn-label">
+                                                                    <i class="glyphicon glyphicon-pencil"></i>
+                                                                </span>Modificar
+                                                            </button>
                                                         </center>
                                                     </div>
                                                     <%}%>
@@ -977,6 +993,7 @@
                     $("#no_cuen_ban").hide();
                     $("#generar").hide();
                     $("#no_cuen_otros").hide();
+                    $("#texto").hide();
                     if ($("#banco").val() == "1") {
                         $("#no_cuen").show();
                     }
@@ -991,6 +1008,8 @@
                     if ($("#banco").val() == "0") {
                         $("#generar").show();
                         $("#no_cuen_otros").show();
+                        document.getElementById("nu_cuen_otros").readOnly = true;
+                        $("#texto").show();
                     }
 
                     //alert($("#es_cuenta").val());
@@ -1111,6 +1130,7 @@
                 $("#nu_cuen").mask("0011-9999999999999999", {placeholder: "X"});
                 $("#no_cuen_otros").hide();
                 $("#nu_cuen_otros").val("");
+                 $("#texto").hide();
             }
             if (banco == '2') {
                 $("#generar").hide();
@@ -1124,6 +1144,7 @@
                 $("#nu_cuen").mask("99999999999999", {placeholder: "X"});
                 $("#no_cuen_otros").hide();
                 $("#nu_cuen_otros").val("");
+                 $("#texto").hide();
             }
             if (banco == '3') {
                 $("#no_cuen").show();
@@ -1137,7 +1158,8 @@
                 $("#nu_cuen_otros").attr("required", "required");
                 $("#generar").hide();
                 $("#subscription").attr('checked', false);
-                 document.getElementById("nu_cuen_otros").readOnly = false;
+                document.getElementById("nu_cuen_otros").readOnly = false;
+                 $("#texto").hide();
             }
             if (banco == '0') {
                 $("#no_cuen").hide();
@@ -1147,6 +1169,7 @@
                 $("#no_cuen_otros").show();
                 $("#nu_cuen_otros").val("BBVA Banco Continental");
                 document.getElementById("nu_cuen_otros").readOnly = true;
+                $("#texto").show();
                 $("#generar").show();
                 $("#subscription").attr("required", "required");
                 $("#nu_cuen_otros").attr("required", "required");
@@ -1702,7 +1725,7 @@
 </body>
 
 </html>
-<%}else {
+<%} else {
         response.sendRedirect("/TALENTO_HUMANO/");
     }
 
