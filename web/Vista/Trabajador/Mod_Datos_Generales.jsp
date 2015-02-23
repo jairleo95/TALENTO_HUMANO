@@ -392,7 +392,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                           
+
                                                                 <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <label >Apellido Materno:</label>
@@ -736,9 +736,9 @@
                                                                         <label>Correo Institucional:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-envelope fa-lg fa-fw"></i></span>
-                                                                            <%if(t.getDi_correo_inst() != null ){%>
+                                                                                <%if (t.getDi_correo_inst() != null) {%>
                                                                             <input type="email" name="CORREO_INST" value="<%=t.getDi_correo_inst()%>" required=""  maxlength="100" class="form-control input-group-sm" >
-                                                                            <%}else{%>
+                                                                            <%} else {%>
                                                                             <input type="email" name="CORREO_INST" value="" required=""  maxlength="100" class="form-control input-group-sm" >
                                                                             <%}%>
                                                                         </div>
@@ -880,8 +880,8 @@
                                                                             <select name="TIPO_TRABAJADOR_ID" class="form-control input-group-sm"  required="">
                                                                                 <option value="">[SELECCIONE]</option>
 
-                                                                                <% if (t.getLi_tipo_trabajador() != null){  
-                                                                                if (t.getLi_tipo_trabajador().trim().equals("T")) {%>
+                                                                                <% if (t.getLi_tipo_trabajador() != null) {
+                                                                                        if (t.getLi_tipo_trabajador().trim().equals("T")) {%>
                                                                                 <option value="T" selected >Trabajador</option>
                                                                                 <option value="A">Alumno</option>
                                                                                 <%}
@@ -889,7 +889,7 @@
                                                                                 <option value="T">Trabajador</option>
                                                                                 <option value="A" selected="">Alumno</option>
                                                                                 <%}
-                                                                                }else{%>
+                                                                                } else {%>
                                                                                 <option value="T">Trabajador</option>
                                                                                 <option value="A">Alumno</option>
                                                                                 <%}%>
@@ -905,7 +905,12 @@
                                                             <input type="hidden" name="opc" value="Modificar_Dat_Gen">
 
                                                             <center>
-                                                                <button type="submit" value="" name="opc"> MODIFICAR</button>
+                                                               <!-- <button type="submit" value="" name="opc"> MODIFICAR</button>-->
+                                                                <button type="submit" class="btn btn-labeled btn-info" name="opc">
+                                                                    <span class="btn-label">
+                                                                        <i class="glyphicon glyphicon-pencil"></i>
+                                                                    </span>Modificar
+                                                                </button>
                                                             </center>
 
                                                         </div>

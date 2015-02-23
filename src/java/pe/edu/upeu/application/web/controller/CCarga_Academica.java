@@ -12,12 +12,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import pe.edu.upeu.application.dao.Carga_AcademicaDAO;
+import pe.edu.upeu.application.dao.Carrera_UniversidadDAO;
 import pe.edu.upeu.application.dao.DireccionDAO;
 import pe.edu.upeu.application.dao.ListaDAO;
 import pe.edu.upeu.application.dao.Tipo_DocumentoDAO;
 import pe.edu.upeu.application.dao.TrabajadorDAO;
 import pe.edu.upeu.application.dao.UbigeoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceCarga_AcademicaDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceCarrera_UniversidadDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTipo_DocumentoDAO;
@@ -49,6 +51,7 @@ public class CCarga_Academica extends HttpServlet {
         InterfaceListaDAO li = new ListaDAO();
         InterfaceUbigeoDAO ub = new UbigeoDAO();
         InterfaceDireccionDAO dir = new DireccionDAO();
+        InterfaceCarrera_UniversidadDAO cu = new Carrera_UniversidadDAO();
         InterfaceTipo_DocumentoDAO tdoc = new Tipo_DocumentoDAO();
         String opc = request.getParameter("opc");
         CCriptografiar cripto = new CCriptografiar();
@@ -73,10 +76,10 @@ public class CCarga_Academica extends HttpServlet {
                 String ap_p = request.getParameter("ap_p");
                 String ap_m = request.getParameter("ap_m");
                 String ti_doc = request.getParameter("ti_doc");
-             //   response.sendRedirect("Vista/Trabajador/Reg_Trabajador.jsp?nro_doc=" + dni + "&ap_p=" + ap_p + "&ap_m=" + ap_m + "&ti_doc=" + ti_doc + "&no_tr=" + no_trabajador);
-
+                   response.sendRedirect("Vista/Trabajador/Reg_Trabajador.jsp?nro_doc=" + dni + "&ap_p=" + ap_p + "&ap_m=" + ap_m + "&ti_doc=" + ti_doc + "&no_tr=" + no_trabajador);
             } else {
                 getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+              
                 //response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?" + "id=" + cripto.Encriptar("idtr:" + idtr));
                 response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?" + "idtr=" + idtr);
             }

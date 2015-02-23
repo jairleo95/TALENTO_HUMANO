@@ -322,7 +322,11 @@
                                                 <input type="hidden" name="opc" value="MODIFICAR_PMC">
                                                 <footer>
                                                     <center>
-                                                        <button type="submit" value="" name="opc"> MODIFICAR</button>
+                                                        <button type="submit" class="btn btn-labeled btn-info" name="opc">
+                                                            <span class="btn-label">
+                                                                <i class="glyphicon glyphicon-pencil"></i>
+                                                            </span>Modificar
+                                                        </button>
                                                     </center>
                                                 </footer>
                                                 <%
@@ -454,16 +458,16 @@
     <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script>
-            if (!window.jQuery) {
-                document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
-            }
+                                                    if (!window.jQuery) {
+                                                        document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                                                    }
     </script>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script>
-            if (!window.jQuery.ui) {
-                document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-            }
+                                                    if (!window.jQuery.ui) {
+                                                        document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                                                    }
     </script>
 
     <!-- IMPORTANT: APP CONFIG -->
@@ -526,206 +530,206 @@
     <script src="../../../js/plugin/fuelux/wizard/wizard.min.js"></script>
     <script type="text/javascript" src="../../../js/JQuery/jquery.numeric.js"></script>
 
-<script>
-        $(document).ready(function() {
-            var b = $(".tbodys");
+    <script>
+                                                        $(document).ready(function() {
+                                                            var b = $(".tbodys");
 
-            $("#btnfiltrar").click(
-                    function() {
-
-
-                        $.post("../../../ajax/Ajax_Conyugue/Ajax_Busc_Conyug.jsp", $("#frm_filtro").serialize(), function(objJson) {
-                            b.empty();
-                            var list = objJson.lista;
-                            for (var i = 0; i < list.length; i++) {
-                                b.append("<tr>");
-                                b.append("<td>" + list[i].NOM + " " + list[i].AP_PA + " " + list[i].AP_MA + "</td>");
-                                b.append("<td>" + list[i].NU_DOC + "</td>");
-                                b.append("<input type ='hidden' class='trab_" + i + "' value='" + list[i].ID_TRAB + "' />");
-                                b.append("<input type ='hidden' class='nac_" + i + "' value='" + list[i].NAC + "' />");
-                                b.append("<input type ='hidden' class='dni_" + i + "' value='" + list[i].NU_DOC + "' />");
-                                b.append("<input type ='hidden' class='tipo_" + i + "' value='" + list[i].TIPO + "' />");
-                                b.append("<input type ='hidden' class='nom_ape_" + i + "' value='" + list[i].NOM + " " + list[i].AP_PA + " " + list[i].AP_MA + "' />");
-                                if (typeof (list[i].ID_C) === "undefined") {
-
-                                    b.append('<td><button type="button" class="btn btn-primary btn-add-conyugue" value="' + i + '" data-dismiss="modal">Agregar</button></td>');
-                                } else {
-                                    b.append('<td>Tiene conyugue</td>');
-                                }
-                                b.append("</tr>");
-
-                            }
-
-                            $(".btn-add-conyugue").click(function() {
-                                var v = $(this).val();
-                                $(".nom_c").val($(".nom_ape_" + v).val());
-                                $(".f_nac").val($(".nac_" + v).val());
-                                $(".ti_documento").val($(".tipo_" + v).val());
-                                $(".num_doc").val($(".dni_" + v).val());
-                                $(".cony").val($(".trab_" + v).val());
+                                                            $("#btnfiltrar").click(
+                                                                    function() {
 
 
+                                                                        $.post("../../../ajax/Ajax_Conyugue/Ajax_Busc_Conyug.jsp", $("#frm_filtro").serialize(), function(objJson) {
+                                                                            b.empty();
+                                                                            var list = objJson.lista;
+                                                                            for (var i = 0; i < list.length; i++) {
+                                                                                b.append("<tr>");
+                                                                                b.append("<td>" + list[i].NOM + " " + list[i].AP_PA + " " + list[i].AP_MA + "</td>");
+                                                                                b.append("<td>" + list[i].NU_DOC + "</td>");
+                                                                                b.append("<input type ='hidden' class='trab_" + i + "' value='" + list[i].ID_TRAB + "' />");
+                                                                                b.append("<input type ='hidden' class='nac_" + i + "' value='" + list[i].NAC + "' />");
+                                                                                b.append("<input type ='hidden' class='dni_" + i + "' value='" + list[i].NU_DOC + "' />");
+                                                                                b.append("<input type ='hidden' class='tipo_" + i + "' value='" + list[i].TIPO + "' />");
+                                                                                b.append("<input type ='hidden' class='nom_ape_" + i + "' value='" + list[i].NOM + " " + list[i].AP_PA + " " + list[i].AP_MA + "' />");
+                                                                                if (typeof (list[i].ID_C) === "undefined") {
 
+                                                                                    b.append('<td><button type="button" class="btn btn-primary btn-add-conyugue" value="' + i + '" data-dismiss="modal">Agregar</button></td>');
+                                                                                } else {
+                                                                                    b.append('<td>Tiene conyugue</td>');
+                                                                                }
+                                                                                b.append("</tr>");
 
-                                //$(".select-conyugue").val("1");
-                            });
-                        }
-                        );
+                                                                            }
+
+                                                                            $(".btn-add-conyugue").click(function() {
+                                                                                var v = $(this).val();
+                                                                                $(".nom_c").val($(".nom_ape_" + v).val());
+                                                                                $(".f_nac").val($(".nac_" + v).val());
+                                                                                $(".ti_documento").val($(".tipo_" + v).val());
+                                                                                $(".num_doc").val($(".dni_" + v).val());
+                                                                                $(".cony").val($(".trab_" + v).val());
 
 
 
-                    });
-            $(".btn-salir-busc, .close").click(function() {
 
-                $(".select-conyugue").val("0");
-            });
+                                                                                //$(".select-conyugue").val("1");
+                                                                            });
+                                                                        }
+                                                                        );
 
 
-            $(".select-conyugue").change(function() {
-                if ($(this).val() == "1") {
-                    $("#btn-mostrar").click();
-                }
-                if ($(this).val() == "0") {
-                    $(".nom_c").val("");
-                    $(".f_nac").val("");
-                    $(".ti_documento").val("");
-                    $(".num_doc").val("");
-                    $(".cony").val("");
 
-                }
+                                                                    });
+                                                            $(".btn-salir-busc, .close").click(function() {
 
-            }
-            );
-            $("#btncancel").click(
-                    function() {
-                        document.formulario.reset();
-                        b.empty();
-                        html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'
-                        $(".tbodys").html(html);
-                    }
-            );
+                                                                $(".select-conyugue").val("0");
+                                                            });
 
-        }
-        );
+
+                                                            $(".select-conyugue").change(function() {
+                                                                if ($(this).val() == "1") {
+                                                                    $("#btn-mostrar").click();
+                                                                }
+                                                                if ($(this).val() == "0") {
+                                                                    $(".nom_c").val("");
+                                                                    $(".f_nac").val("");
+                                                                    $(".ti_documento").val("");
+                                                                    $(".num_doc").val("");
+                                                                    $(".cony").val("");
+
+                                                                }
+
+                                                            }
+                                                            );
+                                                            $("#btncancel").click(
+                                                                    function() {
+                                                                        document.formulario.reset();
+                                                                        b.empty();
+                                                                        html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'
+                                                                        $(".tbodys").html(html);
+                                                                    }
+                                                            );
+
+                                                        }
+                                                        );
 
 
     </script>
 
     <script type="text/javascript">
 
-            // DO NOT REMOVE : GLOBAL FUNCTIONS!
+        // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-            $(document).ready(function() {
+        $(document).ready(function() {
 
-                pageSetUp();
-
-
+            pageSetUp();
 
 
-                var $validator = $("#wizard-1").validate({
-                    rules: {
-                        email: {
-                            required: true,
-                            email: "Your email address must be in the format of name@domain.com"
-                        },
-                        FECHA_NAC: {
-                            required: true,
-                            val_fecha: true
-                        }
-                        ,
-                        FECHA_NAC_H: {
-                            val_fecha: true
-                        }
-                        ,
-                        fname: {
-                            required: true
-                        },
-                        lname: {
-                            required: true
-                        },
-                        country: {
-                            required: true
-                        },
-                        city: {
-                            required: true
-                        },
-                        postal: {
-                            required: true,
-                            minlength: 4
-                        },
-                        wphone: {
-                            required: true,
-                            minlength: 10
-                        },
-                        hphone: {
-                            required: true,
-                            minlength: 10
-                        }
+
+
+            var $validator = $("#wizard-1").validate({
+                rules: {
+                    email: {
+                        required: true,
+                        email: "Your email address must be in the format of name@domain.com"
                     },
-                    messages: {
-                        fname: "Please specify your First name",
-                        lname: "Please specify your Last name",
-                        email: {
-                            required: "We need your email address to contact you",
-                            email: "Your email address must be in the format of name@domain.com"
-                        }
-                    },
-                    highlight: function(element) {
-                        $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-                    },
-                    unhighlight: function(element) {
-                        $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
-                    },
-                    errorElement: 'span',
-                    errorClass: 'help-block',
-                    errorPlacement: function(error, element) {
-                        if (element.parent('.input-group').length) {
-                            error.insertAfter(element.parent());
-                        } else {
-                            error.insertAfter(element);
-                        }
+                    FECHA_NAC: {
+                        required: true,
+                        val_fecha: true
                     }
-                });
-                jQuery.validator.addMethod("val_fecha", function(value, element) {
-                    var d = value.split("-");
-                    return this.optional(element) || String(parseInt(d[0])).length == 4;
-                }, "¡Fecha ingresada invalida!");
-
-                $('#bootstrap-wizard-1').bootstrapWizard({
-                    'tabClass': 'form-wizard',
-                    'onNext': function(tab, navigation, index) {
-                        var $valid = $("#wizard-1").valid();
-                        if (!$valid) {
-                            $validator.focusInvalid();
-                            return false;
-                        } else {
-                            $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass(
-                                    'complete');
-                            $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).find('.step')
-                                    .html('<i class="fa fa-check"></i>');
-                        }
+                    ,
+                    FECHA_NAC_H: {
+                        val_fecha: true
                     }
+                    ,
+                    fname: {
+                        required: true
+                    },
+                    lname: {
+                        required: true
+                    },
+                    country: {
+                        required: true
+                    },
+                    city: {
+                        required: true
+                    },
+                    postal: {
+                        required: true,
+                        minlength: 4
+                    },
+                    wphone: {
+                        required: true,
+                        minlength: 10
+                    },
+                    hphone: {
+                        required: true,
+                        minlength: 10
+                    }
+                },
+                messages: {
+                    fname: "Please specify your First name",
+                    lname: "Please specify your Last name",
+                    email: {
+                        required: "We need your email address to contact you",
+                        email: "Your email address must be in the format of name@domain.com"
+                    }
+                },
+                highlight: function(element) {
+                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                },
+                unhighlight: function(element) {
+                    $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+                },
+                errorElement: 'span',
+                errorClass: 'help-block',
+                errorPlacement: function(error, element) {
+                    if (element.parent('.input-group').length) {
+                        error.insertAfter(element.parent());
+                    } else {
+                        error.insertAfter(element);
+                    }
+                }
+            });
+            jQuery.validator.addMethod("val_fecha", function(value, element) {
+                var d = value.split("-");
+                return this.optional(element) || String(parseInt(d[0])).length == 4;
+            }, "¡Fecha ingresada invalida!");
+
+            $('#bootstrap-wizard-1').bootstrapWizard({
+                'tabClass': 'form-wizard',
+                'onNext': function(tab, navigation, index) {
+                    var $valid = $("#wizard-1").valid();
+                    if (!$valid) {
+                        $validator.focusInvalid();
+                        return false;
+                    } else {
+                        $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass(
+                                'complete');
+                        $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).find('.step')
+                                .html('<i class="fa fa-check"></i>');
+                    }
+                }
+            });
+
+
+            // fuelux wizard
+            var wizard = $('.wizard').wizard();
+
+            wizard.on('finished', function(e, data) {
+                //$("#fuelux-wizard").submit();
+                //console.log("submitted!");
+                $.smallBox({
+                    title: "Congratulations! Your form was submitted",
+                    content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
+                    color: "#5F895F",
+                    iconSmall: "fa fa-check bounce animated",
+                    timeout: 4000
                 });
 
-
-                // fuelux wizard
-                var wizard = $('.wizard').wizard();
-
-                wizard.on('finished', function(e, data) {
-                    //$("#fuelux-wizard").submit();
-                    //console.log("submitted!");
-                    $.smallBox({
-                        title: "Congratulations! Your form was submitted",
-                        content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
-                        color: "#5F895F",
-                        iconSmall: "fa fa-check bounce animated",
-                        timeout: 4000
-                    });
-
-                });
+            });
 
 
-            })
+        })
 
     </script>
 
