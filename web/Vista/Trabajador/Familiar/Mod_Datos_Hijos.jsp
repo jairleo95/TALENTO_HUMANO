@@ -70,6 +70,16 @@
         <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
         <script type="text/javascript" src="../../../js/JQuery/jquery.numeric.js"></script>
         <link rel="stylesheet" href="../../../css/Css_Formulario/form.css"  type="text/css" > 
+
+        <style>
+            #btn-duplicar{
+                margin: 1%;
+                margin-left:  6%;
+            }
+            label{
+                font-weight: bold;
+            }
+        </style>
     </head>
     <body>
 
@@ -110,7 +120,7 @@
                                 <header>
                                     <center>
                                         <span class="widget-icon"> <i class="fa fa-male"></i> </span>
-                                        <h2>MODIFICAR INFORMACIÓN GENERAL</h2>
+                                        <h2>MODIFICAR DATOS DEL HIJO</h2>
                                     </center>
 
                                 </header>
@@ -182,7 +192,13 @@
                                                                     <label>Fecha de Nacimiento:</label>
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-child fa-lg fa-fw"></i><label class="edad"></label></span>
-                                                                        <input type="date" name="FECHA_NAC" required="" value="<%=d.getFe_nacimiento()%>"   class="form-control input-group-sm fecha" >
+                                                                        <input type="date" name="FECHA_NAC" required="" 
+                                                                               <%if (d.getFe_nacimiento() != null) {%>
+                                                                               value="<%=d.getFe_nacimiento()%>"   
+                                                                               <%} else {%>
+                                                                               value=""
+                                                                               <%}%>
+                                                                               class="form-control input-group-sm fecha" >
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -193,7 +209,8 @@
                                                                         <span class="input-group-addon"><i class="fa fa-flag fa-lg fa-fw"></i></span>
                                                                         <select name="SEXO" class="form-control input-group-sm"   required="" >
                                                                             <%
-                                                                                if (d.getEs_sexo().equals("M")) {
+                                                                                if (d.getEs_sexo() != null) {
+                                                                                    if (d.getEs_sexo().equals("M")) {
                                                                             %>
                                                                             <option value="M" selected="">Masculino</option>
                                                                             <option value="F" >Femennino</option>
@@ -204,6 +221,11 @@
                                                                             %>
                                                                             <option value="M" >Masculino</option>     
                                                                             <option value="F" selected="">Femennino</option>
+                                                                            <%}
+                                                                            } else {%>
+                                                                            <option value="" >[SELECCIONE]</option>     
+                                                                            <option value="M" >Masculino</option>     
+                                                                            <option value="F" >Femennino</option>  
                                                                             <%}
                                                                             %>
                                                                         </select>
@@ -216,9 +238,8 @@
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-flag fa-lg fa-fw"></i></span>
                                                                         <select  name="TIPO_DOC_ID" class="form-control input-group-sm"   required="" >
-                                                                            <option value=""></option>
-                                                                            <%
-                                                                                if (d.getEs_tipo_doc().equals("1")) {
+                                                                            <%if (d.getEs_tipo_doc() != null) {
+                                                                                    if (d.getEs_tipo_doc().equals("1")) {
                                                                             %>
                                                                             <option value="1" selected="">DNI</option>
                                                                             <option value="2">Partida</option>
@@ -229,6 +250,11 @@
                                                                             %>
                                                                             <option value="1">DNI</option>
                                                                             <option value="2" selected="">Partida</option>
+                                                                            <%}
+                                                                            } else {%>
+                                                                            <option value="" >[SELECCIONE]</option>     
+                                                                            <option value="1">DNI</option>
+                                                                            <option value="2" >Partida</option>
                                                                             <%}
                                                                             %>
                                                                         </select>
@@ -252,9 +278,8 @@
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-flag fa-lg fa-fw"></i></span>
                                                                         <select  name="INSCRIPCION_VIG_ESSALUD" class="form-control input-group-sm"   required="" >
-                                                                            <option value=""></option>
-                                                                            <%
-                                                                                if (d.getEs_inscripcion_vig_essalud().equals("1")) {
+                                                                            <%if (d.getEs_inscripcion_vig_essalud() != null) {
+                                                                                    if (d.getEs_inscripcion_vig_essalud().equals("1")) {
                                                                             %>
                                                                             <option value="1" selected="">Si</option>
                                                                             <option value="0">No</option>
@@ -265,6 +290,11 @@
                                                                             %>
                                                                             <option value="1">Si</option>
                                                                             <option value="0" selected="">No</option>
+                                                                            <%}
+                                                                            } else {%>
+                                                                            <option value="" >[SELECCIONE]</option>     
+                                                                            <option value="1">Si</option>
+                                                                            <option value="0">No</option> 
                                                                             <%}
                                                                             %>
                                                                         </select>
@@ -277,7 +307,6 @@
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-flag fa-lg fa-fw"></i></span>
                                                                         <select  name="ESTUD_NIV_SUPERIOR" class="form-control input-group-sm"   required="" >
-                                                                            <option  value="">[SLECCIONE]</option>
                                                                             <%if (d.getEs_estudio_niv_superior() != null) {
                                                                                     if (d.getEs_estudio_niv_superior().equals("1")) {
                                                                             %>
@@ -293,6 +322,7 @@
                                                                             <%}
                                                                             } else {
                                                                             %>
+                                                                            <option value="" >[SELECCIONE]</option>    
                                                                             <option  value="1" >Si</option>
                                                                             <option  value="0">No</option
                                                                             <%}%>
