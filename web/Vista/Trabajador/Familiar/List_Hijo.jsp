@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="pe.edu.upeu.application.model.Tipo_Documento"%>
 <%@page import="pe.edu.upeu.application.dao.Tipo_DocumentoDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceTipo_DocumentoDAO"%>
@@ -97,6 +98,7 @@
                     </thead>
                     <tbody>
                         <%
+                           // CConversion c = new CConversion();
                             InterfaceTipo_DocumentoDAO itd = new Tipo_DocumentoDAO();
                             for (int i = 0; i < LISTA_HIJO.size(); i++) {
                                 Datos_Hijo_Trabajador h = new Datos_Hijo_Trabajador();

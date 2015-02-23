@@ -331,7 +331,12 @@
                                                     <input type="hidden" name="idhijo" value="<%= d.getId_datos_hijos_trabajador()%>">
                                                     <input type="hidden" name="idtr" value="<%= d.getId_trabajador()%>">
                                                     <input type="hidden" name="opc" value="MODIFICAR HIJO">
-                                                    <footer>
+                                                    
+                                                    <%}%>
+
+
+
+                                                </div>
                                                         <center>
                                                             <button type="submit" class="btn btn-labeled btn-info" name="opc">
                                                                 <span class="btn-label">
@@ -339,12 +344,6 @@
                                                                 </span>Modificar
                                                             </button>
                                                         </center>
-                                                    </footer>
-                                                    <%}%>
-
-
-
-                                                </div>
                                                 <!-- end widget content -->
                                             </form>
 
