@@ -185,12 +185,27 @@
         <div   class="titulo" style=" width:100%;">Datos del Trabajador</div> 
         <div  class="jarviswidget well" id="wid-id-3" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
 
-            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-                Trabajador Nuevo
-                <%/*
-                     String id =  request.getParameter("id");
-                     out.print(cripto.Desencriptar(id));*/%>
-            </button>
+            <%                String hl = "";
+                String academico = request.getParameter("academico");
+                if (academico != null) {
+                    if (Boolean.valueOf(academico) == true) {
+                        hl = request.getParameter("hl");
+
+            %>
+            <div>
+                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                    Trabajador Nuevo
+                    <%/*
+                         String id =  request.getParameter("id");
+                         out.print(cripto.Desencriptar(id));*/%>
+                </button>
+                <button class="btn btn-default btn-sm" type="button">
+                    Procesar Carga Academica
+                </button>
+            </div>
+            <%}
+                }%>
+
             <table  style="background-color: white " class="table-det" cellpadding="0">
                 <%                    if (t.getNo_ar_foto() == null) {
                 %>
@@ -516,7 +531,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             &times;
                         </button>
-                        <h4 class="modal-title" id="myModalLabel">Article Post</h4>
+                        <h4 class="modal-title" id="myModalLabel">Carga Academica</h4>
                     </div>
                     <div class="modal-body">
                         <form>
@@ -547,7 +562,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="category"> Horas Laborables:</label>
-                                        <input type="text" class="form-control" value="" placeholder="0" required />
+                                        <%
+                                            if (hl != null) {
+                                        %>
+                                        <input type="text" class="form-control" value="<%=hl%>" placeholder="0" required />
+                                        <%} else {%>
+                                        <input type="text" class="form-control"  placeholder="0" required />
+                                        <%}%>
 
                                     </div>
                                 </div>

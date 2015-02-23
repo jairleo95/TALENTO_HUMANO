@@ -76,12 +76,14 @@ public class CCarga_Academica extends HttpServlet {
                 String ap_p = request.getParameter("ap_p");
                 String ap_m = request.getParameter("ap_m");
                 String ti_doc = request.getParameter("ti_doc");
-                   response.sendRedirect("Vista/Trabajador/Reg_Trabajador.jsp?nro_doc=" + dni + "&ap_p=" + ap_p + "&ap_m=" + ap_m + "&ti_doc=" + ti_doc + "&no_tr=" + no_trabajador);
+
+                response.sendRedirect("Vista/Trabajador/Reg_Trabajador.jsp?nro_doc=" + dni + "&ap_p=" + ap_p + "&ap_m=" + ap_m + "&ti_doc=" + ti_doc + "&no_tr=" + no_trabajador);
+
             } else {
+                String hl = request.getParameter("hl");
                 getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-              
                 //response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?" + "id=" + cripto.Encriptar("idtr:" + idtr));
-                response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?" + "idtr=" + idtr);
+                response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?" + "idtr=" + idtr + "&academico=true" + "&hl=" + hl);
             }
         }
     }
