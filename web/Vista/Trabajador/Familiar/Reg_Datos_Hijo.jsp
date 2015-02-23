@@ -78,7 +78,7 @@
                 <!-- widget content -->
                 <div class="widget-body no-padding">
 
-                    <form action="../../../familiar" id="checkout-form" class="smart-form" novalidate="novalidate">
+                    <form action="../../../familiar" id="checkout-form" class="smart-form" >
 
                         <header>
                             <b>HIJOS</b>
