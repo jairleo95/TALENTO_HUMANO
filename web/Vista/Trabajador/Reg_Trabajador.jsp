@@ -702,7 +702,8 @@
                                                                                 <option value="">[Sistema Pensionario]</option>
                                                                                 <option value="1">AFP</option>
                                                                                 <option value="2">ONP</option>
-                                                                                <option value="4">Sin Régimen Provisional(jubilado, cesante).</option>
+                                                                                <option value="3">Sin Régimen Provisional(jubilado, cesante).</option>
+                                                                                <option value="4">Fuera de Planilla</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
