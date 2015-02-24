@@ -860,7 +860,7 @@
                                                                 </div>
                                                                 <div class="col-sm-3">
                                                                     <div class="form-group">
-                                                                        <label>Afiliado ESSALUD-VIDA:</label>
+                                                                        <label>Afiliado ESSALUD-VIDA:<%out.print(t.getEs_afiliado_essalud());%></label>
                                                                         <div class="input-group" >
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select name="AFILIADO_ESSALUD_ID" class="form-control input-group-sm"  required="">
