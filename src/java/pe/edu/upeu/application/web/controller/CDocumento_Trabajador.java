@@ -31,9 +31,9 @@ import pe.edu.upeu.application.model.Renombrar;
 
 /**
  *
- * @author Jose
+ * @author joserodrigo
  */
-public class CDocumento extends HttpServlet {
+public class CDocumento_Trabajador extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -60,17 +60,16 @@ public class CDocumento extends HttpServlet {
 
         // try {
         if (opc != null) {
-            if(opc.equals("Eliminar")){
-                String id_doc_adj=request.getParameter("id_doc");
+            if (opc.equals("Eliminar")) {
+                String id_doc_adj = request.getParameter("id_doc");
                 d.Desactivar_doc(id_doc_adj);
                 int s = d.List_Req_nacionalidad(idtr);
                 int num_ad = d.List_Adventista(idtr);
-              
                 getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
-                getServletContext().setAttribute("List_doc_req_pla", d.List_doc_req_pla(dgp, idtr));
+                getServletContext().setAttribute("Lis_doc_trabajador", d.Lis_doc_trabajador(idtr));
                 getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
-                response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&iddgp=" + dgp + "&pro=pr_dgp");
-                
+                response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&iddgp=" + dgp + "&pro=pr_dgp");
+
             }
             if (opc.equals("Ver_Documento")) {
 
@@ -125,20 +124,20 @@ public class CDocumento extends HttpServlet {
                     //response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad);
                 }
             }
-              
+
             if (("Listar_doc").equals(opc)) {
-                 
+
                 int s = d.List_Req_nacionalidad(idtr);
                 int num_ad = d.List_Adventista(idtr);
                 int can_doc = d.count_documentos(dgp);
-              
+
                 getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
                 getServletContext().setAttribute("List_doc_req_pla", d.List_doc_req_pla(dgp, idtr));
                 getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
                 if (can_doc > 0) {
                     response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr + "&iddgp=" + dgp);
                 } else {
-                response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&iddgp=" + dgp + "&pro=pr_dgp");
+                    response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&iddgp=" + dgp + "&pro=pr_dgp");
                 }
             }
         } else {
@@ -146,7 +145,7 @@ public class CDocumento extends HttpServlet {
             //------>   ./var/www/html/files/   (con: pwd)
             String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Dgp\\Documento\\Archivo";
             //String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
-
+//out.print(ubicacion);
             DiskFileItemFactory f = new DiskFileItemFactory();
             f.setSizeThreshold(1024);
             f.setRepository(new File(ubicacion));
@@ -221,7 +220,7 @@ public class CDocumento extends HttpServlet {
                         if (fieldName.equals("archivos" + i) & item.getName() != null) {
                             if (!item.getName().equals("")) {
 
-                                // out.println(item.getFieldName() + " : " + item.getName());
+                                //out.println(item.getFieldName() + " : " + item.getName());
                                 nombre_archivo = String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + num + iddgp + "_" + item.getName().toUpperCase();
                                 no_original = item.getName();
                                 Thread thread = new Thread(new Renombrar(item, ubicacion, nombre_archivo));
@@ -243,8 +242,9 @@ public class CDocumento extends HttpServlet {
 
                         estado = ((estado == null) ? "0" : estado);
 
-                        String id = d.INSERT_DOCUMENTO_ADJUNTO(null, iddoc,"1" , user, null, null, null, null, desc, null, estado, id_ctr);
-                        d.INSERT_DGP_DOC_ADJ(null, iddgp, id, null,idtr);
+                        String id = d.INSERT_DOCUMENTO_ADJUNTO(null, iddoc, "1", user, null, null, null, null, desc, null, estado, id_ctr);
+                        //out.print(id);
+                        d.INSERT_DGP_DOC_tra(null, null, id, null, idtr);
                         for (int t = 0; t < list_files.size(); t++) {
                             String g[] = list_files.get(t).split(":");
 
@@ -265,24 +265,23 @@ public class CDocumento extends HttpServlet {
 
             }
 
+            getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
+            getServletContext().setAttribute("Documentos", d.Documentos());
+            getServletContext().setAttribute("Lis_doc_trabajador", d.Lis_doc_trabajador(idtr));
+            getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
+
+            int s = d.List_Req_nacionalidad(idtr);
+            int num_ad = d.List_Adventista(idtr);
             
-             getServletContext().setAttribute("List_doc_req_pla", d.List_doc_req_pla(iddgp, idtr));
 
-             int s = d.List_Req_nacionalidad(idtr);
-             int num_ad = d.List_Adventista(idtr);
-             getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
-             getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
+            out.print(idtr);
+            int count = d.count_documentos_x_tra(idtr);
+            if (count > 0) {
+                response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr );
+            } else {
+                response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&pro=pr_dgp");
+            }
 
-                 
-             if (pr != null) {
-             if (pr.equals("enter")) {
-             response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr + "&iddgp=" + iddgp);
-             }
-
-             } else {
-             response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&iddgp=" + iddgp);
-             }
-             
             /*} catch (FileUploadException e) {
              out.println("Error : " + e.getMessage());
              }*/
@@ -293,7 +292,6 @@ public class CDocumento extends HttpServlet {
          out.close();
          }*/
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -309,7 +307,7 @@ public class CDocumento extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(CDocumento.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CDocumento_Trabajador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -327,7 +325,7 @@ public class CDocumento extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(CDocumento.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CDocumento_Trabajador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

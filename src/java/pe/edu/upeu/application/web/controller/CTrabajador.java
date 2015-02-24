@@ -210,15 +210,16 @@ public class CTrabajador extends HttpServlet {
 
             //getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
-            getServletContext().setAttribute("List_doc_req_pla", d.List_doc_tra(idtr));
+            getServletContext().setAttribute("Documentos", d.Documentos());
+            getServletContext().setAttribute("Lis_doc_trabajador", d.Lis_doc_trabajador(idtr));
             getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
             int s = d.List_Req_nacionalidad(idtr);
             int num_ad = d.List_Adventista(idtr);
             int count = d.count_documentos_x_tra(idtr);
             if (count > 0) {
-                response.sendRedirect("Vista/trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr + "&iddgp=" + dgp);
+                response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr );
             } else {
-                response.sendRedirect("Vista/trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&iddgp=" + dgp + "&pro=pr_dgp");
+                response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&pro=pr_dgp");
             }
             //response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr + "&a=t");
         }
