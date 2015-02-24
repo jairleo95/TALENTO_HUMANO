@@ -113,12 +113,16 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(70, ID_CONYUGUE);
             cst.setString(71, CO_UNIVERSITARIO);
             cst.execute();
-        } catch (SQLException ex) {
-              throw new RuntimeException(ex.getMessage());
-        } catch (ParseException ex) {
-            Logger.getLogger(TrabajadorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR :"+e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
@@ -234,11 +238,15 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             }
 
         } catch (SQLException e) {
-
-            System.err.println("Error :" + e.getMessage());
-
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR :"+e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
@@ -346,8 +354,15 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             }
 
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR :"+e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
@@ -387,8 +402,15 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             }
 
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR :"+e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
 
@@ -459,9 +481,16 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(10, iduser);
             cst.setString(11, FE_MODIF);
             cst.execute();
-        } catch (SQLException ex) {
+      } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR :"+e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
@@ -478,9 +507,16 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(6, CL_AUTORIDAD);
             cst.setString(7, ID_TRABAJADOR);
             cst.execute();
-        } catch (SQLException ex) {
+       } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR :"+e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
@@ -503,9 +539,16 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 x.setCl_tra(rs.getString("cl_tra"));
                 Lista.add(x);
             }
-        } catch (SQLException e) {
+      } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR :"+e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return Lista;
     }
@@ -524,9 +567,16 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(7, ID_TRABAJADOR);
             cst.setString(8, ES_CUENTA_SUELDO);
             cst.execute();
-        } catch (SQLException ex) {
+      } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR :"+e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
@@ -560,9 +610,16 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(6, ID_TRABAJADOR);
             cst.setString(7, ES_CUENTA_SUELDO);
             cst.execute();
-        } catch (SQLException ex) {
+      } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR :"+e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
@@ -598,7 +655,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR");
+            throw new RuntimeException("ERROR :"+e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -632,7 +689,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR");
+            throw new RuntimeException("ERROR :"+e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -661,7 +718,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR");
+            throw new RuntimeException("ERROR :"+e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -686,7 +743,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR");
+            throw new RuntimeException("ERROR :"+e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -714,10 +771,10 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 list.add(cs);
             }
 
-        } catch (SQLException e) {
+       } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR");
+            throw new RuntimeException("ERROR :"+e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -756,7 +813,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR");
+            throw new RuntimeException("ERROR :"+e.getMessage());
         } finally {
             try {
                 this.conn.close();
