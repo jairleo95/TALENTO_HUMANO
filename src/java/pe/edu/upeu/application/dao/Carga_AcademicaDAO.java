@@ -5,6 +5,7 @@
  */
 package pe.edu.upeu.application.dao;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import pe.edu.upeu.application.dao_imp.InterfaceCarga_AcademicaDAO;
@@ -35,17 +36,63 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR: "+e.getMessage());
+            throw new RuntimeException("ERROR: " + e.getMessage());
         } finally {
             try {
                 this.conn.close();
             } catch (Exception e) {
-                 throw new RuntimeException(e.getMessage());
-                
+                throw new RuntimeException(e.getMessage());
+
             }
         }
         return idtr;
 
+    }
+
+    @Override
+    public void INSERT_CARGA_ACADEMICA(String ID_CARGA_ACADEMICA, String ES_CARGA_ACADEMICA, String CAMPUS, String ES_TIPO_DOC, String NU_DOC, String AP_PATERNO, String AP_MATERNO, String NO_TRABAJADOR, String NO_FACULTAD, String NO_EAP, String DE_CARGA, String NO_CURSO, String NU_GRUPO, String DE_HORARIO, int CA_HLAB, String DE_CONDICION, String DE_TIPO_CURSO, int CA_TIPO_HORA_PAGO, String FE_DESDE, String FE_HASTA, String ES_PROCESADO, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String NO_USUARIO) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_RHTM_CARGA_ACADEMICA( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )} ");
+            cst.setString(1, null);
+            cst.setString(2, ES_CARGA_ACADEMICA);
+            cst.setString(3, CAMPUS);
+            cst.setString(4, ES_TIPO_DOC);
+            cst.setString(5, NU_DOC);
+            cst.setString(6, AP_PATERNO);
+            cst.setString(7, AP_MATERNO);
+            cst.setString(8, NO_TRABAJADOR);
+            cst.setString(9, NO_FACULTAD);
+            cst.setString(10, NO_EAP);
+            cst.setString(11, DE_CARGA);
+            cst.setString(12, NO_CURSO);
+            cst.setString(13, NU_GRUPO);
+            cst.setString(14, DE_HORARIO);
+            cst.setInt(15, CA_HLAB);
+            cst.setString(16, DE_CONDICION);
+            cst.setString(17, DE_TIPO_CURSO);
+            cst.setInt(18, CA_TIPO_HORA_PAGO);
+            cst.setString(19, FE_DESDE);
+            cst.setString(20, FE_HASTA);
+            cst.setString(21, ES_PROCESADO);
+            cst.setString(22, US_CREACION);
+            cst.setString(23, FE_CREACION);
+            cst.setString(24, US_MODIF);
+            cst.setString(25, FE_MODIF);
+            cst.setString(26, IP_USUARIO);
+            cst.setString(27, NO_USUARIO);
+            cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR :" + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
     }
 
 }
