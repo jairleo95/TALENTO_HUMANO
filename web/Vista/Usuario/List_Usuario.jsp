@@ -67,7 +67,7 @@
                                                             </ul>
                                                         </div>
                                                     </td>
-                                                    <td class="name"><a href="../../Usuario?id_Usuario=<%=v.getId_usuario()%>&opc=Mod_Usuario_con"><%=v.getNo_trabajador() + " " + v.getAp_paterno() + " " + v.getAp_materno()%></a></td>
+                                                    <td class="name"><a href="../../trabajador?idtr=<%=v.getId_trabajador() %>&opc=list"><%=v.getNo_trabajador() + " " + v.getAp_paterno() + " " + v.getAp_materno()%></a></td>
                                                     <td><%=v.getNo_rol()%></td>
                                                     <td><%=v.getNo_puesto()%></td>
                                                     <td><%=v.getNo_seccion()%></td>
