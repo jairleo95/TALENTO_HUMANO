@@ -103,7 +103,6 @@
                 buttons: '[No][Yes]'
             }, function(ButtonPressed) {
                 if (ButtonPressed === "Yes") {
-                    alert(idUsuario + rol + nUsuario);
                     $.post("../../Usuario", "ID_USUARIO=" + idUsuario + "&IDROLES=" + rol + "&USUARIO=" + nUsuario + "&opc=Mod_Usuario_con_2", function() {
                         $.smallBox({
                             title: "Editar Usuario",

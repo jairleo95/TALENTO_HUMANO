@@ -26,7 +26,7 @@
         var asInitVals, i, label, th;
 
         //var sTableId = "table";
-        var sRangeFormat = "From {from} to {to}";
+        var sRangeFormat = "Desde {from} hasta {to}";
         //Array of the functions that will override sSearch_ parameters
         var afnSearch_ = new Array();
         var aiCustomSearch_Indexes = new Array();
@@ -439,7 +439,7 @@
 
 		function fnCreateDropdown(aData) {
 			var index = i;
-			var r = '<div class="dropdown select_filter form-control"><a class="dropdown-toggle" data-toggle="dropdown" href="#">' + label + '<b class="caret"></b></a><ul class="dropdown-menu" role="menu"><li data-value=""><a>Show All</a></li>', j, iLen = aData.length;
+			var r = '<div class="dropdown select_filter form-control"><a class="dropdown-toggle" data-toggle="dropdown" href="#">' + label + '<b class="caret"></b></a><ul class="dropdown-menu" role="menu"><li data-value=""><a>Mostrar Todo</a></li>', j, iLen = aData.length;
 
 			for (j = 0; j < iLen; j++) {
 				r += '<li data-value="' + aData[j] + '"><a>' + aData[j] + '</a></li>';
@@ -656,7 +656,7 @@
             sRangeSeparator: "~",
             iFilteringDelay: 500,
             aoColumns: null,
-            sRangeFormat: "From {from} to {to}",
+            sRangeFormat: "Desde {from} Hasta {to}",
             sDateFromToken: "from",
             sDateToToken: "to"
         };

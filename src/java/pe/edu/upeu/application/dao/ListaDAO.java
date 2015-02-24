@@ -179,8 +179,8 @@ public class ListaDAO implements InterfaceListaDAO {
         List<String> list = new ArrayList<String>();
         list.add("AFP");
         list.add("ONP");
-        list.add("Ninguno");
         list.add("Sin Régimen Privisional(juvilado,cesante).");
+        list.add("Fuera de Planilla");
         return list;
     }
 

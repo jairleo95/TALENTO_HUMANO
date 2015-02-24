@@ -86,7 +86,7 @@ public class CUsuario extends HttpServlet {
         if ("Modificar_clave_2".equals(opc)) {
             String id_usuario = request.getParameter("iduser");
             String No_Usuario = request.getParameter("No_Usuario");
-            String pw_an = request.getParameter("cl_nu_re");
+            String pw_an = request.getParameter("passwordNew2");
             usu.Mod_Pw(id_usuario, No_Usuario, pw_an);
             getServletContext().setAttribute("List_Usuario_var", usu.List_Usuario_var());
             response.sendRedirect("Vista/Usuario/Reg_Usuario.jsp");
@@ -131,7 +131,7 @@ public class CUsuario extends HttpServlet {
             //response.sendRedirect("Vista/Usuario/List_Usuario.jsp");
         }
         if ("Eliminar_Usuario".equals(opc)) {
-            String idUser= request.getParameter("id_usuario");
+            String idUser = request.getParameter("id_usuario");
             usu.Delete_Usuario(idUser);
             getServletContext().setAttribute("List_Usuario_var", usu.List_Usuario_var());
             response.sendRedirect("Vista/Usuario/List_Usuario.jsp");
@@ -174,9 +174,9 @@ public class CUsuario extends HttpServlet {
             String DIR_DOM_A_D5_ID = request.getParameter("DIR_DOM_A_D5_ID");
             String DIR_DOM_A_D6 = request.getParameter("DIR_DOM_A_D6");
             String DIR_DOM_A_REF = request.getParameter("DIR_DOM_A_REF");
-             String ID_TRABAJADOR = request.getParameter("ID_TR");
+            String ID_TRABAJADOR = request.getParameter("ID_TR");
 
-            usu.Mod_perfil(id_user_1, NO_USUARIO, CLA_NUEVA, TE_TRABAJADOR, CL_TRABAJADOR, CORREO_PERSONAL, id_dep, id_prov, DIR_DOM_A_D1_ID, DIR_DOM_A_D2, DIR_DOM_A_D3_ID, DIR_DOM_A_D4, DIR_DOM_A_D5_ID, DIR_DOM_A_D6, DIR_DOM_A_REF, DIR_DOM_A_DISTRITO_ID ,ID_TRABAJADOR);
+            usu.Mod_perfil(id_user_1, NO_USUARIO, CLA_NUEVA, TE_TRABAJADOR, CL_TRABAJADOR, CORREO_PERSONAL, id_dep, id_prov, DIR_DOM_A_D1_ID, DIR_DOM_A_D2, DIR_DOM_A_D3_ID, DIR_DOM_A_D4, DIR_DOM_A_D5_ID, DIR_DOM_A_D6, DIR_DOM_A_REF, DIR_DOM_A_DISTRITO_ID, ID_TRABAJADOR);
             getServletContext().setAttribute("Lista_Usuarios", usu.Val_Usuario(id_user_1));
             response.sendRedirect("Vista/Usuario/Perfil_Usuario.jsp");
         }
