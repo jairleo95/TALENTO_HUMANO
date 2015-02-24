@@ -758,22 +758,32 @@
                                                                                         if (t.getCo_sistema_pensionario().trim().equals("1")) {%>
                                                                                 <option value="1" selected="">AFP</option>
                                                                                 <option value="2">ONP</option>
-                                                                                <option value="4">Sin Régimen Provisional(jubilado, cesante).</option>
+                                                                                <option value="3">Sin Régimen Provisional(jubilado, cesante).</option>
+                                                                                <option value="4">Fuera de Planilla</option>
                                                                                 <%}
                                                                                     if (t.getCo_sistema_pensionario().trim().equals("2")) {%>
                                                                                 <option value="1">AFP</option>
                                                                                 <option value="2" selected="">ONP</option>
-                                                                                <option value="4">Sin Régimen Provisional(jubilado, cesante).</option>
+                                                                                <option value="3">Sin Régimen Provisional(jubilado, cesante).</option>
+                                                                                <option value="4">Fuera de Planilla</option>
+                                                                                <%}
+                                                                                    if (t.getCo_sistema_pensionario().trim().equals("3")) {%>
+                                                                                <option value="1">AFP</option>
+                                                                                <option value="2">ONP</option>
+                                                                                <option value="3" selected="">Sin Régimen Provisional(jubilado, cesante).</option>
+                                                                                <option value="4">Fuera de Planilla</option>
                                                                                 <%}
                                                                                     if (t.getCo_sistema_pensionario().trim().equals("4")) {%>
                                                                                 <option value="1">AFP</option>
                                                                                 <option value="2">ONP</option>
-                                                                                <option value="4" selected="">Sin Régimen Provisional(jubilado, cesante).</option>
+                                                                                <option value="3" >Sin Régimen Provisional(jubilado, cesante).</option>
+                                                                                <option value="4" selected="">Fuera de Planilla</option>
                                                                                 <%}
                                                                                 } else {%>
                                                                                 <option value="1">AFP</option>
                                                                                 <option value="2">ONP</option>
-                                                                                <option value="4">Sin Régimen Provisional(jubilado, cesante).</option>
+                                                                                <option value="3">Sin Régimen Provisional(jubilado, cesante).</option>
+                                                                                <option value="4">Fuera de Planilla</option>
                                                                                 <%}%>
                                                                             </select>
                                                                         </div>
@@ -850,7 +860,7 @@
                                                                 </div>
                                                                 <div class="col-sm-3">
                                                                     <div class="form-group">
-                                                                        <label>Afiliado ESSALUD-VIDA:</label>
+                                                                        <label>Afiliado ESSALUD-VIDA:<%out.print(t.getEs_afiliado_essalud());%></label>
                                                                         <div class="input-group" >
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select name="AFILIADO_ESSALUD_ID" class="form-control input-group-sm"  required="">
