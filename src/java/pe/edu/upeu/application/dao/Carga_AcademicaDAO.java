@@ -8,9 +8,13 @@ package pe.edu.upeu.application.dao;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import pe.edu.upeu.application.dao_imp.InterfaceCarga_AcademicaDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
+import pe.edu.upeu.application.model.Carga_Academica;
+import pe.edu.upeu.application.model.Carrera;
 
 /**
  *
@@ -119,6 +123,42 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
 
             }
         }
+    }
+
+    @Override
+    public List<Carga_Academica> ListCarAca() {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT * FROM RHVD_CARGA_ACADEMICA";
+        List<Carga_Academica> list = new ArrayList<Carga_Academica>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+
+            while (rs.next()) {
+                Carga_Academica ca = new Carga_Academica();
+                ca.setId_situacion_educativa(rs.getString("id_situacion_educativa"));
+                ca.setNo_s_educativa(rs.getString("no_s_educativa"));
+                ca.setProfesion_docente(rs.getString("profesion_docente"));
+                ca.setFe_desde(rs.getString("fe_desde"));
+                ca.setFe_hasta(rs.getString("fe_hasta"));
+                ca.setFe_creacion(rs.getString("fe_creacion"));
+                ca.setId_trabajador(rs.getString("id_trabajador"));
+                ca.setNu_doc(rs.getString("nu_doc"));
+                ca.setEs_tipo_doc(rs.getString("es_tipo_doc"));
+                ca.setNo_trabajador(rs.getString("no_trabajador"));
+                ca.setAp_paterno(rs.getString("ap_paterno"));
+                ca.setAp_materno(rs.getString("ap_materno"));
+                ca.setNo_eap(rs.getString("no_eap"));
+                ca.setNo_facultad(rs.getString("no_facultad"));
+                ca.setDe_condicion(rs.getString("de_condicion"));
+                ca.setDe_carga(rs.getString("de_carga"));
+                ca.setId_proceso_carga_ac(rs.getString("id_proceso_carga_ac"));
+                list.add(ca);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return list;
     }
 
 }

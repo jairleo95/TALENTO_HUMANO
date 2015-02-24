@@ -114,7 +114,7 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        <tr class="odd_gradeX" id="2">
+                        <tr class="" id="2">
                             <td class="read_only">Trident</td>
                             <td>Internet Explorer 4.0</td>
                             <td>Win 95+</td>
@@ -122,7 +122,7 @@
 
                             <td class="center">X</td>
                         </tr>
-                        <tr class="even_gradeC" id="4">
+                        <tr class="" id="4">
                             <td>Trident</td>
                             <td>Internet Explorer 5.0</td>
                             <td>Win 95+</td>
@@ -130,7 +130,7 @@
 
                             <td class="center">C</td>
                         </tr>
-                        <tr class="odd_gradeA" id="5">
+                        <tr class="" id="5">
                             <td>Trident</td>
                             <td>Internet Explorer 5.5</td>
                             <td>Win 95+</td>
@@ -138,7 +138,7 @@
 
                             <td class="center">A</td>
                         </tr>
-                        <tr class="even_gradeA" id="1">
+                        <tr class="" id="1">
                             <td>Trident</td>
                             <td class="read_only">Internet Explorer 6</td>
                             <td>Win 98+</td>
@@ -146,7 +146,7 @@
 
                             <td class="center">A</td>
                         </tr>
-                        <tr class="odd_gradeA" id="5">
+                        <tr class="" id="5">
                             <td>Trident</td>
                             <td>Internet Explorer 7</td>
                             <td class="read_only">Win XP SP2+</td>
@@ -154,7 +154,7 @@
 
                             <td class="center">A</td>
                         </tr>
-                        <tr class="even_gradeA" id="1">
+                        <tr class="" id="1">
                             <td>Trident</td>
                             <td>AOL browser (AOL desktop)</td>
                             <td>Win XP</td>
