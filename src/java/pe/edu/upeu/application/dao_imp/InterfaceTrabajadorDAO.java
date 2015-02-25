@@ -23,7 +23,8 @@ public interface InterfaceTrabajadorDAO {
 
     public boolean EliminarTrabajador(String id, String idc);
 
-    public List<V_Ficha_Trab_Num_C> ListarTrabajador(String iddep, String dni, String nom, String ape_p, String ape_m);
+    public List<V_Ficha_Trab_Num_C> Buscar_Ficha_Trabajador(String iddep, String dni, String nom, String ape_p, String ape_m);
+    public List<V_Ficha_Trab_Num_C> Buscar_Trabajador_Requerimiento(String iddep, String dni, String nom, String ape_p, String ape_m, String id_req);
 
     public List<V_Ficha_Trab_Num_C> ListaridTrabajador(String id);
 

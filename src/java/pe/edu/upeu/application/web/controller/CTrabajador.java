@@ -229,12 +229,13 @@ public class CTrabajador extends HttpServlet {
             String nom = request.getParameter("nom");
             String ape_mat = request.getParameter("ape_mat");
             String ape_pat = request.getParameter("ape_pat");
+            String id_req = request.getParameter("id_req");
             // String all = request.getParameter("all");
 
             if (("Buscar".equals(Buscar) & (!"".equals(dni) | !"".equals(nom) | !"".equals(ape_mat) | !"".equals(ape_pat)))) {
                 String busc = (String) request.getParameter("busc");
                 if (busc != null) {
-                    getServletContext().setAttribute("ListarTrabajador2", tr.ListarTrabajador(iddep, dni, nom, ape_pat, ape_mat));
+                    getServletContext().setAttribute("ListarTrabajador2", tr.Buscar_Trabajador_Requerimiento(iddep, dni, nom, ape_pat, ape_mat,id_req));
                     getServletContext().setAttribute(nom, dgp.VAL_OPC_DGP(dni));
                     response.sendRedirect("Vista/Dgp/Generar_Dgp.jsp?text=" + Text);
                 }
@@ -250,7 +251,7 @@ public class CTrabajador extends HttpServlet {
             String ape_mat = request.getParameter("ape_mat");
             String ape_pat = request.getParameter("ape_pat");
             if (("Buscar".equals(Buscar) & (!"".equals(dni) | !"".equals(nom) | !"".equals(ape_mat) | !"".equals(ape_pat)))) {
-                getServletContext().setAttribute("ListarTrabajador", tr.ListarTrabajador(iddep, dni, nom, ape_pat, ape_mat));
+                getServletContext().setAttribute("ListarTrabajador", tr.Buscar_Ficha_Trabajador(iddep, dni, nom, ape_pat, ape_mat));
                 getServletContext().setAttribute(nom, dgp.VAL_OPC_DGP(dni));
                 response.sendRedirect("Vista/Trabajador/Ficha_Trabajador.jsp");
             } else {
