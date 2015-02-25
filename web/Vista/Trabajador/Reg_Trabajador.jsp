@@ -328,8 +328,7 @@
                                 -->
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-check"></i> </span>
-                                    <h2>FICHA DE TRABAJADOR</h2>
-
+                                    <h2>FICHA DE TRABAJADO</h2>
                                 </header>
 
                                 <!-- widget div-->
@@ -341,7 +340,7 @@
 
                                     </div>
                                     <!-- end widget edit box -->
-                                    <%                                        String nombres = request.getParameter("no_tr");
+                                    <%  String nombres = request.getParameter("no_tr");
                                         String app = request.getParameter("ap_p");
                                         String apm = request.getParameter("ap_m");
                                         String tidoc = request.getParameter("ti_doc");
@@ -868,7 +867,6 @@
                                                             <!--  <input pattern=".{3,}" required title="3 characters minimum">
                                                             <input pattern=".{5,10}" required title="5 to 10 characters">-->
                                                             <div class="row">
-
                                                                 <div class="col-sm-12">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
@@ -1020,6 +1018,7 @@
                                                                     $("#no_cuen_otros").show();
                                                                     $("#nu_cuen_otros").val("");
                                                                     $("#nu_cuen_otros").attr("required", "required");
+                                                                     document.getElementById("nu_cuen_otros").readOnly = false;
                                                                     $("#generar").hide();
                                                                     $("#subscription").attr('checked', false);
                                                                     $("#texto").hide();

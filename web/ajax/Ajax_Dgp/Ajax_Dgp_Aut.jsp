@@ -41,14 +41,13 @@
             nom_ape = nom_ape.toUpperCase();
             
             sueldo = sueldo.toUpperCase();
-            seccion = seccion.toUpperCase();
-            puesto = puesto.toUpperCase();
+     
 
             sql += (!"".equals(nom_ape)) ? " AND  upper(NOMBRE_P)  like '%" + nom_ape + "%'" : "";
             sql += (!"".equals(sueldo)) ? "  and upper(ca_sueldo) like '%" + sueldo + "%'" : "";
             sql += (!"".equals(puesto)) ? "  and upper(no_puesto) like '%" + puesto + "%'" : "";
-//             sql +=(!"".equals(area))?"  and id_area='"+area.trim()+"'":"";
-            sql += (!"".equals(seccion)) ? "  and upper(no_seccion) like'%" + seccion + "%'" : "";
+            //sql +=(!"".equals(area))?"  and id_area='"+ area +"'":"";
+            //sql += (!"".equals(seccion)) ? "  and upper(no_seccion) like'%" + seccion + "%'" : "";
             //sql += (!"".equals(iduser)) ? "  and us_creacion='" + iduser.trim() + "'" : "";
             sql += (!"0".equals(req)) ? "  and id_requerimiento='" + req.trim() + "'" : "";
             // sql +=(!"".equals(proceso))?"  and dp.id_proceso='"+proceso+"'":"";
