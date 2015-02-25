@@ -920,11 +920,11 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            
+
                                                             <div class="col-sm-4" id="generar" >
                                                                 <div class="form-group">
                                                                     <p style="font-weight:bold;">Autorizo a la UPeU gestionar mi cuenta de sueldo en el BBVA Banco Continental, para tal efecto adjunto copia legible y vigente de mi DNI   </p>
-                                                                   
+
                                                                     <div class="input-g">
                                                                         <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="1">
                                                                         <i></i>Generar Nro de Cuenta Bancaria
@@ -1601,7 +1601,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-6">
 
                                                                     <div class="form-group">
 
@@ -1623,6 +1623,10 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
+
+
+                                                            </div>
+                                                            <div class="row">
                                                                 <div class="col-sm-3">
 
                                                                     <div class="form-group">
@@ -1648,11 +1652,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-
-
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
+                                                                <div class="col-sm-3">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-list-alt fa-lg fa-fw"></i></span>
@@ -1678,7 +1678,7 @@
 
                                                             <h3><strong>Paso 6</strong> - DATOS DE HIJO(S)</h3>   
                                                             <div class="row">
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
@@ -1687,7 +1687,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
@@ -1696,7 +1696,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-2">
+                                                                <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
@@ -1705,7 +1705,11 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-2">
+                                                            </div>
+
+
+                                                            <div class="row">
+                                                                <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-calendar fa-lg fa-fw"></i></span>
@@ -1713,7 +1717,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-2">
+                                                                <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
@@ -1726,9 +1730,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-indent fa-lg fa-fw"></i></span>
@@ -1750,7 +1752,9 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3">
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-list-alt fa-lg fa-fw"></i></span>
@@ -1758,7 +1762,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-medkit fa-lg fa-fw"></i></span>
@@ -1770,7 +1774,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-graduation-cap fa-lg fa-fw"></i></span>
