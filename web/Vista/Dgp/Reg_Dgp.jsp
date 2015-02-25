@@ -84,10 +84,12 @@
             }
 
             #titu{
-
                 font-weight: bold;
                 color: #005cac;
                 // color: blue;
+            }
+            p{
+               font-weight: bold; 
             }
 
         </style>
@@ -481,12 +483,14 @@
                                                             </label>
                                                         </section>
                                                         <%}
-                                                            %>
-                                                        <section class="col col-3" >
+                                                        %>
+                                                        <section class="col col-5" >
+
+                                                            <p >Autorizo a la UPeU gestionar mi cuenta de sueldo en el BBVA Banco Continental, para tal efecto adjunto copia legible y vigente de mi DNI   </p>
                                                             <label class="checkbox" >
                                                                 <%if (cs.getEs_gem_nu_cuenta().equals("1")) {%>
                                                                 <input type="checkbox" name="GEN_NU_CUEN" checked="" id="subscription"  value="1">
-                                                                <%}else{%>
+                                                                <%} else {%>
                                                                 <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="1">
                                                                 <%}%>
                                                                 <i></i>Generar Nro de Cuenta Bancaria</label>
@@ -756,7 +760,7 @@
                                                         Siguiente  <i class="fa fa-arrow-circle-right"></i>
                                                     </button>
                                                     <button type="button" class="btn btn-default" onclick="window.history.back();">
-                                                      <i class="fa fa-arrow-circle-left"></i>  Regresar
+                                                        <i class="fa fa-arrow-circle-left"></i>  Regresar
                                                     </button>
                                                 </footer>
                                             </div>

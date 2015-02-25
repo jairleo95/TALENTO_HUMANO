@@ -142,9 +142,9 @@
                     }
                     %></td>
                 <td>
-                    <%if (tr.getEs_proceso() > 0) {
-                            out.print("Tiene requerimiento en proceso");
-                        } else {
+                    <%if (tr.getEs_proceso() > 0) {%>
+                    <label> out.print("Tiene requerimiento en proceso"); <label>
+                       <% } else {
                     %>
                     <a href="../../dgp?idtr=<%=tr.getId_trabajador()%>&idreq=<%=idreq%>&iddep=<%=iddep%>&opc=Reg_form" 
                        class="btn btn-primary">Elaborar Requerimiento <i class="fa fa-arrow-circle-right"></i></a>
