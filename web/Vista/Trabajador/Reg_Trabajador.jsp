@@ -385,10 +385,10 @@
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                                 <%if (app != null) {
                                                                                 %>
-                                                                            <input type="text" name="APELLIDO_P"  value="<%=app.toUpperCase()%>" required="" id="fname" placeholder="Apellido Paterno"  class="form-control input-group-sm"  onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
+                                                                            <input type="text" name="APELLIDO_P"  value="<%=app.toUpperCase()%>" required="" id="fname" placeholder="Apellido Paterno"  class="form-control input-group-sm"  onblur="this.value = this.value.toUpperCase()" maxlength="50" >
                                                                             <%} else if (app == null) {
                                                                             %>
-                                                                            <input type="text" name="APELLIDO_P"  required="" id="fname" placeholder="Apellido Paterno"  class="form-control input-group-sm"  onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
+                                                                            <input type="text" name="APELLIDO_P"  required="" id="fname" placeholder="Apellido Paterno"  class="form-control input-group-sm" onblur="this.value = this.value.toUpperCase()" maxlength="50" >
                                                                             <%}%>
                                                                         </div>
                                                                     </div>
@@ -399,10 +399,10 @@
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                                 <%if (apm != null) {
                                                                                 %>
-                                                                            <input type="text" name="APELLIDO_M" required="" value="<%=apm.toUpperCase()%>" id="lname" placeholder="Apellido Materno" class="form-control input-group-sm" onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
+                                                                            <input type="text" name="APELLIDO_M" required="" value="<%=apm.toUpperCase()%>" id="lname" placeholder="Apellido Materno" class="form-control input-group-sm" onblur="this.value = this.value.toUpperCase()" maxlength="50" >
                                                                             <%} else if (apm == null) {
                                                                             %>
-                                                                            <input type="text" name="APELLIDO_M" required=""  id="lname" placeholder="Apellido Materno" class="form-control input-group-sm" onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
+                                                                            <input type="text" name="APELLIDO_M" required=""  id="lname" placeholder="Apellido Materno" class="form-control input-group-sm" onblur="this.value = this.value.toUpperCase()" maxlength="50" >
                                                                             <%}%>
                                                                         </div>
                                                                     </div>
@@ -413,11 +413,11 @@
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                                 <%if (nombres != null) {
                                                                                 %>
-                                                                            <input type="text" name="NOMBRES" required="" value="<%=nombres.toUpperCase()%>"  id="lname" placeholder="Nombres" class="form-control input-group-sm" onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
+                                                                            <input type="text" name="NOMBRES" required="" value="<%=nombres.toUpperCase()%>"  id="lname" placeholder="Nombres" class="form-control input-group-sm" onblur="this.value = this.value.toUpperCase()" maxlength="50" >
 
                                                                             <%} else if (nombres == null) {
                                                                             %>
-                                                                            <input type="text" name="NOMBRES" required=""  id="lname" placeholder="Nombres" class="form-control input-group-sm" onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
+                                                                            <input type="text" name="NOMBRES" required=""  id="lname" placeholder="Nombres" class="form-control input-group-sm" onblur="this.value = this.value.toUpperCase()" maxlength="50" >
                                                                             <%}%>
                                                                         </div>
                                                                     </div>
@@ -898,41 +898,43 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-4" id="no_cuen_otros" >
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-bank fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"  placeholder="Nombre del Banco" type="text" name="BANCO_OTROS"  id="nu_cuen_otros" maxlength="30"   />
-                                                                        </div>
+                                                                <div class="form-group">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"><i class="fa fa-bank fa-lg fa-fw"></i></span>
+                                                                        <input class="form-control input-group-sm"  placeholder="Nombre del Banco" type="text" name="BANCO_OTROS"  id="nu_cuen_otros" maxlength="30"   />
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-4" id="no_cuen" >
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-list-alt fa-lg fa-fw"></i></span>
-                                                                            <input placeholder="Nro de Cuenta" class="form-control input-group-sm" type="text" name="CUENTA"  id="nu_cuen" maxlength="30"   />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-4" id="no_cuen_ban" >
-                                                                    <div class="form-group">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-list-alt fa-lg fa-fw"></i></span>
-                                                                            <input placeholder="Nro de Cuenta Bancaria" class="form-control input-group-sm" type="text" name="CUENTA_BANC" id="nu_cuen_ban">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-4" id="generar" >
-                                                                    <div class="row form-group">
-                                                                        <div class="col-sm-8"style="margin-top:5px;">
-                                                                            <label>
-                                                                                <input type="checkbox" name="GEN_NU_CUEN" id="subscription" class="checkbox style-2" value="1">
-                                                                                <span><label>  Generar Nro de Cuenta Bancaria</label></span>
-                                                                            </label>                                                                       
-                                                                        </div>
-                                                                    </div>
-                                                                </div> 
-                                                                <input type="hidden" value="0" name="ES_CUENTA_SUELDO" id="es_cuenta"/>
                                                             </div>
+                                                            <div class="col-sm-4" id="no_cuen" >
+                                                                <div class="form-group">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"><i class="fa fa-bank fa-lg fa-fw"></i></span>
+                                                                        <input placeholder="Nro de Cuenta" class="form-control input-group-sm" type="text" name="CUENTA"  id="nu_cuen" maxlength="30"   />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4" id="no_cuen_ban" >
+                                                                <div class="form-group">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"><i class="fa fa-bank fa-lg fa-fw"></i></span>
+                                                                        <input placeholder="Nro de Cuenta Bancaria" class="form-control input-group-sm" type="text" name="CUENTA_BANC" id="nu_cuen_ban">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-4" id="generar" >
+                                                                <div class="form-group">
+                                                                    <p style="font-weight:bold;">Autorizo a la UPeU gestionar mi cuenta de sueldo en el BBVA Banco Continental, para tal efecto adjunto copia legible y vigente de mi DNI   </p>
+
+                                                                    <div class="input-g">
+                                                                        <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="1">
+                                                                        <i></i>Generar Nro de Cuenta Bancaria
+                                                                    </div>
+                                                                </div>
+                                                            </div> 
+                                                            <input type="hidden" value="0" name="ES_CUENTA_SUELDO" id="es_cuenta"/>
+                                                            </div>
+
                                                         </div>  
 
                                                         <script>
@@ -1083,6 +1085,7 @@
                                                                                 $("#no_cuen").hide();
                                                                                 $("#no_cuen_ban").hide();
                                                                                 $("#generar").hide();
+                                                                                $("#texto").hide();
                                                                                 $("#no_cuen_otros").hide();
                                                                                 //alert($("#es_cuenta").val());
 
@@ -1518,7 +1521,7 @@
 
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"    placeholder="Nombres y Apellidos" type="text" name="AUT_APELLIDOSNOMBRES"  maxlength="90">
+                                                                            <input class="form-control input-group-sm"    placeholder="Nombres y Apellidos" type="text"  name="AUT_APELLIDOSNOMBRES"  maxlength="90">
 
                                                                         </div>
                                                                     </div>
@@ -1563,7 +1566,7 @@
 
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text" class="form-control input-group-sm" name="APELLIDOS_NOMBRES_PADRE" placeholder="Apellidos y nombres del Padre" required="" maxlength="50">
+                                                                            <input type="text" class="form-control input-group-sm" name="APELLIDOS_NOMBRES_PADRE" placeholder="Apellidos y nombres del Padre" onblur="this.value = this.value.toUpperCase()" required="" maxlength="50">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1573,7 +1576,7 @@
 
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text"  class="form-control input-group-sm" name="APELLIDOS_NOMBRES_MADRE" placeholder="Apellidos y nombre del Madre" required="" maxlength="50">
+                                                                            <input type="text"  class="form-control input-group-sm" name="APELLIDOS_NOMBRES_MADRE" placeholder="Apellidos y nombre del Madre" onblur="this.value = this.value.toUpperCase()" required="" maxlength="50">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1600,7 +1603,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-6">
 
                                                                     <div class="form-group">
 
@@ -1622,6 +1625,10 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
+
+
+                                                            </div>
+                                                            <div class="row">
                                                                 <div class="col-sm-3">
 
                                                                     <div class="form-group">
@@ -1647,11 +1654,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-
-
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
+                                                                <div class="col-sm-3">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-list-alt fa-lg fa-fw"></i></span>
@@ -1677,7 +1680,7 @@
 
                                                             <h3><strong>Paso 6</strong> - DATOS DE HIJO(S)</h3>   
                                                             <div class="row">
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
@@ -1686,7 +1689,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
@@ -1695,7 +1698,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-2">
+                                                                <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
@@ -1704,7 +1707,11 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-2">
+                                                            </div>
+
+
+                                                            <div class="row">
+                                                                <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-calendar fa-lg fa-fw"></i></span>
@@ -1712,7 +1719,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-2">
+                                                                <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
@@ -1725,9 +1732,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-indent fa-lg fa-fw"></i></span>
@@ -1749,7 +1754,9 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3">
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-list-alt fa-lg fa-fw"></i></span>
@@ -1757,7 +1764,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-medkit fa-lg fa-fw"></i></span>
@@ -1769,7 +1776,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-graduation-cap fa-lg fa-fw"></i></span>
