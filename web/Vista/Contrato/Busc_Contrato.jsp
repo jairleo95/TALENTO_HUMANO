@@ -1,17 +1,17 @@
 
+<%@page import="pe.edu.upeu.application.model.Direccion"%>
 <%
     HttpSession sesion = request.getSession();
     String id_user = (String) sesion.getAttribute("IDUSER");
     if (id_user != null) {
-        
+
 %>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%@page import="pe.edu.upeu.application.model.Requerimiento"%>
 <%@page import="pe.edu.upeu.application.model.Area"%>
-<jsp:useBean id="List_Area" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_Direccion" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean class="java.util.ArrayList" scope="application"  id="Listar_Requerimiento"/>
-<%
-    HttpSession sesion_1 = request.getSession(true);
+<%    HttpSession sesion_1 = request.getSession(true);
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
     String id_dep = (String) sesion.getAttribute("ID_DEPARTAMENTO");
     if (id_user_1 != "") {
@@ -58,29 +58,46 @@
                                 <input type="text"  class="form-control" name="nom_ape"  style="width: 250px"   />
                             </div>
                             <div class="form-group">  
-                                <label>Area :</label><br>
-                                <select name="area" class="form-control" style="width: 250px" >
+                                <label>Direccion :</label><br>
+                                <select name="direccion" class="form-control selecdireccion" style="width: 250px" id="select_direccion">
                                     <option value="">[Seleccione]</option>
-                                    <%for (int i = 0; i < List_Area.size(); i++) {
-                                            Area a = new Area();
-                                            a = (Area) List_Area.get(i);
+                                    <%for (int i = 0; i < Listar_Direccion.size(); i++) {
+                                            Direccion a = new Direccion();
+                                            a = (Direccion) Listar_Direccion.get(i);
                                     %>
-                                    <option value="<%=a.getId_area()%>"><%=a.getNo_area()%></option>
+                                    <option value="<%=a.getId_direccion()%>"><%=a.getNo_direccion()%></option>
                                     <% } %>
                                 </select>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group" >
-                                <label>Puesto :</label><br>
-                                <select name="puesto_select" class="form-control" id="select_pu" style="width: 250px"> 
+                                <label>Departamento :</label><br>
+                                <select name="departamento" class="form-control selectdep" id="select_dep" style="width: 250px"> 
                                     <option value="">[Seleccione]</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
-                                <label>Sueldo :</label><br>
-                                <input type="text" name="sueldo" class="form-control" style="width: 250px" maxlength="10"/>
+                                <label>Area :</label><br>
+                                <select name="area" class="form-control selectarea" id="select_area" style="width: 250px"> 
+                                    <option value="">[Seleccione]</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group" >
+                                <label>Seccion :</label><br>
+                                <select name="seccion" class="form-control selectsec" id="select_sec" style="width: 250px"> 
+                                    <option value="">[Seleccione]</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Puesto :</label><br>
+                                <select name="puesto" class="form-control selectpu" id="select_pu" style="width: 250px"> 
+                                    <option value="">[Seleccione]</option>
+                                </select>
                             </div>
                         </div>
                         <div class="row">
@@ -95,12 +112,11 @@
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                <label>Sección :</label><br>
-                                <input type="text" name="seccion" class="form-control" style="width: 250px">
+                                <label>Sueldo :</label><br>
+                                <input type="text" name="sueldo" class="form-control" style="width: 250px" maxlength="10"/>
                             </div>
                         </div>
                         <hr/>
-
                         <div class="row">
                             <div class="form-group">                            
                                 <button type="button" class="btn btn-primary" id="btnbuscar">Buscar</button>
@@ -153,9 +169,43 @@
 
     </body>
     <script>
+        function listar_opciones(opc,id) {
+            if(opc=='Listar_dir_dep'){
+                var a = $(".selectdep");
+                $(".selectarea").empty();
+                $(".selectarea").append("<option value=''>[Seleccione]</option>");
+                $(".selectsec").empty();
+                $(".selectsec").append("<option value=''>[Seleccione]</option>");
+                $(".selectpu").empty();
+                $(".selectpu").append("<option value=''>[Seleccione]</option>");
+            }
+            if(opc=='Listar_area2'){
+                var a = $(".selectarea");
+                $(".selectsec").empty();
+                $(".selectsec").append("<option value=''>[Seleccione]</option>");
+                $(".selectpu").empty();
+                $(".selectpu").append("<option value=''>[Seleccione]</option>");
+            }
+            if(opc=='Listar_sec2'){
+                var a = $(".selectsec");
+                $(".selectpu").empty();
+                $(".selectpu").append("<option value=''>[Seleccione]</option>");
+            }
+            if(opc=='Listar_pu_id'){
+                var a = $(".selectpu");
+            }
+                $.post("../../Direccion_Puesto", "opc="+opc.trim()+"&id="+id.trim(), function(objJson) {
+                    var list = objJson.lista;
+                    a.empty();
+                    a.append("<option value=''>[Seleccione]</option>");
+                    for (var i = 0; i < list.length; i++) {
+                        a.append("<option value='" + list[i].id + "'>" + list[i].nombre + "</option>");
+                    }
+                    $(".tbodys").append();
+                });
+            }
         $(document).ready(function() {
             var b = $(".tbodys");
-             list_puesto();
             /* $.ajax({
              data:$("#frm_filtro2").serialize(),
              type:"POST",
@@ -166,9 +216,29 @@
              
              });
              */
-
+            $("#select_direccion").change(function(){
+                var opc='Listar_dir_dep';
+                var id=$("#select_direccion").val();
+               listar_opciones(opc,id);
+            });
+            $("#select_dep").change(function(){
+                var opc='Listar_area2';
+                var id=$("#select_dep").val();
+               listar_opciones(opc,id);
+            });
+            $("#select_area").change(function(){
+                var opc='Listar_sec2';
+                var id=$("#select_area").val();
+               listar_opciones(opc,id);
+            });
+            $("#select_sec").change(function(){
+                var opc='Listar_pu_id';
+                var id=$("#select_sec").val();
+               listar_opciones(opc,id);
+            });
             $("#seleccionar_pl").hide();
             $("#asa").hide();
+            
             $("#btnbuscar").click(
                     function() {
                         $.post("../../ajax/Ajax_Contrato/Ajax_Contrato.jsp", $("#frm_filtro2").serialize(), function(objJson) {
@@ -235,23 +305,7 @@
                         $(".tbodys").html(html);
                     }
             );
-            /*$("#imp").change(
-                    function() {
-                        $.post("../../plantilla_contractual", "opc=List_planti&" + "idtr=" + $("#imp").val(), function(objJson) {
 
-                        });
-                    });*/
-            function list_puesto() {
-                var a = $("#select_pu");
-                $.post("../../plantilla_contractual","opc=Listpuesto", function(objJson){
-                    var list = objJson.lista;
-                    a.empty();
-                    a.append("<option value=''>[SELECCIONAR]</option>");
-                    for (var i = 0; i < list.length; i++) {
-                        a.append("<option value='" + list[i].id + "'>" + list[i].nombre + "</option>");
-                    }
-                });
-            }
 
         });
     </script>

@@ -101,9 +101,9 @@
                                 <div>
 
                                     <!-- widget edit box -->
-                                    <div class="jarviswidget-editbox">
+                                    <div >
                                         <!-- This area used as dropdown edit box -->
-
+                                        <a class="btn btn-success" href="../../documento_trabajador?idtr=<%=request.getParameter("idtr")%>&opc=Listar_doc"><i class="fa fa-check"></i> Registrar</a>
                                     </div>
                                     <!-- end widget edit box -->
 

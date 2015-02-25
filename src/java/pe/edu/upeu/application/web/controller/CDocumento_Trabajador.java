@@ -69,7 +69,15 @@ public class CDocumento_Trabajador extends HttpServlet {
                 getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
                 int s = d.List_Req_nacionalidad(idtr);
                 int num_ad = d.List_Adventista(idtr);
-                response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&pro=pr_dgp&P2=TRUE");
+            //    response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&pro=pr_dgp&P2=TRUE");
+                String pr = request.getParameter("P2");
+                String url = "Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr;
+                if (pr!= null) {
+                    url += "&pro=pr_dgp&P2=TRUE";
+                    response.sendRedirect(url);
+                } else {
+                    response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr);
+                }
 
             }
             if (opc.equals("Ver_Documento")) {
@@ -128,24 +136,25 @@ public class CDocumento_Trabajador extends HttpServlet {
 
             if (("Listar_doc").equals(opc)) {
 
+                getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
+                getServletContext().setAttribute("Documentos", d.Documentos());
+                getServletContext().setAttribute("Lis_doc_trabajador", d.Lis_doc_trabajador(idtr));
+                getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
                 int s = d.List_Req_nacionalidad(idtr);
                 int num_ad = d.List_Adventista(idtr);
-                int can_doc = d.count_documentos(dgp);
-
-                getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
-                getServletContext().setAttribute("List_doc_req_pla", d.List_doc_req_pla(dgp, idtr));
-                getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
-                if (can_doc > 0) {
-                    response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr + "&iddgp=" + dgp);
+                int count = d.count_documentos_x_tra(idtr);
+                if (count > 0) {
+                    response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&Vol=volver&idtr=" + idtr);
                 } else {
-                    response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&iddgp=" + dgp + "&pro=pr_dgp");
+                    response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr);
                 }
+
             }
         } else {
 
             //------>   ./var/www/html/files/   (con: pwd)
-           // String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Dgp\\Documento\\Archivo";
-            String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
+            String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Dgp\\Documento\\Archivo";
+            // String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
 //out.print(ubicacion);
             DiskFileItemFactory f = new DiskFileItemFactory();
             f.setSizeThreshold(1024);
@@ -276,10 +285,15 @@ public class CDocumento_Trabajador extends HttpServlet {
 
             out.print(idtr);
             int count = d.count_documentos_x_tra(idtr);
+
             if (count > 0) {
-                response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr);
+                String url = "Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr;
+                if (pr != null) {
+                    url += "&P2=TRUE";
+                }
+                response.sendRedirect(url);
             } else {
-                response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&pro=pr_dgp");
+                response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&pro=pr_dgp&P2=TRUE");
             }
 
             /*} catch (FileUploadException e) {

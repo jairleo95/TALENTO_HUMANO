@@ -70,21 +70,9 @@ public class CDir_Puesto extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
-            if (opc.equals("Listar_area")) {
-                String id_dep = request.getParameter("id_dep");
-                List<Map<String, ?>> lista = are.List_area_id_json(id_dep);
-                rpta.put("rpta", "1");
-                rpta.put("lista", lista);
-            }
             if (opc.equals("Listar_area2")) {
                 String id_dep = request.getParameter("id");
                 List<Map<String, ?>> lista = are.List_area_id_d(id_dep);
-                rpta.put("rpta", "1");
-                rpta.put("lista", lista);
-            }
-            if (opc.equals("Listar_sec")) {
-                String id_are = request.getParameter("id_are");
-                List<Map<String, ?>> lista = sec.List_sec_id(id_are);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
@@ -100,6 +88,20 @@ public class CDir_Puesto extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
+            if (opc.equals("Listar_area")) {
+                String id_dep = request.getParameter("id_dep");
+                List<Map<String, ?>> lista = are.List_area_id_json(id_dep);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
+
+            if (opc.equals("Listar_sec")) {
+                String id_are = request.getParameter("id_are");
+                List<Map<String, ?>> lista = sec.List_sec_id(id_are);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
+
             /*CIERRE*/
 
             if (opc.equals("Listar")) {

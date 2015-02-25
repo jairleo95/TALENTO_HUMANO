@@ -131,8 +131,8 @@
                                     <div class="widget-body no-padding">
 
 
-                                             <!--<form action="../../../documento" method="post" enctype="multipart/form-data" class="smart-form" novalidate="novalidate" id="checkout-form">-->
-                                             <form action="../../../documento_trabajador" method="post" enctype="multipart/form-data" class="smart-form" >
+                                        <!--<form action="../../../documento" method="post" enctype="multipart/form-data" class="smart-form" novalidate="novalidate" id="checkout-form">-->
+                                        <form action="../../../documento_trabajador" method="post" enctype="multipart/form-data" class="smart-form" >
 
 
 
@@ -308,7 +308,7 @@
 
                                                 <tr>
                                                     <td ><strong><%  if (d.getTi_documento().trim().equals("ACMA")) {
-                                                            out.println("ACTA DE MATRIMONIO CON: <p style='color:red;' >" + co.getAp_nombres_conyugue() +  "</p>");
+                                                            out.println("ACTA DE MATRIMONIO CON: <p style='color:red;' >" + co.getAp_nombres_conyugue() + "</p>");
                                                         }
                                                         if (d.getTi_documento().trim().equals("DNIC")) {
                                                             out.println("COPIA DNI CONYUGUE : <p style='color:red;' >" + co.getAp_nombres_conyugue() + "</p>");
@@ -522,7 +522,14 @@
                                                 </td>
                                                 <td >
                                                     <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
+                                                    <%if (request.getParameter("P2") == null & request.getParameter("pro") == null) {
+                                                    %>
                                                     <a type="button"  class="btn btn-danger btn_reg_doc elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                    <%} else if (request.getParameter("P2") != null & request.getParameter("pro") != null) {
+                                                    %>
+                                                    <a type="button"  class="btn btn-danger btn_reg_doc elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>&P2=TRUE"><i class="fa fa-trash-o"></i> Eliminar</a>
+
+                                                    <%                                                       } %>
                                                     <%} else {
                                                             out.print("");
                                                         }%>
@@ -554,7 +561,7 @@
                                                     }
 
                                                     if (request.getParameter("P2") != null) {
-                                                        if (request.getParameter("P2").equals("TRUE")) {%>
+                                                        if (request.getParameter("P2").equals("TRUE") & request.getParameter("Vol") == null) {%>
                                                 <input  type='hidden' value='enter' name='P2'/>
 
                                                 <a class="btn btn-success" href="../../../trabajador?idtr=<%=request.getParameter("idtr")%>&opc=list_reg_tra"><i class="fa fa-check"></i> CONTINUAR</a>
@@ -563,8 +570,14 @@
                                                     Registrar
                                                 </button>
 
-                                                <% }
-                                                } else {%>
+                                                <% } else {%>
+                                                <a class="btn btn-primary" href="../../../trabajador?idtr=<%=request.getParameter("idtr")%>&opc=Documento_Trabajador"><i class="fa  fa-chevron-circle-left"></i> Regresar</a>
+
+                                                <button type="submit" class="btn btn-primary btn_reg_doc" style="display:none"> <i class="fa fa-plus-square"></i>
+                                                    Registrar
+                                                </button>
+                                                <%}%>
+                                                <%} else {%>
                                                 <button type="submit" class="btn btn-primary btn_reg_doc"style="display:none" >
                                                     Registrar
                                                 </button>

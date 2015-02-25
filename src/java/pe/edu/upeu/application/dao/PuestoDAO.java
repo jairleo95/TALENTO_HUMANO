@@ -165,7 +165,7 @@ public class PuestoDAO implements InterfacePuestoDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = " select  *  from rhtr_puesto where id_seccion='" + id + "' ";
+            String sql = " select  *  from rhtr_puesto where id_seccion='" + id + "' order by no_puesto";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();

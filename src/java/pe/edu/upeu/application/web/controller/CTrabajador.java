@@ -289,7 +289,7 @@ public class CTrabajador extends HttpServlet {
         if ("Documento_Trabajador".equals(opc)) {
             String idtr = request.getParameter("idtr");
             getServletContext().setAttribute("Lis_doc_trabajador_hab", d.Lis_doc_trabajador_hab(idtr));
-            response.sendRedirect("Vista/Trabajador/List_Doc_Trabajador.jsp");
+            response.sendRedirect("Vista/Trabajador/List_Doc_Trabajador.jsp?idtr="+idtr);
         }
         if ("aut".equals(opc)) {
             String idtr = request.getParameter("idtr");

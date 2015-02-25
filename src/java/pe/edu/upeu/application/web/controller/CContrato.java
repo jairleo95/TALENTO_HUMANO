@@ -514,7 +514,7 @@ public class CContrato extends HttpServlet {
             response.sendRedirect("Vista/Contrato/Plantilla/Editor_Plantilla.jsp");
         }
         if (opc.equals("filtrar")) {
-            getServletContext().setAttribute("List_Area", area.List_Area());
+            getServletContext().setAttribute("Listar_Direccion", dir.Listar_Direccion());
             response.sendRedirect("Vista/Contrato/Busc_Contrato.jsp");
         }
         /*} catch (Exception e) {
