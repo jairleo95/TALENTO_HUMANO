@@ -40,6 +40,7 @@
                         trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
 
                 %>   
+                <tr><td class="" colspan="2" style="font-weight:bold;">Los siguiente datos son de los estudios de Pre-grado</td></tr>
                 <tr><td class="text-info">Situacion Educativa:</td><td><%out.println(trb.getNo_s_educativa());%></td></tr>
                 <tr><td class="text-info">I.E.Peruana:</td>
                     <td>

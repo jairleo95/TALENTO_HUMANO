@@ -362,6 +362,7 @@ public class CDgp extends HttpServlet {
             getServletContext().setAttribute("List_Area", area.List_Area_ID(iddep));
             //    int num = dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
             getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
+            getServletContext().setAttribute("Listar_Direccion", dir.Listar_Direccion());
 
             response.sendRedirect("Vista/Dgp/Busc_Req_Autorizado.jsp");
         }

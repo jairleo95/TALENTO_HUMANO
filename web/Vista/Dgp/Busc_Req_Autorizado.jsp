@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.model.Direccion"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
     HttpSession sesion_1 = request.getSession();
@@ -8,10 +9,12 @@
 <%@page import="pe.edu.upeu.application.model.Area"%>
 <jsp:useBean class="java.util.ArrayList" scope="application"  id="List_Area"/>
 <jsp:useBean class="java.util.ArrayList" scope="application"  id="Listar_Requerimiento"/>
+<jsp:useBean class="java.util.ArrayList" scope="application"  id="Listar_Direccion"/>
 <%
     HttpSession sesion = request.getSession(true);
     String id_user = (String) sesion.getAttribute("IDUSER");
     String id_dep = (String) sesion.getAttribute("ID_DEPARTAMENTO");
+    String id_rol = (String) sesion.getAttribute("IDROL");
     if (id_user != "") {
 %>
 <!DOCTYPE html>
@@ -35,7 +38,7 @@
     <center>
         <br>
         <div id="contenido">
-           
+
             <div   >
                 <!--style="padding-left: 30px"-->
                 <form class="form-inline" id="frm_filtro" method="post" action="" name="formulario">
@@ -47,43 +50,48 @@
                         <div class="form-group" >
                             <label>Fecha fin:</label><br>
                             <input type="date"  class="form-control" name="al" size="45" maxlength="100" style="width: 250px" />
-                            <input type="hidden" name="iddep" value="<%%>">
                         </div>
                     </div>
                     <div class="row">
-
                         <div class="form-group">
                             <label>Nombres y Apellidos :</label><br>
                             <input type="text"  class="form-control" name="nom_ape"  style="width: 250px"   />
                         </div>
                         <div class="form-group">  
                             <label>Area :</label><br>
-                            <select name="area" class="form-control" style="width: 250px" >
-                                <option value="0">[Seleccione]</option>
-                                <%                                    for (int i = 0; i < List_Area.size(); i++) {
+                            <select name="area"  id="id_a" class="form-control" style="width: 250px" >
+                                <option value="">[Seleccione]</option>
+                                <%
+                                    for (int i = 0; i < List_Area.size(); i++) {
                                         Area a = new Area();
                                         a = (Area) List_Area.get(i);
                                 %>
                                 <option value="<%=a.getId_area()%>"><%=a.getNo_area()%></option>
-                                <% } %>
+                                <%}%>
                             </select>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group" >
-                            <label>Puesto :</label><br>
-                            <input type="text" name="puesto" class="form-control" style="width: 250px" />
+                            <label>Sección :</label><br>
+                            <!-- <input type="text" name="seccion" class="form-control" style="width: 250px" />-->
+                            <select name="seccion" class="form-control" style="width: 250px" >
+
+                            </select>
                         </div>
-                        
+
                         <div class="form-group">
-                            <label>Sueldo :</label><br>
-                            <input type="text" name="sueldo" class="form-control" style="width: 250px" maxlength="10"/>
+                            <label>Puesto :</label><br>
+                            <!--<input type="text" name="puesto" class="form-control" style="width: 250px"/>-->
+                            <select class="sel_pues" name="puesto" class="form-control" style="width: 250px" >
+
+                            </select>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group">
-                            <label>Sección :</label><br>
-                            <input type="text" name="seccion" class="form-control" style="width: 250px">
+                            <label>Sueldo :</label><br>
+                            <input type="text" name="sueldo" class="form-control" style="width: 250px"  maxlength="10">
                         </div>
                         <div class="form-group">
                             <label>Requerimiento :</label><br>
@@ -116,19 +124,35 @@
                             </select>
                         </div>
 
-                        <? //if ($_SESSION["IDROL"] == 1) { ?>
+                        <%//if (id_rol.equals("1")) { %>
                         <div class="form-group">
                             <label>Departamento :</label><br>
                             <select name="dep" class="form-control" style="width: 250px">
                                 <option value="0" ></option>
                                 <?  for ($kk = 0; $kk < count($list_d); $kk++) {?>
-                                <option value="<?echo $list_d[$kk][0]?>"><?echo $list_d[$kk][1];?></option>
-                                <?}?>
+                                <option value=""><?echo $list_d[$kk][1];?></option>
                             </select>
                         </div>
                     </div>
                     <? //} ?>
+                    <div class="row">
 
+
+
+                        <div class="form-group">
+                            <label>Dirección :</label><br>
+                            <select name="dir" class="form-control" style="width: 250px">
+                                <<%
+                                    for (int s = 0; s < Listar_Direccion.size(); s++) {
+                                        Direccion d = new Direccion();
+                                        d = (Direccion) Listar_Direccion.get(s);
+                                %>
+                                <option value="<%=d.getId_direccion()%>"><%=d.getNo_direccion()%></option>
+                                <% } %>
+                            </select>
+                        </div>
+                        <%//}%>
+                    </div>
                     <hr/>
 
                     <div class="row">
@@ -147,7 +171,7 @@
                 </form>
 
             </div> 
-            
+
             <br>
             <br>
             <div class="container">
@@ -162,7 +186,7 @@
                             <td><span title="SUELDO">Sueldo</span></td>
                             <!-- <th><span title="PROCESO">Proceso</span></th>-->
                             <td><span title="MOTIVO">Requerimiento</span></td>
-                            <td><span title="FECHA_CREACION">Fecha de Contratación</span></td>
+                            <td><span title="FECHA_CREACION">Fecha de Autorización</span></td>
                         </tr>
                     </thead>
 
@@ -193,6 +217,7 @@
          
          });
          */
+
 
         $("#btnfiltrar").click(
                 function() {
@@ -228,8 +253,39 @@
                 }
         );
 
+        
+
     }
     );
+
+
+</script>
+<script>
+
+    $("#id_a").change(function() {
+        var id_area = ($("#id_a").val());
+        //alert(id_area);
+    });
+
+
+    function Listar_Provincia_A() {
+
+        var s = $(".sel_pues");
+        $.post("../../", "opc=Listar_P&" + "id_area=" + id_area, function(objJson) {
+            s.empty();
+            var lista = objJson.lista;
+            s.append("<option value='' > [SELECCIONE] </option>");
+            for (var j = 0; j < lista.length; j++) {
+                if ($(".pro_a").val() == lista[j].id) {
+                    s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].descripcion + "</option>");
+
+                } else {
+                    s.append("<option value='" + lista[j].id + "'> " + lista[j].descripcion + "</option>");
+                }
+            }
+
+        });
+    }
 
 
 </script>
