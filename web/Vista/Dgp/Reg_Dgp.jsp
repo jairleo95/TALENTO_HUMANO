@@ -484,7 +484,7 @@
                                                             </label>
                                                         </section>
                                                         <%}
-                                                        %>
+                                                        if(cs.getNo_banco().trim().equals("0")){%>
                                                         <section class="col col-5" >
 
                                                             <p >Autorizo a la UPeU gestionar mi cuenta de sueldo en el BBVA Banco Continental, para tal efecto adjunto copia legible y vigente de mi DNI   </p>
@@ -496,7 +496,7 @@
                                                                 <%}%>
                                                                 <i></i>Generar Nro de Cuenta Bancaria</label>
                                                         </section>
-                                                        <%
+                                                        <%}
                                                         %>
                                                     </div>
 
