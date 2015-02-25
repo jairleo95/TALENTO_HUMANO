@@ -920,8 +920,11 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            
                                                             <div class="col-sm-4" id="generar" >
                                                                 <div class="form-group">
+                                                                    <p style="font-weight:bold;">Autorizo a la UPeU gestionar mi cuenta de sueldo en el BBVA Banco Continental, para tal efecto adjunto copia legible y vigente de mi DNI   </p>
+                                                                   
                                                                     <div class="input-g">
                                                                         <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="1">
                                                                         <i></i>Generar Nro de Cuenta Bancaria
@@ -1081,6 +1084,7 @@
                                                                                 $("#no_cuen").hide();
                                                                                 $("#no_cuen_ban").hide();
                                                                                 $("#generar").hide();
+                                                                                $("#texto").hide();
                                                                                 $("#no_cuen_otros").hide();
                                                                                 //alert($("#es_cuenta").val());
 
@@ -1879,7 +1883,7 @@
                                                                                 $(".td-sex" + $(this).val()).text($(".i_sexo_h option:selected").html());
                                                                                 $(".td-tdoc" + $(this).val()).text($(".i_tdoc_h option:selected").html());
                                                                                 $(".td-ndoc" + $(this).val()).text(ndoc.val());
-                                                                                $(".td-essalud" + $(this).val()).text( $(".i_essalud_h option:selected").html());
+                                                                                $(".td-essalud" + $(this).val()).text($(".i_essalud_h option:selected").html());
                                                                                 $(".td-es_sup" + $(this).val()).text($(".i_es_sup_h option:selected").html());
 
                                                                                 ap_pat.val("");
