@@ -385,10 +385,10 @@
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                                 <%if (app != null) {
                                                                                 %>
-                                                                            <input type="text" name="APELLIDO_P"  value="<%=app.toUpperCase()%>" required="" id="fname" placeholder="Apellido Paterno"  class="form-control input-group-sm"  onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
+                                                                            <input type="text" name="APELLIDO_P"  value="<%=app.toUpperCase()%>" required="" id="fname" placeholder="Apellido Paterno"  class="form-control input-group-sm"  onblur="this.value = this.value.toUpperCase()" maxlength="50" >
                                                                             <%} else if (app == null) {
                                                                             %>
-                                                                            <input type="text" name="APELLIDO_P"  required="" id="fname" placeholder="Apellido Paterno"  class="form-control input-group-sm"  onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
+                                                                            <input type="text" name="APELLIDO_P"  required="" id="fname" placeholder="Apellido Paterno"  class="form-control input-group-sm" onblur="this.value = this.value.toUpperCase()" maxlength="50" >
                                                                             <%}%>
                                                                         </div>
                                                                     </div>
@@ -399,10 +399,10 @@
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                                 <%if (apm != null) {
                                                                                 %>
-                                                                            <input type="text" name="APELLIDO_M" required="" value="<%=apm.toUpperCase()%>" id="lname" placeholder="Apellido Materno" class="form-control input-group-sm" onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
+                                                                            <input type="text" name="APELLIDO_M" required="" value="<%=apm.toUpperCase()%>" id="lname" placeholder="Apellido Materno" class="form-control input-group-sm" onblur="this.value = this.value.toUpperCase()" maxlength="50" >
                                                                             <%} else if (apm == null) {
                                                                             %>
-                                                                            <input type="text" name="APELLIDO_M" required=""  id="lname" placeholder="Apellido Materno" class="form-control input-group-sm" onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
+                                                                            <input type="text" name="APELLIDO_M" required=""  id="lname" placeholder="Apellido Materno" class="form-control input-group-sm" onblur="this.value = this.value.toUpperCase()" maxlength="50" >
                                                                             <%}%>
                                                                         </div>
                                                                     </div>
@@ -413,11 +413,11 @@
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                                 <%if (nombres != null) {
                                                                                 %>
-                                                                            <input type="text" name="NOMBRES" required="" value="<%=nombres.toUpperCase()%>"  id="lname" placeholder="Nombres" class="form-control input-group-sm" onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
+                                                                            <input type="text" name="NOMBRES" required="" value="<%=nombres.toUpperCase()%>"  id="lname" placeholder="Nombres" class="form-control input-group-sm" onblur="this.value = this.value.toUpperCase()" maxlength="50" >
 
                                                                             <%} else if (nombres == null) {
                                                                             %>
-                                                                            <input type="text" name="NOMBRES" required=""  id="lname" placeholder="Nombres" class="form-control input-group-sm" onkeyup="this.value = this.value.toUpperCase()" maxlength="50" >
+                                                                            <input type="text" name="NOMBRES" required=""  id="lname" placeholder="Nombres" class="form-control input-group-sm" onblur="this.value = this.value.toUpperCase()" maxlength="50" >
                                                                             <%}%>
                                                                         </div>
                                                                     </div>
@@ -1519,7 +1519,7 @@
 
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"    placeholder="Nombres y Apellidos" type="text" name="AUT_APELLIDOSNOMBRES"  maxlength="90">
+                                                                            <input class="form-control input-group-sm"    placeholder="Nombres y Apellidos" type="text"  name="AUT_APELLIDOSNOMBRES"  maxlength="90">
 
                                                                         </div>
                                                                     </div>
@@ -1564,7 +1564,7 @@
 
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text" class="form-control input-group-sm" name="APELLIDOS_NOMBRES_PADRE" placeholder="Apellidos y nombres del Padre" required="" maxlength="50">
+                                                                            <input type="text" class="form-control input-group-sm" name="APELLIDOS_NOMBRES_PADRE" placeholder="Apellidos y nombres del Padre" onblur="this.value = this.value.toUpperCase()" required="" maxlength="50">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1574,7 +1574,7 @@
 
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text"  class="form-control input-group-sm" name="APELLIDOS_NOMBRES_MADRE" placeholder="Apellidos y nombre del Madre" required="" maxlength="50">
+                                                                            <input type="text"  class="form-control input-group-sm" name="APELLIDOS_NOMBRES_MADRE" placeholder="Apellidos y nombre del Madre" onblur="this.value = this.value.toUpperCase()" required="" maxlength="50">
                                                                         </div>
                                                                     </div>
                                                                 </div>
