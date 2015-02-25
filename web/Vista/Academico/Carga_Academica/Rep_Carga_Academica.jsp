@@ -36,7 +36,7 @@
                         {sSelector: "#bapenom"},
                         {type: "select", sSelector: "#sfacultad"},
                         {type: "select", sSelector: "#sescuela"},
-                        {type: "select", values: ["", ], sSelector: "#ssitedu"},
+                        {type: "select", sSelector: "#ssitedu"},
                         {type: "select", sSelector: "#sprofdoc"},
                         {type: "select", sSelector: "#scondi"},
                         //---- OTROS TIPOS DE FILTROS -----
