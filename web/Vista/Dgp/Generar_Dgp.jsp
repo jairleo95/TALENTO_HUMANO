@@ -182,7 +182,7 @@
                                     if (count == 0) {
                             %>
                             <!--<strong>No se encontraron registros...</strong>-->
-                            <%} %>
+                            <%}%>
                             <table class="table table-hover" style="width: 50%" >
                                 <thead>
                                     <tr >
