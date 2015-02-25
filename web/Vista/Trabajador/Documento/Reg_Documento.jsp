@@ -283,7 +283,7 @@
                                                                 }
                                                             }%>
                                                     </td>
-                                                    <td style="align-center">
+                                                    <td >
                                                         <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
                                                         <a type="button"  class="btn btn-danger btn_reg_doc elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                         <%} else {
@@ -366,7 +366,7 @@
                                                                 }
                                                             }%>
                                                     </td>
-                                                    <td style="align-center">
+                                                    <td >
                                                         <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
                                                         <a type="button"  class="btn btn-danger btn_reg_doc elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                         <%} else {
@@ -444,7 +444,7 @@
                                                                 }
                                                             }%>
                                                     </td>
-                                                    <td style="align-center">
+                                                    <td >
                                                         <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
                                                         <a type="button"  class="btn btn-danger btn_reg_doc elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                         <%} else {
@@ -520,9 +520,9 @@
                                                             }
                                                         }%>
                                                 </td>
-                                                <td style="align-center">
+                                                <td >
                                                     <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
-                                                    <a type="button"  class="btn btn-danger btn_reg_doc elimi" href="../../../documento_trabajdor?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getId_dgp()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                    <a type="button"  class="btn btn-danger btn_reg_doc elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                     <%} else {
                                                             out.print("");
                                                         }%>
