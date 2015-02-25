@@ -791,7 +791,7 @@
                                                                 <div class="col-sm-4" id="regimen" style="display: none">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-legal fa-lg fa-fw"></i></span>
                                                                             <select class="form-control input-group-sm" id="rg" name="REGIMEN" required>
                                                                                 <option value="" selected="selected">[Regimen de la Institución Educativa]</option>
                                                                                 <option value="1">Publica</option>
@@ -835,20 +835,20 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3">   <label>Codigo Universitario:</label>
+                                                                <div class="col-sm-4">  <!-- <label>Codigo Universitario:</label>-->
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-th fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm" id="doc" type="text" name="COD_UNI" maxlength="9">
+                                                                            <input class="form-control input-group-sm" id="doc" type="text" name="COD_UNI" maxlength="9" placeholder="Codigo Universitario">
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3" id="egreso" style="display: none"><label>Año Egreso:</label>
+                                                                <div class="col-sm-4" id="egreso" style="display: none">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-calendar fa-lg fa-fw"></i></span>
                                                                             <select    name="A_EGRESO" class="form-control input-group-sm" required="" >
-                                                                                <option value="">[SELECCIONE]</option>
+                                                                                <option value="">[Año Egreso]</option>
                                                                                 <% for (int jj = 0; jj < list_año.size(); jj++) {%>
                                                                                 <option value="<%=list_año.get(jj)%>"><%=list_año.get(jj)%></option>
                                                                                 <%}%>
@@ -856,11 +856,11 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>                        
-                                                                <div class="col-sm-3">   <label>Tipo Hora Pago Referencial:</label>
+                                                                <div class="col-sm-4"> <!--  <label>Tipo Hora Pago Referencial:</label>-->
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-money fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm" value="0"  placeholder="Tipo Hora Pago Referencial" type="text" name="TIPO_HORA_PAGO_REFEERENCIAL" maxlength="6">
+                                                                            <input class="form-control input-group-sm" placeholder="Tipo Hora Pago Referencial" type="text" name="TIPO_HORA_PAGO_REFEERENCIAL" maxlength="6">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -869,7 +869,7 @@
                                                             <input pattern=".{5,10}" required title="5 to 10 characters">-->
                                                             <div class="row">
 
-                                                                <div class="col-sm-10">
+                                                                <div class="col-sm-12">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-align-justify fa-lg fa-fw"></i></span>
@@ -882,53 +882,57 @@
 
 
                                                             <h3>- Cuenta Sueldo </h3>
-                                                            <div class="col-sm-4" id="" >
-                                                                <div class="form-group">
-                                                                    <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="fa fa-bank fa-lg fa-fw"></i></span>
-                                                                        <select name="BANCO" id="banco" class="form-control input-group-sm">
-                                                                            <option value="" selected="" disabled="" >[BANCO]</option>
-                                                                            <option value="0" >Ninguno</option>
-                                                                            <option value="1" >BBVA</option>
-                                                                            <option value="2" >BCP</option>
-                                                                            <option value="3" >Otros</option>
-                                                                        </select>
+                                                            <div class="row">
+                                                                <div class="col-sm-4" id="" >
+                                                                    <div class="form-group">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-credit-card  fa-lg fa-fw"></i></span>
+                                                                            <select name="BANCO" id="banco" class="form-control input-group-sm">
+                                                                                <option value="" selected="" disabled="" >[BANCO]</option>
+                                                                                <option value="0" >Ninguno</option>
+                                                                                <option value="1" >BBVA</option>
+                                                                                <option value="2" >BCP</option>
+                                                                                <option value="3" >Otros</option>
+                                                                            </select>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
+                                                                <div class="col-sm-4" id="no_cuen_otros" >
+                                                                    <div class="form-group">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-bank fa-lg fa-fw"></i></span>
+                                                                            <input class="form-control input-group-sm"  placeholder="Nombre del Banco" type="text" name="BANCO_OTROS"  id="nu_cuen_otros" maxlength="30"   />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-4" id="no_cuen" >
+                                                                    <div class="form-group">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-list-alt fa-lg fa-fw"></i></span>
+                                                                            <input placeholder="Nro de Cuenta" class="form-control input-group-sm" type="text" name="CUENTA"  id="nu_cuen" maxlength="30"   />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-4" id="no_cuen_ban" >
+                                                                    <div class="form-group">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-list-alt fa-lg fa-fw"></i></span>
+                                                                            <input placeholder="Nro de Cuenta Bancaria" class="form-control input-group-sm" type="text" name="CUENTA_BANC" id="nu_cuen_ban">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-4" id="generar" >
+                                                                    <div class="row form-group">
+                                                                        <div class="col-sm-8"style="margin-top:5px;">
+                                                                            <label>
+                                                                                <input type="checkbox" name="GEN_NU_CUEN" id="subscription" class="checkbox style-2" value="1">
+                                                                                <span><label>  Generar Nro de Cuenta Bancaria</label></span>
+                                                                            </label>                                                                       
+                                                                        </div>
+                                                                    </div>
+                                                                </div> 
+                                                                <input type="hidden" value="0" name="ES_CUENTA_SUELDO" id="es_cuenta"/>
                                                             </div>
-                                                            <div class="col-sm-4" id="no_cuen_otros" >
-                                                                <div class="form-group">
-                                                                    <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="fa fa-bank fa-lg fa-fw"></i></span>
-                                                                        <input class="form-control input-group-sm"  placeholder="Nombre del Banco" type="text" name="BANCO_OTROS"  id="nu_cuen_otros" maxlength="30"   />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-4" id="no_cuen" >
-                                                                <div class="form-group">
-                                                                    <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="fa fa-bank fa-lg fa-fw"></i></span>
-                                                                        <input placeholder="Nro de Cuenta" class="form-control input-group-sm" type="text" name="CUENTA"  id="nu_cuen" maxlength="30"   />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-4" id="no_cuen_ban" >
-                                                                <div class="form-group">
-                                                                    <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="fa fa-bank fa-lg fa-fw"></i></span>
-                                                                        <input placeholder="Nro de Cuenta Bancaria" class="form-control input-group-sm" type="text" name="CUENTA_BANC" id="nu_cuen_ban">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-4" id="generar" >
-                                                                <div class="form-group">
-                                                                    <div class="input-g">
-                                                                        <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="1">
-                                                                        <i></i>Generar Nro de Cuenta Bancaria
-                                                                    </div>
-                                                                </div>
-                                                            </div> 
-                                                            <input type="hidden" value="0" name="ES_CUENTA_SUELDO" id="es_cuenta"/>
                                                         </div>  
 
                                                         <script>
@@ -1038,9 +1042,7 @@
                                                         </script> 
 
                                                         <div class="tab-pane" id="tab3">
-
-                                                            <strong>Paso 3</strong>
-                                                            <h3>-Domicilio Actual del Trabajador</h3>
+                                                            <h3><strong>Paso 3</strong> -Domicilio Actual del Trabajador</h3>
                                                             <label>Direccion :</label>
                                                             <div class="row">
 
@@ -1067,7 +1069,7 @@
                                                                     <div class="form-group">
 
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-pencil fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-group-sm"    placeholder="" type="text" name="DIR_DOM_A_D2" id="DOM_A_D2" maxlength="100">
 
                                                                             </select>
@@ -1167,7 +1169,7 @@
                                                                     <div class="form-group">
 
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-pencil  fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-group-sm"    placeholder="" type="text" name="DIR_DOM_A_D4" id="DOM_A_D4" maxlength="100">
 
                                                                         </div>
@@ -1198,7 +1200,7 @@
                                                                     <div class="form-group">
 
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-pencil  fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-group-sm"    placeholder="" type="text" name="DIR_DOM_A_D6" id="DOM_A_D6" maxlength="100">
 
                                                                         </div>
@@ -1208,7 +1210,7 @@
                                                                     <div class="form-group">
 
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-pencil  fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-group-sm"    placeholder="Referencia" type="text" name="DIR_DOM_A_REF" id="DOM_A_REF" maxlength="200">
                                                                         </div>
                                                                     </div>
@@ -1263,11 +1265,13 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <button onclick="duplicar();
-                                                                        return false;"  class="btn btn-primary" id="btn-duplicar">Duplicar</button>
+                                                                <div class="col-sm-3">
+                                                                    <div class="form-group">
+                                                                        <button onclick="duplicar();
+                                                                                return false;"  class="btn btn-primary btn-sm" id="btn-duplicar" style="width: 90%;margin-top:0px;" >Duplicar</button>
+                                                                    </div>
 
-
-
+                                                                </div>
                                                             </div>
 
                                                             <h3>- Domicilio Legal (segun DNI)</h3>
@@ -1295,7 +1299,7 @@
                                                                     <div class="form-group">
 
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-pencil fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-group-sm"    placeholder="" type="text" name="DIR_DOM_LEG_D2" id="DOM_LEG_D2" maxlength="100">
 
                                                                         </div>
@@ -1326,7 +1330,7 @@
                                                                     <div class="form-group">
 
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-pencil fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-group-sm"    placeholder="" type="text" name="DIR_DOM_LEG_D4" id="DOM_LEG_D4" maxlength="100">
 
                                                                         </div>
@@ -1355,7 +1359,7 @@
                                                                     <div class="form-group">
 
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-pencil fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-group-sm"    placeholder="" type="text" name="DIR_DOM_LEG_D6" id="DOM_LEG_D6" maxlength="100">
 
                                                                         </div>
@@ -1390,7 +1394,6 @@
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select   id="pro_dir_l" class="form-control input-group-sm"  required="">
                                                                                 <option value="">[Provincia]</option>
-
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -1416,7 +1419,7 @@
                                                                     <div class="form-group">
 
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-suitcase fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-cube fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-group-sm"    placeholder="Empresa" type="text" name="ING_QTA_CAT_EMPRESA"  maxlength="100">
 
                                                                         </div>
@@ -1427,7 +1430,7 @@
                                                                     <div class="form-group">
 
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-file-o fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-barcode fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-group-sm"    placeholder="RUC" type="text" name="ING_QTA_CAT_RUC"  maxlength="20">
 
                                                                         </div>
@@ -1443,7 +1446,7 @@
                                                                     <div class="form-group">
 
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-suitcase fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-cubes fa-lg fa-fw"></i></span>
                                                                             <textarea name="ING_QTA_CAT_OTRAS_EMPRESAS"  placeholder="Otras Empresas"  class="form-control input-group-sm"  cols="60" rows="6" maxlength="500" ></textarea>
                                                                         </div>
                                                                     </div>
@@ -1809,7 +1812,6 @@
                                                                     var p = 1;
                                                                     var texto_h = "";
                                                                     $(".btn-reg-hijo").click(function() {
-
                                                                         var tabla_hijo = $(".tabla-hijo");
                                                                         var ap_pat = $(".i_app_h");
                                                                         var ap_mat = $(".i_apm_h");
@@ -1820,7 +1822,6 @@
                                                                         var ndoc = $(".i_ndoc_h");
                                                                         var essalud = $(".i_essalud_h");
                                                                         var es_sup = $(".i_es_sup_h");
-
                                                                         texto_h += ("<tr class='tr-hijo_" + p + "'>");
                                                                         texto_h += ('<td ><label class="td-ap_pat' + p + '">' + ap_pat.val() + '</label><input type="hidden" value="' + ap_pat.val() + '" name="APELLIDO_P_H' + p + '" class="ap_p_h_' + p + '"/></td>');
                                                                         texto_h += ('<td ><label class="td-ap_mat' + p + '">' + ap_mat.val() + '</label><input type="hidden" value="' + ap_mat.val() + '" name="APELLIDO_M_H' + p + '" class="ap_m_h_' + p + '"/></td>');
@@ -1879,7 +1880,7 @@
                                                                                 $(".td-sex" + $(this).val()).text($(".i_sexo_h option:selected").html());
                                                                                 $(".td-tdoc" + $(this).val()).text($(".i_tdoc_h option:selected").html());
                                                                                 $(".td-ndoc" + $(this).val()).text(ndoc.val());
-                                                                                $(".td-essalud" + $(this).val()).text( $(".i_essalud_h option:selected").html());
+                                                                                $(".td-essalud" + $(this).val()).text($(".i_essalud_h option:selected").html());
                                                                                 $(".td-es_sup" + $(this).val()).text($(".i_es_sup_h option:selected").html());
 
                                                                                 ap_pat.val("");
@@ -2472,7 +2473,7 @@
                     }
 
                 } else {
-                    ti.append("<option value=''>[]</option>");
+                    ti.append("<option value=''>[Provincia]</option>");
                 }
 
             });
@@ -2530,7 +2531,7 @@
 
 
                 } else {
-                    ti.append("<option value=''>[]</option>");
+                    ti.append("<option value=''>[Distrito]</option>");
                 }
 
 
