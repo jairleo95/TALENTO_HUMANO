@@ -63,12 +63,13 @@ public class CDocumento_Trabajador extends HttpServlet {
             if (opc.equals("Eliminar")) {
                 String id_doc_adj = request.getParameter("id_doc");
                 d.Desactivar_doc(id_doc_adj);
-                int s = d.List_Req_nacionalidad(idtr);
-                int num_ad = d.List_Adventista(idtr);
                 getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
+                getServletContext().setAttribute("Documentos", d.Documentos());
                 getServletContext().setAttribute("Lis_doc_trabajador", d.Lis_doc_trabajador(idtr));
                 getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
-                response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&iddgp=" + dgp + "&pro=pr_dgp");
+                int s = d.List_Req_nacionalidad(idtr);
+                int num_ad = d.List_Adventista(idtr);
+                response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&pro=pr_dgp&P2=TRUE");
 
             }
             if (opc.equals("Ver_Documento")) {
@@ -235,7 +236,7 @@ public class CDocumento_Trabajador extends HttpServlet {
                         }
                     }
                 }
-                //Thread.sleep(1000);
+                Thread.sleep(100);
                 if (nombre_archivo != null) {
 
                     if (!nombre_archivo.equals("")) {
@@ -272,12 +273,11 @@ public class CDocumento_Trabajador extends HttpServlet {
 
             int s = d.List_Req_nacionalidad(idtr);
             int num_ad = d.List_Adventista(idtr);
-            
 
             out.print(idtr);
             int count = d.count_documentos_x_tra(idtr);
             if (count > 0) {
-                response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr );
+                response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr);
             } else {
                 response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&pro=pr_dgp");
             }

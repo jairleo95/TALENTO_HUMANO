@@ -99,7 +99,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
 
             while (rs.next()) {
 
-                texto_html = texto_html + "<img src=\"../../Dgp/Documento/Archivo/"+ rs.getString("no_file")+"\" />";
+                texto_html = texto_html + "<img src=\"../../Dgp/Documento/Archivo/"+ rs.getString("NO_FILE")+"\" />";
             }
             rs.close();
         } catch (SQLException e) {

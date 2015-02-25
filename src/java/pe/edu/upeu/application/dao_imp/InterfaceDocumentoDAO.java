@@ -24,6 +24,7 @@ public interface InterfaceDocumentoDAO {
     public List<V_Documento_Trabajador> List_Id_Doc_Trab(String id_trabajador);
 
     public String List_files(String id);
+    
     public String List_files_tra(String id);
 
     public List<Documentos> List_Documentos();

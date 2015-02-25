@@ -219,7 +219,7 @@ public class CTrabajador extends HttpServlet {
             if (count > 0) {
                 response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr );
             } else {
-                response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&pro=pr_dgp");
+                response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&pro=pr_dgp&P2=TRUE");
             }
             //response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr + "&a=t");
         }
@@ -267,6 +267,17 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
            
             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim());
+        }
+        if ("list_reg_tra".equals(opc)) {
+            String idtr = request.getParameter("idtr");
+            getServletContext().setAttribute("List_Cuenta_Sueldo", tr.List_Cuenta_Sueldo(idtr));
+            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            getServletContext().setAttribute("List_Universidad", li.List_Universidad());
+            getServletContext().setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
+            getServletContext().setAttribute("List_Ubigeo", ub.List_Distrito());
+            getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
+           
+            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim()+"&a=t");
         }
         if ("actualizar".equals(opc)) {
             String idtr = request.getParameter("idtr");
