@@ -1,0 +1,90 @@
+html,body,p,pre,ol,ul,li,h1,h2,h3,dl,dt,dd{margin:0;padding:0;}
+li{list-style-type:none;}
+code,th{font-style:normal;font-weight:normal;}
+th{text-align:left;}
+table{border-collapse:collapse;border-spacing:0;}
+
+html,body{height:100%;}
+body{font-size:14px;font-weight:200;line-height:24px;color:white;background:url(bg.gif) repeat;}
+body,strong,em,b,i{font-family:"HelveticaNeue-Light","Helvetica Neue",Helvetica,Arial,sans-serif;}
+
+a:link,a:visited{color:#0098ff;}
+img{border:none;}
+p,h1,h2,h3,ol,ul,pre{margin-bottom:18px;}
+h1,h2,h3,#subtitle{font-weight:normal;}
+h1{font-size:26px;line-height:36px;}
+h2{font-size:16px;}
+ul,ol{margin-left:60px;}
+ul li{list-style-type:square;}
+ol li{list-style-type:decimal;}
+pre,code{font:12px Monaco,monospace;background:white;color:black;}
+pre{padding:5px 10px;border:1px solid #ddd;line-height:15px;overflow-x:auto;}
+table{margin:0 auto 18px;}
+table th,table td{vertical-align:top;padding:4px 10px 4px 4px;}
+table th{text-decoration:underline;}
+table ul,table ol{margin-bottom:5px;}
+table td.align-right{text-align:right;}
+div.break{clear:both;height:18px;}
+
+#outer-wrapper{margin-bottom:-34px;min-height:100%;height:auto !important;height:100%;}
+#stripe{border-top:3px solid black;}
+#wrapper{width:720px;margin:0 auto;}
+#header{height:36px;padding:36px 0 18px 0;}
+#nav,#footer{background:black;color:white;}
+#footer,#push{height:34px;}
+#footer p{text-align:center;font-size:10px;margin:0;line-height:34px;}
+
+#forum #wrapper{width:90%;}
+#forum #nav{margin:0;}
+#forum #content{background:white;}
+
+ul#nav{margin:0 0 18px;text-align:center;padding:4px 0;}
+ul#nav li{list-style:none;display:inline;}
+ul#nav li a{padding:4px 12px;}
+ul#nav li a.selected{background:#202020;}
+
+#download-callout{width:260px;float:right;margin-left:18px;padding:20px 20px 0;background:#202020;border:1px solid #111;}
+#purchase-callout{border:1px solid #111;background:#202020;width:340px;margin:0 auto 18px;}
+#purchase-callout table{margin-bottom:0;}
+#purchase-callout td{padding:20px;text-align:center;}
+#download-container{width:260px;text-align:center;margin:0 auto 18px;padding:20px;background:#202020;border:1px solid #111;}
+#download-container #version{font-size:24px;font-weight:bold;}
+
+#download-zip,#download-tar{cursor:pointer;}
+
+div.feature{width:290px;float:left;margin-left:20px;padding:0 0 20px 60px;background:no-repeat 14px 0;}
+div.feature-icon{width:60px;text-align:center;float:left;}
+div.feature-title{font-size:15px;}
+div.left{clear:left;margin-left:0;}
+div#feature-standards{background-image:url(icon-standards.gif);}
+div#feature-free{background-image:url(icon-free.gif);}
+div#feature-media{background-image:url(icon-media.gif);}
+div#feature-smarts{background-image:url(icon-lightbulb.gif);}
+div#feature-customize{background-image:url(icon-customize.gif);}
+div#feature-universal{background-image:url(icon-universal.gif);}
+div#feature-neat{background-image:url(icon-neat.gif);}
+div#feature-smiley{background-image:url(icon-smiley.gif);}
+
+p.note{padding:5px 10px;border:1px solid steelblue;background:#74a3ca;}
+p.note code{background:steelblue;color:white;}
+p.note a:link,p.note a:visited{color:white;}
+span.note-label{font-size:10px;font-weight:bold;letter-spacing:1px;width:40px;float:left;}
+span.note-text{display:block;padding-left:50px;}
+
+table.thumbs td{text-align:center;vertical-align:middle;}
+table.thumbs td img{margin:0 auto;}
+a.option{padding:4px 10px;border:1px solid #101010;background:#202020;text-decoration:none;display:block;float:left;clear:left;margin-bottom:4px;cursor:pointer;color:#0098ff;}
+a.option:hover{background:#101010;}
+img.border{padding:5px;border:1px solid #eee;background-color:#efefef;}
+
+.hidden{display:none;}
+#hongkong{text-align:center;padding-bottom:18px;}
+div.question{background:url(question.gif) no-repeat 2px 3px;padding-left:26px;}
+
+ul#browser-list{margin-left:38px;}
+ul#browser-list li{list-style-type:none;padding-bottom:4px;}
+ul#browser-list img{vertical-align:middle;margin-right:10px;}
+ul#browser-list li.opera img{margin-left:-3px;margin-right:13px;}
+
+#nav,#nav li a.selected,pre,p.note,.rounded,a.option,#download-callout,#purchase-callout,#download-container,#build-menu{-moz-border-radius:3px;-webkit-border-radius:3px;}
+#forum #nav{-moz-border-radius-bottomleft:0;-moz-border-radius-bottomright:0;-webkit-border-bottom-left-radius:0;-webkit-border-bottom-right-radius:0;}

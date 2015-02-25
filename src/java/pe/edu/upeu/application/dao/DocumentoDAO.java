@@ -623,4 +623,42 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
         }
     }
 
+    @Override
+    public List<Lis_Doc_tra> Lis_doc_trabajador_hab(String idtr) {
+                this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT * FROM RHVD_LIST_DOC_TRA WHERE ID_DOCUMENTO_ADJUNTO IS NOT NULL AND ID_TRABAJADOR='"+idtr.trim()+"'";
+        List<Lis_Doc_tra> x = new ArrayList<Lis_Doc_tra>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+
+            while (rs.next()) {
+                Lis_Doc_tra v = new Lis_Doc_tra();
+                v.setTi_documento(rs.getString("TI_DOCUMENTO"));
+                v.setNo_documento(rs.getString("NO_DOCUMENTO"));
+                v.setId_trabajador(rs.getString("ID_TRABAJADOR"));
+                v.setId_documentos(rs.getString("ID_DOCUMENTOS"));
+                v.setId_documento_adjunto(rs.getString("ID_DOCUMENTO_ADJUNTO"));
+                v.setId_dgp_doc_adj(rs.getString("ID_DGP_DOC_ADJ"));
+                v.setId_dgp(rs.getString("ID_DGP"));
+                v.setEs_obligatorio(rs.getString("ES_OBLIGATORIO"));
+                v.setEs_documento_adjunto(rs.getString("ES_DOCUMENTO_ADJUNTO"));
+                v.setEs_documento(rs.getString("ES_DOCUMENTO"));
+                v.setEs_dgp_doc_adj(rs.getString("ES_DGP_DOC_ADJ"));
+                v.setDe_documento_adjunto(rs.getString("DE_DOCUMENTO_ADJUNTO"));
+                x.add(v);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return x;
+    }
+
 }

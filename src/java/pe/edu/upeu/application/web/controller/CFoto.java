@@ -52,74 +52,74 @@ public class CFoto extends HttpServlet {
         InterfaceTrabajadorDAO tr = new TrabajadorDAO();
         String ubicacion = "";
         try {
-           /* if (System.getProperty("sun.desktop").trim().equals("windows")) {
-                ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "\\Vista\\Usuario\\Fotos";
-            } else {
-                ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "/Vista/Usuario/Fotos/";
-            }*/
+             /*if (System.getProperty("sun.desktop").trim().equals("windows")) {
+             ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "\\Vista\\Usuario\\Fotos";
+             } else {
+             ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "/Vista/Usuario/Fotos/";
+             }*/
               ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Usuario/Fotos/";
-          
             
+
             //out.print(ubicacion);
-
+            out.print(ubicacion);
             DiskFileItemFactory f = new DiskFileItemFactory();
-            f.setSizeThreshold(1024);
-            f.setRepository(new File(ubicacion));
-            ServletFileUpload upload = new ServletFileUpload(f);
+             f.setSizeThreshold(1024);
+             f.setRepository(new File(ubicacion));
+             ServletFileUpload upload = new ServletFileUpload(f);
 
-            List<FileItem> p = upload.parseRequest(request);
-            String idtr = null;
-            String nombre_archivo = null;
-            String no_original = null;
-            long sizeInBytes = 0;
-            Iterator it = p.iterator();
-            while (it.hasNext()) {
+             List<FileItem> p = upload.parseRequest(request);
+             String idtr = null;
+             String nombre_archivo = null;
+             String no_original = null;
+             long sizeInBytes = 0;
+             Iterator it = p.iterator();
+             while (it.hasNext()) {
 
-                FileItem item = (FileItem) it.next();
+             FileItem item = (FileItem) it.next();
 
-                if (item.isFormField()) {
+             if (item.isFormField()) {
 
-                    String nombre = item.getFieldName();
-                    String valor = item.getString();
-                    if (nombre.equals("idtr") & idtr == null) {
-                        idtr = valor;
-                    }
+             String nombre = item.getFieldName();
+             String valor = item.getString();
+             if (nombre.equals("idtr") & idtr == null) {
+             idtr = valor;
+             }
 
-                } else {
+             } else {
 
-                    String fieldName = item.getFieldName();
-                    sizeInBytes = item.getSize();
-                    Calendar fecha = new GregorianCalendar();
-                    int hora = fecha.get(Calendar.HOUR_OF_DAY);
-                    int min = fecha.get(Calendar.MINUTE);
-                    int sec = fecha.get(Calendar.SECOND);
-                    if (fieldName.equals("archivo")) {
-                        nombre_archivo = String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + idtr + "_" + item.getName().toUpperCase();
-                        no_original = item.getName();
-                        Thread thread = new Thread(new Renombrar(item, ubicacion, nombre_archivo));
-                        thread.start();
-                    } else {
-                        no_original = no_original;
-                        nombre_archivo = nombre_archivo;
-                    }
+             String fieldName = item.getFieldName();
+             sizeInBytes = item.getSize();
+             Calendar fecha = new GregorianCalendar();
+             int hora = fecha.get(Calendar.HOUR_OF_DAY);
+             int min = fecha.get(Calendar.MINUTE);
+             int sec = fecha.get(Calendar.SECOND);
+             if (fieldName.equals("archivo")) {
+             nombre_archivo = String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + idtr + "_" + item.getName().toUpperCase();
+             no_original = item.getName();
+             Thread thread = new Thread(new Renombrar(item, ubicacion, nombre_archivo));
+             thread.start();
+             } else {
+             no_original = no_original;
+             nombre_archivo = nombre_archivo;
+             }
 
-                }
+             }
 
-            }
+             }
 
-            foto.INSERT_FOTOS_TRABAJADOR(null, null, nombre_archivo, no_original, no_original, String.valueOf(sizeInBytes), idtr);
+             foto.INSERT_FOTOS_TRABAJADOR(null, null, nombre_archivo, no_original, no_original, String.valueOf(sizeInBytes), idtr);
 
-            //getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-            //Thread.sleep(2000);
-           // response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr);
-            // out.println("Archivo subido correctamente");
+             //getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+             //Thread.sleep(2000);
+             // response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr);
+             // out.println("Archivo subido correctamente");
              out.println(no_original);
              out.println(nombre_archivo);
              out.println(sizeInBytes);
         } catch (Exception e) {
             out.print(e.getMessage());
             //out.print(ubicacion);
-        } 
+        }        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

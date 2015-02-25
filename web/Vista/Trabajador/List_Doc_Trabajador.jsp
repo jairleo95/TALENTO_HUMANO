@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.model.Lis_Doc_tra"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
     HttpSession sesion_1 = request.getSession();
@@ -5,7 +6,7 @@
     if (id_user_1 != null) {
 %>
 <%@page import="pe.edu.upeu.application.model.V_Documento_Trabajador"%>
-<jsp:useBean id="List_Id_Doc_Trab" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Lis_doc_trabajador_hab" scope="application" class="java.util.ArrayList"/>
 
 <!DOCTYPE html>
 <html>
@@ -115,28 +116,24 @@
                                                     <th data-class="expand" style="color:black">Nombres </th>
                                                     <th data-hide="phone,tablet" style="color:black">Documento</th>
                                                     <th data-hide="phone" style="color:black">Descrición</th>
-                                                    <th data-hide="phone,tablet" style="color:black">Requerimiento</th>
                                                 </tr>  
-                                            <thead>
+                                            </thead>
                                             <tbody>
 
-                                                <%  if (List_Id_Doc_Trab.size() == 0) {%>
-                                           
-                                            <%}%>
-                                            <%for (int i = 0; i < List_Id_Doc_Trab.size(); i++) {
-                                                    V_Documento_Trabajador d = new V_Documento_Trabajador();
-                                                    d = (V_Documento_Trabajador) List_Id_Doc_Trab.get(i);
+                                                <%  if (Lis_doc_trabajador_hab.size() == 0) {%>
+                                                <tr>NO TIENE REGISTRADO NINGUN DOCUMENTO EN ESTE MOMENTO</tr>
+                                            <%}else{%>
+                                            <%for (int i = 0; i < Lis_doc_trabajador_hab.size(); i++) {
+                                                    Lis_Doc_tra d = new Lis_Doc_tra();
+                                                    d = (Lis_Doc_tra) Lis_doc_trabajador_hab.get(i);
                                             %>
                                             <tr>
                                                 <td ><%=i + 1%></td>
                                                 <td ><%=d.getNo_documento()%></td>
-                                                <td ><a href="../Dgp/Documento/Ver_Doc.jsp?nom_doc=<%=d.getAr_dato_archivo()%>"><%=d.getNo_documento()%></a></td>
-
+                                                <td ><a href="../Dgp/Documento/Ver_Doc.jsp?nom_doc="><%=d.getNo_documento()%></a></td>
                                                 <td ><%=d.getDe_documento_adjunto()%></td>
-                                                <td><%=d.getNo_req()%></td>
-
                                             </tr>
-                                            <% }%>
+                                            <% }}%>
                                             </tbody>
                                         </table>
                                     </div>

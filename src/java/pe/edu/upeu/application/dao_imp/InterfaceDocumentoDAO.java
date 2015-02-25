@@ -61,4 +61,6 @@ public interface InterfaceDocumentoDAO {
     public List<Lis_Doc_tra> Lis_doc_trabajador(String idtr);
 
     public void INSERT_DGP_DOC_tra(String ID_DGP_DOC_ADJ, String ID_DGP, String ID_DOCUMENTO_ADJUNTO, String ES_DGP_DOC_ADJ, String idtr);
+    
+    public List<Lis_Doc_tra> Lis_doc_trabajador_hab(String idtr);
 }
