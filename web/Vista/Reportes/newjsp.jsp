@@ -118,7 +118,7 @@
 
     <body id="dt_example">
 
-        <H1 align="center">FILTRAR DATOS</H1>
+        <H1 >FILTRAR DATOS</H1>
         <table cellspacing="0" cellpadding="0" border="0" class="display" ID="Table1">
             <tbody>
                 <tr id="filter_global" class="a"><td align="center">Codigo Aps</td><td align="center" id="co_aps"></td></tr>

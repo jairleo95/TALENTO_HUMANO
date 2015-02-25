@@ -172,7 +172,7 @@
                                                         <a style="margin-left: 3%;" href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a></td>
                                                         <% } else {%>
                                                     <td><img src="../Usuario/Fotos/<%=r.getAr_foto()%>"  width="60"  height="60"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a></td>
-                                                        <% }%>
+                                                    <% }%>
                                                     <td> <strong><%=r.getNo_req()%></strong></td>
                                                     <td> <strong><%=r.getFe_creacion()%></strong></td>
 

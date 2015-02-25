@@ -310,7 +310,7 @@ public class CContrato extends HttpServlet {
             if (("Buscar".equals(Buscar) & (!"".equals(dni) | !"".equals(nom) | !"".equals(ape_mat) | !"".equals(ape_pat)))) {
                 String busc = (String) request.getParameter("busc");
                 if (busc != null) {
-                    getServletContext().setAttribute("ListarTrabajador2", tr.ListarTrabajador(iddep, dni, nom, ape_pat, ape_mat));
+                    getServletContext().setAttribute("ListarTrabajador2", tr.Buscar_Ficha_Trabajador(iddep, dni, nom, ape_pat, ape_mat));
                     getServletContext().setAttribute(nom, dgp.VAL_OPC_DGP(dni));
                     response.sendRedirect("Vista/Contrato/Gen_Contrato_CE.jsp");
                 }

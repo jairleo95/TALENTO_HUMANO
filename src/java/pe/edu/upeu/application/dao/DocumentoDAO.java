@@ -20,6 +20,7 @@ import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Cuenta_Sueldo;
 import pe.edu.upeu.application.model.Datos_Hijo_Trabajador;
 import pe.edu.upeu.application.model.Documentos;
+import pe.edu.upeu.application.model.Lis_Doc_tra;
 import pe.edu.upeu.application.model.Padre_Madre_Conyugue;
 import pe.edu.upeu.application.model.V_Documento_Trabajador;
 import pe.edu.upeu.application.model.V_Reg_Dgp_Tra;
@@ -71,6 +72,35 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
             while (rs.next()) {
 
                 texto_html = texto_html + "<img src=\"Archivo/" + rs.getString("NO_FILE") + "\" />";
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return texto_html;
+    }
+
+    @Override
+    public String List_files_tra(String id) {
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        String texto_html = "";
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select a.NO_FILE,a.NO_ORIGINAL  from RHTV_ARCHIVO_DOCUMENTO a ,  RHTV_DOCUMENTO_ADJUNTO d where d.ID_DOCUMENTO_ADJUNTO = a.ID_DOCUMENTO_ADJUNTO  and  a.id_documento_adjunto='" + id + "' and a.ES_FILE='1'";
+            ResultSet rs = this.conn.query(sql);
+
+            while (rs.next()) {
+
+                texto_html = texto_html + "<img src=\"../../Dgp/Documento/Archivo/"+ rs.getString("NO_FILE")+"\" />";
             }
             rs.close();
         } catch (SQLException e) {
@@ -272,7 +302,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     }
 
     @Override
-    public void INSERT_DGP_DOC_ADJ(String ID_DGP_DOC_ADJ, String ID_DGP, String ID_DOCUMENTO_ADJUNTO, String ES_DGP_DOC_ADJ,String idtr) {
+    public void INSERT_DGP_DOC_ADJ(String ID_DGP_DOC_ADJ, String ID_DGP, String ID_DOCUMENTO_ADJUNTO, String ES_DGP_DOC_ADJ, String idtr) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DGP_DOC_ADJ( ?, ?, ?, ? ,?)} ");
@@ -313,7 +343,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
             cst.setString(9, DE_DOCUMENTO_ADJUNTO);
             cst.setString(10, NO_USUARIO);
             cst.setString(11, ES_REC_FISICO);
-            
+
             cst.registerOutParameter(12, Types.CHAR);
             cst.execute();
             id = cst.getString(12);
@@ -507,6 +537,90 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
         }
 
         return num;
+    }
+
+    @Override
+    public List<Documentos> Documentos() {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT ID_DOCUMENTOS,NO_DOCUMENTO, ES_DOCUMENTO, TI_DOCUMENTO,ES_OBLIGATORIO FROM RHTR_DOCUMENTOS where ES_DOCUMENTO='1'";
+        List<Documentos> list = new ArrayList<Documentos>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Documentos d = new Documentos();
+                d.setEs_documento(rs.getString("ES_DOCUMENTO"));
+                d.setId_documentos(rs.getString("ID_DOCUMENTOS"));
+                d.setNo_documento(rs.getString("NO_DOCUMENTO"));
+                d.setTi_documento(rs.getString("TI_DOCUMENTO"));
+                list.add(d);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return list;
+    }
+
+    @Override
+    public List<Lis_Doc_tra> Lis_doc_trabajador(String idtr) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT * FROM RHVD_LIST_DOC_TRA  where ID_TRABAJADOR='" + idtr.trim() + "'";
+        List<Lis_Doc_tra> x = new ArrayList<Lis_Doc_tra>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+
+            while (rs.next()) {
+                Lis_Doc_tra v = new Lis_Doc_tra();
+                v.setTi_documento(rs.getString("TI_DOCUMENTO"));
+                v.setNo_documento(rs.getString("NO_DOCUMENTO"));
+                v.setId_trabajador(rs.getString("ID_TRABAJADOR"));
+                v.setId_documentos(rs.getString("ID_DOCUMENTOS"));
+                v.setId_documento_adjunto(rs.getString("ID_DOCUMENTO_ADJUNTO"));
+                v.setId_dgp_doc_adj(rs.getString("ID_DGP_DOC_ADJ"));
+                v.setId_dgp(rs.getString("ID_DGP"));
+                v.setEs_obligatorio(rs.getString("ES_OBLIGATORIO"));
+                v.setEs_documento_adjunto(rs.getString("ES_DOCUMENTO_ADJUNTO"));
+                v.setEs_documento(rs.getString("ES_DOCUMENTO"));
+                v.setEs_dgp_doc_adj(rs.getString("ES_DGP_DOC_ADJ"));
+                v.setDe_documento_adjunto(rs.getString("DE_DOCUMENTO_ADJUNTO"));
+                x.add(v);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return x;
+    }
+
+    @Override
+    public void INSERT_DGP_DOC_tra(String ID_DGP_DOC_ADJ, String ID_DGP, String ID_DOCUMENTO_ADJUNTO, String ES_DGP_DOC_ADJ, String idtr) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DGP_DOC_ADJ( ?, ?, ?, ? ,?)} ");
+            cst.setString(1, null);
+            cst.setString(2, null);
+            cst.setString(3, ID_DOCUMENTO_ADJUNTO.trim());
+            cst.setString(4, ES_DGP_DOC_ADJ);
+            cst.setString(5, idtr.trim());
+            cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
     }
 
 }

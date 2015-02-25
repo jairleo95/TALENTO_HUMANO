@@ -33,7 +33,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
     ConexionBD conn;
 
     @Override
-    public void INSERT_TRABAJADOR(String ID_TRABAJADOR, String AP_PATERNO, String AP_MATERNO, String NO_TRABAJADOR, String TI_DOC, String NU_DOC, String ES_CIVIL, String FE_NAC, String ID_NACIONALIDAD, String ID_DEPARTAMENTO, String ID_PROVINCIA, String ID_DISTRITO, String TE_TRABAJADOR, String CL_TRA, String DI_CORREO_PERSONAL, String DI_CORREO_INST, String CO_SISTEMA_PENSIONARIO, String ID_SITUACION_EDUCATIVA, String LI_REG_INST_EDUCATIVA, String ES_INST_EDUC_PERU, String ID_UNIVERSIDAD_CARRERA, String DE_ANNO_EGRESO, String CM_OTROS_ESTUDIOS, String ES_SEXO, String LI_GRUPO_SANGUINEO, String DE_REFERENCIA, String LI_RELIGION, String NO_IGLESIA, String DE_CARGO, String LI_AUTORIDAD, String NO_AP_AUTORIDAD, String CL_AUTORIDAD, String ID_NO_AFP, String ES_AFILIADO_ESSALUD, String LI_TIPO_TRABAJADOR, String CA_TIPO_HORA_PAGO_REFEERENCIAL, String ES_FACTOR_RH, String LI_DI_DOM_A_D1, String DI_DOM_A_D2, String LI_DI_DOM_A_D3, String DI_DOM_A_D4, String LI_DI_DOM_A_D5, String DI_DOM_A_D6, String DI_DOM_A_REF, String ID_DI_DOM_A_DISTRITO, String LI_DI_DOM_LEG_D1, String DI_DOM_LEG_D2, String LI_DI_DOM_LEG_D3, String DI_DOM_LEG_D4, String LI_DI_DOM_LEG_D5, String DI_DOM_LEG_D6, String ID_DI_DOM_LEG_DISTRITO, String CA_ING_QTA_CAT_EMPRESA, String CA_ING_QTA_CAT_RUC, String CA_ING_QTA_CAT_OTRAS_EMPRESAS, String CM_OBSERVACIONES, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String AP_NOMBRES_PADRE, String AP_NOMBRES_MADRE, String ES_TRABAJA_UPEU_C, String AP_NOMBRES_C, String FE_NAC_C, String ID_TIPO_DOC_C, String NU_DOC_C, String LI_INSCRIPCION_VIG_ESSALUD_C, String ID_CONYUGUE, String CO_UNIVERSITARIO ) {
+    public void INSERT_TRABAJADOR(String ID_TRABAJADOR, String AP_PATERNO, String AP_MATERNO, String NO_TRABAJADOR, String TI_DOC, String NU_DOC, String ES_CIVIL, String FE_NAC, String ID_NACIONALIDAD, String ID_DEPARTAMENTO, String ID_PROVINCIA, String ID_DISTRITO, String TE_TRABAJADOR, String CL_TRA, String DI_CORREO_PERSONAL, String DI_CORREO_INST, String CO_SISTEMA_PENSIONARIO, String ID_SITUACION_EDUCATIVA, String LI_REG_INST_EDUCATIVA, String ES_INST_EDUC_PERU, String ID_UNIVERSIDAD_CARRERA, String DE_ANNO_EGRESO, String CM_OTROS_ESTUDIOS, String ES_SEXO, String LI_GRUPO_SANGUINEO, String DE_REFERENCIA, String LI_RELIGION, String NO_IGLESIA, String DE_CARGO, String LI_AUTORIDAD, String NO_AP_AUTORIDAD, String CL_AUTORIDAD, String ID_NO_AFP, String ES_AFILIADO_ESSALUD, String LI_TIPO_TRABAJADOR, String CA_TIPO_HORA_PAGO_REFEERENCIAL, String ES_FACTOR_RH, String LI_DI_DOM_A_D1, String DI_DOM_A_D2, String LI_DI_DOM_A_D3, String DI_DOM_A_D4, String LI_DI_DOM_A_D5, String DI_DOM_A_D6, String DI_DOM_A_REF, String ID_DI_DOM_A_DISTRITO, String LI_DI_DOM_LEG_D1, String DI_DOM_LEG_D2, String LI_DI_DOM_LEG_D3, String DI_DOM_LEG_D4, String LI_DI_DOM_LEG_D5, String DI_DOM_LEG_D6, String ID_DI_DOM_LEG_DISTRITO, String CA_ING_QTA_CAT_EMPRESA, String CA_ING_QTA_CAT_RUC, String CA_ING_QTA_CAT_OTRAS_EMPRESAS, String CM_OBSERVACIONES, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String AP_NOMBRES_PADRE, String AP_NOMBRES_MADRE, String ES_TRABAJA_UPEU_C, String AP_NOMBRES_C, String FE_NAC_C, String ID_TIPO_DOC_C, String NU_DOC_C, String LI_INSCRIPCION_VIG_ESSALUD_C, String ID_CONYUGUE, String CO_UNIVERSITARIO) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_TRABAJADOR( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )} ");
@@ -102,10 +102,10 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(63, AP_NOMBRES_MADRE);
             cst.setString(64, ES_TRABAJA_UPEU_C);
             cst.setString(65, AP_NOMBRES_C);
-            if(FE_NAC_C != null ){
-            cst.setString(66, c.convertFecha(FE_NAC_C));
-            }else{
-            cst.setString(66, FE_NAC_C);
+            if (FE_NAC_C != null) {
+                cst.setString(66, c.convertFecha(FE_NAC_C));
+            } else {
+                cst.setString(66, FE_NAC_C);
             }
             cst.setString(67, ID_TIPO_DOC_C);
             cst.setString(68, NU_DOC_C);
@@ -116,7 +116,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR :"+e.getMessage());
+            throw new RuntimeException("ERROR :" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -132,12 +132,12 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
     }
 
     @Override
-    public List<V_Ficha_Trab_Num_C> ListarTrabajador(String iddep, String dni, String nom, String ape_p, String ape_m) {
+    public List<V_Ficha_Trab_Num_C> Buscar_Ficha_Trabajador(String iddep, String dni, String nom, String ape_p, String ape_m) {
         /*if (dni != null || !"".equals(nom)) {
 
          }*/
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select d.*, ES_PROCESO_TRABAJADOR(d.id_trabajador) as es_proceso from (select * from RHVD_TRABAJADOR) d, RHVD_USUARIO u where u.id_usuario= d.id_usuario_creacion ";
+        String sql = "select d.* from (select * from RHVD_TRABAJADOR) d, RHVD_USUARIO u where u.id_usuario= d.id_usuario_creacion ";
         nom = nom.toUpperCase();
         ape_p = ape_p.toUpperCase();
         ape_m = ape_m.toUpperCase();
@@ -233,14 +233,134 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 v.setId_universidad_carrera(rs.getString("id_universidad_carrera"));
                 v.setId_nacionalidad(rs.getString("id_nacionalidad"));
                 v.setDistrito_nac(rs.getString("distrito_nac"));
-                v.setEs_proceso(rs.getInt("es_proceso"));
+                //v.setEs_proceso(rs.getInt("es_proceso"));
                 list.add(v);
             }
 
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR :"+e.getMessage());
+            throw new RuntimeException("ERROR :" + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public List<V_Ficha_Trab_Num_C> Buscar_Trabajador_Requerimiento(String iddep, String dni, String nom, String ape_p, String ape_m, String id_req) {
+        /*if (dni != null || !"".equals(nom)) {
+
+         }*/
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select d.*, ES_PROCESO_TRABAJADOR(d.id_trabajador,'" + id_req + "') as es_proceso from (select * from RHVD_TRABAJADOR) d, RHVD_USUARIO u where u.id_usuario= d.id_usuario_creacion ";
+        nom = nom.toUpperCase();
+        ape_p = ape_p.toUpperCase();
+        ape_m = ape_m.toUpperCase();
+        sql += (!"".equals(dni)) ? " and d.NU_DOC='" + dni + "'" : "";
+        sql += (!"".equals(nom)) ? " and upper(d.NO_TRABAJADOR)like '%" + nom.trim() + "%'" : "";
+        sql += (!"".equals(ape_p)) ? " and upper(d.AP_PATERNO)like '%" + ape_p.trim() + "%'" : "";
+        sql += (!"".equals(ape_m)) ? " and upper(d.AP_MATERNO)like '%" + ape_m.trim() + "%'" : "";
+        sql += " order by d.ID_TRABAJADOR desc";
+
+        List<V_Ficha_Trab_Num_C> list = new ArrayList<V_Ficha_Trab_Num_C>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+
+            while (rs.next()) {
+                V_Ficha_Trab_Num_C v = new V_Ficha_Trab_Num_C();
+                v.setNo_s_educativa(rs.getString("no_s_educativa"));
+                v.setAp_nombres_madre(rs.getString("ap_nombres_madre"));
+                v.setAp_nombres_padre(rs.getString("ap_nombres_padre"));
+                v.setEs_trabaja_upeu_c(rs.getString("es_trabaja_upeu_c"));
+                v.setAp_nombres_c(rs.getString("ap_nombres_c"));
+                v.setFe_nac_c(rs.getString("fe_nac_c"));
+                v.setId_tipo_doc_c(rs.getString("id_tipo_doc_c"));
+                v.setNu_doc_c(rs.getString("nu_doc_c"));
+                v.setLi_inscripcion_vig_essalud_c(rs.getString("li_inscripcion_vig_essalud_c"));
+                v.setId_conyugue(rs.getString("id_conyugue"));
+                v.setNo_carrera(rs.getString("no_carrera"));
+                v.setNo_universidad(rs.getString("no_universidad"));
+                v.setAr_foto(rs.getString("ar_foto"));
+                v.setDe_foto(rs.getString("de_foto"));
+                v.setId_foto(rs.getString("id_foto"));
+                v.setNo_ar_foto(rs.getString("no_ar_foto"));
+                v.setTa_ar_foto(rs.getString("ta_ar_foto"));
+                v.setId_trabajador(rs.getString("id_trabajador"));
+                v.setAp_paterno(rs.getString("ap_paterno"));
+                v.setAp_materno(rs.getString("ap_materno"));
+                v.setNo_trabajador(rs.getString("no_trabajador"));
+                v.setTi_doc(rs.getString("ti_doc"));
+                v.setNu_doc(rs.getString("nu_doc"));
+                v.setEs_civil(rs.getString("es_civil"));
+                v.setFe_nac(rs.getString("fe_nac"));
+                v.setNo_nacionalidad(rs.getString("no_nacionalidad"));
+                v.setNo_departamento(rs.getString("no_departamento"));
+                v.setNo_provincia(rs.getString("no_provincia"));
+                v.setNo_distrito(rs.getString("no_distrito"));
+                v.setTe_trabajador(rs.getString("te_trabajador"));
+                v.setCl_tra(rs.getString("cl_tra"));
+                v.setDi_correo_personal(rs.getString("di_correo_personal"));
+                v.setDi_correo_inst(rs.getString("di_correo_inst"));
+                v.setCo_sistema_pensionario(rs.getString("co_sistema_pensionario"));
+                v.setId_situacion_educativa(rs.getString("id_situacion_educativa"));
+                v.setLi_reg_inst_educativa(rs.getString("li_reg_inst_educativa"));
+                v.setEs_inst_educ_peru(rs.getString("es_inst_educ_peru"));
+                v.setCm_otros_estudios(rs.getString("cm_otros_estudios"));
+                v.setEs_sexo(rs.getString("es_sexo"));
+                v.setLi_grupo_sanguineo(rs.getString("li_grupo_sanguineo"));
+                v.setDe_referencia(rs.getString("de_referencia"));
+                v.setLi_religion(rs.getString("li_religion"));
+                v.setNo_iglesia(rs.getString("no_iglesia"));
+                v.setDe_cargo(rs.getString("de_cargo"));
+                v.setLi_autoridad(rs.getString("li_autoridad"));
+                v.setNo_ap_autoridad(rs.getString("no_ap_autoridad"));
+                v.setCl_autoridad(rs.getString("cl_autoridad"));
+                v.setId_no_afp(rs.getString("id_no_afp"));
+                v.setEs_afiliado_essalud(rs.getString("es_afiliado_essalud"));
+                v.setLi_tipo_trabajador(rs.getString("li_tipo_trabajador"));
+                v.setCa_tipo_hora_pago_refeerencial(rs.getString("ca_tipo_hora_pago_refeerencial"));
+                v.setEs_factor_rh(rs.getString("es_factor_rh"));
+                v.setLi_di_dom_a_d1(rs.getString("li_di_dom_a_d1"));
+                v.setDi_dom_a_d2(rs.getString("di_dom_a_d2"));
+                v.setLi_di_dom_a_d3(rs.getString("li_di_dom_a_d3"));
+                v.setDi_dom_a_d4(rs.getString("di_dom_a_d4"));
+                v.setLi_di_dom_a_d5(rs.getString("li_di_dom_a_d5"));
+                v.setDi_dom_a_d6(rs.getString("di_dom_a_d6"));
+                v.setDi_dom_a_ref(rs.getString("di_dom_a_ref"));
+                v.setDi_dom_a_distrito(rs.getString("di_dom_a_distrito"));
+                v.setLi_di_dom_leg_d1(rs.getString("li_di_dom_leg_d1"));
+                v.setDi_dom_leg_d2(rs.getString("di_dom_leg_d2"));
+                v.setLi_di_dom_leg_d3(rs.getString("li_di_dom_leg_d3"));
+                v.setDi_dom_leg_d4(rs.getString("di_dom_leg_d4"));
+                v.setLi_di_dom_leg_d5(rs.getString("li_di_dom_leg_d5"));
+                v.setDi_dom_leg_d6(rs.getString("di_dom_leg_d6"));
+                v.setDi_dom_leg_distrito(rs.getString("di_dom_leg_distrito"));
+                v.setCa_ing_qta_cat_empresa(rs.getString("ca_ing_qta_cat_empresa"));
+                v.setCa_ing_qta_cat_ruc(rs.getString("ca_ing_qta_cat_ruc"));
+                v.setCa_ing_qta_cat_otras_empresas(rs.getString("ca_ing_qta_cat_otras_empresas"));
+                v.setCm_observaciones(rs.getString("cm_observaciones"));
+                v.setUs_creacion(rs.getString("us_creacion"));
+                v.setFe_creacion(rs.getString("fe_creacion"));
+                v.setUs_modif(rs.getString("us_modif"));
+                v.setFe_modif(rs.getString("fe_modif"));
+                v.setIp_usuario(rs.getString("ip_usuario"));
+                v.setId_usuario_creacion(rs.getString("id_usuario_creacion"));
+                v.setId_universidad_carrera(rs.getString("id_universidad_carrera"));
+                v.setId_nacionalidad(rs.getString("id_nacionalidad"));
+                v.setDistrito_nac(rs.getString("distrito_nac"));
+                v.setEs_proceso(rs.getString("es_proceso"));
+                list.add(v);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR :" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -356,7 +476,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR :"+e.getMessage());
+            throw new RuntimeException("ERROR :" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -404,7 +524,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR :"+e.getMessage());
+            throw new RuntimeException("ERROR :" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -481,10 +601,10 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(10, iduser);
             cst.setString(11, FE_MODIF);
             cst.execute();
-      } catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR :"+e.getMessage());
+            throw new RuntimeException("ERROR :" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -507,10 +627,10 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(6, CL_AUTORIDAD);
             cst.setString(7, ID_TRABAJADOR);
             cst.execute();
-       } catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR :"+e.getMessage());
+            throw new RuntimeException("ERROR :" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -539,10 +659,10 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 x.setCl_tra(rs.getString("cl_tra"));
                 Lista.add(x);
             }
-      } catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR :"+e.getMessage());
+            throw new RuntimeException("ERROR :" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -567,10 +687,10 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(7, ID_TRABAJADOR);
             cst.setString(8, ES_CUENTA_SUELDO);
             cst.execute();
-      } catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR :"+e.getMessage());
+            throw new RuntimeException("ERROR :" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -610,10 +730,10 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(6, ID_TRABAJADOR);
             cst.setString(7, ES_CUENTA_SUELDO);
             cst.execute();
-      } catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR :"+e.getMessage());
+            throw new RuntimeException("ERROR :" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -624,21 +744,21 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
     }
 
     @Override
-    public void MOD_DAT_GEN( String AP_PATERNO, String AP_MATERNO, String NO_TRABAJADOR, String TI_DOC, String NU_DOC, String ES_CIVIL, String FE_NAC, String ID_NACIONALIDAD, String ID_DEPARTAMENTO, String ID_PROVINCIA, String ID_DISTRITO, String TE_TRABAJADOR, String CL_TRA, String DI_CORREO_PERSONAL, String DI_CORREO_INST, String CO_SISTEMA_PENSIONARIO, String ES_SEXO, String LI_GRUPO_SANGUINEO, String ID_NO_AFP, String ES_AFILIADO_ESSALUD, String LI_TIPO_TRABAJADOR, String ES_FACTOR_RH ,String ID_TRABAJADOR) {
+    public void MOD_DAT_GEN(String AP_PATERNO, String AP_MATERNO, String NO_TRABAJADOR, String TI_DOC, String NU_DOC, String ES_CIVIL, String FE_NAC, String ID_NACIONALIDAD, String ID_DEPARTAMENTO, String ID_PROVINCIA, String ID_DISTRITO, String TE_TRABAJADOR, String CL_TRA, String DI_CORREO_PERSONAL, String DI_CORREO_INST, String CO_SISTEMA_PENSIONARIO, String ES_SEXO, String LI_GRUPO_SANGUINEO, String ID_NO_AFP, String ES_AFILIADO_ESSALUD, String LI_TIPO_TRABAJADOR, String ES_FACTOR_RH, String ID_TRABAJADOR) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_TRA_DET_GEN( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)} ");
-            cst.setString(1,AP_PATERNO );
-            cst.setString(2,AP_MATERNO );
-            cst.setString(3,NO_TRABAJADOR );
-            cst.setString(4,TI_DOC);
-            cst.setString(5,NU_DOC);
-            cst.setString(6,ES_CIVIL );
-            cst.setString(7,c.convertFecha(FE_NAC));
-            cst.setString(8,ID_NACIONALIDAD );
-            cst.setString(9,ID_DEPARTAMENTO );
-            cst.setString(10,ID_PROVINCIA );
-            cst.setString(11,ID_DISTRITO );
+            cst.setString(1, AP_PATERNO);
+            cst.setString(2, AP_MATERNO);
+            cst.setString(3, NO_TRABAJADOR);
+            cst.setString(4, TI_DOC);
+            cst.setString(5, NU_DOC);
+            cst.setString(6, ES_CIVIL);
+            cst.setString(7, c.convertFecha(FE_NAC));
+            cst.setString(8, ID_NACIONALIDAD);
+            cst.setString(9, ID_DEPARTAMENTO);
+            cst.setString(10, ID_PROVINCIA);
+            cst.setString(11, ID_DISTRITO);
             cst.setString(12, TE_TRABAJADOR);
             cst.setString(13, CL_TRA);
             cst.setString(14, DI_CORREO_PERSONAL);
@@ -655,7 +775,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR :"+e.getMessage());
+            throw new RuntimeException("ERROR :" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -667,8 +787,8 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
 
     @Override
     public List<Cuenta_Sueldo> List_Cuenta_Sueldo(String idtr) {
-         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT * FROM RHTD_CUENTA_SUELDO WHERE ID_TRABAJADOR = '"+idtr+"'";
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT * FROM RHTD_CUENTA_SUELDO WHERE ID_TRABAJADOR = '" + idtr + "'";
         List<Cuenta_Sueldo> list = new ArrayList<Cuenta_Sueldo>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -689,7 +809,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR :"+e.getMessage());
+            throw new RuntimeException("ERROR :" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -701,24 +821,24 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
     }
 
     @Override
-    public void MOD_ASPEC_ACADEM(String LI_NIVEL_EDUCATIVO,String REGIMEN, String ES_INS_PERU, String CARRERA, String DE_ANNO_EGRESO, String CM_OTROS_ESTUDIOS, String CA_TIPO_HORA_PAGO_REFERENCIAL, String ID_TRABAJADOR, String CO_UNIVERSITARIO) {
+    public void MOD_ASPEC_ACADEM(String LI_NIVEL_EDUCATIVO, String REGIMEN, String ES_INS_PERU, String CARRERA, String DE_ANNO_EGRESO, String CM_OTROS_ESTUDIOS, String CA_TIPO_HORA_PAGO_REFERENCIAL, String ID_TRABAJADOR, String CO_UNIVERSITARIO) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_TRA_ASP_ACAD( ?, ?, ?, ?, ?, ?, ?, ?, ?)} ");
-            cst.setString(1,LI_NIVEL_EDUCATIVO);
-            cst.setString(2,REGIMEN);
-            cst.setString(3,ES_INS_PERU);
-            cst.setString(4,CARRERA);
-            cst.setString(5,DE_ANNO_EGRESO);
-            cst.setString(6,CM_OTROS_ESTUDIOS);
-            cst.setString(7,CA_TIPO_HORA_PAGO_REFERENCIAL);
-            cst.setString(8,ID_TRABAJADOR);
-            cst.setString(9,CO_UNIVERSITARIO);
+            cst.setString(1, LI_NIVEL_EDUCATIVO);
+            cst.setString(2, REGIMEN);
+            cst.setString(3, ES_INS_PERU);
+            cst.setString(4, CARRERA);
+            cst.setString(5, DE_ANNO_EGRESO);
+            cst.setString(6, CM_OTROS_ESTUDIOS);
+            cst.setString(7, CA_TIPO_HORA_PAGO_REFERENCIAL);
+            cst.setString(8, ID_TRABAJADOR);
+            cst.setString(9, CO_UNIVERSITARIO);
             cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR :"+e.getMessage());
+            throw new RuntimeException("ERROR :" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -733,17 +853,17 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_TRA_CUEN_SUELDO( ?, ?, ?, ?, ?, ?)} ");
-            cst.setString(1,NO_BANCO);
-            cst.setString(2,NU_CUENTA);
-            cst.setString(3,NU_CUENTA_BANC);
-            cst.setString(4,ES_GEM_NU_CUENTA);
-            cst.setString(5,NO_BANCO_OTROS_SP);
-            cst.setString(6,ID_TRABAJADOR);
+            cst.setString(1, NO_BANCO);
+            cst.setString(2, NU_CUENTA);
+            cst.setString(3, NU_CUENTA_BANC);
+            cst.setString(4, ES_GEM_NU_CUENTA);
+            cst.setString(5, NO_BANCO_OTROS_SP);
+            cst.setString(6, ID_TRABAJADOR);
             cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR :"+e.getMessage());
+            throw new RuntimeException("ERROR :" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -771,10 +891,10 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 list.add(cs);
             }
 
-       } catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR :"+e.getMessage());
+            throw new RuntimeException("ERROR :" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -787,33 +907,33 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
 
     @Override
     public void MOD_ASPEC_SOCIAL(String LI_DI_DOM_A_D1, String DI_DOM_A_D2, String LI_DI_DOM_A_D3, String DI_DOM_A_D4, String LI_DI_DOM_A_D5, String DI_DOM_A_D6, String DI_DOM_A_REF, String ID_DI_DOM_A_DISTRITO, String LI_DI_DOM_LEG_D1, String DI_DOM_LEG_D2, String LI_DI_DOM_LEG_D3, String DI_DOM_LEG_D4, String LI_DI_DOM_LEG_D5, String DI_DOM_LEG_D6, String ID_DOM_LEG_DISTRITO, String CA_ING_QTA_CAT_EMPRESA, String CA_ING_QTA_RUC, String CA_ING_QTA_CAT_OTRAS_EMPRESAS, String ID_TRABAJADOR) {
-         try {
+        try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_TRA_ASP_SOCIAL( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)} ");
-            cst.setString(1,LI_DI_DOM_A_D1);
-            cst.setString(2,DI_DOM_A_D2);
-            cst.setString(3,LI_DI_DOM_A_D3);
-            cst.setString(4,DI_DOM_A_D4);
-            cst.setString(5,LI_DI_DOM_A_D5);
-            cst.setString(6,DI_DOM_A_D6);
-            cst.setString(7,DI_DOM_A_REF);
-            cst.setString(8,ID_DI_DOM_A_DISTRITO);
-            cst.setString(9,LI_DI_DOM_LEG_D1);
-            cst.setString(10,DI_DOM_LEG_D2);
-            cst.setString(11,LI_DI_DOM_LEG_D3);
-            cst.setString(12,DI_DOM_LEG_D4);
-            cst.setString(13,LI_DI_DOM_LEG_D5);
-            cst.setString(14,DI_DOM_LEG_D6);
-            cst.setString(15,ID_DOM_LEG_DISTRITO);
-            cst.setString(16,CA_ING_QTA_CAT_EMPRESA);
-            cst.setString(17,CA_ING_QTA_RUC);
-            cst.setString(18,CA_ING_QTA_CAT_OTRAS_EMPRESAS);
-            cst.setString(19,ID_TRABAJADOR);
+            cst.setString(1, LI_DI_DOM_A_D1);
+            cst.setString(2, DI_DOM_A_D2);
+            cst.setString(3, LI_DI_DOM_A_D3);
+            cst.setString(4, DI_DOM_A_D4);
+            cst.setString(5, LI_DI_DOM_A_D5);
+            cst.setString(6, DI_DOM_A_D6);
+            cst.setString(7, DI_DOM_A_REF);
+            cst.setString(8, ID_DI_DOM_A_DISTRITO);
+            cst.setString(9, LI_DI_DOM_LEG_D1);
+            cst.setString(10, DI_DOM_LEG_D2);
+            cst.setString(11, LI_DI_DOM_LEG_D3);
+            cst.setString(12, DI_DOM_LEG_D4);
+            cst.setString(13, LI_DI_DOM_LEG_D5);
+            cst.setString(14, DI_DOM_LEG_D6);
+            cst.setString(15, ID_DOM_LEG_DISTRITO);
+            cst.setString(16, CA_ING_QTA_CAT_EMPRESA);
+            cst.setString(17, CA_ING_QTA_RUC);
+            cst.setString(18, CA_ING_QTA_CAT_OTRAS_EMPRESAS);
+            cst.setString(19, ID_TRABAJADOR);
             cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR :"+e.getMessage());
+            throw new RuntimeException("ERROR :" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -822,6 +942,5 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             }
         }
     }
-
 
 }

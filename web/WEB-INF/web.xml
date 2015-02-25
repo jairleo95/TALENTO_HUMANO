@@ -131,6 +131,10 @@
         <servlet-name>CCarga_Academica</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CCarga_Academica</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CDocumento_Trabajador</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CDocumento_Trabajador</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
         <url-pattern>/trabajador</url-pattern>
@@ -258,6 +262,10 @@
     <servlet-mapping>
         <servlet-name>CCarga_Academica</servlet-name>
         <url-pattern>/carga_academica</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CDocumento_Trabajador</servlet-name>
+        <url-pattern>/documento_trabajador</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>300</session-timeout>

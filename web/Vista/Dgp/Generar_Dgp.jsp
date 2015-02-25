@@ -90,6 +90,7 @@
                 <input type="hidden" name="opc" value="Buscar">
                 <input type="hidden" name="busc" value="Busc">
                 <input type="hidden" name="busqueda" value="Buscar">
+                <input type="hidden" name="id_req" value="<%=idreq%>">
                 <input type="hidden" name="text" value="<%=text%>">
                 <div class="form-group">
                     <br>
@@ -142,9 +143,9 @@
                     }
                     %></td>
                 <td>
-                    <%if (tr.getEs_proceso() > 0) {
-                            out.print("Tiene requerimiento en proceso");
-                        } else {
+                    <%if (tr.getEs_proceso() != null) {%>
+                    <label> <%out.print(tr.getEs_proceso());%> </label>
+                    <% } else {
                     %>
                     <a href="../../dgp?idtr=<%=tr.getId_trabajador()%>&idreq=<%=idreq%>&iddep=<%=iddep%>&opc=Reg_form" 
                        class="btn btn-primary">Elaborar Requerimiento <i class="fa fa-arrow-circle-right"></i></a>
