@@ -778,7 +778,7 @@
                                                                 <div class="col-sm-4" id="es_inst_p" style="display: none">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-flag-o fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-flag fa-lg fa-fw"></i></span>
                                                                             <select class="form-control input-group-sm" id="inst_peru" name="ES_INST_PERU" required>
                                                                                 <option value="" selected="selected" >[¿Estudio en una institucion educativa del Perú?]</option>
                                                                                 <option value="1">Si</option>
@@ -898,41 +898,41 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-4" id="no_cuen_otros" >
-                                                                <div class="form-group">
-                                                                    <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="fa fa-bank fa-lg fa-fw"></i></span>
-                                                                        <input class="form-control input-group-sm"  placeholder="Nombre del Banco" type="text" name="BANCO_OTROS"  id="nu_cuen_otros" maxlength="30"   />
+                                                                    <div class="form-group">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-bank fa-lg fa-fw"></i></span>
+                                                                            <input class="form-control input-group-sm"  placeholder="Nombre del Banco" type="text" name="BANCO_OTROS"  id="nu_cuen_otros" maxlength="30"   />
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="col-sm-4" id="no_cuen" >
-                                                                <div class="form-group">
-                                                                    <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="fa fa-bank fa-lg fa-fw"></i></span>
-                                                                        <input placeholder="Nro de Cuenta" class="form-control input-group-sm" type="text" name="CUENTA"  id="nu_cuen" maxlength="30"   />
+                                                                <div class="col-sm-4" id="no_cuen" >
+                                                                    <div class="form-group">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-bank fa-lg fa-fw"></i></span>
+                                                                            <input placeholder="Nro de Cuenta" class="form-control input-group-sm" type="text" name="CUENTA"  id="nu_cuen" maxlength="30"   />
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="col-sm-4" id="no_cuen_ban" >
-                                                                <div class="form-group">
-                                                                    <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="fa fa-bank fa-lg fa-fw"></i></span>
-                                                                        <input placeholder="Nro de Cuenta Bancaria" class="form-control input-group-sm" type="text" name="CUENTA_BANC" id="nu_cuen_ban">
+                                                                <div class="col-sm-4" id="no_cuen_ban" >
+                                                                    <div class="form-group">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-bank fa-lg fa-fw"></i></span>
+                                                                            <input placeholder="Nro de Cuenta Bancaria" class="form-control input-group-sm" type="text" name="CUENTA_BANC" id="nu_cuen_ban">
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
 
-                                                            <div class="col-sm-4" id="generar" >
-                                                                <div class="form-group">
-                                                                    <p style="font-weight:bold;">Autorizo a la UPeU gestionar mi cuenta de sueldo en el BBVA Banco Continental, para tal efecto adjunto copia legible y vigente de mi DNI   </p>
+                                                                <div class="col-sm-4" id="generar" >
+                                                                    <div class="form-group">
+                                                                        <p style="font-weight:bold;">Autorizo a la UPeU gestionar mi cuenta de sueldo en el BBVA Banco Continental, para tal efecto adjunto copia legible y vigente de mi DNI   </p>
 
-                                                                    <div class="input-g">
-                                                                        <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="1">
-                                                                        <i></i>Generar Nro de Cuenta Bancaria
+                                                                        <div class="input-g">
+                                                                            <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="1">
+                                                                            <i></i>Generar Nro de Cuenta Bancaria
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                            </div> 
-                                                            <input type="hidden" value="0" name="ES_CUENTA_SUELDO" id="es_cuenta"/>
+                                                                </div> 
+                                                                <input type="hidden" value="0" name="ES_CUENTA_SUELDO" id="es_cuenta"/>
                                                             </div>
 
                                                         </div>  
@@ -1791,22 +1791,24 @@
                                                                 </div>
                                                             </div> 
                                                             <div class="btn-mant">
-                                                                <button type="button" class="btn-reg-hijo btn btn-info">Agregar Hijo</button>
+                                                                <button type="button" class="btn-reg-hijo btn btn-info btn-labeled"><span class="btn-label">
+                                                                        <i class="fa fa-child fa-lg fa-fw"></i>
+                                                                    </span>Agregar Hijo</button>
                                                             </div>
                                                             <div class="row">
-                                                                <table class="table" style="margin-top:1%;">
+                                                                <table class="table table-bordered" style="width: 98%; margin:auto;margin-top:1%; ">
                                                                     <thead>
                                                                         <tr>
-                                                                            <th>Apellido P.</th>
-                                                                            <th>Apellido M.</th>
+                                                                            <th>Apellido Paterno</th>
+                                                                            <th>Apellido Materno</th>
                                                                             <th>Nombres</th>
-                                                                            <th>Fecha Nac.</th>
+                                                                            <th>Fecha de Nacimiento</th>
                                                                             <th>Sexo</th>
-                                                                            <th>Tip. Doc</th>
-                                                                            <th>Nro. Doc</th>
+                                                                            <th>Tipo de Documento</th>
+                                                                            <th>Nro de Documento</th>
                                                                             <th>Essalud</th>
-                                                                            <th>Est. Superiores</th>
-                                                                            <th></th>
+                                                                            <th>Estudios Superiores</th>
+                                                                            <th colspan="2"><center>Opciones</center></th>
                                                                         </tr>        
                                                                     </thead>
                                                                     <tbody class="tabla-hijo">
@@ -1814,7 +1816,6 @@
                                                                 </table>
                                                             </div>
                                                             <code class="codigo"></code>
-                                                            <input type="submit" name="opc"  class="submit btn btn-primary btn-lg" value="Registrar">
                                                             <script>$(document).ready(function() {
                                                                     var p = 1;
                                                                     var texto_h = "";
@@ -1829,32 +1830,107 @@
                                                                         var ndoc = $(".i_ndoc_h");
                                                                         var essalud = $(".i_essalud_h");
                                                                         var es_sup = $(".i_es_sup_h");
-                                                                        texto_h += ("<tr class='tr-hijo_" + p + "'>");
-                                                                        texto_h += ('<td ><label class="td-ap_pat' + p + '">' + ap_pat.val() + '</label><input type="hidden" value="' + ap_pat.val() + '" name="APELLIDO_P_H' + p + '" class="ap_p_h_' + p + '"/></td>');
-                                                                        texto_h += ('<td ><label class="td-ap_mat' + p + '">' + ap_mat.val() + '</label><input type="hidden" value="' + ap_mat.val() + '" name="APELLIDO_M_H' + p + '" class="ap_m_h_' + p + '"/></td>');
-                                                                        texto_h += ('<td ><label class="td-nom' + p + '">' + nombre.val() + '</label><input type="hidden" value="' + nombre.val() + '" name="NOMBRE_H' + p + '" class="no_h_' + p + '"/></td>');
-                                                                        texto_h += ('<td ><label class="td-fe_nac' + p + '">' + fe_nac.val() + '</label><input type="hidden" value="' + fe_nac.val() + '" name="FECHA_NAC_H' + p + '" class="fe_n_h_' + p + '"/></td>');
-                                                                        texto_h += (' <td ><label class="td-sex' + p + '">' + $(".i_sexo_h option:selected").html() + '</label><input type="hidden" value="' + sexo.val() + '" name="SEXO_H' + p + '" class="sex_h_' + p + '"/></td>');
-                                                                        texto_h += ('<td ><label class="td-tdoc' + p + '">' + $(".i_tdoc_h option:selected").html() + '</label><input type="hidden" value="' + t_doc.val() + '" name="TIPO_DOC_ID_H' + p + '" class="ti_doc_h_' + p + '"/></td>');
-                                                                        texto_h += ('<td ><label class="td-ndoc' + p + '">' + ndoc.val() + '</label><input type="hidden" value="' + ndoc.val() + '" name="NRO_DOC_H' + p + '" class="nu_doc_h_' + p + '"/></td>');
-                                                                        texto_h += ('<td ><label class="td-essalud' + p + '">' + $(".i_essalud_h option:selected").html() + '</label><input type="hidden" value="' + essalud.val() + '" name="ESSALUD_H' + p + '" class="essalud_h_' + p + '"/></td>');
-                                                                        texto_h += ('<td ><label class="td-es_sup' + p + '">' + $(".i_es_sup_h option:selected").html() + '</label><input type="hidden" value="' + es_sup.val() + '" name="EST_SUP_H' + p + '" class="es_sup_h_' + p + '"/></td>');
-                                                                        texto_h += ('<td><a href="javascript:void(0);" class="btn btn-danger" onclick="$(\'.tr-hijo_' + p + '\').remove();">Quitar</a> <button class="btn btn-success btn-modificar_' + p + '" href="javascript:void(0);" type="button" value="' + p + '">Modificar</button></td>');
-                                                                        texto_h += ("</tr>");
-                                                                        tabla_hijo.append(texto_h);
-                                                                        // $(".codigo").text(texto_h);
+                                                                        function validar() {
+                                                                            var x, a, b, c, d, e, f, g, h, i = false;
+                                                                            if (ap_pat.val() == "") {
+                                                                                var $p = ap_pat.parent().parent();
+                                                                                $p.removeClass('has-success');
+                                                                                $p.addClass('has-error');
+                                                                                a = false;
+                                                                            } else
+                                                                                a = true;
+
+                                                                            if (ap_mat.val() == "") {
+                                                                                var $p = ap_mat.parent().parent();
+                                                                                $p.removeClass('has-success');
+                                                                                $p.addClass('has-error');
+                                                                                b = false;
+                                                                            } else
+                                                                                b = true;
+                                                                            if (nombre.val() == "") {
+                                                                                var $p = nombre.parent().parent();
+                                                                                $p.removeClass('has-success');
+                                                                                $p.addClass('has-error');
+                                                                                c = false;
+                                                                            } else
+                                                                                c = true;
+                                                                            if (fe_nac.val() == "") {
+                                                                                var $p = fe_nac.parent().parent();
+                                                                                $p.removeClass('has-success');
+                                                                                $p.addClass('has-error');
+                                                                                d = false;
+                                                                            } else
+                                                                                d = true;
+                                                                            if (sexo.val() == "") {
+                                                                                var $p = sexo.parent().parent();
+                                                                                $p.removeClass('has-success');
+                                                                                $p.addClass('has-error');
+                                                                                e = false;
+                                                                            } else
+                                                                                e = true;
+                                                                            if (t_doc.val() == "") {
+                                                                                var $p = t_doc.parent().parent();
+                                                                                $p.removeClass('has-success');
+                                                                                $p.addClass('has-error');
+                                                                                f = false;
+                                                                            } else
+                                                                                f = true;
+                                                                            if (ndoc.val() == "") {
+                                                                                var $p = ndoc.parent().parent();
+                                                                                $p.removeClass('has-success');
+                                                                                $p.addClass('has-error');
+                                                                                g = false;
+                                                                            } else
+                                                                                g = true;
+                                                                            if (essalud.val() == null) {
+                                                                                var $p = essalud.parent().parent();
+                                                                                $p.removeClass('has-success');
+                                                                                $p.addClass('has-error');
+                                                                                h = false;
+                                                                            } else
+                                                                                h = true;
+                                                                            if (es_sup.val() == null) {
+                                                                                var $p = es_sup.parent().parent();
+                                                                                $p.removeClass('has-success');
+                                                                                $p.addClass('has-error');
+                                                                                i = false;
+                                                                            } else
+                                                                                i = true;
+                                                                            if (a && b && c && d && e && f && g && h && i) {
+                                                                                x = true;
+                                                                            } else {
+                                                                                x = false;
+                                                                            }
+                                                                            return x;
+                                                                        }
+                                                                        if (validar()) {
+                                                                            texto_h += ("<tr class='tr-hijo_" + p + "'>");
+                                                                            texto_h += ('<td ><label class="td-ap_pat' + p + '">' + ap_pat.val() + '</label><input type="hidden" value="' + ap_pat.val() + '" name="APELLIDO_P_H' + p + '" class="ap_p_h_' + p + '"/></td>');
+                                                                            texto_h += ('<td ><label class="td-ap_mat' + p + '">' + ap_mat.val() + '</label><input type="hidden" value="' + ap_mat.val() + '" name="APELLIDO_M_H' + p + '" class="ap_m_h_' + p + '"/></td>');
+                                                                            texto_h += ('<td ><label class="td-nom' + p + '">' + nombre.val() + '</label><input type="hidden" value="' + nombre.val() + '" name="NOMBRE_H' + p + '" class="no_h_' + p + '"/></td>');
+                                                                            texto_h += ('<td ><label class="td-fe_nac' + p + '">' + fe_nac.val() + '</label><input type="hidden" value="' + fe_nac.val() + '" name="FECHA_NAC_H' + p + '" class="fe_n_h_' + p + '"/></td>');
+                                                                            texto_h += (' <td ><label class="td-sex' + p + '">' + $(".i_sexo_h option:selected").html() + '</label><input type="hidden" value="' + sexo.val() + '" name="SEXO_H' + p + '" class="sex_h_' + p + '"/></td>');
+                                                                            texto_h += ('<td ><label class="td-tdoc' + p + '">' + $(".i_tdoc_h option:selected").html() + '</label><input type="hidden" value="' + t_doc.val() + '" name="TIPO_DOC_ID_H' + p + '" class="ti_doc_h_' + p + '"/></td>');
+                                                                            texto_h += ('<td ><label class="td-ndoc' + p + '">' + ndoc.val() + '</label><input type="hidden" value="' + ndoc.val() + '" name="NRO_DOC_H' + p + '" class="nu_doc_h_' + p + '"/></td>');
+                                                                            texto_h += ('<td ><label class="td-essalud' + p + '">' + $(".i_essalud_h option:selected").html() + '</label><input type="hidden" value="' + essalud.val() + '" name="ESSALUD_H' + p + '" class="essalud_h_' + p + '"/></td>');
+                                                                            texto_h += ('<td ><label class="td-es_sup' + p + '">' + $(".i_es_sup_h option:selected").html() + '</label><input type="hidden" value="' + es_sup.val() + '" name="EST_SUP_H' + p + '" class="es_sup_h_' + p + '"/></td>');
+                                                                            texto_h += ('<td><button href="javascript:void(0);" class="btn btn-danger btn-labeled" onclick="$(\'.tr-hijo_' + p + '\').remove();"><span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span>Quitar</button> </td>');
+                                                                            texto_h += ('<td><button class="btn btn-success btn-labeled btn-modificar_' + p + '" href="javascript:void(0);" type="button" value="' + p + '"><span class="btn-label"><i class="glyphicon glyphicon-edit"></i></span>Modificar</button></td>');
+                                                                            texto_h += ("</tr>");
+                                                                            tabla_hijo.append(texto_h);
+                                                                            // $(".codigo").text(texto_h);
 
 
-                                                                        ap_pat.val("");
-                                                                        ap_mat.val("");
-                                                                        nombre.val("");
-                                                                        fe_nac.val("");
-                                                                        sexo.val("");
-                                                                        t_doc.val("");
-                                                                        ndoc.val("");
-                                                                        essalud.val("");
-                                                                        es_sup.val("");
-
+                                                                            ap_pat.val("");
+                                                                            ap_mat.val("");
+                                                                            nombre.val("");
+                                                                            fe_nac.val("");
+                                                                            sexo.val("");
+                                                                            t_doc.val("");
+                                                                            ndoc.val("");
+                                                                            essalud.val("");
+                                                                            es_sup.val("");
+                                                                        }
                                                                         $(".btn-modificar_" + p).click(function() {
                                                                             ap_pat.val($(".ap_p_h_" + $(this).val()).val());
                                                                             ap_mat.val($(".ap_m_h_" + $(this).val()).val());
@@ -1921,13 +1997,16 @@
                                                                         <a href="javascript:void(0);" class="btn btn-lg btn-default"> First </a>
                                                                         </li>-->
                                                                         <li class="previous disabled">
-                                                                            <a href="javascript:void(0);" class="btn btn-lg btn-default"> Atras </a>
+                                                                            <a href="javascript:void(0);" class="btn btn-lg btn-default "><i class="fa fa-chevron-left"></i> Atras </a>
                                                                         </li>
                                                                         <!--<li class="next last">
                                                                         <a href="javascript:void(0);" class="btn btn-lg btn-primary"> Last </a>
                                                                         </li>-->
                                                                         <li class="next">
-                                                                            <a href="javascript:void(0);" class="btn btn-lg txt-color-darken"> Siguiente </a>
+                                                                            <a href="javascript:void(0);" class="btn btn-lg txt-color-darken"> Siguiente <i class="fa fa-chevron-right"></i></a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <input type="submit" name="opc"  class="submit btn btn-primary" value="Registrar" style="width: 30%">
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -2141,12 +2220,7 @@
                                                     // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
                                                     $(document).ready(function() {
-
                                                         pageSetUp();
-
-
-
-
                                                         var $validator = $("#wizard-1").validate({
                                                             rules: {
                                                                 email: {

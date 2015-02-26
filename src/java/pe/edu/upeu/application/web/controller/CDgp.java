@@ -208,7 +208,7 @@ public class CDgp extends HttpServlet {
             String ESTADO = request.getParameter("ESTADO");
             if (ESTADO.trim().equals("0")) {
 
-                tr.MODIF_CUENTA_SUELDO(NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEN_NU_CUENTA, NO_BANCO_OTROS, ID_TRABAJADOR, ES_CUENTA_SUELDO);
+                tr.MOD_CUENTA_SUELDO(NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEN_NU_CUENTA, NO_BANCO_OTROS, ID_TRABAJADOR, ES_CUENTA_SUELDO);
             }
             //out.print(NU_CUENTA);
             //out.print(NU_CUENTA_BANC);

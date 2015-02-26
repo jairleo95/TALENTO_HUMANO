@@ -46,8 +46,6 @@ public interface InterfaceTrabajadorDAO {
  
     public String CuentaSueldoTra(String ID_TRABAJADOR);
     
-    public void MODIF_CUENTA_SUELDO(String NO_BANCO,String NU_CUENTA,String NU_CUENTA_BANC,String ES_GEM_NU_CUENTA, String NO_BANCO_OTROS, String ID_TRABAJADOR, String ES_CUENTA_SUELDO);
-    
     public List<Cuenta_Sueldo> List_Cuenta_Sueldo(String id_tr );
     
     public void MOD_DAT_GEN(String AP_PATERNO, String AP_MATERNO, String NO_TRABAJADOR, String TI_DOC , String NU_DOC, String ES_CIVIL, String FE_NAC, String ID_NACIONALIDAD, String ID_DEPARTAMENTO, String ID_PROVINCIA, String ID_DISTRITO, String TE_TRABAJADOR, String CL_TRA , String DI_CORREO_PERSONAL, String DI_CORREO_INST, String CO_SISTEMA_PENSIONARIO, String ES_SEXO, String LI_GRUPO_SANGUINEO, String ID_NO_AFP, String ES_AFILIADO_ESSALUD, String LI_TIPO_TRABAJADOR, String ES_FACTOR_RH ,String ID_TRABAJADOR);
@@ -56,7 +54,7 @@ public interface InterfaceTrabajadorDAO {
     
     public void MOD_ASPEC_ACADEM (String LI_NIVEL_EDUCATIVO,String REGIMEN, String ES_INS_PERU, String CARRERA, String DE_ANNO_EGRESO, String CM_OTROS_ESTUDIOS, String CA_TIPO_HORA_PAGO_REFERENCIAL, String ID_TRABAJADOR , String CO_UNIVERSITARIO);
     
-    public void MOD_CUENTA_SUELDO (String NO_BANCO, String NU_CUENTA, String NU_CUENTA_BANC, String ES_GEM_NU_CUENTA, String NO_BANCO_OTROS_SP, String ID_TRABAJADOR ); 
+    public void MOD_CUENTA_SUELDO (String NO_BANCO, String NU_CUENTA, String NU_CUENTA_BANC, String ES_GEM_NU_CUENTA, String NO_BANCO_OTROS_SP, String ID_TRABAJADOR, String ES_CUENTA_SUELDO ); 
     
     public void MOD_ASPEC_SOCIAL (String LI_DI_DOM_A_D1, String DI_DOM_A_D2, String LI_DI_DOM_A_D3, String DI_DOM_A_D4, String LI_DI_DOM_A_D5, String DI_DOM_A_D6 , String DI_DOM_A_REF,  String ID_DI_DOM_A_DISTRITO, String LI_DI_DOM_LEG_D1, String DI_DOM_LEG_D2, String LI_DI_DOM_LEG_D3, String DI_DOM_LEG_D4, String LI_DI_DOM_LEG_D5, String DI_DOM_LEG_D6 , String ID_DOM_LEG_DISTRITO,String CA_ING_QTA_CAT_EMPRESA,String CA_ING_QTA_RUC,String CA_ING_QTA_CAT_OTRAS_EMPRESAS, String ID_TRABAJADOR ) ;
 }
