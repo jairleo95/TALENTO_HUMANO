@@ -345,7 +345,7 @@
 
                     <hr class="simple">
                     <ul id="myTab1" class="nav nav-tabs bordered">
-                        <%if (iddep.equals("DPT-0019")) {
+                        <%if (true) {
                         %>
                         <li >
                             <a href="../../contrato?idtr=<%=idtr%>&opc=Detalle_Contractual" target="myframe2"  ><i class="fa fa-file-text fa-gear"></i> Información Contractual </a>

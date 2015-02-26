@@ -25,4 +25,5 @@ public interface InterfaceFuncionDAO {
      public void Insertar_funcion(String id_pu,String de_fu, String user_crea, String tipo_funcion);
      public boolean Modificar_funcion(String id_fun, String es_fun, String de_fun,String id_pu, String us_mod,String tipo_funcion );
      public void Eliminar_funcion(String id_fun);
+     public List<Funciones> List_x_fun_x_idpu(String id_pu);
 }

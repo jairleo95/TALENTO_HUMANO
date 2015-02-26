@@ -182,7 +182,7 @@ public class CDgp extends HttpServlet {
             // String NU_CUENTA = request.getParameter("CUENTA");
             //String NU_CUENTA_BANC = (request.getParameter("CUENTA_BANC") == null) ? "0" : "no tiene";
             String NU_CUENTA_BANC = request.getParameter("CUENTA_BANC");
-            String ES_GEN_NU_CUENTA = (request.getParameter("GEN_NU_CUEN") == null) ? "0" : "1";
+            String ES_GEM_NU_CUENTA = (request.getParameter("GEN_NU_CUEN") == null) ? "0" : "1";
             String NO_BANCO_OTROS = request.getParameter("BANCO_OTROS");
             String ES_CUENTA_SUELDO = request.getParameter("ES_CUENTA_SUELDO");
             //--
@@ -208,7 +208,7 @@ public class CDgp extends HttpServlet {
             String ESTADO = request.getParameter("ESTADO");
             if (ESTADO.trim().equals("0")) {
 
-                tr.MODIF_CUENTA_SUELDO(NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEN_NU_CUENTA, NO_BANCO_OTROS, ID_TRABAJADOR, ES_CUENTA_SUELDO);
+                tr.MOD_CUENTA_SUELDO(NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEM_NU_CUENTA, NO_BANCO_OTROS, ID_TRABAJADOR, ES_CUENTA_SUELDO);
             }
             //out.print(NU_CUENTA);
             //out.print(NU_CUENTA_BANC);

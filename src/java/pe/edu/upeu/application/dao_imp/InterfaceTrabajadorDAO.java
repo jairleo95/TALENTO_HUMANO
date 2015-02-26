@@ -46,8 +46,6 @@ public interface InterfaceTrabajadorDAO {
  
     public String CuentaSueldoTra(String ID_TRABAJADOR);
     
-    public void MODIF_CUENTA_SUELDO(String NO_BANCO,String NU_CUENTA,String NU_CUENTA_BANC,String ES_GEM_NU_CUENTA, String NO_BANCO_OTROS, String ID_TRABAJADOR, String ES_CUENTA_SUELDO);
-    
     public List<Cuenta_Sueldo> List_Cuenta_Sueldo(String id_tr );
     
     public void MOD_DAT_GEN(String AP_PATERNO, String AP_MATERNO, String NO_TRABAJADOR, String TI_DOC , String NU_DOC, String ES_CIVIL, String FE_NAC, String ID_NACIONALIDAD, String ID_DEPARTAMENTO, String ID_PROVINCIA, String ID_DISTRITO, String TE_TRABAJADOR, String CL_TRA , String DI_CORREO_PERSONAL, String DI_CORREO_INST, String CO_SISTEMA_PENSIONARIO, String ES_SEXO, String LI_GRUPO_SANGUINEO, String ID_NO_AFP, String ES_AFILIADO_ESSALUD, String LI_TIPO_TRABAJADOR, String ES_FACTOR_RH ,String ID_TRABAJADOR);

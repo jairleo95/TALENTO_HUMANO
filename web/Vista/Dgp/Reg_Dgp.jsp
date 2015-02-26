@@ -558,7 +558,13 @@
                                                     <%}%>
                                                     <%if (idreq.equals("REQ-0007") || idreq.equals("REQ-0008") || idreq.equals("REQ-0009") || idreq.equals("REQ-0001") || idreq.equals("REQ-0002") || idreq.equals("REQ-0003") || idreq.equals("REQ-0005")) {%>
                                                     <div  class="row" id="centro-costo_1" >
-                                                        <section class="col col-4"><label class="select" id="titu">Centro de Costo Nº 1:<select name="CENTRO_COSTOS_1" class="select-cc centro_costo1" required=""><option value="">[SELECCIONE]</option></select></label></section>
+                                                        <section class="col col-4">
+                                                            <label class="select" id="titu">Centro de Costo Nº 1:
+                                                                <select name="CENTRO_COSTOS_1" class="select-cc centro_costo1" required="">
+                                                                    <option value="">[SELECCIONE]</option>
+                                                                </select>
+                                                            </label>
+                                                        </section>
                                                         <section class="col col-2"><label class="input" id="titu">%<input name="PORCENTAJE_1"  type="text" value="100"  class="porcentaje_cc"/></label></section>
 
 
@@ -1134,7 +1140,6 @@
                         if (arr_cc[0] == lista[i].id) {
                             cc_dir.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
                             listar_dep_cc(num, opc, arr_cc);
-
                         } else {
                             cc_dir.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
                         }
@@ -1278,7 +1283,8 @@
                 $("#no_cuen_ban").hide();
                 $("#nu_cuen_ban").val("");
                 $("#no_cuen_otros").show();
-                $("#nu_cuen_otros").val("BBVA");
+                $("#nu_cuen_otros").val("BBVA Banco Continental");
+                document.getElementById("nu_cuen_otros").readOnly = true;
                 $("#generar").show();
                 $("#subscription").attr("required", "required");
                 $("#nu_cuen_otros").attr("required", "required");

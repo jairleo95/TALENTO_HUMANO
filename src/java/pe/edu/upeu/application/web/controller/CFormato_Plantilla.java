@@ -76,6 +76,7 @@ public class CFormato_Plantilla extends HttpServlet {
                 } else {*/
                     ubicacion ="/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Contrato/Formato_Plantilla/Formato/";
                // }
+                 //ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"web\\Vista\\Contrato\\Formato_Plantilla\\Formato";
                 File archivo = new File(ubicacion + id);
                 if (archivo.exists()) {
                     //  archivo.delete();
@@ -100,7 +101,8 @@ public class CFormato_Plantilla extends HttpServlet {
              /*   if (System.getProperty("sun.desktop").trim().equals("windows")) {
                     ubicacion = direccion_raiz + "\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
                 } else {*/
-                ubicacion ="/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Contrato/Formato_Plantilla/Formato/";
+               // ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"web\\Vista\\Contrato\\Formato_Plantilla\\Formato";
+              ubicacion ="/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Contrato/Formato_Plantilla/Formato/";
               //  }
                 FileReader lector = new FileReader(ubicacion + no_archivo);
                 BufferedReader contenido = new BufferedReader(lector);

@@ -89,9 +89,10 @@ public class X_List_Id_Contrato_DGP {
     private String fe_des;
     private String fe_has;
     private String id_plantilla_contractual;
+    private Double ca_bonificacion_p;
 
 
-    public X_List_Id_Contrato_DGP(String id_contrato, String id_dgp, String fe_desde, String fe_hasta, String fe_cese, String id_func, String li_condicion, Double ca_sueldo, Double ca_reintegro, Double ca_asig_familiar, Double ho_semana, Double nu_horas_lab, Double dia_contrato, String ti_trabajador, String li_regimen_laboral, String es_discapacidad, String ti_contrato, String li_regimen_pensionario, String es_contrato_trabajador, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String us_ip, String fe_vacacio_ini, String fe_vacacio_fin, String es_contrato, String id_filial, String id_puesto, Double ca_bono_alimento, String li_tipo_convenio, String es_firmo_contrato, Double nu_contrato, String de_observacion, String es_apoyo, String ti_hora_pago, String nu_documento, String id_anno, String es_entregar_doc_reglamentos, String es_registro_huella, String de_registro_sistem_remu, String id_trabajador, Double ca_sueldo_total, String id_regimen_laboral, String id_sub_modalidad, String id_grupo_ocupacion, String fe_suscripcion, String co_ti_moneda, String co_ti_rem_variab, String de_remu_especie, String de_ruc_emp_trab, String co_sucursal, String de_mype, String es_ti_contratacion, Double ca_bev, String no_puesto, String no_seccion, String no_area, String no_dep, String no_direccion, String de_grupo_ocupacion, String de_sub_modalidad, String de_modalidad, String no_trabajador, String ap_paterno,String ap_materno,String li_di_dom_a_d1,String di_dom_a_d2,String li_di_dom_a_d3,String di_dom_a_d4,String li_di_dom_a_d5,String di_dom_a_d6, String no_provincia,String no_distrito,String fe_sus,String id_plantilla_contractual,String fe_des,String fe_has) {
+    public X_List_Id_Contrato_DGP(String id_contrato, String id_dgp, String fe_desde, String fe_hasta, String fe_cese, String id_func, String li_condicion, Double ca_sueldo, Double ca_reintegro, Double ca_asig_familiar, Double ho_semana, Double nu_horas_lab, Double dia_contrato, String ti_trabajador, String li_regimen_laboral, String es_discapacidad, String ti_contrato, String li_regimen_pensionario, String es_contrato_trabajador, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String us_ip, String fe_vacacio_ini, String fe_vacacio_fin, String es_contrato, String id_filial, String id_puesto, Double ca_bono_alimento, String li_tipo_convenio, String es_firmo_contrato, Double nu_contrato, String de_observacion, String es_apoyo, String ti_hora_pago, String nu_documento, String id_anno, String es_entregar_doc_reglamentos, String es_registro_huella, String de_registro_sistem_remu, String id_trabajador, Double ca_sueldo_total, String id_regimen_laboral, String id_sub_modalidad, String id_grupo_ocupacion, String fe_suscripcion, String co_ti_moneda, String co_ti_rem_variab, String de_remu_especie, String de_ruc_emp_trab, String co_sucursal, String de_mype, String es_ti_contratacion, Double ca_bev, String no_puesto, String no_seccion, String no_area, String no_dep, String no_direccion, String de_grupo_ocupacion, String de_sub_modalidad, String de_modalidad, String no_trabajador, String ap_paterno,String ap_materno,String li_di_dom_a_d1,String di_dom_a_d2,String li_di_dom_a_d3,String di_dom_a_d4,String li_di_dom_a_d5,String di_dom_a_d6, String no_provincia,String no_distrito,String fe_sus,String id_plantilla_contractual,String fe_des,String fe_hasm,Double ca_bonificacion_p) {
         this.id_contrato = id_contrato;
         this.id_dgp = id_dgp;
         this.fe_desde = fe_desde;
@@ -170,6 +171,7 @@ public class X_List_Id_Contrato_DGP {
         this.fe_des = fe_des;
         this.fe_has = fe_has;
         this.id_plantilla_contractual = id_plantilla_contractual;
+        this.ca_bonificacion_p = ca_bonificacion_p;
     }
 
     public X_List_Id_Contrato_DGP() {
@@ -251,6 +253,15 @@ public class X_List_Id_Contrato_DGP {
         this.fe_des = "";
         this.fe_has = "";
         this.id_plantilla_contractual = "";
+        this.ca_bonificacion_p = 0.0;
+    }
+
+    public Double getCa_bonificacion_p() {
+        return ca_bonificacion_p;
+    }
+
+    public void setCa_bonificacion_p(Double ca_bonificacion_p) {
+        this.ca_bonificacion_p = ca_bonificacion_p;
     }
 
     public String getFe_des() {

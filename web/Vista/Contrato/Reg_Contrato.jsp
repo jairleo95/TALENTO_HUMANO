@@ -318,7 +318,7 @@
                                         </section>
                                         <section class="col col-1">
                                             <label class="input" id="titulo">Bono puesto:
-                                                <input type="text" name="BEV" value="<%=d.getCa_bonificacion_p()%>" class="input-group-sm">
+                                                <input type="text" name="ca_bono_puesto" value="<%=d.getCa_bonificacion_p()%>" class="input-group-sm">
                                             </label>
                                         </section>
 
@@ -475,7 +475,7 @@
                                             <label class="select" id="titulo">Tipo de Modeda:
                                                 <select name="TIPO_MONEDA" class="input-group-sm" required="">
                                                     <option value="">[SELECCIONE]</option>
-                                                    <option value="01">SOLES</option>
+                                                    <option value="01" selected="">SOLES</option>
                                                     <option value="02">DOLARES</option>
                                                     <option value="03">EUROS</option>
                                                 </select>
