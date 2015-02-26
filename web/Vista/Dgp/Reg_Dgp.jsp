@@ -1278,7 +1278,8 @@
                 $("#no_cuen_ban").hide();
                 $("#nu_cuen_ban").val("");
                 $("#no_cuen_otros").show();
-                $("#nu_cuen_otros").val("BBVA");
+                $("#nu_cuen_otros").val("BBVA Banco Continental");
+                document.getElementById("nu_cuen_otros").readOnly = true;
                 $("#generar").show();
                 $("#subscription").attr("required", "required");
                 $("#nu_cuen_otros").attr("required", "required");
