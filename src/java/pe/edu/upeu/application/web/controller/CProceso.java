@@ -63,6 +63,12 @@ public class CProceso extends HttpServlet {
                 rpta.put("rpta","1");
                 rpta.put("lista",lista);
             }
+            
+            if (opc.equals("Listar_Pro_Paso_Id")) {
+                List<Map<String, ?>> lista=p.List_Proceso();
+                rpta.put("rpta","1");
+                rpta.put("lista",lista);
+            }
             if (opc.equals("Eliminar")) {
 
 

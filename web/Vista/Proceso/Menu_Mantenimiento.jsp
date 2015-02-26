@@ -15,19 +15,18 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Mantenimiento de Proceso</title>
+        <title>Mantenimiento de Procesos</title>
         <script type="text/javascript" src="../../js/JQuery/jquery.autoheight.js"></script>
     </head>
     <body>
         <h1></h1>
         <ul>
-            <li><a href="Mant_Proceso.jsp"  target="myframe3">Procesos</a> </li>
-            <li><a href="Mant_Tipo_Requerimiento.jsp"  target="myframe3">Requerimiento</a></li>
-            <li><a href="Prueba_Nestable_List.jsp"  target="myframe3">Pasos</a></li>
-            <li><a href="Mant_Paso_Puesto.jsp"  target="myframe3">Paso - Puesto</a></li>
-            <li><a href="Mant_Req_Proceso.jsp"  target="myframe3">Requerimiento - Proceso</a></li>
+            <li><a href="Mant_Paso.jsp"  target="myframe3">(1) Procesos</a> </li>
+            <!-- <li><a href="Mant_Tipo_Requerimiento.jsp"  target="myframe3">Requerimiento</a></li>-->
+            <li><a href="Mant_Proceso.jsp"  target="myframe3">(2) Pasos</a></li>
+            <li><a href="Mant_Req_Proceso.jsp"  target="myframe3">(3) Requerimiento - Proceso</a></li>
         </ul>
-        <iframe id="myframe" name="myframe3" width="100%" height="800" scrolling="si" frameborder="0" src="Prueba_Nestable_List.jsp" />
+        <iframe id="myframe" name="myframe3" width="100%" height="800" scrolling="si" frameborder="0" src="Mant_Proceso.jsp" ></iframe>
 
     </body>
 </html>

@@ -47,30 +47,40 @@ public class CRequerimiento extends HttpServlet {
 
         HttpSession sesion = request.getSession(true);
         String opc = request.getParameter("opc");
-
-        if (opc.equals("Listar")) {
-            String iddep = (String) sesion.getAttribute("IDDEPARTAMENTO");
-
-            getServletContext().setAttribute("List_Det_Dgp", Idgp.LIST_DET_DGP(iddep));
-
-            // out.print(Idgp.LIST_DET_DGP(iddep).size());
-            response.sendRedirect("Vista/Dgp/List_Dgp.jsp?iddep");
-
-        }
-
-        if (opc.equals("Listar_tp")) {
-            List<Map<String, ?>> lista = req.List_planilla();
-            rpta.put("rpta", "1");
-            rpta.put("lista", lista);
-        }
-        if (opc.equals("Listar_req_id")) {
-            String id = request.getParameter("id");
-            List<Map<String, ?>> lista = req.List_Req_tipo_planilla(id);
-            rpta.put("rpta", "1");
-            rpta.put("lista", lista);
-        }
-
         try {
+            if (opc.equals("Listar")) {
+                String iddep = (String) sesion.getAttribute("IDDEPARTAMENTO");
+
+                getServletContext().setAttribute("List_Det_Dgp", Idgp.LIST_DET_DGP(iddep));
+
+                // out.print(Idgp.LIST_DET_DGP(iddep).size());
+                response.sendRedirect("Vista/Dgp/List_Dgp.jsp?iddep");
+
+            }
+
+            if (opc.equals("Listar_tp")) {
+                List<Map<String, ?>> lista = req.List_planilla();
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
+            if (opc.equals("Listar_req_id")) {
+                String id = request.getParameter("id");
+                List<Map<String, ?>> lista = req.List_Req_tipo_planilla(id);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
+            if (opc.equals("Listar_id_req")) {
+                String id = request.getParameter("id");
+                List<Map<String, ?>> lista = req.List_requerimiento(id);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
+            if (opc.equals("Listar_Tipo_Planilla")) {
+                //String id = request.getParameter("id");
+                List<Map<String, ?>> lista = req.List_planilla();
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
 
         } catch (Exception e) {
             rpta.put("rpta", "-1");

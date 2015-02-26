@@ -121,4 +121,33 @@ public class RequerimientoDAO implements InterfaceRequerimientoDAO {
         return lista;
     }
 
+    @Override
+    public List<Map<String, ?>> List_requerimiento(String id) {
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select  *  from rhtr_requerimiento where id_tipo_planilla='" + id.trim() + "'   order by no_req ";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("id_requerimiento"));
+                rec.put("nombre", rs.getString("no_req"));
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error:" + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return lista;
+
+    }
+
 }
