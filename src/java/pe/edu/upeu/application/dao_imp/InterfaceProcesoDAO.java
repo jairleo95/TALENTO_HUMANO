@@ -15,4 +15,5 @@ import java.util.Map;
 public interface InterfaceProcesoDAO {
 
     public List<Map<String, ?>> List_Proceso();
+    public List<Map<String, ?>> List_Pro_Paso_Id(String id);
 }

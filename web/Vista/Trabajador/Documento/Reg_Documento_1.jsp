@@ -163,7 +163,7 @@
                                                         <td ><strong><%=d.getNo_documento() + d.getTi_documento()%></strong></td>
 
                                                         <td class="caji<%=(i + 1)%>">
-                                                            <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007"))) {%>
+                                                            <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007")|rol.trim().equals("ROL-0001"))) {%>
                                                             <div class="form-group">
                                                                 <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  name="archivos<%=(i + 1)%>" >
                                                             </div>
@@ -179,7 +179,7 @@
                                                         </td>
 
                                                         <td>
-                                                            <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
+                                                            <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007")|rol.trim().equals("ROL-0001"))) {%>
                                                             <input type="text"  name="lob_description<%=i + 1%>">
                                                             <% } else { %>
                                                             <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null) { %>
@@ -191,7 +191,7 @@
                                                                 } %>
                                                         </td>
                                                         <td>
-                                                            <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
+                                                            <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007")|rol.trim().equals("ROL-0001"))) {%>
                                                             <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                                 <% } else { %>
                                                                 <% if (d.getEs_documento_adjunto() == null) { %>
@@ -212,7 +212,7 @@
                                                                 }%>
                                                         </td>
                                                         <td >
-                                                            <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
+                                                            <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007")|rol.trim().equals("ROL-0001"))) {%>
                                                             <a type="button"  class="btn btn-danger btn_reg_doc elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getId_dgp()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                             <%} else {
                                                                     out.print("");
@@ -232,7 +232,7 @@
                                                     <td ><strong><%=d.getNo_documento() + d.getTi_documento()%></strong></td>
 
                                                     <td class="caji<%=(i + 1)%>">
-                                                        <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
+                                                        <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007")|rol.trim().equals("ROL-0001"))) {%>
                                                         <div class="form-group">
                                                             <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  name="archivos<%=(i + 1)%>" >
                                                         </div>
@@ -250,7 +250,7 @@
                                                     </td>
 
                                                     <td >
-                                                        <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
+                                                        <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007")|rol.trim().equals("ROL-0001"))) {%>
                                                         <input type="text"  name="lob_description<%=i + 1%>">
                                                         <% } else { %>
                                                         <% if (d.getDe_documento_adjunto() == null) { %>
@@ -262,7 +262,7 @@
                                                         <% } %>    
                                                     </td>
                                                     <td >
-                                                        <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
+                                                        <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007")|rol.trim().equals("ROL-0001"))) {%>
                                                         <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                             <% } else { %>
                                                             <% if (d.getEs_documento_adjunto() == null) { %>
@@ -284,7 +284,7 @@
                                                             }%>
                                                     </td>
                                                     <td style="align-center">
-                                                        <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
+                                                        <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007")|rol.trim().equals("ROL-0001"))) {%>
                                                         <a type="button"  class="btn btn-danger btn_reg_doc elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getId_dgp()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                         <%} else {
                                                                 out.print("");
@@ -316,7 +316,7 @@
                                                         </strong></td>
 
                                                     <td class="caji<%=(i + 1)%>">
-                                                        <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
+                                                        <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007")|rol.trim().equals("ROL-0001"))) {%>
                                                         <div class="form-group">
                                                             <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"   name="archivos<%=(i + 1)%>" >
                                                         </div>
@@ -334,7 +334,7 @@
                                                     </td>
 
                                                     <td >
-                                                        <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
+                                                        <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007")|rol.trim().equals("ROL-0001"))) {%>
                                                         <input type="text"  name="lob_description<%=i + 1%>">
                                                         <% } else { %>
                                                         <% if (d.getDe_documento_adjunto() == null) { %>
@@ -347,7 +347,7 @@
 
                                                     </td>
                                                     <td >
-                                                        <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
+                                                        <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007")|rol.trim().equals("ROL-0001"))) {%>
                                                         <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                             <% } else { %>
                                                             <% if (d.getEs_documento_adjunto() == null) { %>
@@ -367,7 +367,7 @@
                                                             }%>
                                                     </td>
                                                     <td style="align-center">
-                                                        <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
+                                                        <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007")|rol.trim().equals("ROL-0001"))) {%>
                                                         <a type="button"  class="btn btn-danger btn_reg_doc elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getId_dgp()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                         <%} else {
                                                                 out.print("");
@@ -395,7 +395,7 @@
 
 
                                                     <td class="caji<%=(i + 1)%>">
-                                                        <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007"))) {%>
+                                                        <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007")|rol.trim().equals("ROL-0001"))) {%>
                                                         <div class="form-group">
                                                             <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"   name="archivos<%=(i + 1)%>" >
                                                         </div>
@@ -413,7 +413,7 @@
                                                     </td>
 
                                                     <td >
-                                                        <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
+                                                        <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007")|rol.trim().equals("ROL-0001"))) {%>
                                                         <input type="text"  name="lob_description<%=i + 1%>">
                                                         <% } else { %>
                                                         <% if (d.getDe_documento_adjunto() == null) { %>
@@ -425,7 +425,7 @@
                                                         <% } %>    
                                                     </td>
                                                     <td >
-                                                        <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
+                                                        <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007")|rol.trim().equals("ROL-0001"))) {%>
                                                         <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                             <% } else { %>
                                                             <% if (d.getEs_documento_adjunto() == null) { %>
@@ -446,7 +446,7 @@
                                                             }%>
                                                     </td>
                                                     <td style="align-center">
-                                                        <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
+                                                        <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007")|rol.trim().equals("ROL-0001"))) {%>
                                                         <a type="button"  class="btn btn-danger btn_reg_doc elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getId_dgp()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                         <%} else {
                                                                 out.print("");
@@ -468,7 +468,7 @@
 
 
                                                 <td class="caji<%=(i + 1)%>">
-                                                    <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007"))) {%>
+                                                    <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007")|rol.trim().equals("ROL-0001"))) {%>
                                                     <div class="form-group">
                                                         <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  name="archivos<%=(i + 1)%>" >
                                                     </div>
@@ -488,7 +488,7 @@
 
 
                                                 <td >
-                                                    <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007"))) {%>
+                                                    <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007")|rol.trim().equals("ROL-0001"))) {%>
                                                     <input type="text"   name="lob_description<%=i + 1%>">
                                                     <% } else { %>
 
@@ -502,7 +502,7 @@
                                                     <% } %>    
                                                 </td>
                                                 <td >
-                                                    <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
+                                                    <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007")|rol.trim().equals("ROL-0001"))) {%>
                                                     <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                         <% } else { %>
                                                         <% if (d.getEs_documento_adjunto() == null) { %>
@@ -522,7 +522,7 @@
                                                         }%>
                                                 </td>
                                                 <td style="align-center">
-                                                    <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007"))) {%>
+                                                    <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007")|rol.trim().equals("ROL-0001"))) {%>
                                                     <a type="button"  class="btn btn-danger btn_reg_doc elimi" href="../../../documento_trabajdor?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getId_dgp()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                     <%} else {
                                                             out.print("");
@@ -538,7 +538,7 @@
 
                                                     }%>
                                                 <input type="hidden" name="num" value="<%=i + 1%>">
-                                                <% if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007")) { %>
+                                                <% if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007")|rol.trim().equals("ROL-0001")) { %>
                                                 <%if (request.getParameter("P2") != null) {%>
                                                 <%} else {%>
                                                 <tr><td><input type="hidden" value="Registrar" name="opc"></td></tr>
