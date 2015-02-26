@@ -485,7 +485,7 @@ public class CContrato extends HttpServlet {
             getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
             getServletContext().setAttribute("List_tipo_contrato", doc.List_Adventista(idcto));
             
-            getServletContext().setAttribute("List_doc_req_pla", doc.List_Doc_CE());
+            getServletContext().setAttribute("Lis_doc_trabajador", doc.Lis_doc_trabajador(ID_TRABAJADOR));
             int i = doc.List_Req_nacionalidad(ID_TRABAJADOR);
             int num_ad = doc.List_Adventista(ID_TRABAJADOR);
             getServletContext().setAttribute("List_Hijos", doc.List_Hijos(ID_TRABAJADOR));
@@ -493,8 +493,8 @@ public class CContrato extends HttpServlet {
 
             //out.print(i);
             String idctr = con.Contrato_max(ID_TRABAJADOR);
-            response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&idtr=" + ID_TRABAJADOR + "&idctr=" + idctr + "&dce=Doc_CE");
-            
+            //response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&idtr=" + ID_TRABAJADOR + "&idctr=" + idctr + "&dce=Doc_CE");
+            response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&pro=pr_dgp&idtr=" + ID_TRABAJADOR);
         }
         if (opc.equals("Reporte_CE")) {
             getServletContext().setAttribute("List_Casos_Esp", con.LIST_CASOS_ESPECIALES());

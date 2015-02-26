@@ -282,8 +282,12 @@
                                                                 <input type="text" name="BEV"  id="bev" value="0" class="input-group-sm">
                                                             </label>
                                                         </section>
-
-                                                        <section class="col col-2">
+                                                        <section class="col col-1">
+                                                            <label class="input" id="titu">Bono puesto:
+                                                                <input type="text" name="ca_bono_puesto" value="0" id="bo_puesto" required="" class="input-group-sm">
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-1">
                                                             <label class="input" id="titu">Sueldo Total:
                                                                 <input type="text" name="TOTAL_SUELDO" value="" id="sueldo_total"class="input-group-sm" selected="" >
                                                             </label>
@@ -299,6 +303,7 @@
                                                                 <input type="text" name="ASIG_FAMILIAR" <%if (cant_hijos == 0) {%> value="0.0" <%} else {%> value="75.0" <%}%> id="asig_fa" class="input-group-sm">
                                                             </label>
                                                         </section>
+
                                                     </div>
 
 
@@ -890,7 +895,8 @@
             var a = parseFloat($("#remu").val());
             var b = parseFloat($("#bono_al").val());
             var c = parseFloat($("#bev").val());
-            var x = a + b + c;
+            var d = parseFloat($("#bo_puesto").val());
+            var x = a + b + c + d;
             $("#sueldo_total").val(x);
         }
         $(document).ready(
@@ -908,6 +914,11 @@
                             }
                     );
                     $("#bev").keyup(
+                            function() {
+                                Sueldo_Total();
+                            }
+                    );
+                    $("#bo_puesto").keyup(
                             function() {
                                 Sueldo_Total();
                             }
