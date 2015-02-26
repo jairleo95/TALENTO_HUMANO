@@ -301,35 +301,122 @@
                                                         </section>
                                                     </div>
 
-                                                    <div  class="row" id="centro-costo_1" >
-                                                        <section class="col col-4">
-                                                            <label class="select" id="titu">Centro de Costo Nº 1:
-                                                                <select name="CENTRO_COSTOS_1" class="select-cc centro_costo1" required="">
-                                                                    <option value="">[SELECCIONE]</option>
+
+
+                                                    <div class="row centro-costo_1" >
+                                                        <!--<code class="ver"></code>-->
+                                                        <section class="col col-3">
+                                                            <label id="titu" class="centro-costo_1" >Centro de Costo Nº 1:</label>
+                                                            <label class="select" id="titu">Dirección :
+                                                                <select required="" class="cc-dir">
+                                                                    <option value="">[DIRECCION]</option>
                                                                 </select>
                                                             </label>
                                                         </section>
-                                                        <section class="col col-2">
+                                                        <section class="col col-3">
+                                                            <label></label>
+                                                            <label class="select" id="titu"> Departamento :
+                                                                <select required="" name="DEP" class="cc-dep">
+                                                                    <option value="">[DEPARTAMENTO]</option>
+                                                                </select>
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-3">
+                                                            <label></label>
+                                                            <label class="select" id="titu"> Centro de Costo :
+                                                                <select name="CENTRO_COSTOS_1" class="centro_costo" required="">
+                                                                    <option value="">[CENTRO COSTO]</option>
+                                                                </select>
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-1">
+                                                            <label></label>
                                                             <label class="input" id="titu">%
                                                                 <input name="PORCENTAJE_1"  type="text" value="100"  class="porcentaje_cc"/>
                                                             </label>
                                                         </section>
-                                                        <section class="col col-2">
-                                                            <label class="btn">
-                                                                <button type="button" class="btn btn-default btn-agregar-cc" id="btn-agregar-cc" >Agregar</button>
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-2">
+                                                        <section class="col col-1">
+                                                            <label></label>
                                                             <label class="input" style="font-weight: bold;color:red;">% Total :
                                                                 <input  readonly="" name="TOTAL_PORCENTAJE" max="100" min="100" maxlength="3" type="text" class="total_porcentaje"  />
                                                             </label>
                                                         </section>
-                                                        <input name="CANT" value="1" type="hidden" class="cant"/>
+                                                        <section class="col col-1">
+                                                            <label class="btn">
+                                                                <button type="button" class="btn btn-default btn-agregar-cc" id="btn-agregar-cc" >Agregar</button>
+                                                            </label>
+                                                        </section>
 
+                                                        <input name="CANT" value="1" type="hidden" class="cant"/>
                                                     </div>
-                                                    <div class="row">
-                                                        <code class="ver"></code>
-                                                    </div>
+
+                                                    <script>
+
+                                                        $(document).ready(
+                                                                function() {
+                                                                    Listar_Direccion();
+                                                                    Listar_Departamento();
+
+                                                                }
+                                                        );</script> 
+                                                    <script>
+
+                                                        function Listar_Direccion() {
+                                                            var cc_dir = $(".cc-dir");
+                                                            $.post("../../centro_costo?opc=Listar_dir", function(objJson) {
+                                                                if (objJson.rpta == -1) {
+                                                                    alert(objJson.mensaje);
+                                                                    return;
+                                                                }
+                                                                var lista = objJson.lista;
+                                                                for (var i = 0; i < lista.length; i++) {
+                                                                    cc_dir.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
+                                                                }
+                                                            });
+                                                        }
+                                                        $(".cc-dir").change(function() {
+                                                            var id_dir = $(".cc-dir").val();
+                                                            //alert(id_dir);
+                                                            Listar_Departamento(id_dir);
+                                                        });
+                                                        function Listar_Departamento(id_dir) {
+                                                            var cc_dep = $(".cc-dep");
+                                                            $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + id_dir, function(objJson) {
+                                                                cc_dep.empty();
+                                                                cc_dep.append("<option value=''>[DEPARTAMENTO]</option>");
+                                                                if (objJson.rpta == -1) {
+                                                                    alert(objJson.mensaje);
+                                                                    return;
+                                                                }
+                                                                var lista = objJson.lista;
+                                                                // alert(lista.length)
+                                                                for (var i = 0; i < lista.length; i++) {
+                                                                    cc_dep.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
+                                                                }
+                                                            });
+                                                        }
+                                                        $(".cc-dep").change(function() {
+                                                            var id_dep = $(".cc-dep").val();
+                                                            //alert(id_dir);
+                                                            Listar_Centro_Costo(id_dep);
+                                                        });
+                                                        function Listar_Centro_Costo(id_dep) {
+                                                            var centro_costo = $(".centro_costo");
+                                                            $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + id_dep, function(objJson) {
+                                                                centro_costo.empty();
+                                                                centro_costo.append("<option value=''>[CENTRO COSTO]</option>");
+                                                                if (objJson.rpta == -1) {
+                                                                    alert(objJson.mensaje);
+                                                                    return;
+                                                                }
+                                                                var lista = objJson.lista;
+                                                                for (var i = 0; i < lista.length; i++) {
+                                                                    centro_costo.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
+                                                                }
+                                                            });
+                                                        }
+                                                    </script>
+
 
                                                 </fieldset>
                                                 <fieldset>
@@ -398,10 +485,10 @@
                                                             </label>
                                                         </section>
                                                         <section class="col col-4">
-                                                            <label class="select" id="titu">Tipo de Modeda:
+                                                            <label class="select" id="titu">Tipo de Moneda:
                                                                 <select name="TIPO_MONEDA" class="input-group-sm" required="">
                                                                     <option value="">[SELECCIONE]</option>
-                                                                    <option value="01">SOLES</option>
+                                                                    <option value="01" selected="">SOLES</option>
                                                                     <option value="02">DOLARES</option>
                                                                     <option value="03">EUROS</option>
                                                                 </select>
@@ -1518,7 +1605,7 @@
     <script type="text/javascript">
 
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
-        
+
         $(document).ready(function() {
 
             pageSetUp();
@@ -1969,7 +2056,7 @@
             Listar_dep();
             Listar_centro_costo();
             Listar_plantilla2();
-    
+
             var a = $("#select-sub-mod");
             var c = $("#Selec_Area");
             var d = $("#select_sec");
@@ -2001,7 +2088,7 @@
                             }
                         });
                     });
-                   
+
             $("#selec_dep").change(
                     function() {
                         $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function(objJson) {
@@ -2024,7 +2111,7 @@
 
             $(".select_dir").change(
                     function() {
-                      
+
                         $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $(this).val(), function(objJson) {
                             b.empty();
 
@@ -2043,7 +2130,7 @@
                             }
                         });
                     });
-                 
+
 
             $("#Selec_Area").change(
                     function() {
@@ -2060,7 +2147,7 @@
                             }
                         });
                     });
-                      
+
             $("#select_sec").change(
                     function() {
                         $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function(objJson) {
