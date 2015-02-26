@@ -241,7 +241,7 @@
             
             $("#btnbuscar").click(
                     function() {
-                        $.post("../../ajax/Ajax_Contrato/Ajax_Contrato.jsp", $("#frm_filtro2").serialize(), function(objJson) {
+                        $.post("../../impresion_masiva?opc=filtrar", $("#frm_filtro2").serialize(), function(objJson) {
                             b.empty();
                             //alert($("#select_pu").val());
                             var list = objJson.lista;

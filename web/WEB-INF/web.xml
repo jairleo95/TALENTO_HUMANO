@@ -135,6 +135,10 @@
         <servlet-name>CDocumento_Trabajador</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CDocumento_Trabajador</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CImpresion_Masiva</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CImpresion_Masiva</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
         <url-pattern>/trabajador</url-pattern>
@@ -266,6 +270,10 @@
     <servlet-mapping>
         <servlet-name>CDocumento_Trabajador</servlet-name>
         <url-pattern>/documento_trabajador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CImpresion_Masiva</servlet-name>
+        <url-pattern>/impresion_masiva</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>300</session-timeout>

@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.spi.DirStateFactory;
@@ -669,6 +670,11 @@ public class ContratoDAO implements InterfaceContratoDAO {
             this.conn.close();
         }
         return list;
+    }
+
+    @Override
+    public List<Map<String, ?>> Listar_Contratos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 

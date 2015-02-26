@@ -6,6 +6,7 @@
 package pe.edu.upeu.application.dao_imp;
 
 import java.util.List;
+import java.util.Map;
 import pe.edu.upeu.application.model.Anno;
 import pe.edu.upeu.application.model.List_Rh_Contrato_Fec;
 import pe.edu.upeu.application.model.Modalidad;
@@ -60,5 +61,7 @@ public interface InterfaceContratoDAO {
     public void UPDATE_FIRMA(String ID_TR,String IDDGP);
     
     public List<V_List_Empleado> LIST_CASOS_ESPECIALES();
+    
+    public List<Map<String,?>> Listar_Contratos();
 
 }
