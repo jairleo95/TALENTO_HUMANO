@@ -240,7 +240,7 @@
     (function($) {
         $(document).ready(function() {
 
-            var url = 'http://localhost/demo/data.php';
+            var url = 'http://192.168.13.52/demo/data.php';
 
             $(".semestre").change(function() {
 
@@ -250,7 +250,7 @@
                     $('.tbody-carga').empty();
                     $.each(data, function(i, campo) {
                        
-                       $.post("../../../dgp",function(){alert()});
+                       //$.post("../../../dgp",function(){alert()});
                         $('.tbody-carga').append('<tr>');
                         $('.tbody-carga').append('<td>' + campo.tipodocumento + '</td>');
                         $('.tbody-carga').append('<td>' + campo.numerodocumento + '</td>');

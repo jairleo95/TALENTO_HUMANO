@@ -723,7 +723,7 @@
                                                         $("#file-0").fileinput({
                                                             'allowedFileExtensions': ['jpg', 'png', 'gif'],
                                                         });
-                                                        $("#file-1").fileinput({
+                                                        $("#file-5").fileinput({
                                                             initialPreview: ["<img src='Desert.jpg' class='file-preview-image'>", "<img src='Jellyfish.jpg' class='file-preview-image'>"],
                                                             initialPreviewConfig: [
                                                                 {caption: 'Desert.jpg', width: '120px', url: '#'},
@@ -732,7 +732,7 @@
                                                             uploadUrl: '#',
                                                             allowedFileExtensions: ['jpg', 'png', 'gif'],
                                                             overwriteInitial: false,
-                                                            maxFileSize: 1000,
+                                                            maxFileSize: 50,
                                                             maxFilesNum: 10,
                                                             //allowedFileTypes: ['image', 'video', 'flash'],
                                                             slugCallback: function(filename) {
