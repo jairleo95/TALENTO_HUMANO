@@ -294,4 +294,28 @@ public class FuncionDAO implements InterfaceFuncionDAO {
         return Lista;
     }
 
+    @Override
+    public List<Funciones> List_x_fun_x_idpu(String id_pu) {
+        this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT * FROM RHTD_FUNCION where ID_PUESTO='"+ id_pu.trim() + "' AND ES_FUNCION='1'";
+        List<Funciones> Lista = new ArrayList<Funciones>();
+        try {
+            ResultSet rs = this.cnn.query(sql);
+
+            while (rs.next()) {
+                Funciones x = new Funciones();
+                x.setId_fucion(rs.getString("ID_FUNCION"));
+                x.setDe_funcion(rs.getString("DE_FUNCION"));
+                x.setTi_funcion(rs.getString("TI_FUNCION"));
+                Lista.add(x);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } finally {
+            this.cnn.close();
+        }
+        return Lista;
+    }
+
 }

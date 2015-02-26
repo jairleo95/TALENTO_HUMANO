@@ -541,6 +541,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                                     <tr><td>[horas]</td><td>Horas de trabajo semanales</td></tr>
                                                     <tr><td>[cursos]</td><td>Cuesos que va enseñar (en el caso que sea docente)</td></tr>
                                                     <tr><td>[funciones]</td><td>Funciones que va a desempeñar en el puesto</td></tr>
+                                                    <tr><td>[moneda]</td><td>Tipo de moneda de pago</td></tr>
                                                 </tbody>
                                             </table>
                                         </div>

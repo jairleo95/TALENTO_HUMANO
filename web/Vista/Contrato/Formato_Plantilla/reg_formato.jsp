@@ -1,4 +1,5 @@
 
+<%@page import="pe.edu.upeu.application.model.Funciones"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
@@ -20,6 +21,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 <%@page import="pe.edu.upeu.application.model.X_List_Id_Contrato_DGP"%>
 <%@page import="java.util.Calendar;"%>
 <jsp:useBean id="List_contra_x_idcto" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_x_fun_x_idpu" scope="application" class="java.util.ArrayList"/>
 <html>
     <head>
         <meta charset="utf-8">
@@ -54,6 +56,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                             Direccion += " " + n.getDi_dom_a_d4() + " " + l.List_Dom_D5_Id().get(c);
                         }
                     }
+                    
                     Direccion += " " + n.getDi_dom_a_d6();
 
                     String fecha = n.getFe_sus();
@@ -84,6 +87,27 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         fechahas = f[0] + " de " + f[1] + " del " + f[2];
                     } else {
                         fechahas = "NO TIENE";
+                    }
+                    String funciones ="";
+                    for (int p = 0; p < List_x_fun_x_idpu.size(); p++) {
+                        Funciones fn = new Funciones();
+                        fn = (Funciones) List_x_fun_x_idpu.get(p);
+                        if (p == (List_x_fun_x_idpu.size() - 1)) {
+                            funciones += fn.getDe_funcion();
+                        } else {
+                            funciones += fn.getDe_funcion() + ",";
+                        }
+                        funciones += "DGDFD";
+                    }
+                    String moneda="";
+                    if(n.getCo_ti_moneda().trim().equals("01")){
+                        moneda="nuevos soles";
+                    }
+                    if(n.getCo_ti_moneda().trim().equals("02")){
+                        moneda="dolares";
+                    }
+                    if(n.getCo_ti_moneda().trim().equals("03")){
+                        moneda="euros";
                     }
         %>
         <script>
@@ -203,7 +227,9 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     "[fe_suscripcion]": "<%=fechasus%>",
                     "[sueldo]": "<%=n.getCa_sueldo_total()%>",
                     "[horas]": "<%=n.getNu_horas_lab()%>",
-                    "[cursos]": ""
+                    "[cursos]": "",
+                    "[moneda]": "<%=moneda%>",
+                    "[funciones]": "<%=funciones%>"
                 };
                 var editor = CKEDITOR.instances.editor1;
                 var string_texto = "";
@@ -248,8 +274,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
     <body style="height: 1080px">
         <h3>CARGAR PLANTILLAS</h3>
-        <%String no_ar = request.getParameter("no_arc");
-        %>
+        <%String no_ar = request.getParameter("no_arc");%>
         <input type="hidden" id="no_arch" class="no_arc" value="<%=no_ar%>">
         <h3>EDITAR PLANTILLAS <%=fechades%></h3>
         <form class="ckeditor_form" action="../../../formato_plantilla" method="post">
