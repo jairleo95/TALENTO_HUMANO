@@ -749,7 +749,7 @@
 
                                                         <%}
                                                         %>
-                                                        <input type="hidden" value="0" name="ES_CUENTA_SUELDO" id="es_cuenta"/>
+                                                        <input type="hidden" value="1" name="ES_CUENTA_SUELDO" id="es_cuenta"/>
 
                                                         <%String idtr = request.getParameter("idtr");%>
                                                         <input type="hidden" name="idtr" value="<%=idtr%>"/>

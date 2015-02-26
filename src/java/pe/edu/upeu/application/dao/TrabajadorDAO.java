@@ -849,16 +849,17 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
     }
 
     @Override
-    public void MOD_CUENTA_SUELDO(String NO_BANCO, String NU_CUENTA, String NU_CUENTA_BANC, String ES_GEM_NU_CUENTA, String NO_BANCO_OTROS_SP, String ID_TRABAJADOR) {
+    public void MOD_CUENTA_SUELDO(String NO_BANCO, String NU_CUENTA, String NU_CUENTA_BANC, String ES_GEM_NU_CUENTA, String NO_BANCO_OTROS_SP, String ID_TRABAJADOR, String ES_CUENTA_SUELDO) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_TRA_CUEN_SUELDO( ?, ?, ?, ?, ?, ?)} ");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_TRA_CUEN_SUELDO( ?, ?, ?, ?, ?, ?, ?)} ");
             cst.setString(1, NO_BANCO);
             cst.setString(2, NU_CUENTA);
             cst.setString(3, NU_CUENTA_BANC);
             cst.setString(4, ES_GEM_NU_CUENTA);
             cst.setString(5, NO_BANCO_OTROS_SP);
             cst.setString(6, ID_TRABAJADOR);
+            cst.setString(7, ES_CUENTA_SUELDO);
             cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
