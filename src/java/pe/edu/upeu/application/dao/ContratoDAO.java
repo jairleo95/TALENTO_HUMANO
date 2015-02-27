@@ -655,6 +655,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
             while (rs.next()) {
                 V_List_Empleado v = new V_List_Empleado();
                 v.setNo_trabajador(rs.getString("no_trabajador"));
+                v.setId_trabajador(rs.getString("id_trabajador"));
                 v.setAp_paterno(rs.getString("ap_paterno"));
                 v.setAp_materno(rs.getString("ap_materno"));
                 v.setNo_area(rs.getString("no_area"));

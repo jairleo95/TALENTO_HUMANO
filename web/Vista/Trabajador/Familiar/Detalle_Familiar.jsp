@@ -56,14 +56,15 @@
                             out.print("No registrado");
                         }
                             %></td></tr>
-                    <%if(tr.getAp_nombres_madre() == null && tr.getAp_nombres_padre() == null ){%>
-                    <%  if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005")) {%>
+                    <%if( tr.getAp_nombres_madre() == null || tr.getAp_nombres_padre() == null){%>
+                    <%  if (rol.trim().equals("ROL-0002") || rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001")) {%>
                 <tr><td colspan="2"> <a class="btn btn-success" href=Reg_Padres.jsp?idtr=<%=request.getParameter("idtr")%>">Agregar Padres</a></td></tr>
                 <%}%>
                 <%}%>
                 </table>
             </div>
 
+                
 
             <table  class="table table-striped table-bordered table-hover"  >
                 <tr><td colspan="2"><div class="title"><h4>DATOS DE CONYUGUE</h4></div></td></tr>
@@ -141,11 +142,11 @@
 
 
                 <tr><td colspan="2"> <label>Aun no se ha registrado los datos del cónyugue</label><br></td></tr> 
-                        <%  if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005")) {%>
+                        <%  if (rol.trim().equals("ROL-0002") || rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001")) {%>
                 <tr><td colspan="2"> <a class="btn btn-success" href=Reg_Conyugue.jsp?idtr=<%=request.getParameter("idtr")%>">Agregar Cónyugue</a></td></tr>
                 <%}%>
                 <%}%>
-                <%if(tr.getAp_nombres_c() != null && tr.getAp_nombres_madre() != null && tr.getAp_nombres_padre()!= null ){%>
+                <%if(tr.getAp_nombres_c() != null || tr.getAp_nombres_madre() != null && tr.getAp_nombres_padre()!= null ){%>
                  <input type="hidden" name="idtra" value="<%=tr.getId_trabajador().trim()%>">
                 <input type="hidden" name="opc" value="Editar_Familiar">
                 <tr><td colspan="2"><input class="btn btn-success" type="submit" value="EDITAR"></td></tr>
@@ -159,7 +160,7 @@
     <center>
 
         <%        if (LISTA_HIJOS.size() != 0) {
-                if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005")) {%>
+                if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001") ) {%>
                 <%@include file="List_Hijo.jsp" %>
         <a href="Reg_Datos_Hijo.jsp?idtr=<%=request.getParameter("idtr")%>" class="btn btn-primary">Agregar un hijo</a>
         <%}%>
@@ -167,7 +168,7 @@
 
         <label>No se ha registrado ningun Hijo(a)</label><br>
 
-        <%  if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005")) {%>
+        <%  if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001")) {%>
         <a href="Reg_Datos_Hijo.jsp?idtr=<%=request.getParameter("idtr")%>" class="btn btn-primary">Registrar Hijos</a>
         <%}%>
     </center>
