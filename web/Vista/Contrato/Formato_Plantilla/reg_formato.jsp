@@ -97,7 +97,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         } else {
                             funciones += fn.getDe_funcion() + ",";
                         }
-                        funciones += "DGDFD";
                     }
                     String moneda="";
                     if(n.getCo_ti_moneda().trim().equals("01")){
