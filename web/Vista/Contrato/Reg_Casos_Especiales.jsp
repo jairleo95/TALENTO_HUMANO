@@ -350,8 +350,15 @@
                                                             <label class="btn">
                                                                 <button type="button" class="btn btn-default btn-agregar-cc" id="btn-agregar-cc" >Agregar</button>
                                                             </label>
+                                                            <a href="javascript:void(0);" class="btn bg-color-red txt-color-white"><i class="fa fa-plus fa-3x"></i></a>
                                                         </section>
-
+                                                        <ul class="demo-btns">
+                                                          
+                                                            <li>
+                                                
+                                            </li>
+                                                            
+                                                        </ul>
                                                         <input name="CANT" value="1" type="hidden" class="cant"/>
                                                     </div>
 
