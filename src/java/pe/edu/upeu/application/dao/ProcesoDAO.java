@@ -56,26 +56,48 @@ public class ProcesoDAO implements InterfaceProcesoDAO {
     }
 
     @Override
-    public List<Map<String, ?>> List_Pro_Paso_Id(String id) {
-
+    public List<Map<String, ?>> List_Pro_Paso_Id(String id_req, String id_pro, String id_dir, String id_dep) {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "";
+            String sql = "select  *  from rhvd_requerimiento_proceso where ES_REQ_PROCESO is not null ";
+            if (id_req != null) {
+                sql += (!"".equals(id_req)) ? " and  ID_REQUERIMIENTO = '" + id_req + "'" : "";
+            }
+            if (id_pro != null) {
+                sql += (!"".equals(id_pro)) ? " and  ID_PROCESO = '" + id_pro + "'" : "";
+            }
+            if (id_dir != null) {
+                sql += (!"".equals(id_dir)) ? " and  ID_DIRECCION = '" + id_dir + "'" : "";
+            }
+            if (id_dep != null) {
+                sql += (!"".equals(id_dep)) ? " and  ID_DEPARTAMENTO = '" + id_dep + "'" : "";
+            }
+
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
-
                 Map<String, Object> rec = new HashMap<String, Object>();
-                rec.put("id", rs.getString("id_proceso"));
-                rec.put("nombre", rs.getString("no_proceso"));
-                rec.put("desc", rs.getString("de_proceso"));
+                rec.put("id", rs.getString("ID_DETALLE_REQ_PROCESO"));
+                rec.put("id_req", rs.getString("ID_REQUERIMIENTO"));
+                rec.put("id_pro", rs.getString("ID_PROCESO"));
+                rec.put("id_dir", rs.getString("ID_DIRECCION"));
+                rec.put("id_dep", rs.getString("ID_DEPARTAMENTO"));
+                rec.put("id_area", rs.getString("ID_AREA"));
+                rec.put("id_ti_planilla", rs.getString("ID_TIPO_PLANILLA"));
+                rec.put("ti_planilla", rs.getString("TI_PLANILLA"));
+                rec.put("req", rs.getString("NO_REQ"));
+                rec.put("proceso", rs.getString("NO_PROCESO"));
+                rec.put("dep", rs.getString("NO_DEP"));
+                rec.put("dir", rs.getString("NO_DIRECCION"));
+                rec.put("area", rs.getString("NO_AREA"));
+                rec.put("estado", rs.getString("ES_REQ_PROCESO"));
                 lista.add(rec);
             }
             rs.close();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR"+e.getMessage());
+            throw new RuntimeException("ERROR" + e.getMessage());
         } finally {
             try {
                 this.conn.close();

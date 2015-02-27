@@ -23,7 +23,6 @@ import pe.edu.upeu.application.dao_imp.InterfaceProcesoDAO;
  *
  * @author ALFA 3
  */
-
 @WebServlet(name = "CProceso", urlPatterns = {"/Proceso"})
 public class CProceso extends HttpServlet {
 
@@ -45,32 +44,33 @@ public class CProceso extends HttpServlet {
         Map<String, Object> rpta = new HashMap<String, Object>();
         try {
             String opc = request.getParameter("opc");
-            
+
             if (opc.equals("Mantenimiento")) {
                 response.sendRedirect("Vista/Dgp/Plazo/Reg_Plazo_Dgp.jsp");
 
             }
             if (opc.equals("Registrar")) {
 
-
             }
             if (opc.equals("Modificar")) {
 
-
             }
             if (opc.equals("Listar")) {
-                List<Map<String, ?>> lista=p.List_Proceso();
-                rpta.put("rpta","1");
-                rpta.put("lista",lista);
+                List<Map<String, ?>> lista = p.List_Proceso();
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
             }
-            
+
             if (opc.equals("Listar_Pro_Paso_Id")) {
-                List<Map<String, ?>> lista=p.List_Proceso();
-                rpta.put("rpta","1");
-                rpta.put("lista",lista);
+                String id_req = request.getParameter("id_req");
+                String id_pro = request.getParameter("id_pro");
+                String id_dir = request.getParameter("id_dir");
+                String id_dep = request.getParameter("id_dep");
+                List<Map<String, ?>> lista = p.List_Pro_Paso_Id(id_req, id_pro, id_dir, id_dep);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
             }
             if (opc.equals("Eliminar")) {
-
 
             }
         } catch (Exception e) {
