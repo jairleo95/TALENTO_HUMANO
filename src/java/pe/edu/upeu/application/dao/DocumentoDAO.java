@@ -70,8 +70,17 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
             ResultSet rs = this.conn.query(sql);
 
             while (rs.next()) {
+                String tipo = rs.getString("NO_FILE").substring(rs.getString("NO_FILE").length() - 3, rs.getString("NO_FILE").length());
+                if (tipo.equals("PDF") || tipo.equals("OCX")) {
+                    if( tipo.equals("OCX")||tipo.equals("DOC")){
+                        texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href=\"Archivo/" + rs.getString("NO_FILE") + "'><img src='Archivo/word.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
+                    }else{
+                    texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href=\"Archivo/" + rs.getString("NO_FILE") + "\"><img src='Archivo/pdf.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
+                    }
+                } else {
+                    texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href=\"Archivo/" + rs.getString("NO_FILE") + "\"><img src=\"Archivo/" + rs.getString("NO_FILE") + "\" style='width:100px;height:100px' class='borde' /></a>";
+                }
 
-                texto_html = texto_html + "<img src=\"Archivo/" + rs.getString("NO_FILE") + "\" />";
             }
             rs.close();
         } catch (SQLException e) {
@@ -100,7 +109,45 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
 
             while (rs.next()) {
 
-                texto_html = texto_html + "<img src=\"../../Dgp/Documento/Archivo/"+ rs.getString("NO_FILE")+"\" />";
+                texto_html = texto_html + "<img src=\"../../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "\" />";
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return texto_html;
+    }
+
+    @Override
+    public String List_file_url(String id) {
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        String texto_html = "";
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select a.NO_FILE,a.NO_ORIGINAL  from RHTV_ARCHIVO_DOCUMENTO a ,  RHTV_DOCUMENTO_ADJUNTO d where d.ID_DOCUMENTO_ADJUNTO = a.ID_DOCUMENTO_ADJUNTO  and  a.id_documento_adjunto='" + id + "' and a.ES_FILE='1'";
+            ResultSet rs = this.conn.query(sql);
+
+            while (rs.next()) {
+                String tipo = rs.getString("NO_FILE").substring(rs.getString("NO_FILE").length() - 3, rs.getString("NO_FILE").length());
+                if (tipo.trim().equals("PDF") || tipo.equals("OCX")||tipo.equals("DOC")) {
+                    if( tipo.equals("OCX")||tipo.equals("DOC")){
+                        texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href='../../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "'><img src='../../Dgp/Documento/Archivo/word.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
+                    }else{
+                    texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href='../../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "'><img src='../../Dgp/Documento/Archivo/pdf.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
+                    }
+                } else {
+
+                    texto_html = texto_html + "<a class='mustang-gallery' title='" + tipo + "' href='../../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "'><img src='../../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "' style='width:100px;height:100px;' class='borde'></a>";
+                }
             }
             rs.close();
         } catch (SQLException e) {
@@ -625,8 +672,8 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
 
     @Override
     public List<Lis_Doc_tra> Lis_doc_trabajador_hab(String idtr) {
-                this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT * FROM RHVD_LIST_DOC_TRA WHERE ID_DOCUMENTO_ADJUNTO IS NOT NULL AND ID_TRABAJADOR='"+idtr.trim()+"'";
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT * FROM RHVD_LIST_DOC_TRA WHERE ID_DOCUMENTO_ADJUNTO IS NOT NULL AND ID_TRABAJADOR='" + idtr.trim() + "'";
         List<Lis_Doc_tra> x = new ArrayList<Lis_Doc_tra>();
         try {
             ResultSet rs = this.conn.query(sql);

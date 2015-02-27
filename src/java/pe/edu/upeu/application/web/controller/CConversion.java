@@ -45,7 +45,7 @@ public class CConversion {
         String f[] = fecha.split("-");
         return f[2] + "/" + f[1] + "/" + f[0];
     }
-
+    
      /*public String convertFecha(String fecha) {
      String f[] = fecha.split("-");
      return "04-JUN-14";

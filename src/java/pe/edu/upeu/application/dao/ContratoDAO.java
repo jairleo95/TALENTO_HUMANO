@@ -655,6 +655,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
             while (rs.next()) {
                 V_List_Empleado v = new V_List_Empleado();
                 v.setNo_trabajador(rs.getString("no_trabajador"));
+                v.setId_trabajador(rs.getString("id_trabajador"));
                 v.setAp_paterno(rs.getString("ap_paterno"));
                 v.setAp_materno(rs.getString("ap_materno"));
                 v.setNo_area(rs.getString("no_area"));
@@ -689,6 +690,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
             if(fe_i!=null ){sql+=" and FE_DESDE= '"+c.convertFecha(fe_i.trim())+"'";}else{}
             if(fe_fin!=null ){sql+=" and FE_HASTA= '"+c.convertFecha(fe_fin.trim())+"'";}else{}
            // if(sueldo_total!=null ){sql+=" and CA_SUELDO_TOTAL="+sueldo_total;}else{}
+           // sql += (!"".equals()) ? " AND  upper(NOM_APE)  like '%" + nom_ape + "%'" : "";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
