@@ -23,7 +23,6 @@
 
         <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
         <link type="text/css" rel="stylesheet" href="../../css/Css_Reporte/Reportes.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="../../../HTML_version/css/bootstrap.min.css">
         <link type="text/css" rel="stylesheet" href="../../css/Css_Formulario/form.css">
         <link rel="stylesheet" href="../../css/bootstrap.min.css">
         <title>Contratos</title>
@@ -43,11 +42,11 @@
                         <div class="row">
                             <div class="form-group" >
                                 <label>Fecha de Contratacion</label><br>
-                                <input type="date"  class="form-control" name="del"  length="45" style="width: 250px" />
+                                <input type="date"  class="form-control" name="del"  length="45" style="width: 250px" id="del"/>
                             </div>
                             <div class="form-group" >
                                 <label>Al</label><br>
-                                <input type="date"  class="form-control" name="al" size="45" maxlength="100" style="width: 250px" />
+                                <input type="date"  class="form-control" name="al" size="45" maxlength="100" style="width: 250px" id="al" />
                                 <input type="hidden" name="iddep" value="<%%>">
                             </div>
                         </div>
@@ -55,7 +54,7 @@
 
                             <div class="form-group">
                                 <label>Nombres y Apellidos :</label><br>
-                                <input type="text"  class="form-control" name="nom_ape"  style="width: 250px"   />
+                                <input type="text"  class="form-control" name="nom_ape"  style="width: 250px"   id="ap"/>
                             </div>
                             <div class="form-group">  
                                 <label>Direccion :</label><br>
@@ -103,17 +102,17 @@
                         <div class="row">
                             <div class="form-group">
                                 <label>Fecha Inicio:</label><br>
-                                <input type="date" name="fec_i" class="form-control" length="45" style="width: 250px">
+                                <input type="date" name="fec_i" class="form-control" length="45" style="width: 250px" id="fe_i">
                             </div>
                             <div class="form-group">
                                 <label>Fecha Fin :</label><br>
-                                <input type="date" name="fec_f" class="form-control" size="45" maxlength="100" style="width: 250px">
+                                <input type="date" name="fec_f" class="form-control" size="45" maxlength="100" style="width: 250px" id="fe_fin">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group">
                                 <label>Sueldo :</label><br>
-                                <input type="text" name="sueldo" class="form-control" style="width: 250px" maxlength="10"/>
+                                <input type="text" name="sueldo" class="form-control" style="width: 250px" maxlength="10" id="sueldo" value=""/>
                             </div>
                         </div>
                         <hr/>
@@ -169,8 +168,8 @@
 
     </body>
     <script>
-        function listar_opciones(opc,id) {
-            if(opc=='Listar_dir_dep'){
+        function listar_opciones(opc, id) {
+            if (opc == 'Listar_dir_dep') {
                 var a = $(".selectdep");
                 $(".selectarea").empty();
                 $(".selectarea").append("<option value=''>[Seleccione]</option>");
@@ -179,33 +178,96 @@
                 $(".selectpu").empty();
                 $(".selectpu").append("<option value=''>[Seleccione]</option>");
             }
-            if(opc=='Listar_area2'){
+            if (opc == 'Listar_area2') {
                 var a = $(".selectarea");
                 $(".selectsec").empty();
                 $(".selectsec").append("<option value=''>[Seleccione]</option>");
                 $(".selectpu").empty();
                 $(".selectpu").append("<option value=''>[Seleccione]</option>");
             }
-            if(opc=='Listar_sec2'){
+            if (opc == 'Listar_sec2') {
                 var a = $(".selectsec");
                 $(".selectpu").empty();
                 $(".selectpu").append("<option value=''>[Seleccione]</option>");
             }
-            if(opc=='Listar_pu_id'){
+            if (opc == 'Listar_pu_id') {
                 var a = $(".selectpu");
             }
-                $.post("../../Direccion_Puesto", "opc="+opc.trim()+"&id="+id.trim(), function(objJson) {
-                    var list = objJson.lista;
-                    a.empty();
-                    a.append("<option value=''>[Seleccione]</option>");
-                    for (var i = 0; i < list.length; i++) {
-                        a.append("<option value='" + list[i].id + "'>" + list[i].nombre + "</option>");
-                    }
-                    $(".tbodys").append();
-                });
-            }
-        $(document).ready(function() {
+            $.post("../../Direccion_Puesto", "opc=" + opc.trim() + "&id=" + id.trim(), function(objJson) {
+                var list = objJson.lista;
+                a.empty();
+                a.append("<option value=''>[Seleccione]</option>");
+                for (var i = 0; i < list.length; i++) {
+                    a.append("<option value='" + list[i].id + "'>" + list[i].nombre + "</option>");
+                }
+                $(".tbodys").append();
+            });
+
+        }
+        function buscar(del, al, nombre, dir, dep, area, sec, puesto, fe_i, fe_fi, ca_sueldo) {
             var b = $(".tbodys");
+            if(del==''){del=null;}
+            if(al==''){del=null;}
+            if(nombre==''){del=null;}
+            if(dir==''){del=null;}
+            if(dep==''){del=null;}
+            if(area==''){del=null;}
+            if(sec==''){del=null;}
+            if(puesto==''){del=null;}
+            if(fe_i==''){del=null;}
+            if(fe_fi==''){del=null;}
+            if(ca_sueldo==''){del=null;}
+            $.post("../../impresion_masiva?opc=filtrar" + "&del=" + del + "&al=" + al + "&nom_ape=" + nombre + "&direccion=" + dir + "&departamento=" + dep + "&area=" + area + "&seccion=" + sec + "&puesto=" + puesto + "&fec_i=" + fe_i + "&fec_f=" + fe_fi + "&sueldo=" + ca_sueldo, function(objJson) {
+                b.empty();
+                //alert($("#select_pu").val());
+                var list = objJson.lista;
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var nuro = 1;
+                for (var i = 0; i < list.length; i++) {
+                    nuro = nuro + i;
+                    b.append("<tr>");
+                    b.append("<td>" + nuro + "</td>");
+                    b.append("<td><p>" + list[i].nombre + "</p></td>");
+                    b.append("<td>" + list[i].fe_de + "</td>");
+                    b.append("<td>" + list[i].fe_ha + "</td>");
+                    b.append("<td><p>" + list[i].no_ar + "</p></td>");
+                    b.append("<td><p>" + list[i].no_ae + "</p></td>");
+                    b.append("<td><p>" + list[i].no_pu + "</p></td>");
+                    b.append("<td>" + list[i].ca_su + '</td>');
+                    b.append("<td>" + list[i].fe_cr + "</td>");
+                    b.append('<td><a class="btn-warming" href="../../contrato?opc=Detalle_Contractual&idtr=' + list[i].id_tr + '">Ver detalle</a> </td>');
+                    //b.append('<td id="sel' + i + '"></td>');
+                    b.append('<td><input type="checkbox" id="imp" name="Imprimir" value="' + list[i].id_pl + '"></td>');
+                    b.append("</tr>");
+                    nuro = 1;
+                }
+                if (list.length !== 0) {
+                    $("#asa").show();
+                }
+                $("#btns").click(
+                        function() {
+                            $("#gg :checkbox").attr('checked', true);
+                            $('#imp').is(':checked');
+                            alerta(checkboxValues.push($("#imp").val()));
+                        });
+                $("#btns2").click(
+                        function() {
+                            var checkboxValues = new Array();
+//recorremos todos los checkbox seleccionados con .each
+                            $('input[name="orderBox[]"]:checked').each(function() {
+                                //$(this).val() es el valor del checkbox correspondiente
+                                checkboxValues.push($(this).val());
+                                alert(checkboxValues.push($(this).val()));
+                            });
+                        });
+            }
+            );
+        }
+        $(document).ready(function() {
+            
             /* $.ajax({
              data:$("#frm_filtro2").serialize(),
              type:"POST",
@@ -216,75 +278,43 @@
              
              });
              */
-            $("#select_direccion").change(function(){
-                var opc='Listar_dir_dep';
-                var id=$("#select_direccion").val();
-               listar_opciones(opc,id);
+            $("#select_direccion").change(function() {
+                var opc = 'Listar_dir_dep';
+                var id = $("#select_direccion").val();
+                listar_opciones(opc, id);
             });
-            $("#select_dep").change(function(){
-                var opc='Listar_area2';
-                var id=$("#select_dep").val();
-               listar_opciones(opc,id);
+            $("#select_dep").change(function() {
+                var opc = 'Listar_area2';
+                var id = $("#select_dep").val();
+                listar_opciones(opc, id);
             });
-            $("#select_area").change(function(){
-                var opc='Listar_sec2';
-                var id=$("#select_area").val();
-               listar_opciones(opc,id);
+            $("#select_area").change(function() {
+                var opc = 'Listar_sec2';
+                var id = $("#select_area").val();
+                listar_opciones(opc, id);
             });
-            $("#select_sec").change(function(){
-                var opc='Listar_pu_id';
-                var id=$("#select_sec").val();
-               listar_opciones(opc,id);
+            $("#select_sec").change(function() {
+                var opc = 'Listar_pu_id';
+                var id = $("#select_sec").val();
+                listar_opciones(opc, id);
             });
             $("#seleccionar_pl").hide();
             $("#asa").hide();
-            
             $("#btnbuscar").click(
                     function() {
-                        $.post("../../impresion_masiva?opc=filtrar", $("#frm_filtro2").serialize(), function(objJson) {
-                            b.empty();
-                            //alert($("#select_pu").val());
-                            var list = objJson.lista;
-                            var nuro = 1;
-                            for (var i = 0; i < list.length; i++) {
-                                nuro = nuro + i;
-                                b.append("<tr>");
-                                b.append("<td>" + nuro + "</td>");
-                                b.append("<td><p>" + list[i].nom_ape + "</p></td>");
-                                b.append("<td>" + list[i].fe_desde + "</td>");
-                                b.append("<td>" + list[i].fe_hasta + "</td>");
-                                b.append("<td><p>" + list[i].no_area + "</p></td>");
-                                b.append("<td><p>" + list[i].no_seccion + "</p></td>");
-                                b.append("<td><p>" + list[i].no_puesto + "</p></td>");
-                                b.append("<td>" + list[i].ca_sueldo + '</td>');
-                                b.append("<td>" + list[i].fecha_contratacion + "</td>");
-                                b.append('<td><a class="btn-warming" href="../../contrato?opc=Detalle_Contractual&idtr=' + list[i].id_trabajador + '">Ver detalle</a> </td>');
-                                //b.append('<td id="sel' + i + '"></td>');
-                                b.append('<td><input type="checkbox" id="imp" name="Imprimir" value="' + list[i].id_contrato + '"></td>');
-                                b.append("</tr>");
-                                nuro = 1;
-                            }
-                            if (list.length !== 0) {
-                                $("#asa").show();
-                            }
-                            $("#btns").click(
-                                    function() {
-                                        $("#gg :checkbox").attr('checked', true);
-                                        $('#imp').is(':checked');
-                                        alerta(checkboxValues.push($("#imp").val()));
-                                    });
-                            $("#btns2").click(
-                                    function() {
-                                        var checkboxValues = new Array();
-//recorremos todos los checkbox seleccionados con .each
-                                        $('input[name="orderBox[]"]:checked').each(function() {
-                                            //$(this).val() es el valor del checkbox correspondiente
-                                            checkboxValues.push($(this).val());
-                                            alert(checkboxValues.push($(this).val()));
-                                        });
-                                    });
-                        }
-                        );
+                        var del = $("#del").val();
+                        var al = $("#al").val();
+                        var nombre = $("#ap").val();
+                        var dir = $("#select_direccion").val();
+                        var dep = $("#select_dep").val();
+                        var area = $("#select_area").val();
+                        var sec = $("#select_sec").val();
+                        var pu = $("#select_pu").val();
+                        var fe_i = $("#fe_i").val();
+                        var fe_f = $("#fe_fin").val();
+                        var sueldo = $("#sueldo").val();
+                        alert(del + al + nombre + dir + dep + area + sec + pu + fe_i + fe_f + sueldo)
+                        buscar(del, al, nombre, dir, dep, area, sec, pu, fe_i, fe_f, sueldo);
                     }
             );
             /* $("#btnbuscar").click(
@@ -311,6 +341,7 @@
     </script>
 
 </html>
+
 <%        }%>
 <%} else {
         response.sendRedirect("/TALENTO_HUMANO/");

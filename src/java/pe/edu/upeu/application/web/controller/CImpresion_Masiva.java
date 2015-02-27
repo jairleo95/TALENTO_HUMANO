@@ -10,11 +10,15 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import pe.edu.upeu.application.dao.ContratoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceContratoDAO;
 
 /**
  *
@@ -31,17 +35,23 @@ public class CImpresion_Masiva extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    CConversion co=new CConversion();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         Map<String, Object> rpta = new HashMap<String, Object>();
         String opc = request.getParameter("opc");
+        HttpSession sesion = request.getSession(true);
         PrintWriter out = response.getWriter();
+        String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
+        CConversion co=new CConversion();
+        InterfaceContratoDAO c=new ContratoDAO();
         try{
             if(opc.equals("filtrar")){
-                String del=request.getParameter("del");
-                String al=request.getParameter("al");
+                String del=request.getParameter("del").trim();
+                //del =co.convertFecha3(del.trim());
+                String al=request.getParameter("al").trim();
                 String nom_ape=request.getParameter("nom_ape");
                 String direccion=request.getParameter("direccion");
                 String departamento=request.getParameter("departamento");
@@ -50,11 +60,14 @@ public class CImpresion_Masiva extends HttpServlet {
                 String puesto=request.getParameter("puesto");
                 String fec_i=request.getParameter("fec_i");
                 String fec_f=request.getParameter("fec_f");
-                String sueldo=request.getParameter("sueldo");
-                //List<Map<String, ?>> lista = dep.Listar_dep_id(id_dir);
-                
+                Double sueldo=Double.parseDouble(request.getParameter("sueldo"));
+                List<Map<String, ?>> list = c.Listar_Contratos(del, al, direccion, departamento, area, seccion, puesto, sueldo, nom_ape, fec_i, fec_f);
+                rpta.put("rpta", "1");
+                rpta.put("lista", list);
             }
         }catch(Exception e){
+            rpta.put("rpta", "-1");
+            rpta.put("mensaje", e.getMessage());
         }
         Gson gson =new Gson();
         out.print(gson.toJson(rpta));

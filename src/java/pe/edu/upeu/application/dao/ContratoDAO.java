@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -673,9 +674,52 @@ public class ContratoDAO implements InterfaceContratoDAO {
     }
 
     @Override
-    public List<Map<String, ?>> Listar_Contratos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Map<String, ?>> Listar_Contratos(String de, String al, String direccion, String dep, String area, String sec, String puesto, Double sueldo_total,String nombre,String fe_i,String fe_fin) {
+      List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select  *  from RHVD_FILTRO_CONTRATO_TERMINADO WHERE FE_CREACION IS NOT NULL";
+            if(de!=null & al!=null){sql+=" AND FE_CREACION BETWEEN '"+c.convertFecha(de.trim())+"' and '"+c.convertFecha(al.trim())+"'";}else{}
+            if(nombre!=null){sql+=" AND upper(NO_AP) '"+nombre.toUpperCase()+"'";}else{}
+            if(direccion!=null){sql+=" AND ID_DIRECCION '"+direccion.trim()+"'";}else{}
+            if(dep!=null ){sql+=" and ID_DEPARTAMENTO= '"+dep.trim()+"'";}else{}
+            if(area!=null ){sql+=" and ID_AREA= '"+area.trim()+"'";}else{}
+            if(sec!=null ){sql+=" and ID_SECCION= '"+sec.trim()+"'";}else{}
+            if(puesto!=null ){sql+=" and ID_PUESTO= '"+puesto.trim()+"'";}else{}
+            if(fe_i!=null ){sql+=" and FE_DESDE= '"+c.convertFecha(fe_i.trim())+"'";}else{}
+            if(fe_fin!=null ){sql+=" and FE_HASTA= '"+c.convertFecha(fe_fin.trim())+"'";}else{}
+           // if(sueldo_total!=null ){sql+=" and CA_SUELDO_TOTAL="+sueldo_total;}else{}
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("nombre", rs.getString("NO_AP"));
+                rec.put("id_co", rs.getString("ID_CONTRATO"));
+                rec.put("no_pu", rs.getString("NO_PUESTO"));
+                rec.put("no_ar", rs.getString("NO_AREA"));
+                rec.put("no_se", rs.getString("NO_SECCION"));
+                rec.put("no_di", rs.getString("NO_DIRECCION"));
+                rec.put("no_de", rs.getString("NO_DEP"));
+                rec.put("ca_su", rs.getString("CA_SUELDO_TOTAL"));
+                rec.put("id_pl", rs.getString("ID_PLANTILLA_CONTRACTUAL"));
+                rec.put("de_cr", rs.getString("FE_CREACION"));
+                rec.put("id_tr", rs.getString("ID_TRABAJADOR"));
+                rec.put("fe_de", rs.getString("FE_DESDE"));
+                rec.put("fe_ha", rs.getString("FE_HASTA"));
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de puestos");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return lista;
     }
-
 
 }

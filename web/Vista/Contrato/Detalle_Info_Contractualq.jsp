@@ -448,7 +448,7 @@
                                     Usuario u = new Usuario();
                                     u = (Usuario) List_Usuario.get(f);
                                     if (n.getUs_creacion().equals(u.getId_usuario())) {%>
-                        <td class="text-info text-center"><%=u.getNo_usuario()%></td>
+                                    <td class="text-info text-center" colspan="6"><%=u.getNo_usuario()%></td>
                         <%}
                             }
                         } else {%>

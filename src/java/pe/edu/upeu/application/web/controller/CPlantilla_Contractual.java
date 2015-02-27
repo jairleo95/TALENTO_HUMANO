@@ -76,10 +76,11 @@ public class CPlantilla_Contractual extends HttpServlet {
                 response.sendRedirect("Vista/Contrato/Formato_Plantilla/reg_formato.jsp?no_arc=" + no_arch);
             }
             if (opc.equals("Imprimir")) {
-                String id_puesto = request.getParameter("puesto");
+               // String id_puesto = request.getParameter("puesto");
                 String id_planti_con = request.getParameter("id_plan_contr");
                 String no_arch = pl.List_pl_con_x_id(id_planti_con);
                 String id_con = request.getParameter("id_con");
+                 String id_puesto=pu.puesto(id_con);
                 out.print(no_arch);
                 getServletContext().setAttribute("List_x_fun_x_idpu", fu.List_x_fun_x_idpu(id_puesto));
                 getServletContext().setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_con));
