@@ -218,7 +218,6 @@ public class PuestoDAO implements InterfacePuestoDAO {
         }
         return lista;
     }
-
     @Override
     public String List_Puesto_x_iddgp(String id_dgp) {
 
@@ -236,7 +235,6 @@ public class PuestoDAO implements InterfacePuestoDAO {
         }
         return Maxdgp;
     }
-
     @Override
     public List<Puesto> List_Puesto_lima() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -256,7 +254,6 @@ public class PuestoDAO implements InterfacePuestoDAO {
         }
         return list;
     }
-
     @Override
     public void Registrar_Puesto_Paso(String ID_DETALLE_PASOS, String ID_PASOS, String ID_PUESTO, String ES_DETALLE_PASOS, String CO_PUESTO) {
         try {
@@ -280,14 +277,12 @@ public class PuestoDAO implements InterfacePuestoDAO {
             }
         }
     }
-
     @Override
     public String puesto(String id_cto) {
       this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "SELECT ID_PUESTO FROM RHTM_CONTRATO where ID_CONTRATO='"+id_cto.trim()+"'";
         ResultSet rs = this.conn.query(sql);
         String id = null;
-
         try {
             rs.next();
             id = rs.getString(1);
@@ -298,5 +293,4 @@ public class PuestoDAO implements InterfacePuestoDAO {
         }
         return id;
     }
-
 }
