@@ -70,8 +70,17 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
             ResultSet rs = this.conn.query(sql);
 
             while (rs.next()) {
+                String tipo = rs.getString("NO_FILE").substring(rs.getString("NO_FILE").length() - 3, rs.getString("NO_FILE").length());
+                if (tipo.equals("PDF") || tipo.equals("OCX")) {
+                    if( tipo.equals("OCX")||tipo.equals("DOC")){
+                        texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href=\"Archivo/" + rs.getString("NO_FILE") + "'><img src='Archivo/word.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
+                    }else{
+                    texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href=\"Archivo/" + rs.getString("NO_FILE") + "\"><img src='Archivo/pdf.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
+                    }
+                } else {
+                    texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href=\"Archivo/" + rs.getString("NO_FILE") + "\"><img src=\"Archivo/" + rs.getString("NO_FILE") + "\" style='width:100px;height:100px' class='borde' /></a>";
+                }
 
-                texto_html = texto_html + "<img src=\"Archivo/" + rs.getString("NO_FILE") + "\" />";
             }
             rs.close();
         } catch (SQLException e) {
@@ -129,12 +138,15 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
 
             while (rs.next()) {
                 String tipo = rs.getString("NO_FILE").substring(rs.getString("NO_FILE").length() - 3, rs.getString("NO_FILE").length());
-                if(tipo.trim().equals("PDF")||tipo.equals("OCX"))
-                {
-                    texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href='../../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "'>"+rs.getString("NO_ORIGINAL")+"</a>";
-                }else{
-                    
-                texto_html = texto_html + "<a class='mustang-gallery' title='" + tipo + "' href='../../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "'><img src='../../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "' style='width:100px;'class='borde'></a>";
+                if (tipo.trim().equals("PDF") || tipo.equals("OCX")||tipo.equals("DOC")) {
+                    if( tipo.equals("OCX")||tipo.equals("DOC")){
+                        texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href='../../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "'><img src='../../Dgp/Documento/Archivo/word.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
+                    }else{
+                    texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href='../../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "'><img src='../../Dgp/Documento/Archivo/pdf.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
+                    }
+                } else {
+
+                    texto_html = texto_html + "<a class='mustang-gallery' title='" + tipo + "' href='../../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "'><img src='../../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "' style='width:100px;height:100px;' class='borde'></a>";
                 }
             }
             rs.close();
