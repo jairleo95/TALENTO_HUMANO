@@ -148,13 +148,15 @@ public class CContrato extends HttpServlet {
             String ida1 = a.List_Anno_Max_Cont(idtr);
 
             String id_cto = con.Contrato_max(idtr);
-            String id_pu = puesto.puesto(id_cto);
+            if (id_cto != null) {
+                String id_pu = puesto.puesto(id_cto);
+                getServletContext().setAttribute("List_x_fun_x_idpu", fu.List_x_fun_x_idpu(id_pu));
+            }
             getServletContext().setAttribute("List_Anno_trabajador", a.List_Anno_trabajador(idtr));
             getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(idtr));
             getServletContext().setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_cto));
             getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
             //getServletContext().setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
-            getServletContext().setAttribute("List_x_fun_x_idpu", fu.List_x_fun_x_idpu(id_pu));
             getServletContext().setAttribute("List_Usuario", usu.List_Usuario());
             getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
             getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());

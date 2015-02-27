@@ -253,7 +253,12 @@
                                                             url: "../../trabajador",
                                                             type: "POST",
                                                             data: "opc=reg_huella&cod=" + $(".cod_huella" + r).val() + "&idtr=" + $(".idtr" + r).val()
-                                                        }).done(function () {
+                                                        }).done(function () {});
+                                                        $.ajax({
+                                                            url: "../../autorizacion",
+                                                            type: "POST",
+                                                            data: "opc=Aceptar" + $(".val_aut" + r).val()
+                                                        }).done(function() {
                                                             window.location.href = "../../autorizacion";
                                                         });
 
