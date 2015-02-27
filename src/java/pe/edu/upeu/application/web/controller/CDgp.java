@@ -28,6 +28,7 @@ import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.DireccionDAO;
 import pe.edu.upeu.application.dao.DocumentoDAO;
 import pe.edu.upeu.application.dao.EmpleadoDAO;
+import pe.edu.upeu.application.dao.FuncionDAO;
 import pe.edu.upeu.application.dao.GrupoOcupacionesDAO;
 import pe.edu.upeu.application.dao.HorarioDAO;
 import pe.edu.upeu.application.dao.ListaDAO;
@@ -50,6 +51,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceEmpleadoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceFuncionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceGrupo_ocupacionesDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceHorarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
@@ -115,6 +117,7 @@ public class CDgp extends HttpServlet {
         InterfaceDatos_Hijo_Trabajador dht = new Datos_Hijo_TrabajadorDAO();
         InterfaceGrupo_ocupacionesDAO gr = new GrupoOcupacionesDAO();
 
+        InterfaceFuncionDAO fu = new FuncionDAO();
         InterfaceSeccionDAO seccion = new SeccionDAO();
         InterfaceListaDAO l = new ListaDAO();
         InterfaceSeccionDAO sec = new SeccionDAO();
@@ -401,6 +404,7 @@ public class CDgp extends HttpServlet {
                     String ida1 = anno.List_Anno_Max_Cont(idtr);
 
                     String id_cto = con.Contrato_max(idtr);
+                    String id_pu = puesto.puesto(id_cto);
                     getServletContext().setAttribute("List_Anno_trabajador", anno.List_Anno_trabajador(idtr));
                     getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(idtr));
                     getServletContext().setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_cto));
@@ -409,6 +413,7 @@ public class CDgp extends HttpServlet {
                     getServletContext().setAttribute("List_Usuario", usu.List_Usuario());
                     getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
                     getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
+                    getServletContext().setAttribute("List_x_fun_x_idpu", fu.List_x_fun_x_idpu(id_pu));
                     getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
                     response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1 + "&idtr=" + idtr + "&id_cto=" + id_cto);
 
@@ -432,6 +437,7 @@ public class CDgp extends HttpServlet {
                     //String idtr = request.getParameter("idtr");
                     String ida1 = anno.List_Anno_Max_Cont(idtr);
                     String id_cto = con.Contrato_max(idtr);
+                    String id_pu = puesto.puesto(id_cto);
                     getServletContext().setAttribute("List_Anno_trabajador", anno.List_Anno_trabajador(idtr));
                     getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(idtr));
                     getServletContext().setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_cto));
@@ -439,6 +445,7 @@ public class CDgp extends HttpServlet {
                     //getServletContext().setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
                     getServletContext().setAttribute("List_Usuario", usu.List_Usuario());
                     getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
+                    getServletContext().setAttribute("List_x_fun_x_idpu", fu.List_x_fun_x_idpu(id_pu));
                     getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
                     getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
                     response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1 + "&idtr=" + idtr + "&id_cto=" + id_cto);

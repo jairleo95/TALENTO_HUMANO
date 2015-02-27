@@ -51,7 +51,7 @@ public class CImpresion_Masiva extends HttpServlet {
                 String fec_i=request.getParameter("fec_i");
                 String fec_f=request.getParameter("fec_f");
                 String sueldo=request.getParameter("sueldo");
-                List<Map<String, ?>> lista = dep.Listar_dep_id(id_dir);
+                //List<Map<String, ?>> lista = dep.Listar_dep_id(id_dir);
                 
             }
         }catch(Exception e){

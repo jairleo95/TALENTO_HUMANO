@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.model.Funciones"%>
 <%
     HttpSession sesion = request.getSession();
     String id_user = (String) sesion.getAttribute("IDUSER");
@@ -30,6 +31,7 @@
 <jsp:useBean id="List_Usuario" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="Lis_c_c_id_contr" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Anno_trabajador" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_x_fun_x_idpu" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -140,7 +142,6 @@
                 <table class="table table-hover table-striped  table-responsive" style="border-radius: 30px ">
                     <tr><td align="right"><select name="ida" class="anno " >
                                 <%
-                                    String anno = request.getParameter("anno");
                                     String ID_CTO = request.getParameter("id_cto");
                                     for (int cv = 0; cv < List_Anno_trabajador.size(); cv++) {
                                         Anno an = new Anno();
@@ -158,8 +159,8 @@
                 </table>
             </div>
 
-            <script>$(document).ready(function () {
-                    $(".anno").change(function () {
+            <script>$(document).ready(function() {
+                    $(".anno").change(function() {
                         $(".btn_act").click();
 
                     });
@@ -226,11 +227,11 @@
                         } else {
                             out.print("0");
                         }%> </td></tr>
-                   <!-- <tr><td class="text-info table-bordered"><strong>Bonificacion Puesto:</strong></td><td class="table-bordered"  colspan="6">S/.<%/*if (n.getCa_bonificacion_p()!= null) {
-                            out.print(n.getCa_bonificacion_p());
-                        } else {
-                            out.print("0");
-                        }*/%> </td></tr>-->
+                    <!-- <tr><td class="text-info table-bordered"><strong>Bonificacion Puesto:</strong></td><td class="table-bordered"  colspan="6">S/.<%/*if (n.getCa_bonificacion_p()!= null) {
+                         out.print(n.getCa_bonificacion_p());
+                         } else {
+                         out.print("0");
+                         }*/%> </td></tr>-->
                     <tr><td class="text-info table-bordered"><strong>Sueldo Total:</strong></td><td class="table-bordered" colspan="6">S/.<%if (n.getCa_sueldo_total() != null) {
                             out.print(n.getCa_sueldo_total());
                         } else {
@@ -408,7 +409,8 @@
                                 if (n.getId_filial().trim().equals(3 + "")) {
                                     out.println("Tarapoto");%>
                             <%}
-                            %> </td></tr>   
+                            %> </td></tr>
+
                     <tr><td class="text-info table-bordered"><strong>Fecha de Cese:</strong></td><td class="table-bordered  " colspan="6">
                             <% if (n.getFe_cese() != null) {
                                     out.print(n.getFe_cese());
@@ -418,8 +420,14 @@
                     <!--   <tr><td>Nro. Documento:</td><td><? /*echo $list_rhc[$index][43];?> </td></tr>   
                    <tr><td>Pares:</td><td><? echo $list_rhc[$index][36];?> </td></tr>   
                      <tr><td>Apoyo:</td><td><? echo $list_rhc[$index][41];*/?> </td></tr>   -->
-
-
+                    <%if(List_x_fun_x_idpu.size()>0){%>
+                    <tr><td class="text-info table-bordered" colspan="8" style="text-align:center;">FUNCIONES</td></tr>
+                    <%for (int fu = 0; fu < List_x_fun_x_idpu.size(); fu++) {
+                            Funciones fun = new Funciones();
+                            fun = (Funciones) List_x_fun_x_idpu.get(fu);
+                    %>
+                    <tr><td class="text-info table-bordered"><strong>Funcion Nº<%=fu + 1%>:</strong></td><td class="table-bordered" colspan="6"><%=fun.getDe_funcion()%></td></tr>   <%}%>
+                    <%}%>
 
 
                     <tr><%if (n.getUs_modif() != null && n.getFe_modif() != null) {%>
@@ -485,7 +493,7 @@
                     <td><input type="hidden" name="idtraba" value="<%=n.getId_trabajador()%>"></td>
                     <td><input type="hidden" name="id_con" value="<%=n.getId_contrato()%>"></td>
                     <td><input type="hidden" name="puesto" class="id_pu" value="<%=n.getId_puesto()%>" ></td>
-                    
+
                     <tr><td class="text-info" colspan="8" style="text-align:center"><input class="button blue"  type="hidden" value="Editar"><button name="opc" value="Imprimir" class="PLANTI button blue">Mostrar Plantillas</button></td></tr>
                 </table>
             </div>

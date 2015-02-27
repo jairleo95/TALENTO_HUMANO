@@ -271,7 +271,7 @@
                                     </td>
                                     <%}
                                         }
-                                        if (ID_ROL.trim().equals("ROL-0007")|rol.trim().equals("ROL-0001")) {
+                                        if (ID_ROL.trim().equals("ROL-0007")||ID_ROL.trim().equals("ROL-0001")) {
                                             int val_huella = Integer.parseInt(request.getParameter("val_huella"));
                                             if (val_huella > 0) {%>
                                     <td>
@@ -370,7 +370,7 @@
                             <a href="../../trabajador?idtr=<%=idtr%>&opc=Documento_Trabajador" target="myframe2"><i class="fa fa-file fa-gear"></i> Documentación </a>
                         </li>
 
-                        <%if (idrol.trim().equals("ROL-0007")|rol.trim().equals("ROL-0001")) {
+                        <%if (idrol.trim().equals("ROL-0007")|ID_ROL.trim().equals("ROL-0001")) {
                         %>
                         <li >
                             <a href="../../empleado?opc=Eva_Emp&idtr=<%=idtr%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Evaluación de Emleado</a>
@@ -464,7 +464,7 @@
                 </form>
                 <%}
                 } else {%>
-                <% if (idrol.trim().equals("ROL-0007")|rol.trim().equals("ROL-0001")) {
+                <% if (idrol.trim().equals("ROL-0007")|ID_ROL.trim().equals("ROL-0001")) {
                         int val_huella = Integer.parseInt(request.getParameter("val_huella"));
                         if (val_huella > 0) {%>
                 <form class="form-aut" action="../../autorizacion" method="post" > 

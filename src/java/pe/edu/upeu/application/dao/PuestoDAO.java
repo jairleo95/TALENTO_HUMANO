@@ -281,4 +281,22 @@ public class PuestoDAO implements InterfacePuestoDAO {
         }
     }
 
+    @Override
+    public String puesto(String id_cto) {
+      this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT ID_PUESTO FROM RHTM_CONTRATO where ID_CONTRATO='"+id_cto.trim()+"'";
+        ResultSet rs = this.conn.query(sql);
+        String id = null;
+
+        try {
+            rs.next();
+            id = rs.getString(1);
+        } catch (SQLException ex) {
+            //Logger.getLogger(AnnoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.conn.close();
+        }
+        return id;
+    }
+
 }

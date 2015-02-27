@@ -41,4 +41,6 @@ public interface InterfacePuestoDAO {
     public List<Map<String, ?>> Listar_Puesto_id(String id);
 
     public List<Map<String, ?>> List_puesto();
+    
+    public String puesto(String id_cto);
 }
