@@ -147,7 +147,7 @@
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">
 
-                                        <form id="checkout-form" class="smart-form" novalidate="novalidate">
+                                        <form id="checkout-form" class="smart-form form-pro_req" novalidate="novalidate">
 
                                             <fieldset>
                                                 <div class="row">
@@ -207,7 +207,7 @@
 
 
                                             <footer>
-                                                <button type="button" class="btn btn-danger">
+                                                <button type="button" class="btn btn-danger btn-cancelar">
                                                     Cancelar
                                                 </button>
                                                 <button type="button" class="btn btn-primary">
@@ -277,6 +277,8 @@
                                                         <th>Dirección</th>
                                                         <th>Departamento</th>
                                                         <th>Area</th>
+                                                        <th>Estado</th>
+                                                        <th>Acciones</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="tbody-pro-paso">
@@ -428,16 +430,15 @@
 
             }
             $(document).ready(function () {
-
                 pageSetUp();
+                $(".btn-cancelar").click(function () {
+                    $(".form-pro_req")[0].reset();
+                    $(".tbody-pro-paso").empty();
+                });
                 list_select($(".ti_planilla"), "../../requerimiento", "opc=Listar_Tipo_Planilla");
                 $(".ti_planilla").change(function () {
                     list_select($(".req"), "../../requerimiento", "opc=Listar_id_req&id=" + $(this).val(), "1", $(this).val());
-
                 });
-
-
-
                 list_select($(".proceso"), "../../Proceso", "opc=Listar");
                 list_select($(".direccion"), "../../Direccion_Puesto", "opc=Listar_direccion");
                 $(".direccion").change(function () {
@@ -446,13 +447,32 @@
                 $(".departamento").change(function () {
                     list_select($(".area"), "../../Direccion_Puesto", "opc=Listar_area2&id=" + $(this).val(), "1", $(this).val());
                 });
-
-                $(".proceso").change(function () {
-                    $.post("../../", "", function () {
-
+                $(".proceso, .req, .direccion, .departamento").change(function () {
+                    var tbody = $(".tbody-pro-paso");
+                    tbody.empty();
+                    var text_html = "";
+                    $.post("../../Proceso", "opc=Listar_Pro_Paso_Id&id_req=" + $(".req").val()+"&id_pro="+$(".proceso").val()+"&id_dir="+$(".direccion").val()+"&id_dep="+$(".departamento").val(), function (objJson) {
+                        var lista = objJson.lista;
+                        if (objJson.rpta == -1) {
+                            alert(objJson.mensaje);
+                            return;
+                        }
+                        for (var f = 0; f < lista.length; f++) {
+                            text_html += "<tr>";
+                            text_html += "<td>" + lista[f].ti_planilla + "</td>";
+                            text_html += "<td>" + lista[f].req + "</td>";
+                            text_html += "<td>" + lista[f].proceso + "</td>";
+                            text_html += "<td>" + lista[f].dir + "</td>";
+                            text_html += "<td>" + lista[f].dep + "</td>";
+                            text_html += "<td>" + lista[f].area + "</td>";
+                            text_html += "<td>" + lista[f].estado + "</td>";
+                            text_html += "<td></td>";
+                            text_html += "</tr>";
+                        }
+                        tbody.append(text_html);
+                        text_html = "";
                     });
                 });
-
                 var $checkoutForm = $('#checkout-form').validate({
                     // Rules for form validation
                     rules: {

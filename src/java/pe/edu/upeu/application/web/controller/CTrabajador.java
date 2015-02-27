@@ -7,10 +7,6 @@ package pe.edu.upeu.application.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -217,7 +213,7 @@ public class CTrabajador extends HttpServlet {
             int num_ad = d.List_Adventista(idtr);
             int count = d.count_documentos_x_tra(idtr);
             if (count > 0) {
-                response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr );
+                response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr);
             } else {
                 response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&pro=pr_dgp&P2=TRUE");
             }
@@ -235,7 +231,7 @@ public class CTrabajador extends HttpServlet {
             if (("Buscar".equals(Buscar) & (!"".equals(dni) | !"".equals(nom) | !"".equals(ape_mat) | !"".equals(ape_pat)))) {
                 String busc = (String) request.getParameter("busc");
                 if (busc != null) {
-                    getServletContext().setAttribute("ListarTrabajador2", tr.Buscar_Trabajador_Requerimiento(iddep, dni, nom, ape_pat, ape_mat,id_req));
+                    getServletContext().setAttribute("ListarTrabajador2", tr.Buscar_Trabajador_Requerimiento(iddep, dni, nom, ape_pat, ape_mat, id_req));
                     getServletContext().setAttribute(nom, dgp.VAL_OPC_DGP(dni));
                     response.sendRedirect("Vista/Dgp/Generar_Dgp.jsp?text=" + Text);
                 }
@@ -266,6 +262,7 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
             getServletContext().setAttribute("List_Ubigeo", ub.List_Distrito());
             getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
+//out.print(idtr);            
             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr);
         }
         if ("list_reg_tra".equals(opc)) {
@@ -276,8 +273,8 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
             getServletContext().setAttribute("List_Ubigeo", ub.List_Distrito());
             getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
-           
-            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim()+"&a=t");
+
+            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&a=t");
         }
         if ("actualizar".equals(opc)) {
             String idtr = request.getParameter("idtr");
@@ -288,7 +285,7 @@ public class CTrabajador extends HttpServlet {
         if ("Documento_Trabajador".equals(opc)) {
             String idtr = request.getParameter("idtr");
             getServletContext().setAttribute("Lis_doc_trabajador_hab", d.Lis_doc_trabajador_hab(idtr));
-            response.sendRedirect("Vista/Trabajador/List_Doc_Trabajador.jsp?idtr="+idtr);
+            response.sendRedirect("Vista/Trabajador/List_Doc_Trabajador.jsp?idtr=" + idtr);
         }
         if ("aut".equals(opc)) {
             String idtr = request.getParameter("idtr");
@@ -456,7 +453,7 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             getServletContext().setAttribute("List_Cuenta_Sueldo", tr.List_Cuenta_Sueldo(idtr));
             //out.print(ES_CUENTA_SUELDO);
-           response.sendRedirect("Vista/Trabajador/Aspecto_Academico.jsp?idtr=" + idtr);
+            response.sendRedirect("Vista/Trabajador/Aspecto_Academico.jsp?idtr=" + idtr);
         }
         if (opc.equals("Editar_Asp_Soc")) {
             String idtr = request.getParameter("idtr");
@@ -469,7 +466,7 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("List_Ubigeo", ub.List_Distrito());
             getServletContext().setAttribute("List_Departamento", ub.List_Departamento());
 
-             //out.print(dir.Listar_via().size()+"-");   
+            //out.print(dir.Listar_via().size()+"-");   
             //out.print(dir.Listar_Direccion().size()+"-");   
             //out.print(dir.Listar_zona().size()+"-");   
             response.sendRedirect("Vista/Trabajador/Mod_Aspecto_Social.jsp?idtr=" + idtr);

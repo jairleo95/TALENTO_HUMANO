@@ -17,7 +17,7 @@ function list_select(objSelect, url, datos, opc, id) {
         }
         var lista = objJson.lista;
         if (lista.length > 0) {
-            objSelect.append("<option >[SELECCIONE]</option>");
+            objSelect.append("<option value=''>[SELECCIONE]</option>");
             if (opc == "1") {
                 for (var i = 0; i < lista.length; i++) {
                     if (id == lista[i].id) {
@@ -32,7 +32,7 @@ function list_select(objSelect, url, datos, opc, id) {
                 }
             }
         } else {
-            objSelect.append("<option >[]</option>");
+            objSelect.append("<option value=' '>[]</option>");
         }
         objSelect.append(text_html);
         text_html = "";
