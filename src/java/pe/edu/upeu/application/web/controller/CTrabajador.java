@@ -266,7 +266,7 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
             getServletContext().setAttribute("List_Ubigeo", ub.List_Distrito());
             getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
-            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim());
+            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr);
         }
         if ("list_reg_tra".equals(opc)) {
             String idtr = request.getParameter("idtr");
