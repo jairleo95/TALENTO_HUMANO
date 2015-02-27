@@ -146,7 +146,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
                     }
                 } else {
 
-                    texto_html = texto_html + "<a class='mustang-gallery' title='" + tipo + "' href='../../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "'><img src='../../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "' style='width:100px;height:100px;' class='borde'></a>";
+                    texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href='../../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "'><img src='../../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "' style='width:100px;height:100px;' class='borde'></a>";
                 }
             }
             rs.close();

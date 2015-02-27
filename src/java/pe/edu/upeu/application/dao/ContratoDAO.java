@@ -690,7 +690,14 @@ public class ContratoDAO implements InterfaceContratoDAO {
             if(fe_i!=null ){sql+=" and FE_DESDE= '"+c.convertFecha(fe_i.trim())+"'";}else{}
             if(fe_fin!=null ){sql+=" and FE_HASTA= '"+c.convertFecha(fe_fin.trim())+"'";}else{}
            // if(sueldo_total!=null ){sql+=" and CA_SUELDO_TOTAL="+sueldo_total;}else{}
-           // sql += (!"".equals()) ? " AND  upper(NOM_APE)  like '%" + nom_ape + "%'" : "";
+           sql += (!"".equals(nombre)) ? " AND  upper(NOM_APE)  like '%" + nombre.toUpperCase() + "%'" : "";
+           sql += (!"".equals(de)) ? " AND  upper(NOM_APE)  like '%" + nombre.toUpperCase() + "%'" : "";
+           sql += (!"".equals(nombre)) ? " AND  upper(NOM_APE)  like '%" + nombre.toUpperCase() + "%'" : "";
+           sql += (!"".equals(nombre)) ? " AND  upper(NOM_APE)  like '%" + nombre.toUpperCase() + "%'" : "";
+           sql += (!"".equals(nombre)) ? " AND  upper(NOM_APE)  like '%" + nombre.toUpperCase() + "%'" : "";
+           sql += (!"".equals(nombre)) ? " AND  upper(NOM_APE)  like '%" + nombre.toUpperCase() + "%'" : "";
+           sql += (!"".equals(nombre)) ? " AND  upper(NOM_APE)  like '%" + nombre.toUpperCase() + "%'" : "";
+           sql += (!"".equals(nombre)) ? " AND  upper(NOM_APE)  like '%" + nombre.toUpperCase() + "%'" : "";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
