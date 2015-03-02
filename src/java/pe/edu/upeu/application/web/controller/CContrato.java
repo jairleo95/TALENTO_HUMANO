@@ -502,9 +502,18 @@ public class CContrato extends HttpServlet {
             getServletContext().setAttribute("List_Conyugue", doc.List_Conyugue(ID_TRABAJADOR));
 
             //out.print(i);
+             int s = doc.List_Req_nacionalidad(ID_TRABAJADOR);
             String idctr = con.Contrato_max(ID_TRABAJADOR);
             //response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&idtr=" + ID_TRABAJADOR + "&idctr=" + idctr + "&dce=Doc_CE");
-            response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&pro=pr_dgp&idtr=" + ID_TRABAJADOR);
+           // response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&pro=pr_dgp&idtr=" + ID_TRABAJADOR );
+              String pr = request.getParameter("P2");
+                String url = "Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + ID_TRABAJADOR;
+                if (pr!= null) {
+                    url += "&P2=TRUE";
+                    response.sendRedirect(url);
+                } else {
+                    response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + ID_TRABAJADOR);
+                }
         }
         if (opc.equals("Reporte_CE")) {
             getServletContext().setAttribute("List_Casos_Esp", con.LIST_CASOS_ESPECIALES());

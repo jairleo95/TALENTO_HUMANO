@@ -350,15 +350,11 @@
                                                             <label class="btn">
                                                                 <button type="button" class="btn btn-default btn-agregar-cc" id="btn-agregar-cc" >Agregar</button>
                                                             </label>
-                                                            <a href="javascript:void(0);" class="btn bg-color-red txt-color-white"><i class="fa fa-plus fa-3x"></i></a>
-                                                        </section>
-                                                        <ul class="demo-btns">
+                                                           
+                                                            <a href="javascript:void(0);" class="btn btn-default txt-color-green" style="padding: 5%;"><i class="fa fa-plus fa-lg"></i></a>
                                                           
-                                                            <li>
-                                                
-                                            </li>
-                                                            
-                                                        </ul>
+                                                        </section>
+                                                        
                                                         <input name="CANT" value="1" type="hidden" class="cant"/>
                                                     </div>
 
@@ -608,7 +604,7 @@
                                                         </section>
                                                         <section class="col col-4">
                                                             <label class="select" id="titu">Tipo Convenio:
-                                                                <select name="TIPO_CONVENIO" class="input-group-sm" required="">
+                                                                <select name="TIPO_CONVENIO" class="input-group-sm" >
                                                                     <option value="">[SELECCIONE]</option>
                                                                     <option value="1">CLJ</option>
                                                                     <option value="2">PPP</option>
