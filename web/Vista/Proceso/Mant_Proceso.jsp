@@ -94,186 +94,180 @@
                     <!-- row -->
                     <div class="row">
                         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="jarviswidget jarviswidget-sortable jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget" style="">
-                                <header role="heading">
-                                    <div class="jarviswidget-ctrls" role="menu">
-                                        <a href="javascript:void(0);" class="button-icon jarviswidget-toggle-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Collapse">
-                                            <i class="fa fa-minus "></i>
-                                        </a>
-                                        <a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen">
-                                            <i class="fa fa-expand "></i></a>
-                                        <a href="javascript:void(0);" class="button-icon jarviswidget-delete-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Delete">
-                                            <i class="fa fa-times"></i></a>
-                                    </div>
-
-                                    <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                    <h2>Mantenimiento de Pasos</h2>				
-                                    <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
+                            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-3" data-widget-editbutton="false">
+                                <header>
+                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                    <h2>Mantenimiento de Pasos</h2>
+                                </header>
                                 <div>
-                                    <div class="jarviswidget-editbox">
-                                    </div>
-                                    <div class="widget-body">
+                                    <div class="widget-body no-padding">
                                         <form class="smart-form">
                                             <fieldset>
-                                                <div class="row" style="float: left;">
+                                                <section class="col col-lg-4">
                                                     <div class="row">
-                                                        <section class="col col-12">
+                                                        <section class="col col-6">
                                                             <label class="input">
                                                                 <input name="num" required=""  maxlength="3" class="num_paso" maxlength="6" placeholder="Numero de Paso">
                                                             </label>
                                                         </section>
-                                                        <section class="col col-12">
+                                                        <section class="col col-6">
                                                             <label class="input">
                                                                 <input type="text" name="cod" class="co_paso" required=""maxlength="6" placeholder="Codigo" />
                                                             </label>
                                                         </section>
                                                     </div>
                                                     <div class="row">
-                                                        <section class="col col-12">
+                                                        <section class="col col-xs-12">
+                                                            <label>Proceso</label>
                                                             <label class="select">
                                                                 <select name="proceso" required=""  id="select-proceso">
-                                                                    <option value="">[Seleccione Proceso]</option>
+                                                                    <option value="">[Seleccione]</option>
                                                                 </select>
                                                                 <i></i></label>
                                                         </section>
                                                     </div>
-                                                </div>
-                                                <div class="row" style="float: right;">
-                                                    <section class="col col-12">
-                                                        <label class="input">
-                                                            <textarea type="text" name="desc" required="" maxlength="300" rows="5" cols="50" class="desc_paso" placeholder="Descripcion" ></textarea>
-                                                        </label>
-                                                    </section>
-                                                </div>
+                                                </section>
+                                                <section class="col col-lg-8">
+                                                    <label class="textarea textarea-resizable">
+                                                        <textarea type="text" name="desc" required="" maxlength="300" rows="5" cols="50" class="desc_paso custom-scroll" placeholder="Descripcion"></textarea>
+                                                    </label>
+                                                </section>
                                             </fieldset>
+                                            <footer>
+                                                <button class="btn btn-primary"type="submit" id="btn-registrar" name="Enviar" value="Registrar Paso" /> Registrar Paso</button>
+                                                <button class="btn btn-default" type="button" class="btn_cancel_edit">Cancelar</button>
+                                            </footer>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </article>
-                        <!-- NEW WIDGET START -->
-                        <article class="col-sm-12">
-
-                            <!-- Widget ID (each widget will need unique ID)-->
-                            <div class="jarviswidget well" id="wid-id-0">
-                                <!-- widget options:
-                                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-
-                                data-widget-colorbutton="false"
-                                data-widget-editbutton="false"
-                                data-widget-togglebutton="false"
-                                data-widget-deletebutton="false"
-                                data-widget-fullscreenbutton="false"
-                                data-widget-custombutton="false"
-                                data-widget-collapsed="true"
-                                data-widget-sortable="false"
-
-                                -->
-
-                                <!-- widget div-->
+                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-3" data-widget-editbutton="false">
+                                <header>
+                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                    <h2>Lista de pasos Deshabilitados :<strong><label class="lb-list_pasos"></label></strong> </h2>
+                                </header>
                                 <div>
-
-                                    <div class="row">
-
-                                        <h1>Mantenimiento de Pasos</h1>
-
-                                        <form  method="post" id="form-paso" class="form_paso" >
-                                            <table class="table table-bordered">
-                                                <tr ><td >Descripción :<td><textarea type="text" name="desc" required="" maxlength="300" rows="5" cols="50" class="desc_paso" ></textarea></td></tr>
-                                                <tr><td>Numero Paso :<td><input name="num" required=""  maxlength="3" class="num_paso" maxlength="6"> </td></tr>
-                                                <tr><td>Código:<td><input type="text" name="cod" class="co_paso" required=""maxlength="6"  /></td></tr>
-                                                <tr><td>Proceso:<td>
-                                                        <select name="proceso" required=""  id="select-proceso">
-                                                            <option value="">[SELECCIONE]</option>
-                                                        </select></td></tr>
-                                                <input type="hidden" name="opc" value="Registrar"  class="opc"/>
-                                                <input type="hidden" name="id" value=""  class="id_p"/>
-                                                <tr><td><input type="submit" id="btn-registrar" name="Enviar" value="Registrar Paso" /></td></tr>
-                                                <tr><td><button type="button" class="btn_cancel_edit" style="display:none">Cancelar</button></td></tr>
-                                            </table>
-                                        </form>
-                                        <h2>Lista de pasos Deshabilitados :<strong><label class="lb-list_pasos"></label></strong> </h2>
-                                        <table class="table table-bordered" border='1'>
-                                            <thead>
-                                                <tr>
-                                                    <td>Nro</td>
-                                                    <td>Descripción</td>
-                                                    <td>Número</td>
-                                                    <td>Codigo</td>
-                                                    <td>Proceso</td>
-                                                    <td>Editar</td>
-
-                                                </tr>
-                                            </thead>
-
-                                            <tbody  class="tbodys" style=" display: none;">
-                                            </tbody>
-
-                                        </table>
-
+                                    <div class="jarviswidget-editbox">
                                     </div>
-                                    <!-- end widget edit box -->
-
-                                    <!-- widget content -->
                                     <div class="widget-body">
-
-
-
-
-
-                                        <div class="row">
-
-
-                                            <div class="col-sm-6 col-lg-12">
-
-                                                <h2>Lista de pasos Habilitados :<strong><label class="lb-list_pasos"></label></strong> </h2>
-
-                                                <button type="button" class="btn btn-default Generar" data-action="collapse-all">
-                                                    Generar Pasos
-                                                </button>
-                                                <br><style>
-                                                    .div{
-                                                        border-style: solid;
-                                                        border-color: #ff0000 #0000ff;
-                                                    }
-                                                    label{
-                                                        margin-left: 10px;
-                                                    }
-                                                </style>
-
-                                                <div class="dd" id="nestable" >
-                                                    <ol class="dd-list" style="width: 1024px;" >
-
-
-
-                                                    </ol>
-                                                </div>
-
-                                            </div>
-
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <td>Nro</td>
+                                                        <td>Descripción</td>
+                                                        <td>Número</td>
+                                                        <td>Codigo</td>
+                                                        <td>Proceso</td>
+                                                        <td>Editar</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="tbodys" style=" display: none;">
+                                                </tbody>
+                                            </table>
                                         </div>
-                                        <div class="row" >
-                                            <h2>Lista de puestos :<strong><label class="lb-list_puesto"></label></strong> </h2>
-                                            <form action="" method="post" class="form_puesto" style="display:none;">
-                                                <label>Dirección</label><select class="sl_dir" required="" ></select>
-                                                <label>Departamento:</label><select class="sl_dep" required=""></select>
-                                                <label>Area:</label><select class="sl_area" required=""></select>
-                                                <label>Sección:</label><select class="sl_sec" required=""></select>
-                                                <label>Puesto:</label><select name="id_pu" class="sl_puesto" required=""></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-3" data-widget-editbutton="false">
+                                <header>
+                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                    <h2>Lista de pasos Habilitados :<strong><label class="lb-list_pasos"></label></strong> </h2>
+                                </header>
+                                <div>
+                                    <div class="jarviswidget-editbox">
+                                    </div>
+                                    <div class="widget-body">
+                                        <div class="table-responsive">
+                                            <button type="button" class="btn btn-default Generar" data-action="collapse-all">
+                                                Generar Pasos
+                                            </button>
+                                            <br><style>
+                                                .div{
+                                                    border-style: solid;
+                                                    border-color: #ff0000 #0000ff;
+                                                }
+                                                label{
+                                                    margin-left: 10px;
+                                                }
+                                            </style>
+
+                                            <div class="dd" id="nestable" >
+                                                <ol class="dd-list" style="width: 100%;" >
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-3" data-widget-editbutton="false">
+                                <header>
+                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                    <h2>Lista de puestos :<strong><label class="lb-list_puesto"></label></strong> </h2>
+                                </header>
+                                <div>
+                                    <div class="jarviswidget-editbox">
+                                    </div>
+                                    <div class="widget-body no-padding">
+                                        <form action="" method="post" class="smart-form form_puesto" style="display:none;">
+                                            <fieldset>
+                                                <section class="col col-4">
+                                                    <label>Dirección</label>
+                                                    <label class="select">
+                                                        <select class="sl_dir" required="" ></select> 
+                                                        <i></i></label>      
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label>Departamento:</label>
+                                                    <label class="select">
+                                                        <select class="sl_dep" required=""></select> 
+                                                        <i></i></label>                                                    
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label>Area:</label>
+                                                    <label class="select">
+                                                        <select class="sl_area" required=""></select>  
+                                                        <i></i></label>
+                                                </section>
+                                                <section class="col col-3">
+                                                    <label>Sección:</label>
+                                                    <label class="select">
+                                                        <select class="sl_sec" required=""></select> 
+                                                        <i></i></label>
+                                                </section>
+                                                <section class="col col-3">
+                                                    <label>Puesto:</label>
+                                                    <label class="select">
+                                                        <select name="id_pu" class="sl_puesto" required=""></select>
+                                                        <i></i></label>
+                                                </section>                                          
                                                 <input type="hidden" value="" name="idpasos" class="id_pasos"  />
                                                 <input type="hidden" value="" name="nun" class="num_p"  />
-                                                <br>
-                                                Código Puesto :<select class="co_puesto" name="co_pasos">
-                                                    <option value=""></option>
-                                                    <option value="SECR">Secretaria de Area</option>
-                                                    <option value="JEFE">Jefe de Area</option>
-                                                </select>
-                                                <br>
-                                                <button type="button" class="btn-agregar-p">
-                                                    Agregar Puesto
-                                                </button>
-                                            </form>
-                                            <table class="table table-bordered" border="1">
+                                                <section class="col col-3">
+                                                    <label>Código Puesto</label>
+                                                    <label class="select">
+                                                        <select class="co_puesto" name="co_pasos">
+                                                            <option value=""></option>
+                                                            <option value="SECR">Secretaria de Area</option>
+                                                            <option value="JEFE">Jefe de Area</option>
+                                                        </select> 
+                                                        <i></i></label>
+                                                </section>
+                                                <section class="col col-3">
+                                                    <button type="button" class="btn btn-agregar-p">
+                                                        Agregar Puesto
+                                                    </button> 
+                                                </section>
+                                            </fieldset>
+                                        </form>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th>Puesto</th>
@@ -287,21 +281,11 @@
 
                                                 </tbody>
                                             </table>
-
-
                                         </div>
-
                                     </div>
-                                    <!-- end widget content -->
-
                                 </div>
-                                <!-- end widget div -->
-
                             </div>
-                            <!-- end widget -->
-
                         </article>
-                        <!-- WIDGET END -->
 
                     </div>
 
@@ -680,15 +664,15 @@
                             b.append("</tr>");
                         }
                         for (var i = 0; i < lista.length; i++) {
-                            txt_append += '<li class="dd-item dd3-item"  ><div class="dd-handle dd3-handle">Drag</div><div class="dd3-content"><label class="item_req item_' + (i + 1) + '">' + lista[i].num + ' </label> ' +
-                                    '<div class="pull-right"><button class="btn btn-success btn-cargar-puesto" value="' + i + '" > Ver Puestos</button></div>' +
-                                    '<div class="pull-right"><button class="btn btn-primary btn-editar" value="' + i + '" > Editar</button></div>' +
-                                    '<div class="pull-right"><button class="btn btn-primary btn-eliminar" value="' + i + '" > Eliminar</button></div>';
+                            txt_append += '<li class="dd-item dd3-item"  ><div class="dd-handle dd3-handle">Drag</div><div class="dd3-content"><label class="item_req item_' + (i + 1) + '" style="font-size: 12px;">' + lista[i].num + ' </label> ' +
+                                    '<div class="pull-right"><button class="btn btn-warning btn-sm btn-cargar-puesto" value="' + i + '" ><i class="fa fa-eye" ></i></button></div>' +
+                                    '<div class="pull-right"><button class="btn btn-success btn-sm btn-editar" value="' + i + '" ><i class="fa fa-pencil" ></i></button></div>' +
+                                    '<div class="pull-right"><button class="btn btn-danger btn-sm btn-eliminar" value="' + i + '" ><i class="fa fa-times"></i></button></div>';
                             if (typeof (lista[i].det) === "undefined") {
                                 txt_append += '<div class="pull-right"><label ></label></div>';
                             } else {
 
-                                txt_append += '<div class="pull-right"><label >' + lista[i].det + '</label></div>';
+                                txt_append += '<div class="pull-right"><label style="font-size: 12px;">' + lista[i].det + '</label></div>';
                             }
 
                             // '<div class="pull-right"><label >' + lista[i].co + '</label></div>' +
