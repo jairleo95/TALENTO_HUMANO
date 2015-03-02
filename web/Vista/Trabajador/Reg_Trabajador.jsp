@@ -1816,7 +1816,8 @@
                                                                 </table>
                                                             </div>
                                                             <br><br>
-                                                            <center><input type="submit" name="opc"  class="submit btn btn-primary" value="Registrar Trabajador" style="width: 30%"></center>
+                                                            <input type="hidden" name="opc" value="Registrar" >
+                                                            <center><input type="submit" name=""  class="submit btn btn-primary" value="Registrar Trabajador" style="width: 30%"></center>
                                                             <code class="codigo"></code>
                                                             <script>$(document).ready(function() {
                                                                     var p = 1;
