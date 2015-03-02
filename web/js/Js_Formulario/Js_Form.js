@@ -32,7 +32,7 @@ function list_select(objSelect, url, datos, opc, id) {
                 }
             }
         } else {
-            objSelect.append("<option value=' '>[]</option>");
+            objSelect.append("<option value=''>[]</option>");
         }
         objSelect.append(text_html);
         text_html = "";

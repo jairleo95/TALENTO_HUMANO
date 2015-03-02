@@ -445,11 +445,11 @@
                 $(".departamento").change(function () {
                     list_select($(".area"), "../../Direccion_Puesto", "opc=Listar_area2&id=" + $(this).val(), "1", $(this).val());
                 });
-                $(".proceso, .req, .direccion, .departamento").change(function () {
+                $(".proceso, .req, .direccion, .departamento, .area").change(function () {
                     var tbody = $(".tbody-pro-paso");
                     tbody.empty();
                     var text_html = "";
-                    $.post("../../Proceso", "opc=Listar_Pro_Paso_Id&id_req=" + $(".req").val()+"&id_pro="+$(".proceso").val()+"&id_dir="+$(".direccion").val()+"&id_dep="+$(".departamento").val(), function (objJson) {
+                    $.post("../../Proceso", "opc=Listar_Pro_Paso_Id&id_req=" + $(".req").val()+"&id_pro="+$(".proceso").val()+"&id_dir="+$(".direccion").val()+"&id_dep="+$(".departamento").val()+"&id_area="+$(".area").val(), function (objJson) {
                         var lista = objJson.lista;
                         if (objJson.rpta == -1) {
                             alert(objJson.mensaje);
