@@ -425,7 +425,6 @@
                     text_html = "";
 
                 });
-
             }
             $(document).ready(function () {
                 pageSetUp();

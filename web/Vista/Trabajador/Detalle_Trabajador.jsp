@@ -271,7 +271,7 @@
                                     </td>
                                     <%}
                                         }
-                                        if (ID_ROL.trim().equals("ROL-0007")||ID_ROL.trim().equals("ROL-0001")) {
+                                        if (ID_ROL.trim().equals("ROL-0007") || ID_ROL.trim().equals("ROL-0001")) {
                                             int val_huella = Integer.parseInt(request.getParameter("val_huella"));
                                             if (val_huella > 0) {%>
                                     <td>
@@ -345,7 +345,7 @@
 
                     <hr class="simple">
                     <ul id="myTab1" class="nav nav-tabs bordered">
-                        <%if (iddep.equals("DPT-0019")|| idrol.trim().equals("ROL-0012")|| idrol.trim().equals("ROL-0002")|| idrol.trim().equals("ROL-0005")) {
+                        <%if (iddep.equals("DPT-0019") || idrol.trim().equals("ROL-0012") || idrol.trim().equals("ROL-0002") || idrol.trim().equals("ROL-0005")) {
                         %>
                         <li >
                             <a href="../../contrato?idtr=<%=idtr%>&opc=Detalle_Contractual" target="myframe2"  ><i class="fa fa-file-text fa-gear"></i> Información Contractual </a>
@@ -370,7 +370,7 @@
                             <a href="../../trabajador?idtr=<%=idtr%>&opc=Documento_Trabajador" target="myframe2"><i class="fa fa-file fa-gear"></i> Documentación </a>
                         </li>
 
-                        <%if (idrol.trim().equals("ROL-0007")|ID_ROL.trim().equals("ROL-0001")) {
+                        <%if (idrol.trim().equals("ROL-0007") | ID_ROL.trim().equals("ROL-0001")) {
                         %>
                         <li >
                             <a href="../../empleado?opc=Eva_Emp&idtr=<%=idtr%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Evaluación de Emleado</a>
@@ -464,7 +464,7 @@
                 </form>
                 <%}
                 } else {%>
-                <% if (idrol.trim().equals("ROL-0007")|ID_ROL.trim().equals("ROL-0001")) {
+                <% if (idrol.trim().equals("ROL-0007") | ID_ROL.trim().equals("ROL-0001")) {
                         int val_huella = Integer.parseInt(request.getParameter("val_huella"));
                         if (val_huella > 0) {%>
                 <form class="form-aut" action="../../autorizacion" method="post" > 
@@ -555,7 +555,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="category"> Tipo de Hora Pago:</label>
-                                        <input type="text" class="form-control" value="" placeholder="0.0" required />
+                                        <input type="text" class="form-control" value="25" placeholder="0.0" required />
 
                                     </div>
                                 </div>
@@ -581,7 +581,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="category"> MES 1 :</label>
-                                        <input type="text" class="form-control" value="" placeholder="0" required />
+                                        <input type="text" class="form-control" name="mes1" value="700" placeholder="0" required />
+                                        <label for="category"> MES 2 :</label>
+                                        <input type="text" class="form-control" name="mes2" value="700" placeholder="0" required />
+                                        <label for="category"> MES 3 :</label>
+                                        <input type="text" class="form-control" name="mes3" value="700" placeholder="0" required />
+                                        <label for="category"> MES 4 :</label>
+                                        <input type="text" class="form-control" name="mes4" value="700" placeholder="0" required />
 
                                     </div>
                                 </div>
