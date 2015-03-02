@@ -1809,12 +1809,15 @@
                                                                             <th>Essalud</th>
                                                                             <th>Estudios Superiores</th>
                                                                             <th colspan="2"><center>Opciones</center></th>
-                                                                        </tr>        
+                                                                    </tr>        
                                                                     </thead>
                                                                     <tbody class="tabla-hijo">
                                                                     </tbody>
                                                                 </table>
                                                             </div>
+                                                            <br><br>
+                                                            <input type="hidden" name="opc" value="Registrar" >
+                                                            <center><input type="submit" name=""  class="submit btn btn-primary" value="Registrar Trabajador" style="width: 30%"></center>
                                                             <code class="codigo"></code>
                                                             <script>$(document).ready(function() {
                                                                     var p = 1;
@@ -2005,9 +2008,7 @@
                                                                         <li class="next">
                                                                             <a href="javascript:void(0);" class="btn btn-lg txt-color-darken"> Siguiente <i class="fa fa-chevron-right"></i></a>
                                                                         </li>
-                                                                        <li>
-                                                                            <input type="submit" name="opc"  class="submit btn btn-primary" value="Registrar" style="width: 30%">
-                                                                        </li>
+                                                                        
                                                                     </ul>
                                                                 </div>
                                                             </div>

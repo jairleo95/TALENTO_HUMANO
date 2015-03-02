@@ -121,7 +121,7 @@
                                         <h1>Mantenimiento de Pasos</h1>
 
                                         <form  method="post" id="form-paso" class="form_paso" >
-                                            <table>
+                                            <table class="table table-bordered">
                                                 <tr ><td >Descripción :<td><textarea type="text" name="desc" required="" maxlength="300" rows="5" cols="50" class="desc_paso" ></textarea></td></tr>
                                                 <tr><td>Numero Paso :<td><input name="num" required=""  maxlength="3" class="num_paso" maxlength="6"> </td></tr>
                                                 <tr><td>Código:<td><input type="text" name="cod" class="co_paso" required=""maxlength="6"  /></td></tr>
@@ -136,7 +136,7 @@
                                             </table>
                                         </form>
                                         <h2>Lista de pasos Deshabilitados :<strong><label class="lb-list_pasos"></label></strong> </h2>
-                                        <table border='1'>
+                                        <table class="table table-bordered" border='1'>
                                             <thead>
                                                 <tr>
                                                     <td>Nro</td>
@@ -150,7 +150,6 @@
                                             </thead>
 
                                             <tbody  class="tbodys" style=" display: none;">
-
                                             </tbody>
 
                                         </table>
@@ -217,7 +216,7 @@
                                                     Agregar Puesto
                                                 </button>
                                             </form>
-                                            <table border="1">
+                                            <table class="table table-bordered" border="1">
                                                 <thead>
                                                     <tr>
                                                         <th>Puesto</th>
