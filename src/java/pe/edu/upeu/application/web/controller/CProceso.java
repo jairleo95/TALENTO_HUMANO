@@ -67,7 +67,8 @@ public class CProceso extends HttpServlet {
                 String id_dir = request.getParameter("id_dir");
                 String id_dep = request.getParameter("id_dep");
                 String id_area = request.getParameter("id_area");
-                List<Map<String, ?>> lista = p.List_Pro_Paso_Id(id_req, id_pro, id_dir, id_dep, id_area);
+                String id_ti_planilla = request.getParameter("id_ti_planilla");
+                List<Map<String, ?>> lista = p.List_Pro_Paso_Id(id_req, id_pro, id_dir, id_dep, id_area, id_ti_planilla);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }

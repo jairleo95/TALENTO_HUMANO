@@ -56,7 +56,7 @@ public class ProcesoDAO implements InterfaceProcesoDAO {
     }
 
     @Override
-    public List<Map<String, ?>> List_Pro_Paso_Id(String id_req, String id_pro, String id_dir, String id_dep, String id_area) {
+    public List<Map<String, ?>> List_Pro_Paso_Id(String id_req, String id_pro, String id_dir, String id_dep, String id_area,String id_ti_planilla) {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -75,6 +75,9 @@ public class ProcesoDAO implements InterfaceProcesoDAO {
             }
             if (id_area != null) {
                sql += (!"".equals(id_area)) ? " and  ID_AREA = '" + id_area + "'" : "";
+            }
+            if (id_ti_planilla != null) {
+               sql += (!"".equals(id_ti_planilla)) ? " and  ID_TIPO_PLANILLA = '" + id_ti_planilla + "'" : "";
             }
 
             ResultSet rs = this.conn.query(sql);
