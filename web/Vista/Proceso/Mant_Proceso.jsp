@@ -93,7 +93,64 @@
 
                     <!-- row -->
                     <div class="row">
+                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="jarviswidget jarviswidget-sortable jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" role="widget" style="">
+                                <header role="heading">
+                                    <div class="jarviswidget-ctrls" role="menu">
+                                        <a href="javascript:void(0);" class="button-icon jarviswidget-toggle-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Collapse">
+                                            <i class="fa fa-minus "></i>
+                                        </a>
+                                        <a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen">
+                                            <i class="fa fa-expand "></i></a>
+                                        <a href="javascript:void(0);" class="button-icon jarviswidget-delete-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Delete">
+                                            <i class="fa fa-times"></i></a>
+                                    </div>
 
+                                    <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                                    <h2>Mantenimiento de Pasos</h2>				
+                                    <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
+                                <div>
+                                    <div class="jarviswidget-editbox">
+                                    </div>
+                                    <div class="widget-body">
+                                        <form class="smart-form">
+                                            <fieldset>
+                                                <div class="row" style="float: left;">
+                                                    <div class="row">
+                                                        <section class="col col-12">
+                                                            <label class="input">
+                                                                <input name="num" required=""  maxlength="3" class="num_paso" maxlength="6" placeholder="Numero de Paso">
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-12">
+                                                            <label class="input">
+                                                                <input type="text" name="cod" class="co_paso" required=""maxlength="6" placeholder="Codigo" />
+                                                            </label>
+                                                        </section>
+                                                    </div>
+                                                    <div class="row">
+                                                        <section class="col col-12">
+                                                            <label class="select">
+                                                                <select name="proceso" required=""  id="select-proceso">
+                                                                    <option value="">[Seleccione Proceso]</option>
+                                                                </select>
+                                                                <i></i></label>
+                                                        </section>
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="float: right;">
+                                                    <section class="col col-12">
+                                                        <label class="input">
+                                                            <textarea type="text" name="desc" required="" maxlength="300" rows="5" cols="50" class="desc_paso" placeholder="Descripcion" ></textarea>
+                                                        </label>
+                                                    </section>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
                         <!-- NEW WIDGET START -->
                         <article class="col-sm-12">
 
@@ -354,7 +411,7 @@
             function  list_put_id(d, valor) {
 
 
-                $.post("../../Direccion_Puesto", "opc=" + "Listar_pu_id" + "&" + "id=" + valor, function (objJson) {
+                $.post("../../Direccion_Puesto", "opc=" + "Listar_pu_id" + "&" + "id=" + valor, function(objJson) {
                     d.empty();
                     d.append("<option value='' > [SELECCIONE] </option>");
                     var list = objJson.lista;
@@ -371,7 +428,7 @@
             function  lis_dir_id(d, valor) {
 
 
-                $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + valor, function (objJson) {
+                $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + valor, function(objJson) {
                     d.empty();
                     d.append("<option value='' > [SELECCIONE] </option>");
                     if (objJson.rpta == -1) {
@@ -391,7 +448,7 @@
             function list_area_id(c, valor) {
 
 
-                $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + valor, function (objJson) {
+                $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + valor, function(objJson) {
                     c.empty();
                     c.append("<option value='' > [SELECCIONE] </option>");
                     if (objJson.rpta == -1) {
@@ -409,7 +466,7 @@
                 });
             }
             function list_sec_id(d, valor) {
-                $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + valor, function (objJson) {
+                $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + valor, function(objJson) {
                     d.empty();
                     d.append("<option value='' > [SELECCIONE] </option>");
                     if (objJson.rpta == -1) {
@@ -427,7 +484,7 @@
                 });
             }
             function list_dir(c) {
-                $.post("../../Direccion_Puesto", "opc=Listar_direccion", function (objJson) {
+                $.post("../../Direccion_Puesto", "opc=Listar_direccion", function(objJson) {
                     c.empty();
                     c.append("<option value='' > [SELECCIONE] </option>");
                     if (objJson.rpta == -1) {
@@ -450,7 +507,7 @@
                 var tbody_p = $(".tbody-puesto");
                 var texto = "";
                 $(".id_pasos").val($(".id_paso" + num).val());
-                $.post("../../paso", "opc=Paso_Puesto&id=" + $(".id_paso" + num).val(), function (objJson) {
+                $.post("../../paso", "opc=Paso_Puesto&id=" + $(".id_paso" + num).val(), function(objJson) {
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
                         return;
@@ -483,10 +540,10 @@
                     texto = "";
                     $(".form_puesto").show();
                     $(".btn-eliminar_puesto").click(
-                            function () {
+                            function() {
                                 if (confirm("¿Esta Seguro de Eliminar?")) {
                                     alert("opc=Eliminar_PP&id=" + $(".iddp" + $(this).val()).val());
-                                    $.post("../../paso", "opc=Eliminar_PP&id=" + $(".iddp" + $(this).val()).val(), function (objJson) {
+                                    $.post("../../paso", "opc=Eliminar_PP&id=" + $(".iddp" + $(this).val()).val(), function(objJson) {
 
                                     });
                                 } else {
@@ -494,8 +551,8 @@
                                 }
                             }
                     );
-                    $(".btn_deshabilitar_p").click(function () {
-                        $.post("../../paso", "opc=actualizar_estado&id=" + $(".iddp" + $(this).val()).val() + "&estado=0", function (objJson) {
+                    $(".btn_deshabilitar_p").click(function() {
+                        $.post("../../paso", "opc=actualizar_estado&id=" + $(".iddp" + $(this).val()).val() + "&estado=0", function(objJson) {
 
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
@@ -509,8 +566,8 @@
                         );
 
                     });
-                    $(".btn_habilitar_p").click(function () {
-                        $.post("../../paso", "opc=actualizar_estado&id=" + $(".iddp" + $(this).val()).val() + "&estado=1", function (objJson) {
+                    $(".btn_habilitar_p").click(function() {
+                        $.post("../../paso", "opc=actualizar_estado&id=" + $(".iddp" + $(this).val()).val() + "&estado=1", function(objJson) {
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
                                 return;
@@ -524,8 +581,8 @@
 
                 });
             }
-            $(document).ready(function () {
-                $(".btn_cancel_edit").click(function () {
+            $(document).ready(function() {
+                $(".btn_cancel_edit").click(function() {
                     $("#btn-registrar").val("Registrar Paso");
                     $(".opc").val("Registrar");
                     $(".form_paso")[0].reset();
@@ -533,25 +590,25 @@
                 });
                 $(".form_puesto").hide();
                 list_dir($(".sl_dir"));
-                $(".sl_dir").change(function () {
+                $(".sl_dir").change(function() {
                     lis_dir_id($(".sl_dep"), $(this).val());
                 });
-                $(".sl_dep").change(function () {
+                $(".sl_dep").change(function() {
                     list_area_id($(".sl_area"), $(this).val());
                 });
-                $(".sl_area").change(function () {
+                $(".sl_area").change(function() {
                     list_sec_id($(".sl_sec"), $(this).val());
                 });
-                $(".sl_sec").change(function () {
+                $(".sl_sec").change(function() {
                     list_put_id($(".sl_puesto"), $(this).val());
                 });
                 var num = 1;
                 listar_Proceso();
                 Listar_Paso($("#select-proceso").val());
                 $("#btn-registrar").click(
-                        function () {
+                        function() {
                             var pr = $("#select-proceso").val();
-                            $.post("../../paso", $("#form-paso").serialize(), function (objJson) {
+                            $.post("../../paso", $("#form-paso").serialize(), function(objJson) {
                                 if (objJson.rpta == -1) {
                                     alert(objJson.mensaje);
                                     return;
@@ -566,7 +623,7 @@
                 );
                 function listar_Proceso() {
                     var s = $("#select-proceso");
-                    $.post("../../Proceso", "opc=Listar", function (objJson) {
+                    $.post("../../Proceso", "opc=Listar", function(objJson) {
                         s.empty();
                         var lista = objJson.lista;
                         s.append("<option value='' selected >[SELECCIONE]</option>");
@@ -576,22 +633,22 @@
                     });
                 }
                 $("#select-proceso").change(
-                        function () {
+                        function() {
                             $(".lb-list_pasos").text($(this).find(":selected").text());
                             Listar_Paso($(this).val());
                             $(".form_puesto").hide();
                             $(".tbody-puesto").empty();
                             // alert($(this).val());
                         });
-                $(".btn-agregar-p").click(function () {
+                $(".btn-agregar-p").click(function() {
                     if ($(".form_puesto").valid()) {
                         $.ajax({
                             url: "../../Direccion_Puesto",
                             data: $(".form_puesto").serialize() + "&opc=Reg_puesto_paso"
-                        }).done(function () {
+                        }).done(function() {
                             list_puesto($(".num_p").val());
                             alert("¡Registrado Exitosamente!");
-                        }).fail(function (objJson) {
+                        }).fail(function(objJson) {
                             alert(objJson.mensaje);
                         });
                     } else {
@@ -604,7 +661,7 @@
                 var c = $(".dd-list");
                 function Listar_Paso(proceso) {
                     var txt_append = "";
-                    $.post("../../paso", "opc=Listar_habilitados&proceso=" + proceso, function (objJson) {
+                    $.post("../../paso", "opc=Listar_habilitados&proceso=" + proceso, function(objJson) {
                         b.empty();
                         c.empty();
                         var lista = objJson.lista;
@@ -644,13 +701,13 @@
                         }
                         c.append(txt_append);
                         txt_append = "";
-                        $(".btn-cargar-puesto").click(function () {
+                        $(".btn-cargar-puesto").click(function() {
                             var num = $(this).val();
                             $(".id_pasos_puesto").val($(".id_paso" + num).val());
                             list_puesto(num);
                             $(".num_p").val($(this).val());
                         });
-                        $(".btn-editar").click(function () {
+                        $(".btn-editar").click(function() {
                             $(".btn_cancel_edit").show();
                             $(".desc_paso").val($(".td_det" + $(this).val()).text());
                             $(".num_paso").val($(".td_num" + $(this).val()).text());
@@ -661,10 +718,10 @@
                             $(".opc").val("Modificar");
                         });
                         $(".btn-eliminar").click(
-                                function () {
+                                function() {
                                     var pr_e = $("#select-proceso").val();
                                     if (confirm("¿Esta Seguro de Eliminar?")) {
-                                        $.post("../../paso", "opc=Eliminar&paso=" + $(".id_paso" + $(this).val()).val(), function () {
+                                        $.post("../../paso", "opc=Eliminar&paso=" + $(".id_paso" + $(this).val()).val(), function() {
                                             Listar_Paso(pr_e);
                                         });
                                         //alert($(".id_paso" + $(this).val()).val());
@@ -676,13 +733,13 @@
 
                     });
                 }
-                $(".Generar").click(function () {
+                $(".Generar").click(function() {
                     //var num = $(".tbodys tr").size();
                     var num = 1;
                     var url = "";
 
 
-                    $.each($(".item_req"), function () {
+                    $.each($(".item_req"), function() {
                         $(this).text("P" + num);
                         num++;
                     });
@@ -690,12 +747,12 @@
                         url += "id" + s + "=" + $(".id_paso" + (s - 1)).val() + "&numero" + s + "=" + $(".item_" + s).text() + "&";
                     }
                     url = url.substring(0, url.length - 1);
-                       $.post("../../paso", "opc=Update_nu_paso&num=" + num + "&" + url, function (objJson) {
-                     if (objJson.rpta == -1) {
-                     alert(objJson.mensaje);
-                     return;
-                     }
-                     });
+                    $.post("../../paso", "opc=Update_nu_paso&num=" + num + "&" + url, function(objJson) {
+                        if (objJson.rpta == -1) {
+                            alert(objJson.mensaje);
+                            return;
+                        }
+                    });
                     alert(url);
                     url = "";
                     num = 1;
@@ -720,7 +777,7 @@
                 pageSetUp();
                 // PAGE RELATED SCRIPTS
 
-                var updateOutput = function (e) {
+                var updateOutput = function(e) {
                     var list = e.length ? e : $(e.target), output = list.data('output');
                     if (window.JSON) {
                         output.val(window.JSON.stringify(list.nestable('serialize')));
@@ -740,7 +797,7 @@
                 // output initial serialised data
                 updateOutput($('#nestable').data('output', $('#nestable-output')));
                 updateOutput($('#nestable2').data('output', $('#nestable2-output')));
-                $('#nestable-menu').on('click', function (e) {
+                $('#nestable-menu').on('click', function(e) {
                     var target = $(e.target), action = target.data('action');
                     if (action === 'expand-all') {
                         $('.dd').nestable('expandAll');
@@ -759,7 +816,7 @@
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
-            (function () {
+            (function() {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
