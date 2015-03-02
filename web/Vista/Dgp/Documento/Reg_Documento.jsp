@@ -772,12 +772,24 @@
             });
             $(".file").fileinput({
                 // initialPreview: ["<img src='Desert.jpg' class='file-preview-image'>", "<img src='Jellyfish.jpg' class='file-preview-image'>"],
-             /*   initialPreviewConfig: [
-                    {caption: 'Desert.jpg', width: '120px', url: '#'},
-                    {caption: 'Jellyfish.jpg', width: '120px', url: '#'},
-                ],*/
+                /*   initialPreviewConfig: [
+                 {caption: 'Desert.jpg', width: '120px', url: '#'},
+                 {caption: 'Jellyfish.jpg', width: '120px', url: '#'},
+                 ],*/
                 //uploadUrl: '#',
-                allowedFileExtensions: ['jpg', 'png', 'gif','pdf'],
+
+                showUpload: false,
+                layoutTemplates: {
+                    main1: "{preview}\n" +
+                            "<div class=\'input-group {class}\'>\n" +
+                            "   <div class=\'input-group-btn\'>\n" +
+                            "       {browse}\n" +
+                            "       {upload}\n" +
+                            "       {remove}\n" +
+                            "   </div>\n" +
+                            "   {caption}\n" +
+                            "</div>"},
+                allowedFileExtensions: ['jpg', 'png', 'gif', 'pdf', 'docx', 'doc'],
                 overwriteInitial: false,
                 maxFileSize: 500,
                 maxFilesNum: 10,
