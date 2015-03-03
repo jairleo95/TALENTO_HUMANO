@@ -20,7 +20,7 @@
     </head>
     <body>
         <%
-             ResultSet rs2 = null;
+            ResultSet rs2 = null;
             ResultSet cnt2 = null;
             ResultSet cnt1 = null;
             ResultSet rs = null;
@@ -73,74 +73,75 @@
         %>
 
 
-        <%   
-            int af =0;
+        <%            int af = 0;
+
             for (int f = 0; f < List1.length; f++) {
+                int nom_id = 0;
+                int NUM_ID = 0;
                 out.print("<br>");
                 out.print("CREATE OR REPLACE PROCEDURE RHSP_INSERT" + List1[f][0].substring(4).toUpperCase() + " (");
 
-
                 for (int s = 0; s < List2.length; s++) {
-                       
+
                     if (List1[f][0].equals(List2[s][0])) {
-                  
-                        out.print( List2[s][1] + "_SP " + List2[s][2]);
-                        if (List2[s][4].equals(List1[f][1])==false) {
+                        nom_id++;
+                        //  out.print(List2[s][1] + "_SP " + List2[s][2]);
+                        out.print(List2[s][1] + "_SP " + List1[f][0] + "." + List2[s][1] + "%TYPE");
+                        if (List2[s][4].equals(List1[f][1]) == false) {
                             out.println(",");
-                          
+
                         } else {
-                           
-                            out.println(")");
-                            out.println("<br>");    
+                            NUM_ID = (s - nom_id) + 1;
+                            out.println(", ID_TABLE OUT " + List1[f][0] + "." + List2[NUM_ID][1] + "%TYPE )");
+                            out.println("<br>");
                         }
-                  
+
                     }
-                   
-                 
+
                 }
-                
-                
+
                 out.println("IS BEGIN");
                 out.println("<BR>");
-                out.println("INSERT INTO "+List1[f][0]+" (");
-                
-                 for (int v = 1; v < List2.length; v++) {
+                out.println("INSERT INTO " + List1[f][0] + " (");
+
+                for (int v = 1; v < List2.length; v++) {
 
                     if (List1[f][0].equals(List2[v][0])) {
-                        out.print( List2[v][1]);
-                        if (List2[v][4].equals(List1[f][1])==false) {
+                        out.print(List2[v][1]);
+                        if (List2[v][4].equals(List1[f][1]) == false) {
                             out.println(",");
                         } else {
-                       
+
                             out.println(") VALUES (");
-                          
+
                         }
 
                     }
                 }
-                 
-                   for (int h = 1; h < List2.length; h++) {
+
+                for (int h = 1; h < List2.length; h++) {
 
                     if (List1[f][0].equals(List2[h][0])) {
-                        
-                        out.print( List2[h][1] + "_SP " );
-                        if (List2[h][4].equals(List1[f][1])==false) {
+
+                        out.print(List2[h][1] + "_SP ");
+                        if (List2[h][4].equals(List1[f][1]) == false) {
                             out.println(",");
-                           
+
                         } else {
-                         
-                            out.println(");");
+
+                            out.println(") RETURNING " + List2[NUM_ID][1] + " INTO ID_TABLE ;");
+                            out.println("<br>");
+                            out.println("COMMIT;");
                             out.println("<br>");
                             out.println("END ;");
                         }
 
                     }
                 }
-                   out.println("<br>");
-                   out.println("/");
-                   out.println("<br>");
-                
-                
+                out.println("<br>");
+                out.println("/");
+                out.println("<br>");
+
             }
 
 
