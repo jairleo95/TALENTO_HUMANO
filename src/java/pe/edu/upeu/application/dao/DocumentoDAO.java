@@ -286,7 +286,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     @Override
     public List<V_Reg_Dgp_Tra> List_doc_req_pla(String iddgp, String idtra) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT * FROM RHVD_REQ_DGP_TRA  where IDDGP='" + iddgp + "' AND ID_TRABAJADOR='" + idtra + "'";
+        String sql = "SELECT * FROM RHVD_REQ_DGP_TRA  where IDDGP='" + iddgp + "' AND ID_TRABAJADOR='" + idtra + "' ORDER BY NU_ORDEN_DOC ";
         List<V_Reg_Dgp_Tra> x = new ArrayList<V_Reg_Dgp_Tra>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -611,7 +611,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     @Override
     public List<Lis_Doc_tra> Lis_doc_trabajador(String idtr) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT * FROM RHVD_LIST_DOC_TRA  where ID_TRABAJADOR='" + idtr.trim() + "'";
+        String sql = "SELECT * FROM RHVD_LIST_DOC_TRA  where ID_TRABAJADOR='" + idtr.trim() + "' ORDER BY NU_ORDEN";
         List<Lis_Doc_tra> x = new ArrayList<Lis_Doc_tra>();
         try {
             ResultSet rs = this.conn.query(sql);

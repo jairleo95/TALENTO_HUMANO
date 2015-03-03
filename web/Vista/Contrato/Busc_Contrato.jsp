@@ -28,7 +28,7 @@
         <title>Contratos</title>
     </head>
     <body>  
-        <form class="form-inline" id="frm_filtro2" method="post" action="../../Imprimir" name="formulario">
+        <form class="form-inline validarform" id="frm_filtro2" method="post" action="../../Imprimir" name="formulario" onclick="return marcado();">
             <div class="spacing">
                 <center><h1 class="spacing" style="font-weight: bold;">CONTRATOS</h1></center> 
             </div>
@@ -222,15 +222,20 @@
                         b.append("<td>" + nuro + "</td>");
                         b.append("<td><p>" + list[i].nombre + "</p></td>");
                         b.append("<td>" + list[i].fe_de + "</td>");
-                        b.append("<td>" + list[i].fe_ha + "</td>");
+                        if (list[i].fe_ha != null) {
+                            b.append("<td>" + list[i].fe_ha + "</td>");
+                        } else {
+                            b.append("<td>indefinido</td>");
+                        }
+                        // b.append("<td>" + list[i].fe_ha + "</td>");
                         b.append("<td><p>" + list[i].no_ar + "</p></td>");
-                        b.append("<td><p>" + list[i].no_ae + "</p></td>");
+                        b.append("<td><p>" + list[i].no_se + "</p></td>");
                         b.append("<td><p>" + list[i].no_pu + "</p></td>");
                         b.append("<td>" + list[i].ca_su + '</td>');
                         b.append("<td>" + list[i].fe_cr + "</td>");
                         b.append('<td><a class="btn-warming" href="../../contrato?opc=Detalle_Contractual&idtr=' + list[i].id_tr + '">Ver detalle</a> </td>');
                         //b.append('<td id="sel' + i + '"></td>');
-                        b.append('<td><input type="checkbox" id="imp" name="Imprimir" value="' + list[i].id_pl + '"></td>');
+                        b.append('<td><input type="checkbox" id="imp" name="Imprimir" value="' + list[i].id_co +'/'+ list[i].id_pl +'"></td>');
                         b.append("</tr>");
                         nuro = 1;
                     }
@@ -253,12 +258,23 @@
                                     alert(checkboxValues.push($(this).val()));
                                 });
                             });
-                }else{
+                } else {
                     b.append("<tr><TD colspan='12' style='text-align:center;'> NO SE HA ENCONTRADO DATOS DE LA BUSQUEDA</TD></tr>")
                 }
-                
+
             }
             );
+        }
+        function marcado() {
+            if (document.form.termin.checked) {
+                document.form.submit();
+            }
+            else {
+                alert("Debes aceptar los términos y condiciones");
+                document.form.termin.focus();
+                return false;
+            }
+
         }
         $(document).ready(function() {
 
@@ -329,7 +345,15 @@
                         $(".tbodys").html(html);
                     }
             );
-
+            $(".validarform").submit(function() {
+                var check = $("input[type='checkbox']:checked").length;
+                var radio = $("input[type='radio']:checked").length;
+                var select = $("select option:selected").val();
+                if (check == "") {
+                        alert("seleccione un contrato");
+                        return false;
+                }
+            });
 
         });
     </script>
