@@ -522,7 +522,6 @@
                 }
             %>
         </div>
-
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -534,29 +533,26 @@
                         <h4 class="modal-title" id="myModalLabel">Carga Academica</h4>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form class="form_carga_academica">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="category"> Fecha de Inicio:</label>
-                                        <input type="date" class="form-control" value="" placeholder="Date" required />
+                                        <input type="date" class="form-control" value="" name="DESDE" required />
                                     </div>
-
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="category"> Fecha de Cese:</label>
-                                        <input type="date" class="form-control" value="" placeholder="Date" required />
+                                        <input type="date" class="form-control" value="" name="HASTA" required />
                                     </div>
-
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="category"> Tipo de Hora Pago:</label>
-                                        <input type="text" class="form-control" value="25" placeholder="0.0" required />
-
+                                        <input type="text" class="form-control" value="25" placeholder="0.0"  name="TI_HORA_PAGO" required />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -565,14 +561,12 @@
                                         <%
                                             if (hl != null) {
                                         %>
-                                        <input type="text" class="form-control" value="<%=hl%>" placeholder="0" required />
+                                        <input type="text" class="form-control" value="<%=hl%>" name="HL" placeholder="0" required />
                                         <%} else {%>
-                                        <input type="text" class="form-control"  placeholder="0" required />
+                                        <input type="text" class="form-control"  name="HL" placeholder="0" required />
                                         <%}%>
-
                                     </div>
                                 </div>
-
                             </div>
                             <label for="category" > <strong>CUOTAS</strong></label>
                             <br>
@@ -581,24 +575,23 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="category"> MES 1 :</label>
-                                        <input type="text" class="form-control" name="mes1" value="700" placeholder="0" required />
+                                        <input type="text" class="form-control" name="MES1" value="700" placeholder="0" required />
                                         <label for="category"> MES 2 :</label>
-                                        <input type="text" class="form-control" name="mes2" value="700" placeholder="0" required />
+                                        <input type="text" class="form-control" name="MES2" value="700" placeholder="0" required />
                                         <label for="category"> MES 3 :</label>
-                                        <input type="text" class="form-control" name="mes3" value="700" placeholder="0" required />
+                                        <input type="text" class="form-control" name="MES3" value="700" placeholder="0" required />
                                         <label for="category"> MES 4 :</label>
-                                        <input type="text" class="form-control" name="mes4" value="700" placeholder="0" required />
+                                        <input type="text" class="form-control" name="MES4" value="700" placeholder="0" required />
+                                        <input type="text" name="num_itera" value="4" >
 
                                     </div>
                                 </div>
-
                             </div>
-
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">
                                     Cancelar
                                 </button>
-                                <button type="submit" class="btn btn-primary">
+                                <button type="button" class="btn btn-primary btn_guardar_ca"  data-dismiss="modal">
                                     Guardar
                                 </button>
                             </div>
@@ -613,6 +606,18 @@
         <script>
             $(document).ready(function () {
 
+                $(".btn_guardar_ca").click(function () {
+                    $.ajax({
+                        url: "../../carga_academica",
+                        type: "POST",
+                        data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
+                    }).done(function () {
+                        alert("Registrado con exito!...");
+                    }).fail(function (e) {
+                        alert("Error: " + e);
+                    });
+                });
+
                 $(".btn-autor").click(function (e) {
                     $.SmartMessageBox({
                         title: "Alerta de Confirmación!",
@@ -626,7 +631,6 @@
                         if (ButtonPressed === "No") {
                             return false;
                         }
-
                     });
                     e.preventDefault();
                 });
@@ -646,9 +650,7 @@
                     });
                     e.preventDefault();
                 });
-            }
-            )
-                    ;</script>
+            });</script>
 
         <script src="../../js/JQuery/jQuery.js"></script>
         <script src="../../js/Js_dlmenu/jquery.dlmenu.js"></script>

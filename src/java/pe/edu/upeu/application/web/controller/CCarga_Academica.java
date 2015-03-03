@@ -97,65 +97,62 @@ public class CCarga_Academica extends HttpServlet {
         }
         if (opc.equals("Registrar_CA")) {
             /*Registrar proceso de carga academica*/
-            double CA_TIPO_HORA_PAGO = Double.parseDouble(request.getParameter("CA_TIPO_HORA_PAGO"));
-            double CA_TOTAL_HL = Double.parseDouble(request.getParameter("CA_TOTAL_HL"));
-            String FE_DESDE = request.getParameter("FE_DESDE");
-            String FE_HASTA = request.getParameter("FE_HASTA");
-            String ES_PROCESADO = request.getParameter("ES_PROCESADO");
-            String FE_CREACION = request.getParameter("FE_CREACION");
-            String US_MODIF = request.getParameter("US_MODIF");
-            String FE_MODIF = request.getParameter("FE_MODIF");
+            double CA_TIPO_HORA_PAGO = Double.parseDouble(request.getParameter("TI_HORA_PAGO"));
+            double CA_TOTAL_HL = Double.parseDouble(request.getParameter("HL"));
+            String FE_DESDE = request.getParameter("DESDE");
+            String FE_HASTA = request.getParameter("HASTA");
             String IP_USUARIO = request.getParameter("IP_USUARIO");
             String NO_USUARIO = request.getParameter("NO_USUARIO");
-            String ID_PROCESO_CARGA_AC = carga.INSERT_PROCESO_CARGA_ACADEMICA(null, null, CA_TIPO_HORA_PAGO, CA_TOTAL_HL, FE_DESDE, FE_HASTA, ES_PROCESADO, iduser, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, NO_USUARIO);
+            String ID_PROCESO_CARGA_AC = carga.INSERT_PROCESO_CARGA_ACADEMICA(null, null, CA_TIPO_HORA_PAGO, CA_TOTAL_HL, FE_DESDE, FE_HASTA, "0", iduser, null, null, null, IP_USUARIO, NO_USUARIO);
             int numero = Integer.parseInt(request.getParameter("num_itera"));
-            for (int i = 1; i < numero; i++) {
+            for (int i = 1; i <= numero; i++) {
                 /*pago docente (iterar)*/
-                String NU_CUOTA = request.getParameter("CUOTA" + i);
-                Double CA_CUOTA = Double.parseDouble(request.getParameter("CANTIDAD" + i));
+                String NU_CUOTA = "" + i;
+                Double CA_CUOTA = Double.parseDouble(request.getParameter("MES" + i));
+                /*CORREGIR FECHAS*/
                 String FE_PAGO = request.getParameter("FECHA" + i);
                 /*FALTA US_CREACION*/
-                carga.INSERT_PAGO_DOCENTE(null, NU_CUOTA, CA_CUOTA, FE_PAGO, null, ID_PROCESO_CARGA_AC, null, US_MODIF, FE_MODIF, IP_USUARIO, NO_USUARIO);
+                carga.INSERT_PAGO_DOCENTE(null, NU_CUOTA, CA_CUOTA, FE_PAGO, null, ID_PROCESO_CARGA_AC.trim(), null, null, null, IP_USUARIO, NO_USUARIO);
             }
 
             /* REGISTRAR REQUERIMIENTO*/
-            double CA_SUELDO = Double.parseDouble(request.getParameter("CA_SUELDO"));
-            String DE_DIAS_TRABAJO = request.getParameter("DE_DIAS_TRABAJO");
-            String ID_PUESTO = request.getParameter("ID_PUESTO");
-            String ID_REQUERIMIENTO = request.getParameter("ID_REQUERIMIENTO");
-            String ID_TRABAJADOR = request.getParameter("ID_TRABAJADOR");
-            String CO_RUC = request.getParameter("CO_RUC");
-            String DE_LUGAR_SERVICIO = request.getParameter("DE_LUGAR_SERVICIO");
-            String DE_SERVICIO = request.getParameter("DE_SERVICIO");
-            String DE_PERIODO_PAGO = request.getParameter("DE_PERIODO_PAGO");
-            String DE_DOMICILIO_FISCAL = request.getParameter("DE_DOMICILIO_FISCAL");
-            String DE_SUBVENCION = request.getParameter("DE_SUBVENCION");
-            String DE_HORARIO_CAPACITACION = request.getParameter("DE_HORARIO_CAPACITACION");
-            String DE_HORARIO_REFRIGERIO = request.getParameter("DE_HORARIO_REFRIGERIO");
-            String DE_DIAS_CAPACITACION = request.getParameter("DE_DIAS_CAPACITACION");
-            String ES_DGP = request.getParameter("ES_DGP");
-            String US_CREACION = request.getParameter("US_CREACION");
-            double CA_BONO_ALIMENTARIO = Double.parseDouble(request.getParameter("CA_BONO_ALIMENTARIO"));
-            double DE_BEV = Double.parseDouble(request.getParameter("DE_BEV"));
-            String DE_ANTECEDENTES_POLICIALES = request.getParameter("DE_ANTECEDENTES_POLICIALES");
-            String ES_CERTIFICADO_SALUD = request.getParameter("ES_CERTIFICADO_SALUD");
-            String DE_MONTO_HONORARIO = request.getParameter("DE_MONTO_HONORARIO");
-            String FE_CESE = request.getParameter("FE_CESE");
-            String FE_RECEPCION = request.getParameter("FE_RECEPCION");
-            String MO_RENUNCIA = request.getParameter("MO_RENUNCIA");
-            double DI_ADQUIRIDOS = Double.parseDouble(request.getParameter("DI_ADQUIRIDOS"));
-            double DI_CONSUMIDOS = Double.parseDouble(request.getParameter("DI_CONSUMIDOS"));
-            double DI_POR_CONSUMIR = Double.parseDouble(request.getParameter("DI_POR_CONSUMIR"));
-            String ES_VACACIONES = request.getParameter("ES_VACACIONES");
-            String LI_MOTIVO = request.getParameter("LI_MOTIVO");
-            String ES_MFL = request.getParameter("ES_MFL");
-            double CA_BONIFICACION_P = Double.parseDouble(request.getParameter("CA_BONIFICACION_P"));
-            String iddgp = carga.INSERT_DGP(null, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO, DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION, ES_DGP, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, DE_ANTECEDENTES_POLICIALES, ES_CERTIFICADO_SALUD, DE_MONTO_HONORARIO, FE_CESE, FE_RECEPCION, MO_RENUNCIA, DI_ADQUIRIDOS, DI_CONSUMIDOS, DI_POR_CONSUMIR, ES_VACACIONES, LI_MOTIVO, ES_MFL, CA_BONIFICACION_P, ID_PROCESO_CARGA_AC);
-            String idrp = IReq.id_det_req_proc(iddgp);
-            /* REGISTRAR PRIMERA AUTORIZACION*/
-            List<String> list = a.Det_Autorizacion(idrp);
-            a.Insert_Autorizacion(null, iddgp, "1", "P1", "", iduser, "", "", "", list.get(1), idrp, list.get(0));
-
+            /*
+             double CA_SUELDO = Double.parseDouble(request.getParameter("CA_SUELDO"));
+             String DE_DIAS_TRABAJO = request.getParameter("DE_DIAS_TRABAJO");
+             String ID_PUESTO = request.getParameter("ID_PUESTO");
+             String ID_REQUERIMIENTO = request.getParameter("ID_REQUERIMIENTO");
+             String ID_TRABAJADOR = request.getParameter("ID_TRABAJADOR");
+             String CO_RUC = request.getParameter("CO_RUC");
+             String DE_LUGAR_SERVICIO = request.getParameter("DE_LUGAR_SERVICIO");
+             String DE_SERVICIO = request.getParameter("DE_SERVICIO");
+             String DE_PERIODO_PAGO = request.getParameter("DE_PERIODO_PAGO");
+             String DE_DOMICILIO_FISCAL = request.getParameter("DE_DOMICILIO_FISCAL");
+             String DE_SUBVENCION = request.getParameter("DE_SUBVENCION");
+             String DE_HORARIO_CAPACITACION = request.getParameter("DE_HORARIO_CAPACITACION");
+             String DE_HORARIO_REFRIGERIO = request.getParameter("DE_HORARIO_REFRIGERIO");
+             String DE_DIAS_CAPACITACION = request.getParameter("DE_DIAS_CAPACITACION");
+             String ES_DGP = request.getParameter("ES_DGP");
+             String US_CREACION = request.getParameter("US_CREACION");
+             double CA_BONO_ALIMENTARIO = Double.parseDouble(request.getParameter("CA_BONO_ALIMENTARIO"));
+             double DE_BEV = Double.parseDouble(request.getParameter("DE_BEV"));
+             String DE_ANTECEDENTES_POLICIALES = request.getParameter("DE_ANTECEDENTES_POLICIALES");
+             String ES_CERTIFICADO_SALUD = request.getParameter("ES_CERTIFICADO_SALUD");
+             String DE_MONTO_HONORARIO = request.getParameter("DE_MONTO_HONORARIO");
+             String FE_CESE = request.getParameter("FE_CESE");
+             String FE_RECEPCION = request.getParameter("FE_RECEPCION");
+             String MO_RENUNCIA = request.getParameter("MO_RENUNCIA");
+             double DI_ADQUIRIDOS = Double.parseDouble(request.getParameter("DI_ADQUIRIDOS"));
+             double DI_CONSUMIDOS = Double.parseDouble(request.getParameter("DI_CONSUMIDOS"));
+             double DI_POR_CONSUMIR = Double.parseDouble(request.getParameter("DI_POR_CONSUMIR"));
+             String ES_VACACIONES = request.getParameter("ES_VACACIONES");
+             String LI_MOTIVO = request.getParameter("LI_MOTIVO");
+             String ES_MFL = request.getParameter("ES_MFL");
+             double CA_BONIFICACION_P = Double.parseDouble(request.getParameter("CA_BONIFICACION_P"));
+             String iddgp = carga.INSERT_DGP(null, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO, DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION, ES_DGP, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, DE_ANTECEDENTES_POLICIALES, ES_CERTIFICADO_SALUD, DE_MONTO_HONORARIO, FE_CESE, FE_RECEPCION, MO_RENUNCIA, DI_ADQUIRIDOS, DI_CONSUMIDOS, DI_POR_CONSUMIR, ES_VACACIONES, LI_MOTIVO, ES_MFL, CA_BONIFICACION_P, ID_PROCESO_CARGA_AC);
+             String idrp = IReq.id_det_req_proc(iddgp);
+             /* REGISTRAR PRIMERA AUTORIZACION*/
+            /* List<String> list = a.Det_Autorizacion(idrp);
+             a.Insert_Autorizacion(null, iddgp, "1", "P1", "", iduser, "", "", "", list.get(1), idrp, list.get(0));*/
         }
     }
 

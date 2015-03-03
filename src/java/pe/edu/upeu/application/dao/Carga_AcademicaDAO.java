@@ -161,7 +161,7 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
         String id = "";
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_RHTM_PROCESO_CARGA_ACADEMICA( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? )} ");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_PROCESO_CARGA_AC( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? )} ");
             cst.setString(1, null);
             cst.setString(2, null);
             cst.setDouble(3, CA_TIPO_HORA_PAGO);
@@ -303,14 +303,15 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
         String id = "";
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_RHTD_PAGO_DOCENTE( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? )} ");
-            cst.setString(1, ID_PAGO_DOCENTE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_PAGO_DOCENTE( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? )} ");
+            cst.setString(1, null);
             cst.setString(2, NU_CUOTA);
             cst.setDouble(3, CA_CUOTA);
             cst.setString(4, FE_PAGO);
+            //cst.setString(4, "27/02/15");
             cst.setString(5, ES_PAGO_DOCENTE);
             cst.setString(6, ID_PROCESO_CARGA_AC);
-            cst.setString(7, FE_CREACION);
+            cst.setString(7, null);
             cst.setString(8, US_MODIF);
             cst.setString(9, FE_MODIF);
             cst.setString(10, IP_USUARIO);
