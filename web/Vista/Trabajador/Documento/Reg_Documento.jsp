@@ -143,22 +143,17 @@
 
                                         <!--<form action="../../../documento" method="post" enctype="multipart/form-data" class="smart-form" novalidate="novalidate" id="checkout-form">-->
                                         <form action="../../../documento_trabajador" method="post" enctype="multipart/form-data" class="smart-form" >
-
-
-
-                                            <table id="datatable_tabletools" class="table table-bordered table-hover " width="100%">
-
+                                            <table id="datatable_tabletools" class="table table-bordered table-hover table-responsive" width="100%">
                                                 <thead>
                                                 <center>
                                                     <tr>
-
                                                         <th class="cajita"  style="text-align:center;" align="center">ADJUNTAR</th>   
                                                         <th class="cajita"  style="text-align:center;" align="center">DESCRIPCION</th>   
                                                         <th class="cajita"  style="text-align:center;" align="center">¿RECIBIDO EN FISICO?</th>   
                                                         <th class="cajita"  style="text-align:center;" align="center">ACCION</th>   
                                                     </tr>
                                                 </center>
-                                                </thead>
+                                            </thead>
                                                 <tbody>
                                                     <% int i = 0;
                                                         for (int z = 0; z < Lis_doc_trabajador.size(); z++) {
@@ -311,7 +306,7 @@
                                                         <%} else {
                                                                 out.print("");
                                                             }%>
-                                                    </td><%=d.getTi_documento()%>
+                                                    </td>
                                                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
                                                 </tr>  
 
