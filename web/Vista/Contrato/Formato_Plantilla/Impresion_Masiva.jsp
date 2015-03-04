@@ -38,7 +38,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         <script src="../../../HTML_version/js/plugin/ckeditor/ckeditor.js"></script>
         <link href="../../../HTML_version/js/plugin/ckeditor/samples/sample.css" rel="stylesheet">
         <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
-    <input type="hidden" id="cant_con" value="<%=lista.size()%>">
+    <input type="hidden" id="cant_con" class="cant_con" value="<%=lista.size()%>">
     <%
         for (int i = 0; i < lista.size(); i++) {
             String cadena = lista.get(i).toString();
@@ -60,6 +60,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             document.getElementById('eButtons').style.display = 'block';
         });
         function InsertHTML() {
+           
+            
             // Get the editor instance that we want to interact with.
             var editor = CKEDITOR.instances.editor1;
             var value = document.getElementById('texto2').value;
@@ -155,12 +157,12 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             var editor = CKEDITOR.instances.editor1.getData();
             ap.append("<input type='text' value='" + editor + "' name='valor'>");
         }
-        function procesar_texto(valor) {
+        function procesar_texto(valor, asa) {
             // var editor = CKEDITOR.instances.editor1;
 
             $.post("../../../Imprimir", "opc=Listar_contrato&" + "id=" + valor, function(objJson) {
                 var Lista = objJson.lista;
-                var texto = $("#texto").val();
+                var texto = asa;
                 //alert(Lista.length)
                 for (var i = 0; i < Lista.length; i++) {
                     var nombre = "";
@@ -233,8 +235,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                             if (Lista[i].li_d5.trim() == (cont + 1) + "") {
                                 if (Lista[i].di_d4 != null) {
                                     direccion += Lista[i].di_d4 + " " + arrayz[cont];
-                                }else{
-                                    direccion +="-"+arrayz[cont];
+                                } else {
+                                    direccion += "-" + arrayz[cont];
                                 }
                             }
                         }
@@ -361,33 +363,31 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             $.post("../../../formato_plantilla", "opc=Listar2&id=" + plan.trim(), function(objJson) {
                 var imprimir = objJson.imprimir;
                 //var editor2 = editor.getData();
+
                 imprimir = imprimir + '<div style="page-break-after: always;"><span style="display:none">&nbsp;</span></div>';
+                $(".texto").val("");
                 $(".texto").val(imprimir);
-                procesar_texto(valor);
+                procesar_texto(valor, imprimir);
             });
         }
+        function recorido() {
+            var cant_con = $(".cant_con").val();
+
+            for (var f = 0; f < cant_con + 1; f++) {
+                procesar_texto_1($(".plantilla" + f + "").val(), $(".contrato" + f + "").val());
+            }
+
+        }
         $(document).ready(function() {
+             
             $("#actu").hide();
             $("#texto").hide();
-            //$("#texto2").hide();
-            $("#btns").click(function() {
-                recorido();
-            });
-            function recorido() {
-                // var imp;
-                //editor.resetDirty();
-                // var impresion = $("#almacen").val();
-                var cant_con = $("#cant_con").val();
-                //alert(cant_con);
-                //alert();
-                for (var f = 0; f < cant_con + 1; f++) {
-                    if (f == cant_con) {
-                        alert();
-                    }
-                    procesar_texto_1($("#plantilla" + f + "").val(), $("#contrato" + f + "").val());
-                }
+            $("#texto2").hide();
+            setTimeout(function(){ InsertHTML(); ExecuteCommand("print");}, 3000);
+            recorido();
+         
+        
 
-            }
         }
         );</script>
 
@@ -397,15 +397,16 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     <h3>CARGAR PLANTILLAS</h3>
     <%%>
     <input type="hidden" id="no_arch" class="no_arc" value="<%%>">
-    <button type="button" id="btns">cargar</button>
-    <button type="button" onclick="InsertHTML()">insertar</button>
-    <button type="button" onclick="">procesar</button>
+
+    <button type="button" id="btn2" class="btn2" onclick="InsertHTML()">insertar</button>
+    
     <h3>EDITAR PLANTILLAS</h3>
     <form class="ckeditor_form" action="../../../formato_plantilla" method="post">
         <textarea cols="100" id="editor1" name="editor1" rows="10">
         </textarea>
         <script>
             // Replace the <textarea id="editor1"> with an CKEditor instance.
+          
             CKEDITOR.replace('editor1', {
                 on: {
                     focus: onFocus,
@@ -420,9 +421,10 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     }
                 }
                 , height: '800px'});</script>
-        <script>
+                <script type="text/javascript">
             $(document).ready(function() {
-                $(".procesar").click();
+              
+                
             }
             );</script>
         <div id="eButtons" >
