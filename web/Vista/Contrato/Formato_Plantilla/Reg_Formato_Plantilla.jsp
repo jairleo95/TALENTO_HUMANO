@@ -337,7 +337,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         d.append("<tr><td>NO HAY PLANTILLAS</td></tr>");
                     }
                     $(".btn-cargar_pl").click(function () {
-                        alert($(".plantilla" + $(this).val()).val());
                         mostrar_plantilla($(".plantilla" + $(this).val()).val());
                         $(".id_pl").val($(".plantilla" + $(this).val()).val());
                         $(".id_pc").val($(".id_plantilla" + $(this).val()).val());

@@ -44,7 +44,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                             }
                         }
                     } else {
-                        Direccion += "sin dato";
+                        Direccion += "-";
                     }
                     if (n.getLi_di_dom_a_d3() != null) {
                         if (n.getLi_di_dom_a_d3().trim().equals("1")) {
@@ -71,7 +71,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                             }
                         }
                     } else {
-                        Direccion += "sin dato";
+                        Direccion += "-";
                     }
                     if (n.getLi_di_dom_a_d5() != null) {
                         for (int c = 0; c < l.List_Dom_D5_Id().size(); c++) {
@@ -80,12 +80,12 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                             }
                         }
                     } else {
-                        Direccion += "sin dato";
+                        Direccion += "-";
                     }
                     if (n.getDi_dom_a_d6() != null) {
                         Direccion += " " + n.getDi_dom_a_d6();
                     } else {
-                        Direccion += "-";
+                        Direccion += "";
                     }
                     String fecha = n.getFe_sus();
                     String fechasus = "";

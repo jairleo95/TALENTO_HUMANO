@@ -37,8 +37,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <link type="text/css" rel="stylesheet" href="../../css/Css_Detalle/CSS_DETALLE.css">  
-        <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
         <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
         <style type="text/css">
             body{
@@ -185,7 +187,7 @@
 
                 <%if (idrol.trim().equals("ROL-0006") || idrol.trim().equals("ROL-0002")) {
                 %> 
-                <a class="btn btn-primary" href="../../contrato?opc=Subir_Contrato&idc=<%=n.getId_contrato()%>" >Subir Contrato Firmado</a>
+                <a class="btn btn-labeled btn-primary" href="../../contrato?opc=Subir_Contrato&idc=<%=n.getId_contrato()%>" > <span class="btn-label"><i class="fa fa-cloud-upload"></i></span>Subir Contrato Firmado</a>
                 <%}%>
                 <% for (int p = 0; p < List_contra_x_idcto.size(); p++) {%>
 
@@ -496,7 +498,7 @@
                     <td><input type="hidden" name="id_con" value="<%=n.getId_contrato()%>"></td>
                     <td><input type="hidden" name="puesto" class="id_pu" value="<%=n.getId_puesto()%>" ></td>
 
-                    <tr><td class="text-info" colspan="8" style="text-align:center"><input class="button blue"  type="hidden" value="Editar"><button name="opc" value="Imprimir" class="PLANTI button blue">Mostrar Plantillas</button></td></tr>
+                    <tr><td class="text-info" colspan="8" style="text-align:center"><input class="button blue"  type="hidden" value="Editar"><button name="opc" value="Imprimir" class="PLANTI btn btn-labeled btn-primary"><span class="btn-label"><i class="fa fa-print"></i></span>Imprimir</button></td></tr>
                 </table>
             </div>
         </form>
