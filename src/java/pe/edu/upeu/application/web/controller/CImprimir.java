@@ -5,16 +5,22 @@
  */
 package pe.edu.upeu.application.web.controller;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import pe.edu.upeu.application.dao.ContratoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceContratoDAO;
 
 /**
  *
@@ -33,23 +39,40 @@ public class CImprimir extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
+        Map<String, Object> rpta = new HashMap<String, Object>();
         String opc = request.getParameter("opc");
+        HttpSession sesion = request.getSession(true);
+        InterfaceContratoDAO con = new ContratoDAO();
         try {
             /* TODO output your page here. You may use following sample code. */
             if (opc.equals("Imprimir")) {
-                String[] id_tr = request.getParameterValues("Imprimir");
+                String[] id_con = request.getParameterValues("Imprimir");
                 List<String> list = new ArrayList<String>();
-                for(int i=0;i<id_tr.length;i++){
-                    list.add(id_tr[i]);
+                for (int i = 0; i < id_con.length; i++) {
+                    list.add(id_con[i]);
                 }
                 getServletContext().setAttribute("lista", list);
-                response.sendRedirect("Vista/Contrato/Plantilla/Editor_Plantilla2.jsp");
+                response.sendRedirect("Vista/Contrato/Formato_Plantilla/Impresion_Masiva.jsp");
+                // out.print(list.get(0).toString());
             }
-        } finally {
-            out.close();
+            if (opc.equals("Listar_contrato")) {
+                String id = request.getParameter("id");
+                List<Map<String, ?>> list = con.List_contra_x_idcto_json(id);
+                // out.print(list.get(0).toString());
+                rpta.put("rpta", "1");
+                rpta.put("lista", list);
+            }
+        } catch (Exception e) {
+            rpta.put("rpta", "-1");
+            rpta.put("mensaje", e.getMessage());
         }
+        Gson gson = new Gson();
+        out.println(gson.toJson(rpta));
+        out.flush();
+        out.close();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

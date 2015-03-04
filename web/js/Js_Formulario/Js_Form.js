@@ -8,7 +8,7 @@
 function list_select(objSelect, url, datos, opc, id) {
     var text_html = "";
     objSelect.empty();
-    objSelect.append("<option >Cargando...</option>");
+    objSelect.append("<option  value='' >Cargando...</option>");
     $.post(url, datos, function (objJson) {
         objSelect.empty();
         if (objJson.rpta == -1) {
@@ -32,7 +32,7 @@ function list_select(objSelect, url, datos, opc, id) {
                 }
             }
         } else {
-            objSelect.append("<option value=' '>[]</option>");
+            objSelect.append("<option value=''>[]</option>");
         }
         objSelect.append(text_html);
         text_html = "";

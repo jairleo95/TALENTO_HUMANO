@@ -153,9 +153,9 @@ public class CDocumento_Trabajador extends HttpServlet {
         } else {
 
             //------>   ./var/www/html/files/   (con: pwd)
-            String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Dgp\\Documento\\Archivo";
-            // String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
-            //out.print(ubicacion);
+            //String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Dgp\\Documento\\Archivo";
+             String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
+//out.print(ubicacion);
             DiskFileItemFactory f = new DiskFileItemFactory();
             f.setSizeThreshold(1024);
             f.setRepository(new File(ubicacion));
@@ -287,10 +287,10 @@ public class CDocumento_Trabajador extends HttpServlet {
             int count = d.count_documentos_x_tra(idtr);
 
             if (count > 0) {
-                String url = "Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr+"&P2=TRUE";
-               /* if (pr != null) {
+                String url = "Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr;
+                if (pr != null) {
                     url += "&P2=TRUE";
-                }*/
+                }
                 response.sendRedirect(url);
             } else {
                 response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&pro=pr_dgp&P2=TRUE");

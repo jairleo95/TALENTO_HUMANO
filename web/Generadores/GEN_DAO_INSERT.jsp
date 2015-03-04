@@ -79,13 +79,13 @@
                     out.print("<br>");
                     out.print("@Override");
                     out.print("<br>");
-                    out.print(" public void INSERT" + List1[f][0].substring(4).toUpperCase() + " (");
+                    out.print(" public String INSERT" + List1[f][0].substring(4).toUpperCase() + " (");
 
                     for (int s = 0; s < List2.length; s++) {
 
                         if (List1[f][0].equals(List2[s][0])) {
                             if (List2[s][2].equals("NUMBER")) {
-                                out.print(" Double " + List2[s][1]);
+                                out.print(" double " + List2[s][1]);
                             } else {
                                 out.print(" String " + List2[s][1]);
                             }
@@ -103,7 +103,7 @@
 
                     }
 
-                    out.println("  try { this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);CallableStatement cst = this.conn.conex.prepareCall(\"{CALL RHSP_INSERT_" + List1[f][0] + "(");
+                    out.println("  String id = \"\";  try { this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);CallableStatement cst = this.conn.conex.prepareCall(\"{CALL RHSP_INSERT_" + List1[f][0] + "(");
 
                     for (int v = 1; v < List2.length; v++) {
 
@@ -112,11 +112,8 @@
                             if (List2[v][4].equals(List1[f][1]) == false) {
                                 out.println(",");
                             } else {
-
-                                out.println(" )} \" );");
-
+                                out.println(",? )} \" );");
                             }
-
                         }
                     }
                     int l = 0;
@@ -126,8 +123,12 @@
                             l++;
                             out.print("cst.setString(" + l + "," + List2[h][1] + "); ");
                             if (List2[h][4].equals(List1[f][1]) == false) {
+
                             } else {
-                                out.println(" cst.execute();} catch (SQLException ex) {}finally {this.conn.close();}}");
+                                out.print("cst.registerOutParameter(" + (l + 1) + ", Types.CHAR); ");
+                                out.println(" cst.execute(); id = cst.getString(" + (l + 1) + ");");
+                                out.println(" } catch (SQLException e) {throw new RuntimeException(e.getMessage());} catch (Exception e) {throw new RuntimeException(\"ERROR :\" + e.getMessage());} finally {try {this.conn.close();} catch (Exception e) {throw new RuntimeException(e.getMessage());}}return id;}");
+
                             }
                         }
                     }
