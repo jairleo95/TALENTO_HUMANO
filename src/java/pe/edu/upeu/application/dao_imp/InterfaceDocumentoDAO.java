@@ -28,6 +28,8 @@ public interface InterfaceDocumentoDAO {
     public String List_files_tra(String id);
     
     public String List_file_url(String id);
+    
+    public String List_file_url2(String id);
 
     public List<Documentos> List_Documentos();
 

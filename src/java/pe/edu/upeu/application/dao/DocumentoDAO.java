@@ -163,6 +163,36 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     }
 
     @Override
+    public String List_file_url2(String id) {
+      List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        String texto_html = "";
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select a.NO_FILE,a.NO_ORIGINAL  from RHTV_ARCHIVO_DOCUMENTO a ,  RHTV_DOCUMENTO_ADJUNTO d where d.ID_DOCUMENTO_ADJUNTO = a.ID_DOCUMENTO_ADJUNTO  and  a.id_documento_adjunto='" + id + "' and a.ES_FILE='1'";
+            ResultSet rs = this.conn.query(sql);
+
+            while (rs.next()) {
+                String tipo = rs.getString("NO_FILE").substring(rs.getString("NO_FILE").length() - 3, rs.getString("NO_FILE").length());
+                    texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href='../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "'>"+ rs.getString("NO_ORIGINAL") + "</a>";
+
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return texto_html;
+    }
+
+    @Override
     public List<Documentos> List_Documentos() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "Select * from RHTR_DOCUMENTOS";
@@ -404,8 +434,6 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
         return id;
     }
 
- 
-
     @Override
     public void INSERT_ARCHIVO_DOCUMENTO(String ID_ARCHIVO_DOCUMENTO, String ID_DOCUMENTO_ADJUNTO, String NO_FILE, String NO_ORIGINAL, String ES_FILE) {
         try {
@@ -429,8 +457,6 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
             }
         }
     }
-    
-    
 
     @Override
     public List<V_Reg_Dgp_Tra> List_Doc_CE() {

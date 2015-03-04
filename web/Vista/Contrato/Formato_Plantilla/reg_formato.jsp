@@ -27,7 +27,12 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         <meta charset="utf-8">
         <title>Crear Formatos</title>
         <script src="../../../HTML_version/js/plugin/ckeditor/ckeditor.js"></script>
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-skins.min.css">
         <link href="../../../HTML_version/js/plugin/ckeditor/samples/sample.css" rel="stylesheet">
+
         <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
         <%
             String no_arch = request.getParameter("no_arc");
@@ -76,7 +81,11 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     if (n.getLi_di_dom_a_d5() != null) {
                         for (int c = 0; c < l.List_Dom_D5_Id().size(); c++) {
                             if (n.getLi_di_dom_a_d5().trim().equals(c + 1 + "")) {
-                                Direccion += " " + n.getDi_dom_a_d4() + " " + l.List_Dom_D5_Id().get(c);
+                                if (n.getDi_dom_a_d4() != null) {
+                                    Direccion += " " + n.getDi_dom_a_d4() + " " + l.List_Dom_D5_Id().get(c);
+                                }else{
+                                    Direccion += " - " + l.List_Dom_D5_Id().get(c);
+                                }
                             }
                         }
                     } else {
@@ -85,7 +94,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     if (n.getDi_dom_a_d6() != null) {
                         Direccion += " " + n.getDi_dom_a_d6();
                     } else {
-                        Direccion += "";
+                        Direccion += "-";
                     }
                     String fecha = n.getFe_sus();
                     String fechasus = "";
@@ -100,17 +109,17 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     } else {
                         fechasus = "NO TIENE";
                     }
-                    String fecha2 = n.getFe_des().trim();
+                    String fecha2 = n.getFe_des();
                     String fechades = "";
                     if (fecha2 != "" & fecha2 != null) {
                         String f[] = fecha2.split("/");
                         fechades = f[0] + " de " + f[1] + " del " + f[2];
                     } else {
-                        fechades = "NO TIENE";
+                        fechades = "NO registrado";
                     }
-                    fecha2 = n.getFe_has().trim();
+                    fecha2 = n.getFe_has();
                     String fechahas = "";
-                    if (fecha2 != "" & fecha != null) {
+                    if (fecha2 != "" & fecha2 != null) {
                         String f[] = fecha2.split("/");
                         fechahas = f[0] + " de " + f[1] + " del " + f[2];
                     } else {
@@ -295,17 +304,22 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             $(document).ready(function() {
                 $("#actu").hide();
                 mostrars();
+                setTimeout(function() {
+                    ExecuteCommand('print');
+                }, 1000)
             });</script>
 
     </head>
 
-    <body style="height: 1080px">
-        <h3>CARGAR PLANTILLAS</h3>
+    <body style="height: 1080px" align="center">
         <%String no_ar = request.getParameter("no_arc");%>
         <input type="hidden" id="no_arch" class="no_arc" value="<%=no_ar%>">
-        <h3>EDITAR PLANTILLAS <%=fechades%></h3>
-        <form class="ckeditor_form" action="../../../formato_plantilla" method="post">
-            <textarea cols="100" id="editor1" name="editor1" rows="10">
+        <h1>EDITAR PLANTILLAS <%=fechades%></h1>
+    <CENTER>
+        <button class="btn btn-lg btn-primary" onclick="ExecuteCommand('print');" style="height:50%;weith:20px;"><span class="btn-"><i class="fa fa-print"></i></span>IMPRIMIR</button>
+
+        <form class="ckeditor_form" action="../../../formato_plantilla" method="post" align="center" >
+            <textarea cols="100" id="editor1" name="editor1" rows="10" >
             </textarea>
             <script>
                 // Replace the <textarea id="editor1"> with an CKEditor instance.
@@ -322,7 +336,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                 doc.getById('exec-link').hide();
                         }
                     }
-                    , height: '800px'});</script>
+                    , height: '800px', align: 'center'});</script>
             <script>
                 $(document).ready(function() {
                     $(".procesar").click();
@@ -339,8 +353,9 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         <table>
             <td><h1>Plantilla_no_registrada</h1></td>
         </table>
-        <%}%>
-    </body>
+    </CENTER>
+    <%}%>
+</body>
 
 </html>
 
