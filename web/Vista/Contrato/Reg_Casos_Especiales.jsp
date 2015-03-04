@@ -608,7 +608,7 @@
                                                         </section>
                                                         <section class="col col-4">
                                                             <label class="select" id="titu">Tipo Convenio:
-                                                                <select name="TIPO_CONVENIO" class="input-group-sm" required="">
+                                                                <select name="TIPO_CONVENIO" class="input-group-sm"x>
                                                                     <option value="">[SELECCIONE]</option>
                                                                     <option value="1">CLJ</option>
                                                                     <option value="2">PPP</option>
@@ -660,7 +660,7 @@
                                                         </section>
                                                         <section class="col col-3">
                                                             <label class="select" id="titu">Plantilla de Contrato:
-                                                                <select name="id_plantilla_contractual" class="con_pl_pu input-group-sm" required="">
+                                                                <select name="id_plantilla_contractual" class="con_pl_pu input-group-sm" >
                                                                     <option value="">[SELECCIONE]</option>
                                                                 </select>
                                                             </label>

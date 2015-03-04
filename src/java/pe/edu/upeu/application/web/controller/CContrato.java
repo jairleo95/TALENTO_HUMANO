@@ -488,6 +488,8 @@ public class CContrato extends HttpServlet {
                 }
 
             }
+             emp.VALIDAR_EMPLEADO(ID_TRABAJADOR);
+            
             getServletContext().setAttribute("List_Jefe", l.List_Jefe());
             getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
             getServletContext().setAttribute("List_ID_User", usu.List_ID_User(US_CREACION));

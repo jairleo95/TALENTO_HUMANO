@@ -902,7 +902,7 @@
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-bank fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"  placeholder="Nombre del Banco" type="text" name="BANCO_OTROS"  id="nu_cuen_otros" maxlength="30"   />
+                                                                            <input class="form-control input-group-sm"  placeholder="Nombre del Banco" type="text" name="BANCO_OTROS"  id="nu_cuen_otros" maxlength="20"   />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -910,7 +910,7 @@
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-bank fa-lg fa-fw"></i></span>
-                                                                            <input placeholder="Nro de Cuenta" class="form-control input-group-sm" type="text" name="CUENTA"  id="nu_cuen" maxlength="30"   />
+                                                                            <input placeholder="Nro de Cuenta" class="form-control input-group-sm" type="text" name="CUENTA"  id="nu_cuen" maxlength="20"   />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -992,7 +992,8 @@
                                                                     $("#nu_cuen_ban").val("");
                                                                     $("#subscription").attr('checked', false);
                                                                     $("#nu_cuen").attr("maxlength", "21");
-                                                                    $("#nu_cuen").mask("0011-9999999999999999", {placeholder: "X"});
+                                                                    $("#nu_cuen").attr("minlength", "19");
+                                                                    $("#nu_cuen").val("0011-")
                                                                     $("#no_cuen_otros").hide();
                                                                     $("#nu_cuen_otros").val("");
                                                                     $("#texto").hide();

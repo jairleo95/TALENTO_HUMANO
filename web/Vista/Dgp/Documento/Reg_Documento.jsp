@@ -78,7 +78,7 @@
         <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="../../../css/Css_Bootstrap/fileinput.css" media="all" rel="stylesheet" type="text/css" />
     </head>
-    <body class="">
+    <body class="" onload="closedthis();">
         <%
             HttpSession sesion_1 = request.getSession(true);
             String rol = (String) sesion_1.getAttribute("IDROL");
@@ -90,7 +90,26 @@
             //String id_dgp = "";
         %>
         <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
-
+        <script>
+            function exito(titulo, mensaje) {
+                $.smallBox({
+                    title: titulo,
+                    content: mensaje,
+                    color: "#739E73",
+                    iconSmall: "fa fa-cloud",
+                    timeout: 3000
+                });
+            }
+            function closedthis() {
+                $.smallBox({
+                    title: "¡Ficha de trabajador registrada correctamente!",
+                    content: "ya puede visualizar toda la informacion del trabajador...",
+                    color: "#739E73",
+                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                    timeout: 6000
+                });
+            }
+        </script>
 
         <!-- MAIN PANEL -->
 
@@ -771,7 +790,7 @@
 
                                                         pageSetUp();
 
-                                                        $.each($(".file"), function (i) {
+                                                        $.each($(".file"), function(i) {
 
                                                             if ((i + 1) == 0) {
                                                                 $(".btn_reg_doc").hide();
@@ -781,12 +800,12 @@
                                                             }
 
                                                         });
-                                                        $(".DD").change(function () {
+                                                        $(".DD").change(function() {
 
                                                             $(".div-holi").text($(".DD").val());
 
                                                         });
-                                                        $(".elimi").click(function () {
+                                                        $(".elimi").click(function() {
                                                             var msg = confirm('¿tas seguro de eliminar?');
                                                             if (msg == true) {
                                                                 return true;
@@ -882,7 +901,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function () {
+            (function() {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
