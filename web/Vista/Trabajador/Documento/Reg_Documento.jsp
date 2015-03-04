@@ -143,10 +143,15 @@
 
                                         <!--<form action="../../../documento" method="post" enctype="multipart/form-data" class="smart-form" novalidate="novalidate" id="checkout-form">-->
                                         <form action="../../../documento_trabajador" method="post" enctype="multipart/form-data" class="smart-form" >
-                                            <table id="datatable_tabletools" class="table table-bordered table-hover table-responsive" width="100%">
+
+
+
+                                            <table id="datatable_tabletools" class="table table-bordered table-hover " width="100%">
+
                                                 <thead>
                                                 <center>
                                                     <tr>
+
                                                         <th class="cajita"  style="text-align:center;" align="center">ADJUNTAR</th>   
                                                         <th class="cajita"  style="text-align:center;" align="center">DESCRIPCION</th>   
                                                         <th class="cajita"  style="text-align:center;" align="center">¿RECIBIDO EN FISICO?</th>   

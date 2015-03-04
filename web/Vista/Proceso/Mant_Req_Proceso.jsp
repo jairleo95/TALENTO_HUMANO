@@ -264,8 +264,6 @@
 
                                     <!-- widget content -->
                                     <div class="widget-body">
-                                        <p>Adds borders to any table row within <code>&lt;table&gt;</code> by adding the <code>.table-bordered</code> with the base class</p>
-
                                         <div class="table-responsive">
 
                                             <table class="table table-bordered">

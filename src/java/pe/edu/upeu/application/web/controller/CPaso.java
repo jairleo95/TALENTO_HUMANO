@@ -58,7 +58,6 @@ public class CPaso extends HttpServlet {
             }
             if (opc.equals("Mantenimiento")) {
                 response.sendRedirect("Vista/Proceso/Menu_Mantenimiento.jsp");
-
             }
             if (opc.equals("Eliminar")) {
                 String id = request.getParameter("paso");

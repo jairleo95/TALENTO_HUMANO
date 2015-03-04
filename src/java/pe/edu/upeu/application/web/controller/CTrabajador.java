@@ -273,7 +273,10 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
             getServletContext().setAttribute("List_Ubigeo", ub.List_Distrito());
             getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
-
+            
+            //String num_doc = tr.REG_DOC_TRABAJADOR(idtr);
+           // out.print(num_doc);
+            
             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&a=t");
         }
         if ("actualizar".equals(opc)) {

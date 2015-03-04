@@ -87,11 +87,11 @@
         </style>
 
         <script>
-            function oultar() {
-                document.all.capa.style.visibility = "hidden";
+            function oultar(){
+                document.all.capa.style.visibility="hidden";
             }
         </script>
-
+            
 
     </head>
     <body>
@@ -103,7 +103,7 @@
             <h3>-Modificar Perfil Usuario</h3>
             <hr>
 
-            <form id="wizard"   class="form form_user"  action="../../Usuario"  method="post">
+            <form id="wizard-1" novalidate="novalidate"  class="form form_user"  action="../../Usuario"  method="post">
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="form-group">
@@ -163,13 +163,13 @@
 
                 <script type="text/javascript">
                     $(document).ready(
-                            function() {
+                            function () {
                                 var tip = $("#pro_dir_l");
                                 tip.empty();
                                 var rg = $("#dep_dir_l").val();
                                 var data = "id_dep=" + rg + "&opc=dep_nac";
                                 tip.append('<option value="">Cargando...</option>').val('');
-                                $.post("../../ubigeo", data, function(objJson) {
+                                $.post("../../ubigeo", data, function (objJson) {
                                     tip.empty();
                                     if (objJson.rpta == -1) {
                                         alert(objJson.mensaje);
@@ -191,7 +191,7 @@
                                 var rg = $("#pro_dir_l").val();
                                 var data = "id_dist=" + rg + "&opc=pro_nac";
                                 ti.append('<option value="">Cargando...</option>').val('');
-                                $.post("../../ubigeo", data, function(objJson) {
+                                $.post("../../ubigeo", data, function (objJson) {
                                     ti.empty();
                                     if (objJson.rpta == -1) {
                                         alert(objJson.mensaje);
@@ -214,7 +214,7 @@
                                 $(".doc, .doc_c").val("");
 
                                 $("#nac").change(
-                                        function() {
+                                        function () {
                                             if ($("#nac").val() != "NAC-0193") {
                                                 $("#dist").hide();
                                                 $("#dist_nac").val("DST-001832");
@@ -269,7 +269,7 @@
 
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label for="exampleInput"></label>
+                              <label for="exampleInput"></label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                 <input class="form-control input-group-sm" required autofocus=""  value="<%=vu.getDi_dom_a_d2()%>"   placeholder="" type="text" name="DIR_DOM_A_D2" id="DOM_A_D2" maxlength="100">
@@ -279,9 +279,9 @@
                     </div>
                     <script>
                         $(document).ready(
-                                function() {
+                                function () {
                                     $("#DOM_A_D3").change(
-                                            function() {
+                                            function () {
                                                 if ($("#DOM_A_D3").val() == "3") {
                                                     $("#DOM_A_D4").val("Sin Numero");
                                                 } else {
@@ -292,7 +292,7 @@
                                             }
                                     );
                                     $("#DOM_LEG_D3").change(
-                                            function() {
+                                            function () {
                                                 if ($("#DOM_LEG_D3").val() == "3") {
                                                     $("#DOM_LEG_D4").val("Sin Numero");
                                                 } else {
@@ -303,7 +303,7 @@
                                             }
                                     );
                                     $("#reli").change(
-                                            function() {
+                                            function () {
                                                 if ($("#reli").val() == "1") {
                                                     $("#igle").attr("required", "required")
                                                 } else {
@@ -411,7 +411,7 @@
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label for="exampleInput"></label>
+                           <label for="exampleInput"></label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                 <input class="form-control input-group-sm"  required autofocus=""  value="<%=vu.getDi_dom_a_d4()%>"  placeholder="" type="text" name="DIR_DOM_A_D4" id="DOM_A_D4" maxlength="50">
@@ -447,7 +447,7 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="exampleInput"></label>
+                           <label for="exampleInput"></label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                 <input class="form-control input-group-sm"  required autofocus=""  value="<%=vu.getDi_dom_a_d6()%>"  placeholder="" type="text" name="DIR_DOM_A_D6" id="DOM_A_D6" maxlength="50">
@@ -457,7 +457,7 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="exampleInput"></label>
+                          <label for="exampleInput"></label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                 <input class="form-control input-group-sm"  required autofocus=""  value="<%=vu.getDi_dom_a_ref()%>"   placeholder="Referencia" type="text" name="DIR_DOM_A_REF" id="DOM_A_REF" maxlength="50">
@@ -471,9 +471,9 @@
                     <div class="col-sm-3">
 
                         <div class="form-group">
-                            <label for="exampleInput">Departamento:</label>
+                         <label for="exampleInput">Departamento:</label>
                             <div class="input-group">
-
+                               
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
 
                                 <select  id="dep_dir_a" class="form-control input-group-sm"  required="" name="ID_DEPARTAMENTO">
@@ -524,7 +524,7 @@
                     <div class="col-sm-3">
 
                         <div class="form-group">
-                            <label for="exampleInput">Distrito:</label>
+                             <label for="exampleInput">Distrito:</label>
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
@@ -550,9 +550,9 @@
                             return false;"  class="btn btn-primary" id="btn-duplicar">Duplicar</button>-->
 
                 </div><br>
-
-                <input  type="hidden"   value="<%=vu.getId_trabajador()%>" name="ID_TR"/>
-                <input  type="hidden" value="<%=vu.getId_usuario()%>" name="idus" />
+             
+                <input  type="text"  disabled="disabled" value="<%=vu.getId_trabajador()%>" name="ID_TR"/>
+                <input  type="text" readonly="readonly"  value="<%=vu.getId_usuario()%>" name="idus" />
                 <input type="hidden" value="Modificar" name="opc" />
                 <input type="Submit"  class="btn btn-primary btn_modificar" id="idus"  value="Modificar" >
 
@@ -609,16 +609,15 @@
 
 
                                 </fieldset>
-                                <br>
+
                                 <footer>
-                                    <center>
-                                        <button type="submit" class="btn btn-primary">
-                                            save
-                                        </button>
-                                        <button type="button" class="btn btn-default"  data-dismiss="modal" aria-hidden="true" >
-                                            Cancel
-                                        </button>
-                                    </center>
+                                    <button type="submit" class="btn btn-primary">
+                                        save
+                                    </button>
+                                    <button type="button" class="btn btn-default"  data-dismiss="modal" aria-hidden="true" >
+                                        Cancel
+                                    </button>
+
                                 </footer>
                             </form>						
 
@@ -711,22 +710,22 @@
 
                         // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-                        $(document).ready(function() {
+                        $(document).ready(function () {
 
                             pageSetUp();
 
-                            $(".btn_modificar").click(function(e) {
+                            $(".btn_modificar").click(function (e) {
                                 $.SmartMessageBox({
                                     title: "Smart Alert!",
                                     content: "Se trata de un cuadro de confirmación. Puede ser programado para el botón de devolución de llamada",
                                     buttons: '[No][Si]'
-                                }, function(ButtonPressed) {
+                                }, function (ButtonPressed) {
                                     if (ButtonPressed === "Si") {
 
-                                        $(".form_user").submit();
+                                     $(".form_user").submit();
                                     }
                                     if (ButtonPressed === "No") {
-                                        return false;
+                                      return false;
                                     }
 
                                 });
@@ -762,15 +761,15 @@
                                         email: "Your email address must be in the format of name@domain.com"
                                     }
                                 },
-                                highlight: function(element) {
+                                highlight: function (element) {
                                     $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
                                 },
-                                unhighlight: function(element) {
+                                unhighlight: function (element) {
                                     $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
                                 },
                                 errorElement: 'span',
                                 errorClass: 'help-block',
-                                errorPlacement: function(error, element) {
+                                errorPlacement: function (error, element) {
                                     if (element.parent('.input-group').length) {
                                         error.insertAfter(element.parent());
                                     } else {
@@ -805,15 +804,15 @@
                                         email: "Your email address must be in the format of name@domain.com"
                                     }
                                 },
-                                highlight: function(element) {
+                                highlight: function (element) {
                                     $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
                                 },
-                                unhighlight: function(element) {
+                                unhighlight: function (element) {
                                     $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
                                 },
                                 errorElement: 'span',
                                 errorClass: 'help-block',
-                                errorPlacement: function(error, element) {
+                                errorPlacement: function (error, element) {
                                     if (element.parent('.input-group').length) {
                                         error.insertAfter(element.parent());
                                     } else {
@@ -825,7 +824,7 @@
 
                             $('#bootstrap-wizard-1').bootstrapWizard({
                                 'tabClass': 'form-wizard',
-                                'onNext': function(tab, navigation, index) {
+                                'onNext': function (tab, navigation, index) {
                                     var $valid = $("#wizard-1").valid();
                                     if (!$valid) {
                                         $validator.focusInvalid();
@@ -843,7 +842,7 @@
                             // fuelux wizard
                             var wizard = $('.wizard').wizard();
 
-                            wizard.on('finished', function(e, data) {
+                            wizard.on('finished', function (e, data) {
                                 //$("#fuelux-wizard").submit();
                                 //console.log("submitted!");
                                 $.smallBox({
@@ -869,7 +868,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function() {
+            (function () {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
@@ -887,13 +886,13 @@
         <!--Select dinamicos-->
         <script type="text/javascript">
             /*Ubigeo*/
-            $("#dep_nac").change(function() {
+            $("#dep_nac").change(function () {
                 var ti = $("#pro_nac");
                 ti.empty();
                 var rg = $("#dep_nac").val();
                 var data = "id_dep=" + rg + "&opc=dep_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
+                $.post("../../ubigeo", data, function (objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -911,13 +910,13 @@
                     }
                 });
             });
-            $("#pro_nac").change(function() {
+            $("#pro_nac").change(function () {
                 var ti = $("#dist_nac");
                 ti.empty();
                 var rg = $("#pro_nac").val();
                 var data = "id_dist=" + rg + "&opc=pro_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
+                $.post("../../ubigeo", data, function (objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -935,13 +934,13 @@
                     }
                 });
             });
-            $("#dep_dir_a").change(function() {
+            $("#dep_dir_a").change(function () {
                 var ti = $("#pro_dir_a");
                 ti.empty();
                 var rg = $("#dep_dir_a").val();
                 var data = "id_dep=" + rg + "&opc=dep_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
+                $.post("../../ubigeo", data, function (objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -960,13 +959,13 @@
 
                 });
             });
-            $("#pro_dir_a").change(function() {
+            $("#pro_dir_a").change(function () {
                 var ti = $("#DOM_A_DISTRITO");
                 ti.empty();
                 var rg = $("#pro_dir_a").val();
                 var data = "id_dist=" + rg + "&opc=pro_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
+                $.post("../../ubigeo", data, function (objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -984,13 +983,13 @@
                     }
                 });
             });
-            $("#dep_dir_l").change(function() {
+            $("#dep_dir_l").change(function () {
                 var ti = $("#pro_dir_l");
                 ti.empty();
                 var rg = $("#dep_dir_l").val();
                 var data = "id_dep=" + rg + "&opc=dep_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
+                $.post("../../ubigeo", data, function (objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -1008,13 +1007,13 @@
                     }
                 });
             });
-            $("#pro_dir_l").change(function() {
+            $("#pro_dir_l").change(function () {
                 var ti = $("#DOM_LEG_DISTRITO");
                 ti.empty();
                 var rg = $("#pro_dir_l").val();
                 var data = "id_dist=" + rg + "&opc=pro_nac";
                 ti.append('<option value="">Cargando...</option>').val('');
-                $.post("../../ubigeo", data, function(objJson) {
+                $.post("../../ubigeo", data, function (objJson) {
                     ti.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
