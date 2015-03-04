@@ -57,9 +57,16 @@ public class RequerimientoDAO implements InterfaceRequerimientoDAO {
             sentencia.setString(2, iddgp);
             sentencia.executeQuery();
             Id = sentencia.getString(1);
-        } catch (SQLException e) {
+     } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return Id;
     }

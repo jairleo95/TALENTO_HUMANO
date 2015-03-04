@@ -28,7 +28,7 @@
         <script src="../../../js/DataTables-1.10.4/media/js/jquery.dataTables.columnFilter.js" type="text/javascript"></script>
 
         <script type="text/javascript" charset="utf-8">
-            $(document).ready(function() {
+            $(document).ready(function () {
                 $('#example').dataTable().columnFilter({aoColumns: [
                         {type: "select", sSelector: "#stipodoc"},
                         //{type: "select", values: ["N/A"], sSelector: "#sarose"},
@@ -56,7 +56,7 @@
             _gaq.push(['_setAccount', 'UA-17838786-4']);
             _gaq.push(['_trackPageview']);
 
-            (function() {
+            (function () {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
@@ -195,7 +195,7 @@
                         <td><%=ca.getDe_carga()%></td>
                         <td><%=ca.getFe_desde()%></td>
                         <td><%=ca.getFe_hasta()%></td>
-                        <td><button>lal</button></td>
+                        <td><a href="../../../carga_academica?opc=Completar_Datos&nro_doc=<%=ca.getNu_doc()%>&ap_p=<%=ca.getAp_paterno()%>&ap_m=<%=ca.getAp_materno()%>&no_tr=<%=ca.getNo_trabajador()%>&ti_doc=<%=ca.getEs_tipo_doc()%>&eap=<%=ca.getNo_eap()%>&facultad=<%=ca.getNo_facultad()%>" >Completar Datos</a></td>
                     </tr>
                     <%}%>
 
@@ -210,8 +210,8 @@
     <!--CARGA ACADEMICA-->
     <center>
         <h1>CARGA ACADEMICA</h1>
-        
-           
+
+
         <table border="1">
             <thead>
                 <tr>
@@ -237,20 +237,20 @@
 </body>
 <script>
 
-    (function($) {
-        $(document).ready(function() {
+    (function ($) {
+        $(document).ready(function () {
 
             var url = 'http://192.168.13.52/demo/data.php';
 
-            $(".semestre").change(function() {
+            $(".semestre").change(function () {
 
                 $('.tbody-carga').empty();
                 $('.tbody-carga').append("<tr><td colspan='9' >Cargando... </td></tr>");
-                $.post(url, "semestre=" + $(".semestre").val(), function(data) {
+                $.post(url, "semestre=" + $(".semestre").val(), function (data) {
                     $('.tbody-carga').empty();
-                    $.each(data, function(i, campo) {
-                       
-                       //$.post("../../../dgp",function(){alert()});
+                    $.each(data, function (i, campo) {
+
+                        //$.post("../../../dgp",function(){alert()});
                         $('.tbody-carga').append('<tr>');
                         $('.tbody-carga').append('<td>' + campo.tipodocumento + '</td>');
                         $('.tbody-carga').append('<td>' + campo.numerodocumento + '</td>');
