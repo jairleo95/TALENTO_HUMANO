@@ -360,7 +360,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR :" + e.getMessage());
+          //  throw new RuntimeException("ERROR :" + e.getMessage());
         } finally {
             try {
                 this.conn.close();

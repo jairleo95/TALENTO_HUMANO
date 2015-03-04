@@ -148,7 +148,7 @@
     </head>
 
     <%  //String num = request.getParameter("num");
-       // int num_doc = Integer.parseInt(num);
+        // int num_doc = Integer.parseInt(num);
         if (request.getParameter("a") != null) {
             if (request.getParameter("a").equals("t")) {
     %>
@@ -564,7 +564,7 @@
                                         <label for="category"> Horas Laborables:</label>
                                         <%
                                             if (hl != null) {
-                                                 if (Boolean.valueOf(academico) == true) {
+                                                if (Boolean.valueOf(academico) == true) {
                                         %>
                                         <input type="text" class="form-control" value="<%=hl%>" name="HL" placeholder="0" required />
                                         <%} else {%>
@@ -628,6 +628,12 @@
                         $(".btn_procesar").show();
                     }).fail(function (e) {
                         alert("Error: " + e);
+                    });
+                });
+
+                $(".btn_procesar").click(function () {
+                    $.ajax({
+                        url:"",data:"",
                     });
                 });
 
@@ -745,7 +751,7 @@
                 });
             }
 
-             function closedthis2() {
+            function closedthis2() {
                 $.smallBox({
                     title: "¡Documentos del trabajador registrados correctamente!",
                     content: "ya puede visualizar toda los documentos del trabajador...",
