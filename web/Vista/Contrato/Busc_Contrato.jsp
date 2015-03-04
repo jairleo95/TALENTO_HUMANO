@@ -206,7 +206,18 @@
         }
         function buscar(del, al, nombre, dir, dep, area, sec, puesto, fe_i, fe_fi, ca_sueldo) {
             var b = $(".tbodys");
-            $.post("../../impresion_masiva?opc=filtrar" + "&desde=" + del + "&al=" + al + "&nom_ape=" + nombre + "&direccion=" + dir + "&departamento=" + dep + "&area=" + area + "&seccion=" + sec + "&puesto=" + puesto + "&fec_i=" + fe_i + "&fec_f=" + fe_fi + "&sueldo=" + ca_sueldo, function(objJson) {
+            if(del==''){del=null;}
+            if(al==''){del=null;}
+            if(nombre==''){del=null;}
+            if(dir==''){del=null;}
+            if(dep==''){del=null;}
+            if(area==''){del=null;}
+            if(sec==''){del=null;}
+            if(puesto==''){del=null;}
+            if(fe_i==''){del=null;}
+            if(fe_fi==''){del=null;}
+            if(ca_sueldo==''){del=null;}
+            $.post("../../impresion_masiva?opc=filtrar" + "&del=" + del + "&al=" + al + "&nom_ape=" + nombre + "&direccion=" + dir + "&departamento=" + dep + "&area=" + area + "&seccion=" + sec + "&puesto=" + puesto + "&fec_i=" + fe_i + "&fec_f=" + fe_fi + "&sueldo=" + ca_sueldo, function(objJson) {
                 b.empty();
                 //alert($("#select_pu").val());
                 var list = objJson.lista;
@@ -215,53 +226,48 @@
                     return;
                 }
                 var nuro = 1;
-                if (list.length > 0) {
-                    for (var i = 0; i < list.length; i++) {
-                        nuro = nuro + i;
-                        b.append("<tr>");
-                        b.append("<td>" + nuro + "</td>");
-                        b.append("<td><p>" + list[i].nombre + "</p></td>");
-                        b.append("<td>" + list[i].fe_de + "</td>");
-                        b.append("<td>" + list[i].fe_ha + "</td>");
-                        b.append("<td><p>" + list[i].no_ar + "</p></td>");
-                        b.append("<td><p>" + list[i].no_ae + "</p></td>");
-                        b.append("<td><p>" + list[i].no_pu + "</p></td>");
-                        b.append("<td>" + list[i].ca_su + '</td>');
-                        b.append("<td>" + list[i].fe_cr + "</td>");
-                        b.append('<td><a class="btn-warming" href="../../contrato?opc=Detalle_Contractual&idtr=' + list[i].id_tr + '">Ver detalle</a> </td>');
-                        //b.append('<td id="sel' + i + '"></td>');
-                        b.append('<td><input type="checkbox" id="imp" name="Imprimir" value="' + list[i].id_pl + '"></td>');
-                        b.append("</tr>");
-                        nuro = 1;
-                    }
-                    if (list.length !== 0) {
-                        $("#asa").show();
-                    }
-                    $("#btns").click(
-                            function() {
-                                $("#gg :checkbox").attr('checked', true);
-                                $('#imp').is(':checked');
-                                alerta(checkboxValues.push($("#imp").val()));
-                            });
-                    $("#btns2").click(
-                            function() {
-                                var checkboxValues = new Array();
-//recorremos todos los checkbox seleccionados con .each
-                                $('input[name="orderBox[]"]:checked').each(function() {
-                                    //$(this).val() es el valor del checkbox correspondiente
-                                    checkboxValues.push($(this).val());
-                                    alert(checkboxValues.push($(this).val()));
-                                });
-                            });
-                }else{
-                    b.append("<tr><TD colspan='12' style='text-align:center;'> NO SE HA ENCONTRADO DATOS DE LA BUSQUEDA</TD></tr>")
+                for (var i = 0; i < list.length; i++) {
+                    nuro = nuro + i;
+                    b.append("<tr>");
+                    b.append("<td>" + nuro + "</td>");
+                    b.append("<td><p>" + list[i].nombre + "</p></td>");
+                    b.append("<td>" + list[i].fe_de + "</td>");
+                    b.append("<td>" + list[i].fe_ha + "</td>");
+                    b.append("<td><p>" + list[i].no_ar + "</p></td>");
+                    b.append("<td><p>" + list[i].no_ae + "</p></td>");
+                    b.append("<td><p>" + list[i].no_pu + "</p></td>");
+                    b.append("<td>" + list[i].ca_su + '</td>');
+                    b.append("<td>" + list[i].fe_cr + "</td>");
+                    b.append('<td><a class="btn-warming" href="../../contrato?opc=Detalle_Contractual&idtr=' + list[i].id_tr + '">Ver detalle</a> </td>');
+                    //b.append('<td id="sel' + i + '"></td>');
+                    b.append('<td><input type="checkbox" id="imp" name="Imprimir" value="' + list[i].id_pl + '"></td>');
+                    b.append("</tr>");
+                    nuro = 1;
                 }
-                
+                if (list.length !== 0) {
+                    $("#asa").show();
+                }
+                $("#btns").click(
+                        function() {
+                            $("#gg :checkbox").attr('checked', true);
+                            $('#imp').is(':checked');
+                            alerta(checkboxValues.push($("#imp").val()));
+                        });
+                $("#btns2").click(
+                        function() {
+                            var checkboxValues = new Array();
+//recorremos todos los checkbox seleccionados con .each
+                            $('input[name="orderBox[]"]:checked').each(function() {
+                                //$(this).val() es el valor del checkbox correspondiente
+                                checkboxValues.push($(this).val());
+                                alert(checkboxValues.push($(this).val()));
+                            });
+                        });
             }
             );
         }
         $(document).ready(function() {
-
+            
             /* $.ajax({
              data:$("#frm_filtro2").serialize(),
              type:"POST",
@@ -307,7 +313,7 @@
                         var fe_i = $("#fe_i").val();
                         var fe_f = $("#fe_fin").val();
                         var sueldo = $("#sueldo").val();
-                        //alert(del + al + nombre + dir + dep + area + sec + pu + fe_i + fe_f + sueldo)
+                        alert(del + al + nombre + dir + dep + area + sec + pu + fe_i + fe_f + sueldo)
                         buscar(del, al, nombre, dir, dep, area, sec, pu, fe_i, fe_f, sueldo);
                     }
             );

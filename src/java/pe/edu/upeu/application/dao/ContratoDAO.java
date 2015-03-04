@@ -675,22 +675,29 @@ public class ContratoDAO implements InterfaceContratoDAO {
     }
 
     @Override
-    public List<Map<String, ?>> Listar_Contratos(String de, String al, String direccion, String dep, String area, String sec, String puesto, String sueldo_total,String nombre,String fe_i,String fe_fin) {
+    public List<Map<String, ?>> Listar_Contratos(String de, String al, String direccion, String dep, String area, String sec, String puesto, Double sueldo_total,String nombre,String fe_i,String fe_fin) {
       List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "select  *  from RHVD_FILTRO_CONTRATO_TERMINADO WHERE FE_CREACION IS NOT NULL";
+            if(de!=null & al!=null){sql+=" AND FE_CREACION BETWEEN '"+c.convertFecha(de.trim())+"' and '"+c.convertFecha(al.trim())+"'";}else{}
+            if(nombre!=null){sql+=" AND upper(NO_AP) '"+nombre.toUpperCase()+"'";}else{}
+            if(direccion!=null){sql+=" AND ID_DIRECCION '"+direccion.trim()+"'";}else{}
+            if(dep!=null ){sql+=" and ID_DEPARTAMENTO= '"+dep.trim()+"'";}else{}
+            if(area!=null ){sql+=" and ID_AREA= '"+area.trim()+"'";}else{}
+            if(sec!=null ){sql+=" and ID_SECCION= '"+sec.trim()+"'";}else{}
+            if(puesto!=null ){sql+=" and ID_PUESTO= '"+puesto.trim()+"'";}else{}
+            if(fe_i!=null ){sql+=" and FE_DESDE= '"+c.convertFecha(fe_i.trim())+"'";}else{}
+            if(fe_fin!=null ){sql+=" and FE_HASTA= '"+c.convertFecha(fe_fin.trim())+"'";}else{}
            // if(sueldo_total!=null ){sql+=" and CA_SUELDO_TOTAL="+sueldo_total;}else{}
            sql += (!"".equals(nombre)) ? " AND  upper(NOM_APE)  like '%" + nombre.toUpperCase() + "%'" : "";
-           sql += (!de.equals("") & !al.equals("")) ? " AND FE_CREACION BETWEEN '"+c.convertFecha(de.trim())+"' and '"+c.convertFecha(al.trim())+"'" : "";
-           sql += (!direccion.equals("")) ? " AND ID_DIRECCION = '"+direccion.trim()+"'" : "";
-           sql += (!dep.equals("")) ? " and ID_DEPARTAMENTO= '"+dep.trim()+"'" : "";
-           sql += (!area.equals("")) ?" and ID_AREA= '"+area.trim()+"'" : "";
-           sql += (!sec.equals("")) ? " and ID_SECCION= '"+sec.trim()+"'" : "";
-           sql += (!sueldo_total.equals("")) ? " and CA_SUELDO_TOTAL= '"+sueldo_total.trim()+"'" : "";
-           sql += (!puesto.equals("")) ? " and ID_PUESTO= '"+puesto.trim()+"'" : "";
-           sql += (!fe_i.equals("")) ? " and FE_DESDE= '"+c.convertFecha(fe_i.trim())+"'" : "";
-           sql += (!fe_fin.equals("")) ? " and FE_HASTA= '"+c.convertFecha(fe_fin.trim())+"'" : "";
+           sql += (!"".equals(de)) ? " AND  upper(NOM_APE)  like '%" + nombre.toUpperCase() + "%'" : "";
+           sql += (!"".equals(nombre)) ? " AND  upper(NOM_APE)  like '%" + nombre.toUpperCase() + "%'" : "";
+           sql += (!"".equals(nombre)) ? " AND  upper(NOM_APE)  like '%" + nombre.toUpperCase() + "%'" : "";
+           sql += (!"".equals(nombre)) ? " AND  upper(NOM_APE)  like '%" + nombre.toUpperCase() + "%'" : "";
+           sql += (!"".equals(nombre)) ? " AND  upper(NOM_APE)  like '%" + nombre.toUpperCase() + "%'" : "";
+           sql += (!"".equals(nombre)) ? " AND  upper(NOM_APE)  like '%" + nombre.toUpperCase() + "%'" : "";
+           sql += (!"".equals(nombre)) ? " AND  upper(NOM_APE)  like '%" + nombre.toUpperCase() + "%'" : "";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -703,7 +710,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 rec.put("no_de", rs.getString("NO_DEP"));
                 rec.put("ca_su", rs.getString("CA_SUELDO_TOTAL"));
                 rec.put("id_pl", rs.getString("ID_PLANTILLA_CONTRACTUAL"));
-                rec.put("fe_cr", rs.getString("FE_CREACION"));
+                rec.put("de_cr", rs.getString("FE_CREACION"));
                 rec.put("id_tr", rs.getString("ID_TRABAJADOR"));
                 rec.put("fe_de", rs.getString("FE_DESDE"));
                 rec.put("fe_ha", rs.getString("FE_HASTA"));
