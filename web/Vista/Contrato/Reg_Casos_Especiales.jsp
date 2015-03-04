@@ -346,18 +346,20 @@
                                                                 <input  readonly="" name="TOTAL_PORCENTAJE" max="100" min="100" maxlength="3" type="text" class="total_porcentaje"  />
                                                             </label>
                                                         </section>
-                                                        <section class="col col-1">
-                                                            <label class="btn">
-                                                                <button type="button" class="btn btn-default btn-agregar-cc" id="btn-agregar-cc" >Agregar</button>
-                                                            </label>
-                                                           
-                                                            <a href="javascript:void(0);" class="btn btn-default txt-color-green" style="padding: 5%;"><i class="fa fa-plus fa-lg"></i></a>
-                                                          
-                                                        </section>
                                                         
+                                                        <section class="col col-1">
+                                                            <br>
+                                                            <br>
+                                                            <label class="more">
+                                                                <a href="javascript:void(0);"  type="button" class="btn btn-default txt-color-green btn-agregar-cc" id="btn-agregar-cc" ><i class="fa fa-plus fa-lg"></i></a>
+                                                            </label>
+                                                        </section>
+
+
                                                         <input name="CANT" value="1" type="hidden" class="cant"/>
                                                     </div>
-
+                                                           
+                                                            
                                                     <script>
 
                                                         $(document).ready(
@@ -1326,7 +1328,8 @@
                 texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
                 texto += '<section class="col col-3"><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
                 texto += '<section class="col col-3"><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ag + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
-                texto += '<section class="col col-2"><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '"  min="0"   type="text" required="" value="' + arr_cc[3] + '" class="porcentaje_cc"/><button type="button" class="remover' + ag + '">Remover</button></label></section>';
+                texto += '<section class="col col-2"><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '"  min="0"   type="text" required="" value="' + arr_cc[3] + '" class="porcentaje_cc"/></label></section>';
+                texto += '<section class="col col-1"> <br> <label class=""><a href="javascript:void(0);"  type="button" class="btn btn-default txt-color-red remover' + ag + '"  ><i class="fa  fa-minus fa-lg"></i></a> </label> </section>';
                 texto += '</div>';
                 agregar.append(texto);
                 listar_cc(ag, opc, arr_cc);
@@ -1337,8 +1340,9 @@
                 texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
                 texto += '<section class="col col-3"><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
                 texto += '<section class="col col-3"><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ag + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
-                texto += '<section class="col col-2"><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '"  min="0"   type="text" required="" class="porcentaje_cc"/><button type="button" class="remover' + ag + '">Remover</button></label></section>';
-                texto += '</div>';
+                texto += '<section class="col col-2"><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '"  min="0"   type="text" required="" class="porcentaje_cc"/></label></section>';
+            texto += '<section class="col col-1"> <br> <label class=""><a href="javascript:void(0);"  type="button" class="btn btn-default txt-color-red remover' + ag + '"  ><i class="fa  fa-minus fa-lg"></i></a> </label> </section>';    
+            texto += '</div>';
                 agregar.append(texto);
                 listar_cc(ag);
                 var c_porcentaje = $(".porcentaje_cc").size();
