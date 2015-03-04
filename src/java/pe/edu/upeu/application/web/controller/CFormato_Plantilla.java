@@ -101,30 +101,10 @@ public class CFormato_Plantilla extends HttpServlet {
              /*   if (System.getProperty("sun.desktop").trim().equals("windows")) {
                     ubicacion = direccion_raiz + "\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
                 } else {*/
-                ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"web\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
-              //ubicacion ="/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Contrato/Formato_Plantilla/Formato/";
+               // ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"web\\Vista\\Contrato\\Formato_Plantilla\\Formato";
+              ubicacion ="/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Contrato/Formato_Plantilla/Formato/";
               //  }
                 FileReader lector = new FileReader(ubicacion + no_archivo);
-                BufferedReader contenido = new BufferedReader(lector);
-                while ((texto = contenido.readLine()) != null) {
-                    imprimir = imprimir + texto;
-                }
-                rpta.put("rpta", "1");
-                rpta.put("imprimir", imprimir);
-            }
-            if (opc.equals("Listar2")) {
-                String texto = "";
-                String ubicacion = "";
-                String imprimir = "";
-                String no_archivo = request.getParameter("id");
-                String no_arhivo_or=pl.List_pl_con_x_id(no_archivo);
-             /*   if (System.getProperty("sun.desktop").trim().equals("windows")) {
-                    ubicacion = direccion_raiz + "\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
-                } else {*/
-                ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"web\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
-              //ubicacion ="/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Contrato/Formato_Plantilla/Formato/";
-              //  }
-                FileReader lector = new FileReader(ubicacion + no_arhivo_or);
                 BufferedReader contenido = new BufferedReader(lector);
                 while ((texto = contenido.readLine()) != null) {
                     imprimir = imprimir + texto;

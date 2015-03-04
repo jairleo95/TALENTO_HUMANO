@@ -327,7 +327,7 @@
                                                     <div class="row">
                                                         <section class="col col-6" >
                                                             <label class="input" id="titu">Fecha de Inicio :
-                                                                <input type="date" name="FEC_DESDE" id="datepicker" required="" class="val_fe">
+                                                                <input type="date" name="FEC_DESDE" id="datepicker" required="" >
                                                             </label>
                                                         </section>
                                                         <section class="col col-6">
@@ -417,7 +417,7 @@
                                                         <section class="col col-4" id="no_cuen">
 
                                                             <label class="input" id="titu">Nro Cuenta :
-                                                                <input type="text" name="CUENTA"  id="nu_cuen" maxlength="30" />
+                                                                <input type="text" name="CUENTA"  id="nu_cuen" maxlength="30"   />
                                                             </label>
 
                                                         </section>
@@ -432,7 +432,7 @@
                                                         <section class="col col-6" id="generar">
                                                             <p style="font-weight:bold;">Autorizo a la UPeU gestionar mi cuenta de sueldo en el BBVA Banco Continental, para tal efecto adjunto copia legible y vigente de mi DNI   </p>
                                                             <label class="checkbox" >
-                                                                <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="1" >
+                                                                <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="1">
                                                                 <i></i>Generar Nro de Cuenta Bancaria</label>
                                                         </section>
 
@@ -484,13 +484,13 @@
                                                             </label>
                                                         </section>
                                                         <%}
-                                                            if (cs.getNo_banco().trim().equals("0")) {%>
+                                                        if(cs.getNo_banco().trim().equals("0")){%>
                                                         <section class="col col-5" >
 
                                                             <p >Autorizo a la UPeU gestionar mi cuenta de sueldo en el BBVA Banco Continental, para tal efecto adjunto copia legible y vigente de mi DNI   </p>
                                                             <label class="checkbox" >
                                                                 <%if (cs.getEs_gem_nu_cuenta().equals("1")) {%>
-                                                                <input type="checkbox" name="GEN_NU_CUEN"  id="subscription"  value="1">
+                                                                <input type="checkbox" name="GEN_NU_CUEN" checked="" id="subscription"  value="1">
                                                                 <%} else {%>
                                                                 <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="1">
                                                                 <%}%>
@@ -1245,16 +1245,15 @@
                 $("#nu_cuen").attr("required", "required");
                 $("#no_cuen_ban").hide();
                 $("#nu_cuen_ban").val("");
-                $("#subscription").attr("checked",true);
+                $("#subscription").attr('checked', false);
                 $("#nu_cuen").attr("maxlength", "21");
                 $("#nu_cuen").mask("0011-9999999999999999", {placeholder: "X"});
                 $("#no_cuen_otros").hide();
                 $("#nu_cuen_otros").val("");
-                $("#nu_cuen_otros").removeAttr('readonly');
             }
             if (banco == '2') {
                 $("#generar").hide();
-                $("#subscription").removeAttr('checked');
+                $("#subscription").attr('checked', false);
                 $("#no_cuen_ban").hide();
                 $("#nu_cuen_ban").val("");
                 $("#no_cuen").show();
@@ -1264,13 +1263,11 @@
                 $("#nu_cuen").mask("99999999999999", {placeholder: "X"});
                 $("#no_cuen_otros").hide();
                 $("#nu_cuen_otros").val("");
-                $("#nu_cuen_otros").removeAttr('readonly');
             }
             if (banco == '3') {
                 $("#no_cuen").show();
                 $("#no_cuen").val("");
                 $("#nu_cuen").attr("required", "required");
-                $("#nu_cuen").val("");
                 $("#no_cuen_ban").show();
                 $("#no_cuen_ban").val("");
                 $("#nu_cuen_ban").attr("required", "required");
@@ -1278,8 +1275,7 @@
                 $("#nu_cuen_otros").val("");
                 $("#nu_cuen_otros").attr("required", "required");
                 $("#generar").hide();
-                $("#subscription").removeAttr('checked');
-                $("#nu_cuen_otros").removeAttr('readonly');
+                $("#subscription").attr('checked', false);
             }
             if (banco == '0') {
                 $("#no_cuen").hide();
@@ -1288,8 +1284,7 @@
                 $("#nu_cuen_ban").val("");
                 $("#no_cuen_otros").show();
                 $("#nu_cuen_otros").val("BBVA Banco Continental");
-                //document.getElementById("nu_cuen_otros").readOnly = true;
-                $("#nu_cuen_otros").attr('readonly','readonly');
+                document.getElementById("nu_cuen_otros").readOnly = true;
                 $("#generar").show();
                 $("#subscription").attr("required", "required");
                 $("#nu_cuen_otros").attr("required", "required");

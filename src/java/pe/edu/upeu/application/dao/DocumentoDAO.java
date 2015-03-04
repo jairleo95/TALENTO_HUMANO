@@ -10,11 +10,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
 import pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
+import pe.edu.upeu.application.model.Cuenta_Sueldo;
 import pe.edu.upeu.application.model.Datos_Hijo_Trabajador;
 import pe.edu.upeu.application.model.Documentos;
 import pe.edu.upeu.application.model.Lis_Doc_tra;
@@ -69,10 +72,10 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
             while (rs.next()) {
                 String tipo = rs.getString("NO_FILE").substring(rs.getString("NO_FILE").length() - 3, rs.getString("NO_FILE").length());
                 if (tipo.equals("PDF") || tipo.equals("OCX")) {
-                    if (tipo.equals("OCX") || tipo.equals("DOC")) {
+                    if( tipo.equals("OCX")||tipo.equals("DOC")){
                         texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href=\"Archivo/" + rs.getString("NO_FILE") + "'><img src='Archivo/word.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
-                    } else {
-                        texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href=\"Archivo/" + rs.getString("NO_FILE") + "\"><img src='Archivo/pdf.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
+                    }else{
+                    texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href=\"Archivo/" + rs.getString("NO_FILE") + "\"><img src='Archivo/pdf.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
                     }
                 } else {
                     texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href=\"Archivo/" + rs.getString("NO_FILE") + "\"><img src=\"Archivo/" + rs.getString("NO_FILE") + "\" style='width:100px;height:100px' class='borde' /></a>";
@@ -135,11 +138,11 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
 
             while (rs.next()) {
                 String tipo = rs.getString("NO_FILE").substring(rs.getString("NO_FILE").length() - 3, rs.getString("NO_FILE").length());
-                if (tipo.trim().equals("PDF") || tipo.equals("OCX") || tipo.equals("DOC")) {
-                    if (tipo.equals("OCX") || tipo.equals("DOC")) {
+                if (tipo.trim().equals("PDF") || tipo.equals("OCX")||tipo.equals("DOC")) {
+                    if( tipo.equals("OCX")||tipo.equals("DOC")){
                         texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href='../../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "'><img src='../../Dgp/Documento/Archivo/word.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
-                    } else {
-                        texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href='../../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "'><img src='../../Dgp/Documento/Archivo/pdf.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
+                    }else{
+                    texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href='../../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "'><img src='../../Dgp/Documento/Archivo/pdf.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
                     }
                 } else {
 
@@ -283,7 +286,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     @Override
     public List<V_Reg_Dgp_Tra> List_doc_req_pla(String iddgp, String idtra) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT * FROM RHVD_REQ_DGP_TRA  where IDDGP='" + iddgp + "' AND ID_TRABAJADOR='" + idtra + "' ORDER BY NU_ORDEN_DOC ";
+        String sql = "SELECT * FROM RHVD_REQ_DGP_TRA  where IDDGP='" + iddgp + "' AND ID_TRABAJADOR='" + idtra + "'";
         List<V_Reg_Dgp_Tra> x = new ArrayList<V_Reg_Dgp_Tra>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -387,6 +390,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
             cst.setString(9, DE_DOCUMENTO_ADJUNTO);
             cst.setString(10, NO_USUARIO);
             cst.setString(11, ES_REC_FISICO);
+
             cst.registerOutParameter(12, Types.CHAR);
             cst.execute();
             id = cst.getString(12);
@@ -403,8 +407,6 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
         }
         return id;
     }
-
- 
 
     @Override
     public void INSERT_ARCHIVO_DOCUMENTO(String ID_ARCHIVO_DOCUMENTO, String ID_DOCUMENTO_ADJUNTO, String NO_FILE, String NO_ORIGINAL, String ES_FILE) {
@@ -429,8 +431,6 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
             }
         }
     }
-    
-    
 
     @Override
     public List<V_Reg_Dgp_Tra> List_Doc_CE() {
@@ -611,7 +611,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     @Override
     public List<Lis_Doc_tra> Lis_doc_trabajador(String idtr) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT * FROM RHVD_LIST_DOC_TRA  where ID_TRABAJADOR='" + idtr.trim() + "' ORDER BY NU_ORDEN";
+        String sql = "SELECT * FROM RHVD_LIST_DOC_TRA  where ID_TRABAJADOR='" + idtr.trim() + "'";
         List<Lis_Doc_tra> x = new ArrayList<Lis_Doc_tra>();
         try {
             ResultSet rs = this.conn.query(sql);

@@ -49,8 +49,8 @@ public class CImpresion_Masiva extends HttpServlet {
         InterfaceContratoDAO c=new ContratoDAO();
         try{
             if(opc.equals("filtrar")){
-                String del=request.getParameter("desde").trim();
-               
+                String del=request.getParameter("del").trim();
+                //del =co.convertFecha3(del.trim());
                 String al=request.getParameter("al").trim();
                 String nom_ape=request.getParameter("nom_ape");
                 String direccion=request.getParameter("direccion");
@@ -60,9 +60,8 @@ public class CImpresion_Masiva extends HttpServlet {
                 String puesto=request.getParameter("puesto");
                 String fec_i=request.getParameter("fec_i");
                 String fec_f=request.getParameter("fec_f");
-                String sueldo=request.getParameter("sueldo");
+                Double sueldo=Double.parseDouble(request.getParameter("sueldo"));
                 List<Map<String, ?>> list = c.Listar_Contratos(del, al, direccion, departamento, area, seccion, puesto, sueldo, nom_ape, fec_i, fec_f);
-                String List=del+","+al+","+direccion+","+nom_ape+","+departamento+","+area+","+seccion+","+puesto+","+fec_i+","+fec_f+","+sueldo;
                 rpta.put("rpta", "1");
                 rpta.put("lista", list);
             }

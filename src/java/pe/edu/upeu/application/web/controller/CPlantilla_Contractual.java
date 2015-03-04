@@ -8,7 +8,6 @@ package pe.edu.upeu.application.web.controller;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,23 +88,6 @@ public class CPlantilla_Contractual extends HttpServlet {
                 out.print(id_puesto);
                 response.sendRedirect("Vista/Contrato/Formato_Plantilla/reg_formato.jsp?&no_arc=" + no_arch);
             }
-            /*if (opc.equals("Imprimir masiva")) {
-               // String id_puesto = request.getParameter("puesto");
-                String[] id_con = request.getParameterValues("Imprimir");
-                List<String> contratos=new ArrayList<String>();
-                for(int i=0;i<id_con.length;i++){
-                    contratos.add(id_con[i]);
-                }
-               // String no_arch = pl.List_pl_con_x_id(id_planti_con);
-                 //String id_puesto=pu.puesto(id_con);
-               // out.print(no_arch);
-                getServletContext().setAttribute("List_x_fun_x_idpu", fu.List_x_fun_x_idpu(id_puesto));
-                getServletContext().setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_con));
-                //out.print(getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"Vista\\Contrato\\Formato_Plantilla\\Formato");
-                //out.print(id_puesto);
-                //response.sendRedirect("Vista/Contrato/Formato_Plantilla/reg_formato.jsp?&no_arc=" + no_arch);
-            }*/
-            
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());

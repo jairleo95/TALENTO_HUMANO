@@ -6,11 +6,13 @@
 package pe.edu.upeu.application.dao;
 
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO;
+import pe.edu.upeu.application.factory.Conexion;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Autorizacion;
@@ -216,63 +218,6 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
             while (rs.next()) {
                 V_Autorizar_Dgp v = new V_Autorizar_Dgp();
 
-                v.setId_trabajador(rs.getString("id_trabajador"));
-                v.setNo_trabajador(rs.getString("no_trabajador"));
-                v.setAp_paterno(rs.getString("ap_paterno"));
-                v.setAp_materno(rs.getString("ap_materno"));
-                v.setNo_puesto(rs.getString("no_puesto"));
-                v.setNu_pasos(rs.getString("nu_pasos"));
-                v.setId_dgp(rs.getString("id_dgp"));
-                v.setCo_pasos(rs.getString("co_pasos"));
-                v.setId_detalle_req_proceso(rs.getString("id_detalle_req_proceso"));
-                v.setDe_pasos(rs.getString("de_pasos"));
-                v.setId_departamento(rs.getString("id_departamento"));
-                v.setId_puesto(rs.getString("id_puesto"));
-                v.setId_requerimiento(rs.getString("id_requerimiento"));
-                v.setId_tipo_planilla(rs.getString("id_tipo_planilla"));
-                v.setNo_req(rs.getString("no_req"));
-                v.setId_pasos(rs.getString("id_pasos"));
-                v.setNo_usuario(rs.getString("no_usuario"));
-                v.setId_usuario(rs.getString("id_usuario"));
-                v.setNo_seccion(rs.getString("no_seccion"));
-                v.setNo_area(rs.getString("no_area"));
-                v.setAr_foto(rs.getString("ar_foto"));
-                v.setDe_foto(rs.getString("de_foto"));
-                v.setId_foto(rs.getString("id_foto"));
-                v.setNo_ar_foto(rs.getString("no_ar_foto"));
-                v.setTa_ar_foto(rs.getString("ta_ar_foto"));
-                v.setTi_ar_foto(rs.getString("ti_ar_foto"));
-                v.setFe_creacion(rs.getString("fe_creacion"));
-                v.setVal_plazo(rs.getInt("val_plazo"));
-                v.setVer_list_plazo(rs.getString("ver_list_plazo"));
-                v.setElab_contrato(rs.getString("elab_contrato"));
-                v.setVal_firm_contrato(rs.getString("val_firm_contrato"));
-                v.setNo_dep(rs.getString("no_dep"));
-                v.setMes_creacion(rs.getString("mes_creacion"));
-                v.setVal_cod_aps_empleado(rs.getInt("VAL_COD_APS_EMPLEADO"));
-                v.setVal_cod_huella(rs.getInt("VAL_COD_HUELLA_EMP"));
-                v.setCo_aps(rs.getInt("CO_APS"));
-                v.setCo_huella_digital(rs.getInt("CO_HUELLA_DIGITAL"));
-                list.add(v);
-            }
-        } catch (SQLException e) {
-        } finally {
-            this.conn.close();
-        }
-        return list;
-    }
-
-    @Override
-    public List<V_Autorizar_Dgp> List_Autorizacion_Academico(String id, String id_user) {
-        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select *  from RHVD_AUTORIZAR_CARGA_ACADEMICA where id_puesto='" + id + "'";
-        sql += (!"".equals(id_user)) ? " and id_usuario='" + id_user + "'" : "";
-
-        List<V_Autorizar_Dgp> list = new ArrayList<V_Autorizar_Dgp>();
-        try {
-            ResultSet rs = this.conn.query(sql);
-            while (rs.next()) {
-                V_Autorizar_Dgp v = new V_Autorizar_Dgp();
                 v.setId_trabajador(rs.getString("id_trabajador"));
                 v.setNo_trabajador(rs.getString("no_trabajador"));
                 v.setAp_paterno(rs.getString("ap_paterno"));

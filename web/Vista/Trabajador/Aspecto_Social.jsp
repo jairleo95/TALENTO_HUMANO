@@ -21,7 +21,7 @@
         <link type="text/css" rel="stylesheet" href="../../css/Css_Detalle/CSS_DETALLE.css">  
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
+         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <script src=" ../../../../js1/jquery-1.11.1.min.js" type="text/javascript"></script>
 
         <title>Aspecto Social</title>
@@ -49,7 +49,7 @@
                 </tr> 
                 <tr><td class="text-info">Dirección :</td><td>
                         <% InterfaceListaDAO l = new ListaDAO();
-                            if (trb.getLi_di_dom_a_d1() != null) {
+                            if (trb.getLi_di_dom_a_d1() != null ) {
                                 for (int i = 0; i < l.List_Dom_D1_Id().size(); i++) {
                                     Via v = new Via();
                                     v = (Via) l.List_Dom_D1_Id().get(i);
@@ -81,10 +81,10 @@
                                 out.print(" -- ");
                             }
 
-                            if (trb.getLi_di_dom_a_d5() != null) {
-                                for (int p = 0; p < l.List_Dom_D5_Id().size(); p++) {
+                            if (trb.getLi_di_dom_a_d5()!= null ) {
+                                for (int c = 0; c < l.List_Dom_D5_Id().size(); c++) {
                                     Zona z = new Zona();
-                                    z = (Zona) l.List_Dom_D5_Id().get(p);
+                                    z = (Zona) l.List_Dom_D5_Id().get(c);
                                     if (trb.getLi_di_dom_a_d5().trim().equals(z.getId_zona().trim())) {
                                         out.println(z.getDe_zona());
                                     }
@@ -103,7 +103,7 @@
                 <tr><td class="text-info">Referencia:</td><td><%if (trb.getDi_dom_a_ref() != null) {
                         out.print(trb.getDi_dom_a_ref());
                     } else {
-                        out.print("NO REGISTRADO");
+                        out.print("no registrado");
                     }%></td></tr>
                 <tr><td class="text-info">Dpto / Prov / Dtto:</td>
                     <%
@@ -113,9 +113,14 @@
                             if (trb.getDi_dom_a_distrito().trim().equals(vu.getNo_distrito())) {%>
                     <td><%=vu.getNo_departamento() + " / " + vu.getNo_provincia() + " / " + vu.getNo_distrito()%></td> 
                     <%}
-                        }%>
+                        }
+                    %>
+
                 </tr>
+
+
                 <tr><td colspan="2"><div class="title">Direccion Segun Dni</div></td></tr>
+
                 <tr><td class="text-info">Dirección :</td><td>
                         <%
                             if (trb.getLi_di_dom_leg_d1() != null) {
@@ -169,7 +174,7 @@
 
                         %></td></tr>
                 <tr><td class="text-info">Dpto / Prov / Dtto</td>
-                    <% for (int h = 0; h < List_Ubigeo.size(); h++) {
+                    <%                        for (int h = 0; h < List_Ubigeo.size(); h++) {
                             V_Ubigeo vu = new V_Ubigeo();
                             vu = (V_Ubigeo) List_Ubigeo.get(h);
                             if (trb.getDi_dom_leg_distrito().trim().equals(vu.getNo_distrito())) {%>
@@ -192,7 +197,7 @@
                         out.print(trb.getCa_ing_qta_cat_ruc());
                     }%></td></tr>
                 <tr><td class="text-info">Otras Empresas:</td><td><%if (trb.getCa_ing_qta_cat_otras_empresas() == null) {
-                        out.print("NO REGISTRADO");
+                        out.print("no registrado");
                     } else {
                         out.print(trb.getCa_ing_qta_cat_otras_empresas());
                     }%></td></tr>
@@ -205,7 +210,7 @@
                         <input type="hidden" name="idtr" value="<%=IDTR%>">  
                         <input type="hidden" type="submit" name="opc" value="Editar_Asp_Rel">  
                         <input  type="hidden"  value="EDITAR">  
-                        <button class="btn btn-success btn-labeled" href="../../trabajador?opc=Editar_Asp_Soc&idtr=<%=IDTR%>"> <span class="btn-label"><i class="glyphicon glyphicon-refresh"></i></span> Editar </button>
+                         <button class="btn btn-success btn-labeled" href="../../trabajador?opc=Editar_Asp_Soc&idtr=<%=IDTR%>"> <span class="btn-label"><i class="glyphicon glyphicon-refresh"></i></span> Editar </button>
                     </td>
                 </tr>
                 <tr><td class="text-info">Religión:</td><td><%
@@ -220,15 +225,15 @@
                             out.println("Otros");
                         }
                     } else {
-                        out.print("NO REGISTRADO");
+                        out.print("no registrado");
                     }%></td></tr>
                 <tr><td class="text-info">Iglesia:</td><td><%if (trb.getNo_iglesia() != null) {
                         out.print(trb.getNo_iglesia());
                     } else {
-                        out.print("NO REGISTRADO");
+                        out.print("no registrado");
                     }%></td></tr>
                 <tr><td class="text-info">Cargo en la Iglesia:</td><td><%if (trb.getDe_cargo() == null) {
-                        out.print("NO REGISTRADO");
+                        out.print("no registrado");
                     } else {
                         out.print(trb.getDe_cargo());
                     }%></td></tr>
@@ -244,17 +249,17 @@
                             out.println("Sacerdote");
                         }
                     } else {
-                        out.print("NO REGISTRADO");
+                        out.print("no registrado");
                     }
 
                         %></td></tr>
                 <tr><td class="text-info">Nombres y Apellidos:</td><td><%if (trb.getNo_ap_autoridad() == null) {
-                        out.print("NO REGISTRADO");
+                        out.print("no registrado");
                     } else {
                         out.print(trb.getNo_ap_autoridad());
                     }%></td></tr>
                 <tr><td class="text-info">Telefono/Celular:</td><td><%if (trb.getCl_autoridad() == null) {
-                        out.print("NO REGISTRADO");
+                        out.print("no registrado");
                     } else {
                         out.print(trb.getCl_autoridad());
                     }%></td></tr>

@@ -38,7 +38,7 @@
                         <%
                             InterfaceListaDAO list = new ListaDAO();
                             InterfaceTipo_DocumentoDAO itd = new Tipo_DocumentoDAO();
-                            
+
                             for (int k = 0; k < itd.Listar_tipo_doc().size(); k++) {
                                 Tipo_Documento td = new Tipo_Documento();
                                 td = (Tipo_Documento) itd.Listar_tipo_doc().get(k);
@@ -47,28 +47,20 @@
                                         out.print(td.getDe_tdoc_abreviada());
                                     }
                                 } else {
-                                    out.print("NO REGISTRADO");
+                                    out.print("no registrado");
                                 }
                             }
                         %>
 
                     </td></tr>
-                <tr><td  class="text-info">Numero Documento:</td><td><%
-                    if (trb.getNu_doc() != null) {
-                        out.print(trb.getNu_doc());
-                    } else {
-                        out.print("NO REGISTRADO");
-                    }%></td></tr>
+                <tr><td  class="text-info">Numero Documento:</td><td><%=trb.getNu_doc()%></td></tr>
                 <tr><td  class="text-info">Estado Civil:</td><td><%
                     for (int r = 0; r < list.List_Estado_Civil().size(); r++) {
-                        if (trb.getEs_civil() != null) {
-                            if (trb.getEs_civil().equals(r + 1 + "")) {
-                                out.println(list.List_Estado_Civil().get(r));
-                            }
-                        } else {
-                            out.print("NO DEFINIDO");
+                        if (trb.getEs_civil().equals(r + 1 + "")) {
+                            out.println(list.List_Estado_Civil().get(r));
                         }
                     }
+
                         %></td></tr>
 
                 <tr>
@@ -79,10 +71,10 @@
                                     if (trb.getLi_grupo_sanguineo().trim().equals(n + 1 + "")) {
                                         out.println(list.List_Gs().get(n));
                                     }
-                                    
+
                                 }
                             } else {
-                                out.print("NO DEFINIDO");
+                                out.print("no registrado");
                             }
                         %>
                     </td>
@@ -96,33 +88,23 @@
                             out.println("Negativo");
                         }
                     } else {
-                        out.print("NO DEFINIDO");
+                        out.print("no registrado");
                     }
                         %></td></tr>
 
                 <tr><td  class="text-info">Telefono:</td>
                     <%if (trb.getTe_trabajador() == null) {%>
-                    <td>NO REGISTRADO</td>
+                    <td>no registrado</td>
                     <% } else {%>
                     <td><%=trb.getTe_trabajador()%></td>
                     <%}%>
                 </tr>
-                <tr><td  class="text-info">Celular:</td><td><%
-                    if (trb.getCl_tra() != null) {
-                        out.print(trb.getCl_tra());
-                    } else {
-                        out.print("NO REGISTRADO");
-                    }%></td></tr>
-                <tr><td  class="text-info">Correo Personal:</td><td><%
-                    if (trb.getDi_correo_personal() != null) {
-                        out.print(trb.getDi_correo_personal());
-                    } else {
-                        out.print("NO REGISTRADO");
-                    }%></td></tr>
+                <tr><td  class="text-info">Celular:</td><td><%=trb.getCl_tra()%></td></tr>
+                <tr><td  class="text-info">Correo Personal:</td><td><%=trb.getDi_correo_personal()%></td></tr>
                 <tr>
                     <td  class="text-info">Correo Institucional:</td>
                     <%if (trb.getDi_correo_inst() == null) {%>
-                    <td>NO REGISTRADO</td>
+                    <td>no registrado</td>
                     <%} else {%>
                     <td><%=trb.getDi_correo_inst()%></td>
                     <%}%>
@@ -136,7 +118,7 @@
                             }
                         }
                     } else {
-                        out.print("NO REGISTRADO");
+                        out.print("no registrado");
                     }%></td></tr>
                 <tr><td  class="text-info">Nombre AFP:</td><td><%
                     if (trb.getCo_sistema_pensionario() != null) {
@@ -146,9 +128,9 @@
                             }
                         }
                     } else {
-                        out.print("NO REGISTRADO");
+                        out.print("no registrado");
                     }
-                    
+
                         %></td></tr>
                 <tr><td  class="text-info">Afiliado a EsSalud-vida:</td>
                     <td><%if (trb.getEs_afiliado_essalud() != null) {
@@ -157,10 +139,10 @@
                             }
                             if (trb.getEs_afiliado_essalud().equals("0")) {
                                 out.println("No");
-                                
+
                             }
                         } else {
-                            out.print("NO REGISTRADO");
+                            out.print("no registrado");
                         }
                         %></td>
                 </tr>
@@ -172,7 +154,7 @@
                         out.println("Alumno");
                     }
                     if (trb.getLi_tipo_trabajador() == null) {
-                        out.print("NO REGISTRADO");
+                        out.print("no registrado");
                     }
                         %></td></tr>
 

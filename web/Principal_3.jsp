@@ -352,7 +352,7 @@
                     <li class="li-privilegio">
                         <a href="#"><i class="fa fa-lg fa-fw fa-windows"></i> <span class="menu-item-parent">Generar Requerimiento</span></a>
                         <ul>
-                            <%if (!id_rol.trim().equals("ROL-0011")|id_rol.trim().equals("ROL-0001")) {
+                            <%if (!id_rol.trim().equals("ROL-0011")) {
                             %>
                             <li>
                                 <a href="Vista/Dgp/Requerimiento.jsp?opc=Planilla" target="myframe"><i class="fa fa-lg fa-fw fa-file"></i> En Planilla</a>
@@ -374,7 +374,7 @@
 
                                 </ul>
                             </li>
-                            <%} if(id_rol.trim().equals("ROL-0011")|id_rol.trim().equals("ROL-0001")){%>
+                            <%}else{%>
                             <li>
                                 <a href="Vista/Academico/Carga_Academica/Rep_Carga_Academica.jsp" target="myframe"><i class="fa fa-lg fa-fw fa-file"></i>Carga Academica <span class="badge pull-right inbox-badge bg-color-blue">¡Nuevo!</span></a>
 

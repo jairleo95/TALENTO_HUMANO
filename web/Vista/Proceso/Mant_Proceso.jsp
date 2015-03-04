@@ -93,181 +93,130 @@
 
                     <!-- row -->
                     <div class="row">
-                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-3" data-widget-editbutton="false">
-                                <header>
-                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                    <h2>Mantenimiento de Pasos</h2>
-                                </header>
-                                <div>
-                                    <div class="widget-body no-padding">
-                                        <form class="smart-form">
-                                            <fieldset>
-                                                <section class="col col-lg-4">
-                                                    <div class="row">
-                                                        <section class="col col-6">
-                                                            <label class="input">
-                                                                <input name="num" required=""  maxlength="3" class="num_paso" maxlength="6" placeholder="Numero de Paso">
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-6">
-                                                            <label class="input">
-                                                                <input type="text" name="cod" class="co_paso" required=""maxlength="6" placeholder="Codigo" />
-                                                            </label>
-                                                        </section>
-                                                    </div>
-                                                    <div class="row">
-                                                        <section class="col col-xs-12">
-                                                            <label>Proceso</label>
-                                                            <label class="select">
-                                                                <select name="proceso" required=""  id="select-proceso">
-                                                                    <option value="">[Seleccione]</option>
-                                                                </select>
-                                                                <i></i></label>
-                                                        </section>
-                                                    </div>
-                                                </section>
-                                                <section class="col col-lg-8">
-                                                    <label class="textarea textarea-resizable">
-                                                        <textarea type="text" name="desc" required="" maxlength="300" rows="5" cols="50" class="desc_paso custom-scroll" placeholder="Descripcion"></textarea>
-                                                    </label>
-                                                </section>
-                                            </fieldset>
-                                            <footer>
-                                                <button class="btn btn-primary"type="submit" id="btn-registrar" name="Enviar" value="Registrar Paso" /> Registrar Paso</button>
-                                                <button class="btn btn-default" type="button" class="btn_cancel_edit">Cancelar</button>
-                                            </footer>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-3" data-widget-editbutton="false">
-                                <header>
-                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                    <h2>Lista de pasos Deshabilitados :<strong><label class="lb-list_pasos"></label></strong> </h2>
-                                </header>
-                                <div>
-                                    <div class="jarviswidget-editbox">
-                                    </div>
-                                    <div class="widget-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <td>Nro</td>
-                                                        <td>Descripción</td>
-                                                        <td>Número</td>
-                                                        <td>Codigo</td>
-                                                        <td>Proceso</td>
-                                                        <td>Editar</td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="tbodys" style=" display: none;">
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-                            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-3" data-widget-editbutton="false">
-                                <header>
-                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                    <h2>Lista de pasos Habilitados :<strong><label class="lb-list_pasos"></label></strong> </h2>
-                                </header>
-                                <div>
-                                    <div class="jarviswidget-editbox">
-                                    </div>
-                                    <div class="widget-body">
-                                        <div class="table-responsive">
-                                            <button type="button" class="btn btn-default Generar" data-action="collapse-all">
-                                                Generar Pasos
-                                            </button>
-                                            <br><style>
-                                                .div{
-                                                    border-style: solid;
-                                                    border-color: #ff0000 #0000ff;
-                                                }
-                                                label{
-                                                    margin-left: 10px;
-                                                }
-                                            </style>
 
-                                            <div class="dd" id="nestable" >
-                                                <ol class="dd-list" style="width: 100%;" >
-                                                </ol>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-                            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-3" data-widget-editbutton="false">
-                                <header>
-                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                    <h2>Lista de puestos :<strong><label class="lb-list_puesto"></label></strong> </h2>
-                                </header>
+                        <!-- NEW WIDGET START -->
+                        <article class="col-sm-12">
+
+                            <!-- Widget ID (each widget will need unique ID)-->
+                            <div class="jarviswidget well" id="wid-id-0">
+                                <!-- widget options:
+                                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                                data-widget-colorbutton="false"
+                                data-widget-editbutton="false"
+                                data-widget-togglebutton="false"
+                                data-widget-deletebutton="false"
+                                data-widget-fullscreenbutton="false"
+                                data-widget-custombutton="false"
+                                data-widget-collapsed="true"
+                                data-widget-sortable="false"
+
+                                -->
+
+                                <!-- widget div-->
                                 <div>
-                                    <div class="jarviswidget-editbox">
+
+                                    <div class="row">
+
+                                        <h1>Mantenimiento de Pasos</h1>
+
+                                        <form  method="post" id="form-paso" class="form_paso" >
+                                            <table class="table table-bordered">
+                                                <tr ><td >Descripción :<td><textarea type="text" name="desc" required="" maxlength="300" rows="5" cols="50" class="desc_paso" ></textarea></td></tr>
+                                                <tr><td>Numero Paso :<td><input name="num" required=""  maxlength="3" class="num_paso" maxlength="6"> </td></tr>
+                                                <tr><td>Código:<td><input type="text" name="cod" class="co_paso" required=""maxlength="6"  /></td></tr>
+                                                <tr><td>Proceso:<td>
+                                                        <select name="proceso" required=""  id="select-proceso">
+                                                            <option value="">[SELECCIONE]</option>
+                                                        </select></td></tr>
+                                                <input type="hidden" name="opc" value="Registrar"  class="opc"/>
+                                                <input type="hidden" name="id" value=""  class="id_p"/>
+                                                <tr><td><input type="submit" id="btn-registrar" name="Enviar" value="Registrar Paso" /></td></tr>
+                                                <tr><td><button type="button" class="btn_cancel_edit" style="display:none">Cancelar</button></td></tr>
+                                            </table>
+                                        </form>
+                                        <h2>Lista de pasos Deshabilitados :<strong><label class="lb-list_pasos"></label></strong> </h2>
+                                        <table class="table table-bordered" border='1'>
+                                            <thead>
+                                                <tr>
+                                                    <td>Nro</td>
+                                                    <td>Descripción</td>
+                                                    <td>Número</td>
+                                                    <td>Codigo</td>
+                                                    <td>Proceso</td>
+                                                    <td>Editar</td>
+
+                                                </tr>
+                                            </thead>
+
+                                            <tbody  class="tbodys" style=" display: none;">
+                                            </tbody>
+
+                                        </table>
+
                                     </div>
-                                    <div class="widget-body no-padding">
-                                        <form action="" method="post" class="smart-form form_puesto" style="display:none;">
-                                            <fieldset>
-                                                <section class="col col-4">
-                                                    <label>Dirección</label>
-                                                    <label class="select">
-                                                        <select class="sl_dir" required="" ></select> 
-                                                        <i></i></label>      
-                                                </section>
-                                                <section class="col col-4">
-                                                    <label>Departamento:</label>
-                                                    <label class="select">
-                                                        <select class="sl_dep" required=""></select> 
-                                                        <i></i></label>                                                    
-                                                </section>
-                                                <section class="col col-4">
-                                                    <label>Area:</label>
-                                                    <label class="select">
-                                                        <select class="sl_area" required=""></select>  
-                                                        <i></i></label>
-                                                </section>
-                                                <section class="col col-3">
-                                                    <label>Sección:</label>
-                                                    <label class="select">
-                                                        <select class="sl_sec" required=""></select> 
-                                                        <i></i></label>
-                                                </section>
-                                                <section class="col col-3">
-                                                    <label>Puesto:</label>
-                                                    <label class="select">
-                                                        <select name="id_pu" class="sl_puesto" required=""></select>
-                                                        <i></i></label>
-                                                </section>                                          
+                                    <!-- end widget edit box -->
+
+                                    <!-- widget content -->
+                                    <div class="widget-body">
+
+
+
+
+
+                                        <div class="row">
+
+
+                                            <div class="col-sm-6 col-lg-12">
+
+                                                <h2>Lista de pasos Habilitados :<strong><label class="lb-list_pasos"></label></strong> </h2>
+
+                                                <button type="button" class="btn btn-default Generar" data-action="collapse-all">
+                                                    Generar Pasos
+                                                </button>
+                                                <br><style>
+                                                    .div{
+                                                        border-style: solid;
+                                                        border-color: #ff0000 #0000ff;
+                                                    }
+                                                    label{
+                                                        margin-left: 10px;
+                                                    }
+                                                </style>
+
+                                                <div class="dd" id="nestable" >
+                                                    <ol class="dd-list" style="width: 1024px;" >
+
+
+
+                                                    </ol>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="row" >
+                                            <h2>Lista de puestos :<strong><label class="lb-list_puesto"></label></strong> </h2>
+                                            <form action="" method="post" class="form_puesto" style="display:none;">
+                                                <label>Dirección</label><select class="sl_dir" required="" ></select>
+                                                <label>Departamento:</label><select class="sl_dep" required=""></select>
+                                                <label>Area:</label><select class="sl_area" required=""></select>
+                                                <label>Sección:</label><select class="sl_sec" required=""></select>
+                                                <label>Puesto:</label><select name="id_pu" class="sl_puesto" required=""></select>
                                                 <input type="hidden" value="" name="idpasos" class="id_pasos"  />
                                                 <input type="hidden" value="" name="nun" class="num_p"  />
-                                                <section class="col col-3">
-                                                    <label>Código Puesto</label>
-                                                    <label class="select">
-                                                        <select class="co_puesto" name="co_pasos">
-                                                            <option value=""></option>
-                                                            <option value="SECR">Secretaria de Area</option>
-                                                            <option value="JEFE">Jefe de Area</option>
-                                                        </select> 
-                                                        <i></i></label>
-                                                </section>
-                                                <section class="col col-3">
-                                                    <button type="button" class="btn btn-agregar-p">
-                                                        Agregar Puesto
-                                                    </button> 
-                                                </section>
-                                            </fieldset>
-                                        </form>
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered">
+                                                <br>
+                                                Código Puesto :<select class="co_puesto" name="co_pasos">
+                                                    <option value=""></option>
+                                                    <option value="SECR">Secretaria de Area</option>
+                                                    <option value="JEFE">Jefe de Area</option>
+                                                </select>
+                                                <br>
+                                                <button type="button" class="btn-agregar-p">
+                                                    Agregar Puesto
+                                                </button>
+                                            </form>
+                                            <table class="table table-bordered" border="1">
                                                 <thead>
                                                     <tr>
                                                         <th>Puesto</th>
@@ -281,11 +230,21 @@
 
                                                 </tbody>
                                             </table>
+
+
                                         </div>
+
                                     </div>
+                                    <!-- end widget content -->
+
                                 </div>
+                                <!-- end widget div -->
+
                             </div>
+                            <!-- end widget -->
+
                         </article>
+                        <!-- WIDGET END -->
 
                     </div>
 
@@ -395,7 +354,7 @@
             function  list_put_id(d, valor) {
 
 
-                $.post("../../Direccion_Puesto", "opc=" + "Listar_pu_id" + "&" + "id=" + valor, function(objJson) {
+                $.post("../../Direccion_Puesto", "opc=" + "Listar_pu_id" + "&" + "id=" + valor, function (objJson) {
                     d.empty();
                     d.append("<option value='' > [SELECCIONE] </option>");
                     var list = objJson.lista;
@@ -412,7 +371,7 @@
             function  lis_dir_id(d, valor) {
 
 
-                $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + valor, function(objJson) {
+                $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + valor, function (objJson) {
                     d.empty();
                     d.append("<option value='' > [SELECCIONE] </option>");
                     if (objJson.rpta == -1) {
@@ -432,7 +391,7 @@
             function list_area_id(c, valor) {
 
 
-                $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + valor, function(objJson) {
+                $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + valor, function (objJson) {
                     c.empty();
                     c.append("<option value='' > [SELECCIONE] </option>");
                     if (objJson.rpta == -1) {
@@ -450,7 +409,7 @@
                 });
             }
             function list_sec_id(d, valor) {
-                $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + valor, function(objJson) {
+                $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + valor, function (objJson) {
                     d.empty();
                     d.append("<option value='' > [SELECCIONE] </option>");
                     if (objJson.rpta == -1) {
@@ -468,7 +427,7 @@
                 });
             }
             function list_dir(c) {
-                $.post("../../Direccion_Puesto", "opc=Listar_direccion", function(objJson) {
+                $.post("../../Direccion_Puesto", "opc=Listar_direccion", function (objJson) {
                     c.empty();
                     c.append("<option value='' > [SELECCIONE] </option>");
                     if (objJson.rpta == -1) {
@@ -491,7 +450,7 @@
                 var tbody_p = $(".tbody-puesto");
                 var texto = "";
                 $(".id_pasos").val($(".id_paso" + num).val());
-                $.post("../../paso", "opc=Paso_Puesto&id=" + $(".id_paso" + num).val(), function(objJson) {
+                $.post("../../paso", "opc=Paso_Puesto&id=" + $(".id_paso" + num).val(), function (objJson) {
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
                         return;
@@ -524,10 +483,10 @@
                     texto = "";
                     $(".form_puesto").show();
                     $(".btn-eliminar_puesto").click(
-                            function() {
+                            function () {
                                 if (confirm("¿Esta Seguro de Eliminar?")) {
                                     alert("opc=Eliminar_PP&id=" + $(".iddp" + $(this).val()).val());
-                                    $.post("../../paso", "opc=Eliminar_PP&id=" + $(".iddp" + $(this).val()).val(), function(objJson) {
+                                    $.post("../../paso", "opc=Eliminar_PP&id=" + $(".iddp" + $(this).val()).val(), function (objJson) {
 
                                     });
                                 } else {
@@ -535,8 +494,8 @@
                                 }
                             }
                     );
-                    $(".btn_deshabilitar_p").click(function() {
-                        $.post("../../paso", "opc=actualizar_estado&id=" + $(".iddp" + $(this).val()).val() + "&estado=0", function(objJson) {
+                    $(".btn_deshabilitar_p").click(function () {
+                        $.post("../../paso", "opc=actualizar_estado&id=" + $(".iddp" + $(this).val()).val() + "&estado=0", function (objJson) {
 
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
@@ -550,8 +509,8 @@
                         );
 
                     });
-                    $(".btn_habilitar_p").click(function() {
-                        $.post("../../paso", "opc=actualizar_estado&id=" + $(".iddp" + $(this).val()).val() + "&estado=1", function(objJson) {
+                    $(".btn_habilitar_p").click(function () {
+                        $.post("../../paso", "opc=actualizar_estado&id=" + $(".iddp" + $(this).val()).val() + "&estado=1", function (objJson) {
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
                                 return;
@@ -565,8 +524,8 @@
 
                 });
             }
-            $(document).ready(function() {
-                $(".btn_cancel_edit").click(function() {
+            $(document).ready(function () {
+                $(".btn_cancel_edit").click(function () {
                     $("#btn-registrar").val("Registrar Paso");
                     $(".opc").val("Registrar");
                     $(".form_paso")[0].reset();
@@ -574,25 +533,25 @@
                 });
                 $(".form_puesto").hide();
                 list_dir($(".sl_dir"));
-                $(".sl_dir").change(function() {
+                $(".sl_dir").change(function () {
                     lis_dir_id($(".sl_dep"), $(this).val());
                 });
-                $(".sl_dep").change(function() {
+                $(".sl_dep").change(function () {
                     list_area_id($(".sl_area"), $(this).val());
                 });
-                $(".sl_area").change(function() {
+                $(".sl_area").change(function () {
                     list_sec_id($(".sl_sec"), $(this).val());
                 });
-                $(".sl_sec").change(function() {
+                $(".sl_sec").change(function () {
                     list_put_id($(".sl_puesto"), $(this).val());
                 });
                 var num = 1;
                 listar_Proceso();
                 Listar_Paso($("#select-proceso").val());
                 $("#btn-registrar").click(
-                        function() {
+                        function () {
                             var pr = $("#select-proceso").val();
-                            $.post("../../paso", $("#form-paso").serialize(), function(objJson) {
+                            $.post("../../paso", $("#form-paso").serialize(), function (objJson) {
                                 if (objJson.rpta == -1) {
                                     alert(objJson.mensaje);
                                     return;
@@ -607,7 +566,7 @@
                 );
                 function listar_Proceso() {
                     var s = $("#select-proceso");
-                    $.post("../../Proceso", "opc=Listar", function(objJson) {
+                    $.post("../../Proceso", "opc=Listar", function (objJson) {
                         s.empty();
                         var lista = objJson.lista;
                         s.append("<option value='' selected >[SELECCIONE]</option>");
@@ -617,22 +576,22 @@
                     });
                 }
                 $("#select-proceso").change(
-                        function() {
+                        function () {
                             $(".lb-list_pasos").text($(this).find(":selected").text());
                             Listar_Paso($(this).val());
                             $(".form_puesto").hide();
                             $(".tbody-puesto").empty();
                             // alert($(this).val());
                         });
-                $(".btn-agregar-p").click(function() {
+                $(".btn-agregar-p").click(function () {
                     if ($(".form_puesto").valid()) {
                         $.ajax({
                             url: "../../Direccion_Puesto",
                             data: $(".form_puesto").serialize() + "&opc=Reg_puesto_paso"
-                        }).done(function() {
+                        }).done(function () {
                             list_puesto($(".num_p").val());
                             alert("¡Registrado Exitosamente!");
-                        }).fail(function(objJson) {
+                        }).fail(function (objJson) {
                             alert(objJson.mensaje);
                         });
                     } else {
@@ -645,7 +604,7 @@
                 var c = $(".dd-list");
                 function Listar_Paso(proceso) {
                     var txt_append = "";
-                    $.post("../../paso", "opc=Listar_habilitados&proceso=" + proceso, function(objJson) {
+                    $.post("../../paso", "opc=Listar_habilitados&proceso=" + proceso, function (objJson) {
                         b.empty();
                         c.empty();
                         var lista = objJson.lista;
@@ -664,15 +623,15 @@
                             b.append("</tr>");
                         }
                         for (var i = 0; i < lista.length; i++) {
-                            txt_append += '<li class="dd-item dd3-item"  ><div class="dd-handle dd3-handle">Drag</div><div class="dd3-content"><label class="item_req item_' + (i + 1) + '" style="font-size: 12px;">' + lista[i].num + ' </label> ' +
-                                    '<div class="pull-right"><button class="btn btn-warning btn-sm btn-cargar-puesto" value="' + i + '" ><i class="fa fa-eye" ></i></button></div>' +
-                                    '<div class="pull-right"><button class="btn btn-success btn-sm btn-editar" value="' + i + '" ><i class="fa fa-pencil" ></i></button></div>' +
-                                    '<div class="pull-right"><button class="btn btn-danger btn-sm btn-eliminar" value="' + i + '" ><i class="fa fa-times"></i></button></div>';
+                            txt_append += '<li class="dd-item dd3-item"  ><div class="dd-handle dd3-handle">Drag</div><div class="dd3-content"><label class="item_req item_' + (i + 1) + '">' + lista[i].num + ' </label> ' +
+                                    '<div class="pull-right"><button class="btn btn-success btn-cargar-puesto" value="' + i + '" > Ver Puestos</button></div>' +
+                                    '<div class="pull-right"><button class="btn btn-primary btn-editar" value="' + i + '" > Editar</button></div>' +
+                                    '<div class="pull-right"><button class="btn btn-primary btn-eliminar" value="' + i + '" > Eliminar</button></div>';
                             if (typeof (lista[i].det) === "undefined") {
                                 txt_append += '<div class="pull-right"><label ></label></div>';
                             } else {
 
-                                txt_append += '<div class="pull-right"><label style="font-size: 12px;">' + lista[i].det + '</label></div>';
+                                txt_append += '<div class="pull-right"><label >' + lista[i].det + '</label></div>';
                             }
 
                             // '<div class="pull-right"><label >' + lista[i].co + '</label></div>' +
@@ -685,13 +644,13 @@
                         }
                         c.append(txt_append);
                         txt_append = "";
-                        $(".btn-cargar-puesto").click(function() {
+                        $(".btn-cargar-puesto").click(function () {
                             var num = $(this).val();
                             $(".id_pasos_puesto").val($(".id_paso" + num).val());
                             list_puesto(num);
                             $(".num_p").val($(this).val());
                         });
-                        $(".btn-editar").click(function() {
+                        $(".btn-editar").click(function () {
                             $(".btn_cancel_edit").show();
                             $(".desc_paso").val($(".td_det" + $(this).val()).text());
                             $(".num_paso").val($(".td_num" + $(this).val()).text());
@@ -702,10 +661,10 @@
                             $(".opc").val("Modificar");
                         });
                         $(".btn-eliminar").click(
-                                function() {
+                                function () {
                                     var pr_e = $("#select-proceso").val();
                                     if (confirm("¿Esta Seguro de Eliminar?")) {
-                                        $.post("../../paso", "opc=Eliminar&paso=" + $(".id_paso" + $(this).val()).val(), function() {
+                                        $.post("../../paso", "opc=Eliminar&paso=" + $(".id_paso" + $(this).val()).val(), function () {
                                             Listar_Paso(pr_e);
                                         });
                                         //alert($(".id_paso" + $(this).val()).val());
@@ -717,13 +676,13 @@
 
                     });
                 }
-                $(".Generar").click(function() {
+                $(".Generar").click(function () {
                     //var num = $(".tbodys tr").size();
                     var num = 1;
                     var url = "";
 
 
-                    $.each($(".item_req"), function() {
+                    $.each($(".item_req"), function () {
                         $(this).text("P" + num);
                         num++;
                     });
@@ -731,12 +690,12 @@
                         url += "id" + s + "=" + $(".id_paso" + (s - 1)).val() + "&numero" + s + "=" + $(".item_" + s).text() + "&";
                     }
                     url = url.substring(0, url.length - 1);
-                    $.post("../../paso", "opc=Update_nu_paso&num=" + num + "&" + url, function(objJson) {
-                        if (objJson.rpta == -1) {
-                            alert(objJson.mensaje);
-                            return;
-                        }
-                    });
+                       $.post("../../paso", "opc=Update_nu_paso&num=" + num + "&" + url, function (objJson) {
+                     if (objJson.rpta == -1) {
+                     alert(objJson.mensaje);
+                     return;
+                     }
+                     });
                     alert(url);
                     url = "";
                     num = 1;
@@ -761,7 +720,7 @@
                 pageSetUp();
                 // PAGE RELATED SCRIPTS
 
-                var updateOutput = function(e) {
+                var updateOutput = function (e) {
                     var list = e.length ? e : $(e.target), output = list.data('output');
                     if (window.JSON) {
                         output.val(window.JSON.stringify(list.nestable('serialize')));
@@ -781,7 +740,7 @@
                 // output initial serialised data
                 updateOutput($('#nestable').data('output', $('#nestable-output')));
                 updateOutput($('#nestable2').data('output', $('#nestable2-output')));
-                $('#nestable-menu').on('click', function(e) {
+                $('#nestable-menu').on('click', function (e) {
                     var target = $(e.target), action = target.data('action');
                     if (action === 'expand-all') {
                         $('.dd').nestable('expandAll');
@@ -800,7 +759,7 @@
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
-            (function() {
+            (function () {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;

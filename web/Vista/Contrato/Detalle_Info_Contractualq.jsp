@@ -299,25 +299,23 @@
                         }%> </td></tr> 
                     <tr><td class="text-info table-bordered"><strong>Horas:</strong></td><td class="text-info"><strong>Semanal:</strong></td><td><%=n.getHo_semana()%></td><td class="text-info"><strong>Mensual:</strong></td><td><%=n.getNu_horas_lab() + " h"%></td><td class="text-info"><strong>Dias:</strong></td><td class="table-bordered" > <%=n.getDia_contrato() + " d"%></td></tr>
                     <tr><td class="text-info table-bordered"><strong>Tipo de Trabajador:</strong></td><td class="table-bordered"  colspan="6"><%
-                        if (n.getTi_trabajador() != null) {
-                            if (n.getTi_trabajador().trim().equals("1")) {
+                        if (n.getCo_ti_moneda() != null) {
+                            if (n.getTi_trabajador().equals("1")) {
                                 out.println("Trabajador");
                             }
-                            if (n.getTi_trabajador().trim().equals("2")) {
+                            if (n.getTi_trabajador().equals("2")) {
                                 out.println("Obrero");
                             }
                         } else {
                             out.print("NO DEFINIDO");
                         }%> </td></tr>   
                     <tr><td class="text-info table-bordered"><strong>Régimen Laboral:</strong></td><td class="table-bordered"  colspan="6">
-                            <%if (n.getLi_regimen_laboral() != null) {
-                                    if (n.getLi_regimen_laboral().trim().equals("1")) {
-                                        out.println("Privado");
-                                    } else if (n.getLi_regimen_laboral().trim().equals("2")) {
-                                        out.println("Publico");
-                                    }
-                                } else {
-                                    out.print("NO DEFINIDO");
+                            <%if (n.getLi_regimen_laboral() == "1") {
+                                    out.println("Privado");
+                                } else if (n.getLi_regimen_laboral() == "1") {
+                                    out.println("Publico");
+                                } else if (n.getLi_regimen_laboral() == null) {
+                                    out.println("NO DEFINIDO");
                                 }%> </td></tr>   
                     <!--<tr><td class="text-info table-bordered"><strong>Vacaciones:</strong></td><td class="text-info" colspan="2"><strong>Desde:</strong></td><td colspan="2"> <%=n.getFe_vacacio_ini()%> </td><td class="text-info" ><strong >Hasta:</strong></td><td colspan="2"> <%=n.getFe_vacacio_fin()%> </td></tr>   -->
                     <tr><td class="text-info table-bordered"><strong>Discapacidad:</strong></td><td class="table-bordered" colspan="6"><%
@@ -335,7 +333,7 @@
                     <tr><td class="text-info table-bordered"><strong>Tipo de Contrato:</strong></td><td class="table-bordered" colspan="6">
                             <%if (n.getTi_contrato() != null) {
                                     for (int k = 0; k < List_tipo_contrato.size(); k++) {
-                                        if (n.getTi_contrato().trim().equals(k + 1 + "")) {
+                                        if (n.getTi_contrato() == k + 1 + "") {
                                             out.print(List_tipo_contrato.get(k));
                                         }
                                     }
@@ -345,13 +343,13 @@
                         </td></tr>   
                     <tr><td class="text-info table-bordered"><strong>Tipo de Convenio:</strong></td><td class="table-bordered" colspan="6"><%
                         if (n.getLi_tipo_convenio() != null) {
-                            if (n.getLi_tipo_convenio().trim().equals("1")) {
+                            if (n.getLi_tipo_convenio() == ("1")) {
                                 out.println("CLJ");
                             }
-                            if (n.getLi_tipo_convenio().trim().equals("2")) {
+                            if (n.getLi_tipo_convenio() == ("2")) {
                                 out.println("PPP");
                             }
-                            if (n.getLi_tipo_convenio().trim().equals("3")) {
+                            if (n.getLi_tipo_convenio() == ("3")) {
                                 out.println("PP");
                             }
                         } else {
@@ -384,10 +382,10 @@
                         }%> </td></tr>   
                     <tr><td class="text-info table-bordered"><strong>Régimen Pensionario:</strong></td><td class="table-bordered" colspan="6"><%
                         if (n.getLi_regimen_pensionario() != null) {
-                            if (n.getLi_regimen_pensionario().trim().equals("1")) {
+                            if (n.getLi_regimen_pensionario() == ("1")) {
                                 out.println("Privado");
                             }
-                            if (n.getLi_regimen_pensionario().trim().equals("2")) {
+                            if (n.getLi_regimen_pensionario() == ("2")) {
                                 out.println("SNP");
                             }
                         } else {
@@ -422,14 +420,14 @@
                     <!--   <tr><td>Nro. Documento:</td><td><? /*echo $list_rhc[$index][43];?> </td></tr>   
                    <tr><td>Pares:</td><td><? echo $list_rhc[$index][36];?> </td></tr>   
                      <tr><td>Apoyo:</td><td><? echo $list_rhc[$index][41];*/?> </td></tr>   -->
-                    <%if (List_x_fun_x_idpu.size() > 0) {%>
+                    <%if(List_x_fun_x_idpu.size()>0){%>
                     <tr><td class="text-info table-bordered" colspan="8" style="text-align:center;">FUNCIONES</td></tr>
                     <%for (int fu = 0; fu < List_x_fun_x_idpu.size(); fu++) {
                             Funciones fun = new Funciones();
                             fun = (Funciones) List_x_fun_x_idpu.get(fu);
                     %>
                     <tr><td class="text-info table-bordered"><strong>Funcion Nº<%=fu + 1%>:</strong></td><td class="table-bordered" colspan="6"><%=fun.getDe_funcion()%></td></tr>   <%}%>
-                        <%}%>
+                    <%}%>
 
 
                     <tr><%if (n.getUs_modif() != null && n.getFe_modif() != null) {%>
@@ -450,7 +448,7 @@
                                     Usuario u = new Usuario();
                                     u = (Usuario) List_Usuario.get(f);
                                     if (n.getUs_creacion().equals(u.getId_usuario())) {%>
-                        <td class="text-info text-center" colspan="6"><%=u.getNo_usuario()%></td>
+                                    <td class="text-info text-center" colspan="6"><%=u.getNo_usuario()%></td>
                         <%}
                             }
                         } else {%>

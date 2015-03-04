@@ -95,12 +95,6 @@ public class CAutorizacion extends HttpServlet {
                 getServletContext().setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
                 response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?r=ok");
             }
-            //AUTORIZACION CARGA ACADEMICA POR DOCENTE
-            if (opc.equals("Autorizacion_CD")) {
-                String idpu = e.Id_Puesto_Personal(ide);
-                getServletContext().setAttribute("List_Autorizacion_Academico", a.List_Autorizacion_Academico(idpu, iduser));
-                response.sendRedirect("Vista/Academico/Autorizar_Carga_Academica.jsp");
-            }
             //try {
         } else {
 
