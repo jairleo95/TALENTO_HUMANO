@@ -60,8 +60,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             document.getElementById('eButtons').style.display = 'block';
         });
         function InsertHTML() {
-           
-            
+
+
             // Get the editor instance that we want to interact with.
             var editor = CKEDITOR.instances.editor1;
             var value = document.getElementById('texto2').value;
@@ -378,15 +378,39 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             }
 
         }
+        function resetear() {
+            var editor = CKEDITOR.instances.editor1;
+            //var value = document.getElementById('htmlArea').value;
+            // Set editor contents (replace current contents).
+            // http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-setData
+            editor.setData("");
+            $(".texto2").val("");
+            setTimeout(function() {
+                InsertHTML();
+                ExecuteCommand("print");
+            }, 10000);
+            recorido();
+            //ResetDirty();
+            /*setTimeout(function() {
+             InsertHTML();
+             ExecuteCommand("print");
+             }, 10000);
+             recorido();*/
+            // InsertHTML();
+            //ExecuteCommand("print");
+        }
         $(document).ready(function() {
-             
+
             $("#actu").hide();
             $("#texto").hide();
             $("#texto2").hide();
-            setTimeout(function(){ InsertHTML(); ExecuteCommand("print");}, 3000);
+            setTimeout(function() {
+                InsertHTML();
+                ExecuteCommand("print");
+            }, 10000);
             recorido();
-         
-        
+
+
 
         }
         );</script>
@@ -398,15 +422,15 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     <%%>
     <input type="hidden" id="no_arch" class="no_arc" value="<%%>">
 
-    <button type="button" id="btn2" class="btn2" onclick="InsertHTML()">insertar</button>
-    
+    <button type="button" id="btn2" class="btn2" onclick="InsertHTML()" style="display: none">CARGAR</button>
+    <button type="button" id="btn2" class="btn2" onclick="resetear()" >Resetear</button>
     <h3>EDITAR PLANTILLAS</h3>
     <form class="ckeditor_form" action="../../../formato_plantilla" method="post">
         <textarea cols="100" id="editor1" name="editor1" rows="10">
         </textarea>
         <script>
             // Replace the <textarea id="editor1"> with an CKEditor instance.
-          
+
             CKEDITOR.replace('editor1', {
                 on: {
                     focus: onFocus,
@@ -421,10 +445,10 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     }
                 }
                 , height: '800px'});</script>
-                <script type="text/javascript">
+        <script type="text/javascript">
             $(document).ready(function() {
-              
-                
+
+
             }
             );</script>
         <div id="eButtons" >

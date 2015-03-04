@@ -1,8 +1,12 @@
+<%@page import="pe.edu.upeu.application.dao.DocumentoDAO"%>
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO"%>
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO"%>
 <%@page import="pe.edu.upeu.application.model.Lis_Doc_tra"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
     HttpSession sesion_1 = request.getSession();
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
+    InterfaceDocumentoDAO doc_ = new DocumentoDAO();
     if (id_user_1 != null) {
 %>
 <%@page import="pe.edu.upeu.application.model.V_Documento_Trabajador"%>
@@ -57,7 +61,17 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-
+        <script type="text/javascript" src="../../js/shadowbox/demo.js"></script>
+        <link rel="stylesheet" type="text/css" href="../../js/shadowbox/shadowbox.css"/>
+        <link rel="stylesheet" type="text/css" href="../../js/shadowbox/style.css"/>
+        <script type="text/javascript" src="../../js/shadowbox/shadowbox.js"></script>
+        <script type="text/javascript">
+            Shadowbox.init({
+                // a darker overlay looks better on this particular site
+                overlayOpacity: 0.8
+                        // setupDemos is defined in assets/demo.js
+            }, setupDemos);
+        </script>
     </head>
     <body>
     <center>
@@ -95,7 +109,7 @@
                                 data-widget-sortable="false"
 
                                 -->
-                            
+
 
                                 <!-- widget div-->
                                 <div>
@@ -109,31 +123,32 @@
 
                                     <!-- widget content -->
                                     <div class="widget-body">
-                                        <table id="datatable_tabletools" class="table table-striped table-bordered table-hover" width="100%">
+                                        <table id="datatable_tabletools" class="table table-striped table-bordered table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th data-hide="phone" style="color:black">Nro</th>
-                                                    <th data-class="expand" style="color:black">Nombres </th>
-                                                    <th data-hide="phone,tablet" style="color:black">Documento</th>
-                                                    <th data-hide="phone" style="color:black">Descrición</th>
+                                                    <th data-hide="phone" style="color:black;with:15%;text-align:center;">Nro</th>
+                                                    <th data-class="expand" style="color:black;with:40%;text-align:center;">Nombres </th>
+                                                    <th data-hide="phone,tablet" style="color:black;with:30%;text-align:center;" >Documento</th>
+                                                    <th data-hide="phone" style="color:black;with:15%;text-align:center;">Descrición</th>
                                                 </tr>  
                                             </thead>
                                             <tbody>
 
                                                 <%  if (Lis_doc_trabajador_hab.size() == 0) {%>
                                                 <tr>NO TIENE REGISTRADO NINGUN DOCUMENTO EN ESTE MOMENTO</tr>
-                                            <%}else{%>
-                                            <%for (int i = 0; i < Lis_doc_trabajador_hab.size(); i++) {
-                                                    Lis_Doc_tra d = new Lis_Doc_tra();
-                                                    d = (Lis_Doc_tra) Lis_doc_trabajador_hab.get(i);
-                                            %>
-                                            <tr>
-                                                <td ><%=i + 1%></td>
-                                                <td ><%=d.getNo_documento()%></td>
-                                                <td ><a href="../Dgp/Documento/Ver_Doc.jsp?nom_doc="><%=d.getNo_documento()%></a></td>
-                                                <td ><%=d.getDe_documento_adjunto()%></td>
-                                            </tr>
-                                            <% }}%>
+                                                <%} else {%>
+                                                <%for (int i = 0; i < Lis_doc_trabajador_hab.size(); i++) {
+                                                        Lis_Doc_tra d = new Lis_Doc_tra();
+                                                        d = (Lis_Doc_tra) Lis_doc_trabajador_hab.get(i);
+                                                %>
+                                                <tr>
+                                                    <td style="color:black;with:15%;text-align:center;"><%=i + 1%></td>
+                                                    <td style="color:#1E90FF;with:40%;text-align:center;"><%=d.getNo_documento()%></td>
+                                                    <td style="color:#1E90FF;with:30%;text-align:center;"><%out.print(doc_.List_file_url(d.getId_documento_adjunto().trim()));%></a></td>
+                                                    <td style="color:black;with:15%;text-align:center;"><%=d.getDe_documento_adjunto()%></td>
+                                                </tr>
+                                                <% }
+                                                    }%>
                                             </tbody>
                                         </table>
                                     </div>
