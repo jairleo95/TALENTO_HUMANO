@@ -493,14 +493,12 @@ public class DgpDAO implements InterfaceDgpDAO {
     @Override
     public List<V_Es_Requerimiento> List_Incomplet(String iddep) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-
-        String sql = "select v.*,d.ID_REQUERIMIENTO,r.NO_REQ,d.FE_CREACION from RHVD_ESTADO_REQ v,RHTM_DGP d,RHTR_REQUERIMIENTO r where  ID_DEPARTAMENTO='" + iddep.trim() + "' and v.ID_DGP = d.ID_DGP and r.ID_REQUERIMIENTO=d.ID_REQUERIMIENTO ORDER BY TO_NUMBER(SUBSTR(v.ID_DGP,5,LENGTH(v.ID_DGP))) DESC";
+        String sql = "SELECT i.*,f.AR_FOTO FROM ( select v.*,d.ID_REQUERIMIENTO,r.NO_REQ,d.FE_CREACION from RHVD_ESTADO_REQ v,RHTM_DGP d,RHTR_REQUERIMIENTO r where v.ID_DGP = d.ID_DGP and ID_DEPARTAMENTO='" + iddep.trim() + "' and r.ID_REQUERIMIENTO=d.ID_REQUERIMIENTO ORDER BY TO_NUMBER(SUBSTR(v.ID_DGP,5,LENGTH(v.ID_DGP))) DESC)i left outer join RHTR_FOTOS_TRABAJADOR f on (i.id_trabajador=f.ID_TRABAJADOR)";
         //sql += (!"".equals(id_dep)) ? "where ID_DEPARTAMENTO='" + id_dep + "'" : "";
         //sql += "order by ID_DGP";
         List<V_Es_Requerimiento> Lista = new ArrayList<V_Es_Requerimiento>();
         try {
             ResultSet rs = this.conn.query(sql);
-
             while (rs.next()) {
                 V_Es_Requerimiento v = new V_Es_Requerimiento();
                 v.setId_trabajador(rs.getString("id_trabajador"));
@@ -511,6 +509,7 @@ public class DgpDAO implements InterfaceDgpDAO {
                 v.setId_departamento(rs.getString("id_departamento"));
                 v.setNo_req(rs.getString("no_req"));
                 v.setFe_creacion(rs.getString("fe_creacion"));
+                v.setAr_foto(rs.getString("AR_FOTO"));
                 Lista.add(v);
             }
         } catch (SQLException e) {

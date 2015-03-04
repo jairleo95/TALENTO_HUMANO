@@ -264,9 +264,10 @@
                                     }
                                     $(".edad").text(edad + " años");
                                     if (edad < 18) {
-
+                                        alert("mayor de 18 años");
+                                        $("#edad").val("0000-00-00");
+                                        $(".edad").text("");
                                     }
-
                                 }
                         );
 
@@ -1023,6 +1024,7 @@
                                                                     $("#generar").hide();
                                                                     $("#subscription").attr('checked', false);
                                                                     $("#texto").hide();
+                                                                    $("#nu_cuen_otros").removeAttr('readonly');
                                                                 }
                                                                 if (banco == '0') {
                                                                     $("#no_cuen").hide();
@@ -1031,7 +1033,8 @@
                                                                     $("#nu_cuen_ban").val("");
                                                                     $("#no_cuen_otros").show();
                                                                     $("#nu_cuen_otros").val("BBVA Banco Continental");
-                                                                    document.getElementById("nu_cuen_otros").readOnly = true;
+                                                                    $("#nu_cuen_otros").attr('readonly','readonly');
+                                                                    //document.getElementById("nu_cuen_otros").readOnly = true;
                                                                     $("#texto").show();
                                                                     $("#generar").show();
                                                                     $("#subscription").attr("required", "required");
