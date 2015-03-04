@@ -15,6 +15,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceCarga_AcademicaDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Carga_Academica;
+import pe.edu.upeu.application.model.V_Detalle_Carga_Academica;
 import pe.edu.upeu.application.web.controller.CConversion;
 
 /**
@@ -95,11 +96,11 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
     }
 
     @Override
-    public String INSERT_DGP(String ID_DGP, String FE_DESDE, String FE_HASTA, double CA_SUELDO, String DE_DIAS_TRABAJO, String ID_PUESTO, String ID_REQUERIMIENTO, String ID_TRABAJADOR, String CO_RUC, String DE_LUGAR_SERVICIO, String DE_SERVICIO, String DE_PERIODO_PAGO, String DE_DOMICILIO_FISCAL, String DE_SUBVENCION, String DE_HORARIO_CAPACITACION, String DE_HORARIO_REFRIGERIO, String DE_DIAS_CAPACITACION, String ES_DGP, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, double CA_BONO_ALIMENTARIO, double DE_BEV, String DE_ANTECEDENTES_POLICIALES, String ES_CERTIFICADO_SALUD, String DE_MONTO_HONORARIO, String FE_CESE, String FE_RECEPCION, String MO_RENUNCIA, double DI_ADQUIRIDOS, double DI_CONSUMIDOS, double DI_POR_CONSUMIR, String ES_VACACIONES, String LI_MOTIVO, String ES_MFL, double CA_BONIFICACION_P, String ID_PROCESO_CARGA_AC) {
+    public String INSERT_DGP(String ID_DGP, String FE_DESDE, String FE_HASTA, double CA_SUELDO, String DE_DIAS_TRABAJO, String ID_PUESTO, String ID_REQUERIMIENTO, String ID_TRABAJADOR, String CO_RUC, String DE_LUGAR_SERVICIO, String DE_SERVICIO, String DE_PERIODO_PAGO, String DE_DOMICILIO_FISCAL, String DE_SUBVENCION, String DE_HORARIO_CAPACITACION, String DE_HORARIO_REFRIGERIO, String DE_DIAS_CAPACITACION, String ES_DGP, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, double CA_BONO_ALIMENTARIO, double DE_BEV, String DE_ANTECEDENTES_POLICIALES, String ES_CERTIFICADO_SALUD, String DE_MONTO_HONORARIO, String FE_CESE, String FE_RECEPCION, String MO_RENUNCIA, double DI_ADQUIRIDOS, double DI_CONSUMIDOS, double DI_POR_CONSUMIR, String ES_VACACIONES, String LI_MOTIVO, String ES_MFL, double CA_BONIFICACION_P) {
         String id = "";
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_PROCESO_CA_DGP( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? )} ");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_PROCESO_CA_DGP( ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? )} ");
             cst.setString(1, null);
             cst.setString(2, c.convertFecha(FE_DESDE));
             cst.setString(3, c.convertFecha(FE_HASTA));
@@ -138,10 +139,10 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
             cst.setString(36, LI_MOTIVO);
             cst.setString(37, ES_MFL);
             cst.setDouble(38, CA_BONIFICACION_P);
-            cst.setString(39, ID_PROCESO_CARGA_AC);
-            cst.registerOutParameter(40, Types.CHAR);
+            //  cst.setString(39, ID_PROCESO_CARGA_AC);
+            cst.registerOutParameter(39, Types.CHAR);
             cst.execute();
-            id = cst.getString(40);
+            id = cst.getString(39);
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
@@ -157,11 +158,11 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
     }
 
     @Override
-    public String INSERT_PROCESO_CARGA_ACADEMICA(String ID_PROCESO_CARGA_AC, String ES_PROCESO_CARGA_AC, double CA_TIPO_HORA_PAGO, double CA_TOTAL_HL, String FE_DESDE, String FE_HASTA, String ES_PROCESADO, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String NO_USUARIO) {
+    public String INSERT_PROCESO_CARGA_ACADEMICA(String ID_PROCESO_CARGA_AC, String ES_PROCESO_CARGA_AC, double CA_TIPO_HORA_PAGO, double CA_TOTAL_HL, String FE_DESDE, String FE_HASTA, String ES_PROCESADO, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String NO_USUARIO, String ID_DGP) {
         String id = "";
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_PROCESO_CARGA_AC( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? )} ");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_PROCESO_CARGA_AC( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,? )} ");
             cst.setString(1, null);
             cst.setString(2, null);
             cst.setDouble(3, CA_TIPO_HORA_PAGO);
@@ -175,9 +176,10 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
             cst.setString(11, FE_MODIF);
             cst.setString(12, IP_USUARIO);
             cst.setString(13, NO_USUARIO);
-            cst.registerOutParameter(14, Types.CHAR);
+            cst.setString(14, ID_DGP);
+            cst.registerOutParameter(15, Types.CHAR);
             cst.execute();
-            id = cst.getString(14);
+            id = cst.getString(15);
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
@@ -233,7 +235,7 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
         String id = "";
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_RHTD_DETALLE_CARGA_ACADEMICA( ?, ?, ?, ?,? )} ");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DETALLE_CARGA_ACA( ?, ?, ?, ?,? )} ");
             cst.setString(1, null);
             cst.setString(2, ID_PROCESO_CARGA_AC);
             cst.setString(3, ID_CARGA_ACADEMICA);
@@ -331,6 +333,53 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
             }
         }
         return id;
+    }
+
+    @Override
+    public List<V_Detalle_Carga_Academica> Lista_detalle_academico(String idtr, String facultad, String eap) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT * FROM RHVD_DETALLE_CARGA_ACADEMICA WHERE TRIM(ID_TRABAJADOR)= '" + idtr.trim() + "' AND TRIM(NO_FACULTAD) ='" + facultad.trim() + "' AND TRIM(NO_EAP)='" + eap.trim() + "' ";
+        List<V_Detalle_Carga_Academica> list = new ArrayList<V_Detalle_Carga_Academica>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                V_Detalle_Carga_Academica ca = new V_Detalle_Carga_Academica();
+                ca.setId_carga_academica(rs.getString("id_carga_academica"));
+                ca.setEs_carga_academica(rs.getString("es_carga_academica"));
+                ca.setCampus(rs.getString("campus"));
+                ca.setEs_tipo_doc(rs.getString("es_tipo_doc"));
+                ca.setNu_doc(rs.getString("nu_doc"));
+                ca.setAp_paterno(rs.getString("ap_paterno"));
+                ca.setAp_materno(rs.getString("ap_materno"));
+                ca.setNo_trabajador(rs.getString("no_trabajador"));
+                ca.setNo_facultad(rs.getString("no_facultad"));
+                ca.setNo_eap(rs.getString("no_eap"));
+                ca.setDe_carga(rs.getString("de_carga"));
+                ca.setNo_curso(rs.getString("no_curso"));
+                ca.setNu_grupo(rs.getString("nu_grupo"));
+                ca.setDe_horario(rs.getString("de_horario"));
+                ca.setCa_hlab(rs.getDouble("ca_hlab"));
+                ca.setDe_condicion(rs.getString("de_condicion"));
+                ca.setDe_tipo_curso(rs.getString("de_tipo_curso"));
+                ca.setEs_procesado(rs.getString("es_procesado"));
+                ca.setFe_creacion(rs.getString("fe_creacion"));
+                ca.setCa_tipo_hora_pago_refeerencial(rs.getString("ca_tipo_hora_pago_refeerencial"));
+                ca.setId_trabajador(rs.getString("id_trabajador"));
+                list.add(ca);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR :" + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return list;
+
     }
 
 }

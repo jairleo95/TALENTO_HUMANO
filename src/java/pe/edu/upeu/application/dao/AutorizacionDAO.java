@@ -390,11 +390,15 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
             cst.execute();
 
         } catch (SQLException e) {
-            // System.out.println(e.getMessage());
-        } catch (Exception ex) {
-            // Logger.getLogger(AutorizacionDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
