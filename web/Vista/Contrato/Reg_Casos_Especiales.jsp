@@ -355,11 +355,9 @@
                                                             </label>
                                                         </section>
 
-
                                                         <input name="CANT" value="1" type="hidden" class="cant"/>
                                                     </div>
                                                            
-                                                            
                                                     <script>
 
                                                         $(document).ready(
