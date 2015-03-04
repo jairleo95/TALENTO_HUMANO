@@ -287,11 +287,12 @@ public class CDocumento_Trabajador extends HttpServlet {
             int count = d.count_documentos_x_tra(idtr);
 
             if (count > 0) {
-                String url = "Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr;
+                String url = "Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&m=si";
                 if (pr != null) {
                     url += "&P2=TRUE";
                 }
                 response.sendRedirect(url);
+                
             } else {
                 response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&pro=pr_dgp&P2=TRUE");
             }

@@ -78,7 +78,30 @@
 
             </style>
         </head>
-        <body><center>
+        <body onload="closedthis();">
+        <script >
+             $(document).ready(function () {
+            function exito(titulo, mensaje) {
+                $.smallBox({
+                    title: titulo,
+                    content: mensaje,
+                    color: "#739E73",
+                    iconSmall: "fa fa-cloud",
+                    timeout: 3000
+                });
+            }
+            function closedthis() {
+                $.smallBox({
+                    title: "¡Ficha de trabajador registrada correctamente!",
+                    content: "ya puede visualizar toda la informacion del trabajador...",
+                    color: "#739E73",
+                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                    timeout: 6000
+                });
+            }
+             });
+        </script>
+        <center>
             <div >
 
                 <form action="../../dgp">
