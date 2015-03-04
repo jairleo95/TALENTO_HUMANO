@@ -147,7 +147,9 @@
 
     </head>
 
-    <%if (request.getParameter("a") != null) {
+    <%  //String num = request.getParameter("num");
+       // int num_doc = Integer.parseInt(num);
+        if (request.getParameter("a") != null) {
             if (request.getParameter("a").equals("t")) {
     %>
 
@@ -373,7 +375,7 @@
                         <%if (idrol.trim().equals("ROL-0007") | ID_ROL.trim().equals("ROL-0001")) {
                         %>
                         <li >
-                            <a href="../../empleado?opc=Eva_Emp&idtr=<%=idtr%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Evaluación de Emleado</a>
+                            <a href="../../empleado?opc=Eva_Emp&idtr=<%=idtr%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Evaluación de Empleado</a>
                         </li>
                         <%}%>
                         <%  if (List_Auto_mostrar.size() == 1 && aut != null) {
@@ -743,6 +745,15 @@
                 });
             }
 
+             function closedthis2() {
+                $.smallBox({
+                    title: "¡Documentos del trabajador registrados correctamente!",
+                    content: "ya puede visualizar toda los documentos del trabajador...",
+                    color: "#739E73",
+                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                    timeout: 6000
+                });
+            }
             $(document).ready(function () {
 
                 pageSetUp();

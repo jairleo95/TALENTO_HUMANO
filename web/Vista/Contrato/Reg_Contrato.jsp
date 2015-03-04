@@ -446,7 +446,7 @@
                                         </section>
                                         <section class="col col-4">
                                             <label class="select" id="titulo">Tipo Contratación:
-                                                <select name="REG_LAB_MINTRA" class="input-group-sm" required="">
+                                                <select name="REG_LAB_MINTRA" class="input-group-sm" >
                                                     <option value="">[SELECCIONE]</option>
                                                     <option value="I">INICIO</option>
                                                     <option value="R">RENOVACION</option>
@@ -670,7 +670,7 @@
                                         </section>
                                         <section class="col col-3">
                                             <label class="select" id="titulo" style="color:red">Plantilla de Contrato:
-                                                <select name="id_plantilla_contractual" class="con_pl_pu input-group-sm" required="">
+                                                <select name="id_plantilla_contractual" class="con_pl_pu input-group-sm" >
                                                     <option value="">[SELECCIONE]</option>
                                                 </select>
                                             </label>

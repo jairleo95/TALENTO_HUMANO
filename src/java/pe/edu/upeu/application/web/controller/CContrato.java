@@ -343,9 +343,18 @@ public class CContrato extends HttpServlet {
             int mes = fecha.get(Calendar.MONTH);
             int dia = fecha.get(Calendar.DAY_OF_MONTH);
             String fe_subs = "";
-            if (mes < 9) {
-                fe_subs = año + "-" + "0" + (mes + 1) + "-" + dia;
-            } else {
+            if (mes < 9 && dia < 9) {
+                fe_subs = año + "-" + "0" + (mes + 1) + "-" + "0"+dia;
+            } 
+            
+            if (mes < 9 && dia > 9) {
+                fe_subs = año + "-" + "0" + (mes + 1) + "-" +dia;
+            } 
+            
+            if (mes >= 9 && dia < 9) {
+                fe_subs = año + "-" + (mes + 1) + "-" + "0"+dia;
+            } 
+            if (mes >= 9 && dia > 9){
                 fe_subs = año + "-" + (mes + 1) + "-" + dia;
             }
             // getServletContext().setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr1));
@@ -362,7 +371,7 @@ public class CContrato extends HttpServlet {
             getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
             getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
             getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
-
+            //out.print(fe_subs);
             response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp?idmax=" + MAX_ID + "&idtr=" + idtr + "&nom=" + nom + "&cant_hijos=" + cant_hijos + "&fe_subs=" + fe_subs);
 
         }
@@ -488,6 +497,8 @@ public class CContrato extends HttpServlet {
                 }
 
             }
+             emp.VALIDAR_EMPLEADO(ID_TRABAJADOR);
+            
             getServletContext().setAttribute("List_Jefe", l.List_Jefe());
             getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
             getServletContext().setAttribute("List_ID_User", usu.List_ID_User(US_CREACION));

@@ -1753,7 +1753,7 @@
         elErrorContainer: null,
         slugCallback: null,
         dropZoneEnabled: true,
-        dropZoneTitle: 'Arrastre y suelte sus arquivos aqui...',
+        dropZoneTitle: 'Tama&ntildeo m&aacuteximo del archivo: 500KB',
         dropZoneTitleClass: 'file-drop-zone-title',
         fileActionSettings: {},
         otherActionButtons: '',

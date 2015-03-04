@@ -81,7 +81,10 @@
             }, setupDemos);
         </script>
     </head>
-    <body class="">
+
+    <body onload="closedthis();" class="body">
+
+
         <%
             HttpSession sesion_1 = request.getSession(true);
             String rol = (String) sesion_1.getAttribute("IDROL");
@@ -92,6 +95,26 @@
 
             //String id_dgp = "";
         %>
+        <script>
+            function exito(titulo, mensaje) {
+                $.smallBox({
+                    title: titulo,
+                    content: mensaje,
+                    color: "#739E73",
+                    iconSmall: "fa fa-cloud",
+                    timeout: 3000
+                });
+            }
+            function closedthis() {
+                $.smallBox({
+                    title: "¡Ficha de trabajador registrada correctamente!",
+                    content: "ya puede visualizar toda la informacion del trabajador...",
+                    color: "#739E73",
+                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                    timeout: 6000
+                });
+            }
+        </script>
         <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
 
 
@@ -311,7 +334,7 @@
                                                         <%} else {
                                                                 out.print("");
                                                             }%>
-                                                    </td><%=d.getTi_documento()%>
+                                                    </td>
                                                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
                                                 </tr>  
 
@@ -334,11 +357,11 @@
                                                             <tr>
                                                                 <td align="center" style="border:1px solid;border-color: #D2691E;height:30%">
                                                                     <strong><%  if (d.getTi_documento().trim().equals("ACMA")) {
-                                                                    out.println("ACTA DE MATRIMONIO CON: <p style='color:red;' >" + co.getAp_nombres_conyugue() + "</p>");
-                                                                }
-                                                                if (d.getTi_documento().trim().equals("DNIC")) {
-                                                                    out.println("COPIA DNI CONYUGUE : <p style='color:red;' >" + co.getAp_nombres_conyugue() + "</p>");
-                                                                }%>
+                                                                            out.println("ACTA DE MATRIMONIO CON: <p style='color:red;' >" + co.getAp_nombres_conyugue() + "</p>");
+                                                                        }
+                                                                        if (d.getTi_documento().trim().equals("DNIC")) {
+                                                                            out.println("COPIA DNI CONYUGUE : <p style='color:red;' >" + co.getAp_nombres_conyugue() + "</p>");
+                                                                        }%>
                                                                     </strong>
                                                                 </td><br>
                                                             </tr><br>

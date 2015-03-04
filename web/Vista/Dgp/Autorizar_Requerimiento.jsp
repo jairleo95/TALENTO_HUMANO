@@ -85,7 +85,23 @@
     <body onload='exito("Procesado con exito!", "Usted ha realizado una autorización correctamente.");' class="body">
         <%
             }
-        } else {
+        }%>
+         <%if (request.getParameter("m") != null) {
+            if (request.getParameter("m").equals("si")) {
+    %>
+
+    <body onload='exito("Procesado con exito!", "Codigo APS ingresado correctamente");' class="body">
+        <%
+            }
+        }%>
+        <%if (request.getParameter("h") != null) {
+            if (request.getParameter("h").equals("si")) {
+    %>
+
+    <body onload='exito("Procesado con exito!", "Codigo huella ingresado correctamente");' class="body">
+        <%
+            }
+        }else {
         %>
     <body class="body"  >
         <%}%> 
@@ -235,7 +251,7 @@
                                                             type: "POST",
                                                             data: "opc=Aceptar" + $(".val_aut" + r).val()
                                                         }).done(function() {
-                                                            window.location.href = "../../autorizacion";
+                                                            window.location.href = "../../autorizacion?opc=mens_cod_aps";
                                                         });
                                                     }
 
@@ -261,7 +277,7 @@
                                                             type: "POST",
                                                             data: "opc=Aceptar" + $(".val_aut" + r).val()
                                                         }).done(function() {
-                                                            window.location.href = "../../autorizacion";
+                                                            window.location.href = "../../autorizacion?opc=mens_cod_huella";
                                                         });
 
 
