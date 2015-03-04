@@ -921,4 +921,20 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         }
     }
 
+    @Override
+    public String REG_DOC_TRABAJADOR(String trb) {
+       this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select count(*) from RHTV_DGP_DOC_ADJ where ID_TRABAJADOR = "+trb+"";
+        String n = null;
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                n = rs.getString(1);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return n;
+    }
 }

@@ -147,7 +147,9 @@
 
     </head>
 
-    <%if (request.getParameter("a") != null) {
+    <%  //String num = request.getParameter("num");
+       // int num_doc = Integer.parseInt(num);
+        if (request.getParameter("a") != null) {
             if (request.getParameter("a").equals("t")) {
     %>
 
@@ -724,6 +726,15 @@
                 });
             }
 
+             function closedthis2() {
+                $.smallBox({
+                    title: "¡Documentos del trabajador registrados correctamente!",
+                    content: "ya puede visualizar toda los documentos del trabajador...",
+                    color: "#739E73",
+                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                    timeout: 6000
+                });
+            }
             $(document).ready(function () {
 
                 pageSetUp();
