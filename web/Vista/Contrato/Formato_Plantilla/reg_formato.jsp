@@ -37,28 +37,56 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     n = (X_List_Id_Contrato_DGP) List_contra_x_idcto.get(i);
                     InterfaceListaDAO l = new ListaDAO();
                     String Direccion = "";
-                    for (int b = 0; b < l.List_Dom_D1_Id().size(); b++) {
-                        if (n.getLi_di_dom_a_d1().trim().equals(b + 1 + "")) {
-                            Direccion += l.List_Dom_D1_Id().get(b);
+                    if (n.getLi_di_dom_a_d1() != null) {
+                        for (int b = 0; b < l.List_Dom_D1_Id().size(); b++) {
+                            if (n.getLi_di_dom_a_d1().trim().equals(b + 1 + "")) {
+                                Direccion += l.List_Dom_D1_Id().get(b);
+                            }
                         }
+                    } else {
+                        Direccion += "sin dato";
                     }
-                    if (n.getLi_di_dom_a_d3().trim().equals("1")) {
-                        Direccion += " " + n.getDi_dom_a_d2() + " Numero";
-                    }
-                    if (n.getLi_di_dom_a_d3().trim().equals("2")) {
-                        Direccion += " " + n.getDi_dom_a_d2() + " Lote";
-                    }
-                    if (n.getLi_di_dom_a_d3().trim().equals("3")) {
-                        Direccion += " " + n.getDi_dom_a_d2() + " S/N";
-                    }
-                    for (int c = 0; c < l.List_Dom_D5_Id().size(); c++) {
-                        if (n.getLi_di_dom_a_d5().trim().equals(c + 1 + "")) {
-                            Direccion += " " + n.getDi_dom_a_d4() + " " + l.List_Dom_D5_Id().get(c);
-                        }
-                    }
-                    
-                    Direccion += " " + n.getDi_dom_a_d6();
+                    if (n.getLi_di_dom_a_d3() != null) {
+                        if (n.getLi_di_dom_a_d3().trim().equals("1")) {
 
+                            if (n.getDi_dom_a_d2() != null) {
+                                Direccion += " " + n.getDi_dom_a_d2() + " Numero";
+                            } else {
+                                Direccion += " - Numero";
+                            }
+                        }
+                        if (n.getLi_di_dom_a_d3().trim().equals("2")) {
+                            if (n.getDi_dom_a_d2() != null) {
+                                Direccion += " " + n.getDi_dom_a_d2() + " Lote";
+                            } else {
+                                Direccion += " - Lote";
+                            }
+                        }
+                        if (n.getLi_di_dom_a_d3().trim().equals("3")) {
+
+                            if (n.getDi_dom_a_d2() != null) {
+                                Direccion += " " + n.getDi_dom_a_d2() + " S/N";
+                            } else {
+                                Direccion += " - S/N";
+                            }
+                        }
+                    } else {
+                        Direccion += "sin dato";
+                    }
+                    if (n.getLi_di_dom_a_d5() != null) {
+                        for (int c = 0; c < l.List_Dom_D5_Id().size(); c++) {
+                            if (n.getLi_di_dom_a_d5().trim().equals(c + 1 + "")) {
+                                Direccion += " " + n.getDi_dom_a_d4() + " " + l.List_Dom_D5_Id().get(c);
+                            }
+                        }
+                    } else {
+                        Direccion += "sin dato";
+                    }
+                    if (n.getDi_dom_a_d6() != null) {
+                        Direccion += " " + n.getDi_dom_a_d6();
+                    } else {
+                        Direccion += "-";
+                    }
                     String fecha = n.getFe_sus();
                     String fechasus = "";
                     if (fecha != "" & fecha != null) {
@@ -88,7 +116,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     } else {
                         fechahas = "NO TIENE";
                     }
-                    String funciones ="";
+                    String funciones = "";
                     for (int p = 0; p < List_x_fun_x_idpu.size(); p++) {
                         Funciones fn = new Funciones();
                         fn = (Funciones) List_x_fun_x_idpu.get(p);
@@ -98,15 +126,15 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                             funciones += fn.getDe_funcion() + ",";
                         }
                     }
-                    String moneda="";
-                    if(n.getCo_ti_moneda().trim().equals("01")){
-                        moneda="nuevos soles";
+                    String moneda = "";
+                    if (n.getCo_ti_moneda().trim().equals("01")) {
+                        moneda = "nuevos soles";
                     }
-                    if(n.getCo_ti_moneda().trim().equals("02")){
-                        moneda="dolares";
+                    if (n.getCo_ti_moneda().trim().equals("02")) {
+                        moneda = "dolares";
                     }
-                    if(n.getCo_ti_moneda().trim().equals("03")){
-                        moneda="euros";
+                    if (n.getCo_ti_moneda().trim().equals("03")) {
+                        moneda = "euros";
                     }
         %>
         <script>
