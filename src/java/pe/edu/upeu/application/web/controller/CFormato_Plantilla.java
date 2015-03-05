@@ -20,8 +20,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import pe.edu.upeu.application.dao.DireccionDAO;
 import pe.edu.upeu.application.dao.Formato_HorarioDAO;
 import pe.edu.upeu.application.dao.PlantillaContractualDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceFormato_HorarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePlantillaContractualDAO;
 
@@ -49,6 +51,7 @@ public class CFormato_Plantilla extends HttpServlet {
         InterfaceFormato_HorarioDAO f = new Formato_HorarioDAO();
         InterfacePlantillaContractualDAO pl = new PlantillaContractualDAO();
         HttpSession sesion = request.getSession(true);
+        InterfaceDireccionDAO dir = new DireccionDAO();
         String iduser = (String) sesion.getAttribute("IDUSER");
         String opc = request.getParameter("opc");
         if(iduser!=null){
@@ -61,6 +64,7 @@ public class CFormato_Plantilla extends HttpServlet {
                 String PUES = request.getParameter("id_pu_asig");
                 String id = request.getParameter("id_pc");
                 pl.Insertar_pertenencia(id, DIR, DEP, AREA, SEC, PUES, iduser);
+                getServletContext().setAttribute("Listar_Direccion", dir.Listar_Direccion());
                 response.sendRedirect("Vista/Contrato/Formato_Plantilla/Reg_Formato_Plantilla.jsp");
             }
             if (opc.equals("asignar")) {
