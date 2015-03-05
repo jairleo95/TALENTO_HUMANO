@@ -120,7 +120,7 @@ public class CCarga_Academica extends HttpServlet {
             String ID_PUESTO = request.getParameter("PUESTO");
             String ID_REQUERIMIENTO = request.getParameter("REQ");
             //String ID_REQUERIMIENTO = "REQ-0018";
-            
+
             String CO_RUC = request.getParameter("CO_RUC");
             String DE_LUGAR_SERVICIO = request.getParameter("DE_LUGAR_SERVICIO");
             String DE_SERVICIO = request.getParameter("DE_SERVICIO");
@@ -147,7 +147,7 @@ public class CCarga_Academica extends HttpServlet {
             String ES_MFL = "0";
             double CA_BONIFICACION_P = 0.0;
             String iddgp = carga.INSERT_DGP(null, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO, DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION, ES_DGP, iduser, null, null, null, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, DE_ANTECEDENTES_POLICIALES, ES_CERTIFICADO_SALUD, DE_MONTO_HONORARIO, FE_CESE, FE_RECEPCION, MO_RENUNCIA, DI_ADQUIRIDOS, DI_CONSUMIDOS, DI_POR_CONSUMIR, ES_VACACIONES, LI_MOTIVO, ES_MFL, CA_BONIFICACION_P);
-            String ID_PROCESO_CARGA_AC = carga.INSERT_PROCESO_CARGA_ACADEMICA(null, null, CA_TIPO_HORA_PAGO, CA_TOTAL_HL, FE_DESDE, FE_HASTA, "0", iduser, null, null, null, IP_USUARIO, NO_USUARIO,iddgp);
+            String ID_PROCESO_CARGA_AC = carga.INSERT_PROCESO_CARGA_ACADEMICA(null, null, CA_TIPO_HORA_PAGO, CA_TOTAL_HL, FE_DESDE, FE_HASTA, "0", iduser, null, null, null, IP_USUARIO, NO_USUARIO, iddgp.trim());
             for (int i = 1; i <= numero; i++) {
                 /*pago docente (iterar)*/
                 String NU_CUOTA = "" + i;
@@ -163,7 +163,6 @@ public class CCarga_Academica extends HttpServlet {
             String idrp = IReq.id_det_req_proc(iddgp.trim());
             /* REGISTRAR PRIMERA AUTORIZACION*/
             List<String> list = a.Det_Autorizacion(idrp);
-            //out.print(idrp);
             //  a.Insert_Autorizacion("", iddgp, "1", "P1", "12312", iduser, "", "", "", list.get(1), idrp, list.get(0));
             a.Insert_Autorizacion("", iddgp.trim(), "1", "P1", "", iduser, "", "", "", list.get(1).trim(), idrp.trim(), list.get(0));
         }

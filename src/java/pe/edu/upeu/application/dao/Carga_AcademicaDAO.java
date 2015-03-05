@@ -382,4 +382,28 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
 
     }
 
+    @Override
+    public void PROCESAR_CARGA_ACADEMICA(String id_proceso, String iddgp) {
+
+        //   String id = "";
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL PROCESAR_CARGA_ACADEMICA( ?, ? )} ");
+            cst.setString(1, id_proceso);
+            cst.setString(2, iddgp);
+            cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR :" + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+
+    }
+
 }
