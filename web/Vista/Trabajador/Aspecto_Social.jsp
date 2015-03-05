@@ -121,9 +121,9 @@
                 <tr><td class="text-info">Dirección :</td><td>
                         <%
                             if (trb.getLi_di_dom_leg_d1() != null) {
-                                for (int i = 0; i < l.List_Dom_D1_Id().size(); i++) {
+                                for (int i = 0; i < List_Dom_D1_Id.size(); i++) {
                                     Via v = new Via();
-                                    v = (Via) l.List_Dom_D1_Id().get(i);
+                                    v = (Via)List_Dom_D1_Id.get(i);
                                     if (v.getId_via().trim().equals(trb.getLi_di_dom_leg_d1().trim())) {
                                         out.println(v.getDe_via());
                                     }
@@ -137,10 +137,10 @@
                             }
                             
                             if (trb.getLi_di_dom_leg_d3() != null) {
-                                for (int j = 0; j < l.List_Dom_D3_Id().size(); j++) {
+                                for (int j = 0; j < List_Dom_D3_Id.size(); j++) {
                                     String num = Integer.toString(j + 1);
                                     if (trb.getLi_di_dom_leg_d3().trim().equals(num)) {
-                                        out.print(l.List_Dom_D3_Id().get(j));
+                                        out.print(List_Dom_D3_Id.get(j));
                                     }
                                 }
                             }
@@ -152,9 +152,9 @@
                             }
                             
                             if (trb.getLi_di_dom_leg_d5() != null) {
-                                for (int c = 0; c < l.List_Dom_D5_Id().size(); c++) {
+                                for (int c = 0; c < List_Dom_D5_Id.size(); c++) {
                                     Zona z = new Zona();
-                                    z = (Zona) l.List_Dom_D5_Id().get(c);
+                                    z = (Zona)List_Dom_D5_Id.get(c);
                                     if (trb.getLi_di_dom_leg_d5().trim().equals(z.getId_zona().trim())) {
                                         out.println(z.getDe_zona());
                                     }
