@@ -884,7 +884,7 @@
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-credit-card  fa-lg fa-fw"></i></span>
                                                                             <select name="BANCO" id="banco" class="form-control input-group-sm">
-                                                                                <option value="" selected="" disabled="" >[BANCO]</option>
+                                                                                <option value="" selected="" >[BANCO]</option>
                                                                                 <option value="0" >Ninguno</option>
                                                                                 <option value="1" >BBVA</option>
                                                                                 <option value="2" >BCP</option>
@@ -977,7 +977,30 @@
                                                             }
 
                                                             function cuenta_bancaria(banco) {
+                                                                if (banco == '') {
+                                                                    $("#no_cuen").hide();
+                                                                    $("#no_cuen_ban").hide();
+                                                                    $("#generar").hide();
+                                                                    $("#texto").hide();
+                                                                    $("#no_cuen_otros").hide();
+                                                                }
+                                                                if (banco == '0') {
+                                                                    $("#no_cuen").hide();
+                                                                    $("#nu_cuen").val("");
+                                                                    $("#no_cuen_ban").hide();
+                                                                    $("#nu_cuen_ban").val("");
+                                                                    $("#no_cuen_otros").show();
+                                                                    $("#nu_cuen_otros").val("BBVA Banco Continental");
+                                                                    $("#nu_cuen_otros").attr('readonly', 'readonly');
+                                                                    //document.getElementById("nu_cuen_otros").readOnly = true;
+                                                                    $("#texto").show();
+                                                                    $("#generar").show();
+                                                                    $("#subscription").attr("required", "required");
+                                                                    $("#nu_cuen_otros").attr("required", "required");
+                                                                    $("#nu_cuen_otros").removeAttr('maxlength');
+                                                                    $("#nu_cuen_otros").removeAttr('minlength');
 
+                                                                }
                                                                 if (banco == '1') {
                                                                     $("#generar").hide();
                                                                     $("#no_cuen").show();
@@ -1001,11 +1024,16 @@
                                                                     $("#no_cuen").show();
                                                                     $("#nu_cuen").val("");
                                                                     $("#nu_cuen").attr("required", "required");
+                                                                    $("#nu_cuen_otros").removeAttr('maxlength');
+                                                                    $("#nu_cuen_otros").removeAttr('minlength');
                                                                     $("#nu_cuen").attr("maxlength", "14");
-                                                                    $("#nu_cuen").mask("99999999999999", {placeholder: "X"});
+                                                                    $("#nu_cuen").attr("minlength", "0");
+                                                                    //$("#nu_cuen").mask("99999999999999", {placeholder: "X"});
                                                                     $("#no_cuen_otros").hide();
                                                                     $("#nu_cuen_otros").val("");
                                                                     $("#texto").hide();
+                                                                    
+
                                                                 }
                                                                 if (banco == '3') {
                                                                     $("#no_cuen").show();
@@ -1021,22 +1049,10 @@
                                                                     $("#subscription").attr('checked', false);
                                                                     $("#texto").hide();
                                                                     $("#nu_cuen_otros").removeAttr('readonly');
+                                                                    $("#nu_cuen_otros").removeAttr('maxlength');
+                                                                    $("#nu_cuen_otros").removeAttr('minlength');
                                                                 }
-                                                                if (banco == '0') {
-                                                                    $("#no_cuen").hide();
-                                                                    $("#nu_cuen").val("");
-                                                                    $("#no_cuen_ban").hide();
-                                                                    $("#nu_cuen_ban").val("");
-                                                                    $("#no_cuen_otros").show();
-                                                                    $("#nu_cuen_otros").val("BBVA Banco Continental");
-                                                                    $("#nu_cuen_otros").attr('readonly','readonly');
-                                                                    //document.getElementById("nu_cuen_otros").readOnly = true;
-                                                                    $("#texto").show();
-                                                                    $("#generar").show();
-                                                                    $("#subscription").attr("required", "required");
-                                                                    $("#nu_cuen_otros").attr("required", "required");
 
-                                                                }
 
                                                             }
 
@@ -1102,6 +1118,7 @@
                                                                                 });
 
                                                                                 $("#banco").change(function() {
+                                                                                   
                                                                                     cuenta_bancaria($(this).val());
                                                                                     $("#es_cuenta").val(1);
                                                                                     //  alert($("#es_cuenta").val());
@@ -2007,7 +2024,7 @@
                                                                         <li class="next">
                                                                             <a href="javascript:void(0);" class="btn btn-lg txt-color-darken"> Siguiente <i class="fa fa-chevron-right"></i></a>
                                                                         </li>
-                                                                        
+
                                                                     </ul>
                                                                 </div>
                                                             </div>

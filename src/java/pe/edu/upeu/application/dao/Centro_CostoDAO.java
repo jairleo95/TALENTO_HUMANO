@@ -84,7 +84,7 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select distinct(d.id_direccion) as id_direccion, d.no_direccion    from rhtr_centro_costo cc, rhtx_departamento dp , rhtx_direccion d where dp.id_departamento = cc.id_departamento and  dp.id_direccion = d.id_direccion";
+            String sql = "select distinct(d.id_direccion) as id_direccion, d.no_direccion    from rhtr_centro_costo cc, rhtx_departamento dp , rhtx_direccion d where dp.id_departamento = cc.id_departamento and  dp.id_direccion = d.id_direccion ORDER BY d.NO_DIRECCION";
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -112,7 +112,7 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select  distinct (cc.id_departamento) as id_departamento,dp.no_dep   from rhtr_centro_costo cc, rhtx_departamento dp , rhtx_direccion d where dp.id_departamento = cc.id_departamento and  dp.id_direccion = d.id_direccion and d.id_direccion='" + iddir + "'";
+            String sql = "select  distinct (cc.id_departamento) as id_departamento,dp.no_dep   from rhtr_centro_costo cc, rhtx_departamento dp , rhtx_direccion d where dp.id_departamento = cc.id_departamento and  dp.id_direccion = d.id_direccion and d.id_direccion='" + iddir + "' ORDER BY dp.NO_DEP";
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -140,7 +140,7 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select  cc.id_centro_costo,cc.CO_CENTRO_COSTO ||' -  '||cc.DE_CENTRO_COSTO as DE_CENTRO_COSTO  from rhtr_centro_costo cc, rhtx_departamento dp , rhtx_direccion d where dp.id_departamento = cc.id_departamento and  dp.id_direccion = d.id_direccion and cc.id_departamento='" + iddep + "'";
+            String sql = "select  cc.id_centro_costo,cc.CO_CENTRO_COSTO ||' -  '||cc.DE_CENTRO_COSTO as DE_CENTRO_COSTO  from rhtr_centro_costo cc, rhtx_departamento dp , rhtx_direccion d where dp.id_departamento = cc.id_departamento and  dp.id_direccion = d.id_direccion and cc.id_departamento='" + iddep + "'  ORDER BY cc.DE_CENTRO_COSTO";
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();

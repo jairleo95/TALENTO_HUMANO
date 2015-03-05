@@ -27,7 +27,7 @@ public class DepartamentoDao implements InterfaceDepartamentoDAO {
     @Override
     public List<Departamento> List_Departamento() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from rhtx_departamento";
+        String sql = "select * from rhtx_departamento ORDER BY NO_DEP";
         List<Departamento> list = new ArrayList<Departamento>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -106,7 +106,7 @@ public class DepartamentoDao implements InterfaceDepartamentoDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT ID_DEPARTAMENTO, NO_DEP FROM RHVD_PUESTO_DIRECCION WHERE ID_DIRECCION='"+id+"' GROUP BY ID_DEPARTAMENTO, NO_DEP";
+            String sql = "SELECT ID_DEPARTAMENTO, NO_DEP FROM RHVD_PUESTO_DIRECCION WHERE ID_DIRECCION='"+id+"' GROUP BY ID_DEPARTAMENTO, NO_DEP ORDER BY NO_DEP";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();

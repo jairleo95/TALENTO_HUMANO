@@ -435,7 +435,7 @@
                                                     <div class="row">
                                                         <section class="col col-4">
                                                             <label class="select" id="titu">Regimen Laboral Mintra:
-                                                                <select name="REG_LAB_MINTRA" class="input-group-sm" required="">
+                                                                <select name="REG_LAB_MINTRA" class="input-group-sm" >
                                                                     <option value="">[SELECCIONE]</option>
                                                                     <%for (int q = 0; q < list_reg_labo.size(); q++) {
                                                                             Regimen_Laboral re = new Regimen_Laboral();
@@ -448,7 +448,7 @@
                                                         </section>
                                                         <section class="col col-4">
                                                             <label class="select" id="titu">Modalidad:
-                                                                <select name="MODALIDAD" class="input-group-sm" id="select_mod" required="">
+                                                                <select name="MODALIDAD" class="input-group-sm" id="select_mod" >
                                                                     <option value="">[SELECCIONE]</option>
                                                                     <%for (int l = 0; l < List_modalidad.size(); l++) {
                                                                             Modalidad mo = new Modalidad();
@@ -462,14 +462,14 @@
                                                         </section>
                                                         <section class="col col-4">
                                                             <label class="select" id="titu">SUB-Modalidad:
-                                                                <select name="SUB_MODALIDAD" class="input-group-sm" id="select-sub-mod" required="">
+                                                                <select name="SUB_MODALIDAD" class="input-group-sm" id="select-sub-mod" >
                                                                     <option value="">[SELECCIONE]</option>
                                                                 </select>
                                                             </label>
                                                         </section>
                                                         <section class="col col-4">
                                                             <label class="select" id="titu">Tipo Contratación:
-                                                                <select name="REG_LAB_MINTRA" class="input-group-sm" required="">
+                                                                <select name="REG_LAB_MINTRA" class="input-group-sm" >
                                                                     <option value="">[SELECCIONE]</option>
                                                                     <option value="I">INICIO</option>
                                                                     <option value="R">RENOVACION</option>
@@ -478,7 +478,7 @@
                                                         </section>
                                                         <section class="col col-4">
                                                             <label class="select" id="titu">Codigo Grupo de Ocupaciones:
-                                                                <select name="CO_GRUPO_OCU" class="input-group-sm" required="">
+                                                                <select name="CO_GRUPO_OCU" class="input-group-sm" >
                                                                     <option value="">[SELECCIONE]</option>
                                                                     <%for (int gr = 0; gr < List_grup_ocu.size(); gr++) {
                                                                             Grupo_Ocupaciones g = new Grupo_Ocupaciones();
@@ -493,12 +493,12 @@
                                                             <%String Fecha = request.getParameter("fe_subs");%>
                                                             <!-- <input type="text" value="<%=Fecha%>">-->
                                                             <label class="input" id="titu">Fecha de Suscripción: 
-                                                                <input id="suscripcion" type="date" name="FECHA_SUSCRIPCION"  class="input-group-sm" required="" value="<%=Fecha%>">
+                                                                <input id="suscripcion" type="date" name="FECHA_SUSCRIPCION"  class="input-group-sm"  value="<%=Fecha%>">
                                                             </label>
                                                         </section>
                                                         <section class="col col-4">
                                                             <label class="select" id="titu">Tipo de Moneda:
-                                                                <select name="TIPO_MONEDA" class="input-group-sm" required="">
+                                                                <select name="TIPO_MONEDA" class="input-group-sm" >
                                                                     <option value="">[SELECCIONE]</option>
                                                                     <option value="01" selected="">SOLES</option>
                                                                     <option value="02">DOLARES</option>
@@ -508,7 +508,7 @@
                                                         </section>
                                                         <section class="col col-4">
                                                             <label class="select" id="titu">Tipo Remuneracion Variable:
-                                                                <select name="REM_VARIABLE" class="input-group-sm" required="">
+                                                                <select name="REM_VARIABLE" class="input-group-sm" >
                                                                     <option value="">[SELECCIONE]</option>
                                                                     <option value="1">DESTAJO</option>
                                                                     <option value="2">COMISIONES</option>
@@ -518,7 +518,7 @@
                                                         </section>
                                                         <section class="col col-4">
                                                             <label class="select" id="titu">Remuneración en Especie:
-                                                                <select name="REM_ESPECIE" class="input-group-sm" required="">
+                                                                <select name="REM_ESPECIE" class="input-group-sm" >
                                                                     <option value="">[SELECCIONE]</option>
                                                                     <option value="1">SI</option>
                                                                     <option value="0">NO</option>

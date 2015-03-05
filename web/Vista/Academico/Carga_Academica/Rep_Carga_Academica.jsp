@@ -2,15 +2,52 @@
 <%@page import="pe.edu.upeu.application.model.Carga_Academica"%>
 <%@page import="pe.edu.upeu.application.dao.Carga_AcademicaDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceCarga_AcademicaDAO"%>
+<jsp:useBean id="ListCarAca" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html><head>
 
 
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Carga Académica</title>
 
-        <title>Tablas con Filtros</title>
+        <meta name="description" content="">
+        <meta name="author" content="">
 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <!-- Basic Styles -->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/font-awesome.min.css">
+        <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-skins.min.css">
 
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/demo.min.css">
+
+        <!-- FAVICONS -->
+        <link rel="shortcut icon" href="../../../img/favicon/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="../../../img/favicon/favicon.ico" type="image/x-icon">
+
+        <!-- GOOGLE FONT -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+
+        <!-- Specifying a Webpage Icon for Web Clip 
+                 Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
+        <link rel="apple-touch-icon" href="../../../img/splash/sptouch-icon-iphone.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../../img/splash/touch-icon-ipad.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../../img/splash/touch-icon-iphone-retina.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../../img/splash/touch-icon-ipad-retina.png">
+
+        <!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+        <!-- Startup image for web apps -->
+        <link rel="apple-touch-startup-image" href="../../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+        <link rel="apple-touch-startup-image" href="../../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+        <link rel="apple-touch-startup-image" href="../../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
 
         <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
         <style type="text/css" title="currentStyle">
@@ -19,7 +56,6 @@
             @import "../../../js/DataTables-1.10.4/media/css/themes/base/jquery-ui.css";
             @import "../../../js/DataTables-1.10.4/media/css/themes/smoothness/jquery-ui-1.7.2.custom.css";
         </style>
-
         <script src="../../../js/DataTables-1.10.4/media/js/jquery-1.4.4.min.js" type="text/javascript"></script>
         <script src="../../../js/DataTables-1.10.4/media/js/jquery.dataTables.js" type="text/javascript"></script>
 
@@ -176,10 +212,11 @@
                     </tr>
                 </tfoot>
                 <tbody>
-                    <%InterfaceCarga_AcademicaDAO ica = new Carga_AcademicaDAO();
-                        for (int i = 0; i < ica.ListCarAca().size(); i++) {
+                    <%
+
+                        for (int i = 0; i < ListCarAca.size(); i++) {
                             Carga_Academica ca = new Carga_Academica();
-                            ca = (Carga_Academica) ica.ListCarAca().get(i);
+                            ca = (Carga_Academica) ListCarAca.get(i);
 
 
                     %>
@@ -195,7 +232,7 @@
                         <td><%=ca.getDe_carga()%></td>
                         <td><%=ca.getFe_desde()%></td>
                         <td><%=ca.getFe_hasta()%></td>
-                        <td><a href="../../../carga_academica?opc=Completar_Datos&nro_doc=<%=ca.getNu_doc()%>&ap_p=<%=ca.getAp_paterno()%>&ap_m=<%=ca.getAp_materno()%>&no_tr=<%=ca.getNo_trabajador()%>&ti_doc=<%=ca.getEs_tipo_doc()%>&eap=<%=ca.getNo_eap()%>&facultad=<%=ca.getNo_facultad()%>" >Completar Datos</a></td>
+                        <td><a href="../../../carga_academica?opc=Completar_Datos&nro_doc=<%=ca.getNu_doc()%>&ap_p=<%=ca.getAp_paterno()%>&ap_m=<%=ca.getAp_materno()%>&no_tr=<%=ca.getNo_trabajador()%>&ti_doc=<%=ca.getEs_tipo_doc()%>&eap=<%=ca.getNo_eap()%>&facultad=<%=ca.getNo_facultad()%>" class="btn btn-primary" >Completar Datos</a></td>
                     </tr>
                     <%}%>
 
@@ -272,8 +309,4 @@
     })(jQuery);
 
 </script>
-
-
-
-
 </html>
