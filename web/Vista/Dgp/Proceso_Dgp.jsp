@@ -3,6 +3,7 @@
     HttpSession sesion_1 = request.getSession();
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
     if (id_user_1 != null) {
+        String ID_DEP = (String) sesion_1.getAttribute("DEPARTAMENTO_ID");
 %>
 <%@page import="java.util.Iterator"%>
 <%@page import="pe.edu.upeu.application.dao.DgpDAO"%>
@@ -67,10 +68,10 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <style type="text/css">
             *, *:after, *:before {
-            /*    margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-                font-family: "Open Sans";*/
+                /*    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                    font-family: "Open Sans";*/
             }
 
 
@@ -124,7 +125,7 @@
             }
             .new-progress .new-circle.rechazo {
                 background: #a90329;
-                 color: #b5b5ba;
+                color: #b5b5ba;
             }
             .new-progress .new-bar.active {
                 background: linear-gradient(to right, #EEE 40%, #FFF 60%);
@@ -147,7 +148,7 @@
             }
             .new-progress .new-circle.done .new-label:hover, .new-circle:hover{
 
-              //  background-color:blue; 
+                //  background-color:blue; 
             }
 
         </style>
@@ -204,9 +205,9 @@
                                             <thead>			                
                                                 <tr>
                                                     <th data-hide="phone">Nro</th>
-                                                     <th>MES</th>
+                                                    <th>MES</th>
                                                     <th data-hide="phone,tablet"><i class="fa fa-fw fa-building text-muted hidden-md hidden-sm hidden-xs"></i> Acciones</th>
-                                                   
+
                                                     <th data-class="expand">Nombre</th>
                                                     <th data-hide="phone,tablet">Proceso</th>
                                                     <th >Estado</th>
@@ -244,44 +245,44 @@
                                                 <% if (r.getAr_foto() == null) {%>
                                                 <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30">
                                                     <a style="margin-left: 3%;" href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> 
-                                          
+
                                                         <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a>
 
-                                                    
+
                                                     <input type="hidden" class="num_aut<%=(i + 1)%>" value="<%=r.getAut_actual()%>"/>
 
                                                 </td>
                                                 <td><div class="new-progress prog_aut<%=(i + 1)%>"  >
                                                         <%
-                                                            out.println(d.Imprimir_det_proceso(r.getId_dgp(), r.getId_detalle_req_proceso()));
+                                                            out.println(d.Imprimir_det_proceso(r.getId_dgp(), r.getId_detalle_req_proceso(), ID_DEP));
                                                         %>
                                                     </div></td>
-                                                    <td><%if (r.getEs_dgp().equals("2")) {
-                                                            out.print(" <span class='label label-danger'>Fuera de Proceso</span>");
-                                                        } else {
-                                                            out.print(" <span class='label label-primary'>En Proceso</span>");
-                                                        }%></td>
-                                                <% } else {%>
-                                                <td><img src="../Usuario/Fotos/<%=r.getAr_foto()%>"  width="30"  height="30"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> 
-                                    
-                                                        <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a> 
-
-
-                                                   
-
-                                                    <input type="hidden" class="num_aut<%=(i + 1)%>" value="<%=r.getAut_actual()%>"/>
-                                                </td>
-                                                <td><div class="new-progress prog_aut<%=(i + 1)%>"  >
-                                                        <%
-                                                            out.println(d.Imprimir_det_proceso(r.getId_dgp(), r.getId_detalle_req_proceso()));
-                                                        %>
-                                                    </div></td>
-                                                    <td>  <%if (r.getEs_dgp().equals("2")) {
+                                                <td><%if (r.getEs_dgp().equals("2")) {
                                                         out.print(" <span class='label label-danger'>Fuera de Proceso</span>");
                                                     } else {
                                                         out.print(" <span class='label label-primary'>En Proceso</span>");
                                                     }%></td>
-                                                <% }%>
+                                                    <% } else {%>
+                                                <td><img src="../Usuario/Fotos/<%=r.getAr_foto()%>"  width="30"  height="30"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> 
+
+                                                        <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a> 
+
+
+
+
+                                                    <input type="hidden" class="num_aut<%=(i + 1)%>" value="<%=r.getAut_actual()%>"/>
+                                                </td>
+                                                <td><div class="new-progress prog_aut<%=(i + 1)%>"  >
+                                                        <%
+                                                            out.println(d.Imprimir_det_proceso(r.getId_dgp(), r.getId_detalle_req_proceso(), ID_DEP));
+                                                        %>
+                                                    </div></td>
+                                                <td>  <%if (r.getEs_dgp().equals("2")) {
+                                                        out.print(" <span class='label label-danger'>Fuera de Proceso</span>");
+                                                    } else {
+                                                        out.print(" <span class='label label-primary'>En Proceso</span>");
+                                                    }%></td>
+                                                    <% }%>
                                             </tr>
                                             <% }
                                                 LIST_DGP_PROCESO.clear();%>
@@ -451,26 +452,26 @@
                 };
 
                 $('#dt_basic').dataTable({
-                 "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
-                 "t" +
-                 "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                 "autoWidth": true,
-                 "preDrawCallback": function () {
-                 // Initialize the responsive datatables helper once.
-                 if (!responsiveHelper_dt_basic) {
-                 responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
-                 }
-                 },
-                 "rowCallback": function (nRow) {
-                 responsiveHelper_dt_basic.createExpandIcon(nRow);
-                 
-                 },
-                 "drawCallback": function (oSettings) {
-                 responsiveHelper_dt_basic.respond();
-                 
-                 
-                 }
-                 });
+                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
+                            "t" +
+                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                    "autoWidth": true,
+                    "preDrawCallback": function () {
+                        // Initialize the responsive datatables helper once.
+                        if (!responsiveHelper_dt_basic) {
+                            responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
+                        }
+                    },
+                    "rowCallback": function (nRow) {
+                        responsiveHelper_dt_basic.createExpandIcon(nRow);
+
+                    },
+                    "drawCallback": function (oSettings) {
+                        responsiveHelper_dt_basic.respond();
+
+
+                    }
+                });
 
                 /* END BASIC */
 
@@ -498,7 +499,7 @@
                     "drawCallback": function (oSettings) {
                         responsiveHelper_datatable_fixed_column.respond();
                     }
-                    
+
 
                 });
 
@@ -864,9 +865,9 @@
                 }, 50);
             }
             $(document).ready(function () {
-               /* for (var u = 0; u < $(".tamaño").val() + 1; u++) {
-                    iterar_aut(u, parseInt($(".num_aut" + u).val()) + 2);
-                }*/
+                /* for (var u = 0; u < $(".tamaño").val() + 1; u++) {
+                 iterar_aut(u, parseInt($(".num_aut" + u).val()) + 2);
+                 }*/
 
 
 

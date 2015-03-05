@@ -90,70 +90,9 @@
         <script type="text/javascript" src="js/JQuery/jQuery.js" ></script>
     </head>
     <body>
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-        <div class="new-progress">
-            <div class="new-circle done">
-                <span class="new-label">1</span>
-                <span class="new-title">P1</span>
-            </div>
-            <span class="new-bar done"></span>
-            <div class="new-circle done">
-                <span class="new-label">2</span>
-                <span class="new-title">P2</span>
-            </div>
-            <span class="new-bar half"></span>
-            <div class="new-circle active">
-                <span class="new-label">3</span>
-                <span class="new-title">P3</span>
-            </div>
-            <span class="new-bar"></span>
-            <div class="new-circle">
-                <span class="new-label">4</span>
-                <span class="new-title">P4</span>
-            </div>
-            <span class="new-bar"></span>
-            <div class="new-circle">
-                <span class="new-label">5</span>
-                <span class="new-title">P5</span>
-            </div>
-            <span class="new-bar"></span>
-            <div class="new-circle">
-                <span class="new-label">6</span>
-                <span class="new-title">P6</span>
-            </div>
-            <span class="new-bar"></span>
-            <div class="new-circle">
-                <span class="new-label">7</span>
-                <span class="new-title">xx</span>
-            </div>
-            <span class="new-bar"></span>
-            <div class="new-circle">
-                <span class="new-label">8</span>
-                <span class="new-title">xx</span>
-            </div>
-            <span class="new-bar"></span>
-            <div class="new-circle">
-                <span class="new-label">9</span>
-                <span class="new-title">xx</span>
-            </div>
-            <span class="new-bar"></span>
-            <div class="new-circle">
-                <span class="new-label">10</span>
-                <span class="new-title">xx</span>
-            </div>
-            <span class="new-bar"></span>
-            <div class="new-circle">
-                <span class="new-label">11</span>
-                <span class="new-title">xx</span>
-            </div>
-            <span class="new-bar"></span>
-            <div class="new-circle">
-                <span class="new-label">12</span>
-                <span class="new-title">xx</span>
-            </div>
-        </div>
-<%="SELECT f.de_pasos, "
-                    + "  f.nu_pasos ,s.es_autorizacion, rhfu_count_aut_dgp ('') as count_aut,rhfu_detalle_puesto_aut ('',s.id_pasos) as puesto_aut  "
+      <%
+  String sql = "SELECT f.de_pasos, "
+                    + "  f.nu_pasos ,s.es_autorizacion, rhfu_count_aut_dgp ('') as count_aut,rhfu_detalle_puesto_aut ('',f.id_pasos) as puesto_aut  "
                     + "FROM "
                     + "  (SELECT p.id_pasos, "
                     + "    p.id_proceso, "
@@ -242,7 +181,10 @@
                     + "  ) s ON ( s.ID_DETALLE_REQ_PROCESO=f.ID_DETALLE_REQ_PROCESO "
                     + "AND f.id_pasos                     =s.id_pasos ) "
                     + "WHERE f.ID_DETALLE_REQ_PROCESO     ='' "
-                    + "ORDER BY to_number(SUBSTR(f.nu_pasos,2,LENGTH(f.nu_pasos))) ASC"%>
+                    + "ORDER BY to_number(SUBSTR(f.nu_pasos,2,LENGTH(f.nu_pasos))) ASC";
+  out.print(sql);
+    
+%>  
     </body>
     <script type="text/javascript">
         var i = 1;
