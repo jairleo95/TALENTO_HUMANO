@@ -487,7 +487,7 @@ public class CDgp extends HttpServlet {
             out.print(iddgp);
             dgp.REG_DGP_FINAL(iddgp);
             getServletContext().setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep));
-            response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp");
+            response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp&a=t");
         }
 
         if (opc.equals("Listar")) {

@@ -848,7 +848,6 @@
                 overwriteInitial: false,
                 maxFileSize: 500,
                 maxFilesNum: 10,
-                addCss : "",
                 browseClass: "btn btn-primary btn-lg",
                 //allowedFileTypes: ['image', 'video', 'flash'],
                 slugCallback: function(filename) {

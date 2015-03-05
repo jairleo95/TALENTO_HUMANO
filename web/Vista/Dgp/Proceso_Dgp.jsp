@@ -152,7 +152,20 @@
 
         </style>
     </head>
+        <%  //String num = request.getParameter("num");
+        // int num_doc = Integer.parseInt(num);
+        if (request.getParameter("a") != null) {
+            if (request.getParameter("a").equals("t")) {
+    %>
+
+    <body onload="closedthis();">
+
+        <%
+            }
+        } else {
+        %>
     <body class="">
+        <%}%>
         <!-- MAIN PANEL -->
         <div id="main" role="main" style="margin-left: 0px;">
             <!-- MAIN CONTENT -->
