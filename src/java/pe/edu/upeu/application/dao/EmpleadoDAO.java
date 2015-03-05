@@ -160,19 +160,18 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
         }
         return list;
     }
-
-    @Override
+    
+    
+ @Override
     public List<V_List_Empleado> Listar_Empleado() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT * FROM RHVD_LIST_EMPLEADO ";
+        String sql = "SELECT * FROM RHVD_LIST_EMPLEADO order by id_contrato desc";
         List<V_List_Empleado> list = new ArrayList<V_List_Empleado>();
         try {
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 V_List_Empleado v = new V_List_Empleado();
                 v.setEs_inst_educ_peru(rs.getString("es_inst_educ_peru"));
-                v.setN(rs.getString("n"));
-                v.setNn(rs.getString("nn"));
                 v.setCm_otros_estudios(rs.getString("cm_otros_estudios"));
                 v.setEs_sexo(rs.getString("es_sexo"));
                 v.setLi_grupo_sanguineo(rs.getString("li_grupo_sanguineo"));
@@ -266,6 +265,7 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
         }
         return list;
     }
+    
 
     @Override
     public List<V_List_Empleado> Listar_Emp() {

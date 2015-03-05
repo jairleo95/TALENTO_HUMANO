@@ -110,7 +110,13 @@
                 });
             }
         </script>
-
+        <style type="text/css">
+            .files{
+                width:20px;
+                height:10px;
+            }   
+        </style>
+            
         <!-- MAIN PANEL -->
 
         <div id="main" role="main" style="margin: 0px;">
@@ -367,7 +373,7 @@
                                                                     <div class="form-group">
                                                                         <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  <%if (d.getEs_obligatorio().equals("1")) {
                                                                                 out.println(" required='required' ");
-                                                                            }%> name="archivos<%=(i + 1)%>" >
+                                                                        }%> name="archivos<%=(i + 1)%>" style="height:40px;">
                                                                     </div>
                                                                     <% } else { %>
                                                                     <% if (d.getId_documento_adjunto() == null) { %>
@@ -413,8 +419,7 @@
                                                             %>
                                                             <img src="Desaprobado.png" width="20" height="20">
                                                         </label>
-                                                        <% }
-                                                                }
+                                                        <% }}
                                                             }%>
                                                     </td>
                                                     <td class="table-bordered" style="text-align:center;" align="center">
@@ -453,7 +458,7 @@
                                                                     <div class="form-group">
                                                                         <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  <%if (d.getEs_obligatorio().equals("1")) {
                                                                                 out.println(" required='required' ");
-                                                                            }%> name="archivos<%=(i + 1)%>" >
+                                                                        }%> name="archivos<%=(i + 1)%>" style="height:20px;">
                                                                     </div>
                                                                     <% } else { %>
                                                                     <% if (d.getId_documento_adjunto() == null) { %>
@@ -832,7 +837,7 @@
                 layoutTemplates: {
                     main1: "{preview}\n" +
                             "<div class=\'input-group {class}\'>\n" +
-                            "   <div class=\'input-group-btn\'>\n" +
+                            "   <div class=\'input-group-btn\' >\n" +
                             "       {browse}\n" +
                             "       {upload}\n" +
                             "       {remove}\n" +
@@ -843,6 +848,8 @@
                 overwriteInitial: false,
                 maxFileSize: 500,
                 maxFilesNum: 10,
+                addCss : "",
+                browseClass: "btn btn-primary btn-lg",
                 //allowedFileTypes: ['image', 'video', 'flash'],
                 slugCallback: function(filename) {
                     return filename.replace('(', '_').replace(']', '_');

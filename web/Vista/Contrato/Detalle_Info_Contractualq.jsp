@@ -188,8 +188,8 @@
                 <%if (idrol.trim().equals("ROL-0006") || idrol.trim().equals("ROL-0002")) {
                 %> 
                 <a class="btn btn-labeled btn-primary" href="../../contrato?opc=Subir_Contrato&idc=<%=n.getId_contrato()%>" > <span class="btn-label"><i class="fa fa-cloud-upload"></i></span>Subir Contrato Firmado</a>
-                <%}%>
-                <% for (int p = 0; p < List_contra_x_idcto.size(); p++) {%>
+                        <%}%>
+                        <% for (int p = 0; p < List_contra_x_idcto.size(); p++) {%>
 
 
                 <table class="table table-hover table-striped  table-responsive">
@@ -229,6 +229,11 @@
                         } else {
                             out.print("0");
                         }%> </td></tr>
+                    <tr><td class="text-info table-bordered"><strong>Bonificacion Puesto:</strong></td><td class="table-bordered"  colspan="6">S/.<%if (n.getCa_bonificacion_p()!= null) {
+                            out.print(n.getCa_bonificacion_p());
+                        } else {
+                            out.print("--");
+                        }%> </td></tr>
                     <!-- <tr><td class="text-info table-bordered"><strong>Bonificacion Puesto:</strong></td><td class="table-bordered"  colspan="6">S/.<%/*if (n.getCa_bonificacion_p()!= null) {
                          out.print(n.getCa_bonificacion_p());
                          } else {
@@ -239,7 +244,14 @@
                         } else {
                             out.print("0");
                         }%> </td></tr>
-                    <tr><td class="text-info table-bordered"><strong>Tipo Pago Horas:</strong></td><td class="table-bordered"  colspan="6"><%=n.getTi_hora_pago()%> </td></tr>
+                    <tr><td class="text-info table-bordered"><strong>Tipo Pago Horas:</strong></td><td class="table-bordered"  colspan="6"><%
+                        if (n.getTi_hora_pago() != null) {
+                            out.print(n.getTi_hora_pago());
+                        } else {
+                            out.print("--");
+                        }
+
+                            %> </td></tr>
                     <tr><td class="text-info table-bordered"><strong>Asignación Familiar:</strong></td><td class="table-bordered"  class="table-bordered" colspan="6"><%= "S/." + n.getCa_asig_familiar()%> </td></tr>
                     <tr><td class="text-info table-bordered"><strong>Regimen Laboral Mintra:</strong></td>
                         <% if (n.getId_regimen_laboral() != null) {
