@@ -144,7 +144,7 @@
                                                 <tr>
                                                     <td style="color:black;with:15%;text-align:center;"><%=i + 1%></td>
                                                     <td style="color:#1E90FF;with:40%;text-align:center;"><%=d.getNo_documento()%></td>
-                                                    <td style="color:#1E90FF;with:30%;text-align:center;"><%out.print(doc_.List_file_url(d.getId_documento_adjunto().trim()));%></a></td>
+                                                    <td style="color:#1E90FF;with:30%;text-align:center;"><%out.print(doc_.List_file_url2(d.getId_documento_adjunto().trim()));%></a></td>
                                                     <td style="color:black;with:15%;text-align:center;"><%=d.getDe_documento_adjunto()%></td>
                                                 </tr>
                                                 <% }

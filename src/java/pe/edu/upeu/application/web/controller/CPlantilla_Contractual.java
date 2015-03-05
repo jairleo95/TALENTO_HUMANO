@@ -18,11 +18,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import pe.edu.upeu.application.dao.ContratoDAO;
 import pe.edu.upeu.application.dao.FuncionDAO;
+import pe.edu.upeu.application.dao.ListaDAO;
 import pe.edu.upeu.application.dao.PlantillaContractualDAO;
 import pe.edu.upeu.application.dao.PuestoDAO;
 import pe.edu.upeu.application.dao.TrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceContratoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceFuncionDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePlantillaContractualDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
@@ -45,6 +47,7 @@ public class CPlantilla_Contractual extends HttpServlet {
     
     InterfacePuestoDAO pu = new PuestoDAO();
     InterfaceTrabajadorDAO tr = new TrabajadorDAO();
+    InterfaceListaDAO l = new ListaDAO();
     
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -85,6 +88,8 @@ public class CPlantilla_Contractual extends HttpServlet {
                 out.print(no_arch);
                 getServletContext().setAttribute("List_x_fun_x_idpu", fu.List_x_fun_x_idpu(id_puesto));
                 getServletContext().setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_con));
+                getServletContext().setAttribute("List_Dom_D1_Id", l.List_Dom_D1_Id());
+                getServletContext().setAttribute("List_Dom_D5_Id", l.List_Dom_D5_Id());
                 //out.print(getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"Vista\\Contrato\\Formato_Plantilla\\Formato");
                 out.print(id_puesto);
                 response.sendRedirect("Vista/Contrato/Formato_Plantilla/reg_formato.jsp?&no_arc=" + no_arch);

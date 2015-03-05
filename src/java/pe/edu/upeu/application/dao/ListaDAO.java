@@ -225,7 +225,7 @@ public class ListaDAO implements InterfaceListaDAO {
     @Override
     public List<Via> List_Dom_D1_Id() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from rhtx_via";
+        String sql = "select * from rhtx_via order by co_via";
         List<Via> list = new ArrayList<Via>();
         try {
             ResultSet rs = this.conn.query(sql);

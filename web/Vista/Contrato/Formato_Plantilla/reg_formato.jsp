@@ -1,4 +1,6 @@
 
+<%@page import="pe.edu.upeu.application.model.Zona"%>
+<%@page import="pe.edu.upeu.application.model.Via"%>
 <%@page import="pe.edu.upeu.application.model.Funciones"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -22,6 +24,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 <%@page import="java.util.Calendar;"%>
 <jsp:useBean id="List_contra_x_idcto" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_x_fun_x_idpu" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Dom_D1_Id" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Dom_D5_Id" scope="application" class="java.util.ArrayList"/>
 <html>
     <head>
         <meta charset="utf-8">
@@ -40,61 +44,70 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 for (int i = 0; i < List_contra_x_idcto.size(); i++) {
                     X_List_Id_Contrato_DGP n = new X_List_Id_Contrato_DGP();
                     n = (X_List_Id_Contrato_DGP) List_contra_x_idcto.get(i);
-                    InterfaceListaDAO l = new ListaDAO();
                     String Direccion = "";
                     if (n.getLi_di_dom_a_d1() != null) {
-                        for (int b = 0; b < l.List_Dom_D1_Id().size(); b++) {
+                        for (int b = 0; b < List_Dom_D1_Id.size(); b++) {
+                            Via v = new Via();
+                            v = (Via) List_Dom_D1_Id.get(b);
                             if (n.getLi_di_dom_a_d1().trim().equals(b + 1 + "")) {
-                                Direccion += l.List_Dom_D1_Id().get(b);
+                                if (n.getDi_dom_a_d2() != null) {
+                                    Direccion += v.getDe_via() +" "+ n.getDi_dom_a_d2().trim();
+                                } else {
+                                    Direccion += v.getDe_via().trim() + " - ";
+                                }
                             }
                         }
                     } else {
-                        Direccion += "-";
+                        Direccion += "--" + n.getDi_dom_a_d2().trim();
                     }
                     if (n.getLi_di_dom_a_d3() != null) {
                         if (n.getLi_di_dom_a_d3().trim().equals("1")) {
-
-                            if (n.getDi_dom_a_d2() != null) {
-                                Direccion += " " + n.getDi_dom_a_d2() + " Numero";
-                            } else {
-                                Direccion += " - Numero";
-                            }
+                            Direccion += " Numero ";
                         }
                         if (n.getLi_di_dom_a_d3().trim().equals("2")) {
-                            if (n.getDi_dom_a_d2() != null) {
-                                Direccion += " " + n.getDi_dom_a_d2() + " Lote";
-                            } else {
-                                Direccion += " - Lote";
-                            }
+                            Direccion += " Lote ";
+
                         }
                         if (n.getLi_di_dom_a_d3().trim().equals("3")) {
-
-                            if (n.getDi_dom_a_d2() != null) {
-                                Direccion += " " + n.getDi_dom_a_d2() + " S/N";
-                            } else {
-                                Direccion += " - S/N";
-                            }
+                            Direccion += " S/N ";
+                        }
+                        if (n.getLi_di_dom_a_d3().trim().equals("4")) {
+                            Direccion += " Km ";
+                        }
+                        if (n.getLi_di_dom_a_d3().trim().equals("5")) {
+                            Direccion += " Block ";
+                        }
+                        if (n.getLi_di_dom_a_d3().trim().equals("6")) {
+                            Direccion += " Etapa ";
+                        }
+                        if (n.getLi_di_dom_a_d3().trim().equals("7")) {
+                            Direccion += " Departamento ";
+                        }
+                        if (n.getLi_di_dom_a_d3().trim().equals("8")) {
+                            Direccion += " Interior ";
                         }
                     } else {
                         Direccion += "-";
                     }
                     if (n.getLi_di_dom_a_d5() != null) {
-                        for (int c = 0; c < l.List_Dom_D5_Id().size(); c++) {
+                        for (int c = 0; c < List_Dom_D5_Id.size(); c++) {
+                            Zona z = new Zona();
+                            z = (Zona) List_Dom_D5_Id.get(c);
                             if (n.getLi_di_dom_a_d5().trim().equals(c + 1 + "")) {
                                 if (n.getDi_dom_a_d4() != null) {
-                                    Direccion += " " + n.getDi_dom_a_d4() + " " + l.List_Dom_D5_Id().get(c);
-                                }else{
-                                    Direccion += " - " + l.List_Dom_D5_Id().get(c);
+                                    Direccion += n.getDi_dom_a_d4().trim() + " " + z.getDe_zona();
+                                } else {
+                                    Direccion += " - " + z.getDe_zona();
                                 }
                             }
                         }
                     } else {
-                        Direccion += "-";
+                        Direccion += " -- "+n.getDi_dom_a_d4() ;
                     }
                     if (n.getDi_dom_a_d6() != null) {
-                        Direccion += " " + n.getDi_dom_a_d6();
+                        Direccion += " " + n.getDi_dom_a_d6().trim();
                     } else {
-                        Direccion += "-";
+                        Direccion += " - ";
                     }
                     String fecha = n.getFe_sus();
                     String fechasus = "";
@@ -311,14 +324,14 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
     </head>
 
-    <body style="height: 1080px" align="center">
+    <body style="height:100%;width:100%;" align="center">
         <%String no_ar = request.getParameter("no_arc");%>
         <input type="hidden" id="no_arch" class="no_arc" value="<%=no_ar%>">
-        <h1>EDITAR PLANTILLAS <%=fechades%></h1>
+        <h1>EDITAR PLANTILLAS</h1>
     <CENTER>
         <button class="btn btn-lg btn-primary" onclick="ExecuteCommand('print');" style="height:50%;weith:20px;"><span class="btn-"><i class="fa fa-print"></i></span>IMPRIMIR</button>
 
-        <form class="ckeditor_form" action="../../../formato_plantilla" method="post" align="center" >
+        <form class="ckeditor_form" action="../../../formato_plantilla" method="post" align="center" width="100">
             <textarea cols="100" id="editor1" name="editor1" rows="10" >
             </textarea>
             <script>
@@ -336,7 +349,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                 doc.getById('exec-link').hide();
                         }
                     }
-                    , height: '800px', align: 'center'});</script>
+                    , height: '800px', width: '100%'});</script>
             <script>
                 $(document).ready(function() {
                     $(".procesar").click();

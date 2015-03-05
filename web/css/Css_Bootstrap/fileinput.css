@@ -33,8 +33,10 @@
     position: absolute;
     top: 0;
     right: 0;
-    min-width: 100%;
-    min-height: 100%;
+    min-width: 20px;
+    min-height: 20px;
+width: 25px;
+    height: 25px;
     text-align: right;
     opacity: 0;
     filter: alpha(opacity=0);
