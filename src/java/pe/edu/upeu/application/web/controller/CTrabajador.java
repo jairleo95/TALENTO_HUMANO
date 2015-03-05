@@ -62,7 +62,7 @@ public class CTrabajador extends HttpServlet {
         HttpSession sesion = request.getSession(true);
         String idrol = (String) sesion.getAttribute("IDROL");
         String iduser = (String) sesion.getAttribute("IDUSER");
-
+        InterfaceListaDAO l = new ListaDAO();
         CConversion c = new CConversion();
         InterfaceListaDAO li = new ListaDAO();
         // InterfaceDgpDAO dgp = new DgpDAO();
@@ -273,10 +273,9 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
             getServletContext().setAttribute("List_Ubigeo", ub.List_Distrito());
             getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
-            
+
             //String num_doc = tr.REG_DOC_TRABAJADOR(idtr);
-           // out.print(num_doc);
-            
+            // out.print(num_doc);
             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&a=t");
         }
         if ("actualizar".equals(opc)) {
@@ -468,6 +467,9 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("List_Distrito", ub.List_DistritoTra());
             getServletContext().setAttribute("List_Ubigeo", ub.List_Distrito());
             getServletContext().setAttribute("List_Departamento", ub.List_Departamento());
+            getServletContext().setAttribute("List_Dom_D1_Id", l.List_Dom_D1_Id());
+            getServletContext().setAttribute("List_Dom_D5_Id", l.List_Dom_D5_Id());
+            getServletContext().setAttribute("List_Dom_D3_Id", l.List_Dom_D3_Id());
 
             //out.print(dir.Listar_via().size()+"-");   
             //out.print(dir.Listar_Direccion().size()+"-");   

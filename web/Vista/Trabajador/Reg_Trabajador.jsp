@@ -262,12 +262,7 @@
                                     if ((mmActual < mmCumple) || (mmActual == mmCumple && diaActual < diaCumple)) {
                                         edad--;
                                     }
-                                    $(".edad").text(edad + " años");
-                                    if (edad < 18) {
-                                        alert("mayor de 18 años");
-                                        $("#edad").val("0000-00-00");
-                                        $(".edad").text("");
-                                    }
+
                                 }
                         );
 

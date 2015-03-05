@@ -1,4 +1,3 @@
-
 <%
     HttpSession sesion = request.getSession();
     String id_user = (String) sesion.getAttribute("IDUSER");
@@ -65,7 +64,11 @@
         <link rel="apple-touch-startup-image" href="HTML_version/img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="HTML_version/img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <script type="text/javascript" src="js/JQuery/jquery.autoheight.js"></script>
-
+        <script type="text/javascript">
+            if (history.forward(1)) {
+                history.replace(history.forward(1));
+            }
+        </script>
     </head>
     <body class="">
         <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
@@ -352,7 +355,7 @@
                     <li class="li-privilegio">
                         <a href="#"><i class="fa fa-lg fa-fw fa-windows"></i> <span class="menu-item-parent">Generar Requerimiento</span></a>
                         <ul>
-                            <%if (!id_rol.trim().equals("ROL-0011")|id_rol.trim().equals("ROL-0001")) {
+                            <%if (!id_rol.trim().equals("ROL-0011") | id_rol.trim().equals("ROL-0001")) {
                             %>
                             <li>
                                 <a href="Vista/Dgp/Requerimiento.jsp?opc=Planilla" target="myframe"><i class="fa fa-lg fa-fw fa-file"></i> En Planilla</a>
@@ -374,7 +377,8 @@
 
                                 </ul>
                             </li>
-                            <%} if(id_rol.trim().equals("ROL-0011")|id_rol.trim().equals("ROL-0001")){%>
+                            <%}
+                                if (id_rol.trim().equals("ROL-0011") | id_rol.trim().equals("ROL-0001")) {%>
                             <li>
                                 <a href="Vista/Academico/Carga_Academica/Rep_Carga_Academica.jsp" target="myframe"><i class="fa fa-lg fa-fw fa-file"></i>Carga Academica <span class="badge pull-right inbox-badge bg-color-blue">¡Nuevo!</span></a>
 
@@ -659,7 +663,7 @@
         <script src="HTML_version/js/plugin/fullcalendar/jquery.fullcalendar.min.js"></script>
 
         <script>
-            $(document).ready(function () {
+            $(document).ready(function() {
 
                 // DO NOT REMOVE : GLOBAL FUNCTIONS!
                 pageSetUp();
@@ -667,14 +671,14 @@
                 /*
                  * PAGE RELATED SCRIPTS
                  */
-                $(".menu-item-parent").parent().click(function () {
+                $(".menu-item-parent").parent().click(function() {
                     $(".titulo_menu").text($(this).text());
                 });
-                $(".li-privilegio").click(function () {
+                $(".li-privilegio").click(function() {
                     $(".li-privilegio").removeClass("active");
                     $(this).addClass("active");
                 });
-                $(".js-status-update a").click(function () {
+                $(".js-status-update a").click(function() {
                     var selText = $(this).text();
                     var $this = $(this);
                     $this.parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
@@ -687,7 +691,7 @@
                  */
 
                 // initialize sortable
-                $(function () {
+                $(function() {
                     $("#sortable1, #sortable2").sortable({
                         handle: '.handle',
                         connectWith: ".todo",
@@ -696,7 +700,7 @@
                 });
 
                 // check and uncheck
-                $('.todo .checkbox > input[type="checkbox"]').click(function () {
+                $('.todo .checkbox > input[type="checkbox"]').click(function() {
                     var $this = $(this).parent().parent().parent();
 
                     if ($(this).prop('checked')) {
@@ -707,7 +711,7 @@
                         $(this).parent().hide();
 
                         // once clicked - add class, copy to memory then remove and add to sortable3
-                        $this.slideUp(500, function () {
+                        $this.slideUp(500, function() {
                             $this.clone().prependTo("#sortable3").effect("highlight", {}, 800);
                             $this.remove();
                             countTasks();
@@ -720,7 +724,7 @@
                 // count tasks
                 function countTasks() {
 
-                    $('.todo-group-title').each(function () {
+                    $('.todo-group-title').each(function() {
                         var $this = $(this);
                         $this.find(".num-of-tasks").text($this.next().find("li").size());
                     });
@@ -760,7 +764,7 @@
 
                 // setup control widget
                 var updateInterval = 1500;
-                $("#updating-chart").val(updateInterval).change(function () {
+                $("#updating-chart").val(updateInterval).change(function() {
 
                     var v = $(this).val();
                     if (v && !isNaN(+v)) {
@@ -801,7 +805,7 @@
                 var plot = $.plot($("#updating-chart"), [getRandomData()], options);
 
                 /* live switch */
-                $('input[type="checkbox"]#start_interval').click(function () {
+                $('input[type="checkbox"]#start_interval').click(function() {
                     if ($(this).prop('checked')) {
                         $on = true;
                         updateInterval = 1500;
@@ -830,7 +834,7 @@
 
                 /* TAB 2: Social Network  */
 
-                $(function () {
+                $(function() {
                     // jQuery Flot Chart
                     var twitter = [[1, 27], [2, 34], [3, 51], [4, 48], [5, 55], [6, 65], [7, 61], [8, 70], [9, 65], [10, 75], [11, 57], [12, 59], [13, 62]], facebook = [[1, 25], [2, 31], [3, 45], [4, 37], [5, 38], [6, 40], [7, 47], [8, 55], [9, 43], [10, 50], [11, 47], [12, 39], [13, 47]], data = [{
                             label: "Twitter",
@@ -895,7 +899,7 @@
                 // TAB THREE GRAPH //
                 /* TAB 3: Revenew  */
 
-                $(function () {
+                $(function() {
 
                     var trgt = [[1354586000000, 153], [1364587000000, 658], [1374588000000, 198], [1384589000000, 663], [1394590000000, 801], [1404591000000, 1080], [1414592000000, 353], [1424593000000, 749], [1434594000000, 523], [1444595000000, 258], [1454596000000, 688], [1464597000000, 364]], prft = [[1354586000000, 53], [1364587000000, 65], [1374588000000, 98], [1384589000000, 83], [1394590000000, 980], [1404591000000, 808], [1414592000000, 720], [1424593000000, 674], [1434594000000, 23], [1444595000000, 79], [1454596000000, 88], [1464597000000, 36]], sgnups = [[1354586000000, 647], [1364587000000, 435], [1374588000000, 784], [1384589000000, 346], [1394590000000, 487], [1404591000000, 463], [1414592000000, 479], [1424593000000, 236], [1434594000000, 843], [1444595000000, 657], [1454596000000, 241], [1464597000000, 341]], toggles = $("#rev-toggles"), target = $("#flotcontainer");
 
@@ -945,7 +949,7 @@
                             mode: "time"
                         },
                         yaxes: {
-                            tickFormatter: function (val, axis) {
+                            tickFormatter: function(val, axis) {
                                 return "$" + val;
                             },
                             max: 1200
@@ -957,7 +961,7 @@
 
                     function plotNow() {
                         var d = [];
-                        toggles.find(':checkbox').each(function () {
+                        toggles.find(':checkbox').each(function() {
                             if ($(this).is(':checked')) {
                                 d.push(data[$(this).attr("name").substr(4, 1)]);
                             }
@@ -974,7 +978,7 @@
                     }
                     ;
 
-                    toggles.find(':checkbox').on('change', function () {
+                    toggles.find(':checkbox').on('change', function() {
                         plotNow();
                     });
                     plotNow()
@@ -1014,7 +1018,7 @@
                                 normalizeFunction: 'polynomial'
                             }]
                     },
-                    onRegionLabelShow: function (e, el, code) {
+                    onRegionLabelShow: function(e, el, code) {
                         if (typeof data_array[code] == 'undefined') {
                             e.preventDefault();
                         } else {
@@ -1046,7 +1050,7 @@
                             center: 'prev, next, today',
                             right: 'month, agendaWeek, agenDay' //month, agendaDay,
                         },
-                        select: function (start, end, allDay) {
+                        select: function(start, end, allDay) {
                             var title = prompt('Event Title:');
                             if (title) {
                                 calendar.fullCalendar('renderEvent', {
@@ -1108,7 +1112,7 @@
                                 end: new Date(y, m, 29),
                                 className: ["event", "bg-color-darken"]
                             }],
-                        eventRender: function (event, element, icon) {
+                        eventRender: function(event, element, icon) {
                             if (!event.description == "") {
                                 element.find('.fc-event-title').append("<br/><span class='ultra-light'>" + event.description + "</span>");
                             }
@@ -1125,35 +1129,35 @@
                 $('.fc-header-right, .fc-header-center').hide();
 
                 // calendar prev
-                $('#calendar-buttons #btn-prev').click(function () {
+                $('#calendar-buttons #btn-prev').click(function() {
                     $('.fc-button-prev').click();
                     return false;
                 });
 
                 // calendar next
-                $('#calendar-buttons #btn-next').click(function () {
+                $('#calendar-buttons #btn-next').click(function() {
                     $('.fc-button-next').click();
                     return false;
                 });
 
                 // calendar today
-                $('#calendar-buttons #btn-today').click(function () {
+                $('#calendar-buttons #btn-today').click(function() {
                     $('.fc-button-today').click();
                     return false;
                 });
 
                 // calendar month
-                $('#mt').click(function () {
+                $('#mt').click(function() {
                     $('#calendar').fullCalendar('changeView', 'month');
                 });
 
                 // calendar agenda week
-                $('#ag').click(function () {
+                $('#ag').click(function() {
                     $('#calendar').fullCalendar('changeView', 'agendaWeek');
                 });
 
                 // calendar agenda day
-                $('#td').click(function () {
+                $('#td').click(function() {
                     $('#calendar').fullCalendar('changeView', 'agendaDay');
                 });
 
@@ -1172,14 +1176,14 @@
                  */
 
                 // custom css expression for a case-insensitive contains()
-                jQuery.expr[':'].Contains = function (a, i, m) {
+                jQuery.expr[':'].Contains = function(a, i, m) {
                     return (a.textContent || a.innerText || "").toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
                 };
 
                 function listFilter(list) {// header is any element, list is an unordered list
                     // create and add the filter form to the header
 
-                    $.filter_input.change(function () {
+                    $.filter_input.change(function() {
                         var filter = $(this).val();
                         if (filter) {
                             // this finds all links in a list that contain the input,
@@ -1190,7 +1194,7 @@
                             $.chat_users.find("li").slideDown();
                         }
                         return false;
-                    }).keyup(function () {
+                    }).keyup(function() {
                         // fire the above change event after every letter
                         $(this).change();
 
@@ -1202,7 +1206,7 @@
                 listFilter($.chat_users);
 
                 // open chat list
-                $.chat_list_btn.click(function () {
+                $.chat_list_btn.click(function() {
                     $(this).parent('#chat-container').toggleClass('open');
                 })
 
@@ -1220,7 +1224,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function () {
+            (function() {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;

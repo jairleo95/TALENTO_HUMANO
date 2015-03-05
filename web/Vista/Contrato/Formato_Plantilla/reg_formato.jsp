@@ -49,7 +49,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         for (int b = 0; b < List_Dom_D1_Id.size(); b++) {
                             Via v = new Via();
                             v = (Via) List_Dom_D1_Id.get(b);
-                            if (n.getLi_di_dom_a_d1().trim().equals(b + 1 + "")) {
+                            if (n.getLi_di_dom_a_d1().trim().equals(v.getId_via().trim())) {
                                 if (n.getDi_dom_a_d2() != null) {
                                     Direccion += v.getDe_via() +" "+ n.getDi_dom_a_d2().trim();
                                 } else {
@@ -93,7 +93,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         for (int c = 0; c < List_Dom_D5_Id.size(); c++) {
                             Zona z = new Zona();
                             z = (Zona) List_Dom_D5_Id.get(c);
-                            if (n.getLi_di_dom_a_d5().trim().equals(c + 1 + "")) {
+                            if (n.getLi_di_dom_a_d5().trim().equals(z.getId_zona().trim())) {
                                 if (n.getDi_dom_a_d4() != null) {
                                     Direccion += n.getDi_dom_a_d4().trim() + " " + z.getDe_zona();
                                 } else {
