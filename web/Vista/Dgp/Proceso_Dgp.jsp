@@ -67,10 +67,10 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <style type="text/css">
             *, *:after, *:before {
-            /*    margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-                font-family: "Open Sans";*/
+                /*    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                    font-family: "Open Sans";*/
             }
 
 
@@ -124,7 +124,7 @@
             }
             .new-progress .new-circle.rechazo {
                 background: #a90329;
-                 color: #b5b5ba;
+                color: #b5b5ba;
             }
             .new-progress .new-bar.active {
                 background: linear-gradient(to right, #EEE 40%, #FFF 60%);
@@ -147,12 +147,12 @@
             }
             .new-progress .new-circle.done .new-label:hover, .new-circle:hover{
 
-              //  background-color:blue; 
+                //  background-color:blue; 
             }
 
         </style>
     </head>
-        <%  //String num = request.getParameter("num");
+    <%  //String num = request.getParameter("num");
         // int num_doc = Integer.parseInt(num);
         if (request.getParameter("a") != null) {
             if (request.getParameter("a").equals("t")) {
@@ -217,9 +217,9 @@
                                             <thead>			                
                                                 <tr>
                                                     <th data-hide="phone">Nro</th>
-                                                     <th>MES</th>
+                                                    <th>MES</th>
                                                     <th data-hide="phone,tablet"><i class="fa fa-fw fa-building text-muted hidden-md hidden-sm hidden-xs"></i> Acciones</th>
-                                                   
+
                                                     <th data-class="expand">Nombre</th>
                                                     <th data-hide="phone,tablet">Proceso</th>
                                                     <th >Estado</th>
@@ -257,10 +257,10 @@
                                                 <% if (r.getAr_foto() == null) {%>
                                                 <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30">
                                                     <a style="margin-left: 3%;" href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> 
-                                          
+
                                                         <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a>
 
-                                                    
+
                                                     <input type="hidden" class="num_aut<%=(i + 1)%>" value="<%=r.getAut_actual()%>"/>
 
                                                 </td>
@@ -269,32 +269,32 @@
                                                             out.println(d.Imprimir_det_proceso(r.getId_dgp(), r.getId_detalle_req_proceso()));
                                                         %>
                                                     </div></td>
-                                                    <td><%if (r.getEs_dgp().equals("2")) {
-                                                            out.print(" <span class='label label-danger'>Fuera de Proceso</span>");
-                                                        } else {
-                                                            out.print(" <span class='label label-primary'>En Proceso</span>");
-                                                        }%></td>
-                                                <% } else {%>
-                                                <td><img src="../Usuario/Fotos/<%=r.getAr_foto()%>"  width="30"  height="30"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> 
-                                    
-                                                        <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a> 
-
-
-                                                   
-
-                                                    <input type="hidden" class="num_aut<%=(i + 1)%>" value="<%=r.getAut_actual()%>"/>
-                                                </td>
-                                                <td><div class="new-progress prog_aut<%=(i + 1)%>"  >
-                                                        <%
-                                                            out.println(d.Imprimir_det_proceso(r.getId_dgp(), r.getId_detalle_req_proceso()));
-                                                        %>
-                                                    </div></td>
-                                                    <td>  <%if (r.getEs_dgp().equals("2")) {
+                                                <td><%if (r.getEs_dgp().equals("2")) {
                                                         out.print(" <span class='label label-danger'>Fuera de Proceso</span>");
                                                     } else {
                                                         out.print(" <span class='label label-primary'>En Proceso</span>");
                                                     }%></td>
-                                                <% }%>
+                                                    <% } else {%>
+                                                <td><img src="../Usuario/Fotos/<%=r.getAr_foto()%>"  width="30"  height="30"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> 
+
+                                                        <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a> 
+
+
+
+
+                                                    <input type="hidden" class="num_aut<%=(i + 1)%>" value="<%=r.getAut_actual()%>"/>
+                                                </td>
+                                                <td><div class="new-progress prog_aut<%=(i + 1)%>"  >
+                                                        <%
+                                                            out.println(d.Imprimir_det_proceso(r.getId_dgp(), r.getId_detalle_req_proceso()));
+                                                        %>
+                                                    </div></td>
+                                                <td>  <%if (r.getEs_dgp().equals("2")) {
+                                                        out.print(" <span class='label label-danger'>Fuera de Proceso</span>");
+                                                    } else {
+                                                        out.print(" <span class='label label-primary'>En Proceso</span>");
+                                                    }%></td>
+                                                    <% }%>
                                             </tr>
                                             <% }
                                                 LIST_DGP_PROCESO.clear();%>
@@ -346,18 +346,18 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 
         <script>
-            if (!window.jQuery) {
-                document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
-            }
+        if (!window.jQuery) {
+            document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
+        }
         </script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
 
         <script>
-            if (!window.jQuery.ui) {
-                document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-            }
+        if (!window.jQuery.ui) {
+            document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+        }
         </script>
 
         <!-- IMPORTANT: APP CONFIG -->
@@ -430,177 +430,194 @@
 
         <script type="text/javascript">
 
-            // DO NOT REMOVE : GLOBAL FUNCTIONS!
+        // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-            $(document).ready(function () {
+        $(document).ready(function() {
 
-                pageSetUp();
+            pageSetUp();
 
-                /* // DOM Position key index //
-                 
-                 l - Length changing (dropdown)
-                 f - Filtering input (search)
-                 t - The Table! (datatable)
-                 i - Information (records)
-                 p - Pagination (paging)
-                 r - pRocessing 
-                 < and > - div elements
-                 <"#id" and > - div with an id
-                 <"class" and > - div with a class
-                 <"#id.class" and > - div with an id and class
-                 
-                 Also see: http://legacy.datatables.net/usage/features
-                 */
+            /* // DOM Position key index //
+             
+             l - Length changing (dropdown)
+             f - Filtering input (search)
+             t - The Table! (datatable)
+             i - Information (records)
+             p - Pagination (paging)
+             r - pRocessing 
+             < and > - div elements
+             <"#id" and > - div with an id
+             <"class" and > - div with a class
+             <"#id.class" and > - div with an id and class
+             
+             Also see: http://legacy.datatables.net/usage/features
+             */
 
-                /* BASIC ;*/
-                var responsiveHelper_dt_basic = undefined;
-                var responsiveHelper_datatable_fixed_column = undefined;
-                var responsiveHelper_datatable_col_reorder = undefined;
-                var responsiveHelper_datatable_tabletools = undefined;
+            /* BASIC ;*/
+            var responsiveHelper_dt_basic = undefined;
+            var responsiveHelper_datatable_fixed_column = undefined;
+            var responsiveHelper_datatable_col_reorder = undefined;
+            var responsiveHelper_datatable_tabletools = undefined;
 
-                var breakpointDefinition = {
-                    tablet: 1024,
-                    phone: 480
-                };
+            var breakpointDefinition = {
+                tablet: 1024,
+                phone: 480
+            };
 
-                $('#dt_basic').dataTable({
-                 "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
-                 "t" +
-                 "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                 "autoWidth": true,
-                 "preDrawCallback": function () {
-                 // Initialize the responsive datatables helper once.
-                 if (!responsiveHelper_dt_basic) {
-                 responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
-                 }
-                 },
-                 "rowCallback": function (nRow) {
-                 responsiveHelper_dt_basic.createExpandIcon(nRow);
-                 
-                 },
-                 "drawCallback": function (oSettings) {
-                 responsiveHelper_dt_basic.respond();
-                 
-                 
-                 }
-                 });
-
-                /* END BASIC */
-
-                /* COLUMN FILTER  */
-                var otable = $('#datatable_fixed_column').DataTable({
-                    //"bFilter": false,
-                    //"bInfo": false,
-                    //"bLengthChange": false
-                    //"bAutoWidth": false,
-                    //"bPaginate": false,
-                    //"bStateSave": true // saves sort state using localStorage
-                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>" +
-                            "t" +
-                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                    "autoWidth": true,
-                    "preDrawCallback": function () {
-                        // Initialize the responsive datatables helper once.
-                        if (!responsiveHelper_datatable_fixed_column) {
-                            responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
-                        }
-                    },
-                    "rowCallback": function (nRow) {
-                        responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
-                    },
-                    "drawCallback": function (oSettings) {
-                        responsiveHelper_datatable_fixed_column.respond();
+            $('#dt_basic').dataTable({
+                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
+                        "t" +
+                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                "autoWidth": true,
+                "preDrawCallback": function() {
+                    // Initialize the responsive datatables helper once.
+                    if (!responsiveHelper_dt_basic) {
+                        responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
                     }
-                    
+                },
+                "rowCallback": function(nRow) {
+                    responsiveHelper_dt_basic.createExpandIcon(nRow);
 
-                });
+                },
+                "drawCallback": function(oSettings) {
+                    responsiveHelper_dt_basic.respond();
 
-                // custom toolbar
-                $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
 
-                // Apply the filter
-                $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
+                }
+            });
 
-                    otable
-                            .column($(this).parent().index() + ':visible')
-                            .search(this.value)
-                            .draw();
+            /* END BASIC */
 
-                });
-                /* END COLUMN FILTER */
-
-                /* COLUMN SHOW - HIDE */
-                $('#datatable_col_reorder').dataTable({
-                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'C>r>" +
-                            "t" +
-                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                    "autoWidth": true,
-                    "preDrawCallback": function () {
-                        // Initialize the responsive datatables helper once.
-                        if (!responsiveHelper_datatable_col_reorder) {
-                            responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
-                        }
-                    },
-                    "rowCallback": function (nRow) {
-                        responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
-                    },
-                    "drawCallback": function (oSettings) {
-                        responsiveHelper_datatable_col_reorder.respond();
+            /* COLUMN FILTER  */
+            var otable = $('#datatable_fixed_column').DataTable({
+                //"bFilter": false,
+                //"bInfo": false,
+                //"bLengthChange": false
+                //"bAutoWidth": false,
+                //"bPaginate": false,
+                //"bStateSave": true // saves sort state using localStorage
+                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>" +
+                        "t" +
+                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                "autoWidth": true,
+                "preDrawCallback": function() {
+                    // Initialize the responsive datatables helper once.
+                    if (!responsiveHelper_datatable_fixed_column) {
+                        responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
                     }
-                });
+                },
+                "rowCallback": function(nRow) {
+                    responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
+                },
+                "drawCallback": function(oSettings) {
+                    responsiveHelper_datatable_fixed_column.respond();
+                }
 
-                /* END COLUMN SHOW - HIDE */
 
-                /* TABLETOOLS */
-                $('#datatable_tabletools').dataTable({
-                    // Tabletools options: 
-                    //   https://datatables.net/extensions/tabletools/button_options
-                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>" +
-                            "t" +
-                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                    "oTableTools": {
-                        "aButtons": [
-                            "copy",
-                            "csv",
-                            "xls",
-                            {
-                                "sExtends": "pdf",
-                                "sTitle": "SmartAdmin_PDF",
-                                "sPdfMessage": "SmartAdmin PDF Export",
-                                "sPdfSize": "letter"
-                            },
-                            {
-                                "sExtends": "print",
-                                "sMessage": "Generated by SmartAdmin <i>(press Esc to close)</i>"
-                            }
-                        ],
-                        "sSwfPath": "js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
-                    },
-                    "autoWidth": true,
-                    "preDrawCallback": function () {
-                        // Initialize the responsive datatables helper once.
-                        if (!responsiveHelper_datatable_tabletools) {
-                            responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
-                        }
-                    },
-                    "rowCallback": function (nRow) {
-                        responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
-                    },
-                    "drawCallback": function (oSettings) {
-                        responsiveHelper_datatable_tabletools.respond();
+            });
+
+            // custom toolbar
+            $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
+
+            // Apply the filter
+            $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function() {
+
+                otable
+                        .column($(this).parent().index() + ':visible')
+                        .search(this.value)
+                        .draw();
+
+            });
+            /* END COLUMN FILTER */
+
+            /* COLUMN SHOW - HIDE */
+            $('#datatable_col_reorder').dataTable({
+                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'C>r>" +
+                        "t" +
+                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
+                "autoWidth": true,
+                "preDrawCallback": function() {
+                    // Initialize the responsive datatables helper once.
+                    if (!responsiveHelper_datatable_col_reorder) {
+                        responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
                     }
-                });
+                },
+                "rowCallback": function(nRow) {
+                    responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
+                },
+                "drawCallback": function(oSettings) {
+                    responsiveHelper_datatable_col_reorder.respond();
+                }
+            });
 
-                /* END TABLETOOLS */
+            /* END COLUMN SHOW - HIDE */
 
-            })
+            /* TABLETOOLS */
+            $('#datatable_tabletools').dataTable({
+                // Tabletools options: 
+                //   https://datatables.net/extensions/tabletools/button_options
+                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>" +
+                        "t" +
+                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
+                "oTableTools": {
+                    "aButtons": [
+                        "copy",
+                        "csv",
+                        "xls",
+                        {
+                            "sExtends": "pdf",
+                            "sTitle": "SmartAdmin_PDF",
+                            "sPdfMessage": "SmartAdmin PDF Export",
+                            "sPdfSize": "letter"
+                        },
+                        {
+                            "sExtends": "print",
+                            "sMessage": "Generated by SmartAdmin <i>(press Esc to close)</i>"
+                        }
+                    ],
+                    "sSwfPath": "js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
+                },
+                "autoWidth": true,
+                "preDrawCallback": function() {
+                    // Initialize the responsive datatables helper once.
+                    if (!responsiveHelper_datatable_tabletools) {
+                        responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
+                    }
+                },
+                "rowCallback": function(nRow) {
+                    responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
+                },
+                "drawCallback": function(oSettings) {
+                    responsiveHelper_datatable_tabletools.respond();
+                }
+            });
+
+            /* END TABLETOOLS */
+
+        })
 
         </script>
         <script type="text/javascript">
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
-
-            $(document).ready(function () {
+            function closedthis() {
+                $.smallBox({
+                    title: "¡DGP registrada correctamente!",
+                    content: "ya puede visualizar toda la informacion del trabajador...",
+                    color: "#739E73",
+                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                    timeout: 6000
+                });
+            }
+            function closedthis2() {
+                $.smallBox({
+                    title: "¡Documentos del trabajador registrados correctamente!",
+                    content: "ya puede visualizar toda los documentos del trabajador...",
+                    color: "#739E73",
+                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                    timeout: 6000
+                });
+            }
+            $(document).ready(function() {
 
                 pageSetUp();
 
@@ -626,7 +643,7 @@
                 /*
                  * Smart Notifications
                  */
-                $('#eg1').click(function (e) {
+                $('#eg1').click(function(e) {
 
                     $.bigBox({
                         title: "Big Information box",
@@ -642,7 +659,7 @@
 
                 })
 
-                $('#eg2').click(function (e) {
+                $('#eg2').click(function(e) {
 
                     $.bigBox({
                         title: "Big Information box",
@@ -656,7 +673,7 @@
                     e.preventDefault();
                 })
 
-                $('#eg3').click(function (e) {
+                $('#eg3').click(function(e) {
 
                     $.bigBox({
                         title: "Shield is up and running!",
@@ -671,7 +688,7 @@
 
                 })
 
-                $('#eg4').click(function (e) {
+                $('#eg4').click(function(e) {
 
                     $.bigBox({
                         title: "Success Message Example",
@@ -680,7 +697,7 @@
                         //timeout: 8000,
                         icon: "fa fa-check",
                         number: "4"
-                    }, function () {
+                    }, function() {
                         closedthis();
                     });
 
@@ -690,7 +707,7 @@
 
 
 
-                $('#eg5').click(function () {
+                $('#eg5').click(function() {
 
                     $.smallBox({
                         title: "Ding Dong!",
@@ -704,7 +721,7 @@
 
 
 
-                $('#eg6').click(function () {
+                $('#eg6').click(function() {
 
                     $.smallBox({
                         title: "Big Information box",
@@ -716,7 +733,7 @@
 
                 })
 
-                $('#eg7').click(function () {
+                $('#eg7').click(function() {
 
                     $.smallBox({
                         title: "James Simmons liked your comment",
@@ -742,12 +759,12 @@
                  * SmartAlerts
                  */
                 // With Callback
-                $("#smart-mod-eg1").click(function (e) {
+                $("#smart-mod-eg1").click(function(e) {
                     $.SmartMessageBox({
                         title: "Smart Alert!",
                         content: "This is a confirmation box. Can be programmed for button callback",
                         buttons: '[No][Yes]'
-                    }, function (ButtonPressed) {
+                    }, function(ButtonPressed) {
                         if (ButtonPressed === "Yes") {
 
                             $.smallBox({
@@ -772,7 +789,7 @@
                     e.preventDefault();
                 })
                 // With Input
-                $("#smart-mod-eg2").click(function (e) {
+                $("#smart-mod-eg2").click(function(e) {
 
                     $.SmartMessageBox({
                         title: "Smart Alert: Input",
@@ -780,14 +797,14 @@
                         buttons: "[Accept]",
                         input: "text",
                         placeholder: "Enter your user name"
-                    }, function (ButtonPress, Value) {
+                    }, function(ButtonPress, Value) {
                         alert(ButtonPress + " " + Value);
                     });
 
                     e.preventDefault();
                 })
                 // With Buttons
-                $("#smart-mod-eg3").click(function (e) {
+                $("#smart-mod-eg3").click(function(e) {
 
                     $.SmartMessageBox({
                         title: "Smart Notification: Buttons",
@@ -798,7 +815,7 @@
                     e.preventDefault();
                 })
                 // With Select
-                $("#smart-mod-eg4").click(function (e) {
+                $("#smart-mod-eg4").click(function(e) {
 
                     $.SmartMessageBox({
                         title: "Smart Alert: Select",
@@ -806,7 +823,7 @@
                         buttons: "[Done]",
                         input: "select",
                         options: "[Costa Rica][United States][Autralia][Spain]"
-                    }, function (ButtonPress, Value) {
+                    }, function(ButtonPress, Value) {
                         alert(ButtonPress + " " + Value);
                     });
 
@@ -814,7 +831,7 @@
                 });
 
                 // With Login
-                $("#smart-mod-eg5").click(function (e) {
+                $("#smart-mod-eg5").click(function(e) {
 
                     $.SmartMessageBox({
                         title: "Login form",
@@ -822,7 +839,7 @@
                         buttons: "[Cancel][Accept]",
                         input: "text",
                         placeholder: "Enter your user name"
-                    }, function (ButtonPress, Value) {
+                    }, function(ButtonPress, Value) {
                         if (ButtonPress == "Cancel") {
                             alert("Why did you cancel that? :(");
                             return 0;
@@ -836,7 +853,7 @@
                             buttons: "[Login]",
                             input: "password",
                             placeholder: "Password"
-                        }, function (ButtonPress, Value) {
+                        }, function(ButtonPress, Value) {
                             alert("Username: " + ValueOriginal + " and your password is: " + Value);
                         });
                     });
@@ -849,12 +866,13 @@
 
         </script>
         <script type="text/javascript">
+
             function iterar_aut(s, t) {
                 var i = 1;
                 $('.prog_aut' + s + ' .new-circle').removeClass().addClass('new-circle');
                 $('.prog_aut' + s + ' .new-bar').removeClass().addClass('new-bar');
 
-                setInterval(function () {
+                setInterval(function() {
                     if (i < t) {
                         $('.prog_aut' + s + ' .new-circle:nth-of-type(' + i + ')').addClass('active');
 
@@ -876,10 +894,10 @@
                     }
                 }, 50);
             }
-            $(document).ready(function () {
-               /* for (var u = 0; u < $(".tamaño").val() + 1; u++) {
-                    iterar_aut(u, parseInt($(".num_aut" + u).val()) + 2);
-                }*/
+            $(document).ready(function() {
+                /* for (var u = 0; u < $(".tamaño").val() + 1; u++) {
+                 iterar_aut(u, parseInt($(".num_aut" + u).val()) + 2);
+                 }*/
 
 
 
@@ -896,7 +914,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function () {
+            (function() {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
