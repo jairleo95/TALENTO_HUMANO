@@ -73,7 +73,6 @@ public class CCarga_Academica extends HttpServlet {
             String dni = request.getParameter("nro_doc");
             String idtr = carga.DNI_ID_TRABAJADOR(dni);
             if (idtr.equals("")) {
-
                 getServletContext().setAttribute("List_Carrera", li.List_Carrera());
                 getServletContext().setAttribute("List_Nacionalidad", li.List_Nacionalidad());
                 getServletContext().setAttribute("List_Universidad", li.List_Universidad());
@@ -88,9 +87,7 @@ public class CCarga_Academica extends HttpServlet {
                 String ap_p = request.getParameter("ap_p");
                 String ap_m = request.getParameter("ap_m");
                 String ti_doc = request.getParameter("ti_doc");
-
                 response.sendRedirect("Vista/Trabajador/Reg_Trabajador.jsp?nro_doc=" + dni + "&ap_p=" + ap_p + "&ap_m=" + ap_m + "&ti_doc=" + ti_doc + "&no_tr=" + no_trabajador);
-
             } else {
                 String hl = request.getParameter("hl");
                 getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
@@ -98,6 +95,15 @@ public class CCarga_Academica extends HttpServlet {
                 //response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?" + "id=" + cripto.Encriptar("idtr:" + idtr));
                 response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?" + "idtr=" + idtr + "&academico=true" + "&hl=" + hl + "&eap=" + eap + "&facultad=" + facu);
             }
+        }
+        if (opc.equals("Procesar")) {
+            String iddgp = request.getParameter("dgp");
+            String idpro = request.getParameter("proceso");
+            carga.PROCESAR_CARGA_ACADEMICA(idpro, iddgp);
+        }
+        if (opc.equals("Reporte_Carga_Academica")) {
+            getServletContext().setAttribute("ListCarAca", carga.ListCarAca());
+            response.sendRedirect("Vista/Academico/Carga_Academica/Rep_Carga_Academica.jsp");
         }
         if (opc.equals("Registrar_CA")) {
             /*Registrar proceso de carga academica*/
@@ -109,7 +115,6 @@ public class CCarga_Academica extends HttpServlet {
             String NO_USUARIO = request.getParameter("NO_USUARIO");
 
             int numero = Integer.parseInt(request.getParameter("num_itera"));
-
             String ID_TRABAJADOR = request.getParameter("IDTR");
             String eap = request.getParameter("eap");
             String facultad = request.getParameter("facultad");
@@ -165,6 +170,10 @@ public class CCarga_Academica extends HttpServlet {
             List<String> list = a.Det_Autorizacion(idrp);
             //  a.Insert_Autorizacion("", iddgp, "1", "P1", "12312", iduser, "", "", "", list.get(1), idrp, list.get(0));
             a.Insert_Autorizacion("", iddgp.trim(), "1", "P1", "", iduser, "", "", "", list.get(1).trim(), idrp.trim(), list.get(0));
+
+            /*Enviar Parametros*/
+            out.println((ID_PROCESO_CARGA_AC.trim() + ":" + iddgp.trim()).trim());
+
         }
     }
 

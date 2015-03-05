@@ -566,9 +566,9 @@
                                             if (hl != null) {
                                                 if (Boolean.valueOf(academico) == true) {
                                         %>
-                                        <input type="text" class="form-control" value="<%=hl%>" name="HL" placeholder="0" required />
+                                        <input type="text" class="form-control" value="0" name="HL" placeholder="0" required />
                                         <%} else {%>
-                                        <input type="text" class="form-control"  name="HL" placeholder="0" required />
+                                        <input type="text" class="form-control" value="0" name="HL" placeholder="0" required />
                                         <%}%>
                                     </div>
                                 </div>
@@ -580,19 +580,21 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="category"> MES 1 :</label>
-                                        <input type="text" class="form-control" name="MES1" value="700" placeholder="0" required />
+                                        <input type="text" class="form-control" name="MES1" readonly="" value="700" placeholder="0" required />
                                         <label for="category"> MES 2 :</label>
-                                        <input type="text" class="form-control" name="MES2" value="700" placeholder="0" required />
+                                        <input type="text" class="form-control" name="MES2" readonly="" value="700" placeholder="0" required />
                                         <label for="category"> MES 3 :</label>
-                                        <input type="text" class="form-control" name="MES3" value="700" placeholder="0" required />
+                                        <input type="text" class="form-control" name="MES3" readonly="" value="700" placeholder="0" required />
                                         <label for="category"> MES 4 :</label>
-                                        <input type="text" class="form-control" name="MES4" value="700" placeholder="0" required />
+                                        <input type="text" class="form-control" name="MES4" readonly="" value="700" placeholder="0" required />
                                         <input type="hidden" name="num_itera" value="4" >
-                                        <input type="text" name="PUESTO" value="PUT-000482" >
-                                        <input type="text" name="REQ" value="REQ-0018">
+                                        <input type="hidden" name="PUESTO" value="PUT-000482" >
+                                        <input type="hidden" name="REQ" value="REQ-0018">
                                         <input type="hidden" name="IDTR" value="<%=idtr%>" >
                                         <input type="hidden" name="eap" value="<%=request.getParameter("eap")%>" >
                                         <input type="hidden" name="facultad" value="<%=request.getParameter("facultad")%>" >
+                                        <input type="hidden" name="dgp"  class="dgp" value="<%=request.getParameter("dgp")%>" >
+                                        <input type="hidden" name="proceso" class="proceso" value="<%=request.getParameter("proceso")%>" >
 
                                     </div>
                                 </div>
@@ -623,8 +625,11 @@
                         url: "../../carga_academica",
                         type: "POST",
                         data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
-                    }).done(function () {
+                    }).done(function (ids) {
+                        var arr_id = ids.split(":");
                         alert("Registrado con exito!...");
+                        $(".proceso").val(arr_id[0]);
+                        $(".dgp").val(arr_id[1]);
                         $(".btn_procesar").show();
                     }).fail(function (e) {
                         alert("Error: " + e);
@@ -633,7 +638,9 @@
 
                 $(".btn_procesar").click(function () {
                     $.ajax({
-                        url:"",data:"",
+                        url: "../../carga_academica", data: "opc=Procesar&dgp=" + $(".dgp").val() + "&proceso=" + $(".proceso").val()
+                    }).done(function () {
+                        window.location.href="../../carga_academica?opc=Reporte_Carga_Academica";
                     });
                 });
 
