@@ -901,7 +901,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-4" id="no_cuen" >
+                                                                <div class="col-sm-4 numero_cuenta" id="no_cuen" >
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-bank fa-lg fa-fw"></i></span>
@@ -1017,6 +1017,7 @@
                                                                     $("#texto").hide();
                                                                 }
                                                                 if (banco == '2') {
+
                                                                     $("#generar").hide();
                                                                     $("#subscription").attr('checked', false);
                                                                     $("#no_cuen_ban").hide();
@@ -1026,13 +1027,16 @@
                                                                     $("#nu_cuen").attr("required", "required");
                                                                     $("#nu_cuen_otros").removeAttr('maxlength');
                                                                     $("#nu_cuen_otros").removeAttr('minlength');
+                                                                    $("#nu_cuen").removeAttr('maxlength');
+                                                                    $("#nu_cuen").removeAttr('minlength');
                                                                     $("#nu_cuen").attr("maxlength", "14");
                                                                     $("#nu_cuen").attr("minlength", "0");
                                                                     //$("#nu_cuen").mask("99999999999999", {placeholder: "X"});
                                                                     $("#no_cuen_otros").hide();
                                                                     $("#nu_cuen_otros").val("");
                                                                     $("#texto").hide();
-                                                                    
+                                                                  $("#nu_cuen").valid();
+
 
                                                                 }
                                                                 if (banco == '3') {
@@ -1118,8 +1122,9 @@
                                                                                 });
 
                                                                                 $("#banco").change(function() {
-                                                                                   
+
                                                                                     cuenta_bancaria($(this).val());
+                                                                                    $("#nu_cuen").focus();
                                                                                     $("#es_cuenta").val(1);
                                                                                     //  alert($("#es_cuenta").val());
                                                                                 });
