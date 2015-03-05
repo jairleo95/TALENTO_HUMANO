@@ -174,7 +174,7 @@
                                                 <thead>
                                                 <center>
                                                     <tr>
-
+                                                        <%String required = request.getParameter("req");%>
                                                         <th class="cajita"  style="text-align:center;" align="center">ADJUNTAR</th>   
                                                         <th class="cajita"  style="text-align:center;" align="center">DESCRIPCION</th>   
                                                         <th class="cajita"  style="text-align:center;" align="center">¿RECIBIDO EN FISICO?</th>   
@@ -183,7 +183,8 @@
                                                 </center>
                                                 </thead>
                                                 <tbody>
-                                                    <% int i = 0;
+                                                    <% 
+                                                        int i = 0;
                                                         for (int z = 0; z < Lis_doc_trabajador.size(); z++) {
                                                             Lis_Doc_tra d = new Lis_Doc_tra();
                                                             d = (Lis_Doc_tra) Lis_doc_trabajador.get(z);
@@ -192,16 +193,16 @@
                                                     <%  if (d.getTi_documento().trim().equals("DOCA")) {%>
                                                     <%  if (n_nac != 0) {%>
                                                     <tr>
-
-
-
                                                         <td  style="width:50%;" align="center">
                                                             <table class="table table-striped ">
-                                                                <tr><td align="center" style="border:1px solid;border-color: #D2691E;height:30%"><strong><%=d.getNo_documento()%></strong></td></tr>
+                                                                <tr><td align="center" style="border:1px solid;border-color: #D2691E;height:30%"><strong><%=d.getNo_documento() %></strong></td></tr>
                                                                 <tr>
-                                                                    <td class="caji<%=(i + 1)%>" align="center"><% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
+                                                                    <td class="caji<%=(i + 1)%>" align="center">
+                                                                        <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
                                                                         <div class="form-group">
-                                                                            <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  name="archivos<%=(i + 1)%>" >
+                                                                            <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#" 
+                                                                                   <%if (required.equals("si") && d.getEs_obligatorio().equals("1")) {out.println(" required='required' ");}%> 
+                                                                                   name="archivos<%=(i + 1)%>" >
                                                                         </div>
                                                                         <% } else { %>
                                                                         <% if (d.getId_documento_adjunto() == null) { %>
@@ -277,7 +278,9 @@
                                                                 <td class="caji<%=(i + 1)%>" align="center">
                                                                     <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
                                                                     <div class="form-group">
-                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  name="archivos<%=(i + 1)%>" >
+                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#" 
+                                                                               <%if (required.equals("si") && d.getEs_obligatorio().equals("1")) {out.println(" required='required' ");}%> 
+                                                                               name="archivos<%=(i + 1)%>" >
                                                                     </div>
                                                                     <% } else { %>
                                                                     <% if (d.getId_documento_adjunto() == null) { %>
@@ -369,7 +372,9 @@
                                                                 <td class="caji<%=(i + 1)%>" align="center">
                                                                     <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
                                                                     <div class="form-group">
-                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"   name="archivos<%=(i + 1)%>" >
+                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#" 
+                                                                               <%if (required.equals("si") && d.getEs_obligatorio().equals("1")) { out.println(" required='required' ");}%>   
+                                                                               name="archivos<%=(i + 1)%>" >
                                                                     </div>
                                                                     <% } else { %>
                                                                     <% if (d.getId_documento_adjunto() == null) { %>
@@ -449,7 +454,9 @@
                                                             <tr><td class="caji<%=(i + 1)%>"  align="center">
                                                                     <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
                                                                     <div class="form-group">
-                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"   name="archivos<%=(i + 1)%>" >
+                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  
+                                                                               <%if (required.equals("si") && d.getEs_obligatorio().equals("1")) { out.println(" required='required' ");}%>  
+                                                                               name="archivos<%=(i + 1)%>" >
                                                                     </div>
                                                                     <% } else { %>
                                                                     <% if (d.getId_documento_adjunto() == null) { %>
@@ -523,7 +530,9 @@
                                                         <tr><td align="center" style="border:1px solid;border-color: #D2691E;"><strong><%=d.getNo_documento()%></strong></td></tr><br><br>
                                                         <tr><td class="caji<%=(i + 1)%>" align="center"> <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
                                                                 <div class="form-group">
-                                                                    <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  name="archivos<%=(i + 1)%>" >
+                                                                    <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  
+                                                                           <%if (required.equals("si") && d.getEs_obligatorio().equals("1")) { out.println(" required='required' ");}%>
+                                                                           name="archivos<%=(i + 1)%>" >
                                                                 </div>
 
                                                                 <% } else { %>
