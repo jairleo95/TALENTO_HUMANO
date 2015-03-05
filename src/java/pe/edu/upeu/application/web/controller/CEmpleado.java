@@ -38,65 +38,68 @@ public class CEmpleado extends HttpServlet {
         InterfaceEmpleadoDAO Iem = new EmpleadoDAO();
 
         HttpSession sesion = request.getSession(true);
-        
+
         String opc = request.getParameter("opc");
 
         if (opc.equals("Eva_Emp")) {
             String ID_Trabajador = request.getParameter("idtr");
             String ID_Empleado = Iem.ID_Empleado(ID_Trabajador);
             String estado = Iem.ES_Empleado(ID_Empleado);
-            
+
             getServletContext().setAttribute("LIST_EVALUACION", Iem.Listar_Evaluacion_Emp(ID_Empleado));
-           if(estado!=null){
-            if(estado.equals("1")){
-            response.sendRedirect("Vista/Empleado/List_Evaluacion_Emp.jsp?idemp="+ID_Empleado);      
-            } else{
-            response.sendRedirect("Vista/Empleado/Evaluacion_Empleado.jsp?idtr="+ID_Trabajador);
+            if (estado != null) {
+                if (estado.equals("1")) {
+                    response.sendRedirect("Vista/Empleado/List_Evaluacion_Emp.jsp?idemp=" + ID_Empleado);
+                } else {
+                    response.sendRedirect("Vista/Empleado/Evaluacion_Empleado.jsp?idtr=" + ID_Trabajador);
+                }
+            } else {
+                response.sendRedirect("Vista/Empleado/Evaluacion_Empleado.jsp?idtr=" + ID_Trabajador);
             }
-           }
-            else{
-            response.sendRedirect("Vista/Empleado/Evaluacion_Empleado.jsp?idtr="+ID_Trabajador);
-            }
-            
-            
+
         }
         if (opc.equals("Reg_Evaluar_Emp")) {
-            
-          String ID_EVALUACION_EMP = null;
-          String ES_EVALUACION = request.getParameter("ESTADO") ;
-          String RE_EVALUACION = request.getParameter("RE_EVALUACION");
-          String ID_TRABAJADOR = request.getParameter("ID_TRABAJADOR");
-          
-          String ID_EMPLEADO = Iem.ID_Empleado(ID_TRABAJADOR);
-          Iem.Insert_Evaluacion_Emp(ID_EVALUACION_EMP, ES_EVALUACION, RE_EVALUACION, ID_EMPLEADO);
-          getServletContext().setAttribute("LIST_EVALUACION", Iem.Listar_Evaluacion_Emp(ID_EMPLEADO));
-           response.sendRedirect("Vista/Empleado/List_Evaluacion_Emp.jsp?idemp="+ID_EMPLEADO );
+
+            String ID_EVALUACION_EMP = null;
+            String ES_EVALUACION = request.getParameter("ESTADO");
+            String RE_EVALUACION = request.getParameter("RE_EVALUACION");
+            String ID_TRABAJADOR = request.getParameter("ID_TRABAJADOR");
+
+            String ID_EMPLEADO = Iem.ID_Empleado(ID_TRABAJADOR);
+            Iem.Insert_Evaluacion_Emp(ID_EVALUACION_EMP, ES_EVALUACION, RE_EVALUACION, ID_EMPLEADO);
+            getServletContext().setAttribute("LIST_EVALUACION", Iem.Listar_Evaluacion_Emp(ID_EMPLEADO));
+            response.sendRedirect("Vista/Empleado/List_Evaluacion_Emp.jsp?idemp=" + ID_EMPLEADO);
         }
-        if(opc.equals("Editar")){
+        if (opc.equals("Editar")) {
             String ID_EMP = request.getParameter("idemp");
-         
-          getServletContext().setAttribute("LIST_EVALUACION", Iem.Listar_Evaluacion_Emp(ID_EMP));
-            
-           response.sendRedirect("Vista/Empleado/Mod_Evaluacion_Emp.jsp?idemp="+ID_EMP);
+
+            getServletContext().setAttribute("LIST_EVALUACION", Iem.Listar_Evaluacion_Emp(ID_EMP));
+
+            response.sendRedirect("Vista/Empleado/Mod_Evaluacion_Emp.jsp?idemp=" + ID_EMP);
         }
-       
-        if(opc.equals("modificar")){
+
+        if (opc.equals("modificar")) {
             String RE_EVALUACION = request.getParameter("RE_EVALUACION");
             String ID_EMPLEADO = request.getParameter("ID_EMPLEADO");
             Iem.Mod_Evaluacion_emp(RE_EVALUACION, ID_EMPLEADO);
             getServletContext().setAttribute("LIST_EVALUACION", Iem.Listar_Evaluacion_Emp(ID_EMPLEADO));
-            response.sendRedirect("Vista/Empleado/List_Evaluacion_Emp.jsp?idemp="+ID_EMPLEADO );
-            
+            response.sendRedirect("Vista/Empleado/List_Evaluacion_Emp.jsp?idemp=" + ID_EMPLEADO);
+
         }
-        
+
         if (opc.equals("Reporte")) {
 
             String iddepa = (String) sesion.getAttribute("DEPARTAMENTO_ID");
+            String idrol = (String) sesion.getAttribute("IDROL");
+            
+            if(idrol.trim().equals("ROL-0001")){
+            getServletContext().setAttribute("List_Empleado", Iem.Listar_Empleado());
+            }else{
             getServletContext().setAttribute("List_Empleado", Iem.Listar_Empleado(iddepa));
-
-            //out.print(Iem.Listar_Empleado(iddepa).size());
-
-            response.sendRedirect("Vista/Empleado/Filtro_Empleado.jsp?idtr");
+            }
+            out.print(iddepa);
+            out.print(idrol);
+           response.sendRedirect("Vista/Empleado/Filtro_Empleado.jsp?idtr");
         }
 
         try {
