@@ -327,7 +327,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
     @Override
     public List<Modalidad> List_modalidad() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = " select * from  RHTX_MODALIDAD ";
+        String sql = " select * from  RHTX_MODALIDAD order by DE_MODALIDAD ";
         List<Modalidad> list = new ArrayList<Modalidad>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -349,7 +349,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
     @Override
     public List<Regimen_Laboral> list_reg_labo() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = " select * from  RHTX_REGIMEN_LABORAL ";
+        String sql = " select * from  RHTX_REGIMEN_LABORAL order by DE_REGIMEN_L";
         List<Regimen_Laboral> list = new ArrayList<Regimen_Laboral>();
         try {
             ResultSet rs = this.conn.query(sql);

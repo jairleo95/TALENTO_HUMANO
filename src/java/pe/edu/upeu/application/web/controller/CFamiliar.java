@@ -178,6 +178,7 @@ public class CFamiliar extends HttpServlet {
             String idtr = request.getParameter("idtra");
             //getServletContext().setAttribute("List_PMC", pmc.List_PMC(idtr));
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            getServletContext().setAttribute("Listar_tipo_doc", td.Listar_tipo_doc());
            // out.print(tr.ListaridTrabajador(idtr).size()+"   "+idtr);
            response.sendRedirect("Vista/Trabajador/Familiar/Mod_Familiar.jsp?idtr=" + idtr);
         }
