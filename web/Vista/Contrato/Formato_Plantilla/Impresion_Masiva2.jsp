@@ -29,8 +29,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 <%@page import="pe.edu.upeu.application.model.X_List_Id_Contrato_DGP"%>
 <%@page import="java.util.Calendar;"%>
 <jsp:useBean id="lista" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_contra_x_idcto" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_x_fun_x_idpu" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="texto" scope="application" class="java.util.ArrayList"/>
 <html>
     <head>
         <meta charset="utf-8">
@@ -48,6 +47,12 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     %>
     <input type="hidden" class="contrato<%=i%>" id="contrato<%=i%>" value="<%=id_contrato%>">
     <input type="hidden" class="plantilla<%=i%>" id="plantilla<%=i%>" value="<%=id_pl%>">
+    <%}%>
+    <%
+        for (int i = 0; i < texto.size(); i++) {
+            //String texto_pl = texto.get(i).toString();
+    %>
+    <textarea type="hidden" class="texto<%=i%>" id="texto<%=i%>" style="display:none;" value="<%=texto.get(i).toString()%>" ></textarea>
     <%}%>
     <script>
 // The instanceReady event is fired, when an instance of CKEditor has finished
@@ -354,27 +359,15 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     //alert(texto);
                 }
                 var txt = $("#texto2").val();
-                txt += texto;
+                txt += texto+'<div style="page-break-after: always;"><span style="display:none">&nbsp;</span></div>';
                 $("#texto2").val(txt);
-            });
-        }
-        var texto = "";
-        function procesar_texto_1(plan, valor) {
-            $.post("../../../formato_plantilla", "opc=Listar2&id=" + plan.trim(), function(objJson) {
-                var imprimir = objJson.imprimir;
-                //var editor2 = editor.getData();
-
-                imprimir = imprimir + '<div style="page-break-after: always;"><span style="display:none">&nbsp;</span></div>';
-                $(".texto").val("");
-                $(".texto").val(imprimir);
-                procesar_texto(valor, imprimir);
             });
         }
         function recorido() {
             var cant_con = $(".cant_con").val();
 
             for (var f = 0; f < cant_con + 1; f++) {
-                procesar_texto_1($(".plantilla" + f + "").val(), $(".contrato" + f + "").val());
+                procesar_texto( $(".contrato" + f).val(),  $(".texto" + f).val());
             }
 
         }
@@ -407,7 +400,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             setTimeout(function() {
                 InsertHTML();
                 ExecuteCommand("print");
-            }, 10000);
+            }, 3000);
             recorido();
 
 
@@ -422,7 +415,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     <%%>
     <input type="hidden" id="no_arch" class="no_arc" value="<%%>">
 
-    <button type="button" id="btn2" class=" btn btn-success btn2" onclick="InsertHTML()" style="display: none">CARGAR</button>
+    <button type="button" id="btn2" class="btn2  btn btn-success" onclick="InsertHTML()" style="display: none">CARGAR</button>
     <button type="button" id="btn2" class="btn2" onclick="resetear()" >Resetear</button>
     <h3>EDITAR PLANTILLAS</h3>
     <form class="ckeditor_form" action="../../../formato_plantilla" method="post">

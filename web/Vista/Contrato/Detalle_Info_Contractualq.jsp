@@ -198,19 +198,20 @@
                     <tr><td class="text-info table-bordered"><strong>Departamento:</strong></td><td colspan="6" class="table-bordered" ><p><%=n.getNo_dep()%> </p></td></tr>
                     <tr><td class="text-info table-bordered"><strong>Area:</strong></td><td colspan="6" class="table-bordered" ><p><%=n.getNo_area()%> </td></p></tr>
                     <tr><td class="text-info table-bordered"><strong>Sección:</strong></td><td colspan="6" class="table-bordered" ><p><%=n.getNo_seccion()%> </p></td></tr>
-                    <%
-                        if (Lis_c_c_id_contr.size() > 0) {
-                            Double cantidad = 0.0;
-                            for (int q = 0; q < Lis_c_c_id_contr.size(); q++) {
-                                Centro_Costos cc = new Centro_Costos();
-                                cc = (Centro_Costos) Lis_c_c_id_contr.get(q);
-
-                                cantidad = Double.parseDouble(cc.getCa_porcentaje()) + cantidad;
-                    %>
-                    <tr><td class="text-info table-bordered"><strong>Centro conto Nº <%=q + 1%>:</strong></td><td colspan="2" class="table-bordered" ><p><%=cc.getDe_centro_costo()%></p></td><td class="text-info table-bordered" colspan="2"><strong>Porcentaje</strong></td><td colspan="2"><p><%=cc.getCa_porcentaje()%> %</p> </td></tr><%}%>
-                    <tr><td class="text-info table-bordered"><strong>Total Porcentaje:</strong></td><td colspan="6" class="table-bordered" ><p><%=cantidad%> %</p></td></tr><%} else {%>
-                    <tr><td class="text-info table-bordered"><strong>Centro conto </strong></td><td colspan="6" class="table-bordered" ><p>No tiene</p></td></tr><%}%>
                     <tr><td class="text-info table-bordered"><strong>Puesto:</strong></td><td colspan="6" class="table-bordered" ><p><%=n.getNo_puesto()%></p><input type="hidden" class="id_pu" value="<%=n.getId_puesto()%>" name="puesto"></td> </tr>
+                                <%
+                                    if (Lis_c_c_id_contr.size() > 0) {
+                                        Double cantidad = 0.0;
+                                        for (int q = 0; q < Lis_c_c_id_contr.size(); q++) {
+                                            Centro_Costos cc = new Centro_Costos();
+                                            cc = (Centro_Costos) Lis_c_c_id_contr.get(q);
+
+                                            cantidad = Double.parseDouble(cc.getCa_porcentaje()) + cantidad;
+                                %>
+                    <tr><td class="text-info table-bordered"><strong>Centro costo Nº <%=q + 1%>:</strong></td><td colspan="2" class="table-bordered" ><p><%=cc.getDe_centro_costo()%></p></td><td class="text-info table-bordered" colspan="2"><strong>Porcentaje</strong></td><td colspan="2"><p><%=cc.getCa_porcentaje()%> %</p> </td></tr><%}%>
+                    <tr><td class="text-info table-bordered"><strong>Total Porcentaje:</strong></td><td colspan="6" class="table-bordered" ><p><%=cantidad%> %</p></td></tr><%} else {%>
+                    <tr><td class="text-info table-bordered"><strong>Centro costo </strong></td><td colspan="6" class="table-bordered" ><p>No tiene</p></td></tr><%}%>
+
                     <tr><td class="text-info table-bordered"><strong>Condición:</strong></td> <td colspan="6" class="table-bordered" ><p><%
                         if (n.getLi_condicion() != null) {
                             for (int h = 0; h < list_Condicion_contrato.size(); h++) {
@@ -229,7 +230,7 @@
                         } else {
                             out.print("0");
                         }%> </td></tr>
-                    <tr><td class="text-info table-bordered"><strong>Bonificacion Puesto:</strong></td><td class="table-bordered"  colspan="6">S/.<%if (n.getCa_bonificacion_p()!= null) {
+                    <tr><td class="text-info table-bordered"><strong>Bonificacion Puesto:</strong></td><td class="table-bordered"  colspan="6">S/.<%if (n.getCa_bonificacion_p() != null) {
                             out.print(n.getCa_bonificacion_p());
                         } else {
                             out.print("--");

@@ -114,6 +114,10 @@
                                 <label>Sueldo :</label><br>
                                 <input type="text" name="sueldo" class="form-control" style="width: 250px" maxlength="10" id="sueldo" value=""/>
                             </div>
+                            <div class="form-group">
+                                <label>Fecha Suscripcion :</label><br>
+                                <input type="date" name="fec_f" class="form-control" size="45" maxlength="100" style="width: 250px" id="fe_sus">
+                            </div>
                         </div>
                         <hr/>
                         <div class="row">
@@ -204,9 +208,9 @@
             });
 
         }
-        function buscar(del, al, nombre, dir, dep, area, sec, puesto, fe_i, fe_fi, ca_sueldo) {
+        function buscar(del, al, nombre, dir, dep, area, sec, puesto, fe_i, fe_fi, ca_sueldo, fe_sus) {
             var b = $(".tbodys");
-            $.post("../../impresion_masiva?opc=filtrar" + "&desde=" + del + "&al=" + al + "&nom_ape=" + nombre + "&direccion=" + dir + "&departamento=" + dep + "&area=" + area + "&seccion=" + sec + "&puesto=" + puesto + "&fec_i=" + fe_i + "&fec_f=" + fe_fi + "&sueldo=" + ca_sueldo, function(objJson) {
+            $.post("../../impresion_masiva?opc=filtrar" + "&desde=" + del + "&al=" + al + "&nom_ape=" + nombre + "&direccion=" + dir + "&departamento=" + dep + "&area=" + area + "&seccion=" + sec + "&puesto=" + puesto + "&fec_i=" + fe_i + "&fec_f=" + fe_fi + "&sueldo=" + ca_sueldo + "&fe_sus=" + fe_sus, function(objJson) {
                 b.empty();
                 //alert($("#select_pu").val());
                 var list = objJson.lista;
@@ -232,10 +236,14 @@
                         b.append("<td><p>" + list[i].no_se + "</p></td>");
                         b.append("<td><p>" + list[i].no_pu + "</p></td>");
                         b.append("<td>" + list[i].ca_su + '</td>');
-                        b.append("<td>" + list[i].fe_cr + "</td>");
+                        b.append("<td>" + list[i].fe_su + "</td>");
                         b.append('<td><a class="btn-warming" href="../../contrato?opc=Detalle_Contractual&idtr=' + list[i].id_tr + '">Ver detalle</a> </td>');
                         //b.append('<td id="sel' + i + '"></td>');
-                        b.append('<td><input type="checkbox" id="imp" name="Imprimir" value="' + list[i].id_co +'/'+ list[i].id_pl +'"></td>');
+                        if (list[i].id_pl != null) {
+                            b.append('<td><input type="checkbox" id="imp" name="Imprimir" value="' + list[i].id_co + '/' + list[i].id_pl + '"></td>');
+                        } else {
+                                                        b.append('<td>NO TIENE</td>');
+                        }
                         b.append("</tr>");
                         nuro = 1;
                     }
@@ -323,8 +331,10 @@
                         var fe_i = $("#fe_i").val();
                         var fe_f = $("#fe_fin").val();
                         var sueldo = $("#sueldo").val();
+                        var fe_sus = $("#fe_sus").val();
+
                         //alert(del + al + nombre + dir + dep + area + sec + pu + fe_i + fe_f + sueldo)
-                        buscar(del, al, nombre, dir, dep, area, sec, pu, fe_i, fe_f, sueldo);
+                        buscar(del, al, nombre, dir, dep, area, sec, pu, fe_i, fe_f, sueldo, fe_sus);
                     }
             );
             /* $("#btnbuscar").click(
