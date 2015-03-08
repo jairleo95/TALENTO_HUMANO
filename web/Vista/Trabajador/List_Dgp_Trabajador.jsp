@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
     HttpSession sesion_1 = request.getSession();
@@ -93,7 +94,8 @@
                                     <th data-hide="phone,tablet">Detalle</th>
                                 </tr>
                             </thead>
-                            <%  if (LIST_ID_TRAB_DGP.size() == 0) {%>
+                            <% CConversion c = new CConversion();
+        if (LIST_ID_TRAB_DGP.size() == 0) {%>
                            
                             <%}%>
 
@@ -104,8 +106,8 @@
                                 %>
                                 <tr>
                                     <td ><%=i + 1%></td>
-                                    <td ><%=d.getFe_desde()%></td>
-                                    <td ><%=d.getFe_hasta()%></td>
+                                    <td ><%=c.convertFecha5(d.getFe_desde())%></td>
+                                    <td ><%=c.convertFecha5(d.getFe_hasta())%></td>
                                     <td ><%=d.getNo_req()%></td>
                                     <td ><%=d.getNo_puesto()%></td>
                                     <td ><%=d.getNo_seccion()%></td> 
