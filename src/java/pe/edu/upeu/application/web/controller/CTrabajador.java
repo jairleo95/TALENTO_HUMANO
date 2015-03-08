@@ -267,6 +267,11 @@ public class CTrabajador extends HttpServlet {
         }
         if ("list_reg_tra".equals(opc)) {
             String idtr = request.getParameter("idtr");
+            String me = request.getParameter("aa");
+            String a = "";
+            if(me == ""){
+             a = "t";
+            }
             getServletContext().setAttribute("List_Cuenta_Sueldo", tr.List_Cuenta_Sueldo(idtr));
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             getServletContext().setAttribute("List_Universidad", li.List_Universidad());
@@ -275,8 +280,10 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
 
             //String num_doc = tr.REG_DOC_TRABAJADOR(idtr);
-            // out.print(num_doc);
-            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&a=t");
+            out.print(me+ "--");
+            out.print(a);
+            
+           // response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&a="+a+"&ms="+ ms);
         }
         if ("actualizar".equals(opc)) {
             String idtr = request.getParameter("idtr");
