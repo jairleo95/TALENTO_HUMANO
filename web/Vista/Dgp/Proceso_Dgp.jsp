@@ -624,7 +624,7 @@
                             function closedthis() {
                             $.smallBox({
                             title: "¡DGP registrada correctamente!",
-                                    content: "ya puede visualizar toda la informacion del trabajador...",
+                                    content: "Ya puede visualizar la informacion del DGP",
                                     color: "#739E73",
                                     iconSmall: "fa fa-check fa-2x fadeInRight animated",
                                     timeout: 6000
@@ -898,7 +898,7 @@
                     //$('.new-progress .new-bar').removeClass().addClass('new-bar');
 
 
-                    });        </script>
+                    });</script>
 
         <!-- Your GOOGLE ANALYTICS CODE Below -->
         <script type="text/javascript">

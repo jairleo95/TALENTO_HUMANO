@@ -118,13 +118,13 @@
                                             <thead>
                                                 <tr>
                                                     <th >Paso</th>
+                                                    <th data-hide="phone,tablet"><i class="fa fa-fw fa-calendar txt-color-blue hidden-md hidden-sm hidden-xs"></i> Detalle</th>
                                                     <th data-class="expand"><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Estado</th>
                                                     <th data-hide="phone"><i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i> Encargado</th>
                                                     <th>Cargo Encargado</th>
                                                     <th > Usuario</th>
                                                     <th data-hide="phone,tablet"><i class="fa fa-fw fa-map-marker txt-color-blue hidden-md hidden-sm hidden-xs"></i> Area</th>
                                                     <th data-hide="phone,tablet">Departamento</th>
-                                                    <th data-hide="phone,tablet"><i class="fa fa-fw fa-calendar txt-color-blue hidden-md hidden-sm hidden-xs"></i> Detalle</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -134,6 +134,8 @@
                                                 %>
                                                 <tr >
                                                     <td class="caji"><%=a.getNu_pasos()%></td>
+                                                    <td ><%=a.getDe_pasos()%></td>
+                                                    <% if (a.getEs_autorizacion() != null) {%>
                                                     <td class="caji" >
                                                         <%
                                                             if (a.getEs_autorizacion() != null) {
@@ -160,7 +162,9 @@
                                                     <td  ><%=a.getNo_usuario()%></td> 
                                                     <td ><%=a.getUs_no_area()%></td> 
                                                     <td ><%=a.getUs_no_dep()%></td> 
-                                                    <td ><%=a.getDe_pasos()%></td> 
+                                                    <%}else{%>
+                                                    <td colspan="6">No definido</td>
+                                                    <%}%>
 
                                                     <%
                                                         //if () {
@@ -298,7 +302,7 @@
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-            $(document).ready(function () {
+            $(document).ready(function() {
 
                 pageSetUp();
 
@@ -334,16 +338,16 @@
                             "t" +
                             "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
                     "autoWidth": true,
-                    "preDrawCallback": function () {
+                    "preDrawCallback": function() {
                         // Initialize the responsive datatables helper once.
                         if (!responsiveHelper_dt_basic) {
                             responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
                         }
                     },
-                    "rowCallback": function (nRow) {
+                    "rowCallback": function(nRow) {
                         responsiveHelper_dt_basic.createExpandIcon(nRow);
                     },
-                    "drawCallback": function (oSettings) {
+                    "drawCallback": function(oSettings) {
                         responsiveHelper_dt_basic.respond();
                     }
                 });
@@ -362,16 +366,16 @@
                             "t" +
                             "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
                     "autoWidth": true,
-                    "preDrawCallback": function () {
+                    "preDrawCallback": function() {
                         // Initialize the responsive datatables helper once.
                         if (!responsiveHelper_datatable_fixed_column) {
                             responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
                         }
                     },
-                    "rowCallback": function (nRow) {
+                    "rowCallback": function(nRow) {
                         responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
                     },
-                    "drawCallback": function (oSettings) {
+                    "drawCallback": function(oSettings) {
                         responsiveHelper_datatable_fixed_column.respond();
                     }
 
@@ -381,7 +385,7 @@
                 $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
 
                 // Apply the filter
-                $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
+                $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function() {
 
                     otable
                             .column($(this).parent().index() + ':visible')
@@ -397,16 +401,16 @@
                             "t" +
                             "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
                     "autoWidth": true,
-                    "preDrawCallback": function () {
+                    "preDrawCallback": function() {
                         // Initialize the responsive datatables helper once.
                         if (!responsiveHelper_datatable_col_reorder) {
                             responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
                         }
                     },
-                    "rowCallback": function (nRow) {
+                    "rowCallback": function(nRow) {
                         responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
                     },
-                    "drawCallback": function (oSettings) {
+                    "drawCallback": function(oSettings) {
                         responsiveHelper_datatable_col_reorder.respond();
                     }
                 });
@@ -439,16 +443,16 @@
                         "sSwfPath": "js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
                     },
                     "autoWidth": true,
-                    "preDrawCallback": function () {
+                    "preDrawCallback": function() {
                         // Initialize the responsive datatables helper once.
                         if (!responsiveHelper_datatable_tabletools) {
                             responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
                         }
                     },
-                    "rowCallback": function (nRow) {
+                    "rowCallback": function(nRow) {
                         responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
                     },
-                    "drawCallback": function (oSettings) {
+                    "drawCallback": function(oSettings) {
                         responsiveHelper_datatable_tabletools.respond();
                     }
                 });
@@ -465,7 +469,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function () {
+            (function() {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
