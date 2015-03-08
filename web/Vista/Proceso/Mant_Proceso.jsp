@@ -282,6 +282,8 @@
                                                 </tr>
                                             </thead>
                                             <tbody class="tbody-puesto">
+
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -401,7 +403,7 @@
             function  list_put_id(d, valor) {
 
 
-                $.post("../../Direccion_Puesto", "opc=" + "Listar_pu_id" + "&" + "id=" + valor, function(objJson) {
+                $.post("../../Direccion_Puesto", "opc=" + "Listar_pu_id" + "&" + "id=" + valor, function (objJson) {
                     d.empty();
                     d.append("<option value='' > [SELECCIONE] </option>");
                     var list = objJson.lista;
@@ -418,7 +420,7 @@
             function  lis_dir_id(d, valor) {
 
 
-                $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + valor, function(objJson) {
+                $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + valor, function (objJson) {
                     d.empty();
                     d.append("<option value='' > [SELECCIONE] </option>");
                     if (objJson.rpta == -1) {
@@ -438,7 +440,7 @@
             function list_area_id(c, valor) {
 
 
-                $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + valor, function(objJson) {
+                $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + valor, function (objJson) {
                     c.empty();
                     c.append("<option value='' > [SELECCIONE] </option>");
                     if (objJson.rpta == -1) {
@@ -456,7 +458,7 @@
                 });
             }
             function list_sec_id(d, valor) {
-                $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + valor, function(objJson) {
+                $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + valor, function (objJson) {
                     d.empty();
                     d.append("<option value='' > [SELECCIONE] </option>");
                     if (objJson.rpta == -1) {
@@ -474,7 +476,7 @@
                 });
             }
             function list_dir(c) {
-                $.post("../../Direccion_Puesto", "opc=Listar_direccion", function(objJson) {
+                $.post("../../Direccion_Puesto", "opc=Listar_direccion", function (objJson) {
                     c.empty();
                     c.append("<option value='' > [SELECCIONE] </option>");
                     if (objJson.rpta == -1) {
@@ -497,7 +499,7 @@
                 var tbody_p = $(".tbody-puesto");
                 var texto = "";
                 $(".id_pasos").val($(".id_paso" + num).val());
-                $.post("../../paso", "opc=Paso_Puesto&id=" + $(".id_paso" + num).val(), function(objJson) {
+                $.post("../../paso", "opc=Paso_Puesto&id=" + $(".id_paso" + num).val(), function (objJson) {
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
                         return;
@@ -505,7 +507,13 @@
                     tbody_p.empty();
                     var lista = objJson.lista;
                     for (var h = 0; h < lista.length; h++) {
-                        texto += "<tr>";
+
+                        if (lista[h].estado == '0') {
+                            texto += "<tr class='danger' >";
+                        } else if (lista[h].estado == '1') {
+                            texto += "<tr class='success' >";
+                        }
+
                         texto += "<td>" + lista[h].puesto + "</td>";
                         texto += "<td>" + lista[h].area + "</td>";
                         texto += "<td>" + lista[h].dep + "</td>";
@@ -530,10 +538,10 @@
                     texto = "";
                     $(".form_puesto").show();
                     $(".btn-eliminar_puesto").click(
-                            function() {
+                            function () {
                                 if (confirm("¿Esta Seguro de Eliminar?")) {
                                     alert("opc=Eliminar_PP&id=" + $(".iddp" + $(this).val()).val());
-                                    $.post("../../paso", "opc=Eliminar_PP&id=" + $(".iddp" + $(this).val()).val(), function(objJson) {
+                                    $.post("../../paso", "opc=Eliminar_PP&id=" + $(".iddp" + $(this).val()).val(), function (objJson) {
 
                                     });
                                 } else {
@@ -541,8 +549,8 @@
                                 }
                             }
                     );
-                    $(".btn_deshabilitar_p").click(function() {
-                        $.post("../../paso", "opc=actualizar_estado&id=" + $(".iddp" + $(this).val()).val() + "&estado=0", function(objJson) {
+                    $(".btn_deshabilitar_p").click(function () {
+                        $.post("../../paso", "opc=actualizar_estado&id=" + $(".iddp" + $(this).val()).val() + "&estado=0", function (objJson) {
 
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
@@ -556,8 +564,8 @@
                         );
 
                     });
-                    $(".btn_habilitar_p").click(function() {
-                        $.post("../../paso", "opc=actualizar_estado&id=" + $(".iddp" + $(this).val()).val() + "&estado=1", function(objJson) {
+                    $(".btn_habilitar_p").click(function () {
+                        $.post("../../paso", "opc=actualizar_estado&id=" + $(".iddp" + $(this).val()).val() + "&estado=1", function (objJson) {
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
                                 return;
@@ -571,8 +579,8 @@
 
                 });
             }
-            $(document).ready(function() {
-                $(".btn_cancel_edit").click(function() {
+            $(document).ready(function () {
+                $(".btn_cancel_edit").click(function () {
                     $("#btn-registrar").val("Registrar Paso");
                     $(".opc").val("Registrar");
                     $(".form_paso")[0].reset();
@@ -580,25 +588,25 @@
                 });
                 $(".form_puesto").hide();
                 list_dir($(".sl_dir"));
-                $(".sl_dir").change(function() {
+                $(".sl_dir").change(function () {
                     lis_dir_id($(".sl_dep"), $(this).val());
                 });
-                $(".sl_dep").change(function() {
+                $(".sl_dep").change(function () {
                     list_area_id($(".sl_area"), $(this).val());
                 });
-                $(".sl_area").change(function() {
+                $(".sl_area").change(function () {
                     list_sec_id($(".sl_sec"), $(this).val());
                 });
-                $(".sl_sec").change(function() {
+                $(".sl_sec").change(function () {
                     list_put_id($(".sl_puesto"), $(this).val());
                 });
                 var num = 1;
                 listar_Proceso();
                 Listar_Paso($("#select-proceso").val());
                 $("#btn-registrar").click(
-                        function() {
+                        function () {
                             var pr = $("#select-proceso").val();
-                            $.post("../../paso", $("#form-paso").serialize(), function(objJson) {
+                            $.post("../../paso", $("#form-paso").serialize(), function (objJson) {
                                 if (objJson.rpta == -1) {
                                     alert(objJson.mensaje);
                                     return;
@@ -613,7 +621,7 @@
                 );
                 function listar_Proceso() {
                     var s = $("#select-proceso");
-                    $.post("../../Proceso", "opc=Listar", function(objJson) {
+                    $.post("../../Proceso", "opc=Listar", function (objJson) {
                         s.empty();
                         var lista = objJson.lista;
                         s.append("<option value='' selected >[SELECCIONE]</option>");
@@ -623,22 +631,22 @@
                     });
                 }
                 $("#select-proceso").change(
-                        function() {
+                        function () {
                             $(".lb-list_pasos").text($(this).find(":selected").text());
                             Listar_Paso($(this).val());
                             $(".form_puesto").hide();
                             $(".tbody-puesto").empty();
                             // alert($(this).val());
                         });
-                $(".btn-agregar-p").click(function() {
+                $(".btn-agregar-p").click(function () {
                     if ($(".form_puesto").valid()) {
                         $.ajax({
                             url: "../../Direccion_Puesto",
                             data: $(".form_puesto").serialize() + "&opc=Reg_puesto_paso"
-                        }).done(function() {
+                        }).done(function () {
                             list_puesto($(".num_p").val());
                             alert("¡Registrado Exitosamente!");
-                        }).fail(function(objJson) {
+                        }).fail(function (objJson) {
                             alert(objJson.mensaje);
                         });
                     } else {
@@ -651,7 +659,7 @@
                 var c = $(".dd-list");
                 function Listar_Paso(proceso) {
                     var txt_append = "";
-                    $.post("../../paso", "opc=Listar_habilitados&proceso=" + proceso, function(objJson) {
+                    $.post("../../paso", "opc=Listar_habilitados&proceso=" + proceso, function (objJson) {
                         b.empty();
                         c.empty();
                         var lista = objJson.lista;
@@ -691,13 +699,13 @@
                         }
                         c.append(txt_append);
                         txt_append = "";
-                        $(".btn-cargar-puesto").click(function() {
+                        $(".btn-cargar-puesto").click(function () {
                             var num = $(this).val();
                             $(".id_pasos_puesto").val($(".id_paso" + num).val());
                             list_puesto(num);
                             $(".num_p").val($(this).val());
                         });
-                        $(".btn-editar").click(function() {
+                        $(".btn-editar").click(function () {
                             $(".btn_cancel_edit").show();
                             $(".desc_paso").val($(".td_det" + $(this).val()).text());
                             $(".num_paso").val($(".td_num" + $(this).val()).text());
@@ -708,10 +716,10 @@
                             $(".opc").val("Modificar");
                         });
                         $(".btn-eliminar").click(
-                                function() {
+                                function () {
                                     var pr_e = $("#select-proceso").val();
                                     if (confirm("¿Esta Seguro de Eliminar?")) {
-                                        $.post("../../paso", "opc=Eliminar&paso=" + $(".id_paso" + $(this).val()).val(), function() {
+                                        $.post("../../paso", "opc=Eliminar&paso=" + $(".id_paso" + $(this).val()).val(), function () {
                                             Listar_Paso(pr_e);
                                         });
                                         //alert($(".id_paso" + $(this).val()).val());
@@ -723,13 +731,13 @@
 
                     });
                 }
-                $(".Generar").click(function() {
+                $(".Generar").click(function () {
                     //var num = $(".tbodys tr").size();
                     var num = 1;
                     var url = "";
 
 
-                    $.each($(".item_req"), function() {
+                    $.each($(".item_req"), function () {
                         $(this).text("P" + num);
                         num++;
                     });
@@ -737,7 +745,7 @@
                         url += "id" + s + "=" + $(".id_paso" + (s - 1)).val() + "&numero" + s + "=" + $(".item_" + s).text() + "&";
                     }
                     url = url.substring(0, url.length - 1);
-                    $.post("../../paso", "opc=Update_nu_paso&num=" + num + "&" + url, function(objJson) {
+                    $.post("../../paso", "opc=Update_nu_paso&num=" + num + "&" + url, function (objJson) {
                         if (objJson.rpta == -1) {
                             alert(objJson.mensaje);
                             return;
@@ -767,7 +775,7 @@
                 pageSetUp();
                 // PAGE RELATED SCRIPTS
 
-                var updateOutput = function(e) {
+                var updateOutput = function (e) {
                     var list = e.length ? e : $(e.target), output = list.data('output');
                     if (window.JSON) {
                         output.val(window.JSON.stringify(list.nestable('serialize')));
@@ -787,7 +795,7 @@
                 // output initial serialised data
                 updateOutput($('#nestable').data('output', $('#nestable-output')));
                 updateOutput($('#nestable2').data('output', $('#nestable2-output')));
-                $('#nestable-menu').on('click', function(e) {
+                $('#nestable-menu').on('click', function (e) {
                     var target = $(e.target), action = target.data('action');
                     if (action === 'expand-all') {
                         $('.dd').nestable('expandAll');
@@ -804,7 +812,7 @@
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-            $(document).ready(function() {
+            $(document).ready(function () {
 
                 pageSetUp();
 
@@ -840,16 +848,16 @@
                             "t" +
                             "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
                     "autoWidth": true,
-                    "preDrawCallback": function() {
+                    "preDrawCallback": function () {
                         // Initialize the responsive datatables helper once.
                         if (!responsiveHelper_dt_basic) {
                             responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
                         }
                     },
-                    "rowCallback": function(nRow) {
+                    "rowCallback": function (nRow) {
                         responsiveHelper_dt_basic.createExpandIcon(nRow);
                     },
-                    "drawCallback": function(oSettings) {
+                    "drawCallback": function (oSettings) {
                         responsiveHelper_dt_basic.respond();
                     }
                 });
@@ -868,16 +876,16 @@
                             "t" +
                             "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
                     "autoWidth": true,
-                    "preDrawCallback": function() {
+                    "preDrawCallback": function () {
                         // Initialize the responsive datatables helper once.
                         if (!responsiveHelper_datatable_fixed_column) {
                             responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
                         }
                     },
-                    "rowCallback": function(nRow) {
+                    "rowCallback": function (nRow) {
                         responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
                     },
-                    "drawCallback": function(oSettings) {
+                    "drawCallback": function (oSettings) {
                         responsiveHelper_datatable_fixed_column.respond();
                     }
 
@@ -887,7 +895,7 @@
                 $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
 
                 // Apply the filter
-                $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function() {
+                $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
 
                     otable
                             .column($(this).parent().index() + ':visible')
@@ -903,16 +911,16 @@
                             "t" +
                             "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
                     "autoWidth": true,
-                    "preDrawCallback": function() {
+                    "preDrawCallback": function () {
                         // Initialize the responsive datatables helper once.
                         if (!responsiveHelper_datatable_col_reorder) {
                             responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
                         }
                     },
-                    "rowCallback": function(nRow) {
+                    "rowCallback": function (nRow) {
                         responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
                     },
-                    "drawCallback": function(oSettings) {
+                    "drawCallback": function (oSettings) {
                         responsiveHelper_datatable_col_reorder.respond();
                     }
                 });
@@ -945,16 +953,16 @@
                         "sSwfPath": "../../js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
                     },
                     "autoWidth": true,
-                    "preDrawCallback": function() {
+                    "preDrawCallback": function () {
                         // Initialize the responsive datatables helper once.
                         if (!responsiveHelper_datatable_tabletools) {
                             responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
                         }
                     },
-                    "rowCallback": function(nRow) {
+                    "rowCallback": function (nRow) {
                         responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
                     },
-                    "drawCallback": function(oSettings) {
+                    "drawCallback": function (oSettings) {
                         responsiveHelper_datatable_tabletools.respond();
                     }
                 });
@@ -969,7 +977,7 @@
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
-            (function() {
+            (function () {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
