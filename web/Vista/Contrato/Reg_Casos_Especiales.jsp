@@ -178,7 +178,7 @@
                                                 <fieldset id="fila-agregar">
                                                     <div class="row" >
 
-                                                        <section class="col col-2">
+                                                        <section class="col col-1">
                                                             <label class="select" id="titu">Año:
                                                                 <select name="AÑO_ID" required="" class="input-group-sm">
                                                                     <%  String MAX = request.getParameter("MAX_ID");
@@ -195,19 +195,19 @@
                                                                 </select> 
                                                             </label>
                                                         </section>
-                                                        <section class="col col-3 ">
+                                                        <section class="col col-2 ">
                                                             <label class="input" id="titu">Desde: 
                                                                 <input type="date" name="FEC_DESDE"  class="input-group-sm" required="">
                                                             </label>
                                                         </section>
-                                                        <section class="col col-3">
+                                                        <section class="col col-2">
                                                             <label class="input" id="titu">Hasta: 
                                                                 <input type="date" name="FEC_HASTA"  class="input-group-sm">
                                                             </label>
                                                         </section>
-                                                        <section class="col col-3" id="titulo">
+                                                        <section class="col col-2" id="titulo">
                                                             <label class="select" id="titu">Dirección:
-                                                                <select name="DIRECCION" class="input-group-sm select_dir" >
+                                                                <select name="DIRECCION" class="input-group-sm select_dir" required="">
 
                                                                     <option value="">[SELECCIONE]</option>
                                                                     <%for (int g = 0; g < Listar_Direccion.size(); g++) {
@@ -220,28 +220,28 @@
 
                                                                 </select>  </label>
                                                         </section> 
-                                                        <section class="col col-3" id="titulo">
+                                                        <section class="col col-2" id="titulo">
                                                             <label class="select" id="titu">Departamento:
-                                                                <select name="DEPARTAMENTO_ID" class="input-group-sm" id="selec_dep">
+                                                                <select name="DEPARTAMENTO_ID" class="input-group-sm" id="selec_dep" required="">
                                                                     <option value="">[SELECCIONE]</option>
                                                                 </select>  </label>
                                                         </section>
                                                         <section class="col col-3" id="titulo">
                                                             <label class="select" id="titu">Area:
-                                                                <select name="AREA_ID" class="input-group-sm" id="Selec_Area">
+                                                                <select name="AREA_ID" class="input-group-sm" required="" id="Selec_Area">
                                                                     <option value="">[SELECCIONE]</option>
                                                                 </select>  </label>
                                                         </section>
                                                         <section class="col col-3" id="titulo">
                                                             <label class="select" id="titu">Sección:
-                                                                <select name="SECCION_ID" class="input-group-sm" id="select_sec">
+                                                                <select name="SECCION_ID" class="input-group-sm" id="select_sec" required="">
                                                                     <option value="">[SELECCIONE]</option>
                                                                 </select>  </label>
                                                         </section>
                                                         <section class="col col-3" id="titulo">
                                                             <label class="select" id="titu">Puesto:
 
-                                                                <select name="PUESTO_ID"class="input-group-sm" id="pu_id_se" required="">
+                                                                <select name="PUESTO_ID"class="input-group-sm" id="pu_id_se" required="" required="">
                                                                     <option value="">[SELECCIONE]</option>
                                                                 </select>  </label>
                                                         </section>
@@ -289,7 +289,7 @@
                                                         </section>
                                                         <section class="col col-1">
                                                             <label class="input" id="titu">Sueldo Total:
-                                                                <input type="text" name="TOTAL_SUELDO" value="" id="sueldo_total"class="input-group-sm" selected="" >
+                                                                <input type="text" name="TOTAL_SUELDO" value="0" id="sueldo_total"class="input-group-sm"  >
                                                             </label>
                                                         </section>
                                                         <section class="col col-2">
@@ -1639,7 +1639,7 @@
                         val_fecha: true
                     },
                     FEC_HASTA: {
-                        required: true,
+                    
                         val_fecha: true
                     },
                     FECHA_SUSCRIPCION: {

@@ -87,7 +87,7 @@ public class DgpDAO implements InterfaceDgpDAO {
     @Override
     public List<X_User_dgp> USER_DGP(String id_dgp) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = " select u.*,du.NO_TRABAJADOR ,du.AP_PATERNO,du.AP_MATERNO, p.DE_PASOS as  paso from RHVD_USER_AUT u  ,RHTC_PASOS p ,RHVD_USUARIO du  where u.ID_EMPLEADO=du.ID_EMPLEADO and u.ID_PASOS= p.ID_PASOS  and u.ID_DGP='" + id_dgp + "'  and u.ID_PUESTO IS NOT NULL";
+        String sql = " select u.*,du.NO_TRABAJADOR ,du.AP_PATERNO,du.AP_MATERNO, p.DE_PASOS as  paso from RHVD_USER_AUT u  ,RHTC_PASOS p ,RHVD_USUARIO du  where u.ID_EMPLEADO=du.ID_EMPLEADO and u.ID_PASOS= p.ID_PASOS  and u.ID_DGP='" + id_dgp + "'  AND TRIM(u.ID_PUESTO)<>'0'";
         List<X_User_dgp> Lista = new ArrayList<X_User_dgp>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -136,7 +136,7 @@ public class DgpDAO implements InterfaceDgpDAO {
     @Override
     public List<x_List_Id_Trab_Dgp> LIST_ID_TRAB_DGP(String id) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from RHTM_DGP dgp, RHTR_REQUERIMIENTO r ,RHVD_PUESTO_DIRECCION pd where  pd.ID_PUESTO=dgp.ID_PUESTO  and r.ID_REQUERIMIENTO= dgp.ID_REQUERIMIENTO and dgp.ID_TRABAJADOR='" + id + "'";
+        String sql = "select TO_CHAR(dgp.FE_DESDE,'yyyy-mm-dd') AS FE_DESDE,TO_CHAR(dgp.FE_HASTA,'yyyy-mm-dd') AS FE_HASTA ,dgp.*,r.*,pd.* from RHTM_DGP dgp, RHTR_REQUERIMIENTO r ,RHVD_PUESTO_DIRECCION pd where  pd.ID_PUESTO=dgp.ID_PUESTO  and r.ID_REQUERIMIENTO= dgp.ID_REQUERIMIENTO and dgp.ID_TRABAJADOR='" + id + "'";
         List<x_List_Id_Trab_Dgp> Lista = new ArrayList<x_List_Id_Trab_Dgp>();
         try {
             ResultSet rs = this.conn.query(sql);
