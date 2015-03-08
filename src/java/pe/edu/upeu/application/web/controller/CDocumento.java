@@ -69,7 +69,7 @@ public class CDocumento extends HttpServlet {
                 getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
                 getServletContext().setAttribute("List_doc_req_pla", d.List_doc_req_pla(dgp, idtr));
                 getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
-                response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&iddgp=" + dgp + "&pro=pr_dgp");
+                response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&iddgp=" + dgp + "&pro=pr_dgp&a=e");
 
             }
             if (opc.equals("Ver_Documento")) {
@@ -275,11 +275,11 @@ public class CDocumento extends HttpServlet {
 
             if (pr != null) {
                 if (pr.equals("enter")) {
-                    response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr + "&iddgp=" + iddgp);
+                    response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr + "&iddgp=" + iddgp+"&a=t");
                 }
 
             } else {
-                response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&iddgp=" + iddgp);
+                response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&iddgp=" + iddgp+"&a=t");
             }
 
             /*} catch (FileUploadException e) {

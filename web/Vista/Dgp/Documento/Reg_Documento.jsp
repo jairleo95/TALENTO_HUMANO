@@ -63,7 +63,6 @@
         <!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
         <!-- Startup image for web apps -->
         <link rel="apple-touch-startup-image" href="../../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
@@ -73,12 +72,27 @@
                 // a darker overlay looks better on this particular site
                 overlayOpacity: 0.8
                         // setupDemos is defined in assets/demo.js
-            }, setupDemos);
-        </script>
+            }, setupDemos);</script>
         <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="../../../css/Css_Bootstrap/fileinput.css" media="all" rel="stylesheet" type="text/css" />
     </head>
-    <body class="" onload="closedthis();">
+    <%  //String num = request.getParameter("num");
+        // int num_doc = Integer.parseInt(num);
+        if (request.getParameter("a") != null) {
+            if (request.getParameter("a").trim().equals("t")) {
+    %>
+
+    <body onload="closedthis();">
+
+        <%
+            }
+            if(request.getParameter("a").trim().equals("e")){%>
+    <body onload="closedthis2()">
+            <%}
+        } else {
+        %>
+    <body class="">
+        <%}%>
         <%
             HttpSession sesion_1 = request.getSession(true);
             String rol = (String) sesion_1.getAttribute("IDROL");
@@ -90,35 +104,7 @@
             //String id_dgp = "";
         %>
         <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
-        <script>
-            function exito(titulo, mensaje) {
-                $.smallBox({
-                    title: titulo,
-                    content: mensaje,
-                    color: "#739E73",
-                    iconSmall: "fa fa-cloud",
-                    timeout: 3000
-                });
-            }
-            function closedthis() {
-                $.smallBox({
-                    title: "¡Ficha de trabajador registrada correctamente!",
-                    content: "ya puede visualizar toda la informacion del trabajador...",
-                    color: "#739E73",
-                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                    timeout: 6000
-                });
-            }
-        </script>
-        <style type="text/css">
-            .files{
-                width:20px;
-                height:10px;
-            }   
-        </style>
-            
         <!-- MAIN PANEL -->
-
         <div id="main" role="main" style="margin: 0px;">
             <!-- MAIN CONTENT -->
             <div id="content">
@@ -373,7 +359,7 @@
                                                                     <div class="form-group">
                                                                         <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  <%if (d.getEs_obligatorio().equals("1")) {
                                                                                 out.println(" required='required' ");
-                                                                        }%> name="archivos<%=(i + 1)%>" style="height:40px;">
+                                                                            }%> name="archivos<%=(i + 1)%>" style="height:40px;">
                                                                     </div>
                                                                     <% } else { %>
                                                                     <% if (d.getId_documento_adjunto() == null) { %>
@@ -419,7 +405,8 @@
                                                             %>
                                                             <img src="Desaprobado.png" width="20" height="20">
                                                         </label>
-                                                        <% }}
+                                                        <% }
+                                                                }
                                                             }%>
                                                     </td>
                                                     <td class="table-bordered" style="text-align:center;" align="center">
@@ -458,7 +445,7 @@
                                                                     <div class="form-group">
                                                                         <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  <%if (d.getEs_obligatorio().equals("1")) {
                                                                                 out.println(" required='required' ");
-                                                                        }%> name="archivos<%=(i + 1)%>" style="height:20px;">
+                                                                            }%> name="archivos<%=(i + 1)%>" style="height:20px;">
                                                                     </div>
                                                                     <% } else { %>
                                                                     <% if (d.getId_documento_adjunto() == null) { %>
@@ -735,7 +722,6 @@
         <script src="../../../js/bootstrap/bootstrap.min.js"></script>
 
         <!-- CUSTOM NOTIFICATION -->
-        <script src="../../../js/notification/SmartNotification.min.js"></script>
 
         <!-- JARVIS WIDGETS -->
         <script src="../../../js/smartwidgets/jarvis.widget.min.js"></script>
@@ -754,6 +740,7 @@
 
         <!-- JQUERY SELECT2 INPUT -->
         <script src="../../../js/plugin/select2/select2.min.js"></script>
+        <script src="../../../js/JQuery/jQuery.js"></script>
 
         <!-- JQUERY UI + Bootstrap Slider -->
         <script src="../../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
@@ -763,6 +750,8 @@
 
         <!-- FastClick: For mobile devices -->
         <script src="../../../js/plugin/fastclick/fastclick.min.js"></script>
+      
+
 
         <!--[if IE 8]>
 
@@ -781,20 +770,39 @@
         <script src="../../../js/speech/voicecommand.min.js"></script>
 
         <!-- PAGE RELATED PLUGIN(S) -->
+          
         <script src="../../../js/plugin/jquery-form/jquery-form.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="../../../js/bootstrap/fileinput.js" type="text/javascript"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
-
-
+        <script src="../../../js/notification/SmartNotification.min.js"></script>
         <script type="text/javascript">
-
-                                                    // DO NOT REMOVE : GLOBAL FUNCTIONS!
-
+            function closedthis() {
+                                                        $.smallBox({
+                                                            title: "¡DGP registrada correctamente!",
+                                                            content: "ya puede visualizar toda la informacion del trabajador...",
+                                                            color: "#739E73",
+                                                            iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                                            timeout: 6000
+                                                        });
+                                                    }
+                                                    function closedthis2() {
+                                                        $.smallBox({
+                                                            title: "¡Documento eliminado correctamente!",
+                                                            content: "ya puede visualizar toda los documentos del trabajador...",
+                                                            color: "#739E73",
+                                                            iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                                            timeout: 6000
+                                                        });
+                                                    }
                                                     $(document).ready(function() {
 
                                                         pageSetUp();
-
+                                                        $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
+                                                $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+                                            }); 
+                                                      
+                                                        
                                                         $.each($(".file"), function(i) {
 
                                                             if ((i + 1) == 0) {
@@ -808,7 +816,6 @@
                                                         $(".DD").change(function() {
 
                                                             $(".div-holi").text($(".DD").val());
-
                                                         });
                                                         $(".elimi").click(function() {
                                                             var msg = confirm('¿tas seguro de eliminar?');
@@ -822,6 +829,7 @@
 
         </script>
         <script>
+
             $("#file-0").fileinput({
                 'allowedFileExtensions': ['jpg', 'png', 'gif'],
             });
@@ -899,14 +907,12 @@
                  alert('i = ' + index + ', id = ' + previewId + ', file = ' + file.name);
                  });
                  */
-            });
-        </script>
+            });</script>
         <!-- Your GOOGLE ANALYTICS CODE Below -->
         <script type="text/javascript">
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
-
             (function() {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
@@ -914,9 +920,7 @@
                 ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
                 var s = document.getElementsByTagName('script')[0];
                 s.parentNode.insertBefore(ga, s);
-            })();
-
-        </script>
+            })();</script>
         <script type="text/javascript" >
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));

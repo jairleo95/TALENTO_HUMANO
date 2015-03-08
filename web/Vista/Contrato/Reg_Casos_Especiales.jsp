@@ -195,12 +195,12 @@
                                                                 </select> 
                                                             </label>
                                                         </section>
-                                                        <section class="col col-2">
+                                                        <section class="col col-3 ">
                                                             <label class="input" id="titu">Desde: 
-                                                                <input type="date" name="FEC_DESDE"  class="date input-group-sm" required="">
+                                                                <input type="date" name="FEC_DESDE"  class="input-group-sm" required="">
                                                             </label>
                                                         </section>
-                                                        <section class="col col-2">
+                                                        <section class="col col-3">
                                                             <label class="input" id="titu">Hasta: 
                                                                 <input type="date" name="FEC_HASTA"  class="input-group-sm">
                                                             </label>
@@ -1634,6 +1634,18 @@
             var $checkoutForm = $('#checkout-form').validate({
                 // Rules for form validation
                 rules: {
+                    FEC_DESDE: {
+                        required: true,
+                        val_fecha: true
+                    },
+                    FEC_HASTA: {
+                        required: true,
+                        val_fecha: true
+                    },
+                    FECHA_SUSCRIPCION: {
+                        required: true,
+                        val_fecha: true
+                    },
                     fname: {
                         required: true
                     },
@@ -1736,6 +1748,10 @@
                     error.insertAfter(element.parent());
                 }
             });
+            jQuery.validator.addMethod("val_fecha", function(value, element) {
+                var d = value.split("-");
+                return this.optional(element) || String(parseInt(d[0])).length == 4;
+            }, "¡Fecha ingresada invalida!");
             var $registerForm = $("#smart-form-register").validate({
                 // Rules for form validation
                 rules: {
