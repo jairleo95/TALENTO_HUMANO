@@ -209,7 +209,8 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "select *  from rhvd_autorizar_dgp where id_puesto='" + id + "'";
         sql += (!"".equals(id_user)) ? " and id_usuario='" + id_user + "'" : "";
-
+        sql += (true) ? " order by fe_creacion " : "" ;
+        
         List<V_Autorizar_Dgp> list = new ArrayList<V_Autorizar_Dgp>();
         try {
             ResultSet rs = this.conn.query(sql);
