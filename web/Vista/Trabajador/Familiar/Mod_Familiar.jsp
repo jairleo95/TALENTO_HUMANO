@@ -293,7 +293,7 @@
                                                                                     out.print("");
                                                                                 }%>" type="text" name="NRO_DOC"  required="" maxlength="10">
 
-                                                                        </div>
+                                                                        </div>|
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-4">
