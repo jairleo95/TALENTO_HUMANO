@@ -418,7 +418,6 @@
                                                         <% }%>
                                                     <td ><%=a.getAp_paterno() + " " + a.getAp_materno() + " " + a.getNo_trabajador()%></td>
                                                     <td ><%=a.getNo_puesto()%></td>   
-
                                                     <td ><%=a.getNo_area()%></td>      
                                                     <td ><%=a.getNo_dep()%></td>      
                                                     <td ><%=a.getNo_req()%></td>      
@@ -426,7 +425,27 @@
                                             <input type="hidden" class="val_firm<%=(f + 1)%>" value="&IDDETALLE_DGP=<%=a.getId_dgp()%>&IDTR=<%=a.getId_trabajador()%>"/>
                                             <td style="color: red; font-weight: bold;"><a href="../../trabajador?idtr=<%=a.getId_trabajador()%>&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&iddetalle_dgp=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&cod=<%=a.getCo_pasos()%>&idpasos=<%=a.getId_pasos()%>&autorizacion=1&opc=aut&nup=<%=a.getNu_pasos()%>"><%=a.getDe_pasos()%></a></td>
                                             <td ><%=a.getFe_creacion()%></td>
-                                            <% if (dep.equals("DPT-0019")) {%>
+                                            <td><%if (a.getLi_motivo() != null) {
+                                                    if (a.getLi_motivo().trim().equals("1")) {
+                                                        out.print("Trabajdor Nuevo");
+                                                    }
+                                                    if (a.getLi_motivo().trim().equals("2")) {
+                                                        out.print("Renovación");
+                                                    }
+                                                } else {
+                                                    out.print("No registrado");
+                                                }%></td> 
+                                            <td><%if (a.getEs_mfl() != null) {
+                                                    if (a.getEs_mfl().trim().equals("0")) {
+                                                        out.print("No");
+                                                    }
+                                                    if (a.getEs_mfl().trim().equals("1")) {
+                                                        out.print("Si");
+                                                    }
+                                                } else {
+                                                    out.print("No registrado");
+                                                }%></td> 
+                                                <% if (dep.equals("DPT-0019")) {%>
 
 
                                             <td><%if (a.getVal_plazo() > 0) {
