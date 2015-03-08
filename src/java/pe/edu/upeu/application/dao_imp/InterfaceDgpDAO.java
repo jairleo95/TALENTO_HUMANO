@@ -64,7 +64,7 @@ public interface InterfaceDgpDAO {
 
     public List<Map<String, ?>> Cargar_Datos_Dgp(String id);
 
-    public String Imprimir_det_proceso(String iddgp, String idrp);
+    public String Imprimir_det_proceso(String iddgp, String idrp, String iddep);
 
     public List<Cuenta_Sueldo> LIST_CUEN_SUEL(String id_trabajador);
 

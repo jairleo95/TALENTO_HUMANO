@@ -38,7 +38,7 @@ public class DgpDAO implements InterfaceDgpDAO {
     CConversion c = new CConversion();
 
     @Override
-    public void INSERT_DGP(String ID_DGP, String FE_DESDE, String FE_HASTA, double CA_SUELDO, String DE_DIAS_TRABAJO, String ID_PUESTO, String ID_REQUERIMIENTO, String ID_TRABAJADOR, String CO_RUC, String DE_LUGAR_SERVICIO, String DE_SERVICIO, String DE_PERIODO_PAGO, String DE_DOMICILIO_FISCAL, String DE_SUBVENCION, String DE_HORARIO_CAPACITACION, String DE_HORARIO_REFRIGERIO, String DE_DIAS_CAPACITACION, String ES_DGP, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, double CA_BONO_ALIMENTARIO, double DE_BEV, String DE_ANTECEDENTES_POLICIALES, String ES_CERTIFICADO_SALUD, String DE_MONTO_HONORARIO, String LI_MOTIVO, String ES_MFL,double BONO_PUESTO) {
+    public void INSERT_DGP(String ID_DGP, String FE_DESDE, String FE_HASTA, double CA_SUELDO, String DE_DIAS_TRABAJO, String ID_PUESTO, String ID_REQUERIMIENTO, String ID_TRABAJADOR, String CO_RUC, String DE_LUGAR_SERVICIO, String DE_SERVICIO, String DE_PERIODO_PAGO, String DE_DOMICILIO_FISCAL, String DE_SUBVENCION, String DE_HORARIO_CAPACITACION, String DE_HORARIO_REFRIGERIO, String DE_DIAS_CAPACITACION, String ES_DGP, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, double CA_BONO_ALIMENTARIO, double DE_BEV, String DE_ANTECEDENTES_POLICIALES, String ES_CERTIFICADO_SALUD, String DE_MONTO_HONORARIO, String LI_MOTIVO, String ES_MFL, double BONO_PUESTO) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DGP( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)}");
@@ -616,13 +616,13 @@ public class DgpDAO implements InterfaceDgpDAO {
     }
 
     @Override
-    public String Imprimir_det_proceso(String iddgp, String idrp) {
+    public String Imprimir_det_proceso(String iddgp, String idrp, String iddep) {
 
         String cadena = "";
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "SELECT f.de_pasos, "
-                    + "  f.nu_pasos ,s.es_autorizacion, rhfu_count_aut_dgp ('" + iddgp + "') as count_aut,rhfu_detalle_puesto_aut ('"+idrp+"',f.id_pasos) as puesto_aut  "
+                    + "  f.nu_pasos ,s.es_autorizacion, rhfu_count_aut_dgp ('" + iddgp + "') as count_aut,rhfu_detalle_puesto_aut ('" + idrp + "',f.id_pasos,'" + iddep.trim() + "') as puesto_aut  "
                     + "FROM "
                     + "  (SELECT p.id_pasos, "
                     + "    p.id_proceso, "
@@ -722,15 +722,15 @@ public class DgpDAO implements InterfaceDgpDAO {
 
                         if (i == 1) {
                             cadena = cadena
-                                    + " <div class=\"new-circle done\" rel=\"popover-hover\" data-placement=\"top\" data-original-title=\""+rs.getString("de_pasos") +"\" data-content=\""
-                                    +rs.getString("puesto_aut")+"\" data-html=\"true\">"
+                                    + " <div class=\"new-circle done\" rel=\"popover-hover\" data-placement=\"top\" data-original-title=\"" + rs.getString("de_pasos") + "\" data-content=\""
+                                    + rs.getString("puesto_aut") + "\" data-html=\"true\">"
                                     + "<span class=\"new-label\">&#10004;</span>"
                                     + "<span class=\"new-title\">" + rs.getString("nu_pasos") + "</span> "
                                     + "</div>";
                         } else {
                             cadena = cadena
                                     + " <span class=\"new-bar done\"></span> "
-                                    + "<div class=\"new-circle done\" rel=\"popover-hover\" data-placement=\"top\" data-original-title=\""+rs.getString("de_pasos") +"\" data-content=\""+rs.getString("puesto_aut")+" \" data-html=\"true\">"
+                                    + "<div class=\"new-circle done\" rel=\"popover-hover\" data-placement=\"top\" data-original-title=\"" + rs.getString("de_pasos") + "\" data-content=\"" + rs.getString("puesto_aut") + " \" data-html=\"true\">"
                                     + "<span class=\"new-label\">&#10004;</span>"
                                     + "<span class=\"new-title\">" + rs.getString("nu_pasos") + "</span>"
                                     + " </div>";
@@ -741,7 +741,7 @@ public class DgpDAO implements InterfaceDgpDAO {
                     if (rs.getString("es_autorizacion").equals("2")) {
                         cadena = cadena
                                 + " <span class=\"new-bar done\"></span> "
-                                + "<div  class=\"new-circle rechazo\" rel=\"popover-hover\" data-placement=\"top\" data-original-title=\""+rs.getString("de_pasos") +"\" data-content=\" "+rs.getString("puesto_aut")+" \" data-html=\"true\">"
+                                + "<div  class=\"new-circle rechazo\" rel=\"popover-hover\" data-placement=\"top\" data-original-title=\"" + rs.getString("de_pasos") + "\" data-content=\" " + rs.getString("puesto_aut") + " \" data-html=\"true\">"
                                 + "<span style='color:white; font:bold;' class=\"new-label fa fa-warning\"></span>"
                                 + "<span class=\"new-title\">" + rs.getString("nu_pasos") + "</span>"
                                 + " </div>";
@@ -750,10 +750,10 @@ public class DgpDAO implements InterfaceDgpDAO {
                 } else {
 
                     if (rs.getInt("count_aut") + 1 == i) {
-                    //if (false) {
+                        //if (false) {
                         cadena = cadena
                                 + " <span class=\"new-bar active\"></span> "
-                                + "<div class=\"new-circle active\" rel=\"popover-hover\" data-placement=\"top\" data-original-title=\""+rs.getString("de_pasos") +"\" data-content=\""+rs.getString("puesto_aut")+" \" data-html=\"true\">"
+                                + "<div class=\"new-circle active\" rel=\"popover-hover\" data-placement=\"top\" data-original-title=\"" + rs.getString("de_pasos") + "\" data-content=\"" + rs.getString("puesto_aut") + " \" data-html=\"true\">"
                                 + "<span class=\"new-label fa fa-inbox\"></span>"
                                 + "<span class=\"new-title\">" + rs.getString("nu_pasos") + "</span>"
                                 + " </div>";
@@ -761,14 +761,14 @@ public class DgpDAO implements InterfaceDgpDAO {
                     } else {
                         cadena = cadena
                                 + " <span class=\"new-bar \"></span> "
-                                + "<div class=\"new-circle\" rel=\"popover-hover\" data-placement=\"top\" data-original-title=\""+rs.getString("de_pasos") +"\" data-content=\""+rs.getString("puesto_aut")+" \" data-html=\"true\">"
+                                + "<div class=\"new-circle\" rel=\"popover-hover\" data-placement=\"top\" data-original-title=\"" + rs.getString("de_pasos") + "\" data-content=\"" + rs.getString("puesto_aut") + " \" data-html=\"true\">"
                                 + "<span class=\"new-label fa fa-lock\"></span>"
                                 + "<span class=\"new-title\">" + rs.getString("nu_pasos") + "</span>"
                                 + " </div>";
 
                     }
                 }
-               
+
             }
             rs.close();
         } catch (SQLException e) {

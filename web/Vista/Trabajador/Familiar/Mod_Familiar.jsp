@@ -14,6 +14,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="pe.edu.upeu.application.model.Padre_Madre_Conyugue"%>
 <jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_tipo_doc" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html lang="en-us">
     <head>
@@ -216,13 +217,15 @@
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select name="TRABAJA_UPEU_CONYUGUE"   required=""   class="select-conyugue form-control input-group-sm">
-                                                                                <%if (t.getEs_trabaja_upeu_c().trim().equals("1")) {%>
+                                                                                <%if (t.getEs_trabaja_upeu_c() != null) {
+                                                                                        if (t.getEs_trabaja_upeu_c().trim().equals("1")) {%>
                                                                                 <option value="1" selected="">Si</option>
                                                                                 <option value="0">No</option>
                                                                                 <%} else if (t.getEs_trabaja_upeu_c().trim().equals("0")) {%>
                                                                                 <option value="1">Si</option>
                                                                                 <option value="0" selected="">No</option>
-                                                                                <%}%>
+                                                                                <%}
+                                                                                    }%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -261,16 +264,17 @@
 
                                                                             <select name="TIPO_DOC_ID"  class="form-control input-group-sm" required="">
                                                                                 <%
-                                                                                    InterfaceTipo_DocumentoDAO itd = new Tipo_DocumentoDAO();
 
-                                                                                    for (int k = 0; k < itd.Listar_tipo_doc().size(); k++) {
+                                                                                    for (int k = 0; k < Listar_tipo_doc.size(); k++) {
                                                                                         Tipo_Documento td = new Tipo_Documento();
-                                                                                        td = (Tipo_Documento) itd.Listar_tipo_doc().get(k);
-                                                                                        if (td.getId_tipo_doc_ident().trim().equals(t.getId_tipo_doc_c().trim())) {%>
+                                                                                        td = (Tipo_Documento) Listar_tipo_doc.get(k);
+                                                                                        if (t.getId_tipo_doc_c() != null) {
+                                                                                            if (td.getId_tipo_doc_ident().trim().equals(t.getId_tipo_doc_c().trim())) {%>
                                                                                 <option value="<%=td.getId_tipo_doc_ident()%>" selected=""><%=td.getDe_tdoc_abreviada()%></option>
                                                                                 <%} else {%>
                                                                                 <option value="<%=td.getId_tipo_doc_ident()%>"><%=td.getDe_tdoc_abreviada()%></option>    
                                                                                 <% }
+                                                                                        }
                                                                                     }
                                                                                 %>
 
@@ -289,7 +293,7 @@
                                                                                     out.print("");
                                                                                 }%>" type="text" name="NRO_DOC"  required="" maxlength="10">
 
-                                                                        </div>
+                                                                        </div>|
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-4">
@@ -299,13 +303,15 @@
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select name="INSCRIPCION_VIG_ESSALUD"  class="form-control input-group-sm" required="">
-                                                                                <%if (t.getLi_inscripcion_vig_essalud_c().trim().equals("1")) {%>
+                                                                                <%if (t.getLi_inscripcion_vig_essalud_c() != null) {
+                                                                                if (t.getLi_inscripcion_vig_essalud_c().trim().equals("1")) {%>
                                                                                 <option value="1" selected="">Si</option>
                                                                                 <option value="0">No</option>
                                                                                 <%} else if (t.getLi_inscripcion_vig_essalud_c().trim().equals("0")) {%>
                                                                                 <option value="1">Si</option>
                                                                                 <option value="0" selected="">No</option>
-                                                                                <%}%>
+                                                                                <%}
+                                                                                    }%>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -531,86 +537,86 @@
     <script type="text/javascript" src="../../../js/JQuery/jquery.numeric.js"></script>
 
     <script>
-                                                        $(document).ready(function() {
-                                                            var b = $(".tbodys");
+                                                    $(document).ready(function() {
+                                                        var b = $(".tbodys");
 
-                                                            $("#btnfiltrar").click(
-                                                                    function() {
+                                                        $("#btnfiltrar").click(
+                                                                function() {
 
 
-                                                                        $.post("../../../ajax/Ajax_Conyugue/Ajax_Busc_Conyug.jsp", $("#frm_filtro").serialize(), function(objJson) {
-                                                                            b.empty();
-                                                                            var list = objJson.lista;
-                                                                            for (var i = 0; i < list.length; i++) {
-                                                                                b.append("<tr>");
-                                                                                b.append("<td>" + list[i].NOM + " " + list[i].AP_PA + " " + list[i].AP_MA + "</td>");
-                                                                                b.append("<td>" + list[i].NU_DOC + "</td>");
-                                                                                b.append("<input type ='hidden' class='trab_" + i + "' value='" + list[i].ID_TRAB + "' />");
-                                                                                b.append("<input type ='hidden' class='nac_" + i + "' value='" + list[i].NAC + "' />");
-                                                                                b.append("<input type ='hidden' class='dni_" + i + "' value='" + list[i].NU_DOC + "' />");
-                                                                                b.append("<input type ='hidden' class='tipo_" + i + "' value='" + list[i].TIPO + "' />");
-                                                                                b.append("<input type ='hidden' class='nom_ape_" + i + "' value='" + list[i].NOM + " " + list[i].AP_PA + " " + list[i].AP_MA + "' />");
-                                                                                if (typeof (list[i].ID_C) === "undefined") {
+                                                                    $.post("../../../ajax/Ajax_Conyugue/Ajax_Busc_Conyug.jsp", $("#frm_filtro").serialize(), function(objJson) {
+                                                                        b.empty();
+                                                                        var list = objJson.lista;
+                                                                        for (var i = 0; i < list.length; i++) {
+                                                                            b.append("<tr>");
+                                                                            b.append("<td>" + list[i].NOM + " " + list[i].AP_PA + " " + list[i].AP_MA + "</td>");
+                                                                            b.append("<td>" + list[i].NU_DOC + "</td>");
+                                                                            b.append("<input type ='hidden' class='trab_" + i + "' value='" + list[i].ID_TRAB + "' />");
+                                                                            b.append("<input type ='hidden' class='nac_" + i + "' value='" + list[i].NAC + "' />");
+                                                                            b.append("<input type ='hidden' class='dni_" + i + "' value='" + list[i].NU_DOC + "' />");
+                                                                            b.append("<input type ='hidden' class='tipo_" + i + "' value='" + list[i].TIPO + "' />");
+                                                                            b.append("<input type ='hidden' class='nom_ape_" + i + "' value='" + list[i].NOM + " " + list[i].AP_PA + " " + list[i].AP_MA + "' />");
+                                                                            if (typeof (list[i].ID_C) === "undefined") {
 
-                                                                                    b.append('<td><button type="button" class="btn btn-primary btn-add-conyugue" value="' + i + '" data-dismiss="modal">Agregar</button></td>');
-                                                                                } else {
-                                                                                    b.append('<td>Tiene conyugue</td>');
-                                                                                }
-                                                                                b.append("</tr>");
-
+                                                                                b.append('<td><button type="button" class="btn btn-primary btn-add-conyugue" value="' + i + '" data-dismiss="modal">Agregar</button></td>');
+                                                                            } else {
+                                                                                b.append('<td>Tiene conyugue</td>');
                                                                             }
+                                                                            b.append("</tr>");
 
-                                                                            $(".btn-add-conyugue").click(function() {
-                                                                                var v = $(this).val();
-                                                                                $(".nom_c").val($(".nom_ape_" + v).val());
-                                                                                $(".f_nac").val($(".nac_" + v).val());
-                                                                                $(".ti_documento").val($(".tipo_" + v).val());
-                                                                                $(".num_doc").val($(".dni_" + v).val());
-                                                                                $(".cony").val($(".trab_" + v).val());
-
-
-
-
-                                                                                //$(".select-conyugue").val("1");
-                                                                            });
                                                                         }
-                                                                        );
+
+                                                                        $(".btn-add-conyugue").click(function() {
+                                                                            var v = $(this).val();
+                                                                            $(".nom_c").val($(".nom_ape_" + v).val());
+                                                                            $(".f_nac").val($(".nac_" + v).val());
+                                                                            $(".ti_documento").val($(".tipo_" + v).val());
+                                                                            $(".num_doc").val($(".dni_" + v).val());
+                                                                            $(".cony").val($(".trab_" + v).val());
 
 
 
-                                                                    });
-                                                            $(".btn-salir-busc, .close").click(function() {
 
-                                                                $(".select-conyugue").val("0");
-                                                            });
+                                                                            //$(".select-conyugue").val("1");
+                                                                        });
+                                                                    }
+                                                                    );
 
 
-                                                            $(".select-conyugue").change(function() {
-                                                                if ($(this).val() == "1") {
-                                                                    $("#btn-mostrar").click();
-                                                                }
-                                                                if ($(this).val() == "0") {
-                                                                    $(".nom_c").val("");
-                                                                    $(".f_nac").val("");
-                                                                    $(".ti_documento").val("");
-                                                                    $(".num_doc").val("");
-                                                                    $(".cony").val("");
 
-                                                                }
+                                                                });
+                                                        $(".btn-salir-busc, .close").click(function() {
+
+                                                            $(".select-conyugue").val("0");
+                                                        });
+
+
+                                                        $(".select-conyugue").change(function() {
+                                                            if ($(this).val() == "1") {
+                                                                $("#btn-mostrar").click();
+                                                            }
+                                                            if ($(this).val() == "0") {
+                                                                $(".nom_c").val("");
+                                                                $(".f_nac").val("");
+                                                                $(".ti_documento").val("");
+                                                                $(".num_doc").val("");
+                                                                $(".cony").val("");
 
                                                             }
-                                                            );
-                                                            $("#btncancel").click(
-                                                                    function() {
-                                                                        document.formulario.reset();
-                                                                        b.empty();
-                                                                        html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'
-                                                                        $(".tbodys").html(html);
-                                                                    }
-                                                            );
 
                                                         }
                                                         );
+                                                        $("#btncancel").click(
+                                                                function() {
+                                                                    document.formulario.reset();
+                                                                    b.empty();
+                                                                    html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'
+                                                                    $(".tbodys").html(html);
+                                                                }
+                                                        );
+
+                                                    }
+                                                    );
 
 
     </script>
@@ -781,7 +787,10 @@
 </body>
 
 </html>
-<%} else {
+<%}
+
+    
+        else {
         response.sendRedirect("/TALENTO_HUMANO/");
     }
 %>

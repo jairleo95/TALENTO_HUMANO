@@ -299,7 +299,7 @@
                                         <%if (idrol.trim().equals("ROL-0006")) {
                                         %>
                                         <button type="button" class="btn btn-success btn_pro_firma">Procesar Firmas</button>
-                                        <button type="button" class="btn btn-default btn_pro_remuneracion">Enviar a remuneraciones</button>
+                                        <button type="button" class="btn btn-default btn_pro_remuneracion">Procesar a remuneraciones</button>
                                         <%}%>
                                         <%if (idrol.trim().equals("ROL-0009")) {%>
                                         <button type="button" class="btn btn-success btn_cod_aps">Procesar codigos</button>
