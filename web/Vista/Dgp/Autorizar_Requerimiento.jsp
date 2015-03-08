@@ -84,35 +84,35 @@
 
     <body onload='exito("Procesado con exito!", "Usted ha realizado una autorización correctamente.");' class="body">
         <%
-            }
-        }%>
-         <%if (request.getParameter("m") != null) {
-            if (request.getParameter("m").equals("si")) {
-    %>
+                }
+            }%>
+        <%if (request.getParameter("m") != null) {
+                if (request.getParameter("m").equals("si")) {
+        %>
 
     <body onload='exito("Procesado con exito!", "Codigo APS ingresado correctamente");' class="body">
         <%
-            }
-        }%>
+                }
+            }%>
         <%if (request.getParameter("h") != null) {
-            if (request.getParameter("h").equals("si")) {
-    %>
+                if (request.getParameter("h").equals("si")) {
+        %>
 
     <body onload='exito("Procesado con exito!", "Codigo huella ingresado correctamente");' class="body">
         <%
             }
-        }else {
+        } else {
         %>
     <body class="body"  >
         <%}%> 
         <script>
 
-            $(document).ready(function () {
+            $(document).ready(function() {
 
                 var b = $("#alerta_dgp");
                 // $("#alerta_dgp").hide();
                 function listar() {
-                    $.post("../../plazo_dgp", "opc=Listar", function (objJson) {
+                    $.post("../../plazo_dgp", "opc=Listar", function(objJson) {
                         b.empty();
                         var lista = objJson.lista;
                         if (objJson.rpta == -1) {
@@ -189,16 +189,16 @@
                                                 timeout: 3000
                                             });
                                         }
-                                        $(document).ready(function () {
+                                        $(document).ready(function() {
 
-                                            $(".btn_pro_remuneracion").click(function () {
-                                                $.each($(".env_rem"), function () {
+                                            $(".btn_pro_remuneracion").click(function() {
+                                                $.each($(".env_rem"), function() {
                                                     if ($(this).prop('checked')) {
                                                         $.ajax({
                                                             url: "../../autorizacion",
                                                             type: "POST",
                                                             data: "opc=Aceptar" + $(".val_aut" + $(this).val()).val()
-                                                        }).done(function () {
+                                                        }).done(function() {
 
                                                             window.location.href = "../../autorizacion";
                                                         });
@@ -206,23 +206,23 @@
                                                 });
 
                                             });
-                                            $(".btn_pro_firma").click(function () {
+                                            $(".btn_pro_firma").click(function() {
                                                 try {
-                                                    $.each($(".firm_contr"), function () {
+                                                    $.each($(".firm_contr"), function() {
                                                         //alert($(this).val());
                                                         if ($(this).prop('checked')) {
                                                             $.ajax({
                                                                 url: "../../contrato",
                                                                 type: "POST",
                                                                 data: "opc=Actualizar_Firma" + $(".val_firm" + $(this).val()).val()
-                                                            }).done(function () {
+                                                            }).done(function() {
 
                                                             });
                                                             $.ajax({
                                                                 url: "../../autorizacion",
                                                                 type: "POST",
                                                                 data: "opc=Aceptar" + $(".val_aut" + $(this).val()).val()
-                                                            }).done(function () {
+                                                            }).done(function() {
 
                                                                 window.location.href = "../../autorizacion";
                                                             });
@@ -236,7 +236,7 @@
                                                 } finally {
                                                 }
                                             });
-                                            $(".btn_cod_aps").click(function () {
+                                            $(".btn_cod_aps").click(function() {
 
                                                 for (var r = 1; r <= parseInt($(".num_aps").val()); r++) {
                                                     if ($(".cod_aps" + r).val() != "") {
@@ -263,7 +263,7 @@
 
                                                 //   });
                                             });
-                                            $(".btn_cod_huella").click(function () {
+                                            $(".btn_cod_huella").click(function() {
 
                                                 for (var r = 1; r <= parseInt($(".num_huella").val()); r++) {
                                                     if ($(".cod_huella" + r).val() != "") {
@@ -271,7 +271,8 @@
                                                             url: "../../trabajador",
                                                             type: "POST",
                                                             data: "opc=reg_huella&cod=" + $(".cod_huella" + r).val() + "&idtr=" + $(".idtr" + r).val()
-                                                        }).done(function () {});
+                                                        }).done(function() {
+                                                        });
                                                         $.ajax({
                                                             url: "../../autorizacion",
                                                             type: "POST",
@@ -298,12 +299,12 @@
                                         <%if (idrol.trim().equals("ROL-0006")) {
                                         %>
                                         <button type="button" class="btn btn-success btn_pro_firma">Procesar Firmas</button>
-                                        <button type="button" class="btn btn-default btn_pro_remuneracion">Enviar a remuneraciones</button>
+                                        <button type="button" class="btn btn-default btn_pro_remuneracion">Procesar a remuneraciones</button>
                                         <%}%>
                                         <%if (idrol.trim().equals("ROL-0009")) {%>
                                         <button type="button" class="btn btn-success btn_cod_aps">Procesar codigos</button>
                                         <%}%>
-                                        <%if (idrol.trim().equals("ROL-0007")|idrol.trim().equals("ROL-0001")) {%>
+                                        <%if (idrol.trim().equals("ROL-0007") | idrol.trim().equals("ROL-0001")) {%>
                                         <button type="button" class="btn btn-success btn_cod_huella">Procesar codigos</button>
                                         <%}%>
                                         <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
@@ -322,6 +323,8 @@
                                                     <!--  <td>Departamento</td>-->
                                                     <th data-hide="phone,tablet"><strong>Descripción</strong></th>
                                                     <th  data-hide="phone,tablet">Fecha de Creación</th>  
+                                                    <th  data-hide="phone,tablet">Motivo</th>  
+                                                    <th  data-hide="phone,tablet">MFL</th>  
                                                         <% if (dep.equals("DPT-0019")) {%>
 
                                                     <th  ><strong>¿Cumplio Plazos?</strong></th>
@@ -336,7 +339,7 @@
                                                         <%if (idrol.trim().equals("ROL-0009")) {%>
                                                     <th><strong>Código APS</strong></th>
                                                         <%}%>
-                                                        <%if (idrol.trim().equals("ROL-0007")|idrol.trim().equals("ROL-0001")) {%>
+                                                        <%if (idrol.trim().equals("ROL-0007") | idrol.trim().equals("ROL-0001")) {%>
                                                     <th><strong>Código Huella</strong></th>
                                                         <%}%>
                                                 </tr>
@@ -415,7 +418,6 @@
                                                         <% }%>
                                                     <td ><%=a.getAp_paterno() + " " + a.getAp_materno() + " " + a.getNo_trabajador()%></td>
                                                     <td ><%=a.getNo_puesto()%></td>   
-
                                                     <td ><%=a.getNo_area()%></td>      
                                                     <td ><%=a.getNo_dep()%></td>      
                                                     <td ><%=a.getNo_req()%></td>      
@@ -423,7 +425,27 @@
                                             <input type="hidden" class="val_firm<%=(f + 1)%>" value="&IDDETALLE_DGP=<%=a.getId_dgp()%>&IDTR=<%=a.getId_trabajador()%>"/>
                                             <td style="color: red; font-weight: bold;"><a href="../../trabajador?idtr=<%=a.getId_trabajador()%>&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&iddetalle_dgp=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&cod=<%=a.getCo_pasos()%>&idpasos=<%=a.getId_pasos()%>&autorizacion=1&opc=aut&nup=<%=a.getNu_pasos()%>"><%=a.getDe_pasos()%></a></td>
                                             <td ><%=a.getFe_creacion()%></td>
-                                            <% if (dep.equals("DPT-0019")) {%>
+                                            <td><%if (a.getLi_motivo() != null) {
+                                                    if (a.getLi_motivo().trim().equals("1")) {
+                                                        out.print("Trabajdor Nuevo");
+                                                    }
+                                                    if (a.getLi_motivo().trim().equals("2")) {
+                                                        out.print("Renovación");
+                                                    }
+                                                } else {
+                                                    out.print("No registrado");
+                                                }%></td> 
+                                            <td><%if (a.getEs_mfl() != null) {
+                                                    if (a.getEs_mfl().trim().equals("0")) {
+                                                        out.print("No");
+                                                    }
+                                                    if (a.getEs_mfl().trim().equals("1")) {
+                                                        out.print("Si");
+                                                    }
+                                                } else {
+                                                    out.print("No registrado");
+                                                }%></td> 
+                                                <% if (dep.equals("DPT-0019")) {%>
 
 
                                             <td><%if (a.getVal_plazo() > 0) {
@@ -491,7 +513,7 @@
                                             <td><strong><%=a.getCo_aps()%></strong></td>
                                             <%}
                                                 }%>
-                                            <%if (idrol.trim().equals("ROL-0007")|idrol.trim().equals("ROL-0001")) {%>
+                                            <%if (idrol.trim().equals("ROL-0007") | idrol.trim().equals("ROL-0001")) {%>
                                             <%if (a.getVal_cod_huella() == 0) {
                                                     num_cod_huella++;
                                             %>
@@ -633,10 +655,10 @@
 
                                         // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-                                        $(document).ready(function () {
+                                        $(document).ready(function() {
 
                                             pageSetUp();
-                                            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+                                            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
                                                 $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                                             });
                                             $(".cod_aps").numeric();
@@ -673,16 +695,16 @@
                                                         "t" +
                                                         "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
                                                 "autoWidth": true,
-                                                "preDrawCallback": function () {
+                                                "preDrawCallback": function() {
                                                     // Initialize the responsive datatables helper once.
                                                     if (!responsiveHelper_dt_basic) {
                                                         responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
                                                     }
                                                 },
-                                                "rowCallback": function (nRow) {
+                                                "rowCallback": function(nRow) {
                                                     responsiveHelper_dt_basic.createExpandIcon(nRow);
                                                 },
-                                                "drawCallback": function (oSettings) {
+                                                "drawCallback": function(oSettings) {
                                                     responsiveHelper_dt_basic.respond();
                                                 }
                                             });
@@ -701,16 +723,16 @@
                                                         "t" +
                                                         "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
                                                 "autoWidth": true,
-                                                "preDrawCallback": function () {
+                                                "preDrawCallback": function() {
                                                     // Initialize the responsive datatables helper once.
                                                     if (!responsiveHelper_datatable_fixed_column) {
                                                         responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
                                                     }
                                                 },
-                                                "rowCallback": function (nRow) {
+                                                "rowCallback": function(nRow) {
                                                     responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
                                                 },
-                                                "drawCallback": function (oSettings) {
+                                                "drawCallback": function(oSettings) {
                                                     responsiveHelper_datatable_fixed_column.respond();
                                                 }
 
@@ -720,7 +742,7 @@
                                             $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
 
                                             // Apply the filter
-                                            $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
+                                            $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function() {
 
                                                 otable
                                                         .column($(this).parent().index() + ':visible')
@@ -736,16 +758,16 @@
                                                         "t" +
                                                         "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
                                                 "autoWidth": true,
-                                                "preDrawCallback": function () {
+                                                "preDrawCallback": function() {
                                                     // Initialize the responsive datatables helper once.
                                                     if (!responsiveHelper_datatable_col_reorder) {
                                                         responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
                                                     }
                                                 },
-                                                "rowCallback": function (nRow) {
+                                                "rowCallback": function(nRow) {
                                                     responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
                                                 },
-                                                "drawCallback": function (oSettings) {
+                                                "drawCallback": function(oSettings) {
                                                     responsiveHelper_datatable_col_reorder.respond();
                                                 }
                                             });
@@ -778,16 +800,16 @@
                                                     "sSwfPath": "js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
                                                 },
                                                 "autoWidth": true,
-                                                "preDrawCallback": function () {
+                                                "preDrawCallback": function() {
                                                     // Initialize the responsive datatables helper once.
                                                     if (!responsiveHelper_datatable_tabletools) {
                                                         responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
                                                     }
                                                 },
-                                                "rowCallback": function (nRow) {
+                                                "rowCallback": function(nRow) {
                                                     responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
                                                 },
-                                                "drawCallback": function (oSettings) {
+                                                "drawCallback": function(oSettings) {
                                                     responsiveHelper_datatable_tabletools.respond();
                                                 }
                                             });
@@ -804,7 +826,7 @@
         _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
         _gaq.push(['_trackPageview']);
 
-        (function () {
+        (function() {
             var ga = document.createElement('script');
             ga.type = 'text/javascript';
             ga.async = true;

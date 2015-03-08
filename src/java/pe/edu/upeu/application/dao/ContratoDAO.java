@@ -675,7 +675,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
     }
 
     @Override
-    public List<Map<String, ?>> Listar_Contratos(String de, String al, String direccion, String dep, String area, String sec, String puesto, String sueldo_total,String nombre,String fe_i,String fe_fin) {
+    public List<Map<String, ?>> Listar_Contratos(String de, String al, String direccion, String dep, String area, String sec, String puesto, String sueldo_total,String nombre,String fe_i,String fe_fin,String fe_sus) {
       List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -690,7 +690,8 @@ public class ContratoDAO implements InterfaceContratoDAO {
            sql += (!sueldo_total.equals("")) ? " and CA_SUELDO_TOTAL= '"+sueldo_total.trim()+"'" : "";
            sql += (!puesto.equals("")) ? " and ID_PUESTO= '"+puesto.trim()+"'" : "";
            sql += (!fe_i.equals("")) ? " and FE_DESDE= '"+c.convertFecha(fe_i.trim())+"'" : "";
-           sql += (!fe_fin.equals("")) ? " and FE_HASTA= '"+c.convertFecha(fe_fin.trim())+"'" : "";
+           sql += (!fe_fin.equals("")) ? " or FE_HASTA= '"+c.convertFecha(fe_fin.trim())+"'" : "";
+           sql += (!fe_sus.equals("")) ? " and FE_SUSCRIPCION= '"+c.convertFecha(fe_sus.trim())+"'" : "";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -707,6 +708,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 rec.put("id_tr", rs.getString("ID_TRABAJADOR"));
                 rec.put("fe_de", rs.getString("FE_DESDE"));
                 rec.put("fe_ha", rs.getString("FE_HASTA"));
+                rec.put("fe_su", rs.getString("FE_SUSCRIPCION"));
                 lista.add(rec);
             }
             rs.close();

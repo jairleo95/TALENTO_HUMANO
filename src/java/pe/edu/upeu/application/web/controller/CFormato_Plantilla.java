@@ -64,10 +64,10 @@ public class CFormato_Plantilla extends HttpServlet {
                 String PUES = request.getParameter("id_pu_asig");
                 String id = request.getParameter("id_pc");
                 pl.Insertar_pertenencia(id, DIR, DEP, AREA, SEC, PUES, iduser);
-                getServletContext().setAttribute("Listar_Direccion", dir.Listar_Direccion());
                 response.sendRedirect("Vista/Contrato/Formato_Plantilla/Reg_Formato_Plantilla.jsp");
             }
             if (opc.equals("asignar")) {
+                getServletContext().setAttribute("Listar_Direccion_X", dir.Listar_Direccion());
                 response.sendRedirect("Vista/Contrato/Formato_Plantilla/Reg_Formato_Plantilla.jsp");
             }
            // String direccion_raiz = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"web";

@@ -6,6 +6,7 @@
 <%
     HttpSession sesion_1 = request.getSession();
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
+    String rol = (String) sesion_1.getAttribute("IDROL");
     InterfaceDocumentoDAO doc_ = new DocumentoDAO();
     if (id_user_1 != null) {
 %>
@@ -117,7 +118,8 @@
                                     <!-- widget edit box -->
                                     <div >
                                         <!-- This area used as dropdown edit box -->
-                                        <a class="btn btn-success" href="../../documento_trabajador?idtr=<%=request.getParameter("idtr")%>&opc=Listar_doc"><i class="fa fa-check"></i> Registrar</a>
+                                        <a class="btn btn-success" href="../../documento_trabajador?idtr=<%=request.getParameter("idtr")%>&opc=Listar_doc" style="color:white;"><i class="fa fa-check"></i><%if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001")) {
+                                            out.print("REGISTRAR DOCUMENTOS");}else{out.print("VISUALIZAR DOCUMENTOS");}%> </a>
                                     </div>
                                     <!-- end widget edit box -->
 

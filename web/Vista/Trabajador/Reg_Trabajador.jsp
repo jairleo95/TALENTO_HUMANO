@@ -262,7 +262,7 @@
                                     if ((mmActual < mmCumple) || (mmActual == mmCumple && diaActual < diaCumple)) {
                                         edad--;
                                     }
-
+                                    $(".edad").text(edad + " años");
                                 }
                         );
 
@@ -1035,7 +1035,7 @@
                                                                     $("#no_cuen_otros").hide();
                                                                     $("#nu_cuen_otros").val("");
                                                                     $("#texto").hide();
-                                                                  $("#nu_cuen").valid();
+                                                                    $("#nu_cuen").valid();
 
 
                                                                 }

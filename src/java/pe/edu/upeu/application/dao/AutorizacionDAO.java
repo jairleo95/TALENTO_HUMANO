@@ -209,7 +209,8 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "select *  from rhvd_autorizar_dgp where id_puesto='" + id + "'";
         sql += (!"".equals(id_user)) ? " and id_usuario='" + id_user + "'" : "";
-
+        sql += (true) ? " order by fe_creacion " : "" ;
+        
         List<V_Autorizar_Dgp> list = new ArrayList<V_Autorizar_Dgp>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -253,6 +254,8 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 v.setVal_cod_huella(rs.getInt("VAL_COD_HUELLA_EMP"));
                 v.setCo_aps(rs.getInt("CO_APS"));
                 v.setCo_huella_digital(rs.getInt("CO_HUELLA_DIGITAL"));
+                v.setLi_motivo(rs.getString("LI_MOTIVO"));
+                v.setEs_mfl(rs.getString("ES_MFL"));
                 list.add(v);
             }
         } catch (SQLException e) {
