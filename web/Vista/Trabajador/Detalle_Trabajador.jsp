@@ -347,6 +347,17 @@
 
                     <hr class="simple">
                     <ul id="myTab1" class="nav nav-tabs bordered">
+                         <%  if (List_Auto_mostrar.size() == 1 && aut != null) {
+                                for (int r = 0; r < List_Auto_mostrar.size(); r++) {
+                                    Auto_Mostrar a = new Auto_Mostrar();
+                                    a = (Auto_Mostrar) List_Auto_mostrar.get(r);
+                        %>
+                        <li >
+                            <a href="<%=a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getId_trabajador()%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Datos de Requerimientos</a>
+                        </li>
+                        <%}
+
+                            }%>
                         <%if (iddep.equals("DPT-0019") || idrol.trim().equals("ROL-0012") || idrol.trim().equals("ROL-0002") || idrol.trim().equals("ROL-0005")) {
                         %>
                         <li >
@@ -378,17 +389,7 @@
                             <a href="../../empleado?opc=Eva_Emp&idtr=<%=idtr%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Evaluación de Empleado</a>
                         </li>
                         <%}%>
-                        <%  if (List_Auto_mostrar.size() == 1 && aut != null) {
-                                for (int r = 0; r < List_Auto_mostrar.size(); r++) {
-                                    Auto_Mostrar a = new Auto_Mostrar();
-                                    a = (Auto_Mostrar) List_Auto_mostrar.get(r);
-                        %>
-                        <li >
-                            <a href="<%=a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getId_trabajador()%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Datos de Requerimientos</a>
-                        </li>
-                        <%}
-
-                            }%>
+                       
                     </ul>
                     <div id="myTabContent1" class="tab-content padding-10">
                         <%  if (List_Auto_mostrar.size() == 1 && aut != null) {

@@ -639,7 +639,7 @@
             function closedthis() {
                 $.smallBox({
                     title: "¡DGP registrada correctamente!",
-                    content: "ya puede visualizar toda la informacion del trabajador...",
+                    content: "Para mas detalles click en el botón azul 'Accion' ",
                     color: "#739E73",
                     iconSmall: "fa fa-check fa-2x fadeInRight animated",
                     timeout: 6000

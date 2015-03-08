@@ -123,7 +123,7 @@
 
 
         <div id="main" role="main" style="margin: 0px;">
-            <form id="checkout-form" action="../../contrato"  novalidate="novalidate">
+            <form id="checkout-form" class="wizard-1" action="../../contrato"  novalidate="novalidate">
 
                 <div id="content">
                     <section id="widget-grid" class="">
@@ -207,7 +207,7 @@
                                                         </section>
                                                         <section class="col col-3" id="titulo">
                                                             <label class="select" id="titu">Dirección:
-                                                                <select name="DIRECCION" class="input-group-sm select_dir" >
+                                                                <select name="DIRECCION" class="input-group-sm select_dir" required="">
 
                                                                     <option value="">[SELECCIONE]</option>
                                                                     <%for (int g = 0; g < Listar_Direccion.size(); g++) {
@@ -222,19 +222,19 @@
                                                         </section> 
                                                         <section class="col col-3" id="titulo">
                                                             <label class="select" id="titu">Departamento:
-                                                                <select name="DEPARTAMENTO_ID" class="input-group-sm" id="selec_dep">
+                                                                <select name="DEPARTAMENTO_ID" class="input-group-sm" id="selec_dep" required="">
                                                                     <option value="">[SELECCIONE]</option>
                                                                 </select>  </label>
                                                         </section>
                                                         <section class="col col-3" id="titulo">
                                                             <label class="select" id="titu">Area:
-                                                                <select name="AREA_ID" class="input-group-sm" id="Selec_Area">
+                                                                <select name="AREA_ID" class="input-group-sm" id="Selec_Area" required="">
                                                                     <option value="">[SELECCIONE]</option>
                                                                 </select>  </label>
                                                         </section>
                                                         <section class="col col-3" id="titulo">
                                                             <label class="select" id="titu">Sección:
-                                                                <select name="SECCION_ID" class="input-group-sm" id="select_sec">
+                                                                <select name="SECCION_ID" class="input-group-sm" id="select_sec" required="">
                                                                     <option value="">[SELECCIONE]</option>
                                                                 </select>  </label>
                                                         </section>
@@ -264,7 +264,7 @@
                                                     <div class="row">
                                                         <section class="col col-2">
                                                             <label class="input" id="titu">Remuneración:
-                                                                <input type="text" name="SUELDO" id="remu" value="0"  class="input-group-sm">
+                                                                <input type="text" name="SUELDO" id="remu" value="0"  class="input-group-sm" required="" >  
                                                             </label>
                                                         </section>
                                                         <section class="col col-1">
@@ -289,7 +289,7 @@
                                                         </section>
                                                         <section class="col col-1">
                                                             <label class="input" id="titu">Sueldo Total:
-                                                                <input type="text" name="TOTAL_SUELDO" value="" id="sueldo_total"class="input-group-sm" selected="" >
+                                                                <input type="text" name="TOTAL_SUELDO" value="0" id="sueldo_total"class="input-group-sm" >
                                                             </label>
                                                         </section>
                                                         <section class="col col-2">
@@ -371,6 +371,109 @@
                                                                 function() {
                                                                     Listar_Direccion();
                                                                     Listar_Departamento();
+                                                                    pageSetUp();
+                                                                    var $validator = $("#wizard-1").validate({
+                                                                        rules: {
+                                                                            email: {
+                                                                                required: true,
+                                                                                email: "Your email address must be in the format of name@domain.com"
+                                                                            },
+                                                                            FEC_DESDE: {
+                                                                                required: true,
+                                                                                val_fecha: true
+                                                                            }
+                                                                            ,
+                                                                            FEC_HASTA: {
+                                                                                val_fecha: true
+                                                                            }
+                                                                            ,
+                                                                            fname: {
+                                                                                required: true
+                                                                            },
+                                                                            lname: {
+                                                                                required: true
+                                                                            },
+                                                                            country: {
+                                                                                required: true
+                                                                            },
+                                                                            city: {
+                                                                                required: true
+                                                                            },
+                                                                            postal: {
+                                                                                required: true,
+                                                                                minlength: 4
+                                                                            },
+                                                                            wphone: {
+                                                                                required: true,
+                                                                                minlength: 10
+                                                                            },
+                                                                            hphone: {
+                                                                                required: true,
+                                                                                minlength: 10
+                                                                            }
+                                                                        },
+                                                                        messages: {
+                                                                            fname: "Please specify your First name",
+                                                                            lname: "Please specify your Last name",
+                                                                            email: {
+                                                                                required: "We need your email address to contact you",
+                                                                                email: "Your email address must be in the format of name@domain.com"
+                                                                            }
+                                                                        },
+                                                                        highlight: function(element) {
+                                                                            $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                                                                        },
+                                                                        unhighlight: function(element) {
+                                                                            $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+                                                                        },
+                                                                        errorElement: 'span',
+                                                                        errorClass: 'help-block',
+                                                                        errorPlacement: function(error, element) {
+                                                                            if (element.parent('.input-group').length) {
+                                                                                error.insertAfter(element.parent());
+                                                                            } else {
+                                                                                error.insertAfter(element);
+                                                                            }
+                                                                        }
+                                                                    });
+                                                                    jQuery.validator.addMethod("val_fecha", function(value, element) {
+                                                                        var d = value.split("-");
+                                                                        return this.optional(element) || String(parseInt(d[0])).length == 4;
+                                                                    }, "¡Fecha ingresada invalida!");
+
+                                                                    $('#bootstrap-wizard-1').bootstrapWizard({
+                                                                        'tabClass': 'form-wizard',
+                                                                        'onNext': function(tab, navigation, index) {
+                                                                            var $valid = $("#wizard-1").valid();
+                                                                            if (!$valid) {
+                                                                                $validator.focusInvalid();
+                                                                                return false;
+                                                                            } else {
+                                                                                $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass(
+                                                                                        'complete');
+                                                                                $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).find('.step')
+                                                                                        .html('<i class="fa fa-check"></i>');
+                                                                            }
+                                                                        }
+                                                                    });
+
+
+                                                                    // fuelux wizard
+                                                                    var wizard = $('.wizard').wizard();
+
+                                                                    wizard.on('finished', function(e, data) {
+                                                                        //$("#fuelux-wizard").submit();
+                                                                        //console.log("submitted!");
+                                                                        $.smallBox({
+                                                                            title: "Congratulations! Your form was submitted",
+                                                                            content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
+                                                                            color: "#5F895F",
+                                                                            iconSmall: "fa fa-check bounce animated",
+                                                                            timeout: 4000
+                                                                        });
+
+                                                                    });
+
 
                                                                 }
                                                         );</script> 

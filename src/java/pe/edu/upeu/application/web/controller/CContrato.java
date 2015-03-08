@@ -392,8 +392,17 @@ public class CContrato extends HttpServlet {
             String ID_HORARIO = "HORARIO";
             String ID_REGIMEN_LABORAL = request.getParameter("REG_LAB_MINTRA");
             String ID_MODALIDAD = request.getParameter("MODALIDAD");
+            if (ID_MODALIDAD == null){
+            ID_MODALIDAD = request.getParameter("MODALIDAD"); 
+            }else{
+            ID_MODALIDAD = "MOD-0004";
+            }
             String ID_SUB_MODALIDAD = request.getParameter("SUB_MODALIDAD").trim();
-
+            if (ID_SUB_MODALIDAD == null){
+            ID_SUB_MODALIDAD = request.getParameter("SUB_MODALIDAD"); 
+            }else{
+            ID_SUB_MODALIDAD = "SMD-0011";
+            }
             String FE_DESDE = request.getParameter("FEC_DESDE");
             String FE_HASTA = request.getParameter("FEC_HASTA");
             String LI_CONDICION = request.getParameter("CONDICION");
@@ -401,6 +410,7 @@ public class CContrato extends HttpServlet {
             Double CA_REINTEGRO = Double.parseDouble(request.getParameter("REINTEGRO"));
             Double CA_BONO_ALIMENTO = Double.parseDouble(request.getParameter("BONO_ALIMENTO"));
             Double CA_BEV = Double.parseDouble(request.getParameter("BEV"));
+            
             Double CA_SUELDO_TOTAL = Double.parseDouble(request.getParameter("TOTAL_SUELDO"));
             String TI_HORA_PAGO = request.getParameter("TIPO_HORA_PAGO");
             Double CA_ASIG_FAMILIAR = Double.parseDouble(request.getParameter("ASIG_FAMILIAR"));
@@ -515,7 +525,7 @@ public class CContrato extends HttpServlet {
             //out.print(i);
             String idctr = con.Contrato_max(ID_TRABAJADOR);
             //response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&idtr=" + ID_TRABAJADOR + "&idctr=" + idctr + "&dce=Doc_CE");
-            response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&pro=pr_dgp&req=si&idtr=" + ID_TRABAJADOR );
+            response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&pro=pr_dgp&req=si&idtr=" + ID_TRABAJADOR +"&P2=TRUE");
         }
         if (opc.equals("Reporte_CE")) {
             getServletContext().setAttribute("List_Casos_Esp", con.LIST_CASOS_ESPECIALES());
