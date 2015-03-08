@@ -172,7 +172,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
             ResultSet rs = this.conn.query(sql);
 
             while (rs.next()) {
-                String tipo = rs.getString("NO_FILE").substring(rs.getString("NO_FILE").length() - 3, rs.getString("NO_FILE").length());
+                //String tipo = rs.getString("NO_FILE").substring(rs.getString("NO_FILE").length() - 3, rs.getString("NO_FILE").length());
                     texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href='../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "'>"+ rs.getString("NO_ORIGINAL") + "</a>";
 
             }

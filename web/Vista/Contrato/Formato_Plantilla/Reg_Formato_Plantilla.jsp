@@ -1,7 +1,6 @@
 
 <%@page import="pe.edu.upeu.application.model.Direccion"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
-<jsp:useBean id="Listar_Direccion" scope="application" class="java.util.ArrayList"/>
 <%
     HttpSession sesion = request.getSession();
     String id_user = (String) sesion.getAttribute("IDUSER");
@@ -12,7 +11,7 @@
 Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or http://ckeditor.com/license
 -->
-
+<jsp:useBean id="Listar_Direccion_X" scope="application" class="java.util.ArrayList"/>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -64,7 +63,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
         <script src="../../../js/plugin/ckeditor/ckeditor.js"></script>
         <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
-        <link href="../../../HTML_version/js/plugin/ckeditor/samples/sample.css" rel="stylesheet">
 
         <script>
 // The instanceReady event is fired, when an instance of CKEditor has finished
@@ -234,7 +232,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             function  lis_dir_id(d, valor) {
 
 
-                $.post("../../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + valor, function(objJson) {
+                $.post("../../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + valor.trim(), function(objJson) {
                     d.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -415,10 +413,12 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 //lis_dep(b);
                 var c = $(".dir_as");
                 //list_dir(c);
+                Listar_Plantilla();
                 $("#dir").change(function() {
                     var d = $(".dep");
                     var valor = $("#dir").val();
-                    lis_dir_id(d, valor.trim());
+                    lis_dir_id(d, valor);
+
                     Listar_Plantilla();
 
                 });
@@ -468,6 +468,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     var valor = $(".dir_as").val();
                     var opc = "Listar_dir_dep";
                     lis_sel(d, valor, opc);
+                    $("#di_sig").val(valor.trim());
 
                 });
                 $(".dep_as").change(function() {
@@ -475,40 +476,168 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     var valor = $(".dep_as").val();
                     var opc = "Listar_area2";
                     lis_sel(d, valor, opc);
-
+                    $("#de_sig").val(valor.trim());
                 });
                 $(".area_as").change(function() {
                     var d = $(".seccion_as");
                     var valor = $(".area_as").val();
                     var opc = "Listar_sec2";
                     lis_sel(d, valor, opc);
-
+                    $("#ar_sig").val(valor.trim());
                 });
                 $(".seccion_as").change(function() {
                     var d = $(".puesto_as");
                     var valor = $(".seccion_as").val();
                     var opc = "Listar_pu_id";
                     lis_sel(d, valor, opc);
-
+                    $("#se_sig").val(valor.trim());
                 });
+                $(".puesto_as").change(function() {
+                    $("#pu_sig").val($(".puesto_as").val().trim());
+
+                })
             });
 
         </script>
 
     </head>
 
-    <body class="body  desktop-detected " style="width:100%;">
+    <body class="body  desktop-detected pace-done" style="cursor: auto;">
 
-        <div id="main" style="margin-left: 0px;" width="100%">
-            <div id="content" >
+        <div id="main" style="margin-left: 0px;" >
+            <div id="content" class="widget-body">
                 <section id="widget-grid" class="">
 
-                    <h1>Mant. Plantillas</h1>
+                   
+                    <div class="row">
+                        <article class=" col-sm-12 col-lg-12">
+                            <div  class="jarviswidget jarviswidget-color-darken" id="wid-id-1" data-widget-colorbutton="true" >
+                                <header>
+                                    <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                                    <h2>Filtro de plantillas </h2>
 
+                                </header>
+                                <div>
+
+                                    <!-- widget edit box -->
+                                    <div class="jarviswidget-editbox">
+                                        <!-- This area used as dropdown edit box -->
+
+                                    </div>
+                                    <div class="widget-body no-padding">
+                                        <legend align="center">CARGAR PLANTILLAS</legend>
+                                        <section class="col col-12" style="width:100%;align:cemter;" align="center">
+                                            <label class="select">Dirección:
+                                                <select class="dir form-control" id="dir" name="id_di" >
+                                                    <option value="" >[Direccion]</option>
+                                                    <%for (int i = 0; i < Listar_Direccion_X.size(); i++) {
+                                                            Direccion d = new Direccion();
+                                                            d = (Direccion) Listar_Direccion_X.get(i);
+                                                    %>
+                                                    <option value="<%=d.getId_direccion()%>"> <%=d.getNo_direccion()%></option>
+                                                    <%}%>
+                                                </select>   
+                                            </label>
+                                        </section>
+
+                                        <section class="col col-12" style="width:100%;align:cemter;" align="center">
+                                            <label>Departamento:
+                                                <select class="dep form-control" id="dep" name="id_dep" >
+                                                    <option value="">[TODO]</option>
+                                                </select>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4"  style="width:100%;align:cemter;" align="center">
+                                            <label>Area:
+                                                <select class="area form-control" id="area" name="id_are" >
+                                                    <option value="">[TODO]</option>
+                                                </select>
+                                            </label>
+                                        </section>
+
+                                        <section class="col col-4"  style="width:100%;align:cemter;" align="center">
+                                            <label>Sección:
+                                                <select class="seccion form-control" id="seccion" name="id_sec" >
+                                                    <option value="">[TODO]</option>
+                                                </select>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4"  style="width:100%;align:cemter;" align="center">
+                                            <label>Puesto:
+                                                <select class="puesto form-control" id="puesto" name="id_pu" >
+                                                    <option value="">[TODO]</option>
+                                                </select>
+                                            </label>
+                                        </section>
+                                        <br>
+                                        <br>
+                                        <legend>ASIGNAR PLANTILLAS</legend>
+                                        <section class="col col-4"  style="width:100%;align:cemter;" align="center">
+                                            <label>Dirección:
+                                                <select class="dir_as form-control" id="dir_as"  >
+                                                    <option value="">[SELECCIONE]</option>
+                                                    <option value="">[SELECCIONE]</option>
+                                                    <%for (int i = 0; i < Listar_Direccion_X.size(); i++) {
+                                                            Direccion d = new Direccion();
+                                                            d = (Direccion) Listar_Direccion_X.get(i);
+                                                    %>
+                                                    <option value="<%=d.getId_direccion()%>"> <%=d.getNo_direccion()%></option>
+                                                    <%}%>
+                                                </select>   
+                                            </label>
+                                        </section>
+                                        <section class="col col-4"  style="width:100%;align:cemter;" align="center">
+                                            <label>Departamento:
+                                                <select class="dep_as form-control" id="dep_as" >
+                                                    <option value="0">[TODO]</option>
+                                                </select>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4" style="width:100%;align:cemter;" align="center" >
+                                            <label>Area:
+                                                <select class="area_as form-control" id="area_as" >
+                                                    <option value="0">[TODO]</option>
+                                                </select>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4"  style="width:100%;align:cemter;" align="center" >
+                                            <label>Sección:
+                                                <select class="seccion_as form-control col-5" id="seccion_as"  >
+                                                    <option value="0">[TODO]</option>
+                                                </select>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4"  style="width:100%;align:cemter;" align="center">
+                                            <label>Puesto:
+                                                <select class="puesto_as form-control" id="puesto_as"  >
+                                                    <option value="0">[TODO]</option>
+                                                </select>
+                                            </label>
+                                        </section>
+                                        <legend>Plantillas</legend>      
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th align="center" style="text-align:center;">Nro</th>
+                                                    <th align="center" style="text-align:center;">Nombre Plantilla</th>
+                                                    <th align="center" style="text-align:center;">Estado Plantilla Puesto</th>
+                                                    <th colspan="2" style="text-align:center;">Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="tbody-plantilla">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </article>
+                    </div>
 
                     <div class="row">
-                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
-                            <div class="jarviswidget" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+
+                        <article class=" col-sm-12 col-md-12 col-lg-9">
+                            <div  class="jarviswidget jarviswidget-color-darken" id="wid-id-3" data-widget-colorbutton="true" >
                                 <header><span class="widget-icon"><i class="fa fa-table"></i></span>
                                     <h2>Instrucciones </h2>
                                 </header>
@@ -551,26 +680,9 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                 </div>
                             </div>
                         </article>
+                        <article class="col-sm-12 col-md-12 col-lg-3">
+                            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-2" data-widget-colorbutton="true"  >
 
-
-                        <!-- NEW COL START -->
-                        <article class="col-sm-12 col-md-12 col-lg-8">
-
-                            <!-- Widget ID (each widget will need unique ID)-->
-                            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-1" data-widget-colorbutton="true"  >
-                                <!-- widget options:
-                                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-
-                                data-widget-colorbutton="false"
-                                data-widget-editbutton="false"
-                                data-widget-togglebutton="false"
-                                data-widget-deletebutton="false"
-                                data-widget-fullscreenbutton="false"
-                                data-widget-custombutton="false"
-                                data-widget-collapsed="true"
-                                data-widget-sortable="false"
-
-                                -->
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
                                     <h2>Editar Plantillas </h2>
@@ -590,120 +702,18 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">
 
-                                        <form class="ckeditor_form" action="../../../formato_plantilla" method="post">
-                                            <h3>CARGAR PLANTILLAS</h3>
-                                            <section class="col col-4" >
-                                                <label>Dirección:
-                                                    <div class="col-md-10">
-                                                        <select class="dir form-control" id="dir" name="id_di" ><%=Listar_Direccion.size()%>
-                                                            <option value="">[DIRECCION]</option>
-                                                            <%for (int i = 0; i < Listar_Direccion.size(); i++) {
-                                                                    Direccion di = new Direccion();
-                                                                    di = (Direccion) Listar_Direccion.get(i);
-                                                            %>
-                                                            <option value="<%=di.getId_direccion()%>"><%=di.getNo_direccion()%></option>
-                                                            <%}%>
-                                                        </select>   
-                                                    </div>
-                                                </label>
-                                            </section>
-
-                                            <section class="col col-4" >
-                                                <label>Departamento:
-                                                    <select class="dep form-control" id="dep" name="id_dep" >
-                                                        <option value="">[TODO]</option>
-                                                    </select>
-                                                </label>
-                                            </section>
-                                            <section class="col col-4" >
-                                                <label>Area:
-                                                    <select class="area form-control" id="area" name="id_are" >
-                                                        <option value="">[TODO]</option>
-                                                    </select>
-                                                </label>
-                                            </section>
-
-                                            <section class="col col-4" >
-                                                <label>Sección:
-                                                    <select class="seccion form-control" id="seccion" name="id_sec" >
-                                                        <option value="">[TODO]</option>
-                                                    </select>
-                                                </label>
-                                            </section>
-                                            <section class="col col-4" >
-                                                <label>Puesto:
-                                                    <select class="puesto form-control" id="puesto" name="id_pu" >
-                                                        <option value="">[TODO]</option>
-                                                    </select>
-                                                </label>
-                                            </section>
-                                            <br>
-                                            <br>
-
-                                            <h3>ASIGNAR PLANTILLAS</h3>
-                                            <section class="col col-4" >
-                                                <label>Dirección:
-                                                    <select class="dir_as form-control  " id="dir_as" name="id_di_asig" >
-                                                        <option value="">[SELECCIONE]</option>
-                                                        <%for (int i = 0; i < Listar_Direccion.size(); i++) {
-                                                                Direccion di = new Direccion();
-                                                                di = (Direccion) Listar_Direccion.get(i);
-                                                        %>
-                                                        <option value="<%=di.getId_direccion()%>"><%=di.getNo_direccion()%></option>
-                                                        <%}%>
-                                                    </select>   
-                                                </label>
-                                            </section>
-                                            <section class="col col-4" >
-                                                <label>Departamento:
-                                                    <select class="dep_as form-control " id="dep_as" name="id_dep_asig" >
-                                                        <option value="0">[TODO]</option>
-                                                    </select>
-                                                </label>
-                                            </section>
-                                            <section class="col col-4" >
-                                                <label>Area:
-                                                    <select class="area_as form-control" id="area_as" name="id_are_asig" >
-                                                        <option value="0">[TODO]</option>
-                                                    </select>
-                                                </label>
-                                            </section>
-                                            <section class="col col-4" >
-                                                <label>Sección:
-                                                    <select class="seccion_as form-control" id="seccion_as" name="id_sec_asig" >
-                                                        <option value="0">[TODO]</option>
-                                                    </select>
-                                                </label>
-                                            </section>
-                                            <section class="col col-4" >
-                                                <label>Puesto:
-                                                    <select class="puesto_as form-control" id="puesto_as" name="id_pu_asig" >
-                                                        <option value="0">[TODO]</option>
-                                                    </select>
-                                                </label>
-                                            </section>
-                                            <table>
-                                                <thead>
-                                                    <tr>
-                                                        <td align="center" >Nro</td>
-                                                        <td align="center">Nombre Plantilla</td>
-                                                        <td align="center">Estado Plantilla Puesto</td>
-                                                        <td colspan="2">Acciones</td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="tbody-plantilla">
-                                                </tbody>
-                                            </table>
-
-
-                                            <h3>EDITAR PLANTILLAS</h3>
-
-                                            <br><strong>NOMBRE PLANTILLA</strong><br>
-
+                                        <form class="ckeditor_form" action="../../../formato_plantilla" method="post" style="width:100%;" align="center">
+                                            <h3></h3>
+                                            <legend><h3>EDITAR PLANTILLAS</h3></legend>
+                                            <h3><strong>NOMBRE PLANTILLA</strong></h3>
 
                                             <button type="submit" value="Asignar" onclick="leer();" name="opc">Asignar Plantilla</button>
                                             <button  onclick="procesar_texto();" type="button">Procesar </button>
-
+                                            <input type="hidden" name="id_dep_asig" id="di_sig">
+                                            <input type="hidden" name="id_are_asig" id="de_sig">
+                                            <input type="hidden" name="id_sec_asig" id="ar_sig">
+                                            <input type="hidden" name="id_di_asig" id="se_sig">
+                                            <input type="hidden" name="id_pu_asig" id="pu_sig">
                                             <input type="text" class="nombre_pl form-control" name="no_pl" ><br><br>
                                             <textarea cols="100" id="editor1" name="editor1" rows="10">
                                             </textarea>
@@ -724,8 +734,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                                                 doc.getById('exec-link').hide();
                                                         }
 
-                                                    }, height: '1024px'
-                                                });
+                                                    }, height: '1024px'});
                                             </script>
                                             <div id="eButtons" >
                                                 <input  type="hidden" name="id" value="" class="id_pl"/>
@@ -776,9 +785,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
             </div>
         </div>
-
-
-        <h3>ASIGNAR PLANTILLAS</h3>
     </body>
     <script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>
 
