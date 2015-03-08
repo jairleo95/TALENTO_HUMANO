@@ -265,6 +265,7 @@
                                                     <input type="hidden" class="num_aut<%=(i + 1)%>" value="<%=r.getAut_actual()%>"/>
 
                                                 </td>
+                                               
                                                 <td><div class="new-progress prog_aut<%=(i + 1)%>"  >
                                                         <%
                                                             out.println(d.Imprimir_det_proceso(r.getId_dgp(), r.getId_detalle_req_proceso(), ID_DEP));
