@@ -153,8 +153,8 @@ public class CDocumento_Trabajador extends HttpServlet {
         } else {
 
             //------>   ./var/www/html/files/   (con: pwd)
-          //  String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Dgp\\Documento\\Archivo";
-             String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
+            String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Dgp\\Documento\\Archivo";
+          //   String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
 //out.print(ubicacion);
             DiskFileItemFactory f = new DiskFileItemFactory();
             f.setSizeThreshold(1024);
@@ -167,6 +167,7 @@ public class CDocumento_Trabajador extends HttpServlet {
             String iddgp = null;
             String pr = null;
             String id_ctr = null;
+            String ms = null;
             List<String> list_files = new ArrayList<String>();
             Iterator itera = p.iterator();
 
@@ -191,6 +192,10 @@ public class CDocumento_Trabajador extends HttpServlet {
 
                     if (nombre.equals("idctr") & id_ctr == null) {
                         id_ctr = valor;
+                    }
+
+                    if (nombre.equals("ms") & ms == null) {
+                        ms = valor;
                     }
 
                 }
@@ -291,10 +296,17 @@ public class CDocumento_Trabajador extends HttpServlet {
                 if (pr != null) {
                     url += "&P2=TRUE";
                 }
+                if (ms != null) {
+                    url += "&ms="+ms;
+                }
                 response.sendRedirect(url);
                 
             } else {
-                response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&pro=pr_dgp&P2=TRUE");
+                String url = "Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&pro=pr_dgp&P2=TRUE";
+                if (ms != null) {
+                    url += "&ms="+ms;
+                }
+                response.sendRedirect(url);
             }
 
             /*} catch (FileUploadException e) {
