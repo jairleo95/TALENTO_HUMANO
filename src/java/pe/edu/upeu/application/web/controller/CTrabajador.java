@@ -280,10 +280,9 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
 
             //String num_doc = tr.REG_DOC_TRABAJADOR(idtr);
-            out.print(me+ "--");
-            out.print(a);
+           
             
-           // response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&a="+a+"&ms="+ ms);
+           response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&a="+a+"&ms="+ me);
         }
         if ("actualizar".equals(opc)) {
             String idtr = request.getParameter("idtr");
