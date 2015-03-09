@@ -609,7 +609,8 @@
 
                                             </table>
                                             <footer>
-                                                <%   if (request.getParameter("pro") != null) {
+                                                <%
+                                                if (request.getParameter("pro") != null) {
                                                         if (request.getParameter("pro").equals("pr_dgp")) {
                                                             out.println("<input  type='hidden' value='enter' name='P2'/>");
                                                         }
@@ -619,7 +620,7 @@
                                                         if (request.getParameter("P2").equals("TRUE") & request.getParameter("Vol") == null) {%>
                                                 <input  type='hidden' value='enter' name='P2'/>
 
-                                                <a class="btn btn-success" href="../../../trabajador?idtr=<%=request.getParameter("idtr")%>&opc=list_reg_tra"><i class="fa fa-check"></i> CONTINUAR</a>
+                                                <a class="btn btn-success" href="../../../trabajador?idtr=<%=request.getParameter("idtr")%>&aa=<%=request.getParameter("ms")%>&opc=list_reg_tra"><i class="fa fa-check"></i> CONTINUAR</a>
 
                                                 <button type="submit" class="btn btn-primary btn_reg_doc" style="display:none"> <i class="fa fa-plus-square"></i>
                                                     Registrar
