@@ -618,6 +618,9 @@
                                                 <input type="hidden" name="iddgp" value="<%=d.getId_dgp()%>">
                                                 <input type="hidden" name="idctr" value="<%=request.getParameter("idctr")%>">
                                                 <input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>">
+                                                <%if(request.getParameter("ms") != null){%>
+                                                <input type="hidden" name="ms" value="<%=request.getParameter("ms")%>">
+                                                <%}%>
                                                 <% }
                                                         i++;
                                                         //id_dgp = d.getIddgp();
