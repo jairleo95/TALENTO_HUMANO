@@ -539,7 +539,7 @@
                                                                                     if (tidoc.equals("DNI")) {
 
                                                                                 %>
-                                                                                <%                                                                                        if (tdoc.getId_tipo_doc_ident().trim().equals("1")) {
+                                                                                <%                                                                                    if (tdoc.getId_tipo_doc_ident().trim().equals("1")) {
                                                                                 %>
                                                                                 <option selected="selected" value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
                                                                                 <%} else {%>
@@ -728,7 +728,7 @@
                                                                             <select name="AFILIADO_ESSALUD_ID" class="form-control input-group-sm"  required="">
                                                                                 <option value="">[Afiliado ESSALUD-VIDA]</option>
                                                                                 <option value="1">Si</option>
-                                                                                <option value="2" selected="">No</option>
+                                                                                <option value="0" selected="">No</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
