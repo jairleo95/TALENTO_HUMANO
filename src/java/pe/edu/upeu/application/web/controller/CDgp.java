@@ -145,7 +145,8 @@ public class CDgp extends HttpServlet {
             String FE_DESDE = request.getParameter("FEC_DESDE");
             String FE_HASTA = request.getParameter("FEC_HASTA");
             double CA_SUELDO = Double.parseDouble(request.getParameter("SUELDO"));
-            double BONO_PUESTO = Double.parseDouble(request.getParameter("BONO_PUESTO"));
+            double BONO_PUESTO = 0.0;
+
             String DE_DIAS_TRABAJO = request.getParameter("DIAS_TRABAJO");
             String ID_PUESTO = request.getParameter("IDPUESTO");
             String ID_REQUERIMIENTO = request.getParameter("IDREQUERIMIENTO");
@@ -168,10 +169,15 @@ public class CDgp extends HttpServlet {
             double DE_BEV = 0.0;
             //----CA_CENTRO_COSTOS NO EXISTE EN TABLA RHTM_DGP---
             //double CA_CENTRO_COSTOS = 0.0;
+
+            /*Fuera de planilla*/
             if (ID_REQUERIMIENTO.equals("REQ-0007") || ID_REQUERIMIENTO.equals("REQ-0008") || ID_REQUERIMIENTO.equals("REQ-0009") || ID_REQUERIMIENTO.equals("REQ-0010") || ID_REQUERIMIENTO.equals("REQ-0011")) {
                 CA_BONO_ALIMENTARIO = 0.0;
                 DE_BEV = 0.0;
+                BONO_PUESTO = 0.0;
             } else {
+                /*dentro de planilla de planilla*/
+                BONO_PUESTO = Double.parseDouble(request.getParameter("BONO_PUESTO"));
                 CA_BONO_ALIMENTARIO = Double.parseDouble(request.getParameter("BONO_ALIMENTARIO"));
                 DE_BEV = Double.parseDouble(request.getParameter("BEV"));
             }
@@ -206,16 +212,19 @@ public class CDgp extends HttpServlet {
                 ES_MFL = "0";
             }
 
-            dgp.INSERT_DGP(null, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO, DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION, ES_DGP, iduser, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, DE_ANTECEDENTES_POLICIALES, ES_CERTIFICADO_SALUD, DE_MONTO_HONORARIO, LI_MOTIVO, ES_MFL,BONO_PUESTO);
+            dgp.INSERT_DGP(null, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO, DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION, ES_DGP, iduser, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, DE_ANTECEDENTES_POLICIALES, ES_CERTIFICADO_SALUD, DE_MONTO_HONORARIO, LI_MOTIVO, ES_MFL, BONO_PUESTO);
             String iddgp = dgp.MAX_ID_DGP();
             String ESTADO = request.getParameter("ESTADO");
-            if (ESTADO.trim().equals("0")) {
-
-                tr.MOD_CUENTA_SUELDO(NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEM_NU_CUENTA, NO_BANCO_OTROS, ID_TRABAJADOR, ES_CUENTA_SUELDO);
+          
+            
+            if (ESTADO != null) {
+                if (ESTADO.trim().equals("0")) {
+                    tr.MOD_CUENTA_SUELDO(NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEM_NU_CUENTA, NO_BANCO_OTROS, ID_TRABAJADOR, ES_CUENTA_SUELDO);
+                }
             }
+
             //out.print(NU_CUENTA);
             //out.print(NU_CUENTA_BANC);
-
             String idrp = IReq.id_det_req_proc(iddgp);
 
             for (int i = 1; i <= cantidad; i++) {
