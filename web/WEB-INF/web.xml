@@ -276,6 +276,6 @@
         <url-pattern>/impresion_masiva</url-pattern>
     </servlet-mapping>
     <session-config>
-        <session-timeout>300</session-timeout>
+        <session-timeout>60</session-timeout>
     </session-config>
 </web-app>
