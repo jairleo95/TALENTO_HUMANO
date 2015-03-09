@@ -299,6 +299,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         return;
                     }
                     var imprimir = objJson.imprimir;
+                   // alert(imprimir);
                     editor.setData(imprimir);
                 });
 
@@ -338,9 +339,11 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         d.append("<tr><td>NO HAY PLANTILLAS</td></tr>");
                     }
                     $(".btn-cargar_pl").click(function() {
+                        //alert();
                         mostrar_plantilla($(".plantilla" + $(this).val()).val());
                         $(".id_pl").val($(".plantilla" + $(this).val()).val());
                         $(".id_pc").val($(".id_plantilla" + $(this).val()).val());
+                        
                     });
                     $(".btn-Desac_pl").click(function() {
 
@@ -413,7 +416,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 //lis_dep(b);
                 var c = $(".dir_as");
                 //list_dir(c);
-                Listar_Plantilla();
+               // Listar_Plantilla();
                 $("#dir").change(function() {
                     var d = $(".dep");
                     var valor = $("#dir").val();
@@ -511,7 +514,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                    
                     <div class="row">
                         <article class=" col-sm-12 col-lg-12">
-                            <div  class="jarviswidget jarviswidget-color-darken" id="wid-id-1" data-widget-colorbutton="true" >
+                            <div   class="jarviswidget jarviswidget-color-darken" id="wid-id-1" data-widget-colorbutton="true" >
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
                                     <h2>Filtro de plantillas </h2>
@@ -520,7 +523,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                 <div>
 
                                     <!-- widget edit box -->
-                                    <div class="jarviswidget-editbox">
+                                    <div  class="jarviswidget-editbox">
                                         <!-- This area used as dropdown edit box -->
 
                                     </div>
@@ -715,7 +718,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                             <input type="hidden" name="id_di_asig" id="se_sig">
                                             <input type="hidden" name="id_pu_asig" id="pu_sig">
                                             <input type="text" class="nombre_pl form-control" name="no_pl" ><br><br>
-                                            <textarea cols="100" id="editor1" name="editor1" rows="10">
+                                            <textarea cols="100" id="editor1" name="editor1" >
                                             </textarea>
                                             <script>
                                                 // Replace the <textarea id="editor1"> with an CKEditor instance.
