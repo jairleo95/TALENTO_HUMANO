@@ -501,13 +501,9 @@
                                                     </div>
 
                                                     <%          }
-                                                        }%>
-
-
-                                                    <%}%>
-
-
-                                                    <%if (idreq.equals("REQ-0010")) {%>  
+                                                            }
+                                                        }
+                                                        if (idreq.equals("REQ-0010")) {%>  
                                                     <div class="">
                                                         <section class="col col-4" >
                                                             <label class="input" id="titu"> RUC:
@@ -560,10 +556,6 @@
                                                     </div>
 
                                                     <%}%>
-
-
-
-
                                                     <%if (idreq.equals("REQ-0007") || idreq.equals("REQ-0008") || idreq.equals("REQ-0009") || idreq.equals("REQ-0001") || idreq.equals("REQ-0002") || idreq.equals("REQ-0003") || idreq.equals("REQ-0005")) {%>
                                                     <div  class="row" id="centro-costo_1" >
                                                         <section class="col col-4">
@@ -579,124 +571,6 @@
                                                         <section class="col col-2"><label class="btn"><button type="button" class="btn btn-default btn-agregar-cc" id="btn-agregar-cc" >Agregar</button></label></section>
                                                         <section class="col col-2"><label class="input" style="font-weight: bold;color:red;">% Total :<input  readonly="" name="TOTAL_PORCENTAJE" max="100" min="100" maxlength="3" type="text" class="total_porcentaje"  /></label></section>
                                                     </div>
-
-                                                    <%if (idreq.equals("REQ-0008")) {
-                                                    %>
-                                                    <%String es_cue_sue = request.getParameter("es_cs");%>
-                                                    <input type="hidden" name="ESTADO" value="<%=es_cue_sue%>">
-                                                    <%if (es_cue_sue.equals("0")) {%>
-
-                                                    <input type="hidden" name="ES_CUENTA_SUELDO" value="1" required="" />
-                                                    <div class="row"> 
-                                                        <section class="col col-3" name="">
-                                                            <label class="select" id="titu">Cta Sueldo - Banco:
-                                                                <select name="BANCO" id="banco" required="">
-                                                                    <option value="" selected="" disabled="" >[Selecione]</option>
-                                                                    <option value="0" >Ninguno</option>
-                                                                    <option value="1" >BBVA</option>
-                                                                    <option value="2" >BCP</option>
-                                                                    <option value="3" >Otros</option>
-                                                                </select>
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-3" id="no_cuen_otros">
-
-                                                            <label class="input" id="titu">Nombre Banco :
-                                                                <input type="text" name="BANCO_OTROS"  id="nu_cuen_otros" maxlength="30"   />
-                                                            </label>
-
-                                                        </section>
-                                                        <section class="col col-4" id="no_cuen">
-
-                                                            <label class="input" id="titu">Nro Cuenta :
-                                                                <input type="text" name="CUENTA"  id="nu_cuen" maxlength="30" />
-                                                            </label>
-
-                                                        </section>
-                                                        <section class="col col-4"  id="no_cuen_ban">
-
-                                                            <label class="input" id="titu">Nro Cuenta Bancaria:
-                                                                <input type="text" name="CUENTA_BANC" id="nu_cuen_ban">
-                                                            </label>
-
-                                                        </section>
-
-                                                        <section class="col col-6" id="generar">
-                                                            <p style="font-weight:bold;">Autorizo a la UPeU gestionar mi cuenta de sueldo en el BBVA Banco Continental, para tal efecto adjunto copia legible y vigente de mi DNI   </p>
-                                                            <label class="checkbox" >
-                                                                <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="1" >
-                                                                <i></i>Generar Nro de Cuenta Bancaria</label>
-                                                        </section>
-
-                                                    </div>
-                                                    <%} else { %>
-                                                    <%for (int i = 0; i < list_Cuenta_Sueldo.size(); i++) {
-                                                            Cuenta_Sueldo cs = new Cuenta_Sueldo();
-                                                            cs = (Cuenta_Sueldo) list_Cuenta_Sueldo.get(i);
-
-                                                    %>
-                                                    <div class="row"> 
-
-                                                        <section class="col col-3" name="">
-                                                            <label class="select" id="titu" >Cta Sueldo - Banco:
-                                                                <select name="BANCO"  required="" disabled="">
-                                                                    <%if (cs.getNo_banco().equals("0")) { %>
-                                                                    <option >Ninguno</option>
-                                                                    <%}
-                                                                        if (cs.getNo_banco().equals("1")) {%>
-                                                                    <option >BBVA</option>
-                                                                    <%}
-                                                                        if (cs.getNo_banco().equals("2")) { %>
-                                                                    <option >BCP</option>
-                                                                    <%}
-                                                                        if (cs.getNo_banco().equals("3")) { %>
-                                                                    <option >Otros</option>
-                                                                    <% }%>
-                                                                </select>
-                                                            </label>
-                                                        </section>
-                                                        <%if (cs.getNo_banco_otros() != null) {%>
-                                                        <section class="col col-3">
-                                                            <label class="input" id="titu">Nombre Banco :
-                                                                <input type="text" disabled="" value="<%=cs.getNo_banco_otros()%>"   />
-                                                            </label>
-                                                        </section>
-                                                        <%}
-                                                            if (cs.getNu_cuenta() != null) {%>
-                                                        <section class="col col-4">
-                                                            <label class="input" id="titu">Nro Cuenta :
-                                                                <input type="text" disabled="" value="<%=cs.getNu_cuenta()%>"   />
-                                                            </label>
-                                                        </section>
-                                                        <%}
-                                                            if (cs.getNu_cuenta_banc() != null) {%>
-                                                        <section class="col col-4">
-                                                            <label class="input" id="titu">Nro Cuenta Bancaria:
-                                                                <input type="text" disabled="" value="<%=cs.getNu_cuenta_banc()%>">
-                                                            </label>
-                                                        </section>
-                                                        <%}
-                                                            if (cs.getNo_banco().trim().equals("0")) {%>
-                                                        <section class="col col-5" >
-
-                                                            <p >Autorizo a la UPeU gestionar mi cuenta de sueldo en el BBVA Banco Continental, para tal efecto adjunto copia legible y vigente de mi DNI   </p>
-                                                            <label class="checkbox" >
-                                                                <%if (cs.getEs_gem_nu_cuenta().equals("1")) {%>
-                                                                <input type="checkbox" name="GEN_NU_CUEN"  id="subscription"  value="1">
-                                                                <%} else {%>
-                                                                <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="1">
-                                                                <%}%>
-                                                                <i></i>Generar Nro de Cuenta Bancaria</label>
-                                                        </section>
-                                                        <%}
-                                                        %>
-                                                    </div>
-
-                                                    <%          }
-                                                        }%>
-
-                                                    <%   }
-                                                    %>
                                                     <input type="hidden" value="1" name="numero" class="cant-input" />
                                                     <%}%>
                                                     <code class="ver"></code>
@@ -1362,12 +1236,50 @@
         }
 
         function cuenta_bancaria(banco) {
-            if (banco == '') {
-                $("#no_cuen").hide();
-                $("#no_cuen_ban").hide();
+
+
+            if (banco == '1') {
                 $("#generar").hide();
-                $("#texto").hide();
+                $("#no_cuen").show();
+                $("#nu_cuen").val("");
+                $("#nu_cuen").attr("required", "required");
+                $("#no_cuen_ban").hide();
+                $("#nu_cuen_ban").val("");
+                $("#subscription").attr("checked",true);
+                $("#nu_cuen").attr("maxlength", "21");
+                $("#nu_cuen").mask("0011-9999999999999999", {placeholder: "X"});
                 $("#no_cuen_otros").hide();
+                $("#nu_cuen_otros").val("");
+                $("#nu_cuen_otros").removeAttr('readonly');
+            }
+            if (banco == '2') {
+                $("#generar").hide();
+                $("#subscription").removeAttr('checked');
+                $("#no_cuen_ban").hide();
+                $("#nu_cuen_ban").val("");
+                $("#no_cuen").show();
+                $("#nu_cuen").val("");
+                $("#nu_cuen").attr("required", "required");
+                $("#nu_cuen").attr("maxlength", "14");
+                $("#nu_cuen").mask("99999999999999", {placeholder: "X"});
+                $("#no_cuen_otros").hide();
+                $("#nu_cuen_otros").val("");
+                $("#nu_cuen_otros").removeAttr('readonly');
+            }
+            if (banco == '3') {
+                $("#no_cuen").show();
+                $("#no_cuen").val("");
+                $("#nu_cuen").attr("required", "required");
+                $("#nu_cuen").val("");
+                $("#no_cuen_ban").show();
+                $("#no_cuen_ban").val("");
+                $("#nu_cuen_ban").attr("required", "required");
+                $("#no_cuen_otros").show();
+                $("#nu_cuen_otros").val("");
+                $("#nu_cuen_otros").attr("required", "required");
+                $("#generar").hide();
+                $("#subscription").removeAttr('checked');
+                $("#nu_cuen_otros").removeAttr('readonly');
             }
             if (banco == '0') {
                 $("#no_cuen").hide();
@@ -1376,72 +1288,12 @@
                 $("#nu_cuen_ban").val("");
                 $("#no_cuen_otros").show();
                 $("#nu_cuen_otros").val("BBVA Banco Continental");
-                $("#nu_cuen_otros").attr('readonly', 'readonly');
                 //document.getElementById("nu_cuen_otros").readOnly = true;
-                $("#texto").show();
+                $("#nu_cuen_otros").attr('readonly','readonly');
                 $("#generar").show();
                 $("#subscription").attr("required", "required");
                 $("#nu_cuen_otros").attr("required", "required");
-                $("#nu_cuen_otros").removeAttr('maxlength');
-                $("#nu_cuen_otros").removeAttr('minlength');
-
             }
-            if (banco == '1') {
-                $("#generar").hide();
-                $("#no_cuen").show();
-                $("#nu_cuen").val("");
-                $("#nu_cuen").attr("required", "required");
-                $("#no_cuen_ban").hide();
-                $("#nu_cuen_ban").val("");
-                $("#subscription").attr('checked', false);
-                $("#nu_cuen").attr("maxlength", "21");
-                $("#nu_cuen").attr("minlength", "19");
-                $("#nu_cuen").val("0011-")
-                $("#no_cuen_otros").hide();
-                $("#nu_cuen_otros").val("");
-                $("#texto").hide();
-            }
-            if (banco == '2') {
-
-                $("#generar").hide();
-                $("#subscription").attr('checked', false);
-                $("#no_cuen_ban").hide();
-                $("#nu_cuen_ban").val("");
-                $("#no_cuen").show();
-                $("#nu_cuen").val("");
-                $("#nu_cuen").attr("required", "required");
-                $("#nu_cuen_otros").removeAttr('maxlength');
-                $("#nu_cuen_otros").removeAttr('minlength');
-                $("#nu_cuen").removeAttr('maxlength');
-                $("#nu_cuen").removeAttr('minlength');
-                $("#nu_cuen").attr("maxlength", "14");
-                $("#nu_cuen").attr("minlength", "0");
-                //$("#nu_cuen").mask("99999999999999", {placeholder: "X"});
-                $("#no_cuen_otros").hide();
-                $("#nu_cuen_otros").val("");
-                $("#texto").hide();
-                $("#nu_cuen").valid();
-
-
-            }
-            if (banco == '3') {
-                $("#no_cuen").show();
-                $("#no_cuen").val("");
-                $("#nu_cuen").attr("required", "required");
-                $("#no_cuen_ban").show();
-                $("#no_cuen_ban").val("");
-                $("#nu_cuen_ban").attr("required", "required");
-                $("#no_cuen_otros").show();
-                $("#nu_cuen_otros").val("");
-                $("#nu_cuen_otros").attr("required", "required");
-                $("#generar").hide();
-                $("#subscription").attr('checked', false);
-                $("#texto").hide();
-                $("#nu_cuen_otros").removeAttr('readonly');
-                $("#nu_cuen_otros").removeAttr('maxlength');
-                $("#nu_cuen_otros").removeAttr('minlength');
-            }
-
 
         }
         var agregar = $('#fila-agregar');
@@ -1523,8 +1375,6 @@
             });
             $("#banco").change(function() {
                 cuenta_bancaria($(this).val());
-                $("#nu_cuen").focus();
-                $("#es_cuenta").val(1);
 
             });
 
@@ -1538,44 +1388,12 @@
         }
         )
                 ;</script>
-    
-    <!--Solo numeros -->
-    <script type="text/javascript">
-        $("#nu_cuen, #nu_cuen_ban").numeric();
-        $("#doc, .doc_c").numeric(false, function () {
-            alert("Solo Numeros Enteros");
-            this.value = "";
-            this.focus();
-        });
-        $(".positive").numeric({negative: false}, function () {
-            alert("No negative values");
-            this.value = "";
-            this.focus();
-        });
-        $(".positive-integer").numeric({decimal: false, negative: false}, function () {
-            alert("Positive integers only");
-            this.value = "";
-            this.focus();
-        });
-
-        $("#remove").click(
-                function (e)
-                {
-                    e.preventDefault();
-                    $(".numeric,.integer,.positive").removeNumeric();
-                }
-        );
-    </script>
-    
     <script type="text/javascript">
         $(document).ready(function() {
 
             $("#sueldo").numeric();
             $("#bono_al").numeric();
-            $("#bono_pu").numeric();
             $("#bev").numeric();
-            $("#nu_cuen").numeric();
-            $("#nu_cuen_ban").numeric();
             /* $("#sueldo").mask("99999.99", {placeholder: "0"});
              $("#bono_al").mask("99999.99", {placeholder: "0"});
              $("#bev").mask("99999.99", {placeholder: "0"});*/

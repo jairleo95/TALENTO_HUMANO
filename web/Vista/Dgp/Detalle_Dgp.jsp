@@ -136,19 +136,23 @@
 
 
                         <!--<td><table class="table table-hover table-striped  table-responsive"><tbody><td class="text-info table-bordered">Centro de Costos: </td><td><a href="" >Ver Horario</a></td></tbody></table></td>-->
+                        <%if (d.getDe_antecedentes_policiales() != null) {%>
                         <%if (d.getDe_antecedentes_policiales().equals("1")) {%>
                         <tr><td class="text-info table-bordered">Antecedentes Policiales: </td><td class="text-info table-bordered">No</td></tr>
                         <%} else {%>
                         <tr><td class="text-info table-bordered">Antecedentes Policiales: </td><td class="text-info table-bordered">Si</td></tr>
-                        <%}%> 
-                        <tr><td class="text-info table-bordered">Certificado de Salud: </td><td class="text-info table-bordered" ><%if (d.getEs_certificado_salud() != null) {
+                        <%}%>
+                        <%} else {%>
+                        <tr><td class="text-info table-bordered">Antecedentes Policiales: </td><td class="text-info table-bordered">No registrado</td></tr>
+                        <%}%>
+                        <tr><td class="text-info table-bordered">Certificado de Salud: </td><td class="text-info table-bordered" ><%if(d.getEs_certificado_salud() != null) {
                                 if (d.getEs_certificado_salud().trim().equals("1")) {
                                     out.print("Si");
                                 }
                                 if (d.getEs_certificado_salud().trim().equals("0")) {
                                     out.print("No");
                                 }
-                            } else {
+                            }else {
                                 out.print("No ingresado");
                             }%></td></tr>
 

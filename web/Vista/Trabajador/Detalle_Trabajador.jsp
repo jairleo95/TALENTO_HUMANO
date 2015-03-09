@@ -146,23 +146,16 @@
         </style>
 
     </head>
- <%          if (request.getParameter("ms") != null) {
+    <%          if (request.getParameter("ms") != null) {
             if (request.getParameter("ms").equals("ok")) {
     %>
-
     <body onload="closedthis2();">
-     <%}
- }%>   
-    <%          if (request.getParameter("a") != null) {
-            if (request.getParameter("a").equals("t")) {
-    %>
-
-    <body onload="closedthis();">
-
-        <%
-            }
-        } else {
+        <%}
+            if (request.getParameter("ms").equals("t")) {
         %>
+    <body onload="closedthis();">
+        <%}
+        } else {%> 
     <body >
         <%}%>
         <%
@@ -702,7 +695,7 @@
         <script src="../../js/bootstrap/bootstrap.min.js"></script>
 
         <!-- CUSTOM NOTIFICATION -->
-        
+
         <!-- JARVIS WIDGETS -->
         <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
 

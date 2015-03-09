@@ -213,9 +213,9 @@ public class CTrabajador extends HttpServlet {
             int num_ad = d.List_Adventista(idtr);
             int count = d.count_documentos_x_tra(idtr);
             if (count > 0) {
-                response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr);
+                response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr + "&dt=ok");
             } else {
-                response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&pro=pr_dgp&P2=TRUE");
+                response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&pro=pr_dgp&P2=TRUE&dt=ok");
             }
             //response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr + "&a=t");
         }
@@ -268,9 +268,9 @@ public class CTrabajador extends HttpServlet {
         if ("list_reg_tra".equals(opc)) {
             String idtr = request.getParameter("idtr");
             String me = request.getParameter("aa");
-            String a = "";
-            if(me == ""){
-             a = "t";
+            String op = request.getParameter("a");
+            if (op != null) {
+                me = "t";
             }
             getServletContext().setAttribute("List_Cuenta_Sueldo", tr.List_Cuenta_Sueldo(idtr));
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
@@ -280,9 +280,7 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
 
             //String num_doc = tr.REG_DOC_TRABAJADOR(idtr);
-           
-            
-           response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&a="+a+"&ms="+ me);
+            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&ms=" + me);
         }
         if ("actualizar".equals(opc)) {
             String idtr = request.getParameter("idtr");
