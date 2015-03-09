@@ -2368,7 +2368,7 @@
 
     <!--Solo numeros -->
     <script type="text/javascript">
-        $("#docs, .doc_c").numeric();
+        $("#docs, .doc_c, #nu_cuen, #nu_cuen_ban").numeric();
         $("#doc, .doc_c").numeric(false, function () {
             alert("Solo Numeros Enteros");
             this.value = "";
