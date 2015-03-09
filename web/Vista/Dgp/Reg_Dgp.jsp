@@ -490,9 +490,9 @@
                                                             <p >Autorizo a la UPeU gestionar mi cuenta de sueldo en el BBVA Banco Continental, para tal efecto adjunto copia legible y vigente de mi DNI   </p>
                                                             <label class="checkbox" >
                                                                 <%if (cs.getEs_gem_nu_cuenta().equals("1")) {%>
-                                                                <input type="checkbox" name="GEN_NU_CUEN"  id="subscription"  value="1">
+                                                                <input type="checkbox" name="GEN_NU_CUEN"  id="subscription"  value="1" checked="" disabled="">
                                                                 <%} else {%>
-                                                                <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="1">
+                                                                <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="0" disabled="">
                                                                 <%}%>
                                                                 <i></i>Generar Nro de Cuenta Bancaria</label>
                                                         </section>
@@ -582,7 +582,7 @@
                                                             <tr><td class="td">Horario de Refrigerio:</td><td><input type="text" name="HORARIO_REFRIGERIO"  ></td></tr>  
                                                             <tr><td class="td">Dias de Capacitacion:</td><td><input type="text" name="DIAS_CAPACITACION" ></td></tr>  
                                                         </table>
-                                                    </div  >
+                                                    </div >
 
                                                     <div id="div_3" class="contenido" style="display:none ">
                                                         <table class="table">
@@ -1236,50 +1236,12 @@
         }
 
         function cuenta_bancaria(banco) {
-
-
-            if (banco == '1') {
-                $("#generar").hide();
-                $("#no_cuen").show();
-                $("#nu_cuen").val("");
-                $("#nu_cuen").attr("required", "required");
+            if (banco == '') {
+                $("#no_cuen").hide();
                 $("#no_cuen_ban").hide();
-                $("#nu_cuen_ban").val("");
-                $("#subscription").attr("checked",true);
-                $("#nu_cuen").attr("maxlength", "21");
-                $("#nu_cuen").mask("0011-9999999999999999", {placeholder: "X"});
-                $("#no_cuen_otros").hide();
-                $("#nu_cuen_otros").val("");
-                $("#nu_cuen_otros").removeAttr('readonly');
-            }
-            if (banco == '2') {
                 $("#generar").hide();
-                $("#subscription").removeAttr('checked');
-                $("#no_cuen_ban").hide();
-                $("#nu_cuen_ban").val("");
-                $("#no_cuen").show();
-                $("#nu_cuen").val("");
-                $("#nu_cuen").attr("required", "required");
-                $("#nu_cuen").attr("maxlength", "14");
-                $("#nu_cuen").mask("99999999999999", {placeholder: "X"});
+                $("#texto").hide();
                 $("#no_cuen_otros").hide();
-                $("#nu_cuen_otros").val("");
-                $("#nu_cuen_otros").removeAttr('readonly');
-            }
-            if (banco == '3') {
-                $("#no_cuen").show();
-                $("#no_cuen").val("");
-                $("#nu_cuen").attr("required", "required");
-                $("#nu_cuen").val("");
-                $("#no_cuen_ban").show();
-                $("#no_cuen_ban").val("");
-                $("#nu_cuen_ban").attr("required", "required");
-                $("#no_cuen_otros").show();
-                $("#nu_cuen_otros").val("");
-                $("#nu_cuen_otros").attr("required", "required");
-                $("#generar").hide();
-                $("#subscription").removeAttr('checked');
-                $("#nu_cuen_otros").removeAttr('readonly');
             }
             if (banco == '0') {
                 $("#no_cuen").hide();
@@ -1288,12 +1250,72 @@
                 $("#nu_cuen_ban").val("");
                 $("#no_cuen_otros").show();
                 $("#nu_cuen_otros").val("BBVA Banco Continental");
+                $("#nu_cuen_otros").attr('readonly', 'readonly');
                 //document.getElementById("nu_cuen_otros").readOnly = true;
-                $("#nu_cuen_otros").attr('readonly','readonly');
+                $("#texto").show();
                 $("#generar").show();
                 $("#subscription").attr("required", "required");
                 $("#nu_cuen_otros").attr("required", "required");
+                $("#nu_cuen_otros").removeAttr('maxlength');
+                $("#nu_cuen_otros").removeAttr('minlength');
+
             }
+            if (banco == '1') {
+                $("#generar").hide();
+                $("#no_cuen").show();
+                $("#nu_cuen").val("");
+                $("#nu_cuen").attr("required", "required");
+                $("#no_cuen_ban").hide();
+                $("#nu_cuen_ban").val("");
+                $("#subscription").attr('checked', false);
+                $("#nu_cuen").attr("maxlength", "21");
+                $("#nu_cuen").attr("minlength", "19");
+                $("#nu_cuen").val("0011-")
+                $("#no_cuen_otros").hide();
+                $("#nu_cuen_otros").val("");
+                $("#texto").hide();
+            }
+            if (banco == '2') {
+
+                $("#generar").hide();
+                $("#subscription").attr('checked', false);
+                $("#no_cuen_ban").hide();
+                $("#nu_cuen_ban").val("");
+                $("#no_cuen").show();
+                $("#nu_cuen").val("");
+                $("#nu_cuen").attr("required", "required");
+                $("#nu_cuen_otros").removeAttr('maxlength');
+                $("#nu_cuen_otros").removeAttr('minlength');
+                $("#nu_cuen").removeAttr('maxlength');
+                $("#nu_cuen").removeAttr('minlength');
+                $("#nu_cuen").attr("maxlength", "14");
+                $("#nu_cuen").attr("minlength", "0");
+                //$("#nu_cuen").mask("99999999999999", {placeholder: "X"});
+                $("#no_cuen_otros").hide();
+                $("#nu_cuen_otros").val("");
+                $("#texto").hide();
+                $("#nu_cuen").valid();
+
+
+            }
+            if (banco == '3') {
+                $("#no_cuen").show();
+                $("#no_cuen").val("");
+                $("#nu_cuen").attr("required", "required");
+                $("#no_cuen_ban").show();
+                $("#no_cuen_ban").val("");
+                $("#nu_cuen_ban").attr("required", "required");
+                $("#no_cuen_otros").show();
+                $("#nu_cuen_otros").val("");
+                $("#nu_cuen_otros").attr("required", "required");
+                $("#generar").hide();
+                $("#subscription").attr('checked', false);
+                $("#texto").hide();
+                $("#nu_cuen_otros").removeAttr('readonly');
+                $("#nu_cuen_otros").removeAttr('maxlength');
+                $("#nu_cuen_otros").removeAttr('minlength');
+            }
+
 
         }
         var agregar = $('#fila-agregar');
@@ -1374,10 +1396,12 @@
 
             });
             $("#banco").change(function() {
+
                 cuenta_bancaria($(this).val());
-
+                $("#nu_cuen").focus();
+                $("#es_cuenta").val(1);
+                //  alert($("#es_cuenta").val());
             });
-
             listar_cc();
 
             $("#horario").change(
@@ -1394,6 +1418,8 @@
             $("#sueldo").numeric();
             $("#bono_al").numeric();
             $("#bev").numeric();
+            $("#nu_cuen").numeric();
+            $("#nu_cuen_ban").numeric();
             /* $("#sueldo").mask("99999.99", {placeholder: "0"});
              $("#bono_al").mask("99999.99", {placeholder: "0"});
              $("#bev").mask("99999.99", {placeholder: "0"});*/

@@ -153,8 +153,8 @@ public class CDocumento_Trabajador extends HttpServlet {
         } else {
 
             //------>   ./var/www/html/files/   (con: pwd)
-            //String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Dgp\\Documento\\Archivo";
-               String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
+            String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Dgp\\Documento\\Archivo";
+            // String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
 //out.print(ubicacion);
             DiskFileItemFactory f = new DiskFileItemFactory();
             f.setSizeThreshold(1024);
@@ -254,7 +254,7 @@ public class CDocumento_Trabajador extends HttpServlet {
                         }
                     }
                 }
-                Thread.sleep(100);
+                Thread.sleep(200);
                 if (nombre_archivo != null) {
 
                     if (!nombre_archivo.equals("")) {
@@ -306,7 +306,6 @@ public class CDocumento_Trabajador extends HttpServlet {
                 if (dt != null) {
                     url += "&dt=" + dt;
                 }
-
                 response.sendRedirect(url);
 
             } else {
