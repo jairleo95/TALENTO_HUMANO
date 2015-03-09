@@ -5,6 +5,10 @@
     if (id_user != null) {
         Usuario us = new Usuario();
         String id_rol = (String) sesion.getAttribute("IDROL");
+
+        
+        
+        
 %>
 <%@page import="pe.edu.upeu.application.model.V_Privilegio"%>
 <%@page import="pe.edu.upeu.application.model.V_Usuario"%>
@@ -665,22 +669,24 @@
 
 
         <script>
-            
+
         function nobackbutton() {
 
-             window.location.hash = "no-back-button";
-             
-             window.location.hash = "Again-No-back-button" //chrome
-             
-             window.onhashchange = function () {
-             window.location.hash = "no-back-button";
-             }
+        /*    window.location.hash = "no-back-button";
+
+            window.location.hash = "Again-No-back-button" //chrome
+
+            window.onhashchange = function () {
+                window.location.hash = "no-back-button";
+            }*/
 
         }
         $(document).ready(function () {
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
             pageSetUp();
+
+           // alert('<%="Maximum Inactive Interval of Session in Seconds is : "+sesion.getMaxInactiveInterval()/60%>');
 
 
 

@@ -45,11 +45,13 @@ public class CContrato_Archivo_Adjunto extends HttpServlet {
         String ubicacion = "";
         InterfaceContratoDAO c = new ContratoDAO();
         try {
-            if (System.getProperty("sun.desktop").trim().equals("windows")) {
-                ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "\\Vista\\Contrato\\Contratos_Adjuntos";
-            } else {
-                ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "/Vista/Contrato/Contratos_Adjuntos/";
-            }
+//            if (System.getProperty("sun.desktop").trim().equals("windows")) {
+//                ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "\\Vista\\Contrato\\Contratos_Adjuntos";
+//            } else {
+//                ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "/Vista/Contrato/Contratos_Adjuntos/";
+//            }
+
+            ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Contrato/Contratos_Adjuntos/";
             DiskFileItemFactory f = new DiskFileItemFactory();
 
             if (f.getSizeThreshold() <= 500000) {
