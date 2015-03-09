@@ -79,28 +79,28 @@
             </style>
         </head>
         <body onload="closedthis();">
-        <script >
-             $(document).ready(function () {
-            function exito(titulo, mensaje) {
-                $.smallBox({
-                    title: titulo,
-                    content: mensaje,
-                    color: "#739E73",
-                    iconSmall: "fa fa-cloud",
-                    timeout: 3000
+            <script >
+                $(document).ready(function() {
+                    function exito(titulo, mensaje) {
+                        $.smallBox({
+                            title: titulo,
+                            content: mensaje,
+                            color: "#739E73",
+                            iconSmall: "fa fa-cloud",
+                            timeout: 3000
+                        });
+                    }
+                    function closedthis() {
+                        $.smallBox({
+                            title: "¡Ficha de trabajador registrada correctamente!",
+                            content: "ya puede visualizar toda la informacion del trabajador...",
+                            color: "#739E73",
+                            iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                            timeout: 6000
+                        });
+                    }
                 });
-            }
-            function closedthis() {
-                $.smallBox({
-                    title: "¡Ficha de trabajador registrada correctamente!",
-                    content: "ya puede visualizar toda la informacion del trabajador...",
-                    color: "#739E73",
-                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                    timeout: 6000
-                });
-            }
-             });
-        </script>
+            </script>
         <center>
             <div >
 
@@ -141,7 +141,16 @@
                         <%} else {%>
                         <tr><td class="text-info table-bordered">Antecedentes Policiales: </td><td class="text-info table-bordered">Si</td></tr>
                         <%}%> 
-                        <tr><td class="text-info table-bordered">Certificado de Salud: </td><td class="text-info table-bordered" ><%=d.getEs_certificado_salud()%></td></tr>
+                        <tr><td class="text-info table-bordered">Certificado de Salud: </td><td class="text-info table-bordered" ><%if (d.getEs_certificado_salud() != null) {
+                                if (d.getEs_certificado_salud().trim().equals("1")) {
+                                    out.print("Si");
+                                }
+                                if (d.getEs_certificado_salud().trim().equals("0")) {
+                                    out.print("No");
+                                }
+                            } else {
+                                out.print("No ingresado");
+                            }%></td></tr>
 
 
                         <!--<tr><td class="td-det">Ruc:</td><td><?echo $list[$index][9];?></td></tr>
@@ -211,13 +220,13 @@
                         <%if (d.getLi_motivo().equals("1")) {%>
                         <tr><td class="text-info table-bordered">Motivo :</td><td colspan="2" class="text-info table-bordered">Trabajador Nuevo</td></tr>
                         <%}
-                           if (d.getLi_motivo().equals("2")) {%>
+                            if (d.getLi_motivo().equals("2")) {%>
                         <tr><td class="text-info table-bordered">Motivo:</td><td colspan="2" class="text-info table-bordered">Renovación</td></tr>
                         <%}
-                             if (d.getEs_mfl().equals("1")) {%>
+                            if (d.getEs_mfl().equals("1")) {%>
                         <tr><td class="text-info table-bordered">MFL:</td><td colspan="2" class="text-info table-bordered">Si</td></tr>
                         <%}
-                             if (d.getEs_mfl().equals("0")) {%>
+                            if (d.getEs_mfl().equals("0")) {%>
                         <tr><td class="text-info table-bordered">MFL:</td><td colspan="2" class="text-info table-bordered">No</td></tr>
                         <%}%>
 
@@ -228,7 +237,7 @@
                     <table>
                         <tr><td> </td><td><a class="btn btn-primary btn-labeled" href="../../documento?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=Ver_Documento"><span class="btn-label"><i class="glyphicon glyphicon-info-sign"></i></span>Ver Documentos</a></td><td><a class="btn btn-primary btn-labeled" href="../../horario?iddgp=<%=d.getId_dgp()%>&opc=Listar"><span class="btn-label"><i class="glyphicon glyphicon-info-sign"></i></span>Ver Horario</a></td></tr><%}%>
                     </table>
-                            <%}
+                    <%}
                         }%> 
                 </form>
 
