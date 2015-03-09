@@ -530,6 +530,8 @@
                                                                 <textarea rows=4 name="DESCRIPCION_SERVICIO"></textarea> 
                                                             </label>
                                                         </section>
+                                                    </div>
+                                                    <div class="pago_cuotas_1">
                                                         <section class="col col-2">
                                                             <label class="btn">
                                                                 <button type="button" class="btn btn-default" id="btn_add" >Agregar</button>
@@ -822,8 +824,9 @@
             var agregar = $('#fila-agregar');
             var texto = "";
             cantidad++;
+            texto += '<div class="row pago_cuotas_' + cantidad + '">';
             texto += '<section class="col col-2"><label class="btn">';
-            texto += '<button type="button" class="btn btn-default" id="less_add" >Eliminar</button>';
+            texto += '<button type="button" class="eliminar' + cantidad + '"  >Eliminar</button>';
             texto += '</label></section>';
             texto += '<section class="col col-2" ><label class="input" id="titu">';
             texto += '<input type="text" name="CUOTA_' + cantidad + '" id="cuota" required="" value="' + cantidad + '" >';
@@ -834,11 +837,21 @@
             texto += '<section class="col col-4" ><label class="input" id="titu">';
             texto += '<input type="text" name="MONTO_' + cantidad + '" required="" class="monto" >';
             texto += '</label></section>';
+            texto += '</div>';
+
 
             agregar.append(texto);
             periodo_pago(cantidad);
             $(".cant").val(cantidad);
             //alert($(".cant").val())
+            $(".eliminar" + cantidad).click(function() {
+                $(".pago_cuotas_" + cantidad).remove();
+                periodo_pago(cantidad);
+                cantidad--;
+                 periodo_pago(cantidad);
+                
+                //alert(cantidad)
+            });
         });
 
         $(document).ready(
@@ -857,6 +870,7 @@
                 $(".monto").val(p_p);
             });
         }
+
         function calcular_sueldo_total() {
             var x = parseFloat($("#sueldo").val());
             var y = parseFloat($("#bono_al").val());
