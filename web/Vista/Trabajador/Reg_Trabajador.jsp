@@ -1587,7 +1587,7 @@
 
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text" class="form-control input-group-sm" name="APELLIDOS_NOMBRES_PADRE" placeholder="Apellidos y nombres del Padre" onblur="this.value = this.value.toUpperCase()" required="" maxlength="50">
+                                                                            <input type="text" class="form-control input-group-sm" name="APELLIDOS_NOMBRES_PADRE" placeholder="Apellidos y nombres del Padre" onblur="this.value = this.value.toUpperCase()"  maxlength="50">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1597,7 +1597,7 @@
 
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text"  class="form-control input-group-sm" name="APELLIDOS_NOMBRES_MADRE" placeholder="Apellidos y nombre del Madre" onblur="this.value = this.value.toUpperCase()" required="" maxlength="50">
+                                                                            <input type="text"  class="form-control input-group-sm" name="APELLIDOS_NOMBRES_MADRE" placeholder="Apellidos y nombre del Madre" onblur="this.value = this.value.toUpperCase()"  maxlength="50">
                                                                         </div>
                                                                     </div>
                                                                 </div>

@@ -212,8 +212,8 @@
                                                         }%>
                                                 </select>  </label>
                                         </section  >
-
-                                        <input type="hidden" name="IDDETALLE_DGP" value="<%=d.getId_dgp()%>" class="text-box" id="id_dgp" >                               <section class="col col-2">
+                                        <input type="hidden" name="IDDETALLE_DGP" value="<%=d.getId_dgp()%>" class="text-box" id="id_dgp" >                              
+                                        <section class="col col-2">
                                             <label class="input" id="titulo">Desde: 
                                                 <input type="date" name="FEC_DESDE" value="<%=c.convertFecha3(d.getFe_desde())%>" class=" input-group-sm" required="">
                                             </label>
@@ -226,8 +226,6 @@
                                         <section class="col col-3" id="titulo">
                                             <label class="select" id="titulo">Dirección:
                                                 <select name="DIRECCION" class="select_dir input-group-sm" id="select_dir">
-
-
                                                     <option value="">[SELECCIONE]</option>
                                                     <%for (int g = 0; g < Listar_Direccion.size(); g++) {
                                                             Direccion di = new Direccion();
@@ -1328,7 +1326,7 @@
             });
         }
         $(document).ready(function() {
-            
+
             Listar_centro_costo();
 
             Listar_dep();
