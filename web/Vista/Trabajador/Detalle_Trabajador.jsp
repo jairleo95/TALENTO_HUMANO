@@ -702,8 +702,7 @@
         <script src="../../js/bootstrap/bootstrap.min.js"></script>
 
         <!-- CUSTOM NOTIFICATION -->
-        <script src="../../js/notification/SmartNotification.min.js"></script>
-
+        
         <!-- JARVIS WIDGETS -->
         <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
 
@@ -750,6 +749,8 @@
         <!-- PAGE RELATED PLUGIN(S) -->
         <script src="../../js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
+        <script src="../../js/notification/SmartNotification.min.js"></script>
+
         <script type="text/javascript">
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
