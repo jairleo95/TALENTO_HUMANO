@@ -69,10 +69,10 @@ public class CDocumento_Trabajador extends HttpServlet {
                 getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
                 int s = d.List_Req_nacionalidad(idtr);
                 int num_ad = d.List_Adventista(idtr);
-            //    response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&pro=pr_dgp&P2=TRUE");
+                //    response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&pro=pr_dgp&P2=TRUE");
                 String pr = request.getParameter("P2");
                 String url = "Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr;
-                if (pr!= null) {
+                if (pr != null) {
                     url += "&pro=pr_dgp&P2=TRUE";
                     response.sendRedirect(url);
                 } else {
@@ -153,8 +153,8 @@ public class CDocumento_Trabajador extends HttpServlet {
         } else {
 
             //------>   ./var/www/html/files/   (con: pwd)
-            String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Dgp\\Documento\\Archivo";
-          //   String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
+            //String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Dgp\\Documento\\Archivo";
+               String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
 //out.print(ubicacion);
             DiskFileItemFactory f = new DiskFileItemFactory();
             f.setSizeThreshold(1024);
@@ -168,6 +168,7 @@ public class CDocumento_Trabajador extends HttpServlet {
             String pr = null;
             String id_ctr = null;
             String ms = null;
+            String dt = null;
             List<String> list_files = new ArrayList<String>();
             Iterator itera = p.iterator();
 
@@ -196,6 +197,9 @@ public class CDocumento_Trabajador extends HttpServlet {
 
                     if (nombre.equals("ms") & ms == null) {
                         ms = valor;
+                    }
+                    if (nombre.equals("dt") & ms == null) {
+                        dt = valor;
                     }
 
                 }
@@ -297,14 +301,21 @@ public class CDocumento_Trabajador extends HttpServlet {
                     url += "&P2=TRUE";
                 }
                 if (ms != null) {
-                    url += "&ms="+ms;
+                    url += "&ms=" + ms;
                 }
+                if (dt != null) {
+                    url += "&dt=" + dt;
+                }
+
                 response.sendRedirect(url);
-                
+
             } else {
                 String url = "Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&pro=pr_dgp&P2=TRUE";
                 if (ms != null) {
-                    url += "&ms="+ms;
+                    url += "&ms=" + ms;
+                }
+                if (dt != null) {
+                    url += "&dt=" + dt;
                 }
                 response.sendRedirect(url);
             }

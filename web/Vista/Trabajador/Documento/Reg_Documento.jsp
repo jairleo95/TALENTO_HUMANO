@@ -82,8 +82,7 @@
         </script>
     </head>
 
-    <body onload="closedthis();" class="body">
-
+    <body onload="closedthis();">
 
         <%
             HttpSession sesion_1 = request.getSession(true);
@@ -621,6 +620,9 @@
                                                 <%if(request.getParameter("ms") != null){%>
                                                 <input type="hidden" name="ms" value="<%=request.getParameter("ms")%>">
                                                 <%}%>
+                                                <%if(request.getParameter("dt") != null){%>
+                                                <input type="hidden" name="dt" value="<%=request.getParameter("dt")%>">
+                                                <%}%>
                                                 <% }
                                                         i++;
                                                         //id_dgp = d.getIddgp();
@@ -648,7 +650,7 @@
                                                         if (request.getParameter("P2").equals("TRUE") & request.getParameter("Vol") == null) {%>
                                                 <input  type='hidden' value='enter' name='P2'/>
 
-                                                <a class="btn btn-success" href="../../../trabajador?idtr=<%=request.getParameter("idtr")%>&aa=<%=request.getParameter("ms")%>&opc=list_reg_tra"><i class="fa fa-check"></i> CONTINUAR</a>
+                                                <a class="btn btn-success" href="../../../trabajador?idtr=<%=request.getParameter("idtr")%>&aa=<%=request.getParameter("ms")%>&opc=list_reg_tra&a=<%=request.getParameter("dt")%>"><i class="fa fa-check"></i> CONTINUAR</a>
 
                                                 <button type="submit" class="btn btn-primary btn_reg_doc" style="display:none"> <i class="fa fa-plus-square"></i>
                                                     Registrar

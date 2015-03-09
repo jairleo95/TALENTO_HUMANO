@@ -163,7 +163,7 @@
                                                     <td ><%=a.getUs_no_area()%></td> 
                                                     <td ><%=a.getUs_no_dep()%></td> 
                                                     <%}else{%>
-                                                    <td colspan="6">No definido</td>
+                                                    <td colspan="6" style="text-align:center;">No definido</td>
                                                     <%}%>
 
                                                     <%
@@ -333,24 +333,6 @@
                     phone: 480
                 };
 
-                $('#dt_basic').dataTable({
-                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
-                            "t" +
-                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                    "autoWidth": true,
-                    "preDrawCallback": function() {
-                        // Initialize the responsive datatables helper once.
-                        if (!responsiveHelper_dt_basic) {
-                            responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
-                        }
-                    },
-                    "rowCallback": function(nRow) {
-                        responsiveHelper_dt_basic.createExpandIcon(nRow);
-                    },
-                    "drawCallback": function(oSettings) {
-                        responsiveHelper_dt_basic.respond();
-                    }
-                });
 
                 /* END BASIC */
 
