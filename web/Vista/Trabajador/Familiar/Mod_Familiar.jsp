@@ -186,7 +186,7 @@
                                                                                     out.print(t.getAp_nombres_padre());
                                                                                 } else {
                                                                                     out.print("");
-                                                                                }%>" type="text" name="APELLIDOS_NOMBRES_PADRE"  id="as" required="" maxlength="50">
+                                                                                }%>" type="text" name="APELLIDOS_NOMBRES_PADRE"  id="as" required="" onblur="this.value = this.value.toUpperCase()" maxlength="50">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -201,7 +201,7 @@
                                                                                     out.print(t.getAp_nombres_madre());
                                                                                 } else {
                                                                                     out.print("");
-                                                                                }%>" type="text" name="APELLIDOS_NOMBRES_MADRE" id="DOM_A_D4" required="" maxlength="50">
+                                                                                }%>" type="text" name="APELLIDOS_NOMBRES_MADRE" id="DOM_A_D4" required="" onblur="this.value = this.value.toUpperCase()" maxlength="50">
 
                                                                         </div>
                                                                     </div>
@@ -239,7 +239,7 @@
                                                                                     out.print(t.getAp_nombres_c());
                                                                                 } else {
                                                                                     out.print("");
-                                                                                }%>" type="text" name="APELLIDO_NOMBRES_CONYUGUE" id="DOM_A_D4" required="" maxlength="50">
+                                                                                }%>" type="text" name="APELLIDO_NOMBRES_CONYUGUE" id="DOM_A_D4" required="" onblur="this.value = this.value.toUpperCase()" maxlength="50">
 
                                                                         </div>
                                                                     </div>
@@ -293,7 +293,7 @@
                                                                                     out.print("");
                                                                                 }%>" type="text" name="NRO_DOC"  required="" maxlength="10">
 
-                                                                        </div>|
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-4">

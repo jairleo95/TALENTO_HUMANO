@@ -36,8 +36,9 @@
         <%
             CConversion c = new CConversion();
             
+            for(int r=0; r < ListaridTrabajador.size();r++){
             V_Ficha_Trab_Num_C tr = new V_Ficha_Trab_Num_C();
-            tr = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(0);
+            tr = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(r);
         %>
         <form align="center" action="../../../familiar">
             <div>
@@ -145,7 +146,7 @@
                 <tr><td colspan="2"> <a class="btn btn-success" href=Reg_Conyugue.jsp?idtr=<%=request.getParameter("idtr")%>">Agregar Cónyugue</a></td></tr>
                 <%}%>
                 <%}%>
-                <%if(tr.getAp_nombres_c() != null && tr.getAp_nombres_madre() != null && tr.getAp_nombres_padre()!= null ){%>
+                <%if(tr.getAp_nombres_c() != null && tr.getAp_nombres_madre() != null && tr.getAp_nombres_padre()!= null ||tr.getAp_nombres_c() != null && tr.getAp_nombres_madre() == null || tr.getAp_nombres_padre()== null){%>
                  <input type="hidden" name="idtra" value="<%=tr.getId_trabajador().trim()%>">
                 <input type="hidden" name="opc" value="Editar_Familiar">
                 <tr><td colspan="2"><input class="btn btn-success" type="submit" value="EDITAR"></td></tr>
@@ -172,8 +173,9 @@
         <%}%>
     </center>
     <%}%>
-
+    <%}%>
 </body>
+
 </html>
 
 <%} else {
