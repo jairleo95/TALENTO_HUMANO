@@ -1402,7 +1402,7 @@
                                 + '" /><input type="hidden" name="DIA_' + dia + turno + '" class="nombre_dia_' + (i + 1) + '" value="' + dia + '" >';
                         text_html += '<button type="button" class="btn btn-danger remover_turno" value="' + (i + 1) + '"><i class="fa  fa-minus-circle"></i></button></td></tr>';
                         agregar_turno.append(text_html);
-                        $(".texto-h").mask("99:99", {placeholder: "X"});
+                        //$(".texto-h").mask("99:99", {placeholder: "X"});
                         $(".remover_turno").click(function () {
                             //alert($(this).val());
                             $(".turno_" + $(this).val()).remove();
