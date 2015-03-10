@@ -990,6 +990,7 @@
                                                                     $("#nu_cuen").val("");
                                                                     $("#nu_cuen_ban").val("");
                                                                     $("#nu_cuen_ban_otros").val("");
+                                                                    $("#nu_cuen_otros").val("");
                                                                      $("#es_cuenta").val(0);
                                                                      //alert($("#es_cuenta").val());
 
