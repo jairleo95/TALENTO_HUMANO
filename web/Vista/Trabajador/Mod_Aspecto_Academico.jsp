@@ -1132,139 +1132,101 @@
 
         }
 
-        function cuenta_bancaria(banco) {
-            if (banco == '') {
-                $("#no_cuen").hide();
-                $("#no_cuen_ban").hide();
-                $("#generar").hide();
-                $("#texto").hide();
-                $("#no_cuen_otros").hide();
-                $("#banco").val("");
-                $("#nu_cuen").val("");
-                $("#nu_cuen_ban").val("");
-                $("#nu_cuen_ban_otros").val("");
-                $("#nu_cuen_otros").val("");
-                $("#es_cuenta").val(0);
-                //alert($("#es_cuenta").val());
+       function cuenta_bancaria(banco) {
+                                                                if (banco == '') {
+                                                                    $("#no_cuen").hide();
+                                                                    $("#no_cuen_ban").hide();
+                                                                    $("#generar").hide();
+                                                                    $("#texto").hide();
+                                                                    $("#no_cuen_otros").hide();
+                                                                    $("#banco").val("");
+                                                                    $("#nu_cuen").val("");
+                                                                    $("#nu_cuen_ban").val("");
+                                                                    $("#nu_cuen_ban_otros").val("");
+                                                                    $("#nu_cuen_otros").val("");
+                                                                     $("#es_cuenta").val(0);
+                                                                      $("#subscription").attr('checked', false);
+                                                                     //alert($("#es_cuenta").val());
 
-            }
-            if (banco == '0') {
-                $("#no_cuen").hide();
-                $("#nu_cuen").val("");
-                $("#no_cuen_ban").hide();
-                $("#nu_cuen_ban").val("");
-                $("#no_cuen_otros").show();
-                $("#nu_cuen_otros").val("BBVA Banco Continental");
-                $("#nu_cuen_otros").attr('readonly', 'readonly');
-                //document.getElementById("nu_cuen_otros").readOnly = true;
-                $("#texto").show();
-                $("#generar").show();
-                $("#subscription").attr("required", "required");
-                $("#nu_cuen_otros").attr("required", "required");
-                $("#nu_cuen_otros").removeAttr('maxlength');
-                $("#nu_cuen_otros").removeAttr('minlength');
-                $("#es_cuenta").val(1);
+                                                                }
+                                                                if (banco == '0') {
+                                                                    $("#no_cuen").hide();
+                                                                    $("#nu_cuen").val("");
+                                                                    $("#no_cuen_ban").hide();
+                                                                    $("#nu_cuen_ban").val("");
+                                                                    $("#no_cuen_otros").show();
+                                                                    $("#nu_cuen_otros").val("BBVA Banco Continental");
+                                                                    $("#nu_cuen_otros").attr('readonly', 'readonly');
+                                                                    //document.getElementById("nu_cuen_otros").readOnly = true;
+                                                                    $("#texto").show();
+                                                                    $("#generar").show();
+                                                                    $("#subscription").attr("required", "required");
+                                                                    $("#nu_cuen_otros").attr("required", "required");
+                                                                    $("#nu_cuen_otros").removeAttr('maxlength');
+                                                                    $("#nu_cuen_otros").removeAttr('minlength');
+                                                                    $("#es_cuenta").val(1);
+                                                                }
+                                                                if (banco == '1') {
+                                                                    $("#generar").hide();
+                                                                    $("#no_cuen").show();
+                                                                    $("#nu_cuen").val("");
+                                                                    $("#nu_cuen").attr("required", "required");
+                                                                    $("#no_cuen_ban").hide();
+                                                                    $("#nu_cuen_ban").val("");
+                                                                    $("#subscription").attr('checked', false);
+                                                                    $("#nu_cuen").attr("maxlength", "21");
+                                                                    $("#nu_cuen").attr("minlength", "19");
+                                                                    $("#nu_cuen").val("0011-")
+                                                                    $("#no_cuen_otros").hide();
+                                                                    $("#nu_cuen_otros").val("");
+                                                                    $("#texto").hide();
+                                                                     $("#es_cuenta").val(1);
+                                                                }
+                                                                if (banco == '2') {
 
-                if (banco == '1') {
-                    $("#generar").hide();
-                    $("#no_cuen").show();
-                    $("#nu_cuen").val("");
-                    $("#nu_cuen").attr("required", "required");
-                    $("#no_cuen_ban").hide();
-                    $("#nu_cuen_ban").val("");
-                    $("#subscription").attr('checked', false);
-                    $("#nu_cuen").attr("maxlength", "21");
-                    $("#nu_cuen").mask("0011-9999999999999999", {placeholder: "X"});
-                    $("#no_cuen_otros").hide();
-                    $("#nu_cuen_otros").val("");
-                    $("#texto").hide();
-                }
-                if (banco == '2') {
-                    $("#generar").hide();
-                    $("#subscription").attr('checked', false);
-                    $("#no_cuen_ban").hide();
-                    $("#nu_cuen_ban").val("");
-                    $("#no_cuen").show();
-                    $("#nu_cuen").val("");
-                    $("#nu_cuen").attr("required", "required");
-                    $("#nu_cuen").attr("maxlength", "14");
-                    $("#nu_cuen").mask("99999999999999", {placeholder: "X"});
-                    $("#no_cuen_otros").hide();
-                    $("#nu_cuen_otros").val("");
-                    $("#texto").hide();
-                }
-                if (banco == '3') {
-                    $("#no_cuen").show();
-                    $("#no_cuen").val("");
-                    $("#nu_cuen").attr("required", "required");
-                    $("#no_cuen_ban").show();
-                    $("#no_cuen_ban").val("");
-                    $("#nu_cuen_ban").attr("required", "required");
-                    $("#no_cuen_otros").show();
-                    $("#nu_cuen_otros").val("");
-                    $("#nu_cuen_otros").attr("required", "required");
-                    $("#generar").hide();
-                    $("#subscription").attr('checked', false);
-                    document.getElementById("nu_cuen_otros").readOnly = false;
-                    $("#texto").hide();
-                }
-                if (banco == '0') {
-                    $("#no_cuen").hide();
-                    $("#nu_cuen").val("");
-                    $("#no_cuen_ban").hide();
-                    $("#nu_cuen_ban").val("");
-                    $("#no_cuen_otros").show();
-                    $("#nu_cuen_otros").val("BBVA Banco Continental");
-                    document.getElementById("nu_cuen_otros").readOnly = true;
-                    $("#texto").show();
-                    $("#generar").show();
-                    $("#subscription").attr("required", "required");
-                    $("#nu_cuen_otros").attr("required", "required");
-                }
-
-                $("#generar").hide();
-                $("#subscription").attr('checked', false);
-                $("#no_cuen_ban").hide();
-                $("#nu_cuen_ban").val("");
-                $("#no_cuen").show();
-                $("#nu_cuen").val("");
-                $("#nu_cuen").attr("required", "required");
-                $("#nu_cuen_otros").removeAttr('maxlength');
-                $("#nu_cuen_otros").removeAttr('minlength');
-                $("#nu_cuen").removeAttr('maxlength');
-                $("#nu_cuen").removeAttr('minlength');
-                $("#nu_cuen").attr("maxlength", "14");
-                $("#nu_cuen").attr("minlength", "0");
-                //$("#nu_cuen").mask("99999999999999", {placeholder: "X"});
-                $("#no_cuen_otros").hide();
-                $("#nu_cuen_otros").val("");
-                $("#texto").hide();
-                $("#nu_cuen").valid();
-                $("#es_cuenta").val(1);
+                                                                    $("#generar").hide();
+                                                                    $("#subscription").attr('checked', false);
+                                                                    $("#no_cuen_ban").hide();
+                                                                    $("#nu_cuen_ban").val("");
+                                                                    $("#no_cuen").show();
+                                                                    $("#nu_cuen").val("");
+                                                                    $("#nu_cuen").attr("required", "required");
+                                                                    $("#nu_cuen_otros").removeAttr('maxlength');
+                                                                    $("#nu_cuen_otros").removeAttr('minlength');
+                                                                    $("#nu_cuen").removeAttr('maxlength');
+                                                                    $("#nu_cuen").removeAttr('minlength');
+                                                                    $("#nu_cuen").attr("maxlength", "14");
+                                                                    $("#nu_cuen").attr("minlength", "0");
+                                                                    //$("#nu_cuen").mask("99999999999999", {placeholder: "X"});
+                                                                    $("#no_cuen_otros").hide();
+                                                                    $("#nu_cuen_otros").val("");
+                                                                    $("#texto").hide();
+                                                                    $("#nu_cuen").valid();
+                                                                     $("#es_cuenta").val(1);
 
 
-            }
-            if (banco == '3') {
-                $("#no_cuen").show();
-                $("#no_cuen").val("");
-                $("#nu_cuen").attr("required", "required");
-                $("#no_cuen_ban").show();
-                $("#no_cuen_ban").val("");
-                $("#nu_cuen_ban").attr("required", "required");
-                $("#no_cuen_otros").show();
-                $("#nu_cuen_otros").val("");
-                $("#nu_cuen_otros").attr("required", "required");
-                $("#generar").hide();
-                $("#subscription").attr('checked', false);
-                $("#texto").hide();
-                $("#nu_cuen_otros").removeAttr('readonly');
-                $("#nu_cuen_otros").removeAttr('maxlength');
-                $("#nu_cuen_otros").removeAttr('minlength');
-                $("#es_cuenta").val(1);
-            }
+                                                                }
+                                                                if (banco == '3') {
+                                                                    $("#no_cuen").show();
+                                                                    $("#no_cuen").val("");
+                                                                    $("#nu_cuen").attr("required", "required");
+                                                                    $("#no_cuen_ban").show();
+                                                                    $("#no_cuen_ban").val("");
+                                                                    $("#nu_cuen_ban").attr("required", "required");
+                                                                    $("#no_cuen_otros").show();
+                                                                    $("#nu_cuen_otros").val("");
+                                                                    $("#nu_cuen_otros").attr("required", "required");
+                                                                    $("#generar").hide();
+                                                                    $("#subscription").attr('checked', false);
+                                                                    $("#texto").hide();
+                                                                    $("#nu_cuen_otros").removeAttr('readonly');
+                                                                    $("#nu_cuen_otros").removeAttr('maxlength');
+                                                                    $("#nu_cuen_otros").removeAttr('minlength');
+                                                                     $("#es_cuenta").val(1);
+                                                                }
 
 
-        }
+                                                            }
 
     </script> 
     <script>
