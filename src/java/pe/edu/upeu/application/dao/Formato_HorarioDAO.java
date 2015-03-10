@@ -155,10 +155,11 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
-                rec.put("turno", rs.getString("NO_TURNO"));
-                rec.put("dia", rs.getString("no_dia"));
-                rec.put("desde", rs.getString("ho_desde"));
-                rec.put("hasta", rs.getString("ho_hasta"));
+                rec.put("turno", rs.getString("NO_TURNO").trim());
+                rec.put("dia", rs.getString("no_dia").trim());
+                rec.put("desde", rs.getString("ho_desde").trim());
+                rec.put("hasta", rs.getString("ho_hasta").trim());
+                rec.put("estado", rs.getString("es_f_horario").trim());
                 Lista.add(rec);
             }
             rs.close();
