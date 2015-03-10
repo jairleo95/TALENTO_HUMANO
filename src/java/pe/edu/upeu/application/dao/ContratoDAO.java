@@ -20,6 +20,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceContratoDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Anno;
+import pe.edu.upeu.application.model.Contrato_Adjunto;
 import pe.edu.upeu.application.model.List_Rh_Contrato_Fec;
 import pe.edu.upeu.application.model.Modalidad;
 import pe.edu.upeu.application.model.Plantilla_Contractual;
@@ -40,7 +41,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
     CConversion c = new CConversion();
 
     @Override
-    public void INSERT_CONTRATO(String ID_CONTRATO, String ID_DGP, String FE_DESDE, String FE_HASTA, String FE_CESE, String ID_FUNC, String LI_CONDICION, Double CA_SUELDO, Double CA_REINTEGRO, Double CA_ASIG_FAMILIAR, Double HO_SEMANA, Double NU_HORAS_LAB, Double DIA_CONTRATO, String TI_TRABAJADOR, String LI_REGIMEN_LABORAL, String ES_DISCAPACIDAD, String TI_CONTRATO, String LI_REGIMEN_PENSIONARIO, String ES_CONTRATO_TRABAJADOR, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String US_IP, String FE_VACACIO_INI, String FE_VACACIO_FIN, String ES_CONTRATO, String ID_FILIAL, String ID_PUESTO, Double CA_BONO_ALIMENTO, String LI_TIPO_CONVENIO, String ES_FIRMO_CONTRATO, Double NU_CONTRATO, String DE_OBSERVACION, String ES_APOYO, String TI_HORA_PAGO, String NU_DOCUMENTO, String ID_ANNO, String ES_ENTREGAR_DOC_REGLAMENTOS, String ES_REGISTRO_HUELLA, String DE_REGISTRO_SISTEM_REMU, String ID_TRABAJADOR, Double CA_SUELDO_TOTAL, String ID_REGIMEN_LABORAL, String ID_MODALIDAD, String ID_SUB_MODALIDAD, String CO_GR_OCUPACION, String FE_SUSCRIPCION, String CO_TI_MONEDA, String CO_TI_REM_VARIAB, String DE_REMU_ESPECIE, String DE_RUC_EMP_TRAB, String CO_SUCURSAL, String DE_MYPE, String ES_TI_CONTRATACION, Double CA_BEV, String ID_TIPO_PLANILLA, String ES_REMUNERACION_PROCESADO, String ID_HORARIO,String ID_PLANTILLA_CONTRACTUAL, Double ca_bonificacion_p) {
+    public void INSERT_CONTRATO(String ID_CONTRATO, String ID_DGP, String FE_DESDE, String FE_HASTA, String FE_CESE, String ID_FUNC, String LI_CONDICION, Double CA_SUELDO, Double CA_REINTEGRO, Double CA_ASIG_FAMILIAR, Double HO_SEMANA, Double NU_HORAS_LAB, Double DIA_CONTRATO, String TI_TRABAJADOR, String LI_REGIMEN_LABORAL, String ES_DISCAPACIDAD, String TI_CONTRATO, String LI_REGIMEN_PENSIONARIO, String ES_CONTRATO_TRABAJADOR, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String US_IP, String FE_VACACIO_INI, String FE_VACACIO_FIN, String ES_CONTRATO, String ID_FILIAL, String ID_PUESTO, Double CA_BONO_ALIMENTO, String LI_TIPO_CONVENIO, String ES_FIRMO_CONTRATO, Double NU_CONTRATO, String DE_OBSERVACION, String ES_APOYO, String TI_HORA_PAGO, String NU_DOCUMENTO, String ID_ANNO, String ES_ENTREGAR_DOC_REGLAMENTOS, String ES_REGISTRO_HUELLA, String DE_REGISTRO_SISTEM_REMU, String ID_TRABAJADOR, Double CA_SUELDO_TOTAL, String ID_REGIMEN_LABORAL, String ID_MODALIDAD, String ID_SUB_MODALIDAD, String CO_GR_OCUPACION, String FE_SUSCRIPCION, String CO_TI_MONEDA, String CO_TI_REM_VARIAB, String DE_REMU_ESPECIE, String DE_RUC_EMP_TRAB, String CO_SUCURSAL, String DE_MYPE, String ES_TI_CONTRATACION, Double CA_BEV, String ID_TIPO_PLANILLA, String ES_REMUNERACION_PROCESADO, String ID_HORARIO, String ID_PLANTILLA_CONTRACTUAL, Double ca_bonificacion_p) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_CONTRATO( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,? )} ");
@@ -562,7 +563,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 v.setCa_bonificacion_p(rs.getDouble("ca_bonificacion_p"));
                 list.add(v);
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
             throw new RuntimeException("Error al insertar archivo");
@@ -640,7 +641,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 this.conn.close();
             } catch (Exception e) {
                 throw new RuntimeException(e.getMessage());
-}
+            }
         }
 
     }
@@ -675,23 +676,23 @@ public class ContratoDAO implements InterfaceContratoDAO {
     }
 
     @Override
-    public List<Map<String, ?>> Listar_Contratos(String de, String al, String direccion, String dep, String area, String sec, String puesto, String sueldo_total,String nombre,String fe_i,String fe_fin,String fe_sus) {
-      List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+    public List<Map<String, ?>> Listar_Contratos(String de, String al, String direccion, String dep, String area, String sec, String puesto, String sueldo_total, String nombre, String fe_i, String fe_fin, String fe_sus) {
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "select  *  from RHVD_FILTRO_CONTRATO_TERMINADO WHERE FE_CREACION IS NOT NULL";
-           // if(sueldo_total!=null ){sql+=" and CA_SUELDO_TOTAL="+sueldo_total;}else{}
-           sql += (!nombre.equals("")) ? " AND  UPPER(NO_AP)  like '%" + nombre.toUpperCase() + "%'" : "";
-           sql += (!de.equals("") & !al.equals("")) ? " AND FE_CREACION BETWEEN '"+c.convertFecha(de.trim())+"' and '"+c.convertFecha(al.trim())+"'" : "";
-           sql += (!direccion.equals("")) ? " AND ID_DIRECCION = '"+direccion.trim()+"'" : "";
-           sql += (!dep.equals("")) ? " and ID_DEPARTAMENTO= '"+dep.trim()+"'" : "";
-           sql += (!area.equals("")) ?" and ID_AREA= '"+area.trim()+"'" : "";
-           sql += (!sec.equals("")) ? " and ID_SECCION= '"+sec.trim()+"'" : "";
-           sql += (!sueldo_total.equals("")) ? " and CA_SUELDO_TOTAL= '"+sueldo_total.trim()+"'" : "";
-           sql += (!puesto.equals("")) ? " and ID_PUESTO= '"+puesto.trim()+"'" : "";
-           sql += (!fe_i.equals("")) ? " and FE_DESDE= '"+c.convertFecha(fe_i.trim())+"'" : "";
-           sql += (!fe_fin.equals("")) ? " or FE_HASTA= '"+c.convertFecha(fe_fin.trim())+"'" : "";
-           sql += (!fe_sus.equals("")) ? " and FE_SUSCRIPCION= '"+c.convertFecha(fe_sus.trim())+"'" : "";
+            // if(sueldo_total!=null ){sql+=" and CA_SUELDO_TOTAL="+sueldo_total;}else{}
+            sql += (!nombre.equals("")) ? " AND  UPPER(NO_AP)  like '%" + nombre.toUpperCase() + "%'" : "";
+            sql += (!de.equals("") & !al.equals("")) ? " AND FE_CREACION BETWEEN '" + c.convertFecha(de.trim()) + "' and '" + c.convertFecha(al.trim()) + "'" : "";
+            sql += (!direccion.equals("")) ? " AND ID_DIRECCION = '" + direccion.trim() + "'" : "";
+            sql += (!dep.equals("")) ? " and ID_DEPARTAMENTO= '" + dep.trim() + "'" : "";
+            sql += (!area.equals("")) ? " and ID_AREA= '" + area.trim() + "'" : "";
+            sql += (!sec.equals("")) ? " and ID_SECCION= '" + sec.trim() + "'" : "";
+            sql += (!sueldo_total.equals("")) ? " and CA_SUELDO_TOTAL= '" + sueldo_total.trim() + "'" : "";
+            sql += (!puesto.equals("")) ? " and ID_PUESTO= '" + puesto.trim() + "'" : "";
+            sql += (!fe_i.equals("")) ? " and FE_DESDE= '" + c.convertFecha(fe_i.trim()) + "'" : "";
+            sql += (!fe_fin.equals("")) ? " or FE_HASTA= '" + c.convertFecha(fe_fin.trim()) + "'" : "";
+            sql += (!fe_sus.equals("")) ? " and FE_SUSCRIPCION= '" + c.convertFecha(fe_sus.trim()) + "'" : "";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -728,11 +729,11 @@ public class ContratoDAO implements InterfaceContratoDAO {
 
     @Override
     public List<Map<String, ?>> List_contra_x_idcto_json(String id_ctos) {
-      List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "SELECT * FROM RHVD_CONTRATOS_HISTORIAL WHERE ID_CONTRATO='" + id_ctos + "'";
-           // if(sueldo_total!=null ){sql+=" and CA_SUELDO_TOTAL="+sueldo_total;}else{}
+            // if(sueldo_total!=null ){sql+=" and CA_SUELDO_TOTAL="+sueldo_total;}else{}
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -759,85 +760,85 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 rec.put("id_pu", rs.getString("id_puesto"));
                 /*
                  v.setId_filial(rs.getString("id_filial"));
-                v.setId_puesto(rs.getString("id_puesto"));
-                v.setCa_bono_alimento(rs.getDouble("ca_bono_alimento"));
-                v.setLi_tipo_convenio(rs.getString("li_tipo_convenio"));
-                v.setEs_firmo_contrato(rs.getString("es_firmo_contrato"));
-                v.setNu_contrato(rs.getDouble("nu_contrato"));
-                v.setDe_observacion(rs.getString("de_observacion"));
-                v.setEs_apoyo(rs.getString("es_apoyo"));
-                v.setTi_hora_pago(rs.getString("ti_hora_pago"));
-                v.setNu_documento(rs.getString("nu_documento"));
-                v.setId_anno(rs.getString("id_anno"));
-                v.setEs_entregar_doc_reglamentos(rs.getString("es_entregar_doc_reglamentos"));
-                v.setEs_registro_huella(rs.getString("es_registro_huella"));
-                v.setDe_registro_sistem_remu(rs.getString("de_registro_sistem_remu"));
-                v.setId_trabajador(rs.getString("id_trabajador"));
-                v.setCa_sueldo_total(rs.getDouble("ca_sueldo_total"));
-                v.setId_regimen_laboral(rs.getString("id_regimen_laboral"));
-                v.setId_sub_modalidad(rs.getString("id_sub_modalidad"));
-                v.setId_grupo_ocupacion(rs.getString("id_grupo_ocupacion"));
-                v.setFe_suscripcion(rs.getString("fe_suscripcion"));
-                v.setCo_ti_moneda(rs.getString("co_ti_moneda"));
-                v.setCo_ti_rem_variab(rs.getString("co_ti_rem_variab"));
-                v.setDe_remu_especie(rs.getString("de_remu_especie"));
-                v.setDe_ruc_emp_trab(rs.getString("de_ruc_emp_trab"));
-                v.setCo_sucursal(rs.getString("co_sucursal"));
-                v.setDe_mype(rs.getString("de_mype"));
-                v.setEs_ti_contratacion(rs.getString("es_ti_contratacion"));
-                v.setCa_bev(rs.getDouble("ca_bev"));
-                v.setNo_puesto(rs.getString("no_puesto"));
-                v.setNo_seccion(rs.getString("no_seccion"));
-                v.setNo_area(rs.getString("no_area"));
-                v.setNo_dep(rs.getString("no_dep"));
-                v.setNo_direccion(rs.getString("no_direccion"));
-                v.setDe_grupo_ocupacion(rs.getString("de_grupo_ocupacion"));
-                v.setId_contrato(rs.getString("id_contrato"));
-                v.setId_dgp(rs.getString("id_dgp"));
-                v.setFe_desde(rs.getString("fe_desde"));
-                v.setFe_hasta(rs.getString("fe_hasta"));
-                v.setFe_cese(rs.getString("fe_cese"));
-                v.setId_func(rs.getString("id_func"));
-                v.setLi_condicion(rs.getString("li_condicion"));
-                v.setCa_sueldo(rs.getDouble("ca_sueldo"));
-                v.setCa_reintegro(rs.getDouble("ca_reintegro"));
-                v.setCa_asig_familiar(rs.getDouble("ca_asig_familiar"));
-                v.setHo_semana(rs.getDouble("ho_semana"));
-                v.setNu_horas_lab(rs.getDouble("nu_horas_lab"));
-                v.setDia_contrato(rs.getDouble("dia_contrato"));
-                v.setTi_trabajador(rs.getString("ti_trabajador"));
-                v.setLi_regimen_laboral(rs.getString("li_regimen_laboral"));
-                v.setEs_discapacidad(rs.getString("es_discapacidad"));
-                v.setTi_contrato(rs.getString("ti_contrato"));
-                v.setLi_regimen_pensionario(rs.getString("li_regimen_pensionario"));
-                v.setEs_contrato_trabajador(rs.getString("es_contrato_trabajador"));
-                v.setUs_creacion(rs.getString("us_creacion"));
-                v.setFe_creacion(rs.getString("fe_creacion"));
-                v.setUs_modif(rs.getString("us_modif"));
-                v.setFe_modif(rs.getString("fe_modif"));
-                v.setUs_ip(rs.getString("us_ip"));
-                v.setFe_vacacio_ini(rs.getString("fe_vacacio_ini"));
-                v.setEs_contrato(rs.getString("es_contrato"));
-                v.setFe_vacacio_fin(rs.getString("fe_vacacio_fin"));
-                v.setDe_sub_modalidad(rs.getString("de_sub_modalidad"));
-                v.setDe_modalidad(rs.getString("de_modalidad"));
-                v.setNo_trabajador(rs.getString("no_trabajador"));
-                v.setAp_paterno(rs.getString("ap_paterno"));
-                v.setAp_materno(rs.getString("ap_materno"));
-                v.setLi_di_dom_a_d1(rs.getString("li_di_dom_a_d1"));
-                v.setDi_dom_a_d2(rs.getString("di_dom_a_d2"));
-                v.setLi_di_dom_a_d3(rs.getString("li_di_dom_a_d3"));
-                v.setDi_dom_a_d4(rs.getString("di_dom_a_d4"));
-                v.setLi_di_dom_a_d5(rs.getString("li_di_dom_a_d5"));
-                v.setDi_dom_a_d6(rs.getString("di_dom_a_d6"));
-                v.setNo_distrito(rs.getString("no_distrito"));
-                v.setNo_provincia(rs.getString("no_provincia"));
-                v.setFe_sus(rs.getString("fe_sus"));
-                v.setId_plantilla_contractual(rs.getString("id_plantilla_contractual"));
-                v.setFe_has(rs.getString("fe_has"));
-                v.setFe_des(rs.getString("fe_des"));
-                v.setCa_bonificacion_p(rs.getDouble("ca_bonificacion_p"));
-                */
+                 v.setId_puesto(rs.getString("id_puesto"));
+                 v.setCa_bono_alimento(rs.getDouble("ca_bono_alimento"));
+                 v.setLi_tipo_convenio(rs.getString("li_tipo_convenio"));
+                 v.setEs_firmo_contrato(rs.getString("es_firmo_contrato"));
+                 v.setNu_contrato(rs.getDouble("nu_contrato"));
+                 v.setDe_observacion(rs.getString("de_observacion"));
+                 v.setEs_apoyo(rs.getString("es_apoyo"));
+                 v.setTi_hora_pago(rs.getString("ti_hora_pago"));
+                 v.setNu_documento(rs.getString("nu_documento"));
+                 v.setId_anno(rs.getString("id_anno"));
+                 v.setEs_entregar_doc_reglamentos(rs.getString("es_entregar_doc_reglamentos"));
+                 v.setEs_registro_huella(rs.getString("es_registro_huella"));
+                 v.setDe_registro_sistem_remu(rs.getString("de_registro_sistem_remu"));
+                 v.setId_trabajador(rs.getString("id_trabajador"));
+                 v.setCa_sueldo_total(rs.getDouble("ca_sueldo_total"));
+                 v.setId_regimen_laboral(rs.getString("id_regimen_laboral"));
+                 v.setId_sub_modalidad(rs.getString("id_sub_modalidad"));
+                 v.setId_grupo_ocupacion(rs.getString("id_grupo_ocupacion"));
+                 v.setFe_suscripcion(rs.getString("fe_suscripcion"));
+                 v.setCo_ti_moneda(rs.getString("co_ti_moneda"));
+                 v.setCo_ti_rem_variab(rs.getString("co_ti_rem_variab"));
+                 v.setDe_remu_especie(rs.getString("de_remu_especie"));
+                 v.setDe_ruc_emp_trab(rs.getString("de_ruc_emp_trab"));
+                 v.setCo_sucursal(rs.getString("co_sucursal"));
+                 v.setDe_mype(rs.getString("de_mype"));
+                 v.setEs_ti_contratacion(rs.getString("es_ti_contratacion"));
+                 v.setCa_bev(rs.getDouble("ca_bev"));
+                 v.setNo_puesto(rs.getString("no_puesto"));
+                 v.setNo_seccion(rs.getString("no_seccion"));
+                 v.setNo_area(rs.getString("no_area"));
+                 v.setNo_dep(rs.getString("no_dep"));
+                 v.setNo_direccion(rs.getString("no_direccion"));
+                 v.setDe_grupo_ocupacion(rs.getString("de_grupo_ocupacion"));
+                 v.setId_contrato(rs.getString("id_contrato"));
+                 v.setId_dgp(rs.getString("id_dgp"));
+                 v.setFe_desde(rs.getString("fe_desde"));
+                 v.setFe_hasta(rs.getString("fe_hasta"));
+                 v.setFe_cese(rs.getString("fe_cese"));
+                 v.setId_func(rs.getString("id_func"));
+                 v.setLi_condicion(rs.getString("li_condicion"));
+                 v.setCa_sueldo(rs.getDouble("ca_sueldo"));
+                 v.setCa_reintegro(rs.getDouble("ca_reintegro"));
+                 v.setCa_asig_familiar(rs.getDouble("ca_asig_familiar"));
+                 v.setHo_semana(rs.getDouble("ho_semana"));
+                 v.setNu_horas_lab(rs.getDouble("nu_horas_lab"));
+                 v.setDia_contrato(rs.getDouble("dia_contrato"));
+                 v.setTi_trabajador(rs.getString("ti_trabajador"));
+                 v.setLi_regimen_laboral(rs.getString("li_regimen_laboral"));
+                 v.setEs_discapacidad(rs.getString("es_discapacidad"));
+                 v.setTi_contrato(rs.getString("ti_contrato"));
+                 v.setLi_regimen_pensionario(rs.getString("li_regimen_pensionario"));
+                 v.setEs_contrato_trabajador(rs.getString("es_contrato_trabajador"));
+                 v.setUs_creacion(rs.getString("us_creacion"));
+                 v.setFe_creacion(rs.getString("fe_creacion"));
+                 v.setUs_modif(rs.getString("us_modif"));
+                 v.setFe_modif(rs.getString("fe_modif"));
+                 v.setUs_ip(rs.getString("us_ip"));
+                 v.setFe_vacacio_ini(rs.getString("fe_vacacio_ini"));
+                 v.setEs_contrato(rs.getString("es_contrato"));
+                 v.setFe_vacacio_fin(rs.getString("fe_vacacio_fin"));
+                 v.setDe_sub_modalidad(rs.getString("de_sub_modalidad"));
+                 v.setDe_modalidad(rs.getString("de_modalidad"));
+                 v.setNo_trabajador(rs.getString("no_trabajador"));
+                 v.setAp_paterno(rs.getString("ap_paterno"));
+                 v.setAp_materno(rs.getString("ap_materno"));
+                 v.setLi_di_dom_a_d1(rs.getString("li_di_dom_a_d1"));
+                 v.setDi_dom_a_d2(rs.getString("di_dom_a_d2"));
+                 v.setLi_di_dom_a_d3(rs.getString("li_di_dom_a_d3"));
+                 v.setDi_dom_a_d4(rs.getString("di_dom_a_d4"));
+                 v.setLi_di_dom_a_d5(rs.getString("li_di_dom_a_d5"));
+                 v.setDi_dom_a_d6(rs.getString("di_dom_a_d6"));
+                 v.setNo_distrito(rs.getString("no_distrito"));
+                 v.setNo_provincia(rs.getString("no_provincia"));
+                 v.setFe_sus(rs.getString("fe_sus"));
+                 v.setId_plantilla_contractual(rs.getString("id_plantilla_contractual"));
+                 v.setFe_has(rs.getString("fe_has"));
+                 v.setFe_des(rs.getString("fe_des"));
+                 v.setCa_bonificacion_p(rs.getDouble("ca_bonificacion_p"));
+                 */
                 lista.add(rec);
             }
             rs.close();
@@ -853,6 +854,61 @@ public class ContratoDAO implements InterfaceContratoDAO {
             }
         }
         return lista;
+    }
+
+    @Override
+    public List<Contrato_Adjunto> List_doc_Contrato(String id_ctro) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT * FROM RHTV_CONTRATO_ADJUNTO where ID_CONTRATO='" + id_ctro.trim() + "'";
+        List<Contrato_Adjunto> list = new ArrayList<Contrato_Adjunto>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Contrato_Adjunto v = new Contrato_Adjunto();
+                v.setId_contrato_adjunto(rs.getString("ID_CONTRATO_ADJUNTO"));
+                v.setId_contrato(rs.getString("ID_CONTRATO"));
+                v.setNo_archivo(rs.getString("NO_ARCHIVO"));
+                v.setNo_archivo_original(rs.getString("NO_ARCHIVO_ORIGINAL"));
+                v.setEs_archivo_adjunto(rs.getString("Es_archivo_adjunto"));
+                v.setFe_creacion(rs.getString("FE_CREACION"));
+                list.add(v);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return list;
+    }
+
+    @Override
+    public int Count_doc_con(String id_ctro) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT COUNT(*) FROM RHTV_CONTRATO_ADJUNTO where ID_CONTRATO='" + id_ctro.trim() + "' and ES_CONTRATO_ADJUNTO='1'";
+        int validar = 0;
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                validar = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return validar;
+    }
+
+    @Override
+    public void Eliminar_Contratos_firmados(String id_contrato) {
+        CallableStatement cst;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = conn.conex.prepareCall("{CALL RHSP_DELETE_CONTRATOS_SUBIDOS(?)}");
+            cst.setString(1, id_contrato.trim());
+            cst.execute();
+        } catch (SQLException ex) {
+        } finally {
+            this.conn.close();
+        }
     }
 
 }

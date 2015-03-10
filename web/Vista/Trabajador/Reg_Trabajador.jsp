@@ -166,12 +166,17 @@
                             }
                             else {
                                 $("#es_inst_p").hide();
+                                $("#es_inst_p").find('select option:eq(0)').prop('selected', true);
                                 $("#regimen").hide();
+                                $("#regimen").find('select option:eq(0)').prop('selected', true);
                                 $("#egreso").hide();
+                                $("#egreso").find('select option:eq(0)').prop('selected', true);
                                 $("#ti").hide();
+                                $("#ti").find('select option:eq(0)').prop('selected', true);
                                 $("#institucion").hide();
+                                $("#institucion").find('select option:eq(0)').prop('selected', true);
                                 $("#carr").hide();
-
+                                $("#carr").find('select option:eq(0)').prop('selected', true);
                             }
 
                         });

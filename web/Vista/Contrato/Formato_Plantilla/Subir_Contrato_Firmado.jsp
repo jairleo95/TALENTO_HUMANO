@@ -1,14 +1,12 @@
+
 <%@page import="pe.edu.upeu.application.dao.DocumentoDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO"%>
-<%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
     HttpSession sesion = request.getSession();
     String id_user = (String) sesion.getAttribute("IDUSER");
     if (id_user != null) {
 %>
-<%@page import="pe.edu.upeu.application.model.Datos_Hijo_Trabajador"%>
-<%@page import="pe.edu.upeu.application.model.Padre_Madre_Conyugue"%>
-<%@page import="pe.edu.upeu.application.model.V_Reg_Dgp_Tra"%>
+
 <!DOCTYPE html>
 <html >
     <head>
@@ -74,29 +72,16 @@
     </head>
     <%  //String num = request.getParameter("num");
         // int num_doc = Integer.parseInt(num);
-        if (request.getParameter("a") != null) {
-            if (request.getParameter("a").trim().equals("t")) {
+        InterfaceDocumentoDAO doc_ = new DocumentoDAO();
+        String id_con = "";
     %>
 
-    <body onload="closedthis();">
-
-        <%
-            }
-            if (request.getParameter("a").trim().equals("e")) {%>
-    <body onload="closedthis2()">
-        <%}
-        } else {
-        %>
     <body class="">
-        <%}%>
-        <%
-            HttpSession sesion_1 = request.getSession(true);
-            String rol = (String) sesion_1.getAttribute("IDROL");
-            int n_nac = Integer.parseInt(request.getParameter("n_nac"));
-            int num_ad = Integer.parseInt(request.getParameter("num_ad"));
-            String id_ctr = "";
-            InterfaceDocumentoDAO doc_ = new DocumentoDAO();
-
+        <%          //  HttpSession sesion_1 = request.getSession(true);
+            //String rol = (String) sesion_1.getAttribute("IDROL");
+            //int n_nac = Integer.parseInt(request.getParameter("n_nac"));
+            // int num_ad = Integer.parseInt(request.getParameter("num_ad"));
+            // String id_ctr = "";
             //String id_dgp = "";
         %>
         <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
@@ -153,17 +138,44 @@
                                     <!-- widget content -->
                                     <div class="widget-body">
 
-                                        <form action="../../contrato_adjunto" class="dropzone" id="mydropzone"  enctype="multipart/form-data">
+                                        <form action="../../../doc_adjunto" method="post" enctype="multipart/form-data" class="dropzone" class="smart-form" >
+                                            <table id="datatable_tabletools" class="table table-bordered table-hover table-responsive" width="100%">
+                                                <tr align="center"> <td style="border:1px solid #CC3C3C;">
+                                                        SUBIR CONTRATO FIRMADO
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <%int can = Integer.parseInt(request.getParameter("coun_doc"));
+                                                        if (can > 0) {
+                                                    %>
+                                                    <td class="caji3">
+                                                        <% id_con = request.getParameter("idc");
+                                                             out.print(doc_.List_file_url3(id_con));
+                                                              %>      
 
-                                            <input type="text" class="idc" name="idc" value="<%=request.getParameter("idc")%>">
-                                            <div class="form-group" >
-                                                <input id="file-5" class="file" type="file" data-preview-file-type="any" data-upload-url="#" name="archivo">
-                                            </div>
+                                                    </td>
+                                               
+                                                    <%} else {%>
+                                                    <td class="caji3">
+                                                        <input type="text" class="idc" name="idc" value="<%=request.getParameter("idc")%>" style="">
+
+                                                        <div class="form-group" >
+                                                            <input id="file-5" class="file" type="file" data-preview-file-type="any" data-upload-url="#" name="archivo" multiple="">
+                                                        </div>   
+                                                    </td>
+                                                    <%}%>
+                                                </tr>
+                                            </table>
+                                            <button type="submit" class="btn btn-primary" style="align:center;"><i class="fa fa-upload"></i>Registrar</button>
+                                            <%
+                                                if (can > 0) {
+                                            %>
+                                            <a class="btn btn-primary" href="../../../doc_adjunto?opc=Eliminar&idc=<%=id_con%>"><I class="fa fa-tach"></I>Eliminar</a>
+                                                    <%} else {%>
+                                                    <%}%>
                                         </form>
 
                                     </div>
-                                    <button type="button" class="btn_accion">Remover Todos</button>
-                                    <!-- end widget content -->
 
                                 </div>
                                 <!-- end widget div -->
@@ -208,16 +220,16 @@
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
-        if (!window.jQuery) {
-            document.write('<script src="../../../js/libs/jquery-2.0.2.min.js"><\/script>');
-        }
+            if (!window.jQuery) {
+                document.write('<script src="../../../js/libs/jquery-2.0.2.min.js"><\/script>');
+            }
         </script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script>
-        if (!window.jQuery.ui) {
-            document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-        }
+            if (!window.jQuery.ui) {
+                document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+            }
         </script>
 
         <!-- IMPORTANT: APP CONFIG -->
@@ -285,55 +297,59 @@
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="../../../js/notification/SmartNotification.min.js"></script>
         <script type="text/javascript">
-        function closedthis() {
-            $.smallBox({
-                title: "¡Documento registrada correctamente!",
-                content: "ya puede visualizar el documento",
-                color: "#739E73",
-                iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                timeout: 6000
-            });
-        }
-        function closedthis2() {
-            $.smallBox({
-                title: "¡Documento eliminado correctamente!",
-                content: "ya puede ver eñ cambio",
-                color: "#739E73",
-                iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                timeout: 6000
-            });
-        }
-        $(document).ready(function() {
+            function closedthis() {
+                $.smallBox({
+                    title: "¡Documento registrada correctamente!",
+                    content: "ya puede visualizar el documento",
+                    color: "#739E73",
+                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                    timeout: 6000
+                });
+            }
+            function closedthis2() {
+                $.smallBox({
+                    title: "¡Documento eliminado correctamente!",
+                    content: "ya puede ver eñ cambio",
+                    color: "#739E73",
+                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                    timeout: 6000
+                });
+            }
 
-            pageSetUp();
-            $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
-                $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
-            });
+            $(document).ready(function() {
+
+                pageSetUp();
+                $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
+                    $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+                });
 
 
-            $.each($(".file"), function(i) {
+                $.each($(".file"), function(i) {
 
-                if ((i + 1) == 0) {
-                    $(".btn_reg_doc").hide();
-                    alert();
-                } else {
-                    $(".btn_reg_doc").show();
+                    if ((i + 1) == 0) {
+                        $(".btn_reg_doc").hide();
+                        alert();
+                    } else {
+                        $(".btn_reg_doc").show();
+                    }
+
+                });
+                $(".DD").change(function() {
+
+                    $(".div-holi").text($(".DD").val());
+                });
+                $(".elimi").click(function() {
+                    var msg = confirm('¿tas seguro de eliminar?');
+                    if (msg == true) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                });
+                $(".btn_eliminar").click(){
+
                 }
-
-            });
-            $(".DD").change(function() {
-
-                $(".div-holi").text($(".DD").val());
-            });
-            $(".elimi").click(function() {
-                var msg = confirm('¿tas seguro de eliminar?');
-                if (msg == true) {
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-        })
+            })
 
         </script>
         <script>
@@ -364,7 +380,6 @@
                 overwriteInitial: false,
                 maxFileSize: 500,
                 maxFilesNum: 10,
-                browseClass: "btn btn-primary btn-lg",
                 //allowedFileTypes: ['image', 'video', 'flash'],
                 slugCallback: function(filename) {
                     return filename.replace('(', '_').replace(']', '_');
@@ -438,6 +453,8 @@
             } catch (err) {
             }
         </script>
+        <%
+        %>
     </body>
 </html>
 <%} else {
