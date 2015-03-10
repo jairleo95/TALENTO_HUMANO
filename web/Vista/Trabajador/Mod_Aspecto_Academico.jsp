@@ -171,11 +171,17 @@
                             }
                             else {
                                 $("#es_inst_p").hide();
+                                $("#es_inst_p").find('select option:eq(0)').prop('selected', true);
                                 $("#regimen").hide();
+                                $("#regimen").find('select option:eq(0)').prop('selected', true);
                                 $("#egreso").hide();
+                                $("#egreso").find('select option:eq(0)').prop('selected', true);
                                 $("#ti").hide();
-                                $("#institucion").hide();
+                                $("#ti").find('select option:eq(0)').prop('selected', true);
+                                $("#institucion").hide();                               
+                                $("#institucion").find('select option:eq(0)').prop('selected', true);
                                 $("#carr").hide();
+                                 $("#carr").find('select option:eq(0)').prop('selected', true);
 
                             }
 
@@ -252,12 +258,18 @@
                             $("#es_inst_p").show();
 
                         } else {
-                            $("#es_inst_p").hide();
-                            $("#regimen").hide();
-                            $("#egreso").hide();
-                            $("#ti").hide();
-                            $("#institucion").hide();
-                            $("#carr").hide();
+                            /*$("#es_inst_p").hide();
+                             $("#es_inst_p").removeAttr("selected");
+                             $("#regimen").hide("");
+                             $("#regimen").removeAttr("selected");
+                             $("#egreso").hide("");
+                             $("#egreso").removeAttr("selected");
+                             $("#ti").hide("");
+                             $("#ti").removeAttr("selected");
+                             $("#institucion").hide("");
+                             $("#institucion").removeAttr("selected");
+                             $("#carr").hide("");
+                             $("#carr").removeAttr("selected");*/
                         }
 
                         if ($("#inst_peru").val() == "1") {
@@ -427,7 +439,7 @@
                                                                     </div>
                                                                 </div>
 
-                                                                <div class="col-sm-4" id="es_inst_p"style="display: none">
+                                                                <div class="col-sm-4" id="es_inst_p" style="display: none">
                                                                     <div class="form-group">
                                                                         <label>¿Estudio en una institucion educativa del Perú?</label>
                                                                         <div class="input-group">
@@ -1130,7 +1142,7 @@
                 $("#nu_cuen").mask("0011-9999999999999999", {placeholder: "X"});
                 $("#no_cuen_otros").hide();
                 $("#nu_cuen_otros").val("");
-                 $("#texto").hide();
+                $("#texto").hide();
             }
             if (banco == '2') {
                 $("#generar").hide();
@@ -1144,7 +1156,7 @@
                 $("#nu_cuen").mask("99999999999999", {placeholder: "X"});
                 $("#no_cuen_otros").hide();
                 $("#nu_cuen_otros").val("");
-                 $("#texto").hide();
+                $("#texto").hide();
             }
             if (banco == '3') {
                 $("#no_cuen").show();
@@ -1159,7 +1171,7 @@
                 $("#generar").hide();
                 $("#subscription").attr('checked', false);
                 document.getElementById("nu_cuen_otros").readOnly = false;
-                 $("#texto").hide();
+                $("#texto").hide();
             }
             if (banco == '0') {
                 $("#no_cuen").hide();
