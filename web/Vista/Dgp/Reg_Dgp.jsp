@@ -1379,7 +1379,7 @@
                         primera_fila = 0;
                     }
                     calcularHoras();
-                    $(".texto-h").mask("99:99", {placeholder: "X"});
+                    //$(".texto-h").mask("99:99", {placeholder: "X"});
                     $(".texto-h").keypress(
                             function () {
                                 calcularHoras();
