@@ -336,13 +336,13 @@
                                                             </label>
                                                         </section>
                                                     </div>
-                                                            
-                                                            
-                                                            
+
+
+
                                                     <%if (idreq.equals("REQ-0008")) {
                                                     %>
-                                                    
-                                                    
+
+
                                                     <%String es_cue_sue = request.getParameter("es_cs");%>
                                                     <input type="hidden" name="ESTADO" value="<%=es_cue_sue%>">
                                                     <%if (es_cue_sue.equals("0")) {%>
@@ -454,9 +454,9 @@
                                                     </div>
 
                                                     <%}
-                                                            }%>
-                                                            
-                                                            
+                                                        }%>
+
+
 
                                                     <%}%>
                                                     <div class="row">
@@ -814,7 +814,7 @@
                                                         </section>
                                                         <section class="col col-2" >
                                                             <label class="select" id="titu">MIERCOLES
-                                                                <select id=select_mier  >
+                                                                <select id=select_mie  >
                                                                     <option value="1">Habilitado</option>
                                                                     <option value="2" selected="">Deshabilitado</option>
                                                                 </select>
@@ -855,7 +855,7 @@
                                                             </label>
                                                         </section>
                                                     </div>
-                                                    <div class="input-desp">
+                                                    <div class="input-desp dias_semana">
                                                         <table style="" id="show_lun" class="cont_lun"> 
                                                             <tr><td align="center" colspan="2">Lunes</td></tr>
 
@@ -973,12 +973,12 @@
             periodo_pago(cantidad);
             $(".cant").val(cantidad);
             //alert($(".cant").val())
-            $(".eliminar" + cantidad).click(function() {
+            $(".eliminar" + cantidad).click(function () {
                 $(".pago_cuotas_" + cantidad).remove();
                 periodo_pago(cantidad);
                 cantidad--;
-                 periodo_pago(cantidad);
-                
+                periodo_pago(cantidad);
+
                 //alert(cantidad)
             });
         });
@@ -1069,7 +1069,7 @@
     <script language="javascript" type="text/javascript">
         $(document).ready(
                 function mostrar() {
-                    $(".texto-h").mask("99:99", {placeholder: "X"});
+
                     $(".cont_lun").hide();
                     $(".cont_mar").hide();
                     $(".cont_mie").hide();
@@ -1086,8 +1086,9 @@
                                 }
                                 if ($(this).val() == 2) {
                                     $(".cont_lun").hide();
-                                    $("#show_lun input").val("");
+                                    $("#show_lun input").val("00:00");
                                 }
+                                calcularHoras();
                             }
                     );
                     $("#select_mar").change(
@@ -1097,8 +1098,9 @@
                                 }
                                 if ($(this).val() == 2) {
                                     $(".cont_mar").hide();
-                                    $("#show_mar input").val("");
+                                    $("#show_mar input").val("00:00");
                                 }
+                                calcularHoras();
                             }
                     );
                     $("#select_mie").change(
@@ -1110,6 +1112,7 @@
                                     $(".cont_mie").hide();
                                     $("#show_mie input").val("00:00");
                                 }
+                                calcularHoras();
                             }
                     );
                     $("#select_jue").change(
@@ -1119,8 +1122,9 @@
                                 }
                                 if ($(this).val() == 2) {
                                     $(".cont_jue").hide();
-                                    $("#show_jue input").val("");
+                                    $("#show_jue input").val("00:00");
                                 }
+                                calcularHoras();
                             }
                     );
                     $("#select_vie").change(
@@ -1130,8 +1134,9 @@
                                 }
                                 if ($(this).val() == 2) {
                                     $(".cont_vie").hide();
-                                    $("#show_vie input").val("");
+                                    $("#show_vie input").val("00:00");
                                 }
+                                calcularHoras();
                             }
                     );
                     $("#select_sab").change(
@@ -1141,8 +1146,9 @@
                                 }
                                 if ($(this).val() == 2) {
                                     $(".cont_sab").hide();
-                                    $("#show_sab input").val("");
+                                    $("#show_sab input").val("00:00");
                                 }
+                                calcularHoras();
                             }
                     );
                     $("#select_dom").change(
@@ -1152,8 +1158,9 @@
                                 }
                                 if ($(this).val() == 2) {
                                     $(".cont_dom").hide();
-                                    $("#show_dom input").val("");
+                                    $("#show_dom input").val("00:00");
                                 }
+                                calcularHoras();
                             }
                     );
                 }
@@ -1339,37 +1346,75 @@
                 $(".tr-dia").remove();
                 $.post("../../formato_horario", "opc=Listar_Horario&id=" + valor, function (objJson) {
                     var lista = objJson.lista;
+                    var text_html = '';
+                    var primera_fila = 0;
                     for (var f = 0; f < dias_semana.length; f++) {
-
                         var d = 0;
                         for (var i = 0; i < lista.length; i++) {
-
                             if (dias_semana[f] == lista[i].dia) {
+                                primera_fila++;
                                 var scntDiv = $('#show_' + dias_semana[f]);
-
                                 $(".cont_" + dias_semana[f]).show();
-
-                                $("#select_" + dias_semana[f]).val(1);
-
-                                $('<tr class="tr-dia" ><td>T' + (d + 1) + ' :</td><td><input type="text"   class="texto-h HORA_DESDE_' + dias_semana[f] + (d + 1) + '"   name="HORA_DESDE_' + dias_semana[f] + (d + 1)
-                                        + '" value="' + lista[i].desde + '"  /></td><td><input type="text"  class="texto-h HORA_HASTA_' + dias_semana[f] + (d + 1) + '"  value="' + lista[i].hasta + '" name="HORA_HASTA_' + dias_semana[f] + (d + 1)
-                                        + '" /><input type="hidden" name="DIA_' + dias_semana[f] + (d + 1)
-                                        + '" value="' + dias_semana[f] + '" ><a href="#" class="remove_' + (d + 1) + '">-</a></td></tr>').appendTo(scntDiv);
-
-
-
+                                $("#select_" + dias_semana[f]).val(lista[i].estado);
+                                if (lista[i].estado == '2') {
+                                    scntDiv.hide();
+                                } else if (lista[i].estado == '1') {
+                                    scntDiv.show();
+                                }
+                                text_html += '<tr class="tr-dia turno_' + (i + 1) + '" ><td>T' + (d + 1);
+                                text_html += ' :</td><td><input type="text"   class="texto-h HORA_DESDE_' + dias_semana[f] + (d + 1) + '"   name="HORA_DESDE_' + dias_semana[f] + (d + 1);
+                                text_html += '" value="' + lista[i].desde + '"  /></td><td><input type="text"  class="texto-h HORA_HASTA_' + dias_semana[f] + (d + 1) + '"  value="' + lista[i].hasta + '" name="HORA_HASTA_' + dias_semana[f] + (d + 1)
+                                        + '" /><input type="hidden" name="DIA_' + dias_semana[f] + (d + 1) + '" class="nombre_dia_' + (i + 1) + '" value="' + dias_semana[f] + '" >';
+                                if (primera_fila == 1) {
+                                    text_html += '<button type="button" class="btn btn-primary agregar_turno" value="' + (i + 1) + '"><i class="fa fa-plus-square"></i></button></td></tr>';
+                                } else {
+                                    text_html += '<button type="button" class="btn btn-danger remover_turno" value="' + (i + 1) + '"><i class="fa  fa-minus-circle"></i></button></td></tr>';
+                                }
                                 d++;
+                                scntDiv.append(text_html);
+                                text_html = "";
                             }
                             // alert(dias_semana[f]);
-
                         }
+                        primera_fila = 0;
                     }
                     calcularHoras();
-                    $(".texto-h").keyup(
+                    $(".texto-h").mask("99:99", {placeholder: "X"});
+                    $(".texto-h").keypress(
                             function () {
                                 calcularHoras();
                             }
                     );
+                    $(".remover_turno").click(function () {
+                        //alert($(this).val());
+                        $(".turno_" + $(this).val()).remove();
+                        calcularHoras();
+                    });
+                    $(".agregar_turno").click(function () {
+                        var turno = $('#show_' + $(".nombre_dia_" + $(this).val()).val() + ' .tr-dia').size() + 1;
+                        var dia = $(".nombre_dia_" + $(this).val()).val();
+                        var agregar_turno = $('#show_' + dia);
+                        var text_html = '';
+                        var i = $(".dias_semana .tr-dia").size();
+                        text_html += '<tr class="tr-dia turno_' + (i + 1) + '" ><td>T' + turno;
+                        text_html += ' :</td><td><input type="text"   class="texto-h HORA_DESDE_' + dia + turno + '"   name="HORA_DESDE_' + dia + turno;
+                        text_html += '" value="00:00"  /></td><td><input type="text"  class="texto-h HORA_HASTA_' + dia + turno + '"  value="00:00" name="HORA_HASTA_' + dia + turno
+                                + '" /><input type="hidden" name="DIA_' + dia + turno + '" class="nombre_dia_' + (i + 1) + '" value="' + dia + '" >';
+                        text_html += '<button type="button" class="btn btn-danger remover_turno" value="' + (i + 1) + '"><i class="fa  fa-minus-circle"></i></button></td></tr>';
+                        agregar_turno.append(text_html);
+                        $(".texto-h").mask("99:99", {placeholder: "X"});
+                        $(".remover_turno").click(function () {
+                            //alert($(this).val());
+                            $(".turno_" + $(this).val()).remove();
+                            calcularHoras();
+                        });
+                        $(".texto-h").keypress(
+                                function () {
+                                    calcularHoras();
+                                }
+                        );
+
+                    });
 
                 });
 
@@ -1563,6 +1608,7 @@
             $("#bev").numeric();
             $("#nu_cuen").numeric();
             $("#nu_cuen_ban").numeric();
+            // $(".texto-h").mask("99:99", {placeholder: "0"});
             /* $("#sueldo").mask("99999.99", {placeholder: "0"});
              $("#bono_al").mask("99999.99", {placeholder: "0"});
              $("#bev").mask("99999.99", {placeholder: "0"});*/
