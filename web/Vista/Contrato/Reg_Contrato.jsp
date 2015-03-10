@@ -465,8 +465,9 @@
                                             </label>
                                         </section>
                                         <section class="col col-4">
+                                            <%String Fecha = request.getParameter("fe_subs");%>
                                             <label class="input" id="titulo">Fecha de Suscripción: 
-                                                <input type="date" name="FECHA_SUSCRIPCION" placeholder="" class="input-group-sm" required="">
+                                                <input id="suscripcion" type="date" name="FECHA_SUSCRIPCION"  class="input-group-sm"  value="<%=Fecha%>">
                                             </label>
                                         </section>
                                         <section class="col col-4">

@@ -621,7 +621,11 @@
                                                                     <label>Tipo Hora Pago Referencial:</label>
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-money fa-lg fa-fw"></i></span>
-                                                                        <input class="form-control input-group-sm" value="<%=t.getCa_tipo_hora_pago_refeerencial()%>"   type="text" name="TIPO_HORA_PAGO_REFEERENCIAL" maxlength="6">
+                                                                        <input class="form-control input-group-sm" value="<%if (t.getCa_tipo_hora_pago_refeerencial() == null || t.getCa_tipo_hora_pago_refeerencial().trim().equals("null")) {
+                                                                                out.print("");
+                                                                            } else {
+                                                                                out.print(t.getCa_tipo_hora_pago_refeerencial());
+                                                                            }%>"   type="text" name="TIPO_HORA_PAGO_REFEERENCIAL" maxlength="6">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -653,7 +657,7 @@
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
                                                                         <select name="BANCO" id="banco" class="form-control input-group-sm">
-                                                                            <option value=""  disabled="" selected="">[SELECCIONE]</option>
+                                                                            <option value=""   selected="">[SELECCIONE]</option>
                                                                             <%for (int u = 0; u < List_Cuenta_Sueldo.size(); u++) {
                                                                                     Cuenta_Sueldo cs = new Cuenta_Sueldo();
                                                                                     cs = (Cuenta_Sueldo) List_Cuenta_Sueldo.get(u);
@@ -1041,7 +1045,7 @@
 
                     $("#banco").change(function() {
                         cuenta_bancaria($(this).val());
-                        $("#es_cuenta").val(1);
+                        $("#nu_cuen").focus();
                         //  alert($("#es_cuenta").val());
                     });
 
@@ -1128,7 +1132,36 @@
 
         }
 
-        function cuenta_bancaria(banco) {
+         function cuenta_bancaria(banco) {
+                                                               if (banco == '') {
+                                                                    $("#no_cuen").hide();
+                                                                    $("#no_cuen_ban").hide();
+                                                                    $("#generar").hide();
+                                                                    $("#texto").hide();
+                                                                    $("#no_cuen_otros").hide();
+                                                                     $("#banco").val("es");
+                                                                     $("#nu_cuen").val("");
+                                                                     $("#nu_cuen_ban").val("");
+                                                                     $("#nu_cuen_ban_otros").val("");
+                                                                      $("#es_cuenta").val(0);
+                                                                     
+                                                                }
+                                                                if (banco == '0') {
+                                                                    $("#no_cuen").hide();
+                                                                    $("#nu_cuen").val("");
+                                                                    $("#no_cuen_ban").hide();
+                                                                    $("#nu_cuen_ban").val("");
+                                                                    $("#no_cuen_otros").show();
+                                                                    $("#nu_cuen_otros").val("BBVA Banco Continental");
+                                                                    $("#nu_cuen_otros").attr('readonly', 'readonly');
+                                                                    //document.getElementById("nu_cuen_otros").readOnly = true;
+                                                                    $("#texto").show();
+                                                                    $("#generar").show();
+                                                                    $("#subscription").attr("required", "required");
+                                                                    $("#nu_cuen_otros").attr("required", "required");
+                                                                    $("#nu_cuen_otros").removeAttr('maxlength');
+                                                                    $("#nu_cuen_otros").removeAttr('minlength');
+                                                                     $("#es_cuenta").val(1);
 
             if (banco == '1') {
                 $("#generar").hide();
@@ -1187,7 +1220,49 @@
                 $("#nu_cuen_otros").attr("required", "required");
             }
 
-        }
+                                                                    $("#generar").hide();
+                                                                    $("#subscription").attr('checked', false);
+                                                                    $("#no_cuen_ban").hide();
+                                                                    $("#nu_cuen_ban").val("");
+                                                                    $("#no_cuen").show();
+                                                                    $("#nu_cuen").val("");
+                                                                    $("#nu_cuen").attr("required", "required");
+                                                                    $("#nu_cuen_otros").removeAttr('maxlength');
+                                                                    $("#nu_cuen_otros").removeAttr('minlength');
+                                                                    $("#nu_cuen").removeAttr('maxlength');
+                                                                    $("#nu_cuen").removeAttr('minlength');
+                                                                    $("#nu_cuen").attr("maxlength", "14");
+                                                                    $("#nu_cuen").attr("minlength", "0");
+                                                                    //$("#nu_cuen").mask("99999999999999", {placeholder: "X"});
+                                                                    $("#no_cuen_otros").hide();
+                                                                    $("#nu_cuen_otros").val("");
+                                                                    $("#texto").hide();
+                                                                    $("#nu_cuen").valid();
+                                                                 $("#es_cuenta").val(1);
+
+
+                                                                }
+                                                                if (banco == '3') {
+                                                                    $("#no_cuen").show();
+                                                                    $("#no_cuen").val("");
+                                                                    $("#nu_cuen").attr("required", "required");
+                                                                    $("#no_cuen_ban").show();
+                                                                    $("#no_cuen_ban").val("");
+                                                                    $("#nu_cuen_ban").attr("required", "required");
+                                                                    $("#no_cuen_otros").show();
+                                                                    $("#nu_cuen_otros").val("");
+                                                                    $("#nu_cuen_otros").attr("required", "required");
+                                                                    $("#generar").hide();
+                                                                    $("#subscription").attr('checked', false);
+                                                                    $("#texto").hide();
+                                                                    $("#nu_cuen_otros").removeAttr('readonly');
+                                                                    $("#nu_cuen_otros").removeAttr('maxlength');
+                                                                    $("#nu_cuen_otros").removeAttr('minlength');
+                                                                     $("#es_cuenta").val(1);
+                                                                }
+
+
+                                                            }
 
     </script> 
     <script>
@@ -1350,7 +1425,7 @@
 
     <!--Solo numeros -->
     <script type="text/javascript">
-        $("#docs, .doc_c").numeric();
+        $("#docs, .doc_c, #nu_cuen, #nu_cuen_ban").numeric();
         $("#doc, .doc_c").numeric(false, function() {
             alert("Solo Numeros Enteros");
             this.value = "";
