@@ -120,7 +120,11 @@
                     } else {
                         out.print(trb.getCo_universitario());
                     }%></td></tr>
-                <tr><td class="text-info">Tipo de Hora Referencial:</td><td><%=trb.getCa_tipo_hora_pago_refeerencial()%></td></tr>
+                <tr><td class="text-info">Tipo de Hora Referencial:</td><td><%if (trb.getCa_tipo_hora_pago_refeerencial() == null || trb.getCa_tipo_hora_pago_refeerencial().trim().equals("null")) {
+                        out.print("NO REGISTRADO");
+                    } else {
+                        out.print(trb.getCa_tipo_hora_pago_refeerencial());
+                    }%></td></tr>
                 <tr><td class="text-info">Año Egreso:</td><td><%if (trb.getDe_anno_egreso() == null) {
                         out.print("NO REGISTRADO");
                     } else {

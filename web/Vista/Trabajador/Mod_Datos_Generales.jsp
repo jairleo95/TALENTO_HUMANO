@@ -568,7 +568,7 @@
                                                                         <label>Nro de Documento:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-list-alt fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="NRO_DOC" value="<%=t.getNu_doc()%>" id="doc"  required="" maxlength="10" class="form-control input-group-sm doc" >
+                                                                            <input type="text" name="NRO_DOC" value="<%=t.getNu_doc()%>" id="doc"  required="" maxlength="10" class="form-control input-group-sm doc"  >
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -915,7 +915,7 @@
                                                             <input type="hidden" name="opc" value="Modificar_Dat_Gen">
 
                                                             <center>
-                                                               <!-- <button type="submit" value="" name="opc"> MODIFICAR</button>-->
+                                                                <!-- <button type="submit" value="" name="opc"> MODIFICAR</button>-->
                                                                 <button type="submit" class="btn btn-labeled btn-info" name="opc">
                                                                     <span class="btn-label">
                                                                         <i class="glyphicon glyphicon-pencil"></i>
@@ -1044,6 +1044,23 @@
     <script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script>$(document).ready(function() {
+                                                                                    $('#doc').click(function() {
+                                                                                        $('#doc').val("");
+                                                                                    });
+                                                                                    if ($(".select-doc").val() == 1) {
+                                                                                        $("#doc").numeric(false, function() {
+                                                                                        });
+                                                                                        $(".doc").attr("maxlength", "8");
+                                                                                        $(".doc").attr("minlength", "8");
+
+                                                                                    } else {
+                                                                                        $("#doc").removeNumeric();
+                                                                                        $(".doc").attr("maxlength", "10");
+                                                                                        $(".doc").removeAttr("minlength");
+                                                                                        //    $(".doc").val("");
+                                                                                    }
+                                                                                    $(".doc").focus();
+
                                                                                     var p = 1;
                                                                                     var texto_h = "";
                                                                                     $(".btn-reg-hijo").click(function() {
@@ -1141,6 +1158,25 @@
                                                                                         texto_h = "";
 
                                                                                     });
+                                                                                    $(".select-doc").change(
+                                                                                            function() {
+
+                                                                                                $(".doc").val("");
+                                                                                                if ($(".select-doc").val() == 1) {
+                                                                                                    $("#doc").numeric(false, function() {
+                                                                                                    });
+                                                                                                    $(".doc").attr("maxlength", "8");
+                                                                                                    $(".doc").attr("minlength", "8");
+
+                                                                                                } else {
+                                                                                                    $("#doc").removeNumeric();
+                                                                                                    $(".doc").attr("maxlength", "10");
+                                                                                                    $(".doc").removeAttr("minlength");
+                                                                                                    //    $(".doc").val("");
+                                                                                                }
+                                                                                                $(".doc").focus();
+                                                                                            }
+                                                                                    );
                                                                                 });</script>
     <script>
         $(document).ready(
