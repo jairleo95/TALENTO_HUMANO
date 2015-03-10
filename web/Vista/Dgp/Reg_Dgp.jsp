@@ -940,7 +940,7 @@
     <script language="javascript" type="text/javascript">
         $(document).ready(
                 function mostrar() {
-                    $(".texto-h").mask("99:99", {placeholder: "X"});
+                   // $(".texto-h").mask("99:99", {placeholder: "X"});
                     $(".cont_lun").hide();
                     $(".cont_mar").hide();
                     $(".cont_mie").hide();

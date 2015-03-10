@@ -422,7 +422,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     <%%>
     <input type="hidden" id="no_arch" class="no_arc" value="<%%>">
 
-    <button type="button" id="btn2" class=" btn btn-success btn2" onclick="InsertHTML()" style="display: none">CARGAR</button>
+    <button type="button" id="btn1" class=" btn btn-success btn2" onclick="InsertHTML()" style="display: none">CARGAR</button>
     <button type="button" id="btn2" class="btn2" onclick="resetear()" >Resetear</button>
     <h3>EDITAR PLANTILLAS</h3>
     <form class="ckeditor_form" action="../../../formato_plantilla" method="post">
