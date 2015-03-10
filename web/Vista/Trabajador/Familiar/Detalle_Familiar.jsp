@@ -76,7 +76,6 @@
                                 out.println("Si");%>
                         <%if (tr.getId_conyugue() != null) {
                         %>
-                        <a class="btn btn-success" href="../../../trabajador?idtr=<%=tr.getId_trabajador()%>&opc=list">VER DETALLE</a>
                         <%
                             }
                         %>
@@ -146,7 +145,7 @@
                 <tr><td colspan="2"> <a class="btn btn-success" href=Reg_Conyugue.jsp?idtr=<%=request.getParameter("idtr")%>">Agregar Cónyugue</a></td></tr>
                 <%}%>
                 <%}%>
-                <%if(tr.getAp_nombres_c() != null || tr.getAp_nombres_madre() != null && tr.getAp_nombres_padre()!= null ){%>
+                <%if(tr.getAp_nombres_c() != null && tr.getAp_nombres_madre() != null && tr.getAp_nombres_padre()!= null ){%>
                  <input type="hidden" name="idtra" value="<%=tr.getId_trabajador().trim()%>">
                 <input type="hidden" name="opc" value="Editar_Familiar">
                 <tr><td colspan="2"><input class="btn btn-success" type="submit" value="EDITAR"></td></tr>

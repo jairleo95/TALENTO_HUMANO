@@ -645,7 +645,7 @@
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
                                                                         <select name="BANCO" id="banco" class="form-control input-group-sm">
-                                                                            <option value=""  disabled="" selected="">[SELECCIONE]</option>
+                                                                            <option value=""   selected="">[SELECCIONE]</option>
                                                                             <%for (int u = 0; u < List_Cuenta_Sueldo.size(); u++) {
                                                                                     Cuenta_Sueldo cs = new Cuenta_Sueldo();
                                                                                     cs = (Cuenta_Sueldo) List_Cuenta_Sueldo.get(u);
@@ -1034,7 +1034,6 @@
                     $("#banco").change(function() {
                         cuenta_bancaria($(this).val());
                         $("#nu_cuen").focus();
-                        $("#es_cuenta").val(1);
                         //  alert($("#es_cuenta").val());
                     });
 
@@ -1122,12 +1121,18 @@
         }
 
          function cuenta_bancaria(banco) {
-                                                                if (banco == '') {
+                                                               if (banco == '') {
                                                                     $("#no_cuen").hide();
                                                                     $("#no_cuen_ban").hide();
                                                                     $("#generar").hide();
                                                                     $("#texto").hide();
                                                                     $("#no_cuen_otros").hide();
+                                                                     $("#banco").val("es");
+                                                                     $("#nu_cuen").val("");
+                                                                     $("#nu_cuen_ban").val("");
+                                                                     $("#nu_cuen_ban_otros").val("");
+                                                                      $("#es_cuenta").val(0);
+                                                                     
                                                                 }
                                                                 if (banco == '0') {
                                                                     $("#no_cuen").hide();
@@ -1144,6 +1149,7 @@
                                                                     $("#nu_cuen_otros").attr("required", "required");
                                                                     $("#nu_cuen_otros").removeAttr('maxlength');
                                                                     $("#nu_cuen_otros").removeAttr('minlength');
+                                                                     $("#es_cuenta").val(1);
 
                                                                 }
                                                                 if (banco == '1') {
@@ -1160,6 +1166,7 @@
                                                                     $("#no_cuen_otros").hide();
                                                                     $("#nu_cuen_otros").val("");
                                                                     $("#texto").hide();
+                                                                     $("#es_cuenta").val(1);
                                                                 }
                                                                 if (banco == '2') {
 
@@ -1181,6 +1188,7 @@
                                                                     $("#nu_cuen_otros").val("");
                                                                     $("#texto").hide();
                                                                     $("#nu_cuen").valid();
+                                                                 $("#es_cuenta").val(1);
 
 
                                                                 }
@@ -1200,6 +1208,7 @@
                                                                     $("#nu_cuen_otros").removeAttr('readonly');
                                                                     $("#nu_cuen_otros").removeAttr('maxlength');
                                                                     $("#nu_cuen_otros").removeAttr('minlength');
+                                                                     $("#es_cuenta").val(1);
                                                                 }
 
 

@@ -983,6 +983,12 @@
                                                                     $("#generar").hide();
                                                                     $("#texto").hide();
                                                                     $("#no_cuen_otros").hide();
+                                                                    $("#banco").val("");
+                                                                    $("#nu_cuen").val("");
+                                                                    $("#nu_cuen_ban").val("");
+                                                                    $("#nu_cuen_ban_otros").val("");
+                                                                     $("#es_cuenta").val(0);
+
                                                                 }
                                                                 if (banco == '0') {
                                                                     $("#no_cuen").hide();
@@ -999,7 +1005,7 @@
                                                                     $("#nu_cuen_otros").attr("required", "required");
                                                                     $("#nu_cuen_otros").removeAttr('maxlength');
                                                                     $("#nu_cuen_otros").removeAttr('minlength');
-
+                                                                    $("#es_cuenta").val(1);
                                                                 }
                                                                 if (banco == '1') {
                                                                     $("#generar").hide();
@@ -1015,6 +1021,7 @@
                                                                     $("#no_cuen_otros").hide();
                                                                     $("#nu_cuen_otros").val("");
                                                                     $("#texto").hide();
+                                                                     $("#es_cuenta").val(1);
                                                                 }
                                                                 if (banco == '2') {
 
@@ -1036,6 +1043,7 @@
                                                                     $("#nu_cuen_otros").val("");
                                                                     $("#texto").hide();
                                                                     $("#nu_cuen").valid();
+                                                                     $("#es_cuenta").val(1);
 
 
                                                                 }
@@ -1055,6 +1063,7 @@
                                                                     $("#nu_cuen_otros").removeAttr('readonly');
                                                                     $("#nu_cuen_otros").removeAttr('maxlength');
                                                                     $("#nu_cuen_otros").removeAttr('minlength');
+                                                                     $("#es_cuenta").val(1);
                                                                 }
 
 
@@ -1125,7 +1134,7 @@
 
                                                                                     cuenta_bancaria($(this).val());
                                                                                     $("#nu_cuen").focus();
-                                                                                    $("#es_cuenta").val(1);
+
                                                                                     //  alert($("#es_cuenta").val());
                                                                                 });
 

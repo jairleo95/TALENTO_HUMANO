@@ -123,8 +123,27 @@ public class CContrato extends HttpServlet {
             //getServletContext().setAttribute("Listar_Direccion", dir.Listar_Direccion());
             getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
             int num = dht.ASIGNACION_F(idtr);
+            Calendar fecha = new GregorianCalendar();
+            int año = fecha.get(Calendar.YEAR);
+            int mes = fecha.get(Calendar.MONTH);
+            int dia = fecha.get(Calendar.DAY_OF_MONTH);
+            String fe_subs = "";
+            if (mes < 9 && dia < 9) {
+                fe_subs = año + "-" + "0" + (mes + 1) + "-" + "0" + dia;
+            }
+
+            if (mes < 9 && dia > 9) {
+                fe_subs = año + "-" + "0" + (mes + 1) + "-" + dia;
+            }
+
+            if (mes >= 9 && dia < 9) {
+                fe_subs = año + "-" + (mes + 1) + "-" + "0" + dia;
+            }
+            if (mes >= 9 && dia > 9) {
+                fe_subs = año + "-" + (mes + 1) + "-" + dia;
+            }
             out.print(id_dir);
-            response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp?num=" + num + "&id_direc=" + id_dir);
+            response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp?num=" + num + "&id_direc=" + id_dir+"&fe_subs=" + fe_subs);
         }
         if (opc.equals("Detalle_Contractual")) {
 
