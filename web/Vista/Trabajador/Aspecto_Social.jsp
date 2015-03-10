@@ -62,12 +62,13 @@
                                     
                                 }
                             }
+                            //out.print(List_Dom_D1_Id.size());
                             if (trb.getDi_dom_a_d2() != null) {
                                 out.print(" " + trb.getDi_dom_a_d2());
                             } else {
                                 out.print(" -- ");
                             }
-                            
+                             //out.print(List_Dom_D3_Id.size());
                             if (trb.getLi_di_dom_a_d3() != null) {
                                 for (int j = 0; j < List_Dom_D3_Id.size(); j++) {
                                     String num = Integer.toString(j + 1);
