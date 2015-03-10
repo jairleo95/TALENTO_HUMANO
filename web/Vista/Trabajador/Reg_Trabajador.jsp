@@ -992,6 +992,7 @@
                                                                     $("#nu_cuen_ban_otros").val("");
                                                                     $("#nu_cuen_otros").val("");
                                                                      $("#es_cuenta").val(0);
+                                                                      $("#subscription").attr('checked', false);
                                                                      //alert($("#es_cuenta").val());
 
                                                                 }
