@@ -179,6 +179,11 @@ public class CTrabajador extends HttpServlet {
             String ES_GEM_NU_CUENTA = (request.getParameter("GEN_NU_CUEN") == null) ? "0" : "1";
             String NO_BANCO_OTROS = request.getParameter("BANCO_OTROS");
             String ES_CUENTA_SUELDO = request.getParameter("ES_CUENTA_SUELDO");
+            if(NO_BANCO == null){
+                ES_CUENTA_SUELDO = "0";
+            }else{
+                ES_CUENTA_SUELDO = "1";
+            }
             String CO_UNIVERSITARIO = request.getParameter("COD_UNI");
 
             tr.INSERT_TRABAJADOR(null, AP_PATERNO, AP_MATERNO, NO_TRABAJADOR, TI_DOC, NU_DOC, ES_CIVIL, FE_NAC, ID_NACIONALIDAD, ID_DEPARTAMENTO, ID_PROVINCIA, ID_DISTRITO, TE_TRABAJADOR, CL_TRA, DI_CORREO_PERSONAL, DI_CORREO_INST, CO_SISTEMA_PENSIONARIO, LI_NIVEL_EDUCATIVO, REGIMEN, ES_INST_PERU, CARRERA, DE_ANNO_EGRESO, CM_OTROS_ESTUDIOS, ES_SEXO, LI_GRUPO_SANGUINEO, DE_REFERENCIA, LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, ID_NO_AFP, ES_AFILIADO_ESSALUD, LI_TIPO_TRABAJADOR, CA_TIPO_HORA_PAGO_REFEERENCIAL, ES_FACTOR_RH, LI_DI_DOM_A_D1, DI_DOM_A_D2, LI_DI_DOM_A_D3, DI_DOM_A_D4, LI_DI_DOM_A_D5, DI_DOM_A_D6, DI_DOM_A_REF, ID_DI_DOM_A_DISTRITO, LI_DI_DOM_LEG_D1, DI_DOM_LEG_D2, LI_DI_DOM_LEG_D3, DI_DOM_LEG_D4, LI_DI_DOM_LEG_D5, DI_DOM_LEG_D6, ID_DI_DOM_LEG_DISTRITO, CA_ING_QTA_CAT_EMPRESA, CA_ING_QTA_CAT_RUC, CA_ING_QTA_CAT_OTRAS_EMPRESAS, CM_OBSERVACIONES, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, AP_NOMBRES_PADRE, AP_NOMBRES_MADRE,
@@ -454,13 +459,38 @@ public class CTrabajador extends HttpServlet {
             String ES_GEM_NU_CUENTA = (request.getParameter("GEN_NU_CUEN") == null) ? "0" : "1";
             String NO_BANCO_OTROS = request.getParameter("BANCO_OTROS");
             String ES_CUENTA_SUELDO = request.getParameter("ES_CUENTA_SUELDO");
+            if(NO_BANCO == null){
+                ES_CUENTA_SUELDO = "0";
+            }else{
+                ES_CUENTA_SUELDO = "1";
+            }
 
             tr.MOD_CUENTA_SUELDO(NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEM_NU_CUENTA, NO_BANCO_OTROS, idtr, ES_CUENTA_SUELDO);
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             getServletContext().setAttribute("List_Cuenta_Sueldo", tr.List_Cuenta_Sueldo(idtr));
+            
             //out.print(ES_CUENTA_SUELDO);
             response.sendRedirect("Vista/Trabajador/Aspecto_Academico.jsp?idtr=" + idtr);
         }
+        if (opc.equals("Listar_Asp_Social")) {
+            String idtr = request.getParameter("idtr");
+            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            getServletContext().setAttribute("Listar_via", dir.Listar_via());
+            getServletContext().setAttribute("Listar_zona", dir.Listar_zona());
+            getServletContext().setAttribute("ListarDir_Dom", li.List_Dom_D3_Id());
+            getServletContext().setAttribute("List_Provincia", ub.List_Provincia());
+            getServletContext().setAttribute("List_Distrito", ub.List_DistritoTra());
+            getServletContext().setAttribute("List_Ubigeo", ub.List_Distrito());
+            getServletContext().setAttribute("List_Departamento", ub.List_Departamento());
+            getServletContext().setAttribute("List_Dom_D1_Id", l.List_Dom_D1_Id());
+            getServletContext().setAttribute("List_Dom_D5_Id", l.List_Dom_D5_Id());
+            getServletContext().setAttribute("List_Dom_D3_Id", l.List_Dom_D3_Id());
+
+           
+            response.sendRedirect("Vista/Trabajador/Aspecto_Social.jsp?idtr=" + idtr);
+        }
+        
+        
         if (opc.equals("Editar_Asp_Soc")) {
             String idtr = request.getParameter("idtr");
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
@@ -475,9 +505,7 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("List_Dom_D5_Id", l.List_Dom_D5_Id());
             getServletContext().setAttribute("List_Dom_D3_Id", l.List_Dom_D3_Id());
 
-            //out.print(dir.Listar_via().size()+"-");   
-            //out.print(dir.Listar_Direccion().size()+"-");   
-            //out.print(dir.Listar_zona().size()+"-");   
+             
             response.sendRedirect("Vista/Trabajador/Mod_Aspecto_Social.jsp?idtr=" + idtr);
         }
         if (opc.equals("Modificar_Asp_Soc")) {

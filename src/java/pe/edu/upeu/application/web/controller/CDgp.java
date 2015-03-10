@@ -9,6 +9,8 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -404,8 +406,27 @@ public class CDgp extends HttpServlet {
                     getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
 
                     int asig = dht.ASIGNACION_F(ID_TRABAJADOR);
+                     Calendar fecha = new GregorianCalendar();
+            int año = fecha.get(Calendar.YEAR);
+            int mes = fecha.get(Calendar.MONTH);
+            int dia = fecha.get(Calendar.DAY_OF_MONTH);
+            String fe_subs = "";
+            if (mes < 9 && dia < 9) {
+                fe_subs = año + "-" + "0" + (mes + 1) + "-" + "0" + dia;
+            }
+
+            if (mes < 9 && dia > 9) {
+                fe_subs = año + "-" + "0" + (mes + 1) + "-" + dia;
+            }
+
+            if (mes >= 9 && dia < 9) {
+                fe_subs = año + "-" + (mes + 1) + "-" + "0" + dia;
+            }
+            if (mes >= 9 && dia > 9) {
+                fe_subs = año + "-" + (mes + 1) + "-" + dia;
+            }
                     //out.println(id_dir);
-                    response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp?num=" + asig + "&id_direc=" + id_dir);
+                    response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp?num=" + asig + "&id_direc=" + id_dir +"&fe_subs=" + fe_subs);
 
                 } else if (num == 0 & idrol.trim().equals("ROL-0006") & dgp.LIST_ID_DGP(ID_DGP).get(0).getEs_dgp().equals("1")) {
                     String ida1 = anno.List_Anno_Max_Cont(idtr);

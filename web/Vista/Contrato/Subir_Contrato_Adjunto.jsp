@@ -131,6 +131,8 @@
                                         <form action="../../contrato_adjunto" class="dropzone" id="mydropzone"  enctype="multipart/form-data">
 
                                             <input type="text" class="idc" name="idc" value="<%=request.getParameter("idc")%>">
+
+                                            <button type="submit" >Registrar</button>
                                         </form>
 
                                     </div>

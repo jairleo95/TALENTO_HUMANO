@@ -368,7 +368,7 @@
                             <a href="Aspecto_Academico.jsp" target="myframe2"><i class="fa fa-graduation-cap fa-gear"></i> Aspecto Académico</a>
                         </li>
                         <li >
-                            <a href="Aspecto_Social.jsp" target="myframe2"><i class="fa fa-home fa-gear"></i> Aspecto Social </a>
+                            <a href="../../trabajador?idtr=<%=idtr%>&opc=Listar_Asp_Social" target="myframe2"><i class="fa fa-home fa-gear"></i> Aspecto Social </a>
                         </li>
                         <li >
                             <a href="../../familiar?idtr=<%=idtr%>&opc=Detalle_Familiar" target="myframe2"><i class="fa fa-group fa-gear"></i> Familiares </a>

@@ -187,7 +187,7 @@
 
                 <%if (idrol.trim().equals("ROL-0006") || idrol.trim().equals("ROL-0002")) {
                 %> 
-                <a class="btn btn-labeled btn-primary" href="../../contrato?opc=Subir_Contrato&idc=<%=n.getId_contrato()%>" > <span class="btn-label"><i class="fa fa-cloud-upload"></i></span>Subir Contrato Firmado</a>
+                <a class="btn btn-labeled btn-primary" href="../../contrato?opc=Subir_Contrato2&idc=<%=n.getId_contrato()%>" > <span class="btn-label"><i class="fa fa-cloud-upload"></i></span>Subir Contrato Firmado</a>
                         <%}%>
                         <% for (int p = 0; p < List_contra_x_idcto.size(); p++) {%>
 

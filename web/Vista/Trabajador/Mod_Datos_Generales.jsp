@@ -387,7 +387,7 @@
                                                                         <label >Apellido Paterno:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="APELLIDO_P" value="<%=t.getAp_paterno()%>" required="" id="fname"   class="form-control input-group-sm"  onblur="this.value = this.value.toUpperCase()" maxlength="50" >
+                                                                            <input type="text" name="APELLIDO_P" value="<%=t.getAp_paterno().trim()%>" required="" id="fname"   class="form-control input-group-sm"  onblur="this.value = this.value.toUpperCase()" maxlength="50" >
 
                                                                         </div>
                                                                     </div>
@@ -398,7 +398,7 @@
                                                                         <label >Apellido Materno:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="APELLIDO_M" value="<%=t.getAp_materno()%>" required=""  id="lname"  class="form-control input-group-sm" onblur="this.value = this.value.toUpperCase()" maxlength="50" >
+                                                                            <input type="text" name="APELLIDO_M" value="<%=t.getAp_materno().trim()%>" required=""  id="lname"  class="form-control input-group-sm" onblur="this.value = this.value.toUpperCase()" maxlength="50" >
 
                                                                         </div>
                                                                     </div>
@@ -408,7 +408,7 @@
                                                                         <label>Nombre(s):</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="NOMBRES" value="<%=t.getNo_trabajador()%>" required=""  id="lname"  class="form-control input-group-sm" onblur="this.value = this.value.toUpperCase()" maxlength="50" >
+                                                                            <input type="text" name="NOMBRES" value="<%=t.getNo_trabajador().trim()%>" required=""  id="lname"  class="form-control input-group-sm" onblur="this.value = this.value.toUpperCase()" maxlength="50" >
 
                                                                         </div>
                                                                     </div>
@@ -457,9 +457,9 @@
                                                                                         nac = (Nacionalidad) List_Nacionalidad.get(s);
                                                                                         if (nac.getNo_nacionalidad().equals(t.getNo_nacionalidad())) {
                                                                                 %>
-                                                                                <option value="<%=nac.getId_nacionalidad()%>" selected="" ><%=nac.getNo_nacionalidad()%></option>
+                                                                                <option value="<%=nac.getId_nacionalidad().trim()%>" selected="" ><%=nac.getNo_nacionalidad().trim()%></option>
                                                                                 <%} else {%>
-                                                                                <option value="<%=nac.getId_nacionalidad()%>" ><%=nac.getNo_nacionalidad()%></option>
+                                                                                <option value="<%=nac.getId_nacionalidad().trim()%>" ><%=nac.getNo_nacionalidad().trim()%></option>
                                                                                 <%}
                                                                                     }%>
                                                                             </select>
@@ -483,9 +483,9 @@
                                                                                         dep = (Ub_Departamento) List_Departamento.get(d);
                                                                                         if (dep.getNo_departamento().equals(t.getNo_departamento())) {
                                                                                 %>
-                                                                                <option value="<%=dep.getId_departamento()%>" selected=""><%=dep.getNo_departamento()%></option>
+                                                                                <option value="<%=dep.getId_departamento().trim()%>" selected=""><%=dep.getNo_departamento().trim()%></option>
                                                                                 <%} else {%>
-                                                                                <option value="<%=dep.getId_departamento()%>" ><%=dep.getNo_departamento()%></option>
+                                                                                <option value="<%=dep.getId_departamento().trim()%>" ><%=dep.getNo_departamento().trim()%></option>
                                                                                 <%}
                                                                                     }%>
 
@@ -504,9 +504,9 @@
                                                                                         Ub_Provincia pro = new Ub_Provincia();
                                                                                         pro = (Ub_Provincia) List_Provincia.get(j);
                                                                                         if (pro.getNo_provincia().trim().equals(t.getNo_provincia())) {%>
-                                                                                <option value="<%=pro.getId_provincia()%>" selected=""><%=pro.getNo_provincia()%></option>
+                                                                                <option value="<%=pro.getId_provincia().trim()%>" selected=""><%=pro.getNo_provincia().trim()%></option>
                                                                                 <%} else {%>
-                                                                                <option value="<%=pro.getId_provincia()%>" ><%=pro.getNo_provincia()%></option>
+                                                                                <option value="<%=pro.getId_provincia().trim()%>" ><%=pro.getNo_provincia().trim()%></option>
                                                                                 <%}
                                                                                     }%>
                                                                             </select>
@@ -526,9 +526,9 @@
                                                                                         dis = (Ub_Distrito) List_Distrito.get(q);
                                                                                         if (dis.getNo_distrito().trim().equals(t.getNo_distrito())) {
                                                                                 %>
-                                                                                <option value="<%=dis.getId_distrito()%>" selected=""><%=dis.getNo_distrito()%></option>
+                                                                                <option value="<%=dis.getId_distrito().trim()%>" selected=""><%=dis.getNo_distrito().trim()%></option>
                                                                                 <%} else {%>      
-                                                                                <option value="<%=dis.getId_distrito()%>" ><%=dis.getNo_distrito()%></option>
+                                                                                <option value="<%=dis.getId_distrito().trim()%>" ><%=dis.getNo_distrito().trim()%></option>
                                                                                 <%}
                                                                                     }%>
                                                                             </select>
@@ -553,9 +553,9 @@
                                                                                         tdoc = (Tipo_Documento) Listar_tipo_doc.get(h);
                                                                                         if (t.getTi_doc().trim().equals(tdoc.getId_tipo_doc_ident().trim())) {
                                                                                 %>
-                                                                                <option value="<%=tdoc.getId_tipo_doc_ident().trim()%>" selected="" ><%=tdoc.getDe_tdoc_abreviada()%></option>
+                                                                                <option value="<%=tdoc.getId_tipo_doc_ident().trim()%>" selected="" ><%=tdoc.getDe_tdoc_abreviada().trim()%></option>
                                                                                 <%} else {%>
-                                                                                <option value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
+                                                                                <option value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada().trim()%></option>
                                                                                 <%}
                                                                                     }%>
                                                                             </select>
@@ -568,7 +568,7 @@
                                                                         <label>Nro de Documento:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-list-alt fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="NRO_DOC" value="<%=t.getNu_doc()%>" id="doc"  required="" maxlength="10" class="form-control input-group-sm doc" >
+                                                                            <input type="text" name="NRO_DOC" value="<%=t.getNu_doc().trim()%>" id="doc"  required="" maxlength="10" class="form-control input-group-sm doc" >
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -707,7 +707,7 @@
                                                                         <label>Telefono:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-phone fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="TELEFONO"  value="<%=t.getTe_trabajador()%>"  data-mask="(99) 999-9999" data-mask-placeholder= "X"   maxlength="50"  class="form-control input-group-sm telefono" >
+                                                                            <input type="text" name="TELEFONO"  value="<%=t.getTe_trabajador().trim()%>"  data-mask="(99) 999-9999" data-mask-placeholder= "X"   maxlength="50"  class="form-control input-group-sm telefono" >
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -716,7 +716,7 @@
                                                                         <label>Celular:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-mobile fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="CELULAR" value="<%=t.getCl_tra()%>"  data-mask="999-999-999" data-mask-placeholder= "X" formnovalidate maxlength="38" class="form-control input-group-sm" >
+                                                                            <input type="text" name="CELULAR" value="<%=t.getCl_tra().trim()%>"  data-mask="999-999-999" data-mask-placeholder= "X" formnovalidate maxlength="38" class="form-control input-group-sm" >
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -727,7 +727,7 @@
                                                                         <label>Correo Personal:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-envelope fa-lg fa-fw"></i></span>
-                                                                            <input type="email" name="CORREO_PERSONAL"  value="<%=t.getDi_correo_personal()%>" required=""  maxlength="100" class="form-control input-group-sm" >
+                                                                            <input type="email" name="CORREO_PERSONAL"  value="<%=t.getDi_correo_personal().trim()%>" required=""  maxlength="100" class="form-control input-group-sm" >
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -737,7 +737,7 @@
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-envelope fa-lg fa-fw"></i></span>
                                                                                 <%if (t.getDi_correo_inst() != null) {%>
-                                                                            <input type="email" name="CORREO_INST" value="<%=t.getDi_correo_inst()%>" required=""  maxlength="100" class="form-control input-group-sm" >
+                                                                            <input type="email" name="CORREO_INST" value="<%=t.getDi_correo_inst().trim().trim()%>" required=""  maxlength="100" class="form-control input-group-sm" >
                                                                             <%} else {%>
                                                                             <input type="email" name="CORREO_INST" value="" required=""  maxlength="100" class="form-control input-group-sm" >
                                                                             <%}%>
@@ -911,11 +911,11 @@
                                                             <% CConversion c = new CConversion();%>
                                                             <!--<input type="text" value="<%=t.getFe_nac()%>"> -->               
                                                             <%String idtr = request.getParameter("idtr");%>
-                                                            <input type="hidden" name="idtr" value="<%=idtr%>"/>
+                                                            <input type="hidden" name="idtr" value="<%=idtr.trim()%>"/>
                                                             <input type="hidden" name="opc" value="Modificar_Dat_Gen">
 
                                                             <center>
-                                                               <!-- <button type="submit" value="" name="opc"> MODIFICAR</button>-->
+                                                                <!-- <button type="submit" value="" name="opc"> MODIFICAR</button>-->
                                                                 <button type="submit" class="btn btn-labeled btn-info" name="opc">
                                                                     <span class="btn-label">
                                                                         <i class="glyphicon glyphicon-pencil"></i>
@@ -1044,6 +1044,23 @@
     <script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script>$(document).ready(function() {
+                                                                                    $('#doc').click(function() {
+                                                                                        $('#doc').val("");
+                                                                                    });
+                                                                                    if ($(".select-doc").val() == 1) {
+                                                                                        $("#doc").numeric(false, function() {
+                                                                                        });
+                                                                                        $(".doc").attr("maxlength", "8");
+                                                                                        $(".doc").attr("minlength", "8");
+
+                                                                                    } else {
+                                                                                        $("#doc").removeNumeric();
+                                                                                        $(".doc").attr("maxlength", "10");
+                                                                                        $(".doc").removeAttr("minlength");
+                                                                                        //    $(".doc").val("");
+                                                                                    }
+                                                                                    $(".doc").focus();
+
                                                                                     var p = 1;
                                                                                     var texto_h = "";
                                                                                     $(".btn-reg-hijo").click(function() {
@@ -1141,6 +1158,25 @@
                                                                                         texto_h = "";
 
                                                                                     });
+                                                                                    $(".select-doc").change(
+                                                                                            function() {
+
+                                                                                                $(".doc").val("");
+                                                                                                if ($(".select-doc").val() == 1) {
+                                                                                                    $("#doc").numeric(false, function() {
+                                                                                                    });
+                                                                                                    $(".doc").attr("maxlength", "8");
+                                                                                                    $(".doc").attr("minlength", "8");
+
+                                                                                                } else {
+                                                                                                    $("#doc").removeNumeric();
+                                                                                                    $(".doc").attr("maxlength", "10");
+                                                                                                    $(".doc").removeAttr("minlength");
+                                                                                                    //    $(".doc").val("");
+                                                                                                }
+                                                                                                $(".doc").focus();
+                                                                                            }
+                                                                                    );
                                                                                 });</script>
     <script>
         $(document).ready(

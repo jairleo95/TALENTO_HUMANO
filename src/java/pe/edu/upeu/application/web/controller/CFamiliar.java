@@ -98,6 +98,7 @@ public class CFamiliar extends HttpServlet {
             response.sendRedirect("Vista/Trabajador/Familiar/Detalle_Familiar.jsp?idtr=" + idtr);
         }
         if (opc.equals("REGISTRAR HIJO")) {
+            String idtr = request.getParameter("idtr");
             String ID_DATOS_HIJOS_TRABAJADOR = null;
             String ID_TRABAJADOR = request.getParameter("idtr");
             String AP_PATERNO = request.getParameter("APELLIDO_P");
@@ -137,8 +138,8 @@ public class CFamiliar extends HttpServlet {
             out.print(ES_INSCRIPCION_VIG_ESSALUD);
             out.print("-");
             out.print(ES_ESTUDIO_NIV_SUPERIOR);*/
-            
-            response.sendRedirect("Vista/Trabajador/Familiar/Reg_Datos_Hijo.jsp");
+
+            response.sendRedirect("Vista/Trabajador/Familiar/Reg_Datos_Hijo.jsp?idtr="+idtr);
         }
         if (opc.equals("eliminar")) {
             String id_hijo = request.getParameter("idhijo");

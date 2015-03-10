@@ -166,16 +166,19 @@
                             }
                             else {
                                 $("#es_inst_p").hide();
+                                $("#es_inst_p").find('select option:eq(0)').prop('selected', true);
                                 $("#regimen").hide();
+                                $("#regimen").find('select option:eq(0)').prop('selected', true);
                                 $("#egreso").hide();
+                                $("#egreso").find('select option:eq(0)').prop('selected', true);
                                 $("#ti").hide();
+                                $("#ti").find('select option:eq(0)').prop('selected', true);
                                 $("#institucion").hide();
+                                $("#institucion").find('select option:eq(0)').prop('selected', true);
                                 $("#carr").hide();
-
+                                $("#carr").find('select option:eq(0)').prop('selected', true);
                             }
-
                         });
-
                         $("#es_inst_p").change(function() {
                             if ($("#inst_peru").val() == "1") {
                                 $("#regimen").show();
@@ -983,6 +986,13 @@
                                                                     $("#generar").hide();
                                                                     $("#texto").hide();
                                                                     $("#no_cuen_otros").hide();
+                                                                    $("#banco").val("");
+                                                                    $("#nu_cuen").val("");
+                                                                    $("#nu_cuen_ban").val("");
+                                                                    $("#nu_cuen_ban_otros").val("");
+                                                                     $("#es_cuenta").val(0);
+                                                                     //alert($("#es_cuenta").val());
+
                                                                 }
                                                                 if (banco == '0') {
                                                                     $("#no_cuen").hide();
@@ -999,7 +1009,7 @@
                                                                     $("#nu_cuen_otros").attr("required", "required");
                                                                     $("#nu_cuen_otros").removeAttr('maxlength');
                                                                     $("#nu_cuen_otros").removeAttr('minlength');
-
+                                                                    $("#es_cuenta").val(1);
                                                                 }
                                                                 if (banco == '1') {
                                                                     $("#generar").hide();
@@ -1015,6 +1025,7 @@
                                                                     $("#no_cuen_otros").hide();
                                                                     $("#nu_cuen_otros").val("");
                                                                     $("#texto").hide();
+                                                                     $("#es_cuenta").val(1);
                                                                 }
                                                                 if (banco == '2') {
 
@@ -1036,6 +1047,7 @@
                                                                     $("#nu_cuen_otros").val("");
                                                                     $("#texto").hide();
                                                                     $("#nu_cuen").valid();
+                                                                     $("#es_cuenta").val(1);
 
 
                                                                 }
@@ -1055,6 +1067,7 @@
                                                                     $("#nu_cuen_otros").removeAttr('readonly');
                                                                     $("#nu_cuen_otros").removeAttr('maxlength');
                                                                     $("#nu_cuen_otros").removeAttr('minlength');
+                                                                     $("#es_cuenta").val(1);
                                                                 }
 
 
@@ -1125,7 +1138,7 @@
 
                                                                                     cuenta_bancaria($(this).val());
                                                                                     $("#nu_cuen").focus();
-                                                                                    $("#es_cuenta").val(1);
+
                                                                                     //  alert($("#es_cuenta").val());
                                                                                 });
 

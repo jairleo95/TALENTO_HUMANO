@@ -36,8 +36,8 @@
                             Padre_Madre_Conyugue pmc = new Padre_Madre_Conyugue();
                             pmc = (Padre_Madre_Conyugue) List_PMC.get(i);
                     %>
-                    <tr><td>Apellidos y Nombres del Padre:</td><td><input type="text" name="APELLIDOS_NOMBRES_PADRE"    class="text-box"  id="as" required="" maxlength="50" value="<%=pmc.getAp_nombres_padre()%>"></td></tr>         
-                    <tr><td>Apellidos  y Nombres de la Madre:</td><td><input type="text" name="APELLIDOS_NOMBRES_MADRE"  class="text-box" required="" maxlength="50" value="<%=pmc.getAp_nombres_madre()%>"></td></tr>        
+                    <tr><td>Apellidos y Nombres del Padre:</td><td><input type="text" name="APELLIDOS_NOMBRES_PADRE"    class="text-box"  id="as" required="" maxlength="50" value="<%=pmc.getAp_nombres_padre()%>" onblur="this.value = this.value.toUpperCase()"></td></tr>         
+                    <tr><td>Apellidos  y Nombres de la Madre:</td><td><input type="text" name="APELLIDOS_NOMBRES_MADRE"  class="text-box" required="" maxlength="50" value="<%=pmc.getAp_nombres_madre()%>" onblur="this.value = this.value.toUpperCase()"></td></tr>        
                
                 </table>  
                 
@@ -57,7 +57,7 @@
                             </select>
                         </td></tr>  
                     
-                    <tr><td>Apellidos y Nombres :</td><td><input type="text" name="APELLIDO_NOMBRES_CONYUGUE" class="text-box" required="" maxlength="50" value="<%=pmc.getAp_nombres_conyugue()%>"></td></tr>    
+                    <tr><td>Apellidos y Nombres :</td><td><input type="text" name="APELLIDO_NOMBRES_CONYUGUE" class="text-box" required="" maxlength="50" value="<%=pmc.getAp_nombres_conyugue()%>" onblur="this.value = this.value.toUpperCase()"></td></tr>    
                     <tr><td>Fecha de Nacimiento:</td><td><input type="date" name="FECHA_NAC_CONYUGUE"  class="text-box" required="" value="<%=pmc.getFe_nac_conyugue()%>"></td></tr>            
                     <tr><td>Tipo Documento:</td><td>
                             <select name="TIPO_DOC_ID"  class="text-box" required="">
@@ -81,9 +81,10 @@
                                 <%}%>
                             </select>
                         </td></tr>
-                    <%}%>
+                    
                 </table>
             </div>
+                            <%}%>
             <div>
                 <table class="table">
                     <input type="hidden" name="idtr"  value="<%=request.getParameter("idtr")%>" class="text-box" >  

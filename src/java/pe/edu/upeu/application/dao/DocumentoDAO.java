@@ -204,6 +204,43 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     }
 
     @Override
+    public String List_file_url3(String id) {
+        String texto_html = "";
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "SELECT NO_ARCHIVO,NO_ARCHIVO_ORIGINAL FROM RHTV_CONTRATO_ADJUNTO where  ID_CONTRATO='" + id.trim() + "'";
+            ResultSet rs = this.conn.query(sql);
+
+            while (rs.next()) {
+                String tipo = rs.getString("NO_ARCHIVO").substring(rs.getString("NO_ARCHIVO").length() - 3, rs.getString("NO_ARCHIVO").length());
+                if (tipo.trim().equals("PDF") || tipo.equals("OCX") || tipo.equals("DOC")) {
+                    if (tipo.equals("OCX") || tipo.equals("DOC")) {
+                        texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ARCHIVO_ORIGINAL") + "' href='../Contratos_Adjuntos/" + rs.getString("NO_ARCHIVO") + "'><img src='../Contratos_Adjuntos/' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ARCHIVO_ORIGINAL") + "</a>";
+                    } else {
+                        texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ARCHIVO_ORIGINAL") + "' href='../Contratos_Adjuntos/" + rs.getString("NO_ARCHIVO") + "'><img src='../Contratos_Adjuntos/' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ARCHIVO_ORIGINAL") + "</a>";
+                    }
+                } else {
+
+                    texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ARCHIVO_ORIGINAL") + "' href='../Contratos_Adjuntos/" + rs.getString("NO_ARCHIVO") + "'><img src='../Contratos_Adjuntos/" + rs.getString("NO_ARCHIVO") + "' style='width:100px;height:100px;' class='borde'></a>";
+                }
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return texto_html;
+    }
+
+    @Override
     public List<Documentos> List_Documentos() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "Select * from RHTR_DOCUMENTOS";

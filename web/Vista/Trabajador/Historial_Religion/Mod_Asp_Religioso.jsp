@@ -136,8 +136,6 @@
                                                         trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
                                                 %>  
 
-
-
                                                 <div id="bootstrap-wizard-1" class="col-sm-12">
 
                                                     <div class="tab-content">
@@ -155,22 +153,22 @@
                                                                                 <%if (trb.getLi_religion() != null) {
                                                                                         if (trb.getLi_religion().equals("1")) {%>
                                                                                 <option value="1" selected="">Adventida</option> 
-                                                                                <option value="2" >Catlico</option> 
+                                                                                <option value="2" >Catolico</option> 
                                                                                 <option value="3" >Ótros</option> 
                                                                                 <%}
                                                                                     if (trb.getLi_religion().equals("2")) {%>
                                                                                 <option value="1" >Adventida</option> 
-                                                                                <option value="2" selected="">Catlico</option> 
+                                                                                <option value="2" selected="">Catolico</option> 
                                                                                 <option value="3" >Ótros</option> 
                                                                                 <%}
                                                                                     if (trb.getLi_religion().equals("3")) {%>
                                                                                 <option value="1" >Adventida</option> 
-                                                                                <option value="2" >Catlico</option> 
+                                                                                <option value="2" >Catolico</option> 
                                                                                 <option value="3" selected="">Ótros</option> 
                                                                                 <%}
                                                                                 } else {%>
                                                                                 <option value="1" >Adventida</option> 
-                                                                                <option value="2" >Catlico</option> 
+                                                                                <option value="2" >Catolico</option> 
                                                                                 <option value="3" >Ótros</option> 
                                                                                 <%}%>
                                                                             </select>
@@ -201,7 +199,7 @@
                                                                                     out.print(trb.getDe_cargo());
                                                                                 } else {
                                                                                     out.print("");
-                                                                                }%>" type="text" name="CARGO" >
+                                                                                }%>" type="text" name="CARGO"  id="ca_igle">
 
                                                                         </div>
                                                                     </div>
@@ -213,7 +211,7 @@
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select name="AUTORIDAD"   required=""   class="form-control input-group-sm">
-                                                                                <option value="" disabled="" selected="">[SELECCIONE]</option> 
+                                                                                <option value=""  selected="">[SELECCIONE]</option> 
                                                                                 <% if (trb.getLi_autoridad() != null) {
                                                                                         if (trb.getLi_autoridad().trim().equals("1")) {%>
                                                                                 <option value="1" selected="">Pastor</option> 
@@ -250,7 +248,7 @@
                                                                                     out.print(trb.getNo_ap_autoridad());
                                                                                 } else {
                                                                                     out.print("");
-                                                                                }%>" type="text" name="AUT_APELLIDOSNOMBRES"  required=""  >
+                                                                                }%>" type="text" name="AUT_APELLIDOSNOMBRES"  required="" id="no_ape" >
 
                                                                         </div>
                                                                     </div>
@@ -265,7 +263,7 @@
                                                                                     out.print(trb.getCl_autoridad());
                                                                                 } else {
                                                                                     out.print("");
-                                                                                }%>" type="text" name="AUT_CELULAR"    >
+                                                                                }%>" type="text" name="AUT_CELULAR" id="te_ce" >
 
                                                                         </div>
                                                                     </div>
@@ -567,17 +565,35 @@
                     function() {
                         $("#reli").change(
                                 function() {
-                                    if ($("#reli").val() == "1") {
-                                        $("#igle").attr("required", "required")
-                                    } else {
-
-                                        $("#igle").removeAttr("required");
-                                    }
-
+                                    iglesia($(this).val());
                                 }
                         );
-
                     });
+            function iglesia(igle) {
+                if (igle == '1') {
+                    $("#igle").attr("required", "required")
+                    $("#igle").val("");
+                    $("#ca_igle").val("");
+                    $("#no_ape").val("");
+                    $("#no_ape").attr("required","re")
+                    $("#te_ce").val("");
+                }
+                if (banco == '2') {
+                    $("#igle").removeAttr("required", "required")
+                    $("#igle").val("");
+                    $("#ca_igle").val("");
+                    $("#no_ape").val("");
+                    $("#no_ape").removeAttr("required","re")
+                    $("#te_ce").val("");
+                }
+                if (banco == '3') {
+                    $("#igle").removeAttr("required", "required")
+                    $("#no_ape").removeAttr()("required","re")
+                    
+                }
+            }
+
+
 
         </script>
     </body>
