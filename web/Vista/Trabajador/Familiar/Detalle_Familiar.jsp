@@ -2,8 +2,7 @@
 <%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="pe.edu.upeu.application.model.Tipo_Documento"%>
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
-<%
-    HttpSession sesion_ = request.getSession();
+<%    HttpSession sesion_ = request.getSession();
     String id_user_ = (String) sesion_.getAttribute("IDUSER");
     if (id_user_ != null) {
 %>
@@ -24,6 +23,9 @@
         <!-- <script type="text/javascript" src="../../../js-steps/jquery-1.11.1.js" "></script>-->
         <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
         <title>Familiares</title>
+        <script>
+            
+        </script>
 
     </head>
     <body>
@@ -35,9 +37,9 @@
 
         <%
             CConversion c = new CConversion();
-            
-            V_Ficha_Trab_Num_C tr = new V_Ficha_Trab_Num_C();
-            tr = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(0);
+            for (int q = 0; q < ListaridTrabajador.size(); q++) {
+                V_Ficha_Trab_Num_C tr = new V_Ficha_Trab_Num_C();
+                tr = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(q);
         %>
         <form align="center" action="../../../familiar">
             <div>
@@ -56,15 +58,15 @@
                             out.print("No registrado");
                         }
                             %></td></tr>
-                    <%if( tr.getAp_nombres_madre() == null || tr.getAp_nombres_padre() == null){%>
-                    <%  if (rol.trim().equals("ROL-0002") || rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001")) {%>
-                <tr><td colspan="2"> <a class="btn btn-success" href=Reg_Padres.jsp?idtr=<%=request.getParameter("idtr")%>">Agregar Padres</a></td></tr>
-                <%}%>
-                <%}%>
+                            <%if (tr.getAp_nombres_madre() == null || tr.getAp_nombres_padre() == null) {%>
+                            <%  if (rol.trim().equals("ROL-0002") || rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001")) {%>
+                    <tr><td colspan="2"> <a class="btn btn-success" href=Reg_Padres.jsp?idtr=<%=request.getParameter("idtr")%>">Agregar Padres</a></td></tr>
+                    <%}%>
+                    <%}%>
                 </table>
             </div>
 
-                
+
 
             <table  class="table table-striped table-bordered table-hover"  >
                 <tr><td colspan="2"><div class="title"><h4>DATOS DE CONYUGUE</h4></div></td></tr>
@@ -99,17 +101,17 @@
                     }
                         %></td></tr>
                 <tr ><td class="text-info">Tipo Documento:</td><td class="text-info-left">
-                        <%if(tr.getId_tipo_doc_c() != null){
-                            for (int h = 0; h < Lista_Tipo_Doc.size(); h++) {
-                                Tipo_Documento td = new Tipo_Documento();
-                                td= (Tipo_Documento) Lista_Tipo_Doc.get(h);
-                                if(tr.getId_tipo_doc_c().trim().equals(td.getId_tipo_doc_ident().trim())){
-                                    out.print(td.getDe_tdoc_abreviada());
+                        <%if (tr.getId_tipo_doc_c() != null) {
+                                for (int h = 0; h < Lista_Tipo_Doc.size(); h++) {
+                                    Tipo_Documento td = new Tipo_Documento();
+                                    td = (Tipo_Documento) Lista_Tipo_Doc.get(h);
+                                    if (tr.getId_tipo_doc_c().trim().equals(td.getId_tipo_doc_ident().trim())) {
+                                        out.print(td.getDe_tdoc_abreviada());
+                                    }
                                 }
+                            } else {
+                                out.print("no registrado");
                             }
-                        }else{
-                        out.print("no registrado");
-                        }
                         %>
                     </td></tr>
                 <tr><td class="text-info">Nro Documento:</td><td class="text-info-left"><%if (tr.getNu_doc_c() != null) {
@@ -135,8 +137,8 @@
                             }
                         %>
                     </td></tr>
-               
-                        <%} else {%>
+
+                <%} else {%>
 
 
 
@@ -145,12 +147,12 @@
                 <tr><td colspan="2"> <a class="btn btn-success" href=Reg_Conyugue.jsp?idtr=<%=request.getParameter("idtr")%>">Agregar Cónyugue</a></td></tr>
                 <%}%>
                 <%}%>
-                <%if(tr.getAp_nombres_c() != null && tr.getAp_nombres_madre() != null && tr.getAp_nombres_padre()!= null ){%>
-                 <input type="hidden" name="idtra" value="<%=tr.getId_trabajador().trim()%>">
+                <%if (tr.getAp_nombres_c() != null && tr.getAp_nombres_madre() != null && tr.getAp_nombres_padre() != null) {%>
+                <input type="hidden" name="idtra" value="<%=tr.getId_trabajador().trim()%>">
                 <input type="hidden" name="opc" value="Editar_Familiar">
                 <tr><td colspan="2"><input class="btn btn-success" type="submit" value="EDITAR"></td></tr>
-                <%}%>
-                
+                        <%}%>
+
             </table>
         </form>
 
@@ -159,8 +161,8 @@
     <center>
 
         <%        if (LISTA_HIJOS.size() != 0) {
-                if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001") ) {%>
-                <%@include file="List_Hijo.jsp" %>
+                if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001")) {%>
+        <%@include file="List_Hijo.jsp" %>
         <a href="Reg_Datos_Hijo.jsp?idtr=<%=request.getParameter("idtr")%>" class="btn btn-primary">Agregar un hijo</a>
         <%}%>
         <%} else {%>
@@ -171,7 +173,8 @@
         <a href="Reg_Datos_Hijo.jsp?idtr=<%=request.getParameter("idtr")%>" class="btn btn-primary">Registrar Hijos</a>
         <%}%>
     </center>
-    <%}%>
+    <%}
+        }%>
 
 </body>
 </html>

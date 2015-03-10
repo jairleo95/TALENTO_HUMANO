@@ -264,7 +264,7 @@
                     }%></td></tr>
                 <!-- <td colspan="2"><input class="btn btn-success"  type="submit" value="Editar"></td>-->
                 <%}
-                ListaridTrabajador.clear(); %>
+                %>
                 <tr></tr>
             </table>
         </form>

@@ -178,9 +178,7 @@
                                 $("#carr").hide();
                                 $("#carr").find('select option:eq(0)').prop('selected', true);
                             }
-
                         });
-
                         $("#es_inst_p").change(function() {
                             if ($("#inst_peru").val() == "1") {
                                 $("#regimen").show();
@@ -993,6 +991,7 @@
                                                                     $("#nu_cuen_ban").val("");
                                                                     $("#nu_cuen_ban_otros").val("");
                                                                      $("#es_cuenta").val(0);
+                                                                     //alert($("#es_cuenta").val());
 
                                                                 }
                                                                 if (banco == '0') {
