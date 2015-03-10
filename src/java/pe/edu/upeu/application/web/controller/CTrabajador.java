@@ -468,9 +468,29 @@ public class CTrabajador extends HttpServlet {
             tr.MOD_CUENTA_SUELDO(NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEM_NU_CUENTA, NO_BANCO_OTROS, idtr, ES_CUENTA_SUELDO);
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             getServletContext().setAttribute("List_Cuenta_Sueldo", tr.List_Cuenta_Sueldo(idtr));
+            
             //out.print(ES_CUENTA_SUELDO);
             response.sendRedirect("Vista/Trabajador/Aspecto_Academico.jsp?idtr=" + idtr);
         }
+        if (opc.equals("Listar_Asp_Social")) {
+            String idtr = request.getParameter("idtr");
+            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            getServletContext().setAttribute("Listar_via", dir.Listar_via());
+            getServletContext().setAttribute("Listar_zona", dir.Listar_zona());
+            getServletContext().setAttribute("ListarDir_Dom", li.List_Dom_D3_Id());
+            getServletContext().setAttribute("List_Provincia", ub.List_Provincia());
+            getServletContext().setAttribute("List_Distrito", ub.List_DistritoTra());
+            getServletContext().setAttribute("List_Ubigeo", ub.List_Distrito());
+            getServletContext().setAttribute("List_Departamento", ub.List_Departamento());
+            getServletContext().setAttribute("List_Dom_D1_Id", l.List_Dom_D1_Id());
+            getServletContext().setAttribute("List_Dom_D5_Id", l.List_Dom_D5_Id());
+            getServletContext().setAttribute("List_Dom_D3_Id", l.List_Dom_D3_Id());
+
+           
+            response.sendRedirect("Vista/Trabajador/Aspecto_Social.jsp?idtr=" + idtr);
+        }
+        
+        
         if (opc.equals("Editar_Asp_Soc")) {
             String idtr = request.getParameter("idtr");
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
@@ -485,9 +505,7 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("List_Dom_D5_Id", l.List_Dom_D5_Id());
             getServletContext().setAttribute("List_Dom_D3_Id", l.List_Dom_D3_Id());
 
-            //out.print(dir.Listar_via().size()+"-");   
-            //out.print(dir.Listar_Direccion().size()+"-");   
-            //out.print(dir.Listar_zona().size()+"-");   
+             
             response.sendRedirect("Vista/Trabajador/Mod_Aspecto_Social.jsp?idtr=" + idtr);
         }
         if (opc.equals("Modificar_Asp_Soc")) {
