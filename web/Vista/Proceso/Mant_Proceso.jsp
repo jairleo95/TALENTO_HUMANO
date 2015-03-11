@@ -94,7 +94,7 @@
                     <!-- row -->
                     <div class="row">
                         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false">
+                            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-1" data-widget-editbutton="false">
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
                                     <h2>Mantenimiento de Pasos</h2>
@@ -145,7 +145,7 @@
                     </div>
                     <div class="row">
                         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-5">
-                            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-2" data-widget-editbutton="false">
+                            <div class="jarviswidget jarviswidget-color-greenDark" id="wid-id-2" data-widget-editbutton="false">
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
                                     <h2>Lista de pasos Habilitados :<strong><label class="lb-list_pasos"></label></strong> </h2>
@@ -154,22 +154,14 @@
                                     <div class="jarviswidget-editbox">
                                     </div>
                                     <div class="widget-body">
-                                        <div class="table-responsive">
+                                        <div class="row">
                                             <button type="button" class="btn btn-default Generar" data-action="collapse-all">
                                                 Generar Pasos
                                             </button>
-                                            <br><!--<style>
-                                                .div{
-                                                    border-style: solid;
-                                                    border-color: #ff0000 #0000ff;
-                                                }
-                                                label{
-                                                    margin-left: 10px;
-                                                }
-                                            </style>-->
-
-                                            <div class="dd" id="nestable" >
-                                                <ol class="dd-list" style="width: 100%;" >
+                                        </div> 
+                                        <div>
+                                            <div class="dd" id="nestable"  >
+                                                <ol class="dd-list" >
                                                 </ol>
                                             </div>
                                         </div>
@@ -178,7 +170,7 @@
                             </div>
                         </article>
                         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-7">
-                            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-3" data-widget-editbutton="false">
+                            <div class="jarviswidget jarviswidget-color-red" id="wid-id-3" data-widget-editbutton="false">
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
                                     <h2>Lista de puestos :<strong><label class="lb-list_puesto"></label></strong> </h2>
@@ -266,7 +258,7 @@
                     </div>
                     <div class="row">
                         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-4" data-widget-editbutton="false">
+                            <div class="jarviswidget jarviswidget-color-yellow" id="wid-id-4" data-widget-editbutton="false">
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
                                     <h2>Lista de pasos Deshabilitados :<strong><label class="lb-list_pasos"></label></strong> </h2>
@@ -686,7 +678,7 @@
                                 txt_append += '<div class="pull-right"><label ></label></div>';
                             } else {
 
-                                txt_append += '<div class="pull-right"><label style="font-size: 12px;">' + lista[i].det + '</label></div>';
+                                txt_append += '<div class="pull-right"><label style="font-size: 12px;">' + lista[i].det + '  |' + '</label></div>';
                             }
 
                             // '<div class="pull-right"><label >' + lista[i].co + '</label></div>' +
@@ -773,7 +765,6 @@
                 });
                 pageSetUp();
                 // PAGE RELATED SCRIPTS
-
                 var updateOutput = function (e) {
                     var list = e.length ? e : $(e.target), output = list.data('output');
                     if (window.JSON) {
