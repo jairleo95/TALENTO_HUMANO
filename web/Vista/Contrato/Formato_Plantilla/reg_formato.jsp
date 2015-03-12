@@ -51,14 +51,18 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                             v = (Via) List_Dom_D1_Id.get(b);
                             if (n.getLi_di_dom_a_d1().trim().equals(v.getId_via().trim())) {
                                 if (n.getDi_dom_a_d2() != null) {
-                                    Direccion += v.getDe_via() +" "+ n.getDi_dom_a_d2().trim();
+                                    Direccion += v.getDe_via() + " " + n.getDi_dom_a_d2().trim();
                                 } else {
                                     Direccion += v.getDe_via().trim() + " - ";
                                 }
                             }
                         }
                     } else {
-                        Direccion += "--" + n.getDi_dom_a_d2().trim();
+                        if (n.getDi_dom_a_d2() != null) {
+                            Direccion += "-" + n.getDi_dom_a_d2().trim();
+                        } else {
+                            Direccion += "-";
+                        }
                     }
                     if (n.getLi_di_dom_a_d3() != null) {
                         if (n.getLi_di_dom_a_d3().trim().equals("1")) {
@@ -102,7 +106,11 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                             }
                         }
                     } else {
-                        Direccion += " -- "+n.getDi_dom_a_d4() ;
+                        if (n.getDi_dom_a_d4() != null) {
+                            Direccion += " - " + n.getDi_dom_a_d4().trim();
+                        } else {
+                            Direccion += " - ";
+                        }
                     }
                     if (n.getDi_dom_a_d6() != null) {
                         Direccion += " " + n.getDi_dom_a_d6().trim();
