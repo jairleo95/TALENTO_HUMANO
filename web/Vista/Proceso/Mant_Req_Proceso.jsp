@@ -263,28 +263,25 @@
                                     <!-- end widget edit box -->
 
                                     <!-- widget content -->
-                                    <div class="widget-body">
-                                        <div class="table-responsive">
+                                    <div class="widget-body no-padding">
 
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Tipo de Planilla</th>
-                                                        <th>Requerimiento</th>
-                                                        <th>Proceso</th>
-                                                        <th>Dirección</th>
-                                                        <th>Departamento</th>
-                                                        <th>Area</th>
-                                                        <th>Estado</th>
-                                                        <th>Acciones</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="tbody-pro-paso">
+                                        <table  id="datatable_tabletools" class="table table-striped table-bordered table-hover" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Tipo de Planilla</th>
+                                                    <th>Requerimiento</th>
+                                                    <th data-class="expand">Proceso</th>
+                                                    <th data-hide="phone">Dirección</th>
+                                                    <th data-hide="phone">Departamento</th>
+                                                    <th data-hide="phone">Area</th>
+                                                    <th>Estado</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="tbody-pro-paso">
+                                            </tbody>
+                                        </table>
 
-                                                </tbody>
-                                            </table>
-
-                                        </div>
                                     </div>
                                     <!-- end widget content -->
 
@@ -321,7 +318,7 @@
         <!--================================================== -->
 
         <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-        <script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>
+        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
 
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
@@ -337,65 +334,30 @@
                 document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
             }
         </script>
-
-        <!-- IMPORTANT: APP CONFIG -->
         <script src="../../js/app.config.js"></script>
-
-        <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
         <script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
-
-        <!-- BOOTSTRAP JS -->
         <script src="../../js/bootstrap/bootstrap.min.js"></script>
-
-        <!-- CUSTOM NOTIFICATION -->
         <script src="../../js/notification/SmartNotification.min.js"></script>
-
-        <!-- JARVIS WIDGETS -->
         <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
-
-        <!-- EASY PIE CHARTS -->
         <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
-
-        <!-- SPARKLINES -->
         <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
-
-        <!-- JQUERY VALIDATE -->
         <script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
-
-        <!-- JQUERY MASKED INPUT -->
         <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
-
-        <!-- JQUERY SELECT2 INPUT -->
         <script src="../../js/plugin/select2/select2.min.js"></script>
-
-        <!-- JQUERY UI + Bootstrap Slider -->
         <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
-
-        <!-- browser msie issue fix -->
         <script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
-
-        <!-- FastClick: For mobile devices -->
         <script src="../../js/plugin/fastclick/fastclick.min.js"></script>
-
-        <!--[if IE 8]>
-
-        <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
-
-        <![endif]-->
-
-        <!-- Demo purpose only -->
         <script src="../../js/demo.min.js"></script>
-
-        <!-- MAIN APP JS FILE -->
         <script src="../../js/app.min.js"></script>
-
-        <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
-        <!-- Voice command : plugin -->
         <script src="../../js/speech/voicecommand.min.js"></script>
-
-        <!-- PAGE RELATED PLUGIN(S) -->
         <script src="../../js/plugin/jquery-nestable/jquery.nestable.min.js"></script>
         <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
+        <script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+        <script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>
+        <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
+        <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+        <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
+
         <script type="text/javascript">
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
@@ -428,7 +390,7 @@
 
             }
             $(document).ready(function () {
-                pageSetUp();
+
                 $(".btn-cancelar").click(function () {
                     $(".form-pro_req")[0].reset();
                     $(".tbody-pro-paso").empty();
@@ -446,10 +408,10 @@
                     list_select($(".area"), "../../Direccion_Puesto", "opc=Listar_area2&id=" + $(this).val(), "1", $(this).val());
                 });
                 $(".proceso, .req, .direccion, .departamento").change(function () {
-                    var tbody = $(".tbody-pro-paso");
-                    tbody.empty();
+                    var tbodys = $(".tbody-pro-paso");
+                    tbodys.empty();
                     var text_html = "";
-                    $.post("../../Proceso", "opc=Listar_Pro_Paso_Id&id_req=" + $(".req").val()+"&id_pro="+$(".proceso").val()+"&id_dir="+$(".direccion").val()+"&id_dep="+$(".departamento").val(), function (objJson) {
+                    $.post("../../Proceso", "opc=Listar_Pro_Paso_Id&id_req=" + $(".req").val() + "&id_pro=" + $(".proceso").val() + "&id_dir=" + $(".direccion").val() + "&id_dep=" + $(".departamento").val(), function (objJson) {
                         var lista = objJson.lista;
                         if (objJson.rpta == -1) {
                             alert(objJson.mensaje);
@@ -463,12 +425,19 @@
                             text_html += "<td>" + lista[f].dir + "</td>";
                             text_html += "<td>" + lista[f].dep + "</td>";
                             text_html += "<td>" + lista[f].area + "</td>";
-                            text_html += "<td>" + lista[f].estado + "</td>";
-                            text_html += "<td></td>";
+                            if(lista[f].estado=="1"){
+                                text_html += "<td>Habilitado</td>";
+                                text_html += "<td><button class='btn btn-warning' value="+f+">Desactivar</button></td>";
+                            }else if(lista[f].estado=="2"){
+                                text_html += "<td>Deshabilitado</td>";
+                                text_html += "<td><button class='btn btn-success' value="+f+" style='width: 98%;'>Activar</button></td>";
+                            }                            
+                            text_html += "<td><button class='btn btn-danger'><i class='fa fa-times'></i></button></td>";
                             text_html += "</tr>";
                         }
-                        tbody.append(text_html);
+                        tbodys.append(text_html);
                         text_html = "";
+                        tabla_t();
                     });
                 });
                 var $checkoutForm = $('#checkout-form').validate({
@@ -579,13 +548,10 @@
                         error.insertAfter(element.parent());
                     }
                 });
-
-
                 jQuery.validator.addMethod("val_fecha", function (value, element) {
                     var d = value.split("-");
                     return this.optional(element) || String(parseInt(d[0])).length == 4;
                 }, "¡Fecha ingresada invalida!");
-
                 var $registerForm = $("#smart-form-register").validate({
                     // Rules for form validation
                     rules: {
@@ -881,8 +847,11 @@
                         $('#startdate').datepicker('option', 'maxDate', selectedDate);
                     }
                 });
-            })
+                
 
+
+                /* END TABLETOOLS */
+            });
         </script>
 
 

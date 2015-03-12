@@ -236,7 +236,7 @@
                                             </fieldset>
                                         </form>
                                         <div class="custom-scroll table-responsive"style="height:320px; overflow-y: scroll;">
-                                            <table id="datatable_tabletools" class="table table-striped table-bordered table-hover" style="width: 98%;margin: auto; ">
+                                            <table class="table table-striped table-bordered table-hover" style="width: 98%;margin: auto; ">
                                                 <thead>
                                                     <tr>
                                                         <th data-class="expand">Puesto</th>
@@ -670,15 +670,15 @@
                             b.append("</tr>");
                         }
                         for (var i = 0; i < lista.length; i++) {
-                            txt_append += '<li class="dd-item dd3-item"  ><div class="dd-handle dd3-handle">Drag</div><div class="dd3-content"><label class="item_req item_' + (i + 1) + '" style="font-size: 12px;">' + lista[i].num + ' </label> ' +
-                                    '<div class="pull-right"><button class="btn btn-warning btn-sm btn-cargar-puesto" value="' + i + '" ><i class="fa fa-eye" ></i></button></div>' +
+                            txt_append += '<li class="dd-item dd3-item" ><div class="dd-handle dd3-handle">Drag</div><div class="dd3-content"><label class="item_req item_' + (i + 1) + '" style="font-size: 12px;">' + lista[i].num + ' </label> ' +
+                                    '<div class="pull-right"><button class="btn btn-primary btn-sm btn-cargar-puesto" value="' + i + '" ><i class="fa fa-eye" ></i></button></div>' +
                                     '<div class="pull-right"><button class="btn btn-success btn-sm btn-editar" value="' + i + '" ><i class="fa fa-pencil" ></i></button></div>' +
                                     '<div class="pull-right"><button class="btn btn-danger btn-sm btn-eliminar" value="' + i + '" ><i class="fa fa-times"></i></button></div>';
                             if (typeof (lista[i].det) === "undefined") {
                                 txt_append += '<div class="pull-right"><label ></label></div>';
                             } else {
 
-                                txt_append += '<div class="pull-right"><label style="font-size: 12px;">' + lista[i].det + '  |' + '</label></div>';
+                                txt_append += '<div class="pull-right"><label style="font-size: 12px;">' + lista[i].det +'&nbsp;&nbsp;</label></div>';
                             }
 
                             // '<div class="pull-right"><label >' + lista[i].co + '</label></div>' +
