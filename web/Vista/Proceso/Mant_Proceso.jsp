@@ -94,7 +94,7 @@
                     <!-- row -->
                     <div class="row">
                         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-3" data-widget-editbutton="false">
+                            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-1" data-widget-editbutton="false">
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
                                     <h2>Mantenimiento de Pasos</h2>
@@ -144,8 +144,121 @@
                         </article>
                     </div>
                     <div class="row">
+                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-5">
+                            <div class="jarviswidget jarviswidget-color-greenDark" id="wid-id-2" data-widget-editbutton="false">
+                                <header>
+                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                    <h2>Lista de pasos Habilitados :<strong><label class="lb-list_pasos"></label></strong> </h2>
+                                </header>
+                                <div>
+                                    <div class="jarviswidget-editbox">
+                                    </div>
+                                    <div class="widget-body">
+                                        <div class="row">
+                                            <button type="button" class="btn btn-default Generar" data-action="collapse-all">
+                                                Generar Pasos
+                                            </button>
+                                        </div> 
+                                        <div>
+                                            <div class="dd" id="nestable"  >
+                                                <ol class="dd-list" >
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-7">
+                            <div class="jarviswidget jarviswidget-color-red" id="wid-id-3" data-widget-editbutton="false">
+                                <header>
+                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                    <h2>Lista de puestos :<strong><label class="lb-list_puesto"></label></strong> </h2>
+                                </header>
+                                <div>
+                                    <div class="jarviswidget-editbox">
+                                    </div>
+                                    <div class="widget-body no-padding">
+                                        <form action="" method="post" class="smart-form form_puesto">
+                                            <fieldset>
+                                                <div class="row">
+                                                    <section class="col col-4">
+                                                        <label>Dirección</label>
+                                                        <label class="select">
+                                                            <select class=" input-sm sl_dir" required="" ></select> 
+                                                            <i></i></label>      
+                                                    </section>
+                                                    <section class="col col-4">
+                                                        <label>Departamento:</label>
+                                                        <label class="select">
+                                                            <select class="input-sm sl_dep" required=""></select> 
+                                                            <i></i></label>                                                    
+                                                    </section>
+                                                    <section class="col col-4">
+                                                        <label>Area:</label>
+                                                        <label class="select">
+                                                            <select class="input-sm sl_area" required=""></select>  
+                                                            <i></i></label>
+                                                    </section>
+                                                </div>
+                                                <div class="row">
+                                                    <section class="col col-3">
+                                                        <label>Sección:</label>
+                                                        <label class="select">
+                                                            <select class="input-sm sl_sec" required=""></select> 
+                                                            <i></i></label>
+                                                    </section>
+
+                                                    <section class="col col-3">
+                                                        <label>Puesto:</label>
+                                                        <label class="select">
+                                                            <select name="id_pu" class="input-sm sl_puesto" required=""></select>
+                                                            <i></i></label>
+                                                    </section>                                          
+                                                    <input type="hidden" value="" name="idpasos" class="id_pasos"  />
+                                                    <input type="hidden" value="" name="nun" class="num_p"  />
+                                                    <section class="col col-3" >
+                                                        <label>Código Puesto</label>
+                                                        <label class="select">
+                                                            <select class="input-sm co_puesto" name="co_pasos">
+                                                                <option value=""></option>
+                                                                <option value="SECR">Secretaria de Area</option>
+                                                                <option value="JEFE">Jefe de Area</option>
+                                                            </select> 
+                                                            <i></i></label>
+                                                    </section>
+                                                    <section class="col col-3">
+                                                        <div style="margin-top: 15px; width: 98%; " >
+                                                            <button class="form-control btn btn-primary btn-agregar-p" style="margin: auto;">Agregar Puesto</button> 
+                                                        </div>                                                            
+                                                    </section>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                        <div class="custom-scroll table-responsive"style="height:320px; overflow-y: scroll;">
+                                            <table id="datatable_tabletools" class="table table-striped table-bordered table-hover" style="width: 98%;margin: auto; ">
+                                                <thead>
+                                                    <tr>
+                                                        <th data-class="expand">Puesto</th>
+                                                        <th data-hide="phone,tablet">Area</th>
+                                                        <th data-hide="phone,tablet">Departamento</th>
+                                                        <th data-hide="phone,tablet">Dirección</th>
+                                                        <th>Estado</th>
+                                                        <th colspan="2">Acciones</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="tbody-puesto">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="row">
                         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-3" data-widget-editbutton="false">
+                            <div class="jarviswidget jarviswidget-color-yellow" id="wid-id-4" data-widget-editbutton="false">
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
                                     <h2>Lista de pasos Deshabilitados :<strong><label class="lb-list_pasos"></label></strong> </h2>
@@ -174,123 +287,6 @@
                                 </div>
                             </div>
                         </article>
-                    </div>
-                    <div class="row">
-                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-5">
-                            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-3" data-widget-editbutton="false">
-                                <header>
-                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                    <h2>Lista de pasos Habilitados :<strong><label class="lb-list_pasos"></label></strong> </h2>
-                                </header>
-                                <div>
-                                    <div class="jarviswidget-editbox">
-                                    </div>
-                                    <div class="widget-body">
-                                        <div class="table-responsive">
-                                            <button type="button" class="btn btn-default Generar" data-action="collapse-all">
-                                                Generar Pasos
-                                            </button>
-                                            <br><!--<style>
-                                                .div{
-                                                    border-style: solid;
-                                                    border-color: #ff0000 #0000ff;
-                                                }
-                                                label{
-                                                    margin-left: 10px;
-                                                }
-                                            </style>-->
-
-                                            <div class="dd" id="nestable" >
-                                                <ol class="dd-list" style="width: 100%;" >
-                                                </ol>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-7">
-                            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-3" data-widget-editbutton="false">
-                                <header>
-                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                    <h2>Lista de puestos :<strong><label class="lb-list_puesto"></label></strong> </h2>
-                                </header>
-                                <div>
-                                    <div class="jarviswidget-editbox">
-                                    </div>
-                                    <div class="widget-body no-padding">
-                                        <form action="" method="post" class="smart-form form_puesto">
-                                            <fieldset>
-                                                <section class="col col-4">
-                                                    <label>Dirección</label>
-                                                    <label class="select">
-                                                        <select class=" input-sm sl_dir" required="" ></select> 
-                                                        <i></i></label>      
-                                                </section>
-                                                <section class="col col-4">
-                                                    <label>Departamento:</label>
-                                                    <label class="select">
-                                                        <select class="input-sm sl_dep" required=""></select> 
-                                                        <i></i></label>                                                    
-                                                </section>
-                                                <section class="col col-4">
-                                                    <label>Area:</label>
-                                                    <label class="select">
-                                                        <select class="input-sm sl_area" required=""></select>  
-                                                        <i></i></label>
-                                                </section>
-                                                <section class="col col-3">
-                                                    <label>Sección:</label>
-                                                    <label class="select">
-                                                        <select class="input-sm sl_sec" required=""></select> 
-                                                        <i></i></label>
-                                                </section>
-                                                <section class="col col-3">
-                                                    <label>Puesto:</label>
-                                                    <label class="select">
-                                                        <select name="id_pu" class="input-sm sl_puesto" required=""></select>
-                                                        <i></i></label>
-                                                </section>                                          
-                                                <input type="hidden" value="" name="idpasos" class="id_pasos"  />
-                                                <input type="hidden" value="" name="nun" class="num_p"  />
-                                                <section class="col col-3">
-                                                    <label>Código Puesto</label>
-                                                    <label class="select">
-                                                        <select class="input-sm co_puesto" name="co_pasos">
-                                                            <option value=""></option>
-                                                            <option value="SECR">Secretaria de Area</option>
-                                                            <option value="JEFE">Jefe de Area</option>
-                                                        </select> 
-                                                        <i></i></label>
-                                                </section>
-                                                <section class="col col-3">
-                                                    <button type="button" class="btn btn-agregar-p">
-                                                        Agregar Puesto
-                                                    </button> 
-                                                </section>
-                                            </fieldset>
-                                        </form>
-                                        <table id="datatable_tabletools" class="table table-striped table-bordered table-hover" style="width: 98%;">
-                                            <thead>
-                                                <tr>
-                                                    <th data-class="expand">Puesto</th>
-                                                    <th data-hide="phone,tablet">Area</th>
-                                                    <th data-hide="phone,tablet">Departamento</th>
-                                                    <th data-hide="phone,tablet">Dirección</th>
-                                                    <th>Estado</th>
-                                                    <th>Acciones</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="tbody-puesto">
-
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-
                     </div>
 
                     <!-- end row -->
@@ -507,7 +503,6 @@
                     tbody_p.empty();
                     var lista = objJson.lista;
                     for (var h = 0; h < lista.length; h++) {
-
                         if (lista[h].estado == '0') {
                             texto += "<tr class='danger' >";
                         } else if (lista[h].estado == '1') {
@@ -523,15 +518,13 @@
                         } else if (lista[h].estado == '1') {
                             texto += "<td>Habilitado</td>";
                         }
-
-
-                        texto += "<td><button type='button' value='" + h + "' class='btn-eliminar_puesto'>Eliminar</button>";
-                        texto += "<input type='hidden' class='iddp" + h + "' value='" + lista[h].idpp + "' />";
+                        texto += "<td><input type='hidden' class='iddp" + h + "' value='" + lista[h].idpp + "' />";
                         if (lista[h].estado == '1') {
-                            texto += "<button class='btn_deshabilitar_p' value='" + h + "'>Deshabilitar</button></td>";
+                            texto += "<button class='btn btn-warning btn_deshabilitar_p' value='" + h + "'>Deshabilitar</button></td>";
                         } else {
-                            texto += "<button class='btn_habilitar_p' value='" + h + "'>Habilitar</button></td>";
+                            texto += "<button class='btn btn-success btn_habilitar_p' value='" + h + "' style='width: 98%'>Habilitar</button></td>";
                         }
+                        texto += "<td><button type='button' value='" + h + "' class='btn btn-danger btn-eliminar_puesto'><i class='fa fa-times'></i></button></td>";
                         texto += "</tr>";
                     }
                     tbody_p.append(texto);
@@ -551,7 +544,6 @@
                     );
                     $(".btn_deshabilitar_p").click(function () {
                         $.post("../../paso", "opc=actualizar_estado&id=" + $(".iddp" + $(this).val()).val() + "&estado=0", function (objJson) {
-
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
                                 return;
@@ -686,7 +678,7 @@
                                 txt_append += '<div class="pull-right"><label ></label></div>';
                             } else {
 
-                                txt_append += '<div class="pull-right"><label style="font-size: 12px;">' + lista[i].det + '</label></div>';
+                                txt_append += '<div class="pull-right"><label style="font-size: 12px;">' + lista[i].det + '  |' + '</label></div>';
                             }
 
                             // '<div class="pull-right"><label >' + lista[i].co + '</label></div>' +
@@ -736,7 +728,6 @@
                     var num = 1;
                     var url = "";
 
-
                     $.each($(".item_req"), function () {
                         $(this).text("P" + num);
                         num++;
@@ -774,7 +765,6 @@
                 });
                 pageSetUp();
                 // PAGE RELATED SCRIPTS
-
                 var updateOutput = function (e) {
                     var list = e.length ? e : $(e.target), output = list.data('output');
                     if (window.JSON) {
