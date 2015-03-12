@@ -154,7 +154,7 @@
                                     <td ><span >Opcion</span></td>
                                     <td ><span >Imprimir</span></td>
                                     <td id="seleccionar_pl"><span >seleccionar</span></td>
-                                    <td><button type="button" class="btn btn-primary" id="btns"> Seleccionar todo</button><input type="submit"name="opc" class="btn btn-primary" id="asa" value="Imprimir1"></td>
+                                    <td><button type="button" class="btn btn-primary" id="btns"> Seleccionar todo</button><input type="submit"name="opc" class="btn btn-primary" id="asa" value="Imprimir"></td>
 
 
                                 </tr>

@@ -271,6 +271,7 @@
                                     <%}
                                         }
                                         if (ID_ROL.trim().equals("ROL-0007") || ID_ROL.trim().equals("ROL-0001")) {
+                                            if(request.getParameter("val_huella")!=null){
                                             int val_huella = Integer.parseInt(request.getParameter("val_huella"));
                                             if (val_huella > 0) {%>
                                     <td>
@@ -295,7 +296,7 @@
                                             <tr><td><button value="registrar_huella" name="opc">Registrar</button></td></tr>
                                         </table>
                                     </td>
-                                    <%}
+                                    <%}}
                                         }%>
                                     <%}%>
                                 </table>
