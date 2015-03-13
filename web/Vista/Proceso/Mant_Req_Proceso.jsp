@@ -263,8 +263,7 @@
                                     <!-- end widget edit box -->
 
                                     <!-- widget content -->
-                                    <div class="widget-body no-padding">
-
+                                    <div class="widget-body no-padding tabla-req">
                                         <table  id="datatable_tabletools" class="table table-striped table-bordered table-hover" width="100%">
                                             <thead>
                                                 <tr>
@@ -278,10 +277,8 @@
                                                     <th>Acciones</th>
                                                 </tr>
                                             </thead>
-                                            <tbody class="tbody-pro-paso">
-                                            </tbody>
+                                            <tbody class="tbody-pro-paso"></tbody>
                                         </table>
-
                                     </div>
                                     <!-- end widget content -->
 
@@ -389,10 +386,12 @@
                 });
 
             }
-            $(document).ready(function () {
 
+            $(document).ready(function () {
+                var t;
                 $(".btn-cancelar").click(function () {
                     $(".form-pro_req")[0].reset();
+                    t.draw();
                     $(".tbody-pro-paso").empty();
                 });
                 list_select($(".ti_planilla"), "../../requerimiento", "opc=Listar_Tipo_Planilla");
@@ -410,35 +409,37 @@
                 $(".proceso, .req, .direccion, .departamento").change(function () {
                     var tbodys = $(".tbody-pro-paso");
                     tbodys.empty();
-                    var text_html = "";
                     $.post("../../Proceso", "opc=Listar_Pro_Paso_Id&id_req=" + $(".req").val() + "&id_pro=" + $(".proceso").val() + "&id_dir=" + $(".direccion").val() + "&id_dep=" + $(".departamento").val(), function (objJson) {
                         var lista = objJson.lista;
                         if (objJson.rpta == -1) {
                             alert(objJson.mensaje);
                             return;
                         }
+                        t = $('#datatable_tabletools').DataTable();
                         for (var f = 0; f < lista.length; f++) {
-                            text_html += "<tr>";
-                            text_html += "<td>" + lista[f].ti_planilla + "</td>";
-                            text_html += "<td>" + lista[f].req + "</td>";
-                            text_html += "<td>" + lista[f].proceso + "</td>";
-                            text_html += "<td>" + lista[f].dir + "</td>";
-                            text_html += "<td>" + lista[f].dep + "</td>";
-                            text_html += "<td>" + lista[f].area + "</td>";
-                            if(lista[f].estado=="1"){
-                                text_html += "<td>Habilitado</td>";
-                                text_html += "<td><button class='btn btn-warning' value="+f+">Desactivar</button></td>";
-                            }else if(lista[f].estado=="2"){
-                                text_html += "<td>Deshabilitado</td>";
-                                text_html += "<td><button class='btn btn-success' value="+f+" style='width: 98%;'>Activar</button></td>";
-                            }                            
-                            text_html += "<td><button class='btn btn-danger'><i class='fa fa-times'></i></button></td>";
-                            text_html += "</tr>";
+                            var estadoE, estadoB;
+                            if (lista[f].estado == "1") {
+                                estadoE = "Habilitado";
+                                estadoB="<button class='btn btn-warning' value=" + f + ">Desactivar</button>";
+                            } else if (lista[f].estado == "0") {
+                                estadoE = "Deshabilitado";
+                                estadoB="<button class='btn btn-success' value=" + f + " style='width: 98%;'>Activar</button>";
+                            }
+                            t.row.add([
+                                lista[f].ti_planilla,
+                                lista[f].req,
+                                lista[f].proceso,
+                                lista[f].dir,
+                                lista[f].dep,
+                                lista[f].area,
+                                estadoE ,
+                                "<div class='row'>"+estadoB + "<button class='btn btn-danger'><i class='fa fa-times'></i></button></div>"
+                            ]).draw();
+
                         }
-                        tbodys.append(text_html);
-                        text_html = "";
-                        tabla_t();
+
                     });
+
                 });
                 var $checkoutForm = $('#checkout-form').validate({
                     // Rules for form validation
@@ -847,11 +848,10 @@
                         $('#startdate').datepicker('option', 'maxDate', selectedDate);
                     }
                 });
-                
 
-
-                /* END TABLETOOLS */
             });
+
+
         </script>
 
 
