@@ -548,8 +548,146 @@
                         <!-- WIDGET END -->
 
                     </div>
-
+                                        
                     <!-- end row -->
+                    
+                     <div class="row">
+
+
+                        <!-- NEW WIDGET START -->
+                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                            <div id="alerta_dgp">
+
+                            </div>
+
+
+                            <!-- Widget ID (each widget will need unique ID)-->
+                            <div class="jarviswidget jarviswidget-color-red" id="wid-id-0" data-widget-editbutton="false">
+                                <!-- widget options:
+                                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                                data-widget-colorbutton="false"
+                                data-widget-editbutton="false"
+                                data-widget-togglebutton="false"
+                                data-widget-deletebutton="false"
+                                data-widget-fullscreenbutton="false"
+                                data-widget-custombutton="false"
+                                data-widget-collapsed="true"
+                                data-widget-sortable="false"
+
+                                -->
+                                <header>
+                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                    <h2>Requerimientos Autorizados</h2>
+                                </header>
+                                <!-- widget div-->
+                                <div>
+
+                                    <!-- widget edit box -->
+                                    <div class="jarviswidget-editbox">
+                                        <!-- This area used as dropdown edit box -->
+
+                                    </div>
+                                    <!-- end widget edit box -->
+
+                                    <!-- widget content -->
+                                    <div class="widget-body no-padding">
+
+                                        <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
+                                            <thead>
+                                                <tr data-hide="phone,tablet"> <th><strong>Nro</strong></th>
+                                                    
+                                                    <th ><strong>MES</strong></th>
+
+                                                    <th data-hide="phone,tablet"><strong>Foto</strong> </th>
+                                                    <th data-class="expand" ><strong>Apellidos Y Nombres</strong></th>
+
+                                                    <th data-hide="phone,tablet"><strong>Puesto</strong></th>
+                                                    <th data-hide="phone,tablet"><strong>Area</strong></th>
+                                                    <th data-hide="phone,tablet"><strong>Departamento</strong></th>
+                                                    <th data-hide="phone,tablet"><strong>Requerimiento</strong></th>
+                                                    <!--  <td>Departamento</td>-->
+                                                    <th data-hide="phone,tablet"><strong>Descripción</strong></th>
+                                                    <th  data-hide="phone,tablet">Fecha de Creación</th>  
+                                                    <th  data-hide="phone,tablet">Motivo</th>  
+                                                    <th  data-hide="phone,tablet">MFL</th>  
+                                                       <%// if (dep.equals("DPT-0019")) {%>
+
+                                                    <!--<th  ><strong>¿Cumplio Plazos?</strong></th>-->
+                                                        <%//if (idrol.trim().equals("ROL-0006")) {
+
+                                                        %>
+                                                </tr>
+                                            </thead>
+                                            <tbody> 
+                                                
+                                                <%for (int f = 0; f < List_id_Autorizacion.size(); f++) {
+
+                                                        V_Autorizar_Dgp a = new V_Autorizar_Dgp();
+                                                        a = (V_Autorizar_Dgp) List_id_Autorizacion.get(f);
+                                                %>
+
+                                                <tr>
+                                                    <td><%=f + 1%></td>
+                                                   
+                                                    <td ><%=a.getMes_creacion()%></td>   
+                                                    <% if (a.getAr_foto() == null) {%>
+                                                    <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30"></td>
+                                                        <% } else {%>
+                                                    <td><img src="../Usuario/Fotos/<%=a.getAr_foto()%>"  width="30"  height="30"></td>
+                                                        <% }%>
+                                                    <td ><%=a.getAp_paterno() + " " + a.getAp_materno() + " " + a.getNo_trabajador()%></td>
+                                                    <td ><%=a.getNo_puesto()%></td>   
+                                                    <td ><%=a.getNo_area()%></td>      
+                                                    <td ><%=a.getNo_dep()%></td>      
+                                                    <td ><%=a.getNo_req()%></td>      
+                                            <input type="hidden" class="val_aut<%=(f + 1)%>" value="&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&IDDETALLE_DGP=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&COD=<%=a.getCo_pasos()%>&IDPASOS=<%=a.getId_pasos()%>&NROPASO=<%=a.getNu_pasos()%>&IDTR=<%=a.getId_trabajador()%>"/>
+                                            <input type="hidden" class="val_firm<%=(f + 1)%>" value="&IDDETALLE_DGP=<%=a.getId_dgp()%>&IDTR=<%=a.getId_trabajador()%>"/>
+                                            <td style="color: red; font-weight: bold;"><a href="../../trabajador?idtr=<%=a.getId_trabajador()%>&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&iddetalle_dgp=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&cod=<%=a.getCo_pasos()%>&idpasos=<%=a.getId_pasos()%>&autorizacion=1&opc=aut&nup=<%=a.getNu_pasos()%>"><%=a.getDe_pasos()%></a></td>
+                                            <td ><%=a.getFe_creacion()%></td>
+                                            <td><%if (a.getLi_motivo() != null) {
+                                                    if (a.getLi_motivo().trim().equals("1")) {
+                                                        out.print("Trabajdor Nuevo");
+                                                    }
+                                                    if (a.getLi_motivo().trim().equals("2")) {
+                                                        out.print("Renovación");
+                                                    }
+                                                } else {
+                                                    out.print("No registrado");
+                                                }%></td> 
+                                            <td><%if (a.getEs_mfl() != null) {
+                                                    if (a.getEs_mfl().trim().equals("0")) {
+                                                        out.print("No");
+                                                    }
+                                                    if (a.getEs_mfl().trim().equals("1")) {
+                                                        out.print("Si");
+                                                    }
+                                                } else {
+                                                    out.print("No registrado");
+                                                }%></td> 
+                                               <%
+                                                }
+                                                List_id_Autorizacion.clear();%>
+                                            </tbody>
+                                        </table>
+                                       
+
+                                    </div>
+                                    <!-- end widget content -->
+
+                                </div>
+                                <!-- end widget div -->
+
+                            </div>
+                            <!-- end widget -->
+
+
+
+                        </article>
+                        <!-- WIDGET END -->
+
+                    </div>
 
                     <!-- end row -->
 
@@ -561,6 +699,12 @@
 
             </div>
         </div>
+
+
+
+                                        
+
+       
 
 
 

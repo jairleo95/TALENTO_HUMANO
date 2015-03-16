@@ -194,12 +194,17 @@
                                 $("#ti").show();
                                 $("#institucion").show();
                                 $("#carr").show();
+                                
                             } else {
                                 $("#regimen").hide();
                                 $("#egreso").hide();
                                 $("#ti").hide();
                                 $("#institucion").hide();
                                 $("#carr").hide();
+                                $("#regimen").find('select option:eq(0)').prop('selected', true);
+                                $("#egreso").find('select option:eq(0)').prop('selected', true);
+                                $("#institucion").find('select option:eq(0)').prop('selected', true);
+                                $("#carr").find('select option:eq(0)').prop('selected', true);
 
                             }
 
@@ -593,7 +598,7 @@
                                                                     <label>Año Egreso:</label>
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
-                                                                        <select    name="A_EGRESO" class="form-control input-group-sm" required="" >
+                                                                        <select   id="ano_e" name="A_EGRESO" class="form-control input-group-sm" required="" >
                                                                             <option value="">[SELECCIONE]</option>
                                                                             <% if (t.getDe_anno_egreso() != null) {
                                                                                     for (int jj = 0; jj < list_año.size(); jj++) {
