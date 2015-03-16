@@ -595,6 +595,23 @@ public class ContratoDAO implements InterfaceContratoDAO {
     }
 
     @Override
+    public String obt_dgp_x_dgp(String id_contrato) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String Maxcto = null;
+            String sql = "SELECt ID_DGP FROM RHTM_CONTRATO WHERE ID_CONTRATO='" + id_contrato.trim() + "'";
+            try {
+                ResultSet rs = this.conn.query(sql);
+                while (rs.next()) {
+                    Maxcto = rs.getString(1);
+                }
+            } catch (Exception e) {
+            } finally {
+                this.conn.close();
+            }
+        return Maxcto;
+    }
+
+    @Override
     public void INSERT_CONTRATO_ADJUNTO(String ID_CONTRATO_ADJUNTO, String ID_CONTRATO, String NO_ARCHIVO, String NO_ARCHIVO_ORIGINAL, String ES_CONTRATO_ADJUNTO, String IP_USUARIO, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);

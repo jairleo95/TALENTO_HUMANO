@@ -13,10 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import pe.edu.upeu.application.dao.AutorizacionDAO;
+import pe.edu.upeu.application.dao.CorreoDAO;
 import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.EmpleadoDAO;
 import pe.edu.upeu.application.dao.RequerimientoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceCorreoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceEmpleadoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
@@ -46,6 +48,7 @@ public class CAutorizacion extends HttpServlet {
         InterfaceDgpDAO dgp = new DgpDAO();
         HttpSession sesion = request.getSession(true);
         InterfaceRequerimientoDAO IReq = new RequerimientoDAO();
+        InterfaceCorreoDAO correo = new CorreoDAO();
 
         String iduser = (String) sesion.getAttribute("IDUSER");
         String ide = (String) sesion.getAttribute("IDPER");
@@ -111,6 +114,15 @@ public class CAutorizacion extends HttpServlet {
                 getServletContext().setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
                 response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?h=si");
             }
+            if (opc.equals("Enviar_Correo")) {
+                String to = request.getParameter("to");
+                String from = request.getParameter("from");
+                String asunto = request.getParameter("asunto");
+                String cuerpo = request.getParameter("cuerpo");
+                correo.Enviar(to, from, asunto, cuerpo);
+                response.sendRedirect("Prueba_Mail.jsp");
+            }
+
             //try {
         } else {
 
