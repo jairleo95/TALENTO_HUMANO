@@ -242,7 +242,7 @@
                         if (list[i].id_pl != null) {
                             b.append('<td><input type="checkbox" id="imp" name="Imprimir" value="' + list[i].id_co + '/' + list[i].id_pl + '"></td>');
                         } else {
-                                                        b.append('<td>NO TIENE</td>');
+                            b.append('<td>NO TIENE</td>');
                         }
                         b.append("</tr>");
                         nuro = 1;
@@ -293,9 +293,10 @@
              url:"../../Ajax/Ajax_Dgp/Ajax_Dgp_Aut.jsp"
              
              }
-             
+             var b=$('#tbodys');
              });
              */
+            var b = $('#tbodys');
             $("#select_direccion").change(function() {
                 var opc = 'Listar_dir_dep';
                 var id = $("#select_direccion").val();

@@ -30,6 +30,8 @@ public interface InterfacePuestoDAO {
 
     public String List_Puesto_x_iddgp(String id_dgp);
 
+    public String List_Puesto_x_id_con(String id_contrato);
+
     public List<V_Puesto_Direccion> List_Puesto_Dep(String id_departamento);
 
     public List<V_Puesto_Direccion> List_Det_Puesto();
@@ -41,6 +43,6 @@ public interface InterfacePuestoDAO {
     public List<Map<String, ?>> Listar_Puesto_id(String id);
 
     public List<Map<String, ?>> List_puesto();
-    
+
     public String puesto(String id_cto);
 }

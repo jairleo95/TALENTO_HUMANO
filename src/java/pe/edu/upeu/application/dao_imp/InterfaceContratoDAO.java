@@ -72,5 +72,7 @@ public interface InterfaceContratoDAO {
     public List<Contrato_Adjunto> List_doc_Contrato(String id_ctro);
 
     public int Count_doc_con(String id_ctro);
+    
+    public String obt_dgp_x_dgp(String id_contrato);
 
 }
