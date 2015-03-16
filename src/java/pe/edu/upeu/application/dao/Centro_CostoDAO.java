@@ -227,7 +227,7 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
         }
 
         return list;
-        
+
     }
 
     @Override
@@ -265,7 +265,7 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
     @Override
     public List<Centro_Costos> Lis_c_c_id_dgp(String id_dgp) {
         this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT c.ID_CENTRO_COSTO ,c.DE_CENTRO_COSTO ,c.CO_CENTRO_COSTO, c.ID_DEPARTAMENTO, d.CA_PORCENTAJE FROM RHTR_CENTRO_COSTO c,RHTD_DETALLE_CENTRO_COSTO d where d.ID_CENTRO_COSTO=c.ID_CENTRO_COSTO and  d.ID_DGP ='"+id_dgp.trim()+"';";
+        String sql = "SELECT c.ID_CENTRO_COSTO ,c.DE_CENTRO_COSTO ,c.CO_CENTRO_COSTO, c.ID_DEPARTAMENTO, d.CA_PORCENTAJE FROM RHTR_CENTRO_COSTO c,RHTD_DETALLE_CENTRO_COSTO d where d.ID_CENTRO_COSTO=c.ID_CENTRO_COSTO and  d.ID_DGP ='" + id_dgp.trim() + "';";
         List<Centro_Costos> list = new ArrayList<Centro_Costos>();
         try {
             ResultSet rs = this.cnn.query(sql);
@@ -285,6 +285,7 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
 
         return list;
     }
+
     @Override
     public List<Detalle_Centro_Costo> Cargar_dcc_dgp(String id) {
         this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -309,5 +310,22 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
 
         return Lista;
 
+    }
+
+    @Override
+    public List<String> Listar_cc_dgp(String id_dgp) {
+        this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT (pd.id_direccion||'/'||cc.ID_CENTRO_COSTO||'/'||cc.ID_DEPARTAMENTO)as info FROM RHVD_PUESTO_DIRECCION pd, RHTR_CENTRO_COSTO cc,RHTD_DETALLE_CENTRO_COSTO cen WHERE cen.ID_CENTRO_COSTO = cc.ID_CENTRO_COSTO and pd.ID_DEPARTAMENTO = cc.ID_DEPARTAMENTO  and cen.ID_DGP='"+id_dgp.trim()+"' group by ( pd.id_direccion,cc.ID_CENTRO_COSTO,cc.ID_DEPARTAMENTO)";
+        List<String> list = new ArrayList<String>();
+        try {
+            ResultSet rs = this.cnn.query(sql);
+            while (rs.next()) {
+                list.add(rs.getString("info"));
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.cnn.close();
+        }
+        return list;
     }
 }

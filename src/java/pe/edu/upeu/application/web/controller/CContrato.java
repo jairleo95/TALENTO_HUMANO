@@ -143,7 +143,48 @@ public class CContrato extends HttpServlet {
                 fe_subs = año + "-" + (mes + 1) + "-" + dia;
             }
             out.print(id_dir);
-            response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp?num=" + num + "&id_direc=" + id_dir+"&fe_subs=" + fe_subs);
+            response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp?num=" + num + "&id_direc=" + id_dir + "&fe_subs=" + fe_subs);
+        }
+        if (opc.equals("Editar")) {
+            String idcon = request.getParameter("idc");
+            String idtr = request.getParameter("idtr");
+            getServletContext().setAttribute("List_Anno_trabajador", a.List_Anno_trabajador(idtr));
+            getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(idcon));
+            getServletContext().setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(idcon));
+            getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
+            //getServletContext().setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
+            getServletContext().setAttribute("List_Usuario", usu.List_Usuario());
+            getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
+            getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
+            getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
+            String id_dg = request.getParameter("id_dg");
+            String id_dir = puesto.List_Puesto_x_id_con(idcon);
+            int num = dht.ASIGNACION_F(idtr);
+            if (id_dg != null) {
+                getServletContext().setAttribute("Listar_cc_dgp", cc.Listar_cc_dgp(id_dg));
+                getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(id_dg));
+            }
+            Calendar fecha = new GregorianCalendar();
+            int año = fecha.get(Calendar.YEAR);
+            int mes = fecha.get(Calendar.MONTH);
+            int dia = fecha.get(Calendar.DAY_OF_MONTH);
+            String fe_subs = "";
+            if (mes < 9 && dia < 9) {
+                fe_subs = año + "-" + "0" + (mes + 1) + "-" + "0" + dia;
+            }
+
+            if (mes < 9 && dia > 9) {
+                fe_subs = año + "-" + "0" + (mes + 1) + "-" + dia;
+            }
+
+            if (mes >= 9 && dia < 9) {
+                fe_subs = año + "-" + (mes + 1) + "-" + "0" + dia;
+            }
+            if (mes >= 9 && dia > 9) {
+                fe_subs = año + "-" + (mes + 1) + "-" + dia;
+            }
+            response.sendRedirect("Vista/Contrato/Editar_Contrato.jsp?num=" + num + "&id_direc=" + id_dir + "&fe_subs=" + fe_subs);
+
         }
         if (opc.equals("Detalle_Contractual")) {
 
@@ -165,14 +206,15 @@ public class CContrato extends HttpServlet {
              out.print(id_cto + ida1 + idtr);*/
 
             String ida1 = a.List_Anno_Max_Cont(idtr);
-
+            String id_dgp = "";
             String id_cto = con.Contrato_max(idtr);
             if (id_cto != null) {
                 String id_pu = puesto.puesto(id_cto);
                 getServletContext().setAttribute("List_x_fun_x_idpu", fu.List_x_fun_x_idpu(id_pu));
+                id_dgp = con.obt_dgp_x_dgp(id_cto);
             }
             getServletContext().setAttribute("List_Anno_trabajador", a.List_Anno_trabajador(idtr));
-            getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(idtr));
+            getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_cto));
             getServletContext().setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_cto));
             getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
             //getServletContext().setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
@@ -180,7 +222,7 @@ public class CContrato extends HttpServlet {
             getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
             getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
             getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
-            response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1 + "&idtr=" + idtr + "&id_cto=" + id_cto);
+            response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1 + "&idtr=" + idtr + "&id_cto=" + id_cto + "&id_dg=" + id_dgp);
 
             //response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1 + "&idtr=" + idtr + "&id_cto=" + id_cto);
         }
@@ -190,7 +232,7 @@ public class CContrato extends HttpServlet {
         }
         if (opc.equals("Subir_Contrato2")) {
             int coun_doc = con.Count_doc_con(request.getParameter("idc"));
-            String id_con=request.getParameter("idc");
+            String id_con = request.getParameter("idc");
             response.sendRedirect("Vista/Contrato/Formato_Plantilla/Subir_Contrato_Firmado.jsp?idc=" + id_con + "&coun_doc=" + coun_doc);
         }
 
