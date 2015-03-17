@@ -579,7 +579,7 @@
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select id="es_civil" name="ESTADO_CIVIL" class="form-control input-group-sm"  required="">
                                                                                 <option value="">[SELECCIONE]</option>
-                                                                                <%if (t.getEs_civil().trim().equals("1")) {%>
+                                                                                <%if (t.getEs_civil().equals("1")) {%>
                                                                                 <option value="1" selected="">Soltero(a)</option>
                                                                                 <option value="2">Casado(a)</option>
                                                                                 <option value="3">Divorciado(a)</option>
@@ -707,7 +707,11 @@
                                                                         <label>Telefono:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-phone fa-lg fa-fw"></i></span>
+                                                                            <%if(t.getTe_trabajador() != null){%>
                                                                             <input type="text" name="TELEFONO"  value="<%=t.getTe_trabajador().trim()%>"  data-mask="(99) 999-9999" data-mask-placeholder= "X"   maxlength="50"  class="form-control input-group-sm telefono" >
+                                                                            <%}else{%>
+                                                                            <input type="text" name="TELEFONO"  value=""  data-mask="(99) 999-9999" data-mask-placeholder= "X"   maxlength="50"  class="form-control input-group-sm telefono" >
+                                                                            <%}%>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -716,14 +720,18 @@
                                                                         <label>Celular:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-mobile fa-lg fa-fw"></i></span>
+                                                                            <%if(t.getCl_tra() != null){%>
                                                                             <input type="text" name="CELULAR" value="<%=t.getCl_tra().trim()%>"  data-mask="999-999-999" data-mask-placeholder= "X" formnovalidate maxlength="38" class="form-control input-group-sm" >
+                                                                          <%}else{%>
+                                                                            <input type="text" name="CELULAR" value=""  data-mask="999-999-999" data-mask-placeholder= "X" formnovalidate maxlength="38" class="form-control input-group-sm" >
+                                                                             <%}%>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-sm-6">
-                                                                    <div class="form-group">
+                                                                    <div class="form-group">    
                                                                         <label>Correo Personal:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-envelope fa-lg fa-fw"></i></span>
