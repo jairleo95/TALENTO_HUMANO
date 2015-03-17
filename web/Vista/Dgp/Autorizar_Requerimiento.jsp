@@ -9,6 +9,7 @@
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceDgpDAO"%>
 <%@page import="pe.edu.upeu.application.model.V_Autorizar_Dgp"%>
 <jsp:useBean id="List_id_Autorizacion" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_id_Autorizados" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -604,7 +605,7 @@
                                                     
                                                     <th ><strong>MES</strong></th>
 
-                                                    <th data-hide="phone,tablet"><strong>Foto</strong> </th>
+                                                    <!--<th data-hide="phone,tablet"><strong>Foto</strong> </th>-->
                                                     <th data-class="expand" ><strong>Apellidos Y Nombres</strong></th>
 
                                                     <th data-hide="phone,tablet"><strong>Puesto</strong></th>
@@ -612,7 +613,6 @@
                                                     <th data-hide="phone,tablet"><strong>Departamento</strong></th>
                                                     <th data-hide="phone,tablet"><strong>Requerimiento</strong></th>
                                                     <!--  <td>Departamento</td>-->
-                                                    <th data-hide="phone,tablet"><strong>Descripción</strong></th>
                                                     <th  data-hide="phone,tablet">Fecha de Creación</th>  
                                                     <th  data-hide="phone,tablet">Motivo</th>  
                                                     <th  data-hide="phone,tablet">MFL</th>  
@@ -626,21 +626,17 @@
                                             </thead>
                                             <tbody> 
                                                 
-                                                <%for (int f = 0; f < List_id_Autorizacion.size(); f++) {
+                                                <%for (int f = 0; f < List_id_Autorizados.size(); f++) {
 
                                                         V_Autorizar_Dgp a = new V_Autorizar_Dgp();
-                                                        a = (V_Autorizar_Dgp) List_id_Autorizacion.get(f);
+                                                        a = (V_Autorizar_Dgp) List_id_Autorizados.get(f);
                                                 %>
 
                                                 <tr>
                                                     <td><%=f + 1%></td>
                                                    
-                                                    <td ><%=a.getMes_creacion()%></td>   
-                                                    <% if (a.getAr_foto() == null) {%>
-                                                    <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30"></td>
-                                                        <% } else {%>
-                                                    <td><img src="../Usuario/Fotos/<%=a.getAr_foto()%>"  width="30"  height="30"></td>
-                                                        <% }%>
+                                                   <td ><%=a.getMes_creacion()%></td>   
+                                                   
                                                     <td ><%=a.getAp_paterno() + " " + a.getAp_materno() + " " + a.getNo_trabajador()%></td>
                                                     <td ><%=a.getNo_puesto()%></td>   
                                                     <td ><%=a.getNo_area()%></td>      
@@ -648,7 +644,6 @@
                                                     <td ><%=a.getNo_req()%></td>      
                                             <input type="hidden" class="val_aut<%=(f + 1)%>" value="&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&IDDETALLE_DGP=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&COD=<%=a.getCo_pasos()%>&IDPASOS=<%=a.getId_pasos()%>&NROPASO=<%=a.getNu_pasos()%>&IDTR=<%=a.getId_trabajador()%>"/>
                                             <input type="hidden" class="val_firm<%=(f + 1)%>" value="&IDDETALLE_DGP=<%=a.getId_dgp()%>&IDTR=<%=a.getId_trabajador()%>"/>
-                                            <td style="color: red; font-weight: bold;"><a href="../../trabajador?idtr=<%=a.getId_trabajador()%>&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&iddetalle_dgp=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&cod=<%=a.getCo_pasos()%>&idpasos=<%=a.getId_pasos()%>&autorizacion=1&opc=aut&nup=<%=a.getNu_pasos()%>"><%=a.getDe_pasos()%></a></td>
                                             <td ><%=a.getFe_creacion()%></td>
                                             <td><%if (a.getLi_motivo() != null) {
                                                     if (a.getLi_motivo().trim().equals("1")) {
@@ -672,7 +667,7 @@
                                                 }%></td> 
                                                <%
                                                 }
-                                                List_id_Autorizacion.clear();%>
+                                                List_id_Autorizados.clear();%>
                                             </tbody>
                                         </table>
                                        
