@@ -120,11 +120,28 @@ public class CAutorizacion extends HttpServlet {
             }
             if (opc.equals("Enviar_Correo")) {
                 String to = request.getParameter("to");
-                String from = request.getParameter("from");
+                //  String from = request.getParameter("from");
                 String asunto = request.getParameter("asunto");
                 String cuerpo = request.getParameter("cuerpo");
-                correo.Enviar(to, from, asunto, cuerpo);
-                response.sendRedirect("Prueba_Mail.jsp");
+
+                String correo_inst = request.getParameter("co_inst");
+                String correo_personal = request.getParameter("co_pers");
+                //correo.Enviar(to, from, asunto, cuerpo);
+                correo.Enviar("jairleo95@gmail.com", correo_inst, "CARPETA LABORAL - UPEU", "Estimado(a) Colaborador(a),\n"
+                        + "Compartimos la siguiente información\n \n"
+                        + "- Bienestar para el trabajador\n"
+                        + "- Reglamento de Control de Asistencia\n"
+                        + "- Reglamento de trabajo\n"
+                        + "- Boletín Informativo - sistema pensionario\n \n"
+                        + "Saludos Cordiales");
+                correo.Enviar("jairleo95@gmail.com", correo_personal, "CARPETA LABORAL - UPEU", "Estimado(a) Colaborador(a),\n"
+                        + "Compartimos la siguiente información\n \n"
+                        + "- Bienestar para el trabajador\n"
+                        + "- Reglamento de Control de Asistencia\n"
+                        + "- Reglamento de trabajo\n"
+                        + "- Boletín Informativo - sistema pensionario\n \n"
+                        + "Saludos Cordiales");
+                //  response.sendRedirect("Prueba_Mail.jsp");
             }
 
             //try {
