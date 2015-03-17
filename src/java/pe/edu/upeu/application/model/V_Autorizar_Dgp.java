@@ -49,6 +49,24 @@ public class V_Autorizar_Dgp {
     private int co_huella_digital;
     private String li_motivo;
     private String es_mfl;
+    private String di_correo_personal;
+    private String di_correo_inst;
+
+    public String getDi_correo_personal() {
+        return di_correo_personal;
+    }
+
+    public void setDi_correo_personal(String di_correo_personal) {
+        this.di_correo_personal = di_correo_personal;
+    }
+
+    public String getDi_correo_inst() {
+        return di_correo_inst;
+    }
+
+    public void setDi_correo_inst(String di_correo_inst) {
+        this.di_correo_inst = di_correo_inst;
+    }
 
     public String getLi_motivo() {
         return li_motivo;
@@ -111,7 +129,8 @@ public class V_Autorizar_Dgp {
             String no_puesto, String nu_pasos, String id_dgp, String co_pasos, String id_detalle_req_proceso, String de_pasos, String id_departamento, String id_puesto,
             String id_requerimiento, String id_tipo_planilla, String no_req, String id_pasos, String no_usuario, String id_usuario, String no_seccion, String no_area,
             String ar_foto, String de_foto, String id_foto, String no_ar_foto, String ta_ar_foto, String ti_ar_foto, String fe_creacion, int val_plazo, String ver_list_plazo,
-            String elab_contrato, String val_firm_contrato, String no_dep, String mes_creacion, int val_cod_aps_empleado, int val_cod_huella, int co_aps, int co_huella_digital, String li_motivo, String es_mfl) {
+            String elab_contrato, String val_firm_contrato, String no_dep, String mes_creacion, int val_cod_aps_empleado, int val_cod_huella, int co_aps, int co_huella_digital,
+            String li_motivo, String es_mfl, String di_correo_personal, String di_correo_inst) {
         this.id_trabajador = id_trabajador;
         this.no_trabajador = no_trabajador;
         this.ap_paterno = ap_paterno;
@@ -151,6 +170,8 @@ public class V_Autorizar_Dgp {
         this.co_huella_digital = co_huella_digital;
         this.li_motivo = li_motivo;
         this.es_mfl = es_mfl;
+        this.di_correo_personal = di_correo_personal;
+        this.di_correo_inst = di_correo_inst;
     }
 
     public V_Autorizar_Dgp() {
@@ -193,7 +214,8 @@ public class V_Autorizar_Dgp {
         this.co_huella_digital = 0;
         this.li_motivo = "";
         this.es_mfl = "";
-
+        this.di_correo_personal = "";
+        this.di_correo_inst = "";
     }
 
     public int getCo_aps() {
