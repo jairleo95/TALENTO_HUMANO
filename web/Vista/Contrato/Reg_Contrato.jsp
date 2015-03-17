@@ -669,7 +669,7 @@
                                         </section>
                                         <section class="col col-3">
                                             <label class="select" id="titulo" style="color:red">Plantilla de Contrato:
-                                                <select name="id_plantilla_contractual" class="con_pl_pu input-group-sm" >
+                                                <select name="id_plantilla_contractual" class="con_pl_pu input-group-sm"  required="">
                                                     <option value="">[SELECCIONE]</option>
                                                 </select>
                                             </label>
