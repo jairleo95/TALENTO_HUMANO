@@ -192,18 +192,25 @@
                                         $(document).ready(function () {
 
                                             $(".btn_pro_remuneracion").click(function () {
-                                                $.each($(".env_rem"), function () {
-                                                    if ($(this).prop('checked')) {
+
+                                                for (var i = 1; i <= <%=List_id_Autorizacion.size()%>; i++) {
+                                                    if ($(".env_rem" + i).prop('checked')) {
+
                                                         $.ajax({
                                                             url: "../../autorizacion",
                                                             type: "POST",
-                                                            data: "opc=Aceptar" + $(".val_aut" + $(this).val()).val()
+                                                            data: "opc=Aceptar" + $(".val_aut" + $(".env_rem" + i).val()).val()
                                                         }).done(function () {
 
-                                                            window.location.href = "../../autorizacion";
                                                         });
+
+
                                                     }
-                                                });
+                                                }
+
+                                                window.location.href = "../../autorizacion";
+
+
 
                                             });
                                             $(".btn_pro_firma").click(function () {
@@ -251,11 +258,12 @@
                                                             type: "POST",
                                                             data: "opc=Aceptar" + $(".val_aut" + r).val()
                                                         }).done(function () {
-                                                            window.location.href = "../../autorizacion?opc=mens_cod_aps";
+
                                                         });
                                                     }
 
                                                 }
+                                                window.location.href = "../../autorizacion?opc=mens_cod_aps";
 
                                                 //  $.each($(".cod_aps"), function () {
 
@@ -268,26 +276,35 @@
                                                 for (var r = 1; r <= parseInt($(".num_huella").val()); r++) {
 
                                                     if ($(".cod_huella" + r).val() != "") {
-                                                        /*$.ajax({
-                                                         url: "../../trabajador",
-                                                         type: "POST",
-                                                         data: "opc=reg_huella&cod=" + $(".cod_huella" + r).val() + "&idtr=" + $(".idtr" + r).val()
-                                                         }).done(function () {
-                                                         });
-                                                         
-                                                         
-                                                         $.ajax({
-                                                         url: "../../autorizacion",
-                                                         type: "POST",
-                                                         data: "opc=Aceptar" + $(".val_aut" + r).val()
-                                                         }).done(function () {
-                                                         window.location.href = "../../autorizacion?opc=mens_cod_huella";
-                                                         });
-                                                         */
-                                                        alert($(".correos_"+r).val());
+                                                        $.ajax({
+                                                            url: "../../trabajador",
+                                                            type: "POST",
+                                                            data: "opc=reg_huella&cod=" + $(".cod_huella" + r).val() + "&idtr=" + $(".idtr" + r).val()
+                                                        }).done(function () {
+                                                        });
+
+
+                                                        $.ajax({
+                                                            url: "../../autorizacion",
+                                                            type: "POST",
+                                                            data: "opc=Aceptar" + $(".val_aut" + r).val()
+                                                        }).done(function () {
+
+                                                        });
+
+
+                                                        $.ajax({
+                                                            url: "../../autorizacion",
+                                                            type: "POST",
+                                                            data: "opc=Enviar_Correo" + $(".correos_" + r).val()
+                                                        }).done(function () {
+
+                                                        });
+
 
                                                     }
                                                 }
+                                                window.location.href = "../../autorizacion?opc=mens_cod_huella";
                                                 //  $.each($(".cod_aps"), function () {
 
                                                 /**/
@@ -497,7 +514,7 @@
                                                 if (Integer.parseInt(a.getVal_firm_contrato()) != 0 & Integer.parseInt(a.getElab_contrato()) != 0) {
                                                 %>
                                                 <div class="smart-form">
-                                                    <label class="toggle"><input type="checkbox" value="<%=(f + 1)%>"  class="env_rem"  name="estado" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
+                                                    <label class="toggle"><input type="checkbox" value="<%=(f + 1)%>"  class="env_rem<%=(f + 1)%>"  name="estado" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                 </div>
                                                 <%
                                                     } else {
