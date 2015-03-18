@@ -103,12 +103,15 @@ public class DireccionDAO implements InterfaceDireccionDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select * from rhtx_direccion";
+            String sql = "select * from rhtx_direccion order by NO_DIRECCION";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
                 rec.put("id", rs.getString("id_direccion"));
                 rec.put("nombre", rs.getString("no_direccion"));
+                rec.put("nom_corto",rs.getString("no_corto_dir"));
+                rec.put("filial",rs.getString("id_filial"));
+                rec.put("estado",rs.getString("es_direccion"));
                 lista.add(rec);
             }
             rs.close();
