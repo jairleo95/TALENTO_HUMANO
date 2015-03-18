@@ -889,7 +889,7 @@
 
                                                         </table>
                                                         <div class="h_total" style="color: red; font-weight: bold;">Horas Totales : 00:00 horas</div>
-                                                        <input  readonly="" type="text" name="horas_totales" class="h_total" required="" max="48"/>
+                                                        <input  readonly="" type="text" name="h_total" class="h_total" required="" max="48"/>
                                                         <input  type="hidden" name="dep_actual" value="<%=id_dep%>" class="dep_actual" />
                                                     </div>
                                                 </fieldset>
