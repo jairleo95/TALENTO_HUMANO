@@ -18,6 +18,7 @@
 <jsp:useBean id="List_Det_Puesto" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_Requerimiento" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="list_Cuenta_Sueldo" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="FECHA_MINIMA" scope="session" class="java.lang.String"/>
 
 <!DOCTYPE html >
 <html>
@@ -327,12 +328,12 @@
                                                     <div class="row">
                                                         <section class="col col-6" >
                                                             <label class="input" id="titu">Fecha de Inicio :
-                                                                <input type="date" name="FEC_DESDE" id="datepicker" required="" class="val_fe">
+                                                                <input type="date" name="FEC_DESDE" id="datepicker" required="" class="val_fe" min="<%=FECHA_MINIMA%>">
                                                             </label>
                                                         </section>
                                                         <section class="col col-6">
-                                                            <label class="input"  id="titu"> 
-                                                                Fecha de Cese :<input type="date" name="FEC_HASTA"  required="" id="datepicker">
+                                                            <label class="input"  id="titu">Fecha de Cese :
+                                                                <input type="date" name="FEC_HASTA"  required="" id="datepicker" min="<%=FECHA_MINIMA%>">
                                                             </label>
                                                         </section>
                                                     </div>
@@ -1834,6 +1835,9 @@
                         required: true
                     },
                     FEC_DESDE: {
+                        val_fecha: true
+                    },
+                    FEC_HASTA: {
                         val_fecha: true
                     },
                     horas_totales: {

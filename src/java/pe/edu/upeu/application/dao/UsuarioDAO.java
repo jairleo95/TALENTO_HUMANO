@@ -53,8 +53,9 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
         return list;
 
     }
+
     @Override
-    public List<Usuario> USER_LOGIN(String Usuario, String PWD ) {
+    public List<Usuario> USER_LOGIN(String Usuario, String PWD) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "SELECT * FROM RHTC_USUARIO where no_usuario='" + Usuario.trim() + "' and pw_usuario='" + PWD.trim() + "'";
         List<Usuario> list = new ArrayList<Usuario>();
@@ -252,7 +253,7 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
             JOptionPane.showMessageDialog(null, ex);
         } finally {
             this.conn.close();
-        }        
+        }
     }
 
     @Override
@@ -452,5 +453,22 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
             this.conn.close();
         }
 
+    }
+
+    @Override
+    public String fecha_minima() {
+        String fecha = "";
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT TO_CHAR(sysdate,'yyyy-mm-dd','nls_date_language=spanish') FROM dual;";
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                fecha = rs.getString(1);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return fecha;
     }
 }
