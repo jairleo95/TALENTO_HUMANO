@@ -13,6 +13,7 @@ import pe.edu.upeu.application.model.List_Rh_Contrato_Fec;
 import pe.edu.upeu.application.model.Modalidad;
 import pe.edu.upeu.application.model.Regimen_Laboral;
 import pe.edu.upeu.application.model.Sub_Modalidad;
+import pe.edu.upeu.application.model.V_Contrato_dgp;
 import pe.edu.upeu.application.model.V_List_Empleado;
 import pe.edu.upeu.application.model.X_List_Anno_Id_Tr_DGP;
 import pe.edu.upeu.application.model.X_List_Id_Contrato_DGP;
@@ -75,4 +76,5 @@ public interface InterfaceContratoDAO {
     
     public String obt_dgp_x_dgp(String id_contrato);
 
+    public List<V_Contrato_dgp> List_contrato(String id_contrato);
 }
