@@ -149,7 +149,7 @@
 
 
                             <!-- Widget ID (each widget will need unique ID)-->
-                            <div class="jarviswidget jarviswidget-color-red" id="wid-id-0" data-widget-editbutton="false">
+                            <div class="jarviswidget jarviswidget-color-red" id="wid-id-1" data-widget-editbutton="false">
                                 <!-- widget options:
                                 usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
@@ -202,14 +202,14 @@
                                                             type: "POST",
                                                             data: "opc=Aceptar" + $(".val_aut" + $(".env_rem" + i).val()).val()
                                                         }).done(function () {
-
+                                                            window.location.href = "../../autorizacion";
                                                         });
 
 
                                                     }
                                                 }
 
-                                                window.location.href = "../../autorizacion";
+
 
 
 
@@ -259,12 +259,12 @@
                                                             type: "POST",
                                                             data: "opc=Aceptar" + $(".val_aut" + r).val()
                                                         }).done(function () {
-
+                                                            window.location.href = "../../autorizacion?opc=mens_cod_aps";
                                                         });
                                                     }
 
                                                 }
-                                                window.location.href = "../../autorizacion?opc=mens_cod_aps";
+
 
                                                 //  $.each($(".cod_aps"), function () {
 
@@ -277,6 +277,14 @@
                                                 for (var r = 1; r <= parseInt($(".num_huella").val()); r++) {
 
                                                     if ($(".cod_huella" + r).val() != "") {
+
+                                                        $.ajax({
+                                                            url: "../../autorizacion",
+                                                            type: "POST",
+                                                            data: "opc=Enviar_Correo" + $(".correos_" + r).val()
+                                                        }).done(function () {
+
+                                                        });
                                                         $.ajax({
                                                             url: "../../trabajador",
                                                             type: "POST",
@@ -290,22 +298,17 @@
                                                             type: "POST",
                                                             data: "opc=Aceptar" + $(".val_aut" + r).val()
                                                         }).done(function () {
-
+                                                            window.location.href = "../../autorizacion?opc=mens_cod_huella";
                                                         });
 
 
-                                                        $.ajax({
-                                                            url: "../../autorizacion",
-                                                            type: "POST",
-                                                            data: "opc=Enviar_Correo" + $(".correos_" + r).val()
-                                                        }).done(function () {
 
-                                                        });
 
 
                                                     }
                                                 }
-                                                window.location.href = "../../autorizacion?opc=mens_cod_huella";
+
+
                                                 //  $.each($(".cod_aps"), function () {
 
                                                 /**/
@@ -341,8 +344,9 @@
                                                     <th data-hide="phone,tablet"><strong>Area</strong></th>
                                                     <th data-hide="phone,tablet"><strong>Departamento</strong></th>
                                                     <th data-hide="phone,tablet"><strong>Requerimiento</strong></th>
-                                                    <!--  <td>Departamento</td>-->
                                                     <th data-hide="phone,tablet"><strong>Descripción</strong></th>
+                                                    <!--  <td>Departamento</td>-->
+                                                    re
                                                     <th  data-hide="phone,tablet">Fecha de Creación</th>  
                                                     <th  data-hide="phone,tablet">Motivo</th>  
                                                     <th  data-hide="phone,tablet">MFL</th>  
@@ -570,10 +574,10 @@
                         <!-- WIDGET END -->
 
                     </div>
-                                        
+
                     <!-- end row -->
-                    
-                     <div class="row">
+
+                    <div class="row">
 
 
                         <!-- NEW WIDGET START -->
@@ -616,10 +620,10 @@
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">
 
-                                        <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
+                                        <table id="dt_basic1" class="table table-striped table-bordered table-hover" width="100%">
                                             <thead>
                                                 <tr data-hide="phone,tablet"> <th><strong>Nro</strong></th>
-                                                    
+
                                                     <th ><strong>MES</strong></th>
 
                                                     <!--<th data-hide="phone,tablet"><strong>Foto</strong> </th>-->
@@ -629,20 +633,22 @@
                                                     <th data-hide="phone,tablet"><strong>Area</strong></th>
                                                     <th data-hide="phone,tablet"><strong>Departamento</strong></th>
                                                     <th data-hide="phone,tablet"><strong>Requerimiento</strong></th>
+                                                    <th data-hide="phone,tablet"><strong>Descripción</strong></th>
                                                     <!--  <td>Departamento</td>-->
                                                     <th  data-hide="phone,tablet">Fecha de Creación</th>  
+                                                    <th  data-hide="phone,tablet">Fecha de Autorizacion</th>  
                                                     <th  data-hide="phone,tablet">Motivo</th>  
                                                     <th  data-hide="phone,tablet">MFL</th>  
-                                                       <%// if (dep.equals("DPT-0019")) {%>
+                                                        <%// if (dep.equals("DPT-0019")) {%>
 
                                                     <!--<th  ><strong>¿Cumplio Plazos?</strong></th>-->
-                                                        <%//if (idrol.trim().equals("ROL-0006")) {
+                                                    <%//if (idrol.trim().equals("ROL-0006")) {
 
-                                                        %>
+                                                    %>
                                                 </tr>
                                             </thead>
                                             <tbody> 
-                                                
+
                                                 <%for (int f = 0; f < List_id_Autorizados.size(); f++) {
 
                                                         V_Autorizar_Dgp a = new V_Autorizar_Dgp();
@@ -651,9 +657,9 @@
 
                                                 <tr>
                                                     <td><%=f + 1%></td>
-                                                   
-                                                   <td ><%=a.getMes_creacion()%></td>   
-                                                   
+
+                                                    <td ><%=a.getMes_creacion()%></td>   
+
                                                     <td ><%=a.getAp_paterno() + " " + a.getAp_materno() + " " + a.getNo_trabajador()%></td>
                                                     <td ><%=a.getNo_puesto()%></td>   
                                                     <td ><%=a.getNo_area()%></td>      
@@ -661,7 +667,9 @@
                                                     <td ><%=a.getNo_req()%></td>      
                                             <input type="hidden" class="val_aut<%=(f + 1)%>" value="&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&IDDETALLE_DGP=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&COD=<%=a.getCo_pasos()%>&IDPASOS=<%=a.getId_pasos()%>&NROPASO=<%=a.getNu_pasos()%>&IDTR=<%=a.getId_trabajador()%>"/>
                                             <input type="hidden" class="val_firm<%=(f + 1)%>" value="&IDDETALLE_DGP=<%=a.getId_dgp()%>&IDTR=<%=a.getId_trabajador()%>"/>
+                                            <td ><%=a.getNu_pasos()%><%=a.getDe_pasos()%></td>
                                             <td ><%=a.getFe_creacion()%></td>
+                                            <td ><%=a.getFe_aut() %></td>
                                             <td><%if (a.getLi_motivo() != null) {
                                                     if (a.getLi_motivo().trim().equals("1")) {
                                                         out.print("Trabajdor Nuevo");
@@ -682,12 +690,12 @@
                                                 } else {
                                                     out.print("No registrado");
                                                 }%></td> 
-                                               <%
-                                                }
-                                                List_id_Autorizados.clear();%>
+                                                <%
+                                                    }
+                                                    List_id_Autorizados.clear();%>
                                             </tbody>
                                         </table>
-                                       
+
 
                                     </div>
                                     <!-- end widget content -->
@@ -718,9 +726,9 @@
 
 
 
-                                        
 
-       
+
+
 
 
 
@@ -859,6 +867,24 @@
                                                     // Initialize the responsive datatables helper once.
                                                     if (!responsiveHelper_dt_basic) {
                                                         responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
+                                                    }
+                                                },
+                                                "rowCallback": function (nRow) {
+                                                    responsiveHelper_dt_basic.createExpandIcon(nRow);
+                                                },
+                                                "drawCallback": function (oSettings) {
+                                                    responsiveHelper_dt_basic.respond();
+                                                }
+                                            });
+                                            $('#dt_basic1').dataTable({
+                                                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
+                                                        "t" +
+                                                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                                                "autoWidth": true,
+                                                "preDrawCallback": function () {
+                                                    // Initialize the responsive datatables helper once.
+                                                    if (!responsiveHelper_dt_basic) {
+                                                        responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic1'), breakpointDefinition);
                                                     }
                                                 },
                                                 "rowCallback": function (nRow) {

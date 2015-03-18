@@ -20,6 +20,8 @@ public interface InterfaceUsuarioDAO {
     public List<Usuario> List_Usuario();
 
     public List<V_Usuario> Val_Usuario(String Usuario, String PWD);
+    
+    public List<Usuario> USER_LOGIN(String Usuario, String PWD);
 
     public int Val_Cuenta(int Usuario);
 

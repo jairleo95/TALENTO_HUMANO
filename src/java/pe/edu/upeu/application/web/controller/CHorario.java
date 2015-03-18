@@ -91,7 +91,9 @@ public class CHorario extends HttpServlet {
             String ID_TIPO_HORARIO = request.getParameter("HORARIO");
             String ES_MOD_FORMATO = "1";
 
-            IHor.Insert_Detalle_Horario(ID_DETALLE_HORARIO, ID_DGP, ES_DETALLE_HORARIO, iduser, null, null, null, ID_TIPO_HORARIO, ES_MOD_FORMATO);
+            
+            
+          //  IHor.Insert_Detalle_Horario(ID_DETALLE_HORARIO, ID_DGP, ES_DETALLE_HORARIO, iduser, null, null, null, ID_TIPO_HORARIO, ES_MOD_FORMATO);
 
             ID_DETALLE_HORARIO = IHor.Max_id_Detalle_Horario();
 

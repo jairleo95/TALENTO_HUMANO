@@ -264,11 +264,12 @@ public class CDgp extends HttpServlet {
             String ES_HORARIO = "1";
             String ID_TIPO_HORARIO = request.getParameter("HORARIO");
             String ES_MOD_FORMATO = "1";
+            double horas_totales = 0.0;
+            horas_totales = Double.valueOf(request.getParameter("h_total"));
+            horas_totales = Math.round(horas_totales * 100.0) / 100.0;
+            ID_DETALLE_HORARIO = IHor.Insert_Detalle_Horario(ID_DETALLE_HORARIO, iddgp, ES_DETALLE_HORARIO, iduser, null, null, null, ID_TIPO_HORARIO, ES_MOD_FORMATO, horas_totales);
 
-            IHor.Insert_Detalle_Horario(ID_DETALLE_HORARIO, iddgp, ES_DETALLE_HORARIO, iduser, null, null, null, ID_TIPO_HORARIO, ES_MOD_FORMATO);
-
-            ID_DETALLE_HORARIO = IHor.Max_id_Detalle_Horario();
-
+            //  ID_DETALLE_HORARIO = IHor.Max_id_Detalle_Horario();
             for (int i = 0; i < dia.size(); i++) {
                 for (int j = 0; j < 10; j++) {
                     String hora_desde = request.getParameter("HORA_DESDE_" + dia.get(i) + j);
@@ -282,7 +283,7 @@ public class CDgp extends HttpServlet {
                                     hora_hasta,
                                     d,
                                     ES_HORARIO,
-                                    ID_DETALLE_HORARIO);
+                                    ID_DETALLE_HORARIO.trim());
                         }
                     }
                 }
@@ -296,8 +297,6 @@ public class CDgp extends HttpServlet {
             getServletContext().setAttribute("List_Conyugue", doc.List_Conyugue(ID_TRABAJADOR));
 
             response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&pro=pr_dgp&idtr=" + ID_TRABAJADOR);
-            // response.sendRedirect("Vista/Dgp/Horario/Reg_Horario.jsp?iddgp=" + iddgp + "&idtr=" + ID_TRABAJADOR + "&opc=rd");
-
         }
 
         if (opc.equals("Reg_form")) {
@@ -406,27 +405,27 @@ public class CDgp extends HttpServlet {
                     getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
 
                     int asig = dht.ASIGNACION_F(ID_TRABAJADOR);
-                     Calendar fecha = new GregorianCalendar();
-            int año = fecha.get(Calendar.YEAR);
-            int mes = fecha.get(Calendar.MONTH);
-            int dia = fecha.get(Calendar.DAY_OF_MONTH);
-            String fe_subs = "";
-            if (mes < 9 && dia < 9) {
-                fe_subs = año + "-" + "0" + (mes + 1) + "-" + "0" + dia;
-            }
+                    Calendar fecha = new GregorianCalendar();
+                    int año = fecha.get(Calendar.YEAR);
+                    int mes = fecha.get(Calendar.MONTH);
+                    int dia = fecha.get(Calendar.DAY_OF_MONTH);
+                    String fe_subs = "";
+                    if (mes < 9 && dia < 9) {
+                        fe_subs = año + "-" + "0" + (mes + 1) + "-" + "0" + dia;
+                    }
 
-            if (mes < 9 && dia > 9) {
-                fe_subs = año + "-" + "0" + (mes + 1) + "-" + dia;
-            }
+                    if (mes < 9 && dia > 9) {
+                        fe_subs = año + "-" + "0" + (mes + 1) + "-" + dia;
+                    }
 
-            if (mes >= 9 && dia < 9) {
-                fe_subs = año + "-" + (mes + 1) + "-" + "0" + dia;
-            }
-            if (mes >= 9 && dia > 9) {
-                fe_subs = año + "-" + (mes + 1) + "-" + dia;
-            }
+                    if (mes >= 9 && dia < 9) {
+                        fe_subs = año + "-" + (mes + 1) + "-" + "0" + dia;
+                    }
+                    if (mes >= 9 && dia > 9) {
+                        fe_subs = año + "-" + (mes + 1) + "-" + dia;
+                    }
                     //out.println(id_dir);
-                    response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp?num=" + asig + "&id_direc=" + id_dir +"&fe_subs=" + fe_subs);
+                    response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp?num=" + asig + "&id_direc=" + id_dir + "&fe_subs=" + fe_subs);
 
                 } else if (num == 0 & idrol.trim().equals("ROL-0006") & dgp.LIST_ID_DGP(ID_DGP).get(0).getEs_dgp().equals("1")) {
                     String ida1 = anno.List_Anno_Max_Cont(idtr);

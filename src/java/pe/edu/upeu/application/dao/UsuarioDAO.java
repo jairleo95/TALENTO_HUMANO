@@ -53,6 +53,30 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
         return list;
 
     }
+    @Override
+    public List<Usuario> USER_LOGIN(String Usuario, String PWD ) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT * FROM RHTC_USUARIO where no_usuario='" + Usuario.trim() + "' and pw_usuario='" + PWD.trim() + "'";
+        List<Usuario> list = new ArrayList<Usuario>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Usuario us = new Usuario();
+                us.setId_usuario(rs.getString("id_usuario"));
+                us.setId_rol(rs.getString("id_rol"));
+                us.setId_empleado(rs.getString("id_empleado"));
+                us.setNo_usuario(rs.getString("no_usuario"));
+                us.setPw_usuario(rs.getString("pw_usuario"));
+                list.add(us);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+
+        return list;
+
+    }
 
     @Override
     public List<V_Usuario> Val_Usuario(String Usuario, String PWD) {

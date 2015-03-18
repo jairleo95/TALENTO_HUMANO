@@ -51,6 +51,7 @@ public class V_Autorizar_Dgp {
     private String es_mfl;
     private String di_correo_personal;
     private String di_correo_inst;
+    private String fe_aut;
 
     public String getDi_correo_personal() {
         return di_correo_personal;
@@ -130,7 +131,7 @@ public class V_Autorizar_Dgp {
             String id_requerimiento, String id_tipo_planilla, String no_req, String id_pasos, String no_usuario, String id_usuario, String no_seccion, String no_area,
             String ar_foto, String de_foto, String id_foto, String no_ar_foto, String ta_ar_foto, String ti_ar_foto, String fe_creacion, int val_plazo, String ver_list_plazo,
             String elab_contrato, String val_firm_contrato, String no_dep, String mes_creacion, int val_cod_aps_empleado, int val_cod_huella, int co_aps, int co_huella_digital,
-            String li_motivo, String es_mfl, String di_correo_personal, String di_correo_inst) {
+            String li_motivo, String es_mfl, String di_correo_personal, String di_correo_inst, String fe_aut) {
         this.id_trabajador = id_trabajador;
         this.no_trabajador = no_trabajador;
         this.ap_paterno = ap_paterno;
@@ -172,6 +173,7 @@ public class V_Autorizar_Dgp {
         this.es_mfl = es_mfl;
         this.di_correo_personal = di_correo_personal;
         this.di_correo_inst = di_correo_inst;
+        this.fe_aut = fe_aut;
     }
 
     public V_Autorizar_Dgp() {
@@ -216,6 +218,7 @@ public class V_Autorizar_Dgp {
         this.es_mfl = "";
         this.di_correo_personal = "";
         this.di_correo_inst = "";
+        this.fe_aut = "";
     }
 
     public int getCo_aps() {
@@ -474,4 +477,11 @@ public class V_Autorizar_Dgp {
         this.ti_ar_foto = ti_ar_foto;
     }
 
+    public String getFe_aut() {
+        return fe_aut;
+    }
+
+    public void setFe_aut(String fe_aut) {
+        this.fe_aut = fe_aut;
+    }
 }
