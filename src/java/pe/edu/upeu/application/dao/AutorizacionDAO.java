@@ -427,10 +427,12 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 v.setNo_area(rs.getString("no_area"));
                // v.setAr_foto(rs.getString("ar_foto"));
                 v.setFe_creacion(rs.getString("fe_creacion"));
+                v.setFe_aut(rs.getString("fe_autorizacion"));
                 v.setNo_dep(rs.getString("no_dep"));
                 v.setMes_creacion(rs.getString("mes_creacion"));
                 v.setLi_motivo(rs.getString("LI_MOTIVO"));
                 v.setEs_mfl(rs.getString("ES_MFL"));
+                v.setDe_pasos(rs.getString("de_pasos"));
                 list.add(v);
             }
         } catch (SQLException e) {
