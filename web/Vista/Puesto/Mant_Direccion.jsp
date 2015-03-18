@@ -41,20 +41,20 @@
                                                     <section class="col col-3">
                                                         <label class="label">Nombre</label>
                                                         <label class="input">
-                                                            <input class="inpNombre"type="text" placeholder="Escribir nombre de Direccion">
+                                                            <input class="inpNombre"type="text" placeholder="Escribir nombre de Direccion" required="" maxlength="100">
                                                         </label>
                                                     </section>
                                                     <section class="col col-3">
                                                         <label class="label">Nombre Corto</label>
                                                         <label class="input">
-                                                            <input class="inpNCorto"type="text" placeholder="Escribir nombre Corto">
+                                                            <input class="inpNCorto"type="text" placeholder="Escribir nombre Corto" required="" maxlength="30">
                                                         </label>
                                                     </section>
                                                     <section class="col col-3">
                                                         <label class="label">Estado</label>
                                                         <label class="select">
-                                                            <select class="inpEstado">
-                                                                <option value="0">[Seleccione]</option>
+                                                            <select class="inpEstado" required="0">
+                                                                <option value="">[Seleccione]</option>
                                                                 <option value="1">Hablilitado</option>
                                                                 <option value="2">Deshabilitado</option>
                                                             </select>
@@ -63,8 +63,8 @@
                                                     <section class="col col-3">
                                                         <label class="label">Filial</label>
                                                         <label class="select">
-                                                            <select class="inpFilial">
-                                                                <option value="0">[Seleccione]</option>
+                                                            <select class="inpFilial" required="0">
+                                                                <option value="">[Seleccione]</option>
                                                                 <option value="1">Lima</option>
                                                                 <option value="5">Tarapoto</option>
                                                                 <option value="2">Juliaca</option>
@@ -148,9 +148,50 @@
             $(document).ready(function () {
                 var valNum;
                 cargar_t();
+                $('.inpNombre, .inpNCorto').change(function () {
+                    if ($(this).val() != "") {
+                        validarE($(this).parent(), true);
+                    } else {
+                        validarE($(this).parent(), false);
+                    }
+                });
+                $('.inpEstado, .inpFilial').change(function () {
+                    if ($(this).val() == 0) {
+                        validarE($(this).parent(), false);
+                    } else {
+                        validarE($(this).parent(), true);
+                    }
+                });
                 $('.btnAceptar').click(function () {
+                    if ($('.titulo_t').attr('value') == 1) {
+                        var id, nombre, ncorto, estado, filial;
+                        nombre = $('.inpNombre').val();
+                        ncorto = $('.inpNCorto').val();
+                        estado = $('.inpEstado').val();
+                        filial = $('.inpFilial').val();
+                        crear(nombre, ncorto, estado, filial);
+                    } else if ($('.titulo_t').attr('value') == 2) {
+                        var id, nombre, ncorto, estado, filial;
+                        id = $('.inpId').attr('value');
+                        nombre = $('.inpNombre').val();
+                        ncorto = $('.inpNCorto').val();
+                        estado = $('.inpEstado').val();
+                        filial = $('.inpFilial').val();
+                        editar(id, nombre, ncorto, estado, filial);
+                    }
 
                 });
+
+                function validarE(elem, boo) {
+                    if (boo == true) {
+                        elem.removeClass('state-error');
+                        elem.addClass("state-success");
+                    }
+                    if (boo == false) {
+                        elem.removeClass('state-success');
+                        elem.addClass('state-error');
+                    }
+                }
                 function cargar_t() {
                     var tabb = "";
                     tabb += '<table class="table table-striped table-bordered table-hover tabla_t" width="100%"><thead><tr>';
@@ -169,12 +210,12 @@
                             tex += "<td class='valNombre" + (i + 1) + "'>" + list[i].nombre + "</td>";
                             if (list[i].nom_corto == undefined) {
                                 tex += "<td class='valNCorto" + (i + 1) + "'>No asignado</td>";
-                            } else{
+                            } else {
                                 tex += "<td class='valNCorto" + (i + 1) + "'>" + list[i].nom_corto + "</td>";
                             }
                             if (list[i].estado == 1) {
                                 tex += "<td class='valEstado" + (i + 1) + "' value='1'>Habilitado</td>";
-                            } else if (list[i].estado == 0) {
+                            } else if (list[i].estado == 2) {
                                 tex += "<td class='valEstado" + (i + 1) + "' value='2'>Deshabilitado</td>";
                             }
                             if (list[i].filial == 1) {
@@ -189,7 +230,7 @@
                             tex += '<li><a class="btnEditar" value=' + (i + 1) + '>Editar</a></li>';
                             if (list[i].estado == 1) {
                                 tex += '<li><a class="btnDes" value=' + (i + 1) + '>Deshabilitar</a></li>';
-                            } else if (list[i].estado == 0) {
+                            } else if (list[i].estado == 2) {
                                 tex += '<li><a class="btnHab" value=' + (i + 1) + '>Habilitar</a></li>';
                             }
                             tex += '<li><a class="btnEliminar" value=' + (i + 1) + '>Eliminar</a></li></ul></div></center></td>';
@@ -198,8 +239,9 @@
                         t.append(tex);
                         tex = "";
                         $('.tabla_t').dataTable();
+                        var id, nombre, ncorto, estado, filial;
+
                         $('.btnEditar').click(function () {
-                            var id, nombre, ncorto, estado, filial;
                             valNum = $(this).attr('value');
                             id = $('.valId' + valNum).attr('value');
                             nombre = $('.valNombre' + valNum).text();
@@ -221,12 +263,29 @@
 
                         });
                         $('.btnEliminar').click(function () {
-
+                            valNum = $(this).attr('value');
+                            id = $('.valId' + valNum).attr('value');
+                            alert(id);
+                            eliminar(id);
                         });
                     });
                 }
+                function eliminar(id) {
+                    $.post("../../Puesto", "opc=eliminar-Direccion&id=" + id, function () {
+                        cargar_t();
+                    });
+                }
                 function editar(id, nombre, ncorto, estado, filial) {
-
+                    var data = "opc=editar-Direccion&id=" + id + "&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado + "&filial=" + filial;
+                    $.post("../../Puesto", data, function () {
+                        cargar_t();
+                    });
+                }
+                function crear(nombre, ncorto, estado, filial) {
+                    var data = "opc=crear-Direccion&&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado + "&filial=" + filial;
+                    $.post("../../Puesto", data, function () {
+                        cargar_t();
+                    });
                 }
             });
         </script>
