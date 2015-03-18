@@ -50,7 +50,9 @@ public class CPuesto extends HttpServlet {
                 response.sendRedirect("Vista/Puesto/Menu_puesto.jsp");
             }
             if (opc.equals("list_direccion")) {
-                
+                List<Map<String ,?>> list= di.List_Direccion();
+                rpta.put("rpta", "1");
+                rpta.put("lista", list);
             }
                                     
         } catch (Exception e) {

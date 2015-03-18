@@ -5,7 +5,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%String opc= request.getParameter("opc"); %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,6 +29,6 @@
             </ul>
 
         </div>
-        <iframe id="myframe" name="myframe3" width="100%" height="800" scrolling="si" frameborder="0" src="<%=opc%>.jsp" ></iframe>
+        <iframe id="myframe" name="myframe3" width="100%" height="800" scrolling="si" frameborder="0" src="Mant_Direccion.jsp" ></iframe>
     </body>
 </html>
