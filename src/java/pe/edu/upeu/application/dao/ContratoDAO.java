@@ -26,6 +26,7 @@ import pe.edu.upeu.application.model.Modalidad;
 import pe.edu.upeu.application.model.Plantilla_Contractual;
 import pe.edu.upeu.application.model.Regimen_Laboral;
 import pe.edu.upeu.application.model.Sub_Modalidad;
+import pe.edu.upeu.application.model.V_Contrato_dgp;
 import pe.edu.upeu.application.model.V_List_Empleado;
 import pe.edu.upeu.application.model.X_List_Anno_Id_Tr_DGP;
 import pe.edu.upeu.application.model.X_List_Id_Contrato_DGP;
@@ -598,16 +599,16 @@ public class ContratoDAO implements InterfaceContratoDAO {
     public String obt_dgp_x_dgp(String id_contrato) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String Maxcto = null;
-            String sql = "SELECt ID_DGP FROM RHTM_CONTRATO WHERE ID_CONTRATO='" + id_contrato.trim() + "'";
-            try {
-                ResultSet rs = this.conn.query(sql);
-                while (rs.next()) {
-                    Maxcto = rs.getString(1);
-                }
-            } catch (Exception e) {
-            } finally {
-                this.conn.close();
+        String sql = "SELECt ID_DGP FROM RHTM_CONTRATO WHERE ID_CONTRATO='" + id_contrato.trim() + "'";
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Maxcto = rs.getString(1);
             }
+        } catch (Exception e) {
+        } finally {
+            this.conn.close();
+        }
         return Maxcto;
     }
 
@@ -926,6 +927,109 @@ public class ContratoDAO implements InterfaceContratoDAO {
         } finally {
             this.conn.close();
         }
+    }
+
+    @Override
+    public List<V_Contrato_dgp> List_contrato(String id_contrato) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT * FROM RHVD_CONTRATO_DGP where ID_CONTRATO='" + id_contrato.trim() + "'";
+        List<V_Contrato_dgp> list = new ArrayList<V_Contrato_dgp>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                V_Contrato_dgp v = new V_Contrato_dgp();
+                v.setAp_paterno(rs.getString("ap_paterno"));
+                v.setAp_materno(rs.getString("ap_materno"));
+                v.setCa_asig_familiar(rs.getDouble("ca_asig_familiar"));
+                v.setCa_bev(rs.getDouble("ca_bev"));
+                v.setCa_bonificacion_p(rs.getDouble("ca_bonificacion_p"));
+                v.setCa_bono_alimento(rs.getDouble("ca_bono_alimento"));
+                v.setCa_reintegro(rs.getDouble("ca_reintegro"));
+                v.setCa_sueldo(rs.getDouble("ca_sueldo"));
+                v.setCa_sueldo_total(rs.getDouble("ca_sueldo_total"));
+                v.setCo_sucursal(rs.getString("co_sucursal"));
+                v.setCo_ti_moneda(rs.getString("co_ti_moneda"));
+                v.setCo_ti_rem_variab(rs.getString("co_ti_rem_variab"));
+                v.setDe_grupo_ocupacion(rs.getString("de_grupo_ocupacion"));
+                v.setDe_modalidad(rs.getString("de_modalidad"));
+                v.setDe_mype(rs.getString("de_mype"));
+                v.setDe_observacion(rs.getString("de_observacion"));
+                v.setDe_registro_sistem_remu(rs.getString("de_registro_sistem_remu"));
+                v.setDe_remu_especie(rs.getString("de_remu_especie"));
+                v.setDe_ruc_emp_trab(rs.getString("de_ruc_emp_trab"));
+                v.setDe_sub_modalidad(rs.getString("de_sub_modalidad"));
+                v.setDia_contrato(rs.getDouble("dia_contrato"));
+                v.setDi_dom_a_d2(rs.getString("di_dom_a_d2"));
+                v.setDi_dom_a_d4(rs.getString("di_dom_a_d4"));
+                v.setDi_dom_a_d6(rs.getString("di_dom_a_d6"));
+                v.setEs_apoyo(rs.getString("es_apoyo"));
+                v.setEs_contrato(rs.getString("es_contrato"));
+                v.setEs_contrato_trabajador(rs.getString("es_contrato_trabajador"));
+                v.setEs_discapacidad(rs.getString("es_discapacidad"));
+                v.setEs_entregar_doc_reglamentos(rs.getString("es_entregar_doc_reglamentos"));
+                v.setEs_firmo_contrato(rs.getString("es_firmo_contrato"));
+                v.setEs_registro_huella(rs.getString("es_registro_huella"));
+                v.setEs_ti_contratacion(rs.getString("es_ti_contratacion"));
+                v.setFe_cese(rs.getString("fe_cese"));
+                v.setFe_creacion(rs.getString("fe_creacion"));
+                v.setFe_des(rs.getString("fe_des"));
+                v.setFe_desde(rs.getString("fe_desde"));
+                v.setFe_has(rs.getString("fe_has"));
+                v.setFe_hasta(rs.getString("fe_hasta"));
+                v.setFe_modif(rs.getString("fe_modif"));
+                v.setFe_sus(rs.getString("fe_sus"));
+                v.setFe_suscripcion(rs.getString("fe_suscripcion"));
+                v.setFe_vacacio_fin(rs.getString("fe_vacacio_fin"));
+                v.setFe_vacacio_ini(rs.getString("fe_vacacio_ini"));
+                v.setHo_semana(rs.getDouble("ho_semana"));
+                v.setId_anno(rs.getString("id_anno"));
+                v.setId_area(rs.getString("id_area"));
+                v.setId_contrato(rs.getString("id_contrato"));
+                v.setId_departamento(rs.getString("id_departamento"));
+                v.setId_dgp(rs.getString("id_dgp"));
+                v.setId_direccion(rs.getString("id_direccion"));
+                v.setId_filial(rs.getString("id_filial"));
+                v.setId_func(rs.getString("id_func"));
+                v.setId_grupo_ocupacion(rs.getString("id_grupo_ocupacion"));
+                v.setId_plantilla_contractual(rs.getString("id_plantilla_contractual"));
+                v.setId_puesto(rs.getString("id_puesto"));
+                v.setId_regimen_laboral(rs.getString("id_regimen_laboral"));
+                v.setId_seccion(rs.getString("id_seccion"));
+                v.setId_sub_modalidad(rs.getString("id_sub_modalidad"));
+                v.setId_trabajador(rs.getString("id_trabajador"));
+                v.setLi_condicion(rs.getString("li_condicion"));
+                v.setLi_di_dom_a_d1(rs.getString("li_di_dom_a_d1"));
+                v.setLi_di_dom_a_d3(rs.getString("li_di_dom_a_d3"));
+                v.setLi_di_dom_a_d5(rs.getString("li_di_dom_a_d5"));
+                v.setLi_motivo(rs.getString("li_motivo"));
+                v.setLi_regimen_laboral(rs.getString("li_regimen_laboral"));
+                v.setLi_regimen_pensionario(rs.getString("li_regimen_pensionario"));
+                v.setLi_tipo_convenio(rs.getString("li_tipo_convenio"));
+                v.setNo_area(rs.getString("no_area"));
+                v.setNo_dep(rs.getString("no_dep"));
+                v.setNo_direccion(rs.getString("no_direccion"));
+                v.setNo_distrito(rs.getString("no_distrito"));
+                v.setNo_provincia(rs.getString("no_provincia"));
+                v.setNo_puesto(rs.getString("no_puesto"));
+                v.setNo_seccion(rs.getString("no_seccion"));
+                v.setNo_trabajador(rs.getString("no_trabajador"));
+                v.setNu_contrato(rs.getDouble("nu_contrato"));
+                v.setNu_documento(rs.getString("nu_documento"));
+                v.setNu_horas_lab(rs.getDouble("nu_horas_lab"));
+                v.setTi_contrato(rs.getString("ti_contrato"));
+                v.setTi_hora_pago(rs.getString("ti_hora_pago"));
+                v.setTi_trabajador(rs.getString("ti_trabajador"));
+                v.setUs_creacion(rs.getString("us_creacion"));
+                v.setUs_ip(rs.getString("us_ip"));
+                v.setUs_modif(rs.getString("us_modif"));
+                v.setEs_mfl(rs.getString("es_mfl"));
+                list.add(v);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return list;
     }
 
 }

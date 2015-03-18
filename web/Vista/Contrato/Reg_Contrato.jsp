@@ -171,8 +171,10 @@
                                                 <select disabled=""  class="input-group-sm">
                                                     <%if (d.getLi_motivo().trim().equals("1")) {%>
                                                     <option  selected="selected">Trabajador Nuevo</option>   
+                                                    <option  >renovación</option>   
                                                     <%} else {%>
-                                                    <option  selected="selected">renovación</option>   
+                                                    <option >Trabajador Nuevo</option>   
+                                                    <option selected="selected">renovación</option>   
                                                     <%}%>
                                                 </select>  
                                             </label>
