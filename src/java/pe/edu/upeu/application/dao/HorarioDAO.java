@@ -81,7 +81,6 @@ public class HorarioDAO implements InterfaceHorarioDAO {
         String id = "";
 
         try {
-
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DETALLE_HORARIO( ?, ?, ?, ?, ?, ?, ?, ?, ?,?,? )}");
             cst.setString(1, null);
@@ -159,6 +158,25 @@ public class HorarioDAO implements InterfaceHorarioDAO {
         } finally {
             this.conn.close();
         }
+    }
+
+    @Override
+    public double Ca_Horas_Totales(String iddgp) {
+
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT CA_HORAS_TOTAL FROM RHTD_DETALLE_HORARIO WHERE ID_DGP='" + iddgp.trim() + "'";
+        double num = 0.0;
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                num = rs.getDouble(1);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return num;
+
     }
 
 }

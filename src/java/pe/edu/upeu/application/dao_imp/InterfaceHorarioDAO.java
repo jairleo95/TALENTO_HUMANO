@@ -22,5 +22,7 @@ public interface InterfaceHorarioDAO {
 
     public String Max_id_Detalle_Horario();
 
+    public double Ca_Horas_Totales(String iddgp);
+
     public List<V_Horario> List_V_Horario(String iddgp);
 }
