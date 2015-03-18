@@ -270,6 +270,12 @@
                         });
                     });
                 }
+                function desactivar(id){
+                    
+                }
+                function activar(id){
+                    
+                }
                 function eliminar(id) {
                     $.post("../../Puesto", "opc=eliminar-Direccion&id=" + id, function () {
                         cargar_t();
