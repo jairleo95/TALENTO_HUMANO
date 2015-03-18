@@ -149,6 +149,9 @@ public class CContrato extends HttpServlet {
             String idcon = request.getParameter("idc");
             String idtr = request.getParameter("idtr");
             getServletContext().setAttribute("List_Anno_trabajador", a.List_Anno_trabajador(idtr));
+            getServletContext().setAttribute("List_contrato", con.List_contrato(idcon));
+            getServletContext().setAttribute("List_Anno", a.List_Anno());
+            getServletContext().setAttribute("Listar_Direccion", dir.Listar_Direccion());
             getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(idcon));
             getServletContext().setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(idcon));
             getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
@@ -157,8 +160,11 @@ public class CContrato extends HttpServlet {
             getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
             getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
             getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
+            getServletContext().setAttribute("List_modalidad", con.List_modalidad());
+            getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
             String id_dg = request.getParameter("id_dg");
             String id_dir = puesto.List_Puesto_x_id_con(idcon);
+            String id_modalidad = sub.id_mod_x_id_con(idcon);
             int num = dht.ASIGNACION_F(idtr);
             if (id_dg != null) {
                 getServletContext().setAttribute("Listar_cc_dgp", cc.Listar_cc_dgp(id_dg));
@@ -183,7 +189,7 @@ public class CContrato extends HttpServlet {
             if (mes >= 9 && dia > 9) {
                 fe_subs = año + "-" + (mes + 1) + "-" + dia;
             }
-            response.sendRedirect("Vista/Contrato/Editar_Contrato.jsp?num=" + num + "&id_direc=" + id_dir + "&fe_subs=" + fe_subs);
+            response.sendRedirect("Vista/Contrato/Editar_Contrato.jsp?num=" + num + "&id_direc=" + id_dir + "&fe_subs=" + fe_subs + "&id_mod=" + id_modalidad);
 
         }
         if (opc.equals("Detalle_Contractual")) {
@@ -212,10 +218,10 @@ public class CContrato extends HttpServlet {
                 String id_pu = puesto.puesto(id_cto);
                 getServletContext().setAttribute("List_x_fun_x_idpu", fu.List_x_fun_x_idpu(id_pu));
                 id_dgp = con.obt_dgp_x_dgp(id_cto);
+                getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_cto));
+                getServletContext().setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_cto));
             }
             getServletContext().setAttribute("List_Anno_trabajador", a.List_Anno_trabajador(idtr));
-            getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_cto));
-            getServletContext().setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_cto));
             getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
             //getServletContext().setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
             getServletContext().setAttribute("List_Usuario", usu.List_Usuario());

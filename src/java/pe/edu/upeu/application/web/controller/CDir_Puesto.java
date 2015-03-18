@@ -21,11 +21,13 @@ import pe.edu.upeu.application.dao.DepartamentoDao;
 import pe.edu.upeu.application.dao.DireccionDAO;
 import pe.edu.upeu.application.dao.PuestoDAO;
 import pe.edu.upeu.application.dao.SeccionDAO;
+import pe.edu.upeu.application.dao.Sub_ModalidadDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAreaDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDepartamentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceSeccionDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceSub_ModalidadDAO;
 
 /**
  *
@@ -47,6 +49,7 @@ public class CDir_Puesto extends HttpServlet {
     InterfaceAreaDAO are = new AreaDAO();
     InterfaceSeccionDAO sec = new SeccionDAO();
     InterfacePuestoDAO p = new PuestoDAO();
+    InterfaceSub_ModalidadDAO sub = new Sub_ModalidadDAO();
     InterfaceDireccionDAO dir = new DireccionDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -94,7 +97,6 @@ public class CDir_Puesto extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
-
             if (opc.equals("Listar_sec")) {
                 String id_are = request.getParameter("id_are");
                 List<Map<String, ?>> lista = sec.List_sec_id(id_are);
@@ -103,7 +105,6 @@ public class CDir_Puesto extends HttpServlet {
             }
 
             /*CIERRE*/
-
             if (opc.equals("Listar")) {
                 String id_dir = request.getParameter("id_dir");
                 List<Map<String, ?>> lista = dep.Listar_dep_id(id_dir);
@@ -131,7 +132,14 @@ public class CDir_Puesto extends HttpServlet {
                 p.Registrar_Puesto_Paso(null, idpasos, idpu, null, co_pasos);
                 rpta.put("rpta", "1");
             }
+            /*SUBMODALIDAD*/
+            if (opc.equals("Listar_SUB_MO")) {
+                String id_mod = request.getParameter("id");
+                List<Map<String, ?>> lista = sub.Listar_Sub_mo_x_mod(id_mod);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
 
+            }
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());

@@ -1,7 +1,17 @@
+<%@page import="pe.edu.upeu.application.model.Grupo_Ocupaciones"%>
+<%@page import="pe.edu.upeu.application.model.Modalidad"%>
+<%@page import="pe.edu.upeu.application.model.Regimen_Laboral"%>
+<%@page import="pe.edu.upeu.application.model.Direccion"%>
+<%@page import="pe.edu.upeu.application.model.Anno"%>
+<%@page import="pe.edu.upeu.application.model.V_Contrato_dgp"%>
 <%@page import="pe.edu.upeu.application.model.X_List_Id_Contrato_DGP"%>
 <%@page import="pe.edu.upeu.application.model.X_List_Id_Contrato_DGP"%>
-<jsp:useBean id="List_contra_x_idcto" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="LIST_ID_DGP" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_contrato" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Anno" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_Direccion" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="list_reg_labo" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_modalidad" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_grup_ocu" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html >
 <html>
     <head>
@@ -123,53 +133,92 @@
                             <br>
 
                             <a href="Reg_Contrato.php?hac_cont=1&idtr=<? echo $idtr;?>">Hacer Contrato de Todas Maneras</a>
-                            <%for (int i = 0; i < List_contra_x_idcto.size(); i++) {
-                                    X_List_Id_Contrato_DGP a = new X_List_Id_Contrato_DGP();
-                                    a = (X_List_Id_Contrato_DGP) List_contra_x_idcto.get(i);
+                            <%for (int i = 0; i < List_contrato.size(); i++) {
+                                    V_Contrato_dgp a = new V_Contrato_dgp();
+                                    a = (V_Contrato_dgp) List_contrato.get(i);
                             %>
+
                             <form action="../../contrato" id="checkout-form" class="smart-form"  method="POST" novalidate="novalidate">
                                 <fieldset id="fila-agregar">
+                                    <%if (a.getId_dgp() != null) {%>
                                     <div class="row">
                                         <section class="col col-2">
                                             <label class="select" id="titulo">Motivo :
-                                                <select disabled=""  class="input-group-sm">
-                                                    <option  selected="selected">Trabajador Nuevo</option>   
+                                                <select class="input-group-sm">
+                                                    <%if (a.getLi_motivo().trim().equals("1")) {%>
+                                                    <option value="1" selected="">Trabajador Nuevo</option>   
+                                                    <option value="2" >renovación</option>   
+                                                    <%} else {%>
+                                                    <option value="1" >Trabajador Nuevo</option>   
+                                                    <option value="2" selected="">renovación</option>
+                                                    <%}%>
                                                 </select>
                                             </label>
                                         </section >
                                         <section class="col col-1" style=" margin-top:2%;">
                                             <label class="toggle" id="titulo" > MFL:
-                                                <input type="checkbox" name="checkbox-toggle"checked="" >
-                                                <i data-swchoff-text="NO"  data-swchon-text="SI"></i>       
+                                                <%if (a.getEs_mfl().trim().equals("1")) {%>
+                                                <input type="checkbox" name="checkbox-toggle" checked="" >
+                                                <%} else {%>
+                                                <input type="checkbox" name="checkbox-toggle"  >
+                                                <%}%>
+                                                <i data-swchoff-text="NO"  data-swchon-text="SI"></i>
                                             </label>
                                         </section>
                                     </div>
+                                    <%}%>
                                     <div class="row" >
                                         <input type="hidden" name="id_rol_ses" id="id_rol_s" value="">
-                                        <input type="hidden" name="TIPO_PLANILLA"  value="">
+                                        <input type="hidden" name="TIPO_PLANILLA"  value="<%%>">
                                         <input type="hidden" name="HORARIO"  value="">
                                         <section class="col col-2">
                                             <label class="select" id="titulo">Año:
                                                 <select name="AÑO_ID" required="" class="input-group-sm">
-                                                    <option value="" selected="selected"></option>
-                                                    <option value=""></option>
-                                                </select>  </label>
+                                                    <%for (int b = 0; b < List_Anno.size(); b++) {
+                                                            Anno an = new Anno();
+                                                            an = (Anno) List_Anno.get(b);
+                                                            if (a.getId_anno().trim().equals(an.getId_anno().trim())) {
+                                                    %>
+                                                    <option value="<%=an.getId_anno()%>" selected=""><%=an.getNo_anno()%></option>
+                                                    <%} else {%>
+                                                    <option value="<%=an.getId_anno()%>"><%=an.getNo_anno()%></option>
+                                                    <%}
+                                                        }%>
+                                                </select>  
+                                            </label>
                                         </section>
                                         <input type="hidden" name="IDDETALLE_DGP" value="" class="text-box" id="id_dg" >                              
                                         <section class="col col-2">
-                                            <label class="input" id="titulo">Desde: 
-                                                <input type="date" name="FEC_DESDE" value="" class=" input-group-sm" required="">
+                                            <label class="input" id="titulo">Desde:
+                                                <%if (a.getFe_desde() != null) {%>
+                                                <input type="date" name="FEC_DESDE" value="<%=a.getFe_desde()%>" class=" input-group-sm" required="">
+                                                <%} else {%>
+                                                <input type="date" name="FEC_DESDE" class=" input-group-sm" required="">
+                                                <%}%>
                                             </label>
                                         </section>
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Hasta: 
-                                                <input type="date" name="FEC_HASTA" value="" class="input-group-sm" required="">
+                                                <%if (a.getFe_hasta() != null) {%>
+                                                <input type="date" name="FEC_HASTA" value="<%=a.getFe_hasta()%>" class="input-group-sm" required="">
+                                                <%} else {%>
+                                                <input type="date" name="FEC_DESDE" class=" input-group-sm" required="">
+                                                <%}%>
                                             </label>
                                         </section>
                                         <section class="col col-3" id="titulo">
                                             <label class="select" id="titulo">Dirección:
                                                 <select name="DIRECCION" class="select_dir input-group-sm" id="select_dir">
-                                                    <option value="">[SELECCIONE]</option>
+                                                    <%for (int c = 0; c < Listar_Direccion.size(); c++) {
+                                                            Direccion dir = new Direccion();
+                                                            dir = (Direccion) Listar_Direccion.get(c);
+                                                            if (a.getId_direccion().trim().equals(dir.getId_direccion().trim())) {
+                                                    %>
+                                                    <option value="<%=dir.getId_direccion()%>" selected=""><%=dir.getNo_direccion()%></option>
+                                                    <%} else {%>
+                                                    <option value="<%=dir.getId_direccion()%>"><%=dir.getNo_direccion()%></option>
+                                                    <%}
+                                                        }%>
                                                 </select>  </label>
                                         </section>
                                         <section class="sec_dep col col-3" id="titulo">
@@ -200,6 +249,16 @@
                                         <section class="col col-3">
                                             <label class="select" id="titulo">Condición:
                                                 <select name="CONDICION" class="input-group-sm" required="">
+                                                    <%if (a.getLi_condicion() != null) {%>
+                                                    <option value="1" <%if (a.getLi_condicion().trim().equals("1")) {%>selected=""<% }%>>Contratado</option>
+                                                    <option value="2" <%if (a.getLi_condicion().trim().equals("2")) {%>selected=""<%}%>>Contratado Independiente</option>
+                                                    <option value="3" <%if (a.getLi_condicion().trim().equals("3")) {%>selected=""<%}%>> Enpleado</option>
+                                                    <option value="4" <%if (a.getLi_condicion().trim().equals("4")) {%>selected=""<%}%>>Misionero</option>
+                                                    <option value="5" <%if (a.getLi_condicion().trim().equals("5")) {%>selected=""<%}%>>MFL-Práctica Pre-Profesional</option>
+                                                    <option value="6" <%if (a.getLi_condicion().trim().equals("6")) {%>selected=""<%}%>>MFL-Práctica Profesionales</option>
+                                                    <option value="7" <%if (a.getLi_condicion().trim().equals("7")) {%>selected=""<%}%>>MFL-CLJ</option>
+                                                    <option value="8" <%if (a.getLi_condicion().trim().equals("8")) {%>selected=""<%}%>>MFL-Contrato</option>
+                                                    <%} else {%>
                                                     <option value="">[SELECCIONE]</option>
                                                     <option value="1">Contratado</option>
                                                     <option value="2">Contratado Independiente</option>
@@ -209,6 +268,7 @@
                                                     <option value="6">MFL-Práctica Profesionales</option>
                                                     <option value="7">MFL-CLJ</option>
                                                     <option value="8">MFL-Contrato</option>
+                                                    <%}%>
                                                 </select>
                                             </label>
                                         </section>
@@ -216,43 +276,43 @@
                                     <div class="row">
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Remuneración:
-                                                <input type="text" name="SUELDO" value="" class="input-group-sm" id="remu">
+                                                <input type="text" name="SUELDO" value="<%=a.getCa_sueldo()%>" class="input-group-sm" id="remu" >
                                             </label>
                                         </section>
                                         <section class="col col-1">
                                             <label class="input" id="titulo">Reintegro:
-                                                <input type="text" name="REINTEGRO" value="0" class="input-group-sm" id="rein">
+                                                <input type="text" name="REINTEGRO" value="<%=a.getCa_reintegro()%>" class="input-group-sm" id="rein">
                                             </label>
                                         </section>
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Bono Alimentario:
-                                                <input type="text" name="BONO_ALIMENTO" value="" class="input-group-sm" id="bo_a">
+                                                <input type="text" name="BONO_ALIMENTO" value="<%=a.getCa_bono_alimento()%>" class="input-group-sm" id="bo_a">
                                             </label>
                                         </section>
                                         <section class="col col-1">
                                             <label class="input" id="titulo">BEV:
-                                                <input type="text" name="BEV" value="" class="input-group-sm" id="bev">
+                                                <input type="text" name="BEV" value="<%=a.getCa_bev()%>" class="input-group-sm" id="bev">
                                             </label>
                                         </section>
                                         <section class="col col-1">
                                             <label class="input" id="titulo">Bono puesto:
-                                                <input type="text" name="ca_bono_puesto" value="" class="input-group-sm" required="" id="ca_bono_pu">
+                                                <input type="text" name="ca_bono_puesto" value="<%=a.getCa_bonificacion_p()%>" class="input-group-sm" required="" id="ca_bono_pu">
                                             </label>
                                         </section>
 
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Sueldo Total:
-                                                <input type="text" name="TOTAL_SUELDO" value="" class="input-group-sm" id="su_t">
+                                                <input type="text" name="TOTAL_SUELDO" value="<%=a.getCa_sueldo_total()%>" class="input-group-sm" id="su_t">
                                             </label>
                                         </section>
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Tipo Horas Pago:
-                                                <input type="text" name="TIPO_HORA_PAGO" value="0" class="input-group-sm">
+                                                <input type="text" name="TIPO_HORA_PAGO" value="<%=a.getTi_hora_pago()%>" class="input-group-sm">
                                             </label>
                                         </section>
                                         <section class="col col-2" >
                                             <label class="input" id="titulo">Asignanción Familiar:
-                                                <input type="text" name="ASIG_FAMILIAR" value="0"  class="input-group-sm" id="asig">
+                                                <input type="text" name="ASIG_FAMILIAR" value="<%=a.getCa_asig_familiar()%>"  class="input-group-sm" id="asig">
                                             </label>
                                         </section>
                                     </div>
@@ -330,7 +390,21 @@
                                         <section class="col col-4">
                                             <label class="select" id="titulo">Regimen Laboral Mintra:
                                                 <select name="REG_LAB_MINTRA" class="input-group-sm" required="">
-                                                    <option value="">[SELECCIONE]</option>
+                                                    <option value="">[SELECCIONE]</option> 
+                                                    <%for (int d = 0; d < list_reg_labo.size(); d++) {
+                                                            Regimen_Laboral re = new Regimen_Laboral();
+                                                            re = (Regimen_Laboral) list_reg_labo.get(d);
+                                                            if (a.getId_regimen_laboral() != null) {
+                                                                if (a.getId_regimen_laboral().trim().equals(re.getId_regimen_laboral().trim())) {
+                                                    %>
+                                                    <option value="<%=re.getId_regimen_laboral()%>" selected=""><%=re.getDe_regimen_l()%></option>
+                                                    <%} else {%>
+                                                    <option value="<%=re.getId_regimen_laboral()%>"><%=re.getDe_regimen_l()%></option>
+                                                    <%}
+                                                    } else {%>
+                                                    <option value="<%=re.getId_regimen_laboral()%>"><%=re.getDe_regimen_l()%></option>
+                                                    <%}
+                                                        }%>
                                                 </select>
                                             </label>
                                         </section>
@@ -338,6 +412,20 @@
                                             <label class="select" id="titulo">Modalidad:
                                                 <select name="MODALIDAD" class="input-group-sm" id="select_mod" required="">
                                                     <option value="">[SELECCIONE]</option>
+                                                    <%for (int l = 0; l < List_modalidad.size(); l++) {
+                                                            Modalidad mo = new Modalidad();
+                                                            mo = (Modalidad) List_modalidad.get(l);
+                                                            if (request.getParameter("id_mod") != null) {
+                                                                if (request.getParameter("id_mod").trim().equals(mo.getId_modalidad().trim())) {
+                                                    %>
+                                                    <option value="<%=mo.getId_modalidad()%>" selected=""><%=mo.getDe_modalidad()%></option>
+                                                    <%} else {%>
+                                                    <option value="<%=mo.getId_modalidad()%>" ><%=mo.getDe_modalidad()%></option>
+                                                    <%}
+                                                    } else {%>
+                                                    <option value="<%=mo.getId_modalidad()%>"><%=mo.getDe_modalidad()%></option>
+                                                    <%}
+                                                        }%>
                                                 </select>
                                             </label>
                                         </section>
@@ -361,6 +449,18 @@
                                             <label class="select" id="titulo">Codigo Grupo de Ocupaciones:
                                                 <select name="CO_GRUPO_OCU" class="input-group-sm" required="">
                                                     <option value="">[SELECCIONE]</option>
+                                                    <%for (int gr = 0; gr < List_grup_ocu.size(); gr++) {
+                                                            Grupo_Ocupaciones g = new Grupo_Ocupaciones();
+                                                            g = (Grupo_Ocupaciones) List_grup_ocu.get(gr);
+                                                            if (a.getId_grupo_ocupacion() != null) {
+                                                                if (a.getId_grupo_ocupacion().trim().equals(g.getId_grupo_ocupacion().trim())) {
+                                                    %>    
+                                                    <option value="<%=g.getId_grupo_ocupacion()%>" selected=""><%=g.getDe_grupo_ocupacion()%></option>
+                                                    <%} else {%>
+                                                    <option value="<%=g.getId_grupo_ocupacion()%>"><%=g.getDe_grupo_ocupacion()%></option>
+                                                    <%}
+                                                            }
+                                                        }%>
                                                 </select>
                                             </label>
                                         </section>
@@ -372,20 +472,34 @@
                                         <section class="col col-4">
                                             <label class="select" id="titulo">Tipo de Modeda:
                                                 <select name="TIPO_MONEDA" class="input-group-sm" required="">
+                                                    <%if (a.getCo_ti_moneda() != null) {%>
+                                                    <option value="">[SELECCIONE]</option>
+                                                    <option value="01" <%if (a.getCo_ti_moneda().trim().equals("01")) {%> selected=""<%}%> >SOLES</option>
+                                                    <option value="02" <%if (a.getCo_ti_moneda().trim().equals("02")) {%> selected=""<%}%>>DOLARES</option>
+                                                    <option value="03" <%if (a.getCo_ti_moneda().trim().equals("03")) {%> selected=""<%}%>>EUROS</option>
+                                                    <%} else {%>
                                                     <option value="">[SELECCIONE]</option>
                                                     <option value="01" selected="">SOLES</option>
                                                     <option value="02">DOLARES</option>
                                                     <option value="03">EUROS</option>
+                                                    <%}%>
                                                 </select>
                                             </label>
                                         </section>
                                         <section class="col col-4">
                                             <label class="select" id="titulo">Tipo Remuneracion Variable:
                                                 <select name="REM_VARIABLE" class="input-group-sm" required="">
+                                                    <%if (a.getCo_ti_rem_variab() != null) {%>
+                                                    <option value=""  >[SELECCIONE]</option>
+                                                    <option value="1" <%if (a.getCo_ti_rem_variab().trim().equals("1")) {%> selected=""<%}%> >DESTAJO</option>
+                                                    <option value="2" <%if (a.getCo_ti_rem_variab().trim().equals("2")) {%> selected=""<%}%> >COMISIONES</option>
+                                                    <option value="3" <%if (a.getCo_ti_rem_variab().trim().equals("3")) {%> selected=""<%}%> >NINGUNO</option>
+                                                    <%} else {%>
                                                     <option value="">[SELECCIONE]</option>
                                                     <option value="1">DESTAJO</option>
                                                     <option value="2">COMISIONES</option>
                                                     <option value="3">NINGUNO</option>
+                                                    <%}%>
                                                 </select>
                                             </label>
                                         </section>
@@ -393,8 +507,13 @@
                                             <label class="select" id="titulo">Remuneración en Especie:
                                                 <select name="REM_ESPECIE" class="input-group-sm" required="">
                                                     <option value="">[SELECCIONE]</option>
+                                                    <%if (a.getDe_remu_especie() != null) {%>
+                                                    <option value="1" <%if (a.getDe_remu_especie().trim().equals("1")) {%> selected=""<%}%> >SI</option>
+                                                    <option value="0" <%if (a.getDe_remu_especie().trim().equals("0")) {%> selected=""<%}%> >NO</option>
+                                                    <%} else {%>
                                                     <option value="1">SI</option>
                                                     <option value="0">NO</option>
+                                                    <%}%>
                                                 </select>
                                             </label>
                                         </section>
@@ -433,8 +552,13 @@
                                             <label class="select" id="titulo">Tipo Trabajador.
                                                 <select name="TIPO_TRABAJADOR" class="input-group-sm" required="">
                                                     <option value="">[SELECCIONE]</option>
+                                                    <%if (a.getTi_trabajador() != null) {%>
+                                                    <option value="1" <%if (a.getTi_trabajador().trim().equals("1")) {%> selected=""<%}%> >Empleado</option>
+                                                    <option value="2" <%if (a.getTi_trabajador().trim().equals("2")) {%> selected=""<%}%> >Obrero</option>
+                                                    <%} else {%>
                                                     <option value="1" selected>Empleado</option>
-                                                    <option value="2">Obrero</option>
+                                                    <option value="2">Obrero</option>F
+                                                    <%}%>
                                                 </select>
                                             </label>
                                         </section>
@@ -442,8 +566,13 @@
                                             <label class="select" id="titulo">Regimen Laboral: 
                                                 <select name="REGIMEN_LABORAL" class="input-group-sm" required="">
                                                     <option value="">[SELECCIONE]</option>
-                                                    <option value="1" selected>Privado</option>
-                                                    <option value="2" selected>Público</option>
+                                                    <%if (a.getLi_regimen_laboral() != null) {%>
+                                                    <option value="1" <%if (a.getLi_regimen_laboral().trim().equals("1")) {%> selected=""<%}%> >Privado</option>
+                                                    <option value="2" <%if (a.getLi_regimen_laboral().trim().equals("2")) {%> selected=""<%}%> >Público</option>
+                                                    <%} else {%>
+                                                    <option value="1">Privado</option>
+                                                    <option value="2" selected="">Público</option>
+                                                    <%}%>
                                                 </select>
                                             </label>
                                         </section>
@@ -451,8 +580,14 @@
                                             <label class="select" id="titulo"> Discapacidad:
                                                 <select name="DISCAPACIDAD" class="input-group-sm" required="">
                                                     <option value="">[SLECCIONE]</option>
+                                                    <%if (a.getEs_discapacidad() != null) {%>
+                                                    <option value="1" <%if (a.getEs_discapacidad().trim().equals("1")) {%> selected=""<%}%> >No</option>
+                                                    <option value="2" <%if (a.getEs_discapacidad().trim().equals("2")) {%> selected=""<%}%> >Si</option>
+                                                    <%} else {%>
                                                     <option value="1" selected>No</option>
                                                     <option value="2">Si</option>
+                                                    <%}%>
+
                                                 </select>
                                             </label>
                                         </section>
@@ -460,8 +595,14 @@
                                             <label class="select" id="titulo">Regimen Pensionario:
                                                 <select name="REGIMEN_PENSIONARIO" class="input-group-sm" required="">
                                                     <option value="">[SELECCIONE]</option>
+                                                    <%if (a.getLi_regimen_pensionario() != null) {%>
+                                                    <option value="1" <%if (a.getLi_regimen_pensionario().trim().equals("1")) {%> selected=""<%}%>>Privado</option>
+                                                    <option value="2" <%if (a.getLi_regimen_pensionario().trim().equals("2")) {%> selected=""<%}%>>SNP</option>
+                                                    <%} else {%>
                                                     <option value="1" selected>Privado</option>
                                                     <option value="2">SNP</option>
+                                                    <%}%>
+
                                                 </select>
                                             </label>
                                         </section>
@@ -469,6 +610,20 @@
                                             <label class="select" id="titulo">Tipo Contrato::
                                                 <select name="TIPO_CONTRATO" class="input-group-sm" required="">
                                                     <option value="">[SELECCIONE]</option>
+                                                    <%if (a.getTi_contrato() != null) {%>
+                                                    <option value="1" <%if (a.getTi_contrato().trim().equals("1")) {%> selected=""<%}%>>Necesidad de Mercado</option>
+                                                    <option value="2" <%if (a.getTi_contrato().trim().equals("2")) {%> selected=""<%}%>>Incremento de Actividad</option>
+                                                    <option value="3" <%if (a.getTi_contrato().trim().equals("3")) {%> selected=""<%}%>>Servicio Especifico</option>
+                                                    <option value="4" <%if (a.getTi_contrato().trim().equals("4")) {%> selected=""<%}%>>Inicio de Actividad</option>
+                                                    <option value="5" <%if (a.getTi_contrato().trim().equals("5")) {%> selected=""<%}%>>Tiempo Parcial</option>
+                                                    <option value="6" <%if (a.getTi_contrato().trim().equals("6")) {%> selected=""<%}%>>Indeterminado</option>
+                                                    <option value="7" <%if (a.getTi_contrato().trim().equals("7")) {%> selected=""<%}%>>Extranjero</option>
+                                                    <option value="8" <%if (a.getTi_contrato().trim().equals("8")) {%> selected=""<%}%>>Suplencia</option>
+                                                    <option value="9" <%if (a.getTi_contrato().trim().equals("9")) {%> selected=""<%}%>>Contrato Civil</option>
+                                                    <option value="10" <%if (a.getTi_contrato().trim().equals("10")) {%> selected=""<%}%>>De Temporada</option>
+                                                    <option value="11" <%if (a.getTi_contrato().trim().equals("11")) {%> selected=""<%}%>>Locacion de Servicios</option>
+                                                    <option value="12" <%if (a.getTi_contrato().trim().equals("12")) {%> selected=""<%}%>>No Domiciliados</option>
+                                                    <%} else {%>
                                                     <option value="1">Necesidad de Mercado</option>
                                                     <option value="2">Incremento de Actividad</option>
                                                     <option value="3">Servicio Especifico</option>
@@ -481,6 +636,7 @@
                                                     <option value="10">De Temporada</option>
                                                     <option value="11">Locacion de Servicios</option>
                                                     <option value="12">No Domiciliados</option>
+                                                    <%}%>
                                                 </select>
                                             </label>
                                         </section>
@@ -488,9 +644,15 @@
                                             <label class="select" id="titulo">Tipo Convenio:
                                                 <select name="TIPO_CONVENIO" class="input-group-sm" >
                                                     <option value="">[SELECCIONE]</option>
+                                                    <%if (a.getLi_tipo_convenio() != null) {%>
+                                                    <option value="1" <%if (a.getLi_tipo_convenio().trim().equals("1")) {%> selected=""<%}%> >CLJ</option>
+                                                    <option value="2" <%if (a.getLi_tipo_convenio().trim().equals("2")) {%> selected=""<%}%>>PPP</option>
+                                                    <option value="3" <%if (a.getLi_tipo_convenio().trim().equals("3")) {%> selected=""<%}%>>PP</option>
+                                                    <%} else {%>
                                                     <option value="1">CLJ</option>
                                                     <option value="2">PPP</option>
                                                     <option value="3">PP</option>
+                                                    <%}%>
                                                 </select>
                                             </label>
                                         </section>
@@ -535,9 +697,15 @@
                                             <label class="select" id="titulo">Filial donde Trabaja:
                                                 <select name="FILIAL" class="input-group-sm" required="">
                                                     <option value="">[SELECCIONE]</option>
+                                                    <%if (a.getId_filial() != null) {%>
+                                                    <option value="1" <%if (a.getId_filial().trim().equals("1")) {%> selected=""<%}%>>Lima</option>
+                                                    <option value="2" <%if (a.getId_filial().trim().equals("2")) {%> selected=""<%}%>>Juliaca</option>
+                                                    <option value="3" <%if (a.getId_filial().trim().equals("3")) {%> selected=""<%}%>>Tarapoto</option>
+                                                    <%} else {%>
                                                     <option value="1" selected >Lima</option>
                                                     <option value="2">Juliaca</option>
                                                     <option value="3">Tarapoto</option>
+                                                    <%}%>
                                                 </select>
                                             </label>
                                         </section>
@@ -576,19 +744,22 @@
                                     <input type="hidden" value="" name="IDDATOS_TRABAJADOR" class="text-box" >
 
                                 </fieldset>
-                                <input type="hidden" value="" class="dep_pu">
-                                <input type="hidden" value="" class="area_pu">
-                                <input type="hidden" value="" class="dir_pu">
-                                <input type="hidden" value="" class="sec_pu">
-                                <input type="hidden" value="" class="id_pu_dgp">
+                                <input type="hidden" value="<%=a.getId_departamento()%>" class="dep_pu">
+                                <input type="hidden" value="<%=a.getId_area()%>" class="area_pu">
+                                <input type="hidden" value="<%=a.getId_direccion()%>" class="dir_pu">
+                                <input type="hidden" value="<%=a.getId_seccion()%>" class="sec_pu">
+                                <input type="hidden" value="<%=a.getId_puesto()%>" class="id_pu_dgp">
+                                <input type="hidden" value="<%=request.getParameter("id_mod")%>" class="id_mod_con">
+                                <input type="hidden" value="<%=a.getId_sub_modalidad()%>" class="id_sub_mod">
+                                <input type="hidden" value="<%=a.getId_plantilla_contractual()%>" class="id_pl_con">
                                 <footer>
 
-                                    <input type="hidden" name="opc"   value="REGISTRAR CONTRATO">
-                                    <button type="submit" id="submit" class="btn btn-primary">
-                                        REGISTRAR CONTRATO
+                                    <input type="hidden" name="opc"   value="MODIFICAR CONTRATO">
+                                    <button type="submit" id="submit" class="btn btn-primary" >
+                                        MODIFICAR CONTRATO
                                     </button>
-                                    <a type="button" class="btn btn-success" href="../../horario?iddgp=&opc=Listar">Ver Horario</a>
-                                    <a type="button" class="btn btn-success" href="../../documento?iddgp=&idtr=&opc=Ver_Documento">Ver Documentos</a>
+                                    <!--<a type="button" class="btn btn-success" href="../../horario?iddgp=&opc=Listar">Ver Horario</a>
+                                    <a type="button" class="btn btn-success" href="../../documento?iddgp=&idtr=&opc=Ver_Documento">Ver Documentos</a>-->
                                 </footer>
                             </form>
                             <%}%>
@@ -1175,10 +1346,26 @@
                 s.append("<option value='' > [SELECCIONE] </option>");
                 for (var j = 0; j < lista.length; j++) {
 
-                    if ($(".sec_pu").val() == lista[j].id) {
+                    if ($(".sec_pu").val().trim() == lista[j].id.trim()) {
                         s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nom + "</option>");
                     } else {
                         s.append("<option value='" + lista[j].id + "'> " + lista[j].nom + "</option>");
+                    }
+                }
+            });
+        }
+        function Listar_pue() {
+            var s = $("#pu_id_se");
+            $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $(".sec_pu").val(), function(objJson) {
+                s.empty();
+                var lista = objJson.lista;
+                s.append("<option value='' > [SELECCIONE] </option>");
+                for (var j = 0; j < lista.length; j++) {
+
+                    if ($(".id_pu_dgp").val() == lista[j].id) {
+                        s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nombre + "</option>");
+                    } else {
+                        s.append("<option value='" + lista[j].id + "'> " + lista[j].nombre + "</option>");
                     }
                 }
             });
@@ -1191,16 +1378,40 @@
                 var lista = objJson.lista;
                 s.append("<option value='' > [SELECCIONE] </option>");
                 for (var i = 0; i < lista.length; i++) {
-                    s.append("<option value='" + lista[i].id + "'> " + lista[i].nom_pl + "</option>");
+                    if ($(".id_pl_con").val() == lista[i].id) {
+                        s.append("<option value='" + lista[i].id + "' selected=''> " + lista[i].nom_pl + "</option>");
+                    } else {
+                        s.append("<option value='" + lista[i].id + "'> " + lista[i].nom_pl + "</option>");
+                    }
+                }
+            });
+        }
+        function listar_sub_mod() {
+            var s = $("#select-sub-mod");
+
+            $.post("../../Direccion_Puesto", "opc=Listar_SUB_MO&" + "id=" + $(".id_mod_con").val(), function(objJson) {
+                s.empty();
+                var lista = objJson.lista;
+                s.append("<option value='' > [SELECCIONE] </option>");
+                for (var i = 0; i < lista.length; i++) {
+                    if ($(".id_sub_mod").val() == lista[i].id.trim()) {
+                        s.append("<option value='" + lista[i].id + "' selected=''> " + lista[i].nombre + "</option>");
+                    } else {
+                        s.append("<option value='" + lista[i].id + "'> " + lista[i].nombre + "</option>");
+                    }
                 }
             });
         }
         $(document).ready(function() {
             Listar_centro_costo();
+            Listar_pue();
             Listar_dep();
             Listar_sec();
             Listar_area();
+            //
             Listar_plantilla();
+            listar_sub_mod();
+
 
             var a = $("#select-sub-mod");
             var c = $("#Selec_Area");
