@@ -13,10 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import pe.edu.upeu.application.dao.AutorizacionDAO;
+import pe.edu.upeu.application.dao.CorreoDAO;
 import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.EmpleadoDAO;
 import pe.edu.upeu.application.dao.RequerimientoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceCorreoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceEmpleadoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
@@ -46,6 +48,7 @@ public class CAutorizacion extends HttpServlet {
         InterfaceDgpDAO dgp = new DgpDAO();
         HttpSession sesion = request.getSession(true);
         InterfaceRequerimientoDAO IReq = new RequerimientoDAO();
+        InterfaceCorreoDAO correo = new CorreoDAO();
 
         String iduser = (String) sesion.getAttribute("IDUSER");
         String ide = (String) sesion.getAttribute("IDPER");
@@ -69,6 +72,7 @@ public class CAutorizacion extends HttpServlet {
                 a.Insert_Autorizacion("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
                 String idpu = e.Id_Puesto_Personal(ide);
                 getServletContext().setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
+                getServletContext().setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
                 response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?r=ok");
             }
             if (opc.equals("HDGP")) {
@@ -93,6 +97,7 @@ public class CAutorizacion extends HttpServlet {
                 a.Insert_Autorizacion("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
                 String idpu = e.Id_Puesto_Personal(ide);
                 getServletContext().setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
+                 getServletContext().setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
                 response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?r=ok");
             }
             //AUTORIZACION CARGA ACADEMICA POR DOCENTE
@@ -104,19 +109,49 @@ public class CAutorizacion extends HttpServlet {
             if (opc.equals("mens_cod_aps")) {
                 String idpu = e.Id_Puesto_Personal(ide);
                 getServletContext().setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
+                 getServletContext().setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
                 response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?m=si");
             }
             if (opc.equals("mens_cod_huella")) {
                 String idpu = e.Id_Puesto_Personal(ide);
                 getServletContext().setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
+                 getServletContext().setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
                 response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?h=si");
             }
+            if (opc.equals("Enviar_Correo")) {
+                String to = request.getParameter("to");
+                //  String from = request.getParameter("from");
+                String asunto = request.getParameter("asunto");
+                String cuerpo = request.getParameter("cuerpo");
+
+                String correo_inst = request.getParameter("co_inst");
+                String correo_personal = request.getParameter("co_pers");
+                //correo.Enviar(to, from, asunto, cuerpo);
+                correo.Enviar("jairleo95@gmail.com", correo_inst, "CARPETA LABORAL - UPEU", "Estimado(a) Colaborador(a),\n"
+                        + "Compartimos la siguiente información\n \n"
+                        + "- Bienestar para el trabajador\n"
+                        + "- Reglamento de Control de Asistencia\n"
+                        + "- Reglamento de trabajo\n"
+                        + "- Boletín Informativo - sistema pensionario\n \n"
+                        + "Saludos Cordiales");
+                correo.Enviar("jairleo95@gmail.com", correo_personal, "CARPETA LABORAL - UPEU", "Estimado(a) Colaborador(a),\n"
+                        + "Compartimos la siguiente información\n \n"
+                        + "- Bienestar para el trabajador\n"
+                        + "- Reglamento de Control de Asistencia\n"
+                        + "- Reglamento de trabajo\n"
+                        + "- Boletín Informativo - sistema pensionario\n \n"
+                        + "Saludos Cordiales");
+                //  response.sendRedirect("Prueba_Mail.jsp");
+            }
+
             //try {
         } else {
 
             String idpu = e.Id_Puesto_Personal(ide);
             getServletContext().setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
-            response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp");
+             getServletContext().setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
+             out.print( a.List_Autorizados(idpu).size());
+              response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp");
 
         }
         /* } finally {

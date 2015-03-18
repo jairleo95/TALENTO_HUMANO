@@ -209,8 +209,8 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "select *  from rhvd_autorizar_dgp where id_puesto='" + id + "'";
         sql += (!"".equals(id_user)) ? " and id_usuario='" + id_user + "'" : "";
-        sql += (true) ? " order by fe_creacion " : "" ;
-        
+        sql += (true) ? " order by fe_creacion " : "";
+
         List<V_Autorizar_Dgp> list = new ArrayList<V_Autorizar_Dgp>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -256,6 +256,8 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 v.setCo_huella_digital(rs.getInt("CO_HUELLA_DIGITAL"));
                 v.setLi_motivo(rs.getString("LI_MOTIVO"));
                 v.setEs_mfl(rs.getString("ES_MFL"));
+                v.setDi_correo_personal(rs.getString("DI_CORREO_PERSONAL"));
+                v.setDi_correo_inst(rs.getString("DI_CORREO_INST"));
                 list.add(v);
             }
         } catch (SQLException e) {
@@ -403,6 +405,39 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 throw new RuntimeException(e.getMessage());
             }
         }
+    }
+
+    @Override
+    public List<V_Autorizar_Dgp> List_Autorizados(String id_puesto) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT * FROM RHVD_DGP_AUTORIZADOS where ID_PUESTO = '" + id_puesto + "'";
+        //sql += (true) ? " order by fe_creacion " : "" ;
+        
+        List<V_Autorizar_Dgp> list = new ArrayList<V_Autorizar_Dgp>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                V_Autorizar_Dgp v = new V_Autorizar_Dgp();
+                v.setNo_trabajador(rs.getString("no_trabajador"));
+                v.setAp_paterno(rs.getString("ap_paterno"));
+                v.setAp_materno(rs.getString("ap_materno"));
+                v.setNo_puesto(rs.getString("no_puesto"));
+                v.setNo_puesto(rs.getString("id_puesto"));
+                v.setNo_req(rs.getString("no_req"));
+                v.setNo_area(rs.getString("no_area"));
+               // v.setAr_foto(rs.getString("ar_foto"));
+                v.setFe_creacion(rs.getString("fe_creacion"));
+                v.setNo_dep(rs.getString("no_dep"));
+                v.setMes_creacion(rs.getString("mes_creacion"));
+                v.setLi_motivo(rs.getString("LI_MOTIVO"));
+                v.setEs_mfl(rs.getString("ES_MFL"));
+                list.add(v);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return list;
     }
 
 }
