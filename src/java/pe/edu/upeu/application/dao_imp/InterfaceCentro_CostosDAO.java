@@ -38,6 +38,5 @@ public interface InterfaceCentro_CostosDAO {
 
     public List<Detalle_Centro_Costo> Cargar_dcc_dgp(String id_dgp);
     
-    public List<String> Listar_cc_dgp(String id_dgp);
-
+    public List<String> list_cc_x_con(String id_con);
 }

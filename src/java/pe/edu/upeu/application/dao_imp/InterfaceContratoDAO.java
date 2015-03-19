@@ -77,4 +77,7 @@ public interface InterfaceContratoDAO {
     public String obt_dgp_x_dgp(String id_contrato);
 
     public List<V_Contrato_dgp> List_contrato(String id_contrato);
+    
+    public void MODIFICAR_CONTRATO();
+    
 }

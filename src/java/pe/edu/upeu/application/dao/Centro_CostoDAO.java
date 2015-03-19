@@ -313,14 +313,14 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
     }
 
     @Override
-    public List<String> Listar_cc_dgp(String id_dgp) {
-        this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT (pd.id_direccion||'/'||cc.ID_CENTRO_COSTO||'/'||cc.ID_DEPARTAMENTO)as info FROM RHVD_PUESTO_DIRECCION pd, RHTR_CENTRO_COSTO cc,RHTD_DETALLE_CENTRO_COSTO cen WHERE cen.ID_CENTRO_COSTO = cc.ID_CENTRO_COSTO and pd.ID_DEPARTAMENTO = cc.ID_DEPARTAMENTO  and cen.ID_DGP='"+id_dgp.trim()+"' group by ( pd.id_direccion,cc.ID_CENTRO_COSTO,cc.ID_DEPARTAMENTO)";
+    public List<String> list_cc_x_con(String id_con) {
+       this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT (DC.ID_DETALLE_CENTRO_COSTO||'/'||CC.ID_DEPARTAMENTO||'/'||pu.ID_DIRECCION)as centro_costos FROM RHTR_CENTRO_COSTO CC,RHTD_DETALLE_CENTRO_COSTO DC,RHVD_PUESTO_DIRECCION pu WHERE DC.ID_CENTRO_COSTO = CC.ID_CENTRO_COSTO and pu.ID_DEPARTAMENTO = CC.ID_DEPARTAMENTO AND DC.ID_CONTRATO='"+id_con.trim()+"' GROUP by (DC.ID_DETALLE_CENTRO_COSTO||'/'||CC.ID_DEPARTAMENTO||'/'||pu.ID_DIRECCION)";
         List<String> list = new ArrayList<String>();
         try {
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
-                list.add(rs.getString("info"));
+                list.add(rs.getString("centro_costos"));
             }
         } catch (SQLException e) {
         } finally {

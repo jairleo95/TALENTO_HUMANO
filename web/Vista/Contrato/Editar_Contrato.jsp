@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="pe.edu.upeu.application.model.Grupo_Ocupaciones"%>
 <%@page import="pe.edu.upeu.application.model.Modalidad"%>
 <%@page import="pe.edu.upeu.application.model.Regimen_Laboral"%>
@@ -12,6 +13,7 @@
 <jsp:useBean id="list_reg_labo" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_modalidad" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_grup_ocu" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="list_cc_x_con" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html >
 <html>
     <head>
@@ -383,6 +385,74 @@
         
         
                                     </div>-->
+                                    <%if (list_cc_x_con.size() > 0) {%>
+                                    <%for (int cc = 0; cc < list_cc_x_con.size(); cc++) {
+                                            String cadena = list_cc_x_con.get(cc).toString();
+                                            String[] separar = cadena.split("/");
+                                    %>
+                                    <input type="hidden" value="<%=separar[0]%>" class="id_d_cc<%=cc + 1%>">
+                                    <input type="hidden" value="<%=separar[2]%>" class="id_dire<%=cc + 1%>">
+                                    <input type="hidden" value="<%=separar[1]%>" class="id_depar<%=cc + 1%>">
+                                    <input type="hidden" value="<%=separar[3]%>" class="porcen<%=cc + 1%>">
+                                    <%}%>
+                                    <div class="row centro-costo_1" >
+                                        <!--<code class="ver"></code>-->
+                                        <section class="col col-3">
+                                            <label id="titu" class="centro-costo_1" >Centro de Costo Nº 1:</label>
+                                            <label class="select" id="titu">Dirección :
+                                                <select required="" class="cc-dir">
+
+                                                    <option value="">[DIRECCION]</option>
+                                                </select>
+                                            </label>
+                                        </section>
+                                        <section class="col col-3">
+                                            <label></label>
+                                            <label class="select" id="titu"> Departamento :
+                                                <select required="" name="DEP" class="cc-dep">
+                                                    <option value="">[DEPARTAMENTO]</option>
+                                                </select>
+                                            </label>
+                                        </section>
+                                        <section class="col col-3">
+                                            <label></label>
+                                            <label class="select" id="titu"> Centro de Costo :
+                                                <select name="CENTRO_COSTOS_1" class="centro_costo" required="">
+                                                    <option value="">[CENTRO COSTO]</option>
+                                                </select>
+                                            </label>
+                                        </section>
+                                        <section class="col col-1">
+                                            <label></label>
+                                            <label class="input" id="titu">%
+                                                <input name="PORCENTAJE_1"  type="text" value="100"  class="porcentaje_cc"/>
+                                            </label>
+                                        </section>
+                                        <section class="col col-1">
+                                            <label></label>
+                                            <label class="input" style="font-weight: bold;color:red;">% Total :
+                                                <input  readonly="" name="TOTAL_PORCENTAJE" max="100" min="100" maxlength="3" type="text" class="total_porcentaje"  />
+                                            </label>
+                                        </section>
+                                        <section class="col col-1">
+                                            <br>
+                                            <label  id="titu">Agregar:</label>
+                                            <br>
+                                            <label class="btn">
+                                                <!--<button type="button" class="btn btn-default btn-agregar-cc" id="btn-agregar-cc" >Agregar</button>-->
+                                                <a type="button" style="padding:9%; padding-right:20%; padding-left:20%;" id="btn-agregar-cc" class=" btn btn-default txt-color-green btn-agregar-cc"><i class="fa fa-plus fa-2x"></i></a>
+                                            </label>
+                                        </section>
+                                        <ul class="demo-btns">
+
+                                            <li>
+
+                                            </li>
+
+                                        </ul>
+                                        <input name="CANT" value="1" type="hidden" class="cant"/>
+                                    </div>
+                                    <%}%>
                                 </fieldset>
 
                                 <fieldset>
@@ -1402,6 +1472,23 @@
                 }
             });
         }
+        function Listar_Direccion() {
+            var cc_dir = $(".cc-dir");
+            $.post("../../centro_costo?opc=Listar_dir", function(objJson) {
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                for (var i = 0; i < lista.length; i++) {
+                    if (lista[i].id == $(".id_dire").val()) {
+                        cc_dir.append("<option value='" + lista[i].id + "' selected=''>" + lista[i].nombre + "</option>");
+                    } else {
+                        cc_dir.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
+                    }
+                }
+            });
+        }
         $(document).ready(function() {
             Listar_centro_costo();
             Listar_pue();
@@ -1411,7 +1498,7 @@
             //
             Listar_plantilla();
             listar_sub_mod();
-
+            Listar_Direccion();
 
             var a = $("#select-sub-mod");
             var c = $("#Selec_Area");
