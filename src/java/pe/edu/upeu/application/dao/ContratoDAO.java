@@ -1032,4 +1032,9 @@ public class ContratoDAO implements InterfaceContratoDAO {
         return list;
     }
 
+    @Override
+    public void MODIFICAR_CONTRATO() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
