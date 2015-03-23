@@ -23,11 +23,12 @@ public interface InterfaceDireccionDAO {
      * @return
      */
     public List<Direccion> Listar_Direccion();
-
     public List<Map<String, ?>> List_Direccion();
     /*direccion de ubicacion geografica*/
-
     public List<Via> Listar_via();
-
     public List<Zona> Listar_zona();
+    //Mantenimiento
+    public boolean Editar_Direccion(String id, String nombre, String ncorto, String estado, String filial);
+    public boolean Crear_Direccion(String nombre, String ncorto, String estado, String filial);
+    public boolean Eliminar_Direccion(String id);
 }
