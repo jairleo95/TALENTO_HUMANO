@@ -214,9 +214,9 @@
                                 tex += "<td class='valNCorto" + (i + 1) + "'>" + list[i].nom_corto + "</td>";
                             }
                             if (list[i].estado == 1) {
-                                tex += "<td class='valEstado" + (i + 1) + "' value='1'>Habilitado</td>";
+                                tex += "<td class='valEstado" + (i + 1) + "' value='1' style='background-color: #f0fff0;'>Habilitado</td>";
                             } else if (list[i].estado == 2) {
-                                tex += "<td class='valEstado" + (i + 1) + "' value='2'>Deshabilitado</td>";
+                                tex += "<td class='valEstado" + (i + 1) + "' value='2' style='background-color: #fff0f0;'>Deshabilitado</td>";
                             }
                             if (list[i].filial == 1) {
                                 tex += "<td class='valFilial" + (i + 1) + "' value='1'>Lima</td>";
@@ -257,29 +257,36 @@
                             $('.titulo_t').attr('value', '2');
                         });
                         $('.btnDes').click(function () {
-
+                            valNum = $(this).attr('value');
+                            id = $('.valId' + valNum).attr('value');
+                            desactivar(id);
                         });
                         $('.btnHab').click(function () {
-
+                            valNum = $(this).attr('value');
+                            id = $('.valId' + valNum).attr('value');
+                            activar(id);
                         });
                         $('.btnEliminar').click(function () {
                             valNum = $(this).attr('value');
                             id = $('.valId' + valNum).attr('value');
-                            alert(id);
                             eliminar(id);
                         });
                     });
                 }
-                function desactivar(id){
-
+                function desactivar(id) {
+                    $.post("../../Puesto", "opc=desactivar-Direccion&id=" + id, function () {
+                        cargar_t();
+                    });
                 }
-                function activar(id){
-                    
+                function activar(id) {
+                    $.post("../../Puesto", "opc=activar-Direccion&id=" + id, function () {
+                        cargar_t();
+                    });
                 }
                 function eliminar(id) {
                     $.post("../../Puesto", "opc=eliminar-Direccion&id=" + id, function () {
                         cargar_t();
-            });
+                    });
                 }
                 function editar(id, nombre, ncorto, estado, filial) {
                     var data = "opc=editar-Direccion&id=" + id + "&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado + "&filial=" + filial;

@@ -49,6 +49,7 @@ public class CPuesto extends HttpServlet {
             if (opc.equals("menu")) {
                 response.sendRedirect("Vista/Puesto/Menu_puesto.jsp");
             }
+            //----DIRECCION
             if (opc.equals("list_direccion")) {
                 List<Map<String ,?>> list= di.List_Direccion();
                 rpta.put("rpta", "1");
@@ -70,6 +71,21 @@ public class CPuesto extends HttpServlet {
                 estado=request.getParameter("estado");
                 filial=request.getParameter("filial");
                 di.Crear_Direccion(nombre, ncorto, estado, filial);
+            }
+            if (opc.equals("activar-Direccion")) {
+                String id;
+                id=request.getParameter("id");
+                di.Activar_Direccion(id);
+            }
+            if (opc.equals("desactivar-Direccion")) {
+                String id;
+                id=request.getParameter("id");
+                di.Desactivar_Direccion(id);
+            }
+            if (opc.equals("eliminar-Direccion")) {
+                String id;
+                id=request.getParameter("id");
+                di.Eliminar_Direccion(id);
             }
                                     
         } catch (Exception e) {
