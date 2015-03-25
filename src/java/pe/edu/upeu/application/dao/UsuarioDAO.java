@@ -55,6 +55,31 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
     }
 
     @Override
+    public List<Usuario> USER_LOGIN(String Usuario, String PWD) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT * FROM RHTC_USUARIO where no_usuario='" + Usuario.trim() + "' and pw_usuario='" + PWD.trim() + "'";
+        List<Usuario> list = new ArrayList<Usuario>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Usuario us = new Usuario();
+                us.setId_usuario(rs.getString("id_usuario"));
+                us.setId_rol(rs.getString("id_rol"));
+                us.setId_empleado(rs.getString("id_empleado"));
+                us.setNo_usuario(rs.getString("no_usuario"));
+                us.setPw_usuario(rs.getString("pw_usuario"));
+                list.add(us);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+
+        return list;
+
+    }
+
+    @Override
     public List<V_Usuario> Val_Usuario(String Usuario, String PWD) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         //StringBuilder sql = new StringBuilder();
@@ -139,7 +164,7 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
     public List<V_Usuario> Val_Usuario(String id_usuario) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
 
-        String sql = "select * from rhvd_usuario_temp where id_usuario='" + id_usuario + "'";
+        String sql = "select * from rhvd_usuario where id_usuario='" + id_usuario + "'";
         List<V_Usuario> list = new ArrayList<V_Usuario>();
         try {
             ResultSet rs = this.conn.query(sql.toString());
@@ -228,7 +253,7 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
             JOptionPane.showMessageDialog(null, ex);
         } finally {
             this.conn.close();
-        }        
+        }
     }
 
     @Override
@@ -428,5 +453,22 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
             this.conn.close();
         }
 
+    }
+
+    @Override
+    public String fecha_actual() {
+        String fecha = "";
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT TO_CHAR(sysdate,'yyyy-mm-dd','nls_date_language=spanish') FROM dual;";
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                fecha = rs.getString(1);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return fecha;
     }
 }
