@@ -14,7 +14,8 @@ public class FactoryConnectionDB {
     public static final int MYSQL = 1;
     public static final int ORACLE = 2;
     public static String[] configMYSQL = {"bd_almacen", "root", "root"};
-    public static String[] configORACLE = {"procesosrh", "gestionrrhh", "procesrh-db.upeu", "1521", "upeu"};
+ //   public static String[] configORACLE = {"procesosrh", "gestionrrhh", "procesrh-db.upeu", "1521", "upeu"};
+    public static String[] configORACLE = {"procesosrh", "gestionrrhh", "localhost", "1521", "xe"};
 
     public static ConexionBD open(int typeDB) {
         switch (typeDB) {
