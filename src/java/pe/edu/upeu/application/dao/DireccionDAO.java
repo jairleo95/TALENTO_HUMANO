@@ -143,7 +143,16 @@ public class DireccionDAO implements InterfaceDireccionDAO {
             cst.setString(5, filial);
             x=cst.execute();
         } catch (SQLException e) {
-}
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de direcciones...");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
         return x;
     }
 
@@ -159,6 +168,15 @@ public class DireccionDAO implements InterfaceDireccionDAO {
             cst.setString(4, filial);
             x=cst.execute();
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de direcciones...");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return x;
     }
@@ -171,7 +189,60 @@ public class DireccionDAO implements InterfaceDireccionDAO {
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_ELIMINAR_DIRECCION(?)}");
             cst.setString(1, id);
             x=cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de direcciones...");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return x;
+    }
+
+    @Override
+    public boolean Activar_Direccion(String id) {
+        boolean x=false;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_ACTIVAR_DIRECCION(?)}");
+            cst.setString(1, id);
+            x=cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de direcciones...");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return x;
+    }
+
+    @Override
+    public boolean Desactivar_Direccion(String id) {
+        boolean x=false;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_DESACTIVAR_DIRECCION(?)}");
+            cst.setString(1, id);
+            x=cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de direcciones...");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return x;
     }
