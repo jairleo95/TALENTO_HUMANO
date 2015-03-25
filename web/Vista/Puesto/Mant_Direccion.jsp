@@ -143,6 +143,7 @@
         <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
         <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
+        <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
         <script src="../../js/Js_Mant_Puesto/Datatable_puesto.js"></script>
         <script>
             $(document).ready(function () {

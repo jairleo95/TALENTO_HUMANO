@@ -33,8 +33,8 @@
                                     <div class="jarviswidget-editbox">
                                     </div>
                                     <div class="widget-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered">
+                                        <div class="table-responsive cont_tab">
+                                            <!--<table class="table table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <td>Nro</td>
@@ -47,7 +47,7 @@
                                                 </thead>
                                                 <tbody class="tbodys" style=" display: none;">
                                                 </tbody>
-                                            </table>
+                                            </table>-->
                                         </div>
                                     </div>
                                 </div>
@@ -69,7 +69,7 @@
             if (!window.jQuery.ui) {
                 document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
             }
-        </script>
+        </script><script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
         <script src="../../js/app.config.js"></script>
         <script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
         <script src="../../js/bootstrap/bootstrap.min.js"></script>
@@ -93,5 +93,15 @@
         <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
         <script src="../../js/Js_Mant_Puesto/Datatable_puesto.js" type="text/javascript"></script>
+        <script src="../../js/Js_DTDinamico/Dinamico.js" type="text/javascript"></script>
+        
+        <script>
+            $(document).ready(function (){
+                var cont=$('.cont_tab');
+                var col= ["nro","descripcion","numero","codigo","proceso","editar"];
+                alert('sdf');
+                crear_tabla(cont,col);
+            });
+        </script>
     </body>
 </html>
