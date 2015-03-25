@@ -143,6 +143,10 @@
         <servlet-name>Cdocumento_adjunto</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.Cdocumento_adjunto</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CPago_Docente</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CPago_Docente</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
         <url-pattern>/trabajador</url-pattern>
@@ -282,6 +286,10 @@
     <servlet-mapping>
         <servlet-name>Cdocumento_adjunto</servlet-name>
         <url-pattern>/doc_adjunto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CPago_Docente</servlet-name>
+        <url-pattern>/pago_docente</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>-1</session-timeout>

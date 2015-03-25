@@ -139,7 +139,7 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
     public List<V_Usuario> Val_Usuario(String id_usuario) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
 
-        String sql = "select * from rhvd_usuario where id_usuario='" + id_usuario + "'";
+        String sql = "select * from rhvd_usuario_temp where id_usuario='" + id_usuario + "'";
         List<V_Usuario> list = new ArrayList<V_Usuario>();
         try {
             ResultSet rs = this.conn.query(sql.toString());
