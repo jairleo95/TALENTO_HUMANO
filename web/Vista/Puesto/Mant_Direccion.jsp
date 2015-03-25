@@ -17,6 +17,11 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/demo.min.css">
+        <style>
+            .caja{
+                background:transparent url(../../imagenes/Gifloader.GIF) center no-repeat;
+            }
+        </style>
     </head>
     <body>
         <div id="main" role="main" style="margin: 0px;">
@@ -87,9 +92,9 @@
                     <div class="row">
                         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false">
-                                <header>
+                                <header class="headerr">
                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                    <h2>Lista</h2>
+                                    <h2>Lista de Direcciones</h2>
                                 </header>
                                 <div>
                                     <div class="jarviswidget-editbox">
@@ -143,7 +148,6 @@
         <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
         <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
-        <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
         <script src="../../js/Js_Mant_Puesto/Datatable_puesto.js"></script>
         <script>
             $(document).ready(function () {
@@ -193,14 +197,23 @@
                         elem.addClass('state-error');
                     }
                 }
+                function GifLoader(contenedor){
+                    var text="";
+                    contenedor.empty();
+                    text+="<div class='caja' style='height:250px; width:150px; margin:auto;'><center><h3>Espere..</h3></center></div>";
+                    contenedor.append(text);
+                }
                 function cargar_t() {
-                    var tabb = "";
-                    tabb += '<table class="table table-striped table-bordered table-hover tabla_t" width="100%"><thead><tr>';
-                    tabb += '<td>Nro</td><td>Nombre Direccion</td><td>Nombre Corto</td><td>Estado</td><td>Filial</td>';
-                    tabb += '<td>Acciones</td></tr></thead><tbody class="tbodys"></tbody></table>';
-                    $('.div_t').empty();
-                    $('.div_t').append(tabb);
+                    $('.headerr').hide();
+                    GifLoader($('.div_t'));                                      
                     $.post("../../Puesto", "opc=list_direccion", function (objJson) {
+                        $('.headerr').show();
+                        var tabb = "";
+                        tabb += '<table class="table table-striped table-bordered table-hover tabla_t" width="100%"><thead><tr>';
+                        tabb += '<td>Nro</td><td>Nombre Direccion</td><td>Nombre Corto</td><td>Estado</td><td>Filial</td>';
+                        tabb += '<td>Acciones</td></tr></thead><tbody class="tbodys"></tbody></table>';
+                        $('.div_t').empty();
+                        $('.div_t').append(tabb);
                         var list = objJson.lista;
                         var t = $('.tbodys');
                         t.empty();

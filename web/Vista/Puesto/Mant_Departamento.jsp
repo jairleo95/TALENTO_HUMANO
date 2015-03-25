@@ -161,8 +161,10 @@
                 function cargar_direccion(){
                     var x= $('.inpDireccion');
                     x.empty();
-                    x.append("<option value=''>[Seleccione]</option>");
+                    x.append("<option value=''>Cargando..</option>");
                     $.post("../../Puesto", "opc=list_direccion",function(objJson){
+                        x.empty();
+                    x.append("<option value=''>[Seleccione]</option>");
                         var list = objJson.lista;
                         for (var i = 0; i < list.length; i++) {
                             x.append("<option class='dir"+(i+1)+"' value="+list[i].id+">"+list[i].nombre+"</option>");
