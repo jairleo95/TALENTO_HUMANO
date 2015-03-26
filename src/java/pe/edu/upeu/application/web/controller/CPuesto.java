@@ -16,7 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import java.util.List;
+import pe.edu.upeu.application.dao.DepartamentoDao;
 import pe.edu.upeu.application.dao.DireccionDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDepartamentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 
@@ -44,6 +46,7 @@ public class CPuesto extends HttpServlet {
         PrintWriter out = response.getWriter();
         Map<String, Object> rpta = new HashMap<String, Object>();
         InterfaceDireccionDAO di= new DireccionDAO();
+        InterfaceDepartamentoDAO de= new DepartamentoDao();
         try {
             String opc = request.getParameter("opc");
             if (opc.equals("menu")) {
@@ -87,7 +90,49 @@ public class CPuesto extends HttpServlet {
                 id=request.getParameter("id");
                 di.Eliminar_Direccion(id);
             }
-                                    
+            //--DEPARTAMENTO
+            if (opc.equals("listar_dir_es")) {
+                 List<Map<String ,?>> list= di.List_Direccion_estado();
+                rpta.put("rpta", "1");
+                rpta.put("lista", list);   
+            }
+            if (opc.equals("listar_dep_dir")) {
+                String id=request.getParameter("id");
+                 List<Map<String ,?>> list= de.Listar_dep_x_dir(id);
+                rpta.put("rpta", "1");
+                rpta.put("lista", list);                
+            }
+            if (opc.equals("editar-Dep")) {
+                String id, nombre, ncorto, estado;
+                id=request.getParameter("id");
+                nombre=request.getParameter("nombre");
+                ncorto=request.getParameter("ncorto");
+                estado=request.getParameter("estado");
+                de.Editar_Dep(id.trim(), nombre.trim(), ncorto.trim(), estado.trim());
+            }
+            if (opc.equals("crear-Dep")) {
+                String nombre, ncorto, estado, idDir;
+                nombre=request.getParameter("nombre");
+                ncorto=request.getParameter("ncorto");
+                estado=request.getParameter("estado");
+                idDir=request.getParameter("idDir");
+                de.Crear_Dep(nombre.trim(), ncorto.trim(), estado.trim(), idDir.trim());
+            }
+            if (opc.equals("activar-Dep")) {
+                String id;
+                id=request.getParameter("id");
+                de.Activar_Dep(id.trim());
+            }
+            if (opc.equals("desactivar-Dep")) {
+                String id;
+                id=request.getParameter("id");
+                de.Desactivar_Dep(id.trim());
+            }
+            if (opc.equals("eliminar-Dep")) {
+                String id;
+                id=request.getParameter("id");
+                de.Eliminar_Dep(id.trim());
+            }                                    
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());

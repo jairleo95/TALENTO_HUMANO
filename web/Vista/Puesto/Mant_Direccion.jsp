@@ -198,13 +198,13 @@
                     }
                 }
                 function GifLoader(contenedor){
+                    $('.headerr').hide();
                     var text="";
                     contenedor.empty();
                     text+="<div class='caja' style='height:250px; width:150px; margin:auto;'><center><h3>Espere..</h3></center></div>";
                     contenedor.append(text);
                 }
                 function cargar_t() {
-                    $('.headerr').hide();
                     GifLoader($('.div_t'));                                      
                     $.post("../../Puesto", "opc=list_direccion", function (objJson) {
                         $('.headerr').show();
@@ -231,6 +231,8 @@
                                 tex += "<td class='valEstado" + (i + 1) + "' value='1' style='background-color: #f0fff0;'>Habilitado</td>";
                             } else if (list[i].estado == 2) {
                                 tex += "<td class='valEstado" + (i + 1) + "' value='2' style='background-color: #fff0f0;'>Deshabilitado</td>";
+                            }else{
+                                tex += "<td class='valEstado" + (i + 1) + "' value='1' style='background-color: #f0fff0;'>Habilitado</td>";
                             }
                             if (list[i].filial == 1) {
                                 tex += "<td class='valFilial" + (i + 1) + "' value='1'>Lima</td>";

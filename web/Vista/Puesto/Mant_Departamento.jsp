@@ -17,6 +17,11 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/demo.min.css">
+        <style>
+            .caja{
+                background:transparent url(../../imagenes/Gifloader.GIF) center no-repeat;
+            }
+        </style>
     </head>
     <body>
         <div id="main" role="main" style="margin: 0px;">
@@ -84,7 +89,7 @@
                     <div class="row">
                         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false">
-                                <header>
+                                <header class="headerr">
                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
                                     <h2>Lista</h2>
                                 </header>
@@ -142,36 +147,167 @@
         <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
         <script src="../../js/Js_Mant_Puesto/Datatable_puesto.js"></script>
         <script>
-            $(document).ready(function(){
+            $(document).ready(function () {
+                GifLoader($('.div_t'), "Espere..", 1);
+                var idDir, valNum;
                 cargar_direccion();
-                cargar_t();
-                function cargar_t(){
-                    var tabb = "";
-                    tabb += '<table class="table table-striped table-bordered table-hover tabla_t" width="100%"><thead><tr>';
-                    tabb += '<td>Nro</td><td>Nombre Departamento</td><td>Nombre Corto</td><td>Estado</td><td>Direccion</td>';
-                    tabb += '<td>Acciones</td></tr></thead><tbody class="tbodys"></tbody></table>';
-                    $('.div_t').empty();
-                    $('.div_t').append(tabb);
-                    $.post("../../Puesto","opc=list_Departamento",function(objJson){
+
+                $('.inpDireccion').change(function () {
+                    if ($(this).val() == "") {
+                        GifLoader($('.div_t'), "Seleccione una Direccion", 2);
+                    } else {
+                        idDir = $(this).val();
+                        cargar_t(idDir);
+                    }
+
+                });
+                function cargar_t(id) {
+                    GifLoader($('.div_t'), "Espere..", 1);
+                    $.post("../../Puesto", "opc=listar_dep_dir&id=" + id, function (objJson) {
+                        $('.headerr').show();
+                        var tabb = "";
+                        tabb += '<table class="table table-striped table-bordered table-hover tabla_t" width="100%"><thead><tr>';
+                        tabb += '<td>Nro</td><td>Nombre Departamento</td><td>Nombre Corto</td><td>Estado</td>';
+                        tabb += '<td>Acciones</td></tr></thead><tbody class="tbodys"></tbody></table>';
+                        $('.div_t').empty();
+                        $('.div_t').append(tabb);
+                        var t = $('.tbodys');
                         var list = objJson.lista;
+                        var text = "";
                         for (var i = 0; i < list.length; i++) {
+                            text += "<tr>";
+                            text += "<td class='valId" + (i + 1) + "' value='" + list[i].id + "'>" + (i + 1) + "</td>";
+                            text += "<td class='valNombre" + (i + 1) + "'>" + list[i].nombre + "</td>";
+                            if (list[i].ncorto == undefined) {
+                                text += "<td class='valNCorto" + (i + 1) + "'>No asignado</td>";
+                            } else {
+                                text += "<td class='valNCorto" + (i + 1) + "'>" + list[i].ncorto + "</td>";
+                            }
+                            if (list[i].estado == 1) {
+                                text += "<td class='valEstado" + (i + 1) + "' value='1' style='background-color: #f0fff0;'>Habilitado</td>";
+                            } else if (list[i].estado == 2) {
+                                text += "<td class='valEstado" + (i + 1) + "' value='2' style='background-color: #fff0f0;'>Deshabilitado</td>";
+                            } else {
+                                text += "<td class='valEstado" + (i + 1) + "' value='1' style='background-color: #f0fff0;'>Habilitado</td>";
+                            }
+                            text += '<td><center><div class="btn-group"><button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false">';
+                            text += 'Accion <span class="caret"></span></button><ul class="dropdown-menu" role="menu">';
+                            text += '<li><a class="btnEditar" value=' + (i + 1) + '>Editar</a></li>';
+                            if (list[i].estado == 1) {
+                                text += '<li><a class="btnDes" value=' + (i + 1) + '>Deshabilitar</a></li>';
+                            } else if (list[i].estado == 2) {
+                                text += '<li><a class="btnHab" value=' + (i + 1) + '>Habilitar</a></li>';
+                            }
+                            text += '<li><a class="btnEliminar" value=' + (i + 1) + '>Eliminar</a></li></ul></div></center></td>';
+                            text += "</tr>";
                         }
+                        t.append(text);
+                        text = "";
+                        $('.tabla_t').DataTable();
+
+                        //----Acciones
+                        var id, nombre, ncorto, estado;
+
+                        $('.btnEditar').click(function () {
+                            valNum = $(this).attr('value');
+                            id = $('.valId' + valNum).attr('value');
+                            nombre = $('.valNombre' + valNum).text();
+                            ncorto = $('.valNCorto' + valNum).text();
+                            estado = $('.valEstado' + valNum).attr('value');
+                            $('.inpId').val(id);
+                            $('.inpNombre').val(nombre);
+                            $('.inpNCorto').val(ncorto);
+                            $('.inpEstado > option[value=' + estado + ']').attr('selected', 'selected');
+                            $('.titulo_t').text('Editar Departamento');
+                            $('.titulo_t').attr('value', '2');
+                        });
+                        $('.btnDes').click(function () {
+                            valNum = $(this).attr('value');
+                            id = $('.valId' + valNum).attr('value');
+                            desactivar(id);
+                        });
+                        $('.btnHab').click(function () {
+                            valNum = $(this).attr('value');
+                            id = $('.valId' + valNum).attr('value');
+                            activar(id);
+                        });
+                        $('.btnEliminar').click(function () {
+                            valNum = $(this).attr('value');
+                            id = $('.valId' + valNum).attr('value');
+                            eliminar(id);
+                        });
                     });
                 }
-                function cargar_direccion(){
-                    var x= $('.inpDireccion');
+                $('.btnAceptar').click(function () {
+                    if ($('.titulo_t').attr('value') == 1) {
+                        var id, nombre, ncorto, estado;
+                        nombre = $('.inpNombre').val();
+                        ncorto = $('.inpNCorto').val();
+                        estado = $('.inpEstado').val();
+                        crear(nombre, ncorto, estado);
+                    } else if ($('.titulo_t').attr('value') == 2) {
+                        var id, nombre, ncorto, estado;
+                        id = $('.inpId').attr('value');
+                        nombre = $('.inpNombre').val();
+                        ncorto = $('.inpNCorto').val();
+                        estado = $('.inpEstado').val();
+                        editar(id, nombre, ncorto, estado);
+                    }
+
+                });
+                function desactivar(id) {
+                    $.post("../../Puesto", "opc=desactivar-Dep&id=" + id, function () {
+                        cargar_t(idDir);
+                    });
+                }
+                function activar(id) {
+                    $.post("../../Puesto", "opc=activar-Dep&id=" + id, function () {
+                        cargar_t(idDir);
+                    });
+                }
+                function eliminar(id) {
+                    $.post("../../Puesto", "opc=eliminar-Dep&id=" + id, function () {
+                        cargar_t(idDir);
+                    });
+                }
+                function editar(id, nombre, ncorto, estado) {
+                    var data = "opc=editar-Dep&id=" + id + "&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado;
+                    $.post("../../Puesto", data, function () {
+                        cargar_t(idDir);
+                    });
+                }
+                function crear(nombre, ncorto, estado) {
+                    var data = "opc=crear-Dep&&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado + "&idDir=" + idDir;
+                    $.post("../../Puesto", data, function () {
+                        cargar_t(idDir);
+                    });
+                }
+                function GifLoader(contenedor, msg, action) {
+                    $('.headerr').hide();
+                    var text = "";
+                    contenedor.empty();
+                    if (action == 1) {
+                        text += "<div class='caja' style='height:250px; width:150px; margin:auto;'><center><h3>" + msg + "</h3></center></div>";
+                    } else if (action == 2) {
+                        text += "<div style='height:150px; width:150px; margin:auto; padding-top:30px;'><center><h3>" + msg + "</h3></center></div>";
+                    }
+                    contenedor.append(text);
+                }
+                function cargar_direccion() {
+                    var x = $('.inpDireccion');
                     x.empty();
                     x.append("<option value=''>Cargando..</option>");
-                    $.post("../../Puesto", "opc=list_direccion",function(objJson){
+                    $.post("../../Puesto", "opc=listar_dir_es", function (objJson) {
                         x.empty();
-                    x.append("<option value=''>[Seleccione]</option>");
+                        x.append("<option value=''>[Seleccione]</option>");
                         var list = objJson.lista;
                         for (var i = 0; i < list.length; i++) {
-                            x.append("<option class='dir"+(i+1)+"' value="+list[i].id+">"+list[i].nombre+"</option>");
+                            x.append("<option class='dir" + (i + 1) + "' value=" + list[i].id + ">" + list[i].nombre + "</option>");
                         }
+                        GifLoader($('.div_t'), "Seleccione una Direccion", 2);
                     });
                 }
-                
+
             });
         </script>
     </body>

@@ -83,7 +83,7 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
     public List<V_Usuario> Val_Usuario(String Usuario, String PWD) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         //StringBuilder sql = new StringBuilder();
-        String sql = "select * from rhvd_usuario_temp where no_usuario='" + Usuario.trim() + "' and pw_usuario='" + PWD + "'";
+        String sql = "select * from rhvd_usuario where no_usuario='" + Usuario.trim() + "' and pw_usuario='" + PWD + "'";
         List<V_Usuario> list = new ArrayList<V_Usuario>();
         try {
             ResultSet rs = this.conn.query(sql.toString());
@@ -459,13 +459,14 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
     public String fecha_actual() {
         String fecha = "";
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT TO_CHAR(sysdate,'yyyy-mm-dd','nls_date_language=spanish') FROM dual;";
+        String sql = "SELECT TO_CHAR(sysdate,'yyyy-mm-dd','nls_date_language=spanish') FROM dual";
         try {
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 fecha = rs.getString(1);
             }
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
         } finally {
             this.conn.close();
         }
