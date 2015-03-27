@@ -459,7 +459,7 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
     public String fecha_actual() {
         String fecha = "";
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT TO_CHAR(sysdate,'yyyy-mm-dd','nls_date_language=spanish') FROM dual;";
+        String sql = "SELECT TO_CHAR(sysdate,'yyyy-mm-dd','nls_date_language=spanish') FROM dual";
         try {
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
