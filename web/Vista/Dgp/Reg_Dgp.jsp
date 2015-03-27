@@ -18,7 +18,6 @@
 <jsp:useBean id="List_Det_Puesto" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_Requerimiento" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="list_Cuenta_Sueldo" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="FECHA_MINIMA" scope="application" class="java.lang.String"/>
 
 <!DOCTYPE html >
 <html>
@@ -97,6 +96,7 @@
 
         <%            HttpSession sesion = request.getSession(true);
             String id_dep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
+            String fecha_min = (String) sesion.getAttribute("FECHA_MINIMA");
         %>
 
     </head>
@@ -328,12 +328,12 @@
                                                     <div class="row">
                                                         <section class="col col-6" >
                                                             <label class="input" id="titu">Fecha de Inicio :
-                                                                <input type="date" name="FEC_DESDE" id="datepicker" required="" class="val_fe" min="<%=FECHA_MINIMA%>">
+                                                                <input type="date" name="FEC_DESDE" id="datepicker" required="" class="val_fe" min="<%=fecha_min%>">
                                                             </label>
                                                         </section>
                                                         <section class="col col-6">
                                                             <label class="input"  id="titu">Fecha de Cese :
-                                                                <input type="date" name="FEC_HASTA"  required="" id="datepicker" min="<%=FECHA_MINIMA%>">
+                                                                <input type="date" name="FEC_HASTA"  required="" id="datepicker" min="<%=fecha_min%>">
                                                             </label>
                                                         </section>
                                                     </div>
@@ -1826,7 +1826,13 @@
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
         $(document).ready(function () {
+            $(".val_fe").change(function () {
+                var fecha = $(this).val().split("-");
 
+                if (fecha[0].length > 4) {
+                    $(this).val("");
+                }
+            });
             pageSetUp();
             var $checkoutForm = $('#checkout-form').validate({
                 // Rules for form validation

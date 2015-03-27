@@ -100,6 +100,7 @@
 
             </form>
         </div>
+
         <hr/>
         <%
             int count = ListarTrabajador2.size();
@@ -165,6 +166,24 @@
     </center>
 
 </body>
+ <script type="text/javascript" src="../../js/JQuery/jQuery.js" ></script>
+<script src="../../js/app.config.js"></script>
+<script src="../../js/bootstrap/bootstrap.min.js"></script>
+<script src="../../js/demo.min.js"></script>
+
+<script src="../../js/app.min.js"></script>
+<script type="text/javascript">
+
+                        // DO NOT REMOVE : GLOBAL FUNCTIONS!
+
+                        $(document).ready(function () {
+
+                            pageSetUp();
+
+
+                        })
+
+</script>
 </html>
 
 <%} else {
