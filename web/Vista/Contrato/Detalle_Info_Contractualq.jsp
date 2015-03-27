@@ -148,7 +148,7 @@
                                     for (int cv = 0; cv < List_Anno_trabajador.size(); cv++) {
                                         Anno an = new Anno();
                                         an = (Anno) List_Anno_trabajador.get(cv);
-                                        if (an.getId_contrato().equals(ID_CTO)) {
+                                        if (an.getId_contrato().equals(ID_CTO.trim())) {
                                 %><option value="<%=an.getId_contrato()%>" selected=""><%=an.getNo_anno() + " " + (cv + 1)%></option><%
                                 } else {
                                 %><option value="<%=an.getId_contrato()%>"><%=an.getNo_anno() + " " + (cv + 1)%></option><%
@@ -188,8 +188,8 @@
                 <%if (idrol.trim().equals("ROL-0006") || idrol.trim().equals("ROL-0002")) {
                 %> 
                 <a class="btn btn-labeled btn-primary" href="../../contrato?opc=Subir_Contrato2&idc=<%=n.getId_contrato()%>" > <span class="btn-label"><i class="fa fa-cloud-upload"></i></span>Subir Contrato Firmado</a>
+                <%}%>
                 <a class="btn btn-labeled btn-primary" href="../../contrato?opc=Editar&idc=<%=n.getId_contrato()%>&idtr=<%=request.getParameter("idtr")%>&id_dg=<%=request.getParameter("id_dg")%>" > <span class="btn-label"><i class="fa fa-pencil-square-o"></i></span>Editar Contrato</a>
-                        <%}%>
                         <% for (int p = 0; p < List_contra_x_idcto.size(); p++) {%>
 
 

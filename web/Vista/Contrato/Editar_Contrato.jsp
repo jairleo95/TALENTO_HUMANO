@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="pe.edu.upeu.application.model.Grupo_Ocupaciones"%>
 <%@page import="pe.edu.upeu.application.model.Modalidad"%>
@@ -130,7 +131,7 @@
 
                         <!-- widget content -->
                         <div class="widget-body no-padding">
-
+                            <% CConversion con = new CConversion();%>
                             <label>Todavia no se ha almacenado El DGP,¿desea contratar sin  antes elaborar un DGP?</label>  
                             <br>
 
@@ -146,7 +147,7 @@
                                     <div class="row">
                                         <section class="col col-2">
                                             <label class="select" id="titulo">Motivo :
-                                                <select class="input-group-sm">
+                                                <select class="input-group-sm" disabled="">
                                                     <%if (a.getLi_motivo().trim().equals("1")) {%>
                                                     <option value="1" selected="">Trabajador Nuevo</option>   
                                                     <option value="2" >renovación</option>   
@@ -160,13 +161,14 @@
                                         <section class="col col-1" style=" margin-top:2%;">
                                             <label class="toggle" id="titulo" > MFL:
                                                 <%if (a.getEs_mfl().trim().equals("1")) {%>
-                                                <input type="checkbox" name="checkbox-toggle" checked="" >
+                                                <input type="checkbox" name="checkbox-toggle" checked="" disabled="">
                                                 <%} else {%>
-                                                <input type="checkbox" name="checkbox-toggle"  >
+                                                <input type="checkbox" name="checkbox-toggle"  disabled="">
                                                 <%}%>
                                                 <i data-swchoff-text="NO"  data-swchon-text="SI"></i>
                                             </label>
                                         </section>
+                                        <input type="hidden" value="<%=a.getId_dgp()%>" id="id_dgp">
                                     </div>
                                     <%}%>
                                     <div class="row" >
@@ -189,11 +191,11 @@
                                                 </select>  
                                             </label>
                                         </section>
-                                        <input type="hidden" name="IDDETALLE_DGP" value="" class="text-box" id="id_dg" >                              
+                                        <input type="hidden" name="IDDETALLE_DGP" value="<%=a.getId_dgp()%>" class="text-box" id="id_dg" >                              
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Desde:
                                                 <%if (a.getFe_desde() != null) {%>
-                                                <input type="date" name="FEC_DESDE" value="<%=a.getFe_desde()%>" class=" input-group-sm" required="">
+                                                <input type="date" name="FEC_DESDE" value="<%=con.convertFecha3(a.getFe_desde())%>" class=" input-group-sm" required="">
                                                 <%} else {%>
                                                 <input type="date" name="FEC_DESDE" class=" input-group-sm" required="">
                                                 <%}%>
@@ -202,7 +204,7 @@
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Hasta: 
                                                 <%if (a.getFe_hasta() != null) {%>
-                                                <input type="date" name="FEC_HASTA" value="<%=a.getFe_hasta()%>" class="input-group-sm" required="">
+                                                <input type="date" name="FEC_HASTA" value="<%=con.convertFecha3(a.getFe_hasta())%>" class="input-group-sm" required="">
                                                 <%} else {%>
                                                 <input type="date" name="FEC_DESDE" class=" input-group-sm" required="">
                                                 <%}%>
@@ -278,43 +280,43 @@
                                     <div class="row">
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Remuneración:
-                                                <input type="text" name="SUELDO" value="<%=a.getCa_sueldo()%>" class="input-group-sm" id="remu" >
+                                                <input type="text" name="SUELDO" value="<%=a.getCa_sueldo()%>" class="input-group-sm" id="remu" disabled="">
                                             </label>
                                         </section>
                                         <section class="col col-1">
                                             <label class="input" id="titulo">Reintegro:
-                                                <input type="text" name="REINTEGRO" value="<%=a.getCa_reintegro()%>" class="input-group-sm" id="rein">
+                                                <input type="text" name="REINTEGRO" value="<%=a.getCa_reintegro()%>" class="input-group-sm" id="rein" disabled="">
                                             </label>
                                         </section>
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Bono Alimentario:
-                                                <input type="text" name="BONO_ALIMENTO" value="<%=a.getCa_bono_alimento()%>" class="input-group-sm" id="bo_a">
+                                                <input type="text" name="BONO_ALIMENTO" value="<%=a.getCa_bono_alimento()%>" class="input-group-sm" id="bo_a" disabled="">
                                             </label>
                                         </section>
                                         <section class="col col-1">
                                             <label class="input" id="titulo">BEV:
-                                                <input type="text" name="BEV" value="<%=a.getCa_bev()%>" class="input-group-sm" id="bev">
+                                                <input type="text" name="BEV" value="<%=a.getCa_bev()%>" class="input-group-sm" id="bev" disabled="">
                                             </label>
                                         </section>
                                         <section class="col col-1">
                                             <label class="input" id="titulo">Bono puesto:
-                                                <input type="text" name="ca_bono_puesto" value="<%=a.getCa_bonificacion_p()%>" class="input-group-sm" required="" id="ca_bono_pu">
+                                                <input type="text" name="ca_bono_puesto" value="<%=a.getCa_bonificacion_p()%>" class="input-group-sm" required="" id="ca_bono_pu" disabled="">
                                             </label>
                                         </section>
 
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Sueldo Total:
-                                                <input type="text" name="TOTAL_SUELDO" value="<%=a.getCa_sueldo_total()%>" class="input-group-sm" id="su_t">
+                                                <input type="text" name="TOTAL_SUELDO" value="<%=a.getCa_sueldo_total()%>" class="input-group-sm" id="su_t" disabled="">
                                             </label>
                                         </section>
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Tipo Horas Pago:
-                                                <input type="text" name="TIPO_HORA_PAGO" value="<%=a.getTi_hora_pago()%>" class="input-group-sm">
+                                                <input type="text" name="TIPO_HORA_PAGO" value="<%=a.getTi_hora_pago()%>" class="input-group-sm" disabled="">
                                             </label>
                                         </section>
                                         <section class="col col-2" >
                                             <label class="input" id="titulo">Asignanción Familiar:
-                                                <input type="text" name="ASIG_FAMILIAR" value="<%=a.getCa_asig_familiar()%>"  class="input-group-sm" id="asig">
+                                                <input type="text" name="ASIG_FAMILIAR" value="<%=a.getCa_asig_familiar()%>"  class="input-group-sm" id="asig" disabled="">
                                             </label>
                                         </section>
                                     </div>
@@ -385,74 +387,7 @@
         
         
                                     </div>-->
-                                    <%if (list_cc_x_con.size() > 0) {%>
-                                    <%for (int cc = 0; cc < list_cc_x_con.size(); cc++) {
-                                            String cadena = list_cc_x_con.get(cc).toString();
-                                            String[] separar = cadena.split("/");
-                                    %>
-                                    <input type="hidden" value="<%=separar[0]%>" class="id_d_cc<%=cc + 1%>">
-                                    <input type="hidden" value="<%=separar[2]%>" class="id_dire<%=cc + 1%>">
-                                    <input type="hidden" value="<%=separar[1]%>" class="id_depar<%=cc + 1%>">
-                                    <input type="hidden" value="<%=separar[3]%>" class="porcen<%=cc + 1%>">
-                                    <%}%>
-                                    <div class="row centro-costo_1" >
-                                        <!--<code class="ver"></code>-->
-                                        <section class="col col-3">
-                                            <label id="titu" class="centro-costo_1" >Centro de Costo Nº 1:</label>
-                                            <label class="select" id="titu">Dirección :
-                                                <select required="" class="cc-dir">
 
-                                                    <option value="">[DIRECCION]</option>
-                                                </select>
-                                            </label>
-                                        </section>
-                                        <section class="col col-3">
-                                            <label></label>
-                                            <label class="select" id="titu"> Departamento :
-                                                <select required="" name="DEP" class="cc-dep">
-                                                    <option value="">[DEPARTAMENTO]</option>
-                                                </select>
-                                            </label>
-                                        </section>
-                                        <section class="col col-3">
-                                            <label></label>
-                                            <label class="select" id="titu"> Centro de Costo :
-                                                <select name="CENTRO_COSTOS_1" class="centro_costo" required="">
-                                                    <option value="">[CENTRO COSTO]</option>
-                                                </select>
-                                            </label>
-                                        </section>
-                                        <section class="col col-1">
-                                            <label></label>
-                                            <label class="input" id="titu">%
-                                                <input name="PORCENTAJE_1"  type="text" value="100"  class="porcentaje_cc"/>
-                                            </label>
-                                        </section>
-                                        <section class="col col-1">
-                                            <label></label>
-                                            <label class="input" style="font-weight: bold;color:red;">% Total :
-                                                <input  readonly="" name="TOTAL_PORCENTAJE" max="100" min="100" maxlength="3" type="text" class="total_porcentaje"  />
-                                            </label>
-                                        </section>
-                                        <section class="col col-1">
-                                            <br>
-                                            <label  id="titu">Agregar:</label>
-                                            <br>
-                                            <label class="btn">
-                                                <!--<button type="button" class="btn btn-default btn-agregar-cc" id="btn-agregar-cc" >Agregar</button>-->
-                                                <a type="button" style="padding:9%; padding-right:20%; padding-left:20%;" id="btn-agregar-cc" class=" btn btn-default txt-color-green btn-agregar-cc"><i class="fa fa-plus fa-2x"></i></a>
-                                            </label>
-                                        </section>
-                                        <ul class="demo-btns">
-
-                                            <li>
-
-                                            </li>
-
-                                        </ul>
-                                        <input name="CANT" value="1" type="hidden" class="cant"/>
-                                    </div>
-                                    <%}%>
                                 </fieldset>
 
                                 <fieldset>
@@ -734,7 +669,7 @@
                                     <div class="">
                                         <section class="col col-12">
                                             <label class="textarea" id="titulo">Observación:  </label>
-                                            <textarea  name="OBSERVACION"  class="input-group-sm " cols="35" rows="6"></textarea>
+                                            <textarea  name="OBSERVACION"  class="input-group-sm " cols="35" rows="6" value="<%=a.getDe_observacion()%>" ></textarea>
                                         </section>
 
                                     </div>
@@ -1489,8 +1424,47 @@
                 }
             });
         }
+        function Listar_centro_costo() {
+            var x = $("#fila-agregar");
+            $.post("../../centro_costo", "opc=Listar_centro_id&" + "id_dgp=" + $("#id_dgp").val(), function(objJson) {
+                var lista = objJson.lista;
+                var numero = 1;
+                x.append('<div  class="row centro-costo_' + numero + '" >');
+                for (var i = 0; i < lista.length; i++) {
+                    numero = numero + i;
+                    if ($("#id_rol_s").val() == 'ROL-0001') {
+                        x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section><div class="form-group"><button type="button" class="btn btn-primary" id="Seleccionar_centro" >Buscar</button></div>');
+                    } else {
+                        x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section>');
+                    }
+                    numero = 1;
+                }
+                x.append('</div><table><tr><td><td><input type="hidden" name="can_centro_cos" value="' + lista.length + '"></td></tr></table>');
+
+            });
+
+        }
+        /*function Listar_centro_costo2() {
+            var x = $("#fila-agregar");
+            $.post("../../centro_costo", "opc=Listar_centro_id&" + "id_dgp=" + $("#id_dgp").val(), function(objJson) {
+                var lista = objJson.lista;
+                var numero = 1;
+                x.append('<div  class="row centro-costo_' + numero + '" >');
+                for (var i = 0; i < lista.length; i++) {
+                    numero = numero + i;
+                    if ($("#id_rol_s").val() == 'ROL-0001') {
+                        x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section><div class="form-group"><button type="button" class="btn btn-primary" id="Seleccionar_centro" >Buscar</button></div>');
+                    } else {
+                        x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section>');
+                    }
+                    numero = 1;
+                }
+                x.append('</div><table><tr><td><td><input type="hidden" name="can_centro_cos" value="' + lista.length + '"></td></tr></table>');
+
+            });
+
+        }*/
         $(document).ready(function() {
-            Listar_centro_costo();
             Listar_pue();
             Listar_dep();
             Listar_sec();
@@ -1499,6 +1473,7 @@
             Listar_plantilla();
             listar_sub_mod();
             Listar_Direccion();
+            Listar_centro_costo();
 
             var a = $("#select-sub-mod");
             var c = $("#Selec_Area");
@@ -1611,27 +1586,6 @@
                         return false;
                     }
             );
-            function Listar_centro_costo() {
-                var x = $("#fila-agregar");
-                $.post("../../centro_costo", "opc=Listar_centro_id&" + "id_dgp=" + $("#id_dgp").val(), function(objJson) {
-                    var lista = objJson.lista;
-                    var numero = 1;
-                    x.append('<div  class="row centro-costo_' + numero + '" >');
-                    for (var i = 0; i < lista.length; i++) {
-                        numero = numero + i;
-                        if ($("#id_rol_s").val() == 'ROL-0001') {
-                            x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section><div class="form-group"><button type="button" class="btn btn-primary" id="Seleccionar_centro" >Buscar</button></div>');
-                        } else {
-                            x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section>');
-                        }
-                        numero = 1;
-                    }
-                    x.append('</div><table><tr><td><td><input type="hidden" name="can_centro_cos" value="' + lista.length + '"></td></tr></table>');
-
-                });
-
-            }
-        }
-        );
+        });
     </script>
 </html>

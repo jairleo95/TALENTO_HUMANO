@@ -168,7 +168,6 @@ public class CContrato extends HttpServlet {
             int num = dht.ASIGNACION_F(idtr);
             getServletContext().setAttribute("list_cc_x_con", cc.list_cc_x_con(idcon));
             if (id_dg != null) {
-                
                 getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(id_dg));
             }
             Calendar fecha = new GregorianCalendar();
@@ -263,6 +262,7 @@ public class CContrato extends HttpServlet {
             String ID_PLANTILLA_CONTRACTUAL = request.getParameter("id_plantilla_contractual");
             Double ca_bonificacion_p = Double.parseDouble(request.getParameter("ca_bono_puesto"));
             int cantidad_centro = Integer.parseInt(request.getParameter("can_centro_cos"));
+            
         }
         if (opc.equals("Detalle_Contractual")) {
 
