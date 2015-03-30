@@ -131,7 +131,8 @@ public class CPuesto extends HttpServlet {
             if (opc.equals("eliminar-Dep")) {
                 String id;
                 id=request.getParameter("id");
-                de.Eliminar_Dep(id.trim());
+                boolean x=de.Eliminar_Dep(id.trim());
+                System.out.println(x);
             }                                    
         } catch (Exception e) {
             rpta.put("rpta", "-1");

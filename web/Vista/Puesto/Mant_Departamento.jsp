@@ -35,7 +35,7 @@
                                     <div class="jarviswidget-editbox">
                                     </div>
                                     <div class="widget-body no-padding">
-                                        <form class="smart-form">
+                                        <form class="smart-form form_dep">
                                             <fieldset>
                                                 <div class="row">
                                                     <section class="col col-12">
@@ -77,7 +77,7 @@
                                             </fieldset>
                                             <footer>
                                                 <input class="inpId" type="hidden" value="">
-                                                <input type="submit" class="btn btn-primary btnAceptar" value="Aceptar">
+                                                <input type="button" class="btn btn-primary btnAceptar" value="Aceptar">
                                                 <input type="reset" class="btn btn-default" value="Cancelar">
                                             </footer>
                                         </form>
@@ -149,11 +149,11 @@
         <script>
             $(document).ready(function () {
                 GifLoader($('.div_t'), "Espere..", 1);
-                var idDir, valNum;
+                var idDir = "", valNum;
                 cargar_direccion();
 
                 $('.inpDireccion').change(function () {
-                    if ($(this).val() == "") {
+                    if ($(this).val() == "" && idDir == "") {
                         GifLoader($('.div_t'), "Seleccione una Direccion", 2);
                     } else {
                         idDir = $(this).val();
@@ -203,11 +203,12 @@
                         }
                         t.append(text);
                         text = "";
-                        $('.tabla_t').DataTable();
+
+
 
                         //----Acciones
                         var id, nombre, ncorto, estado;
-
+                        idDir = $('.inpDireccion').val();
                         $('.btnEditar').click(function () {
                             valNum = $(this).attr('value');
                             id = $('.valId' + valNum).attr('value');
@@ -221,65 +222,71 @@
                             $('.titulo_t').text('Editar Departamento');
                             $('.titulo_t').attr('value', '2');
                         });
-                        $('.btnDes').click(function () {
+                        $('.btnDes, .btnHab, .btnEliminar').click(function () {
                             valNum = $(this).attr('value');
                             id = $('.valId' + valNum).attr('value');
-                            desactivar(id);
+                            var dat="opc=desactivar-Dep&id=" + id
+                            acciones()
+                            desactivar(id, idDir);
                         });
                         $('.btnHab').click(function () {
                             valNum = $(this).attr('value');
                             id = $('.valId' + valNum).attr('value');
-                            activar(id);
+                            activar(id , idDir);
                         });
                         $('.btnEliminar').click(function () {
                             valNum = $(this).attr('value');
                             id = $('.valId' + valNum).attr('value');
-                            eliminar(id);
+                            eliminar(id, idDir);
                         });
+                        $('.tabla_t').DataTable();
                     });
                 }
                 $('.btnAceptar').click(function () {
+                    var id, nombre, ncorto, estado, dat;
+                    nombre = $('.inpNombre').val();
+                    ncorto = $('.inpNCorto').val();
+                    estado = $('.inpEstado').val();
                     if ($('.titulo_t').attr('value') == 1) {
-                        var id, nombre, ncorto, estado;
-                        nombre = $('.inpNombre').val();
-                        ncorto = $('.inpNCorto').val();
-                        estado = $('.inpEstado').val();
-                        crear(nombre, ncorto, estado);
+                        dat="opc=crear-Dep&&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado + "&idDir=" + idDir;
+                        acciones(dat, idDir);
                     } else if ($('.titulo_t').attr('value') == 2) {
-                        var id, nombre, ncorto, estado;
-                        id = $('.inpId').attr('value');
-                        nombre = $('.inpNombre').val();
-                        ncorto = $('.inpNCorto').val();
-                        estado = $('.inpEstado').val();
-                        editar(id, nombre, ncorto, estado);
+                        dat="opc=editar-Dep&id=" + id + "&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado;
+                        acciones(dat,idDir);
                     }
-
+                    $('.inpNombre').val("");
+                    $('.inpNCorto').val("");
                 });
-                function desactivar(id) {
+                function acciones(data,idD){
+                    $.post("../../Puesto",data, function(){
+                       cargar_t(idD); 
+                    });
+                }
+                function desactivar(id,idD) {
                     $.post("../../Puesto", "opc=desactivar-Dep&id=" + id, function () {
-                        cargar_t(idDir);
+                        cargar_t(idD);
                     });
                 }
-                function activar(id) {
+                function activar(id,idD) {
                     $.post("../../Puesto", "opc=activar-Dep&id=" + id, function () {
-                        cargar_t(idDir);
+                        cargar_t(idD);
                     });
                 }
-                function eliminar(id) {
+                function eliminar(id,idD) {
                     $.post("../../Puesto", "opc=eliminar-Dep&id=" + id, function () {
-                        cargar_t(idDir);
+                        cargar_t(idD);
                     });
                 }
-                function editar(id, nombre, ncorto, estado) {
+                function editar(id, nombre, ncorto, estado,idD) {
                     var data = "opc=editar-Dep&id=" + id + "&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado;
                     $.post("../../Puesto", data, function () {
-                        cargar_t(idDir);
+                        cargar_t(idD);
                     });
                 }
-                function crear(nombre, ncorto, estado) {
+                function crear(nombre, ncorto, estado,idD) {
                     var data = "opc=crear-Dep&&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado + "&idDir=" + idDir;
                     $.post("../../Puesto", data, function () {
-                        cargar_t(idDir);
+                        cargar_t(idD);
                     });
                 }
                 function GifLoader(contenedor, msg, action) {
