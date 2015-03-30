@@ -182,7 +182,7 @@
                                 text += "<td class='valNCorto" + (i + 1) + "'>No asignado</td>";
                             } else {
                                 text += "<td class='valNCorto" + (i + 1) + "'>" + list[i].ncorto + "</td>";
-                        }
+                            }
                             if (list[i].estado == 1) {
                                 text += "<td class='valEstado" + (i + 1) + "' value='1' style='background-color: #f0fff0;'>Habilitado</td>";
                             } else if (list[i].estado == 2) {
@@ -222,11 +222,9 @@
                             $('.titulo_t').text('Editar Departamento');
                             $('.titulo_t').attr('value', '2');
                         });
-                        $('.btnDes, .btnHab, .btnEliminar').click(function () {
+                        $('.btnDes').click(function () {
                             valNum = $(this).attr('value');
                             id = $('.valId' + valNum).attr('value');
-                            var dat="opc=desactivar-Dep&id=" + id
-                            acciones()
                             desactivar(id, idDir);
                         });
                         $('.btnHab').click(function () {
@@ -243,16 +241,15 @@
                     });
                 }
                 $('.btnAceptar').click(function () {
-                    var id, nombre, ncorto, estado, dat;
+                    var id, nombre, ncorto, estado;
                     nombre = $('.inpNombre').val();
                     ncorto = $('.inpNCorto').val();
                     estado = $('.inpEstado').val();
                     if ($('.titulo_t').attr('value') == 1) {
-                        dat="opc=crear-Dep&&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado + "&idDir=" + idDir;
-                        acciones(dat, idDir);
+                        var dat="opc="
+                        crear(nombre, ncorto, estado, idDir);
                     } else if ($('.titulo_t').attr('value') == 2) {
-                        dat="opc=editar-Dep&id=" + id + "&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado;
-                        acciones(dat,idDir);
+                        editar(id, nombre, ncorto, estado, idDir);
                     }
                     $('.inpNombre').val("");
                     $('.inpNCorto').val("");
@@ -306,7 +303,7 @@
                     x.append("<option value=''>Cargando..</option>");
                     $.post("../../Puesto", "opc=listar_dir_es", function (objJson) {
                         x.empty();
-                    x.append("<option value=''>[Seleccione]</option>");
+                        x.append("<option value=''>[Seleccione]</option>");
                         var list = objJson.lista;
                         for (var i = 0; i < list.length; i++) {
                             x.append("<option class='dir" + (i + 1) + "' value=" + list[i].id + ">" + list[i].nombre + "</option>");
@@ -314,7 +311,7 @@
                         GifLoader($('.div_t'), "Seleccione una Direccion", 2);
                     });
                 }
-                
+
             });
         </script>
     </body>

@@ -23,7 +23,7 @@ public interface InterfaceDepartamentoDAO {
     public List<Map<String, ?>> Listar_dep_x_dir(String id_de);
     //Mantenimiento
     public boolean Editar_Dep(String id, String nombre, String ncorto, String estado);
-    public boolean Crear_Deo(String nombre, String ncorto, String estado, String idDir);
+    public boolean Crear_Dep(String nombre, String ncorto, String estado, String idDir);
     public boolean Eliminar_Dep(String id);
     public boolean Activar_Dep(String id);
     public boolean Desactivar_Dep(String id);
