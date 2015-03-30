@@ -84,7 +84,6 @@ public class CPlazo extends HttpServlet {
             }
             if (opc.equals("Ver_detalle_plazo")) {
                 String iddgp=request.getParameter("iddgp");
-                
                 getServletContext().setAttribute("Lista_detalle_plazo", pl.Lista_detalle_plazo(iddgp));
                 response.sendRedirect("Vista/Dgp/Plazo/Detalle_Plazo.jsp");
             }

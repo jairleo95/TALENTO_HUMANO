@@ -36,6 +36,7 @@ import pe.edu.upeu.application.dao.HorarioDAO;
 import pe.edu.upeu.application.dao.ListaDAO;
 import pe.edu.upeu.application.dao.Periodo_PagoDAO;
 import pe.edu.upeu.application.dao.PlantillaDAO;
+import pe.edu.upeu.application.dao.Plazo_DgpDAO;
 import pe.edu.upeu.application.dao.PuestoDAO;
 import pe.edu.upeu.application.dao.RequerimientoDAO;
 import pe.edu.upeu.application.dao.SeccionDAO;
@@ -59,6 +60,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceHorarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePeriodo_PagoDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePlantillaDAO;
+import pe.edu.upeu.application.dao_imp.InterfacePlazo_DgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceSeccionDAO;
@@ -118,6 +120,7 @@ public class CDgp extends HttpServlet {
         InterfaceCentro_CostosDAO cc = new Centro_CostoDAO();
         InterfaceDatos_Hijo_Trabajador dht = new Datos_Hijo_TrabajadorDAO();
         InterfaceGrupo_ocupacionesDAO gr = new GrupoOcupacionesDAO();
+        InterfacePlazo_DgpDAO plazo = new Plazo_DgpDAO();
 
         InterfaceFuncionDAO fu = new FuncionDAO();
         InterfaceSeccionDAO seccion = new SeccionDAO();
@@ -334,6 +337,7 @@ public class CDgp extends HttpServlet {
             getServletContext().setAttribute("List_Puesto", pu.List_Puesto_Dep(iddep));
             getServletContext().setAttribute("Listar_Trabajador_id", tr.ListaridTrabajador(idtr));
             getServletContext().setAttribute("list_Cuenta_Sueldo", dgp.LIST_CUEN_SUEL(idtr));
+            getServletContext().setAttribute("fecha_maxima_plazo", plazo.fecha_maxima_plazo());
 
             response.sendRedirect("Vista/Dgp/Reg_Dgp.jsp?idreq=" + idreq + "&es_cs=" + ES_CUENTA_SUELDO);
         }
@@ -406,27 +410,27 @@ public class CDgp extends HttpServlet {
                     getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
 
                     int asig = dht.ASIGNACION_F(ID_TRABAJADOR);
-                     Calendar fecha = new GregorianCalendar();
-            int año = fecha.get(Calendar.YEAR);
-            int mes = fecha.get(Calendar.MONTH);
-            int dia = fecha.get(Calendar.DAY_OF_MONTH);
-            String fe_subs = "";
-            if (mes < 9 && dia < 9) {
-                fe_subs = año + "-" + "0" + (mes + 1) + "-" + "0" + dia;
-            }
+                    Calendar fecha = new GregorianCalendar();
+                    int año = fecha.get(Calendar.YEAR);
+                    int mes = fecha.get(Calendar.MONTH);
+                    int dia = fecha.get(Calendar.DAY_OF_MONTH);
+                    String fe_subs = "";
+                    if (mes < 9 && dia < 9) {
+                        fe_subs = año + "-" + "0" + (mes + 1) + "-" + "0" + dia;
+                    }
 
-            if (mes < 9 && dia > 9) {
-                fe_subs = año + "-" + "0" + (mes + 1) + "-" + dia;
-            }
+                    if (mes < 9 && dia > 9) {
+                        fe_subs = año + "-" + "0" + (mes + 1) + "-" + dia;
+                    }
 
-            if (mes >= 9 && dia < 9) {
-                fe_subs = año + "-" + (mes + 1) + "-" + "0" + dia;
-            }
-            if (mes >= 9 && dia > 9) {
-                fe_subs = año + "-" + (mes + 1) + "-" + dia;
-            }
+                    if (mes >= 9 && dia < 9) {
+                        fe_subs = año + "-" + (mes + 1) + "-" + "0" + dia;
+                    }
+                    if (mes >= 9 && dia > 9) {
+                        fe_subs = año + "-" + (mes + 1) + "-" + dia;
+                    }
                     //out.println(id_dir);
-                    response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp?num=" + asig + "&id_direc=" + id_dir +"&fe_subs=" + fe_subs);
+                    response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp?num=" + asig + "&id_direc=" + id_dir + "&fe_subs=" + fe_subs);
 
                 } else if (num == 0 & idrol.trim().equals("ROL-0006") & dgp.LIST_ID_DGP(ID_DGP).get(0).getEs_dgp().equals("1")) {
                     String ida1 = anno.List_Anno_Max_Cont(idtr);
