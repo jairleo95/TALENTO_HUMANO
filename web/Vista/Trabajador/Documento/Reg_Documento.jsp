@@ -903,7 +903,7 @@
 
                 });
                 $(".elimi").click(function() {
-                    var msg = confirm('¿tas seguro de eliminar?');
+                    var msg = confirm('¿estas seguro de eliminar?');
                     if (msg == true) {
                         return true;
                     } else {

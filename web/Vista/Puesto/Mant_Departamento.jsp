@@ -182,7 +182,7 @@
                                 text += "<td class='valNCorto" + (i + 1) + "'>No asignado</td>";
                             } else {
                                 text += "<td class='valNCorto" + (i + 1) + "'>" + list[i].ncorto + "</td>";
-                            }
+                        }
                             if (list[i].estado == 1) {
                                 text += "<td class='valEstado" + (i + 1) + "' value='1' style='background-color: #f0fff0;'>Habilitado</td>";
                             } else if (list[i].estado == 2) {
@@ -306,7 +306,7 @@
                     x.append("<option value=''>Cargando..</option>");
                     $.post("../../Puesto", "opc=listar_dir_es", function (objJson) {
                         x.empty();
-                        x.append("<option value=''>[Seleccione]</option>");
+                    x.append("<option value=''>[Seleccione]</option>");
                         var list = objJson.lista;
                         for (var i = 0; i < list.length; i++) {
                             x.append("<option class='dir" + (i + 1) + "' value=" + list[i].id + ">" + list[i].nombre + "</option>");
@@ -314,7 +314,7 @@
                         GifLoader($('.div_t'), "Seleccione una Direccion", 2);
                     });
                 }
-
+                
             });
         </script>
     </body>

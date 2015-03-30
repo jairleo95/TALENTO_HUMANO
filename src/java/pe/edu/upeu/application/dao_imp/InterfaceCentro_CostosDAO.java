@@ -28,6 +28,8 @@ public interface InterfaceCentro_CostosDAO {
 
     public List<Map<String, ?>> List_centr_id(String id_dgp);
 
+    public List<Map<String, ?>> List_centr_idcon(String id_con);
+
     public void Mod_det_centro(String id_det_cen, String id_contrato);
 
     public List<Centro_Costos> Lis_c_c_id_contr(String id_contrato);
@@ -37,6 +39,10 @@ public interface InterfaceCentro_CostosDAO {
     public List<Map<String, ?>> Cargar_cc_dgp(String id_dgp);
 
     public List<Detalle_Centro_Costo> Cargar_dcc_dgp(String id_dgp);
-    
+
     public List<String> list_cc_x_con(String id_con);
+
+    public int count_cc_x_id_cont(String id_con);
+
+    public void Eliminar_dcc(String id_dcc);
 }

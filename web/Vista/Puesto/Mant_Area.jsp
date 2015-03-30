@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
 
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
@@ -93,41 +93,15 @@
         <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
         <script src="../../js/Js_Mant_Puesto/Datatable_puesto.js" type="text/javascript"></script>
-
+        <script src="../../js/Js_DTDinamico/Dinamico.js" type="text/javascript"></script>
+        
         <script>
-            $(document).ready(function () {
-                var cont = $('.cont_tab');
-                var col = ["Nro", "Descripcion", "Numero", "Codigo", "Proceso", "Editar"];
-                var propiedades="class='asd+(i+1)'";
-                var contenido="list[i].nombre";
-                var elem=[propiedades,contenido];
-                crear_tabla(cont, col);
+            $(document).ready(function (){
+                var cont=$('.cont_tab');
+                var col= ["nro","descripcion","numero","codigo","proceso","editar"];
+                alert('sdf');
+                crear_tabla(cont,col);
             });
-        </script>
-        <script>
-            function crear_tabla(cont, col) {
-                cont.empty();
-                var tabb = "";
-                tabb += '<table class="table table-striped table-bordered table-hover tabla_t" width="100%"><thead><tr>';
-                for (var i = 0; i < col.length; i++) {
-                    tabb += "<td>" + col[i] + "</td>";
-                }
-                tabb += '</tr></thead><tbody class="tbodys"></tbody></table>';
-                cont.append(tabb);                
-            }
-            function cargar_tabla(url, data, tbody,elem) {
-                $.post(url, data, function (objJson) {
-                    var list = objJson.lista;
-                    tbody.empty();
-                    var tex = "";
-                    for (var i = 0; i < list.length; i++) {
-                        tex+=elem[i];                        
-                    }
-                    tbody.append(tex);
-                    tex = "";
-                    $('.tabla_t').DataTable();
-                });
-            }
         </script>
     </body>
 </html>

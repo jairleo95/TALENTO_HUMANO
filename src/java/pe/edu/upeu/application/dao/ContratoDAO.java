@@ -1033,8 +1033,84 @@ public class ContratoDAO implements InterfaceContratoDAO {
     }
 
     @Override
-    public void MODIFICAR_CONTRATO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void MODIFICAR_CONTRATO(String ID_CONTRATO, String ID_DGP, String FE_DESDE, String FE_HASTA, String FE_CESE, String ID_FUNC, String LI_CONDICION, Double CA_SUELDO, Double CA_REINTEGRO, Double CA_ASIG_FAMILIAR, Double HO_SEMANA, Double NU_HORAS_LAB, Double DIA_CONTRATO, String TI_TRABAJADOR, String LI_REGIMEN_LABORAL, String ES_DISCAPACIDAD, String TI_CONTRATO, String LI_REGIMEN_PENSIONARIO, String ES_CONTRATO_TRABAJADOR, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String US_IP, String FE_VACACIO_INI, String FE_VACACIO_FIN, String ES_CONTRATO, String ID_FILIAL, String ID_PUESTO, Double CA_BONO_ALIMENTO, String LI_TIPO_CONVENIO, String ES_FIRMO_CONTRATO, Double NU_CONTRATO, String DE_OBSERVACION, String ES_APOYO, String TI_HORA_PAGO, String NU_DOCUMENTO, String ID_ANNO, String ES_ENTREGAR_DOC_REGLAMENTOS, String ES_REGISTRO_HUELLA, String DE_REGISTRO_SISTEM_REMU, String ID_TRABAJADOR, Double CA_SUELDO_TOTAL, String ID_REGIMEN_LABORAL, String ID_MODALIDAD, String ID_SUB_MODALIDAD, String CO_GR_OCUPACION, String FE_SUSCRIPCION, String CO_TI_MONEDA, String CO_TI_REM_VARIAB, String DE_REMU_ESPECIE, String DE_RUC_EMP_TRAB, String CO_SUCURSAL, String DE_MYPE, String ES_TI_CONTRATACION, Double CA_BEV, String ID_TIPO_PLANILLA, String ES_REMUNERACION_PROCESADO, String ID_HORARIO, String ID_PLANTILLA_CONTRACTUAL, Double ca_bonificacion_p) {
+         try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MODIF_CONTRATO( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,? )} ");
+            cst.setString(1, ID_CONTRATO);
+            cst.setString(2, ID_DGP);
+            cst.setString(3, c.convertFecha(FE_DESDE));
+            if (FE_HASTA.equals("")) {
+                cst.setString(4, FE_HASTA);
+            } else {
+                cst.setString(4, c.convertFecha(FE_HASTA));
+            }
+            cst.setString(5, FE_CESE);
+            cst.setString(6, ID_FUNC);
+            cst.setString(7, LI_CONDICION);
+            cst.setDouble(8, CA_SUELDO);
+            cst.setDouble(9, CA_REINTEGRO);
+            cst.setDouble(10, CA_ASIG_FAMILIAR);
+            cst.setDouble(11, HO_SEMANA);
+            cst.setDouble(12, NU_HORAS_LAB);
+            cst.setDouble(13, DIA_CONTRATO);
+            cst.setString(14, TI_TRABAJADOR);
+            cst.setString(15, LI_REGIMEN_LABORAL);
+            cst.setString(16, ES_DISCAPACIDAD);
+            cst.setString(17, TI_CONTRATO);
+            cst.setString(18, LI_REGIMEN_PENSIONARIO);
+            cst.setString(19, "1");
+            cst.setString(20, US_CREACION);
+            cst.setString(21, FE_CREACION);
+            cst.setString(22, US_MODIF);
+            cst.setString(23, FE_MODIF);
+            cst.setString(24, US_IP);
+            cst.setString(25, FE_VACACIO_INI);
+            cst.setString(26, FE_VACACIO_FIN);
+            cst.setString(27, "1");
+            cst.setString(28, ID_FILIAL);
+            cst.setString(29, ID_PUESTO);
+            cst.setDouble(30, CA_BONO_ALIMENTO);
+            cst.setString(31, LI_TIPO_CONVENIO);
+            cst.setString(32, ES_FIRMO_CONTRATO);
+            cst.setDouble(33, NU_CONTRATO);
+            cst.setString(34, DE_OBSERVACION);
+            cst.setString(35, ES_APOYO);
+            cst.setString(36, TI_HORA_PAGO);
+            cst.setString(37, NU_DOCUMENTO);
+            cst.setString(38, ID_ANNO);
+            cst.setString(39, ES_ENTREGAR_DOC_REGLAMENTOS);
+            cst.setString(40, ES_REGISTRO_HUELLA);
+            cst.setString(41, DE_REGISTRO_SISTEM_REMU);
+            cst.setString(42, ID_TRABAJADOR);
+            cst.setDouble(43, CA_SUELDO_TOTAL);
+            cst.setString(44, ID_REGIMEN_LABORAL);
+            cst.setString(45, ID_MODALIDAD);
+            cst.setString(46, ID_SUB_MODALIDAD);
+            cst.setString(47, CO_GR_OCUPACION);
+            cst.setString(48, c.convertFecha(FE_SUSCRIPCION));
+            cst.setString(49, CO_TI_MONEDA);
+            cst.setString(50, CO_TI_REM_VARIAB);
+            cst.setString(51, DE_REMU_ESPECIE);
+            cst.setString(52, DE_RUC_EMP_TRAB);
+            cst.setString(53, CO_SUCURSAL);
+            cst.setString(54, DE_MYPE);
+            cst.setString(55, ES_TI_CONTRATACION);
+            cst.setDouble(56, CA_BEV);
+            cst.setString(57, ID_TIPO_PLANILLA);
+            cst.setString(58, "0");
+            cst.setString(59, ID_HORARIO);
+            cst.setString(60, ID_PLANTILLA_CONTRACTUAL);
+            cst.setDouble(61, ca_bonificacion_p);
+            cst.execute();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+
+        } catch (ParseException ex) {
+            Logger.getLogger(ContratoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.conn.close();
+        }
     }
 
 }

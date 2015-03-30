@@ -466,7 +466,6 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
                 fecha = rs.getString(1);
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
         } finally {
             this.conn.close();
         }

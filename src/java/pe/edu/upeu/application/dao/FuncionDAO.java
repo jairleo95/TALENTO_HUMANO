@@ -180,9 +180,9 @@ public class FuncionDAO implements InterfaceFuncionDAO {
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select  d.NO_DEP, d.NO_CORTO_DEP, d.ES_DEPARTAMENTO, d.ID_DEPARTAMENTO\n" +
-                            "from rhtx_departamento d, rhtx_direccion r\n" +
-                            "where d.ID_DIRECCION=r.ID_DIRECCION and d.ID_DIRECCION='"+id_de.trim()+"'";
+            String sql = "select d.ID_DEPARTAMENTO, d.NO_DEP\n"
+                    + "           from rhtx_departamento d, rhtx_direccion r\n"
+                    + "             where d.ID_DIRECCION=r.ID_DIRECCION and d.ID_DIRECCION='" + id_de.trim() + "'";
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
