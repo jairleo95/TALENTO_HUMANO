@@ -91,7 +91,7 @@
                             <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false">
                                 <header class="headerr">
                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                    <h2>Lista</h2>
+                                    <h2>Departamentos</h2>
                                 </header>
                                 <div>
                                     <div class="jarviswidget-editbox">
@@ -311,6 +311,7 @@
                         GifLoader($('.div_t'), "Seleccione una Direccion", 2);
                     });
                 }
+                
 
             });
         </script>

@@ -27,4 +27,5 @@ public interface InterfaceDepartamentoDAO {
     public boolean Eliminar_Dep(String id);
     public boolean Activar_Dep(String id);
     public boolean Desactivar_Dep(String id);
+    public List<Map<String, ?>> Listar_dep_x_es(String idDir);
 }
