@@ -121,27 +121,23 @@
 
                     <!-- widget div-->
                     <div>
-
                         <!-- widget edit box -->
                         <div class="jarviswidget-editbox">
                             <!-- This area used as dropdown edit box -->
-
                         </div>
                         <!-- end widget edit box -->
-
                         <!-- widget content -->
                         <div class="widget-body no-padding">
-                            <% CConversion con = new CConversion();%>
-                            <label>Todavia no se ha almacenado El DGP,¿desea contratar sin  antes elaborar un DGP?</label>  
-                            <br>
-
-                            <a href="Reg_Contrato.php?hac_cont=1&idtr=<? echo $idtr;?>">Hacer Contrato de Todas Maneras</a>
+                            <% CConversion con = new CConversion();
+                                HttpSession sesion = request.getSession(true);
+                                String idrol = (String) sesion.getAttribute("IDROL");
+                            %>
                             <%for (int i = 0; i < List_contrato.size(); i++) {
                                     V_Contrato_dgp a = new V_Contrato_dgp();
                                     a = (V_Contrato_dgp) List_contrato.get(i);
                             %>
 
-                            <form action="../../contrato" id="checkout-form" class="smart-form"  method="POST" novalidate="novalidate">
+                            <form action="../../contrato" id="checkout-form" class="smart-form"  method="POST" >
                                 <fieldset id="fila-agregar">
                                     <%if (a.getId_dgp() != null) {%>
                                     <div class="row">
@@ -172,7 +168,7 @@
                                     </div>
                                     <%}%>
                                     <div class="row" >
-                                        <input type="hidden" name="id_rol_ses" id="id_rol_s" value="">
+                                        <input type="hidden" name="id_rol_ses" id="id_rol_s" value="<%=idrol%>">
                                         <input type="hidden" name="TIPO_PLANILLA"  value="<%%>">
                                         <input type="hidden" name="HORARIO"  value="">
                                         <section class="col col-2">
@@ -191,7 +187,7 @@
                                                 </select>  
                                             </label>
                                         </section>
-                                        <input type="hidden" name="IDDETALLE_DGP" value="<%=a.getId_dgp()%>" class="text-box" id="id_dg" >                              
+                                        <input type="hidden" name="IDDETALLE_DGP" value="<%=a.getId_dgp()%>" class="text-box id_dg" id="id_dg" >                              
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Desde:
                                                 <%if (a.getFe_desde() != null) {%>
@@ -280,43 +276,43 @@
                                     <div class="row">
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Remuneración:
-                                                <input type="text" name="SUELDO" value="<%=a.getCa_sueldo()%>" class="input-group-sm" id="remu" disabled="">
+                                                <input type="text" name="SUELDO" value="<%=a.getCa_sueldo()%>" class="input-group-sm" id="remu" readonly="" >
                                             </label>
                                         </section>
                                         <section class="col col-1">
                                             <label class="input" id="titulo">Reintegro:
-                                                <input type="text" name="REINTEGRO" value="<%=a.getCa_reintegro()%>" class="input-group-sm" id="rein" disabled="">
+                                                <input type="text" name="REINTEGRO" value="<%=a.getCa_reintegro()%>" class="input-group-sm" id="rein" readonly="" >
                                             </label>
                                         </section>
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Bono Alimentario:
-                                                <input type="text" name="BONO_ALIMENTO" value="<%=a.getCa_bono_alimento()%>" class="input-group-sm" id="bo_a" disabled="">
+                                                <input type="text" name="BONO_ALIMENTO" value="<%=a.getCa_bono_alimento()%>" class="input-group-sm" id="bo_a" readonly="">
                                             </label>
                                         </section>
                                         <section class="col col-1">
                                             <label class="input" id="titulo">BEV:
-                                                <input type="text" name="BEV" value="<%=a.getCa_bev()%>" class="input-group-sm" id="bev" disabled="">
+                                                <input type="text" name="BEV" value="<%=a.getCa_bev()%>" class="input-group-sm" id="bev" readonly="">
                                             </label>
                                         </section>
                                         <section class="col col-1">
                                             <label class="input" id="titulo">Bono puesto:
-                                                <input type="text" name="ca_bono_puesto" value="<%=a.getCa_bonificacion_p()%>" class="input-group-sm" required="" id="ca_bono_pu" disabled="">
+                                                <input type="text" name="ca_bono_puesto" value="<%=a.getCa_bonificacion_p()%>" class="input-group-sm" required="" id="ca_bono_pu" readonly="">
                                             </label>
                                         </section>
 
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Sueldo Total:
-                                                <input type="text" name="TOTAL_SUELDO" value="<%=a.getCa_sueldo_total()%>" class="input-group-sm" id="su_t" disabled="">
+                                                <input type="text" name="TOTAL_SUELDO" value="<%=a.getCa_sueldo_total()%>" class="input-group-sm" id="su_t" readonly="">
                                             </label>
                                         </section>
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Tipo Horas Pago:
-                                                <input type="text" name="TIPO_HORA_PAGO" value="<%=a.getTi_hora_pago()%>" class="input-group-sm" disabled="">
+                                                <input type="text" name="TIPO_HORA_PAGO" value="<%=a.getTi_hora_pago()%>" class="input-group-sm" readonly="">
                                             </label>
                                         </section>
                                         <section class="col col-2" >
                                             <label class="input" id="titulo">Asignanción Familiar:
-                                                <input type="text" name="ASIG_FAMILIAR" value="<%=a.getCa_asig_familiar()%>"  class="input-group-sm" id="asig" disabled="">
+                                                <input type="text" name="ASIG_FAMILIAR" value="<%=a.getCa_asig_familiar()%>"  class="input-group-sm" id="asig" readonly="">
                                             </label>
                                         </section>
                                     </div>
@@ -389,7 +385,21 @@
                                     </div>-->
 
                                 </fieldset>
-
+                                <fieldset id="fila-agregar-cc">
+                                    <%if (a.getId_dgp() == null) {%>
+                                    <div>
+                                        <section class="col col-1">
+                                            <br>
+                                            <label  id="titu">Agregar:</label>
+                                            <br>
+                                            <label class="btn">
+                                                <!--<button type="button" class="btn btn-default btn-agregar-cc" id="btn-agregar-cc" >Agregar</button>-->
+                                                <a type="button" style="padding:9%; padding-right:20%; padding-left:20%;" id="btn-agregar-cc" class=" btn btn-default txt-color-green btn-agregar-cc"><i class="fa fa-plus fa-2x"></i></a>
+                                            </label>
+                                        </section>
+                                    </div>
+                                    <%}%>
+                                </fieldset>
                                 <fieldset>
                                     <div class="row">
                                         <section class="col col-4">
@@ -471,7 +481,7 @@
                                         </section>
                                         <section class="col col-4">
                                             <label class="input" id="titulo">Fecha de Suscripción: 
-                                                <input id="suscripcion" type="date" name="FECHA_SUSCRIPCION"  class="input-group-sm"  value="">
+                                                <input id="suscripcion" type="date" name="FECHA_SUSCRIPCION"  class="input-group-sm"  value="<%=con.convertFecha3(a.getFe_suscripcion())%>">
                                             </label>
                                         </section>
                                         <section class="col col-4">
@@ -746,9 +756,14 @@
                                     <input type="hidden" name="REGISTRO_HUELLA"  value="0" class="text-box" > 
                                     <input type="hidden" name="REGISTRO_SISTEM_REMU" value="0" class="text-box" >
                                     <input type="hidden" name="ESTADO" value="1" class="text-box" > 
-                                    <input type="hidden" value="" name="IDDATOS_TRABAJADOR" class="text-box" >
+                                    <input type="hidden" value="<%=a.getId_trabajador()%>" name="IDDATOS_TRABAJADOR" class="text-box" >
 
                                 </fieldset>
+                                <input type="hidden" name="id_contrato" value="<%=a.getId_contrato()%>" class="id_contrato">
+                                <input type="hidden" name="can_centro_cos" class="can_centro_cos" value="<%request.getParameter("num_cc");%>">
+                                <input type="hidden" name="can_centro_cos" class="conteo" value="">
+                                <input type="hidden" name="can_centro_cos" class="cant-elimi" value="">
+                                <input type="hidden" name="can_centro_cos" class="cant-ing" value="">
                                 <input type="hidden" value="<%=a.getId_departamento()%>" class="dep_pu">
                                 <input type="hidden" value="<%=a.getId_area()%>" class="area_pu">
                                 <input type="hidden" value="<%=a.getId_direccion()%>" class="dir_pu">
@@ -766,6 +781,7 @@
                                     <!--<a type="button" class="btn btn-success" href="../../horario?iddgp=&opc=Listar">Ver Horario</a>
                                     <a type="button" class="btn btn-success" href="../../documento?iddgp=&idtr=&opc=Ver_Documento">Ver Documentos</a>-->
                                 </footer>
+
                             </form>
                             <%}%>
                             <table>
@@ -1375,6 +1391,7 @@
                 }
             });
         }
+
         function Listar_plantilla() {
             var s = $(".con_pl_pu");
 
@@ -1424,47 +1441,233 @@
                 }
             });
         }
+        /* function Listar_centro_costo() {
+         var x = $("#fila-agregar");
+         $.post("../../centro_costo", "opc=Listar_centro_id&" + "id_dgp=" + $("#id_dgp").val(), function(objJson) {
+         var lista = objJson.lista;
+         var numero = 1;
+         x.append('<div  class="row centro-costo_' + numero + '" >');
+         for (var i = 0; i < lista.length; i++) {
+         numero = numero + i;
+         if ($("#id_rol_s").val() == 'ROL-0001') {
+         x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section><div class="form-group"><button type="button" class="btn btn-primary" id="Seleccionar_centro" >Buscar</button></div>');
+         } else {
+         x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section>');
+         }
+         numero = 1;
+         }
+         x.append('</div><table><tr><td><td><input type="hidden" name="can_centro_cos" value="' + lista.length + '"></td></tr></table>');
+         
+         });
+         
+         }*/
         function Listar_centro_costo() {
-            var x = $("#fila-agregar");
-            $.post("../../centro_costo", "opc=Listar_centro_id&" + "id_dgp=" + $("#id_dgp").val(), function(objJson) {
+            var x = $("#fila-agregar-cc");
+            $.post("../../centro_costo", "opc=Listar_centro_id_con&" + "id_con=" + $(".id_contrato").val(), function(objJson) {
                 var lista = objJson.lista;
                 var numero = 1;
-                x.append('<div  class="row centro-costo_' + numero + '" >');
+
+                var texto = '<div class="row">';
                 for (var i = 0; i < lista.length; i++) {
                     numero = numero + i;
-                    if ($("#id_rol_s").val() == 'ROL-0001') {
-                        x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section><div class="form-group"><button type="button" class="btn btn-primary" id="Seleccionar_centro" >Buscar</button></div>');
+                    if ($("#id_dgp").val() != null) {
+                        texto += ('<section class="col col-4 cen-co-im' + i + '"><br><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm selec' + i + '"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></section>');
                     } else {
-                        x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section>');
+                        texto += ('<section class="col col-4 cen-co-im' + i + '"><br><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm selec' + i + '"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></section><section class="col col-1 cen-co-im' + i + '" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;"value="' + i + '" class=" btn btn-default txt-color-red rem' + i + '" onclick="Eliminar($(this).val());"><i class="fa fa-minus fa-2x"></i></button></label></section>');
                     }
                     numero = 1;
+                    ag++;
                 }
-                x.append('</div><table><tr><td><td><input type="hidden" name="can_centro_cos" value="' + lista.length + '"></td></tr></table>');
-
+                texto += ('</div>');
+                x.append(texto);
             });
-
         }
         /*function Listar_centro_costo2() {
-            var x = $("#fila-agregar");
-            $.post("../../centro_costo", "opc=Listar_centro_id&" + "id_dgp=" + $("#id_dgp").val(), function(objJson) {
-                var lista = objJson.lista;
-                var numero = 1;
-                x.append('<div  class="row centro-costo_' + numero + '" >');
-                for (var i = 0; i < lista.length; i++) {
-                    numero = numero + i;
-                    if ($("#id_rol_s").val() == 'ROL-0001') {
-                        x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section><div class="form-group"><button type="button" class="btn btn-primary" id="Seleccionar_centro" >Buscar</button></div>');
-                    } else {
-                        x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section>');
-                    }
-                    numero = 1;
-                }
-                x.append('</div><table><tr><td><td><input type="hidden" name="can_centro_cos" value="' + lista.length + '"></td></tr></table>');
-
+         var x = $("#fila-agregar");
+         $.post("../../centro_costo", "opc=Listar_centro_id&" + "id_dgp=" + $("#id_dgp").val(), function(objJson) {
+         var lista = objJson.lista;
+         var numero = 1;
+         x.append('<div  class="row centro-costo_' + numero + '" >');
+         for (var i = 0; i < lista.length; i++) {
+         numero = numero + i;
+         if ($("#id_rol_s").val() == 'ROL-0001') {
+         x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section><div class="form-group"><button type="button" class="btn btn-primary" id="Seleccionar_centro" >Buscar</button></div>');
+         } else {
+         x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section>');
+         }
+         numero = 1;
+         }
+         x.append('</div><table><tr><td><td><input type="hidden" name="can_centro_cos" value="' + lista.length + '"></td></tr></table>');
+         
+         });
+         
+         }*/
+        var agregar = $('#fila-agregar-cc');
+        var ag = 1;
+        var ingr = 1;
+        var texto = ""
+        var estable = 0;
+        function agregar_centro_costo(opc, arr_cc) {
+            if (ingr == 1) {
+                texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + ag + ':</label>';
+                texto += '<div  class="row centro-costo_' + ag + '" >';
+                texto += '<section class="col col-3"><label class="select" id="titu">Porcentaje :<select required="" class="cc-dir' + ingr + '"><option value="">[DIRECCION]</option></select></label></section>';
+                texto += '</div>';
+            }
+            if (opc == "1") {
+                texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + ag + ':</label>';
+                texto += '<div  class="row centro-costo_' + ag + '" >';
+                texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ingr + '"><option value="">[DIRECCION]</option></select></label></section>';
+                texto += '<section class="col col-3"><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ingr + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
+                texto += '<section class="col col-3"><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ingr + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
+                texto += '<section class="col col-1"><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '"  min="0"   type="text" required="" value="' + arr_cc[3] + '" class="porcentaje_cc"/><a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class=" btn btn-default txt-color-red remover' + ag + '"><i class="fa fa-minus fa-2x"></i></a></label></section>';
+                texto += '</div>';
+                agregar.append(texto);
+                listar_cc(ag, opc, arr_cc);
+                sumn_porcen_total();
+            } else {
+                texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + ag + ':</label>';
+                texto += '<div  class="row centro-costo_' + ag + '" >';
+                texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ingr + '"><option value="">[DIRECCION]</option></select></label></section>';
+                texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ingr + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
+                texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ingr + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
+                texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '"  min="0" value="' + (ingr + ag - 1) + '"  type="text" required="" class="porcentaje_cc"/></label></section>';
+                texto += '<section class="col col-1" ><br><label class="btn"><a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class=" btn btn-default txt-color-red remover' + ag + '"><i class="fa fa-minus fa-2x"></i></a></label></section>';
+                texto += '</div>';
+                agregar.append(texto);
+                listar_cc(ag);
+                var c_porcentaje = $(".porcentaje_cc").size();
+                $(".porcentaje_cc").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
+                estable++;
+                sumn_porcen_total();
+            }
+            //$(".ver").text(texto); 
+            texto = "";
+            $(".cant").val(ag);
+            ag++;
+            ingr++;
+            $(".porcentaje_cc").keyup(function() {
+                sumn_porcen_total();
             });
+        }
+        function sumn_porcen_total() {
 
-        }*/
+            var acum = 0;
+            $.each($(".porcentaje_cc"), function() {
+                acum = acum + parseFloat($(this).val());
+            });
+            $(".total_porcentaje").val(acum);
+        }
+        function listar_cc(num, opc, arr_cc) {
+            var cc_dir = $(".cc-dir" + num);
+            $.post("../../centro_costo?opc=Listar_dir", function(objJson) {
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                for (var i = 0; i < lista.length; i++) {
+                    if (opc == "1") {
+                        if (arr_cc[0] == lista[i].id) {
+                            cc_dir.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
+                            listar_dep_cc(num, opc, arr_cc);
+                        } else {
+                            cc_dir.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
+                        }
+                    } else {
+                        cc_dir.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
+                    }
+                }
+            });
+            $(".cc-dir" + num).change(function() {
+
+                listar_dep_cc(num, "0", arr_cc);
+            });
+            $(".cc-dep" + num).change(function() {
+
+                listar_centro_costo2(num, "0", arr_cc);
+            });
+            $(".remover" + num).click(function() {
+
+                remover(num);
+                sumn_porcen_total();
+                ag--;
+            });
+        }
+        function remover(rem) {
+            $(".centro-costo_" + rem).remove();
+        }
+        function listar_dep_cc(x, opc, arr_cc) {
+
+            var cc_dep = $(".cc-dep" + x);
+            $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + $(".cc-dir" + x).val(), function(objJson) {
+
+                cc_dep.empty();
+                cc_dep.append("<option value=''>[DEPARTAMENTO]</option>");
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                for (var i = 0; i < lista.length; i++) {
+                    if (opc == "1") {
+                        if (arr_cc[1] == lista[i].id) {
+                            cc_dep.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
+                            (x, opc, arr_cc);
+                        } else {
+                            cc_dep.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
+                        }
+                    } else {
+                        cc_dep.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
+                    }
+
+                }
+            });
+        }
+        function listar_centro_costo2(x, opc, arr_cc) {
+
+            var centro_costo = $(".centro_costo" + x);
+            $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + $(".cc-dep" + x).val(), function(objJson) {
+                centro_costo.empty();
+                centro_costo.append("<option value=''>[CENTRO COSTO]</option>");
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                for (var i = 0; i < lista.length; i++) {
+
+
+                    if (opc == "1") {
+                        if (arr_cc[4] == lista[i].id) {
+                            centro_costo.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
+                        } else {
+                            centro_costo.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
+                        }
+                    } else {
+                        centro_costo.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
+                    }
+
+                }
+            });
+        }
+        function Eliminar(i) {
+            var x = $("#fila-agregar-cc");
+            ag--;
+            var msg = confirm('Si aceptas se eliminara la informacion totalmente ¿aceptas?');
+            if (msg == true) {
+                $.post("../../centro_costo", "opc=Eliminar_det_cc&" + "id_dcc=" + $(".selec" + i).val(), function() {
+                    remov(i);
+                });
+            } else {
+                return false;
+            }
+        }
+        function remov(i) {
+            $(".cen-co-im" + i).remove();
+        }
         $(document).ready(function() {
+
             Listar_pue();
             Listar_dep();
             Listar_sec();
@@ -1474,20 +1677,25 @@
             listar_sub_mod();
             Listar_Direccion();
             Listar_centro_costo();
-
             var a = $("#select-sub-mod");
             var c = $("#Selec_Area");
             var d = $("#select_sec");
             var b = $("#selec_dep");
             var e = $("#pu_id_se");
+            $('#btn-agregar-cc').click(function() {
+                agregar_centro_costo();
+                //alert($(".cant").val());
+
+
+            });
             $(".date").keyup(function() {
                 $(".conteni").val($(".date").val());
             });
+            $(".")
             // $.post("../../  ")
             $("#select_mod").change(
                     function() {
                         // alert("?MODALIDAD="+$("#select_mod").val());
-
                         $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function(objJson) {
                             a.empty();
                             var list = objJson.lista;
@@ -1586,6 +1794,7 @@
                         return false;
                     }
             );
-        });
+        }
+        );
     </script>
 </html>

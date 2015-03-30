@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
 import pe.edu.upeu.application.dao_imp.InterfaceCentro_CostosDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -314,8 +315,8 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
 
     @Override
     public List<String> list_cc_x_con(String id_con) {
-       this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT (DC.ID_DETALLE_CENTRO_COSTO||'/'||CC.ID_DEPARTAMENTO||'/'||pu.ID_DIRECCION)as centro_costos FROM RHTR_CENTRO_COSTO CC,RHTD_DETALLE_CENTRO_COSTO DC,RHVD_PUESTO_DIRECCION pu WHERE DC.ID_CENTRO_COSTO = CC.ID_CENTRO_COSTO and pu.ID_DEPARTAMENTO = CC.ID_DEPARTAMENTO AND DC.ID_CONTRATO='"+id_con.trim()+"' GROUP by (DC.ID_DETALLE_CENTRO_COSTO||'/'||CC.ID_DEPARTAMENTO||'/'||pu.ID_DIRECCION)";
+        this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT (DC.ID_DETALLE_CENTRO_COSTO||'/'||CC.ID_DEPARTAMENTO||'/'||pu.ID_DIRECCION)as centro_costos FROM RHTR_CENTRO_COSTO CC,RHTD_DETALLE_CENTRO_COSTO DC,RHVD_PUESTO_DIRECCION pu WHERE DC.ID_CENTRO_COSTO = CC.ID_CENTRO_COSTO and pu.ID_DEPARTAMENTO = CC.ID_DEPARTAMENTO AND DC.ID_CONTRATO='" + id_con.trim() + "' GROUP by (DC.ID_DETALLE_CENTRO_COSTO||'/'||CC.ID_DEPARTAMENTO||'/'||pu.ID_DIRECCION)";
         List<String> list = new ArrayList<String>();
         try {
             ResultSet rs = this.cnn.query(sql);
@@ -327,5 +328,72 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
             this.cnn.close();
         }
         return list;
+    }
+
+    @Override
+    public List<Map<String, ?>> List_centr_idcon(String id_con) {
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "SELECT (C.ID_CENTRO_COSTO) as id_centro ,c.CO_CENTRO_COSTO ||' -  '||c.DE_CENTRO_COSTO as DE_CENTRO_COSTO  ,(d.ID_DETALLE_CENTRO_COSTO)as id_det_cen FROM RHTR_CENTRO_COSTO C, RHTD_DETALLE_CENTRO_COSTO d where d.ID_CONTRATO='"+id_con.trim()+"' and C.ID_CENTRO_COSTO=d.ID_CENTRO_COSTO";
+            ResultSet rs = this.cnn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("id_centro"));
+                rec.put("nombre", rs.getString("DE_CENTRO_COSTO"));
+                rec.put("id_det_ce", rs.getString("id_det_cen"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
+    }
+
+    @Override
+    public int count_cc_x_id_cont(String id_con) {
+         this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT COUNT(*) FROM RHTD_DETALLE_CENTRO_COSTO WHERE ID_CONTRATO='"+id_con.trim()+"'";
+        int count = 0;
+        try {
+            ResultSet rs = this.cnn.query(sql);
+            while (rs.next()) {
+                count = rs.getInt("1");
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.cnn.close();
+        }
+        return count;
+    }
+
+    @Override
+    public void Eliminar_dcc(String id_dcc) {
+         CallableStatement cst;
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = cnn.conex.prepareCall("{CALL RHSP_ELIMINAR_DET_CC( ? )}");
+            cst.setString(1, id_dcc.trim());
+            cst.execute();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
     }
 }
