@@ -43,19 +43,19 @@
                                                     </section>                                              
                                                 </div>                                               
                                                 <div class="row">
-                                                    <section class="col col-4">
+                                                    <section class="col col-3">
                                                         <label class="label">Nombre</label>
                                                         <label class="input">
                                                             <input class="inpNombre"type="text" placeholder="Escribir nombre de Puesto" required="" maxlength="100">
                                                         </label>
                                                     </section>
-                                                    <section class="col col-4">
+                                                    <section class="col col-3">
                                                         <label class="label">Nombre Corto</label>
                                                         <label class="input">
-                                                            <input class="inpNCorto"type="text" placeholder="Escribir nombre Corto" required="" maxlength="30">
+                                                            <input class="inpNCorto"type="text" placeholder="Escribir nombre Corto" required="" maxlength="20">
                                                         </label>
                                                     </section>
-                                                    <section class="col col-4">
+                                                    <section class="col col-3">
                                                         <label class="label">Estado</label>
                                                         <label class="select">
                                                             <select class="inpEstado" required="0">
@@ -64,6 +64,12 @@
                                                                 <option value="2">Deshabilitado</option>
                                                             </select>
                                                             <i></i></label>
+                                                    </section>
+                                                    <section class="col col-3">
+                                                        <label class="label">Co. Grupo</label>
+                                                        <label class="input">
+                                                            <input class="inpCGrupo"type="text" placeholder="Co Grupo" required="" >
+                                                        </label>
                                                     </section>
                                                 </div>
                                                 <div class="row">
@@ -173,7 +179,7 @@
         <script>
             $(document).ready(function () {
                 GifLoader($('.div_t'), "Espere..", 1);
-                var idDep = "", idDir = "",idArea="", valNum;
+                var idDep = "", idDir = "",idArea="",idSec="", valNum;
                 cargar_direccion();
 
                 $('.inpDireccion').change(function () {
@@ -200,17 +206,27 @@
                         GifLoader($('.div_t'), "Seleccione un Area", 2);
                     } else {
                         idArea = $(this).val();
-                        cargar_t(idArea);
+                        cargar_seccion(idArea);
+                    }
+
+                });
+                $('.inpSec').change(function () {
+                    
+                    if ($(this).val() == "" && idDep == "") {
+                        GifLoader($('.div_t'), "Seleccione un Area", 2);
+                    } else {
+                        idSec = $(this).val();
+                        cargar_t(idSec);
                     }
 
                 });
                 function cargar_t(id) {
                     GifLoader($('.div_t'), "Espere..", 1);
-                    $.post("../../Puesto", "opc=list_sec_area&id=" + id, function (objJson) {
+                    $.post("../../Puesto", "opc=list_puesto_sec&id=" + id, function (objJson) {
                         $('.headerr').show();
                         var tabb = "";
                         tabb += '<table class="table table-striped table-bordered table-hover tabla_t" width="100%"><thead><tr>';
-                        tabb += '<td>Nro</td><td>Nombre Seccion</td><td>Nombre Corto</td><td>Estado</td>';
+                        tabb += '<td>Nro</td><td>Nombre Puesto</td><td>Nombre Corto</td><td>Estado</td><td>Co. Grupo</td>';
                         tabb += '<td>Acciones</td></tr></thead><tbody class="tbodys"></tbody></table>';
                         $('.div_t').empty();
                         $('.div_t').append(tabb);
@@ -224,7 +240,7 @@
                             if (list[i].ncorto != undefined) {
                                 text += "<td class='valNCorto" + (i + 1) + "'>" + list[i].ncorto + "</td>";
                             } else {
-                                text += "<td class='valNCorto" + (i + 1) + "'>No asignado</td>";
+                                text += "<td class='valNCorto" + (i + 1) + "'>No Asignado</td>";
                             }
                             if (list[i].estado == 1) {
                                 text += "<td class='valEstado" + (i + 1) + "' value='1' style='background-color: #f0fff0;'>Habilitado</td>";
@@ -232,6 +248,11 @@
                                 text += "<td class='valEstado" + (i + 1) + "' value='2' style='background-color: #fff0f0;'>Deshabilitado</td>";
                             } else {
                                 text += "<td class='valEstado" + (i + 1) + "' value='1' style='background-color: #f0fff0;'>Habilitado</td>";
+                            }
+                            if (list[i].cgrupo != undefined) {
+                                text += "<td class='valCGrupo" + (i + 1) + "'>" + list[i].cgrupo + "</td>";
+                            } else {
+                                text += "<td class='valCGrupo" + (i + 1) + "'>---</td>";
                             }
                             text += '<td><center><div class="btn-group"><button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false">';
                             text += 'Accion <span class="caret"></span></button><ul class="dropdown-menu" role="menu">';
@@ -250,78 +271,82 @@
 
 
                         //----Acciones
-                        var id, nombre, ncorto, estado;
-                        idArea = $('.inpArea').val();
+                        var id, nombre, ncorto, estado, cGrupo;
+                        idSec = $('.inpSec').val();
                         $('.btnEditar').click(function () {
                             valNum = $(this).attr('value');
                             id = $('.valId' + valNum).attr('value');
                             nombre = $('.valNombre' + valNum).text();
                             ncorto = $('.valNCorto' + valNum).text();
                             estado = $('.valEstado' + valNum).attr('value');
+                            cGrupo = $('.valCGrupo' + valNum).text();
                             $('.inpId').val(id);
                             $('.inpNombre').val(nombre);
                             $('.inpNCorto').val(ncorto);
+                            $('.inpCGrupo').val(cGrupo);
                             $('.inpEstado > option[value=' + estado + ']').attr('selected', 'selected');
-                            $('.titulo_t').text('Editar Area');
+                            $('.titulo_t').text('Editar Puesto');
                             $('.titulo_t').attr('value', '2');
                         });
                         $('.btnDes').click(function () {
                             valNum = $(this).attr('value');
                             id = $('.valId' + valNum).attr('value');
-                            desactivar(id, idArea);
+                            desactivar(id, idSec);
                         });
                         $('.btnHab').click(function () {
                             valNum = $(this).attr('value');
                             id = $('.valId' + valNum).attr('value');
-                            activar(id, idArea);
+                            activar(id, idSec);
                         });
                         $('.btnEliminar').click(function () {
                             valNum = $(this).attr('value');
                             id = $('.valId' + valNum).attr('value');
-                            eliminar(id, idArea);
+                            eliminar(id, idSec);
                         });
                         $('.tabla_t').DataTable();
                     });
                 }
                 $('.btnAceptar').click(function () {
-                    var id, nombre, ncorto, estado;
+                    var id, nombre, ncorto, estado, cGrupo;
                     id = $('.inpId').val();
                     nombre = $('.inpNombre').val();
                     ncorto = $('.inpNCorto').val();
                     estado = $('.inpEstado').val();
+                    cGrupo = $('.inpCGrupo').val();
                     if ($('.titulo_t').attr('value') == 1) {
-                        crear(nombre, ncorto, estado, idArea);
+                        crear(nombre, ncorto, estado,cGrupo, idSec);
                     } else if ($('.titulo_t').attr('value') == 2) {
-                        editar(id, nombre, ncorto, estado, idArea);
-                        $('.titulo_t').text('Agregar Seccion');
+                        editar(id, nombre, ncorto, estado, cGrupo, idSec);
+                        $('.titulo_t').text('Agregar Puesto');
                         $('.titulo_t').attr('value', '1');
                     }
                     $('.inpNombre').val("");
                     $('.inpNCorto').val("");
                 });
                 function desactivar(id, idD) {
-                    $.post("../../Puesto", "opc=desactivar_seccion&id=" + id, function () {
+                    $.post("../../Puesto", "opc=desactivar_puesto&id=" + id, function () {
                         cargar_t(idD);
                     });
                 }
                 function activar(id, idD) {
-                    $.post("../../Puesto", "opc=activar_seccion&id=" + id, function () {
+                    $.post("../../Puesto", "opc=activar_puesto&id=" + id, function () {
                         cargar_t(idD);
                     });
                 }
                 function eliminar(id, idD) {
-                    $.post("../../Puesto", "opc=eliminar_seccion&id=" + id, function () {
+                    $.post("../../Puesto", "opc=eliminar_puesto&id=" + id, function () {
                         cargar_t(idD);
                     });
                 }
-                function editar(id, nombre, ncorto, estado, idD) {
-                    var data = "opc=editar_seccion&id=" + id + "&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado+"&idArea="+idD;
+                function editar(id, nombre, ncorto, estado,cGrupo,idD) {
+                    var data = "opc=editar_puesto&id=" + id + "&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado+ "&cGrupo="+cGrupo+"&idSec="+idD;
                     $.post("../../Puesto", data, function () {
                         cargar_t(idD);
                     });
                 }
-                function crear(nombre, ncorto, estado, idD) {
-                    var data = "opc=crear_seccion&&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado + "&idArea=" + idD;
+                function crear(nombre, ncorto, estado,cGrupo, idD) {
+                    alert(nombre+ncorto+estado+cGrupo+idD);
+                    var data = "opc=crear_puesto&&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado +"&cGrupo="+cGrupo+ "&idSec=" + idD;
                     $.post("../../Puesto", data, function () {
                         cargar_t(idD);
                     });
@@ -377,6 +402,20 @@
                             x.append("<option class='ar" + (i + 1) + "' value=" + list[i].id + ">" + list[i].nombre + "</option>");
                         }
                         GifLoader($('.div_t'), "Seleccione un Area", 2);
+                    });
+                }
+                function cargar_seccion(idArea){
+                    var x = $('.inpSec');
+                    x.empty();
+                    x.append("<option value=''>Cargando..</option>");
+                    $.post("../../Puesto", "opc=list_sec_es&id=" + idArea, function (objJson) {
+                        x.empty();
+                        x.append("<option value=''>[Seleccione]</option>");
+                        var list = objJson.lista;
+                        for (var i = 0; i < list.length; i++) {
+                            x.append("<option class='sec" + (i + 1) + "' value=" + list[i].id + ">" + list[i].nombre + "</option>");
+                        }
+                        GifLoader($('.div_t'), "Seleccione una Seccion", 2);
                     });
                 }
 

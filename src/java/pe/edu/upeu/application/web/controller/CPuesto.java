@@ -19,6 +19,7 @@ import java.util.List;
 import pe.edu.upeu.application.dao.AreaDAO;
 import pe.edu.upeu.application.dao.DepartamentoDao;
 import pe.edu.upeu.application.dao.DireccionDAO;
+import pe.edu.upeu.application.dao.PuestoDAO;
 import pe.edu.upeu.application.dao.SeccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAreaDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDepartamentoDAO;
@@ -52,6 +53,7 @@ public class CPuesto extends HttpServlet {
         InterfaceDepartamentoDAO de = new DepartamentoDao();
         InterfaceAreaDAO ar = new AreaDAO();
         InterfaceSeccionDAO se= new SeccionDAO();
+        InterfacePuestoDAO pu= new PuestoDAO();
         try {
             String opc = request.getParameter("opc");
             if (opc.equals("menu")) {
@@ -223,7 +225,51 @@ public class CPuesto extends HttpServlet {
                 String id = request.getParameter("id");
                 se.eliminar_seccion(id.trim());
             }
-
+            //PUESTO
+            if (opc.equals("list_sec_es")) {
+                String id= request.getParameter("id");
+                List<Map<String, ?>> list = se.List_sec_es(id.trim());
+                rpta.put("rpta", "1");
+                rpta.put("lista", list);
+            }
+            if (opc.equals("list_puesto_sec")) {
+                String id= request.getParameter("id");
+                List<Map<String, ?>> list = pu.Listar_Puesto_id(id.trim());
+                rpta.put("rpta", "1");
+                rpta.put("lista", list);
+            }
+            if (opc.equals("crear_puesto")) {
+                String nombre, ncorto, estado, idSec, cGrupo;
+                nombre = request.getParameter("nombre");
+                ncorto = request.getParameter("ncorto");
+                estado = request.getParameter("estado");
+                cGrupo = request.getParameter("cGrupo");
+                idSec = request.getParameter("idSec");
+               
+                pu.crear_puesto(nombre.trim(), ncorto.trim(), estado.trim(), cGrupo.trim(), idSec.trim());
+            }
+            if (opc.equals("editar_puesto")) {
+                String id,nombre, ncorto, estado, idSec, cGrupo;
+                id = request.getParameter("id");
+                nombre = request.getParameter("nombre");
+                ncorto = request.getParameter("ncorto");
+                estado = request.getParameter("estado");
+                cGrupo = request.getParameter("cGrupo");
+                idSec = request.getParameter("idSec");
+                pu.editar_puesto(id.trim(), nombre.trim(), ncorto.trim(), estado.trim(), cGrupo.trim(), idSec.trim());
+            }
+            if (opc.equals("activar_puesto")) {
+                String id = request.getParameter("id");
+                pu.activar_puesto(id.trim());
+            }
+            if (opc.equals("desactivar_puesto")) {
+                String id = request.getParameter("id");
+                pu.desactivar_puesto(id.trim());
+            }
+            if (opc.equals("eliminar_puesto")) {
+                String id = request.getParameter("id");
+                pu.eliminar_puesto(id.trim());
+            }
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());

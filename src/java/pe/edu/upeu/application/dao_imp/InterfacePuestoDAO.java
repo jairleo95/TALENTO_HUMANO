@@ -45,4 +45,12 @@ public interface InterfacePuestoDAO {
     public List<Map<String, ?>> List_puesto();
 
     public String puesto(String id_cto);
+    
+    //MANTENIMIENTO
+    
+    public boolean crear_puesto(String nombre, String ncorto, String estado, String cgrupo, String idSec);
+    public boolean editar_puesto(String id, String nombre, String ncorto, String estado, String cgrupo, String idSec);
+    public boolean activar_puesto(String id);
+    public boolean desactivar_puesto(String id);
+    public boolean eliminar_puesto(String id);
 }
