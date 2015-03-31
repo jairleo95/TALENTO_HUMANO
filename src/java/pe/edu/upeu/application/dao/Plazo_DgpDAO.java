@@ -196,4 +196,28 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
 
     }
 
+    @Override
+    public String fecha_maxima_plazo() {
+        String fecha = "";
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select TO_CHAR(sysdate+CA_DIAS_TOLERANCIA ,'yyyy-mm-dd','nls_date_language=spanish') from RHTR_PLAZO where TI_PLAZO='2' and ES_PLAZO ='1'";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                fecha = rs.getString(1);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return fecha;
+    }
+
 }

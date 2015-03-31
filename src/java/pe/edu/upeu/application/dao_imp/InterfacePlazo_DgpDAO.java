@@ -21,6 +21,8 @@ public interface InterfacePlazo_DgpDAO {
 
     public List<Map<String, ?>> Listar_Plazo();
 
+    public String fecha_maxima_plazo();
+
     public void INSERT_PLAZO(String ID_PLAZO, String NO_PLAZO, String DET_ALERTA, String FE_DESDE, String FE_HASTA, String ES_PLAZO, String ID_REQUERIMIENTO);
 
     public void UPDATE_PLAZO(String ID_PLAZO, String NO_PLAZO, String DET_ALERTA, String FE_DESDE, String FE_HASTA, String ES_PLAZO);

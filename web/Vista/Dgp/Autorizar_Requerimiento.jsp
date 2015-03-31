@@ -661,7 +661,7 @@
                                                     <td ><%=a.getNo_req()%></td>      
                                             <input type="hidden" class="val_aut<%=(f + 1)%>" value="&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&IDDETALLE_DGP=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&COD=<%=a.getCo_pasos()%>&IDPASOS=<%=a.getId_pasos()%>&NROPASO=<%=a.getNu_pasos()%>&IDTR=<%=a.getId_trabajador()%>"/>
                                             <input type="hidden" class="val_firm<%=(f + 1)%>" value="&IDDETALLE_DGP=<%=a.getId_dgp()%>&IDTR=<%=a.getId_trabajador()%>"/>
-                                            <td ><%=a.getFe_creacion()%></td>
+                                            <td><%=a.getFe_creacion()%></td>
                                             <td><%if (a.getLi_motivo() != null) {
                                                     if (a.getLi_motivo().trim().equals("1")) {
                                                         out.print("Trabajdor Nuevo");
