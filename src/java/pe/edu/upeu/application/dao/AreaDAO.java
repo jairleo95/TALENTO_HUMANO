@@ -5,12 +5,14 @@
  */
 package pe.edu.upeu.application.dao;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
 
 import pe.edu.upeu.application.dao_imp.InterfaceAreaDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
@@ -80,7 +82,7 @@ public class AreaDAO implements InterfaceAreaDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "Select * from rhtd_area where id_departamento='"+id_dep.trim()+"' order by no_area";
+            String sql = "Select * from rhtd_area where id_departamento='" + id_dep.trim() + "' order by no_area";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -104,10 +106,10 @@ public class AreaDAO implements InterfaceAreaDAO {
 
     @Override
     public List<Map<String, ?>> selec_area(String id_pu) {
-       List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT ID_AREA FROM RHTR_SECCION where ID_SECCION=(SELECT ID_SECCION from RHTR_PUESTO where ID_PUESTO='"+id_pu.trim()+"')";
+            String sql = "SELECT ID_AREA FROM RHTR_SECCION where ID_SECCION=(SELECT ID_SECCION from RHTR_PUESTO where ID_PUESTO='" + id_pu.trim() + "')";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -130,15 +132,18 @@ public class AreaDAO implements InterfaceAreaDAO {
 
     @Override
     public List<Map<String, ?>> List_area_id_d(String id_dep) {
-       List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "Select * from rhtd_area where id_departamento='"+id_dep.trim()+"' order by no_area";
+            String sql = "Select * from rhtd_area where id_departamento='" + id_dep.trim() + "' order by no_area";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
                 rec.put("id", rs.getString("ID_AREA"));
                 rec.put("nombre", rs.getString("NO_AREA"));
+                rec.put("ncorto", rs.getString("NO_CORTO_AREA"));
+                rec.put("estado", rs.getString("ES_AREA"));
+                rec.put("dep", rs.getString("ID_DEPARTAMENTO"));
                 lista.add(rec);
             }
             rs.close();
@@ -175,5 +180,124 @@ public class AreaDAO implements InterfaceAreaDAO {
         return list;
     }
 
+    @Override
+    public boolean crear_area(String nombre, String ncorto, String estado, String idDep) {
+        boolean x = false;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_AREA( ?, ?, ?, ?, ?)}");
+            cst.setString(1, null);
+            cst.setString(2, nombre);
+            cst.setString(3, ncorto);
+            cst.setString(4, estado);
+            cst.setString(5, idDep);
+            x = cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de direcciones...");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return x;
+    }
+
+    @Override
+    public boolean editar_area(String idArea, String nombre, String ncorto, String estado, String idDep) {
+        boolean x = false;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_AREA( ?, ?, ?, ?, ?)}");
+            cst.setString(1, idArea);
+            cst.setString(2, nombre);
+            cst.setString(3, ncorto);
+            cst.setString(4, estado);
+            cst.setString(5, idDep);
+            x = cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            throw new RuntimeException("Error al cargar la lista de direcciones...");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return x;
+    }
+
+    @Override
+    public boolean activar_area(String idArea) {
+        boolean x = false;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_ACTIVAR_AREA( ?)}");
+            cst.setString(1, idArea);
+            x = cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de direcciones...");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return x;
+    }
+
+    @Override
+    public boolean desactivar_area(String idArea) {
+        boolean x = false;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_DESACTIVAR_AREA( ?)}");
+            cst.setString(1, idArea);
+            x = cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de direcciones...");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return x;
+    }
+
+    @Override
+    public boolean eliminar_area(String idArea) {
+        boolean x = false;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_ELIMINAR_AREA( ?)}");
+            cst.setString(1, idArea);
+            x = cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de direcciones...");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return x;
+
+    }
 
 }
