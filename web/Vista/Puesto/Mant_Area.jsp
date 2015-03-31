@@ -46,7 +46,7 @@
                                                     <section class="col col-2">
                                                         <label class="label">Nombre</label>
                                                         <label class="input">
-                                                            <input class="inpNombre"type="text" placeholder="Escribir nombre de Departamento" required="" maxlength="100">
+                                                            <input class="inpNombre"type="text" placeholder="Escribir nombre de Area" required="" maxlength="100">
                                                         </label>
                                                     </section>
                                                     <section class="col col-2">

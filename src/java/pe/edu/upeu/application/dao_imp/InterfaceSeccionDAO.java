@@ -28,4 +28,10 @@ public interface InterfaceSeccionDAO {
     public List<Map<String, ?>> List_pu_id(String id_pu);
 
     public List<Map<String, ?>> selec_sec(String id_pu);
+    //MANTENIMIENTO
+    public boolean crear_seccion(String nombre, String ncorto, String estado, String idArea);
+    public boolean editar_seccion(String id, String nombre, String ncorto, String estado , String idArea);
+    public boolean activar_seccion(String id);
+    public boolean desactivar_seccion(String id);
+    public boolean eliminar_seccion(String id);
 }

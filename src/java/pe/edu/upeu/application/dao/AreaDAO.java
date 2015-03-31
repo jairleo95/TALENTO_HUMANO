@@ -238,7 +238,7 @@ public class AreaDAO implements InterfaceAreaDAO {
         boolean x = false;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_ACTIVAR_AREA( ?)}");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_ACTIVAR_AREA(?)}");
             cst.setString(1, idArea);
             x = cst.execute();
         } catch (SQLException e) {
@@ -260,7 +260,7 @@ public class AreaDAO implements InterfaceAreaDAO {
         boolean x = false;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_DESACTIVAR_AREA( ?)}");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_DESACTIVAR_AREA(?)}");
             cst.setString(1, idArea);
             x = cst.execute();
         } catch (SQLException e) {
@@ -282,7 +282,7 @@ public class AreaDAO implements InterfaceAreaDAO {
         boolean x = false;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_ELIMINAR_AREA( ?)}");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_ELIMINAR_AREA(?)}");
             cst.setString(1, idArea);
             x = cst.execute();
         } catch (SQLException e) {
@@ -298,6 +298,33 @@ public class AreaDAO implements InterfaceAreaDAO {
         }
         return x;
 
+    }
+
+    @Override
+    public List<Map<String, ?>> List_area_es(String idDep) {
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "Select * from rhtd_area where id_departamento='" + idDep.trim() + "' and ES_AREA='1' order by no_area";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("ID_AREA"));
+                rec.put("nombre", rs.getString("NO_AREA"));
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return lista;
     }
 
 }

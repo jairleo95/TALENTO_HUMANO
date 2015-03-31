@@ -19,10 +19,12 @@ import java.util.List;
 import pe.edu.upeu.application.dao.AreaDAO;
 import pe.edu.upeu.application.dao.DepartamentoDao;
 import pe.edu.upeu.application.dao.DireccionDAO;
+import pe.edu.upeu.application.dao.SeccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAreaDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDepartamentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceSeccionDAO;
 
 /**
  *
@@ -48,7 +50,8 @@ public class CPuesto extends HttpServlet {
         Map<String, Object> rpta = new HashMap<String, Object>();
         InterfaceDireccionDAO di = new DireccionDAO();
         InterfaceDepartamentoDAO de = new DepartamentoDao();
-        InterfaceAreaDAO ar= new AreaDAO();
+        InterfaceAreaDAO ar = new AreaDAO();
+        InterfaceSeccionDAO se= new SeccionDAO();
         try {
             String opc = request.getParameter("opc");
             if (opc.equals("menu")) {
@@ -147,9 +150,9 @@ public class CPuesto extends HttpServlet {
                 String id = request.getParameter("id");
                 List<Map<String, ?>> list = ar.List_area_id_d(id.trim());
                 rpta.put("rpta", "1");
-                rpta.put("lista", list);                
+                rpta.put("lista", list);
             }
-            if(opc.equals("crear_area")){
+            if (opc.equals("crear_area")) {
                 String nombre, ncorto, estado, idDep;
                 nombre = request.getParameter("nombre");
                 ncorto = request.getParameter("ncorto");
@@ -157,9 +160,9 @@ public class CPuesto extends HttpServlet {
                 idDep = request.getParameter("idDep");
                 ar.crear_area(nombre.trim(), ncorto.trim(), estado.trim(), idDep.trim());
             }
-            if(opc.equals("editar_area")){
+            if (opc.equals("editar_area")) {
                 String idArea, nombre, ncorto, estado, idDep;
-                idArea= request.getParameter("id");
+                idArea = request.getParameter("id");
                 nombre = request.getParameter("nombre");
                 ncorto = request.getParameter("ncorto");
                 estado = request.getParameter("estado");
@@ -167,19 +170,60 @@ public class CPuesto extends HttpServlet {
                 ar.editar_area(idArea.trim(), nombre.trim(), ncorto.trim(), estado.trim(), idDep.trim());
             }
             if (opc.equals("activar_area")) {
-                String id=request.getParameter("id");
+                String id = request.getParameter("id");
                 ar.activar_area(id.trim());
             }
             if (opc.equals("desactivar_area")) {
-                String id=request.getParameter("id");
+                String id = request.getParameter("id");
                 ar.desactivar_area(id.trim());
             }
             if (opc.equals("eliminar_area")) {
-                String id= request.getParameter("id");
+                String id = request.getParameter("id");
                 ar.eliminar_area(id);
-                
             }
-                    
+            //SECCION
+            if (opc.equals("list_area_es")) {
+                String id = request.getParameter("id");
+                List<Map<String, ?>> list = ar.List_area_es(id);
+                rpta.put("rpta", "1");
+                rpta.put("lista", list);
+            }
+            if (opc.equals("list_sec_area")) {
+                String id = request.getParameter("id");
+                List<Map<String, ?>> list = se.List_sec_ida(id.trim());
+                rpta.put("rpta", "1");
+                rpta.put("lista", list);
+            }
+            if (opc.equals("crear_seccion")) {
+                String nombre, ncorto, estado, idArea;
+                nombre = request.getParameter("nombre");
+                ncorto = request.getParameter("ncorto");
+                estado = request.getParameter("estado");
+                idArea = request.getParameter("idArea");
+                se.crear_seccion(nombre.trim(), ncorto.trim(), estado.trim(), idArea.trim());
+            }
+            if (opc.equals("editar_seccion")) {
+                String id, nombre, ncorto, estado, idArea;
+                id= request.getParameter("id");
+                nombre = request.getParameter("nombre");
+                ncorto = request.getParameter("ncorto");
+                estado = request.getParameter("estado");
+                idArea = request.getParameter("idArea");
+                se.editar_seccion(id.trim(), nombre.trim(), ncorto.trim(), estado.trim(), idArea.trim());
+            }
+            if (opc.equals("activar_seccion")) {
+                String id = request.getParameter("id");
+                se.activar_seccion(id.trim());
+            }
+            if (opc.equals("desactivar_seccion")) {
+                String id = request.getParameter("id");
+                se.desactivar_seccion(id.trim());
+            }
+            if (opc.equals("eliminar_seccion")) {
+                String id = request.getParameter("id");
+                se.eliminar_seccion(id.trim());
+            }
+
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());
