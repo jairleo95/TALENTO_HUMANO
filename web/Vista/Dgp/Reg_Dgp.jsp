@@ -98,8 +98,8 @@
         <%            HttpSession sesion = request.getSession(true);
             String id_dep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
             String fecha_min = (String) sesion.getAttribute("FECHA_MINIMA");
-            
-            
+
+
         %>
 
     </head>
@@ -117,6 +117,9 @@
                             <article class="col-sm-12 col-md-12 col-lg-6">
 
                                 <div id="alerta_dgp">
+
+                                </div>
+                                <div class="div_info">
 
                                 </div>
 
@@ -168,8 +171,7 @@
 
                                                 <fieldset id="fila-agregar">
 
-                                                    <%
-                                                        /*Temporal*/
+                                                    <%                                                        /*Temporal*/
                                                         String idreq = request.getParameter("idreq");
 
                                                         for (int i = 0; i < Listar_Trabajador_id.size(); i++) {
@@ -935,6 +937,7 @@
     <script>
         $(document).ready(function () {
             var b = $("#alerta_dgp");
+            var info = $(".div_info");
             // $("#alerta_dgp").hide();
             function listar() {
                 $.post("../../plazo_dgp", "opc=Listar", function (objJson) {
@@ -946,6 +949,8 @@
                     }
                     for (var i = 0; i < lista.length; i++) {
                         b.append("<div class='alert alert-danger alert-block' ><a class='close' data-dismiss='alert' href='#'>×</a><h4 class='alert-heading'>" + lista[i].nom + "</h4>" + lista[i].det + " , Fecha Plazo " + lista[i].desde + " al " + lista[i].hasta + "</div>");
+
+                        info.append('<div class="alert alert-info fade in"><button class="close" data-dismiss="alert">×</button><i class="fa-fw fa fa-info"></i><strong>¡Importante!</strong> Su requerimiento será procesado en el mes de <strong>' + lista[i].mes + '.</strong></div>');
                     }
                 });
             }
