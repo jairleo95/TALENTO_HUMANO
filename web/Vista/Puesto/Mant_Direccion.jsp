@@ -151,6 +151,7 @@
         <script src="../../js/Js_Mant_Puesto/Datatable_puesto.js"></script>
         <script>
             $(document).ready(function () {
+                $('.inpEstado > option[value=1]').attr('selected', 'selected');
                 var valNum;
                 cargar_t();
                 $('.inpNombre, .inpNCorto').change(function () {
@@ -254,7 +255,7 @@
                         }
                         t.append(tex);
                         tex = "";
-                        $('.tabla_t').dataTable();
+                        
                         var id, nombre, ncorto, estado, filial;
 
                         $('.btnEditar').click(function () {
@@ -287,6 +288,7 @@
                             id = $('.valId' + valNum).attr('value');
                             eliminar(id);
                         });
+                        $('.tabla_t').dataTable();
                     });
                 }
                 function desactivar(id) {

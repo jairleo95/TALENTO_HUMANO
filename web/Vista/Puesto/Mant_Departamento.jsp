@@ -148,6 +148,7 @@
         <script src="../../js/Js_Mant_Puesto/Datatable_puesto.js"></script>
         <script>
             $(document).ready(function () {
+                $('.inpEstado > option[value=1]').attr('selected', 'selected');
                 GifLoader($('.div_t'), "Espere..", 1);
                 var idDir = "", valNum;
                 cargar_direccion();
@@ -242,6 +243,7 @@
                 }
                 $('.btnAceptar').click(function () {
                     var id, nombre, ncorto, estado;
+                    id = $('.inpId').val();
                     nombre = $('.inpNombre').val();
                     ncorto = $('.inpNCorto').val();
                     estado = $('.inpEstado').val();
@@ -269,13 +271,13 @@
                     });
                 }
                 function editar(id, nombre, ncorto, estado,idD) {
-                    var data = "opc=editar-Dep&id=" + id + "&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado;
+                    var data = "opc=editar-Dep&id=" + id + "&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado +"&idDir="+idD;
                     $.post("../../Puesto", data, function () {
                         cargar_t(idD);
                     });
                 }
                 function crear(nombre, ncorto, estado,idD) {
-                    var data = "opc=crear-Dep&&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado + "&idDir=" + idDir;
+                    var data = "opc=crear-Dep&&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado + "&idDir=" + idD;
                     $.post("../../Puesto", data, function () {
                         cargar_t(idD);
                     });

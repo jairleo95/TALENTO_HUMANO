@@ -110,12 +110,13 @@ public class CPuesto extends HttpServlet {
                 rpta.put("lista", list);
             }
             if (opc.equals("editar-Dep")) {
-                String id, nombre, ncorto, estado;
+                String id, nombre, ncorto, estado, idDir;
                 id = request.getParameter("id");
                 nombre = request.getParameter("nombre");
                 ncorto = request.getParameter("ncorto");
                 estado = request.getParameter("estado");
-                de.Editar_Dep(id.trim(), nombre.trim(), ncorto.trim(), estado.trim());
+                idDir = request.getParameter("idDir");
+                de.Editar_Dep(id.trim(), nombre.trim(), ncorto.trim(), estado.trim(), idDir.trim());
             }
             if (opc.equals("crear-Dep")) {
                 String nombre, ncorto, estado, idDir;
@@ -139,7 +140,6 @@ public class CPuesto extends HttpServlet {
                 String id;
                 id = request.getParameter("id");
                 boolean x = de.Eliminar_Dep(id.trim());
-                System.out.println(x);
             }
             //AREA
             if (opc.equals("list_dep_es")) {

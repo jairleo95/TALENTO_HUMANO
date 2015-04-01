@@ -181,15 +181,16 @@ public class DepartamentoDao implements InterfaceDepartamentoDAO {
     }
 
     @Override
-    public boolean Editar_Dep(String id, String nombre, String ncorto, String estado) {
+    public boolean Editar_Dep(String id, String nombre, String ncorto, String estado, String idDir) {
         boolean x = false;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_DEPARTAMENTO( ?, ?, ?, ?)}");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_DEPARTAMENTO( ?, ?, ?, ?,?)}");
             cst.setString(1, id);
             cst.setString(2, nombre);
             cst.setString(3, ncorto);
             cst.setString(4, estado);
+            cst.setString(5, idDir);
             x = cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());

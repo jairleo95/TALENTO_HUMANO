@@ -68,7 +68,7 @@
                                                     <section class="col col-3">
                                                         <label class="label">Co. Grupo</label>
                                                         <label class="input">
-                                                            <input class="inpCGrupo"type="text" placeholder="Co Grupo" required="" >
+                                                            <input class="inpCGrupo"type="text" placeholder="Co Grupo" required="" maxlength="5" >
                                                         </label>
                                                     </section>
                                                 </div>
@@ -178,6 +178,7 @@
 
         <script>
             $(document).ready(function () {
+                $('.inpEstado > option[value=1]').attr('selected', 'selected');
                 GifLoader($('.div_t'), "Espere..", 1);
                 var idDep = "", idDir = "",idArea="",idSec="", valNum;
                 cargar_direccion();
@@ -345,7 +346,6 @@
                     });
                 }
                 function crear(nombre, ncorto, estado,cGrupo, idD) {
-                    alert(nombre+ncorto+estado+cGrupo+idD);
                     var data = "opc=crear_puesto&&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado +"&cGrupo="+cGrupo+ "&idSec=" + idD;
                     $.post("../../Puesto", data, function () {
                         cargar_t(idD);

@@ -154,6 +154,7 @@
 
         <script>
             $(document).ready(function () {
+                $('.inpEstado > option[value=1]').attr('selected', 'selected');
                 GifLoader($('.div_t'), "Espere..", 1);
                 var idDep = "", idDir = "", valNum;
                 cargar_direccion();
