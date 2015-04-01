@@ -59,4 +59,6 @@ public interface InterfaceTrabajadorDAO {
     public void MOD_ASPEC_SOCIAL (String LI_DI_DOM_A_D1, String DI_DOM_A_D2, String LI_DI_DOM_A_D3, String DI_DOM_A_D4, String LI_DI_DOM_A_D5, String DI_DOM_A_D6 , String DI_DOM_A_REF,  String ID_DI_DOM_A_DISTRITO, String LI_DI_DOM_LEG_D1, String DI_DOM_LEG_D2, String LI_DI_DOM_LEG_D3, String DI_DOM_LEG_D4, String LI_DI_DOM_LEG_D5, String DI_DOM_LEG_D6 , String ID_DOM_LEG_DISTRITO,String CA_ING_QTA_CAT_EMPRESA,String CA_ING_QTA_RUC,String CA_ING_QTA_CAT_OTRAS_EMPRESAS, String ID_TRABAJADOR ) ;
 
     public String REG_DOC_TRABAJADOR (String trb);  
+    
+    public String ID_TRB (String user);
 }
