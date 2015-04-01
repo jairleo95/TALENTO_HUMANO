@@ -246,7 +246,6 @@
                     ncorto = $('.inpNCorto').val();
                     estado = $('.inpEstado').val();
                     if ($('.titulo_t').attr('value') == 1) {
-                        var dat="opc="
                         crear(nombre, ncorto, estado, idDir);
                     } else if ($('.titulo_t').attr('value') == 2) {
                         editar(id, nombre, ncorto, estado, idDir);
@@ -254,11 +253,6 @@
                     $('.inpNombre').val("");
                     $('.inpNCorto').val("");
                 });
-                function acciones(data,idD){
-                    $.post("../../Puesto",data, function(){
-                       cargar_t(idD); 
-                    });
-                }
                 function desactivar(id,idD) {
                     $.post("../../Puesto", "opc=desactivar-Dep&id=" + id, function () {
                         cargar_t(idD);

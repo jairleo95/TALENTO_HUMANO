@@ -245,7 +245,6 @@ public class CPuesto extends HttpServlet {
                 estado = request.getParameter("estado");
                 cGrupo = request.getParameter("cGrupo");
                 idSec = request.getParameter("idSec");
-               
                 pu.crear_puesto(nombre.trim(), ncorto.trim(), estado.trim(), cGrupo.trim(), idSec.trim());
             }
             if (opc.equals("editar_puesto")) {

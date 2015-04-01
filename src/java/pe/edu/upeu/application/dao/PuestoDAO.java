@@ -351,8 +351,8 @@ public class PuestoDAO implements InterfacePuestoDAO {
             cst.setString(2, nombre);
             cst.setString(3, ncorto);
             cst.setString(4, estado);
-            cst.setString(5, idSec);
-            cst.setString(6, cgrupo);
+            cst.setString(5, cgrupo);
+            cst.setString(6, idSec);
             x = cst.execute();
         } catch (SQLException e) {
             System.out.println(e);
