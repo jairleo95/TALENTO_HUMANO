@@ -937,4 +937,21 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         }
         return n;
     }
+
+    @Override
+    public String ID_TRB(String user) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select ID_TRABAJADOR from RHVD_USUARIO_TEMP where ID_USUARIO = '"+user+"'";
+        String id = null;
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                id = rs.getString(1);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return id;
+    }
 }

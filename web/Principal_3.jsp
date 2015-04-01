@@ -434,7 +434,9 @@
 
                 <!-- breadcrumb -->
                 <ol class="breadcrumb">
+                    <%if(sesion.getAttribute("DEPARTAMENTO") != null){%>
                     <li><%out.println("DEPARTAMENTO DE  " + ((String) sesion.getAttribute("DEPARTAMENTO")).toUpperCase() + " / AREA DE " + ((String) sesion.getAttribute("AREA")).toUpperCase() + " / SECCION DE " + ((String) sesion.getAttribute("SECCION")).toUpperCase() + " / PUESTO DE " + ((String) sesion.getAttribute("PUESTO")).toUpperCase());%></li>
+                    <%}%>
                 </ol>
                 <!-- end breadcrumb -->
 

@@ -171,6 +171,9 @@ public class PuestoDAO implements InterfacePuestoDAO {
                 Map<String, Object> rec = new HashMap<String, Object>();
                 rec.put("id", rs.getString("id_puesto"));
                 rec.put("nombre", rs.getString("no_puesto"));
+                rec.put("ncorto", rs.getString("NO_CORTO_PU"));
+                rec.put("estado", rs.getString("ES_PUESTO"));
+                rec.put("cgrupo", rs.getString("CO_GRUPO"));
 
                 lista.add(rec);
             }
@@ -309,5 +312,126 @@ public class PuestoDAO implements InterfacePuestoDAO {
             this.conn.close();
         }
         return Maxdgp;
+    }
+
+    @Override
+    public boolean crear_puesto(String nombre, String ncorto, String estado, String cgrupo, String idSec) {
+        boolean x = false;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_PUESTO( ?, ?, ?, ?, ?,?)}");
+            cst.setString(1, null);
+            cst.setString(2, nombre);
+            cst.setString(3, ncorto);
+            cst.setString(4, estado);
+            cst.setString(5, idSec);
+            cst.setString(6, cgrupo);
+            x = cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de direcciones...");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return x;
+    }
+
+    @Override
+    public boolean editar_puesto(String id, String nombre, String ncorto, String estado, String cgrupo, String idSec) {
+        boolean x = false;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_PUESTO( ?, ?, ?, ?, ?,?)}");
+            cst.setString(1, id);
+            cst.setString(2, nombre);
+            cst.setString(3, ncorto);
+            cst.setString(4, estado);
+            cst.setString(5, cgrupo);
+            cst.setString(6, idSec);
+            x = cst.execute();
+        } catch (SQLException e) {
+            System.out.println(e);
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de direcciones...");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return x;
+    }
+
+    @Override
+    public boolean activar_puesto(String id) {
+        boolean x = false;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_ACTIVAR_PUESTO(?)}");
+            cst.setString(1, id);
+            x = cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de direcciones...");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return x;
+    }
+
+    @Override
+    public boolean desactivar_puesto(String id) {
+        boolean x = false;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_DESACTIVAR_PUESTO(?)}");
+            cst.setString(1, id);
+            x = cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de direcciones...");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return x;
+    }
+
+    @Override
+    public boolean eliminar_puesto(String id) {
+        boolean x = false;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_ELIMINAR_PUESTO(?)}");
+            cst.setString(1, id);
+            x = cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de direcciones...");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return x;
     }
 }

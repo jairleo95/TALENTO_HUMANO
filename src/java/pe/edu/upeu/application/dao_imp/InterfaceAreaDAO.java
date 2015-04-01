@@ -27,6 +27,7 @@ public interface InterfaceAreaDAO {
 
     public List<Map<String, ?>> selec_area(String id_pu);
     //MANTENIMIENTO
+    public List<Map<String, ?>> List_area_es(String idDep);
     public boolean crear_area(String nombre,String ncorto, String estado, String idDep);
     public boolean editar_area(String idArea, String nombre,String ncorto, String estado, String idDep);
     public boolean activar_area(String idArea);
