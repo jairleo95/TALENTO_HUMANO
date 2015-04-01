@@ -380,6 +380,7 @@ public class CTrabajador extends HttpServlet {
 
         if (opc.equals("Editar_Dat_Gen")) {
             String idtr = request.getParameter("idtr");
+            String edit = request.getParameter("edit");
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             getServletContext().setAttribute("List_Nacionalidad", li.List_Nacionalidad());
             getServletContext().setAttribute("List_Departamento", ub.List_Departamento());
@@ -387,7 +388,7 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("List_Distrito", ub.List_DistritoTra());
             getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
 
-            response.sendRedirect("Vista/Trabajador/Mod_Datos_Generales.jsp?idtr=" + idtr);
+            response.sendRedirect("Vista/Trabajador/Mod_Datos_Generales.jsp?idtr=" + idtr + "&edit="+edit);
         }
         if (opc.equals("Modificar_Dat_Gen")) {
             String AP_PATERNO = request.getParameter("APELLIDO_P");
@@ -422,6 +423,7 @@ public class CTrabajador extends HttpServlet {
         }
         if (opc.equals("Editar_Asp_Acad")) {
             String idtr = request.getParameter("idtr");
+            String edit = request.getParameter("edit");
 
             getServletContext().setAttribute("List_Cuenta_Sueldo", tr.List_Cuenta_Sueldo(idtr));
             getServletContext().setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
@@ -430,7 +432,7 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("List_Carrera", li.List_Carrera());
             getServletContext().setAttribute("List_Situacion_Educativa", li.List_Situacion_Educativa());
 
-            response.sendRedirect("Vista/Trabajador/Mod_Aspecto_Academico.jsp?idtr=" + idtr);
+            response.sendRedirect("Vista/Trabajador/Mod_Aspecto_Academico.jsp?idtr=" + idtr + "&edit=" + edit);
         }
         if (opc.equals("Modificar_Asp_Acad")) {
             String idtr = request.getParameter("idtr");

@@ -33,7 +33,7 @@
 
         <form align="center">
             <table class="table table-striped table-hover table-responsive">
-                <%
+                <%  String edit = request.getParameter("edit");
                     InterfaceCarrera_UniversidadDAO icu = new Carrera_UniversidadDAO();
                     for (int index = 0; index < ListaridTrabajador.size(); index++) {
                         V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
@@ -176,7 +176,7 @@
                 <%}%>
                 <%String IDTR = trb.getId_trabajador();%>
                 <td colspan="2">
-                    <a class="btn btn-success btn-labeled"  href="../../trabajador?opc=Editar_Asp_Acad&idtr=<%=IDTR%>"> <span class="btn-label"><i class="glyphicon glyphicon-refresh"></i></span> Editar </a>
+                    <a class="btn btn-success btn-labeled"  href="../../trabajador?opc=Editar_Asp_Acad&idtr=<%=IDTR%>&edit=<%=edit%>"> <span class="btn-label"><i class="glyphicon glyphicon-refresh"></i></span> Editar </a>
 
                 </td>
 

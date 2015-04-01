@@ -544,7 +544,7 @@
                                                                         <label>Tipo de Documento:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <select name="TIPO_DOC" class="form-control input-group-sm select-doc"  required="">
+                                                                            <select name="TIPO_DOC" class="form-control input-group-sm select-doc" id="select-doc"  required="">
                                                                                 <option value="">[SELECCIONE]</option>
 
                                                                                 <%
@@ -916,9 +916,12 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <% CConversion c = new CConversion();%>
+                                                            <% CConversion c = new CConversion();
+                                                            String edit = request.getParameter("edit");
+                                                            %>
                                                             <!--<input type="text" value="<%=t.getFe_nac()%>"> -->               
                                                             <%String idtr = request.getParameter("idtr");%>
+                                                            <input type="hidden" name="editar" value="<%=edit%>"/>
                                                             <input type="hidden" name="idtr" value="<%=idtr.trim()%>"/>
                                                             <input type="hidden" name="opc" value="Modificar_Dat_Gen">
 
@@ -1208,7 +1211,11 @@
                          }*/
 
                     });
-
+                    if($("#editar").val("ok")){
+                         document.getElementById("select-doc").disabled = true;
+                         document.getElementById("doc").disabled = true;
+                    }
+                    
                     $("#banco").change(function() {
                         cuenta_bancaria($(this).val());
                         $("#es_cuenta").val(1);
@@ -1297,7 +1304,9 @@
             }
 
         }
-
+        function editarusuario (editar){
+            if (editar)
+        } 
         function cuenta_bancaria(banco) {
 
             if (banco == '1') {
