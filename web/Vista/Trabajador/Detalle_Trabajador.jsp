@@ -346,7 +346,8 @@
 
                     <hr class="simple">
                     <ul id="myTab1" class="nav nav-tabs bordered">
-                        <%  if (List_Auto_mostrar.size() == 1 && aut != null) {
+                        <% String edit  = request.getParameter("edit");
+                                if (List_Auto_mostrar.size() == 1 && aut != null) {
                                 for (int r = 0; r < List_Auto_mostrar.size(); r++) {
                                     Auto_Mostrar a = new Auto_Mostrar();
                                     a = (Auto_Mostrar) List_Auto_mostrar.get(r);
@@ -364,10 +365,10 @@
                         </li>
                         <%}%>
                         <li >
-                            <a href="Datos_Generales.jsp" target="myframe2"  ><i class="fa fa-male fa-gear"></i> Información General </a>
+                            <a href="Datos_Generales.jsp?edit=<%=edit%>" target="myframe2"  ><i class="fa fa-male fa-gear"></i> Información General </a>
                         </li>
                         <li>
-                            <a href="Aspecto_Academico.jsp" target="myframe2"><i class="fa fa-graduation-cap fa-gear"></i> Aspecto Académico</a>
+                            <a href="Aspecto_Academico.jsp?edit=<%=edit%>" target="myframe2"><i class="fa fa-graduation-cap fa-gear"></i> Aspecto Académico</a>
                         </li>
                         <li >
                             <a href="../../trabajador?idtr=<%=idtr%>&opc=Listar_Asp_Social" target="myframe2"><i class="fa fa-home fa-gear"></i> Aspecto Social </a>
