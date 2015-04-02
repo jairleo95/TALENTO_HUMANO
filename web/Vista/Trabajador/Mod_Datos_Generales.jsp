@@ -149,18 +149,21 @@
                         $(".doc, .doc_c").attr("maxlength", "8");
                         $(".doc, .doc_c").attr("minlength", "8");
                         //$(".doc, .doc_c").val("");
-
+                        if($("#nac").val() != "NAC-0193"){
+                            $("#dist").hide();
+                        }
+                        
                         $("#nac").change(
                                 function() {
                                     if ($("#nac").val() != "NAC-0193") {
                                         $("#dist").hide();
-                                        $("#dist_nac").val("DST-001832");
-
-
+                                         $("#dist_nac").val("DST-001835");
+                                        
                                     }
                                     if ($("#nac").val() == "NAC-0193") {
-
                                         $("#dist").show();
+                                       
+                                         
                                     }
                                 }
                         );
@@ -544,7 +547,7 @@
                                                                         <label>Tipo de Documento:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <select name="TIPO_DOC" class="form-control input-group-sm select-doc"  required="">
+                                                                            <select name="TIPO_DOC" class="form-control input-group-sm select-doc" id="select-doc"  required="">
                                                                                 <option value="">[SELECCIONE]</option>
 
                                                                                 <%
@@ -916,11 +919,16 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <% CConversion c = new CConversion();%>
+                                                            <% CConversion c = new CConversion();
+                                                            String edit = request.getParameter("edit");
+                                                            %>
                                                             <!--<input type="text" value="<%=t.getFe_nac()%>"> -->               
                                                             <%String idtr = request.getParameter("idtr");%>
+                                                            <input type="hidden" name="editar" value="<%=edit%>"/>
                                                             <input type="hidden" name="idtr" value="<%=idtr.trim()%>"/>
                                                             <input type="hidden" name="opc" value="Modificar_Dat_Gen">
+                                                            <input type="hidden" name="TI_DOC" value="<%=t.getTi_doc() %>">
+                                                            <input type="hidden" name="NU_DOC" value="<%=t.getNu_doc()%>">
 
                                                             <center>
                                                                 <!-- <button type="submit" value="" name="opc"> MODIFICAR</button>-->
@@ -1208,7 +1216,10 @@
                          }*/
 
                     });
-
+                    if($("#editar").val("ok")){
+                    document.getElementById("select-doc").disabled = true;
+                      document.getElementById("doc").disabled = true;
+                    }
                     $("#banco").change(function() {
                         cuenta_bancaria($(this).val());
                         $("#es_cuenta").val(1);
@@ -1297,7 +1308,9 @@
             }
 
         }
-
+        function editarusuario (editar){
+            if (editar)
+        } 
         function cuenta_bancaria(banco) {
 
             if (banco == '1') {

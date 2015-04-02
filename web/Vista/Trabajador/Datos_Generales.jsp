@@ -26,7 +26,8 @@
         <form  align="center" ethod="post" action="" >
             <table class="table table-striped table-hover table-responsive  ">
 
-                <%for (int index = 0; index < ListaridTrabajador.size(); index++) {
+                <%String edit = request.getParameter("edit");
+                        for (int index = 0; index < ListaridTrabajador.size(); index++) {
                         V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
                         trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
 
@@ -180,7 +181,7 @@
                 <tr>
                     <%String IDTR = trb.getId_trabajador();%>
                     <td colspan="2">
-                        <a class="btn btn-success btn-labeled"  href="../../trabajador?opc=Editar_Dat_Gen&idtr=<%=IDTR%>"> <span class="btn-label"><i class="glyphicon glyphicon-refresh"></i></span> Editar </a>
+                        <a class="btn btn-success btn-labeled"  href="../../trabajador?opc=Editar_Dat_Gen&idtr=<%=IDTR%>&edit=<%=edit%>"> <span class="btn-label"><i class="glyphicon glyphicon-refresh"></i></span> Editar </a>
                     </td>
                 </tr>
                 <%}%>
