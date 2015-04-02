@@ -118,8 +118,8 @@
                                     <!-- widget edit box -->
                                     <div >
                                         <!-- This area used as dropdown edit box -->
-                                        <a class="btn btn-success" href="../../documento_trabajador?idtr=<%=request.getParameter("idtr")%>&opc=Listar_doc" style="color:white;"><i class="fa fa-check"></i><%if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001")) {
-                                            out.print("REGISTRAR DOCUMENTOS");}else{out.print("VISUALIZAR DOCUMENTOS");}%> </a>
+                                        <a class="btn btn-success" href="../../documento_trabajador?idtr=<%=request.getParameter("idtr")%>&opc=Listar_doc" style="color:#343434;"><i class="fa fa-eye"></i><%if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001")) {
+                                            out.print("REGISTRAR DOCUMENTOS");}else{out.print(" VISUALIZAR DOCUMENTOS");}%> </a>
                                     </div>
                                     <!-- end widget edit box -->
 
