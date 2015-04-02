@@ -45,4 +45,6 @@ public interface InterfaceCentro_CostosDAO {
     public int count_cc_x_id_cont(String id_con);
 
     public void Eliminar_dcc(String id_dcc);
+    
+    public void Modificar_Centro_Costo(String id_dcc);
 }
