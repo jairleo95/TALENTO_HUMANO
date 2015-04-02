@@ -461,25 +461,45 @@ public class CTrabajador extends HttpServlet {
             tr.MOD_ASPEC_ACADEM(LI_NIVEL_EDUCATIVO, REGIMEN, ES_INST_PERU, CARRERA, DE_ANNO_EGRESO, CM_OTROS_ESTUDIOS, CA_TIPO_HORA_PAGO_REFEERENCIAL, idtr, CO_UNIVERSITARIO);
             //out.print(CARRERA);
             //REGISTRAR EN TABLA CUENTA SUELDO
-            String NO_BANCO = request.getParameter("BANCO");
-            String NU_CUENTA = (request.getParameter("CUENTA") == null) ? "no tiene" : request.getParameter("CUENTA");
+            String editar = request.getParameter("editar");
+            String NO_BANCO = "";
+            String NU_CUENTA = "";
+            String NU_CUENTA_BANC = "";
+            String ES_GEM_NU_CUENTA = "";
+            String NO_BANCO_OTROS = "";
+            if(editar.equals("ok")){
+             NO_BANCO = request.getParameter("BAN");
+             NU_CUENTA = (request.getParameter("CUEN") == null) ? "no tiene" : request.getParameter("CUEN");
             //String NU_CUENTA_BANC = (request.getParameter("CUENTA_BANC") == null) ? "0" : "no tiene";
-            String NU_CUENTA_BANC = request.getParameter("CUENTA_BANC");
-            String ES_GEM_NU_CUENTA = (request.getParameter("GEN_NU_CUEN") == null) ? "0" : "1";
-            String NO_BANCO_OTROS = request.getParameter("BANCO_OTROS");
+             NU_CUENTA_BANC = request.getParameter("CUEN_BAN");
+             ES_GEM_NU_CUENTA = (request.getParameter("GCC") == null) ? "0" : "1";
+             NO_BANCO_OTROS = request.getParameter("BAN_OTROS");
+            }else{
+             NO_BANCO = request.getParameter("BANCO");
+             NU_CUENTA = (request.getParameter("CUENTA") == null) ? "no tiene" : request.getParameter("CUENTA");
+            //String NU_CUENTA_BANC = (request.getParameter("CUENTA_BANC") == null) ? "0" : "no tiene";
+             NU_CUENTA_BANC = request.getParameter("CUENTA_BANC");
+             ES_GEM_NU_CUENTA = (request.getParameter("GEN_NU_CUEN") == null) ? "0" : "1";
+             NO_BANCO_OTROS = request.getParameter("BANCO_OTROS");
+            }
+            
             String ES_CUENTA_SUELDO = request.getParameter("ES_CUENTA_SUELDO");
             if(NO_BANCO == null){
                 ES_CUENTA_SUELDO = "0";
             }else{
                 ES_CUENTA_SUELDO = "1";
             }
-
-            tr.MOD_CUENTA_SUELDO(NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEM_NU_CUENTA, NO_BANCO_OTROS, idtr, ES_CUENTA_SUELDO);
+            //tr.MOD_CUENTA_SUELDO(NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEM_NU_CUENTA, NO_BANCO_OTROS, idtr, ES_CUENTA_SUELDO);
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             getServletContext().setAttribute("List_Cuenta_Sueldo", tr.List_Cuenta_Sueldo(idtr));
             
-            //out.print(ES_CUENTA_SUELDO);
-            response.sendRedirect("Vista/Trabajador/Aspecto_Academico.jsp?idtr=" + idtr);
+            //out.print(editar);
+            out.print(NO_BANCO +"--");
+            out.print(NU_CUENTA);
+            out.print(NU_CUENTA_BANC);
+            out.print(ES_GEM_NU_CUENTA);
+            out.print(NO_BANCO_OTROS);
+            response.sendRedirect("Vista/Trabajador/Aspecto_Academico.jsp?idtr=" + idtr + "&edit= "+ editar);
         }
         if (opc.equals("Listar_Asp_Social")) {
             String idtr = request.getParameter("idtr");

@@ -59,7 +59,7 @@
                         }
                             %></td></tr>
                             <%if (tr.getAp_nombres_madre() == null || tr.getAp_nombres_padre() == null) {%>
-                            <%  if (rol.trim().equals("ROL-0002") || rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001")) {%>
+                            <%  if (rol.trim().equals("ROL-0002") || rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001") | rol.trim().equals("ROL-0013")) {%>
                     <tr><td colspan="2"> <a class="btn btn-success" href=Reg_Padres.jsp?idtr=<%=request.getParameter("idtr")%>">Agregar Padres</a></td></tr>
                     <%}%>
                     <%}%>
