@@ -144,6 +144,7 @@
                                         <section class="col col-2">
                                             <label class="select" id="titulo">Motivo :
                                                 <select class="input-group-sm" disabled="">
+                                                    <%if (a.getLi_motivo() != null) {%>
                                                     <%if (a.getLi_motivo().trim().equals("1")) {%>
                                                     <option value="1" selected="">Trabajador Nuevo</option>   
                                                     <option value="2" >renovación</option>   
@@ -151,15 +152,23 @@
                                                     <option value="1" >Trabajador Nuevo</option>   
                                                     <option value="2" selected="">renovación</option>
                                                     <%}%>
+                                                    <%} else {%>
+                                                    <option value="1" >Trabajador Nuevo</option>   
+                                                    <option value="2" >renovación</option>
+                                                    <%}%>
                                                 </select>
                                             </label>
                                         </section >
                                         <section class="col col-1" style=" margin-top:2%;">
                                             <label class="toggle" id="titulo" > MFL:
+                                                <input type="checkbox" name="checkbox-toggle"  >
+                                                <%if (a.getEs_mfl() != null) {%>
                                                 <%if (a.getEs_mfl().trim().equals("1")) {%>
                                                 <input type="checkbox" name="checkbox-toggle" checked="" disabled="">
                                                 <%} else {%>
                                                 <input type="checkbox" name="checkbox-toggle"  disabled="">
+                                                <%}
+                                                } else {%>
                                                 <%}%>
                                                 <i data-swchoff-text="NO"  data-swchon-text="SI"></i>
                                             </label>
@@ -177,10 +186,14 @@
                                                     <%for (int b = 0; b < List_Anno.size(); b++) {
                                                             Anno an = new Anno();
                                                             an = (Anno) List_Anno.get(b);
-                                                            if (a.getId_anno().trim().equals(an.getId_anno().trim())) {
+                                                            if (a.getId_anno() != null) {
+                                                                if (a.getId_anno().trim().equals(an.getId_anno().trim())) {
                                                     %>
                                                     <option value="<%=an.getId_anno()%>" selected=""><%=an.getNo_anno()%></option>
                                                     <%} else {%>
+                                                    <option value="<%=an.getId_anno()%>"><%=an.getNo_anno()%></option>
+                                                    <%}
+                                                    } else {%>
                                                     <option value="<%=an.getId_anno()%>"><%=an.getNo_anno()%></option>
                                                     <%}
                                                         }%>
@@ -209,14 +222,19 @@
                                         <section class="col col-3" id="titulo">
                                             <label class="select" id="titulo">Dirección:
                                                 <select name="DIRECCION" class="select_dir input-group-sm" id="select_dir">
-                                                    <%for (int c = 0; c < Listar_Direccion.size(); c++) {
+                                                    <%
+                                                        for (int c = 0; c < Listar_Direccion.size(); c++) {
                                                             Direccion dir = new Direccion();
                                                             dir = (Direccion) Listar_Direccion.get(c);
-                                                            if (a.getId_direccion().trim().equals(dir.getId_direccion().trim())) {
+                                                            if (a.getId_direccion() != null) {
+                                                                if (a.getId_direccion().trim().equals(dir.getId_direccion().trim())) {
                                                     %>
                                                     <option value="<%=dir.getId_direccion()%>" selected=""><%=dir.getNo_direccion()%></option>
                                                     <%} else {%>
-                                                    <option value="<%=dir.getId_direccion()%>"><%=dir.getNo_direccion()%></option>
+
+                                                    <%}
+                                                    } else {%>
+                                                    <option value="<%=dir.getId_direccion()%>"><%=dir.getNo_direccion()%></option> 
                                                     <%}
                                                         }%>
                                                 </select>  </label>
@@ -231,7 +249,8 @@
                                             <label class="select" id="titulo">Area:
                                                 <select name="AREA_ID" class="Selec_Area input-group-sm" id="Selec_Area">
                                                     <option value="">[SELECCIONE]</option>
-                                                </select>  </label>
+                                                </select>  
+                                            </label>
                                         </section>
                                         <section class="sec_sec col col-3" id="titulo">
                                             <label class="select" id="titulo">Sección:
@@ -250,7 +269,7 @@
                                             <label class="select" id="titulo">Condición:
                                                 <select name="CONDICION" class="input-group-sm" required="">
                                                     <%if (a.getLi_condicion() != null) {%>
-                                                    <option value="1" <%if (a.getLi_condicion().trim().equals("1")) {%>selected=""<% }%>>Contratado</option>
+                                                    <<option value="1" <%if (a.getLi_condicion().trim().equals("1")) {%>selected=""<% }%>>Contratado</option>
                                                     <option value="2" <%if (a.getLi_condicion().trim().equals("2")) {%>selected=""<%}%>>Contratado Independiente</option>
                                                     <option value="3" <%if (a.getLi_condicion().trim().equals("3")) {%>selected=""<%}%>> Enpleado</option>
                                                     <option value="4" <%if (a.getLi_condicion().trim().equals("4")) {%>selected=""<%}%>>Misionero</option>
@@ -307,7 +326,11 @@
                                         </section>
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Tipo Horas Pago:
-                                                <input type="text" name="TIPO_HORA_PAGO" value="<%=a.getTi_hora_pago()%>" class="input-group-sm" readonly="">
+                                                <input type="text" name="TIPO_HORA_PAGO" value="<%if (a.getTi_hora_pago() == null) {
+                                                        out.print("0");
+                                                    } else {
+                                                        out.print(a.getTi_hora_pago());
+                                                    }%>" class="input-group-sm" readonly="">
                                             </label>
                                         </section>
                                         <section class="col col-2" >
@@ -386,6 +409,20 @@
 
                                 </fieldset>
                                 <fieldset id="fila-agregar-cc">
+                                    <%if (Integer.parseInt(request.getParameter("num_cc")) == 0) {%>
+                                    <div class="row" >
+                                        <section class="col col-1">
+                                            <br>
+                                            <label  id="titu">Agregar:</label>
+                                            <br>
+                                            <label class="btn">
+                                                <!--<button type="button" class="btn btn-default btn-agregar-cc" id="btn-agregar-cc" >Agregar</button>-->
+                                                <a type="button" style="padding:9%; padding-right:20%; padding-left:20%;" id="btn-agregar-cc" class=" btn btn-default txt-color-green btn-agregar-cc"><i class="fa fa-plus fa-2x"></i></a>
+                                            </label>
+                                            <label class="input" id="titulo">%:<input type="text" name="PORCENTAJE_TOTAL" max="100" min="100" maxlength="3" value="" class="input-group-sm por_sum_to" id="bo_a" readonly=""></label>
+                                        </section>
+                                    </div>
+                                    <%}%>
                                     <section  id="centros-costos-relleno"></section> 
                                 </fieldset>
                                 <fieldset>
@@ -421,7 +458,7 @@
                                                             if (request.getParameter("id_mod") != null) {
                                                                 if (request.getParameter("id_mod").trim().equals(mo.getId_modalidad().trim())) {
                                                     %>
-                                                    <option value="<%=mo.getId_modalidad()%>" selected=""><%=mo.getDe_modalidad()%></option>
+                                                    <option value="<%=mo.getId_modalidad()%>" selected=""><%=mo.getDe_modalidad() + mo.getId_modalidad()%></option>
                                                     <%} else {%>
                                                     <option value="<%=mo.getId_modalidad()%>" ><%=mo.getDe_modalidad()%></option>
                                                     <%}
@@ -469,7 +506,11 @@
                                         </section>
                                         <section class="col col-4">
                                             <label class="input" id="titulo">Fecha de Suscripción: 
+                                                <%if (a.getFe_suscripcion() != null) {%>
                                                 <input id="suscripcion" type="date" name="FECHA_SUSCRIPCION"  class="input-group-sm"  value="<%=con.convertFecha3(a.getFe_suscripcion())%>">
+                                                <%} else {%>
+                                                <input id="suscripcion" type="date" name="FECHA_SUSCRIPCION"  class="input-group-sm"  value="">
+                                                <%}%>
                                             </label>
                                         </section>
                                         <section class="col col-4">
@@ -1355,8 +1396,7 @@
                     var lista = objJson.lista;
                     s.append("<option value='' > [SELECCIONE] </option>");
                     for (var j = 0; j < lista.length; j++) {
-
-                        if ($(".sec_pu").val().trim() == lista[j].id.trim()) {
+                        if ($(".sec_pu").val() == lista[j].id) {
                             s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nom + "</option>");
                         } else {
                             s.append("<option value='" + lista[j].id + "'> " + lista[j].nom + "</option>");
@@ -1405,8 +1445,12 @@
                     var lista = objJson.lista;
                     s.append("<option value='' > [SELECCIONE] </option>");
                     for (var i = 0; i < lista.length; i++) {
-                        if ($(".id_sub_mod").val() == lista[i].id.trim()) {
-                            s.append("<option value='" + lista[i].id + "' selected=''> " + lista[i].nombre + "</option>");
+                        if ($(".id_sub_mod").val() != null) {
+                            if ($(".id_sub_mod").val() == lista[i].id) {
+                                s.append("<option value='" + lista[i].id + "' selected=''> " + lista[i].nombre + "</option>");
+                            } else {
+                                s.append("<option value='" + lista[i].id + "'> " + lista[i].nombre + "</option>");
+                            }
                         } else {
                             s.append("<option value='" + lista[i].id + "'> " + lista[i].nombre + "</option>");
                         }
@@ -1433,73 +1477,80 @@
             function Listar_centro_costo() {
                 var x = $("#centros-costos-relleno");
                 $.post("../../centro_costo", "opc=Listar_centro_id_con&" + "id_con=" + $(".id_contrato").val(), function(objJson) {
-                    var lista = objJson.lista;
-                    x.empty();
-                    var numero = 1;
-                    var texto = "";
-                    if ($("#id_dgp").val() == null) {
-                        texto += '<div class="row" ><section class="col col-1"><br><label  id="titu">Agregar:</label><br><label class="btn"><a type="button" style="padding:9%; padding-right:20%; padding-left:20%;" id="btn-agregar-cc2" class=" btn btn-default txt-color-green btn-agregar-cc"><i class="fa fa-plus fa-2x"></i></a></label></section><section class="col col-2"><label class="input" id="titulo">%:<input type="text" name="PORCENTAJE_TOTAL" max="100" min="100" maxlength="3" value="" class="input-group-sm por_sum_to" id="bo_a" readonly=""></label></section></div>';
-                    }
-                    for (var i = 0; i < lista.length; i++) {
-                        numero = numero + i;
-                        if ($("#id_dgp").val() != null) {
-                            texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + (i + 1) + ':</label>';
-                            texto += '<div  class="row centro-costo_' + ag + '" >';
-                            texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '" id="cc-dir' + ag + '" readonly=""  disabled><option value="">[DIRECCION]</option></select></label></section>';
-                            texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '" disabled readonly="readonly" disabled><option value=""  >[DEPARTAMENTO]</option></select></label></section>';
-                            texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required="" readonly="readonly" disabled><option value="">[CENTRO COSTO]</option></select></label></section>';
-                            texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '"  min="0" value="' + lista[i].ca_por_cc + '"  type="text" required="" class="porcentaje_cc" readonly="readonly" disabled/></label></section>';
-                            texto += '</div>';
-                            var dir, dep, cc;
-                            dir = lista[i].id_dir_cc;
-                            dep = lista[i].id_dep_cc;
-                            cc = lista[i].id;
-                            listar_cc2(ag, dir, dep, cc);
-                        } else {
-                            if ($(".can_centro_cos ").val() == "1") {
-                                texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + (i + 1) + ':</label>';
-                                texto += '<div  class="row centro-costo_' + ag + '" >';
-                                texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '" id="cc-dir' + ag + '" readonly="readonly"  disabled><option value="">[DIRECCION]</option></select></label></section>';
-                                texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '" readonly="readonly"  disabled><option value="">[DEPARTAMENTO]</option></select></label></section>';
-                                texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required="" readonly="readonly"  disabled><option value="">[CENTRO COSTO]</option></select></label></section>';
-                                texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '"  min="0" value="' + lista[i].ca_por_cc + '"  type="text" required="" class="porcentaje_cc"/></label></section>';
-                                texto += '<section class="col col-1" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;" value="' + ag + '" class=" btn btn-default txt-color-red remover' + ag + '" onclick="Eliminar($(this).val());" disabled ><i class="fa fa-minus fa-2x"></i></button></label></section>';
-                                texto += '<input type="hidden" value="' + lista[i].id_det_ce + '" class="id_dcc' + ag + '" ><input type="hidden" name="id_d_cen_cos" value="' + lista[i].id_det_ce + '" ></div>';
-                                var dir, dep, cc;
-                                dir = lista[i].id_dir_cc;
-                                dep = lista[i].id_dep_cc;
-                                cc = lista[i].id;
-                                listar_cc2(ag, dir, dep, cc);
-                                /*texto += ('<section class="col col-4 cen-co-im' + i + '"><br><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm selec' + i + '"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></section><section class="col col-1 cen-co-im' + i + '" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;"value="' + i + '" class=" btn btn-default txt-color-red rem' + i + '" id="rem' + (i + 1) + '" onclick="Eliminar($(this).val());" disabled=""><i class="fa fa-minus fa-2x"></i></button></label></section>');
-                                 texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
-                                 texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
-                                 texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';*/
-                            } else {
-                                texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + (i + 1) + ':</label>';
-                                texto += '<div  class="row centro-costo_' + ag + '" >';
-                                texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '" id="cc-dir' + ag + '" readonly="readonly"  disabled><option value="">[DIRECCION]</option></select></label></section>';
-                                texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '" readonly="readonly"  disabled><option value="">[DEPARTAMENTO]</option></select></label></section>';
-                                texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required="" readonly="readonly"  disabled><option value="">[CENTRO COSTO]</option></select></label></section>';
-                                texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '"  min="0" value="' + lista[i].ca_por_cc + '"  type="text" required="" class="porcentaje_cc"/></label></section>';
-                                texto += '<section class="col col-1" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;" value="' + ag + '" class=" btn btn-default txt-color-red remover' + ag + '" onclick="Eliminar($(this).val());" ><i class="fa fa-minus fa-2x"></i></button></label></section>';
-                                texto += '<input type="hidden" value="' + lista[i].id_det_ce + '" class="id_dcc' + ag + '" ></div>';
-                                var dir, dep, cc;
-                                dir = lista[i].id_dir_cc;
-                                dep = lista[i].id_dep_cc;
-                                cc = lista[i].id;
-                                listar_cc2(ag, dir, dep, cc);
-                                // texto += ('<section class="col col-4 cen-co-im' + i + '"><br><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm selec' + i + '"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></section><section class="col col-1 cen-co-im' + i + '" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;"value="' + i + '" class=" btn btn-default txt-color-red rem' + i + '" onclick="Eliminar($(this).val());"><i class="fa fa-minus fa-2x"></i></button></label></section>');
-                            }
-                            //listar_cc2(ag, lista[i].id_dir_cc, lista[i].id_dep_cc, lista[i].id);
+                    if ($(".can_centro_cos").val() != 0) {
+                        var lista = objJson.lista;
+                        x.empty();
+                        var numero = 1;
+                        var texto = "";
+                        if ($("#id_dgp").val() == null) {
+                            texto += '<div class="row" ><section class="col col-1"><br><label  id="titu">Agregar:</label><br><label class="btn"><a type="button" style="padding:9%; padding-right:20%; padding-left:20%;" id="btn-agregar-cc2" class=" btn btn-default txt-color-green btn-agregar-cc"><i class="fa fa-plus fa-2x"></i></a></label></section><section class="col col-2"><label class="input" id="titulo">%:<input type="text" name="PORCENTAJE_TOTAL" max="100" min="100" maxlength="3" value="" class="input-group-sm por_sum_to" id="bo_a" readonly=""></label></section></div>';
                         }
-                        numero = 1;
-                        ag++;
+                        for (var i = 0; i < lista.length; i++) {
+                            numero = numero + i;
+                            if ($("#id_dgp").val() != null) {
+                                texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + (i + 1) + ':</label>';
+                                texto += '<div  class="row centro-costo_' + ag + '" >';
+                                texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '" id="cc-dir' + ag + '" readonly=""  disabled><option value="">[DIRECCION]</option></select></label></section>';
+                                texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '" disabled readonly="readonly" disabled><option value=""  >[DEPARTAMENTO]</option></select></label></section>';
+                                texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required="" readonly="readonly" disabled><option value="">[CENTRO COSTO]</option></select></label></section>';
+                                texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '"  min="0" value="' + lista[i].ca_por_cc + '"  type="text" required="" class="porcentaje_cc" readonly="readonly" disabled/></label></section>';
+                                texto += '</div>';
+                                var dir, dep, cc;
+                                dir = lista[i].id_dir_cc;
+                                dep = lista[i].id_dep_cc;
+                                cc = lista[i].id;
+                                listar_cc2(ag, dir, dep, cc);
+                            } else {
+                                if ($(".can_centro_cos ").val() == "1") {
+                                    texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + (i + 1) + ':</label>';
+                                    texto += '<div  class="row centro-costo_' + ag + '" >';
+                                    texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '" id="cc-dir' + ag + '" readonly="readonly"  disabled><option value="">[DIRECCION]</option></select></label></section>';
+                                    texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '" readonly="readonly"  disabled><option value="">[DEPARTAMENTO]</option></select></label></section>';
+                                    texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required="" readonly="readonly"  disabled><option value="">[CENTRO COSTO]</option></select></label></section>';
+                                    texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '" value="' + lista[i].ca_por_cc + '"  type="text" required="" class="porcentaje_cc por-cen-' + ag + '" onkeyup="dar_valor($(this).val(),'+ag+');"/><input type="hidden" name="porcent_ant_' + (i + 1) + '"  class="porc' + ag + '" /></label> </section>';
+                                    texto += '<section class="col col-1" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;" value="' + ag + '" class=" btn btn-default txt-color-red remover' + ag + '" onclick="Eliminar(alert());" disabled ><i class="fa fa-minus fa-2x"></i></button></label></section>';
+                                    texto += '<input type="hidden" value="' + lista[i].id_det_ce + '" class="id_dcc' + ag + '" ><input type="hidden" name="id_d_cen_cos' + (i + 1) + '" value="' + lista[i].id_det_ce + '" ></div>';
+                                    var dir, dep, cc;
+                                    dir = lista[i].id_dir_cc;
+                                    dep = lista[i].id_dep_cc;
+                                    cc = lista[i].id;
+                                    listar_cc2(ag, dir, dep, cc);
+                                    /*texto += ('<section class="col col-4 cen-co-im' + i + '"><br><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm selec' + i + '"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></section><section class="col col-1 cen-co-im' + i + '" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;"value="' + i + '" class=" btn btn-default txt-color-red rem' + i + '" id="rem' + (i + 1) + '" onclick="Eliminar($(this).val());" disabled=""><i class="fa fa-minus fa-2x"></i></button></label></section>');
+                                     texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
+                                     texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
+                                     texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';*/
+                                } else {
+                                    texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + (i + 1) + ':</label>';
+                                    texto += '<div  class="row centro-costo_' + ag + '" >';
+                                    texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '" id="cc-dir' + ag + '" readonly="readonly"  disabled><option value="">[DIRECCION]</option></select></label></section>';
+                                    texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '" readonly="readonly"  disabled><option value="">[DEPARTAMENTO]</option></select></label></section>';
+                                    texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required="" readonly="readonly"  disabled><option value="">[CENTRO COSTO]</option></select></label></section>';
+                                    texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '" value="' + lista[i].ca_por_cc + '"  type="text" required="" class="porcentaje_cc por-cen-' + ag + '" onkeyup="dar_valor($(this).val(),'+ag+');"/><input type="hidden" name="porcent_ant_' + (i + 1) + '"  class="porc' + ag + '" /></label></section>';
+                                    texto += '<section class="col col-1" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;" value="' + ag + '" class=" btn btn-default txt-color-red remover' + ag + '" onclick="Eliminar($(this).val());" ><i class="fa fa-minus fa-2x"></i></button></label></section>';
+                                    texto += '<input type="hidden" value="' + lista[i].id_det_ce + '" class="id_dcc' + ag + '" ><input type="hidden" name="id_d_cen_cos' + (i + 1) + '" value="' + lista[i].id_det_ce + '" ></div>';
+                                    var dir, dep, cc;
+                                    dir = lista[i].id_dir_cc;
+                                    dep = lista[i].id_dep_cc;
+                                    cc = lista[i].id;
+                                    listar_cc2(ag, dir, dep, cc);
+                                    // texto += ('<section class="col col-4 cen-co-im' + i + '"><br><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm selec' + i + '"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></section><section class="col col-1 cen-co-im' + i + '" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;"value="' + i + '" class=" btn btn-default txt-color-red rem' + i + '" onclick="Eliminar($(this).val());"><i class="fa fa-minus fa-2x"></i></button></label></section>');
+                                }
+                                //listar_cc2(ag, lista[i].id_dir_cc, lista[i].id_dep_cc, lista[i].id);
+                            }
+                            numero = 1;
+                            ag++;
+                        }
+                        x.append(texto);
+                        $('#btn-agregar-cc2').click(function() {
+                            agregar_centro_costo();
+                        });
+                    } else {
+                        remover_fil();
                     }
-                    x.append(texto);
-                    $('#btn-agregar-cc2').click(function() {
-                        agregar_centro_costo();
-                    });
                 });
+            }
+            function remover_fil() {
+                $(".fila-agregar-cc").remove();
             }
             var agregar = $('#fila-agregar-cc');
             var ag = 1;
@@ -1508,14 +1559,14 @@
             var estable = 0;
             var can_eliminada = 0;
             function agregar_centro_costo(opc, arr_cc) {
-                if ($(".can_centro_cos").val().trim() == "1") {
+                if ($(".can_centro_cos").val() == "1") {
                     ingr++;
                     texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + ag + ':</label>';
                     texto += '<div  class="row centro-costo_' + ag + '" >';
                     texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '" ><option value="">[DIRECCION]</option></select></label></section>';
                     texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
                     texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
-                    texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '"  min="0" value="' + (ingr + ag - 1) + '"  type="text" required="" class="porcentaje_cc"/></label></section>';
+                    texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '"  value="' + (ingr + ag - 1) + '"  type="text" required="" class="porcentaje_cc porcenttaj' + ag + '"/><input name="PORCENTAJE_CC' + ingr + '"  type="hidden" class="procent cont_dif' + ag + '"></label></section>';
                     texto += '<section class="col col-1" ><br><label class="btn"><a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class=" btn btn-default txt-color-red remover' + ag + '"><i class="fa fa-minus fa-2x"></i></a></label></section>';
                     texto += '</div>';
                     agregar.append(texto);
@@ -1523,10 +1574,10 @@
                     listar_cc(ag);
                     var c_porcentaje = $(".porcentaje_cc").size();
                     $(".porcentaje_cc").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
+                    $(".procent").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
                     estable++;
                     sumn_porcen_total();
                     $(".can_centro_cos").val("a");
-
                     $(".cant-ing").val(ingr);
                 } else {
                     ingr++;
@@ -1535,32 +1586,31 @@
                     texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
                     texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
                     texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
-                    texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '"  min="0" value="' + (ingr + ag - 1) + '"  type="text" required="" class="porcentaje_cc"/></label></section>';
+                    texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '"  min="0" value="' + (ingr + ag - 1) + '"  type="text" required="" class="porcentaje_cc porcenttaj' + ag + '"/><input name="PORCENTAJE_CC' + ingr + '"  type="hidden" class="procent cont_dif' + ag + '"/></label></section>';
                     texto += '<section class="col col-1" ><br><label class="btn"><a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class=" btn btn-default txt-color-red remover' + ag + '"><i class="fa fa-minus fa-2x"></i></a></label></section>';
                     texto += '</div>';
                     agregar.append(texto);
                     // remover_atrib(ag - 1);
                     //remover_atrib(ag-1);
-                    agrgar_atrib(ag - 1)
+                    agrgar_atrib(ag - 1);
                     listar_cc(ag);
                     var c_porcentaje = $(".porcentaje_cc").size();
 
                     $(".cant-ing").val(ingr);
                     $(".porcentaje_cc").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
+                    $(".procent").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
                     estable++;
                     sumn_porcen_total();
-
                 }
                 //$(".ver").text(texto); 
                 texto = "";
                 $(".cant").val(ag);
                 ag++;
-
-
                 $(".porcentaje_cc").keyup(function() {
                     sumn_porcen_total();
                 });
             }
+
             function remover_atrib(num) {
                 $(".remover" + num).removeAttr("disabled");
             }
@@ -1607,6 +1657,9 @@
 
                     listar_centro_costo2(num, "0", arr_cc);
                 });
+                $(".porcenttaj" + num).keyup(function() {
+                    $(".cont_dif" + num).val($(this).val());
+                });
                 $(".remover" + num).click(function() {
                     $(".remover" + (num - 1)).removeAttr("disabled");
                     remover(num);
@@ -1618,9 +1671,10 @@
                     actualizar_porcentaje();
                     sumn_porcen_total();
                 });
+
             }
-            function actualizar_porcentaje(){
-                 $(".porcentaje_cc").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
+            function actualizar_porcentaje() {
+                $(".porcentaje_cc").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
             }
             function remover(rem) {
                 $(".centro-costo_" + rem).remove();
@@ -1704,12 +1758,18 @@
 
                     listar_centro_costo2(num, "0", arr_cc);
                 });
+              //  alert(num);
+                $(".por-cen-1").keyup(function(){alert();});
                 $(".remover" + num).click(function() {
                     $(".remover" + (num - 1)).removeAttr("disabled");
                     remover(num);
                     sumn_porcen_total();
                     ag--;
                 });
+            }
+            function dar_valor(caracter,num) {
+                alert(caracter+num);
+               $(".porc" + num).val(caracter);
             }
             function remover2(rem) {
 
@@ -1727,7 +1787,7 @@
                     }
                     var lista = objJson.lista;
                     for (var i = 0; i < lista.length; i++) {
-                        if (dep == lista[i].id.trim()) {
+                        if (dep == lista[i].id) {
                             cc_dep.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
                             listar_centro_costo3(x, cc);
                         } else {
@@ -1749,7 +1809,7 @@
                     }
                     var lista = objJson.lista;
                     for (var i = 0; i < lista.length; i++) {
-                        if (cc == lista[i].id.trim()) {
+                        if (cc == lista[i].id) {
                             centro_costo.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
                         } else {
                             centro_costo.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");

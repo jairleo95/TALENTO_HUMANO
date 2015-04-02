@@ -280,15 +280,22 @@ public class CContrato extends HttpServlet {
             //int cantidad_centro = Integer.parseInt(request.getParameter("can_centro_cos"));
             // out.print(ID_CONTRATO + "-" + ID_DGP + "-" + FE_DESDE + "-" + FE_HASTA + "-" + FE_CESE + "-" + ID_FUNC + "-" + LI_CONDICION + "-" + CA_SUELDO + "-" + CA_REINTEGRO + "-" + CA_ASIG_FAMILIAR + "-" + HO_SEMANA + "-" + NU_HORAS_LAB + "-" + DIA_CONTRATO + "-" + TI_TRABAJADOR + "-" + LI_REGIMEN_LABORAL + "-" + ES_DISCAPACIDAD + "-" + TI_CONTRATO + "-" + LI_REGIMEN_PENSIONARIO + "-" + ES_CONTRATO_TRABAJADOR + "-" + US_CREACION + "-" + FE_CREACION + "-" + US_MODIF + "-" + FE_MODIF + "-" + US_IP + "-" + FE_VACACIO_INI + "-" + FE_VACACIO_FIN + "-" + ES_CONTRATO + "-" + ID_FILIAL + "-" + ID_PUESTO + "-" + CA_BONO_ALIMENTO + "-" + LI_TIPO_CONVENIO + "-" + ES_FIRMO_CONTRATO + "-" + NU_CONTRATO + "-" + DE_OBSERVACION + "-" + ES_APOYO + "-" + TI_HORA_PAGO + "-" + NU_DOCUMENTO + "-" + ID_ANNO + "-" + ES_ENTREGAR_DOC_REGLAMENTOS + "-" + ES_REGISTRO_HUELLA + "-" + DE_REGISTRO_SISTEM_REMU + "-" + ID_TRABAJADOR + "-" + CA_SUELDO_TOTAL + "-" + ID_REGIMEN_LABORAL + "-" + ID_MODALIDAD + "-" + ID_SUB_MODALIDAD + "-" + CO_GR_OCUPACION + "-" + FE_SUSCRIPCION + "-" + CO_TI_MONEDA + "-" + CO_TI_REM_VARIAB + "-" + DE_REMU_ESPECIE + "-" + DE_RUC_EMP_TRAB + "-" + CO_SUCURSAL + "-" + DE_MYPE + "-" + ES_TI_CONTRATACION + "-" + CA_BEV + "-" + ID_TIPO_PLANILLA + "-" + ES_REMUNERACION_PROCESADO + "-" + ID_HORARIO + "-" + ID_PLANTILLA_CONTRACTUAL + "-" + ca_bonificacion_p);
             con.MODIFICAR_CONTRATO(ID_CONTRATO, ID_DGP, FE_DESDE, FE_HASTA, FE_CESE, ID_FUNC, LI_CONDICION, CA_SUELDO, CA_REINTEGRO, CA_ASIG_FAMILIAR, HO_SEMANA, NU_HORAS_LAB, DIA_CONTRATO, TI_TRABAJADOR, LI_REGIMEN_LABORAL, ES_DISCAPACIDAD, TI_CONTRATO, LI_REGIMEN_PENSIONARIO, ES_CONTRATO_TRABAJADOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, US_IP, FE_VACACIO_INI, FE_VACACIO_FIN, ES_CONTRATO, ID_FILIAL, ID_PUESTO, CA_BONO_ALIMENTO, LI_TIPO_CONVENIO, ES_FIRMO_CONTRATO, NU_CONTRATO, DE_OBSERVACION, ES_APOYO, TI_HORA_PAGO, NU_DOCUMENTO, ID_ANNO, ES_ENTREGAR_DOC_REGLAMENTOS, ES_REGISTRO_HUELLA, DE_REGISTRO_SISTEM_REMU, ID_TRABAJADOR, CA_SUELDO_TOTAL, ID_REGIMEN_LABORAL, ID_MODALIDAD, ID_SUB_MODALIDAD, CO_GR_OCUPACION, FE_SUSCRIPCION, CO_TI_MONEDA, CO_TI_REM_VARIAB, DE_REMU_ESPECIE, DE_RUC_EMP_TRAB, CO_SUCURSAL, DE_MYPE, ES_TI_CONTRATACION, CA_BEV, ID_TIPO_PLANILLA, ES_REMUNERACION_PROCESADO, ID_HORARIO, ID_PLANTILLA_CONTRACTUAL, ca_bonificacion_p);
-            int cant_actual = Integer.parseInt(request.getParameter("cant_actual_anti"));
-            int cant_eliminada = Integer.parseInt(request.getParameter("cant_eliminada"));
-            int cant_inicial = Integer.parseInt(request.getParameter("cant_inicial"));
-            int cant_ingresada = Integer.parseInt(request.getParameter("cant_actual_anti"));
-            for (int a = 0; a < cant_inicial; a++) {
-                if (request.getParameter("id_d_cen_cos")!=null) {
-                    
+            if (ID_DGP != null) {
+                int cant_actual = Integer.parseInt(request.getParameter("cant_actual_anti"));
+                int cant_eliminada = Integer.parseInt(request.getParameter("cant_eliminada"));
+                int cant_inicial = Integer.parseInt(request.getParameter("cant_inicial"));
+                int cant_ingresada = Integer.parseInt(request.getParameter("cant_ingresada"));
+                if (cant_ingresada > 0) {
+                    for (int a = 0; a < cant_inicial; a++) {
+                        if (request.getParameter("id_d_cen_cos"+(a+1)) != null) {
+                            int porcen=Integer.parseInt(request.getParameter("porcent_ant_"+a+1));
+                            
+                        }
+                    }
+                } else {
                 }
             }
+
             //String idtr = request.getParameter("IDDATOS_TRABAJADOR");
             /*String ida1 = a.List_Anno_Max_Cont(idtr);
              String id_cto = con.Contrato_max(idtr);
@@ -322,9 +329,11 @@ public class CContrato extends HttpServlet {
              getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
              getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
              getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
-             response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1 + "&idtr=" + idtr + "&id_cto=" + id_cto + "&id_dg=" + id_dgp);*/  
+             response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1 + "&idtr=" + idtr + "&id_cto=" + id_cto + "&id_dg=" + id_dgp);*/
         }
-        if (opc.equals("Detalle_Contractual")) {
+
+        if (opc.equals(
+                "Detalle_Contractual")) {
 
             String idtr = request.getParameter("idtr");
             /*String ida1 = a.List_Anno_Max_Cont(idtr);
@@ -364,23 +373,30 @@ public class CContrato extends HttpServlet {
 
             //response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1 + "&idtr=" + idtr + "&id_cto=" + id_cto);
         }
-        if (opc.equals("Subir_Contrato")) {
+
+        if (opc.equals(
+                "Subir_Contrato")) {
 
             response.sendRedirect("Vista/Contrato/Subir_Contrato_Adjunto.jsp?idc=" + request.getParameter("idc"));
         }
-        if (opc.equals("Subir_Contrato2")) {
+
+        if (opc.equals(
+                "Subir_Contrato2")) {
             int coun_doc = con.Count_doc_con(request.getParameter("idc"));
             String id_con = request.getParameter("idc");
             response.sendRedirect("Vista/Contrato/Formato_Plantilla/Subir_Contrato_Firmado.jsp?idc=" + id_con + "&coun_doc=" + coun_doc);
         }
 
-        if (opc.equals("Actualizar_Firma")) {
+        if (opc.equals(
+                "Actualizar_Firma")) {
             String idtr = request.getParameter("IDTR");
             String iddgp = request.getParameter("IDDETALLE_DGP");
             con.UPDATE_FIRMA(idtr, iddgp);
 
         }
-        if (opc.equals("actualizar")) {
+
+        if (opc.equals(
+                "actualizar")) {
             String ida1 = request.getParameter("ida");
             String idtr = request.getParameter("idtr");
             String id_cto = request.getParameter("ida");
@@ -398,7 +414,8 @@ public class CContrato extends HttpServlet {
             response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1.trim() + "&idtr=" + idtr.trim() + "&id_cto=" + id_cto);
         }
 
-        if (opc.equals("REGISTRAR CONTRATO")) {
+        if (opc.equals(
+                "REGISTRAR CONTRATO")) {
 
             String ID_CONTRATO = "";
             String ID_DGP = request.getParameter("IDDETALLE_DGP");
@@ -514,7 +531,9 @@ public class CContrato extends HttpServlet {
             //response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp");
             response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1.trim() + "&idtr=" + idtr1.trim() + "&id_cto=" + id_cto);
         }
-        if (opc.equals("Buscar")) {
+
+        if (opc.equals(
+                "Buscar")) {
             String Buscar = request.getParameter("busqueda");
             String dni = request.getParameter("dni");
             String nom = request.getParameter("nom");
@@ -535,7 +554,8 @@ public class CContrato extends HttpServlet {
             }
         }
 
-        if (opc.equals("LIST_FORMULARIO")) {
+        if (opc.equals(
+                "LIST_FORMULARIO")) {
 
             String US_CREACION = iduser;
             String idtr = request.getParameter("idtr");
@@ -581,7 +601,8 @@ public class CContrato extends HttpServlet {
 
         }
 
-        if (opc.equals("REG_CASOS_ESP")) {
+        if (opc.equals(
+                "REG_CASOS_ESP")) {
 
             String ID_CONTRATO = "";
             String ID_DGP = "";
@@ -733,25 +754,34 @@ public class CContrato extends HttpServlet {
             //response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&idtr=" + ID_TRABAJADOR + "&idctr=" + idctr + "&dce=Doc_CE");
             response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&pro=pr_dgp&req=si&idtr=" + ID_TRABAJADOR + "&P2=TRUE&ms=ok");
         }
-        if (opc.equals("Reporte_CE")) {
+
+        if (opc.equals(
+                "Reporte_CE")) {
             getServletContext().setAttribute("List_Casos_Esp", con.LIST_CASOS_ESPECIALES());
             response.sendRedirect("Vista/Contrato/Filtro_Contrato_CE.jsp");
         }
 
-        if (opc.equals("Buscar")) {
+        if (opc.equals(
+                "Buscar")) {
             getServletContext().setAttribute("List_Area", area.List_Area());
         }
-        if (opc.equals("Ver_Plantilla")) {
+
+        if (opc.equals(
+                "Ver_Plantilla")) {
             String idc = request.getParameter("idc");
             getServletContext().setAttribute("LIST_DAT_TR_PLANTILLA", tr.LIST_DAT_TR_PLANTILLA(idc));
             response.sendRedirect("Vista/Contrato/Plantilla/Editor_Plantilla.jsp");
         }
-        if (opc.equals("Ver Plantilla")) {
+
+        if (opc.equals(
+                "Ver Plantilla")) {
             String idc = request.getParameter("idc");
             getServletContext().setAttribute("LIST_DAT_TR_PLANTILLA", tr.LIST_DAT_TR_PLANTILLA(idc));
             response.sendRedirect("Vista/Contrato/Plantilla/Editor_Plantilla.jsp");
         }
-        if (opc.equals("filtrar")) {
+
+        if (opc.equals(
+                "filtrar")) {
             getServletContext().setAttribute("Listar_Direccion", dir.Listar_Direccion());
             response.sendRedirect("Vista/Contrato/Busc_Contrato.jsp");
         }
@@ -761,7 +791,7 @@ public class CContrato extends HttpServlet {
 
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
