@@ -549,6 +549,18 @@ public class CTrabajador extends HttpServlet {
             response.sendRedirect("Vista/Trabajador/Aspecto_Social.jsp");
 
         }
+         if ("edit_perfil".equals(opc)) {
+            String user = (String)sesion.getAttribute("IDUSER");
+            String idtr =   tr.ID_TRB(user);
+            getServletContext().setAttribute("List_Cuenta_Sueldo", tr.List_Cuenta_Sueldo(idtr));
+            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            getServletContext().setAttribute("List_Universidad", li.List_Universidad());
+            getServletContext().setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
+            getServletContext().setAttribute("List_Ubigeo", ub.List_Distrito());
+            getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
+             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr + "&edit=ok");
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

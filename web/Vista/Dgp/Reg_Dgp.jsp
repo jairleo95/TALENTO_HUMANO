@@ -18,6 +18,7 @@
 <jsp:useBean id="List_Det_Puesto" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_Requerimiento" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="list_Cuenta_Sueldo" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="fecha_maxima_plazo" scope="application" class="java.lang.String"/>
 
 <!DOCTYPE html >
 <html>
@@ -97,6 +98,8 @@
         <%            HttpSession sesion = request.getSession(true);
             String id_dep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
             String fecha_min = (String) sesion.getAttribute("FECHA_MINIMA");
+
+
         %>
 
     </head>
@@ -114,6 +117,9 @@
                             <article class="col-sm-12 col-md-12 col-lg-6">
 
                                 <div id="alerta_dgp">
+
+                                </div>
+                                <div class="div_info">
 
                                 </div>
 
@@ -165,8 +171,7 @@
 
                                                 <fieldset id="fila-agregar">
 
-                                                    <%
-                                                        /*Temporal*/
+                                                    <%                                                        /*Temporal*/
                                                         String idreq = request.getParameter("idreq");
 
                                                         for (int i = 0; i < Listar_Trabajador_id.size(); i++) {
@@ -328,12 +333,12 @@
                                                     <div class="row">
                                                         <section class="col col-6" >
                                                             <label class="input" id="titu">Fecha de Inicio :
-                                                                <input type="date" name="FEC_DESDE" id="datepicker" required="" class="val_fe" min="<%=fecha_min%>">
+                                                                <input type="date" name="FEC_DESDE" id="datepicker" required="" class="val_fe" min="<%=fecha_maxima_plazo%>">
                                                             </label>
                                                         </section>
                                                         <section class="col col-6">
                                                             <label class="input"  id="titu">Fecha de Cese :
-                                                                <input type="date" name="FEC_HASTA"  required="" id="datepicker" min="<%=fecha_min%>">
+                                                                <input type="date" name="FEC_HASTA"  required="" id="datepicker" class="val_fe" min="<%=fecha_min%>" >
                                                             </label>
                                                         </section>
                                                     </div>
@@ -932,6 +937,7 @@
     <script>
         $(document).ready(function () {
             var b = $("#alerta_dgp");
+            var info = $(".div_info");
             // $("#alerta_dgp").hide();
             function listar() {
                 $.post("../../plazo_dgp", "opc=Listar", function (objJson) {
@@ -943,6 +949,8 @@
                     }
                     for (var i = 0; i < lista.length; i++) {
                         b.append("<div class='alert alert-danger alert-block' ><a class='close' data-dismiss='alert' href='#'>×</a><h4 class='alert-heading'>" + lista[i].nom + "</h4>" + lista[i].det + " , Fecha Plazo " + lista[i].desde + " al " + lista[i].hasta + "</div>");
+
+                        info.append('<div class="alert alert-info fade in"><button class="close" data-dismiss="alert">×</button><i class="fa-fw fa fa-info"></i><strong>¡Importante!</strong> Su requerimiento será procesado en el mes de <strong>' + lista[i].mes + '.</strong></div>');
                     }
                 });
             }

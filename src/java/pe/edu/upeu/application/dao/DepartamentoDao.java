@@ -5,6 +5,7 @@
  */
 package pe.edu.upeu.application.dao;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -79,7 +80,7 @@ public class DepartamentoDao implements InterfaceDepartamentoDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT ID_DEPARTAMENTO FROM RHVD_PUESTO_DIRECCION where ID_PUESTO='"+id_pu.trim()+"'";
+            String sql = "SELECT ID_DEPARTAMENTO FROM RHVD_PUESTO_DIRECCION where ID_PUESTO='" + id_pu.trim() + "'";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -106,7 +107,7 @@ public class DepartamentoDao implements InterfaceDepartamentoDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT ID_DEPARTAMENTO, NO_DEP FROM RHVD_PUESTO_DIRECCION WHERE ID_DIRECCION='"+id+"' GROUP BY ID_DEPARTAMENTO, NO_DEP ORDER BY NO_DEP";
+            String sql = "SELECT ID_DEPARTAMENTO, NO_DEP FROM RHVD_PUESTO_DIRECCION WHERE ID_DIRECCION='" + id + "' GROUP BY ID_DEPARTAMENTO, NO_DEP ORDER BY NO_DEP";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -146,6 +147,186 @@ public class DepartamentoDao implements InterfaceDepartamentoDAO {
             this.conn.close();
         }
         return list;
+    }
+
+    @Override
+    public List<Map<String, ?>> Listar_dep_x_dir(String id_de) {
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select  d.NO_DEP, d.NO_CORTO_DEP, d.ES_DEPARTAMENTO, d.ID_DEPARTAMENTO\n"
+                    + "from rhtx_departamento d, rhtx_direccion r\n"
+                    + "where d.ID_DIRECCION=r.ID_DIRECCION and d.ID_DIRECCION='" + id_de.trim() + "' and r.ES_DIRECCION='1'";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("ID_DEPARTAMENTO"));
+                rec.put("nombre", rs.getString("NO_DEP"));
+                rec.put("ncorto", rs.getString("NO_CORTO_DEP"));
+                rec.put("estado", rs.getString("ES_DEPARTAMENTO"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
+    }
+
+    @Override
+    public boolean Editar_Dep(String id, String nombre, String ncorto, String estado, String idDir) {
+        boolean x = false;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_DEPARTAMENTO( ?, ?, ?, ?,?)}");
+            cst.setString(1, id);
+            cst.setString(2, nombre);
+            cst.setString(3, ncorto);
+            cst.setString(4, estado);
+            cst.setString(5, idDir);
+            x = cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de direcciones...");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return x;
+    }
+
+    @Override
+    public boolean Crear_Dep(String nombre, String ncorto, String estado, String idDir) {
+        boolean x = false;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DEPARTAMENTO( ?, ?, ?, ?)}");
+            cst.setString(1, nombre);
+            cst.setString(2, ncorto);
+            cst.setString(3, estado);
+            cst.setString(4, idDir);
+            x = cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de direcciones...");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return x;
+    }
+
+    @Override
+    public boolean Eliminar_Dep(String id) {
+        boolean x = false;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_ELIMINAR_DEPARTAMENTO(?)}");
+            cst.setString(1, id);
+            x = cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de direcciones...");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return x;
+    }
+
+    @Override
+    public boolean Activar_Dep(String id) {
+        boolean x = false;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_ACTIVAR_DEPARTAMENTO(?)}");
+            cst.setString(1, id);
+            x = cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de direcciones...");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return x;
+    }
+
+    @Override
+    public boolean Desactivar_Dep(String id) {
+        boolean x = false;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_DESACTIVAR_DEPARTAMENTO(?)}");
+            cst.setString(1, id);
+            x = cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de direcciones...");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return x;
+    }
+
+    @Override
+    public List<Map<String, ?>> Listar_dep_x_es(String idDir) {
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select  d.NO_DEP, d.NO_CORTO_DEP, d.ES_DEPARTAMENTO, d.ID_DEPARTAMENTO\n"
+                    + "from rhtx_departamento d, rhtx_direccion r\n"
+                    + "where d.ID_DIRECCION=r.ID_DIRECCION and d.ID_DIRECCION='"+idDir+"' and r.ES_DIRECCION='1' and d.ES_DEPARTAMENTO='1'";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("ID_DEPARTAMENTO"));
+                rec.put("nombre", rs.getString("NO_DEP"));
+                rec.put("ncorto", rs.getString("NO_CORTO_DEP"));
+                rec.put("estado", rs.getString("ES_DEPARTAMENTO"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
+
     }
 
 }
