@@ -6,8 +6,7 @@
 $(document).ready(function () {
     $('.inpEstado > option[value=1]').attr('selected', 'selected');
     GifLoader($('.div_t'), "Espere..", 1);
-    var idDep = "", idDir = "", idArea = "", idSec = "", valNum;
-    cargar_direccion();
+    
 });
 function GifLoader(contenedor, msg, action) {
     $('.headerr').hide();
