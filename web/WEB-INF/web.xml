@@ -147,6 +147,10 @@
         <servlet-name>CPago_Docente</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CPago_Docente</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CSolicitud_Requerimiento</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CSolicitud_Requerimiento</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
         <url-pattern>/trabajador</url-pattern>
@@ -290,6 +294,10 @@
     <servlet-mapping>
         <servlet-name>CPago_Docente</servlet-name>
         <url-pattern>/pago_docente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CSolicitud_Requerimiento</servlet-name>
+        <url-pattern>/solicitud_requerimiento</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>-1</session-timeout>
