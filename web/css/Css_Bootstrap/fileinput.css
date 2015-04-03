@@ -103,13 +103,13 @@
     border-radius: 5px;
     border: 1px solid #ddd;
     padding: 5px;
-    width: 100%;
+    /* width: 100%; */
     margin-bottom: 5px;
 }
 
 .file-preview-frame {
     display: table;
-    margin: 8px;
+    margin: 4px;
     height: 160px;
     border: 1px solid #ddd;
     box-shadow: 1px 1px 5px 0px #a2958a;
@@ -200,9 +200,10 @@
 }
 
 .file-drop-zone-title {
-	color: #aaa;
-    font-size: 40px;
-    padding: 85px 10px;
+    color: #aaa;
+
+    font-size: 20px;
+    padding: 50px 10px;
 }
 
 .highlighted {

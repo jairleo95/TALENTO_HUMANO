@@ -73,7 +73,6 @@
                 overlayOpacity: 0.8
                         // setupDemos is defined in assets/demo.js
             }, setupDemos);</script>
-        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="../../../css/Css_Bootstrap/fileinput.css" media="all" rel="stylesheet" type="text/css" />
     </head>
     <%  //String num = request.getParameter("num");
@@ -116,7 +115,7 @@
                         <article class="col-sm-12 col-md-12 col-lg-12">
 
                             <!-- Widget ID (each widget will need unique ID)-->
-                            <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
+                            <div class="jarviswidget jarviswidget-color-purple" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
                                 <!-- widget options:
                                         usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
                                         
@@ -131,7 +130,7 @@
                                 -->
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                    <h2>REGISTRAR DOCUMENTO ADJUNTO </h2>				
+                                    <h2>Registrar Documentos</h2>				
                                 </header>
 
 
@@ -244,7 +243,7 @@
                                                         </td>
                                                         <td class="table-bordered" style="text-align:center;" align="center">
                                                             <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
-                                                            <a type="button"  class="btn btn-file btn_reg_doc elimi" href="../../../documento?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getId_dgp()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                            <a type="button"  class="btn btn-danger btn-sm btn_reg_doc elimi" href="../../../documento?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getId_dgp()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                             <%} else {
                                                                     out.print("");
                                                                 }%>
@@ -302,7 +301,7 @@
                                                         <section class="col col-10" style="text-align:center;" align="center">
                                                             <%}%>
                                                             <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
-                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i>¿RECIBIDO EN FISICO?:</label>
+                                                            <label>¿RECIBIDO EN FISICO?:</label><br> <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                                 <% } else { %>
                                                                 <% if (d.getEs_documento_adjunto() == null) { %>
 
@@ -328,7 +327,7 @@
                                                     </td>
                                                     <td class="table-bordered" style="text-align:center;" align="center">
                                                         <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
-                                                        <a type="button"  class="btn btn-file btn_reg_doc elimi" href="../../../documento?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getId_dgp()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                        <a type="button"  class="btn btn-danger btn-sm btn_reg_doc elimi" href="../../../documento?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getId_dgp()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                         <%} else {
                                                                 out.print("");
                                                             }%>
@@ -427,7 +426,7 @@
 
                                                     <td class="table-bordered" style="text-align:center;" align="center">
                                                         <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
-                                                        <a type="button"  class="btn btn-file btn_reg_doc elimi" href="../../../documento?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getId_dgp()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                        <a type="button"  class="btn btn-danger btn-sm btn_reg_doc elimi" href="../../../documento?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getId_dgp()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                         <%} else {
                                                                 out.print("");
                                                             }%>
@@ -519,7 +518,7 @@
                                                     </td>
                                                     <td  style="text-align:center;" align="center">
                                                         <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
-                                                        <a type="button"  class="btn btn-file btn_reg_doc elimi" href="../../../documento?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getId_dgp()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                        <a type="button"  class="btn btn-danger btn-sm btn_reg_doc elimi" href="../../../documento?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getId_dgp()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                         <%} else {
                                                                 out.print("");
                                                             }%>
@@ -539,7 +538,7 @@
                                                 <td  style="width:50%;" align="center">
                                                     <table class="table table-striped">
                                                         <tr> 
-                                                            <td align="center" style="border:1px solid;border-color: #D2691E;height:30%">
+                                                            <td align="center" style="border:1px solid;border-color: #D2691E;height:30%;margin-top:0px">
                                                                 <strong><%=d.getDocumento()%></strong>
                                                             </td>
                                                         </tr><br>
@@ -585,10 +584,11 @@
                                                     <% } %>
                                                     <% } %>
                                                     <%if (d.getEs_documento_adjunto() == null) {%>
-                                                    <section class="col col-10" style="text-align:center;" align="center">
+                                                    <label>¿RECIBIDO EN FISICO?:</label><br>
+                                                 
                                                         <%}%>
                                                         <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
-                                                        <label class="toggle"  style="text-align:center;"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" style="margin-left:auto; margin-right:auto;" ><i data-swchon-text="SI" data-swchoff-text="NO"></i>¿RECIBIDO EN FISICO?:</label>
+                                                         <label class="toggle"  ><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" style="margin-left:auto; margin-right:auto;" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                             <% } else { %>
                                                             <% if (d.getEs_documento_adjunto() == null) { %>
 
@@ -606,12 +606,12 @@
                                                                 }
                                                             }%>
                                                         <%if (d.getEs_documento_adjunto() == null) {%>
-                                                    </section>
+                                           
                                                     <%}%>
                                                 </td>
                                                 <td  class="table-bordered" style="text-align:center;" align="center">
                                                     <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
-                                                    <a type="button"  class="btn btn-file btn_reg_doc elimi" href="../../../documento?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getId_dgp()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                    <a type="button"  class="btn btn-danger btn-sm btn_reg_doc elimi" href="../../../documento?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getId_dgp()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                     <%} else {
                                                             out.print("");
                                                         }%>
@@ -655,11 +655,12 @@
                                                         if (request.getParameter("P2").equals("TRUE")) {%>
                                                 <input  type='hidden' value='enter' name='P2'/>
 
-                                                <a class="btn btn-success" href="../../../dgp?iddgp=<%=request.getParameter("iddgp")%>&idtr=<%=request.getParameter("idtr")%>&opc=rd"><i class="fa fa-check"></i> CONTINUAR</a>
+                                                <a class="btn btn-success btn-labeled" href="../../../dgp?iddgp=<%=request.getParameter("iddgp")%>&idtr=<%=request.getParameter("idtr")%>&opc=rd">CONTINUAR <i class="fa fa-arrow-circle-right"></i> </a>
 
                                                 <button type="submit" class="btn btn-primary btn_reg_doc" style="display:none"> <i class="fa fa-plus-square"></i>
                                                     Registrar
                                                 </button>
+
 
                                                 <% }
                                                 } else {%>
@@ -822,15 +823,15 @@
                                                             timeout: 6000
                                                         });
                                                     }
-                                                    $(document).ready(function() {
+                                                    $(document).ready(function () {
 
                                                         pageSetUp();
-                                                        $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
+                                                        $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                                                             $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                                                         });
 
 
-                                                        $.each($(".file"), function(i) {
+                                                        $.each($(".file"), function (i) {
 
                                                             if ((i + 1) == 0) {
                                                                 $(".btn_reg_doc").hide();
@@ -840,11 +841,11 @@
                                                             }
 
                                                         });
-                                                        $(".DD").change(function() {
+                                                        $(".DD").change(function () {
 
                                                             $(".div-holi").text($(".DD").val());
                                                         });
-                                                        $(".elimi").click(function() {
+                                                        $(".elimi").click(function () {
                                                             var msg = confirm('¿tas seguro de eliminar?');
                                                             if (msg == true) {
                                                                 return true;
@@ -883,9 +884,10 @@
                 overwriteInitial: false,
                 maxFileSize: 500,
                 maxFilesNum: 10,
-                browseClass: "btn btn-primary btn-lg",
+                browseClass: "btn btn-primary btn-sm",
+                removeClass:"btn btn-danger btn-sm",
                 //allowedFileTypes: ['image', 'video', 'flash'],
-                slugCallback: function(filename) {
+                slugCallback: function (filename) {
                     return filename.replace('(', '_').replace(']', '_');
                 }
             });
@@ -905,14 +907,14 @@
                     {kvId: '10'}
                 ],
             });
-            $(".btn-warning").on('click', function() {
+            $(".btn-warning").on('click', function () {
                 if ($('#file-4').attr('disabled')) {
                     $('#file-4').fileinput('enable');
                 } else {
                     $('#file-4').fileinput('disable');
                 }
             });
-            $(".btn-info").on('click', function() {
+            $(".btn-info").on('click', function () {
                 $('#file-4').fileinput('refresh', {previewClass: 'bg-info'});
             });
             /*
@@ -923,7 +925,7 @@
              alert('File browse clicked for #file-4');
              });
              */
-            $(document).ready(function() {
+            $(document).ready(function () {
                 $("#test-upload").fileinput({
                     'showPreview': false,
                     'allowedFileExtensions': ['jpg', 'png', 'gif'],
@@ -940,7 +942,7 @@
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
-            (function() {
+            (function () {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;

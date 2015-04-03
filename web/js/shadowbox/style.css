@@ -8,7 +8,7 @@ html,body{height:100%;}
 body{font-size:14px;font-weight:200;line-height:24px;color:white;background:url(bg.gif) repeat;}
 body,strong,em,b,i{font-family:"HelveticaNeue-Light","Helvetica Neue",Helvetica,Arial,sans-serif;}
 
-a:link,a:visited{color:#0098ff;}
+//a:link,a:visited{color:#0098ff;}
 img{border:none;}
 p,h1,h2,h3,ol,ul,pre{margin-bottom:18px;}
 h1,h2,h3,#subtitle{font-weight:normal;}
@@ -21,7 +21,7 @@ pre,code{font:12px Monaco,monospace;background:white;color:black;}
 pre{padding:5px 10px;border:1px solid #ddd;line-height:15px;overflow-x:auto;}
 table{margin:0 auto 18px;}
 table th,table td{vertical-align:top;padding:4px 10px 4px 4px;}
-table th{text-decoration:underline;}
+//table th{text-decoration:underline;}
 table ul,table ol{margin-bottom:5px;}
 table td.align-right{text-align:right;}
 div.break{clear:both;height:18px;}
