@@ -59,7 +59,7 @@
                         }
                             %></td></tr>
                             <%if (tr.getAp_nombres_madre() == null || tr.getAp_nombres_padre() == null) {%>
-                            <%  if (rol.trim().equals("ROL-0002") || rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001")) {%>
+                            <%  if (rol.trim().equals("ROL-0002") || rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001") | rol.trim().equals("ROL-0013")) {%>
                     <tr><td colspan="2"> <a class="btn btn-success" href=Reg_Padres.jsp?idtr=<%=request.getParameter("idtr")%>">Agregar Padres</a></td></tr>
                     <%}%>
                     <%}%>
@@ -143,7 +143,7 @@
 
 
                 <tr><td colspan="2"> <label>Aun no se ha registrado los datos del cónyugue</label><br></td></tr> 
-                        <%  if (rol.trim().equals("ROL-0002") || rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001")) {%>
+                        <%  if (rol.trim().equals("ROL-0002") || rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001") || rol.trim().equals("ROL-0013")) {%>
                 <tr><td colspan="2"> <a class="btn btn-success" href=Reg_Conyugue.jsp?idtr=<%=request.getParameter("idtr")%>">Agregar Cónyugue</a></td></tr>
                 <%}%>
                 <%}%>
@@ -161,7 +161,7 @@
     <center>
 
         <%        if (LISTA_HIJOS.size() != 0) {
-                if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001")) {%>
+                if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001")|| rol.trim().equals("ROL-0013") ) {%>
         <%@include file="List_Hijo.jsp" %>
         <a href="Reg_Datos_Hijo.jsp?idtr=<%=request.getParameter("idtr")%>" class="btn btn-primary">Agregar un hijo</a>
         <%}%>
@@ -169,7 +169,7 @@
 
         <label>No se ha registrado ningun Hijo(a)</label><br>
 
-        <%  if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001")) {%>
+        <%  if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001")|| rol.trim().equals("ROL-0013")) {%>
         <a href="Reg_Datos_Hijo.jsp?idtr=<%=request.getParameter("idtr")%>" class="btn btn-primary">Registrar Hijos</a>
         <%}%>
     </center>

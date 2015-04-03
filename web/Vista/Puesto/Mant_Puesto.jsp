@@ -263,7 +263,7 @@
                             } else if (list[i].estado == 2) {
                                 text += '<li><a class="btnHab" value=' + (i + 1) + '>Habilitar</a></li>';
                             }
-                            text += '<li><a class="btnEliminar" value=' + (i + 1) + '>Eliminar</a></li></ul></div></center></td>';
+                            text += '</ul></div></center></td>';
                             text += "</tr>";
                         }
                         t.append(text);
@@ -378,8 +378,14 @@
                 }
                 function cargar_dep(idDir) {
                     var x = $('.inpDep');
+                    var y=$('.inpArea');
+                    var z=$('.inpSec');
+                    y.empty();
                     x.empty();
+                    z.empty();
                     x.append("<option value=''>Cargando..</option>");
+                    y.append("<option value=''>[Seleccione]</option>");
+                    z.append("<option value=''>[Seleccione]</option>");
                     $.post("../../Puesto", "opc=list_dep_es&id=" + idDir, function (objJson) {
                         x.empty();
                         x.append("<option value=''>[Seleccione]</option>");
@@ -392,8 +398,11 @@
                 }
                 function cargar_area(idDep){
                     var x = $('.inpArea');
+                    var z=$('.inpSec');
                     x.empty();
+                    z.empty();
                     x.append("<option value=''>Cargando..</option>");
+                    z.append("<option value=''>[Seleccione]</option>");
                     $.post("../../Puesto", "opc=list_area_es&id=" + idDep, function (objJson) {
                         x.empty();
                         x.append("<option value=''>[Seleccione]</option>");

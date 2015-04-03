@@ -199,7 +199,7 @@
                             } else if (list[i].estado == 2) {
                                 text += '<li><a class="btnHab" value=' + (i + 1) + '>Habilitar</a></li>';
                             }
-                            text += '<li><a class="btnEliminar" value=' + (i + 1) + '>Eliminar</a></li></ul></div></center></td>';
+                            text += '</ul></div></center></td>';
                             text += "</tr>";
                         }
                         t.append(text);

@@ -250,7 +250,7 @@
                             } else if (list[i].estado == 2) {
                                 tex += '<li><a class="btnHab" value=' + (i + 1) + '>Habilitar</a></li>';
                             }
-                            tex += '<li><a class="btnEliminar" value=' + (i + 1) + '>Eliminar</a></li></ul></div></center></td>';
+                            tex += '</ul></div></center></td>';
                             tex += "</tr>";
                         }
                         t.append(tex);
