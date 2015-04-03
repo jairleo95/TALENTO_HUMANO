@@ -1,10 +1,11 @@
+<%@page import="pe.edu.upeu.application.model.V_Solicitud_Requerimiento"%>
 <%
     HttpSession sesion = request.getSession();
     String id_user = (String) sesion.getAttribute("IDUSER");
     if (id_user != null) {
 %>
 
-<jsp:useBean id="List_id_Autorizados" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_solicitud" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -126,7 +127,6 @@
                                     <!-- widget edit box -->
                                     <div class="jarviswidget-editbox">
                                         <!-- This area used as dropdown edit box -->
-
                                     </div>
                                     <!-- end widget edit box -->
 
@@ -135,32 +135,47 @@
 
                                         <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                                             <thead>
-                                                <tr >
+                                                <tr>
                                                     <th><strong>Nro</strong></th>
+                                                    <th>Acciones</th>  
+                                                    <th data-class="expand"><strong>Apellidos y Nombres</strong></th>
                                                     <th data-hide="phone,tablet" ><strong>Departamento</strong></th>
                                                     <th data-class="expand" ><strong>Area</strong></th>
                                                     <th data-hide="phone,tablet"><strong>Puesto</strong></th>
-                                                    <th data-class="expand"><strong>Apellidos y Nombres</strong></th>
+
                                                     <th data-hide="phone,tablet"><strong>Fecha Inicio</strong></th>
                                                     <th data-hide="phone,tablet"><strong>Fecha Cese</strong></th>
                                                     <th  data-hide="phone,tablet">Fecha Solicitud</th>  
-                                                    <th  data-hide="phone,tablet">Acciones</th>  
                                                 </tr>
                                             </thead>
                                             <tbody> 
-
+                                                <%for (int i = 0; i < Listar_solicitud.size(); i++) {
+                                                        V_Solicitud_Requerimiento s = new V_Solicitud_Requerimiento();
+                                                        s = (V_Solicitud_Requerimiento) Listar_solicitud.get(i);
+                                                %>
                                                 <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td><%=(i + 1)%></td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                                Accion <span class="caret"></span>
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                                <li><a href="../../dgp?iddgp=<%=s.getId_dgp().trim()%>&idtr=<%=s.getId_trabajador().trim()%>&opc=Detalle"> Ver Requerimiento</a></li>
+                                                                <li class="divider"></li>
+                                                                <li><a href=""> Ver Solicitud</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </td>
+                                                    <td><a href="../../trabajador?idtr=<%=s.getId_trabajador()%>&opc=list"><strong><%=s.getAp_paterno() + " " + s.getAp_materno() + " " + s.getNo_trabajador()%></strong></a></td>
+                                                    <td><%=s.getNo_dep()%></td>
+                                                    <td><%=s.getNo_area()%></td>
+                                                    <td><%=s.getNo_puesto()%></td>
+                                                    <td><%=s.getFe_desde()%></td>
+                                                    <td><%=s.getFe_hasta()%></td>
+                                                    <td><%=s.getFe_creacion()%></td>
                                                 </tr>
-
+                                                <%}%>
                                             </tbody>
                                         </table>
                                     </div>

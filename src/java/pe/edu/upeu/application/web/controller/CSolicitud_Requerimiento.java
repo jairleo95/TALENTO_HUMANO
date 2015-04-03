@@ -11,6 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import pe.edu.upeu.application.dao.Solicitud_RequerimientoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceSolicitud_RequerimientoDAO;
 
 /**
  *
@@ -32,8 +34,10 @@ public class CSolicitud_Requerimiento extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String opc = request.getParameter("opc");
+        InterfaceSolicitud_RequerimientoDAO s = new Solicitud_RequerimientoDAO();
         try {
             if (opc.equals("Listar_Solicitud")) {
+                getServletContext().setAttribute("Listar_solicitud", s.Listar_solicitud());
                 response.sendRedirect("Vista/Solicitud/Reporte_Solicitud.jsp");
             }
 

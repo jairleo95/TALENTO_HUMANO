@@ -18,7 +18,7 @@
             Connection cx = Conexion.getConex();
 
             stmt2 = cx.createStatement();
-            rs = stmt2.executeQuery("select table_name, initcap(SUBSTR(COLUMN_NAME,1,2))||lower(SUBSTR(COLUMN_NAME,3,LENGTH(COLUMN_NAME))),column_name,data_type from user_tab_columns  where table_name='RHVD_DETALLE_CARGA_ACADEMICA'");
+            rs = stmt2.executeQuery("select table_name, initcap(SUBSTR(COLUMN_NAME,1,2))||lower(SUBSTR(COLUMN_NAME,3,LENGTH(COLUMN_NAME))),column_name,data_type from user_tab_columns  where table_name='RHVD_SOLICITUD_REQUERIMIENTO'");
 
    
     
@@ -32,7 +32,7 @@
     <body>
             <table >
 
-           <% String objeto = "ca"; 
+           <% String objeto = "v"; 
 
             while(rs.next()){
              
