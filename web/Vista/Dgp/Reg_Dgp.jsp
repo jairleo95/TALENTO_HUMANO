@@ -666,9 +666,9 @@
                                                     </div>
                                                     <div class="pago_cuotas_1">
                                                         <section class="col col-2">
-                                                            <label class="btn">
-                                                                <button type="button" class="btn btn-default" id="btn_add" >Agregar</button>
-                                                            </label>
+                                                          
+                                                                <a type="button" class="btn btn-default btn-lg" id="btn_add" >Agregar</a>
+                                                         
                                                         </section>
                                                         <section class="col col-2" >
                                                             <label class="input" id="titu"> CUOTA:
@@ -894,8 +894,18 @@
                                                             <tr><td align="center" colspan="2">Domingo</td></tr>
 
                                                         </table>
-                                                        <div class="h_total" style="color: red; font-weight: bold;">Horas Totales : 00:00 horas</div>
-                                                        <input  readonly="" type="text" name="h_total" class="h_total" required="" max="48"/>
+
+
+                                                        <div  class="row" >
+
+                                                            <section class="col col-4">
+                                                                <label class="input" id="titu">
+                                                                    <div class="h_total" style=" font-weight: bold;">Horas Totales : 00:00 horas</div>
+                                                                     <input  readonly="" type="text" name="h_total" class=" h_total" required="" max="48"/>
+                                                                </label>
+                                                            </section>
+                                                        </div>
+                                                       
                                                         <input  type="hidden" name="dep_actual" value="<%=id_dep%>" class="dep_actual" />
                                                     </div>
                                                 </fieldset>
