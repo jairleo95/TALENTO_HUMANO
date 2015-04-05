@@ -432,7 +432,7 @@ public class CTrabajador extends HttpServlet {
            if(edit.equals("ok")){
            response.sendRedirect("Vista/Trabajador/Datos_Generales.jsp?idtr=" + idtr +"&edit="+edit);
            }else{
-            response.sendRedirect("Vista/Trabajador/Datos_Generales.jsp?idtr=" + idtr);
+              response.sendRedirect("Vista/Trabajador/Datos_Generales.jsp?idtr=" + idtr);
            }
         }
         if (opc.equals("Editar_Asp_Acad")) {
@@ -491,7 +491,7 @@ public class CTrabajador extends HttpServlet {
             }else{
                 ES_CUENTA_SUELDO = "1";
             }
-            //tr.MOD_CUENTA_SUELDO(NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEM_NU_CUENTA, NO_BANCO_OTROS, idtr, ES_CUENTA_SUELDO);
+            tr.MOD_CUENTA_SUELDO(NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEM_NU_CUENTA, NO_BANCO_OTROS, idtr, ES_CUENTA_SUELDO);
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             getServletContext().setAttribute("List_Cuenta_Sueldo", tr.List_Cuenta_Sueldo(idtr));
             
