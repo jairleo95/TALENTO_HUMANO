@@ -221,4 +221,34 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
         return fecha;
     }
 
+    @Override
+    public List<Map<String, ?>> Listar_Plazo_id(String id_tipo) {
+
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select  *  from rhtr_plazo where ti_plazo='" + id_tipo.trim() + "'";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("id_plazo"));
+                rec.put("nombre", rs.getString("no_plazo"));
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return lista;
+
+    }
+
 }

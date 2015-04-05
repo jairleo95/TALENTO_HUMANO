@@ -49,7 +49,6 @@ public class CPlazo extends HttpServlet {
 
             }
             if (opc.equals("Registrar")) {
-
                 String NO_PLAZO = request.getParameter("nombre_plazo");
                 String DET_ALERTA = request.getParameter("descripcion");
                 String FE_DESDE = request.getParameter("desde");
@@ -80,12 +79,17 @@ public class CPlazo extends HttpServlet {
             if (opc.equals("Eliminar")) {
                 String id = request.getParameter("plz");
                 pl.REMOVE_PLAZO(id);
-
             }
             if (opc.equals("Ver_detalle_plazo")) {
-                String iddgp=request.getParameter("iddgp");
+                String iddgp = request.getParameter("iddgp");
                 getServletContext().setAttribute("Lista_detalle_plazo", pl.Lista_detalle_plazo(iddgp));
                 response.sendRedirect("Vista/Dgp/Plazo/Detalle_Plazo.jsp");
+            }
+            if (opc.equals("List_id_plazo")) {
+                String id = request.getParameter("tipo");
+                List<Map<String, ?>> lista = pl.Listar_Plazo_id(id);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
             }
         } catch (Exception e) {
             rpta.put("rpta", "-1");
