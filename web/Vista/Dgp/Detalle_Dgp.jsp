@@ -317,14 +317,14 @@
                                                     <label class="label lb_fecha_solicitud">Fecha de Inicio :</label>
                                                     <label class="input"> 
                                                         <input type="date" name="desde"  class="fe_inicio" required="">
-                                                        <input type="hidden" name="tipo_fecha"  class="tipo_fecha" required="">
+                                                        <input type="text" name="tipo_fecha"  class="tipo_fecha" value="date" required="">
                                                         <input type="hidden" name="iddgp"  value="<%=iddgp%>" class="dgp" required="">
                                                     </label>
                                                 </section>
                                                 <section class="col col-4">
                                                     <label class="label">Tipo de Plazo :</label>
                                                     <label class="select"> 
-                                                        <select name="tipo" class="tipo">
+                                                        <select name="tipo" class="tipo" required="">
                                                             <option value=''>[SELECCIONE]</option>
                                                             <option value='1'>Ingreso a planilla</option>
                                                             <option value='2'>Inicio de Contrato</option>
@@ -334,7 +334,7 @@
                                                 <section class="col col-4">
                                                     <label class="label">Plazo :</label>
                                                     <label class="select"> 
-                                                        <select name="plazo" class="plazo">
+                                                        <select name="plazo" class="plazo" required="">
                                                             <option value='' selected >[SELECCIONE]</option>
                                                         </select>          
                                                     </label>
@@ -343,14 +343,14 @@
                                             <section >
                                                 <label class="label">Motivo :</label>
                                                 <label class="textarea"> 										
-                                                    <textarea rows="3" class="comentario" name="info" placeholder=""></textarea> 
+                                                    <textarea rows="3" class="comentario" name="descripcion" placeholder="" required=""></textarea> 
                                                 </label>
                                             </section>
                                             <footer>
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">
                                                     Cancelar
                                                 </button>
-                                                <button type="submit" class="btn btn-primary" >
+                                                <button type="button" class="btn btn-primary sbm_solicitud" >
                                                     Enviar
                                                 </button>
                                             </footer>
@@ -454,16 +454,26 @@
                         if ($(this).val() == '2') {
                             $(".fe_inicio").attr("type", "month");
                             $(".lb_fecha_solicitud").text("Mes :");
-                            $(".tipo_fecha").text("month");
+                            $(".tipo_fecha").val("month");
                         }
                         if ($(this).val() == '1') {
                             $(".fe_inicio").attr("type", "date");
                             $(".lb_fecha_solicitud").text("Fecha de Inicio :");
-                            $(".tipo_fecha").text("date");
+                            $(".tipo_fecha").val("date");
                         }
                         list_select($(".plazo"), "../../plazo_dgp?opc=List_id_plazo", $(".solicitud_plazo").serialize(), "1", $(".tipo").val());
                     });
-                
+                    $(".sbm_solicitud").click(function () {
+                        if ($(".solicitud_plazo").valid() == true) {
+                            $.ajax({
+                                url: "../../solicitud_requerimiento",
+                                type: "post",
+                                data: $(".solicitud_plazo").serialize() + "&opc=Registrar_solicitud"
+                            });
+                        }
+
+                    });
+
                     /*
                      * Autostart Carousel
                      */

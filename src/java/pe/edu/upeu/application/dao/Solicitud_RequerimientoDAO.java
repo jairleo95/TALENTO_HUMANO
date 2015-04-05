@@ -15,6 +15,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceSolicitud_RequerimientoDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.V_Solicitud_Requerimiento;
+import pe.edu.upeu.application.web.controller.CConversion;
 
 /**
  *
@@ -23,6 +24,7 @@ import pe.edu.upeu.application.model.V_Solicitud_Requerimiento;
 public class Solicitud_RequerimientoDAO implements InterfaceSolicitud_RequerimientoDAO {
 
     ConexionBD conn;
+    CConversion c = new CConversion();
 
     @Override
     public List<V_Solicitud_Requerimiento> Listar_solicitud() {
@@ -73,12 +75,12 @@ public class Solicitud_RequerimientoDAO implements InterfaceSolicitud_Requerimie
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_SOLICITUD_DGP( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? )} ");
             cst.setString(1, null);
-            cst.setString(2, FE_DESDE);
+            cst.setString(2, c.convertFecha(FE_DESDE));
             cst.setString(3, ID_DGP);
             cst.setString(4, ID_PLAZO);
             cst.setString(5, DE_SOLICITUD);
-            cst.setString(6, ES_AUTORIZAR);
-            cst.setString(7, ES_SOLICITUD_DGP);
+            cst.setString(6, "0");
+            cst.setString(7, "1");
             cst.setString(8, IP_USUARIO);
             cst.setString(9, US_CREACION);
             cst.setString(10, FE_CREACION);
