@@ -292,18 +292,13 @@
                                         <button type="submit" class="btn btn-success btn-labeled"><span class="btn-label"><i class="fa fa-arrow-circle-right"></i></span>
                                             TERMINAR
                                         </button>
-                                        
-
                                     </footer>
-                                </form></td></tr>
+                                </form>
                                 <%}
                                     }%>
 
                             </div>
                         </section>
-
-
-
 
                         <!-- Modal -->
                         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -313,22 +308,43 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                                             &times;
                                         </button>
-                                        <h4 class="modal-title" id="myModalLabel">Solicitud de Requerimiento</h4>
+                                        <h4 class="modal-title" id="myModalLabel"><strong>Solicitud de Requerimiento</strong></h4>
                                     </div>
                                     <div class="modal-body">
-                                        <form id="checkout-form" class="smart-form" >
+                                        <form id="checkout-form" class="smart-form solicitud_plazo">
                                             <div class="row">
-                                                <section class="col col-6">
-                                                    <label class="input"> <i class="icon-prepend fa fa-user"></i>
-                                                        <input type="text" name="fname" placeholder="First name" required="">
+                                                <section class="col col-4">
+                                                    <label class="label">Fecha de Inicio :</label>
+                                                    <label class="input"> 
+                                                        <input type="date" name="desde"  class="fe_inicio" required="">
                                                     </label>
                                                 </section>
-                                                <section class="col col-6">
-                                                    <label class="input"> <i class="icon-prepend fa fa-user"></i>
-                                                        <input type="text" name="lname" placeholder="Last name">
+                                                <section class="col col-4">
+                                                    <label class="label">Tipo de Plazo :</label>
+                                                    <label class="select"> 
+                                                        <select name="tipo" class="tipo">
+                                                            <option value=''>[SELECCIONE]</option>
+                                                            <option value='1'>Ingreso a planilla</option>
+                                                            <option value='2'>Inicio de Contrato</option>
+                                                        </select>          
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">Plazo :</label>
+                                                    <label class="select"> 
+                                                        <select name="plazo" class="plazo">
+                                                            <option value=''>[SELECCIONE]</option>
+                                                        </select>          
                                                     </label>
                                                 </section>
                                             </div>
+                                            <section >
+                                                <label class="label">Comentario :</label>
+                                                <label class="textarea"> 										
+                                                    <textarea rows="3" class="comentario" name="info" placeholder=""></textarea> 
+                                                </label>
+
+                                            </section>
                                             <footer>
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">
                                                     Cancelar
@@ -423,7 +439,7 @@
 
         <!-- PAGE RELATED PLUGIN(S) -->
         <script src="../../js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-
+        <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
 
 
         <script type="text/javascript">
@@ -433,6 +449,11 @@
                 $(document).ready(function () {
 
                     pageSetUp();
+                    $(".tipo").change(function () {
+                        list_select($(".plazo"), "../../plazo_dgp?opc=List_id_plazo", $(".solicitud_plazo").serialize()), "1", $(".tipo").val());
+
+                    });
+
 
                     /*
                      * Autostart Carousel
