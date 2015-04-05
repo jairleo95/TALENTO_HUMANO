@@ -1216,7 +1216,7 @@
                          }*/
 
                     });
-                    if($("#editar").val("ok")){
+                    if($("#editar").val() == 'ok'){
                     document.getElementById("select-doc").disabled = true;
                       document.getElementById("doc").disabled = true;
                     }

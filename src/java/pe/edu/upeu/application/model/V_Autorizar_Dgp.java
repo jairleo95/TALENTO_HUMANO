@@ -38,6 +38,7 @@ public class V_Autorizar_Dgp {
     private String ta_ar_foto;
     private String ti_ar_foto;
     private String fe_creacion;
+    private String fe_autorizacion;
     private String ver_list_plazo;
     private String elab_contrato;
     private String val_firm_contrato;
@@ -52,6 +53,15 @@ public class V_Autorizar_Dgp {
     private String di_correo_personal;
     private String di_correo_inst;
 
+    public String getFe_autorizacion() {
+        return fe_autorizacion;
+    }
+
+    public void setFe_autorizacion(String fe_autorizacion) {
+        this.fe_autorizacion = fe_autorizacion;
+    }
+    
+    
     public String getDi_correo_personal() {
         return di_correo_personal;
     }
@@ -130,7 +140,7 @@ public class V_Autorizar_Dgp {
             String id_requerimiento, String id_tipo_planilla, String no_req, String id_pasos, String no_usuario, String id_usuario, String no_seccion, String no_area,
             String ar_foto, String de_foto, String id_foto, String no_ar_foto, String ta_ar_foto, String ti_ar_foto, String fe_creacion, int val_plazo, String ver_list_plazo,
             String elab_contrato, String val_firm_contrato, String no_dep, String mes_creacion, int val_cod_aps_empleado, int val_cod_huella, int co_aps, int co_huella_digital,
-            String li_motivo, String es_mfl, String di_correo_personal, String di_correo_inst) {
+            String li_motivo, String es_mfl, String di_correo_personal, String di_correo_inst, String fe_autorizacion) {
         this.id_trabajador = id_trabajador;
         this.no_trabajador = no_trabajador;
         this.ap_paterno = ap_paterno;
@@ -158,6 +168,7 @@ public class V_Autorizar_Dgp {
         this.ta_ar_foto = ta_ar_foto;
         this.ti_ar_foto = ti_ar_foto;
         this.fe_creacion = fe_creacion;
+        this.fe_autorizacion = fe_autorizacion;
         this.val_plazo = val_plazo;
         this.ver_list_plazo = ver_list_plazo;
         this.elab_contrato = elab_contrato;
@@ -202,6 +213,7 @@ public class V_Autorizar_Dgp {
         this.ta_ar_foto = "";
         this.ti_ar_foto = "";
         this.fe_creacion = "";
+        this.fe_autorizacion = "";
         this.ver_list_plazo = "";
         this.elab_contrato = "";
         this.val_firm_contrato = "";

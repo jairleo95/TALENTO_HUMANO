@@ -1040,7 +1040,7 @@
                         document.getElementById("nu_cuen_otros").readOnly = true;
                         $("#texto").show();
                     }
-                    if ($("#editar").val("ok")) {
+                    if ($("#editar").val() == "ok") {
                         document.getElementById("banco").disabled = true;
                         document.getElementById("nu_cuen_otros").disabled = true;
                         document.getElementById("nu_cuen").disabled = true;
