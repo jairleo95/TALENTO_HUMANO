@@ -424,13 +424,15 @@ public class CTrabajador extends HttpServlet {
             String LI_TIPO_TRABAJADOR = request.getParameter("TIPO_TRABAJADOR_ID");
             String idtr = request.getParameter("idtr");
             out.print(edit);
+            
            tr.MOD_DAT_GEN(AP_PATERNO, AP_MATERNO, NO_TRABAJADOR, TI_DOC, NU_DOC, ES_CIVIL, FE_NAC, ID_NACIONALIDAD, ID_DEPARTAMENTO, ID_PROVINCIA, ID_DISTRITO, TE_TRABAJADOR, CL_TRA, DI_CORREO_PERSONAL, DI_CORREO_INST, CO_SISTEMA_PENSIONARIO, ES_SEXO, LI_GRUPO_SANGUINEO, ID_NO_AFP, ES_AFILIADO_ESSALUD, LI_TIPO_TRABAJADOR, ES_FACTOR_RH, idtr);
            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
            
+           out.print(TI_DOC+"--"+NU_DOC);
            if(edit.equals("ok")){
-            response.sendRedirect("Vista/Trabajador/Datos_Generales.jsp?idtr=" + idtr +"&edit="+edit);
+           response.sendRedirect("Vista/Trabajador/Datos_Generales.jsp?idtr=" + idtr +"&edit="+edit);
            }else{
-               response.sendRedirect("Vista/Trabajador/Datos_Generales.jsp?idtr=" + idtr);
+            response.sendRedirect("Vista/Trabajador/Datos_Generales.jsp?idtr=" + idtr);
            }
         }
         if (opc.equals("Editar_Asp_Acad")) {
