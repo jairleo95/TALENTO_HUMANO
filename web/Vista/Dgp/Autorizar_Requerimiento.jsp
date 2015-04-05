@@ -328,7 +328,7 @@
                                         <%if (idrol.trim().equals("ROL-0007") | idrol.trim().equals("ROL-0001")) {%>
                                         <button type="button" class="btn btn-success btn_cod_huella">Procesar codigos</button>
                                         <%}%>
-                                        <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
+                                        <table id="dt_basic1" class="table table-striped table-bordered table-hover" width="100%">
                                             <thead>
                                                 <tr data-hide="phone,tablet"> <th><strong>Nro</strong></th>
                                                     <th data-hide="phone,tablet"><strong>Acción</strong></th>
@@ -859,6 +859,25 @@
                                                     // Initialize the responsive datatables helper once.
                                                     if (!responsiveHelper_dt_basic) {
                                                         responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
+                                                    }
+                                                },
+                                                "rowCallback": function (nRow) {
+                                                    responsiveHelper_dt_basic.createExpandIcon(nRow);
+                                                },
+                                                "drawCallback": function (oSettings) {
+                                                    responsiveHelper_dt_basic.respond();
+                                                }
+                                            });
+                                            
+                                            $('#dt_basic1').dataTable({
+                                                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
+                                                        "t" +
+                                                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                                                "autoWidth": true,
+                                                "preDrawCallback": function () {
+                                                    // Initialize the responsive datatables helper once.
+                                                    if (!responsiveHelper_dt_basic) {
+                                                        responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic1'), breakpointDefinition);
                                                     }
                                                 },
                                                 "rowCallback": function (nRow) {
