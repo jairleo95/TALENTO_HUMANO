@@ -151,7 +151,8 @@ public class CAutorizacion extends HttpServlet {
             getServletContext().setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
              getServletContext().setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
              out.print( a.List_Autorizados(idpu).size());
-              response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp");
+             out.print( idpu);
+             response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp");
 
         }
         /* } finally {

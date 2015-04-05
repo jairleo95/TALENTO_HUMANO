@@ -149,7 +149,7 @@
 
 
                             <!-- Widget ID (each widget will need unique ID)-->
-                            <div class="jarviswidget jarviswidget-color-red" id="wid-id-0" data-widget-editbutton="false">
+                            <div class="jarviswidget jarviswidget-color-red" id="wid-id-2" data-widget-editbutton="false">
                                 <!-- widget options:
                                 usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
@@ -585,7 +585,7 @@
 
 
                             <!-- Widget ID (each widget will need unique ID)-->
-                            <div class="jarviswidget jarviswidget-color-red" id="wid-id-0" data-widget-editbutton="false">
+                            <div class="jarviswidget jarviswidget-color-red" id="wid-id-1" data-widget-editbutton="false">
                                 <!-- widget options:
                                 usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 

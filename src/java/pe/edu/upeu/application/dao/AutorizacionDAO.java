@@ -422,7 +422,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 v.setAp_paterno(rs.getString("ap_paterno"));
                 v.setAp_materno(rs.getString("ap_materno"));
                 v.setNo_puesto(rs.getString("no_puesto"));
-                v.setNo_puesto(rs.getString("id_puesto"));
+                v.setNo_puesto(rs.getString("no_puesto"));
                 v.setNo_req(rs.getString("no_req"));
                 v.setNo_area(rs.getString("no_area"));
                // v.setAr_foto(rs.getString("ar_foto"));
