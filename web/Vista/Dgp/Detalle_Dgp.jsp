@@ -318,6 +318,7 @@
                                                     <label class="input"> 
                                                         <input type="date" name="desde"  class="fe_inicio" required="">
                                                         <input type="hidden" name="tipo_fecha"  class="tipo_fecha" required="">
+                                                        <input type="hidden" name="iddgp"  value="<%=iddgp%>" class="dgp" required="">
                                                     </label>
                                                 </section>
                                                 <section class="col col-4">
@@ -462,9 +463,7 @@
                         }
                         list_select($(".plazo"), "../../plazo_dgp?opc=List_id_plazo", $(".solicitud_plazo").serialize(), "1", $(".tipo").val());
                     });
-                    $(".fe_inicio").change(function () {
-                        alert($(this).val())
-                    });
+                
                     /*
                      * Autostart Carousel
                      */

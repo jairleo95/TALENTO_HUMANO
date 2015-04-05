@@ -5,8 +5,10 @@
  */
 package pe.edu.upeu.application.dao;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import pe.edu.upeu.application.dao_imp.InterfaceSolicitud_RequerimientoDAO;
@@ -62,6 +64,42 @@ public class Solicitud_RequerimientoDAO implements InterfaceSolicitud_Requerimie
             }
         }
         return lista;
+    }
+
+    @Override
+    public String INSERT_SOLICITUD_DGP(String ID_SOLICITUD_DGP, String FE_DESDE, String ID_DGP, String ID_PLAZO, String DE_SOLICITUD, String ES_AUTORIZAR, String ES_SOLICITUD_DGP, String IP_USUARIO, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String NO_USUARIO) {
+        String id = "";
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_SOLICITUD_DGP( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? )} ");
+            cst.setString(1, null);
+            cst.setString(2, FE_DESDE);
+            cst.setString(3, ID_DGP);
+            cst.setString(4, ID_PLAZO);
+            cst.setString(5, DE_SOLICITUD);
+            cst.setString(6, ES_AUTORIZAR);
+            cst.setString(7, ES_SOLICITUD_DGP);
+            cst.setString(8, IP_USUARIO);
+            cst.setString(9, US_CREACION);
+            cst.setString(10, FE_CREACION);
+            cst.setString(11, US_MODIF);
+            cst.setString(12, FE_MODIF);
+            cst.setString(13, NO_USUARIO);
+            cst.registerOutParameter(14, Types.CHAR);
+            cst.execute();
+            id = cst.getString(14);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR :" + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return id;
     }
 
 }

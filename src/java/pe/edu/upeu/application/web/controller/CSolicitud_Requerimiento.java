@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import pe.edu.upeu.application.dao.Solicitud_RequerimientoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceSolicitud_RequerimientoDAO;
 
@@ -35,10 +36,31 @@ public class CSolicitud_Requerimiento extends HttpServlet {
         PrintWriter out = response.getWriter();
         String opc = request.getParameter("opc");
         InterfaceSolicitud_RequerimientoDAO s = new Solicitud_RequerimientoDAO();
+        HttpSession sesion = request.getSession(true);
+        String iduser = (String) sesion.getAttribute("IDUSER");
         try {
             if (opc.equals("Listar_Solicitud")) {
                 getServletContext().setAttribute("Listar_solicitud", s.Listar_solicitud());
                 response.sendRedirect("Vista/Solicitud/Reporte_Solicitud.jsp");
+            }
+            if (opc.equals("Registrar_solicitud")) {
+                String FE_DESDE = request.getParameter("FE_DESDE");
+                String ID_DGP = request.getParameter("ID_DGP");
+                String ID_PLAZO = request.getParameter("ID_PLAZO");
+                String DE_SOLICITUD = request.getParameter("DE_SOLICITUD");
+                String ES_AUTORIZAR = request.getParameter("ES_AUTORIZAR");
+                String ES_SOLICITUD_DGP = request.getParameter("ES_SOLICITUD_DGP");
+                String IP_USUARIO = request.getParameter("IP_USUARIO");
+                String US_CREACION = request.getParameter("US_CREACION");
+                String FE_CREACION = request.getParameter("FE_CREACION");
+                String US_MODIF = request.getParameter("US_MODIF");
+                String FE_MODIF = request.getParameter("FE_MODIF");
+                String NO_USUARIO = request.getParameter("NO_USUARIO");
+                String tipo = request.getParameter("tipo");
+                if (tipo.equals("month")) {
+                    FE_DESDE = FE_DESDE + "-01";
+                }
+                s.INSERT_SOLICITUD_DGP(null, FE_DESDE, ID_DGP, ID_PLAZO, DE_SOLICITUD, ES_AUTORIZAR, ES_SOLICITUD_DGP, IP_USUARIO, iduser, FE_CREACION, US_MODIF, FE_MODIF, NO_USUARIO);
             }
 
         } catch (Exception e) {
