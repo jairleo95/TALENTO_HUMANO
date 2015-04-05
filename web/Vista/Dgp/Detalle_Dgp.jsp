@@ -314,9 +314,10 @@
                                         <form id="checkout-form" class="smart-form solicitud_plazo">
                                             <div class="row">
                                                 <section class="col col-4">
-                                                    <label class="label">Fecha de Inicio :</label>
+                                                    <label class="label lb_fecha_solicitud">Fecha de Inicio :</label>
                                                     <label class="input"> 
                                                         <input type="date" name="desde"  class="fe_inicio" required="">
+                                                        <input type="hidden" name="tipo_fecha"  class="tipo_fecha" required="">
                                                     </label>
                                                 </section>
                                                 <section class="col col-4">
@@ -333,17 +334,16 @@
                                                     <label class="label">Plazo :</label>
                                                     <label class="select"> 
                                                         <select name="plazo" class="plazo">
-                                                            <option value=''>[SELECCIONE]</option>
+                                                            <option value='' selected >[SELECCIONE]</option>
                                                         </select>          
                                                     </label>
                                                 </section>
                                             </div>
                                             <section >
-                                                <label class="label">Comentario :</label>
+                                                <label class="label">Motivo :</label>
                                                 <label class="textarea"> 										
                                                     <textarea rows="3" class="comentario" name="info" placeholder=""></textarea> 
                                                 </label>
-
                                             </section>
                                             <footer>
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -450,11 +450,21 @@
 
                     pageSetUp();
                     $(".tipo").change(function () {
-                        list_select($(".plazo"), "../../plazo_dgp?opc=List_id_plazo", $(".solicitud_plazo").serialize()), "1", $(".tipo").val());
-
+                        if ($(this).val() == '2') {
+                            $(".fe_inicio").attr("type", "month");
+                            $(".lb_fecha_solicitud").text("Mes :");
+                            $(".tipo_fecha").text("month");
+                        }
+                        if ($(this).val() == '1') {
+                            $(".fe_inicio").attr("type", "date");
+                            $(".lb_fecha_solicitud").text("Fecha de Inicio :");
+                            $(".tipo_fecha").text("date");
+                        }
+                        list_select($(".plazo"), "../../plazo_dgp?opc=List_id_plazo", $(".solicitud_plazo").serialize(), "1", $(".tipo").val());
                     });
-
-
+                    $(".fe_inicio").change(function () {
+                        alert($(this).val())
+                    });
                     /*
                      * Autostart Carousel
                      */
