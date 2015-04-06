@@ -924,7 +924,7 @@
                                                             %>
                                                             <!--<input type="text" value="<%=t.getFe_nac()%>"> -->               
                                                             <%String idtr = request.getParameter("idtr");%>
-                                                            <input type="hidden" name="editar" value="<%=edit%>"/>
+                                                            <input type="hidden" name="editar" id="editar" value="<%=edit%>"/>
                                                             <input type="hidden" name="idtr" value="<%=idtr.trim()%>"/>
                                                             <input type="hidden" name="opc" value="Modificar_Dat_Gen">
                                                             <input type="hidden" name="TI_DOC" value="<%=t.getTi_doc() %>">
@@ -1202,8 +1202,8 @@
                     $("#no_cuen_ban").hide();
                     $("#generar").hide();
                     $("#no_cuen_otros").hide();
+                    alert($("#editar").val());
                     //alert($("#es_cuenta").val());
-
                     $(".fecha").keyup(function() {
 
                         /*var arr_date = $(this).val().split("-");
@@ -1216,9 +1216,10 @@
                          }*/
 
                     });
-                    if($("#editar").val() == 'ok'){
+                    if($("#editar").val() === 'ok'){
                     document.getElementById("select-doc").disabled = true;
-                      document.getElementById("doc").disabled = true;
+                    document.getElementById("doc").disabled = true;
+                    alert();
                     }
                     $("#banco").change(function() {
                         cuenta_bancaria($(this).val());

@@ -775,7 +775,7 @@
                                                         <%String idtr = request.getParameter("idtr");%>
                                                         <input type="hidden" name="idtr" value="<%=idtr%>"/>
                                                         <input type="hidden" name="opc" value="Modificar_Asp_Acad">
-                                                        <input type="hidden" name="editar" value="<%=edit%>">
+                                                        <input type="hidden" name="editar" id="editar" value="<%=edit%>">
                                                         <input type="hidden" name="BAN" value="<%=cs.getNo_banco() %>">
                                                         <input type="hidden" name="BAN_OTROS" value="<%=cs.getNo_banco_otros() %>">
                                                         <input type="hidden" name="CUEN" value="<%=cs.getNu_cuenta() %>">

@@ -60,6 +60,11 @@ public class CSolicitud_Requerimiento extends HttpServlet {
                 }
                 s.INSERT_SOLICITUD_DGP(null, FE_DESDE, ID_DGP, ID_PLAZO, DE_SOLICITUD, ES_AUTORIZAR, ES_SOLICITUD_DGP, IP_USUARIO, iduser, FE_CREACION, US_MODIF, FE_MODIF, NO_USUARIO);
             }
+            if(opc.equals("Reg_List_Solicitud")){
+                String iddgp = request.getParameter("iddgp");
+                response.sendRedirect("Vista/Solicitud/Reg_List_Solicitud.jsp");
+                out.print(iddgp);
+            }
 
        
     }
