@@ -317,7 +317,7 @@
                                                     <label class="label lb_fecha_solicitud">Fecha de Inicio :</label>
                                                     <label class="input"> 
                                                         <input type="date" name="desde"  class="fe_inicio" required="">
-                                                        <input type="text" name="tipo_fecha"  class="tipo_fecha" value="date" required="">
+                                                        <input type="hidden" name="tipo_fecha"  class="tipo_fecha" value="date" required="">
                                                         <input type="hidden" name="iddgp"  value="<%=iddgp%>" class="dgp" required="">
                                                     </label>
                                                 </section>
