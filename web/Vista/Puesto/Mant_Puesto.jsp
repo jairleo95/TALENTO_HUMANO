@@ -35,7 +35,7 @@
                                     <div class="jarviswidget-editbox">
                                     </div>
                                     <div class="widget-body no-padding">
-                                        <form class="smart-form form_dep">
+                                        <form class="smart-form form_f">
                                             <fieldset>
                                                 <div class="row">
                                                     <section class="col col-12">
@@ -46,19 +46,19 @@
                                                     <section class="col col-3">
                                                         <label class="label">Nombre</label>
                                                         <label class="input">
-                                                            <input class="inpNombre"type="text" placeholder="Escribir nombre de Puesto" required="" maxlength="100">
+                                                            <input class="inpNombre"type="text" placeholder="Escribir nombre de Puesto" required="" maxlength="100" name="name">
                                                         </label>
                                                     </section>
                                                     <section class="col col-3">
                                                         <label class="label">Nombre Corto</label>
                                                         <label class="input">
-                                                            <input class="inpNCorto"type="text" placeholder="Escribir nombre Corto" required="" maxlength="20">
+                                                            <input class="inpNCorto"type="text" placeholder="Escribir nombre Corto" required="" maxlength="20" name="name2">
                                                         </label>
                                                     </section>
                                                     <section class="col col-3">
                                                         <label class="label">Estado</label>
                                                         <label class="select">
-                                                            <select class="inpEstado" required="0">
+                                                            <select class="inpEstado" required="0" name="est">
                                                                 <option value="">[Seleccione]</option>
                                                                 <option value="1">Hablilitado</option>
                                                                 <option value="2">Deshabilitado</option>
@@ -68,7 +68,7 @@
                                                     <section class="col col-3">
                                                         <label class="label">Co. Grupo</label>
                                                         <label class="input">
-                                                            <input class="inpCGrupo"type="text" placeholder="Co Grupo" required="" maxlength="5" >
+                                                            <input class="inpCGrupo"type="text" placeholder="Co Grupo" required="" maxlength="5" name="cgru">
                                                         </label>
                                                     </section>
                                                 </div>
@@ -76,7 +76,7 @@
                                                     <section class="col col-3">
                                                         <label class="label">Direccion</label>
                                                         <label class="select">
-                                                            <select class="inpDireccion" required="0">
+                                                            <select class="inpDireccion" required="0" name="dir">
                                                                 <option value="">[Seleccione]</option>
                                                             </select>
                                                             <i></i></label>
@@ -84,7 +84,7 @@
                                                     <section class="col col-3">
                                                         <label class="label">Departamento</label>
                                                         <label class="select">
-                                                            <select class="inpDep" required="0">
+                                                            <select class="inpDep" required="0" name="dep">
                                                                 <option value="">[Seleccione]</option>
                                                             </select>
                                                             <i></i></label>
@@ -92,7 +92,7 @@
                                                     <section class="col col-3">
                                                         <label class="label">Area</label>
                                                         <label class="select">
-                                                            <select class="inpArea" required="0">
+                                                            <select class="inpArea" required="0" name="are">
                                                                 <option value="">[Seleccione]</option>
                                                             </select>
                                                             <i></i></label>
@@ -100,7 +100,7 @@
                                                     <section class="col col-3">
                                                         <label class="label">Seccion</label>
                                                         <label class="select">
-                                                            <select class="inpSec" required="0">
+                                                            <select class="inpSec" required="0" name="sec">
                                                                 <option value="">[Seleccione]</option>
                                                             </select>
                                                             <i></i></label>
@@ -109,8 +109,8 @@
                                             </fieldset>
                                             <footer>
                                                 <input class="inpId" type="hidden" value="">
-                                                <input type="button" class="btn btn-primary btnAceptar" value="Aceptar">
-                                                <input type="reset" class="btn btn-default" value="Cancelar">
+                                                <input type="submit" class="btn btn-primary btnAceptar" value="Aceptar">
+                                                <input type="reset" class="btn btn-default btnCancelar" value="Cancelar">
                                             </footer>
                                         </form>
                                     </div>
@@ -180,7 +180,7 @@
             $(document).ready(function () {
                 $('.inpEstado > option[value=1]').attr('selected', 'selected');
                 GifLoader($('.div_t'), "Espere..", 1);
-                var idDep = "", idDir = "",idArea="",idSec="", valNum;
+                var idDep = "", idDir = "", idArea = "", idSec = "", valNum;
                 cargar_direccion();
 
                 $('.inpDireccion').change(function () {
@@ -202,7 +202,7 @@
 
                 });
                 $('.inpArea').change(function () {
-                    
+
                     if ($(this).val() == "" && idDep == "") {
                         GifLoader($('.div_t'), "Seleccione un Area", 2);
                     } else {
@@ -212,7 +212,7 @@
 
                 });
                 $('.inpSec').change(function () {
-                    
+
                     if ($(this).val() == "" && idDep == "") {
                         GifLoader($('.div_t'), "Seleccione un Area", 2);
                     } else {
@@ -308,21 +308,49 @@
                     });
                 }
                 $('.btnAceptar').click(function () {
-                    var id, nombre, ncorto, estado, cGrupo;
-                    id = $('.inpId').val();
-                    nombre = $('.inpNombre').val();
-                    ncorto = $('.inpNCorto').val();
-                    estado = $('.inpEstado').val();
-                    cGrupo = $('.inpCGrupo').val();
-                    if ($('.titulo_t').attr('value') == 1) {
-                        crear(nombre, ncorto, estado,cGrupo, idSec);
-                    } else if ($('.titulo_t').attr('value') == 2) {
-                        editar(id, nombre, ncorto, estado, cGrupo, idSec);
-                        $('.titulo_t').text('Agregar Puesto');
-                        $('.titulo_t').attr('value', '1');
-                    }
-                    $('.inpNombre').val("");
-                    $('.inpNCorto').val("");
+                    $('.form_f').validate({
+                        rules: {
+                            name: {required: true},
+                            name2: {required: true},
+                            cgru: {required: true},
+                            est: {required: 0},
+                            dir: {required: 0},
+                            dep: {required: 0},
+                            are: {required: 0},
+                            sec: {required: 0}
+                        },
+                        messages: {
+                            name: "Escribir nombre de Puesto",
+                            name2: "Escribir nombre Corto",
+                            cgru: "Escribir codigo de Grupo",
+                            est: "Seleccione Estado",
+                            dir: "Seleccione Direccion",
+                            dep: "Seleccione Departamento",
+                            are: "Seleccione Area",
+                            sec: "Seleccione Seccion"
+                        },
+                        submitHandler: function (form) {
+                            var id, nombre, ncorto, estado, cGrupo;
+                            id = $('.inpId').val();
+                            nombre = $('.inpNombre').val();
+                            ncorto = $('.inpNCorto').val();
+                            estado = $('.inpEstado').val();
+                            cGrupo = $('.inpCGrupo').val();
+                            if ($('.titulo_t').attr('value') == 1) {
+                                crear(nombre, ncorto, estado, cGrupo, idSec);
+                            } else if ($('.titulo_t').attr('value') == 2) {
+                                editar(id, nombre, ncorto, estado, cGrupo, idSec);
+                                $('.titulo_t').text('Agregar Puesto');
+                                $('.titulo_t').attr('value', '1');
+                            }
+                            $('.inpNombre').val("");
+                            $('.inpNCorto').val("");
+                            $('.inpCGrupo').val("");
+                        }
+                    });
+                });
+                $('.btnCancelar').click(function(){
+                    cargar_direccion(); 
                 });
                 function desactivar(id, idD) {
                     $.post("../../Puesto", "opc=desactivar_puesto&id=" + id, function () {
@@ -339,14 +367,14 @@
                         cargar_t(idD);
                     });
                 }
-                function editar(id, nombre, ncorto, estado,cGrupo,idD) {
-                    var data = "opc=editar_puesto&id=" + id + "&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado+ "&cGrupo="+cGrupo+"&idSec="+idD;
+                function editar(id, nombre, ncorto, estado, cGrupo, idD) {
+                    var data = "opc=editar_puesto&id=" + id + "&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado + "&cGrupo=" + cGrupo + "&idSec=" + idD;
                     $.post("../../Puesto", data, function () {
                         cargar_t(idD);
                     });
                 }
-                function crear(nombre, ncorto, estado,cGrupo, idD) {
-                    var data = "opc=crear_puesto&&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado +"&cGrupo="+cGrupo+ "&idSec=" + idD;
+                function crear(nombre, ncorto, estado, cGrupo, idD) {
+                    var data = "opc=crear_puesto&&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado + "&cGrupo=" + cGrupo + "&idSec=" + idD;
                     $.post("../../Puesto", data, function () {
                         cargar_t(idD);
                     });
@@ -378,8 +406,8 @@
                 }
                 function cargar_dep(idDir) {
                     var x = $('.inpDep');
-                    var y=$('.inpArea');
-                    var z=$('.inpSec');
+                    var y = $('.inpArea');
+                    var z = $('.inpSec');
                     y.empty();
                     x.empty();
                     z.empty();
@@ -396,9 +424,9 @@
                         GifLoader($('.div_t'), "Seleccione un Departamento", 2);
                     });
                 }
-                function cargar_area(idDep){
+                function cargar_area(idDep) {
                     var x = $('.inpArea');
-                    var z=$('.inpSec');
+                    var z = $('.inpSec');
                     x.empty();
                     z.empty();
                     x.append("<option value=''>Cargando..</option>");
@@ -413,7 +441,7 @@
                         GifLoader($('.div_t'), "Seleccione un Area", 2);
                     });
                 }
-                function cargar_seccion(idArea){
+                function cargar_seccion(idArea) {
                     var x = $('.inpSec');
                     x.empty();
                     x.append("<option value=''>Cargando..</option>");

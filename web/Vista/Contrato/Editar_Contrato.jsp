@@ -212,11 +212,19 @@
                                         </section>
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Hasta: 
-                                                <%if (a.getFe_hasta() != null) {%>
-                                                <input type="date" name="FEC_HASTA" value="<%=con.convertFecha3(a.getFe_hasta())%>" class="input-group-sm" required="">
+                                                <%if (a.getFe_hasta() != null) {
+                                                        if (a.getId_dgp() == null) {%>
+                                                <input type="date" name="FEC_HASTA" value="<%=con.convertFecha3(a.getFe_hasta())%>" class="input-group-sm" >
                                                 <%} else {%>
-                                                <input type="date" name="FEC_DESDE" class=" input-group-sm" required="">
-                                                <%}%>
+                                                <input type="date" name="FEC_HASTA" value="<%=con.convertFecha3(a.getFe_hasta())%>" class="input-group-sm" required="">
+                                                <%}
+                                                } else {%>
+                                                <% if (a.getId_dgp() == null) {%>
+                                                <input type="date" name="FEC_HASTA" value="" class="input-group-sm" >
+                                                <%} else {%>
+                                                <input type="date" name="FEC_HASTA" value="" class="input-group-sm" required="">
+                                                <%}
+                                                    }%>
                                             </label>
                                         </section>
                                         <section class="col col-3" id="titulo">
@@ -1480,10 +1488,11 @@
                     if ($(".can_centro_cos").val() != 0) {
                         var lista = objJson.lista;
                         x.empty();
+                        var CANT_T = 0;
                         var numero = 1;
                         var texto = "";
                         if ($("#id_dgp").val() == null) {
-                            texto += '<div class="row" ><section class="col col-1"><br><label  id="titu">Agregar:</label><br><label class="btn"><a type="button" style="padding:9%; padding-right:20%; padding-left:20%;" id="btn-agregar-cc2" class=" btn btn-default txt-color-green btn-agregar-cc"><i class="fa fa-plus fa-2x"></i></a></label></section><section class="col col-2"><label class="input" id="titulo">%:<input type="text" name="PORCENTAJE_TOTAL" max="100" min="100" maxlength="3" value="" class="input-group-sm por_sum_to" id="bo_a" readonly=""></label></section></div>';
+                            texto += '<div class="row" ><section class="col col-1"><br><label  id="titu">Agregar:</label><br><label class="btn"><a type="button" style="padding:9%; padding-right:20%; padding-left:20%;" id="btn-agregar-cc2" class=" btn btn-default txt-color-green btn-agregar-cc"><i class="fa fa-plus fa-2x"></i></a></label></section><section class="col col-2"><label class="input" id="titulo">%:<input type="text" name="PORCENTAJE_TOTAL" max="100" min="100" maxlength="3"  class="input-group-sm por_sum_to" id="bo_a" readonly=""></label></section></div>';
                         }
                         for (var i = 0; i < lista.length; i++) {
                             numero = numero + i;
@@ -1501,14 +1510,14 @@
                                 cc = lista[i].id;
                                 listar_cc2(ag, dir, dep, cc);
                             } else {
-                                if ($(".can_centro_cos ").val() == "1") {
+                                if ($(".can_centro_cos").val() == "1") {
                                     texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + (i + 1) + ':</label>';
                                     texto += '<div  class="row centro-costo_' + ag + '" >';
                                     texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '" id="cc-dir' + ag + '" readonly="readonly"  disabled><option value="">[DIRECCION]</option></select></label></section>';
                                     texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '" readonly="readonly"  disabled><option value="">[DEPARTAMENTO]</option></select></label></section>';
                                     texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required="" readonly="readonly"  disabled><option value="">[CENTRO COSTO]</option></select></label></section>';
-                                    texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '" value="' + lista[i].ca_por_cc + '"  type="text" required="" class="porcentaje_cc por-cen-' + ag + '" onkeyup="dar_valor($(this).val(),'+ag+');"/><input type="hidden" name="porcent_ant_' + (i + 1) + '"  class="porc' + ag + '" /></label> </section>';
-                                    texto += '<section class="col col-1" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;" value="' + ag + '" class=" btn btn-default txt-color-red remover' + ag + '" onclick="Eliminar(alert());" disabled ><i class="fa fa-minus fa-2x"></i></button></label></section>';
+                                    texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '" value="' + lista[i].ca_por_cc + '"  type="text" required="" class="porcentaje_cc por-cen-' + ag + '" onkeyup="dar_valor($(this).val(),' + ag + ');"/><input type="hidden" name="porcent_ant_' + (i + 1) + '"  value="' + lista[i].ca_por_cc + '" class="porc' + ag + ' por-i" /></label> </section>';
+                                    texto += '<section class="col col-1" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;" value="' + ag + '" class=" btn btn-default txt-color-red remover' + ag + ' dis-total" onclick="Eliminar(alert());"  ><i class="fa fa-minus fa-2x"></i></button></label></section>';
                                     texto += '<input type="hidden" value="' + lista[i].id_det_ce + '" class="id_dcc' + ag + '" ><input type="hidden" name="id_d_cen_cos' + (i + 1) + '" value="' + lista[i].id_det_ce + '" ></div>';
                                     var dir, dep, cc;
                                     dir = lista[i].id_dir_cc;
@@ -1525,8 +1534,8 @@
                                     texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '" id="cc-dir' + ag + '" readonly="readonly"  disabled><option value="">[DIRECCION]</option></select></label></section>';
                                     texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '" readonly="readonly"  disabled><option value="">[DEPARTAMENTO]</option></select></label></section>';
                                     texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required="" readonly="readonly"  disabled><option value="">[CENTRO COSTO]</option></select></label></section>';
-                                    texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '" value="' + lista[i].ca_por_cc + '"  type="text" required="" class="porcentaje_cc por-cen-' + ag + '" onkeyup="dar_valor($(this).val(),'+ag+');"/><input type="hidden" name="porcent_ant_' + (i + 1) + '"  class="porc' + ag + '" /></label></section>';
-                                    texto += '<section class="col col-1" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;" value="' + ag + '" class=" btn btn-default txt-color-red remover' + ag + '" onclick="Eliminar($(this).val());" ><i class="fa fa-minus fa-2x"></i></button></label></section>';
+                                    texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '" value="' + lista[i].ca_por_cc + '"  type="text" required="" class="porcentaje_cc por-cen-' + ag + '" onkeyup="dar_valor($(this).val(),' + ag + ');"/><input type="hidden" name="porcent_ant_' + (i + 1) + '" value="' + lista[i].ca_por_cc + '" class="porc' + ag + ' por-i" /></label></section>';
+                                    texto += '<section class="col col-1" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;" value="' + ag + '" class=" btn btn-default txt-color-red remover' + ag + ' dis-total" onclick="Eliminar($(this).val());" ><i class="fa fa-minus fa-2x"></i></button></label></section>';
                                     texto += '<input type="hidden" value="' + lista[i].id_det_ce + '" class="id_dcc' + ag + '" ><input type="hidden" name="id_d_cen_cos' + (i + 1) + '" value="' + lista[i].id_det_ce + '" ></div>';
                                     var dir, dep, cc;
                                     dir = lista[i].id_dir_cc;
@@ -1539,11 +1548,15 @@
                             }
                             numero = 1;
                             ag++;
+                            CANT_T = (CANT_T + parseInt(lista[i].ca_por_cc)
+
+                                    );
                         }
                         x.append(texto);
                         $('#btn-agregar-cc2').click(function() {
                             agregar_centro_costo();
                         });
+                        $(".por_sum_to").val(CANT_T);
                     } else {
                         remover_fil();
                     }
@@ -1567,7 +1580,7 @@
                     texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
                     texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
                     texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '"  value="' + (ingr + ag - 1) + '"  type="text" required="" class="porcentaje_cc porcenttaj' + ag + '"/><input name="PORCENTAJE_CC' + ingr + '"  type="hidden" class="procent cont_dif' + ag + '"></label></section>';
-                    texto += '<section class="col col-1" ><br><label class="btn"><a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class=" btn btn-default txt-color-red remover' + ag + '"><i class="fa fa-minus fa-2x"></i></a></label></section>';
+                    texto += '<section class="col col-1" ><br><label class="btn"><a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class=" btn btn-default txt-color-red remover' + ag + ' "><i class="fa fa-minus fa-2x"></i></a></label></section>';
                     texto += '</div>';
                     agregar.append(texto);
                     remover_atrib(ag - 1);
@@ -1575,10 +1588,12 @@
                     var c_porcentaje = $(".porcentaje_cc").size();
                     $(".porcentaje_cc").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
                     $(".procent").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
+                    $(".por-i").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
                     estable++;
                     sumn_porcen_total();
                     $(".can_centro_cos").val("a");
                     $(".cant-ing").val(ingr);
+                    //agrgar_atrib_rem_t();
                 } else {
                     ingr++;
                     texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + ag + ':</label>';
@@ -1587,20 +1602,23 @@
                     texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
                     texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
                     texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '"  min="0" value="' + (ingr + ag - 1) + '"  type="text" required="" class="porcentaje_cc porcenttaj' + ag + '"/><input name="PORCENTAJE_CC' + ingr + '"  type="hidden" class="procent cont_dif' + ag + '"/></label></section>';
-                    texto += '<section class="col col-1" ><br><label class="btn"><a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class=" btn btn-default txt-color-red remover' + ag + '"><i class="fa fa-minus fa-2x"></i></a></label></section>';
+                    texto += '<section class="col col-1" ><br><label class="btn"><a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class=" btn btn-default txt-color-red remover' + ag + ' "><i class="fa fa-minus fa-2x"></i></a></label></section>';
                     texto += '</div>';
                     agregar.append(texto);
                     // remover_atrib(ag - 1);
                     //remover_atrib(ag-1);
                     agrgar_atrib(ag - 1);
+                    agrgar_atrib_rem_t();
                     listar_cc(ag);
                     var c_porcentaje = $(".porcentaje_cc").size();
-
                     $(".cant-ing").val(ingr);
                     $(".porcentaje_cc").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
                     $(".procent").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
+                    $(".por-i").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
                     estable++;
                     sumn_porcen_total();
+                    //agrgar_atrib_rem_t();
+                    
                 }
                 //$(".ver").text(texto); 
                 texto = "";
@@ -1619,6 +1637,12 @@
                 } else {
                     $(".remover" + num).attr("disabled", "disabled");
                 }
+            }
+            function agrgar_atrib_rem_t() {
+                $(".dis-total").attr("disabled", "disabled");
+            }
+            function rem_atrib_rem_t() {
+                $(".dis-total").removeAttr("disabled");
             }
             function sumn_porcen_total() {
 
@@ -1652,13 +1676,14 @@
                 $(".cc-dir" + num).change(function() {
 
                     listar_dep_cc(num, "0", arr_cc);
+                    
                 });
                 $(".cc-dep" + num).change(function() {
-
                     listar_centro_costo2(num, "0", arr_cc);
                 });
                 $(".porcenttaj" + num).keyup(function() {
                     $(".cont_dif" + num).val($(this).val());
+                    // act_va_an();
                 });
                 $(".remover" + num).click(function() {
                     $(".remover" + (num - 1)).removeAttr("disabled");
@@ -1667,14 +1692,23 @@
                     ag--;
                     ingr--;
                     estable--;
+                    if(ingr==0){
+                        rem_atrib_rem_t();
+                    }
                     $(".cant-ing").val(ingr);
                     actualizar_porcentaje();
                     sumn_porcen_total();
                 });
 
             }
+            function act_va_an() {
+                // var num = $(".conteo").val() + 0;
+                $(".por_i").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
+            }
             function actualizar_porcentaje() {
                 $(".porcentaje_cc").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
+                $(".procent").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
+                $(".por-i").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
             }
             function remover(rem) {
                 $(".centro-costo_" + rem).remove();
@@ -1758,8 +1792,10 @@
 
                     listar_centro_costo2(num, "0", arr_cc);
                 });
-              //  alert(num);
-                $(".por-cen-1").keyup(function(){alert();});
+                //  alert(num);
+                $(".por-cen-1").keyup(function() {
+                    alert();
+                });
                 $(".remover" + num).click(function() {
                     $(".remover" + (num - 1)).removeAttr("disabled");
                     remover(num);
@@ -1767,9 +1803,8 @@
                     ag--;
                 });
             }
-            function dar_valor(caracter,num) {
-                alert(caracter+num);
-               $(".porc" + num).val(caracter);
+            function dar_valor(caracter, num) {
+                $(".porc" + num).val(caracter);
             }
             function remover2(rem) {
 
@@ -1819,7 +1854,7 @@
                 });
             }
             function Eliminar(i) {
-                alert();
+                //alert();
                 var x = $("#fila-agregar-cc");
                 ag--;
                 var msg = confirm('Si aceptas se eliminara la informacion totalmente ¿aceptas?');
@@ -1831,13 +1866,20 @@
                         $(".cant-elimi").val(can_eliminada);
                         var can = $(".can_centro_cos ").val();
                         can--;
-                        Listar_centro_costo();
+                        //Listar_centro_costo();
                         $(".can_centro_cos ").val(can);
+                        Actualizar_valores().after(Listar_centro_costo());
                         ag = 1;
                     });
                 } else {
                     return false;
                 }
+            }
+            function Actualizar_valores() {
+                $(".porcentaje_cc").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
+                $(".procent").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
+                $(".por-i").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
+                sumn_porcen_total();
             }
             function remov(i) {
                 $(".centro-costo_" + i).remove();

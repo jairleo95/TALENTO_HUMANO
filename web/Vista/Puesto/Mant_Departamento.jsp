@@ -35,7 +35,7 @@
                                     <div class="jarviswidget-editbox">
                                     </div>
                                     <div class="widget-body no-padding">
-                                        <form class="smart-form form_dep">
+                                        <form class="smart-form form_f">
                                             <fieldset>
                                                 <div class="row">
                                                     <section class="col col-12">
@@ -46,19 +46,19 @@
                                                     <section class="col col-3">
                                                         <label class="label">Nombre</label>
                                                         <label class="input">
-                                                            <input class="inpNombre"type="text" placeholder="Escribir nombre de Departamento" required="" maxlength="100">
+                                                            <input class="inpNombre"type="text" placeholder="Escribir nombre de Departamento" required="" maxlength="100" name="name">
                                                         </label>
                                                     </section>
                                                     <section class="col col-3">
                                                         <label class="label">Nombre Corto</label>
                                                         <label class="input">
-                                                            <input class="inpNCorto"type="text" placeholder="Escribir nombre Corto" required="" maxlength="30">
+                                                            <input class="inpNCorto"type="text" placeholder="Escribir nombre Corto" required="" maxlength="30" name="name2">
                                                         </label>
                                                     </section>
                                                     <section class="col col-3">
                                                         <label class="label">Estado</label>
                                                         <label class="select">
-                                                            <select class="inpEstado" required="0">
+                                                            <select class="inpEstado" required="0" name="est">
                                                                 <option value="">[Seleccione]</option>
                                                                 <option value="1">Hablilitado</option>
                                                                 <option value="2">Deshabilitado</option>
@@ -68,7 +68,7 @@
                                                     <section class="col col-3">
                                                         <label class="label">Direccion</label>
                                                         <label class="select">
-                                                            <select class="inpDireccion" required="0">
+                                                            <select class="inpDireccion" required="0" name="dir">
                                                                 <option value="">[Seleccione]</option>
                                                             </select>
                                                             <i></i></label>
@@ -77,7 +77,7 @@
                                             </fieldset>
                                             <footer>
                                                 <input class="inpId" type="hidden" value="">
-                                                <input type="button" class="btn btn-primary btnAceptar" value="Aceptar">
+                                                <input type="submit" class="btn btn-primary btnAceptar" value="Aceptar">
                                                 <input type="reset" class="btn btn-default" value="Cancelar">
                                             </footer>
                                         </form>
@@ -145,23 +145,53 @@
         <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
         <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
-        <script src="../../js/Js_Mant_Puesto/Datatable_puesto.js"></script>
         <script>
             $(document).ready(function () {
                 $('.inpEstado > option[value=1]').attr('selected', 'selected');
                 GifLoader($('.div_t'), "Espere..", 1);
                 var idDir = "", valNum;
                 cargar_direccion();
-
                 $('.inpDireccion').change(function () {
                     if ($(this).val() == "" && idDir == "") {
                         GifLoader($('.div_t'), "Seleccione una Direccion", 2);
                     } else {
                         idDir = $(this).val();
                         cargar_t(idDir);
-                    }
-
+                    }                   
                 });
+                $('.btnAceptar').click(function () {
+                    $('.form_f').validate({
+                        rules: {
+                            name: {required: true },
+                            name2: {required: true },
+                            est: {required: 0 },
+                            dir: {required: 0 }
+                        },
+                        messages: {
+                            name: "Escribir nombre de Departamento",
+                            name2: "Escribir nombre Corto",
+                            est: "Seleccione Estado",
+                            dir: "Seleccione Direccion"
+                        },
+                        submitHandler: function (form) {
+                            var id, nombre, ncorto, estado;
+                            id = $('.inpId').val();
+                            nombre = $('.inpNombre').val();
+                            ncorto = $('.inpNCorto').val();
+                            estado = $('.inpEstado').val();
+                            if ($('.titulo_t').attr('value') == 1) {
+                                crear(nombre, ncorto, estado, idDir);
+                            } else if ($('.titulo_t').attr('value') == 2) {
+                                editar(id, nombre, ncorto, estado, idDir);
+                                $('.titulo_t').text('Agregar Departamento');
+                                $('.titulo_t').attr('value', '1');
+                            }
+                            $('.inpNombre').val("");
+                            $('.inpNCorto').val("");
+                        }
+                    });
+                });
+                
                 function cargar_t(id) {
                     GifLoader($('.div_t'), "Espere..", 1);
                     $.post("../../Puesto", "opc=listar_dep_dir&id=" + id, function (objJson) {
@@ -204,9 +234,6 @@
                         }
                         t.append(text);
                         text = "";
-
-
-
                         //----Acciones
                         var id, nombre, ncorto, estado;
                         idDir = $('.inpDireccion').val();
@@ -231,7 +258,7 @@
                         $('.btnHab').click(function () {
                             valNum = $(this).attr('value');
                             id = $('.valId' + valNum).attr('value');
-                            activar(id , idDir);
+                            activar(id, idDir);
                         });
                         $('.btnEliminar').click(function () {
                             valNum = $(this).attr('value');
@@ -241,42 +268,29 @@
                         $('.tabla_t').DataTable();
                     });
                 }
-                $('.btnAceptar').click(function () {
-                    var id, nombre, ncorto, estado;
-                    id = $('.inpId').val();
-                    nombre = $('.inpNombre').val();
-                    ncorto = $('.inpNCorto').val();
-                    estado = $('.inpEstado').val();
-                    if ($('.titulo_t').attr('value') == 1) {
-                        crear(nombre, ncorto, estado, idDir);
-                    } else if ($('.titulo_t').attr('value') == 2) {
-                        editar(id, nombre, ncorto, estado, idDir);
-                    }
-                    $('.inpNombre').val("");
-                    $('.inpNCorto').val("");
-                });
-                function desactivar(id,idD) {
+                
+                function desactivar(id, idD) {
                     $.post("../../Puesto", "opc=desactivar-Dep&id=" + id, function () {
                         cargar_t(idD);
                     });
                 }
-                function activar(id,idD) {
+                function activar(id, idD) {
                     $.post("../../Puesto", "opc=activar-Dep&id=" + id, function () {
                         cargar_t(idD);
                     });
                 }
-                function eliminar(id,idD) {
+                function eliminar(id, idD) {
                     $.post("../../Puesto", "opc=eliminar-Dep&id=" + id, function () {
                         cargar_t(idD);
                     });
                 }
-                function editar(id, nombre, ncorto, estado,idD) {
-                    var data = "opc=editar-Dep&id=" + id + "&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado +"&idDir="+idD;
+                function editar(id, nombre, ncorto, estado, idD) {
+                    var data = "opc=editar-Dep&id=" + id + "&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado + "&idDir=" + idD;
                     $.post("../../Puesto", data, function () {
                         cargar_t(idD);
                     });
                 }
-                function crear(nombre, ncorto, estado,idD) {
+                function crear(nombre, ncorto, estado, idD) {
                     var data = "opc=crear-Dep&&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado + "&idDir=" + idD;
                     $.post("../../Puesto", data, function () {
                         cargar_t(idD);
@@ -307,7 +321,7 @@
                         GifLoader($('.div_t'), "Seleccione una Direccion", 2);
                     });
                 }
-                
+
 
             });
         </script>
