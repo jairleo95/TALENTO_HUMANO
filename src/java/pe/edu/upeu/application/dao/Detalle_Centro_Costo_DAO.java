@@ -45,4 +45,19 @@ public class Detalle_Centro_Costo_DAO implements InterfaceDetalle_Centro_Costo {
         }
     }
 
+    @Override
+    public void Modificar_Centro_Costo_porc(String id_dcc, Double porc, String id_user) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_POR_D_CEN_C( ?, ?, ?)}");
+            cst.setString(1, id_dcc.trim());
+            cst.setDouble(2, porc);
+            cst.setString(3, id_user.trim());
+            cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } finally {
+            this.conn.close();
+        }
+    }
 }
