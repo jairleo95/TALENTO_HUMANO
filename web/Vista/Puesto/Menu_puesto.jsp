@@ -17,6 +17,11 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
 
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/demo.min.css">
+        <style>
+            a{
+                color: #3276b1;
+            }
+        </style>
     </head>
    
     <body>
