@@ -1202,7 +1202,7 @@
                     $("#no_cuen_ban").hide();
                     $("#generar").hide();
                     $("#no_cuen_otros").hide();
-                    alert($("#editar").val());
+                    
                     //alert($("#es_cuenta").val());
                     $(".fecha").keyup(function() {
 
@@ -1219,7 +1219,7 @@
                     if($("#editar").val() === 'ok'){
                     document.getElementById("select-doc").disabled = true;
                     document.getElementById("doc").disabled = true;
-                    alert();
+                    
                     }
                     $("#banco").change(function() {
                         cuenta_bancaria($(this).val());
