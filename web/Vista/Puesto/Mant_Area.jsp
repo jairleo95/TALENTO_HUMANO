@@ -233,6 +233,7 @@
                             estado = $('.valEstado' + valNum).attr('value');
                             $('.inpId').val(id);
                             $('.inpNombre').val(nombre);
+                            $('.inpNombre').focus();
                             $('.inpNCorto').val(ncorto);
                             $('.inpEstado > option[value=' + estado + ']').attr('selected', 'selected');
                             $('.titulo_t').text('Editar Area');
