@@ -55,9 +55,9 @@ public class CContrato_Archivo_Adjunto extends HttpServlet {
             DiskFileItemFactory f = new DiskFileItemFactory();
 
             if (f.getSizeThreshold() <= 500000) {
-                out.print("adassd");
+                //out.print("adassd");
             } else {
-                out.print("putopoooo");
+               // out.print("putopoooo");
             }
             f.setRepository(new File(ubicacion));
 
@@ -85,9 +85,7 @@ public class CContrato_Archivo_Adjunto extends HttpServlet {
                 } else {
                     tamaño = item.getSize();
                     if (tamaño <= 500000) {
-
                         String fieldName = item.getFieldName();
-
                         Calendar fecha = new GregorianCalendar();
                         int hora = fecha.get(Calendar.HOUR_OF_DAY);
                         int min = fecha.get(Calendar.MINUTE);

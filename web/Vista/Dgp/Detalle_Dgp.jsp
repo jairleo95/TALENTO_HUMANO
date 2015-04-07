@@ -308,19 +308,12 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                                             &times;
                                         </button>
-                                        <h4 class="modal-title" id="myModalLabel"><strong>Solicitud de Requerimiento</strong></h4>
+                                        <h4 class="modal-title" id="myModalLabel"><span class="btn-label"><i class="fa fa-envelope"></i></span> <strong>Solicitud de Requerimiento</strong></h4>
                                     </div>
                                     <div class="modal-body">
                                         <form id="checkout-form" class="smart-form solicitud_plazo">
                                             <div class="row">
-                                                <section class="col col-4">
-                                                    <label class="label lb_fecha_solicitud">Fecha de Inicio :</label>
-                                                    <label class="input"> 
-                                                        <input type="date" name="desde"  class="fe_inicio" required="">
-                                                        <input type="hidden" name="tipo_fecha"  class="tipo_fecha" value="date" required="">
-                                                        <input type="hidden" name="iddgp"  value="<%=iddgp%>" class="dgp" required="">
-                                                    </label>
-                                                </section>
+
                                                 <section class="col col-4">
                                                     <label class="label">Tipo de Plazo :</label>
                                                     <label class="select"> 
@@ -337,6 +330,14 @@
                                                         <select name="plazo" class="plazo" required="">
                                                             <option value='' selected >[SELECCIONE]</option>
                                                         </select>          
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label lb_fecha_solicitud">Fecha de Inicio :</label>
+                                                    <label class="input"> 
+                                                        <input type="date" name="desde"  class="fe_inicio" required="">
+                                                        <input type="hidden" name="tipo_fecha"  class="tipo_fecha" value="date" required="">
+                                                        <input type="hidden" name="iddgp"  value="<%=iddgp%>" class="dgp" required="">
                                                     </label>
                                                 </section>
                                             </div>
@@ -450,6 +451,9 @@
                 $(document).ready(function () {
 
                     pageSetUp();
+                    $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+                        $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+                    });
                     $(".tipo").change(function () {
                         if ($(this).val() == '2') {
                             $(".fe_inicio").attr("type", "month");
@@ -463,16 +467,79 @@
                         }
                         list_select($(".plazo"), "../../plazo_dgp?opc=List_id_plazo", $(".solicitud_plazo").serialize(), "1", $(".tipo").val());
                     });
-                    $(".sbm_solicitud").click(function () {
+                    $(".sbm_solicitud").click(function (e) {
                         if ($(".solicitud_plazo").valid() == true) {
-                            $.ajax({
-                                url: "../../solicitud_requerimiento",
-                                type: "post",
-                                data: $(".solicitud_plazo").serialize() + "&opc=Registrar_solicitud"
+
+                            $.SmartMessageBox({
+                                title: "¡Advertencia!",
+                                content: "¿Esta seguro de enviar la solicitud?",
+                                buttons: '[No][Si]'
+                            }, function (ButtonPressed) {
+                                if (ButtonPressed === "Si") {
+
+                                    $.ajax({
+                                        url: "../../solicitud_requerimiento",
+                                        type: "post",
+                                        data: $(".solicitud_plazo").serialize() + "&opc=Registrar_solicitud"
+                                    }).done(function () {
+                                        $('.solicitud_plazo')[0].reset();
+                                        $.smallBox({
+                                            title: "¡Exito!",
+                                            content: "<i class='fa fa-clock-o'></i> <i>La solicitud ha sido enviada exitosamente...</i>",
+                                            color: "#659265",
+                                            iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                            timeout: 4000
+                                        });
+                                    }).error(function () {
+                                        $.smallBox({
+                                            title: "¡Error!",
+                                            content: "<i class='fa fa-clock-o'></i> <i>La solicitud no ha podido ser enviada...</i>",
+                                            color: "#C46A69",
+                                            iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                            timeout: 4000
+                                        });
+
+                                    });
+
+                                }
+                                if (ButtonPressed === "No") {
+                                }
+
                             });
+
                         }
 
                     });
+
+                    $(".sbm_solicituda").click(function (e) {
+                        $.SmartMessageBox({
+                            title: "Smart Alert!",
+                            content: "This is a confirmation box. Can be programmed for button callback",
+                            buttons: '[No][Yes]'
+                        }, function (ButtonPressed) {
+                            if (ButtonPressed === "Yes") {
+
+                                $.smallBox({
+                                    title: "Callback function",
+                                    content: "<i class='fa fa-clock-o'></i> <i>You pressed Yes...</i>",
+                                    color: "#659265",
+                                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                    timeout: 4000
+                                });
+                            }
+                            if (ButtonPressed === "No") {
+                                $.smallBox({
+                                    title: "Callback function",
+                                    content: "<i class='fa fa-clock-o'></i> <i>You pressed No...</i>",
+                                    color: "#C46A69",
+                                    iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                    timeout: 4000
+                                });
+                            }
+
+                        });
+                        e.preventDefault();
+                    })
 
                     /*
                      * Autostart Carousel
@@ -612,35 +679,7 @@
                      * SmartAlerts
                      */
                     // With Callback
-                    $("#smart-mod-eg1").click(function (e) {
-                        $.SmartMessageBox({
-                            title: "Smart Alert!",
-                            content: "This is a confirmation box. Can be programmed for button callback",
-                            buttons: '[No][Yes]'
-                        }, function (ButtonPressed) {
-                            if (ButtonPressed === "Yes") {
 
-                                $.smallBox({
-                                    title: "Callback function",
-                                    content: "<i class='fa fa-clock-o'></i> <i>You pressed Yes...</i>",
-                                    color: "#659265",
-                                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                    timeout: 4000
-                                });
-                            }
-                            if (ButtonPressed === "No") {
-                                $.smallBox({
-                                    title: "Callback function",
-                                    content: "<i class='fa fa-clock-o'></i> <i>You pressed No...</i>",
-                                    color: "#C46A69",
-                                    iconSmall: "fa fa-times fa-2x fadeInRight animated",
-                                    timeout: 4000
-                                });
-                            }
-
-                        });
-                        e.preventDefault();
-                    })
                     // With Input
                     $("#smart-mod-eg2").click(function (e) {
 

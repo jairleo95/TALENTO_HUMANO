@@ -35,7 +35,7 @@
                                     <div class="jarviswidget-editbox">
                                     </div>
                                     <div class="widget-body no-padding">
-                                        <form class="smart-form form_dep">
+                                        <form class="smart-form form_f">
                                             <fieldset>
                                                 <div class="row">
                                                     <section class="col col-12">
@@ -46,19 +46,19 @@
                                                     <section class="col col-2">
                                                         <label class="label">Nombre</label>
                                                         <label class="input">
-                                                            <input class="inpNombre"type="text" placeholder="Escribir nombre de Area" required="" maxlength="100">
+                                                            <input class="inpNombre"type="text" placeholder="Escribir nombre de Area" required="" maxlength="100" name="name">
                                                         </label>
                                                     </section>
                                                     <section class="col col-2">
                                                         <label class="label">Nombre Corto</label>
                                                         <label class="input">
-                                                            <input class="inpNCorto"type="text" placeholder="Escribir nombre Corto" required="" maxlength="30">
+                                                            <input class="inpNCorto"type="text" placeholder="Escribir nombre Corto" required="" maxlength="20" name="name2">
                                                         </label>
                                                     </section>
                                                     <section class="col col-2">
                                                         <label class="label">Estado</label>
                                                         <label class="select">
-                                                            <select class="inpEstado" required="0">
+                                                            <select class="inpEstado" required="0" name="est">
                                                                 <option value="">[Seleccione]</option>
                                                                 <option value="1">Hablilitado</option>
                                                                 <option value="2">Deshabilitado</option>
@@ -68,7 +68,7 @@
                                                     <section class="col col-3">
                                                         <label class="label">Direccion</label>
                                                         <label class="select">
-                                                            <select class="inpDireccion" required="0">
+                                                            <select class="inpDireccion" required="0" name="dir">
                                                                 <option value="">[Seleccione]</option>
                                                             </select>
                                                             <i></i></label>
@@ -76,7 +76,7 @@
                                                     <section class="col col-3">
                                                         <label class="label">Departamento</label>
                                                         <label class="select">
-                                                            <select class="inpDep" required="0">
+                                                            <select class="inpDep" required="0" name="dep">
                                                                 <option value="">[Seleccione]</option>
                                                             </select>
                                                             <i></i></label>
@@ -85,7 +85,7 @@
                                             </fieldset>
                                             <footer>
                                                 <input class="inpId" type="hidden" value="">
-                                                <input type="button" class="btn btn-primary btnAceptar" value="Aceptar">
+                                                <input type="submit" class="btn btn-primary btnAceptar" value="Aceptar">
                                                 <input type="reset" class="btn btn-default" value="Cancelar">
                                             </footer>
                                         </form>
@@ -233,6 +233,7 @@
                             estado = $('.valEstado' + valNum).attr('value');
                             $('.inpId').val(id);
                             $('.inpNombre').val(nombre);
+                            $('.inpNombre').focus();
                             $('.inpNCorto').val(ncorto);
                             $('.inpEstado > option[value=' + estado + ']').attr('selected', 'selected');
                             $('.titulo_t').text('Editar Area');
@@ -257,20 +258,39 @@
                     });
                 }
                 $('.btnAceptar').click(function () {
-                    var id, nombre, ncorto, estado;
-                    id = $('.inpId').val();
-                    nombre = $('.inpNombre').val();
-                    ncorto = $('.inpNCorto').val();
-                    estado = $('.inpEstado').val();
-                    if ($('.titulo_t').attr('value') == 1) {
-                        crear(nombre, ncorto, estado, idDep);
-                    } else if ($('.titulo_t').attr('value') == 2) {
-                        editar(id, nombre, ncorto, estado, idDep);
-                        $('.titulo_t').text('Agregar Area');
-                        $('.titulo_t').attr('value', '1');
-                    }
-                    $('.inpNombre').val("");
-                    $('.inpNCorto').val("");
+                    $('.form_f').validate({
+                        rules: {
+                            name: {required: true},
+                            name2: {required: true},
+                            est:{required: 0},
+                            dir: {required: 0},
+                            dep: {required: 0}
+                        },
+                        messages: {
+                            name: "Escribir nombre de Area",
+                            name2: "Escribir nombre Corto",
+                            est: "Seleccione Estado",
+                            dir: "Seleccione Direccion",
+                            dep: "Seleccione Departamento"
+                        },
+                        submitHandler: function (form) {
+                            var id, nombre, ncorto, estado;
+                            id = $('.inpId').val();
+                            nombre = $('.inpNombre').val();
+                            ncorto = $('.inpNCorto').val();
+                            estado = $('.inpEstado').val();
+                            if ($('.titulo_t').attr('value') == 1) {
+                                crear(nombre, ncorto, estado, idDep);
+                            } else if ($('.titulo_t').attr('value') == 2) {
+                                editar(id, nombre, ncorto, estado, idDep);
+                                $('.titulo_t').text('Agregar Area');
+                                $('.titulo_t').attr('value', '1');
+                            }
+                            $('.inpNombre').val("");
+                            $('.inpNCorto').val("");
+                        }
+                    });
+
                 });
                 function desactivar(id, idD) {
                     $.post("../../Puesto", "opc=desactivar_area&id=" + id, function () {
@@ -288,7 +308,7 @@
                     });
                 }
                 function editar(id, nombre, ncorto, estado, idD) {
-                    var data = "opc=editar_area&id=" + id + "&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado+"&idDep="+idD;
+                    var data = "opc=editar_area&id=" + id + "&nombre=" + nombre + "&ncorto=" + ncorto + "&estado=" + estado + "&idDep=" + idD;
                     $.post("../../Puesto", data, function () {
                         cargar_t(idD);
                     });

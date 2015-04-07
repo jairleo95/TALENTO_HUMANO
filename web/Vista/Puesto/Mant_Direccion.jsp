@@ -35,7 +35,7 @@
                                     <div class="jarviswidget-editbox">
                                     </div>
                                     <div class="widget-body no-padding">
-                                        <form class="smart-form">
+                                        <form class="smart-form form_f">
                                             <fieldset>
                                                 <div class="row">
                                                     <section class="col col-12">
@@ -46,19 +46,19 @@
                                                     <section class="col col-3">
                                                         <label class="label">Nombre</label>
                                                         <label class="input">
-                                                            <input class="inpNombre"type="text" placeholder="Escribir nombre de Direccion" required="" maxlength="100">
+                                                            <input class="inpNombre"type="text" placeholder="Escribir nombre de Direccion" required="" maxlength="100" name="name">
                                                         </label>
                                                     </section>
                                                     <section class="col col-3">
                                                         <label class="label">Nombre Corto</label>
                                                         <label class="input">
-                                                            <input class="inpNCorto"type="text" placeholder="Escribir nombre Corto" required="" maxlength="30">
+                                                            <input class="inpNCorto"type="text" placeholder="Escribir nombre Corto" required="" maxlength="30" name="name2">
                                                         </label>
                                                     </section>
                                                     <section class="col col-3">
                                                         <label class="label">Estado</label>
                                                         <label class="select">
-                                                            <select class="inpEstado" required="0">
+                                                            <select class="inpEstado" required="0" name="est">
                                                                 <option value="">[Seleccione]</option>
                                                                 <option value="1">Hablilitado</option>
                                                                 <option value="2">Deshabilitado</option>
@@ -68,7 +68,7 @@
                                                     <section class="col col-3">
                                                         <label class="label">Filial</label>
                                                         <label class="select">
-                                                            <select class="inpFilial" required="0">
+                                                            <select class="inpFilial" required="0" name="fil">
                                                                 <option value="">[Seleccione]</option>
                                                                 <option value="1">Lima</option>
                                                                 <option value="5">Tarapoto</option>
@@ -81,7 +81,7 @@
                                             <footer>
                                                 <input class="inpId" type="hidden" value="">
                                                 <input type="submit" class="btn btn-primary btnAceptar" value="Aceptar">
-                                                <input type="reset" class="btn btn-default" value="Cancelar">
+                                                <input type="reset" class="btn btn-default btnCancelar" value="Cancelar">
                                             </footer>
                                         </form>
                                     </div>
@@ -148,7 +148,6 @@
         <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
         <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
-        <script src="../../js/Js_Mant_Puesto/Datatable_puesto.js"></script>
         <script>
             $(document).ready(function () {
                 $('.inpEstado > option[value=1]').attr('selected', 'selected');
@@ -169,25 +168,45 @@
                     }
                 });
                 $('.btnAceptar').click(function () {
-                    if ($('.titulo_t').attr('value') == 1) {
-                        var id, nombre, ncorto, estado, filial;
-                        nombre = $('.inpNombre').val();
-                        ncorto = $('.inpNCorto').val();
-                        estado = $('.inpEstado').val();
-                        filial = $('.inpFilial').val();
-                        crear(nombre, ncorto, estado, filial);
-                    } else if ($('.titulo_t').attr('value') == 2) {
-                        var id, nombre, ncorto, estado, filial;
-                        id = $('.inpId').attr('value');
-                        nombre = $('.inpNombre').val();
-                        ncorto = $('.inpNCorto').val();
-                        estado = $('.inpEstado').val();
-                        filial = $('.inpFilial').val();
-                        editar(id, nombre, ncorto, estado, filial);
-                    }
-
+                    $('.form_f').validate({
+                        rules: {
+                            name: {required: true, minlength: 2},
+                            name2: {required: true, minlength: 2},
+                            est: {required: 0},
+                            fil: {required: 0}
+                        },
+                        messages: {
+                            name: "Escribir nombre de Direccion",
+                            name2: "Escribir nombre Corto",
+                            est: "Seleccione Estado",
+                            fil: "Seleccione Filial"
+                        },
+                        submitHandler: function (form) {
+                            if ($('.titulo_t').attr('value') == 1) {
+                                var id, nombre, ncorto, estado, filial;
+                                nombre = $('.inpNombre').val();
+                                ncorto = $('.inpNCorto').val();
+                                estado = $('.inpEstado').val();
+                                filial = $('.inpFilial').val();
+                                crear(nombre, ncorto, estado, filial);
+                            } else if ($('.titulo_t').attr('value') == 2) {
+                                var id, nombre, ncorto, estado, filial;
+                                id = $('.inpId').attr('value');
+                                nombre = $('.inpNombre').val();
+                                ncorto = $('.inpNCorto').val();
+                                estado = $('.inpEstado').val();
+                                filial = $('.inpFilial').val();
+                                editar(id, nombre, ncorto, estado, filial);
+                                $('.titulo_t').text('Agregar Direccion');
+                                $('.titulo_t').attr('value', '1');
+                            }
+                            $('.form_f').cleanData();
+                        }
+                    });
                 });
-
+                $('.btnCancelar').click(function () {
+                    $('.form_f').reset();
+                });
                 function validarE(elem, boo) {
                     if (boo == true) {
                         elem.removeClass('state-error');
@@ -198,15 +217,15 @@
                         elem.addClass('state-error');
                     }
                 }
-                function GifLoader(contenedor){
+                function GifLoader(contenedor) {
                     $('.headerr').hide();
-                    var text="";
+                    var text = "";
                     contenedor.empty();
-                    text+="<div class='caja' style='height:250px; width:150px; margin:auto;'><center><h3>Espere..</h3></center></div>";
+                    text += "<div class='caja' style='height:250px; width:150px; margin:auto;'><center><h3>Espere..</h3></center></div>";
                     contenedor.append(text);
                 }
                 function cargar_t() {
-                    GifLoader($('.div_t'));                                      
+                    GifLoader($('.div_t'));
                     $.post("../../Puesto", "opc=list_direccion", function (objJson) {
                         $('.headerr').show();
                         var tabb = "";
@@ -232,7 +251,7 @@
                                 tex += "<td class='valEstado" + (i + 1) + "' value='1' style='background-color: #f0fff0;'>Habilitado</td>";
                             } else if (list[i].estado == 2) {
                                 tex += "<td class='valEstado" + (i + 1) + "' value='2' style='background-color: #fff0f0;'>Deshabilitado</td>";
-                            }else{
+                            } else {
                                 tex += "<td class='valEstado" + (i + 1) + "' value='1' style='background-color: #f0fff0;'>Habilitado</td>";
                             }
                             if (list[i].filial == 1) {
@@ -241,6 +260,8 @@
                                 tex += "<td class='valFilial" + (i + 1) + " ' value='2'>Juliaca</td>";
                             } else if (list[i].filial == 5) {
                                 tex += "<td class='valFilial" + (i + 1) + "' value='5'>Tarapoto</td>";
+                            } else {
+                                tex += "<td class='valFilial" + (i + 1) + "' value=''>No Asignado</td>";
                             }
                             tex += '<td><center><div class="btn-group"><button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false">';
                             tex += 'Accion <span class="caret"></span></button><ul class="dropdown-menu" role="menu">';
@@ -255,10 +276,11 @@
                         }
                         t.append(tex);
                         tex = "";
-                        
+
                         var id, nombre, ncorto, estado, filial;
 
                         $('.btnEditar').click(function () {
+                            
                             valNum = $(this).attr('value');
                             id = $('.valId' + valNum).attr('value');
                             nombre = $('.valNombre' + valNum).text();
@@ -267,6 +289,7 @@
                             filial = $('.valFilial' + valNum).attr('value');
                             $('.inpId').val(id);
                             $('.inpNombre').val(nombre);
+                            $('.inpNombre').focus();
                             $('.inpNCorto').val(ncorto);
                             $('.inpEstado > option[value=' + estado + ']').attr('selected', 'selected');
                             $('.inpFilial > option[value=' + filial + ']').attr('selected', 'selected');

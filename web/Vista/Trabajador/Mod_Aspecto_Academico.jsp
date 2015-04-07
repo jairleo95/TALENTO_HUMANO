@@ -646,9 +646,9 @@
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-align-justify fa-lg fa-fw"></i></span>
                                                                             <%if (t.getCm_otros_estudios() != null) {%>
-                                                                        <textarea name="OTROS_ESTUDIOS"  class="form-control input-group-sm" class="text-box" cols="60" rows="6" maxlength="500"><%=t.getCm_otros_estudios()%></textarea>
+                                                                        <textarea name="OTROS_ESTUDIOS"  class="form-control input-group-sm" class="text-box" cols="60" rows="6" maxlength="1000"><%=t.getCm_otros_estudios()%></textarea>
                                                                         <%} else {%>
-                                                                        <textarea name="OTROS_ESTUDIOS"  class="form-control input-group-sm" class="text-box" cols="60" rows="6" maxlength="500"></textarea>
+                                                                        <textarea name="OTROS_ESTUDIOS"  class="form-control input-group-sm" class="text-box" cols="60" rows="6" maxlength="1000"></textarea>
                                                                         <%}%>
                                                                     </div>
                                                                 </div>
@@ -762,7 +762,7 @@
                                                                     <%if (cs.getEs_gem_nu_cuenta().trim().equals("1")) {%>
                                                                     <input type="checkbox" checked="" name="GEN_NU_CUEN" id="subscription"  value="1">
                                                                     <%} else {%>
-                                                                    <input type="checkbox"  name="GEN_NU_CUEN" id="subscription"  value="1">
+                                                                    <input type="checkbox"  name="GEN_NU_CUEN" id="subscription"  value="0">
                                                                     <%}%>
                                                                     <i></i>Generar Nro de Cuenta Bancaria
                                                                 </div>
@@ -1040,7 +1040,7 @@
                         document.getElementById("nu_cuen_otros").readOnly = true;
                         $("#texto").show();
                     }
-                    if ($("#editar").val() == "ok") {
+                    if ($("#editar").val() === 'ok') {
                         document.getElementById("banco").disabled = true;
                         document.getElementById("nu_cuen_otros").disabled = true;
                         document.getElementById("nu_cuen").disabled = true;

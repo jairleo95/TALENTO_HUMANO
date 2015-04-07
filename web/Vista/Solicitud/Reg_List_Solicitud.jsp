@@ -155,6 +155,91 @@
                                 <!-- end widget div -->
                             </div>
                             <!-- end widget -->
+                            <!-- NEW WIDGET START -->
+                        <article class="col-sm-12 col-md-12 col-lg-6">
+                            <div id="alerta_dgp">
+                            </div>
+                            <!-- Widget ID (each widget will need unique ID)-->
+                            <div class="jarviswidget jarviswidget-color-greenDark" id="wid-id-2" data-widget-editbutton="false">
+                                <!-- widget options:
+                                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                                data-widget-colorbutton="false"
+                                data-widget-editbutton="false"
+                                data-widget-togglebutton="false"
+                                data-widget-deletebutton="false"
+                                data-widget-fullscreenbutton="false"
+                                data-widget-custombutton="false"
+                                data-widget-collapsed="true"
+                                data-widget-sortable="false"
+
+                                -->
+                                <header>
+                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                    <h>Hacer Solicitud</h2>
+                                </header>
+                                <!-- widget div-->
+                                <div>
+                                    <!-- widget edit box -->
+                                    <div class="jarviswidget-editbox">
+                                        <!-- This area used as dropdown edit box -->
+                                    </div>
+                                    <!-- end widget edit box -->
+
+                                    <!-- widget content -->
+                                    <div class="smart-form">
+                                        <form id="checkout-form" class="smart-form solicitud_plazo">
+                                            <div class="row">
+                                                <section class="col col-4">
+                                                    <label class="label lb_fecha_solicitud">Fecha de Inicio :</label>
+                                                    <label class="input"> 
+                                                        <input type="date" name="desde"  class="fe_inicio" required="">
+                                                        <input type="hidden" name="tipo_fecha"  class="tipo_fecha" value="date" required="">
+                                                        <input type="hidden" name="iddgp"  value="<%//=iddgp%>" class="dgp" required="">
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">Tipo de Plazo :</label>
+                                                    <label class="select"> 
+                                                        <select name="tipo" class="tipo" required="">
+                                                            <option value=''>[SELECCIONE]</option>
+                                                            <option value='1'>Ingreso a planilla</option>
+                                                            <option value='2'>Inicio de Contrato</option>
+                                                        </select>          
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">Plazo :</label>
+                                                    <label class="select"> 
+                                                        <select name="plazo" class="plazo" required="">
+                                                            <option value='' selected >[SELECCIONE]</option>
+                                                        </select>          
+                                                    </label>
+                                                </section>
+                                            </div>
+                                            <section >
+                                                <label class="label">Motivo :</label>
+                                                <label class="textarea"> 										
+                                                    <textarea rows="3" class="comentario" name="descripcion" placeholder="" required=""></textarea> 
+                                                </label>
+                                            </section>
+                                            <footer>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                    Cancelar
+                                                </button>
+                                                <button type="button" class="btn btn-primary sbm_solicitud" >
+                                                    Enviar
+                                                </button>
+                                            </footer>
+
+                                        </form>
+                                        
+                                    </div>
+                                    <!-- end widget content -->
+                                </div>
+                                <!-- end widget div -->
+                            </div>
+                            <!-- end widget -->
                         </article>
                         <!-- WIDGET END -->
                     </div>
