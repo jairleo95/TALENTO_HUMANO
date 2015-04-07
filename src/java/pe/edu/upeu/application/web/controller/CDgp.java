@@ -267,11 +267,11 @@ public class CDgp extends HttpServlet {
             String ES_HORARIO = "1";
             String ID_TIPO_HORARIO = request.getParameter("HORARIO");
             String ES_MOD_FORMATO = "1";
+            Double horas_totales = Double.parseDouble(request.getParameter("h_total"));
+            String id_d_hor = "";
+            id_d_hor = IHor.Insert_Detalle_Horario(ID_DETALLE_HORARIO, iddgp, ES_DETALLE_HORARIO, iduser, null, null, null, ID_TIPO_HORARIO, ES_MOD_FORMATO, horas_totales);
 
-            IHor.Insert_Detalle_Horario(ID_DETALLE_HORARIO, iddgp, ES_DETALLE_HORARIO, iduser, null, null, null, ID_TIPO_HORARIO, ES_MOD_FORMATO);
-
-            ID_DETALLE_HORARIO = IHor.Max_id_Detalle_Horario();
-
+         //   ID_DETALLE_HORARIO = IHor.Max_id_Detalle_Horario();
             for (int i = 0; i < dia.size(); i++) {
                 for (int j = 0; j < 10; j++) {
                     String hora_desde = request.getParameter("HORA_DESDE_" + dia.get(i) + j);
@@ -280,18 +280,13 @@ public class CDgp extends HttpServlet {
 
                     if (hora_desde != null & d != null & hora_hasta != null) {
                         if (!hora_hasta.equals("") & !hora_desde.equals("") & !d.equals("")) {
-                            IHor.Insert_Horario(null,
-                                    hora_desde,
-                                    hora_hasta,
-                                    d,
-                                    ES_HORARIO,
-                                    ID_DETALLE_HORARIO);
+                            IHor.Insert_Horario(null, hora_desde, hora_hasta, d, ES_HORARIO, id_d_hor);
                         }
                     }
                 }
 
             }
-
+           // out.print(id_d_hor + "---" + ID_TIPO_HORARIO + "---" + horas_totales);
             getServletContext().setAttribute("List_doc_req_pla", doc.List_doc_req_pla(iddgp, ID_TRABAJADOR));
             int i = doc.List_Req_nacionalidad(ID_TRABAJADOR);
             int num_ad = doc.List_Adventista(ID_TRABAJADOR);
@@ -300,7 +295,6 @@ public class CDgp extends HttpServlet {
 
             response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&pro=pr_dgp&idtr=" + ID_TRABAJADOR);
             // response.sendRedirect("Vista/Dgp/Horario/Reg_Horario.jsp?iddgp=" + iddgp + "&idtr=" + ID_TRABAJADOR + "&opc=rd");
-
         }
 
         if (opc.equals("Reg_form")) {

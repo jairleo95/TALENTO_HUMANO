@@ -204,8 +204,8 @@
                         }
                     });
                 });
-                $('.btnCancelar').click(function(){
-                    $('.form_f').reset();               
+                $('.btnCancelar').click(function () {
+                    $('.form_f').reset();
                 });
                 function validarE(elem, boo) {
                     if (boo == true) {
@@ -280,6 +280,7 @@
                         var id, nombre, ncorto, estado, filial;
 
                         $('.btnEditar').click(function () {
+                            
                             valNum = $(this).attr('value');
                             id = $('.valId' + valNum).attr('value');
                             nombre = $('.valNombre' + valNum).text();
@@ -288,6 +289,7 @@
                             filial = $('.valFilial' + valNum).attr('value');
                             $('.inpId').val(id);
                             $('.inpNombre').val(nombre);
+                            $('.inpNombre').focus();
                             $('.inpNCorto').val(ncorto);
                             $('.inpEstado > option[value=' + estado + ']').attr('selected', 'selected');
                             $('.inpFilial > option[value=' + filial + ']').attr('selected', 'selected');
