@@ -219,7 +219,7 @@
                             } else if (list[i].estado == 2) {
                                 text += "<td class='valEstado" + (i + 1) + "' value='2' style='background-color: #fff0f0;'>Deshabilitado</td>";
                             } else {
-                                text += "<td class='valEstado" + (i + 1) + "' value='1' style='background-color: #f0fff0;'>Habilitado</td>";
+                                text += "<td class='valEstado" + (i + 1) + "' value='3'>No Asignado</td>";
                             }
                             text += '<td><center><div class="btn-group"><button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false">';
                             text += 'Accion <span class="caret"></span></button><ul class="dropdown-menu" role="menu">';
