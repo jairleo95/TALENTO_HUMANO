@@ -8,6 +8,7 @@ package pe.edu.upeu.application.dao;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -60,10 +61,10 @@ public class HorarioDAO implements InterfaceHorarioDAO {
                 Vh.setId_horario(rs.getString("id_horario"));
                 list.add(Vh);
             }
-         } catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR: "+e.getMessage());
+            throw new RuntimeException("ERROR: " + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -72,33 +73,6 @@ public class HorarioDAO implements InterfaceHorarioDAO {
             }
         }
         return list;
-    }
-
-    @Override
-    public void Insert_Detalle_Horario(String ID_DET_HOR, String ID_DGP, String ES_DE_HOR, String US_CRE, String US_MODIF, String FE_CRE, String FE_MODIF , String ID_TIPO_HORARIO, String ES_MOD_FORMATO ) {
-
-        try {
-
-            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DETALLE_HORARIO( ?, ?, ?, ?, ?, ?, ?, ?, ? )}");
-            cst.setString(1, null);
-            cst.setString(2, ID_DGP);
-            cst.setString(3, ES_DE_HOR);
-            cst.setString(4, US_CRE);
-            cst.setString(5, US_MODIF);
-            cst.setString(6, FE_CRE);
-            cst.setString(7, FE_MODIF);
-            cst.setString(8, ID_TIPO_HORARIO);
-            cst.setString(9, ES_MOD_FORMATO);
-            cst.execute();
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } catch (Exception ex) {
-            Logger.getLogger(AutorizacionDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            this.conn.close();
-        }
     }
 
     @Override
@@ -142,9 +116,38 @@ public class HorarioDAO implements InterfaceHorarioDAO {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }finally {
+        } finally {
             this.conn.close();
         }
+    }
+
+    @Override
+    public String Insert_Detalle_Horario(String ID_DET_HOR, String ID_DGP, String ES_DE_HOR, String US_CRE, String FE_CRE, String US_MODIF, String FE_MODIF, String ID_TIPO_HORARIO, String ES_MOD_FORMATO, Double ca_h_total) {
+        String id="";
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DETALLE_HORARIO( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? )}");
+            cst.setString(1, null);
+            cst.setString(2, ID_DGP);
+            cst.setString(3, ES_DE_HOR);
+            cst.setString(4, US_CRE);
+            cst.setString(5, US_MODIF);
+            cst.setString(6, FE_CRE);
+            cst.setString(7, FE_MODIF);
+            cst.setString(8, ID_TIPO_HORARIO);
+            cst.setString(9, ES_MOD_FORMATO);
+            cst.setDouble(10, ca_h_total);
+            cst.registerOutParameter(11, Types.CHAR);
+            cst.execute();
+            id = cst.getString(11);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (Exception ex) {
+            Logger.getLogger(AutorizacionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.conn.close();
+        }
+        return id;
     }
 
 }
