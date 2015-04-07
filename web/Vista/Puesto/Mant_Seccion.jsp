@@ -253,9 +253,10 @@
                             estado = $('.valEstado' + valNum).attr('value');
                             $('.inpId').val(id);
                             $('.inpNombre').val(nombre);
+                            $('.inpNombre').focus();
                             $('.inpNCorto').val(ncorto);
                             $('.inpEstado > option[value=' + estado + ']').attr('selected', 'selected');
-                            $('.titulo_t').text('Editar Area');
+                            $('.titulo_t').text('Editar Seccion');
                             $('.titulo_t').attr('value', '2');
                         });
                         $('.btnDes').click(function () {

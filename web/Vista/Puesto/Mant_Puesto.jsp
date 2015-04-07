@@ -283,6 +283,7 @@
                             cGrupo = $('.valCGrupo' + valNum).text();
                             $('.inpId').val(id);
                             $('.inpNombre').val(nombre);
+                            $('.inpNombre').focus();
                             $('.inpNCorto').val(ncorto);
                             $('.inpCGrupo').val(cGrupo);
                             $('.inpEstado > option[value=' + estado + ']').attr('selected', 'selected');
@@ -333,6 +334,7 @@
                             var id, nombre, ncorto, estado, cGrupo;
                             id = $('.inpId').val();
                             nombre = $('.inpNombre').val();
+                            
                             ncorto = $('.inpNCorto').val();
                             estado = $('.inpEstado').val();
                             cGrupo = $('.inpCGrupo').val();
@@ -342,6 +344,7 @@
                                 editar(id, nombre, ncorto, estado, cGrupo, idSec);
                                 $('.titulo_t').text('Agregar Puesto');
                                 $('.titulo_t').attr('value', '1');
+                                
                             }
                             $('.inpNombre').val("");
                             $('.inpNCorto').val("");
