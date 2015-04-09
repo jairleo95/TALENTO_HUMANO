@@ -252,7 +252,7 @@
                             } else if (list[i].estado == 2) {
                                 tex += "<td class='valEstado" + (i + 1) + "' value='2' style='background-color: #fff0f0;'>Deshabilitado</td>";
                             } else {
-                                tex += "<td class='valEstado" + (i + 1) + "' value='1' style='background-color: #f0fff0;'>Habilitado</td>";
+                                tex += "<td class='valEstado" + (i + 1) + "' value='3'>No Asignado</td>";
                             }
                             if (list[i].filial == 1) {
                                 tex += "<td class='valFilial" + (i + 1) + "' value='1'>Lima</td>";
