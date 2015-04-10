@@ -266,6 +266,7 @@
                                 text += '<li><a class="btnHab" value=' + (i + 1) + '>Habilitar</a></li>';
                                 text += '<li><a class="btnDes" value=' + (i + 1) + '>Deshabilitar</a></li>';
                             }
+                            text += '<li><a class="btnEliminar" value=' + (i + 1) + '>Eliminar</a></li>';
                             text += '</ul></div></center></td>';
                             text += "</tr>";
                         }
