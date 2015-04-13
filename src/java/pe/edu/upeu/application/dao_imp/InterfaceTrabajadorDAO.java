@@ -52,7 +52,7 @@ public interface InterfaceTrabajadorDAO {
     
     public List<Universidad_Carrera> List_Uni_Carr();
     
-    public void MOD_ASPEC_ACADEM (String LI_NIVEL_EDUCATIVO,String REGIMEN, String ES_INS_PERU, String CARRERA, String DE_ANNO_EGRESO, String CM_OTROS_ESTUDIOS, String CA_TIPO_HORA_PAGO_REFERENCIAL, String ID_TRABAJADOR , String CO_UNIVERSITARIO);
+    public void MOD_ASPEC_ACADEM (String LI_NIVEL_EDUCATIVO,String REGIMEN, String ES_INS_PERU, String CARRERA, String DE_ANNO_EGRESO, String CM_OTROS_ESTUDIOS, String CA_TIPO_HORA_PAGO_REFERENCIAL, String ID_TRABAJADOR , String CO_UNIVERSITARIO, String US_MODIF, String IP_USUARIO);
     
     public void MOD_CUENTA_SUELDO (String NO_BANCO, String NU_CUENTA, String NU_CUENTA_BANC, String ES_GEM_NU_CUENTA, String NO_BANCO_OTROS_SP, String ID_TRABAJADOR, String ES_CUENTA_SUELDO ); 
     
