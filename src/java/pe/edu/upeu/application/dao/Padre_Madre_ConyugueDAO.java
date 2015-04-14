@@ -30,11 +30,11 @@ public class Padre_Madre_ConyugueDAO implements InterfacePadre_Madre_ConyugueDAO
     CConversion c = new CConversion();
 
     @Override
-    public void INSERT_CONYUGUE(String ES_TRABAJA_UPEU_CONYUGUE, String AP_NOMBRES_CONYUGUE, String FE_NAC_CONYUGUE, String TI_DOC_ID, String NU_DOC, String LI_INSCRIPCION_VIG_ESSALUD, String US_MODIF, String FE_MODIF, String IP_USUARIO, String ID_TRABAJADOR, String ID_CONYUGUE) {
+    public void INSERT_CONYUGUE(String ES_TRABAJA_UPEU_CONYUGUE, String AP_NOMBRES_CONYUGUE, String FE_NAC_CONYUGUE, String TI_DOC_ID, String NU_DOC, String LI_INSCRIPCION_VIG_ESSALUD, String US_MODIF, String IP_USUARIO, String ID_TRABAJADOR, String ID_CONYUGUE) {
         CallableStatement cst;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            cst = conn.conex.prepareCall("{CALL RHSP_INSERT_CONYUGUE(  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+            cst = conn.conex.prepareCall("{CALL RHSP_INSERT_CONYUGUE(  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
             cst.setString(1, ES_TRABAJA_UPEU_CONYUGUE);
             cst.setString(2, AP_NOMBRES_CONYUGUE);
             cst.setString(3, c.convertFecha(FE_NAC_CONYUGUE));
@@ -42,11 +42,10 @@ public class Padre_Madre_ConyugueDAO implements InterfacePadre_Madre_ConyugueDAO
             cst.setString(5, NU_DOC);
             cst.setString(6, LI_INSCRIPCION_VIG_ESSALUD);
             cst.setString(7, US_MODIF);
-            cst.setString(8, FE_MODIF);
-            cst.setString(9, InetAddress.getLocalHost().getHostAddress());
+            cst.setString(8, InetAddress.getLocalHost().getHostAddress());
             //cst.setString(9, null);
-            cst.setString(10, ID_TRABAJADOR);
-            cst.setString(11, ID_CONYUGUE);
+            cst.setString(9, ID_TRABAJADOR);
+            cst.setString(10, ID_CONYUGUE);
             cst.execute();
         } catch (SQLException ex) {
             throw new RuntimeException(ex.getMessage());
@@ -98,11 +97,11 @@ public class Padre_Madre_ConyugueDAO implements InterfacePadre_Madre_ConyugueDAO
     }
 
     @Override
-    public void MOD_PADRE_MADRE_CONYUGUE(String AP_NOMBRES_PADRE, String AP_NOMBRES_MADRE, String ES_TRABAJA_UPEU_CONYUGUE, String AP_NOMBRES_C, String FE_NAC_C, String ID_TIPO_DOC_C, String NU_DOC_C, String LI_INSCRIPCION_VIG_ESSALUD_C, String ID_TRABAJADOR) {
+    public void MOD_PADRE_MADRE_CONYUGUE(String AP_NOMBRES_PADRE, String AP_NOMBRES_MADRE, String ES_TRABAJA_UPEU_CONYUGUE, String AP_NOMBRES_C, String FE_NAC_C, String ID_TIPO_DOC_C, String NU_DOC_C, String LI_INSCRIPCION_VIG_ESSALUD_C, String ID_TRABAJADOR, String US_MODIF, String IP_USUARIO) {
         CallableStatement cst;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            cst = conn.conex.prepareCall("{CALL RHSP_MOD_PADRE_MAD_CON( ?, ?, ?, ?, ?, ?, ?, ? ,?)}");
+            cst = conn.conex.prepareCall("{CALL RHSP_MOD_PADRE_MAD_CON( ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?)}");
             cst.setString(1, AP_NOMBRES_PADRE);
             cst.setString(2, AP_NOMBRES_MADRE);
             cst.setString(3, ES_TRABAJA_UPEU_CONYUGUE);
@@ -112,6 +111,8 @@ public class Padre_Madre_ConyugueDAO implements InterfacePadre_Madre_ConyugueDAO
             cst.setString(7, NU_DOC_C);
             cst.setString(8, LI_INSCRIPCION_VIG_ESSALUD_C);
             cst.setString(9, ID_TRABAJADOR);
+            cst.setString(10, US_MODIF);
+            cst.setString(11, IP_USUARIO);
             cst.execute();
         } catch (SQLException ex) {
         } finally {
@@ -120,14 +121,16 @@ public class Padre_Madre_ConyugueDAO implements InterfacePadre_Madre_ConyugueDAO
     }
 
     @Override
-    public void INSERT_PADRES(String AP_NOMBRES_MADRE, String AP_NOMBRES_PADRE, String ID_TRABAJDOR) {
+    public void INSERT_PADRES(String AP_NOMBRES_MADRE, String AP_NOMBRES_PADRE, String ID_TRABAJDOR, String US_MODIF, String IP_USUARIO) {
         CallableStatement cst;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            cst = conn.conex.prepareCall("{CALL RHSP_INSERT_PADRES(  ?, ?, ?)}");
+            cst = conn.conex.prepareCall("{CALL RHSP_INSERT_PADRES(  ?, ?, ?, ?, ?)}");
             cst.setString(1, AP_NOMBRES_MADRE);
             cst.setString(2, AP_NOMBRES_PADRE);
             cst.setString(3, ID_TRABAJDOR);
+            cst.setString(4, US_MODIF);
+            cst.setString(5, IP_USUARIO);
 
             cst.execute();
         } catch (SQLException ex) {

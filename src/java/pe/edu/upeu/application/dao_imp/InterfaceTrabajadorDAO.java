@@ -32,13 +32,13 @@ public interface InterfaceTrabajadorDAO {
 
     public String MAX_ID_DATOS_TRABAJADOR();
 
-    public void UPDATE_ID_CONYUGUE(String id_conyugue, String id_trabajador);
+    public void UPDATE_ID_CONYUGUE(String id_conyugue, String id_trabajador, String US_MODIF, String IP_USUARIO);
     
     public String tipo_planilla(String id_trabajador);
     
     public void INSERT_HIST_RELIGION(String ID_HIST_INFO_REL, String LI_RELIGION, String NO_IGLESIA, String DE_CARGO, String LI_AUTORIDAD, String NO_AP_AUTORIDAD,String CL_AUTORIDAD, String ES_HIST_INFO_REL, String ID_TRABAJADOR, String iduser, String FE_MODIF);
     
-    public void MOD_ASP_REL ( String LI_RELIGION, String NO_IGLESIA, String DE_CARGO, String LI_AUTORIDAD, String NO_AP_AUTORIDAD,String CL_AUTORIDAD, String ID_TRABAJADOR);
+    public void MOD_ASP_REL ( String LI_RELIGION, String NO_IGLESIA, String DE_CARGO, String LI_AUTORIDAD, String NO_AP_AUTORIDAD,String CL_AUTORIDAD, String ID_TRABAJADOR, String US_MODIF, String IP_USUARIO);
     
     public List<Trabajador> LIST_TRABAJADOR_MOD_REL ();
      
@@ -61,4 +61,6 @@ public interface InterfaceTrabajadorDAO {
     public String REG_DOC_TRABAJADOR (String trb);  
     
     public String ID_TRB (String user);
+    
+    public String ip();
 }

@@ -17,12 +17,14 @@ import pe.edu.upeu.application.dao.DireccionDAO;
 import pe.edu.upeu.application.dao.EmpleadoDAO;
 import pe.edu.upeu.application.dao.ListaDAO;
 import pe.edu.upeu.application.dao.RolDAO;
+import pe.edu.upeu.application.dao.TrabajadorDAO;
 import pe.edu.upeu.application.dao.UbigeoDAO;
 import pe.edu.upeu.application.dao.UsuarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceEmpleadoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRolDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUbigeoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO;
 
@@ -39,6 +41,7 @@ public class CUsuario extends HttpServlet {
     InterfaceListaDAO li = new ListaDAO();
     InterfaceUbigeoDAO ub = new UbigeoDAO();
     InterfaceDireccionDAO dir = new DireccionDAO();
+    InterfaceTrabajadorDAO tr= new TrabajadorDAO();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -176,7 +179,7 @@ public class CUsuario extends HttpServlet {
             String DIR_DOM_A_REF = request.getParameter("DIR_DOM_A_REF");
             String ID_TRABAJADOR = request.getParameter("ID_TR");
 
-            usu.Mod_perfil(id_user_1, NO_USUARIO, CLA_NUEVA, TE_TRABAJADOR, CL_TRABAJADOR, CORREO_PERSONAL, id_dep, id_prov, DIR_DOM_A_D1_ID, DIR_DOM_A_D2, DIR_DOM_A_D3_ID, DIR_DOM_A_D4, DIR_DOM_A_D5_ID, DIR_DOM_A_D6, DIR_DOM_A_REF, DIR_DOM_A_DISTRITO_ID, ID_TRABAJADOR);
+            usu.Mod_perfil(id_user_1, NO_USUARIO, CLA_NUEVA, TE_TRABAJADOR, CL_TRABAJADOR, CORREO_PERSONAL, id_dep, id_prov, DIR_DOM_A_D1_ID, DIR_DOM_A_D2, DIR_DOM_A_D3_ID, DIR_DOM_A_D4, DIR_DOM_A_D5_ID, DIR_DOM_A_D6, DIR_DOM_A_REF, DIR_DOM_A_DISTRITO_ID, ID_TRABAJADOR, id_user_1, tr.ip());
             getServletContext().setAttribute("Lista_Usuarios", usu.Val_Usuario(id_user_1));
             response.sendRedirect("Vista/Usuario/Perfil_Usuario.jsp");
         }

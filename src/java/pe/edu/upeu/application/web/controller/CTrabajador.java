@@ -190,8 +190,9 @@ public class CTrabajador extends HttpServlet {
             String idtr = tr.MAX_ID_DATOS_TRABAJADOR();
             tr.INSERT_CUENTA_SUELDO(null, NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEM_NU_CUENTA, NO_BANCO_OTROS, idtr, ES_CUENTA_SUELDO);
             tr.INSERT_HIST_RELIGION(null, LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, "1", idtr, iduser, FE_MODIF);
-
-            tr.UPDATE_ID_CONYUGUE(idtr, ID_CONYUGUE);
+            US_MODIF=iduser;
+            IP_USUARIO=tr.ip();
+            tr.UPDATE_ID_CONYUGUE(idtr, ID_CONYUGUE, US_MODIF, IP_USUARIO);
             for (int i = 1; i <= num_hijo; i++) {
                 String AP_PATERNO_H = request.getParameter("APELLIDO_P_H" + i);
                 String AP_MATERNO_H = request.getParameter("APELLIDO_M_H" + i);
@@ -429,7 +430,7 @@ public class CTrabajador extends HttpServlet {
             String idtr = request.getParameter("idtr");
             out.print(edit);
             String US_MODIF = iduser;
-            String IP_USUARIO = ip();
+            String IP_USUARIO = tr.ip();
             tr.MOD_DAT_GEN(AP_PATERNO, AP_MATERNO, NO_TRABAJADOR, TI_DOC, NU_DOC, ES_CIVIL, FE_NAC, ID_NACIONALIDAD, ID_DEPARTAMENTO, ID_PROVINCIA, ID_DISTRITO, TE_TRABAJADOR, CL_TRA, DI_CORREO_PERSONAL, DI_CORREO_INST, CO_SISTEMA_PENSIONARIO, ES_SEXO, LI_GRUPO_SANGUINEO, ID_NO_AFP, ES_AFILIADO_ESSALUD, LI_TIPO_TRABAJADOR, ES_FACTOR_RH, idtr,US_MODIF,IP_USUARIO);
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
 
@@ -465,7 +466,7 @@ public class CTrabajador extends HttpServlet {
             String CA_TIPO_HORA_PAGO_REFEERENCIAL = request.getParameter("TIPO_HORA_PAGO_REFEERENCIAL");
             String CO_UNIVERSITARIO = request.getParameter("CO_UNIVERSITARIO");
             String US_MODIF = iduser;
-            String IP_USUARIO = ip();
+            String IP_USUARIO = tr.ip();
             tr.MOD_ASPEC_ACADEM(LI_NIVEL_EDUCATIVO, REGIMEN, ES_INST_PERU, CARRERA, DE_ANNO_EGRESO, CM_OTROS_ESTUDIOS, CA_TIPO_HORA_PAGO_REFEERENCIAL, idtr, CO_UNIVERSITARIO, US_MODIF, IP_USUARIO);
             //out.print(CARRERA);
             //REGISTRAR EN TABLA CUENTA SUELDO
@@ -568,7 +569,7 @@ public class CTrabajador extends HttpServlet {
             String CA_ING_QTA_CAT_RUC = request.getParameter("ING_QTA_CAT_RUC");
             String CA_ING_QTA_CAT_OTRAS_EMPRESAS = request.getParameter("ING_QTA_CAT_OTRAS_EMPRESAS");
             String US_MODIF = iduser;
-            String IP_USUARIO = ip();
+            String IP_USUARIO = tr.ip();
             tr.MOD_ASPEC_SOCIAL(LI_DI_DOM_A_D1, DI_DOM_A_D2, LI_DI_DOM_A_D3, DI_DOM_A_D4, LI_DI_DOM_A_D5, DI_DOM_A_D6, DI_DOM_A_REF, ID_DI_DOM_A_DISTRITO, LI_DI_DOM_LEG_D1, DI_DOM_LEG_D2, LI_DI_DOM_LEG_D3, DI_DOM_LEG_D4, LI_DI_DOM_LEG_D5, DI_DOM_LEG_D6, ID_DI_DOM_LEG_DISTRITO, CA_ING_QTA_CAT_EMPRESA, CA_ING_QTA_CAT_RUC, CA_ING_QTA_CAT_OTRAS_EMPRESAS, idtr,US_MODIF,IP_USUARIO);
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             response.sendRedirect("Vista/Trabajador/Aspecto_Social.jsp?idtr=" + idtr);
@@ -589,7 +590,7 @@ public class CTrabajador extends HttpServlet {
             String FE_MODIF = "";
             out.print(idtr);
             tr.INSERT_HIST_RELIGION(null, LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, "1", idtr, iduser, FE_MODIF);
-            tr.MOD_ASP_REL(LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, idtr);
+            tr.MOD_ASP_REL(LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, idtr, iduser, tr.ip());
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             response.sendRedirect("Vista/Trabajador/Aspecto_Social.jsp");
 
@@ -647,24 +648,4 @@ public class CTrabajador extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    public String ip() {
-        String x = "";
-        InetAddress ip;
-	try {
-		ip = InetAddress.getLocalHost();
-		NetworkInterface network = NetworkInterface.getByInetAddress(ip);
-		byte[] mac = network.getHardwareAddress();
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < mac.length; i++) {
-			sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));		
-		}
-                x=ip.getHostAddress()+"**"+ip.getCanonicalHostName()+"**"+sb.toString();
- 
-	} catch (UnknownHostException e) {
-		e.printStackTrace();
-	} catch (SocketException e){
-		e.printStackTrace();
-	}
-        return x;
-    }
 }

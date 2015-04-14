@@ -5,6 +5,10 @@
  */
 package pe.edu.upeu.application.dao;
 
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -554,12 +558,14 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
     }
 
     @Override
-    public void UPDATE_ID_CONYUGUE(String id_conyugue, String id_trabajador) {
+    public void UPDATE_ID_CONYUGUE(String id_conyugue, String id_trabajador ,String US_MODIF, String IP_USUARIO) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_UPDATE_ID_CONYUGUE(?, ?)} ");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_UPDATE_ID_CONYUGUE(?, ?, ? ,?)} ");
             cst.setString(1, id_conyugue);
             cst.setString(2, id_trabajador);
+            cst.setString(3, US_MODIF);
+            cst.setString(4, IP_USUARIO);
             cst.execute();
         } catch (SQLException ex) {
         } finally {
@@ -615,10 +621,10 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
     }
 
     @Override
-    public void MOD_ASP_REL(String LI_RELIGION, String NO_IGLESIA, String DE_CARGO, String LI_AUTORIDAD, String NO_AP_AUTORIDAD, String CL_AUTORIDAD, String ID_TRABAJADOR) {
+    public void MOD_ASP_REL(String LI_RELIGION, String NO_IGLESIA, String DE_CARGO, String LI_AUTORIDAD, String NO_AP_AUTORIDAD, String CL_AUTORIDAD, String ID_TRABAJADOR, String US_MODIF, String IP_USUARIO) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_RELIGION_TRA( ?, ?, ?, ?, ?, ?, ?)} ");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_RELIGION_TRA( ?, ?, ?, ?, ?, ?, ?, ?, ?)} ");
             cst.setString(1, LI_RELIGION);
             cst.setString(2, NO_IGLESIA);
             cst.setString(3, DE_CARGO);
@@ -626,6 +632,8 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(5, NO_AP_AUTORIDAD);
             cst.setString(6, CL_AUTORIDAD);
             cst.setString(7, ID_TRABAJADOR);
+            cst.setString(8, US_MODIF);
+            cst.setString(9, IP_USUARIO);
             cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
@@ -959,5 +967,26 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             this.conn.close();
         }
         return id;
+    }
+    @Override
+     public String ip() {
+        String x = "";
+        InetAddress ip;
+	try {
+		ip = InetAddress.getLocalHost();
+		NetworkInterface network = NetworkInterface.getByInetAddress(ip);
+		byte[] mac = network.getHardwareAddress();
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < mac.length; i++) {
+			sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));		
+		}
+                x=ip.getHostAddress()+"**"+ip.getCanonicalHostName()+"**"+sb.toString();
+ 
+	} catch (UnknownHostException e) {
+		e.printStackTrace();
+	} catch (SocketException e){
+		e.printStackTrace();
+	}
+        return x;
     }
 }
