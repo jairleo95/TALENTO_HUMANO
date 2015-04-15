@@ -27,63 +27,68 @@
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
     </head>
     <body>
-        <header>
-            <div class="page-header">
-                <h1 class="text-center">Historial de Modificaciones <small>/ Trabajadores</small></h1>
 
-            </div>
-        </header>
         <div id="main" role="main" style="margin: 0px;">
             <div id="content" >
                 <section id="widget-grid" class="">
                     <div class="row">
-                        <div class="col col-sm-12">
-                            <div class="well">
-                                <form class="smart-form">
-                                    <h1 class="text-left font-md semi-bold">Filtros</h1><br>
-                                    <div class="row">
-                                        <section class="col col-sm-2">
-                                            <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                                                <input type="text" name="request" placeholder="Seleccionar Fecha" class="datepicker" data-dateformat='dd/mm/yy'>
-                                            </label>
-                                        </section>                                    
-                                    </div>
-                                </form>
-                            </div>
+
+                        <div class="well">
+                            <form class="smart-form">
+
+                                <h1 class="text-center">Historial de Modificaciones <small>/ Trabajadores</small></h1><br>
+                                <h1 class="text-left font-md semi-bold">Filtros:</h1><br>
+                                <div class="row">
+                                    <section class="col col-sm-3">
+                                        <label>Desde:</label>
+                                        <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                                            <input type="text"  placeholder="Seleccionar Fecha" class="datepicker" id="dtp1" data-dateformat='dd/mm/yy'>
+                                        </label>
+                                    </section>
+                                    <section class="col col-sm-3">
+                                        <label>Hasta:</label>
+                                        <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                                            <input type="text"  placeholder="Seleccionar Fecha" class="datepicker" id="dtp2" data-dateformat='dd/mm/yy'>
+                                        </label>
+                                    </section>
+                                    <section class="col col-sm-4">
+                                        <label>Usuario:</label>
+                                        <label class="input">
+                                            <input type="text" name="usuario" placeholder="Nombre de Usuario">
+                                        </label>
+                                    </section>
+                                    <section class="col col-sm-2">
+                                        <center><a class="btn btn-primary btn-circle btn-xl"><i class="glyphicon glyphicon-search"></i></a></center>
+                                    </section>
+                                </div>
+                            </form>
+
 
                         </div>
 
                     </div>
                     <div class="row">
-                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-3" data-widget-editbutton="false">
-                                <header>
-                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                    <h2>Historial</h2>
-                                </header>
-                                <div>
-                                    <div class="jarviswidget-editbox">
-                                    </div>
-                                    <div class="widget-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th>a</th>
-                                                        <th>a</th>
-                                                        <th>a</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
+                        <div class="well">
+                            <div class="table-responsive">
+                                <table class="tabla_t table table-bordered table-hover table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center semi-bold">Nro</th>
+                                            <th class="text-center semi-bold">Usuario</th>
+                                            <th class="text-center semi-bold">Fecha</th>
+                                            <th class="text-center semi-bold">Trabajador</th>
+                                            <th class="text-center semi-bold">Detalle</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbodys">
 
-                                                </tbody>
-                                            </table>
-                                        </div>
-
-                                    </div>
-                                </div>
+                                    </tbody>
+                                </table>
                             </div>
-                        </article>
+
+
+                        </div>
+
                     </div>
                 </section>
             </div>
@@ -134,10 +139,41 @@
         <script src="../../../js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
         <script src="../../../js/plugin/fuelux/wizard/wizard.min.js"></script>
         <script type="text/javascript" src="../../../js/JQuery/jquery.numeric.js"></script>
+        <script src="../../../js/plugin/jquery-nestable/jquery.nestable.min.js"></script>
+        <script src="../../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+        <script src="../../../js/plugin/datatables/dataTables.colVis.min.js"></script>
+        <script src="../../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
+        <script src="../../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+        <script src="../../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
         <script type="text/javascript">
-            runAllForms();
-            $(function () {
-                $("#smart-form-register").validate();
+            /* runAllForms();
+             $(function () {
+             $("#smart-form-register").validate();
+             
+             });*/
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#dtp1").datepicker({
+                    dateFormat: "dd/mm/yy",
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    numberOfMonths: 2,
+                    
+                    onClose: function (selectedDate) {
+                        $("#dtp2").datepicker("option", "minDate", selectedDate);
+                    }
+                });
+                $("#dtp2").datepicker({
+                    dateFormat: "dd/mm/yy",
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    numberOfMonths: 2,
+                    onClose: function (selectedDate) {
+                        $("#dtp1").datepicker("option", "maxDate", selectedDate);
+                    }
+                });
+                $('.tabla_t').DataTable();
             });
         </script>
     </body>
