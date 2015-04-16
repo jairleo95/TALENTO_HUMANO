@@ -50,5 +50,5 @@ public interface InterfaceUsuarioDAO {
     public String fecha_actual();
 
     public void Mod_perfil(String ID_USUARIO, String NO_USUARIO_SP, String PW_USUARIO_SP, String TE_TRABAJADOR, String CL_TRA, String DI_CORREO_PERSONAL, String ID_DEPARTAMENTO, String ID_PROVINCIA, String LI_DI_DOM_A_D1, String DI_DOM_A_D2,
-            String LI_DI_DOM_A_D3, String DI_DOM_A_D4, String LI_DI_DOM_A_D5, String DI_DOM_A_D6, String DI_DOM_A_REF, String ID_DI_DOM_A_DISTRITO, String ID_TRABAJADOR);
+            String LI_DI_DOM_A_D3, String DI_DOM_A_D4, String LI_DI_DOM_A_D5, String DI_DOM_A_D6, String DI_DOM_A_REF, String ID_DI_DOM_A_DISTRITO, String ID_TRABAJADOR, String US_MODIF, String IP_USUARIO);
 }
