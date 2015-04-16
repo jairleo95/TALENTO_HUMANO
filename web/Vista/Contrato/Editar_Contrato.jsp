@@ -303,33 +303,33 @@
                                     <div class="row">
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Remuneración:
-                                                <input type="text" name="SUELDO" value="<%=a.getCa_sueldo()%>" class="input-group-sm" id="remu" readonly="" >
+                                                <input type="text" name="SUELDO" value="<%=a.getCa_sueldo()%>" class="input-group-sm" id="remu" <%if(a.getId_dgp() == null){}else{%>readonly=""<%}%>>
                                             </label>
                                         </section>
                                         <section class="col col-1">
                                             <label class="input" id="titulo">Reintegro:
-                                                <input type="text" name="REINTEGRO" value="<%=a.getCa_reintegro()%>" class="input-group-sm" id="rein" readonly="" >
+                                                <input type="text" name="REINTEGRO" value="<%=a.getCa_reintegro()%>" class="input-group-sm" id="rein" <%if(a.getId_dgp() == null){}else{%>readonly=""<%}%> >
                                             </label>
                                         </section>
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Bono Alimentario:
-                                                <input type="text" name="BONO_ALIMENTO" value="<%=a.getCa_bono_alimento()%>" class="input-group-sm" id="bo_a" readonly="">
+                                                <input type="text" name="BONO_ALIMENTO" value="<%=a.getCa_bono_alimento()%>" class="input-group-sm" id="bo_a" <%if(a.getId_dgp() == null){}else{%>readonly=""<%}%>>
                                             </label>
                                         </section>
                                         <section class="col col-1">
                                             <label class="input" id="titulo">BEV:
-                                                <input type="text" name="BEV" value="<%=a.getCa_bev()%>" class="input-group-sm" id="bev" readonly="">
+                                                <input type="text" name="BEV" value="<%=a.getCa_bev()%>" class="input-group-sm" id="bev" <%if(a.getId_dgp() == null){}else{%>readonly=""<%}%>>
                                             </label>
                                         </section>
                                         <section class="col col-1">
                                             <label class="input" id="titulo">Bono puesto:
-                                                <input type="text" name="ca_bono_puesto" value="<%=a.getCa_bonificacion_p()%>" class="input-group-sm" required="" id="ca_bono_pu" readonly="">
+                                                <input type="text" name="ca_bono_puesto" value="<%=a.getCa_bonificacion_p()%>" class="input-group-sm" required="" id="ca_bono_pu" <%if(a.getId_dgp() == null){}else{%>readonly=""<%}%>>
                                             </label>
                                         </section>
 
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Sueldo Total:
-                                                <input type="text" name="TOTAL_SUELDO" value="<%=a.getCa_sueldo_total()%>" class="input-group-sm" id="su_t" readonly="">
+                                                <input type="text" name="TOTAL_SUELDO" value="<%=a.getCa_sueldo_total()%>" class="input-group-sm" id="su_t" <%if(a.getId_dgp() == null){}else{%>readonly=""<%}%>>
                                             </label>
                                         </section>
                                         <section class="col col-2">
@@ -338,12 +338,12 @@
                                                         out.print("0");
                                                     } else {
                                                         out.print(a.getTi_hora_pago());
-                                                    }%>" class="input-group-sm" readonly="">
+                                                    }%>" class="input-group-sm" <%if(a.getId_dgp() == null){}else{%>readonly=""<%}%>>
                                             </label>
                                         </section>
                                         <section class="col col-2" >
                                             <label class="input" id="titulo">Asignanción Familiar:
-                                                <input type="text" name="ASIG_FAMILIAR" value="<%=a.getCa_asig_familiar()%>"  class="input-group-sm" id="asig" readonly="">
+                                                <input type="text" name="ASIG_FAMILIAR" value="<%=a.getCa_asig_familiar()%>"  class="input-group-sm" id="asig" <%if(a.getId_dgp() == null){}else{%>readonly=""<%}%>>
                                             </label>
                                         </section>
                                     </div>
@@ -1856,10 +1856,11 @@
             function Eliminar(i) {
                 //alert();
                 var x = $("#fila-agregar-cc");
-                ag--;
+                
                 var msg = confirm('Si aceptas se eliminara la informacion totalmente ¿aceptas?');
                 if (msg == true) {
                     $.post("../../centro_costo", "opc=Eliminar_det_cc&" + "id_dcc=" + $(".id_dcc" + i).val(), function() {
+                        ag--;
                         $(".remover" + i + 1).attr("disabled", "disabled");
                         remov(i);
                         can_eliminada++;
@@ -1871,7 +1872,7 @@
                         Actualizar_valores().after(Listar_centro_costo());
                         ag = 1;
                     });
-                } else {
+                } else if(msg == false){
                     return false;
                 }
             }
