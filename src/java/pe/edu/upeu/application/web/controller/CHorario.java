@@ -90,10 +90,11 @@ public class CHorario extends HttpServlet {
             String ID_TRABAJJADOR = request.getParameter("idtr");
             String ID_TIPO_HORARIO = request.getParameter("HORARIO");
             String ES_MOD_FORMATO = "1";
+            Double Ca_ho_total = Double.parseDouble(request.getParameter("h_total"));
 
-            IHor.Insert_Detalle_Horario(ID_DETALLE_HORARIO, ID_DGP, ES_DETALLE_HORARIO, iduser, null, null, null, ID_TIPO_HORARIO, ES_MOD_FORMATO);
+            ID_DETALLE_HORARIO = IHor.Insert_Detalle_Horario(ID_DETALLE_HORARIO, ID_DGP, ES_DETALLE_HORARIO, iduser, null, null, null, ID_TIPO_HORARIO, ES_MOD_FORMATO, Ca_ho_total);
 
-            ID_DETALLE_HORARIO = IHor.Max_id_Detalle_Horario();
+            //ID_DETALLE_HORARIO = IHor.Max_id_Detalle_Horario();
 
             for (int i = 0; i < dia.size(); i++) {
                 for (int j = 0; j < 10; j++) {
