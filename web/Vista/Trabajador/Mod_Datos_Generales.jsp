@@ -929,6 +929,7 @@
                                                             <input type="hidden" name="opc" value="Modificar_Dat_Gen">
                                                             <input type="hidden" name="TI_DOC" value="<%=t.getTi_doc() %>">
                                                             <input type="hidden" name="NU_DOC" value="<%=t.getNu_doc()%>">
+                                                            <input type="hidden" name="IDTR" value="<%=t.getId_trabajador()%>">
 
                                                             <center>
                                                                 <!-- <button type="submit" value="" name="opc"> MODIFICAR</button>-->

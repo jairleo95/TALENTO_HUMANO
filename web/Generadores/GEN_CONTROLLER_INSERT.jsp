@@ -60,6 +60,7 @@
             int j = 0;
             while (rs2.next()) {
 
+                
                 List2[j][0] = rs2.getString(1);
                 List2[j][1] = rs2.getString(2);
                 List2[j][2] = rs2.getString(3);
