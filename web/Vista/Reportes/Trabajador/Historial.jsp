@@ -39,27 +39,29 @@
                                 <h1 class="text-center">Historial de Modificaciones <small>/ Trabajadores</small></h1><br>
                                 <h1 class="text-left font-md semi-bold">Filtros:</h1><br>
                                 <div class="row">
-                                    <section class="col col-sm-3">
-                                        <label>Desde:</label>
-                                        <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                                            <input type="text"  placeholder="Seleccionar Fecha" class="datepicker" id="dtp1" data-dateformat='dd/mm/yy'>
-                                        </label>
-                                    </section>
-                                    <section class="col col-sm-3">
-                                        <label>Hasta:</label>
-                                        <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                                            <input type="text"  placeholder="Seleccionar Fecha" class="datepicker" id="dtp2" data-dateformat='dd/mm/yy'>
-                                        </label>
-                                    </section>
-                                    <section class="col col-sm-4">
-                                        <label>Usuario:</label>
-                                        <label class="input">
-                                            <input type="text" name="usuario" placeholder="Nombre de Usuario">
-                                        </label>
-                                    </section>
-                                    <section class="col col-sm-2">
-                                        <center><a class="btn btn-primary btn-circle btn-xl"><i class="glyphicon glyphicon-search"></i></a></center>
-                                    </section>
+                                    <div class="col col-lg-9">
+                                        <section class="col col-sm-6">
+                                            <label>Desde:</label>
+                                            <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                                                <input type="text"  placeholder="Seleccionar Fecha" class="datepicker" id="dtp1" data-dateformat='dd/mm/yy'>
+                                            </label>
+                                        </section>
+                                        <section class="col col-sm-6">
+                                            <label>Hasta:</label>
+                                            <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                                                <input type="text"  placeholder="Seleccionar Fecha" class="datepicker" id="dtp2" data-dateformat='dd/mm/yy'>
+                                            </label>
+                                        </section>
+                                    </div>
+                                    <div class="col col-lg-3">
+                                        <center>
+                                            <section class="col col-sm-12">
+                                                <a class="btn btn-primary btn-circle btn-xl"><i class="glyphicon glyphicon-search"></i></a>
+                                            </section>
+                                        </center>
+                                    </div>
+
+
                                 </div>
                             </form>
 
@@ -74,8 +76,6 @@
                                     <thead>
                                         <tr>
                                             <th class="text-center semi-bold">Nro</th>
-                                            <th class="text-center semi-bold">Usuario</th>
-                                            <th class="text-center semi-bold">Fecha</th>
                                             <th class="text-center semi-bold">Trabajador</th>
                                             <th class="text-center semi-bold">Detalle</th>
                                         </tr>
@@ -159,7 +159,6 @@
                     defaultDate: "+1w",
                     changeMonth: true,
                     numberOfMonths: 2,
-                    
                     onClose: function (selectedDate) {
                         $("#dtp2").datepicker("option", "minDate", selectedDate);
                     }
