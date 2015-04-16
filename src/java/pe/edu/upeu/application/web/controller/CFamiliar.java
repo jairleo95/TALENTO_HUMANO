@@ -67,7 +67,7 @@ public class CFamiliar extends HttpServlet {
             String ID_TRABAJADOR = request.getParameter("idtr");
             String ID_CONYUGUE = request.getParameter("CONYUGUE");
 
-            pmc.INSERT_CONYUGUE(ES_TRABAJA_UPEU_CONYUGUE, AP_NOMBRES_CONYUGUE, FE_NAC_CONYUGUE, TI_DOC_ID, NU_DOC, LI_INSCRIPCION_VIG_ESSALUD, user, null, null, ID_TRABAJADOR, ID_CONYUGUE);
+            pmc.INSERT_CONYUGUE(ES_TRABAJA_UPEU_CONYUGUE, AP_NOMBRES_CONYUGUE, FE_NAC_CONYUGUE, TI_DOC_ID, NU_DOC, LI_INSCRIPCION_VIG_ESSALUD, user, tr.ip(), ID_TRABAJADOR, ID_CONYUGUE);
             getServletContext().setAttribute("List_PMC", pmc.List_PMC(ID_TRABAJADOR));
             getServletContext().setAttribute("LISTA_HIJOS", h.LISTA_HIJOS(ID_TRABAJADOR));
             getServletContext().setAttribute("LISTA_HIJO", h.LISTA_HIJOS(ID_TRABAJADOR));
@@ -80,7 +80,7 @@ public class CFamiliar extends HttpServlet {
            
             String ID_TRABAJADOR = request.getParameter("idtr");
        
-            pmc.INSERT_PADRES(AP_NOMBRES_MADRE, AP_NOMBRES_PADRE, ID_TRABAJADOR);
+            pmc.INSERT_PADRES(AP_NOMBRES_MADRE, AP_NOMBRES_PADRE, ID_TRABAJADOR, user, tr.ip());
             getServletContext().setAttribute("List_PMC", pmc.List_PMC(ID_TRABAJADOR));
             getServletContext().setAttribute("LISTA_HIJOS", h.LISTA_HIJOS(ID_TRABAJADOR));
             getServletContext().setAttribute("LISTA_HIJO", h.LISTA_HIJOS(ID_TRABAJADOR));
@@ -198,7 +198,7 @@ public class CFamiliar extends HttpServlet {
                 //String FE_MODIF = "";
                 String ID_TRABAJADOR = request.getParameter("idtr");
                 // out.print(opc+"   "+AP_NOMBRES_PADRE+AP_NOMBRES_MADRE+ES_TRABAJA_UPEU_CONYUGUE+AP_NOMBRES_CONYUGUE+FE_NAC_CONYUGUE+TI_DOC_ID+ NU_DOC + LI_INSCRIPCION_VIG_ESSALUD + US_MODIF+FE_MODIF + ID_TRABAJADOR+"");
-                pmc.MOD_PADRE_MADRE_CONYUGUE(AP_NOMBRES_PADRE, AP_NOMBRES_MADRE, ES_TRABAJA_UPEU_CONYUGUE, AP_NOMBRES_CONYUGUE , FE_NAC_CONYUGUE, TI_DOC_ID, NU_DOC, LI_INSCRIPCION_VIG_ESSALUD, ID_TRABAJADOR);
+                pmc.MOD_PADRE_MADRE_CONYUGUE(AP_NOMBRES_PADRE, AP_NOMBRES_MADRE, ES_TRABAJA_UPEU_CONYUGUE, AP_NOMBRES_CONYUGUE , FE_NAC_CONYUGUE, TI_DOC_ID, NU_DOC, LI_INSCRIPCION_VIG_ESSALUD, ID_TRABAJADOR,user, tr.ip());
                 
                  getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(ID_TRABAJADOR));
                 getServletContext().setAttribute("LISTA_HIJOS", h.LISTA_HIJOS(ID_TRABAJADOR));
