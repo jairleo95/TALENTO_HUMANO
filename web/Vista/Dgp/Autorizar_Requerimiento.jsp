@@ -202,14 +202,14 @@
                                                             type: "POST",
                                                             data: "opc=Aceptar" + $(".val_aut" + $(".env_rem" + i).val()).val()
                                                         }).done(function () {
-
+                                                            window.location.href = "../../autorizacion";
                                                         });
 
 
                                                     }
                                                 }
 
-                                                window.location.href = "../../autorizacion";
+
 
 
 
@@ -259,12 +259,12 @@
                                                             type: "POST",
                                                             data: "opc=Aceptar" + $(".val_aut" + r).val()
                                                         }).done(function () {
-
+                                                            window.location.href = "../../autorizacion?opc=mens_cod_aps";
                                                         });
                                                     }
 
                                                 }
-                                                window.location.href = "../../autorizacion?opc=mens_cod_aps";
+
 
                                                 //  $.each($(".cod_aps"), function () {
 

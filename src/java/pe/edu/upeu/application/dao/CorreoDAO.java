@@ -44,6 +44,8 @@ public class CorreoDAO implements InterfaceCorreoDAO {
                 });
         try {
             String ubicacion = FactoryConnectionDB.url + "web/Vista/Contrato/Reglamentos/";
+            //String ubicacion = "D:\\NetBeansProjects\\TALENTO_HUMANO\\web\\Vista\\Contrato\\Reglamentos\\";
+
             List<String> lista_archivos = new ArrayList<String>();
 
             // Create a default MimeMessage object.
