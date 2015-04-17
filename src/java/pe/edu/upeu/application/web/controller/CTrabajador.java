@@ -606,9 +606,7 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr + "&edit=ok");
         }
-        if(opc.equals("hist_tra")){
-            response.sendRedirect("Vista/Reportes/Trabajador/Historial.jsp");
-        }
+        
 
     }
 
