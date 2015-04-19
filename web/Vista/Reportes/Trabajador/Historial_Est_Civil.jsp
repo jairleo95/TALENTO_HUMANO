@@ -211,7 +211,7 @@
                                 t += "<td>" + (i + 1) + "</td>";
                                 t += "<td>" + lista[i].no_tra + " " + lista[i].ap_pat + " " + lista[i].ap_mat + "</td>";
                                 t += "<td>" + ec_p + "</td>";
-                                t += "<td>" + lista[i].es_civil_a + "</td>";
+                                t += "<td>" + ec_a+ "</td>";
                                 t += "<td>" + lista[i].no_usuario + "</td>";
                                 t += "<td>" + lista[i].fe_modi + "</td></tr>";
                             }

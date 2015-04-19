@@ -69,9 +69,10 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
             if (FE_INICIO.equals(FE_FIN)) {
                 adday = "+1";
             }
-            String sql = "select  tr.ID_TRABAJADOR ID_TRABAJADOR, tr.NO_TRABAJADOR NO_TRABAJADOR, tr.AP_MATERNO AP_MATERNO, tr.AP_PATERNO AP_PATERNO ,tr.ES_CIVIL ES_CIVIL , ec.LI_ESTADO_CIVIL LI_ESTADO_CIVIL , ec.US_MODIFICACION US_MODIFICACION, ec.FE_MODIFICACION FE_MODIFICACION   \n"
-                    + " from RHTM_TRABAJADOR tr , RHTH_ESTADO_CIVIL ec\n"
+            String sql = "select  tr.ID_TRABAJADOR ID_TRABAJADOR, tr.NO_TRABAJADOR NO_TRABAJADOR, tr.AP_MATERNO AP_MATERNO, tr.AP_PATERNO AP_PATERNO ,tr.ES_CIVIL ES_CIVIL , ec.LI_ESTADO_CIVIL LI_ESTADO_CIVIL , u.NO_USUARIO NO_USUARIO, ec.FE_MODIFICACION FE_MODIFICACION   \n"
+                    + " from RHTM_TRABAJADOR tr , RHTH_ESTADO_CIVIL ec , RHTC_USUARIO u \n"
                     + " where tr.ID_TRABAJADOR = ec.ID_TRABAJADOR \n"
+                     + "and ec.US_MODIFICACION = u.ID_USUARIO \n"
                     + " and ec.FE_MODIFICACION >= TO_DATE('" + FE_INICIO + "') AND ec.FE_MODIFICACION <= TO_DATE('" + FE_FIN + "')  " + adday + " ";
                   
             ResultSet rs = this.cnn.query(sql);
@@ -83,7 +84,7 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
                 rec.put("ap_mat", rs.getString("AP_MATERNO"));
                 rec.put("es_civil_a", rs.getString("ES_CIVIL"));
                 rec.put("es_civil_p", rs.getString("LI_ESTADO_CIVIL"));
-                rec.put("no_usuario", rs.getString("US_MODIFICACION"));
+                rec.put("no_usuario", rs.getString("NO_USUARIO"));
                 rec.put("fe_modi", rs.getString("FE_MODIFICACION"));
                 Lista.add(rec);
             }
