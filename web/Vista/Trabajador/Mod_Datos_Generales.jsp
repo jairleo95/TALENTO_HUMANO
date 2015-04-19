@@ -930,6 +930,7 @@
                                                             <input type="hidden" name="TI_DOC" value="<%=t.getTi_doc() %>">
                                                             <input type="hidden" name="NU_DOC" value="<%=t.getNu_doc()%>">
                                                             <input type="hidden" name="IDTR" value="<%=t.getId_trabajador()%>">
+                                                            <input type="hidden" name="ES_CIVIL_A" value="<%=t.getEs_civil()%>">
 
                                                             <center>
                                                                 <!-- <button type="submit" value="" name="opc"> MODIFICAR</button>-->
