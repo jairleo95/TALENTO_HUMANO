@@ -43,8 +43,9 @@ public class CorreoDAO implements InterfaceCorreoDAO {
                     }
                 });
         try {
-            String ubicacion = FactoryConnectionDB.url + "web/Vista/Contrato/Reglamentos/";
-            //String ubicacion = "D:\\NetBeansProjects\\TALENTO_HUMANO\\web\\Vista\\Contrato\\Reglamentos\\";
+            // String ubicacion = FactoryConnectionDB.url + "Vista/Contrato/Reglamentos/";
+            String ubicacion = "D:\\NetBeansProjects\\TALENTO_HUMANO\\web\\Vista\\Contrato\\Reglamentos\\";
+            //   String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Contrato/Reglamentos/";
 
             List<String> lista_archivos = new ArrayList<String>();
 

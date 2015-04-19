@@ -191,12 +191,9 @@
                                             });
                                         }
                                         $(document).ready(function () {
-
                                             $(".btn_pro_remuneracion").click(function () {
-
                                                 for (var i = 1; i <= <%=List_id_Autorizacion.size()%>; i++) {
                                                     if ($(".env_rem" + i).prop('checked')) {
-
                                                         $.ajax({
                                                             url: "../../autorizacion",
                                                             type: "POST",
@@ -204,15 +201,8 @@
                                                         }).done(function () {
                                                             window.location.href = "../../autorizacion";
                                                         });
-
-
                                                     }
                                                 }
-
-
-
-
-
                                             });
                                             $(".btn_pro_firma").click(function () {
                                                 try {
@@ -262,14 +252,10 @@
                                                             window.location.href = "../../autorizacion?opc=mens_cod_aps";
                                                         });
                                                     }
-
                                                 }
-
-
                                                 //  $.each($(".cod_aps"), function () {
 
                                                 /**/
-
                                                 //   });
                                             });
                                             $(".btn_cod_huella").click(function () {
@@ -293,19 +279,16 @@
 
                                                         });
 
-
                                                         $.ajax({
                                                             url: "../../autorizacion",
                                                             type: "POST",
                                                             data: "opc=Enviar_Correo" + $(".correos_" + r).val()
                                                         }).done(function () {
-                                                            window.location.href = "../../autorizacion?opc=mens_cod_huella";
+                                                            //window.location.href = "../../autorizacion?opc=mens_cod_huella";
                                                         });
-
 
                                                     }
                                                 }
-
                                                 //  $.each($(".cod_aps"), function () {
 
                                                 /**/
@@ -391,7 +374,6 @@
                                                                 Accion <span class="caret"></span>
                                                             </button>
                                                             <ul class="dropdown-menu">
-
                                                                 <li><a href="../../dgp?iddgp=<%=a.getId_dgp().trim()%>&opc=Seguimiento">Ver Proceso</a></li>
                                                                 <li><a href="../../documento?iddgp=<%=a.getId_dgp().trim()%>&idtr=<%=a.getId_trabajador().trim()%>&opc=Reg_Pro_Dgp">Ver Documentos</a></li>
                                                                 <li><a href="../../comentario?iddgp=<%=a.getId_dgp().trim()%>&idp=<%=a.getId_puesto()%>&opc=Comentar_Dgp">Comentar</a></li>    
