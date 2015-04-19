@@ -25,13 +25,17 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
 
     @Override
     public List<Map<String, ?>> Listar_Tra_Fecha(String FE_INICIO, String FE_FIN) {
+        String adday="+0";
         List<Map<String, ?>> Lista = new ArrayList<>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            if (FE_INICIO.equals(FE_FIN)) {
+                adday="+1";
+            }
             String sql = "SELECT ID_TRABAJADOR, NO_TRABAJADOR, AP_PATERNO, AP_MATERNO, COUNT(*) CANT_M\n"
                     + "FROM RHTH_MODIF_TRABAJADOR\n"
-                    + "WHERE FE_MODIF > TO_DATE('"+FE_INICIO+"') AND FE_MODIF < TO_DATE('"+FE_FIN+"')\n"
-                    + "GROUP BY ID_TRABAJADOR,NO_TRABAJADOR, AP_PATERNO, AP_MATERNO;";
+                    + "WHERE FE_MODIF >= TO_DATE('"+FE_INICIO+"') AND FE_MODIF <= TO_DATE('"+FE_FIN+"') "+adday+" \n"
+                    + "GROUP BY ID_TRABAJADOR,NO_TRABAJADOR, AP_PATERNO, AP_MATERNO";
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<>();

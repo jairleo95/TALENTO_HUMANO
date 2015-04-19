@@ -338,7 +338,7 @@
                                                         </section>
                                                         <section class="col col-6">
                                                             <label class="input"  id="titu">Fecha de Cese :
-                                                                <input type="date" name="FEC_HASTA"  required="" id="datepicker" class="val_fe" min="<%=fecha_min%>" >
+                                                                <input type="date" name="FEC_HASTA"  required="" id="datepicker" class="val_fe" min="<%=fecha_maxima_plazo%>" >
                                                             </label>
                                                         </section>
                                                     </div>

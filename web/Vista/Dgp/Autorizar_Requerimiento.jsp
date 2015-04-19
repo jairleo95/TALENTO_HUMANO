@@ -202,14 +202,14 @@
                                                             type: "POST",
                                                             data: "opc=Aceptar" + $(".val_aut" + $(".env_rem" + i).val()).val()
                                                         }).done(function () {
-
+                                                            window.location.href = "../../autorizacion";
                                                         });
 
 
                                                     }
                                                 }
 
-                                                window.location.href = "../../autorizacion";
+
 
 
 
@@ -259,12 +259,12 @@
                                                             type: "POST",
                                                             data: "opc=Aceptar" + $(".val_aut" + r).val()
                                                         }).done(function () {
-
+                                                            window.location.href = "../../autorizacion?opc=mens_cod_aps";
                                                         });
                                                     }
 
                                                 }
-                                                window.location.href = "../../autorizacion?opc=mens_cod_aps";
+
 
                                                 //  $.each($(".cod_aps"), function () {
 
@@ -299,13 +299,13 @@
                                                             type: "POST",
                                                             data: "opc=Enviar_Correo" + $(".correos_" + r).val()
                                                         }).done(function () {
-
+                                                            window.location.href = "../../autorizacion?opc=mens_cod_huella";
                                                         });
 
 
                                                     }
                                                 }
-                                                window.location.href = "../../autorizacion?opc=mens_cod_huella";
+
                                                 //  $.each($(".cod_aps"), function () {
 
                                                 /**/
@@ -570,10 +570,10 @@
                         <!-- WIDGET END -->
 
                     </div>
-                                        
+
                     <!-- end row -->
-                    
-                     <div class="row">
+
+                    <div class="row">
 
 
                         <!-- NEW WIDGET START -->
@@ -619,7 +619,7 @@
                                         <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                                             <thead>
                                                 <tr data-hide="phone,tablet"> <th><strong>Nro</strong></th>
-                                                    
+
                                                     <th ><strong>MES</strong></th>
 
                                                     <!--<th data-hide="phone,tablet"><strong>Foto</strong> </th>-->
@@ -634,16 +634,16 @@
                                                     <th  data-hide="phone,tablet">Fecha de Autorización</th>  
                                                     <th  data-hide="phone,tablet">Motivo</th>  
                                                     <th  data-hide="phone,tablet">MFL</th>  
-                                                       <%// if (dep.equals("DPT-0019")) {%>
+                                                        <%// if (dep.equals("DPT-0019")) {%>
 
                                                     <!--<th  ><strong>¿Cumplio Plazos?</strong></th>-->
-                                                        <%//if (idrol.trim().equals("ROL-0006")) {
+                                                    <%//if (idrol.trim().equals("ROL-0006")) {
 
-                                                        %>
+                                                    %>
                                                 </tr>
                                             </thead>
                                             <tbody> 
-                                                
+
                                                 <%for (int f = 0; f < List_id_Autorizados.size(); f++) {
 
                                                         V_Autorizar_Dgp a = new V_Autorizar_Dgp();
@@ -652,9 +652,9 @@
 
                                                 <tr>
                                                     <td><%=f + 1%></td>
-                                                   
-                                                   <td ><%=a.getMes_creacion()%></td>   
-                                                   
+
+                                                    <td ><%=a.getMes_creacion()%></td>   
+
                                                     <td ><%=a.getAp_paterno() + " " + a.getAp_materno() + " " + a.getNo_trabajador()%></td>
                                                     <td ><%=a.getNo_puesto()%></td>   
                                                     <td ><%=a.getNo_area()%></td>      
@@ -684,12 +684,12 @@
                                                 } else {
                                                     out.print("No registrado");
                                                 }%></td> 
-                                               <%
-                                                }
-                                                List_id_Autorizados.clear();%>
+                                                <%
+                                                    }
+                                                    List_id_Autorizados.clear();%>
                                             </tbody>
                                         </table>
-                                       
+
 
                                     </div>
                                     <!-- end widget content -->
@@ -720,9 +720,9 @@
 
 
 
-                                        
 
-       
+
+
 
 
 
@@ -870,7 +870,7 @@
                                                     responsiveHelper_dt_basic.respond();
                                                 }
                                             });
-                                            
+
                                             $('#dt_basic1').dataTable({
                                                 "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
                                                         "t" +

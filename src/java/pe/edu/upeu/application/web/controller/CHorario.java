@@ -104,12 +104,7 @@ public class CHorario extends HttpServlet {
 
                     if (hora_desde != null & d != null & hora_hasta != null) {
                         if (!hora_hasta.equals("") & !hora_desde.equals("") & !d.equals("")) {
-                            IHor.Insert_Horario(null,
-                                    hora_desde,
-                                    hora_hasta,
-                                    d,
-                                    ES_HORARIO,
-                                    ID_DETALLE_HORARIO);
+                            IHor.Insert_Horario(null,hora_desde,hora_hasta,d,ES_HORARIO,ID_DETALLE_HORARIO);
                         }
                     }
                 }
