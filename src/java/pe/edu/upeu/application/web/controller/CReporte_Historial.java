@@ -48,7 +48,7 @@ public class CReporte_Historial extends HttpServlet {
         InterfaceReporte_HistorialDAO re = new Reporte_HistorialDAO();
         try {
             if (opc.equals("hist_tra")) {
-                String pagina="Vista/Reportes/Trabajador/Historial.jsp";
+                String pagina = "Vista/Reportes/Trabajador/Historial.jsp";
                 response.sendRedirect(pagina);
             }
             if (opc.equals("list_mod_fecha")) {
@@ -58,6 +58,14 @@ public class CReporte_Historial extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", list);
 
+            }
+            if (opc.equals("Filtro_hijo")) {
+                String FE_INICIO = request.getParameter("fe_inicio");
+                String FE_FIN = request.getParameter("fe_fin");
+                String tipo = request.getParameter("tipo");
+                List<Map<String, ?>> lista = re.List_historial_modf_hijo(FE_INICIO, FE_FIN,tipo);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
             }
 
         } catch (Exception e) {

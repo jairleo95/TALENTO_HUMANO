@@ -25,16 +25,16 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
 
     @Override
     public List<Map<String, ?>> Listar_Tra_Fecha(String FE_INICIO, String FE_FIN) {
-        String adday="+0";
+        String adday = "+0";
         List<Map<String, ?>> Lista = new ArrayList<>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             if (FE_INICIO.equals(FE_FIN)) {
-                adday="+1";
+                adday = "+1";
             }
             String sql = "SELECT ID_TRABAJADOR, NO_TRABAJADOR, AP_PATERNO, AP_MATERNO, COUNT(*) CANT_M\n"
                     + "FROM RHTH_MODIF_TRABAJADOR\n"
-                    + "WHERE FE_MODIF >= TO_DATE('"+FE_INICIO+"') AND FE_MODIF <= TO_DATE('"+FE_FIN+"') "+adday+" \n"
+                    + "WHERE FE_MODIF >= TO_DATE('" + FE_INICIO + "') AND FE_MODIF <= TO_DATE('" + FE_FIN + "') " + adday + " \n"
                     + "GROUP BY ID_TRABAJADOR,NO_TRABAJADOR, AP_PATERNO, AP_MATERNO";
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
@@ -58,6 +58,39 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
             }
         }
         return Lista;
+    }
+
+    public List<Map<String, ?>> List_historial_modf_hijo(String FE_INICIO, String FE_FIN, String tipo) {
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "SELECT * FROM RHVD_HISTORIAL_MOD_HIJO WHERE FE_FILTRO_TODO BETWEEN TO_DATE('" + FE_INICIO.trim() + "') AND TO_DATE('" + FE_FIN.trim() + "') ORDER BY FE_FILTRO_TODO";
+            ResultSet rs = this.cnn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("id_datos_hijos_trabajador"));
+                rec.put("idtr", rs.getString("id_trabajador"));
+                rec.put("no_tra", rs.getString("NO_TRABAJADOR_T"));
+                rec.put("ap_pat_t", rs.getString("AP_PATERNO_T"));
+                rec.put("ap_mat_t", rs.getString("AP_MATERNO_T"));
+                rec.put("no_hijo", rs.getString("NO_HIJO_TRABAJADOR"));
+                rec.put("ap_pat_h", rs.getString("AP_PATERNO"));
+                rec.put("ap_mat_h", rs.getString("AP_MATERNO"));
+                rec.put("estado_filtro", rs.getString("ESTADO_REGISTRO"));
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+            }
+        }
+        return lista;
     }
 
 }

@@ -13,7 +13,9 @@ import java.util.Map;
  * @author Andres
  */
 public interface InterfaceReporte_HistorialDAO {
-    
-   public List<Map<String,?>> Listar_Tra_Fecha(String FE_INICIO, String FE_FIN);
-    
+
+    public List<Map<String, ?>> Listar_Tra_Fecha(String FE_INICIO, String FE_FIN);
+
+    public List<Map<String, ?>> List_historial_modf_hijo(String FE_INICIO, String FE_FIN, String tipo);
+
 }
