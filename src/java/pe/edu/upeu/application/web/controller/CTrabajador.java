@@ -24,6 +24,7 @@ import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.DireccionDAO;
 import pe.edu.upeu.application.dao.DocumentoDAO;
 import pe.edu.upeu.application.dao.EmpleadoDAO;
+import pe.edu.upeu.application.dao.Hist_Estado_CivilDAO;
 import pe.edu.upeu.application.dao.ListaDAO;
 import pe.edu.upeu.application.dao.Padre_Madre_ConyugueDAO;
 import pe.edu.upeu.application.dao.Tipo_DocumentoDAO;
@@ -37,6 +38,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceEmpleadoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceHist_Estado_CivilDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePadre_Madre_ConyugueDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTipo_DocumentoDAO;
@@ -80,6 +82,7 @@ public class CTrabajador extends HttpServlet {
         InterfaceTipo_DocumentoDAO tdoc = new Tipo_DocumentoDAO();
         InterfaceContratoDAO con = new ContratoDAO();
         InterfaceCarrera_UniversidadDAO cu = new Carrera_UniversidadDAO();
+        InterfaceHist_Estado_CivilDAO ec = new Hist_Estado_CivilDAO();
         String opc = "";
         String Text = "";
         opc = (String) request.getParameter("opc");
@@ -397,6 +400,7 @@ public class CTrabajador extends HttpServlet {
         }
         if (opc.equals("Modificar_Dat_Gen")) {
             String edit = request.getParameter("editar");
+            String ID_TRABAJADOR = request.getParameter("IDTR");
             String AP_PATERNO = request.getParameter("APELLIDO_P");
             String AP_MATERNO = request.getParameter("APELLIDO_M");
             String NO_TRABAJADOR = request.getParameter("NOMBRES");
@@ -416,6 +420,7 @@ public class CTrabajador extends HttpServlet {
                 TI_DOC = request.getParameter("TIPO_DOC");
                 NU_DOC = request.getParameter("NRO_DOC");
             }
+            
             String ES_CIVIL = request.getParameter("ESTADO_CIVIL");
             String LI_GRUPO_SANGUINEO = request.getParameter("GRUPO_SANGUINEO");
             String ES_FACTOR_RH = request.getParameter("FACTOR_RH_ID");
@@ -428,17 +433,26 @@ public class CTrabajador extends HttpServlet {
             String ES_AFILIADO_ESSALUD = request.getParameter("AFILIADO_ESSALUD_ID");
             String LI_TIPO_TRABAJADOR = request.getParameter("TIPO_TRABAJADOR_ID");
             String idtr = request.getParameter("idtr");
-            out.print(edit);
+           //out.print(edit);
             String US_MODIF = iduser;
             String IP_USUARIO = tr.ip();
+            String FE_MODIFICACION = "";
+            
+            String ES_CIVIL_A = request.getParameter("ES_CIVIL_A");
+            if(!ES_CIVIL.equals(ES_CIVIL_A) ){
+            ec.INSERT_HIST_ESTADO_CIVIL(null, ES_CIVIL_A, FE_MODIFICACION, US_MODIF, ID_TRABAJADOR);
+            }
             tr.MOD_DAT_GEN(AP_PATERNO, AP_MATERNO, NO_TRABAJADOR, TI_DOC, NU_DOC, ES_CIVIL, FE_NAC, ID_NACIONALIDAD, ID_DEPARTAMENTO, ID_PROVINCIA, ID_DISTRITO, TE_TRABAJADOR, CL_TRA, DI_CORREO_PERSONAL, DI_CORREO_INST, CO_SISTEMA_PENSIONARIO, ES_SEXO, LI_GRUPO_SANGUINEO, ID_NO_AFP, ES_AFILIADO_ESSALUD, LI_TIPO_TRABAJADOR, ES_FACTOR_RH, idtr,US_MODIF,IP_USUARIO);
+            
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
 
-            out.print(TI_DOC + "--" + NU_DOC);
+            //out.print(TI_DOC + "--" + NU_DOC);
+           // out.print(ES_CIVIL+FE_MODIFICACION+US_MODIF+ID_TRABAJADOR);
+            
             if (edit.equals("ok")) {
                 response.sendRedirect("Vista/Trabajador/Datos_Generales.jsp?idtr=" + idtr + "&edit=" + edit);
             } else {
-                response.sendRedirect("Vista/Trabajador/Datos_Generales.jsp?idtr=" + idtr);
+               response.sendRedirect("Vista/Trabajador/Datos_Generales.jsp?idtr=" + idtr);
             }
         }
         if (opc.equals("Editar_Asp_Acad")) {
@@ -606,9 +620,7 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr + "&edit=ok");
         }
-        if(opc.equals("hist_tra")){
-            response.sendRedirect("Vista/Reportes/Trabajador/Historial.jsp");
-        }
+        
 
     }
 

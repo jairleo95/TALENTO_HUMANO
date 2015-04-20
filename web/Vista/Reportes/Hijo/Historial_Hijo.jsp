@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Historial de Modificaciones</title>
+        <title>Historial Hijos</title>
 
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/font-awesome.min.css">
@@ -36,20 +36,30 @@
                         <div class="well">
                             <form class="smart-form form_f">
 
-                                <h1 class="text-center">Historial de Modificaciones <small>/ Trabajadores</small></h1><br>
+                                <h1 class="text-center"><strong>Datos de Hijos </strong> <small> / Historial de Modificaciones </small></h1><br>
                                 <h1 class="text-left font-md semi-bold">Filtros:</h1><br>
                                 <div class="row">
                                     <div class="col col-lg-9">
-                                        <section class="col col-sm-6">
-                                            <label>Desde:</label>
+                                        <section class="col col-sm-4">
+                                            <label><strong>Desde:</strong></label>
                                             <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                                                <input type="text"  placeholder="Seleccionar Fecha" class="datepicker" id="dtp1" data-dateformat='dd/mm/yy' name="fe_inicio">
+                                                <input type="text"  placeholder="Seleccionar Fecha" class="datepicker" id="dtp1" data-dateformat='dd/mm/yy' name="fe_inicio" required="">
                                             </label>
                                         </section>
-                                        <section class="col col-sm-6">
-                                            <label>Hasta:</label>
+                                        <section class="col col-sm-4">
+                                            <label><strong>Hasta:</strong></label>
                                             <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                                                <input type="text"  placeholder="Seleccionar Fecha" class="datepicker" id="dtp2" data-dateformat='dd/mm/yy' name="fe_fin">
+                                                <input type="text"  placeholder="Seleccionar Fecha" class="datepicker" id="dtp2" data-dateformat='dd/mm/yy' name="fe_fin" required="">
+                                            </label>
+                                        </section>
+                                        <section class="col col-sm-4">
+                                            <label><strong>Tipo:</strong></label>
+                                            <label class="select"> <i class="icon-append fa fa-calendar"></i>
+                                                <select name="tipo" required="" >
+                                                    <option value="1" >Todos</option>
+                                                    <option value="2">Registrados</option>
+                                                    <option value="3">Modificados</option>
+                                                </select>
                                             </label>
                                         </section>
                                     </div>
@@ -57,7 +67,9 @@
                                         <center>
                                             <section class="col col-sm-12">
                                                 <a class="btn btn-primary btn-circle btn-xl btnEnviar"><i class="glyphicon glyphicon-search"></i></a>
+                                                <a class="btn btn-danger btn-circle btn-xl btnCancelar"><i class="glyphicon glyphicon-remove"></i></a>
                                             </section>
+
                                         </center>
                                     </div>
 
@@ -77,7 +89,8 @@
                                         <tr>
                                             <th class="text-center semi-bold">Nro</th>
                                             <th class="text-center semi-bold">Trabajador</th>
-                                            <th class="text-center semi-bold">Acciones</th>
+                                            <th class="text-center semi-bold">Hijo(a)</th>
+                                            <th class="text-center semi-bold">Detalle</th>
                                         </tr>
                                     </thead>
                                     <tbody class="tbodys">
@@ -162,66 +175,77 @@
                     changeMonth: true,
                     numberOfMonths: 2,
                     onClose: function (selectedDate) {
-
                         $("#dtp1").datepicker("option", "maxDate", selectedDate);
                     }
                 });
                 $('.tabla_t').DataTable();
                 $('.btnEnviar').click(function () {
-                    var data = $('.form_f').serializeArray();
-                    var d = "opc=list_mod_fecha";
-                    jQuery.each(data, function (index, field) {
-                        d += "&" + field.name + "=" + field.value;
-                    });
-                    $.post("../../../RHistorial?", d, function (objJson) {
-                        var lista = objJson.lista;
-                        if (lista.length < 1) {
-                            $.smallBox({
-                                title: "Busqueda de Historial",
-                                content: "<i class='fa fa-ban'></i> <i>No hay modificaciones en ese rango de fechas</i>",
-                                color: "#dfb56c",
-                                iconSmall: "bounce animated",
-                                timeout: 4000
-                            });
-                            crear_t();
-                            $('.tabla_t').DataTable();
-                        } else {
-                            var t="";
-                            for (var i = 0; i < lista.length; i++) {
-                                t += "<tr>";
-                                t += "<td>" + (i + 1) + "</td>";
-                                t += "<td>" + lista[i].no_tra + " " + lista[i].ap_pat + " " + lista[i].ap_mat + "</td>";
-                                t += '<td>'+barra_acciones(lista[i].id_tra)+'</td></tr>';
+
+
+                    if ($('.form_f').valid()) {
+                        var data = $('.form_f').serialize();
+                        var d = "&opc=Filtro_hijo";
+                        $.post("../../../RHistorial", data + d, function (objJson) {
+                            var lista = objJson.lista;
+                            if (objJson.rpta == -1) {
+                                alert(objJson.mensaje);
+                                return;
                             }
-                            
+                            if (lista.length < 1) {
+                                $.smallBox({
+                                    title: "Busqueda de Historial",
+                                    content: "<i class='fa fa-ban'></i> <i>No hay modificaciones en ese rango de fechas</i>",
+                                    color: "#dfb56c",
+                                    iconSmall: "bounce animated",
+                                    timeout: 4000
+                                });
+                                crear_t();
+                                $('.tabla_t').DataTable();
+                            } else {
+                                var t = "<tr>";
+                                for (var i = 0; i < lista.length; i++) {
+                                    t += "<td>" + (i + 1) + "</td>";
+                                    t += "<td>" + lista[i].ap_pat_t + " " + lista[i].ap_mat_t + " " + lista[i].no_tra + "</td>";
+                                    t += "<td>" + lista[i].ap_pat_h + " " + lista[i].ap_mat_h + " " + lista[i].no_hijo + "</td>";
+                                    if (lista[i].estado_filtro == '1') {
+                                        t += "<td>Modificado</td>";
+                                    } else if (lista[i].estado_filtro == '0') {
+                                        t += "<td>Agregado</td>";
+                                    }
+                                    t += "<td>Detalle</td></tr>";
+                                }
+                                crear_t();
+                                $('.tbodys').append(t);
+                                $('.tabla_t').DataTable();
+                            }
+                        });
+                        $(".btnCancelar").click(function () {
+                            $('.form_f')[0].reset();
                             crear_t();
-                            $('.tbodys').append(t);
                             $('.tabla_t').DataTable();
-                        }
-                    });
-                    function crear_t() {
-                        var text = '<table class="tabla_t table table-bordered table-hover table-striped"><thead><tr><th class="text-center semi-bold">Nro</th>';
-                        text += '<th class="text-center semi-bold">Trabajador</th><th class="text-center semi-bold">Detalle</th></tr></thead><tbody class="tbodys">';
-                        text += '</tbody></table>';
-                        $('.cont_t').empty();
-                        $('.cont_t').append(text);
+
+                        });
+                    } else {
+                        $.smallBox({
+                            title: "Busqueda de Historial",
+                            content: "<i class='fa fa-ban'></i> <i>Complete los filtros...</i>",
+                            color: "red",
+                            iconSmall: "bounce animated",
+                            timeout: 4000
+                        });
                     }
-                    function barra_acciones(idtr){
-                        var tex='<center><div class="btn-group">';
-                        tex+='<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">';
-                        tex+='Action <span class="caret"></span></button>';
-                        tex+='<ul class="dropdown-menu" role="menu">';
-                        tex+='<li><a href="../../../RHistorial?opc=mod_tra&idtr='+idtr+'">Detalle</a></li>';
-                        tex+='<li><a href="#">Another action</a></li>';
-                        tex+='<li><a href="#">Something else here</a></li>';
-                        tex+='<li class="divider"></li>';
-                        tex+='<li><a href="#">Separated link</a></li>';
-                        tex+='</ul>';
-                        tex+='</div></center>';
-                        return tex;
-                    }
+
+
+
                 });
             });
+            function crear_t() {
+                var text = '<table class="tabla_t table table-bordered table-hover table-striped"><thead><tr><th class="text-center semi-bold">Nro</th>';
+                text += '<th class="text-center semi-bold">Trabajador</th><th class="text-center semi-bold">Hijo(a)</th><th class="text-center semi-bold">Estado</th><th class="text-center semi-bold">Detalle</th></tr></thead><tbody class="tbodys">';
+                text += '</tbody></table>';
+                $('.cont_t').empty();
+                $('.cont_t').append(text);
+            }
         </script>
     </body>
 

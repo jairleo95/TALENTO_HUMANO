@@ -127,14 +127,14 @@ public class CAutorizacion extends HttpServlet {
                 String correo_inst = request.getParameter("co_inst");
                 String correo_personal = request.getParameter("co_pers");
                 //correo.Enviar(to, from, asunto, cuerpo);
-                correo.Enviar("jairleo95@gmail.com", correo_inst, "CARPETA LABORAL - UPEU", "Estimado(a) Colaborador(a),\n"
+                correo.Enviar("jairleo95@gmail.com", "jairleo95@gmail.com", "CARPETA LABORAL - UPEU", "Estimado(a) Colaborador(a),\n"
                         + "Compartimos la siguiente información\n \n"
                         + "- Bienestar para el trabajador\n"
                         + "- Reglamento de Control de Asistencia\n"
                         + "- Reglamento de trabajo\n"
                         + "- Boletín Informativo - sistema pensionario\n \n"
                         + "Saludos Cordiales");
-                correo.Enviar("jairleo95@gmail.com", correo_personal, "CARPETA LABORAL - UPEU", "Estimado(a) Colaborador(a),\n"
+                correo.Enviar("jairleo95@gmail.com", "jairleo95@gmail.com", "CARPETA LABORAL - UPEU", "Estimado(a) Colaborador(a),\n"
                         + "Compartimos la siguiente información\n \n"
                         + "- Bienestar para el trabajador\n"
                         + "- Reglamento de Control de Asistencia\n"

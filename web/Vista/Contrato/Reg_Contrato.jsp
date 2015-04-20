@@ -298,44 +298,44 @@
 
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Remuneración:
-                                                <input type="text" name="SUELDO" value="<%=d.getCa_sueldo()%>" class="input-group-sm" id="remu">
+                                                <input type="text" name="SUELDO" value="<%=d.getCa_sueldo()%>" class="input-group-sm" id="remu" readonly="">
                                             </label>
                                         </section>
                                         <section class="col col-1">
                                             <label class="input" id="titulo">Reintegro:
-                                                <input type="text" name="REINTEGRO" value="0" class="input-group-sm" id="rein">
+                                                <input type="text" name="REINTEGRO" value="0" class="input-group-sm" id="rein" readonly="">
                                             </label>
                                         </section>
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Bono Alimentario:
-                                                <input type="text" name="BONO_ALIMENTO" value="<%=d.getCa_bono_alimentario()%>" class="input-group-sm" id="bo_a">
+                                                <input type="text" name="BONO_ALIMENTO" value="<%=d.getCa_bono_alimentario()%>" class="input-group-sm" id="bo_a" readonly="">
                                             </label>
                                         </section>
                                         <section class="col col-1">
                                             <label class="input" id="titulo">BEV:
-                                                <input type="text" name="BEV" value="<%=d.getDe_bev()%>" class="input-group-sm" id="bev">
+                                                <input type="text" name="BEV" value="<%=d.getDe_bev()%>" class="input-group-sm" id="bev" readonly="">
                                             </label>
                                         </section>
                                         <section class="col col-1">
                                             <label class="input" id="titulo">Bono puesto:
-                                                <input type="text" name="ca_bono_puesto" value="<%=d.getCa_bonificacion_p()%>" class="input-group-sm" required="" id="ca_bono_pu">
+                                                <input type="text" name="ca_bono_puesto" value="<%=d.getCa_bonificacion_p()%>" class="input-group-sm" required="" id="ca_bono_pu" readonly="">
                                             </label>
                                         </section>
 
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Sueldo Total:
-                                                <input type="text" name="TOTAL_SUELDO" value="<%=d.getCa_bono_alimentario() + d.getCa_sueldo() + d.getDe_bev() + d.getCa_bonificacion_p()%>" class="input-group-sm" id="su_t">
+                                                <input type="text" name="TOTAL_SUELDO" value="<%=d.getCa_bono_alimentario() + d.getCa_sueldo() + d.getDe_bev() + d.getCa_bonificacion_p()%>" class="input-group-sm" id="su_t" readonly="">
                                             </label>
                                         </section>
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Tipo Horas Pago:
-                                                <input type="text" name="TIPO_HORA_PAGO" value="0" class="input-group-sm">
+                                                <input type="text" name="TIPO_HORA_PAGO" value="0" class="input-group-sm" readonly="">
                                             </label>
                                         </section>
                                         <%int total = Integer.parseInt(request.getParameter("num")); %>
                                         <section class="col col-2" >
                                             <label class="input" id="titulo">Asignanción Familiar:
-                                                <input type="text" name="ASIG_FAMILIAR" <%if (total == 0) {%>value="0" <%} else {%> value="75.0" <%}%> class="input-group-sm" id="asig">
+                                                <input type="text" name="ASIG_FAMILIAR" <%if (total == 0) {%>value="0" <%} else {%> value="75.0" <%}%> class="input-group-sm" id="asig" readonly="">
                                             </label>
                                         </section>
                                     </div>

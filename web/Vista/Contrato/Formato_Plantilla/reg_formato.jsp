@@ -332,14 +332,14 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
     </head>
 
-    <body style="height:100%;width:100%;" align="center">
+    <body style="height:100%;width:100%;" align="center" width="100%">
         <%String no_ar = request.getParameter("no_arc");%>
         <input type="hidden" id="no_arch" class="no_arc" value="<%=no_ar%>">
         <h1>EDITAR PLANTILLAS</h1>
     <CENTER>
         <button class="btn btn-lg btn-primary" onclick="ExecuteCommand('print');" style="height:50%;weith:20px;"><span class="btn-"><i class="fa fa-print"></i></span>IMPRIMIR</button>
 
-        <form class="ckeditor_form" action="../../../formato_plantilla" method="post" align="center" width="100">
+        <form class="ckeditor_form" action="../../../formato_plantilla" method="post" align="center" width="100%">
             <textarea cols="100" id="editor1" name="editor1" rows="10" >
             </textarea>
             <script>
