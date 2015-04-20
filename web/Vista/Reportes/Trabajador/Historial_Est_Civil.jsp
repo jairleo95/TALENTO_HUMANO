@@ -63,6 +63,7 @@
 
 
                                 </div>
+                               
                             </form>
 
 
@@ -178,7 +179,7 @@
                     });
                     $.post("../../../RHistorial?", d, function(objJson) {
                         var lista = objJson.lista;
-
+                       // alert(lista)
                         if (lista.length < 1) {
                             $.smallBox({
                                 title: "Busqueda de Historial",
