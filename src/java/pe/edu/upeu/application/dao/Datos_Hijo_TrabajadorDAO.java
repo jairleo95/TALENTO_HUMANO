@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import pe.edu.upeu.application.dao_imp.InterfaceDatos_Hijo_Trabajador;
 import pe.edu.upeu.application.factory.ConexionBD;
@@ -29,8 +27,6 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
 
     ConexionBD conn;
     CConversion c = new CConversion();
-
-   
 
     @Override
     public void INSERT_DATOS_HIJO_TRABAJADOR(String ID_DATOS_HIJOS_TRABAJADOR, String ID_TRABAJADOR, String AP_PATERNO, String AP_MATERNO, String NO_HIJO_TRABAJADOR, String FE_NACIMIENTO, String ES_SEXO, String ES_TIPO_DOC, String NU_DOC, String ES_PRESENTA_DOCUMENTO, String ES_INSCRIPCION_VIG_ESSALUD, String ES_ESTUDIO_NIV_SUPERIOR, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String ES_DATOS_HIJO_TRABAJADOR) {
