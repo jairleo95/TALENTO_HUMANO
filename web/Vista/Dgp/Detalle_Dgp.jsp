@@ -465,6 +465,7 @@
                             $(".lb_fecha_solicitud").text("Fecha de Inicio :");
                             $(".tipo_fecha").val("date");
                         }
+                        alert();
                         list_select($(".plazo"), "../../plazo_dgp?opc=List_id_plazo", $(".solicitud_plazo").serialize(), "1", $(".tipo").val());
                     });
                     $(".sbm_solicitud").click(function (e) {

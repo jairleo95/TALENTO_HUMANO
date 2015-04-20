@@ -1,9 +1,9 @@
 <%-- 
-    Document   : Historial
-    Created on : 14/04/2015, 10:05:59 AM
-    Author     : Andres
+    Document   : Historial_Est_Civil
+    Created on : 19/04/2015, 10:55:38 AM
+    Author     : Alex
 --%>
-
+<jsp:useBean id="List_Estado_Civil" scope="application" class="java.util.ArrayList"/>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -36,7 +36,7 @@
                         <div class="well">
                             <form class="smart-form form_f">
 
-                                <h1 class="text-center">Historial de Modificaciones <small>/ Trabajadores</small></h1><br>
+                                <h1 class="text-center">Historial de Modificaciones <small>/Estado Civil</small></h1><br>
                                 <h1 class="text-left font-md semi-bold">Filtros:</h1><br>
                                 <div class="row">
                                     <div class="col col-lg-9">
@@ -77,7 +77,10 @@
                                         <tr>
                                             <th class="text-center semi-bold">Nro</th>
                                             <th class="text-center semi-bold">Trabajador</th>
-                                            <th class="text-center semi-bold">Acciones</th>
+                                            <th class="text-center semi-bold">Es.Civil Pasado</th>
+                                            <th class="text-center semi-bold">Es.Civil Actual</th>
+                                            <th class="text-center semi-bold">Uuario</th>
+                                            <th class="text-center semi-bold">Fe.Modificacion</th>
                                         </tr>
                                     </thead>
                                     <tbody class="tbodys">
@@ -145,13 +148,13 @@
         <script src="../../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="../../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
         <script type="text/javascript">
-            $(document).ready(function () {
+            $(document).ready(function() {
                 $("#dtp1").datepicker({
                     dateFormat: "dd/mm/yy",
                     defaultDate: "+1w",
                     changeMonth: true,
                     numberOfMonths: 2,
-                    onClose: function (selectedDate) {
+                    onClose: function(selectedDate) {
                         $("#dtp2").datepicker("option", "minDate", selectedDate);
                         $("#dtp2").datepicker("setDate", selectedDate);
                     }
@@ -161,20 +164,21 @@
                     defaultDate: "+1w",
                     changeMonth: true,
                     numberOfMonths: 2,
-                    onClose: function (selectedDate) {
+                    onClose: function(selectedDate) {
 
                         $("#dtp1").datepicker("option", "maxDate", selectedDate);
                     }
                 });
                 $('.tabla_t').DataTable();
-                $('.btnEnviar').click(function () {
+                $('.btnEnviar').click(function() {
                     var data = $('.form_f').serializeArray();
-                    var d = "opc=list_mod_fecha";
-                    jQuery.each(data, function (index, field) {
+                    var d = "opc=list_hist_es_civil";
+                    jQuery.each(data, function(index, field) {
                         d += "&" + field.name + "=" + field.value;
                     });
-                    $.post("../../../RHistorial?", d, function (objJson) {
+                    $.post("../../../RHistorial?", d, function(objJson) {
                         var lista = objJson.lista;
+
                         if (lista.length < 1) {
                             $.smallBox({
                                 title: "Busqueda de Historial",
@@ -186,39 +190,49 @@
                             crear_t();
                             $('.tabla_t').DataTable();
                         } else {
-                            var t="";
+                            var t = "<tr>";
                             for (var i = 0; i < lista.length; i++) {
-                                t += "<tr>";
+                                var ec_p;
+                                var ec_a;
+                                if(lista[i].es_civil_p == 1 ){ec_p = "Soltero(a)"}
+                                if(lista[i].es_civil_p == 2){ec_p = "Casado(a)"}
+                                if(lista[i].es_civil_p == 3){ec_p = "Divorciado(a)"}
+                                if(lista[i].es_civil_p == 4){ec_p = "Viudo(a)"}
+                                if(lista[i].es_civil_p == 5){ec_p = "Separado(a)"}
+                                if(lista[i].es_civil_p == 6){ec_p = "Conviviente(a)"}
+                                
+                                if(lista[i].es_civil_a == 1 ){ec_a = "Soltero(a)"}
+                                if(lista[i].es_civil_a == 2){ec_a = "Casado(a)"}
+                                if(lista[i].es_civil_a == 3){ec_a = "Divorciado(a)"}
+                                if(lista[i].es_civil_a == 4){ec_a = "Viudo(a)"}
+                                if(lista[i].es_civil_a == 5){ec_a = "Separado(a)"}
+                                if(lista[i].es_civil_a == 6){ec_a = "Conviviente(a)"}
+                                
                                 t += "<td>" + (i + 1) + "</td>";
                                 t += "<td>" + lista[i].no_tra + " " + lista[i].ap_pat + " " + lista[i].ap_mat + "</td>";
-                                t += '<td>'+barra_acciones(lista[i].id_tra)+'</td></tr>';
+                                t += "<td>" + ec_p + "</td>";
+                                t += "<td>" + ec_a+ "</td>";
+                                t += "<td>" + lista[i].no_usuario + "</td>";
+                                t += "<td>" + lista[i].fe_modi + "</td></tr>";
                             }
-                            
                             crear_t();
                             $('.tbodys').append(t);
                             $('.tabla_t').DataTable();
                         }
                     });
                     function crear_t() {
+                        /* var text = '<table class="tabla_t table table-bordered table-hover table-striped"><thead><tr><th class="text-center semi-bold">Nro</th>';
+                         text += '<th class="text-center semi-bold">Trabajador</th><th class="text-center semi-bold">Detalle</th></tr></thead><tbody class="tbodys">';
+                         text += '</tbody></table>';
+                         $('.cont_t').empty();
+                         $('.cont_t').append(text);*/
+
                         var text = '<table class="tabla_t table table-bordered table-hover table-striped"><thead><tr><th class="text-center semi-bold">Nro</th>';
-                        text += '<th class="text-center semi-bold">Trabajador</th><th class="text-center semi-bold">Detalle</th></tr></thead><tbody class="tbodys">';
+                        text += '<th class="text-center semi-bold">Trabajador</th><th class="text-center semi-bold">Es.Civil Pasado</th><th class="text-center semi-bold">Es.Civil Actual</th>';
+                        text += '<th class="text-center semi-bold">Uuario</th><th class="text-center semi-bold">Fe.Modificacion</th> </tr> </thead><tbody class="tbodys">';
                         text += '</tbody></table>';
                         $('.cont_t').empty();
                         $('.cont_t').append(text);
-                    }
-                    function barra_acciones(idtr){
-                        var tex='<center><div class="btn-group">';
-                        tex+='<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">';
-                        tex+='Action <span class="caret"></span></button>';
-                        tex+='<ul class="dropdown-menu" role="menu">';
-                        tex+='<li><a href="../../../RHistorial?opc=mod_tra&idtr='+idtr+'">Detalle</a></li>';
-                        tex+='<li><a href="#">Another action</a></li>';
-                        tex+='<li><a href="#">Something else here</a></li>';
-                        tex+='<li class="divider"></li>';
-                        tex+='<li><a href="#">Separated link</a></li>';
-                        tex+='</ul>';
-                        tex+='</div></center>';
-                        return tex;
                     }
                 });
             });

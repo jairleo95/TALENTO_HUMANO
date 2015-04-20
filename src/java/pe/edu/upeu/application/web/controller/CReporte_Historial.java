@@ -17,7 +17,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import pe.edu.upeu.application.dao.ListaDAO;
 import pe.edu.upeu.application.dao.Reporte_HistorialDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceReporte_HistorialDAO;
 
 /**
@@ -46,6 +48,7 @@ public class CReporte_Historial extends HttpServlet {
         HttpSession sesion = request.getSession(true);
         String id_user = (String) sesion.getAttribute("IDUSER");
         InterfaceReporte_HistorialDAO re = new Reporte_HistorialDAO();
+        InterfaceListaDAO li = new ListaDAO();
         try {
             if (opc.equals("hist_tra")) {
                 String pagina = "Vista/Reportes/Trabajador/Historial.jsp";
@@ -57,7 +60,27 @@ public class CReporte_Historial extends HttpServlet {
                 List<Map<String, ?>> list = re.Listar_Tra_Fecha(FE_INICIO, FE_FIN);
                 rpta.put("rpta", "1");
                 rpta.put("lista", list);
-
+            }
+            if (opc.equals("mod_tra")) {
+                String ID_TRABAJADOR=request.getParameter("idtr");
+                response.sendRedirect("Vista/Reportes/Trabajador/detalleHistorial.jsp?idtr="+ID_TRABAJADOR);
+            }
+            if (opc.equals("list_mod_tra")) {
+                String ID_TRABAJADOR=request.getParameter("idtr");
+                List<Map<String, ?>> list = re.Listar_Mod_Tra(ID_TRABAJADOR);
+                rpta.put("rpta", "1");
+                rpta.put("lista", list);
+            }
+            if (opc.equals("hist_es_civil")) {
+                getServletContext().setAttribute("List_Estado_Civil", li.List_Estado_Civil());
+                response.sendRedirect("Vista/Reportes/Trabajador/Historial_Est_Civil.jsp");
+            }
+            if (opc.equals("list_hist_es_civil")) {
+                String FE_INICIO = request.getParameter("fe_inicio");
+                String FE_FIN = request.getParameter("fe_fin");
+                List<Map<String, ?>> list = re.Listar_His_Estado_Civil(FE_INICIO, FE_FIN);
+                rpta.put("rpta", "1");
+                rpta.put("lista", list);
             }
             if (opc.equals("Filtro_hijo")) {
                 String FE_INICIO = request.getParameter("fe_inicio");
