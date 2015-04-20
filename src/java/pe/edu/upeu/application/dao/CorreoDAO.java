@@ -1,5 +1,7 @@
 package pe.edu.upeu.application.dao;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -16,6 +18,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import pe.edu.upeu.application.dao_imp.InterfaceCorreoDAO;
+import pe.edu.upeu.application.factory.FactoryConnectionDB;
 
 public class CorreoDAO implements InterfaceCorreoDAO {
 
@@ -40,6 +43,12 @@ public class CorreoDAO implements InterfaceCorreoDAO {
                     }
                 });
         try {
+            // String ubicacion = FactoryConnectionDB.url + "Vista/Contrato/Reglamentos/";
+            String ubicacion = "D:\\NetBeansProjects\\TALENTO_HUMANO\\web\\Vista\\Contrato\\Reglamentos\\";
+            //   String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Contrato/Reglamentos/";
+
+            List<String> lista_archivos = new ArrayList<String>();
+
             // Create a default MimeMessage object.
             Message message = new MimeMessage(session);
             // Set From: header field of the header.
@@ -58,17 +67,22 @@ public class CorreoDAO implements InterfaceCorreoDAO {
             // Set text message part
             multipart.addBodyPart(messageBodyPart);
             // Part two is attachment
-          //  messageBodyPart = new MimeBodyPart();
-            String filename = "C:\\Users\\ALFA 3\\Documents\\Ac@demico_pre,matrivula.pdf";
-            String filename2 = "C:\\Users\\ALFA 3\\Documents\\ACTIVIDAD 1.docx";
-            DataSource source = new FileDataSource(filename);
-            messageBodyPart.setDataHandler(new DataHandler(source));
-            messageBodyPart.setFileName(filename);
-            multipart.addBodyPart(messageBodyPart);
+            //  messageBodyPart = new MimeBodyPart();
+            lista_archivos.add("BoletinInformativo.pdf");
+            lista_archivos.add("BIENESTAR PARA EL TRABAJADOR.pdf");
+            lista_archivos.add("Reglamento de Control de Asistencia.pdf");
+            lista_archivos.add("Reglamento de trabajo.pdf");
+            //   String filename2 = "C:\\Users\\ALFA 3\\Documents\\ACTIVIDAD 1.docx";
+           /* DataSource source = new FileDataSource(nombre_archivo);
+             messageBodyPart.setDataHandler(new DataHandler(source));
+             messageBodyPart.setFileName(nombre_archivo);
+             multipart.addBodyPart(messageBodyPart);*/
             // Send the complete message parts
-             message.setContent(multipart);
-           // agregar_archivo(multipart, filename,messageBodyPart);
-           // addAttachment(multipart, filename2);
+            message.setContent(multipart);
+            for (int i = 0; i < lista_archivos.size(); i++) {
+                agregar_archivo(multipart, lista_archivos.get(i), ubicacion + lista_archivos.get(i), messageBodyPart);
+            }
+            // addAttachment(multipart, filename2);
             // Send message
             Transport.send(message);
             //     System.out.println("Sent message successfully....");
@@ -77,9 +91,9 @@ public class CorreoDAO implements InterfaceCorreoDAO {
         }
     }
 
-    private static void agregar_archivo(Multipart multipart, String filename,BodyPart messageBodyPart) throws MessagingException {
-        DataSource source = new FileDataSource(filename);
-         messageBodyPart = new MimeBodyPart();
+    private static void agregar_archivo(Multipart multipart, String filename, String ubicacion, BodyPart messageBodyPart) throws MessagingException {
+        DataSource source = new FileDataSource(ubicacion);
+        messageBodyPart = new MimeBodyPart();
         messageBodyPart.setDataHandler(new DataHandler(source));
         messageBodyPart.setFileName(filename);
         multipart.addBodyPart(messageBodyPart);

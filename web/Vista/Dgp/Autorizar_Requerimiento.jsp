@@ -191,28 +191,18 @@
                                             });
                                         }
                                         $(document).ready(function () {
-
                                             $(".btn_pro_remuneracion").click(function () {
-
                                                 for (var i = 1; i <= <%=List_id_Autorizacion.size()%>; i++) {
                                                     if ($(".env_rem" + i).prop('checked')) {
-
                                                         $.ajax({
                                                             url: "../../autorizacion",
                                                             type: "POST",
                                                             data: "opc=Aceptar" + $(".val_aut" + $(".env_rem" + i).val()).val()
                                                         }).done(function () {
-
+                                                            window.location.href = "../../autorizacion";
                                                         });
-
-
                                                     }
                                                 }
-
-                                                window.location.href = "../../autorizacion";
-
-
-
                                             });
                                             $(".btn_pro_firma").click(function () {
                                                 try {
@@ -259,17 +249,13 @@
                                                             type: "POST",
                                                             data: "opc=Aceptar" + $(".val_aut" + r).val()
                                                         }).done(function () {
-
+                                                            window.location.href = "../../autorizacion?opc=mens_cod_aps";
                                                         });
                                                     }
-
                                                 }
-                                                window.location.href = "../../autorizacion?opc=mens_cod_aps";
-
                                                 //  $.each($(".cod_aps"), function () {
 
                                                 /**/
-
                                                 //   });
                                             });
                                             $(".btn_cod_huella").click(function () {
@@ -293,19 +279,16 @@
 
                                                         });
 
-
                                                         $.ajax({
                                                             url: "../../autorizacion",
                                                             type: "POST",
                                                             data: "opc=Enviar_Correo" + $(".correos_" + r).val()
                                                         }).done(function () {
-
+                                                            //window.location.href = "../../autorizacion?opc=mens_cod_huella";
                                                         });
-
 
                                                     }
                                                 }
-                                                window.location.href = "../../autorizacion?opc=mens_cod_huella";
                                                 //  $.each($(".cod_aps"), function () {
 
                                                 /**/
@@ -391,7 +374,6 @@
                                                                 Accion <span class="caret"></span>
                                                             </button>
                                                             <ul class="dropdown-menu">
-
                                                                 <li><a href="../../dgp?iddgp=<%=a.getId_dgp().trim()%>&opc=Seguimiento">Ver Proceso</a></li>
                                                                 <li><a href="../../documento?iddgp=<%=a.getId_dgp().trim()%>&idtr=<%=a.getId_trabajador().trim()%>&opc=Reg_Pro_Dgp">Ver Documentos</a></li>
                                                                 <li><a href="../../comentario?iddgp=<%=a.getId_dgp().trim()%>&idp=<%=a.getId_puesto()%>&opc=Comentar_Dgp">Comentar</a></li>    
@@ -570,10 +552,10 @@
                         <!-- WIDGET END -->
 
                     </div>
-                                        
+
                     <!-- end row -->
-                    
-                     <div class="row">
+
+                    <div class="row">
 
 
                         <!-- NEW WIDGET START -->
@@ -619,7 +601,7 @@
                                         <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                                             <thead>
                                                 <tr data-hide="phone,tablet"> <th><strong>Nro</strong></th>
-                                                    
+
                                                     <th ><strong>MES</strong></th>
 
                                                     <!--<th data-hide="phone,tablet"><strong>Foto</strong> </th>-->
@@ -634,16 +616,16 @@
                                                     <th  data-hide="phone,tablet">Fecha de Autorización</th>  
                                                     <th  data-hide="phone,tablet">Motivo</th>  
                                                     <th  data-hide="phone,tablet">MFL</th>  
-                                                       <%// if (dep.equals("DPT-0019")) {%>
+                                                        <%// if (dep.equals("DPT-0019")) {%>
 
                                                     <!--<th  ><strong>¿Cumplio Plazos?</strong></th>-->
-                                                        <%//if (idrol.trim().equals("ROL-0006")) {
+                                                    <%//if (idrol.trim().equals("ROL-0006")) {
 
-                                                        %>
+                                                    %>
                                                 </tr>
                                             </thead>
                                             <tbody> 
-                                                
+
                                                 <%for (int f = 0; f < List_id_Autorizados.size(); f++) {
 
                                                         V_Autorizar_Dgp a = new V_Autorizar_Dgp();
@@ -652,9 +634,9 @@
 
                                                 <tr>
                                                     <td><%=f + 1%></td>
-                                                   
-                                                   <td ><%=a.getMes_creacion()%></td>   
-                                                   
+
+                                                    <td ><%=a.getMes_creacion()%></td>   
+
                                                     <td ><%=a.getAp_paterno() + " " + a.getAp_materno() + " " + a.getNo_trabajador()%></td>
                                                     <td ><%=a.getNo_puesto()%></td>   
                                                     <td ><%=a.getNo_area()%></td>      
@@ -684,12 +666,12 @@
                                                 } else {
                                                     out.print("No registrado");
                                                 }%></td> 
-                                               <%
-                                                }
-                                                List_id_Autorizados.clear();%>
+                                                <%
+                                                    }
+                                                    List_id_Autorizados.clear();%>
                                             </tbody>
                                         </table>
-                                       
+
 
                                     </div>
                                     <!-- end widget content -->
@@ -720,9 +702,9 @@
 
 
 
-                                        
 
-       
+
+
 
 
 
@@ -870,7 +852,7 @@
                                                     responsiveHelper_dt_basic.respond();
                                                 }
                                             });
-                                            
+
                                             $('#dt_basic1').dataTable({
                                                 "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
                                                         "t" +

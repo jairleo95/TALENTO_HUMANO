@@ -15,5 +15,6 @@ import java.util.Map;
 public interface InterfaceReporte_HistorialDAO {
     
    public List<Map<String,?>> Listar_Tra_Fecha(String FE_INICIO, String FE_FIN);
+   public List<Map<String,?>> Listar_His_Estado_Civil(String FE_INICIO, String FE_FIN);
     
 }

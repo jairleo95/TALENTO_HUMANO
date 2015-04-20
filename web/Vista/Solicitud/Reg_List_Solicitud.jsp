@@ -65,7 +65,7 @@
         <script type="text/javascript"  src="../../js/Js_Alerta/Alertas.js"></script>
     </head>
 
-    
+
     <body  >
         <!-- MAIN PANEL -->
         <div id="main" role="main" style="margin-left: 0px;">
@@ -120,34 +120,34 @@
                                                 </tr>
                                             </thead>
                                             <!--<tbody> 
-                                                <%for (int i = 0; i < Listar_solicitud.size(); i++) {
-                                                        V_Solicitud_Requerimiento s = new V_Solicitud_Requerimiento();
-                                                        s = (V_Solicitud_Requerimiento) Listar_solicitud.get(i);
-                                                %>
-                                                <tr>
-                                                    <td><%=(i + 1)%></td>
-                                                    <td>
-                                                        <div class="btn-group">
-                                                            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                                                Accion <span class="caret"></span>
-                                                            </button>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a href="../../dgp?iddgp=<%=s.getId_dgp().trim()%>&idtr=<%=s.getId_trabajador().trim()%>&opc=Detalle"> Ver Requerimiento</a></li>
-                                                                <li class="divider"></li>
-                                                                <li><a href=""> Ver Solicitud</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </td>
-                                                    <td><a href="../../trabajador?idtr=<%=s.getId_trabajador()%>&opc=list"><strong><%=s.getAp_paterno() + " " + s.getAp_materno() + " " + s.getNo_trabajador()%></strong></a></td>
-                                                    <td><%=s.getNo_dep()%></td>
-                                                    <td><%=s.getNo_area()%></td>
-                                                    <td><%=s.getNo_puesto()%></td>
-                                                    <td><%=s.getFe_desde()%></td>
-                                                    <td><%=s.getFe_hasta()%></td>
-                                                    <td><%=s.getFe_creacion()%></td>
-                                                </tr>
-                                                <%}%>
-                                            </tbody>-->
+                                            <%for (int i = 0; i < Listar_solicitud.size(); i++) {
+                                                    V_Solicitud_Requerimiento s = new V_Solicitud_Requerimiento();
+                                                    s = (V_Solicitud_Requerimiento) Listar_solicitud.get(i);
+                                            %>
+                                            <tr>
+                                                <td><%=(i + 1)%></td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                            Accion <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a href="../../dgp?iddgp=<%=s.getId_dgp().trim()%>&idtr=<%=s.getId_trabajador().trim()%>&opc=Detalle"> Ver Requerimiento</a></li>
+                                                            <li class="divider"></li>
+                                                            <li><a href=""> Ver Solicitud</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                                <td><a href="../../trabajador?idtr=<%=s.getId_trabajador()%>&opc=list"><strong><%=s.getAp_paterno() + " " + s.getAp_materno() + " " + s.getNo_trabajador()%></strong></a></td>
+                                                <td><%=s.getNo_dep()%></td>
+                                                <td><%=s.getNo_area()%></td>
+                                                <td><%=s.getNo_puesto()%></td>
+                                                <td><%=s.getFe_desde()%></td>
+                                                <td><%=s.getFe_hasta()%></td>
+                                                <td><%=s.getFe_creacion()%></td>
+                                            </tr>
+                                            <%}%>
+                                        </tbody>-->
                                         </table>
                                     </div>
                                     <!-- end widget content -->
@@ -155,7 +155,8 @@
                                 <!-- end widget div -->
                             </div>
                             <!-- end widget -->
-                            <!-- NEW WIDGET START -->
+                        </article>
+                        <!-- NEW WIDGET START -->
                         <article class="col-sm-12 col-md-12 col-lg-6">
                             <div id="alerta_dgp">
                             </div>
@@ -233,7 +234,7 @@
                                             </footer>
 
                                         </form>
-                                        
+
                                     </div>
                                     <!-- end widget content -->
                                 </div>
@@ -338,11 +339,68 @@
 
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             pageSetUp();
-            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
                 $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+            });
+
+            $(".tipo").change(function() {
+                if ($(this).val() == '2') {
+                    $(".fe_inicio").attr("type", "month");
+                    $(".lb_fecha_solicitud").text("Mes :");
+                    $(".tipo_fecha").val("month");
+                }
+                if ($(this).val() == '1') {
+                    $(".fe_inicio").attr("type", "date");
+                    $(".lb_fecha_solicitud").text("Fecha de Inicio :");
+                    $(".tipo_fecha").val("date");
+                }
+                list_select($(".plazo"), "../../plazo_dgp?opc=List_id_plazo", $(".solicitud_plazo").serialize(), "1", $(".tipo").val());
+            });
+            $(".sbm_solicitud").click(function(e) {
+                if ($(".solicitud_plazo").valid() == true) {
+
+                    $.SmartMessageBox({
+                        title: "¡Advertencia!",
+                        content: "¿Esta seguro de enviar la solicitud?",
+                        buttons: '[No][Si]'
+                    }, function(ButtonPressed) {
+                        if (ButtonPressed === "Si") {
+
+                            $.ajax({
+                                url: "../../solicitud_requerimiento",
+                                type: "post",
+                                data: $(".solicitud_plazo").serialize() + "&opc=Registrar_solicitud"
+                            }).done(function() {
+                                $('.solicitud_plazo')[0].reset();
+                                $.smallBox({
+                                    title: "¡Exito!",
+                                    content: "<i class='fa fa-clock-o'></i> <i>La solicitud ha sido enviada exitosamente...</i>",
+                                    color: "#659265",
+                                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                    timeout: 4000
+                                });
+                            }).error(function() {
+                                $.smallBox({
+                                    title: "¡Error!",
+                                    content: "<i class='fa fa-clock-o'></i> <i>La solicitud no ha podido ser enviada...</i>",
+                                    color: "#C46A69",
+                                    iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                    timeout: 4000
+                                });
+
+                            });
+
+                        }
+                        if (ButtonPressed === "No") {
+                        }
+
+                    });
+
+                }
+
             });
             $(".cod_aps").numeric();
 
@@ -378,16 +436,16 @@
                         "t" +
                         "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
                 "autoWidth": true,
-                "preDrawCallback": function () {
+                "preDrawCallback": function() {
                     // Initialize the responsive datatables helper once.
                     if (!responsiveHelper_dt_basic) {
                         responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
                     }
                 },
-                "rowCallback": function (nRow) {
+                "rowCallback": function(nRow) {
                     responsiveHelper_dt_basic.createExpandIcon(nRow);
                 },
-                "drawCallback": function (oSettings) {
+                "drawCallback": function(oSettings) {
                     responsiveHelper_dt_basic.respond();
                 }
             });
@@ -406,16 +464,16 @@
                         "t" +
                         "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
                 "autoWidth": true,
-                "preDrawCallback": function () {
+                "preDrawCallback": function() {
                     // Initialize the responsive datatables helper once.
                     if (!responsiveHelper_datatable_fixed_column) {
                         responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
                     }
                 },
-                "rowCallback": function (nRow) {
+                "rowCallback": function(nRow) {
                     responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
                 },
-                "drawCallback": function (oSettings) {
+                "drawCallback": function(oSettings) {
                     responsiveHelper_datatable_fixed_column.respond();
                 }
 
@@ -425,7 +483,7 @@
             $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
 
             // Apply the filter
-            $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
+            $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function() {
 
                 otable
                         .column($(this).parent().index() + ':visible')
@@ -441,16 +499,16 @@
                         "t" +
                         "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
                 "autoWidth": true,
-                "preDrawCallback": function () {
+                "preDrawCallback": function() {
                     // Initialize the responsive datatables helper once.
                     if (!responsiveHelper_datatable_col_reorder) {
                         responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
                     }
                 },
-                "rowCallback": function (nRow) {
+                "rowCallback": function(nRow) {
                     responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
                 },
-                "drawCallback": function (oSettings) {
+                "drawCallback": function(oSettings) {
                     responsiveHelper_datatable_col_reorder.respond();
                 }
             });
@@ -483,16 +541,16 @@
                     "sSwfPath": "js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
                 },
                 "autoWidth": true,
-                "preDrawCallback": function () {
+                "preDrawCallback": function() {
                     // Initialize the responsive datatables helper once.
                     if (!responsiveHelper_datatable_tabletools) {
                         responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
                     }
                 },
-                "rowCallback": function (nRow) {
+                "rowCallback": function(nRow) {
                     responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
                 },
-                "drawCallback": function (oSettings) {
+                "drawCallback": function(oSettings) {
                     responsiveHelper_datatable_tabletools.respond();
                 }
             });
@@ -509,7 +567,7 @@
         _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
         _gaq.push(['_trackPageview']);
 
-        (function () {
+        (function() {
             var ga = document.createElement('script');
             ga.type = 'text/javascript';
             ga.async = true;
