@@ -202,7 +202,7 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT * FROM RHVD_FILTRO_EDAD";
+            String sql = "SELECT * FROM RHVD_FILTRO_EDAD ";
             sql += (!desde.equals("") & !(hasta.equals(""))) ? "where EDAD BETWEEN '" + desde.trim() + "' and '" + hasta.trim() + "'" : "";
             sql += (!edad.equals("")) ? "where EDAD='" + edad.trim() + "'" : "";
             ResultSet rs = this.conn.query(sql);
@@ -213,8 +213,8 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
                 rec.put("gen", rs.getString("genero"));
                 rec.put("fec_na", rs.getString("fecha_nac"));
                 rec.put("edad", rs.getString("edad"));
-                rec.put("id_tr", rs.getString("edad"));
-                rec.put("id_hi", rs.getString("edad"));
+                rec.put("id_tr", rs.getString("ID_TRABAJADOR"));
+                rec.put("id_hi", rs.getString("ID_DATOS_HIJOS_TRABAJADOR"));
                 Lista.add(rec);
             }
             rs.close();

@@ -44,12 +44,12 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-        <title>Contratos</title>
+        <title>Reporte Datos Hijos</title>
     </head>
     <body>  
         <form class="form-inline validarform" id="frm_filtro2" method="post" action="../../Imprimir" name="formulario" onclick="return marcado();">
             <div class="spacing">
-                <center><h1 class="spacing" style="font-weight: bold;">CONTRATOS</h1></center> 
+                <center><h1 class="spacing" style="font-weight: bold;">Datos Hijos</h1></center> 
             </div>
             <center>
                 <br>
@@ -71,36 +71,24 @@
                         <br>
                         <div class="row">
                             <div class="form-group" >
-                                <label>edad</label><br>
+                                <label>Edad</label><br>
                                 <input type="text"  class="form-control edad" name="del"  length="45" style="width: 250px" id="edad"/>
                             </div>
                         </div>
+                        <br>
                         <div class="row">
-                            <div class="form-group" >
-                                <label>edad</label><br>
-                                <button class="btn btn-primary bsc">Buscar</button>
+                            <div class="form-group">                            
+                                <button type="button" class="btn btn-primary" id="btnbuscar">Buscar</button>
                             </div>
-                        </div>
+
+                        </div>  
                     </div> 
                     <br>
                     <br>
                     <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-3" data-widget-editbutton="false">
-                        <!-- widget options:
-                        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-
-                        data-widget-colorbutton="false"
-                        data-widget-editbutton="false"
-                        data-widget-togglebutton="false"
-                        data-widget-deletebutton="false"
-                        data-widget-fullscreenbutton="false"
-                        data-widget-custombutton="false"
-                        data-widget-collapsed="true"
-                        data-widget-sortable="false"
-
-                        -->
                         <header>
                             <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                            <h2>Export to PDF / Excel</h2>
+                            <h2>Exportar en PDF o Excel</h2>
 
                         </header>
 
@@ -120,16 +108,39 @@
                                 <table id="datatable_tabletools" class="table table-striped table-bordered table-hover" width="100%">
                                     <thead>
                                         <tr>
-                                            <th data-hide="phone">ID</th>
-                                            <th data-class="expand">Name</th>
-                                            <th>Phone</th>
-                                            <th data-hide="phone">Company</th>
-                                            <th data-hide="phone,tablet">Zip</th>
-                                            <th data-hide="phone,tablet">City</th>
-                                            <th data-hide="phone,tablet">Date</th>
+                                            <th data-hide="phone">#</th>
+                                            <th data-class="nom">Name</th>
+                                            <th data-hide="dni">Dni</th>
+                                            <th data-hide="Genero">Genero</th>
+                                            <th data-hide="fec_nac">Fecha de nacimiento</th>
+                                            <th data-hide="edad">Edad</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="tbodys">
+                                    <tbody id="Li_hijos">
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Jennifer</td>
+                                            <td>1-342-463-8341</td>
+                                            <td>Et Rutrum Non Associates</td>
+                                            <td>35728</td>
+                                            <td>Fogo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Jennifer</td>
+                                            <td>1-342-463-8341</td>
+                                            <td>Et Rutrum Non Associates</td>
+                                            <td>35728</td>
+                                            <td>Fogo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Clark</td>
+                                            <td>1-516-859-1120</td>
+                                            <td>Nam Ac Inc.</td>
+                                            <td>7162</td>
+                                            <td>Machelen</td>
+                                        </tr>
                                     </tbody>
                                 </table>
 
@@ -257,88 +268,88 @@
                     tablet: 1024,
                     phone: 480
                 };
-
-                $('#dt_basic').dataTable({
-                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
-                            "t" +
-                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                    "autoWidth": true,
-                    "preDrawCallback": function () {
-                        // Initialize the responsive datatables helper once.
-                        if (!responsiveHelper_dt_basic) {
-                            responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
-                        }
-                    },
-                    "rowCallback": function (nRow) {
-                        responsiveHelper_dt_basic.createExpandIcon(nRow);
-                    },
-                    "drawCallback": function (oSettings) {
-                        responsiveHelper_dt_basic.respond();
-                    }
-                });
-
+                /*
+                 $('#dt_basic').dataTable({
+                 "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
+                 "t" +
+                 "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                 "autoWidth": true,
+                 "preDrawCallback": function () {
+                 // Initialize the responsive datatables helper once.
+                 if (!responsiveHelper_dt_basic) {
+                 responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
+                 }
+                 },
+                 "rowCallback": function (nRow) {
+                 responsiveHelper_dt_basic.createExpandIcon(nRow);
+                 },
+                 "drawCallback": function (oSettings) {
+                 responsiveHelper_dt_basic.respond();
+                 }
+                 });
+                 */
                 /* END BASIC */
 
                 /* COLUMN FILTER  */
-                var otable = $('#datatable_fixed_column').DataTable({
-                    //"bFilter": false,
-                    //"bInfo": false,
-                    //"bLengthChange": false
-                    //"bAutoWidth": false,
-                    //"bPaginate": false,
-                    //"bStateSave": true // saves sort state using localStorage
-                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>" +
-                            "t" +
-                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                    "autoWidth": true,
-                    "preDrawCallback": function () {
-                        // Initialize the responsive datatables helper once.
-                        if (!responsiveHelper_datatable_fixed_column) {
-                            responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
-                        }
-                    },
-                    "rowCallback": function (nRow) {
-                        responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
-                    },
-                    "drawCallback": function (oSettings) {
-                        responsiveHelper_datatable_fixed_column.respond();
-                    }
-
-                });
+                /*              var otable = $('#datatable_fixed_column').DataTable({
+                 //"bFilter": false,
+                 //"bInfo": false,
+                 //"bLengthChange": false
+                 //"bAutoWidth": false,
+                 //"bPaginate": false,
+                 //"bStateSave": true // saves sort state using localStorage
+                 "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>" +
+                 "t" +
+                 "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                 "autoWidth": true,
+                 "preDrawCallback": function () {
+                 // Initialize the responsive datatables helper once.
+                 if (!responsiveHelper_datatable_fixed_column) {
+                 responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
+                 }
+                 },
+                 "rowCallback": function (nRow) {
+                 responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
+                 },
+                 "drawCallback": function (oSettings) {
+                 responsiveHelper_datatable_fixed_column.respond();
+                 }
+                 
+                 });*/
 
                 // custom toolbar
-                $("div.toolbar").html('<div class="text-right"><img src="../../img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
+                //          $("div.toolbar").html('<div class="text-right"><img src="../../img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
 
                 // Apply the filter
-                $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
-
-                    otable
-                            .column($(this).parent().index() + ':visible')
-                            .search(this.value)
-                            .draw();
-
-                });
+                /*   $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
+                 
+                 otable
+                 .column($(this).parent().index() + ':visible')
+                 .search(this.value)
+                 .draw();
+                 
+                 });*/
                 /* END COLUMN FILTER */
 
                 /* COLUMN SHOW - HIDE */
-                $('#datatable_col_reorder').dataTable({
-                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'C>r>" +
-                            "t" +
-                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                    "autoWidth": true,
-                    "preDrawCallback": function () {
-                        // Initialize the responsive datatables helper once.
-                        if (!responsiveHelper_datatable_col_reorder) {
-                            responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
-                        }
-                    },
-                    "rowCallback": function (nRow) {
-                        responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
-                    },
-                    "drawCallback": function (oSettings) {
-                        responsiveHelper_datatable_col_reorder.respond();
-                    }
-                });
+                /*   $('#datatable_col_reorder').dataTable({
+                 "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'C>r>" +
+                 "t" +
+                 "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
+                 "autoWidth": true,
+                 "preDrawCallback": function () {
+                 // Initialize the responsive datatables helper once.
+                 if (!responsiveHelper_datatable_col_reorder) {
+                 responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
+                 }
+                 },
+                 "rowCallback": function (nRow) {
+                 responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
+                 },
+                 "drawCallback": function (oSettings) {
+                 responsiveHelper_datatable_col_reorder.respond();
+                 }
+                 });*/
 
                 /* END COLUMN SHOW - HIDE */
 
@@ -517,55 +528,38 @@
             }
 
         }
+        //Listar Hijos de Trabajadores
         function listar_hijos() {
-            var a=$(".des").val();
-            var b=$(".has").val();
-            var c=$(".edad").val();
-            $.post("")
+            var a = $(".des").val();
+            var b = $(".has").val();
+            var c = $(".edad").val();
+            var d = $("#Li_hijos");
+            var texto = '';
+            $.post("../../reporte", "opc=reporte_hijo&desde=" + a + "&hasta=" + b + "&edad=" + c, function (objJson) {
+                d.empty();
+                var lista = objJson.lista;
+                for (var i = 0; i < lista.length; i++) {
+                    texto += '<tr role="row" class="odd">';
+                    texto += '<td class>' + (i + 1) + '</td>';
+                    texto += '<td>' + lista[i].nom + '</td>';
+                    texto += '<td>' + lista[i].dni + '</td>';
+                    texto += '<td>' + lista[i].gen + '</td>';
+                    texto += '<td>' + lista[i].fec_na + '</td>';
+                    texto += '<td>' + lista[i].edad + '</td>';
+                    texto += '</tr>';
+
+                }
+                d.append(texto);
+
+            });
         }
         $(document).ready(function () {
-
-            /* $.ajax({
-             data:$("#frm_filtro2").serialize(),
-             type:"POST",
-             dataType:"json",
-             url:"../../Ajax/Ajax_Dgp/Ajax_Dgp_Aut.jsp"
-             
-             }
-             var b=$('#tbodys');
-             });
-             */
             var b = $('#tbodys');
-
             $("#btnbuscar").click(
                     function () {
-                        var del = $("#del").val();
-                        var al = $("#al").val();
-                        var nombre = $("#ap").val();
-                        var dir = $("#select_direccion").val();
-                        var dep = $("#select_dep").val();
-                        var area = $("#select_area").val();
-                        var sec = $("#select_sec").val();
-                        var pu = $("#select_pu").val();
-                        var fe_i = $("#fe_i").val();
-                        var fe_f = $("#fe_fin").val();
-                        var sueldo = $("#sueldo").val();
-                        var fe_sus = $("#fe_sus").val();
-
-                        //alert(del + al + nombre + dir + dep + area + sec + pu + fe_i + fe_f + sueldo)
-                        buscar(del, al, nombre, dir, dep, area, sec, pu, fe_i, fe_f, sueldo, fe_sus);
+                        listar_hijos();
                     }
             );
-            /* $("#btnbuscar").click(
-             function() {
-             
-             $.post("../../ajax/Ajax_Contrato/Ajax_Contrato.jsp", $("#frm_filtro2").serialize(), function(objJson) {
-             alert( );
-             }
-             );
-             
-             }
-             );*/
             $("#btncancel").click(
                     function () {
                         document.formulario.reset();
@@ -574,16 +568,6 @@
                         $(".tbodys").html(html);
                     }
             );
-            $(".validarform").submit(function () {
-                var check = $("input[type='checkbox']:checked").length;
-                var radio = $("input[type='radio']:checked").length;
-                var select = $("select option:selected").val();
-                if (check == "") {
-                        alert("seleccione un contrato");
-                        return false;
-                }
-            });
-
         });
     </script>
 
