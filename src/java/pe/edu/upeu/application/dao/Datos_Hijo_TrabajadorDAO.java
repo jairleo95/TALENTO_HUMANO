@@ -28,8 +28,6 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
     ConexionBD conn;
     CConversion c = new CConversion();
 
-   
-
     @Override
     public void INSERT_DATOS_HIJO_TRABAJADOR(String ID_DATOS_HIJOS_TRABAJADOR, String ID_TRABAJADOR, String AP_PATERNO, String AP_MATERNO, String NO_HIJO_TRABAJADOR, String FE_NACIMIENTO, String ES_SEXO, String ES_TIPO_DOC, String NU_DOC, String ES_PRESENTA_DOCUMENTO, String ES_INSCRIPCION_VIG_ESSALUD, String ES_ESTUDIO_NIV_SUPERIOR, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String ES_DATOS_HIJO_TRABAJADOR) {
         CallableStatement cst;
@@ -197,6 +195,40 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
         }
         return Lista;
 
+    }
+
+    @Override
+    public List<Map<String, ?>> Listar_hijo_filtro(String desde, String hasta, String edad) {
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "SELECT * FROM RHVD_FILTRO_EDAD ";
+            sql += (!desde.equals("") & !(hasta.equals(""))) ? "where EDAD BETWEEN '" + desde.trim() + "' and '" + hasta.trim() + "'" : "";
+            sql += (!edad.equals("")) ? "where EDAD='" + edad.trim() + "'" : "";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("nom", rs.getString("nombre"));
+                rec.put("dni", rs.getString("dni"));
+                rec.put("gen", rs.getString("genero"));
+                rec.put("fec_na", rs.getString("fecha_nac"));
+                rec.put("edad", rs.getString("edad"));
+                rec.put("id_tr", rs.getString("ID_TRABAJADOR"));
+                rec.put("id_hi", rs.getString("ID_DATOS_HIJOS_TRABAJADOR"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
     }
 
 }

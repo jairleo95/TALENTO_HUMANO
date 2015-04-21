@@ -27,5 +27,5 @@ public interface InterfaceDatos_Hijo_Trabajador {
 
     public void ELIMINAR_HIJO(String id_hijo, String id_trabajador);
 
-    
+    public List<Map<String, ?>> Listar_hijo_filtro(String desde, String hasta,String edad);
 }

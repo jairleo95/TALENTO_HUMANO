@@ -284,7 +284,7 @@
                                                             type: "POST",
                                                             data: "opc=Enviar_Correo" + $(".correos_" + r).val()
                                                         }).done(function () {
-                                                            //window.location.href = "../../autorizacion?opc=mens_cod_huella";
+                                                            window.location.href = "../../autorizacion?opc=mens_cod_huella";
                                                         });
 
                                                     }
