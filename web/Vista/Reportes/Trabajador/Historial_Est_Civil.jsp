@@ -82,6 +82,7 @@
                                             <th class="text-center semi-bold">Es.Civil Actual</th>
                                             <th class="text-center semi-bold">Uuario</th>
                                             <th class="text-center semi-bold">Fe.Modificacion</th>
+                                            <th class="text-center semi-bold">Registrado</th>
                                         </tr>
                                     </thead>
                                     <tbody class="tbodys">
@@ -214,7 +215,8 @@
                                 t += "<td>" + ec_p + "</td>";
                                 t += "<td>" + ec_a+ "</td>";
                                 t += "<td>" + lista[i].no_usuario + "</td>";
-                                t += "<td>" + lista[i].fe_modi + "</td></tr>";
+                                t += "<td>" + lista[i].fe_modi + "</td>";
+                                t += "<td><center><input  type='checkbox' name='reg' value='' ><center> </td></tr>";
                             }
                             crear_t();
                             $('.tbodys').append(t);
@@ -230,7 +232,7 @@
 
                         var text = '<table class="tabla_t table table-bordered table-hover table-striped"><thead><tr><th class="text-center semi-bold">Nro</th>';
                         text += '<th class="text-center semi-bold">Trabajador</th><th class="text-center semi-bold">Es.Civil Pasado</th><th class="text-center semi-bold">Es.Civil Actual</th>';
-                        text += '<th class="text-center semi-bold">Uuario</th><th class="text-center semi-bold">Fe.Modificacion</th> </tr> </thead><tbody class="tbodys">';
+                        text += '<th class="text-center semi-bold">Uuario</th><th class="text-center semi-bold">Fe.Modificacion</th><th class="text-center semi-bold">Registrado</th> </tr> </thead><tbody class="tbodys">';
                         text += '</tbody></table>';
                         $('.cont_t').empty();
                         $('.cont_t').append(text);
