@@ -8,11 +8,10 @@ package pe.edu.upeu.application.dao;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import pe.edu.upeu.application.dao_imp.InterfaceDatos_Hijo_Trabajador;
 import pe.edu.upeu.application.factory.ConexionBD;
@@ -196,6 +195,40 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
         }
         return Lista;
 
+    }
+
+    @Override
+    public List<Map<String, ?>> Listar_hijo_filtro(String desde, String hasta, String edad) {
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "SELECT * FROM RHVD_FILTRO_EDAD ";
+            sql += (!desde.equals("") & !(hasta.equals(""))) ? "where EDAD BETWEEN '" + desde.trim() + "' and '" + hasta.trim() + "'" : "";
+            sql += (!edad.equals("")) ? "where EDAD='" + edad.trim() + "'" : "";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("nom", rs.getString("nombre"));
+                rec.put("dni", rs.getString("dni"));
+                rec.put("gen", rs.getString("genero"));
+                rec.put("fec_na", rs.getString("fecha_nac"));
+                rec.put("edad", rs.getString("edad"));
+                rec.put("id_tr", rs.getString("ID_TRABAJADOR"));
+                rec.put("id_hi", rs.getString("ID_DATOS_HIJOS_TRABAJADOR"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
     }
 
 }
