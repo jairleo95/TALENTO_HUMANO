@@ -106,21 +106,21 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
         List<Map<String, ?>> ip = new ArrayList<>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT ID_TRABAJADOR, FE_MODIF,TO_CHAR(FE_MODIF,'HH:MM:SS')HORA_MODIF, US_MODIF, IP_USUARIO\n"
+            String sql = "SELECT ID_TRABAJADOR,TO_CHAR( FE_MODIF,'Day,DD \"de\" MONTH \"del\" YYYY') FE_MODIFi,TO_CHAR(FE_MODIF,'HH:MM:SS AM')HORA_MODIF, US_MODIF, IP_USUARIO\n"
                     + "FROM RHTH_MODIF_TRABAJADOR\n"
-                    + "WHERE ID_TRABAJADOR='" + ID_TRABAJADOR + "'\n"
-                    + "ORDER BY FE_MODIF DESC";
+                    + "WHERE ID_TRABAJADOR='"+ID_TRABAJADOR+"' AND FE_MODIF IS NOT NULL\n"
+                    + "ORDER BY FE_MODIFi desc";
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<>();
                 rec.put("id_tra", rs.getString("ID_TRABAJADOR"));
-                rec.put("fe_mod", rs.getString("FE_MODIF"));
+                rec.put("fe_mod", rs.getString("FE_MODIFi"));
                 rec.put("hora_mod", rs.getString("HORA_MODIF"));
                 rec.put("us_mod", rs.getString("US_MODIF"));
-                ip = ip_usuario(rs.getString("ID_TRABAJADOR"));
-                rec.put("ip_user", ip.get(0).get("IP0"));
-                rec.put("host_name", ip.get(0).get("IP1"));
-                rec.put("mac_address", ip.get(0).get("IP2"));
+                /*ip = ip_usuario(rs.getString("ID_TRABAJADOR"));
+                 rec.put("ip_user", ip.get(0).get("IP0"));
+                 rec.put("host_name", ip.get(0).get("IP1"));
+                 rec.put("mac_address", ip.get(0).get("IP2"));*/
                 Lista.add(rec);
             }
             rs.close();
