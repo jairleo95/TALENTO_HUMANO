@@ -310,12 +310,12 @@
                                                     <div class="row">
                                                         <section class="col col-1 ">
                                                             <label class="input" id="titu">Codigo APS: 
-                                                                <input type="text" name="co_aps" id="aps" class="input-group-sm"><!--required=""-->
+                                                                <input type="text" maxlength="6" name="co_aps" id="aps" class="input-group-sm"><!--required=""-->
                                                             </label>
                                                         </section>
                                                         <section class="col col-1 ">
                                                             <label class="input" id="titu">Codigo Huella: 
-                                                                <input type="text" name="co_hue" id="hue" class="input-group-sm"><!--required=""-->
+                                                                <input type="text" maxlength="6" name="co_hue" id="hue" class="input-group-sm"><!--required=""-->
                                                             </label>
                                                         </section>
                                                         <section class="col col-2" style=" margin-top:0.8%;">

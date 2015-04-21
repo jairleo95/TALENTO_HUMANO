@@ -239,7 +239,7 @@
                                                 for (var r = 1; r <= parseInt($(".num_aps").val()); r++) {
                                                     if ($(".cod_aps" + r).val() != "") {
                                                         $.ajax({
-                                                            url: "../../trabajador",
+                                                            url: "../../trabajad|or",
                                                             type: "POST",
                                                             data: "opc=reg_aps_masivo&cod=" + $(".cod_aps" + r).val() + "&idtr=" + $(".idtr" + r).val()
                                                         }).done(function () {
@@ -511,7 +511,7 @@
                                             <%if (a.getVal_cod_aps_empleado() == 0) {
                                                     num_cod_aps++;
                                             %>
-                                            <td><input type="text" name="cod_aps" maxlength="6" class="cod_aps<%=(f + 1)%>" style="width:50px"/></td>
+                                                <td><input type="text" name="cod_aps" maxlength="6" class="cod_aps<%=(f + 1)%>" style="width:50px"/></td>
                                             <input type="hidden" name="idtr"  class="idtr<%=(f + 1)%>" value="<%=a.getId_trabajador()%>" />
                                             <%} else {%>
                                             <td><strong><%=a.getCo_aps()%></strong></td>
