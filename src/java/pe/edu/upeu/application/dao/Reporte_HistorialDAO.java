@@ -69,11 +69,9 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
             if (FE_INICIO.equals(FE_FIN)) {
                 adday = "+1";
             }
-            String sql = "select  tr.ID_TRABAJADOR ID_TRABAJADOR, tr.NO_TRABAJADOR NO_TRABAJADOR, tr.AP_MATERNO AP_MATERNO, tr.AP_PATERNO AP_PATERNO ,tr.ES_CIVIL ES_CIVIL , ec.LI_ESTADO_CIVIL LI_ESTADO_CIVIL , u.NO_USUARIO NO_USUARIO, ec.FE_MODIFICACION FE_MODIFICACION   \n"
-                    + " from RHTM_TRABAJADOR tr , RHTH_ESTADO_CIVIL ec , RHTC_USUARIO u \n"
-                    + " where tr.ID_TRABAJADOR = ec.ID_TRABAJADOR \n"
-                    + "and ec.US_MODIFICACION = u.ID_USUARIO \n"
-                    + " and ec.FE_MODIFICACION >= TO_DATE('" + FE_INICIO + "') AND ec.FE_MODIFICACION <= TO_DATE('" + FE_FIN + "')  " + adday + " ";
+
+            String sql = " select * from RHVD_HISTORIAL_ES_CIVIL  h1 where h1.FE_MODIFICACION = (select  max(h2.FE_MODIFICACION) from RHVD_HISTORIAL_ES_CIVIL h2 where h1.ID_TRABAJADOR = h2.ID_TRABAJADOR )  and h1.FE_MODIFICACION >= TO_DATE('"+FE_INICIO+"') AND h1.FE_MODIFICACION <= TO_DATE('"+FE_FIN+"') "+adday+" ";
+                  
 
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {

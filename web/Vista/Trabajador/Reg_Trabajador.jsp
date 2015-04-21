@@ -960,7 +960,7 @@
                                                                 if (es_civil == '2' || es_civil == '6') {
                                                                     // alert("estado civil");
 
-                                                                    //REMOVE REQUIRED
+                                                                    //ADD REQUIRED
                                                                     $("#tra_upeu_con").attr("required", "required");
                                                                     $("#nom_ape_con").attr("required", "required");
                                                                     $("#nac_con").attr("required", "required");
