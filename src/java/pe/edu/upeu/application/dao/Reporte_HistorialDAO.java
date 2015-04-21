@@ -69,11 +69,9 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
             if (FE_INICIO.equals(FE_FIN)) {
                 adday = "+1";
             }
-            String sql = "select  tr.ID_TRABAJADOR ID_TRABAJADOR, tr.NO_TRABAJADOR NO_TRABAJADOR, tr.AP_MATERNO AP_MATERNO, tr.AP_PATERNO AP_PATERNO ,tr.ES_CIVIL ES_CIVIL , ec.LI_ESTADO_CIVIL LI_ESTADO_CIVIL , u.NO_USUARIO NO_USUARIO, ec.FE_MODIFICACION FE_MODIFICACION   \n"
-                    + " from RHTM_TRABAJADOR tr , RHTH_ESTADO_CIVIL ec , RHTC_USUARIO u \n"
-                    + " where tr.ID_TRABAJADOR = ec.ID_TRABAJADOR \n"
-                    + "and ec.US_MODIFICACION = u.ID_USUARIO \n"
-                    + " and ec.FE_MODIFICACION >= TO_DATE('" + FE_INICIO + "') AND ec.FE_MODIFICACION <= TO_DATE('" + FE_FIN + "')  " + adday + " ";
+
+            String sql = " select * from RHVD_HISTORIAL_ES_CIVIL  h1 where h1.FE_MODIFICACION = (select  max(h2.FE_MODIFICACION) from RHVD_HISTORIAL_ES_CIVIL h2 where h1.ID_TRABAJADOR = h2.ID_TRABAJADOR )  and h1.FE_MODIFICACION >= TO_DATE('"+FE_INICIO+"') AND h1.FE_MODIFICACION <= TO_DATE('"+FE_FIN+"') "+adday+" ";
+                  
 
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
@@ -162,7 +160,15 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT * FROM RHVD_HISTORIAL_MOD_HIJO WHERE FE_FILTRO_TODO BETWEEN TO_DATE('" + FE_INICIO.trim() + "') AND TO_DATE('" + FE_FIN.trim() + "') ORDER BY FE_FILTRO_TODO";
+            String sql = "SELECT * FROM RHVD_HISTORIAL_MOD_HIJO WHERE  us_creacion is not null ";
+            if (tipo.equals("2")) {
+                sql += " and  ESTADO_REGISTRO ='0' and fe_creacion BETWEEN TO_DATE('" + FE_INICIO.trim() + "') AND TO_DATE('" + FE_FIN.trim() + "')  ";
+            } else if (tipo.equals("3")) {
+                sql += " and  ESTADO_REGISTRO ='1'  and fe_modif BETWEEN TO_DATE('" + FE_INICIO.trim() + "') AND TO_DATE('" + FE_FIN.trim() + "') ";
+            } else if (tipo.equals("1")) {
+                sql += " and FE_FILTRO_TODO BETWEEN TO_DATE('" + FE_INICIO.trim() + "') AND TO_DATE('" + FE_FIN.trim() + "') ";
+            } 
+            sql += " ORDER BY FE_FILTRO_TODO";
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -175,6 +181,7 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
                 rec.put("ap_pat_h", rs.getString("AP_PATERNO"));
                 rec.put("ap_mat_h", rs.getString("AP_MATERNO"));
                 rec.put("estado_filtro", rs.getString("ESTADO_REGISTRO"));
+                rec.put("fecha", rs.getString("FE_FILTRO_TODO"));
                 lista.add(rec);
             }
             rs.close();

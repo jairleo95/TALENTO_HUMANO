@@ -1,15 +1,9 @@
-<%-- 
-    Document   : Historial
-    Created on : 14/04/2015, 10:05:59 AM
-    Author     : Andres
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Historial Hijos</title>
+        <title>Detalle Historial</title>
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/font-awesome.min.css">
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
@@ -32,40 +26,49 @@
                             <form class="smart-form form_f">
 
                                 <h1 class="text-center"><strong>Datos de Hijos </strong> <small> / Historial de Modificaciones </small></h1><br>
-                                <h1 class="text-left font-md semi-bold">Filtros:</h1><br>
+                                <h1 class="text-left font-md semi-bold">Comparar Modificaciones :</h1><br>
                                 <div class="row">
-                                    <div class="col col-lg-9">
-                                        <section class="col col-sm-4">
-                                            <label><strong>Desde:</strong></label>
-                                            <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                                                <input type="text"  placeholder="Seleccionar Fecha" class="datepicker" id="dtp1" data-dateformat='dd/mm/yy' name="fe_inicio" required="">
+                                    <div class="col col-lg-12">
+                                        <section class="col col-sm-6">
+                                            <label><strong>Trabajador</strong></label>
+                                            <label class="select"> <i class="icon-append fa fa-calendar"></i>
+                                                <select name="trabajador" required="">
+                                                    <option value='' >[SELECCIONE]</option>
+                                                </select>
                                             </label>
                                         </section>
-                                        <section class="col col-sm-4">
-                                            <label><strong>Hasta:</strong></label>
-                                            <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                                                <input type="text"  placeholder="Seleccionar Fecha" class="datepicker" id="dtp2" data-dateformat='dd/mm/yy' name="fe_fin" required="">
+                                        <section class="col col-sm-6">
+                                            <label><strong>Hijo(a)</strong></label>
+                                            <label class="select"> <i class="icon-append fa fa-calendar"></i>
+                                                <select name="trabajador" required="">
+                                                    <option value='' >[SELECCIONE]</option>
+                                                </select>
                                             </label>
                                         </section>
-                                        <section class="col col-sm-4">
-                                            <label><strong>Tipo:</strong></label>
-                                            <label class="select"><i class="icon-append fa fa-calendar"></i>
-                                                <select name="tipo" required="" class="tipo">
-                                                    <option value="1" >Todos</option>
-                                                    <option value="2">Registrados</option>
-                                                    <option value="3">Modificados</option>
+
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col col-lg-12">
+                                        <section class="col col-sm-6">
+                                            <label><strong>Fecha</strong></label>
+                                            <label class="select"> <i class="icon-append fa fa-calendar"></i>
+                                                <select name="fecha1" required="">
+                                                    <option value='' >[SELECCIONE]</option>
+                                                </select>
+                                            </label>
+                                        </section>
+                                        <section class="col col-sm-6">
+                                            <label><strong>Fecha</strong></label>
+                                            <label class="select"> <i class="icon-append fa fa-calendar"></i>
+                                                <select name="fecha1" required="">
+                                                    <option value='' >[SELECCIONE]</option>
                                                 </select>
                                             </label>
                                         </section>
                                     </div>
-                                    <div class="col col-lg-3">
-                                        <center>
-                                            <section class="col col-sm-12">
-                                                <a class="btn btn-primary btn-circle btn-xl btnEnviar"><i class="glyphicon glyphicon-search"></i></a>
-                                                <a class="btn btn-danger btn-circle btn-xl btnCancelar"><i class="glyphicon glyphicon-remove"></i></a>
-                                            </section>
-                                        </center>
-                                    </div>
+
                                 </div>
                             </form>
                         </div>
@@ -78,11 +81,8 @@
                                     <thead>
                                         <tr>
                                             <th class="text-center semi-bold">Nro</th>
-                                            <th class="text-center semi-bold">Trabajador</th>
-                                            <th class="text-center semi-bold">Hijo(a)</th>
-                                            <th class="text-center semi-bold">Estado</th>
-                                            <th class="text-center semi-bold">Fecha</th>
-                                            <th class="text-center semi-bold">Detalle</th>
+                                            <th class="text-center semi-bold">Data 1</th>
+                                            <th class="text-center semi-bold">Data 2</th>
                                         </tr>
                                     </thead>
                                     <tbody class="tbodys">
@@ -94,17 +94,17 @@
                 </section>
             </div>
         </div>
-        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
+        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../../js/plugin/pace/pace.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
             if (!window.jQuery) {
-                document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                document.write('<script src="../../../js/libs/jquery-2.0.2.min.js"><\/script>');
             }
         </script>
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script>
             if (!window.jQuery.ui) {
-                document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
             }
         </script>
         <script src="../../../js/app.config.js"></script>
@@ -141,34 +141,8 @@
         <script src="../../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
-                $("#dtp1").datepicker({
-                    dateFormat: "dd/mm/yy",
-                    defaultDate: "+1w",
-                    changeMonth: true,
-                    numberOfMonths: 2,
-                    onClose: function (selectedDate) {
-                        $("#dtp2").datepicker("option", "minDate", selectedDate);
-                        $("#dtp2").datepicker("setDate", selectedDate);
-                    }
-                });
-                $("#dtp2").datepicker({
-                    dateFormat: "dd/mm/yy",
-                    defaultDate: "+1w",
-                    changeMonth: true,
-                    numberOfMonths: 2,
-                    onClose: function (selectedDate) {
-                        $("#dtp1").datepicker("option", "maxDate", selectedDate);
-                    }
-                });
-                $('.tabla_t').DataTable();
-                $(".tipo").change(function () {
-                    if ($("#dtp1").val() != '' && $("#dtp2").val() != '') {
-                        obetnerDatos();
-                    }
-                });
-                $('.btnEnviar').click(function () {
-                    obetnerDatos();
-                });
+
+
             });
             function obetnerDatos() {
                 if ($('.form_f').valid()) {

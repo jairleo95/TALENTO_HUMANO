@@ -176,6 +176,7 @@
                                                 </header>
 
                                                 <fieldset id="fila-agregar">
+
                                                     <div class="row" >
 
                                                         <section class="col col-1">
@@ -306,7 +307,25 @@
 
                                                     </div>
 
+                                                    <div class="row">
+                                                        <section class="col col-1 ">
+                                                            <label class="input" id="titu">Codigo APS: 
+                                                                <input type="text" maxlength="6" name="co_aps" id="aps" class="input-group-sm"><!--required=""-->
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-1 ">
+                                                            <label class="input" id="titu">Codigo Huella: 
+                                                                <input type="text" maxlength="6" name="co_hue" id="hue" class="input-group-sm"><!--required=""-->
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-2" style=" margin-top:0.8%;">
+                                                            <label class="toggle" id="titu" > MFL:
+                                                                <input type="checkbox" value="1"   name="MFL" name="checkbox-toggle" onchange="mflcheck(this)" id="cb">
+                                                                <i data-swchon-text="SI" data-swchoff-text="NO"></i>
+                                                            </label>
+                                                        </section>
 
+                                                    </div>
 
                                                     <div class="row centro-costo_1" >
                                                         <!--<code class="ver"></code>-->
@@ -375,6 +394,19 @@
                                                                 }
                                                         );</script> 
                                                     <script>
+                                                        function mflcheck(cb) {
+                                                            if (cb.checked == true) {
+                                                                $(".centro-costo_1").hide();
+                                                                $(".cc-dir").removeAttr('required');
+                                                                $(".cc-dep").removeAttr('required');
+                                                                $(".centro_costo").removeAttr('required');
+                                                            } else {
+                                                                $(".centro-costo_1").show();
+                                                                $(".cc-dir").attr("required", "required");
+                                                                $(".cc-dep").attr("required", "required");
+                                                                $(".centro_costo").attr('required', "required");
+                                                            }
+                                                        }
 
                                                         function Listar_Direccion() {
                                                             var cc_dir = $(".cc-dir");
@@ -1638,7 +1670,6 @@
                         val_fecha: true
                     },
                     FEC_HASTA: {
-                    
                         val_fecha: true
                     },
                     FECHA_SUSCRIPCION: {
