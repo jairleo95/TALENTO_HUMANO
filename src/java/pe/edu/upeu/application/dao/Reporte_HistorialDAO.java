@@ -70,8 +70,7 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
                 adday = "+1";
             }
 
-            String sql = " select * from RHVD_HISTORIAL_ES_CIVIL  h1 where h1.FE_MODIFICACION = (select  max(h2.FE_MODIFICACION) from RHVD_HISTORIAL_ES_CIVIL h2 where h1.ID_TRABAJADOR = h2.ID_TRABAJADOR )  and h1.FE_MODIFICACION >= TO_DATE('"+FE_INICIO+"') AND h1.FE_MODIFICACION <= TO_DATE('"+FE_FIN+"') "+adday+" ";
-                  
+            String sql = " select * from RHVD_HISTORIAL_ES_CIVIL  h1 where h1.FE_MODIFICACION = (select  max(h2.FE_MODIFICACION) from RHVD_HISTORIAL_ES_CIVIL h2 where h1.ID_TRABAJADOR = h2.ID_TRABAJADOR )  and h1.FE_MODIFICACION >= TO_DATE('" + FE_INICIO + "') AND h1.FE_MODIFICACION <= TO_DATE('" + FE_FIN + "') " + adday + " ";
 
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
@@ -107,21 +106,21 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
         List<Map<String, ?>> ip = new ArrayList<>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT ID_TRABAJADOR, FE_MODIF,TO_CHAR(FE_MODIF,'HH:MM:SS')HORA_MODIF, US_MODIF, IP_USUARIO\n"
+            String sql = "SELECT ID_TRABAJADOR,TO_CHAR( FE_MODIF,'Day,DD \"de\" MONTH \"del\" YYYY') FE_MODIFi,TO_CHAR(FE_MODIF,'HH:MM:SS AM')HORA_MODIF, US_MODIF, IP_USUARIO\n"
                     + "FROM RHTH_MODIF_TRABAJADOR\n"
-                    + "WHERE ID_TRABAJADOR='" + ID_TRABAJADOR + "'\n"
-                    + "ORDER BY FE_MODIF DESC";
+                    + "WHERE ID_TRABAJADOR='"+ID_TRABAJADOR+"' AND FE_MODIF IS NOT NULL\n"
+                    + "ORDER BY FE_MODIFi desc";
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<>();
                 rec.put("id_tra", rs.getString("ID_TRABAJADOR"));
-                rec.put("fe_mod", rs.getString("FE_MODIF"));
+                rec.put("fe_mod", rs.getString("FE_MODIFi"));
                 rec.put("hora_mod", rs.getString("HORA_MODIF"));
                 rec.put("us_mod", rs.getString("US_MODIF"));
-                ip = ip_usuario(rs.getString("ID_TRABAJADOR"));
-                rec.put("ip_user", ip.get(0).get("IP0"));
-                rec.put("host_name", ip.get(0).get("IP1"));
-                rec.put("mac_address", ip.get(0).get("IP2"));
+                /*ip = ip_usuario(rs.getString("ID_TRABAJADOR"));
+                 rec.put("ip_user", ip.get(0).get("IP0"));
+                 rec.put("host_name", ip.get(0).get("IP1"));
+                 rec.put("mac_address", ip.get(0).get("IP2"));*/
                 Lista.add(rec);
             }
             rs.close();
@@ -167,7 +166,7 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
                 sql += " and  ESTADO_REGISTRO ='1'  and fe_modif BETWEEN TO_DATE('" + FE_INICIO.trim() + "') AND TO_DATE('" + FE_FIN.trim() + "') ";
             } else if (tipo.equals("1")) {
                 sql += " and FE_FILTRO_TODO BETWEEN TO_DATE('" + FE_INICIO.trim() + "') AND TO_DATE('" + FE_FIN.trim() + "') ";
-            } 
+            }
             sql += " ORDER BY FE_FILTRO_TODO";
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
