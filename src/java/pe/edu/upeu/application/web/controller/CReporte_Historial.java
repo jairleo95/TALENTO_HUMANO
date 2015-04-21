@@ -62,11 +62,11 @@ public class CReporte_Historial extends HttpServlet {
                 rpta.put("lista", list);
             }
             if (opc.equals("mod_tra")) {
-                String ID_TRABAJADOR=request.getParameter("idtr");
-                response.sendRedirect("Vista/Reportes/Trabajador/detalleHistorial.jsp?idtr="+ID_TRABAJADOR);
+                String ID_TRABAJADOR = request.getParameter("idtr");
+                response.sendRedirect("Vista/Reportes/Trabajador/detalleHistorial.jsp?idtr=" + ID_TRABAJADOR);
             }
             if (opc.equals("list_mod_tra")) {
-                String ID_TRABAJADOR=request.getParameter("idtr");
+                String ID_TRABAJADOR = request.getParameter("idtr");
                 List<Map<String, ?>> list = re.Listar_Mod_Tra(ID_TRABAJADOR);
                 rpta.put("rpta", "1");
                 rpta.put("lista", list);
@@ -86,7 +86,21 @@ public class CReporte_Historial extends HttpServlet {
                 String FE_INICIO = request.getParameter("fe_inicio");
                 String FE_FIN = request.getParameter("fe_fin");
                 String tipo = request.getParameter("tipo");
-                List<Map<String, ?>> lista = re.List_historial_modf_hijo(FE_INICIO, FE_FIN,tipo);
+                List<Map<String, ?>> lista = re.List_historial_modf_hijo(FE_INICIO, FE_FIN, tipo);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
+            if (opc.equals("Fe_Modif_Hijo")) {
+                String id = request.getParameter("hijo");
+                List<Map<String, ?>> lista = re.list_fecha_modif(id);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
+            if (opc.equals("Comparar_dato_Hijo")) {
+                String id = request.getParameter("id");
+                String fecha1 = request.getParameter("fecha1");
+                String fecha2 = request.getParameter("fecha2");
+                List<Map<String, ?>> lista = re.Lista_campos_modif(fecha1, fecha2, id);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
