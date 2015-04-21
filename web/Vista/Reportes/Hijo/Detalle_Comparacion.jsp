@@ -30,6 +30,28 @@
                                 <div class="row">
                                     <div class="col col-lg-12">
                                         <section class="col col-sm-6">
+                                            <label><strong>Trabajador</strong></label>
+                                            <label class="select"> <i class="icon-append fa fa-calendar"></i>
+                                                <select name="trabajador" required="">
+                                                    <option value='' >[SELECCIONE]</option>
+                                                </select>
+                                            </label>
+                                        </section>
+                                        <section class="col col-sm-6">
+                                            <label><strong>Hijo(a)</strong></label>
+                                            <label class="select"> <i class="icon-append fa fa-calendar"></i>
+                                                <select name="trabajador" required="">
+                                                    <option value='' >[SELECCIONE]</option>
+                                                </select>
+                                            </label>
+                                        </section>
+
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col col-lg-12">
+                                        <section class="col col-sm-6">
                                             <label><strong>Fecha</strong></label>
                                             <label class="select"> <i class="icon-append fa fa-calendar"></i>
                                                 <select name="fecha1" required="">
