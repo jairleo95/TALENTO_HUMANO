@@ -231,4 +231,45 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
         return Lista;
     }
 
+    @Override
+    public List<Map<String, ?>> Listar_Cumpleaños(String mes, String dia) {
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "SELECT * FROM RHVD_FILTRO_CUMPL_TRAB ";
+            sql += (!mes.equals("")&!mes.equals("13")) ? "where mes='" + mes.trim() + "' " : "";
+            sql += (!mes.equals("")&mes.equals("13")) ? "" : "";
+            sql += (!dia.equals("")) ? "and dia='" + dia.trim() + "'" : "";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("aps", rs.getString("APS"));
+                rec.put("dep", rs.getString("DEPARTAMENTO"));
+                rec.put("are", rs.getString("AREA"));
+                rec.put("secc", rs.getString("SECCION"));
+                rec.put("pue", rs.getString("PUESTO"));
+                rec.put("fec_na", rs.getString("FECHA_NAC"));
+                rec.put("edad", rs.getString("EDAD"));
+                rec.put("nom", rs.getString("NOMBRE"));
+                rec.put("tip", rs.getString("TIPO"));
+                rec.put("dni", rs.getString("DNI")); 
+                rec.put("dia", rs.getString("DIA"));
+                rec.put("mes", rs.getString("MES"));               
+                rec.put("id_tr", rs.getString("ID_TRABAJADOR"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
+    }
+
 }

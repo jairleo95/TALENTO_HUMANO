@@ -310,17 +310,17 @@
                                                     <div class="row">
                                                         <section class="col col-1 ">
                                                             <label class="input" id="titu">Codigo APS: 
-                                                                <input type="text" maxlength="6" name="co_aps" id="aps" class="input-group-sm"><!--required=""-->
+                                                                <input type="text" maxlength="6" name="co_aps" id="aps" class="input-group-sm">
                                                             </label>
                                                         </section>
                                                         <section class="col col-1 ">
                                                             <label class="input" id="titu">Codigo Huella: 
-                                                                <input type="text" maxlength="6" name="co_hue" id="hue" class="input-group-sm"><!--required=""-->
+                                                                <input type="text" maxlength="6" name="co_hue" id="hue" class="input-group-sm">
                                                             </label>
                                                         </section>
                                                         <section class="col col-2" style=" margin-top:0.8%;">
                                                             <label class="toggle" id="titu" > MFL:
-                                                                <input type="checkbox" value="1"   name="MFL" name="checkbox-toggle" onchange="mflcheck(this)" id="cb">
+                                                                <input type="checkbox" value="0"   name="MFL" name="checkbox-toggle" onchange="mflcheck(this)" id="cb">
                                                                 <i data-swchon-text="SI" data-swchoff-text="NO"></i>
                                                             </label>
                                                         </section>
@@ -390,17 +390,21 @@
                                                                 function() {
                                                                     Listar_Direccion();
                                                                     Listar_Departamento();
-
+                                                                    
+                                                                    $("#aps").numeric();
+                                                                    $("#hue").numeric();
                                                                 }
                                                         );</script> 
                                                     <script>
                                                         function mflcheck(cb) {
                                                             if (cb.checked == true) {
+                                                                $("#cb").val('1')
                                                                 $(".centro-costo_1").hide();
                                                                 $(".cc-dir").removeAttr('required');
                                                                 $(".cc-dep").removeAttr('required');
                                                                 $(".centro_costo").removeAttr('required');
                                                             } else {
+                                                                $("#cb").val('0')
                                                                 $(".centro-costo_1").show();
                                                                 $(".cc-dir").attr("required", "required");
                                                                 $(".cc-dep").attr("required", "required");

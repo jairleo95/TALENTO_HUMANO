@@ -87,6 +87,13 @@ public class CReporte extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
+            if (opc.equals("reporte_cumpleaños")) {
+                String mes = request.getParameter("mes");
+                String dia = request.getParameter("dia");
+                List<Map<String, ?>> lista = dah.Listar_Cumpleaños(mes, dia);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());
