@@ -32,47 +32,98 @@
             <div id="content" >
                 <section id="widget-grid" class="">
                     <div class="row">
+                        <div class="col-xs-12">
 
-                        <div class="well">
-                            <form class="smart-form form_f">
+                            <div class="well">
+                                <form class="smart-form form_f">
 
-                                <h1 class="text-center ">Historial de Modificaciones <small>/ Trabajadores</small></h1><br>
-                                <div class="row">
-                                    <div class="col col-xs-9">
-                                        <section class="col col-xs-12">
-                                            <div class="custom-scroll table-responsive" style="height:190px; overflow-y: scroll;">
+                                    <h1 class="text-center ">Historial de Modificaciones <small>/ Trabajadores</small></h1><br>
+                                    <div class="row">
+                                        <div class="col col-xs-9">
+                                            <section class="col col-xs-12">
+                                                <label class="label">Ultimas Modificaciones</label>
+                                                <label class="select">
+                                                    <select class="s_fecha">
+                                                        <option>[Seleccione]</option>
+                                                    </select>
+                                                    <i></i></label>
+                                            </section>
+                                        </div>
+                                        <div class="col col-xs-3">
+                                            <section class="col col-sm-12">
+                                                <center>
+                                                    <a class="btn btn-primary btn-circle btn-xl btnEnviar"><i class="glyphicon glyphicon-search"></i></a>
+                                                </center>
+                                            </section>
+                                        </div>
+
+
+                                    </div>
+                                </form>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-md-6">
+                            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="jarviswidget jarviswidget-color-blue" id="wid-id-1" data-widget-editbutton="false">
+                                    <header>
+                                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                        <h2 class="ti_fecha">Seleccionar Fecha</h2>
+                                    </header>
+                                    <div>
+                                        <div class="jarviswidget-editbox">
+                                        </div>
+                                        <div class="widget-body no-padding">
+                                            <div class="table-responsive">
                                                 <table class="table table-bordered">
                                                     <thead>
                                                         <tr>
-                                                            <th>Fecha</th>
-                                                            <th>Hora</th>
-                                                            <th>Acciones</th>
+                                                            <td>Nro</td>
+                                                            <td>Columna</td>
+                                                            <td>Detalle</td>
                                                         </tr>
                                                     </thead>
-                                                    <tbody class="s_fecha">
-                                                        
+                                                    <tbody class="tbodys_hist">
                                                     </tbody>
                                                 </table>
                                             </div>
-                                        </section>
+                                        </div>
                                     </div>
-                                    <div class="col col-xs-3">
-                                        <section class="col col-sm-12">
-                                            <center>
-                                                <a class="btn btn-primary btn-circle btn-xl btnEnviar"><i class="glyphicon glyphicon-search"></i></a>
-                                            </center>
-                                        </section>
-                                    </div>
-
-
                                 </div>
-                            </form>
-
-
+                            </article>
                         </div>
-
-                    </div>
-                    <div class="row">
+                        <div class="col col-md-6">
+                            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="jarviswidget jarviswidget-color-blue" id="wid-id-2" data-widget-editbutton="false">
+                                    <header>
+                                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                        <h2>Datos Actuales</h2>
+                                    </header>
+                                    <div>
+                                        <div class="jarviswidget-editbox">
+                                        </div>
+                                        <div class="widget-body no-padding">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <td>Nro</td>
+                                                            <td>Columna</td>
+                                                            <td>Detalle</td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="tbodys">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
                     </div>
                 </section>
             </div>
@@ -129,28 +180,87 @@
                 function cargar_fechas() {
                     var s = $('.s_fecha');
                     s.empty();
-                    
+                    s.append("<option>[Espere..]</option>");
                     $.post("../../../RHistorial?", "opc=list_mod_tra&idtr=" + idtrab, function (objJson) {
                         var lista = objJson.lista;
                         if (lista.length < 1) {
                             s.empty();
-                            s.append("<tr>[No hay Datos]</tr>");
+                            s.append("<option>[No hay Datos]</option>");
                         } else {
                             s.empty();
+                            s.append("<option>[Seleccione]</option>");
                             for (var i = 0; i < lista.length; i++) {
                                 if (lista[i].fe_mod != undefined) {
-                                    s.append("<tr>");
-                                    s.append("<td>" + lista[i].fe_mod + "</td>");
-                                    s.append("<td>" + lista[i].hora_mod+ "</td>");
-                                    s.append("<td><a class='btn btn-primary'>Ver</a></td>");
-                                    s.append("</tr>");
+                                    s.append("<option >" + lista[i].fe_mod + "</option>");
                                 }
-                                
+
                             }
                         }
                     });
                 }
+                $('.s_fecha').change(function () {
+                    $('.ti_fecha').empty();
+                    $('.ti_fecha').text("Datos al " + $(this).val());
+                    cargar_hist($(this).val());
+                });
+                function cargar_hist(fe_hist) {
+                    $.post("../../../RHistorial?","opc=list_hist_fecha&fe_modif="+fe_hist, function(objJson){
+                        var lista=objJson.lista;
+                        if(lista.length<1){                            
+                        }else{
+                            var text="<tr>";
+                            var cont=1;
+                            for(var i=0; i<lista.length;i++){
+                                text+="<td>"+(cont)+"</td>";
+                                text+="<td>Id Trabajador</td>";
+                                text+="<td>"+lista[i].col1+"</td>";
+                            }
+                            text+="</tr>";
+                            $('.tbodys_hist').empty();
+                            $('.tbodys_hist').append(text);
+                        }
+                    });
+                }
             });
+        </script>
+        <script type="text/javascript">
+
+            // DO NOT REMOVE : GLOBAL FUNCTIONS!
+
+            $(document).ready(function () {
+
+                pageSetUp();
+
+                // PAGE RELATED SCRIPTS
+
+                // switch style change
+                $('input[name="checkbox-style"]').change(function () {
+                    //alert($(this).val())
+                    $this = $(this);
+
+                    if ($this.attr('value') === "switch-1") {
+                        $("#switch-1").show();
+                        $("#switch-2").hide();
+                    } else if ($this.attr('value') === "switch-2") {
+                        $("#switch-1").hide();
+                        $("#switch-2").show();
+                    }
+
+                });
+
+                // tab - pills toggle
+                $('#show-tabs').click(function () {
+                    $this = $(this);
+                    if ($this.prop('checked')) {
+                        $("#widget-tab-1").removeClass("nav-pills").addClass("nav-tabs");
+                    } else {
+                        $("#widget-tab-1").removeClass("nav-tabs").addClass("nav-pills");
+                    }
+
+                });
+
+            });
+
         </script>
     </body>
 </html>

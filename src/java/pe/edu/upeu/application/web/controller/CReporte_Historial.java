@@ -104,6 +104,12 @@ public class CReporte_Historial extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
+            if (opc.equals("list_hist_fecha")) {
+               String fe_modif=request.getParameter("fe_modif");
+               List<Map<String, ?>> lista = re.Listar_hist_fecha(fe_modif);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
 
         } catch (Exception e) {
             rpta.put("rpta", "-1");

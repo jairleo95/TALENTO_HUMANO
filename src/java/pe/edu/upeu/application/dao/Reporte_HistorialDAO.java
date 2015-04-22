@@ -106,17 +106,16 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
         List<Map<String, ?>> ip = new ArrayList<>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT ID_TRABAJADOR,TO_CHAR( FE_MODIF,'Day,DD \"de\" MONTH \"del\" YYYY') FE_MODIFi,TO_CHAR(FE_MODIF,'HH:MM:SS AM')HORA_MODIF, US_MODIF, IP_USUARIO\n"
+            String sql = "SELECT ID_TRABAJADOR,TO_CHAR(FE_MODIF,'DD/MM/YYYY HH:MI:SS')FE_MODIFI, US_MODIF, IP_USUARIO\n"
                     + "FROM RHTH_MODIF_TRABAJADOR\n"
-                    + "WHERE ID_TRABAJADOR='"+ID_TRABAJADOR+"' AND FE_MODIF IS NOT NULL\n"
+                    + "WHERE ID_TRABAJADOR='" + ID_TRABAJADOR + "' AND FE_MODIF IS NOT NULL\n"
                     + "ORDER BY FE_MODIFi desc";
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<>();
-                rec.put("id_tra", rs.getString("ID_TRABAJADOR"));
-                rec.put("fe_mod", rs.getString("FE_MODIFi"));
-                rec.put("hora_mod", rs.getString("HORA_MODIF"));
-                rec.put("us_mod", rs.getString("US_MODIF"));
+                rec.put("id_tra", rs.getString(1));
+                rec.put("fe_mod", rs.getString(2));
+                rec.put("us_mod", rs.getString(3));
                 /*ip = ip_usuario(rs.getString("ID_TRABAJADOR"));
                  rec.put("ip_user", ip.get(0).get("IP0"));
                  rec.put("host_name", ip.get(0).get("IP1"));
@@ -250,5 +249,42 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
             }
         }
         return lista;
+    }
+
+    @Override
+    public List<Map<String, ?>> Listar_hist_fecha(String FE_MODIF) {
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "SELECT *\n"
+                    + "FROM RHTH_MODIF_TRABAJADOR\n"
+                    + "WHERE ID_TRABAJADOR='TRB-002529'\n"
+                    + "AND (TO_CHAR(FE_MODIF,'DD/MM/YYYY HH:MI:SS')\n"
+                    + "=TO_CHAR(TO_DATE('" + FE_MODIF + "','DD/MM/YYYY HH:MI:SS'),'DD/MM/YYYY HH:MI:SS') )";
+            ResultSet rs = this.cnn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                for (int i = 1; i < 73; i++) {
+                    rec.put("col" + i, rs.getString(i));
+                }
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+            }
+        }
+        return lista;
+    }
+
+    @Override
+    public List<Map<String, ?>> Listar_dat_actual(String ID_TRABAJADOR) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
