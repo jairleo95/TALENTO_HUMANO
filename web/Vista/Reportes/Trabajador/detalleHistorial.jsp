@@ -26,9 +26,7 @@
         <!-- #GOOGLE FONT -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
     </head>
-    <%
-        String idtr = request.getParameter("idtr");
-    %>
+
     <body>
         <div id="main" role="main" style="margin: 0px;">
             <div id="content" >
@@ -38,19 +36,27 @@
                         <div class="well">
                             <form class="smart-form form_f">
 
-                                <h1 class="text-center">Historial de Modificaciones <small>/ Trabajadores</small></h1><br>
+                                <h1 class="text-center ">Historial de Modificaciones <small>/ Trabajadores</small></h1><br>
                                 <div class="row">
-                                    <div class="col col-sm-9">
-                                        <section class="col col-sm-12">
-                                            <label class="label">Ultimas Modificaciones</label>
-                                            <label class="select">
-                                                <select class="s_fecha">
-                                                    <option>[Seleccione]</option>
-                                                </select>
-                                                <i></i></label>
+                                    <div class="col col-xs-9">
+                                        <section class="col col-xs-12">
+                                            <div class="custom-scroll table-responsive" style="height:190px; overflow-y: scroll;">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Fecha</th>
+                                                            <th>Hora</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="s_fecha">
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </section>
                                     </div>
-                                    <div class="col col-sm-3">
+                                    <div class="col col-xs-3">
                                         <section class="col col-sm-12">
                                             <center>
                                                 <a class="btn btn-primary btn-circle btn-xl btnEnviar"><i class="glyphicon glyphicon-search"></i></a>
@@ -67,7 +73,6 @@
 
                     </div>
                     <div class="row">
-                        <!--<iframe src="../../../trabajador?idtr=TRB-002342&opc=list" width="100%" height="700" frameborder="0" ></iframe>-->
                     </div>
                 </section>
             </div>
@@ -119,23 +124,28 @@
         <script src="../../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
-                alert(<%=idtr%>);
+                var idtrab = '<%= request.getParameter("idtr")%>';
                 cargar_fechas();
                 function cargar_fechas() {
-                    
                     var s = $('.s_fecha');
                     s.empty();
-                    s.append("<option>[Espere..]</option>");
-                    $.post("../../../RHistorial", "opc=list_mod_tra&idtr=" +<%=idtr%>, function (objJson) {
+                    
+                    $.post("../../../RHistorial?", "opc=list_mod_tra&idtr=" + idtrab, function (objJson) {
                         var lista = objJson.lista;
                         if (lista.length < 1) {
                             s.empty();
-                            s.append("<option>[No hay Datos]</option>")
+                            s.append("<tr>[No hay Datos]</tr>");
                         } else {
                             s.empty();
-                            s.append("<option>[Seleccione]</option>");
                             for (var i = 0; i < lista.length; i++) {
-                                s.append("<option>"+lista.fe_mod+"</option>");
+                                if (lista[i].fe_mod != undefined) {
+                                    s.append("<tr>");
+                                    s.append("<td>" + lista[i].fe_mod + "</td>");
+                                    s.append("<td>" + lista[i].hora_mod+ "</td>");
+                                    s.append("<td><a class='btn btn-primary'>Ver</a></td>");
+                                    s.append("</tr>");
+                                }
+                                
                             }
                         }
                     });

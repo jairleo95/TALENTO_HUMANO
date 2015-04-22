@@ -550,7 +550,6 @@
 
                 }
                 d.append(texto);
-
             });
         }
         $(document).ready(function () {
