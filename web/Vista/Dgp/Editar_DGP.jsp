@@ -1,44 +1,27 @@
-<%@page import="pe.edu.upeu.application.model.Usuario"%>
+
+<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
+<%@page import="pe.edu.upeu.application.model.V_Det_DGP"%>
+<%@page import="pe.edu.upeu.application.model.Cuenta_Sueldo"%>
 <%
-    HttpSession sesion = request.getSession();
-    String id_user = (String) sesion.getAttribute("IDUSER");
-    if (id_user != null) {
+    HttpSession sesion_1 = request.getSession();
+    String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
+    if (id_user_1 != null) {
+
 %>
-
-<%-- 
-    Document   : Reg_Casos_Especiales
-    Created on : 21/01/2015, 09:46:47 AM
-    Author     : Alex
---%>
-
-
-<%@page import="pe.edu.upeu.application.model.Grupo_Ocupaciones"%>
-<%@page import="pe.edu.upeu.application.model.Modalidad"%>
-<%@page import="pe.edu.upeu.application.model.Regimen_Laboral"%>
-<%@page import="pe.edu.upeu.application.model.Direccion"%>
-<%@page import="pe.edu.upeu.application.model.Anno"%>
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.When"%>
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
 <%@page import="pe.edu.upeu.application.model.Requerimiento"%>
 <%@page import="pe.edu.upeu.application.model.V_Puesto_Direccion"%>
 <%@page import="pe.edu.upeu.application.model.Puesto"%>
 <%@page import="pe.edu.upeu.application.model.Trabajador"%>
-
-<!--CONTRATO-->
-
-<jsp:useBean id="LISTAR_ANNO" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Puesto" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="Listar_Direccion" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="LIST_ID_DGP" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="ASIGNACION_F" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_modalidad" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="list_reg_labo" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_centro_costo" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_grup_ocu" scope="application" class="java.util.ArrayList"/>
-<!--DGP-->
 <jsp:useBean id="Listar_Trabajador_id" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="LIST_ID_DGP" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Puesto" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Det_Puesto" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_Requerimiento" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="list_Cuenta_Sueldo" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="fecha_maxima_plazo" scope="application" class="java.lang.String"/>
 
 <!DOCTYPE html >
 <html>
@@ -46,7 +29,7 @@
         <meta charset="utf-8">
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
-        <title> Registrar Casos Especiales </title>
+        <title> Registrar DGP </title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -105,17 +88,20 @@
             }
 
             #titu{
-
                 font-weight: bold;
                 color: #005cac;
                 // color: blue;
             }
+            p{
+                font-weight: bold; 
+            }
 
         </style>
 
-        <%
-            //HttpSession sesion = request.getSession(true);
-            //String id_dep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
+        <%            HttpSession sesion = request.getSession(true);
+            String id_dep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
+            String fecha_min = (String) sesion.getAttribute("FECHA_MINIMA");
+            CConversion c = new CConversion();
         %>
 
     </head>
@@ -123,15 +109,24 @@
 
 
         <div id="main" role="main" style="margin: 0px;">
-            <form id="checkout-form" action="../../contrato"  novalidate="novalidate">
 
-                <div id="content">
-                    <section id="widget-grid" class="">
-                        <div class="row">
-                            <article class="col-sm-12 col-md-12 col-lg">
+
+            <div id="content">
+                <section id="widget-grid" class="">
+                    <div class="row">
+                        <form id="checkout-form" action="../../dgp"  novalidate="novalidate">
+                            <!-- NEW COL START -->
+                            <article class="col-sm-12 col-md-12 col-lg-6">
+
+                                <div id="alerta_dgp">
+
+                                </div>
+                                <div class="div_info">
+
+                                </div>
 
                                 <!-- Widget ID (each widget will need unique ID)-->
-                                <div class="jarviswidget" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-deletebutton="false">
+                                <div class="jarviswidget" id="wid-id-2" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-custombutton="false">
                                     <!-- widget options:
                                     usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
     
@@ -143,10 +138,11 @@
                                     data-widget-custombutton="false"
                                     data-widget-collapsed="true"
                                     data-widget-sortable="false"
+    
                                     -->
                                     <header>
                                         <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                        <h2>Registrar Contrato</h2>
+                                        <h2>Editar Requerimiento</h2>
 
                                     </header>
 
@@ -163,560 +159,507 @@
                                         <!-- widget content -->
                                         <div class="widget-body no-padding">
 
-                                            <div class="smart-form" >
+                                            <div class="smart-form" id="form_dgp"  method="post" action="../../dgp">
                                                 <header class="titulo_req">
 
                                                     <div class="spacing">
-                                                        <center><h1 class="spacing" style="font-weight: bold; margin: 0px;  color: #005cac;"> Ficha Contractual</h1></center>
-                                                            <%String nom = request.getParameter("nom");%>
-                                                        <label style="font-weight: bold; color:#0F0F0F; ">Trabajador: <%=nom%> </label>
+                                                        <center><h1 class="spacing" style="font-weight: bold; margin: 0px;  color: #005cac;"> Documento de Gestión de Personal</h1></center>
                                                         <br>
 
                                                     </div>
+                                                    <br>
+
                                                 </header>
-
+                                                <%for (int a = 0; a < LIST_ID_DGP.size(); a++) {
+                                                        V_Det_DGP dg = new V_Det_DGP();
+                                                        dg = (V_Det_DGP) LIST_ID_DGP.get(a);
+                                                %>
                                                 <fieldset id="fila-agregar">
+                                                    <%                                                        /*Temporal*/
 
+                                                        for (int i = 0; i < Listar_Trabajador_id.size(); i++) {
+                                                            V_Ficha_Trab_Num_C tr = new V_Ficha_Trab_Num_C();
+                                                            tr = (V_Ficha_Trab_Num_C) Listar_Trabajador_id.get(i);
+                                                    %>
+                                                    <div class="row">
+                                                        <input value=""  type="hidden" id="" />
+                                                        <section class="col col-6">
+                                                            <label class="label" id="titu">Trabajador :</label>
+                                                            <label class="input" style="color: red; font-weight: bold;">
+                                                                <%=tr.getAp_paterno() + " " + tr.getAp_materno() + " " + tr.getNo_trabajador()%>
+                                                                <input type="hidden" value="<%=tr.getId_trabajador()%>" name="IDDATOS_TRABAJADOR" class="id_tr input-xs">
+                                                                <%}%>
+                                                            </label>
+                                                        </section>
+                                                    </div>
+                                                    <script>
+                                                        $(document).ready(function() {
+                                                        });
+                                                    </script>
+
+                                                    <section>
+                                                        <label class="label" id="titu">Puesto | Seccion | Area:</label><%=dg.getId_puesto()%>
+                                                        <label class="select">
+                                                            <select name="IDPUESTO"  required="" >
+                                                                <option value="">[SELECCIONE]</option>
+                                                                <%for (int b = 0; b < List_Puesto.size(); b++) {
+                                                                        V_Puesto_Direccion p = new V_Puesto_Direccion();
+                                                                        p = (V_Puesto_Direccion) List_Puesto.get(b);
+                                                                        if (dg.getId_puesto().trim().equals(p.getId_puesto().trim())) {
+                                                                %>
+                                                                <option value="<%=p.getId_puesto()%>" selected=""><% out.println(p.getNo_puesto() + " | " + p.getNo_seccion() + " | " + p.getNo_area());%></option>
+                                                                <%} else {%>
+                                                                <option value="<%=p.getId_puesto()%>"><% out.println(p.getNo_puesto() + " | " + p.getNo_seccion() + " | " + p.getNo_area());%></option>
+                                                                <%}
+                                                                    }%>
+                                                            </select>
+                                                        </label>
+                                                    </section>
+
+                                                    <section>
+                                                        <label class="label" id="titu">Requerimiento :</label>
+                                                        <label class="select">
+                                                            <select name="IDREQUERIMIENTO"    disabled="" onchange="mostrar()"  id="nom_req"  > 
+                                                                <option value="">[SELECCIONAR]</option>
+                                                                <%
+                                                                    for (int index = 0; index < Listar_Requerimiento.size(); index++) {
+                                                                        Requerimiento r = new Requerimiento();
+                                                                        r = (Requerimiento) Listar_Requerimiento.get(index);
+                                                                        if (dg.getId_requerimiento().trim().equals(r.getId_requerimiento().trim())) {
+                                                                %>
+                                                                //<option value="<%=r.getId_requerimiento()%>" selected=""  ><%=r.getNo_req()%></option>
+                                                                <%} else {%>
+                                                                <option value="<%=r.getId_requerimiento()%>"><%=r.getNo_req()%></option>                      
+                                                                <%}
+                                                                    }%>
+                                                            </select> 
+                                                        </label>
+                                                    </section>
                                                     <div class="row" >
-
-                                                        <section class="col col-1">
-                                                            <label class="select" id="titu">Año:
-                                                                <select name="AÑO_ID" required="" class="input-group-sm">
-                                                                    <%  String MAX = request.getParameter("MAX_ID");
-                                                                        for (int i = 0; i < LISTAR_ANNO.size(); i++) {
-                                                                            Anno a = new Anno();
-                                                                            a = (Anno) LISTAR_ANNO.get(i);
-                                                                            if (a.getId_anno().trim().equals(MAX)) {
-                                                                    %>
-                                                                    <option value="<%=a.getId_anno()%>" selected="selected"  ><%=a.getNo_anno()%></option> 
+                                                        <section class="col col-6">
+                                                            <label class="select" id="titu">
+                                                                Motivo :<select name="MOTIVO" class="ant_policiales" required="" >
+                                                                    <option value="" >[SELECCIONE]</option>
+                                                                    <%if (dg.getLi_motivo().equals("1")) {%>
+                                                                    <option value="1" selected="">Trabajdor Nuevo</option>
+                                                                    <option value="2">Renovación</option>
+                                                                    <%}
+                                                                        if (dg.getLi_motivo().equals("2")) {%>
+                                                                    <option value="1">Trabajdor Nuevo</option>
+                                                                    <option value="2" selected="">Renovación</option>
                                                                     <%}%>
-                                                                    <option value="<%=a.getId_anno()%>" ><%=a.getNo_anno()%></option>            
-                                                                    <%}%>
-
-                                                                </select> 
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-2 ">
-                                                            <label class="input" id="titu">Desde: 
-                                                                <input type="date" name="FEC_DESDE"  class="input-group-sm" required="">
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-2">
-                                                            <label class="input" id="titu">Hasta: 
-                                                                <input type="date" name="FEC_HASTA"  class="input-group-sm">
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-2" id="titulo">
-                                                            <label class="select" id="titu">Dirección:
-                                                                <select name="DIRECCION" class="input-group-sm select_dir" required="">
-
-                                                                    <option value="">[SELECCIONE]</option>
-                                                                    <%for (int g = 0; g < Listar_Direccion.size(); g++) {
-                                                                            Direccion di = new Direccion();
-                                                                            di = (Direccion) Listar_Direccion.get(g);
-                                                                    %>
-                                                                    <option value="<%=di.getId_direccion()%>"><%=di.getNo_direccion()%></option>
-
-                                                                    <%}%>
-
-                                                                </select>  </label>
-                                                        </section> 
-                                                        <section class="col col-2" id="titulo">
-                                                            <label class="select" id="titu">Departamento:
-                                                                <select name="DEPARTAMENTO_ID" class="input-group-sm" id="selec_dep" required="">
-                                                                    <option value="">[SELECCIONE]</option>
-                                                                </select>  </label>
-                                                        </section>
-                                                        <section class="col col-3" id="titulo">
-                                                            <label class="select" id="titu">Area:
-                                                                <select name="AREA_ID" class="input-group-sm" required="" id="Selec_Area">
-                                                                    <option value="">[SELECCIONE]</option>
-                                                                </select>  </label>
-                                                        </section>
-                                                        <section class="col col-3" id="titulo">
-                                                            <label class="select" id="titu">Sección:
-                                                                <select name="SECCION_ID" class="input-group-sm" id="select_sec" required="">
-                                                                    <option value="">[SELECCIONE]</option>
-                                                                </select>  </label>
-                                                        </section>
-                                                        <section class="col col-3" id="titulo">
-                                                            <label class="select" id="titu">Puesto:
-
-                                                                <select name="PUESTO_ID"class="input-group-sm" id="pu_id_se" required="" required="">
-                                                                    <option value="">[SELECCIONE]</option>
-                                                                </select>  </label>
-                                                        </section>
-                                                        <section class="col col-3">
-                                                            <label class="select" id="titu">Condición:
-                                                                <select name="CONDICION" class="input-group-sm" required="">
-                                                                    <option value="">[SELECCIONE]</option>
-                                                                    <option value="1">Contratado</option>
-                                                                    <option value="2">Contratado Independiente</option>
-                                                                    <option value="3">Enpleado</option>
-                                                                    <option value="4">Misionero</option>
-                                                                    <option value="5">MFL-Práctica Pre-Profesional</option>
-                                                                    <option value="6">MFL-Práctica Profesionales</option>
-                                                                    <option value="7">MFL-CLJ</option>
-                                                                    <option value="8">MFL-Contrato</option>
                                                                 </select>
                                                             </label>
-                                                        </section>
-                                                    </div>
-                                                    <div class="row">
-                                                        <section class="col col-2">
-                                                            <label class="input" id="titu">Remuneración:
-                                                                <input type="text" name="SUELDO" id="remu" value="0"  class="input-group-sm">
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-1">
-                                                            <label class="input" id="titu">Reintegro:
-                                                                <input type="text" name="REINTEGRO"  value="0" class="input-group-sm">
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-2">
-                                                            <label class="input" id="titu">Bono Alimentario:
-                                                                <input type="text" name="BONO_ALIMENTO" id="bono_al" value="0" class="input-group-sm">
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-1">
-                                                            <label class="input" id="titu">BEV:
-                                                                <input type="text" name="BEV"  id="bev" value="0" class="input-group-sm">
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-1">
-                                                            <label class="input" id="titu">Bono puesto:
-                                                                <input type="text" name="ca_bono_puesto" value="0" id="bo_puesto" required="" class="input-group-sm">
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-1">
-                                                            <label class="input" id="titu">Sueldo Total:
-                                                                <input type="text" name="TOTAL_SUELDO" value="0" id="sueldo_total"class="input-group-sm"  >
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-2">
-                                                            <label class="input" id="titu">Tipo Horas Pago:
-                                                                <input type="text" name="TIPO_HORA_PAGO" value="0" class="input-group-sm">
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-2" >
-                                                            <%int cant_hijos = Integer.parseInt(request.getParameter("cant_hijos"));%>
-                                                            <label class="input" id="titu">Asignanción Familiar:
-                                                                <input type="text" name="ASIG_FAMILIAR" <%if (cant_hijos == 0) {%> value="0.0" <%} else {%> value="75.0" <%}%> id="asig_fa" class="input-group-sm">
-                                                            </label>
-                                                        </section>
 
-                                                    </div>
-
-                                                    <div class="row">
-                                                        <section class="col col-1 ">
-                                                            <label class="input" id="titu">Codigo APS: 
-                                                                <input type="text" maxlength="6" name="co_aps" id="aps" class="input-group-sm">
-                                                            </label>
                                                         </section>
-                                                        <section class="col col-1 ">
-                                                            <label class="input" id="titu">Codigo Huella: 
-                                                                <input type="text" maxlength="6" name="co_hue" id="hue" class="input-group-sm">
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-2" style=" margin-top:0.8%;">
+                                                        <section class="col col-2" style=" margin-top:2%;">
                                                             <label class="toggle" id="titu" > MFL:
-                                                                <input type="checkbox" value="0"   name="MFL" name="checkbox-toggle" onchange="mflcheck(this)" id="cb">
+                                                                <%if (dg.getEs_mfl().trim().equals("0")) {%>
+                                                                <input type="checkbox" value="1"  name="MFL" name="checkbox-toggle" >
+                                                                <%}
+                                                                    if (dg.getEs_mfl().trim().equals("1")) {%>
+                                                                <input type="checkbox" value="1"  name="MFL" name="checkbox-toggle" checked="">
+                                                                <%}%>
                                                                 <i data-swchon-text="SI" data-swchoff-text="NO"></i>
                                                             </label>
                                                         </section>
-
                                                     </div>
 
-                                                    <div class="row centro-costo_1" >
-                                                        <!--<code class="ver"></code>-->
-                                                        <section class="col col-3">
-                                                            <label id="titu" class="centro-costo_1" >Centro de Costo Nº 1:</label>
-                                                            <label class="select" id="titu">Dirección :
-                                                                <select required="" class="cc-dir">
-                                                                    <option value="">[DIRECCION]</option>
-                                                                </select>
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-3">
-                                                            <label></label>
-                                                            <label class="select" id="titu"> Departamento :
-                                                                <select required="" name="DEP" class="cc-dep">
-                                                                    <option value="">[DEPARTAMENTO]</option>
-                                                                </select>
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-3">
-                                                            <label></label>
-                                                            <label class="select" id="titu"> Centro de Costo :
-                                                                <select name="CENTRO_COSTOS_1" class="centro_costo" required="">
-                                                                    <option value="">[CENTRO COSTO]</option>
-                                                                </select>
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-1">
-                                                            <label></label>
-                                                            <label class="input" id="titu">%
-                                                                <input name="PORCENTAJE_1"  type="text" value="100"  class="porcentaje_cc"/>
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-1">
-                                                            <label></label>
-                                                            <label class="input" style="font-weight: bold;color:red;">% Total :
-                                                                <input  readonly="" name="TOTAL_PORCENTAJE" max="100" min="100" maxlength="3" type="text" class="total_porcentaje"  />
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-1">
-                                                            <br>
-                                                            <label  id="titu">Agregar:</label>
-                                                            <br>
-                                                            <label class="btn">
-                                                                <!--<button type="button" class="btn btn-default btn-agregar-cc" id="btn-agregar-cc" >Agregar</button>-->
-                                                                <a type="button" style="padding:9%; padding-right:20%; padding-left:20%;" id="btn-agregar-cc" class=" btn btn-default txt-color-green btn-agregar-cc"><i class="fa fa-plus fa-2x"></i></a>
-                                                            </label>
-                                                        </section>
-                                                        <ul class="demo-btns">
-
-                                                            <li>
-
-                                                            </li>
-
-                                                        </ul>
-                                                        <input name="CANT" value="1" type="hidden" class="cant"/>
-                                                    </div>
-
-                                                    <script>
-
-                                                        $(document).ready(
-                                                                function() {
-                                                                    Listar_Direccion();
-                                                                    Listar_Departamento();
-                                                                    
-                                                                    $("#aps").numeric();
-                                                                    $("#hue").numeric();
-                                                                }
-                                                        );</script> 
-                                                    <script>
-                                                        function mflcheck(cb) {
-                                                            if (cb.checked == true) {
-                                                                $("#cb").val('1')
-                                                                $(".centro-costo_1").hide();
-                                                                $(".cc-dir").removeAttr('required');
-                                                                $(".cc-dep").removeAttr('required');
-                                                                $(".centro_costo").removeAttr('required');
-                                                            } else {
-                                                                $("#cb").val('0')
-                                                                $(".centro-costo_1").show();
-                                                                $(".cc-dir").attr("required", "required");
-                                                                $(".cc-dep").attr("required", "required");
-                                                                $(".centro_costo").attr('required', "required");
-                                                            }
-                                                        }
-
-                                                        function Listar_Direccion() {
-                                                            var cc_dir = $(".cc-dir");
-                                                            $.post("../../centro_costo?opc=Listar_dir", function(objJson) {
-                                                                if (objJson.rpta == -1) {
-                                                                    alert(objJson.mensaje);
-                                                                    return;
-                                                                }
-                                                                var lista = objJson.lista;
-                                                                for (var i = 0; i < lista.length; i++) {
-                                                                    cc_dir.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                                                                }
-                                                            });
-                                                        }
-                                                        $(".cc-dir").change(function() {
-                                                            var id_dir = $(".cc-dir").val();
-                                                            //alert(id_dir);
-                                                            Listar_Departamento(id_dir);
-                                                        });
-                                                        function Listar_Departamento(id_dir) {
-                                                            var cc_dep = $(".cc-dep");
-                                                            $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + id_dir, function(objJson) {
-                                                                cc_dep.empty();
-                                                                cc_dep.append("<option value=''>[DEPARTAMENTO]</option>");
-                                                                if (objJson.rpta == -1) {
-                                                                    alert(objJson.mensaje);
-                                                                    return;
-                                                                }
-                                                                var lista = objJson.lista;
-                                                                // alert(lista.length)
-                                                                for (var i = 0; i < lista.length; i++) {
-                                                                    cc_dep.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                                                                }
-                                                            });
-                                                        }
-                                                        $(".cc-dep").change(function() {
-                                                            var id_dep = $(".cc-dep").val();
-                                                            //alert(id_dir);
-                                                            Listar_Centro_Costo(id_dep);
-                                                        });
-                                                        function Listar_Centro_Costo(id_dep) {
-                                                            var centro_costo = $(".centro_costo");
-                                                            $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + id_dep, function(objJson) {
-                                                                centro_costo.empty();
-                                                                centro_costo.append("<option value=''>[CENTRO COSTO]</option>");
-                                                                if (objJson.rpta == -1) {
-                                                                    alert(objJson.mensaje);
-                                                                    return;
-                                                                }
-                                                                var lista = objJson.lista;
-                                                                for (var i = 0; i < lista.length; i++) {
-                                                                    centro_costo.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                                                                }
-                                                            });
-                                                        }
-                                                    </script>
-
-
-                                                </fieldset>
-                                                <fieldset>
                                                     <div class="row">
-                                                        <section class="col col-4">
-                                                            <label class="select" id="titu">Regimen Laboral Mintra:
-                                                                <select name="REG_LAB_MINTRA" class="input-group-sm" >
-                                                                    <option value="">[SELECCIONE]</option>
-                                                                    <%for (int q = 0; q < list_reg_labo.size(); q++) {
-                                                                            Regimen_Laboral re = new Regimen_Laboral();
-                                                                            re = (Regimen_Laboral) list_reg_labo.get(q);
-                                                                    %>
-                                                                    <option value="<%=re.getId_regimen_laboral()%>"><%=re.getDe_regimen_l()%></option>
-                                                                    <%}%>
-                                                                </select>
+                                                        <section class="col col-6" >
+                                                            <label class="input" id="titu">Fecha de Inicio :
+                                                                <input type="date" name="FEC_DESDE" id="datepicker" required="" class="val_fe" min="<%=fecha_maxima_plazo%>" value="<%=c.convertFecha3(dg.getFe_desde())%>">
                                                             </label>
                                                         </section>
-                                                        <section class="col col-4">
-                                                            <label class="select" id="titu">Modalidad:
-                                                                <select name="MODALIDAD" class="input-group-sm" id="select_mod" >
-                                                                    <option value="">[SELECCIONE]</option>
-                                                                    <%for (int l = 0; l < List_modalidad.size(); l++) {
-                                                                            Modalidad mo = new Modalidad();
-                                                                            mo = (Modalidad) List_modalidad.get(l);
-
-                                                                    %>
-                                                                    <option value="<%=mo.getId_modalidad()%>"><%=mo.getDe_modalidad()%></option>
-                                                                    <%}%>
-                                                                </select>
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-4">
-                                                            <label class="select" id="titu">SUB-Modalidad:
-                                                                <select name="SUB_MODALIDAD" class="input-group-sm" id="select-sub-mod" >
-                                                                    <option value="">[SELECCIONE]</option>
-                                                                </select>
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-4">
-                                                            <label class="select" id="titu">Tipo Contratación:
-                                                                <select name="REG_LAB_MINTRA" class="input-group-sm" >
-                                                                    <option value="">[SELECCIONE]</option>
-                                                                    <option value="I">INICIO</option>
-                                                                    <option value="R">RENOVACION</option>
-                                                                </select>
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-4">
-                                                            <label class="select" id="titu">Codigo Grupo de Ocupaciones:
-                                                                <select name="CO_GRUPO_OCU" class="input-group-sm" >
-                                                                    <option value="">[SELECCIONE]</option>
-                                                                    <%for (int gr = 0; gr < List_grup_ocu.size(); gr++) {
-                                                                            Grupo_Ocupaciones g = new Grupo_Ocupaciones();
-                                                                            g = (Grupo_Ocupaciones) List_grup_ocu.get(gr);
-                                                                    %>
-                                                                    <option value="<%=g.getId_grupo_ocupacion()%>"><%=g.getDe_grupo_ocupacion()%></option>
-                                                                    <%}%>
-                                                                </select>
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-4">
-                                                            <%String Fecha = request.getParameter("fe_subs");%>
-                                                            <label class="input" id="titu">Fecha de Suscripción: 
-                                                                <input id="suscripcion" type="date" name="FECHA_SUSCRIPCION"  class="input-group-sm"  value="<%=Fecha%>">
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-4">
-                                                            <label class="select" id="titu">Tipo de Moneda:
-                                                                <select name="TIPO_MONEDA" class="input-group-sm" >
-                                                                    <option value="">[SELECCIONE]</option>
-                                                                    <option value="01" selected="">SOLES</option>
-                                                                    <option value="02">DOLARES</option>
-                                                                    <option value="03">EUROS</option>
-                                                                </select>
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-4">
-                                                            <label class="select" id="titu">Tipo Remuneracion Variable:
-                                                                <select name="REM_VARIABLE" class="input-group-sm" >
-                                                                    <option value="">[SELECCIONE]</option>
-                                                                    <option value="1">DESTAJO</option>
-                                                                    <option value="2">COMISIONES</option>
-                                                                    <option value="3">NINGUNO</option>
-                                                                </select>
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-4">
-                                                            <label class="select" id="titu">Remuneración en Especie:
-                                                                <select name="REM_ESPECIE" class="input-group-sm" >
-                                                                    <option value="">[SELECCIONE]</option>
-                                                                    <option value="1">SI</option>
-                                                                    <option value="0">NO</option>
-                                                                </select>
+                                                        <section class="col col-6">
+                                                            <label class="input"  id="titu">Fecha de Cese :
+                                                                <input type="date" name="FEC_HASTA"  required="" id="datepicker" class="val_fe" min="<%=fecha_maxima_plazo%>" value="<%=c.convertFecha3(dg.getFe_hasta())%>">
                                                             </label>
                                                         </section>
                                                     </div>
-                                                </fieldset> 
-                                                <fieldset>
-                                                    <h6><label id="titu">Horas:</label></h6><br>
-                                                    <div calss="row" >
-                                                        <section class="col col-2">
-                                                            <label class="input" id="titu">Semanal:
-                                                                <input type="text" name="HORAS_SEMANA" value="48" class="input-group-sm" required="">
+                                                    <%if (dg.getId_requerimiento().trim().equals("REG-0008")) {%>
+                                                    <%String es_cue_sue = request.getParameter("es_cs");%>
+                                                    <input type="hidden" name="ESTADO" value="<%=es_cue_sue%>">
+                                                    <%if (es_cue_sue.equals("0")) {%>
+                                                    <input type="hidden" name="ES_CUENTA_SUELDO" value="1" required="" />
+                                                    <div class="row"> 
+                                                        <section class="col col-3" name="">
+                                                            <label class="select" id="titu">Cta Sueldo - Banco:
+                                                                <select name="BANCO" id="banco" required="">
+                                                                    <option value="" selected="" disabled="" >[Selecione]</option>
+                                                                    <option value="0" >Ninguno</option>
+                                                                    <option value="1" >BBVA</option>
+                                                                    <option value="2" >BCP</option>
+                                                                    <option value="3" >Otros</option>
+                                                                </select>
                                                             </label>
+                                                        </section>
+                                                        <section class="col col-3" id="no_cuen_otros">
+
+                                                            <label class="input" id="titu">Nombre Banco :
+                                                                <input type="text" name="BANCO_OTROS"  id="nu_cuen_otros" maxlength="30"   />
+                                                            </label>
+
+                                                        </section>
+                                                        <section class="col col-4" id="no_cuen">
+
+                                                            <label class="input" id="titu">Nro Cuenta :
+                                                                <input type="text" name="CUENTA"  id="nu_cuen" maxlength="30" />
+                                                            </label>
+
+                                                        </section>
+                                                        <section class="col col-4"  id="no_cuen_ban">
+
+                                                            <label class="input" id="titu">Nro Cuenta Bancaria:
+                                                                <input type="text" name="CUENTA_BANC" id="nu_cuen_ban">
+                                                            </label>
+
                                                         </section>
 
-                                                        <section class="col col-2">
-                                                            <label class="input" id="titu">Mensual:
-                                                                <input type="text" name="NRO_HORAS_LAB" value="192" class="input-group-sm" required="">
-                                                            </label>
+                                                        <section class="col col-6" id="generar">
+                                                            <p style="font-weight:bold;">Autorizo a la UPeU gestionar mi cuenta de sueldo en el BBVA Banco Continental, para tal efecto adjunto copia legible y vigente de mi DNI   </p>
+                                                            <label class="checkbox" >
+                                                                <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="1" >
+                                                                <i></i>Generar Nro de Cuenta Bancaria</label>
                                                         </section>
 
-                                                        <section class="col col-2">
-                                                            <label class="input" id="titu">Dias:
-                                                                <input type="text" name="DIAS" value="8" class="input-group-sm" required="">
-                                                            </label>
-                                                        </section>
                                                     </div>
-                                                </fieldset>
-                                                <fieldset>
+                                                    <%} else { %>
+                                                    <%for (int i = 0; i < list_Cuenta_Sueldo.size(); i++) {
+                                                            Cuenta_Sueldo cs = new Cuenta_Sueldo();
+                                                            cs = (Cuenta_Sueldo) list_Cuenta_Sueldo.get(i);
+                                                    %>
+                                                    <div class="row"> 
+                                                        <section class="col col-3" name="">
+                                                            <label class="select" id="titu" >Cta Sueldo - Banco:
+                                                                <select name="BANCO"  required="" disabled="">
+                                                                    <%if (cs.getNo_banco().equals("0")) {%>
+                                                                    <option >Ninguno</option>
+                                                                    <%}
+                                                                        if (cs.getNo_banco().equals("1")) {%>
+                                                                    <option >BBVA</option>
+                                                                    <%}
+                                                                        if (cs.getNo_banco().equals("2")) {%>
+                                                                    <option >BCP</option>
+                                                                    <%}
+                                                                        if (cs.getNo_banco().equals("3")) {%>
+                                                                    <option >Otros</option>
+                                                                    <%}%>
+                                                                </select>
+                                                            </label>
+                                                        </section>
+                                                        <%if (cs.getNo_banco_otros() != null) {%>
+                                                        <section class="col col-3">
+                                                            <label class="input" id="titu">Nombre Banco :
+                                                                <input type="text" disabled="" value="<%=cs.getNo_banco_otros()%>" />
+                                                            </label>
+                                                        </section>
+                                                        <%}
+                                                            if (cs.getNu_cuenta() != null) {%>
+                                                        <section class="col col-4">
+                                                            <label class="input" id="titu">Nro Cuenta :
+                                                                <input type="text" disabled="" value="<%=cs.getNu_cuenta()%>" />
+                                                            </label>
+                                                        </section>
+                                                        <%}
+                                                            if (cs.getNu_cuenta_banc() != null) {%>
+                                                        <section class="col col-4">
+                                                            <label class="input" id="titu">Nro Cuenta Bancaria:
+                                                                <input type="text" disabled="" value="<%=cs.getNu_cuenta_banc()%>">
+                                                            </label>
+                                                        </section>
+                                                        <%}
+                                                            if (cs.getNo_banco().equals("0")) {%>
+                                                        <section class="col col-5" >
+
+                                                            <p >Autorizo a la UPeU gestionar mi cuenta de sueldo en el BBVA Banco Continental, para tal efecto adjunto copia legible y vigente de mi DNI   </p>
+                                                            <label class="checkbox" >
+                                                                <%if (cs.getEs_gem_nu_cuenta().equals("1")) {%>
+                                                                <input type="checkbox" name="GEN_NU_CUEN"  id="subscription"  value="1" checked="" disabled="">
+                                                                <%} else {%>
+                                                                <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="0" disabled="">
+                                                                <%}%>
+                                                                <i></i>Generar Nro de Cuenta Bancaria</label>
+                                                        </section>
+                                                        <%}%>
+                                                    </div>
+                                                    <%}
+                                                        }%>
+                                                    <%}%>
                                                     <div class="row">
-                                                        <section class="col col-4">
-                                                            <label class="select" id="titu">Tipo Trabajador.
-                                                                <select name="TIPO_TRABAJADOR" class="input-group-sm" required="">
-                                                                    <option value="">[SELECCIONE]</option>
-                                                                    <option value="1" selected>Empleado</option>
-                                                                    <option value="2">Obrero</option>
-                                                                </select>
+                                                        <section class="col col-3" >
+                                                            <label class="input" id="titu">Sueldo :
+                                                                <input type="text" name="SUELDO" required="" maxlength="13" value="<%=dg.getCa_sueldo()%>"  id="sueldo" >
                                                             </label>
                                                         </section>
-                                                        <section class="col col-4">
-                                                            <label class="select" id="titu">Regimen Laboral: 
-                                                                <select name="REGIMEN_LABORAL" class="input-group-sm" required="">
-                                                                    <option value="">[SELECCIONE]</option>
-                                                                    <option value="1" selected>Privado</option>
-                                                                    <option value="2" selected>Público</option>
-                                                                </select>
+                                                        <%if (dg.getId_requerimiento().trim().equals("REQ-0001") || dg.getId_requerimiento().trim().equals("REQ-0002") || dg.getId_requerimiento().trim().equals("REQ-0003") || dg.getId_requerimiento().trim().equals("REQ-0005")) {
+                                                        %> 
+                                                        <section class="col col-3">
+                                                            <label class="input"  id="titu"> 
+                                                                Bono de Alimentos :<input type="text" maxlength="13"  value="<%=dg.getCa_bono_alimentario()%>" name="BONO_ALIMENTARIO"  id="bono_al">
                                                             </label>
                                                         </section>
+                                                        <section class="col col-3">
+                                                            <label class="input"  id="titu"> 
+                                                                Bonificaion Puesto :<input type="text" maxlength="13"  value="<%=dg.getCa_bonificacion_p()%>" name="BONO_PUESTO"  id="bono_pu">
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-3">
+                                                            <label class="input"  id="titu"> 
+                                                                BEV :<input type="text" name="BEV" maxlength="13" value="<%=dg.getDe_bev()%>" id="bev">
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-3">
+                                                            <label class="input"  id="titu"> 
+                                                                Sueldo Total :<div id="suel_total" style="color: red;">0.0</div>
+                                                            </label>
+                                                        </section>
+                                                    </div>
+                                                    <div  class="row" >
                                                         <section class="col col-4">
-                                                            <label class="select" id="titu"> Discapacidad:
-                                                                <select name="DISCAPACIDAD" class="input-group-sm" required="">
-                                                                    <option value="">[SLECCIONE]</option>
-                                                                    <option value="1" selected>No</option>
+                                                            <label class="select" id="titu">
+                                                                Antecedentes Policiales :<select name="ANTECEDENTES_POLICIALES" class="ant_policiales" >
+                                                                    <option value="" >[SELECCIONE]</option>
+                                                                    <%if (dg.getDe_antecedentes_policiales() != null) {
+                                                                            if (dg.getDe_antecedentes_policiales().equals("1")) {
+                                                                    %>
+                                                                    <option value="1" selected="">No</option>
                                                                     <option value="2">Si</option>
+                                                                    <%}
+                                                                        if (dg.getDe_antecedentes_policiales().equals("2")) {%>
+                                                                    <option value="1" >No</option>
+                                                                    <option value="2" selected="">Si</option>
+                                                                    <%}
+                                                                    } else {%>
+                                                                    <option value="1" >No</option>
+                                                                    <option value="2">Si</option>
+                                                                    <%}%>
                                                                 </select>
                                                             </label>
+
                                                         </section>
                                                         <section class="col col-4">
-                                                            <label class="select" id="titu">Regimen Pensionario:
-                                                                <select name="REGIMEN_PENSIONARIO" class="input-group-sm" required="">
+
+                                                            <label class="select" id="titu">
+                                                                Certificado de Salud: 
+                                                                <select name="CERTIFICADO_SALUD" required=""  class="essalud">
                                                                     <option value="">[SELECCIONE]</option>
-                                                                    <option value="1" selected>Privado</option>
-                                                                    <option value="2">SNP</option>
-                                                                </select>
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-4">
-                                                            <label class="select" id="titu">Tipo Contrato:
-                                                                <select name="TIPO_CONTRATO" class="input-group-sm" required="">
-                                                                    <option value="">[SELECCIONE]</option>
-                                                                    <option value="1">Necesidad de Mercado</option>
-                                                                    <option value="2">Incremento de Actividad</option>
-                                                                    <option value="3">Servicio Especifico</option>
-                                                                    <option value="4">Inicio de Actividad</option>
-                                                                    <option value="5">Tiempo Parcial</option>
-                                                                    <option value="6">Indeterminado</option>
-                                                                    <option value="7">Extranjero</option>
-                                                                    <option value="8">Suplencia</option>
-                                                                    <option value="9">Contrato Civil</option>
-                                                                    <option value="10">De Temporada</option>
-                                                                    <option value="11">Locacion de Servicios</option>
-                                                                    <option value="12">No Domiciliados</option>
-                                                                </select>
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-4">
-                                                            <label class="select" id="titu">Tipo Convenio:
-                                                                <select name="TIPO_CONVENIO" class="input-group-sm"x>
-                                                                    <option value="">[SELECCIONE]</option>
-                                                                    <option value="1">CLJ</option>
-                                                                    <option value="2">PPP</option>
-                                                                    <option value="3">PP</option>
+                                                                    <%if (dg.getEs_certificado_salud() != null) {
+                                                                            if (dg.getEs_certificado_salud().equals("1")) {
+                                                                    %>
+                                                                    <option value="1" selected="" >Si</option>
+                                                                    <option value="0">No</option>
+                                                                    <%}
+                                                                        if (dg.getEs_certificado_salud().equals("0")) {%>
+                                                                    <option value="1">Si</option>
+                                                                    <option selected="" value="0">No</option>
+                                                                    <%}
+                                                                    } else {%>
+                                                                    <option value="1" >Si</option>
+                                                                    <option value="0">No</option>
+                                                                    <%}%>
                                                                 </select>
                                                             </label>
                                                         </section>
                                                     </div>
-                                                </fieldset>
-                                                <fieldset>
+                                                    <%String es_cue_sue = request.getParameter("es_cs");%>
+                                                    <input type="hidden" name="ESTADO" value="<%=es_cue_sue%>">
+                                                    <%if (es_cue_sue.trim().equals("0")) {%>
+                                                    <input type="hidden" name="ES_CUENTA_SUELDO" value="1" />
+                                                    <div class="row"> 
+                                                        <section class="col col-3" name="">
+                                                            <label class="select" id="titu">Cta Sueldo - Banco:
+                                                                <select name="BANCO" id="banco" required="">
+                                                                    <option value="" selected="" disabled="" >[Selecione]</option>
+                                                                    <option value="0" >Ninguno</option>
+                                                                    <option value="1" >BBVA</option>
+                                                                    <option value="2" >BCP</option>
+                                                                    <option value="3" >Otros</option>
+                                                                </select>
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-3" id="no_cuen_otros">
+
+                                                            <label class="input" id="titu">Nombre Banco :
+                                                                <input type="text" name="BANCO_OTROS"  id="nu_cuen_otros" maxlength="30"   />
+                                                            </label>
+
+                                                        </section>
+                                                        <section class="col col-4" id="no_cuen">
+
+                                                            <label class="input" id="titu">Nro Cuenta :
+                                                                <input type="text" name="CUENTA"  id="nu_cuen" maxlength="30" />
+                                                            </label>
+
+                                                        </section>
+                                                        <section class="col col-4"  id="no_cuen_ban">
+
+                                                            <label class="input" id="titu">Nro Cuenta Bancaria:
+                                                                <input type="text" name="CUENTA_BANC" id="nu_cuen_ban">
+                                                            </label>
+
+                                                        </section>
+
+                                                        <section class="col col-6" id="generar">
+                                                            <p style="font-weight:bold;">Autorizo a la UPeU gestionar mi cuenta de sueldo en el BBVA Banco Continental, para tal efecto adjunto copia legible y vigente de mi DNI   </p>
+                                                            <label class="checkbox" >
+                                                                <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="1" >
+                                                                <i></i>Generar Nro de Cuenta Bancaria</label>
+                                                        </section>
+
+                                                    </div>
+                                                    <%} else {%>
+                                                    <%for (int i = 0; i < list_Cuenta_Sueldo.size(); i++) {
+                                                            Cuenta_Sueldo cs = new Cuenta_Sueldo();
+                                                            cs = (Cuenta_Sueldo) list_Cuenta_Sueldo.get(i);
+
+                                                    %>
+                                                    <div class="row"> 
+
+                                                        <section class="col col-3" name="">
+                                                            <label class="select" id="titu" >Cta Sueldo - Banco:
+                                                                <select name="BANCO"  required="" disabled="">
+                                                                    <%if (cs.getNo_banco().equals("0")) { %>
+                                                                    <option >Ninguno</option>
+                                                                    <%}
+                                                                        if (cs.getNo_banco().equals("1")) {%>
+                                                                    <option >BBVA</option>
+                                                                    <%}
+                                                                        if (cs.getNo_banco().equals("2")) { %>
+                                                                    <option >BCP</option>
+                                                                    <%}
+                                                                        if (cs.getNo_banco().equals("3")) { %>
+                                                                    <option >Otros</option>
+                                                                    <% }%>
+                                                                </select>
+                                                            </label>
+                                                        </section>
+                                                        <%if (cs.getNo_banco_otros() != null) {%>
+                                                        <section class="col col-3">
+                                                            <label class="input" id="titu">Nombre Banco :
+                                                                <input type="text" disabled="" value="<%=cs.getNo_banco_otros()%>"   />
+                                                            </label>
+                                                        </section>
+                                                        <%}%>
+                                                        <%if (cs.getNu_cuenta() != null) {%>
+                                                        <section class="col col-4">
+                                                            <label class="input" id="titu">Nro Cuenta :
+                                                                <input type="text" disabled="" value="<%=cs.getNu_cuenta()%>"    />
+                                                            </label>
+                                                        </section>
+                                                        <%}%>
+                                                        <%if (cs.getNu_cuenta_banc() != null) {%>
+                                                        <section class="col col-4">
+                                                            <label class="input" id="titu">Nro Cuenta Bancaria:
+                                                                <input type="text" disabled="" value="<%=cs.getNu_cuenta_banc()%>">
+                                                            </label>
+                                                        </section>
+                                                        <%}
+                                                            if (cs.getNo_banco().trim().equals("0")) {%>%>
+                                                        <section class="col col-5" >
+                                                            <p >Autorizo a la UPeU gestionar mi cuenta de sueldo en el BBVA Banco Continental, para tal efecto adjunto copia legible y vigente de mi DNI   </p>
+                                                            <label class="checkbox" >
+                                                                <%if (cs.getEs_gem_nu_cuenta().trim().equals("1")) {%>
+                                                                <input type="checkbox" name="GEN_NU_CUEN"  id="subscription"  value="1" checked="" disabled="">
+                                                                <%} else {%>
+                                                                <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="0" disabled="">
+                                                                <%}%>
+                                                                <i></i>Generar Nro de Cuenta Bancaria</label>
+                                                        </section>
+                                                        <%}%>
+                                                    </div>
+                                                    <%}
+                                                            }
+                                                        }%>
+                                                    <%if (dg.getId_requerimiento().equals("REQ-0010")) {%>
                                                     <div class="">
-                                                        <section class="col col-12">
-                                                            <label class="textarea" id="titu">Observación:  </label>
-                                                            <textarea  name="OBSERVACION"  class="input-group-sm " cols="35" rows="6"></textarea>
+                                                        <section class="col col-4" >
+                                                            <label class="input" id="titu"> RUC:
+                                                                <input type="text" name="RUC" id="" maxlength="20" required="" >
+                                                            </label>
+
                                                         </section>
                                                     </div>
-                                                </fieldset>
-                                                <fieldset>
-                                                    <div class="row">
-                                                        <section class="col col-3">
-                                                            <label class="select" id="titu">Filial donde Trabaja:
-                                                                <select name="FILIAL" class="input-group-sm" required="">
-                                                                    <option value="">[SELECCIONE]</option>
-                                                                    <option value="1" selected >Lima</option>
-                                                                    <option value="2">Juliaca</option>
-                                                                    <option value="3">Tarapoto</option>
-                                                                </select>
+                                                    <div class="">
+                                                        <section class="col col-6" >
+                                                            <label class="input" id="titu"> Domicilio Fiscal:
+                                                                <input type="text" name="DOMICILIO_FISCAL" id="" required="" >
                                                             </label>
                                                         </section>
-                                                        <!--<section class="col col-4">
-                                                            <label class="input" id="titulo">Fecha Cese: 
-                                                                <input type="date" name="FEC_CESE"  class="input-group-sm" required="">
-                                                            </label>
-                                                        </section>-->
-                                                        <section class="col col-2">
-                                                            <label class="input" id="titu">RUC UPEU:
-                                                                <input type="text" name="EMP_RUC" value="20138122256" maxlength="20" class="input-group-sm" required="">
+                                                        <%}%>
+                                                        <%if (dg.getId_requerimiento().equals("REQ-0010") || dg.getId_requerimiento().equals("REQ-0011")) {%>
+                                                        <section class="col col-6" >
+                                                            <label class="input" id="titu"> Lugar de Servicio:
+                                                                <input type="text" name="LUGAR_SERVICIO" id="" required="" value="<%=dg.getDe_lugar_servicio()%>">
                                                             </label>
                                                         </section>
-                                                        <section class="col col-2">
-                                                            <label class="input" id="titu">Cod. Sucursal:
-                                                                <input type="text" name="SUCURSAL" value="-1" maxlength="3" class="input-group-sm" required="">
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-2">
-                                                            <label class="input" id="titu">MYPE:
-                                                                <input type="text" name="MYPE" value="N"  maxlength="2" class="input-group-sm" required="">
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-3">
-                                                            <label class="select" id="titu">Plantilla de Contrato:
-                                                                <select name="id_plantilla_contractual" class="con_pl_pu input-group-sm" >
-                                                                    <option value="">[SELECCIONE]</option>
-                                                                </select>
+                                                        <section class="col col-lg-12" >
+                                                            <label class="textarea" id="titu" >Descripcion del Servicio 										
+                                                                <textarea rows=4 name="DESCRIPCION_SERVICIO" value="<%=dg.getDe_servicio()%>"></textarea> 
                                                             </label>
                                                         </section>
                                                     </div>
-                                                    <%String idtr = request.getParameter("idtr");%>
-                                                    <input type="hidden" value="<%=idtr%>" name="IDDATOS_TRABAJADOR" class="text-box" >
-                                                    <input type="hidden" name="ENTREGAR_DOC_REGLAMENTOS"  value="0" class="text-box" >
-                                                    <input type="hidden" name="REGISTRO_HUELLA"  value="0" class="text-box" > 
-                                                    <input type="hidden" name="REGISTRO_SISTEM_REMU" value="0" class="text-box" >
-                                                    <input type="hidden" name="ESTADO" value="1" class="text-box" > 
-                                                    <input type="hidden" value="ARE-0022" name="AREA_ID" class="text-box" >
+                                                    <div class="pago_cuotas_1">
+                                                        <section class="col col-2">
+                                                            <a type="button" class="btn btn-default btn-lg" id="btn_add" >Agregar</a>
+                                                        </section>
+                                                        <section class="col col-2" >
+                                                            <label class="input" id="titu"> CUOTA:
+                                                                <input type="text" name="CUOTA_1" id="cuota" required="" value="1" >
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-4" >
+                                                            <label class="input" id="titu">Fecha a Pagar :
+                                                                <input type="date" name="FEC_PAGAR_1" id="datepicker" required="" >
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-4" >
+                                                            <label class="input" id="titu">Monto :
+                                                                <input type="text" name="MONTO_1" required=""  value="0.0"  class="monto" >
+                                                            </label>
+                                                        </section>
+                                                        <input type="hidden" value="1" name="ES_PERIODO" />
+                                                        <input type="hidden" value="1" name="CANT" class="cant" />
+
+                                                    </div>
+                                                    <%}%>
+                                                    <div  class="row" id="centro-costo_1" >
+                                                        <section class="col col-4">
+                                                            <label class="select" id="titu">Centro de Costo Nº 1:
+                                                                <select name="CENTRO_COSTOS_1" class="select-cc centro_costo1" required="">
+                                                                    <option value="">[SELECCIONE]</option>
+                                                                </select>
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-2"><label class="input" id="titu">%<input name="PORCENTAJE_1"  type="text" value="100"  class="porcentaje_cc"/></label></section>
+
+
+                                                        <section class="col col-2"><label class="btn"><button type="button" class="btn btn-default btn-agregar-cc" id="btn-agregar-cc" >Agregar</button></label></section>
+                                                        <section class="col col-2"><label class="input" style="font-weight: bold;color:red;">% Total :<input  readonly="" name="TOTAL_PORCENTAJE" max="100" min="100" maxlength="3" type="text" class="total_porcentaje"  /></label></section>
+                                                    </div>
+                                                    <input type="hidden" value="1" name="numero" class="cant-input" />
+
+
+                                                    <code class="ver"></code>
+                                                    <input type="hidden" name="IDREQUERIMIENTO"  id="combito"  value="">
+                                                    <div id="div_2" class="contenido" style="display: none">
+                                                        <table  class="table">
+                                                            <tr><td class="td">Subvencion:</td><td><input type="text" name="SUBVENCION"  ></td></tr>   
+                                                            <tr><td class="td">Horario de Capacitacion:</td><td><input type="text" name="HORARIO_CAPACITACION"  ></td></tr>   
+                                                            <tr><td class="td">Horario de Refrigerio:</td><td><input type="text" name="HORARIO_REFRIGERIO"  ></td></tr>  
+                                                            <tr><td class="td">Dias de Capacitacion:</td><td><input type="text" name="DIAS_CAPACITACION" ></td></tr>  
+                                                        </table>
+                                                    </div >
+
+                                                    <div id="div_3" class="contenido" style="display:none ">
+                                                        <table class="table">
+                                                            <tr><td class="td">Monto del Honorario:</td><td><input type="text" name="MONTO_HONORARIO" ></td></tr>   
+                                                        </table>
+                                                    </div>
 
                                                 </fieldset>
-
-
+                                                <%}%>
                                             </div>
-
 
                                         </div>
                                         <!-- end widget content -->
@@ -728,9 +671,6 @@
                                 <!-- end widget -->
 
                             </article>
-                            <!-- END COL -->
-
-
 
 
                             <article class="col-sm-12 col-md-12 col-lg-6">
@@ -784,8 +724,10 @@
                                                         <label class="label" id="titu">Tipo de Horario :</label>
                                                         <label class="select">
 
-                                                            <select id="horario" required="" name="ID_TIPO_HORARIO">
-                                                                <!-- function listar_tipo_horario-->
+                                                            <select id="horario" required="" name="HORARIO" >
+                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="0">Editable</option>
+
                                                             </select>
 
                                                         </label>
@@ -809,7 +751,7 @@
                                                         </section>
                                                         <section class="col col-2" >
                                                             <label class="select" id="titu">MIERCOLES
-                                                                <select id=select_mier  >
+                                                                <select id=select_mie  >
                                                                     <option value="1">Habilitado</option>
                                                                     <option value="2" selected="">Deshabilitado</option>
                                                                 </select>
@@ -850,7 +792,7 @@
                                                             </label>
                                                         </section>
                                                     </div>
-                                                    <div class="input-desp">
+                                                    <div class="input-desp dias_semana">
                                                         <table style="" id="show_lun" class="cont_lun"> 
                                                             <tr><td align="center" colspan="2">Lunes</td></tr>
 
@@ -883,22 +825,29 @@
                                                             <tr><td align="center" colspan="2">Domingo</td></tr>
 
                                                         </table>
-                                                        <div class="h_total" style="color: red; font-weight: bold;">Horas Totales : 00:00 horas</div>
-                                                        <input  readonly="" type="text" name="horas_totales" class="h_total" required="" max="48"/>
-                                                       <!-- <input  type="hidden" name="dep_actual" value="<%//=id_dep%>" class="dep_actual" />-->
+
+
+                                                        <div  class="row" >
+
+                                                            <section class="col col-4">
+                                                                <label class="input" id="titu">
+                                                                    <div class="h_total" style=" font-weight: bold;">Horas Totales : 00:00 horas</div>
+                                                                    <input  readonly="" type="text" name="h_total" class=" h_total" required="" max="48"/>
+                                                                </label>
+                                                            </section>
+                                                        </div>
+
+                                                        <input  type="hidden" name="dep_actual" value="" class="dep_actual" />
                                                     </div>
                                                 </fieldset>
                                                 <footer>
-                                                    <input  type="hidden" name="opc" value="REG_CASOS_ESP">
-                                                    <button type="submit" class="btn btn-primary" name="opc">
-                                                        Siguiente
+                                                    <button type="submit" class="btn btn-primary btn-labeled">
+                                                        Siguiente  <i class="fa fa-arrow-circle-right"></i>
                                                     </button>
                                                     <button type="button" class="btn btn-default" onclick="window.history.back();">
-                                                        Regresar
+                                                        <i class="fa fa-arrow-circle-left"></i>  Regresar
                                                     </button>
-
                                                 </footer>
-
                                             </div>
 
 
@@ -914,62 +863,125 @@
                             </article>
                             <!-- END COL -->
 
-                        </div>
 
-                </div>
-
-            </form>
-
-        </div>                                      
+                            <input type="hidden" name="opc"  class="submit" value="Registrar">
+                        </form>
 
 
+                    </div>
+
+                </section>
+            </div>
+        </div>
 
     </body>
     <script>
+        $(document).ready(function() {
+            var b = $("#alerta_dgp");
+            var info = $(".div_info");
+            // $("#alerta_dgp").hide();
+            function listar() {
+                $.post("../../plazo_dgp", "opc=Listar", function(objJson) {
+                    b.empty();
+                    var lista = objJson.lista;
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    for (var i = 0; i < lista.length; i++) {
+                        b.append("<div class='alert alert-danger alert-block' ><a class='close' data-dismiss='alert' href='#'>×</a><h4 class='alert-heading'>" + lista[i].nom + "</h4>" + lista[i].det + " , Fecha Plazo " + lista[i].desde + " al " + lista[i].hasta + "</div>");
+
+                        info.append('<div class="alert alert-info fade in"><button class="close" data-dismiss="alert">×</button><i class="fa-fw fa fa-info"></i><strong>¡Importante!</strong> Su requerimiento será procesado en el mes de <strong>' + lista[i].mes + '.</strong></div>');
+                    }
+                });
+            }
+            listar();
+        });
+        var cantidad = 1;
+
+        $("#btn_add").click(function() {
+            var agregar = $('#fila-agregar');
+            var texto = "";
+            cantidad++;
+            texto += '<div class="row pago_cuotas_' + cantidad + '">';
+            texto += '<section class="col col-2"><label class="btn">';
+            texto += '<button type="button" class="eliminar' + cantidad + '"  >Eliminar</button>';
+            texto += '</label></section>';
+            texto += '<section class="col col-2" ><label class="input" id="titu">';
+            texto += '<input type="text" name="CUOTA_' + cantidad + '" id="cuota" required="" value="' + cantidad + '" >';
+            texto += '</label></section>';
+            texto += '<section class="col col-4" ><label class="input" id="titu">';
+            texto += '<input type="date" name="FEC_PAGAR_' + cantidad + '" id="datepicker" required="" >';
+            texto += '</label></section>';
+            texto += '<section class="col col-4" ><label class="input" id="titu">';
+            texto += '<input type="text" name="MONTO_' + cantidad + '" required="" class="monto" >';
+            texto += '</label></section>';
+            texto += '</div>';
+
+
+            agregar.append(texto);
+            periodo_pago(cantidad);
+            $(".cant").val(cantidad);
+            //alert($(".cant").val())
+            $(".eliminar" + cantidad).click(function() {
+                $(".pago_cuotas_" + cantidad).remove();
+                periodo_pago(cantidad);
+                cantidad--;
+                periodo_pago(cantidad);
+
+                //alert(cantidad)
+            });
+        });
 
         $(document).ready(
                 function() {
-                    document.getElementById("sueldo_total").readOnly = true;
-                    document.getElementById("asig_fa").readOnly = true;
-
+                    $("#sueldo").keyup(
+                            function() {
+                                var sueldo = parseFloat($("#sueldo").val());
+                                $(".monto").val(Math.round(sueldo));
+                            });
                 }
-        );</script>
-    <script>
-        function Sueldo_Total() {
+        );
+        function periodo_pago(cantidad) {
+            var sueldo = parseFloat($("#sueldo").val());
+            var p_p = sueldo / cantidad;
+            $.each($(".monto"), function() {
+                $(".monto").val(p_p);
+            });
+        }
 
-            var a = parseFloat($("#remu").val());
-            var b = parseFloat($("#bono_al").val());
-            var c = parseFloat($("#bev").val());
-            var d = parseFloat($("#bo_puesto").val());
-            var x = a + b + c + d;
-            $("#sueldo_total").val(x);
+        function calcular_sueldo_total() {
+            var x = parseFloat($("#sueldo").val());
+            var y = parseFloat($("#bono_al").val());
+            var w = parseFloat($("#bono_pu").val());
+            var z = parseFloat($("#bev").val());
+            var v = x + y + z + w;
+            $("#suel_total").text(Math.round(v * 100) / 100);
         }
         $(document).ready(
                 function() {
-
-
-                    $("#remu").keyup(
+                    $("#sueldo").keyup(
                             function() {
-                                Sueldo_Total();
+                                calcular_sueldo_total();
                             }
                     );
                     $("#bono_al").keyup(
                             function() {
-                                Sueldo_Total();
+                                calcular_sueldo_total();
                             }
                     );
                     $("#bev").keyup(
                             function() {
-                                Sueldo_Total();
+                                calcular_sueldo_total();
                             }
                     );
-                    $("#bo_puesto").keyup(
+                    $("#bono_pu").keyup(
                             function() {
-                                Sueldo_Total();
+                                calcular_sueldo_total();
                             }
                     );
                 }
-        );</script>    
+        );</script>
     <script>
         /*$(".texto-h").setMask("29:59").keypress(
          function () {
@@ -984,7 +996,6 @@
     </script>
     <script language="javascript" type="text/javascript">
         $(document).ready(function() {
-
             $(".contenido").hide();
             /*TEMPORAL*/
             //Planilla
@@ -1009,7 +1020,6 @@
         $(document).ready(
                 function mostrar() {
 
-                    $(".texto-h").mask("99:99", {placeholder: "X"});
                     $(".cont_lun").hide();
                     $(".cont_mar").hide();
                     $(".cont_mie").hide();
@@ -1017,6 +1027,8 @@
                     $(".cont_vie").hide();
                     $(".cont_sab").hide();
                     $(".cont_dom").hide();
+
+
                     $("#select_lun").change(
                             function() {
                                 if ($(this).val() == 1) {
@@ -1024,8 +1036,9 @@
                                 }
                                 if ($(this).val() == 2) {
                                     $(".cont_lun").hide();
-                                    $("#show_lun input").val("");
+                                    $("#show_lun input").val("00:00");
                                 }
+                                calcularHoras();
                             }
                     );
                     $("#select_mar").change(
@@ -1035,8 +1048,9 @@
                                 }
                                 if ($(this).val() == 2) {
                                     $(".cont_mar").hide();
-                                    $("#show_mar input").val("");
+                                    $("#show_mar input").val("00:00");
                                 }
+                                calcularHoras();
                             }
                     );
                     $("#select_mie").change(
@@ -1048,6 +1062,7 @@
                                     $(".cont_mie").hide();
                                     $("#show_mie input").val("00:00");
                                 }
+                                calcularHoras();
                             }
                     );
                     $("#select_jue").change(
@@ -1057,8 +1072,9 @@
                                 }
                                 if ($(this).val() == 2) {
                                     $(".cont_jue").hide();
-                                    $("#show_jue input").val("");
+                                    $("#show_jue input").val("00:00");
                                 }
+                                calcularHoras();
                             }
                     );
                     $("#select_vie").change(
@@ -1068,8 +1084,9 @@
                                 }
                                 if ($(this).val() == 2) {
                                     $(".cont_vie").hide();
-                                    $("#show_vie input").val("");
+                                    $("#show_vie input").val("00:00");
                                 }
+                                calcularHoras();
                             }
                     );
                     $("#select_sab").change(
@@ -1079,8 +1096,9 @@
                                 }
                                 if ($(this).val() == 2) {
                                     $(".cont_sab").hide();
-                                    $("#show_sab input").val("");
+                                    $("#show_sab input").val("00:00");
                                 }
+                                calcularHoras();
                             }
                     );
                     $("#select_dom").change(
@@ -1090,8 +1108,9 @@
                                 }
                                 if ($(this).val() == 2) {
                                     $(".cont_dom").hide();
-                                    $("#show_dom input").val("");
+                                    $("#show_dom input").val("00:00");
                                 }
+                                calcularHoras();
                             }
                     );
                 }
@@ -1150,7 +1169,9 @@
                     if (opc == "1") {
                         if (arr_cc[1] == lista[i].id) {
                             cc_dep.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
-                            (x, opc, arr_cc);
+                            listar_centro_costo(x, opc, arr_cc);
+
+
                         } else {
                             cc_dep.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
                         }
@@ -1160,6 +1181,7 @@
 
                 }
             });
+
         }
         function listar_centro_costo(x, opc, arr_cc) {
 
@@ -1178,6 +1200,9 @@
                     if (opc == "1") {
                         if (arr_cc[4] == lista[i].id) {
                             centro_costo.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
+
+
+
                         } else {
                             centro_costo.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
                         }
@@ -1187,8 +1212,8 @@
 
                 }
             });
-        }
 
+        }
         function listar_cc(num, opc, arr_cc) {
             var select_cc = $(".select-cc");
             $.post("../../centro_costo?opc=Listar_cc", function(objJson) {
@@ -1234,6 +1259,7 @@
             $(".remover" + num).click(function() {
                 $(".centro-costo_" + num).remove();
                 sumn_porcen_total();
+
             });
         }
         function sumn_porcen_total() {
@@ -1270,40 +1296,108 @@
                 $(".tr-dia").remove();
                 $.post("../../formato_horario", "opc=Listar_Horario&id=" + valor, function(objJson) {
                     var lista = objJson.lista;
+                    var text_html = '';
+                    var primera_fila = 0;
                     for (var f = 0; f < dias_semana.length; f++) {
-
                         var d = 0;
                         for (var i = 0; i < lista.length; i++) {
-
                             if (dias_semana[f] == lista[i].dia) {
+                                primera_fila++;
                                 var scntDiv = $('#show_' + dias_semana[f]);
                                 $(".cont_" + dias_semana[f]).show();
-                                $("#select_" + dias_semana[f]).val(1);
-                                $('<tr class="tr-dia" ><td>T' + (d + 1) + ' :</td><td><input type="text"   class="texto-h HORA_DESDE_' + dias_semana[f] + (d + 1) + '"   name="HORA_DESDE_' + dias_semana[f] + (d + 1)
-                                        + '" value="' + lista[i].desde + '"  /></td><td><input type="text"  class="texto-h HORA_HASTA_' + dias_semana[f] + (d + 1) + '"  value="' + lista[i].hasta + '" name="HORA_HASTA_' + dias_semana[f] + (d + 1)
-                                        + '" /><input type="hidden" name="DIA_' + dias_semana[f] + (d + 1)
-                                        + '" value="' + dias_semana[f] + '" ><a href="#" class="remove_' + (d + 1) + '">-</a></td></tr>').appendTo(scntDiv);
+                                $("#select_" + dias_semana[f]).val(lista[i].estado);
+                                if (lista[i].estado == '2') {
+                                    scntDiv.hide();
+                                } else if (lista[i].estado == '1') {
+                                    scntDiv.show();
+                                }
+                                text_html += '<tr class="tr-dia turno_' + (i + 1) + '" ><td>T' + (d + 1);
+                                text_html += ' :</td><td><input type="text"   class="texto-h HORA_DESDE_' + dias_semana[f] + (d + 1) + '"   name="HORA_DESDE_' + dias_semana[f] + (d + 1);
+                                text_html += '" value="' + lista[i].desde + '"  /></td><td><input type="text"  class="texto-h HORA_HASTA_' + dias_semana[f] + (d + 1) + '"  value="' + lista[i].hasta + '" name="HORA_HASTA_' + dias_semana[f] + (d + 1)
+                                        + '" /><input type="hidden" name="DIA_' + dias_semana[f] + (d + 1) + '" class="nombre_dia_' + (i + 1) + '" value="' + dias_semana[f] + '" >';
+                                if (primera_fila == 1) {
+                                    text_html += '<button type="button" class="btn btn-primary agregar_turno" value="' + (i + 1) + '"><i class="fa fa-plus-square"></i></button></td></tr>';
+                                } else {
+                                    text_html += '<button type="button" class="btn btn-danger remover_turno" value="' + (i + 1) + '"><i class="fa  fa-minus-circle"></i></button></td></tr>';
+                                }
                                 d++;
+                                scntDiv.append(text_html);
+                                text_html = "";
                             }
                             // alert(dias_semana[f]);
-
                         }
+                        primera_fila = 0;
                     }
                     calcularHoras();
-                    $(".texto-h").keyup(
+                    //$(".texto-h").mask("99:99", {placeholder: "X"});
+                    $(".texto-h").keypress(
                             function() {
                                 calcularHoras();
                             }
                     );
+                    $(".remover_turno").click(function() {
+                        //alert($(this).val());
+                        $(".turno_" + $(this).val()).remove();
+                        calcularHoras();
+                    });
+                    $(".agregar_turno").click(function() {
+                        var turno = $('#show_' + $(".nombre_dia_" + $(this).val()).val() + ' .tr-dia').size() + 1;
+                        var dia = $(".nombre_dia_" + $(this).val()).val();
+                        var agregar_turno = $('#show_' + dia);
+                        var text_html = '';
+                        var i = $(".dias_semana .tr-dia").size();
+                        text_html += '<tr class="tr-dia turno_' + (i + 1) + '" ><td>T' + turno;
+                        text_html += ' :</td><td><input type="text"   class="texto-h HORA_DESDE_' + dia + turno + '"   name="HORA_DESDE_' + dia + turno;
+                        text_html += '" value="00:00"  /></td><td><input type="text"  class="texto-h HORA_HASTA_' + dia + turno + '"  value="00:00" name="HORA_HASTA_' + dia + turno
+                                + '" /><input type="hidden" name="DIA_' + dia + turno + '" class="nombre_dia_' + (i + 1) + '" value="' + dia + '" >';
+                        text_html += '<button type="button" class="btn btn-danger remover_turno" value="' + (i + 1) + '"><i class="fa  fa-minus-circle"></i></button></td></tr>';
+                        agregar_turno.append(text_html);
+                        //$(".texto-h").mask("99:99", {placeholder: "X"});
+                        $(".remover_turno").click(function() {
+                            //alert($(this).val());
+                            $(".turno_" + $(this).val()).remove();
+                            calcularHoras();
+                        });
+                        $(".texto-h").keypress(
+                                function() {
+                                    calcularHoras();
+                                }
+                        );
+
+                    });
+
                 });
+
             }
 
 
         }
 
         function cuenta_bancaria(banco) {
+            if (banco == '') {
+                $("#no_cuen").hide();
+                $("#no_cuen_ban").hide();
+                $("#generar").hide();
+                $("#texto").hide();
+                $("#no_cuen_otros").hide();
+            }
+            if (banco == '0') {
+                $("#no_cuen").hide();
+                $("#nu_cuen").val("");
+                $("#no_cuen_ban").hide();
+                $("#nu_cuen_ban").val("");
+                $("#no_cuen_otros").show();
+                $("#nu_cuen_otros").val("BBVA Banco Continental");
+                $("#nu_cuen_otros").attr('readonly', 'readonly');
+                //document.getElementById("nu_cuen_otros").readOnly = true;
+                $("#texto").show();
+                $("#generar").show();
+                $("#subscription").attr("required", "required");
+                $("#nu_cuen_otros").attr("required", "required");
+                $("#nu_cuen_otros").removeAttr('maxlength');
+                $("#nu_cuen_otros").removeAttr('minlength');
 
-
+            }
             if (banco == '1') {
                 $("#generar").hide();
                 $("#no_cuen").show();
@@ -1313,11 +1407,14 @@
                 $("#nu_cuen_ban").val("");
                 $("#subscription").attr('checked', false);
                 $("#nu_cuen").attr("maxlength", "21");
-                $("#nu_cuen").mask("0011-9999999999999999", {placeholder: "X"});
+                $("#nu_cuen").attr("minlength", "19");
+                $("#nu_cuen").val("0011-")
                 $("#no_cuen_otros").hide();
                 $("#nu_cuen_otros").val("");
+                $("#texto").hide();
             }
             if (banco == '2') {
+
                 $("#generar").hide();
                 $("#subscription").attr('checked', false);
                 $("#no_cuen_ban").hide();
@@ -1325,10 +1422,19 @@
                 $("#no_cuen").show();
                 $("#nu_cuen").val("");
                 $("#nu_cuen").attr("required", "required");
+                $("#nu_cuen_otros").removeAttr('maxlength');
+                $("#nu_cuen_otros").removeAttr('minlength');
+                $("#nu_cuen").removeAttr('maxlength');
+                $("#nu_cuen").removeAttr('minlength');
                 $("#nu_cuen").attr("maxlength", "14");
-                $("#nu_cuen").mask("99999999999999", {placeholder: "X"});
+                $("#nu_cuen").attr("minlength", "0");
+                //$("#nu_cuen").mask("99999999999999", {placeholder: "X"});
                 $("#no_cuen_otros").hide();
                 $("#nu_cuen_otros").val("");
+                $("#texto").hide();
+                $("#nu_cuen").valid();
+
+
             }
             if (banco == '3') {
                 $("#no_cuen").show();
@@ -1342,25 +1448,19 @@
                 $("#nu_cuen_otros").attr("required", "required");
                 $("#generar").hide();
                 $("#subscription").attr('checked', false);
+                $("#texto").hide();
+                $("#nu_cuen_otros").removeAttr('readonly');
+                $("#nu_cuen_otros").removeAttr('maxlength');
+                $("#nu_cuen_otros").removeAttr('minlength');
             }
-            if (banco == '0') {
-                $("#no_cuen").hide();
-                $("#nu_cuen").val("");
-                $("#no_cuen_ban").hide();
-                $("#nu_cuen_ban").val("");
-                $("#no_cuen_otros").show();
-                $("#nu_cuen_otros").val("BBVA");
-                $("#generar").show();
-                $("#subscription").attr("required", "required");
-                $("#nu_cuen_otros").attr("required", "required");
-            }
+
 
         }
         var agregar = $('#fila-agregar');
         var ag = $('#fila-agregar .porcentaje_cc').size() + 1;
         var texto = "";
-        function agregar_centro_costo(opc, arr_cc) {
 
+        function agregar_centro_costo(opc, arr_cc) {
 
             if (opc == "1") {
                 texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + ag + ':</label>';
@@ -1368,19 +1468,20 @@
                 texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
                 texto += '<section class="col col-3"><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
                 texto += '<section class="col col-3"><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ag + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
-                texto += '<section class="col col-1"><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '"  min="0"   type="text" required="" value="' + arr_cc[3] + '" class="porcentaje_cc"/><a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class=" btn btn-default txt-color-red remover' + ag + '"><i class="fa fa-minus fa-2x"></i></a></label></section>';
+                texto += '<section class="col col-2"><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '"  min="0"   type="text" required="" value="' + arr_cc[3] + '" class="porcentaje_cc"/><button type="button" class="remover' + ag + '">Remover</button></label></section>';
                 texto += '</div>';
+
                 agregar.append(texto);
                 listar_cc(ag, opc, arr_cc);
+
                 sumn_porcen_total();
             } else {
                 texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + ag + ':</label>';
                 texto += '<div  class="row centro-costo_' + ag + '" >';
                 texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
-                texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
-                texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ag + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
-                texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '"  min="0"   type="text" required="" class="porcentaje_cc"/></label></section>';
-                texto += '<section class="col col-1" ><br><label class="btn"><a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class=" btn btn-default txt-color-red remover' + ag + '"><i class="fa fa-minus fa-2x"></i></a></label></section>';
+                texto += '<section class="col col-3"><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
+                texto += '<section class="col col-3"><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ag + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
+                texto += '<section class="col col-2"><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '"  min="0"   type="text" required="" class="porcentaje_cc"/><button type="button" class="remover' + ag + '">Remover</button></label></section>';
                 texto += '</div>';
                 agregar.append(texto);
                 listar_cc(ag);
@@ -1388,9 +1489,10 @@
                 $(".porcentaje_cc").val(Math.round((100 / c_porcentaje) * 100) / 100);
                 sumn_porcen_total();
             }
-            //$(".ver").text(texto); 
+
+
             texto = "";
-            $(".cant").val(ag);
+            $(".cant-input").val(ag);
             ag++;
             $(".porcentaje_cc").keyup(function() {
                 sumn_porcen_total();
@@ -1422,18 +1524,24 @@
             $("#no_cuen_ban").hide();
             $("#generar").hide();
             $("#no_cuen_otros").hide();
+
+
+
             //  var r = "";
             $('#btn-agregar-cc').click(function() {
-
                 agregar_centro_costo();
-                //alert($(".cant").val());
 
 
             });
             $("#banco").change(function() {
+
                 cuenta_bancaria($(this).val());
+                $("#nu_cuen").focus();
+                $("#es_cuenta").val(1);
+                //  alert($("#es_cuenta").val());
             });
             listar_cc();
+
             $("#horario").change(
                     function() {
                         list_horario($(this).val());
@@ -1448,6 +1556,9 @@
             $("#sueldo").numeric();
             $("#bono_al").numeric();
             $("#bev").numeric();
+            $("#nu_cuen").numeric();
+            $("#nu_cuen_ban").numeric();
+            // $(".texto-h").mask("99:99", {placeholder: "0"});
             /* $("#sueldo").mask("99999.99", {placeholder: "0"});
              $("#bono_al").mask("99999.99", {placeholder: "0"});
              $("#bev").mask("99999.99", {placeholder: "0"});*/
@@ -1664,24 +1775,25 @@
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
         $(document).ready(function() {
+            $(".val_fe").change(function() {
+                var fecha = $(this).val().split("-");
 
+                if (fecha[0].length > 4) {
+                    $(this).val("");
+                }
+            });
             pageSetUp();
             var $checkoutForm = $('#checkout-form').validate({
                 // Rules for form validation
                 rules: {
+                    fname: {
+                        required: true
+                    },
                     FEC_DESDE: {
-                        required: true,
                         val_fecha: true
                     },
                     FEC_HASTA: {
                         val_fecha: true
-                    },
-                    FECHA_SUSCRIPCION: {
-                        required: true,
-                        val_fecha: true
-                    },
-                    fname: {
-                        required: true
                     },
                     horas_totales: {
                         required: true
@@ -1782,10 +1894,13 @@
                     error.insertAfter(element.parent());
                 }
             });
+
+
             jQuery.validator.addMethod("val_fecha", function(value, element) {
                 var d = value.split("-");
                 return this.optional(element) || String(parseInt(d[0])).length == 4;
             }, "¡Fecha ingresada invalida!");
+
             var $registerForm = $("#smart-form-register").validate({
                 // Rules for form validation
                 rules: {
@@ -2109,183 +2224,8 @@
             ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
             var s = document.getElementsByTagName('script')[0];
             s.parentNode.insertBefore(ga, s);
-        })();</script>
-    <script>
-        function Listar_plantilla2() {
-            var s = $(".con_pl_pu");
+        })();
 
-            $.post("../../plantilla_contractual", "opc=List_planti&" + "id_pu=" + $(".id_pu_dgp").val(), function(objJson) {
-                s.empty();
-                var lista = objJson.lista;
-                s.append("<option value='' > [SELECCIONE] </option>");
-                for (var i = 0; i < lista.length; i++) {
-                    s.append("<option value='" + lista[i].id + "'> " + lista[i].nom_pl + "</option>");
-                }
-            });
-        }
-        $(document).ready(function() {
-
-            Listar_dep();
-            Listar_centro_costo();
-            Listar_plantilla2();
-
-            var a = $("#select-sub-mod");
-            var c = $("#Selec_Area");
-            var d = $("#select_sec");
-            var b = $("#selec_dep");
-            var e = $("#pu_id_se");
-            // $.post("../../  ")
-
-            $("#select_mod").change(
-                    function() {
-                        //  alert($(this).val());
-
-
-                        $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function(objJson) {
-                            a.empty();
-                            var list = objJson.lista;
-                            a.append("<option value='' > [SELECCIONE] </option>");
-                            if (list.length !== 0) {
-                                for (var i = 0; i < list.length; i++) {
-                                    if ($("#select_mod").val() === 'MOD-0004') {
-                                        a.append('<option value="' + list[i].id_submodalidad + '" selected="">' + list[i].de_submod + '</option>');
-                                        // alert();
-                                    }
-                                    else {
-
-                                        a.append('<option value="' + list[i].id_submodalidad + '">' + list[i].de_submod + '</option>');
-                                    }
-
-                                }
-                            }
-                        });
-                    });
-
-            $("#selec_dep").change(
-                    function() {
-                        $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function(objJson) {
-                            c.empty();
-                            if (objJson.rpta == -1) {
-                                alert(objJson.mensaje);
-                                return;
-                            }
-                            var list = objJson.lista;
-                            c.append("<option value='' > [SELECCIONE] </option>");
-                            if (list.length !== 0) {
-                                for (var i = 0; i < list.length; i++) {
-                                    c.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
-                                }
-                            } else {
-                                c.append("<option value='' > [no hay] </option>");
-                            }
-                        });
-                    });
-
-            $(".select_dir").change(
-                    function() {
-
-                        $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $(this).val(), function(objJson) {
-                            b.empty();
-
-                            if (objJson.rpta == -1) {
-                                alert(objJson.mensaje);
-                                return;
-                            }
-                            var list = objJson.lista;
-                            b.append("<option value='' > [SELECCIONE] </option>");
-                            if (list.length !== 0) {
-                                for (var i = 0; i < list.length; i++) {
-                                    b.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
-                                }
-                            } else {
-                                b.append("<option value='' > [] </option>");
-                            }
-                        });
-                    });
-
-
-            $("#Selec_Area").change(
-                    function() {
-                        $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function(objJson) {
-                            d.empty();
-                            var list = objJson.lista;
-                            d.append("<option value='' > [SELECCIONE] </option>");
-                            if (list.length !== 0) {
-                                for (var i = 0; i < list.length; i++) {
-                                    d.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
-                                }
-                            } else {
-                                d.append("<option value='' > [no hay] </option>");
-                            }
-                        });
-                    });
-
-            $("#select_sec").change(
-                    function() {
-                        $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function(objJson) {
-                            e.empty();
-                            if (objJson.rpta == -1) {
-                                alert(objJson.mensaje);
-                                return;
-                            }
-                            var list = objJson.lista;
-                            e.append("<option value='' > [SELECCIONE] </option>");
-                            if (list.length !== 0) {
-                                for (var i = 0; i < list.length; i++) {
-                                    e.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
-                                }
-                            } else {
-                                e.empty();
-                                e.append("<option value='' > [] </option>");
-                            }
-                        });
-                    });
-            $("#btn-registrar").click(
-                    function() {
-                        var pr = $("#select-proceso").val();
-                        $.post("../../paso", $("#form-paso").serialize(), function() {
-                            Listar_Paso(pr);
-                        });
-                        $("#btn-registrar").val("Registrar Paso");
-                        $(".opc").val("Registrar");
-                        $("#form-paso")[0].reset();
-                        return false;
-                    }
-            );
-            function Listar_dep() {
-                var s = $("#selec_dep");
-                $.post("../../Direccion_Puesto", "opc=Listar", function(objJson) {
-                    s.empty();
-                    var lista = objJson.lista;
-                    s.append("<option value='' > [SELECCIONE] </option>");
-                    for (var j = 0; j < lista.length; j++) {
-                        s.append("<option value='" + lista[j].id + "' > " + lista[j].nom + "</option>");
-                    }
-                });
-            }
-            function Listar_centro_costo() {
-                var x = $("#fila-agregar");
-                $.post("../../centro_costo", "opc=Listar_centro_id&" + "id_dgp=" + $("#id_dgp").val(), function(objJson) {
-                    var lista = objJson.lista;
-                    var numero = 1;
-                    x.append('<div  class="row centro-costo_' + numero + '" >');
-                    for (var i = 0; i < lista.length; i++) {
-                        numero = numero + i;
-                        if ($("#id_rol_s").val() == 'ROL-0001') {
-                            x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section><div class="form-group"><button type="button" class="btn btn-primary" id="Seleccionar_centro" >Buscar</button></div>');
-                        } else {
-                            x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section>');
-                        }
-                    }
-                    x.append('</div><table><tr><td><td><input type="hidden" name="can_centro_cos" value="' + lista.length + '"></td></tr></table>');
-                });
-            }
-
-
-        });
     </script>
 </html>
-<%} else {
-        response.sendRedirect("/TALENTO_HUMANO/");
-    }
-%>
+<%}%>

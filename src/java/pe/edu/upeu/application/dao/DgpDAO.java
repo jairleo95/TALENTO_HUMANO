@@ -840,4 +840,28 @@ public class DgpDAO implements InterfaceDgpDAO {
         return list;
     }
 
+    @Override
+    public String obt_idtr_x_dgp(String id_dgp) {
+        String valor = null;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "SELECT ID_TRABAJADOR FROM  RHTM_DGP WHERE ID_DGP='"+id_dgp.trim()+"'";
+            ResultSet rs = this.conn.query(sql);
+            rs.next();
+            valor = rs.getString(1);
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al valdiar contratos por requerimientos");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return valor;
+    }
+
 }

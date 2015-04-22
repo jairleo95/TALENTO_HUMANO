@@ -157,7 +157,7 @@
                             </select>
                         </td></tr>    
                     <tr><td class="td">Antecedentes Policiales:</td><td><input type="text" name="ANTECEDENTES_POLICIALES" class="text-box" value="<%=w.getDe_antecedentes_policiales()%>"></td></tr>     
-                    <tr><td class="td">Certificado de Salud:</td><td><input type="text" name="CERTIFICADO_SALUD" class="text-box" value="<%=w.getDe_certificado_salud()%>"></td></tr>   
+                    <tr><td class="td">Certificado de Salud:</td><td><input type="text" name="CERTIFICADO_SALUD" class="text-box" value="<%%>"></td></tr>   
 
                 </table>
             </div>   

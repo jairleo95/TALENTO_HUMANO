@@ -67,5 +67,7 @@ public interface InterfaceDgpDAO {
     public String Imprimir_det_proceso(String iddgp, String idrp, String iddep);
 
     public List<Cuenta_Sueldo> LIST_CUEN_SUEL(String id_trabajador);
+    
+    public String obt_idtr_x_dgp(String id_dgp);
 
 }

@@ -67,7 +67,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         <script>
 // The instanceReady event is fired, when an instance of CKEditor has finished
 // its initialization.
-            CKEDITOR.on('instanceReady', function (ev) {
+            CKEDITOR.on('instanceReady', function(ev) {
                 // Show the editor name and description in the browser status bar.
                 document.getElementById('eMessage').innerHTML = 'Instance <code>' + ev.editor.name + '<\/code> loaded.';
 
@@ -212,7 +212,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 ap.append("<input type='hidden' value='" + editor + "' name='valor'>");
             }
             function lis_dep(b) {
-                $.post("../../../Direccion_Puesto", "opc=Listar_direccion", function (objJson) {
+                $.post("../../../Direccion_Puesto", "opc=Listar_direccion", function(objJson) {
                     b.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -232,7 +232,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             function  lis_dir_id(d, valor) {
 
 
-                $.post("../../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + valor.trim(), function (objJson) {
+                $.post("../../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + valor.trim(), function(objJson) {
                     d.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -253,7 +253,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             function list_area_id(c, valor) {
 
 
-                $.post("../../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + valor, function (objJson) {
+                $.post("../../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + valor, function(objJson) {
                     c.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -272,7 +272,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
             }
             function list_sec_id(d, valor) {
-                $.post("../../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + valor, function (objJson) {
+                $.post("../../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + valor, function(objJson) {
                     d.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -293,7 +293,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
             function mostrar_plantilla(valor) {
                 var editor = CKEDITOR.instances.editor1;
-                $.post("../../../formato_plantilla", "opc=Listar&id=" + valor, function (objJson) {
+                $.post("../../../formato_plantilla", "opc=Listar&id=" + valor, function(objJson) {
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
                         return;
@@ -306,7 +306,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             }
             function Listar_Plantilla() {
                 var d = $(".tbody-plantilla");
-                $.post("../../../formato_plantilla", "opc=List_Plamtillas&" + "id_dir=" + $(".dir").val() + "&id_dep=" + $(".dep").val() + "&id_are=" + $(".area").val() + "&sec=" + $(".seccion").val() + "&id_pu=" + $(".puesto").val(), function (objJson) {
+                var texto = "";
+                $.post("../../../formato_plantilla", "opc=List_Plamtillas&" + "id_dir=" + $(".dir").val() + "&id_dep=" + $(".dep").val() + "&id_are=" + $(".area").val() + "&sec=" + $(".seccion").val() + "&id_pu=" + $(".puesto").val(), function(objJson) {
                     d.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -315,44 +316,45 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     var list = objJson.lista;
                     if (list.length > 0) {
                         for (var i = 0; i < list.length; i++) {
-                            d.append('<tr>');
-                            d.append('<td align="center">' + (i + 1) + '</td>');
-                            d.append('<td align="center">' + list[i].nom_pl + '</td>');
+                            texto += '<tr>';
+                            texto += '<td align="center">' + (i + 1) + '</td>';
+                            texto += '<td align="center">' + list[i].nom_pl + '</td>';
                             if (list[i].es_pl === '1') {
-                                d.append('<td align="center">Activado</td>');
+                                texto += '<td align="center">Activado</td>';
                             } else {
-                                d.append('<td align="center">Desactivado</td>');
+                                texto += '<td align="center">Desactivado</td>';
                             }
-                            d.append('<input type="hidden" value="' + list[i].id + '" class="id_plantilla' + i + '" />');
-                            d.append('<input type="hidden" value="' + list[i].nom_ar + '" class="plantilla' + i + '" />');
-                            d.append('<input type="hidden" value="' + list[i].id_pp + '" class="idplpu' + i + '" />');
-                            d.append('<td><button type="button" value="' + i + '" class="btn-cargar_pl">Cargar</button></td>');
+                            texto += '<input type="hidden" value="' + list[i].id + '" class="id_plantilla' + i + '" />';
+                            texto += '<input type="hidden" value="' + list[i].nom_ar + '" class="plantilla' + i + '" />';
+                            texto += '<input type="hidden" value="' + list[i].id_pp + '" class="idplpu' + i + '" />';
+                            texto += '<td align="center"><button  type="button" value="' + i + '" class="btn btn-primary btn-cargar_pl">Cargar</button></td>';
                             if (list[i].es_pl === '1') {
-                                d.append('<td align="center" ><button style="width: 100px" type="button" value="' + i + '" class="btn-Desac_pl">Desactivar</button></td>');
+                                texto += '<td align="center" ><button style="width: 100px" type="button" value="' + i + '" class="btn btn-danger btn-Desac_pl">Desactivar</button></td>';
                             } else {
-                                d.append('<td align="center"><button style="width: 100px" type="button" value="' + i + '" class="btn-Activ_pl">Activar</button></td>');
+                                texto += '<td align="center"><button style="width: 100px" type="button" value="' + i + '" class=" btn btn-success btn-Activ_pl">Activar</button></td>';
                             }
                         }
-                        d.append('</tr>');
+                        texto += '</tr>';
+                        d.append(texto);
                     }
                     else {
                         d.append("<tr><td>NO HAY PLANTILLAS</td></tr>");
                     }
-                    $(".btn-cargar_pl").click(function () {
+                    $(".btn-cargar_pl").click(function() {
                         //alert();
                         mostrar_plantilla($(".plantilla" + $(this).val()).val());
                         $(".id_pl").val($(".plantilla" + $(this).val()).val());
                         $(".id_pc").val($(".id_plantilla" + $(this).val()).val());
 
                     });
-                    $(".btn-Desac_pl").click(function () {
+                    $(".btn-Desac_pl").click(function() {
 
                         var idpp = $(".idplpu" + $(this).val()).val();
                         var opc = "Desactivar_pp";
                         Desac_Plantilla(idpp, opc);
 
                     });
-                    $(".btn-Activ_pl").click(function () {
+                    $(".btn-Activ_pl").click(function() {
 
                         var idpp = $(".idplpu" + $(this).val()).val();
                         var opc = "activar_pp";
@@ -366,19 +368,19 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 });
             }
             function Activar_Plantilla(id_pp, opc) {
-                $.post("../../../formato_plantilla", "opc=" + opc + "&id_pp=" + id_pp, function () {
+                $.post("../../../formato_plantilla", "opc=" + opc + "&id_pp=" + id_pp, function() {
                     Listar_Plantilla();
                 });
             }
             function Desac_Plantilla(id_pp, opc) {
-                $.post("../../../formato_plantilla", "opc=" + opc + "&id_pp=" + id_pp, function () {
+                $.post("../../../formato_plantilla", "opc=" + opc + "&id_pp=" + id_pp, function() {
                     Listar_Plantilla();
                 });
             }
             function  lis_sel(d, valor, opc) {
 
 
-                $.post("../../../Direccion_Puesto", "opc=" + opc + "&" + "id=" + valor, function (objJson) {
+                $.post("../../../Direccion_Puesto", "opc=" + opc + "&" + "id=" + valor, function(objJson) {
                     d.empty();
                     var list = objJson.lista;
                     d.append("<option value='0' selected=''> [TODOS] </option>");
@@ -393,7 +395,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
             }
             function list_dir(c) {
-                $.post("../../../Direccion_Puesto", "opc=Listar_direccion", function (objJson) {
+                $.post("../../../Direccion_Puesto", "opc=Listar_direccion", function(objJson) {
                     c.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -411,13 +413,13 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 });
             }
 
-            $(document).ready(function () {
+            $(document).ready(function() {
                 var b = $(".dir");
                 //lis_dep(b);
                 var c = $(".dir_as");
                 //list_dir(c);
                 // Listar_Plantilla();
-                $("#dir").change(function () {
+                $("#dir").change(function() {
                     var d = $(".dep");
                     var valor = $("#dir").val();
                     lis_dir_id(d, valor);
@@ -425,25 +427,25 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     Listar_Plantilla();
 
                 });
-                $(".dep").change(function () {
+                $(".dep").change(function() {
                     Listar_Plantilla();
                     list_area_id($(".area"), $(this).val());
 
                     //list_plantillas($(this).val());
                 });
 
-                $(".area").change(function () {
+                $(".area").change(function() {
                     var d = $(".seccion");
                     Listar_Plantilla();
                     list_sec_id(d, $(this).val());
                     //list_plantillas($(this).val());
                 });
 
-                $(".seccion").change(function () {
+                $(".seccion").change(function() {
                     //list_plantillas($(this).val());
                     Listar_Plantilla()
                     var e = $(".puesto");
-                    $.post("../../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $(this).val(), function (objJson) {
+                    $.post("../../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $(this).val(), function(objJson) {
                         e.empty();
                         if (objJson.rpta == -1) {
                             alert(objJson.mensaje);
@@ -461,12 +463,12 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         }
                     });
                 });
-                $(".puesto").change(function () {
+                $(".puesto").change(function() {
                     Listar_Plantilla();
                     //list_plantillas($(this).val());
 
                 });
-                $(".dir_as").change(function () {
+                $(".dir_as").change(function() {
                     var d = $(".dep_as");
                     var valor = $(".dir_as").val();
                     var opc = "Listar_dir_dep";
@@ -474,28 +476,28 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     $("#di_sig").val(valor.trim());
 
                 });
-                $(".dep_as").change(function () {
+                $(".dep_as").change(function() {
                     var d = $(".area_as");
                     var valor = $(".dep_as").val();
                     var opc = "Listar_area2";
                     lis_sel(d, valor, opc);
                     $("#de_sig").val(valor.trim());
                 });
-                $(".area_as").change(function () {
+                $(".area_as").change(function() {
                     var d = $(".seccion_as");
                     var valor = $(".area_as").val();
                     var opc = "Listar_sec2";
                     lis_sel(d, valor, opc);
                     $("#ar_sig").val(valor.trim());
                 });
-                $(".seccion_as").change(function () {
+                $(".seccion_as").change(function() {
                     var d = $(".puesto_as");
                     var valor = $(".seccion_as").val();
                     var opc = "Listar_pu_id";
                     lis_sel(d, valor, opc);
                     $("#se_sig").val(valor.trim());
                 });
-                $(".puesto_as").change(function () {
+                $(".puesto_as").change(function() {
                     $("#pu_sig").val($(".puesto_as").val().trim());
 
                 })
@@ -512,183 +514,174 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 <section id="widget-grid" class="">
 
 
-                    <div class="row">
-                        <article class=" col-sm-12 col-lg-4">
-                            <div   class="jarviswidget jarviswidget-color-darken" id="wid-id-1" data-widget-colorbutton="true" >
-                                <header>
-                                    <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                    <h2>Filtro de plantillas </h2>
+                    <div class="row" width="100%">
 
-                                </header>
-                                <div>
+                        <div>
 
-                                    <!-- widget edit box -->
-                                    <div  class="jarviswidget-editbox">
-                                        <!-- This area used as dropdown edit box -->
-
-                                    </div>
-                                    <div class="widget-body no-padding">
-                                        <legend align="center">CARGAR PLANTILLAS</legend>
-                                        <section class="col col-12" style="width:100%;align:cemter;" align="center">
-                                            <label class="select">Dirección:
-                                                <select class="dir form-control" id="dir" name="id_di" >
-                                                    <option value="" >[Direccion]</option>
-                                                    <%for (int i = 0; i < Listar_Direccion_X.size(); i++) {
-                                                            Direccion d = new Direccion();
-                                                            d = (Direccion) Listar_Direccion_X.get(i);
-                                                    %>
-                                                    <option value="<%=d.getId_direccion()%>"> <%=d.getNo_direccion()%></option>
-                                                    <%}%>
-                                                </select>   
-                                            </label>
-                                        </section>
-
-                                        <section class="col col-12" style="width:100%;align:cemter;" align="center">
-                                            <label>Departamento:
-                                                <select class="dep form-control" id="dep" name="id_dep" >
-                                                    <option value="">[TODO]</option>
-                                                </select>
-                                            </label>
-                                        </section>
-                                        <section class="col col-4"  style="width:100%;align:cemter;" align="center">
-                                            <label>Area:
-                                                <select class="area form-control" id="area" name="id_are" >
-                                                    <option value="">[TODO]</option>
-                                                </select>
-                                            </label>
-                                        </section>
-
-                                        <section class="col col-4"  style="width:100%;align:cemter;" align="center">
-                                            <label>Sección:
-                                                <select class="seccion form-control" id="seccion" name="id_sec" >
-                                                    <option value="">[TODO]</option>
-                                                </select>
-                                            </label>
-                                        </section>
-                                        <section class="col col-4"  style="width:100%;align:cemter;" align="center">
-                                            <label>Puesto:
-                                                <select class="puesto form-control" id="puesto" name="id_pu" >
-                                                    <option value="">[TODO]</option>
-                                                </select>
-                                            </label>
-                                        </section>
-                                        <br>
-                                        <br>
-                                        <legend>ASIGNAR PLANTILLAS</legend>
-                                        <section class="col col-4"  style="width:100%;align:cemter;" align="center">
-                                            <label>Dirección:
-                                                <select class="dir_as form-control" id="dir_as"  >
-                                                    <option value="">[SELECCIONE]</option>
-                                                    <option value="">[SELECCIONE]</option>
-                                                    <%for (int i = 0; i < Listar_Direccion_X.size(); i++) {
-                                                            Direccion d = new Direccion();
-                                                            d = (Direccion) Listar_Direccion_X.get(i);
-                                                    %>
-                                                    <option value="<%=d.getId_direccion()%>"> <%=d.getNo_direccion()%></option>
-                                                    <%}%>
-                                                </select>   
-                                            </label>
-                                        </section>
-                                        <section class="col col-4"  style="width:100%;align:cemter;" align="center">
-                                            <label>Departamento:
-                                                <select class="dep_as form-control" id="dep_as" >
-                                                    <option value="0">[TODO]</option>
-                                                </select>
-                                            </label>
-                                        </section>
-                                        <section class="col col-4" style="width:100%;align:cemter;" align="center" >
-                                            <label>Area:
-                                                <select class="area_as form-control" id="area_as" >
-                                                    <option value="0">[TODO]</option>
-                                                </select>
-                                            </label>
-                                        </section>
-                                        <section class="col col-4"  style="width:100%;align:cemter;" align="center" >
-                                            <label>Sección:
-                                                <select class="seccion_as form-control col-5" id="seccion_as"  >
-                                                    <option value="0">[TODO]</option>
-                                                </select>
-                                            </label>
-                                        </section>
-                                        <section class="col col-4"  style="width:100%;align:cemter;" align="center">
-                                            <label>Puesto:
-                                                <select class="puesto_as form-control" id="puesto_as"  >
-                                                    <option value="0">[TODO]</option>
-                                                </select>
-                                            </label>
-                                        </section>
-                                        <legend>Plantillas</legend>      
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th align="center" style="text-align:center;">Nro</th>
-                                                    <th align="center" style="text-align:center;">Nombre Plantilla</th>
-                                                    <th align="center" style="text-align:center;">Estado Plantilla Puesto</th>
-                                                    <th colspan="2" style="text-align:center;">Acciones</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="tbody-plantilla">
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                            <!-- widget edit box -->
+                            <div  class="jarviswidget-editbox">
+                                <!-- This area used as dropdown edit box -->
 
                             </div>
-                        </article>
+                            <div class="widget-body no-padding">
+                                <legend align="center">CARGAR PLANTILLAS</legend>
+                                <section class="col col-12" style="width:100%;align:cemter;" align="center">
+                                    <label class="select">Dirección:
+                                        <select class="dir form-control" id="dir" name="id_di" >
+                                            <option value="" >[Direccion]</option>
+                                            <%for (int i = 0; i < Listar_Direccion_X.size(); i++) {
+                                                    Direccion d = new Direccion();
+                                                    d = (Direccion) Listar_Direccion_X.get(i);
+                                            %>
+                                            <option value="<%=d.getId_direccion()%>"> <%=d.getNo_direccion()%></option>
+                                            <%}%>
+                                        </select>   
+                                    </label>
+                                </section>
+
+                                <section class="col col-12" style="width:100%;align:cemter;" align="center">
+                                    <label>Departamento:
+                                        <select class="dep form-control" id="dep" name="id_dep" >
+                                            <option value="">[TODO]</option>
+                                        </select>
+                                    </label>
+                                </section>
+                                <section class="col col-4"  style="width:100%;align:cemter;" align="center">
+                                    <label>Area:
+                                        <select class="area form-control" id="area" name="id_are" >
+                                            <option value="">[TODO]</option>
+                                        </select>
+                                    </label>
+                                </section>
+
+                                <section class="col col-4"  style="width:100%;align:cemter;" align="center">
+                                    <label>Sección:
+                                        <select class="seccion form-control" id="seccion" name="id_sec" >
+                                            <option value="">[TODO]</option>
+                                        </select>
+                                    </label>
+                                </section>
+                                <section class="col col-4"  style="width:100%;align:cemter;" align="center">
+                                    <label>Puesto:
+                                        <select class="puesto form-control" id="puesto" name="id_pu" >
+                                            <option value="">[TODO]</option>
+                                        </select>
+                                    </label>
+                                </section>
+                                <br>
+                                <br>
+                                <CENER><legend align="center">ASIGNAR PLANTILLAS</legend></CENER>
+                                <section class="col col-4"  style="width:100%;align:cemter;" align="center">
+                                    <label>Dirección:
+                                        <select class="dir_as form-control" id="dir_as"  >
+                                            <option value="">[SELECCIONE]</option>
+                                            <%for (int i = 0; i < Listar_Direccion_X.size(); i++) {
+                                                    Direccion d = new Direccion();
+                                                    d = (Direccion) Listar_Direccion_X.get(i);
+                                            %>
+                                            <option value="<%=d.getId_direccion()%>"> <%=d.getNo_direccion()%></option>
+                                            <%}%>
+                                        </select>   
+                                    </label>
+                                </section>
+                                <section class="col col-4"  style="width:100%;align:cemter;" align="center">
+                                    <label>Departamento:
+                                        <select class="dep_as form-control" id="dep_as" >
+                                            <option value="0">[TODO]</option>
+                                        </select>
+                                    </label>
+                                </section>
+                                <section class="col col-4" style="width:100%;align:cemter;" align="center" >
+                                    <label>Area:
+                                        <select class="area_as form-control" id="area_as" >
+                                            <option value="0">[TODO]</option>
+                                        </select>
+                                    </label>
+                                </section>
+                                <section class="col col-4"  style="width:100%;align:cemter;" align="center" >
+                                    <label>Sección:
+                                        <select class="seccion_as form-control col-5" id="seccion_as"  >
+                                            <option value="0">[TODO]</option>
+                                        </select>
+                                    </label>
+                                </section>
+                                <section class="col col-4"  style="width:100%;align:cemter;" align="center">
+                                    <label>Puesto:
+                                        <select class="puesto_as form-control" id="puesto_as"  >
+                                            <option value="0">[TODO]</option>
+                                        </select>
+                                    </label>
+                                </section>
+                                <legend align="center">Plantillas</legend>      
+                                <table class="table table-striped table-bordered table-hover dataTable no-footer">
+                                    <thead>
+                                        <tr>
+                                            <th align="center" style="text-align:center;">Nro</th>
+                                            <th align="center" style="text-align:center;">Nombre Plantilla</th>
+                                            <th align="center" style="text-align:center;">Estado Plantilla Puesto</th>
+                                            <th colspan="2" style="text-align:center;">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbody-plantilla">
+                                        <tr><td colspan="4" align="center">SELECCIONA UNA OPCION</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-
                     <div class="row">
-
                         <article class=" col-sm-12 col-md-12 col-lg-4">
-                            <div  class="jarviswidget jarviswidget-color-darken" id="wid-id-3" data-widget-colorbutton="true" >
-                                <header><span class="widget-icon"><i class="fa fa-table"></i></span>
-                                    <h2>Instrucciones </h2>
+                            <div class="jarviswidget well" id="wid-id-4" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-fullscreenbutton="false" data-widget-sortable="false">
+                                <header>
+                                    <span class="widget-icon"> <i class="fa fa-pencil"></i> </span>
+                                    <h2>Markdown API</h2>
+
                                 </header>
                                 <div>
                                     <div class="jarviswidget-editbox">
                                         <!-- This area used as dropdown edit box -->
 
                                     </div>
-                                    <div class="widget-body no-padding">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th><i class="fa fa-building"></i>Nomenclatura</th>
-                                                        <th><i class="fa fa-calendar"></i>Significado</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr ><td>[nombre]</td><td>Nombre del trabajador</td></tr>
-                                                    <tr><td>[app]</td><td>Apellido Paterno del trabajador</td></tr>
-                                                    <tr><td>[apm]</td><td>Apellido Materno del trabajador</td></tr>
-                                                    <tr><td>[dni]</td><td>Dni del trabajador</td></tr>
-                                                    <tr><td>[dir]</td><td>direccion del trabajador</td></tr>
-                                                    <tr><td>[prov]</td><td>Provincia actual</td></tr>
-                                                    <tr><td>[dist]</td><td>Distrito en el que estan</td></tr>
-                                                    <tr><td>[dep]</td><td>Departamento en donde se va a desenpeñar</td></tr>
-                                                    <tr><td>[desde]</td><td>fecha de Inicio del contrato</td></tr>
-                                                    <tr><td>[hasta]</td><td>Fecha de Fin del contrato</td></tr>
-                                                    <tr><td>[puesto]</td><td>Puesto que va a desempeñar</td></tr>
-                                                    <tr><td>[fe_suscripcion]</td><td>Fecha de suscripcion</td></tr>
-                                                    <tr><td>[sueldo]</td><td>Sueldo del trabajador</td></tr>
-                                                    <tr><td>[horas]</td><td>Horas de trabajo semanales</td></tr>
-                                                    <tr><td>[cursos]</td><td>Cuesos que va enseñar (en el caso que sea docente)</td></tr>
-                                                    <tr><td>[funciones]</td><td>Funciones que va a desempeñar en el puesto</td></tr>
-                                                    <tr><td>[moneda]</td><td>Tipo de moneda de pago</td></tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                    <div class="widget-body">
+
+                                        <h3>Markdown API</h3>
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th><i class="fa  fa-align-left"> </i> Nomenclatura</th>
+                                                    <th><i class="fa fa-chain"> </i>  Significado</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ><td><code>[nombre]</code></td><td>Nombre del trabajador</td></tr>
+                                                <tr><td><code>[app]</code></td><td>Apellido Paterno del trabajador</td></tr>
+                                                <tr><td><code>[apm]</code></td><td>Apellido Materno del trabajador</td></tr>
+                                                <tr><td><code>[dni]</code></td><td>Dni del trabajador</td></tr>
+                                                <tr><td><code>[dir]</code></td><td>direccion del trabajador</td></tr>
+                                                <tr><td><code>[prov]</code></td><td>Provincia actual</td></tr>
+                                                <tr><td><code>[dist]</code></td><td>Distrito en el que estan</td></tr>
+                                                <tr><td><code>[dep]</code></td><td>Departamento en donde se va a desenpeñar</td></tr>
+                                                <tr><td><code>[desde]</code></td><td>fecha de Inicio del contrato</td></tr>
+                                                <tr><td><code>[hasta]</code></td><td>Fecha de Fin del contrato</td></tr>
+                                                <tr><td><code>[puesto]</code></td><td>Puesto que va a desempeñar</td></tr>
+                                                <tr><td><code>[fe_suscripcion]</code></td><td>Fecha de suscripcion</td></tr>
+                                                <tr><td><code>[sueldo]</code></td><td>Sueldo del trabajador</td></tr>
+                                                <tr><td><code>[horas]</code></td><td>Horas de trabajo semanales</td></tr>
+                                                <tr><td><code>[cursos]</code></td><td>Cuesos que va enseñar (en el caso que sea docente)</td></tr>
+                                                <tr><td><code>[funciones]</code></td><td>Funciones que va a desempeñar en el puesto</td></tr>
+                                                <tr><td><code>[moneda]</code></td><td>Tipo de moneda de pago</td></tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </article>
                         <article class="col-sm-12 col-md-12 col-lg-8">
-                            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-2" data-widget-colorbutton="true"  >
+                            <div class="jarviswidget jarviswidget-color-blue" id="wid-id-0"  data-widget-editbutton="false"  data-widget-fullscreenbutton="false" data-widget-sortable="false">
 
                                 <header>
-                                    <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                    <h2>Editar Plantillas </h2>
+                                    <span class="widget-icon"> <i class="fa fa-pencil"></i> </span>
+                                    <h2>Editar Platilla</h2>
 
                                 </header>
 
@@ -727,7 +720,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                                         focus: onFocus,
                                                         blur: onBlur,
                                                         // Check for availability of corresponding plugins.
-                                                        pluginsLoaded: function (evt) {
+                                                        pluginsLoaded: function(evt) {
 
 
                                                             var doc = CKEDITOR.document, ed = evt.editor;
@@ -866,7 +859,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
     <script type="text/javascript">
                                                     // DO NOT REMOVE : GLOBAL FUNCTIONS!
-                                                    $(document).ready(function () {
+                                                    $(document).ready(function() {
                                                         pageSetUp();
                                                     })
 
@@ -878,7 +871,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
         _gaq.push(['_trackPageview']);
 
-        (function () {
+        (function() {
             var ga = document.createElement('script');
             ga.type = 'text/javascript';
             ga.async = true;
