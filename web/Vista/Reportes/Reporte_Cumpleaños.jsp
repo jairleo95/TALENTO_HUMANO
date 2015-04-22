@@ -58,18 +58,33 @@
                     <div   >
                         <!--style="padding-left: 30px"-->
                         <br>
-                       <div class="row">
-                            <div class="form-group">
-                                <label>Mes de Cumpleaños</label><br>
-                                <input type="date" name="fec_i" class="form-control" length="45" style="width: 250px" id="fe_i">
-                            </div>
+                        <div class="form-group">
+                            <label>Mes de Cumpleaños:</label><br>
+                            <select name="puesto" class="form-control selec_mes" id="selec_mes" style="width: 250px" required=""> 
+                                <option value="">[Seleccione]</option>
+                                <option value="01">Enero</option>
+                                <option value="02">Febrero</option>
+                                <option value="03">Marzo</option>
+                                <option value="04">Abril</option>
+                                <option value="05">Mayo</option>
+                                <option value="06">Junio</option>
+                                <option value="07">Julio</option>
+                                <option value="08">Agosto</option>
+                                <option value="09">Setiembre</option>
+                                <option value="10">Octubre</option>
+                                <option value="11">Noviembre</option>
+                                <option value="12">Dicienbre</option>
+                                <option value="13">Todos</option>
+                            </select>
                         </div>
                         <br>
+                        <br>
                         <div class="row">
-                            <div class="form-group">
-                                <label>Dia de cumpleaños:</label><br>
-                                <input type="date" name="fec_f" class="form-control" size="45" maxlength="100" style="width: 250px" id="fe_sus">
-                            </div>
+                            <label>Dia de Cumpleaños:</label><br>
+                            <select name="puesto" class="form-control select_dia aaa" id="select_dia" style="width: 250px"> 
+                                <option value="">[Seleccione]</option>
+                            </select>
+
                         </div>
                         <br>
                         <div class="row">
@@ -77,7 +92,7 @@
                                 <button type="button" class="btn btn-primary" id="btnbuscar">Buscar</button>
                             </div>
 
-                        </div>  
+                        </div>
                     </div> 
                     <br>
                     <br>
@@ -118,7 +133,6 @@
                                         </tr>
                                     </thead>
                                     <tbody id="Li_cump">
-                                        
                                     </tbody>
                                 </table>
 
@@ -148,7 +162,7 @@
             if (!window.jQuery.ui) {
                 document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
             }
-        </script>
+            </script>
 
         <!-- IMPORTANT: APP CONFIG -->
         <script src="../../js/app.config.js"></script>
@@ -211,365 +225,208 @@
         <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
         <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
+        <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
 
-        <script type="text/javascript">
-
-            // DO NOT REMOVE : GLOBAL FUNCTIONS!
-
-            $(document).ready(function () {
-
-                pageSetUp();
-
-                /* // DOM Position key index //
-                 
-                 l - Length changing (dropdown)
-                 f - Filtering input (search)
-                 t - The Table! (datatable)
-                 i - Information (records)
-                 p - Pagination (paging)
-                 r - pRocessing 
-                 < and > - div elements
-                 <"#id" and > - div with an id
-                 <"class" and > - div with a class
-                 <"#id.class" and > - div with an id and class
-                 
-                 Also see: http://legacy.datatables.net/usage/features
-                 */
-
-                /* BASIC ;*/
-                var responsiveHelper_dt_basic = undefined;
-                var responsiveHelper_datatable_fixed_column = undefined;
-                var responsiveHelper_datatable_col_reorder = undefined;
-                var responsiveHelper_datatable_tabletools = undefined;
-
-                var breakpointDefinition = {
-                    tablet: 1024,
-                    phone: 480
-                };
-                /*
-                 $('#dt_basic').dataTable({
-                 "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
-                 "t" +
-                 "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                 "autoWidth": true,
-                 "preDrawCallback": function () {
-                 // Initialize the responsive datatables helper once.
-                 if (!responsiveHelper_dt_basic) {
-                 responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
-                 }
-                 },
-                 "rowCallback": function (nRow) {
-                 responsiveHelper_dt_basic.createExpandIcon(nRow);
-                 },
-                 "drawCallback": function (oSettings) {
-                 responsiveHelper_dt_basic.respond();
-                 }
-                 });
-                 */
-                /* END BASIC */
-
-                /* COLUMN FILTER  */
-                /*              var otable = $('#datatable_fixed_column').DataTable({
-                 //"bFilter": false,
-                 //"bInfo": false,
-                 //"bLengthChange": false
-                 //"bAutoWidth": false,
-                 //"bPaginate": false,
-                 //"bStateSave": true // saves sort state using localStorage
-                 "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>" +
-                 "t" +
-                 "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                 "autoWidth": true,
-                 "preDrawCallback": function () {
-                 // Initialize the responsive datatables helper once.
-                 if (!responsiveHelper_datatable_fixed_column) {
-                 responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
-                 }
-                 },
-                 "rowCallback": function (nRow) {
-                 responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
-                 },
-                 "drawCallback": function (oSettings) {
-                 responsiveHelper_datatable_fixed_column.respond();
-                 }
-                 
-                 });*/
-
-                // custom toolbar
-                //          $("div.toolbar").html('<div class="text-right"><img src="../../img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
-
-                // Apply the filter
-                /*   $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
-                 
-                 otable
-                 .column($(this).parent().index() + ':visible')
-                 .search(this.value)
-                 .draw();
-                 
-                 });*/
-                /* END COLUMN FILTER */
-
-                /* COLUMN SHOW - HIDE */
-                /*   $('#datatable_col_reorder').dataTable({
-                 "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'C>r>" +
-                 "t" +
-                 "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                 "autoWidth": true,
-                 "preDrawCallback": function () {
-                 // Initialize the responsive datatables helper once.
-                 if (!responsiveHelper_datatable_col_reorder) {
-                 responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
-                 }
-                 },
-                 "rowCallback": function (nRow) {
-                 responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
-                 },
-                 "drawCallback": function (oSettings) {
-                 responsiveHelper_datatable_col_reorder.respond();
-                 }
-                 });*/
-
-                /* END COLUMN SHOW - HIDE */
-
-                /* TABLETOOLS */
-                $('#datatable_tabletools').dataTable({
-                    // Tabletools options: 
-                    //   https://datatables.net/extensions/tabletools/button_options
-                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>" +
-                            "t" +
-                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                    "oTableTools": {
-                        "aButtons": [
-                            "copy",
-                            "csv",
-                            "xls",
-                            {
-                                "sExtends": "pdf",
-                                "sTitle": "SmartAdmin_PDF",
-                                "sPdfMessage": "SmartAdmin PDF Export",
-                                "sPdfSize": "letter"
-                            },
-                            {
-                                "sExtends": "print",
-                                "sMessage": "Generated by SmartAdmin <i>(press Esc to close)</i>"
-                            }
-                        ],
-                        "sSwfPath": "../../js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
-                    },
-                    "autoWidth": true,
-                    "preDrawCallback": function () {
-                        // Initialize the responsive datatables helper once.
-                        if (!responsiveHelper_datatable_tabletools) {
-                            responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
-                        }
-                    },
-                    "rowCallback": function (nRow) {
-                        responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
-                    },
-                    "drawCallback": function (oSettings) {
-                        responsiveHelper_datatable_tabletools.respond();
-                    }
-                });
-
-                /* END TABLETOOLS */
-
-            })
-
-        </script>
-
-        <!-- Your GOOGLE ANALYTICS CODE Below -->
-        <script type="text/javascript">
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-            _gaq.push(['_trackPageview']);
-
-            (function () {
-                var ga = document.createElement('script');
-                ga.type = 'text/javascript';
-                ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(ga, s);
-            })();
-        </script>
     </body>
     <script>
-        function listar_opciones(opc, id) {
-            if (opc == 'Listar_dir_dep') {
-                var a = $(".selectdep");
-                $(".selectarea").empty();
-                $(".selectarea").append("<option value=''>[Seleccione]</option>");
-                $(".selectsec").empty();
-                $(".selectsec").append("<option value=''>[Seleccione]</option>");
-                $(".selectpu").empty();
+            function listar_opciones(opc, id) {
+                if (opc == 'Listar_dir_dep') {
+                    var a = $(".selectdep");
+                    $(".selectarea").empty();
+                    $(".selectarea").append("<option value=''>[Seleccione]</option>");
+                    $(".selectsec").empty();
+                    $(".selectsec").append("<option value=''>[Seleccione]</option>");
+        $(".selectpu").empty();
                 $(".selectpu").append("<option value=''>[Seleccione]</option>");
-            }
-            if (opc == 'Listar_area2') {
+                }                 if (opc == 'Listar_area2') {
                 var a = $(".selectarea");
-                $(".selectsec").empty();
+                    $(".selectsec").empty();
                 $(".selectsec").append("<option value=''>[Seleccione]</option>");
-                $(".selectpu").empty();
+                    $(".selectpu").empty();
                 $(".selectpu").append("<option value=''>[Seleccione]</option>");
-            }
+                }
             if (opc == 'Listar_sec2') {
-                var a = $(".selectsec");
+            var a = $(".selectsec");
                 $(".selectpu").empty();
                 $(".selectpu").append("<option value=''>[Seleccione]</option>");
-            }
-            if (opc == 'Listar_pu_id') {
+                }
+                if (opc == 'Listar_pu_id') {
                 var a = $(".selectpu");
-            }
+                }
             $.post("../../Direccion_Puesto", "opc=" + opc.trim() + "&id=" + id.trim(), function (objJson) {
                 var list = objJson.lista;
                 a.empty();
                 a.append("<option value=''>[Seleccione]</option>");
-                for (var i = 0; i < list.length; i++) {
-                    a.append("<option value='" + list[i].id + "'>" + list[i].nombre + "</option>");
-                }
-                $(".tbodys").append();
-            });
-
-        }
-        function buscar(del, al, nombre, dir, dep, area, sec, puesto, fe_i, fe_fi, ca_sueldo, fe_sus) {
-            var b = $(".tbodys");
-            $.post("../../impresion_masiva?opc=filtrar" + "&desde=" + del + "&al=" + al + "&nom_ape=" + nombre + "&direccion=" + dir + "&departamento=" + dep + "&area=" + area + "&seccion=" + sec + "&puesto=" + puesto + "&fec_i=" + fe_i + "&fec_f=" + fe_fi + "&sueldo=" + ca_sueldo + "&fe_sus=" + fe_sus, function (objJson) {
-                b.empty();
-                //alert($("#select_pu").val());
-                var list = objJson.lista;
-                if (objJson.rpta == -1) {
-                    alert(objJson.mensaje);
-                    return;
-                }
-                var nuro = 1;
-                if (list.length > 0) {
-                    for (var i = 0; i < list.length; i++) {
-                        nuro = nuro + i;
-                        b.append("<tr>");
-                        b.append("<td>" + nuro + "</td>");
-                        b.append("<td><p>" + list[i].nombre + "</p></td>");
-                        b.append("<td>" + list[i].fe_de + "</td>");
-                        if (list[i].fe_ha != null) {
-                            b.append("<td>" + list[i].fe_ha + "</td>");
+            for (var i = 0; i < list.length; i++) {
+            a.append("<option value='" + list[i].id + "'>" + list[i].nombre + "</option>");
+            }
+                    $(".tbodys").append();
+                }); 
+            }
+                function buscar(del, al, nombre, dir, dep, area, sec, puesto, fe_i, fe_fi, ca_sueldo, fe_sus) {
+                var b = $(".tbodys");
+        $.post("../../impresion_masiva?opc=filtrar" + "&desde=" + del + "&al=" + al + "&nom_ape=" + nombre + "&direccion=" + dir + "&departamento=" + dep + "&area=" + area + "&seccion=" + sec + "&puesto=" + puesto + "&fec_i=" + fe_i + "&fec_f=" + fe_fi + "&sueldo=" + ca_sueldo + "&fe_sus=" + fe_sus, function (objJson) {
+                    b.empty();
+            //alert($("#select_pu").val());
+            var list = objJson.lista;
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    var nuro = 1;
+                    if (list.length > 0) {
+                for (var i = 0; i < list.length; i++) {                             nuro = nuro + i;
+                            b.append("<tr>");
+                b.append("<td>" + nuro + "</td>");
+                    b.append("<td><p>" + list[i].nombre + "</p></td>");
+                b.append("<td>" + list[i].fe_de + "</td>");
+                if (list[i].fe_ha != null) {
+                        b.append("<td>" + list[i].fe_ha + "</td>");
                         } else {
-                            b.append("<td>indefinido</td>");
-                        }
+                        b.append("<td>indefinido</td>");
+                            }
                         // b.append("<td>" + list[i].fe_ha + "</td>");
                         b.append("<td><p>" + list[i].no_ar + "</p></td>");
-                        b.append("<td><p>" + list[i].no_se + "</p></td>");
+                            b.append("<td><p>" + list[i].no_se + "</p></td>");
                         b.append("<td><p>" + list[i].no_pu + "</p></td>");
-                        b.append("<td>" + list[i].ca_su + '</td>');
+                            b.append("<td>" + list[i].ca_su + '</td>');
                         b.append("<td>" + list[i].fe_su + "</td>");
                         b.append('<td><a class="btn-warming" href="../../contrato?opc=Detalle_Contractual&idtr=' + list[i].id_tr + '">Ver detalle</a> </td>');
                         //b.append('<td id="sel' + i + '"></td>');
                         if (list[i].id_pl != null) {
-                            b.append('<td><input type="checkbox" id="imp" name="Imprimir" value="' + list[i].id_co + '/' + list[i].id_pl + '"></td>');
-                        } else {
-                            b.append('<td>NO TIENE</td>');
-                        }
+                        b.append('<td><input type="checkbox" id="imp" name="Imprimir" value="' + list[i].id_co + '/' + list[i].id_pl + '"></td>');
+                            } else {
+                                b.append('<td>NO TIENE</td>');
+                            }
                         b.append("</tr>");
-                        nuro = 1;
-                    }
-                    if (list.length !== 0) {
-                        $("#asa").show();
-                    }
-                    $("#btns").click(
-                            function () {
-                                $("#gg :checkbox").attr('checked', true);
-                                $('#imp').is(':checked');
-                                alerta(checkboxValues.push($("#imp").val()));
-                            });
-                    $("#btns2").click(
-                            function () {
-                                var checkboxValues = new Array();
-//recorremos todos los checkbox seleccionados con .each
-                                $('input[name="orderBox[]"]:checked').each(function () {
-                                    //$(this).val() es el valor del checkbox correspondiente
-                                    checkboxValues.push($(this).val());
-                                    alert(checkboxValues.push($(this).val()));
+                            nuro = 1;
+                        }
+                            if (list.length !== 0) {
+                            $("#asa").show();
+                        }
+                        $("#btns").click(
+                        function () {
+                            $("#gg :checkbox").attr('checked', true);
+                        $('#imp').is(':checked');
+                    alerta(checkboxValues.push($("#imp").val()));
                                 });
-                            });
-                } else {
-                    b.append("<tr><TD colspan='12' style='text-align:center;'> NO SE HA ENCONTRADO DATOS DE LA BUSQUEDA</TD></tr>")
-                }
-
-            }
-            );
-        }
-        function marcado() {
-            if (document.form.termin.checked) {
-                document.form.submit();
-            }
-            else {
-                alert("Debes aceptar los términos y condiciones");
-                document.form.termin.focus();
-                return false;
-            }
-
-        }
-        //Listar Hijos de Trabajadores
-         function listar_cumpleaños() {
-            var a = $(".mes").val();
-            var b = $(".dia").val();
-            var d = $("#Li_cump");
-            var texto = '';
-            $.post("../../reporte", "opc=reporte_hijo&desde=" + a + "&hasta=" + b + "&edad=" + c, function (objJson) {
-                d.empty();
-                var lista = objJson.lista;
-                for (var i = 0; i < lista.length; i++) {
-                    texto += '<tr role="row" class="odd">';
-                    texto += '<td class>' + (i + 1) + '</td>';
-                    texto += '<td>' + lista[i].nom + '</td>';
-                    texto += '<td>' + lista[i].dni + '</td>';
-                    texto += '<td>' + lista[i].gen + '</td>';
-                    texto += '<td>' + lista[i].fec_na + '</td>';
-                    texto += '<td>' + lista[i].edad + '</td>';
-                    texto += '</tr>';
-
-                }
-                d.append(texto);
-
-            });
-        }
-        function listar_hijos() {
-            var a = $(".des").val();
-            var b = $(".has").val();
-            var c = $(".edad").val();
-            var d = $("#Li_hijos");
-            var texto = '';
-            $.post("../../reporte", "opc=reporte_hijo&desde=" + a + "&hasta=" + b + "&edad=" + c, function (objJson) {
-                d.empty();
-                var lista = objJson.lista;
-                for (var i = 0; i < lista.length; i++) {
-                    texto += '<tr role="row" class="odd">';
-                    texto += '<td class>' + (i + 1) + '</td>';
-                    texto += '<td>' + lista[i].nom + '</td>';
-                    texto += '<td>' + lista[i].dni + '</td>';
-                    texto += '<td>' + lista[i].gen + '</td>';
-                    texto += '<td>' + lista[i].fec_na + '</td>';
-                    texto += '<td>' + lista[i].edad + '</td>';
-                    texto += '</tr>';
-
-                }
-                d.append(texto);
-
-            });
-        }
-        $(document).ready(function () {
-            var b = $('#tbodys');
-            $("#btnbuscar").click(
+                        $("#btns2").click(
                     function () {
-                        listar_hijos();
+                            var checkboxValues = new Array();
+                                //recorremos todos los checkbox seleccionados con .each
+                                $('input[name="orderBox[]"]:checked').each(function () {
+                            //$(this).val() es el valor del checkbox correspondiente
+                            checkboxValues.push($(this).val());
+                                alert(checkboxValues.push($(this).val()));
+                                    });
+                                });
+                                } else {
+                                    b.append("<tr><TD colspan='12' style='text-align:center;'> NO SE HA ENCONTRADO DATOS DE LA BUSQUEDA</TD></tr>")
                     }
-            );
+
+                                    }
+                );
+            }
+                                    function marcado() {
+                if (document.form.termin.checked) {
+                                document.form.submit();
+                }
+                            else {
+                    alert("Debes aceptar los términos y condiciones");
+                    document.form.termin.focus();
+                    return false;
+                }
+
+                }
+            //Listar Hijos de Trabajadores
+        function listar_cumpleaños() {
+            var a = $(".selec_mes").val();
+                var b = $(".select_dia").val();
+            var d = $("#Li_cump");
+                var texto = '';
+                $.post("../../reporte", "opc=reporte_cumpleaños&mes=" + a + "&dia=" + b, function (objJson) {
+                d.empty();
+        var lista = objJson.lista;
+        if (lista > 0) {
+            for (var i = 0; i < lista.length; i++) {
+            texto += '<tr role="row" class="odd">';
+            texto += '<td class>' + (i + 1) + '</td>';
+            texto += '<td>' + lista[i].aps + '</td>';
+                texto += '<td>' + lista[i].dep + '</td>';
+                texto += '<td>' + lista[i].are + '</td>';
+                    texto += '<td>' + lista[i].secc + '</td>';
+                        texto += '<td>' + lista[i].pue + '</td>';
+                        texto += '<td>' + lista[i].fec_na + '</td>';
+                        texto += '<td>' + lista[i].edad + '</td>';
+                        texto += '<td>' + lista[i].nom + '</td>';
+                        texto += '<td>' + lista[i].tip + '</td>';
+                        texto += '<td>' + lista[i].dni + '</td>';
+                        texto += '</tr>';
+                        }
+                        d.append(texto);                     } else {
+                        d.append("<td colspan='11' align='center'><strong>No hay datos</strong></td>");
+                    }
+                });
+                        }
+            $(document).ready(function () {
+                        var b = $('#tbodys');
+                $("#btnbuscar").click(
+                        function () {
+                    if ($(".selec_mes").val() == "") {
+                    alert("Ingresa mes");
+                            } else {
+                                listar_cumpleaños();
+                }
+        }
+        );
             $("#btncancel").click(
-                    function () {
-                        document.formulario.reset();
+            function () {
+                    document.formulario.reset();
                         b.empty();
                         html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'
-                        $(".tbodys").html(html);
+                            $(".tbodys").html(html);
+                        }
+                    );
+            $(".selec_mes").change(function () {
+                    var mes = $(".selec_mes").val();
+                        var dia = $(".select_dia");
+                        dia.empty();
+                        var dias = 0;
+                    var texto = "<option value=''>[SELECCIONE]</option>";
+                        if (mes == "01") {
+                        dias = 31;
                     }
-            );
-        });
+            if (mes == "02") {
+            dias = 28;
+                }
+                    if (mes == "03") {
+                dias = 31;
+                    }
+                if (mes == "04") {
+                dias = 30;
+                    }
+                    if (mes == "05") {
+                    dias = 31;                     }
+                if (mes == "06") {
+                    dias = 30;                     }
+                if (mes == "07") {
+                    dias = 31;                     }
+                if (mes == "08") {
+                    dias = 31;                     }
+                if (mes == "09") {
+                    dias = 30;                     }
+                if (mes == "10") {
+                    dias = 31;                     }
+                if (mes == "11") {
+                    dias = 30;                     }
+                if (mes == "12") {
+                    dias = 31;                     }
+                for (var i = 0; i < dias; i++) {
+                texto += "<option value='" + (i + 1) + "'>" + (i + 1) + "</option>";
+                    }
+                    dia.append(texto);
+                });
+                });
     </script>
 
 </html>
