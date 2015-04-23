@@ -2,51 +2,29 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-
-        <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
-
-        <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
-        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
-
-        <!-- SmartAdmin RTL Support is under construction
-                 This RTL CSS will be released in version 1.5
-        <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css"> -->
-
-        <!-- We recommend you use "your_style.css" to override SmartAdmin
-             specific styles this will also ensure you retrain your customization with each SmartAdmin update.
-        <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
-
-        <!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
-        <link rel="stylesheet" type="text/css" media="screen" href="../../css/demo.min.css">
-
-        <!-- FAVICONS -->
-        <link rel="shortcut icon" href="../../img/favicon/favicon.ico" type="image/x-icon">
-        <link rel="icon" href="../../img/favicon/favicon.ico" type="image/x-icon">
-
-        <!-- GOOGLE FONT -->
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
-
-        <!-- Specifying a Webpage Icon for Web Clip 
-                 Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
-        <link rel="apple-touch-icon" href="../../img/splash/sptouch-icon-iphone.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="../../img/splash/touch-icon-ipad.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="../../img/splash/touch-icon-iphone-retina.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="../../img/splash/touch-icon-ipad-retina.png">
-
-        <!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-        <!-- Startup image for web apps -->
-        <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
-        <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
-        <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <link rel="shortcut icon" type="image/ico" href="http://www.sprymedia.co.uk/media/images/favicon.ico">
+        <style type="text/css" title="currentStyle">
+            @import "../../js/DataTables-1.10.4/media/css/demo_page.css";
+            @import "../../js/DataTables-1.10.4/media/css/demo_table.css";
+            @import "../../js/DataTables-1.10.4/media/css/jquery-ui.css";
+            @import "../../js/DataTables-1.10.4/media/css/jquery-ui-1.7.2.custom.css";
+        </style>
+        <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
+        <script src="../../js/DataTables-1.10.4/media/js/jquery-1.4.4.min.js" type="text/javascript"></script>
+        <script src="../../js/DataTables-1.10.4/media/js/jquery.dataTables.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="../../js/DataTables-1.10.4/media/css/site.css?_=c3204084d1e8a5f5906d625e768e171a">
+        <link rel="stylesheet" type="text/css" href="../../js/DataTables-1.10.4/extensions/TableTools/css/dataTables.tableTools.css">
+        <script type="text/javascript" language="javascript" src="../../js/DataTables-1.10.4/extensions/TableTools/js/dataTables.tableTools.js"></script>
         <title>Reporte de Cumpleaños</title>
+        <script type="text/javascript" charset="utf-8">
+            $(document).ready(function () {
+                //          alert();
+
+            });
+        </script>
     </head>
-    <body>  
+    <body> 
         <form class="form-inline validarform" id="frm_filtro2" method="post" action="../../Imprimir" name="formulario" onclick="return marcado();">
             <div class="spacing">
                 <center><h1 class="spacing" style="font-weight: bold;">Cumpleaños Del Trabajador</h1></center> 
@@ -116,7 +94,7 @@
                             <!-- widget content -->
                             <div class="widget-body no-padding">
 
-                                <table id="datatable_tabletools" class="table table-striped table-bordered table-hover" width="100%">
+                                <table  id="datatable_tabletools">
                                     <thead>
                                         <tr>
                                             <th data-hide="phone">#</th>
@@ -162,7 +140,7 @@
             if (!window.jQuery.ui) {
                 document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
             }
-            </script>
+        </script>
 
         <!-- IMPORTANT: APP CONFIG -->
         <script src="../../js/app.config.js"></script>
@@ -225,8 +203,6 @@
         <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
         <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
-        <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
-
     </body>
     <script>
             function listar_opciones(opc, id) {
@@ -236,197 +212,215 @@
                     $(".selectarea").append("<option value=''>[Seleccione]</option>");
                     $(".selectsec").empty();
                     $(".selectsec").append("<option value=''>[Seleccione]</option>");
-        $(".selectpu").empty();
-                $(".selectpu").append("<option value=''>[Seleccione]</option>");
-                }                 if (opc == 'Listar_area2') {
-                var a = $(".selectarea");
-                    $(".selectsec").empty();
-                $(".selectsec").append("<option value=''>[Seleccione]</option>");
                     $(".selectpu").empty();
-                $(".selectpu").append("<option value=''>[Seleccione]</option>");
+                    $(".selectpu").append("<option value=''>[Seleccione]</option>");
                 }
-            if (opc == 'Listar_sec2') {
-            var a = $(".selectsec");
-                $(".selectpu").empty();
-                $(".selectpu").append("<option value=''>[Seleccione]</option>");
+                if (opc == 'Listar_area2') {
+                    var a = $(".selectarea");
+                    $(".selectsec").empty();
+                    $(".selectsec").append("<option value=''>[Seleccione]</option>");
+                    $(".selectpu").empty();
+                    $(".selectpu").append("<option value=''>[Seleccione]</option>");
+                }
+                if (opc == 'Listar_sec2') {
+                    var a = $(".selectsec");
+                    $(".selectpu").empty();
+                    $(".selectpu").append("<option value=''>[Seleccione]</option>");
                 }
                 if (opc == 'Listar_pu_id') {
-                var a = $(".selectpu");
+                    var a = $(".selectpu");
                 }
-            $.post("../../Direccion_Puesto", "opc=" + opc.trim() + "&id=" + id.trim(), function (objJson) {
-                var list = objJson.lista;
-                a.empty();
-                a.append("<option value=''>[Seleccione]</option>");
-            for (var i = 0; i < list.length; i++) {
-            a.append("<option value='" + list[i].id + "'>" + list[i].nombre + "</option>");
-            }
+                $.post("../../Direccion_Puesto", "opc=" + opc.trim() + "&id=" + id.trim(), function (objJson) {
+                    var list = objJson.lista;
+                    a.empty();
+                    a.append("<option value=''>[Seleccione]</option>");
+                    for (var i = 0; i < list.length; i++) {
+                        a.append("<option value='" + list[i].id + "'>" + list[i].nombre + "</option>");
+                    }
                     $(".tbodys").append();
-                }); 
+                });
             }
-                function buscar(del, al, nombre, dir, dep, area, sec, puesto, fe_i, fe_fi, ca_sueldo, fe_sus) {
+            function buscar(del, al, nombre, dir, dep, area, sec, puesto, fe_i, fe_fi, ca_sueldo, fe_sus) {
                 var b = $(".tbodys");
-        $.post("../../impresion_masiva?opc=filtrar" + "&desde=" + del + "&al=" + al + "&nom_ape=" + nombre + "&direccion=" + dir + "&departamento=" + dep + "&area=" + area + "&seccion=" + sec + "&puesto=" + puesto + "&fec_i=" + fe_i + "&fec_f=" + fe_fi + "&sueldo=" + ca_sueldo + "&fe_sus=" + fe_sus, function (objJson) {
+                $.post("../../impresion_masiva?opc=filtrar" + "&desde=" + del + "&al=" + al + "&nom_ape=" + nombre + "&direccion=" + dir + "&departamento=" + dep + "&area=" + area + "&seccion=" + sec + "&puesto=" + puesto + "&fec_i=" + fe_i + "&fec_f=" + fe_fi + "&sueldo=" + ca_sueldo + "&fe_sus=" + fe_sus, function (objJson) {
                     b.empty();
-            //alert($("#select_pu").val());
-            var list = objJson.lista;
+                    //alert($("#select_pu").val());
+                    var list = objJson.lista;
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
                         return;
                     }
                     var nuro = 1;
                     if (list.length > 0) {
-                for (var i = 0; i < list.length; i++) {                             nuro = nuro + i;
+                        for (var i = 0; i < list.length; i++) {
+                            nuro = nuro + i;
                             b.append("<tr>");
-                b.append("<td>" + nuro + "</td>");
-                    b.append("<td><p>" + list[i].nombre + "</p></td>");
-                b.append("<td>" + list[i].fe_de + "</td>");
-                if (list[i].fe_ha != null) {
-                        b.append("<td>" + list[i].fe_ha + "</td>");
-                        } else {
-                        b.append("<td>indefinido</td>");
+                            b.append("<td>" + nuro + "</td>");
+                            b.append("<td><p>" + list[i].nombre + "</p></td>");
+                            b.append("<td>" + list[i].fe_de + "</td>");
+                            if (list[i].fe_ha != null) {
+                                b.append("<td>" + list[i].fe_ha + "</td>");
+                            } else {
+                                b.append("<td>indefinido</td>");
                             }
-                        // b.append("<td>" + list[i].fe_ha + "</td>");
-                        b.append("<td><p>" + list[i].no_ar + "</p></td>");
+                            // b.append("<td>" + list[i].fe_ha + "</td>");
+                            b.append("<td><p>" + list[i].no_ar + "</p></td>");
                             b.append("<td><p>" + list[i].no_se + "</p></td>");
-                        b.append("<td><p>" + list[i].no_pu + "</p></td>");
+                            b.append("<td><p>" + list[i].no_pu + "</p></td>");
                             b.append("<td>" + list[i].ca_su + '</td>');
-                        b.append("<td>" + list[i].fe_su + "</td>");
-                        b.append('<td><a class="btn-warming" href="../../contrato?opc=Detalle_Contractual&idtr=' + list[i].id_tr + '">Ver detalle</a> </td>');
-                        //b.append('<td id="sel' + i + '"></td>');
-                        if (list[i].id_pl != null) {
-                        b.append('<td><input type="checkbox" id="imp" name="Imprimir" value="' + list[i].id_co + '/' + list[i].id_pl + '"></td>');
+                            b.append("<td>" + list[i].fe_su + "</td>");
+                            b.append('<td><a class="btn-warming" href="../../contrato?opc=Detalle_Contractual&idtr=' + list[i].id_tr + '">Ver detalle</a> </td>');
+                            //b.append('<td id="sel' + i + '"></td>');
+                            if (list[i].id_pl != null) {
+                                b.append('<td><input type="checkbox" id="imp" name="Imprimir" value="' + list[i].id_co + '/' + list[i].id_pl + '"></td>');
                             } else {
                                 b.append('<td>NO TIENE</td>');
                             }
-                        b.append("</tr>");
+                            b.append("</tr>");
                             nuro = 1;
                         }
-                            if (list.length !== 0) {
+                        if (list.length !== 0) {
                             $("#asa").show();
                         }
                         $("#btns").click(
-                        function () {
-                            $("#gg :checkbox").attr('checked', true);
-                        $('#imp').is(':checked');
-                    alerta(checkboxValues.push($("#imp").val()));
+                                function () {
+                                    $("#gg :checkbox").attr('checked', true);
+                                    $('#imp').is(':checked');
+                                    alerta(checkboxValues.push($("#imp").val()));
                                 });
                         $("#btns2").click(
-                    function () {
-                            var checkboxValues = new Array();
-                                //recorremos todos los checkbox seleccionados con .each
-                                $('input[name="orderBox[]"]:checked').each(function () {
-                            //$(this).val() es el valor del checkbox correspondiente
-                            checkboxValues.push($(this).val());
-                                alert(checkboxValues.push($(this).val()));
+                                function () {
+                                    var checkboxValues = new Array();
+                                    //recorremos todos los checkbox seleccionados con .each
+                                    $('input[name="orderBox[]"]:checked').each(function () {
+                                        //$(this).val() es el valor del checkbox correspondiente
+                                        checkboxValues.push($(this).val());
+                                        alert(checkboxValues.push($(this).val()));
                                     });
                                 });
-                                } else {
-                                    b.append("<tr><TD colspan='12' style='text-align:center;'> NO SE HA ENCONTRADO DATOS DE LA BUSQUEDA</TD></tr>")
+                    } else {
+                        b.append("<tr><TD colspan='12' style='text-align:center;'> NO SE HA ENCONTRADO DATOS DE LA BUSQUEDA</TD></tr>")
                     }
 
-                                    }
+                }
                 );
             }
-                                    function marcado() {
+            function marcado() {
                 if (document.form.termin.checked) {
-                                document.form.submit();
+                    document.form.submit();
                 }
-                            else {
+                else {
                     alert("Debes aceptar los términos y condiciones");
                     document.form.termin.focus();
                     return false;
                 }
 
-                }
+            }
             //Listar Hijos de Trabajadores
-        function listar_cumpleaños() {
-            var a = $(".selec_mes").val();
+            function listar_cumpleaños() {
+                var a = $(".selec_mes").val();
                 var b = $(".select_dia").val();
-            var d = $("#Li_cump");
+                var d = $("#Li_cump");
                 var texto = '';
                 $.post("../../reporte", "opc=reporte_cumpleaños&mes=" + a + "&dia=" + b, function (objJson) {
-                d.empty();
-        var lista = objJson.lista;
-        if (lista > 0) {
-            for (var i = 0; i < lista.length; i++) {
-            texto += '<tr role="row" class="odd">';
-            texto += '<td class>' + (i + 1) + '</td>';
-            texto += '<td>' + lista[i].aps + '</td>';
-                texto += '<td>' + lista[i].dep + '</td>';
-                texto += '<td>' + lista[i].are + '</td>';
-                    texto += '<td>' + lista[i].secc + '</td>';
-                        texto += '<td>' + lista[i].pue + '</td>';
-                        texto += '<td>' + lista[i].fec_na + '</td>';
-                        texto += '<td>' + lista[i].edad + '</td>';
-                        texto += '<td>' + lista[i].nom + '</td>';
-                        texto += '<td>' + lista[i].tip + '</td>';
-                        texto += '<td>' + lista[i].dni + '</td>';
-                        texto += '</tr>';
+                    d.empty();
+                    var lista = objJson.lista;
+                    if (lista.length > 0) {
+                        for (var i = 0; i < lista.length; i++) {
+                            texto += '<tr role="row" class="odd">';
+                            texto += '<td class>' + (i + 1) + '</td>';
+                            texto += '<td>' + lista[i].aps + '</td>';
+                            texto += '<td>' + lista[i].dep + '</td>';
+                            texto += '<td>' + lista[i].are + '</td>';
+                            texto += '<td>' + lista[i].secc + '</td>';
+                            texto += '<td>' + lista[i].pue + '</td>';
+                            texto += '<td>' + lista[i].fec_na + '</td>';
+                            texto += '<td>' + lista[i].edad + '</td>';
+                            texto += '<td>' + lista[i].nom + '</td>';
+                            texto += '<td>' + lista[i].tip + '</td>';
+                            texto += '<td>' + lista[i].dni + '</td>';
+                            texto += '</tr>';
                         }
-                        d.append(texto);                     } else {
+                        d.append(texto);
+                    } else {
                         d.append("<td colspan='11' align='center'><strong>No hay datos</strong></td>");
                     }
                 });
-                        }
+            }
             $(document).ready(function () {
-                        var b = $('#tbodys');
+                var b = $('#tbodys');
                 $("#btnbuscar").click(
                         function () {
-                    if ($(".selec_mes").val() == "") {
-                    alert("Ingresa mes");
+                            if ($(".selec_mes").val() == "") {
+                                alert("Ingresa mes");
                             } else {
                                 listar_cumpleaños();
-                }
-        }
-        );
-            $("#btncancel").click(
-            function () {
-                    document.formulario.reset();
-                        b.empty();
-                        html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'
+                                TableTools.DEFAULTS.aButtons = ["copy", "xls", "print"];
+                                $('#datatable_tabletools').dataTable({
+                                    "dom": 'T<"clear">lfrtip',
+                                    "tableTools": {
+                                        "sSwfPath": "../../js/DataTables-1.10.4/media/js/copy_csv_xls.swf"
+                                    }
+                                });
+                            }
+                        }
+                );
+                $("#btncancel").click(
+                        function () {
+                            document.formulario.reset();
+                            b.empty();
+                            html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'
                             $(".tbodys").html(html);
                         }
-                    );
-            $(".selec_mes").change(function () {
+                );
+                $(".selec_mes").change(function () {
                     var mes = $(".selec_mes").val();
-                        var dia = $(".select_dia");
-                        dia.empty();
-                        var dias = 0;
+                    var dia = $(".select_dia");
+                    dia.empty();
+                    var dias = 0;
                     var texto = "<option value=''>[SELECCIONE]</option>";
-                        if (mes == "01") {
+                    if (mes == "01") {
                         dias = 31;
                     }
-            if (mes == "02") {
-            dias = 28;
-                }
-                    if (mes == "03") {
-                dias = 31;
+                    if (mes == "02") {
+                        dias = 28;
                     }
-                if (mes == "04") {
-                dias = 30;
+                    if (mes == "03") {
+                        dias = 31;
+                    }
+                    if (mes == "04") {
+                        dias = 30;
                     }
                     if (mes == "05") {
-                    dias = 31;                     }
-                if (mes == "06") {
-                    dias = 30;                     }
-                if (mes == "07") {
-                    dias = 31;                     }
-                if (mes == "08") {
-                    dias = 31;                     }
-                if (mes == "09") {
-                    dias = 30;                     }
-                if (mes == "10") {
-                    dias = 31;                     }
-                if (mes == "11") {
-                    dias = 30;                     }
-                if (mes == "12") {
-                    dias = 31;                     }
-                for (var i = 0; i < dias; i++) {
-                texto += "<option value='" + (i + 1) + "'>" + (i + 1) + "</option>";
+                        dias = 31;
+                    }
+                    if (mes == "06") {
+                        dias = 30;
+                    }
+                    if (mes == "07") {
+                        dias = 31;
+                    }
+                    if (mes == "08") {
+                        dias = 31;
+                    }
+                    if (mes == "09") {
+                        dias = 30;
+                    }
+                    if (mes == "10") {
+                        dias = 31;
+                    }
+                    if (mes == "11") {
+                        dias = 30;
+                    }
+                    if (mes == "12") {
+                        dias = 31;
+                    }
+                    for (var i = 0; i < dias; i++) {
+                        texto += "<option value='" + (i + 1) + "'>" + (i + 1) + "</option>";
                     }
                     dia.append(texto);
                 });
-                });
+            });
     </script>
 
 </html>

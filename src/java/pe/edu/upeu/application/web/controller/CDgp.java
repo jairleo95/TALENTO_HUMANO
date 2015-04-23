@@ -271,7 +271,7 @@ public class CDgp extends HttpServlet {
             String id_d_hor = "";
             id_d_hor = IHor.Insert_Detalle_Horario(ID_DETALLE_HORARIO, iddgp, ES_DETALLE_HORARIO, iduser, null, null, null, ID_TIPO_HORARIO, ES_MOD_FORMATO, horas_totales);
 
-         //   ID_DETALLE_HORARIO = IHor.Max_id_Detalle_Horario();
+            //   ID_DETALLE_HORARIO = IHor.Max_id_Detalle_Horario();
             for (int i = 0; i < dia.size(); i++) {
                 for (int j = 0; j < 10; j++) {
                     String hora_desde = request.getParameter("HORA_DESDE_" + dia.get(i) + j);
@@ -286,7 +286,7 @@ public class CDgp extends HttpServlet {
                 }
 
             }
-           // out.print(id_d_hor + "---" + ID_TIPO_HORARIO + "---" + horas_totales);
+            // out.print(id_d_hor + "---" + ID_TIPO_HORARIO + "---" + horas_totales);
             getServletContext().setAttribute("List_doc_req_pla", doc.List_doc_req_pla(iddgp, ID_TRABAJADOR));
             int i = doc.List_Req_nacionalidad(ID_TRABAJADOR);
             int num_ad = doc.List_Adventista(ID_TRABAJADOR);
@@ -527,12 +527,15 @@ public class CDgp extends HttpServlet {
         }
         if (opc.equals("MODIFICAR REQUERIMIENTO")) {
             String iddgp = request.getParameter("iddgp");
+            idtr = dgp.obt_idtr_x_dgp(iddgp);
+            String ES_CUENTA_SUELDO = tr.CuentaSueldoTra(idtr);
             out.println(idtr + " " + iddgp + "" + idreq + "" + iddep + "" + idpuesto);
             getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(iddgp));
             getServletContext().setAttribute("Listar_Trabajador_id", tr.ListaridTrabajador(idtr));
             getServletContext().setAttribute("List_Puesto", pu.List_Puesto_Dep(iddep));
+            getServletContext().setAttribute("list_Cuenta_Sueldo", dgp.LIST_CUEN_SUEL(idtr));
             getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
-            response.sendRedirect("Vista/Dgp/Mod_DGP.jsp?idreq=" + idreq);
+            response.sendRedirect("Vista/Dgp/Editar_DGP.jsp?es_cs="+ES_CUENTA_SUELDO);
         }
         if (opc.equals("MODIFICAR")) {
             String ID_DGP = request.getParameter("ID_DGP");
