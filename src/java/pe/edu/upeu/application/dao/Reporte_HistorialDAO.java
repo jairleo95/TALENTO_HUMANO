@@ -108,7 +108,7 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "SELECT ID_TRABAJADOR,TO_CHAR( FE_MODIF,'Day,DD \"de\" MONTH \"del\" YYYY') FE_MODIFi,TO_CHAR(FE_MODIF,'HH:MM:SS AM')HORA_MODIF, US_MODIF, IP_USUARIO\n"
                     + "FROM RHTH_MODIF_TRABAJADOR\n"
-                    + "WHERE ID_TRABAJADOR='"+ID_TRABAJADOR+"' AND FE_MODIF IS NOT NULL\n"
+                    + "WHERE ID_TRABAJADOR='" + ID_TRABAJADOR + "' AND FE_MODIF IS NOT NULL\n"
                     + "ORDER BY FE_MODIFi desc";
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
@@ -231,11 +231,24 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT * FROM RHVD_HISTORIAL_MOD_HIJO where ID_DATOS_HIJOS_TRABAJADOR='" + id + "' and to_char(FE_FILTRO_TODO,'dd/mm/yyyy hh:mm:ss') ='" + fecha1.trim() + "' or to_char(FE_FILTRO_TODO,'dd/mm/yyyy hh:mm:ss') ='" + fecha2.trim() + "' ";
+            String sql = "SELECT AP_MATERNO_T, AP_PATERNO_T, NO_TRABAJADOR_T, ID_DATOS_HIJOS_TRABAJADOR, ID_TRABAJADOR, AP_PATERNO, AP_MATERNO, NO_HIJO_TRABAJADOR, FE_NACIMIENTO, ES_SEXO, ES_TIPO_DOC, NU_DOC, ES_PRESENTA_DOCUMENTO, ES_INSCRIPCION_VIG_ESSALUD, ES_ESTUDIO_NIV_SUPERIOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, ES_DATOS_HIJO_TRABAJADOR, SEMESTRE, ESTADO_REGISTRO, FE_FILTRO_TODO, NO_USUARIO_CREACION, NO_USUARIO_MODIF  FROM RHVD_HISTORIAL_MOD_HIJO where ID_DATOS_HIJOS_TRABAJADOR='" + id + "' and to_char(FE_FILTRO_TODO,'dd/mm/yyyy hh:mm:ss') ='" + fecha1.trim() + "' or to_char(FE_FILTRO_TODO,'dd/mm/yyyy hh:mm:ss') ='" + fecha2.trim() + "' ";
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
                 rec.put("ap_p", rs.getString("ap_paterno"));
+                rec.put("ap_m", rs.getString("ap_materno"));
+                rec.put("no_hijo", rs.getString("no_hijo_trabajador"));
+                rec.put("fe_nac", rs.getString("fe_nacimiento"));
+                rec.put("sexo", rs.getString("ES_SEXO"));
+                rec.put("ti_doc", rs.getString("ES_TIPO_DOC"));
+                rec.put("nu_doc", rs.getString("NU_DOC"));
+                rec.put("essalud", rs.getString("ES_INSCRIPCION_VIG_ESSALUD"));
+                rec.put("estudios", rs.getString("ES_ESTUDIO_NIV_SUPERIOR"));
+                rec.put("us_creacion", rs.getString("NO_USUARIO_CREACION"));
+                rec.put("creacion", rs.getString("FE_CREACION"));
+                rec.put("us_modif", rs.getString("no_usuario_modif"));
+                rec.put("modif", rs.getString("FE_MODIF"));
+                rec.put("ip_usuario", rs.getString("IP_USUARIO"));
                 lista.add(rec);
             }
             rs.close();

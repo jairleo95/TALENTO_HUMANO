@@ -79,6 +79,7 @@
                                     <thead>
                                         <tr>
                                             <th class="text-center semi-bold">Nro</th>
+                                            <th class="text-center semi-bold">Campo</th>
                                             <th class="text-center semi-bold">Data 1</th>
                                             <th class="text-center semi-bold">Data 2</th>
                                         </tr>
@@ -152,22 +153,130 @@
 
                 $(".fecha2").change(function () {
                     var tbody = $(".tbodys");
-                    var num = 1;
                     tbody.empty();
                     $.post("../../../RHistorial", "opc=Comparar_dato_Hijo&id=" + $(".idh").val() + "&fecha1=" + $(".fecha1").val() + "&fecha2=" + $(".fecha2").val(), function (objJson) {
                         var lista = objJson.lista;
                         var texto_html = "";
 
-                        for (var i = 0; i < lista.length; i++) {
-                            if (num == 2) {
-                                texto_html += "<td>" + lista[i].ap_p + "</td></tr>";
-                                num = 1;
-
-                            } else if (num == 1) {
-                                texto_html += "<tr><td>" + (i + 1) + "</td><td>" + lista[i].ap_p + "</td>";
-                                num++;
-                            }
+                        if (lista[0].ap_p != lista[1].ap_p) {
+                            texto_html += "<tr class='danger'>";
+                        } else {
+                            texto_html += "<tr>";
                         }
+                        texto_html += "<td>1</td><td>Apellido Paterno:</td><td>" + lista[0].ap_p + "</td>";
+                        texto_html += "<td>" + lista[1].ap_p + "</td></tr>";
+
+
+                        if (lista[0].ap_m != lista[1].ap_m) {
+                            texto_html += "<tr class='danger'>";
+                        } else {
+                            texto_html += "<tr>";
+                        }
+                        texto_html += "<td>2</td><td>Apellido Materno:</td><td>" + lista[0].ap_m + "</td>";
+                        texto_html += "<td>" + lista[1].ap_m + "</td></tr>";
+
+                        if (lista[0].no_hijo != lista[1].no_hijo) {
+                            texto_html += "<tr class='danger'>";
+                        } else {
+                            texto_html += "<tr>";
+                        }
+                        texto_html += "<td>3</td><td>Nombres:</td><td>" + lista[0].no_hijo + "</td>";
+                        texto_html += "<td>" + lista[1].no_hijo + "</td></tr>";
+
+                        if (lista[0].fe_nac != lista[1].fe_nac) {
+                            texto_html += "<tr class='danger'>";
+                        } else {
+                            texto_html += "<tr>";
+                        }
+                        texto_html += "<td>4</td><td>Fecha de Nacimiento:</td><td>" + lista[0].fe_nac + "</td>";
+                        texto_html += "<td>" + lista[1].fe_nac + "</td></tr>";
+
+                        if (lista[0].sexo != lista[1].sexo) {
+                            texto_html += "<tr class='danger'>";
+                        } else {
+                            texto_html += "<tr>";
+                        }
+                        texto_html += "<td>5</td><td>Sexo:</td><td>" + lista[0].sexo + "</td>";
+                        texto_html += "<td>" + lista[1].sexo + "</td></tr>";
+
+                        if (lista[0].ti_doc != lista[1].ti_doc) {
+                            texto_html += "<tr class='danger'>";
+                        } else {
+                            texto_html += "<tr>";
+                        }
+                        texto_html += "<td>6</td><td>Tipo de documento:</td><td>" + lista[0].ti_doc + "</td>";
+                        texto_html += "<td>" + lista[1].ti_doc + "</td></tr>";
+
+                        if (lista[0].nu_doc != lista[1].nu_doc) {
+                            texto_html += "<tr class='danger'>";
+                        } else {
+                            texto_html += "<tr>";
+                        }
+                        texto_html += "<td>7</td><td>Numero de Documento:</td><td>" + lista[0].nu_doc + "</td>";
+                        texto_html += "<td>" + lista[1].nu_doc + "</td></tr>";
+
+
+                        if (lista[0].essalud != lista[1].essalud) {
+                            texto_html += "<tr class='danger'>";
+                        } else {
+                            texto_html += "<tr>";
+                        }
+                        texto_html += "<td>8</td><td>Inscripcion Vigente en Essalud:</td><td>" + lista[0].essalud + "</td>";
+                        texto_html += "<td>" + lista[1].essalud + "</td></tr>";
+
+
+                        if (lista[0].estudios != lista[1].estudios) {
+                            texto_html += "<tr class='danger'>";
+                        } else {
+                            texto_html += "<tr>";
+                        }
+                        texto_html += "<td>9</td><td>Estudios en Nivel Superior:</td><td>" + lista[0].estudios + "</td>";
+                        texto_html += "<td>" + lista[1].estudios + "</td></tr>";
+
+
+                        if (lista[0].us_creacion != lista[1].us_creacion) {
+                            texto_html += "<tr class='danger'>";
+                        } else {
+                            texto_html += "<tr>";
+                        }
+                        texto_html += "<td>10</td><td>Usuario de Creacion:</td><td>" + lista[0].us_creacion + "</td>";
+                        texto_html += "<td>" + lista[1].us_creacion + "</td></tr>";
+
+                        if (lista[0].creacion != lista[1].creacion) {
+                            texto_html += "<tr class='danger'>";
+                        } else {
+                            texto_html += "<tr>";
+                        }
+                        texto_html += "<td>11</td><td>Fecha de Creacion:</td><td>" + lista[0].creacion + "</td>";
+                        texto_html += "<td>" + lista[1].creacion + "</td></tr>";
+
+                        if (lista[0].us_modif != lista[1].us_modif) {
+                            texto_html += "<tr class='danger'>";
+                        } else {
+                            texto_html += "<tr>";
+                        }
+                        texto_html += "<td>12</td><td>Usuario de Modificacion:</td><td>" + lista[0].us_modif + "</td>";
+                        texto_html += "<td>" + lista[1].us_modif + "</td></tr>";
+
+                        if (lista[0].modif != lista[1].modif) {
+                            texto_html += "<tr class='danger'>";
+                        } else {
+                            texto_html += "<tr>";
+                        }
+                        texto_html += "<td>13</td><td>Fecha de Modificacion:</td><td>" + lista[0].modif + "</td>";
+                        texto_html += "<td>" + lista[1].modif + "</td></tr>";
+
+                        if (lista[0].ip_usuario != lista[1].ip_usuario) {
+                            texto_html += "<tr class='danger'>";
+                        } else {
+                            texto_html += "<tr>";
+                        }
+                        texto_html += "<td>13</td><td>Fecha de Modificacion:</td><td>" + lista[0].ip_usuario + "</td>";
+                        texto_html += "<td>" + lista[1].ip_usuario + "</td></tr>";
+
+
+
+
                         tbody.append(texto_html);
                         texto_html = "";
                     });
