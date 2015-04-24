@@ -265,21 +265,22 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
     }
 
     @Override
-    public List<Map<String, ?>> Listar_hist_fecha(String FE_MODIF) {
-        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+    public List<Map<Integer, ?>> Listar_hist_fecha(String FE_MODIF, String idtra) {
+        List<Map<Integer, ?>> lista = new ArrayList<Map<Integer, ?>>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "SELECT *\n"
                     + "FROM RHTH_MODIF_TRABAJADOR\n"
-                    + "WHERE ID_TRABAJADOR='TRB-002529'\n"
+                    + "WHERE ID_TRABAJADOR='"+idtra+"'\n"
                     + "AND (TO_CHAR(FE_MODIF,'DD/MM/YYYY HH:MI:SS')\n"
                     + "=TO_CHAR(TO_DATE('" + FE_MODIF + "','DD/MM/YYYY HH:MI:SS'),'DD/MM/YYYY HH:MI:SS') )";
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
-                Map<String, Object> rec = new HashMap<String, Object>();
+                Map<Integer, Object> rec = new HashMap<Integer, Object>();
                 for (int i = 1; i < 73; i++) {
-                    rec.put("col" + i, rs.getString(i));
+                    rec.put( i, rs.getString(i));
                 }
+                
                 lista.add(rec);
             }
             rs.close();

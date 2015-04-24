@@ -106,7 +106,8 @@ public class CReporte_Historial extends HttpServlet {
             }
             if (opc.equals("list_hist_fecha")) {
                String fe_modif=request.getParameter("fe_modif");
-               List<Map<String, ?>> lista = re.Listar_hist_fecha(fe_modif);
+               String idtra= request.getParameter("idtra");
+               List<Map<Integer, ?>> lista = re.Listar_hist_fecha(fe_modif,idtra);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
