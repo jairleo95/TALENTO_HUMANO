@@ -206,22 +206,22 @@
                 function cargar_hist(fe_hist) {
                     $.post("../../../RHistorial?", "opc=list_hist_fecha&fe_modif=" + fe_hist + "&idtra=" + idtrab, function (objJson) {
                         var lista = objJson.lista;
+                        alert(lista.length);
                         if (lista.length < 1) {
                         } else {
-                            var cont = 1;
                             var text="";
-                            text += "<tr>";
-                            text += "<td>" + (cont) + "</td>";
-                            text += "<td>Id Trabajador</td>";
-                            text += "<td>" + lista[1].1 + "</td>";
+                            for(var i=0;i<lista.length;i++){
+                                text += "<tr>";
+                            text += "<td>" + (i+1) + "</td>";
+                            text += "<td>"+lista[i].col+"</td>";
+                            if(lista[i].det!=undefined){
+                               text += "<td>" + lista[i].det + "</td>"; 
+                            }else{
+                                text += "<td>Sin Datos</td>"; 
+                            }
+                            
                             text += "</tr>";
-                            text += "<tr>";
-                            cont++;
-                            text += "<tr>";
-                            text += "<td>" + (cont) + "</td>";
-                            text += "<td>Id Trabajador</td>";
-                            text += "<td>" + lista[1].2 + "</td>";
-                            text += "</tr>";
+                            }                                                        
                             $('.tbodys_hist').empty();
                             $('.tbodys_hist').append(text);
                         }
