@@ -96,7 +96,7 @@
                             <!-- end widget -->
 
                             <!-- Widget ID (each widget will need unique ID)-->
-                            <div  width="200%" class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false">
+                            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false">
                                 <!-- widget options:
                                 usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
@@ -110,7 +110,7 @@
                                 data-widget-sortable="false"
 
                                 -->
-                                <header width="200%">
+                                <header>
                                     <span class="widget-icon"><i class="fa fa-table"></i>  </span>
                                     <label style=" font-size:21px; font-family:cambria; color:white ;padding-left:5px;padding-top: 2px;">Reporte Filtro</label>
                                 </header>
@@ -119,7 +119,7 @@
                                 <div>
 
                                     <!-- widget edit box -->
-                                    <div class="jarviswidget-editbox" width="200%">
+                                    <div class="jarviswidget-editbox">
                                         <!-- This area used as dropdown edit box -->
 
                                     </div>
@@ -128,7 +128,7 @@
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">
                                         
-                                        <table id="datatable_tabletools" class="table table-striped table-bordered table-hover">
+                                        <table id="datatable_tabletools" class="table table-striped table-bordered table-hover table-responsive">
                                             <thead>
                                                 <tr>
                                                     <th data-hide="phone">#</th>
