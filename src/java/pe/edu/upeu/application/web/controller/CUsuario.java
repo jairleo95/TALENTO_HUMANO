@@ -41,7 +41,7 @@ public class CUsuario extends HttpServlet {
     InterfaceListaDAO li = new ListaDAO();
     InterfaceUbigeoDAO ub = new UbigeoDAO();
     InterfaceDireccionDAO dir = new DireccionDAO();
-    InterfaceTrabajadorDAO tr= new TrabajadorDAO();
+    InterfaceTrabajadorDAO tr = new TrabajadorDAO();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -59,6 +59,7 @@ public class CUsuario extends HttpServlet {
         HttpSession sesion_1 = request.getSession();
         PrintWriter out = response.getWriter();
         String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
+        String usuario = (String) sesion_1.getAttribute("USER");
         if ("Reg_Usuario".equals(opc)) {
             getServletContext().setAttribute("List_Usuario", usu.List_Usuario());
             getServletContext().setAttribute("Listar_Emp", emp.Listar_Emp());
@@ -182,6 +183,17 @@ public class CUsuario extends HttpServlet {
             usu.Mod_perfil(id_user_1, NO_USUARIO, CLA_NUEVA, TE_TRABAJADOR, CL_TRABAJADOR, CORREO_PERSONAL, id_dep, id_prov, DIR_DOM_A_D1_ID, DIR_DOM_A_D2, DIR_DOM_A_D3_ID, DIR_DOM_A_D4, DIR_DOM_A_D5_ID, DIR_DOM_A_D6, DIR_DOM_A_REF, DIR_DOM_A_DISTRITO_ID, ID_TRABAJADOR, id_user_1, tr.ip());
             getServletContext().setAttribute("Lista_Usuarios", usu.Val_Usuario(id_user_1));
             response.sendRedirect("Vista/Usuario/Perfil_Usuario.jsp");
+        }
+        if (opc.equals("Cambiar_clave")) {
+            String pwd_actual = request.getParameter("password1");
+            String pwd_nueva = request.getParameter("password2");
+            if (usu.Val_Usuario(usuario, pwd_actual).size() == 1) {
+                usu.Mod_Clave(id_user_1, pwd_nueva, id_user_1);
+                out.print("1");
+            } else {
+                out.print("0");
+            }
+
         }
 
     }

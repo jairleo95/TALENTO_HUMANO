@@ -641,7 +641,7 @@
 
 
                                                     <code class="ver"></code>
-                                                    <input type="hidden" name="IDREQUERIMIENTO"  id="combito"  value="">
+                                                    <input type="hidden" name="IDREQUERIMIENTO"  id="combito"  value="<%=dg.getId_requerimiento()%>">
                                                     <div id="div_2" class="contenido" style="display: none">
                                                         <table  class="table">
                                                             <tr><td class="td">Subvencion:</td><td><input type="text" name="SUBVENCION"  ></td></tr>   
@@ -1259,7 +1259,6 @@
             $(".remover" + num).click(function() {
                 $(".centro-costo_" + num).remove();
                 sumn_porcen_total();
-
             });
         }
         function sumn_porcen_total() {
@@ -1460,35 +1459,20 @@
         var ag = $('#fila-agregar .porcentaje_cc').size() + 1;
         var texto = "";
 
-        function agregar_centro_costo(opc, arr_cc) {
+        function agregar_centro_costo() {
 
-            if (opc == "1") {
-                texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + ag + ':</label>';
-                texto += '<div  class="row centro-costo_' + ag + '" >';
-                texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
-                texto += '<section class="col col-3"><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
-                texto += '<section class="col col-3"><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ag + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
-                texto += '<section class="col col-2"><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '"  min="0"   type="text" required="" value="' + arr_cc[3] + '" class="porcentaje_cc"/><button type="button" class="remover' + ag + '">Remover</button></label></section>';
-                texto += '</div>';
-
-                agregar.append(texto);
-                listar_cc(ag, opc, arr_cc);
-
-                sumn_porcen_total();
-            } else {
-                texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + ag + ':</label>';
-                texto += '<div  class="row centro-costo_' + ag + '" >';
-                texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
-                texto += '<section class="col col-3"><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
-                texto += '<section class="col col-3"><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ag + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
-                texto += '<section class="col col-2"><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '"  min="0"   type="text" required="" class="porcentaje_cc"/><button type="button" class="remover' + ag + '">Remover</button></label></section>';
-                texto += '</div>';
-                agregar.append(texto);
-                listar_cc(ag);
-                var c_porcentaje = $(".porcentaje_cc").size();
-                $(".porcentaje_cc").val(Math.round((100 / c_porcentaje) * 100) / 100);
-                sumn_porcen_total();
-            }
+            texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + ag + ':</label>';
+            texto += '<div  class="row centro-costo_' + ag + '" >';
+            texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
+            texto += '<section class="col col-3"><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
+            texto += '<section class="col col-3"><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ag + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
+            texto += '<section class="col col-2"><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '"  min="0"   type="text" required="" class="porcentaje_cc"/><button type="button" class="remover' + ag + '">Remover</button></label></section>';
+            texto += '</div>';
+            agregar.append(texto);
+            listar_cc(ag);
+            var c_porcentaje = $(".porcentaje_cc").size();
+            $(".porcentaje_cc").val(Math.round((100 / c_porcentaje) * 100) / 100);
+            sumn_porcen_total();
 
 
             texto = "";
@@ -1498,7 +1482,15 @@
                 sumn_porcen_total();
             });
         }
-
+        function Listar_Centro_costo() {
+            $.post("../../dgp?", "", function(objJson) {
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                
+            });
+        }
         function listar_tipo_horario() {
             $.post("../../formato_horario", "opc=Listar_Tip_Horario", function(objJson) {
 
