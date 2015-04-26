@@ -29,5 +29,6 @@ public interface InterfaceReporte_HistorialDAO {
     public List<Map<String, ?>> ip_usuario(String IP_USUARIO);
 
     public List<Map<String, ?>> list_fecha_modif(String Hijo);
+    public String [] decode(String t);
 
 }
