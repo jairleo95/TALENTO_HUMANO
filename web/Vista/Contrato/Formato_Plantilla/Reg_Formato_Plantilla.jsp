@@ -661,7 +661,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     <div class="jarviswidget well" id="wid-id-4" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-fullscreenbutton="false" data-widget-sortable="false">
                         <header>
                             <span class="widget-icon"> <i class="fa fa-pencil"></i> </span>
-                            <h2>Markdown API</h2>
+                            <h2>NOMENCLATURA</h2>
 
                         </header>
                         <div>
@@ -671,7 +671,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                             </div>
                             <div class="widget-body">
 
-                                <h3>Markdown API</h3>
+                                <h3>NOMENCLATURA</h3>
                                 <table class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
