@@ -346,8 +346,8 @@
 
                     <hr class="simple">
                     <ul id="myTab1" class="nav nav-tabs bordered">
-                        <% String edit  = request.getParameter("edit");
-                                if (List_Auto_mostrar.size() == 1 && aut != null) {
+                        <% String edit = request.getParameter("edit");
+                            if (List_Auto_mostrar.size() == 1 && aut != null) {
                                 for (int r = 0; r < List_Auto_mostrar.size(); r++) {
                                     Auto_Mostrar a = new Auto_Mostrar();
                                     a = (Auto_Mostrar) List_Auto_mostrar.get(r);
@@ -358,17 +358,17 @@
                         <%}
 
                             }%>
-                            <%if (iddep == null|| iddep.equals("DPT-0019") || idrol.trim().equals("ROL-0012") || idrol.trim().equals("ROL-0002") || idrol.trim().equals("ROL-0005")) {
+                        <%if (iddep == null || iddep.equals("DPT-0019") || idrol.trim().equals("ROL-0012") || idrol.trim().equals("ROL-0002") || idrol.trim().equals("ROL-0005")) {
                         %>
                         <li >
-                            <a href="../../contrato?idtr=<%=idtr%>&opc=Detalle_Contractual" target="myframe2"  ><i class="fa fa-file-text fa-gear"></i> Información Contractual </a>
+                            <a href="../../contrato?idtr=<%=idtr%>&opc=Detalle_Contractual" target="myframe2"  ><i class="fa fa-file-text fa-gear"></i> Informaci? Contractual </a>
                         </li>
                         <%}%>
                         <li >
-                            <a href="Datos_Generales.jsp?edit=<%=edit%>" target="myframe2"  ><i class="fa fa-male fa-gear"></i> Información General </a>
+                            <a href="Datos_Generales.jsp?edit=<%=edit%>" target="myframe2"  ><i class="fa fa-male fa-gear"></i> Informaci? General </a>
                         </li>
                         <li>
-                            <a href="Aspecto_Academico.jsp?edit=<%=edit%>" target="myframe2"><i class="fa fa-graduation-cap fa-gear"></i> Aspecto Académico</a>
+                            <a href="Aspecto_Academico.jsp?edit=<%=edit%>" target="myframe2"><i class="fa fa-graduation-cap fa-gear"></i> Aspecto Acad?ico</a>
                         </li>
                         <li >
                             <a href="../../trabajador?idtr=<%=idtr%>&opc=Listar_Asp_Social" target="myframe2"><i class="fa fa-home fa-gear"></i> Aspecto Social </a>
@@ -379,16 +379,19 @@
                         <li >
                             <a href="../../dgp?idtr=<%=idtr%>&opc=List_Dgp_Tr" target="myframe2"><i class="fa fa-file-o fa-gear"></i> Historial de Requerimientos </a>
                         </li>
-                        <li >
-                            <a href="../../trabajador?idtr=<%=idtr%>&opc=Documento_Trabajador" target="myframe2"><i class="fa fa-file fa-gear"></i> Documentación </a>
+                        <li>
+                            <a href="../../trabajador?idtr=<%=idtr%>&opc=Documento_Trabajador" target="myframe2"><i class="fa fa-file fa-gear"></i> Documentaci? </a>
                         </li>
 
                         <%if (idrol.trim().equals("ROL-0007") | ID_ROL.trim().equals("ROL-0001")) {
                         %>
                         <li >
-                            <a href="../../empleado?opc=Eva_Emp&idtr=<%=idtr%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Evaluación de Empleado</a>
+                            <a href="../../empleado?opc=Eva_Emp&idtr=<%=idtr%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Evaluaci? de Empleado</a>
                         </li>
                         <%}%>
+                        <li>
+                            <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2"><i class="fa fa-file fa-gear"></i> Cambiar Contrase? </a>
+                        </li>
 
                     </ul>
                     <div id="myTabContent1" class="tab-content padding-10">
@@ -657,8 +660,8 @@
 
                 $(".btn-autor").click(function (e) {
                     $.SmartMessageBox({
-                        title: "Alerta de Confirmación!",
-                        content: "¿Esta totalmente seguro de autorizar este requerimiento?",
+                        title: "Alerta de Confirmaci?!",
+                        content: "?sta totalmente seguro de autorizar este requerimiento?",
                         buttons: '[No][Si]'
                     }, function (ButtonPressed) {
                         if (ButtonPressed === "Si") {
@@ -673,8 +676,8 @@
                 });
                 $(".btn-rech").click(function (e) {
                     $.SmartMessageBox({
-                        title: "Alerta de Confirmación!",
-                        content: "¿Esta totalmente seguro de rechazar este requerimiento?",
+                        title: "Alerta de Confirmaci?!",
+                        content: "?sta totalmente seguro de rechazar este requerimiento?",
                         buttons: '[No][Si]'
                     }, function (ButtonPressed) {
                         if (ButtonPressed === "Si") {
@@ -762,7 +765,7 @@
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
             function closedthis() {
                 $.smallBox({
-                    title: "¡Ficha de trabajador registrada correctamente!",
+                    title: "?icha de trabajador registrada correctamente!",
                     content: "ya puede visualizar toda la informacion del trabajador...",
                     color: "#739E73",
                     iconSmall: "fa fa-check fa-2x fadeInRight animated",
@@ -772,7 +775,7 @@
 
             function closedthis2() {
                 $.smallBox({
-                    title: "¡Contrato Especial registrado con exito!",
+                    title: "?ontrato Especial registrado con exito!",
                     content: "ya puede visualizar el contrato en Detalle del Trabajador",
                     color: "#739E73",
                     iconSmall: "fa fa-check fa-2x fadeInRight animated",
@@ -1045,7 +1048,7 @@
                             addImage(e);
                             // alert("Archivo permitido");
                         } else {
-                            alert("Archivo no permitido, su tamaño debe ser menor a 500 KB");
+                            alert("Archivo no permitido, su tama? debe ser menor a 500 KB");
                             $(this).val('');
                         }
 

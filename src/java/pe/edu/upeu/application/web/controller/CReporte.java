@@ -94,6 +94,13 @@ public class CReporte extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
+            if (opc.equals("Reporte_Datos_Hijos")) {
+                 response.sendRedirect("Vista/Reportes/Reporte_Datos_Hijos.jsp");
+            }
+            
+            if (opc.equals("Reporte_Datos_cumpleaños")) {
+                 response.sendRedirect("/Vista/Reportes/Reporte_Cumpleaños.jsp");
+            }
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());

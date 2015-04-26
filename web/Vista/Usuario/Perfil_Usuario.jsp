@@ -93,9 +93,8 @@
 
                                         <div class="row">
                                             <%
-
-                                            V_Usuario  vu=  new V_Usuario();
-                                            vu=(V_Usuario)Lista_Usuarios.get(0);
+                                                V_Usuario vu = new V_Usuario();
+                                                vu = (V_Usuario) Lista_Usuarios.get(0);
                                             %>
                                             <div class="col-sm-12">
                                                 <div id="myCarousel" class="carousel fade profile-carousel">
@@ -135,83 +134,83 @@
                                                         <img src="../../img/avatars/sunny-big.png" alt="demo user">
                                                         <div class="padding-10">
                                                             <h3 class="font-md"><strong>1,543</strong>
-                                                              
-                                                                <small><a href="../../Usuario?opc=editar_Perfil&id=<%=(String)sesion_1.getAttribute("IDUSER")%>">Editar Perfil</a></small></h3>
+
+                                                                <small><a href="../../Usuario?opc=editar_Perfil&id=<%=(String) sesion_1.getAttribute("IDUSER")%>">Editar Perfil</a></small></h3>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <h1><%=vu.getNo_usuario()%> <span class="semi-bold">telf: <%=vu.getTe_trabajador()%></span></h1>
-                                                            <br>
-                        
+                                                        <br>
+
 
                                                         <ul class="list-unstyled">
-                                                              <li>
+                                                            <li>
                                                                 <p class="text-muted">
                                                                     <i class="fa fa-unlock" ></i>&nbsp;<input  type="password" value="<%=vu.getPw_usuario().trim()%>">
-                                                                    
+
                                                                 </p>
                                                             </li>
-                                                            
+
                                                             <li>
                                                                 <p class="text-muted">
                                                                     <i class="fa fa-phone"></i>&nbsp;&nbsp;(<span class="txt-color-darken"><%=vu.getTe_trabajador()%></span>)
                                                                 </p>
                                                             </li>
-                                                             <li >
+                                                            <li >
                                                                 <p class="text-muted" >
                                                                     <i class="fa fa-mobile-phone" ></i>&nbsp;&nbsp;<span class="txt-color-darken" ><%=vu.getCl_tra()%></span>
                                                                 </p>
                                                             </li>
                                                             <li>
-                                                                
+
                                                                 <p class="text-muted">
                                                                     <i class="fa fa-envelope"></i>&nbsp;&nbsp;<a href=""><%=vu.getDi_correo_personal()%></a>
                                                                 </p>
                                                             </li>
-                                                          
+
                                                             <li>
-                                                            
-                                                            <h3>Diereccion del Usuario</h3>
-                                                             <li>
+
+                                                                <h3>Diereccion del Usuario</h3>
+                                                            <li>
                                                                 <p class="text-muted">
-                                                                    <i class="fa  fa-th"></i>&nbsp;&nbsp;<span class="txt-color-darken"><%=vu.getLi_di_dom_a_d1()+vu.getDi_dom_a_d2()+vu.getDi_dom_a_d4()+vu.getDi_dom_a_d6()+vu.getDi_dom_a_ref()%></span>
+                                                                    <i class="fa  fa-th"></i>&nbsp;&nbsp;<span class="txt-color-darken"><%=vu.getLi_di_dom_a_d1() + vu.getDi_dom_a_d2() + vu.getDi_dom_a_d4() + vu.getDi_dom_a_d6() + vu.getDi_dom_a_ref()%></span>
                                                                 </p>
                                                             </li>
-                                                          
-                                                               <li>
+
+                                                            <li>
                                                                 <p class="text-muted">
                                                                     <i class="fa  fa-tasks"></i>&nbsp;&nbsp;<span class="txt-color-darken"><%=vu.getNo_departamento_ub()%></span>
                                                                 </p>
                                                             </li>
-                                                             <li>
+                                                            <li>
                                                                 <p class="text-muted">
                                                                     <i class="fa fa-tasks"></i>&nbsp;&nbsp;<span class="txt-color-darken"><%=vu.getNo_provincia_ub()%></span>
                                                                 </p>
                                                             </li>
-                                                             <li>
+                                                            <li>
                                                                 <p class="text-muted">
                                                                     <i class="fa fa-tasks"></i>&nbsp;&nbsp;<span class="txt-color-darken"><%=vu.getNo_distrito_ub()%></span>
                                                                 </p>
                                                             </li>
-                                                            
-                                                        
+
+
                                                         </ul>
-                                                                 
-             
-                                                 
-                                                      
+
+
+
+
                                                         <br>
                                                         <a href="javascript:void(0);" class="btn btn-default btn-xs"><i class="fa fa-envelope-o"></i> Send Message</a>
                                                         <br>
                                                         <br>
-                                                      <ul class="nav nav-tabs tabs-pull-right">
-                                                       <li class="pull-left">
-                                                            <span class="margin-top-10 display-inline"><i class="fa fa-rss text-success"></i> Activity</span>
-                                                        </li>
-                                                    </ul>
+                                                        <ul class="nav nav-tabs tabs-pull-right">
+                                                            <li class="pull-left">
+                                                                <span class="margin-top-10 display-inline"><i class="fa fa-rss text-success"></i> Activity</span>
+                                                            </li>
+                                                        </ul>
 
                                                     </div>
-                                                         
+
 
                                                 </div>
 
@@ -223,7 +222,7 @@
                                     </div>
 
                                 </div>
-                               
+
                             </div>
 
                         </div>
@@ -239,23 +238,23 @@
             <!-- END MAIN CONTENT -->
 
         </div>
-    
+
 
         <script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>
 
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
-                                        if (!window.jQuery) {
-                                            document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
-                                        }
+            if (!window.jQuery) {
+                document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+            }
         </script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script>
-                                        if (!window.jQuery.ui) {
-                                            document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                                        }
+            if (!window.jQuery.ui) {
+                document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+            }
         </script>
 
         <!-- IMPORTANT: APP CONFIG -->
@@ -318,60 +317,60 @@
 
         <script type="text/javascript">
 
-                                        // DO NOT REMOVE : GLOBAL FUNCTIONS!
+            // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-                                        $(document).ready(function () {
+            $(document).ready(function () {
 
-                                            pageSetUp();
+                pageSetUp();
 
-                                        })
+            })
 
         </script>
 
         <!-- Your GOOGLE ANALYTICS CODE Below -->
-        
+
         <div id="dialog_simple" title="Dialog Simple Title">
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-	</p>
-</div>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+        </div>
 
-<div id="dialog-message" title="Dialog Simple Title">
-	<p>
-		Esta seguro de modificar?
-	</p>
+        <div id="dialog-message" title="Dialog Simple Title">
+            <p>
+                Esta seguro de modificar?
+            </p>
 
-	<div class="hr hr-12 hr-double"></div>
+            <div class="hr hr-12 hr-double"></div>
 
-	
-		Currently using
-		<b>36% of your storage space</b>
-		<div class="progress progress-striped active no-margin">
-			<div class="progress-bar progress-primary" role="progressbar" style="width: 36%"></div>
-		</div>
-                <div id="addtab" title="<div class='widget-header'><h4><i class='fa fa-plus'></i> Add another tab</h4></div>">
 
-				<form>
+            Currently using
+            <b>36% of your storage space</b>
+            <div class="progress progress-striped active no-margin">
+                <div class="progress-bar progress-primary" role="progressbar" style="width: 36%"></div>
+            </div>
+            <div id="addtab" title="<div class='widget-header'><h4><i class='fa fa-plus'></i> Add another tab</h4></div>">
 
-					<fieldset>
-						<input name="authenticity_token" type="hidden">
-						<div class="form-group">
-							<label>Tab Title</label>
-							<input class="form-control" id="tab_title" value="" placeholder="Text field" type="text">
-						</div>
+                <form>
 
-						<div class="form-group">
-							<label>Content</label>
-							<textarea class="form-control" name="tab_content" id="tab_content" placeholder="Tab Content" rows="3"></textarea>
-						</div>
+                    <fieldset>
+                        <input name="authenticity_token" type="hidden">
+                        <div class="form-group">
+                            <label>Tab Title</label>
+                            <input class="form-control" id="tab_title" value="" placeholder="Text field" type="text">
+                        </div>
 
-					</fieldset>
+                        <div class="form-group">
+                            <label>Content</label>
+                            <textarea class="form-control" name="tab_content" id="tab_content" placeholder="Tab Content" rows="3"></textarea>
+                        </div>
 
-				</form>
+                    </fieldset>
 
-			</div>
-	
-</div><!-- #dialog-message -->
+                </form>
+
+            </div>
+
+        </div><!-- #dialog-message -->
         <script type="text/javascript">
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
@@ -385,159 +384,158 @@
                 var s = document.getElementsByTagName('script')[0];
                 s.parentNode.insertBefore(ga, s);
             })();
-          
-                       
+
+
         </script>
         <div class="well well-sm well-light">
-			<h3>Dialogue</h3>
-			<a href="#" id="dialog_link" class="btn btn-info"> Open Dialog </a>
-			&nbsp;
-			<a href="#" id="modal_link" class="btn bg-color-purple txt-color-white"> Open Modal Dialog </a>
-		</div>
-        
-        		<script type="text/javascript">
-		
-		// DO NOT REMOVE : GLOBAL FUNCTIONS!
-		
-		$(document).ready(function() {
-			
-			pageSetUp();
-			
-		
-			$.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
-				_title : function(title) {
-					if (!this.options.title) {
-						title.html("&#160;");
-					} else {
-						title.html(this.options.title);
-					}
-				}
-			}));
-		
-/*
-			* DIALOG SIMPLE
-			*/
-		
-			// Dialog click
-			$('#dialog_link').click(function() {
-				$('#dialog_simple').dialog('open');
-				return false;
-		
-			});
-		
-			$('#dialog_simple').dialog({
-				autoOpen : false,
-				width : 600,
-				resizable : false,
-				modal : true,
-				title : "<div class='widget-header'><h4><i class='fa fa-warning'></i> Empty the recycle bin?</h4></div>",
-				buttons : [{
-					html : "<i class='fa fa-trash-o'></i>&nbsp; Delete all items",
-					"class" : "btn btn-danger",
-					click : function() {
-						$(this).dialog("close");
-					}
-				}, {
-					html : "<i class='fa fa-times'></i>&nbsp; Cancel",
-					"class" : "btn btn-default",
-					click : function() {
-						$(this).dialog("close");
-					}
-				}]
-			});
-		
-			/*
-			* DIALOG HEADER ICON
-			*/
-		
-			// Modal Link
-			$('#modal_link').click(function() {
-				$('#dialog-message').dialog('open');
-				return false;
-			});
-		
-			$("#dialog-message").dialog({
-				autoOpen : false,
-				modal : true,
-				title : "<div class='widget-header'><h4><i class='icon-ok'></i> jQuery UI Dialog</h4></div>",
-				buttons : [{
-					html : "Cancel",
-					"class" : "btn btn-default",
-					click : function() {
-						$(this).dialog("close");
-					}
-				}, {
-					html : "<i class='fa fa-check'></i>&nbsp; OK",
-					"class" : "btn btn-primary",
-					click : function() {
-						$(this).dialog("close");
-					}
-				}]
-		
-			});
-		
-			/*
-			 * Remove focus from buttons
-			 */
-			$('.ui-dialog :button').blur();
-		
-			/*
-			 * Just Tabs
-			 */
-		
-			$('#tabs').tabs();
-		
-			/*
-			 *  Simple tabs adding and removing
-			 */
-		
-			$('#tabs2').tabs();
-		
-			// Dynamic tabs
-		
-			// modal dialog init: custom buttons and a "close" callback reseting the form inside
-			var dialog = $("#addtab").dialog({
-				autoOpen : false,
-				width : 600,
-				resizable : false,
-				modal : true,
-				buttons : [{
-					html : "<i class='fa fa-times'></i>&nbsp; Cancel",
-					"class" : "btn btn-default",
-					click : function() {
-						$(this).dialog("close");
-		
-					}
-				}, {
-		
-					html : "<i class='fa fa-plus'></i>&nbsp; Add",
-					"class" : "btn btn-danger",
-					click : function() {
-						addTab();
-						$(this).dialog("close");
-					}
-				}]
-			});
-		
-			
-		
-			
-			$("#add_tab").button().click(function() {
-				dialog.dialog("open");
-			});
-		
-			// close icon: removing the tab on click
-			$("#tabs2").on("click", 'span.delete-tab', function() {
-		
-				var panelId = $(this).closest("li").remove().attr("aria-controls");
-				$("#" + panelId).remove();
-				tabs.tabs("refresh");
-			});
-		
-		
-		});
+            <h3>Dialogue</h3>
+            <a href="#" id="dialog_link" class="btn btn-info"> Open Dialog </a>
+            &nbsp;
+            <a href="#" id="modal_link" class="btn bg-color-purple txt-color-white"> Open Modal Dialog </a>
+        </div>
 
-		</script>
+        <script type="text/javascript">
+
+// DO NOT REMOVE : GLOBAL FUNCTIONS!
+
+            $(document).ready(function () {
+
+                pageSetUp();
+
+
+                $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
+                    _title: function (title) {
+                        if (!this.options.title) {
+                            title.html("&#160;");
+                        } else {
+                            title.html(this.options.title);
+                        }
+                    }
+                }));
+
+                /*
+                 * DIALOG SIMPLE
+                 */
+
+                // Dialog click
+                $('#dialog_link').click(function () {
+                    $('#dialog_simple').dialog('open');
+                    return false;
+
+                });
+
+                $('#dialog_simple').dialog({
+                    autoOpen: false,
+                    width: 600,
+                    resizable: false,
+                    modal: true,
+                    title: "<div class='widget-header'><h4><i class='fa fa-warning'></i> Empty the recycle bin?</h4></div>",
+                    buttons: [{
+                            html: "<i class='fa fa-trash-o'></i>&nbsp; Delete all items",
+                            "class": "btn btn-danger",
+                            click: function () {
+                                $(this).dialog("close");
+                            }
+                        }, {
+                            html: "<i class='fa fa-times'></i>&nbsp; Cancel",
+                            "class": "btn btn-default",
+                            click: function () {
+                                $(this).dialog("close");
+                            }
+                        }]
+                });
+
+                /*
+                 * DIALOG HEADER ICON
+                 */
+
+                // Modal Link
+                $('#modal_link').click(function () {
+                    $('#dialog-message').dialog('open');
+                    return false;
+                });
+
+                $("#dialog-message").dialog({
+                    autoOpen: false,
+                    modal: true,
+                    title: "<div class='widget-header'><h4><i class='icon-ok'></i> jQuery UI Dialog</h4></div>",
+                    buttons: [{
+                            html: "Cancel",
+                            "class": "btn btn-default",
+                            click: function () {
+                                $(this).dialog("close");
+                            }
+                        }, {
+                            html: "<i class='fa fa-check'></i>&nbsp; OK",
+                            "class": "btn btn-primary",
+                            click: function () {
+                                $(this).dialog("close");
+                            }
+                        }]
+
+                });
+
+                /*
+                 * Remove focus from buttons
+                 */
+                $('.ui-dialog :button').blur();
+
+                /*
+                 * Just Tabs
+                 */
+
+                $('#tabs').tabs();
+
+                /*
+                 *  Simple tabs adding and removing
+                 */
+
+                $('#tabs2').tabs();
+
+                // Dynamic tabs
+
+                // modal dialog init: custom buttons and a "close" callback reseting the form inside
+                var dialog = $("#addtab").dialog({
+                    autoOpen: false,
+                    width: 600,
+                    resizable: false,
+                    modal: true,
+                    buttons: [{
+                            html: "<i class='fa fa-times'></i>&nbsp; Cancel",
+                            "class": "btn btn-default",
+                            click: function () {
+                                $(this).dialog("close");
+
+                            }
+                        }, {
+                            html: "<i class='fa fa-plus'></i>&nbsp; Add",
+                            "class": "btn btn-danger",
+                            click: function () {
+                                addTab();
+                                $(this).dialog("close");
+                            }
+                        }]
+                });
+
+
+
+
+                $("#add_tab").button().click(function () {
+                    dialog.dialog("open");
+                });
+
+                // close icon: removing the tab on click
+                $("#tabs2").on("click", 'span.delete-tab', function () {
+
+                    var panelId = $(this).closest("li").remove().attr("aria-controls");
+                    $("#" + panelId).remove();
+                    tabs.tabs("refresh");
+                });
+
+
+            });
+
+        </script>
 
     </body>
 

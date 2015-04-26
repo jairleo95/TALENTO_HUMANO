@@ -144,6 +144,8 @@
                     var select1 = $(".fecha1");
                     var select2 = $(".fecha2");
                     var lista = objJson.lista;
+                    select1.append("<option value=''>Cargando...</option>");
+                    select2.append("<option value=''>Cargando...</option>");
                     for (var i = 0; i < lista.length; i++) {
                         select1.append("<option value='" + lista[i].fecha + "'>" + lista[i].fecha + "</option>");
                         select2.append("<option value='" + lista[i].fecha + "'>" + lista[i].fecha + "</option>");
@@ -154,9 +156,10 @@
                 $(".fecha2").change(function () {
                     var tbody = $(".tbodys");
                     tbody.empty();
+                    var texto_html = "";
                     $.post("../../../RHistorial", "opc=Comparar_dato_Hijo&id=" + $(".idh").val() + "&fecha1=" + $(".fecha1").val() + "&fecha2=" + $(".fecha2").val(), function (objJson) {
                         var lista = objJson.lista;
-                        var texto_html = "";
+
 
                         if (lista[0].ap_p != lista[1].ap_p) {
                             texto_html += "<tr class='danger'>";
@@ -266,20 +269,46 @@
                         texto_html += "<td>13</td><td>Fecha de Modificacion:</td><td>" + lista[0].modif + "</td>";
                         texto_html += "<td>" + lista[1].modif + "</td></tr>";
 
-                        if (lista[0].ip_usuario != lista[1].ip_usuario) {
+                        var detalle_ip1 = lista[0].ip_usuario.split("**");
+                        var ip1 = detalle_ip1[0];
+                        var no_usuario1 = detalle_ip1[1];
+                        var mac1 = detalle_ip1[2];
+
+                        var detalle_ip2 = lista[1].ip_usuario.split("**");
+                        var ip2 = detalle_ip2[0];
+                        var no_usuario2 = detalle_ip2[1];
+                        var mac2 = detalle_ip2[2];
+
+
+                        if (ip1 != ip2) {
                             texto_html += "<tr class='danger'>";
                         } else {
                             texto_html += "<tr>";
                         }
-                        texto_html += "<td>13</td><td>Fecha de Modificacion:</td><td>" + lista[0].ip_usuario + "</td>";
-                        texto_html += "<td>" + lista[1].ip_usuario + "</td></tr>";
+                        texto_html += "<td>15</td><td>Direccion Ip:</td><td>" + ip1 + "</td>";
+                        texto_html += "<td>" + ip2 + "</td></tr>";
 
+                        if (no_usuario1 != no_usuario2) {
+                            texto_html += "<tr class='danger'>";
+                        } else {
+                            texto_html += "<tr>";
+                        }
+                        texto_html += "<td>16</td><td>Nombre de Usuario:</td><td>" + no_usuario1 + "</td>";
+                        texto_html += "<td>" + no_usuario2 + "</td></tr>";
 
+                        if (mac1 != mac2) {
+                            texto_html += "<tr class='danger'>";
+                        } else {
+                            texto_html += "<tr>";
+                        }
+                        texto_html += "<td>17</td><td>Direccion Fisica:</td><td>" + mac1 + "</td>";
+                        texto_html += "<td>" + mac2 + "</td></tr>";
 
 
                         tbody.append(texto_html);
-                        texto_html = "";
+
                     });
+                    texto_html = "";
                 });
 
 
