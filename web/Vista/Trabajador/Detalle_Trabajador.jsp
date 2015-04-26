@@ -170,6 +170,7 @@
             String idp = (String) sesion.getAttribute("p");
             String idrol = (String) sesion.getAttribute("IDROL");
             String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
+            String idtr_session = (String) sesion.getAttribute("IDTR");
             String iddgp = request.getParameter("dgp");
             String cod = request.getParameter("c");
             String iddrp = request.getParameter("drp");
@@ -389,10 +390,10 @@
                             <a href="../../empleado?opc=Eva_Emp&idtr=<%=idtr%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Evaluaci? de Empleado</a>
                         </li>
                         <%}%>
-                        <%if (idrol.trim().equals("ROL-0013")) {
+                        <%if (idtr.equals(idtr_session)) {
                         %>
                         <li>
-                            <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2"><i class="fa fa-file fa-gear"></i> Cambiar Contraseña </a>
+                            <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2"><i class="fa fa-lock"></i> Cambiar Contraseña </a>
                         </li>
                         <%}%>
 

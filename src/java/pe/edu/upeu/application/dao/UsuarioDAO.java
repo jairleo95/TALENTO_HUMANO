@@ -90,6 +90,7 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
             while (rs.next()) {
                 V_Usuario us = new V_Usuario();
                 us.setId_usuario(rs.getString("id_usuario"));
+                us.setId_trabajador(rs.getString("id_trabajador"));
                 us.setId_rol(rs.getString("id_rol"));
                 us.setId_empleado(rs.getString("id_empleado"));
                 us.setNo_usuario(rs.getString("no_usuario"));
