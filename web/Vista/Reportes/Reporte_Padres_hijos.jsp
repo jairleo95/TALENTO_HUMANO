@@ -96,7 +96,7 @@
                             <!-- end widget -->
 
                             <!-- Widget ID (each widget will need unique ID)-->
-                            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false">
+                            <div  width="200%" class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false">
                                 <!-- widget options:
                                 usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
@@ -110,7 +110,7 @@
                                 data-widget-sortable="false"
 
                                 -->
-                                <header>
+                                <header width="200%">
                                     <span class="widget-icon"><i class="fa fa-table"></i>  </span>
                                     <label style=" font-size:21px; font-family:cambria; color:white ;padding-left:5px;padding-top: 2px;">Reporte Filtro</label>
                                 </header>
@@ -119,7 +119,7 @@
                                 <div>
 
                                     <!-- widget edit box -->
-                                    <div class="jarviswidget-editbox">
+                                    <div class="jarviswidget-editbox" width="200%">
                                         <!-- This area used as dropdown edit box -->
 
                                     </div>
@@ -127,8 +127,8 @@
 
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">
-                                        
-                                        <table id="datatable_tabletools" class="table table-striped table-bordered table-hover table-responsive">
+
+                                        <table id="datatable_tabletools" class="table table-striped table-bordered table-hover">
                                             <thead>
                                                 <tr>
                                                     <th data-hide="phone">#</th>
@@ -137,33 +137,15 @@
                                                     <th data-hide="ARE">Area</th>
                                                     <th data-hide="secc">Sección</th>
                                                     <th data-hide="pues">Puesto</th>
-                                                    <th data-class="fec_nac">Fecha Nacimiento</th>
-                                                    <th data-class="ed">Edad</th>
-                                                    <th data-class="nom">Apellidos y Nombres</th>
-                                                    <th data-class="tip">Fecha de inicio</th>
-                                                    <th data-class="tip">Fecha de Cese</th>
-                                                    <th data-class="tip">Sexo</th>
-                                                    <th data-class="tip">Fecha de nacimiento</th>
-                                                    <th data-class="tip">Nacionalidad</th>
-                                                    <th data-class="tip">Esatodo Civil</th>
-                                                    <th data-class="tip">Grupo sanguíneo</th>
-                                                    <th data-class="tip">Sistema Pencionario</th>
-                                                    <th data-class="tip">AFP</th>
-                                                    <th data-class="tip">Situacion Educativa</th>
-                                                    <th data-class="tip">Estudio en Instituto</th>
-                                                    <th data-class="tip">Regimen</th>
-                                                    <th data-class="tip">Tipo de Instituto</th>
-                                                    <th data-class="tip">Institución</th>
-                                                    <th data-class="tip">Carrera</th>
-                                                    <th data-class="tip">Año de Egreso</th>
-                                                    <th data-class="tip">Tipo de Hora de Pago</th>
-                                                    <th data-class="tip">Domicilio Actual</th>
-                                                    <th data-class="tip">Distrito</th>
-                                                    <th data-class="tip">Provincia</th>
-                                                    <th data-class="tip">Domicilio Actual</th>
-                                                    <th data-class="tip">Departamento</th>
-                                                    <th data-class="tip">Religion</th>
-                                                    <th data-class="tip">Iglesia</th>
+                                                    <th data-hide="Genero">Tipo Documento</th>
+                                                    <th data-hide="Genero">Numero Documento</th>                                                    
+                                                    <th data-class="nom">Apellidos y Nombres del Padre</th>
+                                                    <th data-hide="Genero">Fecha Cese</th>                                                    
+                                                    <th data-class="nom">Condicion Laboral</th>
+                                                    <th data-hide="dni">Dni del Hijo</th>
+                                                    <th data-class="fec_nac">Fecha Nacimiento del Hijo</th>
+                                                    <th data-class="ed">Edad del Hijo</th>
+                                                    <th data-hide="Genero">Genero del Hijo</th>
                                                 </tr>
                                             </thead>
 
@@ -171,7 +153,6 @@
                                                 <tr>
                                                     <td>1</td>
                                                     <td>Jennifer</td>
-                                                    <td>1-342-463-8341</td>
                                                     <td>Et Rutrum Non Associates</td>
                                                     <td>35728</td>
                                                     <td>Fogo</td>
@@ -182,28 +163,11 @@
                                                     <td>Fogo</td>
                                                     <td>Fogo</td>
                                                     <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
+                                                    <td>Fogo</td>                                                   
                                                     <td>Fogo</td>
                                                     <td>03/04/14</td>
                                                 </tr>
-                                               
+
 
                                             </tbody>
 
