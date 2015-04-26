@@ -243,28 +243,32 @@
                                         for (int e = 0; e < id_empleadox_ide.size(); e++) {
                                             Empleado emp = new Empleado();
                                             emp = (Empleado) id_empleadox_ide.get(e);
-                                            if (emp.getCo_aps() != null) {
-                                                int val_aps = Integer.parseInt(emp.getCo_aps());
-                                                int val_hue = Integer.parseInt(emp.getCo_huella_digital());
-                                                
 
                                     %>
                                     <td>
-                                        <table >
-                                            <%if (val_aps > 0) {%>
+                                        <table class="info-det" style="margin-left:80%;" >
+                                            <%if (emp.getCo_aps() != null) {
+                                                 int val_aps = Integer.parseInt(emp.getCo_aps());
+                                                 if (val_aps > 0) {%>
+
                                             <tr><td class="td" >Código APS:</td><td class="td1" ><%=emp.getCo_aps()%></td></tr>
-                                            <%}
-                                            if(val_hue > 0){%>
+                                                <%}
+                                                    }
+                                                    if (emp.getCo_huella_digital() != null) {
+
+                                                        int val_hue = Integer.parseInt(emp.getCo_huella_digital());
+                                                        if (val_hue > 0) {%>
                                             <tr><td class="td" >Código Huella</td><td class="td1" ><%=emp.getCo_huella_digital()%></td></tr>
-                                            <%}%>
+                                                <%}%>
+                                                <%}%>
                                         </table>
                                     </td>
                                     <%
-                                        }
+
                                         String val_aps = emp.getCo_aps();
                                         if (val_aps == null && ID_ROL.trim().equals("ROL-0001")) {%>
                                     <td>
-                                        <table class="info-det">
+                                        <table class="info-det" style="margin-left:50%;">
                                             <input type="hidden" name="iddetalle_dgp" value="<%=iddgp%>">
                                             <input type="hidden" name="puesto_id" value="<%=idp%>">
                                             <input type="hidden" name="cod" value="<%=cod%>">
@@ -279,9 +283,9 @@
                                     </td>
                                     <%}
                                         String val_hue = emp.getCo_huella_digital();
-                                   if(val_hue == null && ID_ROL.trim().equals("ROL-0001")) {%>
+                                        if (val_hue == null && ID_ROL.trim().equals("ROL-0001")) {%>
                                     <td>
-                                        <table class="info-det">
+                                        <table class="info-det" style="margin-left:50%;">
                                             <input type="hidden" name="iddetalle_dgp" value="<%=iddgp%>">
                                             <input type="hidden" name="puesto_id" value="<%=idp%>">
                                             <input type="hidden" name="cod" value="<%=cod%>">
@@ -295,8 +299,8 @@
                                         </table>
                                     </td>
                                     <%}
-                                            
-                                        %>
+
+                                    %>
                                     <%}%>
                                 </table>
                             </form>
