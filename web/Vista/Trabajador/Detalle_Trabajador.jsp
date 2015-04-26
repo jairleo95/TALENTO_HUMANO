@@ -380,7 +380,7 @@
                             <a href="../../dgp?idtr=<%=idtr%>&opc=List_Dgp_Tr" target="myframe2"><i class="fa fa-file-o fa-gear"></i> Historial de Requerimientos </a>
                         </li>
                         <li>
-                            <a href="../../trabajador?idtr=<%=idtr%>&opc=Documento_Trabajador" target="myframe2"><i class="fa fa-file fa-gear"></i> Documentaci? </a>
+                            <a href="../../trabajador?idtr=<%=idtr%>&opc=Documento_Trabajador" target="myframe2"><i class="fa fa-file fa-gear"></i> Documentación </a>
                         </li>
 
                         <%if (idrol.trim().equals("ROL-0007") | ID_ROL.trim().equals("ROL-0001")) {
@@ -390,7 +390,7 @@
                         </li>
                         <%}%>
                         <li>
-                            <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2"><i class="fa fa-file fa-gear"></i> Cambiar Contrase? </a>
+                            <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2"><i class="fa fa-file fa-gear"></i> Cambiar Contraseña </a>
                         </li>
 
                     </ul>
