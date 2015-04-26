@@ -2,29 +2,51 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-        <link rel="shortcut icon" type="image/ico" href="http://www.sprymedia.co.uk/media/images/favicon.ico">
-        <style type="text/css" title="currentStyle">
-            @import "../../js/DataTables-1.10.4/media/css/demo_page.css";
-            @import "../../js/DataTables-1.10.4/media/css/demo_table.css";
-            @import "../../js/DataTables-1.10.4/media/css/jquery-ui.css";
-            @import "../../js/DataTables-1.10.4/media/css/jquery-ui-1.7.2.custom.css";
-        </style>
-        <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
-        <script src="../../js/DataTables-1.10.4/media/js/jquery-1.4.4.min.js" type="text/javascript"></script>
-        <script src="../../js/DataTables-1.10.4/media/js/jquery.dataTables.js" type="text/javascript"></script>
-        <link rel="stylesheet" type="text/css" href="../../js/DataTables-1.10.4/media/css/site.css?_=c3204084d1e8a5f5906d625e768e171a">
-        <link rel="stylesheet" type="text/css" href="../../js/DataTables-1.10.4/extensions/TableTools/css/dataTables.tableTools.css">
-        <script type="text/javascript" language="javascript" src="../../js/DataTables-1.10.4/extensions/TableTools/js/dataTables.tableTools.js"></script>
-        <title>Reporte de Cumpleaños</title>
-        <script type="text/javascript" charset="utf-8">
-            $(document).ready(function () {
-                //          alert();
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 
-            });
-        </script>
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
+
+        <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
+
+        <!-- SmartAdmin RTL Support is under construction
+                 This RTL CSS will be released in version 1.5
+        <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css"> -->
+
+        <!-- We recommend you use "your_style.css" to override SmartAdmin
+             specific styles this will also ensure you retrain your customization with each SmartAdmin update.
+        <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
+
+        <!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/demo.min.css">
+
+        <!-- FAVICONS -->
+        <link rel="shortcut icon" href="../../img/favicon/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="../../img/favicon/favicon.ico" type="image/x-icon">
+
+        <!-- GOOGLE FONT -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+
+        <!-- Specifying a Webpage Icon for Web Clip 
+                 Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
+        <link rel="apple-touch-icon" href="../../img/splash/sptouch-icon-iphone.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../img/splash/touch-icon-ipad.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../img/splash/touch-icon-iphone-retina.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../img/splash/touch-icon-ipad-retina.png">
+
+        <!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+        <!-- Startup image for web apps -->
+        <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+        <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+        <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+        <title>Reporte de Cumpleaños</title>
     </head>
-    <body> 
+    <body>  
         <form class="form-inline validarform" id="frm_filtro2" method="post" action="../../Imprimir" name="formulario" onclick="return marcado();">
             <div class="spacing">
                 <center><h1 class="spacing" style="font-weight: bold;">Cumpleaños Del Trabajador</h1></center> 
@@ -51,7 +73,7 @@
                                 <option value="09">Setiembre</option>
                                 <option value="10">Octubre</option>
                                 <option value="11">Noviembre</option>
-                                <option value="12">Dicienbre</option>
+                                <option value="12">Diciembre</option>
                                 <option value="13">Todos</option>
                             </select>
                         </div>
@@ -94,7 +116,7 @@
                             <!-- widget content -->
                             <div class="widget-body no-padding">
 
-                                <table  id="datatable_tabletools">
+                                <table id="datatable_tabletools" class="table table-striped table-bordered table-hover" width="100%">
                                     <thead>
                                         <tr>
                                             <th data-hide="phone">#</th>
@@ -203,6 +225,12 @@
         <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
         <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
+        <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
+        <script>
+            $(document).ready(function(){
+               TableTools.DEFAULTS.aButtons = ["copy","xmls","print"] 
+            });
+        </script>
     </body>
     <script>
             function listar_opciones(opc, id) {
@@ -355,13 +383,6 @@
                                 alert("Ingresa mes");
                             } else {
                                 listar_cumpleaños();
-                                TableTools.DEFAULTS.aButtons = ["copy", "xls", "print"];
-                                $('#datatable_tabletools').dataTable({
-                                    "dom": 'T<"clear">lfrtip',
-                                    "tableTools": {
-                                        "sSwfPath": "../../js/DataTables-1.10.4/media/js/copy_csv_xls.swf"
-                                    }
-                                });
                             }
                         }
                 );

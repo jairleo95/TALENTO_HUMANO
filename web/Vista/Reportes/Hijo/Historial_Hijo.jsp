@@ -202,7 +202,7 @@
                                     t += "<td>Agregado</td>";
                                 }
                                 t += "<td>" + lista[i].fecha + "</td>";
-                                t += "<td><a href='' class='btn btn-primary btn-labeled'>Ver Detalle <i class='fa fa-arrow-circle-right' ></i></a></td></tr> ";
+                                t += "<td><a href='../../../RHistorial?opc=Comparar_hijo&idtr=" + lista[i].idtr + "&idh=" + lista[i].id + "' class='btn btn-primary btn-labeled'>Ver Detalle <i class='fa fa-arrow-circle-right' ></i></a></td></tr> ";
                             }
                             crear_t();
                             $('.tbodys').append(t);

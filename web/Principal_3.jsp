@@ -16,9 +16,9 @@
 <jsp:useBean id="listarURL" scope="application" class="java.util.ArrayList"/>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en-us">
+<html>
     <head>
-        <meta charset="utf-8">
+         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
         <title> TALENTO HUMANO </title>

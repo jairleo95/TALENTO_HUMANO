@@ -980,7 +980,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
 		for (int i = 0; i < mac.length; i++) {
 			sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));		
 		}
-                x=ip.getHostAddress()+"**"+ip.getCanonicalHostName()+"**"+sb.toString();
+                x=ip.getHostAddress()+"*"+ip.getCanonicalHostName()+"*"+sb.toString();
  
 	} catch (UnknownHostException e) {
 		e.printStackTrace();

@@ -106,17 +106,16 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
         List<Map<String, ?>> ip = new ArrayList<>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT ID_TRABAJADOR,TO_CHAR( FE_MODIF,'Day,DD \"de\" MONTH \"del\" YYYY') FE_MODIFi,TO_CHAR(FE_MODIF,'HH:MM:SS AM')HORA_MODIF, US_MODIF, IP_USUARIO\n"
+            String sql = "SELECT ID_TRABAJADOR,TO_CHAR(FE_MODIF,'DD/MM/YYYY HH:MI:SS')FE_MODIFI, US_MODIF, IP_USUARIO\n"
                     + "FROM RHTH_MODIF_TRABAJADOR\n"
                     + "WHERE ID_TRABAJADOR='" + ID_TRABAJADOR + "' AND FE_MODIF IS NOT NULL\n"
                     + "ORDER BY FE_MODIFi desc";
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<>();
-                rec.put("id_tra", rs.getString("ID_TRABAJADOR"));
-                rec.put("fe_mod", rs.getString("FE_MODIFi"));
-                rec.put("hora_mod", rs.getString("HORA_MODIF"));
-                rec.put("us_mod", rs.getString("US_MODIF"));
+                rec.put("id_tra", rs.getString(1));
+                rec.put("fe_mod", rs.getString(2));
+                rec.put("us_mod", rs.getString(3));
                 /*ip = ip_usuario(rs.getString("ID_TRABAJADOR"));
                  rec.put("ip_user", ip.get(0).get("IP0"));
                  rec.put("host_name", ip.get(0).get("IP1"));
@@ -263,5 +262,151 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
             }
         }
         return lista;
+    }
+
+    @Override
+    public List<Map<String, ?>> Listar_hist_fecha(String FE_MODIF, String idtra) {
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "SELECT *\n"
+                    + "FROM (\n"
+                    + "      SELECT ROWNUM R,\n"
+                    + "        T.ID_TRABAJADOR, T.AP_PATERNO, T.AP_MATERNO, T.NO_TRABAJADOR, T.TI_DOC, T.NU_DOC, T.\n"
+                    + "        ES_CIVIL, TO_CHAR(T.FE_NAC,'DD/MM/YYYY HH:MI:SS')AS FE_NAC , T.ID_NACIONALIDAD,\n"
+                    + "        T.ID_DEPARTAMENTO, T.ID_PROVINCIA, T.ID_DISTRITO, T.TE_TRABAJADOR,\n"
+                    + "        T.CL_TRA, T.DI_CORREO_PERSONAL, T.DI_CORREO_INST, T.CO_SISTEMA_PENSIONARIO,\n"
+                    + "        T.ID_SITUACION_EDUCATIVA, T.LI_REG_INST_EDUCATIVA, T.ES_INST_EDUC_PERU,\n"
+                    + "        T.ID_UNIVERSIDAD_CARRERA, T.DE_ANNO_EGRESO, T.CM_OTROS_ESTUDIOS,\n"
+                    + "        T.ES_SEXO, T.LI_GRUPO_SANGUINEO, T.DE_REFERENCIA, T.LI_RELIGION, T.NO_IGLESIA, \n"
+                    + "        T.DE_CARGO, T.LI_AUTORIDAD, T.NO_AP_AUTORIDAD, T.CL_AUTORIDAD, T.ID_NO_AFP, \n"
+                    + "        T.ES_AFILIADO_ESSALUD, T.LI_TIPO_TRABAJADOR, T.CA_TIPO_HORA_PAGO_REFEERENCIAL, \n"
+                    + "        T.ES_FACTOR_RH, T.LI_DI_DOM_A_D1, T.DI_DOM_A_D2, T.LI_DI_DOM_A_D3, T.DI_DOM_A_D4, \n"
+                    + "        T.LI_DI_DOM_A_D5, T.DI_DOM_A_D6, T.DI_DOM_A_REF, T.ID_DI_DOM_A_DISTRITO,\n"
+                    + "        T.LI_DI_DOM_LEG_D1, T.DI_DOM_LEG_D2, T.LI_DI_DOM_LEG_D3, T.DI_DOM_LEG_D4, \n"
+                    + "        T.LI_DI_DOM_LEG_D5, T.DI_DOM_LEG_D6, T.ID_DI_DOM_LEG_DISTRITO, T.CA_ING_QTA_CAT_EMPRESA, \n"
+                    + "        T.CA_ING_QTA_CAT_RUC, T.CA_ING_QTA_CAT_OTRAS_EMPRESAS, T.CM_OBSERVACIONES,\n"
+                    + "        T.US_CREACION, TO_CHAR(T.FE_CREACION,'DD/MM/YYYY HH:MI:SS')AS FE_CREACION,\n"
+                    + "        T.US_MODIF, TO_CHAR(T.FE_MODIF,'DD/MM/YYYY HH:MI:SS')AS FE_MODIF, T.IP_USUARIO, T.AP_NOMBRES_PADRE, \n"
+                    + "        T.AP_NOMBRES_MADRE, T.ES_TRABAJA_UPEU_C, T.AP_NOMBRES_C, TO_CHAR(T.FE_NAC_C,'DD/MM/YYYY HH:MI:SS')AS FE_NAC_C,\n"
+                    + "        T.ID_TIPO_DOC_C, T.NU_DOC_C, T.LI_INSCRIPCION_VIG_ESSALUD_C, T.ID_CONYUGUE, T.CO_UNIVERSITARIO, T.SEMESTRE\n"
+                    + "      FROM RHTH_MODIF_TRABAJADOR T\n"
+                    + "      WHERE T.ID_TRABAJADOR='" + idtra + "'\n"
+                    + "      AND (TO_CHAR(FE_MODIF,'DD/MM/YYYY HH:MI:SS')\n"
+                    + "      =TO_CHAR(TO_DATE('" + FE_MODIF + "','DD/MM/YYYY HH:MI:SS'),'DD/MM/YYYY HH:MI:SS') )\n"
+                    + "      )\n"
+                    + "UNPIVOT INCLUDE NULLS(\n"
+                    + "        DETALLE FOR COLUMNA IN\n"
+                    + "        (ID_TRABAJADOR,AP_PATERNO,AP_MATERNO,NO_TRABAJADOR,TI_DOC,NU_DOC,ES_CIVIL,FE_NAC,ID_NACIONALIDAD,\n"
+                    + "        ID_DEPARTAMENTO,ID_PROVINCIA,ID_DISTRITO,TE_TRABAJADOR,CL_TRA,DI_CORREO_PERSONAL,DI_CORREO_INST,\n"
+                    + "        CO_SISTEMA_PENSIONARIO,ID_SITUACION_EDUCATIVA,LI_REG_INST_EDUCATIVA,ES_INST_EDUC_PERU,\n"
+                    + "        ID_UNIVERSIDAD_CARRERA,DE_ANNO_EGRESO,CM_OTROS_ESTUDIOS,ES_SEXO,LI_GRUPO_SANGUINEO,DE_REFERENCIA,\n"
+                    + "        lI_RELIGION,NO_IGLESIA,DE_CARGO,LI_AUTORIDAD,NO_AP_AUTORIDAD,CL_AUTORIDAD,ID_NO_AFP,ES_AFILIADO_ESSALUD,\n"
+                    + "        LI_TIPO_TRABAJADOR,CA_TIPO_HORA_PAGO_REFEERENCIAL,ES_FACTOR_RH,LI_DI_DOM_A_D1,DI_DOM_A_D2,\n"
+                    + "        LI_DI_DOM_A_D3,DI_DOM_A_D4,LI_DI_DOM_A_D5,DI_DOM_A_D6,DI_DOM_A_REF,ID_DI_DOM_A_DISTRITO,\n"
+                    + "        LI_DI_DOM_LEG_D1,DI_DOM_LEG_D2,LI_DI_DOM_LEG_D3,DI_DOM_LEG_D4,LI_DI_DOM_LEG_D5,DI_DOM_LEG_D6,\n"
+                    + "        ID_DI_DOM_LEG_DISTRITO,CA_ING_QTA_CAT_EMPRESA,CA_ING_QTA_CAT_RUC,CA_ING_QTA_CAT_OTRAS_EMPRESAS,\n"
+                    + "        CM_OBSERVACIONES,US_CREACION,FE_CREACION,US_MODIF,FE_MODIF,IP_USUARIO,AP_NOMBRES_PADRE,\n"
+                    + "        AP_NOMBRES_MADRE,ES_TRABAJA_UPEU_C,AP_NOMBRES_C,FE_NAC_C,ID_TIPO_DOC_C,NU_DOC_C,\n"
+                    + "        LI_INSCRIPCION_VIG_ESSALUD_C,ID_CONYUGUE,CO_UNIVERSITARIO,SEMESTRE)\n"
+                    + "        )";
+            ResultSet rs = this.cnn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("col", rs.getString("columna"));
+                rec.put("det", rs.getString("detalle"));
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+            }
+        }
+        return lista;
+    }
+
+    @Override
+    public List<Map<String, ?>> Listar_dat_actual(String ID_TRABAJADOR) {
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "SELECT *\n"
+                    + "FROM (\n"
+                    + "      SELECT ROWNUM R,\n"
+                    + "        T.ID_TRABAJADOR, T.AP_PATERNO, T.AP_MATERNO, T.NO_TRABAJADOR, T.TI_DOC, T.NU_DOC, T.\n"
+                    + "        ES_CIVIL, TO_CHAR(T.FE_NAC,'DD/MM/YYYY HH:MI:SS')AS FE_NAC , T.ID_NACIONALIDAD,\n"
+                    + "        T.ID_DEPARTAMENTO, T.ID_PROVINCIA, T.ID_DISTRITO, T.TE_TRABAJADOR,\n"
+                    + "        T.CL_TRA, T.DI_CORREO_PERSONAL, T.DI_CORREO_INST, T.CO_SISTEMA_PENSIONARIO,\n"
+                    + "        T.ID_SITUACION_EDUCATIVA, T.LI_REG_INST_EDUCATIVA, T.ES_INST_EDUC_PERU,\n"
+                    + "        T.ID_UNIVERSIDAD_CARRERA, T.DE_ANNO_EGRESO, T.CM_OTROS_ESTUDIOS,\n"
+                    + "        T.ES_SEXO, T.LI_GRUPO_SANGUINEO, T.DE_REFERENCIA, T.LI_RELIGION, T.NO_IGLESIA, \n"
+                    + "        T.DE_CARGO, T.LI_AUTORIDAD, T.NO_AP_AUTORIDAD, T.CL_AUTORIDAD, T.ID_NO_AFP, \n"
+                    + "        T.ES_AFILIADO_ESSALUD, T.LI_TIPO_TRABAJADOR, T.CA_TIPO_HORA_PAGO_REFEERENCIAL, \n"
+                    + "        T.ES_FACTOR_RH, T.LI_DI_DOM_A_D1, T.DI_DOM_A_D2, T.LI_DI_DOM_A_D3, T.DI_DOM_A_D4, \n"
+                    + "        T.LI_DI_DOM_A_D5, T.DI_DOM_A_D6, T.DI_DOM_A_REF, T.ID_DI_DOM_A_DISTRITO,\n"
+                    + "        T.LI_DI_DOM_LEG_D1, T.DI_DOM_LEG_D2, T.LI_DI_DOM_LEG_D3, T.DI_DOM_LEG_D4, \n"
+                    + "        T.LI_DI_DOM_LEG_D5, T.DI_DOM_LEG_D6, T.ID_DI_DOM_LEG_DISTRITO, T.CA_ING_QTA_CAT_EMPRESA, \n"
+                    + "        T.CA_ING_QTA_CAT_RUC, T.CA_ING_QTA_CAT_OTRAS_EMPRESAS, T.CM_OBSERVACIONES,\n"
+                    + "        T.US_CREACION, TO_CHAR(T.FE_CREACION,'DD/MM/YYYY HH:MI:SS')AS FE_CREACION,\n"
+                    + "        T.US_MODIF, TO_CHAR(T.FE_MODIF,'DD/MM/YYYY HH:MI:SS')AS FE_MODIF, T.IP_USUARIO, T.AP_NOMBRES_PADRE, \n"
+                    + "        T.AP_NOMBRES_MADRE, T.ES_TRABAJA_UPEU_C, T.AP_NOMBRES_C, TO_CHAR(T.FE_NAC_C,'DD/MM/YYYY HH:MI:SS')AS FE_NAC_C,\n"
+                    + "        T.ID_TIPO_DOC_C, T.NU_DOC_C, T.LI_INSCRIPCION_VIG_ESSALUD_C, T.ID_CONYUGUE, T.CO_UNIVERSITARIO, T.SEMESTRE\n"
+                    + "      FROM RHTM_TRABAJADOR T\n"
+                    + "      WHERE T.ID_TRABAJADOR='" + ID_TRABAJADOR + "'\n"
+                    + "      )\n"
+                    + "UNPIVOT INCLUDE NULLS(\n"
+                    + "        DETALLE FOR COLUMNA IN\n"
+                    + "        (ID_TRABAJADOR,AP_PATERNO,AP_MATERNO,NO_TRABAJADOR,TI_DOC,NU_DOC,ES_CIVIL,FE_NAC,ID_NACIONALIDAD,\n"
+                    + "        ID_DEPARTAMENTO,ID_PROVINCIA,ID_DISTRITO,TE_TRABAJADOR,CL_TRA,DI_CORREO_PERSONAL,DI_CORREO_INST,\n"
+                    + "        CO_SISTEMA_PENSIONARIO,ID_SITUACION_EDUCATIVA,LI_REG_INST_EDUCATIVA,ES_INST_EDUC_PERU,\n"
+                    + "        ID_UNIVERSIDAD_CARRERA,DE_ANNO_EGRESO,CM_OTROS_ESTUDIOS,ES_SEXO,LI_GRUPO_SANGUINEO,DE_REFERENCIA,\n"
+                    + "        lI_RELIGION,NO_IGLESIA,DE_CARGO,LI_AUTORIDAD,NO_AP_AUTORIDAD,CL_AUTORIDAD,ID_NO_AFP,ES_AFILIADO_ESSALUD,\n"
+                    + "        LI_TIPO_TRABAJADOR,CA_TIPO_HORA_PAGO_REFEERENCIAL,ES_FACTOR_RH,LI_DI_DOM_A_D1,DI_DOM_A_D2,\n"
+                    + "        LI_DI_DOM_A_D3,DI_DOM_A_D4,LI_DI_DOM_A_D5,DI_DOM_A_D6,DI_DOM_A_REF,ID_DI_DOM_A_DISTRITO,\n"
+                    + "        LI_DI_DOM_LEG_D1,DI_DOM_LEG_D2,LI_DI_DOM_LEG_D3,DI_DOM_LEG_D4,LI_DI_DOM_LEG_D5,DI_DOM_LEG_D6,\n"
+                    + "        ID_DI_DOM_LEG_DISTRITO,CA_ING_QTA_CAT_EMPRESA,CA_ING_QTA_CAT_RUC,CA_ING_QTA_CAT_OTRAS_EMPRESAS,\n"
+                    + "        CM_OBSERVACIONES,US_CREACION,FE_CREACION,US_MODIF,FE_MODIF,IP_USUARIO,AP_NOMBRES_PADRE,\n"
+                    + "        AP_NOMBRES_MADRE,ES_TRABAJA_UPEU_C,AP_NOMBRES_C,FE_NAC_C,ID_TIPO_DOC_C,NU_DOC_C,\n"
+                    + "        LI_INSCRIPCION_VIG_ESSALUD_C,ID_CONYUGUE,CO_UNIVERSITARIO,SEMESTRE)\n"
+                    + "        )";
+            ResultSet rs = this.cnn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("col", rs.getString("columna"));
+                rec.put("det", rs.getString("detalle"));
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+            }
+        }
+        return lista;
+    }
+
+    @Override
+    public String[] decode(String t) {
+        String x[] = new String[3];
+        int cont = 0;
+        String b[] = t.split("\\*");
+        for (String a : b) {
+            if (!a.equals("")) {
+                x[cont] = a;
+                cont++;
+            }
+        }
+        return x;
     }
 }
