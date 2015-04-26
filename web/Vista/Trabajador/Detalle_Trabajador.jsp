@@ -389,9 +389,12 @@
                             <a href="../../empleado?opc=Eva_Emp&idtr=<%=idtr%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Evaluación de Empleado</a>
                         </li>
                         <%}%>
+                        <%if (idrol.trim().equals("ROL-0013")) {
+                        %>
                         <li>
                             <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2"><i class="fa fa-file fa-gear"></i> Cambiar Contraseña </a>
                         </li>
+                        <%}%>
 
                     </ul>
                     <div id="myTabContent1" class="tab-content padding-10">

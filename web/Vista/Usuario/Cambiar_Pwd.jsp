@@ -30,12 +30,12 @@
                                     <div class="col col-lg-12">
                                         <section class="col col-sm-4">Contraseña actual:
                                             <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                                <input type="password" name="clave" placeholder="Password"  required="">
+                                                <input type="password" name="password1" placeholder="Password"  required="">
                                                 <b class="tooltip tooltip-bottom-right">Ingrese su contraseña actual</b> </label>
                                         </section>
                                         <section class="col col-sm-4">Escribir nueva contraseña:
                                             <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                                <input type="password" name="password" placeholder="Password" id="password" required="">
+                                                <input type="password" name="password2" placeholder="Password" id="password" required="">
                                                 <b class="tooltip tooltip-bottom-right">No olvides tu contraseña</b> </label>
                                         </section>
                                         <section class="col col-sm-4">Confirmar Contraseña:
@@ -46,7 +46,7 @@
                                     </div>
                                 </div>
                                 <footer>
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="button" class="btn_validar_form btn btn-primary">
                                         Cambiar Contraseña 
                                     </button>
                                 </footer>
@@ -140,6 +140,18 @@
             $(document).ready(function () {
 
                 pageSetUp();
+                $(".btn_validar_form ").click(function () {
+                    if ($(".form_cambiar_clave").valid()) {
+                        $.ajax({
+                            url: "../../Usuario",
+                            type: "post",
+                            data: $(".form_cambiar_clave").serialize() + "&opc=Cambiar_clave"
+                        }).done(function (e) {
+                            alert(e);
+                        });
+                    }
+
+                });
 
                 $(".form_cambiar_clave").validate({
                     // Rules for form validation
