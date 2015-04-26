@@ -104,6 +104,11 @@ public class CReporte_Historial extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
+            if (opc.equals("Comparar_hijo")) {
+                String id_trabajador = request.getParameter("idtr");
+                String id_hijo = request.getParameter("idh");
+                response.sendRedirect("Vista/Reportes/Trabajador/Historial_Est_Civil.jsp?idtr="+id_trabajador+"&idh="+id_hijo);
+            }
 
         } catch (Exception e) {
             rpta.put("rpta", "-1");

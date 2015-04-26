@@ -346,8 +346,8 @@
 
                     <hr class="simple">
                     <ul id="myTab1" class="nav nav-tabs bordered">
-                        <% String edit  = request.getParameter("edit");
-                                if (List_Auto_mostrar.size() == 1 && aut != null) {
+                        <% String edit = request.getParameter("edit");
+                            if (List_Auto_mostrar.size() == 1 && aut != null) {
                                 for (int r = 0; r < List_Auto_mostrar.size(); r++) {
                                     Auto_Mostrar a = new Auto_Mostrar();
                                     a = (Auto_Mostrar) List_Auto_mostrar.get(r);
@@ -358,7 +358,7 @@
                         <%}
 
                             }%>
-                            <%if (iddep == null|| iddep.equals("DPT-0019") || idrol.trim().equals("ROL-0012") || idrol.trim().equals("ROL-0002") || idrol.trim().equals("ROL-0005")) {
+                        <%if (iddep == null || iddep.equals("DPT-0019") || idrol.trim().equals("ROL-0012") || idrol.trim().equals("ROL-0002") || idrol.trim().equals("ROL-0005")) {
                         %>
                         <li >
                             <a href="../../contrato?idtr=<%=idtr%>&opc=Detalle_Contractual" target="myframe2"  ><i class="fa fa-file-text fa-gear"></i> Información Contractual </a>
@@ -379,7 +379,7 @@
                         <li >
                             <a href="../../dgp?idtr=<%=idtr%>&opc=List_Dgp_Tr" target="myframe2"><i class="fa fa-file-o fa-gear"></i> Historial de Requerimientos </a>
                         </li>
-                        <li >
+                        <li>
                             <a href="../../trabajador?idtr=<%=idtr%>&opc=Documento_Trabajador" target="myframe2"><i class="fa fa-file fa-gear"></i> Documentación </a>
                         </li>
 
@@ -389,6 +389,9 @@
                             <a href="../../empleado?opc=Eva_Emp&idtr=<%=idtr%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Evaluación de Empleado</a>
                         </li>
                         <%}%>
+                        <li>
+                            <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2"><i class="fa fa-file fa-gear"></i> Cambiar Contraseña </a>
+                        </li>
 
                     </ul>
                     <div id="myTabContent1" class="tab-content padding-10">
