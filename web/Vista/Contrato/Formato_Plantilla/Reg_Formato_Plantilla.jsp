@@ -511,127 +511,72 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
         <div id="main" style="margin-left: 0px;" >
             <div id="content" class="widget-body">
-                <section id="widget-grid" class="">
+                <div class="contenido" >
 
+                    <article class=" col-sm-12 col-md-12 col-lg-12">
 
-                    <div class="row" width="100%">
+                        <div class=" jarviswidget well" id="wid-id-4" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-fullscreenbutton="false" data-widget-sortable="false">
+                            <div class="col">
+                                <header>
+                                    <span class="widget-icon"> <i class="fa fa-pencil"></i> </span>
+                                    <h2>Markdown API</h2>
 
-                        <div>
+                                </header>
+                                <div>
 
-                            <!-- widget edit box -->
-                            <div  class="jarviswidget-editbox">
-                                <!-- This area used as dropdown edit box -->
+                                    <div class="widget-body col-lg-6" align="center">
 
+                                        <h3>CARGAR PLANTILLAS</h3>
+                                        <div class="col-sm-12 col-md-12 col-lg-4" >
+                                            <section class="col col-12" style="width:100%;align:cemter;" align="center">
+                                                <label class="select">Dirección:
+                                                    <select class="dir form-control" id="dir" name="id_di" >
+                                                        <option value="" >[Direccion]</option>
+                                                        <%for (int i = 0; i < Listar_Direccion_X.size(); i++) {
+                                                                Direccion d = new Direccion();
+                                                                d = (Direccion) Listar_Direccion_X.get(i);
+                                                        %>
+                                                        <option value="<%=d.getId_direccion()%>"> <%=d.getNo_direccion()%></option>
+                                                        <%}%>
+                                                    </select>   
+                                                </label>
+                                            </section>
+
+                                            <section class="col col-12" style="width:100%;align:cemter;" align="center">
+                                                <label>Departamento:
+                                                    <select class="dep form-control" id="dep" name="id_dep" >
+                                                        <option value="">[TODO]</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <section class="col col-4"  style="width:100%;align:cemter;" align="center">
+                                                <label>Area:
+                                                    <select class="area form-control" id="area" name="id_are" >
+                                                        <option value="">[TODO]</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+
+                                            <section class="col col-4"  style="width:100%;align:cemter;" align="center">
+                                                <label>Sección:
+                                                    <select class="seccion form-control" id="seccion" name="id_sec" >
+                                                        <option value="">[TODO]</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <section class="col col-4"  style="width:100%;align:cemter;" align="center">
+                                                <label>Puesto:
+                                                    <select class="puesto form-control" id="puesto" name="id_pu" >
+                                                        <option value="">[TODO]</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="widget-body no-padding">
-                                <legend align="center">CARGAR PLANTILLAS</legend>
-                                <section class="col col-12" style="width:100%;align:cemter;" align="center">
-                                    <label class="select">Dirección:
-                                        <select class="dir form-control" id="dir" name="id_di" >
-                                            <option value="" >[Direccion]</option>
-                                            <%for (int i = 0; i < Listar_Direccion_X.size(); i++) {
-                                                    Direccion d = new Direccion();
-                                                    d = (Direccion) Listar_Direccion_X.get(i);
-                                            %>
-                                            <option value="<%=d.getId_direccion()%>"> <%=d.getNo_direccion()%></option>
-                                            <%}%>
-                                        </select>   
-                                    </label>
-                                </section>
+                            <div class="col">
 
-                                <section class="col col-12" style="width:100%;align:cemter;" align="center">
-                                    <label>Departamento:
-                                        <select class="dep form-control" id="dep" name="id_dep" >
-                                            <option value="">[TODO]</option>
-                                        </select>
-                                    </label>
-                                </section>
-                                <section class="col col-4"  style="width:100%;align:cemter;" align="center">
-                                    <label>Area:
-                                        <select class="area form-control" id="area" name="id_are" >
-                                            <option value="">[TODO]</option>
-                                        </select>
-                                    </label>
-                                </section>
-
-                                <section class="col col-4"  style="width:100%;align:cemter;" align="center">
-                                    <label>Sección:
-                                        <select class="seccion form-control" id="seccion" name="id_sec" >
-                                            <option value="">[TODO]</option>
-                                        </select>
-                                    </label>
-                                </section>
-                                <section class="col col-4"  style="width:100%;align:cemter;" align="center">
-                                    <label>Puesto:
-                                        <select class="puesto form-control" id="puesto" name="id_pu" >
-                                            <option value="">[TODO]</option>
-                                        </select>
-                                    </label>
-                                </section>
-                                <br>
-                                <br>
-                                <CENER><legend align="center">ASIGNAR PLANTILLAS</legend></CENER>
-                                <section class="col col-4"  style="width:100%;align:cemter;" align="center">
-                                    <label>Dirección:
-                                        <select class="dir_as form-control" id="dir_as"  >
-                                            <option value="">[SELECCIONE]</option>
-                                            <%for (int i = 0; i < Listar_Direccion_X.size(); i++) {
-                                                    Direccion d = new Direccion();
-                                                    d = (Direccion) Listar_Direccion_X.get(i);
-                                            %>
-                                            <option value="<%=d.getId_direccion()%>"> <%=d.getNo_direccion()%></option>
-                                            <%}%>
-                                        </select>   
-                                    </label>
-                                </section>
-                                <section class="col col-4"  style="width:100%;align:cemter;" align="center">
-                                    <label>Departamento:
-                                        <select class="dep_as form-control" id="dep_as" >
-                                            <option value="0">[TODO]</option>
-                                        </select>
-                                    </label>
-                                </section>
-                                <section class="col col-4" style="width:100%;align:cemter;" align="center" >
-                                    <label>Area:
-                                        <select class="area_as form-control" id="area_as" >
-                                            <option value="0">[TODO]</option>
-                                        </select>
-                                    </label>
-                                </section>
-                                <section class="col col-4"  style="width:100%;align:cemter;" align="center" >
-                                    <label>Sección:
-                                        <select class="seccion_as form-control col-5" id="seccion_as"  >
-                                            <option value="0">[TODO]</option>
-                                        </select>
-                                    </label>
-                                </section>
-                                <section class="col col-4"  style="width:100%;align:cemter;" align="center">
-                                    <label>Puesto:
-                                        <select class="puesto_as form-control" id="puesto_as"  >
-                                            <option value="0">[TODO]</option>
-                                        </select>
-                                    </label>
-                                </section>
-                                <legend align="center">Plantillas</legend>      
-                                <table class="table table-striped table-bordered table-hover dataTable no-footer">
-                                    <thead>
-                                        <tr>
-                                            <th align="center" style="text-align:center;">Nro</th>
-                                            <th align="center" style="text-align:center;">Nombre Plantilla</th>
-                                            <th align="center" style="text-align:center;">Estado Plantilla Puesto</th>
-                                            <th colspan="2" style="text-align:center;">Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="tbody-plantilla">
-                                        <tr><td colspan="4" align="center">SELECCIONA UNA OPCION</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <article class=" col-sm-12 col-md-12 col-lg-4">
-                            <div class="jarviswidget well" id="wid-id-4" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-fullscreenbutton="false" data-widget-sortable="false">
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-pencil"></i> </span>
                                     <h2>Markdown API</h2>
@@ -642,245 +587,327 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                         <!-- This area used as dropdown edit box -->
 
                                     </div>
-                                    <div class="widget-body">
-
-                                        <h3>Markdown API</h3>
-                                        <table class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th><i class="fa  fa-align-left"> </i> Nomenclatura</th>
-                                                    <th><i class="fa fa-chain"> </i>  Significado</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr ><td><code>[nombre]</code></td><td>Nombre del trabajador</td></tr>
-                                                <tr><td><code>[app]</code></td><td>Apellido Paterno del trabajador</td></tr>
-                                                <tr><td><code>[apm]</code></td><td>Apellido Materno del trabajador</td></tr>
-                                                <tr><td><code>[dni]</code></td><td>Dni del trabajador</td></tr>
-                                                <tr><td><code>[dir]</code></td><td>direccion del trabajador</td></tr>
-                                                <tr><td><code>[prov]</code></td><td>Provincia actual</td></tr>
-                                                <tr><td><code>[dist]</code></td><td>Distrito en el que estan</td></tr>
-                                                <tr><td><code>[dep]</code></td><td>Departamento en donde se va a desenpeñar</td></tr>
-                                                <tr><td><code>[desde]</code></td><td>fecha de Inicio del contrato</td></tr>
-                                                <tr><td><code>[hasta]</code></td><td>Fecha de Fin del contrato</td></tr>
-                                                <tr><td><code>[puesto]</code></td><td>Puesto que va a desempeñar</td></tr>
-                                                <tr><td><code>[fe_suscripcion]</code></td><td>Fecha de suscripcion</td></tr>
-                                                <tr><td><code>[sueldo]</code></td><td>Sueldo del trabajador</td></tr>
-                                                <tr><td><code>[horas]</code></td><td>Horas de trabajo semanales</td></tr>
-                                                <tr><td><code>[cursos]</code></td><td>Cuesos que va enseñar (en el caso que sea docente)</td></tr>
-                                                <tr><td><code>[funciones]</code></td><td>Funciones que va a desempeñar en el puesto</td></tr>
-                                                <tr><td><code>[moneda]</code></td><td>Tipo de moneda de pago</td></tr>
-                                            </tbody>
-                                        </table>
+                                    <div class="widget-body" align="center">
+                                        <h3>ASIGNAR PLANTILLAS</h3>
+                                        <div class="col-sm-12 col-md-12 col-lg-4" width="50%">
+                                            <section class="col col-4"  style="width:100%;align:cemter;" align="center">
+                                                <label>Dirección:
+                                                    <select class="dir_as form-control" id="dir_as"  >
+                                                        <option value="">[SELECCIONE]</option>
+                                                        <%for (int i = 0; i < Listar_Direccion_X.size(); i++) {
+                                                                Direccion d = new Direccion();
+                                                                d = (Direccion) Listar_Direccion_X.get(i);
+                                                        %>
+                                                        <option value="<%=d.getId_direccion()%>"> <%=d.getNo_direccion()%></option>
+                                                        <%}%>
+                                                    </select>   
+                                                </label>
+                                            </section>
+                                            <section class="col col-4"  style="width:100%;align:cemter;" align="center">
+                                                <label>Departamento:
+                                                    <select class="dep_as form-control" id="dep_as" >
+                                                        <option value="0">[TODO]</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <section class="col col-4" style="width:100%;align:cemter;" align="center" >
+                                                <label>Area:
+                                                    <select class="area_as form-control" id="area_as" >
+                                                        <option value="0">[TODO]</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <section class="col col-4"  style="width:100%;align:cemter;" align="center" >
+                                                <label>Sección:
+                                                    <select class="seccion_as form-control col-5" id="seccion_as"  >
+                                                        <option value="0">[TODO]</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <section class="col col-4"  style="width:100%;align:cemter;" align="center">
+                                                <label>Puesto:
+                                                    <select class="puesto_as form-control" id="puesto_as"  >
+                                                        <option value="0">[TODO]</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </article>
-                        <article class="col-sm-12 col-md-12 col-lg-8">
-                            <div class="jarviswidget jarviswidget-color-blue" id="wid-id-0"  data-widget-editbutton="false"  data-widget-fullscreenbutton="false" data-widget-sortable="false">
+                        </div>
+                    </article>
 
-                                <header>
-                                    <span class="widget-icon"> <i class="fa fa-pencil"></i> </span>
-                                    <h2>Editar Platilla</h2>
+                    <div>
+                        <legend align="center">Plantillas</legend>      
+                        <table class="table table-striped table-bordered table-hover dataTable no-footer">
+                            <thead>
+                                <tr>
+                                    <th align="center" style="text-align:center;">Nro</th>
+                                    <th align="center" style="text-align:center;">Nombre Plantilla</th>
+                                    <th align="center" style="text-align:center;">Estado Plantilla Puesto</th>
+                                    <th colspan="2" style="text-align:center;">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody-plantilla">
+                                <tr><td colspan="4" align="center">SELECCIONA UNA OPCION</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <article class=" col-sm-12 col-md-12 col-lg-4">
+                    <div class="jarviswidget well" id="wid-id-4" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-fullscreenbutton="false" data-widget-sortable="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-pencil"></i> </span>
+                            <h2>NOMENCLATURA</h2>
 
-                                </header>
-
-                                <!-- widget div-->
-                                <div>
-
-                                    <!-- widget edit box -->
-                                    <div class="jarviswidget-editbox">
-                                        <!-- This area used as dropdown edit box -->
-
-                                    </div>
-                                    <!-- end widget edit box -->
-
-                                    <!-- widget content -->
-                                    <div class="widget-body no-padding">
-
-                                        <form class="ckeditor_form" action="../../../formato_plantilla" method="post" style="width:100%;" align="center">
-                                            <h3></h3>
-                                            <legend><h3>EDITAR PLANTILLAS</h3></legend>
-                                            <h3><strong>NOMBRE PLANTILLA</strong></h3>
-
-                                            <button type="submit" value="Asignar" onclick="leer();" name="opc">Asignar Plantilla</button>
-                                            <button  onclick="procesar_texto();" type="button">Procesar </button>
-                                            <input type="hidden" name="id_dep_asig" id="di_sig">
-                                            <input type="hidden" name="id_are_asig" id="de_sig">
-                                            <input type="hidden" name="id_sec_asig" id="ar_sig">
-                                            <input type="hidden" name="id_di_asig" id="se_sig">
-                                            <input type="hidden" name="id_pu_asig" id="pu_sig">
-                                            <input type="text" class="nombre_pl form-control" name="no_pl" ><br><br>
-                                            <textarea cols="100" id="editor1" name="editor1" >
-                                            </textarea>
-                                            <script>
-                                                // Replace the <textarea id="editor1"> with an CKEditor instance.
-                                                CKEDITOR.replace('editor1', {
-                                                    on: {
-                                                        focus: onFocus,
-                                                        blur: onBlur,
-                                                        // Check for availability of corresponding plugins.
-                                                        pluginsLoaded: function(evt) {
-
-
-                                                            var doc = CKEDITOR.document, ed = evt.editor;
-                                                            if (!ed.getCommand('bold'))
-                                                                doc.getById('exec-bold').hide();
-                                                            if (!ed.getCommand('link'))
-                                                                doc.getById('exec-link').hide();
-                                                        }
-
-                                                    }, height: '1024px'});
-                                            </script>
-                                            <div id="eButtons" >
-                                                <input  type="hidden" name="id" value="" class="id_pl"/>
-                                                <input  type="hidden" name="id_pc" value="" class="id_pc"/>
-                                                <button type="submit" value="Actualizar" onclick="leer();" name="opc">Actualizar Plantilla</button>
-                                                <button type="submit" value="Crear_Plantilla" name="opc" onclick="leer();">Crear Plantilla</button>
-                                            </div>
-                                            <div id="shortcut">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#inbox.html" class="jarvismetro-tile big-cubes bg-color-blue"> <span class="iconbox"> <i class="fa fa-envelope fa-4x"></i> <span>Mail <span class="label pull-right bg-color-darken">14</span></span> </span> </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#calendar.html" class="jarvismetro-tile big-cubes bg-color-orangeDark"> <span class="iconbox"> <i class="fa fa-calendar fa-4x"></i> <span>Calendar</span> </span> </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#gmap-xml.html" class="jarvismetro-tile big-cubes bg-color-purple"> <span class="iconbox"> <i class="fa fa-map-marker fa-4x"></i> <span>Maps</span> </span> </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#invoice.html" class="jarvismetro-tile big-cubes bg-color-blueDark"> <span class="iconbox"> <i class="fa fa-book fa-4x"></i> <span>Invoice <span class="label pull-right bg-color-darken">99</span></span> </span> </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#gallery.html" class="jarvismetro-tile big-cubes bg-color-greenLight"> <span class="iconbox"> <i class="fa fa-picture-o fa-4x"></i> <span>Gallery </span> </span> </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" class="jarvismetro-tile big-cubes selected bg-color-pinkDark"> <span class="iconbox"> <i class="fa fa-user fa-4x"></i> <span>My Profile </span> </span> </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </form>
-
-                                    </div>
-                                    <!-- end widget content -->
-
-                                </div>
-                                <!-- end widget div -->
+                        </header>
+                        <div>
+                            <div class="jarviswidget-editbox">
+                                <!-- This area used as dropdown edit box -->
 
                             </div>
-                            <!-- end widget -->
+                            <div class="widget-body">
 
-                        </article>
-                        <!-- END COL -->
+                                <h3>NOMENCLATURA</h3>
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th><i class="fa  fa-align-left"> </i> Nomenclatura</th>
+                                            <th><i class="fa fa-chain"> </i>  Significado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ><td><code>[nombre]</code></td><td>Nombre del trabajador</td></tr>
+                                        <tr><td><code>[app]</code></td><td>Apellido Paterno del trabajador</td></tr>
+                                        <tr><td><code>[apm]</code></td><td>Apellido Materno del trabajador</td></tr>
+                                        <tr><td><code>[dni]</code></td><td>Dni del trabajador</td></tr>
+                                        <tr><td><code>[dir]</code></td><td>direccion del trabajador</td></tr>
+                                        <tr><td><code>[prov]</code></td><td>Provincia actual</td></tr>
+                                        <tr><td><code>[dist]</code></td><td>Distrito en el que estan</td></tr>
+                                        <tr><td><code>[dep]</code></td><td>Departamento en donde se va a desenpeñar</td></tr>
+                                        <tr><td><code>[desde]</code></td><td>fecha de Inicio del contrato</td></tr>
+                                        <tr><td><code>[hasta]</code></td><td>Fecha de Fin del contrato</td></tr>
+                                        <tr><td><code>[puesto]</code></td><td>Puesto que va a desempeñar</td></tr>
+                                        <tr><td><code>[fe_suscripcion]</code></td><td>Fecha de suscripcion</td></tr>
+                                        <tr><td><code>[sueldo]</code></td><td>Sueldo del trabajador</td></tr>
+                                        <tr><td><code>[horas]</code></td><td>Horas de trabajo semanales</td></tr>
+                                        <tr><td><code>[cursos]</code></td><td>Cuesos que va enseñar (en el caso que sea docente)</td></tr>
+                                        <tr><td><code>[funciones]</code></td><td>Funciones que va a desempeñar en el puesto</td></tr>
+                                        <tr><td><code>[moneda]</code></td><td>Tipo de moneda de pago</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <article class="col-sm-12 col-md-12 col-lg-8">
+                    <div class="jarviswidget jarviswidget-color-blue" id="wid-id-0"  data-widget-editbutton="false"  data-widget-fullscreenbutton="false" data-widget-sortable="false">
 
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-pencil"></i> </span>
+                            <h2>Editar Platilla</h2>
+
+                        </header>
+
+                        <!-- widget div-->
+                        <div>
+
+                            <!-- widget edit box -->
+                            <div class="jarviswidget-editbox">
+                                <!-- This area used as dropdown edit box -->
+
+                            </div>
+                            <!-- end widget edit box -->
+
+                            <!-- widget content -->
+                            <div class="widget-body no-padding">
+
+                                <form class="ckeditor_form" action="../../../formato_plantilla" method="post" style="width:100%;" align="center">
+                                    <h3></h3>
+                                    <legend><h3>EDITAR PLANTILLAS</h3></legend>
+                                    <h3><strong>NOMBRE PLANTILLA</strong></h3>
+
+                                    <button type="submit" value="Asignar" onclick="leer();" name="opc">Asignar Plantilla</button>
+                                    <button  onclick="procesar_texto();" type="button">Procesar </button>
+                                    <input type="hidden" name="id_dep_asig" id="di_sig">
+                                    <input type="hidden" name="id_are_asig" id="de_sig">
+                                    <input type="hidden" name="id_sec_asig" id="ar_sig">
+                                    <input type="hidden" name="id_di_asig" id="se_sig">
+                                    <input type="hidden" name="id_pu_asig" id="pu_sig">
+                                    <input type="text" class="nombre_pl form-control" name="no_pl" ><br><br>
+                                    <textarea cols="100" id="editor1" name="editor1" >
+                                    </textarea>
+                                    <script>
+                                        // Replace the <textarea id="editor1"> with an CKEditor instance.
+                                        CKEDITOR.replace('editor1', {
+                                            on: {
+                                                focus: onFocus,
+                                                blur: onBlur,
+                                                // Check for availability of corresponding plugins.
+                                                pluginsLoaded: function(evt) {
+
+
+                                                    var doc = CKEDITOR.document, ed = evt.editor;
+                                                    if (!ed.getCommand('bold'))
+                                                        doc.getById('exec-bold').hide();
+                                                    if (!ed.getCommand('link'))
+                                                        doc.getById('exec-link').hide();
+                                                }
+
+                                            }, height: '1024px'});
+                                    </script>
+                                    <div id="eButtons" >
+                                        <input  type="hidden" name="id" value="" class="id_pl"/>
+                                        <input  type="hidden" name="id_pc" value="" class="id_pc"/>
+                                        <button type="submit" value="Actualizar" onclick="leer();" name="opc">Actualizar Plantilla</button>
+                                        <button type="submit" value="Crear_Plantilla" name="opc" onclick="leer();">Crear Plantilla</button>
+                                    </div>
+                                    <div id="shortcut">
+                                        <ul>
+                                            <li>
+                                                <a href="#inbox.html" class="jarvismetro-tile big-cubes bg-color-blue"> <span class="iconbox"> <i class="fa fa-envelope fa-4x"></i> <span>Mail <span class="label pull-right bg-color-darken">14</span></span> </span> </a>
+                                            </li>
+                                            <li>
+                                                <a href="#calendar.html" class="jarvismetro-tile big-cubes bg-color-orangeDark"> <span class="iconbox"> <i class="fa fa-calendar fa-4x"></i> <span>Calendar</span> </span> </a>
+                                            </li>
+                                            <li>
+                                                <a href="#gmap-xml.html" class="jarvismetro-tile big-cubes bg-color-purple"> <span class="iconbox"> <i class="fa fa-map-marker fa-4x"></i> <span>Maps</span> </span> </a>
+                                            </li>
+                                            <li>
+                                                <a href="#invoice.html" class="jarvismetro-tile big-cubes bg-color-blueDark"> <span class="iconbox"> <i class="fa fa-book fa-4x"></i> <span>Invoice <span class="label pull-right bg-color-darken">99</span></span> </span> </a>
+                                            </li>
+                                            <li>
+                                                <a href="#gallery.html" class="jarvismetro-tile big-cubes bg-color-greenLight"> <span class="iconbox"> <i class="fa fa-picture-o fa-4x"></i> <span>Gallery </span> </span> </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" class="jarvismetro-tile big-cubes selected bg-color-pinkDark"> <span class="iconbox"> <i class="fa fa-user fa-4x"></i> <span>My Profile </span> </span> </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </form>
+
+                            </div>
+                            <!-- end widget content -->
+
+                        </div>
+                        <!-- end widget div -->
 
                     </div>
+                    <!-- end widget -->
 
-                </section>
+                </article>
+                <!-- END COL -->
+
 
             </div>
-        </div>
-    </body>
-    <script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>
 
-    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-    <script>
-                                                    if (!window.jQuery) {
-                                                        document.write('<script src="../../../js/libs/jquery-2.0.2.min.js"><\/script>');
-                                                    }
-    </script>
+        </section>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-    <script>
-                                                    if (!window.jQuery.ui) {
-                                                        document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                                                    }
-    </script>
+    </div>
+</div>
+</body>
+<script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>
 
-    <!-- IMPORTANT: APP CONFIG -->
-    <script src="../../../js/app.config.js"></script>
+<!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<script>
+                                            if (!window.jQuery) {
+                                                document.write('<script src="../../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                                            }
+</script>
 
-    <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
-    <script src="../../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script>
+                                            if (!window.jQuery.ui) {
+                                                document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                                            }
+</script>
 
-    <!-- BOOTSTRAP JS -->
-    <script src="../../../js/bootstrap/bootstrap.min.js"></script>
+<!-- IMPORTANT: APP CONFIG -->
+<script src="../../../js/app.config.js"></script>
 
-    <!-- CUSTOM NOTIFICATION -->
-    <script src="../../../js/notification/SmartNotification.min.js"></script>
+<!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
+<script src="../../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
 
-    <!-- JARVIS WIDGETS -->
-    <script src="../../../js/smartwidgets/jarvis.widget.min.js"></script>
+<!-- BOOTSTRAP JS -->
+<script src="../../../js/bootstrap/bootstrap.min.js"></script>
 
-    <!-- EASY PIE CHARTS -->
-    <script src="../../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+<!-- CUSTOM NOTIFICATION -->
+<script src="../../../js/notification/SmartNotification.min.js"></script>
 
-    <!-- SPARKLINES -->
-    <script src="../../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
+<!-- JARVIS WIDGETS -->
+<script src="../../../js/smartwidgets/jarvis.widget.min.js"></script>
 
-    <!-- JQUERY VALIDATE -->
-    <script src="../../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
+<!-- EASY PIE CHARTS -->
+<script src="../../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
 
-    <!-- JQUERY MASKED INPUT -->
-    <script src="../../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+<!-- SPARKLINES -->
+<script src="../../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
 
-    <!-- JQUERY SELECT2 INPUT -->
-    <script src="../../../js/plugin/select2/select2.min.js"></script>
+<!-- JQUERY VALIDATE -->
+<script src="../../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
 
-    <!-- JQUERY UI + Bootstrap Slider -->
-    <script src="../../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+<!-- JQUERY MASKED INPUT -->
+<script src="../../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
 
-    <!-- browser msie issue fix -->
-    <script src="../../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+<!-- JQUERY SELECT2 INPUT -->
+<script src="../../../js/plugin/select2/select2.min.js"></script>
 
-    <!-- FastClick: For mobile devices -->
-    <script src="../../../js/plugin/fastclick/fastclick.min.js"></script>
+<!-- JQUERY UI + Bootstrap Slider -->
+<script src="../../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
 
-    <!--[if IE 8]>
+<!-- browser msie issue fix -->
+<script src="../../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
 
-    <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+<!-- FastClick: For mobile devices -->
+<script src="../../../js/plugin/fastclick/fastclick.min.js"></script>
 
-    <![endif]-->
+<!--[if IE 8]>
 
-    <!-- Demo purpose only -->
-    <script src="../../../HTML_version/js/demo.min.js"></script>
+<h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
 
-    <!-- MAIN APP JS FILE -->
-    <script src="../../../HTML_version/js/app.min.js"></script>
+<![endif]-->
 
-    <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
-    <!-- Voice command : plugin -->
-    <script src="../../../HTML_version/js/speech/voicecommand.min.js"></script>
+<!-- Demo purpose only -->
+<script src="../../../HTML_version/js/demo.min.js"></script>
 
-    <!-- PAGE RELATED PLUGIN(S) -->
+<!-- MAIN APP JS FILE -->
+<script src="../../../HTML_version/js/app.min.js"></script>
+
+<!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
+<!-- Voice command : plugin -->
+<script src="../../../HTML_version/js/speech/voicecommand.min.js"></script>
+
+<!-- PAGE RELATED PLUGIN(S) -->
 
 
-    <script type="text/javascript">
-                                                    // DO NOT REMOVE : GLOBAL FUNCTIONS!
-                                                    $(document).ready(function() {
-                                                        pageSetUp();
-                                                    })
+<script type="text/javascript">
+                                            // DO NOT REMOVE : GLOBAL FUNCTIONS!
+                                            $(document).ready(function() {
+                                                pageSetUp();
+                                            })
 
-    </script>
+</script>
 
-    <!-- Your GOOGLE ANALYTICS CODE Below -->
-    <script type="text/javascript">
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-        _gaq.push(['_trackPageview']);
+<!-- Your GOOGLE ANALYTICS CODE Below -->
+<script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+    _gaq.push(['_trackPageview']);
 
-        (function() {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
+    (function() {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+    })();
 
-    </script>
+</script>
 
 </html>
 
