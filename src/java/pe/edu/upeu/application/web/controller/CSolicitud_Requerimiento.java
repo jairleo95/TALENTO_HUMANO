@@ -38,35 +38,40 @@ public class CSolicitud_Requerimiento extends HttpServlet {
         InterfaceSolicitud_RequerimientoDAO s = new Solicitud_RequerimientoDAO();
         HttpSession sesion = request.getSession(true);
         String iduser = (String) sesion.getAttribute("IDUSER");
-               if (opc.equals("Listar_Solicitud")) {
-                getServletContext().setAttribute("Listar_solicitud", s.Listar_solicitud());
-                response.sendRedirect("Vista/Solicitud/Reporte_Solicitud.jsp");
+        if (opc.equals("Listar_Solicitud")) {
+            getServletContext().setAttribute("Listar_solicitud", s.Listar_solicitud());
+            response.sendRedirect("Vista/Solicitud/Reporte_Solicitud.jsp");
+        }
+        if (opc.equals("Registrar_solicitud")) {
+            String FE_DESDE = request.getParameter("desde");
+            String ID_DGP = request.getParameter("iddgp");
+            String ID_PLAZO = request.getParameter("plazo");
+            String DE_SOLICITUD = request.getParameter("descripcion");
+            String ES_AUTORIZAR = request.getParameter("ES_AUTORIZAR");
+            String ES_SOLICITUD_DGP = request.getParameter("ES_SOLICITUD_DGP");
+            String IP_USUARIO = request.getParameter("IP_USUARIO");
+            String FE_CREACION = request.getParameter("FE_CREACION");
+            String US_MODIF = request.getParameter("US_MODIF");
+            String FE_MODIF = request.getParameter("FE_MODIF");
+            String NO_USUARIO = request.getParameter("NO_USUARIO");
+            String tipo = request.getParameter("tipo_fecha");
+            if (tipo.equals("month")) {
+                FE_DESDE = FE_DESDE + "-01";
             }
-            if (opc.equals("Registrar_solicitud")) {
-                String FE_DESDE = request.getParameter("desde");
-                String ID_DGP = request.getParameter("iddgp");
-                String ID_PLAZO = request.getParameter("plazo");
-                String DE_SOLICITUD = request.getParameter("descripcion");
-                String ES_AUTORIZAR = request.getParameter("ES_AUTORIZAR");
-                String ES_SOLICITUD_DGP = request.getParameter("ES_SOLICITUD_DGP");
-                String IP_USUARIO = request.getParameter("IP_USUARIO");
-                String FE_CREACION = request.getParameter("FE_CREACION");
-                String US_MODIF = request.getParameter("US_MODIF");
-                String FE_MODIF = request.getParameter("FE_MODIF");
-                String NO_USUARIO = request.getParameter("NO_USUARIO");
-                String tipo = request.getParameter("tipo_fecha");
-                if (tipo.equals("month")) {
-                    FE_DESDE = FE_DESDE + "-01";
-                }
-                s.INSERT_SOLICITUD_DGP(null, FE_DESDE, ID_DGP, ID_PLAZO, DE_SOLICITUD, ES_AUTORIZAR, ES_SOLICITUD_DGP, IP_USUARIO, iduser, FE_CREACION, US_MODIF, FE_MODIF, NO_USUARIO);
-            }
-            if(opc.equals("Reg_List_Solicitud")){
-                String iddgp = request.getParameter("iddgp");
-                response.sendRedirect("Vista/Solicitud/Reg_List_Solicitud.jsp");
-                out.print(iddgp);
-            }
+            s.INSERT_SOLICITUD_DGP(null, FE_DESDE, ID_DGP, ID_PLAZO, DE_SOLICITUD, ES_AUTORIZAR, ES_SOLICITUD_DGP, IP_USUARIO, iduser, FE_CREACION, US_MODIF, FE_MODIF, NO_USUARIO);
+        }
+        if (opc.equals("Reg_List_Solicitud")) {
+            String iddgp = request.getParameter("iddgp");
+            response.sendRedirect("Vista/Solicitud/Reg_List_Solicitud.jsp");
+            //out.print(iddgp);
+        }
+        if (opc.equals("Ver_Detalle_Solicitud")) {
+            String id = request.getParameter("id");
+            getServletContext().setAttribute("Detalle_Solicitud", s.Listar_solicitud_id(id));
+            response.sendRedirect("Vista/Solicitud/Detalle_Solicitud.jsp");
+            //out.print(iddgp);
+        }
 
-       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
