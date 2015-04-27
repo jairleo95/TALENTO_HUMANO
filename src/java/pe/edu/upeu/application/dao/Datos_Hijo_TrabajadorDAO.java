@@ -50,7 +50,7 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
             cst.setString(14, null);
             cst.setString(15, null);
             cst.setString(16, null);
-            cst.setString(17, IP_USUARIO);
+            cst.setString(17, FactoryConnectionDB.detalle_ip());
             cst.setString(18, "1");
             cst.execute();
         } catch (SQLException e) {
