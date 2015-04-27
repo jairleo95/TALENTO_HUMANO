@@ -163,7 +163,7 @@
                                                             <ul class="dropdown-menu">
                                                                 <li><a href="../../dgp?iddgp=<%=s.getId_dgp().trim()%>&idtr=<%=s.getId_trabajador().trim()%>&opc=Detalle"> Ver Requerimiento</a></li>
                                                                 <li class="divider"></li>
-                                                                <li><a href=""> Ver Solicitud</a></li>
+                                                                <li><a href="../../solicitud_requerimiento?opc=Ver_Detalle_Solicitud&id=<%=s.getId_solicitud_dgp()%>"> Ver Solicitud</a></li>
                                                             </ul>
                                                         </div>
                                                     </td>

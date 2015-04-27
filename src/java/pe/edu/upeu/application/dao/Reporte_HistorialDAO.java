@@ -71,7 +71,7 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
                 adday = "+1";
             }
 
-            String sql = " select * from RHVD_HISTORIAL_ES_CIVIL  h1 where h1.FE_MODIFICACION = (select  max(h2.FE_MODIFICACION) from RHVD_HISTORIAL_ES_CIVIL h2 where h1.ID_TRABAJADOR = h2.ID_TRABAJADOR )  and h1.FE_MODIFICACION >= TO_CHAR('"+FE_INICIO+"') AND h1.FE_MODIFICACION <= TO_CHAR('"+FE_FIN+"')  ";
+            String sql = " select * from RHVD_HISTORIAL_ES_CIVIL  h1 where h1.FE_MODIFICACION = (select  max(h2.FE_MODIFICACION) from RHVD_HISTORIAL_ES_CIVIL h2 where h1.ID_TRABAJADOR = h2.ID_TRABAJADOR )  and h1.FE_MODIFICACION >= TO_CHAR('" + FE_INICIO + "') AND h1.FE_MODIFICACION <= TO_CHAR('" + FE_FIN + "')  ";
 
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
@@ -208,6 +208,34 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
     }
 
     @Override
+    public List<Map<String, ?>> list_fecha_modif2(String Hijo, String fecha) {
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select  to_char(FE_FILTRO_TODO,'dd/mm/yyyy hh:mi:ss') as FE_FILTRO_TODO  from RHVD_HISTORIAL_MOD_HIJO where ID_DATOS_HIJOS_TRABAJADOR='" + Hijo + "' and to_char(FE_FILTRO_TODO,'dd/mm/yyyy hh:mi:ss') <>'" + fecha.trim() + "'";
+            ResultSet rs = this.cnn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("FE_FILTRO_TODO"));
+                rec.put("fecha", rs.getString("FE_FILTRO_TODO"));
+                rec.put("nombre", rs.getString("FE_FILTRO_TODO"));
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+            }
+        }
+        return lista;
+    }
+
+    @Override
     public List<Map<String, ?>> list_hijo_trabajdor(String id_tr) {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
@@ -264,6 +292,7 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
                 rec.put("us_modif", rs.getString("no_usuario_modif"));
                 rec.put("modif", rs.getString("FE_MODIF"));
                 rec.put("ip_usuario", rs.getString("IP_USUARIO"));
+                rec.put("es_procesado", rs.getString("es_procesado"));
                 lista.add(rec);
             }
             rs.close();

@@ -157,7 +157,7 @@
                                                
                                                     <%} else {%>
                                                     <td class="caji3">
-                                                        <input type="text" class="idc" name="idc" value="<%=request.getParameter("idc")%>" style="">
+                                                        <input type="hidden" class="idc" name="idc" value="<%=request.getParameter("idc")%>" style="">
 
                                                         <div class="form-group" >
                                                             <input id="file-5" class="file" type="file" data-preview-file-type="any" data-upload-url="#" name="archivo" multiple="">
