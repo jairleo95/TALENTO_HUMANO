@@ -159,7 +159,7 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT * FROM RHVD_HISTORIAL_MOD_HIJO WHERE  us_creacion is not null ";
+            String sql = "SELECT AP_MATERNO_T, AP_PATERNO_T, NO_TRABAJADOR_T, ID_DATOS_HIJOS_TRABAJADOR, ID_TRABAJADOR, AP_PATERNO, AP_MATERNO, NO_HIJO_TRABAJADOR, FE_NACIMIENTO, NO_ES_SEXO, ES_SEXO, ES_TIPO_DOC, NU_DOC, ES_PRESENTA_DOCUMENTO, ES_INSCRIPCION_VIG_ESSALUD, NO_ESSALUD, ES_ESTUDIO_NIV_SUPERIOR, NO_ESTUDIO_SUPERIOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, ES_DATOS_HIJO_TRABAJADOR, SEMESTRE, ESTADO_REGISTRO, to_char(FE_FILTRO_TODO,'dd/mm/yyyy hh:mi:ss') as FE_FILTRO_TODO, NO_USUARIO_CREACION, NO_USUARIO_MODIF, DE_TIP_DOC,ES_PROCESADO FROM RHVD_HISTORIAL_MOD_HIJO WHERE  us_creacion is not null ";
             if (tipo.equals("2")) {
                 sql += " and  ESTADO_REGISTRO ='0' and fe_creacion BETWEEN TO_DATE('" + FE_INICIO.trim() + "') AND TO_DATE('" + FE_FIN.trim() + "')  ";
             } else if (tipo.equals("3")) {
@@ -181,6 +181,7 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
                 rec.put("ap_mat_h", rs.getString("AP_MATERNO"));
                 rec.put("estado_filtro", rs.getString("ESTADO_REGISTRO"));
                 rec.put("fecha", rs.getString("FE_FILTRO_TODO"));
+                rec.put("procesado", rs.getString("ES_PROCESADO"));
                 lista.add(rec);
             }
             rs.close();
@@ -203,11 +204,40 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select  to_char(FE_FILTRO_TODO,'dd/mm/yyyy hh:mm:ss') as FE_FILTRO_TODO  from RHVD_HISTORIAL_MOD_HIJO where ID_DATOS_HIJOS_TRABAJADOR='" + Hijo + "'";
+            String sql = "select  to_char(FE_FILTRO_TODO,'dd/mm/yyyy hh:mi:ss') as FE_FILTRO_TODO  from RHVD_HISTORIAL_MOD_HIJO where ID_DATOS_HIJOS_TRABAJADOR='" + Hijo + "'";
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("FE_FILTRO_TODO"));
                 rec.put("fecha", rs.getString("FE_FILTRO_TODO"));
+                rec.put("nombre", rs.getString("FE_FILTRO_TODO"));
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+            }
+        }
+        return lista;
+    }
+
+    @Override
+    public List<Map<String, ?>> list_hijo_trabajdor(String id_tr) {
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "  SELECT * FROM RHTD_DATOS_HIJO_TRABAJADOR WHERE ID_TRABAJADOR='" + id_tr.trim() + "'";
+            ResultSet rs = this.cnn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("id_datos_hijos_trabajador"));
+                rec.put("nombre", rs.getString("ap_paterno") + " " + rs.getString("ap_materno") + " " + rs.getString("no_hijo_trabajador"));
                 lista.add(rec);
             }
             rs.close();
@@ -230,7 +260,7 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT AP_MATERNO_T, AP_PATERNO_T, NO_TRABAJADOR_T, ID_DATOS_HIJOS_TRABAJADOR, ID_TRABAJADOR, AP_PATERNO, AP_MATERNO, NO_HIJO_TRABAJADOR, FE_NACIMIENTO, ES_SEXO, ES_TIPO_DOC, NU_DOC, ES_PRESENTA_DOCUMENTO, ES_INSCRIPCION_VIG_ESSALUD, ES_ESTUDIO_NIV_SUPERIOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, ES_DATOS_HIJO_TRABAJADOR, SEMESTRE, ESTADO_REGISTRO, FE_FILTRO_TODO, NO_USUARIO_CREACION, NO_USUARIO_MODIF  FROM RHVD_HISTORIAL_MOD_HIJO where ID_DATOS_HIJOS_TRABAJADOR='" + id + "' and to_char(FE_FILTRO_TODO,'dd/mm/yyyy hh:mm:ss') ='" + fecha1.trim() + "' or to_char(FE_FILTRO_TODO,'dd/mm/yyyy hh:mm:ss') ='" + fecha2.trim() + "' ";
+            String sql = "SELECT * FROM RHVD_HISTORIAL_MOD_HIJO where ID_DATOS_HIJOS_TRABAJADOR='" + id + "' and to_char(FE_FILTRO_TODO,'dd/mm/yyyy hh:mi:ss') ='" + fecha1.trim() + "' or to_char(FE_FILTRO_TODO,'dd/mm/yyyy hh:mi:ss') ='" + fecha2.trim() + "' ";
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -242,6 +272,12 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
                 rec.put("ti_doc", rs.getString("ES_TIPO_DOC"));
                 rec.put("nu_doc", rs.getString("NU_DOC"));
                 rec.put("essalud", rs.getString("ES_INSCRIPCION_VIG_ESSALUD"));
+
+                rec.put("no_essalud", rs.getString("NO_ESSALUD"));
+                rec.put("no_niv_sup", rs.getString("NO_ESTUDIO_SUPERIOR"));
+                rec.put("no_sexo", rs.getString("NO_ES_SEXO"));
+                rec.put("de_tip_doc", rs.getString("DE_TIP_DOC"));
+
                 rec.put("estudios", rs.getString("ES_ESTUDIO_NIV_SUPERIOR"));
                 rec.put("us_creacion", rs.getString("NO_USUARIO_CREACION"));
                 rec.put("creacion", rs.getString("FE_CREACION"));
