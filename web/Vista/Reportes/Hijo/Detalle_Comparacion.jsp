@@ -35,7 +35,7 @@
                                                 <select name="trabajador" required="" class="tabajador">
                                                     <option value='' >[SELECCIONE]</option>
                                                 </select>
-                                                <input type="text" class="idtr" value="<%=request.getParameter("idtr")%>">
+                                                <input type="hidden" class="idtr" value="<%=request.getParameter("idtr")%>">
                                             </label>
                                         </section>
                                         <section class="col col-sm-6">
@@ -44,7 +44,7 @@
                                                 <select name="trabajador" required="" class="hijo">
                                                     <option value='' >[SELECCIONE]</option>
                                                 </select>
-                                                <input type="text" class="idh" value="<%=request.getParameter("idh")%>">
+                                                <input type="hidden" class="idh" value="<%=request.getParameter("idh")%>">
                                             </label>
                                         </section>
                                     </div>
@@ -56,7 +56,7 @@
                                             <label class="select"> <i class="icon-append fa fa-calendar"></i>
                                                 <select class="fecha1" required="">
                                                     <option value='' >[SELECCIONE]</option>
-                                                     <input type="text" class="fecha_default" value="<%=request.getParameter("fecha_default")%>">
+                                                     <input type="hidden" class="fecha_default" value="<%=request.getParameter("fecha_default")%>">
                                                 </select>
                                             </label>
                                         </section>
