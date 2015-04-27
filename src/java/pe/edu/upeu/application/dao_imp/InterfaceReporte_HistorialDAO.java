@@ -16,18 +16,24 @@ public interface InterfaceReporte_HistorialDAO {
 
     public List<Map<String, ?>> List_historial_modf_hijo(String FE_INICIO, String FE_FIN, String tipo);
 
-    public List<Map<String, ?>> Lista_campos_modif(String fecha1, String fecha2,String id);
+    public List<Map<String, ?>> Lista_campos_modif(String fecha1, String fecha2, String id);
 
     public List<Map<String, ?>> Listar_Tra_Fecha(String FE_INICIO, String FE_FIN);
 
     public List<Map<String, ?>> Listar_His_Estado_Civil(String FE_INICIO, String FE_FIN);
 
     public List<Map<String, ?>> Listar_Mod_Tra(String ID_TRABAJADOR);
-    public List<Map<String, ?>> Listar_hist_fecha(String FE_MODIF);
+
+    public List<Map<String, ?>> Listar_hist_fecha(String FE_MODIF, String idtra);
+
     public List<Map<String, ?>> Listar_dat_actual(String ID_TRABAJADOR);
 
-    public List<Map<String, ?>> ip_usuario(String IP_USUARIO);
-
     public List<Map<String, ?>> list_fecha_modif(String Hijo);
+
+    public List<Map<String, ?>> list_hijo_trabajdor(String id_tr);
+
+    public String[] decode(String t);
+
+    public void Procesar_historial_hijo(String id_hijo, String es_fecha, String fecha);
 
 }

@@ -39,7 +39,7 @@
 
                                     <h1 class="text-center ">Historial de Modificaciones <small>/ Trabajadores</small></h1><br>
                                     <div class="row">
-                                        <div class="col col-xs-9">
+                                        <div class="col col-xs-4">
                                             <section class="col col-xs-12">
                                                 <label class="label">Ultimas Modificaciones</label>
                                                 <label class="select">
@@ -49,11 +49,42 @@
                                                     <i></i></label>
                                             </section>
                                         </div>
-                                        <div class="col col-xs-3">
-                                            <section class="col col-sm-12">
-                                                <center>
-                                                    <a class="btn btn-primary btn-circle btn-xl btnEnviar"><i class="glyphicon glyphicon-search"></i></a>
-                                                </center>
+                                        <div class="col col-xs-8">
+                                            <section class="col col-md-12">
+                                                <div class="row">
+                                                    <div class="col col-sm-6">
+                                                        <label class="label">Usuario Modificador</label>
+                                                        <label class="input">
+                                                            <input type="text" disabled="" class="inUs">
+                                                        </label>
+                                                    </div>
+                                                    <div class="col col-sm-6">
+                                                        <label class="label">Fecha de Modificacion</label>
+                                                        <label class="input">
+                                                            <input type="text" disabled="" class="inFe">
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col col-sm-4">
+                                                        <label class="label">IP de Usuario</label>
+                                                        <label class="input">
+                                                            <input type="text" disabled="" class="inIp">
+                                                        </label>
+                                                    </div>
+                                                    <div class="col col-sm-4">
+                                                        <label class="label">Nombre del Host</label>
+                                                        <label class="input">
+                                                            <input type="text" disabled="" class="inHos">
+                                                        </label>
+                                                    </div>
+                                                    <div class="col col-sm-4">
+                                                        <label class="label">Direccion MAC</label>
+                                                        <label class="input">
+                                                            <input type="text" disabled="" class="inMac">
+                                                        </label>
+                                                    </div>
+                                                </div>
                                             </section>
                                         </div>
 
@@ -115,7 +146,7 @@
                                                             <td>Detalle</td>
                                                         </tr>
                                                     </thead>
-                                                    <tbody class="tbodys">
+                                                    <tbody class="tbodys_act">
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -176,6 +207,7 @@
         <script type="text/javascript">
             $(document).ready(function () {
                 var idtrab = '<%= request.getParameter("idtr")%>';
+                var ip,host,mac, us,fe;
                 cargar_fechas();
                 function cargar_fechas() {
                     var s = $('.s_fecha');
@@ -202,24 +234,97 @@
                     $('.ti_fecha').empty();
                     $('.ti_fecha').text("Datos al " + $(this).val());
                     cargar_hist($(this).val());
+
                 });
                 function cargar_hist(fe_hist) {
-                    $.post("../../../RHistorial?","opc=list_hist_fecha&fe_modif="+fe_hist, function(objJson){
-                        var lista=objJson.lista;
-                        if(lista.length<1){                            
-                        }else{
-                            var text="<tr>";
-                            var cont=1;
-                            for(var i=0; i<lista.length;i++){
-                                text+="<td>"+(cont)+"</td>";
-                                text+="<td>Id Trabajador</td>";
-                                text+="<td>"+lista[i].col1+"</td>";
+                    $.post("../../../RHistorial?", "opc=list_hist_fecha&fe_modif=" + fe_hist + "&idtra=" + idtrab, function (objJson) {
+                        var lista = objJson.lista;
+                        var ipp = objJson.ipp;
+                        var idd=objJson.idd;
+                        ip=ipp[0];
+                        host=ipp[1];
+                        mac=ipp[2];
+                        us=lista[58].det;
+                        fe=lista[59].det;
+                        if (lista.length < 1) {
+                        } else {
+                            var text = "";
+                            
+                            for (var i = 0; i < lista.length; i++) {
+
+                                text += "<tr class='roh" + i + "'>";
+                                text += "<td>" + (i + 1) + "</td>";
+                                text += "<td>" + lista[i].col + "</td>";
+
+                                if (lista[i].det != undefined) {
+                                    if (i == 60) {
+                                        text += "<td class='deth" + i + "'>" + ip + " / " + host + " / " + mac + "</td>";
+                                    } else {
+                                        if(i==){
+                                            
+                                        }
+                                        text += "<td class='deth" + i + "'>" + lista[i].det + "</td>";
+                                    }
+                                } else {
+                                    text += "<td>Sin Datos</td>";
+                                }
+
+
+                                text += "</tr>";
                             }
-                            text+="</tr>";
                             $('.tbodys_hist').empty();
                             $('.tbodys_hist').append(text);
+                            cargar_act();
+                            cargar_ip();
                         }
                     });
+                }
+                function cargar_act() {
+                    $.post("../../../RHistorial?", "opc=list_actual&idtra=" + idtrab, function (objJson) {
+                        var lista = objJson.lista;
+                        var ipp = objJson.ipp;
+                        if (lista.length < 1) {
+                        } else {
+                            var text = "";
+                            var nn = lista.length;
+                            for (var i = 0; i < lista.length; i++) {
+                                text += "<tr class='roa" + i + "'>";
+                                text += "<td>" + (i + 1) + "</td>";
+                                text += "<td>" + lista[i].col + "</td>";
+
+                                if (lista[i].det != undefined) {
+                                    if (i == 60) {
+                                        text += "<td class='deta" + i + "'>" + ipp[0] + " / " + ipp[1] + " / " + ipp[2] + "</td>";
+                                    } else {
+                                        text += "<td class='deta" + i + "'>" + lista[i].det + "</td>";
+                                    }
+                                } else {
+                                    text += "<td>Sin Datos</td>";
+                                }
+
+                                text += "</tr>";
+                            }
+                            $('.tbodys_act').empty();
+                            $('.tbodys_act').append(text);
+                            color_t(nn);
+                        }
+                    });
+                }
+                function cargar_ip(){
+                    $('.inUs').val(us);
+                    $('.inFe').val(fe);
+                    $('.inIp').val(ip);
+                    $('.inHos').val(host);
+                    $('.inMac').val(mac);
+                }
+                function color_t(nn) {
+                    for (var i = 0; i < nn; i++) {
+                        if ($('.deth' + i).text() != $('.deta' + i).text()) {
+                            $('.roh' + i).css('background-color', '#efe1b3');
+                            $('.roa' + i).css('background-color', '#cde0c4');
+                        }
+                    }
+
                 }
             });
         </script>

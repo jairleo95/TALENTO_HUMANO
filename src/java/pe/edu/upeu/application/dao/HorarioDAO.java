@@ -150,4 +150,21 @@ public class HorarioDAO implements InterfaceHorarioDAO {
         return id;
     }
 
+    @Override
+    public String id_det_horario(String id_dgp) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT ID_TIPO_HORARIO FROM RHTD_DETALLE_HORARIO WHERE ID_DGP='"+id_dgp.trim()+"'";
+        String id = "";
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                id = rs.getString(1);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return id;
+    }
+
 }

@@ -32,10 +32,10 @@
                                         <section class="col col-sm-6">
                                             <label><strong>Trabajador</strong></label>
                                             <label class="select"> <i class="icon-append fa fa-calendar"></i>
-                                                <select name="trabajador" required="">
+                                                <select name="trabajador" required="" class="tabajador">
                                                     <option value='' >[SELECCIONE]</option>
                                                 </select>
-                                                <input type="text" class="idtr" value="<%%>">
+                                                <input type="hidden" class="idtr" value="<%=request.getParameter("idtr")%>">
                                             </label>
                                         </section>
                                         <section class="col col-sm-6">
@@ -44,7 +44,7 @@
                                                 <select name="trabajador" required="" class="hijo">
                                                     <option value='' >[SELECCIONE]</option>
                                                 </select>
-                                                <input type="text" class="idh" value="<%="DHT-001665"%>">
+                                                <input type="hidden" class="idh" value="<%=request.getParameter("idh")%>">
                                             </label>
                                         </section>
                                     </div>
@@ -52,15 +52,16 @@
                                 <div class="row">
                                     <div class="col col-lg-12">
                                         <section class="col col-sm-6">
-                                            <label><strong>Fecha</strong></label>
+                                            <label><strong>Fecha 1</strong></label>
                                             <label class="select"> <i class="icon-append fa fa-calendar"></i>
                                                 <select class="fecha1" required="">
                                                     <option value='' >[SELECCIONE]</option>
+                                                     <input type="hidden" class="fecha_default" value="<%=request.getParameter("fecha_default")%>">
                                                 </select>
                                             </label>
                                         </section>
                                         <section class="col col-sm-6">
-                                            <label><strong>Fecha</strong></label>
+                                            <label><strong>Fecha 2</strong></label>
                                             <label class="select"><i class="icon-append fa fa-calendar"></i>
                                                 <select class="fecha2" required="">
                                                     <option value='' >[SELECCIONE]</option>
@@ -138,25 +139,34 @@
         <script src="../../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
         <script src="../../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="../../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
+        <script src="../../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
+
         <script type="text/javascript">
             $(document).ready(function () {
+
+                list_select($(".hijo"), "../../../RHistorial", "opc=Listar_hijo_trabajador&idtr=" + $(".idtr").val(), "1", $(".idh").val());
+                list_select($(".fecha1"), "../../../RHistorial", "opc=Fe_Modif_Hijo&hijo=" + $(".idh").val(), "1", $(".fecha_default").val());
+
                 $.post("../../../RHistorial", "opc=Fe_Modif_Hijo&hijo=" + $(".idh").val(), function (objJson) {
-                    var select1 = $(".fecha1");
                     var select2 = $(".fecha2");
                     var lista = objJson.lista;
-                    for (var i = 0; i < lista.length; i++) {
-                        select1.append("<option value='" + lista[i].fecha + "'>" + lista[i].fecha + "</option>");
-                        select2.append("<option value='" + lista[i].fecha + "'>" + lista[i].fecha + "</option>");
+                    select2.append("<option value=''>Cargando...</option>");
+                    select2.empty();
+                    if (lista.length > 0) {
+                        select2.append("<option value=''>[SELECCIONE]</option>");
+                        for (var i = 0; i < lista.length; i++) {
+                            select2.append("<option value='" + lista[i].fecha + "'>" + lista[i].fecha + "</option>");
+                        }
                     }
-
                 });
 
                 $(".fecha2").change(function () {
                     var tbody = $(".tbodys");
                     tbody.empty();
+                    var texto_html = "";
                     $.post("../../../RHistorial", "opc=Comparar_dato_Hijo&id=" + $(".idh").val() + "&fecha1=" + $(".fecha1").val() + "&fecha2=" + $(".fecha2").val(), function (objJson) {
                         var lista = objJson.lista;
-                        var texto_html = "";
+
 
                         if (lista[0].ap_p != lista[1].ap_p) {
                             texto_html += "<tr class='danger'>";
@@ -191,21 +201,21 @@
                         texto_html += "<td>4</td><td>Fecha de Nacimiento:</td><td>" + lista[0].fe_nac + "</td>";
                         texto_html += "<td>" + lista[1].fe_nac + "</td></tr>";
 
-                        if (lista[0].sexo != lista[1].sexo) {
+                        if (lista[0].no_sexo != lista[1].no_sexo) {
                             texto_html += "<tr class='danger'>";
                         } else {
                             texto_html += "<tr>";
                         }
-                        texto_html += "<td>5</td><td>Sexo:</td><td>" + lista[0].sexo + "</td>";
-                        texto_html += "<td>" + lista[1].sexo + "</td></tr>";
+                        texto_html += "<td>5</td><td>Sexo:</td><td>" + lista[0].no_sexo + "</td>";
+                        texto_html += "<td>" + lista[1].no_sexo + "</td></tr>";
 
-                        if (lista[0].ti_doc != lista[1].ti_doc) {
+                        if (lista[0].de_tip_doc != lista[1].de_tip_doc) {
                             texto_html += "<tr class='danger'>";
                         } else {
                             texto_html += "<tr>";
                         }
-                        texto_html += "<td>6</td><td>Tipo de documento:</td><td>" + lista[0].ti_doc + "</td>";
-                        texto_html += "<td>" + lista[1].ti_doc + "</td></tr>";
+                        texto_html += "<td>6</td><td>Tipo de documento:</td><td>" + lista[0].de_tip_doc + "</td>";
+                        texto_html += "<td>" + lista[1].de_tip_doc + "</td></tr>";
 
                         if (lista[0].nu_doc != lista[1].nu_doc) {
                             texto_html += "<tr class='danger'>";
@@ -216,22 +226,22 @@
                         texto_html += "<td>" + lista[1].nu_doc + "</td></tr>";
 
 
-                        if (lista[0].essalud != lista[1].essalud) {
+                        if (lista[0].no_essalud != lista[1].no_essalud) {
                             texto_html += "<tr class='danger'>";
                         } else {
                             texto_html += "<tr>";
                         }
-                        texto_html += "<td>8</td><td>Inscripcion Vigente en Essalud:</td><td>" + lista[0].essalud + "</td>";
-                        texto_html += "<td>" + lista[1].essalud + "</td></tr>";
+                        texto_html += "<td>8</td><td>Inscripcion Vigente en Essalud:</td><td>" + lista[0].no_essalud + "</td>";
+                        texto_html += "<td>" + lista[1].no_essalud + "</td></tr>";
 
 
-                        if (lista[0].estudios != lista[1].estudios) {
+                        if (lista[0].no_niv_sup != lista[1].no_niv_sup) {
                             texto_html += "<tr class='danger'>";
                         } else {
                             texto_html += "<tr>";
                         }
-                        texto_html += "<td>9</td><td>Estudios en Nivel Superior:</td><td>" + lista[0].estudios + "</td>";
-                        texto_html += "<td>" + lista[1].estudios + "</td></tr>";
+                        texto_html += "<td>9</td><td>Estudios en Nivel Superior:</td><td>" + lista[0].no_niv_sup + "</td>";
+                        texto_html += "<td>" + lista[1].no_niv_sup + "</td></tr>";
 
 
                         if (lista[0].us_creacion != lista[1].us_creacion) {
@@ -266,21 +276,51 @@
                         texto_html += "<td>13</td><td>Fecha de Modificacion:</td><td>" + lista[0].modif + "</td>";
                         texto_html += "<td>" + lista[1].modif + "</td></tr>";
 
-                        if (lista[0].ip_usuario != lista[1].ip_usuario) {
+                        var detalle_ip1 = lista[0].ip_usuario.split("**");
+                        var ip1 = detalle_ip1[0];
+                        var no_usuario1 = detalle_ip1[1];
+                        var mac1 = detalle_ip1[2];
+
+                        var detalle_ip2 = lista[1].ip_usuario.split("**");
+                        var ip2 = detalle_ip2[0];
+                        var no_usuario2 = detalle_ip2[1];
+                        var mac2 = detalle_ip2[2];
+
+
+                        if (ip1 != ip2) {
                             texto_html += "<tr class='danger'>";
                         } else {
                             texto_html += "<tr>";
                         }
-                        texto_html += "<td>13</td><td>Fecha de Modificacion:</td><td>" + lista[0].ip_usuario + "</td>";
-                        texto_html += "<td>" + lista[1].ip_usuario + "</td></tr>";
+                        texto_html += "<td>15</td><td>Direccion Ip:</td><td>" + ip1 + "</td>";
+                        texto_html += "<td>" + ip2 + "</td></tr>";
 
+                        if (no_usuario1 != no_usuario2) {
+                            texto_html += "<tr class='danger'>";
+                        } else {
+                            texto_html += "<tr>";
+                        }
+                        texto_html += "<td>16</td><td>Nombre de Usuario:</td><td>" + no_usuario1 + "</td>";
+                        texto_html += "<td>" + no_usuario2 + "</td></tr>";
 
+                        if (mac1 != mac2) {
+                            texto_html += "<tr class='danger'>";
+                        } else {
+                            texto_html += "<tr>";
+                        }
+                        texto_html += "<td>17</td><td>Direccion Fisica:</td><td>" + mac1 + "</td>";
+                        texto_html += "<td>" + mac2 + "</td></tr>";
 
 
                         tbody.append(texto_html);
-                        texto_html = "";
+
                     });
+                    texto_html = "";
                 });
+
+
+
+
 
 
             });

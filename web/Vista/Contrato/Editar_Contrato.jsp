@@ -1793,8 +1793,8 @@
                     listar_centro_costo2(num, "0", arr_cc);
                 });
                 //  alert(num);
-                $(".por-cen-1").keyup(function() {
-                    alert();
+                $(".por-cen-"+num).keyup(function() {
+                    sumn_porcen_total();
                 });
                 $(".remover" + num).click(function() {
                     $(".remover" + (num - 1)).removeAttr("disabled");

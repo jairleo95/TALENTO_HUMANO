@@ -405,4 +405,36 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
     public void Modificar_Centro_Costo(String id_dcc) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List<Map<String, ?>> List_centr_iddgp(String id_dgp) {
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "SELECT (c.ID_CENTRO_COSTO)as id_centro ,(c.CO_CENTRO_COSTO||' - '||c.DE_CENTRO_COSTO)as DE_CENTRO_COSTO,c.CO_CENTRO_COSTO, c.ID_DEPARTAMENTO, d.CA_PORCENTAJE,pd.ID_DIRECCION,(d.ID_DETALLE_CENTRO_COSTO)as id_det_cen FROM RHTR_CENTRO_COSTO c,RHTD_DETALLE_CENTRO_COSTO d,RHVD_PUESTO_DIRECCION pd where pd.ID_DEPARTAMENTO=c.ID_DEPARTAMENTO and d.ID_CENTRO_COSTO=c.ID_CENTRO_COSTO and  d.ID_DGP='"+id_dgp.trim()+"' GROUP by( c.ID_CENTRO_COSTO ,c.DE_CENTRO_COSTO ,c.CO_CENTRO_COSTO, c.ID_DEPARTAMENTO,d.CA_PORCENTAJE,pd.ID_DIRECCION,d.ID_DETALLE_CENTRO_COSTO)";
+            ResultSet rs = this.cnn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("id_centro"));
+                rec.put("nombre", rs.getString("DE_CENTRO_COSTO"));
+                rec.put("id_det_ce", rs.getString("id_det_cen"));
+                rec.put("co_cen_c", rs.getString("CO_CENTRO_COSTO"));
+                rec.put("id_dep_cc", rs.getString("ID_DEPARTAMENTO"));
+                rec.put("id_dir_cc", rs.getString("ID_DIRECCION"));
+                rec.put("ca_por_cc", rs.getString("CA_PORCENTAJE"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
+    }
 }

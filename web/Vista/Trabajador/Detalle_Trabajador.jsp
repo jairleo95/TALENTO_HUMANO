@@ -170,6 +170,7 @@
             String idp = (String) sesion.getAttribute("p");
             String idrol = (String) sesion.getAttribute("IDROL");
             String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
+            String idtr_session = (String) sesion.getAttribute("IDTR");
             String iddgp = request.getParameter("dgp");
             String cod = request.getParameter("c");
             String iddrp = request.getParameter("drp");
@@ -243,19 +244,32 @@
                                         for (int e = 0; e < id_empleadox_ide.size(); e++) {
                                             Empleado emp = new Empleado();
                                             emp = (Empleado) id_empleadox_ide.get(e);
-                                            if (ID_ROL.trim().equals("ROL-0009")) {
-                                                int val_aps = Integer.parseInt(request.getParameter("val_aps"));
-                                                if (val_aps > 0) {%>
 
+                                    %>
                                     <td>
-                                        <table class="info-det">
-                                            <tr><td class="td" colspan="3">Codigo APS:</td></tr>
-                                            <tr><td class="td" colspan="2"><%=emp.getCo_aps()%></td></tr>
+                                        <table class="info-det" style="margin-left:80%;" >
+                                            <%if (emp.getCo_aps() != null) {
+                                                 int val_aps = Integer.parseInt(emp.getCo_aps());
+                                                 if (val_aps > 0) {%>
+
+                                            <tr><td class="td" >Código APS:</td><td class="td1" ><%=emp.getCo_aps()%></td></tr>
+                                                <%}
+                                                    }
+                                                    if (emp.getCo_huella_digital() != null) {
+
+                                                        int val_hue = Integer.parseInt(emp.getCo_huella_digital());
+                                                        if (val_hue > 0) {%>
+                                            <tr><td class="td" >Código Huella</td><td class="td1" ><%=emp.getCo_huella_digital()%></td></tr>
+                                                <%}%>
+                                                <%}%>
                                         </table>
                                     </td>
-                                    <%} else {%>
+                                    <%
+
+                                        String val_aps = emp.getCo_aps();
+                                        if (val_aps == null && ID_ROL.trim().equals("ROL-0001")) {%>
                                     <td>
-                                        <table class="info-det">
+                                        <table class="info-det" style="margin-left:50%;">
                                             <input type="hidden" name="iddetalle_dgp" value="<%=iddgp%>">
                                             <input type="hidden" name="puesto_id" value="<%=idp%>">
                                             <input type="hidden" name="cod" value="<%=cod%>">
@@ -269,21 +283,10 @@
                                         </table>
                                     </td>
                                     <%}
-                                        }
-                                        if (ID_ROL.trim().equals("ROL-0007") || ID_ROL.trim().equals("ROL-0001")) {
-                                            if (request.getParameter("val_huella") != null) {
-                                                int val_huella = Integer.parseInt(request.getParameter("val_huella"));
-                                                if (val_huella > 0) {%>
+                                        String val_hue = emp.getCo_huella_digital();
+                                        if (val_hue == null && ID_ROL.trim().equals("ROL-0001")) {%>
                                     <td>
-                                        <table class="info-det">
-                                            <tr><td class="td" 
-                                                    >Codigo huella digital:</td></tr>
-                                            <tr><td class="td" ><%=emp.getCo_huella_digital()%></td></tr>
-                                        </table>
-                                    </td>
-                                    <%} else {%>
-                                    <td>
-                                        <table class="info-det">
+                                        <table class="info-det" style="margin-left:50%;">
                                             <input type="hidden" name="iddetalle_dgp" value="<%=iddgp%>">
                                             <input type="hidden" name="puesto_id" value="<%=idp%>">
                                             <input type="hidden" name="cod" value="<%=cod%>">
@@ -297,8 +300,8 @@
                                         </table>
                                     </td>
                                     <%}
-                                            }
-                                        }%>
+
+                                    %>
                                     <%}%>
                                 </table>
                             </form>
@@ -346,8 +349,8 @@
 
                     <hr class="simple">
                     <ul id="myTab1" class="nav nav-tabs bordered">
-                        <% String edit  = request.getParameter("edit");
-                                if (List_Auto_mostrar.size() == 1 && aut != null) {
+                        <% String edit = request.getParameter("edit");
+                            if (List_Auto_mostrar.size() == 1 && aut != null) {
                                 for (int r = 0; r < List_Auto_mostrar.size(); r++) {
                                     Auto_Mostrar a = new Auto_Mostrar();
                                     a = (Auto_Mostrar) List_Auto_mostrar.get(r);
@@ -358,17 +361,17 @@
                         <%}
 
                             }%>
-                            <%if (iddep == null|| iddep.equals("DPT-0019") || idrol.trim().equals("ROL-0012") || idrol.trim().equals("ROL-0002") || idrol.trim().equals("ROL-0005")) {
+                        <%if (iddep == null || iddep.equals("DPT-0019") || idrol.trim().equals("ROL-0012") || idrol.trim().equals("ROL-0002") || idrol.trim().equals("ROL-0005")) {
                         %>
                         <li >
-                            <a href="../../contrato?idtr=<%=idtr%>&opc=Detalle_Contractual" target="myframe2"  ><i class="fa fa-file-text fa-gear"></i> Información Contractual </a>
+                            <a href="../../contrato?idtr=<%=idtr%>&opc=Detalle_Contractual" target="myframe2"  ><i class="fa fa-file-text fa-gear"></i> Informaci? Contractual </a>
                         </li>
                         <%}%>
                         <li >
-                            <a href="Datos_Generales.jsp?edit=<%=edit%>" target="myframe2"  ><i class="fa fa-male fa-gear"></i> Información General </a>
+                            <a href="Datos_Generales.jsp?edit=<%=edit%>" target="myframe2"  ><i class="fa fa-male fa-gear"></i> Informaci? General </a>
                         </li>
                         <li>
-                            <a href="Aspecto_Academico.jsp?edit=<%=edit%>" target="myframe2"><i class="fa fa-graduation-cap fa-gear"></i> Aspecto Académico</a>
+                            <a href="Aspecto_Academico.jsp?edit=<%=edit%>" target="myframe2"><i class="fa fa-graduation-cap fa-gear"></i> Aspecto Acad?ico</a>
                         </li>
                         <li >
                             <a href="../../trabajador?idtr=<%=idtr%>&opc=Listar_Asp_Social" target="myframe2"><i class="fa fa-home fa-gear"></i> Aspecto Social </a>
@@ -379,14 +382,20 @@
                         <li >
                             <a href="../../dgp?idtr=<%=idtr%>&opc=List_Dgp_Tr" target="myframe2"><i class="fa fa-file-o fa-gear"></i> Historial de Requerimientos </a>
                         </li>
-                        <li >
+                        <li>
                             <a href="../../trabajador?idtr=<%=idtr%>&opc=Documento_Trabajador" target="myframe2"><i class="fa fa-file fa-gear"></i> Documentación </a>
                         </li>
 
                         <%if (idrol.trim().equals("ROL-0007") | ID_ROL.trim().equals("ROL-0001")) {
                         %>
                         <li >
-                            <a href="../../empleado?opc=Eva_Emp&idtr=<%=idtr%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Evaluación de Empleado</a>
+                            <a href="../../empleado?opc=Eva_Emp&idtr=<%=idtr%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Evaluaci? de Empleado</a>
+                        </li>
+                        <%}%>
+                        <%if (idtr.equals(idtr_session)) {
+                        %>
+                        <li>
+                            <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2"><i class="fa fa-lock"></i> Cambiar Contraseña </a>
                         </li>
                         <%}%>
 
@@ -614,12 +623,12 @@
         <%}%>
 
         <script>
-            $(document).ready(function () {
-                $(".fe_desde_p, .fe_hasta_p").change(function () {
+            $(document).ready(function() {
+                $(".fe_desde_p, .fe_hasta_p").change(function() {
                     var cuotas = $(".cuota_docente");
                     cuotas.empty();
 
-                    $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function (objJson) {
+                    $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function(objJson) {
                         var lista = objJson.lista;
                         if (objJson.rpta == -1) {
                             alert(objJson.mensaje);
@@ -631,36 +640,36 @@
                     });
                 });
 
-                $(".btn_guardar_ca").click(function () {
+                $(".btn_guardar_ca").click(function() {
                     $.ajax({
                         url: "../../carga_academica",
                         type: "POST",
                         data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
-                    }).done(function (ids) {
+                    }).done(function(ids) {
                         var arr_id = ids.split(":");
                         alert("Registrado con exito!...");
                         $(".proceso").val(arr_id[0]);
                         $(".dgp").val(arr_id[1]);
                         $(".btn_procesar").show();
-                    }).fail(function (e) {
+                    }).fail(function(e) {
                         alert("Error: " + e);
                     });
                 });
 
-                $(".btn_procesar").click(function () {
+                $(".btn_procesar").click(function() {
                     $.ajax({
                         url: "../../carga_academica", data: "opc=Procesar&dgp=" + $(".dgp").val() + "&proceso=" + $(".proceso").val()
-                    }).done(function () {
+                    }).done(function() {
                         window.location.href = "../../carga_academica?opc=Reporte_Carga_Academica";
                     });
                 });
 
-                $(".btn-autor").click(function (e) {
+                $(".btn-autor").click(function(e) {
                     $.SmartMessageBox({
-                        title: "Alerta de Confirmación!",
-                        content: "¿Esta totalmente seguro de autorizar este requerimiento?",
+                        title: "Alerta de Confirmaci?!",
+                        content: "?sta totalmente seguro de autorizar este requerimiento?",
                         buttons: '[No][Si]'
-                    }, function (ButtonPressed) {
+                    }, function(ButtonPressed) {
                         if (ButtonPressed === "Si") {
                             // return true;
                             $(".form-aut").submit();
@@ -671,12 +680,12 @@
                     });
                     e.preventDefault();
                 });
-                $(".btn-rech").click(function (e) {
+                $(".btn-rech").click(function(e) {
                     $.SmartMessageBox({
-                        title: "Alerta de Confirmación!",
-                        content: "¿Esta totalmente seguro de rechazar este requerimiento?",
+                        title: "Alerta de Confirmaci?!",
+                        content: "?sta totalmente seguro de rechazar este requerimiento?",
                         buttons: '[No][Si]'
-                    }, function (ButtonPressed) {
+                    }, function(ButtonPressed) {
                         if (ButtonPressed === "Si") {
                             $(".form-rech").submit();
                         }
@@ -692,7 +701,7 @@
         <script src="../../js/JQuery/jQuery.js"></script>
         <script src="../../js/Js_dlmenu/jquery.dlmenu.js"></script>
         <script>
-            $(function () {
+            $(function() {
                 $('#dl-menu').dlmenu({
                     animationClasses: {classin: 'dl-animate-in-2', classout: 'dl-animate-out-2'}
                 });
@@ -762,7 +771,7 @@
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
             function closedthis() {
                 $.smallBox({
-                    title: "¡Ficha de trabajador registrada correctamente!",
+                    title: "?icha de trabajador registrada correctamente!",
                     content: "ya puede visualizar toda la informacion del trabajador...",
                     color: "#739E73",
                     iconSmall: "fa fa-check fa-2x fadeInRight animated",
@@ -772,18 +781,18 @@
 
             function closedthis2() {
                 $.smallBox({
-                    title: "¡Contrato Especial registrado con exito!",
+                    title: "?ontrato Especial registrado con exito!",
                     content: "ya puede visualizar el contrato en Detalle del Trabajador",
                     color: "#739E73",
                     iconSmall: "fa fa-check fa-2x fadeInRight animated",
                     timeout: 6000
                 });
             }
-            $(document).ready(function () {
+            $(document).ready(function() {
 
                 pageSetUp();
 
-                $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+                $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
                     $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                 });
                 $("#cod_ap").numeric();
@@ -806,7 +815,7 @@
                 /*
                  * Smart Notifications
                  */
-                $('#eg1').click(function (e) {
+                $('#eg1').click(function(e) {
 
                     $.bigBox({
                         title: "Big Information box",
@@ -820,7 +829,7 @@
                     e.preventDefault();
                 })
 
-                $('#eg2').click(function (e) {
+                $('#eg2').click(function(e) {
 
                     $.bigBox({
                         title: "Big Information box",
@@ -833,7 +842,7 @@
                     e.preventDefault();
                 })
 
-                $('#eg3').click(function (e) {
+                $('#eg3').click(function(e) {
 
                     $.bigBox({
                         title: "Shield is up and running!",
@@ -846,7 +855,7 @@
                     e.preventDefault();
                 })
 
-                $('#eg4').click(function (e) {
+                $('#eg4').click(function(e) {
 
                     $.bigBox({
                         title: "Success Message Example",
@@ -855,7 +864,7 @@
                         //timeout: 8000,
                         icon: "fa fa-check",
                         number: "4"
-                    }, function () {
+                    }, function() {
                         closedthis();
                     });
                     e.preventDefault();
@@ -863,7 +872,7 @@
 
 
 
-                $('#eg5').click(function () {
+                $('#eg5').click(function() {
 
                     $.smallBox({
                         title: "Ding Dong!",
@@ -873,7 +882,7 @@
                         icon: "fa fa-bell swing animated"
                     });
                 });
-                $('#eg6').click(function () {
+                $('#eg6').click(function() {
 
                     $.smallBox({
                         title: "Big Information box",
@@ -884,7 +893,7 @@
                     });
                 })
 
-                $('#eg7').click(function () {
+                $('#eg7').click(function() {
 
                     $.smallBox({
                         title: "James Simmons liked your comment",
@@ -900,12 +909,12 @@
                  * SmartAlerts
                  */
                 // With Callback
-                $("#smart-mod-eg1").click(function (e) {
+                $("#smart-mod-eg1").click(function(e) {
                     $.SmartMessageBox({
                         title: "Smart Alert!",
                         content: "This is a confirmation box. Can be programmed for button callback",
                         buttons: '[No][Yes]'
-                    }, function (ButtonPressed) {
+                    }, function(ButtonPressed) {
                         if (ButtonPressed === "Yes") {
 
                             $.smallBox({
@@ -930,7 +939,7 @@
                     e.preventDefault();
                 })
                 // With Input
-                $("#smart-mod-eg2").click(function (e) {
+                $("#smart-mod-eg2").click(function(e) {
 
                     $.SmartMessageBox({
                         title: "Smart Alert: Input",
@@ -938,13 +947,13 @@
                         buttons: "[Accept]",
                         input: "text",
                         placeholder: "Enter your user name"
-                    }, function (ButtonPress, Value) {
+                    }, function(ButtonPress, Value) {
                         alert(ButtonPress + " " + Value);
                     });
                     e.preventDefault();
                 })
                 // With Buttons
-                $("#smart-mod-eg3").click(function (e) {
+                $("#smart-mod-eg3").click(function(e) {
 
                     $.SmartMessageBox({
                         title: "Smart Notification: Buttons",
@@ -954,7 +963,7 @@
                     e.preventDefault();
                 })
                 // With Select
-                $("#smart-mod-eg4").click(function (e) {
+                $("#smart-mod-eg4").click(function(e) {
 
                     $.SmartMessageBox({
                         title: "Smart Alert: Select",
@@ -962,13 +971,13 @@
                         buttons: "[Done]",
                         input: "select",
                         options: "[Costa Rica][United States][Autralia][Spain]"
-                    }, function (ButtonPress, Value) {
+                    }, function(ButtonPress, Value) {
                         alert(ButtonPress + " " + Value);
                     });
                     e.preventDefault();
                 });
                 // With Login
-                $("#smart-mod-eg5").click(function (e) {
+                $("#smart-mod-eg5").click(function(e) {
 
                     $.SmartMessageBox({
                         title: "Login form",
@@ -976,7 +985,7 @@
                         buttons: "[Cancel][Accept]",
                         input: "text",
                         placeholder: "Enter your user name"
-                    }, function (ButtonPress, Value) {
+                    }, function(ButtonPress, Value) {
                         if (ButtonPress == "Cancel") {
                             alert("Why did you cancel that? :(");
                             return 0;
@@ -990,7 +999,7 @@
                             buttons: "[Login]",
                             input: "password",
                             placeholder: "Password"
-                        }, function (ButtonPress, Value) {
+                        }, function(ButtonPress, Value) {
                             alert("Username: " + ValueOriginal + " and your password is: " + Value);
                         });
                     });
@@ -1005,7 +1014,7 @@
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
-            (function () {
+            (function() {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
@@ -1015,18 +1024,18 @@
             })();</script>
         <script type="text/javascript">
             $(document).ready(
-                    function () {
+                    function() {
 
 
                     });</script>
         <script type="text/javascript" language="javascript">
-            $('.ver_foto').click(function () {
+            $('.ver_foto').click(function() {
                 $(".file-foto").click();
             });
-            $(window).load(function () {
+            $(window).load(function() {
 
-                $(function () {
-                    $('.file-foto').change(function (e) {
+                $(function() {
+                    $('.file-foto').change(function(e) {
 
                         if (this.files[0].size <= 500000) {
                             var jForm = new FormData();
@@ -1039,13 +1048,13 @@
                                 processData: false,
                                 contentType: false,
                                 data: jForm
-                            }).done(function (f) {
+                            }).done(function(f) {
                                 $(".mensaje").text(f);
                             });
                             addImage(e);
                             // alert("Archivo permitido");
                         } else {
-                            alert("Archivo no permitido, su tamaño debe ser menor a 500 KB");
+                            alert("Archivo no permitido, su tama? debe ser menor a 500 KB");
                             $(this).val('');
                         }
 

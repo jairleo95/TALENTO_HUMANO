@@ -60,6 +60,8 @@ public interface InterfaceDgpDAO {
 
     public int VALIDAR_DGP_CONTRATO(String id);
 
+    public int Can_cc_iddgp(String id_dgp);
+
     public List<Map<String, ?>> list_Req(String id);
 
     public List<Map<String, ?>> Cargar_Datos_Dgp(String id);

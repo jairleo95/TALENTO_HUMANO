@@ -73,6 +73,12 @@ public class CCentro_Costo extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", list);
             }
+            if (opc.equals("Listar_centro_id_dgp")) {
+                String id_con = request.getParameter("id_dgp");
+                List<Map<String, ?>> list = cc.List_centr_iddgp(id_con);
+                rpta.put("rpta", "1");
+                rpta.put("lista", list);
+            }
             if (opc.equals("Listar_centro_id_con")) {
                 String id_con = request.getParameter("id_con");
                 List<Map<String, ?>> list = cc.List_centr_idcon(id_con);

@@ -90,6 +90,7 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
             while (rs.next()) {
                 V_Usuario us = new V_Usuario();
                 us.setId_usuario(rs.getString("id_usuario"));
+                us.setId_trabajador(rs.getString("id_trabajador"));
                 us.setId_rol(rs.getString("id_rol"));
                 us.setId_empleado(rs.getString("id_empleado"));
                 us.setNo_usuario(rs.getString("no_usuario"));
@@ -472,5 +473,29 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
             this.conn.close();
         }
         return fecha;
+    }
+
+    @Override
+    public void Mod_Clave(String id_usuario, String pwd, String us_modif) {
+        CallableStatement cst;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = conn.conex.prepareCall("{CALL RHSP_MOD_USUARIO_CLAVE( ?,?,?,?)}");
+            cst.setString(1, id_usuario);
+            cst.setString(2, pwd);
+            cst.setString(3, us_modif);
+            cst.setString(4, FactoryConnectionDB.detalle_ip());
+            cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
     }
 }
