@@ -251,4 +251,33 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
 
     }
 
+    @Override
+    public List<Map<String, ?>> Listar_Horario_dgp(String id_dgp) {
+       List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "SELECT h.ID_HORARIO,h.DIA_HORARIO,h.HO_DESDE,h.HO_HASTA FROM RHTD_DETALLE_HORARIO dh,RHTC_HORARIO h WHERE h.ID_DETALLE_HORARIO = dh.ID_DETALLE_HORARIO and dh.ID_DGP='"+id_dgp.trim()+"'";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("ID_HORARIO").trim());
+                rec.put("dia_h", rs.getString("DIA_HORARIO").trim());
+                rec.put("hor_d", rs.getString("HO_DESDE").trim());
+                rec.put("hor_h", rs.getString("HO_HASTA").trim());
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
+    }
+
 }
