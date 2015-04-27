@@ -57,18 +57,13 @@
                                         <center>
                                             <section class="col col-sm-12">
                                                 <a class="btn btn-primary btn-circle btn-xl btnEnviar"><i class="glyphicon glyphicon-search"></i></a>
+                                                <a class="btn btn-danger btn-circle btn-xl btnCancelar"><i class="glyphicon glyphicon-remove"></i></a>
                                             </section>
                                         </center>
                                     </div>
-
-
                                 </div>
-
                             </form>
-
-
                         </div>
-
                     </div>
                     <div class="row">
                         <div class="well" >
