@@ -71,7 +71,7 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
                 adday = "+1";
             }
 
-            String sql = " select * from RHVD_HISTORIAL_ES_CIVIL  h1 where h1.FE_MODIFICACION = (select  max(h2.FE_MODIFICACION) from RHVD_HISTORIAL_ES_CIVIL h2 where h1.ID_TRABAJADOR = h2.ID_TRABAJADOR )  and h1.FE_MODIFICACION >= TO_DATE('" + FE_INICIO + "') AND h1.FE_MODIFICACION <= TO_DATE('" + FE_FIN + "') " + adday + " ";
+            String sql = " select * from RHVD_HISTORIAL_ES_CIVIL  h1 where h1.FE_MODIFICACION = (select  max(h2.FE_MODIFICACION) from RHVD_HISTORIAL_ES_CIVIL h2 where h1.ID_TRABAJADOR = h2.ID_TRABAJADOR )  and h1.FE_MODIFICACION >= TO_CHAR('"+FE_INICIO+"') AND h1.FE_MODIFICACION <= TO_CHAR('"+FE_FIN+"')  ";
 
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {

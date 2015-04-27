@@ -30,7 +30,7 @@ public class DireccionDAO implements InterfaceDireccionDAO {
     @Override
     public List<Direccion> Listar_Direccion() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = " select * from RHTX_DIRECCION order by NO_DIRECCION";
+        String sql = " select * from RHTX_DIRECCION where id_filial = '1' order by NO_DIRECCION";
         List<Direccion> Lista = new ArrayList<Direccion>();
         try {
             ResultSet rs = this.conn.query(sql);
