@@ -133,6 +133,7 @@
     </head>
     <body>
     <center>
+        <div class="smart-form">¿Decidir la secretaria de departamento o area lo suba e imprima el contrato?<label class='toggle'><input type='checkbox' value='1'  class='ck_procesado'  name='estado' name='checkbox-toggle' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></div><br><br>
         <form action="../../contrato" method="get">
             <%String idanno = request.getParameter("anno");
                 if (List_contra_x_idcto.size() == 0) {%>
@@ -161,13 +162,14 @@
                 </table>
             </div>
 
-            <script>$(document).ready(function() {
-                    $(".anno").change(function() {
+            <script>$(document).ready(function () {
+                    $(".anno").change(function () {
                         $(".btn_act").click();
 
                     });
                 });</script>
         </form>
+
 
 
         <div>
@@ -185,10 +187,11 @@
                         n = (X_List_Id_Contrato_DGP) List_contra_x_idcto.get(b);
                 %>
 
+
                 <%if (idrol.trim().equals("ROL-0006") || idrol.trim().equals("ROL-0002")) {%> 
                 <a class="btn btn-labeled btn-primary" href="../../contrato?opc=Subir_Contrato2&idc=<%=n.getId_contrato()%>" > <span class="btn-label"><i class="fa fa-cloud-upload"></i></span>Subir Contrato Firmado</a>
                         <%}
-                            if (idrol.trim().equals("ROL-0006") || idrol.trim().equals("ROL-0007") || idrol.trim().equals("ROL-0009")|| idrol.trim().equals("ROL-0001")) {%>
+                            if (idrol.trim().equals("ROL-0006") || idrol.trim().equals("ROL-0007") || idrol.trim().equals("ROL-0009") || idrol.trim().equals("ROL-0001")) {%>
                 <a class="btn btn-labeled btn-primary" href="../../contrato?opc=Editar&idc=<%=n.getId_contrato()%>&idtr=<%=request.getParameter("idtr")%>&id_dg=<%=request.getParameter("id_dg")%>" > <span class="btn-label"><i class="fa fa-pencil-square-o"></i></span>Editar Contrato</a>
                         <%}%>
                         <% for (int p = 0; p < List_contra_x_idcto.size(); p++) {%>
