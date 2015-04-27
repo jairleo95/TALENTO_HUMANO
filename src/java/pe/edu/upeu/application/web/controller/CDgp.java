@@ -527,6 +527,8 @@ public class CDgp extends HttpServlet {
         }
         if (opc.equals("MODIFICAR REQUERIMIENTO")) {
             String iddgp = request.getParameter("iddgp");
+            int can_cc = dgp.Can_cc_iddgp(iddgp);
+            String id_d_hor=IHor.id_det_horario(iddgp);
             idtr = dgp.obt_idtr_x_dgp(iddgp);
             String ES_CUENTA_SUELDO = tr.CuentaSueldoTra(idtr);
             out.println(idtr + " " + iddgp + "" + idreq + "" + iddep + "" + idpuesto);
@@ -535,7 +537,7 @@ public class CDgp extends HttpServlet {
             getServletContext().setAttribute("List_Puesto", pu.List_Puesto_Dep(iddep));
             getServletContext().setAttribute("list_Cuenta_Sueldo", dgp.LIST_CUEN_SUEL(idtr));
             getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
-            response.sendRedirect("Vista/Dgp/Editar_DGP.jsp?es_cs="+ES_CUENTA_SUELDO);
+            response.sendRedirect("Vista/Dgp/Editar_DGP.jsp?es_cs=" + ES_CUENTA_SUELDO + "&can_cc=" + can_cc+"&id_det_hor="+id_d_hor.trim());
         }
         if (opc.equals("MODIFICAR")) {
             String ID_DGP = request.getParameter("ID_DGP");

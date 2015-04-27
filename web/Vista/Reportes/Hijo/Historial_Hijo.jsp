@@ -27,10 +27,8 @@
             <div id="content" >
                 <section id="widget-grid" class="">
                     <div class="row">
-
                         <div class="well">
                             <form class="smart-form form_f">
-
                                 <h1 class="text-center"><strong>Datos de Hijos </strong> <small> / Historial de Modificaciones </small></h1><br>
                                 <h1 class="text-left font-md semi-bold">Filtros:</h1><br>
                                 <div class="row">
@@ -69,8 +67,8 @@
                                 </div>
                             </form>
                         </div>
-
                     </div>
+                    <button class="btn_procesar btn btn-primary btn-labeled"  style="display: none;" type="button"><span class="btn-label"><i class="fa fa-check"></i></span>Procesar</button>
                     <div class="row">
                         <div class="well">
                             <div class="table-responsive cont_t">
@@ -95,17 +93,17 @@
                 </section>
             </div>
         </div>
-        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
+        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../../js/plugin/pace/pace.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
             if (!window.jQuery) {
-                document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                document.write('<script src="../../../js/libs/jquery-2.0.2.min.js"><\/script>');
             }
         </script>
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script>
             if (!window.jQuery.ui) {
-                document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
             }
         </script>
         <script src="../../../js/app.config.js"></script>
@@ -142,6 +140,62 @@
         <script src="../../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
+                pageSetUp();
+                $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+                    $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+                });
+                $(".btn_procesar").click(function () {
+
+                    $.SmartMessageBox({
+                        title: "¡Advertencia!",
+                        content: "¿Esta seguro de procesar las modificaciones?",
+                        buttons: '[No][Si]'
+                    }, function (ButtonPressed) {
+                        if (ButtonPressed === "Si") {
+                            var t = 0;
+                            $.each($(".ck_procesado"), function () {
+
+                                if ($(this).prop('checked')) {
+                                    $.ajax({
+                                        url: "../../../RHistorial",
+                                        type: "POST",
+                                        data: "opc=Procesar_datos_hijos&" + $(".val_hijo" + $(this).val()).val()
+                                    }).done(function () {
+                                        $.smallBox({
+                                            title: "Procesado con exito",
+                                            content: "<i class='fa fa-clock-o'></i> <i>Las modificaciones se han procesado correctamente...</i>",
+                                            color: "#659265",
+                                            iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                            timeout: 4000
+                                        });
+
+                                    }).error(function () {
+                                        $.smallBox({
+                                            title: "¡Error!",
+                                            content: "<i class='fa fa-clock-o'></i> <i>Las modificaciones NO se han procesado correctamente...",
+                                            color: "#C46A69",
+                                            iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                            timeout: 6000
+                                        });
+                                    });
+                                    t++;
+                                }
+                            });
+                            if (t == 0) {
+                                $.smallBox({
+                                    title: "Procesar Modificaciones",
+                                    content: "<i class='fa fa-ban'></i> <i>No hay modificaciones por procesar, porfavor seleccione si o no...</i>",
+                                    color: "#dfb56c",
+                                    iconSmall: "bounce animated",
+                                    timeout: 6000
+                                });
+                            }
+                            obetnerDatos();
+                        }
+                        if (ButtonPressed === "No") {
+                        }
+                    });
+                });
                 $("#dtp1").datepicker({
                     dateFormat: "dd/mm/yy",
                     defaultDate: "+1w",
@@ -182,6 +236,7 @@
                             return;
                         }
                         if (lista.length < 1) {
+                            $(".btn_procesar").hide();
                             $.smallBox({
                                 title: "Busqueda de Historial",
                                 content: "<i class='fa fa-ban'></i> <i>No hay modificaciones en ese rango de fechas</i>",
@@ -192,6 +247,7 @@
                             crear_t();
                             $('.tabla_t').DataTable();
                         } else {
+                            $(".btn_procesar").show();
                             var t = "<tr>";
                             for (var i = 0; i < lista.length; i++) {
                                 t += "<td>" + (i + 1) + "</td>";
@@ -203,8 +259,12 @@
                                     t += "<td>Agregado</td>";
                                 }
                                 t += "<td>" + lista[i].fecha + "</td>";
-                                t += "<td>" + lista[i].procesado + "</td>";
-                                t += "<td><a href='../../../RHistorial?opc=Comparar_hijo&idtr=" + lista[i].idtr + "&idh=" + lista[i].id + "&fecha_default=" + lista[i].fecha + "' class='btn btn-primary btn-labeled'>Ver Detalle <i class='fa fa-arrow-circle-right' ></i></a></td></tr> ";
+                                if (lista[i].procesado == '1') {
+                                    t += "<td>Si</td>";
+                                } else {
+                                    t += "<td class='smart-form'><label class='toggle'><input type='checkbox' value='" + i + "'  class='ck_procesado'  name='estado' name='checkbox-toggle' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></td>";
+                                }
+                                t += "<td><input type='hidden' class='val_hijo" + i + "' value='idh=" + lista[i].id + "&es_fecha=" + lista[i].estado_filtro + "&fecha=" + lista[i].fecha + "' ><a href='../../../RHistorial?opc=Comparar_hijo&idtr=" + lista[i].idtr + "&idh=" + lista[i].id + "&fecha_default=" + lista[i].fecha + "' class='btn btn-primary btn-labeled'>Ver Detalle <i class='fa fa-arrow-circle-right' ></i></a></td></tr> ";
                             }
                             crear_t();
                             $('.tbodys').append(t);

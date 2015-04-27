@@ -127,13 +127,20 @@ public class CReporte_Historial extends HttpServlet {
                 String id_trabajador = request.getParameter("idtr");
                 String id_hijo = request.getParameter("idh");
                 String fecha_default = request.getParameter("fecha_default");
-                response.sendRedirect("Vista/Reportes/Hijo/Detalle_Comparacion.jsp?idtr=" + id_trabajador + "&idh=" + id_hijo+"&fecha_default="+fecha_default);
+                response.sendRedirect("Vista/Reportes/Hijo/Detalle_Comparacion.jsp?idtr=" + id_trabajador + "&idh=" + id_hijo + "&fecha_default=" + fecha_default);
             }
             if (opc.equals("Listar_hijo_trabajador")) {
-                    String id_trabajador = request.getParameter("idtr");
+                String id_trabajador = request.getParameter("idtr");
                 List<Map<String, ?>> lista = re.list_hijo_trabajdor(id_trabajador);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
+            }
+            if (opc.equals("Procesar_datos_hijos")) {
+                String es_fecha = request.getParameter("es_fecha");
+                String fecha = request.getParameter("fecha");
+                String idh = request.getParameter("idh");
+                re.Procesar_historial_hijo(idh, es_fecha, fecha);
+                rpta.put("rpta", "1");
             }
 
         } catch (Exception e) {

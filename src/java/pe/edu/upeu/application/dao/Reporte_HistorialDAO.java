@@ -5,6 +5,7 @@
  */
 package pe.edu.upeu.application.dao;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -424,5 +425,25 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
         return x;
     }
 
-    
+    @Override
+    public void Procesar_historial_hijo(String id_hijo, String es_fecha, String fecha) {
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.cnn.conex.prepareCall("{CALL rhsp_procesar_historial_hijo(?,?,?)}");
+            cst.setString(1, id_hijo);
+            cst.setString(2, es_fecha);
+            cst.setString(3, fecha);
+            cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+            }
+        }
+    }
+
 }
