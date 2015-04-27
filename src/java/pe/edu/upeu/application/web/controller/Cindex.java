@@ -67,6 +67,7 @@ public class Cindex extends HttpServlet {
             user = (V_Usuario) u.get(0);
             HttpSession sesion = request.getSession(true);
             sesion.setAttribute("IDUSER", user.getId_usuario());
+            sesion.setAttribute("IDTR", user.getId_trabajador());
             sesion.setAttribute("FECHA_MINIMA", us.fecha_actual());
             sesion.setAttribute("USER", user.getNo_usuario());
             sesion.setAttribute("IDPER", user.getId_empleado());
@@ -91,7 +92,7 @@ public class Cindex extends HttpServlet {
              getServletContext().setAttribute("List_Situacion_Educativa", li.List_Situacion_Educativa());*/
             dgp.VAL_DGP_PASOS();
             cto.VALIDAR_FE_CESE_CON();
-            
+
             out.print("EXITO!");
         } else {
             out.print("ERROR");
