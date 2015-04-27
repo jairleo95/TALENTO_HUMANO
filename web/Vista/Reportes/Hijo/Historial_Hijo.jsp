@@ -82,6 +82,7 @@
                                             <th class="text-center semi-bold">Hijo(a)</th>
                                             <th class="text-center semi-bold">Estado</th>
                                             <th class="text-center semi-bold">Fecha</th>
+                                            <th class="text-center semi-bold">¿Procesado?</th>
                                             <th class="text-center semi-bold">Detalle</th>
                                         </tr>
                                     </thead>
@@ -202,7 +203,8 @@
                                     t += "<td>Agregado</td>";
                                 }
                                 t += "<td>" + lista[i].fecha + "</td>";
-                                t += "<td><a href='../../../RHistorial?opc=Comparar_hijo&idtr=" + lista[i].idtr + "&idh=" + lista[i].id + "' class='btn btn-primary btn-labeled'>Ver Detalle <i class='fa fa-arrow-circle-right' ></i></a></td></tr> ";
+                                t += "<td>" + lista[i].procesado + "</td>";
+                                t += "<td><a href='../../../RHistorial?opc=Comparar_hijo&idtr=" + lista[i].idtr + "&idh=" + lista[i].id + "&fecha_default=" + lista[i].fecha + "' class='btn btn-primary btn-labeled'>Ver Detalle <i class='fa fa-arrow-circle-right' ></i></a></td></tr> ";
                             }
                             crear_t();
                             $('.tbodys').append(t);
@@ -226,7 +228,7 @@
             }
             function crear_t() {
                 var text = '<table class="tabla_t table table-bordered table-hover table-striped"><thead><tr><th class="text-center semi-bold">Nro</th>';
-                text += '<th class="text-center semi-bold">Trabajador</th><th class="text-center semi-bold">Hijo(a)</th><th class="text-center semi-bold">Estado</th><th class="text-center semi-bold">Fecha</th><th class="text-center semi-bold">Detalle</th></tr></thead><tbody class="tbodys">';
+                text += '<th class="text-center semi-bold">Trabajador</th><th class="text-center semi-bold">Hijo(a)</th><th class="text-center semi-bold">Estado</th><th class="text-center semi-bold">Fecha</th><th class="text-center semi-bold">¿Procesado?</th><th class="text-center semi-bold">Detalle</th></tr></thead><tbody class="tbodys">';
                 text += '</tbody></table>';
                 $('.cont_t').empty();
                 $('.cont_t').append(text);

@@ -39,7 +39,7 @@
 
                                     <h1 class="text-center ">Historial de Modificaciones <small>/ Trabajadores</small></h1><br>
                                     <div class="row">
-                                        <div class="col col-xs-6">
+                                        <div class="col col-xs-4">
                                             <section class="col col-xs-12">
                                                 <label class="label">Ultimas Modificaciones</label>
                                                 <label class="select">
@@ -49,7 +49,7 @@
                                                     <i></i></label>
                                             </section>
                                         </div>
-                                        <div class="col col-xs-6">
+                                        <div class="col col-xs-8">
                                             <section class="col col-md-12">
                                                 <div class="row">
                                                     <div class="col col-sm-6">
@@ -240,6 +240,7 @@
                     $.post("../../../RHistorial?", "opc=list_hist_fecha&fe_modif=" + fe_hist + "&idtra=" + idtrab, function (objJson) {
                         var lista = objJson.lista;
                         var ipp = objJson.ipp;
+                        var idd=objJson.idd;
                         ip=ipp[0];
                         host=ipp[1];
                         mac=ipp[2];
@@ -248,6 +249,7 @@
                         if (lista.length < 1) {
                         } else {
                             var text = "";
+                            
                             for (var i = 0; i < lista.length; i++) {
 
                                 text += "<tr class='roh" + i + "'>";
@@ -258,6 +260,9 @@
                                     if (i == 60) {
                                         text += "<td class='deth" + i + "'>" + ip + " / " + host + " / " + mac + "</td>";
                                     } else {
+                                        if(i==){
+                                            
+                                        }
                                         text += "<td class='deth" + i + "'>" + lista[i].det + "</td>";
                                     }
                                 } else {

@@ -23,24 +23,24 @@
                     <div class="row">
 
                         <div class="well">
-                            <h1 class="text-center"><strong>Cambiar Clave  </strong> <small> / Historial de Modificaciones </small></h1><br>
+                            <h1 class="text-center"><strong>Cambiar Contraseña  </strong> <small>  </small></h1><br>
                             <form class="smart-form form_cambiar_clave" >
                                 <div class="row">
 
                                     <div class="col col-lg-12">
                                         <section class="col col-sm-4">Contraseña actual:
                                             <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                                <input type="password" name="password1" placeholder="Password"  required="">
+                                                <input type="password" name="password1" placeholder="Clave Actual"  required="">
                                                 <b class="tooltip tooltip-bottom-right">Ingrese su contraseña actual</b> </label>
                                         </section>
                                         <section class="col col-sm-4">Escribir nueva contraseña:
                                             <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                                <input type="password" name="password2" placeholder="Password" id="password" required="">
+                                                <input type="password" name="password2" placeholder="Clave Nueva" id="password" required="">
                                                 <b class="tooltip tooltip-bottom-right">No olvides tu contraseña</b> </label>
                                         </section>
                                         <section class="col col-sm-4">Confirmar Contraseña:
                                             <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                                <input type="password" name="passwordConfirm" placeholder="Confirm password" required="">
+                                                <input type="password" name="passwordConfirm" placeholder="Repetir Clave Nueva" required="">
                                                 <b class="tooltip tooltip-bottom-right">No olvides tu contraseña</b> </label>
                                         </section>
                                     </div>
@@ -140,6 +140,9 @@
             $(document).ready(function () {
 
                 pageSetUp();
+
+
+
                 $(".btn_validar_form ").click(function () {
                     if ($(".form_cambiar_clave").valid()) {
                         $.ajax({
@@ -147,7 +150,28 @@
                             type: "post",
                             data: $(".form_cambiar_clave").serialize() + "&opc=Cambiar_clave"
                         }).done(function (e) {
-                            alert(e);
+                            $(".form_cambiar_clave")[0].reset();
+                            var $p = $(this).parent().parent();
+                            $p.removeClass('has-success');
+                            $("section > label").removeClass('state-success');
+                            if (e == '0') {
+                                $.smallBox({
+                                    title: "Error de validación",
+                                    content: "<i class='fa fa-clock-o'></i> <i>Contraseña actual incorrecta, intente de nuevo...</i>",
+                                    color: "#C46A69",
+                                    iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                    timeout: 4000
+                                });
+                            } else if (e == '1') {
+                                $.smallBox({
+                                    title: "Cambio de contraseña",
+                                    content: "<i class='fa fa-clock-o'></i> <i>Se ha modificado la contraseña correctamente...</i>",
+                                    color: "#659265",
+                                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                    timeout: 4000
+                                });
+                            }
+
                         });
                     }
 

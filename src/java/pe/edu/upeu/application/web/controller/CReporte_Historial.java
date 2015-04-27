@@ -105,18 +105,18 @@ public class CReporte_Historial extends HttpServlet {
                 rpta.put("lista", lista);
             }
             if (opc.equals("list_hist_fecha")) {
-               String fe_modif=request.getParameter("fe_modif");
-               String idtra= request.getParameter("idtra");
-               List<Map<String, ?>> lista = re.Listar_hist_fecha(fe_modif,idtra);
-               String []r=re.decode((String)lista.get(60).get("det"));
+                String fe_modif = request.getParameter("fe_modif");
+                String idtra = request.getParameter("idtra");
+                List<Map<String, ?>> lista = re.Listar_hist_fecha(fe_modif, idtra);
+                String[] r = re.decode((String) lista.get(60).get("det"));
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
                 rpta.put("ipp", r);
             }
             if (opc.equals("list_actual")) {
-                String idtra= request.getParameter("idtra");
+                String idtra = request.getParameter("idtra");
                 List<Map<String, ?>> lista = re.Listar_dat_actual(idtra);
-                String []r=re.decode((String)lista.get(60).get("det"));
+                String[] r = re.decode((String) lista.get(60).get("det"));
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
                 rpta.put("ipp", r);
@@ -124,7 +124,14 @@ public class CReporte_Historial extends HttpServlet {
             if (opc.equals("Comparar_hijo")) {
                 String id_trabajador = request.getParameter("idtr");
                 String id_hijo = request.getParameter("idh");
-                response.sendRedirect("Vista/Reportes/Trabajador/Historial_Est_Civil.jsp?idtr="+id_trabajador+"&idh="+id_hijo);
+                String fecha_default = request.getParameter("fecha_default");
+                response.sendRedirect("Vista/Reportes/Hijo/Detalle_Comparacion.jsp?idtr=" + id_trabajador + "&idh=" + id_hijo+"&fecha_default="+fecha_default);
+            }
+            if (opc.equals("Listar_hijo_trabajador")) {
+                    String id_trabajador = request.getParameter("idtr");
+                List<Map<String, ?>> lista = re.list_hijo_trabajdor(id_trabajador);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
             }
 
         } catch (Exception e) {
