@@ -67,6 +67,7 @@ public class CReporte_Historial extends HttpServlet {
             }
             if (opc.equals("list_mod_tra")) {
                 String ID_TRABAJADOR = request.getParameter("idtr");
+                System.out.println(ID_TRABAJADOR);
                 List<Map<String, ?>> list = re.Listar_Mod_Tra(ID_TRABAJADOR);
                 rpta.put("rpta", "1");
                 rpta.put("lista", list);

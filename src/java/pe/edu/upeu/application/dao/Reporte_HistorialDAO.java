@@ -108,15 +108,16 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "SELECT ID_TRABAJADOR,TO_CHAR(FE_MODIF,'DD/MM/YYYY HH:MI:SS')FE_MODIFI, US_MODIF, IP_USUARIO\n"
                     + "FROM RHTH_MODIF_TRABAJADOR\n"
-                    + "WHERE ID_TRABAJADOR='" + ID_TRABAJADOR + "' AND FE_MODIF IS NOT NULL\n"
+                    + "WHERE ID_TRABAJADOR='" + ID_TRABAJADOR + "'AND FE_MODIF IS NOT NULL\n"
                     + "ORDER BY FE_MODIFi desc";
+            System.out.println(sql);
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<>();
                 rec.put("id_tra", rs.getString(1));
                 rec.put("fe_mod", rs.getString(2));
                 rec.put("us_mod", rs.getString(3));
-
+                System.out.println(rec.get("fe_mod"));
                 Lista.add(rec);
             }
             rs.close();
@@ -307,6 +308,7 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
                     + "        T.ID_TIPO_DOC_C, T.NU_DOC_C, T.LI_INSCRIPCION_VIG_ESSALUD_C, T.ID_CONYUGUE, T.CO_UNIVERSITARIO, T.SEMESTRE\n"
                     + "      FROM RHTH_MODIF_TRABAJADOR T\n"
                     + "      WHERE T.ID_TRABAJADOR='" + idtra + "'\n"
+                    + "      AND rownum=1  \n"
                     + "      AND (TO_CHAR(FE_MODIF,'DD/MM/YYYY HH:MI:SS')\n"
                     + "      =TO_CHAR(TO_DATE('" + FE_MODIF + "','DD/MM/YYYY HH:MI:SS'),'DD/MM/YYYY HH:MI:SS') )\n"
                     + "      )\n"
