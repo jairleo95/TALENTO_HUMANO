@@ -440,15 +440,16 @@ public class CTrabajador extends HttpServlet {
             String FE_MODIFICACION = "";
 
             String ES_CIVIL_A = request.getParameter("ES_CIVIL_A");
+            String ES_REGISTRO = request.getParameter("ES_REGISTRO");
             if (!ES_CIVIL.equals(ES_CIVIL_A)) {
-                ec.INSERT_HIST_ESTADO_CIVIL(null, ES_CIVIL_A, FE_MODIFICACION, US_MODIF, ID_TRABAJADOR);
+                ec.INSERT_HIST_ESTADO_CIVIL(null, ES_CIVIL_A, FE_MODIFICACION, US_MODIF, ID_TRABAJADOR , ES_REGISTRO);
             }
             tr.MOD_DAT_GEN(AP_PATERNO, AP_MATERNO, NO_TRABAJADOR, TI_DOC, NU_DOC, ES_CIVIL, FE_NAC, ID_NACIONALIDAD, ID_DEPARTAMENTO, ID_PROVINCIA, ID_DISTRITO, TE_TRABAJADOR, CL_TRA, DI_CORREO_PERSONAL, DI_CORREO_INST, CO_SISTEMA_PENSIONARIO, ES_SEXO, LI_GRUPO_SANGUINEO, ID_NO_AFP, ES_AFILIADO_ESSALUD, LI_TIPO_TRABAJADOR, ES_FACTOR_RH, idtr, US_MODIF, IP_USUARIO);
 
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
 
             //out.print(TI_DOC + "--" + NU_DOC);
-            out.print(ES_CIVIL + "-A-----P-" + ES_CIVIL_A);
+            out.print(ES_REGISTRO);
 
             if (edit.equals("ok")) {
                 response.sendRedirect("Vista/Trabajador/Datos_Generales.jsp?idtr=" + idtr + "&edit=" + edit);

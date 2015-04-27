@@ -63,7 +63,7 @@
 
 
                                 </div>
-                               
+
                             </form>
 
 
@@ -71,8 +71,10 @@
 
                     </div>
                     <div class="row">
-                        <div class="well">
-                            <div class="table-responsive cont_t">
+                        <div class="well" >
+                            <button type="button" class="btn btn-success btn_pro_reg">Procesar Registros</button>
+                            <div class="table-responsive cont_t" >
+
                                 <table class="tabla_t table table-bordered table-hover table-striped">
                                     <thead>
                                         <tr>
@@ -180,7 +182,7 @@
                     });
                     $.post("../../../RHistorial?", d, function(objJson) {
                         var lista = objJson.lista;
-                       // alert(lista)
+                        // alert(lista)
                         if (lista.length < 1) {
                             $.smallBox({
                                 title: "Busqueda de Historial",
@@ -192,31 +194,56 @@
                             crear_t();
                             $('.tabla_t').DataTable();
                         } else {
+
                             var t = "<tr>";
                             for (var i = 0; i < lista.length; i++) {
                                 var ec_p;
                                 var ec_a;
-                                if(lista[i].es_civil_p == 1 ){ec_p = "Soltero(a)"}
-                                if(lista[i].es_civil_p == 2){ec_p = "Casado(a)"}
-                                if(lista[i].es_civil_p == 3){ec_p = "Divorciado(a)"}
-                                if(lista[i].es_civil_p == 4){ec_p = "Viudo(a)"}
-                                if(lista[i].es_civil_p == 5){ec_p = "Separado(a)"}
-                                if(lista[i].es_civil_p == 6){ec_p = "Conviviente(a)"}
-                                
-                                if(lista[i].es_civil_a == 1 ){ec_a = "Soltero(a)"}
-                                if(lista[i].es_civil_a == 2){ec_a = "Casado(a)"}
-                                if(lista[i].es_civil_a == 3){ec_a = "Divorciado(a)"}
-                                if(lista[i].es_civil_a == 4){ec_a = "Viudo(a)"}
-                                if(lista[i].es_civil_a == 5){ec_a = "Separado(a)"}
-                                if(lista[i].es_civil_a == 6){ec_a = "Conviviente(a)"}
-                                
-                                t += "<td>" + (i + 1) + "</td>";
+                                if (lista[i].es_civil_p == 1) {
+                                    ec_p = "Soltero(a)"
+                                }
+                                if (lista[i].es_civil_p == 2) {
+                                    ec_p = "Casado(a)"
+                                }
+                                if (lista[i].es_civil_p == 3) {
+                                    ec_p = "Divorciado(a)"
+                                }
+                                if (lista[i].es_civil_p == 4) {
+                                    ec_p = "Viudo(a)"
+                                }
+                                if (lista[i].es_civil_p == 5) {
+                                    ec_p = "Separado(a)"
+                                }
+                                if (lista[i].es_civil_p == 6) {
+                                    ec_p = "Conviviente(a)"
+                                }
+
+                                if (lista[i].es_civil_a == 1) {
+                                    ec_a = "Soltero(a)"
+                                }
+                                if (lista[i].es_civil_a == 2) {
+                                    ec_a = "Casado(a)"
+                                }
+                                if (lista[i].es_civil_a == 3) {
+                                    ec_a = "Divorciado(a)"
+                                }
+                                if (lista[i].es_civil_a == 4) {
+                                    ec_a = "Viudo(a)"
+                                }
+                                if (lista[i].es_civil_a == 5) {
+                                    ec_a = "Separado(a)"
+                                }
+                                if (lista[i].es_civil_a == 6) {
+                                    ec_a = "Conviviente(a)"
+                                }
+
+                                t += "<tr><td>" + (i + 1) + "</td>";
                                 t += "<td>" + lista[i].no_tra + " " + lista[i].ap_pat + " " + lista[i].ap_mat + "</td>";
                                 t += "<td>" + ec_p + "</td>";
-                                t += "<td>" + ec_a+ "</td>";
+                                t += "<td>" + ec_a + "</td>";
                                 t += "<td>" + lista[i].no_usuario + "</td>";
                                 t += "<td>" + lista[i].fe_modi + "</td>";
-                                t += "<td><center><input  type='checkbox' name='reg' value='' ><center> </td></tr>";
+                                t += "<td><center><label class='toggle'><input type='checkbox' value="+(i + 1)+" name='checkbox-toggle' class='' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label><center> </td></tr>";
                             }
                             crear_t();
                             $('.tbodys').append(t);
@@ -238,6 +265,36 @@
                         $('.cont_t').append(text);
                     }
                 });
+            });
+            $(".btn_pro_reg").click(function() {
+                try {
+                    $.each($(".firm_contr"), function() {
+                        //alert($(this).val());
+                        if ($(this).prop('checked')) {
+                            $.ajax({
+                                url: "../../contrato",
+                                type: "POST",
+                                data: "opc=Actualizar_Firma" + $(".val_firm" + $(this).val()).val()
+                            }).done(function() {
+
+                            });
+                            $.ajax({
+                                url: "../../autorizacion",
+                                type: "POST",
+                                data: "opc=Aceptar" + $(".val_aut" + $(this).val()).val()
+                            }).done(function() {
+
+                                window.location.href = "../../autorizacion";
+                            });
+                        }
+                    });
+                    // exito("Procesado correctamente!", "Las firmas de cada trabajador han sido procesadas con exito.");
+
+                }
+                catch (err) {
+                    alert(err.message);
+                } finally {
+                }
             });
         </script>
     </body>
