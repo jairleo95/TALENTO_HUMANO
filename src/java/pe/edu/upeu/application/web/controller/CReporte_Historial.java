@@ -82,6 +82,8 @@ public class CReporte_Historial extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", list);
             }
+            if(opc.equals("val_reg_ec")){
+            }
             if (opc.equals("Filtro_hijo")) {
                 String FE_INICIO = request.getParameter("fe_inicio");
                 String FE_FIN = request.getParameter("fe_fin");
