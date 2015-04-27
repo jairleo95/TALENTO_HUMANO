@@ -39,7 +39,7 @@
                                 <h1 class="text-center">Historial de Modificaciones <small>/ Trabajadores</small></h1><br>
                                 <h1 class="text-left font-md semi-bold">Filtros:</h1><br>
                                 <div class="row">
-                                    <div class="col col-lg-9">
+                                    <div class="col col-xs-9">
                                         <section class="col col-sm-6">
                                             <label>Desde:</label>
                                             <label class="input"> <i class="icon-append fa fa-calendar"></i>
@@ -53,7 +53,7 @@
                                             </label>
                                         </section>
                                     </div>
-                                    <div class="col col-lg-3">
+                                    <div class="col col-xs-3">
                                         <center>
                                             <section class="col col-sm-12">
                                                 <a class="btn btn-primary btn-circle btn-xl btnEnviar"><i class="glyphicon glyphicon-search"></i></a>

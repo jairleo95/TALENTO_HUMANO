@@ -103,7 +103,6 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
     @Override
     public List<Map<String, ?>> Listar_Mod_Tra(String ID_TRABAJADOR) {
         List<Map<String, ?>> Lista = new ArrayList<>();
-        List<Map<String, ?>> ip = new ArrayList<>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "SELECT ID_TRABAJADOR,TO_CHAR(FE_MODIF,'DD/MM/YYYY HH:MI:SS')FE_MODIFI, US_MODIF, IP_USUARIO\n"
@@ -116,10 +115,7 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
                 rec.put("id_tra", rs.getString(1));
                 rec.put("fe_mod", rs.getString(2));
                 rec.put("us_mod", rs.getString(3));
-                /*ip = ip_usuario(rs.getString("ID_TRABAJADOR"));
-                 rec.put("ip_user", ip.get(0).get("IP0"));
-                 rec.put("host_name", ip.get(0).get("IP1"));
-                 rec.put("mac_address", ip.get(0).get("IP2"));*/
+
                 Lista.add(rec);
             }
             rs.close();
@@ -133,24 +129,6 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
             } catch (Exception e) {
             }
         }
-        return Lista;
-    }
-
-    @Override
-    public List<Map<String, ?>> ip_usuario(String IP_USUARIO) {
-        List<Map<String, ?>> Lista = new ArrayList<>();
-        int cont = 0;
-        for (int i = 0; i < IP_USUARIO.length(); i++) {
-            Map<String, Object> rec = new HashMap<>();
-            if (IP_USUARIO.charAt(i) == '*' && IP_USUARIO.charAt(i + 1) == '*') {
-                rec.put("IP" + cont, IP_USUARIO.substring(0, i));
-                IP_USUARIO = IP_USUARIO.substring(0, i + 2);
-                Lista.add(rec);
-                cont++;
-            }
-
-        }
-
         return Lista;
     }
 
@@ -445,4 +423,6 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
         }
         return x;
     }
+
+    
 }
