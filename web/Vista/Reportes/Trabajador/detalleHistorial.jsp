@@ -260,9 +260,7 @@
                                     if (i == 60) {
                                         text += "<td class='deth" + i + "'>" + ip + " / " + host + " / " + mac + "</td>";
                                     } else {
-                                        if(i==){
-                                            
-                                        }
+                                        
                                         text += "<td class='deth" + i + "'>" + lista[i].det + "</td>";
                                     }
                                 } else {

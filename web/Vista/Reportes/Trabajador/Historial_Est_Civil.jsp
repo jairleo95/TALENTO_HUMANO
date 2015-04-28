@@ -61,9 +61,15 @@
                                             </section>
                                         </center>
                                     </div>
+
+
                                 </div>
+
                             </form>
+
+
                         </div>
+
                     </div>
                     <div class="row">
                         <div class="well" >
@@ -80,6 +86,7 @@
                                             <th class="text-center semi-bold">Uuario</th>
                                             <th class="text-center semi-bold">Fe.Modificacion</th>
                                             <th class="text-center semi-bold">Registrado</th>
+                                            <th class="text-center semi-bold">Detalle</th>
                                         </tr>
                                     </thead>
                                     <tbody class="tbodys">
@@ -148,6 +155,62 @@
         <script src="../../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {
+                pageSetUp();
+                $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
+                    $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+                });
+                $(".btn_pro_reg").click(function() {
+
+                    $.SmartMessageBox({
+                        title: "¡Advertencia!",
+                        content: "¿Esta seguro de procesar la(s) modificacione(s)?",
+                        buttons: '[No][Si]'
+                    }, function(ButtonPressed) {
+                        if (ButtonPressed === "Si") {
+                            var t = 0;
+                            $.each($(".registrado"), function() {
+
+                                if ($(this).prop('checked')) {
+                                    $.ajax({
+                                        url: "../../../RHistorial",
+                                        type: "POST",
+                                        data: "opc=Procesar_reg_ec&" + $(".id_ec" + $(this).val()).val()
+                                    }).done(function() {
+                                        $.smallBox({
+                                            title: "Procesado con exito",
+                                            content: "<i class='fa fa-clock-o'></i> <i>Las modificaciones se han procesado correctamente...</i>",
+                                            color: "#659265",
+                                            iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                            timeout: 4000
+                                        });
+
+                                    }).error(function() {
+                                        $.smallBox({
+                                            title: "¡Error!",
+                                            content: "<i class='fa fa-clock-o'></i> <i>Las modificaciones NO se han procesado correctamente...",
+                                            color: "#C46A69",
+                                            iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                            timeout: 6000
+                                        });
+                                    });
+                                    t++;
+                                }
+                            });
+                            if (t == 0) {
+                                $.smallBox({
+                                    title: "Procesar Modificaciones",
+                                    content: "<i class='fa fa-ban'></i> <i>No hay modificaciones por procesar, porfavor seleccione si o no...</i>",
+                                    color: "#dfb56c",
+                                    iconSmall: "bounce animated",
+                                    timeout: 6000
+                                });
+                            }
+                            ListarEC();
+                        }
+                        if (ButtonPressed === "No") {
+                        }
+                    });
+                });
                 $("#dtp1").datepicker({
                     dateFormat: "dd/mm/yy",
                     defaultDate: "+1w",
@@ -171,38 +234,13 @@
                 $('.tabla_t').DataTable();
 
             });
-            $(".btn_pro_reg").click(function() {
-                try {
-                    $.each($(".firm_contr"), function() {
-                        //alert($(this).val());
-                        if ($(this).prop('checked')) {
-                            $.ajax({
-                                url: "../../../RHistorial?",
-                                type: "POST",
-                                data: "opc=val_reg_ec" + $(".val_firm" + $(this).val()).val()
-                            }).done(function() {
-
-                            });
-                            $.ajax({
-                                url: "../../autorizacion",
-                                type: "POST",
-                                data: "opc=Aceptar" + $(".val_aut" + $(this).val()).val()
-                            }).done(function() {
-
-                                window.location.href = "../../autorizacion";
-                            });
-                        }
-                    });
-                    // exito("Procesado correctamente!", "Las firmas de cada trabajador han sido procesadas con exito.");
-
-                }
-                catch (err) {
-                    alert(err.message);
-                } finally {
-                }
-            });
+           
 
             $('.btnEnviar').click(function() {
+                ListarEC();
+                });
+                
+            function ListarEC(){
                 var data = $('.form_f').serializeArray();
                 var d = "opc=list_hist_es_civil";
                 jQuery.each(data, function(index, field) {
@@ -210,7 +248,7 @@
                 });
                 $.post("../../../RHistorial?", d, function(objJson) {
                     var lista = objJson.lista;
-                    // alert(lista)
+                    //alert(lista)
                     if (lista.length < 1) {
                         $.smallBox({
                             title: "Busqueda de Historial",
@@ -271,15 +309,36 @@
                             t += "<td>" + ec_a + "</td>";
                             t += "<td>" + lista[i].no_usuario + "</td>";
                             t += "<td>" + lista[i].fe_modi + "</td>";
-                            t += "<td><center><label class='toggle'><input type='checkbox' value=" + (i + 1) + " name='checkbox-toggle' class='' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label><center> </td></tr>";
+                            if (lista[i].es_reg == '1') {
+                                t += "<td><center>Si</center></td>";
+                            } else {
+                                t += "<td class='smart-form'><center><label class='toggle'><input type='checkbox' value=" + i + " name='checkbox-toggle' class='registrado' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label><center> </td>";
+                            }
+                            t += "<td><input type='hidden' class='id_ec"+i+"' value='idec="+ lista[i].id_ec+"'><center><a href='../../../RHistorial?opc=Detalle_hist_ec&idtr="+lista[i].id_tra+"&name="+lista[i].no_tra + " " + lista[i].ap_pat + " " + lista[i].ap_mat+"'  class='btn btn-primary btn-labeled'>Ver Detalle <i class='fa fa-arrow-circle-right' ></i></a><center> </td></tr>";
                         }
                         crear_t();
                         $('.tbodys').append(t);
                         $('.tabla_t').DataTable();
                     }
                 });
-               
-            });
+                function crear_t() {
+                    /* var text = '<table class="tabla_t table table-bordered table-hover table-striped"><thead><tr><th class="text-center semi-bold">Nro</th>';
+                     text += '<th class="text-center semi-bold">Trabajador</th><th class="text-center semi-bold">Detalle</th></tr></thead><tbody class="tbodys">';
+                     text += '</tbody></table>';
+                     $('.cont_t').empty();
+                     $('.cont_t').append(text);*/
+
+                    var text = '<table class="tabla_t table table-bordered table-hover table-striped"><thead><tr><th class="text-center semi-bold">Nro</th>';
+                    text += '<th class="text-center semi-bold">Trabajador</th><th class="text-center semi-bold">Es.Civil Pasado</th><th class="text-center semi-bold">Es.Civil Actual</th>';
+                    text += '<th class="text-center semi-bold">Uuario</th><th class="text-center semi-bold">Fe.Modificacion</th><th class="text-center semi-bold">Registrado</th> <th class="text-center semi-bold">Detalle</th> </tr> </thead><tbody class="tbodys">';
+                    text += '</tbody></table>';
+                    $('.cont_t').empty();
+                    $('.cont_t').append(text);
+                }
+
+            
+            }    
+                
         </script>
     </body>
 

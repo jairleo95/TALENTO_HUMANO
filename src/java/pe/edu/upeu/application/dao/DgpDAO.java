@@ -845,7 +845,7 @@ public class DgpDAO implements InterfaceDgpDAO {
         String valor = null;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT ID_TRABAJADOR FROM  RHTM_DGP WHERE ID_DGP='"+id_dgp.trim()+"'";
+            String sql = "SELECT ID_TRABAJADOR FROM  RHTM_DGP WHERE ID_DGP='" + id_dgp.trim() + "'";
             ResultSet rs = this.conn.query(sql);
             rs.next();
             valor = rs.getString(1);
@@ -866,10 +866,10 @@ public class DgpDAO implements InterfaceDgpDAO {
 
     @Override
     public int Can_cc_iddgp(String id_dgp) {
-       int num_c = 0;
+        int num_c = 0;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT COUNT(*) FROM RHTD_DETALLE_CENTRO_COSTO WHERE ID_DGP='"+id_dgp.trim()+"'";
+            String sql = "SELECT COUNT(*) FROM RHTD_DETALLE_CENTRO_COSTO WHERE ID_DGP='" + id_dgp.trim() + "'";
             ResultSet rs = this.conn.query(sql);
             rs.next();
             num_c = rs.getInt(1);
@@ -886,6 +886,53 @@ public class DgpDAO implements InterfaceDgpDAO {
             }
         }
         return num_c;
+    }
+
+    @Override
+    public void MODIFICAR_DGP(String ID_DGP, String FE_DESDE, String FE_HASTA, double CA_SUELDO, String DE_DIAS_TRABAJO, String ID_PUESTO, String ID_REQUERIMIENTO, String ID_TRABAJADOR, String CO_RUC, String DE_LUGAR_SERVICIO, String DE_SERVICIO, String DE_PERIODO_PAGO, String DE_DOMICILIO_FISCAL, String DE_SUBVENCION, String DE_HORARIO_CAPACITACION, String DE_HORARIO_REFRIGERIO, String DE_DIAS_CAPACITACION, String ES_DGP, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, double CA_BONO_ALIMENTARIO, double DE_BEV, String DE_ANTECEDENTES_POLICIALES, String ES_CERTIFICADO_SALUD, String DE_MONTO_HONORARIO, String LI_MOTIVO, String ES_MFL, double BONO_PUESTO) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MODIFICAR_DGP( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)}");
+            cst.setString(1, ID_DGP);
+            cst.setString(2, c.convertFecha(FE_DESDE));
+            cst.setString(3, c.convertFecha(FE_HASTA));
+            cst.setDouble(4, CA_SUELDO);
+            cst.setString(5, DE_DIAS_TRABAJO);
+            cst.setString(6, ID_PUESTO);
+            cst.setString(7, ID_REQUERIMIENTO);
+            cst.setString(8, ID_TRABAJADOR);
+            cst.setString(9, CO_RUC);
+            cst.setString(10, DE_LUGAR_SERVICIO);
+            cst.setString(11, DE_SERVICIO);
+            cst.setString(12, DE_PERIODO_PAGO);
+            cst.setString(13, DE_DOMICILIO_FISCAL);
+            cst.setString(14, DE_SUBVENCION);
+            cst.setString(15, DE_HORARIO_CAPACITACION);
+            cst.setString(16, DE_HORARIO_REFRIGERIO);
+            cst.setString(17, DE_DIAS_CAPACITACION);
+            cst.setString(18, ES_DGP);
+            cst.setString(19, US_CREACION);
+            cst.setString(20, null);
+            cst.setString(21, US_MODIF);
+            cst.setString(22, null);
+            cst.setString(23, IP_USUARIO);
+            cst.setDouble(24, CA_BONO_ALIMENTARIO);
+            cst.setDouble(25, DE_BEV);
+            cst.setString(26, DE_ANTECEDENTES_POLICIALES);
+            cst.setString(27, ES_CERTIFICADO_SALUD);
+            cst.setString(28, DE_MONTO_HONORARIO);
+            cst.setString(29, LI_MOTIVO);
+            cst.setString(30, ES_MFL);
+            cst.setDouble(31, BONO_PUESTO);
+            cst.execute();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (ParseException ex) {
+            Logger.getLogger(DgpDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.conn.close();
+        }
     }
 
 }
