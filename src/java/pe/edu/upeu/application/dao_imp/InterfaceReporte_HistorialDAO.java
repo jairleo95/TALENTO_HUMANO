@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -21,6 +21,10 @@ public interface InterfaceReporte_HistorialDAO {
     public List<Map<String, ?>> Listar_Tra_Fecha(String FE_INICIO, String FE_FIN);
 
     public List<Map<String, ?>> Listar_His_Estado_Civil(String FE_INICIO, String FE_FIN);
+    
+    public void Procesar_Est_Civil (String id_ec );
+    
+    public List<Map<String, ?>> Listar_Det_EC(String idtr);
 
     public List<Map<String, ?>> Listar_Mod_Tra(String ID_TRABAJADOR);
 

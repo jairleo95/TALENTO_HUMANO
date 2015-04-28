@@ -71,11 +71,12 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
                 adday = "+1";
             }
 
-            String sql = " select * from RHVD_HISTORIAL_ES_CIVIL  h1 where h1.FE_MODIFICACION = (select  max(h2.FE_MODIFICACION) from RHVD_HISTORIAL_ES_CIVIL h2 where h1.ID_TRABAJADOR = h2.ID_TRABAJADOR )  and h1.FE_MODIFICACION >= TO_CHAR('"+FE_INICIO+"') AND h1.FE_MODIFICACION <= TO_CHAR('"+FE_FIN+"')  ";
+            String sql = " select * from RHVD_HISTORIAL_ES_CIVIL  h1 where h1.FE_MODIFICACION = (select  max(h2.FE_MODIFICACION) from RHVD_HISTORIAL_ES_CIVIL h2 where h1.ID_TRABAJADOR = h2.ID_TRABAJADOR )  and h1.FE_MODIFICACION >= TO_CHAR('" + FE_INICIO + "') AND h1.FE_MODIFICACION <= TO_CHAR('" + FE_FIN + "')";
 
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<>();
+                rec.put("id_ec", rs.getString("ID_ESTADO_CIVIL"));
                 rec.put("id_tra", rs.getString("ID_TRABAJADOR"));
                 rec.put("no_tra", rs.getString("NO_TRABAJADOR"));
                 rec.put("ap_pat", rs.getString("AP_PATERNO"));
@@ -84,6 +85,7 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
                 rec.put("es_civil_p", rs.getString("LI_ESTADO_CIVIL"));
                 rec.put("no_usuario", rs.getString("NO_USUARIO"));
                 rec.put("fe_modi", rs.getString("FE_MODIFICACION"));
+                rec.put("es_reg", rs.getString("ES_REGISTRO"));
                 Lista.add(rec);
 
             }
@@ -446,4 +448,55 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
         }
     }
 
+    @Override
+    public void Procesar_Est_Civil(String id_ec) {
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "UPDATE RHTH_ESTADO_CIVIL SET ES_REGISTRO = '1' WHERE ID_ESTADO_CIVIL = '" + id_ec + "'";
+            ResultSet rs = this.cnn.query(sql);
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    @Override
+    public List<Map<String, ?>> Listar_Det_EC(String idtr) {
+        List<Map<String, ?>> lista = new ArrayList<>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select * from RHTH_ESTADO_CIVIL where ID_TRABAJADOR = '" + idtr.trim() + "'";
+
+            ResultSet rs = this.cnn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<>();
+                rec.put("id_ec", rs.getString("ID_ESTADO_CIVIL"));
+                rec.put("es_civil_p", rs.getString("LI_ESTADO_CIVIL"));
+                rec.put("no_usuario", rs.getString("US_MODIFICACION"));
+                rec.put("fe_modi", rs.getString("FE_MODIFICACION"));
+                rec.put("es_reg", rs.getString("ES_REGISTRO"));
+                lista.add(rec);
+
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+            }
+        }
+        return lista;
+
+    }
 }
