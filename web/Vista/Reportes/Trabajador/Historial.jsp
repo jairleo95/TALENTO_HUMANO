@@ -148,7 +148,7 @@
             $(document).ready(function () {
                 $("#dtp1").datepicker({
                     dateFormat: "dd/mm/yy",
-                    defaultDate: "+1w",
+                    defaultDate: "+1d",
                     changeMonth: true,
                     numberOfMonths: 2,
                     onClose: function (selectedDate) {
@@ -158,7 +158,7 @@
                 });
                 $("#dtp2").datepicker({
                     dateFormat: "dd/mm/yy",
-                    defaultDate: "+1w",
+                    defaultDate: "+1d",
                     changeMonth: true,
                     numberOfMonths: 2,
                     onClose: function (selectedDate) {

@@ -67,6 +67,7 @@ public class CReporte_Historial extends HttpServlet {
             }
             if (opc.equals("list_mod_tra")) {
                 String ID_TRABAJADOR = request.getParameter("idtr");
+                System.out.println(ID_TRABAJADOR);
                 List<Map<String, ?>> list = re.Listar_Mod_Tra(ID_TRABAJADOR);
                 rpta.put("rpta", "1");
                 rpta.put("lista", list);
@@ -109,6 +110,13 @@ public class CReporte_Historial extends HttpServlet {
             if (opc.equals("Fe_Modif_Hijo")) {
                 String id = request.getParameter("hijo");
                 List<Map<String, ?>> lista = re.list_fecha_modif(id);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
+            if (opc.equals("Fe_Modif_Hijo2")) {
+                String id = request.getParameter("hijo");
+                String fecha = request.getParameter("fecha");
+                List<Map<String, ?>> lista = re.list_fecha_modif2(id, fecha);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
@@ -155,6 +163,9 @@ public class CReporte_Historial extends HttpServlet {
                 String idh = request.getParameter("idh");
                 re.Procesar_historial_hijo(idh, es_fecha, fecha);
                 rpta.put("rpta", "1");
+            }
+            if (opc.equals("Historial_Datos_Hijo")) {
+               response.sendRedirect("Vista/Reportes/Hijo/Historial_Hijo.jsp");
             }
 
         } catch (Exception e) {

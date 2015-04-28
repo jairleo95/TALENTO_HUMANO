@@ -34,6 +34,8 @@ public interface InterfaceReporte_HistorialDAO {
 
     public List<Map<String, ?>> list_fecha_modif(String Hijo);
 
+    public List<Map<String, ?>> list_fecha_modif2(String Hijo, String fecha);
+
     public List<Map<String, ?>> list_hijo_trabajdor(String id_tr);
 
     public String[] decode(String t);

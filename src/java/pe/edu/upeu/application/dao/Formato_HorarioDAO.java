@@ -213,7 +213,7 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
             if (id.substring(0, 3).equals("PUT")) {
                 sql += " and pp.id_puesto='" + id.trim() + "'";
             }
-            
+
             if (id.substring(0, 3).equals("DIR")) {
                 sql += " and pp.ID_DIRECCION='" + id.trim() + "' or pp.ID_DIRECCION='0' and pp.ID_DEPARTAMENTO='0' and pp.ID_AREA='0' and  pp.ID_SECCION='0'";
             }
@@ -226,7 +226,7 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
             if (id.substring(0, 3).equals("SEC")) {
                 sql += " and pp.ID_SECCION='" + id.trim() + "' or pp.ID_SECCION='0'";
             }
-            sql+="group by pc.ID_PLANTILLA_CONTRACTUAL,pc.NO_PLANTILLA,pc.NO_PLANTILLA,pc.NO_ARCHIVO ";
+            sql += "group by pc.ID_PLANTILLA_CONTRACTUAL,pc.NO_PLANTILLA,pc.NO_PLANTILLA,pc.NO_ARCHIVO ";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -253,10 +253,10 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
 
     @Override
     public List<Map<String, ?>> Listar_Horario_dgp(String id_dgp) {
-       List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT h.ID_HORARIO,h.DIA_HORARIO,h.HO_DESDE,h.HO_HASTA FROM RHTD_DETALLE_HORARIO dh,RHTC_HORARIO h WHERE h.ID_DETALLE_HORARIO = dh.ID_DETALLE_HORARIO and dh.ID_DGP='"+id_dgp.trim()+"'";
+            String sql = "SELECT h.ID_HORARIO,h.DIA_HORARIO,h.HO_DESDE,h.HO_HASTA FROM RHTD_DETALLE_HORARIO dh,RHTC_HORARIO h WHERE h.ID_DETALLE_HORARIO = dh.ID_DETALLE_HORARIO and dh.ID_DGP='" + id_dgp.trim() + "'";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -278,6 +278,20 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
             }
         }
         return Lista;
+    }
+
+    @Override
+    public void Eliminar_turno(String id_turno) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_ELIMINAR_TURNO (?)}");
+            cst.setString(1, id_turno);
+            cst.execute();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } finally {
+            this.conn.close();
+        }
     }
 
 }
