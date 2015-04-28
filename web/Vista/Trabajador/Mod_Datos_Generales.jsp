@@ -390,7 +390,7 @@
                                                                         <label >Apellido Paterno:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="APELLIDO_P" value="<%=t.getAp_paterno().trim()%>" required="" id="fname"   class="form-control input-group-sm"  onblur="this.value = this.value.toUpperCase()" maxlength="50" >
+                                                                            <input type="text" name="APELLIDO_P" value="<%=t.getAp_paterno().trim()%>" required="" id="fname"  class="form-control input-group-sm"  onblur="this.value = this.value.toUpperCase()" maxlength="50" >
 
                                                                         </div>
                                                                     </div>
@@ -411,7 +411,7 @@
                                                                         <label>Nombre(s):</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="NOMBRES" value="<%=t.getNo_trabajador().trim()%>" required=""  id="lname"  class="form-control input-group-sm" onblur="this.value = this.value.toUpperCase()" maxlength="50" >
+                                                                            <input type="text" name="NOMBRES" value="<%=t.getNo_trabajador().trim()%>" required=""  id="lname1"  class="form-control input-group-sm" onblur="this.value = this.value.toUpperCase()" maxlength="50" >
 
                                                                         </div>
                                                                     </div>
@@ -1222,7 +1222,10 @@
                     if($("#editar").val() === 'ok'){
                     document.getElementById("select-doc").disabled = true;
                     document.getElementById("doc").disabled = true;
-                    
+                    document.getElementById("fname").readOnly = true;
+                    document.getElementById("lname").readOnly = true;
+                    document.getElementById("lname1").readOnly = true;
+                 
                     }
                     $("#banco").change(function() {
                         cuenta_bancaria($(this).val());
@@ -1426,6 +1429,9 @@
                     lname: {
                         required: true
                     },
+                    lname1: {
+                        required: true
+                    },
                     country: {
                         required: true
                     },
@@ -1447,7 +1453,7 @@
                 },
                 messages: {
                     fname: "Por Favor Ingrese su Apellido Paterno",
-                    lname: "Please specify your Last name",
+                    lname: "Por Favor Ingrese ",
                     email: {
                         required: "We need your email address to contact you",
                         email: "Your email address must be in the format of name@domain.com"

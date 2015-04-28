@@ -620,7 +620,7 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
             getServletContext().setAttribute("List_Ubigeo", ub.List_Distrito());
             getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
-            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr + "&edit=ok");
+            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?edit=ok&idtr=" + idtr );
         }
         if (opc.equals("Form_Cambiar_Clave")) {
             response.sendRedirect("Vista/Usuario/Cambiar_Pwd.jsp");
