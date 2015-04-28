@@ -98,8 +98,8 @@ public class CReporte extends HttpServlet {
                  response.sendRedirect("Vista/Reportes/Reporte_Datos_Hijos.jsp");
             }
             
-            if (opc.equals("Reporte_Datos_cumpleaños")) {
-                 response.sendRedirect("/Vista/Reportes/Reporte_Cumpleaños.jsp");
+            if (opc.equals("Reporte_Datos_cumpl")) {
+                 response.sendRedirect("Vista/Reportes/Reporte_Cumpleanos.jsp");
             }
         } catch (Exception e) {
             rpta.put("rpta", "-1");

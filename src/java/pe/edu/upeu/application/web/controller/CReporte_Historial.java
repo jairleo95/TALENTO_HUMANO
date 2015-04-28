@@ -82,8 +82,23 @@ public class CReporte_Historial extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", list);
             }
-            if (opc.equals("val_reg_ec")) {
+            if(opc.equals("Procesar_reg_ec")){
+                String id_ec = request.getParameter("idec");
+                re.Procesar_Est_Civil(id_ec);
+                rpta.put("rpta", "1");
             }
+            if(opc.equals("Detalle_hist_ec")){
+                String idtr = request.getParameter("idtr"); 
+                String nombre = request.getParameter("name");
+                response.sendRedirect("Vista/Reportes/Trabajador/Det_Historial_Est_Civil.jsp?idtr=" + idtr + "&name="+ nombre  );   
+            }
+            if(opc.equals("list_detalle_ec")){
+                String idtr = request.getParameter("idtr"); 
+                List<Map<String, ?>> list = re.Listar_Det_EC(idtr);
+                rpta.put("rpta", "1");
+                rpta.put("lista", list);
+            }
+            
             if (opc.equals("Filtro_hijo")) {
                 String FE_INICIO = request.getParameter("fe_inicio");
                 String FE_FIN = request.getParameter("fe_fin");

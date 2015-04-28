@@ -527,6 +527,7 @@
                         <button class="btn btn-labeled btn-danger btn-rech" type="submit">
                             <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span>RECHAZAR 
                         </button>
+
                     </table>
                 </form>   
             </center>
@@ -611,6 +612,7 @@
                                 <button type="button" class="btn btn-primary btn_guardar_ca"  data-dismiss="modal">
                                     Guardar
                                 </button>
+
                             </div>
                         </form>
 
@@ -618,7 +620,91 @@
 
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
+        </div>
+        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Encontrar Conyugue</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div id="contenido">
+                                <div >
+
+                                    <form class="form-inline" id="frm_filtro" method="post" name="formulario"  >
+
+                                        <div class="row">
+                                            <div class="form-group" >
+                                                <label class="control-label" >Nombres</label><br>
+                                                <input type="text"  class="form-control"  name="nom" maxlength="80" >
+                                            </div>
+                                            <div class="form-group" >
+                                                <label class="control-label" >Apellido Paterno</label><br>
+                                                <input type="text"  class="form-control"  name="ap_pa" maxlength="80">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label" >Apellido Materno</label><br>
+                                                <input type="text"  class="form-control"  name="ap_ma" maxlength="80" >
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label" >DNI:</label><br>
+                                                <input type="text"  class="form-control"  onKeyPress="return checkIt(event)"   name="dni" maxlength="8">
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="form-group">                            
+                                                <button type="button" class="btn btn-primary" id="btnfiltrar" >Buscar</button>
+                                            </div>
+                                            <div class="form-group">  
+                                                <a href="javascript:;"  id="btncancel" class="btn btn-primary" >Cancelar</a>
+                                            </div>
+
+                                        </div>
+
+                                    </form>
+
+                                </div> 
+
+                                <hr/>
+
+                                <table  id="data"  >
+                                    <thead class="tab_cabe">
+                                        <tr>
+                                            <td><span title="NOMBRE_AP">Nombres y Apellidos</span></td>
+                                            <td><span  >DNI</span></td>
+                                            <td></td>
+
+                                        </tr>
+                                    </thead>
+
+                                    <tbody class="tbodys">
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-salir-busc"  data-dismiss="modal">Salir</button>
+
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
+
         <%}%>
         <%}%>
 
@@ -699,6 +785,83 @@
             });</script>
 
         <script src="../../js/JQuery/jQuery.js"></script>
+        <script>
+                                                    $(document).ready(function() {
+                                                        $(".fe_desde_p, .fe_hasta_p").change(function() {
+                                                            var cuotas = $(".cuota_docente");
+                                                            cuotas.empty();
+
+                                                            $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function(objJson) {
+                                                                var lista = objJson.lista;
+                                                                if (objJson.rpta == -1) {
+                                                                    alert(objJson.mensaje);
+                                                                    return;
+                                                                }
+                                                                for (var i = 0; i < lista.length; i++) {
+                                                                    cuotas.append(lista[i].html);
+                                                                }
+                                                            });
+                                                        });
+                                                        $(".btn_guardar_ca").click(function() {
+                                                            $.ajax({
+                                                                url: "../../carga_academica",
+                                                                type: "POST",
+                                                                data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
+                                                            }).done(function(ids) {
+                                                                var arr_id = ids.split(":");
+                                                                alert("Registrado con exito!...");
+                                                                $(".proceso").val(arr_id[0]);
+                                                                $(".dgp").val(arr_id[1]);
+                                                                $(".btn_procesar").show();
+                                                            }).fail(function(e) {
+                                                                alert("Error: " + e);
+                                                            });
+                                                        });
+
+                                                        $(".btn_procesar").click(function() {
+                                                            $.ajax({
+                                                                url: "../../carga_academica", data: "opc=Procesar&dgp=" + $(".dgp").val() + "&proceso=" + $(".proceso").val()
+                                                            }).done(function() {
+                                                                window.location.href = "../../carga_academica?opc=Reporte_Carga_Academica";
+                                                            });
+                                                        });
+
+                                                        $(".btn-autor").click(function(e) {
+                                                            $.SmartMessageBox({
+                                                                title: "Alerta de Confirmaci?!",
+                                                                content: "?sta totalmente seguro de autorizar este requerimiento?",
+                                                                buttons: '[No][Si]'
+                                                            }, function(ButtonPressed) {
+                                                                if (ButtonPressed === "Si") {
+                                                                    // return true;
+                                                                    $(".form-aut").submit();
+                                                                }
+                                                                if (ButtonPressed === "No") {
+                                                                    return false;
+                                                                }
+                                                            });
+                                                            e.preventDefault();
+                                                        });
+                                                        $(".btn-rech").click(function(e) {
+                                                            $.SmartMessageBox({
+                                                                title: "Alerta de Confirmaci?!",
+                                                                content: "?sta totalmente seguro de rechazar este requerimiento?",
+                                                                buttons: '[No][Si]'
+                                                            }, function(ButtonPressed) {
+                                                                if (ButtonPressed === "Si") {
+                                                                    $(".btn-mos").click();
+                                                                    //$(".form-rech").submit();
+                                                                }
+                                                                if (ButtonPressed === "No") {
+                                                                    return false;
+                                                                }
+
+                                                            });
+                                                            e.preventDefault();
+                                                        });
+                                                    });</script>
+
+
         <script src="../../js/Js_dlmenu/jquery.dlmenu.js"></script>
         <script>
             $(function() {
@@ -768,16 +931,16 @@
 
         <script type="text/javascript">
 
-            // DO NOT REMOVE : GLOBAL FUNCTIONS!
-            function closedthis() {
-                $.smallBox({
-                    title: "?icha de trabajador registrada correctamente!",
-                    content: "ya puede visualizar toda la informacion del trabajador...",
-                    color: "#739E73",
-                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                    timeout: 6000
-                });
-            }
+                                                    // DO NOT REMOVE : GLOBAL FUNCTIONS!
+                                                    function closedthis() {
+                                                        $.smallBox({
+                                                            title: "?icha de trabajador registrada correctamente!",
+                                                            content: "ya puede visualizar toda la informacion del trabajador...",
+                                                            color: "#739E73",
+                                                            iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                                            timeout: 6000
+                                                        });
+                                                    }
 
             function closedthis2() {
                 $.smallBox({
@@ -790,7 +953,7 @@
             }
             $(document).ready(function() {
 
-                pageSetUp();
+                                                        pageSetUp();
 
                 $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
                     $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
@@ -817,43 +980,43 @@
                  */
                 $('#eg1').click(function(e) {
 
-                    $.bigBox({
-                        title: "Big Information box",
-                        content: "This message will dissapear in 6 seconds!",
-                        color: "#C46A69",
-                        //timeout: 6000,
-                        icon: "fa fa-warning shake animated",
-                        number: "1",
-                        timeout: 6000
-                    });
-                    e.preventDefault();
-                })
+                                                            $.bigBox({
+                                                                title: "Big Information box",
+                                                                content: "This message will dissapear in 6 seconds!",
+                                                                color: "#C46A69",
+                                                                //timeout: 6000,
+                                                                icon: "fa fa-warning shake animated",
+                                                                number: "1",
+                                                                timeout: 6000
+                                                            });
+                                                            e.preventDefault();
+                                                        })
 
                 $('#eg2').click(function(e) {
 
-                    $.bigBox({
-                        title: "Big Information box",
-                        content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-                        color: "#3276B1",
-                        //timeout: 8000,
-                        icon: "fa fa-bell swing animated",
-                        number: "2"
-                    });
-                    e.preventDefault();
-                })
+                                                            $.bigBox({
+                                                                title: "Big Information box",
+                                                                content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                                                                color: "#3276B1",
+                                                                //timeout: 8000,
+                                                                icon: "fa fa-bell swing animated",
+                                                                number: "2"
+                                                            });
+                                                            e.preventDefault();
+                                                        })
 
                 $('#eg3').click(function(e) {
 
-                    $.bigBox({
-                        title: "Shield is up and running!",
-                        content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-                        color: "#C79121",
-                        //timeout: 8000,
-                        icon: "fa fa-shield fadeInLeft animated",
-                        number: "3"
-                    });
-                    e.preventDefault();
-                })
+                                                            $.bigBox({
+                                                                title: "Shield is up and running!",
+                                                                content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                                                                color: "#C79121",
+                                                                //timeout: 8000,
+                                                                icon: "fa fa-shield fadeInLeft animated",
+                                                                number: "3"
+                                                            });
+                                                            e.preventDefault();
+                                                        })
 
                 $('#eg4').click(function(e) {
 
@@ -884,25 +1047,25 @@
                 });
                 $('#eg6').click(function() {
 
-                    $.smallBox({
-                        title: "Big Information box",
-                        content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-                        color: "#5384AF",
-                        //timeout: 8000,
-                        icon: "fa fa-bell"
-                    });
-                })
+                                                            $.smallBox({
+                                                                title: "Big Information box",
+                                                                content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                                                                color: "#5384AF",
+                                                                //timeout: 8000,
+                                                                icon: "fa fa-bell"
+                                                            });
+                                                        })
 
                 $('#eg7').click(function() {
 
-                    $.smallBox({
-                        title: "James Simmons liked your comment",
-                        content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
-                        color: "#296191",
-                        iconSmall: "fa fa-thumbs-up bounce animated",
-                        timeout: 4000
-                    });
-                })
+                                                            $.smallBox({
+                                                                title: "James Simmons liked your comment",
+                                                                content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
+                                                                color: "#296191",
+                                                                iconSmall: "fa fa-thumbs-up bounce animated",
+                                                                timeout: 4000
+                                                            });
+                                                        })
 
 
                 /*
@@ -917,23 +1080,23 @@
                     }, function(ButtonPressed) {
                         if (ButtonPressed === "Yes") {
 
-                            $.smallBox({
-                                title: "Callback function",
-                                content: "<i class='fa fa-clock-o'></i> <i>You pressed Yes...</i>",
-                                color: "#659265",
-                                iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                timeout: 4000
-                            });
-                        }
-                        if (ButtonPressed === "No") {
-                            $.smallBox({
-                                title: "Callback function",
-                                content: "<i class='fa fa-clock-o'></i> <i>You pressed No...</i>",
-                                color: "#C46A69",
-                                iconSmall: "fa fa-times fa-2x fadeInRight animated",
-                                timeout: 4000
-                            });
-                        }
+                                                                    $.smallBox({
+                                                                        title: "Callback function",
+                                                                        content: "<i class='fa fa-clock-o'></i> <i>You pressed Yes...</i>",
+                                                                        color: "#659265",
+                                                                        iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                                                        timeout: 4000
+                                                                    });
+                                                                }
+                                                                if (ButtonPressed === "No") {
+                                                                    $.smallBox({
+                                                                        title: "Callback function",
+                                                                        content: "<i class='fa fa-clock-o'></i> <i>You pressed No...</i>",
+                                                                        color: "#C46A69",
+                                                                        iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                                                        timeout: 4000
+                                                                    });
+                                                                }
 
                     });
                     e.preventDefault();
