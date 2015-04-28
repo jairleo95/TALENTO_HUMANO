@@ -90,7 +90,8 @@ public class CReporte_Historial extends HttpServlet {
             }
             if(opc.equals("Detalle_hist_ec")){
                 String idtr = request.getParameter("idtr"); 
-                response.sendRedirect("Vista/Reportes/Trabajador/Det_Historial_Est_Civil.jsp?idtr=" + idtr );   
+                String nombre = request.getParameter("name");
+                response.sendRedirect("Vista/Reportes/Trabajador/Det_Historial_Est_Civil.jsp?idtr=" + idtr + "&name="+ nombre  );   
             }
             if(opc.equals("list_detalle_ec")){
                 String idtr = request.getParameter("idtr"); 

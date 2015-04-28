@@ -35,7 +35,7 @@
 
                         <div class="well">
 
-                            <label> Trabajador:</label><%=request.getParameter("name")%>
+                            <h2><label> Trabajador:</label> <strong><%=request.getParameter("name")%></strong></h2>
                             <input type="hidden" class="idtra" value="<%=request.getParameter("idtr")%>">
                         </div>
                     </div>
@@ -132,8 +132,7 @@
                  d += "&idtr=" + id;
                 $.post("../../../RHistorial?", d, function(objJson) {
                     var lista = objJson.lista;
-                    alert(d);
-                    alert(lista.length);
+                    
                    // alert(lista);
                     var t = "<tr>";
                     for (var i = 0; i < lista.length; i++) {
@@ -183,7 +182,7 @@
                      $('.cont_t').append(text);*/
 
                     var text = '<table class="tabla_t table table-bordered table-hover table-striped"><thead><tr><th class="text-center semi-bold">Nro</th>';
-                    text += '<th class="text-center semi-bold">Estado Civil</th><th class="text-center semi-bold">Fe.ModificacionPasado</th><th class="text-center semi-bold">Usuario</th>';
+                    text += '<th class="text-center semi-bold">Estado Civil</th><th class="text-center semi-bold">Fe.Modificacion</th><th class="text-center semi-bold">Usuario</th>';
                     text += '<th class="text-center semi-bold">Procesado</th></tr> </thead><tbody class="tbodys">';
                     text += '</tbody></table>';
                     $('.cont_t').empty();

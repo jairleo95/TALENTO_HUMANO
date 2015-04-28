@@ -234,13 +234,13 @@
                 $('.tabla_t').DataTable();
 
             });
-           
+
 
             $('.btnEnviar').click(function() {
                 ListarEC();
-                });
-                
-            function ListarEC(){
+            });
+
+            function ListarEC() {
                 var data = $('.form_f').serializeArray();
                 var d = "opc=list_hist_es_civil";
                 jQuery.each(data, function(index, field) {
@@ -314,12 +314,17 @@
                             } else {
                                 t += "<td class='smart-form'><center><label class='toggle'><input type='checkbox' value=" + i + " name='checkbox-toggle' class='registrado' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label><center> </td>";
                             }
-                            t += "<td><input type='hidden' class='id_ec"+i+"' value='idec="+ lista[i].id_ec+"'><center><a href='../../../RHistorial?opc=Detalle_hist_ec&idtr="+lista[i].id_tra+"&name="+lista[i].no_tra + " " + lista[i].ap_pat + " " + lista[i].ap_mat+"'  class='btn btn-primary btn-labeled'>Ver Detalle <i class='fa fa-arrow-circle-right' ></i></a><center> </td></tr>";
+                            t += "<td><input type='hidden' class='id_ec" + i + "' value='idec=" + lista[i].id_ec + "'><center><a href='../../../RHistorial?opc=Detalle_hist_ec&idtr=" + lista[i].id_tra + "&name=" + lista[i].no_tra + " " + lista[i].ap_pat + " " + lista[i].ap_mat + "'  class='btn btn-primary btn-labeled'>Ver Detalle <i class='fa fa-arrow-circle-right' ></i></a><center> </td></tr>";
                         }
                         crear_t();
                         $('.tbodys').append(t);
                         $('.tabla_t').DataTable();
                     }
+                });
+                $(".btnCancelar").click(function() {
+                    $('.form_f')[0].reset();
+                    crear_t();
+                    $('.tabla_t').DataTable();
                 });
                 function crear_t() {
                     /* var text = '<table class="tabla_t table table-bordered table-hover table-striped"><thead><tr><th class="text-center semi-bold">Nro</th>';
@@ -336,9 +341,9 @@
                     $('.cont_t').append(text);
                 }
 
-            
-            }    
-                
+
+            }
+
         </script>
     </body>
 

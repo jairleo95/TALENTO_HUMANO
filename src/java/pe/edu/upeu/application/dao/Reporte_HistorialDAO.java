@@ -503,14 +503,14 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
         List<Map<String, ?>> lista = new ArrayList<>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select * from RHTH_ESTADO_CIVIL where ID_TRABAJADOR = '" + idtr.trim() + "'";
+            String sql = "select ec.ID_ESTADO_CIVIL, ec.LI_ESTADO_CIVIL , TO_CHAR (ec.FE_MODIFICACION , 'dd/mm/yy HH:MI:SS' ) as FE_MODIFICACION, us.NO_USUARIO , ec.ID_TRABAJADOR , ec.ES_REGISTRO from RHTH_ESTADO_CIVIL ec , RHTC_USUARIO us where us.ID_USUARIO = ec.US_MODIFICACION and ID_TRABAJADOR = '"+idtr+"' order by FE_MODIFICACION desc";
 
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<>();
                 rec.put("id_ec", rs.getString("ID_ESTADO_CIVIL"));
                 rec.put("es_civil_p", rs.getString("LI_ESTADO_CIVIL"));
-                rec.put("no_usuario", rs.getString("US_MODIFICACION"));
+                rec.put("no_usuario", rs.getString("NO_USUARIO"));
                 rec.put("fe_modi", rs.getString("FE_MODIFICACION"));
                 rec.put("es_reg", rs.getString("ES_REGISTRO"));
                 lista.add(rec);
