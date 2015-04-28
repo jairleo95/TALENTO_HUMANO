@@ -640,11 +640,11 @@
                                                             <tr><td class="td">Monto del Honorario:</td><td><input type="text" name="MONTO_HONORARIO" ></td></tr>   
                                                         </table>
                                                     </div>
-                                                    <input type="hidden" value="<%=dg.getId_dgp()%>" class="iddgp">
+                                                    <input type="hidden" name="ID_DGP" value="<%=dg.getId_dgp()%>" class="iddgp">
                                                     <input type="hidden" name="cant_actual_anti" class="can_centro_cos" value="<%=request.getParameter("can_cc")%>">
                                                     <input type="hidden" name="cant_inicial" class="conteo" value="<%=request.getParameter("num_cc")%>">
                                                     <input type="hidden" name="cant_eliminada" class="cant-elimi" value="0">
-                                                    <input type="hidden" name="cant_eliminada" class="cant-actualmente" value="<%=request.getParameter("can_cc")%>">
+                                                    <input type="hidden" name="CANT_actu" class="cant-actualmente" value="<%=request.getParameter("can_cc")%>">
                                                     <input type="hidden" name="cant_ingresada" class="cant-ing" value="0">
                                                 </fieldset>
                                                 <fieldset id="list-cc">
@@ -829,12 +829,13 @@
                                                             </section>
                                                         </div>
                                                         <input  type="hidden" name="dep_actual" value="" class="dep_actual" />
+                                                        <input  type="hidden" name="estado_de_horario" value="" class="modificacion-total" />
                                                         <input  type="hidden" name="id_det_hor" value="<%=request.getParameter("id_det_hor")%>" class="id_det_hor" />
                                                     </div>
                                                 </fieldset>
                                                 <footer>
                                                     <button type="submit" class="btn btn-primary btn-labeled">
-                                                        Siguiente  <i class="fa fa-arrow-circle-right"></i>
+                                                        Modificar  <i class="fa fa-pencil"></i>
                                                     </button>
                                                     <button type="button" class="btn btn-default" onclick="window.history.back();">
                                                         <i class="fa fa-arrow-circle-left"></i>  Regresar
@@ -1023,86 +1024,128 @@
 
                     $("#select_lun").change(
                             function() {
-                                if ($(this).val() == 1) {
-                                    $("#show_lun").show();
+                                var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
+                                if (msg == true) {
+                                    if ($(this).val() == 1) {
+                                        $("#show_lun").show();
+                                    }
+                                    if ($(this).val() == 2) {
+                                        $(".cont_lun").hide();
+                                        $("#show_lun input").val("00:00");
+                                    }
+                                    calcularHoras();
+                                } else {
+                                    $("#select_lun").val("1");
+                                    return false;
                                 }
-                                if ($(this).val() == 2) {
-                                    $(".cont_lun").hide();
-                                    $("#show_lun input").val("00:00");
-                                }
-                                calcularHoras();
                             }
                     );
                     $("#select_mar").change(
                             function() {
-                                if ($(this).val() == 1) {
-                                    $("#show_mar").show();
+                                var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
+                                if (msg == true) {
+                                    if ($(this).val() == 1) {
+                                        $("#show_mar").show();
+                                    }
+                                    if ($(this).val() == 2) {
+                                        $(".cont_mar").hide();
+                                        $("#show_mar input").val("00:00");
+                                    }
+                                    calcularHoras();
+                                } else {
+                                    $("#select_mar").val("1")
+                                    return false;
                                 }
-                                if ($(this).val() == 2) {
-                                    $(".cont_mar").hide();
-                                    $("#show_mar input").val("00:00");
-                                }
-                                calcularHoras();
                             }
                     );
                     $("#select_mie").change(
                             function() {
-                                if ($(this).val() == 1) {
-                                    $("#show_mie").show();
+                                var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
+                                if (msg == true) {
+                                    if ($(this).val() == 1) {
+                                        $("#show_mie").show();
+                                    }
+                                    if ($(this).val() == 2) {
+                                        $(".cont_mie").hide();
+                                        $("#show_mie input").val("00:00");
+                                    }
+                                    calcularHoras();
+                                } else {
+                                    $("#select_mie").val("1")
+                                    return false;
                                 }
-                                if ($(this).val() == 2) {
-                                    $(".cont_mie").hide();
-                                    $("#show_mie input").val("00:00");
-                                }
-                                calcularHoras();
                             }
                     );
                     $("#select_jue").change(
                             function() {
-                                if ($(this).val() == 1) {
-                                    $("#show_jue").show();
+                                var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
+                                if (msg == true) {
+                                    if ($(this).val() == 1) {
+                                        $("#show_jue").show();
+                                    }
+                                    if ($(this).val() == 2) {
+                                        $(".cont_jue").hide();
+                                        $("#show_jue input").val("00:00");
+                                    }
+                                    calcularHoras();
+                                } else {
+                                    $("#select_jue").val("1")
+                                    return false;
                                 }
-                                if ($(this).val() == 2) {
-                                    $(".cont_jue").hide();
-                                    $("#show_jue input").val("00:00");
-                                }
-                                calcularHoras();
                             }
                     );
                     $("#select_vie").change(
                             function() {
-                                if ($(this).val() == 1) {
-                                    $("#show_vie").show();
+                                var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
+                                if (msg == true) {
+                                    if ($(this).val() == 1) {
+                                        $("#show_vie").show();
+                                    }
+                                    if ($(this).val() == 2) {
+                                        $(".cont_vie").hide();
+                                        $("#show_vie input").val("00:00");
+                                    }
+                                    calcularHoras();
+                                } else {
+                                    $("#select_vie").val("1")
+                                    return false;
                                 }
-                                if ($(this).val() == 2) {
-                                    $(".cont_vie").hide();
-                                    $("#show_vie input").val("00:00");
-                                }
-                                calcularHoras();
                             }
                     );
                     $("#select_sab").change(
                             function() {
-                                if ($(this).val() == 1) {
-                                    $("#show_sab").show();
+                                var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
+                                if (msg == true) {
+                                    if ($(this).val() == 1) {
+                                        $("#show_sab").show();
+                                    }
+                                    if ($(this).val() == 2) {
+                                        $(".cont_sab").hide();
+                                        $("#show_sab input").val("00:00");
+                                    }
+                                    calcularHoras();
+                                } else {
+                                    $("#select_sab").val("1")
+                                    return false;
                                 }
-                                if ($(this).val() == 2) {
-                                    $(".cont_sab").hide();
-                                    $("#show_sab input").val("00:00");
-                                }
-                                calcularHoras();
                             }
                     );
                     $("#select_dom").change(
                             function() {
-                                if ($(this).val() == 1) {
-                                    $("#show_dom").show();
+                                var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
+                                if (msg == true) {
+                                    if ($(this).val() == 1) {
+                                        $("#show_dom").show();
+                                    }
+                                    if ($(this).val() == 2) {
+                                        $(".cont_dom").hide();
+                                        $("#show_dom input").val("00:00");
+                                    }
+                                    calcularHoras();
+                                } else {
+                                    $("#select_dom").val("1")
+                                    return false;
                                 }
-                                if ($(this).val() == 2) {
-                                    $(".cont_dom").hide();
-                                    $("#show_dom input").val("00:00");
-                                }
-                                calcularHoras();
                             }
                     );
                 }
@@ -1173,7 +1216,7 @@
                             texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '" readonly="readonly"  disabled><option value="">[DEPARTAMENTO]</option></select></label></section>';
                             texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required="" readonly="readonly"  disabled><option value="">[CENTRO COSTO]</option></select></label></section>';
                             texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '" value="' + lista[i].ca_por_cc + '"  type="text" required="" class="porcentaje_cc por-cen-' + ag + '" onkeyup="dar_valor($(this).val(),' + ag + ');"/><input type="hidden" name="porcent_ant_' + (i + 1) + '"  value="' + lista[i].ca_por_cc + '" class="porc' + ag + ' por-i" /></label> </section>';
-                            texto += '<section class="col col-1" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;" value="' + ag + '" class=" btn btn-default txt-color-red remover' + ag + ' dis-total" onclick="Eliminar(alert());"  disabled><i class="fa fa-minus fa-2x"></i></button></label></section>';
+                            texto += '<section class="col col-1" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;" value="' + ag + '" class=" btn btn-default txt-color-red remover' + ag + ' dis-total" onclick="Eliminar2($(this).val());"  disabled><i class="fa fa-minus fa-2x"></i></button></label></section>';
                             texto += '<input type="hidden" value="' + lista[i].id_det_ce + '" class="id_dcc' + ag + '" ><input type="hidden" name="id_d_cen_cos' + (i + 1) + '" value="' + lista[i].id_det_ce + '" ></div>';
                             var dir, dep, cc;
                             dir = lista[i].id_dir_cc;
@@ -1191,7 +1234,7 @@
                             texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '" readonly="readonly"  disabled><option value="">[DEPARTAMENTO]</option></select></label></section>';
                             texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required="" readonly="readonly"  disabled=""><option value="">[CENTRO COSTO]</option></select></label></section>';
                             texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '" value="' + lista[i].ca_por_cc + '"  type="text" required="" class="porcentaje_cc por-cen-' + ag + '" onkeyup="dar_valor($(this).val(),' + ag + ');"/><input type="hidden" name="porcent_ant_' + (i + 1) + '" value="' + lista[i].ca_por_cc + '" class="porc' + ag + ' por-i" /></label></section>';
-                            texto += '<section class="col col-1" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;" value="' + ag + '" class=" btn btn-default txt-color-red remover' + ag + ' dis-total" onclick="Eliminar($(this).val());" ><i class="fa fa-minus fa-2x"></i></button></label></section>';
+                            texto += '<section class="col col-1" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;" value="' + ag + '" class=" btn btn-default txt-color-red remover' + ag + ' dis-total" onclick="Eliminar2($(this).val());" ><i class="fa fa-minus fa-2x"></i></button></label></section>';
                             texto += '<input type="hidden" value="' + lista[i].id_det_ce + '" class="id_dcc' + ag + '" ><input type="hidden" name="id_d_cen_cos' + (i + 1) + '" value="' + lista[i].id_det_ce + '" ></div>';
                             var dir, dep, cc;
                             dir = lista[i].id_dir_cc;
@@ -1515,7 +1558,7 @@
             $(".por_sum_to").val(acum);
 
         }
-        function Eliminar(i) {
+        function Eliminar2(i) {
             //alert();
             var x = $("#fila-agregar-cc");
 
@@ -1694,19 +1737,20 @@
                                     scntDiv.hide();
                                 } else if (lista[i].estado == '1') {
                                     scntDiv.show();
+                                    text_html += '<tr class="tr-dia turno_' + (i + 1) + '" ><td>T' + (d + 1);
+                                    text_html += ' :</td><td><input type="text"   class="texto-h HORA_DESDE_' + dias_semana[f] + (d + 1) + '"   name="HORA_DESDE_' + dias_semana[f] + (d + 1);
+                                    text_html += '" value="' + lista[i].desde + '"  /></td><td><input type="text"  class="texto-h HORA_HASTA_' + dias_semana[f] + (d + 1) + '"  value="' + lista[i].hasta + '" name="HORA_HASTA_' + dias_semana[f] + (d + 1)
+                                            + '" /><input type="hidden" name="DIA_' + dias_semana[f] + (d + 1) + '" class="nombre_dia_' + (i + 1) + '" value="' + dias_semana[f] + '" >';
+                                    if (primera_fila == 1) {
+                                        text_html += '<button type="button" class="btn btn-primary agregar_turno" value="' + (i + 1) + '"><i class="fa fa-plus-square"></i></button></td></tr>';
+                                    } else {
+                                        text_html += '<button type="button" class="btn btn-danger remover_turno" value="' + (i + 1) + '"><i class="fa  fa-minus-circle"></i></button></td></tr>';
+                                    }
+                                    d++;
+                                    scntDiv.append(text_html);
+                                    text_html = "";
                                 }
-                                text_html += '<tr class="tr-dia turno_' + (i + 1) + '" ><td>T' + (d + 1);
-                                text_html += ' :</td><td><input type="text"   class="texto-h HORA_DESDE_' + dias_semana[f] + (d + 1) + '"   name="HORA_DESDE_' + dias_semana[f] + (d + 1);
-                                text_html += '" value="' + lista[i].desde + '"  /></td><td><input type="text"  class="texto-h HORA_HASTA_' + dias_semana[f] + (d + 1) + '"  value="' + lista[i].hasta + '" name="HORA_HASTA_' + dias_semana[f] + (d + 1)
-                                        + '" /><input type="hidden" name="DIA_' + dias_semana[f] + (d + 1) + '" class="nombre_dia_' + (i + 1) + '" value="' + dias_semana[f] + '" >';
-                                if (primera_fila == 1) {
-                                    text_html += '<button type="button" class="btn btn-primary agregar_turno" value="' + (i + 1) + '"><i class="fa fa-plus-square"></i></button></td></tr>';
-                                } else {
-                                    text_html += '<button type="button" class="btn btn-danger remover_turno" value="' + (i + 1) + '"><i class="fa  fa-minus-circle"></i></button></td></tr>';
-                                }
-                                d++;
-                                scntDiv.append(text_html);
-                                text_html = "";
+
                             }
                             // alert(dias_semana[f]);
                         }
@@ -1763,40 +1807,154 @@
                     return;
                 }
                 var lista = objJson.lista;
+                var turno_l = 0;
+                var turno_ma = 0;
+                var turno_mi = 0;
+                var turno_j = 0;
+                var turno_v = 0;
+                var turno_s = 0;
+                var turno_d = 0;
+                var turno = 0;
+                var dia = 0;
+                $(".dias_semana").append("<input type='hidden' value='" + lista.length + "' name='cantidad_inicial_horario'>")
                 for (var i = 0; i < lista.length; i++) {
+                    $("#select_" + lista[i].dia_h).val(1);
+                    $('#show_' + lista[i].dia_h).show();
+                    var g = $("#show_" + lista[i].dia_h);
+                    var text_html = '';
                     if (lista[i].dia_h == "lun") {
-                        var turno = $('#show_' + $(".nombre_dia_" + $(this).val()).val() + ' .tr-dia').size() + 1;
-                        var g = $(".cont_lun");
-                        var text_html = '';
-                        var dia = $(".nombre_dia_" + $(this).val()).val();
-                        var agregar_turno = $('#show_' + lista[i].dia_h);
-                        text_html += '<tr class="tr-dia turno_' + (i + 1) + '" ><td>T' + turno;
-                        text_html += ' :</td><td><input type="text"   class="texto-h HORA_DESDE_' + lista[i].dia_h + turno + '"   name="HORA_DESDE_' + lista[i].dia_h + turno;
-                        text_html += '" value="' + lista[i].hor_d + '"  /></td><td><input type="text"  class="texto-h HORA_HASTA_' + lista[i].dia_h + turno + '"  value="' + lista[i].hor_h + '" name="HORA_HASTA_' + lista[i].dia_h + turno
-                                + '" /><input type="hidden" name="DIA_' + lista[i].dia_h + turno + '" class="nombre_dia_' + (i + 1) + '" value="' + lista[i].dia_h + '" >';
-                        text_html += '<button type="button" class="btn btn-danger remover_turno" value="' + (i + 1) + '"><i class="fa  fa-minus-circle"></i></button></td></tr>';
-                        agregar_turno.append(text_html);
+                        turno = turno_l;
+                        dia = 1;
                     }
                     if (lista[i].dia_h == "mar") {
-                        var a = $(".cont_mar");
+                        turno = turno_ma;
+                        dia = 2;
                     }
                     if (lista[i].dia_h == "mie") {
-                        var b = $(".cont_mie");
+                        turno = turno_mi;
+                        dia = 3;
                     }
                     if (lista[i].dia_h == "jue") {
-                        var c = $(".cont_jue");
+                        turno = turno_j;
+                        dia = 4;
                     }
                     if (lista[i].dia_h == "vie") {
-                        var d = $(".cont_vie");
+                        turno = turno_v;
+                        dia = 5;
                     }
                     if (lista[i].dia_h == "sab") {
-                        var e = $(".cont_sab");
+                        dia = 6;
+                        turno = turno_s;
                     }
                     if (lista[i].dia_h == "dom") {
-                        var f = $(".cont_dom");
+                        turno = turno_d;
+                        dia = 7;
                     }
+
+                    text_html += '<tr class="tr-dia turno_' + (turno + 1) + lista[i].dia_h + '" ><td>T' + (turno + 1);
+                    text_html += ' :</td><td><input type="text"   class="texto-h HORA_DESDE_' + lista[i].dia_h + (turno + 1) + '"   name="HORA_DESDE_' + lista[i].dia_h + (turno + 1);
+                    text_html += '" value="' + lista[i].hor_d + '"  /></td><td><input type="text"  class="texto-h HORA_HASTA_' + lista[i].dia_h + (turno + 1) + '"  value="' + lista[i].hor_h + '" name="HORA_HASTA_' + lista[i].dia_h + (turno + 1)
+                            + '" /><input type="hidden" name="DIA_' + lista[i].dia_h + (turno + 1) + '" class="nombre_dia_' + (i + 1) + '" value="' + lista[i].dia_h + '" >';
+                    text_html += '<input type="hidden" value="' + lista[i].id + '" name="id_horario' + (turno + 1) + lista[i].dia_h + '">'
+                    if (turno + 1 == 1) {
+                        text_html += '<button type="button" class="btn btn-primary agregar_turno' + (turno + 1) + '" value="' + lista[i].id + '" ><i class="fa fa-plus-square"></i></button></td></tr>';
+                    } else {
+                        text_html += '<button type="button" class="btn btn-danger remover_turno' + (turno + 1) + lista[i].dia_h + '" value="' + lista[i].id + '" onclick="Eliminar($(this).val(),' + (turno + 1) + ',' + dia + ');"><i class="fa  fa-minus-circle"></i></button></td></tr>';
+                    }
+                    g.append(text_html);
+                    if (lista[i].dia_h == "lun") {
+                        turno_l++;
+                    }
+                    if (lista[i].dia_h == "mar") {
+                        turno_ma++;
+                    }
+                    if (lista[i].dia_h == "mie") {
+                        turno_mi++;
+                    }
+                    if (lista[i].dia_h == "jue") {
+                        turno_j++;
+                    }
+                    if (lista[i].dia_h == "vie") {
+                        turno_v++;
+                    }
+                    if (lista[i].dia_h == "sab") {
+                        turno_s++;
+                    }
+                    if (lista[i].dia_h == "dom") {
+                        turno_d++;
+                    }
+                    calcularHoras();
+                    //$(".texto-h").mask("99:99", {placeholder: "X"});
+                    $(".texto-h").keypress(
+                            function() {
+                                calcularHoras();
+                            }
+                    );
+                    /* $(".remover_turno" + (turno + 1)).click(function() {
+                     //alert($(this).val());
+                     //$(".turno_" + $(this).val()).remove();
+                     Eliminar();
+                     });*/
+                    $(".agregar_turno").click(function() {
+                        //var turno = $('#show_' + $(".nombre_dia_" + $(this).val()).val() + ' .tr-dia').size() + 1;
+                        var dia = $(".nombre_dia_" + $(this).val()).val();
+                        var agregar_turno = $('#show_' + dia);
+
+                        var i = $(".dias_semana .tr-dia").size();
+                        text_html += '<tr class="tr-dia turno_' + (i + 1) + '" ><td>T' + (turno + 1);
+                        text_html += ' :</td><td><input type="text"   class="texto-h HORA_DESDE_' + dia + (turno + 1) + '"   name="HORA_DESDE_' + dia + (turno + 1);
+                        text_html += '" value="00:00"  /></td><td><input type="text"  class="texto-h HORA_HASTA_' + dia + (turno + 1) + '"  value="00:00" name="HORA_HASTA_' + dia + (turno + 1)
+                                + '" /><input type="hidden" name="DIA_' + dia + (turno + 1) + '" class="nombre_dia_' + (i + 1) + '" value="' + dia + '" >';
+                        text_html += '<button type="button" class="btn btn-danger remover_turno" value="' + (i + 1) + '"><i class="fa  fa-minus-circle"></i></button></td></tr>';
+                        agregar_turno.append(text_html);
+                        //$(".texto-h").mask("99:99", {placeholder: "X"});
+                        $(".remover_turno").click(function() {
+                            //alert($(this).val());
+                            $(".turno_" + $(this).val()).remove();
+                            calcularHoras();
+                        });
+                        $(".texto-h").keypress(
+                                function() {
+                                    calcularHoras();
+                                }
+                        );
+
+                    });
                 }
             });
+        }
+        function Eliminar(id, num, dia) {
+            var dia_string = "";
+            var msg = confirm('Si aceptas se eliminara la informacion totalmente ¿estas seguro de realizar esta operacion?');
+            if (msg == true) {
+                $.post("../../formato_horario", "opc=Eliminar_turno&id_horario=" + id, function(objJson) {
+                    if (dia == 1) {
+                        dia_string = "lun";
+                    }
+                    if (dia == 2) {
+                        dia_string = "mar";
+                    }
+                    if (dia == 3) {
+                        dia_string = "mie";
+                    }
+                    if (dia == 4) {
+                        dia_string = "jue";
+                    }
+                    if (dia == 5) {
+                        dia_string = "vie";
+                    }
+                    if (dia == 6) {
+                        dia_string = "sab";
+                    }
+                    if (dia == 7) {
+                        dia_string = "dom";
+                    }
+                    $(".turno_" + num + dia_string).remove();
+                    calcularHoras();
+                });
+            } else {
+                return false;
+            }
         }
         $(document).ready(function() {
             Listar_centro_costo1();
@@ -1813,8 +1971,6 @@
             //  var r = "";
             $('#btn-agregar-cc').click(function() {
                 agregar_centro_costo();
-
-
             });
             $("#banco").change(function() {
 
@@ -1825,14 +1981,18 @@
             });
             listar_cc();
 
-            $("#horario").change(
-                    function() {
-                        list_horario($(this).val());
-                    }
-            );
-        }
-        )
-                ;</script>
+            $("#horario").change(function() {
+                var select_an = $("#horario").val();
+                var msg = confirm('Si aceptas se eliminara la informacion totalmente los horarios que se ven ahora ¿deseas continuar?');
+                if (msg == true) {
+                    list_horario($(this).val());
+                    $(".modificacion-total").val("1");
+                } else {
+                    listar_tipo_horario();
+                    return false;
+                }
+            });
+        });</script>
     <script type="text/javascript">
         $(document).ready(function() {
             $("#sueldo").numeric();

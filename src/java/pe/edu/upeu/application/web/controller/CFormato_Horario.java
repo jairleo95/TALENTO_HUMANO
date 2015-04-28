@@ -115,6 +115,10 @@ public class CFormato_Horario extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
+            if (opc.equals("Eliminar_turno")) {
+                String id_horario=request.getParameter("id_horario");
+                Ifh.Eliminar_turno(id_horario);
+            }
             if (opc.equals("Listar_Horas_horario")) {
                 String id_dgp = request.getParameter("iddgp");
                 List<Map<String, ?>> lista = Ifh.Listar_Horario_dgp(id_dgp);

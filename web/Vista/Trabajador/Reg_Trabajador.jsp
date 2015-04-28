@@ -2497,9 +2497,7 @@
                 }
             });
         });
-
         // ============ DIRECCION ===========
-
         $("#dep_dir_a").change(function() {
             var ti = $("#pro_dir_a");
             ti.empty();
