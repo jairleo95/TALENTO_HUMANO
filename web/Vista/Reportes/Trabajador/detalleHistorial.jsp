@@ -37,11 +37,11 @@
                             <div class="well">
                                 <form class="smart-form form_f">
 
-                                    <h1 class="text-center ">Historial de Modificaciones <small>/ Trabajadores</small></h1><br>
+                                    <h1 class="text-center ">Historial de Modificaciones <small class="n_tra">/ Trabajadores</small></h1><br>
                                     <div class="row">
                                         <div class="col col-xs-4">
                                             <section class="col col-xs-12">
-                                                <label class="label">Ultimas Modificaciones</label>
+                                                <label class="label">Lista de Modificaciones</label>
                                                 <label class="select">
                                                     <select class="s_fecha">
                                                         <option>[Seleccione]</option>
@@ -204,10 +204,11 @@
         <script src="../../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
         <script src="../../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="../../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
+        <script src="../../../js/Js_Hist_Mod/cargar_tablas.js" type="text/javascript"></script>
         <script type="text/javascript">
             $(document).ready(function () {
                 var idtrab = '<%= request.getParameter("idtr")%>';
-                var ip,host,mac, us,fe;
+                var us_ip,nombres, us, fe;
                 cargar_fechas();
                 function cargar_fechas() {
                     var s = $('.s_fecha');
@@ -239,82 +240,46 @@
                 function cargar_hist(fe_hist) {
                     $.post("../../../RHistorial?", "opc=list_hist_fecha&fe_modif=" + fe_hist + "&idtra=" + idtrab, function (objJson) {
                         var lista = objJson.lista;
-                        var ipp = objJson.ipp;
-                        var idd=objJson.idd;
-                        ip=ipp[0];
-                        host=ipp[1];
-                        mac=ipp[2];
-                        us=lista[58].det;
-                        fe=lista[59].det;
+                        us_ip = objJson.us_ip;
+                        us=lista[0].col60;
+                        fe=lista[0].col61;
                         if (lista.length < 1) {
                         } else {
                             var text = "";
-                            
-                            for (var i = 0; i < lista.length; i++) {
-
-                                text += "<tr class='roh" + i + "'>";
-                                text += "<td>" + (i + 1) + "</td>";
-                                text += "<td>" + lista[i].col + "</td>";
-
-                                if (lista[i].det != undefined) {
-                                    if (i == 60) {
-                                        text += "<td class='deth" + i + "'>" + ip + " / " + host + " / " + mac + "</td>";
-                                    } else {
-                                        
-                                        text += "<td class='deth" + i + "'>" + lista[i].det + "</td>";
-                                    }
-                                } else {
-                                    text += "<td>Sin Datos</td>";
-                                }
-
-
-                                text += "</tr>";
-                            }
+                            text = cargar_historial(lista, text);
                             $('.tbodys_hist').empty();
                             $('.tbodys_hist').append(text);
                             cargar_act();
-                            cargar_ip();
+                            
                         }
                     });
+                }
+                function cargar_ip(us_ip) {
+                    $('.inUs').val(us);
+                    $('.inFe').val(fe);
+                    $('.inIp').val(us_ip[0]);
+                    $('.inHos').val(us_ip[1]);
+                    $('.inMac').val(us_ip[2]);
+                    $('.deth61').text(us_ip[0]);
+                    $('.deta61').text(us_ip[0]);
                 }
                 function cargar_act() {
                     $.post("../../../RHistorial?", "opc=list_actual&idtra=" + idtrab, function (objJson) {
                         var lista = objJson.lista;
-                        var ipp = objJson.ipp;
+                        nombres=" / "+lista[0].col4+" "+lista[0].col2;
+                        $('.n_tra').text(nombres);
                         if (lista.length < 1) {
                         } else {
                             var text = "";
-                            var nn = lista.length;
-                            for (var i = 0; i < lista.length; i++) {
-                                text += "<tr class='roa" + i + "'>";
-                                text += "<td>" + (i + 1) + "</td>";
-                                text += "<td>" + lista[i].col + "</td>";
-
-                                if (lista[i].det != undefined) {
-                                    if (i == 60) {
-                                        text += "<td class='deta" + i + "'>" + ipp[0] + " / " + ipp[1] + " / " + ipp[2] + "</td>";
-                                    } else {
-                                        text += "<td class='deta" + i + "'>" + lista[i].det + "</td>";
-                                    }
-                                } else {
-                                    text += "<td>Sin Datos</td>";
-                                }
-
-                                text += "</tr>";
-                            }
+                            text = cargar_actual(lista, text);
                             $('.tbodys_act').empty();
                             $('.tbodys_act').append(text);
-                            color_t(nn);
+                            cargar_ip(us_ip);
+                            color_t(73);                            
                         }
                     });
                 }
-                function cargar_ip(){
-                    $('.inUs').val(us);
-                    $('.inFe').val(fe);
-                    $('.inIp').val(ip);
-                    $('.inHos').val(host);
-                    $('.inMac').val(mac);
-                }
+
                 function color_t(nn) {
                     for (var i = 0; i < nn; i++) {
                         if ($('.deth' + i).text() != $('.deta' + i).text()) {

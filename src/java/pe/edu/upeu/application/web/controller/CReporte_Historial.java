@@ -67,7 +67,6 @@ public class CReporte_Historial extends HttpServlet {
             }
             if (opc.equals("list_mod_tra")) {
                 String ID_TRABAJADOR = request.getParameter("idtr");
-                System.out.println(ID_TRABAJADOR);
                 List<Map<String, ?>> list = re.Listar_Mod_Tra(ID_TRABAJADOR);
                 rpta.put("rpta", "1");
                 rpta.put("lista", list);
@@ -118,18 +117,16 @@ public class CReporte_Historial extends HttpServlet {
                 String fe_modif = request.getParameter("fe_modif");
                 String idtra = request.getParameter("idtra");
                 List<Map<String, ?>> lista = re.Listar_hist_fecha(fe_modif, idtra);
-                String[] r = re.decode((String) lista.get(60).get("det"));
+                String[]r =re.decode((String)lista.get(0).get("col62"));
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
-                rpta.put("ipp", r);
+                rpta.put("us_ip", r);
             }
             if (opc.equals("list_actual")) {
                 String idtra = request.getParameter("idtra");
                 List<Map<String, ?>> lista = re.Listar_dat_actual(idtra);
-                String[] r = re.decode((String) lista.get(60).get("det"));
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
-                rpta.put("ipp", r);
             }
             if (opc.equals("Comparar_hijo")) {
                 String id_trabajador = request.getParameter("idtr");
