@@ -21,15 +21,16 @@ public class Hist_Estado_CivilDAO implements InterfaceHist_Estado_CivilDAO {
     ConexionBD conn;
 
     @Override
-    public void INSERT_HIST_ESTADO_CIVIL(String ID_ESTADO_CIVIL, String LI_ESTADO_CIVIL, String FE_MODIFICACION, String US_MODIFICACION, String ID_TRABAJADOR) {
+    public void INSERT_HIST_ESTADO_CIVIL(String ID_ESTADO_CIVIL, String LI_ESTADO_CIVIL, String FE_MODIFICACION, String US_MODIFICACION, String ID_TRABAJADOR , String ES_REGISTRO) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_ESTADO_CIVIL( ?, ?, ?, ?, ?)} ");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_ESTADO_CIVIL( ?, ?, ?, ?, ?, ?)} ");
             cst.setString(1, null);
             cst.setString(2, LI_ESTADO_CIVIL);
             cst.setString(3, FE_MODIFICACION);
             cst.setString(4, US_MODIFICACION);
             cst.setString(5, ID_TRABAJADOR);
+            cst.setString(6, ES_REGISTRO);
             cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());

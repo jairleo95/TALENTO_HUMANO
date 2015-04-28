@@ -18,13 +18,16 @@ public class V_Solicitud_Requerimiento {
     private String ap_materno;
     private String ap_paterno;
     private String fe_desde;
-    private String fe_hasta;
-    private String fe_creacion;
-    private String id_dgp;
-    private String id_solicitud_dgp;
-    private String id_trabajador;
-    private String id_departamento;
-    private String no_usuario_sol;
+
+    private String fe_desde_s;
+
+    public String getFe_desde_s() {
+        return fe_desde_s;
+    }
+
+    public void setFe_desde_s(String fe_desde_s) {
+        this.fe_desde_s = fe_desde_s;
+    }
 
     public String getNo_dep() {
         return no_dep;
@@ -146,6 +149,38 @@ public class V_Solicitud_Requerimiento {
         this.us_modif = us_modif;
     }
 
+    public String getId_plazo() {
+        return id_plazo;
+    }
+
+    public void setId_plazo(String id_plazo) {
+        this.id_plazo = id_plazo;
+    }
+
+    public String getNo_plazo() {
+        return no_plazo;
+    }
+
+    public void setNo_plazo(String no_plazo) {
+        this.no_plazo = no_plazo;
+    }
+
+    public String getDet_alerta() {
+        return det_alerta;
+    }
+
+    public void setDet_alerta(String det_alerta) {
+        this.det_alerta = det_alerta;
+    }
+
+    public String getFe_desde_p() {
+        return fe_desde_p;
+    }
+
+    public void setFe_desde_p(String fe_desde_p) {
+        this.fe_desde_p = fe_desde_p;
+    }
+
     public String getNo_usuario_modif() {
         return no_usuario_modif;
     }
@@ -153,10 +188,48 @@ public class V_Solicitud_Requerimiento {
     public void setNo_usuario_modif(String no_usuario_modif) {
         this.no_usuario_modif = no_usuario_modif;
     }
-    private String us_modif;
-    private String no_usuario_modif;
 
-    public V_Solicitud_Requerimiento(String no_dep, String no_area, String no_puesto, String no_trabajador, String ap_materno, String ap_paterno, String fe_desde, String fe_hasta, String fe_creacion, String id_dgp, String id_solicitud_dgp, String id_trabajador, String id_departamento, String no_usuario_sol, String us_modif, String no_usuario_modif) {
+    public String getNo_req() {
+        return no_req;
+    }
+
+    public void setNo_req(String no_req) {
+        this.no_req = no_req;
+    }
+
+    public String getDe_solicitud() {
+        return de_solicitud;
+    }
+
+    public void setDe_solicitud(String de_solicitud) {
+        this.de_solicitud = de_solicitud;
+    }
+
+    public String getEs_autorizar() {
+        return es_autorizar;
+    }
+
+    public void setEs_autorizar(String es_autorizar) {
+        this.es_autorizar = es_autorizar;
+    }
+
+    public String getEs_solicitud_dgp() {
+        return es_solicitud_dgp;
+    }
+
+    public void setEs_solicitud_dgp(String es_solicitud_dgp) {
+        this.es_solicitud_dgp = es_solicitud_dgp;
+    }
+
+    public String getTi_plazo() {
+        return ti_plazo;
+    }
+
+    public void setTi_plazo(String ti_plazo) {
+        this.ti_plazo = ti_plazo;
+    }
+
+    public V_Solicitud_Requerimiento(String no_dep, String no_area, String no_puesto, String no_trabajador, String ap_materno, String ap_paterno, String fe_desde, String fe_hasta, String fe_creacion, String id_dgp, String id_solicitud_dgp, String id_trabajador, String id_departamento, String no_usuario_sol, String us_modif, String id_plazo, String no_plazo, String det_alerta, String fe_desde_p, String no_usuario_modif, String no_req, String de_solicitud, String es_autorizar, String es_solicitud_dgp, String ti_plazo, String fe_desde_s) {
         this.no_dep = no_dep;
         this.no_area = no_area;
         this.no_puesto = no_puesto;
@@ -172,7 +245,17 @@ public class V_Solicitud_Requerimiento {
         this.id_departamento = id_departamento;
         this.no_usuario_sol = no_usuario_sol;
         this.us_modif = us_modif;
+        this.id_plazo = id_plazo;
+        this.no_plazo = no_plazo;
+        this.det_alerta = det_alerta;
+        this.fe_desde_p = fe_desde_p;
         this.no_usuario_modif = no_usuario_modif;
+        this.no_req = no_req;
+        this.de_solicitud = de_solicitud;
+        this.es_autorizar = es_autorizar;
+        this.es_solicitud_dgp = es_solicitud_dgp;
+        this.ti_plazo = ti_plazo;
+        this.fe_desde_s = fe_desde_s;
     }
 
     public V_Solicitud_Requerimiento() {
@@ -191,7 +274,35 @@ public class V_Solicitud_Requerimiento {
         this.id_departamento = "";
         this.no_usuario_sol = "";
         this.us_modif = "";
+        this.id_plazo = "";
+        this.no_plazo = "";
+        this.det_alerta = "";
+        this.fe_desde_p = "";
         this.no_usuario_modif = "";
+        this.no_req = "";
+        this.de_solicitud = "";
+        this.es_autorizar = "";
+        this.es_solicitud_dgp = "";
+        this.ti_plazo = "";
+        this.fe_desde_s = "";
     }
+    private String fe_hasta;
+    private String fe_creacion;
+    private String id_dgp;
+    private String id_solicitud_dgp;
+    private String id_trabajador;
+    private String id_departamento;
+    private String no_usuario_sol;
+    private String us_modif;
+    private String id_plazo;
+    private String no_plazo;
+    private String det_alerta;
+    private String fe_desde_p;
+    private String no_usuario_modif;
+    private String no_req;
+    private String de_solicitud;
+    private String es_autorizar;
+    private String es_solicitud_dgp;
+    private String ti_plazo;
 
 }

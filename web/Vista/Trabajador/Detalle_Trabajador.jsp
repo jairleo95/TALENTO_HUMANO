@@ -244,19 +244,32 @@
                                         for (int e = 0; e < id_empleadox_ide.size(); e++) {
                                             Empleado emp = new Empleado();
                                             emp = (Empleado) id_empleadox_ide.get(e);
-                                            if (ID_ROL.trim().equals("ROL-0009")) {
-                                                int val_aps = Integer.parseInt(request.getParameter("val_aps"));
-                                                if (val_aps > 0) {%>
 
+                                    %>
                                     <td>
-                                        <table class="info-det">
-                                            <tr><td class="td" colspan="3">Codigo APS:</td></tr>
-                                            <tr><td class="td" colspan="2"><%=emp.getCo_aps()%></td></tr>
+                                        <table class="info-det" style="margin-left:80%;" >
+                                            <%if (emp.getCo_aps() != null) {
+                                                 int val_aps = Integer.parseInt(emp.getCo_aps());
+                                                 if (val_aps > 0) {%>
+
+                                            <tr><td class="td" >Código APS:</td><td class="td1" ><%=emp.getCo_aps()%></td></tr>
+                                                <%}
+                                                    }
+                                                    if (emp.getCo_huella_digital() != null) {
+
+                                                        int val_hue = Integer.parseInt(emp.getCo_huella_digital());
+                                                        if (val_hue > 0) {%>
+                                            <tr><td class="td" >Código Huella</td><td class="td1" ><%=emp.getCo_huella_digital()%></td></tr>
+                                                <%}%>
+                                                <%}%>
                                         </table>
                                     </td>
-                                    <%} else {%>
+                                    <%
+
+                                        String val_aps = emp.getCo_aps();
+                                        if (val_aps == null && ID_ROL.trim().equals("ROL-0001")) {%>
                                     <td>
-                                        <table class="info-det">
+                                        <table class="info-det" style="margin-left:50%;">
                                             <input type="hidden" name="iddetalle_dgp" value="<%=iddgp%>">
                                             <input type="hidden" name="puesto_id" value="<%=idp%>">
                                             <input type="hidden" name="cod" value="<%=cod%>">
@@ -270,21 +283,10 @@
                                         </table>
                                     </td>
                                     <%}
-                                        }
-                                        if (ID_ROL.trim().equals("ROL-0007") || ID_ROL.trim().equals("ROL-0001")) {
-                                            if (request.getParameter("val_huella") != null) {
-                                                int val_huella = Integer.parseInt(request.getParameter("val_huella"));
-                                                if (val_huella > 0) {%>
+                                        String val_hue = emp.getCo_huella_digital();
+                                        if (val_hue == null && ID_ROL.trim().equals("ROL-0001")) {%>
                                     <td>
-                                        <table class="info-det">
-                                            <tr><td class="td" 
-                                                    >Codigo huella digital:</td></tr>
-                                            <tr><td class="td" ><%=emp.getCo_huella_digital()%></td></tr>
-                                        </table>
-                                    </td>
-                                    <%} else {%>
-                                    <td>
-                                        <table class="info-det">
+                                        <table class="info-det" style="margin-left:50%;">
                                             <input type="hidden" name="iddetalle_dgp" value="<%=iddgp%>">
                                             <input type="hidden" name="puesto_id" value="<%=idp%>">
                                             <input type="hidden" name="cod" value="<%=cod%>">
@@ -298,8 +300,8 @@
                                         </table>
                                     </td>
                                     <%}
-                                            }
-                                        }%>
+
+                                    %>
                                     <%}%>
                                 </table>
                             </form>
@@ -705,9 +707,83 @@
 
         <%}%>
         <%}%>
-        <button  data-toggle="modal" data-target="#myModal2" id="btn-mostrar" hidden="" class="btn-mos">
-            Launch demo modal
-        </button>
+
+        <script>
+            $(document).ready(function() {
+                $(".fe_desde_p, .fe_hasta_p").change(function() {
+                    var cuotas = $(".cuota_docente");
+                    cuotas.empty();
+
+                    $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function(objJson) {
+                        var lista = objJson.lista;
+                        if (objJson.rpta == -1) {
+                            alert(objJson.mensaje);
+                            return;
+                        }
+                        for (var i = 0; i < lista.length; i++) {
+                            cuotas.append(lista[i].html);
+                        }
+                    });
+                });
+
+                $(".btn_guardar_ca").click(function() {
+                    $.ajax({
+                        url: "../../carga_academica",
+                        type: "POST",
+                        data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
+                    }).done(function(ids) {
+                        var arr_id = ids.split(":");
+                        alert("Registrado con exito!...");
+                        $(".proceso").val(arr_id[0]);
+                        $(".dgp").val(arr_id[1]);
+                        $(".btn_procesar").show();
+                    }).fail(function(e) {
+                        alert("Error: " + e);
+                    });
+                });
+
+                $(".btn_procesar").click(function() {
+                    $.ajax({
+                        url: "../../carga_academica", data: "opc=Procesar&dgp=" + $(".dgp").val() + "&proceso=" + $(".proceso").val()
+                    }).done(function() {
+                        window.location.href = "../../carga_academica?opc=Reporte_Carga_Academica";
+                    });
+                });
+
+                $(".btn-autor").click(function(e) {
+                    $.SmartMessageBox({
+                        title: "Alerta de Confirmaci?!",
+                        content: "?sta totalmente seguro de autorizar este requerimiento?",
+                        buttons: '[No][Si]'
+                    }, function(ButtonPressed) {
+                        if (ButtonPressed === "Si") {
+                            // return true;
+                            $(".form-aut").submit();
+                        }
+                        if (ButtonPressed === "No") {
+                            return false;
+                        }
+                    });
+                    e.preventDefault();
+                });
+                $(".btn-rech").click(function(e) {
+                    $.SmartMessageBox({
+                        title: "Alerta de Confirmaci?!",
+                        content: "?sta totalmente seguro de rechazar este requerimiento?",
+                        buttons: '[No][Si]'
+                    }, function(ButtonPressed) {
+                        if (ButtonPressed === "Si") {
+                            $(".form-rech").submit();
+                        }
+                        if (ButtonPressed === "No") {
+                            return false;
+                        }
+
+                    });
+                    e.preventDefault();
+                });
+            });</script>
+
         <script src="../../js/JQuery/jQuery.js"></script>
         <script>
                                                     $(document).ready(function() {
@@ -788,11 +864,11 @@
 
         <script src="../../js/Js_dlmenu/jquery.dlmenu.js"></script>
         <script>
-                                                    $(function() {
-                                                        $('#dl-menu').dlmenu({
-                                                            animationClasses: {classin: 'dl-animate-in-2', classout: 'dl-animate-out-2'}
-                                                        });
-                                                    });</script>
+            $(function() {
+                $('#dl-menu').dlmenu({
+                    animationClasses: {classin: 'dl-animate-in-2', classout: 'dl-animate-out-2'}
+                });
+            });</script>
 
         <!-- IMPORTANT: APP CONFIG -->
         <script src="../../js/app.config.js"></script>
@@ -866,43 +942,43 @@
                                                         });
                                                     }
 
-                                                    function closedthis2() {
-                                                        $.smallBox({
-                                                            title: "?ontrato Especial registrado con exito!",
-                                                            content: "ya puede visualizar el contrato en Detalle del Trabajador",
-                                                            color: "#739E73",
-                                                            iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                                            timeout: 6000
-                                                        });
-                                                    }
-                                                    $(document).ready(function() {
+            function closedthis2() {
+                $.smallBox({
+                    title: "?ontrato Especial registrado con exito!",
+                    content: "ya puede visualizar el contrato en Detalle del Trabajador",
+                    color: "#739E73",
+                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                    timeout: 6000
+                });
+            }
+            $(document).ready(function() {
 
                                                         pageSetUp();
 
-                                                        $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
-                                                            $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
-                                                        });
-                                                        $("#cod_ap").numeric();
-                                                        /*
-                                                         * Autostart Carousel
-                                                         */
-                                                        $('.carousel.slide').carousel({
-                                                            interval: 3000,
-                                                            cycle: true
-                                                        });
-                                                        $('.carousel.fade').carousel({
-                                                            interval: 3000,
-                                                            cycle: true
-                                                        });
-                                                        // Fill all progress bars with animation
+                $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
+                    $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+                });
+                $("#cod_ap").numeric();
+                /*
+                 * Autostart Carousel
+                 */
+                $('.carousel.slide').carousel({
+                    interval: 3000,
+                    cycle: true
+                });
+                $('.carousel.fade').carousel({
+                    interval: 3000,
+                    cycle: true
+                });
+                // Fill all progress bars with animation
 
-                                                        $('.progress-bar').progressbar({
-                                                            display_text: 'fill'
-                                                        });
-                                                        /*
-                                                         * Smart Notifications
-                                                         */
-                                                        $('#eg1').click(function(e) {
+                $('.progress-bar').progressbar({
+                    display_text: 'fill'
+                });
+                /*
+                 * Smart Notifications
+                 */
+                $('#eg1').click(function(e) {
 
                                                             $.bigBox({
                                                                 title: "Big Information box",
@@ -916,7 +992,7 @@
                                                             e.preventDefault();
                                                         })
 
-                                                        $('#eg2').click(function(e) {
+                $('#eg2').click(function(e) {
 
                                                             $.bigBox({
                                                                 title: "Big Information box",
@@ -929,7 +1005,7 @@
                                                             e.preventDefault();
                                                         })
 
-                                                        $('#eg3').click(function(e) {
+                $('#eg3').click(function(e) {
 
                                                             $.bigBox({
                                                                 title: "Shield is up and running!",
@@ -942,34 +1018,34 @@
                                                             e.preventDefault();
                                                         })
 
-                                                        $('#eg4').click(function(e) {
+                $('#eg4').click(function(e) {
 
-                                                            $.bigBox({
-                                                                title: "Success Message Example",
-                                                                content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-                                                                color: "#739E73",
-                                                                //timeout: 8000,
-                                                                icon: "fa fa-check",
-                                                                number: "4"
-                                                            }, function() {
-                                                                closedthis();
-                                                            });
-                                                            e.preventDefault();
-                                                        })
+                    $.bigBox({
+                        title: "Success Message Example",
+                        content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                        color: "#739E73",
+                        //timeout: 8000,
+                        icon: "fa fa-check",
+                        number: "4"
+                    }, function() {
+                        closedthis();
+                    });
+                    e.preventDefault();
+                })
 
 
 
-                                                        $('#eg5').click(function() {
+                $('#eg5').click(function() {
 
-                                                            $.smallBox({
-                                                                title: "Ding Dong!",
-                                                                content: "Someone's at the door...shall one get it sir? <p class='text-align-right'><a href='javascript:void(0);' class='btn btn-primary btn-sm'>Yes</a> <a href='javascript:void(0);' class='btn btn-danger btn-sm'>No</a></p>",
-                                                                color: "#296191",
-                                                                //timeout: 8000,
-                                                                icon: "fa fa-bell swing animated"
-                                                            });
-                                                        });
-                                                        $('#eg6').click(function() {
+                    $.smallBox({
+                        title: "Ding Dong!",
+                        content: "Someone's at the door...shall one get it sir? <p class='text-align-right'><a href='javascript:void(0);' class='btn btn-primary btn-sm'>Yes</a> <a href='javascript:void(0);' class='btn btn-danger btn-sm'>No</a></p>",
+                        color: "#296191",
+                        //timeout: 8000,
+                        icon: "fa fa-bell swing animated"
+                    });
+                });
+                $('#eg6').click(function() {
 
                                                             $.smallBox({
                                                                 title: "Big Information box",
@@ -980,7 +1056,7 @@
                                                             });
                                                         })
 
-                                                        $('#eg7').click(function() {
+                $('#eg7').click(function() {
 
                                                             $.smallBox({
                                                                 title: "James Simmons liked your comment",
@@ -992,17 +1068,17 @@
                                                         })
 
 
-                                                        /*
-                                                         * SmartAlerts
-                                                         */
-                                                        // With Callback
-                                                        $("#smart-mod-eg1").click(function(e) {
-                                                            $.SmartMessageBox({
-                                                                title: "Smart Alert!",
-                                                                content: "This is a confirmation box. Can be programmed for button callback",
-                                                                buttons: '[No][Yes]'
-                                                            }, function(ButtonPressed) {
-                                                                if (ButtonPressed === "Yes") {
+                /*
+                 * SmartAlerts
+                 */
+                // With Callback
+                $("#smart-mod-eg1").click(function(e) {
+                    $.SmartMessageBox({
+                        title: "Smart Alert!",
+                        content: "This is a confirmation box. Can be programmed for button callback",
+                        buttons: '[No][Yes]'
+                    }, function(ButtonPressed) {
+                        if (ButtonPressed === "Yes") {
 
                                                                     $.smallBox({
                                                                         title: "Callback function",
@@ -1022,77 +1098,77 @@
                                                                     });
                                                                 }
 
-                                                            });
-                                                            e.preventDefault();
-                                                        })
-                                                        // With Input
-                                                        $("#smart-mod-eg2").click(function(e) {
+                    });
+                    e.preventDefault();
+                })
+                // With Input
+                $("#smart-mod-eg2").click(function(e) {
 
-                                                            $.SmartMessageBox({
-                                                                title: "Smart Alert: Input",
-                                                                content: "Please enter your user name",
-                                                                buttons: "[Accept]",
-                                                                input: "text",
-                                                                placeholder: "Enter your user name"
-                                                            }, function(ButtonPress, Value) {
-                                                                alert(ButtonPress + " " + Value);
-                                                            });
-                                                            e.preventDefault();
-                                                        })
-                                                        // With Buttons
-                                                        $("#smart-mod-eg3").click(function(e) {
+                    $.SmartMessageBox({
+                        title: "Smart Alert: Input",
+                        content: "Please enter your user name",
+                        buttons: "[Accept]",
+                        input: "text",
+                        placeholder: "Enter your user name"
+                    }, function(ButtonPress, Value) {
+                        alert(ButtonPress + " " + Value);
+                    });
+                    e.preventDefault();
+                })
+                // With Buttons
+                $("#smart-mod-eg3").click(function(e) {
 
-                                                            $.SmartMessageBox({
-                                                                title: "Smart Notification: Buttons",
-                                                                content: "Lots of buttons to go...",
-                                                                buttons: '[Need?][You][Do][Buttons][Many][How]'
-                                                            });
-                                                            e.preventDefault();
-                                                        })
-                                                        // With Select
-                                                        $("#smart-mod-eg4").click(function(e) {
+                    $.SmartMessageBox({
+                        title: "Smart Notification: Buttons",
+                        content: "Lots of buttons to go...",
+                        buttons: '[Need?][You][Do][Buttons][Many][How]'
+                    });
+                    e.preventDefault();
+                })
+                // With Select
+                $("#smart-mod-eg4").click(function(e) {
 
-                                                            $.SmartMessageBox({
-                                                                title: "Smart Alert: Select",
-                                                                content: "You can even create a group of options.",
-                                                                buttons: "[Done]",
-                                                                input: "select",
-                                                                options: "[Costa Rica][United States][Autralia][Spain]"
-                                                            }, function(ButtonPress, Value) {
-                                                                alert(ButtonPress + " " + Value);
-                                                            });
-                                                            e.preventDefault();
-                                                        });
-                                                        // With Login
-                                                        $("#smart-mod-eg5").click(function(e) {
+                    $.SmartMessageBox({
+                        title: "Smart Alert: Select",
+                        content: "You can even create a group of options.",
+                        buttons: "[Done]",
+                        input: "select",
+                        options: "[Costa Rica][United States][Autralia][Spain]"
+                    }, function(ButtonPress, Value) {
+                        alert(ButtonPress + " " + Value);
+                    });
+                    e.preventDefault();
+                });
+                // With Login
+                $("#smart-mod-eg5").click(function(e) {
 
-                                                            $.SmartMessageBox({
-                                                                title: "Login form",
-                                                                content: "Please enter your user name",
-                                                                buttons: "[Cancel][Accept]",
-                                                                input: "text",
-                                                                placeholder: "Enter your user name"
-                                                            }, function(ButtonPress, Value) {
-                                                                if (ButtonPress == "Cancel") {
-                                                                    alert("Why did you cancel that? :(");
-                                                                    return 0;
-                                                                }
+                    $.SmartMessageBox({
+                        title: "Login form",
+                        content: "Please enter your user name",
+                        buttons: "[Cancel][Accept]",
+                        input: "text",
+                        placeholder: "Enter your user name"
+                    }, function(ButtonPress, Value) {
+                        if (ButtonPress == "Cancel") {
+                            alert("Why did you cancel that? :(");
+                            return 0;
+                        }
 
-                                                                Value1 = Value.toUpperCase();
-                                                                ValueOriginal = Value;
-                                                                $.SmartMessageBox({
-                                                                    title: "Hey! <strong>" + Value1 + ",</strong>",
-                                                                    content: "And now please provide your password:",
-                                                                    buttons: "[Login]",
-                                                                    input: "password",
-                                                                    placeholder: "Password"
-                                                                }, function(ButtonPress, Value) {
-                                                                    alert("Username: " + ValueOriginal + " and your password is: " + Value);
-                                                                });
-                                                            });
-                                                            e.preventDefault();
-                                                        });
-                                                    })
+                        Value1 = Value.toUpperCase();
+                        ValueOriginal = Value;
+                        $.SmartMessageBox({
+                            title: "Hey! <strong>" + Value1 + ",</strong>",
+                            content: "And now please provide your password:",
+                            buttons: "[Login]",
+                            input: "password",
+                            placeholder: "Password"
+                        }, function(ButtonPress, Value) {
+                            alert("Username: " + ValueOriginal + " and your password is: " + Value);
+                        });
+                    });
+                    e.preventDefault();
+                });
+            })
 
         </script>
 

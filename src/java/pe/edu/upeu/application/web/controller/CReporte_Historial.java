@@ -67,6 +67,7 @@ public class CReporte_Historial extends HttpServlet {
             }
             if (opc.equals("list_mod_tra")) {
                 String ID_TRABAJADOR = request.getParameter("idtr");
+                System.out.println(ID_TRABAJADOR);
                 List<Map<String, ?>> list = re.Listar_Mod_Tra(ID_TRABAJADOR);
                 rpta.put("rpta", "1");
                 rpta.put("lista", list);
@@ -82,6 +83,8 @@ public class CReporte_Historial extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", list);
             }
+            if (opc.equals("val_reg_ec")) {
+            }
             if (opc.equals("Filtro_hijo")) {
                 String FE_INICIO = request.getParameter("fe_inicio");
                 String FE_FIN = request.getParameter("fe_fin");
@@ -93,6 +96,13 @@ public class CReporte_Historial extends HttpServlet {
             if (opc.equals("Fe_Modif_Hijo")) {
                 String id = request.getParameter("hijo");
                 List<Map<String, ?>> lista = re.list_fecha_modif(id);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
+            if (opc.equals("Fe_Modif_Hijo2")) {
+                String id = request.getParameter("hijo");
+                String fecha = request.getParameter("fecha");
+                List<Map<String, ?>> lista = re.list_fecha_modif2(id, fecha);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
@@ -125,13 +135,23 @@ public class CReporte_Historial extends HttpServlet {
                 String id_trabajador = request.getParameter("idtr");
                 String id_hijo = request.getParameter("idh");
                 String fecha_default = request.getParameter("fecha_default");
-                response.sendRedirect("Vista/Reportes/Hijo/Detalle_Comparacion.jsp?idtr=" + id_trabajador + "&idh=" + id_hijo+"&fecha_default="+fecha_default);
+                response.sendRedirect("Vista/Reportes/Hijo/Detalle_Comparacion.jsp?idtr=" + id_trabajador + "&idh=" + id_hijo + "&fecha_default=" + fecha_default);
             }
             if (opc.equals("Listar_hijo_trabajador")) {
-                    String id_trabajador = request.getParameter("idtr");
+                String id_trabajador = request.getParameter("idtr");
                 List<Map<String, ?>> lista = re.list_hijo_trabajdor(id_trabajador);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
+            }
+            if (opc.equals("Procesar_datos_hijos")) {
+                String es_fecha = request.getParameter("es_fecha");
+                String fecha = request.getParameter("fecha");
+                String idh = request.getParameter("idh");
+                re.Procesar_historial_hijo(idh, es_fecha, fecha);
+                rpta.put("rpta", "1");
+            }
+            if (opc.equals("Historial_Datos_Hijo")) {
+               response.sendRedirect("Vista/Reportes/Hijo/Historial_Hijo.jsp");
             }
 
         } catch (Exception e) {

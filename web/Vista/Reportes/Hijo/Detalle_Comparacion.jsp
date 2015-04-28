@@ -35,7 +35,7 @@
                                                 <select name="trabajador" required="" class="tabajador">
                                                     <option value='' >[SELECCIONE]</option>
                                                 </select>
-                                                <input type="text" class="idtr" value="<%=request.getParameter("idtr")%>">
+                                                <input type="hidden" class="idtr" value="<%=request.getParameter("idtr")%>">
                                             </label>
                                         </section>
                                         <section class="col col-sm-6">
@@ -44,7 +44,7 @@
                                                 <select name="trabajador" required="" class="hijo">
                                                     <option value='' >[SELECCIONE]</option>
                                                 </select>
-                                                <input type="text" class="idh" value="<%=request.getParameter("idh")%>">
+                                                <input type="hidden" class="idh" value="<%=request.getParameter("idh")%>">
                                             </label>
                                         </section>
                                     </div>
@@ -56,7 +56,7 @@
                                             <label class="select"> <i class="icon-append fa fa-calendar"></i>
                                                 <select class="fecha1" required="">
                                                     <option value='' >[SELECCIONE]</option>
-                                                     <input type="text" class="fecha_default" value="<%=request.getParameter("fecha_default")%>">
+                                                    <input type="hidden" class="fecha_default" value="<%=request.getParameter("fecha_default")%>">
                                                 </select>
                                             </label>
                                         </section>
@@ -147,7 +147,7 @@
                 list_select($(".hijo"), "../../../RHistorial", "opc=Listar_hijo_trabajador&idtr=" + $(".idtr").val(), "1", $(".idh").val());
                 list_select($(".fecha1"), "../../../RHistorial", "opc=Fe_Modif_Hijo&hijo=" + $(".idh").val(), "1", $(".fecha_default").val());
 
-                $.post("../../../RHistorial", "opc=Fe_Modif_Hijo&hijo=" + $(".idh").val(), function (objJson) {
+                $.post("../../../RHistorial", "opc=Fe_Modif_Hijo2&hijo=" + $(".idh").val() + "&fecha=" + $(".fecha_default").val(), function (objJson) {
                     var select2 = $(".fecha2");
                     var lista = objJson.lista;
                     select2.append("<option value=''>Cargando...</option>");
@@ -310,6 +310,25 @@
                         }
                         texto_html += "<td>17</td><td>Direccion Fisica:</td><td>" + mac1 + "</td>";
                         texto_html += "<td>" + mac2 + "</td></tr>";
+
+                        if (lista[0].es_procesado != lista[1].es_procesado) {
+                            texto_html += "<tr class='danger'>";
+                        } else {
+                            texto_html += "<tr>";
+                        }
+                        texto_html += "<td>14</td><td>¿Procesar?</td>";
+                        if (lista[0].es_procesado == '1') {
+                            texto_html += "<td>Si</td>";
+                        } else {
+                            texto_html += "<td class='smart-form'><label class='toggle'><input type='checkbox' value=''  class='ck_procesado'  name='estado' name='checkbox-toggle' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></td>";
+                        }
+
+
+                        if (lista[1].es_procesado == '1') {
+                            texto_html += "<td>Si</td>";
+                        } else {
+                            texto_html += "<td class='smart-form'><label class='toggle'><input type='checkbox' value=''  class='ck_procesado'  name='estado' name='checkbox-toggle' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></td>";
+                        }
 
 
                         tbody.append(texto_html);

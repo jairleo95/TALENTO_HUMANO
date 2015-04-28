@@ -34,7 +34,7 @@
                                 <option  value="0">Desactivado</option>
                             </select>
                         </td></tr>                           
-                    <tr><td colspan="2"><input type="submit" value="REGISTRAR PRIVILEGIO" name="opc"></td></tr>
+                    <tr><td colspan="2"><button type="submit" value="REGISTRAR PRIVILEGIO"  name="opc">REGISTRAR PRIVILEGIO</button></td></tr>
                 </table>
             </center>
         </form>
