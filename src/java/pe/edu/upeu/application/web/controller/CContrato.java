@@ -404,8 +404,7 @@ public class CContrato extends HttpServlet {
             response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1.trim() + "&idtr=" + idtr.trim() + "&id_cto=" + id_cto);
         }
 
-        if (opc.equals(
-                "REGISTRAR CONTRATO")) {
+        if (opc.equals("REGISTRAR CONTRATO")) {
 
             String ID_CONTRATO = "";
             String ID_DGP = request.getParameter("IDDETALLE_DGP");

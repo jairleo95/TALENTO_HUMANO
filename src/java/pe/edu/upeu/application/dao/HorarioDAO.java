@@ -86,7 +86,7 @@ public class HorarioDAO implements InterfaceHorarioDAO {
             cst.setString(3, HO_HASTA);
             cst.setString(4, DIA_HOR);
             cst.setString(5, ES_HOR);
-            cst.setString(6, ID_DET_HOR);
+            cst.setString(6, ID_DET_HOR.trim());
             cst.execute();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -123,7 +123,7 @@ public class HorarioDAO implements InterfaceHorarioDAO {
 
     @Override
     public String Insert_Detalle_Horario(String ID_DET_HOR, String ID_DGP, String ES_DE_HOR, String US_CRE, String FE_CRE, String US_MODIF, String FE_MODIF, String ID_TIPO_HORARIO, String ES_MOD_FORMATO, Double ca_h_total) {
-        String id="";
+        String id = "";
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DETALLE_HORARIO( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? )}");
@@ -153,7 +153,7 @@ public class HorarioDAO implements InterfaceHorarioDAO {
     @Override
     public String id_det_horario(String id_dgp) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT ID_TIPO_HORARIO FROM RHTD_DETALLE_HORARIO WHERE ID_DGP='"+id_dgp.trim()+"'";
+        String sql = "SELECT ID_TIPO_HORARIO FROM RHTD_DETALLE_HORARIO WHERE ID_DGP='" + id_dgp.trim() + "'";
         String id = "";
         try {
             ResultSet rs = this.conn.query(sql);
@@ -165,6 +165,57 @@ public class HorarioDAO implements InterfaceHorarioDAO {
             this.conn.close();
         }
         return id;
+    }
+
+    @Override
+    public String id_detalle_horario(String id_dgp) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT ID_DETALLE_HORARIO FROM RHTD_DETALLE_HORARIO WHERE ID_DGP='" + id_dgp.trim() + "'";
+        String id = "";
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                id = rs.getString(1);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return id;
+    }
+
+    @Override
+    public void ELIMINAR_HORARIO(String ID_DET_HORARIO) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_ELIMINAR_DET_HORARIO( ?)}");
+            cst.setString(1, ID_DET_HORARIO.trim());
+            cst.execute();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (Exception ex) {
+            Logger.getLogger(AutorizacionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.conn.close();
+        }
+    }
+
+    @Override
+    public void modificar_horario(String ho_desde, String ho_hasta, String id_horario) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MODIFICAR_HORARIO( ?,?,?)}");
+            cst.setString(1, id_horario);
+            cst.setString(2, ho_desde);
+            cst.setString(3, ho_hasta);
+            cst.execute();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (Exception ex) {
+            Logger.getLogger(AutorizacionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.conn.close();
+        }
     }
 
 }

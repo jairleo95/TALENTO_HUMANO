@@ -528,7 +528,7 @@ public class CDgp extends HttpServlet {
         if (opc.equals("MODIFICAR REQUERIMIENTO")) {
             String iddgp = request.getParameter("iddgp");
             int can_cc = dgp.Can_cc_iddgp(iddgp);
-            String id_d_hor=IHor.id_det_horario(iddgp);
+            String id_d_hor = IHor.id_det_horario(iddgp);
             idtr = dgp.obt_idtr_x_dgp(iddgp);
             String ES_CUENTA_SUELDO = tr.CuentaSueldoTra(idtr);
             out.println(idtr + " " + iddgp + "" + idreq + "" + iddep + "" + idpuesto);
@@ -537,27 +537,204 @@ public class CDgp extends HttpServlet {
             getServletContext().setAttribute("List_Puesto", pu.List_Puesto_Dep(iddep));
             getServletContext().setAttribute("list_Cuenta_Sueldo", dgp.LIST_CUEN_SUEL(idtr));
             getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
-            response.sendRedirect("Vista/Dgp/Editar_DGP.jsp?es_cs=" + ES_CUENTA_SUELDO + "&can_cc=" + can_cc+"&id_det_hor="+id_d_hor.trim());
+            response.sendRedirect("Vista/Dgp/Editar_DGP.jsp?es_cs=" + ES_CUENTA_SUELDO + "&can_cc=" + can_cc + "&id_det_hor=" + id_d_hor.trim());
         }
-        if (opc.equals("MODIFICAR")) {
-            String ID_DGP = request.getParameter("ID_DGP");
+        if (opc.equals("Modificar")) {
+            /*String ID_DGP = request.getParameter("ID_DGP");
+             String FE_DESDE = request.getParameter("FEC_DESDE");
+             String FE_HASTA = request.getParameter("FEC_HASTA");
+             double CA_SUELDO = Double.parseDouble(request.getParameter("SUELDO"));
+             String ID_PUESTO = request.getParameter("IDPUESTO");
+             String ID_REQUERIMIENTO = request.getParameter("IDREQUERIMIENTO");
+             double CA_BONO_ALIMENTARIO = Double.parseDouble(request.getParameter("BONO_ALIMENTARIO"));
+             double DE_BEV = Double.parseDouble(request.getParameter("BEV"));
+             double CA_CENTRO_COSTOS = Double.parseDouble(request.getParameter("CENTRO_COSTOS"));
+             String DE_ANTECEDENTES_POLICIALES = request.getParameter("ANTECEDENTES_POLICIALES");
+             String DE_CERTIFICADO_SALUD = request.getParameter("CERTIFICADO_SALUD");
+             dgp.MOD_REQUE(ID_DGP, FE_DESDE, FE_HASTA, CA_SUELDO, ID_PUESTO, ID_REQUERIMIENTO, CA_BONO_ALIMENTARIO, DE_BEV, CA_CENTRO_COSTOS, DE_ANTECEDENTES_POLICIALES, DE_CERTIFICADO_SALUD);
+             String ID_TRABAJADOR = request.getParameter("IDDATOS_TRABAJADOR");
+             getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(ID_DGP));
+             int num = dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
+             getServletContext().setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
+             response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&iddgp=" + ID_DGP);*/
             String FE_DESDE = request.getParameter("FEC_DESDE");
             String FE_HASTA = request.getParameter("FEC_HASTA");
             double CA_SUELDO = Double.parseDouble(request.getParameter("SUELDO"));
+            double BONO_PUESTO = 0.0;
+
+            String DE_DIAS_TRABAJO = request.getParameter("DIAS_TRABAJO");
             String ID_PUESTO = request.getParameter("IDPUESTO");
             String ID_REQUERIMIENTO = request.getParameter("IDREQUERIMIENTO");
-            double CA_BONO_ALIMENTARIO = Double.parseDouble(request.getParameter("BONO_ALIMENTARIO"));
-            double DE_BEV = Double.parseDouble(request.getParameter("BEV"));
-            double CA_CENTRO_COSTOS = Double.parseDouble(request.getParameter("CENTRO_COSTOS"));
-            String DE_ANTECEDENTES_POLICIALES = request.getParameter("ANTECEDENTES_POLICIALES");
-            String DE_CERTIFICADO_SALUD = request.getParameter("CERTIFICADO_SALUD");
-            dgp.MOD_REQUE(ID_DGP, FE_DESDE, FE_HASTA, CA_SUELDO, ID_PUESTO, ID_REQUERIMIENTO, CA_BONO_ALIMENTARIO, DE_BEV, CA_CENTRO_COSTOS, DE_ANTECEDENTES_POLICIALES, DE_CERTIFICADO_SALUD);
             String ID_TRABAJADOR = request.getParameter("IDDATOS_TRABAJADOR");
-            getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(ID_DGP));
-            int num = dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
-            getServletContext().setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
-            response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&iddgp=" + ID_DGP);
+            String CO_RUC = request.getParameter("RUC");
+            String DE_LUGAR_SERVICIO = request.getParameter("LUGAR_SERVICIO");
+            String DE_SERVICIO = request.getParameter("DESCRIPCION_SERVICIO");
+            String DE_PERIODO_PAGO = request.getParameter("PERIODO_PAGO");
+            String DE_DOMICILIO_FISCAL = request.getParameter("DOMICILIO_FISCAL");
+            String DE_SUBVENCION = request.getParameter("SUBVENCION");
+            String DE_HORARIO_CAPACITACION = request.getParameter("HORARIO_CAPACITACION");
+            String DE_HORARIO_REFRIGERIO = request.getParameter("HORARIO_REFRIGERIO");
+            String DE_DIAS_CAPACITACION = request.getParameter("DIAS_CAPACITACION");
+            String ES_DGP = "";
+            String FE_CREACION = request.getParameter("FECHA_CREACION");
+            String US_MODIF = request.getParameter("USER_MODIF");
+            String FE_MODIF = request.getParameter("FECHA_MODIF");
+            String IP_USUARIO = request.getParameter("USUARIO_IP");
+            double CA_BONO_ALIMENTARIO = 0.0;
+            double DE_BEV = 0.0;
+            //----CA_CENTRO_COSTOS NO EXISTE EN TABLA RHTM_DGP---
+            //double CA_CENTRO_COSTOS = 0.0;
+
+            /*Fuera de planilla*/
+            if (ID_REQUERIMIENTO.equals("REQ-0007") || ID_REQUERIMIENTO.equals("REQ-0008") || ID_REQUERIMIENTO.equals("REQ-0009") || ID_REQUERIMIENTO.equals("REQ-0010") || ID_REQUERIMIENTO.equals("REQ-0011")) {
+                CA_BONO_ALIMENTARIO = 0.0;
+                DE_BEV = 0.0;
+                BONO_PUESTO = 0.0;
+            } else {
+                /*dentro de planilla de planilla*/
+                BONO_PUESTO = Double.parseDouble(request.getParameter("BONO_PUESTO"));
+                CA_BONO_ALIMENTARIO = Double.parseDouble(request.getParameter("BONO_ALIMENTARIO"));
+                DE_BEV = Double.parseDouble(request.getParameter("BEV"));
+            }
+            String DE_ANTECEDENTES_POLICIALES = request.getParameter("ANTECEDENTES_POLICIALES");
+            String ES_CERTIFICADO_SALUD = request.getParameter("CERTIFICADO_SALUD");
+            String DE_MONTO_HONORARIO = request.getParameter("MONTO_HONORARIO");
+            //--INSERT TABLA_CUENTA_SUELDO
+            String NO_BANCO = request.getParameter("BANCO");
+            String NU_CUENTA = (request.getParameter("CUENTA") == null) ? "no tiene" : request.getParameter("CUENTA");
+            // String NU_CUENTA = request.getParameter("CUENTA");
+            //String NU_CUENTA_BANC = (request.getParameter("CUENTA_BANC") == null) ? "0" : "no tiene";
+            String NU_CUENTA_BANC = request.getParameter("CUENTA_BANC");
+            String ES_GEM_NU_CUENTA = (request.getParameter("GEN_NU_CUEN") == null) ? "0" : "1";
+            String NO_BANCO_OTROS = request.getParameter("BANCO_OTROS");
+            String ES_CUENTA_SUELDO = request.getParameter("ES_CUENTA_SUELDO");
+            String ID_DGP = request.getParameter("ID_DGP");
+            //--
+            int NUMERO = 0;
+            int cantidad = 0;
+            if (ID_REQUERIMIENTO.equals("REQ-0010") || ID_REQUERIMIENTO.equals("REQ-0011")) {
+                NUMERO = 0;
+                cantidad = Integer.parseInt(request.getParameter("CANT"));
+            } else {
+                NUMERO = Integer.parseInt(request.getParameter("numero"));
+                cantidad = 0;
+            }
+            String LI_MOTIVO = request.getParameter("MOTIVO");
+            String ES_MFL = request.getParameter("MFL");
+            if (ES_MFL != null) {
+                ES_MFL = "1";
+            } else {
+                ES_MFL = "0";
+            }
+
+            dgp.MODIFICAR_DGP(ID_DGP, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO, DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION, ES_DGP, iduser, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, DE_ANTECEDENTES_POLICIALES, ES_CERTIFICADO_SALUD, DE_MONTO_HONORARIO, LI_MOTIVO, ES_MFL, BONO_PUESTO);
+            String iddgp = dgp.MAX_ID_DGP();
+            String ESTADO = request.getParameter("ESTADO");
+            if (ESTADO != null) {
+                if (ESTADO.trim().equals("0")) {
+                    tr.MOD_CUENTA_SUELDO(NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEM_NU_CUENTA, NO_BANCO_OTROS, ID_TRABAJADOR, ES_CUENTA_SUELDO);
+                }
+            }
+
+            //out.print(NU_CUENTA);
+            //out.print(NU_CUENTA_BANC);
+            String idrp = IReq.id_det_req_proc(ID_DGP);
+
+            /*for (int g = 1; g <= NUMERO; g++) {
+             String ID_CENTRO_COSTO = request.getParameter("CENTRO_COSTOS_" + g);
+             double porcentaje = Double.parseDouble(request.getParameter("PORCENTAJE_" + g));
+             if (ID_CENTRO_COSTO != null && porcentaje != 0.0) {
+             dcc.INSERT_DETALLE_CENTRO_COSTO(null, ID_CENTRO_COSTO, iddgp, porcentaje, IP_USUARIO, iduser, FE_CREACION, US_MODIF, FE_MODIF, null, "1");
+             }
+             }
+             */
+            int cant_inicial = Integer.parseInt(request.getParameter("cant_actual_anti"));
+            int cant_ingresada = Integer.parseInt(request.getParameter("cant_ingresada"));
+
+            for (int j = 0; j < cant_inicial; j++) {
+             if (request.getParameter("id_d_cen_cos" + (j + 1)) != null) {
+             Double porcen = Double.parseDouble(request.getParameter("porcent_ant_" + (j + 1)));
+             String id_dt_cen_c = request.getParameter("id_d_cen_cos" + (j + 1));
+             dcc.Modificar_Centro_Costo_porc(id_dt_cen_c, porcen, iduser);
+             }
+             }
+             if (cant_ingresada > 0) {
+             for (int i = 0; i < cant_ingresada; i++) {
+             double porc_nuevo = Double.parseDouble(request.getParameter("PORCENTAJE_CC" + (1 + i)));
+             String centro_c_nuevo = request.getParameter("CENTRO_COSTOS_" + (1 + i));
+             String id_cont = request.getParameter("id_contrato");
+             dcc.INSERT_DETALLE_CENTRO_COSTO("", centro_c_nuevo, ID_DGP, porc_nuevo, "", iduser, "", "", "", id_cont, "1");
+             }
+             } else {
+             }
+          //  List<String> list = a.Det_Autorizacion(idrp);
+            // a.Insert_Autorizacion("", iddgp, "1", "P1", "12312", iduser, "", "", "", list.get(1), idrp, list.get(0));
+            String es_mod = request.getParameter("estado_de_horario");
+
+            if (es_mod.equals("1")) {
+                String id_de_horario = IHor.id_detalle_horario(ID_DGP);
+                IHor.ELIMINAR_HORARIO(id_de_horario);
+                List<String> dia = new ArrayList<String>();
+                dia.add("lun");
+                dia.add("mar");
+                dia.add("mie");
+                dia.add("jue");
+                dia.add("vie");
+                dia.add("sab");
+                dia.add("dom");
+
+                String ID_DETALLE_HORARIO = request.getParameter("ID_DETALLE_HORARIO");
+
+                String ES_DETALLE_HORARIO = "1";
+                String ES_HORARIO = "1";
+                String ID_TIPO_HORARIO = request.getParameter("HORARIO");
+                String ES_MOD_FORMATO = "1";
+                Double horas_totales = Double.parseDouble(request.getParameter("h_total"));
+                String id_d_hor = "";
+                id_d_hor = IHor.Insert_Detalle_Horario(ID_DETALLE_HORARIO, ID_DGP, ES_DETALLE_HORARIO, iduser, null, null, null, ID_TIPO_HORARIO, ES_MOD_FORMATO, horas_totales);
+                for (int i = 0; i < dia.size(); i++) {
+                    for (int j = 0; j < 10; j++) {
+                        String hora_desde = request.getParameter("HORA_DESDE_" + dia.get(i) + j);
+                        String hora_hasta = request.getParameter("HORA_HASTA_" + dia.get(i) + j);
+                        String d = request.getParameter("DIA_" + dia.get(i) + j);
+                        if (hora_desde != null & d != null & hora_hasta != null) {
+                            if (!hora_hasta.equals("") & !hora_desde.equals("") & !d.equals("")) {
+                                IHor.Insert_Horario("", hora_desde, hora_hasta, d, ES_HORARIO, id_d_hor);
+                            }
+                        }
+                    }
+                }
+            } else {
+                List<String> dia = new ArrayList<String>();
+                dia.add("lun");
+                dia.add("mar");
+                dia.add("mie");
+                dia.add("jue");
+                dia.add("vie");
+                dia.add("sab");
+                dia.add("dom");
+                for (int y = 0; y < dia.size(); y++) {
+                    for (int j = 0; j < 10; j++) {
+                        String id_horario = request.getParameter("id_horario" + j + dia.get(y));
+                        String ho_desde = request.getParameter("HORA_DESDE_" + dia.get(y) + j);
+                        String ho_hasta = request.getParameter("HORA_HASTA_" + dia.get(y) + j);
+                        if (id_horario != null) {
+                            IHor.modificar_horario(ho_desde, ho_hasta, id_horario);
+                        }
+                    }
+                }
+            }
+            // out.print(id_d_hor + "---" + ID_TIPO_HORARIO + "---" + horas_totales);
+            getServletContext().setAttribute("List_doc_req_pla", doc.List_doc_req_pla(iddgp, ID_TRABAJADOR));
+            int i = doc.List_Req_nacionalidad(ID_TRABAJADOR);
+            int num_ad = doc.List_Adventista(ID_TRABAJADOR);
+            getServletContext().setAttribute("List_Hijos", doc.List_Hijos(ID_TRABAJADOR));
+            getServletContext().setAttribute("List_Conyugue", doc.List_Conyugue(ID_TRABAJADOR));
+            getServletContext().setAttribute("Det_Autorizacion", a.List_Detalle_Autorizacion(ID_DGP, idrp));
+             response.sendRedirect("Vista/Dgp/Detalle_Seguimiento_Dgp.jsp");
+
         }
+
         if (opc.equals("Incompleto")) {
             getServletContext().setAttribute("List_Incomplet", dgp.List_Incomplet(iddep));
             response.sendRedirect("Vista/Dgp/List_req_incompl.jsp");
