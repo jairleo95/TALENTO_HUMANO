@@ -165,7 +165,7 @@ public class CDgp extends HttpServlet {
             String DE_HORARIO_CAPACITACION = request.getParameter("HORARIO_CAPACITACION");
             String DE_HORARIO_REFRIGERIO = request.getParameter("HORARIO_REFRIGERIO");
             String DE_DIAS_CAPACITACION = request.getParameter("DIAS_CAPACITACION");
-            String ES_DGP = "";
+            String ES_DGP = "0";
             String FE_CREACION = request.getParameter("FECHA_CREACION");
             String US_MODIF = request.getParameter("USER_MODIF");
             String FE_MODIF = request.getParameter("FECHA_MODIF");
@@ -638,7 +638,7 @@ public class CDgp extends HttpServlet {
 
             //out.print(NU_CUENTA);
             //out.print(NU_CUENTA_BANC);
-            String idrp = IReq.id_det_req_proc(ID_DGP);
+           // String idrp = IReq.id_det_req_proc(ID_DGP);
 
             /*for (int g = 1; g <= NUMERO; g++) {
              String ID_CENTRO_COSTO = request.getParameter("CENTRO_COSTOS_" + g);
@@ -730,7 +730,7 @@ public class CDgp extends HttpServlet {
             int num_ad = doc.List_Adventista(ID_TRABAJADOR);
             getServletContext().setAttribute("List_Hijos", doc.List_Hijos(ID_TRABAJADOR));
             getServletContext().setAttribute("List_Conyugue", doc.List_Conyugue(ID_TRABAJADOR));
-            getServletContext().setAttribute("Det_Autorizacion", a.List_Detalle_Autorizacion(ID_DGP, idrp));
+           // getServletContext().setAttribute("Det_Autorizacion", a.List_Detalle_Autorizacion(ID_DGP, idrp));
              response.sendRedirect("Vista/Dgp/Detalle_Seguimiento_Dgp.jsp");
 
         }

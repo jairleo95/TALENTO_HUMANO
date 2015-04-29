@@ -250,8 +250,8 @@
                                     <td>
                                         <table class="info-det" style="margin-left:80%;" >
                                             <%if (emp.getCo_aps() != null) {
-                                                 int val_aps = Integer.parseInt(emp.getCo_aps());
-                                                 if (val_aps > 0) {%>
+                                                    int val_aps = Integer.parseInt(emp.getCo_aps());
+                                                    if (val_aps > 0) {%>
 
                                             <tr><td class="td" >Código APS:</td><td class="td1" ><%=emp.getCo_aps()%></td></tr>
                                                 <%}
@@ -350,7 +350,7 @@
 
                     <hr class="simple">
                     <ul id="myTab1" class="nav nav-tabs bordered">
-                        <% 
+                        <%
                             if (List_Auto_mostrar.size() == 1 && aut != null) {
                                 for (int r = 0; r < List_Auto_mostrar.size(); r++) {
                                     Auto_Mostrar a = new Auto_Mostrar();
@@ -787,80 +787,80 @@
 
         <script src="../../js/JQuery/jQuery.js"></script>
         <script>
-                                                    $(document).ready(function() {
-                                                        $(".fe_desde_p, .fe_hasta_p").change(function() {
-                                                            var cuotas = $(".cuota_docente");
-                                                            cuotas.empty();
+            $(document).ready(function() {
+                $(".fe_desde_p, .fe_hasta_p").change(function() {
+                    var cuotas = $(".cuota_docente");
+                    cuotas.empty();
 
-                                                            $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function(objJson) {
-                                                                var lista = objJson.lista;
-                                                                if (objJson.rpta == -1) {
-                                                                    alert(objJson.mensaje);
-                                                                    return;
-                                                                }
-                                                                for (var i = 0; i < lista.length; i++) {
-                                                                    cuotas.append(lista[i].html);
-                                                                }
-                                                            });
-                                                        });
-                                                        $(".btn_guardar_ca").click(function() {
-                                                            $.ajax({
-                                                                url: "../../carga_academica",
-                                                                type: "POST",
-                                                                data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
-                                                            }).done(function(ids) {
-                                                                var arr_id = ids.split(":");
-                                                                alert("Registrado con exito!...");
-                                                                $(".proceso").val(arr_id[0]);
-                                                                $(".dgp").val(arr_id[1]);
-                                                                $(".btn_procesar").show();
-                                                            }).fail(function(e) {
-                                                                alert("Error: " + e);
-                                                            });
-                                                        });
+                    $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function(objJson) {
+                        var lista = objJson.lista;
+                        if (objJson.rpta == -1) {
+                            alert(objJson.mensaje);
+                            return;
+                        }
+                        for (var i = 0; i < lista.length; i++) {
+                            cuotas.append(lista[i].html);
+                        }
+                    });
+                });
+                $(".btn_guardar_ca").click(function() {
+                    $.ajax({
+                        url: "../../carga_academica",
+                        type: "POST",
+                        data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
+                    }).done(function(ids) {
+                        var arr_id = ids.split(":");
+                        alert("Registrado con exito!...");
+                        $(".proceso").val(arr_id[0]);
+                        $(".dgp").val(arr_id[1]);
+                        $(".btn_procesar").show();
+                    }).fail(function(e) {
+                        alert("Error: " + e);
+                    });
+                });
 
-                                                        $(".btn_procesar").click(function() {
-                                                            $.ajax({
-                                                                url: "../../carga_academica", data: "opc=Procesar&dgp=" + $(".dgp").val() + "&proceso=" + $(".proceso").val()
-                                                            }).done(function() {
-                                                                window.location.href = "../../carga_academica?opc=Reporte_Carga_Academica";
-                                                            });
-                                                        });
+                $(".btn_procesar").click(function() {
+                    $.ajax({
+                        url: "../../carga_academica", data: "opc=Procesar&dgp=" + $(".dgp").val() + "&proceso=" + $(".proceso").val()
+                    }).done(function() {
+                        window.location.href = "../../carga_academica?opc=Reporte_Carga_Academica";
+                    });
+                });
 
-                                                        $(".btn-autor").click(function(e) {
-                                                            $.SmartMessageBox({
-                                                                title: "Alerta de Confirmaci?!",
-                                                                content: "?sta totalmente seguro de autorizar este requerimiento?",
-                                                                buttons: '[No][Si]'
-                                                            }, function(ButtonPressed) {
-                                                                if (ButtonPressed === "Si") {
-                                                                    // return true;
-                                                                    $(".form-aut").submit();
-                                                                }
-                                                                if (ButtonPressed === "No") {
-                                                                    return false;
-                                                                }
-                                                            });
-                                                            e.preventDefault();
-                                                        });
-                                                        $(".btn-rech").click(function(e) {
-                                                            $.SmartMessageBox({
-                                                                title: "Alerta de Confirmaci?!",
-                                                                content: "?sta totalmente seguro de rechazar este requerimiento?",
-                                                                buttons: '[No][Si]'
-                                                            }, function(ButtonPressed) {
-                                                                if (ButtonPressed === "Si") {
-                                                                    $(".btn-mos").click();
-                                                                    //$(".form-rech").submit();
-                                                                }
-                                                                if (ButtonPressed === "No") {
-                                                                    return false;
-                                                                }
+                $(".btn-autor").click(function(e) {
+                    $.SmartMessageBox({
+                        title: "Alerta de Confirmaci?!",
+                        content: "?sta totalmente seguro de autorizar este requerimiento?",
+                        buttons: '[No][Si]'
+                    }, function(ButtonPressed) {
+                        if (ButtonPressed === "Si") {
+                            // return true;
+                            $(".form-aut").submit();
+                        }
+                        if (ButtonPressed === "No") {
+                            return false;
+                        }
+                    });
+                    e.preventDefault();
+                });
+                $(".btn-rech").click(function(e) {
+                    $.SmartMessageBox({
+                        title: "Alerta de Confirmaci?!",
+                        content: "?sta totalmente seguro de rechazar este requerimiento?",
+                        buttons: '[No][Si]'
+                    }, function(ButtonPressed) {
+                        if (ButtonPressed === "Si") {
+                            $(".btn-mos").click();
+                            //$(".form-rech").submit();
+                        }
+                        if (ButtonPressed === "No") {
+                            return false;
+                        }
 
-                                                            });
-                                                            e.preventDefault();
-                                                        });
-                                                    });</script>
+                    });
+                    e.preventDefault();
+                });
+            });</script>
 
 
         <script src="../../js/Js_dlmenu/jquery.dlmenu.js"></script>
@@ -870,7 +870,22 @@
                     animationClasses: {classin: 'dl-animate-in-2', classout: 'dl-animate-out-2'}
                 });
             });</script>
+        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
 
+        <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <script>
+                if (!window.jQuery) {
+                    document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                }
+        </script>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+        <script>
+                if (!window.jQuery.ui) {
+                    document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                }
+        </script>
         <!-- IMPORTANT: APP CONFIG -->
         <script src="../../js/app.config.js"></script>
 
@@ -932,16 +947,16 @@
 
         <script type="text/javascript">
 
-                                                    // DO NOT REMOVE : GLOBAL FUNCTIONS!
-                                                    function closedthis() {
-                                                        $.smallBox({
-                                                            title: "?icha de trabajador registrada correctamente!",
-                                                            content: "ya puede visualizar toda la informacion del trabajador...",
-                                                            color: "#739E73",
-                                                            iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                                            timeout: 6000
-                                                        });
-                                                    }
+            // DO NOT REMOVE : GLOBAL FUNCTIONS!
+            function closedthis() {
+                $.smallBox({
+                    title: "?icha de trabajador registrada correctamente!",
+                    content: "ya puede visualizar toda la informacion del trabajador...",
+                    color: "#739E73",
+                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                    timeout: 6000
+                });
+            }
 
             function closedthis2() {
                 $.smallBox({
@@ -954,7 +969,7 @@
             }
             $(document).ready(function() {
 
-                                                        pageSetUp();
+                pageSetUp();
 
                 $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
                     $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
@@ -981,43 +996,43 @@
                  */
                 $('#eg1').click(function(e) {
 
-                                                            $.bigBox({
-                                                                title: "Big Information box",
-                                                                content: "This message will dissapear in 6 seconds!",
-                                                                color: "#C46A69",
-                                                                //timeout: 6000,
-                                                                icon: "fa fa-warning shake animated",
-                                                                number: "1",
-                                                                timeout: 6000
-                                                            });
-                                                            e.preventDefault();
-                                                        })
+                    $.bigBox({
+                        title: "Big Information box",
+                        content: "This message will dissapear in 6 seconds!",
+                        color: "#C46A69",
+                        //timeout: 6000,
+                        icon: "fa fa-warning shake animated",
+                        number: "1",
+                        timeout: 6000
+                    });
+                    e.preventDefault();
+                })
 
                 $('#eg2').click(function(e) {
 
-                                                            $.bigBox({
-                                                                title: "Big Information box",
-                                                                content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-                                                                color: "#3276B1",
-                                                                //timeout: 8000,
-                                                                icon: "fa fa-bell swing animated",
-                                                                number: "2"
-                                                            });
-                                                            e.preventDefault();
-                                                        })
+                    $.bigBox({
+                        title: "Big Information box",
+                        content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                        color: "#3276B1",
+                        //timeout: 8000,
+                        icon: "fa fa-bell swing animated",
+                        number: "2"
+                    });
+                    e.preventDefault();
+                })
 
                 $('#eg3').click(function(e) {
 
-                                                            $.bigBox({
-                                                                title: "Shield is up and running!",
-                                                                content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-                                                                color: "#C79121",
-                                                                //timeout: 8000,
-                                                                icon: "fa fa-shield fadeInLeft animated",
-                                                                number: "3"
-                                                            });
-                                                            e.preventDefault();
-                                                        })
+                    $.bigBox({
+                        title: "Shield is up and running!",
+                        content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                        color: "#C79121",
+                        //timeout: 8000,
+                        icon: "fa fa-shield fadeInLeft animated",
+                        number: "3"
+                    });
+                    e.preventDefault();
+                })
 
                 $('#eg4').click(function(e) {
 
@@ -1048,25 +1063,25 @@
                 });
                 $('#eg6').click(function() {
 
-                                                            $.smallBox({
-                                                                title: "Big Information box",
-                                                                content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-                                                                color: "#5384AF",
-                                                                //timeout: 8000,
-                                                                icon: "fa fa-bell"
-                                                            });
-                                                        })
+                    $.smallBox({
+                        title: "Big Information box",
+                        content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                        color: "#5384AF",
+                        //timeout: 8000,
+                        icon: "fa fa-bell"
+                    });
+                })
 
                 $('#eg7').click(function() {
 
-                                                            $.smallBox({
-                                                                title: "James Simmons liked your comment",
-                                                                content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
-                                                                color: "#296191",
-                                                                iconSmall: "fa fa-thumbs-up bounce animated",
-                                                                timeout: 4000
-                                                            });
-                                                        })
+                    $.smallBox({
+                        title: "James Simmons liked your comment",
+                        content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
+                        color: "#296191",
+                        iconSmall: "fa fa-thumbs-up bounce animated",
+                        timeout: 4000
+                    });
+                })
 
 
                 /*
@@ -1081,23 +1096,23 @@
                     }, function(ButtonPressed) {
                         if (ButtonPressed === "Yes") {
 
-                                                                    $.smallBox({
-                                                                        title: "Callback function",
-                                                                        content: "<i class='fa fa-clock-o'></i> <i>You pressed Yes...</i>",
-                                                                        color: "#659265",
-                                                                        iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                                                        timeout: 4000
-                                                                    });
-                                                                }
-                                                                if (ButtonPressed === "No") {
-                                                                    $.smallBox({
-                                                                        title: "Callback function",
-                                                                        content: "<i class='fa fa-clock-o'></i> <i>You pressed No...</i>",
-                                                                        color: "#C46A69",
-                                                                        iconSmall: "fa fa-times fa-2x fadeInRight animated",
-                                                                        timeout: 4000
-                                                                    });
-                                                                }
+                            $.smallBox({
+                                title: "Callback function",
+                                content: "<i class='fa fa-clock-o'></i> <i>You pressed Yes...</i>",
+                                color: "#659265",
+                                iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                timeout: 4000
+                            });
+                        }
+                        if (ButtonPressed === "No") {
+                            $.smallBox({
+                                title: "Callback function",
+                                content: "<i class='fa fa-clock-o'></i> <i>You pressed No...</i>",
+                                color: "#C46A69",
+                                iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                timeout: 4000
+                            });
+                        }
 
                     });
                     e.preventDefault();

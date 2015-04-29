@@ -198,7 +198,7 @@
                                                     </script>
 
                                                     <section>
-                                                        <label class="label" id="titu">Puesto | Seccion | Area:</label><%=dg.getId_puesto()%>
+                                                        <label class="label" id="titu">Puesto | Seccion | Area:</label>
                                                         <label class="select">
                                                             <select name="IDPUESTO"  required="" >
                                                                 <option value="">[SELECCIONE]</option>
