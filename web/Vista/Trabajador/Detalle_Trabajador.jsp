@@ -78,7 +78,7 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-
+        <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <style type="text/css">
             body{
 
@@ -235,6 +235,7 @@
                                     %>
                                     <td>
                                         <table>
+                                            <button data-toggle="modal" data-target="#myModal" id="btn-mostrar" hidden="">asas</button>
                                             <tr><td class="td">Nombre :</td><td class="td1"><%=trb.getNo_trabajador().toUpperCase()%></td></tr>
                                             <tr><td class="td">Apellido Paterno :</td><td class="td1"><%=trb.getAp_paterno().toUpperCase()%></td></tr>
                                             <tr><td class="td">Apellido Materno :</td><td class="td1"><%=trb.getAp_materno().toUpperCase()%></td></tr>
@@ -530,10 +531,44 @@
                         <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
                         <input type="hidden" name="IDPASOS" value="<%=id_pasos%>" 
                                <tr><td><input type="hidden" name="opc"  class="submit" value="Rechazar"/></td></tr>
-                        <button class="btn btn-labeled btn-danger btn-rech" type="submit">
+                        <div class="modal fade" id="myModal6" tabindex="-1" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
+                                        </button>
+                                    </div>
+                                    <div class="modal-body no-padding">
+                                        <fieldset>
+                                            <section>
+                                                <div class="row" align="center">
+                                                    <h1 class="h1" style="color:#218FDD ; font-size:20px;"><strong>COMENTARIO</strong></h1>
+                                                    <div class="col col-10"  aligncenter>
+                                                        <label class="input">
+                                                            <textarea rows="5" width="70%" maxlength="200"></textarea>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </fieldset>
+                                        <footer>
+                                            <button type="submit" class="btn btn-primary">
+                                                Continuar
+                                            </button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal" >
+                                                Cancel
+                                            </button>
+
+                                        </footer>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a data-toggle="modal" href="#myModal6" class="btn btn-success btn-lg pull-right header-btn hidden-mobile"><i class="fa fa-circle-arrow-up fa-lg"></i> Launch form modal</a>
+                        <button class="btn btn-labeled btn-danger btn-rech" type="button">
                             <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span>RECHAZAR 
                         </button>
-
                     </table>
                 </form>   
             </center>
@@ -627,96 +662,144 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div>
-        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                            &times;
-                        </button>
-                        <h4 class="modal-title" id="myModalLabel">Encontrar Conyugue</h4>
-                    </div>
-                    <div class="modal-body">
-
-                        <div class="row">
-                            <div id="contenido">
-                                <div >
-
-                                    <form class="form-inline" id="frm_filtro" method="post" name="formulario"  >
-
-                                        <div class="row">
-                                            <div class="form-group" >
-                                                <label class="control-label" >Nombres</label><br>
-                                                <input type="text"  class="form-control"  name="nom" maxlength="80" >
-                                            </div>
-                                            <div class="form-group" >
-                                                <label class="control-label" >Apellido Paterno</label><br>
-                                                <input type="text"  class="form-control"  name="ap_pa" maxlength="80">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group">
-                                                <label class="control-label" >Apellido Materno</label><br>
-                                                <input type="text"  class="form-control"  name="ap_ma" maxlength="80" >
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="control-label" >DNI:</label><br>
-                                                <input type="text"  class="form-control"  onKeyPress="return checkIt(event)"   name="dni" maxlength="8">
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-
-                                            <div class="form-group">                            
-                                                <button type="button" class="btn btn-primary" id="btnfiltrar" >Buscar</button>
-                                            </div>
-                                            <div class="form-group">  
-                                                <a href="javascript:;"  id="btncancel" class="btn btn-primary" >Cancelar</a>
-                                            </div>
-
-                                        </div>
-
-                                    </form>
-
-                                </div> 
-
-                                <hr/>
-
-                                <table  id="data"  >
-                                    <thead class="tab_cabe">
-                                        <tr>
-                                            <td><span title="NOMBRE_AP">Nombres y Apellidos</span></td>
-                                            <td><span  >DNI</span></td>
-                                            <td></td>
-
-                                        </tr>
-                                    </thead>
-
-                                    <tbody class="tbodys">
-                                    </tbody>
-                                </table>
-
-                            </div>
-                        </div>
-
-
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default btn-salir-busc"  data-dismiss="modal">Salir</button>
-
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
+        <!-- /.modal -->
 
         <%}%>
         <%}%>
+        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
 
+        <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
-            $(document).ready(function () {
-                $(".fe_desde_p, .fe_hasta_p").change(function () {
+        if (!window.jQuery) {
+            document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+        }
+        </script>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+        <script>
+        if (!window.jQuery.ui) {
+            document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+        }
+        </script>
+        <script type="text/javascript">
+
+            // DO NOT REMOVE : GLOBAL FUNCTIONS!
+
+            $(document).ready(function() {
+                pageSetUp();
+                var $validator = $("#wizard-1").validate({
+                    rules: {
+                        email: {
+                            required: true,
+                            email: "Your email address must be in the format of name@domain.com"
+                        },
+                        FECHA_NAC: {
+                            required: true,
+                            val_fecha: true
+                        }
+                        ,
+                        FECHA_NAC_H: {
+                            val_fecha: true
+                        }
+                        ,
+                        fname: {
+                            required: true
+                        },
+                        lname: {
+                            required: true
+                        },
+                        country: {
+                            required: true
+                        },
+                        city: {
+                            required: true
+                        },
+                        postal: {
+                            required: true,
+                            minlength: 4
+                        },
+                        wphone: {
+                            required: true,
+                            minlength: 10
+                        },
+                        hphone: {
+                            required: true,
+                            minlength: 10
+                        }
+                    },
+                    messages: {
+                        fname: "Please specify your First name",
+                        lname: "Please specify your Last name",
+                        email: {
+                            required: "We need your email address to contact you",
+                            email: "Your email address must be in the format of name@domain.com"
+                        }
+                    },
+                    highlight: function(element) {
+                        $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                    },
+                    unhighlight: function(element) {
+                        $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+                    },
+                    errorElement: 'span',
+                    errorClass: 'help-block',
+                    errorPlacement: function(error, element) {
+                        if (element.parent('.input-group').length) {
+                            error.insertAfter(element.parent());
+                        } else {
+                            error.insertAfter(element);
+                        }
+                    }
+                });
+                jQuery.validator.addMethod("val_fecha", function(value, element) {
+                    var d = value.split("-");
+                    return this.optional(element) || String(parseInt(d[0])).length == 4;
+                }, "¡Fecha ingresada invalida!");
+
+                $('#bootstrap-wizard-1').bootstrapWizard({
+                    'tabClass': 'form-wizard',
+                    'onNext': function(tab, navigation, index) {
+                        var $valid = $("#wizard-1").valid();
+                        if (!$valid) {
+                            $validator.focusInvalid();
+                            return false;
+                        } else {
+                            $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass(
+                                    'complete');
+                            $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).find('.step')
+                                    .html('<i class="fa fa-check"></i>');
+                        }
+                    }
+                });
+
+
+                // fuelux wizard
+                var wizard = $('.wizard').wizard();
+
+                wizard.on('finished', function(e, data) {
+                    //$("#fuelux-wizard").submit();
+                    //console.log("submitted!");
+                    $.smallBox({
+                        title: "Congratulations! Your form was submitted",
+                        content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
+                        color: "#5F895F",
+                        iconSmall: "fa fa-check bounce animated",
+                        timeout: 4000
+                    });
+
+                });
+
+
+            })
+
+        </script>
+        <script>
+            $(document).ready(function() {
+                $(".btn-rech").click(function(e) {
+                    $("#bnt-mostrar").click();
+                });
+                $(".fe_desde_p, .fe_hasta_p").change(function() {
                     var cuotas = $(".cuota_docente");
                     cuotas.empty();
 
@@ -785,15 +868,15 @@
                             return false;
                         }
 
-                    });
-                    e.preventDefault();
-                });
             });</script>
 
         <script src="../../js/JQuery/jQuery.js"></script>
         <script>
-            $(document).ready(function () {
-                $(".fe_desde_p, .fe_hasta_p").change(function () {
+            $(document).ready(function() {
+                $(".btn-rech").click(function(e) {
+                    $("#bnt-mostrar").click();
+                });
+                $(".fe_desde_p, .fe_hasta_p").change(function() {
                     var cuotas = $(".cuota_docente");
                     cuotas.empty();
 
@@ -867,7 +950,21 @@
                 });
             });</script>
 
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+            _gaq.push(['_trackPageview']);
 
+            (function() {
+                var ga = document.createElement('script');
+                ga.type = 'text/javascript';
+                ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(ga, s);
+            })();
+
+        </script>
         <script src="../../js/Js_dlmenu/jquery.dlmenu.js"></script>
         <script>
             $(function () {
@@ -875,9 +972,7 @@
                     animationClasses: {classin: 'dl-animate-in-2', classout: 'dl-animate-out-2'}
                 });
             });</script>
-
         <!-- IMPORTANT: APP CONFIG -->
-        <script src="../../js/app.config.js"></script>
 
         <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
         <script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
@@ -913,28 +1008,23 @@
 
         <!-- FastClick: For mobile devices -->
         <script src="../../js/plugin/fastclick/fastclick.min.js"></script>
-
-        <!--[if IE 8]>
-
-        <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
-
-        <![endif]-->
-
         <!-- Demo purpose only -->
         <script src="../../js/demo.min.js"></script>
-
+        <!-- MAIN APP JS FILE -->
+        <script src="../../js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+        <script src="../../js/app.config.js"></script>
+        <script src="../../js/notification/SmartNotification.min.js"></script>
+        <!--[if IE 8]>
         <!-- MAIN APP JS FILE -->
         <script src="../../js/app.min.js"></script>
-
         <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
         <!-- Voice command : plugin -->
         <script src="../../js/speech/voicecommand.min.js"></script>
-
         <!-- PAGE RELATED PLUGIN(S) -->
-        <script src="../../js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+        <script src="../../js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+        <script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
-        <script src="../../js/notification/SmartNotification.min.js"></script>
-
+        <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
         <script type="text/javascript">
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
@@ -1246,6 +1336,21 @@
             });
         </script>
         <%}%>
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+                var ga = document.createElement('script');
+                ga.type = 'text/javascript';
+                ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(ga, s);
+            })();
+
+        </script>
     </body>
 </html>
 <%}else {
