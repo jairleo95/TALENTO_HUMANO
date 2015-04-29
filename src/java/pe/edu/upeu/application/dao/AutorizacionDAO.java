@@ -205,10 +205,10 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
     }
 
     @Override
-    public List<V_Autorizar_Dgp> List_id_Autorizacion(String id, String id_user) {
+    public List<V_Autorizar_Dgp> List_id_Autorizacion(String id_aurotizacion, String id_user) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select *  from rhvd_autorizar_dgp where id_puesto='" + id + "'";
-        sql += (!"".equals(id_user)) ? " and id_usuario='" + id_user + "'" : "";
+        String sql = "select *  from rhvd_autorizar_dgp where id_puesto='" + id_aurotizacion.trim() + "'";
+        sql += (!"".equals(id_user)) ? " and id_usuario='" + id_user.trim() + "'" : "";
         sql += (true) ? " order by fe_creacion " : "";
 
         List<V_Autorizar_Dgp> list = new ArrayList<V_Autorizar_Dgp>();
@@ -258,7 +258,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 v.setEs_mfl(rs.getString("ES_MFL"));
                 v.setDi_correo_personal(rs.getString("DI_CORREO_PERSONAL"));
                 v.setDi_correo_inst(rs.getString("DI_CORREO_INST"));
-                v.setVal_contrato_adjunto(rs.getInt("val_contrato_adjunto"));
+                //v.setVal_contrato_adjunto(rs.getInt("val_contrato_adjunto"));
                 list.add(v);
             }
         } catch (SQLException e) {
