@@ -222,12 +222,12 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
     }
 
     @Override
-    public List<Map<String, ?>> Listar_Plazo_id(String id_tipo) {
+    public List<Map<String, ?>> Listar_Plazo_id(String id_tipo, String iddgp) {
 
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select  *  from rhtr_plazo where ti_plazo='" + id_tipo.trim() + "'";
+            String sql = "select  *  from rhtr_plazo where ti_plazo='" + id_tipo.trim() + "' and id_plazo not in (select  id_plazo  from RHTD_SOLICITUD_DGP where ID_DGP='" + iddgp + "')";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
 

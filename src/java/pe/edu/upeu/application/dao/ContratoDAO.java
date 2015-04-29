@@ -1133,4 +1133,25 @@ public class ContratoDAO implements InterfaceContratoDAO {
         }
     }
 
+    @Override
+    public void HABILITAR_SI(String idc, String estado) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall(" {CALL RHSP_HABILITAR_SI( ?,?)}   ");
+            cst.setString(1, idc);
+            cst.setString(2, estado);
+            cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+    }
+
 }

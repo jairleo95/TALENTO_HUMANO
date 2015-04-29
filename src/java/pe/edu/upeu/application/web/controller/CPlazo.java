@@ -87,7 +87,8 @@ public class CPlazo extends HttpServlet {
             }
             if (opc.equals("List_id_plazo")) {
                 String id = request.getParameter("tipo");
-                List<Map<String, ?>> lista = pl.Listar_Plazo_id(id);
+                String iddgp = request.getParameter("iddgp");
+                List<Map<String, ?>> lista = pl.Listar_Plazo_id(id, iddgp);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }

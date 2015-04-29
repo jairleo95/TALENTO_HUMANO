@@ -180,7 +180,8 @@
                 <!-- <tr><td colspan="2"><input class="btn btn-success" style="height: 140%; width: 30%;"  type="submit" value="Editar"></td></tr>-->
                 <tr>
                     <%String IDTR = trb.getId_trabajador();%>
-                    <td colspan="2">
+                    <td colspan="2"></td>
+                    <%=edit%>
                         <a class="btn btn-success btn-labeled"  href="../../trabajador?opc=Editar_Dat_Gen&idtr=<%=IDTR%>&edit=<%=edit%>"> <span class="btn-label"><i class="glyphicon glyphicon-refresh"></i></span> Editar </a>
                     </td>
                 </tr>

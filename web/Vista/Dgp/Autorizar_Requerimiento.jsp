@@ -252,15 +252,9 @@
                                                         });
                                                     }
                                                 }
-                                                //  $.each($(".cod_aps"), function () {
-
-                                                /**/
-                                                //   });
                                             });
                                             $(".btn_cod_huella").click(function () {
-
                                                 for (var r = 1; r <= parseInt($(".num_huella").val()); r++) {
-
                                                     if ($(".cod_huella" + r).val() != "") {
                                                         $.ajax({
                                                             url: "../../trabajador",
@@ -268,8 +262,6 @@
                                                             data: "opc=reg_huella&cod=" + $(".cod_huella" + r).val() + "&idtr=" + $(".idtr" + r).val()
                                                         }).done(function () {
                                                         });
-
-
                                                         $.ajax({
                                                             url: "../../autorizacion",
                                                             type: "POST",
@@ -277,7 +269,6 @@
                                                         }).done(function () {
 
                                                         });
-
                                                         $.ajax({
                                                             url: "../../autorizacion",
                                                             type: "POST",
@@ -285,14 +276,8 @@
                                                         }).done(function () {
                                                             window.location.href = "../../autorizacion?opc=mens_cod_huella";
                                                         });
-
                                                     }
                                                 }
-                                                //  $.each($(".cod_aps"), function () {
-
-                                                /**/
-
-                                                //   });
                                             });
 
                                         });
@@ -337,6 +322,7 @@
                                                     <th ><strong>¿Contrato Elaborado?</strong></th>
                                                     <th  ><strong>¿Firmo Contrato?</strong></th>
                                                     <th ><strong>Enviar a Rem.</strong></th>
+                                                    <th ><strong>¿Contrato Subido?</strong></th>
                                                         <%}
                                                             }%>
                                                         <%if (idrol.trim().equals("ROL-0009")) {%>
@@ -356,7 +342,6 @@
                                                     InterfaceDgpDAO dgp = new DgpDAO();
                                                     if (t == 0) {
                                                 %>
-
                                                 <!-- <tr><td colspan="9" align="center"><h3>No hay ningún DGP por autorizar...</h3></td></tr>-->
                                                 <%}%>
                                                 <%for (int f = 0; f < List_id_Autorizacion.size(); f++) {
@@ -364,7 +349,6 @@
                                                         V_Autorizar_Dgp a = new V_Autorizar_Dgp();
                                                         a = (V_Autorizar_Dgp) List_id_Autorizacion.get(f);
                                                 %>
-
                                                 <tr>
                                                     <td><%=f + 1%></td>
                                                     <td>
@@ -376,12 +360,16 @@
                                                                 <li><a href="../../dgp?iddgp=<%=a.getId_dgp().trim()%>&opc=Seguimiento">Ver Proceso</a></li>
                                                                 <li><a href="../../documento?iddgp=<%=a.getId_dgp().trim()%>&idtr=<%=a.getId_trabajador().trim()%>&opc=Reg_Pro_Dgp">Ver Documentos</a></li>
                                                                 <li><a href="../../comentario?iddgp=<%=a.getId_dgp().trim()%>&idp=<%=a.getId_puesto()%>&opc=Comentar_Dgp">Comentar</a></li>    
+                                                                    <% if (Integer.parseInt(a.getElab_contrato()) > 0) {
+                                                                    %>
+                                                                <li><a href="../../contrato?idtr=<%=a.getId_trabajador().trim()%>&opc=Detalle_Contractual">Ver Contrato</a></li>
+                                                                    <%
+                                                                        }
+                                                                    %>
                                                                 <li class="divider"></li>
                                                                 <li>
                                                                 <li>
-
                                                                     <%
-
                                                                         int num = dgp.VALIDAR_DGP_CONTR(a.getId_dgp(), a.getId_trabajador());
                                                                     %>
                                                                     <a href="../../trabajador?idtr=<%=a.getId_trabajador()%>&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&iddetalle_dgp=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&cod=<%=a.getCo_pasos()%>&idpasos=<%=a.getId_pasos()%>&autorizacion=1&opc=aut&nup=<%=a.getNu_pasos()%>">
@@ -398,19 +386,13 @@
                                                                                         out.print("Autorizar");
                                                                                     }
                                                                                 } else {
-
                                                                                     out.println("Autorizar");
-
                                                                                 }
-
                                                                             }
-
                                                                         %> </a></li>
                                                                 </li>
                                                             </ul>
                                                         </div>
-
-
                                                     </td>
                                                     <td ><%=a.getMes_creacion()%></td>   
                                                     <% if (a.getAr_foto() == null) {%>
@@ -465,7 +447,6 @@
                                             <%if (idrol.trim().equals("ROL-0006")) {
 
                                             %>
-
                                             <td ><%                                                if (Integer.parseInt(a.getElab_contrato()) == 0) {
                                                     out.println("No");
                                                 } else {
@@ -482,11 +463,9 @@
                                                 <div class="smart-form">
                                                     <label class="toggle"><input type="checkbox" value="<%=(f + 1)%>"  class="firm_contr"  name="estado" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                 </div>
-
                                                 <%
                                                         }
                                                     } else {
-
                                                         out.println("Si");
                                                     }
                                                 %></td>
@@ -504,13 +483,19 @@
                                                     }
 
                                                 %></td>
+                                            <td><%                                                if (a.getVal_contrato_adjunto() == 0) {
+                                                    out.print("No");
+                                                } else {
+                                                    out.print("Si");
+                                                }
+                                                %></td>
 
                                             <%}%>
                                             <%if (idrol.trim().equals("ROL-0009")) {%>
                                             <%if (a.getVal_cod_aps_empleado() == 0) {
                                                     num_cod_aps++;
                                             %>
-                                                <td><input type="text" name="cod_aps" maxlength="6" class="cod_aps<%=(f + 1)%>" style="width:50px"/></td>
+                                            <td><input type="text" name="cod_aps" maxlength="6" class="cod_aps<%=(f + 1)%>" style="width:50px"/></td>
                                             <input type="hidden" name="idtr"  class="idtr<%=(f + 1)%>" value="<%=a.getId_trabajador()%>" />
                                             <%} else {%>
                                             <td><strong><%=a.getCo_aps()%></strong></td>

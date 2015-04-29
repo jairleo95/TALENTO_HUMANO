@@ -52,6 +52,15 @@ public class V_Autorizar_Dgp {
     private String es_mfl;
     private String di_correo_personal;
     private String di_correo_inst;
+    private int val_contrato_adjunto;
+
+    public int getVal_contrato_adjunto() {
+        return val_contrato_adjunto;
+    }
+
+    public void setVal_contrato_adjunto(int val_contrato_adjunto) {
+        this.val_contrato_adjunto = val_contrato_adjunto;
+    }
 
     public String getFe_autorizacion() {
         return fe_autorizacion;
@@ -60,8 +69,7 @@ public class V_Autorizar_Dgp {
     public void setFe_autorizacion(String fe_autorizacion) {
         this.fe_autorizacion = fe_autorizacion;
     }
-    
-    
+
     public String getDi_correo_personal() {
         return di_correo_personal;
     }
@@ -140,7 +148,7 @@ public class V_Autorizar_Dgp {
             String id_requerimiento, String id_tipo_planilla, String no_req, String id_pasos, String no_usuario, String id_usuario, String no_seccion, String no_area,
             String ar_foto, String de_foto, String id_foto, String no_ar_foto, String ta_ar_foto, String ti_ar_foto, String fe_creacion, int val_plazo, String ver_list_plazo,
             String elab_contrato, String val_firm_contrato, String no_dep, String mes_creacion, int val_cod_aps_empleado, int val_cod_huella, int co_aps, int co_huella_digital,
-            String li_motivo, String es_mfl, String di_correo_personal, String di_correo_inst, String fe_autorizacion) {
+            String li_motivo, String es_mfl, String di_correo_personal, String di_correo_inst, String fe_autorizacion, int val_contrato_adjunto) {
         this.id_trabajador = id_trabajador;
         this.no_trabajador = no_trabajador;
         this.ap_paterno = ap_paterno;
@@ -183,6 +191,7 @@ public class V_Autorizar_Dgp {
         this.es_mfl = es_mfl;
         this.di_correo_personal = di_correo_personal;
         this.di_correo_inst = di_correo_inst;
+        this.val_contrato_adjunto = val_contrato_adjunto;
     }
 
     public V_Autorizar_Dgp() {
@@ -228,6 +237,7 @@ public class V_Autorizar_Dgp {
         this.es_mfl = "";
         this.di_correo_personal = "";
         this.di_correo_inst = "";
+        this.val_contrato_adjunto = 0;
     }
 
     public int getCo_aps() {
