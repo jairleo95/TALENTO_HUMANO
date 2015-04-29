@@ -78,7 +78,7 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-
+        <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <style type="text/css">
             body{
 
@@ -235,6 +235,7 @@
                                     %>
                                     <td>
                                         <table>
+                                            <button data-toggle="modal" data-target="#myModal" id="btn-mostrar" hidden="">asas</button>
                                             <tr><td class="td">Nombre :</td><td class="td1"><%=trb.getNo_trabajador().toUpperCase()%></td></tr>
                                             <tr><td class="td">Apellido Paterno :</td><td class="td1"><%=trb.getAp_paterno().toUpperCase()%></td></tr>
                                             <tr><td class="td">Apellido Materno :</td><td class="td1"><%=trb.getAp_materno().toUpperCase()%></td></tr>
@@ -399,7 +400,12 @@
                             <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2"><i class="fa fa-lock"></i> Cambiar Contraseña </a>
                         </li>
                         <%}%>
-
+                        <%if (idrol.trim().equals("ROL-0002") | ID_ROL.trim().equals("ROL-0001")) {
+                        %>
+                        <li>
+                            <a href="../../contrato?idtr=<%=idtr%>&opc=SI_CONNTRATO" target="myframe2"><i class="fa fa-male fa-gear"></i> Imprimir / Subir Contratos </a>
+                        </li>
+                        <%}%>
                     </ul>
                     <div id="myTabContent1" class="tab-content padding-10">
                         <%  if (List_Auto_mostrar.size() == 1 && aut != null) {
@@ -525,10 +531,44 @@
                         <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
                         <input type="hidden" name="IDPASOS" value="<%=id_pasos%>" 
                                <tr><td><input type="hidden" name="opc"  class="submit" value="Rechazar"/></td></tr>
-                        <button class="btn btn-labeled btn-danger btn-rech" type="submit">
+                        <div class="modal fade" id="myModal6" tabindex="-1" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
+                                        </button>
+                                    </div>
+                                    <div class="modal-body no-padding">
+                                        <fieldset>
+                                            <section>
+                                                <div class="row" align="center">
+                                                    <h1 class="h1" style="color:#218FDD ; font-size:20px;"><strong>COMENTARIO</strong></h1>
+                                                    <div class="col col-10"  aligncenter>
+                                                        <label class="input">
+                                                            <textarea rows="5" width="70%" maxlength="200"></textarea>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </fieldset>
+                                        <footer>
+                                            <button type="submit" class="btn btn-primary">
+                                                Continuar
+                                            </button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal" >
+                                                Cancel
+                                            </button>
+
+                                        </footer>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a data-toggle="modal" href="#myModal6" class="btn btn-success btn-lg pull-right header-btn hidden-mobile"><i class="fa fa-circle-arrow-up fa-lg"></i> Launch form modal</a>
+                        <button class="btn btn-labeled btn-danger btn-rech" type="button">
                             <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span>RECHAZAR 
                         </button>
-
                     </table>
                 </form>   
             </center>
@@ -622,100 +662,148 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div>
-        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                            &times;
-                        </button>
-                        <h4 class="modal-title" id="myModalLabel">Encontrar Conyugue</h4>
-                    </div>
-                    <div class="modal-body">
-
-                        <div class="row">
-                            <div id="contenido">
-                                <div >
-
-                                    <form class="form-inline" id="frm_filtro" method="post" name="formulario"  >
-
-                                        <div class="row">
-                                            <div class="form-group" >
-                                                <label class="control-label" >Nombres</label><br>
-                                                <input type="text"  class="form-control"  name="nom" maxlength="80" >
-                                            </div>
-                                            <div class="form-group" >
-                                                <label class="control-label" >Apellido Paterno</label><br>
-                                                <input type="text"  class="form-control"  name="ap_pa" maxlength="80">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group">
-                                                <label class="control-label" >Apellido Materno</label><br>
-                                                <input type="text"  class="form-control"  name="ap_ma" maxlength="80" >
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="control-label" >DNI:</label><br>
-                                                <input type="text"  class="form-control"  onKeyPress="return checkIt(event)"   name="dni" maxlength="8">
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-
-                                            <div class="form-group">                            
-                                                <button type="button" class="btn btn-primary" id="btnfiltrar" >Buscar</button>
-                                            </div>
-                                            <div class="form-group">  
-                                                <a href="javascript:;"  id="btncancel" class="btn btn-primary" >Cancelar</a>
-                                            </div>
-
-                                        </div>
-
-                                    </form>
-
-                                </div> 
-
-                                <hr/>
-
-                                <table  id="data"  >
-                                    <thead class="tab_cabe">
-                                        <tr>
-                                            <td><span title="NOMBRE_AP">Nombres y Apellidos</span></td>
-                                            <td><span  >DNI</span></td>
-                                            <td></td>
-
-                                        </tr>
-                                    </thead>
-
-                                    <tbody class="tbodys">
-                                    </tbody>
-                                </table>
-
-                            </div>
-                        </div>
-
-
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default btn-salir-busc"  data-dismiss="modal">Salir</button>
-
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
+        <!-- /.modal -->
 
         <%}%>
         <%}%>
+        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
 
+        <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <script>
+        if (!window.jQuery) {
+            document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+        }
+        </script>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+        <script>
+        if (!window.jQuery.ui) {
+            document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+        }
+        </script>
+        <script type="text/javascript">
+
+            // DO NOT REMOVE : GLOBAL FUNCTIONS!
+
+            $(document).ready(function() {
+                pageSetUp();
+                var $validator = $("#wizard-1").validate({
+                    rules: {
+                        email: {
+                            required: true,
+                            email: "Your email address must be in the format of name@domain.com"
+                        },
+                        FECHA_NAC: {
+                            required: true,
+                            val_fecha: true
+                        }
+                        ,
+                        FECHA_NAC_H: {
+                            val_fecha: true
+                        }
+                        ,
+                        fname: {
+                            required: true
+                        },
+                        lname: {
+                            required: true
+                        },
+                        country: {
+                            required: true
+                        },
+                        city: {
+                            required: true
+                        },
+                        postal: {
+                            required: true,
+                            minlength: 4
+                        },
+                        wphone: {
+                            required: true,
+                            minlength: 10
+                        },
+                        hphone: {
+                            required: true,
+                            minlength: 10
+                        }
+                    },
+                    messages: {
+                        fname: "Please specify your First name",
+                        lname: "Please specify your Last name",
+                        email: {
+                            required: "We need your email address to contact you",
+                            email: "Your email address must be in the format of name@domain.com"
+                        }
+                    },
+                    highlight: function(element) {
+                        $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                    },
+                    unhighlight: function(element) {
+                        $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+                    },
+                    errorElement: 'span',
+                    errorClass: 'help-block',
+                    errorPlacement: function(error, element) {
+                        if (element.parent('.input-group').length) {
+                            error.insertAfter(element.parent());
+                        } else {
+                            error.insertAfter(element);
+                        }
+                    }
+                });
+                jQuery.validator.addMethod("val_fecha", function(value, element) {
+                    var d = value.split("-");
+                    return this.optional(element) || String(parseInt(d[0])).length == 4;
+                }, "¡Fecha ingresada invalida!");
+
+                $('#bootstrap-wizard-1').bootstrapWizard({
+                    'tabClass': 'form-wizard',
+                    'onNext': function(tab, navigation, index) {
+                        var $valid = $("#wizard-1").valid();
+                        if (!$valid) {
+                            $validator.focusInvalid();
+                            return false;
+                        } else {
+                            $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass(
+                                    'complete');
+                            $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).find('.step')
+                                    .html('<i class="fa fa-check"></i>');
+                        }
+                    }
+                });
+
+
+                // fuelux wizard
+                var wizard = $('.wizard').wizard();
+
+                wizard.on('finished', function(e, data) {
+                    //$("#fuelux-wizard").submit();
+                    //console.log("submitted!");
+                    $.smallBox({
+                        title: "Congratulations! Your form was submitted",
+                        content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
+                        color: "#5F895F",
+                        iconSmall: "fa fa-check bounce animated",
+                        timeout: 4000
+                    });
+
+                });
+
+
+            })
+
+        </script>
         <script>
             $(document).ready(function() {
+                $(".btn-rech").click(function(e) {
+                    $("#bnt-mostrar").click();
+                });
                 $(".fe_desde_p, .fe_hasta_p").change(function() {
                     var cuotas = $(".cuota_docente");
                     cuotas.empty();
 
-                    $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function(objJson) {
+                    $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function (objJson) {
                         var lista = objJson.lista;
                         if (objJson.rpta == -1) {
                             alert(objJson.mensaje);
@@ -727,36 +815,36 @@
                     });
                 });
 
-                $(".btn_guardar_ca").click(function() {
+                $(".btn_guardar_ca").click(function () {
                     $.ajax({
                         url: "../../carga_academica",
                         type: "POST",
                         data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
-                    }).done(function(ids) {
+                    }).done(function (ids) {
                         var arr_id = ids.split(":");
                         alert("Registrado con exito!...");
                         $(".proceso").val(arr_id[0]);
                         $(".dgp").val(arr_id[1]);
                         $(".btn_procesar").show();
-                    }).fail(function(e) {
+                    }).fail(function (e) {
                         alert("Error: " + e);
                     });
                 });
 
-                $(".btn_procesar").click(function() {
+                $(".btn_procesar").click(function () {
                     $.ajax({
                         url: "../../carga_academica", data: "opc=Procesar&dgp=" + $(".dgp").val() + "&proceso=" + $(".proceso").val()
-                    }).done(function() {
+                    }).done(function () {
                         window.location.href = "../../carga_academica?opc=Reporte_Carga_Academica";
                     });
                 });
 
-                $(".btn-autor").click(function(e) {
+                $(".btn-autor").click(function (e) {
                     $.SmartMessageBox({
                         title: "Alerta de Confirmaci?!",
                         content: "?sta totalmente seguro de autorizar este requerimiento?",
                         buttons: '[No][Si]'
-                    }, function(ButtonPressed) {
+                    }, function (ButtonPressed) {
                         if (ButtonPressed === "Si") {
                             // return true;
                             $(".form-aut").submit();
@@ -767,12 +855,12 @@
                     });
                     e.preventDefault();
                 });
-                $(".btn-rech").click(function(e) {
+                $(".btn-rech").click(function (e) {
                     $.SmartMessageBox({
                         title: "Alerta de Confirmaci?!",
                         content: "?sta totalmente seguro de rechazar este requerimiento?",
                         buttons: '[No][Si]'
-                    }, function(ButtonPressed) {
+                    }, function (ButtonPressed) {
                         if (ButtonPressed === "Si") {
                             $(".form-rech").submit();
                         }
@@ -780,19 +868,19 @@
                             return false;
                         }
 
-                    });
-                    e.preventDefault();
-                });
             });</script>
 
         <script src="../../js/JQuery/jQuery.js"></script>
         <script>
             $(document).ready(function() {
+                $(".btn-rech").click(function(e) {
+                    $("#bnt-mostrar").click();
+                });
                 $(".fe_desde_p, .fe_hasta_p").change(function() {
                     var cuotas = $(".cuota_docente");
                     cuotas.empty();
 
-                    $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function(objJson) {
+                    $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function (objJson) {
                         var lista = objJson.lista;
                         if (objJson.rpta == -1) {
                             alert(objJson.mensaje);
@@ -803,36 +891,36 @@
                         }
                     });
                 });
-                $(".btn_guardar_ca").click(function() {
+                $(".btn_guardar_ca").click(function () {
                     $.ajax({
                         url: "../../carga_academica",
                         type: "POST",
                         data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
-                    }).done(function(ids) {
+                    }).done(function (ids) {
                         var arr_id = ids.split(":");
                         alert("Registrado con exito!...");
                         $(".proceso").val(arr_id[0]);
                         $(".dgp").val(arr_id[1]);
                         $(".btn_procesar").show();
-                    }).fail(function(e) {
+                    }).fail(function (e) {
                         alert("Error: " + e);
                     });
                 });
 
-                $(".btn_procesar").click(function() {
+                $(".btn_procesar").click(function () {
                     $.ajax({
                         url: "../../carga_academica", data: "opc=Procesar&dgp=" + $(".dgp").val() + "&proceso=" + $(".proceso").val()
-                    }).done(function() {
+                    }).done(function () {
                         window.location.href = "../../carga_academica?opc=Reporte_Carga_Academica";
                     });
                 });
 
-                $(".btn-autor").click(function(e) {
+                $(".btn-autor").click(function (e) {
                     $.SmartMessageBox({
                         title: "Alerta de Confirmaci?!",
                         content: "?sta totalmente seguro de autorizar este requerimiento?",
                         buttons: '[No][Si]'
-                    }, function(ButtonPressed) {
+                    }, function (ButtonPressed) {
                         if (ButtonPressed === "Si") {
                             // return true;
                             $(".form-aut").submit();
@@ -843,12 +931,12 @@
                     });
                     e.preventDefault();
                 });
-                $(".btn-rech").click(function(e) {
+                $(".btn-rech").click(function (e) {
                     $.SmartMessageBox({
                         title: "Alerta de Confirmaci?!",
                         content: "?sta totalmente seguro de rechazar este requerimiento?",
                         buttons: '[No][Si]'
-                    }, function(ButtonPressed) {
+                    }, function (ButtonPressed) {
                         if (ButtonPressed === "Si") {
                             $(".btn-mos").click();
                             //$(".form-rech").submit();
@@ -862,32 +950,29 @@
                 });
             });</script>
 
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+            _gaq.push(['_trackPageview']);
 
+            (function() {
+                var ga = document.createElement('script');
+                ga.type = 'text/javascript';
+                ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(ga, s);
+            })();
+
+        </script>
         <script src="../../js/Js_dlmenu/jquery.dlmenu.js"></script>
         <script>
-            $(function() {
+            $(function () {
                 $('#dl-menu').dlmenu({
                     animationClasses: {classin: 'dl-animate-in-2', classout: 'dl-animate-out-2'}
                 });
             });</script>
-        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
-
-        <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-        <script>
-                if (!window.jQuery) {
-                    document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
-                }
-        </script>
-
-        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-        <script>
-                if (!window.jQuery.ui) {
-                    document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                }
-        </script>
         <!-- IMPORTANT: APP CONFIG -->
-        <script src="../../js/app.config.js"></script>
 
         <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
         <script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
@@ -923,28 +1008,23 @@
 
         <!-- FastClick: For mobile devices -->
         <script src="../../js/plugin/fastclick/fastclick.min.js"></script>
-
-        <!--[if IE 8]>
-
-        <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
-
-        <![endif]-->
-
         <!-- Demo purpose only -->
         <script src="../../js/demo.min.js"></script>
-
+        <!-- MAIN APP JS FILE -->
+        <script src="../../js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+        <script src="../../js/app.config.js"></script>
+        <script src="../../js/notification/SmartNotification.min.js"></script>
+        <!--[if IE 8]>
         <!-- MAIN APP JS FILE -->
         <script src="../../js/app.min.js"></script>
-
         <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
         <!-- Voice command : plugin -->
         <script src="../../js/speech/voicecommand.min.js"></script>
-
         <!-- PAGE RELATED PLUGIN(S) -->
-        <script src="../../js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+        <script src="../../js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+        <script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
-        <script src="../../js/notification/SmartNotification.min.js"></script>
-
+        <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
         <script type="text/javascript">
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
@@ -967,11 +1047,11 @@
                     timeout: 6000
                 });
             }
-            $(document).ready(function() {
+            $(document).ready(function () {
 
                 pageSetUp();
 
-                $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
+                $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                     $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                 });
                 $("#cod_ap").numeric();
@@ -994,7 +1074,7 @@
                 /*
                  * Smart Notifications
                  */
-                $('#eg1').click(function(e) {
+                $('#eg1').click(function (e) {
 
                     $.bigBox({
                         title: "Big Information box",
@@ -1008,7 +1088,7 @@
                     e.preventDefault();
                 })
 
-                $('#eg2').click(function(e) {
+                $('#eg2').click(function (e) {
 
                     $.bigBox({
                         title: "Big Information box",
@@ -1021,7 +1101,7 @@
                     e.preventDefault();
                 })
 
-                $('#eg3').click(function(e) {
+                $('#eg3').click(function (e) {
 
                     $.bigBox({
                         title: "Shield is up and running!",
@@ -1034,7 +1114,7 @@
                     e.preventDefault();
                 })
 
-                $('#eg4').click(function(e) {
+                $('#eg4').click(function (e) {
 
                     $.bigBox({
                         title: "Success Message Example",
@@ -1043,7 +1123,7 @@
                         //timeout: 8000,
                         icon: "fa fa-check",
                         number: "4"
-                    }, function() {
+                    }, function () {
                         closedthis();
                     });
                     e.preventDefault();
@@ -1051,7 +1131,7 @@
 
 
 
-                $('#eg5').click(function() {
+                $('#eg5').click(function () {
 
                     $.smallBox({
                         title: "Ding Dong!",
@@ -1061,7 +1141,7 @@
                         icon: "fa fa-bell swing animated"
                     });
                 });
-                $('#eg6').click(function() {
+                $('#eg6').click(function () {
 
                     $.smallBox({
                         title: "Big Information box",
@@ -1072,7 +1152,7 @@
                     });
                 })
 
-                $('#eg7').click(function() {
+                $('#eg7').click(function () {
 
                     $.smallBox({
                         title: "James Simmons liked your comment",
@@ -1088,12 +1168,12 @@
                  * SmartAlerts
                  */
                 // With Callback
-                $("#smart-mod-eg1").click(function(e) {
+                $("#smart-mod-eg1").click(function (e) {
                     $.SmartMessageBox({
                         title: "Smart Alert!",
                         content: "This is a confirmation box. Can be programmed for button callback",
                         buttons: '[No][Yes]'
-                    }, function(ButtonPressed) {
+                    }, function (ButtonPressed) {
                         if (ButtonPressed === "Yes") {
 
                             $.smallBox({
@@ -1118,7 +1198,7 @@
                     e.preventDefault();
                 })
                 // With Input
-                $("#smart-mod-eg2").click(function(e) {
+                $("#smart-mod-eg2").click(function (e) {
 
                     $.SmartMessageBox({
                         title: "Smart Alert: Input",
@@ -1126,13 +1206,13 @@
                         buttons: "[Accept]",
                         input: "text",
                         placeholder: "Enter your user name"
-                    }, function(ButtonPress, Value) {
+                    }, function (ButtonPress, Value) {
                         alert(ButtonPress + " " + Value);
                     });
                     e.preventDefault();
                 })
                 // With Buttons
-                $("#smart-mod-eg3").click(function(e) {
+                $("#smart-mod-eg3").click(function (e) {
 
                     $.SmartMessageBox({
                         title: "Smart Notification: Buttons",
@@ -1142,7 +1222,7 @@
                     e.preventDefault();
                 })
                 // With Select
-                $("#smart-mod-eg4").click(function(e) {
+                $("#smart-mod-eg4").click(function (e) {
 
                     $.SmartMessageBox({
                         title: "Smart Alert: Select",
@@ -1150,13 +1230,13 @@
                         buttons: "[Done]",
                         input: "select",
                         options: "[Costa Rica][United States][Autralia][Spain]"
-                    }, function(ButtonPress, Value) {
+                    }, function (ButtonPress, Value) {
                         alert(ButtonPress + " " + Value);
                     });
                     e.preventDefault();
                 });
                 // With Login
-                $("#smart-mod-eg5").click(function(e) {
+                $("#smart-mod-eg5").click(function (e) {
 
                     $.SmartMessageBox({
                         title: "Login form",
@@ -1164,7 +1244,7 @@
                         buttons: "[Cancel][Accept]",
                         input: "text",
                         placeholder: "Enter your user name"
-                    }, function(ButtonPress, Value) {
+                    }, function (ButtonPress, Value) {
                         if (ButtonPress == "Cancel") {
                             alert("Why did you cancel that? :(");
                             return 0;
@@ -1178,7 +1258,7 @@
                             buttons: "[Login]",
                             input: "password",
                             placeholder: "Password"
-                        }, function(ButtonPress, Value) {
+                        }, function (ButtonPress, Value) {
                             alert("Username: " + ValueOriginal + " and your password is: " + Value);
                         });
                     });
@@ -1193,7 +1273,7 @@
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
-            (function() {
+            (function () {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
@@ -1203,18 +1283,18 @@
             })();</script>
         <script type="text/javascript">
             $(document).ready(
-                    function() {
+                    function () {
 
 
                     });</script>
         <script type="text/javascript" language="javascript">
-            $('.ver_foto').click(function() {
+            $('.ver_foto').click(function () {
                 $(".file-foto").click();
             });
-            $(window).load(function() {
+            $(window).load(function () {
 
-                $(function() {
-                    $('.file-foto').change(function(e) {
+                $(function () {
+                    $('.file-foto').change(function (e) {
 
                         if (this.files[0].size <= 500000) {
                             var jForm = new FormData();
@@ -1227,7 +1307,7 @@
                                 processData: false,
                                 contentType: false,
                                 data: jForm
-                            }).done(function(f) {
+                            }).done(function (f) {
                                 $(".mensaje").text(f);
                             });
                             addImage(e);
@@ -1256,9 +1336,24 @@
             });
         </script>
         <%}%>
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+                var ga = document.createElement('script');
+                ga.type = 'text/javascript';
+                ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(ga, s);
+            })();
+
+        </script>
     </body>
 </html>
-<%} else {
+<%}else {
         response.sendRedirect("/TALENTO_HUMANO/");
     }
 %>
