@@ -319,8 +319,8 @@
                                                     <label class="select"> 
                                                         <select name="tipo" class="tipo" required="">
                                                             <option value=''>[SELECCIONE]</option>
-                                                            <option value='1'>Ingreso a planilla</option>
-                                                            <option value='2'>Inicio de Contrato</option>
+                                                            <option value='1'>Inicio de Contrato</option>
+                                                            <option value='2'>Ingreso a planilla</option>
                                                         </select>          
                                                     </label>
                                                 </section>
@@ -465,7 +465,7 @@
                             $(".lb_fecha_solicitud").text("Fecha de Inicio :");
                             $(".tipo_fecha").val("date");
                         }
-                        alert();
+                        //alert();
                         list_select($(".plazo"), "../../plazo_dgp?opc=List_id_plazo", $(".solicitud_plazo").serialize(), "1", $(".tipo").val());
                     });
                     $(".sbm_solicitud").click(function (e) {
@@ -487,6 +487,8 @@
                                         var $p = $(this).parent().parent();
                                         $p.removeClass('has-success');
                                         $("section > label").removeClass('state-success');
+                                        /*vuelve a cargar el selector para evitar enviar solicitudes del mismo plazo*/
+                                        list_select($(".plazo"), "../../plazo_dgp?opc=List_id_plazo", $(".solicitud_plazo").serialize(), "1", $(".tipo").val());
                                         $.smallBox({
                                             title: "¡Exito!",
                                             content: "<i class='fa fa-clock-o'></i> <i>La solicitud ha sido enviada exitosamente...</i>",

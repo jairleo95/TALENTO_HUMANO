@@ -20,7 +20,8 @@ public interface InterfacePlazo_DgpDAO {
     public List<V_Dgp_Plazo> Lista_detalle_plazo(String id);
 
     public List<Map<String, ?>> Listar_Plazo();
-    public List<Map<String, ?>> Listar_Plazo_id(String id_tipo);
+
+    public List<Map<String, ?>> Listar_Plazo_id(String id_tipo, String iddgp);
 
     public String fecha_maxima_plazo();
 

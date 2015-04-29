@@ -133,7 +133,7 @@
     </head>
     <body>
     <center>
-        <div class="smart-form">¿Decidir la secretaria de departamento o area lo suba e imprima el contrato?<label class='toggle'><input type='checkbox' value='1'  class='ck_procesado'  name='estado' name='checkbox-toggle' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></div><br><br>
+        <div class="smart-form">¿Decidir la secretaria de departamento o area lo suba e imprima el contrato?<label class='toggle'><input type='checkbox' value='1'  class='ck_habilitar_is'  name='estado' name='checkbox-toggle' checked><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></div><br><br>
         <form action="../../contrato" method="get">
             <%String idanno = request.getParameter("anno");
                 if (List_contra_x_idcto.size() == 0) {%>
@@ -165,7 +165,6 @@
             <script>$(document).ready(function () {
                     $(".anno").change(function () {
                         $(".btn_act").click();
-
                     });
                 });</script>
         </form>
@@ -511,7 +510,7 @@
                 <table>
                     <td><input type="hidden" name="id_plan_contr" value="<%=n.getId_plantilla_contractual()%>"></td>
                     <td><input type="hidden" name="idtraba" value="<%=n.getId_trabajador()%>"></td>
-                    <td><input type="hidden" name="id_con" value="<%=n.getId_contrato()%>"></td>
+                    <td><input type="hidden" name="id_con" class="id_contrato" value="<%=n.getId_contrato()%>"></td>
                     <td><input type="hidden" name="puesto" class="id_pu" value="<%=n.getId_puesto()%>" ></td>
 
                     <tr><td class="text-info" colspan="8" style="text-align:center"><input class="button blue"  type="hidden" value="Editar"><button name="opc" value="Imprimir" class="PLANTI btn btn-labeled btn-primary"><span class="btn-label"><i class="fa fa-print"></i></span>Imprimir</button></td></tr>
@@ -526,6 +525,31 @@
 
     <%}%>
 </body>
+<script>
+    $(document).ready(function () {
+
+
+        $(".ck_habilitar_is").click(function () {
+            if ($(".ck_habilitar_is").prop('checked')) {
+                $.ajax({
+                    url: "../../contrato",
+                    data: "opc=Habilitar_is&id=" + $(".id_contrato").val() + "&estado=1"
+                }).done(function () {
+                    alert()
+                });
+            } else {
+                $.ajax({
+                    url: "../../contrato",
+                    data: "opc=Habilitar_is&id=" + $(".id_contrato").val() + "&estado=2"
+                }).done(function () {
+                    alert()
+                });
+            }
+        });
+
+
+    });
+</script>
 <%} else {
         response.sendRedirect("/TALENTO_HUMANO/");
     }
