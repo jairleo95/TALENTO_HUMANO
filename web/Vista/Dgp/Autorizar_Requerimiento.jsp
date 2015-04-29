@@ -15,7 +15,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <title>Autorización</title>
-
         <meta name="description" content="">
         <meta name="author" content="">
 
