@@ -8,6 +8,7 @@ package pe.edu.upeu.application.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import pe.edu.upeu.application.dao_imp.InterfaceReporteDAO;
@@ -92,6 +93,51 @@ public class ReporteDAO implements InterfaceReporteDAO {
             this.conn.close();
         }
         return list;
+    }
+
+    @Override
+    public List<Map<String, ?>> listar_padre_hi(String desde, String hasta, String edad) {
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "SELECT * from RHVD_FILTRO__PADRE_HIJO ";
+            sql += (!desde.equals("") & !(hasta.equals(""))) ? "where EDAD_HI BETWEEN '" + desde.trim() + "' and '" + hasta.trim() + "'" : "";
+            sql += (!edad.equals("")) ? "where EDAD_HI='" + edad.trim() + "'" : "";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("aps", rs.getString("APS"));
+                rec.put("dep", rs.getString("DEPARTAMENTO"));
+                rec.put("are", rs.getString("AREA"));
+                rec.put("sec", rs.getString("SECCION"));
+                rec.put("pue", rs.getString("PUESTO"));
+                rec.put("tip_d", rs.getString("TI_DOC"));
+                rec.put("num_d", rs.getString("NU_DOC"));
+                rec.put("pat", rs.getString("PATERNO"));
+                rec.put("mat", rs.getString("MATERNO"));
+                rec.put("nom", rs.getString("NOM"));
+                rec.put("nom_e", rs.getString("NOMBRE_EMPLEADO"));
+                rec.put("fec_s", rs.getString("FEC_CESE"));
+                rec.put("dni_h", rs.getString("DNI_HI"));
+                rec.put("nom_h", rs.getString("NOM_HI"));
+                rec.put("fech_hi", rs.getString("FE_NAC_HI"));
+                rec.put("edad_hi", rs.getString("EDAD_HI"));
+                rec.put("fen_hi", rs.getString("GEN_HI"));
+                rec.put("id_tra", rs.getString("ID_TRABAJADOR"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
     }
 
 }

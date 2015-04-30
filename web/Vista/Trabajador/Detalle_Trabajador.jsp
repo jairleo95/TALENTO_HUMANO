@@ -7,6 +7,7 @@
     if (id_user_1 != null) {
 %>
 
+
 <%@page import="pe.edu.upeu.application.model.Empleado"%>
 <%@page import="javax.print.DocFlavor.STRING"%>
 <%@page import="pe.edu.upeu.application.model.Auto_Mostrar"%>
