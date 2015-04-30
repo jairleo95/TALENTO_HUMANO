@@ -548,7 +548,7 @@
                     texto += '<td>' + lista[i].dni_h + '</td>';
                     texto += '<td>' + lista[i].nom_h + '</td>';
                     texto += '<td>' + lista[i].fech_hi + '</td>';
-                    texto += '<td>' + lista[i].edad + '</td>';
+                    texto += '<td>' + lista[i].edad_hi + '</td>';
                     texto += '</tr>';
                 }
                 d.append(texto);
