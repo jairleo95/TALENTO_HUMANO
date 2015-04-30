@@ -85,6 +85,7 @@ public class CAutorizacion extends HttpServlet {
             }
             if (opc.equals("Rechazar")) {
                 String iddgp = request.getParameter("IDDETALLE_DGP");
+                String comentario = request.getParameter("comentario");
                 String estado = "2";
                 String nropaso = request.getParameter("NROPASO");
                 String usuario_ip = "";
