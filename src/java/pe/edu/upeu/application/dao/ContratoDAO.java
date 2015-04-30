@@ -563,6 +563,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 v.setFe_has(rs.getString("fe_has"));
                 v.setFe_des(rs.getString("fe_des"));
                 v.setCa_bonificacion_p(rs.getDouble("ca_bonificacion_p"));
+                v.setEs_secre_is(rs.getString("es_secre_is"));
                 list.add(v);
             }
         } catch (SQLException e) {

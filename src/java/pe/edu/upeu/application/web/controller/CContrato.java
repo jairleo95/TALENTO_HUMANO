@@ -322,8 +322,7 @@ public class CContrato extends HttpServlet {
             response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1 + "&idtr=" + ID_TRABAJADOR + "&id_cto=" + ID_CONTRATO + "&id_dg=" + id_dgp);
         }
 
-        if (opc.equals(
-                "Detalle_Contractual")) {
+        if (opc.equals("Detalle_Contractual")) {
 
             String idtr = request.getParameter("idtr");
             /*String ida1 = a.List_Anno_Max_Cont(idtr);
@@ -360,6 +359,30 @@ public class CContrato extends HttpServlet {
             getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
             getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
             response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1 + "&idtr=" + idtr + "&id_cto=" + id_cto + "&id_dg=" + id_dgp);
+
+            //response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1 + "&idtr=" + idtr + "&id_cto=" + id_cto);
+        }
+        if (opc.equals("SI_CONNTRATO")) {
+
+            String idtr = request.getParameter("idtr");
+            String ida1 = a.List_Anno_Max_Cont(idtr);
+            String id_dgp = "";
+            String id_cto = con.Contrato_max(idtr);
+            if (id_cto != null) {
+                String id_pu = puesto.puesto(id_cto);
+                getServletContext().setAttribute("List_x_fun_x_idpu", fu.List_x_fun_x_idpu(id_pu));
+                id_dgp = con.obt_dgp_x_dgp(id_cto);
+                getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_cto));
+                getServletContext().setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_cto));
+            }
+            getServletContext().setAttribute("List_Anno_trabajador", a.List_Anno_trabajador(idtr));
+            getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
+            //getServletContext().setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
+            getServletContext().setAttribute("List_Usuario", usu.List_Usuario());
+            getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
+            getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
+            getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
+            response.sendRedirect("Vista/Contrato/Imprimir_Subir_Contrato.jsp?anno=" + ida1 + "&idtr=" + idtr + "&id_cto=" + id_cto + "&id_dg=" + id_dgp);
 
             //response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1 + "&idtr=" + idtr + "&id_cto=" + id_cto);
         }
