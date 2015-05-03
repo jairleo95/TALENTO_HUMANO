@@ -20,6 +20,15 @@ public class V_Solicitud_Requerimiento {
     private String fe_desde;
 
     private String fe_desde_s;
+    private String us_creacion;
+
+    public String getUs_creacion() {
+        return us_creacion;
+    }
+
+    public void setUs_creacion(String us_creacion) {
+        this.us_creacion = us_creacion;
+    }
 
     public String getFe_desde_s() {
         return fe_desde_s;
@@ -229,7 +238,7 @@ public class V_Solicitud_Requerimiento {
         this.ti_plazo = ti_plazo;
     }
 
-    public V_Solicitud_Requerimiento(String no_dep, String no_area, String no_puesto, String no_trabajador, String ap_materno, String ap_paterno, String fe_desde, String fe_hasta, String fe_creacion, String id_dgp, String id_solicitud_dgp, String id_trabajador, String id_departamento, String no_usuario_sol, String us_modif, String id_plazo, String no_plazo, String det_alerta, String fe_desde_p, String no_usuario_modif, String no_req, String de_solicitud, String es_autorizar, String es_solicitud_dgp, String ti_plazo, String fe_desde_s) {
+    public V_Solicitud_Requerimiento(String no_dep, String no_area, String no_puesto, String no_trabajador, String ap_materno, String ap_paterno, String fe_desde, String fe_hasta, String fe_creacion, String id_dgp, String id_solicitud_dgp, String id_trabajador, String id_departamento, String no_usuario_sol, String us_modif, String id_plazo, String no_plazo, String det_alerta, String fe_desde_p, String no_usuario_modif, String no_req, String de_solicitud, String es_autorizar, String es_solicitud_dgp, String ti_plazo, String fe_desde_s, String us_creacion) {
         this.no_dep = no_dep;
         this.no_area = no_area;
         this.no_puesto = no_puesto;
@@ -256,6 +265,7 @@ public class V_Solicitud_Requerimiento {
         this.es_solicitud_dgp = es_solicitud_dgp;
         this.ti_plazo = ti_plazo;
         this.fe_desde_s = fe_desde_s;
+        this.us_creacion = us_creacion ;
     }
 
     public V_Solicitud_Requerimiento() {
@@ -285,6 +295,7 @@ public class V_Solicitud_Requerimiento {
         this.es_solicitud_dgp = "";
         this.ti_plazo = "";
         this.fe_desde_s = "";
+        this.us_creacion = "";
     }
     private String fe_hasta;
     private String fe_creacion;

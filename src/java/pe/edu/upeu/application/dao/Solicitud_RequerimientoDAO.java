@@ -166,4 +166,57 @@ public class Solicitud_RequerimientoDAO implements InterfaceSolicitud_Requerimie
         return id;
     }
 
+    @Override
+    public List<V_Solicitud_Requerimiento> Listar_solicitud_id_us(String id_us) {
+         List<V_Solicitud_Requerimiento> lista = new ArrayList<>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select *  from RHVD_SOLICITUD_REQUERIMIENTO where  US_CREACION='" + id_us.trim() + "'";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                V_Solicitud_Requerimiento v = new V_Solicitud_Requerimiento();
+
+                v.setNo_dep(rs.getString("no_dep"));
+                v.setNo_area(rs.getString("no_area"));
+                v.setNo_puesto(rs.getString("no_puesto"));
+                v.setNo_trabajador(rs.getString("no_trabajador"));
+                v.setAp_materno(rs.getString("ap_materno"));
+                v.setAp_paterno(rs.getString("ap_paterno"));
+                v.setFe_desde(rs.getString("fe_desde"));
+                v.setFe_hasta(rs.getString("fe_hasta"));
+                v.setFe_creacion(rs.getString("fe_creacion"));
+                v.setId_dgp(rs.getString("id_dgp"));
+                v.setId_solicitud_dgp(rs.getString("id_solicitud_dgp"));
+                v.setId_trabajador(rs.getString("id_trabajador"));
+                v.setId_departamento(rs.getString("id_departamento"));
+                v.setNo_usuario_sol(rs.getString("no_usuario_sol"));
+                v.setUs_modif(rs.getString("us_modif"));
+                v.setId_plazo(rs.getString("id_plazo"));
+                v.setNo_plazo(rs.getString("no_plazo"));
+                v.setDet_alerta(rs.getString("det_alerta"));
+                v.setFe_desde_p(rs.getString("fe_desde_p"));
+                v.setNo_usuario_modif(rs.getString("no_usuario_modif"));
+                v.setNo_req(rs.getString("no_req"));
+                v.setDe_solicitud(rs.getString("de_solicitud"));
+                v.setEs_autorizar(rs.getString("es_autorizar"));
+                v.setEs_solicitud_dgp(rs.getString("es_solicitud_dgp"));
+                v.setTi_plazo(rs.getString("ti_plazo"));
+                v.setFe_desde_s(rs.getString("fe_desde_s"));
+                v.setUs_creacion(rs.getString("us_creacion"));
+                lista.add(v);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return lista;
+    }
+
 }

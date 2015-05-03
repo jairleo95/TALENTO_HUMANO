@@ -5,7 +5,7 @@
     if (id_user != null) {
 %>
 
-<jsp:useBean id="Listar_solicitud" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Solicitud_User" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -112,42 +112,46 @@
                                             <thead>
                                                 <tr>
                                                     <th><strong>Nro</strong></th>
-                                                    <th data-hide="phone,tablet" ><strong>Fecha Creación</strong></th>
-                                                    <th data-class="expand"><strong>Trabajador</strong></th>
-                                                    <th data-class="expand" ><strong>Usuario</strong></th>
-                                                    <th data-hide="phone,tablet"><strong>Fecha Desde</strong></th>
-                                                    <th data-hide="phone,tablet"><strong>Autorización</strong></th>
+                                                    <th>Acciones</th>  
+                                                    <th data-class="expand"><strong>Apellidos y Nombres</strong></th>
+                                                    <th data-hide="phone,tablet" ><strong>Departamento</strong></th>
+                                                    <th data-class="expand" ><strong>Area</strong></th>
+                                                    <th data-hide="phone,tablet"><strong>Puesto</strong></th>
+
+                                                    <th data-hide="phone,tablet"><strong>Fecha Inicio</strong></th>
+                                                    <th data-hide="phone,tablet"><strong>Fecha Cese</strong></th>
+                                                    <th  data-hide="phone,tablet">Fecha Solicitud</th>  
                                                 </tr>
                                             </thead>
-                                            <!--<tbody> 
-                                            <%for (int i = 0; i < Listar_solicitud.size(); i++) {
-                                                    V_Solicitud_Requerimiento s = new V_Solicitud_Requerimiento();
-                                                    s = (V_Solicitud_Requerimiento) Listar_solicitud.get(i);
-                                            %>
-                                            <tr>
-                                                <td><%=(i + 1)%></td>
-                                                <td>
-                                                    <div class="btn-group">
-                                                        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                                            Accion <span class="caret"></span>
-                                                        </button>
-                                                        <ul class="dropdown-menu">
-                                                            <li><a href="../../dgp?iddgp=<%=s.getId_dgp().trim()%>&idtr=<%=s.getId_trabajador().trim()%>&opc=Detalle"> Ver Requerimiento</a></li>
-                                                            <li class="divider"></li>
-                                                            <li><a href=""> Ver Solicitud</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </td>
-                                                <td><a href="../../trabajador?idtr=<%=s.getId_trabajador()%>&opc=list"><strong><%=s.getAp_paterno() + " " + s.getAp_materno() + " " + s.getNo_trabajador()%></strong></a></td>
-                                                <td><%=s.getNo_dep()%></td>
-                                                <td><%=s.getNo_area()%></td>
-                                                <td><%=s.getNo_puesto()%></td>
-                                                <td><%=s.getFe_desde()%></td>
-                                                <td><%=s.getFe_hasta()%></td>
-                                                <td><%=s.getFe_creacion()%></td>
-                                            </tr>
-                                            <%}%>
-                                        </tbody>-->
+                                            <tbody> 
+                                                <%for (int i = 0; i < List_Solicitud_User.size(); i++) {
+                                                        V_Solicitud_Requerimiento s = new V_Solicitud_Requerimiento();
+                                                        s = (V_Solicitud_Requerimiento) List_Solicitud_User.get(i);
+                                                %>
+                                                <tr>
+                                                    <td><%=(i + 1)%></td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                                Accion <span class="caret"></span>
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                                <li><a href="../../dgp?iddgp=<%=s.getId_dgp().trim()%>&idtr=<%=s.getId_trabajador().trim()%>&opc=Detalle"> Ver Requerimiento</a></li>
+                                                                <li class="divider"></li>
+                                                                <li><a href="../../solicitud_requerimiento?opc=Ver_Detalle_Solicitud&id=<%=s.getId_solicitud_dgp()%>"> Ver Solicitud</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </td>
+                                                    <td><a href="../../trabajador?idtr=<%=s.getId_trabajador()%>&opc=list"><strong><%=s.getAp_paterno() + " " + s.getAp_materno() + " " + s.getNo_trabajador()%></strong></a></td>
+                                                    <td><%=s.getNo_dep()%></td>
+                                                    <td><%=s.getNo_area()%></td>
+                                                    <td><%=s.getNo_puesto()%></td>
+                                                    <td><%=s.getFe_desde()%></td>
+                                                    <td><%=s.getFe_hasta()%></td>
+                                                    <td><%=s.getFe_creacion()%></td>
+                                                </tr>
+                                                <%}%>
+                                            </tbody>
                                         </table>
                                     </div>
                                     <!-- end widget content -->
@@ -192,20 +196,12 @@
                                         <form id="checkout-form" class="smart-form solicitud_plazo">
                                             <div class="row">
                                                 <section class="col col-4">
-                                                    <label class="label lb_fecha_solicitud">Fecha de Inicio :</label>
-                                                    <label class="input"> 
-                                                        <input type="date" name="desde"  class="fe_inicio" required="">
-                                                        <input type="hidden" name="tipo_fecha"  class="tipo_fecha" value="date" required="">
-                                                        <input type="hidden" name="iddgp"  value="<%//=iddgp%>" class="dgp" required="">
-                                                    </label>
-                                                </section>
-                                                <section class="col col-4">
                                                     <label class="label">Tipo de Plazo :</label>
                                                     <label class="select"> 
                                                         <select name="tipo" class="tipo" required="">
                                                             <option value=''>[SELECCIONE]</option>
-                                                            <option value='1'>Ingreso a planilla</option>
-                                                            <option value='2'>Inicio de Contrato</option>
+                                                            <option value='1'>Inicio de Contrato</option>
+                                                            <option value='2'>Ingreso a planilla</option>
                                                         </select>          
                                                     </label>
                                                 </section>
@@ -215,6 +211,14 @@
                                                         <select name="plazo" class="plazo" required="">
                                                             <option value='' selected >[SELECCIONE]</option>
                                                         </select>          
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label lb_fecha_solicitud">Fecha de Inicio :</label>
+                                                    <label class="input"> 
+                                                        <input type="date" name="desde"  class="fe_inicio" required="">
+                                                        <input type="hidden" name="tipo_fecha"  class="tipo_fecha" value="date" required="">
+                                                        <input type="hidden" name="iddgp"  value="<%=request.getParameter("iddgp")%>" class="dgp" required="">
                                                     </label>
                                                 </section>
                                             </div>
@@ -310,9 +314,9 @@
     <script src="../../js/plugin/fastclick/fastclick.min.js"></script>
 
     <!--[if IE 8]>
-    
+
     <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
-    
+
     <![endif]-->
 
     <!-- Demo purpose only -->
@@ -326,238 +330,298 @@
     <script src="../../js/speech/voicecommand.min.js"></script>
 
     <!-- PAGE RELATED PLUGIN(S) -->
-    <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
-    <script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
-    <script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>
-    <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
-    <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
-    <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
-    <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
+    <script src="../../js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
 
 
     <script type="text/javascript">
 
-        // DO NOT REMOVE : GLOBAL FUNCTIONS!
+            // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-        $(document).ready(function() {
+            $(document).ready(function() {
 
-            pageSetUp();
-            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
-                $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
-            });
+                pageSetUp();
+                $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
+                    $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+                });
+                $(".tipo").change(function() {
+                    if ($(this).val() == '2') {
+                        $(".fe_inicio").attr("type", "month");
+                        $(".lb_fecha_solicitud").text("Mes :");
+                        $(".tipo_fecha").val("month");
+                    }
+                    if ($(this).val() == '1') {
+                        $(".fe_inicio").attr("type", "date");
+                        $(".lb_fecha_solicitud").text("Fecha de Inicio :");
+                        $(".tipo_fecha").val("date");
+                    }
 
-            $(".tipo").change(function() {
-                if ($(this).val() == '2') {
-                    $(".fe_inicio").attr("type", "month");
-                    $(".lb_fecha_solicitud").text("Mes :");
-                    $(".tipo_fecha").val("month");
-                }
-                if ($(this).val() == '1') {
-                    $(".fe_inicio").attr("type", "date");
-                    $(".lb_fecha_solicitud").text("Fecha de Inicio :");
-                    $(".tipo_fecha").val("date");
-                }
-                list_select($(".plazo"), "../../plazo_dgp?opc=List_id_plazo", $(".solicitud_plazo").serialize(), "1", $(".tipo").val());
-            });
-            $(".sbm_solicitud").click(function(e) {
-                if ($(".solicitud_plazo").valid() == true) {
+                    //alert();
+                    list_select($(".plazo"), "../../plazo_dgp?opc=List_id_plazo", $(".solicitud_plazo").serialize(), "1", $(".tipo").val());
+                });
+                $(".sbm_solicitud").click(function(e) {
+                    if ($(".solicitud_plazo").valid() == true) {
 
-                    $.SmartMessageBox({
-                        title: "¡Advertencia!",
-                        content: "¿Esta seguro de enviar la solicitud?",
-                        buttons: '[No][Si]'
-                    }, function(ButtonPressed) {
-                        if (ButtonPressed === "Si") {
+                        $.SmartMessageBox({
+                            title: "¡Advertencia!",
+                            content: "¿Esta seguro de enviar la solicitud?",
+                            buttons: '[No][Si]'
+                        }, function(ButtonPressed) {
+                            if (ButtonPressed === "Si") {
 
-                            $.ajax({
-                                url: "../../solicitud_requerimiento",
-                                type: "post",
-                                data: $(".solicitud_plazo").serialize() + "&opc=Registrar_solicitud"
-                            }).done(function() {
-                                $('.solicitud_plazo')[0].reset();
-                                $.smallBox({
-                                    title: "¡Exito!",
-                                    content: "<i class='fa fa-clock-o'></i> <i>La solicitud ha sido enviada exitosamente...</i>",
-                                    color: "#659265",
-                                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                    timeout: 4000
+                                $.ajax({
+                                    url: "../../solicitud_requerimiento",
+                                    type: "post",
+                                    data: $(".solicitud_plazo").serialize() + "&opc=Registrar_solicitud"
+                                }).done(function() {
+                                    $('.solicitud_plazo')[0].reset();
+                                    var $p = $(this).parent().parent();
+                                    $p.removeClass('has-success');
+                                    $("section > label").removeClass('state-success');
+                                    /*vuelve a cargar el selector para evitar enviar solicitudes del mismo plazo*/
+                                    list_select($(".plazo"), "../../plazo_dgp?opc=List_id_plazo", $(".solicitud_plazo").serialize(), "1", $(".tipo").val());
+                                    $.smallBox({
+                                        title: "¡Exito!",
+                                        content: "<i class='fa fa-clock-o'></i> <i>La solicitud ha sido enviada exitosamente...</i>",
+                                        color: "#659265",
+                                        iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                        timeout: 4000
+                                    });
+                                }).error(function() {
+                                    $.smallBox({
+                                        title: "¡Error!",
+                                        content: "<i class='fa fa-clock-o'></i> <i>La solicitud no ha podido ser enviada...</i>",
+                                        color: "#C46A69",
+                                        iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                        timeout: 4000
+                                    });
                                 });
-                            }).error(function() {
-                                $.smallBox({
-                                    title: "¡Error!",
-                                    content: "<i class='fa fa-clock-o'></i> <i>La solicitud no ha podido ser enviada...</i>",
-                                    color: "#C46A69",
-                                    iconSmall: "fa fa-times fa-2x fadeInRight animated",
-                                    timeout: 4000
-                                });
+                            }
+                            if (ButtonPressed === "No") {
+                            }
 
-                            });
+                        });
 
-                        }
-                        if (ButtonPressed === "No") {
-                        }
+                    }
 
+                });
+
+
+
+                /*
+                 * Autostart Carousel
+                 */
+                $('.carousel.slide').carousel({
+                    interval: 3000,
+                    cycle: true
+                });
+                $('.carousel.fade').carousel({
+                    interval: 3000,
+                    cycle: true
+                });
+
+                // Fill all progress bars with animation
+
+                $('.progress-bar').progressbar({
+                    display_text: 'fill'
+                });
+
+
+                /*
+                 * Smart Notifications
+                 */
+                $('#eg1').click(function(e) {
+
+                    $.bigBox({
+                        title: "Big Information box",
+                        content: "This message will dissapear in 6 seconds!",
+                        color: "#C46A69",
+                        //timeout: 6000,
+                        icon: "fa fa-warning shake animated",
+                        number: "1",
+                        timeout: 6000
                     });
 
+                    e.preventDefault();
+
+                })
+
+                $('#eg2').click(function(e) {
+
+                    $.bigBox({
+                        title: "Big Information box",
+                        content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                        color: "#3276B1",
+                        //timeout: 8000,
+                        icon: "fa fa-bell swing animated",
+                        number: "2"
+                    });
+
+                    e.preventDefault();
+                })
+
+                $('#eg3').click(function(e) {
+
+                    $.bigBox({
+                        title: "Shield is up and running!",
+                        content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                        color: "#C79121",
+                        //timeout: 8000,
+                        icon: "fa fa-shield fadeInLeft animated",
+                        number: "3"
+                    });
+
+                    e.preventDefault();
+
+                })
+
+                $('#eg4').click(function(e) {
+
+                    $.bigBox({
+                        title: "Success Message Example",
+                        content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                        color: "#739E73",
+                        //timeout: 8000,
+                        icon: "fa fa-check",
+                        number: "4"
+                    }, function() {
+                        closedthis();
+                    });
+
+                    e.preventDefault();
+
+                })
+
+
+
+                $('#eg5').click(function() {
+
+                    $.smallBox({
+                        title: "Ding Dong!",
+                        content: "Someone's at the door...shall one get it sir? <p class='text-align-right'><a href='javascript:void(0);' class='btn btn-primary btn-sm'>Yes</a> <a href='javascript:void(0);' class='btn btn-danger btn-sm'>No</a></p>",
+                        color: "#296191",
+                        //timeout: 8000,
+                        icon: "fa fa-bell swing animated"
+                    });
+
+                });
+
+
+
+                $('#eg6').click(function() {
+
+                    $.smallBox({
+                        title: "Big Information box",
+                        content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                        color: "#5384AF",
+                        //timeout: 8000,
+                        icon: "fa fa-bell"
+                    });
+
+                })
+
+                $('#eg7').click(function() {
+
+                    $.smallBox({
+                        title: "James Simmons liked your comment",
+                        content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
+                        color: "#296191",
+                        iconSmall: "fa fa-thumbs-up bounce animated",
+                        timeout: 4000
+                    });
+
+                })
+
+                function closedthis() {
+                    $.smallBox({
+                        title: "Great! You just closed that last alert!",
+                        content: "This message will be gone in 5 seconds!",
+                        color: "#739E73",
+                        iconSmall: "fa fa-cloud",
+                        timeout: 5000
+                    });
                 }
 
-            });
-            $(".cod_aps").numeric();
+                /*
+                 * SmartAlerts
+                 */
+                // With Callback
 
-            /* // DOM Position key index //
-             
-             l - Length changing (dropdown)
-             f - Filtering input (search)
-             t - The Table! (datatable)
-             i - Information (records)
-             p - Pagination (paging)
-             r - pRocessing 
-             < and > - div elements
-             <"#id" and > - div with an id
-             <"class" and > - div with a class
-             <"#id.class" and > - div with an id and class
-             
-             Also see: http://legacy.datatables.net/usage/features
-             */
+                // With Input
+                $("#smart-mod-eg2").click(function(e) {
 
-            /* BASIC ;*/
-            var responsiveHelper_dt_basic = undefined;
-            var responsiveHelper_datatable_fixed_column = undefined;
-            var responsiveHelper_datatable_col_reorder = undefined;
-            var responsiveHelper_datatable_tabletools = undefined;
+                    $.SmartMessageBox({
+                        title: "Smart Alert: Input",
+                        content: "Please enter your user name",
+                        buttons: "[Accept]",
+                        input: "text",
+                        placeholder: "Enter your user name"
+                    }, function(ButtonPress, Value) {
+                        alert(ButtonPress + " " + Value);
+                    });
 
-            var breakpointDefinition = {
-                tablet: 1024,
-                phone: 480
-            };
+                    e.preventDefault();
+                })
+                // With Buttons
+                $("#smart-mod-eg3").click(function(e) {
 
-            $('#dt_basic').dataTable({
-                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
-                        "t" +
-                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                "autoWidth": true,
-                "preDrawCallback": function() {
-                    // Initialize the responsive datatables helper once.
-                    if (!responsiveHelper_dt_basic) {
-                        responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
-                    }
-                },
-                "rowCallback": function(nRow) {
-                    responsiveHelper_dt_basic.createExpandIcon(nRow);
-                },
-                "drawCallback": function(oSettings) {
-                    responsiveHelper_dt_basic.respond();
-                }
-            });
+                    $.SmartMessageBox({
+                        title: "Smart Notification: Buttons",
+                        content: "Lots of buttons to go...",
+                        buttons: '[Need?][You][Do][Buttons][Many][How]'
+                    });
 
-            /* END BASIC */
+                    e.preventDefault();
+                })
+                // With Select
+                $("#smart-mod-eg4").click(function(e) {
 
-            /* COLUMN FILTER  */
-            var otable = $('#datatable_fixed_column').DataTable({
-                //"bFilter": false,
-                //"bInfo": false,
-                //"bLengthChange": false
-                //"bAutoWidth": false,
-                //"bPaginate": false,
-                //"bStateSave": true // saves sort state using localStorage
-                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>" +
-                        "t" +
-                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                "autoWidth": true,
-                "preDrawCallback": function() {
-                    // Initialize the responsive datatables helper once.
-                    if (!responsiveHelper_datatable_fixed_column) {
-                        responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
-                    }
-                },
-                "rowCallback": function(nRow) {
-                    responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
-                },
-                "drawCallback": function(oSettings) {
-                    responsiveHelper_datatable_fixed_column.respond();
-                }
+                    $.SmartMessageBox({
+                        title: "Smart Alert: Select",
+                        content: "You can even create a group of options.",
+                        buttons: "[Done]",
+                        input: "select",
+                        options: "[Costa Rica][United States][Autralia][Spain]"
+                    }, function(ButtonPress, Value) {
+                        alert(ButtonPress + " " + Value);
+                    });
 
-            });
+                    e.preventDefault();
+                });
 
-            // custom toolbar
-            $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
+                // With Login
+                $("#smart-mod-eg5").click(function(e) {
 
-            // Apply the filter
-            $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function() {
-
-                otable
-                        .column($(this).parent().index() + ':visible')
-                        .search(this.value)
-                        .draw();
-
-            });
-            /* END COLUMN FILTER */
-
-            /* COLUMN SHOW - HIDE */
-            $('#datatable_col_reorder').dataTable({
-                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'C>r>" +
-                        "t" +
-                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                "autoWidth": true,
-                "preDrawCallback": function() {
-                    // Initialize the responsive datatables helper once.
-                    if (!responsiveHelper_datatable_col_reorder) {
-                        responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
-                    }
-                },
-                "rowCallback": function(nRow) {
-                    responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
-                },
-                "drawCallback": function(oSettings) {
-                    responsiveHelper_datatable_col_reorder.respond();
-                }
-            });
-
-            /* END COLUMN SHOW - HIDE */
-
-            /* TABLETOOLS */
-            $('#datatable_tabletools').dataTable({
-                // Tabletools options: 
-                //   https://datatables.net/extensions/tabletools/button_options
-                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>" +
-                        "t" +
-                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                "oTableTools": {
-                    "aButtons": [
-                        "copy",
-                        "csv",
-                        "xls",
-                        {
-                            "sExtends": "pdf",
-                            "sTitle": "SmartAdmin_PDF",
-                            "sPdfMessage": "SmartAdmin PDF Export",
-                            "sPdfSize": "letter"
-                        },
-                        {
-                            "sExtends": "print",
-                            "sMessage": "Generated by SmartAdmin <i>(press Esc to close)</i>"
+                    $.SmartMessageBox({
+                        title: "Login form",
+                        content: "Please enter your user name",
+                        buttons: "[Cancel][Accept]",
+                        input: "text",
+                        placeholder: "Enter your user name"
+                    }, function(ButtonPress, Value) {
+                        if (ButtonPress == "Cancel") {
+                            alert("Why did you cancel that? :(");
+                            return 0;
                         }
-                    ],
-                    "sSwfPath": "js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
-                },
-                "autoWidth": true,
-                "preDrawCallback": function() {
-                    // Initialize the responsive datatables helper once.
-                    if (!responsiveHelper_datatable_tabletools) {
-                        responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
-                    }
-                },
-                "rowCallback": function(nRow) {
-                    responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
-                },
-                "drawCallback": function(oSettings) {
-                    responsiveHelper_datatable_tabletools.respond();
-                }
-            });
 
-            /* END TABLETOOLS */
+                        Value1 = Value.toUpperCase();
+                        ValueOriginal = Value;
+                        $.SmartMessageBox({
+                            title: "Hey! <strong>" + Value1 + ",</strong>",
+                            content: "And now please provide your password:",
+                            buttons: "[Login]",
+                            input: "password",
+                            placeholder: "Password"
+                        }, function(ButtonPress, Value) {
+                            alert("Username: " + ValueOriginal + " and your password is: " + Value);
+                        });
+                    });
 
-        })
+                    e.preventDefault();
+                });
+
+
+            })
 
     </script>
 
