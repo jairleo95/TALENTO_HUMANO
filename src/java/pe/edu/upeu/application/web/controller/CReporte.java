@@ -55,6 +55,7 @@ public class CReporte extends HttpServlet {
     InterfaceAreaDAO a = new AreaDAO();
     InterfaceSeccionDAO s = new SeccionDAO();
     InterfacePuestoDAO p = new PuestoDAO();
+    InterfaceReporteDAO RP= new ReporteDAO();
     InterfaceNacionalidadDAO n = new NacionalidadDAO();
     InterfaceSituacionEducativaDAO se = new SituacionEducativaDAO();
     InterfaceCarrera_UniversidadDAO ca = new Carrera_UniversidadDAO();
@@ -84,6 +85,14 @@ public class CReporte extends HttpServlet {
                 String hasta = request.getParameter("hasta");
                 String edad = request.getParameter("edad");
                 List<Map<String, ?>> lista = dah.Listar_hijo_filtro(desde, hasta, edad);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
+            if (opc.equals("reporte_padre_hijo")) {
+                String desde = request.getParameter("desde");
+                String hasta = request.getParameter("hasta");
+                String edad = request.getParameter("edad");
+                List<Map<String, ?>> lista = RP.listar_padre_hi(desde, hasta, edad);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
