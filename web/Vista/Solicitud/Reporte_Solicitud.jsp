@@ -164,6 +164,11 @@
                                                                 <li><a href="../../dgp?iddgp=<%=s.getId_dgp().trim()%>&idtr=<%=s.getId_trabajador().trim()%>&opc=Detalle"> Ver Requerimiento</a></li>
                                                                 <li class="divider"></li>
                                                                 <li><a href="../../solicitud_requerimiento?opc=Ver_Detalle_Solicitud&id=<%=s.getId_solicitud_dgp()%>"> Ver Solicitud</a></li>
+                                                                <li>
+                                                                    <button class="btn btn-primary btn-labeled btn_sol" data-toggle="modal" type="button" data-target="#myModal" value="<%=s.getId_solicitud_dgp()%>"><span class="btn-label"><i class="fa fa-envelope"></i></span>
+                                                                        Ver Solicitud
+                                                                    </button>
+                                                                </li>
                                                             </ul>
                                                         </div>
                                                     </td>
@@ -190,9 +195,40 @@
                     <!-- end row -->
                 </section>
                 <!-- end widget grid -->
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel"><span class="btn-label"><i class="fa fa-envelope"></i></span> <strong>Solicitud de Requerimiento</strong></h4>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table table-hover table-striped  table-responsive tabla_detalle_sol" ></table>
+                                <input  type="hidden" value="" class="data_procesar" />
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default btn-labeled" data-dismiss="modal"><span class="btn-label"><i class="fa fa-times"></i></span>
+                                    Cancel
+                                </button>
+                                <button class="btn btn-primary btn-labeled btn_procesar_sol"  type="button" ><span class="btn-label"><i class="fa fa-check"></i></span>
+                                    Procesar
+                                </button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+
             </div>
         </div>
     </body>
+
+
+
     <!--================================================== -->
 
     <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
@@ -283,15 +319,45 @@
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
         $(document).ready(function () {
-
             pageSetUp();
             $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                 $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
             });
             $(".cod_aps").numeric();
+            $(".btn_procesar_sol").click(function () {
+                $.post("../../solicitud_requerimiento", "opc=Procesar_Solicitud" + $(".data_procesar").val());
+            });
+            $(".btn_sol").click(function () {
 
+                var tb = $(".tabla_detalle_sol");
+                tb.empty();
+                var texto_html = '';
+                $.post("../../solicitud_requerimiento", "opc=Ver_Solicitud&id=" + $(this).val(), function (objJson) {
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    var lista = objJson.lista;
+                    for (var i = 0; i < lista.length; i++) {
+                        texto_html += '<tr><td colspan="2" class="text-info table-bordered"><i class="fa fa-file"></i> REQUERIMIENTO : ' + lista[i].req + '</td></tr>';
+                        texto_html += '<tr><td>Apellidos y Nombres</td><td>' + lista[i].ap_p + ' ' + lista[i].ap_m + ' ' + lista[i].nombre + '</td></tr>';
+                        texto_html += '<tr><td>Tipo de Plazo</td><td>' + lista[i].ti_plazo + '</td></tr>';
+                        texto_html += '<tr><td>Nombre de Plazo</td><td>' + lista[i].plazo + '</td></tr>';
+                        texto_html += '<tr><td>Detalle de Plazo</td><td>' + lista[i].detalle_plazo + '</td></tr>';
+                        if (lista[i].ti_plazo == '1') {
+                            texto_html += ' <tr><td>Fecha de inicio de contrato solicitado : </td><td>' + lista[i].fecha_plazo + '</td></tr>';
+                        }
+                        else {
+                            texto_html += ' <tr><td>Mes de ingreso solicitado : </td><td>' + lista[i].mes + '</td></tr>';
+                        }
+                        texto_html += '<tr><td>Motivo de solicitud</td><td>' + lista[i].solicitud + '</td></tr>';
+                        $(".data_procesar").val("&id=" + lista[i].id + "&tipo=" + lista[i].ti_plazo + "&fecha=" + lista[i].fecha_plazo);
+                    }
+                    tb.append(texto_html);
+                    texto_html = "";
+                });
+            });
             /* // DOM Position key index //
-             
              l - Length changing (dropdown)
              f - Filtering input (search)
              t - The Table! (datatable)
@@ -446,7 +512,6 @@
         })
 
     </script>
-
     <!-- Your GOOGLE ANALYTICS CODE Below -->
     <script type="text/javascript">
         var _gaq = _gaq || [];
@@ -462,7 +527,6 @@
             s.parentNode.insertBefore(ga, s);
         })();
     </script>
-
 </html>
 <%} else {
         response.sendRedirect("/TALENTO_HUMANO/");
