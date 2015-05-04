@@ -193,10 +193,10 @@
                         <%}%>
                         <%if (idrol.trim().equals("ROL-0006") || idrol.trim().equals("ROL-0002") || idrol.trim().equals("ROL-0001")) {
                         %> 
-                        
-                        <%if (Integer.parseInt(n.getEs_secre_is()) == 2 && idrol.trim().equals("ROL-0002")) {
-                        %>
-                        <%} else {%>
+
+                <%if (Integer.parseInt(n.getEs_secre_is()) == 2 && idrol.trim().equals("ROL-0002")) {
+                %>
+                <%} else {%>
                 <a class="btn btn-labeled btn-primary" href="../../contrato?opc=Subir_Contrato2&idc=<%=n.getId_contrato()%>" > <span class="btn-label"><i class="fa fa-cloud-upload"></i></span>Subir Contrato Firmado</a>
                         <%}%>
                         <%}
@@ -538,30 +538,76 @@
 
     <%}%>
 </body>
+<!-- IMPORTANT: APP CONFIG -->
+<script src="../../js/app.config.js"></script>
+
+<!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
+<script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
+
+<!-- BOOTSTRAP JS -->
+<script src="../../js/bootstrap/bootstrap.min.js"></script>
+
+<!-- CUSTOM NOTIFICATION -->
+<script src="../../js/notification/SmartNotification.min.js"></script>
 <script>
-    $(document).ready(function () {
 
 
-        $(".ck_habilitar_is").click(function () {
-            if ($(".ck_habilitar_is").prop('checked')) {
-                $.ajax({
-                    url: "../../contrato",
-                    data: "opc=Habilitar_is&id=" + $(".id_contrato").val() + "&estado=1"
-                }).done(function () {
-                    alert()
+                $(document).ready(function () {
+                    //pageSetup();
+                    $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+                        $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+                    });
+                    $(".ck_habilitar_is").click(function () {
+                        if ($(".ck_habilitar_is").prop('checked')) {
+                            $.ajax({
+                                url: "../../contrato",
+                                data: "opc=Habilitar_is&id=" + $(".id_contrato").val() + "&estado=1"
+                            }).done(function () {
+                                $.smallBox({
+                                    title: "¡Alerta!",
+                                    content: "Se ha autortizado que la secretaria pueda subir e imprimir el contrato.",
+                                    color: "#296191",
+                                    iconSmall: "fa fa-cloud",
+                                    timeout: 4000
+                                });
+
+                            }).fail(function (jqXHR, textStatus, errorThrown) {
+                                $.smallBox({
+                                    title: "¡Error!",
+                                    // content: "<i class='fa fa-clock-o'></i> <i>" +jqXHR.responseText+" - "+ textStatus + " - "+errorThrown+" : Se ha producido un error que causo que no se realice la accion...</i>",
+                                    content: "<i class='fa fa-clock-o'></i> <i>  " + textStatus + " - " + errorThrown + " : Se ha producido un error que causo que no se realice la accion...</i>",
+                                    color: "#C46A69",
+                                    iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                    timeout: 6000
+                                });
+                            });
+                        } else {
+                            $.ajax({
+                                url: "../../contrato",
+                                data: "opc=Habilitar_is&id=" + $(".id_contrato").val() + "&estado=2"
+                            }).done(function () {
+                                $.smallBox({
+                                    title: "¡Alerta!",
+                                    content: "Se ha autortizado que la secretaria <strong>NO</strong> pueda subir e imprimir el contrato.",
+                                    color: "#C79121",
+                                    iconSmall: "fa fa-cloud",
+                                    timeout: 4000
+                                });
+                            }).fail(function (jqXHR, textStatus, errorThrown) {
+                                $.smallBox({
+                                    title: "¡Error!",
+                                    // content: "<i class='fa fa-clock-o'></i> <i>" +jqXHR.responseText+" - "+ textStatus + " - "+errorThrown+" : Se ha producido un error que causo que no se realice la accion...</i>",
+                                    content: "<i class='fa fa-clock-o'></i> <i>  " + textStatus + " - " + errorThrown + " : Se ha producido un error que causo que no se realice la accion...</i>",
+                                    color: "#C46A69",
+                                    iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                    timeout: 6000
+                                });
+                            });
+                        }
+                    });
+
+
                 });
-            } else {
-                $.ajax({
-                    url: "../../contrato",
-                    data: "opc=Habilitar_is&id=" + $(".id_contrato").val() + "&estado=2"
-                }).done(function () {
-                    alert()
-                });
-            }
-        });
-
-
-    });
 </script>
 <%} else {
         response.sendRedirect("/TALENTO_HUMANO/");
