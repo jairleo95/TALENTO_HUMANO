@@ -83,15 +83,20 @@
 
             <section class="col col-sm-4 col-md-4">
                 <div class="caja">
-                    <table class="table">
+                    <table class="table table-condensed table-bordered">
 
-                        <tr class="c_header"><td colspan="2"  style="text-align: center;"><% out.println(l.List_H()[i][1]);%></td></tr>   
+                        <tr class="c_header"><td colspan="3"  style="text-align: center;"><% out.println(l.List_H()[i][1]);%></td></tr>   
 
                         <%}%>
 
                         <tr>
+                            <%if (h.getHo_desde().equals("00:00") && h.getHo_hasta().equals("00:00")) {%>
+
+                            <%} else {%>
+                            <td class="text-center">Turno <%=g + 1%></td>
                             <td class="text-center"><%out.println(h.getHo_desde()); %> </td>
                             <td class="text-center"><%out.println(h.getHo_hasta());%></td>
+                            <%}%>
                         </tr>
 
                         <% g++; %>
