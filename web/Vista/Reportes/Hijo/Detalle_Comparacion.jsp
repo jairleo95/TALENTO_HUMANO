@@ -142,12 +142,8 @@
         <script src="../../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
 
         <script type="text/javascript">
-            $(document).ready(function () {
-
-                list_select($(".hijo"), "../../../RHistorial", "opc=Listar_hijo_trabajador&idtr=" + $(".idtr").val(), "1", $(".idh").val());
-                list_select($(".fecha1"), "../../../RHistorial", "opc=Fe_Modif_Hijo&hijo=" + $(".idh").val(), "1", $(".fecha_default").val());
-
-                $.post("../../../RHistorial", "opc=Fe_Modif_Hijo2&hijo=" + $(".idh").val() + "&fecha=" + $(".fecha_default").val(), function (objJson) {
+            function listar_fec_sin_repetir(fecha_default) {
+                $.post("../../../RHistorial", "opc=Fe_Modif_Hijo2&hijo=" + $(".idh").val() + "&fecha=" + fecha_default, function (objJson) {
                     var select2 = $(".fecha2");
                     var lista = objJson.lista;
                     select2.append("<option value=''>Cargando...</option>");
@@ -159,15 +155,17 @@
                         }
                     }
                 });
-
+            }
+            $(document).ready(function () {
+                list_select($(".hijo"), "../../../RHistorial", "opc=Listar_hijo_trabajador&idtr=" + $(".idtr").val(), "1", $(".idh").val());
+                list_select($(".fecha1"), "../../../RHistorial", "opc=Fe_Modif_Hijo&hijo=" + $(".idh").val(), "1", $(".fecha_default").val());
+                listar_fec_sin_repetir($(".fecha_default").val());
                 $(".fecha2").change(function () {
                     var tbody = $(".tbodys");
                     tbody.empty();
                     var texto_html = "";
                     $.post("../../../RHistorial", "opc=Comparar_dato_Hijo&id=" + $(".idh").val() + "&fecha1=" + $(".fecha1").val() + "&fecha2=" + $(".fecha2").val(), function (objJson) {
                         var lista = objJson.lista;
-
-
                         if (lista[0].ap_p != lista[1].ap_p) {
                             texto_html += "<tr class='danger'>";
                         } else {
@@ -175,7 +173,6 @@
                         }
                         texto_html += "<td>1</td><td>Apellido Paterno:</td><td>" + lista[0].ap_p + "</td>";
                         texto_html += "<td>" + lista[1].ap_p + "</td></tr>";
-
 
                         if (lista[0].ap_m != lista[1].ap_m) {
                             texto_html += "<tr class='danger'>";
@@ -337,7 +334,10 @@
                     texto_html = "";
                 });
 
-
+                $(".fecha1").change(function () {
+                    
+                    listar_fec_sin_repetir($(this).val());
+                });
 
 
 

@@ -5,8 +5,12 @@
  */
 package pe.edu.upeu.application.web.controller;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,12 +36,14 @@ public class CSolicitud_Requerimiento extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
         String opc = request.getParameter("opc");
         InterfaceSolicitud_RequerimientoDAO s = new Solicitud_RequerimientoDAO();
         HttpSession sesion = request.getSession(true);
         String iduser = (String) sesion.getAttribute("IDUSER");
+        Map<String, Object> rpta = new HashMap<String, Object>();
         if (opc.equals("Listar_Solicitud")) {
             getServletContext().setAttribute("Listar_solicitud", s.Listar_solicitud());
             response.sendRedirect("Vista/Solicitud/Reporte_Solicitud.jsp");
@@ -57,22 +63,37 @@ public class CSolicitud_Requerimiento extends HttpServlet {
             String tipo = request.getParameter("tipo_fecha");
             if (tipo.equals("month")) {
                 FE_DESDE = FE_DESDE + "-01";
-            } 
+            }
             getServletContext().setAttribute("List_Solicitud_User", s.Listar_solicitud_id_us(iduser));
             s.INSERT_SOLICITUD_DGP(null, FE_DESDE, ID_DGP, ID_PLAZO, DE_SOLICITUD, ES_AUTORIZAR, ES_SOLICITUD_DGP, IP_USUARIO, iduser, FE_CREACION, US_MODIF, FE_MODIF, NO_USUARIO);
         }
         if (opc.equals("Reg_List_Solicitud")) {
             String iddgp = request.getParameter("iddgp");
-           getServletContext().setAttribute("List_Solicitud_User", s.Listar_solicitud_id_us(iduser));
-            response.sendRedirect("Vista/Solicitud/Reg_List_Solicitud.jsp?iddgp="+iddgp+"");
-            //out.print(iddgp);
+            getServletContext().setAttribute("List_Solicitud_User", s.Listar_solicitud_id_us(iduser));
+            response.sendRedirect("Vista/Solicitud/Reg_List_Solicitud.jsp?iddgp=" + iddgp + "");
         }
         if (opc.equals("Ver_Detalle_Solicitud")) {
             String id = request.getParameter("id");
             getServletContext().setAttribute("Detalle_Solicitud", s.Listar_solicitud_id(id));
             response.sendRedirect("Vista/Solicitud/Detalle_Solicitud.jsp");
-            //out.print(iddgp);
         }
+        if (opc.equals("Ver_Solicitud")) {
+            String id = request.getParameter("id");
+            List<Map<String, ?>> list = s.List_solicitud_id(id);
+            rpta.put("rpta", "1");
+            rpta.put("lista", list);
+        }
+        if (opc.equals("Procesar_Solicitud")) {
+            String id = request.getParameter("id");
+            String tipo = request.getParameter("tipo");
+            String fecha = request.getParameter("fecha");
+            s.procesar_solicitud(tipo, id, fecha, iduser);
+            rpta.put("rpta", "1");
+        }
+        Gson gson = new Gson();
+        out.println(gson.toJson(rpta));
+        out.flush();
+        out.close();
 
     }
 
