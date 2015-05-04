@@ -508,7 +508,6 @@
                                             %>
                                             <td><input type="text" name="cod_huella" maxlength="6" class="cod_huella<%=(f + 1)%>" style="width:50px"/></td>
                                             <input type="hidden" name="idtr"  class="idtr<%=(f + 1)%>" value="<%=a.getId_trabajador()%>" />
-
                                             <%} else {%>
                                             <td><strong><%=a.getCo_huella_digital()%></strong></td>
                                             <%}
@@ -521,23 +520,15 @@
                                         </table>
                                         <input class="num_aps" type="hidden" value="<%=num_cod_aps%>" />
                                         <input class="num_huella" type="hidden" value="<%=num_cod_huella%>" 
-
                                     </div>
                                     <!-- end widget content -->
-
                                 </div>
                                 <!-- end widget div -->
-
                             </div>
                             <!-- end widget -->
-
-
-
                         </article>
                         <!-- WIDGET END -->
-
                     </div>
-
                     <!-- end row -->
 
                     <div class="row">

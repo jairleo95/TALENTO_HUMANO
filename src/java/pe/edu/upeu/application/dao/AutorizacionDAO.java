@@ -261,7 +261,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 v.setEs_mfl(rs.getString("ES_MFL"));
                 v.setDi_correo_personal(rs.getString("DI_CORREO_PERSONAL"));
                 v.setDi_correo_inst(rs.getString("DI_CORREO_INST"));
-                //v.setVal_contrato_adjunto(rs.getInt("val_contrato_adjunto"));
+                v.setVal_contrato_adjunto(rs.getInt("val_contrato_adjunto"));
                 list.add(v);
             }
         } catch (SQLException e) {

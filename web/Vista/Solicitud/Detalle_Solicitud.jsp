@@ -19,8 +19,16 @@
             <tr><td>Apellidos y Nombres</td><td><%=s.getAp_paterno() + " " + s.getAp_materno() + " " + s.getNo_trabajador()%></td></tr>
             <tr><td>Tipo de Plazo</td><td><%=s.getTi_plazo()%></td></tr>
             <tr><td>Nombre de Plazo</td><td><%=s.getNo_plazo()%></td></tr>
-            <tr><td>Fecha </td><td><%=s.getFe_desde_s()%></td></tr>
+            <tr><td>Detalle de Plazo</td><td><%=s.getDet_alerta()%></td></tr>
+            <%if (s.getTi_plazo().trim().equals("1")) {
+            %>  
+            <tr><td>Fecha de inicio de contrato solicitada : </td><td><%=s.getFe_desde_s()%></td></tr>
+            <%} else if (s.getTi_plazo().trim().equals("2")) {
+            %>
+            <tr><td>Mes de ingreso solicitado :</td><td><%=s.getFe_desde_s()%></td></tr>
+            <%}%>
             <tr><td>Motivo de solicitud</td><td><%=s.getDe_solicitud()%></td></tr>
+            <tr><td colspan="2"><button type="button">Procesar Solicitud</button></td></tr>
         </table>
         <%}%>
     </center>

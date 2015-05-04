@@ -71,6 +71,24 @@
         <!-- END NAVIGATION -->
 
         <!-- MAIN PANEL -->
+        <div class="spacing">
+            <center><h1 class="spacing" style="font-weight: bold;">RERPORTE-TRABAJADORES DE NAVIDAD</h1></center> 
+        </div>
+        <div align="center">
+            <div class="row">
+                <div class="form-group" >
+                    <label>Tiempo de Trabajo</label><br>
+                    <input type="text"  class="form-control des" name="del"  length="45" style="width: 250px" id="des"/>
+                </div>
+                            </div>
+                        <br>
+            <div class="row">
+                <div class="form-group">                            
+                    <button type="button" class="btn btn-primary" id="btnbuscar">Buscar</button>
+                </div>
+
+            </div>  
+        </div> 
         <div id="main" role="main" style="margin-left: 0px">
 
             <!-- RIBBON -->
@@ -97,19 +115,7 @@
 
                             <!-- Widget ID (each widget will need unique ID)-->
                             <div  width="200%" class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false">
-                                <!-- widget options:
-                                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
-                                data-widget-colorbutton="false"
-                                data-widget-editbutton="false"
-                                data-widget-togglebutton="false"
-                                data-widget-deletebutton="false"
-                                data-widget-fullscreenbutton="false"
-                                data-widget-custombutton="false"
-                                data-widget-collapsed="true"
-                                data-widget-sortable="false"
-
-                                -->
                                 <header width="200%">
                                     <span class="widget-icon"><i class="fa fa-table"></i>  </span>
                                     <label style=" font-size:21px; font-family:cambria; color:white ;padding-left:5px;padding-top: 2px;">Reporte Filtro</label>
@@ -135,49 +141,28 @@
                                                     <th data-class="APS">Codigo APS</th>
                                                     <th data-hide="DEP">Departamento</th>
                                                     <th data-hide="ARE">Area</th><th data-class="tip">Tipo de Hora de Pago</th>
-                                                    <th data-class="tip">Tipo Documento</th>
-                                                    <th data-hide="secc">Numerno de Documento</th>
-                                                    <th data-hide="pues">Puesto</th>
-                                                    <th data-class="fec_nac">Fecha Nacimiento</th>
-                                                    <th data-class="ed">Edad</th>
-                                                    <th data-class="nom">Apellidos y Nombres</th>
-                                                    <th data-class="tip">Sexo</th>
-                                                    <th data-class="tip">Fecha de nacimiento</th>
+                                                    <th data-class="tip">Tipo Documento</th>  
+                                                    <th data-class="tip">Numerno de documento</th>
+                                                    <th data-class="tip">Sección</th>
+                                                    <th data-class="tip">Puesto</th>
+                                                    <th data-class="tip">Apelido Paterno</th>
+                                                    <th data-class="tip">Apellido Materno</th>
+                                                    <th data-class="tip">Nombres</th>
+                                                    <th data-class="tip">Apellidos y Nombres</th>
+                                                    <th data-class="tip">sexo</th>
+                                                    <th data-class="tip">Fecha Nacimiento</th>                                                    
                                                     <th data-class="tip">Fecha de inicio</th>
-                                                    <th data-class="tip">Fecha de Cese</th>
-
+                                                    <th data-class="tip">fecha de Cese</th>
                                                 </tr>
                                             </thead>
 
                                             <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Jennifer</td>
-                                                    <td>1-342-463-8341</td>
-                                                    <td>Et Rutrum Non Associates</td>
-                                                    <td>35728</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                                                                      
-                                                </tr>
-
-
+                                                
                                             </tbody>
-
                                         </table>
                                     </div>
-                                    <!-- end widget content -->
 
                                 </div>
-                                <!-- end widget div -->
 
                             </div>
                             <!-- end widget -->
