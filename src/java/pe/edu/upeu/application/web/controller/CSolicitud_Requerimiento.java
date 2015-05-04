@@ -63,9 +63,9 @@ public class CSolicitud_Requerimiento extends HttpServlet {
             String tipo = request.getParameter("tipo_fecha");
             if (tipo.equals("month")) {
                 FE_DESDE = FE_DESDE + "-01";
-            }
-            getServletContext().setAttribute("List_Solicitud_User", s.Listar_solicitud_id_us(iduser));
+            } 
             s.INSERT_SOLICITUD_DGP(null, FE_DESDE, ID_DGP, ID_PLAZO, DE_SOLICITUD, ES_AUTORIZAR, ES_SOLICITUD_DGP, IP_USUARIO, iduser, FE_CREACION, US_MODIF, FE_MODIF, NO_USUARIO);
+             getServletContext().setAttribute("List_Solicitud_User", s.Listar_solicitud_id_us(iduser));
         }
         if (opc.equals("Reg_List_Solicitud")) {
             String iddgp = request.getParameter("iddgp");
