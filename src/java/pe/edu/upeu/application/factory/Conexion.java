@@ -17,9 +17,9 @@ public class Conexion {
     public static Connection getConex() throws Exception {
         String usuario = "procesosrh";
         String password = "gestionrrhh";
-        String host = "192.168.14.50";
+        String host = "localhost";
         String puerto = "1521";
-        String sid = "xe";
+        String sid = "orcl";
         String driver = "oracle.jdbc.driver.OracleDriver";
         String url = "jdbc:oracle:thin:" + usuario + "/" + password + "@" + host + ":" + puerto + ":" + sid;
 
