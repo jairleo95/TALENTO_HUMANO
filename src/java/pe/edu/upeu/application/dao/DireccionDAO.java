@@ -132,7 +132,7 @@ public class DireccionDAO implements InterfaceDireccionDAO {
 
     @Override
     public boolean Editar_Direccion(String id, String nombre, String ncorto, String estado, String filial) {
-        boolean x=false;
+        boolean x = false;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MOD_DIRECCION( ?, ?, ?, ?, ?)}");
@@ -141,7 +141,7 @@ public class DireccionDAO implements InterfaceDireccionDAO {
             cst.setString(3, ncorto);
             cst.setString(4, estado);
             cst.setString(5, filial);
-            x=cst.execute();
+            x = cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
@@ -158,7 +158,7 @@ public class DireccionDAO implements InterfaceDireccionDAO {
 
     @Override
     public boolean Crear_Direccion(String nombre, String ncorto, String estado, String filial) {
-        boolean x=false;
+        boolean x = false;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DIRECCION( ?, ?, ?, ?)}");
@@ -166,7 +166,7 @@ public class DireccionDAO implements InterfaceDireccionDAO {
             cst.setString(2, ncorto);
             cst.setString(3, estado);
             cst.setString(4, filial);
-            x=cst.execute();
+            x = cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
@@ -183,12 +183,12 @@ public class DireccionDAO implements InterfaceDireccionDAO {
 
     @Override
     public boolean Eliminar_Direccion(String id) {
-        boolean x=false;
+        boolean x = false;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_ELIMINAR_DIRECCION(?)}");
             cst.setString(1, id);
-            x=cst.execute();
+            x = cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
@@ -205,12 +205,12 @@ public class DireccionDAO implements InterfaceDireccionDAO {
 
     @Override
     public boolean Activar_Direccion(String id) {
-        boolean x=false;
+        boolean x = false;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_ACTIVAR_DIRECCION(?)}");
             cst.setString(1, id);
-            x=cst.execute();
+            x = cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
@@ -227,12 +227,12 @@ public class DireccionDAO implements InterfaceDireccionDAO {
 
     @Override
     public boolean Desactivar_Direccion(String id) {
-        boolean x=false;
+        boolean x = false;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_DESACTIVAR_DIRECCION(?)}");
             cst.setString(1, id);
-            x=cst.execute();
+            x = cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
@@ -246,8 +246,9 @@ public class DireccionDAO implements InterfaceDireccionDAO {
         }
         return x;
     }
+
     @Override
-    public List<Map<String, ?>> List_Direccion_estado(){
+    public List<Map<String, ?>> List_Direccion_estado() {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -274,7 +275,38 @@ public class DireccionDAO implements InterfaceDireccionDAO {
                 throw new RuntimeException(e.getMessage());
             }
         }
-        return lista;        
+        return lista;
+    }
+
+    @Override
+    public List<Map<String, ?>> List_Direccion_filial(String fil) {
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select * from rhtx_direccion where id_filial='"+fil+"' order by NO_DIRECCION";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("id_direccion"));
+                rec.put("nombre", rs.getString("no_direccion"));
+                rec.put("nom_corto", rs.getString("no_corto_dir"));
+                rec.put("filial", rs.getString("id_filial"));
+                rec.put("estado", rs.getString("es_direccion"));
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de direcciones...");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return lista;
     }
 
 }

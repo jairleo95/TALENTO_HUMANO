@@ -18,7 +18,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
         <title> TALENTO HUMANO </title>
@@ -75,7 +75,8 @@
         <script type="text/javascript" src="js/JQuery/jquery.autoheight.js"></script>
 
     </head>
-    <body class=""  onload="nobackbutton();document.getElementById('link').click()">
+    <body class=""  onload="nobackbutton();
+            document.getElementById('link').click()">
         <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
 
         <!-- HEADER -->
@@ -398,14 +399,19 @@
                     <%} else {%>
 
                     <li class="li-privilegio">
-
-                        <%if (dp.getNo_link().trim().equals("Procesar Requerimiento")) {%>
+                        <%if (id_rol.trim().equals("ROL-0013")) {%>
+                        <%if (dp.getNo_link().trim().equals("Ficha del Trabajador")) {%>
                         <a href="<%=dp.getDi_url()%>" target="myframe" title="<%=dp.getNo_link()%>" class="link"  id="link"><i class="<%=dp.getIc_link().trim()%> "></i> <span class="menu-item-parent"><%=dp.getNo_link()%></span></a>
-
-                        <%} else {%>
+                            <%}
+                                }
+                                if (!id_rol.trim().equals("ROL-0013")) {
+                                    if (dp.getNo_link().trim().equals("Procesar Requerimiento")) {%>
+                        <a href="<%=dp.getDi_url()%>" target="myframe" title="<%=dp.getNo_link()%>" class="link"  id="link"><i class="<%=dp.getIc_link().trim()%> "></i> <span class="menu-item-parent"><%=dp.getNo_link()%></span></a>
+                            <%} else {%>
                         <a href="<%=dp.getDi_url()%>" target="myframe" title="<%=dp.getNo_link()%>"  ><i class="<%=dp.getIc_link().trim()%> "></i> <span class="menu-item-parent"><%=dp.getNo_link()%></span></a>
 
-                        <%}%>
+                        <%}
+                            }%>
                     </li>
                     <%}
                         }%>
@@ -434,9 +440,9 @@
 
                 <!-- breadcrumb -->
                 <ol class="breadcrumb">
-                    <%if(sesion.getAttribute("DEPARTAMENTO") != null){%>
+                    <%if (sesion.getAttribute("DEPARTAMENTO") != null) {%>
                     <li><%out.println("DEPARTAMENTO DE  " + ((String) sesion.getAttribute("DEPARTAMENTO")).toUpperCase() + " / AREA DE " + ((String) sesion.getAttribute("AREA")).toUpperCase() + " / SECCION DE " + ((String) sesion.getAttribute("SECCION")).toUpperCase() + " / PUESTO DE " + ((String) sesion.getAttribute("PUESTO")).toUpperCase());%></li>
-                    <%}%>
+                        <%}%>
                 </ol>
                 <!-- end breadcrumb -->
 

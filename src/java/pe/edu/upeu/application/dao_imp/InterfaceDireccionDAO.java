@@ -24,6 +24,7 @@ public interface InterfaceDireccionDAO {
      */
     public List<Direccion> Listar_Direccion();
     public List<Map<String, ?>> List_Direccion();
+    public List<Map<String, ?>> List_Direccion_filial(String fil);
     /*direccion de ubicacion geografica*/
     public List<Via> Listar_via();
     public List<Zona> Listar_zona();
