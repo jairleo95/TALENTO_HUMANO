@@ -150,7 +150,7 @@
                                                         <% }
                                                         } else {%>
                                                         No registrado
-                                                        <%}%></td>
+                                                        <%}%><input type="hidden" class="estado-aut" value="<%=a.getEs_autorizacion()%>"></td>
                                                     <td ><%
                                                         if (a.getUs_ap_mat() != null) {
                                                             out.println(a.getUs_ap_p().toUpperCase() + " " + a.getUs_ap_mat().toUpperCase() + " " + a.getUs_no_tr().toUpperCase());
@@ -162,7 +162,7 @@
                                                     <td  ><%=a.getNo_usuario()%></td> 
                                                     <td ><%=a.getUs_no_area()%></td> 
                                                     <td ><%=a.getUs_no_dep()%></td> 
-                                                    <%}else{%>
+                                                    <%} else {%>
                                                     <td colspan="6" style="text-align:center;">No definido</td>
                                                     <%}%>
 
@@ -177,8 +177,39 @@
                                             <div class="alert alert-danger alert-block">
                                                 <a class="close" data-dismiss="alert" href="#">×</a>
                                                 <h4 class="alert-heading">DGP fuera de Proceso!</h4>
-                                                <p>El DGP se ha rechazado por uno de los Usuarios... <a href="../../autorizacion?opc=HDGP&iddgp=<%=a.getId_dgp().trim()%>&ID<%=a.getId_departamento()%>" class="btn btn-primary"><strong><i class="fa fa-arrow-circle-right"></i> Habilitar</strong></a>  <a href="../../dgp?opc=MODIFICAR REQUERIMIENTO&iddgp=<%=a.getId_dgp().trim()%>" class="btn btn-primary"><strong><i class="fa fa-pencil-square-o"></i> Editar DGP</strong></a>
+                                                <p>El DGP se ha rechazado por uno de los Usuarios... <a href="../../autorizacion?opc=HDGP&iddgp=<%=a.getId_dgp().trim()%>&ID<%=a.getId_departamento()%>" class="btn btn-primary"><strong><i class="fa fa-arrow-circle-right"></i> Habilitar</strong></a>  <a href="../../dgp?opc=MODIFICAR REQUERIMIENTO&iddgp=<%=a.getId_dgp().trim()%>" class="btn btn-primary"><strong><i class="fa fa-pencil-square-o"></i> Editar DGP</strong></a> <a data-toggle="modal" href="#myModal6" class="btn btn-primary"><i class="glyphicon glyphicon-remove"></i> Ver Motivo</a>
                                                 </p>
+                                                <input type="hidden" class="id-autorizacion" value="<%=a.getId_autorizacion()%>">
+                                            </div>
+                                            <div class="modal fade" id="myModal6" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content" align="center">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                                &times;
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body no-padding">
+                                                            <fieldset>
+                                                                <section align="center">
+                                                                    <div class="row" >
+                                                                        <h1 class="h1" style="color:#218FDD ; font-size:20px;"><strong>MOTIVO</strong></h1>
+                                                                        <div class="col col-10"  >
+                                                                            <label class="input">
+                                                                                <P class="list_motivo"></P>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </section>
+                                                            </fieldset>
+                                                            <footer align="center">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal" >
+                                                                    Cancel
+                                                                </button>
+                                                            </footer>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             <%}
@@ -459,6 +490,11 @@
                 var s = document.getElementsByTagName('script')[0];
                 s.parentNode.insertBefore(ga, s);
             })();
+        </script>
+        <script>
+            $(document).ready(function (){
+                if($(".estado-aut").val()==)
+            })
         </script>
 
     </body>

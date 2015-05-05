@@ -11,7 +11,7 @@
         <meta charset="utf-8">
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
-        <title> SmartAdmin </title>
+        <title> Reporte Navidad </title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -60,7 +60,7 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
 
     </head>
-    <body class="" >
+    <body>
         <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
 
         <!-- HEADER -->
@@ -80,11 +80,11 @@
                     <label>Tiempo de Trabajo</label><br>
                     <input type="text"  class="form-control des" name="del"  length="45" style="width: 250px" id="des"/>
                 </div>
-                            </div>
-                        <br>
+            </div>
+            <br>
             <div class="row">
                 <div class="form-group">                            
-                    <button type="button" class="btn btn-primary" id="btnbuscar">Buscar</button>
+                    <button type="button" class="btn btn-primary" id="btnbuscar" >Buscar</button>
                 </div>
 
             </div>  
@@ -156,8 +156,8 @@
                                                 </tr>
                                             </thead>
 
-                                            <tbody>
-                                                
+                                            <tbody id="Li_Trabajor">
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -183,62 +183,7 @@
             <!-- END MAIN CONTENT -->
 
         </div>
-        <!-- END MAIN PANEL -->
 
-        <!-- PAGE FOOTER -->
-        <div class="page-footer">
-            <div class="row">
-                <div class="col-xs-12 col-sm-6">
-                    <span class="txt-color-white">SmartAdmin WebApp © 2013-2014</span>
-                </div>
-
-                <div class="col-xs-6 col-sm-6 text-right hidden-xs">
-                    <div class="txt-color-white inline-block">
-                        <i class="txt-color-blueLight hidden-mobile">Last account activity <i class="fa fa-clock-o"></i> <strong>52 mins ago &nbsp;</strong> </i>
-                        <div class="btn-group dropup">
-                            <button class="btn btn-xs dropdown-toggle bg-color-blue txt-color-white" data-toggle="dropdown">
-                                <i class="fa fa-link"></i> <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu pull-right text-left">
-                                <li>
-                                    <div class="padding-5">
-                                        <p class="txt-color-darken font-sm no-margin">Download Progress</p>
-                                        <div class="progress progress-micro no-margin">
-                                            <div class="progress-bar progress-bar-success" style="width: 50%;"></div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <div class="padding-5">
-                                        <p class="txt-color-darken font-sm no-margin">Server Load</p>
-                                        <div class="progress progress-micro no-margin">
-                                            <div class="progress-bar progress-bar-success" style="width: 20%;"></div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <div class="padding-5">
-                                        <p class="txt-color-darken font-sm no-margin">Memory Load <span class="text-danger">*critical*</span></p>
-                                        <div class="progress progress-micro no-margin">
-                                            <div class="progress-bar progress-bar-danger" style="width: 70%;"></div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <div class="padding-5">
-                                        <button class="btn btn-block btn-default">refresh</button>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- END PAGE FOOTER -->
 
         <!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
         Note: These tiles are completely responsive,
@@ -254,16 +199,16 @@
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
-            if (!window.jQuery) {
-                document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
-            }
+                        if (!window.jQuery) {
+                            document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                        }
         </script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script>
-            if (!window.jQuery.ui) {
-                document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-            }
+                        if (!window.jQuery.ui) {
+                            document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                        }
         </script>
 
         <!-- IMPORTANT: APP CONFIG -->
@@ -329,166 +274,166 @@
         <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
         <script type="text/javascript">
 
-            // DO NOT REMOVE : GLOBAL FUNCTIONS!
+                        // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-            $(document).ready(function () {
+                        $(document).ready(function () {
 
-                pageSetUp();
+                            pageSetUp();
 
-                /* // DOM Position key index //
-                 
-                 l - Length changing (dropdown)
-                 f - Filtering input (search)
-                 t - The Table! (datatable)
-                 i - Information (records)
-                 p - Pagination (paging)
-                 r - pRocessing 
-                 < and > - div elements
-                 <"#id" and > - div with an id
-                 <"class" and > - div with a class
-                 <"#id.class" and > - div with an id and class
-                 
-                 Also see: http://legacy.datatables.net/usage/features
-                 */
+                            /* // DOM Position key index //
+                             
+                             l - Length changing (dropdown)
+                             f - Filtering input (search)
+                             t - The Table! (datatable)
+                             i - Information (records)
+                             p - Pagination (paging)
+                             r - pRocessing 
+                             < and > - div elements
+                             <"#id" and > - div with an id
+                             <"class" and > - div with a class
+                             <"#id.class" and > - div with an id and class
+                             
+                             Also see: http://legacy.datatables.net/usage/features
+                             */
 
-                /* BASIC ;*/
-                var responsiveHelper_dt_basic = undefined;
-                var responsiveHelper_datatable_fixed_column = undefined;
-                var responsiveHelper_datatable_col_reorder = undefined;
-                var responsiveHelper_datatable_tabletools = undefined;
+                            /* BASIC ;*/
+                            var responsiveHelper_dt_basic = undefined;
+                            var responsiveHelper_datatable_fixed_column = undefined;
+                            var responsiveHelper_datatable_col_reorder = undefined;
+                            var responsiveHelper_datatable_tabletools = undefined;
 
-                var breakpointDefinition = {
-                    tablet: 1024,
-                    phone: 480
-                };
+                            var breakpointDefinition = {
+                                tablet: 1024,
+                                phone: 480
+                            };
 
-                $('#dt_basic').dataTable({
-                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
-                            "t" +
-                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                    "autoWidth": true,
-                    "preDrawCallback": function () {
-                        // Initialize the responsive datatables helper once.
-                        if (!responsiveHelper_dt_basic) {
-                            responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
-                        }
-                    },
-                    "rowCallback": function (nRow) {
-                        responsiveHelper_dt_basic.createExpandIcon(nRow);
-                    },
-                    "drawCallback": function (oSettings) {
-                        responsiveHelper_dt_basic.respond();
-                    }
-                });
+                            $('#dt_basic').dataTable({
+                                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
+                                        "t" +
+                                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                                "autoWidth": true,
+                                "preDrawCallback": function () {
+                                    // Initialize the responsive datatables helper once.
+                                    if (!responsiveHelper_dt_basic) {
+                                        responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
+                                    }
+                                },
+                                "rowCallback": function (nRow) {
+                                    responsiveHelper_dt_basic.createExpandIcon(nRow);
+                                },
+                                "drawCallback": function (oSettings) {
+                                    responsiveHelper_dt_basic.respond();
+                                }
+                            });
 
-                /* END BASIC */
+                            /* END BASIC */
 
-                /* COLUMN FILTER  */
-                var otable = $('#datatable_fixed_column').DataTable({
-                    //"bFilter": false,
-                    //"bInfo": false,
-                    //"bLengthChange": false
-                    //"bAutoWidth": false,
-                    //"bPaginate": false,
-                    //"bStateSave": true // saves sort state using localStorage
-                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>" +
-                            "t" +
-                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                    "autoWidth": true,
-                    "preDrawCallback": function () {
-                        // Initialize the responsive datatables helper once.
-                        if (!responsiveHelper_datatable_fixed_column) {
-                            responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
-                        }
-                    },
-                    "rowCallback": function (nRow) {
-                        responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
-                    },
-                    "drawCallback": function (oSettings) {
-                        responsiveHelper_datatable_fixed_column.respond();
-                    }
+                            /* COLUMN FILTER  */
+                            var otable = $('#datatable_fixed_column').DataTable({
+                                //"bFilter": false,
+                                //"bInfo": false,
+                                //"bLengthChange": false
+                                //"bAutoWidth": false,
+                                //"bPaginate": false,
+                                //"bStateSave": true // saves sort state using localStorage
+                                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>" +
+                                        "t" +
+                                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                                "autoWidth": true,
+                                "preDrawCallback": function () {
+                                    // Initialize the responsive datatables helper once.
+                                    if (!responsiveHelper_datatable_fixed_column) {
+                                        responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
+                                    }
+                                },
+                                "rowCallback": function (nRow) {
+                                    responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
+                                },
+                                "drawCallback": function (oSettings) {
+                                    responsiveHelper_datatable_fixed_column.respond();
+                                }
 
-                });
+                            });
 
-                // custom toolbar
-                $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
+                            // custom toolbar
+                            $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
 
-                // Apply the filter
-                $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
+                            // Apply the filter
+                            $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
 
-                    otable
-                            .column($(this).parent().index() + ':visible')
-                            .search(this.value)
-                            .draw();
+                                otable
+                                        .column($(this).parent().index() + ':visible')
+                                        .search(this.value)
+                                        .draw();
 
-                });
-                /* END COLUMN FILTER */
+                            });
+                            /* END COLUMN FILTER */
 
-                /* COLUMN SHOW - HIDE */
-                $('#datatable_col_reorder').dataTable({
-                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'C>r>" +
-                            "t" +
-                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                    "autoWidth": true,
-                    "preDrawCallback": function () {
-                        // Initialize the responsive datatables helper once.
-                        if (!responsiveHelper_datatable_col_reorder) {
-                            responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
-                        }
-                    },
-                    "rowCallback": function (nRow) {
-                        responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
-                    },
-                    "drawCallback": function (oSettings) {
-                        responsiveHelper_datatable_col_reorder.respond();
-                    }
-                });
+                            /* COLUMN SHOW - HIDE */
+                            $('#datatable_col_reorder').dataTable({
+                                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'C>r>" +
+                                        "t" +
+                                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
+                                "autoWidth": true,
+                                "preDrawCallback": function () {
+                                    // Initialize the responsive datatables helper once.
+                                    if (!responsiveHelper_datatable_col_reorder) {
+                                        responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
+                                    }
+                                },
+                                "rowCallback": function (nRow) {
+                                    responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
+                                },
+                                "drawCallback": function (oSettings) {
+                                    responsiveHelper_datatable_col_reorder.respond();
+                                }
+                            });
 
-                /* END COLUMN SHOW - HIDE */
+                            /* END COLUMN SHOW - HIDE */
 
-                /* TABLETOOLS */
-                $('#datatable_tabletools').dataTable({
-                    // Tabletools options: 
-                    //   https://datatables.net/extensions/tabletools/button_options
-                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>" +
-                            "t" +
-                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                    "oTableTools": {
-                        "aButtons": [
-                            "copy",
-                            "csv",
-                            "xls",
-                            {
-                                "sExtends": "pdf",
-                                "sTitle": "SmartAdmin_PDF",
-                                "sPdfMessage": "SmartAdmin PDF Export",
-                                "sPdfSize": "letter"
-                            },
-                            {
-                                "sExtends": "print",
-                                "sMessage": "Generated by SmartAdmin <i>(press Esc to close)</i>"
-                            }
-                        ],
-                        "sSwfPath": "../../js/DataTables-1.10.4/media/js/copy_csv_xls_pdf.swf"
-                    },
-                    "autoWidth": true,
-                    "preDrawCallback": function () {
-                        // Initialize the responsive datatables helper once.
-                        if (!responsiveHelper_datatable_tabletools) {
-                            responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
-                        }
-                    },
-                    "rowCallback": function (nRow) {
-                        responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
-                    },
-                    "drawCallback": function (oSettings) {
-                        responsiveHelper_datatable_tabletools.respond();
-                    }
-                });
+                            /* TABLETOOLS */
+                            $('#datatable_tabletools').dataTable({
+                                // Tabletools options: 
+                                //   https://datatables.net/extensions/tabletools/button_options
+                                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>" +
+                                        "t" +
+                                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
+                                "oTableTools": {
+                                    "aButtons": [
+                                        "copy",
+                                        "csv",
+                                        "xls",
+                                        {
+                                            "sExtends": "pdf",
+                                            "sTitle": "SmartAdmin_PDF",
+                                            "sPdfMessage": "SmartAdmin PDF Export",
+                                            "sPdfSize": "letter"
+                                        },
+                                        {
+                                            "sExtends": "print",
+                                            "sMessage": "Generated by SmartAdmin <i>(press Esc to close)</i>"
+                                        }
+                                    ],
+                                    "sSwfPath": "../../js/DataTables-1.10.4/media/js/copy_csv_xls_pdf.swf"
+                                },
+                                "autoWidth": true,
+                                "preDrawCallback": function () {
+                                    // Initialize the responsive datatables helper once.
+                                    if (!responsiveHelper_datatable_tabletools) {
+                                        responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
+                                    }
+                                },
+                                "rowCallback": function (nRow) {
+                                    responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
+                                },
+                                "drawCallback": function (oSettings) {
+                                    responsiveHelper_datatable_tabletools.respond();
+                                }
+                            });
 
-                /* END TABLETOOLS */
+                            /* END TABLETOOLS */
 
-            })
+                        })
 
         </script>
 
@@ -509,7 +454,63 @@
         </script>
 
 
-
+        <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
     </body>
+    <script>
+
+        $(document).ready(function () {
+            var b = $('#tbodys');
+
+            $("#btnbuscar").click(
+                    function () {
+                        listar_trabajor_na();
+                    }
+            );
+            $("#btncancel").click(
+                    function () {
+                        document.formulario.reset();
+                        b.empty();
+                        html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'
+                        $(".tbodys").html(html);
+                    }
+            );
+        }
+        );
+        function listar_trabajor_na() {
+            var a = $(".mes").val();
+            var b = $("#listar_trabajor_na");
+            var texto = '';
+            alert();
+            $.post("../../reporte", "opc=reporte_t_navidad&mes=" + a, function (objJson) {
+               if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                b.empty();
+                var lista = objJson.lista;
+                for (var i = 0; i < lista.length; i++) {
+                    texto += '<tr role="row" class="odd">';
+                    texto += '<td class>' + (i + 1) + '</td>';
+                    texto += '<td>' + lista[i].aps + '</td>';
+                    texto += '<td>' + lista[i].dep + '</td>';
+                    texto += '<td>' + lista[i].are + '</td>';
+                    texto += '<td>' + lista[i].ti_doc+ '</td>';
+                    texto += '<td>' + lista[i].nu_doc + '</td>';
+                    texto += '<td>' + lista[i].sec + '</td>';
+                    texto += '<td>' + lista[i].pat + '</td>';
+                    texto += '<td>' + lista[i].mat + '</td>';
+                    texto += '<td>' + lista[i].nom_t + '</td>';
+                    texto += '<td>' + lista[i].sex + '</td>';
+                    texto += '<td>' + lista[i].fe_nac + '</td>';
+                    texto += '<td>' + lista[i].des + '</td>';
+                    texto += '<td>' + lista[i].has + '</td>';
+                    texto += '<td>' + lista[i].t_tra + '</td>';
+                    texto += '</tr>';
+                }
+                b.append(texto);
+            });
+
+        }
+    </script>
 
 </html>

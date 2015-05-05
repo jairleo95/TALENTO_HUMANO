@@ -36,8 +36,11 @@
 
                             <div class="well">
                                 <form class="smart-form form_f">
-
-                                    <h1 class="text-center ">Historial de Modificaciones <small class="n_tra">/ Trabajadores</small></h1><br>
+                                    <div class="row">
+                                        <a class="btm btn-primary btn-circle pull-left" onclick="history.back()" ><i class="glyphicon glyphicon-arrow-left"></i></a>
+                                        <h1 class="text-center ">Historial de Modificaciones <small class="n_tra">/ Trabajadores</small></h1><br>
+                                        
+                                    </div>
                                     <div class="row">
                                         <div class="col col-xs-4">
                                             <section class="col col-xs-12">
@@ -162,15 +165,15 @@
         <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
-            if (!window.jQuery) {
-                document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
-            }
+                                            if (!window.jQuery) {
+                                                document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                                            }
         </script>
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script>
-            if (!window.jQuery.ui) {
-                document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-            }
+                                            if (!window.jQuery.ui) {
+                                                document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                                            }
         </script>
         <script src="../../../js/app.config.js"></script>
         <script src="../../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
@@ -206,90 +209,90 @@
         <script src="../../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
         <script src="../../../js/Js_Hist_Mod/cargar_tablas.js" type="text/javascript"></script>
         <script type="text/javascript">
-            $(document).ready(function () {
-                var idtrab = '<%= request.getParameter("idtr")%>';
-                var us_ip,nombres, us, fe;
-                cargar_fechas();
-                function cargar_fechas() {
-                    var s = $('.s_fecha');
-                    s.empty();
-                    s.append("<option>[Espere..]</option>");
-                    $.post("../../../RHistorial?", "opc=list_mod_tra&idtr=" + idtrab, function (objJson) {
-                        var lista = objJson.lista;
-                        if (lista.length < 1) {
-                            s.empty();
-                            s.append("<option>[No hay Datos]</option>");
-                        } else {
-                            s.empty();
-                            s.append("<option>[Seleccione]</option>");
-                            for (var i = 0; i < lista.length; i++) {
-                                if (lista[i].fe_mod != undefined) {
-                                    s.append("<option >" + lista[i].fe_mod + "</option>");
-                                }
+                                            $(document).ready(function () {
+                                                var idtrab = '<%= request.getParameter("idtr")%>';
+                                                var us_ip, nombres, us, fe;
+                                                cargar_fechas();
+                                                function cargar_fechas() {
+                                                    var s = $('.s_fecha');
+                                                    s.empty();
+                                                    s.append("<option>[Espere..]</option>");
+                                                    $.post("../../../RHistorial?", "opc=list_mod_tra&idtr=" + idtrab, function (objJson) {
+                                                        var lista = objJson.lista;
+                                                        if (lista.length < 1) {
+                                                            s.empty();
+                                                            s.append("<option>[No hay Datos]</option>");
+                                                        } else {
+                                                            s.empty();
+                                                            s.append("<option>[Seleccione]</option>");
+                                                            for (var i = 0; i < lista.length; i++) {
+                                                                if (lista[i].fe_mod != undefined) {
+                                                                    s.append("<option >" + lista[i].fe_mod + "</option>");
+                                                                }
 
-                            }
-                        }
-                    });
-                }
-                $('.s_fecha').change(function () {
-                    $('.ti_fecha').empty();
-                    $('.ti_fecha').text("Datos al " + $(this).val());
-                    cargar_hist($(this).val());
+                                                            }
+                                                        }
+                                                    });
+                                                }
+                                                $('.s_fecha').change(function () {
+                                                    $('.ti_fecha').empty();
+                                                    $('.ti_fecha').text("Datos al " + $(this).val());
+                                                    cargar_hist($(this).val());
 
-                });
-                function cargar_hist(fe_hist) {
-                    $.post("../../../RHistorial?", "opc=list_hist_fecha&fe_modif=" + fe_hist + "&idtra=" + idtrab, function (objJson) {
-                        var lista = objJson.lista;
-                        us_ip = objJson.us_ip;
-                        us=lista[0].col60;
-                        fe=lista[0].col61;
-                        if (lista.length < 1) {
-                        } else {
-                            var text = "";
-                            text = cargar_historial(lista, text);
-                            $('.tbodys_hist').empty();
-                            $('.tbodys_hist').append(text);
-                            cargar_act();
-                            
-                        }
-                    });
-                }
-                function cargar_ip(us_ip) {
-                    $('.inUs').val(us);
-                    $('.inFe').val(fe);
-                    $('.inIp').val(us_ip[0]);
-                    $('.inHos').val(us_ip[1]);
-                    $('.inMac').val(us_ip[2]);
-                    $('.deth61').text(us_ip[0]);
-                    $('.deta61').text(us_ip[0]);
-                }
-                function cargar_act() {
-                    $.post("../../../RHistorial?", "opc=list_actual&idtra=" + idtrab, function (objJson) {
-                        var lista = objJson.lista;
-                        nombres=" / "+lista[0].col4+" "+lista[0].col2;
-                        $('.n_tra').text(nombres);
-                        if (lista.length < 1) {
-                        } else {
-                            var text = "";
-                            text = cargar_actual(lista, text);
-                            $('.tbodys_act').empty();
-                            $('.tbodys_act').append(text);
-                            cargar_ip(us_ip);
-                            color_t(73);                            
-                        }
-                    });
-                }
+                                                });
+                                                function cargar_hist(fe_hist) {
+                                                    $.post("../../../RHistorial?", "opc=list_hist_fecha&fe_modif=" + fe_hist + "&idtra=" + idtrab, function (objJson) {
+                                                        var lista = objJson.lista;
+                                                        us_ip = objJson.us_ip;
+                                                        us = lista[0].col60;
+                                                        fe = lista[0].col61;
+                                                        if (lista.length < 1) {
+                                                        } else {
+                                                            var text = "";
+                                                            text = cargar_historial(lista, text);
+                                                            $('.tbodys_hist').empty();
+                                                            $('.tbodys_hist').append(text);
+                                                            cargar_act();
 
-                function color_t(nn) {
-                    for (var i = 0; i < nn; i++) {
-                        if ($('.deth' + i).text() != $('.deta' + i).text()) {
-                            $('.roh' + i).css('background-color', '#efe1b3');
-                            $('.roa' + i).css('background-color', '#cde0c4');
-                        }
-                    }
+                                                        }
+                                                    });
+                                                }
+                                                function cargar_ip(us_ip) {
+                                                    $('.inUs').val(us);
+                                                    $('.inFe').val(fe);
+                                                    $('.inIp').val(us_ip[0]);
+                                                    $('.inHos').val(us_ip[1]);
+                                                    $('.inMac').val(us_ip[2]);
+                                                    $('.deth61').text(us_ip[0]);
+                                                    $('.deta61').text(us_ip[0]);
+                                                }
+                                                function cargar_act() {
+                                                    $.post("../../../RHistorial?", "opc=list_actual&idtra=" + idtrab, function (objJson) {
+                                                        var lista = objJson.lista;
+                                                        nombres = " / " + lista[0].col4 + " " + lista[0].col2;
+                                                        $('.n_tra').text(nombres);
+                                                        if (lista.length < 1) {
+                                                        } else {
+                                                            var text = "";
+                                                            text = cargar_actual(lista, text);
+                                                            $('.tbodys_act').empty();
+                                                            $('.tbodys_act').append(text);
+                                                            cargar_ip(us_ip);
+                                                            color_t(73);
+                                                        }
+                                                    });
+                                                }
 
-                }
-            });
+                                                function color_t(nn) {
+                                                    for (var i = 0; i < nn; i++) {
+                                                        if ($('.deth' + i).text() != $('.deta' + i).text()) {
+                                                            $('.roh' + i).css('background-color', '#efe1b3');
+                                                            $('.roa' + i).css('background-color', '#cde0c4');
+                                                        }
+                                                    }
+
+                                                }
+                                            });
         </script>
         <script type="text/javascript">
 
