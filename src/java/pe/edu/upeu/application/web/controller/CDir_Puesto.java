@@ -67,6 +67,12 @@ public class CDir_Puesto extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
+            if (opc.equals("Listar_direccion_filial")) {
+                String id_fil=request.getParameter("id_fil");
+                List<Map<String, ?>> lista = dir.List_Direccion_filial(id_fil);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
             if (opc.equals("Listar_dir_dep")) {
                 String id = request.getParameter("id");
                 List<Map<String, ?>> lista = dep.Listar_dep_id(id);
